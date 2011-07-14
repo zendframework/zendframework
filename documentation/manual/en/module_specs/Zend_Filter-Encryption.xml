@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.encrypt"><info><title>Encrypt and Decrypt</title></info>
     
 
@@ -144,24 +142,24 @@
             filter.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Use the Mcrypt adapter
-$filter1 = new Zend_Filter_Encrypt(array('adapter' =&gt; 'mcrypt'));
+$filter1 = new Zend_Filter_Encrypt(array('adapter' => 'mcrypt'));
 
 // Use the OpenSSL adapter
-$filter2 = new Zend_Filter_Encrypt(array('adapter' =&gt; 'openssl'));
-</programlisting>
+$filter2 = new Zend_Filter_Encrypt(array('adapter' => 'openssl'));
+]]></programlisting>
 
         <para>
             To set another adapter you can also use <methodname>setAdapter()</methodname>, and the
             <methodname>getAdapter()</methodname> method to receive the actual set adapter.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Use the Mcrypt adapter
 $filter = new Zend_Filter_Encrypt();
-$filter-&gt;setAdapter('openssl');
-</programlisting>
+$filter->setAdapter('openssl');
+]]></programlisting>
 
         <note>
             <para>
@@ -215,20 +213,20 @@ $filter-&gt;setAdapter('openssl');
             </para>
         </note>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Use the default blowfish settings
 $filter = new Zend_Filter_Encrypt('myencryptionkey');
 
 // Set a own vector, otherwise you must call getVector()
 // and store this vector for later decryption
-$filter-&gt;setVector('myvector');
-// $filter-&gt;getVector();
+$filter->setVector('myvector');
+// $filter->getVector();
 
-$encrypted = $filter-&gt;filter('text_to_be_encoded');
+$encrypted = $filter->filter('text_to_be_encoded');
 print $encrypted;
 
 // For decryption look at the Decrypt filter
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.filter.set.encrypt.mcryptdecrypt"><info><title>Decryption with Mcrypt</title></info>
@@ -250,16 +248,16 @@ print $encrypted;
             As soon as you have provided all options decryption is as simple as encryption.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Use the default blowfish settings
 $filter = new Zend_Filter_Decrypt('myencryptionkey');
 
 // Set the vector with which the content was encrypted
-$filter-&gt;setVector('myvector');
+$filter->setVector('myvector');
 
-$decrypted = $filter-&gt;filter('encoded_text_normally_unreadable');
+$decrypted = $filter->filter('encoded_text_normally_unreadable');
 print $decrypted;
-</programlisting>
+]]></programlisting>
 
         <note>
             <para>
@@ -289,19 +287,19 @@ print $decrypted;
             <methodname>setPrivateKey()</methodname> methods.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Use openssl and provide a private key
 $filter = new Zend_Filter_Encrypt(array(
-   'adapter' =&gt; 'openssl',
-   'private' =&gt; '/path/to/mykey/private.pem'
+   'adapter' => 'openssl',
+   'private' => '/path/to/mykey/private.pem'
 ));
 
 // of course you can also give the public keys at initiation
-$filter-&gt;setPublicKey(array(
+$filter->setPublicKey(array(
    '/public/key/path/first.pem',
    '/public/key/path/second.pem'
 ));
-</programlisting>
+]]></programlisting>
 
         <note>
             <para>
@@ -317,20 +315,20 @@ $filter-&gt;setPublicKey(array(
             passphrase to decode the encrypted key.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Use openssl and provide a private key
 $filter = new Zend_Filter_Encrypt(array(
-   'adapter' =&gt; 'openssl',
-   'private' =&gt; '/path/to/mykey/private.pem'
+   'adapter' => 'openssl',
+   'private' => '/path/to/mykey/private.pem'
 ));
 
 // of course you can also give the public keys at initiation
-$filter-&gt;setPublicKey(array(
+$filter->setPublicKey(array(
    '/public/key/path/first.pem',
    '/public/key/path/second.pem'
 ));
-$filter-&gt;setPassphrase('mypassphrase');
-</programlisting>
+$filter->setPassphrase('mypassphrase');
+]]></programlisting>
 
         <para>
             At last, when you use OpenSSL you need to give the receiver the encrypted content, the
@@ -347,26 +345,26 @@ $filter-&gt;setPassphrase('mypassphrase');
             like this.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Use openssl and provide a private key
 $filter = new Zend_Filter_Encrypt(array(
-   'adapter' =&gt; 'openssl',
-   'private' =&gt; '/path/to/mykey/private.pem'
+   'adapter' => 'openssl',
+   'private' => '/path/to/mykey/private.pem'
 ));
 
 // of course you can also give the public keys at initiation
-$filter-&gt;setPublicKey(array(
+$filter->setPublicKey(array(
    '/public/key/path/first.pem',
    '/public/key/path/second.pem'
 ));
-$filter-&gt;setPassphrase('mypassphrase');
+$filter->setPassphrase('mypassphrase');
 
-$encrypted = $filter-&gt;filter('text_to_be_encoded');
-$envelope  = $filter-&gt;getEnvelopeKey();
+$encrypted = $filter->filter('text_to_be_encoded');
+$envelope  = $filter->getEnvelopeKey();
 print $encrypted;
 
 // For decryption look at the Decrypt filter
-</programlisting>
+]]></programlisting>
 
         <section xml:id="zend.filter.set.encrypt.openssl.simplified"><info><title>Simplified usage with Openssl</title></info>
             
@@ -381,20 +379,20 @@ print $encrypted;
                 <constant>TRUE</constant>. The default value is <constant>FALSE</constant>.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Use openssl and provide a private key
 $filter = new Zend_Filter_Encrypt(array(
-   'adapter' =&gt; 'openssl',
-   'private' =&gt; '/path/to/mykey/private.pem',
-   'public'  =&gt; '/public/key/path/public.pem',
-   'package' =&gt; true
+   'adapter' => 'openssl',
+   'private' => '/path/to/mykey/private.pem',
+   'public'  => '/public/key/path/public.pem',
+   'package' => true
 ));
 
-$encrypted = $filter-&gt;filter('text_to_be_encoded');
+$encrypted = $filter->filter('text_to_be_encoded');
 print $encrypted;
 
 // For decryption look at the Decrypt filter
-</programlisting>
+]]></programlisting>
 
             <para>
                 Now the returned value contains the encrypted value and the envelope. You don't
@@ -419,25 +417,25 @@ print $encrypted;
                 compression adapter.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Use basic compression adapter
 $filter1 = new Zend_Filter_Encrypt(array(
-   'adapter'     =&gt; 'openssl',
-   'private'     =&gt; '/path/to/mykey/private.pem',
-   'public'      =&gt; '/public/key/path/public.pem',
-   'package'     =&gt; true,
-   'compression' =&gt; 'bz2'
+   'adapter'     => 'openssl',
+   'private'     => '/path/to/mykey/private.pem',
+   'public'      => '/public/key/path/public.pem',
+   'package'     => true,
+   'compression' => 'bz2'
 ));
 
 // Use basic compression adapter
 $filter2 = new Zend_Filter_Encrypt(array(
-   'adapter'     =&gt; 'openssl',
-   'private'     =&gt; '/path/to/mykey/private.pem',
-   'public'      =&gt; '/public/key/path/public.pem',
-   'package'     =&gt; true,
-   'compression' =&gt; array('adapter' =&gt; 'zip', 'target' =&gt; '\usr\tmp\tmp.zip')
+   'adapter'     => 'openssl',
+   'private'     => '/path/to/mykey/private.pem',
+   'public'      => '/public/key/path/public.pem',
+   'package'     => true,
+   'compression' => array('adapter' => 'zip', 'target' => '\usr\tmp\tmp.zip')
 ));
-</programlisting>
+]]></programlisting>
 
             <note><info><title>Decryption with same settings</title></info>
                 
@@ -459,19 +457,19 @@ $filter2 = new Zend_Filter_Encrypt(array(
             to have all data from the person who encrypted the content. See the following example:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Use openssl and provide a private key
 $filter = new Zend_Filter_Decrypt(array(
-   'adapter' =&gt; 'openssl',
-   'private' =&gt; '/path/to/mykey/private.pem'
+   'adapter' => 'openssl',
+   'private' => '/path/to/mykey/private.pem'
 ));
 
 // of course you can also give the envelope keys at initiation
-$filter-&gt;setEnvelopeKey(array(
+$filter->setEnvelopeKey(array(
    '/key/from/encoder/first.pem',
    '/key/from/encoder/second.pem'
 ));
-</programlisting>
+]]></programlisting>
 
         <note>
             <para>
@@ -485,42 +483,42 @@ $filter-&gt;setEnvelopeKey(array(
             themself by using the <methodname>setPassphrase()</methodname> method.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Use openssl and provide a private key
 $filter = new Zend_Filter_Decrypt(array(
-   'adapter' =&gt; 'openssl',
-   'private' =&gt; '/path/to/mykey/private.pem'
+   'adapter' => 'openssl',
+   'private' => '/path/to/mykey/private.pem'
 ));
 
 // of course you can also give the envelope keys at initiation
-$filter-&gt;setEnvelopeKey(array(
+$filter->setEnvelopeKey(array(
    '/key/from/encoder/first.pem',
    '/key/from/encoder/second.pem'
 ));
-$filter-&gt;setPassphrase('mypassphrase');
-</programlisting>
+$filter->setPassphrase('mypassphrase');
+]]></programlisting>
 
         <para>
             At last, decode the content. Our complete example for decrypting the previously
             encrypted content looks like this.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Use openssl and provide a private key
 $filter = new Zend_Filter_Decrypt(array(
-   'adapter' =&gt; 'openssl',
-   'private' =&gt; '/path/to/mykey/private.pem'
+   'adapter' => 'openssl',
+   'private' => '/path/to/mykey/private.pem'
 ));
 
 // of course you can also give the envelope keys at initiation
-$filter-&gt;setEnvelopeKey(array(
+$filter->setEnvelopeKey(array(
    '/key/from/encoder/first.pem',
    '/key/from/encoder/second.pem'
 ));
-$filter-&gt;setPassphrase('mypassphrase');
+$filter->setPassphrase('mypassphrase');
 
-$decrypted = $filter-&gt;filter('encoded_text_normally_unreadable');
+$decrypted = $filter->filter('encoded_text_normally_unreadable');
 print $decrypted;
-</programlisting>
+]]></programlisting>
     </section>
 </section>

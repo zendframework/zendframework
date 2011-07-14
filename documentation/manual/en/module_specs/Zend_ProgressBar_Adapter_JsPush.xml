@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.progressbar.adapter.jspush"><info><title>Zend_ProgressBar_Adapter_JsPush</title></info>
     
 
@@ -93,15 +91,15 @@
             <acronym>CSS</acronym> and JavaScript for the JsPush adapter
         </para>
 
-        <programlisting language="html">
-&lt;div id="zend-progressbar-container"&gt;
-    &lt;div id="zend-progressbar-done"&gt;&lt;/div&gt;
-&lt;/div&gt;
+        <programlisting language="html"><![CDATA[
+<div id="zend-progressbar-container">
+    <div id="zend-progressbar-done"></div>
+</div>
 
-&lt;iframe src="long-running-process.php" id="long-running-process"&gt;&lt;/iframe&gt;
-</programlisting>
+<iframe src="long-running-process.php" id="long-running-process"></iframe>
+]]></programlisting>
 
-        <programlisting language="css">
+        <programlisting language="css"><![CDATA[
 #long-running-process {
     position: absolute;
     left: -100px;
@@ -125,15 +123,15 @@
 
     background-color: #000000;
 }
-</programlisting>
+]]></programlisting>
 
-        <programlisting language="javascript">
+        <programlisting language="javascript"><![CDATA[
 function Zend_ProgressBar_Update(data)
 {
     document.getElementById('zend-progressbar-done').style.width =
          data.percent + '%';
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             This will create a simple container with a black border and a

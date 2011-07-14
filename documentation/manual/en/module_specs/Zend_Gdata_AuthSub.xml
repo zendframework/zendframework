@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.authsub"><info><title>Authenticating with AuthSub</title></info>
     
 
@@ -77,7 +75,7 @@
             <acronym>HTTP</acronym> Client.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $my_calendar = 'http://www.google.com/calendar/feeds/default/private/full';
 
 if (!isset($_SESSION['cal_token'])) {
@@ -92,7 +90,7 @@ if (!isset($_SESSION['cal_token'])) {
         $googleUri = Zend_Gdata_AuthSub::getAuthSubTokenUri(
             'http://'. $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'],
             $my_calendar, 0, 1);
-        echo "Click &lt;a href='$googleUri'&gt;here&lt;/a&gt; " .
+        echo "Click <a href='$googleUri'>here</a> " .
              "to authorize this application.";
         exit();
     }
@@ -103,7 +101,7 @@ $client = Zend_Gdata_AuthSub::getHttpClient($_SESSION['cal_token']);
 
 // Create a Gdata object using the authenticated Http Client
 $cal = new Zend_Gdata_Calendar($client);
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.gdata.authsub.logout"><info><title>Revoking AuthSub authentication</title></info>
@@ -116,7 +114,7 @@ $cal = new Zend_Gdata_Calendar($client);
             some time.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Carefully construct this value to avoid application security problems.
 $php_self = htmlentities(substr($_SERVER['PHP_SELF'],
                          0,
@@ -129,7 +127,7 @@ if (isset($_GET['logout'])) {
     header('Location: ' . $php_self);
     exit();
 }
-</programlisting>
+]]></programlisting>
 
         <note><info><title>Security notes</title></info>
             

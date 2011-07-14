@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.basic_usage"><info><title>Basic Usage</title></info>
     
 
@@ -22,11 +20,11 @@
         the <varname>$_SESSION</varname> superglobal array, where the namespace is used as the key.
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $myNamespace = new Zend_Session_Namespace('myNamespace');
 
 // $myNamespace corresponds to $_SESSION['myNamespace']
-</programlisting>
+]]></programlisting>
 
     <para>
         It is possible to use <classname>Zend_Session</classname> in conjunction with other code
@@ -51,19 +49,19 @@ $myNamespace = new Zend_Session_Namespace('myNamespace');
         <example xml:id="zend.session.basic_usage.basic_examples.example.counting_page_views"><info><title>Counting Page Views</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $defaultNamespace = new Zend_Session_Namespace('Default');
 
-if (isset($defaultNamespace-&gt;numberOfPageRequests)) {
+if (isset($defaultNamespace->numberOfPageRequests)) {
     // this will increment for each page load.
-    $defaultNamespace-&gt;numberOfPageRequests++;
+    $defaultNamespace->numberOfPageRequests++;
 } else {
-    $defaultNamespace-&gt;numberOfPageRequests = 1; // first time
+    $defaultNamespace->numberOfPageRequests = 1; // first time
 }
 
 echo "Page requests this session: ",
-    $defaultNamespace-&gt;numberOfPageRequests;
-</programlisting>
+    $defaultNamespace->numberOfPageRequests;
+]]></programlisting>
         </example>
 
         <para>
@@ -85,15 +83,15 @@ echo "Page requests this session: ",
         <example xml:id="zend.session.basic_usage.basic_examples.example.namespaces.new"><info><title>New Way: Namespaces Avoid Collisions</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // in the Zend_Auth component
 $authNamespace = new Zend_Session_Namespace('Zend_Auth');
-$authNamespace-&gt;user = "myusername";
+$authNamespace->user = "myusername";
 
 // in a web services component
 $webServiceNamespace = new Zend_Session_Namespace('Some_Web_Service');
-$webServiceNamespace-&gt;user = "mywebusername";
-</programlisting>
+$webServiceNamespace->user = "mywebusername";
+]]></programlisting>
         </example>
 
         <para>
@@ -104,10 +102,10 @@ $webServiceNamespace-&gt;user = "mywebusername";
         <example xml:id="zend.session.basic_usage.basic_examples.example.namespaces.old"><info><title>Old Way: PHP Session Access</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $_SESSION['Zend_Auth']['user'] = "myusername";
 $_SESSION['Some_Web_Service']['user'] = "mywebusername";
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -122,14 +120,14 @@ $_SESSION['Some_Web_Service']['user'] = "mywebusername";
         <example xml:id="zend.session.basic_usage.iteration.example"><info><title>Session Iteration</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $aNamespace =
     new Zend_Session_Namespace('some_namespace_with_data_present');
 
-foreach ($aNamespace as $index =&gt; $value) {
-    echo "aNamespace-&gt;$index = '$value';\n";
+foreach ($aNamespace as $index => $value) {
+    echo "aNamespace->$index = '$value';\n";
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -148,19 +146,19 @@ foreach ($aNamespace as $index =&gt; $value) {
         <example xml:id="zend.session.basic_usage.accessors.example"><info><title>Accessing Session Data</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $namespace = new Zend_Session_Namespace(); // default namespace
 
-$namespace-&gt;foo = 100;
+$namespace->foo = 100;
 
-echo "\$namespace-&gt;foo = $namespace-&gt;foo\n";
+echo "\$namespace->foo = $namespace->foo\n";
 
-if (!isset($namespace-&gt;bar)) {
-    echo "\$namespace-&gt;bar not set\n";
+if (!isset($namespace->bar)) {
+    echo "\$namespace->bar not set\n";
 }
 
-unset($namespace-&gt;foo);
-</programlisting>
+unset($namespace->foo);
+]]></programlisting>
         </example>
     </section>
 </section>

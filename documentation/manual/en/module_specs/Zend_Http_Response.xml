@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.response"><info><title>Zend_Http_Response</title></info>
     
 
@@ -23,7 +21,7 @@
             <example xml:id="zend.http.response.introduction.example-1"><info><title>Instantiating a Zend_Http_Response Object Using the Factory Method</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $str = '';
 $sock = fsockopen('www.example.com', 80);
 $req =     "GET / HTTP/1.1\r\n" .
@@ -36,7 +34,7 @@ while ($buff = fread($sock, 1024))
     $str .= $sock;
 
 $response = Zend_Http_Response::fromString($str);
-</programlisting>
+]]></programlisting>
             </example>
         </para>
 
@@ -124,14 +122,14 @@ $response = Zend_Http_Response::fromString($str);
             <example xml:id="zend.http.response.testers.example-1"><info><title>Using the isError() method to validate a response</title></info>
                 
 
-                <programlisting language="php">
-if ($response-&gt;isError()) {
+                <programlisting language="php"><![CDATA[
+if ($response->isError()) {
   echo "Error transmitting data.\n"
-  echo "Server reply was: " . $response-&gt;getStatus() .
-       " " . $response-&gt;getMessage() . "\n";
+  echo "Server reply was: " . $response->getStatus() .
+       " " . $response->getMessage() . "\n";
 }
 // .. process the response here...
-</programlisting>
+]]></programlisting>
             </example>
         </para>
     </section>
@@ -211,15 +209,15 @@ if ($response-&gt;isError()) {
             <example xml:id="zend.http.response.acessors.example-1"><info><title>Using Zend_Http_Response Accessor Methods</title></info>
                 
 
-                <programlisting language="php">
-if ($response-&gt;getStatus() == 200) {
-  echo "The request returned the following information:&lt;br /&gt;";
-  echo $response-&gt;getBody();
+                <programlisting language="php"><![CDATA[
+if ($response->getStatus() == 200) {
+  echo "The request returned the following information:<br />";
+  echo $response->getBody();
 } else {
-  echo "An error occurred while fetching data:&lt;br /&gt;";
-  echo $response-&gt;getStatus() . ": " . $response-&gt;getMessage();
+  echo "An error occurred while fetching data:<br />";
+  echo $response->getStatus() . ": " . $response->getMessage();
 }
-</programlisting>
+]]></programlisting>
             </example>
 
             <note><info><title>Always check return value</title></info>
@@ -236,17 +234,17 @@ if ($response-&gt;getStatus() == 200) {
             <example xml:id="zend.http.response.acessors.example-2"><info><title>Accessing Response Headers</title></info>
                 
 
-                <programlisting language="php">
-$ctype = $response-&gt;getHeader('Content-type');
+                <programlisting language="php"><![CDATA[
+$ctype = $response->getHeader('Content-type');
 if (is_array($ctype)) $ctype = $ctype[0];
 
-$body = $response-&gt;getBody();
+$body = $response->getBody();
 if ($ctype == 'text/html' || $ctype == 'text/xml') {
   $body = htmlentities($body);
 }
 
 echo $body;
-</programlisting>
+]]></programlisting>
             </example>
         </para>
     </section>

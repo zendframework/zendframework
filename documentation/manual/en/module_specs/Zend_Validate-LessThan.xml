@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.lessthan"><info><title>LessThan</title></info>
     
 
@@ -43,12 +41,12 @@
             example.
         </para>
 
-        <programlisting language="php">
-$valid  = new Zend_Validate_LessThan(array('max' =&gt; 10));
+        <programlisting language="php"><![CDATA[
+$valid  = new Zend_Validate_LessThan(array('max' => 10));
 $value  = 10;
-$return = $valid-&gt;isValid($value);
+$return = $valid->isValid($value);
 // returns true
-</programlisting>
+]]></programlisting>
 
         <para>
             The above example returns <constant>TRUE</constant> for all values which are equal to 10

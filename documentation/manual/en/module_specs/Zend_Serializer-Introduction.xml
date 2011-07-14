@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.serializer.introduction"><info><title>Introduction</title></info>
     
 
@@ -18,21 +16,21 @@
             adapter:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $serializer = Zend_Serializer::factory('PhpSerialize');
 // Now $serializer is an instance of Zend_Serializer_Adapter_AdapterInterface,
 // specifically Zend_Serializer_Adapter_PhpSerialize
 
 try {
-    $serialized = $serializer-&gt;serialize($data);
+    $serialized = $serializer->serialize($data);
     // now $serialized is a string
 
-    $unserialized = $serializer-&gt;unserialize($serialized);
+    $unserialized = $serializer->unserialize($serialized);
     // now $data == $unserialized
 } catch (Zend_Serializer_Exception $e) {
     echo $e;
 }
-</programlisting>
+]]></programlisting>
     </example>
 
     <para>
@@ -52,25 +50,25 @@ try {
         <methodname>serialize()</methodname> and <methodname>unserialize()</methodname> methods:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $serializer = Zend_Serializer::factory('Wddx', array(
-    'comment' =&gt; 'serialized by Zend_Serializer',
+    'comment' => 'serialized by Zend_Serializer',
 ));
 
 try {
-    $serialized = $serializer-&gt;serialize(
+    $serialized = $serializer->serialize(
         $data,
-        array('comment' =&gt; 'change comment')
+        array('comment' => 'change comment')
     );
 
-    $unserialized = $serializer-&gt;unserialize(
+    $unserialized = $serializer->unserialize(
         $serialized,
         array(/* options for unserialize */)
     );
 } catch (Zend_Serializer_Exception $e) {
     echo $e;
 }
-</programlisting>
+]]></programlisting>
 
     <para>
         Options passed to the <methodname>factory()</methodname> are valid for the instantiated
@@ -90,7 +88,7 @@ try {
             option using the <methodname>setDefaultAdapter()</methodname> static method.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 Zend_Serializer::setDefaultAdapter('PhpSerialize', $options);
 // or
 $serializer = Zend_Serializer::factory('PhpSerialize', $options);
@@ -102,6 +100,6 @@ try {
 } catch (Zend_Serializer_Exception $e) {
     echo $e;
 }
-</programlisting>
+]]></programlisting>
     </example>
 </section>

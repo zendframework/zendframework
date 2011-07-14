@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.stringtoupper"><info><title>StringToUpper</title></info>
     
 
@@ -33,12 +31,12 @@
             This is a basic example for using the <classname>StringToUpper</classname> filter:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_StringToUpper();
 
-print $filter-&gt;filter('Sample');
+print $filter->filter('Sample');
 // returns "SAMPLE"
-</programlisting>
+]]></programlisting>
 
     </section>
 
@@ -51,11 +49,11 @@ print $filter-&gt;filter('Sample');
             character sets works the same as with <classname>StringToLower</classname>.
         </para>
 
-        <programlisting language="php">
-$filter = new Zend_Filter_StringToUpper(array('encoding' =&gt; 'UTF-8'));
+        <programlisting language="php"><![CDATA[
+$filter = new Zend_Filter_StringToUpper(array('encoding' => 'UTF-8'));
 
 // or do this afterwards
-$filter-&gt;setEncoding('ISO-8859-1');
-</programlisting>
+$filter->setEncoding('ISO-8859-1');
+]]></programlisting>
     </section>
 </section>

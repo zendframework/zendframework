@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.spl-autoloader"><info><title>The SplAutoloader Interface</title></info>
     
 
@@ -33,7 +31,7 @@
             for a class file named after the class within a list of registered directories.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 namespace Custom;
 
 use Zend\Loader\SplAutoloader;
@@ -45,19 +43,19 @@ class ModifiedIncludePathAutoloader implements SplAutoloader
     public function __construct($options = null)
     {
         if (null !== $options) {
-            $this-&gt;setOptions($options);
+            $this->setOptions($options);
         }
     }
 
     public function setOptions($options)
     {
-        if (!is_array($options) &amp;&amp; !($options instanceof \Traversable)) {
+        if (!is_array($options) && !($options instanceof \Traversable)) {
             throw new \InvalidArgumentException();
         }
 
         foreach ($options as $path) {
-            if (!in_array($path, $this-&gt;paths)) {
-                $this-&gt;paths[] = $path;
+            if (!in_array($path, $this->paths)) {
+                $this->paths[] = $path;
             }
         }
         return $this;
@@ -66,7 +64,7 @@ class ModifiedIncludePathAutoloader implements SplAutoloader
     public function autoload($classname)
     {
         $filename = $classname . '.php';
-        foreach ($this-&gt;paths as $path) {
+        foreach ($this->paths as $path) {
             $test = $path . DIRECTORY_SEPARATOR . $filename;
             if (file_exists($test)) {
                 return include($test);
@@ -80,7 +78,7 @@ class ModifiedIncludePathAutoloader implements SplAutoloader
         spl_autoload_register(array($this, 'autoload'));
     }
 }
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.loader.spl-autoloader.options"><info><title>Configuration Options</title></info>
@@ -194,12 +192,12 @@ class ModifiedIncludePathAutoloader implements SplAutoloader
                     should look like the following:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 public function register()
 {
     spl_autoload_register(array($this, 'autoload'));
 }
-</programlisting>
+]]></programlisting>
             </refsection>
         </refentry>
     </section>

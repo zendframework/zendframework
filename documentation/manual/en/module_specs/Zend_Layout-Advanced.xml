@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.advanced"><info><title>Zend_Layout Advanced Usage</title></info>
     
 
@@ -63,10 +61,10 @@
             <methodname>setView()</methodname> accessor:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $view = new My_Custom_View();
-$layout-&gt;setView($view);
-</programlisting>
+$layout->setView($view);
+]]></programlisting>
 
         <note><info><title>Not all Zend_View implementations are equal</title></info>
             
@@ -97,10 +95,10 @@ $layout-&gt;setView($view);
                 can access the variables via the 'Zend_Layout' placeholder, using the <link linkend="zend.view.helpers.initial.placeholder">placeholder helper</link>:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $placeholders = new Zend_View_Helper_Placeholder();
-$layoutVars   = $placeholders-&gt;placeholder('Zend_Layout')-&gt;getArrayCopy();
-</programlisting>
+$layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
+]]></programlisting>
         </note>
     </section>
 
@@ -191,13 +189,13 @@ $layoutVars   = $placeholders-&gt;placeholder('Zend_Layout')-&gt;getArrayCopy();
                 has accessors for setting these values.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Set the inflector target:
-$layout-&gt;setInflectorTarget('layouts/:script.:suffix');
+$layout->setInflectorTarget('layouts/:script.:suffix');
 
 // Set the layout view script suffix:
-$layout-&gt;setViewSuffix('php');
-</programlisting>
+$layout->setViewSuffix('php');
+]]></programlisting>
         </example>
 
         <example xml:id="zend.layout.advanced.inflector.directmodification"><info><title>Direct modification of Zend_Layout inflector</title></info>
@@ -218,11 +216,11 @@ $layout-&gt;setViewSuffix('php');
                 for the script.
             </para>
 
-            <programlisting language="php">
-$layout-&gt;getInflector()-&gt;setTarget('layouts/:script.:suffix')
-                       -&gt;setStaticRule('suffix', 'html')
-                       -&gt;setFilterRule(array('Word_CamelCaseToUnderscore'));
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$layout->getInflector()->setTarget('layouts/:script.:suffix')
+                       ->setStaticRule('suffix', 'html')
+                       ->setFilterRule(array('Word_CamelCaseToUnderscore'));
+]]></programlisting>
         </example>
 
         <example xml:id="zend.layout.advanced.inflector.custom"><info><title>Custom inflectors</title></info>
@@ -235,14 +233,14 @@ $layout-&gt;getInflector()-&gt;setTarget('layouts/:script.:suffix')
                 <classname>Zend_Layout</classname> supports this.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $inflector = new Zend_Filter_Inflector('layouts/:script.:suffix');
-$inflector-&gt;addRules(array(
-    ':script' =&gt; array('Word_CamelCaseToUnderscore'),
-    'suffix'  =&gt; 'html'
+$inflector->addRules(array(
+    ':script' => array('Word_CamelCaseToUnderscore'),
+    'suffix'  => 'html'
 ));
-$layout-&gt;setInflector($inflector);
-</programlisting>
+$layout->setInflector($inflector);
+]]></programlisting>
         </example>
 
         <note><info><title>Inflection can be disabled</title></info>

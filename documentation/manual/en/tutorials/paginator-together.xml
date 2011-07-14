@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.paginator.together"><info><title>Putting it all Together</title></info>
     
 
@@ -23,7 +21,7 @@
         purposes only. A real application should not use controllers in this manner.
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 class IndexController extends Zend_Controller_Action
 {
     public function indexAction()
@@ -36,19 +34,19 @@ class IndexController extends Zend_Controller_Action
         $db = Zend_Registry::get('db');
 
         // Create a select object which fetches blog posts, sorted decending by date of creation
-        $select = $db-&gt;select()-&gt;from('posts')-&gt;sort('date_created DESC');
+        $select = $db->select()->from('posts')->sort('date_created DESC');
 
         // Create a Paginator for the blog posts query
         $paginator = Zend_Paginator::factory($select);
 
         // Read the current page number from the request. Default to 1 if no explicit page number is provided.
-        $paginator-&gt;setCurrentPageNumber($this-&gt;_getParam('page', 1));
+        $paginator->setCurrentPageNumber($this->_getParam('page', 1));
 
         // Assign the Paginator object to the view
-        $this-&gt;view-&gt;paginator = $paginator;
+        $this->view->paginator = $paginator;
     }
 }
-</programlisting>
+]]></programlisting>
 
     <para>
         The following view script is the index.phtml view script for the IndexController's
@@ -56,17 +54,17 @@ class IndexController extends Zend_Controller_Action
         ScrollingStyle.
     </para>
 
-    <programlisting language="php">
-&lt;ul&gt;
-&lt;?php
+    <programlisting language="php"><![CDATA[
+<ul>
+<?php
 // Render each the title of each post for the current page in a list-item
-foreach ($this-&gt;paginator as $item) {
-    echo '&lt;li&gt;' . $item-&gt;title . '&lt;/li&gt;';
+foreach ($this->paginator as $item) {
+    echo '<li>' . $item->title . '</li>';
 }
-?&gt;
-&lt;/ul&gt;
-&lt;?php echo $this-&gt;paginator; ?&gt;
-</programlisting>
+?>
+</ul>
+<?php echo $this->paginator; ?>
+]]></programlisting>
 
     <para>
         Now navigate to your project's index and see Paginator in action. What we have discussed

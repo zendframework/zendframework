@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.server.reflection"><info><title>Zend_Server_Reflection</title></info>
     
 
@@ -29,34 +27,34 @@
             Basic usage is simple:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $class    = Zend_Server_Reflection::reflectClass('My_Class');
 $function = Zend_Server_Reflection::reflectFunction('my_function');
 
 // Get prototypes
-$prototypes = $reflection-&gt;getPrototypes();
+$prototypes = $reflection->getPrototypes();
 
 // Loop through each prototype for the function
 foreach ($prototypes as $prototype) {
 
     // Get prototype return type
-    echo "Return type: ", $prototype-&gt;getReturnType(), "\n";
+    echo "Return type: ", $prototype->getReturnType(), "\n";
 
     // Get prototype parameters
-    $parameters = $prototype-&gt;getParameters();
+    $parameters = $prototype->getParameters();
 
     echo "Parameters: \n";
     foreach ($parameters as $parameter) {
         // Get parameter type
-        echo "    ", $parameter-&gt;getType(), "\n";
+        echo "    ", $parameter->getType(), "\n";
     }
 }
 
 // Get namespace for a class, function, or method.
 // Namespaces may be set at instantiation time (second argument), or using
 // setNamespace()
-$reflection-&gt;getNamespace();
-</programlisting>
+$reflection->getNamespace();
+]]></programlisting>
 
         <para>
             <methodname>reflectFunction()</methodname> returns a

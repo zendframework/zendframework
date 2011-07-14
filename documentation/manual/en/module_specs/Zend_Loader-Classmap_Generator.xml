@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.classmap-generator"><info><title>The Class Map Generator utility: bin/classmap_generator.php</title></info>
     
 
@@ -29,9 +27,9 @@
             <filename>.classmap.php</filename> in the directory you specify.
         </para>
 
-        <programlisting language="sh">
+        <programlisting language="sh"><![CDATA[
 php classmap_generator.php Some/Directory/
-</programlisting>
+]]></programlisting>
 
     </section>
 

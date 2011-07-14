@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.file.transfer.introduction"><info><title>Zend_File_Transfer</title></info>
     
 
@@ -53,14 +51,14 @@
             The first part is the file form. In our example there is one file to upload.
         </para>
 
-        <programlisting language="xml">
-&lt;form enctype="multipart/form-data" action="/file/upload" method="POST"&gt;
-    &lt;input type="hidden" name="MAX_FILE_SIZE" value="100000" /&gt;
-        Choose a file to upload: &lt;input name="uploadedfile" type="file" /&gt;
-    &lt;br /&gt;
-    &lt;input type="submit" value="Upload File" /&gt;
-&lt;/form&gt;
-</programlisting>
+        <programlisting language="xml"><![CDATA[
+<form enctype="multipart/form-data" action="/file/upload" method="POST">
+    <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+        Choose a file to upload: <input name="uploadedfile" type="file" />
+    <br />
+    <input type="submit" value="Upload File" />
+</form>
+]]></programlisting>
 
         <para>
            For convenience, you can use <link linkend="zend.form.standardElements.file">Zend_Form_Element_File</link> instead of
@@ -73,16 +71,16 @@
             controller and the <methodname>upload()</methodname> action.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $adapter = new Zend_File_Transfer_Adapter_Http();
 
-$adapter-&gt;setDestination('C:\temp');
+$adapter->setDestination('C:\temp');
 
-if (!$adapter-&gt;receive()) {
-    $messages = $adapter-&gt;getMessages();
+if (!$adapter->receive()) {
+    $messages = $adapter->getMessages();
     echo implode("\n", $messages);
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             This code listing demonstrates the simplest usage of
@@ -181,28 +179,28 @@ if (!$adapter-&gt;receive()) {
         <example xml:id="zend.file.transfer.introduction.checking.example"><info><title>Checking Files</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Returns all known internal file information
-$files = $upload-&gt;getFileInfo();
+$files = $upload->getFileInfo();
 
-foreach ($files as $file =&gt; $info) {
+foreach ($files as $file => $info) {
     // file uploaded ?
-    if (!$upload-&gt;isUploaded($file)) {
+    if (!$upload->isUploaded($file)) {
         print "Why havn't you uploaded the file ?";
         continue;
     }
 
     // validators are ok ?
-    if (!$upload-&gt;isValid($file)) {
+    if (!$upload->isValid($file)) {
         print "Sorry but $file is not what we wanted";
         continue;
     }
 }
 
-$upload-&gt;receive();
-</programlisting>
+$upload->receive();
+]]></programlisting>
         </example>
     </section>
 
@@ -267,16 +265,16 @@ $upload-&gt;receive();
         <example xml:id="zend.file.transfer.introduction.informations.example1"><info><title>Getting the Filename</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
-$upload-&gt;receive();
+$upload->receive();
 
 // Returns the file names from all files
-$names = $upload-&gt;getFileName();
+$names = $upload->getFileName();
 
 // Returns the file names from the 'foo' form element
-$names = $upload-&gt;getFileName('foo');
-</programlisting>
+$names = $upload->getFileName('foo');
+]]></programlisting>
         </example>
 
         <note>
@@ -297,17 +295,17 @@ $names = $upload-&gt;getFileName('foo');
         <example xml:id="zend.file.transfer.introduction.informations.example.getfilesize"><info><title>Getting the size of a file</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
-$upload-&gt;receive();
+$upload->receive();
 
 // Returns the sizes from all files as array if more than one file was uploaded
-$size = $upload-&gt;getFileSize();
+$size = $upload->getFileSize();
 
 // Switches of the SI notation to return plain numbers
-$upload-&gt;setOption(array('useByteString' =&gt; false));
-$size = $upload-&gt;getFileSize();
-</programlisting>
+$upload->setOption(array('useByteString' => false));
+$size = $upload->getFileSize();
+]]></programlisting>
         </example>
 
         <note><info><title>Client given filesize</title></info>
@@ -330,16 +328,16 @@ $size = $upload-&gt;getFileSize();
         <example xml:id="zend.file.transfer.introduction.informations.example2"><info><title>Getting the hash of a file</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
-$upload-&gt;receive();
+$upload->receive();
 
 // Returns the hashes from all files as array if more than one file was uploaded
-$hash = $upload-&gt;getHash('md5');
+$hash = $upload->getHash('md5');
 
 // Returns the hash for the 'foo' form element
-$names = $upload-&gt;getHash('crc32', 'foo');
-</programlisting>
+$names = $upload->getHash('crc32', 'foo');
+]]></programlisting>
         </example>
 
         <note><info><title>Return value</title></info>
@@ -359,15 +357,15 @@ $names = $upload-&gt;getHash('crc32', 'foo');
         <example xml:id="zend.file.transfer.introduction.informations.getmimetype"><info><title>Getting the mimetype of a file</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
-$upload-&gt;receive();
+$upload->receive();
 
-$mime = $upload-&gt;getMimeType();
+$mime = $upload->getMimeType();
 
 // Returns the mimetype for the 'foo' form element
-$names = $upload-&gt;getMimeType('foo');
-</programlisting>
+$names = $upload->getMimeType('foo');
+]]></programlisting>
         </example>
 
         <note><info><title>Client given mimetype</title></info>
@@ -454,7 +452,7 @@ $names = $upload-&gt;getMimeType('foo');
             <example xml:id="zend.file.transfer.introduction.uploadprogress.progressadapter.example1"><info><title>Using the progressbar adapter to retrieve the actual state</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $adapter = new Zend_ProgressBar_Adapter_Console();
 $upload  = Zend_File_Transfer_Adapter_Http::getProgress($adapter);
 
@@ -462,7 +460,7 @@ $upload = null;
 while (!$upload['done']) {
     $upload = Zend_File_Transfer_Adapter_Http:getProgress($upload);
 }
-</programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -565,7 +563,7 @@ while (!$upload['done']) {
             <example xml:id="zend.file.transfer.introduction.uploadprogress.manually.example1"><info><title>Manual usage of the file progress</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $upload  = Zend_File_Transfer_Adapter_Http::getProgress();
 
 while (!$upload['done']) {
@@ -573,7 +571,7 @@ while (!$upload['done']) {
     print "\nActual progress:".$upload['message'];
     // do whatever you need
 }
-</programlisting>
+]]></programlisting>
             </example>
 
             <note><info><title>Knowing the file to get the progress from</title></info>

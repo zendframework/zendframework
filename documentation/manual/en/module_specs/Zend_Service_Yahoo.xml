@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.yahoo"><info><title>Zend_Service_Yahoo</title></info>
     
 
@@ -32,13 +30,13 @@
         <example xml:id="zend.service.yahoo.websearch.example-1"><info><title>Searching the Web with Yahoo!</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
-$results = $yahoo-&gt;webSearch('PHP');
+$results = $yahoo->webSearch('PHP');
 foreach ($results as $result) {
-    echo $result-&gt;Title .'&lt;br /&gt;';
+    echo $result->Title .'<br />';
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -56,13 +54,13 @@ foreach ($results as $result) {
         <example xml:id="zend.service.yahoo.imagesearch.example-1"><info><title>Finding Images with Yahoo!</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
-$results = $yahoo-&gt;imageSearch('PHP');
+$results = $yahoo->imageSearch('PHP');
 foreach ($results as $result) {
-    echo $result-&gt;Title .'&lt;br /&gt;';
+    echo $result->Title .'<br />';
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -79,13 +77,13 @@ foreach ($results as $result) {
         <example xml:id="zend.service.yahoo.videosearch.example-1"><info><title>Finding videos with Yahoo!</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
-$results = $yahoo-&gt;videoSearch('PHP');
+$results = $yahoo->videoSearch('PHP');
 foreach ($results as $result) {
-    echo $result-&gt;Title .'&lt;br /&gt;';
+    echo $result->Title .'<br />';
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -101,13 +99,13 @@ foreach ($results as $result) {
         <example xml:id="zend.service.yahoo.localsearch.example-1"><info><title>Finding Local Businesses and Services with Yahoo!</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
-$results = $yahoo-&gt;localSearch('Apple Computers', array('zip' =&gt; '95014'));
+$results = $yahoo->localSearch('Apple Computers', array('zip' => '95014'));
 foreach ($results as $result) {
-    echo $result-&gt;Title .'&lt;br /&gt;';
+    echo $result->Title .'<br />';
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -123,13 +121,13 @@ foreach ($results as $result) {
         <example xml:id="zend.service.yahoo.newssearch.example-1"><info><title>Searching Yahoo! News</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
-$results = $yahoo-&gt;newsSearch('PHP');
+$results = $yahoo->newsSearch('PHP');
 foreach ($results as $result) {
-    echo $result-&gt;Title .'&lt;br /&gt;';
+    echo $result->Title .'<br />';
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -146,13 +144,13 @@ foreach ($results as $result) {
         <example xml:id="zend.service.yahoo.inlinkdatasearch.example-1"><info><title>Searching Yahoo! Site Explorer Inbound Links</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
-$results = $yahoo-&gt;inlinkDataSearch('http://framework.zend.com/');
+$results = $yahoo->inlinkDataSearch('http://framework.zend.com/');
 foreach ($results as $result) {
-    echo $result-&gt;Title .'&lt;br /&gt;';
+    echo $result->Title .'<br />';
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -169,13 +167,13 @@ foreach ($results as $result) {
         <example xml:id="zend.service.yahoo.pagedatasearch.example-1"><info><title>Searching Yahoo! Site Explorer's PageData</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
-$results = $yahoo-&gt;pageDataSearch('http://framework.zend.com/');
+$results = $yahoo->pageDataSearch('http://framework.zend.com/');
 foreach ($results as $result) {
-    echo $result-&gt;Title .'&lt;br /&gt;';
+    echo $result->Title .'<br />';
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 

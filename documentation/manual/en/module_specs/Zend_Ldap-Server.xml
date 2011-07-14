@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.server"><info><title>Getting information from the LDAP server</title></info>
     
 
@@ -37,12 +35,12 @@
         <example xml:id="zend.ldap.server.rootdse.getting"><info><title>Getting hands on the RootDSE</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
-$rootdse = $ldap-&gt;getRootDse();
-$serverType = $rootdse-&gt;getServerType();
-</programlisting>
+$rootdse = $ldap->getRootDse();
+$serverType = $rootdse->getServerType();
+]]></programlisting>
         </example>
     </section>
 
@@ -52,12 +50,12 @@ $serverType = $rootdse-&gt;getServerType();
         <example xml:id="zend.ldap.server.schema.getting"><info><title>Getting hands on the server schema</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
-$schema = $ldap-&gt;getSchema();
-$classes = $schema-&gt;getObjectClasses();
-</programlisting>
+$schema = $ldap->getSchema();
+$classes = $schema->getObjectClasses();
+]]></programlisting>
         </example>
 
         <section xml:id="zend.ldap.server.schema.openldap"><info><title>OpenLDAP</title></info>

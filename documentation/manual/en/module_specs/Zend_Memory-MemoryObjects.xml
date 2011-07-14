@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.memory.memory-objects"><info><title>Memory Objects</title></info>
     
 
@@ -12,9 +10,9 @@
             method of the memory manager:
         </para>
 
-        <programlisting language="php">
-$memObject = $memoryManager-&gt;create($data);
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$memObject = $memoryManager->create($data);
+]]></programlisting>
 
         <para>
             "Movable" means that such objects may be swapped and unloaded from
@@ -30,9 +28,9 @@ $memObject = $memoryManager-&gt;create($data);
             method of the memory manager:
         </para>
 
-        <programlisting language="php">
-$memObject = $memoryManager-&gt;createLocked($data);
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$memObject = $memoryManager->createLocked($data);
+]]></programlisting>
 
         <para>
             "Locked" means that such objects are never swapped and unloaded
@@ -70,19 +68,19 @@ $memObject = $memoryManager-&gt;createLocked($data);
             property to operate with memory object data:
         </para>
 
-        <programlisting language="php">
-$memObject = $memoryManager-&gt;create($data);
+        <programlisting language="php"><![CDATA[
+$memObject = $memoryManager->create($data);
 
-echo $memObject-&gt;value;
+echo $memObject->value;
 
-$memObject-&gt;value = $newValue;
+$memObject->value = $newValue;
 
-$memObject-&gt;value[$index] = '_';
+$memObject->value[$index] = '_';
 
-echo ord($memObject-&gt;value[$index1]);
+echo ord($memObject->value[$index1]);
 
-$memObject-&gt;value = substr($memObject-&gt;value, $start, $length);
-</programlisting>
+$memObject->value = substr($memObject->value, $start, $length);
+]]></programlisting>
 
         <para>
             An alternative way to access memory object data is to use the <link linkend="zend.memory.memory-objects.api.getRef"><methodname>getRef()</methodname></link>
@@ -102,9 +100,9 @@ $memObject-&gt;value = substr($memObject-&gt;value, $start, $length);
         <section xml:id="zend.memory.memory-objects.api.getRef"><info><title>getRef() method</title></info>
             
 
-            <programlisting language="php">
-public function &amp;getRef();
-</programlisting>
+            <programlisting language="php"><![CDATA[
+public function &getRef();
+]]></programlisting>
 
             <para>
                 The <methodname>getRef()</methodname> method returns reference to the object value.
@@ -131,37 +129,37 @@ public function &amp;getRef();
                 for value data processing:
             </para>
 
-            <programlisting language="php">
-$memObject = $memoryManager-&gt;create($data);
+            <programlisting language="php"><![CDATA[
+$memObject = $memoryManager->create($data);
 
-$value = &amp;$memObject-&gt;getRef();
+$value = &$memObject->getRef();
 
-for ($count = 0; $count &lt; strlen($value); $count++) {
+for ($count = 0; $count < strlen($value); $count++) {
     $char = $value[$count];
     ...
 }
-</programlisting>
+]]></programlisting>
         </section>
 
         <section xml:id="zend.memory.memory-objects.api.touch"><info><title>touch() method</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 public function touch();
-</programlisting>
+]]></programlisting>
 
             <para>
                 The <methodname>touch()</methodname> method should be used in common with
                 <methodname>getRef()</methodname>. It signals that object value has been changed:
             </para>
 
-            <programlisting language="php">
-$memObject = $memoryManager-&gt;create($data);
+            <programlisting language="php"><![CDATA[
+$memObject = $memoryManager->create($data);
 ...
 
-$value = &amp;$memObject-&gt;getRef();
+$value = &$memObject->getRef();
 
-for ($count = 0; $count &lt; strlen($value); $count++) {
+for ($count = 0; $count < strlen($value); $count++) {
     ...
     if ($condition) {
         $value[$count] = $char;
@@ -169,16 +167,16 @@ for ($count = 0; $count &lt; strlen($value); $count++) {
     ...
 }
 
-$memObject-&gt;touch();
-</programlisting>
+$memObject->touch();
+]]></programlisting>
         </section>
 
         <section xml:id="zend.memory.memory-objects.api.lock"><info><title>lock() method</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 public function lock();
-</programlisting>
+]]></programlisting>
 
             <para>
                 The <methodname>lock()</methodname> methods locks object in memory.
@@ -195,33 +193,33 @@ public function lock();
                 unlock the object:
             </para>
 
-            <programlisting language="php">
-$memObject1 = $memoryManager-&gt;create($data1);
-$memObject2 = $memoryManager-&gt;create($data2);
+            <programlisting language="php"><![CDATA[
+$memObject1 = $memoryManager->create($data1);
+$memObject2 = $memoryManager->create($data2);
 ...
 
-$memObject1-&gt;lock();
-$memObject2-&gt;lock();
+$memObject1->lock();
+$memObject2->lock();
 
-$value1 = &amp;$memObject1-&gt;getRef();
-$value2 = &amp;$memObject2-&gt;getRef();
+$value1 = &$memObject1->getRef();
+$value2 = &$memObject2->getRef();
 
-for ($count = 0; $count &lt; strlen($value2); $count++) {
+for ($count = 0; $count < strlen($value2); $count++) {
     $value1 .= $value2[$count];
 }
 
-$memObject1-&gt;touch();
-$memObject1-&gt;unlock();
-$memObject2-&gt;unlock();
-</programlisting>
+$memObject1->touch();
+$memObject1->unlock();
+$memObject2->unlock();
+]]></programlisting>
         </section>
 
         <section xml:id="zend.memory.memory-objects.api.unlock"><info><title>unlock() method</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 public function unlock();
-</programlisting>
+]]></programlisting>
 
             <para>
                 <methodname>unlock()</methodname> method unlocks object when it's no longer
@@ -232,9 +230,9 @@ public function unlock();
         <section xml:id="zend.memory.memory-objects.api.isLocked"><info><title>isLocked() method</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 public function isLocked();
-</programlisting>
+]]></programlisting>
 
             <para>
                 The <methodname>isLocked()</methodname> method can be used to check if

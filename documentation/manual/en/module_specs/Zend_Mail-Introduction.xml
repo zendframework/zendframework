@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.introduction"><info><title>Introduction</title></info>
     
 
@@ -24,14 +22,14 @@
                 following:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
-$mail-&gt;setBodyText('This is the text of the mail.');
-$mail-&gt;setFrom('somebody@example.com', 'Some Sender');
-$mail-&gt;addTo('somebody_else@example.com', 'Some Recipient');
-$mail-&gt;setSubject('TestSubject');
-$mail-&gt;send();
-</programlisting>
+$mail->setBodyText('This is the text of the mail.');
+$mail->setFrom('somebody@example.com', 'Some Sender');
+$mail->addTo('somebody_else@example.com', 'Some Recipient');
+$mail->setSubject('TestSubject');
+$mail->send();
+]]></programlisting>
         </example>
 
         <note><info><title>Minimum definitions</title></info>
@@ -64,14 +62,14 @@ $mail-&gt;send();
             convenient fluent interface.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
-$mail-&gt;setBodyText('This is the text of the mail.')
-    -&gt;setFrom('somebody@example.com', 'Some Sender')
-    -&gt;addTo('somebody_else@example.com', 'Some Recipient')
-    -&gt;setSubject('TestSubject')
-    -&gt;send();
-</programlisting>
+$mail->setBodyText('This is the text of the mail.')
+    ->setFrom('somebody@example.com', 'Some Sender')
+    ->addTo('somebody_else@example.com', 'Some Recipient')
+    ->setSubject('TestSubject')
+    ->send();
+]]></programlisting>
     </section>
 
     <section xml:id="zend.mail.introduction.sendmail"><info><title>Configuring the default sendmail transport</title></info>
@@ -97,17 +95,17 @@ $mail-&gt;setBodyText('This is the text of the mail.')
                 This example shows how to change the Return-Path of the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mail"><methodname>mail()</methodname></link> function.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $tr = new Zend_Mail_Transport_Sendmail('-freturn_to_me@example.com');
 Zend_Mail::setDefaultTransport($tr);
 
 $mail = new Zend_Mail();
-$mail-&gt;setBodyText('This is the text of the mail.');
-$mail-&gt;setFrom('somebody@example.com', 'Some Sender');
-$mail-&gt;addTo('somebody_else@example.com', 'Some Recipient');
-$mail-&gt;setSubject('TestSubject');
-$mail-&gt;send();
-</programlisting>
+$mail->setBodyText('This is the text of the mail.');
+$mail->setFrom('somebody@example.com', 'Some Sender');
+$mail->addTo('somebody_else@example.com', 'Some Recipient');
+$mail->setSubject('TestSubject');
+$mail->send();
+]]></programlisting>
         </example>
 
         <note><info><title>Safe mode restrictions</title></info>

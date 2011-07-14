@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.timesync.working"><info><title>Working with Zend_TimeSync</title></info>
     
 
@@ -26,11 +24,11 @@
             from which you want to request the time.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $server = new Zend_TimeSync('0.pool.ntp.org');
 
-print $server-&gt;getDate()-&gt;getIso();
-</programlisting>
+print $server->getDate()->getIso();
+]]></programlisting>
 
         <para>
             So what is happening in the background of <classname>Zend_TimeSync</classname>? First
@@ -66,14 +64,14 @@ print $server-&gt;getDate()-&gt;getIso();
             method.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $server = new Zend_TimeSync(array('0.pool.ntp.org',
                                   '1.pool.ntp.org',
                                   '2.pool.ntp.org'));
-$server-&gt;addServer('3.pool.ntp.org');
+$server->addServer('3.pool.ntp.org');
 
-print $server-&gt;getDate()-&gt;getIso();
-</programlisting>
+print $server->getDate()->getIso();
+]]></programlisting>
 
         <para>
             There is no limit to the number of time servers you can add. When a time server can not
@@ -88,14 +86,14 @@ print $server-&gt;getDate()-&gt;getIso();
             parameter when adding another time server.
         </para>
 
-        <programlisting language="php">
-$server = new Zend_TimeSync(array('generic'  =&gt; '0.pool.ntp.org',
-                                  'fallback' =&gt; '1.pool.ntp.org',
-                                  'reserve'  =&gt; '2.pool.ntp.org'));
-$server-&gt;addServer('3.pool.ntp.org', 'additional');
+        <programlisting language="php"><![CDATA[
+$server = new Zend_TimeSync(array('generic'  => '0.pool.ntp.org',
+                                  'fallback' => '1.pool.ntp.org',
+                                  'reserve'  => '2.pool.ntp.org'));
+$server->addServer('3.pool.ntp.org', 'additional');
 
-print $server-&gt;getDate()-&gt;getIso();
-</programlisting>
+print $server->getDate()->getIso();
+]]></programlisting>
 
         <para>
             Naming the time servers allows you to request a specific time server as we will see
@@ -120,14 +118,14 @@ print $server-&gt;getDate()-&gt;getIso();
             protocol in the address as demonstrated in the previous examples.
         </para>
 
-        <programlisting language="php">
-$server = new Zend_TimeSync(array('generic'  =&gt; 'ntp:\\0.pool.ntp.org',
-                                  'fallback' =&gt; 'ntp:\\1.pool.ntp.org',
-                                  'reserve'  =&gt; 'ntp:\\2.pool.ntp.org'));
-$server-&gt;addServer('sntp:\\internal.myserver.com', 'additional');
+        <programlisting language="php"><![CDATA[
+$server = new Zend_TimeSync(array('generic'  => 'ntp:\\0.pool.ntp.org',
+                                  'fallback' => 'ntp:\\1.pool.ntp.org',
+                                  'reserve'  => 'ntp:\\2.pool.ntp.org'));
+$server->addServer('sntp:\\internal.myserver.com', 'additional');
 
-print $server-&gt;getDate()-&gt;getIso();
-</programlisting>
+print $server->getDate()->getIso();
+]]></programlisting>
 
         <para>
             <classname>Zend_TimeSync</classname> can handle mixed time servers. So you are not
@@ -151,13 +149,13 @@ print $server-&gt;getDate()-&gt;getIso();
             <classname>Zend_TimeSync</classname> will use the standard port.
         </para>
 
-        <programlisting language="php">
-$server = new Zend_TimeSync(array('generic'  =&gt; 'ntp:\\0.pool.ntp.org:200',
-                                  'fallback' =&gt; 'ntp:\\1.pool.ntp.org'));
-$server-&gt;addServer('sntp:\\internal.myserver.com:399', 'additional');
+        <programlisting language="php"><![CDATA[
+$server = new Zend_TimeSync(array('generic'  => 'ntp:\\0.pool.ntp.org:200',
+                                  'fallback' => 'ntp:\\1.pool.ntp.org'));
+$server->addServer('sntp:\\internal.myserver.com:399', 'additional');
 
-print $server-&gt;getDate()-&gt;getIso();
-</programlisting>
+print $server->getDate()->getIso();
+]]></programlisting>
     </section>
 
     <section xml:id="zend.timesync.working.options"><info><title>Time Servers Options</title></info>
@@ -186,16 +184,16 @@ print $server-&gt;getDate()-&gt;getIso();
             key is set, it will return all set options.
         </para>
 
-        <programlisting language="php">
-Zend_TimeSync::setOptions(array('timeout' =&gt; 3, 'myoption' =&gt; 'timesync'));
-$server = new Zend_TimeSync(array('generic'  =&gt; 'ntp:\\0.pool.ntp.org',
-                                  'fallback' =&gt; 'ntp:\\1.pool.ntp.org'));
-$server-&gt;addServer('sntp:\\internal.myserver.com', 'additional');
+        <programlisting language="php"><![CDATA[
+Zend_TimeSync::setOptions(array('timeout' => 3, 'myoption' => 'timesync'));
+$server = new Zend_TimeSync(array('generic'  => 'ntp:\\0.pool.ntp.org',
+                                  'fallback' => 'ntp:\\1.pool.ntp.org'));
+$server->addServer('sntp:\\internal.myserver.com', 'additional');
 
-print $server-&gt;getDate()-&gt;getIso();
+print $server->getDate()->getIso();
 print_r(Zend_TimeSync::getOptions();
 print "Timeout = " . Zend_TimeSync::getOptions('timeout');
-</programlisting>
+]]></programlisting>
 
         <para>
             As you can see, the options for <classname>Zend_TimeSync</classname> are static. Each
@@ -217,14 +215,14 @@ print "Timeout = " . Zend_TimeSync::getOptions('timeout');
             server will be returned.
         </para>
 
-        <programlisting language="php">
-$server = new Zend_TimeSync(array('generic'  =&gt; 'ntp:\\0.pool.ntp.org',
-                                  'fallback' =&gt; 'ntp:\\1.pool.ntp.org'));
-$server-&gt;addServer('sntp:\\internal.myserver.com', 'additional');
+        <programlisting language="php"><![CDATA[
+$server = new Zend_TimeSync(array('generic'  => 'ntp:\\0.pool.ntp.org',
+                                  'fallback' => 'ntp:\\1.pool.ntp.org'));
+$server->addServer('sntp:\\internal.myserver.com', 'additional');
 
-$actual = $server-&gt;getServer();
-$server = $server-&gt;setServer('additional');
-</programlisting>
+$actual = $server->getServer();
+$server = $server->setServer('additional');
+]]></programlisting>
     </section>
 
     <section xml:id="zend.timesync.working.informations"><info><title>Information from Time Servers</title></info>
@@ -235,12 +233,12 @@ $server = $server-&gt;setServer('additional');
             get this information with the <methodname>getInfo()</methodname> method.
         </para>
 
-        <programlisting language="php">
-$server = new Zend_TimeSync(array('generic'  =&gt; 'ntp:\\0.pool.ntp.org',
-                                  'fallback' =&gt; 'ntp:\\1.pool.ntp.org'));
+        <programlisting language="php"><![CDATA[
+$server = new Zend_TimeSync(array('generic'  => 'ntp:\\0.pool.ntp.org',
+                                  'fallback' => 'ntp:\\1.pool.ntp.org'));
 
-print_r ($server-&gt;getInfo());
-</programlisting>
+print_r ($server->getInfo());
+]]></programlisting>
 
         <para>
             The returned information differs with the protocol used and can also differ with the
@@ -256,27 +254,27 @@ print_r ($server-&gt;getInfo());
             iterate through all thrown exceptions as shown in the following example:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $serverlist = array(
         // invalid servers
-        'invalid_a'  =&gt; 'ntp://a.foo.bar.org',
-        'invalid_b'  =&gt; 'sntp://b.foo.bar.org',
+        'invalid_a'  => 'ntp://a.foo.bar.org',
+        'invalid_b'  => 'sntp://b.foo.bar.org',
 );
 
 $server = new Zend_TimeSync($serverlist);
 
 try {
-    $result = $server-&gt;getDate();
-    echo $result-&gt;getIso();
+    $result = $server->getDate();
+    echo $result->getIso();
 } catch (Zend_TimeSync_Exception $e) {
 
-    $exceptions = $e-&gt;get();
+    $exceptions = $e->get();
 
-    foreach ($exceptions as $key =&gt; $myException) {
-        echo $myException-&gt;getMessage();
-        echo '&lt;br /&gt;';
+    foreach ($exceptions as $key => $myException) {
+        echo $myException->getMessage();
+        echo '<br />';
     }
 }
-</programlisting>
+]]></programlisting>
     </section>
 </section>

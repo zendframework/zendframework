@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.view.placeholders.standard"><info><title>Standard Placeholders</title></info>
     
 
@@ -45,9 +43,9 @@
             <acronym>DTD</acronym>, you can simply specify:
         </para>
 
-        <programlisting language="php">
-$this-&gt;doctype('XHTML1_STRICT');
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$this->doctype('XHTML1_STRICT');
+]]></programlisting>
 
         <para>
             Among the other available mnemonics, you'll find these common types:
@@ -109,37 +107,37 @@ $this-&gt;doctype('XHTML1_STRICT');
             You can assign the type and render the declaration in a single call:
         </para>
 
-        <programlisting language="php">
-echo $this-&gt;doctype('XHTML1_STRICT');
-</programlisting>
+        <programlisting language="php"><![CDATA[
+echo $this->doctype('XHTML1_STRICT');
+]]></programlisting>
 
         <para>
             However, the better approach is to assign the type in your bootstrap, and then render it
             in your layout. Try adding the following to your bootstrap class:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     protected function _initDocType()
     {
-        $this-&gt;bootstrap('View');
-        $view = $this-&gt;getResource('View');
-        $view-&gt;doctype('XHTML1_STRICT');
+        $this->bootstrap('View');
+        $view = $this->getResource('View');
+        $view->doctype('XHTML1_STRICT');
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Then, in your layout script, simply <methodname>echo()</methodname> the helper at the
             top of the file:
         </para>
 
-        <programlisting language="php">
-&lt;?php echo $this-&gt;doctype() ?&gt;
-&lt;html&gt;
-    &lt;!-- ... --&gt;
-</programlisting>
+        <programlisting language="php"><![CDATA[
+<?php echo $this->doctype() ?>
+<html>
+    <!-- ... -->
+]]></programlisting>
 
         <para>
             This will ensure that your DocType-aware view helpers render the appropriate markup,
@@ -176,57 +174,57 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             placeholders, and specify an initial title as well as a separator.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     // ...
 
     protected function _initPlaceholders()
     {
-        $this-&gt;bootstrap('View');
-        $view = $this-&gt;getResource('View');
-        $view-&gt;doctype('XHTML1_STRICT');
+        $this->bootstrap('View');
+        $view = $this->getResource('View');
+        $view->doctype('XHTML1_STRICT');
 
         // Set the initial title and separator:
-        $view-&gt;headTitle('My Site')
-             -&gt;setSeparator(' :: ');
+        $view->headTitle('My Site')
+             ->setSeparator(' :: ');
     }
 
     // ...
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Within a view script, we might want to add another segment:
         </para>
 
-        <programlisting language="php">
-&lt;?php $this-&gt;headTitle()-&gt;append('Some Page'); // place after other segments ?&gt;
-&lt;?php $this-&gt;headTitle()-&gt;prepend('Some Page'); // place before ?&gt;
-</programlisting>
+        <programlisting language="php"><![CDATA[
+<?php $this->headTitle()->append('Some Page'); // place after other segments ?>
+<?php $this->headTitle()->prepend('Some Page'); // place before ?>
+]]></programlisting>
 
         <para>
             In our layout, we will simply echo the <methodname>headTitle()</methodname> helper:
         </para>
 
-        <programlisting language="php">
-&lt;?php echo $this-&gt;doctype() ?&gt;
-&lt;html&gt;
-    &lt;?php echo $this-&gt;headTitle() ?&gt;
-    &lt;!-- ... --&gt;
-</programlisting>
+        <programlisting language="php"><![CDATA[
+<?php echo $this->doctype() ?>
+<html>
+    <?php echo $this->headTitle() ?>
+    <!-- ... -->
+]]></programlisting>
 
         <para>
             This will generate the following output:
         </para>
 
-        <programlisting language="html">
-&lt;!-- If append() was used: --&gt;
-&lt;title&gt;My Site :: Some Page&lt;/title&gt;
+        <programlisting language="html"><![CDATA[
+<!-- If append() was used: -->
+<title>My Site :: Some Page</title>
 
-&lt;!-- If prepend() was used: --&gt;
-&lt;title&gt;Some Page :: My Site&lt;/title&gt;
-</programlisting>
+<!-- If prepend() was used: -->
+<title>Some Page :: My Site</title>
+]]></programlisting>
     </section>
 
     <section xml:id="learning.view.placeholders.standard.head-link"><info><title>Specifying Stylesheets with HeadLink</title></info>
@@ -261,57 +259,57 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             this in our <methodname>_initPlaceholders()</methodname> bootstrap method.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     // ...
 
     protected function _initPlaceholders()
     {
-        $this-&gt;bootstrap('View');
-        $view = $this-&gt;getResource('View');
-        $view-&gt;doctype('XHTML1_STRICT');
+        $this->bootstrap('View');
+        $view = $this->getResource('View');
+        $view->doctype('XHTML1_STRICT');
 
         // Set the initial title and separator:
-        $view-&gt;headTitle('My Site')
-             -&gt;setSeparator(' :: ');
+        $view->headTitle('My Site')
+             ->setSeparator(' :: ');
 
         // Set the initial stylesheet:
-        $view-&gt;headLink()-&gt;prependStylesheet('/styles/site.css');
+        $view->headLink()->prependStylesheet('/styles/site.css');
     }
 
     // ...
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Later, in a controller or action-specific view script, we can add more stylesheets:
         </para>
 
-        <programlisting language="php">
-&lt;?php $this-&gt;headLink()-&gt;appendStylesheet('/styles/user-list.css') ?&gt;
-</programlisting>
+        <programlisting language="php"><![CDATA[
+<?php $this->headLink()->appendStylesheet('/styles/user-list.css') ?>
+]]></programlisting>
 
         <para>
             Within our layout view script, once again, we simply echo the placeholder:
         </para>
 
-        <programlisting language="php">
-&lt;?php echo $this-&gt;doctype() ?&gt;
-&lt;html&gt;
-    &lt;?php echo $this-&gt;headTitle() ?&gt;
-    &lt;?php echo $this-&gt;headLink() ?&gt;
-    &lt;!-- ... --&gt;
-</programlisting>
+        <programlisting language="php"><![CDATA[
+<?php echo $this->doctype() ?>
+<html>
+    <?php echo $this->headTitle() ?>
+    <?php echo $this->headLink() ?>
+    <!-- ... -->
+]]></programlisting>
 
         <para>
             This will generate the following output:
         </para>
 
-        <programlisting language="html">
-&lt;link rel="stylesheet" type="text/css" href="/styles/site.css" /&gt;
-&lt;link rel="stylesheet" type="text/css" href="/styles/user-list.css" /&gt;
-</programlisting>
+        <programlisting language="html"><![CDATA[
+<link rel="stylesheet" type="text/css" href="/styles/site.css" />
+<link rel="stylesheet" type="text/css" href="/styles/user-list.css" />
+]]></programlisting>
     </section>
 
     <section xml:id="learning.view.placeholders.standard.head-script"><info><title>Aggregating Scripts Using HeadScript</title></info>
@@ -352,73 +350,73 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             <methodname>_initPlaceholders()</methodname> bootstrap method to do this.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     // ...
 
     protected function _initPlaceholders()
     {
-        $this-&gt;bootstrap('View');
-        $view = $this-&gt;getResource('View');
-        $view-&gt;doctype('XHTML1_STRICT');
+        $this->bootstrap('View');
+        $view = $this->getResource('View');
+        $view->doctype('XHTML1_STRICT');
 
         // Set the initial title and separator:
-        $view-&gt;headTitle('My Site')
-             -&gt;setSeparator(' :: ');
+        $view->headTitle('My Site')
+             ->setSeparator(' :: ');
 
         // Set the initial stylesheet:
-        $view-&gt;headLink()-&gt;prependStylesheet('/styles/site.css');
+        $view->headLink()->prependStylesheet('/styles/site.css');
 
         // Set the initial JS to load:
-        $view-&gt;headScript()-&gt;prependFile('/js/site.js');
+        $view->headScript()->prependFile('/js/site.js');
     }
 
     // ...
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Within a view script, we might then add an extra script file to source, or capture some
             JavaScript to include in our document.
         </para>
 
-        <programlisting language="php">
-&lt;?php $this-&gt;headScript()-&gt;appendFile('/js/user-list.js') ?&gt;
-&lt;?php $this-&gt;headScript()-&gt;captureStart() ?&gt;
+        <programlisting language="php"><![CDATA[
+<?php $this->headScript()->appendFile('/js/user-list.js') ?>
+<?php $this->headScript()->captureStart() ?>
 site = {
-    baseUrl: "&lt;?php echo $this-&gt;baseUrl() ?&gt;"
+    baseUrl: "<?php echo $this->baseUrl() ?>"
 };
-&lt;?php $this-&gt;headScript()-&gt;captureEnd() ?&gt;
-</programlisting>
+<?php $this->headScript()->captureEnd() ?>
+]]></programlisting>
 
         <para>
             Within our layout script, we then simply echo the placeholder, just as we have all the
             others:
         </para>
 
-        <programlisting language="php">
-&lt;?php echo $this-&gt;doctype() ?&gt;
-&lt;html&gt;
-    &lt;?php echo $this-&gt;headTitle() ?&gt;
-    &lt;?php echo $this-&gt;headLink() ?&gt;
-    &lt;?php echo $this-&gt;headScript() ?&gt;
-    &lt;!-- ... --&gt;
-</programlisting>
+        <programlisting language="php"><![CDATA[
+<?php echo $this->doctype() ?>
+<html>
+    <?php echo $this->headTitle() ?>
+    <?php echo $this->headLink() ?>
+    <?php echo $this->headScript() ?>
+    <!-- ... -->
+]]></programlisting>
 
         <para>
             This will generate the following output:
         </para>
 
-        <programlisting language="html">
-&lt;script type="text/javascript" src="/js/site.js"&gt;&lt;/script&gt;
-&lt;script type="text/javascript" src="/js/user-list.js"&gt;&lt;/script&gt;
-&lt;script type="text/javascript"&gt;
+        <programlisting language="html"><![CDATA[
+<script type="text/javascript" src="/js/site.js"></script>
+<script type="text/javascript" src="/js/user-list.js"></script>
+<script type="text/javascript">
 site = {
-    baseUrl: "&lt;?php echo $this-&gt;baseUrl() ?&gt;"
+    baseUrl: "<?php echo $this->baseUrl() ?>"
 };
-&lt;/script&gt;
-</programlisting>
+</script>
+]]></programlisting>
 
         <note><info><title>InlineScript Variant</title></info>
             

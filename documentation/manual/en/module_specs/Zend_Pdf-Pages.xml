@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.pages"><info><title>Working with Pages</title></info>
     
 
@@ -52,21 +50,21 @@
         <example xml:id="zend.pdf.pages.example-1"><info><title>PDF document pages management</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 ...
 // Reverse page order
-$pdf-&gt;pages = array_reverse($pdf-&gt;pages);
+$pdf->pages = array_reverse($pdf->pages);
 ...
 // Add new page
-$pdf-&gt;pages[] = new \Zend\Pdf\Page(\Zend\Pdf\Page::SIZE_A4);
+$pdf->pages[] = new \Zend\Pdf\Page(\Zend\Pdf\Page::SIZE_A4);
 // Add new page
-$pdf-&gt;pages[] = $pdf-&gt;newPage(\Zend\Pdf\Page::SIZE_A4);
+$pdf->pages[] = $pdf->newPage(\Zend\Pdf\Page::SIZE_A4);
 
 // Remove specified page.
-unset($pdf-&gt;pages[$id]);
+unset($pdf->pages[$id]);
 
 ...
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -81,28 +79,28 @@ unset($pdf-&gt;pages[$id]);
         <example xml:id="zend.pdf.pages.example-2"><info><title>Duplicating existing page</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 ...
 // Store template page in a separate variable
-$template = $pdf-&gt;pages[$templatePageIndex];
+$template = $pdf->pages[$templatePageIndex];
 ...
 // Add new page
 $page1 = new \Zend\Pdf\Page($template);
-$page1-&gt;drawText('Some text...', $x, $y);
-$pdf-&gt;pages[] = $page1;
+$page1->drawText('Some text...', $x, $y);
+$pdf->pages[] = $page1;
 ...
 
 // Add another page
 $page2 = new \Zend\Pdf\Page($template);
-$page2-&gt;drawText('Another text...', $x, $y);
-$pdf-&gt;pages[] = $page2;
+$page2->drawText('Another text...', $x, $y);
+$pdf->pages[] = $page2;
 ...
 
 // Remove source template page from the documents.
-unset($pdf-&gt;pages[$templatePageIndex]);
+unset($pdf->pages[$templatePageIndex]);
 
 ...
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -127,16 +125,16 @@ unset($pdf-&gt;pages[$templatePageIndex]);
         <example xml:id="zend.pdf.pages.example-3"><info><title>Cloning existing page</title></info>
             
 
-            <programlisting language="php">
-$page1 = clone $pdf1-&gt;pages[$templatePageIndex1];
-$page2 = clone $pdf2-&gt;pages[$templatePageIndex2];
-$page1-&gt;drawText('Some text...', $x, $y);
-$page2-&gt;drawText('Another text...', $x, $y);
+            <programlisting language="php"><![CDATA[
+$page1 = clone $pdf1->pages[$templatePageIndex1];
+$page2 = clone $pdf2->pages[$templatePageIndex2];
+$page1->drawText('Some text...', $x, $y);
+$page2->drawText('Another text...', $x, $y);
 ...
 $pdf = new \Zend\Pdf\PdfDocument();
-$pdf-&gt;pages[] = $page1;
-$pdf-&gt;pages[] = $page2;
-</programlisting>
+$pdf->pages[] = $page1;
+$pdf->pages[] = $page2;
+]]></programlisting>
         </example>
        
         <para>
@@ -151,18 +149,18 @@ $pdf-&gt;pages[] = $page2;
             </title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $extractor = new \Zend\Pdf\Resource\Extractor();
 ....
-$page1 = $extractor-&gt;clonePage($pdf-&gt;pages[$templatePageIndex1]);
-$page2 = $extractor-&gt;clonePage($pdf-&gt;pages[$templatePageIndex2]);
-$page1-&gt;drawText('Some text...', $x, $y);
-$page2-&gt;drawText('Another text...', $x, $y);
+$page1 = $extractor->clonePage($pdf->pages[$templatePageIndex1]);
+$page2 = $extractor->clonePage($pdf->pages[$templatePageIndex2]);
+$page1->drawText('Some text...', $x, $y);
+$page2->drawText('Another text...', $x, $y);
 ...
 $pdf = new Zend_Pdf();
-$pdf-&gt;pages[] = $page1;
-$pdf-&gt;pages[] = $page2;
-</programlisting>
+$pdf->pages[] = $page1;
+$pdf->pages[] = $page2;
+]]></programlisting>
         </example>
     </section>
 </section>

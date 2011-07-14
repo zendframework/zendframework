@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.form.examples"><info><title>Dojo Form Examples</title></info>
     
 
@@ -16,19 +14,19 @@
             in its own tab.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class My_Form_Test extends Zend_Dojo_Form
 {
     /**
      * Options to use with select elements
      */
     protected $_selectOptions = array(
-        'red'    =&gt; 'Rouge',
-        'blue'   =&gt; 'Bleu',
-        'white'  =&gt; 'Blanc',
-        'orange' =&gt; 'Orange',
-        'black'  =&gt; 'Noir',
-        'green'  =&gt; 'Vert',
+        'red'    => 'Rouge',
+        'blue'   => 'Bleu',
+        'white'  => 'Blanc',
+        'orange' => 'Orange',
+        'black'  => 'Noir',
+        'green'  => 'Vert',
     );
 
     /**
@@ -38,246 +36,246 @@ class My_Form_Test extends Zend_Dojo_Form
      */
     public function init()
     {
-        $this-&gt;setMethod('post');
-        $this-&gt;setAttribs(array(
-            'name'  =&gt; 'masterForm',
+        $this->setMethod('post');
+        $this->setAttribs(array(
+            'name'  => 'masterForm',
         ));
-        $this-&gt;setDecorators(array(
+        $this->setDecorators(array(
             'FormElements',
             array('TabContainer', array(
-                'id' =&gt; 'tabContainer',
-                'style' =&gt; 'width: 600px; height: 500px;',
-                'dijitParams' =&gt; array(
-                    'tabPosition' =&gt; 'top'
+                'id' => 'tabContainer',
+                'style' => 'width: 600px; height: 500px;',
+                'dijitParams' => array(
+                    'tabPosition' => 'top'
                 ),
             )),
             'DijitForm',
         ));
         $textForm = new Zend_Dojo_Form_SubForm();
-        $textForm-&gt;setAttribs(array(
-            'name'   =&gt; 'textboxtab',
-            'legend' =&gt; 'Text Elements',
-            'dijitParams' =&gt; array(
-                'title' =&gt; 'Text Elements',
+        $textForm->setAttribs(array(
+            'name'   => 'textboxtab',
+            'legend' => 'Text Elements',
+            'dijitParams' => array(
+                'title' => 'Text Elements',
             ),
         ));
-        $textForm-&gt;addElement(
+        $textForm->addElement(
                 'TextBox',
                 'textbox',
                 array(
-                    'value'      =&gt; 'some text',
-                    'label'      =&gt; 'TextBox',
-                    'trim'       =&gt; true,
-                    'propercase' =&gt; true,
+                    'value'      => 'some text',
+                    'label'      => 'TextBox',
+                    'trim'       => true,
+                    'propercase' => true,
                 )
             )
-            -&gt;addElement(
+            ->addElement(
                 'DateTextBox',
                 'datebox',
                 array(
-                    'value' =&gt; '2008-07-05',
-                    'label' =&gt; 'DateTextBox',
-                    'required'  =&gt; true,
+                    'value' => '2008-07-05',
+                    'label' => 'DateTextBox',
+                    'required'  => true,
                 )
             )
-            -&gt;addElement(
+            ->addElement(
                 'TimeTextBox',
                 'timebox',
                 array(
-                    'label' =&gt; 'TimeTextBox',
-                    'required'  =&gt; true,
+                    'label' => 'TimeTextBox',
+                    'required'  => true,
                 )
             )
-            -&gt;addElement(
+            ->addElement(
                 'CurrencyTextBox',
                 'currencybox',
                 array(
-                    'label' =&gt; 'CurrencyTextBox',
-                    'required'  =&gt; true,
-                    // 'currency' =&gt; 'USD',
-                    'invalidMessage' =&gt; 'Invalid amount. ' .
+                    'label' => 'CurrencyTextBox',
+                    'required'  => true,
+                    // 'currency' => 'USD',
+                    'invalidMessage' => 'Invalid amount. ' .
                                         'Include dollar sign, commas, ' .
                                         'and cents.',
-                    // 'fractional' =&gt; true,
-                    // 'symbol' =&gt; 'USD',
-                    // 'type' =&gt; 'currency',
+                    // 'fractional' => true,
+                    // 'symbol' => 'USD',
+                    // 'type' => 'currency',
                 )
             )
-            -&gt;addElement(
+            ->addElement(
                 'NumberTextBox',
                 'numberbox',
                 array(
-                    'label' =&gt; 'NumberTextBox',
-                    'required'  =&gt; true,
-                    'invalidMessage' =&gt; 'Invalid elevation.',
-                    'constraints' =&gt; array(
-                        'min' =&gt; -20000,
-                        'max' =&gt; 20000,
-                        'places' =&gt; 0,
+                    'label' => 'NumberTextBox',
+                    'required'  => true,
+                    'invalidMessage' => 'Invalid elevation.',
+                    'constraints' => array(
+                        'min' => -20000,
+                        'max' => 20000,
+                        'places' => 0,
                     )
                 )
             )
-            -&gt;addElement(
+            ->addElement(
                 'ValidationTextBox',
                 'validationbox',
                 array(
-                    'label' =&gt; 'ValidationTextBox',
-                    'required'  =&gt; true,
-                    'regExp' =&gt; '[\w]+',
-                    'invalidMessage' =&gt; 'Invalid non-space text.',
+                    'label' => 'ValidationTextBox',
+                    'required'  => true,
+                    'regExp' => '[\w]+',
+                    'invalidMessage' => 'Invalid non-space text.',
                 )
             )
-            -&gt;addElement(
+            ->addElement(
                 'Textarea',
                 'textarea',
                 array(
-                    'label'    =&gt; 'Textarea',
-                    'required' =&gt; true,
-                    'style'    =&gt; 'width: 200px;',
+                    'label'    => 'Textarea',
+                    'required' => true,
+                    'style'    => 'width: 200px;',
                 )
             );
         $editorForm = new Zend_Dojo_Form_SubForm();
-        $editorForm-&gt;setAttribs(array(
-            'name'   =&gt; 'editortab',
-            'legend' =&gt; 'Editor',
-            'dijitParams' =&gt; array(
-                'title' =&gt; 'Editor'
+        $editorForm->setAttribs(array(
+            'name'   => 'editortab',
+            'legend' => 'Editor',
+            'dijitParams' => array(
+                'title' => 'Editor'
             ),
         ))
-        $editorForm-&gt;addElement(
+        $editorForm->addElement(
             'Editor',
             'wysiwyg',
             array(
-                'label'        =&gt; 'Editor',
-                'inheritWidth' =&gt; 'true',
+                'label'        => 'Editor',
+                'inheritWidth' => 'true',
             )
         );
 
         $toggleForm = new Zend_Dojo_Form_SubForm();
-        $toggleForm-&gt;setAttribs(array(
-            'name'   =&gt; 'toggletab',
-            'legend' =&gt; 'Toggle Elements',
+        $toggleForm->setAttribs(array(
+            'name'   => 'toggletab',
+            'legend' => 'Toggle Elements',
         ));
-        $toggleForm-&gt;addElement(
+        $toggleForm->addElement(
                 'NumberSpinner',
                 'ns',
                 array(
-                    'value'             =&gt; '7',
-                    'label'             =&gt; 'NumberSpinner',
-                    'smallDelta'        =&gt; 5,
-                    'largeDelta'        =&gt; 25,
-                    'defaultTimeout'    =&gt; 1000,
-                    'timeoutChangeRate' =&gt; 100,
-                    'min'               =&gt; 9,
-                    'max'               =&gt; 1550,
-                    'places'            =&gt; 0,
-                    'maxlength'         =&gt; 20,
+                    'value'             => '7',
+                    'label'             => 'NumberSpinner',
+                    'smallDelta'        => 5,
+                    'largeDelta'        => 25,
+                    'defaultTimeout'    => 1000,
+                    'timeoutChangeRate' => 100,
+                    'min'               => 9,
+                    'max'               => 1550,
+                    'places'            => 0,
+                    'maxlength'         => 20,
                 )
             )
-            -&gt;addElement(
+            ->addElement(
                 'Button',
                 'dijitButton',
                 array(
-                    'label' =&gt; 'Button',
+                    'label' => 'Button',
                 )
             )
-            -&gt;addElement(
+            ->addElement(
                 'CheckBox',
                 'checkbox',
                 array(
-                    'label' =&gt; 'CheckBox',
-                    'checkedValue'  =&gt; 'foo',
-                    'uncheckedValue'  =&gt; 'bar',
-                    'checked' =&gt; true,
+                    'label' => 'CheckBox',
+                    'checkedValue'  => 'foo',
+                    'uncheckedValue'  => 'bar',
+                    'checked' => true,
                 )
             )
-            -&gt;addElement(
+            ->addElement(
                 'RadioButton',
                 'radiobutton',
                 array(
-                    'label' =&gt; 'RadioButton',
-                    'multiOptions'  =&gt; array(
-                        'foo' =&gt; 'Foo',
-                        'bar' =&gt; 'Bar',
-                        'baz' =&gt; 'Baz',
+                    'label' => 'RadioButton',
+                    'multiOptions'  => array(
+                        'foo' => 'Foo',
+                        'bar' => 'Bar',
+                        'baz' => 'Baz',
                     ),
-                    'value' =&gt; 'bar',
+                    'value' => 'bar',
                 )
             );
         $selectForm = new Zend_Dojo_Form_SubForm();
-        $selectForm-&gt;setAttribs(array(
-            'name'   =&gt; 'selecttab',
-            'legend' =&gt; 'Select Elements',
+        $selectForm->setAttribs(array(
+            'name'   => 'selecttab',
+            'legend' => 'Select Elements',
         ));
-        $selectForm-&gt;addElement(
+        $selectForm->addElement(
                 'ComboBox',
                 'comboboxselect',
                 array(
-                    'label' =&gt; 'ComboBox (select)',
-                    'value' =&gt; 'blue',
-                    'autocomplete' =&gt; false,
-                    'multiOptions' =&gt; $this-&gt;_selectOptions,
+                    'label' => 'ComboBox (select)',
+                    'value' => 'blue',
+                    'autocomplete' => false,
+                    'multiOptions' => $this->_selectOptions,
                 )
             )
-            -&gt;addElement(
+            ->addElement(
                 'ComboBox',
                 'comboboxremote',
                 array(
-                    'label' =&gt; 'ComboBox (remoter)',
-                    'storeId' =&gt; 'stateStore',
-                    'storeType' =&gt; 'dojo.data.ItemFileReadStore',
-                    'storeParams' =&gt; array(
-                        'url' =&gt; '/js/states.txt',
+                    'label' => 'ComboBox (remoter)',
+                    'storeId' => 'stateStore',
+                    'storeType' => 'dojo.data.ItemFileReadStore',
+                    'storeParams' => array(
+                        'url' => '/js/states.txt',
                     ),
-                    'dijitParams' =&gt; array(
-                        'searchAttr' =&gt; 'name',
+                    'dijitParams' => array(
+                        'searchAttr' => 'name',
                     ),
                 )
             )
-            -&gt;addElement(
+            ->addElement(
                 'FilteringSelect',
                 'filterselect',
                 array(
-                    'label' =&gt; 'FilteringSelect (select)',
-                    'value' =&gt; 'blue',
-                    'autocomplete' =&gt; false,
-                    'multiOptions' =&gt; $this-&gt;_selectOptions,
+                    'label' => 'FilteringSelect (select)',
+                    'value' => 'blue',
+                    'autocomplete' => false,
+                    'multiOptions' => $this->_selectOptions,
                 )
             )
-            -&gt;addElement(
+            ->addElement(
                 'FilteringSelect',
                 'filterselectremote',
                 array(
-                    'label' =&gt; 'FilteringSelect (remoter)',
-                    'storeId' =&gt; 'stateStore',
-                    'storeType' =&gt; 'dojo.data.ItemFileReadStore',
-                    'storeParams' =&gt; array(
-                        'url' =&gt; '/js/states.txt',
+                    'label' => 'FilteringSelect (remoter)',
+                    'storeId' => 'stateStore',
+                    'storeType' => 'dojo.data.ItemFileReadStore',
+                    'storeParams' => array(
+                        'url' => '/js/states.txt',
                     ),
-                    'dijitParams' =&gt; array(
-                        'searchAttr' =&gt; 'name',
+                    'dijitParams' => array(
+                        'searchAttr' => 'name',
                     ),
                 )
             );
         $sliderForm = new Zend_Dojo_Form_SubForm();
-        $sliderForm-&gt;setAttribs(array(
-            'name'   =&gt; 'slidertab',
-            'legend' =&gt; 'Slider Elements',
+        $sliderForm->setAttribs(array(
+            'name'   => 'slidertab',
+            'legend' => 'Slider Elements',
         ));
-        $sliderForm-&gt;addElement(
+        $sliderForm->addElement(
                 'HorizontalSlider',
                 'horizontal',
                 array(
-                    'label' =&gt; 'HorizontalSlider',
-                    'value' =&gt; 5,
-                    'minimum' =&gt; -10,
-                    'maximum' =&gt; 10,
-                    'discreteValues' =&gt; 11,
-                    'intermediateChanges' =&gt; true,
-                    'showButtons' =&gt; true,
-                    'topDecorationDijit' =&gt; 'HorizontalRuleLabels',
-                    'topDecorationContainer' =&gt; 'topContainer',
-                    'topDecorationLabels' =&gt; array(
+                    'label' => 'HorizontalSlider',
+                    'value' => 5,
+                    'minimum' => -10,
+                    'maximum' => 10,
+                    'discreteValues' => 11,
+                    'intermediateChanges' => true,
+                    'showButtons' => true,
+                    'topDecorationDijit' => 'HorizontalRuleLabels',
+                    'topDecorationContainer' => 'topContainer',
+                    'topDecorationLabels' => array(
                             ' ',
                             '20%',
                             '40%',
@@ -285,46 +283,46 @@ class My_Form_Test extends Zend_Dojo_Form
                             '80%',
                             ' ',
                     ),
-                    'topDecorationParams' =&gt; array(
-                        'container' =&gt; array(
-                            'style' =&gt; 'height:1.2em; ' .
+                    'topDecorationParams' => array(
+                        'container' => array(
+                            'style' => 'height:1.2em; ' .
                                        'font-size=75%;color:gray;',
                         ),
-                        'list' =&gt; array(
-                            'style' =&gt; 'height:1em; ' .
+                        'list' => array(
+                            'style' => 'height:1em; ' .
                                        'font-size=75%;color:gray;',
                         ),
                     ),
-                    'bottomDecorationDijit' =&gt; 'HorizontalRule',
-                    'bottomDecorationContainer' =&gt; 'bottomContainer',
-                    'bottomDecorationLabels' =&gt; array(
+                    'bottomDecorationDijit' => 'HorizontalRule',
+                    'bottomDecorationContainer' => 'bottomContainer',
+                    'bottomDecorationLabels' => array(
                             '0%',
                             '50%',
                             '100%',
                     ),
-                    'bottomDecorationParams' =&gt; array(
-                        'list' =&gt; array(
-                            'style' =&gt; 'height:1em; ' .
+                    'bottomDecorationParams' => array(
+                        'list' => array(
+                            'style' => 'height:1em; ' .
                                        'font-size=75%;color:gray;',
                         ),
                     ),
                 )
             )
-            -&gt;addElement(
+            ->addElement(
                 'VerticalSlider',
                 'vertical',
                 array(
-                    'label' =&gt; 'VerticalSlider',
-                    'value' =&gt; 5,
-                    'style' =&gt; 'height: 200px; width: 3em;',
-                    'minimum' =&gt; -10,
-                    'maximum' =&gt; 10,
-                    'discreteValues' =&gt; 11,
-                    'intermediateChanges' =&gt; true,
-                    'showButtons' =&gt; true,
-                    'leftDecorationDijit' =&gt; 'VerticalRuleLabels',
-                    'leftDecorationContainer' =&gt; 'leftContainer',
-                    'leftDecorationLabels' =&gt; array(
+                    'label' => 'VerticalSlider',
+                    'value' => 5,
+                    'style' => 'height: 200px; width: 3em;',
+                    'minimum' => -10,
+                    'maximum' => 10,
+                    'discreteValues' => 11,
+                    'intermediateChanges' => true,
+                    'showButtons' => true,
+                    'leftDecorationDijit' => 'VerticalRuleLabels',
+                    'leftDecorationContainer' => 'leftContainer',
+                    'leftDecorationLabels' => array(
                             ' ',
                             '20%',
                             '40%',
@@ -332,9 +330,9 @@ class My_Form_Test extends Zend_Dojo_Form
                             '80%',
                             ' ',
                     ),
-                    'rightDecorationDijit' =&gt; 'VerticalRule',
-                    'rightDecorationContainer' =&gt; 'rightContainer',
-                    'rightDecorationLabels' =&gt; array(
+                    'rightDecorationDijit' => 'VerticalRule',
+                    'rightDecorationContainer' => 'rightContainer',
+                    'rightDecorationLabels' => array(
                             '0%',
                             '50%',
                             '100%',
@@ -342,14 +340,14 @@ class My_Form_Test extends Zend_Dojo_Form
                 )
             );
 
-        $this-&gt;addSubForm($textForm, 'textboxtab')
-             -&gt;addSubForm($editorForm, 'editortab')
-             -&gt;addSubForm($toggleForm, 'toggletab')
-             -&gt;addSubForm($selectForm, 'selecttab')
-             -&gt;addSubForm($sliderForm, 'slidertab');
+        $this->addSubForm($textForm, 'textboxtab')
+             ->addSubForm($editorForm, 'editortab')
+             ->addSubForm($toggleForm, 'toggletab')
+             ->addSubForm($selectForm, 'selecttab')
+             ->addSubForm($sliderForm, 'slidertab');
     }
 }
-</programlisting>
+]]></programlisting>
     </example>
 
     <example xml:id="zend.dojo.form.examples.decorating"><info><title>Modifying an existing form to utilize Dojo</title></info>
@@ -364,34 +362,34 @@ class My_Form_Test extends Zend_Dojo_Form
             This first example shows decorating an existing form instance:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $form = new My_Custom_Form();
 Zend_Dojo::enableForm($form);
-$form-&gt;addElement(
+$form->addElement(
 'ComboBox',
 'query',
 array(
-    'label'        =&gt; 'Color:',
-    'value'        =&gt; 'blue',
-    'autocomplete' =&gt; false,
-    'multiOptions' =&gt; array(
-        'red'    =&gt; 'Rouge',
-        'blue'   =&gt; 'Bleu',
-        'white'  =&gt; 'Blanc',
-        'orange' =&gt; 'Orange',
-        'black'  =&gt; 'Noir',
-        'green'  =&gt; 'Vert',
+    'label'        => 'Color:',
+    'value'        => 'blue',
+    'autocomplete' => false,
+    'multiOptions' => array(
+        'red'    => 'Rouge',
+        'blue'   => 'Bleu',
+        'white'  => 'Blanc',
+        'orange' => 'Orange',
+        'black'  => 'Noir',
+        'green'  => 'Vert',
     ),
 )
 );
-</programlisting>
+]]></programlisting>
 
         <para>
             Alternately, you can make a slight tweak to your form
             initialization:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class My_Custom_Form extends Zend_Form
 {
     public function init()
@@ -401,7 +399,7 @@ class My_Custom_Form extends Zend_Form
         // ...
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Of course, if you can do that... you could and should simply alter

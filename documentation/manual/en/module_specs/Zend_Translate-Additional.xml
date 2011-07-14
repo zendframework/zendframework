@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.additional"><info><title>Additional features for translation</title></info>
     
 
@@ -30,28 +28,28 @@
         <example xml:id="zend.translate..additional.options.example"><info><title>Using translation options</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // define ':' as separator for the translation source files
 $translate = new Zend_Translate(
     array(
-        'adapter' =&gt; 'csv',
-        'content' =&gt; '/path/to/mytranslation.csv',
-        'locale'  =&gt; 'de',
-        'delimiter' =&gt; ':'
+        'adapter' => 'csv',
+        'content' => '/path/to/mytranslation.csv',
+        'locale'  => 'de',
+        'delimiter' => ':'
     )
 );
 
 ...
 
 // clear the defined language and use new translation data
-$translate-&gt;addTranslation(
+$translate->addTranslation(
     array(
-        'content' =&gt; '/path/to/new.csv',
-        'locale'  =&gt; 'fr',
-        'clear'   =&gt; true
+        'content' => '/path/to/new.csv',
+        'locale'  => 'fr',
+        'clear'   => true
     )
 );
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -367,25 +365,25 @@ $translate-&gt;addTranslation(
         <example xml:id="zend.translate.additional.languages.example"><info><title>Handling languages with adapters</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // returns the currently set language
-$actual = $translate-&gt;getLocale();
+$actual = $translate->getLocale();
 
 // you can use the optional parameter while translating
-echo $translate-&gt;_("my_text", "fr");
+echo $translate->_("my_text", "fr");
 // or set a new language
-$translate-&gt;setLocale("fr");
-echo $translate-&gt;_("my_text");
+$translate->setLocale("fr");
+echo $translate->_("my_text");
 // refer to the base language
 // fr_CH will be downgraded to fr
-$translate-&gt;setLocale("fr_CH");
-echo $translate-&gt;_("my_text");
+$translate->setLocale("fr_CH");
+echo $translate->_("my_text");
 
 // check if this language exist
-if ($translate-&gt;isAvailable("fr")) {
+if ($translate->isAvailable("fr")) {
     // language exists
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <section xml:id="zend.translate.additional.languages.automatic"><info><title>Automatical handling of languages</title></info>
@@ -409,7 +407,7 @@ if ($translate-&gt;isAvailable("fr")) {
             <example xml:id="zend.translate.additional.languages.automatic.example"><info><title>Automatically language detection</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Let's expect the browser returns these language settings:
 // HTTP_ACCEPT_LANGUAGE = "de_AT=1;fr=1;en_US=0.8";
 
@@ -417,10 +415,10 @@ if ($translate-&gt;isAvailable("fr")) {
 // When no fitting language is found, the message ID is returned
 $translate = new Zend_Translate(
     array(
-        'adapter' =&gt; 'gettext',
-        'content' =&gt; 'my_it.mo',
-        'locale'  =&gt; 'auto',
-        'scan' =&gt; Zend_Translate::LOCALE_FILENAME
+        'adapter' => 'gettext',
+        'content' => 'my_it.mo',
+        'locale'  => 'auto',
+        'scan' => Zend_Translate::LOCALE_FILENAME
     )
 );
 
@@ -428,10 +426,10 @@ $translate = new Zend_Translate(
 // Best found fitting language is 'fr'
 $translate = new Zend_Translate(
     array(
-        'adapter' =&gt; 'gettext',
-        'content' =&gt; 'my_fr.mo',
-        'locale'  =&gt; 'auto',
-        'scan' =&gt; Zend_Translate::LOCALE_FILENAME
+        'adapter' => 'gettext',
+        'content' => 'my_fr.mo',
+        'locale'  => 'auto',
+        'scan' => Zend_Translate::LOCALE_FILENAME
     )
 );
 
@@ -439,10 +437,10 @@ $translate = new Zend_Translate(
 // Best found fitting language is 'de' ('de_AT' will be degraded)
 $translate = new Zend_Translate(
     array(
-        'adapter' =&gt; 'gettext',
-        'content' =&gt; 'my_de.mo',
-        'locale'  =&gt; 'auto',
-        'scan' =&gt; Zend_Translate::LOCALE_FILENAME
+        'adapter' => 'gettext',
+        'content' => 'my_de.mo',
+        'locale'  => 'auto',
+        'scan' => Zend_Translate::LOCALE_FILENAME
     )
 );
 
@@ -450,16 +448,16 @@ $translate = new Zend_Translate(
 // Returns 'it' as translation source and overrides the automatic settings
 $translate = new Zend_Translate(
     array(
-        'adapter' =&gt; 'gettext',
-        'content' =&gt; 'my_it.mo',
-        'locale'  =&gt; 'auto',
-        'scan' =&gt; Zend_Translate::LOCALE_FILENAME
+        'adapter' => 'gettext',
+        'content' => 'my_it.mo',
+        'locale'  => 'auto',
+        'scan' => Zend_Translate::LOCALE_FILENAME
     )
 );
 
-$translate-&gt;addTranslation(array('content' =&gt; 'my_ru.mo', 'locale' =&gt; 'ru'));
-$translate-&gt;setLocale('it_IT');
-</programlisting>
+$translate->addTranslation(array('content' => 'my_ru.mo', 'locale' => 'ru'));
+$translate->setLocale('it_IT');
+]]></programlisting>
             </example>
 
             <para>
@@ -481,7 +479,7 @@ $translate-&gt;setLocale('it_IT');
                 multiple times.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // in your bootstrap file
 $locale = new Zend_Locale();
 Zend_Registry::set('Zend_Locale', $locale);
@@ -491,16 +489,16 @@ $defaultlanguage = 'en';
 
 // somewhere in your application
 $translate = new Zend_Translate(
-    array('adapter' =&gt; 'gettext', 'content' =&gt; 'my_de.mo')
+    array('adapter' => 'gettext', 'content' => 'my_de.mo')
 );
 
-if (!$translate-&gt;isAvailable($locale-&gt;getLanguage())) {
+if (!$translate->isAvailable($locale->getLanguage())) {
     // not available languages are rerouted to another language
-    $translate-&gt;setLocale($defaultlanguage);
+    $translate->setLocale($defaultlanguage);
 }
 
-$translate-&gt;getLocale();
-</programlisting>
+$translate->getLocale();
+]]></programlisting>
         </section>
 
         <section xml:id="zend.translate.additional.languages.territory"><info><title>Using a country as language</title></info>
@@ -520,15 +518,15 @@ $translate-&gt;getLocale();
                 for the country <emphasis>US</emphasis>.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate(
     array(
-        'adapter' =&gt; 'gettext',
-        'content' =&gt; 'my_de.mo',
-        'locale'  =&gt; 'US'
+        'adapter' => 'gettext',
+        'content' => 'my_de.mo',
+        'locale'  => 'US'
     )
 );
-</programlisting>
+]]></programlisting>
 
             <note><info><title>Always uppercase countries</title></info>
                 
@@ -574,7 +572,7 @@ $translate = new Zend_Translate(
         <example xml:id="zend.translate.additional.languages.directory.example"><info><title>Scanning a directory structure for sources</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // assuming we have the following structure
 //  /language/
 //  /language/login/login.tmx
@@ -583,9 +581,9 @@ $translate = new Zend_Translate(
 //  /language/error/logouterror.tmx
 
 $translate = new Zend_Translate(
-    array('adapter' =&gt; 'tmx', 'content' =&gt; '/language')
+    array('adapter' => 'tmx', 'content' => '/language')
 );
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -630,7 +628,7 @@ $translate = new Zend_Translate(
             <example xml:id="zend.translate.additional.detection.directory.example"><info><title>Directory scanning for languages</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // assuming we have the following structure
 //  /language/
 //  /language/de/login/login.mo
@@ -640,12 +638,12 @@ $translate = new Zend_Translate(
 
 $translate = new Zend_Translate(
     array(
-        'adapter' =&gt; 'gettext',
-        'content' =&gt; '/language',
-        'scan' =&gt; Zend_Translate::LOCALE_DIRECTORY
+        'adapter' => 'gettext',
+        'content' => '/language',
+        'scan' => Zend_Translate::LOCALE_DIRECTORY
     )
 );
-</programlisting>
+]]></programlisting>
             </example>
 
             <note>
@@ -683,7 +681,7 @@ $translate = new Zend_Translate(
             <example xml:id="zend.translate.additional.detection.filename.example"><info><title>Filename scanning for languages</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // assuming we have the following structure
 //  /language/
 //  /language/login/login_en.mo
@@ -693,12 +691,12 @@ $translate = new Zend_Translate(
 
 $translate = new Zend_Translate(
     array(
-        'adapter' =&gt; 'gettext',
-        'content' =&gt; '/language',
-        'scan' =&gt; Zend_Translate::LOCALE_FILENAME
+        'adapter' => 'gettext',
+        'content' => '/language',
+        'scan' => Zend_Translate::LOCALE_FILENAME
     )
 );
-</programlisting>
+]]></programlisting>
             </example>
 
             <section xml:id="zend.translate.additional.detection.filename.complete"><info><title>Complete filename</title></info>
@@ -709,12 +707,12 @@ $translate = new Zend_Translate(
                     viable if you have only one file per language.
                 </para>
 
-                <programlisting language="txt">
+                <programlisting language="txt"><![CDATA[
 /languages/
 /languages/en.mo
 /languages/de.mo
 /languages/es.mo
-</programlisting>
+]]></programlisting>
             </section>
 
             <section xml:id="zend.translate.additional.detection.filename.extension"><info><title>Extension of the file</title></info>
@@ -726,12 +724,12 @@ $translate = new Zend_Translate(
                     the file originally had.
                 </para>
 
-                <programlisting language="txt">
+                <programlisting language="txt"><![CDATA[
 /languages/
 /languages/view.en
 /languages/view.de
 /languages/view.es
-</programlisting>
+]]></programlisting>
             </section>
 
             <section xml:id="zend.translate.additional.detection.filename.token"><info><title>Filename tokens</title></info>
@@ -744,24 +742,24 @@ $translate = new Zend_Translate(
                     be used: a dot '.', an underscore '_', or a hyphen '-'.
                 </para>
 
-                <programlisting language="txt">
+                <programlisting language="txt"><![CDATA[
 /languages/
-/languages/view_en.mo -&gt; detects english
-/languages/view_de.mo -&gt; detects german
-/languages/view_it.mo -&gt; detects italian
-</programlisting>
+/languages/view_en.mo -> detects english
+/languages/view_de.mo -> detects german
+/languages/view_it.mo -> detects italian
+]]></programlisting>
 
                 <para>
                     The first found string delimited by a token which can be interpreted as a
                     locale will be used. See the following example for details.
                 </para>
 
-                <programlisting language="txt">
+                <programlisting language="txt"><![CDATA[
 /languages/
-/languages/view_en_de.mo -&gt; detects english
-/languages/view_en_es.mo -&gt; detects english and overwrites the first file
-/languages/view_it_it.mo -&gt; detects italian
-</programlisting>
+/languages/view_en_de.mo -> detects english
+/languages/view_en_es.mo -> detects english and overwrites the first file
+/languages/view_it_it.mo -> detects italian
+]]></programlisting>
 
                 <para>
                     All three tokens are used to detect the locale. When the filename contains
@@ -769,12 +767,12 @@ $translate = new Zend_Translate(
                     which are used. See the following example for details.
                 </para>
 
-                <programlisting language="txt">
+                <programlisting language="txt"><![CDATA[
 /languages/
-/languages/view_en-it.mo -&gt; detects english because '_' will be used before '-'
-/languages/view-en_it.mo -&gt; detects italian because '_' will be used before '-'
-/languages/view_en.it.mo -&gt; detects italian because '.' will be used before '_'
-</programlisting>
+/languages/view_en-it.mo -> detects english because '_' will be used before '-'
+/languages/view-en_it.mo -> detects italian because '_' will be used before '-'
+/languages/view_en.it.mo -> detects italian because '.' will be used before '_'
+]]></programlisting>
             </section>
         </section>
 
@@ -803,17 +801,17 @@ $translate = new Zend_Translate(
                     automatically and has to be omitted.
                 </para>
 
-                <programlisting language="php">
-$options   = array('ignore' =&gt; 'test');
+                <programlisting language="php"><![CDATA[
+$options   = array('ignore' => 'test');
 $translate = new Zend_Translate(
     array(
-        'adapter' =&gt; $adapter,
-        'content' =&gt; $content,
-        'locale'  =&gt; $locale,
-        'ignore'  =&gt; 'test'
+        'adapter' => $adapter,
+        'content' => $content,
+        'locale'  => $locale,
+        'ignore'  => 'test'
     )
 );
-</programlisting>
+]]></programlisting>
 
                 <para>
                     The above example will ignore all files and directories beginning with
@@ -845,17 +843,17 @@ $translate = new Zend_Translate(
                     you can simply give an array with all wished names which will be ignored.
                 </para>
 
-                <programlisting language="php">
-$options = array('ignore' =&gt; array('.', 'test', 'old'));
+                <programlisting language="php"><![CDATA[
+$options = array('ignore' => array('.', 'test', 'old'));
 $translate = new Zend_Translate(
     array(
-        'adapter' =&gt; $adapter,
-        'content' =&gt; $content,
-        'locale'  =&gt; $locale,
-        'ignore'  =&gt; array('.', 'test', 'old')
+        'adapter' => $adapter,
+        'content' => $content,
+        'locale'  => $locale,
+        'ignore'  => array('.', 'test', 'old')
     )
 );
-</programlisting>
+]]></programlisting>
 
                 <para>
                     In the above case all 3 syntax will be ignored. But still they have to
@@ -877,22 +875,22 @@ $translate = new Zend_Translate(
                     option has to begin with <emphasis>regex</emphasis>.
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $options = array(
-    'ignore' =&gt; array(
-        'regex' =&gt; '/test/u',
-        'regex_2' =&gt; '/deleted$/u'
+    'ignore' => array(
+        'regex' => '/test/u',
+        'regex_2' => '/deleted$/u'
     )
 );
 $translate = new Zend_Translate(
     array(
-        'adapter' =&gt; $adapter,
-        'content' =&gt; $content,
-        'locale'  =&gt; $locale,
-        'ignore'  =&gt; array('regex' =&gt; '/test/u', 'regex_2' =&gt; '/deleted$/u')
+        'adapter' => $adapter,
+        'content' => $content,
+        'locale'  => $locale,
+        'ignore'  => array('regex' => '/test/u', 'regex_2' => '/deleted$/u')
     )
 );
-</programlisting>
+]]></programlisting>
 
                 <para>
                     In the above case we defined 2 regular expressions. The files and directories
@@ -918,16 +916,16 @@ $translate = new Zend_Translate(
             You can add one route for every language. See the following example:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate(
     array(
-        'adapter' =&gt; $adapter,
-        'content' =&gt; $content,
-        'locale'  =&gt; $locale,
-        'route'   =&gt; array('fr' =&gt; 'en', 'de' =&gt; 'fr')
+        'adapter' => $adapter,
+        'content' => $content,
+        'locale'  => $locale,
+        'route'   => array('fr' => 'en', 'de' => 'fr')
     )
 );
-</programlisting>
+]]></programlisting>
 
         <para>
             The above returns a english translation for all messages which can not be translated to
@@ -959,25 +957,25 @@ $translate = new Zend_Translate(
             the following example:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate(
     array(
-        'adapter' =&gt; 'gettext',
-        'content' =&gt; '\path\to\translation.mo',
-        'locale'  =&gt; 'en'
+        'adapter' => 'gettext',
+        'content' => '\path\to\translation.mo',
+        'locale'  => 'en'
     )
 );
 
 $translate_second = new Zend_Translate(
     array(
-        'adapter' =&gt; 'array',
-        'content' =&gt; '\resources\languages\en\Zend_Validate.php',
-        'locale'  =&gt; 'en'
+        'adapter' => 'array',
+        'content' => '\resources\languages\en\Zend_Validate.php',
+        'locale'  => 'en'
     )
 );
 
-$translate-&gt;addTranslation(array('content' =&gt; $translate_second));
-</programlisting>
+$translate->addTranslation(array('content' => $translate_second));
+]]></programlisting>
 
         <para>
             Now the first instance holds all translations from the second instance and you can use
@@ -1000,14 +998,14 @@ $translate-&gt;addTranslation(array('content' =&gt; $translate_second));
             add only one language from the second adapter.
         </para>
 
-        <programlisting language="php">
-$translate-&gt;addTranslation(
+        <programlisting language="php"><![CDATA[
+$translate->addTranslation(
     array(
-        'content' =&gt; $translate_second,
-        'locale'  =&gt; 'en'
+        'content' => $translate_second,
+        'locale'  => 'en'
     )
 );
-</programlisting>
+]]></programlisting>
 
         <para>
             This allows you still to scan through the directories and still add only those languages
@@ -1030,7 +1028,7 @@ $translate-&gt;addTranslation(
             the following example:
         </para>
 
-        <programlisting>
+        <programlisting><![CDATA[
 $translate = new Zend_Translate(
     'gettext',
     '\path\to\translation.mo',
@@ -1043,8 +1041,8 @@ $translate_second = new Zend_Translate(
     'en'
 );
 
-$translate-&gt;addTranslation($translate_second);
-</programlisting>
+$translate->addTranslation($translate_second);
+]]></programlisting>
 
         <para>
             Now the first instance holds all translations from the second instance and you can use
@@ -1067,9 +1065,9 @@ $translate-&gt;addTranslation($translate_second);
             add only one language from the second adapter.
         </para>
 
-        <programlisting>
-$translate-&gt;addTranslation($translate_second, 'en');
-</programlisting>
+        <programlisting><![CDATA[
+$translate->addTranslation($translate_second, 'en');
+]]></programlisting>
 
         <para>
             This allows you still to scan through the directories and still add only those languages
@@ -1100,33 +1098,33 @@ $translate-&gt;addTranslation($translate_second, 'en');
         <example xml:id="zend.translate.additional.istranslated.example"><info><title>Checking if a text is translatable</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $english = array(
-    'message1' =&gt; 'Nachricht 1',
-    'message2' =&gt; 'Nachricht 2',
-    'message3' =&gt; 'Nachricht 3');
+    'message1' => 'Nachricht 1',
+    'message2' => 'Nachricht 2',
+    'message3' => 'Nachricht 3');
 
 $translate = new Zend_Translate(
     array(
-        'adapter' =&gt; 'array',
-        'content' =&gt; $english,
-        'locale' =&gt; 'de_AT'
+        'adapter' => 'array',
+        'content' => $english,
+        'locale' => 'de_AT'
     )
 );
 
-if ($translate-&gt;isTranslated('message1')) {
+if ($translate->isTranslated('message1')) {
     print "'message1' can be translated";
 }
 
-if (!($translate-&gt;isTranslated('message1', true, 'de'))) {
+if (!($translate->isTranslated('message1', true, 'de'))) {
     print "'message1' can not be translated to 'de'"
         . " as it's available only in 'de_AT'";
 }
 
-if ($translate-&gt;isTranslated('message1', false, 'de')) {
+if ($translate->isTranslated('message1', false, 'de')) {
     print "'message1' can be translated in 'de_AT' as it falls back to 'de'";
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -1148,12 +1146,12 @@ if ($translate-&gt;isTranslated('message1', false, 'de')) {
         <example xml:id="zend.translate.additional.logging.example"><info><title>Log translations</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate(
     array(
-        'adapter' =&gt; 'gettext',
-        'content' =&gt; $path,
-        'locale' =&gt; 'de'
+        'adapter' => 'gettext',
+        'content' => $path,
+        'locale' => 'de'
     )
 );
 
@@ -1162,15 +1160,15 @@ $writer = new Zend_Log_Writer_Stream('/path/to/file.log');
 $log    = new Zend_Log($writer);
 
 // Attach it to the translation instance
-$translate-&gt;setOptions(
+$translate->setOptions(
     array(
-        'log'             =&gt; $log,
-        'logUntranslated' =&gt; true
+        'log'             => $log,
+        'logUntranslated' => true
     )
 );
 
-$translate-&gt;translate('unknown string');
-</programlisting>
+$translate->translate('unknown string');
+]]></programlisting>
         </example>
 
         <para>
@@ -1204,12 +1202,12 @@ $translate-&gt;translate('unknown string');
         <example xml:id="zend.translate.additional.logging.example2"><info><title>Self defined log messages</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate(
     array(
-        'adapter' =&gt; 'gettext',
-        'content' =&gt; $path,
-        'locale'  =&gt; 'de'
+        'adapter' => 'gettext',
+        'content' => $path,
+        'locale'  => 'de'
     )
 );
 
@@ -1218,16 +1216,16 @@ $writer = new Zend_Log_Writer_Stream('/path/to/file.log');
 $log    = new Zend_Log($writer);
 
 // Attach it to the translation instance
-$translate-&gt;setOptions(
+$translate->setOptions(
     array(
-        'log'             =&gt; $log,
-        'logMessage'      =&gt; "Missing '%message%' within locale '%locale%'",
-        'logUntranslated' =&gt; true
+        'log'             => $log,
+        'logMessage'      => "Missing '%message%' within locale '%locale%'",
+        'logUntranslated' => true
     )
 );
 
-$translate-&gt;translate('unknown string');
-</programlisting>
+$translate->translate('unknown string');
+]]></programlisting>
         </example>
 
         <para>
@@ -1240,25 +1238,25 @@ $translate-&gt;translate('unknown string');
         <example xml:id="zend.translate.additional.logging.example3"><info><title>Self defined log priority</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Create a log instance
 $writer = new Zend_Log_Writer_Stream('/path/to/file.log');
 $log    = new Zend_Log($writer);
 
 $translate = new Zend_Translate(
     array(
-        'adapter' =&gt; 'gettext',
-        'content' =&gt; $path,
-        'locale'  =&gt; 'de',
-        'log'             =&gt; $log,
-        'logMessage'      =&gt; "Missing '%message%' within locale '%locale%'",
-        'logPriority'     =&gt; Zend_Log::ALERT,
-        'logUntranslated' =&gt; true
+        'adapter' => 'gettext',
+        'content' => $path,
+        'locale'  => 'de',
+        'log'             => $log,
+        'logMessage'      => "Missing '%message%' within locale '%locale%'",
+        'logPriority'     => Zend_Log::ALERT,
+        'logUntranslated' => true
     )
 );
 
-$translate-&gt;translate('unknown string');
-</programlisting>
+$translate->translate('unknown string');
+]]></programlisting>
         </example>
     </section>
 
@@ -1310,19 +1308,19 @@ $translate-&gt;translate('unknown string');
         <example xml:id="zend.translate.additional.sourcedata.example"><info><title>Handling languages with adapters</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // returns all known message IDs
-$messageIds = $translate-&gt;getMessageIds();
+$messageIds = $translate->getMessageIds();
 print_r($messageIds);
 
 // or just for the specified language
-$messageIds = $translate-&gt;getMessageIds('en_US');
+$messageIds = $translate->getMessageIds('en_US');
 print_r($messageIds);
 
 // returns all the complete translation data
-$source = $translate-&gt;getMessages();
+$source = $translate->getMessages();
 print_r($source);
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 </section>

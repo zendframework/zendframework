@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.openid.provider"><info><title>Zend_OpenId_Provider</title></info>
     
 
@@ -32,23 +30,23 @@
         <example xml:id="zend.openid.provider.example-1"><info><title>The Identity</title></info>
             
 
-            <programlisting language="php">
-&lt;?php
+            <programlisting language="php"><![CDATA[
+<?php
 // Set up test identity
 define("TEST_SERVER", Zend_OpenId::absoluteURL("example-8.php"));
 define("TEST_ID", Zend_OpenId::selfURL());
 define("TEST_PASSWORD", "123");
 $server = new Zend_OpenId_Provider();
-if (!$server-&gt;hasUser(TEST_ID)) {
-    $server-&gt;register(TEST_ID, TEST_PASSWORD);
+if (!$server->hasUser(TEST_ID)) {
+    $server->register(TEST_ID, TEST_PASSWORD);
 }
-?&gt;
-&lt;html&gt;&lt;head&gt;
-&lt;link rel="openid.server" href="&lt;?php echo TEST_SERVER;?&gt;" /&gt;
-&lt;/head&gt;&lt;body&gt;
-&lt;?php echo TEST_ID;?&gt;
-&lt;/body&gt;&lt;/html&gt;
-</programlisting>
+?>
+<html><head>
+<link rel="openid.server" href="<?php echo TEST_SERVER;?>" />
+</head><body>
+<?php echo TEST_ID;?>
+</body></html>
+]]></programlisting>
         </example>
 
         <para>
@@ -73,17 +71,17 @@ if (!$server-&gt;hasUser(TEST_ID)) {
         <example xml:id="zend.openid.provider.example-2"><info><title>Simple Identity Provider</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $server = new Zend_OpenId_Provider("example-8-login.php",
                                    "example-8-trust.php");
-$ret = $server-&gt;handle();
+$ret = $server->handle();
 if (is_string($ret)) {
     echo $ret;
 } else if ($ret !== true) {
     header('HTTP/1.0 403 Forbidden');
     echo 'Forbidden';
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <note>
@@ -126,56 +124,56 @@ if (is_string($ret)) {
         <example xml:id="zend.openid.provider.example-3"><info><title>Simple Login Screen</title></info>
             
 
-            <programlisting language="php">
-&lt;?php
+            <programlisting language="php"><![CDATA[
+<?php
 $server = new Zend_OpenId_Provider();
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' &amp;&amp;
-    isset($_POST['openid_action']) &amp;&amp;
-    $_POST['openid_action'] === 'login' &amp;&amp;
-    isset($_POST['openid_identifier']) &amp;&amp;
+if ($_SERVER['REQUEST_METHOD'] == 'POST' &&
+    isset($_POST['openid_action']) &&
+    $_POST['openid_action'] === 'login' &&
+    isset($_POST['openid_identifier']) &&
     isset($_POST['openid_password'])) {
-    $server-&gt;login($_POST['openid_identifier'],
+    $server->login($_POST['openid_identifier'],
                    $_POST['openid_password']);
     Zend_OpenId::redirect("example-8.php", $_GET);
 }
-?&gt;
-&lt;html&gt;
-&lt;body&gt;
-&lt;form method="post"&gt;
-&lt;fieldset&gt;
-&lt;legend&gt;OpenID Login&lt;/legend&gt;
-&lt;table border=0&gt;
-&lt;tr&gt;
-&lt;td&gt;Name:&lt;/td&gt;
-&lt;td&gt;
-&lt;input type="text"
+?>
+<html>
+<body>
+<form method="post">
+<fieldset>
+<legend>OpenID Login</legend>
+<table border=0>
+<tr>
+<td>Name:</td>
+<td>
+<input type="text"
        name="openid_identifier"
-       value="&lt;?php echo htmlspecialchars($_GET['openid_identity']);?&gt;"&gt;
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Password:&lt;/td&gt;
-&lt;td&gt;
-&lt;input type="text"
+       value="<?php echo htmlspecialchars($_GET['openid_identity']);?>">
+</td>
+</tr>
+<tr>
+<td>Password:</td>
+<td>
+<input type="text"
        name="openid_password"
-       value=""&gt;
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&amp;nbsp;&lt;/td&gt;
-&lt;td&gt;
-&lt;input type="submit"
+       value="">
+</td>
+</tr>
+<tr>
+<td> </td>
+<td>
+<input type="submit"
        name="openid_action"
-       value="login"&gt;
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
-&lt;/fieldset&gt;
-&lt;/form&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</programlisting>
+       value="login">
+</td>
+</tr>
+</table>
+</fieldset>
+</form>
+</body>
+</html>
+]]></programlisting>
         </example>
 
         <para>
@@ -192,50 +190,50 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' &amp;&amp;
         <example xml:id="zend.openid.provider.example-4"><info><title>Simple Trust Screen</title></info>
             
 
-            <programlisting language="php">
-&lt;?php
+            <programlisting language="php"><![CDATA[
+<?php
 $server = new Zend_OpenId_Provider();
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' &amp;&amp;
-    isset($_POST['openid_action']) &amp;&amp;
+if ($_SERVER['REQUEST_METHOD'] == 'POST' &&
+    isset($_POST['openid_action']) &&
     $_POST['openid_action'] === 'trust') {
 
     if (isset($_POST['allow'])) {
         if (isset($_POST['forever'])) {
-            $server-&gt;allowSite($server-&gt;getSiteRoot($_GET));
+            $server->allowSite($server->getSiteRoot($_GET));
         }
-        $server-&gt;respondToConsumer($_GET);
+        $server->respondToConsumer($_GET);
     } else if (isset($_POST['deny'])) {
         if (isset($_POST['forever'])) {
-            $server-&gt;denySite($server-&gt;getSiteRoot($_GET));
+            $server->denySite($server->getSiteRoot($_GET));
         }
         Zend_OpenId::redirect($_GET['openid_return_to'],
-                              array('openid.mode'=&gt;'cancel'));
+                              array('openid.mode'=>'cancel'));
     }
 }
-?&gt;
-&lt;html&gt;
-&lt;body&gt;
-&lt;p&gt;A site identifying as
-&lt;a href="&lt;?php echo htmlspecialchars($server-&gt;getSiteRoot($_GET));?&gt;"&gt;
-&lt;?php echo htmlspecialchars($server-&gt;getSiteRoot($_GET));?&gt;
-&lt;/a&gt;
+?>
+<html>
+<body>
+<p>A site identifying as
+<a href="<?php echo htmlspecialchars($server->getSiteRoot($_GET));?>">
+<?php echo htmlspecialchars($server->getSiteRoot($_GET));?>
+</a>
 has asked us for confirmation that
-&lt;a href="&lt;?php echo htmlspecialchars($server-&gt;getLoggedInUser());?&gt;"&gt;
-&lt;?php echo htmlspecialchars($server-&gt;getLoggedInUser());?&gt;
-&lt;/a&gt;
+<a href="<?php echo htmlspecialchars($server->getLoggedInUser());?>">
+<?php echo htmlspecialchars($server->getLoggedInUser());?>
+</a>
 is your identity URL.
-&lt;/p&gt;
-&lt;form method="post"&gt;
-&lt;input type="checkbox" name="forever"&gt;
-&lt;label for="forever"&gt;forever&lt;/label&gt;&lt;br&gt;
-&lt;input type="hidden" name="openid_action" value="trust"&gt;
-&lt;input type="submit" name="allow" value="Allow"&gt;
-&lt;input type="submit" name="deny" value="Deny"&gt;
-&lt;/form&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</programlisting>
+</p>
+<form method="post">
+<input type="checkbox" name="forever">
+<label for="forever">forever</label><br>
+<input type="hidden" name="openid_action" value="trust">
+<input type="submit" name="allow" value="Allow">
+<input type="submit" name="deny" value="Deny">
+</form>
+</body>
+</html>
+]]></programlisting>
         </example>
 
         <para>
@@ -268,25 +266,25 @@ is your identity URL.
         <example xml:id="zend.openid.provider.example-5"><info><title>Everything Together</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $server = new Zend_OpenId_Provider();
 
 define("TEST_ID", Zend_OpenId::absoluteURL("example-9-id.php"));
 define("TEST_PASSWORD", "123");
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET' &amp;&amp;
-    isset($_GET['openid_action']) &amp;&amp;
+if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
+    isset($_GET['openid_action']) &&
     $_GET['openid_action'] === 'login') {
-    $server-&gt;login(TEST_ID, TEST_PASSWORD);
+    $server->login(TEST_ID, TEST_PASSWORD);
     unset($_GET['openid_action']);
     Zend_OpenId::redirect(Zend_OpenId::selfUrl(), $_GET);
-} else if ($_SERVER['REQUEST_METHOD'] == 'GET' &amp;&amp;
-    isset($_GET['openid_action']) &amp;&amp;
+} else if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
+    isset($_GET['openid_action']) &&
     $_GET['openid_action'] === 'trust') {
     unset($_GET['openid_action']);
-    $server-&gt;respondToConsumer($_GET);
+    $server->respondToConsumer($_GET);
 } else {
-    $ret = $server-&gt;handle();
+    $ret = $server->handle();
     if (is_string($ret)) {
         echo $ret;
     } else if ($ret !== true) {
@@ -294,7 +292,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &amp;&amp;
         echo 'Forbidden';
     }
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -320,34 +318,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &amp;&amp;
         <example xml:id="zend.openid.provider.example-6"><info><title>Identity with Profile</title></info>
             
 
-            <programlisting language="php">
-&lt;?php
+            <programlisting language="php"><![CDATA[
+<?php
 define("TEST_SERVER", Zend_OpenId::absoluteURL("example-10.php"));
 define("TEST_ID", Zend_OpenId::selfURL());
 define("TEST_PASSWORD", "123");
 $server = new Zend_OpenId_Provider();
-if (!$server-&gt;hasUser(TEST_ID)) {
-    $server-&gt;register(TEST_ID, TEST_PASSWORD);
-    $server-&gt;login(TEST_ID, TEST_PASSWORD);
+if (!$server->hasUser(TEST_ID)) {
+    $server->register(TEST_ID, TEST_PASSWORD);
+    $server->login(TEST_ID, TEST_PASSWORD);
     $sreg = new Zend_OpenId_Extension_Sreg(array(
-        'nickname' =&gt;'test',
-        'email' =&gt; 'test@test.com'
+        'nickname' =>'test',
+        'email' => 'test@test.com'
     ));
     $root = Zend_OpenId::absoluteURL(".");
     Zend_OpenId::normalizeUrl($root);
-    $server-&gt;allowSite($root, $sreg);
-    $server-&gt;logout();
+    $server->allowSite($root, $sreg);
+    $server->logout();
 }
-?&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;link rel="openid.server" href="&lt;?php echo TEST_SERVER;?&gt;" /&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;?php echo TEST_ID;?&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</programlisting>
+?>
+<html>
+<head>
+<link rel="openid.server" href="<?php echo TEST_SERVER;?>" />
+</head>
+<body>
+<?php echo TEST_ID;?>
+</body>
+</html>
+]]></programlisting>
         </example>
 
         <para>
@@ -375,25 +373,25 @@ if (!$server-&gt;hasUser(TEST_ID)) {
         <example xml:id="zend.openid.provider.example-7"><info><title>Provider with SREG</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $server = new Zend_OpenId_Provider();
 $sreg = new Zend_OpenId_Extension_Sreg();
 
 define("TEST_ID", Zend_OpenId::absoluteURL("example-10-id.php"));
 define("TEST_PASSWORD", "123");
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET' &amp;&amp;
-    isset($_GET['openid_action']) &amp;&amp;
+if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
+    isset($_GET['openid_action']) &&
     $_GET['openid_action'] === 'login') {
-    $server-&gt;login(TEST_ID, TEST_PASSWORD);
+    $server->login(TEST_ID, TEST_PASSWORD);
     unset($_GET['openid_action']);
     Zend_OpenId::redirect(Zend_OpenId::selfUrl(), $_GET);
-} else if ($_SERVER['REQUEST_METHOD'] == 'GET' &amp;&amp;
-    isset($_GET['openid_action']) &amp;&amp;
+} else if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
+    isset($_GET['openid_action']) &&
     $_GET['openid_action'] === 'trust') {
    echo "UNTRUSTED DATA" ;
 } else {
-    $ret = $server-&gt;handle(null, $sreg);
+    $ret = $server->handle(null, $sreg);
     if (is_string($ret)) {
         echo $ret;
     } else if ($ret !== true) {
@@ -401,7 +399,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &amp;&amp;
         echo 'Forbidden';
     }
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.basic"><info><title>Basic usage</title></info>
     
 
@@ -13,24 +11,24 @@
     <example xml:id="zend.exception.catchall.example"><info><title>Catch all Zend Framework exceptions</title></info>
         
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 try {
     // your code
 } catch (Zend_Exception $e) {
     // do something
 }
-</programlisting>
+]]></programlisting>
     </example>
 
     <example xml:id="zend.exception.catchcomponent.example"><info><title>Catch exceptions thrown by a specific component of Zend Framework</title></info>
         
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 try {
     // your code
 } catch (Zend_Db_Exception $e) {
     // do something
 }
-</programlisting>
+]]></programlisting>
     </example>
 </section>

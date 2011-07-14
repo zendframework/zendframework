@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.elements"><info><title>Creating Form Elements Using Zend_Form_Element</title></info>
     
 
@@ -131,35 +129,35 @@
                 file "My/Decorator/Label.php".
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class My_Decorator_Label extends Zend_Form_Decorator_Abstract
 {
     protected $_placement = 'PREPEND';
 
     public function render($content)
     {
-        if (null === ($element = $this-&gt;getElement())) {
+        if (null === ($element = $this->getElement())) {
             return $content;
         }
         if (!method_exists($element, 'getLabel')) {
             return $content;
         }
 
-        $label = $element-&gt;getLabel() . ':';
+        $label = $element->getLabel() . ':';
 
-        if (null === ($view = $element-&gt;getView())) {
-            return $this-&gt;renderLabel($content, $label);
+        if (null === ($view = $element->getView())) {
+            return $this->renderLabel($content, $label);
         }
 
-        $label = $view-&gt;formLabel($element-&gt;getName(), $label);
+        $label = $view->formLabel($element->getName(), $label);
 
-        return $this-&gt;renderLabel($content, $label);
+        return $this->renderLabel($content, $label);
     }
 
     public function renderLabel($content, $label)
     {
-        $placement = $this-&gt;getPlacement();
-        $separator = $this-&gt;getSeparator();
+        $placement = $this->getPlacement();
+        $separator = $this->getSeparator();
 
         switch ($placement) {
             case 'APPEND':
@@ -170,25 +168,25 @@ class My_Decorator_Label extends Zend_Form_Decorator_Abstract
         }
     }
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 Now we can tell the element to use this plugin path when looking
                 for decorators:
             </para>
 
-            <programlisting language="php">
-$element-&gt;addPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$element->addPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
+]]></programlisting>
 
             <para>
                 Alternately, we can do that at the form level to ensure all
                 decorators use this path:
             </para>
 
-            <programlisting language="php">
-$form-&gt;addElementPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$form->addElementPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
+]]></programlisting>
 
             <para>
                 After it added as in the example above, the 'My/Decorator/' path will be searched
@@ -214,9 +212,9 @@ $form-&gt;addElementPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
             <methodname>getValue()</methodname>:
         </para>
 
-        <programlisting language="php">
-$filtered = $element-&gt;getValue();
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$filtered = $element->getValue();
+]]></programlisting>
 
         <para>
             Filters may be added to the chain in two ways:
@@ -240,14 +238,14 @@ $filtered = $element-&gt;getValue();
             Let's see some examples:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Concrete filter instance:
-$element-&gt;addFilter(new Zend_Filter_Alnum());
+$element->addFilter(new Zend_Filter_Alnum());
 
 // Short filter name:
-$element-&gt;addFilter('Alnum');
-$element-&gt;addFilter('alnum');
-</programlisting>
+$element->addFilter('Alnum');
+$element->addFilter('alnum');
+]]></programlisting>
 
         <para>
             Short names are typically the filter name minus the prefix. In the
@@ -266,9 +264,9 @@ $element-&gt;addFilter('alnum');
                 <classname>Zend_Form_Element</classname> about this as follows:
             </para>
 
-            <programlisting language="php">
-$element-&gt;addPrefixPath('My_Filter', 'My/Filter/', 'filter');
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$element->addPrefixPath('My_Filter', 'My/Filter/', 'filter');
+]]></programlisting>
 
             <para>
                 (Recall that the third argument indicates which plugin loader
@@ -281,9 +279,9 @@ $element-&gt;addPrefixPath('My_Filter', 'My/Filter/', 'filter');
             <methodname>getUnfilteredValue()</methodname> method:
         </para>
 
-        <programlisting language="php">
-$unfiltered = $element-&gt;getUnfilteredValue();
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$unfiltered = $element->getUnfilteredValue();
+]]></programlisting>
 
         <para>
             For more information on filters, see the <link linkend="zend.filter.introduction">Zend_Filter
@@ -371,14 +369,14 @@ $unfiltered = $element-&gt;getUnfilteredValue();
             Let's see some examples:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Concrete validator instance:
-$element-&gt;addValidator(new Zend_Validate_Alnum());
+$element->addValidator(new Zend_Validate_Alnum());
 
 // Short validator name:
-$element-&gt;addValidator('Alnum');
-$element-&gt;addValidator('alnum');
-</programlisting>
+$element->addValidator('Alnum');
+$element->addValidator('alnum');
+]]></programlisting>
 
         <para>
             Short names are typically the validator name minus the prefix. In
@@ -397,9 +395,9 @@ $element-&gt;addValidator('alnum');
                 <classname>Zend_Form_Element</classname> about this as follows:
             </para>
 
-            <programlisting language="php">
-$element-&gt;addPrefixPath('My_Validator', 'My/Validator/', 'validate');
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$element->addPrefixPath('My_Validator', 'My/Validator/', 'validate');
+]]></programlisting>
 
             <para>
                 (Recall that the third argument indicates which plugin loader
@@ -412,9 +410,9 @@ $element-&gt;addPrefixPath('My_Validator', 'My/Validator/', 'validate');
             from firing, pass boolean <constant>TRUE</constant> as the second parameter:
         </para>
 
-        <programlisting language="php">
-$element-&gt;addValidator('alnum', true);
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$element->addValidator('alnum', true);
+]]></programlisting>
 
         <para>
             If you are using a string name to add a validator, and the
@@ -423,9 +421,9 @@ $element-&gt;addValidator('alnum', true);
             array:
         </para>
 
-        <programlisting language="php">
-$element-&gt;addValidator('StringLength', false, array(6, 20));
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$element->addValidator('StringLength', false, array(6, 20));
+]]></programlisting>
 
         <para>
             Arguments passed in this way should be in the order in which they
@@ -434,9 +432,9 @@ $element-&gt;addValidator('StringLength', false, array(6, 20));
             <varname>$min</varname> and <varname>$max</varname> parameters:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(6, 20);
-</programlisting>
+]]></programlisting>
 
         <note><info><title>Providing Custom Validator Error Messages</title></info>
             
@@ -467,44 +465,44 @@ $validator = new Zend_Validate_StringLength(6, 20);
             constructor of <methodname>addValidator()</methodname>:
         </para>
 
-        <programlisting language="php">
-$element-&gt;addValidators(array(
+        <programlisting language="php"><![CDATA[
+$element->addValidators(array(
     array('NotEmpty', true),
     array('alnum'),
     array('stringLength', false, array(6, 20)),
 ));
-</programlisting>
+]]></programlisting>
 
         <para>
             If you want to be more verbose or explicit, you can use the array
             keys 'validator', 'breakChainOnFailure', and 'options':
         </para>
 
-        <programlisting language="php">
-$element-&gt;addValidators(array(
+        <programlisting language="php"><![CDATA[
+$element->addValidators(array(
     array(
-        'validator'           =&gt; 'NotEmpty',
-        'breakChainOnFailure' =&gt; true),
-    array('validator' =&gt; 'alnum'),
+        'validator'           => 'NotEmpty',
+        'breakChainOnFailure' => true),
+    array('validator' => 'alnum'),
     array(
-        'validator' =&gt; 'stringLength',
-        'options'   =&gt; array(6, 20)),
+        'validator' => 'stringLength',
+        'options'   => array(6, 20)),
 ));
-</programlisting>
+]]></programlisting>
 
         <para>
             This usage is good for illustrating how you could then configure
             validators in a config file:
         </para>
 
-        <programlisting language="ini">
+        <programlisting language="ini"><![CDATA[
 element.validators.notempty.validator = "NotEmpty"
 element.validators.notempty.breakChainOnFailure = true
 element.validators.alnum.validator = "Alnum"
 element.validators.strlen.validator = "StringLength"
 element.validators.strlen.options.min = 6
 element.validators.strlen.options.max = 20
-</programlisting>
+]]></programlisting>
 
         <para>
             Notice that every item has a key, whether or not it needs one; this
@@ -518,13 +516,13 @@ element.validators.strlen.options.max = 20
             <methodname>isValid()</methodname>:
         </para>
 
-        <programlisting language="php">
-if ($element-&gt;isValid($value)) {
+        <programlisting language="php"><![CDATA[
+if ($element->isValid($value)) {
     // valid
 } else {
     // invalid
 }
-</programlisting>
+]]></programlisting>
 
         <note><info><title>Validation Operates On Filtered Values</title></info>
             
@@ -553,35 +551,35 @@ if ($element-&gt;isValid($value)) {
                 validator might look like the following:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class My_Validate_PasswordConfirmation extends Zend_Validate_Abstract
 {
     const NOT_MATCH = 'notMatch';
 
     protected $_messageTemplates = array(
-        self::NOT_MATCH =&gt; 'Password confirmation does not match'
+        self::NOT_MATCH => 'Password confirmation does not match'
     );
 
     public function isValid($value, $context = null)
     {
         $value = (string) $value;
-        $this-&gt;_setValue($value);
+        $this->_setValue($value);
 
         if (is_array($context)) {
             if (isset($context['password_confirm'])
-                &amp;&amp; ($value == $context['password_confirm']))
+                && ($value == $context['password_confirm']))
             {
                 return true;
             }
-        } elseif (is_string($context) &amp;&amp; ($value == $context)) {
+        } elseif (is_string($context) && ($value == $context)) {
             return true;
         }
 
-        $this-&gt;_error(self::NOT_MATCH);
+        $this->_error(self::NOT_MATCH);
         return false;
     }
 }
-</programlisting>
+]]></programlisting>
         </note>
 
         <para>
@@ -596,10 +594,10 @@ class My_Validate_PasswordConfirmation extends Zend_Validate_Abstract
             messages from the validator chain:
         </para>
 
-        <programlisting language="php">
-$errors   = $element-&gt;getErrors();
-$messages = $element-&gt;getMessages();
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$errors   = $element->getErrors();
+$messages = $element->getMessages();
+]]></programlisting>
 
         <para>
             (Note: error messages returned are an associative array of error
@@ -944,12 +942,12 @@ $messages = $element-&gt;getMessages();
                 'disableLoadDefaultDecorators' option to the constructor:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $element = new Zend_Form_Element('foo',
-                                 array('disableLoadDefaultDecorators' =&gt;
+                                 array('disableLoadDefaultDecorators' =>
                                       true)
                                 );
-</programlisting>
+]]></programlisting>
 
             <para>
                 This option may be mixed with any other options you pass,
@@ -966,15 +964,15 @@ $element = new Zend_Form_Element('foo',
             decorators:
         </para>
 
-        <programlisting language="php">
-$this-&gt;addDecorators(array(
+        <programlisting language="php"><![CDATA[
+$this->addDecorators(array(
     array('ViewHelper'),
     array('Errors'),
-    array('Description', array('tag' =&gt; 'p', 'class' =&gt; 'description')),
-    array('HtmlTag', array('tag' =&gt; 'dd')),
-    array('Label', array('tag' =&gt; 'dt')),
+    array('Description', array('tag' => 'p', 'class' => 'description')),
+    array('HtmlTag', array('tag' => 'dd')),
+    array('Label', array('tag' => 'dt')),
 ));
-</programlisting>
+]]></programlisting>
 
         <para>
             The initial content is created by the 'ViewHelper' decorator, which
@@ -991,18 +989,18 @@ $this-&gt;addDecorators(array(
             The resulting output looks basically like this:
         </para>
 
-        <programlisting language="html">
-&lt;dt&gt;&lt;label for="foo" class="optional"&gt;Foo&lt;/label&gt;&lt;/dt&gt;
-&lt;dd&gt;
-    &lt;input type="text" name="foo" id="foo" value="123" /&gt;
-    &lt;ul class="errors"&gt;
-        &lt;li&gt;"123" is not an alphanumeric value&lt;/li&gt;
-    &lt;/ul&gt;
-    &lt;p class="description"&gt;
+        <programlisting language="html"><![CDATA[
+<dt><label for="foo" class="optional">Foo</label></dt>
+<dd>
+    <input type="text" name="foo" id="foo" value="123" />
+    <ul class="errors">
+        <li>"123" is not an alphanumeric value</li>
+    </ul>
+    <p class="description">
         This is some descriptive text regarding the element.
-    &lt;/p&gt;
-&lt;/dd&gt;
-</programlisting>
+    </p>
+</dd>
+]]></programlisting>
 
         <para>
             For more information on decorators, read the <link linkend="zend.form.decorators">Zend_Form_Decorator section</link>.
@@ -1027,14 +1025,14 @@ $this-&gt;addDecorators(array(
                 or name:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Alias to 'FooBar':
-$element-&gt;addDecorator(array('FooBar' =&gt; 'HtmlTag'),
-                       array('tag' =&gt; 'div'));
+$element->addDecorator(array('FooBar' => 'HtmlTag'),
+                       array('tag' => 'div'));
 
 // And retrieve later:
-$decorator = $element-&gt;getDecorator('FooBar');
-</programlisting>
+$decorator = $element->getDecorator('FooBar');
+]]></programlisting>
 
             <para>
                 In the <methodname>addDecorators()</methodname> and
@@ -1042,20 +1040,20 @@ $decorator = $element-&gt;getDecorator('FooBar');
                 the 'decorator' option in the array representing the decorator:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Add two 'HtmlTag' decorators, aliasing one to 'FooBar':
-$element-&gt;addDecorators(
-    array('HtmlTag', array('tag' =&gt; 'div')),
+$element->addDecorators(
+    array('HtmlTag', array('tag' => 'div')),
     array(
-        'decorator' =&gt; array('FooBar' =&gt; 'HtmlTag'),
-        'options' =&gt; array('tag' =&gt; 'dd')
+        'decorator' => array('FooBar' => 'HtmlTag'),
+        'options' => array('tag' => 'dd')
     ),
 );
 
 // And retrieve later:
-$htmlTag = $element-&gt;getDecorator('HtmlTag');
-$fooBar  = $element-&gt;getDecorator('FooBar');
-</programlisting>
+$htmlTag = $element->getDecorator('HtmlTag');
+$fooBar  = $element->getDecorator('FooBar');
+]]></programlisting>
         </note>
 
         <para>
@@ -1118,13 +1116,13 @@ $fooBar  = $element-&gt;getDecorator('FooBar');
             <methodname>render()</methodname> method. As an example:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Render only the ViewHelper decorator:
-echo $element-&gt;renderViewHelper();
+echo $element->renderViewHelper();
 
 // Render only the HtmlTag decorator, passing in content:
-echo $element-&gt;renderHtmlTag("This is the html tag content");
-</programlisting>
+echo $element->renderHtmlTag("This is the html tag content");
+]]></programlisting>
 
         <para>
             If the decorator does not exist, an exception is raised.
@@ -1258,10 +1256,10 @@ echo $element-&gt;renderHtmlTag("This is the html tag content");
             to facilitate access to them:
         </para>
 
-        <programlisting language="php">
-// Equivalent to $element-&gt;setAttrib('class', 'text'):
-$element-&gt;class = 'text;
-</programlisting>
+        <programlisting language="php"><![CDATA[
+// Equivalent to $element->setAttrib('class', 'text'):
+$element->class = 'text;
+]]></programlisting>
 
         <para>
             By default, all attributes are passed to the view helper used by
@@ -1572,7 +1570,7 @@ $element-&gt;class = 'text;
             every type of configurable data:
         </para>
 
-        <programlisting language="ini">
+        <programlisting language="ini"><![CDATA[
 [element]
 name = "foo"
 value = "foobar"
@@ -1599,7 +1597,7 @@ filters.ucase.filter = "StringToUpper"
 decorators.element.decorator = "ViewHelper"
 decorators.element.options.helper = "FormText"
 decorators.label.decorator = "Label"
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.form.elements.custom"><info><title>Custom Elements</title></info>
@@ -1643,31 +1641,31 @@ decorators.label.decorator = "Label"
             specify. You could define an element to accomplish this as follows:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class My_Element_Text extends Zend_Form_Element
 {
     public function init()
     {
-        $this-&gt;addPrefixPath('My_Decorator', 'My/Decorator/', 'decorator')
-             -&gt;addFilters('StringTrim')
-             -&gt;addValidator('Regex', false, array('/^[a-z0-9]{6,}$/i'))
-             -&gt;addDecorator('TextItem')
-             -&gt;setAttrib('size', 30)
-             -&gt;setAttrib('maxLength', 45)
-             -&gt;setAttrib('class', 'text');
+        $this->addPrefixPath('My_Decorator', 'My/Decorator/', 'decorator')
+             ->addFilters('StringTrim')
+             ->addValidator('Regex', false, array('/^[a-z0-9]{6,}$/i'))
+             ->addDecorator('TextItem')
+             ->setAttrib('size', 30)
+             ->setAttrib('maxLength', 45)
+             ->setAttrib('class', 'text');
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             You could then inform your form object about the prefix path for
             such elements, and start creating elements:
         </para>
 
-        <programlisting language="php">
-$form-&gt;addPrefixPath('My_Element', 'My/Element/', 'element')
-     -&gt;addElement('text', 'foo');
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$form->addPrefixPath('My_Element', 'My/Element/', 'element')
+     ->addElement('text', 'foo');
+]]></programlisting>
 
         <para>
             The 'foo' element will now be of type <classname>My_Element_Text</classname>,
@@ -1683,19 +1681,19 @@ $form-&gt;addPrefixPath('My_Element', 'My/Element/', 'element')
             class:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class My_Element_Text extends Zend_Form_Element
 {
     public function loadDefaultDecorators()
     {
-        $this-&gt;addDecorator('ViewHelper')
-             -&gt;addDecorator('DisplayError')
-             -&gt;addDecorator('Label')
-             -&gt;addDecorator('HtmlTag',
-                            array('tag' =&gt; 'div', 'class' =&gt; 'element'));
+        $this->addDecorator('ViewHelper')
+             ->addDecorator('DisplayError')
+             ->addDecorator('Label')
+             ->addDecorator('HtmlTag',
+                            array('tag' => 'div', 'class' => 'element'));
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             There are many ways to customize elements. Read the <acronym>API</acronym>

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.additional"><info><title>Working Examples</title></info>
     
 
@@ -55,7 +53,7 @@
         <example xml:id="zend.date.additional.checking.example-1"><info><title>Checking Dates</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Checking dates
 $date = '01.03.2000';
 if (Zend_Date::isDate($date)) {
@@ -79,7 +77,7 @@ if (Zend_Date::isDate($date,'dd MMMM yyyy', 'en')) {
 } else {
     print "String $date is NO date";
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -110,10 +108,10 @@ if (Zend_Date::isDate($date,'dd MMMM yyyy', 'en')) {
         <example xml:id="zend.date.additional.sunrise-sunset.example-1"><info><title>Getting all Available Cities</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Output the complete list of available cities
 print_r (Zend_Date_Cities::getCityList());
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -182,7 +180,7 @@ print_r (Zend_Date_Cities::getCityList());
         <example xml:id="zend.date.additional.sunrise-sunset.example-2"><info><title>Getting the Location for a City</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Get the location for a defined city
 // uses the effective horizon as no horizon is defined
 print_r (Zend_Date_Cities::city('Vienna'));
@@ -191,8 +189,8 @@ print_r (Zend_Date_Cities::city('Vienna'));
 print_r (Zend_Date_Cities::city('Vienna', 'nautic'));
 
 // self definition of a location
-$mylocation = array('latitude' =&gt; 41.5, 'longitude' =&gt; 13.2446);
-</programlisting>
+$mylocation = array('latitude' => 41.5, 'longitude' => 13.2446);
+]]></programlisting>
         </example>
 
         <para>
@@ -208,7 +206,7 @@ $mylocation = array('latitude' =&gt; 41.5, 'longitude' =&gt; 13.2446);
         <example xml:id="zend.date.additional.sunrise-sunset.example-3"><info><title>Calculating Sun Information</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Get the location for a defined city
 $city = Zend_Date_Cities::city('Vienna');
 
@@ -216,15 +214,15 @@ $city = Zend_Date_Cities::city('Vienna');
 $date = new Zend_Date('10.03.2007', Zend_Date::ISO_8601, 'de');
 
 // calculate sunset
-$sunset = $date-&gt;getSunset($city);
-print $sunset-&gt;get(Zend_Date::ISO_8601);
+$sunset = $date->getSunset($city);
+print $sunset->get(Zend_Date::ISO_8601);
 
 // calculate all sun informations
-$info = $date-&gt;getSunInfo($city);
+$info = $date->getSunInfo($city);
 foreach ($info as $sun) {
-    print "\n" . $sun-&gt;get(Zend_Date::ISO_8601);
+    print "\n" . $sun->get(Zend_Date::ISO_8601);
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -263,7 +261,7 @@ foreach ($info as $sun) {
         <example xml:id="zend.date.additional.timezones.example-1"><info><title>Working with Time Zones</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Set a default timezone... this has to be done within the bootstrap
 // file or php.ini.
 // We do this here just for having a complete example.
@@ -273,20 +271,20 @@ date_default_timezone_set('Europe/Vienna');
 $date = new Zend_Date('10.03.2007', Zend_Date::DATES, 'de');
 
 // view our date object
-print $date-&gt;getIso();
+print $date->getIso();
 
 // what timezone do we have ?
-print $date-&gt;getTimezone();
+print $date->getTimezone();
 
 // set another timezone
-$date-&gt;setTimezone('America/Chicago');
+$date->setTimezone('America/Chicago');
 
 // what timezone do we now have ?
-print $date-&gt;getTimezone();
+print $date->getTimezone();
 
 // see the changed date object
-print $date-&gt;getIso();
-</programlisting>
+print $date->getIso();
+]]></programlisting>
         </example>
 
         <para>
@@ -307,7 +305,7 @@ print $date-&gt;getIso();
         <example xml:id="zend.date.additional.timezones.example-2"><info><title>Multiple Time Zones</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Set a default timezone... this has to be done within the bootstrap
 // file or php.ini.
 // We do this here just for having a complete example.
@@ -317,25 +315,25 @@ date_default_timezone_set('Europe/Vienna');
 $date = new Zend_Date('10.03.2007 00:00:00', Zend_Date::ISO_8601, 'de');
 
 // view our date object
-print $date-&gt;getIso();
+print $date->getIso();
 
 // the date stays unchanged even after changeing the timezone
 date_default_timezone_set('America/Chicago');
-print $date-&gt;getIso();
+print $date->getIso();
 
 $otherdate = clone $date;
-$otherdate-&gt;setTimezone('Brazil/Acre');
+$otherdate->setTimezone('Brazil/Acre');
 
 // view our date object
-print $otherdate-&gt;getIso();
+print $otherdate->getIso();
 
 // set the object to the actual systems timezone
 $lastdate = clone $date;
-$lastdate-&gt;setTimezone();
+$lastdate->setTimezone();
 
 // view our date object
-print $lastdate-&gt;getIso();
-</programlisting>
+print $lastdate->getIso();
+]]></programlisting>
         </example>
     </section>
 </section>

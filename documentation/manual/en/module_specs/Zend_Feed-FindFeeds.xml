@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.findFeeds"><info><title>Retrieving Feeds from Web Pages</title></info>
     
 
@@ -10,9 +8,9 @@
         retrieve all feeds referenced by a web page with one simple method call:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $feedArray = Zend_Feed::findFeeds('http://www.example.com/news.html');
-</programlisting>
+]]></programlisting>
 
     <para>
         Here the <methodname>findFeeds()</methodname> method returns an array of

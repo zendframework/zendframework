@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.db.quickstart"><info><title>Quickstart</title></info>
     
 
@@ -27,7 +25,7 @@
             </para>
         </note>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
 {
     private $_connectionMock;
@@ -39,14 +37,14 @@ class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
      */
     protected function getConnection()
     {
-        if($this-&gt;_connectionMock == null) {
+        if($this->_connectionMock == null) {
             $connection = Zend_Db::factory(...);
-            $this-&gt;_connectionMock = $this-&gt;createZendDbConnection(
+            $this->_connectionMock = $this->createZendDbConnection(
                 $connection, 'zfunittests'
             );
             Zend_Db_Table_Abstract::setDefaultAdapter($connection);
         }
-        return $this-&gt;_connectionMock;
+        return $this->_connectionMock;
     }
 
     /**
@@ -54,12 +52,12 @@ class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
      */
     protected function getDataSet()
     {
-        return $this-&gt;createFlatXmlDataSet(
+        return $this->createFlatXmlDataSet(
             dirname(__FILE__) . '/_files/bugsSeed.xml'
         );
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Here we create the database connection and seed some data into the database. Some
@@ -114,32 +112,32 @@ class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
             format:
         </para>
 
-        <programlisting language="xml">
-&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
-&lt;dataset&gt;
-    &lt;zfbugs bug_id="1" bug_description="system needs electricity to run"
+        <programlisting language="xml"><![CDATA[
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataset>
+    <zfbugs bug_id="1" bug_description="system needs electricity to run"
         bug_status="NEW" created_on="2007-04-01 00:00:00"
         updated_on="2007-04-01 00:00:00" reported_by="goofy"
-        assigned_to="mmouse" verified_by="dduck" /&gt;
-    &lt;zfbugs bug_id="2" bug_description="Implement Do What I Mean function"
+        assigned_to="mmouse" verified_by="dduck" />
+    <zfbugs bug_id="2" bug_description="Implement Do What I Mean function"
         bug_status="VERIFIED" created_on="2007-04-02 00:00:00"
         updated_on="2007-04-02 00:00:00" reported_by="goofy"
-        assigned_to="mmouse" verified_by="dduck" /&gt;
-    &lt;zfbugs bug_id="3" bug_description="Where are my keys?" bug_status="FIXED"
+        assigned_to="mmouse" verified_by="dduck" />
+    <zfbugs bug_id="3" bug_description="Where are my keys?" bug_status="FIXED"
         created_on="2007-04-03 00:00:00" updated_on="2007-04-03 00:00:00"
-        reported_by="dduck" assigned_to="mmouse" verified_by="dduck" /&gt;
-    &lt;zfbugs bug_id="4" bug_description="Bug no product" bug_status="INCOMPLETE"
+        reported_by="dduck" assigned_to="mmouse" verified_by="dduck" />
+    <zfbugs bug_id="4" bug_description="Bug no product" bug_status="INCOMPLETE"
         created_on="2007-04-04 00:00:00" updated_on="2007-04-04 00:00:00"
-        reported_by="mmouse" assigned_to="goofy" verified_by="dduck" /&gt;
-&lt;/dataset&gt;
-</programlisting>
+        reported_by="mmouse" assigned_to="goofy" verified_by="dduck" />
+</dataset>
+]]></programlisting>
 
         <para>
             We will work with this four entries in the database table "zfbugs" in the next
             examples. The required MySQL schema for this example is:
         </para>
 
-        <programlisting language="sql">
+        <programlisting language="sql"><![CDATA[
 CREATE TABLE IF NOT EXISTS `zfbugs` (
     `bug_id` int(11) NOT NULL auto_increment,
     `bug_description` varchar(100) default NULL,
@@ -151,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `zfbugs` (
     `verified_by` varchar(100) default NULL,
 PRIMARY KEY  (`bug_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 ;
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.test.phpunit.db.quickstart.initial-tests"><info><title>A few initial database tests</title></info>
@@ -164,7 +162,7 @@ PRIMARY KEY  (`bug_id`)
             our first assertion. This will be a test to insert a new bug.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
 {
     public function testBugInsertedIntoDatabase()
@@ -172,30 +170,30 @@ class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
         $bugsTable = new Bugs();
 
         $data = array(
-            'created_on'      =&gt; '2007-03-22 00:00:00',
-            'updated_on'      =&gt; '2007-03-22 00:00:00',
-            'bug_description' =&gt; 'Something wrong',
-            'bug_status'      =&gt; 'NEW',
-            'reported_by'     =&gt; 'garfield',
-            'verified_by'     =&gt; 'garfield',
-            'assigned_to'     =&gt; 'mmouse',
+            'created_on'      => '2007-03-22 00:00:00',
+            'updated_on'      => '2007-03-22 00:00:00',
+            'bug_description' => 'Something wrong',
+            'bug_status'      => 'NEW',
+            'reported_by'     => 'garfield',
+            'verified_by'     => 'garfield',
+            'assigned_to'     => 'mmouse',
         );
 
-        $bugsTable-&gt;insert($data);
+        $bugsTable->insert($data);
 
         $ds = new Zend_Test_PHPUnit_Db_DataSet_QueryDataSet(
-            $this-&gt;getConnection()
+            $this->getConnection()
         );
-        $ds-&gt;addTable('zfbugs', 'SELECT * FROM zfbugs');
+        $ds->addTable('zfbugs', 'SELECT * FROM zfbugs');
 
-        $this-&gt;assertDataSetsEqual(
-            $this-&gt;createFlatXmlDataSet(dirname(__FILE__)
+        $this->assertDataSetsEqual(
+            $this->createFlatXmlDataSet(dirname(__FILE__)
                                       . "/_files/bugsInsertIntoAssertion.xml"),
             $ds
         );
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Now up to the <methodname>$bugsTable-&gt;insert($data);</methodname> everything looks
@@ -211,15 +209,15 @@ class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
             another row with the expected data:
         </para>
 
-        <programlisting language="xml">
-&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
-&lt;dataset&gt;
-    &lt;!-- previous 4 rows --&gt;
-    &lt;zfbugs bug_id="5" bug_description="Something wrong" bug_status="NEW"
+        <programlisting language="xml"><![CDATA[
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataset>
+    <!-- previous 4 rows -->
+    <zfbugs bug_id="5" bug_description="Something wrong" bug_status="NEW"
         created_on="2007-03-22 00:00:00" updated_on="2007-03-22 00:00:00"
-        reported_by="garfield" assigned_to="mmouse" verified_by="garfield" /&gt;
-&lt;/dataset&gt;
-</programlisting>
+        reported_by="garfield" assigned_to="mmouse" verified_by="garfield" />
+</dataset>
+]]></programlisting>
 
         <para>
             There are other ways to assert that the current database state equals an expected
@@ -228,28 +226,28 @@ class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
             the database is possible:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
 {
     public function testBugDelete()
     {
         $bugsTable = new Bugs();
 
-        $bugsTable-&gt;delete(
-            $bugsTable-&gt;getAdapter()-&gt;quoteInto("bug_id = ?", 4)
+        $bugsTable->delete(
+            $bugsTable->getAdapter()->quoteInto("bug_id = ?", 4)
         );
 
         $ds = new Zend_Test_PHPUnit_Db_DataSet_DbTableDataSet();
-        $ds-&gt;addTable($bugsTable);
+        $ds->addTable($bugsTable);
 
-        $this-&gt;assertDataSetsEqual(
-            $this-&gt;createFlatXmlDataSet(dirname(__FILE__)
+        $this->assertDataSetsEqual(
+            $this->createFlatXmlDataSet(dirname(__FILE__)
                                       . "/_files/bugsDeleteAssertion.xml"),
             $ds
         );
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             We have created a <classname>Zend_Test_PHPUnit_Db_DataSet_DbTableDataSet</classname>
@@ -273,7 +271,7 @@ class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
             of a dataset.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
 {
     public function testBugUpdate()
@@ -281,28 +279,28 @@ class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
         $bugsTable = new Bugs();
 
         $data = array(
-            'updated_on'      =&gt; '2007-05-23',
-            'bug_status'      =&gt; 'FIXED'
+            'updated_on'      => '2007-05-23',
+            'bug_status'      => 'FIXED'
         );
 
-        $where = $bugsTable-&gt;getAdapter()-&gt;quoteInto('bug_id = ?', 1);
+        $where = $bugsTable->getAdapter()->quoteInto('bug_id = ?', 1);
 
-        $bugsTable-&gt;update($data, $where);
+        $bugsTable->update($data, $where);
 
-        $rowset = $bugsTable-&gt;fetchAll();
+        $rowset = $bugsTable->fetchAll();
 
         $ds        = new Zend_Test_PHPUnit_Db_DataSet_DbRowset($rowset);
-        $assertion = $this-&gt;createFlatXmlDataSet(
+        $assertion = $this->createFlatXmlDataSet(
             dirname(__FILE__) . '/_files/bugsUpdateAssertion.xml'
         );
-        $expectedRowsets = $assertion-&gt;getTable('zfbugs');
+        $expectedRowsets = $assertion->getTable('zfbugs');
 
-        $this-&gt;assertTablesEqual(
+        $this->assertTablesEqual(
             $expectedRowsets, $ds
         );
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Here we create the current database state from a

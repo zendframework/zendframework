@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.using"><info><title>Using Exceptions</title></info>
     
 
@@ -17,17 +15,17 @@
             Framework class:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 try {
     // Calling Zend_Loader::loadClass() with a non-existant class will cause
     // an exception to be thrown in Zend_Loader:
     Zend_Loader::loadClass('nonexistantclass');
 } catch (Zend_Exception $e) {
     echo "Caught exception: " . get_class($e) . "\n";
-    echo "Message: " . $e-&gt;getMessage() . "\n";
+    echo "Message: " . $e->getMessage() . "\n";
     // Other code to recover from the error
 }
-</programlisting>
+]]></programlisting>
     </example>
 
     <para>

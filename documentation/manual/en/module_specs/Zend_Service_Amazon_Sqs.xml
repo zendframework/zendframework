@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.sqs"><info><title>Zend_Service_Amazon_Sqs</title></info>
     
 
@@ -118,18 +116,18 @@
         <example xml:id="zend.service.amazon.sqs.storing-your-first.example"><info><title>Zend_Service_Amazon_Sqs Usage Example</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $sqs = new Zend_Service_Amazon_Sqs($my_aws_key, $my_aws_secret_key);
 
-$queue_url = $sqs-&gt;create('test');
+$queue_url = $sqs->create('test');
 
 $message = 'this is a test';
-$message_id = $sqs-&gt;send($queue_url, $message);
+$message_id = $sqs->send($queue_url, $message);
 
-foreach ($sqs-&gt;receive($queue_url) as $message) {
-    echo $message['body'].'&lt;br/&gt;';
+foreach ($sqs->receive($queue_url) as $message) {
+    echo $message['body'].'<br/>';
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -139,10 +137,10 @@ foreach ($sqs-&gt;receive($queue_url) as $message) {
             you can set default credentials for the service:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 Zend_Service_Amazon_Sqs::setKeys($my_aws_key, $my_aws_secret_key);
 $sqs = new Zend_Service_Amazon_Sqs();
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.service.amazon.sqs.queues"><info><title>Queue operations</title></info>
@@ -176,11 +174,11 @@ $sqs = new Zend_Service_Amazon_Sqs();
                 <example xml:id="zend.service.amazon.sqs.queues.removalExample"><info><title>Zend_Service_Amazon_Sqs Queue Removal Example</title></info>
                     
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 $sqs = new Zend_Service_Amazon_Sqs($my_aws_key, $my_aws_secret_key);
-$queue_url = $sqs-&gt;create('test_1');
-$sqs-&gt;delete($queue_url);
-</programlisting>
+$queue_url = $sqs->create('test_1');
+$sqs->delete($queue_url);
+]]></programlisting>
                 </example>
             </listitem>
 
@@ -193,12 +191,12 @@ $sqs-&gt;delete($queue_url);
                 <example xml:id="zend.service.amazon.sqs.queues.countExample"><info><title>Zend_Service_Amazon_Sqs Queue Count Example</title></info>
                     
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 $sqs = new Zend_Service_Amazon_Sqs($my_aws_key, $my_aws_secret_key);
-$queue_url = $sqs-&gt;create('test_1');
-$sqs-&gt;send($queue_url, 'this is a test');
-$count = $sqs-&gt;count($queue_url); // Returns '1'
-</programlisting>
+$queue_url = $sqs->create('test_1');
+$sqs->send($queue_url, 'this is a test');
+$count = $sqs->count($queue_url); // Returns '1'
+]]></programlisting>
                 </example>
             </listitem>
 
@@ -211,13 +209,13 @@ $count = $sqs-&gt;count($queue_url); // Returns '1'
                 <example xml:id="zend.service.amazon.sqs.queues.listExample"><info><title>Zend_Service_Amazon_Sqs Queue Listing Example</title></info>
                     
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 $sqs = new Zend_Service_Amazon_Sqs($my_aws_key, $my_aws_secret_key);
-$list = $sqs-&gt;getQueues();
+$list = $sqs->getQueues();
 foreach($list as $queue) {
    echo "I have queue $queue\n";
 }
-</programlisting>
+]]></programlisting>
                 </example>
             </listitem>
         </itemizedlist>
@@ -244,11 +242,11 @@ foreach($list as $queue) {
                 <example xml:id="zend.service.amazon.sqs.messages.sendExample"><info><title>Zend_Service_Amazon_Sqs Message Send Example</title></info>
                     
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 $sqs = new Zend_Service_Amazon_Sqs($my_aws_key, $my_aws_secret_key);
-$queue_url = $sqs-&gt;create('test_queue');
-$sqs-&gt;send($queue_url, 'this is a test message');
-</programlisting>
+$queue_url = $sqs->create('test_queue');
+$sqs->send($queue_url, 'this is a test message');
+]]></programlisting>
                 </example>
             </listitem>
 
@@ -261,14 +259,14 @@ $sqs-&gt;send($queue_url, 'this is a test message');
                 <example xml:id="zend.service.amazon.sqs.messages.receiveExample"><info><title>Zend_Service_Amazon_Sqs Message Receive Example</title></info>
                     
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 $sqs = new Zend_Service_Amazon_Sqs($my_aws_key, $my_aws_secret_key);
-$queue_url = $sqs-&gt;create('test_queue');
-$sqs-&gt;send($queue_url, 'this is a test message');
-foreach ($sqs-&gt;receive($queue_url) as $message) {
-    echo "got message ".$message['body'].'&lt;br/&gt;';
+$queue_url = $sqs->create('test_queue');
+$sqs->send($queue_url, 'this is a test message');
+foreach ($sqs->receive($queue_url) as $message) {
+    echo "got message ".$message['body'].'<br/>';
 }
-</programlisting>
+]]></programlisting>
                 </example>
             </listitem>
 
@@ -283,21 +281,21 @@ foreach ($sqs-&gt;receive($queue_url) as $message) {
                 <example xml:id="zend.service.amazon.sqs.messages.deleteExample"><info><title>Zend_Service_Amazon_Sqs Message Delete Example</title></info>
                     
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 $sqs = new Zend_Service_Amazon_Sqs($my_aws_key, $my_aws_secret_key);
-$queue_url = $sqs-&gt;create('test_queue');
-$sqs-&gt;send($queue_url, 'this is a test message');
-foreach ($sqs-&gt;receive($queue_url) as $message) {
-    echo "got message ".$message['body'].'&lt;br/&gt;';
+$queue_url = $sqs->create('test_queue');
+$sqs->send($queue_url, 'this is a test message');
+foreach ($sqs->receive($queue_url) as $message) {
+    echo "got message ".$message['body'].'<br/>';
 
-    if ($sqs-&gt;deleteMessage($queue_url, $message['handle'])) {
+    if ($sqs->deleteMessage($queue_url, $message['handle'])) {
         echo "Message deleted";
     }
     else {
         echo "Message not deleted";
     }
 }
-</programlisting>
+]]></programlisting>
                 </example>
             </listitem>
        </itemizedlist>

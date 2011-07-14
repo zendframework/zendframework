@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.in_array"><info><title>InArray</title></info>
     
 
@@ -48,15 +46,15 @@
             initiation:
         </para>
 
-        <programlisting language="php">
-$validator = new Zend_Validate_InArray(array('key' =&gt; 'value',
-                                             'otherkey' =&gt; 'othervalue'));
-if ($validator-&gt;isValid('value')) {
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_InArray(array('key' => 'value',
+                                             'otherkey' => 'othervalue'));
+if ($validator->isValid('value')) {
     // value found
 } else {
     // no value found
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             This will behave exactly like <acronym>PHP</acronym>'s
@@ -76,16 +74,16 @@ if ($validator-&gt;isValid('value')) {
             returns the actual set haystack array.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_InArray();
-$validator-&gt;setHaystack(array('key' =&gt; 'value', 'otherkey' =&gt; 'othervalue'));
+$validator->setHaystack(array('key' => 'value', 'otherkey' => 'othervalue'));
 
-if ($validator-&gt;isValid('value')) {
+if ($validator->isValid('value')) {
     // value found
 } else {
     // no value found
 }
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.validate.set.in_array.strict"><info><title>Strict array validation</title></info>
@@ -103,20 +101,20 @@ if ($validator-&gt;isValid('value')) {
             using a method. At initiation you have to give an array with the following structure:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_InArray(
     array(
-        'haystack' =&gt; array('key' =&gt; 'value', 'otherkey' =&gt; 'othervalue'),
-        'strict'   =&gt; true
+        'haystack' => array('key' => 'value', 'otherkey' => 'othervalue'),
+        'strict'   => true
     )
 );
 
-if ($validator-&gt;isValid('value')) {
+if ($validator->isValid('value')) {
     // value found
 } else {
     // no value found
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             The <emphasis>haystack</emphasis> key contains your array to validate against. And by
@@ -151,24 +149,24 @@ if ($validator-&gt;isValid('value')) {
             option.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_InArray(
     array(
-        'haystack' =&gt; array(
-            'firstDimension' =&gt; array('key' =&gt; 'value',
-                                      'otherkey' =&gt; 'othervalue'),
-            'secondDimension' =&gt; array('some' =&gt; 'real',
-                                       'different' =&gt; 'key')),
-        'recursive' =&gt; true
+        'haystack' => array(
+            'firstDimension' => array('key' => 'value',
+                                      'otherkey' => 'othervalue'),
+            'secondDimension' => array('some' => 'real',
+                                       'different' => 'key')),
+        'recursive' => true
     )
 );
 
-if ($validator-&gt;isValid('value')) {
+if ($validator->isValid('value')) {
     // value found
 } else {
     // no value found
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Your array will then be validated recursive to see if the given value is contained.
@@ -176,23 +174,23 @@ if ($validator-&gt;isValid('value')) {
             afterwards and <methodname>getRecursive()</methodname> to retrieve it.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_InArray(
     array(
-        'firstDimension' =&gt; array('key' =&gt; 'value',
-                                  'otherkey' =&gt; 'othervalue'),
-        'secondDimension' =&gt; array('some' =&gt; 'real',
-                                   'different' =&gt; 'key')
+        'firstDimension' => array('key' => 'value',
+                                  'otherkey' => 'othervalue'),
+        'secondDimension' => array('some' => 'real',
+                                   'different' => 'key')
     )
 );
-$validator-&gt;setRecursive(true);
+$validator->setRecursive(true);
 
-if ($validator-&gt;isValid('value')) {
+if ($validator->isValid('value')) {
     // value found
 } else {
     // no value found
 }
-</programlisting>
+]]></programlisting>
 
         <note><info><title>Default setting for recursion</title></info>
             

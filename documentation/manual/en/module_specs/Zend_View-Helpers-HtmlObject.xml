@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.object"><info><title>HTML Object Helpers</title></info>
     
 
@@ -58,21 +56,21 @@
             The only required argument is the resource <acronym>URI</acronym>.
         </para>
 
-        <programlisting language="php">
-&lt;?php echo $this-&gt;htmlFlash('/path/to/flash.swf'); ?&gt;
-</programlisting>
+        <programlisting language="php"><![CDATA[
+<?php echo $this->htmlFlash('/path/to/flash.swf'); ?>
+]]></programlisting>
 
         <para>
             This outputs the following <acronym>HTML</acronym>:
         </para>
 
-        <programlisting language="html">
-&lt;object data="/path/to/flash.swf"
+        <programlisting language="html"><![CDATA[
+<object data="/path/to/flash.swf"
         type="application/x-shockwave-flash"
         classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-        codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab"&gt;
-&lt;/object&gt;
-</programlisting>
+        codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab">
+</object>
+]]></programlisting>
     </example>
 
     <para>
@@ -100,17 +98,17 @@
             content to the object. Now for an example which utilizes all arguments.
         </para>
 
-        <programlisting language="php">
-echo $this-&gt;htmlObject(
+        <programlisting language="php"><![CDATA[
+echo $this->htmlObject(
     '/path/to/file.ext',
     'mime/type',
     array(
-        'attr1' =&gt; 'aval1',
-        'attr2' =&gt; 'aval2'
+        'attr1' => 'aval1',
+        'attr2' => 'aval2'
     ),
     array(
-        'param1' =&gt; 'pval1',
-        'param2' =&gt; 'pval2'
+        'param1' => 'pval1',
+        'param2' => 'pval2'
     ),
     'some content'
 );
@@ -118,13 +116,13 @@ echo $this-&gt;htmlObject(
 /*
 This would output:
 
-&lt;object data="/path/to/file.ext" type="mime/type"
-    attr1="aval1" attr2="aval2"&gt;
-    &lt;param name="param1" value="pval1" /&gt;
-    &lt;param name="param2" value="pval2" /&gt;
+<object data="/path/to/file.ext" type="mime/type"
+    attr1="aval1" attr2="aval2">
+    <param name="param1" value="pval1" />
+    <param name="param2" value="pval2" />
     some content
-&lt;/object&gt;
+</object>
 */
-</programlisting>
+]]></programlisting>
     </example>
 </section>

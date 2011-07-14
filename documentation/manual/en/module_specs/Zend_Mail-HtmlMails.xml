@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.html-mails"><info><title>HTML E-Mail</title></info>
     
 
@@ -16,14 +14,14 @@
     <example xml:id="zend.mail.html-mails.example-1"><info><title>Sending HTML E-Mail</title></info>
         
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
-$mail-&gt;setBodyText('My Nice Test Text');
-$mail-&gt;setBodyHtml('My Nice &lt;b&gt;Test&lt;/b&gt; Text');
-$mail-&gt;setFrom('somebody@example.com', 'Some Sender');
-$mail-&gt;addTo('somebody_else@example.com', 'Some Recipient');
-$mail-&gt;setSubject('TestSubject');
-$mail-&gt;send();
-</programlisting>
+$mail->setBodyText('My Nice Test Text');
+$mail->setBodyHtml('My Nice <b>Test</b> Text');
+$mail->setFrom('somebody@example.com', 'Some Sender');
+$mail->addTo('somebody_else@example.com', 'Some Recipient');
+$mail->setSubject('TestSubject');
+$mail->send();
+]]></programlisting>
     </example>
 </section>

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.audioscrobbler"><info><title>Zend_Service_Audioscrobbler</title></info>
     
 
@@ -203,46 +201,46 @@
                 user's profile information:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $as = new Zend_Service_Audioscrobbler();
 // Set the user whose profile information we want to retrieve
-$as-&gt;setUser('BigDaddy71');
+$as->setUser('BigDaddy71');
 // Retrieve BigDaddy71's profile information
-$profileInfo = $as-&gt;userGetProfileInformation();
+$profileInfo = $as->userGetProfileInformation();
 // Display some of it
-print "Information for $profileInfo-&gt;realname "
-    . "can be found at $profileInfo-&gt;url";
-</programlisting>
+print "Information for $profileInfo->realname "
+    . "can be found at $profileInfo->url";
+]]></programlisting>
         </example>
 
         <example xml:id="zend.service.audioscrobbler.users.example.weekly_artist_chart"><info><title>Retrieving a User's Weekly Artist Chart</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $as = new Zend_Service_Audioscrobbler();
 // Set the user whose profile weekly artist chart we want to retrieve
-$as-&gt;setUser('lo_fye');
+$as->setUser('lo_fye');
 // Retrieves a list of previous weeks for which there are chart data
-$weeks = $as-&gt;userGetWeeklyChartList();
-if (count($weeks) &lt; 1) {
+$weeks = $as->userGetWeeklyChartList();
+if (count($weeks) < 1) {
     echo 'No data available';
 }
 sort($weeks); // Order the list of weeks
 
-$as-&gt;setFromDate($weeks[0]); // Set the starting date
-$as-&gt;setToDate($weeks[0]); // Set the ending date
+$as->setFromDate($weeks[0]); // Set the starting date
+$as->setToDate($weeks[0]); // Set the ending date
 
-$previousWeeklyArtists = $as-&gt;userGetPreviousWeeklyArtistChart();
+$previousWeeklyArtists = $as->userGetPreviousWeeklyArtistChart();
 
 echo 'Artist Chart For Week Of '
-   . date('Y-m-d h:i:s', $as-&gt;from_date)
-   . '&lt;br /&gt;';
+   . date('Y-m-d h:i:s', $as->from_date)
+   . '<br />';
 
 foreach ($previousWeeklyArtists as $artist) {
     // Display the artists' names with links to their profiles
-    print '&lt;a href="' . $artist-&gt;url . '"&gt;' . $artist-&gt;name . '&lt;/a&gt;&lt;br /&gt;';
+    print '<a href="' . $artist->url . '">' . $artist->name . '</a><br />';
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -295,17 +293,17 @@ foreach ($previousWeeklyArtists as $artist) {
         <example xml:id="zend.service.audioscrobbler.artists.example.related_artists"><info><title>Retrieving Related Artists</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $as = new Zend_Service_Audioscrobbler();
 // Set the artist for whom you would like to retrieve related artists
-$as-&gt;setArtist('LCD Soundsystem');
+$as->setArtist('LCD Soundsystem');
 // Retrieve the related artists
-$relatedArtists = $as-&gt;artistGetRelatedArtists();
+$relatedArtists = $as->artistGetRelatedArtists();
 foreach ($relatedArtists as $artist) {
     // Display the related artists
-    print '&lt;a href="' . $artist-&gt;url . '"&gt;' . $artist-&gt;name . '&lt;/a&gt;&lt;br /&gt;';
+    print '<a href="' . $artist->url . '">' . $artist->name . '</a><br />';
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 

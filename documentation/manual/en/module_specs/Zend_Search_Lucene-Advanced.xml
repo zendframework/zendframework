@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.advanced"><info><title>Advanced</title></info>
     
 
@@ -116,7 +114,7 @@
             line of the executed script.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class Searcher {
     private static $_index;
 
@@ -126,7 +124,7 @@ class Searcher {
 }
 
 Searcher::initIndex();
-</programlisting>
+]]></programlisting>
 
         <para>
             All the same, the destructor for static properties is correctly invoked at this point in
@@ -156,7 +154,7 @@ Searcher::initIndex();
             destructor has nothing to do and will not throw exception:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class Searcher {
     private static $_index;
 
@@ -167,7 +165,7 @@ class Searcher {
     ...
 
     public static function commit() {
-        self::$_index-&gt;commit();
+        self::$_index->commit();
     }
 }
 
@@ -179,6 +177,6 @@ Searcher::initIndex();
 ...
 Searcher::commit();
 ...
-</programlisting>
+]]></programlisting>
     </section>
 </section>

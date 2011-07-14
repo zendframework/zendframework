@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers.mail"><info><title>Writing to Email</title></info>
     
 
@@ -24,29 +22,29 @@
         Basic usage is outlined below:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
-$mail-&gt;setFrom('errors@example.org')
-     -&gt;addTo('project_developers@example.org');
+$mail->setFrom('errors@example.org')
+     ->addTo('project_developers@example.org');
 
 $writer = new Zend_Log_Writer_Mail($mail);
 
 // Set subject text for use; summary of number of errors is appended to the
 // subject line before sending the message.
-$writer-&gt;setSubjectPrependText('Errors with script foo.php');
+$writer->setSubjectPrependText('Errors with script foo.php');
 
 // Only email warning level entries and higher.
-$writer-&gt;addFilter(Zend_Log::WARN);
+$writer->addFilter(Zend_Log::WARN);
 
 $log = new Zend_Log();
-$log-&gt;addWriter($writer);
+$log->addWriter($writer);
 
 // Something bad happened!
-$log-&gt;error('unable to connect to database');
+$log->error('unable to connect to database');
 
 // On writer shutdown, Zend_Mail::send() is triggered to send an email with
 // all log entries at or above the Zend_Log filter level.
-</programlisting>
+]]></programlisting>
 
     <para>
         <classname>Zend_Log_Writer_Mail</classname> will render the email body as plain
@@ -82,10 +80,10 @@ $log-&gt;error('unable to connect to database');
             below.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
-$mail-&gt;setFrom('errors@example.org')
-     -&gt;addTo('project_developers@example.org');
+$mail->setFrom('errors@example.org')
+     ->addTo('project_developers@example.org');
 // Note that a subject line is not being set on the Zend_Mail instance!
 
 // Use a simple Zend_Layout instance with its defaults.
@@ -93,26 +91,26 @@ $layout = new Zend_Layout();
 
 // Create a formatter that wraps the entry in a listitem tag.
 $layoutFormatter = new Zend_Log_Formatter_Simple(
-    '&lt;li&gt;' . Zend_Log_Formatter_Simple::DEFAULT_FORMAT . '&lt;/li&gt;'
+    '<li>' . Zend_Log_Formatter_Simple::DEFAULT_FORMAT . '</li>'
 );
 
 $writer = new Zend_Log_Writer_Mail($mail, $layout);
 
 // Apply the formatter for entries as rendered with Zend_Layout.
-$writer-&gt;setLayoutFormatter($layoutFormatter);
-$writer-&gt;setSubjectPrependText('Errors with script foo.php');
-$writer-&gt;addFilter(Zend_Log::WARN);
+$writer->setLayoutFormatter($layoutFormatter);
+$writer->setSubjectPrependText('Errors with script foo.php');
+$writer->addFilter(Zend_Log::WARN);
 
 $log = new Zend_Log();
-$log-&gt;addWriter($writer);
+$log->addWriter($writer);
 
 // Something bad happened!
-$log-&gt;error('unable to connect to database');
+$log->error('unable to connect to database');
 
 // On writer shutdown, Zend_Mail::send() is triggered to send an email with
 // all log entries at or above the Zend_Log filter level. The email will
 // contain both plain text and HTML parts.
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.log.writers.mail.dynamicsubjectline"><info><title>Subject Line Error Level Summary</title></info>

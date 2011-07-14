@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.testing"><info><title>Testing your Controllers and MVC Applications</title></info>
     
 
@@ -15,18 +13,18 @@
         <methodname>dispatch()</methodname> method of the TestCase:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 class IndexControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     // ...
 
     public function testHomePage()
     {
-        $this-&gt;dispatch('/');
+        $this->dispatch('/');
         // ...
     }
 }
-</programlisting>
+]]></programlisting>
 
     <para>
         There will be times, however, that you need to provide extra
@@ -34,7 +32,7 @@ class IndexControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         populate the request with that information:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 class FooControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     // ...
@@ -42,38 +40,38 @@ class FooControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
     public function testBarActionShouldReceiveAllParameters()
     {
         // Set GET variables:
-        $this-&gt;request-&gt;setQuery(array(
-            'foo' =&gt; 'bar',
-            'bar' =&gt; 'baz',
+        $this->request->setQuery(array(
+            'foo' => 'bar',
+            'bar' => 'baz',
         ));
 
         // Set POST variables:
-        $this-&gt;request-&gt;setPost(array(
-            'baz'  =&gt; 'bat',
-            'lame' =&gt; 'bogus',
+        $this->request->setPost(array(
+            'baz'  => 'bat',
+            'lame' => 'bogus',
         ));
 
         // Set a cookie value:
-        $this-&gt;request-&gt;setCookie('user', 'matthew');
+        $this->request->setCookie('user', 'matthew');
         // or many:
-        $this-&gt;request-&gt;setCookies(array(
-            'timestamp' =&gt; time(),
-            'host'      =&gt; 'foobar',
+        $this->request->setCookies(array(
+            'timestamp' => time(),
+            'host'      => 'foobar',
         ));
 
         // Set headers, even:
-        $this-&gt;request-&gt;setHeader('X-Requested-With', 'XmlHttpRequest');
+        $this->request->setHeader('X-Requested-With', 'XmlHttpRequest');
 
         // Set the request method:
-        $this-&gt;request-&gt;setMethod('POST');
+        $this->request->setMethod('POST');
 
         // Dispatch:
-        $this-&gt;dispatch('/foo/bar');
+        $this->dispatch('/foo/bar');
 
         // ...
     }
 }
-</programlisting>
+]]></programlisting>
 
     <para>
         Now that the request is made, it's time to start making assertions against it.
@@ -101,22 +99,22 @@ class FooControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
             redirect work correctly you should it them in the following way:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class MyController extends Zend_Controller_Action
 {
     public function indexAction()
     {
         if($someCondition == true) {
-            return $this-&gt;_redirect(...);
+            return $this->_redirect(...);
         } else if($anotherCondition == true) {
-            $this-&gt;_redirector-&gt;gotoSimple("foo");
+            $this->_redirector->gotoSimple("foo");
             return;
         }
 
         // do some stuff here
     }
 }
-</programlisting>
+]]></programlisting>
 
         <important>
             <para>

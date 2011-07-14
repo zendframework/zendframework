@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tag.cloud"><info><title>Zend_Tag_Cloud</title></info>
     
 
@@ -85,22 +83,22 @@
             cloud, add multiple tags to it and finally render it.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Create the cloud and assign static tags to it
 $cloud = new Zend_Tag_Cloud(array(
-    'tags' =&gt; array(
-        array('title' =&gt; 'Code', 'weight' =&gt; 50,
-              'params' =&gt; array('url' =&gt; '/tag/code')),
-        array('title' =&gt; 'Zend Framework', 'weight' =&gt; 1,
-              'params' =&gt; array('url' =&gt; '/tag/zend-framework')),
-        array('title' =&gt; 'PHP', 'weight' =&gt; 5,
-              'params' =&gt; array('url' =&gt; '/tag/php')),
+    'tags' => array(
+        array('title' => 'Code', 'weight' => 50,
+              'params' => array('url' => '/tag/code')),
+        array('title' => 'Zend Framework', 'weight' => 1,
+              'params' => array('url' => '/tag/zend-framework')),
+        array('title' => 'PHP', 'weight' => 5,
+              'params' => array('url' => '/tag/php')),
     )
 ));
 
 // Render the cloud
 echo $cloud;
-</programlisting>
+]]></programlisting>
 
         <para>
             This will output the tag cloud with the three tags, spread with

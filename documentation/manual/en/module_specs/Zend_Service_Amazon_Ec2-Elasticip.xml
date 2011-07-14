@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.elasticip"><info><title>Zend_Service_Amazon_Ec2: Elastic IP Addresses</title></info>
     
 
@@ -38,13 +36,13 @@
             <code>allocate</code> returns the newly allocated ip.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $ec2_eip = new Zend_Service_Amazon_Ec2_Elasticip('aws_key','aws_secret_key');
-$ip = $ec2_eip-&gt;allocate();
+$ip = $ec2_eip->allocate();
 
 // print out your newly allocated elastic ip address;
 print $ip;
-</programlisting>
+]]></programlisting>
     </example>
 
     <example xml:id="zend.service.amazon.ec2.elasticip.describe"><info><title>Describing Allocated Elastic IP Addresses</title></info>
@@ -61,17 +59,17 @@ print $ip;
             Address which contains the publicIp and the instanceId if it is assocated.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $ec2_eip = new Zend_Service_Amazon_Ec2_Elasticip('aws_key','aws_secret_key');
 // describe all
-$ips = $ec2_eip-&gt;describe();
+$ips = $ec2_eip->describe();
 
 // describe a subset
-$ips = $ec2_eip-&gt;describe(array('ip1', 'ip2', 'ip3'));
+$ips = $ec2_eip->describe(array('ip1', 'ip2', 'ip3'));
 
 // describe a single ip address
-$ip = $ec2_eip-&gt;describe('ip1');
-</programlisting>
+$ip = $ec2_eip->describe('ip1');
+]]></programlisting>
     </example>
 
     <example xml:id="zend.service.amazon.ec2.elasticip.release"><info><title>Releasing Elastic IP</title></info>
@@ -85,10 +83,10 @@ $ip = $ec2_eip-&gt;describe('ip1');
             Returns a boolean <constant>TRUE</constant> or <constant>FALSE</constant>.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $ec2_eip = new Zend_Service_Amazon_Ec2_Elasticip('aws_key','aws_secret_key');
-$ec2_eip-&gt;release('ipaddress');
-</programlisting>
+$ec2_eip->release('ipaddress');
+]]></programlisting>
     </example>
 
     <example xml:id="zend.service.amazon.ec2.elasticip.associate"><info><title>Associates an Elastic IP to an Instance</title></info>
@@ -103,10 +101,10 @@ $ec2_eip-&gt;release('ipaddress');
             Returns a boolean <constant>TRUE</constant> or <constant>FALSE</constant>.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $ec2_eip = new Zend_Service_Amazon_Ec2_Elasticip('aws_key','aws_secret_key');
-$ec2_eip-&gt;associate('instance_id', 'ipaddress');
-</programlisting>
+$ec2_eip->associate('instance_id', 'ipaddress');
+]]></programlisting>
     </example>
 
     <example xml:id="zend.service.amazon.ec2.elasticip.disassociate"><info><title>Disassociate an Elastic IP from an instance</title></info>
@@ -122,9 +120,9 @@ $ec2_eip-&gt;associate('instance_id', 'ipaddress');
             Returns a boolean <constant>TRUE</constant> or <constant>FALSE</constant>.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $ec2_eip = new Zend_Service_Amazon_Ec2_Elasticip('aws_key','aws_secret_key');
-$ec2_eip-&gt;disassociate('ipaddress');
-</programlisting>
+$ec2_eip->disassociate('ipaddress');
+]]></programlisting>
     </example>
 </section>

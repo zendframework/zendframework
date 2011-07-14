@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tag.introduction"><info><title>Introduction</title></info>
     
 
@@ -38,23 +36,23 @@
             absolute weight values on them.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Create the item list
 $list = new Zend_Tag_ItemList();
 
 // Assign tags to it
-$list[] = new Zend_Tag_Item(array('title' =&gt; 'Code', 'weight' =&gt; 50));
-$list[] = new Zend_Tag_Item(array('title' =&gt; 'Zend Framework', 'weight' =&gt; 1));
-$list[] = new Zend_Tag_Item(array('title' =&gt; 'PHP', 'weight' =&gt; 5));
+$list[] = new Zend_Tag_Item(array('title' => 'Code', 'weight' => 50));
+$list[] = new Zend_Tag_Item(array('title' => 'Zend Framework', 'weight' => 1));
+$list[] = new Zend_Tag_Item(array('title' => 'PHP', 'weight' => 5));
 
 // Spread absolute values on the items
-$list-&gt;spreadWeightValues(array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+$list->spreadWeightValues(array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
 
 // Output the items with their absolute values
 foreach ($list as $item) {
-    printf("%s: %d\n", $item-&gt;getTitle(), $item-&gt;getParam('weightValue'));
+    printf("%s: %d\n", $item->getTitle(), $item->getParam('weightValue'));
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             This will output the three items Code, Zend Framework and <acronym>PHP</acronym> with

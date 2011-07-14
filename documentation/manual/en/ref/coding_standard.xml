@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="coding-standard"><info><title>Zend Framework Coding Standard for PHP</title></info>
     
 
@@ -204,28 +202,28 @@
                     <classname>Zend_Controller_Request_Abstract</classname> to use namespaces:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 namespace Zend\Controller\Request;
 
 abstract class Abstract
 {
     // ...
 }
-</programlisting>
+]]></programlisting>
 
                 <para>
                     Clearly, this will not work. Under the new naming conventions, however, this
                     would become:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 namespace Zend\Controller\Request;
 
 abstract class RequestAbstract
 {
     // ...
 }
-</programlisting>
+]]></programlisting>
 
                 <para>
                     We still retain the semantics and namespace separation, while omitting the
@@ -277,13 +275,13 @@ abstract class RequestAbstract
                 following examples show acceptable filenames for Zend Framework classes:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 Zend/Db.php
 
 Zend/Controller/Front.php
 
 Zend/View/Helper/FormRadio.php
-</programlisting>
+]]></programlisting>
 
             <para>
                 File names must map to class names as described above.
@@ -314,13 +312,13 @@ Zend/View/Helper/FormRadio.php
                 These are examples of acceptable names for functions:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 filterInput()
 
 getElementById()
 
 widgetFactory()
-</programlisting>
+]]></programlisting>
 
             <para>
                 For object-oriented programming, accessors for instance or static variables should
@@ -409,11 +407,11 @@ widgetFactory()
                 <acronym>PHP</acronym> tags:
             </para>
 
-            <programlisting language="php">
-&lt;?php
+            <programlisting language="php"><![CDATA[
+<?php
 
-?&gt;
-</programlisting>
+?>
+]]></programlisting>
 
             <para>
                 Short tags are never allowed. For files containing only <acronym>PHP</acronym>
@@ -432,9 +430,9 @@ widgetFactory()
                     "single quote" should always be used to demarcate the string:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $a = 'Example String';
-</programlisting>
+]]></programlisting>
             </section>
 
             <section xml:id="coding-standard.coding-style.strings.literals-containing-apostrophes"><info><title>String Literals Containing Apostrophes</title></info>
@@ -446,10 +444,10 @@ $a = 'Example String';
                     for <constant>SQL</constant> statements:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $sql = "SELECT `id`, `name` from `people` "
      . "WHERE `name`='Fred' OR `name`='Susan'";
-</programlisting>
+]]></programlisting>
 
                 <para>
                     This syntax is preferred over escaping apostrophes as it is much easier to read.
@@ -463,19 +461,19 @@ $sql = "SELECT `id`, `name` from `people` "
                     Variable substitution is permitted using either of these forms:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $greeting = "Hello $name, welcome back!";
 
 $greeting = "Hello {$name}, welcome back!";
-</programlisting>
+]]></programlisting>
 
                 <para>
                     For consistency, this form is not permitted:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $greeting = "Hello ${name}, welcome back!";
-</programlisting>
+]]></programlisting>
             </section>
 
             <section xml:id="coding-standard.coding-style.strings.string-concatenation"><info><title>String Concatenation</title></info>
@@ -486,9 +484,9 @@ $greeting = "Hello ${name}, welcome back!";
                     be added before and after the "." operator to improve readability:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $company = 'Zend' . ' ' . 'Technologies';
-</programlisting>
+]]></programlisting>
 
                 <para>
                     When concatenating strings with the "." operator, it is encouraged to
@@ -497,11 +495,11 @@ $company = 'Zend' . ' ' . 'Technologies';
                     "."; operator is aligned under the "=" operator:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $sql = "SELECT `id`, `name` FROM `people` "
      . "WHERE `name` = 'Susan' "
      . "ORDER BY `name` ASC ";
-</programlisting>
+]]></programlisting>
             </section>
         </section>
 
@@ -523,9 +521,9 @@ $sql = "SELECT `id`, `name` FROM `people` "
                     space must be added after each comma delimiter to improve readability:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $sampleArray = array(1, 2, 3, 'Zend', 'Studio');
-</programlisting>
+]]></programlisting>
 
                 <para>
                     It is permitted to declare multi-line indexed arrays using the "array"
@@ -533,11 +531,11 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio');
                     that beginning of each line is aligned:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
                      $a, $b, $c,
                      56.44, $d, 500);
-</programlisting>
+]]></programlisting>
 
                 <para>
                     Alternately, the initial array item may begin on the following line. If so,
@@ -547,13 +545,13 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
                     indentation level as the line containing the array declaration:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $sampleArray = array(
     1, 2, 3, 'Zend', 'Studio',
     $a, $b, $c,
     56.44, $d, 500,
 );
-</programlisting>
+]]></programlisting>
 
                 <para>
                     When using this latter declaration, we encourage using a trailing comma for
@@ -573,10 +571,10 @@ $sampleArray = array(
                     values are aligned:
                 </para>
 
-                <programlisting language="php">
-$sampleArray = array('firstKey'  =&gt; 'firstValue',
-                     'secondKey' =&gt; 'secondValue');
-</programlisting>
+                <programlisting language="php"><![CDATA[
+$sampleArray = array('firstKey'  => 'firstValue',
+                     'secondKey' => 'secondValue');
+]]></programlisting>
 
                 <para>
                     Alternately, the initial array item may begin on the following line. If so,
@@ -588,12 +586,12 @@ $sampleArray = array('firstKey'  =&gt; 'firstValue',
                     they align.
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $sampleArray = array(
-    'firstKey'  =&gt; 'firstValue',
-    'secondKey' =&gt; 'secondValue',
+    'firstKey'  => 'firstValue',
+    'secondKey' => 'secondValue',
 );
-</programlisting>
+]]></programlisting>
 
                 <para>
                     When using this latter declaration, we encourage using a trailing comma for
@@ -641,7 +639,7 @@ $sampleArray = array(
                     The following is an example of an acceptable class declaration:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 /**
  * Documentation Block Here
  */
@@ -650,18 +648,18 @@ class SampleClass
     // all contents of class
     // must be indented four spaces
 }
-</programlisting>
+]]></programlisting>
 
                 <para>
                     Classes that extend other classes or which implement interfaces should
                     declare their dependencies on the same line when possible.
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 class SampleClass extends FooAbstract implements BarInterface
 {
 }
-</programlisting>
+]]></programlisting>
 
                 <para>
                     If as a result of such declarations, the line length exceeds the <link linkend="coding-standard.php-file-formatting.max-line-length">maximum line
@@ -669,13 +667,13 @@ class SampleClass extends FooAbstract implements BarInterface
                     keywords, and pad those lines by one indentation level.
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 class SampleClass
     extends FooAbstract
     implements BarInterface
 {
 }
-</programlisting>
+]]></programlisting>
 
                 <para>
                     If the class implements multiple interfaces and the declaration exceeds the
@@ -683,13 +681,13 @@ class SampleClass
                     indent the interface names such that they align.
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 class SampleClass
     implements BarInterface,
                BazInterface
 {
 }
-</programlisting>
+]]></programlisting>
             </section>
 
             <section xml:id="coding-standard.coding-style.classes.member-variables"><info><title>Class Member Variables</title></info>
@@ -746,7 +744,7 @@ class SampleClass
                     The following is an example of an acceptable function declaration in a class:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 /**
  * Documentation Block Here
  */
@@ -761,7 +759,7 @@ class Foo
         // must be indented four spaces
     }
 }
-</programlisting>
+]]></programlisting>
 
                 <para>
                     In cases where the argument list exceeds the <link linkend="coding-standard.php-file-formatting.max-line-length">maximum line
@@ -774,7 +772,7 @@ class Foo
                     an example of one such situation:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 /**
  * Documentation Block Here
  */
@@ -790,7 +788,7 @@ class Foo
         // must be indented four spaces
     }
 }
-</programlisting>
+]]></programlisting>
 
                 <note>
                     <para>
@@ -799,7 +797,7 @@ class Foo
                     </para>
                 </note>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 /**
  * Documentation Block Here
  */
@@ -808,10 +806,10 @@ class Foo
     /**
      * Documentation Block Here
      */
-    public function bar(&amp;$baz)
+    public function bar(&$baz)
     {}
 }
-</programlisting>
+]]></programlisting>
 
                 <para>
                     Call-time pass-by-reference is strictly prohibited.
@@ -823,7 +821,7 @@ class Foo
                     return by reference.
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 /**
  * Documentation Block Here
  */
@@ -834,7 +832,7 @@ class Foo
      */
     public function bar()
     {
-        return($this-&gt;bar);
+        return($this->bar);
     }
 
     /**
@@ -842,10 +840,10 @@ class Foo
      */
     public function bar()
     {
-        return $this-&gt;bar;
+        return $this->bar;
     }
 }
-</programlisting>
+]]></programlisting>
             </section>
 
             <section xml:id="coding-standard.coding-style.functions-and-methods.usage"><info><title>Function and Method Usage</title></info>
@@ -857,9 +855,9 @@ class Foo
                     function that takes three arguments:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 threeArguments(1, 2, 3);
-</programlisting>
+]]></programlisting>
 
                 <para>
                     Call-time pass-by-reference is strictly prohibited. See the function
@@ -872,7 +870,7 @@ threeArguments(1, 2, 3);
                     such cases, the normal guidelines for writing arrays still apply:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 threeArguments(array(1, 2, 3), 2, 3);
 
 threeArguments(array(1, 2, 3, 'Zend', 'Studio',
@@ -884,7 +882,7 @@ threeArguments(array(
     $a, $b, $c,
     56.44, $d, 500
 ), 2, 3);
-</programlisting>
+]]></programlisting>
             </section>
         </section>
 
@@ -913,11 +911,11 @@ threeArguments(array(
                     must be indented using four spaces.
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 if ($a != 2) {
     $a = 2;
 }
-</programlisting>
+]]></programlisting>
 
                 <para>
                     If the conditional statement causes the line length to exceed the <link linkend="coding-standard.php-file-formatting.max-line-length">maximum line
@@ -929,14 +927,14 @@ if ($a != 2) {
                     equivalent to the opening control statement.
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 if (($a == $b)
-    &amp;&amp; ($b == $c)
+    && ($b == $c)
     || (Foo::CONST == $d)
 ) {
     $a = $d;
 }
-</programlisting>
+]]></programlisting>
 
                 <para>
                     The intention of this latter declaration format is to prevent issues when
@@ -949,7 +947,7 @@ if (($a == $b)
                     formatting for "if" statements with "else" and/or "elseif" constructs:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 if ($a != 2) {
     $a = 2;
 } else {
@@ -965,7 +963,7 @@ if ($a != 2) {
 }
 
 if (($a == $b)
-    &amp;&amp; ($b == $c)
+    && ($b == $c)
     || (Foo::CONST == $d)
 ) {
     $a = $d;
@@ -976,7 +974,7 @@ if (($a == $b)
 } else {
     $a = $b;
 }
-</programlisting>
+]]></programlisting>
 
                 <para>
                     <acronym>PHP</acronym> allows statements to be written without braces in some
@@ -1000,7 +998,7 @@ if (($a == $b)
                     spaces.
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 switch ($numPeople) {
     case 1:
         break;
@@ -1011,7 +1009,7 @@ switch ($numPeople) {
     default:
         break;
 }
-</programlisting>
+]]></programlisting>
 
                 <para>
                     The construct <property>default</property> should never be omitted from a
@@ -1059,7 +1057,7 @@ switch ($numPeople) {
                     the top of the file that contains these phpDocumentor tags at a minimum:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 /**
  * Short description for file
  *
@@ -1075,7 +1073,7 @@ switch ($numPeople) {
  * @link       http://framework.zend.com/package/PackageName
  * @since      File available since Release 1.5.0
 */
-</programlisting>
+]]></programlisting>
 
                 <para>
                     The <property>@category</property> annotation must have a value of "Zend".
@@ -1104,7 +1102,7 @@ switch ($numPeople) {
                     minimum:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 /**
  * Short description for class
  *
@@ -1120,7 +1118,7 @@ switch ($numPeople) {
  * @since      Class available since Release 1.5.0
  * @deprecated Class deprecated in Release 2.0.0
  */
-</programlisting>
+]]></programlisting>
 
                 <para>
                     The <property>@category</property> annotation must have a value of "Zend".
@@ -1166,9 +1164,9 @@ switch ($numPeople) {
                     exception classes:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 @throws exceptionclass [description]
-</programlisting>
+]]></programlisting>
             </section>
         </section>
     </section>

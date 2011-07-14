@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.books"><info><title>Using the Book Search Data API</title></info>
     
 
@@ -63,21 +61,21 @@
             the query term "domino":
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $books = new Zend_Gdata_Books();
-$query = $books-&gt;newVolumeQuery();
+$query = $books->newVolumeQuery();
 
-$query-&gt;setQuery('domino');
-$query-&gt;setMinViewability('partial_view');
+$query->setQuery('domino');
+$query->setMinViewability('partial_view');
 
-$feed = $books-&gt;getVolumeFeed($query);
+$feed = $books->getVolumeFeed($query);
 
 foreach ($feed as $entry) {
-    echo $entry-&gt;getVolumeId();
-    echo $entry-&gt;getTitle();
-    echo $entry-&gt;getViewability();
+    echo $entry->getVolumeId();
+    echo $entry->getTitle();
+    echo $entry->getViewability();
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             The <classname>Query</classname> class, and subclasses like
@@ -86,9 +84,9 @@ foreach ($feed as $entry) {
             equivalent to the following:
         </para>
 
-        <programlisting language="php">
-http://www.google.com/books/feeds/volumes?q=keyword&amp;amp;min-viewability=partial
-</programlisting>
+        <programlisting language="php"><![CDATA[
+http://www.google.com/books/feeds/volumes?q=keyword&min-viewability=partial
+]]></programlisting>
 
         <para>
             Note: Since Book Search results are
@@ -172,28 +170,28 @@ http://www.google.com/books/feeds/volumes?q=keyword&amp;amp;min-viewability=part
                 <acronym>URL</acronym>:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 http://www.google.com/books/p/PARTNER_COBRAND_ID?q=ball
-</programlisting>
+]]></programlisting>
 
             <para>
                 then you can obtain the same results using the Book Search Data
                 <acronym>API</acronym> at the following <acronym>URL</acronym>:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 http://www.google.com/books/feeds/p/PARTNER_COBRAND_ID/volumes?q=ball+-soccer
-</programlisting>
+]]></programlisting>
 
             <para>
                 To specify an alternate <acronym>URL</acronym> when querying a volume feed, you can
                 provide an extra parameter to <methodname>newVolumeQuery()</methodname>
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $query =
-    $books-&gt;newVolumeQuery('http://www.google.com/books/p/PARTNER_COBRAND_ID');
-</programlisting>
+    $books->newVolumeQuery('http://www.google.com/books/p/PARTNER_COBRAND_ID');
+]]></programlisting>
 
             <para>
                 For additional information or support, visit our
@@ -220,12 +218,12 @@ $query =
                 example below, we start from an empty <classname>VolumeEntry</classname> object.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $entry = new Zend_Gdata_Books_VolumeEntry();
-$entry-&gt;setId(new Zend_Gdata_App_Extension_Id(VOLUME_ID));
-$entry-&gt;setRating(new Zend_Gdata_Extension_Rating(3, 1, 5, 1));
-$books-&gt;insertVolume($entry, Zend_Gdata_Books::MY_ANNOTATION_FEED_URI);
-</programlisting>
+$entry->setId(new Zend_Gdata_App_Extension_Id(VOLUME_ID));
+$entry->setRating(new Zend_Gdata_Extension_Rating(3, 1, 5, 1));
+$books->insertVolume($entry, Zend_Gdata_Books::MY_ANNOTATION_FEED_URI);
+]]></programlisting>
         </section>
 
         <section xml:id="zend.gdata.books.reviews"><info><title>Reviews</title></info>
@@ -247,14 +245,14 @@ $books-&gt;insertVolume($entry, Zend_Gdata_Books::MY_ANNOTATION_FEED_URI);
                     <classname>VolumeEntry</classname> object.
                 </para>
 
-                <programlisting language="php">
-$annotationUrl = $entry-&gt;getAnnotationLink()-&gt;href;
+                <programlisting language="php"><![CDATA[
+$annotationUrl = $entry->getAnnotationLink()->href;
 $review        = new Zend_Gdata_Books_Extension_Review();
 
-$review-&gt;setText("This book is amazing!");
-$entry-&gt;setReview($review);
-$books-&gt;insertVolume($entry, $annotationUrl);
-</programlisting>
+$review->setText("This book is amazing!");
+$entry->setReview($review);
+$books->insertVolume($entry, $annotationUrl);
+]]></programlisting>
             </section>
 
             <section xml:id="zend.gdata.books.editing_review"><info><title>Editing a review</title></info>
@@ -266,14 +264,14 @@ $books-&gt;insertVolume($entry, $annotationUrl);
                     then you submit it to the annotation feed.
                 </para>
 
-                <programlisting language="php">
-$entryUrl = $entry-&gt;getId()-&gt;getText();
+                <programlisting language="php"><![CDATA[
+$entryUrl = $entry->getId()->getText();
 $review   = new Zend_Gdata_Books_Extension_Review();
 
-$review-&gt;setText("This book is actually not that good!");
-$entry-&gt;setReview($review);
-$books-&gt;updateVolume($entry, $entryUrl);
-</programlisting>
+$review->setText("This book is actually not that good!");
+$entry->setReview($review);
+$books->updateVolume($entry, $entryUrl);
+]]></programlisting>
             </section>
         </section>
 
@@ -296,14 +294,14 @@ $books-&gt;updateVolume($entry, $entryUrl);
                     <classname>VolumeEntry</classname> and post it to the annotation feed.
                 </para>
 
-                <programlisting language="php">
-$annotationUrl = $entry-&gt;getAnnotationLink()-&gt;href;
+                <programlisting language="php"><![CDATA[
+$annotationUrl = $entry->getAnnotationLink()->href;
 $category      = new Zend_Gdata_App_Extension_Category(
     'rated',
     'http://schemas.google.com/books/2008/labels');
-$entry-&gt;setCategory(array($category));
-$books-&gt;insertVolume($entry, Zend_Gdata_Books::MY_ANNOTATION_FEED_URI);
-</programlisting>
+$entry->setCategory(array($category));
+$books->insertVolume($entry, Zend_Gdata_Books::MY_ANNOTATION_FEED_URI);
+]]></programlisting>
             </section>
         </section>
 
@@ -319,22 +317,22 @@ $books-&gt;insertVolume($entry, Zend_Gdata_Books::MY_ANNOTATION_FEED_URI);
                 ID.
             </para>
 
-            <programlisting language="php">
-$feed = $books-&gt;getVolumeFeed(
+            <programlisting language="php"><![CDATA[
+$feed = $books->getVolumeFeed(
             'http://www.google.com/books/feeds/users/USER_ID/volumes');
-&lt;i&gt;(or)&lt;/i&gt;
-$feed = $books-&gt;getUserAnnotationFeed();
+<i>(or)</i>
+$feed = $books->getUserAnnotationFeed();
 
 // print title(s) and rating value
 foreach ($feed as $entry) {
-    foreach ($feed-&gt;getTitles() as $title) {
+    foreach ($feed->getTitles() as $title) {
         echo $title;
     }
-    if ($entry-&gt;getRating()) {
-        echo 'Rating: ' . $entry-&gt;getRating()-&gt;getAverage();
+    if ($entry->getRating()) {
+        echo 'Rating: ' . $entry->getRating()->getAverage();
     }
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 For a list of the supported query parameters, see the
@@ -352,9 +350,9 @@ foreach ($feed as $entry) {
                 by calling <methodname>deleteVolume()</methodname> on that entry.
             </para>
 
-            <programlisting language="php">
-$books-&gt;deleteVolume($entry);
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$books->deleteVolume($entry);
+]]></programlisting>
         </section>
     </section>
 
@@ -396,9 +394,9 @@ $books-&gt;deleteVolume($entry);
                     user, use <emphasis>me</emphasis> in place of <constant>USER_ID</constant>.
                 </para>
 
-                <programlisting language="php">
-$feed = $books-&gt;getUserLibraryFeed();
-</programlisting>
+                <programlisting language="php"><![CDATA[
+$feed = $books->getUserLibraryFeed();
+]]></programlisting>
 
                 <para>
                     Note: The feed may not contain all of the user's books, because
@@ -423,13 +421,13 @@ $feed = $books-&gt;getUserLibraryFeed();
                     your library that contain the word "bear":
                 </para>
 
-                <programlisting language="php">
-$query = $books-&gt;newVolumeQuery(
+                <programlisting language="php"><![CDATA[
+$query = $books->newVolumeQuery(
     'http://www.google.com/books/feeds/users' .
     '/USER_ID/collections/library/volumes');
-$query-&gt;setQuery('bear');
-$feed = $books-&gt;getVolumeFeed($query);
-</programlisting>
+$query->setQuery('bear');
+$feed = $books->getVolumeFeed($query);
+]]></programlisting>
 
                 <para>
                     For a list of the supported query parameters, see the
@@ -438,14 +436,14 @@ $feed = $books-&gt;getVolumeFeed($query);
                     <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#zend.gdata.books.labels">labeled by the user</link>:
                 </para>
 
-                <programlisting language="php">
-$query = $books-&gt;newVolumeQuery(
+                <programlisting language="php"><![CDATA[
+$query = $books->newVolumeQuery(
     'http://www.google.com/books/feeds/users/' .
     'USER_ID/collections/library/volumes');
-$query-&gt;setCategory(
-$query-&gt;setCategory('favorites');
-$feed = $books-&gt;getVolumeFeed($query);
-</programlisting>
+$query->setCategory(
+$query->setCategory('favorites');
+$feed = $books->getVolumeFeed($query);
+]]></programlisting>
             </section>
         </section>
 
@@ -475,26 +473,26 @@ $feed = $books-&gt;getVolumeFeed($query);
                     The following example creates a new entry and adds it to the library:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $entry = new Zend_Gdata_Books_VolumeEntry();
-$entry-&gt;setId(new Zend_Gdata_App_Extension_Id(VOLUME_ID));
-$books-&gt;insertVolume(
+$entry->setId(new Zend_Gdata_App_Extension_Id(VOLUME_ID));
+$books->insertVolume(
     $entry,
     Zend_Gdata_Books::MY_LIBRARY_FEED_URI
 );
-</programlisting>
+]]></programlisting>
 
                 <para>
                     The following example adds an existing
                     <classname>VolumeEntry</classname> object to the library:
                 </para>
 
-                <programlisting language="php">
-$books-&gt;insertVolume(
+                <programlisting language="php"><![CDATA[
+$books->insertVolume(
     $entry,
     Zend_Gdata_Books::MY_LIBRARY_FEED_URI
 );
-</programlisting>
+]]></programlisting>
             </section>
 
             <section xml:id="zend.gdata.books.library_book_remove"><info><title>Removing a book from a library</title></info>
@@ -506,9 +504,9 @@ $books-&gt;insertVolume(
                     <classname>VolumeEntry</classname> object.
                 </para>
 
-                <programlisting language="php">
-$books-&gt;deleteVolume($entry);
-</programlisting>
+                <programlisting language="php"><![CDATA[
+$books->deleteVolume($entry);
+]]></programlisting>
             </section>
         </section>
     </section>

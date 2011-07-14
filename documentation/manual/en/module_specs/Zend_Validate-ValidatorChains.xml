@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.validator_chains"><info><title>Validator Chains</title></info>
     
 
@@ -11,24 +9,24 @@
         between 6 and 12 alphanumeric characters:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 // Create a validator chain and add validators to it
 $validatorChain = new Zend_Validate();
-$validatorChain-&gt;addValidator(
-                    new Zend_Validate_StringLength(array('min' =&gt; 6,
-                                                         'max' =&gt; 12)))
-               -&gt;addValidator(new Zend_Validate_Alnum());
+$validatorChain->addValidator(
+                    new Zend_Validate_StringLength(array('min' => 6,
+                                                         'max' => 12)))
+               ->addValidator(new Zend_Validate_Alnum());
 
 // Validate the username
-if ($validatorChain-&gt;isValid($username)) {
+if ($validatorChain->isValid($username)) {
     // username passed validation
 } else {
     // username failed validation; print reasons
-    foreach ($validatorChain-&gt;getMessages() as $message) {
+    foreach ($validatorChain->getMessages() as $message) {
         echo "$message\n";
     }
 }
-</programlisting>
+]]></programlisting>
 
     <para>
         Validators are run in the order they were added to <classname>Zend_Validate</classname>. In
@@ -51,13 +49,13 @@ if ($validatorChain-&gt;isValid($username)) {
         length validation fails:
     </para>
 
-    <programlisting language="php">
-$validatorChain-&gt;addValidator(
-                    new Zend_Validate_StringLength(array('min' =&gt; 6,
-                                                         'max' =&gt; 12)),
+    <programlisting language="php"><![CDATA[
+$validatorChain->addValidator(
+                    new Zend_Validate_StringLength(array('min' => 6,
+                                                         'max' => 12)),
                     true)
-               -&gt;addValidator(new Zend_Validate_Alnum());
-</programlisting>
+               ->addValidator(new Zend_Validate_Alnum());
+]]></programlisting>
 
     <para>
         Any object that implements <classname>Zend_Validate_Interface</classname> may be used in a

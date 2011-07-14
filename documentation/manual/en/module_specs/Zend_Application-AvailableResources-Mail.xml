@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.mail"><info><title>Zend_Application_Resource_Mail</title></info>
     
 
@@ -25,7 +23,7 @@
             configure the mail resource plugin.
         </para>
 
-        <programlisting language="ini">
+        <programlisting language="ini"><![CDATA[
 resources.mail.transport.type = smtp
 resources.mail.transport.host = "smtp.example.com"
 resources.mail.transport.auth = login
@@ -37,7 +35,7 @@ resources.mail.defaultFrom.email = john@example.com
 resources.mail.defaultFrom.name = "John Doe"
 resources.mail.defaultReplyTo.email = Jane@example.com
 resources.mail.defaultReplyTo.name = "Jane Doe"
-</programlisting>
+]]></programlisting>
 
     </example>
 </section>

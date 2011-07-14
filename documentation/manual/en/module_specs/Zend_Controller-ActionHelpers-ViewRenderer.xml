@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.viewrenderer"><info><title>ViewRenderer</title></info>
     
 
@@ -93,12 +91,12 @@
                         helper broker:
                     </para>
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer();
-$viewRenderer-&gt;setView($view)
-             -&gt;setViewSuffix('php');
+$viewRenderer->setView($view)
+             ->setViewSuffix('php');
 Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
-</programlisting>
+]]></programlisting>
                 </listitem>
 
                 <listitem>
@@ -107,12 +105,12 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
                         object on demand via the helper broker:
                     </para>
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 $viewRenderer =
     Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
-$viewRenderer-&gt;setView($view)
-             -&gt;setViewSuffix('php');
-</programlisting>
+$viewRenderer->setView($view)
+             ->setViewSuffix('php');
+]]></programlisting>
                 </listitem>
             </itemizedlist>
         </note>
@@ -128,9 +126,9 @@ $viewRenderer-&gt;setView($view)
             the helper broker's <methodname>getStaticHelper()</methodname> method:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
-</programlisting>
+]]></programlisting>
 
         <para>
             The first time an action controller is instantiated, it will trigger
@@ -153,7 +151,7 @@ Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
             As an example, consider the following class:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // A controller class, foo module:
 class Foo_BarController extends Zend_Controller_Action
 {
@@ -166,15 +164,15 @@ class Foo_BarController extends Zend_Controller_Action
     // Since view object defined at preDispatch(), it's already available.
     public function populateAction()
     {
-        $this-&gt;view-&gt;foo = 'bar';
+        $this->view->foo = 'bar';
     }
 }
 
 ...
 
 // in one of your view scripts:
-$this-&gt;foo(); // call Foo_View_Helper_Foo::foo()
-</programlisting>
+$this->foo(); // call Foo_View_Helper_Foo::foo()
+]]></programlisting>
 
         <para>
             The <emphasis>ViewRenderer</emphasis> also defines a number of accessors to
@@ -280,14 +278,14 @@ $this-&gt;foo(); // call Foo_View_Helper_Foo::foo()
                     easily from your controller:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Render 'foo' instead of current action script
-$this-&gt;_helper-&gt;viewRenderer('foo');
+$this->_helper->viewRenderer('foo');
 
 // render form.phtml to the 'html' response segment, without using a
 // controller view script subdirectory:
-$this-&gt;_helper-&gt;viewRenderer('form', 'html', true);
-</programlisting>
+$this->_helper->viewRenderer('form', 'html', true);
+]]></programlisting>
 
                 <note>
                     <para>
@@ -306,12 +304,12 @@ $this-&gt;_helper-&gt;viewRenderer('form', 'html', true);
             <methodname>initView()</methodname>:
         </para>
 
-        <programlisting language="php">
-$view    = new Zend_View(array('encoding' =&gt; 'UTF-8'));
-$options = array('noController' =&gt; true, 'neverRender' =&gt; true);
+        <programlisting language="php"><![CDATA[
+$view    = new Zend_View(array('encoding' => 'UTF-8'));
+$options = array('noController' => true, 'neverRender' => true);
 $viewRenderer =
     new Zend_Controller_Action_Helper_ViewRenderer($view, $options);
-</programlisting>
+]]></programlisting>
 
         <para>
             There are several additional methods for customizing path
@@ -626,7 +624,7 @@ $viewRenderer =
                 bootstrap, and then set variables in your action methods.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // In your bootstrap:
 Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 
@@ -644,23 +642,23 @@ class Foo_BarController extends Zend_Controller_Action
     // Since view object defined at preDispatch(), it's already available.
     public function populateAction()
     {
-        $this-&gt;view-&gt;foo = 'bar';
+        $this->view->foo = 'bar';
     }
 
     // Renders nothing as it forwards to another action; the new action
     // will perform any rendering
     public function bazAction()
     {
-        $this-&gt;_forward('index');
+        $this->_forward('index');
     }
 
     // Renders nothing as it redirects to another location
     public function batAction()
     {
-        $this-&gt;_redirect('/index');
+        $this->_redirect('/index');
     }
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <note><info><title>Naming Conventions: Word Delimiters in Controller and Action Names</title></info>
@@ -707,14 +705,14 @@ class Foo_BarController extends Zend_Controller_Action
                 off for the current action (<methodname>setNoRender()</methodname>).
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Baz controller class, bar module:
 class Bar_BazController extends Zend_Controller_Action
 {
     public function fooAction()
     {
         // Don't auto render this action
-        $this-&gt;_helper-&gt;viewRenderer-&gt;setNoRender();
+        $this->_helper->viewRenderer->setNoRender();
     }
 }
 
@@ -724,10 +722,10 @@ class Bar_BatController extends Zend_Controller_Action
     public function preDispatch()
     {
         // Never auto render this controller's actions
-        $this-&gt;_helper-&gt;viewRenderer-&gt;setNoRender();
+        $this->_helper->viewRenderer->setNoRender();
     }
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <note>
@@ -753,20 +751,20 @@ class Bar_BatController extends Zend_Controller_Action
                 <methodname>setRender()</methodname>.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Bar controller class, foo module:
 class Foo_BarController extends Zend_Controller_Action
 {
     public function addAction()
     {
         // Render 'bar/form.phtml' instead of 'bar/add.phtml'
-        $this-&gt;_helper-&gt;viewRenderer('form');
+        $this->_helper->viewRenderer('form');
     }
 
     public function editAction()
     {
         // Render 'bar/form.phtml' instead of 'bar/edit.phtml'
-        $this-&gt;_helper-&gt;viewRenderer-&gt;setScriptAction('form');
+        $this->_helper->viewRenderer->setScriptAction('form');
     }
 
     public function processAction()
@@ -774,7 +772,7 @@ class Foo_BarController extends Zend_Controller_Action
         // do some validation...
         if (!$valid) {
             // Render 'bar/form.phtml' instead of 'bar/process.phtml'
-            $this-&gt;_helper-&gt;viewRenderer-&gt;setRender('form');
+            $this->_helper->viewRenderer->setRender('form');
             return;
         }
 
@@ -782,7 +780,7 @@ class Foo_BarController extends Zend_Controller_Action
     }
 
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <example xml:id="zend.controller.actionhelper.viewrenderer.basicusage.example-4"><info><title>Modifying the Registered View</title></info>
@@ -796,24 +794,24 @@ class Foo_BarController extends Zend_Controller_Action
                 both are references to the same object.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Bar controller class, foo module:
 class Foo_BarController extends Zend_Controller_Action
 {
     public function preDispatch()
     {
         // change view encoding
-        $this-&gt;view-&gt;setEncoding('UTF-8');
+        $this->view->setEncoding('UTF-8');
     }
 
     public function bazAction()
     {
         // Get view object and set escape callback to 'htmlspecialchars'
-        $view = $this-&gt;_helper-&gt;viewRenderer-&gt;view;
-        $view-&gt;setEscape('htmlspecialchars');
+        $view = $this->_helper->viewRenderer->view;
+        $view->setEscape('htmlspecialchars');
     }
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -845,7 +843,7 @@ class Foo_BarController extends Zend_Controller_Action
                 want to use 'tpl' as the view script filename suffix.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 /**
  * In your bootstrap:
  */
@@ -854,12 +852,12 @@ class Foo_BarController extends Zend_Controller_Action
 $view = new ZF_Smarty();
 
 $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer($view);
-$viewRenderer-&gt;setViewBasePathSpec('/opt/vendor/templates')
-             -&gt;setViewScriptPathSpec(':module/:controller/:action.:suffix')
-             -&gt;setViewScriptPathNoControllerSpec(':action.:suffix')
-             -&gt;setViewSuffix('tpl');
+$viewRenderer->setViewBasePathSpec('/opt/vendor/templates')
+             ->setViewScriptPathSpec(':module/:controller/:action.:suffix')
+             ->setViewScriptPathNoControllerSpec(':action.:suffix')
+             ->setViewSuffix('tpl');
 Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
-</programlisting>
+]]></programlisting>
         </example>
 
         <example xml:id="zend.controller.actionhelper.viewrenderer.advancedusage.example-2"><info><title>Rendering Multiple View Scripts from a Single Action</title></info>
@@ -871,19 +869,19 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
                 multiple calls to <methodname>render()</methodname>:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class SearchController extends Zend_Controller_Action
 {
     public function resultsAction()
     {
-        // Assume $this-&gt;model is the current model
-        $this-&gt;view-&gt;results =
-            $this-&gt;model-&gt;find($this-&gt;_getParam('query', '');
+        // Assume $this->model is the current model
+        $this->view->results =
+            $this->model->find($this->_getParam('query', '');
 
         // render() by default proxies to the ViewRenderer
         // Render first the search form and then the results
-        $this-&gt;render('form');
-        $this-&gt;render('results');
+        $this->render('form');
+        $this->render('results');
     }
 
     public function formAction()
@@ -891,7 +889,7 @@ class SearchController extends Zend_Controller_Action
         // do nothing; ViewRenderer autorenders the view script
     }
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 </section>

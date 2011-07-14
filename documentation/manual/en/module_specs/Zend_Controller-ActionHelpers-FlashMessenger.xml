@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.flashmessenger"><info><title>FlashMessenger</title></info>
     
 
@@ -32,7 +30,7 @@
             it as well).
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class SomeController extends Zend_Controller_Action
 {
     /**
@@ -44,9 +42,9 @@ class SomeController extends Zend_Controller_Action
 
     public function init()
     {
-        $this-&gt;_flashMessenger =
-            $this-&gt;_helper-&gt;getHelper('FlashMessenger');
-        $this-&gt;initView();
+        $this->_flashMessenger =
+            $this->_helper->getHelper('FlashMessenger');
+        $this->initView();
     }
 
     public function myAction()
@@ -56,15 +54,15 @@ class SomeController extends Zend_Controller_Action
          * Zend_Controller_Action_Helper_FlashMessenger instance
          * on-demand
          */
-        $this-&gt;_flashMessenger-&gt;addMessage('Record Saved!');
+        $this->_flashMessenger->addMessage('Record Saved!');
     }
 
     public function myNextRequestAction()
     {
-        $this-&gt;view-&gt;messages = $this-&gt;_flashMessenger-&gt;getMessages();
-        $this-&gt;render();
+        $this->view->messages = $this->_flashMessenger->getMessages();
+        $this->render();
     }
 }
-</programlisting>
+]]></programlisting>
     </section>
 </section>

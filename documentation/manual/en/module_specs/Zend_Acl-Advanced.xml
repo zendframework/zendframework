@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.advanced"><info><title>Advanced Usage</title></info>
     
 
@@ -47,7 +45,7 @@
             <methodname>assert()</methodname> method of the interface:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class CleanIPAssertion implements Zend_Acl_Assert_Interface
 {
     public function assert(Zend_Acl $acl,
@@ -55,7 +53,7 @@ class CleanIPAssertion implements Zend_Acl_Assert_Interface
                            Zend_Acl_Resource_Interface $resource = null,
                            $privilege = null)
     {
-        return $this-&gt;_isCleanIP($_SERVER['REMOTE_ADDR']);
+        return $this->_isCleanIP($_SERVER['REMOTE_ADDR']);
     }
 
     protected function _isCleanIP($ip)
@@ -63,7 +61,7 @@ class CleanIPAssertion implements Zend_Acl_Assert_Interface
         // ...
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Once an assertion class is available, the developer must supply an instance of the
@@ -71,10 +69,10 @@ class CleanIPAssertion implements Zend_Acl_Assert_Interface
             assertion only applies when the assertion method returns <constant>TRUE</constant>.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $acl = new Zend_Acl();
-$acl-&gt;allow(null, null, null, new CleanIPAssertion());
-</programlisting>
+$acl->allow(null, null, null, new CleanIPAssertion());
+]]></programlisting>
 
         <para>
             The above code creates a conditional allow rule that allows access to all privileges

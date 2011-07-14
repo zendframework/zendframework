@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.cloudwatch"><info><title>Zend_Service_Amazon_Ec2: CloudWatch Monitoring</title></info>
     
 
@@ -24,10 +22,10 @@
                 that can be used to query for the next set of results.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_CloudWatch('aws_key','aws_secret_key');
-$return = $ec2_ebs-&gt;listMetrics();
-</programlisting>
+$return = $ec2_ebs->listMetrics();
+]]></programlisting>
         </example>
 
         <example xml:id="zend.service.amazon.ec2.cloudwatch.usage.getmetricstatistics"><info><title>Return Statistics for a given metric</title></info>
@@ -130,12 +128,12 @@ $return = $ec2_ebs-&gt;listMetrics();
                 </listitem>
             </itemizedlist>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_CloudWatch('aws_key','aws_secret_key');
-$return = $ec2_ebs-&gt;getMetricStatistics(
-                                     array('MeasureName' =&gt; 'NetworkIn',
-                                           'Statistics' =&gt; array('Average')));
-</programlisting>
+$return = $ec2_ebs->getMetricStatistics(
+                                     array('MeasureName' => 'NetworkIn',
+                                           'Statistics' => array('Average')));
+]]></programlisting>
         </example>
     </section>
 </section>

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.18"><info><title>Zend Framework 1.8</title></info>
     
 
@@ -48,9 +46,9 @@
             <example xml:id="migration.18.zend.locale.defaultcaching.example"><info><title>Disabling default caching</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 Zend_Locale::disableCache(true);
-</programlisting>
+]]></programlisting>
             </example>
         </section>
     </section>

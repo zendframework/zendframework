@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.stringtolower"><info><title>StringToLower</title></info>
     
 
@@ -33,12 +31,12 @@
             This is a basic example:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_StringToLower();
 
-print $filter-&gt;filter('SAMPLE');
+print $filter->filter('SAMPLE');
 // returns "sample"
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.filter.set.stringtolower.encoding"><info><title>Different encoded strings</title></info>
@@ -53,16 +51,16 @@ print $filter-&gt;filter('SAMPLE');
             <methodname>setEncoding()</methodname> method to change the encoding afterwards.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // using UTF-8
 $filter = new Zend_Filter_StringToLower('UTF-8');
 
 // or give an array which can be useful when using a configuration
-$filter = new Zend_Filter_StringToLower(array('encoding' =&gt; 'UTF-8'));
+$filter = new Zend_Filter_StringToLower(array('encoding' => 'UTF-8'));
 
 // or do this afterwards
-$filter-&gt;setEncoding('ISO-8859-1');
-</programlisting>
+$filter->setEncoding('ISO-8859-1');
+]]></programlisting>
 
         <note><info><title>Setting wrong encodings</title></info>
             

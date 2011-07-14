@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap-dn"><info><title>Zend_Ldap_Dn</title></info>
     
 
@@ -268,14 +266,14 @@
                             DN values. The resulting array will be of type
                         </para>
 
-                        <programlisting language="php">
+                        <programlisting language="php"><![CDATA[
 array(
-array("cn" =&gt; "name1", "uid" =&gt; "user"),
-array("cn" =&gt; "name2"),
-array("dc" =&gt; "example"),
-array("dc" =&gt; "org")
+array("cn" => "name1", "uid" => "user"),
+array("cn" => "name2"),
+array("dc" => "example"),
+array("dc" => "org")
 )
-</programlisting>
+]]></programlisting>
 
                         <para>
                             for a DN of <code>cn=name1+uid=user,cn=name2,dc=example,dc=org</code>.
@@ -326,14 +324,14 @@ array("dc" =&gt; "org")
                             must of type
                         </para>
 
-                        <programlisting language="php">
+                        <programlisting language="php"><![CDATA[
 array(
-array("cn" =&gt; "name1", "uid" =&gt; "user"),
-array("cn" =&gt; "name2"),
-array("dc" =&gt; "example"),
-array("dc" =&gt; "org")
+array("cn" => "name1", "uid" => "user"),
+array("cn" => "name2"),
+array("dc" => "example"),
+array("dc" => "org")
 )
-</programlisting>
+]]></programlisting>
                     </entry>
                 </row>
 

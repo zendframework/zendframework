@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.soap.wsdl"><info><title>WSDL Accessor</title></info>
     
 
@@ -433,20 +431,20 @@
                 specified <acronym>PHP</acronym> type:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 ...
 $wsdl = new Zend_Soap_Wsdl('My_Web_Service', $myWebServiceUri);
 
 ...
-$soapIntType = $wsdl-&gt;getType('int');
+$soapIntType = $wsdl->getType('int');
 
 ...
 class MyClass {
     ...
 }
 ...
-$soapMyClassType = $wsdl-&gt;getType('MyClass');
-</programlisting>
+$soapMyClassType = $wsdl->getType('MyClass');
+]]></programlisting>
         </section>
 
         <section xml:id="zend.soap.wsdl.types.add_complex"><info><title>Adding complex type information</title></info>

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.searching"><info><title>Searching</title></info>
     
 
@@ -11,13 +9,13 @@
     <example xml:id="learning.lucene.searching.search-example"><info><title>Searching through the index</title></info>
         
 
-        <programlisting language="php">
-$hits = $index-&gt;find($query);
+        <programlisting language="php"><![CDATA[
+$hits = $index->find($query);
 
 foreach ($hits as $hit) {
-    printf("%d %f %s\n", $hit-&gt;id, $hit-&gt;score, $hit-&gt;title);
+    printf("%d %f %s\n", $hit->id, $hit->score, $hit->title);
 }
-</programlisting>
+]]></programlisting>
     </example>
 
     <para>
@@ -34,9 +32,9 @@ foreach ($hits as $hit) {
     <example xml:id="learning.lucene.searching.delete-example"><info><title>Deleting an Indexed Document</title></info>
         
 
-        <programlisting language="php">
-$index-&gt;delete($id);
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$index->delete($id);
+]]></programlisting>
     </example>
 
     <para>
@@ -46,9 +44,9 @@ $index-&gt;delete($id);
     <example xml:id="learning.lucene.searching.retrieve-example"><info><title>Retrieving an Indexed Document</title></info>
         
 
-        <programlisting language="php">
-$doc = $index-&gt;getDocument($id);
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$doc = $index->getDocument($id);
+]]></programlisting>
     </example>
 
     <note xml:id="learning.lucene.searching.identifiers"><info><title>Internal Document Identifiers</title></info>
@@ -90,9 +88,9 @@ $doc = $index-&gt;getDocument($id);
     <example xml:id="learning.lucene.searching.id-score-fields"><info><title>Accessing the original document's "id" and "score" fields</title></info>
         
 
-        <programlisting language="php">
-$id    = $hit-&gt;getDocument()-&gt;id;
-$score = $hit-&gt;getDocument()-&gt;score;
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$id    = $hit->getDocument()->id;
+$score = $hit->getDocument()->score;
+]]></programlisting>
     </example>
 </section>

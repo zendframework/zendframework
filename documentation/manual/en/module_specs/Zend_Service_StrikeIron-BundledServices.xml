@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.strikeiron.bundled-services"><info><title>Zend_Service_StrikeIron: Bundled Services</title></info>
     
 
@@ -37,43 +35,43 @@
             information about a United States ZIP code or Canadian postal code:
         </para>
 
-        <programlisting language="php">
-$strikeIron = new Zend_Service_StrikeIron(array('username' =&gt; 'your-username',
-                                                'password' =&gt; 'your-password'));
+        <programlisting language="php"><![CDATA[
+$strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
+                                                'password' => 'your-password'));
 
 // Get a client for the Zip Code Information service
-$zipInfo = $strikeIron-&gt;getService(array('class' =&gt; 'ZipCodeInfo'));
+$zipInfo = $strikeIron->getService(array('class' => 'ZipCodeInfo'));
 
 // Get the Zip information for 95014
-$response = $zipInfo-&gt;getZipCode(array('ZipCode' =&gt; 95014));
-$zips = $response-&gt;serviceResult;
+$response = $zipInfo->getZipCode(array('ZipCode' => 95014));
+$zips = $response->serviceResult;
 
 // Display the results
-if ($zips-&gt;count == 0) {
+if ($zips->count == 0) {
     echo 'No results found';
 } else {
     // a result with one single zip code is returned as an object,
     // not an array with one element as one might expect.
-    if (! is_array($zips-&gt;zipCodes)) {
-        $zips-&gt;zipCodes = array($zips-&gt;zipCodes);
+    if (! is_array($zips->zipCodes)) {
+        $zips->zipCodes = array($zips->zipCodes);
     }
 
     // print all of the possible results
-    foreach ($zips-&gt;zipCodes as $z) {
-        $info = $z-&gt;zipCodeInfo;
+    foreach ($zips->zipCodes as $z) {
+        $info = $z->zipCodeInfo;
 
         // show all properties
         print_r($info);
 
         // or just the city name
-        echo $info-&gt;preferredCityName;
+        echo $info->preferredCityName;
     }
 }
 
 // Detailed status information
 // http://www.strikeiron.com/exampledata/StrikeIronZipCodeInformation_v3.pdf
-$status = $response-&gt;serviceStatus;
-</programlisting>
+$status = $response->serviceStatus;
+]]></programlisting>
     </section>
 
     <section xml:id="zend.service.strikeiron.bundled-services.us-address-verification"><info><title>U.S. Address Verification</title></info>
@@ -106,38 +104,38 @@ $status = $response-&gt;serviceStatus;
             verify an address in the United States:
         </para>
 
-        <programlisting language="php">
-$strikeIron = new Zend_Service_StrikeIron(array('username' =&gt; 'your-username',
-                                                'password' =&gt; 'your-password'));
+        <programlisting language="php"><![CDATA[
+$strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
+                                                'password' => 'your-password'));
 
 // Get a client for the Zip Code Information service
-$verifier = $strikeIron-&gt;getService(array('class' =&gt; 'USAddressVerification'));
+$verifier = $strikeIron->getService(array('class' => 'USAddressVerification'));
 
 // Address to verify. Not all fields are required but
 // supply as many as possible for the best results.
-$address = array('firm'           =&gt; 'Zend Technologies',
-                 'addressLine1'   =&gt; '19200 Stevens Creek Blvd',
-                 'addressLine2'   =&gt; '',
-                 'city_state_zip' =&gt; 'Cupertino CA 95014');
+$address = array('firm'           => 'Zend Technologies',
+                 'addressLine1'   => '19200 Stevens Creek Blvd',
+                 'addressLine2'   => '',
+                 'city_state_zip' => 'Cupertino CA 95014');
 
 // Verify the address
-$result = $verifier-&gt;verifyAddressUSA($address);
+$result = $verifier->verifyAddressUSA($address);
 
 // Display the results
-if ($result-&gt;addressErrorNumber != 0) {
-    echo $result-&gt;addressErrorNumber;
-    echo $result-&gt;addressErrorMessage;
+if ($result->addressErrorNumber != 0) {
+    echo $result->addressErrorNumber;
+    echo $result->addressErrorMessage;
 } else {
     // show all properties
     print_r($result);
 
     // or just the firm name
-    echo $result-&gt;firm;
+    echo $result->firm;
 
     // valid address?
-    $valid = ($result-&gt;valid == 'VALID');
+    $valid = ($result->valid == 'VALID');
 }
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.service.strikeiron.bundled-services.sales-use-tax-basic"><info><title>Sales &amp; Use Tax Basic</title></info>
@@ -171,22 +169,22 @@ if ($result-&gt;addressErrorNumber != 0) {
             for the United States and Canada, respectively.
         </para>
 
-        <programlisting language="php">
-$strikeIron = new Zend_Service_StrikeIron(array('username' =&gt; 'your-username',
-                                                'password' =&gt; 'your-password'));
+        <programlisting language="php"><![CDATA[
+$strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
+                                                'password' => 'your-password'));
 
-// Get a client for the Sales &amp; Use Tax Basic service
-$taxBasic = $strikeIron-&gt;getService(array('class' =&gt; 'SalesUseTaxBasic'));
+// Get a client for the Sales & Use Tax Basic service
+$taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
 
 // Query tax rate for Ontario, Canada
-$rateInfo = $taxBasic-&gt;getTaxRateCanada(array('province' =&gt; 'foo'));
+$rateInfo = $taxBasic->getTaxRateCanada(array('province' => 'foo'));
 print_r($rateInfo);               // show all properties
-echo $rateInfo-&gt;GST;              // or just the GST (Goods &amp; Services Tax)
+echo $rateInfo->GST;              // or just the GST (Goods & Services Tax)
 
 // Query tax rate for Cupertino, CA USA
-$rateInfo = $taxBasic-&gt;getTaxRateUS(array('zip_code' =&gt; 95014));
+$rateInfo = $taxBasic->getTaxRateUS(array('zip_code' => 95014));
 print_r($rateInfo);               // show all properties
-echo $rateInfo-&gt;state_sales_tax;  // or just the state sales tax
-</programlisting>
+echo $rateInfo->state_sales_tax;  // or just the state sales tax
+]]></programlisting>
     </section>
 </section>

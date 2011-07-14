@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.fetching"><info><title>Fetching Options and Arguments</title></info>
     
 
@@ -40,15 +38,15 @@
         <example xml:id="zend.console.getopt.fetching.exceptions.example"><info><title>Catching Getopt Exceptions</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 try {
     $opts = new Zend_Console_Getopt('abp:');
-    $opts-&gt;parse();
+    $opts->parse();
 } catch (Zend_Console_Getopt_Exception $e) {
-    echo $e-&gt;getUsageMessage();
+    echo $e->getUsageMessage();
     exit;
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -92,11 +90,11 @@ try {
         <example xml:id="zend.console.getopt.fetching.byname.example.setoption"><info><title>Using getOption()</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
-$b = $opts-&gt;getOption('b');
-$p_parameter = $opts-&gt;getOption('p');
-</programlisting>
+$b = $opts->getOption('b');
+$p_parameter = $opts->getOption('p');
+]]></programlisting>
         </example>
 
         <para>
@@ -109,13 +107,13 @@ $p_parameter = $opts-&gt;getOption('p');
         <example xml:id="zend.console.getopt.fetching.byname.example.magic"><info><title>Using __get() and __isset() Magic Methods</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
-if (isset($opts-&gt;b)) {
+if (isset($opts->b)) {
     echo "I got the b option.\n";
 }
-$p_parameter = $opts-&gt;p; // null if not set
-</programlisting>
+$p_parameter = $opts->p; // null if not set
+]]></programlisting>
         </example>
 
         <para>
@@ -189,11 +187,11 @@ $p_parameter = $opts-&gt;p; // null if not set
         <example xml:id="zend.console.getopt.fetching.remainingargs.example"><info><title>Using getRemainingArgs()</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
-$opts-&gt;setArguments(array('-p', 'p_parameter', 'filename'));
-$args = $opts-&gt;getRemainingArgs(); // returns array('filename')
-</programlisting>
+$opts->setArguments(array('-p', 'p_parameter', 'filename'));
+$args = $opts->getRemainingArgs(); // returns array('filename')
+]]></programlisting>
         </example>
 
         <para>

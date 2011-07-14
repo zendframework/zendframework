@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.actionstack"><info><title>ActionStack</title></info>
     
 
@@ -33,7 +31,7 @@
             calling <methodname>Zend_Controller_Action::_forward()</methodname>:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -41,17 +39,17 @@ class FooController extends Zend_Controller_Action
         // Add two actions to the stack
         // Add call to /foo/baz/bar/baz
         // (FooController::bazAction() with request var bar == baz)
-        $this-&gt;_helper-&gt;actionStack('baz',
+        $this->_helper->actionStack('baz',
                                     'foo',
                                     'default',
-                                    array('bar' =&gt; 'baz'));
+                                    array('bar' => 'baz'));
 
         // Add call to /bar/bat
         // (BarController::batAction())
-        $this-&gt;_helper-&gt;actionStack('bat', 'bar');
+        $this->_helper->actionStack('bat', 'bar');
     }
 }
-</programlisting>
+]]></programlisting>
     </example>
 
     <example xml:id="zend.controller.actionhelpers.actionstack.simple2"><info><title>Adding a Task Using a Request Object</title></info>
@@ -63,7 +61,7 @@ class FooController extends Zend_Controller_Action
             well.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -71,21 +69,21 @@ class FooController extends Zend_Controller_Action
         // Add two actions to the stack
         // Add call to /foo/baz/bar/baz
         // (FooController::bazAction() with request var bar == baz)
-        $request = clone $this-&gt;getRequest();
+        $request = clone $this->getRequest();
         // Don't set controller or module; use current values
-        $request-&gt;setActionName('baz')
-                -&gt;setParams(array('bar' =&gt; 'baz'));
-        $this-&gt;_helper-&gt;actionStack($request);
+        $request->setActionName('baz')
+                ->setParams(array('bar' => 'baz'));
+        $this->_helper->actionStack($request);
 
         // Add call to /bar/bat
         // (BarController::batAction())
-        $request = clone $this-&gt;getRequest();
+        $request = clone $this->getRequest();
         // don't set module; use current value
-        $request-&gt;setActionName('bat')
-                -&gt;setControllerName('bar');
-        $this-&gt;_helper-&gt;actionStack($request);
+        $request->setActionName('bat')
+                ->setControllerName('bar');
+        $this->_helper->actionStack($request);
     }
 }
-</programlisting>
+]]></programlisting>
     </example>
 </section>

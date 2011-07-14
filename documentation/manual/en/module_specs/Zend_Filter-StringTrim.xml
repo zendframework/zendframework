@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.stringtrim"><info><title>StringTrim</title></info>
     
 
@@ -35,11 +33,11 @@
             A basic example of usage is below:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_StringTrim();
 
-print $filter-&gt;filter(' This is (my) content: ');
-</programlisting>
+print $filter->filter(' This is (my) content: ');
+]]></programlisting>
 
         <para>
             The above example returns 'This is (my) content:'. Notice that the whitespace characters
@@ -50,12 +48,12 @@ print $filter-&gt;filter(' This is (my) content: ');
     <section xml:id="zend.filter.set.stringtrim.types"><info><title>Default behaviour for Zend_Filter_StringTrim</title></info>
         
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_StringTrim(':');
-// or new Zend_Filter_StringTrim(array('charlist' =&gt; ':'));
+// or new Zend_Filter_StringTrim(array('charlist' => ':'));
 
-print $filter-&gt;filter(' This is (my) content:');
-</programlisting>
+print $filter->filter(' This is (my) content:');
+]]></programlisting>
 
         <para>
             The above example returns 'This is (my) content'. Notice that the whitespace characters

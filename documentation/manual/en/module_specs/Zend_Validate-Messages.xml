@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.messages"><info><title>Validation Messages</title></info>
     
 
@@ -16,11 +14,11 @@
         Let's look into <classname>Zend_Validate_GreaterThan</classname> for an descriptive example:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 protected $_messageTemplates = array(
-    self::NOT_GREATER =&gt; "'%value%' is not greater than '%min%'",
+    self::NOT_GREATER => "'%value%' is not greater than '%min%'",
 );
-</programlisting>
+]]></programlisting>
 
     <para>
         As you can see the constant <constant>self::NOT_GREATER</constant> refers to the failure and
@@ -33,23 +31,23 @@ protected $_messageTemplates = array(
         contains all messages a validator could return in the case of a failed validation.
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_GreaterThan();
-$messages  = $validator-&gt;getMessageTemplates();
-</programlisting>
+$messages  = $validator->getMessageTemplates();
+]]></programlisting>
 
     <para>
         Using the <methodname>setMessage()</methodname> method you can set another message to be
         returned in case of the specified failure.
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_GreaterThan();
-$validator-&gt;setMessage(
+$validator->setMessage(
     'Please enter a lower value',
     Zend_Validate_GreaterThan::NOT_GREATER
 );
-</programlisting>
+]]></programlisting>
 
     <para>
         The second parameter defines the failure which will be overridden. When you omit this
@@ -81,17 +79,17 @@ $validator-&gt;setMessage(
             attach a translator to <classname>Zend_Validate</classname> using these resource files.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $translator = new Zend_Translate(
     array(
-        'adapter' =&gt; 'array',
-        'content' =&gt; '/resources/languages',
-        'locale'  =&gt; $language,
-        'scan' =&gt; Zend_Translate::LOCALE_DIRECTORY
+        'adapter' => 'array',
+        'content' => '/resources/languages',
+        'locale'  => $language,
+        'scan' => Zend_Translate::LOCALE_DIRECTORY
     )
 );
 Zend_Validate_Abstract::setDefaultTranslator($translator);
-</programlisting>
+]]></programlisting>
 
         <note><info><title>Used translation adapter</title></info>
             
@@ -142,9 +140,9 @@ Zend_Validate_Abstract::setDefaultTranslator($translator);
             the rest of the message.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 Zend_Validate::setMessageLength(100);
-</programlisting>
+]]></programlisting>
 
         <note><info><title>Where is this parameter used?</title></info>
             

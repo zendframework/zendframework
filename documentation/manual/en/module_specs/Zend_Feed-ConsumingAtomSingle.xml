@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom-single-entry"><info><title>Consuming a Single Atom Entry</title></info>
     
 
@@ -20,12 +18,12 @@
     <example xml:id="zend.feed.consuming-atom-single-entry.example.atom"><info><title>Reading a Single-Entry Atom Feed</title></info>
         
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
-echo 'The feed has: ' . $feed-&gt;count() . ' entry.';
+echo 'The feed has: ' . $feed->count() . ' entry.';
 
-$entry = $feed-&gt;current();
-</programlisting>
+$entry = $feed->current();
+]]></programlisting>
     </example>
 
     <para>
@@ -36,9 +34,9 @@ $entry = $feed-&gt;current();
     <example xml:id="zend.feed.consuming-atom-single-entry.example.entryatom"><info><title>Using the Entry Object Directly for a Single-Entry Atom Feed</title></info>
         
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $entry = new Zend_Feed_Entry_Atom('http://atom.example.com/feed/1');
-echo $entry-&gt;title();
-</programlisting>
+echo $entry->title();
+]]></programlisting>
     </example>
 </section>

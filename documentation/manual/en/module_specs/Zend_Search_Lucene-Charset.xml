@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.charset"><info><title>Character Set</title></info>
     
 
@@ -83,10 +81,10 @@
             Any of this analyzers can be enabled with the code like this:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 Zend_Search_Lucene_Analysis_Analyzer::setDefault(
     new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8());
-</programlisting>
+]]></programlisting>
 
         <warning><info><title/></info>
             
@@ -114,13 +112,13 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
             Use the following code to check, if PCRE UTF-8 support is enabled:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 if (@preg_match('/\pL/u', 'a') == 1) {
     echo "PCRE unicode support is turned on.\n";
 } else {
     echo "PCRE unicode support is turned off.\n";
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Case insensitive versions of UTF-8 compatible analyzers also need <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/ref.mbstring.php">mbstring</link> extension to
@@ -133,7 +131,7 @@ if (@preg_match('/\pL/u', 'a') == 1) {
             string before searching by converting them to lowercase:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Indexing
 setlocale(LC_CTYPE, 'de_DE.iso-8859-1');
 
@@ -146,18 +144,18 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 
 $doc = new Zend_Search_Lucene_Document();
 
-$doc-&gt;addField(Zend_Search_Lucene_Field::UnStored('contents',
+$doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
                                                   strtolower($contents)));
 
 // Title field for search through (indexed, unstored)
-$doc-&gt;addField(Zend_Search_Lucene_Field::UnStored('title',
+$doc->addField(Zend_Search_Lucene_Field::UnStored('title',
                                                   strtolower($title)));
 
 // Title field for retrieving (unindexed, stored)
-$doc-&gt;addField(Zend_Search_Lucene_Field::UnIndexed('_title', $title));
-</programlisting>
+$doc->addField(Zend_Search_Lucene_Field::UnIndexed('_title', $title));
+]]></programlisting>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Searching
 setlocale(LC_CTYPE, 'de_DE.iso-8859-1');
 
@@ -168,7 +166,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 
 ...
 
-$hits = $index-&gt;find(strtolower($query));
-</programlisting>
+$hits = $index->find(strtolower($query));
+]]></programlisting>
     </section>
 </section>

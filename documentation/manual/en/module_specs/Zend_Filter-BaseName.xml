@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.basename"><info><title>BaseName</title></info>
     
 
@@ -24,21 +22,21 @@
             A basic example of usage is below:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_BaseName();
 
-print $filter-&gt;filter('/vol/tmp/filename');
-</programlisting>
+print $filter->filter('/vol/tmp/filename');
+]]></programlisting>
 
         <para>
             This will return 'filename'.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_BaseName();
 
-print $filter-&gt;filter('/vol/tmp/filename.txt');
-</programlisting>
+print $filter->filter('/vol/tmp/filename.txt');
+]]></programlisting>
 
         <para>
             This will return '<filename>filename.txt</filename>'.

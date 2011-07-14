@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.date"><info><title>Date</title></info>
     
 
@@ -41,12 +39,12 @@
             no locale and no format has been given.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Date();
 
-$validator-&gt;isValid('2000-10-10');   // returns true
-$validator-&gt;isValid('10.10.2000'); // returns false
-</programlisting>
+$validator->isValid('2000-10-10');   // returns true
+$validator->isValid('10.10.2000'); // returns false
+]]></programlisting>
 
         <para>
             The default date format for <classname>Zend_Validate_Date</classname> is 'yyyy-MM-dd'.
@@ -62,12 +60,12 @@ $validator-&gt;isValid('10.10.2000'); // returns false
             locale which the date format should use for validation.
         </para>
 
-        <programlisting language="php">
-$validator = new Zend_Validate_Date(array('locale' =&gt; 'de'));
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_Date(array('locale' => 'de'));
 
-$validator-&gt;isValid('10.Feb.2010'); // returns true
-$validator-&gt;isValid('10.May.2010'); // returns false
-</programlisting>
+$validator->isValid('10.Feb.2010'); // returns true
+$validator->isValid('10.May.2010'); // returns false
+]]></programlisting>
 
         <para>
             The <property>locale</property> option sets the default date format. In the above
@@ -84,23 +82,23 @@ $validator-&gt;isValid('10.May.2010'); // returns false
             option.
         </para>
 
-        <programlisting language="php">
-$validator = new Zend_Validate_Date(array('format' =&gt; 'yyyy'));
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_Date(array('format' => 'yyyy'));
 
-$validator-&gt;isValid('2010'); // returns true
-$validator-&gt;isValid('May');  // returns false
-</programlisting>
+$validator->isValid('2010'); // returns true
+$validator->isValid('May');  // returns false
+]]></programlisting>
 
         <para>
             Of course you can combine <property>format</property> and <property>locale</property>.
             In this case you can also use localized month or daynames.
         </para>
 
-        <programlisting language="php">
-$validator = new Zend_Validate_Date(array('format' =&gt; 'yyyy MMMM', 'locale' =&gt; 'de));
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_Date(array('format' => 'yyyy MMMM', 'locale' => 'de));
 
-$validator-&gt;isValid('2010 Dezember'); // returns true
-$validator-&gt;isValid('2010 June');     // returns false
-</programlisting>
+$validator->isValid('2010 Dezember'); // returns true
+$validator->isValid('2010 June');     // returns false
+]]></programlisting>
     </section>
 </section>

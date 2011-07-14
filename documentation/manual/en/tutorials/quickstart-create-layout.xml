@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.create-layout"><info><title>Create A Layout</title></info>
     
 
@@ -44,12 +42,12 @@
         <command>zf enable layout</command> command:
     </para>
 
-    <programlisting language="shell">
+    <programlisting language="shell"><![CDATA[
 % zf enable layout
 Layouts have been enabled, and a default layout created at
 application/layouts/scripts/layout.phtml
 A layout entry has been added to the application config file.
-</programlisting>
+]]></programlisting>
 
     <para>
         As noted by the command,
@@ -58,18 +56,18 @@ A layout entry has been added to the application config file.
         section:
     </para>
 
-    <programlisting language="ini">
+    <programlisting language="ini"><![CDATA[
 ; application/configs/application.ini
 
 ; Add to [production] section:
 resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts"
-</programlisting>
+]]></programlisting>
 
     <para>
         The final <acronym>INI</acronym> file should look as follows:
     </para>
 
-    <programlisting language="ini">
+    <programlisting language="ini"><![CDATA[
 ; application/configs/application.ini
 
 [production]
@@ -93,7 +91,7 @@ phpSettings.display_errors = 1
 [development : production]
 phpSettings.display_startup_errors = 1
 phpSettings.display_errors = 1
-</programlisting>
+]]></programlisting>
 
     <para>
         This directive tells your application to look for layout view scripts in
@@ -114,7 +112,7 @@ phpSettings.display_errors = 1
         within our bootstrap class:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 // application/Bootstrap.php
 
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
@@ -123,7 +121,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
     }
 }
-</programlisting>
+]]></programlisting>
 
     <para>
         Within that method, we need to hint to the view to use the appropriate doctype. But where
@@ -138,12 +136,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         <constant>production</constant>:
     </para>
 
-    <programlisting language="ini">
+    <programlisting language="ini"><![CDATA[
 ; application/configs/application.ini
 
 ; Add to [production] section:
 resources.view[] =
-</programlisting>
+]]></programlisting>
 
     <para>
         This tells us to initialize the view with no options (the '[]' indicates that the "view" key
@@ -156,52 +154,52 @@ resources.view[] =
         object, and then configure it:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 // application/Bootstrap.php
 
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     protected function _initDoctype()
     {
-        $this-&gt;bootstrap('view');
-        $view = $this-&gt;getResource('view');
-        $view-&gt;doctype('XHTML1_STRICT');
+        $this->bootstrap('view');
+        $view = $this->getResource('view');
+        $view->doctype('XHTML1_STRICT');
     }
 }
-</programlisting>
+]]></programlisting>
 
     <para>
         Now that we've initialized <classname>Zend_Layout</classname> and set the Doctype, let's
         create our site-wide layout:
     </para>
 
-    <programlisting language="php">
-&lt;!-- application/layouts/scripts/layout.phtml --&gt;
-&lt;?php echo $this-&gt;doctype() ?&gt;
-&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
-&lt;head&gt;
-  &lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;
-  &lt;title&gt;Zend Framework Quickstart Application&lt;/title&gt;
-  &lt;?php echo $this-&gt;headLink()-&gt;appendStylesheet('/css/global.css') ?&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div id="header" style="background-color: #EEEEEE; height: 30px;"&gt;
-    &lt;div id="header-logo" style="float: left"&gt;
-        &lt;b&gt;ZF Quickstart Application&lt;/b&gt;
-    &lt;/div&gt;
-    &lt;div id="header-navigation" style="float: right"&gt;
-        &lt;a href="&lt;?php echo $this-&gt;url(
-            array('controller'=&gt;'guestbook'),
+    <programlisting language="php"><![CDATA[
+<!-- application/layouts/scripts/layout.phtml -->
+<?php echo $this->doctype() ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Zend Framework Quickstart Application</title>
+  <?php echo $this->headLink()->appendStylesheet('/css/global.css') ?>
+</head>
+<body>
+<div id="header" style="background-color: #EEEEEE; height: 30px;">
+    <div id="header-logo" style="float: left">
+        <b>ZF Quickstart Application</b>
+    </div>
+    <div id="header-navigation" style="float: right">
+        <a href="<?php echo $this->url(
+            array('controller'=>'guestbook'),
             'default',
-            true) ?&gt;"&gt;Guestbook&lt;/a&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+            true) ?>">Guestbook</a>
+    </div>
+</div>
 
-&lt;?php echo $this-&gt;layout()-&gt;content ?&gt;
+<?php echo $this->layout()->content ?>
 
-&lt;/body&gt;
-&lt;/html&gt;
-</programlisting>
+</body>
+</html>
+]]></programlisting>
 
     <para>
         We grab our application content using the <methodname>layout()</methodname> view helper, and

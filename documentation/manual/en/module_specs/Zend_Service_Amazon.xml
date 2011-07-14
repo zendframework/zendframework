@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon"><info><title>Zend_Service_Amazon</title></info>
     
 
@@ -60,14 +58,14 @@
                 through the results, printing them.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'US', 'AMAZON_SECRET_KEY');
-$results = $amazon-&gt;itemSearch(array('SearchIndex' =&gt; 'Books',
-                                     'Keywords' =&gt; 'php'));
+$results = $amazon->itemSearch(array('SearchIndex' => 'Books',
+                                     'Keywords' => 'php'));
 foreach ($results as $result) {
-    echo $result-&gt;Title . '&lt;br /&gt;';
+    echo $result->Title . '<br />';
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <example xml:id="zend.service.amazon.introduction.example.query_api"><info><title>Search Amazon Using the Query API</title></info>
@@ -79,16 +77,16 @@ foreach ($results as $result) {
                 pattern.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $query = new Zend_Service_Amazon_Query('AMAZON_API_KEY',
                                        'US',
                                        'AMAZON_SECRET_KEY');
-$query-&gt;category('Books')-&gt;Keywords('PHP');
-$results = $query-&gt;search();
+$query->category('Books')->Keywords('PHP');
+$results = $query->search();
 foreach ($results as $result) {
-    echo $result-&gt;Title . '&lt;br /&gt;';
+    echo $result->Title . '<br />';
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -104,10 +102,10 @@ foreach ($results as $result) {
         <example xml:id="zend.service.amazon.countrycodes.example.country_code"><info><title>Choosing an Amazon Web Service Country</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Connect to Amazon in Japan
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'JP', 'AMAZON_SECRET_KEY');
-</programlisting>
+]]></programlisting>
         </example>
 
         <note><info><title>Country codes</title></info>
@@ -131,10 +129,10 @@ $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'JP', 'AMAZON_SECRET_KEY');
         <example xml:id="zend.service.amazon.itemlookup.example.asin"><info><title>Looking up a Specific Amazon Item by ASIN</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'US', 'AMAZON_SECRET_KEY');
-$item = $amazon-&gt;itemLookup('B0000A432X');
-</programlisting>
+$item = $amazon->itemLookup('B0000A432X');
+]]></programlisting>
         </example>
 
         <para>
@@ -165,14 +163,14 @@ $item = $amazon-&gt;itemLookup('B0000A432X');
         <example xml:id="zend.service.amazon.itemsearch.example.basic"><info><title>Performing Amazon Item Searches</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'US', 'AMAZON_SECRET_KEY');
-$results = $amazon-&gt;itemSearch(array('SearchIndex' =&gt; 'Books',
-                                     'Keywords' =&gt; 'php'));
+$results = $amazon->itemSearch(array('SearchIndex' => 'Books',
+                                     'Keywords' => 'php'));
 foreach ($results as $result) {
-    echo $result-&gt;Title . '&lt;br /&gt;';
+    echo $result->Title . '<br />';
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <example xml:id="zend.service.amazon.itemsearch.example.responsegroup"><info><title>Using the ResponseGroup Option</title></info>
@@ -183,18 +181,18 @@ foreach ($results as $result) {
                 that will be returned in the response.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'US', 'AMAZON_SECRET_KEY');
-$results = $amazon-&gt;itemSearch(array(
-    'SearchIndex'   =&gt; 'Books',
-    'Keywords'      =&gt; 'php',
-    'ResponseGroup' =&gt; 'Small,ItemAttributes,Images,SalesRank,Reviews,' .
+$results = $amazon->itemSearch(array(
+    'SearchIndex'   => 'Books',
+    'Keywords'      => 'php',
+    'ResponseGroup' => 'Small,ItemAttributes,Images,SalesRank,Reviews,' .
                        'EditorialReview,Similarities,ListmaniaLists'
     ));
 foreach ($results as $result) {
-    echo $result-&gt;Title . '&lt;br /&gt;';
+    echo $result->Title . '<br />';
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -240,14 +238,14 @@ foreach ($results as $result) {
                     fluent interface to specify options and their respective values:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $query = new Zend_Service_Amazon_Query('MY_API_KEY', 'US', 'AMAZON_SECRET_KEY');
-$query-&gt;Category('Books')-&gt;Keywords('PHP');
-$results = $query-&gt;search();
+$query->Category('Books')->Keywords('PHP');
+$results = $query->search();
 foreach ($results as $result) {
-    echo $result-&gt;Title . '&lt;br /&gt;';
+    echo $result->Title . '<br />';
 }
-</programlisting>
+]]></programlisting>
 
                 <para>
                     This sets the option <code>Category</code> to "Books" and <code>Keywords</code>

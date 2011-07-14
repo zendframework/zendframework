@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.router"><info><title>Zend_Application_Resource_Router</title></info>
     
 
@@ -19,7 +17,7 @@
             configure the router resource.
         </para>
 
-        <programlisting language="ini">
+        <programlisting language="ini"><![CDATA[
 resources.router.routes.route_id.route = "/login"
 resources.router.routes.route_id.defaults.module = "user"
 resources.router.routes.route_id.defaults.controller = "login"
@@ -27,7 +25,7 @@ resources.router.routes.route_id.defaults.action = "index"
 
 ; Optionally you can also set a Chain Name Separator:
 resources.router.chainNameSeparator = "_"
-</programlisting>
+]]></programlisting>
 
         <para>For more information on the Chain Name Separator, please see
             <link linkend="zend.controller.router.routes.chain.config">its section</link>.

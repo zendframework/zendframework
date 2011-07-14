@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.tools"><info><title>Tools</title></info>
     
 
@@ -15,36 +13,36 @@
         <example><info><title>Create simple LDAP filters</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $f1  = Zend_Ldap_Filter::equals('name', 'value');         // (name=value)
 $f2  = Zend_Ldap_Filter::begins('name', 'value');         // (name=value*)
 $f3  = Zend_Ldap_Filter::ends('name', 'value');           // (name=*value)
 $f4  = Zend_Ldap_Filter::contains('name', 'value');       // (name=*value*)
-$f5  = Zend_Ldap_Filter::greater('name', 'value');        // (name&gt;value)
-$f6  = Zend_Ldap_Filter::greaterOrEqual('name', 'value'); // (name&gt;=value)
-$f7  = Zend_Ldap_Filter::less('name', 'value');           // (name&lt;value)
-$f8  = Zend_Ldap_Filter::lessOrEqual('name', 'value');    // (name&lt;=value)
+$f5  = Zend_Ldap_Filter::greater('name', 'value');        // (name>value)
+$f6  = Zend_Ldap_Filter::greaterOrEqual('name', 'value'); // (name>=value)
+$f7  = Zend_Ldap_Filter::less('name', 'value');           // (name<value)
+$f8  = Zend_Ldap_Filter::lessOrEqual('name', 'value');    // (name<=value)
 $f9  = Zend_Ldap_Filter::approx('name', 'value');         // (name~=value)
 $f10 = Zend_Ldap_Filter::any('name');                     // (name=*)
-</programlisting>
+]]></programlisting>
         </example>
 
         <example><info><title>Create more complex LDAP filters</title></info>
             
 
-            <programlisting language="php">
-$f1 = Zend_Ldap_Filter::ends('name', 'value')-&gt;negate(); // (!(name=*value))
+            <programlisting language="php"><![CDATA[
+$f1 = Zend_Ldap_Filter::ends('name', 'value')->negate(); // (!(name=*value))
 
 $f2 = Zend_Ldap_Filter::equals('name', 'value');
 $f3 = Zend_Ldap_Filter::begins('name', 'value');
 $f4 = Zend_Ldap_Filter::ends('name', 'value');
 
-// (&amp;(name=value)(name=value*)(name=*value))
+// (&(name=value)(name=value*)(name=*value))
 $f5 = Zend_Ldap_Filter::andFilter($f2, $f3, $f4);
 
 // (|(name=value)(name=value*)(name=*value))
 $f6 = Zend_Ldap_Filter::orFilter($f2, $f3, $f4);
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 

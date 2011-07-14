@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.iban"><info><title>Iban</title></info>
     
 
@@ -46,19 +44,19 @@
                 wide locale. See the following code snippet:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // within bootstrap
 Zend_Registry::set('Zend_Locale', new Zend_Locale('de_AT'));
 
 // within the module
 $validator = new Zend_Validate_Iban();
 
-if ($validator-&gt;isValid('AT611904300234573201')) {
+if ($validator->isValid('AT611904300234573201')) {
     // IBAN appears to be valid
 } else {
     // IBAN is not valid
 }
-</programlisting>
+]]></programlisting>
 
             <note><info><title>Application wide locale</title></info>
                 
@@ -83,16 +81,16 @@ if ($validator-&gt;isValid('AT611904300234573201')) {
                 <constant>FALSE</constant> as locale.
             </para>
 
-            <programlisting language="php">
-$validator = new Zend_Validate_Iban(array('locale' =&gt; false));
+            <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_Iban(array('locale' => false));
 // Note: you can also set a FALSE as single parameter
 
-if ($validator-&gt;isValid('AT611904300234573201')) {
+if ($validator->isValid('AT611904300234573201')) {
     // IBAN appears to be valid
 } else {
     // IBAN is not valid
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 So <emphasis>any</emphasis> <acronym>IBAN</acronym> number will be valid. Note that
@@ -109,15 +107,15 @@ if ($validator-&gt;isValid('AT611904300234573201')) {
                 using <methodname>setLocale()</methodname>.
             </para>
 
-            <programlisting language="php">
-$validator = new Zend_Validate_Iban(array('locale' =&gt; 'de_AT'));
+            <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_Iban(array('locale' => 'de_AT'));
 
-if ($validator-&gt;isValid('AT611904300234573201')) {
+if ($validator->isValid('AT611904300234573201')) {
     // IBAN appears to be valid
 } else {
     // IBAN is not valid
 }
-</programlisting>
+]]></programlisting>
 
             <note><info><title>Use full qualified locales</title></info>
                 

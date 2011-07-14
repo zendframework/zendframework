@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.router.routes.chain"><info><title>Zend_Controller_Router_Route_Chain</title></info>
     
 
@@ -36,19 +34,19 @@
         routes chained together:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 // Create two routes
 $hostnameRoute = new Zend_Controller_Router_Route_Hostname(...);
 $pathRoute     = new Zend_Controller_Router_Route(...);
 
 // First way, chain them via the chain route
 $chainedRoute = new Zend_Controller_Router_Route_Chain();
-$chainedRoute-&gt;chain($hostnameRoute)
-             -&gt;chain($pathRoute);
+$chainedRoute->chain($hostnameRoute)
+             ->chain($pathRoute);
 
 // Second way, chain them directly
-$chainedRoute = $hostnameRoute-&gt;chain($pathRoute);
-</programlisting>
+$chainedRoute = $hostnameRoute->chain($pathRoute);
+]]></programlisting>
 
     <para>
         When chaining routes together, their separator is a slash
@@ -56,17 +54,17 @@ $chainedRoute = $hostnameRoute-&gt;chain($pathRoute);
         separator:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 // Create two routes
 $firstRoute  = new Zend_Controller_Router_Route('foo');
 $secondRoute = new Zend_Controller_Router_Route('bar');
 
 // Chain them together with a different separator
-$chainedRoute = $firstRoute-&gt;chain($secondRoute, '-');
+$chainedRoute = $firstRoute->chain($secondRoute, '-');
 
 // Assemble the route: "foo-bar"
-echo $chainedRoute-&gt;assemble();
-</programlisting>
+echo $chainedRoute->assemble();
+]]></programlisting>
 
     <section xml:id="zend.controller.router.routes.chain.config"><info><title>Chain Routes via Zend_Config</title></info>
         
@@ -83,43 +81,43 @@ echo $chainedRoute-&gt;assemble();
             would look like this:
         </para>
 
-        <programlisting language="xml">
-&lt;routes&gt;
-    &lt;www type="Zend_Controller_Router_Route_Hostname"&gt;
-        &lt;route&gt;www.example.com&lt;/route&gt;
-        &lt;chains&gt;
-            &lt;language type="Zend_Controller_Router_Route"&gt;
-                &lt;route&gt;:language&lt;/route&gt;
-                &lt;reqs language="[a-z]{2}"&gt;
-                &lt;chains&gt;
-                    &lt;index type="Zend_Controller_Router_Route_Static"&gt;
-                        &lt;route&gt;&lt;/route&gt;
-                        &lt;defaults module="default" controller="index"
-                                  action="index" /&gt;
-                    &lt;/index&gt;
-                    &lt;imprint type="Zend_Controller_Router_Route_Static"&gt;
-                        &lt;route&gt;imprint&lt;/route&gt;
-                        &lt;defaults module="default" controller="index"
-                                  action="index" /&gt;
-                    &lt;/imprint&gt;
-                &lt;/chains&gt;
-            &lt;/language&gt;
-        &lt;/chains&gt;
-    &lt;/www&gt;
-    &lt;users type="Zend_Controller_Router_Route_Hostname"&gt;
-        &lt;route&gt;users.example.com&lt;/route&gt;
-        &lt;chains&gt;
-            &lt;profile type="Zend_Controller_Router_Route"&gt;
-                &lt;route&gt;:username&lt;/route&gt;
-                &lt;defaults module="users" controller="profile" action="index" /&gt;
-            &lt;/profile&gt;
-        &lt;/chains&gt;
-    &lt;/users&gt;
-    &lt;misc type="Zend_Controller_Router_Route_Static"&gt;
-        &lt;route&gt;misc&lt;/route&gt;
-    &lt;/misc&gt;
-&lt;/routes&gt;
-</programlisting>
+        <programlisting language="xml"><![CDATA[
+<routes>
+    <www type="Zend_Controller_Router_Route_Hostname">
+        <route>www.example.com</route>
+        <chains>
+            <language type="Zend_Controller_Router_Route">
+                <route>:language</route>
+                <reqs language="[a-z]{2}">
+                <chains>
+                    <index type="Zend_Controller_Router_Route_Static">
+                        <route></route>
+                        <defaults module="default" controller="index"
+                                  action="index" />
+                    </index>
+                    <imprint type="Zend_Controller_Router_Route_Static">
+                        <route>imprint</route>
+                        <defaults module="default" controller="index"
+                                  action="index" />
+                    </imprint>
+                </chains>
+            </language>
+        </chains>
+    </www>
+    <users type="Zend_Controller_Router_Route_Hostname">
+        <route>users.example.com</route>
+        <chains>
+            <profile type="Zend_Controller_Router_Route">
+                <route>:username</route>
+                <defaults module="users" controller="profile" action="index" />
+            </profile>
+        </chains>
+    </users>
+    <misc type="Zend_Controller_Router_Route_Static">
+        <route>misc</route>
+    </misc>
+</routes>
+]]></programlisting>
 
         <para>
             This will result in the three routes <command>www-language-index</command>,
@@ -135,52 +133,52 @@ echo $chainedRoute-&gt;assemble();
             chain-route type directly, and also just works in the root level:
         </para>
 
-        <programlisting language="xml">
-&lt;routes&gt;
-    &lt;www type="Zend_Controller_Router_Route_Chain"&gt;
-        &lt;route&gt;www.example.com&lt;/route&gt;
-    &lt;/www&gt;
-    &lt;language type="Zend_Controller_Router_Route"&gt;
-        &lt;route&gt;:language&lt;/route&gt;
-        &lt;reqs language="[a-z]{2}"&gt;
-    &lt;/language&gt;
-    &lt;index type="Zend_Controller_Router_Route_Static"&gt;
-        &lt;route&gt;&lt;/route&gt;
-        &lt;defaults module="default" controller="index" action="index" /&gt;
-    &lt;/index&gt;
-    &lt;imprint type="Zend_Controller_Router_Route_Static"&gt;
-        &lt;route&gt;imprint&lt;/route&gt;
-        &lt;defaults module="default" controller="index" action="index" /&gt;
-    &lt;/imprint&gt;
+        <programlisting language="xml"><![CDATA[
+<routes>
+    <www type="Zend_Controller_Router_Route_Chain">
+        <route>www.example.com</route>
+    </www>
+    <language type="Zend_Controller_Router_Route">
+        <route>:language</route>
+        <reqs language="[a-z]{2}">
+    </language>
+    <index type="Zend_Controller_Router_Route_Static">
+        <route></route>
+        <defaults module="default" controller="index" action="index" />
+    </index>
+    <imprint type="Zend_Controller_Router_Route_Static">
+        <route>imprint</route>
+        <defaults module="default" controller="index" action="index" />
+    </imprint>
 
-    &lt;www-index type="Zend_Controller_Router_Route_Chain"&gt;
-        &lt;chain&gt;www, language, index&lt;/chain&gt;
-    &lt;/www-index&gt;
-    &lt;www-imprint type="Zend_Controller_Router_Route_Chain"&gt;
-        &lt;chain&gt;www, language, imprint&lt;/chain&gt;
-    &lt;/www-imprint&gt;
-&lt;/routes&gt;
-</programlisting>
+    <www-index type="Zend_Controller_Router_Route_Chain">
+        <chain>www, language, index</chain>
+    </www-index>
+    <www-imprint type="Zend_Controller_Router_Route_Chain">
+        <chain>www, language, imprint</chain>
+    </www-imprint>
+</routes>
+]]></programlisting>
 
         <para>
             You can also give the <property>chain</property> parameter as array instead
             of separating the routes with a comma:
         </para>
 
-        <programlisting language="xml">
-&lt;routes&gt;
-    &lt;www-index type="Zend_Controller_Router_Route_Chain"&gt;
-        &lt;chain&gt;www&lt;/chain&gt;
-        &lt;chain&gt;language&lt;/chain&gt;
-        &lt;chain&gt;index&lt;/chain&gt;
-    &lt;/www-index&gt;
-    &lt;www-imprint type="Zend_Controller_Router_Route_Chain"&gt;
-        &lt;chain&gt;www&lt;/chain&gt;
-        &lt;chain&gt;language&lt;/chain&gt;
-        &lt;chain&gt;imprint&lt;/chain&gt;
-    &lt;/www-imprint&gt;
-&lt;/routes&gt;
-</programlisting>
+        <programlisting language="xml"><![CDATA[
+<routes>
+    <www-index type="Zend_Controller_Router_Route_Chain">
+        <chain>www</chain>
+        <chain>language</chain>
+        <chain>index</chain>
+    </www-index>
+    <www-imprint type="Zend_Controller_Router_Route_Chain">
+        <chain>www</chain>
+        <chain>language</chain>
+        <chain>imprint</chain>
+    </www-imprint>
+</routes>
+]]></programlisting>
 
         <para>
             When you configure chain routes with <classname>Zend_Config</classname> and
@@ -188,19 +186,19 @@ echo $chainedRoute-&gt;assemble();
             need to specify this separator separately:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $config = new Zend_Config(array(
-    'chainName' =&gt; array(
-        'type'   =&gt; 'Zend_Controller_Router_Route_Static',
-        'route'  =&gt; 'foo',
-        'chains' =&gt; array(
-            'subRouteName' =&gt; array(
-                'type'     =&gt; 'Zend_Controller_Router_Route_Static',
-                'route'    =&gt; 'bar',
-                'defaults' =&gt; array(
-                    'module'      =&gt; 'module',
-                     'controller' =&gt; 'controller',
-                     'action'     =&gt; 'action'
+    'chainName' => array(
+        'type'   => 'Zend_Controller_Router_Route_Static',
+        'route'  => 'foo',
+        'chains' => array(
+            'subRouteName' => array(
+                'type'     => 'Zend_Controller_Router_Route_Static',
+                'route'    => 'bar',
+                'defaults' => array(
+                    'module'      => 'module',
+                     'controller' => 'controller',
+                     'action'     => 'action'
                 )
             )
         )
@@ -208,15 +206,15 @@ $config = new Zend_Config(array(
 ));
 
 // Set separator before adding config
-$router-&gt;setChainNameSeparator('_separator_')
+$router->setChainNameSeparator('_separator_')
 
 // Add config
-$router-&gt;addConfig($config);
+$router->addConfig($config);
 
 // The name of our route now is: chainName_separator_subRouteName
-echo $this-&gt;_router-&gt;assemble(array(), 'chainName_separator_subRouteName');
+echo $this->_router->assemble(array(), 'chainName_separator_subRouteName');
 
 // The proof: it echoes /foo/bar
-</programlisting>
+]]></programlisting>
     </section>
 </section>

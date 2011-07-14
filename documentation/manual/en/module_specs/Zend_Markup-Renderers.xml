@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.markup.renderers"><info><title>Zend_Markup Renderers</title></info>
     
 
@@ -19,7 +17,7 @@
             A simple example for a 'foo' markup:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Creates instance of Zend_Markup_Renderer_Html,
 // with Zend_Markup_Parser_BbCode as its parser
 $bbcode = Zend_Markup::factory('Bbcode');
@@ -29,19 +27,19 @@ $bbcode = Zend_Markup::factory('Bbcode');
 // The second parameter takes an integer that defines the markups type.
 // The third parameter is an array that defines other things about a
 // markup, like the markup's group, and (in this case) a start and end markup.
-$bbcode-&gt;addMarkup(
+$bbcode->addMarkup(
     'foo',
     Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE,
     array(
-        'start' =&gt; '-bar-',
-        'end'   =&gt; '-baz-',
-        'group' =&gt; 'inline'
+        'start' => '-bar-',
+        'end'   => '-baz-',
+        'group' => 'inline'
     )
 );
 
 // now, this will output: 'my -bar-markup-baz-'
-echo $bbcode-&gt;render('my [foo]markup[/foo]');
-</programlisting>
+echo $bbcode->render('my [foo]markup[/foo]');
+]]></programlisting>
 
         <para>
             Please note that creating your own markups only makes sense when your parser also
@@ -71,7 +69,7 @@ echo $bbcode-&gt;render('my [foo]markup[/foo]');
                 interface. An example of a callback class:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class My_Markup_Renderer_Html_Upper
     implements Zend_Markup_Renderer_TokenConverterInterface
 {
@@ -82,7 +80,7 @@ class My_Markup_Renderer_Html_Upper
     }
 
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 Now you can add the 'upper' markup, with as callback, an instance
@@ -90,7 +88,7 @@ class My_Markup_Renderer_Html_Upper
                 class. A simple example:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Creates instance of Zend_Markup_Renderer_Html,
 // with Zend_Markup_Parser_BbCode as its parser
 $bbcode = Zend_Markup::factory('Bbcode');
@@ -100,18 +98,18 @@ $bbcode = Zend_Markup::factory('Bbcode');
 // The second parameter takes an integer that defines the markups type.
 // The third parameter is an array that defines other things about a
 // markup, like the markup's group, and (in this case) a start and end markup.
-$bbcode-&gt;addMarkup(
+$bbcode->addMarkup(
     'upper',
     Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE,
     array(
-        'callback' =&gt; new My_Markup_Renderer_Html_Upper(),
-        'group'    =&gt; 'inline'
+        'callback' => new My_Markup_Renderer_Html_Upper(),
+        'group'    => 'inline'
     )
 );
 
 // now, this will output: 'my !up!MARKUP!up!'
-echo $bbcode-&gt;render('my [upper]markup[/upper]');
-</programlisting>
+echo $bbcode->render('my [upper]markup[/upper]');
+]]></programlisting>
         </section>
     </section>
 

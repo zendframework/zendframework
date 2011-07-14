@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.input"><info><title>Zend_Filter_Input</title></info>
     
 
@@ -113,16 +111,16 @@
             alphabetical characters.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filters = array(
-    'month'   =&gt; 'Digits',
-    'account' =&gt; 'StringTrim'
+    'month'   => 'Digits',
+    'account' => 'StringTrim'
 );
 
 $validators = array(
-    'account' =&gt; 'Alpha'
+    'account' => 'Alpha'
 );
-</programlisting>
+]]></programlisting>
 
         <para>
             Each key in the <varname>$filters</varname> array above is the name of a rule for
@@ -140,11 +138,11 @@ $validators = array(
                     A single string scalar, which is mapped to a class name.
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $validators = array(
-    'month'   =&gt; 'Digits',
+    'month'   => 'Digits',
 );
-</programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -154,13 +152,13 @@ $validators = array(
                     <classname>Zend_Validate_Interface</classname>.
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $digits = new Zend_Validate_Digits();
 
 $validators = array(
-    'month'   =&gt; $digits
+    'month'   => $digits
 );
-</programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -173,15 +171,15 @@ $validators = array(
                     followed by arguments to pass to its constructor.
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $validators = array(
-    'month'   =&gt; array(
+    'month'   => array(
         'Digits',                // string
         new Zend_Validate_Int(), // object instance
         array('Between', 1, 12)  // string with constructor arguments
     )
 );
-</programlisting>
+]]></programlisting>
             </listitem>
         </itemizedlist>
 
@@ -202,12 +200,12 @@ $validators = array(
             applied in the same order in which you declare them.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filters = array(
-    '*'     =&gt; 'StringTrim',
-    'month' =&gt; 'Digits'
+    '*'     => 'StringTrim',
+    'month' => 'Digits'
 );
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.filter.input.running"><info><title>Creating the Filter and Validator Processor</title></info>
@@ -220,9 +218,9 @@ $filters = array(
             can use this object to process one or more sets of input data.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $input = new Zend_Filter_Input($filters, $validators);
-</programlisting>
+]]></programlisting>
 
         <para>
             You can specify input data as the third constructor argument. The
@@ -233,11 +231,11 @@ $input = new Zend_Filter_Input($filters, $validators);
             data for <classname>Zend_Filter_Input</classname>.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $data = $_GET;
 
 $input = new Zend_Filter_Input($filters, $validators, $data);
-</programlisting>
+]]></programlisting>
 
         <para>
             Alternatively, use the <methodname>setData()</methodname> method, passing
@@ -245,10 +243,10 @@ $input = new Zend_Filter_Input($filters, $validators, $data);
             described above.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $input = new Zend_Filter_Input($filters, $validators);
-$input-&gt;setData($newData);
-</programlisting>
+$input->setData($newData);
+]]></programlisting>
 
         <para>
             The <methodname>setData()</methodname> method redefines data in an existing
@@ -278,11 +276,11 @@ $input-&gt;setData($newData);
                 <methodname>isValid()</methodname> returns <constant>FALSE</constant>.
             </para>
 
-            <programlisting language="php">
-if ($input-&gt;isValid()) {
+            <programlisting language="php"><![CDATA[
+if ($input->isValid()) {
   echo "OK\n";
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 This method accepts an optional string argument, naming
@@ -291,11 +289,11 @@ if ($input-&gt;isValid()) {
                 returns <constant>TRUE</constant>.
             </para>
 
-            <programlisting language="php">
-if ($input-&gt;isValid('month')) {
+            <programlisting language="php"><![CDATA[
+if ($input->isValid('month')) {
   echo "Field 'month' is OK\n";
 }
-</programlisting>
+]]></programlisting>
         </section>
 
         <section xml:id="zend.filter.input.results.reports"><info><title>Getting Invalid, Missing, or Unknown Fields</title></info>
@@ -330,26 +328,26 @@ if ($input-&gt;isValid('month')) {
                 </listitem>
             </itemizedlist>
 
-            <programlisting language="php">
-if ($input-&gt;hasInvalid() || $input-&gt;hasMissing()) {
-  $messages = $input-&gt;getMessages();
+            <programlisting language="php"><![CDATA[
+if ($input->hasInvalid() || $input->hasMissing()) {
+  $messages = $input->getMessages();
 }
 
 // getMessages() simply returns the merge of getInvalid() and
 // getMissing()
 
-if ($input-&gt;hasInvalid()) {
-  $invalidFields = $input-&gt;getInvalid();
+if ($input->hasInvalid()) {
+  $invalidFields = $input->getInvalid();
 }
 
-if ($input-&gt;hasMissing()) {
-  $missingFields = $input-&gt;getMissing();
+if ($input->hasMissing()) {
+  $missingFields = $input->getMissing();
 }
 
-if ($input-&gt;hasUnknown()) {
-  $unknownFields = $input-&gt;getUnknown();
+if ($input->hasUnknown()) {
+  $unknownFields = $input->getUnknown();
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 The results of the <methodname>getMessages()</methodname> method is an
@@ -383,9 +381,9 @@ if ($input-&gt;hasUnknown()) {
                 the <methodname>setOptions()</methodname> method.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $options = array(
-    'missingMessage' =&gt; "Field '%field%' is required"
+    'missingMessage' => "Field '%field%' is required"
 );
 
 $input = new Zend_Filter_Input($filters, $validators, $data, $options);
@@ -393,8 +391,8 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
 // alternative method:
 
 $input = new Zend_Filter_Input($filters, $validators, $data);
-$input-&gt;setOptions($options);
-</programlisting>
+$input->setOptions($options);
+]]></programlisting>
 
             <para>
                 And you can also add a translator which gives you the ability to provide multiple
@@ -402,16 +400,16 @@ $input-&gt;setOptions($options);
                 <classname>Zend_Filter_Input</classname>.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate_Adapter_Array(array(
-    'content' =&gt; array(
-        Zend_Filter_Input::MISSING_MESSAGE =&gt; "Where is the field?"
+    'content' => array(
+        Zend_Filter_Input::MISSING_MESSAGE => "Where is the field?"
     )
 );
 
 $input = new Zend_Filter_Input($filters, $validators, $data);
-$input-&gt;setTranslator($translate);
-</programlisting>
+$input->setTranslator($translate);
+]]></programlisting>
 
             <para>
                 When you are using an application wide translator, then it will also be used by
@@ -438,11 +436,11 @@ $input-&gt;setTranslator($translate);
                 <methodname>getEscaped()</methodname> and <methodname>getUnescaped()</methodname>.
             </para>
 
-            <programlisting language="php">
-$m = $input-&gt;month;                 // escaped output from magic accessor
-$m = $input-&gt;getEscaped('month');   // escaped output
-$m = $input-&gt;getUnescaped('month'); // not escaped
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$m = $input->month;                 // escaped output from magic accessor
+$m = $input->getEscaped('month');   // escaped output
+$m = $input->getUnescaped('month'); // not escaped
+]]></programlisting>
 
             <para>
                 By default, when retrieving a value, it is filtered with the
@@ -471,11 +469,11 @@ $m = $input-&gt;getUnescaped('month'); // not escaped
                     fields.
                 </para>
 
-                <programlisting language="php">
-$validators = array('*' =&gt; array());
+                <programlisting language="php"><![CDATA[
+$validators = array('*' => array());
 
 $input = new Zend_Filter_Input($filters, $validators, $data, $options);
-</programlisting>
+]]></programlisting>
 
                 <para>
                     But be warned that using this notation introduces a security leak which could
@@ -489,20 +487,20 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
                 specifying it in the constructor options array:
             </para>
 
-            <programlisting language="php">
-$options = array('escapeFilter' =&gt; 'StringTrim');
+            <programlisting language="php"><![CDATA[
+$options = array('escapeFilter' => 'StringTrim');
 $input = new Zend_Filter_Input($filters, $validators, $data, $options);
-</programlisting>
+]]></programlisting>
 
             <para>
                 Alternatively, you can use the
                 <methodname>setDefaultEscapeFilter()</methodname> method:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $input = new Zend_Filter_Input($filters, $validators, $data);
-$input-&gt;setDefaultEscapeFilter(new Zend_Filter_StringTrim());
-</programlisting>
+$input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
+]]></programlisting>
 
             <para>
                 In either usage, you can specify the escape filter as a string
@@ -561,14 +559,14 @@ $input-&gt;setDefaultEscapeFilter(new Zend_Filter_StringTrim());
                 string.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $filters = array(
-    'month' =&gt; array(
+    'month' => array(
         'Digits',        // filter name at integer index [0]
-        'fields' =&gt; 'mo' // field name at string index ['fields']
+        'fields' => 'mo' // field name at string index ['fields']
     )
 );
-</programlisting>
+]]></programlisting>
 
             <para>
                 In the example above, the filter rule applies the 'digits'
@@ -598,17 +596,17 @@ $filters = array(
                 each other.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $validators = array(
-    'password' =&gt; array(
+    'password' => array(
         'StringEquals',
-        'fields' =&gt; array('password1', 'password2')
+        'fields' => array('password1', 'password2')
     )
 );
 // Invokes hypothetical class Zend_Validate_StringEquals,
 // passing an array argument containing the values of the two input
 // data fields named 'password1' and 'password2'.
-</programlisting>
+]]></programlisting>
 
             <para>
                 If the validation of this rule fails, the rule key ('password') is used in the
@@ -633,14 +631,14 @@ $validators = array(
                 string.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $validators = array(
-    'month' =&gt; array(
+    'month' => array(
         'digits',
-        'presence' =&gt; 'required'
+        'presence' => 'required'
     )
 );
-</programlisting>
+]]></programlisting>
 
             <para>
                 The default value of this metacommand is 'optional'.
@@ -671,11 +669,11 @@ $validators = array(
                 different default values for a given field.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $validators = array(
-    'month' =&gt; array(
+    'month' => array(
         'digits',
-        'default' =&gt; '1'
+        'default' => '1'
     )
 );
 
@@ -683,8 +681,8 @@ $validators = array(
 $data = array();
 
 $input = new Zend_Filter_Input(null, $validators, $data);
-echo $input-&gt;month; // echoes 1
-</programlisting>
+echo $input->month; // echoes 1
+]]></programlisting>
 
             <para>
                 If your rule uses the <constant>FIELDS</constant> metacommand
@@ -728,14 +726,14 @@ echo $input-&gt;month; // echoes 1
                 string.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $validators = array(
-    'address2' =&gt; array(
+    'address2' => array(
         'Alnum',
-        'allowEmpty' =&gt; true
+        'allowEmpty' => true
     )
 );
-</programlisting>
+]]></programlisting>
 
             <para>
                 The default value of this metacommand is <constant>FALSE</constant>.
@@ -752,9 +750,9 @@ $validators = array(
                 <methodname>setOptions()</methodname> method.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $options = array(
-    'notEmptyMessage' =&gt; "A non-empty value is required for field '%field%'"
+    'notEmptyMessage' => "A non-empty value is required for field '%field%'"
 );
 
 $input = new Zend_Filter_Input($filters, $validators, $data, $options);
@@ -762,8 +760,8 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
 // alternative method:
 
 $input = new Zend_Filter_Input($filters, $validators, $data);
-$input-&gt;setOptions($options);
-</programlisting>
+$input->setOptions($options);
+]]></programlisting>
         </section>
 
         <section xml:id="zend.filter.input.metacommands.break-chain"><info><title>The BREAK_CHAIN metacommand</title></info>
@@ -790,17 +788,17 @@ $input-&gt;setOptions($options);
                 string.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $validators = array(
-    'month' =&gt; array(
+    'month' => array(
         'Digits',
         new Zend_Validate_Between(1,12),
         new Zend_Validate_GreaterThan(0),
-        'breakChainOnFailure' =&gt; true
+        'breakChainOnFailure' => true
     )
 );
 $input = new Zend_Filter_Input(null, $validators);
-</programlisting>
+]]></programlisting>
 
             <para>
                 The default value of this metacommand is <constant>FALSE</constant>.
@@ -819,20 +817,20 @@ $input = new Zend_Filter_Input(null, $validators);
                 definition:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Create validator chain with non-uniform breakChainOnFailure
 // attributes
 $chain = new Zend_Validate();
-$chain-&gt;addValidator(new Zend_Validate_Digits(), true);
-$chain-&gt;addValidator(new Zend_Validate_Between(1,12), false);
-$chain-&gt;addValidator(new Zend_Validate_GreaterThan(0), true);
+$chain->addValidator(new Zend_Validate_Digits(), true);
+$chain->addValidator(new Zend_Validate_Between(1,12), false);
+$chain->addValidator(new Zend_Validate_GreaterThan(0), true);
 
 // Declare validator rule using the chain defined above
 $validators = array(
-    'month' =&gt; $chain
+    'month' => $chain
 );
 $input = new Zend_Filter_Input(null, $validators);
-</programlisting>
+]]></programlisting>
         </section>
 
         <section xml:id="zend.filter.input.metacommands.messages"><info><title>The MESSAGES metacommand</title></info>
@@ -857,14 +855,14 @@ $input = new Zend_Filter_Input(null, $validators);
                 for a single validator.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $validators = array(
-    'month' =&gt; array(
+    'month' => array(
         'digits',
-        'messages' =&gt; 'A month must consist only of digits'
+        'messages' => 'A month must consist only of digits'
     )
 );
-</programlisting>
+]]></programlisting>
 
             <para>
                 If you have multiple validators for which you want to set the
@@ -881,19 +879,19 @@ $validators = array(
                 message for a subsequent validator in the chain.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $validators = array(
-    'month' =&gt; array(
+    'month' => array(
         'digits',
         new Zend_Validate_Between(1, 12),
-        'messages' =&gt; array(
+        'messages' => array(
             // use default message for validator [0]
             // set new message for validator [1]
-            1 =&gt; 'A month value must be between 1 and 12'
+            1 => 'A month value must be between 1 and 12'
         )
     )
 );
-</programlisting>
+]]></programlisting>
 
             <para>
                 If one of your validators has multiple error messages, they are
@@ -905,24 +903,24 @@ $validators = array(
                 associative array instead of a string.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $validators = array(
-    'month' =&gt; array(
+    'month' => array(
         'digits', new Zend_Validate_Between(1, 12),
-        'messages' =&gt; array(
+        'messages' => array(
             'A month must consist only of digits',
             array(
-                Zend_Validate_Between::NOT_BETWEEN =&gt;
+                Zend_Validate_Between::NOT_BETWEEN =>
                     'Month value %value% must be between ' .
                     '%min% and %max%',
-                Zend_Validate_Between::NOT_BETWEEN_STRICT =&gt;
+                Zend_Validate_Between::NOT_BETWEEN_STRICT =>
                     'Month value %value% must be strictly between ' .
                     '%min% and %max%'
             )
         )
     )
 );
-</programlisting>
+]]></programlisting>
 
             <para>
                 You should refer to documentation for each validator class to
@@ -936,21 +934,21 @@ $validators = array(
                 array construction:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $validators = array(
-    'month' =&gt; array(
+    'month' => array(
         new Zend_Validate_Between(1, 12),
-        'messages' =&gt; array(
-                        Zend_Validate_Between::NOT_BETWEEN =&gt;
+        'messages' => array(
+                        Zend_Validate_Between::NOT_BETWEEN =>
                             'Month value %value% must be between ' .
                             '%min% and %max%',
-                        Zend_Validate_Between::NOT_BETWEEN_STRICT =&gt;
+                        Zend_Validate_Between::NOT_BETWEEN_STRICT =>
                             'Month value %value% must be strictly between ' .
                             '%min% and %max%'
         )
     )
 );
-</programlisting>
+]]></programlisting>
         </section>
 
         <section xml:id="zend.filter.input.metacommands.global"><info><title>Using options to set metacommands for all rules</title></info>
@@ -965,21 +963,21 @@ $validators = array(
                 every rule.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // The default is set so all fields allow an empty string.
-$options = array('allowEmpty' =&gt; true);
+$options = array('allowEmpty' => true);
 
 // You can override this in a rule definition,
 // if a field should not accept an empty string.
 $validators = array(
-    'month' =&gt; array(
+    'month' => array(
         'Digits',
-        'allowEmpty' =&gt; false
+        'allowEmpty' => false
     )
 );
 
 $input = new Zend_Filter_Input($filters, $validators, $data, $options);
-</programlisting>
+]]></programlisting>
 
             <para>
                 The 'fields', 'messages', and 'default' metacommands cannot be
@@ -1008,11 +1006,11 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
             namespaces in the constructor options:
         </para>
 
-        <programlisting language="php">
-$options = array('filterNamespace' =&gt; 'My_Namespace_Filter',
-                 'validatorNamespace' =&gt; 'My_Namespace_Validate');
+        <programlisting language="php"><![CDATA[
+$options = array('filterNamespace' => 'My_Namespace_Filter',
+                 'validatorNamespace' => 'My_Namespace_Validate');
 $input = new Zend_Filter_Input($filters, $validators, $data, $options);
-</programlisting>
+]]></programlisting>
 
         <para>
             Alternatively, you can use the <methodname>addValidatorPrefixPath($prefix,
@@ -1021,9 +1019,9 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
             <classname>Zend_Filter_Input</classname>:
         </para>
 
-        <programlisting language="php">
-$input-&gt;addValidatorPrefixPath('Other_Namespace', 'Other/Namespace');
-$input-&gt;addFilterPrefixPath('Foo_Namespace', 'Foo/Namespace');
+        <programlisting language="php"><![CDATA[
+$input->addValidatorPrefixPath('Other_Namespace', 'Other/Namespace');
+$input->addFilterPrefixPath('Foo_Namespace', 'Foo/Namespace');
 
 // Now the search order for validators is:
 // 1. My_Namespace_Validate
@@ -1034,7 +1032,7 @@ $input-&gt;addFilterPrefixPath('Foo_Namespace', 'Foo/Namespace');
 // 1. My_Namespace_Filter
 // 2. Foo_Namespace
 // 3. Zend_Filter
-</programlisting>
+]]></programlisting>
 
         <para>
             You cannot remove <classname>Zend_Filter</classname> and

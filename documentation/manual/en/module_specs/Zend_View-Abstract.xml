@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.abstract"><info><title>Zend_View_Abstract</title></info>
     
 
@@ -32,12 +30,12 @@
         Internally, <methodname>Zend_View::_run()</methodname> does the following:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 protected function _run()
 {
     include func_get_arg(0);
 }
-</programlisting>
+]]></programlisting>
 
     <para>
         As such, the view scripts have access to the current object

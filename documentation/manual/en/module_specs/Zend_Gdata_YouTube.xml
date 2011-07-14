@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.youtube"><info><title>Using the YouTube Data API</title></info>
     
 
@@ -44,12 +42,12 @@
         <example xml:id="zend.gdata.youtube.developer_key.example"><info><title>Passing a Developer Key and ClientID to Zend_Gdata_YouTube</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube($httpClient,
                              $applicationId,
                              $clientId,
                              $developerKey);
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -79,25 +77,25 @@ $yt = new Zend_Gdata_YouTube($httpClient,
             <example xml:id="zend.gdata.youtube.videos.searching.example"><info><title>Searching for videos</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube();
-$query = $yt-&gt;newVideoQuery();
-$query-&gt;videoQuery = 'cat';
-$query-&gt;startIndex = 10;
-$query-&gt;maxResults = 20;
-$query-&gt;orderBy = 'viewCount';
+$query = $yt->newVideoQuery();
+$query->videoQuery = 'cat';
+$query->startIndex = 10;
+$query->maxResults = 20;
+$query->orderBy = 'viewCount';
 
-echo $query-&gt;queryUrl . "\n";
-$videoFeed = $yt-&gt;getVideoFeed($query);
+echo $query->queryUrl . "\n";
+$videoFeed = $yt->getVideoFeed($query);
 
 foreach ($videoFeed as $videoEntry) {
     echo "---------VIDEO----------\n";
-    echo "Title: " . $videoEntry-&gt;getVideoTitle() . "\n";
+    echo "Title: " . $videoEntry->getVideoTitle() . "\n";
     echo "\nDescription:\n";
-    echo $videoEntry-&gt;getVideoDescription();
+    echo $videoEntry->getVideoDescription();
     echo "\n\n\n";
 }
-</programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -120,14 +118,14 @@ foreach ($videoFeed as $videoEntry) {
             <example xml:id="zend.gdata.youtube.videos.searchingcategories.example"><info><title>Searching for videos in specific categories</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube();
-$query = $yt-&gt;newVideoQuery();
-$query-&gt;category = 'Comedy/dog';
+$query = $yt->newVideoQuery();
+$query->category = 'Comedy/dog';
 
-echo $query-&gt;queryUrl . "\n";
-$videoFeed = $yt-&gt;getVideoFeed($query);
-</programlisting>
+echo $query->queryUrl . "\n";
+$videoFeed = $yt->getVideoFeed($query);
+]]></programlisting>
             </example>
         </section>
 
@@ -150,10 +148,10 @@ $videoFeed = $yt-&gt;getVideoFeed($query);
             <example xml:id="zend.gdata.youtube.videos.standard.example-1"><info><title>Retrieving a standard video feed</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube();
-$videoFeed = $yt-&gt;getTopRatedVideoFeed();
-</programlisting>
+$videoFeed = $yt->getTopRatedVideoFeed();
+]]></programlisting>
             </example>
 
             <para>
@@ -168,12 +166,12 @@ $videoFeed = $yt-&gt;getTopRatedVideoFeed();
             <example xml:id="zend.gdata.youtube.videos.standard.example-2"><info><title>Using a Zend_Gdata_YouTube_VideoQuery to Retrieve Videos</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube();
-$query = $yt-&gt;newVideoQuery();
-$query-&gt;setTime('today');
-$videoFeed = $yt-&gt;getTopRatedVideoFeed($query);
-</programlisting>
+$query = $yt->newVideoQuery();
+$query->setTime('today');
+$videoFeed = $yt->getTopRatedVideoFeed($query);
+]]></programlisting>
             </example>
 
             <para>
@@ -184,11 +182,11 @@ $videoFeed = $yt-&gt;getTopRatedVideoFeed($query);
             <example xml:id="zend.gdata.youtube.videos.standard.example-3"><info><title>Retrieving a video feed by URL</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube();
 $url = 'http://gdata.youtube.com/feeds/standardfeeds/top_rated?time=today'
-$videoFeed = $yt-&gt;getVideoFeed($url);
-</programlisting>
+$videoFeed = $yt->getVideoFeed($url);
+]]></programlisting>
             </example>
         </section>
 
@@ -204,10 +202,10 @@ $videoFeed = $yt-&gt;getVideoFeed($url);
             <example xml:id="zend.gdata.youtube.videos.user.example"><info><title>Retrieving videos uploaded by a specific user</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube();
-$videoFeed = $yt-&gt;getUserUploads('liz');
-</programlisting>
+$videoFeed = $yt->getUserUploads('liz');
+]]></programlisting>
             </example>
         </section>
 
@@ -223,10 +221,10 @@ $videoFeed = $yt-&gt;getUserUploads('liz');
             <example xml:id="zend.gdata.youtube.videos.favorites.example"><info><title>Retrieving a user's favorite videos</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube();
-$videoFeed = $yt-&gt;getUserFavorites('liz');
-</programlisting>
+$videoFeed = $yt->getUserFavorites('liz');
+]]></programlisting>
             </example>
         </section>
 
@@ -242,10 +240,10 @@ $videoFeed = $yt-&gt;getUserFavorites('liz');
             <example xml:id="zend.gdata.youtube.videos.responses.example"><info><title>Retrieving a feed of video responses</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube();
-$videoFeed = $yt-&gt;getVideoResponseFeed('abc123813abc');
-</programlisting>
+$videoFeed = $yt->getVideoResponseFeed('abc123813abc');
+]]></programlisting>
             </example>
         </section>
     </section>
@@ -262,15 +260,15 @@ $videoFeed = $yt-&gt;getVideoResponseFeed('abc123813abc');
         <example xml:id="zend.gdata.youtube.videos.comments.example-1"><info><title>Retrieving a feed of video comments from a video ID</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube();
-$commentFeed = $yt-&gt;getVideoCommentFeed('abc123813abc');
+$commentFeed = $yt->getVideoCommentFeed('abc123813abc');
 
 foreach ($commentFeed as $commentEntry) {
-    echo $commentEntry-&gt;title-&gt;text . "\n";
-    echo $commentEntry-&gt;content-&gt;text . "\n\n\n";
+    echo $commentEntry->title->text . "\n";
+    echo $commentEntry->content->text . "\n\n\n";
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -281,13 +279,13 @@ foreach ($commentFeed as $commentEntry) {
         <example xml:id="zend.gdata.youtube.videos.comments.example-2"><info><title>Retrieving a Feed of Video Comments from a Zend_Gdata_YouTube_VideoEntry</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube();
-$videoEntry = $yt-&gt;getVideoEntry('abc123813abc');
+$videoEntry = $yt->getVideoEntry('abc123813abc');
 // we don't know the video ID in this example, but we do have the URL
-$commentFeed = $yt-&gt;getVideoCommentFeed(null,
-                                        $videoEntry-&gt;comments-&gt;href);
-</programlisting>
+$commentFeed = $yt->getVideoCommentFeed(null,
+                                        $videoEntry->comments->href);
+]]></programlisting>
         </example>
     </section>
 
@@ -311,16 +309,16 @@ $commentFeed = $yt-&gt;getVideoCommentFeed(null,
             <example xml:id="zend.gdata.youtube.playlists.user.example"><info><title>Retrieving the playlists of a user</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube();
-$playlistListFeed = $yt-&gt;getPlaylistListFeed('liz');
+$playlistListFeed = $yt->getPlaylistListFeed('liz');
 
 foreach ($playlistListFeed as $playlistEntry) {
-    echo $playlistEntry-&gt;title-&gt;text . "\n";
-    echo $playlistEntry-&gt;description-&gt;text . "\n";
-    echo $playlistEntry-&gt;getPlaylistVideoFeedUrl() . "\n\n\n";
+    echo $playlistEntry->title->text . "\n";
+    echo $playlistEntry->description->text . "\n";
+    echo $playlistEntry->getPlaylistVideoFeedUrl() . "\n\n\n";
 }
-</programlisting>
+]]></programlisting>
             </example>
         </section>
 
@@ -336,10 +334,10 @@ foreach ($playlistListFeed as $playlistEntry) {
             <example xml:id="zend.gdata.youtube.playlists.special.example"><info><title>Retrieving a specific playlist</title></info>
                 
 
-                <programlisting language="php">
-$feedUrl = $playlistEntry-&gt;getPlaylistVideoFeedUrl();
-$playlistVideoFeed = $yt-&gt;getPlaylistVideoFeed($feedUrl);
-</programlisting>
+                <programlisting language="php"><![CDATA[
+$feedUrl = $playlistEntry->getPlaylistVideoFeedUrl();
+$playlistVideoFeed = $yt->getPlaylistVideoFeed($feedUrl);
+]]></programlisting>
             </example>
         </section>
     </section>
@@ -360,14 +358,14 @@ $playlistVideoFeed = $yt-&gt;getPlaylistVideoFeed($feedUrl);
         <example xml:id="zend.gdata.youtube.subscriptions.example"><info><title>Retrieving all subscriptions for a user</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube();
-$subscriptionFeed = $yt-&gt;getSubscriptionFeed('liz');
+$subscriptionFeed = $yt->getSubscriptionFeed('liz');
 
 foreach ($subscriptionFeed as $subscriptionEntry) {
-    echo $subscriptionEntry-&gt;title-&gt;text . "\n";
+    echo $subscriptionEntry->title->text . "\n";
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -383,13 +381,13 @@ foreach ($subscriptionFeed as $subscriptionEntry) {
         <example xml:id="zend.gdata.youtube.profile.example"><info><title>Retrieving a user's profile</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube();
-$userProfile = $yt-&gt;getUserProfile('liz');
-echo "username: " . $userProfile-&gt;username-&gt;text . "\n";
-echo "age: " . $userProfile-&gt;age-&gt;text . "\n";
-echo "hometown: " . $userProfile-&gt;hometown-&gt;text . "\n";
-</programlisting>
+$userProfile = $yt->getUserProfile('liz');
+echo "username: " . $userProfile->username->text . "\n";
+echo "age: " . $userProfile->age->text . "\n";
+echo "hometown: " . $userProfile->hometown->text . "\n";
+]]></programlisting>
         </example>
     </section>
 
@@ -485,36 +483,36 @@ echo "hometown: " . $userProfile-&gt;hometown-&gt;text . "\n";
         <example xml:id="zend.gdata.youtube.uploads.example"><info><title>Uploading a video</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube($httpClient);
 $myVideoEntry = new Zend_Gdata_YouTube_VideoEntry();
 
-$filesource = $yt-&gt;newMediaFileSource('mytestmovie.mov');
-$filesource-&gt;setContentType('video/quicktime');
-$filesource-&gt;setSlug('mytestmovie.mov');
+$filesource = $yt->newMediaFileSource('mytestmovie.mov');
+$filesource->setContentType('video/quicktime');
+$filesource->setSlug('mytestmovie.mov');
 
-$myVideoEntry-&gt;setMediaSource($filesource);
+$myVideoEntry->setMediaSource($filesource);
 
-$myVideoEntry-&gt;setVideoTitle('My Test Movie');
-$myVideoEntry-&gt;setVideoDescription('My Test Movie');
+$myVideoEntry->setVideoTitle('My Test Movie');
+$myVideoEntry->setVideoDescription('My Test Movie');
 // Note that category must be a valid YouTube category !
-$myVideoEntry-&gt;setVideoCategory('Comedy');
+$myVideoEntry->setVideoCategory('Comedy');
 
 // Set keywords, note that this must be a comma separated string
 // and that each keyword cannot contain whitespace
-$myVideoEntry-&gt;SetVideoTags('cars, funny');
+$myVideoEntry->SetVideoTags('cars, funny');
 
 // Optionally set some developer tags
-$myVideoEntry-&gt;setVideoDeveloperTags(array('mydevelopertag',
+$myVideoEntry->setVideoDeveloperTags(array('mydevelopertag',
                                            'anotherdevelopertag'));
 
 // Optionally set the video's location
-$yt-&gt;registerPackage('Zend_Gdata_Geo');
-$yt-&gt;registerPackage('Zend_Gdata_Geo_Extension');
-$where = $yt-&gt;newGeoRssWhere();
-$position = $yt-&gt;newGmlPos('37.0 -122.0');
-$where-&gt;point = $yt-&gt;newGmlPoint($position);
-$myVideoEntry-&gt;setWhere($where);
+$yt->registerPackage('Zend_Gdata_Geo');
+$yt->registerPackage('Zend_Gdata_Geo_Extension');
+$where = $yt->newGeoRssWhere();
+$position = $yt->newGmlPos('37.0 -122.0');
+$where->point = $yt->newGmlPoint($position);
+$myVideoEntry->setWhere($where);
 
 // Upload URI for the currently authenticated user
 $uploadUrl =
@@ -524,15 +522,15 @@ $uploadUrl =
 // if availableor just a regular Zend_Gdata_App_Exception
 
 try {
-    $newEntry = $yt-&gt;insertEntry($myVideoEntry,
+    $newEntry = $yt->insertEntry($myVideoEntry,
                                  $uploadUrl,
                                  'Zend_Gdata_YouTube_VideoEntry');
 } catch (Zend_Gdata_App_HttpException $httpException) {
-    echo $httpException-&gt;getRawResponseBody();
+    echo $httpException->getRawResponseBody();
 } catch (Zend_Gdata_App_Exception $e) {
-    echo $e-&gt;getMessage();
+    echo $e->getMessage();
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -557,22 +555,22 @@ try {
         <example xml:id="zend.gdata.youtube.uploads.browser.example-1"><info><title>Browser-based upload</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube($httpClient);
 
 $myVideoEntry= new Zend_Gdata_YouTube_VideoEntry();
-$myVideoEntry-&gt;setVideoTitle('My Test Movie');
-$myVideoEntry-&gt;setVideoDescription('My Test Movie');
+$myVideoEntry->setVideoTitle('My Test Movie');
+$myVideoEntry->setVideoDescription('My Test Movie');
 
 // Note that category must be a valid YouTube category
-$myVideoEntry-&gt;setVideoCategory('Comedy');
-$myVideoEntry-&gt;SetVideoTags('cars, funny');
+$myVideoEntry->setVideoCategory('Comedy');
+$myVideoEntry->SetVideoTags('cars, funny');
 
 $tokenHandlerUrl = 'http://gdata.youtube.com/action/GetUploadToken';
-$tokenArray = $yt-&gt;getFormUploadToken($myVideoEntry, $tokenHandlerUrl);
+$tokenArray = $yt->getFormUploadToken($myVideoEntry, $tokenHandlerUrl);
 $tokenValue = $tokenArray['token'];
 $postUrl = $tokenArray['url'];
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -590,17 +588,17 @@ $postUrl = $tokenArray['url'];
         <example xml:id="zend.gdata.youtube.uploads.browser.example-2"><info><title>Browser-based upload: Creating the HTML form</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // place to redirect user after upload
 $nextUrl = 'http://mysite.com/youtube_uploads';
 
-$form = '&lt;form action="'. $postUrl .'?nexturl='. $nextUrl .
-        '" method="post" enctype="multipart/form-data"&gt;'.
-        '&lt;input name="file" type="file"/&gt;'.
-        '&lt;input name="token" type="hidden" value="'. $tokenValue .'"/&gt;'.
-        '&lt;input value="Upload Video File" type="submit" /&gt;'.
-        '&lt;/form&gt;';
-</programlisting>
+$form = '<form action="'. $postUrl .'?nexturl='. $nextUrl .
+        '" method="post" enctype="multipart/form-data">'.
+        '<input name="file" type="file"/>'.
+        '<input name="token" type="hidden" value="'. $tokenValue .'"/>'.
+        '<input value="Upload Video File" type="submit" />'.
+        '</form>';
+]]></programlisting>
         </example>
     </section>
 
@@ -619,29 +617,29 @@ $form = '&lt;form action="'. $postUrl .'?nexturl='. $nextUrl .
         <example xml:id="zend.gdata.youtube.uploads.status.example"><info><title>Checking video upload status</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 try {
-    $control = $videoEntry-&gt;getControl();
+    $control = $videoEntry->getControl();
 } catch (Zend_Gdata_App_Exception $e) {
-    echo $e-&gt;getMessage();
+    echo $e->getMessage();
 }
 
 if ($control instanceof Zend_Gdata_App_Extension_Control) {
-    if ($control-&gt;getDraft() != null &amp;&amp;
-        $control-&gt;getDraft()-&gt;getText() == 'yes') {
-        $state = $videoEntry-&gt;getVideoState();
+    if ($control->getDraft() != null &&
+        $control->getDraft()->getText() == 'yes') {
+        $state = $videoEntry->getVideoState();
 
         if ($state instanceof Zend_Gdata_YouTube_Extension_State) {
             print 'Upload status: '
-                  . $state-&gt;getName()
-                  .' '. $state-&gt;getText();
+                  . $state->getName()
+                  .' '. $state->getText();
         } else {
             print 'Not able to retrieve the video status information'
                   .' yet. ' . "Please try again shortly.\n";
         }
     }
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 

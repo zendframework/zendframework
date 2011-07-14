@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.securitygroups"><info><title>Zend_Service_Amazon_Ec2: Security Groups</title></info>
     
 
@@ -43,11 +41,11 @@
                 <constant>FALSE</constant>
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $ec2_sg = new Zend_Service_Amazon_Ec2_Securitygroups('aws_key',
                                                      'aws_secret_key');
-$return = $ec2_sg-&gt;create('mygroup', 'my group description');
-</programlisting>
+$return = $ec2_sg->create('mygroup', 'my group description');
+]]></programlisting>
         </example>
 
         <example xml:id="zend.service.amazon.ec2.securitygroups.maintenance.describe"><info><title>Describe a Security Group</title></info>
@@ -71,11 +69,11 @@ $return = $ec2_sg-&gt;create('mygroup', 'my group description');
                 group.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $ec2_sg = new Zend_Service_Amazon_Ec2_Securitygroups('aws_key',
                                                      'aws_secret_key');
-$return = $ec2_sg-&gt;describe('mygroup');
-</programlisting>
+$return = $ec2_sg->describe('mygroup');
+]]></programlisting>
         </example>
 
         <example xml:id="zend.service.amazon.ec2.securitygroups.maintenance.delete"><info><title>Delete a Security Group</title></info>
@@ -95,11 +93,11 @@ $return = $ec2_sg-&gt;describe('mygroup');
                 <constant>FALSE</constant>.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $ec2_sg = new Zend_Service_Amazon_Ec2_Securitygroups('aws_key',
                                                      'aws_secret_key');
-$return = $ec2_sg-&gt;delete('mygroup');
-</programlisting>
+$return = $ec2_sg->delete('mygroup');
+]]></programlisting>
         </example>
     </section>
 
@@ -133,15 +131,15 @@ $return = $ec2_sg-&gt;delete('mygroup');
                 <constant>FALSE</constant>
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $ec2_sg = new Zend_Service_Amazon_Ec2_Securitygroups('aws_key',
                                                      'aws_secret_key');
-$return = $ec2_sg-&gt;authorizeIp('mygroup',
+$return = $ec2_sg->authorizeIp('mygroup',
                                 'protocol',
                                 'fromPort',
                                 'toPort',
                                 'ipRange');
-</programlisting>
+]]></programlisting>
         </example>
 
         <example xml:id="zend.service.amazon.ec2.securitygroups.authorize.group"><info><title>Authorize By Group</title></info>
@@ -162,11 +160,11 @@ $return = $ec2_sg-&gt;authorizeIp('mygroup',
                 <constant>FALSE</constant>.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $ec2_sg = new Zend_Service_Amazon_Ec2_Securitygroups('aws_key',
                                                      'aws_secret_key');
-$return = $ec2_sg-&gt;authorizeGroup('mygroup', 'securityGroupName', 'ownerId');
-</programlisting>
+$return = $ec2_sg->authorizeGroup('mygroup', 'securityGroupName', 'ownerId');
+]]></programlisting>
         </example>
     </section>
 
@@ -201,15 +199,15 @@ $return = $ec2_sg-&gt;authorizeGroup('mygroup', 'securityGroupName', 'ownerId');
                 <constant>FALSE</constant>
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $ec2_sg = new Zend_Service_Amazon_Ec2_Securitygroups('aws_key',
                                                      'aws_secret_key');
-$return = $ec2_sg-&gt;revokeIp('mygroup',
+$return = $ec2_sg->revokeIp('mygroup',
                              'protocol',
                              'fromPort',
                              'toPort',
                              'ipRange');
-</programlisting>
+]]></programlisting>
         </example>
 
         <example xml:id="zend.service.amazon.ec2.securitygroups.revoke.group"><info><title>Revoke By Group</title></info>
@@ -232,11 +230,11 @@ $return = $ec2_sg-&gt;revokeIp('mygroup',
                 <constant>FALSE</constant>.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $ec2_sg = new Zend_Service_Amazon_Ec2_Securitygroups('aws_key',
                                                      'aws_secret_key');
-$return = $ec2_sg-&gt;revokeGroup('mygroup', 'securityGroupName', 'ownerId');
-</programlisting>
+$return = $ec2_sg->revokeGroup('mygroup', 'securityGroupName', 'ownerId');
+]]></programlisting>
         </example>
     </section>
 </section>

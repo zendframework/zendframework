@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.exception"><info><title>Catching Gdata Exceptions</title></info>
     
 
@@ -11,15 +9,15 @@
         <classname>Zend_Gdata_App_Exception</classname>.
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 try {
     $client =
         Zend_Gdata_ClientLogin::getHttpClient($username, $password);
 } catch(Zend_Gdata_App_Exception $ex) {
     // Report the exception to the user
-    die($ex-&gt;getMessage());
+    die($ex->getMessage());
 }
-</programlisting>
+]]></programlisting>
 
     <para>
         The following exception subclasses are used by <classname>Zend_Gdata</classname>:
@@ -90,7 +88,7 @@ try {
         exception subclasses are thrown by which methods in <classname>Zend_Gdata</classname>.
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 try {
     $client = Zend_Gdata_ClientLogin::getHttpClient($username,
                                                     $password,
@@ -101,6 +99,6 @@ try {
     ...
 } catch(Zend_Gdata_App_HttpException $httpEx) {
     // Google Data servers cannot be contacted.
-    die($httpEx-&gt;getMessage);}
-</programlisting>
+    die($httpEx->getMessage);}
+]]></programlisting>
 </section>

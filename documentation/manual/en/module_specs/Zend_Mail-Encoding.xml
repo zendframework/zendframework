@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.encoding"><info><title>Encoding</title></info>
     
 
@@ -25,14 +23,14 @@
         BASE64 header encoding same as the following example describes:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 // By default Zend_Mime::ENCODING_QUOTEDPRINTABLE
 $mail = new Zend_Mail('KOI8-R');
 
 // Reset to Base64 Encoding because Russian expressed in KOI8-R is
 // different from Roman letters-based languages greatly.
-$mail-&gt;setHeaderEncoding(Zend_Mime::ENCODING_BASE64);
-</programlisting>
+$mail->setHeaderEncoding(Zend_Mime::ENCODING_BASE64);
+]]></programlisting>
 
     <para>
         <classname>Zend_Mail_Transport_Smtp</classname> encodes lines starting with one dot or two

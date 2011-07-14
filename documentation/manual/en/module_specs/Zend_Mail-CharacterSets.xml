@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.character-sets"><info><title>Character Sets</title></info>
     
 
@@ -31,7 +29,7 @@
             <acronym>ISO-2022-JP</acronym>.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 //We suppose that character encoding of strings is UTF-8 on PHP script.
 function myConvert($string) {
     return mb_convert_encoding($string, 'ISO-2022-JP', 'UTF-8');
@@ -40,16 +38,16 @@ function myConvert($string) {
 $mail = new Zend_Mail('ISO-2022-JP');
 // In this case, you can use ENCODING_7BIT
 // because the ISO-2022-JP does not use MSB.
-$mail-&gt;setBodyText(
+$mail->setBodyText(
     myConvert('This is the text of the mail.'),
     null,
     Zend_Mime::ENCODING_7BIT
 );
-$mail-&gt;setHeaderEncoding(Zend_Mime::ENCODING_BASE64);
-$mail-&gt;setFrom('somebody@example.com', myConvert('Some Sender'));
-$mail-&gt;addTo('somebody_else@example.com', myConvert('Some Recipient'));
-$mail-&gt;setSubject(myConvert('TestSubject'));
-$mail-&gt;send();
-</programlisting>
+$mail->setHeaderEncoding(Zend_Mime::ENCODING_BASE64);
+$mail->setFrom('somebody@example.com', myConvert('Some Sender'));
+$mail->addTo('somebody_else@example.com', myConvert('Some Recipient'));
+$mail->setSubject(myConvert('TestSubject'));
+$mail->send();
+]]></programlisting>
     </example>
 </section>

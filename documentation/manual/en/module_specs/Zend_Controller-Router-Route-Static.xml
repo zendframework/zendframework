@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.router.routes.static"><info><title>Zend_Controller_Router_Route_Static</title></info>
     
 
@@ -11,13 +9,13 @@
         an overkill. The answer to this situation is to use static routes:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Static(
     'login',
-    array('controller' =&gt; 'auth', 'action' =&gt; 'login')
+    array('controller' => 'auth', 'action' => 'login')
 );
-$router-&gt;addRoute('login', $route);
-</programlisting>
+$router->addRoute('login', $route);
+]]></programlisting>
 
     <para>
         Above route will match a <acronym>URL</acronym> of
@@ -53,9 +51,9 @@ $router-&gt;addRoute('login', $route);
             parameter to the front controller during bootstrapping:
         </para>
 
-        <programlisting language="php">
-$front-&gt;setParam('useDefaultControllerAlways', true);
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$front->setParam('useDefaultControllerAlways', true);
+]]></programlisting>
 
         <para>
             However, this is considered a workaround; it is always better to

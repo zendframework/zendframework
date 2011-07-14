@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.regex"><info><title>Regex</title></info>
     
 
@@ -35,13 +33,13 @@
             simple. Let's look at some examples:
         </para>
 
-        <programlisting language="php">
-$validator = new Zend_Validate_Regex(array('pattern' =&gt; '/^Test/');
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_Regex(array('pattern' => '/^Test/');
 
-$validator-&gt;isValid("Test"); // returns true
-$validator-&gt;isValid("Testing"); // returns true
-$validator-&gt;isValid("Pest"); // returns false
-</programlisting>
+$validator->isValid("Test"); // returns true
+$validator->isValid("Testing"); // returns true
+$validator->isValid("Pest"); // returns false
+]]></programlisting>
 
         <para>
             As you can see, the pattern has to be given using the same syntax as for
@@ -60,13 +58,13 @@ $validator-&gt;isValid("Pest"); // returns false
             <methodname>getPattern()</methodname>.
         </para>
 
-        <programlisting language="php">
-$validator = new Zend_Validate_Regex(array('pattern' =&gt; '/^Test/');
-$validator-&gt;setPattern('ing$/');
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_Regex(array('pattern' => '/^Test/');
+$validator->setPattern('ing$/');
 
-$validator-&gt;isValid("Test"); // returns false
-$validator-&gt;isValid("Testing"); // returns true
-$validator-&gt;isValid("Pest"); // returns false
-</programlisting>
+$validator->isValid("Test"); // returns false
+$validator->isValid("Testing"); // returns true
+$validator->isValid("Pest"); // returns false
+]]></programlisting>
     </section>
 </section>

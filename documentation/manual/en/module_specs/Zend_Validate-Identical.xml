@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.identical"><info><title>Identical</title></info>
     
 
@@ -41,12 +39,12 @@
             See the following example which validates two strings.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $valid = new Zend_Validate_Identical('origin');
-if ($valid-&gt;isValid($value) {
+if ($valid->isValid($value) {
     return true;
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             The validation will only then return <constant>TRUE</constant> when both values are
@@ -69,14 +67,14 @@ if ($valid-&gt;isValid($value) {
             As already noted Haystack and Value must be identical.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $valid = new Zend_Validate_Identical(123);
-if ($valid-&gt;isValid($input)) {
+if ($valid->isValid($input)) {
     // input appears to be valid
 } else {
     // input is invalid
 }
-</programlisting>
+]]></programlisting>
 
         <note><info><title>Type comparison</title></info>
             
@@ -99,14 +97,14 @@ if ($valid-&gt;isValid($input)) {
             See the following example:
         </para>
 
-        <programlisting language="php">
-$form-&gt;addElement('password', 'elementOne');
-$form-&gt;addElement('password', 'elementTwo', array(
-    'validators' =&gt; array(
-        array('identical', false, array('token' =&gt; 'elementOne'))
+        <programlisting language="php"><![CDATA[
+$form->addElement('password', 'elementOne');
+$form->addElement('password', 'elementTwo', array(
+    'validators' => array(
+        array('identical', false, array('token' => 'elementOne'))
     )
 ));
-</programlisting>
+]]></programlisting>
 
         <para>
             By using the elements name from the first element as <property>token</property> for the
@@ -125,15 +123,15 @@ $form-&gt;addElement('password', 'elementTwo', array(
             The default value for this property is <constant>TRUE</constant>.
         </para>
 
-        <programlisting language="php">
-$valid = new Zend_Validate_Identical(array('token' =&gt; 123, 'strict' =&gt; FALSE));
+        <programlisting language="php"><![CDATA[
+$valid = new Zend_Validate_Identical(array('token' => 123, 'strict' => FALSE));
 $input = '123';
-if ($valid-&gt;isValid($input)) {
+if ($valid->isValid($input)) {
     // input appears to be valid
 } else {
     // input is invalid
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             The difference to the previous example is that the validation returns in this case
@@ -162,14 +160,14 @@ if ($valid-&gt;isValid($input)) {
             it could contain only one element.
         </para>
 
-        <programlisting language="php">
-$valid = new Zend_Validate_Identical(array('token' =&gt; 123));
-if ($valid-&gt;isValid($input)) {
+        <programlisting language="php"><![CDATA[
+$valid = new Zend_Validate_Identical(array('token' => 123));
+if ($valid->isValid($input)) {
     // input appears to be valid
 } else {
     // input is invalid
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             The above example validates the integer 123. The reason for this special case is, that
@@ -182,13 +180,13 @@ if ($valid-&gt;isValid($input)) {
             '<property>token</property>' then you have to wrap it like shown in the example below.
         </para>
 
-        <programlisting language="php">
-$valid = new Zend_Validate_Identical(array('token' =&gt; array('token' =&gt; 123)));
-if ($valid-&gt;isValid($input)) {
+        <programlisting language="php"><![CDATA[
+$valid = new Zend_Validate_Identical(array('token' => array('token' => 123)));
+if ($valid->isValid($input)) {
     // input appears to be valid
 } else {
     // input is invalid
 }
-</programlisting>
+]]></programlisting>
     </section>
 </section>

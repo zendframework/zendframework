@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.plugins"><info><title>Plugins</title></info>
     
 
@@ -86,12 +84,12 @@
             abstract class <classname>Zend_Controller_Plugin_Abstract</classname>:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class MyPlugin extends Zend_Controller_Plugin_Abstract
 {
     // ...
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             None of the methods of <classname>Zend_Controller_Plugin_Abstract</classname>
@@ -119,53 +117,53 @@ class MyPlugin extends Zend_Controller_Plugin_Abstract
             plugin may be used in the controller chain:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class MyPlugin extends Zend_Controller_Plugin_Abstract
 {
     public function routeStartup(Zend_Controller_Request_Abstract $request)
     {
-        $this-&gt;getResponse()
-             -&gt;appendBody("&lt;p&gt;routeStartup() called&lt;/p&gt;\n");
+        $this->getResponse()
+             ->appendBody("<p>routeStartup() called</p>\n");
     }
 
     public function routeShutdown(Zend_Controller_Request_Abstract $request)
     {
-        $this-&gt;getResponse()
-             -&gt;appendBody("&lt;p&gt;routeShutdown() called&lt;/p&gt;\n");
+        $this->getResponse()
+             ->appendBody("<p>routeShutdown() called</p>\n");
     }
 
     public function dispatchLoopStartup(
         Zend_Controller_Request_Abstract $request)
     {
-        $this-&gt;getResponse()
-             -&gt;appendBody("&lt;p&gt;dispatchLoopStartup() called&lt;/p&gt;\n");
+        $this->getResponse()
+             ->appendBody("<p>dispatchLoopStartup() called</p>\n");
     }
 
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
-        $this-&gt;getResponse()
-             -&gt;appendBody("&lt;p&gt;preDispatch() called&lt;/p&gt;\n");
+        $this->getResponse()
+             ->appendBody("<p>preDispatch() called</p>\n");
     }
 
     public function postDispatch(Zend_Controller_Request_Abstract $request)
     {
-        $this-&gt;getResponse()
-             -&gt;appendBody("&lt;p&gt;postDispatch() called&lt;/p&gt;\n");
+        $this->getResponse()
+             ->appendBody("<p>postDispatch() called</p>\n");
     }
 
     public function dispatchLoopShutdown()
     {
-        $this-&gt;getResponse()
-             -&gt;appendBody("&lt;p&gt;dispatchLoopShutdown() called&lt;/p&gt;\n");
+        $this->getResponse()
+             ->appendBody("<p>dispatchLoopShutdown() called</p>\n");
     }
 }
 
 $front = Zend_Controller_Front::getInstance();
-$front-&gt;setControllerDirectory('/path/to/controllers')
-      -&gt;setRouter(new Zend_Controller_Router_Rewrite())
-      -&gt;registerPlugin(new MyPlugin());
-$front-&gt;dispatch();
-</programlisting>
+$front->setControllerDirectory('/path/to/controllers')
+      ->setRouter(new Zend_Controller_Router_Rewrite())
+      ->registerPlugin(new MyPlugin());
+$front->dispatch();
+]]></programlisting>
 
         <para>
             Assuming that no actions called emit any output, and only one action
@@ -173,14 +171,14 @@ $front-&gt;dispatch();
             the following output:
         </para>
 
-        <programlisting language="php">
-&lt;p&gt;routeStartup() called&lt;/p&gt;
-&lt;p&gt;routeShutdown() called&lt;/p&gt;
-&lt;p&gt;dispatchLoopStartup() called&lt;/p&gt;
-&lt;p&gt;preDispatch() called&lt;/p&gt;
-&lt;p&gt;postDispatch() called&lt;/p&gt;
-&lt;p&gt;dispatchLoopShutdown() called&lt;/p&gt;
-</programlisting>
+        <programlisting language="php"><![CDATA[
+<p>routeStartup() called</p>
+<p>routeShutdown() called</p>
+<p>dispatchLoopStartup() called</p>
+<p>preDispatch() called</p>
+<p>postDispatch() called</p>
+<p>dispatchLoopShutdown() called</p>
+]]></programlisting>
 
         <note>
             <para>

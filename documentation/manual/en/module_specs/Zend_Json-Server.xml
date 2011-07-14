@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.server"><info><title>Zend_Json_Server - JSON-RPC server</title></info>
     
 
@@ -61,7 +59,7 @@
             'add', 'subtract', 'multiply', and 'divide':
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 /**
  * Calculator - sample class to expose via JSON-RPC
  */
@@ -115,7 +113,7 @@ class Calculator
         return $x / $y;
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Note that each method has a docblock with entries indicating each
@@ -129,15 +127,15 @@ class Calculator
             Now we'll create a script to handle the requests:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $server = new Zend_Json_Server();
 
 // Indicate what functionality is available:
-$server-&gt;setClass('Calculator');
+$server->setClass('Calculator');
 
 // Handle the request:
-$server-&gt;handle();
-</programlisting>
+$server->handle();
+]]></programlisting>
 
         <para>
             However, this will not address the issue of returning an SMD so that
@@ -146,17 +144,17 @@ $server-&gt;handle();
             specifying some server metadata:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $server = new Zend_Json_Server();
-$server-&gt;setClass('Calculator');
+$server->setClass('Calculator');
 
 if ('GET' == $_SERVER['REQUEST_METHOD']) {
     // Indicate the URL endpoint, and the JSON-RPC version used:
-    $server-&gt;setTarget('/json-rpc.php')
-           -&gt;setEnvelope(Zend_Json_Server_Smd::ENV_JSONRPC_2);
+    $server->setTarget('/json-rpc.php')
+           ->setEnvelope(Zend_Json_Server_Smd::ENV_JSONRPC_2);
 
     // Grab the SMD
-    $smd = $server-&gt;getServiceMap();
+    $smd = $server->getServiceMap();
 
     // Return the SMD to the client
     header('Content-Type: application/json');
@@ -164,8 +162,8 @@ if ('GET' == $_SERVER['REQUEST_METHOD']) {
     return;
 }
 
-$server-&gt;handle();
-</programlisting>
+$server->handle();
+]]></programlisting>
 
         <para>
             If utilizing the JSON-RPC server with Dojo toolkit, you will also
@@ -173,25 +171,25 @@ $server-&gt;handle();
             interoperate properly:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $server = new Zend_Json_Server();
-$server-&gt;setClass('Calculator');
+$server->setClass('Calculator');
 
 if ('GET' == $_SERVER['REQUEST_METHOD']) {
-    $server-&gt;setTarget('/json-rpc.php')
-           -&gt;setEnvelope(Zend_Json_Server_Smd::ENV_JSONRPC_2);
-    $smd = $server-&gt;getServiceMap();
+    $server->setTarget('/json-rpc.php')
+           ->setEnvelope(Zend_Json_Server_Smd::ENV_JSONRPC_2);
+    $smd = $server->getServiceMap();
 
     // Set Dojo compatibility:
-    $smd-&gt;setDojoCompatible(true);
+    $smd->setDojoCompatible(true);
 
     header('Content-Type: application/json');
     echo $smd;
     return;
 }
 
-$server-&gt;handle();
-</programlisting>
+$server->handle();
+]]></programlisting>
     </example>
 
     <section xml:id="zend.json.server.details"><info><title>Advanced Details</title></info>

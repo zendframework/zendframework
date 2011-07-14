@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.index-creation"><info><title>Building Indexes</title></info>
     
 
@@ -19,21 +17,21 @@
             using <classname>Zend_Search_Lucene</classname> indexing <acronym>API</acronym>:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Create index
 $index = Zend_Search_Lucene::create('/data/my-index');
 
 $doc = new Zend_Search_Lucene_Document();
 
 // Store document URL to identify it in the search results
-$doc-&gt;addField(Zend_Search_Lucene_Field::Text('url', $docUrl));
+$doc->addField(Zend_Search_Lucene_Field::Text('url', $docUrl));
 
 // Index document contents
-$doc-&gt;addField(Zend_Search_Lucene_Field::UnStored('contents', $docContent));
+$doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $docContent));
 
 // Add document to the index
-$index-&gt;addDocument($doc);
-</programlisting>
+$index->addDocument($doc);
+]]></programlisting>
 
         <para>
             Newly added documents are immediately searchable in the index.
@@ -48,20 +46,20 @@ $index-&gt;addDocument($doc);
             is that the open() method is called instead of the create() method:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Open existing index
 $index = Zend_Search_Lucene::open('/data/my-index');
 
 $doc = new Zend_Search_Lucene_Document();
 // Store document URL to identify it in search result.
-$doc-&gt;addField(Zend_Search_Lucene_Field::Text('url', $docUrl));
+$doc->addField(Zend_Search_Lucene_Field::Text('url', $docUrl));
 // Index document content
-$doc-&gt;addField(Zend_Search_Lucene_Field::UnStored('contents',
+$doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
                                                   $docContent));
 
 // Add document to the index.
-$index-&gt;addDocument($doc);
-</programlisting>
+$index->addDocument($doc);
+]]></programlisting>
     </section>
 
     <section xml:id="zend.search.lucene.index-creation.document-updating"><info><title>Updating Documents</title></info>
@@ -77,13 +75,13 @@ $index-&gt;addDocument($doc);
             index document id. It can be retrieved from a query hit by 'id' property:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $removePath = ...;
-$hits = $index-&gt;find('path:' . $removePath);
+$hits = $index->find('path:' . $removePath);
 foreach ($hits as $hit) {
-    $index-&gt;delete($hit-&gt;id);
+    $index->delete($hit->id);
 }
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.search.lucene.index-creation.counting"><info><title>Retrieving Index Size</title></info>
@@ -106,23 +104,23 @@ foreach ($hits as $hit) {
              non-deleted documents.
         </para>
 
-        <programlisting language="php">
-$indexSize = $index-&gt;count();
-$documents = $index-&gt;numDocs();
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$indexSize = $index->count();
+$documents = $index->numDocs();
+]]></programlisting>
 
         <para>
             <methodname>Zend_Search_Lucene::isDeleted($id)</methodname> method may be used to check
             if a document is deleted.
         </para>
 
-        <programlisting language="php">
-for ($count = 0; $count &lt; $index-&gt;maxDoc(); $count++) {
-    if ($index-&gt;isDeleted($count)) {
+        <programlisting language="php"><![CDATA[
+for ($count = 0; $count < $index->maxDoc(); $count++) {
+    if ($index->isDeleted($count)) {
         echo "Document #$id is deleted.\n";
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Index optimization removes deleted documents and squeezes documents' IDs in to a smaller
@@ -165,13 +163,13 @@ for ($count = 0; $count &lt; $index-&gt;maxDoc(); $count++) {
             segments into one new segment:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Open existing index
 $index = Zend_Search_Lucene::open('/data/my-index');
 
 // Optimize index.
-$index-&gt;optimize();
-</programlisting>
+$index->optimize();
+]]></programlisting>
 
         <para>
             Automatic index optimization is performed to keep indexes in a consistent state.
@@ -292,14 +290,14 @@ $index-&gt;optimize();
             method:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Get current default file permissions
 $currentPermissions =
     Zend_Search_Lucene_Storage_Directory_Filesystem::getDefaultFilePermissions();
 
 // Give read-writing permissions only for current user and group
 Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions(0660);
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.search.lucene.index-creation.limitations"><info><title>Limitations</title></info>

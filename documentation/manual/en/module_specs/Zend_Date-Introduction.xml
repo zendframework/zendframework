@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.introduction"><info><title>Introduction</title></info>
     
 
@@ -45,12 +43,12 @@
         <example xml:id="zend.date.setdefaulttimezone.example-1"><info><title>Setting a Default Timezone</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // timezone for an American in California
 date_default_timezone_set('America/Los_Angeles');
 // timezone for a German in Germany
 date_default_timezone_set('Europe/Berlin');
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.router.routes.rest"><info><title>Zend_Rest_Route</title></info>
     
 
@@ -90,11 +88,11 @@
             default route on the front controller:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $front     = Zend_Controller_Front::getInstance();
 $restRoute = new Zend_Rest_Route($front);
-$front-&gt;getRouter()-&gt;addRoute('default', $restRoute);
-</programlisting>
+$front->getRouter()->addRoute('default', $restRoute);
+]]></programlisting>
 
         <note>
             <para>
@@ -109,24 +107,24 @@ $front-&gt;getRouter()-&gt;addRoute('default', $restRoute);
             construct it with an array of module names as the 3rd constructor argument:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $front     = Zend_Controller_Front::getInstance();
 $restRoute = new Zend_Rest_Route($front, array(), array('product'));
-$front-&gt;getRouter()-&gt;addRoute('rest', $restRoute);
-</programlisting>
+$front->getRouter()->addRoute('rest', $restRoute);
+]]></programlisting>
 
         <para>
             To enable <classname>Zend_Rest_Route</classname> for specific
             controllers, add an array of controller names as the value of each module array element.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $front     = Zend_Controller_Front::getInstance();
 $restRoute = new Zend_Rest_Route($front, array(), array(
-    'product' =&gt; array('ratings')
+    'product' => array('ratings')
 ));
-$front-&gt;getRouter()-&gt;addRoute('rest', $restRoute);
-</programlisting>
+$front->getRouter()->addRoute('rest', $restRoute);
+]]></programlisting>
     </section>
 
     <section xml:id="zend.rest.route_config"><info><title>Zend_Rest_Route with Zend_Config_Ini</title></info>
@@ -137,11 +135,11 @@ $front-&gt;getRouter()-&gt;addRoute('rest', $restRoute);
             file, use a route type parameter and set the config options:
         </para>
 
-        <programlisting language="ini">
+        <programlisting language="ini"><![CDATA[
 routes.rest.type = Zend_Rest_Route
 routes.rest.defaults.controller = object
 routes.rest.mod = project,user
-</programlisting>
+]]></programlisting>
 
         <para>
             The 'type' option designates the RESTful routing config type. The 'defaults' option is
@@ -156,11 +154,11 @@ routes.rest.mod = project,user
             Then use the <methodname>addConfig()</methodname> method of the Rewrite router object:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('path/to/routes.ini');
 $router = new Zend_Controller_Router_Rewrite();
-$router-&gt;addConfig($config, 'routes');
-</programlisting>
+$router->addConfig($config, 'routes');
+]]></programlisting>
     </section>
 
     <section xml:id="zend.rest.controller"><info><title>Zend_Rest_Controller</title></info>

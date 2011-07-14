@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.navigation"><info><title>Zend_Application_Resource_Navigation</title></info>
     
 
@@ -24,7 +22,7 @@
             configure the navigation resource.
         </para>
 
-        <programlisting language="ini">
+        <programlisting language="ini"><![CDATA[
 resources.navigation.pages.page1.label = "Label of the first page"
 resources.navigation.pages.page1.route = "Route that belongs to the first page"
 
@@ -32,6 +30,6 @@ resources.navigation.pages.page1.route = "Route that belongs to the first page"
 resources.navigation.pages.page1.pages.page2.type = "Zend_Navigation_Page_Uri"
 resources.navigation.pages.page1.pages.page2.label = "Label of the second page"
 resources.navigation.pages.page1.pages.page2.uri = "/url/to/page/2"
-</programlisting>
+]]></programlisting>
     </example>
 </section>

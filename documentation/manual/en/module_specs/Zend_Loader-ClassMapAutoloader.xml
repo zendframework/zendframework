@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.class-map-autoloader"><info><title>The ClassMapAutoloader</title></info>
     
 
@@ -38,9 +36,9 @@
             containing source code anywhere underneath it.
         </para>
 
-        <programlisting language="sh">
+        <programlisting language="sh"><![CDATA[
 php classmap_generator.php Some/Directory/
-</programlisting>
+]]></programlisting>
 
         <para>
             This will create a file named <filename>Some/Directory/.classmap.php</filename>, which
@@ -52,7 +50,7 @@ php classmap_generator.php Some/Directory/
             <classname>ClassMapAutoloader</classname>, and provide it the location of the map.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // This example assumes ZF is on your include_path.
 // You could also load the autoloader class from a path relative to the
 // current script, or via an absolute path.
@@ -60,11 +58,11 @@ require_once 'Zend/Loader/ClassMapAutoloader.php';
 $loader = new Zend\Loader\ClassMapAutoloader();
 
 // Register the class map:
-$loader-&gt;registerAutoloadMap('Some/Directory/.classmap.php');
+$loader->registerAutoloadMap('Some/Directory/.classmap.php');
 
 // Register with spl_autoload:
-$loader-&gt;register();
-</programlisting>
+$loader->register();
+]]></programlisting>
 
         <para>
             At this point, you may now use any classes referenced in your class map.
@@ -95,16 +93,16 @@ $loader-&gt;register();
                         As an example:
                     </para>
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 // Configuration defining both a file-based class map, and an array map
 $config = array(
     __DIR__ . '/library/.classmap.php', // file-based class map
     array(                              // array class map
-        'Application\Bootstrap' =&gt; __DIR__ . '/application/Bootstrap.php',
-        'Test\Bootstrap'        =&gt; __DIR__ . '/tests/Bootstrap.php',
+        'Application\Bootstrap' => __DIR__ . '/application/Bootstrap.php',
+        'Test\Bootstrap'        => __DIR__ . '/tests/Bootstrap.php',
     ),
 );
-</programlisting>
+]]></programlisting>
                 </listitem>
             </varlistentry>
         </variablelist>
@@ -308,26 +306,26 @@ $config = array(
                 could be used to configure the autoloader:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Configuration defining both a file-based class map, and an array map
 $config = array(
 APPLICATION_PATH . '/../library/.classmap.php', // file-based class map
     array(                              // array class map
-        'Application\Bootstrap' =&gt; APPLICATION_PATH . '/Bootstrap.php',
-        'Test\Bootstrap'        =&gt; APPLICATION_PATH . '/../tests/Bootstrap.php',
+        'Application\Bootstrap' => APPLICATION_PATH . '/Bootstrap.php',
+        'Test\Bootstrap'        => APPLICATION_PATH . '/../tests/Bootstrap.php',
     ),
 );
-</programlisting>
+]]></programlisting>
             
             <para>
                 An eqivalent INI style configuration might look like this:
             </para>
 
-            <programlisting language="ini">
+            <programlisting language="ini"><![CDATA[
 classmap.library = APPLICATION_PATH "/../library/.classmap.php"
 classmap.resources.Application\Bootstrap = APPLICATION_PATH "/Bootstrap.php"
 classmap.resources.Test\Bootstrap = APPLICATION_PATH "/../tests/Bootstrap.php"
-</programlisting>
+]]></programlisting>
 
             <para>
                 Once you have your configuration, you can pass it either to the constructor of the
@@ -336,7 +334,7 @@ classmap.resources.Test\Bootstrap = APPLICATION_PATH "/../tests/Bootstrap.php"
                 <methodname>registerAutoloadMaps()</methodname>.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 /* The following are all equivalent */
 
 // To the constructor:
@@ -344,12 +342,12 @@ $loader = new Zend\Loader\ClassMapAutoloader($config);
 
 // To setOptions():
 $loader = new Zend\Loader\ClassMapAutoloader();
-$loader-&gt;setOptions($config);
+$loader->setOptions($config);
 
 // To registerAutoloadMaps():
 $loader = new Zend\Loader\ClassMapAutoloader();
-$loader-&gt;registerAutoloadMaps($config);
-</programlisting>
+$loader->registerAutoloadMaps($config);
+]]></programlisting>
         </example>
     </section>
 </section>

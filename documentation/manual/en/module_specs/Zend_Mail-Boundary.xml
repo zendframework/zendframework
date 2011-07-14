@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.boundary"><info><title>Controlling the MIME Boundary</title></info>
     
 
@@ -14,10 +12,10 @@
     <example xml:id="zend.mail.boundary.example-1"><info><title>Changing the MIME Boundary</title></info>
         
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
-$mail-&gt;setMimeBoundary('=_' . md5(microtime(1) . $someId++));
+$mail->setMimeBoundary('=_' . md5(microtime(1) . $someId++));
 // build message...
-</programlisting>
+]]></programlisting>
     </example>
 </section>

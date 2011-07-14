@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.global_session_management"><info><title>Global Session Management</title></info>
     
 
@@ -45,7 +43,7 @@
                 first add the configuration options to the <acronym>INI</acronym> file:
             </para>
 
-            <programlisting language="ini">
+            <programlisting language="ini"><![CDATA[
 ; Accept defaults for production
 [production]
 ; bug_compat_42
@@ -74,7 +72,7 @@ name = UNIQUE_NAME
 ; use_only_cookies
 ; use_trans_sid
 
-; remember_me_seconds = &lt;integer seconds&gt;
+; remember_me_seconds = <integer seconds>
 ; strict = on|off
 
 ; Development inherits configuration from production, but overrides
@@ -86,18 +84,18 @@ save_path = /home/myaccount/zend_sessions/myapp
 use_only_cookies = on
 ; When persisting session id cookies, request a TTL of 10 days
 remember_me_seconds = 864000
-</programlisting>
+]]></programlisting>
 
             <para>
                 Next, load the configuration file and pass its array representation to
                 <methodname>Zend_Session::setOptions()</methodname>:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('myapp.ini', 'development');
 
-Zend_Session::setOptions($config-&gt;toArray());
-</programlisting>
+Zend_Session::setOptions($config->toArray());
+]]></programlisting>
         </example>
 
         <para>
@@ -398,14 +396,14 @@ Zend_Session::setOptions($config-&gt;toArray());
             <example xml:id="zend.session.global_session_management.session_identifiers.hijacking_and_fixation.example"><info><title>Session Fixation</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $defaultNamespace = new Zend_Session_Namespace();
 
-if (!isset($defaultNamespace-&gt;initialized)) {
+if (!isset($defaultNamespace->initialized)) {
     Zend_Session::regenerateId();
-    $defaultNamespace-&gt;initialized = true;
+    $defaultNamespace->initialized = true;
 }
-</programlisting>
+]]></programlisting>
             </example>
         </section>
     </section>

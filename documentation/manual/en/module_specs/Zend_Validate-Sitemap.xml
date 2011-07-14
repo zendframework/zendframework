@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.sitemap"><info><title>Sitemap Validators</title></info>
     
 
@@ -42,20 +40,20 @@
         <example xml:id="zend.validate.sitemap.lastmod.example"><info><title>Sitemap Lastmod Validator</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Sitemap_Lastmod();
 
-$validator-&gt;isValid('1999-11-11T22:23:52-02:00'); // true
-$validator-&gt;isValid('2008-05-12T00:42:52+02:00'); // true
-$validator-&gt;isValid('1999-11-11'); // true
-$validator-&gt;isValid('2008-05-12'); // true
+$validator->isValid('1999-11-11T22:23:52-02:00'); // true
+$validator->isValid('2008-05-12T00:42:52+02:00'); // true
+$validator->isValid('1999-11-11'); // true
+$validator->isValid('2008-05-12'); // true
 
-$validator-&gt;isValid('1999-11-11t22:23:52-02:00'); // false
-$validator-&gt;isValid('2008-05-12T00:42:60+02:00'); // false
-$validator-&gt;isValid('1999-13-11'); // false
-$validator-&gt;isValid('2008-05-32'); // false
-$validator-&gt;isValid('yesterday'); // false
-</programlisting>
+$validator->isValid('1999-11-11t22:23:52-02:00'); // false
+$validator->isValid('2008-05-12T00:42:60+02:00'); // false
+$validator->isValid('1999-13-11'); // false
+$validator->isValid('2008-05-32'); // false
+$validator->isValid('yesterday'); // false
+]]></programlisting>
         </example>
     </section>
 
@@ -83,20 +81,20 @@ $validator-&gt;isValid('yesterday'); // false
         <example xml:id="zend.validate.sitemap.priority.example"><info><title>Sitemap Priority Validator</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Sitemap_Priority();
 
-$validator-&gt;isValid('0.1'); // true
-$validator-&gt;isValid('0.789'); // true
-$validator-&gt;isValid(0.8); // true
-$validator-&gt;isValid(1.0); // true
+$validator->isValid('0.1'); // true
+$validator->isValid('0.789'); // true
+$validator->isValid(0.8); // true
+$validator->isValid(1.0); // true
 
-$validator-&gt;isValid('1.1'); // false
-$validator-&gt;isValid('-0.4'); // false
-$validator-&gt;isValid(1.00001); // false
-$validator-&gt;isValid(0xFF); // false
-$validator-&gt;isValid('foo'); // false
-</programlisting>
+$validator->isValid('1.1'); // false
+$validator->isValid('-0.4'); // false
+$validator->isValid(1.00001); // false
+$validator->isValid(0xFF); // false
+$validator->isValid('foo'); // false
+]]></programlisting>
         </example>
     </section>
 

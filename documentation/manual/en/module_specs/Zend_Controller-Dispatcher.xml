@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.dispatcher"><info><title>The Dispatcher</title></info>
     
 
@@ -35,13 +33,13 @@
                 <constant>TRUE</constant> in either the front controller or your dispatcher:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // In your front controller:
-$front-&gt;setParam('prefixDefaultModule', true);
+$front->setParam('prefixDefaultModule', true);
 
 // In your dispatcher:
-$dispatcher-&gt;setParam('prefixDefaultModule', true);
-</programlisting>
+$dispatcher->setParam('prefixDefaultModule', true);
+]]></programlisting>
 
             <para>
                 This allows you to re-purpose an existing module to be the
@@ -74,11 +72,11 @@ $dispatcher-&gt;setParam('prefixDefaultModule', true);
             send to the new action:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 public function fooAction()
 {
     // forward to another action in the current controller and module:
-    $this-&gt;_forward('bar', null, null, array('baz' =&gt; 'bogus'));
+    $this->_forward('bar', null, null, array('baz' => 'bogus'));
 }
 
 public function barAction()
@@ -86,16 +84,16 @@ public function barAction()
     // forward to an action in another controller:
     // FooController::bazAction(),
     // in the current module:
-    $this-&gt;_forward('baz', 'foo', null, array('baz' =&gt; 'bogus'));
+    $this->_forward('baz', 'foo', null, array('baz' => 'bogus'));
 }
 
 public function bazAction()
 {
     // forward to an action in another controller in another module,
     // Foo_BarController::bazAction():
-    $this-&gt;_forward('baz', 'bar', 'foo', array('baz' =&gt; 'bogus'));
+    $this->_forward('baz', 'bar', 'foo', array('baz' => 'bogus'));
 }
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.controller.dispatcher.subclassing"><info><title>Subclassing the Dispatcher</title></info>
@@ -120,7 +118,7 @@ public function bazAction()
             following methods as required for any dispatcher implementation:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 interface Zend_Controller_Dispatcher_Interface
 {
     /**
@@ -274,7 +272,7 @@ interface Zend_Controller_Dispatcher_Interface
      */
     public function getDefaultAction();
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             In most cases, however, you should simply extend the abstract class

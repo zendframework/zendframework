@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.codegenerator.reference"><info><title>Zend_CodeGenerator Reference</title></info>
     
 
@@ -16,7 +14,7 @@
                 follows:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 abstract class Zend_CodeGenerator_Abstract
 {
     final public function __construct(Array $options = array())
@@ -28,7 +26,7 @@ abstract class Zend_CodeGenerator_Abstract
     abstract public function generate();
     final public function __toString()
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 The constructor first calls <methodname>_init()</methodname> (which is left
@@ -69,7 +67,7 @@ abstract class Zend_CodeGenerator_Abstract
                 content. Its <acronym>API</acronym> is as follows:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 abstract class Zend_CodeGenerator_Php_Abstract
     extends Zend_CodeGenerator_Abstract
 {
@@ -78,7 +76,7 @@ abstract class Zend_CodeGenerator_Php_Abstract
     public function setIndentation($indentation)
     public function getIndentation()
 }
-</programlisting>
+]]></programlisting>
         </section>
 
         <section xml:id="zend.codegenerator.reference.abstracts.php-member-abstract"><info><title>Zend_CodeGenerator_Php_Member_Abstract</title></info>
@@ -92,7 +90,7 @@ abstract class Zend_CodeGenerator_Php_Abstract
                 name of the member. Its <acronym>API</acronym> is as follows:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 abstract class Zend_CodeGenerator_Php_Member_Abstract
     extends Zend_CodeGenerator_Php_Abstract
 {
@@ -105,7 +103,7 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract
     public function setName($name)
     public function getName()
 }
-</programlisting>
+]]></programlisting>
         </section>
     </section>
 
@@ -126,14 +124,14 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract
                 The <acronym>API</acronym> of the class is as follows:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Body extends Zend_CodeGenerator_Php_Abstract
 {
     public function setContent($content)
     public function getContent()
     public function generate()
 }
-</programlisting>
+]]></programlisting>
         </section>
 
         <section xml:id="zend.codegenerator.reference.concrete.php-class"><info><title>Zend_CodeGenerator_Php_Class</title></info>
@@ -153,7 +151,7 @@ class Zend_CodeGenerator_Php_Body extends Zend_CodeGenerator_Php_Abstract
                 The <acronym>API</acronym> is as follows:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
 {
     public static function fromReflection(
@@ -181,7 +179,7 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
     public function isSourceDirty()
     public function generate()
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 The <methodname>setProperty()</methodname> method accepts an array of
@@ -223,7 +221,7 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
                 The <acronym>API</acronym> is as follows:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
 {
     public static function fromReflection(
@@ -238,7 +236,7 @@ class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
     public function getTags()
     public function generate()
 }
-</programlisting>
+]]></programlisting>
         </section>
 
         <section xml:id="zend.codegenerator.reference.concrete.php-docblock-tag"><info><title>Zend_CodeGenerator_Php_Docblock_Tag</title></info>
@@ -256,7 +254,7 @@ class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
                 The class <acronym>API</acronym> is as follows:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Docblock_Tag
     extends Zend_CodeGenerator_Php_Abstract
 {
@@ -269,7 +267,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag
     public function getDescription()
     public function generate()
 }
-</programlisting>
+]]></programlisting>
         </section>
 
         <section xml:id="zend.codegenerator.reference.concrete.php-docblock-tag-param"><info><title>Zend_CodeGenerator_Php_DocBlock_Tag_Param</title></info>
@@ -289,7 +287,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag
                 The class <acronym>API</acronym> is as follows:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Docblock_Tag_Param
     extends Zend_CodeGenerator_Php_Docblock_Tag
 {
@@ -302,7 +300,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
     public function getParamName()
     public function generate()
 }
-</programlisting>
+]]></programlisting>
         </section>
 
         <section xml:id="zend.codegenerator.reference.concrete.php-docblock-tag-return"><info><title>Zend_CodeGenerator_Php_DocBlock_Tag_Return</title></info>
@@ -320,7 +318,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
                 The class <acronym>API</acronym> is as follows:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Docblock_Tag_Param
     extends Zend_CodeGenerator_Php_Docblock_Tag
 {
@@ -331,7 +329,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
     public function getDatatype()
     public function generate()
 }
-</programlisting>
+]]></programlisting>
         </section>
 
         <section xml:id="zend.codegenerator.reference.concrete.php-file"><info><title>Zend_CodeGenerator_Php_File</title></info>
@@ -358,7 +356,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
                 The <acronym>API</acronym> of the class is as follows:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
 {
     public static function fromReflectedFilePath(
@@ -381,7 +379,7 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
     public function isSourceDirty()
     public function generate()
 }
-</programlisting>
+]]></programlisting>
         </section>
 
         <section xml:id="zend.codegenerator.reference.concrete.php-member-container"><info><title>Zend_CodeGenerator_Php_Member_Container</title></info>
@@ -399,12 +397,12 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
                 The <acronym>API</acronym> of the class is as follows:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Member_Container extends ArrayObject
 {
     public function __construct($type = self::TYPE_PROPERTY)
 }
-</programlisting>
+]]></programlisting>
         </section>
 
         <section xml:id="zend.codegenerator.reference.concrete.php-method"><info><title>Zend_CodeGenerator_Php_Method</title></info>
@@ -431,7 +429,7 @@ class Zend_CodeGenerator_Php_Member_Container extends ArrayObject
                 The <acronym>API</acronym> of the class is as follows:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Method
     extends Zend_CodeGenerator_Php_Member_Abstract
 {
@@ -448,7 +446,7 @@ class Zend_CodeGenerator_Php_Method
     public function getBody()
     public function generate()
 }
-</programlisting>
+]]></programlisting>
         </section>
 
         <section xml:id="zend.codegenerator.reference.concrete.php-parameter"><info><title>Zend_CodeGenerator_Php_Parameter</title></info>
@@ -466,7 +464,7 @@ class Zend_CodeGenerator_Php_Method
                 The <acronym>API</acronym> of the class is as follows:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
 {
     public static function fromReflection(
@@ -484,7 +482,7 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
     public function setPassedByReference($passedByReference)
     public function generate()
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 There are several problems that might occur when trying to set
@@ -493,15 +491,15 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
                 can be used, for example:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $parameter = new Zend_CodeGenerator_Php_Parameter();
-$parameter-&gt;setDefaultValue(
+$parameter->setDefaultValue(
     new Zend_CodeGenerator_Php_Parameter_DefaultValue("null")
 );
-$parameter-&gt;setDefaultValue(
+$parameter->setDefaultValue(
     new Zend_CodeGenerator_Php_Parameter_DefaultValue("array('foo', 'bar')")
 );
-</programlisting>
+]]></programlisting>
 
             <para>
                 Internally <methodname>setDefaultValue()</methodname> also converts the values
@@ -525,7 +523,7 @@ $parameter-&gt;setDefaultValue(
                 The <acronym>API</acronym> of the class is as follows:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Property
     extends Zend_CodeGenerator_Php_Member_Abstract
 {
@@ -538,7 +536,7 @@ class Zend_CodeGenerator_Php_Property
     public function getDefaultValue()
     public function generate()
 }
-</programlisting>
+]]></programlisting>
         </section>
     </section>
 </section>

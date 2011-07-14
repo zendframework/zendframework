@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.barcode"><info><title>Barcode</title></info>
     
 
@@ -392,14 +390,14 @@
             following example for an EAN13 barcode:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $valid = new Zend_Validate_Barcode('EAN13');
-if ($valid-&gt;isValid($input)) {
+if ($valid->isValid($input)) {
     // input appears to be valid
 } else {
     // input is invalid
 }
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.validate.set.barcode.checksum"><info><title>Optional checksum</title></info>
@@ -413,17 +411,17 @@ if ($valid-&gt;isValid($input)) {
             ignored.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $valid = new Zend_Validate_Barcode(array(
-    'adapter'  =&gt; 'EAN13',
-    'checksum' =&gt; false,
+    'adapter'  => 'EAN13',
+    'checksum' => false,
 ));
-if ($valid-&gt;isValid($input)) {
+if ($valid->isValid($input)) {
     // input appears to be valid
 } else {
     // input is invalid
 }
-</programlisting>
+]]></programlisting>
 
         <note><info><title>Reduced security by disabling checksum validation</title></info>
             
@@ -519,7 +517,7 @@ if ($valid-&gt;isValid($input)) {
             include all digits and the letters 'ABCDE', and which requires a checksum.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class My_Barcode_MyBar extends Zend_Validate_Barcode_AdapterAbstract
 {
     protected $_length     = 'even';
@@ -533,11 +531,11 @@ class My_Barcode_MyBar extends Zend_Validate_Barcode_AdapterAbstract
 }
 
 $valid = new Zend_Validate_Barcode('My_Barcode_MyBar');
-if ($valid-&gt;isValid($input)) {
+if ($valid->isValid($input)) {
     // input appears to be valid
 } else {
     // input is invalid
 }
-</programlisting>
+]]></programlisting>
     </section>
 </section>

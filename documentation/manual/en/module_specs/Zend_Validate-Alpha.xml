@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.alpha"><info><title>Alpha</title></info>
     
 
@@ -35,14 +33,14 @@
             A basic example is the following one:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Alpha();
-if ($validator-&gt;isValid('Abcd')) {
+if ($validator->isValid('Abcd')) {
     // value contains only allowed chars
 } else {
     // false
 }
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.validate.set.alpha.whitespace"><info><title>Using whitespaces</title></info>
@@ -61,14 +59,14 @@ if ($validator-&gt;isValid('Abcd')) {
             To get the actual state you can use <methodname>getAllowWhiteSpace()</methodname>.
         </para>
 
-        <programlisting language="php">
-$validator = new Zend_Validate_Alpha(array('allowWhiteSpace' =&gt; true));
-if ($validator-&gt;isValid('Abcd and efg')) {
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_Alpha(array('allowWhiteSpace' => true));
+if ($validator->isValid('Abcd and efg')) {
     // value contains only allowed chars
 } else {
     // false
 }
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.validate.set.alpha.languages"><info><title>Using different languages</title></info>

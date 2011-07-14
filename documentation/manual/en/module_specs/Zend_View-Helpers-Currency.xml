@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.currency"><info><title>Currency Helper</title></info>
     
 
@@ -71,15 +69,15 @@
             key.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // our example currency
 $currency = new Zend_Currency('de_AT');
 Zend_Registry::set('Zend_Currency', $currency);
 
 // within your view
-echo $this-&gt;currency(1234.56);
+echo $this->currency(1234.56);
 // this returns '€ 1.234,56'
-</programlisting>
+]]></programlisting>
     </example>
 
     <para>
@@ -96,12 +94,12 @@ echo $this-&gt;currency(1234.56);
             method.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // within your view
 $currency = new Zend_Currency('de_AT');
-$this-&gt;currency()-&gt;setCurrency($currency)-&gt;currency(1234.56);
+$this->currency()->setCurrency($currency)->currency(1234.56);
 // this returns '€ 1.234,56'
-</programlisting>
+]]></programlisting>
     </example>
 
     <para>
@@ -112,14 +110,14 @@ $this-&gt;currency()-&gt;setCurrency($currency)-&gt;currency(1234.56);
     <example xml:id="zend.view.helpers.initial.currency.directly.example-1"><info><title>Direct usage</title></info>
         
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // our example currency
 $currency = new Zend_Currency('de_AT');
 
 // initiate the helper
 $helper = new Zend_View_Helper_Currency($currency);
-echo $helper-&gt;currency(1234.56); // this returns '€ 1.234,56'
-</programlisting>
+echo $helper->currency(1234.56); // this returns '€ 1.234,56'
+]]></programlisting>
     </example>
 
     <para>
@@ -131,16 +129,16 @@ echo $helper-&gt;currency(1234.56); // this returns '€ 1.234,56'
     <example xml:id="zend.view.helpers.initial.currency.directly.example-2"><info><title>Direct usage</title></info>
         
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // our example currency
 $currency = new Zend_Currency('de_AT');
 
 // initiate the helper
 $helper = new Zend_View_Helper_Currency($currency);
-echo $helper-&gt;currency(1234.56); // this returns '€ 1.234,56'
-echo $helper-&gt;currency(1234.56, array('precision' =&gt; 1));
+echo $helper->currency(1234.56); // this returns '€ 1.234,56'
+echo $helper->currency(1234.56, array('precision' => 1));
 // this returns '€ 1.234,6'
-</programlisting>
+]]></programlisting>
     </example>
 
     <para>

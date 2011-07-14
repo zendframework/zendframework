@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.example"><info><title>Example usage</title></info>
     
 
@@ -10,41 +8,41 @@
         message deletion, and sending messages.
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 // For configuration options
 // @see Zend_Queue_Adapater::__construct()
 $options = array(
-    'name' =&gt; 'queue1',
+    'name' => 'queue1',
 );
 
 // Create an array queue
 $queue = new Zend_Queue('Array', $options);
 
 // Get list of queues
-foreach ($queue-&gt;getQueues() as $name) {
+foreach ($queue->getQueues() as $name) {
     echo $name, "\n";
 }
 
 // Create a new queue
-$queue2 = $queue-&gt;createQueue('queue2');
+$queue2 = $queue->createQueue('queue2');
 
 // Get number of messages in a queue (supports Countable interface from SPL)
 echo count($queue);
 
 // Get up to 5 messages from a queue
-$messages = $queue-&gt;receive(5);
+$messages = $queue->receive(5);
 
-foreach ($messages as $i =&gt; $message) {
-    echo $message-&gt;body, "\n";
+foreach ($messages as $i => $message) {
+    echo $message->body, "\n";
 
     // We have processed the message; now we remove it from the queue.
-    $queue-&gt;deleteMessage($message);
+    $queue->deleteMessage($message);
 }
 
 // Send a message to the currently active queue
-$queue-&gt;send('My Test Message');
+$queue->send('My Test Message');
 
 // Delete a queue we created and all of it's messages
-$queue-&gt;deleteQueue('queue2');
-</programlisting>
+$queue->deleteQueue('queue2');
+]]></programlisting>
 </section>

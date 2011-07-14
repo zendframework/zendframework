@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.filters"><info><title>Filters</title></info>
     
 
@@ -16,21 +14,21 @@
             Log object using the <methodname>addFilter()</methodname> method:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $logger = new Zend_Log();
 
 $writer = new Zend_Log_Writer_Stream('php://output');
-$logger-&gt;addWriter($writer);
+$logger->addWriter($writer);
 
 $filter = new Zend_Log_Filter_Priority(Zend_Log::CRIT);
-$logger-&gt;addFilter($filter);
+$logger->addFilter($filter);
 
 // blocked
-$logger-&gt;info('Informational message');
+$logger->info('Informational message');
 
 // logged
-$logger-&gt;emerg('Emergency message');
-</programlisting>
+$logger->emerg('Emergency message');
+]]></programlisting>
 
         <para>
             When you add one or more Filters to the Log object, the message must pass
@@ -46,24 +44,24 @@ $logger-&gt;emerg('Emergency message');
             <methodname>addFilter()</methodname> method of that Writer:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $logger = new Zend_Log();
 
 $writer1 = new Zend_Log_Writer_Stream('/path/to/first/logfile');
-$logger-&gt;addWriter($writer1);
+$logger->addWriter($writer1);
 
 $writer2 = new Zend_Log_Writer_Stream('/path/to/second/logfile');
-$logger-&gt;addWriter($writer2);
+$logger->addWriter($writer2);
 
 // add a filter only to writer2
 $filter = new Zend_Log_Filter_Priority(Zend_Log::CRIT);
-$writer2-&gt;addFilter($filter);
+$writer2->addFilter($filter);
 
 // logged to writer1, blocked from writer2
-$logger-&gt;info('Informational message');
+$logger->info('Informational message');
 
 // logged by both writers
-$logger-&gt;emerg('Emergency message');
-</programlisting>
+$logger->emerg('Emergency message');
+]]></programlisting>
     </section>
 </section>

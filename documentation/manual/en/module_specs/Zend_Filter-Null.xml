@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.null"><info><title>Null</title></info>
     
 
@@ -37,12 +35,12 @@
             <constant>NULL</constant> value will be returned.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Null();
 $value  = '';
-$result = $filter-&gt;filter($value);
+$result = $filter->filter($value);
 // returns null instead of the empty string
-</programlisting>
+]]></programlisting>
 
         <para>
             This means that without providing any configuration,
@@ -119,7 +117,7 @@ $result = $filter-&gt;filter($value);
             give a textual string. See the following examples:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // converts false to null
 $filter = new Zend_Filter_Null(Zend_Filter_Null::BOOLEAN);
 
@@ -139,7 +137,7 @@ $filter = new Zend_Filter_Null(array(
     'boolean',
     'integer',
 ));
-</programlisting>
+]]></programlisting>
 
         <para>
             You can also give an instance of <classname>Zend_Config</classname> to set the wished

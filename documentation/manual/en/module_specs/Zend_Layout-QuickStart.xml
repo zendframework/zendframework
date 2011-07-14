@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.quickstart"><info><title>Zend_Layout Quick Start</title></info>
     
 
@@ -24,31 +22,31 @@
             As an example:
         </para>
 
-        <programlisting language="php">
-&lt;!DOCTYPE html
+        <programlisting language="php"><![CDATA[
+<!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;
-    &lt;title&gt;My Site&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;?php
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>My Site</title>
+</head>
+<body>
+<?php
     // fetch 'content' key using layout helper:
-    echo $this-&gt;layout()-&gt;content;
+    echo $this->layout()->content;
 
     // fetch 'foo' key using placeholder helper:
-    echo $this-&gt;placeholder('Zend_Layout')-&gt;foo;
+    echo $this->placeholder('Zend_Layout')->foo;
 
     // fetch layout object and retrieve various keys from it:
-    $layout = $this-&gt;layout();
-    echo $layout-&gt;bar;
-    echo $layout-&gt;baz;
-?&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</programlisting>
+    $layout = $this->layout();
+    echo $layout->bar;
+    echo $layout->baz;
+?>
+</body>
+</html>
+]]></programlisting>
 
         <para>
             Because <classname>Zend_Layout</classname> utilizes <classname>Zend_View</classname> for
@@ -60,28 +58,28 @@
             navigation, etc.:
         </para>
 
-        <programlisting language="php">
-&lt;!DOCTYPE html
+        <programlisting language="php"><![CDATA[
+<!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;
-    &lt;?php echo $this-&gt;headTitle() ?&gt;
-    &lt;?php echo $this-&gt;headScript() ?&gt;
-    &lt;?php echo $this-&gt;headStyle() ?&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;?php echo $this-&gt;render('header.phtml') ?&gt;
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <?php echo $this->headTitle() ?>
+    <?php echo $this->headScript() ?>
+    <?php echo $this->headStyle() ?>
+</head>
+<body>
+    <?php echo $this->render('header.phtml') ?>
 
-    &lt;div id="nav"&gt;&lt;?php echo $this-&gt;placeholder('nav') ?&gt;&lt;/div&gt;
+    <div id="nav"><?php echo $this->placeholder('nav') ?></div>
 
-    &lt;div id="content"&gt;&lt;?php echo $this-&gt;layout()-&gt;content ?&gt;&lt;/div&gt;
+    <div id="content"><?php echo $this->layout()->content ?></div>
 
-    &lt;?php echo $this-&gt;render('footer.phtml') ?&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</programlisting>
+    <?php echo $this->render('footer.phtml') ?>
+</body>
+</html>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.layout.quickstart.mvc"><info><title>Using Zend_Layout with the Zend Framework MVC</title></info>
@@ -112,10 +110,10 @@
             the <acronym>MVC</acronym>:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // In your bootstrap:
 Zend_Layout::startMvc();
-</programlisting>
+]]></programlisting>
 
         <para>
             <methodname>startMvc()</methodname> can take an optional array of options or
@@ -128,22 +126,22 @@ Zend_Layout::startMvc();
             an action helper:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
     {
         // disable layouts for this action:
-        $this-&gt;_helper-&gt;layout-&gt;disableLayout();
+        $this->_helper->layout->disableLayout();
     }
 
     public function bazAction()
     {
         // use different layout script with this action:
-        $this-&gt;_helper-&gt;layout-&gt;setLayout('foobaz');
+        $this->_helper->layout->setLayout('foobaz');
     };
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             In your view scripts, you can then access the layout object via the
@@ -153,9 +151,9 @@ class FooController extends Zend_Controller_Action
             call methods on the layout object:
         </para>
 
-        <programlisting language="php">
-&lt;?php $this-&gt;layout()-&gt;setLayout('foo'); // set alternate layout ?&gt;
-</programlisting>
+        <programlisting language="php"><![CDATA[
+<?php $this->layout()->setLayout('foo'); // set alternate layout ?>
+]]></programlisting>
 
         <para>
             At any time, you can fetch the <classname>Zend_Layout</classname> instance
@@ -163,10 +161,10 @@ class FooController extends Zend_Controller_Action
             <methodname>getMvcInstance()</methodname> static method:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Returns null if startMvc() has not first been called
 $layout = Zend_Layout::getMvcInstance();
-</programlisting>
+]]></programlisting>
 
         <para>
             Finally, <classname>Zend_Layout</classname>'s front controller plugin has one
@@ -189,15 +187,15 @@ $layout = Zend_Layout::getMvcInstance();
             render each separately:
         </para>
 
-        <programlisting language="php">
-&lt;body&gt;
-    &lt;!-- renders /nav/menu --&gt;
-    &lt;div id="nav"&gt;&lt;?php echo $this-&gt;layout()-&gt;nav ?&gt;&lt;/div&gt;
+        <programlisting language="php"><![CDATA[
+<body>
+    <!-- renders /nav/menu -->
+    <div id="nav"><?php echo $this->layout()->nav ?></div>
 
-    &lt;!-- renders /foo/index + /comment/fetch --&gt;
-    &lt;div id="content"&gt;&lt;?php echo $this-&gt;layout()-&gt;content ?&gt;&lt;/div&gt;
-&lt;/body&gt;
-</programlisting>
+    <!-- renders /foo/index + /comment/fetch -->
+    <div id="content"><?php echo $this->layout()->content ?></div>
+</body>
+]]></programlisting>
 
         <para>
             This feature is particularly useful when used in conjunction with
@@ -231,22 +229,22 @@ $layout = Zend_Layout::getMvcInstance();
             object properties, and render the layout:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $layout = new Zend_Layout();
 
 // Set a layout script path:
-$layout-&gt;setLayoutPath('/path/to/layouts');
+$layout->setLayoutPath('/path/to/layouts');
 
 // set some variables:
-$layout-&gt;content = $content;
-$layout-&gt;nav     = $nav;
+$layout->content = $content;
+$layout->nav     = $nav;
 
 // choose a different layout script:
-$layout-&gt;setLayout('foo');
+$layout->setLayout('foo');
 
 // render final layout
-echo $layout-&gt;render();
-</programlisting>
+echo $layout->render();
+]]></programlisting>
     </section>
 
     <section xml:id="zend.layout.quickstart.example"><info><title>Sample Layout</title></info>

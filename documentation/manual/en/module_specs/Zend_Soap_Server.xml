@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.soap.server"><info><title>Zend_Soap_Server</title></info>
     
 
@@ -207,7 +205,7 @@
             object which has to completely describe Web Service <acronym>API</acronym>:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 ...
 class MyClass {
     /**
@@ -236,12 +234,12 @@ class MyClass {
 ...
 $server = new Zend_Soap_Server(null, $options);
 // Bind Class to Soap Server
-$server-&gt;setClass('MyClass');
+$server->setClass('MyClass');
 // Bind already initialized object to Soap Server
-$server-&gt;setObject(new MyClass());
+$server->setObject(new MyClass());
 ...
-$server-&gt;handle();
-</programlisting>
+$server->handle();
+]]></programlisting>
 
         <note><info><title>Important!</title></info>
             
@@ -258,7 +256,7 @@ $server-&gt;handle();
             <methodname>loadFunctions()</methodname> methods:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 ...
 /**
  * This function ...
@@ -282,11 +280,11 @@ function function2($inputParam1, $inputParam2) {
 }
 ...
 $server = new Zend_Soap_Server(null, $options);
-$server-&gt;addFunction('function1');
-$server-&gt;addFunction('function2');
+$server->addFunction('function1');
+$server->addFunction('function2');
 ...
-$server-&gt;handle();
-</programlisting>
+$server->handle();
+]]></programlisting>
     </section>
 
     <section xml:id="zend.soap.server.request_response"><info><title>Request and response objects handling</title></info>
@@ -316,17 +314,17 @@ $server-&gt;handle();
                 request using <methodname>setRequest()</methodname> method:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
 ...
 // Set request using optional $request parameter
-$server-&gt;handle($request);
+$server->handle($request);
 ...
 // Set request using setRequest() method
-$server-&gt;setRequest();
-$server-&gt;handle();
-</programlisting>
+$server->setRequest();
+$server->handle();
+]]></programlisting>
 
             <para>
                 Request object may be represented using any of the following:
@@ -371,13 +369,13 @@ $server-&gt;handle();
                 string:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
 ...
-$server-&gt;handle();
-$request = $server-&gt;getLastRequest();
-</programlisting>
+$server->handle();
+$request = $server->getLastRequest();
+]]></programlisting>
         </section>
 
         <section xml:id="zend.soap.server.request_response.response"><info><title>Response pre-processing</title></info>
@@ -400,31 +398,31 @@ $request = $server-&gt;getLastRequest();
                 case.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
 ...
 // Get a response as a return value of handle() method
 // instead of emitting it to the standard output
-$server-&gt;setReturnResponse(true);
+$server->setReturnResponse(true);
 ...
-$response = $server-&gt;handle();
+$response = $server->handle();
 ...
-</programlisting>
+]]></programlisting>
 
             <para>
                 Last response may be also retrieved by <methodname>getLastResponse()</methodname>
                 method for some post-processing:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
 ...
-$server-&gt;handle();
-$response = $server-&gt;getLastResponse();
+$server->handle();
+$response = $server->getLastResponse();
 ...
-</programlisting>
+]]></programlisting>
         </section>
     </section>
 </section>

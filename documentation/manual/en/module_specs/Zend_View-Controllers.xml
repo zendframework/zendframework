@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.controllers"><info><title>Controller Scripts</title></info>
     
 
@@ -20,12 +18,12 @@
             of the view instance:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
-$view-&gt;a = "Hay";
-$view-&gt;b = "Bee";
-$view-&gt;c = "Sea";
-</programlisting>
+$view->a = "Hay";
+$view->b = "Bee";
+$view->c = "Sea";
+]]></programlisting>
 
         <para>
             However, this can be tedious when you have already collected the
@@ -38,27 +36,27 @@ $view-&gt;c = "Sea";
             one-by-one property assignments.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 
 // assign an array of key-value pairs, where the
 // key is the variable name, and the value is
 // the assigned value.
 $array = array(
-    'a' =&gt; "Hay",
-    'b' =&gt; "Bee",
-    'c' =&gt; "Sea",
+    'a' => "Hay",
+    'b' => "Bee",
+    'c' => "Sea",
 );
-$view-&gt;assign($array);
+$view->assign($array);
 
 // do the same with an object's public properties;
 // note how we cast it to an array when assigning.
 $obj = new StdClass;
-$obj-&gt;a = "Hay";
-$obj-&gt;b = "Bee";
-$obj-&gt;c = "Sea";
-$view-&gt;assign((array) $obj);
-</programlisting>
+$obj->a = "Hay";
+$obj->b = "Bee";
+$obj->c = "Sea";
+$view->assign((array) $obj);
+]]></programlisting>
 
         <para>
             Alternatively, you can use the assign method to assign
@@ -66,12 +64,12 @@ $view-&gt;assign((array) $obj);
             variable value.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
-$view-&gt;assign('a', "Hay");
-$view-&gt;assign('b', "Bee");
-$view-&gt;assign('c', "Sea");
-</programlisting>
+$view->assign('a', "Hay");
+$view->assign('b', "Bee");
+$view->assign('c', "Sea");
+]]></programlisting>
     </section>
 
     <section xml:id="zend.view.controllers.render"><info><title>Rendering a View Script</title></info>
@@ -85,13 +83,13 @@ $view-&gt;assign('c', "Sea");
             echo it yourself at the appropriate time.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
-$view-&gt;a = "Hay";
-$view-&gt;b = "Bee";
-$view-&gt;c = "Sea";
-echo $view-&gt;render('someView.php');
-</programlisting>
+$view->a = "Hay";
+$view->b = "Bee";
+$view->c = "Sea";
+echo $view->render('someView.php');
+]]></programlisting>
     </section>
 
     <section xml:id="zend.view.controllers.script-paths"><info><title>View Script Paths</title></info>
@@ -111,10 +109,10 @@ echo $view-&gt;render('someView.php');
             setScriptPath() method.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
-$view-&gt;setScriptPath('/path/to/app/views');
-</programlisting>
+$view->setScriptPath('/path/to/app/views');
+]]></programlisting>
 
         <para>
             Now when you call $view-&gt;render('someView.php'), it will look
@@ -130,16 +128,16 @@ $view-&gt;setScriptPath('/path/to/app/views');
             some views, while leaving others alone.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
-$view-&gt;addScriptPath('/path/to/app/views');
-$view-&gt;addScriptPath('/path/to/custom/');
+$view->addScriptPath('/path/to/app/views');
+$view->addScriptPath('/path/to/custom/');
 
-// now when you call $view-&gt;render('booklist.php'), Zend_View will
+// now when you call $view->render('booklist.php'), Zend_View will
 // look first for "/path/to/custom/booklist.php", then for
 // "/path/to/app/views/booklist.php", and finally in the current
 // directory for "booklist.php".
-</programlisting>
+]]></programlisting>
 
         <note><info><title>Never use user input to set script paths</title></info>
             
@@ -155,11 +153,11 @@ $view-&gt;addScriptPath('/path/to/custom/');
                 issue:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // $_GET['foo'] == '../../../etc'
-$view-&gt;addScriptPath($_GET['foo']);
-$view-&gt;render('passwd');
-</programlisting>
+$view->addScriptPath($_GET['foo']);
+$view->render('passwd');
+]]></programlisting>
 
             <para>
                 While this example is contrived, it does clearly show the

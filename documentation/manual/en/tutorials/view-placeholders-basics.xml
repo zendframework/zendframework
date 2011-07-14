@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.view.placeholders.basics"><info><title>Basic Placeholder Usage</title></info>
     
 
@@ -77,52 +75,52 @@
         it might look like this:
     </para>
 
-    <programlisting language="html">
-&lt;div class="sidebar"&gt;
-    &lt;div class="block"&gt;
-        &lt;p&gt;
+    <programlisting language="html"><![CDATA[
+<div class="sidebar">
+    <div class="block">
+        <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
             consectetur aliquet odio ac consectetur. Nulla quis eleifend
             tortor. Pellentesque varius, odio quis bibendum consequat, diam
             lectus porttitor quam, et aliquet mauris orci eu augue.
-        &lt;/p&gt;
-    &lt;/div&gt;
-    &lt;div class="block"&gt;
-        &lt;ul&gt;
-            &lt;li&gt;&lt;a href="/some/target"&gt;Link&lt;/a&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;a href="/some/target"&gt;Link&lt;/a&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-</programlisting>
+        </p>
+    </div>
+    <div class="block">
+        <ul>
+            <li><a href="/some/target">Link</a></li>
+            <li><a href="/some/target">Link</a></li>
+        </ul>
+    </div>
+</div>
+]]></programlisting>
 
     <para>
         The content will vary based on the controller and action, but the structure will be the
         same. Let's first setup the sidebar in a resource method of our bootstrap:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     // ...
 
     protected function _initSidebar()
     {
-        $this-&gt;bootstrap('View');
-        $view = $this-&gt;getResource('View');
+        $this->bootstrap('View');
+        $view = $this->getResource('View');
 
-        $view-&gt;placeholder('sidebar')
-             // "prefix" -&gt; markup to emit once before all items in collection
-             -&gt;setPrefix("&lt;div class=\"sidebar\"&gt;\n    &lt;div class=\"block\"&gt;\n")
-             // "separator" -&gt; markup to emit between items in a collection
-             -&gt;setSeparator("&lt;/div&gt;\n    &lt;div class=\"block\"&gt;\n")
-             // "postfix" -&gt; markup to emit once after all items in a collection
-             -&gt;setPostfix("&lt;/div&gt;\n&lt;/div&gt;");
+        $view->placeholder('sidebar')
+             // "prefix" -> markup to emit once before all items in collection
+             ->setPrefix("<div class=\"sidebar\">\n    <div class=\"block\">\n")
+             // "separator" -> markup to emit between items in a collection
+             ->setSeparator("</div>\n    <div class=\"block\">\n")
+             // "postfix" -> markup to emit once after all items in a collection
+             ->setPostfix("</div>\n</div>");
     }
 
     // ...
 }
-</programlisting>
+]]></programlisting>
 
     <para>
         The above defines a placeholder, "sidebar", that has no items. It configures the basic
@@ -144,17 +142,17 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         follows:
     </para>
 
-    <programlisting language="php">
-&lt;?php $this-&gt;placeholder('sidebar')-&gt;captureStart() ?&gt;
-&lt;h4&gt;User Administration&lt;/h4&gt;
-&lt;ul&gt;
-    &lt;li&gt;&lt;a href="&lt;?php $this-&gt;url(array('action' =&gt; 'list')) ?&gt;"&gt;
-        List&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="&lt;?php $this-&gt;url(array('action' =&gt; 'create')) ?&gt;"&gt;
-        Create&lt;/a&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;?php $this-&gt;placeholder('sidebar')-&gt;captureEnd() ?&gt;
-</programlisting>
+    <programlisting language="php"><![CDATA[
+<?php $this->placeholder('sidebar')->captureStart() ?>
+<h4>User Administration</h4>
+<ul>
+    <li><a href="<?php $this->url(array('action' => 'list')) ?>">
+        List</a></li>
+    <li><a href="<?php $this->url(array('action' => 'create')) ?>">
+        Create</a></a></li>
+</ul>
+<?php $this->placeholder('sidebar')->captureEnd() ?>
+]]></programlisting>
 
     <para>
         The above example makes use of the content capturing feature of placeholders. By default,
@@ -168,7 +166,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         <methodname>preDispatch()</methodname> method:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 class UserController extends Zend_Controller_Action
 {
     // ...
@@ -177,14 +175,14 @@ class UserController extends Zend_Controller_Action
     {
         // ...
 
-        $this-&gt;view-&gt;render('user/_sidebar.phtml');
+        $this->view->render('user/_sidebar.phtml');
 
         // ...
     }
 
     // ...
 }
-</programlisting>
+]]></programlisting>
 
     <para>
         Note that we're not capturing the rendered value; there's no need, as the entierty of that
@@ -197,10 +195,10 @@ class UserController extends Zend_Controller_Action
         the following snippet of content:
     </para>
 
-    <programlisting language="php">
-$this-&gt;placeholder('sidebar')
-     -&gt;append('&lt;p&gt;User: ' . $this-&gt;escape($this-&gt;username) .  '&lt;/p&gt;');
-</programlisting>
+    <programlisting language="php"><![CDATA[
+$this->placeholder('sidebar')
+     ->append('<p>User: ' . $this->escape($this->username) .  '</p>');
+]]></programlisting>
 
     <para>
         This example makes use of the <methodname>append()</methodname> method, and passes it some
@@ -211,19 +209,19 @@ $this-&gt;placeholder('sidebar')
         Finally, let's modify our layout view script, and have it render the placeholder.
     </para>
 
-    <programlisting language="php">
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;My Site&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div class="content"&gt;
-        &lt;?php echo $this-&gt;layout()-&gt;content ?&gt;
-    &lt;/div&gt;
-    &lt;?php echo $this-&gt;placeholder('sidebar') ?&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</programlisting>
+    <programlisting language="php"><![CDATA[
+<html>
+<head>
+    <title>My Site</title>
+</head>
+<body>
+    <div class="content">
+        <?php echo $this->layout()->content ?>
+    </div>
+    <?php echo $this->placeholder('sidebar') ?>
+</body>
+</html>
+]]></programlisting>
 
     <para>
         For controllers and actions that do not populate the "sidebar" placeholder, no content will
@@ -234,20 +232,20 @@ $this-&gt;placeholder('sidebar')
         readability):
     </para>
 
-    <programlisting language="html">
-&lt;div class="sidebar"&gt;
-    &lt;div class="block"&gt;
-        &lt;h4&gt;User Administration&lt;/h4&gt;
-        &lt;ul&gt;
-            &lt;li&gt;&lt;a href="/user/list"&gt;List&lt;/a&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;a href="/user/create"&gt;Create&lt;/a&gt;&lt;/a&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-    &lt;/div&gt;
-    &lt;div class="block"&gt;
-        &lt;p&gt;User: matthew&lt;/p&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-</programlisting>
+    <programlisting language="html"><![CDATA[
+<div class="sidebar">
+    <div class="block">
+        <h4>User Administration</h4>
+        <ul>
+            <li><a href="/user/list">List</a></li>
+            <li><a href="/user/create">Create</a></a></li>
+        </ul>
+    </div>
+    <div class="block">
+        <p>User: matthew</p>
+    </div>
+</div>
+]]></programlisting>
 
     <para>
         There are a large number of things you can do by combining placeholders and layout scripts;

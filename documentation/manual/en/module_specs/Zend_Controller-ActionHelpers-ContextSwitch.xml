@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.contextswitch"><info><title>ContextSwitch and AjaxContext</title></info>
     
 
@@ -50,7 +48,7 @@
         As an example, let's consider the following controller:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 class NewsController extends Zend_Controller_Action
 {
     /**
@@ -58,7 +56,7 @@ class NewsController extends Zend_Controller_Action
      */
     public function indexAction()
     {
-        $this-&gt;_forward('list');
+        $this->_forward('list');
     }
 
     /**
@@ -75,7 +73,7 @@ class NewsController extends Zend_Controller_Action
     {
     }
 }
-</programlisting>
+]]></programlisting>
 
     <para>
         Let's say that we want the <methodname>listAction()</methodname> to also be
@@ -83,19 +81,19 @@ class NewsController extends Zend_Controller_Action
         can hint that it can return an <acronym>XML</acronym> response:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 class NewsController extends Zend_Controller_Action
 {
     public function init()
     {
-        $contextSwitch = $this-&gt;_helper-&gt;getHelper('contextSwitch');
-        $contextSwitch-&gt;addActionContext('list', 'xml')
-                      -&gt;initContext();
+        $contextSwitch = $this->_helper->getHelper('contextSwitch');
+        $contextSwitch->addActionContext('list', 'xml')
+                      ->initContext();
     }
 
     // ...
 }
-</programlisting>
+]]></programlisting>
 
     <para>
         What this will do is:
@@ -180,9 +178,9 @@ class NewsController extends Zend_Controller_Action
                     <acronym>JSON</acronym> serialization:
                 </para>
 
-                <programlisting language="php">
-$this-&gt;_helper-&gt;contextSwitch()-&gt;setAutoJsonSerialization(false);
-</programlisting>
+                <programlisting language="php"><![CDATA[
+$this->_helper->contextSwitch()->setAutoJsonSerialization(false);
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -347,7 +345,7 @@ $this-&gt;_helper-&gt;contextSwitch()-&gt;setAutoJsonSerialization(false);
             following controller class:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function listAction()
@@ -366,7 +364,7 @@ class FooController extends Zend_Controller_Action
     {
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Let's say we wanted to add an <acronym>XML</acronym> context to the 'list' action, and
@@ -374,38 +372,38 @@ class FooController extends Zend_Controller_Action
             We could do so in the <methodname>init()</methodname> method:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function init()
     {
-        $this-&gt;_helper-&gt;contextSwitch()
-             -&gt;addActionContext('list', 'xml')
-             -&gt;addActionContext('comments', array('xml', 'json'))
-             -&gt;initContext();
+        $this->_helper->contextSwitch()
+             ->addActionContext('list', 'xml')
+             ->addActionContext('comments', array('xml', 'json'))
+             ->initContext();
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Alternately, you could simply define the array property
             <varname>$contexts</varname>:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public $contexts = array(
-        'list'     =&gt; array('xml'),
-        'comments' =&gt; array('xml', 'json')
+        'list'     => array('xml'),
+        'comments' => array('xml', 'json')
     );
 
     public function init()
     {
-        $this-&gt;_helper-&gt;contextSwitch()-&gt;initContext();
+        $this->_helper->contextSwitch()->initContext();
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             The above is less overhead, but also prone to potential errors.
@@ -506,15 +504,15 @@ class FooController extends Zend_Controller_Action
             <methodname>initContext()</methodname> in your action controller:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class NewsController extends Zend_Controller_Action
 {
     public function init()
     {
-        $this-&gt;_helper-&gt;contextSwitch()-&gt;initContext();
+        $this->_helper->contextSwitch()->initContext();
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             In some cases, you may want to force the context used; for instance,
@@ -523,9 +521,9 @@ class NewsController extends Zend_Controller_Action
             <methodname>initContext()</methodname>:
         </para>
 
-        <programlisting language="php">
-$contextSwitch-&gt;initContext('xml');
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$contextSwitch->initContext('xml');
+]]></programlisting>
     </section>
 
     <section xml:id="zend.controller.actionhelpers.contextswitch.misc"><info><title>Additional Functionality</title></info>
@@ -547,10 +545,10 @@ $contextSwitch-&gt;initContext('xml');
                     <methodname>initContext()</methodname>.
                 </para>
 
-                <programlisting language="php">
-$contextSwitch-&gt;setAutoJsonSerialization(false);
-$contextSwitch-&gt;initContext();
-</programlisting>
+                <programlisting language="php"><![CDATA[
+$contextSwitch->setAutoJsonSerialization(false);
+$contextSwitch->initContext();
+]]></programlisting>
 
                 <para>
                     You can retrieve the value of the flag with
@@ -783,16 +781,16 @@ $contextSwitch-&gt;initContext();
                 latter, we'll return <acronym>JSON</acronym>.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class CommentController extends Zend_Controller_Action
 {
     public function init()
     {
-        $ajaxContext = $this-&gt;_helper-&gt;getHelper('AjaxContext');
-        $ajaxContext-&gt;addActionContext('view', 'html')
-                    -&gt;addActionContext('form', 'html')
-                    -&gt;addActionContext('process', 'json')
-                    -&gt;initContext();
+        $ajaxContext = $this->_helper->getHelper('AjaxContext');
+        $ajaxContext->addActionContext('view', 'html')
+                    ->addActionContext('form', 'html')
+                    ->addActionContext('process', 'json')
+                    ->initContext();
     }
 
     public function viewAction()
@@ -816,7 +814,7 @@ class CommentController extends Zend_Controller_Action
         // view variables, and JSON will be returned.
     }
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 On the client end, your <acronym>AJAX</acronym> library will simply request the

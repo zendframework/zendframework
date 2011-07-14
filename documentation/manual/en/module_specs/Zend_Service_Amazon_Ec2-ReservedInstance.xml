@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.reserved.instance"><info><title>Zend_Service_Amazon_Ec2: Reserved Instances</title></info>
     
 
@@ -83,11 +81,11 @@
                 usagePrice, productDescription, instanceCount and state.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance_Reserved('aws_key',
                                                      'aws_secret_key');
-$return = $ec2_instance-&gt;describeInstances('instanceId');
-</programlisting>
+$return = $ec2_instance->describeInstances('instanceId');
+]]></programlisting>
         </example>
 
         <example xml:id="zend.service.amazon.ec2.reserved.instance.offerings.describe"><info><title>Describe current Reserved Instance Offerings available</title></info>
@@ -107,11 +105,11 @@ $return = $ec2_instance-&gt;describeInstances('instanceId');
                 usagePrice and productDescription.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance_Reserved('aws_key',
                                                      'aws_secret_key');
-$return = $ec2_instance-&gt;describeOfferings();
-</programlisting>
+$return = $ec2_instance->describeOfferings();
+]]></programlisting>
         </example>
 
         <example xml:id="zend.service.amazon.ec2.reserved.instance.offerings.purchase"><info><title>Turn off CloudWatch Monitoring on an Instance(s)</title></info>
@@ -129,11 +127,11 @@ $return = $ec2_instance-&gt;describeOfferings();
                 <methodname>purchaseOffering()</methodname> returns the reservedInstanceId.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance_Reserved('aws_key',
                                                      'aws_secret_key');
-$return = $ec2_instance-&gt;purchaseOffering('offeringId', 'instanceCount');
-</programlisting>
+$return = $ec2_instance->purchaseOffering('offeringId', 'instanceCount');
+]]></programlisting>
         </example>
     </section>
 </section>

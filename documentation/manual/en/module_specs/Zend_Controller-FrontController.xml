@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.front"><info><title>The Front Controller</title></info>
     
 
@@ -53,20 +51,20 @@
                 at any point prior to calling <methodname>dispatch()</methodname>:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Disable the ErrorHandler plugin:
-$front-&gt;setParam('noErrorHandler', true);
-</programlisting>
+$front->setParam('noErrorHandler', true);
+]]></programlisting>
 
             <para>
                 To disable the <emphasis>ViewRenderer</emphasis>, do the following prior
                 to calling <methodname>dispatch()</methodname>:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Disable the ViewRenderer helper:
-$front-&gt;setParam('noViewRenderer', true);
-</programlisting>
+$front->setParam('noViewRenderer', true);
+]]></programlisting>
         </note>
     </section>
 
@@ -89,9 +87,9 @@ $front-&gt;setParam('noViewRenderer', true);
                 instantiating a front controller object.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
-</programlisting>
+]]></programlisting>
         </section>
 
         <section xml:id="zend.controller.front.methods.primary.setcontrollerdirectory"><info><title>setControllerDirectory() and addControllerDirectory</title></info>
@@ -108,20 +106,20 @@ $front = Zend_Controller_Front::getInstance();
                 As some examples:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Set the default controller directory:
-$front-&gt;setControllerDirectory('../application/controllers');
+$front->setControllerDirectory('../application/controllers');
 
 // Set several module directories at once:
-$front-&gt;setControllerDirectory(array(
-    'default' =&gt; '../application/controllers',
-    'blog'    =&gt; '../modules/blog/controllers',
-    'news'    =&gt; '../modules/news/controllers',
+$front->setControllerDirectory(array(
+    'default' => '../application/controllers',
+    'blog'    => '../modules/blog/controllers',
+    'news'    => '../modules/news/controllers',
 ));
 
 // Add a 'foo' module directory:
-$front-&gt;addControllerDirectory('../modules/foo/controllers', 'foo');
-</programlisting>
+$front->addControllerDirectory('../modules/foo/controllers', 'foo');
+]]></programlisting>
 
             <note>
                 <para>
@@ -235,11 +233,11 @@ $front-&gt;addControllerDirectory('../modules/foo/controllers', 'foo');
                 front controller environment.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Instantiate front controller, set controller directory, and dispatch in one
 // easy step:
 Zend_Controller_Front::run('../application/controllers');
-</programlisting>
+]]></programlisting>
         </section>
     </section>
 
@@ -517,7 +515,7 @@ Zend_Controller_Front::run('../application/controllers');
             to override the <methodname>getInstance()</methodname> method:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class My_Controller_Front extends Zend_Controller_Front
 {
     public static function getInstance()
@@ -529,7 +527,7 @@ class My_Controller_Front extends Zend_Controller_Front
         return self::$_instance;
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Overriding the <methodname>getInstance()</methodname> method ensures that

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.debug.dumping"><info><title>Dumping Variables</title></info>
 
     
@@ -15,9 +13,9 @@
     <example xml:id="zend.debug.dumping.example"><info><title>Example of dump() method</title></info>
         
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 Zend_Debug::dump($var, $label = null, $echo = true);
-</programlisting>
+]]></programlisting>
     </example>
 
     <para>

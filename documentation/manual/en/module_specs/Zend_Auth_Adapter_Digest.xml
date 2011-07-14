@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.digest"><info><title>Digest Authentication</title></info>
     
 
@@ -46,9 +44,9 @@
             password is "<emphasis>somePassword</emphasis>"):
         </para>
 
-        <programlisting language="txt">
+        <programlisting language="txt"><![CDATA[
 someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.auth.adapter.digest.specifics"><info><title>Specifics</title></info>
@@ -101,25 +99,25 @@ someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
             <methodname>authenticate()</methodname> is called.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $adapter = new Zend_Auth_Adapter_Digest($filename,
                                         $realm,
                                         $username,
                                         $password);
 
-$result = $adapter-&gt;authenticate();
+$result = $adapter->authenticate();
 
-$identity = $result-&gt;getIdentity();
+$identity = $result->getIdentity();
 
 print_r($identity);
 
 /*
 Array
 (
-    [realm] =&gt; Some Realm
-    [username] =&gt; someUser
+    [realm] => Some Realm
+    [username] => someUser
 )
 */
-</programlisting>
+]]></programlisting>
     </section>
 </section>

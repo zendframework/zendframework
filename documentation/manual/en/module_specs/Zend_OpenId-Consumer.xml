@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.openid.consumer"><info><title>Zend_OpenId_Consumer Basics</title></info>
     
 
@@ -54,14 +52,14 @@
         <example xml:id="zend.openid.consumer.example-1"><info><title>The Simple OpenID Login form</title></info>
             
 
-            <programlisting language="php">
-&lt;html&gt;&lt;body&gt;
-&lt;form method="post" action="example-1_2.php"&gt;&lt;fieldset&gt;
-&lt;legend&gt;OpenID Login&lt;/legend&gt;
-&lt;input type="text" name="openid_identifier"&gt;
-&lt;input type="submit" name="openid_action" value="login"&gt;
-&lt;/fieldset&gt;&lt;/form&gt;&lt;/body&gt;&lt;/html&gt;
-</programlisting>
+            <programlisting language="php"><![CDATA[
+<html><body>
+<form method="post" action="example-1_2.php"><fieldset>
+<legend>OpenID Login</legend>
+<input type="text" name="openid_identifier">
+<input type="submit" name="openid_action" value="login">
+</fieldset></form></body></html>
+]]></programlisting>
         </example>
 
         <para>
@@ -77,12 +75,12 @@
         <example xml:id="zend.openid.consumer.example-1_2"><info><title>The Authentication Request Handler</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $consumer = new Zend_OpenId_Consumer();
-if (!$consumer-&gt;login($_POST['openid_identifier'], 'example-1_3.php')) {
+if (!$consumer->login($_POST['openid_identifier'], 'example-1_3.php')) {
     die("OpenID login failed.");
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -123,14 +121,14 @@ if (!$consumer-&gt;login($_POST['openid_identifier'], 'example-1_3.php')) {
         <example xml:id="zend.openid.consumer.example-1_3"><info><title>The Authentication Response Verifier</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $consumer = new Zend_OpenId_Consumer();
-if ($consumer-&gt;verify($_GET, $id)) {
+if ($consumer->verify($_GET, $id)) {
     echo "VALID " . htmlspecialchars($id);
 } else {
     echo "INVALID " . htmlspecialchars($id);
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -158,21 +156,21 @@ if ($consumer-&gt;verify($_GET, $id)) {
         <example xml:id="zend.openid.consumer.example-2"><info><title>The Complete OpenID Login Script</title></info>
             
 
-            <programlisting language="php">
-&lt;?php
+            <programlisting language="php"><![CDATA[
+<?php
 $status = "";
-if (isset($_POST['openid_action']) &amp;&amp;
-    $_POST['openid_action'] == "login" &amp;&amp;
+if (isset($_POST['openid_action']) &&
+    $_POST['openid_action'] == "login" &&
     !empty($_POST['openid_identifier'])) {
 
     $consumer = new Zend_OpenId_Consumer();
-    if (!$consumer-&gt;login($_POST['openid_identifier'])) {
+    if (!$consumer->login($_POST['openid_identifier'])) {
         $status = "OpenID login failed.";
     }
 } else if (isset($_GET['openid_mode'])) {
     if ($_GET['openid_mode'] == "id_res") {
         $consumer = new Zend_OpenId_Consumer();
-        if ($consumer-&gt;verify($_GET, $id)) {
+        if ($consumer->verify($_GET, $id)) {
             $status = "VALID " . htmlspecialchars($id);
         } else {
             $status = "INVALID " . htmlspecialchars($id);
@@ -181,18 +179,18 @@ if (isset($_POST['openid_action']) &amp;&amp;
         $status = "CANCELLED";
     }
 }
-?&gt;
-&lt;html&gt;&lt;body&gt;
-&lt;?php echo "$status&lt;br&gt;" ?&gt;
-&lt;form method="post"&gt;
-&lt;fieldset&gt;
-&lt;legend&gt;OpenID Login&lt;/legend&gt;
-&lt;input type="text" name="openid_identifier" value=""/&gt;
-&lt;input type="submit" name="openid_action" value="login"/&gt;
-&lt;/fieldset&gt;
-&lt;/form&gt;
-&lt;/body&gt;&lt;/html&gt;
-</programlisting>
+?>
+<html><body>
+<?php echo "$status<br>" ?>
+<form method="post">
+<fieldset>
+<legend>OpenID Login</legend>
+<input type="text" name="openid_identifier" value=""/>
+<input type="submit" name="openid_action" value="login"/>
+</fieldset>
+</form>
+</body></html>
+]]></programlisting>
         </example>
 
         <para>
@@ -232,14 +230,14 @@ if (isset($_POST['openid_action']) &amp;&amp;
         <example xml:id="zend.openid.consumer.example-3_2"><info><title>Authentication Request for Specified Realm</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $consumer = new Zend_OpenId_Consumer();
-if (!$consumer-&gt;login($_POST['openid_identifier'],
+if (!$consumer->login($_POST['openid_identifier'],
                       'example-3_3.php',
                       'http://*.php.net/')) {
     die("OpenID login failed.");
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -266,12 +264,12 @@ if (!$consumer-&gt;login($_POST['openid_identifier'],
         <example xml:id="zend.openid.consumer.example-4"><info><title>Immediate Check without Interaction</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $consumer = new Zend_OpenId_Consumer();
-if (!$consumer-&gt;check($_POST['openid_identifier'], 'example-4_3.php')) {
+if (!$consumer->check($_POST['openid_identifier'], 'example-4_3.php')) {
     die("OpenID login failed.");
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -313,7 +311,7 @@ if (!$consumer-&gt;check($_POST['openid_identifier'], 'example-4_3.php')) {
         <example xml:id="zend.openid.consumer.example-5"><info><title>Database Storage</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class DbStorage extends Zend_OpenId_Consumer_Storage
 {
     private $_db;
@@ -328,15 +326,15 @@ class DbStorage extends Zend_OpenId_Consumer_Storage
                                 $discovery_table = "discovery",
                                 $nonce_table = "nonce")
     {
-        $this-&gt;_db = $db;
-        $this-&gt;_association_table = $association_table;
-        $this-&gt;_discovery_table = $discovery_table;
-        $this-&gt;_nonce_table = $nonce_table;
-        $tables = $this-&gt;_db-&gt;listTables();
+        $this->_db = $db;
+        $this->_association_table = $association_table;
+        $this->_discovery_table = $discovery_table;
+        $this->_nonce_table = $nonce_table;
+        $tables = $this->_db->listTables();
 
         // If the associations table doesn't exist, create it
         if (!in_array($association_table, $tables)) {
-            $this-&gt;_db-&gt;getConnection()-&gt;exec(
+            $this->_db->getConnection()->exec(
                 "create table $association_table (" .
                 " url     varchar(256) not null primary key," .
                 " handle  varchar(256) not null," .
@@ -348,7 +346,7 @@ class DbStorage extends Zend_OpenId_Consumer_Storage
 
         // If the discovery table doesn't exist, create it
         if (!in_array($discovery_table, $tables)) {
-            $this-&gt;_db-&gt;getConnection()-&gt;exec(
+            $this->_db->getConnection()->exec(
                 "create table $discovery_table (" .
                 " id      varchar(256) not null primary key," .
                 " realId  varchar(256) not null," .
@@ -360,7 +358,7 @@ class DbStorage extends Zend_OpenId_Consumer_Storage
 
         // If the nonce table doesn't exist, create it
         if (!in_array($nonce_table, $tables)) {
-            $this-&gt;_db-&gt;getConnection()-&gt;exec(
+            $this->_db->getConnection()->exec(
                 "create table $nonce_table (" .
                 " nonce   varchar(256) not null primary key," .
                 " created timestamp default current_timestamp" .
@@ -374,32 +372,32 @@ class DbStorage extends Zend_OpenId_Consumer_Storage
                                    $secret,
                                    $expires)
     {
-        $table = $this-&gt;_association_table;
+        $table = $this->_association_table;
         $secret = base64_encode($secret);
-        $this-&gt;_db-&gt;insert($table, array(
-            'url'     =&gt; $url,
-            'handle'  =&gt; $handle,
-            'macFunc' =&gt; $macFunc,
-            'secret'  =&gt; $secret,
-            'expires' =&gt; $expires,
+        $this->_db->insert($table, array(
+            'url'     => $url,
+            'handle'  => $handle,
+            'macFunc' => $macFunc,
+            'secret'  => $secret,
+            'expires' => $expires,
         ));
         return true;
     }
 
     public function getAssociation($url,
-                                   &amp;$handle,
-                                   &amp;$macFunc,
-                                   &amp;$secret,
-                                   &amp;$expires)
+                                   &$handle,
+                                   &$macFunc,
+                                   &$secret,
+                                   &$expires)
     {
-        $table = $this-&gt;_association_table;
-        $this-&gt;_db-&gt;delete(
-            $table, $this-&gt;_db-&gt;quoteInto('expires &lt; ?', time())
+        $table = $this->_association_table;
+        $this->_db->delete(
+            $table, $this->_db->quoteInto('expires < ?', time())
         );
-        $select = $this-_db-&gt;select()
-                -&gt;from($table, array('handle', 'macFunc', 'secret', 'expires'))
-                -&gt;where('url = ?', $url);
-        $res = $this-&gt;_db-&gt;fetchRow($select);
+        $select = $this-_db->select()
+                ->from($table, array('handle', 'macFunc', 'secret', 'expires'))
+                ->where('url = ?', $url);
+        $res = $this->_db->fetchRow($select);
 
         if (is_array($res)) {
             $handle  = $res['handle'];
@@ -412,19 +410,19 @@ class DbStorage extends Zend_OpenId_Consumer_Storage
     }
 
     public function getAssociationByHandle($handle,
-                                           &amp;$url,
-                                           &amp;$macFunc,
-                                           &amp;$secret,
-                                           &amp;$expires)
+                                           &$url,
+                                           &$macFunc,
+                                           &$secret,
+                                           &$expires)
     {
-        $table = $this-&gt;_association_table;
-        $this-&gt;_db-&gt;delete(
-            $table, $this-&gt;_db-&gt;quoteInto('expires &lt; ', time())
+        $table = $this->_association_table;
+        $this->_db->delete(
+            $table, $this->_db->quoteInto('expires < ', time())
         );
-        $select = $this-&gt;_db-&gt;select()
-                -&gt;from($table, array('url', 'macFunc', 'secret', 'expires')
-                -&gt;where('handle = ?', $handle);
-        $res = $select-&gt;fetchRow($select);
+        $select = $this->_db->select()
+                ->from($table, array('url', 'macFunc', 'secret', 'expires')
+                ->where('handle = ?', $handle);
+        $res = $select->fetchRow($select);
 
         if (is_array($res)) {
             $url     = $res['url'];
@@ -438,8 +436,8 @@ class DbStorage extends Zend_OpenId_Consumer_Storage
 
     public function delAssociation($url)
     {
-        $table = $this-&gt;_association_table;
-        $this-&gt;_db-&gt;query("delete from $table where url = '$url'");
+        $table = $this->_association_table;
+        $this->_db->query("delete from $table where url = '$url'");
         return true;
     }
 
@@ -449,30 +447,30 @@ class DbStorage extends Zend_OpenId_Consumer_Storage
                                      $version,
                                      $expires)
     {
-        $table = $this-&gt;_discovery_table;
-        $this-&gt;_db-&gt;insert($table, array(
-            'id'      =&gt; $id,
-            'realId'  =&gt; $realId,
-            'server'  =&gt; $server,
-            'version' =&gt; $version,
-            'expires' =&gt; $expires,
+        $table = $this->_discovery_table;
+        $this->_db->insert($table, array(
+            'id'      => $id,
+            'realId'  => $realId,
+            'server'  => $server,
+            'version' => $version,
+            'expires' => $expires,
         ));
 
         return true;
     }
 
     public function getDiscoveryInfo($id,
-                                     &amp;$realId,
-                                     &amp;$server,
-                                     &amp;$version,
-                                     &amp;$expires)
+                                     &$realId,
+                                     &$server,
+                                     &$version,
+                                     &$expires)
     {
-        $table = $this-&gt;_discovery_table;
-        $this-&gt;_db-&gt;delete($table, $this-&gt;quoteInto('expires &lt; ?', time()));
-        $select = $this-&gt;_db-&gt;select()
-                -&gt;from($table, array('realId', 'server', 'version', 'expires'))
-                -&gt;where('id = ?', $id);
-        $res = $this-&gt;_db-&gt;fetchRow($select);
+        $table = $this->_discovery_table;
+        $this->_db->delete($table, $this->quoteInto('expires < ?', time()));
+        $select = $this->_db->select()
+                ->from($table, array('realId', 'server', 'version', 'expires'))
+                ->where('id = ?', $id);
+        $res = $this->_db->fetchRow($select);
 
         if (is_array($res)) {
             $realId  = $res['realId'];
@@ -486,17 +484,17 @@ class DbStorage extends Zend_OpenId_Consumer_Storage
 
     public function delDiscoveryInfo($id)
     {
-        $table = $this-&gt;_discovery_table;
-        $this-&gt;_db-&gt;delete($table, $this-&gt;_db-&gt;quoteInto('id = ?', $id));
+        $table = $this->_discovery_table;
+        $this->_db->delete($table, $this->_db->quoteInto('id = ?', $id));
         return true;
     }
 
     public function isUniqueNonce($nonce)
     {
-        $table = $this-&gt;_nonce_table;
+        $table = $this->_nonce_table;
         try {
-            $ret = $this-&gt;_db-&gt;insert($table, array(
-                'nonce' =&gt; $nonce,
+            $ret = $this->_db->insert($table, array(
+                'nonce' => $nonce,
             ));
         } catch (Zend_Db_Statement_Exception $e) {
             return false;
@@ -510,10 +508,10 @@ class DbStorage extends Zend_OpenId_Consumer_Storage
 }
 
 $db = Zend_Db::factory('Pdo_Sqlite',
-    array('dbname'=&gt;'/tmp/openid_consumer.db'));
+    array('dbname'=>'/tmp/openid_consumer.db'));
 $storage = new DbStorage($db);
 $consumer = new Zend_OpenId_Consumer($storage);
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -620,19 +618,19 @@ $consumer = new Zend_OpenId_Consumer($storage);
         <example xml:id="zend.openid.consumer.example-6_2"><info><title>Sending Requests with a Simple Registration Extension</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $sreg = new Zend_OpenId_Extension_Sreg(array(
-    'nickname'=&gt;true,
-    'email'=&gt;false,
-    'fullname'=&gt;false), null, 1.1);
+    'nickname'=>true,
+    'email'=>false,
+    'fullname'=>false), null, 1.1);
 $consumer = new Zend_OpenId_Consumer();
-if (!$consumer-&gt;login($_POST['openid_identifier'],
+if (!$consumer->login($_POST['openid_identifier'],
                       'example-6_3.php',
                       null,
                       $sreg)) {
     die("OpenID login failed.");
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -656,28 +654,28 @@ if (!$consumer-&gt;login($_POST['openid_identifier'],
         <example xml:id="zend.openid.consumer.example-6_3"><info><title>Verifying Responses with a Simple Registration Extension</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $sreg = new Zend_OpenId_Extension_Sreg(array(
-    'nickname'=&gt;true,
-    'email'=&gt;false,
-    'fullname'=&gt;false), null, 1.1);
+    'nickname'=>true,
+    'email'=>false,
+    'fullname'=>false), null, 1.1);
 $consumer = new Zend_OpenId_Consumer();
-if ($consumer-&gt;verify($_GET, $id, $sreg)) {
-    echo "VALID " . htmlspecialchars($id) ."&lt;br&gt;\n";
-    $data = $sreg-&gt;getProperties();
+if ($consumer->verify($_GET, $id, $sreg)) {
+    echo "VALID " . htmlspecialchars($id) ."<br>\n";
+    $data = $sreg->getProperties();
     if (isset($data['nickname'])) {
-        echo "nickname: " . htmlspecialchars($data['nickname']) . "&lt;br&gt;\n";
+        echo "nickname: " . htmlspecialchars($data['nickname']) . "<br>\n";
     }
     if (isset($data['email'])) {
-        echo "email: " . htmlspecialchars($data['email']) . "&lt;br&gt;\n";
+        echo "email: " . htmlspecialchars($data['email']) . "<br>\n";
     }
     if (isset($data['fullname'])) {
-        echo "fullname: " . htmlspecialchars($data['fullname']) . "&lt;br&gt;\n";
+        echo "fullname: " . htmlspecialchars($data['fullname']) . "<br>\n";
     }
 } else {
     echo "INVALID " . htmlspecialchars($id);
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -728,26 +726,26 @@ if ($consumer-&gt;verify($_GET, $id, $sreg)) {
         <example xml:id="zend.openid.consumer.example-7"><info><title>Zend_Auth Adapter for OpenID</title></info>
             
 
-            <programlisting language="php">
-&lt;?php
+            <programlisting language="php"><![CDATA[
+<?php
 class OpenIdAdapter implements Zend_Auth_Adapter_Interface {
     private $_id = null;
 
     public function __construct($id = null) {
-        $this-&gt;_id = $id;
+        $this->_id = $id;
     }
 
     public function authenticate() {
-        $id = $this-&gt;_id;
+        $id = $this->_id;
         if (!empty($id)) {
             $consumer = new Zend_OpenId_Consumer();
-            if (!$consumer-&gt;login($id)) {
+            if (!$consumer->login($id)) {
                 $ret = false;
                 $msg = "Authentication failed.";
             }
         } else {
             $consumer = new Zend_OpenId_Consumer();
-            if ($consumer-&gt;verify($_GET, $id)) {
+            if ($consumer->verify($_GET, $id)) {
                 $ret = true;
                 $msg = "Authentication successful";
             } else {
@@ -761,38 +759,38 @@ class OpenIdAdapter implements Zend_Auth_Adapter_Interface {
 
 $status = "";
 $auth = Zend_Auth::getInstance();
-if ((isset($_POST['openid_action']) &amp;&amp;
-     $_POST['openid_action'] == "login" &amp;&amp;
+if ((isset($_POST['openid_action']) &&
+     $_POST['openid_action'] == "login" &&
      !empty($_POST['openid_identifier'])) ||
     isset($_GET['openid_mode'])) {
     $adapter = new OpenIdAdapter(@$_POST['openid_identifier']);
-    $result = $auth-&gt;authenticate($adapter);
-    if ($result-&gt;isValid()) {
+    $result = $auth->authenticate($adapter);
+    if ($result->isValid()) {
         Zend_OpenId::redirect(Zend_OpenId::selfURL());
     } else {
-        $auth-&gt;clearIdentity();
-        foreach ($result-&gt;getMessages() as $message) {
-            $status .= "$message&lt;br&gt;\n";
+        $auth->clearIdentity();
+        foreach ($result->getMessages() as $message) {
+            $status .= "$message<br>\n";
         }
     }
-} else if ($auth-&gt;hasIdentity()) {
-    if (isset($_POST['openid_action']) &amp;&amp;
+} else if ($auth->hasIdentity()) {
+    if (isset($_POST['openid_action']) &&
         $_POST['openid_action'] == "logout") {
-        $auth-&gt;clearIdentity();
+        $auth->clearIdentity();
     } else {
-        $status = "You are logged in as " . $auth-&gt;getIdentity() . "&lt;br&gt;\n";
+        $status = "You are logged in as " . $auth->getIdentity() . "<br>\n";
     }
 }
-?&gt;
-&lt;html&gt;&lt;body&gt;
-&lt;?php echo htmlspecialchars($status);?&gt;
-&lt;form method="post"&gt;&lt;fieldset&gt;
-&lt;legend&gt;OpenID Login&lt;/legend&gt;
-&lt;input type="text" name="openid_identifier" value=""&gt;
-&lt;input type="submit" name="openid_action" value="login"&gt;
-&lt;input type="submit" name="openid_action" value="logout"&gt;
-&lt;/fieldset&gt;&lt;/form&gt;&lt;/body&gt;&lt;/html&gt;
-</programlisting>
+?>
+<html><body>
+<?php echo htmlspecialchars($status);?>
+<form method="post"><fieldset>
+<legend>OpenID Login</legend>
+<input type="text" name="openid_identifier" value="">
+<input type="submit" name="openid_action" value="login">
+<input type="submit" name="openid_action" value="logout">
+</fieldset></form></body></html>
+]]></programlisting>
         </example>
 
         <para>

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headlink"><info><title>HeadLink Helper</title></info>
     
 
@@ -108,19 +106,19 @@
             to output it.
         </para>
 
-        <programlisting language="php">
-&lt;?php // setting links in a view script:
-$this-&gt;headLink()-&gt;appendStylesheet('/styles/basic.css')
-                 -&gt;headLink(array('rel' =&gt; 'favicon',
-                                  'href' =&gt; '/img/favicon.ico'),
+        <programlisting language="php"><![CDATA[
+<?php // setting links in a view script:
+$this->headLink()->appendStylesheet('/styles/basic.css')
+                 ->headLink(array('rel' => 'favicon',
+                                  'href' => '/img/favicon.ico'),
                                   'PREPEND')
-                 -&gt;prependStylesheet('/styles/moz.css',
+                 ->prependStylesheet('/styles/moz.css',
                                      'screen',
                                      true,
-                                     array('id' =&gt; 'my_stylesheet'));
-?&gt;
-&lt;?php // rendering the links: ?&gt;
-&lt;?php echo $this-&gt;headLink() ?&gt;
-</programlisting>
+                                     array('id' => 'my_stylesheet'));
+?>
+<?php // rendering the links: ?>
+<?php echo $this->headLink() ?>
+]]></programlisting>
     </example>
 </section>

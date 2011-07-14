@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.examples"><info><title>Examples</title></info>
     
 
@@ -9,17 +7,17 @@
         it will simply be an empty stub extending the base bootstrap class:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 }
-</programlisting>
+]]></programlisting>
 
     <para>
         With a corresponding configuration file:
     </para>
 
-    <programlisting language="ini">
+    <programlisting language="ini"><![CDATA[
 ; APPLICATION_PATH/configs/application.ini
 [production]
 autoloaderNamespaces[] = "My_"
@@ -30,7 +28,7 @@ resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
 
 [testing : production]
 [development : production]
-</programlisting>
+]]></programlisting>
 
     <note><info><title>Autoloader namespaces</title></info>
         
@@ -73,27 +71,27 @@ resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
         returning a value to store in the bootstrap.
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     protected function _initRequest()
     {
         // Ensure front controller instance is present, and fetch it
-        $this-&gt;bootstrap('FrontController');
-        $front = $this-&gt;getResource('FrontController');
+        $this->bootstrap('FrontController');
+        $front = $this->getResource('FrontController');
 
         // Initialize the request object
         $request = new Zend_Controller_Request_Http();
-        $request-&gt;setBaseUrl('/foo');
+        $request->setBaseUrl('/foo');
 
         // Add it to the front controller
-        $front-&gt;setRequest($request);
+        $front->setRequest($request);
 
         // Bootstrap will store this value in the 'request' key of its container
         return $request;
     }
 }
-</programlisting>
+]]></programlisting>
 
     <para>
         Note in this example the call to <methodname>bootstrap()</methodname>;
@@ -137,36 +135,36 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         following:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 class My_Bootstrap_Resource_View
     extends Zend_Application_Resource_ResourceAbstract
 {
     public function init()
     {
-        $view = new Zend_View($this-&gt;getOptions());
+        $view = new Zend_View($this->getOptions());
         Zend_Dojo::enableView($view);
 
-        $view-&gt;doctype('XHTML1_STRICT');
-        $view-&gt;headTitle()-&gt;setSeparator(' - ')-&gt;append('My Site');
-        $view-&gt;headMeta()-&gt;appendHttpEquiv('Content-Type',
+        $view->doctype('XHTML1_STRICT');
+        $view->headTitle()->setSeparator(' - ')->append('My Site');
+        $view->headMeta()->appendHttpEquiv('Content-Type',
                                            'text/html; charset=utf-8');
 
-        $view-&gt;dojo()-&gt;setDjConfigOption('parseOnLoad', true)
-                     -&gt;setLocalPath('/js/dojo/dojo.js')
-                     -&gt;registerModulePath('../spindle', 'spindle')
-                     -&gt;addStylesheetModule('spindle.themes.spindle')
-                     -&gt;requireModule('spindle.main')
-                     -&gt;disable();
+        $view->dojo()->setDjConfigOption('parseOnLoad', true)
+                     ->setLocalPath('/js/dojo/dojo.js')
+                     ->registerModulePath('../spindle', 'spindle')
+                     ->addStylesheetModule('spindle.themes.spindle')
+                     ->requireModule('spindle.main')
+                     ->disable();
 
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper(
             'ViewRenderer'
         );
-        $viewRenderer-&gt;setView($view);
+        $viewRenderer->setView($view);
 
         return $view;
     }
 }
-</programlisting>
+]]></programlisting>
 
     <para>
         To tell the bootstrap to use this, you would need to provide either the
@@ -174,81 +172,81 @@ class My_Bootstrap_Resource_View
         path and the short name of the resource plugin (e.g, "view"):
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $application = new Zend_Application(
     APPLICATION_ENV,
     array(
-        'resources' =&gt; array(
-            'My_Bootstrap_Resource_View' =&gt; array(), // full class name; OR
-            'view' =&gt; array(),                       // short name
+        'resources' => array(
+            'My_Bootstrap_Resource_View' => array(), // full class name; OR
+            'view' => array(),                       // short name
 
-            'FrontController' =&gt; array(
-                'controllerDirectory' =&gt; APPLICATION_PATH . '/controllers',
+            'FrontController' => array(
+                'controllerDirectory' => APPLICATION_PATH . '/controllers',
             ),
         ),
 
         // For short names, define plugin paths:
         'pluginPaths = array(
-            'My_Bootstrap_Resource' =&gt; 'My/Bootstrap/Resource',
+            'My_Bootstrap_Resource' => 'My/Bootstrap/Resource',
         )
     )
 );
-</programlisting>
+]]></programlisting>
 
     <para>
         Resource plugins can call on other resources and initializers by accessing the
         parent bootstrap:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 class My_Bootstrap_Resource_Layout
     extends Zend_Application_Resource_ResourceAbstract
 {
     public function init()
     {
         // ensure view is initialized...
-        $this-&gt;getBootstrap()-&gt;bootstrap('view');
+        $this->getBootstrap()->bootstrap('view');
 
         // Get view object:
-        $view = $this-&gt;getBootstrap()-&gt;getResource('view');
+        $view = $this->getBootstrap()->getResource('view');
 
         // ...
     }
 }
-</programlisting>
+]]></programlisting>
 
     <para>
         In normal usage, you would instantiate the application, bootstrap it,
         and run it:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $application = new Zend_Application(...);
-$application-&gt;bootstrap()
-            -&gt;run();
-</programlisting>
+$application->bootstrap()
+            ->run();
+]]></programlisting>
 
     <para>
         For a custom script, you might need to simply initialize specific
         resources:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $application = new Zend_Application(...);
-$application-&gt;getBootstrap()-&gt;bootstrap('db');
+$application->getBootstrap()->bootstrap('db');
 
 $service = new Zend_XmlRpc_Server();
-$service-&gt;setClass('Foo');  // uses database...
-echo $service-&gt;handle();
-</programlisting>
+$service->setClass('Foo');  // uses database...
+echo $service->handle();
+]]></programlisting>
 
     <para>
         Instead of using the <methodname>bootstrap()</methodname> method to call the
         internal methods or resources, you may also use overloading:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $application = new Zend_Application(...);
-$application-&gt;getBootstrap()-&gt;bootstrapDb();
-</programlisting>
+$application->getBootstrap()->bootstrapDb();
+]]></programlisting>
 </section>

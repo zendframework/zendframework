@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="project-structure"><info><title>Recommended Project Structure for Zend Framework MVC Applications</title></info>
     
 
@@ -37,8 +35,8 @@
     <section xml:id="project-structure.project"><info><title>Recommended Project Directory Structure</title></info>
         
 
-        <programlisting language="text">
-&lt;project name&gt;/
+        <programlisting language="text"><![CDATA[
+<project name>/
     application/
         configs/
             application.ini
@@ -77,7 +75,7 @@
         build/
     temp/
     tests/
-</programlisting>
+]]></programlisting>
 
         <para>
             The following describes the use cases for each directory as listed.
@@ -249,8 +247,8 @@
             <filename>application/</filename> directory in the recommended project structure:
         </para>
 
-        <programlisting language="text">
-&lt;modulename&gt;
+        <programlisting language="text"><![CDATA[
+<modulename>
     configs/
         application.ini
     controllers/
@@ -267,7 +265,7 @@
         helpers/
         scripts/
     Bootstrap.php
-</programlisting>
+]]></programlisting>
 
         <para>
             The purpose of these directories remains exactly the same as for the recommended
@@ -306,23 +304,23 @@
                     the <property>document_root</property>.
                 </para>
 
-                <programlisting language="text">
-&lt;VirtualHost my.domain.com:80&gt;
+                <programlisting language="text"><![CDATA[
+<VirtualHost my.domain.com:80>
     ServerName   my.domain.com
     DocumentRoot /path/to/server/root/my.domain.com/public
 
     RewriteEngine off
 
-    &lt;Location /&gt;
+    <Location />
         RewriteEngine On
         RewriteCond %{REQUEST_FILENAME} -s [OR]
         RewriteCond %{REQUEST_FILENAME} -l [OR]
         RewriteCond %{REQUEST_FILENAME} -d
         RewriteRule ^.*$ - [NC,L]
         RewriteRule ^.*$ /index.php [NC,L]
-    &lt;/Location&gt;
-&lt;/VirtualHost&gt;
-</programlisting>
+    </Location>
+</VirtualHost>
+]]></programlisting>
 
                 <para>
                     Note the slash ("/") prefixing <filename>index.php</filename>; the rules for
@@ -340,14 +338,14 @@
                     slash is omitted from <filename>index.php</filename>.
                 </para>
 
-                <programlisting language="text">
+                <programlisting language="text"><![CDATA[
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
-</programlisting>
+]]></programlisting>
 
                 <para>
                     There are many ways to configure <property>mod_rewrite</property>; if you
@@ -366,34 +364,34 @@ RewriteRule ^.*$ index.php [NC,L]
                 You may use the following configuration to create the appropriate rewrite rules.
             </para>
 
-            <programlisting language="xml">
-&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;configuration&gt;
-    &lt;system.webServer&gt;
-        &lt;rewrite&gt;
-            &lt;rules&gt;
-                &lt;rule name="Imported Rule 1" stopProcessing="true"&gt;
-                    &lt;match url="^.*$" /&gt;
-                    &lt;conditions logicalGrouping="MatchAny"&gt;
-                        &lt;add input="{REQUEST_FILENAME}"
+            <programlisting language="xml"><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <system.webServer>
+        <rewrite>
+            <rules>
+                <rule name="Imported Rule 1" stopProcessing="true">
+                    <match url="^.*$" />
+                    <conditions logicalGrouping="MatchAny">
+                        <add input="{REQUEST_FILENAME}"
                              matchType="IsFile" pattern=""
-                             ignoreCase="false" /&gt;
-                        &lt;add input="{REQUEST_FILENAME}"
+                             ignoreCase="false" />
+                        <add input="{REQUEST_FILENAME}"
                              matchType="IsDirectory"
                              pattern=""
-                             ignoreCase="false" /&gt;
-                    &lt;/conditions&gt;
-                    &lt;action type="None" /&gt;
-                &lt;/rule&gt;
-                &lt;rule name="Imported Rule 2" stopProcessing="true"&gt;
-                    &lt;match url="^.*$" /&gt;
-                    &lt;action type="Rewrite" url="index.php" /&gt;
-                &lt;/rule&gt;
-            &lt;/rules&gt;
-        &lt;/rewrite&gt;
-    &lt;/system.webServer&gt;
-&lt;/configuration&gt;
-</programlisting>
+                             ignoreCase="false" />
+                    </conditions>
+                    <action type="None" />
+                </rule>
+                <rule name="Imported Rule 2" stopProcessing="true">
+                    <match url="^.*$" />
+                    <action type="Rewrite" url="index.php" />
+                </rule>
+            </rules>
+        </rewrite>
+    </system.webServer>
+</configuration>
+]]></programlisting>
         </section>
     </section>
 </appendix>

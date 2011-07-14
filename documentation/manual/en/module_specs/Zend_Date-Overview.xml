@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.overview"><info><title>Zend_Date API Overview</title></info>
     
 
@@ -167,7 +165,7 @@
         <example xml:id="zend.date.values.example-1"><info><title>User-Specified Input Date Format</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $date1 = new Zend_Date('Feb 31, 2007', null, 'en_US');
 echo $date1, "\n"; // outputs "Mar 3, 2007 12:00:00 AM"
 
@@ -177,7 +175,7 @@ echo $date2, "\n"; // outputs "Mar 3, 2007 12:00:00 AM"
 // strictly restricts interpretation to specified format
 $date3 = new Zend_Date('Feb 31, 2007', 'MM.dd.yyyy');
 echo $date3, "\n"; // outputs "Mar 3, 2007 12:00:00 AM"
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -209,14 +207,14 @@ echo $date3, "\n"; // outputs "Mar 3, 2007 12:00:00 AM"
             multiple times.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // in your bootstrap file
 $locale = new Zend_Locale('de_AT');
 Zend_Registry::set('Zend_Locale', $locale);
 
 // somewhere in your application
 $date = new Zend_Date('31.Feb.2007');
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="id.date.basic"><info><title>Basic Zend_Date Operations Common to Many Date Parts</title></info>
@@ -241,13 +239,13 @@ $date = new Zend_Date('31.Feb.2007');
         <example xml:id="zend.date.basic.example-1"><info><title>Operating on Parts of Dates</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $date = new Zend_Date(); // $date's timestamp === time()
 
 // changes $date by adding 12 hours
-$date-&gt;add('12', Zend_Date::HOUR);
+$date->add('12', Zend_Date::HOUR);
 print $date;
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>

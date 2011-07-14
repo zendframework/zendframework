@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.profiler"><info><title>Zend_Db_Profiler</title></info>
     
 
@@ -21,24 +19,24 @@
             constructor, or by asking the adapter to enable it later.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $params = array(
-    'host'     =&gt; '127.0.0.1',
-    'username' =&gt; 'webuser',
-    'password' =&gt; 'xxxxxxxx',
-    'dbname'   =&gt; 'test'
-    'profiler' =&gt; true  // turn on profiler
+    'host'     => '127.0.0.1',
+    'username' => 'webuser',
+    'password' => 'xxxxxxxx',
+    'dbname'   => 'test'
+    'profiler' => true  // turn on profiler
                         // set to false to disable (disabled by default)
 );
 
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 
 // turn off profiler:
-$db-&gt;getProfiler()-&gt;setEnabled(false);
+$db->getProfiler()->setEnabled(false);
 
 // turn on profiler:
-$db-&gt;getProfiler()-&gt;setEnabled(true);
-</programlisting>
+$db->getProfiler()->setEnabled(true);
+]]></programlisting>
 
         <para>
             The value of the '<property>profiler</property>' option is flexible. It is interpreted
@@ -52,10 +50,10 @@ $db-&gt;getProfiler()-&gt;setEnabled(true);
             default profiler class, <classname>Zend_Db_Profiler</classname>.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $params['profiler'] = true;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
-</programlisting>
+]]></programlisting>
 
         <para>
             An instance of a profiler object makes the adapter use that object. The object type must
@@ -63,12 +61,12 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
             is done separately.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $profiler = MyProject_Db_Profiler();
-$profiler-&gt;setEnabled(true);
+$profiler->setEnabled(true);
 $params['profiler'] = $profiler;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
-</programlisting>
+]]></programlisting>
 
         <para>
             The argument can be an associative array containing any or all of the keys
@@ -82,13 +80,13 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
             option is supplied.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $params['profiler'] = array(
-    'enabled' =&gt; true,
-    'class'   =&gt; 'MyProject_Db_Profiler'
+    'enabled' => true,
+    'class'   => 'MyProject_Db_Profiler'
 );
 $db = Zend_Db::factory('PDO_MYSQL', $params);
-</programlisting>
+]]></programlisting>
 
         <para>
             Finally, the argument can be an object of type <classname>Zend_Config</classname>
@@ -96,36 +94,36 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
             a file "<filename>config.ini</filename>" might contain the following data:
         </para>
 
-        <programlisting language="ini">
+        <programlisting language="ini"><![CDATA[
 [main]
 db.profiler.class   = "MyProject_Db_Profiler"
 db.profiler.enabled = true
-</programlisting>
+]]></programlisting>
 
         <para>
             This configuration can be applied by the following <acronym>PHP</acronym> code:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('config.ini', 'main');
-$params['profiler'] = $config-&gt;db-&gt;profiler;
+$params['profiler'] = $config->db->profiler;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
-</programlisting>
+]]></programlisting>
 
         <para>
             The '<property>instance</property>' property may be used as in the following:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $profiler = new MyProject_Db_Profiler();
-$profiler-&gt;setEnabled(true);
+$profiler->setEnabled(true);
 $configData = array(
-    'instance' =&gt; $profiler
+    'instance' => $profiler
     );
 $config = new Zend_Config($configData);
 $params['profiler'] = $config;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.db.profiler.using"><info><title>Using the Profiler</title></info>
@@ -136,9 +134,9 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
             <methodname>getProfiler()</methodname> method:
         </para>
 
-        <programlisting language="php">
-$profiler = $db-&gt;getProfiler();
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$profiler = $db->getProfiler();
+]]></programlisting>
 
         <para>
             This returns a <classname>Zend_Db_Profiler</classname> object instance. With
@@ -228,11 +226,11 @@ $profiler = $db-&gt;getProfiler();
             last run:
         </para>
 
-        <programlisting language="php">
-$query = $profiler-&gt;getLastQueryProfile();
+        <programlisting language="php"><![CDATA[
+$query = $profiler->getLastQueryProfile();
 
-echo $query-&gt;getQuery();
-</programlisting>
+echo $query->getQuery();
+]]></programlisting>
 
         <para>
             Perhaps a page is generating slowly; use the profiler to determine
@@ -240,16 +238,16 @@ echo $query-&gt;getQuery();
             through the queries to find the one that ran longest:
         </para>
 
-        <programlisting language="php">
-$totalTime    = $profiler-&gt;getTotalElapsedSecs();
-$queryCount   = $profiler-&gt;getTotalNumQueries();
+        <programlisting language="php"><![CDATA[
+$totalTime    = $profiler->getTotalElapsedSecs();
+$queryCount   = $profiler->getTotalNumQueries();
 $longestTime  = 0;
 $longestQuery = null;
 
-foreach ($profiler-&gt;getQueryProfiles() as $query) {
-    if ($query-&gt;getElapsedSecs() &gt; $longestTime) {
-        $longestTime  = $query-&gt;getElapsedSecs();
-        $longestQuery = $query-&gt;getQuery();
+foreach ($profiler->getQueryProfiles() as $query) {
+    if ($query->getElapsedSecs() > $longestTime) {
+        $longestTime  = $query->getElapsedSecs();
+        $longestQuery = $query->getQuery();
     }
 }
 
@@ -260,7 +258,7 @@ echo 'Average query length: ' . $totalTime / $queryCount .
 echo 'Queries per second: ' . $queryCount / $totalTime . "\n";
 echo 'Longest query length: ' . $longestTime . "\n";
 echo "Longest query: \n" . $longestQuery . "\n";
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.db.profiler.advanced"><info><title>Advanced Profiler Usage</title></info>
@@ -281,13 +279,13 @@ echo "Longest query: \n" . $longestQuery . "\n";
                 filter, pass the method a <constant>NULL</constant> value.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Only profile queries that take at least 5 seconds:
-$profiler-&gt;setFilterElapsedSecs(5);
+$profiler->setFilterElapsedSecs(5);
 
 // Profile all queries regardless of length:
-$profiler-&gt;setFilterElapsedSecs(null);
-</programlisting>
+$profiler->setFilterElapsedSecs(null);
+]]></programlisting>
         </section>
 
         <section xml:id="zend.db.profiler.advanced.filtertype"><info><title>Filter by query type</title></info>
@@ -362,21 +360,21 @@ $profiler-&gt;setFilterElapsedSecs(null);
                 argument.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // profile only SELECT queries
-$profiler-&gt;setFilterQueryType(Zend_Db_Profiler::SELECT);
+$profiler->setFilterQueryType(Zend_Db_Profiler::SELECT);
 
 // profile SELECT, INSERT, and UPDATE queries
-$profiler-&gt;setFilterQueryType(Zend_Db_Profiler::SELECT |
+$profiler->setFilterQueryType(Zend_Db_Profiler::SELECT |
                               Zend_Db_Profiler::INSERT |
                               Zend_Db_Profiler::UPDATE);
 
 // profile DELETE queries
-$profiler-&gt;setFilterQueryType(Zend_Db_Profiler::DELETE);
+$profiler->setFilterQueryType(Zend_Db_Profiler::DELETE);
 
 // Remove all filters
-$profiler-&gt;setFilterQueryType(null);
-</programlisting>
+$profiler->setFilterQueryType(null);
+]]></programlisting>
         </section>
 
         <section xml:id="zend.db.profiler.advanced.getbytype"><info><title>Retrieve profiles by query type</title></info>
@@ -393,18 +391,18 @@ $profiler-&gt;setFilterQueryType(null);
                     section</link> for a list of the query type constants.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Retrieve only SELECT query profiles
-$profiles = $profiler-&gt;getQueryProfiles(Zend_Db_Profiler::SELECT);
+$profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::SELECT);
 
 // Retrieve only SELECT, INSERT, and UPDATE query profiles
-$profiles = $profiler-&gt;getQueryProfiles(Zend_Db_Profiler::SELECT |
+$profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::SELECT |
                                         Zend_Db_Profiler::INSERT |
                                         Zend_Db_Profiler::UPDATE);
 
 // Retrieve DELETE query profiles
-$profiles = $profiler-&gt;getQueryProfiles(Zend_Db_Profiler::DELETE);
-</programlisting>
+$profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::DELETE);
+]]></programlisting>
         </section>
     </section>
 

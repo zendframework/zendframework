@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.adapters"><info><title>Adapters</title></info>
     
 
@@ -160,26 +158,26 @@
                 option not listed here, but could be passed would be <emphasis>port</emphasis>.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $options = array(
-    'driverOptions' =&gt; array(
-        'host'      =&gt; 'db1.domain.tld',
-        'username'  =&gt; 'my_username',
-        'password'  =&gt; 'my_password',
-        'dbname'    =&gt; 'messaging',
-        'type'      =&gt; 'pdo_mysql',
-        'port'      =&gt; 3306, // optional parameter.
+    'driverOptions' => array(
+        'host'      => 'db1.domain.tld',
+        'username'  => 'my_username',
+        'password'  => 'my_password',
+        'dbname'    => 'messaging',
+        'type'      => 'pdo_mysql',
+        'port'      => 3306, // optional parameter.
     ),
-    'options' =&gt; array(
+    'options' => array(
         // use Zend_Db_Select for update, not all databases can support this
         // feature.
-        Zend_Db_Select::FOR_UPDATE =&gt; true
+        Zend_Db_Select::FOR_UPDATE => true
     )
 );
 
 // Create a database queue.
 $queue = new Zend_Queue('Db', $options);
-</programlisting>
+]]></programlisting>
 
             <itemizedlist>
                 <listitem>

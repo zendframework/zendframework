@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.additional"><info><title>Additional informations on Zend_Currency</title></info>
     
 
@@ -79,24 +77,24 @@
             Let's see some code snippets as example:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $currency = new Zend_Currency();
 
-var_dump($currency-&gt;getValue());
+var_dump($currency->getValue());
 // returns 0
 
-var_dump($currency-&gt;getRegionList());
+var_dump($currency->getRegionList());
 // could return an array with all regions where USD is used
 
-var_dump($currency-&gt;getRegionList('EUR'));
+var_dump($currency->getRegionList('EUR'));
 // returns an array with all regions where EUR is used
 
-var_dump($currency-&gt;getName());
+var_dump($currency->getName());
 // could return 'US Dollar'
 
-var_dump($currency-&gt;getName('EUR'));
+var_dump($currency->getName('EUR'));
 // returns 'Euro'
-</programlisting>
+]]></programlisting>
 
         <para>
             As you can see, several methods allow to use additional parameters to override the
@@ -122,16 +120,16 @@ var_dump($currency-&gt;getName('EUR'));
         <example xml:id="zend.currency.usage.cache.example"><info><title>Caching currencies</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // creating a cache object
 $cache = Zend_Cache::factory('Core',
                              'File',
-                             array('lifetime' =&gt; 120,
-                                   'automatic_serialization' =&gt; true),
+                             array('lifetime' => 120,
+                                   'automatic_serialization' => true),
                              array('cache_dir'
-                                       =&gt; dirname(__FILE__) . '/_files/'));
+                                       => dirname(__FILE__) . '/_files/'));
 Zend_Currency::setCache($cache);
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 </section>

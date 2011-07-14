@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.form.decorators.simplest"><info><title>Decorator Basics</title></info>
     
 
@@ -15,7 +13,7 @@
             Let's put that into code to make it more easily understood:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 interface Window
 {
     public function isOpen();
@@ -29,20 +27,20 @@ class StandardWindow implements Window
 
     public function isOpen()
     {
-        return $this-&gt;_open;
+        return $this->_open;
     }
 
     public function open()
     {
-        if (!$this-&gt;_open) {
-            $this-&gt;_open = true;
+        if (!$this->_open) {
+            $this->_open = true;
         }
     }
 
     public function close()
     {
-        if ($this-&gt;_open) {
-            $this-&gt;_open = false;
+        if ($this->_open) {
+            $this->_open = false;
         }
     }
 }
@@ -53,8 +51,8 @@ class LockedWindow implements Window
 
     public function __construct(Window $window)
     {
-        $this-&gt;_window = $window;
-        $this-&gt;_window-&gt;close();
+        $this->_window = $window;
+        $this->_window->close();
     }
 
     public function isOpen()
@@ -69,10 +67,10 @@ class LockedWindow implements Window
 
     public function close()
     {
-        $this-&gt;_window-&gt;close();
+        $this->_window->close();
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             You then create an object of type <classname>StandardWindow</classname>, pass it to the
@@ -97,7 +95,7 @@ class LockedWindow implements Window
             still allowing the decorator object to act exactly as if it were a Person object.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class Person
 {
     public function setFirstName($name) {}
@@ -114,26 +112,26 @@ class TextPerson
 
     public function __construct(Person $person)
     {
-        $this-&gt;_person = $person;
+        $this->_person = $person;
     }
 
     public function __call($method, $args)
     {
-        if (!method_exists($this-&gt;_person, $method)) {
+        if (!method_exists($this->_person, $method)) {
             throw new Exception('Invalid method called on HtmlPerson: '
                 .  $method);
         }
-        return call_user_func_array(array($this-&gt;_person, $method), $args);
+        return call_user_func_array(array($this->_person, $method), $args);
     }
 
     public function __toString()
     {
-        return $this-&gt;_person-&gt;getTitle() . ' '
-            . $this-&gt;_person-&gt;getFirstName() . ' '
-            . $this-&gt;_person-&gt;getLastName();
+        return $this->_person->getTitle() . ' '
+            . $this->_person->getFirstName() . ' '
+            . $this->_person->getLastName();
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             In this example, you pass your <classname>Person</classname> instance to the
@@ -170,65 +168,65 @@ class TextPerson
             might look like this:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class My_Decorator_SimpleInput extends Zend_Form_Decorator_Abstract
 {
-    protected $_format = '&lt;label for="%s"&gt;%s&lt;/label&gt;'
-                       . '&lt;input id="%s" name="%s" type="text" value="%s"/&gt;';
+    protected $_format = '<label for="%s">%s</label>'
+                       . '<input id="%s" name="%s" type="text" value="%s"/>';
 
     public function render($content)
     {
-        $element = $this-&gt;getElement();
-        $name    = htmlentities($element-&gt;getFullyQualifiedName());
-        $label   = htmlentities($element-&gt;getLabel());
-        $id      = htmlentities($element-&gt;getId());
-        $value   = htmlentities($element-&gt;getValue());
+        $element = $this->getElement();
+        $name    = htmlentities($element->getFullyQualifiedName());
+        $label   = htmlentities($element->getLabel());
+        $id      = htmlentities($element->getId());
+        $value   = htmlentities($element->getValue());
 
-        $markup  = sprintf($this-&gt;_format, $name, $label, $id, $name, $value);
+        $markup  = sprintf($this->_format, $name, $label, $id, $name, $value);
         return $markup;
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Let's create an element that uses this decorator:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $decorator = new My_Decorator_SimpleInput();
 $element   = new Zend_Form_Element('foo', array(
-    'label'      =&gt; 'Foo',
-    'belongsTo'  =&gt; 'bar',
-    'value'      =&gt; 'test',
-    'decorators' =&gt; array($decorator),
+    'label'      => 'Foo',
+    'belongsTo'  => 'bar',
+    'value'      => 'test',
+    'decorators' => array($decorator),
 ));
-</programlisting>
+]]></programlisting>
 
         <para>
             Rendering this element results in the following markup:
         </para>
 
-        <programlisting language="html">
-&lt;label for="bar[foo]"&gt;Foo&lt;/label&gt;
-&lt;input id="bar-foo" name="bar[foo]" type="text" value="test"/&gt;
-</programlisting>
+        <programlisting language="html"><![CDATA[
+<label for="bar[foo]">Foo</label>
+<input id="bar-foo" name="bar[foo]" type="text" value="test"/>
+]]></programlisting>
 
         <para>
             You could also put this class in your library somewhere, inform your element of that
             path, and refer to the decorator as simply "SimpleInput" as well:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $element = new Zend_Form_Element('foo', array(
-    'label'      =&gt; 'Foo',
-    'belongsTo'  =&gt; 'bar',
-    'value'      =&gt; 'test',
-    'prefixPath' =&gt; array('decorator' =&gt; array(
-        'My_Decorator' =&gt; 'path/to/decorators/',
+    'label'      => 'Foo',
+    'belongsTo'  => 'bar',
+    'value'      => 'test',
+    'prefixPath' => array('decorator' => array(
+        'My_Decorator' => 'path/to/decorators/',
     )),
-    'decorators' =&gt; array('SimpleInput'),
+    'decorators' => array('SimpleInput'),
 ));
-</programlisting>
+]]></programlisting>
 
         <para>
             This gives you the benefit of re-use in other projects, and also opens the door for

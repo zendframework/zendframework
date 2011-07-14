@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.custom"><info><title>Customizing Zend_Queue</title></info>
     
 
@@ -18,7 +16,7 @@
             this adapter is the easiest to conceptualize.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class Custom_DbForUpdate extends Zend_Queue_Adapter_Db
 {
     /**
@@ -36,49 +34,49 @@ class Custom_DbForUpdate extends Zend_Queue_Adapter_Db
 }
 
 $options = array(
-    'name'          =&gt; 'queue1',
-    'driverOptions' =&gt; array(
-        'host'      =&gt; '127.0.0.1',
-        'port'      =&gt; '3306',
-        'username'  =&gt; 'queue',
-        'password'  =&gt; 'queue',
-        'dbname'    =&gt; 'queue',
-        'type'      =&gt; 'pdo_mysql'
+    'name'          => 'queue1',
+    'driverOptions' => array(
+        'host'      => '127.0.0.1',
+        'port'      => '3306',
+        'username'  => 'queue',
+        'password'  => 'queue',
+        'dbname'    => 'queue',
+        'type'      => 'pdo_mysql'
     )
 );
 
 $adapter = new Custom_DbForUpdate($options);
 $queue = new Zend_Queue($adapter, $options);
-</programlisting>
+]]></programlisting>
 
         <para>
             You can also change the adapter on the fly as well.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $adapter = new MyCustom_Adapter($options);
 $queue   = new Zend_Queue($options);
-$queue-&gt;setAdapter($adapter);
-echo "Adapter: ", get_class($queue-&gt;getAdapter()), "\n";
-</programlisting>
+$queue->setAdapter($adapter);
+echo "Adapter: ", get_class($queue->getAdapter()), "\n";
+]]></programlisting>
 
         <para>or</para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $options = array(
-    'name'           =&gt; 'queue1',
-    'namespace'      =&gt; 'Custom',
-    'driverOptions'  =&gt; array(
-        'host'       =&gt; '127.0.0.1',
-        'port'       =&gt; '3306',
-        'username'   =&gt; 'queue',
-        'password'   =&gt; 'queue',
-        'dbname'     =&gt; 'queue',
-        'type'       =&gt; 'pdo_mysql'
+    'name'           => 'queue1',
+    'namespace'      => 'Custom',
+    'driverOptions'  => array(
+        'host'       => '127.0.0.1',
+        'port'       => '3306',
+        'username'   => 'queue',
+        'password'   => 'queue',
+        'dbname'     => 'queue',
+        'type'       => 'pdo_mysql'
     )
 );
 $queue = new Zend_Queue('DbForUpdate', $config); // loads Custom_DbForUpdate
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.queue.custom.message"><info><title>Creating your own message class</title></info>
@@ -89,12 +87,12 @@ $queue = new Zend_Queue('DbForUpdate', $config); // loads Custom_DbForUpdate
             Our variables start with an underscore. For example:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class Zend_Queue_Message
 {
     protected $_data = array();
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             You can extend the existing messaging class. See the example code in

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.extending"><info><title>Extending and Configuring Zend_Tool_Framework</title></info>
     
 
@@ -150,9 +148,9 @@
                 <acronym>INI</acronym> key value pair:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 project.profile = some/path/to/some-directory
-</programlisting>
+]]></programlisting>
 
             <para>
                 The only reserved <acronym>INI</acronym> prefix is the value "php". The "php" prefix
@@ -163,10 +161,10 @@ project.profile = some/path/to/some-directory
                 <acronym>INI</acronym> value, a developer would set:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 php.include_path = "/path/to/includes1:/path/to/includes2"
 php.error_reporting = 1
-</programlisting>
+]]></programlisting>
 
             <important>
                 <para>

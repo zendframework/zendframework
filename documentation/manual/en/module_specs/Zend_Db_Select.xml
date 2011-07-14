@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.select"><info><title>Zend_Db_Select</title></info>
     
 
@@ -73,10 +71,10 @@
         <example xml:id="zend.db.select.creating.example-db"><info><title>Example of the database adapter's select() method</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $db = Zend_Db::factory( ...options... );
-$select = $db-&gt;select();
-</programlisting>
+$select = $db->select();
+]]></programlisting>
         </example>
 
         <para>
@@ -87,10 +85,10 @@ $select = $db-&gt;select();
         <example xml:id="zend.db.select.creating.example-new"><info><title>Example of creating a new Select object</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $db = Zend_Db::factory( ...options... );
 $select = new Zend_Db_Select($db);
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -105,19 +103,19 @@ $select = new Zend_Db_Select($db);
         <example xml:id="zend.db.select.building.example"><info><title>Example of the using methods to add clauses</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Create the Zend_Db_Select object
-$select = $db-&gt;select();
+$select = $db->select();
 
 // Add a FROM clause
-$select-&gt;from( ...specify table and columns... )
+$select->from( ...specify table and columns... )
 
 // Add a WHERE clause
-$select-&gt;where( ...specify search criteria... )
+$select->where( ...specify search criteria... )
 
 // Add an ORDER BY clause
-$select-&gt;order( ...specify sorting criteria... );
-</programlisting>
+$select->order( ...specify sorting criteria... );
+]]></programlisting>
         </example>
 
         <para>
@@ -130,12 +128,12 @@ $select-&gt;order( ...specify sorting criteria... );
         <example xml:id="zend.db.select.building.example-fluent"><info><title>Example of the using the fluent interface</title></info>
             
 
-            <programlisting language="php">
-$select = $db-&gt;select()
-    -&gt;from( ...specify table and columns... )
-    -&gt;where( ...specify search criteria... )
-    -&gt;order( ...specify sorting criteria... );
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$select = $db->select()
+    ->from( ...specify table and columns... )
+    ->where( ...specify search criteria... )
+    ->order( ...specify sorting criteria... );
+]]></programlisting>
         </example>
 
         <para>
@@ -158,14 +156,14 @@ $select = $db-&gt;select()
             <example xml:id="zend.db.select.building.from.example"><info><title>Example of the from() method</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Build this query:
 //   SELECT *
 //   FROM "products"
 
-$select = $db-&gt;select()
-             -&gt;from( 'products' );
-</programlisting>
+$select = $db->select()
+             ->from( 'products' );
+]]></programlisting>
             </example>
 
             <para>
@@ -180,14 +178,14 @@ $select = $db-&gt;select()
             <example xml:id="zend.db.select.building.from.example-cname"><info><title>Example of specifying a table correlation name</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Build this query:
 //   SELECT p.*
 //   FROM "products" AS p
 
-$select = $db-&gt;select()
-             -&gt;from( array('p' =&gt; 'products') );
-</programlisting>
+$select = $db->select()
+             ->from( array('p' => 'products') );
+]]></programlisting>
             </example>
 
             <para>
@@ -201,19 +199,19 @@ $select = $db-&gt;select()
             <example xml:id="zend.db.select.building.from.example-schema"><info><title>Example of specifying a schema name</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Build this query:
 //   SELECT *
 //   FROM "myschema"."products"
 
-$select = $db-&gt;select()
-             -&gt;from( 'myschema.products' );
+$select = $db->select()
+             ->from( 'myschema.products' );
 
 // or
 
-$select = $db-&gt;select()
-             -&gt;from('products', '*', 'myschema');
-</programlisting>
+$select = $db->select()
+             ->from('products', '*', 'myschema');
+]]></programlisting>
             </example>
         </section>
 
@@ -251,31 +249,31 @@ $select = $db-&gt;select()
             <example xml:id="zend.db.select.building.columns.example"><info><title>Examples of specifying columns</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Build this query:
 //   SELECT p."product_id", p."product_name"
 //   FROM "products" AS p
 
-$select = $db-&gt;select()
-             -&gt;from(array('p' =&gt; 'products'),
+$select = $db->select()
+             ->from(array('p' => 'products'),
                     array('product_id', 'product_name'));
 
 // Build the same query, specifying correlation names:
 //   SELECT p."product_id", p."product_name"
 //   FROM "products" AS p
 
-$select = $db-&gt;select()
-             -&gt;from(array('p' =&gt; 'products'),
+$select = $db->select()
+             ->from(array('p' => 'products'),
                     array('p.product_id', 'p.product_name'));
 
 // Build this query with an alias for one column:
 //   SELECT p."product_id" AS prodno, p."product_name"
 //   FROM "products" AS p
 
-$select = $db-&gt;select()
-             -&gt;from(array('p' =&gt; 'products'),
-                    array('prodno' =&gt; 'product_id', 'product_name'));
-</programlisting>
+$select = $db->select()
+             ->from(array('p' => 'products'),
+                    array('prodno' => 'product_id', 'product_name'));
+]]></programlisting>
             </example>
         </section>
 
@@ -310,38 +308,38 @@ $select = $db-&gt;select()
             <example xml:id="zend.db.select.building.columns-expr.example"><info><title>Examples of specifying columns containing expressions</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Build this query:
 //   SELECT p."product_id", LOWER(product_name)
 //   FROM "products" AS p
 // An expression with parentheses implicitly becomes
 // a Zend_Db_Expr.
 
-$select = $db-&gt;select()
-             -&gt;from(array('p' =&gt; 'products'),
+$select = $db->select()
+             ->from(array('p' => 'products'),
                     array('product_id', 'LOWER(product_name)'));
 
 // Build this query:
 //   SELECT p."product_id", (p.cost * 1.08) AS cost_plus_tax
 //   FROM "products" AS p
 
-$select = $db-&gt;select()
-             -&gt;from(array('p' =&gt; 'products'),
+$select = $db->select()
+             ->from(array('p' => 'products'),
                     array('product_id',
-                          'cost_plus_tax' =&gt; '(p.cost * 1.08)')
+                          'cost_plus_tax' => '(p.cost * 1.08)')
                    );
 
 // Build this query using Zend_Db_Expr explicitly:
 //   SELECT p."product_id", p.cost * 1.08 AS cost_plus_tax
 //   FROM "products" AS p
 
-$select = $db-&gt;select()
-             -&gt;from(array('p' =&gt; 'products'),
+$select = $db->select()
+             ->from(array('p' => 'products'),
                     array('product_id',
-                          'cost_plus_tax' =&gt;
+                          'cost_plus_tax' =>
                               new Zend_Db_Expr('p.cost * 1.08'))
                     );
-</programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -372,18 +370,18 @@ $select = $db-&gt;select()
             <example xml:id="zend.db.select.building.columns-quoteid.example"><info><title>Examples of quoting columns in an expression</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Build this query,
 // quoting the special column name "from" in the expression:
 //   SELECT p."from" + 10 AS origin
 //   FROM "products" AS p
 
-$select = $db-&gt;select()
-             -&gt;from(array('p' =&gt; 'products'),
-                    array('origin' =&gt;
-                              '(p.' . $db-&gt;quoteIdentifier('from') . ' + 10)')
+$select = $db->select()
+             ->from(array('p' => 'products'),
+                    array('origin' =>
+                              '(p.' . $db->quoteIdentifier('from') . ' + 10)')
                    );
-</programlisting>
+]]></programlisting>
             </example>
         </section>
 
@@ -404,24 +402,24 @@ $select = $db-&gt;select()
             <example xml:id="zend.db.select.building.columns-atomic.example"><info><title>Examples of adding columns with the columns() method</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Build this query:
 //   SELECT p."product_id", p."product_name"
 //   FROM "products" AS p
 
-$select = $db-&gt;select()
-             -&gt;from(array('p' =&gt; 'products'), 'product_id')
-             -&gt;columns('product_name');
+$select = $db->select()
+             ->from(array('p' => 'products'), 'product_id')
+             ->columns('product_name');
 
 // Build the same query, specifying correlation names:
 //   SELECT p."product_id", p."product_name"
 //   FROM "products" AS p
 
-$select = $db-&gt;select()
-             -&gt;from(array('p' =&gt; 'products'), 'p.product_id')
-             -&gt;columns('product_name', 'p');
+$select = $db->select()
+             ->from(array('p' => 'products'), 'p.product_id')
+             ->columns('product_name', 'p');
              // Alternatively use columns('p.product_name')
-</programlisting>
+]]></programlisting>
             </example>
         </section>
 
@@ -439,18 +437,18 @@ $select = $db-&gt;select()
             <example xml:id="zend.db.select.building.join.example"><info><title>Example of the join() method</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Build this query:
 //   SELECT p."product_id", p."product_name", l.*
 //   FROM "products" AS p JOIN "line_items" AS l
 //     ON p.product_id = l.product_id
 
-$select = $db-&gt;select()
-             -&gt;from(array('p' =&gt; 'products'),
+$select = $db->select()
+             ->from(array('p' => 'products'),
                     array('product_id', 'product_name'))
-             -&gt;join(array('l' =&gt; 'line_items'),
+             ->join(array('l' => 'line_items'),
                     'p.product_id = l.product_id');
-</programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -487,19 +485,19 @@ $select = $db-&gt;select()
             <example xml:id="zend.db.select.building.join.example-no-columns"><info><title>Example of specifying no columns</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Build this query:
 //   SELECT p."product_id", p."product_name"
 //   FROM "products" AS p JOIN "line_items" AS l
 //     ON p.product_id = l.product_id
 
-$select = $db-&gt;select()
-             -&gt;from(array('p' =&gt; 'products'),
+$select = $db->select()
+             ->from(array('p' => 'products'),
                     array('product_id', 'product_name'))
-             -&gt;join(array('l' =&gt; 'line_items'),
+             ->join(array('l' => 'line_items'),
                     'p.product_id = l.product_id',
                     array() ); // empty list of columns
-</programlisting>
+]]></programlisting>
 
                 <para>
                     Note the empty <methodname>array()</methodname> in the above example in place of
@@ -642,7 +640,7 @@ $select = $db-&gt;select()
             <example xml:id="zend.db.select.building.joinusing.example"><info><title>Example of the joinUsing() method</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Build this query:
 //   SELECT *
 //   FROM "table1"
@@ -650,11 +648,11 @@ $select = $db-&gt;select()
 //   ON "table1".column1 = "table2".column1
 //   WHERE column2 = 'foo'
 
-$select = $db-&gt;select()
-             -&gt;from('table1')
-             -&gt;joinUsing('table2', 'column1')
-             -&gt;where('column2 = ?', 'foo');
-</programlisting>
+$select = $db->select()
+             ->from('table1')
+             ->joinUsing('table2', 'column1')
+             ->where('column2 = ?', 'foo');
+]]></programlisting>
             </example>
 
             <para>
@@ -703,17 +701,17 @@ $select = $db-&gt;select()
             <example xml:id="zend.db.select.building.where.example"><info><title>Example of the where() method</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Build this query:
 //   SELECT product_id, product_name, price
 //   FROM "products"
-//   WHERE price &gt; 100.00
+//   WHERE price > 100.00
 
-$select = $db-&gt;select()
-             -&gt;from('products',
+$select = $db->select()
+             ->from('products',
                     array('product_id', 'product_name', 'price'))
-             -&gt;where('price &gt; 100.00');
-</programlisting>
+             ->where('price > 100.00');
+]]></programlisting>
             </example>
 
             <note>
@@ -736,19 +734,19 @@ $select = $db-&gt;select()
             <example xml:id="zend.db.select.building.where.example-param"><info><title>Example of a parameter in the where() method</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Build this query:
 //   SELECT product_id, product_name, price
 //   FROM "products"
-//   WHERE (price &gt; 100.00)
+//   WHERE (price > 100.00)
 
 $minimumPrice = 100;
 
-$select = $db-&gt;select()
-             -&gt;from('products',
+$select = $db->select()
+             ->from('products',
                     array('product_id', 'product_name', 'price'))
-             -&gt;where('price &gt; ?', $minimumPrice);
-</programlisting>
+             ->where('price > ?', $minimumPrice);
+]]></programlisting>
             </example>
 
             <para>
@@ -760,7 +758,7 @@ $select = $db-&gt;select()
             <example xml:id="zend.db.select.building.where.example-array"><info><title>Example of an array parameter in the where() method</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Build this query:
 //   SELECT product_id, product_name, price
 //   FROM "products"
@@ -768,11 +766,11 @@ $select = $db-&gt;select()
 
 $productIds = array(1, 2, 3);
 
-$select = $db-&gt;select()
-             -&gt;from('products',
+$select = $db->select()
+             ->from('products',
                     array('product_id', 'product_name', 'price'))
-             -&gt;where('product_id IN (?)', $productIds);
-</programlisting>
+             ->where('product_id IN (?)', $productIds);
+]]></programlisting>
             </example>
 
             <para>
@@ -784,22 +782,22 @@ $select = $db-&gt;select()
             <example xml:id="zend.db.select.building.where.example-and"><info><title>Example of multiple where() methods</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Build this query:
 //   SELECT product_id, product_name, price
 //   FROM "products"
-//   WHERE (price &gt; 100.00)
-//     AND (price &lt; 500.00)
+//   WHERE (price > 100.00)
+//     AND (price < 500.00)
 
 $minimumPrice = 100;
 $maximumPrice = 500;
 
-$select = $db-&gt;select()
-             -&gt;from('products',
+$select = $db->select()
+             ->from('products',
                     array('product_id', 'product_name', 'price'))
-             -&gt;where('price &gt; ?', $minimumPrice)
-             -&gt;where('price &lt; ?', $maximumPrice);
-</programlisting>
+             ->where('price > ?', $minimumPrice)
+             ->where('price < ?', $maximumPrice);
+]]></programlisting>
             </example>
 
             <para>
@@ -812,22 +810,22 @@ $select = $db-&gt;select()
             <example xml:id="zend.db.select.building.where.example-or"><info><title>Example of the orWhere() method</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Build this query:
 //   SELECT product_id, product_name, price
 //   FROM "products"
-//   WHERE (price &lt; 100.00)
-//     OR (price &gt; 500.00)
+//   WHERE (price < 100.00)
+//     OR (price > 500.00)
 
 $minimumPrice = 100;
 $maximumPrice = 500;
 
-$select = $db-&gt;select()
-             -&gt;from('products',
+$select = $db->select()
+             ->from('products',
                     array('product_id', 'product_name', 'price'))
-             -&gt;where('price &lt; ?', $minimumPrice)
-             -&gt;orWhere('price &gt; ?', $maximumPrice);
-</programlisting>
+             ->where('price < ?', $minimumPrice)
+             ->orWhere('price > ?', $maximumPrice);
+]]></programlisting>
             </example>
 
             <para>
@@ -840,23 +838,23 @@ $select = $db-&gt;select()
             <example xml:id="zend.db.select.building.where.example-parens"><info><title>Example of parenthesizing Boolean expressions</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Build this query:
 //   SELECT product_id, product_name, price
 //   FROM "products"
-//   WHERE (price &lt; 100.00 OR price &gt; 500.00)
+//   WHERE (price < 100.00 OR price > 500.00)
 //     AND (product_name = 'Apple')
 
 $minimumPrice = 100;
 $maximumPrice = 500;
 $prod = 'Apple';
 
-$select = $db-&gt;select()
-             -&gt;from('products',
+$select = $db->select()
+             ->from('products',
                     array('product_id', 'product_name', 'price'))
-             -&gt;where("price &lt; $minimumPrice OR price &gt; $maximumPrice")
-             -&gt;where('product_name = ?', $prod);
-</programlisting>
+             ->where("price < $minimumPrice OR price > $maximumPrice")
+             ->where('product_name = ?', $prod);
+]]></programlisting>
             </example>
 
             <para>
@@ -887,21 +885,21 @@ $select = $db-&gt;select()
             <example xml:id="zend.db.select.building.group.example"><info><title>Example of the group() method</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Build this query:
 //   SELECT p."product_id", COUNT(*) AS line_items_per_product
 //   FROM "products" AS p JOIN "line_items" AS l
 //     ON p.product_id = l.product_id
 //   GROUP BY p.product_id
 
-$select = $db-&gt;select()
-             -&gt;from(array('p' =&gt; 'products'),
+$select = $db->select()
+             ->from(array('p' => 'products'),
                     array('product_id'))
-             -&gt;join(array('l' =&gt; 'line_items'),
+             ->join(array('l' => 'line_items'),
                     'p.product_id = l.product_id',
-                    array('line_items_per_product' =&gt; 'COUNT(*)'))
-             -&gt;group('p.product_id');
-</programlisting>
+                    array('line_items_per_product' => 'COUNT(*)'))
+             ->group('p.product_id');
+]]></programlisting>
             </example>
 
             <para>
@@ -939,23 +937,23 @@ $select = $db-&gt;select()
             <example xml:id="zend.db.select.building.having.example"><info><title>Example of the having() method</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Build this query:
 //   SELECT p."product_id", COUNT(*) AS line_items_per_product
 //   FROM "products" AS p JOIN "line_items" AS l
 //     ON p.product_id = l.product_id
 //   GROUP BY p.product_id
-//   HAVING line_items_per_product &gt; 10
+//   HAVING line_items_per_product > 10
 
-$select = $db-&gt;select()
-             -&gt;from(array('p' =&gt; 'products'),
+$select = $db->select()
+             ->from(array('p' => 'products'),
                     array('product_id'))
-             -&gt;join(array('l' =&gt; 'line_items'),
+             ->join(array('l' => 'line_items'),
                     'p.product_id = l.product_id',
-                    array('line_items_per_product' =&gt; 'COUNT(*)'))
-             -&gt;group('p.product_id')
-             -&gt;having('line_items_per_product &gt; 10');
-</programlisting>
+                    array('line_items_per_product' => 'COUNT(*)'))
+             ->group('p.product_id')
+             ->having('line_items_per_product > 10');
+]]></programlisting>
             </example>
 
             <note>
@@ -999,7 +997,7 @@ $select = $db-&gt;select()
             <example xml:id="zend.db.select.building.order.example"><info><title>Example of the order() method</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Build this query:
 //   SELECT p."product_id", COUNT(*) AS line_items_per_product
 //   FROM "products" AS p JOIN "line_items" AS l
@@ -1007,16 +1005,16 @@ $select = $db-&gt;select()
 //   GROUP BY p.product_id
 //   ORDER BY "line_items_per_product" DESC, "product_id"
 
-$select = $db-&gt;select()
-             -&gt;from(array('p' =&gt; 'products'),
+$select = $db->select()
+             ->from(array('p' => 'products'),
                     array('product_id'))
-             -&gt;join(array('l' =&gt; 'line_items'),
+             ->join(array('l' => 'line_items'),
                     'p.product_id = l.product_id',
-                    array('line_items_per_product' =&gt; 'COUNT(*)'))
-             -&gt;group('p.product_id')
-             -&gt;order(array('line_items_per_product DESC',
+                    array('line_items_per_product' => 'COUNT(*)'))
+             ->group('p.product_id')
+             ->order(array('line_items_per_product DESC',
                            'product_id'));
-</programlisting>
+]]></programlisting>
             </example>
         </section>
 
@@ -1043,7 +1041,7 @@ $select = $db-&gt;select()
             <example xml:id="zend.db.select.building.limit.example"><info><title>Example of the limit() method</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Build this query:
 //   SELECT p."product_id", p."product_name"
 //   FROM "products" AS p
@@ -1053,11 +1051,11 @@ $select = $db-&gt;select()
 //   FROM "products" AS p
 //   LIMIT 20 OFFSET 10
 
-$select = $db-&gt;select()
-             -&gt;from(array('p' =&gt; 'products'),
+$select = $db->select()
+             ->from(array('p' => 'products'),
                     array('product_id', 'product_name'))
-             -&gt;limit(20, 10);
-</programlisting>
+             ->limit(20, 10);
+]]></programlisting>
             </example>
 
             <note>
@@ -1084,17 +1082,17 @@ $select = $db-&gt;select()
             <example xml:id="zend.db.select.building.limit.example2"><info><title>Example of the limitPage() method</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Build this query:
 //   SELECT p."product_id", p."product_name"
 //   FROM "products" AS p
 //   LIMIT 10, 20
 
-$select = $db-&gt;select()
-             -&gt;from(array('p' =&gt; 'products'),
+$select = $db->select()
+             ->from(array('p' => 'products'),
                     array('product_id', 'product_name'))
-             -&gt;limitPage(2, 10);
-</programlisting>
+             ->limitPage(2, 10);
+]]></programlisting>
             </example>
         </section>
 
@@ -1109,15 +1107,15 @@ $select = $db-&gt;select()
             <example xml:id="zend.db.select.building.distinct.example"><info><title>Example of the distinct() method</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Build this query:
 //   SELECT DISTINCT p."product_name"
 //   FROM "products" AS p
 
-$select = $db-&gt;select()
-             -&gt;distinct()
-             -&gt;from(array('p' =&gt; 'products'), 'product_name');
-</programlisting>
+$select = $db->select()
+             ->distinct()
+             ->from(array('p' => 'products'), 'product_name');
+]]></programlisting>
             </example>
         </section>
 
@@ -1133,15 +1131,15 @@ $select = $db-&gt;select()
             <example xml:id="zend.db.select.building.for-update.example"><info><title>Example of forUpdate() method</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Build this query:
 //   SELECT FOR UPDATE p.*
 //   FROM "products" AS p
 
-$select = $db-&gt;select()
-             -&gt;forUpdate()
-             -&gt;from(array('p' =&gt; 'products'));
-</programlisting>
+$select = $db->select()
+             ->forUpdate()
+             ->from(array('p' => 'products'));
+]]></programlisting>
             </example>
         </section>
 
@@ -1160,14 +1158,14 @@ $select = $db-&gt;select()
             <example xml:id="zend.db.select.building.union.example"><info><title>Example of union() method</title></info>
                 
 
-                <programlisting language="php">
-$sql1 = $db-&gt;select();
+                <programlisting language="php"><![CDATA[
+$sql1 = $db->select();
 $sql2 = "SELECT ...";
 
-$select = $db-&gt;select()
-    -&gt;union(array($sql1, $sql2))
-    -&gt;order("id");
-</programlisting>
+$select = $db->select()
+    ->union(array($sql1, $sql2))
+    ->order("id");
+]]></programlisting>
             </example>
         </section>
     </section>
@@ -1199,13 +1197,13 @@ $select = $db-&gt;select()
             <example xml:id="zend.db.select.execute.query-adapter.example"><info><title>Example using the Db adapter's query() method</title></info>
                 
 
-                <programlisting language="php">
-$select = $db-&gt;select()
-             -&gt;from('products');
+                <programlisting language="php"><![CDATA[
+$select = $db->select()
+             ->from('products');
 
-$stmt = $db-&gt;query($select);
-$result = $stmt-&gt;fetchAll();
-</programlisting>
+$stmt = $db->query($select);
+$result = $stmt->fetchAll();
+]]></programlisting>
             </example>
         </section>
 
@@ -1223,13 +1221,13 @@ $result = $stmt-&gt;fetchAll();
             <example xml:id="zend.db.select.execute.query-select.example"><info><title>Example using the Select object's query method</title></info>
                 
 
-                <programlisting language="php">
-$select = $db-&gt;select()
-             -&gt;from('products');
+                <programlisting language="php"><![CDATA[
+$select = $db->select()
+             ->from('products');
 
-$stmt = $select-&gt;query();
-$result = $stmt-&gt;fetchAll();
-</programlisting>
+$stmt = $select->query();
+$result = $stmt->fetchAll();
+]]></programlisting>
             </example>
         </section>
 
@@ -1245,16 +1243,16 @@ $result = $stmt-&gt;fetchAll();
             <example xml:id="zend.db.select.execute.tostring.example"><info><title>Example of the __toString() method</title></info>
                 
 
-                <programlisting language="php">
-$select = $db-&gt;select()
-             -&gt;from('products');
+                <programlisting language="php"><![CDATA[
+$select = $db->select()
+             ->from('products');
 
-$sql = $select-&gt;__toString();
+$sql = $select->__toString();
 echo "$sql\n";
 
 // The output is the string:
 //   SELECT * FROM "products"
-</programlisting>
+]]></programlisting>
             </example>
         </section>
     </section>
@@ -1368,21 +1366,21 @@ echo "$sql\n";
             <example xml:id="zend.db.select.other.get-part.example"><info><title>Example of the getPart() method</title></info>
                 
 
-                <programlisting language="php">
-$select = $db-&gt;select()
-             -&gt;from('products')
-             -&gt;order('product_id');
+                <programlisting language="php"><![CDATA[
+$select = $db->select()
+             ->from('products')
+             ->order('product_id');
 
 // You can use a string literal to specify the part
-$orderData = $select-&gt;getPart( 'order' );
+$orderData = $select->getPart( 'order' );
 
 // You can use a constant to specify the same part
-$orderData = $select-&gt;getPart( Zend_Db_Select::ORDER );
+$orderData = $select->getPart( Zend_Db_Select::ORDER );
 
 // The return value may be an array structure, not a string.
 // Each part has a different structure.
 print_r( $orderData );
-</programlisting>
+]]></programlisting>
             </example>
         </section>
 
@@ -1411,15 +1409,15 @@ print_r( $orderData );
             <example xml:id="zend.db.select.other.reset.example"><info><title>Example of the reset() method</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Build this query:
 //   SELECT p.*
 //   FROM "products" AS p
 //   ORDER BY "product_name"
 
-$select = $db-&gt;select()
-             -&gt;from(array('p' =&gt; 'products')
-             -&gt;order('product_name');
+$select = $db->select()
+             ->from(array('p' => 'products')
+             ->order('product_name');
 
 // Changed requirement, instead order by a different columns:
 //   SELECT p.*
@@ -1427,14 +1425,14 @@ $select = $db-&gt;select()
 //   ORDER BY "product_id"
 
 // Clear one part so we can redefine it
-$select-&gt;reset( Zend_Db_Select::ORDER );
+$select->reset( Zend_Db_Select::ORDER );
 
 // And specify a different column
-$select-&gt;order('product_id');
+$select->order('product_id');
 
 // Clear all parts of the query
-$select-&gt;reset();
-</programlisting>
+$select->reset();
+]]></programlisting>
             </example>
         </section>
 

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.node"><info><title>Object oriented access to the LDAP tree using Zend_Ldap_Node</title></info>
     
 
@@ -52,16 +50,16 @@
         <example><info><title>Traverse LDAP tree recursively</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
-$ldap-&gt;bind();
-$ri = new RecursiveIteratorIterator($ldap-&gt;getBaseNode(),
+$ldap->bind();
+$ri = new RecursiveIteratorIterator($ldap->getBaseNode(),
                                     RecursiveIteratorIterator::SELF_FIRST);
-foreach ($ri as $rdn =&gt; $n) {
+foreach ($ri as $rdn => $n) {
     var_dump($n);
 }
-</programlisting>
+]]></programlisting>
             </example>
     </section>
 </section>

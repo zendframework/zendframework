@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.modifying-feed"><info><title>Modifying Feed and Entry structures</title></info>
     
 
@@ -13,15 +11,15 @@
     <example xml:id="zend.feed.modifying-feed.example.modifying"><info><title>Modifying an Existing Feed Entry</title></info>
         
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
-$entry = $feed-&gt;current();
+$entry = $feed->current();
 
-$entry-&gt;title = 'This is a new title';
-$entry-&gt;author-&gt;email = 'my_email@example.com';
+$entry->title = 'This is a new title';
+$entry->author->email = 'my_email@example.com';
 
-echo $entry-&gt;saveXML();
-</programlisting>
+echo $entry->saveXML();
+]]></programlisting>
 
         <para>
             This will output a full (includes <command>&lt;?xml ... &gt;</command> prologue)
@@ -49,21 +47,21 @@ echo $entry-&gt;saveXML();
     <example xml:id="zend.feed.modifying-feed.example.creating"><info><title>Creating an Atom Entry with Elements of Custom Namespaces</title></info>
         
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $entry = new Zend_Feed_Entry_Atom();
 // id is always assigned by the server in Atom
-$entry-&gt;title = 'my custom entry';
-$entry-&gt;author-&gt;name = 'Example Author';
-$entry-&gt;author-&gt;email = 'me@example.com';
+$entry->title = 'my custom entry';
+$entry->author->name = 'Example Author';
+$entry->author->email = 'me@example.com';
 
 // Now do the custom part.
 Zend_Feed::registerNamespace('myns', 'http://www.example.com/myns/1.0');
 
-$entry-&gt;{'myns:myelement_one'} = 'my first custom value';
-$entry-&gt;{'myns:container_elt'}-&gt;part1 = 'first nested custom part';
-$entry-&gt;{'myns:container_elt'}-&gt;part2 = 'second nested custom part';
+$entry->{'myns:myelement_one'} = 'my first custom value';
+$entry->{'myns:container_elt'}->part1 = 'first nested custom part';
+$entry->{'myns:container_elt'}->part2 = 'second nested custom part';
 
-echo $entry-&gt;saveXML();
-</programlisting>
+echo $entry->saveXML();
+]]></programlisting>
     </example>
 </section>

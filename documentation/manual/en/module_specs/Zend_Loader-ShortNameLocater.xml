@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.short-name-locater"><info><title>The ShortNameLocater Interface</title></info>
     
 
@@ -45,7 +43,7 @@
             only three methods, as shown below.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 namespace Zend\Loader;
 
 interface ShortNameLocater
@@ -54,7 +52,7 @@ interface ShortNameLocater
     public function getClassName($name);
     public function load($name);
 }
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.loader.short-name-locater.options"><info><title>Configuration Options</title></info>

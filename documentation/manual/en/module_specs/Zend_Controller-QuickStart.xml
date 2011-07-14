@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.quickstart"><info><title>Zend_Controller Quick Start</title></info>
     
 
@@ -44,7 +42,7 @@
                 layout is as follows:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 application/
     controllers/
         IndexController.php
@@ -58,7 +56,7 @@ application/
 html/
     .htaccess
     index.php
-</programlisting>
+]]></programlisting>
         </section>
 
         <section xml:id="zend.controller.quickstart.go.docroot"><info><title>Set the Document Root</title></info>
@@ -78,14 +76,14 @@ html/
                 follows:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
-</programlisting>
+]]></programlisting>
 
             <note><info><title>Learn about mod_rewrite</title></info>
                 
@@ -105,33 +103,33 @@ RewriteRule ^.*$ index.php [NC,L]
                 configuration:
             </para>
 
-            <programlisting language="xml">
-&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;configuration&gt;
-     &lt;system.webServer&gt;
-         &lt;rewrite&gt;
-             &lt;rules&gt;
-                 &lt;rule name="Imported Rule 1" stopProcessing="true"&gt;
-                     &lt;match url="^.*$" /&gt;
-                     &lt;conditions logicalGrouping="MatchAny"&gt;
-                         &lt;add input="{REQUEST_FILENAME}"
+            <programlisting language="xml"><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+     <system.webServer>
+         <rewrite>
+             <rules>
+                 <rule name="Imported Rule 1" stopProcessing="true">
+                     <match url="^.*$" />
+                     <conditions logicalGrouping="MatchAny">
+                         <add input="{REQUEST_FILENAME}"
                              matchType="IsFile" pattern=""
-                             ignoreCase="false" /&gt;
-                         &lt;add input="{REQUEST_FILENAME}"
+                             ignoreCase="false" />
+                         <add input="{REQUEST_FILENAME}"
                              matchType="IsDirectory"
-                             pattern="" ignoreCase="false" /&gt;
-                     &lt;/conditions&gt;
-                     &lt;action type="None" /&gt;
-                 &lt;/rule&gt;
-                 &lt;rule name="Imported Rule 2" stopProcessing="true"&gt;
-                     &lt;match url="^.*$" /&gt;
-                     &lt;action type="Rewrite" url="index.php" /&gt;
-                 &lt;/rule&gt;
-             &lt;/rules&gt;
-         &lt;/rewrite&gt;
-     &lt;/system.webServer&gt;
-&lt;/configuration&gt;
-</programlisting>
+                             pattern="" ignoreCase="false" />
+                     </conditions>
+                     <action type="None" />
+                 </rule>
+                 <rule name="Imported Rule 2" stopProcessing="true">
+                     <match url="^.*$" />
+                     <action type="Rewrite" url="index.php" />
+                 </rule>
+             </rules>
+         </rewrite>
+     </system.webServer>
+</configuration>
+]]></programlisting>
 
             <para>
                 The above rules will route requests to existing resources
@@ -158,9 +156,9 @@ RewriteRule ^.*$ index.php [NC,L]
                 the following:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 Zend_Controller_Front::run('/path/to/app/controllers');
-</programlisting>
+]]></programlisting>
 
             <para>
                 This will instantiate and dispatch the front controller, which
@@ -212,7 +210,7 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 enter the following:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 /** Zend_Controller_Action */
 class IndexController extends Zend_Controller_Action
 {
@@ -220,7 +218,7 @@ class IndexController extends Zend_Controller_Action
     {
     }
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 By default, the <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>
@@ -257,20 +255,20 @@ class IndexController extends Zend_Controller_Action
                 this file, and type in some <acronym>HTML</acronym>:
             </para>
 
-            <programlisting language="php">
-&lt;!DOCTYPE html
+            <programlisting language="php"><![CDATA[
+<!DOCTYPE html
 PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;
-  &lt;title&gt;My first Zend Framework App&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1&gt;Hello, World!&lt;/h1&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</programlisting>
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>My first Zend Framework App</title>
+</head>
+<body>
+    <h1>Hello, World!</h1>
+</body>
+</html>
+]]></programlisting>
         </section>
 
         <section xml:id="zend.controller.quickstart.go.errorhandler"><info><title>Create the Error Controller</title></info>
@@ -284,14 +282,14 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                 with an <methodname>errorAction()</methodname> method:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class ErrorController extends Zend_Controller_Action
 {
     public function errorAction()
     {
     }
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 Assuming the already discussed directory layout, this file will
@@ -301,21 +299,21 @@ class ErrorController extends Zend_Controller_Action
                 content might look like:
             </para>
 
-            <programlisting language="php">
-&lt;!DOCTYPE html
+            <programlisting language="php"><![CDATA[
+<!DOCTYPE html
 PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;
-  &lt;title&gt;Error&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1&gt;An error occurred&lt;/h1&gt;
-    &lt;p&gt;An error occurred; please try again later.&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</programlisting>
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Error</title>
+</head>
+<body>
+    <h1>An error occurred</h1>
+    <p>An error occurred; please try again later.</p>
+</body>
+</html>
+]]></programlisting>
         </section>
 
         <section xml:id="zend.controller.quickstart.go.finish"><info><title>View the Site!</title></info>

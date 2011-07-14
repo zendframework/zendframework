@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.baseurl"><info><title>BaseUrl Helper</title></info>
     
 
@@ -15,24 +13,24 @@
         Usage of the BaseUrl helper is very straightforward:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 /*
  * The following assume that the base URL of the page/application is "/mypage".
  */
 
 /*
  * Prints:
- * &lt;base href="/mypage/" /&gt;
+ * <base href="/mypage/" />
  */
-&lt;base href="&lt;?php echo $this-&gt;baseUrl(); ?&gt;" /&gt;
+<base href="<?php echo $this->baseUrl(); ?>" />
 
 /*
  * Prints:
- * &lt;link rel="stylesheet" type="text/css" href="/mypage/css/base.css" /&gt;
+ * <link rel="stylesheet" type="text/css" href="/mypage/css/base.css" />
  */
-&lt;link rel="stylesheet" type="text/css"
-     href="&lt;?php echo $this-&gt;baseUrl('css/base.css'); ?&gt;" /&gt;
-</programlisting>
+<link rel="stylesheet" type="text/css"
+     href="<?php echo $this->baseUrl('css/base.css'); ?>" />
+]]></programlisting>
 
     <note>
         <para>

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.hex"><info><title>Hex</title></info>
     
 
@@ -11,14 +9,14 @@
         you want to validate.
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Hex();
-if ($validator-&gt;isValid('123ABC')) {
+if ($validator->isValid('123ABC')) {
     // value contains only hex chars
 } else {
     // false
 }
-</programlisting>
+]]></programlisting>
 
     <note><info><title>Invalid characters</title></info>
         

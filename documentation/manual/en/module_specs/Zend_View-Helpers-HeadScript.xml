@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headscript"><info><title>HeadScript Helper</title></info>
     
 
@@ -91,14 +89,14 @@
         <example xml:id="zend.view.helpers.initial.headscript.conditional"><info><title>Headscript With Conditional Comments</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // adding scripts
-$this-&gt;headScript()-&gt;appendFile(
+$this->headScript()->appendFile(
     '/js/prototype.js',
     'text/javascript',
-    array('conditional' =&gt; 'lt IE 7')
+    array('conditional' => 'lt IE 7')
 );
-</programlisting>
+]]></programlisting>
         </example>
     </note>
 
@@ -159,9 +157,9 @@ $this-&gt;headScript()-&gt;appendFile(
             <methodname>setAllowArbitraryAttributes()</methodname> method:
         </para>
 
-        <programlisting language="php">
-$this-&gt;headScript()-&gt;setAllowArbitraryAttributes(true);
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$this->headScript()->setAllowArbitraryAttributes(true);
+]]></programlisting>
     </note>
 
     <example xml:id="zend.view.helpers.initial.headscript.basicusage"><info><title>HeadScript Helper Basic Usage</title></info>
@@ -172,11 +170,11 @@ $this-&gt;headScript()-&gt;setAllowArbitraryAttributes(true);
             may be links to outside resource files or scripts themselves.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // adding scripts
-$this-&gt;headScript()-&gt;appendFile('/js/prototype.js')
-                   -&gt;appendScript($onloadScript);
-</programlisting>
+$this->headScript()->appendFile('/js/prototype.js')
+                   ->appendScript($onloadScript);
+]]></programlisting>
 
         <para>
             Order is often important with client-side scripting; you may need to
@@ -185,27 +183,27 @@ $this-&gt;headScript()-&gt;appendFile('/js/prototype.js')
             offsetSet directives to aid in this task:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Putting scripts in order
 
 // place at a particular offset to ensure loaded last
-$this-&gt;headScript()-&gt;offsetSetFile(100, '/js/myfuncs.js');
+$this->headScript()->offsetSetFile(100, '/js/myfuncs.js');
 
 // use scriptaculous effects (append uses next index, 101)
-$this-&gt;headScript()-&gt;appendFile('/js/scriptaculous.js');
+$this->headScript()->appendFile('/js/scriptaculous.js');
 
 // but always have base prototype script load first:
-$this-&gt;headScript()-&gt;prependFile('/js/prototype.js');
-</programlisting>
+$this->headScript()->prependFile('/js/prototype.js');
+]]></programlisting>
 
         <para>
             When you're finally ready to output all scripts in your layout
             script, simply echo the helper:
         </para>
 
-        <programlisting language="php">
-&lt;?php echo $this-&gt;headScript() ?&gt;
-</programlisting>
+        <programlisting language="php"><![CDATA[
+<?php echo $this->headScript() ?>
+]]></programlisting>
     </example>
 
     <example xml:id="zend.view.helpers.initial.headscript.capture"><info><title>Capturing Scripts Using the HeadScript Helper</title></info>
@@ -219,12 +217,12 @@ $this-&gt;headScript()-&gt;prependFile('/js/prototype.js');
             just that, capturing it to the stack:
         </para>
 
-        <programlisting language="php">
-&lt;?php $this-&gt;headScript()-&gt;captureStart() ?&gt;
-var action = '&lt;?php echo $this-&gt;baseUrl ?&gt;';
+        <programlisting language="php"><![CDATA[
+<?php $this->headScript()->captureStart() ?>
+var action = '<?php echo $this->baseUrl ?>';
 $('foo_form').action = action;
-&lt;?php $this-&gt;headScript()-&gt;captureEnd() ?&gt;
-</programlisting>
+<?php $this->headScript()->captureEnd() ?>
+]]></programlisting>
 
         <para>
             The following assumptions are made:

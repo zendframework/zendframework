@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.extending"><info><title>Extending Zend_Tool</title></info>
     
 
@@ -226,12 +224,12 @@
                     one of the following places:
                 </para>
 
-                <programlisting language="text">
+                <programlisting language="text"><![CDATA[
 /usr/bin
 /usr/local/bin
 /usr/local/ZendServer/bin/
 /Applications/ZendServer/bin/
-</programlisting>
+]]></programlisting>
 
                 <para>
                     To find out the location of your <acronym>PHP</acronym> binary, you can execute
@@ -293,12 +291,12 @@
                     command similar to this:
                 </para>
 
-                <programlisting language="sh">
+                <programlisting language="sh"><![CDATA[
 ln -s /usr/local/share/ZendFramework/bin/zf.sh /usr/local/bin/zf
 
 # OR (for example)
 ln -s /home/username/lib/ZendFramework/bin/zf.sh /home/username/bin/zf
-</programlisting>
+]]></programlisting>
 
                 <para>
                     This will create a link which you should be able to access globally
@@ -316,11 +314,11 @@ ln -s /home/username/lib/ZendFramework/bin/zf.sh /home/username/bin/zf
                     one of the following places:
                 </para>
 
-                <programlisting language="text">
+                <programlisting language="text"><![CDATA[
 C:\PHP
 C:\Program Files\ZendServer\bin\
 C:\WAMP\PHP\bin
-</programlisting>
+]]></programlisting>
 
                 <para>
                     You should be able to run <filename>php.exe</filename> on the command line.
@@ -487,7 +485,7 @@ C:\WAMP\PHP\bin
                         we will create the following manifest:
                     </para>
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 class My_Component_Manifest
     implements Zend_Tool_Framework_Manifest_ProviderManifestable
 {
@@ -498,7 +496,7 @@ class My_Component_Manifest
         );
     }
 }
-</programlisting>
+]]></programlisting>
                 </example>
             </section>
 
@@ -517,7 +515,7 @@ class My_Component_Manifest
                     this file would only have to look like the following:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 class My_Component_HelloProvider
     implements Zend_Tool_Framework_Provider_Interface
 {
@@ -526,7 +524,7 @@ class My_Component_HelloProvider
         echo 'Hello from my provider!';
     }
 }
-</programlisting>
+]]></programlisting>
 
                 <para>
                     Given that code above, and assuming the developer wishes to access
@@ -534,10 +532,10 @@ class My_Component_HelloProvider
                     like this:
                 </para>
 
-                <programlisting language="sh">
+                <programlisting language="sh"><![CDATA[
 % zf say hello
 Hello from my provider!
-</programlisting>
+]]></programlisting>
             </section>
 
             <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.response"><info><title>The response object</title></info>
@@ -552,17 +550,17 @@ Hello from my provider!
                     hello provider with this knowledge it looks like:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 class My_Component_HelloProvider
     extends Zend_Tool_Framework_Provider_Abstract
 {
     public function say()
     {
-        $this-&gt;_registry-&gt;getResponse
-                        -&gt;appendContent("Hello from my provider!");
+        $this->_registry->getResponse
+                        ->appendContent("Hello from my provider!");
     }
 }
-</programlisting>
+]]></programlisting>
 
                 <para>
                     As you can see one has to extend the
@@ -596,7 +594,7 @@ class My_Component_HelloProvider
                         would probably do this in OO code:
                     </para>
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 class My_Component_HelloProvider
     implements Zend_Tool_Framework_Provider_Interface
 {
@@ -605,7 +603,7 @@ class My_Component_HelloProvider
         echo 'Hello' . $name . ', from my provider!';
     }
 }
-</programlisting>
+]]></programlisting>
 
                     <para>
                         The above example can then be called via the command line
@@ -626,21 +624,21 @@ class My_Component_HelloProvider
                         the client to ask for more the required input by calling:
                     </para>
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 class My_Component_HelloProvider
     extends Zend_Tool_Framework_Provider_Abstract
 {
     public function say($name = 'Ralph')
     {
-        $nameResponse = $this-&gt;_registry
-                             -&gt;getClient()
-                             -&gt;promptInteractiveInput("Whats your name?");
-        $name = $name-&gt;getContent();
+        $nameResponse = $this->_registry
+                             ->getClient()
+                             ->promptInteractiveInput("Whats your name?");
+        $name = $name->getContent();
 
         echo 'Hello' . $name . ', from my provider!';
     }
 }
-</programlisting>
+]]></programlisting>
 
                     <para>
                         This command throws an exception if the current client is not
@@ -671,30 +669,30 @@ class My_Component_HelloProvider
                         sample below.
                     </para>
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 class My_Component_HelloProvider
     extends    Zend_Tool_Framework_Provider_Abstract
     implements Zend_Tool_Framework_Provider_Pretendable
 {
     public function say($name = 'Ralph')
     {
-        if ($this-&gt;_registry-&gt;getRequest()-&gt;isPretend()) {
+        if ($this->_registry->getRequest()->isPretend()) {
             echo 'I would say hello to ' . $name . '.';
         } else {
             echo 'Hello' . $name . ', from my provider!';
         }
     }
 }
-</programlisting>
+]]></programlisting>
 
                     <para>
                         To run the provider in pretend mode just call:
                     </para>
 
-                    <programlisting language="sh">
+                    <programlisting language="sh"><![CDATA[
 % zf --pretend say hello Ralph
 I would say hello Ralph.
-</programlisting>
+]]></programlisting>
                 </section>
 
                 <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.verbosedebug"><info><title>Verbose and Debug modes</title></info>
@@ -707,21 +705,21 @@ I would say hello Ralph.
                         with:
                     </para>
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 class My_Component_HelloProvider
     implements Zend_Tool_Framework_Provider_Interface
 {
     public function say($name = 'Ralph')
     {
-        if($this-&gt;_registry-&gt;getRequest()-&gt;isVerbose()) {
+        if($this->_registry->getRequest()->isVerbose()) {
             echo "Hello::say has been called\n";
         }
-        if($this-&gt;_registry-&gt;getRequest()-&gt;isDebug()) {
+        if($this->_registry->getRequest()->isDebug()) {
             syslog(LOG_INFO, "Hello::say has been called\n");
         }
     }
 }
-</programlisting>
+]]></programlisting>
                 </section>
 
                 <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.configstorage"><info><title>Accessing User Config and Storage</title></info>
@@ -735,13 +733,13 @@ class My_Component_HelloProvider
                         <classname>Zend_Tool_Framework_Provider_Abstract</classname>.
                     </para>
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 class My_Component_HelloProvider
     extends Zend_Tool_Framework_Provider_Abstract
 {
     public function say()
     {
-        $username = $this-&gt;_registry-&gt;getConfig()-&gt;username;
+        $username = $this->_registry->getConfig()->username;
         if(!empty($username)) {
             echo "Hello $username!";
         } else {
@@ -749,7 +747,7 @@ class My_Component_HelloProvider
         }
     }
 }
-</programlisting>
+]]></programlisting>
 
                     <para>
                         The returned configuration is of the type
@@ -765,23 +763,23 @@ class My_Component_HelloProvider
                         access the storage in a similar way like the configuration:
                     </para>
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 class My_Component_HelloProvider
     extends Zend_Tool_Framework_Provider_Abstract
 {
     public function say()
     {
-        $aValue = $this-&gt;_registry-&gt;getStorage()-&gt;get("myUsername");
+        $aValue = $this->_registry->getStorage()->get("myUsername");
         echo "Hello $aValue!";
     }
 }
-</programlisting>
+]]></programlisting>
 
                     <para>
                         The <acronym>API</acronym> of the storage is very simple:
                     </para>
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 class Zend_Tool_Framework_Client_Storage
 {
     public function setAdapter($adapter);
@@ -792,7 +790,7 @@ class Zend_Tool_Framework_Client_Storage
     public function remove($name);
     public function getStreamUri($name);
 }
-</programlisting>
+]]></programlisting>
 
                     <important>
                         <para>
@@ -859,20 +857,20 @@ class Zend_Tool_Framework_Client_Storage
                 to the current project profile.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class My_Component_HelloProvider
     extends Zend_Tool_Project_Provider_Abstract
 {
     public function say()
     {
-        $profile = $this-&gt;_loadExistingProfile();
+        $profile = $this->_loadExistingProfile();
 
         /* ... do project stuff here */
 
-        $this-&gt;_storeProfile();
+        $this->_storeProfile();
     }
 }
-</programlisting>
+]]></programlisting>
         </section>
 
         <!--

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.index-opening"><info><title>Index Opening and Creation</title></info>
     
 
@@ -13,16 +11,16 @@
     <example xml:id="learning.lucene.index-opening.creation"><info><title>Lucene Index Creation</title></info>
         
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $index = Zend_Search_Lucene::create($indexPath);
-</programlisting>
+]]></programlisting>
     </example>
 
     <example xml:id="learning.lucene.index-opening.opening"><info><title>Lucene Index Opening</title></info>
         
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $index = Zend_Search_Lucene::open($indexPath);
-</programlisting>
+]]></programlisting>
     </example>
 </section>

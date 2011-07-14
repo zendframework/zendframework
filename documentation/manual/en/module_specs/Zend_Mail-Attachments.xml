@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.attachments"><info><title>Attachments</title></info>
     
 
@@ -16,15 +14,15 @@
     <example xml:id="zend.mail.attachments.example-1"><info><title>E-Mail Messages with Attachments</title></info>
         
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 // build message...
-$mail-&gt;createAttachment($someBinaryString);
-$mail-&gt;createAttachment($myImage,
+$mail->createAttachment($someBinaryString);
+$mail->createAttachment($myImage,
                         'image/gif',
                         Zend_Mime::DISPOSITION_INLINE,
                         Zend_Mime::ENCODING_BASE64);
-</programlisting>
+]]></programlisting>
     </example>
 
     <para>
@@ -34,34 +32,34 @@ $mail-&gt;createAttachment($myImage,
         <classname>Zend_Mime_Part</classname> object:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 
-$at = $mail-&gt;createAttachment($myImage);
-$at-&gt;type        = 'image/gif';
-$at-&gt;disposition = Zend_Mime::DISPOSITION_INLINE;
-$at-&gt;encoding    = Zend_Mime::ENCODING_BASE64;
-$at-&gt;filename    = 'test.gif';
+$at = $mail->createAttachment($myImage);
+$at->type        = 'image/gif';
+$at->disposition = Zend_Mime::DISPOSITION_INLINE;
+$at->encoding    = Zend_Mime::ENCODING_BASE64;
+$at->filename    = 'test.gif';
 
-$mail-&gt;send();
-</programlisting>
+$mail->send();
+]]></programlisting>
 
     <para>
         An alternative is to create an instance of <classname>Zend_Mime_Part</classname> and add it
         with <methodname>addAttachment()</methodname>:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 
 $at = new Zend_Mime_Part($myImage);
-$at-&gt;type        = 'image/gif';
-$at-&gt;disposition = Zend_Mime::DISPOSITION_INLINE;
-$at-&gt;encoding    = Zend_Mime::ENCODING_BASE64;
-$at-&gt;filename    = 'test.gif';
+$at->type        = 'image/gif';
+$at->disposition = Zend_Mime::DISPOSITION_INLINE;
+$at->encoding    = Zend_Mime::ENCODING_BASE64;
+$at->filename    = 'test.gif';
 
-$mail-&gt;addAttachment($at);
+$mail->addAttachment($at);
 
-$mail-&gt;send();
-</programlisting>
+$mail->send();
+]]></programlisting>
 </section>

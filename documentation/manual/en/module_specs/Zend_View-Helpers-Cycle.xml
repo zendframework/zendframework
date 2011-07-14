@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.cycle"><info><title>Cycle Helper</title></info>
     
 
@@ -16,33 +14,33 @@
             or use <methodname>assign(array $data)</methodname> function
         </para>
 
-        <programlisting language="php">
-&lt;?php foreach ($this-&gt;books as $book):?&gt;
-  &lt;tr style="background-color:&lt;?php echo $this-&gt;cycle(array("#F0F0F0",
+        <programlisting language="php"><![CDATA[
+<?php foreach ($this->books as $book):?>
+  <tr style="background-color:<?php echo $this->cycle(array("#F0F0F0",
                                                             "#FFFFFF"))
-                                              -&gt;next()?&gt;"&gt;
-  &lt;td&gt;&lt;?php echo $this-&gt;escape($book['author']) ?&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;?php endforeach;?&gt;
+                                              ->next()?>">
+  <td><?php echo $this->escape($book['author']) ?></td>
+</tr>
+<?php endforeach;?>
 
 // Moving in backwards order and assign function
-$this-&gt;cycle()-&gt;assign(array("#F0F0F0","#FFFFFF"));
-$this-&gt;cycle()-&gt;prev();
-?&gt;
-</programlisting>
+$this->cycle()->assign(array("#F0F0F0","#FFFFFF"));
+$this->cycle()->prev();
+?>
+]]></programlisting>
 
         <para>
             The output
         </para>
 
-        <programlisting language="php">
-&lt;tr style="background-color:'#F0F0F0'"&gt;
-   &lt;td&gt;First&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr style="background-color:'#FFFFFF'"&gt;
-   &lt;td&gt;Second&lt;/td&gt;
-&lt;/tr&gt;
-</programlisting>
+        <programlisting language="php"><![CDATA[
+<tr style="background-color:'#F0F0F0'">
+   <td>First</td>
+</tr>
+<tr style="background-color:'#FFFFFF'">
+   <td>Second</td>
+</tr>
+]]></programlisting>
     </example>
 
     <example xml:id="zend.view.helpers.initial.cycle.advanceusage"><info><title>Working with two or more cycles</title></info>
@@ -55,14 +53,14 @@ $this-&gt;cycle()-&gt;prev();
         </para>
     </example>
 
-    <programlisting language="php">
-&lt;?php foreach ($this-&gt;books as $book):?&gt;
-  &lt;tr style="background-color:&lt;?php echo $this-&gt;cycle(array("#F0F0F0",
+    <programlisting language="php"><![CDATA[
+<?php foreach ($this->books as $book):?>
+  <tr style="background-color:<?php echo $this->cycle(array("#F0F0F0",
                                                             "#FFFFFF"))
-                                              -&gt;next()?&gt;"&gt;
-  &lt;td&gt;&lt;?php echo $this-&gt;cycle(array(1,2,3),'number')-&gt;next()?&gt;&lt;/td&gt;
-  &lt;td&gt;&lt;?php echo $this-&gt;escape($book['author'])?&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;?php endforeach;?&gt;
-</programlisting>
+                                              ->next()?>">
+  <td><?php echo $this->cycle(array(1,2,3),'number')->next()?></td>
+  <td><?php echo $this->escape($book['author'])?></td>
+</tr>
+<?php endforeach;?>
+]]></programlisting>
 </section>

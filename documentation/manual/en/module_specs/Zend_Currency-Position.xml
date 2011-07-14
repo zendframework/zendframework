@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.position"><info><title>Where is the currency?</title></info>
     
 
@@ -54,31 +52,31 @@
             returned value could look like this:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $currency = new Zend_Currency(
     array(
-        'value' =&gt; 100,
+        'value' => 100,
     )
 );
 
 print $currency; // Could return '$ 100'
-</programlisting>
+]]></programlisting>
 
         <para>
             So by using the default setting the currency (in our case $) could either be
             rendered left or right from the value. Now let's define a fixed position:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $currency = new Zend_Currency(
     array(
-        'value'    =&gt; 100,
-        'position' =&gt; Zend_Currency::RIGHT,
+        'value'    => 100,
+        'position' => Zend_Currency::RIGHT,
     )
 );
 
 print $currency; // Could return '100 $';
-</programlisting>
+]]></programlisting>
 
         <para>
             Note that in the second snippet the position of <acronym>USD</acronym> is fixed

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.soap.client"><info><title>Zend_Soap_Client</title></info>
     
 
@@ -160,21 +158,21 @@
                         this:
                     </para>
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 // Accept response compression
 $client = new Zend_Soap_Client("some.wsdl",
-  array('compression' =&gt; SOAP_COMPRESSION_ACCEPT));
+  array('compression' => SOAP_COMPRESSION_ACCEPT));
 ...
 
 // Compress requests using gzip with compression level 5
 $client = new Zend_Soap_Client("some.wsdl",
-  array('compression' =&gt; SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 5));
+  array('compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 5));
 ...
 
 // Compress requests using deflate compression
 $client = new Zend_Soap_Client("some.wsdl",
-  array('compression' =&gt; SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_DEFLATE));
-</programlisting>
+  array('compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_DEFLATE));
+]]></programlisting>
                 </listitem>
             </itemizedlist>
         </para>
@@ -197,7 +195,7 @@ $client = new Zend_Soap_Client("some.wsdl",
             Use it like in the following example:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 //****************************************************************
 //                Server code
 //****************************************************************
@@ -227,9 +225,9 @@ $client = new Zend_Soap_Client("some.wsdl",
 // }
 // ...
 // $server = new Zend_Soap_Server(null, $options);
-// $server-&gt;setClass('MyClass');
+// $server->setClass('MyClass');
 // ...
-// $server-&gt;handle();
+// $server->handle();
 //
 //****************************************************************
 //                End of server code
@@ -239,11 +237,11 @@ $client = new Zend_Soap_Client("MyService.wsdl");
 ...
 
 // $result1 is a string
-$result1 = $client-&gt;method1(10);
+$result1 = $client->method1(10);
 ...
 
 // $result2 is a float
-$result2 = $client-&gt;method2(22, 'some string');
-</programlisting>
+$result2 = $client->method2(22, 'some string');
+]]></programlisting>
     </section>
 </section>

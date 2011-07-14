@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.log"><info><title>Zend_Application_Resource_Log</title></info>
     
 
@@ -20,13 +18,13 @@
             configure the log resource.
         </para>
 
-        <programlisting language="ini">
+        <programlisting language="ini"><![CDATA[
 resources.log.stream.writerName = "Stream"
 resources.log.stream.writerParams.stream = APPLICATION_PATH "/../data/logs/application.log"
 resources.log.stream.writerParams.mode = "a"
 resources.log.stream.filterName = "Priority"
 resources.log.stream.filterParams.priority = 4
-</programlisting>
+]]></programlisting>
 
         <para>
             For more information on available options, please review the <link linkend="zend.log.factory">Zend_Log::factory() documentation</link>.

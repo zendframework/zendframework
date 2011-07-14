@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.quickstart"><info><title>Zend_Form Quick Start</title></info>
     
 
@@ -17,9 +15,9 @@
             <classname>Zend_Form</classname>:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $form = new Zend_Form;
-</programlisting>
+]]></programlisting>
 
         <para>
             For advanced use cases, you may want to create a
@@ -34,10 +32,10 @@ $form = new Zend_Form;
             <methodname>setMethod()</methodname> accessors:
         </para>
 
-        <programlisting language="php">
-$form-&gt;setAction('/resource/process')
-     -&gt;setMethod('post');
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$form->setAction('/resource/process')
+     ->setMethod('post');
+]]></programlisting>
 
         <para>
             The above code sets the form action to the partial <acronym>URL</acronym>
@@ -52,9 +50,9 @@ $form-&gt;setAction('/resource/process')
             id, set the "<property>id</property>" attribute:
         </para>
 
-        <programlisting language="php">
-$form-&gt;setAttrib('id', 'login');
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$form->setAttrib('id', 'login');
+]]></programlisting>
     </section>
 
     <section xml:id="zend.form.quickstart.elements"><info><title>Add elements to the form</title></info>
@@ -95,13 +93,13 @@ $form-&gt;setAttrib('id', 'login');
             Some examples:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Instantiating an element and passing to the form object:
-$form-&gt;addElement(new Zend_Form_Element_Text('username'));
+$form->addElement(new Zend_Form_Element_Text('username'));
 
 // Passing a form element type to the form object:
-$form-&gt;addElement('text', 'username');
-</programlisting>
+$form->addElement('text', 'username');
+]]></programlisting>
 
         <para>
             By default, these do not have any validators or filters. This means
@@ -119,25 +117,25 @@ $form-&gt;addElement('text', 'username');
             objects, or the name of a validator to utilize:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $username = new Zend_Form_Element_Text('username');
 
 // Passing a Zend_Validate_* object:
-$username-&gt;addValidator(new Zend_Validate_Alnum());
+$username->addValidator(new Zend_Validate_Alnum());
 
 // Passing a validator name:
-$username-&gt;addValidator('alnum');
-</programlisting>
+$username->addValidator('alnum');
+]]></programlisting>
 
         <para>
             When using this second option, you can pass constructor arguments in an array as the
             third parameter if the validator can accept tem:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Pass a pattern
-$username-&gt;addValidator('regex', false, array('/^[a-z]/i'));
-</programlisting>
+$username->addValidator('regex', false, array('/^[a-z]/i'));
+]]></programlisting>
 
         <para>
             (The second parameter is used to indicate whether or not failure of
@@ -151,10 +149,10 @@ $username-&gt;addValidator('regex', false, array('/^[a-z]/i'));
             the element. In the former case:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Make this element required:
-$username-&gt;setRequired(true);
-</programlisting>
+$username->setRequired(true);
+]]></programlisting>
 
         <para>
             When an element is required, a 'NotEmpty' validator is added to the
@@ -168,27 +166,27 @@ $username-&gt;setRequired(true);
             value:
         </para>
 
-        <programlisting language="php">
-$username-&gt;addFilter('StringtoLower');
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$username->addFilter('StringtoLower');
+]]></programlisting>
 
         <para>
             The final element setup might look like this:
         </para>
 
-        <programlisting language="php">
-$username-&gt;addValidator('alnum')
-         -&gt;addValidator('regex', false, array('/^[a-z]/'))
-         -&gt;setRequired(true)
-         -&gt;addFilter('StringToLower');
+        <programlisting language="php"><![CDATA[
+$username->addValidator('alnum')
+         ->addValidator('regex', false, array('/^[a-z]/'))
+         ->setRequired(true)
+         ->addFilter('StringToLower');
 
 // or, more compactly:
-$username-&gt;addValidators(array('alnum',
+$username->addValidators(array('alnum',
         array('regex', false, '/^[a-z]/i')
     ))
-    -&gt;setRequired(true)
-    -&gt;addFilters(array('StringToLower'));
-</programlisting>
+    ->setRequired(true)
+    ->addFilters(array('StringToLower'));
+]]></programlisting>
 
         <para>
             Simple as this is, repeating it this for every element in a form
@@ -199,16 +197,16 @@ $username-&gt;addValidators(array('alnum',
             above implicitly, try the following:
         </para>
 
-        <programlisting language="php">
-$form-&gt;addElement('text', 'username', array(
-    'validators' =&gt; array(
+        <programlisting language="php"><![CDATA[
+$form->addElement('text', 'username', array(
+    'validators' => array(
         'alnum',
         array('regex', false, '/^[a-z]/i')
     ),
-    'required' =&gt; true,
-    'filters'  =&gt; array('StringToLower'),
+    'required' => true,
+    'filters'  => array('StringToLower'),
 ));
-</programlisting>
+]]></programlisting>
 
         <note>
             <para>
@@ -230,13 +228,13 @@ $form-&gt;addElement('text', 'username', array(
             options: use the form's render() method, or simply echo it.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Explicitly calling render(), and passing an optional view object:
-echo $form-&gt;render($view);
+echo $form->render($view);
 
 // Assuming a view object has been previously set via setView():
 echo $form;
-</programlisting>
+]]></programlisting>
 
         <para>
             By default, <classname>Zend_Form</classname> and
@@ -246,9 +244,9 @@ echo $form;
             To render a form in a view, you simply have to do the following:
         </para>
 
-        <programlisting language="php">
-&lt;?php echo $this-&gt;form ?&gt;
-</programlisting>
+        <programlisting language="php"><![CDATA[
+<?php echo $this->form ?>
+]]></programlisting>
 
         <para>
             Under the hood, <classname>Zend_Form</classname> uses "decorators" to perform
@@ -260,14 +258,14 @@ echo $form;
             looks something like this:
         </para>
 
-        <programlisting language="php">
-$element-&gt;addDecorators(array(
+        <programlisting language="php"><![CDATA[
+$element->addDecorators(array(
     'ViewHelper',
     'Errors',
-    array('HtmlTag', array('tag' =&gt; 'dd')),
-    array('Label', array('tag' =&gt; 'dt')),
+    array('HtmlTag', array('tag' => 'dd')),
+    array('Label', array('tag' => 'dt')),
 ));
-</programlisting>
+]]></programlisting>
 
         <para>
             (Where &lt;HELPERNAME&gt; is the name of a view helper to use, and varies
@@ -278,16 +276,16 @@ $element-&gt;addDecorators(array(
             The above creates output like the following:
         </para>
 
-        <programlisting language="html">
-&lt;dt&gt;&lt;label for="username" class="required"&gt;Username&lt;/dt&gt;
-&lt;dd&gt;
-    &lt;input type="text" name="username" value="123-abc" /&gt;
-    &lt;ul class="errors"&gt;
-        &lt;li&gt;'123-abc' has not only alphabetic and digit characters&lt;/li&gt;
-        &lt;li&gt;'123-abc' does not match against pattern '/^[a-z]/i'&lt;/li&gt;
-    &lt;/ul&gt;
-&lt;/dd&gt;
-</programlisting>
+        <programlisting language="html"><![CDATA[
+<dt><label for="username" class="required">Username</dt>
+<dd>
+    <input type="text" name="username" value="123-abc" />
+    <ul class="errors">
+        <li>'123-abc' has not only alphabetic and digit characters</li>
+        <li>'123-abc' does not match against pattern '/^[a-z]/i'</li>
+    </ul>
+</dd>
+]]></programlisting>
 
         <para>
             (Albeit not with the same formatting.)
@@ -313,17 +311,17 @@ $element-&gt;addDecorators(array(
             order will be used. You can set an element's order using:
         </para>
 
-        <programlisting language="php">
-$element-&gt;setOrder(10);
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$element->setOrder(10);
+]]></programlisting>
 
         <para>
             Or, when creating an element, by passing it as an option:
         </para>
 
-        <programlisting language="php">
-$form-&gt;addElement('text', 'username', array('order' =&gt; 10));
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$form->addElement('text', 'username', array('order' => 10));
+]]></programlisting>
     </section>
 
     <section xml:id="zend.form.quickstart.validate"><info><title>Check if a form is valid</title></info>
@@ -343,13 +341,13 @@ $form-&gt;addElement('text', 'username', array('order' =&gt; 10));
             (web service requests, for instance):
         </para>
 
-        <programlisting language="php">
-if ($form-&gt;isValid($_POST)) {
+        <programlisting language="php"><![CDATA[
+if ($form->isValid($_POST)) {
     // success!
 } else {
     // failure!
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             With <acronym>AJAX</acronym> requests, you can sometimes get away with validating
@@ -359,13 +357,13 @@ if ($form-&gt;isValid($_POST)) {
             present, it will not run validations for that particular element:
         </para>
 
-        <programlisting language="php">
-if ($form-&gt;isValidPartial($_POST)) {
+        <programlisting language="php"><![CDATA[
+if ($form->isValidPartial($_POST)) {
     // elements present all passed validations
 } else {
     // one or more elements tested failed validations
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             An additional method, <methodname>processAjax()</methodname>, can be used
@@ -379,26 +377,26 @@ if ($form-&gt;isValidPartial($_POST)) {
             filtered values:
         </para>
 
-        <programlisting language="php">
-$values = $form-&gt;getValues();
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$values = $form->getValues();
+]]></programlisting>
 
         <para>
             If you need the unfiltered values at any point, use:
         </para>
 
-        <programlisting language="php">
-$unfiltered = $form-&gt;getUnfilteredValues();
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$unfiltered = $form->getUnfilteredValues();
+]]></programlisting>
 
         <para>
             If you on the other hand need all the valid and filtered values of a partially valid
             form, you can call:
         </para>
 
-        <programlisting language="php">
-$values = $form-&gt;getValidValues($_POST);
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$values = $form->getValidValues($_POST);
+]]></programlisting>
     </section>
 
     <section xml:id="zend.form.quickstart.errorstatus"><info><title>Get error status</title></info>
@@ -410,15 +408,15 @@ $values = $form-&gt;getValidValues($_POST);
             default decorators:
         </para>
 
-        <programlisting language="php">
-if (!$form-&gt;isValid($_POST)) {
+        <programlisting language="php"><![CDATA[
+if (!$form->isValid($_POST)) {
     echo $form;
 
     // or assign to the view object and render a view...
-    $this-&gt;view-&gt;form = $form;
-    return $this-&gt;render('form');
+    $this->view->form = $form;
+    return $this->render('form');
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             If you want to inspect the errors, you have two methods.
@@ -459,36 +457,36 @@ if (!$form-&gt;isValid($_POST)) {
             options to build the form:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $form = new Zend_Form();
-$form-&gt;setAction('/user/login')
-     -&gt;setMethod('post');
+$form->setAction('/user/login')
+     ->setMethod('post');
 
 // Create and configure username element:
-$username = $form-&gt;createElement('text', 'username');
-$username-&gt;addValidator('alnum')
-         -&gt;addValidator('regex', false, array('/^[a-z]+/'))
-         -&gt;addValidator('stringLength', false, array(6, 20))
-         -&gt;setRequired(true)
-         -&gt;addFilter('StringToLower');
+$username = $form->createElement('text', 'username');
+$username->addValidator('alnum')
+         ->addValidator('regex', false, array('/^[a-z]+/'))
+         ->addValidator('stringLength', false, array(6, 20))
+         ->setRequired(true)
+         ->addFilter('StringToLower');
 
 // Create and configure password element:
-$password = $form-&gt;createElement('password', 'password');
-$password-&gt;addValidator('StringLength', false, array(6))
-         -&gt;setRequired(true);
+$password = $form->createElement('password', 'password');
+$password->addValidator('StringLength', false, array(6))
+         ->setRequired(true);
 
 // Add elements to form:
-$form-&gt;addElement($username)
-     -&gt;addElement($password)
+$form->addElement($username)
+     ->addElement($password)
      // use addElement() as a factory to create 'Login' button:
-     -&gt;addElement('submit', 'login', array('label' =&gt; 'Login'));
-</programlisting>
+     ->addElement('submit', 'login', array('label' => 'Login'));
+]]></programlisting>
 
         <para>
             Next, we'll create a controller for handling this:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class UserController extends Zend_Controller_Action
 {
     public function getForm()
@@ -500,36 +498,36 @@ class UserController extends Zend_Controller_Action
     public function indexAction()
     {
         // render user/form.phtml
-        $this-&gt;view-&gt;form = $this-&gt;getForm();
-        $this-&gt;render('form');
+        $this->view->form = $this->getForm();
+        $this->render('form');
     }
 
     public function loginAction()
     {
-        if (!$this-&gt;getRequest()-&gt;isPost()) {
-            return $this-&gt;_forward('index');
+        if (!$this->getRequest()->isPost()) {
+            return $this->_forward('index');
         }
-        $form = $this-&gt;getForm();
-        if (!$form-&gt;isValid($_POST)) {
+        $form = $this->getForm();
+        if (!$form->isValid($_POST)) {
             // Failed validation; redisplay form
-            $this-&gt;view-&gt;form = $form;
-            return $this-&gt;render('form');
+            $this->view->form = $form;
+            return $this->render('form');
         }
 
-        $values = $form-&gt;getValues();
+        $values = $form->getValues();
         // now try and authenticate....
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             And a view script for displaying the form:
         </para>
 
-        <programlisting language="php">
-&lt;h2&gt;Please login:&lt;/h2&gt;
-&lt;?php echo $this-&gt;form ?&gt;
-</programlisting>
+        <programlisting language="php"><![CDATA[
+<h2>Please login:</h2>
+<?php echo $this->form ?>
+]]></programlisting>
 
         <para>
             As you'll note from the controller code, there's more work to do:
@@ -553,7 +551,7 @@ class UserController extends Zend_Controller_Action
             ('user'), and a key for the form ('login'):
         </para>
 
-        <programlisting language="ini">
+        <programlisting language="ini"><![CDATA[
 [development]
 ; general form metainformation
 user.login.action = "/user/login"
@@ -578,16 +576,16 @@ user.login.elements.password.options.required = true
 
 ; submit element
 user.login.elements.submit.type = "submit"
-</programlisting>
+]]></programlisting>
 
         <para>
             You would then pass this to the form constructor:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini($configFile, 'development');
-$form   = new Zend_Form($config-&gt;user-&gt;login);
-</programlisting>
+$form   = new Zend_Form($config->user->login);
+]]></programlisting>
 
         <para>
             and the entire form will be defined.

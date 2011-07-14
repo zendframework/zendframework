@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.backends"><info><title>Zend_Cache Backends</title></info>
     
 
@@ -372,9 +370,9 @@
             <methodname>Zend_Cache::factory()</methodname> method:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $cache = Zend_Cache::factory('Core', 'Zend Platform');
-</programlisting>
+]]></programlisting>
 
         <para>
             There are no options for this backend.
@@ -401,9 +399,9 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
             <methodname>Zend_Cache::factory()</methodname> method:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $cache = Zend_Cache::factory('Core', 'Two Levels');
-</programlisting>
+]]></programlisting>
 
         <para>
             Available options are :
@@ -551,10 +549,10 @@ $cache = Zend_Cache::factory('Core', 'Two Levels');
             method:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $cache = Zend_Cache::factory('Core', 'Zend_Cache_Backend_ZendServer_Disk',
                              $frontendOptions, $backendOptions, false, true);
-</programlisting>
+]]></programlisting>
 
         <para>
             There is no option for this backend.
@@ -608,7 +606,7 @@ $cache = Zend_Cache::factory('Core', 'Zend_Cache_Backend_ZendServer_Disk',
             Content-Type header:
         </para>
 
-        <programlisting language="text">
+        <programlisting language="text"><![CDATA[
 AddType application/rss+xml .xml
 AddType application/atom+xml .xml
 
@@ -633,7 +631,7 @@ RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^.*$ - [NC,L]
 
 RewriteRule ^.*$ index.php [NC,L]
-</programlisting>
+]]></programlisting>
 
         <para>
             The above assumes static files are cached to the directory

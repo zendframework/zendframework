@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.simpy"><info><title>Zend_Service_Simpy</title></info>
     
 
@@ -68,52 +66,52 @@
         <example xml:id="zend.service.simpy.links.querying"><info><title>Querying Links</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $simpy = new Zend_Service_Simpy('yourusername', 'yourpassword');
 
 /* Search for the 10 links added most recently */
 $linkQuery = new Zend_Service_Simpy_LinkQuery();
-$linkQuery-&gt;setLimit(10);
+$linkQuery->setLimit(10);
 
 /* Get and display the links */
-$linkSet = $simpy-&gt;getLinks($linkQuery);
+$linkSet = $simpy->getLinks($linkQuery);
 foreach ($linkSet as $link) {
-    echo '&lt;a href="';
-    echo $link-&gt;getUrl();
-    echo '"&gt;';
-    echo $link-&gt;getTitle();
-    echo '&lt;/a&gt;&lt;br /&gt;';
+    echo '<a href="';
+    echo $link->getUrl();
+    echo '">';
+    echo $link->getTitle();
+    echo '</a><br />';
 }
 
 /* Search for the 5 links added most recently with 'PHP' in
 the title */
-$linkQuery-&gt;setQueryString('title:PHP');
-$linkQuery-&gt;setLimit(5);
+$linkQuery->setQueryString('title:PHP');
+$linkQuery->setLimit(5);
 
 /* Search for all links with 'French' in the title and
 'language' in the tags */
-$linkQuery-&gt;setQueryString('+title:French +tags:language');
+$linkQuery->setQueryString('+title:French +tags:language');
 
 /* Search for all links with 'French' in the title and without
 'travel' in the tags */
-$linkQuery-&gt;setQueryString('+title:French -tags:travel');
+$linkQuery->setQueryString('+title:French -tags:travel');
 
 /* Search for all links added on 12/9/06 */
-$linkQuery-&gt;setDate('2006-12-09');
+$linkQuery->setDate('2006-12-09');
 
 /* Search for all links added after 12/9/06 (excluding that
 date) */
-$linkQuery-&gt;setAfterDate('2006-12-09');
+$linkQuery->setAfterDate('2006-12-09');
 
 /* Search for all links added before 12/9/06 (excluding that
 date) */
-$linkQuery-&gt;setBeforeDate('2006-12-09');
+$linkQuery->setBeforeDate('2006-12-09');
 
 /* Search for all links added between 12/1/06 and 12/9/06
 (excluding those two dates) */
-$linkQuery-&gt;setBeforeDate('2006-12-01');
-$linkQuery-&gt;setAfterDate('2006-12-09');
-</programlisting>
+$linkQuery->setBeforeDate('2006-12-01');
+$linkQuery->setAfterDate('2006-12-09');
+]]></programlisting>
         </example>
 
         <para>
@@ -126,11 +124,11 @@ $linkQuery-&gt;setAfterDate('2006-12-09');
         <example xml:id="zend.service.simpy.links.modifying"><info><title>Modifying Links</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $simpy = new Zend_Service_Simpy('yourusername', 'yourpassword');
 
 /* Save a link */
-$simpy-&gt;saveLink(
+$simpy->saveLink(
     'Zend Framework' // Title
     'http://framework.zend.com', // URL
     Zend_Service_Simpy_Link::ACCESSTYPE_PUBLIC, // Access Type
@@ -140,7 +138,7 @@ $simpy-&gt;saveLink(
 );
 
 /* Overwrite the existing link with new data */
-$simpy-&gt;saveLink(
+$simpy->saveLink(
     'Zend Framework'
     'http://framework.zend.com',
     Zend_Service_Simpy_Link::ACCESSTYPE_PRIVATE, // Access Type has changed
@@ -150,14 +148,14 @@ $simpy-&gt;saveLink(
 );
 
 /* Delete the link */
-$simpy-&gt;deleteLink('http://framework.zend.com');
+$simpy->deleteLink('http://framework.zend.com');
 
 /* A really easy way to do spring cleaning on your links ;) */
-$linkSet = $this-&gt;_simpy-&gt;getLinks();
+$linkSet = $this->_simpy->getLinks();
 foreach ($linkSet as $link) {
-    $this-&gt;_simpy-&gt;deleteLink($link-&gt;getUrl());
+    $this->_simpy->deleteLink($link->getUrl());
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -172,11 +170,11 @@ foreach ($linkSet as $link) {
         <example xml:id="zend.service.simpy.tags.working"><info><title>Working With Tags</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $simpy = new Zend_Service_Simpy('yourusername', 'yourpassword');
 
 /* Save a link with tags */
-$simpy-&gt;saveLink(
+$simpy->saveLink(
     'Zend Framework' // Title
     'http://framework.zend.com', // URL
     Zend_Service_Simpy_Link::ACCESSTYPE_PUBLIC, // Access Type
@@ -184,32 +182,32 @@ $simpy-&gt;saveLink(
 );
 
 /* Get a list of all tags in use by links and notes */
-$tagSet = $simpy-&gt;getTags();
+$tagSet = $simpy->getTags();
 
 /* Display each tag with the number of links using it */
 foreach ($tagSet as $tag) {
-    echo $tag-&gt;getTag();
+    echo $tag->getTag();
     echo ' - ';
-    echo $tag-&gt;getCount();
-    echo '&lt;br /&gt;';
+    echo $tag->getCount();
+    echo '<br />';
 }
 
 /* Remove the 'zend' tag from all links using it */
-$simpy-&gt;removeTag('zend');
+$simpy->removeTag('zend');
 
 /* Rename the 'framework' tag to 'frameworks' */
-$simpy-&gt;renameTag('framework', 'frameworks');
+$simpy->renameTag('framework', 'frameworks');
 
 /* Split the 'frameworks' tag into 'framework' and
 'development', which will remove the 'frameworks' tag for
 all links that use it and add the tags 'framework' and
 'development' to all of those links */
-$simpy-&gt;splitTag('frameworks', 'framework', 'development');
+$simpy->splitTag('frameworks', 'framework', 'development');
 
 /* Merge the 'framework' and 'development' tags back into
 'frameworks', basically doing the opposite of splitting them */
-$simpy-&gt;mergeTags('framework', 'development', 'frameworks');
-</programlisting>
+$simpy->mergeTags('framework', 'development', 'frameworks');
+]]></programlisting>
         </example>
     </section>
 
@@ -224,48 +222,48 @@ $simpy-&gt;mergeTags('framework', 'development', 'frameworks');
         <example xml:id="zend.service.simpy.notes.working"><info><title>Working With Notes</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $simpy = new Zend_Service_Simpy('yourusername', 'yourpassword');
 
 /* Save a note */
-$simpy-&gt;saveNote(
+$simpy->saveNote(
     'Test Note', // Title
     'test,note', // Tags
     'This is a test note.' // Description
 );
 
 /* Overwrite an existing note */
-$simpy-&gt;saveNote(
+$simpy->saveNote(
     'Updated Test Note', // Title
     'test,note,updated', // Tags
     'This is an updated test note.', // Description
-    $note-&gt;getId() // Unique identifier
+    $note->getId() // Unique identifier
 );
 
 /* Search for the 10 most recently added notes */
-$noteSet = $simpy-&gt;getNotes(null, 10);
+$noteSet = $simpy->getNotes(null, 10);
 
 /* Display the notes */
 foreach ($noteSet as $note) {
-    echo '&lt;p&gt;';
-    echo $note-&gt;getTitle();
-    echo '&lt;br /&gt;';
-    echo $note-&gt;getDescription();
-    echo '&lt;br &gt;';
-    echo $note-&gt;getTags();
-    echo '&lt;/p&gt;';
+    echo '<p>';
+    echo $note->getTitle();
+    echo '<br />';
+    echo $note->getDescription();
+    echo '<br >';
+    echo $note->getTags();
+    echo '</p>';
 }
 
 /* Search for all notes with 'PHP' in the title */
-$noteSet = $simpy-&gt;getNotes('title:PHP');
+$noteSet = $simpy->getNotes('title:PHP');
 
 /* Search for all notes with 'PHP' in the title and
 without 'framework' in the description */
-$noteSet = $simpy-&gt;getNotes('+title:PHP -description:framework');
+$noteSet = $simpy->getNotes('+title:PHP -description:framework');
 
 /* Delete a note */
-$simpy-&gt;deleteNote($note-&gt;getId());
-</programlisting>
+$simpy->deleteNote($note->getId());
+]]></programlisting>
         </example>
     </section>
 
@@ -281,42 +279,42 @@ $simpy-&gt;deleteNote($note-&gt;getId());
         <example xml:id="zend.service.simpy.watchlists.retrieving"><info><title>Retrieving Watchlists</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $simpy = new Zend_Service_Simpy('yourusername', 'yourpassword');
 
 /* Get a list of all watchlists */
-$watchlistSet = $simpy-&gt;getWatchlists();
+$watchlistSet = $simpy->getWatchlists();
 
 /* Display data for each watchlist */
 foreach ($watchlistSet as $watchlist) {
-    echo $watchlist-&gt;getId();
-    echo '&lt;br /&gt;';
-    echo $watchlist-&gt;getName();
-    echo '&lt;br /&gt;';
-    echo $watchlist-&gt;getDescription();
-    echo '&lt;br /&gt;';
-    echo $watchlist-&gt;getAddDate();
-    echo '&lt;br /&gt;';
-    echo $watchlist-&gt;getNewLinks();
-    echo '&lt;br /&gt;';
+    echo $watchlist->getId();
+    echo '<br />';
+    echo $watchlist->getName();
+    echo '<br />';
+    echo $watchlist->getDescription();
+    echo '<br />';
+    echo $watchlist->getAddDate();
+    echo '<br />';
+    echo $watchlist->getNewLinks();
+    echo '<br />';
 
-    foreach ($watchlist-&gt;getUsers() as $user) {
+    foreach ($watchlist->getUsers() as $user) {
         echo $user;
-        echo '&lt;br /&gt;';
+        echo '<br />';
     }
 
-    foreach ($watchlist-&gt;getFilters() as $filter) {
-        echo $filter-&gt;getName();
-        echo '&lt;br /&gt;';
-        echo $filter-&gt;getQuery();
-        echo '&lt;br /&gt;';
+    foreach ($watchlist->getFilters() as $filter) {
+        echo $filter->getName();
+        echo '<br />';
+        echo $filter->getQuery();
+        echo '<br />';
     }
 }
 
 /* Get an individual watchlist by its identifier */
-$watchlist = $simpy-&gt;getWatchlist($watchlist-&gt;getId());
-$watchlist = $simpy-&gt;getWatchlist(1);
-</programlisting>
+$watchlist = $simpy->getWatchlist($watchlist->getId());
+$watchlist = $simpy->getWatchlist(1);
+]]></programlisting>
         </example>
     </section>
 </section>

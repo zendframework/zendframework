@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.rest.server"><info><title>Zend_Rest_Server</title></info>
     
 
@@ -18,17 +16,17 @@
         <example xml:id="zend.rest.server.usage.example-1"><info><title>Basic Zend_Rest_Server Usage - Classes</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $server = new Zend_Rest_Server();
-$server-&gt;setClass('My_Service_Class');
-$server-&gt;handle();
-</programlisting>
+$server->setClass('My_Service_Class');
+$server->handle();
+]]></programlisting>
         </example>
 
         <example xml:id="zend.rest.server.usage.example-2"><info><title>Basic Zend_Rest_Server Usage - Functions</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 /**
  * Say Hello
  *
@@ -42,9 +40,9 @@ function sayHello($who, $when)
 }
 
 $server = new Zend_Rest_Server();
-$server-&gt;addFunction('sayHello');
-$server-&gt;handle();
-</programlisting>
+$server->addFunction('sayHello');
+$server->handle();
+]]></programlisting>
         </example>
     </section>
 
@@ -96,7 +94,7 @@ $server-&gt;handle();
         <example xml:id="zend.rest.server.customstatus.example-1"><info><title>Returning Custom Status</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 /**
  * Say Hello
  *
@@ -106,13 +104,13 @@ $server-&gt;handle();
  */
 function sayHello($who, $when)
 {
-    return array('msg' =&gt; "An Error Occurred", 'status' =&gt; false);
+    return array('msg' => "An Error Occurred", 'status' => false);
 }
 
 $server = new Zend_Rest_Server();
-$server-&gt;addFunction('sayHello');
-$server-&gt;handle();
-</programlisting>
+$server->addFunction('sayHello');
+$server->handle();
+]]></programlisting>
         </example>
     </section>
 
@@ -128,7 +126,7 @@ $server-&gt;handle();
         <example xml:id="zend.rest.server.customxml.example-1"><info><title>Return Custom XML</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 /**
  * Say Hello
  *
@@ -138,21 +136,21 @@ $server-&gt;handle();
  */
 function sayHello($who, $when)
 {
-    $xml ='&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;
-&lt;mysite&gt;
-    &lt;value&gt;Hey $who! Hope you\'re having a good $when&lt;/value&gt;
-    &lt;code&gt;200&lt;/code&gt;
-&lt;/mysite&gt;';
+    $xml ='<?xml version="1.0" encoding="ISO-8859-1"?>
+<mysite>
+    <value>Hey $who! Hope you\'re having a good $when</value>
+    <code>200</code>
+</mysite>';
 
     $xml = simplexml_load_string($xml);
     return $xml;
 }
 
 $server = new Zend_Rest_Server();
-$server-&gt;addFunction('sayHello');
+$server->addFunction('sayHello');
 
-$server-&gt;handle();
-</programlisting>
+$server->handle();
+]]></programlisting>
         </example>
 
         <para>

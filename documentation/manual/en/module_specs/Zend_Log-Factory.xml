@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.factory"><info><title>Using the Factory to Create a Log</title></info>
     
 
@@ -16,32 +14,32 @@
         As an example:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $logger = Zend_Log::factory(array(
-    'timestampFormat' =&gt; 'Y-m-d',
+    'timestampFormat' => 'Y-m-d',
     array(
-        'writerName'   =&gt; 'Stream',
-        'writerParams' =&gt; array(
-            'stream'   =&gt; '/tmp/zend.log',
+        'writerName'   => 'Stream',
+        'writerParams' => array(
+            'stream'   => '/tmp/zend.log',
         ),
-        'formatterName' =&gt; 'Simple',
-        'formatterParams' =&gt; array(
-            'format'   =&gt; '%timestamp%: %message% -- %info%',
+        'formatterName' => 'Simple',
+        'formatterParams' => array(
+            'format'   => '%timestamp%: %message% -- %info%',
         ),
-        'filterName'   =&gt; 'Priority',
-        'filterParams' =&gt; array(
-            'priority' =&gt; Zend_Log::WARN,
+        'filterName'   => 'Priority',
+        'filterParams' => array(
+            'priority' => Zend_Log::WARN,
         ),
     ),
     array(
-        'writerName'   =&gt; 'Firebug',
-        'filterName'   =&gt; 'Priority',
-        'filterParams' =&gt; array(
-            'priority' =&gt; Zend_Log::INFO,
+        'writerName'   => 'Firebug',
+        'filterName'   => 'Priority',
+        'filterParams' => array(
+            'priority' => Zend_Log::INFO,
         ),
     ),
 ));
-</programlisting>
+]]></programlisting>
 
     <para>
         The above will instantiate a logger with two writers, one for writing to a local file,
@@ -522,7 +520,7 @@ $logger = Zend_Log::factory(array(
             arguments. As an example:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class My_Log_Writer_Foo extends Zend_Log_Writer_Abstract
 {
     public function __construct($bar, $baz)
@@ -533,7 +531,7 @@ class My_Log_Writer_Foo extends Zend_Log_Writer_Abstract
     public static function factory($config)
     {
         if ($config instanceof Zend_Config) {
-            $config = $config-&gt;toArray();
+            $config = $config->toArray();
         }
         if (!is_array($config)) {
             throw new Exception(
@@ -542,8 +540,8 @@ class My_Log_Writer_Foo extends Zend_Log_Writer_Abstract
         }
 
         $default = array(
-            'bar' =&gt; null,
-            'baz' =&gt; null,
+            'bar' => null,
+            'baz' => null,
         );
         $config = array_merge($default, $config);
 
@@ -553,14 +551,14 @@ class My_Log_Writer_Foo extends Zend_Log_Writer_Abstract
         );
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Alternately, you could call appropriate setters after instantiation, but prior to
             returning the instance:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class My_Log_Writer_Foo extends Zend_Log_Writer_Abstract
 {
     public function __construct($bar = null, $baz = null)
@@ -581,7 +579,7 @@ class My_Log_Writer_Foo extends Zend_Log_Writer_Abstract
     public static function factory($config)
     {
         if ($config instanceof Zend_Config) {
-            $config = $config-&gt;toArray();
+            $config = $config->toArray();
         }
         if (!is_array($config)) {
             throw new Exception(
@@ -591,14 +589,14 @@ class My_Log_Writer_Foo extends Zend_Log_Writer_Abstract
 
         $writer = new self();
         if (isset($config['bar'])) {
-            $writer-&gt;setBar($config['bar']);
+            $writer->setBar($config['bar']);
         }
         if (isset($config['baz'])) {
-            $writer-&gt;setBaz($config['baz']);
+            $writer->setBaz($config['baz']);
         }
         return $writer;
     }
 }
-</programlisting>
+]]></programlisting>
     </section>
 </section>

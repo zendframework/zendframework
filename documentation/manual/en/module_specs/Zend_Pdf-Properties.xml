@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.info"><info><title>Document Info and Metadata</title></info>
     <!-- @todo review and revise upon completion of refactoring -->
     
@@ -16,15 +14,15 @@
         <property>properties</property> public property of <classname>Zend_Pdf</classname> objects:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $pdf = Zend_Pdf::load($pdfPath);
 
-echo $pdf-&gt;properties['Title'] . "\n";
-echo $pdf-&gt;properties['Author'] . "\n";
+echo $pdf->properties['Title'] . "\n";
+echo $pdf->properties['Author'] . "\n";
 
-$pdf-&gt;properties['Title'] = 'New Title.';
-$pdf-&gt;save($pdfPath);
-</programlisting>
+$pdf->properties['Title'] = 'New Title.';
+$pdf->save($pdfPath);
+]]></programlisting>
 
     <para>
         The following keys are defined by <acronym>PDF</acronym> v1.4 (Acrobat 5) standard:
@@ -208,26 +206,26 @@ $pdf-&gt;save($pdfPath);
         <methodname>Zend_Pdf::setMetadata($metadata)</methodname> methods:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $pdf = Zend_Pdf::load($pdfPath);
-$metadata = $pdf-&gt;getMetadata();
+$metadata = $pdf->getMetadata();
 $metadataDOM = new DOMDocument();
-$metadataDOM-&gt;loadXML($metadata);
+$metadataDOM->loadXML($metadata);
 
 $xpath = new DOMXPath($metadataDOM);
-$pdfPreffixNamespaceURI = $xpath-&gt;query('/rdf:RDF/rdf:Description')
-                                -&gt;item(0)
-                                -&gt;lookupNamespaceURI('pdf');
-$xpath-&gt;registerNamespace('pdf', $pdfPreffixNamespaceURI);
+$pdfPreffixNamespaceURI = $xpath->query('/rdf:RDF/rdf:Description')
+                                ->item(0)
+                                ->lookupNamespaceURI('pdf');
+$xpath->registerNamespace('pdf', $pdfPreffixNamespaceURI);
 
-$titleNode = $xpath-&gt;query('/rdf:RDF/rdf:Description/pdf:Title')-&gt;item(0);
-$title = $titleNode-&gt;nodeValue;
+$titleNode = $xpath->query('/rdf:RDF/rdf:Description/pdf:Title')->item(0);
+$title = $titleNode->nodeValue;
 ...
 
-$titleNode-&gt;nodeValue = 'New title';
-$pdf-&gt;setMetadata($metadataDOM-&gt;saveXML());
-$pdf-&gt;save($pdfPath);
-</programlisting>
+$titleNode->nodeValue = 'New title';
+$pdf->setMetadata($metadataDOM->saveXML());
+$pdf->save($pdfPath);
+]]></programlisting>
 
     <para>
         Common document properties are duplicated in the Info structure and Metadata document (if

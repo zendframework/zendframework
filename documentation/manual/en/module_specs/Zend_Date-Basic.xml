@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.basic"><info><title>Basic Methods</title></info>
     
 
@@ -36,12 +34,12 @@
         <example xml:id="zend.date.basic.creation.example-1"><info><title>Creating the Current Date</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
 // Output of the current timestamp
 print $date;
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -66,12 +64,12 @@ print $date;
             <example xml:id="zend.date.simple.functions.get.example-1"><info><title>get() - Output a Date</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
 // Output of the desired date
-print $date-&gt;get();
-</programlisting>
+print $date->get();
+]]></programlisting>
             </example>
         </section>
 
@@ -87,13 +85,13 @@ print $date-&gt;get();
             <example xml:id="zend.date.simple.functions.set.example-1"><info><title>set() - Set a Date</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
 // Setting of a new time
-$date-&gt;set('13:00:00',Zend_Date::TIMES);
-print $date-&gt;get(Zend_Date::W3C);
-</programlisting>
+$date->set('13:00:00',Zend_Date::TIMES);
+print $date->get(Zend_Date::W3C);
+]]></programlisting>
             </example>
         </section>
 
@@ -111,17 +109,17 @@ print $date-&gt;get(Zend_Date::W3C);
             <example xml:id="zend.date.simple.functions.add.example-1"><info><title>add() - Adding Dates</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
 // changes $date by adding 12 hours
-$date-&gt;add('12:00:00', Zend_Date::TIMES);
+$date->add('12:00:00', Zend_Date::TIMES);
 
-echo "Date via get() = ", $date-&gt;get(Zend_Date::W3C), "\n";
+echo "Date via get() = ", $date->get(Zend_Date::W3C), "\n";
 
 // use magic __toString() method to call Zend_Date's toString()
 echo "Date via toString() = ", $date, "\n";
-</programlisting>
+]]></programlisting>
             </example>
         </section>
 
@@ -139,16 +137,16 @@ echo "Date via toString() = ", $date, "\n";
             <example xml:id="zend.date.simple.functions.compare.example-1"><info><title>compare() - Compare Dates</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
 // Comparation of both times
-if ($date-&gt;compare(10, Zend_Date::MINUTE) == -1) {
+if ($date->compare(10, Zend_Date::MINUTE) == -1) {
     print "This hour is less than 10 minutes old";
 } else {
     print "This hour is at least 10 minutes old";
 }
-</programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -159,16 +157,16 @@ if ($date-&gt;compare(10, Zend_Date::MINUTE) == -1) {
             <example xml:id="zend.date.simple.functions.compare.example-2"><info><title>equals() - Identify a Date or Date Part</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
 // Comparation of the two dates
-if ($date-&gt;equals(10, Zend_Date::HOUR)) {
+if ($date->equals(10, Zend_Date::HOUR)) {
     print "It's 10 o'clock. Time to get to work.";
 } else {
     print "It is not 10 o'clock. You can keep sleeping.";
 }
-</programlisting>
+]]></programlisting>
             </example>
         </section>
     </section>

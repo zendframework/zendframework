@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers"><info><title>View Helpers</title></info>
     
 
@@ -140,42 +138,42 @@
                     The above is probably best summed up with some examples:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // '1' and '0' as checked/unchecked options; not checked
-echo $this-&gt;formCheckbox('foo');
+echo $this->formCheckbox('foo');
 
 // '1' and '0' as checked/unchecked options; checked
-echo $this-&gt;formCheckbox('foo', null, array('checked' =&gt; true));
+echo $this->formCheckbox('foo', null, array('checked' => true));
 
 // 'bar' and '0' as checked/unchecked options; not checked
-echo $this-&gt;formCheckbox('foo', 'bar');
+echo $this->formCheckbox('foo', 'bar');
 
 // 'bar' and '0' as checked/unchecked options; checked
-echo $this-&gt;formCheckbox('foo', 'bar', array('checked' =&gt; true));
+echo $this->formCheckbox('foo', 'bar', array('checked' => true));
 
 // 'bar' and 'baz' as checked/unchecked options; unchecked
-echo $this-&gt;formCheckbox('foo', null, null, array('bar', 'baz'));
+echo $this->formCheckbox('foo', null, null, array('bar', 'baz'));
 
 // 'bar' and 'baz' as checked/unchecked options; unchecked
-echo $this-&gt;formCheckbox('foo', null, null, array(
-    'checked' =&gt; 'bar',
-    'unChecked' =&gt; 'baz'
+echo $this->formCheckbox('foo', null, null, array(
+    'checked' => 'bar',
+    'unChecked' => 'baz'
 ));
 
 // 'bar' and 'baz' as checked/unchecked options; checked
-echo $this-&gt;formCheckbox('foo', 'bar', null, array('bar', 'baz'));
-echo $this-&gt;formCheckbox('foo',
+echo $this->formCheckbox('foo', 'bar', null, array('bar', 'baz'));
+echo $this->formCheckbox('foo',
                          null,
-                         array('checked' =&gt; true),
+                         array('checked' => true),
                          array('bar', 'baz'));
 
 // 'bar' and 'baz' as checked/unchecked options; unchecked
-echo $this-&gt;formCheckbox('foo', 'baz', null, array('bar', 'baz'));
-echo $this-&gt;formCheckbox('foo',
+echo $this->formCheckbox('foo', 'baz', null, array('bar', 'baz'));
+echo $this->formCheckbox('foo',
                          null,
-                         array('checked' =&gt; false),
+                         array('checked' => false),
                          array('bar', 'baz'));
-</programlisting>
+]]></programlisting>
 
                 <para>
                     In all cases, the markup prepends a hidden element with the
@@ -347,48 +345,48 @@ echo $this-&gt;formCheckbox('foo',
             and instantiate themselves as they are needed.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // inside your view script, $this refers to the Zend_View instance.
 //
 // say that you have already assigned a series of select options under
-// the name $countries as array('us' =&gt; 'United States', 'il' =&gt;
-// 'Israel', 'de' =&gt; 'Germany').
-?&gt;
-&lt;form action="action.php" method="post"&gt;
-    &lt;p&gt;&lt;label&gt;Your Email:
-&lt;?php echo $this-&gt;formText('email', 'you@example.com', array('size' =&gt; 32)) ?&gt;
-    &lt;/label&gt;&lt;/p&gt;
-    &lt;p&gt;&lt;label&gt;Your Country:
-&lt;?php echo $this-&gt;formSelect('country', 'us', null, $this-&gt;countries) ?&gt;
-    &lt;/label&gt;&lt;/p&gt;
-    &lt;p&gt;&lt;label&gt;Would you like to opt in?
-&lt;?php echo $this-&gt;formCheckbox('opt_in', 'yes', null, array('yes', 'no')) ?&gt;
-    &lt;/label&gt;&lt;/p&gt;
-&lt;/form&gt;
-</programlisting>
+// the name $countries as array('us' => 'United States', 'il' =>
+// 'Israel', 'de' => 'Germany').
+?>
+<form action="action.php" method="post">
+    <p><label>Your Email:
+<?php echo $this->formText('email', 'you@example.com', array('size' => 32)) ?>
+    </label></p>
+    <p><label>Your Country:
+<?php echo $this->formSelect('country', 'us', null, $this->countries) ?>
+    </label></p>
+    <p><label>Would you like to opt in?
+<?php echo $this->formCheckbox('opt_in', 'yes', null, array('yes', 'no')) ?>
+    </label></p>
+</form>
+]]></programlisting>
 
         <para>
             The resulting output from the view script will look something like this:
         </para>
 
-        <programlisting language="php">
-&lt;form action="action.php" method="post"&gt;
-    &lt;p&gt;&lt;label&gt;Your Email:
-        &lt;input type="text" name="email" value="you@example.com" size="32" /&gt;
-    &lt;/label&gt;&lt;/p&gt;
-    &lt;p&gt;&lt;label&gt;Your Country:
-        &lt;select name="country"&gt;
-            &lt;option value="us" selected="selected"&gt;United States&lt;/option&gt;
-            &lt;option value="il"&gt;Israel&lt;/option&gt;
-            &lt;option value="de"&gt;Germany&lt;/option&gt;
-        &lt;/select&gt;
-    &lt;/label&gt;&lt;/p&gt;
-    &lt;p&gt;&lt;label&gt;Would you like to opt in?
-        &lt;input type="hidden" name="opt_in" value="no" /&gt;
-        &lt;input type="checkbox" name="opt_in" value="yes" checked="checked" /&gt;
-    &lt;/label&gt;&lt;/p&gt;
-&lt;/form&gt;
-</programlisting>
+        <programlisting language="php"><![CDATA[
+<form action="action.php" method="post">
+    <p><label>Your Email:
+        <input type="text" name="email" value="you@example.com" size="32" />
+    </label></p>
+    <p><label>Your Country:
+        <select name="country">
+            <option value="us" selected="selected">United States</option>
+            <option value="il">Israel</option>
+            <option value="de">Germany</option>
+        </select>
+    </label></p>
+    <p><label>Would you like to opt in?
+        <input type="hidden" name="opt_in" value="no" />
+        <input type="checkbox" name="opt_in" value="yes" checked="checked" />
+    </label></p>
+</form>
+]]></programlisting>
 
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Action.xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-BaseUrl.xml"/>
@@ -424,12 +422,12 @@ echo $this-&gt;formCheckbox('foo',
             prefix is provided, 'Zend_View_Helper_' is assumed.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 
 // Set path to /path/to/more/helpers, with prefix 'My_View_Helper'
-$view-&gt;setHelperPath('/path/to/more/helpers', 'My_View_Helper');
-</programlisting>
+$view->setHelperPath('/path/to/more/helpers', 'My_View_Helper');
+]]></programlisting>
 
         <para>
             In fact, you can "stack" paths using the
@@ -440,21 +438,21 @@ $view-&gt;setHelperPath('/path/to/more/helpers', 'My_View_Helper');
             helpers.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 // Add /path/to/some/helpers with class prefix 'My_View_Helper'
-$view-&gt;addHelperPath('/path/to/some/helpers', 'My_View_Helper');
+$view->addHelperPath('/path/to/some/helpers', 'My_View_Helper');
 // Add /other/path/to/helpers with class prefix 'Your_View_Helper'
-$view-&gt;addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
+$view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
 
-// now when you call $this-&gt;helperName(), Zend_View will look first for
+// now when you call $this->helperName(), Zend_View will look first for
 // "/path/to/some/helpers/HelperName" using class name
 // "Your_View_Helper_HelperName", then for
 // "/other/path/to/helpers/HelperName.php" using class name
 // "My_View_Helper_HelperName", and finally for
 // "Zend/View/Helper/HelperName.php" using class name
 // "Zend_View_Helper_HelperName".
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.view.helpers.custom"><info><title>Writing Custom Helpers</title></info>
@@ -530,18 +528,18 @@ $view-&gt;addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
             Here is an example of our <classname>SpecialPurpose</classname> helper code:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class My_View_Helper_SpecialPurpose extends Zend_View_Helper_Abstract
 {
     protected $_count = 0;
     public function specialPurpose()
     {
-        $this-&gt;_count++;
-        $output = "I have seen 'The Jerk' {$this-&gt;_count} time(s).";
+        $this->_count++;
+        $output = "I have seen 'The Jerk' {$this->_count} time(s).";
         return htmlspecialchars($output);
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Then in a view script, you can call the <classname>SpecialPurpose</classname>
@@ -550,22 +548,22 @@ class My_View_Helper_SpecialPurpose extends Zend_View_Helper_Abstract
             instance.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // remember, in a view script, $this refers to the Zend_View instance.
-echo $this-&gt;specialPurpose();
-echo $this-&gt;specialPurpose();
-echo $this-&gt;specialPurpose();
-</programlisting>
+echo $this->specialPurpose();
+echo $this->specialPurpose();
+echo $this->specialPurpose();
+]]></programlisting>
 
         <para>
             The output would look something like this:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 I have seen 'The Jerk' 1 time(s).
 I have seen 'The Jerk' 2 time(s).
 I have seen 'The Jerk' 3 time(s).
-</programlisting>
+]]></programlisting>
 
         <para>
             Sometimes you will need access to the calling <classname>Zend_View</classname>
@@ -575,22 +573,22 @@ I have seen 'The Jerk' 3 time(s).
             <methodname>setView($view)</methodname> method, like the following:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class My_View_Helper_ScriptPath
 {
     public $view;
 
     public function setView(Zend_View_Interface $view)
     {
-        $this-&gt;view = $view;
+        $this->view = $view;
     }
 
     public function scriptPath($script)
     {
-        return $this-&gt;view-&gt;getScriptPath($script);
+        return $this->view->getScriptPath($script);
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             If your helper class has a <methodname>setView()</methodname> method, it will be
@@ -615,12 +613,12 @@ class My_View_Helper_ScriptPath
             helper object, and the name by which it will be registered.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $helper = new My_Helper_Foo();
 // ...do some configuration or dependency injection...
 
-$view-&gt;registerHelper($helper, 'foo');
-</programlisting>
+$view->registerHelper($helper, 'foo');
+]]></programlisting>
 
         <para>
             If the helper has a <methodname>setView()</methodname> method, the view object will call

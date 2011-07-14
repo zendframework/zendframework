@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.16"><info><title>Zend Framework 1.6</title></info>
     
 
@@ -93,16 +91,16 @@
             <example xml:id="migration.16.zend.file.transfer.example"><info><title>How to change your file validators from 1.6.1 to 1.6.2</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Example for 1.6.1
 $upload = new Zend_File_Transfer_Adapter_Http();
-$upload-&gt;addValidator('FilesSize', array('1B', '100kB'));
+$upload->addValidator('FilesSize', array('1B', '100kB'));
 
 // Same example for 1.6.2 and newer
 // Note the added boolean false
 $upload = new Zend_File_Transfer_Adapter_Http();
-$upload-&gt;addValidator('FilesSize', false, array('1B', '100kB'));
-</programlisting>
+$upload->addValidator('FilesSize', false, array('1B', '100kB'));
+]]></programlisting>
         </example>
         </section>
     </section>

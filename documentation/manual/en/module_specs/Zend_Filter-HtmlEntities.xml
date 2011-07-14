@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.htmlentities"><info><title>HtmlEntities</title></info>
     
 
@@ -74,11 +72,11 @@
             See the following example for the default behaviour of this filter.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_HtmlEntities();
 
-print $filter-&gt;filter('&lt;');
-</programlisting>
+print $filter->filter('<');
+]]></programlisting>
     </section>
 
     <section xml:id="zend.filter.set.htmlentities.quotestyle"><info><title>Quote Style</title></info>
@@ -90,12 +88,12 @@ print $filter-&gt;filter('&lt;');
             un-filtered. See the following example:
         </para>
 
-        <programlisting language="php">
-$filter = new Zend_Filter_HtmlEntities(array('quotestyle' =&gt; ENT_QUOTES));
+        <programlisting language="php"><![CDATA[
+$filter = new Zend_Filter_HtmlEntities(array('quotestyle' => ENT_QUOTES));
 
 $input  = "A 'single' and " . '"double"';
-print $filter-&gt;filter($input);
-</programlisting>
+print $filter->filter($input);
+]]></programlisting>
 
         <para>
             The above example returns
@@ -103,24 +101,24 @@ print $filter-&gt;filter($input);
             as well as "double" quotes are filtered.
         </para>
 
-        <programlisting language="php">
-$filter = new Zend_Filter_HtmlEntities(array('quotestyle' =&gt; ENT_COMPAT));
+        <programlisting language="php"><![CDATA[
+$filter = new Zend_Filter_HtmlEntities(array('quotestyle' => ENT_COMPAT));
 
 $input  = "A 'single' and " . '"double"';
-print $filter-&gt;filter($input);
-</programlisting>
+print $filter->filter($input);
+]]></programlisting>
 
         <para>
             The above example returns <emphasis>A 'single' and "double"</emphasis>.
             Notice that "double" quotes are filtered while 'single' quotes are not altered.
         </para>
 
-        <programlisting language="php">
-$filter = new Zend_Filter_HtmlEntities(array('quotestyle' =&gt; ENT_NOQUOTES));
+        <programlisting language="php"><![CDATA[
+$filter = new Zend_Filter_HtmlEntities(array('quotestyle' => ENT_NOQUOTES));
 
 $input  = "A 'single' and " . '"double"';
-print $filter-&gt;filter($input);
-</programlisting>
+print $filter->filter($input);
+]]></programlisting>
 
         <para>
             The above example returns <emphasis>A 'single' and "double"</emphasis>. Notice that
@@ -141,12 +139,12 @@ print $filter-&gt;filter($input);
             <constant>ENT_NOQUOTES</constant>
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_HtmlEntities();
 
-$filter-&gt;setQuoteStyle(ENT_QUOTES);
-print $filter-&gt;getQuoteStyle(ENT_QUOTES);
-</programlisting>
+$filter->setQuoteStyle(ENT_QUOTES);
+print $filter->getQuoteStyle(ENT_QUOTES);
+]]></programlisting>
 
         <para>
             To change or retrieve the <property>charset</property> after instantiation, the two
@@ -156,12 +154,12 @@ print $filter-&gt;getQuoteStyle(ENT_QUOTES);
             character sets.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_HtmlEntities();
 
-$filter-&gt;setQuoteStyle(ENT_QUOTES);
-print $filter-&gt;getQuoteStyle(ENT_QUOTES);
-</programlisting>
+$filter->setQuoteStyle(ENT_QUOTES);
+print $filter->getQuoteStyle(ENT_QUOTES);
+]]></programlisting>
 
         <para>
             To change or retrieve the <property>doublequote</property> option after instantiation,
@@ -171,11 +169,11 @@ print $filter-&gt;getQuoteStyle(ENT_QUOTES);
             <varname>$doubleQuote</varname>.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_HtmlEntities();
 
-$filter-&gt;setQuoteStyle(ENT_QUOTES);
-print $filter-&gt;getQuoteStyle(ENT_QUOTES);
-</programlisting>
+$filter->setQuoteStyle(ENT_QUOTES);
+print $filter->getQuoteStyle(ENT_QUOTES);
+]]></programlisting>
     </section>
 </section>

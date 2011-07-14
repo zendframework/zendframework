@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.boolean"><info><title>Boolean</title></info>
     
 
@@ -51,12 +49,12 @@
             <command>(boolean) $value</command>.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Boolean();
 $value  = '';
-$result = $filter-&gt;filter($value);
+$result = $filter->filter($value);
 // returns false
-</programlisting>
+]]></programlisting>
 
         <para>
             This means that without providing any configuration,
@@ -167,7 +165,7 @@ $result = $filter-&gt;filter($value);
             give a textual string. See the following examples:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // converts 0 to false
 $filter = new Zend_Filter_Boolean(Zend_Filter_Boolean::INTEGER);
 
@@ -178,7 +176,7 @@ $filter = new Zend_Filter_Boolean(
 
 // converts 0 and '0' to false
 $filter = new Zend_Filter_Boolean(array(
-    'type' =&gt; array(
+    'type' => array(
         Zend_Filter_Boolean::INTEGER,
         Zend_Filter_Boolean::ZERO,
     ),
@@ -186,12 +184,12 @@ $filter = new Zend_Filter_Boolean(array(
 
 // converts 0 and '0' to false
 $filter = new Zend_Filter_Boolean(array(
-    'type' =&gt; array(
+    'type' => array(
         'integer',
         'zero',
     ),
 ));
-</programlisting>
+]]></programlisting>
 
         <para>
             You can also give an instance of <classname>Zend_Config</classname> to set the desired
@@ -216,20 +214,20 @@ $filter = new Zend_Filter_Boolean(array(
             the method <methodname>setLocale()</methodname>.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Boolean(array(
-    'type'   =&gt; Zend_Filter_Boolean::ALL,
-    'locale' =&gt; 'de',
+    'type'   => Zend_Filter_Boolean::ALL,
+    'locale' => 'de',
 ));
 
 // returns false
-echo $filter-&gt;filter('nein');
+echo $filter->filter('nein');
 
-$filter-&gt;setLocale('en');
+$filter->setLocale('en');
 
 // returns true
-$filter-&gt;filter('yes');
-</programlisting>
+$filter->filter('yes');
+]]></programlisting>
     </section>
 
     <section xml:id="zend.filter.set.boolean.casting"><info><title>Disable casting</title></info>
@@ -323,20 +321,20 @@ $filter-&gt;filter('yes');
             option:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Boolean(array(
-    'type'    =&gt; Zend_Filter_Boolean::ALL,
-    'casting' =&gt; false,
+    'type'    => Zend_Filter_Boolean::ALL,
+    'casting' => false,
 ));
 
 // returns false
-echo $filter-&gt;filter(0);
+echo $filter->filter(0);
 
 // returns true
-echo $filter-&gt;filter(1);
+echo $filter->filter(1);
 
 // returns the value
-echo $filter-&gt;filter(2);
-</programlisting>
+echo $filter->filter(2);
+]]></programlisting>
     </section>
 </section>

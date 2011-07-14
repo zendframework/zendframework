@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.form.decorators"><info><title>Dijit-Specific Form Decorators</title></info>
     
 
@@ -49,14 +47,14 @@
         <example xml:id="zend.dojo.form.decorators.dijitElement.usage"><info><title>DijitElement Decorator Usage</title></info>
             
 
-            <programlisting language="php">
-$element-&gt;setDecorators(array(
+            <programlisting language="php"><![CDATA[
+$element->setDecorators(array(
     'DijitElement',
     'Errors',
     'Label',
     'ContentPane',
 ));
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -112,15 +110,15 @@ $element-&gt;setDecorators(array(
         <example xml:id="zend.dojo.form.decorators.dijitContainer.usage"><info><title>DijitContainer Decorator Usage</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Use a TabContainer for your form:
-$form-&gt;setDecorators(array(
+$form->setDecorators(array(
     'FormElements',
     array('TabContainer', array(
-        'id'          =&gt; 'tabContainer',
-        'style'       =&gt; 'width: 600px; height: 500px;',
-        'dijitParams' =&gt; array(
-            'tabPosition' =&gt; 'top'
+        'id'          => 'tabContainer',
+        'style'       => 'width: 600px; height: 500px;',
+        'dijitParams' => array(
+            'tabPosition' => 'top'
         ),
     )),
     'DijitForm',
@@ -128,12 +126,12 @@ $form-&gt;setDecorators(array(
 
 // Use a ContentPane in your sub form (which can be used with all but
 // AccordionContainer):
-$subForm-&gt;setDecorators(array(
+$subForm->setDecorators(array(
     'FormElements',
-    array('HtmlTag', array('tag' =&gt; 'dl')),
+    array('HtmlTag', array('tag' => 'dl')),
     'ContentPane',
 ));
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 </section>

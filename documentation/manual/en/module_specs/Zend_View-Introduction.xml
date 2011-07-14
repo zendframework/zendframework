@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.introduction"><info><title>Introduction</title></info>
     
 
@@ -37,31 +35,31 @@
             controller script might look something like this:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // use a model to get the data for book authors and titles.
 $data = array(
     array(
-        'author' =&gt; 'Hernando de Soto',
-        'title' =&gt; 'The Mystery of Capitalism'
+        'author' => 'Hernando de Soto',
+        'title' => 'The Mystery of Capitalism'
     ),
     array(
-        'author' =&gt; 'Henry Hazlitt',
-        'title' =&gt; 'Economics in One Lesson'
+        'author' => 'Henry Hazlitt',
+        'title' => 'Economics in One Lesson'
     ),
     array(
-        'author' =&gt; 'Milton Friedman',
-        'title' =&gt; 'Free to Choose'
+        'author' => 'Milton Friedman',
+        'title' => 'Free to Choose'
     )
 );
 
 // now assign the book data to a Zend_View instance
 Zend_Loader::loadClass('Zend_View');
 $view = new Zend_View();
-$view-&gt;books = $data;
+$view->books = $data;
 
 // and render a view script called "booklist.php"
-echo $view-&gt;render('booklist.php');
-</programlisting>
+echo $view->render('booklist.php');
+]]></programlisting>
     </section>
 
     <section xml:id="zend.view.introduction.view"><info><title>View Script</title></info>
@@ -78,31 +76,31 @@ echo $view-&gt;render('booklist.php');
             look like this:
         </para>
 
-        <programlisting language="php">
- if ($this-&gt;books): ?&gt;
+        <programlisting language="php"><![CDATA[
+ if ($this->books): ?>
 
-    &lt;!-- A table of some books. --&gt;
-    &lt;table&gt;
-        &lt;tr&gt;
-            &lt;th&gt;Author&lt;/th&gt;
-            &lt;th&gt;Title&lt;/th&gt;
-        &lt;/tr&gt;
+    <!-- A table of some books. -->
+    <table>
+        <tr>
+            <th>Author</th>
+            <th>Title</th>
+        </tr>
 
-        &lt;?php foreach ($this-&gt;books as $key =&gt; $val): ?&gt;
-        &lt;tr&gt;
-            &lt;td&gt;&lt;?php echo $this-&gt;escape($val['author']) ?&gt;&lt;/td&gt;
-            &lt;td&gt;&lt;?php echo $this-&gt;escape($val['title']) ?&gt;&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;?php endforeach; ?&gt;
+        <?php foreach ($this->books as $key => $val): ?>
+        <tr>
+            <td><?php echo $this->escape($val['author']) ?></td>
+            <td><?php echo $this->escape($val['title']) ?></td>
+        </tr>
+        <?php endforeach; ?>
 
-    &lt;/table&gt;
+    </table>
 
-&lt;?php else: ?&gt;
+<?php else: ?>
 
-    &lt;p&gt;There are no books to display.&lt;/p&gt;
+    <p>There are no books to display.</p>
 
-&lt;?php endif;?&gt;
-</programlisting>
+<?php endif;?>
+]]></programlisting>
 
         <para>
             Note how we use the "escape()" method to apply output
@@ -126,12 +124,12 @@ echo $view-&gt;render('booklist.php');
                     structure of:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 base/path/
     helpers/
     filters/
     scripts/
-</programlisting>
+]]></programlisting>
 
                 <para>
                     This may be set via <methodname>setBasePath()</methodname>,
@@ -215,9 +213,9 @@ base/path/
                     Turn on short tags in your <filename>.htaccess</filename> file:
                 </para>
 
-                <programlisting language="apache">
+                <programlisting language="apache"><![CDATA[
 php_value "short_open_tag" "on"
-</programlisting>
+]]></programlisting>
 
                 <para>
                     This will only be possible if you are allowed to create and
@@ -232,9 +230,9 @@ php_value "short_open_tag" "on"
                     long tags on the fly:
                 </para>
 
-                <programlisting language="php">
-$view-&gt;setUseStreamWrapper(true);
-</programlisting>
+                <programlisting language="php"><![CDATA[
+$view->setUseStreamWrapper(true);
+]]></programlisting>
 
                 <para>
                     This registers <classname>Zend_View_Stream</classname> as a stream

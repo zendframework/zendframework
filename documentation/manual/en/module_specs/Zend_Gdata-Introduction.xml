@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.introduction"><info><title>Introduction</title></info>
     
 
@@ -262,21 +260,21 @@
             for the desired class. Here's some examples:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $ss = new Zend_Gdata_Spreadsheets();
 
 // creates a Zend_Gdata_App_Spreadsheets_CellEntry
-$entry = $ss-&gt;newCellEntry();
+$entry = $ss->newCellEntry();
 
 // creates a Zend_Gdata_App_Spreadsheets_Extension_Cell
-$cell = $ss-&gt;newCell();
-$cell-&gt;setText('My cell value');
-$cell-&gt;setRow('1');
-$cell-&gt;setColumn('3');
-$entry-&gt;cell = $cell;
+$cell = $ss->newCell();
+$cell->setText('My cell value');
+$cell->setRow('1');
+$cell->setColumn('3');
+$entry->cell = $cell;
 
 // ... $entry can then be used to send an update to a Google Spreadsheet
-</programlisting>
+]]></programlisting>
 
         <para>
             Each service class in the inheritance tree is responsible for
@@ -343,12 +341,12 @@ $entry-&gt;cell = $cell;
             pass configuration options to that client object.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $client = new Zend_Http_Client();
-$client-&gt;setConfig( ...options... );
+$client->setConfig( ...options... );
 
 $gdata = new Zend_Gdata($client);
-</programlisting>
+]]></programlisting>
 
         <para>
             Beginning with Zend Framework 1.7, support has been added for
@@ -360,14 +358,14 @@ $gdata = new Zend_Gdata($client);
             server functionality.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $client = new Zend_Http_Client();
-$client-&gt;setConfig( ...options... );
+$client->setConfig( ...options... );
 
 $gdata = new Zend_Gdata($client);
-$gdata-&gt;setMajorProtocolVersion(2);
-$gdata-&gt;setMinorProtocolVersion(null);
-</programlisting>
+$gdata->setMajorProtocolVersion(2);
+$gdata->setMinorProtocolVersion(null);
+]]></programlisting>
 
         <para>
             Also see the sections on authentication for methods to
@@ -481,11 +479,11 @@ $gdata-&gt;setMinorProtocolVersion(null);
             <methodname>set*()</methodname> function.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Query();
-$query-&gt;setMaxResults(10);
-echo $query-&gt;getMaxResults();   // returns 10
-</programlisting>
+$query->setMaxResults(10);
+echo $query->getMaxResults();   // returns 10
+]]></programlisting>
 
         <para>
             The <classname>Zend_Gdata</classname> class also implements "magic" getter and
@@ -493,11 +491,11 @@ echo $query-&gt;getMaxResults();   // returns 10
             as a virtual member of the class.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Query();
-$query-&gt;maxResults = 10;
-echo $query-&gt;maxResults;        // returns 10
-</programlisting>
+$query->maxResults = 10;
+echo $query->maxResults;        // returns 10
+]]></programlisting>
 
         <para>
             You can clear all parameters with the <methodname>resetParameters()</methodname>
@@ -505,14 +503,14 @@ echo $query-&gt;maxResults;        // returns 10
             object for multiple queries.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Query();
-$query-&gt;maxResults = 10;
+$query->maxResults = 10;
 // ...get feed...
 
-$query-&gt;resetParameters();      // clears all parameters
+$query->resetParameters();      // clears all parameters
 // ...get a different feed...
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.gdata.introduction.getfeed"><info><title>Fetching a Feed</title></info>
@@ -526,13 +524,13 @@ $query-&gt;resetParameters();      // clears all parameters
             <classname>Zend_Gdata_Feed</classname>.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $gdata = new Zend_Gdata();
 $query = new Zend_Gdata_Query(
         'http://www.blogger.com/feeds/blogID/posts/default');
-$query-&gt;setMaxResults(10);
-$feed = $gdata-&gt;getFeed($query);
-</programlisting>
+$query->setMaxResults(10);
+$feed = $gdata->getFeed($query);
+]]></programlisting>
 
         <para>
             See later sections for special functions in each
@@ -554,16 +552,16 @@ $feed = $gdata-&gt;getFeed($query);
             retrieve the next page of a feed:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 function getNextPage($feed) {
-    $nextURL = $feed-&gt;getLink('next');
+    $nextURL = $feed->getLink('next');
     if ($nextURL !== null) {
-        return $gdata-&gt;getFeed($nextURL);
+        return $gdata->getFeed($nextURL);
     } else {
         return null;
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             If you would prefer not to work with pages in your application,
@@ -573,12 +571,12 @@ function getNextPage($feed) {
             This example shows how to use this function:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $gdata = new Zend_Gdata();
 $query = new Zend_Gdata_Query(
         'http://www.blogger.com/feeds/blogID/posts/default');
-$feed = $gdata-&gt;retrieveAllEntriesForFeed($gdata-&gt;getFeed($query));
-</programlisting>
+$feed = $gdata->retrieveAllEntriesForFeed($gdata->getFeed($query));
+]]></programlisting>
 
         <para>
             Keep in mind when calling this function that it may take a long
@@ -597,20 +595,20 @@ $feed = $gdata-&gt;retrieveAllEntriesForFeed($gdata-&gt;getFeed($query));
             accessors. Here's an example:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $gdata = new Zend_Gdata($client);
 $query = new Zend_Gdata_Query(
         'http://www.blogger.com/feeds/blogID/posts/default');
-$query-&gt;setMaxResults(10);
-$feed = $gdata-&gt;getFeed($query);
+$query->setMaxResults(10);
+$feed = $gdata->getFeed($query);
 foreach ($feed as $entry) {
     // using the magic accessor
-    echo 'Title: ' . $entry-&gt;title-&gt;text;
+    echo 'Title: ' . $entry->title->text;
     // using the defined accessors
-    echo 'Content: ' . $entry-&gt;getContent()-&gt;getText();
+    echo 'Content: ' . $entry->getContent()->getText();
 }
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.gdata.introduction.updateentry"><info><title>Updating Entries</title></info>
@@ -621,23 +619,23 @@ foreach ($feed as $entry) {
             changes back to the server. Here's an example:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $gdata = new Zend_Gdata($client);
 $query = new Zend_Gdata_Query(
         'http://www.blogger.com/feeds/blogID/posts/default');
-$query-&gt;setMaxResults(10);
-$feed = $gdata-&gt;getFeed($query);
+$query->setMaxResults(10);
+$feed = $gdata->getFeed($query);
 foreach ($feed as $entry) {
     // update the title to append 'NEW'
-    echo 'Old Title: ' . $entry-&gt;title-&gt;text;
-    $entry-&gt;title-&gt;text = $entry-&gt;title-&gt;text . ' NEW';
+    echo 'Old Title: ' . $entry->title->text;
+    $entry->title->text = $entry->title->text . ' NEW';
 
     // update the entry on the server
-    $newEntry = $entry-&gt;save();
-    echo 'New Title: ' . $newEntry-&gt;title-&gt;text;
+    $newEntry = $entry->save();
+    echo 'New Title: ' . $newEntry->title->text;
 }
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.gdata.introduction.post"><info><title>Posting Entries to Google Servers</title></info>
@@ -665,21 +663,21 @@ foreach ($feed as $entry) {
             function.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $gdata = new Zend_Gdata($authenticatedHttpClient);
 
-$entry = $gdata-&gt;newEntry();
-$entry-&gt;title = $gdata-&gt;newTitle('Playing football at the park');
+$entry = $gdata->newEntry();
+$entry->title = $gdata->newTitle('Playing football at the park');
 $content =
-    $gdata-&gt;newContent('We will visit the park and play football');
-$content-&gt;setType('text');
-$entry-&gt;content = $content;
+    $gdata->newContent('We will visit the park and play football');
+$content->setType('text');
+$entry->content = $content;
 
-$entryResult = $gdata-&gt;insertEntry($entry,
+$entryResult = $gdata->insertEntry($entry,
         'http://www.blogger.com/feeds/blogID/posts/default');
 
-echo 'The &lt;id&gt; of the resulting entry is: ' . $entryResult-&gt;id-&gt;text;
-</programlisting>
+echo 'The <id> of the resulting entry is: ' . $entryResult->id->text;
+]]></programlisting>
 
         <para>
             To post entries, you must be using an authenticated
@@ -704,19 +702,19 @@ echo 'The &lt;id&gt; of the resulting entry is: ' . $entryResult-&gt;id-&gt;text
             on an entry retrieved from a Google service.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $gdata = new Zend_Gdata($authenticatedHttpClient);
 // a Google Data feed
 $feedUri = ...;
-$feed = $gdata-&gt;getFeed($feedUri);
+$feed = $gdata->getFeed($feedUri);
 foreach ($feed as $feedEntry) {
     // Option 1 - delete the entry directly
-    $feedEntry-&gt;delete();
+    $feedEntry->delete();
     // Option 2 - delete the entry by passing the edit URL to
-    // $gdata-&gt;delete()
-    // $gdata-&gt;delete($feedEntry-&gt;getEditLink()-&gt;href);
+    // $gdata->delete()
+    // $gdata->delete($feedEntry->getEditLink()->href);
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             To delete entries, you must be using an authenticated

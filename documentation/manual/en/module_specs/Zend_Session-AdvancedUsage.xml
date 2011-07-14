@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.advanced_usage"><info><title>Advanced Usage</title></info>
     
 
@@ -22,9 +20,9 @@
         <example xml:id="zend.session.advanced_usage.starting_a_session.example"><info><title>Starting the Global Session</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 Zend_Session::start();
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -51,9 +49,9 @@ Zend_Session::start();
                     <acronym>HTML</acronym> document root directory):
                 </para>
 
-                <programlisting language="httpd.conf">
+                <programlisting language="httpd.conf"><![CDATA[
 php_value session.auto_start 0
-</programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -154,17 +152,17 @@ php_value session.auto_start 0
         <example xml:id="zend.session.advanced_usage.locking.example.basic"><info><title>Locking Session Namespaces</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $userProfileNamespace = new Zend_Session_Namespace('userProfileNamespace');
 
 // marking session as read only locked
-$userProfileNamespace-&gt;lock();
+$userProfileNamespace->lock();
 
 // unlocking read-only lock
-if ($userProfileNamespace-&gt;isLocked()) {
-    $userProfileNamespace-&gt;unLock();
+if ($userProfileNamespace->isLocked()) {
+    $userProfileNamespace->unLock();
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -182,22 +180,22 @@ if ($userProfileNamespace-&gt;isLocked()) {
         <example xml:id="zend.session.advanced_usage.expiration.example"><info><title>Expiration Examples</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $s = new Zend_Session_Namespace('expireAll');
-$s-&gt;a = 'apple';
-$s-&gt;p = 'pear';
-$s-&gt;o = 'orange';
+$s->a = 'apple';
+$s->p = 'pear';
+$s->o = 'orange';
 
-$s-&gt;setExpirationSeconds(5, 'a'); // expire only the key "a" in 5 seconds
+$s->setExpirationSeconds(5, 'a'); // expire only the key "a" in 5 seconds
 
 // expire entire namespace in 5 "hops"
-$s-&gt;setExpirationHops(5);
+$s->setExpirationHops(5);
 
-$s-&gt;setExpirationSeconds(60);
+$s->setExpirationSeconds(60);
 // The "expireAll" namespace will be marked "expired" on
 // the first request received after 60 seconds have elapsed,
 // or in 5 hops, whichever happens first.
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -229,15 +227,15 @@ $s-&gt;setExpirationSeconds(60);
                 to answer the displayed question.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // ...
 // in the question view controller
 $testSpace = new Zend_Session_Namespace('testSpace');
 // expire only this variable
-$testSpace-&gt;setExpirationSeconds(300, 'accept_answer');
-$testSpace-&gt;accept_answer = true;
+$testSpace->setExpirationSeconds(300, 'accept_answer');
+$testSpace->accept_answer = true;
 //...
-</programlisting>
+]]></programlisting>
 
             <para>
                 Below, the controller that processes the answers to test questions determines
@@ -245,18 +243,18 @@ $testSpace-&gt;accept_answer = true;
                 within the allotted time:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // ...
 // in the answer processing controller
 $testSpace = new Zend_Session_Namespace('testSpace');
-if ($testSpace-&gt;accept_answer === true) {
+if ($testSpace->accept_answer === true) {
     // within time
 }
 else {
     // not within time
 }
 // ...
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -280,7 +278,7 @@ else {
         <example xml:id="zend.session.advanced_usage.single_instance.example"><info><title>Limiting Session Namespace Access to a Single Instance</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // create an instance of a namespace
 $authSpaceAccessor1 = new Zend_Session_Namespace('Zend_Auth');
 
@@ -291,9 +289,9 @@ $authSpaceAccessor2 = new Zend_Session_Namespace('Zend_Auth', true);
 // making a reference is still possible
 $authSpaceAccessor3 = $authSpaceAccessor2;
 
-$authSpaceAccessor1-&gt;foo = 'bar';
+$authSpaceAccessor1->foo = 'bar';
 
-assert($authSpaceAccessor2-&gt;foo, 'bar');
+assert($authSpaceAccessor2->foo, 'bar');
 
 try {
     $aNamespaceObject = new Zend_Session_Namespace('Zend_Auth');
@@ -301,7 +299,7 @@ try {
     echo 'Cannot instantiate this namespace since ' .
          '$authSpaceAccessor2 was created\n';
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -336,14 +334,14 @@ try {
                 The following illustrates how the problem may be reproduced:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $sessionNamespace = new Zend_Session_Namespace();
-$sessionNamespace-&gt;array = array();
+$sessionNamespace->array = array();
 
 // may not work as expected before PHP 5.2.1
-$sessionNamespace-&gt;array['testKey'] = 1;
-echo $sessionNamespace-&gt;array['testKey'];
-</programlisting>
+$sessionNamespace->array['testKey'] = 1;
+echo $sessionNamespace->array['testKey'];
+]]></programlisting>
         </example>
 
         <example xml:id="zend.session.advanced_usage.arrays.example.building_prior"><info><title>Building Arrays Prior to Session Storage</title></info>
@@ -354,10 +352,10 @@ echo $sessionNamespace-&gt;array['testKey'];
                 only after all desired array values have been set.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $sessionNamespace = new Zend_Session_Namespace('Foo');
-$sessionNamespace-&gt;array = array('a', 'b', 'c');
-</programlisting>
+$sessionNamespace->array = array('a', 'b', 'c');
+]]></programlisting>
         </example>
 
         <para>
@@ -375,23 +373,23 @@ $sessionNamespace-&gt;array = array('a', 'b', 'c');
                 array.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $sessionNamespace = new Zend_Session_Namespace();
 
 // assign the initial array
-$sessionNamespace-&gt;array = array('tree' =&gt; 'apple');
+$sessionNamespace->array = array('tree' => 'apple');
 
 // make a copy of the array
-$tmp = $sessionNamespace-&gt;array;
+$tmp = $sessionNamespace->array;
 
 // modfiy the array copy
 $tmp['fruit'] = 'peach';
 
 // assign a copy of the array back to the session namespace
-$sessionNamespace-&gt;array = $tmp;
+$sessionNamespace->array = $tmp;
 
-echo $sessionNamespace-&gt;array['fruit']; // prints "peach"
-</programlisting>
+echo $sessionNamespace->array['fruit']; // prints "peach"
+]]></programlisting>
         </example>
 
         <example xml:id="zend.session.advanced_usage.arrays.example.workaround.reference"><info><title>Workaround: store array containing reference</title></info>
@@ -402,13 +400,13 @@ echo $sessionNamespace-&gt;array['fruit']; // prints "peach"
                 access it indirectly.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $myNamespace = new Zend_Session_Namespace('myNamespace');
 $a = array(1, 2, 3);
-$myNamespace-&gt;someArray = array( &amp;$a );
+$myNamespace->someArray = array( &$a );
 $a['foo'] = 'bar';
-echo $myNamespace-&gt;someArray['foo']; // prints "bar"
-</programlisting>
+echo $myNamespace->someArray['foo']; // prints "bar"
+]]></programlisting>
         </example>
     </section>
 
@@ -460,22 +458,22 @@ echo $myNamespace-&gt;someArray['foo']; // prints "bar"
         <example xml:id="zend.session.advanced_usage.testing.example"><info><title>PHPUnit Testing Code Dependent on Zend_Session</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // testing setExpirationSeconds()
 $script = 'SessionTestHelper.php';
 $s = new Zend_Session_Namespace('space');
-$s-&gt;a = 'apple';
-$s-&gt;o = 'orange';
-$s-&gt;setExpirationSeconds(5);
+$s->a = 'apple';
+$s->o = 'orange';
+$s->setExpirationSeconds(5);
 
 Zend_Session::regenerateId();
 $id = Zend_Session::getId();
 session_write_close(); // release session so process below can use it
 sleep(4); // not long enough for things to expire
 exec($script . "expireAll $id expireAll", $result);
-$result = $this-&gt;sortResult($result);
+$result = $this->sortResult($result);
 $expect = ';a === apple;o === orange;p === pear';
-$this-&gt;assertTrue($result === $expect,
+$this->assertTrue($result === $expect,
     "iteration over default Zend_Session namespace failed; " .
     "expecting result === '$expect', but got '$result'");
 
@@ -483,7 +481,7 @@ sleep(2); // long enough for things to expire (total of 6 seconds
           // waiting, but expires in 5)
 exec($script . "expireAll $id expireAll", $result);
 $result = array_pop($result);
-$this-&gt;assertTrue($result === '',
+$this->assertTrue($result === '',
     "iteration over default Zend_Session namespace failed; " .
     "expecting result === '', but got '$result')");
 session_start(); // resume artificially suspended session
@@ -492,20 +490,20 @@ session_start(); // resume artificially suspended session
 // leftover from above contaminates the tests below, that is also a
 // bug that we want to know about.
 $s = new Zend_Session_Namespace('expireGuava');
-$s-&gt;setExpirationSeconds(5, 'g'); // now try to expire only 1 of the
+$s->setExpirationSeconds(5, 'g'); // now try to expire only 1 of the
                                   // keys in the namespace
-$s-&gt;g = 'guava';
-$s-&gt;p = 'peach';
-$s-&gt;p = 'plum';
+$s->g = 'guava';
+$s->p = 'peach';
+$s->p = 'plum';
 
 session_write_close(); // release session so process below can use it
 sleep(6); // not long enough for things to expire
 exec($script . "expireAll $id expireGuava", $result);
-$result = $this-&gt;sortResult($result);
+$result = $this->sortResult($result);
 session_start(); // resume artificially suspended session
-$this-&gt;assertTrue($result === ';p === plum',
+$this->assertTrue($result === ';p === plum',
     "iteration over named Zend_Session namespace failed (result=$result)");
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 </section>

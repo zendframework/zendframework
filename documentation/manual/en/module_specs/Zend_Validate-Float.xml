@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.float"><info><title>Float</title></info>
     
 
@@ -34,13 +32,13 @@
             is used, the environment locale is used for validation:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Float();
 
-$validator-&gt;isValid(1234.5);   // returns true
-$validator-&gt;isValid('10a01'); // returns false
-$validator-&gt;isValid('1,234.5'); // returns true
-</programlisting>
+$validator->isValid(1234.5);   // returns true
+$validator->isValid('10a01'); // returns false
+$validator->isValid('1,234.5'); // returns true
+]]></programlisting>
 
         <para>
             In the above example we expected that our environment is set to "en" as locale.
@@ -61,13 +59,13 @@ $validator-&gt;isValid('1,234.5'); // returns true
             limited to the locale you set. See the following code:
         </para>
 
-        <programlisting language="php">
-$validator = new Zend_Validate_Float(array('locale' =&gt; 'de'));
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_Float(array('locale' => 'de'));
 
-$validator-&gt;isValid(1234.5); // returns true
-$validator-&gt;isValid("1 234,5"); // returns false
-$validator-&gt;isValid("1.234"); // returns true
-</programlisting>
+$validator->isValid(1234.5); // returns true
+$validator->isValid("1 234,5"); // returns false
+$validator->isValid("1.234"); // returns true
+]]></programlisting>
 
         <para>
             As you can see, by using a locale, your input is validated localized. Using a different

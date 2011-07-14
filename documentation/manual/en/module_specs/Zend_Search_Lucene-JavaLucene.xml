@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.java-lucene"><info><title>Interoperating with Java Lucene</title></info>
     
 
@@ -62,7 +60,7 @@
             using Java Lucene:
         </para>
 
-        <programlisting language="java">
+        <programlisting language="java"><![CDATA[
 /**
 * Index creation:
 */
@@ -90,6 +88,6 @@ Reader reader = new BufferedReader(new InputStreamReader(is));
 doc.add(Field.Text("contents", reader));
 
 indexWriter.addDocument(doc);
-</programlisting>
+]]></programlisting>
     </section>
 </section>

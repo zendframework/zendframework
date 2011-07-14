@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.form.elements"><info><title>Dijit-Specific Form Elements</title></info>
     
 
@@ -74,12 +72,12 @@
         decorators, corresponding to the following:
     </para>
 
-    <programlisting language="php">
-$element-&gt;addDecorator('DijitElement')
-        -&gt;addDecorator('Errors')
-        -&gt;addDecorator('HtmlTag', array('tag' =&gt; 'dd'))
-        -&gt;addDecorator('Label', array('tag' =&gt; 'dt'));
-</programlisting>
+    <programlisting language="php"><![CDATA[
+$element->addDecorator('DijitElement')
+        ->addDecorator('Errors')
+        ->addDecorator('HtmlTag', array('tag' => 'dd'))
+        ->addDecorator('Label', array('tag' => 'dt'));
+]]></programlisting>
 
     <para>
         In effect, the DijitElement decorator is used in place of the standard
@@ -139,15 +137,15 @@ $element-&gt;addDecorator('DijitElement')
         <example xml:id="zend.dojo.form.elements.button.example"><info><title>Example Button dijit element usage</title></info>
             
 
-            <programlisting language="php">
-$form-&gt;addElement(
+            <programlisting language="php"><![CDATA[
+$form->addElement(
     'Button',
     'foo',
     array(
-        'label' =&gt; 'Button Label',
+        'label' => 'Button Label',
     )
 );
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -207,18 +205,18 @@ $form-&gt;addElement(
         <example xml:id="zend.dojo.form.elements.checkBox.example"><info><title>Example CheckBox dijit element usage</title></info>
             
 
-            <programlisting language="php">
-$form-&gt;addElement(
+            <programlisting language="php"><![CDATA[
+$form->addElement(
     'CheckBox',
     'foo',
     array(
-        'label'          =&gt; 'A check box',
-        'checkedValue'   =&gt; 'foo',
-        'uncheckedValue' =&gt; 'bar',
-        'checked'        =&gt; true,
+        'label'          => 'A check box',
+        'checkedValue'   => 'foo',
+        'uncheckedValue' => 'bar',
+        'checked'        => true,
     )
 );
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -334,47 +332,47 @@ $form-&gt;addElement(
         <example xml:id="zend.dojo.form.elements.comboBox.selectExample"><info><title>ComboBox dijit element usage as select input</title></info>
             
 
-            <programlisting language="php">
-$form-&gt;addElement(
+            <programlisting language="php"><![CDATA[
+$form->addElement(
     'ComboBox',
     'foo',
     array(
-        'label'        =&gt; 'ComboBox (select)',
-        'value'        =&gt; 'blue',
-        'autocomplete' =&gt; false,
-        'multiOptions' =&gt; array(
-            'red'    =&gt; 'Rouge',
-            'blue'   =&gt; 'Bleu',
-            'white'  =&gt; 'Blanc',
-            'orange' =&gt; 'Orange',
-            'black'  =&gt; 'Noir',
-            'green'  =&gt; 'Vert',
+        'label'        => 'ComboBox (select)',
+        'value'        => 'blue',
+        'autocomplete' => false,
+        'multiOptions' => array(
+            'red'    => 'Rouge',
+            'blue'   => 'Bleu',
+            'white'  => 'Blanc',
+            'orange' => 'Orange',
+            'black'  => 'Noir',
+            'green'  => 'Vert',
         ),
     )
 );
-</programlisting>
+]]></programlisting>
         </example>
 
         <example xml:id="zend.dojo.form.elements.comboBox.datastoreExample"><info><title>ComboBox dijit element usage with datastore</title></info>
             
 
-            <programlisting language="php">
-$form-&gt;addElement(
+            <programlisting language="php"><![CDATA[
+$form->addElement(
     'ComboBox',
     'foo',
     array(
-        'label'       =&gt; 'ComboBox (datastore)',
-        'storeId'     =&gt; 'stateStore',
-        'storeType'   =&gt; 'dojo.data.ItemFileReadStore',
-        'storeParams' =&gt; array(
-            'url' =&gt; '/js/states.txt',
+        'label'       => 'ComboBox (datastore)',
+        'storeId'     => 'stateStore',
+        'storeType'   => 'dojo.data.ItemFileReadStore',
+        'storeParams' => array(
+            'url' => '/js/states.txt',
         ),
-        'dijitParams' =&gt; array(
-            'searchAttr' =&gt; 'name',
+        'dijitParams' => array(
+            'searchAttr' => 'name',
         ),
     )
 );
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -445,20 +443,20 @@ $form-&gt;addElement(
         <example xml:id="zend.dojo.form.elements.currencyTextBox.example"><info><title>Example CurrencyTextBox dijit element usage</title></info>
             
 
-            <programlisting language="php">
-$form-&gt;addElement(
+            <programlisting language="php"><![CDATA[
+$form->addElement(
     'CurrencyTextBox',
     'foo',
     array(
-        'label'          =&gt; 'Currency:',
-        'required'       =&gt; true,
-        'currency'       =&gt; 'USD',
-        'invalidMessage' =&gt; 'Invalid amount. ' .
+        'label'          => 'Currency:',
+        'required'       => true,
+        'currency'       => 'USD',
+        'invalidMessage' => 'Invalid amount. ' .
                             'Include dollar sign, commas, and cents.',
-        'fractional'     =&gt; false,
+        'fractional'     => false,
     )
 );
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -530,18 +528,18 @@ $form-&gt;addElement(
         <example xml:id="zend.dojo.form.elements.dateTextBox.example"><info><title>Example DateTextBox dijit element usage</title></info>
             
 
-            <programlisting language="php">
-$form-&gt;addElement(
+            <programlisting language="php"><![CDATA[
+$form->addElement(
     'DateTextBox',
     'foo',
     array(
-        'label'          =&gt; 'Date:',
-        'required'       =&gt; true,
-        'invalidMessage' =&gt; 'Invalid date specified.',
-        'formatLength'   =&gt; 'long',
+        'label'          => 'Date:',
+        'required'       => true,
+        'invalidMessage' => 'Invalid date specified.',
+        'formatLength'   => 'long',
     )
 );
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -740,16 +738,16 @@ $form-&gt;addElement(
         <example xml:id="zend.dojo.form.elements.editor.example"><info><title>Example Editor dijit element usage</title></info>
             
 
-            <programlisting language="php">
-$form-&gt;addElement('editor', 'content', array(
-    'plugins'            =&gt; array('undo', '|', 'bold', 'italic'),
-    'editActionInterval' =&gt; 2,
-    'focusOnLoad'        =&gt; true,
-    'height'             =&gt; '250px',
-    'inheritWidth'       =&gt; true,
-    'styleSheets'        =&gt; array('/js/custom/editor.css'),
+            <programlisting language="php"><![CDATA[
+$form->addElement('editor', 'content', array(
+    'plugins'            => array('undo', '|', 'bold', 'italic'),
+    'editActionInterval' => 2,
+    'focusOnLoad'        => true,
+    'height'             => '250px',
+    'inheritWidth'       => true,
+    'styleSheets'        => array('/js/custom/editor.css'),
 ));
-</programlisting>
+]]></programlisting>
         </example>
 
         <note><info><title>Editor Dijit uses div by default</title></info>
@@ -768,20 +766,20 @@ $form-&gt;addElement('editor', 'content', array(
                 setting the <property>degrade</property> property to <constant>TRUE</constant>:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // At instantiation:
 $editor = new Zend_Dojo_Form_Element_Editor('foo', array(
-    'degrade' =&gt; true,
+    'degrade' => true,
 ));
 
 // Construction via the form:
-$form-&gt;addElement('editor', 'content', array(
-    'degrade' =&gt; true,
+$form->addElement('editor', 'content', array(
+    'degrade' => true,
 ));
 
 // Or after instantiation:
-$editor-&gt;degrade = true;
-</programlisting>
+$editor->degrade = true;
+]]></programlisting>
         </note>
     </section>
 
@@ -871,21 +869,21 @@ $editor-&gt;degrade = true;
                 element storing the value will be updated.
             </para>
 
-            <programlisting language="php">
-$form-&gt;addElement(
+            <programlisting language="php"><![CDATA[
+$form->addElement(
     'HorizontalSlider',
     'horizontal',
     array(
-        'label'                     =&gt; 'HorizontalSlider',
-        'value'                     =&gt; 5,
-        'minimum'                   =&gt; -10,
-        'maximum'                   =&gt; 10,
-        'discreteValues'            =&gt; 11,
-        'intermediateChanges'       =&gt; true,
-        'showButtons'               =&gt; true,
-        'topDecorationDijit'        =&gt; 'HorizontalRuleLabels',
-        'topDecorationContainer'    =&gt; 'topContainer',
-        'topDecorationLabels'       =&gt; array(
+        'label'                     => 'HorizontalSlider',
+        'value'                     => 5,
+        'minimum'                   => -10,
+        'maximum'                   => 10,
+        'discreteValues'            => 11,
+        'intermediateChanges'       => true,
+        'showButtons'               => true,
+        'topDecorationDijit'        => 'HorizontalRuleLabels',
+        'topDecorationContainer'    => 'topContainer',
+        'topDecorationLabels'       => array(
                 ' ',
                 '20%',
                 '40%',
@@ -893,29 +891,29 @@ $form-&gt;addElement(
                 '80%',
                 ' ',
         ),
-        'topDecorationParams'      =&gt; array(
-            'container' =&gt; array(
-                'style' =&gt; 'height:1.2em; font-size=75%;color:gray;',
+        'topDecorationParams'      => array(
+            'container' => array(
+                'style' => 'height:1.2em; font-size=75%;color:gray;',
             ),
-            'list' =&gt; array(
-                'style' =&gt; 'height:1em; font-size=75%;color:gray;',
+            'list' => array(
+                'style' => 'height:1em; font-size=75%;color:gray;',
             ),
         ),
-        'bottomDecorationDijit'     =&gt; 'HorizontalRule',
-        'bottomDecorationContainer' =&gt; 'bottomContainer',
-        'bottomDecorationLabels'    =&gt; array(
+        'bottomDecorationDijit'     => 'HorizontalRule',
+        'bottomDecorationContainer' => 'bottomContainer',
+        'bottomDecorationLabels'    => array(
                 '0%',
                 '50%',
                 '100%',
         ),
-        'bottomDecorationParams'   =&gt; array(
-            'list' =&gt; array(
-                'style' =&gt; 'height:1em; font-size=75%;color:gray;',
+        'bottomDecorationParams'   => array(
+            'list' => array(
+                'style' => 'height:1em; font-size=75%;color:gray;',
             ),
         ),
     )
 );
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -1002,24 +1000,24 @@ $form-&gt;addElement(
         <example xml:id="zend.dojo.form.elements.numberSpinner.example"><info><title>Example NumberSpinner dijit element usage</title></info>
             
 
-            <programlisting language="php">
-$form-&gt;addElement(
+            <programlisting language="php"><![CDATA[
+$form->addElement(
     'NumberSpinner',
     'foo',
     array(
-        'value'             =&gt; '7',
-        'label'             =&gt; 'NumberSpinner',
-        'smallDelta'        =&gt; 5,
-        'largeDelta'        =&gt; 25,
-        'defaultTimeout'    =&gt; 500,
-        'timeoutChangeRate' =&gt; 100,
-        'min'               =&gt; 9,
-        'max'               =&gt; 1550,
-        'places'            =&gt; 0,
-        'maxlength'         =&gt; 20,
+        'value'             => '7',
+        'label'             => 'NumberSpinner',
+        'smallDelta'        => 5,
+        'largeDelta'        => 25,
+        'defaultTimeout'    => 500,
+        'timeoutChangeRate' => 100,
+        'min'               => 9,
+        'max'               => 1550,
+        'places'            => 0,
+        'maxlength'         => 20,
     )
 );
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -1086,22 +1084,22 @@ $form-&gt;addElement(
         <example xml:id="zend.dojo.form.elements.numberTextBox.example"><info><title>Example NumberTextBox dijit element usage</title></info>
             
 
-            <programlisting language="php">
-$form-&gt;addElement(
+            <programlisting language="php"><![CDATA[
+$form->addElement(
     'NumberTextBox',
     'elevation',
     array(
-        'label'          =&gt; 'NumberTextBox',
-        'required'       =&gt; true,
-        'invalidMessage' =&gt; 'Invalid elevation.',
-        'places'         =&gt; 0,
-        'constraints'    =&gt; array(
-            'min'    =&gt; -20000,
-            'max'    =&gt; 20000,
+        'label'          => 'NumberTextBox',
+        'required'       => true,
+        'invalidMessage' => 'Invalid elevation.',
+        'places'         => 0,
+        'constraints'    => array(
+            'min'    => -20000,
+            'max'    => 20000,
         ),
     )
 );
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -1123,21 +1121,21 @@ $form-&gt;addElement(
         <example xml:id="zend.dojo.form.elements.passwordTextBox.example"><info><title>Example PasswordTextBox dijit element usage</title></info>
             
 
-            <programlisting language="php">
-$form-&gt;addElement(
+            <programlisting language="php"><![CDATA[
+$form->addElement(
     'PasswordTextBox',
     'password',
     array(
-        'label'          =&gt; 'Password',
-        'required'       =&gt; true,
-        'trim'           =&gt; true,
-        'lowercase'      =&gt; true,
-        'regExp'         =&gt; '^[a-z0-9]{6,}$',
-        'invalidMessage' =&gt; 'Invalid password; ' .
+        'label'          => 'Password',
+        'required'       => true,
+        'trim'           => true,
+        'lowercase'      => true,
+        'regExp'         => '^[a-z0-9]{6,}$',
+        'invalidMessage' => 'Invalid password; ' .
                             'must be at least 6 alphanumeric characters',
     )
 );
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -1168,21 +1166,21 @@ $form-&gt;addElement(
         <example xml:id="zend.dojo.form.elements.radioButton.example"><info><title>Example RadioButton dijit element usage</title></info>
             
 
-            <programlisting language="php">
-$form-&gt;addElement(
+            <programlisting language="php"><![CDATA[
+$form->addElement(
     'RadioButton',
     'foo',
     array(
-        'label' =&gt; 'RadioButton',
-        'multiOptions'  =&gt; array(
-            'foo' =&gt; 'Foo',
-            'bar' =&gt; 'Bar',
-            'baz' =&gt; 'Baz',
+        'label' => 'RadioButton',
+        'multiOptions'  => array(
+            'foo' => 'Foo',
+            'bar' => 'Bar',
+            'baz' => 'Baz',
         ),
-        'value' =&gt; 'bar',
+        'value' => 'bar',
     )
 );
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -1199,17 +1197,17 @@ $form-&gt;addElement(
         <example xml:id="zend.dojo.form.elements.simpletextarea.example"><info><title>Example SimpleTextarea dijit element usage</title></info>
             
 
-            <programlisting language="php">
-$form-&gt;addElement(
+            <programlisting language="php"><![CDATA[
+$form->addElement(
     'SimpleTextarea',
     'simpletextarea',
     array(
-        'label'    =&gt; 'SimpleTextarea',
-        'required' =&gt; true,
-        'style'    =&gt; 'width: 80em; height: 25em;',
+        'label'    => 'SimpleTextarea',
+        'required' => true,
+        'style'    => 'width: 80em; height: 25em;',
     )
 );
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -1301,17 +1299,17 @@ $form-&gt;addElement(
         <example xml:id="zend.dojo.form.elements.submitButton.example"><info><title>Example SubmitButton dijit element usage</title></info>
             
 
-            <programlisting language="php">
-$form-&gt;addElement(
+            <programlisting language="php"><![CDATA[
+$form->addElement(
     'SubmitButton',
     'foo',
     array(
-        'required'   =&gt; false,
-        'ignore'     =&gt; true,
-        'label'      =&gt; 'Submit Button!',
+        'required'   => false,
+        'ignore'     => true,
+        'label'      => 'Submit Button!',
     )
 );
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -1371,18 +1369,18 @@ $form-&gt;addElement(
         <example xml:id="zend.dojo.form.elements.textBox.example"><info><title>Example TextBox dijit element usage</title></info>
             
 
-            <programlisting language="php">
-$form-&gt;addElement(
+            <programlisting language="php"><![CDATA[
+$form->addElement(
     'TextBox',
     'foo',
     array(
-        'value'      =&gt; 'some text',
-        'label'      =&gt; 'TextBox',
-        'trim'       =&gt; true,
-        'propercase' =&gt; true,
+        'value'      => 'some text',
+        'label'      => 'TextBox',
+        'trim'       => true,
+        'propercase' => true,
     )
 );
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -1400,17 +1398,17 @@ $form-&gt;addElement(
         <example xml:id="zend.dojo.form.elements.textarea.example"><info><title>Example Textarea dijit element usage</title></info>
             
 
-            <programlisting language="php">
-$form-&gt;addElement(
+            <programlisting language="php"><![CDATA[
+$form->addElement(
     'Textarea',
     'textarea',
     array(
-        'label'    =&gt; 'Textarea',
-        'required' =&gt; true,
-        'style'    =&gt; 'width: 200px;',
+        'label'    => 'Textarea',
+        'required' => true,
+        'style'    => 'width: 200px;',
     )
 );
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -1475,19 +1473,19 @@ $form-&gt;addElement(
                 at a time, with increments of 10 minutes.
             </para>
 
-            <programlisting language="php">
-$form-&gt;addElement(
+            <programlisting language="php"><![CDATA[
+$form->addElement(
     'TimeTextBox',
     'foo',
     array(
-        'label'              =&gt; 'TimeTextBox',
-        'required'           =&gt; true,
-        'visibleRange'       =&gt; 'T04:00:00',
-        'visibleIncrement'   =&gt; 'T00:10:00',
-        'clickableIncrement' =&gt; 'T00:10:00',
+        'label'              => 'TimeTextBox',
+        'required'           => true,
+        'visibleRange'       => 'T04:00:00',
+        'visibleIncrement'   => 'T00:10:00',
+        'clickableIncrement' => 'T00:10:00',
     )
 );
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -1569,18 +1567,18 @@ $form-&gt;addElement(
                 spaces, most punctuation is invalid).
             </para>
 
-            <programlisting language="php">
-$form-&gt;addElement(
+            <programlisting language="php"><![CDATA[
+$form->addElement(
     'ValidationTextBox',
     'foo',
     array(
-        'label'          =&gt; 'ValidationTextBox',
-        'required'       =&gt; true,
-        'regExp'         =&gt; '[\w]+',
-        'invalidMessage' =&gt; 'Invalid non-space text.',
+        'label'          => 'ValidationTextBox',
+        'required'       => true,
+        'regExp'         => '[\w]+',
+        'invalidMessage' => 'Invalid non-space text.',
     )
 );
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -1607,22 +1605,22 @@ $form-&gt;addElement(
                 element storing the value will be updated.
             </para>
 
-            <programlisting language="php">
-$form-&gt;addElement(
+            <programlisting language="php"><![CDATA[
+$form->addElement(
     'VerticalSlider',
     'foo',
     array(
-        'label'                    =&gt; 'VerticalSlider',
-        'value'                    =&gt; 5,
-        'style'                    =&gt; 'height: 200px; width: 3em;',
-        'minimum'                  =&gt; -10,
-        'maximum'                  =&gt; 10,
-        'discreteValues'           =&gt; 11,
-        'intermediateChanges'      =&gt; true,
-        'showButtons'              =&gt; true,
-        'leftDecorationDijit'      =&gt; 'VerticalRuleLabels',
-        'leftDecorationContainer'  =&gt; 'leftContainer',
-        'leftDecorationLabels'     =&gt; array(
+        'label'                    => 'VerticalSlider',
+        'value'                    => 5,
+        'style'                    => 'height: 200px; width: 3em;',
+        'minimum'                  => -10,
+        'maximum'                  => 10,
+        'discreteValues'           => 11,
+        'intermediateChanges'      => true,
+        'showButtons'              => true,
+        'leftDecorationDijit'      => 'VerticalRuleLabels',
+        'leftDecorationContainer'  => 'leftContainer',
+        'leftDecorationLabels'     => array(
                 ' ',
                 '20%',
                 '40%',
@@ -1630,16 +1628,16 @@ $form-&gt;addElement(
                 '80%',
                 ' ',
         ),
-        'rightDecorationDijit' =&gt; 'VerticalRule',
-        'rightDecorationContainer' =&gt; 'rightContainer',
-        'rightDecorationLabels' =&gt; array(
+        'rightDecorationDijit' => 'VerticalRule',
+        'rightDecorationContainer' => 'rightContainer',
+        'rightDecorationLabels' => array(
                 '0%',
                 '50%',
                 '100%',
         ),
     )
 );
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 </section>

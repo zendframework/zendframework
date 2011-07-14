@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.additional-headers"><info><title>Additional Headers</title></info>
     
 
@@ -54,11 +52,11 @@
     <example xml:id="zend.mail.additional-headers.example-1"><info><title>Adding E-Mail Message Headers</title></info>
         
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
-$mail-&gt;addHeader('X-MailGenerator', 'MyCoolApplication');
-$mail-&gt;addHeader('X-greetingsTo', 'Mom', true); // multiple values
-$mail-&gt;addHeader('X-greetingsTo', 'Dad', true);
-</programlisting>
+$mail->addHeader('X-MailGenerator', 'MyCoolApplication');
+$mail->addHeader('X-greetingsTo', 'Mom', true); // multiple values
+$mail->addHeader('X-greetingsTo', 'Dad', true);
+]]></programlisting>
     </example>
 </section>

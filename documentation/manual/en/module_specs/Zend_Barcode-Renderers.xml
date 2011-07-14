@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.barcode.renderers"><info><title>Zend_Barcode Renderers</title></info>
     
 
@@ -37,25 +35,25 @@
     <example xml:id="zend.barcode.renderers.configuration"><info><title>Different ways to parameterize a renderer object</title></info>
         
 
-        <programlisting language="php">
-$options = array('topOffset' =&gt; 10);
+        <programlisting language="php"><![CDATA[
+$options = array('topOffset' => 10);
 
 // Case 1
 $renderer = new Zend_Barcode_Renderer_Pdf($options);
 
 // Case 2
 $renderer = new Zend_Barcode_Renderer_Pdf();
-$renderer-&gt;setOptions($options);
+$renderer->setOptions($options);
 
 // Case 3
 $config   = new Zend_Config($options);
 $renderer = new Zend_Barcode_Renderer_Pdf();
-$renderer-&gt;setConfig($config);
+$renderer->setConfig($config);
 
 // Case 4
 $renderer = new Zend_Barcode_Renderer_Pdf();
-$renderer-&gt;setTopOffset(10);
-</programlisting>
+$renderer->setTopOffset(10);
+]]></programlisting>
     </example>
 
     <section xml:id="zend.barcode.renderers.common.options"><info><title>Common Options</title></info>

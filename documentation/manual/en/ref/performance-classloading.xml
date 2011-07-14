@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.classloading"><info><title>Class Loading</title></info>
     
 
@@ -46,27 +44,27 @@
                 setting your include_path:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $paths = array(
     realpath(dirname(__FILE__) . '/../library'),
     '.',
 );
 set_include_path(implode(PATH_SEPARATOR, $paths);
-</programlisting>
+]]></programlisting>
 
             <para>
                 You <emphasis>can</emphasis> use relative paths -- so long as
                 they are relative to an absolute path:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 define('APPLICATION_PATH', realpath(dirname(__FILE__)));
 $paths = array(
     APPLICATION_PATH . '/../library'),
     '.',
 );
 set_include_path(implode(PATH_SEPARATOR, $paths);
-</programlisting>
+]]></programlisting>
 
             <para>
                 However, even so, it's typically a trivial task to simply pass
@@ -143,13 +141,13 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                     installation:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 library
     Archive/
     PEAR/
     PHPUnit/
     Zend/
-</programlisting>
+]]></programlisting>
 
                 <para>
                     This allows us to add our own library code if necessary, while
@@ -172,13 +170,13 @@ library
                     here -- we're going to end up with only two paths.
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $paths = array(
     realpath(dirname(__FILE__) . '/../library'),
     '.'
 );
 set_include_path(implode(PATH_SEPARATOR, $paths));
-</programlisting>
+]]></programlisting>
             </example>
         </section>
     </section>
@@ -214,12 +212,12 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
                 indicates the shell prompt):
             </para>
 
-            <programlisting language="shell">
+            <programlisting language="shell"><![CDATA[
 % cd path/to/ZendFramework/library
 % find . -name '*.php' -not -wholename '*/Loader/Autoloader.php' \
   -not -wholename '*/Application.php' -print0 | \
   xargs -0 sed --regexp-extended --in-place 's/(require_once)/\/\/ \1/g'
-</programlisting>
+]]></programlisting>
 
             <para>
                 This one-liner (broken into two lines for readability) iterates
@@ -241,10 +239,10 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
                 following code:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 require_once 'Zend/Loader/Autoloader.php';
 Zend_Loader_Autoloader::getInstance();
-</programlisting>
+]]></programlisting>
         </section>
     </section>
 

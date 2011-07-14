@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headtitle"><info><title>HeadTitle Helper</title></info>
     
 
@@ -40,27 +38,27 @@
             application: site, controller, action, and potentially resource.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
  // setting the controller and action name as title segments:
-$request = Zend_Controller_Front::getInstance()-&gt;getRequest();
-$this-&gt;headTitle($request-&gt;getActionName())
-     -&gt;headTitle($request-&gt;getControllerName());
+$request = Zend_Controller_Front::getInstance()->getRequest();
+$this->headTitle($request->getActionName())
+     ->headTitle($request->getControllerName());
 
 // setting the site in the title; possibly in the layout script:
-$this-&gt;headTitle('Zend Framework');
+$this->headTitle('Zend Framework');
 
 // setting a separator string for segments:
-$this-&gt;headTitle()-&gt;setSeparator(' / ');
-</programlisting>
+$this->headTitle()->setSeparator(' / ');
+]]></programlisting>
 
         <para>
             When you're finally ready to render the title in your layout
             script, simply echo the helper:
         </para>
 
-        <programlisting language="php">
-&lt;!-- renders &lt;action&gt; / &lt;controller&gt; / Zend Framework --&gt;
-&lt;?php echo $this-&gt;headTitle() ?&gt;
-</programlisting>
+        <programlisting language="php"><![CDATA[
+<!-- renders <action> / <controller> / Zend Framework -->
+<?php echo $this->headTitle() ?>
+]]></programlisting>
     </example>
 </section>

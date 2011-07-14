@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.s3"><info><title>Zend_Service_Amazon_S3</title></info>
     
 
@@ -102,17 +100,17 @@
         <example xml:id="zend.service.amazon.s3.storing-your-first.example"><info><title>Zend_Service_Amazon_S3 Usage Example</title></info>
             
 
-             <programlisting language="php">
+             <programlisting language="php"><![CDATA[
 require_once 'Zend/Service/Amazon/S3.php';
 
 $s3 = new Zend_Service_Amazon_S3($my_aws_key, $my_aws_secret_key);
 
-$s3-&gt;createBucket("my-own-bucket");
+$s3->createBucket("my-own-bucket");
 
-$s3-&gt;putObject("my-own-bucket/myobject", "somedata");
+$s3->putObject("my-own-bucket/myobject", "somedata");
 
-echo $s3-&gt;getObject("my-own-bucket/myobject");
-</programlisting>
+echo $s3->getObject("my-own-bucket/myobject");
+]]></programlisting>
         </example>
 
         <para>
@@ -121,12 +119,12 @@ echo $s3-&gt;getObject("my-own-bucket/myobject");
             If you only use one account, you can set default credentials for the service:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 require_once 'Zend/Service/Amazon/S3.php';
 
 Zend_Service_Amazon_S3::setKeys($my_aws_key, $my_aws_secret_key);
 $s3 = new Zend_Service_Amazon_S3();
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.service.amazon.s3.buckets"><info><title>Bucket operations</title></info>
@@ -168,14 +166,14 @@ $s3 = new Zend_Service_Amazon_S3();
                 <example xml:id="zend.service.amazon.s3.buckets.remove.example"><info><title>Zend_Service_Amazon_S3 Bucket Removal Example</title></info>
                     
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 require_once 'Zend/Service/Amazon/S3.php';
 
 $s3 = new Zend_Service_Amazon_S3($my_aws_key, $my_aws_secret_key);
 
-$s3-&gt;cleanBucket("my-own-bucket");
-$s3-&gt;removeBucket("my-own-bucket");
-</programlisting>
+$s3->cleanBucket("my-own-bucket");
+$s3->removeBucket("my-own-bucket");
+]]></programlisting>
                 </example>
             </listitem>
 
@@ -188,16 +186,16 @@ $s3-&gt;removeBucket("my-own-bucket");
                 <example xml:id="zend.service.amazon.s3.buckets.list.example"><info><title>Zend_Service_Amazon_S3 Bucket Listing Example</title></info>
                     
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 require_once 'Zend/Service/Amazon/S3.php';
 
 $s3 = new Zend_Service_Amazon_S3($my_aws_key, $my_aws_secret_key);
 
-$list = $s3-&gt;getBuckets();
+$list = $s3->getBuckets();
 foreach($list as $bucket) {
   echo "I have bucket $bucket\n";
 }
-</programlisting>
+]]></programlisting>
                 </example>
             </listitem>
 
@@ -324,20 +322,20 @@ foreach($list as $bucket) {
                             <example xml:id="zend.service.amazon.s3.objects.public.example"><info><title>Zend_Service_Amazon_S3 Public Object Example</title></info>
                                 
 
-                                <programlisting language="php">
+                                <programlisting language="php"><![CDATA[
 require_once 'Zend/Service/Amazon/S3.php';
 
 $s3 = new Zend_Service_Amazon_S3($my_aws_key, $my_aws_secret_key);
 
-$s3-&gt;putObject("my-own-bucket/Pictures/Me.png", file_get_contents("me.png"),
-    array(Zend_Service_Amazon_S3::S3_ACL_HEADER =&gt;
+$s3->putObject("my-own-bucket/Pictures/Me.png", file_get_contents("me.png"),
+    array(Zend_Service_Amazon_S3::S3_ACL_HEADER =>
           Zend_Service_Amazon_S3::S3_ACL_PUBLIC_READ));
 // or:
-$s3-&gt;putFile("me.png", "my-own-bucket/Pictures/Me.png",
-    array(Zend_Service_Amazon_S3::S3_ACL_HEADER =&gt;
+$s3->putFile("me.png", "my-own-bucket/Pictures/Me.png",
+    array(Zend_Service_Amazon_S3::S3_ACL_HEADER =>
           Zend_Service_Amazon_S3::S3_ACL_PUBLIC_READ));
 echo "Go to http://s3.amazonaws.com/my-own-bucket/Pictures/Me.png to see me!\n";
-</programlisting>
+]]></programlisting>
                             </example>
                         </listitem>
                     </varlistentry>
@@ -416,18 +414,18 @@ echo "Go to http://s3.amazonaws.com/my-own-bucket/Pictures/Me.png to see me!\n";
                 <example xml:id="zend.service.amazon.s3.objects.list.example"><info><title>Zend_Service_Amazon_S3 Object Listing Example</title></info>
                     
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 require_once 'Zend/Service/Amazon/S3.php';
 
 $s3 = new Zend_Service_Amazon_S3($my_aws_key, $my_aws_secret_key);
 
-$list = $s3-&gt;getObjectsByBucket("my-own-bucket");
+$list = $s3->getObjectsByBucket("my-own-bucket");
 foreach($list as $name) {
   echo "I have $name key:\n";
-  $data = $s3-&gt;getObject("my-own-bucket/$name");
+  $data = $s3->getObject("my-own-bucket/$name");
   echo "with data: $data\n";
 }
-</programlisting>
+]]></programlisting>
                 </example>
             </listitem>
 
@@ -472,14 +470,14 @@ foreach($list as $name) {
             <example xml:id="zend.service.amazon.s3.streaming.example1"><info><title>Zend_Service_Amazon_S3 Data Streaming Example</title></info>
                 
 
-                <programlisting language="php">
-$response = $amazon-&gt;getObjectStream("mybycket/zftest");
+                <programlisting language="php"><![CDATA[
+$response = $amazon->getObjectStream("mybycket/zftest");
 // copy file
-copy($response-&gt;getStreamName(), "my/downloads/file");
+copy($response->getStreamName(), "my/downloads/file");
 // use stream
 $fp = fopen("my/downloads/file2", "w");
-stream_copy_to_stream($response-&gt;getStream(), $fp);
-</programlisting>
+stream_copy_to_stream($response->getStream(), $fp);
+]]></programlisting>
             </example>
         </para>
 
@@ -514,18 +512,18 @@ stream_copy_to_stream($response-&gt;getStream(), $fp);
         <example xml:id="zend.service.amazon.s3.streams.example"><info><title>Zend_Service_Amazon_S3 Streams Example</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 require_once 'Zend/Service/Amazon/S3.php';
 
 $s3 = new Zend_Service_Amazon_S3($my_aws_key, $my_aws_secret_key);
 
-$s3-&gt;registerStreamWrapper("s3");
+$s3->registerStreamWrapper("s3");
 
 mkdir("s3://my-own-bucket");
 file_put_contents("s3://my-own-bucket/testdata", "mydata");
 
 echo file_get_contents("s3://my-own-bucket/testdata");
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>

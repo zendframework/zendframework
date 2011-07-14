@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.router.routes.regex"><info><title>Zend_Controller_Router_Route_Regex</title></info>
     
 
@@ -18,16 +16,16 @@
         route this time:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Regex(
     'archive/(\d+)',
     array(
-        'controller' =&gt; 'archive',
-        'action'     =&gt; 'show'
+        'controller' => 'archive',
+        'action'     => 'show'
     )
 );
-$router-&gt;addRoute('archive', $route);
-</programlisting>
+$router->addRoute('archive', $route);
+]]></programlisting>
 
     <para>
         Every defined regex subpattern will be injected to the request
@@ -36,13 +34,13 @@ $router-&gt;addRoute('archive', $route);
         array may look like:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $values = array(
-    1            =&gt; '2006',
-    'controller' =&gt; 'archive',
-    'action'     =&gt; 'show'
+    1            => '2006',
+    'controller' => 'archive',
+    'action'     => 'show'
 );
-</programlisting>
+]]></programlisting>
 
     <note>
         <para>
@@ -76,13 +74,13 @@ $values = array(
         You can get the contents of the defined subpatterns the usual way:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 public function showAction()
 {
-    $request = $this-&gt;getRequest();
-    $year    = $request-&gt;getParam(1); // $year = '2006';
+    $request = $this->getRequest();
+    $year    = $request->getParam(1); // $year = '2006';
 }
-</programlisting>
+]]></programlisting>
 
     <note>
         <para>Notice the key is an integer (1) instead of a string ('1').</para>
@@ -97,17 +95,17 @@ public function showAction()
         with the slash but catch only the numeric part:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Regex(
     'archive(?:/(\d+))?',
     array(
-        1            =&gt; '2006',
-        'controller' =&gt; 'archive',
-        'action'     =&gt; 'show'
+        1            => '2006',
+        'controller' => 'archive',
+        'action'     => 'show'
     )
 );
-$router-&gt;addRoute('archive', $route);
-</programlisting>
+$router->addRoute('archive', $route);
+]]></programlisting>
 
     <para>
         Now let's get to the problem you have probably noticed on your own by
@@ -118,42 +116,42 @@ $router-&gt;addRoute('archive', $route);
         keys. Let's work on our easier example:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Regex(
     'archive/(\d+)',
     array(
-        'controller' =&gt; 'archive',
-        'action' =&gt; 'show'
+        'controller' => 'archive',
+        'action' => 'show'
     ),
     array(
-        1 =&gt; 'year'
+        1 => 'year'
     )
 );
-$router-&gt;addRoute('archive', $route);
-</programlisting>
+$router->addRoute('archive', $route);
+]]></programlisting>
 
     <para>
         This will result in following values injected into Request:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $values = array(
-    'year'       =&gt; '2006',
-    'controller' =&gt; 'archive',
-    'action'     =&gt; 'show'
+    'year'       => '2006',
+    'controller' => 'archive',
+    'action'     => 'show'
 );
-</programlisting>
+]]></programlisting>
 
     <para>
         The map may be defined in either direction to make it work in any
         environment. Keys may contain variable names or subpattern indexes:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Regex(
     'archive/(\d+)',
     array( ... ),
-    array(1 =&gt; 'year')
+    array(1 => 'year')
 );
 
 // OR
@@ -161,9 +159,9 @@ $route = new Zend_Controller_Router_Route_Regex(
 $route = new Zend_Controller_Router_Route_Regex(
     'archive/(\d+)',
     array( ... ),
-    array('year' =&gt; 1)
+    array('year' => 1)
 );
-</programlisting>
+]]></programlisting>
 
     <note>
         <para>
@@ -177,13 +175,13 @@ $route = new Zend_Controller_Router_Route_Regex(
         variables if you wish:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Regex(
     'archive/(\d+)/page/(\d+)',
     array( ... ),
-    array('year' =&gt; 1)
+    array('year' => 1)
 );
-</programlisting>
+]]></programlisting>
 
     <para>
         Which will result in mixed values available in the Request. As an example, the
@@ -191,14 +189,14 @@ $route = new Zend_Controller_Router_Route_Regex(
         will result in following values:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $values = array(
-    'year'       =&gt; '2006',
-    2            =&gt; 10,
-    'controller' =&gt; 'archive',
-    'action'     =&gt; 'show'
+    'year'       => '2006',
+    2            => 10,
+    'controller' => 'archive',
+    'action'     => 'show'
 );
-</programlisting>
+]]></programlisting>
 
     <para>
         Since regex patterns are not easily reversed, you will need to prepare
@@ -207,14 +205,14 @@ $values = array(
         <methodname>sprintf()</methodname> and is defined as a fourth construct parameter:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Regex(
     'archive/(\d+)',
     array( ... ),
-    array('year' =&gt; 1),
+    array('year' => 1),
     'archive/%s'
 );
-</programlisting>
+]]></programlisting>
 
     <para>
         All of this is something which was already possible by the means of a
@@ -228,21 +226,21 @@ $route = new Zend_Controller_Router_Route_Regex(
         With the Regex route, you can do something like the following solution:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Regex(
     'blog/archive/(\d+)-(.+)\.html',
     array(
-        'controller' =&gt; 'blog',
-        'action'     =&gt; 'view'
+        'controller' => 'blog',
+        'action'     => 'view'
     ),
     array(
-        1 =&gt; 'id',
-        2 =&gt; 'description'
+        1 => 'id',
+        2 => 'description'
     ),
     'blog/archive/%d-%s.html'
 );
-$router-&gt;addRoute('blogArchive', $route);
-</programlisting>
+$router->addRoute('blogArchive', $route);
+]]></programlisting>
 
     <para>
         As you can see, this adds a tremendous amount of flexibility over the

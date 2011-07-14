@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.ebs"><info><title>Zend_Service_Amazon_Ec2: Elastic Block Storage (EBS)</title></info>
     
 
@@ -43,10 +41,10 @@
                 and createTime.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
-$return = $ec2_ebs-&gt;createNewVolume(40, 'us-east-1a');
-</programlisting>
+$return = $ec2_ebs->createNewVolume(40, 'us-east-1a');
+]]></programlisting>
         </example>
 
         <example xml:id="zend.service.amazon.ec2.ebs.creating.volumesnapshot"><info><title>Create an EBS Volume from a Snapshot</title></info>
@@ -63,10 +61,10 @@ $return = $ec2_ebs-&gt;createNewVolume(40, 'us-east-1a');
                 snapshotId.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
-$return = $ec2_ebs-&gt;createVolumeFromSnapshot('snap-78a54011', 'us-east-1a');
-</programlisting>
+$return = $ec2_ebs->createVolumeFromSnapshot('snap-78a54011', 'us-east-1a');
+]]></programlisting>
         </example>
 
         <example xml:id="zend.service.amazon.ec2.ebs.creating.snapshot"><info><title>Create a Snapshot of an EBS Volume</title></info>
@@ -82,10 +80,10 @@ $return = $ec2_ebs-&gt;createVolumeFromSnapshot('snap-78a54011', 'us-east-1a');
                 and progress.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
-$return = $ec2_ebs-&gt;createSnapshot('volumeId');
-</programlisting>
+$return = $ec2_ebs->createSnapshot('volumeId');
+]]></programlisting>
         </example>
     </section>
 
@@ -110,10 +108,10 @@ $return = $ec2_ebs-&gt;createSnapshot('volumeId');
                 which includes volumeId, instanceId, device, status and attachTime.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
-$return = $ec2_ebs-&gt;describeVolume('volumeId');
-</programlisting>
+$return = $ec2_ebs->describeVolume('volumeId');
+]]></programlisting>
         </example>
 
         <example xml:id="zend.service.amazon.ec2.ebs.describing.attachedvolumes"><info><title>Describe Attached Volumes</title></info>
@@ -131,10 +129,10 @@ $return = $ec2_ebs-&gt;describeVolume('volumeId');
                 to the specified instanceId.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
-$return = $ec2_ebs-&gt;describeAttachedVolumes('instanceId');
-</programlisting>
+$return = $ec2_ebs->describeAttachedVolumes('instanceId');
+]]></programlisting>
         </example>
 
         <example xml:id="zend.service.amazon.ec2.ebs.describing.snapshot"><info><title>Describe an EBS Volume Snapshot</title></info>
@@ -154,10 +152,10 @@ $return = $ec2_ebs-&gt;describeAttachedVolumes('instanceId');
                 progress.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
-$return = $ec2_ebs-&gt;describeSnapshot('volumeId');
-</programlisting>
+$return = $ec2_ebs->describeSnapshot('volumeId');
+]]></programlisting>
         </example>
     </section>
 
@@ -179,10 +177,10 @@ $return = $ec2_ebs-&gt;describeSnapshot('volumeId');
                 attachTime
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
-$return = $ec2_ebs-&gt;attachVolume('volumeId', 'instanceid', '/dev/sdh');
-</programlisting>
+$return = $ec2_ebs->attachVolume('volumeId', 'instanceid', '/dev/sdh');
+]]></programlisting>
         </example>
 
         <example xml:id="zend.service.amazon.ec2.ebs.attachdetach.detach"><info><title>Detaching an EBS Volume</title></info>
@@ -201,10 +199,10 @@ $return = $ec2_ebs-&gt;attachVolume('volumeId', 'instanceid', '/dev/sdh');
                 the EBS Volume which includes volumeId, instanceId, device, status and attachTime.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
-$return = $ec2_ebs-&gt;detachVolume('volumeId');
-</programlisting>
+$return = $ec2_ebs->detachVolume('volumeId');
+]]></programlisting>
         </example>
 
         <note><info><title>Forced Detach</title></info>
@@ -237,10 +235,10 @@ $return = $ec2_ebs-&gt;detachVolume('volumeId');
                 <constant>FALSE</constant>.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
-$return = $ec2_ebs-&gt;deleteVolume('volumeId');
-</programlisting>
+$return = $ec2_ebs->deleteVolume('volumeId');
+]]></programlisting>
         </example>
 
         <example xml:id="zend.service.amazon.ec2.ebs.deleting.snapshot"><info><title>Deleting an EBS Volume Snapshot</title></info>
@@ -255,10 +253,10 @@ $return = $ec2_ebs-&gt;deleteVolume('volumeId');
                 <constant>FALSE</constant>.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
-$return = $ec2_ebs-&gt;deleteSnapshot('snapshotId');
-</programlisting>
+$return = $ec2_ebs->deleteSnapshot('snapshotId');
+]]></programlisting>
         </example>
     </section>
 </section>

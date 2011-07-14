@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headstyle"><info><title>HeadStyle Helper</title></info>
     
 
@@ -71,10 +69,10 @@
         <example xml:id="zend.view.helpers.initial.headstyle.conditional"><info><title>Headstyle With Conditional Comments</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // adding scripts
-$this-&gt;headStyle()-&gt;appendStyle($styles, array('conditional' =&gt; 'lt IE 7'));
-</programlisting>
+$this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7'));
+]]></programlisting>
         </example>
     </note>
 
@@ -137,10 +135,10 @@ $this-&gt;headStyle()-&gt;appendStyle($styles, array('conditional' =&gt; 'lt IE 
             You may specify a new style tag at any time:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // adding styles
-$this-&gt;headStyle()-&gt;appendStyle($styles);
-</programlisting>
+$this->headStyle()->appendStyle($styles);
+]]></programlisting>
 
         <para>
             Order is very important with <acronym>CSS</acronym>; you may need to ensure that
@@ -149,27 +147,27 @@ $this-&gt;headStyle()-&gt;appendStyle($styles);
             to aid in this task:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Putting styles in order
 
 // place at a particular offset:
-$this-&gt;headStyle()-&gt;offsetSetStyle(100, $customStyles);
+$this->headStyle()->offsetSetStyle(100, $customStyles);
 
 // place at end:
-$this-&gt;headStyle()-&gt;appendStyle($finalStyles);
+$this->headStyle()->appendStyle($finalStyles);
 
 // place at beginning
-$this-&gt;headStyle()-&gt;prependStyle($firstStyles);
-</programlisting>
+$this->headStyle()->prependStyle($firstStyles);
+]]></programlisting>
 
         <para>
             When you're finally ready to output all style declarations in your
             layout script, simply echo the helper:
         </para>
 
-        <programlisting language="php">
-&lt;?php echo $this-&gt;headStyle() ?&gt;
-</programlisting>
+        <programlisting language="php"><![CDATA[
+<?php echo $this->headStyle() ?>
+]]></programlisting>
     </example>
 
     <example xml:id="zend.view.helpers.initial.headstyle.capture"><info><title>Capturing Style Declarations Using the HeadStyle Helper</title></info>
@@ -183,13 +181,13 @@ $this-&gt;headStyle()-&gt;prependStyle($firstStyles);
             <classname>HeadStyle</classname> lets you do just that, capturing it to the stack:
         </para>
 
-        <programlisting language="php">
-&lt;?php $this-&gt;headStyle()-&gt;captureStart() ?&gt;
+        <programlisting language="php"><![CDATA[
+<?php $this->headStyle()->captureStart() ?>
 body {
-    background-color: &lt;?php echo $this-&gt;bgColor ?&gt;;
+    background-color: <?php echo $this->bgColor ?>;
 }
-&lt;?php $this-&gt;headStyle()-&gt;captureEnd() ?&gt;
-</programlisting>
+<?php $this->headStyle()->captureEnd() ?>
+]]></programlisting>
 
         <para>
             The following assumptions are made:

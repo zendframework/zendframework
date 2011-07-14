@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.cookies"><info><title>Zend_Http_Cookie and Zend_Http_CookieJar</title></info>
     
 
@@ -140,7 +138,7 @@
             <example xml:id="zend.http.cookies.cookie.instantiating.example-1"><info><title>Instantiating a Zend_Http_Cookie object</title></info>
                
 
-               <programlisting language="php">
+               <programlisting language="php"><![CDATA[
 // First, using the constructor. This cookie will expire in 2 hours
 $cookie = new Zend_Http_Cookie('foo',
                                'bar',
@@ -157,7 +155,7 @@ $cookie = Zend_Http_Cookie::fromString('foo=bar; domain=.example.com; ' .
 // If the cookie's domain is not set, you have to manually specify it
 $cookie = Zend_Http_Cookie::fromString('foo=bar; secure;',
                                        'http://www.example.com/path');
-</programlisting>
+]]></programlisting>
             </example>
 
             <note>
@@ -179,7 +177,7 @@ $cookie = Zend_Http_Cookie::fromString('foo=bar; secure;',
             <example xml:id="zend.http.cookies.cookie.instantiating.example-2"><info><title>Stringifying a Zend_Http_Cookie object</title></info>
                
 
-               <programlisting language="php">
+               <programlisting language="php"><![CDATA[
 // Create a new cookie
 $cookie = new Zend_Http_Cookie('foo',
                                'two words',
@@ -188,14 +186,14 @@ $cookie = new Zend_Http_Cookie('foo',
                                '/path');
 
 // Will print out 'foo=two+words;' :
-echo $cookie-&gt;__toString();
+echo $cookie->__toString();
 
 // This is actually the same:
 echo (string) $cookie;
 
 // In PHP 5.2 and higher, this also works:
 echo $cookie;
-</programlisting>
+]]></programlisting>
             </example>
         </para>
     </section>
@@ -281,7 +279,7 @@ echo $cookie;
             <example xml:id="zend.http.cookies.cookie.accessors.example-1"><info><title>Using getter methods with Zend_Http_Cookie</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // First, create the cookie
 $cookie =
     Zend_Http_Cookie::fromString('foo=two+words; ' +
@@ -290,23 +288,23 @@ $cookie =
                                  'secure; ' +
                                  'expires=Wednesday, 28-Feb-05 20:41:22 UTC');
 
-echo $cookie-&gt;getName();   // Will echo 'foo'
-echo $cookie-&gt;getValue();  // will echo 'two words'
-echo $cookie-&gt;getDomain(); // Will echo '.example.com'
-echo $cookie-&gt;getPath();   // Will echo '/'
+echo $cookie->getName();   // Will echo 'foo'
+echo $cookie->getValue();  // will echo 'two words'
+echo $cookie->getDomain(); // Will echo '.example.com'
+echo $cookie->getPath();   // Will echo '/'
 
-echo date('Y-m-d', $cookie-&gt;getExpiryTime());
+echo date('Y-m-d', $cookie->getExpiryTime());
 // Will echo '2005-02-28'
 
-echo ($cookie-&gt;isExpired() ? 'Yes' : 'No');
+echo ($cookie->isExpired() ? 'Yes' : 'No');
 // Will echo 'Yes'
 
-echo ($cookie-&gt;isExpired(strtotime('2005-01-01') ? 'Yes' : 'No');
+echo ($cookie->isExpired(strtotime('2005-01-01') ? 'Yes' : 'No');
 // Will echo 'No'
 
-echo ($cookie-&gt;isSessionCookie() ? 'Yes' : 'No');
+echo ($cookie->isSessionCookie() ? 'Yes' : 'No');
 // Will echo 'No'
-</programlisting>
+]]></programlisting>
             </example>
         </para>
     </section>
@@ -354,29 +352,29 @@ echo ($cookie-&gt;isSessionCookie() ? 'Yes' : 'No');
             <example xml:id="zend.http.cookies.cookie.matching.example-1"><info><title>Matching cookies</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Create the cookie object - first, a secure session cookie
 $cookie = Zend_Http_Cookie::fromString('foo=two+words; ' +
                                        'domain=.example.com; ' +
                                        'path=/somedir; ' +
                                        'secure;');
 
-$cookie-&gt;match('https://www.example.com/somedir/foo.php');
+$cookie->match('https://www.example.com/somedir/foo.php');
 // Will return true
 
-$cookie-&gt;match('http://www.example.com/somedir/foo.php');
+$cookie->match('http://www.example.com/somedir/foo.php');
 // Will return false, because the connection is not secure
 
-$cookie-&gt;match('https://otherexample.com/somedir/foo.php');
+$cookie->match('https://otherexample.com/somedir/foo.php');
 // Will return false, because the domain is wrong
 
-$cookie-&gt;match('https://example.com/foo.php');
+$cookie->match('https://example.com/foo.php');
 // Will return false, because the path is wrong
 
-$cookie-&gt;match('https://www.example.com/somedir/foo.php', false);
+$cookie->match('https://www.example.com/somedir/foo.php', false);
 // Will return false, because session cookies are not matched
 
-$cookie-&gt;match('https://sub.domain.example.com/somedir/otherdir/foo.php');
+$cookie->match('https://sub.domain.example.com/somedir/otherdir/foo.php');
 // Will return true
 
 // Create another cookie object - now, not secure, with expiration time
@@ -386,20 +384,20 @@ $cookie = Zend_Http_Cookie::fromString('foo=two+words; ' +
                                        'expires='
                                        . date(DATE_COOKIE, time() + 7200));
 
-$cookie-&gt;match('http://www.example.com/');
+$cookie->match('http://www.example.com/');
 // Will return true
 
-$cookie-&gt;match('https://www.example.com/');
+$cookie->match('https://www.example.com/');
 // Will return true - non secure cookies can go over secure connections
 // as well!
 
-$cookie-&gt;match('http://subdomain.example.com/');
+$cookie->match('http://subdomain.example.com/');
 // Will return false, because the domain is wrong
 
-$cookie-&gt;match('http://www.example.com/', true, time() + (3 * 3600));
+$cookie->match('http://www.example.com/', true, time() + (3 * 3600));
 // Will return false, because we added a time offset of +3 hours to
 // current time
-</programlisting>
+]]></programlisting>
             </example>
         </para>
     </section>

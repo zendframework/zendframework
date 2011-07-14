@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.introduction"><info><title>Introduction</title></info>
     
 
@@ -41,33 +39,33 @@
     <example xml:id="zend.feed.introduction.example.rss"><info><title>Putting Zend_Feed to Work on RSS Feed Data</title></info>
         
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Fetch the latest Slashdot headlines
 try {
     $slashdotRss =
         Zend_Feed::import('http://rss.slashdot.org/Slashdot/slashdot');
 } catch (Zend_Feed_Exception $e) {
     // feed import failed
-    echo "Exception caught importing feed: {$e-&gt;getMessage()}\n";
+    echo "Exception caught importing feed: {$e->getMessage()}\n";
     exit;
 }
 
 // Initialize the channel data array
 $channel = array(
-    'title'       =&gt; $slashdotRss-&gt;title(),
-    'link'        =&gt; $slashdotRss-&gt;link(),
-    'description' =&gt; $slashdotRss-&gt;description(),
-    'items'       =&gt; array()
+    'title'       => $slashdotRss->title(),
+    'link'        => $slashdotRss->link(),
+    'description' => $slashdotRss->description(),
+    'items'       => array()
     );
 
 // Loop over each channel item and store relevant data
 foreach ($slashdotRss as $item) {
     $channel['items'][] = array(
-        'title'       =&gt; $item-&gt;title(),
-        'link'        =&gt; $item-&gt;link(),
-        'description' =&gt; $item-&gt;description()
+        'title'       => $item->title(),
+        'link'        => $item->link(),
+        'description' => $item->description()
         );
 }
-</programlisting>
+]]></programlisting>
     </example>
 </section>

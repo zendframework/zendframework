@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.writer.introduction"><info><title>Zend_Config_Writer</title></info>
     
 
@@ -71,37 +69,37 @@
             <classname>Zend_Config_Writer_Xml</classname> to create a new config file:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Create the config object
 $config = new Zend_Config(array(), true);
-$config-&gt;production = array();
-$config-&gt;staging    = array();
+$config->production = array();
+$config->staging    = array();
 
-$config-&gt;setExtend('staging', 'production');
+$config->setExtend('staging', 'production');
 
-$config-&gt;production-&gt;db = array();
-$config-&gt;production-&gt;db-&gt;hostname = 'localhost';
-$config-&gt;production-&gt;db-&gt;username = 'production';
+$config->production->db = array();
+$config->production->db->hostname = 'localhost';
+$config->production->db->username = 'production';
 
-$config-&gt;staging-&gt;db = array();
-$config-&gt;staging-&gt;db-&gt;username = 'staging';
+$config->staging->db = array();
+$config->staging->db->username = 'staging';
 
 // Write the config file in one of the following ways:
 // a)
-$writer = new Zend_Config_Writer_Xml(array('config'   =&gt; $config,
-                                           'filename' =&gt; 'config.xml'));
-$writer-&gt;write();
+$writer = new Zend_Config_Writer_Xml(array('config'   => $config,
+                                           'filename' => 'config.xml'));
+$writer->write();
 
 // b)
 $writer = new Zend_Config_Writer_Xml();
-$writer-&gt;setConfig($config)
-       -&gt;setFilename('config.xml')
-       -&gt;write();
+$writer->setConfig($config)
+       ->setFilename('config.xml')
+       ->write();
 
 // c)
 $writer = new Zend_Config_Writer_Xml();
-$writer-&gt;write('config.xml', $config);
-</programlisting>
+$writer->write('config.xml', $config);
+]]></programlisting>
 
         <para>
             This will create an <acronym>XML</acronym> config file with the sections production
@@ -116,21 +114,21 @@ $writer-&gt;write('config.xml', $config);
             This example demonstrates how to edit an existing config file.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Load all sections from an existing config file, while skipping the extends.
 $config = new Zend_Config_Ini('config.ini',
                               null,
-                              array('skipExtends'        =&gt; true,
-                                    'allowModifications' =&gt; true));
+                              array('skipExtends'        => true,
+                                    'allowModifications' => true));
 
 // Modify a value
-$config-&gt;production-&gt;hostname = 'foobar';
+$config->production->hostname = 'foobar';
 
 // Write the config file
-$writer = new Zend_Config_Writer_Ini(array('config'   =&gt; $config,
-                                           'filename' =&gt; 'config.ini'));
-$writer-&gt;write();
-</programlisting>
+$writer = new Zend_Config_Writer_Ini(array('config'   => $config,
+                                           'filename' => 'config.ini'));
+$writer->write();
+]]></programlisting>
     </example>
 
     <note><info><title>Loading a Config File</title></info>

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.client"><info><title>Introduction</title></info>
     
 
@@ -26,22 +24,22 @@
             <example xml:id="zend.http.client.introduction.example-1"><info><title>Instantiating a Zend_Http_Client Object</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $client = new Zend_Http_Client('http://example.org', array(
-    'maxredirects' =&gt; 0,
-    'timeout'      =&gt; 30));
+    'maxredirects' => 0,
+    'timeout'      => 30));
 
 // This is actually exactly the same:
 $client = new Zend_Http_Client();
-$client-&gt;setUri('http://example.org');
-$client-&gt;setConfig(array(
-    'maxredirects' =&gt; 0,
-    'timeout'      =&gt; 30));
+$client->setUri('http://example.org');
+$client->setConfig(array(
+    'maxredirects' => 0,
+    'timeout'      => 30));
 
 // You can also use a Zend_Config object to set the client's configuration
 $config = new Zend_Config_Ini('httpclient.ini', 'secure');
-$client-&gt;setConfig($config);
-</programlisting>
+$client->setConfig($config);
+]]></programlisting>
             </example>
 
             <note>
@@ -199,10 +197,10 @@ $client-&gt;setConfig($config);
             <example xml:id="zend.http.client.basic-requests.example-1"><info><title>Performing a Simple GET Request</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $client = new Zend_Http_Client('http://example.org');
-$response = $client-&gt;request();
-</programlisting>
+$response = $client->request();
+]]></programlisting>
             </example>
 
             The request() method takes one optional parameter - the request method.
@@ -230,14 +228,14 @@ $response = $client-&gt;request();
             <example xml:id="zend.http.client.basic-requests.example-2"><info><title>Using Request Methods Other Than GET</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Preforming a POST request
-$response = $client-&gt;request('POST');
+$response = $client->request('POST');
 
 // Yet another way of preforming a POST request
-$client-&gt;setMethod(Zend_Http_Client::POST);
-$response = $client-&gt;request();
-</programlisting>
+$client->setMethod(Zend_Http_Client::POST);
+$response = $client->request();
+]]></programlisting>
             </example>
         </para>
     </section>
@@ -258,20 +256,20 @@ $response = $client-&gt;request();
             <example xml:id="zend.http.client.parameters.example-1"><info><title>Setting GET Parameters</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Setting a get parameter using the setParameterGet method
-$client-&gt;setParameterGet('knight', 'lancelot');
+$client->setParameterGet('knight', 'lancelot');
 
 // This is equivalent to setting such URL:
-$client-&gt;setUri('http://example.com/index.php?knight=lancelot');
+$client->setUri('http://example.com/index.php?knight=lancelot');
 
 // Adding several parameters with one call
-$client-&gt;setParameterGet(array(
-    'first_name'  =&gt; 'Bender',
-    'middle_name' =&gt; 'Bending'
-    'made_in'     =&gt; 'Mexico',
+$client->setParameterGet(array(
+    'first_name'  => 'Bender',
+    'middle_name' => 'Bending'
+    'made_in'     => 'Mexico',
 ));
-</programlisting>
+]]></programlisting>
             </example>
         </para>
 
@@ -285,17 +283,17 @@ $client-&gt;setParameterGet(array(
             <example xml:id="zend.http.client.parameters.example-2"><info><title>Setting POST Parameters</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Setting a POST parameter
-$client-&gt;setParameterPost('language', 'fr');
+$client->setParameterPost('language', 'fr');
 
 // Setting several POST parameters, one of them with several values
-$client-&gt;setParameterPost(array(
-    'language'  =&gt; 'es',
-    'country'   =&gt; 'ar',
-    'selection' =&gt; array(45, 32, 80)
+$client->setParameterPost(array(
+    'language'  => 'es',
+    'country'   => 'ar',
+    'selection' => array(45, 32, 80)
 ));
-</programlisting>
+]]></programlisting>
             </example>
 
             Note that when sending POST requests, you can set both <constant>GET</constant> and

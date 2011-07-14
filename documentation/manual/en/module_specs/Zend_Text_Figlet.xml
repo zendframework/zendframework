@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.text.figlet"><info><title>Zend_Text_Figlet</title></info>
     
 
@@ -118,22 +116,22 @@
             to create a simple FIGlet text:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $figlet = new Zend_Text_Figlet();
-echo $figlet-&gt;render('Zend');
-</programlisting>
+echo $figlet->render('Zend');
+]]></programlisting>
 
         <para>
             Assuming you are using a monospace font, this would look as follows:
         </para>
 
-        <programlisting language="text">
+        <programlisting language="text"><![CDATA[
   ______    ______    _  __   ______
  |__  //   |  ___||  | \| || |  __ \\
    / //    | ||__    |  ' || | |  \ ||
   / //__   | ||___   | .  || | |__/ ||
  /_____||  |_____||  |_|\_|| |_____//
  `-----`'  `-----`   `-` -`'  -----`
-</programlisting>
+]]></programlisting>
     </example>
 </section>

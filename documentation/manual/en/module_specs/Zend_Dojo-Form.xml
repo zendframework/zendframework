@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.form"><info><title>Dojo Form Elements and Decorators</title></info>
     
 
@@ -73,7 +71,7 @@
             them:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class My_Form_Custom extends Zend_Form
 {
     public function init()
@@ -84,12 +82,12 @@ class My_Form_Custom extends Zend_Form
         // ... continue form definition from here
 
         // Dojo-enable all sub forms:
-        foreach ($this-&gt;getSubForms() as $subForm) {
+        foreach ($this->getSubForms() as $subForm) {
             Zend_Dojo::enableForm($subForm);
         }
     }
 }
-</programlisting>
+]]></programlisting>
     </example>
 
     <para>

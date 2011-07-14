@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.hostname"><info><title>Hostname</title></info>
     
 
@@ -60,17 +58,17 @@
             A basic example of usage is below:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Hostname();
-if ($validator-&gt;isValid($hostname)) {
+if ($validator->isValid($hostname)) {
     // hostname appears to be valid
 } else {
     // hostname is invalid; print the reasons
-    foreach ($validator-&gt;getMessages() as $message) {
+    foreach ($validator->getMessages() as $message) {
         echo "$message\n";
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             This will match the hostname <varname>$hostname</varname> and on failure populate
@@ -111,17 +109,17 @@ if ($validator-&gt;isValid($hostname)) {
             To just check for IP addresses you can use the example below:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_IP);
-if ($validator-&gt;isValid($hostname)) {
+if ($validator->isValid($hostname)) {
     // hostname appears to be valid
 } else {
     // hostname is invalid; print the reasons
-    foreach ($validator-&gt;getMessages() as $message) {
+    foreach ($validator->getMessages() as $message) {
         echo "$message\n";
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             As well as using <constant>ALLOW_ALL</constant> to accept all common hostnames types
@@ -130,10 +128,10 @@ if ($validator-&gt;isValid($hostname)) {
             <classname>Zend_Validate_Hostname</classname> object as so:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
                                         Zend_Validate_Hostname::ALLOW_IP);
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.validate.set.hostname.idn"><info><title>Validating International Domains Names</title></info>
@@ -168,15 +166,15 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
             <classname>Zend_Validate_Hostname</classname> constructor in the following way.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $validator =
     new Zend_Validate_Hostname(
         array(
-            'allow' =&gt; Zend_Validate_Hostname::ALLOW_DNS,
-            'idn'   =&gt; false
+            'allow' => Zend_Validate_Hostname::ALLOW_DNS,
+            'idn'   => false
         )
     );
-</programlisting>
+]]></programlisting>
 
         <para>
             Alternatively you can either pass <constant>TRUE</constant> or
@@ -210,16 +208,16 @@ $validator =
             supporting <acronym>IDN</acronym> validation via the second parameter.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $validator =
     new Zend_Validate_Hostname(
         array(
-            'allow' =&gt; Zend_Validate_Hostname::ALLOW_DNS,
-            'idn'   =&gt; true,
-            'tld'   =&gt; false
+            'allow' => Zend_Validate_Hostname::ALLOW_DNS,
+            'idn'   => true,
+            'tld'   => false
         )
     );
-</programlisting>
+]]></programlisting>
 
         <para>
             Alternatively you can either pass <constant>TRUE</constant> or

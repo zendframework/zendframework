@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.doctype"><info><title>Doctype Helper</title></info>
     
 
@@ -48,18 +46,18 @@
             bootstrap:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $doctypeHelper = new Zend_View_Helper_Doctype();
-$doctypeHelper-&gt;doctype('XHTML1_STRICT');
-</programlisting>
+$doctypeHelper->doctype('XHTML1_STRICT');
+]]></programlisting>
 
         <para>
             And then print it out on top of your layout script:
         </para>
 
-        <programlisting language="php">
-&lt;?php echo $this-&gt;doctype() ?&gt;
-</programlisting>
+        <programlisting language="php"><![CDATA[
+<?php echo $this->doctype() ?>
+]]></programlisting>
     </example>
 
     <example xml:id="zend.view.helpers.initial.doctype.retrieving"><info><title>Retrieving the Doctype</title></info>
@@ -71,29 +69,29 @@ $doctypeHelper-&gt;doctype('XHTML1_STRICT');
             invoking the helper.
         </para>
 
-        <programlisting language="php">
-$doctype = $view-&gt;doctype()-&gt;getDoctype();
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$doctype = $view->doctype()->getDoctype();
+]]></programlisting>
 
         <para>
             Typically, you'll simply want to know if the doctype is <acronym>XHTML</acronym> or
             not; for this, the <methodname>isXhtml()</methodname> method will suffice:
         </para>
 
-        <programlisting language="php">
-if ($view-&gt;doctype()-&gt;isXhtml()) {
+        <programlisting language="php"><![CDATA[
+if ($view->doctype()->isXhtml()) {
     // do something differently
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             You can also check if the doctype represents an <acronym>HTML5</acronym> document
         </para>
 
-        <programlisting language="php">
-if ($view-&gt;doctype()-&gt;isHtml5()) {
+        <programlisting language="php"><![CDATA[
+if ($view->doctype()->isHtml5()) {
     // do something differently
 }
-</programlisting>
+]]></programlisting>
     </example>
 </section>

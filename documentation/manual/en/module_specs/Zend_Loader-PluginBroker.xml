@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.plugin-broker"><info><title>The PluginBroker</title></info>
     
 
@@ -65,12 +63,12 @@
             and then retrieve a given plugin, optionally passing in constructor arguments.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 use Zend\View\HelperBroker;
 $broker    = new HelperBroker();
-$urlHelper = $broker-&gt;load('url', array('router' =&gt; $router));
-echo $urlHelper-&gt;simple('sign', 'guestbook');
-</programlisting>
+$urlHelper = $broker->load('url', array('router' => $router));
+echo $urlHelper->simple('sign', 'guestbook');
+]]></programlisting>
 
         <para>
             You can seed the broker as well, using the <methodname>register()</methodname> method.
@@ -78,9 +76,9 @@ echo $urlHelper-&gt;simple('sign', 'guestbook');
             when you want to manually configure it before injecting it into the broker.
         </para>
 
-        <programlisting language="php">
-$broker-&gt;register('url', $urlHelper);
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$broker->register('url', $urlHelper);
+]]></programlisting>
     </section>
 
     <section xml:id="zend.loader.plugin-broker.options"><info><title>Configuration Options</title></info>
@@ -371,11 +369,11 @@ $broker-&gt;register('url', $urlHelper);
                     implementing <interfacename>Traversable</interfacename>:
                 </para>
 
-                <programlisting language="php">
-$broker-&gt;setValidator(function($plugin) {
+                <programlisting language="php"><![CDATA[
+$broker->setValidator(function($plugin) {
     return ($plugin instanceof \Traversable);
 });
-</programlisting>
+]]></programlisting>
 
                 <para>
                     Passing a null value will clear the validator; otherwise, the method expects any
@@ -425,20 +423,20 @@ $broker-&gt;setValidator(function($plugin) {
                 <interfacename>ArrayAccess</interfacename>.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 use Zend\Loader\PluginBroker,
     My\Entity\HelperLoader;
 
 // Assume My\Entity\HelperLoader is a PluginClassLoader instance
 $broker = new PluginBroker();
-$broker-&gt;setClassLoader(new HelperLoader)
-       -&gt;setValidator(function($plugin) {
+$broker->setClassLoader(new HelperLoader)
+       ->setValidator(function($plugin) {
            return (
                ($plugin instanceof \Traversable)
-               &amp;&amp; ($plugin instanceof \ArrayAccess)
+               && ($plugin instanceof \ArrayAccess)
            );
        });
-</programlisting>
+]]></programlisting>
 
             <para>
                 Any plugins loaded that do not satisfy that criteria will no raise an exception in
@@ -477,7 +475,7 @@ $broker-&gt;setClassLoader(new HelperLoader)
                 plugin broker class.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 namespace My\Entity;
 
 use Zend\Loader\PluginBroker;
@@ -490,11 +488,11 @@ class HelperBroker extends PluginBroker
     {
         return (
             ($plugin instanceof \Traversable)
-            &amp;&amp; ($plugin instanceof \ArrayAccess)
+            && ($plugin instanceof \ArrayAccess)
         );
     }
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 You may now use this class as a plugin broker anywhere in your code, typehint on it,

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.load"><info><title>Loading Files and Classes Dynamically</title></info>
     
 
@@ -24,9 +22,9 @@
         <example xml:id="zend.loader.load.file.example"><info><title>Example of the loadFile() Method</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 Zend_Loader::loadFile($filename, $dirs=null, $once=false);
-</programlisting>
+]]></programlisting>
     </example>
 
         <para>
@@ -67,11 +65,11 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
         <example xml:id="zend.loader.load.isreadable.example"><info><title>Example of isReadable() method</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 if (Zend_Loader::isReadable($filename)) {
     // do something with $filename
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>

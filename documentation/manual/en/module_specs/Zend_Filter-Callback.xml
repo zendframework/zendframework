@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.callback"><info><title>Callback</title></info>
     
 
@@ -42,12 +40,12 @@
             reverses a string.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Callback('strrev');
 
-print $filter-&gt;filter('Hello!');
+print $filter->filter('Hello!');
 // returns "!olleH"
-</programlisting>
+]]></programlisting>
 
         <para>
             As you can see it's really simple to use a callback to define a own filter. It is also
@@ -55,7 +53,7 @@ print $filter-&gt;filter('Hello!');
             callback.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Our classdefinition
 class MyClass
 {
@@ -64,8 +62,8 @@ class MyClass
 
 // The filter definition
 $filter = new Zend_Filter_Callback(array('MyClass', 'Reverse'));
-print $filter-&gt;filter('Hello!');
-</programlisting>
+print $filter->filter('Hello!');
+]]></programlisting>
 
         <para>
             To get the actual set callback use <methodname>getCallback()</methodname> and to set
@@ -91,22 +89,22 @@ print $filter-&gt;filter('Hello!');
             which will be filtered.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Callback(
     array(
-        'callback' =&gt; 'MyMethod',
-        'options'  =&gt; array('key' =&gt; 'param1', 'key2' =&gt; 'param2')
+        'callback' => 'MyMethod',
+        'options'  => array('key' => 'param1', 'key2' => 'param2')
     )
 );
-$filter-&gt;filter(array('value' =&gt; 'Hello'));
-</programlisting>
+$filter->filter(array('value' => 'Hello'));
+]]></programlisting>
 
         <para>
             When you would call the above method definition manually it would look like this:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $value = MyMethod('Hello', 'param1', 'param2');
-</programlisting>
+]]></programlisting>
     </section>
 </section>

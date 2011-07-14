@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.advanced"><info><title>Advanced Zend_Form Usage</title></info>
     
 
@@ -22,57 +20,57 @@
             for example:
         </para>
 
-        <programlisting language="html">
-&lt;form&gt;
-    &lt;fieldset&gt;
-        &lt;legend&gt;Shipping Address&lt;/legend&gt;
-        &lt;dl&gt;
-            &lt;dt&gt;&lt;label for="recipient"&gt;Ship to:&lt;/label&gt;&lt;/dt&gt;
-            &lt;dd&gt;&lt;input name="recipient" type="text" value="" /&gt;&lt;/dd&gt;
+        <programlisting language="html"><![CDATA[
+<form>
+    <fieldset>
+        <legend>Shipping Address</legend>
+        <dl>
+            <dt><label for="recipient">Ship to:</label></dt>
+            <dd><input name="recipient" type="text" value="" /></dd>
 
-            &lt;dt&gt;&lt;label for="address"&gt;Address:&lt;/label&gt;&lt;/dt&gt;
-            &lt;dd&gt;&lt;input name="address" type="text" value="" /&gt;&lt;/dd&gt;
+            <dt><label for="address">Address:</label></dt>
+            <dd><input name="address" type="text" value="" /></dd>
 
-            &lt;dt&gt;&lt;label for="municipality"&gt;City:&lt;/label&gt;&lt;/dt&gt;
-            &lt;dd&gt;&lt;input name="municipality" type="text" value="" /&gt;&lt;/dd&gt;
+            <dt><label for="municipality">City:</label></dt>
+            <dd><input name="municipality" type="text" value="" /></dd>
 
-            &lt;dt&gt;&lt;label for="province"&gt;State:&lt;/label&gt;&lt;/dt&gt;
-            &lt;dd&gt;&lt;input name="province" type="text" value="" /&gt;&lt;/dd&gt;
+            <dt><label for="province">State:</label></dt>
+            <dd><input name="province" type="text" value="" /></dd>
 
-            &lt;dt&gt;&lt;label for="postal"&gt;Postal Code:&lt;/label&gt;&lt;/dt&gt;
-            &lt;dd&gt;&lt;input name="postal" type="text" value="" /&gt;&lt;/dd&gt;
-        &lt;/dl&gt;
-    &lt;/fieldset&gt;
+            <dt><label for="postal">Postal Code:</label></dt>
+            <dd><input name="postal" type="text" value="" /></dd>
+        </dl>
+    </fieldset>
 
-    &lt;fieldset&gt;
-        &lt;legend&gt;Billing Address&lt;/legend&gt;
-        &lt;dl&gt;
-            &lt;dt&gt;&lt;label for="payer"&gt;Bill To:&lt;/label&gt;&lt;/dt&gt;
-            &lt;dd&gt;&lt;input name="payer" type="text" value="" /&gt;&lt;/dd&gt;
+    <fieldset>
+        <legend>Billing Address</legend>
+        <dl>
+            <dt><label for="payer">Bill To:</label></dt>
+            <dd><input name="payer" type="text" value="" /></dd>
 
-            &lt;dt&gt;&lt;label for="address"&gt;Address:&lt;/label&gt;&lt;/dt&gt;
-            &lt;dd&gt;&lt;input name="address" type="text" value="" /&gt;&lt;/dd&gt;
+            <dt><label for="address">Address:</label></dt>
+            <dd><input name="address" type="text" value="" /></dd>
 
-            &lt;dt&gt;&lt;label for="municipality"&gt;City:&lt;/label&gt;&lt;/dt&gt;
-            &lt;dd&gt;&lt;input name="municipality" type="text" value="" /&gt;&lt;/dd&gt;
+            <dt><label for="municipality">City:</label></dt>
+            <dd><input name="municipality" type="text" value="" /></dd>
 
-            &lt;dt&gt;&lt;label for="province"&gt;State:&lt;/label&gt;&lt;/dt&gt;
-            &lt;dd&gt;&lt;input name="province" type="text" value="" /&gt;&lt;/dd&gt;
+            <dt><label for="province">State:</label></dt>
+            <dd><input name="province" type="text" value="" /></dd>
 
-            &lt;dt&gt;&lt;label for="postal"&gt;Postal Code:&lt;/label&gt;&lt;/dt&gt;
-            &lt;dd&gt;&lt;input name="postal" type="text" value="" /&gt;&lt;/dd&gt;
-        &lt;/dl&gt;
-    &lt;/fieldset&gt;
+            <dt><label for="postal">Postal Code:</label></dt>
+            <dd><input name="postal" type="text" value="" /></dd>
+        </dl>
+    </fieldset>
 
-    &lt;dl&gt;
-        &lt;dt&gt;&lt;label for="terms"&gt;I agree to the Terms of Service&lt;/label&gt;&lt;/dt&gt;
-        &lt;dd&gt;&lt;input name="terms" type="checkbox" value="" /&gt;&lt;/dd&gt;
+    <dl>
+        <dt><label for="terms">I agree to the Terms of Service</label></dt>
+        <dd><input name="terms" type="checkbox" value="" /></dd>
 
-        &lt;dt&gt;&lt;/dt&gt;
-        &lt;dd&gt;&lt;input name="save" type="submit" value="Save" /&gt;&lt;/dd&gt;
-    &lt;/dl&gt;
-&lt;/form&gt;
-</programlisting>
+        <dt></dt>
+        <dd><input name="save" type="submit" value="Save" /></dd>
+    </dl>
+</form>
+]]></programlisting>
 
         <para>
             In this example, the billing and shipping address contain some
@@ -80,67 +78,67 @@
             solve this solution using array notation:
         </para>
 
-        <programlisting language="html">
-&lt;form&gt;
-    &lt;fieldset&gt;
-        &lt;legend&gt;Shipping Address&lt;/legend&gt;
-        &lt;dl&gt;
-            &lt;dt&gt;&lt;label for="shipping-recipient"&gt;Ship to:&lt;/label&gt;&lt;/dt&gt;
-            &lt;dd&gt;&lt;input name="shipping[recipient]" id="shipping-recipient"
-                type="text" value="" /&gt;&lt;/dd&gt;
+        <programlisting language="html"><![CDATA[
+<form>
+    <fieldset>
+        <legend>Shipping Address</legend>
+        <dl>
+            <dt><label for="shipping-recipient">Ship to:</label></dt>
+            <dd><input name="shipping[recipient]" id="shipping-recipient"
+                type="text" value="" /></dd>
 
-            &lt;dt&gt;&lt;label for="shipping-address"&gt;Address:&lt;/label&gt;&lt;/dt&gt;
-            &lt;dd&gt;&lt;input name="shipping[address]" id="shipping-address"
-                type="text" value="" /&gt;&lt;/dd&gt;
+            <dt><label for="shipping-address">Address:</label></dt>
+            <dd><input name="shipping[address]" id="shipping-address"
+                type="text" value="" /></dd>
 
-            &lt;dt&gt;&lt;label for="shipping-municipality"&gt;City:&lt;/label&gt;&lt;/dt&gt;
-            &lt;dd&gt;&lt;input name="shipping[municipality]" id="shipping-municipality"
-                type="text" value="" /&gt;&lt;/dd&gt;
+            <dt><label for="shipping-municipality">City:</label></dt>
+            <dd><input name="shipping[municipality]" id="shipping-municipality"
+                type="text" value="" /></dd>
 
-            &lt;dt&gt;&lt;label for="shipping-province"&gt;State:&lt;/label&gt;&lt;/dt&gt;
-            &lt;dd&gt;&lt;input name="shipping[province]" id="shipping-province"
-                type="text" value="" /&gt;&lt;/dd&gt;
+            <dt><label for="shipping-province">State:</label></dt>
+            <dd><input name="shipping[province]" id="shipping-province"
+                type="text" value="" /></dd>
 
-            &lt;dt&gt;&lt;label for="shipping-postal"&gt;Postal Code:&lt;/label&gt;&lt;/dt&gt;
-            &lt;dd&gt;&lt;input name="shipping[postal]" id="shipping-postal"
-                type="text" value="" /&gt;&lt;/dd&gt;
-        &lt;/dl&gt;
-    &lt;/fieldset&gt;
+            <dt><label for="shipping-postal">Postal Code:</label></dt>
+            <dd><input name="shipping[postal]" id="shipping-postal"
+                type="text" value="" /></dd>
+        </dl>
+    </fieldset>
 
-    &lt;fieldset&gt;
-        &lt;legend&gt;Billing Address&lt;/legend&gt;
-        &lt;dl&gt;
-            &lt;dt&gt;&lt;label for="billing-payer"&gt;Bill To:&lt;/label&gt;&lt;/dt&gt;
-            &lt;dd&gt;&lt;input name="billing[payer]" id="billing-payer"
-                type="text" value="" /&gt;&lt;/dd&gt;
+    <fieldset>
+        <legend>Billing Address</legend>
+        <dl>
+            <dt><label for="billing-payer">Bill To:</label></dt>
+            <dd><input name="billing[payer]" id="billing-payer"
+                type="text" value="" /></dd>
 
-            &lt;dt&gt;&lt;label for="billing-address"&gt;Address:&lt;/label&gt;&lt;/dt&gt;
-            &lt;dd&gt;&lt;input name="billing[address]" id="billing-address"
-                type="text" value="" /&gt;&lt;/dd&gt;
+            <dt><label for="billing-address">Address:</label></dt>
+            <dd><input name="billing[address]" id="billing-address"
+                type="text" value="" /></dd>
 
-            &lt;dt&gt;&lt;label for="billing-municipality"&gt;City:&lt;/label&gt;&lt;/dt&gt;
-            &lt;dd&gt;&lt;input name="billing[municipality]" id="billing-municipality"
-                type="text" value="" /&gt;&lt;/dd&gt;
+            <dt><label for="billing-municipality">City:</label></dt>
+            <dd><input name="billing[municipality]" id="billing-municipality"
+                type="text" value="" /></dd>
 
-            &lt;dt&gt;&lt;label for="billing-province"&gt;State:&lt;/label&gt;&lt;/dt&gt;
-            &lt;dd&gt;&lt;input name="billing[province]" id="billing-province"
-                type="text" value="" /&gt;&lt;/dd&gt;
+            <dt><label for="billing-province">State:</label></dt>
+            <dd><input name="billing[province]" id="billing-province"
+                type="text" value="" /></dd>
 
-            &lt;dt&gt;&lt;label for="billing-postal"&gt;Postal Code:&lt;/label&gt;&lt;/dt&gt;
-            &lt;dd&gt;&lt;input name="billing[postal]" id="billing-postal"
-                type="text" value="" /&gt;&lt;/dd&gt;
-        &lt;/dl&gt;
-    &lt;/fieldset&gt;
+            <dt><label for="billing-postal">Postal Code:</label></dt>
+            <dd><input name="billing[postal]" id="billing-postal"
+                type="text" value="" /></dd>
+        </dl>
+    </fieldset>
 
-    &lt;dl&gt;
-        &lt;dt&gt;&lt;label for="terms"&gt;I agree to the Terms of Service&lt;/label&gt;&lt;/dt&gt;
-        &lt;dd&gt;&lt;input name="terms" type="checkbox" value="" /&gt;&lt;/dd&gt;
+    <dl>
+        <dt><label for="terms">I agree to the Terms of Service</label></dt>
+        <dd><input name="terms" type="checkbox" value="" /></dd>
 
-        &lt;dt&gt;&lt;/dt&gt;
-        &lt;dd&gt;&lt;input name="save" type="submit" value="Save" /&gt;&lt;/dd&gt;
-    &lt;/dl&gt;
-&lt;/form&gt;
-</programlisting>
+        <dt></dt>
+        <dd><input name="save" type="submit" value="Save" /></dd>
+    </dl>
+</form>
+]]></programlisting>
 
         <para>
             In the above sample, we now get separate addresses. In the submitted
@@ -242,19 +240,19 @@
                 within it:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class My_Form_Registration extends Zend_Form
 {
     public function init()
     {
         // Create user sub form: username and password
         $user = new Zend_Form_SubForm();
-        $user-&gt;addElements(array(
+        $user->addElements(array(
             new Zend_Form_Element_Text('username', array(
-                'required'   =&gt; true,
-                'label'      =&gt; 'Username:',
-                'filters'    =&gt; array('StringTrim', 'StringToLower'),
-                'validators' =&gt; array(
+                'required'   => true,
+                'label'      => 'Username:',
+                'filters'    => array('StringTrim', 'StringToLower'),
+                'validators' => array(
                     'Alnum',
                     array('Regex',
                           false,
@@ -263,10 +261,10 @@ class My_Form_Registration extends Zend_Form
             )),
 
             new Zend_Form_Element_Password('password', array(
-                'required'   =&gt; true,
-                'label'      =&gt; 'Password:',
-                'filters'    =&gt; array('StringTrim'),
-                'validators' =&gt; array(
+                'required'   => true,
+                'label'      => 'Password:',
+                'filters'    => array('StringTrim'),
+                'validators' => array(
                     'NotEmpty',
                     array('StringLength', false, array(6))
                 )
@@ -276,12 +274,12 @@ class My_Form_Registration extends Zend_Form
         // Create demographics sub form: given name, family name, and
         // location
         $demog = new Zend_Form_SubForm();
-        $demog-&gt;addElements(array(
+        $demog->addElements(array(
             new Zend_Form_Element_Text('givenName', array(
-                'required'   =&gt; true,
-                'label'      =&gt; 'Given (First) Name:',
-                'filters'    =&gt; array('StringTrim'),
-                'validators' =&gt; array(
+                'required'   => true,
+                'label'      => 'Given (First) Name:',
+                'filters'    => array('StringTrim'),
+                'validators' => array(
                     array('Regex',
                           false,
                           array('/^[a-z][a-z0-9., \'-]{2,}$/i'))
@@ -289,10 +287,10 @@ class My_Form_Registration extends Zend_Form
             )),
 
             new Zend_Form_Element_Text('familyName', array(
-                'required'   =&gt; true,
-                'label'      =&gt; 'Family (Last) Name:',
-                'filters'    =&gt; array('StringTrim'),
-                'validators' =&gt; array(
+                'required'   => true,
+                'label'      => 'Family (Last) Name:',
+                'filters'    => array('StringTrim'),
+                'validators' => array(
                     array('Regex',
                           false,
                           array('/^[a-z][a-z0-9., \'-]{2,}$/i'))
@@ -300,10 +298,10 @@ class My_Form_Registration extends Zend_Form
             )),
 
             new Zend_Form_Element_Text('location', array(
-                'required'   =&gt; true,
-                'label'      =&gt; 'Your Location:',
-                'filters'    =&gt; array('StringTrim'),
-                'validators' =&gt; array(
+                'required'   => true,
+                'label'      => 'Your Location:',
+                'filters'    => array('StringTrim'),
+                'validators' => array(
                     array('StringLength', false, array(2))
                 )
             )),
@@ -311,21 +309,21 @@ class My_Form_Registration extends Zend_Form
 
         // Create mailing lists sub form
         $listOptions = array(
-            'none'        =&gt; 'No lists, please',
-            'fw-general'  =&gt; 'Zend Framework General List',
-            'fw-mvc'      =&gt; 'Zend Framework MVC List',
-            'fw-auth'     =&gt; 'Zend Framwork Authentication and ACL List',
-            'fw-services' =&gt; 'Zend Framework Web Services List',
+            'none'        => 'No lists, please',
+            'fw-general'  => 'Zend Framework General List',
+            'fw-mvc'      => 'Zend Framework MVC List',
+            'fw-auth'     => 'Zend Framwork Authentication and ACL List',
+            'fw-services' => 'Zend Framework Web Services List',
         );
         $lists = new Zend_Form_SubForm();
-        $lists-&gt;addElements(array(
+        $lists->addElements(array(
             new Zend_Form_Element_MultiCheckbox('subscriptions', array(
-                'label'        =&gt;
+                'label'        =>
                     'Which lists would you like to subscribe to?',
-                'multiOptions' =&gt; $listOptions,
-                'required'     =&gt; true,
-                'filters'      =&gt; array('StringTrim'),
-                'validators'   =&gt; array(
+                'multiOptions' => $listOptions,
+                'required'     => true,
+                'filters'      => array('StringTrim'),
+                'validators'   => array(
                     array('InArray',
                           false,
                           array(array_keys($listOptions)))
@@ -334,14 +332,14 @@ class My_Form_Registration extends Zend_Form
         ));
 
         // Attach sub forms to main form
-        $this-&gt;addSubForms(array(
-            'user'  =&gt; $user,
-            'demog' =&gt; $demog,
-            'lists' =&gt; $lists
+        $this->addSubForms(array(
+            'user'  => $user,
+            'demog' => $demog,
+            'lists' => $lists
         ));
     }
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 Note that there are no submit buttons, and that we have done
@@ -353,7 +351,7 @@ class My_Form_Registration extends Zend_Form
                 some scaffolding to our class to provide that information:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class My_Form_Registration extends Zend_Form
 {
     // ...
@@ -367,16 +365,16 @@ class My_Form_Registration extends Zend_Form
     public function prepareSubForm($spec)
     {
         if (is_string($spec)) {
-            $subForm = $this-&gt;{$spec};
+            $subForm = $this->{$spec};
         } elseif ($spec instanceof Zend_Form_SubForm) {
             $subForm = $spec;
         } else {
             throw new Exception('Invalid argument passed to ' .
                                 __FUNCTION__ . '()');
         }
-        $this-&gt;setSubFormDecorators($subForm)
-             -&gt;addSubmitButton($subForm)
-             -&gt;addSubFormActions($subForm);
+        $this->setSubFormDecorators($subForm)
+             ->addSubmitButton($subForm)
+             ->addSubFormActions($subForm);
         return $subForm;
     }
 
@@ -388,10 +386,10 @@ class My_Form_Registration extends Zend_Form
      */
     public function setSubFormDecorators(Zend_Form_SubForm $subForm)
     {
-        $subForm-&gt;setDecorators(array(
+        $subForm->setDecorators(array(
             'FormElements',
-            array('HtmlTag', array('tag' =&gt; 'dl',
-                                   'class' =&gt; 'zend_form')),
+            array('HtmlTag', array('tag' => 'dl',
+                                   'class' => 'zend_form')),
             'Form',
         ));
         return $this;
@@ -405,12 +403,12 @@ class My_Form_Registration extends Zend_Form
      */
     public function addSubmitButton(Zend_Form_SubForm $subForm)
     {
-        $subForm-&gt;addElement(new Zend_Form_Element_Submit(
+        $subForm->addElement(new Zend_Form_Element_Submit(
             'save',
             array(
-                'label'    =&gt; 'Save and continue',
-                'required' =&gt; false,
-                'ignore'   =&gt; true,
+                'label'    => 'Save and continue',
+                'required' => false,
+                'ignore'   => true,
             )
         ));
         return $this;
@@ -424,12 +422,12 @@ class My_Form_Registration extends Zend_Form
      */
     public function addSubFormActions(Zend_Form_SubForm $subForm)
     {
-        $subForm-&gt;setAction('/registration/process')
-                -&gt;setMethod('post');
+        $subForm->setAction('/registration/process')
+                ->setMethod('post');
         return $this;
     }
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 Next, we need to add some scaffolding in our action controller,
@@ -447,20 +445,20 @@ class My_Form_Registration extends Zend_Form
                 form instance:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class RegistrationController extends Zend_Controller_Action
 {
     protected $_form;
 
     public function getForm()
     {
-        if (null === $this-&gt;_form) {
-            $this-&gt;_form = new My_Form_Registration();
+        if (null === $this->_form) {
+            $this->_form = new My_Form_Registration();
         }
-        return $this-&gt;_form;
+        return $this->_form;
     }
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 Now, let's add some functionality for determining which form to
@@ -472,7 +470,7 @@ class RegistrationController extends Zend_Controller_Action
                 representing each subform.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class RegistrationController extends Zend_Controller_Action
 {
     // ...
@@ -487,12 +485,12 @@ class RegistrationController extends Zend_Controller_Action
      */
     public function getSessionNamespace()
     {
-        if (null === $this-&gt;_session) {
-            $this-&gt;_session =
-                new Zend_Session_Namespace($this-&gt;_namespace);
+        if (null === $this->_session) {
+            $this->_session =
+                new Zend_Session_Namespace($this->_namespace);
         }
 
-        return $this-&gt;_session;
+        return $this->_session;
     }
 
     /**
@@ -503,7 +501,7 @@ class RegistrationController extends Zend_Controller_Action
     public function getStoredForms()
     {
         $stored = array();
-        foreach ($this-&gt;getSessionNamespace() as $key =&gt; $value) {
+        foreach ($this->getSessionNamespace() as $key => $value) {
             $stored[] = $key;
         }
 
@@ -517,7 +515,7 @@ class RegistrationController extends Zend_Controller_Action
      */
     public function getPotentialForms()
     {
-        return array_keys($this-&gt;getForm()-&gt;getSubForms());
+        return array_keys($this->getForm()->getSubForms());
     }
 
     /**
@@ -527,15 +525,15 @@ class RegistrationController extends Zend_Controller_Action
      */
     public function getCurrentSubForm()
     {
-        $request = $this-&gt;getRequest();
-        if (!$request-&gt;isPost()) {
+        $request = $this->getRequest();
+        if (!$request->isPost()) {
             return false;
         }
 
-        foreach ($this-&gt;getPotentialForms() as $name) {
-            if ($data = $request-&gt;getPost($name, false)) {
+        foreach ($this->getPotentialForms() as $name) {
+            if ($data = $request->getPost($name, false)) {
                 if (is_array($data)) {
-                    return $this-&gt;getForm()-&gt;getSubForm($name);
+                    return $this->getForm()->getSubForm($name);
                     break;
                 }
             }
@@ -551,19 +549,19 @@ class RegistrationController extends Zend_Controller_Action
      */
     public function getNextSubForm()
     {
-        $storedForms    = $this-&gt;getStoredForms();
-        $potentialForms = $this-&gt;getPotentialForms();
+        $storedForms    = $this->getStoredForms();
+        $potentialForms = $this->getPotentialForms();
 
         foreach ($potentialForms as $name) {
             if (!in_array($name, $storedForms)) {
-                return $this-&gt;getForm()-&gt;getSubForm($name);
+                return $this->getForm()->getSubForm($name);
             }
         }
 
         return false;
     }
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 The above methods allow us to use notations such as "<command>$subForm =
@@ -592,7 +590,7 @@ class RegistrationController extends Zend_Controller_Action
                 session:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class RegistrationController extends Zend_Controller_Action
 {
     // ...
@@ -607,9 +605,9 @@ class RegistrationController extends Zend_Controller_Action
     public function subFormIsValid(Zend_Form_SubForm $subForm,
                                    array $data)
     {
-        $name = $subForm-&gt;getName();
-        if ($subForm-&gt;isValid($data)) {
-            $this-&gt;getSessionNamespace()-&gt;$name = $subForm-&gt;getValues();
+        $name = $subForm->getName();
+        if ($subForm->isValid($data)) {
+            $this->getSessionNamespace()->$name = $subForm->getValues();
             return true;
         }
 
@@ -624,14 +622,14 @@ class RegistrationController extends Zend_Controller_Action
     public function formIsValid()
     {
         $data = array();
-        foreach ($this-&gt;getSessionNamespace() as $key =&gt; $info) {
+        foreach ($this->getSessionNamespace() as $key => $info) {
             $data[$key] = $info;
         }
 
-        return $this-&gt;getForm()-&gt;isValid($data);
+        return $this->getForm()->isValid($data);
     }
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 Now that we have the legwork out of the way, let's build the
@@ -639,7 +637,7 @@ class RegistrationController extends Zend_Controller_Action
                 form, and then a 'process' action for processing the form.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class RegistrationController extends Zend_Controller_Action
 {
     // ...
@@ -648,37 +646,37 @@ class RegistrationController extends Zend_Controller_Action
     {
         // Either re-display the current page, or grab the "next"
         // (first) sub form
-        if (!$form = $this-&gt;getCurrentSubForm()) {
-            $form = $this-&gt;getNextSubForm();
+        if (!$form = $this->getCurrentSubForm()) {
+            $form = $this->getNextSubForm();
         }
-        $this-&gt;view-&gt;form = $this-&gt;getForm()-&gt;prepareSubForm($form);
+        $this->view->form = $this->getForm()->prepareSubForm($form);
     }
 
     public function processAction()
     {
-        if (!$form = $this-&gt;getCurrentSubForm()) {
-            return $this-&gt;_forward('index');
+        if (!$form = $this->getCurrentSubForm()) {
+            return $this->_forward('index');
         }
 
-        if (!$this-&gt;subFormIsValid($form,
-                                   $this-&gt;getRequest()-&gt;getPost())) {
-            $this-&gt;view-&gt;form = $this-&gt;getForm()-&gt;prepareSubForm($form);
-            return $this-&gt;render('index');
+        if (!$this->subFormIsValid($form,
+                                   $this->getRequest()->getPost())) {
+            $this->view->form = $this->getForm()->prepareSubForm($form);
+            return $this->render('index');
         }
 
-        if (!$this-&gt;formIsValid()) {
-            $form = $this-&gt;getNextSubForm();
-            $this-&gt;view-&gt;form = $this-&gt;getForm()-&gt;prepareSubForm($form);
-            return $this-&gt;render('index');
+        if (!$this->formIsValid()) {
+            $form = $this->getNextSubForm();
+            $this->view->form = $this->getForm()->prepareSubForm($form);
+            return $this->render('index');
         }
 
         // Valid form!
         // Render information in a verification page
-        $this-&gt;view-&gt;info = $this-&gt;getSessionNamespace();
-        $this-&gt;render('verification');
+        $this->view->info = $this->getSessionNamespace();
+        $this->render('verification');
     }
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 As you'll notice, the actual code for processing the form is
@@ -695,38 +693,38 @@ class RegistrationController extends Zend_Controller_Action
                 The view scripts are very simple:
             </para>
 
-            <programlisting language="php">
-&lt;?php // registration/index.phtml ?&gt;
-&lt;h2&gt;Registration&lt;/h2&gt;
-&lt;?php echo $this-&gt;form ?&gt;
+            <programlisting language="php"><![CDATA[
+<?php // registration/index.phtml ?>
+<h2>Registration</h2>
+<?php echo $this->form ?>
 
-&lt;?php // registration/verification.phtml ?&gt;
-&lt;h2&gt;Thank you for registering!&lt;/h2&gt;
-&lt;p&gt;
+<?php // registration/verification.phtml ?>
+<h2>Thank you for registering!</h2>
+<p>
     Here is the information you provided:
-&lt;/p&gt;
+</p>
 
-&lt;?
+<?
 // Have to do this construct due to how items are stored in session
 // namespaces
-foreach ($this-&gt;info as $info):
-    foreach ($info as $form =&gt; $data): ?&gt;
-&lt;h4&gt;&lt;?php echo ucfirst($form) ?&gt;:&lt;/h4&gt;
-&lt;dl&gt;
-    &lt;?php foreach ($data as $key =&gt; $value): ?&gt;
-    &lt;dt&gt;&lt;?php echo ucfirst($key) ?&gt;&lt;/dt&gt;
-    &lt;?php if (is_array($value)):
-        foreach ($value as $label =&gt; $val): ?&gt;
-    &lt;dd&gt;&lt;?php echo $val ?&gt;&lt;/dd&gt;
-        &lt;?php endforeach;
-       else: ?&gt;
-    &lt;dd&gt;&lt;?php echo $this-&gt;escape($value) ?&gt;&lt;/dd&gt;
-    &lt;?php endif;
-    endforeach; ?&gt;
-&lt;/dl&gt;
-&lt;?php endforeach;
-endforeach ?&gt;
-</programlisting>
+foreach ($this->info as $info):
+    foreach ($info as $form => $data): ?>
+<h4><?php echo ucfirst($form) ?>:</h4>
+<dl>
+    <?php foreach ($data as $key => $value): ?>
+    <dt><?php echo ucfirst($key) ?></dt>
+    <?php if (is_array($value)):
+        foreach ($value as $label => $val): ?>
+    <dd><?php echo $val ?></dd>
+        <?php endforeach;
+       else: ?>
+    <dd><?php echo $this->escape($value) ?></dd>
+    <?php endif;
+    endforeach; ?>
+</dl>
+<?php endforeach;
+endforeach ?>
+]]></programlisting>
 
             <para>
                 Upcoming releases of Zend Framework will include components to

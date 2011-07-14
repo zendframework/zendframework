@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.relationships"><info><title>Zend_Db_Table Relationships</title></info>
     
 
@@ -34,7 +32,7 @@
             Below are the <acronym>PHP</acronym> class definitions for these tables:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class Accounts extends Zend_Db_Table_Abstract
 {
     protected $_name            = 'accounts';
@@ -54,20 +52,20 @@ class Bugs extends Zend_Db_Table_Abstract
     protected $_dependentTables = array('BugsProducts');
 
     protected $_referenceMap    = array(
-        'Reporter' =&gt; array(
-            'columns'           =&gt; 'reported_by',
-            'refTableClass'     =&gt; 'Accounts',
-            'refColumns'        =&gt; 'account_name'
+        'Reporter' => array(
+            'columns'           => 'reported_by',
+            'refTableClass'     => 'Accounts',
+            'refColumns'        => 'account_name'
         ),
-        'Engineer' =&gt; array(
-            'columns'           =&gt; 'assigned_to',
-            'refTableClass'     =&gt; 'Accounts',
-            'refColumns'        =&gt; 'account_name'
+        'Engineer' => array(
+            'columns'           => 'assigned_to',
+            'refTableClass'     => 'Accounts',
+            'refColumns'        => 'account_name'
         ),
-        'Verifier' =&gt; array(
-            'columns'           =&gt; array('verified_by'),
-            'refTableClass'     =&gt; 'Accounts',
-            'refColumns'        =&gt; array('account_name')
+        'Verifier' => array(
+            'columns'           => array('verified_by'),
+            'refTableClass'     => 'Accounts',
+            'refColumns'        => array('account_name')
         )
     );
 }
@@ -77,20 +75,20 @@ class BugsProducts extends Zend_Db_Table_Abstract
     protected $_name = 'bugs_products';
 
     protected $_referenceMap    = array(
-        'Bug' =&gt; array(
-            'columns'           =&gt; array('bug_id'),
-            'refTableClass'     =&gt; 'Bugs',
-            'refColumns'        =&gt; array('bug_id')
+        'Bug' => array(
+            'columns'           => array('bug_id'),
+            'refTableClass'     => 'Bugs',
+            'refColumns'        => array('bug_id')
         ),
-        'Product' =&gt; array(
-            'columns'           =&gt; array('product_id'),
-            'refTableClass'     =&gt; 'Products',
-            'refColumns'        =&gt; array('product_id')
+        'Product' => array(
+            'columns'           => array('product_id'),
+            'refTableClass'     => 'Products',
+            'refColumns'        => array('product_id')
         )
     );
 
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             If you use <classname>Zend_Db_Table</classname> to emulate cascading
@@ -211,9 +209,9 @@ class BugsProducts extends Zend_Db_Table_Abstract
             from dependent tables that reference the current row. Use the method:
         </para>
 
-        <programlisting language="php">
-$row-&gt;findDependentRowset($table, [$rule]);
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$row->findDependentRowset($table, [$rule]);
+]]></programlisting>
 
         <para>
             This method returns a <classname>Zend_Db_Table_Rowset_Abstract</classname> object,
@@ -235,13 +233,13 @@ $row-&gt;findDependentRowset($table, [$rule]);
                 and finding the <command>Bugs</command> reported by that account.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $accountsTable = new Accounts();
-$accountsRowset = $accountsTable-&gt;find(1234);
-$user1234 = $accountsRowset-&gt;current();
+$accountsRowset = $accountsTable->find(1234);
+$user1234 = $accountsRowset->current();
 
-$bugsReportedByUser = $user1234-&gt;findDependentRowset('Bugs');
-</programlisting>
+$bugsReportedByUser = $user1234->findDependentRowset('Bugs');
+]]></programlisting>
         </example>
 
         <para>
@@ -267,13 +265,13 @@ $bugsReportedByUser = $user1234-&gt;findDependentRowset('Bugs');
                 example is <command>'Engineer'</command>.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $accountsTable = new Accounts();
-$accountsRowset = $accountsTable-&gt;find(1234);
-$user1234 = $accountsRowset-&gt;current();
+$accountsRowset = $accountsTable->find(1234);
+$user1234 = $accountsRowset->current();
 
-$bugsAssignedToUser = $user1234-&gt;findDependentRowset('Bugs', 'Engineer');
-</programlisting>
+$bugsAssignedToUser = $user1234->findDependentRowset('Bugs', 'Engineer');
+]]></programlisting>
         </example>
 
         <para>
@@ -291,17 +289,17 @@ $bugsAssignedToUser = $user1234-&gt;findDependentRowset('Bugs', 'Engineer');
                 name.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $accountsTable = new Accounts();
-$accountsRowset = $accountsTable-&gt;find(1234);
-$user1234 = $accountsRowset-&gt;current();
-$select = $accountsTable-&gt;select()-&gt;order('name ASC')
-                                  -&gt;limit(3);
+$accountsRowset = $accountsTable->find(1234);
+$user1234 = $accountsRowset->current();
+$select = $accountsTable->select()->order('name ASC')
+                                  ->limit(3);
 
-$bugsAssignedToUser = $user1234-&gt;findDependentRowset('Bugs',
+$bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
                                                      'Engineer',
                                                      $select);
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -351,17 +349,17 @@ $bugsAssignedToUser = $user1234-&gt;findDependentRowset('Bugs',
                 specifying the table and rule as strings.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $accountsTable = new Accounts();
-$accountsRowset = $accountsTable-&gt;find(1234);
-$user1234 = $accountsRowset-&gt;current();
+$accountsRowset = $accountsTable->find(1234);
+$user1234 = $accountsRowset->current();
 
 // Use the default reference rule
-$bugsReportedBy = $user1234-&gt;findBugs();
+$bugsReportedBy = $user1234->findBugs();
 
 // Specify the reference rule
-$bugsAssignedTo = $user1234-&gt;findBugsByEngineer();
-</programlisting>
+$bugsAssignedTo = $user1234->findBugsByEngineer();
+]]></programlisting>
         </example>
     </section>
 
@@ -373,9 +371,9 @@ $bugsAssignedTo = $user1234-&gt;findBugsByEngineer();
             the row in the parent to which the dependent row refers. Use the method:
         </para>
 
-        <programlisting language="php">
-$row-&gt;findParentRow($table, [$rule]);
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$row->findParentRow($table, [$rule]);
+]]></programlisting>
 
         <para>
             There always should be exactly one row in the parent table referenced by a dependent
@@ -397,13 +395,13 @@ $row-&gt;findParentRow($table, [$rule]);
                 <command>Accounts</command> table for the user who reported the bug.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $bugsTable = new Bugs();
-$bugsRowset = $bugsTable-&gt;fetchAll(array('bug_status = ?' =&gt; 'NEW'));
-$bug1 = $bugsRowset-&gt;current();
+$bugsRowset = $bugsTable->fetchAll(array('bug_status = ?' => 'NEW'));
+$bug1 = $bugsRowset->current();
 
-$reporter = $bug1-&gt;findParentRow('Accounts');
-</programlisting>
+$reporter = $bug1->findParentRow('Accounts');
+]]></programlisting>
         </example>
 
         <para>
@@ -428,13 +426,13 @@ $reporter = $bug1-&gt;findParentRow('Accounts');
                 <command>'Engineer'</command>.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $bugsTable = new Bugs();
-$bugsRowset = $bugsTable-&gt;fetchAll(array('bug_status = ?', 'NEW'));
-$bug1 = $bugsRowset-&gt;current();
+$bugsRowset = $bugsTable->fetchAll(array('bug_status = ?', 'NEW'));
+$bug1 = $bugsRowset->current();
 
-$engineer = $bug1-&gt;findParentRow('Accounts', 'Engineer');
-</programlisting>
+$engineer = $bug1->findParentRow('Accounts', 'Engineer');
+]]></programlisting>
         </example>
 
         <para>
@@ -482,17 +480,17 @@ $engineer = $bug1-&gt;findParentRow('Accounts', 'Engineer');
                 specifying the table and rule as strings.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $bugsTable = new Bugs();
-$bugsRowset = $bugsTable-&gt;fetchAll(array('bug_status = ?', 'NEW'));
-$bug1 = $bugsRowset-&gt;current();
+$bugsRowset = $bugsTable->fetchAll(array('bug_status = ?', 'NEW'));
+$bug1 = $bugsRowset->current();
 
 // Use the default reference rule
-$reporter = $bug1-&gt;findParentAccounts();
+$reporter = $bug1->findParentAccounts();
 
 // Specify the reference rule
-$engineer = $bug1-&gt;findParentAccountsByEngineer();
-</programlisting>
+$engineer = $bug1->findParentAccountsByEngineer();
+]]></programlisting>
         </example>
     </section>
 
@@ -506,15 +504,15 @@ $engineer = $bug1-&gt;findParentAccountsByEngineer();
             intersection table. Use the method:
         </para>
 
-        <programlisting language="php">
-$row-&gt;findManyToManyRowset($table,
+        <programlisting language="php"><![CDATA[
+$row->findManyToManyRowset($table,
                            $intersectionTable,
                            [$rule1,
                                [$rule2,
                                    [Zend_Db_Table_Select $select]
                                ]
                            ]);
-</programlisting>
+]]></programlisting>
 
         <para>
             This method returns a <classname>Zend_Db_Table_Rowset_Abstract</classname> containing
@@ -545,14 +543,14 @@ $row-&gt;findManyToManyRowset($table,
                 <command>Products</command>, representing products related to that bug.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $bugsTable = new Bugs();
-$bugsRowset = $bugsTable-&gt;find(1234);
-$bug1234 = $bugsRowset-&gt;current();
+$bugsRowset = $bugsTable->find(1234);
+$bug1234 = $bugsRowset->current();
 
-$productsRowset = $bug1234-&gt;findManyToManyRowset('Products',
+$productsRowset = $bug1234->findManyToManyRowset('Products',
                                                  'BugsProducts');
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -596,15 +594,15 @@ $productsRowset = $bug1234-&gt;findManyToManyRowset('Products',
                 <command>Products</command>, representing products related to that bug.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $bugsTable = new Bugs();
-$bugsRowset = $bugsTable-&gt;find(1234);
-$bug1234 = $bugsRowset-&gt;current();
+$bugsRowset = $bugsTable->find(1234);
+$bug1234 = $bugsRowset->current();
 
-$productsRowset = $bug1234-&gt;findManyToManyRowset('Products',
+$productsRowset = $bug1234->findManyToManyRowset('Products',
                                                  'BugsProducts',
                                                  'Bug');
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -662,17 +660,17 @@ $productsRowset = $bug1234-&gt;findManyToManyRowset('Products',
                 relationship representing products related to a given bug.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $bugsTable = new Bugs();
-$bugsRowset = $bugsTable-&gt;find(1234);
-$bug1234 = $bugsRowset-&gt;current();
+$bugsRowset = $bugsTable->find(1234);
+$bug1234 = $bugsRowset->current();
 
 // Use the default reference rule
-$products = $bug1234-&gt;findProductsViaBugsProducts();
+$products = $bug1234->findProductsViaBugsProducts();
 
 // Specify the reference rule
-$products = $bug1234-&gt;findProductsViaBugsProductsByBug();
-</programlisting>
+$products = $bug1234->findProductsViaBugsProductsByBug();
+]]></programlisting>
         </example>
     </section>
 
@@ -724,15 +722,15 @@ $products = $bug1234-&gt;findProductsViaBugsProductsByBug();
                 table.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $productsTable = new Products();
-$productsRowset = $productsTable-&gt;find(1234);
-$product1234 = $productsRowset-&gt;current();
+$productsRowset = $productsTable->find(1234);
+$product1234 = $productsRowset->current();
 
-$product1234-&gt;delete();
+$product1234->delete();
 // Automatically cascades to Bugs table
 // and deletes dependent rows.
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -775,22 +773,22 @@ $product1234-&gt;delete();
                 omitting the <command>'onUpdate'</command> entry.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class BugsProducts extends Zend_Db_Table_Abstract
 {
     ...
     protected $_referenceMap = array(
-        'Product' =&gt; array(
-            'columns'           =&gt; array('product_id'),
-            'refTableClass'     =&gt; 'Products',
-            'refColumns'        =&gt; array('product_id'),
-            'onDelete'          =&gt; self::CASCADE,
-            'onUpdate'          =&gt; self::RESTRICT
+        'Product' => array(
+            'columns'           => array('product_id'),
+            'refTableClass'     => 'Products',
+            'refColumns'        => array('product_id'),
+            'onDelete'          => self::CASCADE,
+            'onUpdate'          => self::RESTRICT
         ),
         ...
     );
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <section xml:id="zend.db.table.relationships.cascading.notes"><info><title>Notes Regarding Cascading Operations</title></info>

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.action"><info><title>Action View Helper</title></info>
     
 
@@ -33,15 +31,15 @@
             a list of comments for the current request:
         </para>
 
-        <programlisting language="php">
-&lt;div id="sidebar right"&gt;
-    &lt;div class="item"&gt;
-        &lt;?php echo $this-&gt;action('list',
+        <programlisting language="php"><![CDATA[
+<div id="sidebar right">
+    <div class="item">
+        <?php echo $this->action('list',
                                  'comment',
                                  null,
-                                 array('count' =&gt; 10)); ?&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-</programlisting>
+                                 array('count' => 10)); ?>
+    </div>
+</div>
+]]></programlisting>
     </example>
 </section>

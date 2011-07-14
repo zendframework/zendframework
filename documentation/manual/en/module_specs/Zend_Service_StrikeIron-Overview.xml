@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.strikeiron"><info><title>Zend_Service_StrikeIron</title></info>
     
 
@@ -177,12 +175,12 @@
             for StrikeIron services:
         </para>
 
-        <programlisting language="php">
-$strikeIron = new Zend_Service_StrikeIron(array('username' =&gt; 'your-username',
-                                                'password' =&gt; 'your-password'));
+        <programlisting language="php"><![CDATA[
+$strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
+                                                'password' => 'your-password'));
 
-$taxBasic = $strikeIron-&gt;getService(array('class' =&gt; 'SalesUseTaxBasic'));
-</programlisting>
+$taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
+]]></programlisting>
 
         <para>
             The <methodname>getService()</methodname> method will return a client for any
@@ -211,19 +209,19 @@ $taxBasic = $strikeIron-&gt;getService(array('class' =&gt; 'SalesUseTaxBasic'));
             by calling methods on it just like any other <acronym>PHP</acronym> object.
         </para>
 
-        <programlisting language="php">
-$strikeIron = new Zend_Service_StrikeIron(array('username' =&gt; 'your-username',
-                                                'password' =&gt; 'your-password'));
+        <programlisting language="php"><![CDATA[
+$strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
+                                                'password' => 'your-password'));
 
-// Get a client for the Sales &amp; Use Tax Basic service
-$taxBasic = $strikeIron-&gt;getService(array('class' =&gt; 'SalesUseTaxBasic'));
+// Get a client for the Sales & Use Tax Basic service
+$taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
 
 // Query tax rate for Ontario, Canada
-$rateInfo = $taxBasic-&gt;getTaxRateCanada(array('province' =&gt; 'ontario'));
-echo $rateInfo-&gt;province;
-echo $rateInfo-&gt;abbreviation;
-echo $rateInfo-&gt;GST;
-</programlisting>
+$rateInfo = $taxBasic->getTaxRateCanada(array('province' => 'ontario'));
+echo $rateInfo->province;
+echo $rateInfo->abbreviation;
+echo $rateInfo->GST;
+]]></programlisting>
 
         <para>
             In the example above, the <methodname>getService()</methodname> method is used
@@ -267,31 +265,31 @@ echo $rateInfo-&gt;GST;
             <acronym>PHP</acronym> functions like <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/print_r">print_r()</link>:
         </para>
 
-        <programlisting language="php">
-&lt;?php
-$strikeIron = new Zend_Service_StrikeIron(array('username' =&gt; 'your-username',
-                                                'password' =&gt; 'your-password'));
+        <programlisting language="php"><![CDATA[
+<?php
+$strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
+                                                'password' => 'your-password'));
 
-$taxBasic = $strikeIron-&gt;getService(array('class' =&gt; 'SalesUseTaxBasic'));
+$taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
 
-$rateInfo = $taxBasic-&gt;getTaxRateCanada(array('province' =&gt; 'ontario'));
+$rateInfo = $taxBasic->getTaxRateCanada(array('province' => 'ontario'));
 print_r($rateInfo);
-?&gt;
+?>
 
 Zend_Service_StrikeIron_Decorator Object
 (
-    [_name:protected] =&gt; GetTaxRateCanadaResult
-    [_object:protected] =&gt; stdClass Object
+    [_name:protected] => GetTaxRateCanadaResult
+    [_object:protected] => stdClass Object
         (
-            [abbreviation] =&gt; ON
-            [province] =&gt; ONTARIO
-            [GST] =&gt; 0.06
-            [PST] =&gt; 0.08
-            [total] =&gt; 0.14
-            [HST] =&gt; Y
+            [abbreviation] => ON
+            [province] => ONTARIO
+            [GST] => 0.06
+            [PST] => 0.08
+            [total] => 0.14
+            [HST] => Y
         )
 )
-</programlisting>
+]]></programlisting>
 
         <para>
             In the output above, we see that the decorator (<varname>$rateInfo</varname>) wraps an
@@ -340,15 +338,15 @@ Zend_Service_StrikeIron_Decorator Object
             service:
         </para>
 
-        <programlisting language="php">
-$strikeIron = new Zend_Service_StrikeIron(array('username' =&gt; 'your-username',
-                                                'password' =&gt; 'your-password'));
+        <programlisting language="php"><![CDATA[
+$strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
+                                                'password' => 'your-password'));
 
-$taxBasic = $strikeIron-&gt;getService(array('class' =&gt; 'SalesUseTaxBasic'));
+$taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
 
 try {
 
-  $taxBasic-&gt;getTaxRateCanada(array('province' =&gt; 'ontario'));
+  $taxBasic->getTaxRateCanada(array('province' => 'ontario'));
 
 } catch (Zend_Service_StrikeIron_Exception $e) {
 
@@ -356,7 +354,7 @@ try {
   // problems or subscription errors
 
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             The exceptions thrown will always be
@@ -400,17 +398,17 @@ try {
             the <methodname>getSubscriptionInfo()</methodname> method of the client:
         </para>
 
-        <programlisting language="php">
-// Get a client for the Sales &amp; Use Tax Basic service
-$strikeIron = new Zend_Service_StrikeIron(array('username' =&gt; 'your-username',
-                                                'password' =&gt; 'your-password'));
+        <programlisting language="php"><![CDATA[
+// Get a client for the Sales & Use Tax Basic service
+$strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
+                                                'password' => 'your-password'));
 
-$taxBasic = $strikeIron-&gt;getService(array('class =&gt; 'SalesUseTaxBasic'));
+$taxBasic = $strikeIron->getService(array('class => 'SalesUseTaxBasic'));
 
-// Check remaining hits for the Sales &amp; Use Tax Basic service
-$subscription = $taxBasic-&gt;getSubscriptionInfo();
-echo $subscription-&gt;remainingHits;
-</programlisting>
+// Check remaining hits for the Sales & Use Tax Basic service
+$subscription = $taxBasic->getSubscriptionInfo();
+echo $subscription->remainingHits;
+]]></programlisting>
 
         <para>
             The <methodname>getSubscriptionInfo()</methodname> method will return an object

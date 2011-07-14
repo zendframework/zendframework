@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.barcode.objects"><info><title>Zend_Barcode Objects</title></info>
     
 
@@ -44,26 +42,26 @@
     <example xml:id="zend.barcode.objects.configuration"><info><title>Different ways to parameterize a barcode object</title></info>
         
 
-        <programlisting language="php">
-$options = array('text' =&gt; 'ZEND-FRAMEWORK', 'barHeight' =&gt; 40);
+        <programlisting language="php"><![CDATA[
+$options = array('text' => 'ZEND-FRAMEWORK', 'barHeight' => 40);
 
 // Case 1: constructor
 $barcode = new Zend_Barcode_Object_Code39($options);
 
 // Case 2: setOptions()
 $barcode = new Zend_Barcode_Object_Code39();
-$barcode-&gt;setOptions($options);
+$barcode->setOptions($options);
 
 // Case 3: setConfig()
 $config  = new Zend_Config($options);
 $barcode = new Zend_Barcode_Object_Code39();
-$barcode-&gt;setConfig($config);
+$barcode->setConfig($config);
 
 // Case 4: individual setters
 $barcode = new Zend_Barcode_Object_Code39();
-$barcode-&gt;setText('ZEND-FRAMEWORK')
-        -&gt;setBarHeight(40);
-</programlisting>
+$barcode->setText('ZEND-FRAMEWORK')
+        ->setBarHeight(40);
+]]></programlisting>
     </example>
 
     <section xml:id="zend.barcode.objects.common.options"><info><title>Common Options</title></info>
@@ -255,7 +253,7 @@ $barcode-&gt;setText('ZEND-FRAMEWORK')
                 <methodname>setFont()</methodname> method.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // In your bootstrap:
 Zend_Barcode_Object::setBarcodeFont('my_font.ttf');
 
@@ -263,7 +261,7 @@ Zend_Barcode_Object::setBarcodeFont('my_font.ttf');
 Zend_Barcode::render(
     'code39',
     'pdf',
-    array('text' =&gt; 'ZEND-FRAMEWORK')
+    array('text' => 'ZEND-FRAMEWORK')
 ); // will use 'my_font.ttf'
 
 // or:
@@ -271,11 +269,11 @@ Zend_Barcode::render(
     'code39',
     'image',
     array(
-        'text' =&gt; 'ZEND-FRAMEWORK',
-        'font' =&gt; 3
+        'text' => 'ZEND-FRAMEWORK',
+        'font' => 3
     )
 ); // will use the 3rd GD internal font
-</programlisting>
+]]></programlisting>
         </section>
     </section>
 

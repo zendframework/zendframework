@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.progressbar.introduction"><info><title>Zend_ProgressBar</title></info>
     
 
@@ -27,17 +25,17 @@
             you want to process a file, you would do something like:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $progressBar = new Zend_ProgressBar($adapter, 0, $fileSize);
 
 while (!feof($fp)) {
     // Do something
 
-    $progressBar-&gt;update($currentByteCount);
+    $progressBar->update($currentByteCount);
 }
 
-$progressBar-&gt;finish();
-</programlisting>
+$progressBar->finish();
+]]></programlisting>
 
         <para>
             In the first step, an instance of <classname>Zend_ProgressBar</classname> is

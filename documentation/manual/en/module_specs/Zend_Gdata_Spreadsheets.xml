@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.spreadsheets"><info><title>Using Google Spreadsheets</title></info>
     
 
@@ -38,12 +36,12 @@
             user.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Spreadsheets::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $spreadsheetService = new Zend_Gdata_Spreadsheets($client);
-$feed = $spreadsheetService-&gt;getSpreadsheetFeed();
-</programlisting>
+$feed = $spreadsheetService->getSpreadsheetFeed();
+]]></programlisting>
     </section>
 
      <section xml:id="zend.gdata.spreadsheets.listworksheets"><info><title>Get a List of Worksheets</title></info>
@@ -62,11 +60,11 @@ $feed = $spreadsheetService-&gt;getSpreadsheetFeed();
             containing a list of worksheets associated with that spreadsheet.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Spreadsheets_DocumentQuery();
-$query-&gt;setSpreadsheetKey($spreadsheetKey);
-$feed = $spreadsheetService-&gt;getWorksheetFeed($query);
-</programlisting>
+$query->setSpreadsheetKey($spreadsheetKey);
+$feed = $spreadsheetService->getWorksheetFeed($query);
+]]></programlisting>
 
         <para>
             The resulting <classname>Zend_Gdata_Spreadsheets_WorksheetFeed</classname>
@@ -130,12 +128,12 @@ $feed = $spreadsheetService-&gt;getWorksheetFeed($query);
                 <methodname>getListFeed()</methodname> method of the Spreadsheets service.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Spreadsheets_ListQuery();
-$query-&gt;setSpreadsheetKey($spreadsheetKey);
-$query-&gt;setWorksheetId($worksheetId);
-$listFeed = $spreadsheetService-&gt;getListFeed($query);
-</programlisting>
+$query->setSpreadsheetKey($spreadsheetKey);
+$query->setWorksheetId($worksheetId);
+$listFeed = $spreadsheetService->getListFeed($query);
+]]></programlisting>
 
             <para>
                 The resulting <classname>Zend_Gdata_Spreadsheets_ListFeed</classname>
@@ -152,12 +150,12 @@ $listFeed = $spreadsheetService-&gt;getListFeed($query);
                 row. You can extract and display this array:
             </para>
 
-            <programlisting language="php">
-$rowData = $listFeed-&gt;entries[1]-&gt;getCustom();
+            <programlisting language="php"><![CDATA[
+$rowData = $listFeed->entries[1]->getCustom();
 foreach($rowData as $customEntry) {
-  echo $customEntry-&gt;getColumnName() . " = " . $customEntry-&gt;getText();
+  echo $customEntry->getColumnName() . " = " . $customEntry->getText();
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 An alternate version of this array, <property>customByName</property>,
@@ -165,10 +163,10 @@ foreach($rowData as $customEntry) {
                 convenient when trying to access a specific header:
             </para>
 
-            <programlisting language="php">
-$customEntry = $listFeed-&gt;entries[1]-&gt;getCustomByName('my_heading');
-echo $customEntry-&gt;getColumnName() . " = " . $customEntry-&gt;getText();
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$customEntry = $listFeed->entries[1]->getCustomByName('my_heading');
+echo $customEntry->getColumnName() . " = " . $customEntry->getText();
+]]></programlisting>
         </section>
 
         <section xml:id="zend.gdata.spreadsheets.listfeeds.reverse"><info><title>Reverse-sort Rows</title></info>
@@ -182,13 +180,13 @@ echo $customEntry-&gt;getColumnName() . " = " . $customEntry-&gt;getText();
                 object to <constant>TRUE</constant>:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Spreadsheets_ListQuery();
-$query-&gt;setSpreadsheetKey($spreadsheetKey);
-$query-&gt;setWorksheetId($worksheetId);
-$query-&gt;setReverse('true');
-$listFeed = $spreadsheetService-&gt;getListFeed($query);
-</programlisting>
+$query->setSpreadsheetKey($spreadsheetKey);
+$query->setWorksheetId($worksheetId);
+$query->setReverse('true');
+$listFeed = $spreadsheetService->getListFeed($query);
+]]></programlisting>
 
             <para>
                 Note that if you want to order (or reverse sort) by a
@@ -212,13 +210,13 @@ $listFeed = $spreadsheetService-&gt;getListFeed($query);
                 25. To do so, you would set <property>sq</property> as follows:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Spreadsheets_ListQuery();
-$query-&gt;setSpreadsheetKey($spreadsheetKey);
-$query-&gt;setWorksheetId($worksheetId);
-$query-&gt;setSpreadsheetQuery('name=John and age&gt;25');
-$listFeed = $spreadsheetService-&gt;getListFeed($query);
-</programlisting>
+$query->setSpreadsheetKey($spreadsheetKey);
+$query->setWorksheetId($worksheetId);
+$query->setSpreadsheetQuery('name=John and age>25');
+$listFeed = $spreadsheetService->getListFeed($query);
+]]></programlisting>
         </section>
 
         <section xml:id="zend.gdata.spreadsheets.listfeeds.addrow"><info><title>Add a Row</title></info>
@@ -229,11 +227,11 @@ $listFeed = $spreadsheetService-&gt;getListFeed($query);
                 <methodname>insertRow()</methodname> method of the Spreadsheet service.
             </para>
 
-            <programlisting language="php">
-$insertedListEntry = $spreadsheetService-&gt;insertRow($rowData,
+            <programlisting language="php"><![CDATA[
+$insertedListEntry = $spreadsheetService->insertRow($rowData,
                                                     $spreadsheetKey,
                                                     $worksheetId);
-</programlisting>
+]]></programlisting>
 
             <para>
                 The <varname>$rowData</varname> parameter contains an array of column
@@ -258,10 +256,10 @@ $insertedListEntry = $spreadsheetService-&gt;insertRow($rowData,
                 <methodname>updateRow()</methodname> method of the Spreadsheet service.
             </para>
 
-            <programlisting language="php">
-$updatedListEntry = $spreadsheetService-&gt;updateRow($oldListEntry,
+            <programlisting language="php"><![CDATA[
+$updatedListEntry = $spreadsheetService->updateRow($oldListEntry,
                                                    $newRowData);
-</programlisting>
+]]></programlisting>
 
             <para>
                 The <varname>$oldListEntry</varname> parameter contains the list entry
@@ -282,18 +280,18 @@ $updatedListEntry = $spreadsheetService-&gt;updateRow($oldListEntry,
                 entry to be deleted:
             </para>
 
-            <programlisting language="php">
-$spreadsheetService-&gt;deleteRow($listEntry);
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$spreadsheetService->deleteRow($listEntry);
+]]></programlisting>
 
             <para>
                 Alternatively, you can call the <methodname>delete()</methodname> method of
                 the entry itself:
             </para>
 
-            <programlisting language="php">
-$listEntry-&gt;delete();
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$listEntry->delete();
+]]></programlisting>
         </section>
     </section>
 
@@ -317,12 +315,12 @@ $listEntry-&gt;delete();
                 <methodname>getCellFeed()</methodname> method of the Spreadsheets service.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Spreadsheets_CellQuery();
-$query-&gt;setSpreadsheetKey($spreadsheetKey);
-$query-&gt;setWorksheetId($worksheetId);
-$cellFeed = $spreadsheetService-&gt;getCellFeed($query);
-</programlisting>
+$query->setSpreadsheetKey($spreadsheetKey);
+$query->setWorksheetId($worksheetId);
+$cellFeed = $spreadsheetService->getCellFeed($query);
+]]></programlisting>
 
             <para>
                 The resulting <classname>Zend_Gdata_Spreadsheets_CellFeed</classname>
@@ -333,14 +331,14 @@ $cellFeed = $spreadsheetService-&gt;getCellFeed($query);
                 a single cell in a worksheet. You can display this information:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 foreach($cellFeed as $cellEntry) {
-  $row = $cellEntry-&gt;cell-&gt;getRow();
-  $col = $cellEntry-&gt;cell-&gt;getColumn();
-  $val = $cellEntry-&gt;cell-&gt;getText();
+  $row = $cellEntry->cell->getRow();
+  $col = $cellEntry->cell->getColumn();
+  $val = $cellEntry->cell->getText();
   echo "$row, $col = $val\n";
 }
-</programlisting>
+]]></programlisting>
         </section>
 
         <section xml:id="zend.gdata.spreadsheets.cellfeeds.cellrangequery"><info><title>Send a Cell Range Query</title></info>
@@ -352,13 +350,13 @@ foreach($cellFeed as $cellEntry) {
                 this column as follows:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Spreadsheets_CellQuery();
-$query-&gt;setMinCol(1);
-$query-&gt;setMaxCol(1);
-$query-&gt;setMinRow(2);
-$feed = $spreadsheetService-&gt;getCellsFeed($query);
-</programlisting>
+$query->setMinCol(1);
+$query->setMaxCol(1);
+$query->setMinRow(2);
+$feed = $spreadsheetService->getCellsFeed($query);
+]]></programlisting>
 
             <para>
                 This requests all the data in column 1, starting with row 2.
@@ -374,13 +372,13 @@ $feed = $spreadsheetService-&gt;getCellsFeed($query);
                 and new value of the cell.
             </para>
 
-            <programlisting language="php">
-$updatedCell = $spreadsheetService-&gt;updateCell($row,
+            <programlisting language="php"><![CDATA[
+$updatedCell = $spreadsheetService->updateCell($row,
                                                $col,
                                                $inputValue,
                                                $spreadsheetKey,
                                                $worksheetId);
-</programlisting>
+]]></programlisting>
 
             <para>
                 The new data is placed in the specified cell in the worksheet.

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.modules"><info><title>Zend_Application_Resource_Modules</title></info>
     
 
@@ -24,34 +22,34 @@
         configuration, this looks like:
     </para>
 
-    <programlisting language="ini">
+    <programlisting language="ini"><![CDATA[
 resources.modules[] =
-</programlisting>
+]]></programlisting>
 
     <para>
         In <acronym>XML</acronym> style configuration, this looks like:
     </para>
 
-    <programlisting language="xml">
-&lt;resources&gt;
-    &lt;modules&gt;
-        &lt;!-- Placeholder to ensure an array is created --&gt;
-        &lt;placeholder /&gt;
-    &lt;/modules&gt;
-&lt;/resources&gt;
-</programlisting>
+    <programlisting language="xml"><![CDATA[
+<resources>
+    <modules>
+        <!-- Placeholder to ensure an array is created -->
+        <placeholder />
+    </modules>
+</resources>
+]]></programlisting>
 
     <para>
         Using a standard <acronym>PHP</acronym> array, simply create it as an empty array:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $options = array(
-    'resources' =&gt; array(
-        'modules' =&gt; array(),
+    'resources' => array(
+        'modules' => array(),
     ),
 );
-</programlisting>
+]]></programlisting>
 
     <note><info><title>Front Controller Resource Dependency</title></info>
         
@@ -80,36 +78,36 @@ $options = array(
             configuration of resources in that module.
         </para>
 
-        <programlisting language="ini">
+        <programlisting language="ini"><![CDATA[
 [production]
 news.resources.db.adapter = "pdo_mysql"
 news.resources.db.params.host = "localhost"
 news.resources.db.params.username = "webuser"
 news.resources.db.params.password = "XXXXXXX"
 news.resources.db.params.dbname = "news"
-</programlisting>
+]]></programlisting>
 
-        <programlisting language="xml">
-&lt;?xml version="1.0"?&gt;
-&lt;config&gt;
-    &lt;production&gt;
-        &lt;news&gt;
-            &lt;resources&gt;
-                &lt;db&gt;
-                    &lt;adapter&gt;pdo_mysql&lt;/adapter&gt;
-                    &lt;params&gt;
-                        &lt;host&gt;localhost&lt;/host&gt;
-                        &lt;username&gt;webuser&lt;/username&gt;
-                        &lt;password&gt;XXXXXXX&lt;/password&gt;
-                        &lt;dbname&gt;news&lt;/dbname&gt;
-                    &lt;/params&gt;
-                    &lt;isDefaultAdapter&gt;true&lt;/isDefaultAdapter&gt;
-                &lt;/db&gt;
-            &lt;/resources&gt;
-        &lt;/news&gt;
-    &lt;/production&gt;
-&lt;/config&gt;
-</programlisting>
+        <programlisting language="xml"><![CDATA[
+<?xml version="1.0"?>
+<config>
+    <production>
+        <news>
+            <resources>
+                <db>
+                    <adapter>pdo_mysql</adapter>
+                    <params>
+                        <host>localhost</host>
+                        <username>webuser</username>
+                        <password>XXXXXXX</password>
+                        <dbname>news</dbname>
+                    </params>
+                    <isDefaultAdapter>true</isDefaultAdapter>
+                </db>
+            </resources>
+        </news>
+    </production>
+</config>
+]]></programlisting>
     </example>
 
     <example xml:id="zend.application.available-resources.modules.retrieveBootstrapExample"><info><title>Retrieving a specific module bootstrap</title></info>
@@ -123,10 +121,10 @@ news.resources.db.params.dbname = "news"
             method.
         </para>
 
-        <programlisting language="php">
-$resource = $bootstrap-&gt;getPluginResource('modules');
-$moduleBootstraps = $resource-&gt;getExecutedBootstraps();
+        <programlisting language="php"><![CDATA[
+$resource = $bootstrap->getPluginResource('modules');
+$moduleBootstraps = $resource->getExecutedBootstraps();
 $newsBootstrap = $moduleBootstraps['news'];
-</programlisting>
+]]></programlisting>
     </example>
 </section>

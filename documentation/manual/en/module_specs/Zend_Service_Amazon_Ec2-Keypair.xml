@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.keypairs"><info><title>Zend_Service_Amazon_Ec2: Keypairs</title></info>
     
 
@@ -22,10 +20,10 @@
             keyFingerprint and keyMaterial.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $ec2_kp = new Zend_Service_Amazon_Ec2_Keypair('aws_key','aws_secret_key');
-$return = $ec2_kp-&gt;create('my-new-key');
-</programlisting>
+$return = $ec2_kp->create('my-new-key');
+]]></programlisting>
     </example>
 
     <example xml:id="zend.service.amazon.ec2.keypairs.delete"><info><title>Deleting an Amazon Keypair</title></info>
@@ -42,10 +40,10 @@ $return = $ec2_kp-&gt;create('my-new-key');
             <constant>FALSE</constant>
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $ec2_kp = new Zend_Service_Amazon_Ec2_Keypair('aws_key','aws_secret_key');
-$return = $ec2_kp-&gt;delete('my-new-key');
-</programlisting>
+$return = $ec2_kp->delete('my-new-key');
+]]></programlisting>
     </example>
 
     <example xml:id="zend.service.amazon.ec2.describe"><info><title>Describe an Amazon Keypair</title></info>
@@ -61,9 +59,9 @@ $return = $ec2_kp-&gt;delete('my-new-key');
             <code>describe</code> returns an array which contains keyName and keyFingerprint
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $ec2_kp = new Zend_Service_Amazon_Ec2_Keypair('aws_key','aws_secret_key');
-$return = $ec2_kp-&gt;describe('my-new-key');
-</programlisting>
+$return = $ec2_kp->describe('my-new-key');
+]]></programlisting>
     </example>
 </section>

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.06"><info><title>Zend Framework 0.6</title></info>
     
 
@@ -17,26 +15,26 @@
             still do each of the following:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 Zend_Controller_Front::run('/path/to/controllers');
-</programlisting>
+]]></programlisting>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 /* -- create a router -- */
 $router = new Zend_Controller_RewriteRouter();
-$router-&gt;addRoute('user',
+$router->addRoute('user',
                   'user/:username',
-                  array('controller' =&gt; 'user', 'action' =&gt; 'info')
+                  array('controller' => 'user', 'action' => 'info')
 );
 
 /* -- set it in a controller -- */
 $ctrl = Zend_Controller_Front::getInstance();
-$ctrl-&gt;setRouter($router);
+$ctrl->setRouter($router);
 
 /* -- set controller directory and dispatch -- */
-$ctrl-&gt;setControllerDirectory('/path/to/controllers');
-$ctrl-&gt;dispatch();
-</programlisting>
+$ctrl->setControllerDirectory('/path/to/controllers');
+$ctrl->dispatch();
+]]></programlisting>
 
         <para>
             We encourage use of the Response object to aggregate content and
@@ -77,9 +75,9 @@ $ctrl-&gt;dispatch();
                             controller:
                         </para>
 
-                        <programlisting language="php">
-$front-&gt;throwExceptions(true);
-</programlisting>
+                        <programlisting language="php"><![CDATA[
+$front->throwExceptions(true);
+]]></programlisting>
                     </listitem>
 
                     <listitem>
@@ -88,17 +86,17 @@ $front-&gt;throwExceptions(true);
                             object:
                         </para>
 
-                        <programlisting language="php">
-$response-&gt;renderExceptions(true);
-$front-&gt;setResponse($response);
-$front-&gt;dispatch();
+                        <programlisting language="php"><![CDATA[
+$response->renderExceptions(true);
+$front->setResponse($response);
+$front->dispatch();
 
 // or:
-$front-&gt;returnResponse(true);
-$response = $front-&gt;dispatch();
-$response-&gt;renderExceptions(true);
+$front->returnResponse(true);
+$response = $front->dispatch();
+$response->renderExceptions(true);
 echo $response;
-</programlisting>
+]]></programlisting>
                     </listitem>
                 </itemizedlist>
             </listitem>
@@ -192,25 +190,25 @@ echo $response;
                             as follows:
                         </para>
 
-                        <programlisting language="php">
+                        <programlisting language="php"><![CDATA[
 // Retrieve the requested controller name
-// Access used to be via: $this-&gt;_action-&gt;getControllerName().
+// Access used to be via: $this->_action->getControllerName().
 // The example below uses getRequest(), though you may also directly
 // access the $_request property; using getRequest() is recommended as
 // a parent class may override access to the request object.
-$controller = $this-&gt;getRequest()-&gt;getControllerName();
+$controller = $this->getRequest()->getControllerName();
 
 // Retrieve the requested action name
-// Access used to be via: $this-&gt;_action-&gt;getActionName().
-$action = $this-&gt;getRequest()-&gt;getActionName();
+// Access used to be via: $this->_action->getActionName().
+$action = $this->getRequest()->getActionName();
 
 // Retrieve the request parameters
 // This hasn't changed; the _getParams() and _getParam() methods simply
 // proxy to the request object now.
-$params = $this-&gt;_getParams();
+$params = $this->_getParams();
 // request 'foo' parameter, using 'default' as default value if not found
-$foo = $this-&gt;_getParam('foo', 'default');
-</programlisting>
+$foo = $this->_getParam('foo', 'default');
+]]></programlisting>
                     </listitem>
 
                     <listitem>
@@ -221,18 +219,18 @@ $foo = $this-&gt;_getParam('foo', 'default');
                             action is using <methodname>__call()</methodname>:
                         </para>
 
-                        <programlisting language="php">
+                        <programlisting language="php"><![CDATA[
 public function __call($method, $args)
 {
     // If an unmatched 'Action' method was requested, pass on to the
     // default action method:
     if ('Action' == substr($method, -6)) {
-        return $this-&gt;defaultAction();
+        return $this->defaultAction();
     }
 
     throw new Zend_Controller_Exception('Invalid method called');
 }
-</programlisting>
+]]></programlisting>
                     </listitem>
                 </itemizedlist>
             </listitem>

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.isbn"><info><title>Isbn</title></info>
     
 
@@ -43,14 +41,14 @@
             A basic example of usage is below:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Isbn();
-if ($validator-&gt;isValid($isbn)) {
+if ($validator->isValid($isbn)) {
     // isbn is valid
 } else {
     // isbn is not valid
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             This will validate any <acronym>ISBN-10</acronym> and <acronym>ISBN-13</acronym> without
@@ -65,20 +63,20 @@ if ($validator-&gt;isValid($isbn)) {
             An example of an <acronym>ISBN</acronym> type restriction is below:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Isbn();
-$validator-&gt;setType(Zend_Validate_Isbn::ISBN13);
+$validator->setType(Zend_Validate_Isbn::ISBN13);
 // OR
 $validator = new Zend_Validate_Isbn(array(
-    'type' =&gt; Zend_Validate_Isbn::ISBN13,
+    'type' => Zend_Validate_Isbn::ISBN13,
 ));
 
-if ($validator-&gt;isValid($isbn)) {
+if ($validator->isValid($isbn)) {
     // this is a valid ISBN-13 value
 } else {
     // this is an invalid ISBN-13 value
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             The above will validate only <acronym>ISBN-13</acronym> values.
@@ -110,20 +108,20 @@ if ($validator-&gt;isValid($isbn)) {
             An example of separator restriction is below:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Isbn();
-$validator-&gt;setSeparator('-');
+$validator->setSeparator('-');
 // OR
 $validator = new Zend_Validate_Isbn(array(
-    'separator' =&gt; '-',
+    'separator' => '-',
 ));
 
-if ($validator-&gt;isValid($isbn)) {
+if ($validator->isValid($isbn)) {
     // this is a valid ISBN with separator
 } else {
     // this is an invalid ISBN with separator
 }
-</programlisting>
+]]></programlisting>
 
         <note><info><title>Values without separator</title></info>
             

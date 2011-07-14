@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2"><info><title>Zend_Service_Amazon_Ec2</title></info>
     
 
@@ -37,9 +35,9 @@
         <example xml:id="zend.service.amazon.ec2.staticmethods.setkeys"><info><title>setKeys() Example</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 Zend_Service_Amazon_Ec2_Ebs::setKeys('aws_key','aws_secret_key');
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -52,9 +50,9 @@ Zend_Service_Amazon_Ec2_Ebs::setKeys('aws_key','aws_secret_key');
         <example xml:id="zend.service.amazon.ec2.staticmethods.setregion"><info><title>setRegion() Example</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 Zend_Service_Amazon_Ec2_Ebs::setRegion('us-east-1');
-</programlisting>
+]]></programlisting>
         </example>
 
         <note xml:id="zend.service.amazon.ec2.staticmethods.setregion.note"><info><title>Set Amazon Ec2 Region</title></info>

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.multiuser.authentication"><info><title>Authenticating Users in Zend Framework</title></info>
     
 
@@ -52,7 +50,7 @@
             Lets assume we have the following database table setup:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 CREATE TABLE users (
     id INTEGER  NOT NULL PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
@@ -60,7 +58,7 @@ CREATE TABLE users (
     password_salt VARCHAR(32) NULL,
     real_name VARCHAR(150) NULL
 )
-</programlisting>
+]]></programlisting>
 
         <para>
             The above demonstrates a user table that includes a username, password, and also a
@@ -75,35 +73,35 @@ CREATE TABLE users (
             the "login form". We will use <classname>Zend_Form</classname> to accomplish this.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // located at application/forms/Auth/Login.php
 
 class Default_Form_Auth_Login extends Zend_Form
 {
     public function init()
     {
-        $this-&gt;setMethod('post');
+        $this->setMethod('post');
 
-        $this-&gt;addElement(
+        $this->addElement(
             'text', 'username', array(
-                'label' =&gt; 'Username:',
-                'required' =&gt; true,
-                'filters'    =&gt; array('StringTrim'),
+                'label' => 'Username:',
+                'required' => true,
+                'filters'    => array('StringTrim'),
             ));
 
-        $this-&gt;addElement('password', 'password', array(
-            'label' =&gt; 'Password:',
-            'required' =&gt; true,
+        $this->addElement('password', 'password', array(
+            'label' => 'Password:',
+            'required' => true,
             ));
 
-        $this-&gt;addElement('submit', 'submit', array(
-            'ignore'   =&gt; true,
-            'label'    =&gt; 'Login',
+        $this->addElement('submit', 'submit', array(
+            'ignore'   => true,
+            'label'    => 'Login',
             ));
 
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             With the above form, we can now go about creating our login action for
@@ -120,17 +118,17 @@ class Default_Form_Auth_Login extends Zend_Form
             with the form:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class AuthController extends Zend_Controller_Action
 {
 
     public function loginAction()
     {
-        $db = $this-&gt;_getParam('db');
+        $db = $this->_getParam('db');
 
         $loginForm = new Default_Form_Auth_Login($_POST);
 
-        if ($loginForm-&gt;isValid()) {
+        if ($loginForm->isValid()) {
 
             $adapter = new Zend_Auth_Adapter_DbTable(
                 $db,
@@ -140,25 +138,25 @@ class AuthController extends Zend_Controller_Action
                 'MD5(CONCAT(?, password_salt))'
                 );
 
-            $adapter-&gt;setIdentity($loginForm-&gt;getValue('username'));
-            $adapter-&gt;setCredential($loginForm-&gt;getValue('password'));
+            $adapter->setIdentity($loginForm->getValue('username'));
+            $adapter->setCredential($loginForm->getValue('password'));
 
-            $result = $auth-&gt;authenticate($adapter);
+            $result = $auth->authenticate($adapter);
 
-            if ($result-&gt;isValid()) {
-                $this-&gt;_helper-&gt;FlashMessenger('Successful Login');
-                $this-&gt;redirect('/');
+            if ($result->isValid()) {
+                $this->_helper->FlashMessenger('Successful Login');
+                $this->redirect('/');
                 return;
             }
 
         }
 
-        $this-&gt;view-&gt;loginForm = $loginForm;
+        $this->view->loginForm = $loginForm;
 
     }
 
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             The corresponding view script is quite simple for this action. It will set the current
@@ -166,10 +164,10 @@ class AuthController extends Zend_Controller_Action
             is located at <filename>application/views/scripts/auth/login.phtml</filename>:
         </para>
 
-        <programlisting language="php">
-$this-&gt;form-&gt;setAction($this-&gt;url());
-echo $this-&gt;form;
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$this->form->setAction($this->url());
+echo $this->form;
+]]></programlisting>
 
         <para>
             There you have it. With these basics you can expand the general concepts to include

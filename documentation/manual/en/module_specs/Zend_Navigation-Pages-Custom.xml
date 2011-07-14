@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.custom"><info><title>Creating custom page types</title></info>
     
 
@@ -29,7 +27,7 @@
             <methodname>getHref()</methodname> method.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class My_Simple_Page extends Zend_Navigation_Page
 {
     public function getHref()
@@ -37,7 +35,7 @@ class My_Simple_Page extends Zend_Navigation_Page
         return 'something-completely-different';
     }
 }
-</programlisting>
+]]></programlisting>
     </example>
 
     <example xml:id="zend.navigation.custom.example.properties"><info><title>A custom page with properties</title></info>
@@ -49,7 +47,7 @@ class My_Simple_Page extends Zend_Navigation_Page
             <methodname>setConfig()</methodname>.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class My_Navigation_Page extends Zend_Navigation_Page
 {
     private $_foo;
@@ -57,44 +55,44 @@ class My_Navigation_Page extends Zend_Navigation_Page
 
     public function setFoo($foo)
     {
-        $this-&gt;_foo = $foo;
+        $this->_foo = $foo;
     }
 
     public function getFoo()
     {
-        return $this-&gt;_foo;
+        return $this->_foo;
     }
 
     public function setFooBar($fooBar)
     {
-        $this-&gt;_fooBar = $fooBar;
+        $this->_fooBar = $fooBar;
     }
 
     public function getFooBar()
     {
-        return $this-&gt;_fooBar;
+        return $this->_fooBar;
     }
 
     public function getHref()
     {
-        return $this-&gt;foo . '/' . $this-&gt;fooBar;
+        return $this->foo . '/' . $this->fooBar;
     }
 }
 
 // can now construct using
 $page = new My_Navigation_Page(array(
-    'label'   =&gt; 'Property names are mapped to setters',
-    'foo'     =&gt; 'bar',
-    'foo_bar' =&gt; 'baz'
+    'label'   => 'Property names are mapped to setters',
+    'foo'     => 'bar',
+    'foo_bar' => 'baz'
 ));
 
 // ...or
 $page = Zend_Navigation_Page::factory(array(
-    'type'    =&gt; 'My_Navigation_Page',
-    'label'   =&gt; 'Property names are mapped to setters',
-    'foo'     =&gt; 'bar',
-    'foo_bar' =&gt; 'baz'
+    'type'    => 'My_Navigation_Page',
+    'label'   => 'Property names are mapped to setters',
+    'foo'     => 'bar',
+    'foo_bar' => 'baz'
 ));
-</programlisting>
+]]></programlisting>
     </example>
 </section>

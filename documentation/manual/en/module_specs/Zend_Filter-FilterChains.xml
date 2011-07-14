@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.filter_chains"><info><title>Filter Chains</title></info>
     
 
@@ -12,15 +10,15 @@
         username:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 // Create a filter chain and add filters to the chain
 $filterChain = new Zend_Filter();
-$filterChain-&gt;addFilter(new Zend_Filter_Alpha())
-            -&gt;addFilter(new Zend_Filter_StringToLower());
+$filterChain->addFilter(new Zend_Filter_Alpha())
+            ->addFilter(new Zend_Filter_StringToLower());
 
 // Filter the username
-$username = $filterChain-&gt;filter($_POST['username']);
-</programlisting>
+$username = $filterChain->filter($_POST['username']);
+]]></programlisting>
 
     <para>
         Filters are run in the order they were added to <classname>Zend_Filter</classname>. In the
@@ -43,18 +41,18 @@ $username = $filterChain-&gt;filter($_POST['username']);
             username filter chain example:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Create a filter chain and add filters to the chain
 $filterChain = new Zend_Filter();
 
 // this filter will be appended to the filter chain
-$filterChain-&gt;appendFilter(new Zend_Filter_StringToLower());
+$filterChain->appendFilter(new Zend_Filter_StringToLower());
 
 // this filter will be prepended at the beginning of the filter chain.
-$filterChain-&gt;prependFilter(new Zend_Filter_Alpha());
+$filterChain->prependFilter(new Zend_Filter_Alpha());
 
 // Filter the username
-$username = $filterChain-&gt;filter($_POST['username']);
-</programlisting>
+$username = $filterChain->filter($_POST['username']);
+]]></programlisting>
     </section>
 </section>

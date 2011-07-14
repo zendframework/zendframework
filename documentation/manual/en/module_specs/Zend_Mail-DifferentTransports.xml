@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.different-transports"><info><title>Using Different Transports</title></info>
     
 
@@ -14,15 +12,15 @@
     <example xml:id="zend.mail.different-transports.example-1"><info><title>Using Different Transports</title></info>
         
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 // build message...
 $tr1 = new Zend_Mail_Transport_Smtp('server@example.com');
 $tr2 = new Zend_Mail_Transport_Smtp('other_server@example.com');
-$mail-&gt;send($tr1);
-$mail-&gt;send($tr2);
-$mail-&gt;send();  // use default again
-</programlisting>
+$mail->send($tr1);
+$mail->send($tr2);
+$mail->send();  // use default again
+]]></programlisting>
     </example>
 
     <note><info><title>Additional transports</title></info>

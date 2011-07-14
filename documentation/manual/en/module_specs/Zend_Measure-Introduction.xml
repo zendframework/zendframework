@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.introduction"><info><title>Introduction</title></info>
 
     
@@ -23,13 +21,13 @@
             for units of the same type (mass, area, temperature, velocity, etc.), not between types.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('en');
 $unit = new Zend_Measure_Length(100, Zend_Measure_Length::METER, $locale);
 
 // Convert meters to yards
-echo $unit-&gt;convertTo(Zend_Measure_Length::YARD);
-</programlisting>
+echo $unit->convertTo(Zend_Measure_Length::YARD);
+]]></programlisting>
     </example>
 
     <para>
@@ -51,13 +49,13 @@ echo $unit-&gt;convertTo(Zend_Measure_Length::YARD);
             unit is <emphasis>m</emphasis>.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 echo Zend_Measure_Length::STANDARD;  // outputs 'Length::METER'
 echo Zend_Measure_Length::KILOMETER; // outputs 'Length::KILOMETER'
 
 $unit = new Zend_Measure_Length(100,'METER');
 echo $unit;
 // outputs '100 m'
-</programlisting>
+]]></programlisting>
     </example>
 </section>

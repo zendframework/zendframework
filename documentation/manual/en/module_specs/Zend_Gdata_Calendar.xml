@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.calendar"><info><title>Using Google Calendar</title></info>
     
 
@@ -119,7 +117,7 @@
                 authentication:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Parameters for ClientAuth authentication
 $service = Zend_Gdata_Calendar::AUTH_SERVICE_NAME;
 $user = "sample.user@gmail.com";
@@ -130,14 +128,14 @@ $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 
 // Create an instance of the Calendar service
 $service = new Zend_Gdata_Calendar($client);
-</programlisting>
+]]></programlisting>
 
             <para>
                 A Calendar service using AuthSub can be created in a similar, though slightly more
                 lengthy fashion:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 /*
  * Retrieve the current URL so that the AuthSub server knows where to
  * redirect the user after authentication is complete.
@@ -153,16 +151,16 @@ function getCurrentUrl()
                             strcspn($_SERVER['REQUEST_URI'], "\n\r")),
                             ENT_QUOTES);
 
-    if (isset($_SERVER['HTTPS']) &amp;&amp;
+    if (isset($_SERVER['HTTPS']) &&
         strtolower($_SERVER['HTTPS']) == 'on') {
         $protocol = 'https://';
     } else {
         $protocol = 'http://';
     }
     $host = $_SERVER['HTTP_HOST'];
-    if ($_SERVER['HTTP_PORT'] != '' &amp;&amp;
-        (($protocol == 'http://' &amp;&amp; $_SERVER['HTTP_PORT'] != '80') ||
-        ($protocol == 'https://' &amp;&amp; $_SERVER['HTTP_PORT'] != '443'))) {
+    if ($_SERVER['HTTP_PORT'] != '' &&
+        (($protocol == 'http://' && $_SERVER['HTTP_PORT'] != '80') ||
+        ($protocol == 'https://' && $_SERVER['HTTP_PORT'] != '443'))) {
         $port = ':' . $_SERVER['HTTP_PORT'];
     } else {
         $port = '';
@@ -180,7 +178,7 @@ function getAuthSubHttpClient()
 
     // if there is no AuthSub session or one-time token waiting for us,
     // redirect the user to the AuthSub server to get one.
-    if (!isset($_SESSION['sessionToken']) &amp;&amp; !isset($_GET['token'])) {
+    if (!isset($_SESSION['sessionToken']) && !isset($_GET['token'])) {
         // Parameters to give to AuthSub server
         $next = getCurrentUrl();
         $scope = "http://www.google.com/calendar/feeds/";
@@ -201,7 +199,7 @@ function getAuthSubHttpClient()
     }
 
     // Convert an AuthSub one-time token into a session token if needed
-    if (!isset($_SESSION['sessionToken']) &amp;&amp; isset($_GET['token'])) {
+    if (!isset($_SESSION['sessionToken']) && isset($_GET['token'])) {
         $_SESSION['sessionToken'] =
             Zend_Gdata_AuthSub::getAuthSubSessionToken($_GET['token']);
     }
@@ -214,7 +212,7 @@ function getAuthSubHttpClient()
     return $client;
 }
 
-// -&gt; Script execution begins here &lt;-
+// -> Script execution begins here <-
 
 // Make sure that the user has a valid session, so we can record the
 // AuthSub session token once it is available.
@@ -223,19 +221,19 @@ session_start();
 // Create an instance of the Calendar service, redirecting the user
 // to the AuthSub server if necessary.
 $service = new Zend_Gdata_Calendar(getAuthSubHttpClient());
-</programlisting>
+]]></programlisting>
 
             <para>
                 Finally, an unauthenticated server can be created for use with either public feeds
                 or MagicCookie authentication:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Create an instance of the Calendar service using an unauthenticated
 // HTTP client
 
 $service = new Zend_Gdata_Calendar();
-</programlisting>
+]]></programlisting>
 
             <para>
                 Note that MagicCookie authentication is not supplied with the
@@ -263,17 +261,17 @@ $service = new Zend_Gdata_Calendar();
             Required) status code.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Calendar::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Calendar($client);
 
 try {
-    $listFeed= $service-&gt;getCalendarListFeed();
+    $listFeed= $service->getCalendarListFeed();
 } catch (Zend_Gdata_App_Exception $e) {
-    echo "Error: " . $e-&gt;getMessage();
+    echo "Error: " . $e->getMessage();
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Calling <methodname>getCalendarListFeed()</methodname> creates a new instance of
@@ -283,15 +281,15 @@ try {
             the enclosed calendars.
         </para>
 
-        <programlisting language="php">
-echo "&lt;h1&gt;Calendar List Feed&lt;/h1&gt;";
-echo "&lt;ul&gt;";
+        <programlisting language="php"><![CDATA[
+echo "<h1>Calendar List Feed</h1>";
+echo "<ul>";
 foreach ($listFeed as $calendar) {
-    echo "&lt;li&gt;" . $calendar-&gt;title .
-         " (Event Feed: " . $calendar-&gt;id . ")&lt;/li&gt;";
+    echo "<li>" . $calendar->title .
+         " (Event Feed: " . $calendar->id . ")</li>";
 }
-echo "&lt;/ul&gt;";
-</programlisting>
+echo "</ul>";
+]]></programlisting>
     </section>
 
     <section xml:id="zend.gdata.event_retrieval"><info><title>Retrieving Events</title></info>
@@ -371,30 +369,30 @@ echo "&lt;/ul&gt;";
                 events occurring in the future are returned.
             </para>
 
-            <programlisting language="php">
-$query = $service-&gt;newEventQuery();
-$query-&gt;setUser('default');
-// Set to $query-&gt;setVisibility('private-magicCookieValue') if using
+            <programlisting language="php"><![CDATA[
+$query = $service->newEventQuery();
+$query->setUser('default');
+// Set to $query->setVisibility('private-magicCookieValue') if using
 // MagicCookie auth
-$query-&gt;setVisibility('private');
-$query-&gt;setProjection('full');
-$query-&gt;setOrderby('starttime');
-$query-&gt;setFutureevents('true');
+$query->setVisibility('private');
+$query->setProjection('full');
+$query->setOrderby('starttime');
+$query->setFutureevents('true');
 
 // Retrieve the event list from the calendar server
 try {
-    $eventFeed = $service-&gt;getCalendarEventFeed($query);
+    $eventFeed = $service->getCalendarEventFeed($query);
 } catch (Zend_Gdata_App_Exception $e) {
-    echo "Error: " . $e-&gt;getMessage();
+    echo "Error: " . $e->getMessage();
 }
 
 // Iterate through the list of events, outputting them as an HTML list
-echo "&lt;ul&gt;";
+echo "<ul>";
 foreach ($eventFeed as $event) {
-    echo "&lt;li&gt;" . $event-&gt;title . " (Event ID: " . $event-&gt;id . ")&lt;/li&gt;";
+    echo "<li>" . $event->title . " (Event ID: " . $event->id . ")</li>";
 }
-echo "&lt;/ul&gt;";
-</programlisting>
+echo "</ul>";
+]]></programlisting>
 
             <para>
                 Additional properties such as ID, author, when, event status, visibility, web
@@ -418,10 +416,10 @@ echo "&lt;/ul&gt;";
                 <property>startMax</property>.
             </para>
 
-            <programlisting language="php">
-$query-&gt;setStartMin('2006-12-01');
-$query-&gt;setStartMax('2006-12-16');
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$query->setStartMin('2006-12-01');
+$query->setStartMax('2006-12-16');
+]]></programlisting>
 
             <para>
                 Note that <property>startMin</property> is inclusive whereas
@@ -438,9 +436,9 @@ $query-&gt;setStartMax('2006-12-16');
                 the <methodname>setQuery()</methodname> method when creating the query.
             </para>
 
-            <programlisting language="php">
-$query-&gt;setQuery("dogfood");
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$query->setQuery("dogfood");
+]]></programlisting>
         </section>
 
         <section xml:id="zend.gdata.event_retrieval.individual"><info><title>Retrieving Individual Events</title></info>
@@ -452,19 +450,19 @@ $query-&gt;setQuery("dogfood");
                 <methodname>getCalendarEventEntry()</methodname> should be called instead.
             </para>
 
-            <programlisting language="php">
-$query = $service-&gt;newEventQuery();
-$query-&gt;setUser('default');
-$query-&gt;setVisibility('private');
-$query-&gt;setProjection('full');
-$query-&gt;setEvent($eventId);
+            <programlisting language="php"><![CDATA[
+$query = $service->newEventQuery();
+$query->setUser('default');
+$query->setVisibility('private');
+$query->setProjection('full');
+$query->setEvent($eventId);
 
 try {
-    $event = $service-&gt;getCalendarEventEntry($query);
+    $event = $service->getCalendarEventEntry($query);
 } catch (Zend_Gdata_App_Exception $e) {
-    echo "Error: " . $e-&gt;getMessage();
+    echo "Error: " . $e->getMessage();
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 In a similar fashion, if the event <acronym>URL</acronym> is known, it can be passed
@@ -473,16 +471,16 @@ try {
                 <acronym>URL</acronym> contains all the necessary information to retrieve the event.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $eventURL = "http://www.google.com/calendar/feeds/default/private"
           . "/full/g829on5sq4ag12se91d10uumko";
 
 try {
-    $event = $service-&gt;getCalendarEventEntry($eventURL);
+    $event = $service->getCalendarEventEntry($eventURL);
 } catch (Zend_Gdata_App_Exception $e) {
-    echo "Error: " . $e-&gt;getMessage();
+    echo "Error: " . $e->getMessage();
 }
-</programlisting>
+]]></programlisting>
         </section>
     </section>
 
@@ -605,16 +603,16 @@ try {
                 <methodname>insertEvent()</methodname> function.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Create a new entry using the calendar service's magic factory method
-$event= $service-&gt;newEventEntry();
+$event= $service->newEventEntry();
 
 // Populate the event with the desired information
 // Note that each attribute is crated as an instance of a matching class
-$event-&gt;title = $service-&gt;newTitle("My Event");
-$event-&gt;where = array($service-&gt;newWhere("Mountain View, California"));
-$event-&gt;content =
-    $service-&gt;newContent(" This is my awesome event. RSVP required.");
+$event->title = $service->newTitle("My Event");
+$event->where = array($service->newWhere("Mountain View, California"));
+$event->content =
+    $service->newContent(" This is my awesome event. RSVP required.");
 
 // Set the date using RFC 3339 format.
 $startDate = "2008-01-20";
@@ -623,15 +621,15 @@ $endDate = "2008-01-20";
 $endTime = "16:00";
 $tzOffset = "-08";
 
-$when = $service-&gt;newWhen();
-$when-&gt;startTime = "{$startDate}T{$startTime}:00.000{$tzOffset}:00";
-$when-&gt;endTime = "{$endDate}T{$endTime}:00.000{$tzOffset}:00";
-$event-&gt;when = array($when);
+$when = $service->newWhen();
+$when->startTime = "{$startDate}T{$startTime}:00.000{$tzOffset}:00";
+$when->endTime = "{$endDate}T{$endTime}:00.000{$tzOffset}:00";
+$event->when = array($when);
 
 // Upload the event to the calendar server
 // A copy of the event as it is recorded on the server is returned
-$newEvent = $service-&gt;insertEvent($event);
-</programlisting>
+$newEvent = $service->insertEvent($event);
+]]></programlisting>
         </section>
 
         <section xml:id="zend.gdata.calendar.creating_events.schedulers_reminders"><info><title>Event Schedules and Reminders</title></info>
@@ -654,16 +652,16 @@ $newEvent = $service-&gt;insertEvent($event);
                 <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.ietf.org/rfc/rfc3339.txt">RFC3339</link> format.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Schedule the event to occur on December 05, 2007 at 2 PM PST (UTC-8)
 // with a duration of one hour.
-$when = $service-&gt;newWhen();
-$when-&gt;startTime = "2007-12-05T14:00:00-08:00";
-$when-&gt;endTime="2007-12-05T15:00:00:00-08:00";
+$when = $service->newWhen();
+$when->startTime = "2007-12-05T14:00:00-08:00";
+$when->endTime="2007-12-05T15:00:00:00-08:00";
 
 // Apply the when property to an event
-$event-&gt;when = array($when);
-</programlisting>
+$event->when = array($when);
+]]></programlisting>
 
             <para>
                 The <property>when</property> attribute also controls when reminders are sent to a
@@ -682,17 +680,17 @@ $event-&gt;when = array($when);
                 available. For example, 1 hour and 30 minutes should be entered as 90 minutes.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Create a new reminder object. It should be set to send an email
 // to the user 10 minutes beforehand.
-$reminder = $service-&gt;newReminder();
-$reminder-&gt;method = "email";
-$reminder-&gt;minutes = "10";
+$reminder = $service->newReminder();
+$reminder->method = "email";
+$reminder->minutes = "10";
 
 // Apply the reminder to an existing event's when property
-$when = $event-&gt;when[0];
-$when-&gt;reminders = array($reminder);
-</programlisting>
+$when = $event->when[0];
+$when->reminders = array($reminder);
+]]></programlisting>
         </section>
 
         <section xml:id="zend.gdata.calendar.creating_events.recurring"><info><title>Creating Recurring Events</title></info>
@@ -720,16 +718,16 @@ $when-&gt;reminders = array($reminder);
                     Guide</link>, as well as in <acronym>RFC</acronym> 2445.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
  // Create a new entry using the calendar service's magic factory method
-$event= $service-&gt;newEventEntry();
+$event= $service->newEventEntry();
 
 // Populate the event with the desired information
 // Note that each attribute is crated as an instance of a matching class
-$event-&gt;title = $service-&gt;newTitle("My Recurring Event");
-$event-&gt;where = array($service-&gt;newWhere("Palo Alto, California"));
-$event-&gt;content =
-    $service-&gt;newContent(' This is my other awesome event, ' .
+$event->title = $service->newTitle("My Recurring Event");
+$event->where = array($service->newWhere("Palo Alto, California"));
+$event->content =
+    $service->newContent(' This is my other awesome event, ' .
                          ' occurring all-day every Tuesday from .
                          '2007-05-01 until 207-09-04. No RSVP required.');
 
@@ -739,12 +737,12 @@ $recurrence = "DTSTART;VALUE=DATE:20070501\r\n" .
         "DTEND;VALUE=DATE:20070502\r\n" .
         "RRULE:FREQ=WEEKLY;BYDAY=Tu;UNTIL=20070904\r\n";
 
-$event-&gt;recurrence = $service-&gt;newRecurrence($recurrence);
+$event->recurrence = $service->newRecurrence($recurrence);
 
 // Upload the event to the calendar server
 // A copy of the event as it is recorded on the server is returned
-$newEvent = $service-&gt;insertEvent($event);
-</programlisting>
+$newEvent = $service->insertEvent($event);
+]]></programlisting>
         </section>
 
         <section xml:id="zend.gdata.calendar.creating_events.quickadd"><info><title>Using QuickAdd</title></info>
@@ -759,18 +757,18 @@ $newEvent = $service-&gt;insertEvent($event);
                 <property>content</property> property.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Create a new entry using the calendar service's magic factory method
-$event= $service-&gt;newEventEntry();
+$event= $service->newEventEntry();
 
 // Populate the event with the desired information
-$event-&gt;content= $service-&gt;newContent("Dinner at Joe's Diner on Thursday");
-$event-&gt;quickAdd = $service-&gt;newQuickAdd("true");
+$event->content= $service->newContent("Dinner at Joe's Diner on Thursday");
+$event->quickAdd = $service->newQuickAdd("true");
 
 // Upload the event to the calendar server
 // A copy of the event as it is recorded on the server is returned
-$newEvent = $service-&gt;insertEvent($event);
-</programlisting>
+$newEvent = $service->insertEvent($event);
+]]></programlisting>
         </section>
     </section>
 
@@ -792,20 +790,20 @@ $newEvent = $service-&gt;insertEvent($event);
             before attempting to resubmit any modifications.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Get the first event in the user's event list
 $event = $eventFeed[0];
 
 // Change the title to a new value
-$event-&gt;title = $service-&gt;newTitle("Woof!");
+$event->title = $service->newTitle("Woof!");
 
 // Upload the changes to the server
 try {
-    $event-&gt;save();
+    $event->save();
 } catch (Zend_Gdata_App_Exception $e) {
-    echo "Error: " . $e-&gt;getMessage();
+    echo "Error: " . $e->getMessage();
 }
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.gdata.calendar.deleting_events"><info><title>Deleting Events</title></info>
@@ -826,16 +824,16 @@ try {
             "http://schemas.google.com/g/2005#event.canceled".
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Option 1: Events can be deleted directly
-$event-&gt;delete();
-</programlisting>
+$event->delete();
+]]></programlisting>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Option 2: Events can be deleted supplying the edit URL of the event
 // to the calendar service, if known
-$service-&gt;delete($event-&gt;getEditLink()-&gt;href);
-</programlisting>
+$service->delete($event->getEditLink()->href);
+]]></programlisting>
     </section>
 
     <section xml:id="zend.gdata.calendar.comments"><info><title>Accessing Event Comments</title></info>
@@ -856,25 +854,25 @@ $service-&gt;delete($event-&gt;getEditLink()-&gt;href);
             <property>content</property> property.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Extract the comment URL from the first event in a user's feed list
 $event = $eventFeed[0];
-$commentUrl = $event-&gt;comments-&gt;feedLink-&gt;url;
+$commentUrl = $event->comments->feedLink->url;
 
 // Retrieve the comment list for the event
 try {
-$commentFeed = $service-&gt;getFeed($commentUrl);
+$commentFeed = $service->getFeed($commentUrl);
 } catch (Zend_Gdata_App_Exception $e) {
-    echo "Error: " . $e-&gt;getMessage();
+    echo "Error: " . $e->getMessage();
 }
 
 // Output each comment as an HTML list
-echo "&lt;ul&gt;";
+echo "<ul>";
 foreach ($commentFeed as $comment) {
-    echo "&lt;li&gt;&lt;em&gt;Comment By: " . $comment-&gt;author-&gt;name "&lt;/em&gt;&lt;br/&gt;" .
-         $comment-&gt;content . "&lt;/li&gt;";
+    echo "<li><em>Comment By: " . $comment->author->name "</em><br/>" .
+         $comment->content . "</li>";
 }
-echo "&lt;/ul&gt;";
-</programlisting>
+echo "</ul>";
+]]></programlisting>
     </section>
 </section>

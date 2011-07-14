@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.statement"><info><title>Zend_Db_Statement</title></info>
     
 
@@ -31,12 +29,12 @@
         <example xml:id="zend.db.statement.creating.example1"><info><title>Creating a SQL statement object with query()</title></info>
             
 
-            <programlisting language="php">
-$stmt = $db-&gt;query(
+            <programlisting language="php"><![CDATA[
+$stmt = $db->query(
             'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?',
             array('goofy', 'FIXED')
         );
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -58,11 +56,11 @@ $stmt = $db-&gt;query(
         <example xml:id="zend.db.statement.creating.example2"><info><title>Using a SQL statement constructor</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?';
 
 $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -86,13 +84,13 @@ $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
         <example xml:id="zend.db.statement.executing.example1"><info><title>Executing a statement with positional parameters</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?';
 
 $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
 
-$stmt-&gt;execute(array('goofy', 'FIXED'));
-</programlisting>
+$stmt->execute(array('goofy', 'FIXED'));
+]]></programlisting>
         </example>
 
         <para>
@@ -105,14 +103,14 @@ $stmt-&gt;execute(array('goofy', 'FIXED'));
         <example xml:id="zend.db.statement.executing.example2"><info><title>Executing a statement with named parameters</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE ' .
        'reported_by = :reporter AND bug_status = :status';
 
 $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
 
-$stmt-&gt;execute(array(':reporter' =&gt; 'goofy', ':status' =&gt; 'FIXED'));
-</programlisting>
+$stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
+]]></programlisting>
         </example>
 
         <para>
@@ -189,13 +187,13 @@ $stmt-&gt;execute(array(':reporter' =&gt; 'goofy', ':status' =&gt; 'FIXED'));
             <example xml:id="zend.db.statement.fetching.fetch.example"><info><title>Using fetch() in a loop</title></info>
                 
 
-                <programlisting language="php">
-$stmt = $db-&gt;query('SELECT * FROM bugs');
+                <programlisting language="php"><![CDATA[
+$stmt = $db->query('SELECT * FROM bugs');
 
-while ($row = $stmt-&gt;fetch()) {
+while ($row = $stmt->fetch()) {
     echo $row['bug_description'];
 }
-</programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -219,13 +217,13 @@ while ($row = $stmt-&gt;fetch()) {
             <example xml:id="zend.db.statement.fetching.fetchall.example"><info><title>Using fetchAll()</title></info>
                 
 
-                <programlisting language="php">
-$stmt = $db-&gt;query('SELECT * FROM bugs');
+                <programlisting language="php"><![CDATA[
+$stmt = $db->query('SELECT * FROM bugs');
 
-$rows = $stmt-&gt;fetchAll();
+$rows = $stmt->fetchAll();
 
 echo $rows[0]['bug_description'];
-</programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -255,15 +253,15 @@ echo $rows[0]['bug_description'];
             <example xml:id="zend.db.statement.fetching.fetch-mode.example"><info><title>Setting the fetch mode</title></info>
                 
 
-                <programlisting language="php">
-$stmt = $db-&gt;query('SELECT * FROM bugs');
+                <programlisting language="php"><![CDATA[
+$stmt = $db->query('SELECT * FROM bugs');
 
-$stmt-&gt;setFetchMode(Zend_Db::FETCH_NUM);
+$stmt->setFetchMode(Zend_Db::FETCH_NUM);
 
-$rows = $stmt-&gt;fetchAll();
+$rows = $stmt->fetchAll();
 
 echo $rows[0][0];
-</programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -295,11 +293,11 @@ echo $rows[0][0];
             <example xml:id="zend.db.statement.fetching.fetchcolumn.example"><info><title>Using fetchColumn()</title></info>
                 
 
-                <programlisting language="php">
-$stmt = $db-&gt;query('SELECT bug_id, bug_description, bug_status FROM bugs');
+                <programlisting language="php"><![CDATA[
+$stmt = $db->query('SELECT bug_id, bug_description, bug_status FROM bugs');
 
-$bug_status = $stmt-&gt;fetchColumn(2);
-</programlisting>
+$bug_status = $stmt->fetchColumn(2);
+]]></programlisting>
             </example>
 
             <para>
@@ -322,13 +320,13 @@ $bug_status = $stmt-&gt;fetchColumn(2);
             <example xml:id="zend.db.statement.fetching.fetchobject.example"><info><title>Using fetchObject()</title></info>
                 
 
-                <programlisting language="php">
-$stmt = $db-&gt;query('SELECT bug_id, bug_description, bug_status FROM bugs');
+                <programlisting language="php"><![CDATA[
+$stmt = $db->query('SELECT bug_id, bug_description, bug_status FROM bugs');
 
-$obj = $stmt-&gt;fetchObject();
+$obj = $stmt->fetchObject();
 
-echo $obj-&gt;bug_description;
-</programlisting>
+echo $obj->bug_description;
+]]></programlisting>
             </example>
 
             <para>

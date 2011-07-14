@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.plurals"><info><title>Plural notations for Translation</title></info>
     
 
@@ -55,16 +53,16 @@
                 translation.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate(
     array(
-        'adapter' =&gt; 'gettext',
-        'content' =&gt; '/path/to/german.mo',
-        'locale'  =&gt; 'de'
+        'adapter' => 'gettext',
+        'content' => '/path/to/german.mo',
+        'locale'  => 'de'
     )
 );
-$translate-&gt;plural('Car', 'Cars', $number);
-</programlisting>
+$translate->plural('Car', 'Cars', $number);
+]]></programlisting>
         </example>
     </section>
 
@@ -92,16 +90,16 @@ $translate-&gt;plural('Car', 'Cars', $number);
                 example would have to be defined like below.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate(
     array(
-        'adapter' =&gt; 'gettext',
-        'content' =&gt; '/path/to/german.mo',
-        'locale'  =&gt; 'de'
+        'adapter' => 'gettext',
+        'content' => '/path/to/german.mo',
+        'locale'  => 'de'
     )
 );
-$translate-&gt;translate(array('Car', 'Cars', $number));
-</programlisting>
+$translate->translate(array('Car', 'Cars', $number));
+]]></programlisting>
         </example>
 
         <para>
@@ -117,15 +115,15 @@ $translate-&gt;translate(array('Car', 'Cars', $number));
                 messageId's are Russian and not English.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate(
     array(
-        'adapter' =&gt; 'gettext',
-        'content' =&gt; '/path/to/german.mo',
-        'locale'  =&gt; 'de'
+        'adapter' => 'gettext',
+        'content' => '/path/to/german.mo',
+        'locale'  => 'de'
     )
 );
-$translate-&gt;translate(
+$translate->translate(
     array(
         'Car',
         'Cars first plural',
@@ -134,7 +132,7 @@ $translate-&gt;translate(
         'ru'
     )
 );
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -227,17 +225,17 @@ $translate-&gt;translate(
                 An array with plural definitions has to look like the following example.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 array(
-    'plural_0' =&gt; array(
+    'plural_0' => array(
         'plural_0 (ru)',
         'plural_1 (ru)',
         'plural_2 (ru)',
         'plural_3 (ru)'
     ),
-    'plural_1' =&gt; ''
+    'plural_1' => ''
 );
-</programlisting>
+]]></programlisting>
 
             <para>
                 In the above example 'plural_0' and 'plural_1' are the
@@ -246,15 +244,15 @@ array(
                 with real content and translation from English source to German.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 array(
-    'Car' =&gt; array(
+    'Car' => array(
         'Auto',
         'Autos'
     ),
-    'Cars' =&gt; ''
+    'Cars' => ''
 );
-</programlisting>
+]]></programlisting>
 
             <para>
                 When your translated language supports more plural forms then simply add them to
@@ -270,10 +268,10 @@ array(
                 A csv file with plural definitions has to look like the following example.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 "plural_0";"plural_0 (ru)";"plural_1 (ru)";"plural_2 (ru)";"plural_3 (ru)"
 "plural_1";
-</programlisting>
+]]></programlisting>
 
             <para>
                 All translated plural forms have to be added after the first plural of the source
@@ -326,11 +324,11 @@ array(
             Your rule could look like this:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 public function MyRule($number) {
     return ($number == 10) ? 0 : 1;
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             As you see, your rule must accept one parameter. It is the number which you will use to
@@ -349,9 +347,9 @@ public function MyRule($number) {
             this:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 Zend_Translate_Plural::setPlural('MyPlural', 'zh');
-</programlisting>
+]]></programlisting>
 
         <para>
             Now we linked our plural definition to the Chinese language.

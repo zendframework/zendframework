@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.ip"><info><title>Ip</title></info>
     
 
@@ -40,14 +38,14 @@
             A basic example of usage is below:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Ip();
-if ($validator-&gt;isValid($ip)) {
+if ($validator->isValid($ip)) {
     // ip appears to be valid
 } else {
     // ip is invalid; print the reasons
 }
-</programlisting>
+]]></programlisting>
 
         <note><info><title>Invalid IP addresses</title></info>
             
@@ -89,14 +87,14 @@ if ($validator-&gt;isValid($ip)) {
             constructor or by using <methodname>setOptions()</methodname> afterwards.
         </para>
 
-        <programlisting language="php">
-$validator = new Zend_Validate_Ip(array('allowipv6' =&gt; false));
-if ($validator-&gt;isValid($ip)) {
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_Ip(array('allowipv6' => false));
+if ($validator->isValid($ip)) {
     // ip appears to be valid ipv4 address
 } else {
     // ip is no ipv4 address
 }
-</programlisting>
+]]></programlisting>
 
         <note><info><title>Default behaviour</title></info>
             

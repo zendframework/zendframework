@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.introduction"><info><title>Introduction</title></info>
     
 
@@ -26,20 +24,20 @@
         The sender sends a message to the queue:
     </para>
 
-    <programlisting language="xml">
-&lt;resume&gt;
-    &lt;name&gt;John Smith&lt;/name&gt;
-    &lt;location&gt;
-        &lt;city&gt;San Francisco&lt;/city&gt;
-        &lt;state&gt;California&lt;/state&gt;
-        &lt;zip&gt;00001&lt;/zip&gt;
-    &lt;/location&gt;
-    &lt;skills&gt;
-        &lt;programming&gt;PHP&lt;/programming&gt;
-        &lt;programming&gt;Perl&lt;/programming&gt;
-    &lt;/skills&gt;
-&lt;/resume&gt;
-</programlisting>
+    <programlisting language="xml"><![CDATA[
+<resume>
+    <name>John Smith</name>
+    <location>
+        <city>San Francisco</city>
+        <state>California</state>
+        <zip>00001</zip>
+    </location>
+    <skills>
+        <programming>PHP</programming>
+        <programming>Perl</programming>
+    </skills>
+</resume>
+]]></programlisting>
 
     <para>
         The recipient or consumer of the queue would pick up the message and

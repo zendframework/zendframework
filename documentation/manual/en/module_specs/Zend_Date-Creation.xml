@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.creation"><info><title>Creation of Dates</title></info>
     
 
@@ -30,9 +28,9 @@
                 <classname>Zend_Date</classname> instance.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
-</programlisting>
+]]></programlisting>
         </example>
 
         <example xml:id="zend.date.creation.actual.example-2"><info><title>Static Date Creation</title></info>
@@ -46,9 +44,9 @@ $date = new Zend_Date();
                 can not be changed by giving optional parameters.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $date = Zend_Date::now();
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -85,10 +83,10 @@ $date = Zend_Date::now();
                 much smaller than converting it to a specified format.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // SELECT UNIX_TIMESTAMP(my_datetime_column) FROM my_table
 $date = new Zend_Date($unixtimestamp, Zend_Date::TIMESTAMP);
-</programlisting>
+]]></programlisting>
         </example>
 
         <example xml:id="zend.date.creation.database.example-2"><info><title>Convenient Creation of Dates from Database Date Values</title></info>
@@ -108,10 +106,10 @@ $date = new Zend_Date($unixtimestamp, Zend_Date::TIMESTAMP);
                 timestamps are only supported for dates after 1 January 1970.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // SELECT datecolumn FROM my_table
 $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -145,20 +143,20 @@ $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
                 means that if f.e. no hour is given the hour <emphasis>0</emphasis> is used.
             </para>
 
-            <programlisting language="php">
-$datearray = array('year' =&gt; 2006,
-                   'month' =&gt; 4,
-                   'day' =&gt; 18,
-                   'hour' =&gt; 12,
-                   'minute' =&gt; 3,
-                   'second' =&gt; 10);
+            <programlisting language="php"><![CDATA[
+$datearray = array('year' => 2006,
+                   'month' => 4,
+                   'day' => 18,
+                   'hour' => 12,
+                   'minute' => 3,
+                   'second' => 10);
 $date = new Zend_Date($datearray);
-</programlisting>
+]]></programlisting>
 
-            <programlisting language="php">
-$datearray = array('year' =&gt; 2006, 'month' =&gt; 4, 'day' =&gt; 18);
+            <programlisting language="php"><![CDATA[
+$datearray = array('year' => 2006, 'month' => 4, 'day' => 18);
 $date = new Zend_Date($datearray);
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 </section>

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.xmlrpc.client"><info><title>Zend_XmlRpc_Client</title></info>
     
 
@@ -37,13 +35,13 @@
         <example xml:id="zend.xmlrpc.client.method-calls.example-1"><info><title>XML-RPC Method Call</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
 
-echo $client-&gt;call('test.sayHello');
+echo $client->call('test.sayHello');
 
 // hello
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -64,16 +62,16 @@ echo $client-&gt;call('test.sayHello');
         <example xml:id="zend.xmlrpc.client.method-calls.example-2"><info><title>XML-RPC Method Call with Parameters</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
 
 $arg1 = 1.1;
 $arg2 = 'foo';
 
-$result = $client-&gt;call('test.sayHello', array($arg1, $arg2));
+$result = $client->call('test.sayHello', array($arg1, $arg2));
 
 // $result is a native PHP type
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -216,10 +214,10 @@ $result = $client-&gt;call('test.sayHello', array($arg1, $arg2));
                     your <acronym>XML-RPC</acronym> call:
                 </para>
 
-                <programlisting language="php">
-$client-&gt;setSkipSystemLookup(true);
-$result = $client-&gt;call('foo.bar', array(array()));
-</programlisting>
+                <programlisting language="php"><![CDATA[
+$client->setSkipSystemLookup(true);
+$result = $client->call('foo.bar', array(array()));
+]]></programlisting>
             </note>
         </section>
 
@@ -445,13 +443,13 @@ $result = $client-&gt;call('foo.bar', array(array()));
         <example xml:id="zend.xmlrpc.client.requests-and-responses.example-1"><info><title>Proxy the Default Namespace</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
 
-$service = $client-&gt;getProxy();           // Proxy the default namespace
+$service = $client->getProxy();           // Proxy the default namespace
 
-$hello = $service-&gt;test-&gt;sayHello(1, 2);  // test.Hello(1, 2) returns "hello"
-</programlisting>
+$hello = $service->test->sayHello(1, 2);  // test.Hello(1, 2) returns "hello"
+]]></programlisting>
         </example>
 
         <para>
@@ -465,13 +463,13 @@ $hello = $service-&gt;test-&gt;sayHello(1, 2);  // test.Hello(1, 2) returns "hel
         <example xml:id="zend.xmlrpc.client.requests-and-responses.example-2"><info><title>Proxy Any Namespace</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
 
-$test  = $client-&gt;getProxy('test');     // Proxy the "test" namespace
+$test  = $client->getProxy('test');     // Proxy the "test" namespace
 
-$hello = $test-&gt;sayHello(1, 2);         // test.Hello(1,2) returns "hello"
-</programlisting>
+$hello = $test->sayHello(1, 2);         // test.Hello(1,2) returns "hello"
+]]></programlisting>
         </example>
 
         <para>
@@ -505,20 +503,20 @@ $hello = $test-&gt;sayHello(1, 2);         // test.Hello(1,2) returns "hello"
             <example xml:id="zend.xmlrpc.client.error-handling.http.example-1"><info><title>Handling HTTP Errors</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://foo/404');
 
 try {
 
-    $client-&gt;call('bar', array($arg1, $arg2));
+    $client->call('bar', array($arg1, $arg2));
 
 } catch (Zend_XmlRpc_Client_HttpException $e) {
 
-    // $e-&gt;getCode() returns 404
-    // $e-&gt;getMessage() returns "Not Found"
+    // $e->getCode() returns 404
+    // $e->getMessage() returns "Not Found"
 
 }
-</programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -551,20 +549,20 @@ try {
             <example xml:id="zend.xmlrpc.client.error-handling.faults.example-1"><info><title>Handling XML-RPC Faults</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
 
 try {
 
-    $client-&gt;call('badMethod');
+    $client->call('badMethod');
 
 } catch (Zend_XmlRpc_Client_FaultException $e) {
 
-    // $e-&gt;getCode() returns 1
-    // $e-&gt;getMessage() returns "Unknown method"
+    // $e->getCode() returns 1
+    // $e->getMessage() returns "Unknown method"
 
 }
-</programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -622,18 +620,18 @@ try {
         <example xml:id="zend.xmlrpc.client.request-to-response.example-1"><info><title>Processing Request to Response</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
 
 $request = new Zend_XmlRpc_Request();
-$request-&gt;setMethod('test.sayHello');
-$request-&gt;setParams(array('foo', 'bar'));
+$request->setMethod('test.sayHello');
+$request->setParams(array('foo', 'bar'));
 
-$client-&gt;doRequest($request);
+$client->doRequest($request);
 
-// $client-&gt;getLastRequest() returns instanceof Zend_XmlRpc_Request
-// $client-&gt;getLastResponse() returns instanceof Zend_XmlRpc_Response
-</programlisting>
+// $client->getLastRequest() returns instanceof Zend_XmlRpc_Request
+// $client->getLastResponse() returns instanceof Zend_XmlRpc_Response
+]]></programlisting>
         </example>
 
         <para>

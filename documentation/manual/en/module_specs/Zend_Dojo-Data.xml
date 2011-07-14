@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.data"><info><title>Zend_Dojo_Data: dojo.data Envelopes</title></info>
     
 
@@ -19,16 +17,16 @@
         server side then returns data in the following <acronym>JSON</acronym> format:
     </para>
 
-    <programlisting language="javascript">
+    <programlisting language="javascript"><![CDATA[
 {
-    identifier: '&lt;name&gt;',
-    &lt;label: '&lt;label&gt;',&gt;
+    identifier: '<name>',
+    <label: '<label>',>
     items: [
         { name: '...', label: '...', someKey: '...' },
         ...
     ]
 }
-</programlisting>
+]]></programlisting>
 
     <para>
         <classname>Zend_Dojo_Data</classname> provides a simple interface for building
@@ -48,19 +46,19 @@
         <example xml:id="zend.dojo.data.usage.constructor"><info><title>Zend_Dojo_Data initialization via constructor</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $data = new Zend_Dojo_Data('id', $items);
-</programlisting>
+]]></programlisting>
         </example>
 
         <example xml:id="zend.dojo.data.usage.mutators"><info><title>Zend_Dojo_Data initialization via mutators</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $data = new Zend_Dojo_Data();
-$data-&gt;setIdentifier('id')
-     -&gt;addItems($items);
-</programlisting>
+$data->setIdentifier('id')
+     ->addItems($items);
+]]></programlisting>
         </example>
 
         <para>
@@ -71,12 +69,12 @@ $data-&gt;setIdentifier('id')
         <example xml:id="zend.dojo.data.usage.append"><info><title>Appending data to Zend_Dojo_Data</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $data = new Zend_Dojo_Data($identifier, $items);
-$data-&gt;addItem($someItem);
+$data->addItem($someItem);
 
-$data-&gt;addItems($someMoreItems);
-</programlisting>
+$data->addItems($someMoreItems);
+]]></programlisting>
         </example>
 
         <note><info><title>Always use an identifier!</title></info>
@@ -134,9 +132,9 @@ $data-&gt;addItems($someMoreItems);
         <example xml:id="zend.dojo.data.usage.label"><info><title>Specifying a label field in Zend_Dojo_Data</title></info>
             
 
-            <programlisting language="php">
-$data-&gt;setLabel('name');
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$data->setLabel('name');
+]]></programlisting>
         </example>
 
         <para>
@@ -148,9 +146,9 @@ $data-&gt;setLabel('name');
         <example xml:id="zend.dojo.data.usage.populate"><info><title>Populating Zend_Dojo_Data from JSON</title></info>
             
 
-            <programlisting language="php">
-$data-&gt;fromJson($json);
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$data->fromJson($json);
+]]></programlisting>
         </example>
     </section>
 
@@ -176,28 +174,28 @@ $data-&gt;fromJson($json);
             to the object. The following illustrates usage:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Set the "numRows" to 100
-$data-&gt;setMetadata('numRows', 100);
+$data->setMetadata('numRows', 100);
 
 // Set several items at once:
-$data-&gt;setMetadata(array(
-    'numRows' =&gt; 100,
-    'sort'    =&gt; 'name',
+$data->setMetadata(array(
+    'numRows' => 100,
+    'sort'    => 'name',
 ));
 
 // Inspect a single metadata value:
-$numRows = $data-&gt;getMetadata('numRows');
+$numRows = $data->getMetadata('numRows');
 
 // Inspect all metadata:
-$metadata = $data-&gt;getMetadata();
+$metadata = $data->getMetadata();
 
 // Remove a metadata item:
-$data-&gt;clearMetadata('numRows');
+$data->clearMetadata('numRows');
 
 // Remove all metadata:
-$data-&gt;clearMetadata();
-</programlisting>
+$data->clearMetadata();
+]]></programlisting>
     </section>
 
     <section xml:id="zend.dojo.data.advanced"><info><title>Advanced Use Cases</title></info>
@@ -223,22 +221,22 @@ $data-&gt;clearMetadata();
             <methodname>getItem()</methodname> method, or via array notation.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Using getItem():
-$item = $data-&gt;getItem('foo');
+$item = $data->getItem('foo');
 
 // Or use array notation:
 $item = $data['foo'];
-</programlisting>
+]]></programlisting>
 
         <para>
             If you know the identifier, you can use it to retrieve an item,
             update it, delete it, create it, or test for it:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Update or create an item:
-$data['foo'] = array('title' =&gt; 'Foo', 'email' =&gt; 'foo@foo.com');
+$data['foo'] = array('title' => 'Foo', 'email' => 'foo@foo.com');
 
 // Delete an item:
 unset($data['foo']);
@@ -246,37 +244,37 @@ unset($data['foo']);
 // Test for an item:
 if (isset($data[foo])) {
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             You can loop over all items as well. Internally, all items are
             stored as arrays.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 foreach ($data as $item) {
     echo $item['title'] . ': ' . $item['description'] . "\n";
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Or even count to see how many items you have:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 echo count($data), " items found!";
-</programlisting>
+]]></programlisting>
 
         <para>
             Finally, as the class implements <methodname>__toString()</methodname>, you can
             also cast it to <acronym>JSON</acronym> simply by echoing it or casting to string:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 echo $data; // echo as JSON string
 
 $json = (string) $data; // cast to string == cast to JSON
-</programlisting>
+]]></programlisting>
 
         <section xml:id="zend.dojo.data.advanced.methods"><info><title>Available Methods</title></info>
             

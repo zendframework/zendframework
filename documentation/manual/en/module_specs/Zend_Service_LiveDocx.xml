@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.livedocx"><info><title>Zend_Service_LiveDocx</title></info>
     
 
@@ -351,24 +349,24 @@
                 in Microsoft Word, all we have to code is as follows:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
 
-$phpLiveDocx-&gt;setUsername('myUsername')
-            -&gt;setPassword('myPassword');
+$phpLiveDocx->setUsername('myUsername')
+            ->setPassword('myPassword');
 
-$phpLiveDocx-&gt;setLocalTemplate('template.docx');
+$phpLiveDocx->setLocalTemplate('template.docx');
 
-$phpLiveDocx-&gt;assign('software', 'Magic Graphical Compression Suite v1.9')
-            -&gt;assign('licensee', 'Henry Döner-Meyer')
-            -&gt;assign('company',  'Co-Operation');
+$phpLiveDocx->assign('software', 'Magic Graphical Compression Suite v1.9')
+            ->assign('licensee', 'Henry Döner-Meyer')
+            ->assign('company',  'Co-Operation');
 
-$phpLiveDocx-&gt;createDocument();
+$phpLiveDocx->createDocument();
 
-$document = $phpLiveDocx-&gt;retrieveDocument('pdf');
+$document = $phpLiveDocx->retrieveDocument('pdf');
 
 file_put_contents('document.pdf', $document);
-</programlisting>
+]]></programlisting>
 
             <para>
                 The resulting document is written to disk in the file
@@ -425,17 +423,17 @@ file_put_contents('document.pdf', $document);
                 The format of a block is as follows:
             </para>
 
-            <programlisting language="text">
+            <programlisting language="text"><![CDATA[
 blockStart_ + unique name
 blockEnd_ + unique name
-</programlisting>
+]]></programlisting>
 
             <para>For example:</para>
 
-            <programlisting language="text">
+            <programlisting language="text"><![CDATA[
 blockStart_block1
 blockEnd_block1
-</programlisting>
+]]></programlisting>
 
             <para>
                 The content of a block is repeated, until all data assigned in the block fields has
@@ -460,45 +458,45 @@ blockEnd_block1
                 The following code populates the above template with data.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
 
-$phpLiveDocx-&gt;setUsername('myUsername')
-            -&gt;setPassword('myPassword');
+$phpLiveDocx->setUsername('myUsername')
+            ->setPassword('myPassword');
 
-$phpLiveDocx-&gt;setLocalTemplate('template.doc');
+$phpLiveDocx->setLocalTemplate('template.doc');
 
 $billConnections = array(
     array(
-        'connection_number'   =&gt; '+49 421 335 912',
-        'connection_duration' =&gt; '00:00:07',
-        'fee'                 =&gt; '€ 0.03',
+        'connection_number'   => '+49 421 335 912',
+        'connection_duration' => '00:00:07',
+        'fee'                 => '€ 0.03',
     ),
     array(
-        'connection_number'   =&gt; '+49 421 335 913',
-        'connection_duration' =&gt; '00:00:07',
-        'fee'                 =&gt; '€ 0.03',
+        'connection_number'   => '+49 421 335 913',
+        'connection_duration' => '00:00:07',
+        'fee'                 => '€ 0.03',
     ),
     array(
-        'connection_number'   =&gt; '+49 421 335 914',
-        'connection_duration' =&gt; '00:00:07',
-        'fee'                 =&gt; '€ 0.03',
+        'connection_number'   => '+49 421 335 914',
+        'connection_duration' => '00:00:07',
+        'fee'                 => '€ 0.03',
     ),
     array(
-        'connection_number'   =&gt; '+49 421 335 916',
-        'connection_duration' =&gt; '00:00:07',
-        'fee'                 =&gt; '€ 0.03',
+        'connection_number'   => '+49 421 335 916',
+        'connection_duration' => '00:00:07',
+        'fee'                 => '€ 0.03',
     ),
 );
 
-$phpLiveDocx-&gt;assign('connection', $billConnections);
+$phpLiveDocx->assign('connection', $billConnections);
 
 // ... assign other data here ...
 
-$phpLiveDocx-&gt;createDocument();
-$document = $phpLiveDocx-&gt;retrieveDocument('pdf');
+$phpLiveDocx->createDocument();
+$document = $phpLiveDocx->retrieveDocument('pdf');
 file_put_contents('document.pdf', $document);
-</programlisting>
+]]></programlisting>
 
             <para>
                 The data, which is specified in the array <varname>$billConnections</varname> is
@@ -561,40 +559,40 @@ file_put_contents('document.pdf', $document);
                 <methodname>getImageFormats()</methodname>.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
-$date-&gt;setLocale('en_US');
+$date->setLocale('en_US');
 
 $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
 
-$phpLiveDocx-&gt;setUsername('myUsername')
-            -&gt;setPassword('myPassword');
+$phpLiveDocx->setUsername('myUsername')
+            ->setPassword('myPassword');
 
-$phpLiveDocx-&gt;setLocalTemplate('template.docx');
+$phpLiveDocx->setLocalTemplate('template.docx');
 
-$phpLiveDocx-&gt;assign('software', 'Magic Graphical Compression Suite v1.9')
-            -&gt;assign('licensee', 'Daï Lemaitre')
-            -&gt;assign('company',  'Megasoft Co-operation')
-            -&gt;assign('date',     $date-&gt;get(Zend_Date::DATE_LONG))
-            -&gt;assign('time',     $date-&gt;get(Zend_Date::TIME_LONG))
-            -&gt;assign('city',     'Lyon')
-            -&gt;assign('country',  'France');
+$phpLiveDocx->assign('software', 'Magic Graphical Compression Suite v1.9')
+            ->assign('licensee', 'Daï Lemaitre')
+            ->assign('company',  'Megasoft Co-operation')
+            ->assign('date',     $date->get(Zend_Date::DATE_LONG))
+            ->assign('time',     $date->get(Zend_Date::TIME_LONG))
+            ->assign('city',     'Lyon')
+            ->assign('country',  'France');
 
-$phpLiveDocx-&gt;createDocument();
+$phpLiveDocx->createDocument();
 
 // Get all bitmaps
 // (zoomFactor, format)
-$bitmaps = $phpLiveDocx-&gt;getAllBitmaps(100, 'png');
+$bitmaps = $phpLiveDocx->getAllBitmaps(100, 'png');
 
 // Get just bitmaps in specified range
 // (fromPage, toPage, zoomFactor, format)
-// $bitmaps = $phpLiveDocx-&gt;getBitmaps(2, 2, 100, 'png');
+// $bitmaps = $phpLiveDocx->getBitmaps(2, 2, 100, 'png');
 
-foreach ($bitmaps as $pageNumber =&gt; $bitmapData) {
+foreach ($bitmaps as $pageNumber => $bitmapData) {
     $filename = sprintf('documentPage%d.png', $pageNumber);
     file_put_contents($filename, $bitmapData);
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 This produces two files (<filename>documentPage1.png</filename> and
@@ -640,16 +638,16 @@ foreach ($bitmaps as $pageNumber =&gt; $bitmapData) {
                 The following code illustrates how to use a local template.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
 
-$phpLiveDocx-&gt;setUsername('myUsername')
-            -&gt;setPassword('myPassword');
+$phpLiveDocx->setUsername('myUsername')
+            ->setPassword('myPassword');
 
-$phpLiveDocx-&gt;setLocalTemplate('./template.docx');
+$phpLiveDocx->setLocalTemplate('./template.docx');
 
 // assign data and create document
-</programlisting>
+]]></programlisting>
 
             <para>
                 In the case that a template is stored remotely, it is uploaded once to the server
@@ -663,30 +661,30 @@ $phpLiveDocx-&gt;setLocalTemplate('./template.docx');
                 The following code illustrates how to upload a template to the server:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
 
-$phpLiveDocx-&gt;setUsername('myUsername')
-            -&gt;setPassword('myPassword');
+$phpLiveDocx->setUsername('myUsername')
+            ->setPassword('myPassword');
 
-$phpLiveDocx-&gt;uploadTemplate('template.docx');
-</programlisting>
+$phpLiveDocx->uploadTemplate('template.docx');
+]]></programlisting>
 
             <para>
                 The following code illustrates how to reference the remotely stored template on all
                 subsequent requests:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
 
-$phpLiveDocx-&gt;setUsername('myUsername')
-            -&gt;setPassword('myPassword');
+$phpLiveDocx->setUsername('myUsername')
+            ->setPassword('myPassword');
 
-$phpLiveDocx-&gt;setRemoteTemplate('template.docx');
+$phpLiveDocx->setRemoteTemplate('template.docx');
 
 // assign data and create document
-</programlisting>
+]]></programlisting>
         </section>
 
         <section xml:id="zend.service.livedocx.mailmerge.information"><info><title>Getting Information</title></info>
@@ -706,20 +704,20 @@ $phpLiveDocx-&gt;setRemoteTemplate('template.docx');
                     application, in which an end-user can update a template.
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
 
-$phpLiveDocx-&gt;setUsername('myUsername')
-            -&gt;setPassword('myPassword');
+$phpLiveDocx->setUsername('myUsername')
+            ->setPassword('myPassword');
 
 $templateName = 'template-1-text-field.docx';
-$phpLiveDocx-&gt;setLocalTemplate($templateName);
+$phpLiveDocx->setLocalTemplate($templateName);
 
-$fieldNames = $phpLiveDocx-&gt;getFieldNames();
+$fieldNames = $phpLiveDocx->getFieldNames();
 foreach ($fieldNames as $fieldName) {
     printf('- %s%s', $fieldName, PHP_EOL);
 }
-</programlisting>
+]]></programlisting>
             </example>
 
             <example xml:id="zend.service.livedocx.mailmerge.information.getblockfieldname"><info><title>Get Array of Block Field Names in Template</title></info>
@@ -733,23 +731,23 @@ foreach ($fieldNames as $fieldName) {
                     fields.
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
 
-$phpLiveDocx-&gt;setUsername('myUsername')
-            -&gt;setPassword('myPassword');
+$phpLiveDocx->setUsername('myUsername')
+            ->setPassword('myPassword');
 
 $templateName = 'template-block-fields.doc';
-$phpLiveDocx-&gt;setLocalTemplate($templateName);
+$phpLiveDocx->setLocalTemplate($templateName);
 
-$blockNames = $phpLiveDocx-&gt;getBlockNames();
+$blockNames = $phpLiveDocx->getBlockNames();
 foreach ($blockNames as $blockName) {
-    $blockFieldNames = $phpLiveDocx-&gt;getBlockFieldNames($blockName);
+    $blockFieldNames = $phpLiveDocx->getBlockFieldNames($blockName);
     foreach ($blockFieldNames as $blockFieldName) {
         printf('- %s::%s%s', $blockName, $blockFieldName, PHP_EOL);
     }
 }
-</programlisting>
+]]></programlisting>
             </example>
 
             <example xml:id="zend.service.livedocx.mailmerge.information.getfontnames"><info><title>Get Array of Fonts Installed on Server</title></info>
@@ -764,14 +762,14 @@ foreach ($blockNames as $blockName) {
                     font-substitution will take place. This may lead to undesirable results.
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
 
-$phpLiveDocx-&gt;setUsername('myUsername')
-            -&gt;setPassword('myPassword');
+$phpLiveDocx->setUsername('myUsername')
+            ->setPassword('myPassword');
 
-Zend_Debug::dump($phpLiveDocx-&gt;getFontNames());
-</programlisting>
+Zend_Debug::dump($phpLiveDocx->getFontNames());
+]]></programlisting>
 
                 <para>
                     <emphasis>NOTE:</emphasis> As the return value of this method changes very
@@ -791,14 +789,14 @@ Zend_Debug::dump($phpLiveDocx-&gt;getFontNames());
                     documentation generation process.
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge()
 
-$phpLiveDocx-&gt;setUsername('myUsername')
-            -&gt;setPassword('myPassword');
+$phpLiveDocx->setUsername('myUsername')
+            ->setPassword('myPassword');
 
-Zend_Debug::dump($phpLiveDocx-&gt;getTemplateFormats());
-</programlisting>
+Zend_Debug::dump($phpLiveDocx->getTemplateFormats());
+]]></programlisting>
 
                 <para>
                     <emphasis>NOTE:</emphasis> As the return value of this method changes very
@@ -818,14 +816,14 @@ Zend_Debug::dump($phpLiveDocx-&gt;getTemplateFormats());
                     documentation generation process.
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
 
-$phpLiveDocx-&gt;setUsername('myUsername')
-            -&gt;setPassword('myPassword');
+$phpLiveDocx->setUsername('myUsername')
+            ->setPassword('myPassword');
 
-Zend_Debug::dump($phpLiveDocx-&gt;getDocumentFormats());
-</programlisting>
+Zend_Debug::dump($phpLiveDocx->getDocumentFormats());
+]]></programlisting>
             </example>
 
             <example xml:id="zend.service.livedocx.mailmerge.information.getimageformats"><info><title>Get Array of Supported Image File Formats</title></info>
@@ -838,14 +836,14 @@ Zend_Debug::dump($phpLiveDocx-&gt;getDocumentFormats());
                     documentation generation process.
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
 
-$phpLiveDocx-&gt;setUsername('myUsername')
-            -&gt;setPassword('myPassword');
+$phpLiveDocx->setUsername('myUsername')
+            ->setPassword('myPassword');
 
-Zend_Debug::dump($phpLiveDocx-&gt;getImageFormats());
-</programlisting>
+Zend_Debug::dump($phpLiveDocx->getImageFormats());
+]]></programlisting>
 
                 <para>
                     <emphasis>NOTE:</emphasis> As the return value of this method changes very

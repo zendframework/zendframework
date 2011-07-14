@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.xml"><info><title>Zend_Config_Xml</title></info>
     
 
@@ -43,32 +41,32 @@
             <filename>/path/to/config.xml</filename>:
         </para>
 
-        <programlisting language="xml">
-&lt;?xml version="1.0"?&gt;
-&lt;configdata&gt;
-    &lt;production&gt;
-        &lt;webhost&gt;www.example.com&lt;/webhost&gt;
-        &lt;database&gt;
-            &lt;adapter&gt;pdo_mysql&lt;/adapter&gt;
-            &lt;params&gt;
-                &lt;host&gt;db.example.com&lt;/host&gt;
-                &lt;username&gt;dbuser&lt;/username&gt;
-                &lt;password&gt;secret&lt;/password&gt;
-                &lt;dbname&gt;dbname&lt;/dbname&gt;
-            &lt;/params&gt;
-        &lt;/database&gt;
-    &lt;/production&gt;
-    &lt;staging extends="production"&gt;
-        &lt;database&gt;
-            &lt;params&gt;
-                &lt;host&gt;dev.example.com&lt;/host&gt;
-                &lt;username&gt;devuser&lt;/username&gt;
-                &lt;password&gt;devsecret&lt;/password&gt;
-            &lt;/params&gt;
-        &lt;/database&gt;
-    &lt;/staging&gt;
-&lt;/configdata&gt;
-</programlisting>
+        <programlisting language="xml"><![CDATA[
+<?xml version="1.0"?>
+<configdata>
+    <production>
+        <webhost>www.example.com</webhost>
+        <database>
+            <adapter>pdo_mysql</adapter>
+            <params>
+                <host>db.example.com</host>
+                <username>dbuser</username>
+                <password>secret</password>
+                <dbname>dbname</dbname>
+            </params>
+        </database>
+    </production>
+    <staging extends="production">
+        <database>
+            <params>
+                <host>dev.example.com</host>
+                <username>devuser</username>
+                <password>devsecret</password>
+            </params>
+        </database>
+    </staging>
+</configdata>
+]]></programlisting>
 
         <para>
             Next, assume that the application developer needs the staging configuration data from
@@ -76,12 +74,12 @@
             the <acronym>XML</acronym> file and the staging section:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Xml('/path/to/config.xml', 'staging');
 
-echo $config-&gt;database-&gt;params-&gt;host;   // prints "dev.example.com"
-echo $config-&gt;database-&gt;params-&gt;dbname; // prints "dbname"
-</programlisting>
+echo $config->database->params->host;   // prints "dev.example.com"
+echo $config->database->params->dbname; // prints "dbname"
+]]></programlisting>
     </example>
 
     <example xml:id="zend.config.adapters.xml.example.attributes"><info><title>Using Tag Attributes in Zend_Config_Xml</title></info>
@@ -96,23 +94,23 @@ echo $config-&gt;database-&gt;params-&gt;dbname; // prints "dbname"
             node, which then will be translated into children of that node:
         </para>
 
-        <programlisting language="xml">
-&lt;?xml version="1.0"?&gt;
-&lt;configdata&gt;
-    &lt;production webhost="www.example.com"&gt;
-        &lt;database adapter="pdo_mysql"&gt;
-            &lt;params host="db.example.com" username="dbuser" password="secret"
-                    dbname="dbname"/&gt;
-        &lt;/database&gt;
-    &lt;/production&gt;
-    &lt;staging extends="production"&gt;
-        &lt;database&gt;
-            &lt;params host="dev.example.com" username="devuser"
-                    password="devsecret"/&gt;
-        &lt;/database&gt;
-    &lt;/staging&gt;
-&lt;/configdata&gt;
-</programlisting>
+        <programlisting language="xml"><![CDATA[
+<?xml version="1.0"?>
+<configdata>
+    <production webhost="www.example.com">
+        <database adapter="pdo_mysql">
+            <params host="db.example.com" username="dbuser" password="secret"
+                    dbname="dbname"/>
+        </database>
+    </production>
+    <staging extends="production">
+        <database>
+            <params host="dev.example.com" username="devuser"
+                    password="devsecret"/>
+        </database>
+    </staging>
+</configdata>
+]]></programlisting>
 
         <para>
             The other way does not really shorten the config, but keeps it easier to maintain since
@@ -120,32 +118,32 @@ echo $config-&gt;database-&gt;params-&gt;dbname; // prints "dbname"
             value in the <emphasis>value</emphasis> attribute:
         </para>
 
-        <programlisting language="xml">
-&lt;?xml version="1.0"?&gt;
-&lt;configdata&gt;
-    &lt;production&gt;
-        &lt;webhost&gt;www.example.com&lt;/webhost&gt;
-        &lt;database&gt;
-            &lt;adapter value="pdo_mysql"/&gt;
-            &lt;params&gt;
-                &lt;host value="db.example.com"/&gt;
-                &lt;username value="dbuser"/&gt;
-                &lt;password value="secret"/&gt;
-                &lt;dbname value="dbname"/&gt;
-            &lt;/params&gt;
-        &lt;/database&gt;
-    &lt;/production&gt;
-    &lt;staging extends="production"&gt;
-        &lt;database&gt;
-            &lt;params&gt;
-                &lt;host value="dev.example.com"/&gt;
-                &lt;username value="devuser"/&gt;
-                &lt;password value="devsecret"/&gt;
-            &lt;/params&gt;
-        &lt;/database&gt;
-    &lt;/staging&gt;
-&lt;/configdata&gt;
-</programlisting>
+        <programlisting language="xml"><![CDATA[
+<?xml version="1.0"?>
+<configdata>
+    <production>
+        <webhost>www.example.com</webhost>
+        <database>
+            <adapter value="pdo_mysql"/>
+            <params>
+                <host value="db.example.com"/>
+                <username value="dbuser"/>
+                <password value="secret"/>
+                <dbname value="dbname"/>
+            </params>
+        </database>
+    </production>
+    <staging extends="production">
+        <database>
+            <params>
+                <host value="dev.example.com"/>
+                <username value="devuser"/>
+                <password value="devsecret"/>
+            </params>
+        </database>
+    </staging>
+</configdata>
+]]></programlisting>
     </example>
 
     <note><info><title>XML strings</title></info>
@@ -158,30 +156,30 @@ echo $config-&gt;database-&gt;params-&gt;dbname; // prints "dbname"
             characters <emphasis>'&lt;?xml'</emphasis>:
         </para>
 
-        <programlisting language="xml">
-$string = &lt;&lt;&lt;EOT
-&lt;?xml version="1.0"?&gt;
-&lt;config&gt;
-    &lt;production&gt;
-        &lt;db&gt;
-            &lt;adapter value="pdo_mysql"/&gt;
-            &lt;params&gt;
-                &lt;host value="db.example.com"/&gt;
-            &lt;/params&gt;
-        &lt;/db&gt;
-    &lt;/production&gt;
-    &lt;staging extends="production"&gt;
-        &lt;db&gt;
-            &lt;params&gt;
-                &lt;host value="dev.example.com"/&gt;
-            &lt;/params&gt;
-        &lt;/db&gt;
-    &lt;/staging&gt;
-&lt;/config&gt;
+        <programlisting language="xml"><![CDATA[
+$string = <<<EOT
+<?xml version="1.0"?>
+<config>
+    <production>
+        <db>
+            <adapter value="pdo_mysql"/>
+            <params>
+                <host value="db.example.com"/>
+            </params>
+        </db>
+    </production>
+    <staging extends="production">
+        <db>
+            <params>
+                <host value="dev.example.com"/>
+            </params>
+        </db>
+    </staging>
+</config>
 EOT;
 
 $config = new Zend_Config_Xml($string, 'staging');
-</programlisting>
+]]></programlisting>
     </note>
 
     <note><info><title>Zend_Config XML namespace</title></info>
@@ -203,34 +201,34 @@ $config = new Zend_Config_Xml($string, 'staging');
             Zend Framework 2.0.
         </para>
 
-        <programlisting language="xml">
-$string = &lt;&lt;&lt;EOT
-&lt;?xml version="1.0"?&gt;
-&lt;config xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/"&gt;
-    &lt;production&gt;
-        &lt;includePath&gt;
-            &lt;zf:const zf:name="APPLICATION_PATH"/&gt;/library&lt;/includePath&gt;
-        &lt;db&gt;
-            &lt;adapter value="pdo_mysql"/&gt;
-            &lt;params&gt;
-                &lt;host value="db.example.com"/&gt;
-            &lt;/params&gt;
-        &lt;/db&gt;
-    &lt;/production&gt;
-    &lt;staging zf:extends="production"&gt;
-        &lt;db&gt;
-            &lt;params&gt;
-                &lt;host value="dev.example.com"/&gt;
-            &lt;/params&gt;
-        &lt;/db&gt;
-    &lt;/staging&gt;
-&lt;/config&gt;
+        <programlisting language="xml"><![CDATA[
+$string = <<<EOT
+<?xml version="1.0"?>
+<config xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/">
+    <production>
+        <includePath>
+            <zf:const zf:name="APPLICATION_PATH"/>/library</includePath>
+        <db>
+            <adapter value="pdo_mysql"/>
+            <params>
+                <host value="db.example.com"/>
+            </params>
+        </db>
+    </production>
+    <staging zf:extends="production">
+        <db>
+            <params>
+                <host value="dev.example.com"/>
+            </params>
+        </db>
+    </staging>
+</config>
 EOT;
 
 define('APPLICATION_PATH', dirname(__FILE__));
 $config = new Zend_Config_Xml($string, 'staging');
 
-echo $config-&gt;includePath; // Prints "/var/www/something/library"
-</programlisting>
+echo $config->includePath; // Prints "/var/www/something/library"
+]]></programlisting>
     </note>
 </section>

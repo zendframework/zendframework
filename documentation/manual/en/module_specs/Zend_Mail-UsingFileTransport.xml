@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.file-transport"><info><title>Using File Transport</title></info>
     
     
@@ -24,15 +22,15 @@
         hash as the filename:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
-$mail-&gt;addTo('somebody@example.com', 'Some Recipient');
+$mail->addTo('somebody@example.com', 'Some Recipient');
 // build message...
-$tr = new Zend_Mail_Transport_File(array('callback' =&gt; function ($transport){
-    return $transport-&gt;recipients . '_' . mt_rand() . '.tmp';
+$tr = new Zend_Mail_Transport_File(array('callback' => function ($transport){
+    return $transport->recipients . '_' . mt_rand() . '.tmp';
 }));
-$mail-&gt;send($tr);
-</programlisting>
+$mail->send($tr);
+]]></programlisting>
 
     <para>
         The resulting file will be something like <filename>somebody@example.com_1493362665.tmp</filename>

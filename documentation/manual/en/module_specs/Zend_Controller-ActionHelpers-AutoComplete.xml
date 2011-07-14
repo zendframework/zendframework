@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.autocomplete"><info><title>AutoComplete</title></info>
     
 
@@ -24,7 +22,7 @@
         Basic usage for each implementation is the same:
     </para>
 
-   <programlisting language="php">
+   <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -32,18 +30,18 @@ class FooController extends Zend_Controller_Action
         // Perform some logic...
 
         // Encode and send response;
-        $this-&gt;_helper-&gt;autoCompleteDojo($data);
+        $this->_helper->autoCompleteDojo($data);
 
         // Or explicitly:
-        $response = $this-&gt;_helper-&gt;autoCompleteDojo
-                                  -&gt;sendAutoCompletion($data);
+        $response = $this->_helper->autoCompleteDojo
+                                  ->sendAutoCompletion($data);
 
         // Or simply prepare autocompletion response:
-        $response = $this-&gt;_helper-&gt;autoCompleteDojo
-                                  -&gt;prepareAutoCompletion($data);
+        $response = $this->_helper->autoCompleteDojo
+                                  ->prepareAutoCompletion($data);
     }
 }
-</programlisting>
+]]></programlisting>
 
     <para>
         By default, autocompletion does the following:
@@ -134,10 +132,10 @@ class FooController extends Zend_Controller_Action
             for use with such a store:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // within a controller action:
-$this-&gt;_helper-&gt;autoCompleteDojo($data);
-</programlisting>
+$this->_helper->autoCompleteDojo($data);
+]]></programlisting>
 
         <example xml:id="zend.controller.actionhelpers.autocomplete.dojo.example1"><info><title>AutoCompletion with Dojo Using Zend MVC</title></info>
             
@@ -162,7 +160,7 @@ $this-&gt;_helper-&gt;autoCompleteDojo($data);
                 following contents:
             </para>
 
-            <programlisting language="javascript">
+            <programlisting language="javascript"><![CDATA[
 dojo.provide("custom.TestNameReadStore");
 dojo.declare("custom.TestNameReadStore", dojox.data.QueryReadStore, {
     fetch:function (request) {
@@ -170,7 +168,7 @@ dojo.declare("custom.TestNameReadStore", dojox.data.QueryReadStore, {
         return this.inherited("fetch", arguments);
     }
 });
-</programlisting>
+]]></programlisting>
 
             <para>
                 This class is simply an extension of Dojo's own QueryReadStore,
@@ -183,36 +181,36 @@ dojo.declare("custom.TestNameReadStore", dojox.data.QueryReadStore, {
                 AutoCompletion:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class TestController extends Zend_Controller_Action
 {
     protected $_form;
 
     public function getForm()
     {
-        if (null === $this-&gt;_form) {
-            $this-&gt;_form = new Zend_Form();
-            $this-&gt;_form-&gt;setMethod('get')
-                -&gt;setAction(
-                    $this-&gt;getRequest()-&gt;getBaseUrl() . '/test/process'
+        if (null === $this->_form) {
+            $this->_form = new Zend_Form();
+            $this->_form->setMethod('get')
+                ->setAction(
+                    $this->getRequest()->getBaseUrl() . '/test/process'
                 )
-                -&gt;addElements(array(
-                    'test' =&gt; array('type' =&gt; 'text', 'options' =&gt; array(
-                        'filters'        =&gt; array('StringTrim'),
-                        'dojoType'       =&gt; array('dijit.form.ComboBox'),
-                        'store'          =&gt; 'testStore',
-                        'autoComplete'   =&gt; 'false',
-                        'hasDownArrow'   =&gt; 'true',
-                        'label' =&gt; 'Your input:',
+                ->addElements(array(
+                    'test' => array('type' => 'text', 'options' => array(
+                        'filters'        => array('StringTrim'),
+                        'dojoType'       => array('dijit.form.ComboBox'),
+                        'store'          => 'testStore',
+                        'autoComplete'   => 'false',
+                        'hasDownArrow'   => 'true',
+                        'label' => 'Your input:',
                     )),
-                    'go' =&gt; array('type' =&gt; 'submit',
-                                  'options' =&gt; array('label' =&gt; 'Go!'))
+                    'go' => array('type' => 'submit',
+                                  'options' => array('label' => 'Go!'))
                 ));
         }
-        return $this-&gt;_form;
+        return $this->_form;
     }
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 Here, we simply create a form with 'test' and 'go' methods. The
@@ -231,7 +229,7 @@ class TestController extends Zend_Controller_Action
                 for processing AutoCompletion:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class TestController extends Zend_Controller_Action
 {
     // ...
@@ -241,30 +239,30 @@ class TestController extends Zend_Controller_Action
      */
     public function indexAction()
     {
-        $this-&gt;view-&gt;form = $this-&gt;getForm();
+        $this->view->form = $this->getForm();
     }
 
     public function autocompleteAction()
     {
-        if ('ajax' != $this-&gt;_getParam('format', false)) {
-            return $this-&gt;_helper-&gt;redirector('index');
+        if ('ajax' != $this->_getParam('format', false)) {
+            return $this->_helper->redirector('index');
         }
-        if ($this-&gt;getRequest()-&gt;isPost()) {
-            return $this-&gt;_helper-&gt;redirector('index');
+        if ($this->getRequest()->isPost()) {
+            return $this->_helper->redirector('index');
         }
 
-        $match = trim($this-&gt;getRequest()-&gt;getQuery('test', ''));
+        $match = trim($this->getRequest()->getQuery('test', ''));
 
         $matches = array();
-        foreach ($this-&gt;getData() as $datum) {
+        foreach ($this->getData() as $datum) {
             if (0 === strpos($datum, $match)) {
                 $matches[] = $datum;
             }
         }
-        $this-&gt;_helper-&gt;autoCompleteDojo($matches);
+        $this->_helper->autoCompleteDojo($matches);
     }
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 In our <methodname>autocompleteAction()</methodname> we do a number of
@@ -287,38 +285,38 @@ class TestController extends Zend_Controller_Action
                 view script, which comments the steps:
             </para>
 
-            <programlisting language="php">
-&lt;?php // setup our data store: ?&gt;
-&lt;div dojoType="custom.TestNameReadStore" jsId="testStore"
-    url="&lt;?php echo $this-&gt;baseUrl() ?&gt;/unit-test/autocomplete/format/ajax"
-    requestMethod="get"&gt;&lt;/div&gt;
+            <programlisting language="php"><![CDATA[
+<?php // setup our data store: ?>
+<div dojoType="custom.TestNameReadStore" jsId="testStore"
+    url="<?php echo $this->baseUrl() ?>/unit-test/autocomplete/format/ajax"
+    requestMethod="get"></div>
 
-&lt;?php // render our form: ?&gt;
-&lt;?php echo $this-&gt;form ?&gt;
+<?php // render our form: ?>
+<?php echo $this->form ?>
 
-&lt;?php // setup Dojo-related CSS to load in HTML head: ?&gt;
-&lt;?php $this-&gt;headStyle()-&gt;captureStart() ?&gt;
-@import "&lt;?php echo $this-&gt;baseUrl()
-?&gt;/javascript/dijit/themes/tundra/tundra.css";
-@import "&lt;?php echo $this-&gt;baseUrl() ?&gt;/javascript/dojo/resources/dojo.css";
-&lt;?php $this-&gt;headStyle()-&gt;captureEnd() ?&gt;
+<?php // setup Dojo-related CSS to load in HTML head: ?>
+<?php $this->headStyle()->captureStart() ?>
+@import "<?php echo $this->baseUrl()
+?>/javascript/dijit/themes/tundra/tundra.css";
+@import "<?php echo $this->baseUrl() ?>/javascript/dojo/resources/dojo.css";
+<?php $this->headStyle()->captureEnd() ?>
 
-&lt;?php // setup javascript to load in HTML head, including all required
-   // Dojo libraries: ?&gt;
-&lt;?php $this-&gt;headScript()
-        -&gt;setAllowArbitraryAttributes(true)
-        -&gt;appendFile($this-&gt;baseUrl() . '/javascript/dojo/dojo.js',
+<?php // setup javascript to load in HTML head, including all required
+   // Dojo libraries: ?>
+<?php $this->headScript()
+        ->setAllowArbitraryAttributes(true)
+        ->appendFile($this->baseUrl() . '/javascript/dojo/dojo.js',
             'text/javascript',
-            array('djConfig' =&gt; 'parseOnLoad: true'))
-        -&gt;captureStart() ?&gt;
+            array('djConfig' => 'parseOnLoad: true'))
+        ->captureStart() ?>
 djConfig.usePlainJson=true;
 dojo.registerModulePath("custom","../custom");
 dojo.require("dojo.parser");
 dojo.require("dojox.data.QueryReadStore");
 dojo.require("dijit.form.ComboBox");
 dojo.require("custom.TestNameReadStore");
-&lt;?php $this-&gt;headScript()-&gt;captureEnd() ?&gt;
-</programlisting>
+<?php $this->headScript()->captureEnd() ?>
+]]></programlisting>
 
             <para>
                 Note the calls to view helpers such as headStyle and headScript;

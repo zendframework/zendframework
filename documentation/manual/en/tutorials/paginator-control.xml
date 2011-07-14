@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.paginator.control"><info><title>Pagination Control and ScrollingStyles</title></info>
     
 
@@ -23,47 +21,47 @@
         examples of what might go in the view script. Here is one example.
     </para>
 
-    <programlisting language="php">
-&lt;?php if ($this-&gt;pageCount): ?&gt;
-&lt;!-- First page link --&gt;
-&lt;?php if (isset($this-&gt;previous)): ?&gt;
-  &lt;a href="&lt;?php echo $this-&gt;url(array('page' =&gt; $this-&gt;first)); ?&gt;"&gt;
+    <programlisting language="php"><![CDATA[
+<?php if ($this->pageCount): ?>
+<!-- First page link -->
+<?php if (isset($this->previous)): ?>
+  <a href="<?php echo $this->url(array('page' => $this->first)); ?>">
     First
-  &lt;/a&gt; |
-&lt;?php else: ?&gt;
-  &lt;span class="disabled"&gt;First&lt;/span&gt; |
-&lt;?php endif; ?&gt;
+  </a> |
+<?php else: ?>
+  <span class="disabled">First</span> |
+<?php endif; ?>
 
-&lt;!-- Previous page link --&gt;
-&lt;?php if (isset($this-&gt;previous)): ?&gt;
-  &lt;a href="&lt;?php echo $this-&gt;url(array('page' =&gt; $this-&gt;previous)); ?&gt;"&gt;
-    &amp;lt; Previous
-  &lt;/a&gt; |
-&lt;?php else: ?&gt;
-  &lt;span class="disabled"&gt;&amp;lt; Previous&lt;/span&gt; |
-&lt;?php endif; ?&gt;
+<!-- Previous page link -->
+<?php if (isset($this->previous)): ?>
+  <a href="<?php echo $this->url(array('page' => $this->previous)); ?>">
+    < Previous
+  </a> |
+<?php else: ?>
+  <span class="disabled">< Previous</span> |
+<?php endif; ?>
 
-&lt;!-- Next page link --&gt;
-&lt;?php if (isset($this-&gt;next)): ?&gt;
-  &lt;a href="&lt;?php echo $this-&gt;url(array('page' =&gt; $this-&gt;next)); ?&gt;"&gt;
-    Next &amp;gt;
-  &lt;/a&gt; |
-&lt;?php else: ?&gt;
-  &lt;span class="disabled"&gt;Next &amp;gt;&lt;/span&gt; |
-&lt;?php endif; ?&gt;
+<!-- Next page link -->
+<?php if (isset($this->next)): ?>
+  <a href="<?php echo $this->url(array('page' => $this->next)); ?>">
+    Next >
+  </a> |
+<?php else: ?>
+  <span class="disabled">Next ></span> |
+<?php endif; ?>
 
-&lt;!-- Last page link --&gt;
-&lt;?php if (isset($this-&gt;next)): ?&gt;
-  &lt;a href="&lt;?php echo $this-&gt;url(array('page' =&gt; $this-&gt;last)); ?&gt;"&gt;
+<!-- Last page link -->
+<?php if (isset($this->next)): ?>
+  <a href="<?php echo $this->url(array('page' => $this->last)); ?>">
     Last
-  &lt;/a&gt;
-&lt;?php else: ?&gt;
-  &lt;span class="disabled"&gt;Last&lt;/span&gt;
-&lt;?php endif; ?&gt;
+  </a>
+<?php else: ?>
+  <span class="disabled">Last</span>
+<?php endif; ?>
 
-&lt;/div&gt;
-&lt;?php endif; ?&gt;
-</programlisting>
+</div>
+<?php endif; ?>
+]]></programlisting>
 
     <para>
         The next step is to tell <classname>Zend_Paginator</classname> which view partial can be
@@ -71,9 +69,9 @@
         bootstrap file.
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 Zend_View_Helper_PaginationControl::setDefaultViewPartial('controls.phtml');
-</programlisting>
+]]></programlisting>
 
     <para>
         The last step is probably the easiest. Make sure you have assigned your Paginator object
@@ -84,9 +82,9 @@ Zend_View_Helper_PaginationControl::setDefaultViewPartial('controls.phtml');
         The next section will feature a complete example.
     </para>
 
-    <programlisting language="php">
-&lt;?php echo $this-&gt;paginator; ?&gt;
-</programlisting>
+    <programlisting language="php"><![CDATA[
+<?php echo $this->paginator; ?>
+]]></programlisting>
 
     <para>
         <classname>Zend_Paginator</classname>, together with the 'controls.phtml' view script you
@@ -100,10 +98,10 @@ Zend_View_Helper_PaginationControl::setDefaultViewPartial('controls.phtml');
         manual invocation of the view helper in your view script.
     </para>
 
-    <programlisting language="php">
-// $this-&gt;paginator is a Paginator object
-&lt;?php echo $this-&gt;paginationControl($this-&gt;paginator, 'Elastic', 'controls.phtml'); ?&gt;
-</programlisting>
+    <programlisting language="php"><![CDATA[
+// $this->paginator is a Paginator object
+<?php echo $this->paginationControl($this->paginator, 'Elastic', 'controls.phtml'); ?>
+]]></programlisting>
 
     <para>
         For a list of all available ScrollingStyles, see the reference manual.

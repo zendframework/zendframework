@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.previous"><info><title>Previous Exceptions</title></info>
     
 
@@ -20,14 +18,14 @@
     <example xml:id="zend.exception.previous.example"><info><title>Previous exceptions</title></info>
         
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 try {
-    $db-&gt;query($sql);
+    $db->query($sql);
 } catch (Zend_Db_Statement_Exception $e) {
-    if ($e-&gt;getPrevious()) {
+    if ($e->getPrevious()) {
         echo '[' . get_class($e)
             . '] has the previous exception of ['
-            . get_class($e-&gt;getPrevious())
+            . get_class($e->getPrevious())
             . ']' . PHP_EOL;
     } else {
         echo '[' . get_class($e)
@@ -39,6 +37,6 @@ try {
     // displays all exceptions starting by the first thrown
     // exception if available.
 }
-</programlisting>
+]]></programlisting>
     </example>
 </section>

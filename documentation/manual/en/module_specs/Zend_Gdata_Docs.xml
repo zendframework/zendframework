@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.docs"><info><title>Using Google Documents List Data API</title></info>
     
 
@@ -29,12 +27,12 @@
             user.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Docs::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $docs = new Zend_Gdata_Docs($client);
-$feed = $docs-&gt;getDocumentListFeed();
-</programlisting>
+$feed = $docs->getDocumentListFeed();
+]]></programlisting>
 
         <para>
         The resulting <classname>Zend_Gdata_Docs_DocumentListFeed</classname> object
@@ -56,7 +54,7 @@ $feed = $docs-&gt;getDocumentListFeed();
             information about the result from the server.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 /**
  * Upload the specified document
  *
@@ -84,7 +82,7 @@ function uploadDocument($docs, $html, $originalFileName,
   // Upload the file and convert it into a Google Document. The original
   // file name is used as the title of the document and the MIME type
   // is determined based on the extension on the original file name.
-  $newDocumentEntry = $docs-&gt;uploadFile($fileToUpload, $originalFileName,
+  $newDocumentEntry = $docs->uploadFile($fileToUpload, $originalFileName,
       null, Zend_Gdata_Docs::DOCUMENTS_LIST_FEED_URI);
 
   echo "New Document Title: ";
@@ -92,18 +90,18 @@ function uploadDocument($docs, $html, $originalFileName,
   if ($html) {
       // Find the URL of the HTML view of this document.
       $alternateLink = '';
-      foreach ($newDocumentEntry-&gt;link as $link) {
-          if ($link-&gt;getRel() === 'alternate') {
-              $alternateLink = $link-&gt;getHref();
+      foreach ($newDocumentEntry->link as $link) {
+          if ($link->getRel() === 'alternate') {
+              $alternateLink = $link->getHref();
           }
       }
       // Make the title link to the document on docs.google.com.
-      echo "&lt;a href=\"$alternateLink\"&gt;\n";
+      echo "<a href=\"$alternateLink\">\n";
   }
-  echo $newDocumentEntry-&gt;title."\n";
-  if ($html) {echo "&lt;/a&gt;\n";}
+  echo $newDocumentEntry->title."\n";
+  if ($html) {echo "</a>\n";}
 }
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.gdata.docs.queries"><info><title>Searching the documents feed</title></info>
@@ -129,10 +127,10 @@ function uploadDocument($docs, $html, $originalFileName,
                 category query as follows.
             </para>
 
-            <programlisting language="php">
-$feed = $docs-&gt;getDocumentListFeed(
+            <programlisting language="php"><![CDATA[
+$feed = $docs->getDocumentListFeed(
     'http://docs.google.com/feeds/documents/private/full/-/document');
-</programlisting>
+]]></programlisting>
         </section>
 
         <section xml:id="zend.gdata.docs.listspreadsheets"><info><title>Get a List of Spreadsheets</title></info>
@@ -142,10 +140,10 @@ $feed = $docs-&gt;getDocumentListFeed(
                 To request a list of your Google Spreadsheets, use the following category query:
             </para>
 
-            <programlisting language="php">
-$feed = $docs-&gt;getDocumentListFeed(
+            <programlisting language="php"><![CDATA[
+$feed = $docs->getDocumentListFeed(
     'http://docs.google.com/feeds/documents/private/full/-/spreadsheet');
-</programlisting>
+]]></programlisting>
         </section>
 
         <section xml:id="zend.gdata.docs.textquery"><info><title>Performing a text query</title></info>
@@ -159,11 +157,11 @@ $feed = $docs-&gt;getDocumentListFeed(
                 the documents list for documents which contain the search string:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $docsQuery = new Zend_Gdata_Docs_Query();
-$docsQuery-&gt;setQuery($query);
-$feed = $client-&gt;getDocumentListFeed($docsQuery);
-</programlisting>
+$docsQuery->setQuery($query);
+$feed = $client->getDocumentListFeed($docsQuery);
+]]></programlisting>
         </section>
     </section>
 </section>

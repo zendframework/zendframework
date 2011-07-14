@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.reader"><info><title>Zend_Feed_Reader</title></info>
     
 
@@ -91,29 +89,29 @@
             elsewhere.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $feed = Zend_Feed_Reader::import('http://www.planet-php.net/rdf/');
 $data = array(
-    'title'        =&gt; $feed-&gt;getTitle(),
-    'link'         =&gt; $feed-&gt;getLink(),
-    'dateModified' =&gt; $feed-&gt;getDateModified(),
-    'description'  =&gt; $feed-&gt;getDescription(),
-    'language'     =&gt; $feed-&gt;getLanguage(),
-    'entries'      =&gt; array(),
+    'title'        => $feed->getTitle(),
+    'link'         => $feed->getLink(),
+    'dateModified' => $feed->getDateModified(),
+    'description'  => $feed->getDescription(),
+    'language'     => $feed->getLanguage(),
+    'entries'      => array(),
 );
 
 foreach ($feed as $entry) {
     $edata = array(
-        'title'        =&gt; $entry-&gt;getTitle(),
-        'description'  =&gt; $entry-&gt;getDescription(),
-        'dateModified' =&gt; $entry-&gt;getDateModified(),
-        'authors'       =&gt; $entry-&gt;getAuthors(),
-        'link'         =&gt; $entry-&gt;getLink(),
-        'content'      =&gt; $entry-&gt;getContent()
+        'title'        => $entry->getTitle(),
+        'description'  => $entry->getDescription(),
+        'dateModified' => $entry->getDateModified(),
+        'authors'       => $entry->getAuthors(),
+        'link'         => $entry->getLink(),
+        'content'      => $entry->getContent()
     );
     $data['entries'][] = $edata;
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             The example above demonstrates
@@ -137,7 +135,7 @@ foreach ($feed as $entry) {
             type <classname>Zend_Feed_Abstract</classname>.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // from a URI
 $feed = Zend_Feed_Reader::import('http://www.planet-php.net/rdf/');
 
@@ -150,7 +148,7 @@ $feed = Zend_Feed_Reader::importFile('./feed.xml');
 // from a Zend_Feed_Abstract object
 $zfeed = Zend_Feed::import('http://www.planet-php.net/atom/');
 $feed  = Zend_Feed_Reader::importFeed($zfeed);
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.feed.reader.sources"><info><title>Retrieving Underlying Feed and Entry Sources</title></info>
@@ -224,15 +222,15 @@ $feed  = Zend_Feed_Reader::importFeed($zfeed);
             Extension beforehand.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $feed        = Zend_Feed_Reader::import('http://www.planet-php.net/rdf/');
-$xpathPrefix = $feed-&gt;getXpathPrefix();
-$xpath       = $feed-&gt;getXpath();
-$xpath-&gt;registerNamespace('admin', 'http://webns.net/mvcb/');
-$reportErrorsTo = $xpath-&gt;evaluate('string('
+$xpathPrefix = $feed->getXpathPrefix();
+$xpath       = $feed->getXpath();
+$xpath->registerNamespace('admin', 'http://webns.net/mvcb/');
+$reportErrorsTo = $xpath->evaluate('string('
                                  . $xpathPrefix
                                  . '/admin:errorReportsTo)');
-</programlisting>
+]]></programlisting>
 
         <warning>
             <para>
@@ -261,18 +259,18 @@ $reportErrorsTo = $xpath-&gt;evaluate('string('
                 <acronym>MD5</acronym> hash of the feed's <acronym>URI</acronym>.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $frontendOptions = array(
-   'lifetime' =&gt; 7200,
-   'automatic_serialization' =&gt; true
+   'lifetime' => 7200,
+   'automatic_serialization' => true
 );
-$backendOptions = array('cache_dir' =&gt; './tmp/');
+$backendOptions = array('cache_dir' => './tmp/');
 $cache = Zend_Cache::factory(
     'Core', 'File', $frontendOptions, $backendOptions
 );
 
 Zend_Feed_Reader::setCache($cache);
-</programlisting>
+]]></programlisting>
 
             <note>
                 <para>
@@ -317,12 +315,12 @@ Zend_Feed_Reader::setCache($cache);
                 need to provide a cache to <classname>Zend_Feed_Reader</classname>.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $frontendOptions = array(
-   'lifetime' =&gt; 86400,
-   'automatic_serialization' =&gt; true
+   'lifetime' => 86400,
+   'automatic_serialization' => true
 );
-$backendOptions = array('cache_dir' =&gt; './tmp/');
+$backendOptions = array('cache_dir' => './tmp/');
 $cache = Zend_Cache::factory(
     'Core', 'File', $frontendOptions, $backendOptions
 );
@@ -331,7 +329,7 @@ Zend_Feed_Reader::setCache($cache);
 Zend_Feed_Reader::useHttpConditionalGet();
 
 $feed = Zend_Feed_Reader::import('http://www.planet-php.net/rdf/');
-</programlisting>
+]]></programlisting>
 
             <para>
                 In the example above, with <acronym>HTTP</acronym> Conditional
@@ -348,13 +346,13 @@ $feed = Zend_Feed_Reader::import('http://www.planet-php.net/rdf/');
                 via the <acronym>URI</acronym> import method.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $lastEtagReceived = '5e6cefe7df5a7e95c8b1ba1a2ccaff3d';
 $lastModifiedDateReceived = 'Wed, 08 Jul 2009 13:37:22 GMT';
 $feed = Zend_Feed_Reader::import(
     $uri, $lastEtagReceived, $lastModifiedDateReceived
 );
-</programlisting>
+]]></programlisting>
         </section>
     </section>
 
@@ -392,19 +390,19 @@ $feed = Zend_Feed_Reader::import(
             "atom".
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $links = Zend_Feed_Reader::findFeedLinks('http://www.planet-php.net');
 
-if(isset($links-&gt;rdf)) {
-    echo $links-&gt;rdf, "\n"; // http://www.planet-php.org/rdf/
+if(isset($links->rdf)) {
+    echo $links->rdf, "\n"; // http://www.planet-php.org/rdf/
 }
-if(isset($links-&gt;rss)) {
-    echo $links-&gt;rss, "\n"; // http://www.planet-php.org/rss/
+if(isset($links->rss)) {
+    echo $links->rss, "\n"; // http://www.planet-php.org/rss/
 }
-if(isset($links-&gt;atom)) {
-    echo $links-&gt;atom, "\n"; // http://www.planet-php.org/atom/
+if(isset($links->atom)) {
+    echo $links->atom, "\n"; // http://www.planet-php.org/atom/
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Based on these links, you can then import from whichever source you
@@ -418,13 +416,13 @@ if(isset($links-&gt;atom)) {
             all links using the ArrayObject's iterator.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $links = Zend_Feed_Reader::findFeedLinks('http://www.planet-php.net');
 
 foreach ($links as $link) {
     echo $link['uri'], "\n";
 }
-</programlisting>
+]]></programlisting>
   </section>
 
   <section xml:id="zend.feed.reader.attribute-collections"><info><title>Attribute Collections</title></info>
@@ -470,14 +468,14 @@ foreach ($links as $link) {
             you might commit to something like:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $feed = Zend_Feed_Reader::import('http://www.example.com/atom.xml');
-$categories = $feed-&gt;getCategories();
+$categories = $feed->getCategories();
 $labels = array();
 foreach ($categories as $cat) {
     $labels[] = $cat['label']
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             It's a contrived example, but the point is that the labels are tied up with
@@ -494,11 +492,11 @@ foreach ($categories as $cat) {
             duplication.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $feed = Zend_Feed_Reader::import('http://www.example.com/atom.xml');
-$categories = $feed-&gt;getCategories();
-$labels = $categories-&gt;getValues();
-</programlisting>
+$categories = $feed->getCategories();
+$labels = $categories->getValues();
+]]></programlisting>
 
         <para>
             The above example shows how to extract only labels and nothing else thus
@@ -1369,11 +1367,11 @@ $labels = $categories-&gt;getValues();
             terms.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 Zend_Feed_Reader::registerExtension('Syndication');
 $feed = Zend_Feed_Reader::import('http://rss.slashdot.org/Slashdot/slashdot');
-$updatePeriod = $feed-&gt;current()-&gt;getUpdatePeriod();
-</programlisting>
+$updatePeriod = $feed->current()->getUpdatePeriod();
+]]></programlisting>
 
         <para>
             In the simple example above, we checked how frequently a feed is being updated
@@ -1389,12 +1387,12 @@ $updatePeriod = $feed-&gt;current()-&gt;getUpdatePeriod();
             you can also directly access any Extension object for a similar result as seen below.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 Zend_Feed_Reader::registerExtension('Syndication');
 $feed = Zend_Feed_Reader::import('http://rss.slashdot.org/Slashdot/slashdot');
-$syndication = $feed-&gt;getExtension('Syndication');
-$updatePeriod = $syndication-&gt;getUpdatePeriod();
-</programlisting>
+$syndication = $feed->getExtension('Syndication');
+$updatePeriod = $syndication->getUpdatePeriod();
+]]></programlisting>
 
         <section xml:id="zend.feed.reader.extending.feed"><info><title>Writing Zend_Feed_Reader Extensions</title></info>
             
@@ -1424,42 +1422,42 @@ $updatePeriod = $syndication-&gt;getUpdatePeriod();
                 name and namespace <acronym>URI</acronym>:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 JungleBooks 1.0:
 http://example.com/junglebooks/rss/module/1.0/
-</programlisting>
+]]></programlisting>
 
             <para>
                 A snippet of <acronym>RSS</acronym> containing this extension in practice could be
                 something similar to:
             </para>
 
-            <programlisting language="php">
-&lt;?xml version="1.0" encoding="utf-8" ?&gt;
-&lt;rss version="2.0"
+            <programlisting language="php"><![CDATA[
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="2.0"
    xmlns:content="http://purl.org/rss/1.0/modules/content/"
-   xmlns:jungle="http://example.com/junglebooks/rss/module/1.0/"&gt;
-&lt;channel&gt;
-    &lt;title&gt;Jungle Books Customer Reviews&lt;/title&gt;
-    &lt;link&gt;http://example.com/junglebooks&lt;/link&gt;
-    &lt;description&gt;Many book reviews!&lt;/description&gt;
-    &lt;pubDate&gt;Fri, 26 Jun 2009 19:15:10 GMT&lt;/pubDate&gt;
-    &lt;jungle:dayPopular&gt;
+   xmlns:jungle="http://example.com/junglebooks/rss/module/1.0/">
+<channel>
+    <title>Jungle Books Customer Reviews</title>
+    <link>http://example.com/junglebooks</link>
+    <description>Many book reviews!</description>
+    <pubDate>Fri, 26 Jun 2009 19:15:10 GMT</pubDate>
+    <jungle:dayPopular>
         http://example.com/junglebooks/book/938
-    &lt;/jungle:dayPopular&gt;
-    &lt;item&gt;
-        &lt;title&gt;Review Of Flatland: A Romance of Many Dimensions&lt;/title&gt;
-        &lt;link&gt;http://example.com/junglebooks/review/987&lt;/link&gt;
-        &lt;author&gt;Confused Physics Student&lt;/author&gt;
-        &lt;content:encoded&gt;
+    </jungle:dayPopular>
+    <item>
+        <title>Review Of Flatland: A Romance of Many Dimensions</title>
+        <link>http://example.com/junglebooks/review/987</link>
+        <author>Confused Physics Student</author>
+        <content:encoded>
         A romantic square?!
-        &lt;/content:encoded&gt;
-        &lt;pubDate&gt;Thu, 25 Jun 2009 20:03:28 -0700&lt;/pubDate&gt;
-        &lt;jungle:isbn&gt;048627263X&lt;/jungle:isbn&gt;
-    &lt;/item&gt;
-&lt;/channel&gt;
-&lt;/rss&gt;
-</programlisting>
+        </content:encoded>
+        <pubDate>Thu, 25 Jun 2009 20:03:28 -0700</pubDate>
+        <jungle:isbn>048627263X</jungle:isbn>
+    </item>
+</channel>
+</rss>
+]]></programlisting>
 
             <para>
                 Implementing this new <acronym>ISBN</acronym> element as a simple entry level
@@ -1467,33 +1465,33 @@ http://example.com/junglebooks/rss/module/1.0/
                 namespace outside of Zend).
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class My_FeedReader_Extension_JungleBooks_Entry
     extends Zend_Feed_Reader_Extension_EntryAbstract
 {
     public function getIsbn()
     {
-        if (isset($this-&gt;_data['isbn'])) {
-            return $this-&gt;_data['isbn'];
+        if (isset($this->_data['isbn'])) {
+            return $this->_data['isbn'];
         }
-        $isbn = $this-&gt;_xpath-&gt;evaluate(
-            'string(' . $this-&gt;getXpathPrefix() . '/jungle:isbn)'
+        $isbn = $this->_xpath->evaluate(
+            'string(' . $this->getXpathPrefix() . '/jungle:isbn)'
         );
         if (!$isbn) {
             $isbn = null;
         }
-        $this-&gt;_data['isbn'] = $isbn;
-        return $this-&gt;_data['isbn'];
+        $this->_data['isbn'] = $isbn;
+        return $this->_data['isbn'];
     }
 
     protected function _registerNamespaces()
     {
-        $this-&gt;_xpath-&gt;registerNamespace(
+        $this->_xpath->registerNamespace(
             'jungle', 'http://example.com/junglebooks/rss/module/1.0/'
         );
     }
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 This extension is easy enough to follow. It creates a new method
@@ -1520,7 +1518,7 @@ class My_FeedReader_Extension_JungleBooks_Entry
                 if it's not already loaded, and using it in practice.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 if(!Zend_Feed_Reader::isRegistered('JungleBooks')) {
     Zend_Feed_Reader::addPrefixPath(
         '/path/to/My/FeedReader/Extension', 'My_FeedReader_Extension'
@@ -1530,8 +1528,8 @@ if(!Zend_Feed_Reader::isRegistered('JungleBooks')) {
 $feed = Zend_Feed_Reader::import('http://example.com/junglebooks/rss');
 
 // ISBN for whatever book the first entry in the feed was concerned with
-$firstIsbn = $feed-&gt;current()-&gt;getIsbn();
-</programlisting>
+$firstIsbn = $feed->current()->getIsbn();
+]]></programlisting>
 
             <para>
                 Writing a feed level Extension is not much different. The
@@ -1544,40 +1542,40 @@ $firstIsbn = $feed-&gt;current()-&gt;getIsbn();
                 feel level <acronym>API</acronym>.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class My_FeedReader_Extension_JungleBooks_Feed
     extends Zend_Feed_Reader_Extension_FeedAbstract
 {
     public function getDaysPopularBookLink()
     {
-        if (isset($this-&gt;_data['dayPopular'])) {
-            return $this-&gt;_data['dayPopular'];
+        if (isset($this->_data['dayPopular'])) {
+            return $this->_data['dayPopular'];
         }
-        $dayPopular = $this-&gt;_xpath-&gt;evaluate(
-            'string(' . $this-&gt;getXpathPrefix() . '/jungle:dayPopular)'
+        $dayPopular = $this->_xpath->evaluate(
+            'string(' . $this->getXpathPrefix() . '/jungle:dayPopular)'
         );
         if (!$dayPopular) {
             $dayPopular = null;
         }
-        $this-&gt;_data['dayPopular'] = $dayPopular;
-        return $this-&gt;_data['dayPopular'];
+        $this->_data['dayPopular'] = $dayPopular;
+        return $this->_data['dayPopular'];
     }
 
     protected function _registerNamespaces()
     {
-        $this-&gt;_xpath-&gt;registerNamespace(
+        $this->_xpath->registerNamespace(
             'jungle', 'http://example.com/junglebooks/rss/module/1.0/'
         );
     }
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 Let's repeat the last example using a custom Extension to show the
                 method being used.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 if(!Zend_Feed_Reader::isRegistered('JungleBooks')) {
     Zend_Feed_Reader::addPrefixPath(
         '/path/to/My/FeedReader/Extension', 'My_FeedReader_Extension'
@@ -1587,11 +1585,11 @@ if(!Zend_Feed_Reader::isRegistered('JungleBooks')) {
 $feed = Zend_Feed_Reader::import('http://example.com/junglebooks/rss');
 
 // URI to the information page of the day's most popular book with visitors
-$daysPopularBookLink = $feed-&gt;getDaysPopularBookLink();
+$daysPopularBookLink = $feed->getDaysPopularBookLink();
 
 // ISBN for whatever book the first entry in the feed was concerned with
-$firstIsbn = $feed-&gt;current()-&gt;getIsbn();
-</programlisting>
+$firstIsbn = $feed->current()->getIsbn();
+]]></programlisting>
 
             <para>
                 Going through these examples, you'll note that we don't register

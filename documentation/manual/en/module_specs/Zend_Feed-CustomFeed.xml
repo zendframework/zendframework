@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.custom-feed"><info><title>Custom Feed and Entry Classes</title></info>
     
 
@@ -20,7 +18,7 @@
     <example xml:id="zend.feed.custom-feed.example.extending"><info><title>Extending the Atom Entry Class with Custom Namespaces</title></info>
         
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 /**
  * The custom entry class automatically knows the feed URI (optional) and
  * can automatically add extra namespaces.
@@ -74,21 +72,21 @@ class MyEntry extends Zend_Feed_Entry_Atom
         }
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Then to use this class, you'd just instantiate it directly and set the
             <property>myUpdated</property> property:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $entry = new MyEntry();
-$entry-&gt;myUpdated = '2005-04-19T15:30';
+$entry->myUpdated = '2005-04-19T15:30';
 
 // method-style call is handled by __call function
-$entry-&gt;myUpdated();
+$entry->myUpdated();
 // property-style call is handled by __get function
-$entry-&gt;myUpdated;
-</programlisting>
+$entry->myUpdated;
+]]></programlisting>
     </example>
 </section>

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dom.query"><info><title>Zend_Dom_Query</title></info>
     
 
@@ -127,24 +125,24 @@
                     the word 'One' in the listing below:
                 </para>
 
-                <programlisting language="html">
-&lt;div&gt;
-&lt;table&gt;
-    &lt;tr&gt;
-        &lt;td class="foo"&gt;
-            &lt;div&gt;
-                Lorem ipsum &lt;span class="bar"&gt;
-                    &lt;a href="/foo/bar" id="one"&gt;One&lt;/a&gt;
-                    &lt;a href="/foo/baz" id="two"&gt;Two&lt;/a&gt;
-                    &lt;a href="/foo/bat" id="three"&gt;Three&lt;/a&gt;
-                    &lt;a href="/foo/bla" id="four"&gt;Four&lt;/a&gt;
-                &lt;/span&gt;
-            &lt;/div&gt;
-        &lt;/td&gt;
-    &lt;/tr&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-</programlisting>
+                <programlisting language="html"><![CDATA[
+<div>
+<table>
+    <tr>
+        <td class="foo">
+            <div>
+                Lorem ipsum <span class="bar">
+                    <a href="/foo/bar" id="one">One</a>
+                    <a href="/foo/baz" id="two">Two</a>
+                    <a href="/foo/bat" id="three">Three</a>
+                    <a href="/foo/bla" id="four">Four</a>
+                </span>
+            </div>
+        </td>
+    </tr>
+</table>
+</div>
+]]></programlisting>
             </listitem>
         </itemizedlist>
 
@@ -158,15 +156,15 @@
             that selects against the <acronym>HTML</acronym> above:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $dom = new Zend_Dom_Query($html);
-$results = $dom-&gt;query('.foo .bar a');
+$results = $dom->query('.foo .bar a');
 
 $count = count($results); // get number of matches: 4
 foreach ($results as $result) {
     // $result is a DOMElement
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             <classname>Zend_Dom_Query</classname> also allows straight XPath queries

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.introduction"><info><title>Introduction</title></info>
     
 
@@ -25,17 +23,17 @@
             utilize a simple object-oriented interface:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Given an array of configuration data
 $configArray = array(
-    'webhost'  =&gt; 'www.example.com',
-    'database' =&gt; array(
-        'adapter' =&gt; 'pdo_mysql',
-        'params'  =&gt; array(
-            'host'     =&gt; 'db.example.com',
-            'username' =&gt; 'dbuser',
-            'password' =&gt; 'secret',
-            'dbname'   =&gt; 'mydatabase'
+    'webhost'  => 'www.example.com',
+    'database' => array(
+        'adapter' => 'pdo_mysql',
+        'params'  => array(
+            'host'     => 'db.example.com',
+            'username' => 'dbuser',
+            'password' => 'secret',
+            'dbname'   => 'mydatabase'
         )
     )
 );
@@ -44,16 +42,16 @@ $configArray = array(
 $config = new Zend_Config($configArray);
 
 // Print a configuration datum (results in 'www.example.com')
-echo $config-&gt;webhost;
+echo $config->webhost;
 
 // Use the configuration data to connect to the database
-$db = Zend_Db::factory($config-&gt;database-&gt;adapter,
-                       $config-&gt;database-&gt;params-&gt;toArray());
+$db = Zend_Db::factory($config->database->adapter,
+                       $config->database->params->toArray());
 
 // Alternative usage: simply pass the Zend_Config object.
 // The Zend_Db factory knows how to interpret it.
-$db = Zend_Db::factory($config-&gt;database);
-</programlisting>
+$db = Zend_Db::factory($config->database);
+]]></programlisting>
     </example>
 
     <para>
@@ -67,9 +65,9 @@ $db = Zend_Db::factory($config-&gt;database);
         return the supplied default value if the data element doesn't exist. For example:
     </para>
 
-    <programlisting language="php">
-$host = $config-&gt;database-&gt;get('host', 'localhost');
-</programlisting>
+    <programlisting language="php"><![CDATA[
+$host = $config->database->get('host', 'localhost');
+]]></programlisting>
 
     <example xml:id="zend.config.introduction.example.file.php"><info><title>Using Zend_Config with a PHP Configuration File</title></info>
         
@@ -79,28 +77,28 @@ $host = $config-&gt;database-&gt;get('host', 'localhost');
             The following code illustrates how easily this can be accomplished:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // config.php
 return array(
-    'webhost'  =&gt; 'www.example.com',
-    'database' =&gt; array(
-        'adapter' =&gt; 'pdo_mysql',
-        'params'  =&gt; array(
-            'host'     =&gt; 'db.example.com',
-            'username' =&gt; 'dbuser',
-            'password' =&gt; 'secret',
-            'dbname'   =&gt; 'mydatabase'
+    'webhost'  => 'www.example.com',
+    'database' => array(
+        'adapter' => 'pdo_mysql',
+        'params'  => array(
+            'host'     => 'db.example.com',
+            'username' => 'dbuser',
+            'password' => 'secret',
+            'dbname'   => 'mydatabase'
         )
     )
 );
-</programlisting>
+]]></programlisting>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Configuration consumption
 $config = new Zend_Config(require 'config.php');
 
 // Print a configuration datum (results in 'www.example.com')
-echo $config-&gt;webhost;
-</programlisting>
+echo $config->webhost;
+]]></programlisting>
     </example>
 </section>

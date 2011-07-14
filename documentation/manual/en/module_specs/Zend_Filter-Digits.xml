@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.digits"><info><title>Digits</title></info>
     
 
@@ -23,21 +21,21 @@
             A basic example of usage is below:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Digits();
 
-print $filter-&gt;filter('October 2009');
-</programlisting>
+print $filter->filter('October 2009');
+]]></programlisting>
 
         <para>
             This returns "2009".
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Digits();
 
-print $filter-&gt;filter('HTML 5 for Dummies');
-</programlisting>
+print $filter->filter('HTML 5 for Dummies');
+]]></programlisting>
 
         <para>
             This returns "5".

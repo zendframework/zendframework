@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.row"><info><title>Zend_Db_Table_Row</title></info>
     
 
@@ -34,10 +32,10 @@
         <example xml:id="zend.db.table.row.read.example"><info><title>Example of fetching a row</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
-$row = $bugs-&gt;fetchRow($bugs-&gt;select()-&gt;where('bug_id = ?', 1));
-</programlisting>
+$row = $bugs->fetchRow($bugs->select()->where('bug_id = ?', 1));
+]]></programlisting>
         </example>
 
         <para>
@@ -48,11 +46,11 @@ $row = $bugs-&gt;fetchRow($bugs-&gt;select()-&gt;where('bug_id = ?', 1));
         <example xml:id="zend.db.table.row.read.example-rowset"><info><title>Example of reading a row in a rowset</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
-$rowset = $bugs-&gt;fetchAll($bugs-&gt;select()-&gt;where('bug_status = ?', 1));
-$row = $rowset-&gt;current();
-</programlisting>
+$rowset = $bugs->fetchAll($bugs->select()->where('bug_status = ?', 1));
+$row = $rowset->current();
+]]></programlisting>
         </example>
 
         <section xml:id="zend.db.table.row.read.get"><info><title>Reading column values from a row</title></info>
@@ -66,13 +64,13 @@ $row = $rowset-&gt;current();
             <example xml:id="zend.db.table.row.read.get.example"><info><title>Example of reading a column in a row</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
-$row = $bugs-&gt;fetchRow($bugs-&gt;select()-&gt;where('bug_id = ?', 1));
+$row = $bugs->fetchRow($bugs->select()->where('bug_id = ?', 1));
 
 // Echo the value of the bug_description column
-echo $row-&gt;bug_description;
-</programlisting>
+echo $row->bug_description;
+]]></programlisting>
             </example>
 
             <note>
@@ -102,19 +100,19 @@ echo $row-&gt;bug_description;
             <example xml:id="zend.db.table.row.read.to-array.example"><info><title>Example of using the toArray() method</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
-$row = $bugs-&gt;fetchRow($bugs-&gt;select()-&gt;where('bug_id = ?', 1));
+$row = $bugs->fetchRow($bugs->select()->where('bug_id = ?', 1));
 
 // Get the column/value associative array from the Row object
-$rowArray = $row-&gt;toArray();
+$rowArray = $row->toArray();
 
 // Now use it as a normal array
-foreach ($rowArray as $column =&gt; $value) {
+foreach ($rowArray as $column => $value) {
     echo "Column: $column\n";
     echo "Value:  $value\n";
 }
-</programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -155,16 +153,16 @@ foreach ($rowArray as $column =&gt; $value) {
             <example xml:id="zend.db.table.row.write.set.example"><info><title>Example of changing a column in a row</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
-$row = $bugs-&gt;fetchRow($bugs-&gt;select()-&gt;where('bug_id = ?', 1));
+$row = $bugs->fetchRow($bugs->select()->where('bug_id = ?', 1));
 
 // Change the value of one or more columns
-$row-&gt;bug_status = 'FIXED';
+$row->bug_status = 'FIXED';
 
 // UPDATE the row in the database with new values
-$row-&gt;save();
-</programlisting>
+$row->save();
+]]></programlisting>
             </example>
         </section>
 
@@ -181,17 +179,17 @@ $row-&gt;save();
             <example xml:id="zend.db.table.row.write.insert.example"><info><title>Example of creating a new row for a table</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
-$newRow = $bugs-&gt;createRow();
+$newRow = $bugs->createRow();
 
 // Set column values as appropriate for your application
-$newRow-&gt;bug_description = '...description...';
-$newRow-&gt;bug_status = 'NEW';
+$newRow->bug_description = '...description...';
+$newRow->bug_status = 'NEW';
 
 // INSERT the new row to the database
-$newRow-&gt;save();
-</programlisting>
+$newRow->save();
+]]></programlisting>
             </example>
 
             <para>
@@ -202,18 +200,18 @@ $newRow-&gt;save();
             <example xml:id="zend.db.table.row.write.insert.example2"><info><title>Example of populating a new row for a table</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $data = array(
-    'bug_description' =&gt; '...description...',
-    'bug_status'      =&gt; 'NEW'
+    'bug_description' => '...description...',
+    'bug_status'      => 'NEW'
 );
 
 $bugs = new Bugs();
-$newRow = $bugs-&gt;createRow($data);
+$newRow = $bugs->createRow($data);
 
 // INSERT the new row to the database
-$newRow-&gt;save();
-</programlisting>
+$newRow->save();
+]]></programlisting>
             </example>
 
             <note>
@@ -241,22 +239,22 @@ $newRow-&gt;save();
             <example xml:id="zend.db.table.row.write.set-from-array.example"><info><title>Example of using setFromArray() to set values in a new Row</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
-$newRow = $bugs-&gt;createRow();
+$newRow = $bugs->createRow();
 
 // Data are arranged in an associative array
 $data = array(
-    'bug_description' =&gt; '...description...',
-    'bug_status'      =&gt; 'NEW'
+    'bug_description' => '...description...',
+    'bug_status'      => 'NEW'
 );
 
 // Set all the column values at once
-$newRow-&gt;setFromArray($data);
+$newRow->setFromArray($data);
 
 // INSERT the new row to the database
-$newRow-&gt;save();
-</programlisting>
+$newRow->save();
+]]></programlisting>
             </example>
         </section>
 
@@ -271,13 +269,13 @@ $newRow-&gt;save();
             <example xml:id="zend.db.table.row.write.delete.example"><info><title>Example of deleting a row</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
-$row = $bugs-&gt;fetchRow('bug_id = 1');
+$row = $bugs->fetchRow('bug_id = 1');
 
 // DELETE this row
-$row-&gt;delete();
-</programlisting>
+$row->delete();
+]]></programlisting>
             </example>
 
             <para>
@@ -308,15 +306,15 @@ $row-&gt;delete();
             <example xml:id="zend.db.table.row.serialize.serializing.example"><info><title>Example of serializing a row</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
-$row = $bugs-&gt;fetchRow('bug_id = 1');
+$row = $bugs->fetchRow('bug_id = 1');
 
 // Convert object to serialized form
 $serializedRow = serialize($row);
 
 // Now you can write $serializedRow to a file, etc.
-</programlisting>
+]]></programlisting>
             </example>
         </section>
 
@@ -339,12 +337,12 @@ $serializedRow = serialize($row);
             <example xml:id="zend.db.table.row.serialize.unserializing.example"><info><title>Example of unserializing a serialized row</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $rowClone = unserialize($serializedRow);
 
 // Now you can use object properties, but read-only
-echo $rowClone-&gt;bug_description;
-</programlisting>
+echo $rowClone->bug_description;
+]]></programlisting>
             </example>
 
             <note><info><title>Why do Rows unserialize in a disconnected state?</title></info>
@@ -377,19 +375,19 @@ echo $rowClone-&gt;bug_description;
             <example xml:id="zend.db.table.row.serialize.set-table.example"><info><title>Example of reactivating a row</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $rowClone = unserialize($serializedRow);
 
 $bugs = new Bugs();
 
 // Reconnect the row to a table, and
 // thus to a live database connection
-$rowClone-&gt;setTable($bugs);
+$rowClone->setTable($bugs);
 
 // Now you can make changes to the row and save them
-$rowClone-&gt;bug_status = 'FIXED';
-$rowClone-&gt;save();
-</programlisting>
+$rowClone->bug_status = 'FIXED';
+$rowClone->save();
+]]></programlisting>
             </example>
         </section>
     </section>
@@ -410,7 +408,7 @@ $rowClone-&gt;save();
         <example xml:id="zend.db.table.row.extending.example"><info><title>Specifying a custom Row class</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class MyRow extends Zend_Db_Table_Row_Abstract
 {
     // ...customizations
@@ -426,8 +424,8 @@ class Products extends Zend_Db_Table_Abstract
 
 // Or specify a custom Row to be used in one
 // instance of a Table class.
-$bugs = new Bugs(array('rowClass' =&gt; 'MyRow'));
-</programlisting>
+$bugs = new Bugs(array('rowClass' => 'MyRow'));
+]]></programlisting>
         </example>
 
         <section xml:id="zend.db.table.row.extending.overriding"><info><title>Row initialization</title></info>
@@ -444,17 +442,17 @@ $bugs = new Bugs(array('rowClass' =&gt; 'MyRow'));
             <example xml:id="zend.db.table.row.init.usage.example"><info><title>Example usage of init() method</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 class MyApplicationRow extends Zend_Db_Table_Row_Abstract
 {
     protected $_role;
 
     public function init()
     {
-        $this-&gt;_role = new MyRoleClass();
+        $this->_role = new MyRoleClass();
     }
 }
-</programlisting>
+]]></programlisting>
             </example>
         </section>
 
@@ -498,14 +496,14 @@ class MyApplicationRow extends Zend_Db_Table_Row_Abstract
                     configuration has enabled this behavior.
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 class MyLoggingRow extends Zend_Db_Table_Row_Abstract
 {
     protected function _insert()
     {
         $log = Zend_Registry::get('database_log');
-        $log-&gt;info(Zend_Debug::dump($this-&gt;_data,
-                                    "INSERT: $this-&gt;_tableClass",
+        $log->info(Zend_Debug::dump($this->_data,
+                                    "INSERT: $this->_tableClass",
                                     false)
                   );
     }
@@ -514,11 +512,11 @@ class MyLoggingRow extends Zend_Db_Table_Row_Abstract
 // $loggingEnabled is an example property that depends
 // on your application configuration
 if ($loggingEnabled) {
-    $bugs = new Bugs(array('rowClass' =&gt; 'MyLoggingRow'));
+    $bugs = new Bugs(array('rowClass' => 'MyLoggingRow'));
 } else {
     $bugs = new Bugs();
 }
-</programlisting>
+]]></programlisting>
             </example>
 
             <example xml:id="zend.db.table.row.extending.overriding-example2"><info><title>Example of a Row class that logs insert data for multiple tables</title></info>
@@ -535,14 +533,14 @@ if ($loggingEnabled) {
                     In this example, the logging code is identical in all table classes.
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 class MyLoggingRow extends Zend_Db_Table_Row_Abstract
 {
     protected function _insert()
     {
         $log = Zend_Registry::get('database_log');
-        $log-&gt;info(Zend_Debug::dump($this-&gt;_data,
-                                    "INSERT: $this-&gt;_tableClass",
+        $log->info(Zend_Debug::dump($this->_data,
+                                    "INSERT: $this->_tableClass",
                                     false)
                   );
     }
@@ -559,7 +557,7 @@ class Products extends Zend_Db_Table_Abstract
     protected $_name = 'products';
     protected $_rowClass = 'MyLoggingRow';
 }
-</programlisting>
+]]></programlisting>
             </example>
         </section>
 
@@ -595,7 +593,7 @@ class Products extends Zend_Db_Table_Abstract
                     table.
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 class MyInflectedRow extends Zend_Db_Table_Row_Abstract
 {
     protected function _transformColumn($columnName)
@@ -612,13 +610,13 @@ class Bugs extends Zend_Db_Table_Abstract
 }
 
 $bugs = new Bugs();
-$row = $bugs-&gt;fetchNew();
+$row = $bugs->fetchNew();
 
 // Use camelcase column names, and rely on the
 // transformation function to change it into the
 // native representation.
-$row-&gt;bugDescription = 'New description';
-</programlisting>
+$row->bugDescription = 'New description';
+]]></programlisting>
             </example>
 
             <para>

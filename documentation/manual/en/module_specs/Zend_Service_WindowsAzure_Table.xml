@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.windowsazure.storage.table"><info><title>Zend_Service_WindowsAzure_Storage_Table</title></info>
     
 
@@ -45,14 +43,14 @@
             <example xml:id="zend.service.windowsazure.storage.table.api.create.example"><info><title>Creating a table</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Table(
     'table.core.windows.net', 'myaccount', 'myauthkey'
 );
-$result = $storageClient-&gt;createTable('testtable');
+$result = $storageClient->createTable('testtable');
 
-echo 'New table name is: ' . $result-&gt;Name;
-</programlisting>
+echo 'New table name is: ' . $result->Name;
+]]></programlisting>
             </example>
         </section>
 
@@ -67,15 +65,15 @@ echo 'New table name is: ' . $result-&gt;Name;
             <example xml:id="zend.service.windowsazure.storage.table.api.list.example"><info><title>Listing all tables</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Table(
     'table.core.windows.net', 'myaccount', 'myauthkey'
 );
-$result = $storageClient-&gt;listTables();
+$result = $storageClient->listTables();
 foreach ($result as $table) {
-    echo 'Table name is: ' . $table-&gt;Name . "\r\n";
+    echo 'Table name is: ' . $table->Name . "\r\n";
 }
-</programlisting>
+]]></programlisting>
             </example>
         </section>
     </section>
@@ -121,7 +119,7 @@ foreach ($result as $table) {
         <example xml:id="zend.service.windowsazure.storage.table.entities.schema"><info><title>Enforced schema used in samples</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class SampleEntity extends Zend_Service_WindowsAzure_Storage_TableEntity
 {
     /**
@@ -139,7 +137,7 @@ class SampleEntity extends Zend_Service_WindowsAzure_Storage_TableEntity
     */
     public $Visible = false;
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -204,7 +202,7 @@ class SampleEntity extends Zend_Service_WindowsAzure_Storage_TableEntity
             <example xml:id="zend.service.windowsazure.storage.table.entities.enforced.schema"><info><title>Sample enforced schema class</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 class SampleEntity extends Zend_Service_WindowsAzure_Storage_TableEntity
 {
     /**
@@ -222,7 +220,7 @@ class SampleEntity extends Zend_Service_WindowsAzure_Storage_TableEntity
      */
     public $Visible = false;
 }
-</programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -237,12 +235,12 @@ class SampleEntity extends Zend_Service_WindowsAzure_Storage_TableEntity
             <example xml:id="zend.service.windowsazure.storage.table.entities.enforced.schema-property"><info><title>Enforced property</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 /**
- * @azure &lt;property name in Windows Azure&gt; &lt;optional property type&gt;
+ * @azure <property name in Windows Azure> <optional property type>
  */
-public $&lt;property name in PHP&gt;;
-</programlisting>
+public $<property name in PHP>;
+]]></programlisting>
             </example>
 
             <para>
@@ -253,12 +251,12 @@ public $&lt;property name in PHP&gt;;
             <example xml:id="zend.service.windowsazure.storage.table.entities.enforced.schema-property-sample"><info><title>Sample enforced property</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 /**
  * @azure Age Edm.Int64
  */
 public $Age;
-</programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -385,13 +383,13 @@ public $Age;
                 </title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $target = new Zend_Service_WindowsAzure_Storage_DynamicTableEntity(
     'partition1', '000001'
 );
-$target-&gt;Name = 'Name'; // Will add property "Name" of type "Edm.String"
-$target-&gt;Age  = 25;     // Will add property "Age" of type "Edm.Int32"
-</programlisting>
+$target->Name = 'Name'; // Will add property "Name" of type "Edm.String"
+$target->Age  = 25;     // Will add property "Age" of type "Edm.Int32"
+]]></programlisting>
             </example>
 
             <para>
@@ -403,16 +401,16 @@ $target-&gt;Age  = 25;     // Will add property "Age" of type "Edm.Int32"
                 </title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $target = new Zend_Service_WindowsAzure_Storage_DynamicTableEntity(
     'partition1', '000001'
 );
-$target-&gt;Name = 'Name'; // Will add property "Name" of type "Edm.String"
-$target-&gt;Age  = 25;     // Will add property "Age" of type "Edm.Int32"
+$target->Name = 'Name'; // Will add property "Name" of type "Edm.String"
+$target->Age  = 25;     // Will add property "Age" of type "Edm.Int32"
 
 // Change type of property "Age" to "Edm.Int32":
-$target-&gt;setAzurePropertyType('Age', 'Edm.Int64');
-</programlisting>
+$target->setAzurePropertyType('Age', 'Edm.Int64');
+]]></programlisting>
             </example>
 
             <para>
@@ -437,21 +435,21 @@ $target-&gt;setAzurePropertyType('Age', 'Edm.Int64');
                 <example xml:id="zend.service.windowsazure.storage.table.api.entities.insert.example"><info><title>Inserting an entity</title></info>
                     
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 $entity = new SampleEntity ('partition1', 'row1');
-$entity-&gt;FullName = "Maarten";
-$entity-&gt;Age = 25;
-$entity-&gt;Visible = true;
+$entity->FullName = "Maarten";
+$entity->Age = 25;
+$entity->Visible = true;
 
 $storageClient = new Zend_Service_WindowsAzure_Storage_Table(
     'table.core.windows.net', 'myaccount', 'myauthkey'
 );
-$result = $storageClient-&gt;insertEntity('testtable', $entity);
+$result = $storageClient->insertEntity('testtable', $entity);
 
 // Check the timestamp and etag of the newly inserted entity
-echo 'Timestamp: ' . $result-&gt;getTimestamp() . "\n";
-echo 'Etag: ' . $result-&gt;getEtag() . "\n";
-</programlisting>
+echo 'Timestamp: ' . $result->getTimestamp() . "\n";
+echo 'Etag: ' . $result->getEtag() . "\n";
+]]></programlisting>
                 </example>
             </section>
 
@@ -466,14 +464,14 @@ echo 'Etag: ' . $result-&gt;getEtag() . "\n";
                 <example xml:id="zend.service.windowsazure.storage.table.entities.api.retrieve-by-id.example"><info><title>Retrieving an entity by partition key and row key</title></info>
                     
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Table(
     'table.core.windows.net', 'myaccount', 'myauthkey'
 );
-$entity= $storageClient-&gt;retrieveEntityById(
+$entity= $storageClient->retrieveEntityById(
     'testtable', 'partition1', 'row1', 'SampleEntity'
 );
-</programlisting>
+]]></programlisting>
                 </example>
             </section>
 
@@ -488,17 +486,17 @@ $entity= $storageClient-&gt;retrieveEntityById(
                 <example xml:id="zend.service.windowsazure.storage.table.api.entities.updating.example"><info><title>Updating an entity</title></info>
                     
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Table(
     'table.core.windows.net', 'myaccount', 'myauthkey'
 );
-$entity = $storageClient-&gt;retrieveEntityById(
+$entity = $storageClient->retrieveEntityById(
     'testtable', 'partition1', 'row1', 'SampleEntity'
 );
 
-$entity-&gt;Name = 'New name';
-$result = $storageClient-&gt;updateEntity('testtable', $entity);
-</programlisting>
+$entity->Name = 'New name';
+$result = $storageClient->updateEntity('testtable', $entity);
+]]></programlisting>
                 </example>
 
                 <para>
@@ -511,19 +509,19 @@ $result = $storageClient-&gt;updateEntity('testtable', $entity);
                 <example xml:id="zend.service.windowsazure.storage.table.entities.api.updating.example-etag"><info><title>Updating an entity (with Etag check)</title></info>
                     
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Table(
     'table.core.windows.net', 'myaccount', 'myauthkey'
 );
-$entity = $storageClient-&gt;retrieveEntityById(
+$entity = $storageClient->retrieveEntityById(
     'testtable', 'partition1', 'row1', 'SampleEntity'
 );
 
-$entity-&gt;Name = 'New name';
+$entity->Name = 'New name';
 
 // last parameter instructs the Etag check:
-$result = $storageClient-&gt;updateEntity('testtable', $entity, true);
-</programlisting>
+$result = $storageClient->updateEntity('testtable', $entity, true);
+]]></programlisting>
                 </example>
             </section>
 
@@ -538,15 +536,15 @@ $result = $storageClient-&gt;updateEntity('testtable', $entity, true);
                 <example xml:id="zend.service.windowsazure.storage.table.entities.api.delete.example"><info><title>Deleting an entity</title></info>
                     
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Table(
     'table.core.windows.net', 'myaccount', 'myauthkey'
 );
-$entity = $storageClient-&gt;retrieveEntityById(
+$entity = $storageClient->retrieveEntityById(
     'testtable', 'partition1', 'row1', 'SampleEntity'
 );
-$result = $storageClient-&gt;deleteEntity('testtable', $entity);
-</programlisting>
+$result = $storageClient->deleteEntity('testtable', $entity);
+]]></programlisting>
                 </example>
             </section>
         </section>
@@ -583,20 +581,20 @@ $result = $storageClient-&gt;deleteEntity('testtable', $entity);
             <example xml:id="zend.service.windowsazure.storage.table.entities.querying.query-filter"><info><title>Performing queries using a filter condition</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Table(
     'table.core.windows.net', 'myaccount', 'myauthkey'
 );
-$entities = $storageClient-&gt;storageClient-&gt;retrieveEntities(
+$entities = $storageClient->storageClient->retrieveEntities(
     'testtable',
     'Name eq \'Maarten\' and PartitionKey eq \'partition1\'',
     'SampleEntity'
 );
 
 foreach ($entities as $entity) {
-    echo 'Name: ' . $entity-&gt;Name . "\n";
+    echo 'Name: ' . $entity->Name . "\n";
 }
-</programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -607,23 +605,23 @@ foreach ($entities as $entity) {
             <example xml:id="zend.service.windowsazure.storage.table.api.entities.query-fluent"><info><title>Performing queries using a fluent interface</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Table(
     'table.core.windows.net', 'myaccount', 'myauthkey'
 );
-$entities = $storageClient-&gt;storageClient-&gt;retrieveEntities(
+$entities = $storageClient->storageClient->retrieveEntities(
     'testtable',
-    $storageClient-&gt;select()
-                  -&gt;from($tableName)
-                  -&gt;where('Name eq ?', 'Maarten')
-                  -&gt;andWhere('PartitionKey eq ?', 'partition1'),
+    $storageClient->select()
+                  ->from($tableName)
+                  ->where('Name eq ?', 'Maarten')
+                  ->andWhere('PartitionKey eq ?', 'partition1'),
     'SampleEntity'
 );
 
 foreach ($entities as $entity) {
-    echo 'Name: ' . $entity-&gt;Name . "\n";
+    echo 'Name: ' . $entity->Name . "\n";
 }
-</programlisting>
+]]></programlisting>
             </example>
         </section>
 
@@ -646,23 +644,23 @@ foreach ($entities as $entity) {
             <example xml:id="zend.service.windowsazure.storage.table.api.batch"><info><title>Executing a batch operation</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Table(
     'table.core.windows.net', 'myaccount', 'myauthkey'
 );
 
 // Start batch
-$batch = $storageClient-&gt;startBatch();
+$batch = $storageClient->startBatch();
 
 // Insert entities in batch
 $entities = generateEntities();
 foreach ($entities as $entity) {
-    $storageClient-&gt;insertEntity($tableName, $entity);
+    $storageClient->insertEntity($tableName, $entity);
 }
 
 // Commit
-$batch-&gt;commit();
-</programlisting>
+$batch->commit();
+]]></programlisting>
             </example>
         </section>
     </section>
@@ -689,7 +687,7 @@ $batch-&gt;commit();
         <example xml:id="zend.service.windowsazure.storage.table.api.sessionhandler-register"><info><title>Registering table storage session handler</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Table(
     'table.core.windows.net', 'myaccount', 'myauthkey'
 );
@@ -697,8 +695,8 @@ $storageClient = new Zend_Service_WindowsAzure_Storage_Table(
 $sessionHandler = new Zend_Service_WindowsAzure_SessionHandler(
     $storageClient , 'sessionstable'
 );
-$sessionHandler-&gt;register();
-</programlisting>
+$sessionHandler->register();
+]]></programlisting>
         </example>
 
         <para>
@@ -717,7 +715,7 @@ $sessionHandler-&gt;register();
         <example xml:id="zend.service.windowsazure.storage.table.api.sessionhandler-usage"><info><title>Using table storage session handler</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Table(
     'table.core.windows.net', 'myaccount', 'myauthkey'
 );
@@ -725,7 +723,7 @@ $storageClient = new Zend_Service_WindowsAzure_Storage_Table(
 $sessionHandler = new Zend_Service_WindowsAzure_SessionHandler(
     $storageClient , 'sessionstable'
 );
-$sessionHandler-&gt;register();
+$sessionHandler->register();
 
 session_start();
 
@@ -734,7 +732,7 @@ if (!isset($_SESSION['firstVisit'])) {
 }
 
 // ...
-</programlisting>
+]]></programlisting>
         </example>
 
         <warning>

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.twitter.search"><info><title>Zend_Service_Twitter_Search</title></info>
     
 
@@ -28,14 +26,14 @@
             an array.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $twitterSearch  = new Zend_Service_Twitter_Search();
-$twitterTrends  = $twitterSearch-&gt;trends();
+$twitterTrends  = $twitterSearch->trends();
 
 foreach ($twitterTrends as $trend) {
     print $trend['name'] . ' - ' . $trend['url'] . PHP_EOL
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             The return array has two values in it:
@@ -126,10 +124,10 @@ foreach ($twitterTrends as $trend) {
                 The following code sample will return an array with the search results.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $twitterSearch  = new Zend_Service_Twitter_Search('json');
-$searchResults  = $twitterSearch-&gt;search('zend', array('lang' =&gt; 'en'));
-</programlisting>
+$searchResults  = $twitterSearch->search('zend', array('lang' => 'en'));
+]]></programlisting>
         </example>
 
         <example xml:id="zend.service.twitter.search.search.atom"><info><title>ATOM Search Example</title></info>
@@ -140,10 +138,10 @@ $searchResults  = $twitterSearch-&gt;search('zend', array('lang' =&gt; 'en'));
                 object.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $twitterSearch  = new Zend_Service_Twitter_Search('atom');
-$searchResults  = $twitterSearch-&gt;search('zend', array('lang' =&gt; 'en'));
-</programlisting>
+$searchResults  = $twitterSearch->search('zend', array('lang' => 'en'));
+]]></programlisting>
         </example>
     </section>
 

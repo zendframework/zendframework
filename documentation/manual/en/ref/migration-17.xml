@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.17"><info><title>Zend Framework 1.7</title></info>
     
 
@@ -88,19 +86,19 @@
                 <example xml:id="migration.17.zend.file.transfer.validators.rename.example"><info><title>Changes for the rename filter from 1.6 to 1.7</title></info>
                     
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 // Example for 1.6
 $upload = new Zend_File_Transfer_Adapter_Http();
-$upload-&gt;addFilter('Rename',
+$upload->addFilter('Rename',
                    array('/path/to/oldfile', '/path/to/newfile', true));
 
 // Same example for 1.7
 $upload = new Zend_File_Transfer_Adapter_Http();
-$upload-&gt;addFilter('Rename',
-                   array('source' =&gt; '/path/to/oldfile',
-                         'target' =&gt; '/path/to/newfile',
-                         'overwrite' =&gt; true));
-</programlisting>
+$upload->addFilter('Rename',
+                   array('source' => '/path/to/oldfile',
+                         'target' => '/path/to/newfile',
+                         'overwrite' => true));
+]]></programlisting>
                 </example>
             </section>
 
@@ -129,19 +127,19 @@ $upload-&gt;addFilter('Rename',
                 <example xml:id="migration.17.zend.file.transfer.validators.count.example"><info><title>Changes for the count validator from 1.6 to 1.7</title></info>
                     
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 // Example for 1.6
 $upload = new Zend_File_Transfer_Adapter_Http();
-$upload-&gt;addValidator('Count',
+$upload->addValidator('Count',
                       array(2, 3));
 
 // Same example for 1.7
 $upload = new Zend_File_Transfer_Adapter_Http();
-$upload-&gt;addValidator('Count',
+$upload->addValidator('Count',
                       false,
-                      array('min' =&gt; 2,
-                            'max' =&gt; 3));
-</programlisting>
+                      array('min' => 2,
+                            'max' => 3));
+]]></programlisting>
                 </example>
             </section>
 
@@ -171,19 +169,19 @@ $upload-&gt;addValidator('Count',
                 <example xml:id="migration.17.zend.file.transfer.validators.extension.example"><info><title>Changes for the extension validator from 1.6 to 1.7</title></info>
                     
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 // Example for 1.6
 $upload = new Zend_File_Transfer_Adapter_Http();
-$upload-&gt;addValidator('Extension',
+$upload->addValidator('Extension',
                       array('jpg,gif,bmp', true));
 
 // Same example for 1.7
 $upload = new Zend_File_Transfer_Adapter_Http();
-$upload-&gt;addValidator('Extension',
+$upload->addValidator('Extension',
                       false,
-                      array('extension1' =&gt; 'jpg,gif,bmp',
-                            'case' =&gt; true));
-</programlisting>
+                      array('extension1' => 'jpg,gif,bmp',
+                            'case' => true));
+]]></programlisting>
                 </example>
             </section>
 
@@ -223,26 +221,26 @@ $upload-&gt;addValidator('Extension',
                 <example xml:id="migration.17.zend.file.transfer.validators.filessize.example"><info><title>Changes for the filessize validator from 1.6 to 1.7</title></info>
                     
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 // Example for 1.6
 $upload = new Zend_File_Transfer_Adapter_Http();
-$upload-&gt;addValidator('FilesSize',
+$upload->addValidator('FilesSize',
                    array(100, 10000, true));
 
 // Same example for 1.7
 $upload = new Zend_File_Transfer_Adapter_Http();
-$upload-&gt;addValidator('FilesSize',
+$upload->addValidator('FilesSize',
                       false,
-                      array('min' =&gt; 100,
-                            'max' =&gt; 10000,
-                            'bytestring' =&gt; true));
+                      array('min' => 100,
+                            'max' => 10000,
+                            'bytestring' => true));
 
 // Example for 1.6
-$upload-&gt;useByteString(true); // set flag
+$upload->useByteString(true); // set flag
 
 // Same example for 1.7
-$upload-&gt;setUseByteSting(true); // set flag
-</programlisting>
+$upload->setUseByteSting(true); // set flag
+]]></programlisting>
                 </example>
             </section>
 
@@ -272,19 +270,19 @@ $upload-&gt;setUseByteSting(true); // set flag
                 <example xml:id="migration.17.zend.file.transfer.validators.hash.example"><info><title>Changes for the hash validator from 1.6 to 1.7</title></info>
                     
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 // Example for 1.6
 $upload = new Zend_File_Transfer_Adapter_Http();
-$upload-&gt;addValidator('Hash',
+$upload->addValidator('Hash',
                    array('12345', 'md5'));
 
 // Same example for 1.7
 $upload = new Zend_File_Transfer_Adapter_Http();
-$upload-&gt;addValidator('Hash',
+$upload->addValidator('Hash',
                       false,
-                      array('hash1' =&gt; '12345',
-                            'algorithm' =&gt; 'md5'));
-</programlisting>
+                      array('hash1' => '12345',
+                            'algorithm' => 'md5'));
+]]></programlisting>
                 </example>
             </section>
 
@@ -316,21 +314,21 @@ $upload-&gt;addValidator('Hash',
                 <example xml:id="migration.17.zend.file.transfer.validators.imagesize.example"><info><title>Changes for the imagesize validator from 1.6 to 1.7</title></info>
                     
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 // Example for 1.6
 $upload = new Zend_File_Transfer_Adapter_Http();
-$upload-&gt;addValidator('ImageSize',
+$upload->addValidator('ImageSize',
                       array(10, 10, 100, 100));
 
 // Same example for 1.7
 $upload = new Zend_File_Transfer_Adapter_Http();
-$upload-&gt;addValidator('ImageSize',
+$upload->addValidator('ImageSize',
                       false,
-                      array('minwidth' =&gt; 10,
-                            'minheight' =&gt; 10,
-                            'maxwidth' =&gt; 100,
-                            'maxheight' =&gt; 100));
-</programlisting>
+                      array('minwidth' => 10,
+                            'minheight' => 10,
+                            'maxwidth' => 100,
+                            'maxheight' => 100));
+]]></programlisting>
                 </example>
             </section>
 
@@ -362,20 +360,20 @@ $upload-&gt;addValidator('ImageSize',
                 <example xml:id="migration.17.zend.file.transfer.validators.size.example"><info><title>Changes for the size validator from 1.6 to 1.7</title></info>
                     
 
-                    <programlisting language="php">
+                    <programlisting language="php"><![CDATA[
 // Example for 1.6
 $upload = new Zend_File_Transfer_Adapter_Http();
-$upload-&gt;addValidator('Size',
+$upload->addValidator('Size',
                       array(100, 10000, true));
 
 // Same example for 1.7
 $upload = new Zend_File_Transfer_Adapter_Http();
-$upload-&gt;addValidator('Size',
+$upload->addValidator('Size',
                       false,
-                      array('min' =&gt; 100,
-                            'max' =&gt; 10000,
-                            'bytestring' =&gt; true));
-</programlisting>
+                      array('min' => 100,
+                            'max' => 10000,
+                            'bytestring' => true));
+]]></programlisting>
                 </example>
             </section>
         </section>
@@ -405,7 +403,7 @@ $upload-&gt;addValidator('Size',
             <example xml:id="migration.17.zend.locale.islocale.example"><info><title>How to change isLocale() from 1.6 to 1.7</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Example for 1.6
 if ($locale = Zend_Locale::isLocale($locale)) {
     // do something
@@ -419,14 +417,14 @@ Zend_Locale::$compatibilityMode = false;
 
 if (Zend_Locale::isLocale($locale)) {
 }
-</programlisting>
+]]></programlisting>
 
                 <para>
                     Note that you can use the second parameter to see if the locale is correct
                     without processing a rerouting.
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Example for 1.6
 if ($locale = Zend_Locale::isLocale($locale, false)) {
     // do something
@@ -445,7 +443,7 @@ if (Zend_Locale::isLocale($locale, false)) {
 
     // original string is no locale but can be rerouted
 }
-</programlisting>
+]]></programlisting>
             </example>
         </section>
 
@@ -467,9 +465,9 @@ if (Zend_Locale::isLocale($locale, false)) {
             <example xml:id="migration.17.zend.locale.islocale.getdefault.example"><info><title>How to change getDefault() from 1.6 to 1.7</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Example for 1.6
-$locales = $locale-&gt;getDefault(Zend_Locale::BROWSER);
+$locales = $locale->getDefault(Zend_Locale::BROWSER);
 
 // Same example for 1.7
 
@@ -478,7 +476,7 @@ $locales = $locale-&gt;getDefault(Zend_Locale::BROWSER);
 Zend_Locale::$compatibilityMode = false;
 
 $locale = Zend_Locale::getOrder(Zend_Locale::BROWSER);
-</programlisting>
+]]></programlisting>
 
                 <para>
                     Note that the second parameter of the old <methodname>getDefault()</methodname>
@@ -539,23 +537,23 @@ $locale = Zend_Locale::getOrder(Zend_Locale::BROWSER);
                     'fr' which is not in our portfolio of translated languages.
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $language = new Zend_Translate('gettext',
                                '/path/to/translations',
                                'auto');
-</programlisting>
+]]></programlisting>
 
                 <para>
                     In this case we will get an notice about a not available language 'fr'.
                     Simply add the option and the notices will be disabled.
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $language = new Zend_Translate('gettext',
                                '/path/to/translations',
                                'auto',
-                               array('disableNotices' =&gt; true));
-</programlisting>
+                               array('disableNotices' => true));
+]]></programlisting>
             </example>
         </section>
     </section>
@@ -580,10 +578,10 @@ $language = new Zend_Translate('gettext',
             passed to the <methodname>render()</methodname> method:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Where $_GET['foobar'] = '../../../../etc/passwd'
-echo $view-&gt;render($_GET['foobar']); // LFI inclusion
-</programlisting>
+echo $view->render($_GET['foobar']); // LFI inclusion
+]]></programlisting>
 
         <para>
             <classname>Zend_View</classname> now by default raises an exception when such
@@ -602,14 +600,14 @@ echo $view-&gt;render($_GET['foobar']); // LFI inclusion
                 by explicitly calling the <methodname>setLfiProtection()</methodname> method.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Disabling via constructor
-$view = new Zend_View(array('lfiProtectionOn' =&gt; false));
+$view = new Zend_View(array('lfiProtectionOn' => false));
 
 // Disabling via exlicit method call:
 $view = new Zend_View();
-$view-&gt;setLfiProtection(false);
-</programlisting>
+$view->setLfiProtection(false);
+]]></programlisting>
         </section>
     </section>
 </section>

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.autoloader-factory"><info><title>The AutoloaderFactory</title></info>
     
 
@@ -29,44 +27,44 @@
             example, consider the following PHP array:
         </para>
 
-        <programlisting xml:lang="php">
+        <programlisting xml:lang="php"><![CDATA[
 $config = array(
-    'Zend\Loader\ClassMapAutoloader' =&gt; array(
-        'application' =&gt; APPLICATION_PATH . '/.classmap.php',
-        'zf'          =&gt; APPLICATION_PATH . '/../library/Zend/.classmap.php',
+    'Zend\Loader\ClassMapAutoloader' => array(
+        'application' => APPLICATION_PATH . '/.classmap.php',
+        'zf'          => APPLICATION_PATH . '/../library/Zend/.classmap.php',
     ),
-    'Zend\Loader\StandardAutoloader' =&gt; array(
-        'namespaces' =&gt; array(
-            'Phly\Mustache' =&gt; APPLICATION_PATH . '/../library/Phly/Mustache',
-            'Doctrine'      =&gt; APPLICATION_PATH . '/../library/Doctrine',
+    'Zend\Loader\StandardAutoloader' => array(
+        'namespaces' => array(
+            'Phly\Mustache' => APPLICATION_PATH . '/../library/Phly/Mustache',
+            'Doctrine'      => APPLICATION_PATH . '/../library/Doctrine',
         ),
     ),
 );
-</programlisting>
+]]></programlisting>
 
         <para>
             An equivalent INI-style configuration might look like the following:
         </para>
 
-        <programlisting xml:lang="ini">
+        <programlisting xml:lang="ini"><![CDATA[
 Zend\Loader\ClassMapAutoloader.application = APPLICATION_PATH "/.classmap.php"
 Zend\Loader\ClassMapAutoloader.zf          = APPLICATION_PATH "/../library/Zend/.classmap.php"
 Zend\Loader\StandardAutoloader.namespaces.Phly\Mustache = APPLICATION_PATH "/../library/Phly/Mustache"
 Zend\Loader\StandardAutoloader.namespaces.Doctrine       = APPLICATION_PATH "/../library/Doctrine"
-</programlisting>
+]]></programlisting>
 
         <para>
             Once you have your configuration in a PHP array, you simply pass it to the
             <classname>AutoloaderFactory</classname>.
         </para>
 
-        <programlisting xml:lang="php">
+        <programlisting xml:lang="php"><![CDATA[
 // This example assumes ZF is on your include_path.
 // You could also load the factory class from a path relative to the
 // current script, or via an absolute path.
 require_once 'Zend/Loader/AutoloaderFactory.php';
 Zend\Loader\AutoloaderFactory::factory($config);
-</programlisting>
+]]></programlisting>
 
         <para>
             The <classname>AutoloaderFactory</classname> will instantiate each autoloader with the

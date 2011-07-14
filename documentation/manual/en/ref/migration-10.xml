@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.10"><info><title>Zend Framework 1.0</title></info>
     
 
@@ -30,9 +28,9 @@
             front controller parameter <property>noErrorHandler</property>:
         </para>
 
-        <programlisting language="php">
-$front-&gt;setParam('noErrorHandler', true);
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$front->setParam('noErrorHandler', true);
+]]></programlisting>
 
         <para>
             The <classname>ViewRenderer</classname> action helper automates view injection
@@ -50,10 +48,10 @@ $front-&gt;setParam('noErrorHandler', true);
             to dispatching:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Assuming $front is an instance of Zend_Controller_Front
-$front-&gt;setParam('noViewRenderer', true);
-</programlisting>
+$front->setParam('noViewRenderer', true);
+]]></programlisting>
 
         <para>
             However, this is not a good long term strategy, as it means most
@@ -82,9 +80,9 @@ $front-&gt;setParam('noViewRenderer', true);
             The easiest change is to disable auto-rendering for that method:
         </para>
 
-        <programlisting language="php">
-$this-&gt;_helper-&gt;viewRenderer-&gt;setNoRender();
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$this->_helper->viewRenderer->setNoRender();
+]]></programlisting>
 
         <para>
             If you find that none of your action methods are rendering,
@@ -93,14 +91,14 @@ $this-&gt;_helper-&gt;viewRenderer-&gt;setNoRender();
             methods:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 public function preDispatch()
 {
     // disable view script autorendering
-    $this-&gt;_helper-&gt;viewRenderer-&gt;setNoRender()
+    $this->_helper->viewRenderer->setNoRender()
     // .. do other things...
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             If you are calling <methodname>render()</methodname>, and you're using <link linkend="zend.controller.modular">the Conventional Modular
@@ -154,11 +152,11 @@ public function preDispatch()
                     Prior to dispatching a front controller instance:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Assuming $view has already been defined
 $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer($view);
 Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
-</programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -166,11 +164,11 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
                     Any time during the bootstrap process:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $viewRenderer =
     Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
-$viewRenderer-&gt;setView($view);
-</programlisting>
+$viewRenderer->setView($view);
+]]></programlisting>
             </listitem>
         </itemizedlist>
 
@@ -201,9 +199,9 @@ $viewRenderer-&gt;setView($view);
             <methodname>setFormat()</methodname> method.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $currency = new Zend_Currency($currency, $locale);
-</programlisting>
+]]></programlisting>
 
         <para>
             The <methodname>setFormat()</methodname> method takes now an array of options. These
@@ -271,9 +269,9 @@ $currency = new Zend_Currency($currency, $locale);
             </listitem>
         </itemizedlist>
 
-        <programlisting language="php">
-$currency-&gt;setFormat(array $options);
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$currency->setFormat(array $options);
+]]></programlisting>
 
         <para>
             The <methodname>toCurrency()</methodname> method no longer supports the optional
@@ -281,9 +279,9 @@ $currency-&gt;setFormat(array $options);
             can contain the same keys as for the <methodname>setFormat()</methodname> method.
         </para>
 
-        <programlisting language="php">
-$currency-&gt;toCurrency($value, array $options);
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$currency->toCurrency($value, array $options);
+]]></programlisting>
 
         <para>
             The methods <methodname>getSymbol()</methodname>,

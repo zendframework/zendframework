@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.framework"><info><title>Framework</title></info>
     
 
@@ -16,23 +14,23 @@
         Below is an example for using database tables for a queuing system:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $options = array(
-    'name'          =&gt; 'queue1',
-    'driverOptions' =&gt; array(
-        'host'      =&gt; '127.0.0.1',
-        'port'      =&gt; '3306',
-        'username'  =&gt; 'queue',
-        'password'  =&gt; 'queue',
-        'dbname'    =&gt; 'queue',
-        'type'      =&gt; 'pdo_mysql'
+    'name'          => 'queue1',
+    'driverOptions' => array(
+        'host'      => '127.0.0.1',
+        'port'      => '3306',
+        'username'  => 'queue',
+        'password'  => 'queue',
+        'dbname'    => 'queue',
+        'type'      => 'pdo_mysql'
     )
 );
 
 // Create a database queue.
 // Zend_Queue will prepend Zend_Queue_Adapter_ to 'Db' for the class name.
 $queue = new Zend_Queue('Db', $options);
-</programlisting>
+]]></programlisting>
 
     <para>
         The <classname>Zend_Queue</classname> constructor will create a
@@ -54,12 +52,12 @@ $queue = new Zend_Queue('Db', $options);
         <classname>Zend_Queue_Message</classname> objects.
     </para>
 
-    <programlisting language="php">
-$messages = $queue-&gt;receive(5);
-foreach ($messages as $i =&gt; $message) {
-    echo "$i) Message =&gt; ", $message-&gt;body, "\n";
+    <programlisting language="php"><![CDATA[
+$messages = $queue->receive(5);
+foreach ($messages as $i => $message) {
+    echo "$i) Message => ", $message->body, "\n";
 }
-</programlisting>
+]]></programlisting>
 
     <para>
         Any exceptions thrown are of class

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.common"><info><title>Common page features</title></info>
     
 
@@ -246,16 +244,16 @@
             This example shows how custom properties can be used.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $page = new Zend_Navigation_Page_Mvc();
-$page-&gt;foo = 'bar';
-$page-&gt;meaning = 42;
+$page->foo = 'bar';
+$page->meaning = 42;
 
-echo $page-&gt;foo;
+echo $page->foo;
 
-if ($page-&gt;meaning != 42) {
+if ($page->meaning != 42) {
     // action should be taken
 }
-</programlisting>
+]]></programlisting>
     </example>
 </section>

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.create"><info><title>Creating and Loading PDF Documents</title></info>
     
 
@@ -25,7 +23,7 @@
     <example xml:id="zend.pdf.create.example-1"><info><title>Create new or load existing PDF document</title></info>
         
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 ...
 // Create a new PDF document
 $pdf1 = new Zend_Pdf();
@@ -36,7 +34,7 @@ $pdf2 = Zend_Pdf::load($fileName);
 // Load a PDF document from a string
 $pdf3 = Zend_Pdf::parse($pdfString);
 ...
-</programlisting>
+]]></programlisting>
     </example>
 
     <para>
@@ -63,7 +61,7 @@ $pdf3 = Zend_Pdf::parse($pdfString);
     <example xml:id="zend.pdf.create.example-2"><info><title>Requesting Specific Revisions of a PDF Document</title></info>
         
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 ...
 // Load the previous revision of the PDF document
 $pdf1 = Zend_Pdf::load($fileName, 1);
@@ -73,9 +71,9 @@ $pdf2 = Zend_Pdf::parse($pdfString, 1);
 
 // Load the first revision of the PDF document
 $pdf3 = Zend_Pdf::load($fileName);
-$revisions = $pdf3-&gt;revisions();
-$pdf3-&gt;rollback($revisions - 1);
+$revisions = $pdf3->revisions();
+$pdf3->rollback($revisions - 1);
 ...
-</programlisting>
+]]></programlisting>
     </example>
 </section>

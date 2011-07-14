@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.view.dijit"><info><title>Dijit-Specific View Helpers</title></info>
     
 
@@ -165,9 +163,9 @@
     <example xml:id="zend.dojo.view.dijit.prefixpath"><info><title>Registering the Dojo View Helper Prefix Path</title></info>
         
 
-        <programlisting language="php">
-$view-&gt;addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
+]]></programlisting>
     </example>
 
     <section xml:id="zend.dojo.view.dijit.layout"><info><title>Dijit Layout Elements</title></info>
@@ -198,18 +196,18 @@ $view-&gt;addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
                     display that particular pane.
                 </para>
 
-                <programlisting language="php">
-&lt;?php echo $view-&gt;accordionContainer(
+                <programlisting language="php"><![CDATA[
+<?php echo $view->accordionContainer(
     'foo',
     $content,
     array(
-        'duration' =&gt; 200,
+        'duration' => 200,
     ),
     array(
-        'style' =&gt; 'width: 200px; height: 300px;',
+        'style' => 'width: 200px; height: 300px;',
     ),
-); ?&gt;
-</programlisting>
+); ?>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -219,18 +217,18 @@ $view-&gt;addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
                     AccordionContainer.
                 </para>
 
-                <programlisting language="php">
-&lt;?php echo $view-&gt;accordionPane(
+                <programlisting language="php"><![CDATA[
+<?php echo $view->accordionPane(
     'foo',
     $content,
     array(
-        'title' =&gt; 'Pane Title',
+        'title' => 'Pane Title',
     ),
     array(
-        'style' =&gt; 'background-color: lightgray;',
+        'style' => 'background-color: lightgray;',
     ),
-); ?&gt;
-</programlisting>
+); ?>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -241,18 +239,18 @@ $view-&gt;addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
                     traditional application.
                 </para>
 
-                <programlisting language="php">
-&lt;?php echo $view-&gt;borderContainer(
+                <programlisting language="php"><![CDATA[
+<?php echo $view->borderContainer(
     'foo',
     $content,
     array(
-        'design' =&gt; 'headline',
+        'design' => 'headline',
     ),
     array(
-        'style' =&gt; 'width: 100%; height: 100%',
+        'style' => 'width: 100%; height: 100%',
     ),
-); ?&gt;
-</programlisting>
+); ?>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -261,19 +259,19 @@ $view-&gt;addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
                     Use inside any container except AccordionContainer.
                 </para>
 
-                <programlisting language="php">
-&lt;?php echo $view-&gt;contentPane(
+                <programlisting language="php"><![CDATA[
+<?php echo $view->contentPane(
     'foo',
     $content,
     array(
-        'title'  =&gt; 'Pane Title',
-        'region' =&gt; 'left',
+        'title'  => 'Pane Title',
+        'region' => 'left',
     ),
     array(
-        'style' =&gt; 'width: 120px; background-color: lightgray;',
+        'style' => 'width: 120px; background-color: lightgray;',
     ),
-); ?&gt;
-</programlisting>
+); ?>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -283,20 +281,20 @@ $view-&gt;addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
                     panes; deprecated in Dojo in favor of BorderContainer.
                 </para>
 
-                <programlisting language="php">
-&lt;?php echo $view-&gt;splitContainer(
+                <programlisting language="php"><![CDATA[
+<?php echo $view->splitContainer(
     'foo',
     $content,
     array(
-        'orientation'  =&gt; 'horizontal',
-        'sizerWidth'   =&gt; 7,
-        'activeSizing' =&gt; true,
+        'orientation'  => 'horizontal',
+        'sizerWidth'   => 7,
+        'activeSizing' => true,
     ),
     array(
-        'style' =&gt; 'width: 400px; height: 500px;',
+        'style' => 'width: 400px; height: 500px;',
     ),
-); ?&gt;
-</programlisting>
+); ?>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -307,16 +305,16 @@ $view-&gt;addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
                     functionality to reveal one at a time.
                 </para>
 
-                <programlisting language="php">
-&lt;?php echo $view-&gt;stackContainer(
+                <programlisting language="php"><![CDATA[
+<?php echo $view->stackContainer(
     'foo',
     $content,
     array(),
     array(
-        'style' =&gt; 'width: 400px; height: 500px; border: 1px;',
+        'style' => 'width: 400px; height: 500px; border: 1px;',
     ),
-); ?&gt;
-</programlisting>
+); ?>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -327,16 +325,16 @@ $view-&gt;addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
                     one side for switching between them.
                 </para>
 
-                <programlisting language="php">
-&lt;?php echo $view-&gt;tabContainer(
+                <programlisting language="php"><![CDATA[
+<?php echo $view->tabContainer(
     'foo',
     $content,
     array(),
     array(
-        'style' =&gt; 'width: 400px; height: 500px; border: 1px;',
+        'style' => 'width: 400px; height: 500px; border: 1px;',
     ),
-); ?&gt;
-</programlisting>
+); ?>
+]]></programlisting>
             </listitem>
         </itemizedlist>
 
@@ -382,40 +380,40 @@ $view-&gt;addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
                 layout effects.
             </para>
 
-            <programlisting language="php">
-$view-&gt;borderContainer()-&gt;captureStart('masterLayout',
-                                       array('design' =&gt; 'headline'));
+            <programlisting language="php"><![CDATA[
+$view->borderContainer()->captureStart('masterLayout',
+                                       array('design' => 'headline'));
 
-echo $view-&gt;contentPane(
+echo $view->contentPane(
     'menuPane',
     'This is the menu pane',
-    array('region' =&gt; 'top'),
-    array('style' =&gt; 'background-color: darkblue;')
+    array('region' => 'top'),
+    array('style' => 'background-color: darkblue;')
 );
 
-echo  $view-&gt;contentPane(
+echo  $view->contentPane(
     'navPane',
     'This is the navigation pane',
-    array('region' =&gt; 'left'),
-    array('style' =&gt; 'width: 200px; background-color: lightblue;')
+    array('region' => 'left'),
+    array('style' => 'width: 200px; background-color: lightblue;')
 );
 
-echo $view-&gt;contentPane(
+echo $view->contentPane(
     'mainPane',
     'This is the main content pane area',
-    array('region' =&gt; 'center'),
-    array('style' =&gt; 'background-color: white;')
+    array('region' => 'center'),
+    array('style' => 'background-color: white;')
 );
 
-echo $view-&gt;contentPane(
+echo $view->contentPane(
     'statusPane',
     'Status area',
-    array('region' =&gt; 'bottom'),
-    array('style' =&gt; 'background-color: lightgray;')
+    array('region' => 'bottom'),
+    array('style' => 'background-color: lightgray;')
 );
 
-echo $view-&gt;borderContainer()-&gt;captureEnd('masterLayout');
-</programlisting>
+echo $view->borderContainer()->captureEnd('masterLayout');
+]]></programlisting>
         </example>
     </section>
 
@@ -443,13 +441,13 @@ echo $view-&gt;borderContainer()-&gt;captureEnd('masterLayout');
                     form button.
                 </para>
 
-                <programlisting language="php">
-&lt;?php echo $view-&gt;button(
+                <programlisting language="php"><![CDATA[
+<?php echo $view->button(
     'foo',
     'Show Me!',
-    array('iconClass' =&gt; 'myButtons'),
-); ?&gt;
-</programlisting>
+    array('iconClass' => 'myButtons'),
+); ?>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -481,15 +479,15 @@ echo $view-&gt;borderContainer()-&gt;captureEnd('masterLayout');
                     are assumed.
                 </para>
 
-                <programlisting language="php">
-&lt;?php echo $view-&gt;checkBox(
+                <programlisting language="php"><![CDATA[
+<?php echo $view->checkBox(
     'foo',
     'bar',
     array(),
     array(),
-    array('checkedValue' =&gt; 'foo', 'unCheckedValue' =&gt; 'bar')
-); ?&gt;
-</programlisting>
+    array('checkedValue' => 'foo', 'unCheckedValue' => 'bar')
+); ?>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -586,34 +584,34 @@ echo $view-&gt;borderContainer()-&gt;captureEnd('masterLayout');
                     </listitem>
                 </itemizedlist>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // As a select element:
-echo $view-&gt;comboBox(
+echo $view->comboBox(
     'foo',
     'bar',
     array(
-        'autocomplete' =&gt; false,
+        'autocomplete' => false,
     ),
     array(),
     array(
-        'foo' =&gt; 'Foo',
-        'bar' =&gt; 'Bar',
-        'baz' =&gt; 'Baz',
+        'foo' => 'Foo',
+        'bar' => 'Bar',
+        'baz' => 'Baz',
     )
 );
 
 // As a dojo.data-enabled element:
-echo $view-&gt;comboBox(
+echo $view->comboBox(
     'foo',
     'bar',
     array(
-        'autocomplete' =&gt; false,
-        'store'        =&gt; 'stateStore',
-        'storeType'    =&gt; 'dojo.data.ItemFileReadStore',
-        'storeParams'  =&gt; array('url' =&gt; '/js/states.json'),
+        'autocomplete' => false,
+        'store'        => 'stateStore',
+        'storeType'    => 'dojo.data.ItemFileReadStore',
+        'storeParams'  => array('url' => '/js/states.json'),
     ),
 );
-</programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -627,14 +625,14 @@ echo $view-&gt;comboBox(
                     ValidationTextBox and TextBox.
                 </para>
 
-                <programlisting language="php">
-echo $view-&gt;currencyTextBox(
+                <programlisting language="php"><![CDATA[
+echo $view->currencyTextBox(
     'foo',
     '$25.00',
-    array('currency' =&gt; 'USD'),
-    array('maxlength' =&gt; 20)
+    array('currency' => 'USD'),
+    array('maxlength' => 20)
 );
-</programlisting>
+]]></programlisting>
 
                 <note><info><title>Issues with Builds</title></info>
                     
@@ -647,10 +645,10 @@ echo $view-&gt;currencyTextBox(
                         character set to utf-8, which you can do by calling:
                     </para>
 
-                    <programlisting language="php">
-$view-&gt;headMeta()-&gt;appendHttpEquiv('Content-Type',
+                    <programlisting language="php"><![CDATA[
+$view->headMeta()->appendHttpEquiv('Content-Type',
                                    'text/html; charset=utf-8');
-</programlisting>
+]]></programlisting>
 
                     <para>
                         This will mean, of course, that you will need to ensure
@@ -670,13 +668,13 @@ $view-&gt;headMeta()-&gt;appendHttpEquiv('Content-Type',
                     ValidationTextBox or TextBox.
                 </para>
 
-                <programlisting language="php">
-echo $view-&gt;dateTextBox(
+                <programlisting language="php"><![CDATA[
+echo $view->dateTextBox(
     'foo',
     '2008-07-11',
-    array('required' =&gt; true)
+    array('required' => true)
 );
-</programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -688,9 +686,9 @@ echo $view-&gt;dateTextBox(
                         dijit.Editor documentation</link> for more details.
                 </para>
 
-                <programlisting language="php">
-echo $view-&gt;editor('foo');
-</programlisting>
+                <programlisting language="php"><![CDATA[
+echo $view->editor('foo');
+]]></programlisting>
 
                 <note><info><title>Editor Dijit uses div by default</title></info>
                     
@@ -850,20 +848,20 @@ echo $view-&gt;editor('foo');
                     </listitem>
                 </itemizedlist>
 
-                <programlisting language="php">
-echo $view-&gt;horizontalSlider(
+                <programlisting language="php"><![CDATA[
+echo $view->horizontalSlider(
     'foo',
     1,
     array(
-        'minimum'             =&gt; -10,
-        'maximum'             =&gt; 10,
-        'discreteValues'      =&gt; 11,
-        'intermediateChanges' =&gt; true,
-        'showButtons'         =&gt; true,
-        'topDecoration'       =&gt; array(
-            'container' =&gt; 'topContainer'
-            'dijit'     =&gt; 'HorizontalRuleLabels',
-            'labels'    =&gt; array(
+        'minimum'             => -10,
+        'maximum'             => 10,
+        'discreteValues'      => 11,
+        'intermediateChanges' => true,
+        'showButtons'         => true,
+        'topDecoration'       => array(
+            'container' => 'topContainer'
+            'dijit'     => 'HorizontalRuleLabels',
+            'labels'    => array(
                 ' ',
                 '20%',
                 '40%',
@@ -871,34 +869,34 @@ echo $view-&gt;horizontalSlider(
                 '80%',
                 ' ',
             ),
-            'params' =&gt; array(
-                'container' =&gt; array(
-                    'style' =&gt; 'height:1.2em; font-size=75%;color:gray;',
+            'params' => array(
+                'container' => array(
+                    'style' => 'height:1.2em; font-size=75%;color:gray;',
                 ),
-                'labels' =&gt; array(
-                    'style' =&gt; 'height:1em; font-size=75%;color:gray;',
+                'labels' => array(
+                    'style' => 'height:1em; font-size=75%;color:gray;',
                 ),
             ),
         ),
-        'bottomDecoration'    =&gt; array(
-            'container' =&gt; 'bottomContainer'
-            'labels'    =&gt; array(
+        'bottomDecoration'    => array(
+            'container' => 'bottomContainer'
+            'labels'    => array(
                 '0%',
                 '50%',
                 '100%',
             ),
-            'params' =&gt; array(
-                'container' =&gt; array(
-                    'style' =&gt; 'height:1.2em; font-size=75%;color:gray;',
+            'params' => array(
+                'container' => array(
+                    'style' => 'height:1.2em; font-size=75%;color:gray;',
                 ),
-                'labels' =&gt; array(
-                    'style' =&gt; 'height:1em; font-size=75%;color:gray;',
+                'labels' => array(
+                    'style' => 'height:1em; font-size=75%;color:gray;',
                 ),
             ),
         ),
     )
 );
-</programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -917,20 +915,20 @@ echo $view-&gt;horizontalSlider(
                     decrement.
                 </para>
 
-                <programlisting language="php">
-echo $view-&gt;numberSpinner(
+                <programlisting language="php"><![CDATA[
+echo $view->numberSpinner(
     'foo',
     5,
     array(
-        'min'    =&gt; -10,
-        'max'    =&gt; 10,
-        'places' =&gt; 2,
+        'min'    => -10,
+        'max'    => 10,
+        'places' => 2,
     ),
     array(
-        'maxlenth' =&gt; 3,
+        'maxlenth' => 3,
     )
 );
-</programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -942,19 +940,19 @@ echo $view-&gt;numberSpinner(
                     against given constraints.
                 </para>
 
-                <programlisting language="php">
-echo $view-&gt;numberTextBox(
+                <programlisting language="php"><![CDATA[
+echo $view->numberTextBox(
     'foo',
     5,
     array(
-        'places' =&gt; 4,
-        'type'   =&gt; 'percent',
+        'places' => 4,
+        'type'   => 'percent',
     ),
     array(
-        'maxlength' =&gt; 20,
+        'maxlength' => 20,
     )
 );
-</programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -966,18 +964,18 @@ echo $view-&gt;numberTextBox(
                     dijit theme, as well as allow for client-side validation.
                 </para>
 
-                <programlisting language="php">
-echo $view-&gt;passwordTextBox(
+                <programlisting language="php"><![CDATA[
+echo $view->passwordTextBox(
     'foo',
     '',
     array(
-        'required' =&gt; true,
+        'required' => true,
     ),
     array(
-        'maxlength' =&gt; 20,
+        'maxlength' => 20,
     )
 );
-</programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -995,19 +993,19 @@ echo $view-&gt;passwordTextBox(
                     the <varname>$attribs</varname> key <property>options</property>.
                 </para>
 
-                <programlisting language="php">
-echo $view-&gt;radioButton(
+                <programlisting language="php"><![CDATA[
+echo $view->radioButton(
     'foo',
     'bar',
     array(),
     array(),
     array(
-        'foo' =&gt; 'Foo',
-        'bar' =&gt; 'Bar',
-        'baz' =&gt; 'Baz',
+        'foo' => 'Foo',
+        'bar' => 'Bar',
+        'baz' => 'Baz',
     )
 );
-</programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -1019,14 +1017,14 @@ echo $view-&gt;radioButton(
                     percentages for the width and height, instead.
                 </para>
 
-                <programlisting language="php">
-echo $view-&gt;simpleTextarea(
+                <programlisting language="php"><![CDATA[
+echo $view->simpleTextarea(
     'foo',
     'Start writing here...',
     array(),
-    array('style' =&gt; 'width: 90%; height: 5ems;')
+    array('style' => 'width: 90%; height: 5ems;')
 );
-</programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -1046,14 +1044,14 @@ echo $view-&gt;simpleTextarea(
                     width should be specified via a style setting.
                 </para>
 
-                <programlisting language="php">
-echo $view-&gt;textarea(
+                <programlisting language="php"><![CDATA[
+echo $view->textarea(
     'foo',
     'Start writing here...',
     array(),
-    array('style' =&gt; 'width: 300px;')
+    array('style' => 'width: 300px;')
 );
-</programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -1074,20 +1072,20 @@ echo $view-&gt;textarea(
                     may specifiy the parameters 'size' and 'maxLength'.
                 </para>
 
-                <programlisting language="php">
-echo $view-&gt;textBox(
+                <programlisting language="php"><![CDATA[
+echo $view->textBox(
     'foo',
     'some text',
     array(
-        'trim'       =&gt; true,
-        'propercase' =&gt; true,
-        'maxLength'  =&gt; 20,
+        'trim'       => true,
+        'propercase' => true,
+        'maxLength'  => 20,
     ),
     array(
-        'size' =&gt; 20,
+        'size' => 20,
     )
 );
-</programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -1100,20 +1098,20 @@ echo $view-&gt;textBox(
                     range of times available.
                 </para>
 
-                <programlisting language="php">
-echo $view-&gt;timeTextBox(
+                <programlisting language="php"><![CDATA[
+echo $view->timeTextBox(
     'foo',
     '',
     array(
-        'am.pm'            =&gt; true,
-        'visibleIncrement' =&gt; 'T00:05:00', // 5-minute increments
-        'visibleRange'     =&gt; 'T02:00:00', // show 2 hours of increments
+        'am.pm'            => true,
+        'visibleIncrement' => 'T00:05:00', // 5-minute increments
+        'visibleRange'     => 'T02:00:00', // show 2 hours of increments
     ),
     array(
-        'size' =&gt; 20,
+        'size' => 20,
     )
 );
-</programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -1160,22 +1158,22 @@ echo $view-&gt;timeTextBox(
                     </listitem>
                 </itemizedlist>
 
-                <programlisting language="php">
-echo $view-&gt;validationTextBox(
+                <programlisting language="php"><![CDATA[
+echo $view->validationTextBox(
     'foo',
     '',
     array(
-        'required' =&gt; true,
-        'regExp'   =&gt; '[\w]+',
-        'invalidMessage' =&gt; 'No spaces or non-word characters allowed',
-        'promptMessage'  =&gt; 'Single word consisting of alphanumeric ' .
+        'required' => true,
+        'regExp'   => '[\w]+',
+        'invalidMessage' => 'No spaces or non-word characters allowed',
+        'promptMessage'  => 'Single word consisting of alphanumeric ' .
                             'characters and underscores only',
     ),
     array(
-        'maxlength' =&gt; 20,
+        'maxlength' => 20,
     )
 );
-</programlisting>
+]]></programlisting>
             </listitem>
         </itemizedlist>
     </section>
@@ -1224,17 +1222,17 @@ echo $view-&gt;validationTextBox(
                 At its most basic, you can do the following:
             </para>
 
-            <programlisting language="php">
-&lt;?php echo $this-&gt;customDijit(
+            <programlisting language="php"><![CDATA[
+<?php echo $this->customDijit(
     'foo',
     $content,
     array(
-        'dojoType' =&gt; 'dojox.layout.ContentPane',
-        'title'    =&gt; 'Custom pane',
-        'region'   =&gt; 'center'
+        'dojoType' => 'dojox.layout.ContentPane',
+        'title'    => 'Custom pane',
+        'region'   => 'center'
     )
-); ?&gt;
-</programlisting>
+); ?>
+]]></programlisting>
 
             <para>
                 If you wanted to capture content instead, simply use the
@@ -1242,18 +1240,18 @@ echo $view-&gt;validationTextBox(
                 the "params" argument:
             </para>
 
-            <programlisting language="php">
-&lt;?php $this-&gt;customDijit()-&gt;captureStart(
+            <programlisting language="php"><![CDATA[
+<?php $this->customDijit()->captureStart(
     'foo',
     array(
-        'dojoType' =&gt; 'dojox.layout.ContentPane',
-        'title'    =&gt; 'Custom pane',
-        'region'   =&gt; 'center'
+        'dojoType' => 'dojox.layout.ContentPane',
+        'title'    => 'Custom pane',
+        'region'   => 'center'
     )
-); ?&gt;
+); ?>
 This is the content of the pane
-&lt;?php echo $this-&gt;customDijit()-&gt;captureEnd('foo'); ?&gt;
-</programlisting>
+<?php echo $this->customDijit()->captureEnd('foo'); ?>
+]]></programlisting>
 
             <para>
                 You can also extend <classname>CustomDijit</classname> easily to create
@@ -1263,7 +1261,7 @@ This is the content of the pane
                 following helper to support it:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class My_View_Helper_FooContentPane
     extends Zend_Dojo_View_Helper_CustomDijit
 {
@@ -1273,10 +1271,10 @@ class My_View_Helper_FooContentPane
         $id = null, $value = null,
         array $params = array(), array $attribs = array()
     ) {
-        return $this-&gt;customDijit($id, $value, $params, $attribs);
+        return $this->customDijit($id, $value, $params, $attribs);
     }
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 As long as your custom dijit follows the same basic <acronym>API</acronym> as

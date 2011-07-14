@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.standardDecorators"><info><title>Standard Form Decorators Shipped With Zend Framework</title></info>
     
 
@@ -23,15 +21,15 @@
             callback:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class Util
 {
     public static function label($content, $element, array $options)
     {
-        return '&lt;span class="label"&gt;' . $element-&gt;getLabel() . "&lt;/span&gt;";
+        return '<span class="label">' . $element->getLabel() . "</span>";
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             This callback would be specified as <methodname>array('Util',
@@ -110,13 +108,13 @@ class Util
             The output looks something like this:
         </para>
 
-        <programlisting language="html">
-&lt;dt&gt;&lt;/dt&gt;
-&lt;dd&gt;&lt;fieldset id="subform"&gt;
-    &lt;legend&gt;User Information&lt;/legend&gt;
+        <programlisting language="html"><![CDATA[
+<dt></dt>
+<dd><fieldset id="subform">
+    <legend>User Information</legend>
     ...
-&lt;/fieldset&gt;&lt;/dd&gt;
-</programlisting>
+</fieldset></dd>
+]]></programlisting>
 
         <para>
             This decorator replaces the content provided to it by wrapping
@@ -204,22 +202,22 @@ class Util
             By default, the generated list of errors has the following markup:
         </para>
 
-        <programlisting language="html">
-&lt;ul class="form-errors&gt;
-    &lt;li&gt;&lt;b&gt;[element label or name]&lt;/b&gt;&lt;ul&gt;
-            &lt;li&gt;[error message]&lt;/li&gt;
-            &lt;li&gt;[error message]&lt;/li&gt;
-        &lt;/ul&gt;
-    &lt;/li&gt;
-    &lt;li&gt;&lt;ul&gt;
-        &lt;li&gt;&lt;b&gt;[subform element label or name&lt;/b&gt;&lt;ul&gt;
-                &lt;li&gt;[error message]&lt;/li&gt;
-                &lt;li&gt;[error message]&lt;/li&gt;
-            &lt;/ul&gt;
-        &lt;/li&gt;
-    &lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</programlisting>
+        <programlisting language="html"><![CDATA[
+<ul class="form-errors>
+    <li><b>[element label or name]</b><ul>
+            <li>[error message]</li>
+            <li>[error message]</li>
+        </ul>
+    </li>
+    <li><ul>
+        <li><b>[subform element label or name</b><ul>
+                <li>[error message]</li>
+                <li>[error message]</li>
+            </ul>
+        </li>
+    </ul></li>
+</ul>
+]]></programlisting>
 
         <para>
             You can pass in a variety of options to configure the generated
@@ -407,12 +405,12 @@ class Util
             set it as the first decorator in the list.
         </para>
 
-        <programlisting language="php">
-$form-&gt;setDecorators(array(
+        <programlisting language="php"><![CDATA[
+$form->setDecorators(array(
     'PrepareElements',
-    array('ViewScript', array('viewScript' =&gt; 'form.phtml')),
+    array('ViewScript', array('viewScript' => 'form.phtml')),
 ));
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.form.standardDecorators.viewHelper"><info><title>Zend_Form_Decorator_ViewHelper</title></info>
@@ -493,38 +491,38 @@ $form-&gt;setDecorators(array(
             As an example, you might have the following element:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Setting the decorator for the element to a single, ViewScript,
 // decorator, specifying the viewScript as an option, and some extra
 // options:
-$element-&gt;setDecorators(array(array('ViewScript', array(
-    'viewScript' =&gt; '_element.phtml',
-    'class'      =&gt; 'form element'
+$element->setDecorators(array(array('ViewScript', array(
+    'viewScript' => '_element.phtml',
+    'class'      => 'form element'
 ))));
 
 // OR specifying the viewScript as an element attribute:
-$element-&gt;viewScript = '_element.phtml';
-$element-&gt;setDecorators(array(array('ViewScript',
-                                    array('class' =&gt; 'form element'))));
-</programlisting>
+$element->viewScript = '_element.phtml';
+$element->setDecorators(array(array('ViewScript',
+                                    array('class' => 'form element'))));
+]]></programlisting>
 
         <para>
             You could then have a view script something like this:
         </para>
 
-        <programlisting language="php">
-&lt;div class="&lt;?php echo $this-&gt;class ?&gt;"&gt;
-    &lt;?php echo $this-&gt;formLabel($this-&gt;element-&gt;getName(),
-                         $this-&gt;element-&gt;getLabel()) ?&gt;
-    &lt;?php echo $this-&gt;{$this-&gt;element-&gt;helper}(
-        $this-&gt;element-&gt;getName(),
-        $this-&gt;element-&gt;getValue(),
-        $this-&gt;element-&gt;getAttribs()
-    ) ?&gt;
-    &lt;?php echo $this-&gt;formErrors($this-&gt;element-&gt;getMessages()) ?&gt;
-    &lt;div class="hint"&gt;&lt;?php echo $this-&gt;element-&gt;getDescription() ?&gt;&lt;/div&gt;
-&lt;/div&gt;
-</programlisting>
+        <programlisting language="php"><![CDATA[
+<div class="<?php echo $this->class ?>">
+    <?php echo $this->formLabel($this->element->getName(),
+                         $this->element->getLabel()) ?>
+    <?php echo $this->{$this->element->helper}(
+        $this->element->getName(),
+        $this->element->getValue(),
+        $this->element->getAttribs()
+    ) ?>
+    <?php echo $this->formErrors($this->element->getMessages()) ?>
+    <div class="hint"><?php echo $this->element->getDescription() ?></div>
+</div>
+]]></programlisting>
 
         <note><info><title>Replacing content with a view script</title></info>
             
@@ -536,19 +534,19 @@ $element-&gt;setDecorators(array(array('ViewScript',
                 for the decorator's 'placement' option:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // At decorator creation:
-$element-&gt;addDecorator('ViewScript', array('placement' =&gt; false));
+$element->addDecorator('ViewScript', array('placement' => false));
 
 // Applying to an existing decorator instance:
-$decorator-&gt;setOption('placement', false);
+$decorator->setOption('placement', false);
 
 // Applying to a decorator already attached to an element:
-$element-&gt;getDecorator('ViewScript')-&gt;setOption('placement', false);
+$element->getDecorator('ViewScript')->setOption('placement', false);
 
 // Within a view script used by a decorator:
-$this-&gt;decorator-&gt;setOption('placement', false);
-</programlisting>
+$this->decorator->setOption('placement', false);
+]]></programlisting>
         </note>
 
         <para>

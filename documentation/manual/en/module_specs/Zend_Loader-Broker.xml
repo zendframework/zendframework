@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.broker"><info><title>The Broker Interface</title></info>
     
 
@@ -44,7 +42,7 @@
             A concrete interface must simply follow the contract as specified in the interface:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 namespace Zend\Loader;
 interface Broker
 {
@@ -54,7 +52,7 @@ interface Broker
     public function setClassLoader(ShortNameLocater $loader);
     public function getClassLoader();
 }
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.loader.broker.options"><info><title>Configuration Options</title></info>

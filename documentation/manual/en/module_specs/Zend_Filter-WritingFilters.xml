@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.writing_filters"><info><title>Writing Filters</title></info>
     
 
@@ -21,7 +19,7 @@
         The following example demonstrates how to write a custom filter:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 class MyFilter implements Zend_Filter_Interface
 {
     public function filter($value)
@@ -31,14 +29,14 @@ class MyFilter implements Zend_Filter_Interface
         return $valueFiltered;
     }
 }
-</programlisting>
+]]></programlisting>
 
     <para>
         To add an instance of the filter defined above to a filter chain:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $filterChain = new Zend_Filter();
-$filterChain-&gt;addFilter(new MyFilter());
-</programlisting>
+$filterChain->addFilter(new MyFilter());
+]]></programlisting>
 </section>

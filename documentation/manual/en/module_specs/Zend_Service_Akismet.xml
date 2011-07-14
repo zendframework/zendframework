@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.akismet"><info><title>Zend_Service_Akismet</title></info>
     
 
@@ -45,17 +43,17 @@
             so with this method.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Instantiate with the API key and a URL to the application or
 // resource being used
 $akismet = new Zend_Service_Akismet($apiKey,
                                     'http://framework.zend.com/wiki/');
-if ($akismet-&gt;verifyKey($apiKey) {
+if ($akismet->verifyKey($apiKey) {
     echo "Key is valid.\n";
 } else {
     echo "Key is not valid\n";
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             If called with no arguments, <methodname>verifyKey()</methodname> uses
@@ -178,23 +176,23 @@ if ($akismet-&gt;verifyKey($apiKey) {
         <example xml:id="zend.service.akismet.isspam.example-1"><info><title>isSpam() Usage</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $data = array(
-    'user_ip'              =&gt; '111.222.111.222',
-    'user_agent'           =&gt; 'Mozilla/5.0 ' . (Windows; U; Windows NT ' .
+    'user_ip'              => '111.222.111.222',
+    'user_agent'           => 'Mozilla/5.0 ' . (Windows; U; Windows NT ' .
                               '5.2; en-GB; rv:1.8.1) Gecko/20061010 ' .
                               'Firefox/2.0',
-    'comment_type'         =&gt; 'contact',
-    'comment_author'       =&gt; 'John Doe',
-    'comment_author_email' =&gt; 'nospam@myhaus.net',
-    'comment_content'      =&gt; "I'm not a spammer, honest!"
+    'comment_type'         => 'contact',
+    'comment_author'       => 'John Doe',
+    'comment_author_email' => 'nospam@myhaus.net',
+    'comment_content'      => "I'm not a spammer, honest!"
 );
-if ($akismet-&gt;isSpam($data)) {
+if ($akismet->isSpam($data)) {
     echo "Sorry, but we think you're a spammer.";
 } else {
     echo "Welcome to our site!";
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -220,18 +218,18 @@ if ($akismet-&gt;isSpam($data)) {
         <example xml:id="zend.service.akismet.submitspam.example-1"><info><title>submitSpam() Usage</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $data = array(
-    'user_ip'              =&gt; '111.222.111.222',
-    'user_agent'           =&gt; 'Mozilla/5.0 (Windows; U; Windows NT 5.2;' .
+    'user_ip'              => '111.222.111.222',
+    'user_agent'           => 'Mozilla/5.0 (Windows; U; Windows NT 5.2;' .
                               'en-GB; rv:1.8.1) Gecko/20061010 Firefox/2.0',
-    'comment_type'         =&gt; 'contact',
-    'comment_author'       =&gt; 'John Doe',
-    'comment_author_email' =&gt; 'nospam@myhaus.net',
-    'comment_content'      =&gt; "I'm not a spammer, honest!"
+    'comment_type'         => 'contact',
+    'comment_author'       => 'John Doe',
+    'comment_author_email' => 'nospam@myhaus.net',
+    'comment_content'      => "I'm not a spammer, honest!"
 );
-$akismet-&gt;submitSpam($data));
-</programlisting>
+$akismet->submitSpam($data));
+]]></programlisting>
         </example>
 
         <para>
@@ -261,18 +259,18 @@ $akismet-&gt;submitSpam($data));
         <example xml:id="zend.service.akismet.submitham.example-1"><info><title>submitHam() Usage</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $data = array(
-    'user_ip'              =&gt; '111.222.111.222',
-    'user_agent'           =&gt; 'Mozilla/5.0 (Windows; U; Windows NT 5.2;' .
+    'user_ip'              => '111.222.111.222',
+    'user_agent'           => 'Mozilla/5.0 (Windows; U; Windows NT 5.2;' .
                               'en-GB; rv:1.8.1) Gecko/20061010 Firefox/2.0',
-    'comment_type'         =&gt; 'contact',
-    'comment_author'       =&gt; 'John Doe',
-    'comment_author_email' =&gt; 'nospam@myhaus.net',
-    'comment_content'      =&gt; "I'm not a spammer, honest!"
+    'comment_type'         => 'contact',
+    'comment_author'       => 'John Doe',
+    'comment_author_email' => 'nospam@myhaus.net',
+    'comment_content'      => "I'm not a spammer, honest!"
 );
-$akismet-&gt;submitHam($data));
-</programlisting>
+$akismet->submitHam($data));
+]]></programlisting>
         </example>
 
         <para>

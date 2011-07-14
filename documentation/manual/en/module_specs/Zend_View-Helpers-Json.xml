@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.json"><info><title>JSON Helper</title></info>
     
 
@@ -15,9 +13,9 @@
         The <acronym>JSON</acronym> helper sets the following header:
     </para>
 
-    <programlisting language="text">
+    <programlisting language="text"><![CDATA[
 Content-Type: application/json
-</programlisting>
+]]></programlisting>
 
     <para>
         Most <acronym>AJAX</acronym> libraries look for this header when parsing responses to
@@ -28,9 +26,9 @@ Content-Type: application/json
         Usage of the <acronym>JSON</acronym> helper is very straightforward:
     </para>
 
-    <programlisting language="php">
-&lt;?php echo $this-&gt;json($this-&gt;data) ?&gt;
-</programlisting>
+    <programlisting language="php"><![CDATA[
+<?php echo $this->json($this->data) ?>
+]]></programlisting>
 
     <note><info><title>Keeping layouts and enabling encoding using Zend_Json_Expr</title></info>
         
@@ -49,13 +47,13 @@ Content-Type: application/json
             with a value of a boolean <constant>TRUE</constant>.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Boolean true as second argument enables layouts:
-echo $this-&gt;json($this-&gt;data, true);
+echo $this->json($this->data, true);
 
 // Or boolean true as "keepLayouts" key:
-echo $this-&gt;json($this-&gt;data, array('keepLayouts' =&gt; true));
-</programlisting>
+echo $this->json($this->data, array('keepLayouts' => true));
+]]></programlisting>
 
         <para>
             <classname>Zend_Json::encode</classname> allows the encoding of native
@@ -65,11 +63,11 @@ echo $this-&gt;json($this-&gt;data, array('keepLayouts' =&gt; true));
             the options array:
         </para>
 
-        <programlisting language="php">
-&lt;?php echo $this-&gt;json($this-&gt;data, array(
-    'enableJsonExprFinder' =&gt; true,
-    'keepLayouts'          =&gt; true,
-)) ?&gt;
-</programlisting>
+        <programlisting language="php"><![CDATA[
+<?php echo $this->json($this->data, array(
+    'enableJsonExprFinder' => true,
+    'keepLayouts'          => true,
+)) ?>
+]]></programlisting>
     </note>
 </section>

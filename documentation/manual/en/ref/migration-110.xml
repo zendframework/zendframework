@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.110"><info><title>Zend Framework 1.10</title></info>
     
 
@@ -23,15 +21,15 @@
             <constant>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE</constant>:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 /**
  * Before 1.10
  */
     public function errorAction()
     {
-        $errors = $this-&gt;_getParam('error_handler');
+        $errors = $this->_getParam('error_handler');
 
-        switch ($errors-&gt;type) {
+        switch ($errors->type) {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
     // ...
@@ -41,14 +39,14 @@
  */
     public function errorAction()
     {
-        $errors = $this-&gt;_getParam('error_handler');
+        $errors = $this->_getParam('error_handler');
 
-        switch ($errors-&gt;type) {
+        switch ($errors->type) {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
     // ...
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="migration.110.zend.feed.reader"><info><title>Zend_Feed_Reader</title></info>
@@ -95,19 +93,19 @@
             easy to apply as demonstrated below.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 /**
  * Before 1.10
  */
 $feed = Zend_Feed_Reader::import('http://example.com/feed');
-$authors = $feed-&gt;getAuthors();
+$authors = $feed->getAuthors();
 
 /**
  * With 1.10
  */
 $feed = Zend_Feed_Reader::import('http://example.com/feed');
-$authors = $feed-&gt;getAuthors()-&gt;getValues();
-</programlisting>
+$authors = $feed->getAuthors()->getValues();
+]]></programlisting>
     </section>
 
     <section xml:id="migration.110.zend.file.transfer"><info><title>Zend_File_Transfer</title></info>
@@ -242,11 +240,11 @@ $authors = $feed-&gt;getAuthors()-&gt;getValues();
                 <property>useId</property> option to <constant>FALSE</constant>.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $trans = new Zend_Translate(
-    'xliff', '/path/to/source', $locale, array('useId' =&gt; false)
+    'xliff', '/path/to/source', $locale, array('useId' => false)
 );
-</programlisting>
+]]></programlisting>
         </section>
     </section>
 
@@ -270,34 +268,34 @@ $trans = new Zend_Translate(
                 message you expected.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 My_Validator extends Zend_Validate_Abstract
 {
     public isValid($value)
     {
         ...
-        $this-&gt;_error(); // unexpected results between different OS
+        $this->_error(); // unexpected results between different OS
         ...
     }
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 To prevent this problem the <methodname>_error()</methodname> method is no longer
                 allowed to be called without giving a parameter.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 My_Validator extends Zend_Validate_Abstract
 {
     public isValid($value)
     {
         ...
-        $this-&gt;_error(self::MY_ERROR); // defined error, no unexpected results
+        $this->_error(self::MY_ERROR); // defined error, no unexpected results
         ...
     }
 }
-</programlisting>
+]]></programlisting>
         </section>
 
         <section xml:id="migration.110.zend.validate.datevalidator"><info><title>Simplification in date validator</title></info>

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.between"><info><title>Between</title></info>
     
 
@@ -58,12 +56,12 @@
             <property>max</property> where both border values are allowed as value.
         </para>
 
-        <programlisting language="php">
-$valid  = new Zend_Validate_Between(array('min' =&gt; 0, 'max' =&gt; 10));
+        <programlisting language="php"><![CDATA[
+$valid  = new Zend_Validate_Between(array('min' => 0, 'max' => 10));
 $value  = 10;
-$result = $valid-&gt;isValid($value);
+$result = $valid->isValid($value);
 // returns true
-</programlisting>
+]]></programlisting>
 
         <para>
             In the above example the result is <constant>TRUE</constant> due to the reason that per
@@ -81,18 +79,18 @@ $result = $valid-&gt;isValid($value);
             following example:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $valid  = new Zend_Validate_Between(
     array(
-        'min' =&gt; 0,
-        'max' =&gt; 10,
-        'inclusive' =&gt; false
+        'min' => 0,
+        'max' => 10,
+        'inclusive' => false
     )
 );
 $value  = 10;
-$result = $valid-&gt;isValid($value);
+$result = $valid->isValid($value);
 // returns false
-</programlisting>
+]]></programlisting>
 
         <para>
             The example is almost equal to our first example but we excluded the border value. Now

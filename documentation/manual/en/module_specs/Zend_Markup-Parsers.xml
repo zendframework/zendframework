@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.markup.parsers"><info><title>Zend_Markup Parsers</title></info>
     
 
@@ -19,9 +17,9 @@
             piece of BBCode for example:
         </para>
 
-        <programlisting>
+        <programlisting><![CDATA[
 [b]foo[i]bar[/i][/b]baz
-</programlisting>
+]]></programlisting>
 
         <para>
             Then the BBCode parser will take that value, tear it apart and create the following
@@ -72,20 +70,20 @@
             a token tree. The syntax of all BBCode tags is:
         </para>
 
-        <programlisting language="text">
+        <programlisting language="text"><![CDATA[
 [name(=(value|"value"))( attribute=(value|"value"))*]
-</programlisting>
+]]></programlisting>
 
         <para>
             Some examples of valid BBCode tags are:
         </para>
 
-        <programlisting>
+        <programlisting><![CDATA[
 [b]
 [list=1]
 [code file=Zend/Markup.php]
 [url="http://framework.zend.com/" title="Zend Framework!"]
-</programlisting>
+]]></programlisting>
 
         <para>
             By default, all tags are closed by using the format '[/tagname]'.
@@ -203,13 +201,13 @@
                 character and bullit-lists using the "*" character. An example of both lists:
             </para>
 
-            <programlisting>
+            <programlisting><![CDATA[
 # Item 1
 # Item 2
 
 * Item 1
 * Item 2
-</programlisting>
+]]></programlisting>
 
             <para>
                 The above will generate two lists: the first, numbered; and the second, bulleted.

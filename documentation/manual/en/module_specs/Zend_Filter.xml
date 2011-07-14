@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.introduction"><info><title>Introduction</title></info>
     
 
@@ -61,12 +59,12 @@
             (<emphasis>"</emphasis>) characters:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $htmlEntities = new Zend_Filter_HtmlEntities();
 
-echo $htmlEntities-&gt;filter('&amp;'); // &amp;amp;
-echo $htmlEntities-&gt;filter('"'); // &amp;quot;
-</programlisting>
+echo $htmlEntities->filter('&'); // &
+echo $htmlEntities->filter('"'); // "
+]]></programlisting>
     </section>
 
     <section xml:id="zend.filter.introduction.static"><info><title>Using the static staticFilter() method</title></info>
@@ -85,20 +83,20 @@ echo $htmlEntities-&gt;filter('"'); // &amp;quot;
             input.
         </para>
 
-        <programlisting language="php">
-echo Zend_Filter::filterStatic('&amp;', 'HtmlEntities');
-</programlisting>
+        <programlisting language="php"><![CDATA[
+echo Zend_Filter::filterStatic('&', 'HtmlEntities');
+]]></programlisting>
 
         <para>
             You can also pass an array of constructor arguments, if they
             are needed for the filter class.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 echo Zend_Filter::filterStatic('"',
                                'HtmlEntities',
-                               array('quotestyle' =&gt; ENT_QUOTES));
-</programlisting>
+                               array('quotestyle' => ENT_QUOTES));
+]]></programlisting>
 
         <para>
             The static usage can be convenient for invoking a filter ad hoc,
@@ -123,14 +121,14 @@ echo Zend_Filter::filterStatic('"',
                 where your filter can be found.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 echo Zend_Filter::filterStatic(
     '"',
     'MyFilter',
     array($parameters),
     array('FirstNamespace', 'SecondNamespace')
 );
-</programlisting>
+]]></programlisting>
 
             <para>
                 <classname>Zend_Filter</classname> allows also to set namespaces as default.
@@ -139,11 +137,11 @@ echo Zend_Filter::filterStatic(
                 The following code snippet is identical to the above one.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 Zend_Filter::setDefaultNamespaces(array('FirstNamespace', 'SecondNamespace'));
 echo Zend_Filter::filterStatic('"', 'MyFilter', array($parameters));
 echo Zend_Filter::filterStatic('"', 'OtherFilter', array($parameters));
-</programlisting>
+]]></programlisting>
 
             <para>
                 For your convenience there are following methods which allow the handling of
@@ -194,17 +192,17 @@ echo Zend_Filter::filterStatic('"', 'OtherFilter', array($parameters));
             example:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $original = "my_original_content";
 
 // Attach a filter
 $filter   = new Zend_Filter_Word_UnderscoreToCamelCase();
-$filtered = $filter-&gt;filter($original);
+$filtered = $filter->filter($original);
 
 // Use it's opposite
 $filter2  = new Zend_Filter_Word_CamelCaseToUnderscore();
-$filtered = $filter2-&gt;filter($filtered)
-</programlisting>
+$filtered = $filter2->filter($filtered)
+]]></programlisting>
 
         <para>
             The above code example could lead to the impression that you will get the original

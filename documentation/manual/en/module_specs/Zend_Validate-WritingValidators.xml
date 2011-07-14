@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.writing_validators"><info><title>Writing Validators</title></info>
     
 
@@ -58,28 +56,28 @@
             point value.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class MyValid_Float extends Zend_Validate_Abstract
 {
     const FLOAT = 'float';
 
     protected $_messageTemplates = array(
-        self::FLOAT =&gt; "'%value%' is not a floating point value"
+        self::FLOAT => "'%value%' is not a floating point value"
     );
 
     public function isValid($value)
     {
-        $this-&gt;_setValue($value);
+        $this->_setValue($value);
 
         if (!is_float($value)) {
-            $this-&gt;_error();
+            $this->_error();
             return false;
         }
 
         return true;
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             The class defines a template for its single validation failure message, which includes
@@ -120,7 +118,7 @@ class MyValid_Float extends Zend_Validate_Abstract
             These validation failure reasons are then translated to definitions in the class:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class MyValid_NumericBetween extends Zend_Validate_Abstract
 {
     const MSG_NUMERIC = 'msgNumeric';
@@ -131,39 +129,39 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
     public $maximum = 100;
 
     protected $_messageVariables = array(
-        'min' =&gt; 'minimum',
-        'max' =&gt; 'maximum'
+        'min' => 'minimum',
+        'max' => 'maximum'
     );
 
     protected $_messageTemplates = array(
-        self::MSG_NUMERIC =&gt; "'%value%' is not numeric",
-        self::MSG_MINIMUM =&gt; "'%value%' must be at least '%min%'",
-        self::MSG_MAXIMUM =&gt; "'%value%' must be no more than '%max%'"
+        self::MSG_NUMERIC => "'%value%' is not numeric",
+        self::MSG_MINIMUM => "'%value%' must be at least '%min%'",
+        self::MSG_MAXIMUM => "'%value%' must be no more than '%max%'"
     );
 
     public function isValid($value)
     {
-        $this-&gt;_setValue($value);
+        $this->_setValue($value);
 
         if (!is_numeric($value)) {
-            $this-&gt;_error(self::MSG_NUMERIC);
+            $this->_error(self::MSG_NUMERIC);
             return false;
         }
 
-        if ($value &lt; $this-&gt;minimum) {
-            $this-&gt;_error(self::MSG_MINIMUM);
+        if ($value < $this->minimum) {
+            $this->_error(self::MSG_MINIMUM);
             return false;
         }
 
-        if ($value &gt; $this-&gt;maximum) {
-            $this-&gt;_error(self::MSG_MAXIMUM);
+        if ($value > $this->maximum) {
+            $this->_error(self::MSG_MAXIMUM);
             return false;
         }
 
         return true;
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             The public properties <varname>$minimum</varname> and <varname>$maximum</varname> have
@@ -205,7 +203,7 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
             The following class implements these validation criteria:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class MyValid_PasswordStrength extends Zend_Validate_Abstract
 {
     const LENGTH = 'length';
@@ -214,42 +212,42 @@ class MyValid_PasswordStrength extends Zend_Validate_Abstract
     const DIGIT  = 'digit';
 
     protected $_messageTemplates = array(
-        self::LENGTH =&gt; "'%value%' must be at least 8 characters in length",
-        self::UPPER  =&gt; "'%value%' must contain at least one uppercase letter",
-        self::LOWER  =&gt; "'%value%' must contain at least one lowercase letter",
-        self::DIGIT  =&gt; "'%value%' must contain at least one digit character"
+        self::LENGTH => "'%value%' must be at least 8 characters in length",
+        self::UPPER  => "'%value%' must contain at least one uppercase letter",
+        self::LOWER  => "'%value%' must contain at least one lowercase letter",
+        self::DIGIT  => "'%value%' must contain at least one digit character"
     );
 
     public function isValid($value)
     {
-        $this-&gt;_setValue($value);
+        $this->_setValue($value);
 
         $isValid = true;
 
-        if (strlen($value) &lt; 8) {
-            $this-&gt;_error(self::LENGTH);
+        if (strlen($value) < 8) {
+            $this->_error(self::LENGTH);
             $isValid = false;
         }
 
         if (!preg_match('/[A-Z]/', $value)) {
-            $this-&gt;_error(self::UPPER);
+            $this->_error(self::UPPER);
             $isValid = false;
         }
 
         if (!preg_match('/[a-z]/', $value)) {
-            $this-&gt;_error(self::LOWER);
+            $this->_error(self::LOWER);
             $isValid = false;
         }
 
         if (!preg_match('/\d/', $value)) {
-            $this-&gt;_error(self::DIGIT);
+            $this->_error(self::DIGIT);
             $isValid = false;
         }
 
         return $isValid;
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Note that the four criteria tests in <methodname>isValid()</methodname> do not

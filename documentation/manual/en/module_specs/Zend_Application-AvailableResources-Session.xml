@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.session"><info><title>Zend_Application_Resource_Session</title></info>
     
 
@@ -57,7 +55,7 @@
             as configures a <classname>Zend_Session_SaveHandler_DbTable</classname> instance.
         </para>
 
-        <programlisting language="ini">
+        <programlisting language="ini"><![CDATA[
 resources.session.save_path = APPLICATION_PATH "/../data/session"
 resources.session.use_only_cookies = true
 resources.session.remember_me_seconds = 864000
@@ -72,7 +70,7 @@ resources.session.saveHandler.options.primaryAssignment.sessionName = "sessionNa
 resources.session.saveHandler.options.modifiedColumn = "modified"
 resources.session.saveHandler.options.dataColumn = "session_data"
 resources.session.saveHandler.options.lifetimeColumn = "lifetime"
-</programlisting>
+]]></programlisting>
     </example>
 
     <note><info><title>Bootstrap your database first!</title></info>

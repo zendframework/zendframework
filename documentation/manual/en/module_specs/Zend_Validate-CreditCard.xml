@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.creditcard"><info><title>CreditCard</title></info>
     
 
@@ -133,14 +131,14 @@
             be accepted. See the folowing example:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $valid = new Zend_Validate_CreditCard();
-if ($valid-&gt;isValid($input)) {
+if ($valid->isValid($input)) {
     // input appears to be valid
 } else {
     // input is invalid
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             The above example would validate against all known credit card institutes.
@@ -166,22 +164,22 @@ if ($valid-&gt;isValid($input)) {
             You can provide a single institute:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $valid = new Zend_Validate_CreditCard(
     Zend_Validate_CreditCard::AMERICAN_EXPRESS
 );
-</programlisting>
+]]></programlisting>
 
         <para>
             When you want to allow multiple institutes, then you can provide them as array:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $valid = new Zend_Validate_CreditCard(array(
     Zend_Validate_CreditCard::AMERICAN_EXPRESS,
     Zend_Validate_CreditCard::VISA
 ));
-</programlisting>
+]]></programlisting>
 
         <para>
             And as with all validators, you can also pass an associative array of options or an
@@ -189,11 +187,11 @@ $valid = new Zend_Validate_CreditCard(array(
             institutes with the <property>type</property> array key as simulated here:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $valid = new Zend_Validate_CreditCard(array(
-    'type' =&gt; array(Zend_Validate_CreditCard::AMERICAN_EXPRESS)
+    'type' => array(Zend_Validate_CreditCard::AMERICAN_EXPRESS)
 ));
-</programlisting>
+]]></programlisting>
 
         <table xml:id="zend.validate.set.creditcard.institute.table"><info><title>Constants for credit card institutes</title></info>
             
@@ -281,13 +279,13 @@ $valid = new Zend_Validate_CreditCard(array(
             <methodname>getType()</methodname>.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $valid = new Zend_Validate_CreditCard();
-$valid-&gt;setType(array(
+$valid->setType(array(
     Zend_Validate_CreditCard::AMERICAN_EXPRESS,
     Zend_Validate_CreditCard::VISA
 ));
-</programlisting>
+]]></programlisting>
 
         <note><info><title>Default institute</title></info>
             
@@ -335,7 +333,7 @@ $valid-&gt;setType(array(
             about possible options take a look into <link linkend="zend.validate.set.callback">Callback</link>.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Your service class
 class CcService
 {
@@ -348,8 +346,8 @@ class CcService
 // The validation
 $service = new CcService();
 $valid   = new Zend_Validate_CreditCard(Zend_Validate_CreditCard::VISA);
-$valid-&gt;setService(array($service, 'checkOnline'));
-</programlisting>
+$valid->setService(array($service, 'checkOnline'));
+]]></programlisting>
 
         <para>
             As you can see the callback method will be called with the creditcard number as the

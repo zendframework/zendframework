@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.introduction"><info><title>Introduction</title></info>
     
 
@@ -118,23 +116,23 @@
                 "admin"):
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $acl = new Zend_Acl();
 
-$acl-&gt;addRole(new Zend_Acl_Role('guest'))
-    -&gt;addRole(new Zend_Acl_Role('member'))
-    -&gt;addRole(new Zend_Acl_Role('admin'));
+$acl->addRole(new Zend_Acl_Role('guest'))
+    ->addRole(new Zend_Acl_Role('member'))
+    ->addRole(new Zend_Acl_Role('admin'));
 
 $parents = array('guest', 'member', 'admin');
-$acl-&gt;addRole(new Zend_Acl_Role('someUser'), $parents);
+$acl->addRole(new Zend_Acl_Role('someUser'), $parents);
 
-$acl-&gt;add(new Zend_Acl_Resource('someResource'));
+$acl->add(new Zend_Acl_Resource('someResource'));
 
-$acl-&gt;deny('guest', 'someResource');
-$acl-&gt;allow('member', 'someResource');
+$acl->deny('guest', 'someResource');
+$acl->allow('member', 'someResource');
 
-echo $acl-&gt;isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
-</programlisting>
+echo $acl->isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
+]]></programlisting>
 
             <para>
                 Since there is no rule specifically defined for the "someUser" role and
@@ -181,9 +179,9 @@ echo $acl-&gt;isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
             <acronym>ACL</acronym> with no parameters:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $acl = new Zend_Acl();
-</programlisting>
+]]></programlisting>
 
         <note>
             <para>
@@ -255,28 +253,28 @@ $acl = new Zend_Acl();
             can be added to the role registry as follows:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $acl = new Zend_Acl();
 
 // Add groups to the Role registry using Zend_Acl_Role
 // Guest does not inherit access controls
 $roleGuest = new Zend_Acl_Role('guest');
-$acl-&gt;addRole($roleGuest);
+$acl->addRole($roleGuest);
 
 // Staff inherits from guest
-$acl-&gt;addRole(new Zend_Acl_Role('staff'), $roleGuest);
+$acl->addRole(new Zend_Acl_Role('staff'), $roleGuest);
 
 /*
 Alternatively, the above could be written:
-$acl-&gt;addRole(new Zend_Acl_Role('staff'), 'guest');
+$acl->addRole(new Zend_Acl_Role('staff'), 'guest');
 */
 
 // Editor inherits from staff
-$acl-&gt;addRole(new Zend_Acl_Role('editor'), 'staff');
+$acl->addRole(new Zend_Acl_Role('editor'), 'staff');
 
 // Administrator does not inherit access controls
-$acl-&gt;addRole(new Zend_Acl_Role('administrator'));
-</programlisting>
+$acl->addRole(new Zend_Acl_Role('administrator'));
+]]></programlisting>
     </section>
 
     <section xml:id="zend.acl.introduction.defining"><info><title>Defining Access Controls</title></info>
@@ -304,34 +302,34 @@ $acl-&gt;addRole(new Zend_Acl_Role('administrator'));
             code. To apply the base permissions as defined above:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $acl = new Zend_Acl();
 
 $roleGuest = new Zend_Acl_Role('guest');
-$acl-&gt;addRole($roleGuest);
-$acl-&gt;addRole(new Zend_Acl_Role('staff'), $roleGuest);
-$acl-&gt;addRole(new Zend_Acl_Role('editor'), 'staff');
-$acl-&gt;addRole(new Zend_Acl_Role('administrator'));
+$acl->addRole($roleGuest);
+$acl->addRole(new Zend_Acl_Role('staff'), $roleGuest);
+$acl->addRole(new Zend_Acl_Role('editor'), 'staff');
+$acl->addRole(new Zend_Acl_Role('administrator'));
 
 // Guest may only view content
-$acl-&gt;allow($roleGuest, null, 'view');
+$acl->allow($roleGuest, null, 'view');
 
 /*
 Alternatively, the above could be written:
-$acl-&gt;allow('guest', null, 'view');
+$acl->allow('guest', null, 'view');
 //*/
 
 // Staff inherits view privilege from guest, but also needs additional
 // privileges
-$acl-&gt;allow('staff', null, array('edit', 'submit', 'revise'));
+$acl->allow('staff', null, array('edit', 'submit', 'revise'));
 
 // Editor inherits view, edit, submit, and revise privileges from
 // staff, but also needs additional privileges
-$acl-&gt;allow('editor', null, array('publish', 'archive', 'delete'));
+$acl->allow('editor', null, array('publish', 'archive', 'delete'));
 
 // Administrator inherits nothing, but is allowed all privileges
-$acl-&gt;allow('administrator');
-</programlisting>
+$acl->allow('administrator');
+]]></programlisting>
 
         <para>
             The <constant>NULL</constant> values in the above <methodname>allow()</methodname> calls
@@ -349,38 +347,38 @@ $acl-&gt;allow('administrator');
             method:
         </para>
 
-        <programlisting language="php">
-echo $acl-&gt;isAllowed('guest', null, 'view') ?
+        <programlisting language="php"><![CDATA[
+echo $acl->isAllowed('guest', null, 'view') ?
      "allowed" : "denied";
 // allowed
 
-echo $acl-&gt;isAllowed('staff', null, 'publish') ?
+echo $acl->isAllowed('staff', null, 'publish') ?
      "allowed" : "denied";
 // denied
 
-echo $acl-&gt;isAllowed('staff', null, 'revise') ?
+echo $acl->isAllowed('staff', null, 'revise') ?
      "allowed" : "denied";
 // allowed
 
-echo $acl-&gt;isAllowed('editor', null, 'view') ?
+echo $acl->isAllowed('editor', null, 'view') ?
      "allowed" : "denied";
 // allowed because of inheritance from guest
 
-echo $acl-&gt;isAllowed('editor', null, 'update') ?
+echo $acl->isAllowed('editor', null, 'update') ?
      "allowed" : "denied";
 // denied because no allow rule for 'update'
 
-echo $acl-&gt;isAllowed('administrator', null, 'view') ?
+echo $acl->isAllowed('administrator', null, 'view') ?
      "allowed" : "denied";
 // allowed because administrator is allowed all privileges
 
-echo $acl-&gt;isAllowed('administrator') ?
+echo $acl->isAllowed('administrator') ?
      "allowed" : "denied";
 // allowed because administrator is allowed all privileges
 
-echo $acl-&gt;isAllowed('administrator', null, 'update') ?
+echo $acl->isAllowed('administrator', null, 'update') ?
      "allowed" : "denied";
 // allowed because administrator is allowed all privileges
-</programlisting>
+]]></programlisting>
     </section>
 </section>

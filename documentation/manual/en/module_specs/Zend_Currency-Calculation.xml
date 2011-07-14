@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.calculation"><info><title>Calculating with currencies</title></info>
     
 
@@ -89,33 +87,33 @@
         <classname>Zend_Currency</classname>. See the next snippets as example:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $currency = new Zend_Currency(
     array(
-        'value'    =&gt; 1000,
-        'currency' =&gt; 'USD',
+        'value'    => 1000,
+        'currency' => 'USD',
     )
 );
 
 print $currency; // Could return '$ 1.000,00'
 
-$currency-&gt;add(500);
+$currency->add(500);
 print $currency; // Could return '$ 1.500,00'
-</programlisting>
+]]></programlisting>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $currency_2 = new Zend_Currency(
     array(
-        'value'    =&gt; 500,
-        'currency' =&gt; 'USD',
+        'value'    => 500,
+        'currency' => 'USD',
     )
 );
 
-if ($currency-&gt;isMore($currency_2)) {
+if ($currency->isMore($currency_2)) {
     print "First is more";
 }
 
-$currency-&gt;div(5);
+$currency->div(5);
 print $currency; // Could return '$ 200,00'
-</programlisting>
+]]></programlisting>
 </section>

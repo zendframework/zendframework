@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.form.decorators.individual"><info><title>Rendering Individual Decorators</title></info>
     
 
@@ -17,38 +15,38 @@
         element. Let's review the previous example:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $element = new Zend_Form_Element('foo', array(
-    'label'      =&gt; 'Foo',
-    'belongsTo'  =&gt; 'bar',
-    'value'      =&gt; 'test',
-    'prefixPath' =&gt; array('decorator' =&gt; array(
-        'My_Decorator' =&gt; 'path/to/decorators/',
+    'label'      => 'Foo',
+    'belongsTo'  => 'bar',
+    'value'      => 'test',
+    'prefixPath' => array('decorator' => array(
+        'My_Decorator' => 'path/to/decorators/',
     )),
-    'decorators' =&gt; array(
+    'decorators' => array(
         'SimpleInput'
-        array('SimpleLabel', array('placement' =&gt; 'append')),
+        array('SimpleLabel', array('placement' => 'append')),
     ),
 ));
-</programlisting>
+]]></programlisting>
 
     <para>
         If we wanted to pull and render just the <classname>SimpleInput</classname> decorator, we
         can do so using the <methodname>getDecorator()</methodname> method:
     </para>
 
-    <programlisting language="php">
-$decorator = $element-&gt;getDecorator('SimpleInput');
-echo $decorator-&gt;render('');
-</programlisting>
+    <programlisting language="php"><![CDATA[
+$decorator = $element->getDecorator('SimpleInput');
+echo $decorator->render('');
+]]></programlisting>
 
     <para>
         This is pretty easy, but it can be made even easier; let's do it in a single line:
     </para>
 
-    <programlisting language="php">
-echo $element-&gt;getDecorator('SimpleInput')-&gt;render('');
-</programlisting>
+    <programlisting language="php"><![CDATA[
+echo $element->getDecorator('SimpleInput')->render('');
+]]></programlisting>
 
     <para>
         Not too bad, but still a little complex. To make this easier, a shorthand notation was
@@ -58,9 +56,9 @@ echo $element-&gt;getDecorator('SimpleInput')-&gt;render('');
         argument optional and simplifies the usage:
     </para>
 
-    <programlisting language="php">
-echo $element-&gt;renderSimpleInput();
-</programlisting>
+    <programlisting language="php"><![CDATA[
+echo $element->renderSimpleInput();
+]]></programlisting>
 
     <para>
         This is a neat trick, but how and why would you use it?
@@ -84,40 +82,40 @@ echo $element-&gt;renderSimpleInput();
         elements in order to achieve its goals. Here is the basic form definition:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 class My_Form_UserDemographics extends Zend_Form
 {
     public function init()
     {
         // Add a path for my own decorators
-        $this-&gt;addElementPrefixPaths(array(
-            'decorator' =&gt; array('My_Decorator' =&gt; 'My/Decorator'),
+        $this->addElementPrefixPaths(array(
+            'decorator' => array('My_Decorator' => 'My/Decorator'),
         ));
 
-        $this-&gt;addElement('text', 'firstName', array(
-            'label' =&gt; 'First name: ',
+        $this->addElement('text', 'firstName', array(
+            'label' => 'First name: ',
         ));
-        $this-&gt;addElement('text', 'lastName', array(
-            'label' =&gt; 'Last name: ',
+        $this->addElement('text', 'lastName', array(
+            'label' => 'Last name: ',
         ));
-        $this-&gt;addElement('text', 'title', array(
-            'label' =&gt; 'Title: ',
+        $this->addElement('text', 'title', array(
+            'label' => 'Title: ',
         ));
-        $this-&gt;addElement('text', 'dateOfBirth', array(
-            'label' =&gt; 'Date of Birth (DD/MM/YYYY): ',
+        $this->addElement('text', 'dateOfBirth', array(
+            'label' => 'Date of Birth (DD/MM/YYYY): ',
         ));
-        $this-&gt;addElement('text', 'email', array(
-            'label' =&gt; 'Your email address: ',
+        $this->addElement('text', 'email', array(
+            'label' => 'Your email address: ',
         ));
-        $this-&gt;addElement('password', 'password', array(
-            'label' =&gt; 'Password: ',
+        $this->addElement('password', 'password', array(
+            'label' => 'Password: ',
         ));
-        $this-&gt;addElement('password', 'passwordConfirmation', array(
-            'label' =&gt; 'Confirm Password: ',
+        $this->addElement('password', 'passwordConfirmation', array(
+            'label' => 'Confirm Password: ',
         ));
     }
 }
-</programlisting>
+]]></programlisting>
 
     <note>
         <para>
@@ -185,88 +183,88 @@ class My_Form_UserDemographics extends Zend_Form
         Our view script might then look like this:
     </para>
 
-    <programlisting language="php">
-&lt;?php
-$form = $this-&gt;form;
-// Remove &lt;dt&gt; from label generation
-foreach ($form-&gt;getElements() as $element) {
-    $element-&gt;getDecorator('label')-&gt;setOption('tag', null);
+    <programlisting language="php"><![CDATA[
+<?php
+$form = $this->form;
+// Remove <dt> from label generation
+foreach ($form->getElements() as $element) {
+    $element->getDecorator('label')->setOption('tag', null);
 }
-?&gt;
-&lt;form method="&lt;?php echo $form-&gt;getMethod() ?&gt;" action="&lt;?php echo
-    $form-&gt;getAction()?&gt;"&gt;
-    &lt;div class="element"&gt;
-        &lt;?php echo $form-&gt;title-&gt;renderLabel()
-              . $form-&gt;title-&gt;renderViewHelper() ?&gt;
-        &lt;?php echo $form-&gt;firstName-&gt;renderLabel()
-              . $form-&gt;firstName-&gt;renderViewHelper() ?&gt;
-        &lt;?php echo $form-&gt;lastName-&gt;renderLabel()
-              . $form-&gt;lastName-&gt;renderViewHelper() ?&gt;
-    &lt;/div&gt;
-    &lt;div class="element"&gt;
-        &lt;?php echo $form-&gt;dateOfBirth-&gt;renderLabel() ?&gt;
-        &lt;?php echo $this-&gt;formText('dateOfBirth[day]', '', array(
-            'size' =&gt; 2, 'maxlength' =&gt; 2)) ?&gt;
+?>
+<form method="<?php echo $form->getMethod() ?>" action="<?php echo
+    $form->getAction()?>">
+    <div class="element">
+        <?php echo $form->title->renderLabel()
+              . $form->title->renderViewHelper() ?>
+        <?php echo $form->firstName->renderLabel()
+              . $form->firstName->renderViewHelper() ?>
+        <?php echo $form->lastName->renderLabel()
+              . $form->lastName->renderViewHelper() ?>
+    </div>
+    <div class="element">
+        <?php echo $form->dateOfBirth->renderLabel() ?>
+        <?php echo $this->formText('dateOfBirth[day]', '', array(
+            'size' => 2, 'maxlength' => 2)) ?>
         /
-        &lt;?php echo $this-&gt;formText('dateOfBirth[month]', '', array(
-            'size' =&gt; 2, 'maxlength' =&gt; 2)) ?&gt;
+        <?php echo $this->formText('dateOfBirth[month]', '', array(
+            'size' => 2, 'maxlength' => 2)) ?>
         /
-        &lt;?php echo $this-&gt;formText('dateOfBirth[year]', '', array(
-            'size' =&gt; 4, 'maxlength' =&gt; 4)) ?&gt;
-    &lt;/div&gt;
-    &lt;div class="element"&gt;
-        &lt;?php echo $form-&gt;password-&gt;renderLabel()
-              . $form-&gt;password-&gt;renderViewHelper() ?&gt;
-    &lt;/div&gt;
-    &lt;div class="element"&gt;
-        &lt;?php echo $form-&gt;passwordConfirmation-&gt;renderLabel()
-              . $form-&gt;passwordConfirmation-&gt;renderViewHelper() ?&gt;
-    &lt;/div&gt;
-    &lt;?php echo $this-&gt;formSubmit('submit', 'Save') ?&gt;
-&lt;/form&gt;
-</programlisting>
+        <?php echo $this->formText('dateOfBirth[year]', '', array(
+            'size' => 4, 'maxlength' => 4)) ?>
+    </div>
+    <div class="element">
+        <?php echo $form->password->renderLabel()
+              . $form->password->renderViewHelper() ?>
+    </div>
+    <div class="element">
+        <?php echo $form->passwordConfirmation->renderLabel()
+              . $form->passwordConfirmation->renderViewHelper() ?>
+    </div>
+    <?php echo $this->formSubmit('submit', 'Save') ?>
+</form>
+]]></programlisting>
 
     <para>
         If you use the above view script, you'll get approximately the following
         <acronym>HTML</acronym> (approximate, as the <acronym>HTML</acronym> below is formatted):
     </para>
 
-    <programlisting language="html">
-&lt;form method="post" action=""&gt;
-    &lt;div class="element"&gt;
-        &lt;label for="title" tag="" class="optional"&gt;Title:&lt;/label&gt;
-        &lt;input type="text" name="title" id="title" value=""/&gt;
+    <programlisting language="html"><![CDATA[
+<form method="post" action="">
+    <div class="element">
+        <label for="title" tag="" class="optional">Title:</label>
+        <input type="text" name="title" id="title" value=""/>
 
-        &lt;label for="firstName" tag="" class="optional"&gt;First name:&lt;/label&gt;
-        &lt;input type="text" name="firstName" id="firstName" value=""/&gt;
+        <label for="firstName" tag="" class="optional">First name:</label>
+        <input type="text" name="firstName" id="firstName" value=""/>
 
-        &lt;label for="lastName" tag="" class="optional"&gt;Last name:&lt;/label&gt;
-        &lt;input type="text" name="lastName" id="lastName" value=""/&gt;
-    &lt;/div&gt;
+        <label for="lastName" tag="" class="optional">Last name:</label>
+        <input type="text" name="lastName" id="lastName" value=""/>
+    </div>
 
-    &lt;div class="element"&gt;
-        &lt;label for="dateOfBirth" tag="" class="optional"&gt;Date of Birth
-            (DD/MM/YYYY):&lt;/label&gt;
-        &lt;input type="text" name="dateOfBirth[day]" id="dateOfBirth-day"
-            value="" size="2" maxlength="2"/&gt;
+    <div class="element">
+        <label for="dateOfBirth" tag="" class="optional">Date of Birth
+            (DD/MM/YYYY):</label>
+        <input type="text" name="dateOfBirth[day]" id="dateOfBirth-day"
+            value="" size="2" maxlength="2"/>
         /
-        &lt;input type="text" name="dateOfBirth[month]" id="dateOfBirth-month"
-            value="" size="2" maxlength="2"/&gt;
+        <input type="text" name="dateOfBirth[month]" id="dateOfBirth-month"
+            value="" size="2" maxlength="2"/>
         /
-        &lt;input type="text" name="dateOfBirth[year]" id="dateOfBirth-year"
-            value="" size="4" maxlength="4"/&gt;
-    &lt;/div&gt;
+        <input type="text" name="dateOfBirth[year]" id="dateOfBirth-year"
+            value="" size="4" maxlength="4"/>
+    </div>
 
-    &lt;div class="element"&gt;
-        &lt;label for="password" tag="" class="optional"&gt;Password:&lt;/label&gt;
-        &lt;input type="password" name="password" id="password" value=""/&gt;
-    &lt;/div&gt;
+    <div class="element">
+        <label for="password" tag="" class="optional">Password:</label>
+        <input type="password" name="password" id="password" value=""/>
+    </div>
 
-    &lt;div class="element"&gt;
-        &lt;label for="passwordConfirmation" tag="" class="" id="submit"
-            value="Save"/&gt;
-&lt;/form&gt;
-</programlisting>
+    <div class="element">
+        <label for="passwordConfirmation" tag="" class="" id="submit"
+            value="Save"/>
+</form>
+]]></programlisting>
 
     <para>
         It may not be truly pretty, but with some CSS, it could be made to look exactly how you

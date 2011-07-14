@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.markup.getting-started"><info><title>Getting Started With Zend_Markup</title></info>
     
 
@@ -25,14 +23,14 @@
             of BBCode to <acronym>HTML</acronym>.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Creates instance of Zend_Markup_Renderer_Html,
 // with Zend_Markup_Parser_BbCode as its parser
 $bbcode = Zend_Markup::factory('Bbcode');
 
-echo $bbcode-&gt;render('[b]bold text[/b] and [i]cursive text[/i]');
-// Outputs: '&lt;strong&gt;bold text&lt;/strong&gt; and &lt;em&gt;cursive text&lt;/em&gt;'
-</programlisting>
+echo $bbcode->render('[b]bold text[/b] and [i]cursive text[/i]');
+// Outputs: '<strong>bold text</strong> and <em>cursive text</em>'
+]]></programlisting>
     </example>
 
     <example xml:id="zend.markup.getting-started.complicated-example"><info><title>A more complicated example of Zend_Markup</title></info>
@@ -43,25 +41,25 @@ echo $bbcode-&gt;render('[b]bold text[/b] and [i]cursive text[/i]');
             markup.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $bbcode = Zend_Markup::factory('Bbcode');
 
-$input = &lt;&lt;&lt;EOT
+$input = <<<EOT
 [list]
 [*]Zend Framework
 [*]Foobar
 [/list]
 EOT;
 
-echo $bbcode-&gt;render($input);
+echo $bbcode->render($input);
 /*
 Should output something like:
-&lt;ul&gt;
-&lt;li&gt;Zend Framework&lt;/li&gt;
-&lt;li&gt;Foobar&lt;/li&gt;
-&lt;/ul&gt;
+<ul>
+<li>Zend Framework</li>
+<li>Foobar</li>
+</ul>
 */
-</programlisting>
+]]></programlisting>
     </example>
 
     <example xml:id="zend.markup.getting-started.incorrect-input"><info><title>Processing incorrect input</title></info>
@@ -75,13 +73,13 @@ Should output something like:
             closes tags that were not closed:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $bbcode = Zend_Markup::factory('Bbcode');
 
-echo $bbcode-&gt;render('some [i]wrong [b]sample [/i] text');
+echo $bbcode->render('some [i]wrong [b]sample [/i] text');
 // Note that the '[b]' tag is never closed, and is also incorrectly
 // nested; regardless, Zend_Markup renders it correctly as:
-// some &lt;em&gt;wrong &lt;strong&gt;sample &lt;/strong&gt;&lt;/em&gt;&lt;strong&gt; text&lt;/strong&gt;
-</programlisting>
+// some <em>wrong <strong>sample </strong></em><strong> text</strong>
+]]></programlisting>
     </example>
 </section>

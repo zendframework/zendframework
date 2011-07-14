@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.plugins.standard.errorhandler"><info><title>Zend_Controller_Plugin_ErrorHandler</title></info>
     
 
@@ -106,15 +104,15 @@
             <methodname>Zend_Controller_Action::_getParam('error_handler')</methodname>:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class ErrorController extends Zend_Controller_Action
 {
     public function errorAction()
     {
-        $errors = $this-&gt;_getParam('error_handler');
+        $errors = $this->_getParam('error_handler');
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Once you have the error object, you can get the type via
@@ -156,20 +154,20 @@ class ErrorController extends Zend_Controller_Action
             indicate a 404 page:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class ErrorController extends Zend_Controller_Action
 {
     public function errorAction()
     {
-        $errors = $this-&gt;_getParam('error_handler');
+        $errors = $this->_getParam('error_handler');
 
-        switch ($errors-&gt;type) {
+        switch ($errors->type) {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
                 // 404 error -- controller or action not found
-                $this-&gt;getResponse()
-                     -&gt;setRawHeader('HTTP/1.1 404 Not Found');
+                $this->getResponse()
+                     ->setRawHeader('HTTP/1.1 404 Not Found');
 
                 // ... get some output to display...
                 break;
@@ -180,7 +178,7 @@ class ErrorController extends Zend_Controller_Action
         }
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Finally, you can retrieve the exception that triggered the error
@@ -188,18 +186,18 @@ class ErrorController extends Zend_Controller_Action
             <emphasis>error_handler</emphasis> object:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 public function errorAction()
 {
-        $errors = $this-&gt;_getParam('error_handler');
+        $errors = $this->_getParam('error_handler');
 
-        switch ($errors-&gt;type) {
+        switch ($errors->type) {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
                 // 404 error -- controller or action not found
-                $this-&gt;getResponse()
-                     -&gt;setRawHeader('HTTP/1.1 404 Not Found');
+                $this->getResponse()
+                     ->setRawHeader('HTTP/1.1 404 Not Found');
 
                 // ... get some output to display...
                 break;
@@ -210,18 +208,18 @@ public function errorAction()
                 // ...
 
                 // Log the exception:
-                $exception = $errors-&gt;exception;
+                $exception = $errors->exception;
                 $log = new Zend_Log(
                     new Zend_Log_Writer_Stream(
                         '/tmp/applicationException.log'
                     )
                 );
-                $log-&gt;debug($exception-&gt;getMessage() . "\n" .
-                            $exception-&gt;getTraceAsString());
+                $log->debug($exception->getMessage() . "\n" .
+                            $exception->getTraceAsString());
                 break;
         }
 }
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.controller.plugins.standard.errorhandler.buffer"><info><title>Handling Previously Rendered Output</title></info>
@@ -240,9 +238,9 @@ public function errorAction()
             clear the response body prior to rendering any views:
         </para>
 
-        <programlisting language="php">
-$this-&gt;getResponse()-&gt;clearBody();
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$this->getResponse()->clearBody();
+]]></programlisting>
     </section>
 
     <section xml:id="zend.controller.plugins.standard.errorhandler.examples"><info><title>Plugin Usage Examples</title></info>
@@ -251,37 +249,37 @@ $this-&gt;getResponse()-&gt;clearBody();
         <example xml:id="zend.controller.plugins.standard.errorhandler.examples.example-1"><info><title>Standard Usage</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
-$front-&gt;registerPlugin(new Zend_Controller_Plugin_ErrorHandler());
-</programlisting>
+$front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler());
+]]></programlisting>
         </example>
 
         <example xml:id="zend.controller.plugins.standard.errorhandler.examples.example-2"><info><title>Setting a Different Error Handler</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
-$front-&gt;registerPlugin(new Zend_Controller_Plugin_ErrorHandler(array(
-    'module'     =&gt; 'mystuff',
-    'controller' =&gt; 'static',
-    'action'     =&gt; 'error'
+$front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler(array(
+    'module'     => 'mystuff',
+    'controller' => 'static',
+    'action'     => 'error'
 )));
-</programlisting>
+]]></programlisting>
         </example>
 
         <example xml:id="zend.controller.plugins.standard.errorhandler.examples.example-3"><info><title>Using Accessors</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $plugin = new Zend_Controller_Plugin_ErrorHandler();
-$plugin-&gt;setErrorHandlerModule('mystuff')
-       -&gt;setErrorHandlerController('static')
-       -&gt;setErrorHandlerAction('error');
+$plugin->setErrorHandlerModule('mystuff')
+       ->setErrorHandlerController('static')
+       ->setErrorHandlerAction('error');
 
 $front = Zend_Controller_Front::getInstance();
-$front-&gt;registerPlugin($plugin);
-</programlisting>
+$front->registerPlugin($plugin);
+]]></programlisting>
         </example>
     </section>
 
@@ -293,40 +291,40 @@ $front-&gt;registerPlugin($plugin);
             controller. Below is a simple example.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class ErrorController extends Zend_Controller_Action
 {
     public function errorAction()
     {
-        $errors = $this-&gt;_getParam('error_handler');
+        $errors = $this->_getParam('error_handler');
 
-        switch ($errors-&gt;type) {
+        switch ($errors->type) {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
                 // 404 error -- controller or action not found
-                $this-&gt;getResponse()-&gt;setRawHeader('HTTP/1.1 404 Not Found');
+                $this->getResponse()->setRawHeader('HTTP/1.1 404 Not Found');
 
-                $content =&lt;&lt;&lt;EOH
-&lt;h1&gt;Error!&lt;/h1&gt;
-&lt;p&gt;The page you requested was not found.&lt;/p&gt;
+                $content =<<<EOH
+<h1>Error!</h1>
+<p>The page you requested was not found.</p>
 EOH;
                 break;
             default:
                 // application error
-                $content =&lt;&lt;&lt;EOH
-&lt;h1&gt;Error!&lt;/h1&gt;
-&lt;p&gt;An unexpected error occurred. Please try again later.&lt;/p&gt;
+                $content =<<<EOH
+<h1>Error!</h1>
+<p>An unexpected error occurred. Please try again later.</p>
 EOH;
                 break;
         }
 
         // Clear previous content
-        $this-&gt;getResponse()-&gt;clearBody();
+        $this->getResponse()->clearBody();
 
-        $this-&gt;view-&gt;content = $content;
+        $this->view->content = $content;
     }
 }
-</programlisting>
+]]></programlisting>
     </section>
 </section>

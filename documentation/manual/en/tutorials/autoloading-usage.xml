@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.usage"><info><title>Basic Autoloader Usage</title></info>
     
 
@@ -17,10 +15,10 @@
         <methodname>getInstance()</methodname> to retrieve an instance.
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 require_once 'Zend/Loader/Autoloader.php';
 Zend_Loader_Autoloader::getInstance();
-</programlisting>
+]]></programlisting>
 
     <para>
         By default, this will allow loading any classes with the class namespace prefixes of "Zend_"
@@ -33,12 +31,12 @@ Zend_Loader_Autoloader::getInstance();
         can pass a single namespace prefix, or an array of them:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 require_once 'Zend/Loader/Autoloader.php';
 $loader = Zend_Loader_Autoloader::getInstance();
-$loader-&gt;registerNamespace('Foo_');
-$loader-&gt;registerNamespace(array('Foo_', 'Bar_'));
-</programlisting>
+$loader->registerNamespace('Foo_');
+$loader->registerNamespace(array('Foo_', 'Bar_'));
+]]></programlisting>
 
     <para>
         Alternately, you can tell <classname>Zend_Loader_Autoloader</classname> to act as a
@@ -46,9 +44,9 @@ $loader-&gt;registerNamespace(array('Foo_', 'Bar_'));
         namespace prefix.
     </para>
 
-    <programlisting language="php">
-$loader-&gt;setFallbackAutoloader(true);
-</programlisting>
+    <programlisting language="php"><![CDATA[
+$loader->setFallbackAutoloader(true);
+]]></programlisting>
 
     <warning><info><title>Do not use as a fallback autoloader</title></info>
         
@@ -148,13 +146,13 @@ $loader-&gt;setFallbackAutoloader(true);
         Autoloaders managed this way may be any valid <acronym>PHP</acronym> callback.
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 // Append function 'my_autoloader' to the stack,
 // to manage classes with the prefix 'My_':
-$loader-&gt;pushAutoloader('my_autoloader', 'My_');
+$loader->pushAutoloader('my_autoloader', 'My_');
 
 // Prepend static method Foo_Loader::autoload() to the stack,
 // to manage classes with the prefix 'Foo_':
-$loader-&gt;unshiftAutoloader(array('Foo_Loader', 'autoload'), 'Foo_');
-</programlisting>
+$loader->unshiftAutoloader(array('Foo_Loader', 'autoload'), 'Foo_');
+]]></programlisting>
 </section>

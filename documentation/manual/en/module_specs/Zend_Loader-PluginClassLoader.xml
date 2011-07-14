@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.plugin-class-loader"><info><title>The PluginClassLoader</title></info>
     
 
@@ -41,23 +39,23 @@
             plugin name.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 use Zend\View\HelperLoader;
 
 // Provide a global map, or override defaults:
 HelperLoader::addStaticMap(array(
-    'url' =&gt; 'My\Custom\UrlHelper',
+    'url' => 'My\Custom\UrlHelper',
 ));
 
 // Instantiate the loader:
 $loader = new Zend\View\HelperLoader();
 
 // Register a new plugin:
-$loader-&gt;registerPlugin('bugUrl', 'My\Custom\BugUrlHelper');
+$loader->registerPlugin('bugUrl', 'My\Custom\BugUrlHelper');
 
 // Load/retrieve the associated plugin class:
-$class = $loader-&gt;load('url'); // 'My\Custom\UrlHelper'
-</programlisting>
+$class = $loader->load('url'); // 'My\Custom\UrlHelper'
+]]></programlisting>
 
         <note><info><title>Case Sensitivity</title></info>
             
@@ -403,25 +401,25 @@ $class = $loader-&gt;load('url'); // 'My\Custom\UrlHelper'
                 <methodname>addStaticMap()</methodname> method:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 use Zend\Loader\PluginClassLoader;
 
 PluginClassLoader::addStaticMap(array(
-    'url' =&gt; 'Zend\View\Helper\Url',
+    'url' => 'Zend\View\Helper\Url',
 ));
-</programlisting>
+]]></programlisting>
 
             <para>
                 Any later instances created will now have this map defined, allowing you to load
                 that plugin.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 use Zend\Loader\PluginClassLoader;
 
 $loader = new PluginClassLoader();
-$helper = $loader-&gt;load('url'); // Zend\View\Helper\Url
-</programlisting>
+$helper = $loader->load('url'); // Zend\View\Helper\Url
+]]></programlisting>
         </example>
 
         <example xml:id="zend.loader.plugin-class-loader.examples.extended-loader"><info><title>Creating a pre-loaded map</title></info>
@@ -434,7 +432,7 @@ $helper = $loader-&gt;load('url'); // Zend\View\Helper\Url
                 class.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 namespace My\Plugins;
 
 use Zend\Loader\PluginClassLoader;
@@ -445,21 +443,21 @@ class PluginLoader extends PluginClassLoader
      * @var array Plugin map
      */
     protected $plugins = array(
-        'foo'    =&gt; 'My\Plugins\Foo',
-        'bar'    =&gt; 'My\Plugins\Bar',
-        'foobar' =&gt; 'My\Plugins\FooBar',
+        'foo'    => 'My\Plugins\Foo',
+        'bar'    => 'My\Plugins\Bar',
+        'foobar' => 'My\Plugins\FooBar',
     );
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 At this point, you can simply instantiate the map and use it.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $loader = new My\Plugins\PluginLoader();
-$class  = $loader-&gt;load('foobar'); // My\Plugins\FooBar
-</programlisting>
+$class  = $loader->load('foobar'); // My\Plugins\FooBar
+]]></programlisting>
 
             <para>
                 <classname>PluginClassLoader</classname> makes use of late static binding, allowing
@@ -468,7 +466,7 @@ $class  = $loader-&gt;load('foobar'); // My\Plugins\FooBar
                 <varname>$staticMap</varname> property:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 namespace My\Plugins;
 
 use Zend\Loader\PluginClassLoader;
@@ -479,18 +477,18 @@ class PluginLoader extends PluginClassLoader
 
     // ...
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 To inject the static map, use the extending class' name to call the static
                 <methodname>addStaticMap()</methodname> method.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 PluginLoader::addStaticMap(array(
-    'url' =&gt; 'Zend\View\Helper\Url',
+    'url' => 'Zend\View\Helper\Url',
 ));
-</programlisting>
+]]></programlisting>
         </example>
 
         <example xml:id="zend.loader.plugin-class-loader.examples.using-as-plugin-map"><info><title>Extending a plugin map using another plugin map</title></info>
@@ -516,7 +514,7 @@ PluginLoader::addStaticMap(array(
                 <methodname>registerPlugins()</methodname>.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 namespace My\Plugins;
 
 use Zend\Loader\PluginClassLoader,
@@ -528,9 +526,9 @@ class PluginLoader extends PluginClassLoader
      * @var array Plugin map
      */
     protected $plugins = array(
-        'foo'    =&gt; 'My\Plugins\Foo',
-        'bar'    =&gt; 'My\Plugins\Bar',
-        'foobar' =&gt; 'My\Plugins\FooBar',
+        'foo'    => 'My\Plugins\Foo',
+        'bar'    => 'My\Plugins\Bar',
+        'foobar' => 'My\Plugins\FooBar',
     );
 }
 
@@ -539,9 +537,9 @@ $loader = new HelperLoader('My\Plugins\PluginLoader');
 $loader = new HelperLoader(new PluginLoader());
 
 // Or via registerPlugins():
-$loader-&gt;registerPlugins('My\Plugins\PluginLoader');
-$loader-&gt;registerPlugins(new PluginLoader());
-</programlisting>
+$loader->registerPlugins('My\Plugins\PluginLoader');
+$loader->registerPlugins(new PluginLoader());
+]]></programlisting>
         </example>
     </section>
 </section>

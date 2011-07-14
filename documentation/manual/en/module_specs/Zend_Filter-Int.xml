@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.int"><info><title>Int</title></info>
     
 
@@ -24,11 +22,11 @@
             A basic example of usage is below:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Int();
 
-print $filter-&gt;filter('-4 is less than 0');
-</programlisting>
+print $filter->filter('-4 is less than 0');
+]]></programlisting>
 
         <para>
             This will return '-4'.

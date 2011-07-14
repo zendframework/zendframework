@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.theory"><info><title>The Theory of Caching</title></info>
     
 
@@ -45,7 +43,7 @@
             given in the following example :
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // We choose a backend (for example 'File' or 'Sqlite'...)
 $backendName = '[...]';
 
@@ -64,7 +62,7 @@ $cache = Zend_Cache::factory($frontendName,
                              $backendName,
                              $frontendOptions,
                              $backendOptions);
-</programlisting>
+]]></programlisting>
 
         <para>
             In the following examples we will assume that the <varname>$cache</varname> variable
@@ -90,9 +88,9 @@ $cache = Zend_Cache::factory($frontendName,
             tags):
         </para>
 
-        <programlisting language="php">
-$cache-&gt;save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
+]]></programlisting>
 
         <note>
             <para>
@@ -111,55 +109,55 @@ $cache-&gt;save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
             <methodname>remove()</methodname> method :
         </para>
 
-        <programlisting language="php">
-$cache-&gt;remove('idToRemove');
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$cache->remove('idToRemove');
+]]></programlisting>
 
         <para>
             To remove or invalidate several cache ids in one operation, you can use the
             <methodname>clean()</methodname> method. For example to remove all cache records :
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // clean all records
-$cache-&gt;clean(Zend_Cache::CLEANING_MODE_ALL);
+$cache->clean(Zend_Cache::CLEANING_MODE_ALL);
 
 // clean only outdated
-$cache-&gt;clean(Zend_Cache::CLEANING_MODE_OLD);
-</programlisting>
+$cache->clean(Zend_Cache::CLEANING_MODE_OLD);
+]]></programlisting>
 
         <para>
             If you want to remove cache entries matching the tags 'tagA' and 'tagC':
         </para>
 
-        <programlisting language="php">
-$cache-&gt;clean(
+        <programlisting language="php"><![CDATA[
+$cache->clean(
     Zend_Cache::CLEANING_MODE_MATCHING_TAG,
     array('tagA', 'tagC')
 );
-</programlisting>
+]]></programlisting>
 
         <para>
             If you want to remove cache entries not matching the tags 'tagA' or 'tagC':
         </para>
 
-        <programlisting language="php">
-$cache-&gt;clean(
+        <programlisting language="php"><![CDATA[
+$cache->clean(
     Zend_Cache::CLEANING_MODE_NOT_MATCHING_TAG,
     array('tagA', 'tagC')
 );
-</programlisting>
+]]></programlisting>
 
         <para>
             If you want to remove cache entries matching the tags 'tagA' or 'tagC':
         </para>
 
-        <programlisting language="php">
-$cache-&gt;clean(
+        <programlisting language="php"><![CDATA[
+$cache->clean(
     Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG,
     array('tagA', 'tagC')
 );
-</programlisting>
+]]></programlisting>
 
         <para>
             Available cleaning modes are: <constant>CLEANING_MODE_ALL</constant>,

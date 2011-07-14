@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.nirvanix"><info><title>Zend_Service_Nirvanix</title></info>
     
 
@@ -120,20 +118,20 @@
             methods for these three operations.
         </para>
 
-        <programlisting language="php">
-$auth = array('username' =&gt; 'your-username',
-              'password' =&gt; 'your-password',
-              'appKey'   =&gt; 'your-app-key');
+        <programlisting language="php"><![CDATA[
+$auth = array('username' => 'your-username',
+              'password' => 'your-password',
+              'appKey'   => 'your-app-key');
 
 $nirvanix = new Zend_Service_Nirvanix($auth);
-$imfs = $nirvanix-&gt;getService('IMFS');
+$imfs = $nirvanix->getService('IMFS');
 
-$imfs-&gt;putContents('/foo.txt', 'contents to store');
+$imfs->putContents('/foo.txt', 'contents to store');
 
-echo $imfs-&gt;getContents('/foo.txt');
+echo $imfs->getContents('/foo.txt');
 
-$imfs-&gt;unlink('/foo.txt');
-</programlisting>
+$imfs->unlink('/foo.txt');
+]]></programlisting>
 
         <para>
             The first step to using <classname>Zend_Service_Nirvanix</classname> is always
@@ -196,17 +194,17 @@ $imfs-&gt;unlink('/foo.txt');
             <classname>Zend_Service_Nirvanix</classname>:
         </para>
 
-        <programlisting language="php">
-$auth = array('username' =&gt; 'your-username',
-              'password' =&gt; 'your-password',
-              'appKey'   =&gt; 'your-app-key');
+        <programlisting language="php"><![CDATA[
+$auth = array('username' => 'your-username',
+              'password' => 'your-password',
+              'appKey'   => 'your-app-key');
 
 $nirvanix = new Zend_Service_Nirvanix($auth);
-$imfs = $nirvanix-&gt;getService('IMFS');
+$imfs = $nirvanix->getService('IMFS');
 
-$result = $imfs-&gt;renameFile(array('filePath' =&gt; '/path/to/foo.txt',
-                                  'newFileName' =&gt; 'bar.txt'));
-</programlisting>
+$result = $imfs->renameFile(array('filePath' => '/path/to/foo.txt',
+                                  'newFileName' => 'bar.txt'));
+]]></programlisting>
 
         <para>
             Above, a proxy for the <constant>IMFS</constant> namespace is created. A method,
@@ -246,29 +244,29 @@ $result = $imfs-&gt;renameFile(array('filePath' =&gt; '/path/to/foo.txt',
             built-in <acronym>PHP</acronym> functions like <methodname>print_r()</methodname>:
         </para>
 
-        <programlisting language="php">
-&lt;?php
-$auth = array('username' =&gt; 'your-username',
-              'password' =&gt; 'your-password',
-              'appKey'   =&gt; 'your-app-key');
+        <programlisting language="php"><![CDATA[
+<?php
+$auth = array('username' => 'your-username',
+              'password' => 'your-password',
+              'appKey'   => 'your-app-key');
 
 $nirvanix = new Zend_Service_Nirvanix($auth);
-$imfs = $nirvanix-&gt;getService('IMFS');
+$imfs = $nirvanix->getService('IMFS');
 
-$result = $imfs-&gt;putContents('/foo.txt', 'fourteen bytes');
+$result = $imfs->putContents('/foo.txt', 'fourteen bytes');
 print_r($result);
-?&gt;
+?>
 
 Zend_Service_Nirvanix_Response Object
 (
-    [_sxml:protected] =&gt; SimpleXMLElement Object
+    [_sxml:protected] => SimpleXMLElement Object
         (
-            [ResponseCode] =&gt; 0
-            [FilesUploaded] =&gt; 1
-            [BytesUploaded] =&gt; 14
+            [ResponseCode] => 0
+            [FilesUploaded] => 1
+            [BytesUploaded] => 14
         )
 )
-</programlisting>
+]]></programlisting>
 
         <para>
             You can access any property or method of the decorated <code>SimpleXMLElement</code>.
@@ -299,11 +297,11 @@ Zend_Service_Nirvanix_Response Object
             example:
         </para>
 
-        <programlisting language="xml">
-&lt;Response&gt;
-   &lt;ResponseCode&gt;0&lt;/ResponseCode&gt;
-&lt;/Response&gt;
-</programlisting>
+        <programlisting language="xml"><![CDATA[
+<Response>
+   <ResponseCode>0</ResponseCode>
+</Response>
+]]></programlisting>
 
         <para>
             When the <code>ResponseCode</code> is zero such as in the example
@@ -319,22 +317,22 @@ Zend_Service_Nirvanix_Response Object
             error, a <classname>Zend_Service_Nirvanix_Exception</classname> will be thrown.
         </para>
 
-        <programlisting language="xml">
-$auth = array('username' =&gt; 'your-username',
-              'password' =&gt; 'your-password',
-              'appKey'   =&gt; 'your-app-key');
+        <programlisting language="xml"><![CDATA[
+$auth = array('username' => 'your-username',
+              'password' => 'your-password',
+              'appKey'   => 'your-app-key');
 $nirvanix = new Zend_Service_Nirvanix($auth);
 
 try {
 
-  $imfs = $nirvanix-&gt;getService('IMFS');
-  $imfs-&gt;unlink('/a-nonexistant-path');
+  $imfs = $nirvanix->getService('IMFS');
+  $imfs->unlink('/a-nonexistant-path');
 
 } catch (Zend_Service_Nirvanix_Exception $e) {
-  echo $e-&gt;getMessage() . "\n";
-  echo $e-&gt;getCode();
+  echo $e->getMessage() . "\n";
+  echo $e->getCode();
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             In the example above, <methodname>unlink()</methodname> is a convenience method that

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.post_code"><info><title>PostCode</title></info>
     
 
@@ -25,9 +23,9 @@
         ("AT", for Austria).
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_PostCode('de_AT');
-</programlisting>
+]]></programlisting>
 
     <para>
         When you don't set a locale yourself, then <classname>Zend_Validate_PostCode</classname>
@@ -35,13 +33,13 @@ $validator = new Zend_Validate_PostCode('de_AT');
         <classname>Zend_Locale</classname>.
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 // application wide locale within your bootstrap
 $locale = new Zend_Locale('de_AT');
 Zend_Registry::set('Zend_Locale', $locale);
 
 $validator = new Zend_Validate_PostCode();
-</programlisting>
+]]></programlisting>
 
     <para>
         You can also change the locale afterwards by calling <methodname>setLocale()</methodname>.
@@ -49,10 +47,10 @@ $validator = new Zend_Validate_PostCode();
         <methodname>getLocale()</methodname>.
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_PostCode('de_AT');
-$validator-&gt;setLocale('en_GB');
-</programlisting>
+$validator->setLocale('en_GB');
+]]></programlisting>
 
     <para>
         Postal code formats themself are simply regular expression strings. When the international
@@ -60,10 +58,10 @@ $validator-&gt;setLocale('en_GB');
         can also manually set a format by calling <methodname>setFormat()</methodname>.
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_PostCode('de_AT');
-$validator-&gt;setFormat('AT-\d{5}');
-</programlisting>
+$validator->setFormat('AT-\d{5}');
+]]></programlisting>
 
     <note><info><title>Conventions for self defined formats</title></info>
         
@@ -89,10 +87,10 @@ $validator-&gt;setFormat('AT-\d{5}');
             <classname>Zend_Validate_PostCode</classname>.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_PostCode('de_AT');
 $validator = new Zend_Validate_PostCode($locale);
-</programlisting>
+]]></programlisting>
 
         <para>
             Additionally, you may pass either an array or a <classname>Zend_Config</classname>
@@ -100,12 +98,12 @@ $validator = new Zend_Validate_PostCode($locale);
             "format"; these will be used to set the appropriate values in the validator object.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_PostCode(array(
-    'locale' =&gt; 'de_AT',
-    'format' =&gt; 'AT_\d+'
+    'locale' => 'de_AT',
+    'format' => 'AT_\d+'
 ));
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.validate.set.post_code.options"><info><title>Supported options for Zend_Validate_PostCode</title></info>

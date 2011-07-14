@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.view.dojo"><info><title>dojo() View Helper</title></info>
     
 
@@ -53,9 +51,9 @@
             plugin; simply grab your view object and execute the following:
         </para>
 
-        <programlisting language="php">
-$view-&gt;addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+]]></programlisting>
 
         <para>
             Next, the view script. In this case, we're going to specify
@@ -64,23 +62,23 @@ $view-&gt;addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
             'PairedStore' and store in our 'custom' module.
         </para>
 
-        <programlisting language="php">
-&lt;?php // setup data store for FilteringSelect ?&gt;
-&lt;div dojoType="custom.PairedStore" jsId="stateStore"
+        <programlisting language="php"><![CDATA[
+<?php // setup data store for FilteringSelect ?>
+<div dojoType="custom.PairedStore" jsId="stateStore"
     url="/data/autocomplete/type/state/format/ajax"
-    requestMethod="get"&gt;&lt;/div&gt;
+    requestMethod="get"></div>
 
-&lt;?php // Input element: ?&gt;
-State: &lt;input id="state" dojoType="dijit.form.FilteringSelect"
-    store="stateStore" pageSize="5" /&gt;
+<?php // Input element: ?>
+State: <input id="state" dojoType="dijit.form.FilteringSelect"
+    store="stateStore" pageSize="5" />
 
-&lt;?php // setup required dojo elements:
-$this-&gt;dojo()-&gt;enable()
-             -&gt;setDjConfigOption('parseOnLoad', true)
-             -&gt;registerModulePath('custom', '../custom/')
-             -&gt;requireModule('dijit.form.FilteringSelect')
-             -&gt;requireModule('custom.PairedStore'); ?&gt;
-</programlisting>
+<?php // setup required dojo elements:
+$this->dojo()->enable()
+             ->setDjConfigOption('parseOnLoad', true)
+             ->registerModulePath('custom', '../custom/')
+             ->requireModule('dijit.form.FilteringSelect')
+             ->requireModule('custom.PairedStore'); ?>
+]]></programlisting>
 
         <para>
             In our layout script, we'll then check to see if Dojo is enabled,
@@ -88,28 +86,28 @@ $this-&gt;dojo()-&gt;enable()
             it:
         </para>
 
-        <programlisting language="php">
-&lt;?php echo $this-&gt;doctype() ?&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;?php echo $this-&gt;headTitle() ?&gt;
-    &lt;?php echo $this-&gt;headMeta() ?&gt;
-    &lt;?php echo $this-&gt;headLink() ?&gt;
-    &lt;?php echo $this-&gt;headStyle() ?&gt;
-&lt;?php if ($this-&gt;dojo()-&gt;isEnabled()){
-    $this-&gt;dojo()-&gt;setLocalPath('/js/dojo/dojo.js')
-                 -&gt;addStyleSheetModule('dijit.themes.tundra');
-    echo $this-&gt;dojo();
+        <programlisting language="php"><![CDATA[
+<?php echo $this->doctype() ?>
+<html>
+<head>
+    <?php echo $this->headTitle() ?>
+    <?php echo $this->headMeta() ?>
+    <?php echo $this->headLink() ?>
+    <?php echo $this->headStyle() ?>
+<?php if ($this->dojo()->isEnabled()){
+    $this->dojo()->setLocalPath('/js/dojo/dojo.js')
+                 ->addStyleSheetModule('dijit.themes.tundra');
+    echo $this->dojo();
    }
-?&gt;
-    &lt;?php echo $this-&gt;headScript() ?&gt;
-&lt;/head&gt;
-&lt;body class="tundra"&gt;
-    &lt;?php echo $this-&gt;layout()-&gt;content ?&gt;
-    &lt;?php echo $this-&gt;inlineScript() ?&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</programlisting>
+?>
+    <?php echo $this->headScript() ?>
+</head>
+<body class="tundra">
+    <?php echo $this->layout()->content ?>
+    <?php echo $this->inlineScript() ?>
+</body>
+</html>
+]]></programlisting>
 
         <para>
             At this point, you only need to ensure that your files are in the
@@ -189,18 +187,18 @@ $this-&gt;dojo()-&gt;enable()
                 <methodname>setUseDeclarative()</methodname> method:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
-</programlisting>
+]]></programlisting>
 
             <para>
                 If you decide instead to use programmatic usage, call the static
                 <methodname>setUseProgrammatic()</methodname> method:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
-</programlisting>
+]]></programlisting>
 
             <para>
                 Finally, if you want to create your own programmatic rules, you
@@ -209,9 +207,9 @@ Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
                 will be created.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 Zend_Dojo_View_Helper_Dojo::setUseProgrammatic(-1);
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -223,9 +221,9 @@ Zend_Dojo_View_Helper_Dojo::setUseProgrammatic(-1);
             select one by passing in a module path:
         </para>
 
-        <programlisting language="php">
-$view-&gt;dojo()-&gt;addStylesheetModule('dijit.themes.tundra');
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$view->dojo()->addStylesheetModule('dijit.themes.tundra');
+]]></programlisting>
 
         <para>
             The module path is discovered by using the character '.' as a
@@ -241,9 +239,9 @@ $view-&gt;dojo()-&gt;addStylesheetModule('dijit.themes.tundra');
             using; the most common use case is to pass it in the body:
         </para>
 
-        <programlisting language="html">
-&lt;body class="tundra"&gt;
-</programlisting>
+        <programlisting language="html"><![CDATA[
+<body class="tundra">
+]]></programlisting>
     </section>
 
     <section xml:id="zend.dojo.view.dojo.layers"><info><title>Using Layers (Custom Builds)</title></info>
@@ -298,9 +296,9 @@ $view-&gt;dojo()-&gt;addStylesheetModule('dijit.themes.tundra');
             <methodname>addLayer()</methodname> method for adding paths to required layers:
         </para>
 
-        <programlisting language="html">
-$view-&gt;dojo()-&gt;addLayer('/js/foo/foo.js');
-</programlisting>
+        <programlisting language="html"><![CDATA[
+$view->dojo()->addLayer('/js/foo/foo.js');
+]]></programlisting>
 
         <para>
             For more information on creating custom builds, please <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org/reference-guide/dojo/index.html#package-system">refer

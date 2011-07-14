@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.flickr"><info><title>Zend_Service_Flickr</title></info>
     
 
@@ -23,15 +21,15 @@
         <example xml:id="zend.service.flickr.introduction.example-1"><info><title>Simple Flickr Photo Search</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $flickr = new Zend_Service_Flickr('MY_API_KEY');
 
-$results = $flickr-&gt;tagSearch("php");
+$results = $flickr->tagSearch("php");
 
 foreach ($results as $result) {
-    echo $result-&gt;title . '&lt;br /&gt;';
+    echo $result->title . '<br />';
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <note><info><title>Optional parameter</title></info>
@@ -85,15 +83,15 @@ foreach ($results as $result) {
                 user's public photos by using the <methodname>userSearch()</methodname> method:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $flickr = new Zend_Service_Flickr('MY_API_KEY');
 
-$results = $flickr-&gt;userSearch($userEmail);
+$results = $flickr->userSearch($userEmail);
 
 foreach ($results as $result) {
-    echo $result-&gt;title . '&lt;br /&gt;';
+    echo $result->title . '<br />';
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -108,15 +106,15 @@ foreach ($results as $result) {
         <example xml:id="zend.service.flickr.grouppoolgetphotos.example-1"><info><title>Retrieving a Group's Pool Photos by Group ID</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $flickr = new Zend_Service_Flickr('MY_API_KEY');
 
-    $results = $flickr-&gt;groupPoolGetPhotos($groupId);
+    $results = $flickr->groupPoolGetPhotos($groupId);
 
     foreach ($results as $result) {
-        echo $result-&gt;title . '&lt;br /&gt;';
+        echo $result->title . '<br />';
     }
-</programlisting>
+]]></programlisting>
         </example>
 
         <note><info><title>Optional parameter</title></info>
@@ -146,14 +144,14 @@ $flickr = new Zend_Service_Flickr('MY_API_KEY');
                 the image:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $flickr = new Zend_Service_Flickr('MY_API_KEY');
 
-$image = $flickr-&gt;getImageDetails($imageId);
+$image = $flickr->getImageDetails($imageId);
 
-echo "Image ID $imageId is $image-&gt;width x $image-&gt;height pixels.&lt;br /&gt;\n";
-echo "&lt;a href=\"$image-&gt;clickUri\"&gt;Click for Image&lt;/a&gt;\n";
-</programlisting>
+echo "Image ID $imageId is $image->width x $image->height pixels.<br />\n";
+echo "<a href=\"$image->clickUri\">Click for Image</a>\n";
+]]></programlisting>
         </example>
     </section>
 

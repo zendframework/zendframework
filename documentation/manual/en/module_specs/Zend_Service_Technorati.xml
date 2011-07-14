@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.technorati"><info><title>Zend_Service_Technorati</title></info>
     
 
@@ -64,14 +62,14 @@
         <example xml:id="zend.service.technorati.making-first-query.example-1"><info><title>Sending your first query</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // create a new Zend_Service_Technorati
 // with a valid API_KEY
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
 
 // search Technorati for PHP keyword
-$resultSet = $technorati-&gt;search('PHP');
-</programlisting>
+$resultSet = $technorati->search('PHP');
+]]></programlisting>
         </example>
 
         <para>
@@ -82,18 +80,18 @@ $resultSet = $technorati-&gt;search('PHP');
         <example xml:id="zend.service.technorati.making-first-query.example-2"><info><title>Refining your query</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // create a new Zend_Service_Technorati
 // with a valid API_KEY
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
 
 // filter your query including only results
 // with some authority (Results from blogs with a handful of links)
-$options = array('authority' =&gt; 'a4');
+$options = array('authority' => 'a4');
 
 // search Technorati for PHP keyword
-$resultSet = $technorati-&gt;search('PHP', $options);
-</programlisting>
+$resultSet = $technorati->search('PHP', $options);
+]]></programlisting>
         </example>
 
         <para>
@@ -105,17 +103,17 @@ $resultSet = $technorati-&gt;search('PHP', $options);
         <example xml:id="zend.service.technorati.making-first-query.example-3"><info><title>Sending multiple queries with the same Zend_Service_Technorati instance</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // create a new Zend_Service_Technorati
 // with a valid API_KEY
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
 
 // search Technorati for PHP keyword
-$search = $technorati-&gt;search('PHP');
+$search = $technorati->search('PHP');
 
 // get top tags indexed by Technorati
-$topTags = $technorati-&gt;topTags();
-</programlisting>
+$topTags = $technorati->topTags();
+]]></programlisting>
         </example>
     </section>
 
@@ -139,20 +137,20 @@ $topTags = $technorati-&gt;topTags();
         <example xml:id="zend.service.technorati.consuming-results.example-1"><info><title>Consuming a result set object</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // create a new Zend_Service_Technorati
 // with a valid API_KEY
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
 
 // search Technorati for PHP keyword
 // $resultSet is an instance of Zend_Service_Technorati_SearchResultSet
-$resultSet = $technorati-&gt;search('PHP');
+$resultSet = $technorati->search('PHP');
 
 // loop over all result objects
 foreach ($resultSet as $result) {
     // $result is an instance of Zend_Service_Technorati_SearchResult
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -164,19 +162,19 @@ foreach ($resultSet as $result) {
         <example xml:id="zend.service.technorati.consuming-results.example-2"><info><title>Seeking a specific result set object</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // create a new Zend_Service_Technorati
 // with a valid API_KEY
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
 
 // search Technorati for PHP keyword
 // $resultSet is an instance of Zend_Service_Technorati_SearchResultSet
-$resultSet = $technorati-&gt;search('PHP');
+$resultSet = $technorati->search('PHP');
 
 // $result is an instance of Zend_Service_Technorati_SearchResult
-$resultSet-&gt;seek(1);
-$result = $resultSet-&gt;current();
-</programlisting>
+$resultSet->seek(1);
+$result = $resultSet->current();
+]]></programlisting>
         </example>
 
         <note>
@@ -199,23 +197,23 @@ $result = $resultSet-&gt;current();
         <example xml:id="zend.service.technorati.consuming-results.example-3"><info><title>Consuming a standalone result object</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // create a new Zend_Service_Technorati
 // with a valid API_KEY
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
 
 // get info about weppos author
-$result = $technorati-&gt;getInfo('weppos');
+$result = $technorati->getInfo('weppos');
 
-$author = $result-&gt;getAuthor();
-echo '&lt;h2&gt;Blogs authored by ' . $author-&gt;getFirstName() . " " .
-          $author-&gt;getLastName() . '&lt;/h2&gt;';
-echo '&lt;ol&gt;';
-foreach ($result-&gt;getWeblogs() as $weblog) {
-    echo '&lt;li&gt;' . $weblog-&gt;getName() . '&lt;/li&gt;';
+$author = $result->getAuthor();
+echo '<h2>Blogs authored by ' . $author->getFirstName() . " " .
+          $author->getLastName() . '</h2>';
+echo '<ol>';
+foreach ($result->getWeblogs() as $weblog) {
+    echo '<li>' . $weblog->getName() . '</li>';
 }
-echo "&lt;/ol&gt;";
-</programlisting>
+echo "</ol>";
+]]></programlisting>
         </example>
 
         <para>
@@ -251,14 +249,14 @@ echo "&lt;/ol&gt;";
         <example xml:id="zend.service.technorati.handling-errors.example-1"><info><title>Handling a Query Exception</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
 try {
-    $resultSet = $technorati-&gt;search('PHP');
+    $resultSet = $technorati->search('PHP');
 } catch(Zend_Service_Technorati_Exception $e) {
-    echo "An error occurred: " $e-&gt;getMessage();
+    echo "An error occurred: " $e->getMessage();
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -284,14 +282,14 @@ try {
         <example xml:id="zend.service.technorati.checking-api-daily-usage.example-1"><info><title>Getting API key daily usage information</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
-$key = $technorati-&gt;keyInfo();
+$key = $technorati->keyInfo();
 
-echo "API Key: " . $key-&gt;getApiKey() . "&lt;br /&gt;";
-echo "Daily Usage: " . $key-&gt;getApiQueries() . "/" .
-     $key-&gt;getMaxQueries() . "&lt;br /&gt;";
-</programlisting>
+echo "API Key: " . $key->getApiKey() . "<br />";
+echo "Daily Usage: " . $key->getApiQueries() . "/" .
+     $key->getMaxQueries() . "<br />";
+]]></programlisting>
         </example>
     </section>
 
@@ -368,19 +366,19 @@ echo "Daily Usage: " . $key-&gt;getApiQueries() . "/" .
             <example xml:id="zend.service.technorati.queries.cosmos.example-1"><info><title>Cosmos Query</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
-$resultSet = $technorati-&gt;cosmos('http://devzone.zend.com/');
+$resultSet = $technorati->cosmos('http://devzone.zend.com/');
 
-echo "&lt;p&gt;Reading " . $resultSet-&gt;totalResults() .
-     " of " . $resultSet-&gt;totalResultsAvailable() .
-     " available results&lt;/p&gt;";
-echo "&lt;ol&gt;";
+echo "<p>Reading " . $resultSet->totalResults() .
+     " of " . $resultSet->totalResultsAvailable() .
+     " available results</p>";
+echo "<ol>";
 foreach ($resultSet as $result) {
-    echo "&lt;li&gt;" . $result-&gt;getWeblog()-&gt;getName() . "&lt;/li&gt;";
+    echo "<li>" . $result->getWeblog()->getName() . "</li>";
 }
-echo "&lt;/ol&gt;";
-</programlisting>
+echo "</ol>";
+]]></programlisting>
             </example>
         </section>
 
@@ -398,19 +396,19 @@ echo "&lt;/ol&gt;";
             <example xml:id="zend.service.technorati.queries.search.example-1"><info><title>Search Query</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
-$resultSet = $technorati-&gt;search('zend framework');
+$resultSet = $technorati->search('zend framework');
 
-echo "&lt;p&gt;Reading " . $resultSet-&gt;totalResults() .
-     " of " . $resultSet-&gt;totalResultsAvailable() .
-     " available results&lt;/p&gt;";
-echo "&lt;ol&gt;";
+echo "<p>Reading " . $resultSet->totalResults() .
+     " of " . $resultSet->totalResultsAvailable() .
+     " available results</p>";
+echo "<ol>";
 foreach ($resultSet as $result) {
-    echo "&lt;li&gt;" . $result-&gt;getWeblog()-&gt;getName() . "&lt;/li&gt;";
+    echo "<li>" . $result->getWeblog()->getName() . "</li>";
 }
-echo "&lt;/ol&gt;";
-</programlisting>
+echo "</ol>";
+]]></programlisting>
             </example>
         </section>
 
@@ -428,19 +426,19 @@ echo "&lt;/ol&gt;";
             <example xml:id="zend.service.technorati.queries.tag.example-1"><info><title>Tag Query</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
-$resultSet = $technorati-&gt;tag('php');
+$resultSet = $technorati->tag('php');
 
-echo "&lt;p&gt;Reading " . $resultSet-&gt;totalResults() .
-     " of " . $resultSet-&gt;totalResultsAvailable() .
-     " available results&lt;/p&gt;";
-echo "&lt;ol&gt;";
+echo "<p>Reading " . $resultSet->totalResults() .
+     " of " . $resultSet->totalResultsAvailable() .
+     " available results</p>";
+echo "<ol>";
 foreach ($resultSet as $result) {
-    echo "&lt;li&gt;" . $result-&gt;getWeblog()-&gt;getName() . "&lt;/li&gt;";
+    echo "<li>" . $result->getWeblog()->getName() . "</li>";
 }
-echo "&lt;/ol&gt;";
-</programlisting>
+echo "</ol>";
+]]></programlisting>
             </example>
         </section>
 
@@ -459,16 +457,16 @@ echo "&lt;/ol&gt;";
             <example xml:id="zend.service.technorati.queries.dailycounts.example-1"><info><title>DailyCounts Query</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
-$resultSet = $technorati-&gt;dailyCounts('php');
+$resultSet = $technorati->dailyCounts('php');
 
 foreach ($resultSet as $result) {
-    echo "&lt;li&gt;" . $result-&gt;getDate() .
-         "(" . $result-&gt;getCount() . ")&lt;/li&gt;";
+    echo "<li>" . $result->getDate() .
+         "(" . $result->getCount() . ")</li>";
 }
-echo "&lt;/ol&gt;";
-</programlisting>
+echo "</ol>";
+]]></programlisting>
             </example>
         </section>
 
@@ -486,19 +484,19 @@ echo "&lt;/ol&gt;";
             <example xml:id="zend.service.technorati.queries.toptags.example-1"><info><title>TopTags Query</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
-$resultSet = $technorati-&gt;topTags();
+$resultSet = $technorati->topTags();
 
-echo "&lt;p&gt;Reading " . $resultSet-&gt;totalResults() .
-     " of " . $resultSet-&gt;totalResultsAvailable() .
-     " available results&lt;/p&gt;";
-echo "&lt;ol&gt;";
+echo "<p>Reading " . $resultSet->totalResults() .
+     " of " . $resultSet->totalResultsAvailable() .
+     " available results</p>";
+echo "<ol>";
 foreach ($resultSet as $result) {
-    echo "&lt;li&gt;" . $result-&gt;getTag() . "&lt;/li&gt;";
+    echo "<li>" . $result->getTag() . "</li>";
 }
-echo "&lt;/ol&gt;";
-</programlisting>
+echo "</ol>";
+]]></programlisting>
             </example>
         </section>
 
@@ -517,13 +515,13 @@ echo "&lt;/ol&gt;";
             <example xml:id="zend.service.technorati.queries.bloginfo.example-1"><info><title>BlogInfo Query</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
-$result = $technorati-&gt;blogInfo('http://devzone.zend.com/');
+$result = $technorati->blogInfo('http://devzone.zend.com/');
 
-echo '&lt;h2&gt;&lt;a href="' . (string) $result-&gt;getWeblog()-&gt;getUrl() . '"&gt;' .
-     $result-&gt;getWeblog()-&gt;getName() . '&lt;/a&gt;&lt;/h2&gt;';
-</programlisting>
+echo '<h2><a href="' . (string) $result->getWeblog()->getUrl() . '">' .
+     $result->getWeblog()->getName() . '</a></h2>';
+]]></programlisting>
             </example>
         </section>
 
@@ -542,19 +540,19 @@ echo '&lt;h2&gt;&lt;a href="' . (string) $result-&gt;getWeblog()-&gt;getUrl() . 
             <example xml:id="zend.service.technorati.queries.blogposttags.example-1"><info><title>BlogPostTags Query</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
-$resultSet = $technorati-&gt;blogPostTags('http://devzone.zend.com/');
+$resultSet = $technorati->blogPostTags('http://devzone.zend.com/');
 
-echo "&lt;p&gt;Reading " . $resultSet-&gt;totalResults() .
-     " of " . $resultSet-&gt;totalResultsAvailable() .
-     " available results&lt;/p&gt;";
-echo "&lt;ol&gt;";
+echo "<p>Reading " . $resultSet->totalResults() .
+     " of " . $resultSet->totalResultsAvailable() .
+     " available results</p>";
+echo "<ol>";
 foreach ($resultSet as $result) {
-    echo "&lt;li&gt;" . $result-&gt;getTag() . "&lt;/li&gt;";
+    echo "<li>" . $result->getTag() . "</li>";
 }
-echo "&lt;/ol&gt;";
-</programlisting>
+echo "</ol>";
+]]></programlisting>
             </example>
         </section>
 
@@ -572,19 +570,19 @@ echo "&lt;/ol&gt;";
             <example xml:id="zend.service.technorati.queries.getinfo.example-1"><info><title>GetInfo Query</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
-$result = $technorati-&gt;getInfo('weppos');
+$result = $technorati->getInfo('weppos');
 
-$author = $result-&gt;getAuthor();
-echo "&lt;h2&gt;Blogs authored by " . $author-&gt;getFirstName() . " " .
-     $author-&gt;getLastName() . "&lt;/h2&gt;";
-echo "&lt;ol&gt;";
-foreach ($result-&gt;getWeblogs() as $weblog) {
-    echo "&lt;li&gt;" . $weblog-&gt;getName() . "&lt;/li&gt;";
+$author = $result->getAuthor();
+echo "<h2>Blogs authored by " . $author->getFirstName() . " " .
+     $author->getLastName() . "</h2>";
+echo "<ol>";
+foreach ($result->getWeblogs() as $weblog) {
+    echo "<li>" . $weblog->getName() . "</li>";
 }
-echo "&lt;/ol&gt;";
-</programlisting>
+echo "</ol>";
+]]></programlisting>
             </example>
         </section>
 
@@ -751,10 +749,10 @@ echo "&lt;/ol&gt;";
             <example xml:id="zend.service.technorati.classes.resultset.example-1"><info><title>Iterating result objects from a resultset collection</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // run a simple query
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
-$resultSet = $technorati-&gt;search('php');
+$resultSet = $technorati->search('php');
 
 // $resultSet is now an instance of
 // Zend_Service_Technorati_SearchResultSet
@@ -763,7 +761,7 @@ foreach ($resultSet as $result) {
     // do something with your
     // Zend_Service_Technorati_SearchResult object
 }
-</programlisting>
+]]></programlisting>
             </example>
         </section>
 

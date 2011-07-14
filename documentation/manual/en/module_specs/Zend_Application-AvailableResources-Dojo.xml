@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.dojo"><info><title>Zend_Application_Resource_Dojo</title></info>
     
 
@@ -17,9 +15,9 @@
             <classname>Zend_Dojo</classname> can be enabled.
         </para>
 
-        <programlisting language="ini">
+        <programlisting language="ini"><![CDATA[
 resources.dojo.enable = true ; Always load the Dojo javascript files
-</programlisting>
+]]></programlisting>
 
         <para>
             The <classname>Zend_Dojo</classname> resource plugin utilises the options for the

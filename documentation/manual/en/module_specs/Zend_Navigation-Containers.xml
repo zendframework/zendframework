@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.containers"><info><title>Containers</title></info>
     
 
@@ -38,7 +36,7 @@
         <example xml:id="zend.navigation.containers.creating.example.array"><info><title>Creating a container using an array</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 /*
  * Create a container from an array
  *
@@ -47,109 +45,109 @@
  */
 $container = new Zend_Navigation(array(
     array(
-        'label' =&gt; 'Page 1',
-        'id' =&gt; 'home-link',
-        'uri' =&gt; '/'
+        'label' => 'Page 1',
+        'id' => 'home-link',
+        'uri' => '/'
     ),
     array(
-        'label' =&gt; 'Zend',
-        'uri' =&gt; 'http://www.zend-project.com/',
-        'order' =&gt; 100
+        'label' => 'Zend',
+        'uri' => 'http://www.zend-project.com/',
+        'order' => 100
     ),
     array(
-        'label' =&gt; 'Page 2',
-        'controller' =&gt; 'page2',
-        'pages' =&gt; array(
+        'label' => 'Page 2',
+        'controller' => 'page2',
+        'pages' => array(
             array(
-                'label' =&gt; 'Page 2.1',
-                'action' =&gt; 'page2_1',
-                'controller' =&gt; 'page2',
-                'class' =&gt; 'special-one',
-                'title' =&gt; 'This element has a special class',
-                'active' =&gt; true
+                'label' => 'Page 2.1',
+                'action' => 'page2_1',
+                'controller' => 'page2',
+                'class' => 'special-one',
+                'title' => 'This element has a special class',
+                'active' => true
             ),
             array(
-                'label' =&gt; 'Page 2.2',
-                'action' =&gt; 'page2_2',
-                'controller' =&gt; 'page2',
-                'class' =&gt; 'special-two',
-                'title' =&gt; 'This element has a special class too'
+                'label' => 'Page 2.2',
+                'action' => 'page2_2',
+                'controller' => 'page2',
+                'class' => 'special-two',
+                'title' => 'This element has a special class too'
             )
         )
     ),
     array(
-        'label' =&gt; 'Page 2 with params',
-        'action' =&gt; 'index',
-        'controller' =&gt; 'page2',
+        'label' => 'Page 2 with params',
+        'action' => 'index',
+        'controller' => 'page2',
         // specify a param or two
-        'params' =&gt; array(
-            'format' =&gt; 'json',
-            'foo' =&gt; 'bar'
+        'params' => array(
+            'format' => 'json',
+            'foo' => 'bar'
         )
     ),
     array(
-        'label' =&gt; 'Page 2 with params and a route',
-        'action' =&gt; 'index',
-        'controller' =&gt; 'page2',
+        'label' => 'Page 2 with params and a route',
+        'action' => 'index',
+        'controller' => 'page2',
         // specify a route name and a param for the route
-        'route' =&gt; 'nav-route-example',
-        'params' =&gt; array(
-            'format' =&gt; 'json'
+        'route' => 'nav-route-example',
+        'params' => array(
+            'format' => 'json'
         )
     ),
     array(
-        'label' =&gt; 'Page 3',
-        'action' =&gt; 'index',
-        'controller' =&gt; 'index',
-        'module' =&gt; 'mymodule',
-        'reset_params' =&gt; false
+        'label' => 'Page 3',
+        'action' => 'index',
+        'controller' => 'index',
+        'module' => 'mymodule',
+        'reset_params' => false
     ),
     array(
-        'label' =&gt; 'Page 4',
-        'uri' =&gt; '#',
-        'pages' =&gt; array(
+        'label' => 'Page 4',
+        'uri' => '#',
+        'pages' => array(
             array(
-                'label' =&gt; 'Page 4.1',
-                'uri' =&gt; '/page4',
-                'title' =&gt; 'Page 4 using uri',
-                'pages' =&gt; array(
+                'label' => 'Page 4.1',
+                'uri' => '/page4',
+                'title' => 'Page 4 using uri',
+                'pages' => array(
                     array(
-                        'label' =&gt; 'Page 4.1.1',
-                        'title' =&gt; 'Page 4 using mvc params',
-                        'action' =&gt; 'index',
-                        'controller' =&gt; 'page4',
+                        'label' => 'Page 4.1.1',
+                        'title' => 'Page 4 using mvc params',
+                        'action' => 'index',
+                        'controller' => 'page4',
                         // let's say this page is active
-                        'active' =&gt; '1'
+                        'active' => '1'
                     )
                 )
             )
         )
     ),
     array(
-        'label' =&gt; 'Page 0?',
-        'uri' =&gt; '/setting/the/order/option',
+        'label' => 'Page 0?',
+        'uri' => '/setting/the/order/option',
         // setting order to -1 should make it appear first
-        'order' =&gt; -1
+        'order' => -1
     ),
     array(
-        'label' =&gt; 'Page 5',
-        'uri' =&gt; '/',
+        'label' => 'Page 5',
+        'uri' => '/',
         // this page should not be visible
-        'visible' =&gt; false,
-        'pages' =&gt; array(
+        'visible' => false,
+        'pages' => array(
             array(
-                'label' =&gt; 'Page 5.1',
-                'uri' =&gt; '#',
-                'pages' =&gt; array(
+                'label' => 'Page 5.1',
+                'uri' => '#',
+                'pages' => array(
                     array(
-                        'label' =&gt; 'Page 5.1.1',
-                        'uri' =&gt; '#',
-                        'pages' =&gt; array(
+                        'label' => 'Page 5.1.1',
+                        'uri' => '#',
+                        'pages' => array(
                             array(
-                                'label' =&gt; 'Page 5.1.2',
-                                'uri' =&gt; '#',
+                                'label' => 'Page 5.1.2',
+                                'uri' => '#',
                                 // let's say this page is active
-                                'active' =&gt; true
+                                'active' => true
                             )
                         )
                     )
@@ -158,250 +156,250 @@ $container = new Zend_Navigation(array(
         )
     ),
     array(
-        'label' =&gt; 'ACL page 1 (guest)',
-        'uri' =&gt; '#acl-guest',
-        'resource' =&gt; 'nav-guest',
-        'pages' =&gt; array(
+        'label' => 'ACL page 1 (guest)',
+        'uri' => '#acl-guest',
+        'resource' => 'nav-guest',
+        'pages' => array(
             array(
-                'label' =&gt; 'ACL page 1.1 (foo)',
-                'uri' =&gt; '#acl-foo',
-                'resource' =&gt; 'nav-foo'
+                'label' => 'ACL page 1.1 (foo)',
+                'uri' => '#acl-foo',
+                'resource' => 'nav-foo'
             ),
             array(
-                'label' =&gt; 'ACL page 1.2 (bar)',
-                'uri' =&gt; '#acl-bar',
-                'resource' =&gt; 'nav-bar'
+                'label' => 'ACL page 1.2 (bar)',
+                'uri' => '#acl-bar',
+                'resource' => 'nav-bar'
             ),
             array(
-                'label' =&gt; 'ACL page 1.3 (baz)',
-                'uri' =&gt; '#acl-baz',
-                'resource' =&gt; 'nav-baz'
+                'label' => 'ACL page 1.3 (baz)',
+                'uri' => '#acl-baz',
+                'resource' => 'nav-baz'
             ),
             array(
-                'label' =&gt; 'ACL page 1.4 (bat)',
-                'uri' =&gt; '#acl-bat',
-                'resource' =&gt; 'nav-bat'
+                'label' => 'ACL page 1.4 (bat)',
+                'uri' => '#acl-bat',
+                'resource' => 'nav-bat'
             )
         )
     ),
     array(
-        'label' =&gt; 'ACL page 2 (member)',
-        'uri' =&gt; '#acl-member',
-        'resource' =&gt; 'nav-member'
+        'label' => 'ACL page 2 (member)',
+        'uri' => '#acl-member',
+        'resource' => 'nav-member'
     ),
     array(
-        'label' =&gt; 'ACL page 3 (admin',
-        'uri' =&gt; '#acl-admin',
-        'resource' =&gt; 'nav-admin',
-        'pages' =&gt; array(
+        'label' => 'ACL page 3 (admin',
+        'uri' => '#acl-admin',
+        'resource' => 'nav-admin',
+        'pages' => array(
             array(
-                'label' =&gt; 'ACL page 3.1 (nothing)',
-                'uri' =&gt; '#acl-nada'
+                'label' => 'ACL page 3.1 (nothing)',
+                'uri' => '#acl-nada'
             )
         )
     ),
     array(
-        'label' =&gt; 'Zend Framework',
-        'route' =&gt; 'zf-route'
+        'label' => 'Zend Framework',
+        'route' => 'zf-route'
     )
 ));
-</programlisting>
+]]></programlisting>
         </example>
 
         <example xml:id="zend.navigation.containers.creating.example.config"><info><title>Creating a container using a config object</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 /* CONTENTS OF /path/to/navigation.xml:
-&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;config&gt;
-    &lt;nav&gt;
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <nav>
 
-        &lt;zend&gt;
-            &lt;label&gt;Zend&lt;/label&gt;
-            &lt;uri&gt;http://www.zend-project.com/&lt;/uri&gt;
-            &lt;order&gt;100&lt;/order&gt;
-        &lt;/zend&gt;
+        <zend>
+            <label>Zend</label>
+            <uri>http://www.zend-project.com/</uri>
+            <order>100</order>
+        </zend>
 
-        &lt;page1&gt;
-            &lt;label&gt;Page 1&lt;/label&gt;
-            &lt;uri&gt;page1&lt;/uri&gt;
-            &lt;pages&gt;
+        <page1>
+            <label>Page 1</label>
+            <uri>page1</uri>
+            <pages>
 
-                &lt;page1_1&gt;
-                    &lt;label&gt;Page 1.1&lt;/label&gt;
-                    &lt;uri&gt;page1/page1_1&lt;/uri&gt;
-                &lt;/page1_1&gt;
+                <page1_1>
+                    <label>Page 1.1</label>
+                    <uri>page1/page1_1</uri>
+                </page1_1>
 
-            &lt;/pages&gt;
-        &lt;/page1&gt;
+            </pages>
+        </page1>
 
-        &lt;page2&gt;
-            &lt;label&gt;Page 2&lt;/label&gt;
-            &lt;uri&gt;page2&lt;/uri&gt;
-            &lt;pages&gt;
+        <page2>
+            <label>Page 2</label>
+            <uri>page2</uri>
+            <pages>
 
-                &lt;page2_1&gt;
-                    &lt;label&gt;Page 2.1&lt;/label&gt;
-                    &lt;uri&gt;page2/page2_1&lt;/uri&gt;
-                &lt;/page2_1&gt;
+                <page2_1>
+                    <label>Page 2.1</label>
+                    <uri>page2/page2_1</uri>
+                </page2_1>
 
-                &lt;page2_2&gt;
-                    &lt;label&gt;Page 2.2&lt;/label&gt;
-                    &lt;uri&gt;page2/page2_2&lt;/uri&gt;
-                    &lt;pages&gt;
+                <page2_2>
+                    <label>Page 2.2</label>
+                    <uri>page2/page2_2</uri>
+                    <pages>
 
-                        &lt;page2_2_1&gt;
-                            &lt;label&gt;Page 2.2.1&lt;/label&gt;
-                            &lt;uri&gt;page2/page2_2/page2_2_1&lt;/uri&gt;
-                        &lt;/page2_2_1&gt;
+                        <page2_2_1>
+                            <label>Page 2.2.1</label>
+                            <uri>page2/page2_2/page2_2_1</uri>
+                        </page2_2_1>
 
-                        &lt;page2_2_2&gt;
-                            &lt;label&gt;Page 2.2.2&lt;/label&gt;
-                            &lt;uri&gt;page2/page2_2/page2_2_2&lt;/uri&gt;
-                            &lt;active&gt;1&lt;/active&gt;
-                        &lt;/page2_2_2&gt;
+                        <page2_2_2>
+                            <label>Page 2.2.2</label>
+                            <uri>page2/page2_2/page2_2_2</uri>
+                            <active>1</active>
+                        </page2_2_2>
 
-                    &lt;/pages&gt;
-                &lt;/page2_2&gt;
+                    </pages>
+                </page2_2>
 
-                &lt;page2_3&gt;
-                    &lt;label&gt;Page 2.3&lt;/label&gt;
-                    &lt;uri&gt;page2/page2_3&lt;/uri&gt;
-                    &lt;pages&gt;
+                <page2_3>
+                    <label>Page 2.3</label>
+                    <uri>page2/page2_3</uri>
+                    <pages>
 
-                        &lt;page2_3_1&gt;
-                            &lt;label&gt;Page 2.3.1&lt;/label&gt;
-                            &lt;uri&gt;page2/page2_3/page2_3_1&lt;/uri&gt;
-                        &lt;/page2_3_1&gt;
+                        <page2_3_1>
+                            <label>Page 2.3.1</label>
+                            <uri>page2/page2_3/page2_3_1</uri>
+                        </page2_3_1>
 
-                        &lt;page2_3_2&gt;
-                            &lt;label&gt;Page 2.3.2&lt;/label&gt;
-                            &lt;uri&gt;page2/page2_3/page2_3_2&lt;/uri&gt;
-                            &lt;visible&gt;0&lt;/visible&gt;
-                            &lt;pages&gt;
+                        <page2_3_2>
+                            <label>Page 2.3.2</label>
+                            <uri>page2/page2_3/page2_3_2</uri>
+                            <visible>0</visible>
+                            <pages>
 
-                                    &lt;page2_3_2_1&gt;
-                                        &lt;label&gt;Page 2.3.2.1&lt;/label&gt;
-                                        &lt;uri&gt;page2/page2_3/page2_3_2/1&lt;/uri&gt;
-                                        &lt;active&gt;1&lt;/active&gt;
-                                    &lt;/page2_3_2_1&gt;
+                                    <page2_3_2_1>
+                                        <label>Page 2.3.2.1</label>
+                                        <uri>page2/page2_3/page2_3_2/1</uri>
+                                        <active>1</active>
+                                    </page2_3_2_1>
 
-                                    &lt;page2_3_2_2&gt;
-                                        &lt;label&gt;Page 2.3.2.2&lt;/label&gt;
-                                        &lt;uri&gt;page2/page2_3/page2_3_2/2&lt;/uri&gt;
-                                        &lt;active&gt;1&lt;/active&gt;
+                                    <page2_3_2_2>
+                                        <label>Page 2.3.2.2</label>
+                                        <uri>page2/page2_3/page2_3_2/2</uri>
+                                        <active>1</active>
 
-                                        &lt;pages&gt;
-                                            &lt;page_2_3_2_2_1&gt;
-                                                &lt;label&gt;Ignore&lt;/label&gt;
-                                                &lt;uri&gt;#&lt;/uri&gt;
-                                                &lt;active&gt;1&lt;/active&gt;
-                                            &lt;/page_2_3_2_2_1&gt;
-                                        &lt;/pages&gt;
-                                    &lt;/page2_3_2_2&gt;
+                                        <pages>
+                                            <page_2_3_2_2_1>
+                                                <label>Ignore</label>
+                                                <uri>#</uri>
+                                                <active>1</active>
+                                            </page_2_3_2_2_1>
+                                        </pages>
+                                    </page2_3_2_2>
 
-                            &lt;/pages&gt;
-                        &lt;/page2_3_2&gt;
+                            </pages>
+                        </page2_3_2>
 
-                        &lt;page2_3_3&gt;
-                            &lt;label&gt;Page 2.3.3&lt;/label&gt;
-                            &lt;uri&gt;page2/page2_3/page2_3_3&lt;/uri&gt;
-                            &lt;resource&gt;admin&lt;/resource&gt;
-                            &lt;pages&gt;
+                        <page2_3_3>
+                            <label>Page 2.3.3</label>
+                            <uri>page2/page2_3/page2_3_3</uri>
+                            <resource>admin</resource>
+                            <pages>
 
-                                    &lt;page2_3_3_1&gt;
-                                        &lt;label&gt;Page 2.3.3.1&lt;/label&gt;
-                                        &lt;uri&gt;page2/page2_3/page2_3_3/1&lt;/uri&gt;
-                                        &lt;active&gt;1&lt;/active&gt;
-                                    &lt;/page2_3_3_1&gt;
+                                    <page2_3_3_1>
+                                        <label>Page 2.3.3.1</label>
+                                        <uri>page2/page2_3/page2_3_3/1</uri>
+                                        <active>1</active>
+                                    </page2_3_3_1>
 
-                                    &lt;page2_3_3_2&gt;
-                                        &lt;label&gt;Page 2.3.3.2&lt;/label&gt;
-                                        &lt;uri&gt;page2/page2_3/page2_3_3/2&lt;/uri&gt;
-                                        &lt;resource&gt;guest&lt;/resource&gt;
-                                        &lt;active&gt;1&lt;/active&gt;
-                                    &lt;/page2_3_3_2&gt;
+                                    <page2_3_3_2>
+                                        <label>Page 2.3.3.2</label>
+                                        <uri>page2/page2_3/page2_3_3/2</uri>
+                                        <resource>guest</resource>
+                                        <active>1</active>
+                                    </page2_3_3_2>
 
-                            &lt;/pages&gt;
-                        &lt;/page2_3_3&gt;
+                            </pages>
+                        </page2_3_3>
 
-                    &lt;/pages&gt;
-                &lt;/page2_3&gt;
+                    </pages>
+                </page2_3>
 
-            &lt;/pages&gt;
-        &lt;/page2&gt;
+            </pages>
+        </page2>
 
-        &lt;page3&gt;
-            &lt;label&gt;Page 3&lt;/label&gt;
-            &lt;uri&gt;page3&lt;/uri&gt;
-            &lt;pages&gt;
+        <page3>
+            <label>Page 3</label>
+            <uri>page3</uri>
+            <pages>
 
-                &lt;page3_1&gt;
-                    &lt;label&gt;Page 3.1&lt;/label&gt;
-                    &lt;uri&gt;page3/page3_1&lt;/uri&gt;
-                    &lt;resource&gt;guest&lt;/resource&gt;
-                &lt;/page3_1&gt;
+                <page3_1>
+                    <label>Page 3.1</label>
+                    <uri>page3/page3_1</uri>
+                    <resource>guest</resource>
+                </page3_1>
 
-                &lt;page3_2&gt;
-                    &lt;label&gt;Page 3.2&lt;/label&gt;
-                    &lt;uri&gt;page3/page3_2&lt;/uri&gt;
-                    &lt;resource&gt;member&lt;/resource&gt;
-                    &lt;pages&gt;
+                <page3_2>
+                    <label>Page 3.2</label>
+                    <uri>page3/page3_2</uri>
+                    <resource>member</resource>
+                    <pages>
 
-                        &lt;page3_2_1&gt;
-                            &lt;label&gt;Page 3.2.1&lt;/label&gt;
-                            &lt;uri&gt;page3/page3_2/page3_2_1&lt;/uri&gt;
-                        &lt;/page3_2_1&gt;
+                        <page3_2_1>
+                            <label>Page 3.2.1</label>
+                            <uri>page3/page3_2/page3_2_1</uri>
+                        </page3_2_1>
 
-                        &lt;page3_2_2&gt;
-                            &lt;label&gt;Page 3.2.2&lt;/label&gt;
-                            &lt;uri&gt;page3/page3_2/page3_2_2&lt;/uri&gt;
-                            &lt;resource&gt;admin&lt;/resource&gt;
-                        &lt;/page3_2_2&gt;
+                        <page3_2_2>
+                            <label>Page 3.2.2</label>
+                            <uri>page3/page3_2/page3_2_2</uri>
+                            <resource>admin</resource>
+                        </page3_2_2>
 
-                    &lt;/pages&gt;
-                &lt;/page3_2&gt;
+                    </pages>
+                </page3_2>
 
-                &lt;page3_3&gt;
-                    &lt;label&gt;Page 3.3&lt;/label&gt;
-                    &lt;uri&gt;page3/page3_3&lt;/uri&gt;
-                    &lt;resource&gt;special&lt;/resource&gt;
-                    &lt;pages&gt;
+                <page3_3>
+                    <label>Page 3.3</label>
+                    <uri>page3/page3_3</uri>
+                    <resource>special</resource>
+                    <pages>
 
-                        &lt;page3_3_1&gt;
-                            &lt;label&gt;Page 3.3.1&lt;/label&gt;
-                            &lt;uri&gt;page3/page3_3/page3_3_1&lt;/uri&gt;
-                            &lt;visible&gt;0&lt;/visible&gt;
-                        &lt;/page3_3_1&gt;
+                        <page3_3_1>
+                            <label>Page 3.3.1</label>
+                            <uri>page3/page3_3/page3_3_1</uri>
+                            <visible>0</visible>
+                        </page3_3_1>
 
-                        &lt;page3_3_2&gt;
-                            &lt;label&gt;Page 3.3.2&lt;/label&gt;
-                            &lt;uri&gt;page3/page3_3/page3_3_2&lt;/uri&gt;
-                            &lt;resource&gt;admin&lt;/resource&gt;
-                        &lt;/page3_3_2&gt;
+                        <page3_3_2>
+                            <label>Page 3.3.2</label>
+                            <uri>page3/page3_3/page3_3_2</uri>
+                            <resource>admin</resource>
+                        </page3_3_2>
 
-                    &lt;/pages&gt;
-                &lt;/page3_3&gt;
+                    </pages>
+                </page3_3>
 
-            &lt;/pages&gt;
-        &lt;/page3&gt;
+            </pages>
+        </page3>
 
-        &lt;home&gt;
-            &lt;label&gt;Home&lt;/label&gt;
-            &lt;order&gt;-100&lt;/order&gt;
-            &lt;module&gt;default&lt;/module&gt;
-            &lt;controller&gt;index&lt;/controller&gt;
-            &lt;action&gt;index&lt;/action&gt;
-        &lt;/home&gt;
+        <home>
+            <label>Home</label>
+            <order>-100</order>
+            <module>default</module>
+            <controller>index</controller>
+            <action>index</action>
+        </home>
 
-    &lt;/nav&gt;
-&lt;/config&gt;
+    </nav>
+</config>
  */
 
 $config = new Zend_Config_Xml('/path/to/navigation.xml', 'nav');
 $container = new Zend_Navigation($config);
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -417,42 +415,42 @@ $container = new Zend_Navigation($config);
         <example xml:id="zend.navigation.containers.adding.example"><info><title>Adding pages to a container</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // create container
 $container = new Zend_Navigation();
 
 // add page by giving a page instance
-$container-&gt;addPage(Zend_Navigation_Page::factory(array(
-    'uri' =&gt; 'http://www.example.com/'
+$container->addPage(Zend_Navigation_Page::factory(array(
+    'uri' => 'http://www.example.com/'
 )))
 
 // add page by giving an array
-$container-&gt;addPage(array(
-    'uri' =&gt; 'http://www.example.com/'
+$container->addPage(array(
+    'uri' => 'http://www.example.com/'
 )))
 
 // add page by giving a config object
-$container-&gt;addPage(new Zend_Config(array(
-    'uri' =&gt; 'http://www.example.com/'
+$container->addPage(new Zend_Config(array(
+    'uri' => 'http://www.example.com/'
 )))
 
 $pages = array(
     array(
-        'label'  =&gt; 'Save'
-        'action' =&gt; 'save',
+        'label'  => 'Save'
+        'action' => 'save',
     ),
     array(
-        'label' =&gt;  'Delete',
-        'action' =&gt; 'delete'
+        'label' =>  'Delete',
+        'action' => 'delete'
     )
 );
 
 // add two pages
-$container-&gt;addPages($pages);
+$container->addPages($pages);
 
 // remove existing pages and add the given pages
-$container-&gt;setPages($pages);
-</programlisting>
+$container->setPages($pages);
+]]></programlisting>
         </example>
     </section>
 
@@ -470,36 +468,36 @@ $container-&gt;setPages($pages);
         <example xml:id="zend.navigation.containers.removing.example"><info><title>Removing pages from a container</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $container = new Zend_Navigation(array(
     array(
-        'label'  =&gt; 'Page 1',
-        'action' =&gt; 'page1'
+        'label'  => 'Page 1',
+        'action' => 'page1'
     ),
     array(
-        'label'  =&gt; 'Page 2',
-        'action' =&gt; 'page2',
-        'order'  =&gt; 200
+        'label'  => 'Page 2',
+        'action' => 'page2',
+        'order'  => 200
     ),
     array(
-        'label'  =&gt; 'Page 3',
-        'action' =&gt; 'page3'
+        'label'  => 'Page 3',
+        'action' => 'page3'
     )
 ));
 
 // remove page by implicit page order
-$container-&gt;removePage(0);      // removes Page 1
+$container->removePage(0);      // removes Page 1
 
 // remove page by instance
-$page3 = $container-&gt;findOneByAction('Page 3');
-$container-&gt;removePage($page3); // removes Page 3
+$page3 = $container->findOneByAction('Page 3');
+$container->removePage($page3); // removes Page 3
 
 // remove page by explicit page order
-$container-&gt;removePage(200);    // removes Page 2
+$container->removePage(200);    // removes Page 2
 
 // remove all pages
-$container-&gt;removePages();      // removes all pages
-</programlisting>
+$container->removePages();      // removes all pages
+]]></programlisting>
         </example>
     </section>
 
@@ -536,86 +534,86 @@ $container-&gt;removePages();      // removes all pages
         <example xml:id="zend.navigation.containers.finding.example"><info><title>Finding pages in a container</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $container = new Zend_Navigation(array(
     array(
-        'label' =&gt; 'Page 1',
-        'uri'   =&gt; 'page-1',
-        'foo'   =&gt; 'bar',
-        'pages' =&gt; array(
+        'label' => 'Page 1',
+        'uri'   => 'page-1',
+        'foo'   => 'bar',
+        'pages' => array(
             array(
-                'label' =&gt; 'Page 1.1',
-                'uri'   =&gt; 'page-1.1',
-                'foo'   =&gt; 'bar',
+                'label' => 'Page 1.1',
+                'uri'   => 'page-1.1',
+                'foo'   => 'bar',
             ),
             array(
-                'label' =&gt; 'Page 1.2',
-                'uri'   =&gt; 'page-1.2',
-                'class' =&gt; 'my-class',
+                'label' => 'Page 1.2',
+                'uri'   => 'page-1.2',
+                'class' => 'my-class',
             ),
             array(
-                'type'   =&gt; 'uri',
-                'label'  =&gt; 'Page 1.3',
-                'uri'    =&gt; 'page-1.3',
-                'action' =&gt; 'about'
+                'type'   => 'uri',
+                'label'  => 'Page 1.3',
+                'uri'    => 'page-1.3',
+                'action' => 'about'
             )
         )
     ),
     array(
-        'label'      =&gt; 'Page 2',
-        'id'         =&gt; 'page_2_and_3',
-        'class'      =&gt; 'my-class',
-        'module'     =&gt; 'page2',
-        'controller' =&gt; 'index',
-        'action'     =&gt; 'page1'
+        'label'      => 'Page 2',
+        'id'         => 'page_2_and_3',
+        'class'      => 'my-class',
+        'module'     => 'page2',
+        'controller' => 'index',
+        'action'     => 'page1'
     ),
     array(
-        'label'      =&gt; 'Page 3',
-        'id'         =&gt; 'page_2_and_3',
-        'module'     =&gt; 'page3',
-        'controller' =&gt; 'index'
+        'label'      => 'Page 3',
+        'id'         => 'page_2_and_3',
+        'module'     => 'page3',
+        'controller' => 'index'
     )
 ));
 
 // The 'id' is not required to be unique, but be aware that
 // having two pages with the same id will render the same id attribute
 // in menus and breadcrumbs.
-$found = $container-&gt;findBy('id',
+$found = $container->findBy('id',
                             'page_2_and_3');      // returns Page 2
-$found = $container-&gt;findOneBy('id',
+$found = $container->findOneBy('id',
                                'page_2_and_3');   // returns Page 2
-$found = $container-&gt;findBy('id',
+$found = $container->findBy('id',
                             'page_2_and_3',
                             true);                // returns Page 2 and Page 3
-$found = $container-&gt;findById('page_2_and_3');    // returns Page 2
-$found = $container-&gt;findOneById('page_2_and_3'); // returns Page 2
-$found = $container-&gt;findAllById('page_2_and_3'); // returns Page 2 and Page 3
+$found = $container->findById('page_2_and_3');    // returns Page 2
+$found = $container->findOneById('page_2_and_3'); // returns Page 2
+$found = $container->findAllById('page_2_and_3'); // returns Page 2 and Page 3
 
 // Find all matching CSS class my-class
-$found = $container-&gt;findAllBy('class',
+$found = $container->findAllBy('class',
                                'my-class');       // returns Page 1.2 and Page 2
-$found = $container-&gt;findAllByClass('my-class');  // returns Page 1.2 and Page 2
+$found = $container->findAllByClass('my-class');  // returns Page 1.2 and Page 2
 
 // Find first matching CSS class my-class
-$found = $container-&gt;findOneByClass('my-class');  // returns Page 1.2
+$found = $container->findOneByClass('my-class');  // returns Page 1.2
 
 // Find all matching CSS class non-existant
-$found = $container-&gt;findAllByClass('non-existant'); // returns array()
+$found = $container->findAllByClass('non-existant'); // returns array()
 
 // Find first matching CSS class non-existant
-$found = $container-&gt;findOneByClass('non-existant'); // returns null
+$found = $container->findOneByClass('non-existant'); // returns null
 
 // Find all pages with custom property 'foo' = 'bar'
-$found = $container-&gt;findAllBy('foo', 'bar'); // returns Page 1 and Page 1.1
+$found = $container->findAllBy('foo', 'bar'); // returns Page 1 and Page 1.1
 
 // To achieve the same magically, 'foo' must be in lowercase.
 // This is because 'foo' is a custom property, and thus the
 // property name is not normalized to 'Foo'
-$found = $container-&gt;findAllByfoo('bar');
+$found = $container->findAllByfoo('bar');
 
 // Find all with controller = 'index'
-$found = $container-&gt;findAllByController('index'); // returns Page 2 and Page 3
-</programlisting>
+$found = $container->findAllByController('index'); // returns Page 2 and Page 3
+]]></programlisting>
         </example>
     </section>
 
@@ -633,39 +631,39 @@ $found = $container-&gt;findAllByController('index'); // returns Page 2 and Page
         <example xml:id="zend.navigation.containers.iterating.example"><info><title>Iterating a container</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 /*
  * Create a container from an array
  */
 $container = new Zend_Navigation(array(
     array(
-        'label' =&gt; 'Page 1',
-        'uri'   =&gt; '#'
+        'label' => 'Page 1',
+        'uri'   => '#'
     ),
     array(
-        'label' =&gt; 'Page 2',
-        'uri'   =&gt; '#',
-        'pages' =&gt; array(
+        'label' => 'Page 2',
+        'uri'   => '#',
+        'pages' => array(
             array(
-                'label' =&gt; 'Page 2.1',
-                'uri'   =&gt; '#'
+                'label' => 'Page 2.1',
+                'uri'   => '#'
             ),
             array(
-                'label' =&gt; 'Page 2.2',
-                'uri'   =&gt; '#'
+                'label' => 'Page 2.2',
+                'uri'   => '#'
             )
         )
     )
     array(
-        'label' =&gt; 'Page 3',
-        'uri'   =&gt; '#'
+        'label' => 'Page 3',
+        'uri'   => '#'
     )
 ));
 
 // Iterate flat using regular foreach:
 // Output: Page 1, Page 2, Page 3
 foreach ($container as $page) {
-    echo $page-&gt;label;
+    echo $page->label;
 }
 
 // Iterate recursively using RecursiveIteratorIterator
@@ -674,9 +672,9 @@ $it = new RecursiveIteratorIterator(
 
 // Output: Page 1, Page 2, Page 2.1, Page 2.2, Page 3
 foreach ($it as $page) {
-    echo $page-&gt;label;
+    echo $page->label;
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -699,116 +697,116 @@ foreach ($it as $page) {
         <example xml:id="zend.navigation.containers.other.example.toarray"><info><title>Converting a container to an array</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $container = new Zend_Navigation(array(
     array(
-        'label' =&gt; 'Page 1',
-        'uri'   =&gt; '#'
+        'label' => 'Page 1',
+        'uri'   => '#'
     ),
     array(
-        'label' =&gt; 'Page 2',
-        'uri'   =&gt; '#',
-        'pages' =&gt; array(
+        'label' => 'Page 2',
+        'uri'   => '#',
+        'pages' => array(
             array(
-                'label' =&gt; 'Page 2.1',
-                'uri'   =&gt; '#'
+                'label' => 'Page 2.1',
+                'uri'   => '#'
             ),
             array(
-                'label' =&gt; 'Page 2.2',
-               'uri'   =&gt; '#'
+                'label' => 'Page 2.2',
+               'uri'   => '#'
             )
         )
     )
 ));
 
-var_dump($container-&gt;toArray());
+var_dump($container->toArray());
 
 /* Output:
 array(2) {
-  [0]=&gt; array(15) {
-    ["label"]=&gt; string(6) "Page 1"
-    ["id"]=&gt; NULL
-    ["class"]=&gt; NULL
-    ["title"]=&gt; NULL
-    ["target"]=&gt; NULL
-    ["rel"]=&gt; array(0) {
+  [0]=> array(15) {
+    ["label"]=> string(6) "Page 1"
+    ["id"]=> NULL
+    ["class"]=> NULL
+    ["title"]=> NULL
+    ["target"]=> NULL
+    ["rel"]=> array(0) {
     }
-    ["rev"]=&gt; array(0) {
+    ["rev"]=> array(0) {
     }
-    ["order"]=&gt; NULL
-    ["resource"]=&gt; NULL
-    ["privilege"]=&gt; NULL
-    ["active"]=&gt; bool(false)
-    ["visible"]=&gt; bool(true)
-    ["type"]=&gt; string(23) "Zend_Navigation_Page_Uri"
-    ["pages"]=&gt; array(0) {
+    ["order"]=> NULL
+    ["resource"]=> NULL
+    ["privilege"]=> NULL
+    ["active"]=> bool(false)
+    ["visible"]=> bool(true)
+    ["type"]=> string(23) "Zend_Navigation_Page_Uri"
+    ["pages"]=> array(0) {
     }
-    ["uri"]=&gt; string(1) "#"
+    ["uri"]=> string(1) "#"
   }
-  [1]=&gt; array(15) {
-    ["label"]=&gt; string(6) "Page 2"
-    ["id"]=&gt; NULL
-    ["class"]=&gt; NULL
-    ["title"]=&gt; NULL
-    ["target"]=&gt; NULL
-    ["rel"]=&gt; array(0) {
+  [1]=> array(15) {
+    ["label"]=> string(6) "Page 2"
+    ["id"]=> NULL
+    ["class"]=> NULL
+    ["title"]=> NULL
+    ["target"]=> NULL
+    ["rel"]=> array(0) {
     }
-    ["rev"]=&gt; array(0) {
+    ["rev"]=> array(0) {
     }
-    ["order"]=&gt; NULL
-    ["resource"]=&gt; NULL
-    ["privilege"]=&gt; NULL
-    ["active"]=&gt; bool(false)
-    ["visible"]=&gt; bool(true)
-    ["type"]=&gt; string(23) "Zend_Navigation_Page_Uri"
-    ["pages"]=&gt; array(2) {
-      [0]=&gt; array(15) {
-        ["label"]=&gt; string(8) "Page 2.1"
-        ["id"]=&gt; NULL
-        ["class"]=&gt; NULL
-        ["title"]=&gt; NULL
-        ["target"]=&gt; NULL
-        ["rel"]=&gt; array(0) {
+    ["order"]=> NULL
+    ["resource"]=> NULL
+    ["privilege"]=> NULL
+    ["active"]=> bool(false)
+    ["visible"]=> bool(true)
+    ["type"]=> string(23) "Zend_Navigation_Page_Uri"
+    ["pages"]=> array(2) {
+      [0]=> array(15) {
+        ["label"]=> string(8) "Page 2.1"
+        ["id"]=> NULL
+        ["class"]=> NULL
+        ["title"]=> NULL
+        ["target"]=> NULL
+        ["rel"]=> array(0) {
         }
-        ["rev"]=&gt; array(0) {
+        ["rev"]=> array(0) {
         }
-        ["order"]=&gt; NULL
-        ["resource"]=&gt; NULL
-        ["privilege"]=&gt; NULL
-        ["active"]=&gt; bool(false)
-        ["visible"]=&gt; bool(true)
-        ["type"]=&gt; string(23) "Zend_Navigation_Page_Uri"
-        ["pages"]=&gt; array(0) {
+        ["order"]=> NULL
+        ["resource"]=> NULL
+        ["privilege"]=> NULL
+        ["active"]=> bool(false)
+        ["visible"]=> bool(true)
+        ["type"]=> string(23) "Zend_Navigation_Page_Uri"
+        ["pages"]=> array(0) {
         }
-        ["uri"]=&gt; string(1) "#"
+        ["uri"]=> string(1) "#"
       }
-      [1]=&gt;
+      [1]=>
       array(15) {
-        ["label"]=&gt; string(8) "Page 2.2"
-        ["id"]=&gt; NULL
-        ["class"]=&gt; NULL
-        ["title"]=&gt; NULL
-        ["target"]=&gt; NULL
-        ["rel"]=&gt; array(0) {
+        ["label"]=> string(8) "Page 2.2"
+        ["id"]=> NULL
+        ["class"]=> NULL
+        ["title"]=> NULL
+        ["target"]=> NULL
+        ["rel"]=> array(0) {
         }
-        ["rev"]=&gt; array(0) {
+        ["rev"]=> array(0) {
         }
-        ["order"]=&gt; NULL
-        ["resource"]=&gt; NULL
-        ["privilege"]=&gt; NULL
-        ["active"]=&gt; bool(false)
-        ["visible"]=&gt; bool(true)
-        ["type"]=&gt; string(23) "Zend_Navigation_Page_Uri"
-        ["pages"]=&gt; array(0) {
+        ["order"]=> NULL
+        ["resource"]=> NULL
+        ["privilege"]=> NULL
+        ["active"]=> bool(false)
+        ["visible"]=> bool(true)
+        ["type"]=> string(23) "Zend_Navigation_Page_Uri"
+        ["pages"]=> array(0) {
         }
-        ["uri"]=&gt; string(1) "#"
+        ["uri"]=> string(1) "#"
       }
     }
-    ["uri"]=&gt; string(1) "#"
+    ["uri"]=> string(1) "#"
   }
 }
 */
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 </section>

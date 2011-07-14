@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.placeholder"><info><title>Placeholder Helper</title></info>
     
 
@@ -22,14 +20,14 @@
             either manipulate or simply echo out.
         </para>
 
-        <programlisting language="php">
-&lt;?php $this-&gt;placeholder('foo')-&gt;set("Some text for later") ?&gt;
+        <programlisting language="php"><![CDATA[
+<?php $this->placeholder('foo')->set("Some text for later") ?>
 
-&lt;?php
-    echo $this-&gt;placeholder('foo');
+<?php
+    echo $this->placeholder('foo');
     // outputs "Some text for later"
-?&gt;
-</programlisting>
+?>
+]]></programlisting>
     </example>
 
     <example xml:id="zend.view.helpers.initial.placeholder.aggregation"><info><title>Using Placeholders to Aggregate Content</title></info>
@@ -85,25 +83,25 @@
             </listitem>
         </itemizedlist>
 
-        <programlisting language="php">
-&lt;!-- first view script --&gt;
-&lt;?php $this-&gt;placeholder('foo')-&gt;exchangeArray($this-&gt;data) ?&gt;
-</programlisting>
+        <programlisting language="php"><![CDATA[
+<!-- first view script -->
+<?php $this->placeholder('foo')->exchangeArray($this->data) ?>
+]]></programlisting>
 
-        <programlisting language="php">
-&lt;!-- later view script --&gt;
-&lt;?php
-$this-&gt;placeholder('foo')-&gt;setPrefix("&lt;ul&gt;\n    &lt;li&gt;")
-                         -&gt;setSeparator("&lt;/li&gt;&lt;li&gt;\n")
-                         -&gt;setIndent(4)
-                         -&gt;setPostfix("&lt;/li&gt;&lt;/ul&gt;\n");
-?&gt;
+        <programlisting language="php"><![CDATA[
+<!-- later view script -->
+<?php
+$this->placeholder('foo')->setPrefix("<ul>\n    <li>")
+                         ->setSeparator("</li><li>\n")
+                         ->setIndent(4)
+                         ->setPostfix("</li></ul>\n");
+?>
 
-&lt;?php
-    echo $this-&gt;placeholder('foo');
+<?php
+    echo $this->placeholder('foo');
     // outputs as unordered list with pretty indentation
-?&gt;
-</programlisting>
+?>
+]]></programlisting>
 
         <para>
             Because the <classname>Placeholder</classname> container objects extend
@@ -113,15 +111,15 @@ $this-&gt;placeholder('foo')-&gt;setPrefix("&lt;ul&gt;\n    &lt;li&gt;")
             array keys.
         </para>
 
-        <programlisting language="php">
-&lt;?php $this-&gt;placeholder('foo')-&gt;bar = $this-&gt;data ?&gt;
-&lt;?php echo $this-&gt;placeholder('foo')-&gt;bar ?&gt;
+        <programlisting language="php"><![CDATA[
+<?php $this->placeholder('foo')->bar = $this->data ?>
+<?php echo $this->placeholder('foo')->bar ?>
 
-&lt;?php
-$foo = $this-&gt;placeholder('foo');
+<?php
+$foo = $this->placeholder('foo');
 echo $foo['bar'];
-?&gt;
-</programlisting>
+?>
+]]></programlisting>
     </example>
 
     <example xml:id="zend.view.helpers.initial.placeholder.capture"><info><title>Using Placeholders to Capture Content</title></info>
@@ -175,33 +173,33 @@ echo $foo['bar'];
             </listitem>
         </itemizedlist>
 
-        <programlisting language="php">
-&lt;!-- Default capture: append --&gt;
-&lt;?php $this-&gt;placeholder('foo')-&gt;captureStart();
-foreach ($this-&gt;data as $datum): ?&gt;
-&lt;div class="foo"&gt;
-    &lt;h2&gt;&lt;?php echo $datum-&gt;title ?&gt;&lt;/h2&gt;
-    &lt;p&gt;&lt;?php echo $datum-&gt;content ?&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;?php endforeach; ?&gt;
-&lt;?php $this-&gt;placeholder('foo')-&gt;captureEnd() ?&gt;
+        <programlisting language="php"><![CDATA[
+<!-- Default capture: append -->
+<?php $this->placeholder('foo')->captureStart();
+foreach ($this->data as $datum): ?>
+<div class="foo">
+    <h2><?php echo $datum->title ?></h2>
+    <p><?php echo $datum->content ?></p>
+</div>
+<?php endforeach; ?>
+<?php $this->placeholder('foo')->captureEnd() ?>
 
-&lt;?php echo $this-&gt;placeholder('foo') ?&gt;
-</programlisting>
+<?php echo $this->placeholder('foo') ?>
+]]></programlisting>
 
-        <programlisting language="php">
-&lt;!-- Capture to key --&gt;
-&lt;?php $this-&gt;placeholder('foo')-&gt;captureStart('SET', 'data');
-foreach ($this-&gt;data as $datum): ?&gt;
-&lt;div class="foo"&gt;
-    &lt;h2&gt;&lt;?php echo $datum-&gt;title ?&gt;&lt;/h2&gt;
-    &lt;p&gt;&lt;?php echo $datum-&gt;content ?&gt;&lt;/p&gt;
-&lt;/div&gt;
- &lt;?php endforeach; ?&gt;
-&lt;?php $this-&gt;placeholder('foo')-&gt;captureEnd() ?&gt;
+        <programlisting language="php"><![CDATA[
+<!-- Capture to key -->
+<?php $this->placeholder('foo')->captureStart('SET', 'data');
+foreach ($this->data as $datum): ?>
+<div class="foo">
+    <h2><?php echo $datum->title ?></h2>
+    <p><?php echo $datum->content ?></p>
+</div>
+ <?php endforeach; ?>
+<?php $this->placeholder('foo')->captureEnd() ?>
 
-&lt;?php echo $this-&gt;placeholder('foo')-&gt;data ?&gt;
-</programlisting>
+<?php echo $this->placeholder('foo')->data ?>
+]]></programlisting>
     </example>
 
     <section xml:id="zend.view.helpers.initial.placeholder.implementations"><info><title>Concrete Placeholder Implementations</title></info>

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.adapter"><info><title>Adapters for Zend_Translate</title></info>
     
 
@@ -367,21 +365,21 @@
             example of how a self written adapter class could be implemented:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 try {
     $translate = new Zend_Translate(
         array(
-            'adapter' =&gt; 'Company_Translate_Adapter_MyFormat',
-            'content' =&gt; '/path/to/translate.xx',
-            'locale'  =&gt; 'en',
-            'myoption' =&gt; 'myvalue'
+            'adapter' => 'Company_Translate_Adapter_MyFormat',
+            'content' => '/path/to/translate.xx',
+            'locale'  => 'en',
+            'myoption' => 'myvalue'
         )
     );
 } catch (Exception $e) {
     // File not found, no adapter class...
     // General failure
 }
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.translate.adapter.caching"><info><title>Speedup all Adapters</title></info>
@@ -404,7 +402,7 @@ try {
             <methodname>removeCache()</methodname>.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $cache = Zend_Cache::factory('Core',
                              'File',
                              $frontendOptions,
@@ -412,15 +410,15 @@ $cache = Zend_Cache::factory('Core',
 Zend_Translate::setCache($cache);
 $translate = new Zend_Translate(
     array(
-        'adapter' =&gt; 'gettext',
-        'content' =&gt; '/path/to/translate.mo',
-        'locale'  =&gt; 'en'
+        'adapter' => 'gettext',
+        'content' => '/path/to/translate.mo',
+        'locale'  => 'en'
     )
 );
 
 // to clear the cache somewhere later in your code
 Zend_Translate::clearCache();
-</programlisting>
+]]></programlisting>
 
         <note>
             <para>
@@ -443,7 +441,7 @@ Zend_Translate::clearCache();
             <methodname>clearCache()</methodname> to declare which tag you want to delete.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $cache = Zend_Cache::factory('Core',
                              'File',
                              $frontendOptions,
@@ -451,15 +449,15 @@ $cache = Zend_Cache::factory('Core',
 Zend_Translate::setCache($cache);
 $translate = new Zend_Translate(
     array(
-        'adapter' =&gt; 'gettext',
-        'content' =&gt; '/path/to/translate.mo',
-        'locale'  =&gt; 'en',
-        'tag'     =&gt; 'MyTag'
+        'adapter' => 'gettext',
+        'content' => '/path/to/translate.mo',
+        'locale'  => 'en',
+        'tag'     => 'MyTag'
     )
 );
 
 // somewhere later in your code
 Zend_Translate::clearCache('MyTag');
-</programlisting>
+]]></programlisting>
     </section>
 </section>

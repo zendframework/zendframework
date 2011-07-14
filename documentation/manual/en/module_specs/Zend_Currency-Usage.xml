@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.usage"><info><title>Using Zend_Currency</title></info>
     
 
@@ -22,12 +20,12 @@
                 currency which has to be used.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $currency = new Zend_Currency();
 
 // See the default settings which are depending on the client
 // var_dump($currency);
-</programlisting>
+]]></programlisting>
 
             <para>
                 The created object would now contain the currency "US Dollar" as this is the actual
@@ -63,15 +61,15 @@ $currency = new Zend_Currency();
             manually.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $currency = new Zend_Currency('en_US');
 
 // You can also use the 'locale' option
-// $currency = new Zend_Currency(array('locale' =&gt; 'en_US'));
+// $currency = new Zend_Currency(array('locale' => 'en_US'));
 
 // See the actual settings which are fixed to 'en_US'
 // var_dump($currency);
-</programlisting>
+]]></programlisting>
 
         <para>
             As within our first example the used currency will be "US Dollar". But now we are no
@@ -85,14 +83,14 @@ $currency = new Zend_Currency('en_US');
             instance when you want to use the same locale throughout the application.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // in your bootstrap file
 $locale = new Zend_Locale('de_AT');
 Zend_Registry::set('Zend_Locale', $locale);
 
 // somewhere in your application
 $currency = new Zend_Currency();
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.currency.usage.territory"><info><title>Currency creation based on a country</title></info>
@@ -103,12 +101,12 @@ $currency = new Zend_Currency();
             <classname>Zend_Locale</classname> internally.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $currency = new Zend_Currency('US');
 
 // See the actual settings which are fixed to 'en_US'
 // var_dump($currency);
-</programlisting>
+]]></programlisting>
 
         <note><info><title>Uppercase territories</title></info>
             

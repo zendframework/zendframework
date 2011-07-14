@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.save"><info><title>Save Changes to PDF Documents</title></info>
     
 
@@ -27,20 +25,20 @@
     <example xml:id="zend.pdf.save.example-1"><info><title>Saving PDF Documents</title></info>
         
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 ...
 // Load the PDF document
 $pdf = Zend_Pdf::load($fileName);
 ...
 // Update the PDF document
-$pdf-&gt;save($fileName, true);
+$pdf->save($fileName, true);
 // Save document as a new file
-$pdf-&gt;save($newFileName);
+$pdf->save($newFileName);
 
 // Return the PDF document as a string
-$pdfString = $pdf-&gt;render();
+$pdfString = $pdf->render();
 
 ...
-</programlisting>
+]]></programlisting>
     </example>
 </section>

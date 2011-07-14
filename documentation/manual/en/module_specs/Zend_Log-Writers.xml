@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers"><info><title>Writers</title></info>
     
 
@@ -23,12 +21,12 @@
             stream like <constant>STDERR</constant> (<filename>php://stderr</filename>).
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $writer = new Zend_Log_Writer_Stream('php://output');
 $logger = new Zend_Log($writer);
 
-$logger-&gt;info('Informational message');
-</programlisting>
+$logger->info('Informational message');
+]]></programlisting>
 
         <para>
             To write data to a file, use one of the
@@ -36,12 +34,12 @@ $logger-&gt;info('Informational message');
             URLs</link>:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $writer = new Zend_Log_Writer_Stream('/path/to/logfile');
 $logger = new Zend_Log($writer);
 
-$logger-&gt;info('Informational message');
-</programlisting>
+$logger->info('Informational message');
+]]></programlisting>
 
         <para>
             By default, the stream opens in the append mode ("a").
@@ -54,7 +52,7 @@ $logger-&gt;info('Informational message');
             existing stream resource:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $stream = @fopen('/path/to/logfile', 'a', false);
 if (! $stream) {
     throw new Exception('Failed to open stream');
@@ -63,8 +61,8 @@ if (! $stream) {
 $writer = new Zend_Log_Writer_Stream($stream);
 $logger = new Zend_Log($writer);
 
-$logger-&gt;info('Informational message');
-</programlisting>
+$logger->info('Informational message');
+]]></programlisting>
 
         <para>
             You cannot specify the mode for existing stream resources. Doing so
@@ -83,20 +81,20 @@ $logger-&gt;info('Informational message');
             columns to event data items:
         </para>
 
-        <programlisting language="php">
-$params = array ('host'     =&gt; '127.0.0.1',
-                 'username' =&gt; 'malory',
-                 'password' =&gt; '******',
-                 'dbname'   =&gt; 'camelot');
+        <programlisting language="php"><![CDATA[
+$params = array ('host'     => '127.0.0.1',
+                 'username' => 'malory',
+                 'password' => '******',
+                 'dbname'   => 'camelot');
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 
-$columnMapping = array('lvl' =&gt; 'priority', 'msg' =&gt; 'message');
+$columnMapping = array('lvl' => 'priority', 'msg' => 'message');
 $writer = new Zend_Log_Writer_Db($db, 'log_table_name', $columnMapping);
 
 $logger = new Zend_Log($writer);
 
-$logger-&gt;info('Informational message');
-</programlisting>
+$logger->info('Informational message');
+]]></programlisting>
 
         <para>
             The example above writes a single row of log data to the database table named
@@ -118,13 +116,13 @@ $logger-&gt;info('Informational message');
             to anything. It is useful for disabling logging or stubbing out logging during tests:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $writer = new Zend_Log_Writer_Null;
 $logger = new Zend_Log($writer);
 
 // goes nowhere
-$logger-&gt;info('Informational message');
-</programlisting>
+$logger->info('Informational message');
+]]></programlisting>
     </section>
 
     <section xml:id="zend.log.writers.mock"><info><title>Testing with the Mock</title></info>
@@ -135,22 +133,22 @@ $logger-&gt;info('Informational message');
             the raw data it receives in an array exposed as a public property.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $mock = new Zend_Log_Writer_Mock;
 $logger = new Zend_Log($mock);
 
-$logger-&gt;info('Informational message');
+$logger->info('Informational message');
 
-var_dump($mock-&gt;events[0]);
+var_dump($mock->events[0]);
 
 // Array
 // (
-//    [timestamp] =&gt; 2007-04-06T07:16:37-07:00
-//    [message] =&gt; Informational message
-//    [priority] =&gt; 6
-//    [priorityName] =&gt; INFO
+//    [timestamp] => 2007-04-06T07:16:37-07:00
+//    [message] => Informational message
+//    [priority] => 6
+//    [priorityName] => INFO
 // )
-</programlisting>
+]]></programlisting>
 
         <para>
             To clear the events logged by the mock, simply set
@@ -167,16 +165,16 @@ var_dump($mock-&gt;events[0]);
             method:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $writer1 = new Zend_Log_Writer_Stream('/path/to/first/logfile');
 $writer2 = new Zend_Log_Writer_Stream('/path/to/second/logfile');
 
 $logger = new Zend_Log();
-$logger-&gt;addWriter($writer1);
-$logger-&gt;addWriter($writer2);
+$logger->addWriter($writer1);
+$logger->addWriter($writer2);
 
 // goes to both writers
-$logger-&gt;info('Informational message');
-</programlisting>
+$logger->info('Informational message');
+]]></programlisting>
     </section>
 </section>

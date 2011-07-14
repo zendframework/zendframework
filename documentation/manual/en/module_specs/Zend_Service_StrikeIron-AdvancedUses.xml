@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.strikeiron.advanced-uses"><info><title>Zend_Service_StrikeIron: Advanced Uses</title></info>
     
 
@@ -26,20 +24,20 @@
             instead of the <property>class</property> option:
         </para>
 
-        <programlisting language="php">
-$strikeIron = new Zend_Service_StrikeIron(array('username' =&gt; 'your-username',
-                                                'password' =&gt; 'your-password'));
+        <programlisting language="php"><![CDATA[
+$strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
+                                                'password' => 'your-password'));
 
 // Get a generic client to the Reverse Phone Lookup service
-$phone = $strikeIron-&gt;getService(
-    array('wsdl' =&gt; 'http://ws.strikeiron.com/ReversePhoneLookup?WSDL')
+$phone = $strikeIron->getService(
+    array('wsdl' => 'http://ws.strikeiron.com/ReversePhoneLookup?WSDL')
 );
 
-$result = $phone-&gt;lookup(array('Number' =&gt; '(408) 253-8800'));
-echo $result-&gt;listingName;
+$result = $phone->lookup(array('Number' => '(408) 253-8800'));
+echo $result->listingName;
 
 // Zend Technologies USA Inc
-</programlisting>
+]]></programlisting>
 
         <para>
             Using StrikeIron services from the WSDL will require at least some understanding
@@ -88,22 +86,22 @@ echo $result-&gt;listingName;
             and <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/function.soap-soapclient-getlastresponse.php"><methodname>__getLastRequest()</methodname></link>:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $strikeIron =
-    new Zend_Service_StrikeIron(array('username' =&gt; 'your-username',
-                                      'password' =&gt; 'your-password',
-                                      'options'  =&gt; array('trace' =&gt; true)));
+    new Zend_Service_StrikeIron(array('username' => 'your-username',
+                                      'password' => 'your-password',
+                                      'options'  => array('trace' => true)));
 
-// Get a client for the Sales &amp; Use Tax Basic service
-$taxBasic = $strikeIron-&gt;getService(array('class' =&gt; 'SalesUseTaxBasic'));
+// Get a client for the Sales & Use Tax Basic service
+$taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
 
 // Perform a method call
-$taxBasic-&gt;getTaxRateCanada(array('province' =&gt; 'ontario'));
+$taxBasic->getTaxRateCanada(array('province' => 'ontario'));
 
 // Get SOAPClient instance and view XML
-$soapClient = $taxBasic-&gt;getSoapClient();
-echo $soapClient-&gt;__getLastRequest();
-echo $soapClient-&gt;__getLastResponse();
-</programlisting>
+$soapClient = $taxBasic->getSoapClient();
+echo $soapClient->__getLastRequest();
+echo $soapClient->__getLastResponse();
+]]></programlisting>
     </section>
 </section>

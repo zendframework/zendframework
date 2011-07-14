@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.frontcontroller"><info><title>Zend_Application_Resource_Frontcontroller</title></info>
     
 
@@ -114,7 +112,7 @@
             controller resource.
         </para>
 
-        <programlisting language="ini">
+        <programlisting language="ini"><![CDATA[
 [production]
 resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
 resources.frontController.moduleControllerDirectoryName = "actions"
@@ -133,7 +131,7 @@ resources.frontController.env = APPLICATION_ENV
 ; The following proxies to:
 ; Zend_Controller_Action_HelperBroker::addPath('Helper_Path', $helperPrefix);
 resources.frontController.actionHelperPaths.HELPER_Prefix = "My/Helper/Path"
-</programlisting>
+]]></programlisting>
     </example>
 
     <example xml:id="zend.application.available-resources.frontcontroller.propertyExample"><info><title>Retrieving the Front Controller in your bootstrap</title></info>
@@ -145,9 +143,9 @@ resources.frontController.actionHelperPaths.HELPER_Prefix = "My/Helper/Path"
             <varname>$frontController</varname> property of your bootstrap.
         </para>
 
-        <programlisting language="php">
-$bootstrap-&gt;bootstrap('frontController');
-$front = $bootstrap-&gt;frontController;
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$bootstrap->bootstrap('frontController');
+$front = $bootstrap->frontController;
+]]></programlisting>
     </example>
 </section>

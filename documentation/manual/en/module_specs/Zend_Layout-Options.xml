@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.options"><info><title>Zend_Layout Configuration Options</title></info>
     
 
@@ -115,15 +113,15 @@
             array and <varname>$config</varname> object:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $options = array(
-    'layout'     =&gt; 'foo',
-    'layoutPath' =&gt; '/path/to/layouts',
-    'contentKey' =&gt; 'CONTENT',           // ignored when MVC not used
+    'layout'     => 'foo',
+    'layoutPath' => '/path/to/layouts',
+    'contentKey' => 'CONTENT',           // ignored when MVC not used
 );
-</programlisting>
+]]></programlisting>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 /**
 [layout]
 layout = "foo"
@@ -131,7 +129,7 @@ layoutPath = "/path/to/layouts"
 contentKey = "CONTENT"
 */
 $config = new Zend_Config_Ini('/path/to/layout.ini', 'layout');
-</programlisting>
+]]></programlisting>
 
         <example xml:id="zend.layout.options.examples.constructor"><info><title>Passing options to the constructor or startMvc()</title></info>
             
@@ -147,19 +145,19 @@ $config = new Zend_Config_Ini('/path/to/layout.ini', 'layout');
                 First, let's look at passing an array:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Using constructor:
 $layout = new Zend_Layout($options);
 
 // Using startMvc():
 $layout = Zend_Layout::startMvc($options);
-</programlisting>
+]]></programlisting>
 
             <para>
                 And now using a config object:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('/path/to/layout.ini', 'layout');
 
 // Using constructor:
@@ -167,7 +165,7 @@ $layout = new Zend_Layout($config);
 
 // Using startMvc():
 $layout = Zend_Layout::startMvc($config);
-</programlisting>
+]]></programlisting>
 
             <para>
                 Basically, this is the easiest way to customize your
@@ -185,13 +183,13 @@ $layout = Zend_Layout::startMvc($config);
                 you a quick and easy way to do so:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Using an array of options:
-$layout-&gt;setOptions($options);
+$layout->setOptions($options);
 
 // Using a Zend_Config object:
-$layout-&gt;setConfig($options);
-</programlisting>
+$layout->setConfig($options);
+]]></programlisting>
 
             <para>
                 Note, however, that certain options, such as
@@ -210,11 +208,11 @@ $layout-&gt;setConfig($options);
                 interface, meaning their calls may be chained:
             </para>
 
-            <programlisting language="php">
-$layout-&gt;setLayout('foo')
-       -&gt;setLayoutPath('/path/to/layouts')
-       -&gt;setContentKey('CONTENT');
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$layout->setLayout('foo')
+       ->setLayoutPath('/path/to/layouts')
+       ->setContentKey('CONTENT');
+]]></programlisting>
         </example>
     </section>
 </section>

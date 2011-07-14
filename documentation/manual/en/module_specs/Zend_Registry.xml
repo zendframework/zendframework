@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.registry.using"><info><title>Using the Registry</title></info>
     
 
@@ -28,9 +26,9 @@
         <example xml:id="zend.registry.using.storing.example"><info><title>Example of set() Method Usage</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 Zend_Registry::set('index', $value);
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -57,9 +55,9 @@ Zend_Registry::set('index', $value);
         <example xml:id="zend.registry.using.retrieving.example"><info><title>Example of get() Method Usage</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $value = Zend_Registry::get('index');
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -71,14 +69,14 @@ $value = Zend_Registry::get('index');
         <example xml:id="zend.registry.using.retrieving.example-iterating"><info><title>Example of Iterating over the Registry</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $registry = Zend_Registry::getInstance();
 
-foreach ($registry as $index =&gt; $value) {
+foreach ($registry as $index => $value) {
     echo "Registry index $index contains:\n";
     var_dump($value);
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -108,9 +106,9 @@ foreach ($registry as $index =&gt; $value) {
         <example xml:id="zend.registry.using.constructing.example"><info><title>Example of Constructing a Registry</title></info>
             
 
-            <programlisting language="php">
-$registry = new Zend_Registry(array('index' =&gt; $value));
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$registry = new Zend_Registry(array('index' => $value));
+]]></programlisting>
         </example>
 
         <para>
@@ -123,11 +121,11 @@ $registry = new Zend_Registry(array('index' =&gt; $value));
         <example xml:id="zend.registry.using.constructing.example-setinstance"><info><title>Example of Initializing the Singleton Registry</title></info>
             
 
-            <programlisting language="php">
-$registry = new Zend_Registry(array('index' =&gt; $value));
+            <programlisting language="php"><![CDATA[
+$registry = new Zend_Registry(array('index' => $value));
 
 Zend_Registry::setInstance($registry);
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -148,13 +146,13 @@ Zend_Registry::setInstance($registry);
         <example xml:id="zend.registry.using.array-access.example"><info><title>Example of Array Access</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $registry = Zend_Registry::getInstance();
 
 $registry['index'] = $value;
 
 var_dump( $registry['index'] );
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -188,11 +186,11 @@ var_dump( $registry['index'] );
         <example xml:id="zend.registry.using.array-object.example"><info><title>Example of Object Access</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // in your application bootstrap:
 $registry = new Zend_Registry(array(), ArrayObject::ARRAY_AS_PROPS)
 Zend_Registry::setInstance($registry);
-$registry-&gt;tree = 'apple';
+$registry->tree = 'apple';
 
 .
 .
@@ -201,12 +199,12 @@ $registry-&gt;tree = 'apple';
 // in a different function, elsewhere in your application:
 $registry = Zend_Registry::getInstance();
 
-echo $registry-&gt;tree; // echo's "apple"
+echo $registry->tree; // echo's "apple"
 
-$registry-&gt;index = $value;
+$registry->index = $value;
 
-var_dump($registry-&gt;index);
-</programlisting>
+var_dump($registry->index);
+]]></programlisting>
         </example>
     </section>
 
@@ -221,11 +219,11 @@ var_dump($registry-&gt;index);
         <example xml:id="zend.registry.using.isset.example-isregistered"><info><title>Example of isRegistered() Method Usage</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 if (Zend_Registry::isRegistered($index)) {
     $value = Zend_Registry::get($index);
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -237,7 +235,7 @@ if (Zend_Registry::isRegistered($index)) {
         <example xml:id="zend.registry.using.isset.example-isset"><info><title>Example of isset() Method Usage</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $registry = Zend_Registry::getInstance();
 
 // using array access syntax
@@ -246,10 +244,10 @@ if (isset($registry['index'])) {
 }
 
 // using object access syntax
-if (isset($registry-&gt;index)) {
-    var_dump( $registry-&gt;index );
+if (isset($registry->index)) {
+    var_dump( $registry->index );
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -272,11 +270,11 @@ if (isset($registry-&gt;index)) {
         <example xml:id="zend.registry.using.subclassing.example"><info><title>Example of Specifying the Singleton Registry's Class Name</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 Zend_Registry::setClassName('My_Registry');
 
 Zend_Registry::set('index', $value);
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -319,7 +317,7 @@ Zend_Registry::set('index', $value);
         <example xml:id="zend.registry.using.unsetting.example"><info><title>Example of _unsetInstance() Method Usage</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 Zend_Registry::set('index', $value);
 
 Zend_Registry::_unsetInstance();
@@ -328,7 +326,7 @@ Zend_Registry::_unsetInstance();
 Zend_Registry::setClassName('My_Registry');
 
 Zend_Registry::set('index', $value);
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 </section>

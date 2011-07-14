@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.exchange"><info><title>Exchanging currencies</title></info>
     
 
@@ -21,7 +19,7 @@
         First let's write a simple exchange service.
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 class SimpleExchange implements Zend_Currency_CurrencyInterface
 {
     public function getRate($from, $to)
@@ -40,7 +38,7 @@ class SimpleExchange implements Zend_Currency_CurrencyInterface
        throw new Exception('Unable to exchange $to');
     }
 }
-</programlisting>
+]]></programlisting>
 
     <para>
         We have now created a manual exchange service. It will not fit the real live, but it
@@ -67,28 +65,28 @@ class SimpleExchange implements Zend_Currency_CurrencyInterface
         by simply giving a string with the classname.
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $currency = new Zend_Currency(
     array(
-        'value'    =&gt; 1000,
-        'currency' =&gt; 'EUR',
+        'value'    => 1000,
+        'currency' => 'EUR',
     )
 );
 
 $service  = new SimpleExchange();
 
 // attach the exchange service
-$currency-&gt;setService($service);
+$currency->setService($service);
 
 $currency2 = new Zend_Currency(
     array(
-        'value'    =&gt; 1000,
-        'currency' =&gt; 'USD',
+        'value'    => 1000,
+        'currency' => 'USD',
     )
 );
 
-print $currency-&gt;add($currency2);
-</programlisting>
+print $currency->add($currency2);
+]]></programlisting>
 
     <para>
         The above example will return '$ 3.000' because the 1.000 <acronym>USD</acronym> will be

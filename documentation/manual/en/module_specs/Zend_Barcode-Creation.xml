@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.barcode.creation"><info><title>Barcode creation using Zend_Barcode class</title></info>
     
 
@@ -55,16 +53,16 @@
                 <emphasis>Image</emphasis> renderer.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Only the text to draw is required
-$barcodeOptions = array('text' =&gt; 'ZEND-FRAMEWORK');
+$barcodeOptions = array('text' => 'ZEND-FRAMEWORK');
 
 // No required options
 $rendererOptions = array();
 $renderer = Zend_Barcode::factory(
     'code39', 'image', $barcodeOptions, $rendererOptions
 );
-</programlisting>
+]]></programlisting>
         </example>
 
         <example xml:id="zend.barcode.creation.configuration.example-2"><info><title>Using Zend_Barcode::factory() with Zend_Config objects</title></info>
@@ -76,17 +74,17 @@ $renderer = Zend_Barcode::factory(
                 the previous.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Using only one Zend_Config object
 $config = new Zend_Config(array(
-    'barcode'        =&gt; 'code39',
-    'barcodeParams'  =&gt; array('text' =&gt; 'ZEND-FRAMEWORK'),
-    'renderer'       =&gt; 'image',
-    'rendererParams' =&gt; array('imageType' =&gt; 'gif'),
+    'barcode'        => 'code39',
+    'barcodeParams'  => array('text' => 'ZEND-FRAMEWORK'),
+    'renderer'       => 'image',
+    'rendererParams' => array('imageType' => 'gif'),
 ));
 
 $renderer = Zend_Barcode::factory($config);
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -103,9 +101,9 @@ $renderer = Zend_Barcode::factory($config);
         <example xml:id="zend.barcode.creation.drawing.example-1"><info><title>Drawing a barcode with the renderer object</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Only the text to draw is required
-$barcodeOptions = array('text' =&gt; 'ZEND-FRAMEWORK');
+$barcodeOptions = array('text' => 'ZEND-FRAMEWORK');
 
 // No required options
 $rendererOptions = array();
@@ -113,16 +111,16 @@ $rendererOptions = array();
 // Draw the barcode in a new image,
 $imageResource = Zend_Barcode::factory(
     'code39', 'image', $barcodeOptions, $rendererOptions
-)-&gt;draw();
-</programlisting>
+)->draw();
+]]></programlisting>
         </example>
 
         <example xml:id="zend.barcode.creation.drawing.example-2"><info><title>Drawing a barcode with Zend_Barcode::draw()</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Only the text to draw is required
-$barcodeOptions = array('text' =&gt; 'ZEND-FRAMEWORK');
+$barcodeOptions = array('text' => 'ZEND-FRAMEWORK');
 
 // No required options
 $rendererOptions = array();
@@ -131,7 +129,7 @@ $rendererOptions = array();
 $imageResource = Zend_Barcode::draw(
     'code39', 'image', $barcodeOptions, $rendererOptions
 );
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -148,9 +146,9 @@ $imageResource = Zend_Barcode::draw(
         <example xml:id="zend.barcode.creation.renderering.example-1"><info><title>Renderering a barcode with the renderer object</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Only the text to draw is required
-$barcodeOptions = array('text' =&gt; 'ZEND-FRAMEWORK');
+$barcodeOptions = array('text' => 'ZEND-FRAMEWORK');
 
 // No required options
 $rendererOptions = array();
@@ -159,8 +157,8 @@ $rendererOptions = array();
 // send the headers and the image
 Zend_Barcode::factory(
     'code39', 'image', $barcodeOptions, $rendererOptions
-)-&gt;render();
-</programlisting>
+)->render();
+]]></programlisting>
 
             <para>
                 This will generate this barcode:
@@ -174,9 +172,9 @@ Zend_Barcode::factory(
         <example xml:id="zend.barcode.creation.renderering.example-2"><info><title>Renderering a barcode with Zend_Barcode::render()</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Only the text to draw is required
-$barcodeOptions = array('text' =&gt; 'ZEND-FRAMEWORK');
+$barcodeOptions = array('text' => 'ZEND-FRAMEWORK');
 
 // No required options
 $rendererOptions = array();
@@ -186,7 +184,7 @@ $rendererOptions = array();
 Zend_Barcode::render(
     'code39', 'image', $barcodeOptions, $rendererOptions
 );
-</programlisting>
+]]></programlisting>
 
             <para>
                 This will generate the same barcode as the previous example.

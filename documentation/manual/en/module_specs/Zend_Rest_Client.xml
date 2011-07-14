@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.rest.client"><info><title>Zend_Rest_Client</title></info>
     
 
@@ -18,14 +16,14 @@
         <example xml:id="zend.rest.client.introduction.example-1"><info><title>A basic REST request</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 /**
  * Connect to framework.zend.com server and retrieve a greeting
  */
 $client = new Zend_Rest_Client('http://framework.zend.com/rest');
 
-echo $client-&gt;sayHello('Davey', 'Day')-&gt;get(); // "Hello Davey, Good Day"
-</programlisting>
+echo $client->sayHello('Davey', 'Day')->get(); // "Hello Davey, Good Day"
+]]></programlisting>
         </example>
 
         <note><info><title>Differences in calling</title></info>
@@ -40,10 +38,10 @@ echo $client-&gt;sayHello('Davey', 'Day')-&gt;get(); // "Hello Davey, Good Day"
                 be made via method chaining or in separate method calls:
             </para>
 
-            <programlisting language="php">
-$client-&gt;sayHello('Davey', 'Day');
-echo $client-&gt;get();
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$client->sayHello('Davey', 'Day');
+echo $client->get();
+]]></programlisting>
         </note>
     </section>
 
@@ -66,13 +64,13 @@ echo $client-&gt;get();
         <example xml:id="zend.rest.client.return.example-1"><info><title>Response Status</title></info>
             
 
-            <programlisting language="php">
-$result = $client-&gt;sayHello('Davey', 'Day')-&gt;get();
+            <programlisting language="php"><![CDATA[
+$result = $client->sayHello('Davey', 'Day')->get();
 
-if ($result-&gt;isSuccess()) {
+if ($result->isSuccess()) {
     echo $result; // "Hello Davey, Good Day"
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -98,52 +96,52 @@ if ($result-&gt;isSuccess()) {
         <example xml:id="zend.rest.client.return.example-2"><info><title>Using Technorati's Rest Service</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $technorati = new Zend_Rest_Client('http://api.technorati.com/bloginfo');
-$technorati-&gt;key($key);
-$technorati-&gt;url('http://pixelated-dreams.com');
-$result = $technorati-&gt;get();
-echo $result-&gt;firstname() .' '. $result-&gt;lastname();
-</programlisting>
+$technorati->key($key);
+$technorati->url('http://pixelated-dreams.com');
+$result = $technorati->get();
+echo $result->firstname() .' '. $result->lastname();
+]]></programlisting>
         </example>
 
         <example xml:id="zend.rest.client.return.example-3"><info><title>Example Technorati Response</title></info>
             
 
-            <programlisting language="xml">
-&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;!-- generator="Technorati API version 1.0 /bloginfo" --&gt;
-&lt;!DOCTYPE tapi PUBLIC "-//Technorati, Inc.//DTD TAPI 0.02//EN"
-                      "http://api.technorati.com/dtd/tapi-002.xml"&gt;
-&lt;tapi version="1.0"&gt;
-    &lt;document&gt;
-        &lt;result&gt;
-            &lt;url&gt;http://pixelated-dreams.com&lt;/url&gt;
-            &lt;weblog&gt;
-                &lt;name&gt;Pixelated Dreams&lt;/name&gt;
-                &lt;url&gt;http://pixelated-dreams.com&lt;/url&gt;
-                &lt;author&gt;
-                    &lt;username&gt;DShafik&lt;/username&gt;
-                    &lt;firstname&gt;Davey&lt;/firstname&gt;
-                    &lt;lastname&gt;Shafik&lt;/lastname&gt;
-                &lt;/author&gt;
-                &lt;rssurl&gt;
+            <programlisting language="xml"><![CDATA[
+<?xml version="1.0" encoding="utf-8"?>
+<!-- generator="Technorati API version 1.0 /bloginfo" -->
+<!DOCTYPE tapi PUBLIC "-//Technorati, Inc.//DTD TAPI 0.02//EN"
+                      "http://api.technorati.com/dtd/tapi-002.xml">
+<tapi version="1.0">
+    <document>
+        <result>
+            <url>http://pixelated-dreams.com</url>
+            <weblog>
+                <name>Pixelated Dreams</name>
+                <url>http://pixelated-dreams.com</url>
+                <author>
+                    <username>DShafik</username>
+                    <firstname>Davey</firstname>
+                    <lastname>Shafik</lastname>
+                </author>
+                <rssurl>
                     http://pixelated-dreams.com/feeds/index.rss2
-                &lt;/rssurl&gt;
-                &lt;atomurl&gt;
+                </rssurl>
+                <atomurl>
                     http://pixelated-dreams.com/feeds/atom.xml
-                &lt;/atomurl&gt;
-                &lt;inboundblogs&gt;44&lt;/inboundblogs&gt;
-                &lt;inboundlinks&gt;218&lt;/inboundlinks&gt;
-                &lt;lastupdate&gt;2006-04-26 04:36:36 GMT&lt;/lastupdate&gt;
-                &lt;rank&gt;60635&lt;/rank&gt;
-            &lt;/weblog&gt;
-            &lt;inboundblogs&gt;44&lt;/inboundblogs&gt;
-            &lt;inboundlinks&gt;218&lt;/inboundlinks&gt;
-        &lt;/result&gt;
-    &lt;/document&gt;
-&lt;/tapi&gt;
-</programlisting>
+                </atomurl>
+                <inboundblogs>44</inboundblogs>
+                <inboundlinks>218</inboundlinks>
+                <lastupdate>2006-04-26 04:36:36 GMT</lastupdate>
+                <rank>60635</rank>
+            </weblog>
+            <inboundblogs>44</inboundblogs>
+            <inboundlinks>218</inboundlinks>
+        </result>
+    </document>
+</tapi>
+]]></programlisting>
         </example>
 
         <para>
@@ -181,17 +179,17 @@ echo $result-&gt;firstname() .' '. $result-&gt;lastname();
         <example xml:id="zend.rest.client.args.example-1"><info><title>Setting Request Arguments</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $client = new Zend_Rest_Client('http://example.org/rest');
 
-$client-&gt;arg('value1');
-$client-&gt;arg2('value2');
-$client-&gt;get();
+$client->arg('value1');
+$client->arg2('value2');
+$client->get();
 
 // or
 
-$client-&gt;arg('value1')-&gt;arg2('value2')-&gt;get();
-</programlisting>
+$client->arg('value1')->arg2('value2')->get();
+]]></programlisting>
         </example>
 
         <para>

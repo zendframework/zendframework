@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.formatters"><info><title>Formatters</title></info>
     
 
@@ -25,28 +23,28 @@
             equivalent to the following:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $format = '%timestamp% %priorityName% (%priority%): %message%' . PHP_EOL;
 $formatter = new Zend_Log_Formatter_Simple($format);
-</programlisting>
+]]></programlisting>
 
         <para>
             A formatter is set on an individual Writer object using the Writer's
             <methodname>setFormatter()</methodname> method:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $writer = new Zend_Log_Writer_Stream('php://output');
 $formatter = new Zend_Log_Formatter_Simple('hello %message%' . PHP_EOL);
-$writer-&gt;setFormatter($formatter);
+$writer->setFormatter($formatter);
 
 $logger = new Zend_Log();
-$logger-&gt;addWriter($writer);
+$logger->addWriter($writer);
 
-$logger-&gt;info('there');
+$logger->info('there');
 
 // outputs "hello there"
-</programlisting>
+]]></programlisting>
 
         <para>
             The constructor of <classname>Zend_Log_Formatter_Simple</classname> accepts a single
@@ -67,29 +65,29 @@ $logger-&gt;info('there');
             data array:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $writer = new Zend_Log_Writer_Stream('php://output');
 $formatter = new Zend_Log_Formatter_Xml();
-$writer-&gt;setFormatter($formatter);
+$writer->setFormatter($formatter);
 
 $logger = new Zend_Log();
-$logger-&gt;addWriter($writer);
+$logger->addWriter($writer);
 
-$logger-&gt;info('informational message');
-</programlisting>
+$logger->info('informational message');
+]]></programlisting>
 
         <para>
             The code above outputs the following <acronym>XML</acronym> (space added for clarity):
         </para>
 
-        <programlisting language="xml">
-&lt;logEntry&gt;
-  &lt;timestamp&gt;2007-04-06T07:24:37-07:00&lt;/timestamp&gt;
-  &lt;message&gt;informational message&lt;/message&gt;
-  &lt;priority&gt;6&lt;/priority&gt;
-  &lt;priorityName&gt;INFO&lt;/priorityName&gt;
-&lt;/logEntry&gt;
-</programlisting>
+        <programlisting language="xml"><![CDATA[
+<logEntry>
+  <timestamp>2007-04-06T07:24:37-07:00</timestamp>
+  <message>informational message</message>
+  <priority>6</priority>
+  <priorityName>INFO</priorityName>
+</logEntry>
+]]></programlisting>
 
         <para>
             It's possible to customize the root element as well as specify a mapping
@@ -99,19 +97,19 @@ $logger-&gt;info('informational message');
             the element mapping as the second parameter:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $writer = new Zend_Log_Writer_Stream('php://output');
 $formatter = new Zend_Log_Formatter_Xml('log',
-                                        array('msg' =&gt; 'message',
-                                              'level' =&gt; 'priorityName')
+                                        array('msg' => 'message',
+                                              'level' => 'priorityName')
                                        );
-$writer-&gt;setFormatter($formatter);
+$writer->setFormatter($formatter);
 
 $logger = new Zend_Log();
-$logger-&gt;addWriter($writer);
+$logger->addWriter($writer);
 
-$logger-&gt;info('informational message');
-</programlisting>
+$logger->info('informational message');
+]]></programlisting>
 
         <para>
             The code above changes the root element from its default of
@@ -120,11 +118,11 @@ $logger-&gt;info('informational message');
             results in the following output:
         </para>
 
-        <programlisting language="xml">
-&lt;log&gt;
-  &lt;msg&gt;informational message&lt;/msg&gt;
-  &lt;level&gt;INFO&lt;/level&gt;
-&lt;/log&gt;
-</programlisting>
+        <programlisting language="xml"><![CDATA[
+<log>
+  <msg>informational message</msg>
+  <level>INFO</level>
+</log>
+]]></programlisting>
     </section>
 </section>

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.pregreplace"><info><title>PregReplace</title></info>
     
 
@@ -52,16 +50,16 @@
             an array of strings for multiple pattern.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_PregReplace(array(
-    'match'   =&gt; '/bob/',
-    'replace' =&gt; 'john',
+    'match'   => '/bob/',
+    'replace' => 'john',
 ));
 $input  = 'Hy bob!";
 
-$filter-&gt;filter($input);
+$filter->filter($input);
 // returns 'Hy john!'
-</programlisting>
+]]></programlisting>
 
         <para>
             You can use <methodname>getMatchPattern()</methodname> and
@@ -70,15 +68,15 @@ $filter-&gt;filter($input);
             <methodname>setReplacement()</methodname>.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_PregReplace();
-$filter-&gt;setMatchPattern(array('bob', 'Hy'))
-      -&gt;setReplacement(array('john', 'Bye'));
+$filter->setMatchPattern(array('bob', 'Hy'))
+      ->setReplacement(array('john', 'Bye'));
 $input  = 'Hy bob!";
 
-$filter-&gt;filter($input);
+$filter->filter($input);
 // returns 'Bye john!'
-</programlisting>
+]]></programlisting>
 
         <para>
             For a more complex usage take a look into <acronym>PHP</acronym>'s <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/reference.pcre.pattern.modifiers.php">PCRE

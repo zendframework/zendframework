@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.locale"><info><title>Zend_Application_Resource_Locale</title></info>
     
 
@@ -112,11 +110,11 @@
                 the client does not send a locale himself.
             </para>
 
-            <programlisting language="ini">
+            <programlisting language="ini"><![CDATA[
 ; Try to determine automatically first,
 ; if unsuccessful, use nl_NL as fallback.
 resources.locale.default = "nl_NL"
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -140,11 +138,11 @@ resources.locale.default = "nl_NL"
                 The following snippet shows how to set a single locale for your entire application.
             </para>
 
-            <programlisting language="ini">
+            <programlisting language="ini"><![CDATA[
 ; No matter what, the nl_NL locale will be used.
 resources.locale.default = "nl_NL"
 resources.locale.force = true
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 </section>

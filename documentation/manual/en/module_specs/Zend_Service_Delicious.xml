@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.delicious"><info><title>Zend_Service_Delicious</title></info>
     
 
@@ -18,16 +16,16 @@
         <example xml:id="zend.service.delicious.introduction.getAllPosts"><info><title>Get all posts</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $delicious = new Zend_Service_Delicious('username', 'password');
-$posts = $delicious-&gt;getAllPosts();
+$posts = $delicious->getAllPosts();
 
 foreach ($posts as $post) {
     echo "--\n";
-    echo "Title: {$post-&gt;getTitle()}\n";
-    echo "Url: {$post-&gt;getUrl()}\n";
+    echo "Title: {$post->getTitle()}\n";
+    echo "Url: {$post->getUrl()}\n";
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -41,7 +39,7 @@ foreach ($posts as $post) {
             <classname>Zend_Service_Delicious_PostList</classname>, which holds all retrieved posts.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 /**
  * Get posts matching the arguments. If no date or url is given,
  * most recent date will be used.
@@ -70,7 +68,7 @@ public function getRecentPosts($tag = null, $count = 15);
  * @return Zend_Service_Delicious_PostList
  */
 public function getAllPosts($tag = null);
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.service.delicious.postlist"><info><title>Zend_Service_Delicious_PostList</title></info>
@@ -91,9 +89,9 @@ public function getAllPosts($tag = null);
         <example xml:id="zend.service.delicious.postlist.accessing_post_lists"><info><title>Accessing post lists</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $delicious = new Zend_Service_Delicious('username', 'password');
-$posts = $delicious-&gt;getAllPosts();
+$posts = $delicious->getAllPosts();
 
 // count posts
 echo count($posts);
@@ -101,13 +99,13 @@ echo count($posts);
 // iterate over posts
 foreach ($posts as $post) {
     echo "--\n";
-    echo "Title: {$post-&gt;getTitle()}\n";
-    echo "Url: {$post-&gt;getUrl()}\n";
+    echo "Title: {$post->getTitle()}\n";
+    echo "Url: {$post->getUrl()}\n";
 }
 
 // get post using array access
-echo $posts[0]-&gt;getTitle();
-</programlisting>
+echo $posts[0]->getTitle();
+]]></programlisting>
         </example>
 
         <note>
@@ -134,16 +132,16 @@ echo $posts[0]-&gt;getTitle();
                 single tag needs to be specified.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $delicious = new Zend_Service_Delicious('username', 'password');
-$posts = $delicious-&gt;getAllPosts();
+$posts = $delicious->getAllPosts();
 
 // Print posts having "php" and "zend" tags
-foreach ($posts-&gt;withTags(array('php', 'zend')) as $post) {
-    echo "Title: {$post-&gt;getTitle()}\n";
-    echo "Url: {$post-&gt;getUrl()}\n";
+foreach ($posts->withTags(array('php', 'zend')) as $post) {
+    echo "Title: {$post->getTitle()}\n";
+    echo "Url: {$post->getUrl()}\n";
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <example xml:id="zend.service.delicious.postlist.example.byUrl"><info><title>Filtering a Post List by URL</title></info>
@@ -154,16 +152,16 @@ foreach ($posts-&gt;withTags(array('php', 'zend')) as $post) {
                 expression using the <methodname>withUrl()</methodname> method:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $delicious = new Zend_Service_Delicious('username', 'password');
-$posts = $delicious-&gt;getAllPosts();
+$posts = $delicious->getAllPosts();
 
 // Print posts having "help" in the URL
-foreach ($posts-&gt;withUrl('/help/') as $post) {
-    echo "Title: {$post-&gt;getTitle()}\n";
-    echo "Url: {$post-&gt;getUrl()}\n";
+foreach ($posts->withUrl('/help/') as $post) {
+    echo "Title: {$post->getTitle()}\n";
+    echo "Url: {$post->getUrl()}\n";
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -173,15 +171,15 @@ foreach ($posts-&gt;withUrl('/help/') as $post) {
         <example xml:id="zend.service.delicious.editing_posts.post_editing"><info><title>Post editing</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $delicious = new Zend_Service_Delicious('username', 'password');
-$posts = $delicious-&gt;getPosts();
+$posts = $delicious->getPosts();
 
 // set title
-$posts[0]-&gt;setTitle('New title');
+$posts[0]->setTitle('New title');
 // save changes
-$posts[0]-&gt;save();
-</programlisting>
+$posts[0]->save();
+]]></programlisting>
         </example>
 
         <example xml:id="zend.service.delicious.editing_posts.method_call_chaining"><info><title>Method call chaining</title></info>
@@ -192,14 +190,14 @@ $posts[0]-&gt;save();
                a fluent interface.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $delicious = new Zend_Service_Delicious('username', 'password');
-$posts = $delicious-&gt;getPosts();
+$posts = $delicious->getPosts();
 
-$posts[0]-&gt;setTitle('New title')
-         -&gt;setNotes('New notes')
-         -&gt;save();
-</programlisting>
+$posts[0]->setTitle('New title')
+         ->setNotes('New notes')
+         ->save();
+]]></programlisting>
         </example>
     </section>
 
@@ -214,19 +212,19 @@ $posts[0]-&gt;setTitle('New title')
         <example xml:id="zend.service.delicious.deleting_posts.deleting_posts"><info><title>Deleting posts</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $delicious = new Zend_Service_Delicious('username', 'password');
 
 // by specifying URL
-$delicious-&gt;deletePost('http://framework.zend.com');
+$delicious->deletePost('http://framework.zend.com');
 
 // or by calling the method upon a post object
-$posts = $delicious-&gt;getPosts();
-$posts[0]-&gt;delete();
+$posts = $delicious->getPosts();
+$posts[0]->delete();
 
 // another way of using deletePost()
-$delicious-&gt;deletePost($posts[0]-&gt;getUrl());
-</programlisting>
+$delicious->deletePost($posts[0]->getUrl());
+]]></programlisting>
         </example>
     </section>
 
@@ -243,20 +241,20 @@ $delicious-&gt;deletePost($posts[0]-&gt;getUrl());
         <example xml:id="zend.service.delicious.adding_posts.adding_a_post"><info><title>Adding a post</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $delicious = new Zend_Service_Delicious('username', 'password');
 
 // create a new post and save it (with method call chaining)
-$delicious-&gt;createNewPost('Zend Framework', 'http://framework.zend.com')
-          -&gt;setNotes('Zend Framework Homepage')
-          -&gt;save();
+$delicious->createNewPost('Zend Framework', 'http://framework.zend.com')
+          ->setNotes('Zend Framework Homepage')
+          ->save();
 
 // create a new post and save it  (without method call chaining)
-$newPost = $delicious-&gt;createNewPost('Zend Framework',
+$newPost = $delicious->createNewPost('Zend Framework',
                                      'http://framework.zend.com');
-$newPost-&gt;setNotes('Zend Framework Homepage');
-$newPost-&gt;save();
-</programlisting>
+$newPost->setNotes('Zend Framework Homepage');
+$newPost->save();
+]]></programlisting>
         </example>
     </section>
 
@@ -266,15 +264,15 @@ $newPost-&gt;save();
         <example xml:id="zend.service.delicious.tags.tags"><info><title>Tags</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $delicious = new Zend_Service_Delicious('username', 'password');
 
 // get all tags
-print_r($delicious-&gt;getTags());
+print_r($delicious->getTags());
 
 // rename tag ZF to zendFramework
-$delicious-&gt;renameTag('ZF', 'zendFramework');
-</programlisting>
+$delicious->renameTag('ZF', 'zendFramework');
+]]></programlisting>
         </example>
     </section>
 
@@ -284,18 +282,18 @@ $delicious-&gt;renameTag('ZF', 'zendFramework');
         <example xml:id="zend.service.delicious.bundles.example"><info><title>Bundles</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $delicious = new Zend_Service_Delicious('username', 'password');
 
 // get all bundles
-print_r($delicious-&gt;getBundles());
+print_r($delicious->getBundles());
 
 // delete bundle someBundle
-$delicious-&gt;deleteBundle('someBundle');
+$delicious->deleteBundle('someBundle');
 
 // add bundle
-$delicious-&gt;addBundle('newBundle', array('tag1', 'tag2'));
-</programlisting>
+$delicious->addBundle('newBundle', array('tag1', 'tag2'));
+]]></programlisting>
         </example>
     </section>
 
@@ -357,19 +355,19 @@ $delicious-&gt;addBundle('newBundle', array('tag1', 'tag2'));
         <example xml:id="zend.service.delicious.public_data.retrieving_public_data"><info><title>Retrieving public data</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // username and password are not required
 $delicious = new Zend_Service_Delicious();
 
 // get fans of user someUser
-print_r($delicious-&gt;getUserFans('someUser'));
+print_r($delicious->getUserFans('someUser'));
 
 // get network of user someUser
-print_r($delicious-&gt;getUserNetwork('someUser'));
+print_r($delicious->getUserNetwork('someUser'));
 
 // get tags of user someUser
-print_r($delicious-&gt;getUserTags('someUser'));
-</programlisting>
+print_r($delicious->getUserTags('someUser'));
+]]></programlisting>
         </example>
 
         <section xml:id="zend.service.delicious.public_data.posts"><info><title>Public posts</title></info>
@@ -439,10 +437,10 @@ print_r($delicious-&gt;getUserTags('someUser'));
         <example xml:id="zend.service.delicious.httpclient.changing"><info><title>Changing the HTTP client of Zend_Rest_Client</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $myHttpClient = new My_Http_Client();
 Zend_Rest_Client::setHttpClient($myHttpClient);
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -454,11 +452,11 @@ Zend_Rest_Client::setHttpClient($myHttpClient);
         <example xml:id="zend.service.delicious.httpclient.keepalive"><info><title>Configuring your HTTP client to keep connections alive</title></info>
             
 
-            <programlisting language="php">
-Zend_Rest_Client::getHttpClient()-&gt;setConfig(array(
-        'keepalive' =&gt; true
+            <programlisting language="php"><![CDATA[
+Zend_Rest_Client::getHttpClient()->setConfig(array(
+        'keepalive' => true
 ));
-</programlisting>
+]]></programlisting>
         </example>
 
         <note>

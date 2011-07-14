@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.oauth.introduction.getting-started"><info><title>Getting Started</title></info>
     
 
@@ -19,15 +17,15 @@
         object).
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $config = array(
-    'callbackUrl' =&gt; 'http://example.com/callback.php',
-    'siteUrl' =&gt; 'http://twitter.com/oauth',
-    'consumerKey' =&gt; 'gg3DsFTW9OU9eWPnbuPzQ',
-    'consumerSecret' =&gt; 'tFB0fyWLSMf74lkEu9FTyoHXcazOWpbrAjTCCK48A'
+    'callbackUrl' => 'http://example.com/callback.php',
+    'siteUrl' => 'http://twitter.com/oauth',
+    'consumerKey' => 'gg3DsFTW9OU9eWPnbuPzQ',
+    'consumerSecret' => 'tFB0fyWLSMf74lkEu9FTyoHXcazOWpbrAjTCCK48A'
 );
 $consumer = new Zend_Oauth_Consumer($config);
-</programlisting>
+]]></programlisting>
 
     <para>
         The callbackUrl is the URI we want Twitter to request from our server
@@ -87,18 +85,18 @@ $consumer = new Zend_Oauth_Consumer($config);
         is accomplished using:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $config = array(
-    'callbackUrl' =&gt; 'http://example.com/callback.php',
-    'siteUrl' =&gt; 'http://twitter.com/oauth',
-    'consumerKey' =&gt; 'gg3DsFTW9OU9eWPnbuPzQ',
-    'consumerSecret' =&gt; 'tFB0fyWLSMf74lkEu9FTyoHXcazOWpbrAjTCCK48A'
+    'callbackUrl' => 'http://example.com/callback.php',
+    'siteUrl' => 'http://twitter.com/oauth',
+    'consumerKey' => 'gg3DsFTW9OU9eWPnbuPzQ',
+    'consumerSecret' => 'tFB0fyWLSMf74lkEu9FTyoHXcazOWpbrAjTCCK48A'
 );
 $consumer = new Zend_Oauth_Consumer($config);
 
 // fetch a request token
-$token = $consumer-&gt;getRequestToken();
-</programlisting>
+$token = $consumer->getRequestToken();
+]]></programlisting>
 
     <para>
         The new request token (an instance of <classname>Zend_Oauth_Token_Request
@@ -108,24 +106,24 @@ $token = $consumer-&gt;getRequestToken();
         via:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $config = array(
-    'callbackUrl' =&gt; 'http://example.com/callback.php',
-    'siteUrl' =&gt; 'http://twitter.com/oauth',
-    'consumerKey' =&gt; 'gg3DsFTW9OU9eWPnbuPzQ',
-    'consumerSecret' =&gt; 'tFB0fyWLSMf74lkEu9FTyoHXcazOWpbrAjTCCK48A'
+    'callbackUrl' => 'http://example.com/callback.php',
+    'siteUrl' => 'http://twitter.com/oauth',
+    'consumerKey' => 'gg3DsFTW9OU9eWPnbuPzQ',
+    'consumerSecret' => 'tFB0fyWLSMf74lkEu9FTyoHXcazOWpbrAjTCCK48A'
 );
 $consumer = new Zend_Oauth_Consumer($config);
 
 // fetch a request token
-$token = $consumer-&gt;getRequestToken();
+$token = $consumer->getRequestToken();
 
 // persist the token to storage
 $_SESSION['TWITTER_REQUEST_TOKEN'] = serialize($token);
 
 // redirect the user
-$consumer-&gt;redirect();
-</programlisting>
+$consumer->redirect();
+]]></programlisting>
 
     <para>
         The user will now be redirected to Twitter. They will be asked to authorize
@@ -152,17 +150,17 @@ $consumer-&gt;redirect();
         so it should really be stored to a database.
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $config = array(
-    'callbackUrl' =&gt; 'http://example.com/callback.php',
-    'siteUrl' =&gt; 'http://twitter.com/oauth',
-    'consumerKey' =&gt; 'gg3DsFTW9OU9eWPnbuPzQ',
-    'consumerSecret' =&gt; 'tFB0fyWLSMf74lkEu9FTyoHXcazOWpbrAjTCCK48A'
+    'callbackUrl' => 'http://example.com/callback.php',
+    'siteUrl' => 'http://twitter.com/oauth',
+    'consumerKey' => 'gg3DsFTW9OU9eWPnbuPzQ',
+    'consumerSecret' => 'tFB0fyWLSMf74lkEu9FTyoHXcazOWpbrAjTCCK48A'
 );
 $consumer = new Zend_Oauth_Consumer($config);
 
-if (!empty($_GET) &amp;&amp; isset($_SESSION['TWITTER_REQUEST_TOKEN'])) {
-    $token = $consumer-&gt;getAccessToken(
+if (!empty($_GET) && isset($_SESSION['TWITTER_REQUEST_TOKEN'])) {
+    $token = $consumer->getAccessToken(
                  $_GET,
                  unserialize($_SESSION['TWITTER_REQUEST_TOKEN'])
              );
@@ -174,7 +172,7 @@ if (!empty($_GET) &amp;&amp; isset($_SESSION['TWITTER_REQUEST_TOKEN'])) {
     // Mistaken request? Some malfeasant trying something?
     exit('Invalid callback request. Oops. Sorry.');
 }
-</programlisting>
+]]></programlisting>
 
     <para>
         Success! We have an authorized access token - so it's time to actually
@@ -188,30 +186,30 @@ if (!empty($_GET) &amp;&amp; isset($_SESSION['TWITTER_REQUEST_TOKEN'])) {
         configuration and retrieve the final authorized access token.
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $config = array(
-    'callbackUrl' =&gt; 'http://example.com/callback.php',
-    'siteUrl' =&gt; 'http://twitter.com/oauth',
-    'consumerKey' =&gt; 'gg3DsFTW9OU9eWPnbuPzQ',
-    'consumerSecret' =&gt; 'tFB0fyWLSMf74lkEu9FTyoHXcazOWpbrAjTCCK48A'
+    'callbackUrl' => 'http://example.com/callback.php',
+    'siteUrl' => 'http://twitter.com/oauth',
+    'consumerKey' => 'gg3DsFTW9OU9eWPnbuPzQ',
+    'consumerSecret' => 'tFB0fyWLSMf74lkEu9FTyoHXcazOWpbrAjTCCK48A'
 );
 
 $statusMessage = 'I\'m posting to Twitter using Zend_Oauth!';
 
 $token = unserialize($_SESSION['TWITTER_ACCESS_TOKEN']);
-$client = $token-&gt;getHttpClient($configuration);
-$client-&gt;setUri('http://twitter.com/statuses/update.json');
-$client-&gt;setMethod(Zend_Http_Client::POST);
-$client-&gt;setParameterPost('status', $statusMessage);
-$response = $client-&gt;request();
+$client = $token->getHttpClient($configuration);
+$client->setUri('http://twitter.com/statuses/update.json');
+$client->setMethod(Zend_Http_Client::POST);
+$client->setParameterPost('status', $statusMessage);
+$response = $client->request();
 
-$data = Zend_Json::decode($response-&gt;getBody());
-$result = $response-&gt;getBody();
-if (isset($data-&gt;text)) {
+$data = Zend_Json::decode($response->getBody());
+$result = $response->getBody();
+if (isset($data->text)) {
     $result = 'true';
 }
 echo $result;
-</programlisting>
+]]></programlisting>
 
     <para>
         As a note on the customised client, this can be passed to most

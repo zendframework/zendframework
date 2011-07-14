@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.plugins.usage"><info><title>Using Plugins</title></info>
     
 
@@ -30,13 +28,13 @@
             12). The tree might look like this:
         </para>
 
-        <programlisting language="text">
+        <programlisting language="text"><![CDATA[
 foo/
 |-- plugins/
 |   |-- validators/
 |   |   |-- Even.php
 |   |   |-- Dozens.php
-</programlisting>
+]]></programlisting>
 
         <para>
             Now, we'll inform a <classname>Zend_Form_Element</classname> instance of this prefix
@@ -46,9 +44,9 @@ foo/
             "validate" plugin.
         </para>
 
-        <programlisting language="php">
-$element-&gt;addPrefixPath('Foo_Validate', 'foo/plugins/validators/', 'validate');
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$element->addPrefixPath('Foo_Validate', 'foo/plugins/validators/', 'validate');
+]]></programlisting>
 
         <para>
             Now we can simply tell the element the short name of the validators we want to use. In
@@ -56,12 +54,12 @@ $element-&gt;addPrefixPath('Foo_Validate', 'foo/plugins/validators/', 'validate'
             custom validators ("Even", "Dozens"):
         </para>
 
-        <programlisting language="php">
-$element-&gt;addValidator('NotEmpty')
-        -&gt;addValidator('Int')
-        -&gt;addValidator('Even')
-        -&gt;addValidator('Dozens');
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$element->addValidator('NotEmpty')
+        ->addValidator('Int')
+        ->addValidator('Even')
+        ->addValidator('Dozens');
+]]></programlisting>
 
         <para>
             When the element needs to validate, it will then request the plugin class from the
@@ -135,14 +133,14 @@ $element-&gt;addValidator('NotEmpty')
             view:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Zend_View::addHelperPath() utilizes the PluginLoader; however, it inverts
 // the arguments, as it provides a default value of "Zend_View_Helper" for the
 // plugin prefix.
 //
 // The below assumes your class is in the directory 'foo/view/helpers/'.
-$view-&gt;addHelperPath('foo/view/helpers', 'Foo_View_Helper');
-</programlisting>
+$view->addHelperPath('foo/view/helpers', 'Foo_View_Helper');
+]]></programlisting>
 
         <para>
             Once done, anywhere you now use the "Button" helper will delegate to your custom

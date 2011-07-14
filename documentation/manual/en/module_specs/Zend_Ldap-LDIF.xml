@@ -1,41 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.ldif"><info><title>Serializing LDAP data to and from LDIF</title></info>
     
 
     <section xml:id="zend.ldap.ldif.encode"><info><title>Serialize a LDAP entry to LDIF</title></info>
         
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $data = array(
-    'dn'                         =&gt; 'uid=rogasawara,ou=営業部,o=Airius',
-    'objectclass'                =&gt; array('top',
+    'dn'                         => 'uid=rogasawara,ou=営業部,o=Airius',
+    'objectclass'                => array('top',
                                           'person',
                                           'organizationalPerson',
                                           'inetOrgPerson'),
-    'uid'                        =&gt; array('rogasawara'),
-    'mail'                       =&gt; array('rogasawara@airius.co.jp'),
-    'givenname;lang-ja'          =&gt; array('ロドニー'),
-    'sn;lang-ja'                 =&gt; array('小笠原'),
-    'cn;lang-ja'                 =&gt; array('小笠原 ロドニー'),
-    'title;lang-ja'              =&gt; array('営業部 部長'),
-    'preferredlanguage'          =&gt; array('ja'),
-    'givenname'                  =&gt; array('ロドニー'),
-    'sn'                         =&gt; array('小笠原'),
-    'cn'                         =&gt; array('小笠原 ロドニー'),
-    'title'                      =&gt; array('営業部 部長'),
-    'givenname;lang-ja;phonetic' =&gt; array('ろどにー'),
-    'sn;lang-ja;phonetic'        =&gt; array('おがさわら'),
-    'cn;lang-ja;phonetic'        =&gt; array('おがさわら ろどにー'),
-    'title;lang-ja;phonetic'     =&gt; array('えいぎょうぶ ぶちょう'),
-    'givenname;lang-en'          =&gt; array('Rodney'),
-    'sn;lang-en'                 =&gt; array('Ogasawara'),
-    'cn;lang-en'                 =&gt; array('Rodney Ogasawara'),
-    'title;lang-en'              =&gt; array('Sales, Director'),
+    'uid'                        => array('rogasawara'),
+    'mail'                       => array('rogasawara@airius.co.jp'),
+    'givenname;lang-ja'          => array('ロドニー'),
+    'sn;lang-ja'                 => array('小笠原'),
+    'cn;lang-ja'                 => array('小笠原 ロドニー'),
+    'title;lang-ja'              => array('営業部 部長'),
+    'preferredlanguage'          => array('ja'),
+    'givenname'                  => array('ロドニー'),
+    'sn'                         => array('小笠原'),
+    'cn'                         => array('小笠原 ロドニー'),
+    'title'                      => array('営業部 部長'),
+    'givenname;lang-ja;phonetic' => array('ろどにー'),
+    'sn;lang-ja;phonetic'        => array('おがさわら'),
+    'cn;lang-ja;phonetic'        => array('おがさわら ろどにー'),
+    'title;lang-ja;phonetic'     => array('えいぎょうぶ ぶちょう'),
+    'givenname;lang-en'          => array('Rodney'),
+    'sn;lang-en'                 => array('Ogasawara'),
+    'cn;lang-en'                 => array('Rodney Ogasawara'),
+    'title;lang-en'              => array('Sales, Director'),
 );
-$ldif = Zend_Ldap_Ldif_Encoder::encode($data, array('sort' =&gt; false,
-                                                    'version' =&gt; null));
+$ldif = Zend_Ldap_Ldif_Encoder::encode($data, array('sort' => false,
+                                                    'version' => null));
 /*
 $ldif contains:
 dn:: dWlkPXJvZ2FzYXdhcmEsb3U95Za25qWt6YOoLG89QWlyaXVz
@@ -63,13 +61,13 @@ sn;lang-en: Ogasawara
 cn;lang-en: Rodney Ogasawara
 title;lang-en: Sales, Director
 */
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.ldap.ldif.decode"><info><title>Deserialize a LDIF string into a LDAP entry</title></info>
         
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $ldif = "dn:: dWlkPXJvZ2FzYXdhcmEsb3U95Za25qWt6YOoLG89QWlyaXVz
 objectclass: top
 objectclass: person
@@ -97,32 +95,32 @@ title;lang-en: Sales, Director";
 $data = Zend_Ldap_Ldif_Encoder::decode($ldif);
 /*
 $data = array(
-    'dn'                         =&gt; 'uid=rogasawara,ou=営業部,o=Airius',
-    'objectclass'                =&gt; array('top',
+    'dn'                         => 'uid=rogasawara,ou=営業部,o=Airius',
+    'objectclass'                => array('top',
                                           'person',
                                           'organizationalPerson',
                                           'inetOrgPerson'),
-    'uid'                        =&gt; array('rogasawara'),
-    'mail'                       =&gt; array('rogasawara@airius.co.jp'),
-    'givenname;lang-ja'          =&gt; array('ロドニー'),
-    'sn;lang-ja'                 =&gt; array('小笠原'),
-    'cn;lang-ja'                 =&gt; array('小笠原 ロドニー'),
-    'title;lang-ja'              =&gt; array('営業部 部長'),
-    'preferredlanguage'          =&gt; array('ja'),
-    'givenname'                  =&gt; array('ロドニー'),
-    'sn'                         =&gt; array('小笠原'),
-    'cn'                         =&gt; array('小笠原 ロドニー'),
-    'title'                      =&gt; array('営業部 部長'),
-    'givenname;lang-ja;phonetic' =&gt; array('ろどにー'),
-    'sn;lang-ja;phonetic'        =&gt; array('おがさわら'),
-    'cn;lang-ja;phonetic'        =&gt; array('おがさわら ろどにー'),
-    'title;lang-ja;phonetic'     =&gt; array('えいぎょうぶ ぶちょう'),
-    'givenname;lang-en'          =&gt; array('Rodney'),
-    'sn;lang-en'                 =&gt; array('Ogasawara'),
-    'cn;lang-en'                 =&gt; array('Rodney Ogasawara'),
-    'title;lang-en'              =&gt; array('Sales, Director'),
+    'uid'                        => array('rogasawara'),
+    'mail'                       => array('rogasawara@airius.co.jp'),
+    'givenname;lang-ja'          => array('ロドニー'),
+    'sn;lang-ja'                 => array('小笠原'),
+    'cn;lang-ja'                 => array('小笠原 ロドニー'),
+    'title;lang-ja'              => array('営業部 部長'),
+    'preferredlanguage'          => array('ja'),
+    'givenname'                  => array('ロドニー'),
+    'sn'                         => array('小笠原'),
+    'cn'                         => array('小笠原 ロドニー'),
+    'title'                      => array('営業部 部長'),
+    'givenname;lang-ja;phonetic' => array('ろどにー'),
+    'sn;lang-ja;phonetic'        => array('おがさわら'),
+    'cn;lang-ja;phonetic'        => array('おがさわら ろどにー'),
+    'title;lang-ja;phonetic'     => array('えいぎょうぶ ぶちょう'),
+    'givenname;lang-en'          => array('Rodney'),
+    'sn;lang-en'                 => array('Ogasawara'),
+    'cn;lang-en'                 => array('Rodney Ogasawara'),
+    'title;lang-en'              => array('Sales, Director'),
 );
 */
-</programlisting>
+]]></programlisting>
     </section>
 </section>

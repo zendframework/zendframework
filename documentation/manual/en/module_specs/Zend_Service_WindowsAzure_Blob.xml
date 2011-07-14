@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.windowsazure.storage.blob"><info><title>Zend_Service_WindowsAzure_Storage_Blob</title></info>
     
 
@@ -37,12 +35,12 @@
             <example xml:id="zend.service.windowsazure.storage.blob.api.create-container.example"><info><title>Creating a storage container</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Blob();
-$result = $storageClient-&gt;createContainer('testcontainer');
+$result = $storageClient->createContainer('testcontainer');
 
-echo 'Container name is: ' . $result-&gt;Name;
-</programlisting>
+echo 'Container name is: ' . $result->Name;
+]]></programlisting>
             </example>
         </section>
 
@@ -57,10 +55,10 @@ echo 'Container name is: ' . $result-&gt;Name;
             <example xml:id="zend.service.windowsazure.storage.blob.api.delete-container.example"><info><title>Deleting a storage container</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Blob();
-$storageClient-&gt;deleteContainer('testcontainer');
-</programlisting>
+$storageClient->deleteContainer('testcontainer');
+]]></programlisting>
             </example>
         </section>
 
@@ -75,16 +73,16 @@ $storageClient-&gt;deleteContainer('testcontainer');
             <example xml:id="zend.service.windowsazure.storage.blob.api.storing-blob.example"><info><title>Storing a blob</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Blob();
 
 // upload /home/maarten/example.txt to Azure
-$result = $storageClient-&gt;putBlob(
+$result = $storageClient->putBlob(
     'testcontainer', 'example.txt', '/home/maarten/example.txt'
 );
 
-echo 'Blob name is: ' . $result-&gt;Name;
-</programlisting>
+echo 'Blob name is: ' . $result->Name;
+]]></programlisting>
             </example>
         </section>
 
@@ -101,16 +99,16 @@ echo 'Blob name is: ' . $result-&gt;Name;
             <example xml:id="zend.service.windowsazure.storage.blob.api.copy-blob.example"><info><title>Copying a blob</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Blob();
 
 // copy example.txt to example2.txt
-$result = $storageClient-&gt;copyBlob(
+$result = $storageClient->copyBlob(
     'testcontainer', 'example.txt', 'testcontainer', 'example2.txt'
 );
 
-echo 'Copied blob name is: ' . $result-&gt;Name;
-</programlisting>
+echo 'Copied blob name is: ' . $result->Name;
+]]></programlisting>
             </example>
         </section>
 
@@ -126,14 +124,14 @@ echo 'Copied blob name is: ' . $result-&gt;Name;
             <example xml:id="zend.service.windowsazure.storage.blob.api.download-blob.example"><info><title>Downloading a blob</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Blob();
 
 // download file to /home/maarten/example.txt
-$storageClient-&gt;getBlob(
+$storageClient->getBlob(
     'testcontainer', 'example.txt', '/home/maarten/example.txt'
 );
-</programlisting>
+]]></programlisting>
             </example>
         </section>
 
@@ -155,15 +153,15 @@ $storageClient-&gt;getBlob(
             <example xml:id="zend.service.windowsazure.storage.blob.api.public-blob.example"><info><title>Making a blob publicly available</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Blob();
 
 // make container publicly available
-$storageClient-&gt;setContainerAcl(
+$storageClient->setContainerAcl(
     'testcontainer',
     Zend_Service_WindowsAzure_Storage_Blob::ACL_PUBLIC
 );
-</programlisting>
+]]></programlisting>
             </example>
         </section>
     </section>
@@ -199,13 +197,13 @@ $storageClient-&gt;setContainerAcl(
         <example xml:id="zend.service.windowsazure.storage.blob.wrapper.sample"><info><title>Example usage of blob storage stream wrapper</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $fileHandle = fopen('azure://mycontainer/myfile.txt', 'r');
 
 // ...
 
 fclose($fileHandle);
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -217,17 +215,17 @@ fclose($fileHandle);
         <example xml:id="zend.service.windowsazure.storage.blob.wrapper.register"><info><title>Registering the blob storage stream wrapper</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Blob();
 // registers azure:// on this storage client
-$storageClient-&gt;registerStreamWrapper();
+$storageClient->registerStreamWrapper();
 
 
 // or:
 
 // regiters blob:// on this storage client
-$storageClient-&gt;registerStreamWrapper('blob://');
-</programlisting>
+$storageClient->registerStreamWrapper('blob://');
+]]></programlisting>
         </example>
 
         <para>
@@ -280,17 +278,17 @@ http://phpstorage.blob.core.windows.net/phpazuretestshared1?st=2009-08-17T09%3A0
             <example xml:id="zend.service.windowsazure.storage.blob.sharedaccesssig.generate-2"><info><title>Generating a Shared Access Signature for a container</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $storageClient   = new Zend_Service_WindowsAzure_Storage_Blob();
-$sharedAccessUrl = $storageClient-&gt;generateSharedAccessUrl(
+$sharedAccessUrl = $storageClient->generateSharedAccessUrl(
     'container1',
     '',
     'c',
     'w',
-    $storageClient -&gt;isoDate(time() - 500),
-    $storageClient -&gt;isoDate(time() + 3000)
+    $storageClient ->isoDate(time() - 500),
+    $storageClient ->isoDate(time() + 3000)
 );
-</programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -302,17 +300,17 @@ $sharedAccessUrl = $storageClient-&gt;generateSharedAccessUrl(
             <example xml:id="zend.service.windowsazure.storage.blob.sharedaccesssig-generate-3"><info><title>Generating a Shared Access Signature for a blob</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $storageClient   = new Zend_Service_WindowsAzure_Storage_Blob();
-$sharedAccessUrl = $storageClient-&gt;generateSharedAccessUrl(
+$sharedAccessUrl = $storageClient->generateSharedAccessUrl(
     'container1',
     'test.txt',
     'b',
     'r',
-    $storageClient -&gt;isoDate(time() - 500),
-    $storageClient -&gt;isoDate(time() + 3000)
+    $storageClient ->isoDate(time() - 500),
+    $storageClient ->isoDate(time() + 3000)
 );
-</programlisting>
+]]></programlisting>
             </example>
         </section>
 
@@ -339,20 +337,20 @@ http://phpstorage.blob.core.windows.net/phpazuretestshared1?st=2009-08-17T09%3A0
             <example xml:id="zend.service.windowsazure.storage.blob.sharedaccesssig.consuming"><info><title>Consuming a Shared Access Signature for a container</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Blob(
     'blob.core.windows.net', 'phpstorage', ''
 );
-$storageClient-&gt;setCredentials(
+$storageClient->setCredentials(
     new Zend_Service_WindowsAzure_Credentials_SharedAccessSignature()
 );
-$storageClient-&gt;getCredentials()-&gt;setPermissionSet(array(
-    'http://phpstorage.blob.core.windows.net/phpazuretestshared1?st=2009-08-17T09%3A06%3A17Z&amp;se=2009-08-17T09%3A56%3A17Z&amp;sr=c&amp;sp=w&amp;sig=hscQ7Su1nqd91OfMTwTkxabhJSaspx%2BD%2Fz8UqZAgn9s%3D'
+$storageClient->getCredentials()->setPermissionSet(array(
+    'http://phpstorage.blob.core.windows.net/phpazuretestshared1?st=2009-08-17T09%3A06%3A17Z&se=2009-08-17T09%3A56%3A17Z&sr=c&sp=w&sig=hscQ7Su1nqd91OfMTwTkxabhJSaspx%2BD%2Fz8UqZAgn9s%3D'
 ));
-$storageClient-&gt;putBlob(
+$storageClient->putBlob(
     'phpazuretestshared1', 'NewBlob.txt', 'C:\Files\dataforazure.txt'
 );
-</programlisting>
+]]></programlisting>
             </example>
 
             <para>

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.theory-of-operation"><info><title>Theory of Operation</title></info>
     
 
@@ -151,7 +149,7 @@
             which defines the following <acronym>API</acronym>:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 interface Zend_Application_Bootstrap_Bootstrapper
 {
     public function __construct($application);
@@ -163,7 +161,7 @@ interface Zend_Application_Bootstrap_Bootstrapper
     public function bootstrap($resource = null);
     public function run();
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             This <acronym>API</acronym> allows the bootstrap to accept the environment and
@@ -210,7 +208,7 @@ interface Zend_Application_Bootstrap_Bootstrapper
                 Take the following bootstrap class:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     protected function _initFoo()
@@ -228,34 +226,34 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         // ...
     }
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 To bootstrap just the <methodname>_initFoo()</methodname> method, do the
                 following:
             </para>
 
-            <programlisting language="php">
-$bootstrap-&gt;bootstrap('foo');
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$bootstrap->bootstrap('foo');
+]]></programlisting>
 
             <para>
                 To bootstrap the <methodname>_initFoo()</methodname> and
                 <methodname>_initBar()</methodname> methods, do the following:
             </para>
 
-            <programlisting language="php">
-$bootstrap-&gt;bootstrap(array('foo', 'bar'));
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$bootstrap->bootstrap(array('foo', 'bar'));
+]]></programlisting>
 
             <para>
                 To bootstrap all resource methods, call <methodname>bootstrap()</methodname>
                 with no arguments:
             </para>
 
-            <programlisting language="php">
-$bootstrap-&gt;bootstrap();
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$bootstrap->bootstrap();
+]]></programlisting>
         </section>
 
         <section xml:id="zend.application.theory-of-operation.bootstrap.resource-plugins"><info><title>Bootstraps that use resource plugins</title></info>
@@ -278,7 +276,7 @@ $bootstrap-&gt;bootstrap();
                 loading resource plugins:
             </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 interface Zend_Application_Bootstrap_ResourceBootstrapper
 {
     public function registerPluginResource($resource, $options = null);
@@ -290,7 +288,7 @@ interface Zend_Application_Bootstrap_ResourceBootstrapper
     public function setPluginLoader(Zend_Loader_PluginLoader_Interface $loader);
     public function getPluginLoader();
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 Resource plugins basically provide the ability to create
@@ -319,15 +317,15 @@ interface Zend_Application_Bootstrap_ResourceBootstrapper
                 be the name of the resource. As an example,
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $application = new Zend_Application(APPLICATION_ENV, array(
-    'resources' =&gt; array(
-        'FrontController' =&gt; array(
-            'controllerDirectory' =&gt; APPLICATION_PATH . '/controllers',
+    'resources' => array(
+        'FrontController' => array(
+            'controllerDirectory' => APPLICATION_PATH . '/controllers',
         ),
     ),
 ));
-</programlisting>
+]]></programlisting>
 
             <para>
                 This indicates that the "FrontController" resource should be
@@ -349,18 +347,18 @@ $application = new Zend_Application(APPLICATION_ENV, array(
                 pass that information to the application object as follows:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $application = new Zend_Application(APPLICATION_ENV, array(
-    'pluginPaths' =&gt; array(
-        'My_Resource' =&gt; APPLICATION_PATH . '/resources/',
+    'pluginPaths' => array(
+        'My_Resource' => APPLICATION_PATH . '/resources/',
     ),
-    'resources' =&gt; array(
-        'FrontController' =&gt; array(
-            'controllerDirectory' =&gt; APPLICATION_PATH . '/controllers',
+    'resources' => array(
+        'FrontController' => array(
+            'controllerDirectory' => APPLICATION_PATH . '/controllers',
         ),
     ),
 ));
-</programlisting>
+]]></programlisting>
 
             <para>
                 You would now be able to use resources from that directory.
@@ -374,16 +372,16 @@ $application = new Zend_Application(APPLICATION_ENV, array(
                 you can mix and match to execute resource methods as well.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Execute one:
-$bootstrap-&gt;bootstrap('FrontController');
+$bootstrap->bootstrap('FrontController');
 
 // Execute several:
-$bootstrap-&gt;bootstrap(array('FrontController', 'Foo'));
+$bootstrap->bootstrap(array('FrontController', 'Foo'));
 
 // Execute all resource methods and plugins:
-$bootstrap-&gt;bootstrap();
-</programlisting>
+$bootstrap->bootstrap();
+]]></programlisting>
         </section>
 
         <section xml:id="zend.application.theory-of-operation.bootstrap.registry"><info><title>Resource Registry</title></info>
@@ -419,7 +417,7 @@ $bootstrap-&gt;bootstrap();
                 As an example, consider a basic view resource:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     protected function _initView()
@@ -430,24 +428,24 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         return $view;
     }
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 You can then check for it and/or fetch it as follows:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Using the has/getResource() pair:
-if ($bootstrap-&gt;hasResource('view')) {
-    $view = $bootstrap-&gt;getResource('view');
+if ($bootstrap->hasResource('view')) {
+    $view = $bootstrap->getResource('view');
 }
 
 // Via the container:
-$container = $bootstrap-&gt;getContainer();
-if (isset($container-&gt;view)) {
-    $view = $container-&gt;view;
+$container = $bootstrap->getContainer();
+if (isset($container->view)) {
+    $view = $container->view;
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 Please note that the registry and also the container is not global. This
@@ -464,17 +462,17 @@ if (isset($container-&gt;view)) {
                 above within your action controller, you could do the following:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function init()
     {
-        $bootstrap = $this-&gt;getInvokeArg('bootstrap');
-        $view = $bootstrap-&gt;getResource('view');
+        $bootstrap = $this->getInvokeArg('bootstrap');
+        $view = $bootstrap->getResource('view');
         // ...
     }
 }
-</programlisting>
+]]></programlisting>
         </section>
 
         <section xml:id="zend.application.theory-of-operation.bootstrap.dependency-tracking"><info><title>Dependency Tracking</title></info>
@@ -513,26 +511,26 @@ class FooController extends Zend_Controller_Action
                 In a resource method, such a call would look like this:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     protected function _initRequest()
     {
         // Ensure the front controller is initialized
-        $this-&gt;bootstrap('FrontController');
+        $this->bootstrap('FrontController');
 
         // Retrieve the front controller from the bootstrap registry
-        $front = $this-&gt;getResource('FrontController');
+        $front = $this->getResource('FrontController');
 
         $request = new Zend_Controller_Request_Http();
-        $request-&gt;setBaseUrl('/foo');
-        $front-&gt;setRequest($request);
+        $request->setBaseUrl('/foo');
+        $front->setRequest($request);
 
         // Ensure the request is stored in the bootstrap registry
         return $request;
     }
 }
-</programlisting>
+]]></programlisting>
         </section>
     </section>
 
@@ -556,7 +554,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             interface is simply this:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 interface Zend_Application_Resource_Resource
 {
     public function __construct($options = null);
@@ -568,7 +566,7 @@ interface Zend_Application_Resource_Resource
     public function getOptions();
     public function init();
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             The interface defines simply that a resource plugin should accept options
@@ -584,7 +582,7 @@ interface Zend_Application_Resource_Resource
             via configuration. Such a resource plugin might look like this:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class My_Resource_View extends Zend_Application_Resource_ResourceAbstract
 {
     protected $_view;
@@ -592,13 +590,13 @@ class My_Resource_View extends Zend_Application_Resource_ResourceAbstract
     public function init()
     {
         // Return view so bootstrap will store it in the registry
-        return $this-&gt;getView();
+        return $this->getView();
     }
 
     public function getView()
     {
-        if (null === $this-&gt;_view) {
-            $options = $this-&gt;getOptions();
+        if (null === $this->_view) {
+            $options = $this->getOptions();
             $title   = '';
             if (array_key_exists('title', $options)) {
                 $title = $options['title'];
@@ -606,23 +604,23 @@ class My_Resource_View extends Zend_Application_Resource_ResourceAbstract
             }
 
             $view = new Zend_View($options);
-            $view-&gt;doctype('XHTML1_STRICT');
-            $view-&gt;headTitle($title);
-            $view-&gt;headLink()-&gt;appendStylesheet('/css/site.css');
-            $view-&gt;headScript()-&gt;appendfile('/js/analytics.js');
+            $view->doctype('XHTML1_STRICT');
+            $view->headTitle($title);
+            $view->headLink()->appendStylesheet('/css/site.css');
+            $view->headScript()->appendfile('/js/analytics.js');
 
             $viewRenderer =
                 Zend_Controller_Action_HelperBroker::getStaticHelper(
                     'ViewRenderer'
                 );
-            $viewRenderer-&gt;setView($view);
+            $viewRenderer->setView($view);
 
-            $this-&gt;_view = $view;
+            $this->_view = $view;
         }
-        return $this-&gt;_view;
+        return $this->_view;
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             As long as you register the prefix path for this resource plugin,

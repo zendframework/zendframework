@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.types"><info><title>Types of measurements</title></info>
     
 
@@ -383,13 +381,13 @@
             the computer, an underline has to be used instead of it.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $great = '_X';
 $locale = new Zend_Locale('en');
 $unit = new Zend_Measure_Number($great,Zend_Measure_Number::ROMAN, $locale);
 
 // convert to the decimal system
-echo $unit-&gt;convertTo(Zend_Measure_Number::DECIMAL);
-</programlisting>
+echo $unit->convertTo(Zend_Measure_Number::DECIMAL);
+]]></programlisting>
     </section>
 </section>

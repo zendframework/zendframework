@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.decorators"><info><title>Creating Custom Form Markup Using Zend_Form_Decorator</title></info>
     
 
@@ -159,7 +157,7 @@
             following:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 interface Zend_Form_Decorator_Interface
 {
     public function __construct($options = null);
@@ -174,7 +172,7 @@ interface Zend_Form_Decorator_Interface
     public function clearOptions();
     public function render($content);
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             To make this simpler, you can simply extend
@@ -190,80 +188,80 @@ interface Zend_Form_Decorator_Interface
             decorator as follows:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class My_Decorator_Composite extends Zend_Form_Decorator_Abstract
 {
     public function buildLabel()
     {
-        $element = $this-&gt;getElement();
-        $label = $element-&gt;getLabel();
-        if ($translator = $element-&gt;getTranslator()) {
-            $label = $translator-&gt;translate($label);
+        $element = $this->getElement();
+        $label = $element->getLabel();
+        if ($translator = $element->getTranslator()) {
+            $label = $translator->translate($label);
         }
-        if ($element-&gt;isRequired()) {
+        if ($element->isRequired()) {
             $label .= '*';
         }
         $label .= ':';
-        return $element-&gt;getView()
-                       -&gt;formLabel($element-&gt;getName(), $label);
+        return $element->getView()
+                       ->formLabel($element->getName(), $label);
     }
 
     public function buildInput()
     {
-        $element = $this-&gt;getElement();
-        $helper  = $element-&gt;helper;
-        return $element-&gt;getView()-&gt;$helper(
-            $element-&gt;getName(),
-            $element-&gt;getValue(),
-            $element-&gt;getAttribs(),
-            $element-&gt;options
+        $element = $this->getElement();
+        $helper  = $element->helper;
+        return $element->getView()->$helper(
+            $element->getName(),
+            $element->getValue(),
+            $element->getAttribs(),
+            $element->options
         );
     }
 
     public function buildErrors()
     {
-        $element  = $this-&gt;getElement();
-        $messages = $element-&gt;getMessages();
+        $element  = $this->getElement();
+        $messages = $element->getMessages();
         if (empty($messages)) {
             return '';
         }
-        return '&lt;div class="errors"&gt;' .
-               $element-&gt;getView()-&gt;formErrors($messages) . '&lt;/div&gt;';
+        return '<div class="errors">' .
+               $element->getView()->formErrors($messages) . '</div>';
     }
 
     public function buildDescription()
     {
-        $element = $this-&gt;getElement();
-        $desc    = $element-&gt;getDescription();
+        $element = $this->getElement();
+        $desc    = $element->getDescription();
         if (empty($desc)) {
             return '';
         }
-        return '&lt;div class="description"&gt;' . $desc . '&lt;/div&gt;';
+        return '<div class="description">' . $desc . '</div>';
     }
 
     public function render($content)
     {
-        $element = $this-&gt;getElement();
+        $element = $this->getElement();
         if (!$element instanceof Zend_Form_Element) {
             return $content;
         }
-        if (null === $element-&gt;getView()) {
+        if (null === $element->getView()) {
             return $content;
         }
 
-        $separator = $this-&gt;getSeparator();
-        $placement = $this-&gt;getPlacement();
-        $label     = $this-&gt;buildLabel();
-        $input     = $this-&gt;buildInput();
-        $errors    = $this-&gt;buildErrors();
-        $desc      = $this-&gt;buildDescription();
+        $separator = $this->getSeparator();
+        $placement = $this->getPlacement();
+        $label     = $this->buildLabel();
+        $input     = $this->buildInput();
+        $errors    = $this->buildErrors();
+        $desc      = $this->buildDescription();
 
-        $output = '&lt;div class="form element"&gt;'
+        $output = '<div class="form element">'
                 . $label
                 . $input
                 . $errors
                 . $desc
-                . '&lt;/div&gt;'
+                . '</div>'
 
         switch ($placement) {
             case (self::PREPEND):
@@ -274,33 +272,33 @@ class My_Decorator_Composite extends Zend_Form_Decorator_Abstract
         }
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             You can then place this in the decorator path:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // for an element:
-$element-&gt;addPrefixPath('My_Decorator',
+$element->addPrefixPath('My_Decorator',
                         'My/Decorator/',
                         'decorator');
 
 // for all elements:
-$form-&gt;addElementPrefixPath('My_Decorator',
+$form->addElementPrefixPath('My_Decorator',
                             'My/Decorator/',
                             'decorator');
-</programlisting>
+]]></programlisting>
 
         <para>
             You can then specify this decorator as 'Composite' and attach it to
             an element:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Overwrite existing decorators with this single one:
-$element-&gt;setDecorators(array('Composite'));
-</programlisting>
+$element->setDecorators(array('Composite'));
+]]></programlisting>
 
         <para>
             While this example showed how to create a decorator that renders
@@ -319,16 +317,16 @@ $element-&gt;setDecorators(array('Composite'));
             decorator:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class My_Decorator_Errors
 {
     public function render($content = '')
     {
-        $output = '&lt;div class="errors"&gt;The value you provided was invalid;
-            please try again&lt;/div&gt;';
+        $output = '<div class="errors">The value you provided was invalid;
+            please try again</div>';
 
-        $placement = $this-&gt;getPlacement();
-        $separator = $this-&gt;getSeparator();
+        $placement = $this->getPlacement();
+        $separator = $this->getSeparator();
 
         switch ($placement) {
             case 'PREPEND':
@@ -339,7 +337,7 @@ class My_Decorator_Errors
         }
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             In this particular example, because the decorator's final segment,
@@ -369,16 +367,16 @@ class My_Decorator_Errors
             you can pass in content you want decorated. For example:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // render just the element label decorator:
-echo $element-&gt;renderLabel();
+echo $element->renderLabel();
 
 // render just the display group fieldset, with some content:
-echo $group-&gt;renderFieldset('fieldset content');
+echo $group->renderFieldset('fieldset content');
 
 // render just the form HTML tag, with some content:
-echo $form-&gt;renderHtmlTag('wrap this content');
-</programlisting>
+echo $form->renderHtmlTag('wrap this content');
+]]></programlisting>
 
         <para>
             If the decorator does not exist, an exception is raised.

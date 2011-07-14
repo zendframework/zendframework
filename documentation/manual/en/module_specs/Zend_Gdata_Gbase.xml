@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.gbase"><info><title>Using Google Base</title></info>
     
 
@@ -120,7 +118,7 @@
                 authentication:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Parameters for ClientAuth authentication
 $service = Zend_Gdata_Gbase::AUTH_SERVICE_NAME;
 $user = "sample.user@gmail.com";
@@ -131,14 +129,14 @@ $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 
 // Create an instance of the Base service
 $service = new Zend_Gdata_Gbase($client);
-</programlisting>
+]]></programlisting>
 
             <para>
                 A Base service using AuthSub can be created in a similar, though slightly more
                 lengthy fashion:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 /*
  * Retrieve the current URL so that the AuthSub server knows where to
  * redirect the user after authentication is complete.
@@ -154,16 +152,16 @@ function getCurrentUrl()
                             strcspn($_SERVER['REQUEST_URI'], "\n\r")),
                      ENT_QUOTES);
 
-    if (isset($_SERVER['HTTPS']) &amp;&amp;
+    if (isset($_SERVER['HTTPS']) &&
         strtolower($_SERVER['HTTPS']) == 'on') {
         $protocol = 'https://';
     } else {
         $protocol = 'http://';
     }
     $host = $_SERVER['HTTP_HOST'];
-    if ($_SERVER['HTTP_PORT'] != '' &amp;&amp;
-        (($protocol == 'http://' &amp;&amp; $_SERVER['HTTP_PORT'] != '80') ||
-        ($protocol == 'https://' &amp;&amp; $_SERVER['HTTP_PORT'] != '443'))) {
+    if ($_SERVER['HTTP_PORT'] != '' &&
+        (($protocol == 'http://' && $_SERVER['HTTP_PORT'] != '80') ||
+        ($protocol == 'https://' && $_SERVER['HTTP_PORT'] != '443'))) {
         $port = ':' . $_SERVER['HTTP_PORT'];
     } else {
         $port = '';
@@ -181,7 +179,7 @@ function getAuthSubHttpClient()
 
     // If there is no AuthSub session or one-time token waiting for us,
     // redirect the user to the AuthSub server to get one.
-    if (!isset($_SESSION['sessionToken']) &amp;&amp; !isset($_GET['token'])) {
+    if (!isset($_SESSION['sessionToken']) && !isset($_GET['token'])) {
         // Parameters to give to AuthSub server
         $next = getCurrentUrl();
         $scope = "http://www.google.com/base/feeds/items/";
@@ -202,7 +200,7 @@ function getAuthSubHttpClient()
     }
 
     // Convert an AuthSub one-time token into a session token if needed
-    if (!isset($_SESSION['sessionToken']) &amp;&amp; isset($_GET['token'])) {
+    if (!isset($_SESSION['sessionToken']) && isset($_GET['token'])) {
         $_SESSION['sessionToken'] =
             Zend_Gdata_AuthSub::getAuthSubSessionToken($_GET['token']);
     }
@@ -215,7 +213,7 @@ function getAuthSubHttpClient()
     return $client;
 }
 
-// -&gt; Script execution begins here &lt;-
+// -> Script execution begins here <-
 
 // Make sure http://code.google.com/apis/gdata/reference.html#Queriesthat
 // the user has a valid session, so we can record the
@@ -225,16 +223,16 @@ session_start();
 // Create an instance of the Base service, redirecting the user
 // to the AuthSub server if necessary.
 $service = new Zend_Gdata_Gbase(getAuthSubHttpClient());
-</programlisting>
+]]></programlisting>
 
             <para>
                 Finally, an unauthenticated server can be created for use with snippets feeds:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Create an instance of the Base service using an unauthenticated HTTP client
 $service = new Zend_Gdata_Gbase();
-</programlisting>
+]]></programlisting>
         </section>
     </section>
 
@@ -272,15 +270,15 @@ $service = new Zend_Gdata_Gbase();
                     <methodname>getGbaseItemFeed()</methodname> methods:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $service = new Zend_Gdata_Gbase($client);
-$query = $service-&gt;newItemQuery();
-$query-&gt;setBq('[title:Programming]');
-$query-&gt;setOrderBy('modification_time');
-$query-&gt;setSortOrder('descending');
-$query-&gt;setMaxResults('5');
-$feed = $service-&gt;getGbaseItemFeed($query);
-</programlisting>
+$query = $service->newItemQuery();
+$query->setBq('[title:Programming]');
+$query->setOrderBy('modification_time');
+$query->setSortOrder('descending');
+$query->setMaxResults('5');
+$feed = $service->getGbaseItemFeed($query);
+]]></programlisting>
 
                 <para>
                     A full list of these parameters is available at the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/base/items-feed.html#QueParameters">Query
@@ -297,15 +295,15 @@ $feed = $service-&gt;getGbaseItemFeed($query);
                     <methodname>getGbaseSnippetFeed()</methodname> methods:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $service = new Zend_Gdata_Gbase();
-$query = $service-&gt;newSnippetQuery();
-$query-&gt;setBq('[title:Programming]');
-$query-&gt;setOrderBy('modification_time');
-$query-&gt;setSortOrder('descending');
-$query-&gt;setMaxResults('5');
-$feed = $service-&gt;getGbaseSnippetFeed($query);
-</programlisting>
+$query = $service->newSnippetQuery();
+$query->setBq('[title:Programming]');
+$query->setOrderBy('modification_time');
+$query->setSortOrder('descending');
+$query->setMaxResults('5');
+$feed = $service->getGbaseSnippetFeed($query);
+]]></programlisting>
 
                 <para>
                     A full list of these parameters is available at the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/base/snippets-feed.html#Parameters">Query
@@ -327,31 +325,31 @@ $feed = $service-&gt;getGbaseSnippetFeed($query);
                 <methodname>getGbaseAttributes()</methodname> and iterate through the results:
             </para>
 
-            <programlisting language="php">
-foreach ($feed-&gt;entries as $entry) {
+            <programlisting language="php"><![CDATA[
+foreach ($feed->entries as $entry) {
   // Get all attributes and print out the name and text value of each
   // attribute
-  $baseAttributes = $entry-&gt;getGbaseAttributes();
+  $baseAttributes = $entry->getGbaseAttributes();
   foreach ($baseAttributes as $attr) {
-    echo "Attribute " . $attr-&gt;name . " : " . $attr-&gt;text . "&lt;br&gt;";
+    echo "Attribute " . $attr->name . " : " . $attr->text . "<br>";
   }
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 Or, you can look for specific attribute name and iterate through the results that
                 match:
             </para>
 
-            <programlisting language="php">
-foreach ($feed-&gt;entries as $entry) {
-  // Print all main ingredients &lt;g:main_ingredient&gt;
-  $baseAttributes = $entry-&gt;getGbaseAttribute("main_ingredient");
+            <programlisting language="php"><![CDATA[
+foreach ($feed->entries as $entry) {
+  // Print all main ingredients <g:main_ingredient>
+  $baseAttributes = $entry->getGbaseAttribute("main_ingredient");
   foreach ($baseAttributes as $attr) {
-    echo "Main ingredient: " . $attr-&gt;text . "&lt;br&gt;";
+    echo "Main ingredient: " . $attr->text . "<br>";
   }
 }
-</programlisting>
+]]></programlisting>
         </section>
     </section>
 
@@ -377,39 +375,39 @@ foreach ($feed-&gt;entries as $entry) {
                 for the Base service:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $service = new Zend_Gdata_Gbase($client);
-$newEntry = $service-&gt;newItemEntry();
+$newEntry = $service->newItemEntry();
 
 // Add title
 $title = "PHP Developer Handbook";
-$newEntry-&gt;title = $service-&gt;newTitle(trim($title));
+$newEntry->title = $service->newTitle(trim($title));
 
 // Add some content
 $content = "Essential handbook for PHP developers.";
-$newEntry-&gt;content = $service-&gt;newContent($content);
-$newEntry-&gt;content-&gt;type = 'text';
+$newEntry->content = $service->newContent($content);
+$newEntry->content->type = 'text';
 
 // Define product type
 $itemType = "Products";
-$newEntry-&gt;itemType = $itemType;
+$newEntry->itemType = $itemType;
 
 // Add item specific attributes
-$newEntry-&gt;addGbaseAttribute("product_type", "book", "text");
-$newEntry-&gt;addGbaseAttribute("price", "12.99 USD", "floatUnit");
-$newEntry-&gt;addGbaseAttribute("quantity", "10", "int");
-$newEntry-&gt;addGbaseAttribute("weight", "2.2 lbs", "numberUnit");
-$newEntry-&gt;addGbaseAttribute("condition", "New", "text");
-$newEntry-&gt;addGbaseAttribute("author", "John Doe", "text");
-$newEntry-&gt;addGbaseAttribute("edition", "First Edition", "text");
-$newEntry-&gt;addGbaseAttribute("pages", "253", "number");
-$newEntry-&gt;addGbaseAttribute("publisher", "My Press", "text");
-$newEntry-&gt;addGbaseAttribute("year", "2007", "number");
-$newEntry-&gt;addGbaseAttribute("payment_accepted", "Google Checkout", "text");
+$newEntry->addGbaseAttribute("product_type", "book", "text");
+$newEntry->addGbaseAttribute("price", "12.99 USD", "floatUnit");
+$newEntry->addGbaseAttribute("quantity", "10", "int");
+$newEntry->addGbaseAttribute("weight", "2.2 lbs", "numberUnit");
+$newEntry->addGbaseAttribute("condition", "New", "text");
+$newEntry->addGbaseAttribute("author", "John Doe", "text");
+$newEntry->addGbaseAttribute("edition", "First Edition", "text");
+$newEntry->addGbaseAttribute("pages", "253", "number");
+$newEntry->addGbaseAttribute("publisher", "My Press", "text");
+$newEntry->addGbaseAttribute("year", "2007", "number");
+$newEntry->addGbaseAttribute("payment_accepted", "Google Checkout", "text");
 
 $dryRun = true;
-$createdEntry = $service-&gt;insertGbaseItem($newEntry, $dryRun);
-</programlisting>
+$createdEntry = $service->insertGbaseItem($newEntry, $dryRun);
+]]></programlisting>
         </section>
 
         <section xml:id="zend.gdata.gbase.crud.modify"><info><title>Modify an Item</title></info>
@@ -419,49 +417,49 @@ $createdEntry = $service-&gt;insertGbaseItem($newEntry, $dryRun);
                 You can update each attribute element of an item as you iterate through them:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Update the title
 $newTitle = "PHP Developer Handbook Second Edition";
-$entry-&gt;title = $service-&gt;newTitle($newTitle);
+$entry->title = $service->newTitle($newTitle);
 
-// Find &lt;g:price&gt; attribute and update the price
-$baseAttributes = $entry-&gt;getGbaseAttribute("price");
+// Find <g:price> attribute and update the price
+$baseAttributes = $entry->getGbaseAttribute("price");
 if (is_object($baseAttributes[0])) {
   $newPrice = "16.99 USD";
-  $baseAttributes[0]-&gt;text = $newPrice;
+  $baseAttributes[0]->text = $newPrice;
 }
 
-// Find &lt;g:pages&gt; attribute and update the number of pages
-$baseAttributes = $entry-&gt;getGbaseAttribute("pages");
+// Find <g:pages> attribute and update the number of pages
+$baseAttributes = $entry->getGbaseAttribute("pages");
 if (is_object($baseAttributes[0])) {
   $newPages = "278";
-  $baseAttributes[0]-&gt;text = $newPages;
+  $baseAttributes[0]->text = $newPages;
 
   // Update the attribute type from "number" to "int"
-  if ($baseAttributes[0]-&gt;type == "number") {
+  if ($baseAttributes[0]->type == "number") {
     $newType = "int";
-    $baseAttributes[0]-&gt;type = $newType;
+    $baseAttributes[0]->type = $newType;
   }
 }
 
-// Remove &lt;g:label&gt; attributes
-$baseAttributes = $entry-&gt;getGbaseAttribute("label");
+// Remove <g:label> attributes
+$baseAttributes = $entry->getGbaseAttribute("label");
 foreach ($baseAttributes as $note) {
-  $entry-&gt;removeGbaseAttribute($note);
+  $entry->removeGbaseAttribute($note);
 }
 
 // Add new attributes
-$entry-&gt;addGbaseAttribute("note", "PHP 5", "text");
-$entry-&gt;addGbaseAttribute("note", "Web Programming", "text");
+$entry->addGbaseAttribute("note", "PHP 5", "text");
+$entry->addGbaseAttribute("note", "Web Programming", "text");
 
 // Save the changes by invoking save() on the entry object itself
 $dryRun = true;
-$entry-&gt;save($dryRun);
+$entry->save($dryRun);
 
 // Or, save the changes by calling updateGbaseItem() on the service object
 // $dryRun = true;
-// $service-&gt;updateGbaseItem($entry, $dryRun);
-</programlisting>
+// $service->updateGbaseItem($entry, $dryRun);
+]]></programlisting>
 
             <para>
                 After making the changes, either invoke <methodname>save($dryRun)</methodname>
@@ -478,20 +476,20 @@ $entry-&gt;save($dryRun);
                 You can remove an item by calling <methodname>deleteGbaseItem()</methodname> method:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $dryRun = false;
-$service-&gt;deleteGbaseItem($entry, $dryRun);
-</programlisting>
+$service->deleteGbaseItem($entry, $dryRun);
+]]></programlisting>
 
             <para>
                 Alternatively, you can invoke <methodname>delete()</methodname> on the
                 <classname>Zend_Gdata_Gbase_ItemEntry</classname> object:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $dryRun = false;
-$entry-&gt;delete($dryRun);
-</programlisting>
+$entry->delete($dryRun);
+]]></programlisting>
         </section>
     </section>
 </section>

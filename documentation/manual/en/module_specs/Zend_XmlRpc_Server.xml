@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.xmlrpc.server"><info><title>Zend_XmlRpc_Server</title></info>
     
 
@@ -22,11 +20,11 @@
             An example of the most basic use case:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $server = new Zend_XmlRpc_Server();
-$server-&gt;setClass('My_Service_Class');
-echo $server-&gt;handle();
-</programlisting>
+$server->setClass('My_Service_Class');
+echo $server->handle();
+]]></programlisting>
     </section>
 
     <section xml:id="zend.xmlrpc.server.structure"><info><title>Server Structure</title></info>
@@ -149,7 +147,7 @@ echo $server-&gt;handle();
             An example of how to hint follows:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 /**
 * This is a sample function
 *
@@ -161,7 +159,7 @@ echo $server-&gt;handle();
 function myFunc($val1, $val2, $val3)
 {
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             PhpDocumentor does no validation of the types specified for params
@@ -179,7 +177,7 @@ function myFunc($val1, $val2, $val3)
             PhpDocumentor, using the '|' operator:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 /**
 * This is a sample function
 *
@@ -191,7 +189,7 @@ function myFunc($val1, $val2, $val3)
 function myFunc($val1, $val2, $val3)
 {
 }
-</programlisting>
+]]></programlisting>
 
         <note>
             <para>
@@ -230,14 +228,14 @@ function myFunc($val1, $val2, $val3)
             function or class:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // All public methods in My_Service_Class will be accessible as
 // myservice.METHODNAME
-$server-&gt;setClass('My_Service_Class', 'myservice');
+$server->setClass('My_Service_Class', 'myservice');
 
 // Function 'somefunc' will be accessible as funcs.somefunc
-$server-&gt;addFunction('somefunc', 'funcs');
-</programlisting>
+$server->addFunction('somefunc', 'funcs');
+]]></programlisting>
     </section>
 
     <section xml:id="zend.xmlrpc.server.request"><info><title>Custom Request Objects</title></info>
@@ -297,9 +295,9 @@ $server-&gt;addFunction('somefunc', 'funcs');
             exception class to whitelist:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
-</programlisting>
+]]></programlisting>
 
         <para>
             If you utilize an exception class that your other project exceptions
@@ -335,7 +333,7 @@ Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
             An sample usage follows:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 function __autoload($class)
 {
     Zend_Loader::loadClass($class);
@@ -349,15 +347,15 @@ if (!Zend_XmlRpc_Server_Cache::get($cacheFile, $server)) {
     require_once 'My/Services/Paste.php';
     require_once 'My/Services/Tape.php';
 
-    $server-&gt;setClass('My_Services_Glue', 'glue');   // glue. namespace
-    $server-&gt;setClass('My_Services_Paste', 'paste'); // paste. namespace
-    $server-&gt;setClass('My_Services_Tape', 'tape');   // tape. namespace
+    $server->setClass('My_Services_Glue', 'glue');   // glue. namespace
+    $server->setClass('My_Services_Paste', 'paste'); // paste. namespace
+    $server->setClass('My_Services_Tape', 'tape');   // tape. namespace
 
     Zend_XmlRpc_Server_Cache::save($cacheFile, $server);
 }
 
-echo $server-&gt;handle();
-</programlisting>
+echo $server->handle();
+]]></programlisting>
 
         <para>
             The above example attempts to retrieve a server definition from
@@ -385,7 +383,7 @@ echo $server-&gt;handle();
                 method and handles incoming calls.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 /**
  * Return the MD5 sum of a value
  *
@@ -398,9 +396,9 @@ function md5Value($value)
 }
 
 $server = new Zend_XmlRpc_Server();
-$server-&gt;addFunction('md5Value');
-echo $server-&gt;handle();
-</programlisting>
+$server->addFunction('md5Value');
+echo $server->handle();
+]]></programlisting>
         </example>
 
         <example xml:id="zend.xmlrpc.server.use.attach-class"><info><title>Attaching a class</title></info>
@@ -411,13 +409,13 @@ echo $server-&gt;handle();
                 as dispatchable <acronym>XML-RPC</acronym> methods.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 require_once 'Services/Comb.php';
 
 $server = new Zend_XmlRpc_Server();
-$server-&gt;setClass('Services_Comb');
-echo $server-&gt;handle();
-</programlisting>
+$server->setClass('Services_Comb');
+echo $server->handle();
+]]></programlisting>
         </example>
 
         <example xml:id="zend.xmlrpc.server.use.attach-class-with-arguments"><info><title>Attaching a class with arguments</title></info>
@@ -429,7 +427,7 @@ echo $server-&gt;handle();
                 defaults when registering service classes.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class Services_PricingService
 {
     /**
@@ -448,11 +446,11 @@ class Services_PricingService
 }
 
 $server = new Zend_XmlRpc_Server();
-$server-&gt;setClass('Services_PricingService',
+$server->setClass('Services_PricingService',
                   'pricing',
                   new ProductRepository(),
                   new PurchaseRepository());
-</programlisting>
+]]></programlisting>
 
             <para>
                 The arguments passed at <methodname>setClass()</methodname> at server construction
@@ -477,7 +475,7 @@ $server-&gt;setClass('Services_PricingService',
                 <classname>Services_PricingService2</classname>.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class Services_PricingService2
 {
     /**
@@ -503,12 +501,12 @@ class Services_PricingService2
 }
 
 $server = new Zend_XmlRpc_Server();
-$server-&gt;sendArgumentsToAllMethods(false);
-$server-&gt;setClass('Services_PricingService2',
+$server->sendArgumentsToAllMethods(false);
+$server->setClass('Services_PricingService2',
                   'pricing',
                   new ProductRepository(),
                   new PurchaseRepository());
-</programlisting>
+]]></programlisting>
         </example>
 
         <example xml:id="zend.xmlrpc.server.use.attach-instance"><info><title>Attaching a class instance</title></info>
@@ -530,17 +528,17 @@ $server-&gt;setClass('Services_PricingService2',
                 with their own namespace.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 require_once 'Services/Comb.php';
 require_once 'Services/Brush.php';
 require_once 'Services/Pick.php';
 
 $server = new Zend_XmlRpc_Server();
-$server-&gt;setClass('Services_Comb', 'comb');   // methods called as comb.*
-$server-&gt;setClass('Services_Brush', 'brush'); // methods called as brush.*
-$server-&gt;setClass('Services_Pick', 'pick');   // methods called as pick.*
-echo $server-&gt;handle();
-</programlisting>
+$server->setClass('Services_Comb', 'comb');   // methods called as comb.*
+$server->setClass('Services_Brush', 'brush'); // methods called as brush.*
+$server->setClass('Services_Pick', 'pick');   // methods called as pick.*
+echo $server->handle();
+]]></programlisting>
         </example>
 
         <example xml:id="zend.xmlrpc.server.use.exceptions-faults"><info><title>Specifying exceptions to use as valid fault responses</title></info>
@@ -551,7 +549,7 @@ echo $server-&gt;handle();
                 class to report its code and message in the fault response.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 require_once 'Services/Exception.php';
 require_once 'Services/Comb.php';
 require_once 'Services/Brush.php';
@@ -561,11 +559,11 @@ require_once 'Services/Pick.php';
 Zend_XmlRpc_Server_Fault::attachFaultException('Services_Exception');
 
 $server = new Zend_XmlRpc_Server();
-$server-&gt;setClass('Services_Comb', 'comb');   // methods called as comb.*
-$server-&gt;setClass('Services_Brush', 'brush'); // methods called as brush.*
-$server-&gt;setClass('Services_Pick', 'pick');   // methods called as pick.*
-echo $server-&gt;handle();
-</programlisting>
+$server->setClass('Services_Comb', 'comb');   // methods called as comb.*
+$server->setClass('Services_Brush', 'brush'); // methods called as brush.*
+$server->setClass('Services_Pick', 'pick');   // methods called as pick.*
+echo $server->handle();
+]]></programlisting>
         </example>
 
         <example xml:id="zend.xmlrpc.server.use.custom-request-object"><info><title>Utilizing custom request and response objects</title></info>
@@ -586,7 +584,7 @@ echo $server-&gt;handle();
                 passes it to the server to handle.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 require_once 'Services/Request.php';
 require_once 'Services/Exception.php';
 require_once 'Services/Comb.php';
@@ -597,15 +595,15 @@ require_once 'Services/Pick.php';
 Zend_XmlRpc_Server_Fault::attachFaultException('Services_Exception');
 
 $server = new Zend_XmlRpc_Server();
-$server-&gt;setClass('Services_Comb', 'comb');   // methods called as comb.*
-$server-&gt;setClass('Services_Brush', 'brush'); // methods called as brush.*
-$server-&gt;setClass('Services_Pick', 'pick');   // methods called as pick.*
+$server->setClass('Services_Comb', 'comb');   // methods called as comb.*
+$server->setClass('Services_Brush', 'brush'); // methods called as brush.*
+$server->setClass('Services_Pick', 'pick');   // methods called as pick.*
 
 // Create a request object
 $request = new Services_Request();
 
-echo $server-&gt;handle($request);
-</programlisting>
+echo $server->handle($request);
+]]></programlisting>
         </example>
 
         <example xml:id="zend.xmlrpc.server.use.custom-response-object"><info><title>Specifying a custom response class</title></info>
@@ -616,7 +614,7 @@ echo $server-&gt;handle($request);
                 for the returned response.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 require_once 'Services/Request.php';
 require_once 'Services/Response.php';
 require_once 'Services/Exception.php';
@@ -628,18 +626,18 @@ require_once 'Services/Pick.php';
 Zend_XmlRpc_Server_Fault::attachFaultException('Services_Exception');
 
 $server = new Zend_XmlRpc_Server();
-$server-&gt;setClass('Services_Comb', 'comb');   // methods called as comb.*
-$server-&gt;setClass('Services_Brush', 'brush'); // methods called as brush.*
-$server-&gt;setClass('Services_Pick', 'pick');   // methods called as pick.*
+$server->setClass('Services_Comb', 'comb');   // methods called as comb.*
+$server->setClass('Services_Brush', 'brush'); // methods called as brush.*
+$server->setClass('Services_Pick', 'pick');   // methods called as pick.*
 
 // Create a request object
 $request = new Services_Request();
 
 // Utilize a custom response
-$server-&gt;setResponseClass('Services_Response');
+$server->setResponseClass('Services_Response');
 
-echo $server-&gt;handle($request);
-</programlisting>
+echo $server->handle($request);
+]]></programlisting>
         </example>
     </section>
 
@@ -653,7 +651,7 @@ echo $server-&gt;handle($request);
                 The example below illustrates caching server definitions between requests.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Specify a cache file
 $cacheFile = dirname(__FILE__) . '/xmlrpc.cache';
 
@@ -664,9 +662,9 @@ $server = new Zend_XmlRpc_Server();
 
 // Attempt to retrieve server definition from cache
 if (!Zend_XmlRpc_Server_Cache::get($cacheFile, $server)) {
-    $server-&gt;setClass('Services_Comb', 'comb');   // methods called as comb.*
-    $server-&gt;setClass('Services_Brush', 'brush'); // methods called as brush.*
-    $server-&gt;setClass('Services_Pick', 'pick');   // methods called as pick.*
+    $server->setClass('Services_Comb', 'comb');   // methods called as comb.*
+    $server->setClass('Services_Brush', 'brush'); // methods called as brush.*
+    $server->setClass('Services_Pick', 'pick');   // methods called as pick.*
 
     // Save cache
     Zend_XmlRpc_Server_Cache::save($cacheFile, $server);
@@ -676,10 +674,10 @@ if (!Zend_XmlRpc_Server_Cache::get($cacheFile, $server)) {
 $request = new Services_Request();
 
 // Utilize a custom response
-$server-&gt;setResponseClass('Services_Response');
+$server->setResponseClass('Services_Response');
 
-echo $server-&gt;handle($request);
-</programlisting>
+echo $server->handle($request);
+]]></programlisting>
         </example>
 
         <note>
@@ -707,7 +705,7 @@ echo $server-&gt;handle($request);
                 to leaverage the performance differences.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 require_once 'Zend/XmlRpc/Server.php';
 require_once 'Zend/XmlRpc/Generator/XmlWriter.php';
 
@@ -715,7 +713,7 @@ Zend_XmlRpc_Value::setGenerator(new Zend_XmlRpc_Generator_XmlWriter());
 
 $server = new Zend_XmlRpc_Server();
 ...
-</programlisting>
+]]></programlisting>
         </example>
 
         <note><info><title>Benchmark your application</title></info>

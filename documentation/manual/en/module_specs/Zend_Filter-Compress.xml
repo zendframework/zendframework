@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.compress"><info><title>Compress and Decompress</title></info>
     
 
@@ -108,9 +106,9 @@
             <classname>Zend_Filter_Compress</classname> and indicate the desired adapter.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Compress('Bz2');
-</programlisting>
+]]></programlisting>
 
         <para>
             To use a different adapter, you simply specify it to the constructor.
@@ -123,14 +121,14 @@ $filter = new Zend_Filter_Compress('Bz2');
             instantiation).
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Compress(array(
-    'adapter' =&gt; 'Bz2',
-    'options' =&gt; array(
-        'blocksize' =&gt; 8,
+    'adapter' => 'Bz2',
+    'options' => array(
+        'blocksize' => 8,
     ),
 ));
-</programlisting>
+]]></programlisting>
 
         <note><info><title>Default compression Adapter</title></info>
             
@@ -146,30 +144,30 @@ $filter = new Zend_Filter_Compress(array(
             decompression filter in this case.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Decompress('Bz2');
-</programlisting>
+]]></programlisting>
 
         <para>
             To get the compressed string, we have to give the original string. The filtered value is
             the compressed version of the original string.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter     = new Zend_Filter_Compress('Bz2');
-$compressed = $filter-&gt;filter('Uncompressed string');
+$compressed = $filter->filter('Uncompressed string');
 // Returns the compressed string
-</programlisting>
+]]></programlisting>
 
         <para>
             Decompression works the same way.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter     = new Zend_Filter_Decompress('Bz2');
-$compressed = $filter-&gt;filter('Compressed string');
+$compressed = $filter->filter('Compressed string');
 // Returns the uncompressed string
-</programlisting>
+]]></programlisting>
 
         <note><info><title>Note on string compression</title></info>
             
@@ -191,16 +189,16 @@ $compressed = $filter-&gt;filter('Compressed string');
             create.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter     = new Zend_Filter_Compress(array(
-    'adapter' =&gt; 'Bz2',
-    'options' =&gt; array(
-        'archive' =&gt; 'filename.bz2',
+    'adapter' => 'Bz2',
+    'options' => array(
+        'archive' => 'filename.bz2',
     ),
 ));
-$compressed = $filter-&gt;filter('Uncompressed string');
+$compressed = $filter->filter('Uncompressed string');
 // Returns true on success and creates the archive file
-</programlisting>
+]]></programlisting>
 
         <para>
             In the above example the uncompressed string is compressed, and is then written into
@@ -220,32 +218,32 @@ $compressed = $filter-&gt;filter('Uncompressed string');
             When you want to compress a file, then you must give the name of the file with its path.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter     = new Zend_Filter_Compress(array(
-    'adapter' =&gt; 'Bz2',
-    'options' =&gt; array(
-        'archive' =&gt; 'filename.bz2'
+    'adapter' => 'Bz2',
+    'options' => array(
+        'archive' => 'filename.bz2'
     ),
 ));
-$compressed = $filter-&gt;filter('C:\temp\compressme.txt');
+$compressed = $filter->filter('C:\temp\compressme.txt');
 // Returns true on success and creates the archive file
-</programlisting>
+]]></programlisting>
 
         <para>
             You may also specify a directory instead of a filename. In this case the whole directory
             with all its files and subdirectories will be compressed into the archive.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter     = new Zend_Filter_Compress(array(
-    'adapter' =&gt; 'Bz2',
-    'options' =&gt; array(
-        'archive' =&gt; 'filename.bz2'
+    'adapter' => 'Bz2',
+    'options' => array(
+        'archive' => 'filename.bz2'
     ),
 ));
-$compressed = $filter-&gt;filter('C:\temp\somedir');
+$compressed = $filter->filter('C:\temp\somedir');
 // Returns true on success and creates the archive file
-</programlisting>
+]]></programlisting>
 
         <note><info><title>Do not compress large or base directories</title></info>
             
@@ -268,28 +266,28 @@ $compressed = $filter-&gt;filter('C:\temp\somedir');
             decompress the file.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter     = new Zend_Filter_Decompress('Bz2');
-$compressed = $filter-&gt;filter('filename.bz2');
+$compressed = $filter->filter('filename.bz2');
 // Returns true on success and decompresses the archive file
-</programlisting>
+]]></programlisting>
 
         <para>
             Some adapters support decompressing the archive into another subdirectory. In this
             case you can set the <property>target</property> parameter.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter     = new Zend_Filter_Decompress(array(
-    'adapter' =&gt; 'Zip',
-    'options' =&gt; array(
-        'target' =&gt; 'C:\temp',
+    'adapter' => 'Zip',
+    'options' => array(
+        'target' => 'C:\temp',
     )
 ));
-$compressed = $filter-&gt;filter('filename.zip');
+$compressed = $filter->filter('filename.zip');
 // Returns true on success and decompresses the archive file
 // into the given target directory
-</programlisting>
+]]></programlisting>
 
         <note><info><title>Directories to extract to must exist</title></info>
             

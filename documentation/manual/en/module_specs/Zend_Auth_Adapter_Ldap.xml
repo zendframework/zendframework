@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.ldap"><info><title>LDAP Authentication</title></info>
     
 
@@ -35,39 +33,39 @@
             the meat of your code should look something like the following:
         </para>
 
-        <programlisting language="php">
-$username = $this-&gt;_request-&gt;getParam('username');
-$password = $this-&gt;_request-&gt;getParam('password');
+        <programlisting language="php"><![CDATA[
+$username = $this->_request->getParam('username');
+$password = $this->_request->getParam('password');
 
 $auth = Zend_Auth::getInstance();
 
 $config = new Zend_Config_Ini('../application/config/config.ini',
                               'production');
-$log_path = $config-&gt;ldap-&gt;log_path;
-$options = $config-&gt;ldap-&gt;toArray();
+$log_path = $config->ldap->log_path;
+$options = $config->ldap->toArray();
 unset($options['log_path']);
 
 $adapter = new Zend_Auth_Adapter_Ldap($options, $username,
                                       $password);
 
-$result = $auth-&gt;authenticate($adapter);
+$result = $auth->authenticate($adapter);
 
 if ($log_path) {
-    $messages = $result-&gt;getMessages();
+    $messages = $result->getMessages();
 
     $logger = new Zend_Log();
-    $logger-&gt;addWriter(new Zend_Log_Writer_Stream($log_path));
+    $logger->addWriter(new Zend_Log_Writer_Stream($log_path));
     $filter = new Zend_Log_Filter_Priority(Zend_Log::DEBUG);
-    $logger-&gt;addFilter($filter);
+    $logger->addFilter($filter);
 
-    foreach ($messages as $i =&gt; $message) {
-        if ($i-- &gt; 1) { // $messages[2] and up are log messages
+    foreach ($messages as $i => $message) {
+        if ($i-- > 1) { // $messages[2] and up are log messages
             $message = str_replace("\n", "\n  ", $message);
-            $logger-&gt;log("Ldap: $i: $message", Zend_Log::DEBUG);
+            $logger->log("Ldap: $i: $message", Zend_Log::DEBUG);
         }
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Of course, the logging code is optional, but it is highly recommended that you use a
@@ -89,7 +87,7 @@ if ($log_path) {
             (<emphasis>=</emphasis>) will need to be quoted (like the DNs shown below).
         </para>
 
-        <programlisting language="ini">
+        <programlisting language="ini"><![CDATA[
 [production]
 
 ldap.log_path = /tmp/ldap.log
@@ -111,7 +109,7 @@ ldap.server2.accountDomainName = w.net
 ldap.server2.accountDomainNameShort = W
 ldap.server2.accountCanonicalForm = 3
 ldap.server2.baseDn = "CN=Users,DC=w,DC=net"
-</programlisting>
+]]></programlisting>
 
         <para>
             The above configuration will instruct <classname>Zend_Auth_Adapter_Ldap</classname> to
@@ -156,33 +154,33 @@ ldap.server2.baseDn = "CN=Users,DC=w,DC=net"
             representation):
         </para>
 
-        <programlisting language="output">
+        <programlisting language="output"><![CDATA[
 Array
 (
-    [server2] =&gt; Array
+    [server2] => Array
         (
-            [host] =&gt; dc1.w.net
-            [useStartTls] =&gt; 1
-            [accountDomainName] =&gt; w.net
-            [accountDomainNameShort] =&gt; W
-            [accountCanonicalForm] =&gt; 3
-            [baseDn] =&gt; CN=Users,DC=w,DC=net
+            [host] => dc1.w.net
+            [useStartTls] => 1
+            [accountDomainName] => w.net
+            [accountDomainNameShort] => W
+            [accountCanonicalForm] => 3
+            [baseDn] => CN=Users,DC=w,DC=net
         )
 
-    [server1] =&gt; Array
+    [server1] => Array
         (
-            [host] =&gt; s0.foo.net
-            [accountDomainName] =&gt; foo.net
-            [accountDomainNameShort] =&gt; FOO
-            [accountCanonicalForm] =&gt; 3
-            [username] =&gt; CN=user1,DC=foo,DC=net
-            [password] =&gt; pass1
-            [baseDn] =&gt; OU=Sales,DC=foo,DC=net
-            [bindRequiresDn] =&gt; 1
+            [host] => s0.foo.net
+            [accountDomainName] => foo.net
+            [accountDomainNameShort] => FOO
+            [accountCanonicalForm] => 3
+            [username] => CN=user1,DC=foo,DC=net
+            [password] => pass1
+            [baseDn] => OU=Sales,DC=foo,DC=net
+            [bindRequiresDn] => 1
         )
 
 )
-</programlisting>
+]]></programlisting>
 
         <para>
             The information provided in each set of options above is different mainly because AD

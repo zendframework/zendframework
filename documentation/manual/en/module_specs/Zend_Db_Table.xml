@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table"><info><title>Zend_Db_Table</title></info>
     
 
@@ -35,10 +33,10 @@
         <example xml:id="zend.db.table.defining.concrete-instantiation.example1"><info><title>Declaring a table class with just the string name</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 Zend_Db_Table::setDefaultAdapter($dbAdapter);
 $bugTable = new Zend_Db_Table('bug');
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -70,12 +68,12 @@ $bugTable = new Zend_Db_Table('bug');
             <example xml:id="zend.db.table.defining.table-schema.example1"><info><title>Declaring a table class with explicit table name</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bugs';
 }
-</programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -87,12 +85,12 @@ class Bugs extends Zend_Db_Table_Abstract
             <example xml:id="zend.db.table.defining.table-schema.example"><info><title>Declaring a table class with implicit table name</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 class bugs extends Zend_Db_Table_Abstract
 {
     // table name matches class name
 }
-</programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -107,7 +105,7 @@ class bugs extends Zend_Db_Table_Abstract
             <example xml:id="zend.db.table.defining.table-schema.example3"><info><title>Declaring a table class with schema</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // First alternative:
 class Bugs extends Zend_Db_Table_Abstract
 {
@@ -129,7 +127,7 @@ class Bugs extends Zend_Db_Table_Abstract
     protected $_name   = 'bug_db.bugs';
     protected $_schema = 'ignored';
 }
-</programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -143,25 +141,25 @@ class Bugs extends Zend_Db_Table_Abstract
             <example xml:id="zend.db.table.defining.table-schema.example.constructor"><info><title>Declaring table and schema names upon instantiation</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
 }
 
 // First alternative:
 
-$tableBugs = new Bugs(array('name' =&gt; 'bugs', 'schema' =&gt; 'bug_db'));
+$tableBugs = new Bugs(array('name' => 'bugs', 'schema' => 'bug_db'));
 
 // Second alternative:
 
-$tableBugs = new Bugs(array('name' =&gt; 'bug_db.bugs'));
+$tableBugs = new Bugs(array('name' => 'bug_db.bugs'));
 
 // If schemas are specified in both 'name' and 'schema', the one
 // specified in 'name' takes precedence:
 
-$tableBugs = new Bugs(array('name' =&gt; 'bug_db.bugs',
-                            'schema' =&gt; 'ignored'));
-</programlisting>
+$tableBugs = new Bugs(array('name' => 'bug_db.bugs',
+                            'schema' => 'ignored'));
+]]></programlisting>
             </example>
 
             <para>
@@ -183,13 +181,13 @@ $tableBugs = new Bugs(array('name' =&gt; 'bug_db.bugs',
             <example xml:id="zend.db.table.defining.primary-key.example"><info><title>Example of specifying the primary key</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bugs';
     protected $_primary = 'bug_id';
 }
-</programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -222,16 +220,16 @@ class Bugs extends Zend_Db_Table_Abstract
             <example xml:id="zend.db.table.defining.setup.example"><info><title>Example of overriding the _setupTableName() method</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected function _setupTableName()
     {
-        $this-&gt;_name = 'bugs';
+        $this->_name = 'bugs';
         parent::_setupTableName();
     }
 }
-</programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -292,17 +290,17 @@ class Bugs extends Zend_Db_Table_Abstract
             <example xml:id="zend.db.table.defining.init.usage.example"><info><title>Example usage of init() method</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_observer;
 
     public function init()
     {
-        $this-&gt;_observer = new MyObserverClass();
+        $this->_observer = new MyObserverClass();
     }
 }
-</programlisting>
+]]></programlisting>
             </example>
         </section>
     </section>
@@ -330,11 +328,11 @@ class Bugs extends Zend_Db_Table_Abstract
             <example xml:id="zend.db.table.constructing.adapter.example"><info><title>Example of constructing a Table using an Adapter object</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $db = Zend_Db::factory('PDO_MYSQL', $options);
 
-$table = new Bugs(array('db' =&gt; $db));
-</programlisting>
+$table = new Bugs(array('db' => $db));
+]]></programlisting>
             </example>
         </section>
 
@@ -353,14 +351,14 @@ $table = new Bugs(array('db' =&gt; $db));
             <example xml:id="zend.db.table.constructing.default-adapter.example"><info><title>Example of constructing a Table using a the Default Adapter</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $db = Zend_Db::factory('PDO_MYSQL', $options);
 Zend_Db_Table_Abstract::setDefaultAdapter($db);
 
 // Later...
 
 $table = new Bugs();
-</programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -386,14 +384,14 @@ $table = new Bugs();
             <example xml:id="zend.db.table.constructing.registry.example"><info><title>Example of constructing a Table using a Registry key</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $db = Zend_Db::factory('PDO_MYSQL', $options);
 Zend_Registry::set('my_db', $db);
 
 // Later...
 
-$table = new Bugs(array('db' =&gt; 'my_db'));
-</programlisting>
+$table = new Bugs(array('db' => 'my_db'));
+]]></programlisting>
             </example>
 
             <para>
@@ -419,17 +417,17 @@ $table = new Bugs(array('db' =&gt; 'my_db'));
         <example xml:id="zend.db.table.insert.example"><info><title>Example of inserting to a Table</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $data = array(
-    'created_on'      =&gt; '2007-03-22',
-    'bug_description' =&gt; 'Something wrong',
-    'bug_status'      =&gt; 'NEW'
+    'created_on'      => '2007-03-22',
+    'bug_description' => 'Something wrong',
+    'bug_status'      => 'NEW'
 );
 
-$table-&gt;insert($data);
-</programlisting>
+$table->insert($data);
+]]></programlisting>
         </example>
 
         <para>
@@ -442,15 +440,15 @@ $table-&gt;insert($data);
         <example xml:id="zend.db.table.insert.example-expr"><info><title>Example of inserting expressions to a Table</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $data = array(
-    'created_on'      =&gt; new Zend_Db_Expr('CURDATE()'),
-    'bug_description' =&gt; 'Something wrong',
-    'bug_status'      =&gt; 'NEW'
+    'created_on'      => new Zend_Db_Expr('CURDATE()'),
+    'bug_description' => 'Something wrong',
+    'bug_status'      => 'NEW'
 );
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -479,7 +477,7 @@ $data = array(
             <example xml:id="zend.db.table.insert.key-auto.example"><info><title>Example of declaring a Table with auto-incrementing primary key</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bugs';
@@ -488,7 +486,7 @@ class Bugs extends Zend_Db_Table_Abstract
     // you do not need to define this.
     protected $_sequence = true;
 }
-</programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -525,14 +523,14 @@ class Bugs extends Zend_Db_Table_Abstract
             <example xml:id="zend.db.table.insert.key-sequence.example"><info><title>Example of declaring a Table with a sequence</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bugs';
 
     protected $_sequence = 'bug_sequence';
 }
-</programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -569,14 +567,14 @@ class Bugs extends Zend_Db_Table_Abstract
             <example xml:id="zend.db.table.insert.key-natural.example"><info><title>Example of declaring a Table with a natural key</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 class BugStatus extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bug_status';
 
     protected $_sequence = false;
 }
-</programlisting>
+]]></programlisting>
             </example>
 
             <note>
@@ -604,18 +602,18 @@ class BugStatus extends Zend_Db_Table_Abstract
         <example xml:id="zend.db.table.update.example"><info><title>Example of updating rows in a Table</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $data = array(
-    'updated_on'      =&gt; '2007-03-23',
-    'bug_status'      =&gt; 'FIXED'
+    'updated_on'      => '2007-03-23',
+    'bug_status'      => 'FIXED'
 );
 
-$where = $table-&gt;getAdapter()-&gt;quoteInto('bug_id = ?', 1234);
+$where = $table->getAdapter()->quoteInto('bug_id = ?', 1234);
 
-$table-&gt;update($data, $where);
-</programlisting>
+$table->update($data, $where);
+]]></programlisting>
         </example>
 
         <para>
@@ -648,13 +646,13 @@ $table-&gt;update($data, $where);
         <example xml:id="zend.db.table.delete.example"><info><title>Example of deleting rows from a Table</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
-$where = $table-&gt;getAdapter()-&gt;quoteInto('bug_id = ?', 1235);
+$where = $table->getAdapter()->quoteInto('bug_id = ?', 1235);
 
-$table-&gt;delete($where);
-</programlisting>
+$table->delete($where);
+]]></programlisting>
         </example>
 
         <para>
@@ -688,17 +686,17 @@ $table-&gt;delete($where);
         <example xml:id="zend.db.table.find.example"><info><title>Example of finding rows by primary key values</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 // Find a single row
 // Returns a Rowset
-$rows = $table-&gt;find(1234);
+$rows = $table->find(1234);
 
 // Find multiple rows
 // Also returns a Rowset
-$rows = $table-&gt;find(array(1234, 5678));
-</programlisting>
+$rows = $table->find(array(1234, 5678));
+]]></programlisting>
         </example>
 
         <para>
@@ -740,7 +738,7 @@ $rows = $table-&gt;find(array(1234, 5678));
                 and the second row must have primary key value (5678, 'DEF').
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class BugsProducts extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bugs_products';
@@ -751,12 +749,12 @@ $table = new BugsProducts();
 
 // Find a single row with a compound primary key
 // Returns a Rowset
-$rows = $table-&gt;find(1234, 'ABC');
+$rows = $table->find(1234, 'ABC');
 
 // Find multiple rows with compound primary keys
 // Also returns a Rowset
-$rows = $table-&gt;find(array(1234, 5678), array('ABC', 'DEF'));
-</programlisting>
+$rows = $table->find(array(1234, 5678), array('ABC', 'DEF'));
+]]></programlisting>
         </example>
     </section>
 
@@ -781,51 +779,51 @@ $rows = $table-&gt;find(array(1234, 5678), array('ABC', 'DEF'));
                     where possible.
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 /**
  * Fetching a rowset
  */
-$rows = $table-&gt;fetchAll(
+$rows = $table->fetchAll(
     'bug_status = "NEW"',
     'bug_id ASC',
     10,
     0
     );
-$rows = $table-&gt;fetchAll(
-    $table-&gt;select()
-        -&gt;where('bug_status = ?', 'NEW')
-        -&gt;order('bug_id ASC')
-        -&gt;limit(10, 0)
+$rows = $table->fetchAll(
+    $table->select()
+        ->where('bug_status = ?', 'NEW')
+        ->order('bug_id ASC')
+        ->limit(10, 0)
     );
 // or with binding
-$rows = $table-&gt;fetchAll(
-    $table-&gt;select()
-        -&gt;where('bug_status = :status')
-        -&gt;bind(array(':status'=&gt;'NEW')
-        -&gt;order('bug_id ASC')
-        -&gt;limit(10, 0)
+$rows = $table->fetchAll(
+    $table->select()
+        ->where('bug_status = :status')
+        ->bind(array(':status'=>'NEW')
+        ->order('bug_id ASC')
+        ->limit(10, 0)
     );
 
 /**
  * Fetching a single row
  */
-$row = $table-&gt;fetchRow(
+$row = $table->fetchRow(
     'bug_status = "NEW"',
     'bug_id ASC'
     );
-$row = $table-&gt;fetchRow(
-    $table-&gt;select()
-        -&gt;where('bug_status = ?', 'NEW')
-        -&gt;order('bug_id ASC')
+$row = $table->fetchRow(
+    $table->select()
+        ->where('bug_status = ?', 'NEW')
+        ->order('bug_id ASC')
     );
 // or with binding
-$row = $table-&gt;fetchRow(
-    $table-&gt;select()
-        -&gt;where('bug_status = :status')
-        -&gt;bind(array(':status'=&gt;'NEW')
-        -&gt;order('bug_id ASC')
+$row = $table->fetchRow(
+    $table->select()
+        ->where('bug_status = :status')
+        ->bind(array(':status'=>'NEW')
+        ->order('bug_id ASC')
     );
-</programlisting>
+]]></programlisting>
             </warning>
 
             <para>
@@ -877,14 +875,14 @@ $row = $table-&gt;fetchRow(
             <example xml:id="zend.db.table.qry.rows.set.simple.usage.example"><info><title>Simple usage</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
-$select = $table-&gt;select();
-$select-&gt;where('bug_status = ?', 'NEW');
+$select = $table->select();
+$select->where('bug_status = ?', 'NEW');
 
-$rows = $table-&gt;fetchAll($select);
-</programlisting>
+$rows = $table->fetchAll($select);
+]]></programlisting>
             </example>
 
             <para>
@@ -895,12 +893,12 @@ $rows = $table-&gt;fetchAll($select);
             <example xml:id="zend.db.table.qry.rows.set.fluent.interface.example"><info><title>Example of fluent interface</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $rows =
-    $table-&gt;fetchAll($table-&gt;select()-&gt;where('bug_status = ?', 'NEW'));
-</programlisting>
+    $table->fetchAll($table->select()->where('bug_status = ?', 'NEW'));
+]]></programlisting>
             </example>
         </section>
 
@@ -917,13 +915,13 @@ $rows =
             <example xml:id="zend.db.table.qry.rows.set.finding.row.example"><info><title>Example of finding rows by an expression</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
-$select = $table-&gt;select()-&gt;where('bug_status = ?', 'NEW');
+$select = $table->select()->where('bug_status = ?', 'NEW');
 
-$rows = $table-&gt;fetchAll($select);
-</programlisting>
+$rows = $table->fetchAll($select);
+]]></programlisting>
             </example>
 
             <para>
@@ -937,7 +935,7 @@ $rows = $table-&gt;fetchAll($select);
             <example xml:id="zend.db.table.fetch-all.example2"><info><title>Example of finding rows by an expression</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 $order  = 'bug_id';
@@ -946,12 +944,12 @@ $order  = 'bug_id';
 $count  = 10;
 $offset = 20;
 
-$select = $table-&gt;select()-&gt;where('bug_status = ?', 'NEW')
-                          -&gt;order($order)
-                          -&gt;limit($count, $offset);
+$select = $table->select()->where('bug_status = ?', 'NEW')
+                          ->order($order)
+                          ->limit($count, $offset);
 
-$rows = $table-&gt;fetchAll($select);
-</programlisting>
+$rows = $table->fetchAll($select);
+]]></programlisting>
             </example>
 
             <para>
@@ -978,15 +976,15 @@ $rows = $table-&gt;fetchAll($select);
             <example xml:id="zend.db.table.qry.rows.set.retrieving.a.example"><info><title>Retrieving specific columns</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
-$select = $table-&gt;select();
-$select-&gt;from($table, array('bug_id', 'bug_description'))
-       -&gt;where('bug_status = ?', 'NEW');
+$select = $table->select();
+$select->from($table, array('bug_id', 'bug_description'))
+       ->where('bug_status = ?', 'NEW');
 
-$rows = $table-&gt;fetchAll($select);
-</programlisting>
+$rows = $table->fetchAll($select);
+]]></programlisting>
             </example>
 
             <important>
@@ -1010,17 +1008,17 @@ $rows = $table-&gt;fetchAll($select);
             <example xml:id="zend.db.table.qry.rows.set.retrieving.b.example"><info><title>Retrieving expressions as columns</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
-$select = $table-&gt;select();
-$select-&gt;from($table,
+$select = $table->select();
+$select->from($table,
               array('COUNT(reported_by) as `count`', 'reported_by'))
-       -&gt;where('bug_status = ?', 'NEW')
-       -&gt;group('reported_by');
+       ->where('bug_status = ?', 'NEW')
+       ->group('reported_by');
 
-$rows = $table-&gt;fetchAll($select);
-</programlisting>
+$rows = $table->fetchAll($select);
+]]></programlisting>
             </example>
 
             <para>
@@ -1032,18 +1030,18 @@ $rows = $table-&gt;fetchAll($select);
             <example xml:id="zend.db.table.qry.rows.set.refine.example"><info><title>Using a lookup table to refine the results of fetchAll()</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
 // retrieve with from part set, important when joining
-$select = $table-&gt;select(Zend_Db_Table::SELECT_WITH_FROM_PART);
-$select-&gt;setIntegrityCheck(false)
-       -&gt;where('bug_status = ?', 'NEW')
-       -&gt;join('accounts', 'accounts.account_name = bugs.reported_by')
-       -&gt;where('accounts.account_name = ?', 'Bob');
+$select = $table->select(Zend_Db_Table::SELECT_WITH_FROM_PART);
+$select->setIntegrityCheck(false)
+       ->where('bug_status = ?', 'NEW')
+       ->join('accounts', 'accounts.account_name = bugs.reported_by')
+       ->where('accounts.account_name = ?', 'Bob');
 
-$rows = $table-&gt;fetchAll($select);
-</programlisting>
+$rows = $table->fetchAll($select);
+]]></programlisting>
             </example>
 
             <para>
@@ -1064,19 +1062,19 @@ $rows = $table-&gt;fetchAll($select);
                 </title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
-$select = $table-&gt;select(Zend_Db_Table::SELECT_WITH_FROM_PART)
-                -&gt;setIntegrityCheck(false);
-$select-&gt;where('bug_status = ?', 'NEW')
-       -&gt;join('accounts',
+$select = $table->select(Zend_Db_Table::SELECT_WITH_FROM_PART)
+                ->setIntegrityCheck(false);
+$select->where('bug_status = ?', 'NEW')
+       ->join('accounts',
               'accounts.account_name = bugs.reported_by',
               'account_name')
-       -&gt;where('accounts.account_name = ?', 'Bob');
+       ->where('accounts.account_name = ?', 'Bob');
 
-$rows = $table-&gt;fetchAll($select);
-</programlisting>
+$rows = $table->fetchAll($select);
+]]></programlisting>
             </example>
         </section>
     </section>
@@ -1092,14 +1090,14 @@ $rows = $table-&gt;fetchAll($select);
         <example xml:id="zend.db.table.fetch-row.example1"><info><title>Example of finding a single row by an expression</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
-$select  = $table-&gt;select()-&gt;where('bug_status = ?', 'NEW')
-                           -&gt;order('bug_id');
+$select  = $table->select()->where('bug_status = ?', 'NEW')
+                           ->order('bug_id');
 
-$row = $table-&gt;fetchRow($select);
-</programlisting>
+$row = $table->fetchRow($select);
+]]></programlisting>
         </example>
 
         <para>
@@ -1122,13 +1120,13 @@ $row = $table-&gt;fetchRow($select);
         <example xml:id="zend.db.table.info.example"><info><title>Example of getting the table name</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
-$info = $table-&gt;info();
+$info = $table->info();
 
 echo "The table name is " . $info['name'] . "\n";
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -1272,14 +1270,14 @@ echo "The table name is " . $info['name'] . "\n";
                 all table objects:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // First, set up the Cache
 $frontendOptions = array(
-    'automatic_serialization' =&gt; true
+    'automatic_serialization' => true
     );
 
 $backendOptions  = array(
-    'cache_dir'                =&gt; 'cacheDir'
+    'cache_dir'                => 'cacheDir'
     );
 
 $cache = Zend_Cache::factory('Core',
@@ -1298,7 +1296,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
 // Each instance of Bugs now uses the default metadata cache
 $bugs = new Bugs();
-</programlisting>
+]]></programlisting>
         </example>
 
         <example xml:id="zend.db.table.metadata.caching-instance"><info><title>Using a Metadata Cache for a Specific Table Object</title></info>
@@ -1309,14 +1307,14 @@ $bugs = new Bugs();
                 object instance:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // First, set up the Cache
 $frontendOptions = array(
-    'automatic_serialization' =&gt; true
+    'automatic_serialization' => true
     );
 
 $backendOptions  = array(
-    'cache_dir'                =&gt; 'cacheDir'
+    'cache_dir'                => 'cacheDir'
     );
 
 $cache = Zend_Cache::factory('Core',
@@ -1331,8 +1329,8 @@ class Bugs extends Zend_Db_Table_Abstract
 }
 
 // Configure an instance upon instantiation
-$bugs = new Bugs(array('metadataCache' =&gt; $cache));
-</programlisting>
+$bugs = new Bugs(array('metadataCache' => $cache));
+]]></programlisting>
         </example>
 
         <note><info><title>Automatic Serialization with the Cache Frontend</title></info>
@@ -1367,27 +1365,27 @@ $bugs = new Bugs(array('metadataCache' =&gt; $cache));
                 The metadata structure is as follows:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 protected $_metadata = array(
-    '&lt;column_name&gt;' =&gt; array(
-        'SCHEMA_NAME'      =&gt; &lt;string&gt;,
-        'TABLE_NAME'       =&gt; &lt;string&gt;,
-        'COLUMN_NAME'      =&gt; &lt;string&gt;,
-        'COLUMN_POSITION'  =&gt; &lt;int&gt;,
-        'DATA_TYPE'        =&gt; &lt;string&gt;,
-        'DEFAULT'          =&gt; NULL|&lt;value&gt;,
-        'NULLABLE'         =&gt; &lt;bool&gt;,
-        'LENGTH'           =&gt; &lt;string - length&gt;,
-        'SCALE'            =&gt; NULL|&lt;value&gt;,
-        'PRECISION'        =&gt; NULL|&lt;value&gt;,
-        'UNSIGNED'         =&gt; NULL|&lt;bool&gt;,
-        'PRIMARY'          =&gt; &lt;bool&gt;,
-        'PRIMARY_POSITION' =&gt; &lt;int&gt;,
-        'IDENTITY'         =&gt; &lt;bool&gt;,
+    '<column_name>' => array(
+        'SCHEMA_NAME'      => <string>,
+        'TABLE_NAME'       => <string>,
+        'COLUMN_NAME'      => <string>,
+        'COLUMN_POSITION'  => <int>,
+        'DATA_TYPE'        => <string>,
+        'DEFAULT'          => NULL|<value>,
+        'NULLABLE'         => <bool>,
+        'LENGTH'           => <string - length>,
+        'SCALE'            => NULL|<value>,
+        'PRECISION'        => NULL|<value>,
+        'UNSIGNED'         => NULL|<bool>,
+        'PRIMARY'          => <bool>,
+        'PRIMARY_POSITION' => <int>,
+        'IDENTITY'         => <bool>,
     ),
     // additional columns...
 );
-</programlisting>
+]]></programlisting>
 
             <para>
                 An easy way to get the appropriate values is to use the metadata
@@ -1399,13 +1397,13 @@ protected $_metadata = array(
                 <property>metadataCacheInClass</property> flag:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // At instantiation:
-$bugs = new Bugs(array('metadataCacheInClass' =&gt; false));
+$bugs = new Bugs(array('metadataCacheInClass' => false));
 
 // Or later:
-$bugs-&gt;setMetadataCacheInClass(false);
-</programlisting>
+$bugs->setMetadataCacheInClass(false);
+]]></programlisting>
 
             <para>
                 The flag is enabled by default, which ensures that the
@@ -1439,7 +1437,7 @@ $bugs-&gt;setMetadataCacheInClass(false);
             <example xml:id="zend.db.table.extending.row-rowset.example"><info><title>Example of specifying the Row and Rowset classes</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 class My_Row extends Zend_Db_Table_Row_Abstract
 {
     ...
@@ -1452,17 +1450,17 @@ class My_Rowset extends Zend_Db_Table_Rowset_Abstract
 
 $table = new Bugs(
     array(
-        'rowClass'    =&gt; 'My_Row',
-        'rowsetClass' =&gt; 'My_Rowset'
+        'rowClass'    => 'My_Row',
+        'rowsetClass' => 'My_Rowset'
     )
 );
 
-$where = $table-&gt;getAdapter()-&gt;quoteInto('bug_status = ?', 'NEW')
+$where = $table->getAdapter()->quoteInto('bug_status = ?', 'NEW')
 
 // Returns an object of type My_Rowset,
 // containing an array of objects of type My_Row.
-$rows = $table-&gt;fetchAll($where);
-</programlisting>
+$rows = $table->fetchAll($where);
+]]></programlisting>
             </example>
 
             <para>
@@ -1475,24 +1473,24 @@ $rows = $table-&gt;fetchAll($where);
             <example xml:id="zend.db.table.extending.row-rowset.example2"><info><title>Example of changing the Row and Rowset classes</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $table = new Bugs();
 
-$where = $table-&gt;getAdapter()-&gt;quoteInto('bug_status = ?', 'NEW')
+$where = $table->getAdapter()->quoteInto('bug_status = ?', 'NEW')
 
 // Returns an object of type Zend_Db_Table_Rowset
 // containing an array of objects of type Zend_Db_Table_Row.
-$rowsStandard = $table-&gt;fetchAll($where);
+$rowsStandard = $table->fetchAll($where);
 
-$table-&gt;setRowClass('My_Row');
-$table-&gt;setRowsetClass('My_Rowset');
+$table->setRowClass('My_Row');
+$table->setRowsetClass('My_Rowset');
 
 // Returns an object of type My_Rowset,
 // containing an array of objects of type My_Row.
-$rowsCustom = $table-&gt;fetchAll($where);
+$rowsCustom = $table->fetchAll($where);
 
 // The $rowsStandard object still exists, and it is unchanged.
-</programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -1514,7 +1512,7 @@ $rowsCustom = $table-&gt;fetchAll($where);
             <example xml:id="zend.db.table.extending.insert-update.example"><info><title>Custom logic to manage timestamps</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bugs';
@@ -1537,7 +1535,7 @@ class Bugs extends Zend_Db_Table_Abstract
         return parent::update($data, $where);
     }
 }
-</programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -1560,18 +1558,18 @@ class Bugs extends Zend_Db_Table_Abstract
             <example xml:id="zend.db.table.extending.finders.example"><info><title>Custom method to find bugs by status</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bugs';
 
     public function findByStatus($status)
     {
-        $where = $this-&gt;getAdapter()-&gt;quoteInto('bug_status = ?', $status);
-        return $this-&gt;fetchAll($where, 'bug_id');
+        $where = $this->getAdapter()->quoteInto('bug_status = ?', $status);
+        return $this->fetchAll($where, 'bug_id');
     }
 }
-</programlisting>
+]]></programlisting>
             </example>
         </section>
 
@@ -1623,13 +1621,13 @@ class Bugs extends Zend_Db_Table_Abstract
             <example xml:id="zend.db.table.extending.inflection.example"><info><title>Example of an abstract table class that implements inflection</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 abstract class MyAbstractTable extends Zend_Db_Table_Abstract
 {
     protected function _setupTableName()
     {
-        if (!$this-&gt;_name) {
-            $this-&gt;_name = myCustomInflector(get_class($this));
+        if (!$this->_name) {
+            $this->_name = myCustomInflector(get_class($this));
         }
         parent::_setupTableName();
     }
@@ -1638,7 +1636,7 @@ abstract class MyAbstractTable extends Zend_Db_Table_Abstract
 class BugsProducts extends MyAbstractTable
 {
 }
-</programlisting>
+]]></programlisting>
             </example>
 
             <para>

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.multiuser.authorization"><info><title>Building an Authorization System in Zend Framework</title></info>
     
 
@@ -67,21 +65,21 @@
             users database role itself.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class Default_Model_User implements Zend_Acl_Role_Interface
 {
     protected $_aclRoleId = null;
 
     public function getRoleId()
     {
-        if ($this-&gt;_aclRoleId == null) {
+        if ($this->_aclRoleId == null) {
             return 'guest';
         }
 
-        return $this-&gt;_aclRoleId;
+        return $this->_aclRoleId;
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             While the concept of a user as a role is pretty straight forward, your application
@@ -92,7 +90,7 @@ class Default_Model_User implements Zend_Acl_Role_Interface
             this value can be dynamic if your system requires it to be so.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class Default_Model_BlogPost implements Zend_Acl_Resource_Interface
 {
     public function getResourceId()
@@ -100,7 +98,7 @@ class Default_Model_BlogPost implements Zend_Acl_Resource_Interface
         return 'blogPost';
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Now that we have at least a role and a resource, we can go about defining the rules
@@ -113,22 +111,22 @@ class Default_Model_BlogPost implements Zend_Acl_Resource_Interface
             Lets assume the following rules:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $acl = new Zend_Acl();
 
 // setup the various roles in our system
-$acl-&gt;addRole('guest');
+$acl->addRole('guest');
 // owner inherits all of the rules of guest
-$acl-&gt;addRole('owner', 'guest');
+$acl->addRole('owner', 'guest');
 
 // add the resources
-$acl-&gt;addResource('blogPost');
+$acl->addResource('blogPost');
 
 // add privileges to roles and resource combinations
-$acl-&gt;allow('guest', 'blogPost', 'view');
-$acl-&gt;allow('owner', 'blogPost', 'post');
-$acl-&gt;allow('owner', 'blogPost', 'publish');
-</programlisting>
+$acl->allow('guest', 'blogPost', 'view');
+$acl->allow('owner', 'blogPost', 'post');
+$acl->allow('owner', 'blogPost', 'publish');
+]]></programlisting>
 
         <para>
             The above rules are quite simple: a guest role and an owner role exist; as does a
@@ -137,18 +135,18 @@ $acl-&gt;allow('owner', 'blogPost', 'publish');
             the following:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // assume the user model is of type guest resource
 $guestUser = new Default_Model_User();
 $ownerUser = new Default_Model_Owner('OwnersUsername');
 
 $post = new Default_Model_BlogPost();
 
-$acl-&gt;isAllowed($guestUser, $post, 'view'); // true
-$acl-&gt;isAllowed($ownerUser, $post, 'view'); // true
-$acl-&gt;isAllowed($guestUser, $post, 'post'); // false
-$acl-&gt;isAllowed($ownerUser, $post, 'post'); // true
-</programlisting>
+$acl->isAllowed($guestUser, $post, 'view'); // true
+$acl->isAllowed($ownerUser, $post, 'view'); // true
+$acl->isAllowed($guestUser, $post, 'post'); // false
+$acl->isAllowed($ownerUser, $post, 'post'); // true
+]]></programlisting>
 
         <para>
             As you can see, the above rules exercise whether owners and guests can view posts,
@@ -168,7 +166,7 @@ $acl-&gt;isAllowed($ownerUser, $post, 'post'); // true
             assertion:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class OwnerCanPublishBlogPostAssertion implements Zend_Acl_Assert_Interface
 {
     /**
@@ -202,36 +200,36 @@ class OwnerCanPublishBlogPostAssertion implements Zend_Acl_Assert_Interface
         }
 
         // if role is publisher, he can always modify a post
-        if ($user-&gt;getRoleId() == 'publisher') {
+        if ($user->getRoleId() == 'publisher') {
             return true;
         }
 
         // check to ensure that everyone else is only modifying their own post
-        if ($user-&gt;id != null &amp;&amp; $blogPost-&gt;ownerUserId == $user-&gt;id) {
+        if ($user->id != null && $blogPost->ownerUserId == $user->id) {
             return true;
         } else {
             return false;
         }
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             To hook this into our <acronym>ACL</acronym> system, we would do the following:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // replace this:
-//   $acl-&gt;allow('owner', 'blogPost', 'publish');
+//   $acl->allow('owner', 'blogPost', 'publish');
 // with this:
-$acl-&gt;allow('owner',
+$acl->allow('owner',
             'blogPost',
             'publish',
             new OwnerCanPublishBlogPostAssertion());
 
 // lets also add the role of a "publisher" who has access to everything
-$acl-&gt;allow('publisher', 'blogPost', 'publish');
-</programlisting>
+$acl->allow('publisher', 'blogPost', 'publish');
+]]></programlisting>
 
         <para>
             Now, anytime the <acronym>ACL</acronym> is consulted about whether or not an owner

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.notempty"><info><title>NotEmpty</title></info>
     
 
@@ -37,12 +35,12 @@
             string '<emphasis>0</emphasis>' as empty.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $valid = new Zend_Validate_NotEmpty();
 $value  = '';
-$result = $valid-&gt;isValid($value);
+$result = $valid->isValid($value);
 // returns false
-</programlisting>
+]]></programlisting>
 
         <note><info><title>Default behaviour differs from PHP</title></info>
             
@@ -177,7 +175,7 @@ $result = $valid-&gt;isValid($value);
             can give a textual string. See the following examples:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Returns false on 0
 $validator = new Zend_Validate_NotEmpty(Zend_Validate_NotEmpty::INTEGER);
 
@@ -197,7 +195,7 @@ $validator = new Zend_Validate_NotEmpty(array(
     'integer',
     'zero',
 ));
-</programlisting>
+]]></programlisting>
 
         <para>
             You can also provide an instance of <classname>Zend_Config</classname> to set the

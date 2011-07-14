@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.part"><info><title>Zend_Mime_Part</title></info>
     
 
@@ -28,7 +26,7 @@
             attributes directly:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 public $type = Zend_Mime::TYPE_OCTETSTREAM;
 public $encoding = Zend_Mime::ENCODING_8BIT;
 public $id;
@@ -39,7 +37,7 @@ public $charset;
 public $boundary;
 public $location;
 public $language;
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.mime.part.methods"><info><title>Methods for rendering the message part to a string</title></info>

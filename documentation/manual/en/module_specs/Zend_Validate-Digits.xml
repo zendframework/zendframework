@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.digits"><info><title>Digits</title></info>
     
 
@@ -24,13 +22,13 @@
             the validator like shown in this example:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Digits();
 
-$validator-&gt;isValid("1234567890"); // returns true
-$validator-&gt;isValid(1234);         // returns true
-$validator-&gt;isValid('1a234');      // returns false
-</programlisting>
+$validator->isValid("1234567890"); // returns true
+$validator->isValid(1234);         // returns true
+$validator->isValid('1a234');      // returns false
+]]></programlisting>
 
         <note><info><title>Validating numbers</title></info>
             

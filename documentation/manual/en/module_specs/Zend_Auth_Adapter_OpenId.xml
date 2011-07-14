@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.openid"><info><title>Open ID Authentication</title></info>
     
 
@@ -77,48 +75,48 @@
             <varname>$_POST['openid_mode']</varname> set.
         </para>
 
-        <programlisting language="php">
-&lt;?php
+        <programlisting language="php"><![CDATA[
+<?php
 $status = "";
 $auth = Zend_Auth::getInstance();
-if ((isset($_POST['openid_action']) &amp;&amp;
-     $_POST['openid_action'] == "login" &amp;&amp;
+if ((isset($_POST['openid_action']) &&
+     $_POST['openid_action'] == "login" &&
      !empty($_POST['openid_identifier'])) ||
     isset($_GET['openid_mode']) ||
     isset($_POST['openid_mode'])) {
-    $result = $auth-&gt;authenticate(
+    $result = $auth->authenticate(
         new Zend_Auth_Adapter_OpenId(@$_POST['openid_identifier']));
-    if ($result-&gt;isValid()) {
+    if ($result->isValid()) {
         $status = "You are logged in as "
-                . $auth-&gt;getIdentity()
-                . "&lt;br&gt;\n";
+                . $auth->getIdentity()
+                . "<br>\n";
     } else {
-        $auth-&gt;clearIdentity();
-        foreach ($result-&gt;getMessages() as $message) {
-            $status .= "$message&lt;br&gt;\n";
+        $auth->clearIdentity();
+        foreach ($result->getMessages() as $message) {
+            $status .= "$message<br>\n";
         }
     }
-} else if ($auth-&gt;hasIdentity()) {
-    if (isset($_POST['openid_action']) &amp;&amp;
+} else if ($auth->hasIdentity()) {
+    if (isset($_POST['openid_action']) &&
         $_POST['openid_action'] == "logout") {
-        $auth-&gt;clearIdentity();
+        $auth->clearIdentity();
     } else {
         $status = "You are logged in as "
-                . $auth-&gt;getIdentity()
-                . "&lt;br&gt;\n";
+                . $auth->getIdentity()
+                . "<br>\n";
     }
 }
-?&gt;
-&lt;html&gt;&lt;body&gt;
-&lt;?php echo htmlspecialchars($status);?&gt;
-&lt;form method="post"&gt;&lt;fieldset&gt;
-&lt;legend&gt;OpenID Login&lt;/legend&gt;
-&lt;input type="text" name="openid_identifier" value=""&gt;
-&lt;input type="submit" name="openid_action" value="login"&gt;
-&lt;input type="submit" name="openid_action" value="logout"&gt;
-&lt;/fieldset&gt;&lt;/form&gt;&lt;/body&gt;&lt;/html&gt;
+?>
+<html><body>
+<?php echo htmlspecialchars($status);?>
+<form method="post"><fieldset>
+<legend>OpenID Login</legend>
+<input type="text" name="openid_identifier" value="">
+<input type="submit" name="openid_action" value="login">
+<input type="submit" name="openid_action" value="logout">
+</fieldset></form></body></html>
 */
-</programlisting>
+]]></programlisting>
 
         <para>
             You may customize the OpenID authentication process in several way.

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.text.table.introduction"><info><title>Zend_Text_Table</title></info>
     
 
@@ -155,31 +153,31 @@
             to create a simple table:
         </para>
 
-        <programlisting language="php">
-$table = new Zend_Text_Table(array('columnWidths' =&gt; array(10, 20)));
+        <programlisting language="php"><![CDATA[
+$table = new Zend_Text_Table(array('columnWidths' => array(10, 20)));
 
 // Either simple
-$table-&gt;appendRow(array('Zend', 'Framework'));
+$table->appendRow(array('Zend', 'Framework'));
 
 // Or verbose
 $row = new Zend_Text_Table_Row();
 
-$row-&gt;appendColumn(new Zend_Text_Table_Column('Zend'));
-$row-&gt;appendColumn(new Zend_Text_Table_Column('Framework'));
+$row->appendColumn(new Zend_Text_Table_Column('Zend'));
+$row->appendColumn(new Zend_Text_Table_Column('Framework'));
 
-$table-&gt;appendRow($row);
+$table->appendRow($row);
 
 echo $table;
-</programlisting>
+]]></programlisting>
 
         <para>
             This will result in the following output:
         </para>
 
-        <programlisting language="text">
+        <programlisting language="text"><![CDATA[
 ┌──────────┬────────────────────┐
 │Zend      │Framework           │
 └──────────┴────────────────────┘
-</programlisting>
+]]></programlisting>
     </example>
 </section>

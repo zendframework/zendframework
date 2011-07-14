@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.mvc"><info><title>Zend_Navigation_Page_Mvc</title></info>
     
 
@@ -96,28 +94,28 @@
             to generate <acronym>URI</acronym>s when calling <code>$page-&gt;getHref()</code>.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // getHref() returns /
 $page = new Zend_Navigation_Page_Mvc(array(
-    'action'     =&gt; 'index',
-    'controller' =&gt; 'index'
+    'action'     => 'index',
+    'controller' => 'index'
 ));
 
 // getHref() returns /blog/post/view
 $page = new Zend_Navigation_Page_Mvc(array(
-    'action'     =&gt; 'view',
-    'controller' =&gt; 'post',
-    'module'     =&gt; 'blog'
+    'action'     => 'view',
+    'controller' => 'post',
+    'module'     => 'blog'
 ));
 
 // getHref() returns /blog/post/view/id/1337
 $page = new Zend_Navigation_Page_Mvc(array(
-    'action'     =&gt; 'view',
-    'controller' =&gt; 'post',
-    'module'     =&gt; 'blog',
-    'params'     =&gt; array('id' =&gt; 1337)
+    'action'     => 'view',
+    'controller' => 'post',
+    'module'     => 'blog',
+    'params'     => array('id' => 1337)
 ));
-</programlisting>
+]]></programlisting>
     </example>
 
     <example xml:id="zend.navigation.pages.mvc.example.isActive"><info><title>isActive() determines if page is active</title></info>
@@ -128,7 +126,7 @@ $page = new Zend_Navigation_Page_Mvc(array(
             by using the params found in the request object.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 /*
  * Dispatched request:
  * - module:     default
@@ -136,17 +134,17 @@ $page = new Zend_Navigation_Page_Mvc(array(
  * - action:     index
  */
 $page1 = new Zend_Navigation_Page_Mvc(array(
-    'action'     =&gt; 'index',
-    'controller' =&gt; 'index'
+    'action'     => 'index',
+    'controller' => 'index'
 ));
 
 $page2 = new Zend_Navigation_Page_Mvc(array(
-    'action'     =&gt; 'bar',
-    'controller' =&gt; 'index'
+    'action'     => 'bar',
+    'controller' => 'index'
 ));
 
-$page1-&gt;isActive(); // returns true
-$page2-&gt;isActive(); // returns false
+$page1->isActive(); // returns true
+$page2->isActive(); // returns false
 
 /*
  * Dispatched request:
@@ -156,13 +154,13 @@ $page2-&gt;isActive(); // returns false
  * - id:         1337
  */
 $page = new Zend_Navigation_Page_Mvc(array(
-    'action'     =&gt; 'view',
-    'controller' =&gt; 'post',
-    'module'     =&gt; 'blog'
+    'action'     => 'view',
+    'controller' => 'post',
+    'module'     => 'blog'
 ));
 
 // returns true, because request has the same module, controller and action
-$page-&gt;isActive();
+$page->isActive();
 
 /*
  * Dispatched request:
@@ -171,15 +169,15 @@ $page-&gt;isActive();
  * - action:     view
  */
 $page = new Zend_Navigation_Page_Mvc(array(
-    'action'     =&gt; 'view',
-    'controller' =&gt; 'post',
-    'module'     =&gt; 'blog',
-    'params'     =&gt; array('id' =&gt; null)
+    'action'     => 'view',
+    'controller' => 'post',
+    'module'     => 'blog',
+    'params'     => array('id' => null)
 ));
 
 // returns false, because page requires the id param to be set in the request
-$page-&gt;isActive(); // returns false
-</programlisting>
+$page->isActive(); // returns false
+]]></programlisting>
     </example>
 
     <example xml:id="zend.navigation.pages.mvc.example.routes"><info><title>Using routes</title></info>
@@ -207,33 +205,33 @@ $page-&gt;isActive(); // returns false
             </note>
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // the following route is added to the ZF router
-Zend_Controller_Front::getInstance()-&gt;getRouter()-&gt;addRoute(
+Zend_Controller_Front::getInstance()->getRouter()->addRoute(
     'article_view', // route name
     new Zend_Controller_Router_Route(
         'a/:id',
         array(
-            'module'     =&gt; 'news',
-            'controller' =&gt; 'article',
-            'action'     =&gt; 'view',
-            'id'         =&gt; null
+            'module'     => 'news',
+            'controller' => 'article',
+            'action'     => 'view',
+            'id'         => null
         )
     )
 );
 
 // a page is created with a 'route' option
 $page = new Zend_Navigation_Page_Mvc(array(
-    'label'      =&gt; 'A news article',
-    'route'      =&gt; 'article_view',
-    'module'     =&gt; 'news',    // required for isActive(), see note above
-    'controller' =&gt; 'article', // required for isActive(), see note above
-    'action'     =&gt; 'view',    // required for isActive(), see note above
-    'params'     =&gt; array('id' =&gt; 42)
+    'label'      => 'A news article',
+    'route'      => 'article_view',
+    'module'     => 'news',    // required for isActive(), see note above
+    'controller' => 'article', // required for isActive(), see note above
+    'action'     => 'view',    // required for isActive(), see note above
+    'params'     => array('id' => 42)
 ));
 
 // returns: /a/42
-$page-&gt;getHref();
-</programlisting>
+$page->getHref();
+]]></programlisting>
     </example>
 </section>

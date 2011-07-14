@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.resources"><info><title>Resource Autoloading</title></info>
     
 
@@ -24,12 +22,12 @@
         the autoloader's base path). In action, you'd do something like this:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $loader = new Zend_Application_Module_Autoloader(array(
-    'namespace' =&gt; 'Blog',
-    'basePath'  =&gt; APPLICATION_PATH . '/modules/blog',
+    'namespace' => 'Blog',
+    'basePath'  => APPLICATION_PATH . '/modules/blog',
 ));
-</programlisting>
+]]></programlisting>
 
     <para>
         Once you have the loader in place, you then need to inform it of the various resource types
@@ -40,7 +38,7 @@ $loader = new Zend_Application_Module_Autoloader(array(
         As an example, consider the following tree:
     </para>
 
-    <programlisting language="text">
+    <programlisting language="text"><![CDATA[
 path/to/some/resources/
 |-- forms/
 |   `-- Guestbook.php        // Foo_Form_Guestbook
@@ -49,18 +47,18 @@ path/to/some/resources/
 |   |   `-- Guestbook.php    // Foo_Model_DbTable_Guestbook
 |   |-- Guestbook.php        // Foo_Model_Guestbook
 |   `-- GuestbookMapper.php  // Foo_Model_GuestbookMapper
-</programlisting>
+]]></programlisting>
 
     <para>
         Our first step is creating the resource loader:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $loader = new Zend_Loader_Autoloader_Resource(array(
-    'basePath'  =&gt; 'path/to/some/resources/',
-    'namespace' =&gt; 'Foo',
+    'basePath'  => 'path/to/some/resources/',
+    'namespace' => 'Foo',
 ));
-</programlisting>
+]]></programlisting>
 
     <para>
         Next, we need to define some resource types.
@@ -74,20 +72,20 @@ $loader = new Zend_Loader_Autoloader_Resource(array(
         follows:
     </para>
 
-    <programlisting language="php">
-$loader-&gt;addResourceType('form', 'forms', 'Form')
-       -&gt;addResourceType('model', 'models', 'Model')
-       -&gt;addResourceType('dbtable', 'models/DbTable', 'Model_DbTable');
-</programlisting>
+    <programlisting language="php"><![CDATA[
+$loader->addResourceType('form', 'forms', 'Form')
+       ->addResourceType('model', 'models', 'Model')
+       ->addResourceType('dbtable', 'models/DbTable', 'Model_DbTable');
+]]></programlisting>
 
     <para>
         Once defined, we can simply use these classes:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $form      = new Foo_Form_Guestbook();
 $guestbook = new Foo_Model_Guestbook();
-</programlisting>
+]]></programlisting>
 
     <note><info><title>Module Resource Autoloading</title></info>
         

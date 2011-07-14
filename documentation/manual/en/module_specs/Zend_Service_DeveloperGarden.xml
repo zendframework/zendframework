@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.developergarden"><info><title>Zend_Service_DeveloperGarden</title></info>
     
 
@@ -164,15 +162,15 @@
             <example xml:id="zend.service.developergarden.config.example"><info><title>Configuration Example</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 require_once 'Zend/Service/DeveloperGarden/SendSms.php';
 $config = array(
-    'username'    =&gt; 'yourUsername',
-    'password'    =&gt; 'yourPassword',
-    'environment' =&gt; Zend_Service_DeveloperGarden_SendSms::ENV_PRODUCTION,
+    'username'    => 'yourUsername',
+    'password'    => 'yourPassword',
+    'environment' => Zend_Service_DeveloperGarden_SendSms::ENV_PRODUCTION,
 );
 $service = new Zend_Service_DeveloperGarden_SendSms($config);
-</programlisting>
+]]></programlisting>
             </example>
         </section>
     </section>
@@ -193,10 +191,10 @@ $service = new Zend_Service_DeveloperGarden_SendSms($config);
         <example xml:id="zend.service.developergarden.baseuserservice.getaccountbalance.example"><info><title>Get account balance example</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $service = new Zend_Service_DeveloperGarden_BaseUserService($config);
-print_r($service-&gt;getAccountBalance());
-</programlisting>
+print_r($service->getAccountBalance());
+]]></programlisting>
         </example>
 
         <section xml:id="zend.service.developergarden.baseuserservice.getquotainformation"><info><title>Get quota information</title></info>
@@ -210,16 +208,16 @@ print_r($service-&gt;getAccountBalance());
             <example xml:id="zend.service.developergarden.baseuserservice.getquotainformation.example"><info><title>Get quota information example</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $service = new Zend_Service_DeveloperGarden_BaseUserService($config);
-$result = $service-&gt;getSmsQuotaInformation(
+$result = $service->getSmsQuotaInformation(
     Zend_Service_DeveloperGarden_BaseUserService::ENV_PRODUCTION
 );
-echo 'Sms Quota:&lt;br /&gt;';
-echo 'Max Quota: ', $result-&gt;getMaxQuota(), '&lt;br /&gt;';
-echo 'Max User Quota: ', $result-&gt;getMaxUserQuota(), '&lt;br /&gt;';
-echo 'Quota Level: ', $result-&gt;getQuotaLevel(), '&lt;br /&gt;';
-</programlisting>
+echo 'Sms Quota:<br />';
+echo 'Max Quota: ', $result->getMaxQuota(), '<br />';
+echo 'Max User Quota: ', $result->getMaxUserQuota(), '<br />';
+echo 'Quota Level: ', $result->getQuotaLevel(), '<br />';
+]]></programlisting>
             </example>
 
             <para>
@@ -277,16 +275,16 @@ echo 'Quota Level: ', $result-&gt;getQuotaLevel(), '&lt;br /&gt;';
             <example xml:id="zend.service.developergarden.baseuserservice.changequotainformation.example"><info><title>Change quota information example</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $service = new Zend_Service_DeveloperGarden_BaseUserService($config);
-$result = $service-&gt;changeSmsQuotaPool(
+$result = $service->changeSmsQuotaPool(
     1000,
     Zend_Service_DeveloperGarden_BaseUserService::ENV_PRODUCTION
 );
-if (!$result-&gt;hasError()) {
+if (!$result->hasError()) {
     echo 'updated Quota Pool';
 }
-</programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -355,14 +353,14 @@ if (!$result-&gt;hasError()) {
         <example xml:id="zend.service.developergarden.iplocation.locateip.example"><info><title>Locate a given IP</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $service = new Zend_Service_DeveloperGarden_IpLocation($config);
-$service-&gt;setEnvironment(
+$service->setEnvironment(
     Zend_Service_DeveloperGarden_IpLocation::ENV_MOCK
 );
 $ip = new Zend_Service_DeveloperGarden_IpLocation_IpAddress('127.0.0.1');
-print_r($service-&gt;locateIp($ip));
-</programlisting>
+print_r($service->locateIp($ip));
+]]></programlisting>
         </example>
     </section>
 
@@ -378,16 +376,16 @@ print_r($service-&gt;locateIp($ip));
         <example xml:id="zend.service.developergarden.localsearch.example"><info><title>Locate a Restaurant</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $service = new Zend_Service_DeveloperGarden_LocalSearch($config);
 $search  = new Zend_Service_DeveloperGarden_LocalSearch_SearchParameters();
 /**
  * @see http://www.developergarden.com/static/docu/en/ch04s02s06s04.html
  */
-$search-&gt;setWhat('pizza')
-       -&gt;setWhere('jena');
-print_r($service-&gt;localSearch($search));
-</programlisting>
+$search->setWhat('pizza')
+       ->setWhere('jena');
+print_r($service->localSearch($search));
+]]></programlisting>
         </example>
     </section>
 
@@ -462,14 +460,14 @@ print_r($service-&gt;localSearch($search));
         <example xml:id="zend.service.developergarden.sendsms.example"><info><title>Sending an SMS</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $service = new Zend_Service_DeveloperGarden_SendSms($config);
-$sms = $service-&gt;createSms(
+$sms = $service->createSms(
     '+49-172-123456; +49-177-789012',
     'your test message',
     'yourname'
 );
-print_r($service-&gt;send($sms));</programlisting>
+print_r($service->send($sms));]]></programlisting>
         </example>
     </section>
 
@@ -499,19 +497,19 @@ print_r($service-&gt;send($sms));</programlisting>
         <example xml:id="zend.service.developergarden.smsvalidation.request.example"><info><title>Request validation keyword</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $service = new Zend_Service_DeveloperGarden_SmsValidation($config);
-print_r($service-&gt;sendValidationKeyword('+49-172-123456'));
-</programlisting>
+print_r($service->sendValidationKeyword('+49-172-123456'));
+]]></programlisting>
         </example>
 
         <example xml:id="zend.service.developergarden.smsvalidation.validate.example"><info><title>Validate a number with a keyword</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $service = new Zend_Service_DeveloperGarden_SmsValidation($config);
-print_r($service-&gt;validate('TheKeyWord', '+49-172-123456'));
-</programlisting>
+print_r($service->validate('TheKeyWord', '+49-172-123456'));
+]]></programlisting>
         </example>
 
         <para>
@@ -562,15 +560,15 @@ print_r($service-&gt;validate('TheKeyWord', '+49-172-123456'));
         <example xml:id="zend.service.developergarden.voicecall.call.example"><info><title>Call two numbers</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $service = new Zend_Service_DeveloperGarden_VoiceCall($config);
 $aNumber = '+49-30-000001';
 $bNumber = '+49-30-000002';
 $expiration  = 30;  // seconds
 $maxDuration = 300; // 5 mins
-$newCall = $service-&gt;newCall($aNumber, $bNumber, $expiration, $maxDuration);
-echo $newCall-&gt;getSessionId();
-</programlisting>
+$newCall = $service->newCall($aNumber, $bNumber, $expiration, $maxDuration);
+echo $newCall->getSessionId();
+]]></programlisting>
         </example>
 
         <para>
@@ -583,23 +581,23 @@ echo $newCall-&gt;getSessionId();
         <example xml:id="zend.service.developergarden.voicecall.teardown.example"><info><title>Call two numbers, ask for status, and cancel</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $service = new Zend_Service_DeveloperGarden_VoiceCall($config);
 $aNumber = '+49-30-000001';
 $bNumber = '+49-30-000002';
 $expiration  = 30; // seconds
 $maxDuration = 300; // 5 mins
 
-$newCall = $service-&gt;newCall($aNumber, $bNumber, $expiration, $maxDuration);
+$newCall = $service->newCall($aNumber, $bNumber, $expiration, $maxDuration);
 
-$sessionId = $newCall-&gt;getSessionId();
+$sessionId = $newCall->getSessionId();
 
-$service-&gt;callStatus($sessionId, true); // extend the call
+$service->callStatus($sessionId, true); // extend the call
 
 sleep(10); // sleep 10s and then tearDown
 
-$service-&gt;tearDownCall($sessionId);
-</programlisting>
+$service->tearDownCall($sessionId);
+]]></programlisting>
         </example>
     </section>
 
@@ -797,7 +795,7 @@ $service-&gt;tearDownCall($sessionId);
         <example xml:id="zend.service.developergarden.conferencecall.example"><info><title>Ad-Hoc conference</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $client = new Zend_Service_DeveloperGarden_ConferenceCall($config);
 
 $conferenceDetails =
@@ -807,7 +805,7 @@ $conferenceDetails =
         60                                    // duration in seconds
     );
 
-$conference = $client-&gt;createConference('MyName', $conferenceDetails);
+$conference = $client->createConference('MyName', $conferenceDetails);
 
 $part1 = new Zend_Service_DeveloperGarden_ConferenceCall_ParticipantDetail(
     'Jon',
@@ -817,11 +815,11 @@ $part1 = new Zend_Service_DeveloperGarden_ConferenceCall_ParticipantDetail(
     true
 );
 
-$client-&gt;newParticipant($conference-&gt;getConferenceId(), $part1);
+$client->newParticipant($conference->getConferenceId(), $part1);
 // add a second, third ... participant
 
-$client-&gt;commitConference($conference-&gt;getConferenceId());
-</programlisting>
+$client->commitConference($conference->getConferenceId());
+]]></programlisting>
         </example>
     </section>
 
@@ -840,11 +838,11 @@ $client-&gt;commitConference($conference-&gt;getConferenceId());
         <example xml:id="zend.service.developergarden.performance.wsdlcache.example"><info><title>WSDL cache options</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::setWsdlCache(
     [PHP CONSTANT]
 );
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -886,10 +884,10 @@ Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::setWsdlCache(
         <example xml:id="zend.service.developergarden.performance.cache.example"><info><title>SecurityTokenServer cache option</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $cache = Zend_Cache::factory('Core', ...);
 Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::setCache($cache);
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 </section>

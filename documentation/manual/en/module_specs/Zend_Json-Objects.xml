@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.advanced"><info><title>Advanced Usage of Zend_Json</title></info>
     
 
@@ -35,10 +33,10 @@
             as associative arrays. However, if you desire an object returned, you can specify this:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Decode JSON objects as PHP objects
 $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
-</programlisting>
+]]></programlisting>
 
         <para>
             Any objects thus decoded are returned as <classname>StdClass</classname> objects
@@ -84,9 +82,9 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
             if you have ext/json installed. You can achieve this by calling:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 Zend_Json::$useBuiltinEncoderDecoder = true:
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.json.advanced.expr"><info><title>JSON Expressions</title></info>
@@ -112,18 +110,18 @@ Zend_Json::$useBuiltinEncoderDecoder = true:
             structures. A usage example would look like:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $data = array(
-    'onClick' =&gt; new Zend_Json_Expr('function() {'
+    'onClick' => new Zend_Json_Expr('function() {'
               . 'alert("I am a valid javascript callback '
               . 'created by Zend_Json"); }'),
-    'other' =&gt; 'no expression',
+    'other' => 'no expression',
 );
 $jsonObjectWithExpression = Zend_Json::encode(
     $data,
     false,
-    array('enableJsonExprFinder' =&gt; true)
+    array('enableJsonExprFinder' => true)
 );
-</programlisting>
+]]></programlisting>
     </section>
 </section>

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers.firebug"><info><title>Writing to Firebug</title></info>
     
 
@@ -48,40 +46,40 @@
     <example xml:id="zend.log.writers.firebug.example.with_front_controller"><info><title>Logging with Zend_Controller_Front</title></info>
         
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Place this in your bootstrap file before dispatching your front controller
 $writer = new Zend_Log_Writer_Firebug();
 $logger = new Zend_Log($writer);
 
 // Use this in your model, view and controller files
-$logger-&gt;log('This is a log message!', Zend_Log::INFO);
-</programlisting>
+$logger->log('This is a log message!', Zend_Log::INFO);
+]]></programlisting>
     </example>
 
     <example xml:id="zend.log.writers.firebug.example.without_front_controller"><info><title>Logging without Zend_Controller_Front</title></info>
         
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $writer = new Zend_Log_Writer_Firebug();
 $logger = new Zend_Log($writer);
 
 $request = new Zend_Controller_Request_Http();
 $response = new Zend_Controller_Response_Http();
 $channel = Zend_Wildfire_Channel_HttpHeaders::getInstance();
-$channel-&gt;setRequest($request);
-$channel-&gt;setResponse($response);
+$channel->setRequest($request);
+$channel->setResponse($response);
 
 // Start output buffering
 ob_start();
 
 // Now you can make calls to the logger
 
-$logger-&gt;log('This is a log message!', Zend_Log::INFO);
+$logger->log('This is a log message!', Zend_Log::INFO);
 
 // Flush log data to browser
-$channel-&gt;flush();
-$response-&gt;sendHeaders();
-</programlisting>
+$channel->flush();
+$response->sendHeaders();
+]]></programlisting>
     </example>
 
     <section xml:id="zend.log.writers.firebug.priority-styles"><info><title>Setting Styles for Priorities</title></info>
@@ -92,20 +90,20 @@ $response-&gt;sendHeaders();
             <methodname>setPriorityStyle()</methodname> method.
         </para>
 
-        <programlisting language="php">
-$logger-&gt;addPriority('FOO', 8);
-$writer-&gt;setPriorityStyle(8, 'TRACE');
-$logger-&gt;foo('Foo Message');
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$logger->addPriority('FOO', 8);
+$writer->setPriorityStyle(8, 'TRACE');
+$logger->foo('Foo Message');
+]]></programlisting>
 
         <para>
             The default style for user-defined priorities can be set with the
             <methodname>setDefaultPriorityStyle()</methodname> method.
         </para>
 
-        <programlisting language="php">
-$writer-&gt;setDefaultPriorityStyle('TRACE');
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$writer->setDefaultPriorityStyle('TRACE');
+]]></programlisting>
 
         <para>
             The supported styles are as follows:
@@ -191,10 +189,10 @@ $writer-&gt;setDefaultPriorityStyle('TRACE');
             automatically recognized.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $exception = new Zend_Exception('Test exception');
-$logger-&gt;err($exception);
-</programlisting>
+$logger->err($exception);
+]]></programlisting>
     </section>
 
     <section xml:id="zend.log.writers.firebug.preparing-data.table"><info><title>Table Logging</title></info>
@@ -205,9 +203,9 @@ $logger-&gt;err($exception);
             recognized and the first row of data automatically becomes the header.
         </para>
 
-        <programlisting language="php">
-$writer-&gt;setPriorityStyle(8, 'TABLE');
-$logger-&gt;addPriority('TABLE', 8);
+        <programlisting language="php"><![CDATA[
+$writer->setPriorityStyle(8, 'TABLE');
+$logger->addPriority('TABLE', 8);
 
 $table = array('Summary line for the table',
              array(
@@ -216,7 +214,7 @@ $table = array('Summary line for the table',
                  array('Row 2 c 1',' Row 2 c 2')
              )
             );
-$logger-&gt;table($table);
-</programlisting>
+$logger->table($table);
+]]></programlisting>
     </section>
 </section>

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headmeta"><info><title>HeadMeta Helper</title></info>
     
 
@@ -121,63 +119,63 @@
             keywords you wish to associate with your page:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // setting meta keywords
-$this-&gt;headMeta()-&gt;appendName('keywords', 'framework, PHP, productivity');
-</programlisting>
+$this->headMeta()->appendName('keywords', 'framework, PHP, productivity');
+]]></programlisting>
 
         <para>
             If you wished to set some client-side caching rules, you'd set
             http-equiv tags with the rules you wish to enforce:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // disabling client-side cache
-$this-&gt;headMeta()-&gt;appendHttpEquiv('expires',
+$this->headMeta()->appendHttpEquiv('expires',
                                    'Wed, 26 Feb 1997 08:21:57 GMT')
-                 -&gt;appendHttpEquiv('pragma', 'no-cache')
-                 -&gt;appendHttpEquiv('Cache-Control', 'no-cache');
-</programlisting>
+                 ->appendHttpEquiv('pragma', 'no-cache')
+                 ->appendHttpEquiv('Cache-Control', 'no-cache');
+]]></programlisting>
 
         <para>
             Another popular use for meta tags is setting the content type,
             character set, and language:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // setting content type and character set
-$this-&gt;headMeta()-&gt;appendHttpEquiv('Content-Type',
+$this->headMeta()->appendHttpEquiv('Content-Type',
                                    'text/html; charset=UTF-8')
-                 -&gt;appendHttpEquiv('Content-Language', 'en-US');
-</programlisting>
+                 ->appendHttpEquiv('Content-Language', 'en-US');
+]]></programlisting>
 
         <para>
             If you are serving an <acronym>HTML</acronym>5 document, you should provide the
             character set like this:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // setting character set in HTML5
-$this-&gt;headMeta()-&gt;setCharset('UTF-8'); // Will look like &lt;meta charset="UTF-8"&gt;
-</programlisting>
+$this->headMeta()->setCharset('UTF-8'); // Will look like <meta charset="UTF-8">
+]]></programlisting>
 
         <para>
             As a final example, an easy way to display a transitional message
             before a redirect is using a "meta refresh":
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // setting a meta refresh for 3 seconds to a new url:
-$this-&gt;headMeta()-&gt;appendHttpEquiv('Refresh',
+$this->headMeta()->appendHttpEquiv('Refresh',
                                    '3;URL=http://www.some.org/some.html');
-</programlisting>
+]]></programlisting>
 
         <para>
             When you're ready to place your meta tags in the layout, simply echo the helper:
         </para>
 
-        <programlisting language="php">
-&lt;?php echo $this-&gt;headMeta() ?&gt;
-</programlisting>
+        <programlisting language="php"><![CDATA[
+<?php echo $this->headMeta() ?>
+]]></programlisting>
     </example>
 </section>

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.examples"><info><title>Examples</title></info>
     
 
@@ -86,7 +84,7 @@
             first:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class Bugapp_Plugin_Initialize extends Zend_Controller_Plugin_Abstract
 {
     /**
@@ -120,15 +118,15 @@ class Bugapp_Plugin_Initialize extends Zend_Controller_Plugin_Abstract
      */
     public function __construct($env, $root = null)
     {
-        $this-&gt;_setEnv($env);
+        $this->_setEnv($env);
         if (null === $root) {
             $root = realpath(dirname(__FILE__) . '/../../../');
         }
-        $this-&gt;_root = $root;
+        $this->_root = $root;
 
-        $this-&gt;initPhpConfig();
+        $this->initPhpConfig();
 
-        $this-&gt;_front = Zend_Controller_Front::getInstance();
+        $this->_front = Zend_Controller_Front::getInstance();
     }
 
     /**
@@ -138,42 +136,42 @@ class Bugapp_Plugin_Initialize extends Zend_Controller_Plugin_Abstract
      */
     public function routeStartup(Zend_Controller_Request_Abstract $request)
     {
-        $this-&gt;initDb();
-        $this-&gt;initHelpers();
-        $this-&gt;initView();
-        $this-&gt;initPlugins();
-        $this-&gt;initRoutes();
-        $this-&gt;initControllers();
+        $this->initDb();
+        $this->initHelpers();
+        $this->initView();
+        $this->initPlugins();
+        $this->initRoutes();
+        $this->initControllers();
     }
 
     // definition of methods would follow...
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             This allows us to create a bootstrap callback like the following:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     public function appBootstrap()
     {
-        $controller = $this-&gt;getFrontController();
-        $controller-&gt;registerPlugin(
+        $controller = $this->getFrontController();
+        $controller->registerPlugin(
             new Bugapp_Plugin_Initialize('development')
         );
     }
 
     public function setUp()
     {
-        $this-&gt;bootstrap = array($this, 'appBootstrap');
+        $this->bootstrap = array($this, 'appBootstrap');
         parent::setUp();
     }
 
     // ...
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Once we have that in place, we can write our tests. However, what
@@ -184,116 +182,116 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
             dispatch another request.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     // ...
 
     public function loginUser($user, $password)
     {
-        $this-&gt;request-&gt;setMethod('POST')
-                      -&gt;setPost(array(
-                          'username' =&gt; $user,
-                          'password' =&gt; $password,
+        $this->request->setMethod('POST')
+                      ->setPost(array(
+                          'username' => $user,
+                          'password' => $password,
                       ));
-        $this-&gt;dispatch('/user/login');
-        $this-&gt;assertRedirectTo('/user/view');
+        $this->dispatch('/user/login');
+        $this->assertRedirectTo('/user/view');
 
-        $this-&gt;resetRequest()
-             -&gt;resetResponse();
+        $this->resetRequest()
+             ->resetResponse();
 
-        $this-&gt;request-&gt;setPost(array());
+        $this->request->setPost(array());
 
         // ...
     }
 
     // ...
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Now let's write tests:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     // ...
 
     public function testCallWithoutActionShouldPullFromIndexAction()
     {
-        $this-&gt;dispatch('/user');
-        $this-&gt;assertController('user');
-        $this-&gt;assertAction('index');
+        $this->dispatch('/user');
+        $this->assertController('user');
+        $this->assertAction('index');
     }
 
     public function testLoginFormShouldContainLoginAndRegistrationForms()
     {
-        $this-&gt;dispatch('/user');
-        $this-&gt;assertQueryCount('form', 2);
+        $this->dispatch('/user');
+        $this->assertQueryCount('form', 2);
     }
 
     public function testInvalidCredentialsShouldResultInRedisplayOfLoginForm()
     {
-        $request = $this-&gt;getRequest();
-        $request-&gt;setMethod('POST')
-                -&gt;setPost(array(
-                    'username' =&gt; 'bogus',
-                    'password' =&gt; 'reallyReallyBogus',
+        $request = $this->getRequest();
+        $request->setMethod('POST')
+                ->setPost(array(
+                    'username' => 'bogus',
+                    'password' => 'reallyReallyBogus',
                 ));
-        $this-&gt;dispatch('/user/login');
-        $this-&gt;assertNotRedirect();
-        $this-&gt;assertQuery('form');
+        $this->dispatch('/user/login');
+        $this->assertNotRedirect();
+        $this->assertQuery('form');
     }
 
     public function testValidLoginShouldRedirectToProfilePage()
     {
-        $this-&gt;loginUser('foobar', 'foobar');
+        $this->loginUser('foobar', 'foobar');
     }
 
     public function testAuthenticatedUserShouldHaveCustomizedProfilePage()
     {
-        $this-&gt;loginUser('foobar', 'foobar');
-        $this-&gt;request-&gt;setMethod('GET');
-        $this-&gt;dispatch('/user/view');
-        $this-&gt;assertNotRedirect();
-        $this-&gt;assertQueryContentContains('h2', 'foobar');
+        $this->loginUser('foobar', 'foobar');
+        $this->request->setMethod('GET');
+        $this->dispatch('/user/view');
+        $this->assertNotRedirect();
+        $this->assertQueryContentContains('h2', 'foobar');
     }
 
     public function
         testAuthenticatedUsersShouldBeRedirectedToProfileWhenVisitingLogin()
     {
-        $this-&gt;loginUser('foobar', 'foobar');
-        $this-&gt;request-&gt;setMethod('GET');
-        $this-&gt;dispatch('/user');
-        $this-&gt;assertRedirectTo('/user/view');
+        $this->loginUser('foobar', 'foobar');
+        $this->request->setMethod('GET');
+        $this->dispatch('/user');
+        $this->assertRedirectTo('/user/view');
     }
 
     public function testUserShouldRedirectToLoginPageOnLogout()
     {
-        $this-&gt;loginUser('foobar', 'foobar');
-        $this-&gt;request-&gt;setMethod('GET');
-        $this-&gt;dispatch('/user/logout');
-        $this-&gt;assertRedirectTo('/user');
+        $this->loginUser('foobar', 'foobar');
+        $this->request->setMethod('GET');
+        $this->dispatch('/user/logout');
+        $this->assertRedirectTo('/user');
     }
 
     public function testRegistrationShouldFailWithInvalidData()
     {
         $data = array(
-            'username' =&gt; 'This will not work',
-            'email'    =&gt; 'this is an invalid email',
-            'password' =&gt; 'Th1s!s!nv@l1d',
-            'passwordVerification' =&gt; 'wrong!',
+            'username' => 'This will not work',
+            'email'    => 'this is an invalid email',
+            'password' => 'Th1s!s!nv@l1d',
+            'passwordVerification' => 'wrong!',
         );
-        $request = $this-&gt;getRequest();
-        $request-&gt;setMethod('POST')
-                -&gt;setPost($data);
-        $this-&gt;dispatch('/user/register');
-        $this-&gt;assertNotRedirect();
-        $this-&gt;assertQuery('form .errors');
+        $request = $this->getRequest();
+        $request->setMethod('POST')
+                ->setPost($data);
+        $this->dispatch('/user/register');
+        $this->assertNotRedirect();
+        $this->assertQuery('form .errors');
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Notice that these are terse, and, for the most part, don't look for

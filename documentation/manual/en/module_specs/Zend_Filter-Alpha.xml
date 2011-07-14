@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.alpha"><info><title>Alpha</title></info>
     
 
@@ -35,11 +33,11 @@
             A basic example of usage is below:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Alpha();
 
-print $filter-&gt;filter('This is (my) content: 123');
-</programlisting>
+print $filter->filter('This is (my) content: 123');
+]]></programlisting>
 
         <para>
             The above example returns 'Thisismycontent'. Notice that the whitespace characters and
@@ -65,11 +63,11 @@ print $filter-&gt;filter('This is (my) content: 123');
             example:
         </para>
 
-        <programlisting language="php">
-$filter = new Zend_Filter_Alpha(array('allowwhitespace' =&gt; true));
+        <programlisting language="php"><![CDATA[
+$filter = new Zend_Filter_Alpha(array('allowwhitespace' => true));
 
-print $filter-&gt;filter('This is (my) content: 123');
-</programlisting>
+print $filter->filter('This is (my) content: 123');
+]]></programlisting>
 
         <para>
             The above example returns 'This is my content '. Notice that the parenthesis, colon, and

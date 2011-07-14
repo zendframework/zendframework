@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.localizedtonormalized"><info><title>LocalizedToNormalized and NormalizedToLocalized</title></info>
     
 
@@ -128,12 +126,12 @@
             So how does this normalization work in detail for numbers:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Initiate the filter
 $filter = new Zend_Filter_LocalizedToNormalized();
-$filter-&gt;filter('123.456,78');
+$filter->filter('123.456,78');
 // returns the value '123456.78'
-</programlisting>
+]]></programlisting>
 
         <para>
             Let's expect you have set the locale 'de' as application wide locale.
@@ -154,16 +152,16 @@ $filter-&gt;filter('123.456,78');
             Below is a example with defined precision so you can see how options work:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Numeric Filter
-$filter = new Zend_Filter_LocalizedToNormalized(array('precision' =&gt; 2));
+$filter = new Zend_Filter_LocalizedToNormalized(array('precision' => 2));
 
-$filter-&gt;filter('123.456');
+$filter->filter('123.456');
 // returns the value '123456.00'
 
-$filter-&gt;filter('123.456,78901');
+$filter->filter('123.456,78901');
 // returns the value '123456.79'
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.filter.set.localizedtonormalized.dates"><info><title>Normalization for date and time</title></info>
@@ -174,12 +172,12 @@ $filter-&gt;filter('123.456,78901');
             will be returned as array, where each date part is given within a own key.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Initiate the filter
 $filter = new Zend_Filter_LocalizedToNormalized();
-$filter-&gt;filter('12.April.2009');
-// returns array('day' =&gt; '12', 'month' =&gt; '04', 'year' =&gt; '2009')
-</programlisting>
+$filter->filter('12.April.2009');
+// returns array('day' => '12', 'month' => '04', 'year' => '2009')
+]]></programlisting>
 
         <para>
             Let's expect you have set the locale 'de' again. Now the input is automatically detected
@@ -191,15 +189,15 @@ $filter-&gt;filter('12.April.2009');
             <emphasis>date_format</emphasis> and the <emphasis>locale</emphasis> option.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Date Filter
 $filter = new Zend_Filter_LocalizedToNormalized(
-   array('date_format' =&gt; 'ss:mm:HH')
+   array('date_format' => 'ss:mm:HH')
 );
 
-$filter-&gt;filter('11:22:33');
-// returns array('hour' =&gt; '33', 'minute' =&gt; '22', 'second' =&gt; '11')
-</programlisting>
+$filter->filter('11:22:33');
+// returns array('hour' => '33', 'minute' => '22', 'second' => '11')
+]]></programlisting>
     </section>
 
     <section xml:id="zend.filter.set.localizedtonormalized.numberslocal"><info><title>Localization for numbers</title></info>
@@ -214,12 +212,12 @@ $filter-&gt;filter('11:22:33');
             So how does localization work in detail for numbers:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Initiate the filter
 $filter = new Zend_Filter_NormalizedToLocalized();
-$filter-&gt;filter(123456.78);
+$filter->filter(123456.78);
 // returns the value '123.456,78'
-</programlisting>
+]]></programlisting>
 
         <para>
             Let's expect you have set the locale 'de' as application wide locale.
@@ -241,16 +239,16 @@ $filter-&gt;filter(123456.78);
             work:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Numeric Filter
-$filter = new Zend_Filter_NormalizedToLocalized(array('precision' =&gt; 2));
+$filter = new Zend_Filter_NormalizedToLocalized(array('precision' => 2));
 
-$filter-&gt;filter(123456);
+$filter->filter(123456);
 // returns the value '123.456,00'
 
-$filter-&gt;filter(123456.78901);
+$filter->filter(123456.78901);
 // returns the value '123.456,79'
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.filter.set.normalizedtolocalized.dates"><info><title>Localization for date and time</title></info>
@@ -261,12 +259,12 @@ $filter-&gt;filter(123456.78901);
             values will be returned as string, with the format defined by the set locale.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Initiate the filter
 $filter = new Zend_Filter_NormalizedToLocalized();
-$filter-&gt;filter(array('day' =&gt; '12', 'month' =&gt; '04', 'year' =&gt; '2009');
+$filter->filter(array('day' => '12', 'month' => '04', 'year' => '2009');
 // returns '12.04.2009'
-</programlisting>
+]]></programlisting>
 
         <para>
             Let's expect you have set the locale 'de' again. Now the input is automatically detected
@@ -278,14 +276,14 @@ $filter-&gt;filter(array('day' =&gt; '12', 'month' =&gt; '04', 'year' =&gt; '200
             <emphasis>date_format</emphasis>, and the <emphasis>locale</emphasis> option.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Date Filter
 $filter = new Zend_Filter_LocalizedToNormalized(
-   array('date_format' =&gt; 'ss:mm:HH')
+   array('date_format' => 'ss:mm:HH')
 );
 
-$filter-&gt;filter(array('hour' =&gt; '33', 'minute' =&gt; '22', 'second' =&gt; '11'));
+$filter->filter(array('hour' => '33', 'minute' => '22', 'second' => '11'));
 // returns '11:22:33'
-</programlisting>
+]]></programlisting>
     </section>
 </section>

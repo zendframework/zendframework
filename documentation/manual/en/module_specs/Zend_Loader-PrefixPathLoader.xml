@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.prefix-path-loader"><info><title>The PrefixPathLoader</title></info>
     
 
@@ -73,35 +71,35 @@
             <methodname>addPrefixPaths()</methodname> methods.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 use Zend\Loader\PrefixPathLoader;
 
 // Configure at instantiation:
 $loader = new PrefixPathLoader(array(
-    array('prefix' =&gt; 'Foo', 'path' =&gt; '../library/Foo'),
-    array('prefix' =&gt; 'Bar', 'path' =&gt; '../vendor/Bar'),
+    array('prefix' => 'Foo', 'path' => '../library/Foo'),
+    array('prefix' => 'Bar', 'path' => '../vendor/Bar'),
 ));
 
 // Or configure manually using methods:
 $loader = new PrefixPathLoader();
-$loader-&gt;addPrefixPath('Foo', '../library/Foo');
+$loader->addPrefixPath('Foo', '../library/Foo');
 
-$loader-&gt;addPrefixPaths(array(
-    array('prefix' =&gt; 'Foo', 'path' =&gt; '../library/Foo'),
-    array('prefix' =&gt; 'Bar', 'path' =&gt; '../vendor/Bar'),
+$loader->addPrefixPaths(array(
+    array('prefix' => 'Foo', 'path' => '../library/Foo'),
+    array('prefix' => 'Bar', 'path' => '../vendor/Bar'),
 ));
-</programlisting>
+]]></programlisting>
 
         <para>
             Once configured, you may then attempt to lookup a plugin.
         </para>
 
-        <programlisting language="php">
-if (false === ($class = $loader-&gt;load('bar'))) {
+        <programlisting language="php"><![CDATA[
+if (false === ($class = $loader->load('bar'))) {
     throw new Exception("Plugin class matching 'bar' not found!");
 }
 $plugin = new $class();
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.loader.prefix-path-loader.options"><info><title>Configuration Options</title></info>
@@ -541,7 +539,7 @@ $plugin = new $class();
                 Consider the following directory structures:
             </para>
 
-            <programlisting language="text">
+            <programlisting language="text"><![CDATA[
 project
 |-- library
 |   |-- Foo
@@ -551,7 +549,7 @@ project
 |   |-- Foo
 |   |   |-- Bar.php
 |   |   `-- Foobar.php
-            </programlisting>
+            ]]></programlisting>
 
             <para>
                 For purposes of this example, we'll assume that the common namespace is "Foo", and
@@ -559,26 +557,26 @@ project
                 simply register the "vendor" directory last.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 use Zend\Loader\PrefixPathLoader;
 
 $loader = new PrefixPathLoader();
 
 // Multiple calls to addPrefixPath():
-$loader-&gt;addPrefixPath('Foo', PROJECT_ROOT . '/library/Foo')
-       -&gt;addPrefixPath('Foo', PROJECT_ROOT . '/vendor/Foo');
+$loader->addPrefixPath('Foo', PROJECT_ROOT . '/library/Foo')
+       ->addPrefixPath('Foo', PROJECT_ROOT . '/vendor/Foo');
 
 // Or use a single call to addPrefixPaths():
-$loader-&gt;addPrefixPaths(array(
-    array('prefix' =&gt; 'Foo', 'path' =&gt; PROJECT_ROOT . '/library/Foo'),
-    array('prefix' =&gt; 'Foo', 'path' =&gt; PROJECT_ROOT . '/vendor/Foo'),
+$loader->addPrefixPaths(array(
+    array('prefix' => 'Foo', 'path' => PROJECT_ROOT . '/library/Foo'),
+    array('prefix' => 'Foo', 'path' => PROJECT_ROOT . '/vendor/Foo'),
 ));
 
 // And then resolve plugins:
-$bar    = $loader-&gt;load('bar');    // Foo\Bar from vendor/Foo/Bar.php
-$baz    = $loader-&gt;load('baz');    // Foo\Baz from library/Foo/Baz.php
-$foobar = $loader-&gt;load('foobar'); // Foo\Foobar from vendor/Foo/Baz.php
-</programlisting>
+$bar    = $loader->load('bar');    // Foo\Bar from vendor/Foo/Bar.php
+$baz    = $loader->load('baz');    // Foo\Baz from library/Foo/Baz.php
+$foobar = $loader->load('foobar'); // Foo\Foobar from vendor/Foo/Baz.php
+]]></programlisting>
         </example>
 
         <example xml:id="zend.loader.prefix-path-loader.examples.optimizing"><info><title>Prototyping with PrefixPathLoader</title></info>
@@ -614,11 +612,11 @@ $foobar = $loader-&gt;load('foobar'); // Foo\Foobar from vendor/Foo/Baz.php
                 Usage of these methods is quite simple.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // After a number of load() operations, or at the end of the request:
-$classMap  = $loader-&gt;getClassMap();
-$pluginMap = $loader-&gt;getPluginMap();
-</programlisting>
+$classMap  = $loader->getClassMap();
+$pluginMap = $loader->getPluginMap();
+]]></programlisting>
 
             <para>
                 From here, you will need to do a little work. First, you need to serialize this
@@ -626,12 +624,12 @@ $pluginMap = $loader-&gt;getPluginMap();
                 <classname>Zend\Serializer</classname> or <classname>Zend\Cache</classname>.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // Using Zend\Serializer:
 use Zend\Serializer\Serializer;
 
 $adapter = Serializer::factory('PhpCode');
-$content = "&lt;?php\nreturn " . $adapter-&gt;serialize($classMap) . ";";
+$content = "<?php\nreturn " . $adapter->serialize($classMap) . ";";
 file_put_contents(APPLICATION_PATH . '/.classmap.php', $content);
 
 // Using Zend\Cache:
@@ -639,11 +637,11 @@ use Zend\Cache\Cache;
 
 $cache = Cache::factory(
     'Core', 'File', 
-    array('lifetime' =&gt; null, 'automatic_serialization' =&gt; true),
-    array('cache_dir' =&gt; APPLICATION_PATH . '/../cache/classmaps')
+    array('lifetime' => null, 'automatic_serialization' => true),
+    array('cache_dir' => APPLICATION_PATH . '/../cache/classmaps')
 );
-$cache-&gt;save($pluginMap, 'pluginmap');
-</programlisting>
+$cache->save($pluginMap, 'pluginmap');
+]]></programlisting>
 
             <para>
                 Note: the examples alternate between the class map and plugin map; however, either
@@ -656,10 +654,10 @@ $cache-&gt;save($pluginMap, 'pluginmap');
                 <varname>ClassMapAutoloader</varname> instance:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $autoloader = new Zend\Loader\ClassMapAutoloader();
-$autoloader-&gt;registerAutoloadMap(APPLICATION_PATH . '/.classmap.php');
-</programlisting>
+$autoloader->registerAutoloadMap(APPLICATION_PATH . '/.classmap.php');
+]]></programlisting>
 
             <para>
                 If using <classname>Zend\Cache</classname>, you would retrieve the cached data, and
@@ -667,11 +665,11 @@ $autoloader-&gt;registerAutoloadMap(APPLICATION_PATH . '/.classmap.php');
                 <classname>PluginClassLoader</classname> instance.
             </para>
 
-            <programlisting language="php">
-$map = $cache-&gt;load('pluginmap');
+            <programlisting language="php"><![CDATA[
+$map = $cache->load('pluginmap');
 
 $loader = new Zend\Loader\PluginClassLoader($map);
-</programlisting>
+]]></programlisting>
 
             <para>
                 With some creative and well disciplined architecture, you can likely automate these

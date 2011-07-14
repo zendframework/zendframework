@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit"><info><title>Zend_Test_PHPUnit</title></info>
     
 
@@ -44,61 +42,61 @@
             (such as the correct controller, plugin, etc).
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     public function setUp()
     {
-        $this-&gt;bootstrap = array($this, 'appBootstrap');
+        $this->bootstrap = array($this, 'appBootstrap');
         parent::setUp();
     }
 
     public function appBootstrap()
     {
-        $this-&gt;frontController
-             -&gt;registerPlugin(new Bugapp_Plugin_Initialize('development'));
+        $this->frontController
+             ->registerPlugin(new Bugapp_Plugin_Initialize('development'));
     }
 
     public function testCallWithoutActionShouldPullFromIndexAction()
     {
-        $this-&gt;dispatch('/user');
-        $this-&gt;assertController('user');
-        $this-&gt;assertAction('index');
+        $this->dispatch('/user');
+        $this->assertController('user');
+        $this->assertAction('index');
     }
 
     public function testIndexActionShouldContainLoginForm()
     {
-        $this-&gt;dispatch('/user');
-        $this-&gt;assertAction('index');
-        $this-&gt;assertQueryCount('form#loginForm', 1);
+        $this->dispatch('/user');
+        $this->assertAction('index');
+        $this->assertQueryCount('form#loginForm', 1);
     }
 
     public function testValidLoginShouldGoToProfilePage()
     {
-        $this-&gt;request-&gt;setMethod('POST')
-              -&gt;setPost(array(
-                  'username' =&gt; 'foobar',
-                  'password' =&gt; 'foobar'
+        $this->request->setMethod('POST')
+              ->setPost(array(
+                  'username' => 'foobar',
+                  'password' => 'foobar'
               ));
-        $this-&gt;dispatch('/user/login');
-        $this-&gt;assertRedirectTo('/user/view');
+        $this->dispatch('/user/login');
+        $this->assertRedirectTo('/user/view');
 
-        $this-&gt;resetRequest()
-             -&gt;resetResponse();
+        $this->resetRequest()
+             ->resetResponse();
 
-        $this-&gt;request-&gt;setMethod('GET')
-             -&gt;setPost(array());
-        $this-&gt;dispatch('/user/view');
-        $this-&gt;assertRoute('default');
-        $this-&gt;assertModule('default');
-        $this-&gt;assertController('user');
-        $this-&gt;assertAction('view');
-        $this-&gt;assertNotRedirect();
-        $this-&gt;assertQuery('dl');
-        $this-&gt;assertQueryContentContains('h2', 'User: foobar');
+        $this->request->setMethod('GET')
+             ->setPost(array());
+        $this->dispatch('/user/view');
+        $this->assertRoute('default');
+        $this->assertModule('default');
+        $this->assertController('user');
+        $this->assertAction('view');
+        $this->assertNotRedirect();
+        $this->assertQuery('dl');
+        $this->assertQueryContentContains('h2', 'User: foobar');
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             This example could be written somewhat simpler -- not all the

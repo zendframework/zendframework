@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.callback"><info><title>Callback</title></info>
     
 
@@ -41,27 +39,27 @@
             we have the following function.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 function myMethod($value)
 {
     // some validation
     return true;
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             To use it within <classname>Zend_Validate_Callback</classname> you just have to call it
             this way:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $valid = new Zend_Validate_Callback('myMethod');
-if ($valid-&gt;isValid($input)) {
+if ($valid->isValid($input)) {
     // input appears to be valid
 } else {
     // input is invalid
 }
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.validate.set.callback.closure"><info><title>Usage with closures</title></info>
@@ -74,18 +72,18 @@ if ($valid-&gt;isValid($input)) {
             <classname>Zend_Validate_Callback</classname>. As an example:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $valid = new Zend_Validate_Callback(function($value){
     // some validation
     return true;
 });
 
-if ($valid-&gt;isValid($input)) {
+if ($valid->isValid($input)) {
     // input appears to be valid
 } else {
     // input is invalid
 }
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.validate.set.callback.class"><info><title>Usage with class-based callbacks</title></info>
@@ -96,7 +94,7 @@ if ($valid-&gt;isValid($input)) {
             the following class method:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class MyClass
 {
     public function myMethod($value)
@@ -105,29 +103,29 @@ class MyClass
         return true;
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             The definition of the callback is in this case almost the same. You have just to create
             an instance of the class before the method and create an array describing the callback:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $object = new MyClass;
 $valid = new Zend_Validate_Callback(array($object, 'myMethod'));
-if ($valid-&gt;isValid($input)) {
+if ($valid->isValid($input)) {
     // input appears to be valid
 } else {
     // input is invalid
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             You may also define a static method as a callback. Consider the following class
             definition and validator usage:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class MyClass
 {
     public static function test($value)
@@ -138,12 +136,12 @@ class MyClass
 }
 
 $valid = new Zend_Validate_Callback(array('MyClass', 'test'));
-if ($valid-&gt;isValid($input)) {
+if ($valid->isValid($input)) {
     // input appears to be valid
 } else {
     // input is invalid
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Finally, if you are using <acronym>PHP</acronym> 5.3, you may define the magic method
@@ -151,7 +149,7 @@ if ($valid-&gt;isValid($input)) {
             instance of the class as the callback will also work:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class MyClass
 {
     public function __invoke($value)
@@ -163,12 +161,12 @@ class MyClass
 
 $object = new MyClass();
 $valid = new Zend_Validate_Callback($object);
-if ($valid-&gt;isValid($input)) {
+if ($valid->isValid($input)) {
     // input appears to be valid
 } else {
     // input is invalid
 }
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.validate.set.callback.options2"><info><title>Adding options</title></info>
@@ -183,7 +181,7 @@ if ($valid-&gt;isValid($input)) {
             Consider the following class and method definition:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class MyClass
 {
     function myMethod($value, $option)
@@ -192,7 +190,7 @@ class MyClass
         return true;
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             There are two ways to inform the validator of additional options: pass them in the
@@ -204,49 +202,49 @@ class MyClass
             "callback" and "options":
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $valid = new Zend_Validate_Callback(array(
-    'callback' =&gt; array('MyClass', 'myMethod'),
-    'options'  =&gt; $option,
+    'callback' => array('MyClass', 'myMethod'),
+    'options'  => $option,
 ));
 
-if ($valid-&gt;isValid($input)) {
+if ($valid->isValid($input)) {
     // input appears to be valid
 } else {
     // input is invalid
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Otherwise, you may pass them to the validator after instantiation:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $valid = new Zend_Validate_Callback(array('MyClass', 'myMethod'));
-$valid-&gt;setOptions($option);
+$valid->setOptions($option);
 
-if ($valid-&gt;isValid($input)) {
+if ($valid->isValid($input)) {
     // input appears to be valid
 } else {
     // input is invalid
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             When there are additional values given to <methodname>isValid()</methodname> then these
             values will be added immediately after <varname>$value</varname>.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $valid = new Zend_Validate_Callback(array('MyClass', 'myMethod'));
-$valid-&gt;setOptions($option);
+$valid->setOptions($option);
 
-if ($valid-&gt;isValid($input, $additional)) {
+if ($valid->isValid($input, $additional)) {
     // input appears to be valid
 } else {
     // input is invalid
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             When making the call to the callback, the value to be validated will always be passed as

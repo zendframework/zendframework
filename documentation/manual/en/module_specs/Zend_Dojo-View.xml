@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.view"><info><title>Dojo View Helpers</title></info>
     
 
@@ -27,18 +25,18 @@
             <methodname>addHelperPath()</methodname>:
         </para>
 
-        <programlisting language="php">
-$view-&gt;addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+]]></programlisting>
 
         <para>
             Alternately, you can use <classname>Zend_Dojo</classname>'s
             <methodname>enableView()</methodname> method to do the work for you:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 Zend_Dojo::enableView($view);
-</programlisting>
+]]></programlisting>
     </example>
 
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Dojo-View-Dojo.xml"/>

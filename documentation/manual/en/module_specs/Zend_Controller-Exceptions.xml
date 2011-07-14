@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.exceptions"><info><title>MVC Exceptions</title></info>
     
 
@@ -69,14 +67,14 @@
                     you'd rather handle them yourself. As an example:
                 </para>
 
-                <programlisting language="php">
-$front-&gt;throwExceptions(true);
+                <programlisting language="php"><![CDATA[
+$front->throwExceptions(true);
 try {
-    $front-&gt;dispatch();
+    $front->dispatch();
 } catch (Exception $e) {
     // handle exceptions yourself
 }
-</programlisting>
+]]></programlisting>
 
                 <para>
                     This method is probably the easiest way to add custom
@@ -116,17 +114,17 @@ try {
                     example:
                 </para>
 
-                <programlisting language="php">
-$front-&gt;returnResponse(true);
-$response = $front-&gt;dispatch();
-if ($response-&gt;isException()) {
-    $exceptions = $response-&gt;getException();
+                <programlisting language="php"><![CDATA[
+$front->returnResponse(true);
+$response = $front->dispatch();
+if ($response->isException()) {
+    $exceptions = $response->getException();
     // handle exceptions ...
 } else {
-    $response-&gt;sendHeaders();
-    $response-&gt;outputBody();
+    $response->sendHeaders();
+    $response->outputBody();
 }
-</programlisting>
+]]></programlisting>
 
                 <para>
                     The primary advantage this method offers over
@@ -172,13 +170,13 @@ if ($response-&gt;isException()) {
                             the following directive:
                         </para>
 
-                        <programlisting language="php">
-$front-&gt;setParam('useDefaultControllerAlways', true);
+                        <programlisting language="php"><![CDATA[
+$front->setParam('useDefaultControllerAlways', true);
 
 // or
 
-$dispatcher-&gt;setParam('useDefaultControllerAlways', true);
-</programlisting>
+$dispatcher->setParam('useDefaultControllerAlways', true);
+]]></programlisting>
 
                         <para>
                             When this flag is set, the dispatcher will use the
@@ -221,21 +219,21 @@ $dispatcher-&gt;setParam('useDefaultControllerAlways', true);
                             example:
                         </para>
 
-                        <programlisting language="php">
+                        <programlisting language="php"><![CDATA[
 class My_Controller_Action extends Zend_Controller_Action
 {
     public function __call($method, $args)
     {
         if ('Action' == substr($method, -6)) {
-            $controller = $this-&gt;getRequest()-&gt;getControllerName();
+            $controller = $this->getRequest()->getControllerName();
             $url = '/' . $controller . '/index';
-            return $this-&gt;_redirect($url);
+            return $this->_redirect($url);
         }
 
         throw new Exception('Invalid method');
     }
 }
-</programlisting>
+]]></programlisting>
 
                         <para>
                             The example above intercepts any undefined action
@@ -251,30 +249,30 @@ class My_Controller_Action extends Zend_Controller_Action
                             verify the action exists. As an example:
                         </para>
 
-                        <programlisting language="php">
+                        <programlisting language="php"><![CDATA[
 class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
 {
     public function getAction($request)
     {
-        $action = $request-&gt;getActionName();
+        $action = $request->getActionName();
         if (empty($action)) {
-            $action = $this-&gt;getDefaultAction();
-            $request-&gt;setActionName($action);
-            $action = $this-&gt;formatActionName($action);
+            $action = $this->getDefaultAction();
+            $request->setActionName($action);
+            $action = $this->formatActionName($action);
         } else {
-            $controller = $this-&gt;getController();
-            $action     = $this-&gt;formatActionName($action);
+            $controller = $this->getController();
+            $action     = $this->formatActionName($action);
             if (!method_exists($controller, $action)) {
-                $action = $this-&gt;getDefaultAction();
-                $request-&gt;setActionName($action);
-                $action = $this-&gt;formatActionName($action);
+                $action = $this->getDefaultAction();
+                $request->setActionName($action);
+                $action = $this->formatActionName($action);
             }
         }
 
         return $action;
     }
 }
-</programlisting>
+]]></programlisting>
 
                         <para>
                             The above code checks to see that the requested
@@ -324,33 +322,33 @@ class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
                             As an example:
                         </para>
 
-                        <programlisting language="php">
+                        <programlisting language="php"><![CDATA[
 class My_Controller_PreDispatchPlugin extends Zend_Controller_Plugin_Abstract
 {
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
         $front      = Zend_Controller_Front::getInstance();
-        $dispatcher = $front-&gt;getDispatcher();
-        $class      = $dispatcher-&gt;getControllerClass($request);
+        $dispatcher = $front->getDispatcher();
+        $class      = $dispatcher->getControllerClass($request);
         if (!$class) {
-            $class = $dispatcher-&gt;getDefaultControllerClass($request);
+            $class = $dispatcher->getDefaultControllerClass($request);
         }
 
         $r      = new ReflectionClass($class);
-        $action = $dispatcher-&gt;getActionMethod($request);
+        $action = $dispatcher->getActionMethod($request);
 
-        if (!$r-&gt;hasMethod($action)) {
-            $defaultAction  = $dispatcher-&gt;getDefaultAction();
-            $controllerName = $request-&gt;getControllerName();
-            $response       = $front-&gt;getResponse();
-            $response-&gt;setRedirect('/' . $controllerName
+        if (!$r->hasMethod($action)) {
+            $defaultAction  = $dispatcher->getDefaultAction();
+            $controllerName = $request->getControllerName();
+            $response       = $front->getResponse();
+            $response->setRedirect('/' . $controllerName
                                   . '/' . $defaultAction);
-            $response-&gt;sendHeaders();
+            $response->sendHeaders();
             exit;
         }
     }
 }
-</programlisting>
+]]></programlisting>
 
                         <para>
                             In this example, we check to see if the action

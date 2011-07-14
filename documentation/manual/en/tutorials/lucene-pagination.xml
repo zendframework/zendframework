@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.pagination"><info><title>Search result pagination</title></info>
     
 
@@ -19,31 +17,31 @@
     <example xml:id="learning.lucene.pagination.example"><info><title>Search result pagination example</title></info>
         
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $cacheId = md5($query);
 
-if (!$resultSet = $cache-&gt;load($cacheId)) {
-    $hits = $index-&gt;find($query);
+if (!$resultSet = $cache->load($cacheId)) {
+    $hits = $index->find($query);
     $resultSet = array();
     foreach ($hits as $hit) {
         $resultSetEntry          = array();
-        $resultSetEntry['id']    = $hit-&gt;id;
-        $resultSetEntry['score'] = $hit-&gt;score;
+        $resultSetEntry['id']    = $hit->id;
+        $resultSetEntry['score'] = $hit->score;
 
         $resultSet[] = $resultSetEntry;
     }
 
-    $cache-&gt;save($resultSet, $cacheId);
+    $cache->save($resultSet, $cacheId);
 }
 
 $publishedResultSet = array();
-for ($resultId = $startId; $resultId &lt; $endId; $resultId++) {
+for ($resultId = $startId; $resultId < $endId; $resultId++) {
     $publishedResultSet[$resultId] = array(
-        'id'    =&gt; $resultSet[$resultId]['id'],
-        'score' =&gt; $resultSet[$resultId]['score'],
-        'doc'   =&gt; $index-&gt;getDocument($resultSet[$resultId]['id']),
+        'id'    => $resultSet[$resultId]['id'],
+        'score' => $resultSet[$resultId]['score'],
+        'doc'   => $index->getDocument($resultSet[$resultId]['id']),
     );
 }
-</programlisting>
+]]></programlisting>
     </example>
 </section>

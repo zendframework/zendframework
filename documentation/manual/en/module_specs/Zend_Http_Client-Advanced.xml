@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.client.advanced"><info><title>Zend_Http_Client - Advanced Usage</title></info>
     
 
@@ -26,13 +24,13 @@
             <example xml:id="zend.http.client.redirections.example-1"><info><title>Forcing RFC 2616 Strict Redirections on 301 and 302 Responses</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Strict Redirections
-$client-&gt;setConfig(array('strictredirects' =&gt; true));
+$client->setConfig(array('strictredirects' => true));
 
 // Non-strict Redirections
-$client-&gt;setConfig(array('strictredirects' =&gt; false));
-</programlisting>
+$client->setConfig(array('strictredirects' => false));
+]]></programlisting>
             </example>
         </para>
 
@@ -54,18 +52,18 @@ $client-&gt;setConfig(array('strictredirects' =&gt; false));
             <example xml:id="zend.http.client.cookies.example-1"><info><title>Setting Cookies Using setCookie()</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Easy and simple: by providing a cookie name and cookie value
-$client-&gt;setCookie('flavor', 'chocolate chips');
+$client->setCookie('flavor', 'chocolate chips');
 
 // By directly providing a raw cookie string (name=value)
 // Note that the value must be already URL encoded
-$client-&gt;setCookie('flavor=chocolate%20chips');
+$client->setCookie('flavor=chocolate%20chips');
 
 // By providing a Zend_Http_Cookie object
 $cookie = Zend_Http_Cookie::fromString('flavor=chocolate%20chips');
-$client-&gt;setCookie($cookie);
-</programlisting>
+$client->setCookie($cookie);
+]]></programlisting>
             </example>
 
             For more information about <classname>Zend_Http_Cookie</classname> objects, see
@@ -83,24 +81,24 @@ $client-&gt;setCookie($cookie);
             <example xml:id="zend.http.client.cookies.example-2"><info><title>Enabling Cookie Stickiness</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // To turn cookie stickiness on, set a Cookie Jar
-$client-&gt;setCookieJar();
+$client->setCookieJar();
 
 // First request: log in and start a session
-$client-&gt;setUri('http://example.com/login.php');
-$client-&gt;setParameterPost('user', 'h4x0r');
-$client-&gt;setParameterPost('password', '1337');
-$client-&gt;request('POST');
+$client->setUri('http://example.com/login.php');
+$client->setParameterPost('user', 'h4x0r');
+$client->setParameterPost('password', '1337');
+$client->request('POST');
 
 // The Cookie Jar automatically stores the cookies set
 // in the response, like a session ID cookie.
 
 // Now we can send our next request - the stored cookies
 // will be automatically sent.
-$client-&gt;setUri('http://example.com/read_member_news.php');
-$client-&gt;request('GET');
-</programlisting>
+$client->setUri('http://example.com/read_member_news.php');
+$client->request('GET');
+]]></programlisting>
             </example>
 
             For more information about the <classname>Zend_Http_CookieJar</classname> class, see
@@ -119,20 +117,20 @@ $client-&gt;request('GET');
             <example xml:id="zend.http.client.custom_headers.example-1"><info><title>Setting A Single Custom Request Header</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Setting a single header, overwriting any previous value
-$client-&gt;setHeaders('Host', 'www.example.com');
+$client->setHeaders('Host', 'www.example.com');
 
 // Another way of doing the exact same thing
-$client-&gt;setHeaders('Host: www.example.com');
+$client->setHeaders('Host: www.example.com');
 
 // Setting several values for the same header
 // (useful mostly for Cookie headers):
-$client-&gt;setHeaders('Cookie', array(
+$client->setHeaders('Cookie', array(
     'PHPSESSID=1234567890abcdef1234567890abcdef',
     'language=he'
 ));
-</programlisting>
+]]></programlisting>
             </example>
         </para>
 
@@ -143,19 +141,19 @@ $client-&gt;setHeaders('Cookie', array(
             <example xml:id="zend.http.client.custom_headers.example-2"><info><title>Setting Multiple Custom Request Headers</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Setting multiple headers, overwriting any previous value
-$client-&gt;setHeaders(array(
-    'Host' =&gt; 'www.example.com',
-    'Accept-encoding' =&gt; 'gzip,deflate',
-    'X-Powered-By' =&gt; 'Zend Framework'));
+$client->setHeaders(array(
+    'Host' => 'www.example.com',
+    'Accept-encoding' => 'gzip,deflate',
+    'X-Powered-By' => 'Zend Framework'));
 
 // The array can also contain full array strings:
-$client-&gt;setHeaders(array(
+$client->setHeaders(array(
     'Host: www.example.com',
     'Accept-encoding: gzip,deflate',
     'X-Powered-By: Zend Framework'));
-</programlisting>
+]]></programlisting>
             </example>
         </para>
     </section>
@@ -183,17 +181,17 @@ $client-&gt;setHeaders(array(
             <example xml:id="zend.http.client.file_uploads.example-1"><info><title>Using setFileUpload to Upload Files</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Uploading arbitrary data as a file
 $text = 'this is some plain text';
-$client-&gt;setFileUpload('some_text.txt', 'upload', $text, 'text/plain');
+$client->setFileUpload('some_text.txt', 'upload', $text, 'text/plain');
 
 // Uploading an existing file
-$client-&gt;setFileUpload('/tmp/Backup.tar.gz', 'bufile');
+$client->setFileUpload('/tmp/Backup.tar.gz', 'bufile');
 
 // Send the files
-$client-&gt;request('POST');
-</programlisting>
+$client->request('POST');
+]]></programlisting>
             </example>
 
             In the first example, the $text variable is uploaded and will be
@@ -231,18 +229,18 @@ $client-&gt;request('POST');
             <example xml:id="zend.http.client.raw_post_data.example-1"><info><title>Sending Raw POST Data</title></info>
                 
 
-                <programlisting language="php">
-$xml = '&lt;book&gt;' .
-       '  &lt;title&gt;Islands in the Stream&lt;/title&gt;' .
-       '  &lt;author&gt;Ernest Hemingway&lt;/author&gt;' .
-       '  &lt;year&gt;1970&lt;/year&gt;' .
-       '&lt;/book&gt;';
+                <programlisting language="php"><![CDATA[
+$xml = '<book>' .
+       '  <title>Islands in the Stream</title>' .
+       '  <author>Ernest Hemingway</author>' .
+       '  <year>1970</year>' .
+       '</book>';
 
-$client-&gt;setRawData($xml, 'text/xml')-&gt;request('POST');
+$client->setRawData($xml, 'text/xml')->request('POST');
 
 // Another way to do the same thing:
-$client-&gt;setRawData($xml)-&gt;setEncType('text/xml')-&gt;request('POST');
-</programlisting>
+$client->setRawData($xml)->setEncType('text/xml')->request('POST');
+]]></programlisting>
             </example>
 
             The data should be available on the server side through <acronym>PHP</acronym>'s
@@ -277,16 +275,16 @@ $client-&gt;setRawData($xml)-&gt;setEncType('text/xml')-&gt;request('POST');
             <example xml:id="zend.http.client.http_authentication.example-1"><info><title>Setting HTTP Authentication User and Password</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Using basic authentication
-$client-&gt;setAuth('shahar', 'myPassword!', Zend_Http_Client::AUTH_BASIC);
+$client->setAuth('shahar', 'myPassword!', Zend_Http_Client::AUTH_BASIC);
 
 // Since basic auth is default, you can just do this:
-$client-&gt;setAuth('shahar', 'myPassword!');
+$client->setAuth('shahar', 'myPassword!');
 
 // You can also specify username and password in the URI
-$client-&gt;setUri('http://christer:secret@example.com');
-</programlisting>
+$client->setUri('http://christer:secret@example.com');
+]]></programlisting>
             </example>
         </para>
     </section>
@@ -356,39 +354,39 @@ $client-&gt;setUri('http://christer:secret@example.com');
         <example xml:id="zend.http.client.multiple_requests.example-1"><info><title>Performing consecutive requests with one client</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // First, instantiate the client
 $client = new Zend_Http_Client('http://www.example.com/fetchdata.php', array(
-    'keepalive' =&gt; true
+    'keepalive' => true
 ));
 
 // Do we have the cookies stored in our session?
-if (isset($_SESSION['cookiejar']) &amp;&amp;
+if (isset($_SESSION['cookiejar']) &&
     $_SESSION['cookiejar'] instanceof Zend_Http_CookieJar) {
 
-    $client-&gt;setCookieJar($_SESSION['cookiejar']);
+    $client->setCookieJar($_SESSION['cookiejar']);
 } else {
     // If we don't, authenticate and store cookies
-    $client-&gt;setCookieJar();
-    $client-&gt;setUri('http://www.example.com/login.php');
-    $client-&gt;setParameterPost(array(
-        'user' =&gt; 'shahar',
-        'pass' =&gt; 'somesecret'
+    $client->setCookieJar();
+    $client->setUri('http://www.example.com/login.php');
+    $client->setParameterPost(array(
+        'user' => 'shahar',
+        'pass' => 'somesecret'
     ));
-    $client-&gt;request(Zend_Http_Client::POST);
+    $client->request(Zend_Http_Client::POST);
 
     // Now, clear parameters and set the URI to the original one
     // (note that the cookies that were set by the server are now
     // stored in the jar)
-    $client-&gt;resetParameters();
-    $client-&gt;setUri('http://www.example.com/fetchdata.php');
+    $client->resetParameters();
+    $client->setUri('http://www.example.com/fetchdata.php');
 }
 
-$response = $client-&gt;request(Zend_Http_Client::GET);
+$response = $client->request(Zend_Http_Client::GET);
 
 // Store cookies in session, for next page
-$_SESSION['cookiejar'] = $client-&gt;getCookieJar();
-</programlisting>
+$_SESSION['cookiejar'] = $client->getCookieJar();
+]]></programlisting>
         </example>
     </section>
 
@@ -411,10 +409,10 @@ $_SESSION['cookiejar'] = $client-&gt;getCookieJar();
             <example xml:id="zend.http.client.streaming.example-1"><info><title>Sending file to HTTP server with streaming</title></info>
                 
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $fp = fopen("mybigfile.zip", "r");
-$client-&gt;setRawData($fp, 'application/zip')-&gt;request('PUT');
-</programlisting>
+$client->setRawData($fp, 'application/zip')->request('PUT');
+]]></programlisting>
             </example>
         </para>
 
@@ -445,17 +443,17 @@ $client-&gt;setRawData($fp, 'application/zip')-&gt;request('PUT');
             <example xml:id="zend.http.client.streaming.example-2"><info><title>Receiving file from HTTP server with streaming</title></info>
                 
 
-                <programlisting language="php">
-$client-&gt;setStream(); // will use temp file
-$response = $client-&gt;request('GET');
+                <programlisting language="php"><![CDATA[
+$client->setStream(); // will use temp file
+$response = $client->request('GET');
 // copy file
-copy($response-&gt;getStreamName(), "my/downloads/file");
+copy($response->getStreamName(), "my/downloads/file");
 // use stream
 $fp = fopen("my/downloads/file2", "w");
-stream_copy_to_stream($response-&gt;getStream(), $fp);
+stream_copy_to_stream($response->getStream(), $fp);
 // Also can write to known file
-$client-&gt;setStream("my/downloads/myfile)-&gt;request('GET');
-</programlisting>
+$client->setStream("my/downloads/myfile)->request('GET');
+]]></programlisting>
             </example>
         </para>
     </section>

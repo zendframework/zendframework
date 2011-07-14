@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.codegenerator.introduction"><info><title>Introduction</title></info>
     
 
@@ -23,16 +21,16 @@
             simply echo the object or call its <methodname>generate()</methodname> method.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Passing configuration to the constructor:
 $file = new Zend_CodeGenerator_Php_File(array(
-    'classes' =&gt; array(
+    'classes' => array(
         new Zend_CodeGenerator_Php_Class(array(
-            'name'    =&gt; 'World',
-            'methods' =&gt; array(
+            'name'    => 'World',
+            'methods' => array(
                 new Zend_CodeGenerator_Php_Method(array(
-                    'name' =&gt; 'hello',
-                    'body' =&gt; 'echo \'Hello world!\';',
+                    'name' => 'hello',
+                    'body' => 'echo \'Hello world!\';',
                 )),
             ),
         )),
@@ -41,29 +39,29 @@ $file = new Zend_CodeGenerator_Php_File(array(
 
 // Configuring after instantiation
 $method = new Zend_CodeGenerator_Php_Method();
-$method-&gt;setName('hello')
-       -&gt;setBody('echo \'Hello world!\';');
+$method->setName('hello')
+       ->setBody('echo \'Hello world!\';');
 
 $class = new Zend_CodeGenerator_Php_Class();
-$class-&gt;setName('World')
-      -&gt;setMethod($method);
+$class->setName('World')
+      ->setMethod($method);
 
 $file = new Zend_CodeGenerator_Php_File();
-$file-&gt;setClass($class);
+$file->setClass($class);
 
 // Render the generated file
 echo $file;
 
 // or write it to a file:
-file_put_contents('World.php', $file-&gt;generate());
-</programlisting>
+file_put_contents('World.php', $file->generate());
+]]></programlisting>
 
         <para>
             Both of the above samples will render the same result:
         </para>
 
-        <programlisting language="php">
-&lt;?php
+        <programlisting language="php"><![CDATA[
+<?php
 
 class World
 {
@@ -74,7 +72,7 @@ class World
     }
 
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Another common use case is to update existing code -- for instance,
@@ -90,32 +88,32 @@ class World
             following:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $class = Zend_CodeGenerator_Php_Class::fromReflection(
     new Zend_Reflection_Class('World')
 );
 
 $method = new Zend_CodeGenerator_Php_Method();
-$method-&gt;setName('mrMcFeeley')
-       -&gt;setBody('echo \'Hello, Mr. McFeeley!\';');
-$class-&gt;setMethod($method);
+$method->setName('mrMcFeeley')
+       ->setBody('echo \'Hello, Mr. McFeeley!\';');
+$class->setMethod($method);
 
 $file = new Zend_CodeGenerator_Php_File();
-$file-&gt;setClass($class);
+$file->setClass($class);
 
 // Render the generated file
 echo $file;
 
 // Or, better yet, write it back to the original file:
-file_put_contents('World.php', $file-&gt;generate());
-</programlisting>
+file_put_contents('World.php', $file->generate());
+]]></programlisting>
 
         <para>
             The resulting class file will now look like this:
         </para>
 
-        <programlisting language="php">
-&lt;?php
+        <programlisting language="php"><![CDATA[
+<?php
 
 class World
 {
@@ -131,6 +129,6 @@ class World
     }
 
 }
-</programlisting>
+]]></programlisting>
     </section>
 </section>

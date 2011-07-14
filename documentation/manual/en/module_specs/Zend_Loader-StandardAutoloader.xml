@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.standard-autoloader"><info><title>The StandardAutoloader</title></info>
     
 
@@ -14,10 +12,10 @@
             simple statement that illustrates how resolution works is as follows:
         </para>
 
-        <programlisting xml:lang="php">
+        <programlisting xml:lang="php"><![CDATA[
 $filename = str_replace(array('_', '\\'), DIRECTORY_SEPARATOR, $classname) 
           . '.php';
-</programlisting>
+]]></programlisting>
 
         <para>
             Previous incarnations of PSR-0-compliant autoloaders in Zend Framework have relied upon
@@ -113,7 +111,7 @@ $filename = str_replace(array('_', '\\'), DIRECTORY_SEPARATOR, $classname)
         <example xml:id="zend.loader.standard-autoloader.quick-start.example-manual-configuration"><info><title>Manual Configuration</title></info>
             
 
-            <programlisting xml:lang="php">
+            <programlisting xml:lang="php"><![CDATA[
 // This example assumes ZF is on your include_path.
 // You could also load the autoloader class from a path relative to the
 // current script, or via an absolute path.
@@ -121,18 +119,18 @@ require_once 'Zend/Loader/StandardAutoloader.php';
 $loader = new Zend\Loader\StandardAutoloader();
 
 // Register the "Phly" namespace:
-$loader-&gt;registerNamespace('Phly', APPLICATION_PATH . '/../library/Phly');
+$loader->registerNamespace('Phly', APPLICATION_PATH . '/../library/Phly');
 
 // Register the "Scapi" vendor prefix:
-$loader-&gt;registerPrefix('Scapi', APPLICATION_PATH . '/../library/Scapi');
+$loader->registerPrefix('Scapi', APPLICATION_PATH . '/../library/Scapi');
 
 // Optionally, specify the autoloader as a "fallback" autoloader;
 // this is not recommended.
-$loader-&gt;setFallbackAutoloader(true);
+$loader->setFallbackAutoloader(true);
 
 // Register with spl_autoload:
-$loader-&gt;register();
-</programlisting>
+$loader->register();
+]]></programlisting>
         </example>
 
         <example xml:id="zend.loader.standard-autoloader.quick-start.example-constructor-configuration"><info><title>Configuration at Instantiation</title></info>
@@ -164,21 +162,21 @@ $loader-&gt;register();
                 The following is equivalent to the previous example.
             </para>
 
-            <programlisting xml:lang="php">
+            <programlisting xml:lang="php"><![CDATA[
 require_once 'Zend/Loader/StandardAutoloader.php';
 $loader = new Zend\Loader\StandardAutoloader(array(
-    'namespaces' =&gt; array(
-        'Phly' =&gt; APPLICATION_PATH . '/../library/Phly',
+    'namespaces' => array(
+        'Phly' => APPLICATION_PATH . '/../library/Phly',
     ),
-    'prefixes' =&gt; array(
-        'Scapi' =&gt; APPLICATION_PATH . '/../library/Scapi',
+    'prefixes' => array(
+        'Scapi' => APPLICATION_PATH . '/../library/Scapi',
     ),
-    'fallback_autoloader' =&gt; true,
+    'fallback_autoloader' => true,
 ));
 
 // Register with spl_autoload:
-$loader-&gt;register();
-</programlisting>
+$loader->register();
+]]></programlisting>
         </example>
     </section>
 

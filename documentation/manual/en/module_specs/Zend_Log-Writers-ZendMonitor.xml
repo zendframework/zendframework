@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers.zendmonitor"><info><title>Writing to the Zend Server Monitor</title></info>
     
 
@@ -34,39 +32,39 @@
         Instantiating the <classname>ZendMonitor</classname> log writer is trivial:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $writer = new Zend_Log_Writer_ZendMonitor();
 $log    = new Zend_Log($writer);
-</programlisting>
+]]></programlisting>
 
     <para>
         Then, simply log messages as usual:
     </para>
 
-    <programlisting language="php">
-$log-&gt;info('This is a message');
-</programlisting>
+    <programlisting language="php"><![CDATA[
+$log->info('This is a message');
+]]></programlisting>
 
     <para>
         If you want to specify additional information to log with the event, pass that information
         in a second parameter:
     </para>
 
-    <programlisting language="php">
-$log-&gt;info('Exception occurred', $e);
-</programlisting>
+    <programlisting language="php"><![CDATA[
+$log->info('Exception occurred', $e);
+]]></programlisting>
 
     <para>
         The second parameter may be a scalar, object, or array; if you need to pass multiple pieces
         of information, the best way to do so is to pass an associative array.
     </para>
 
-    <programlisting language="php">
-$log-&gt;info('Exception occurred', array(
-    'request'   =&gt; $request,
-    'exception' =&gt; $e,
+    <programlisting language="php"><![CDATA[
+$log->info('Exception occurred', array(
+    'request'   => $request,
+    'exception' => $e,
 ));
-</programlisting>
+]]></programlisting>
 
     <para>
         Within Zend Server, your event is logged as a "custom event". From the "Monitor" tab, select

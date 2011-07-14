@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.rowset"><info><title>Zend_Db_Table_Rowset</title></info>
     
 
@@ -29,10 +27,10 @@
         <example xml:id="zend.db.table.rowset.fetch.example"><info><title>Example of fetching a rowset</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $bugs   = new Bugs();
-$rowset = $bugs-&gt;fetchAll("bug_status = 'NEW'");
-</programlisting>
+$rowset = $bugs->fetchAll("bug_status = 'NEW'");
+]]></programlisting>
         </example>
     </section>
 
@@ -55,17 +53,17 @@ $rowset = $bugs-&gt;fetchAll("bug_status = 'NEW'");
         <example xml:id="zend.db.table.rowset.rows.counting.example"><info><title>Counting the Rows in a Rowset</title></info>
             
 
-            <programlisting language="php">
-$rowset   = $bugs-&gt;fetchAll("bug_status = 'FIXED'");
+            <programlisting language="php"><![CDATA[
+$rowset   = $bugs->fetchAll("bug_status = 'FIXED'");
 
 $rowCount = count($rowset);
 
-if ($rowCount &gt; 0) {
+if ($rowCount > 0) {
     echo "found $rowCount rows";
 } else {
     echo 'no rows matched the query';
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <example xml:id="zend.db.table.rowset.rows.current.example"><info><title>Reading a Single Row from a Rowset</title></info>
@@ -77,11 +75,11 @@ if ($rowCount &gt; 0) {
                 Rowset contains exactly one Row.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $bugs   = new Bugs();
-$rowset = $bugs-&gt;fetchAll("bug_id = 1");
-$row    = $rowset-&gt;current();
-</programlisting>
+$rowset = $bugs->fetchAll("bug_id = 1");
+$row    = $rowset->current();
+]]></programlisting>
         </example>
 
         <para>
@@ -100,11 +98,11 @@ $row    = $rowset-&gt;current();
                 that corresponds to one record from the table.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
 
 // fetch all records from the table
-$rowset = $bugs-&gt;fetchAll();
+$rowset = $bugs->fetchAll();
 
 foreach ($rowset as $row) {
 
@@ -112,15 +110,15 @@ foreach ($rowset as $row) {
     echo get_class($row) . "\n";
 
     // read a column in the row
-    $status = $row-&gt;bug_status;
+    $status = $row->bug_status;
 
     // modify a column in the current row
-    $row-&gt;assigned_to = 'mmouse';
+    $row->assigned_to = 'mmouse';
 
     // write the change to the database
-    $row-&gt;save();
+    $row->save();
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <example xml:id="zend.db.table.rowset.rows.seek.example"><info><title>Seeking to a known position into a Rowset</title></info>
@@ -136,22 +134,22 @@ foreach ($rowset as $row) {
                 position.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
 
 // fetch all records from the table
-$rowset = $bugs-&gt;fetchAll();
+$rowset = $bugs->fetchAll();
 
 // takes the iterator to the 9th element (zero is one element) :
-$rowset-&gt;seek(8);
+$rowset->seek(8);
 
 // retrieve it
-$row9 = $rowset-&gt;current();
+$row9 = $rowset->current();
 
 // and use it
-$row9-&gt;assigned_to = 'mmouse';
-$row9-&gt;save();
-</programlisting>
+$row9->assigned_to = 'mmouse';
+$row9->save();
+]]></programlisting>
         </example>
 
         <para>
@@ -165,19 +163,19 @@ $row9-&gt;save();
             position requested does not exist, an exception will be thrown. Here is an example:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
 
 // fetch all records from the table
-$rowset = $bugs-&gt;fetchAll();
+$rowset = $bugs->fetchAll();
 
 // retrieve the 9th element immediately:
-$row9-&gt;getRow(8);
+$row9->getRow(8);
 
 // and use it:
-$row9-&gt;assigned_to = 'mmouse';
-$row9-&gt;save();
-</programlisting>
+$row9->assigned_to = 'mmouse';
+$row9->save();
+]]></programlisting>
 
         <para>
             After you have access to an individual Row object, you can manipulate the Row using
@@ -198,22 +196,22 @@ $row9-&gt;save();
         <example xml:id="zend.db.table.rowset.to-array.example"><info><title>Using toArray()</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $bugs   = new Bugs();
-$rowset = $bugs-&gt;fetchAll();
+$rowset = $bugs->fetchAll();
 
-$rowsetArray = $rowset-&gt;toArray();
+$rowsetArray = $rowset->toArray();
 
 $rowCount = 1;
 foreach ($rowsetArray as $rowArray) {
     echo "row #$rowCount:\n";
-    foreach ($rowArray as $column =&gt; $value) {
-        echo "\t$column =&gt; $value\n";
+    foreach ($rowArray as $column => $value) {
+        echo "\t$column => $value\n";
     }
     ++$rowCount;
     echo "\n";
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -241,15 +239,15 @@ foreach ($rowsetArray as $rowArray) {
                 argument.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $bugs   = new Bugs();
-$rowset = $bugs-&gt;fetchAll();
+$rowset = $bugs->fetchAll();
 
 // Convert object to serialized form
 $serializedRowset = serialize($rowset);
 
 // Now you can write $serializedRowset to a file, etc.
-</programlisting>
+]]></programlisting>
         </example>
 
         <example xml:id="zend.db.table.rowset.serialize.example.unserialize"><info><title>Unserializing a Serialized Rowset</title></info>
@@ -268,13 +266,13 @@ $serializedRowset = serialize($rowset);
                 require a database connection (for example, queries against related tables).
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $rowsetDisconnected = unserialize($serializedRowset);
 
 // Now you can use object methods and properties, but read-only
-$row = $rowsetDisconnected-&gt;current();
-echo $row-&gt;bug_description;
-</programlisting>
+$row = $rowsetDisconnected->current();
+echo $row->bug_description;
+]]></programlisting>
         </example>
 
         <note><info><title>Why do Rowsets unserialize in a disconnected state?</title></info>
@@ -303,21 +301,21 @@ echo $row-&gt;bug_description;
         <example xml:id="zend.db.table.rowset.serialize.example.set-table"><info><title>Reactivating a Rowset as Live Data</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $rowset = unserialize($serializedRowset);
 
 $bugs = new Bugs();
 
 // Reconnect the rowset to a table, and
 // thus to a live database connection
-$rowset-&gt;setTable($bugs);
+$rowset->setTable($bugs);
 
-$row = $rowset-&gt;current();
+$row = $rowset->current();
 
 // Now you can make changes to the row and save them
-$row-&gt;bug_status = 'FIXED';
-$row-&gt;save();
-</programlisting>
+$row->bug_status = 'FIXED';
+$row->save();
+]]></programlisting>
         </example>
 
         <para>
@@ -340,7 +338,7 @@ $row-&gt;save();
         <example xml:id="zend.db.table.rowset.extending.example"><info><title>Specifying a custom Rowset class</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class MyRowset extends Zend_Db_Table_Rowset_Abstract
 {
     // ...customizations
@@ -356,8 +354,8 @@ class Products extends Zend_Db_Table_Abstract
 
 // Or specify a custom Rowset to be used in one
 // instance of a Table class.
-$bugs = new Bugs(array('rowsetClass' =&gt; 'MyRowset'));
-</programlisting>
+$bugs = new Bugs(array('rowsetClass' => 'MyRowset'));
+]]></programlisting>
         </example>
 
         <para>
@@ -371,7 +369,7 @@ $bugs = new Bugs(array('rowsetClass' =&gt; 'MyRowset'));
         <example xml:id="zend.db.table.rowset.extending.example-aggregate"><info><title>Example of Rowset class with a new method</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class MyBugsRowset extends Zend_Db_Table_Rowset_Abstract
 {
     /**
@@ -383,7 +381,7 @@ class MyBugsRowset extends Zend_Db_Table_Rowset_Abstract
         $max_updated_at = 0;
         $latestRow = null;
         foreach ($this as $row) {
-            if ($row-&gt;updated_at &gt; $max_updated_at) {
+            if ($row->updated_at > $max_updated_at) {
                 $latestRow = $row;
             }
         }
@@ -396,7 +394,7 @@ class Bugs extends Zend_Db_Table_Abstract
     protected $_name = 'bugs';
     protected $_rowsetClass = 'MyBugsRowset';
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 </section>

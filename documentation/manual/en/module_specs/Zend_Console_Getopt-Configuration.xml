@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.configuration"><info><title>Configuring Zend_Console_Getopt</title></info>
     
 
@@ -22,14 +20,14 @@
         <example xml:id="zend.console.getopt.configuration.addrules.example"><info><title>Using addRules()</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
-$opts-&gt;addRules(
+$opts->addRules(
   array(
-    'verbose|v' =&gt; 'Print verbose output'
+    'verbose|v' => 'Print verbose output'
   )
 );
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -56,16 +54,16 @@ $opts-&gt;addRules(
         <example xml:id="zend.console.getopt.configuration.addhelp.example"><info><title>Using setHelp()</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
-$opts-&gt;setHelp(
+$opts->setHelp(
     array(
-        'a' =&gt; 'apple option, with no parameter',
-        'b' =&gt; 'banana option, with required integer parameter',
-        'p' =&gt; 'pear option, with optional string parameter'
+        'a' => 'apple option, with no parameter',
+        'b' => 'banana option, with required integer parameter',
+        'p' => 'pear option, with optional string parameter'
     )
 );
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -99,16 +97,16 @@ $opts-&gt;setHelp(
         <example xml:id="zend.console.getopt.configuration.addaliases.example"><info><title>Using setAliases()</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
-$opts-&gt;setAliases(
+$opts->setAliases(
     array(
-        'a' =&gt; 'apple',
-        'a' =&gt; 'apfel',
-        'p' =&gt; 'pear'
+        'a' => 'apple',
+        'a' => 'apfel',
+        'p' => 'pear'
     )
 );
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -145,16 +143,16 @@ $opts-&gt;setAliases(
         <example xml:id="zend.console.getopt.configuration.addargs.example"><info><title>Using addArguments() and setArguments()</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // By default, the constructor uses $_SERVER['argv']
 $opts = new Zend_Console_Getopt('abp:');
 
 // Append an array to the existing arguments
-$opts-&gt;addArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
+$opts->addArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
 
 // Substitute a new array for the existing arguments
-$opts-&gt;setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
-</programlisting>
+$opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
+]]></programlisting>
         </example>
     </section>
 
@@ -241,10 +239,10 @@ $opts-&gt;setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
         <example xml:id="zend.console.getopt.configuration.config.example.setoption"><info><title>Using setOption()</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
-$opts-&gt;setOption('ignoreCase', true);
-</programlisting>
+$opts->setOption('ignoreCase', true);
+]]></programlisting>
         </example>
 
         <para>
@@ -259,15 +257,15 @@ $opts-&gt;setOption('ignoreCase', true);
         <example xml:id="zend.console.getopt.configuration.config.example.setoptions"><info><title>Using setOptions()</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
-$opts-&gt;setOptions(
+$opts->setOptions(
     array(
-        'ignoreCase' =&gt; true,
-        'dashDash'   =&gt; false
+        'ignoreCase' => true,
+        'dashDash'   => false
     )
 );
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 </section>

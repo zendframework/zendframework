@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.alnum"><info><title>Alnum</title></info>
     
 
@@ -34,14 +32,14 @@
             A basic example is the following one:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Alnum();
-if ($validator-&gt;isValid('Abcd12')) {
+if ($validator->isValid('Abcd12')) {
     // value contains only allowed chars
 } else {
     // false
 }
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.validate.set.alnum.whitespace"><info><title>Using whitespaces</title></info>
@@ -60,14 +58,14 @@ if ($validator-&gt;isValid('Abcd12')) {
             To get the actual state you can use <methodname>getAllowWhiteSpace()</methodname>.
         </para>
 
-        <programlisting language="php">
-$validator = new Zend_Validate_Alnum(array('allowWhiteSpace' =&gt; true));
-if ($validator-&gt;isValid('Abcd and 12')) {
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_Alnum(array('allowWhiteSpace' => true));
+if ($validator->isValid('Abcd and 12')) {
     // value contains only allowed chars
 } else {
     // false
 }
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.validate.set.alnum.languages"><info><title>Using different languages</title></info>

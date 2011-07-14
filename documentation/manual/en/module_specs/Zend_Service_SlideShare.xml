@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.slideshare"><info><title>Zend_Service_SlideShare</title></info>
     
 
@@ -29,13 +27,13 @@
             shown below:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Create a new instance of the component
 $ss = new Zend_Service_SlideShare('APIKEY',
                                   'SHAREDSECRET',
                                   'USERNAME',
                                   'PASSWORD');
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.service.slideshare.slideshowobj"><info><title>The SlideShow object</title></info>
@@ -48,28 +46,28 @@ $ss = new Zend_Service_SlideShare('APIKEY',
             version of this class is provided below.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class Zend_Service_SlideShare_SlideShow {
 
     /**
      * Retrieves the location of the slide show
      */
     public function getLocation() {
-        return $this-&gt;_location;
+        return $this->_location;
     }
 
     /**
      * Gets the transcript for this slide show
      */
     public function getTranscript() {
-        return $this-&gt;_transcript;
+        return $this->_transcript;
     }
 
     /**
      * Adds a tag to the slide show
      */
     public function addTag($tag) {
-        $this-&gt;_tags[] = (string)$tag;
+        $this->_tags[] = (string)$tag;
         return $this;
     }
 
@@ -77,7 +75,7 @@ class Zend_Service_SlideShare_SlideShow {
      * Sets the tags for the slide show
      */
     public function setTags(Array $tags) {
-        $this-&gt;_tags = $tags;
+        $this->_tags = $tags;
         return $this;
     }
 
@@ -85,7 +83,7 @@ class Zend_Service_SlideShare_SlideShow {
      * Gets all of the tags associated with the slide show
      */
     public function getTags() {
-        return $this-&gt;_tags;
+        return $this->_tags;
     }
 
     /**
@@ -93,7 +91,7 @@ class Zend_Service_SlideShare_SlideShow {
      * (for uploading a new slide show)
      */
     public function setFilename($file) {
-        $this-&gt;_slideShowFilename = (string)$file;
+        $this->_slideShowFilename = (string)$file;
         return $this;
     }
 
@@ -102,35 +100,35 @@ class Zend_Service_SlideShare_SlideShow {
      * which will be uploaded
      */
     public function getFilename() {
-        return $this-&gt;_slideShowFilename;
+        return $this->_slideShowFilename;
     }
 
     /**
      * Gets the ID for the slide show
      */
     public function getId() {
-        return $this-&gt;_slideShowId;
+        return $this->_slideShowId;
     }
 
     /**
      * Retrieves the HTML embed code for the slide show
      */
     public function getEmbedCode() {
-        return $this-&gt;_embedCode;
+        return $this->_embedCode;
     }
 
     /**
      * Retrieves the Thumbnail URi for the slide show
      */
     public function getThumbnailUrl() {
-        return $this-&gt;_thumbnailUrl;
+        return $this->_thumbnailUrl;
     }
 
     /**
      * Sets the title for the Slide show
      */
     public function setTitle($title) {
-        $this-&gt;_title = (string)$title;
+        $this->_title = (string)$title;
         return $this;
     }
 
@@ -138,14 +136,14 @@ class Zend_Service_SlideShare_SlideShow {
      * Retrieves the Slide show title
      */
     public function getTitle() {
-        return $this-&gt;_title;
+        return $this->_title;
     }
 
     /**
      * Sets the description for the Slide show
      */
     public function setDescription($desc) {
-        $this-&gt;_description = (string)$desc;
+        $this->_description = (string)$desc;
         return $this;
     }
 
@@ -153,14 +151,14 @@ class Zend_Service_SlideShare_SlideShow {
      * Gets the description of the slide show
      */
     public function getDescription() {
-        return $this-&gt;_description;
+        return $this->_description;
     }
 
     /**
      * Gets the numeric status of the slide show on the server
      */
     public function getStatus() {
-        return $this-&gt;_status;
+        return $this->_status;
     }
 
     /**
@@ -168,24 +166,24 @@ class Zend_Service_SlideShare_SlideShow {
      * the server
      */
     public function getStatusDescription() {
-        return $this-&gt;_statusDescription;
+        return $this->_statusDescription;
     }
 
     /**
      * Gets the permanent link of the slide show
      */
     public function getPermaLink() {
-        return $this-&gt;_permalink;
+        return $this->_permalink;
     }
 
     /**
      * Gets the number of views the slide show has received
      */
     public function getNumViews() {
-        return $this-&gt;_numViews;
+        return $this->_numViews;
     }
 }
-</programlisting>
+]]></programlisting>
 
         <note>
             <para>
@@ -211,18 +209,18 @@ class Zend_Service_SlideShare_SlideShow {
             <classname>Zend_Service_SlideShare_SlideShow</classname> object as shown.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Create a new instance of the component
 $ss = new Zend_Service_SlideShare('APIKEY',
                                   'SHAREDSECRET',
                                   'USERNAME',
                                   'PASSWORD');
 
-$slideshow = $ss-&gt;getSlideShow(123456);
+$slideshow = $ss->getSlideShow(123456);
 
-print "Slide Show Title: {$slideshow-&gt;getTitle()}&lt;br/&gt;\n";
-print "Number of views: {$slideshow-&gt;getNumViews()}&lt;br/&gt;\n";
-</programlisting>
+print "Slide Show Title: {$slideshow->getTitle()}<br/>\n";
+print "Number of views: {$slideshow->getNumViews()}<br/>\n";
+]]></programlisting>
     </section>
 
     <section xml:id="zend.service.slideshare.getslideshowlist"><info><title>Retrieving Groups of Slide Shows</title></info>
@@ -276,7 +274,7 @@ print "Number of views: {$slideshow-&gt;getNumViews()}&lt;br/&gt;\n";
             used. An example of using each method is shown below:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Create a new instance of the component
 $ss = new Zend_Service_SlideShare('APIKEY',
                                   'SHAREDSECRET',
@@ -287,15 +285,15 @@ $starting_offset = 0;
 $limit = 10;
 
 // Retrieve the first 10 of each type
-$ss_user = $ss-&gt;getSlideShowsByUser('username', $starting_offset, $limit);
-$ss_tags = $ss-&gt;getSlideShowsByTag('zend', $starting_offset, $limit);
-$ss_group = $ss-&gt;getSlideShowsByGroup('mygroup', $starting_offset, $limit);
+$ss_user = $ss->getSlideShowsByUser('username', $starting_offset, $limit);
+$ss_tags = $ss->getSlideShowsByTag('zend', $starting_offset, $limit);
+$ss_group = $ss->getSlideShowsByGroup('mygroup', $starting_offset, $limit);
 
 // Iterate over the slide shows
 foreach($ss_user as $slideshow) {
-   print "Slide Show Title: {$slideshow-&gt;getTitle}&lt;br/&gt;\n";
+   print "Slide Show Title: {$slideshow->getTitle}<br/>\n";
 }
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.service.slideshare.caching"><info><title>Zend_Service_SlideShare Caching policies</title></info>
@@ -309,12 +307,12 @@ foreach($ss_user as $slideshow) {
             <methodname>setCacheObject()</methodname> method as shown:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $frontendOptions = array(
-                        'lifetime' =&gt; 7200,
-                        'automatic_serialization' =&gt; true);
+                        'lifetime' => 7200,
+                        'automatic_serialization' => true);
 $backendOptions  = array(
-                        'cache_dir' =&gt; '/webtmp/');
+                        'cache_dir' => '/webtmp/');
 
 $cache = Zend_Cache::factory('Core',
                              'File',
@@ -325,10 +323,10 @@ $ss = new Zend_Service_SlideShare('APIKEY',
                                   'SHAREDSECRET',
                                   'USERNAME',
                                   'PASSWORD');
-$ss-&gt;setCacheObject($cache);
+$ss->setCacheObject($cache);
 
-$ss_user = $ss-&gt;getSlideShowsByUser('username', $starting_offset, $limit);
-</programlisting>
+$ss_user = $ss->getSlideShowsByUser('username', $starting_offset, $limit);
+]]></programlisting>
     </section>
 
     <section xml:id="zend.service.slideshare.httpclient"><info><title>Changing the behavior of the HTTP Client</title></info>
@@ -343,16 +341,16 @@ $ss_user = $ss-&gt;getSlideShowsByUser('username', $starting_offset, $limit);
             shown:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $client = new Zend_Http_Client();
-$client-&gt;setConfig(array('timeout' =&gt; 5));
+$client->setConfig(array('timeout' => 5));
 
 $ss = new Zend_Service_SlideShare('APIKEY',
                                   'SHAREDSECRET',
                                   'USERNAME',
                                   'PASSWORD');
-$ss-&gt;setHttpClient($client);
-$ss_user = $ss-&gt;getSlideShowsByUser('username', $starting_offset, $limit);
-</programlisting>
+$ss->setHttpClient($client);
+$ss_user = $ss->getSlideShowsByUser('username', $starting_offset, $limit);
+]]></programlisting>
     </section>
 </section>

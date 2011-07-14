@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.plugin-class-locater"><info><title>The PluginClassLocater interface</title></info>
     
 
@@ -23,7 +21,7 @@
             implement only three methods, as illustrated below.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 namespace Zend\Loader;
 
 interface PluginClassLocater
@@ -32,7 +30,7 @@ interface PluginClassLocater
     public function unregisterPlugin($shortName);
     public function getRegisteredPlugins();
 }
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.loader.plugin-class-locater.options"><info><title>Configuration Options</title></info>

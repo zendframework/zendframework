@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.introduction"><info><title>Introduction</title></info>
     
 
@@ -60,7 +58,7 @@
             service is queried, have been omitted for brevity:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class MyAuthAdapter implements Zend_Auth_Adapter_Interface
 {
     /**
@@ -85,7 +83,7 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
         // ...
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             As indicated in its docblock, <methodname>authenticate()</methodname> must return an
@@ -155,24 +153,24 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
             authentication result messages to the user. The following result codes are available:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 Zend_Auth_Result::SUCCESS
 Zend_Auth_Result::FAILURE
 Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND
 Zend_Auth_Result::FAILURE_IDENTITY_AMBIGUOUS
 Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID
 Zend_Auth_Result::FAILURE_UNCATEGORIZED
-</programlisting>
+]]></programlisting>
 
         <para>
             The following example illustrates how a developer may branch on the result code:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // inside of AuthController / loginAction
-$result = $this-&gt;_auth-&gt;authenticate($adapter);
+$result = $this->_auth->authenticate($adapter);
 
-switch ($result-&gt;getCode()) {
+switch ($result->getCode()) {
 
     case Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND:
         /** do stuff for nonexistent identity **/
@@ -190,7 +188,7 @@ switch ($result-&gt;getCode()) {
         /** do stuff for other failure **/
         break;
 }
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.auth.introduction.persistence"><info><title>Identity Persistence</title></info>
@@ -249,12 +247,12 @@ switch ($result-&gt;getCode()) {
                     storage of the identity.
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Save a reference to the Singleton instance of Zend_Auth
 $auth = Zend_Auth::getInstance();
 
 // Use 'someNamespace' instead of 'Zend_Auth'
-$auth-&gt;setStorage(new Zend_Auth_Storage_Session('someNamespace'));
+$auth->setStorage(new Zend_Auth_Storage_Session('someNamespace'));
 
 /**
  * @todo Set up the auth adapter, $authAdapter
@@ -262,8 +260,8 @@ $auth-&gt;setStorage(new Zend_Auth_Storage_Session('someNamespace'));
 
 // Authenticate, saving the result, and persisting the identity on
 // success
-$result = $auth-&gt;authenticate($authAdapter);
-</programlisting>
+$result = $auth->authenticate($authAdapter);
+]]></programlisting>
             </example>
         </section>
 
@@ -287,7 +285,7 @@ $result = $auth-&gt;authenticate($authAdapter);
                     <classname>Zend_Auth_Storage_Interface</classname>:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 class MyStorage implements Zend_Auth_Storage_Interface
 {
     /**
@@ -350,7 +348,7 @@ class MyStorage implements Zend_Auth_Storage_Interface
          */
     }
 }
-</programlisting>
+]]></programlisting>
 
                 <para>
                     In order to use this custom storage class,
@@ -358,9 +356,9 @@ class MyStorage implements Zend_Auth_Storage_Interface
                     authentication query is attempted:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 // Instruct Zend_Auth to use the custom storage class
-Zend_Auth::getInstance()-&gt;setStorage(new MyStorage());
+Zend_Auth::getInstance()->setStorage(new MyStorage());
 
 /**
  * @todo Set up the auth adapter, $authAdapter
@@ -368,8 +366,8 @@ Zend_Auth::getInstance()-&gt;setStorage(new MyStorage());
 
 // Authenticate, saving the result, and persisting the identity on
 // success
-$result = Zend_Auth::getInstance()-&gt;authenticate($authAdapter);
-</programlisting>
+$result = Zend_Auth::getInstance()->authenticate($authAdapter);
+]]></programlisting>
             </example>
         </section>
     </section>
@@ -400,7 +398,7 @@ $result = Zend_Auth::getInstance()-&gt;authenticate($authAdapter);
             indirectly, through the use of the <classname>Zend_Auth</classname> class:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Get a reference to the singleton instance of Zend_Auth
 $auth = Zend_Auth::getInstance();
 
@@ -408,33 +406,33 @@ $auth = Zend_Auth::getInstance();
 $authAdapter = new MyAuthAdapter($username, $password);
 
 // Attempt authentication, saving the result
-$result = $auth-&gt;authenticate($authAdapter);
+$result = $auth->authenticate($authAdapter);
 
-if (!$result-&gt;isValid()) {
+if (!$result->isValid()) {
     // Authentication failed; print the reasons why
-    foreach ($result-&gt;getMessages() as $message) {
+    foreach ($result->getMessages() as $message) {
         echo "$message\n";
     }
 } else {
     // Authentication succeeded; the identity ($username) is stored
     // in the session
-    // $result-&gt;getIdentity() === $auth-&gt;getIdentity()
-    // $result-&gt;getIdentity() === $username
+    // $result->getIdentity() === $auth->getIdentity()
+    // $result->getIdentity() === $username
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             Once authentication has been attempted in a request, as in the above example, it is a
             simple matter to check whether a successfully authenticated identity exists:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $auth = Zend_Auth::getInstance();
-if ($auth-&gt;hasIdentity()) {
+if ($auth->hasIdentity()) {
     // Identity exists; get it
-    $identity = $auth-&gt;getIdentity();
+    $identity = $auth->getIdentity();
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             To remove an identity from persistent storage, simply use the
@@ -442,9 +440,9 @@ if ($auth-&gt;hasIdentity()) {
             implementing an application "logout" operation:
         </para>
 
-        <programlisting language="php">
-Zend_Auth::getInstance()-&gt;clearIdentity();
-</programlisting>
+        <programlisting language="php"><![CDATA[
+Zend_Auth::getInstance()->clearIdentity();
+]]></programlisting>
 
         <para>
             When the automatic use of persistent storage is inappropriate for a particular use
@@ -456,22 +454,22 @@ Zend_Auth::getInstance()-&gt;clearIdentity();
             <classname>MyAuthAdapter</classname>:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Set up the authentication adapter
 $authAdapter = new MyAuthAdapter($username, $password);
 
 // Attempt authentication, saving the result
-$result = $authAdapter-&gt;authenticate();
+$result = $authAdapter->authenticate();
 
-if (!$result-&gt;isValid()) {
+if (!$result->isValid()) {
     // Authentication failed; print the reasons why
-    foreach ($result-&gt;getMessages() as $message) {
+    foreach ($result->getMessages() as $message) {
         echo "$message\n";
     }
 } else {
     // Authentication succeeded
-    // $result-&gt;getIdentity() === $username
+    // $result->getIdentity() === $username
 }
-</programlisting>
+]]></programlisting>
     </section>
 </section>

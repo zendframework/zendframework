@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.definition"><info><title>Zend_Db_Table_Definition</title></info>
     
 
@@ -35,39 +33,39 @@
         <example xml:id="zend.db.table.definition.example1"><info><title>Describing the Definition of a Database Data Model</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $definition = new Zend_Db_Table_Definition(array(
-    'author' =&gt; array(
-        'name' =&gt; 'author',
-        'dependentTables' =&gt; array('book')
+    'author' => array(
+        'name' => 'author',
+        'dependentTables' => array('book')
         ),
-    'book' =&gt; array(
-        'name' =&gt; 'book',
-        'referenceMap' =&gt; array(
-            'author' =&gt; array(
-                'columns' =&gt; 'author_id',
-                'refTableClass' =&gt; 'author',
-                'refColumns' =&gt; 'id'
+    'book' => array(
+        'name' => 'book',
+        'referenceMap' => array(
+            'author' => array(
+                'columns' => 'author_id',
+                'refTableClass' => 'author',
+                'refColumns' => 'id'
                 )
             )
         ),
-    'genre' =&gt; null,
-    'book_to_genre' =&gt; array(
-        'referenceMap' =&gt; array(
-            'book' =&gt; array(
-                'columns' =&gt; 'book_id',
-                'refTableClass' =&gt; 'book',
-                'refColumns' =&gt; 'id'
+    'genre' => null,
+    'book_to_genre' => array(
+        'referenceMap' => array(
+            'book' => array(
+                'columns' => 'book_id',
+                'refTableClass' => 'book',
+                'refColumns' => 'id'
                 ),
-            'genre' =&gt; array(
-                'columns' =&gt; 'genre_id',
-                'refTableClass' =&gt; 'genre',
-                'refColumns' =&gt; 'id'
+            'genre' => array(
+                'columns' => 'genre_id',
+                'refTableClass' => 'genre',
+                'refColumns' => 'id'
                 )
             )
         )
     ));
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -88,29 +86,29 @@ $definition = new Zend_Db_Table_Definition(array(
         <example xml:id="zend.db.table.definition.example2"><info><title>Interacting with the described definition</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $authorTable = new Zend_Db_Table('author', $definition);
-$authors = $authorTable-&gt;fetchAll();
+$authors = $authorTable->fetchAll();
 
 foreach ($authors as $author) {
-    echo $author-&gt;id
+    echo $author->id
        . ': '
-       . $author-&gt;first_name
+       . $author->first_name
        . ' '
-       . $author-&gt;last_name
+       . $author->last_name
        . PHP_EOL;
-    $books = $author-&gt;findDependentRowset('book');
+    $books = $author->findDependentRowset('book');
     foreach ($books as $book) {
-        echo '    Book: ' . $book-&gt;title . PHP_EOL;
+        echo '    Book: ' . $book->title . PHP_EOL;
         $genreOutputArray = array();
-        $genres = $book-&gt;findManyToManyRowset('genre', 'book_to_genre');
+        $genres = $book->findManyToManyRowset('genre', 'book_to_genre');
         foreach ($genres as $genreRow) {
-            $genreOutputArray[] = $genreRow-&gt;name;
+            $genreOutputArray[] = $genreRow->name;
         }
         echo '        Genre: ' . implode(', ', $genreOutputArray) . PHP_EOL;
     }
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -135,63 +133,63 @@ foreach ($authors as $author) {
         <example xml:id="zend.db.table.definition.example3"><info><title>Interacting A Mixed Use Zend_Db_Table Definition</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 class MyBook extends Zend_Db_Table_Abstract
 {
     protected $_name = 'book';
     protected $_referenceMap = array(
-        'author' =&gt; array(
-            'columns' =&gt; 'author_id',
-            'refTableClass' =&gt; 'author',
-            'refColumns' =&gt; 'id'
+        'author' => array(
+            'columns' => 'author_id',
+            'refTableClass' => 'author',
+            'refColumns' => 'id'
             )
         );
 }
 
 $definition = new Zend_Db_Table_Definition(array(
-    'author' =&gt; array(
-        'name' =&gt; 'author',
-        'dependentTables' =&gt; array('MyBook')
+    'author' => array(
+        'name' => 'author',
+        'dependentTables' => array('MyBook')
         ),
-    'genre' =&gt; null,
-    'book_to_genre' =&gt; array(
-        'referenceMap' =&gt; array(
-            'book' =&gt; array(
-                'columns' =&gt; 'book_id',
-                'refTableClass' =&gt; 'MyBook',
-                'refColumns' =&gt; 'id'
+    'genre' => null,
+    'book_to_genre' => array(
+        'referenceMap' => array(
+            'book' => array(
+                'columns' => 'book_id',
+                'refTableClass' => 'MyBook',
+                'refColumns' => 'id'
                 ),
-            'genre' =&gt; array(
-                'columns' =&gt; 'genre_id',
-                'refTableClass' =&gt; 'genre',
-                'refColumns' =&gt; 'id'
+            'genre' => array(
+                'columns' => 'genre_id',
+                'refTableClass' => 'genre',
+                'refColumns' => 'id'
                 )
             )
         )
     ));
 
 $authorTable = new Zend_Db_Table('author', $definition);
-$authors = $authorTable-&gt;fetchAll();
+$authors = $authorTable->fetchAll();
 
 foreach ($authors as $author) {
-    echo $author-&gt;id
+    echo $author->id
        . ': '
-       . $author-&gt;first_name
+       . $author->first_name
        . ' '
-       . $author-&gt;last_name
+       . $author->last_name
        . PHP_EOL;
-    $books = $author-&gt;findDependentRowset(new MyBook());
+    $books = $author->findDependentRowset(new MyBook());
     foreach ($books as $book) {
-        echo '    Book: ' . $book-&gt;title . PHP_EOL;
+        echo '    Book: ' . $book->title . PHP_EOL;
         $genreOutputArray = array();
-        $genres = $book-&gt;findManyToManyRowset('genre', 'book_to_genre');
+        $genres = $book->findManyToManyRowset('genre', 'book_to_genre');
         foreach ($genres as $genreRow) {
-            $genreOutputArray[] = $genreRow-&gt;name;
+            $genreOutputArray[] = $genreRow->name;
         }
         echo '        Genre: ' . implode(', ', $genreOutputArray) . PHP_EOL;
     }
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 </section>

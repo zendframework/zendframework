@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.prefix-path-mapper"><info><title>The PrefixPathMapper Interface</title></info>
     
 
@@ -26,7 +24,7 @@
             registering a prefix path, and another for removing one.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 namespace Zend\Loader;
 
 interface PrefixPathMapper
@@ -34,7 +32,7 @@ interface PrefixPathMapper
     public function addPrefixPath($prefix, $path);
     public function removePrefixPath($prefix, $path);
 }
-</programlisting>
+]]></programlisting>
     </section>
 
     <section xml:id="zend.loader.prefix-path-mapper.options"><info><title>Configuration Options</title></info>

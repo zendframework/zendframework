@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.database"><info><title>Zend_Db Performance</title></info>
     
 
@@ -95,14 +93,14 @@
                 inject the values into the <acronym>SQL</acronym>:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 // $adapter is the DB adapter. In Zend_Db_Table, retrieve
-// it using $this-&gt;getAdapter().
+// it using $this->getAdapter().
 $sql = vsprintf(
     self::SELECT_FOO,
     array_walk($values, array($adapter, 'quoteInto'))
 );
-</programlisting>
+]]></programlisting>
         </section>
     </section>
 </section>

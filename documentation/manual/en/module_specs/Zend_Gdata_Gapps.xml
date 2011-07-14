@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.gapps"><info><title>Using Google Apps Provisioning</title></info>
     
 
@@ -56,10 +54,10 @@
                 when instantiating the service class. For example:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $domain = "example.com";
 $gdata = new Zend_Gdata_Gapps($client, $domain);
-</programlisting>
+]]></programlisting>
         </section>
 
         <section xml:id="zend.gdata.gapps.domain.query"><info><title>Setting the domain for query classes</title></info>
@@ -72,10 +70,10 @@ $gdata = new Zend_Gdata_Gapps($client, $domain);
                 the query. For example:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $domain = "example.com";
 $query = new Zend_Gdata_Gapps_UserQuery($domain, $arg);
-</programlisting>
+]]></programlisting>
 
             <para>
                 When using a service class factory method to create a query,
@@ -84,11 +82,11 @@ $query = new Zend_Gdata_Gapps_UserQuery($domain, $arg);
                 specify the domain as part of the constructor arguments.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $domain = "example.com";
 $gdata = new Zend_Gdata_Gapps($client, $domain);
-$query = $gdata-&gt;newUserQuery($arg);
-</programlisting>
+$query = $gdata->newUserQuery($arg);
+]]></programlisting>
         </section>
     </section>
 
@@ -110,9 +108,9 @@ $query = $gdata-&gt;newUserQuery($arg);
                 <methodname>createUser()</methodname> convenience method:
             </para>
 
-            <programlisting language="php">
-$gdata-&gt;createUser('foo', 'Random', 'User', '••••••••');
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$gdata->createUser('foo', 'Random', 'User', '••••••••');
+]]></programlisting>
 
             <para>
                 Users can also be created by instantiating UserEntry,
@@ -121,16 +119,16 @@ $gdata-&gt;createUser('foo', 'Random', 'User', '••••••••');
                 upload the entry to the server.
             </para>
 
-            <programlisting language="php">
-$user = $gdata-&gt;newUserEntry();
-$user-&gt;login = $gdata-&gt;newLogin();
-$user-&gt;login-&gt;username = 'foo';
-$user-&gt;login-&gt;password = '••••••••';
-$user-&gt;name = $gdata-&gt;newName();
-$user-&gt;name-&gt;givenName = 'Random';
-$user-&gt;name-&gt;familyName = 'User';
-$user = $gdata-&gt;insertUser($user);
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$user = $gdata->newUserEntry();
+$user->login = $gdata->newLogin();
+$user->login->username = 'foo';
+$user->login->password = '••••••••';
+$user->name = $gdata->newName();
+$user->name->givenName = 'Random';
+$user->name->familyName = 'User';
+$user = $gdata->insertUser($user);
+]]></programlisting>
 
             <para>
                 The user's password should normally be provided as cleartext.
@@ -149,19 +147,19 @@ $user = $gdata-&gt;insertUser($user);
                 not found, <constant>NULL</constant> will be returned.
             </para>
 
-            <programlisting language="php">
-$user = $gdata-&gt;retrieveUser('foo');
+            <programlisting language="php"><![CDATA[
+$user = $gdata->retrieveUser('foo');
 
-echo 'Username: ' . $user-&gt;login-&gt;userName . "\n";
-echo 'Given Name: ' . $user-&gt;name-&gt;givenName . "\n";
-echo 'Family Name: ' . $user-&gt;name-&gt;familyName . "\n";
-echo 'Suspended: ' . ($user-&gt;login-&gt;suspended ? 'Yes' : 'No') . "\n";
-echo 'Admin: ' . ($user-&gt;login-&gt;admin ? 'Yes' : 'No') . "\n"
+echo 'Username: ' . $user->login->userName . "\n";
+echo 'Given Name: ' . $user->name->givenName . "\n";
+echo 'Family Name: ' . $user->name->familyName . "\n";
+echo 'Suspended: ' . ($user->login->suspended ? 'Yes' : 'No') . "\n";
+echo 'Admin: ' . ($user->login->admin ? 'Yes' : 'No') . "\n"
 echo 'Must Change Password: ' .
-     ($user-&gt;login-&gt;changePasswordAtNextLogin ? 'Yes' : 'No') . "\n";
+     ($user->login->changePasswordAtNextLogin ? 'Yes' : 'No') . "\n";
 echo 'Has Agreed To Terms: ' .
-     ($user-&gt;login-&gt;agreedToTerms ? 'Yes' : 'No') . "\n";
-</programlisting>
+     ($user->login->agreedToTerms ? 'Yes' : 'No') . "\n";
+]]></programlisting>
 
             <para>
                 Users can also be retrieved by creating an
@@ -171,20 +169,20 @@ echo 'Has Agreed To Terms: ' .
                 service object with that query.
             </para>
 
-            <programlisting language="php">
-$query = $gdata-&gt;newUserQuery('foo');
-$user = $gdata-&gt;getUserEntry($query);
+            <programlisting language="php"><![CDATA[
+$query = $gdata->newUserQuery('foo');
+$user = $gdata->getUserEntry($query);
 
-echo 'Username: ' . $user-&gt;login-&gt;userName . "\n";
-echo 'Given Name: ' . $user-&gt;login-&gt;givenName . "\n";
-echo 'Family Name: ' . $user-&gt;login-&gt;familyName . "\n";
-echo 'Suspended: ' . ($user-&gt;login-&gt;suspended ? 'Yes' : 'No') . "\n";
-echo 'Admin: ' . ($user-&gt;login-&gt;admin ? 'Yes' : 'No') . "\n"
+echo 'Username: ' . $user->login->userName . "\n";
+echo 'Given Name: ' . $user->login->givenName . "\n";
+echo 'Family Name: ' . $user->login->familyName . "\n";
+echo 'Suspended: ' . ($user->login->suspended ? 'Yes' : 'No') . "\n";
+echo 'Admin: ' . ($user->login->admin ? 'Yes' : 'No') . "\n"
 echo 'Must Change Password: ' .
-     ($user-&gt;login-&gt;changePasswordAtNextLogin ? 'Yes' : 'No') . "\n";
+     ($user->login->changePasswordAtNextLogin ? 'Yes' : 'No') . "\n";
 echo 'Has Agreed To Terms: ' .
-     ($user-&gt;login-&gt;agreedToTerms ? 'Yes' : 'No') . "\n";
-</programlisting>
+     ($user->login->agreedToTerms ? 'Yes' : 'No') . "\n";
+]]></programlisting>
 
             <para>
                 If the specified user cannot be located a ServiceException
@@ -202,14 +200,14 @@ echo 'Has Agreed To Terms: ' .
                 <methodname>retrieveAllUsers()</methodname> convenience method.
             </para>
 
-            <programlisting language="php">
-$feed = $gdata-&gt;retrieveAllUsers();
+            <programlisting language="php"><![CDATA[
+$feed = $gdata->retrieveAllUsers();
 
 foreach ($feed as $user) {
-    echo "  * " . $user-&gt;login-&gt;username . ' (' . $user-&gt;name-&gt;givenName .
-        ' ' . $user-&gt;name-&gt;familyName . ")\n";
+    echo "  * " . $user->login->username . ' (' . $user->name->givenName .
+        ' ' . $user->name->familyName . ")\n";
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 This will create a <classname>Zend_Gdata_Gapps_UserFeed</classname> object which
@@ -223,14 +221,14 @@ foreach ($feed as $user) {
                 information on paging, see <link linkend="zend.gdata.introduction.paging">the paging chapter</link>.
             </para>
 
-            <programlisting language="php">
-$feed = $gdata-&gt;getUserFeed();
+            <programlisting language="php"><![CDATA[
+$feed = $gdata->getUserFeed();
 
 foreach ($feed as $user) {
-    echo "  * " . $user-&gt;login-&gt;username . ' (' . $user-&gt;name-&gt;givenName .
-        ' ' . $user-&gt;name-&gt;familyName . ")\n";
+    echo "  * " . $user->login->username . ' (' . $user->name->givenName .
+        ' ' . $user->name->familyName . ")\n";
 }
-</programlisting>
+]]></programlisting>
         </section>
 
         <section xml:id="zend.gdata.gapps.users.updating"><info><title>Updating a user account</title></info>
@@ -243,12 +241,12 @@ foreach ($feed as $user) {
                 changes made will be propagated to the server.
             </para>
 
-            <programlisting language="php">
-$user = $gdata-&gt;retrieveUser('foo');
-$user-&gt;name-&gt;givenName = 'Foo';
-$user-&gt;name-&gt;familyName = 'Bar';
-$user = $user-&gt;save();
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$user = $gdata->retrieveUser('foo');
+$user->name->givenName = 'Foo';
+$user->name->familyName = 'Bar';
+$user = $user->save();
+]]></programlisting>
 
             <section xml:id="zend.gdata.gapps.users.updating.resettingPassword"><info><title>Resetting a user's password</title></info>
                 
@@ -258,11 +256,11 @@ $user = $user-&gt;save();
                     the <command>login-&gt;password</command> property.
                 </para>
 
-                <programlisting language="php">
-$user = $gdata-&gt;retrieveUser('foo');
-$user-&gt;login-&gt;password = '••••••••';
-$user = $user-&gt;save();
-</programlisting>
+                <programlisting language="php"><![CDATA[
+$user = $gdata->retrieveUser('foo');
+$user->login->password = '••••••••';
+$user = $user->save();
+]]></programlisting>
 
                 <para>
                     Note that it is not possible to recover a password in this
@@ -281,11 +279,11 @@ $user = $user-&gt;save();
                     <constant>TRUE</constant>.
                 </para>
 
-                <programlisting language="php">
-$user = $gdata-&gt;retrieveUser('foo');
-$user-&gt;login-&gt;changePasswordAtNextLogin = true;
-$user = $user-&gt;save();
-</programlisting>
+                <programlisting language="php"><![CDATA[
+$user = $gdata->retrieveUser('foo');
+$user->login->changePasswordAtNextLogin = true;
+$user = $user->save();
+]]></programlisting>
 
                 <para>
                     Similarly, this can be undone by setting the
@@ -306,10 +304,10 @@ $user = $user-&gt;save();
                     <methodname>restoreUser()</methodname> convenience methods:
                 </para>
 
-                <programlisting language="php">
-$gdata-&gt;suspendUser('foo');
-$gdata-&gt;restoreUser('foo');
-</programlisting>
+                <programlisting language="php"><![CDATA[
+$gdata->suspendUser('foo');
+$gdata->restoreUser('foo');
+]]></programlisting>
 
                 <para>
                     Alternatively, you can set the UserEntry's
@@ -317,11 +315,11 @@ $gdata-&gt;restoreUser('foo');
                     <constant>TRUE</constant>.
                 </para>
 
-                <programlisting language="php">
-$user = $gdata-&gt;retrieveUser('foo');
-$user-&gt;login-&gt;suspended = true;
-$user = $user-&gt;save();
-</programlisting>
+                <programlisting language="php"><![CDATA[
+$user = $gdata->retrieveUser('foo');
+$user->login->suspended = true;
+$user = $user->save();
+]]></programlisting>
 
                 <para>
                     To restore the user's access, set the
@@ -339,11 +337,11 @@ $user = $user-&gt;save();
                     <constant>TRUE</constant>.
                 </para>
 
-                <programlisting language="php">
-$user = $gdata-&gt;retrieveUser('foo');
-$user-&gt;login-&gt;admin = true;
-$user = $user-&gt;save();
-</programlisting>
+                <programlisting language="php"><![CDATA[
+$user = $gdata->retrieveUser('foo');
+$user->login->admin = true;
+$user = $user->save();
+]]></programlisting>
 
                 <para>
                     And as expected, setting a user's <command>login-&gt;admin</command>
@@ -362,19 +360,19 @@ $user = $user-&gt;save();
                 entry.
             </para>
 
-            <programlisting language="php">
-$user = $gdata-&gt;retrieveUser('foo');
-$user-&gt;delete();
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$user = $gdata->retrieveUser('foo');
+$user->delete();
+]]></programlisting>
 
             <para>
                 If you do not have access to a UserEntry object for an
                 account, use the <methodname>deleteUser()</methodname> convenience method.
             </para>
 
-            <programlisting language="php">
-$gdata-&gt;deleteUser('foo');
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$gdata->deleteUser('foo');
+]]></programlisting>
         </section>
     </section>
 
@@ -401,9 +399,9 @@ $gdata-&gt;deleteUser('foo');
                 <methodname>createNickname()</methodname> convenience method:
             </para>
 
-            <programlisting language="php">
-$gdata-&gt;createNickname('foo', 'bar');
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$gdata->createNickname('foo', 'bar');
+]]></programlisting>
 
             <para>
                 Nicknames can also be created by instantiating NicknameEntry,
@@ -412,12 +410,12 @@ $gdata-&gt;createNickname('foo', 'bar');
                 the entry to the server.
             </para>
 
-            <programlisting language="php">
-$nickname = $gdata-&gt;newNicknameEntry();
-$nickname-&gt;login = $gdata-&gt;newLogin('foo');
-$nickname-&gt;nickname = $gdata-&gt;newNickname('bar');
-$nickname = $gdata-&gt;insertNickname($nickname);
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$nickname = $gdata->newNicknameEntry();
+$nickname->login = $gdata->newLogin('foo');
+$nickname->nickname = $gdata->newNickname('bar');
+$nickname = $gdata->insertNickname($nickname);
+]]></programlisting>
         </section>
 
         <section xml:id="zend.gdata.gapps.nicknames.retrieving"><info><title>Retrieving a nickname</title></info>
@@ -429,12 +427,12 @@ $nickname = $gdata-&gt;insertNickname($nickname);
                 return <constant>NULL</constant> if a user is not found.
             </para>
 
-            <programlisting language="php">
-$nickname = $gdata-&gt;retrieveNickname('bar');
+            <programlisting language="php"><![CDATA[
+$nickname = $gdata->retrieveNickname('bar');
 
-echo 'Nickname: ' . $nickname-&gt;nickname-&gt;name . "\n";
-echo 'Owner: ' . $nickname-&gt;login-&gt;username . "\n";
-</programlisting>
+echo 'Nickname: ' . $nickname->nickname->name . "\n";
+echo 'Owner: ' . $nickname->login->username . "\n";
+]]></programlisting>
 
             <para>
                 Individual nicknames can also be retrieved by creating an
@@ -444,13 +442,13 @@ echo 'Owner: ' . $nickname-&gt;login-&gt;username . "\n";
                 service object with that query.
             </para>
 
-            <programlisting language="php">
-$query = $gdata-&gt;newNicknameQuery('bar');
-$nickname = $gdata-&gt;getNicknameEntry($query);
+            <programlisting language="php"><![CDATA[
+$query = $gdata->newNicknameQuery('bar');
+$nickname = $gdata->getNicknameEntry($query);
 
-echo 'Nickname: ' . $nickname-&gt;nickname-&gt;name . "\n";
-echo 'Owner: ' . $nickname-&gt;login-&gt;username . "\n";
-</programlisting>
+echo 'Nickname: ' . $nickname->nickname->name . "\n";
+echo 'Owner: ' . $nickname->login->username . "\n";
+]]></programlisting>
 
             <para>
                 As with users, if no corresponding nickname is found a
@@ -468,13 +466,13 @@ echo 'Owner: ' . $nickname-&gt;login-&gt;username . "\n";
                 the convenience method <methodname>retrieveNicknames()</methodname>.
             </para>
 
-            <programlisting language="php">
-$feed = $gdata-&gt;retrieveNicknames('foo');
+            <programlisting language="php"><![CDATA[
+$feed = $gdata->retrieveNicknames('foo');
 
 foreach ($feed as $nickname) {
-    echo '  * ' . $nickname-&gt;nickname-&gt;name . "\n";
+    echo '  * ' . $nickname->nickname->name . "\n";
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 This will create a <classname>Zend_Gdata_Gapps_NicknameFeed</classname> object which
@@ -488,15 +486,15 @@ foreach ($feed as $nickname) {
                 object.
             </para>
 
-            <programlisting language="php">
-$query = $gdata-&gt;newNicknameQuery();
-$query-&gt;setUsername('foo');
-$feed = $gdata-&gt;getNicknameFeed($query);
+            <programlisting language="php"><![CDATA[
+$query = $gdata->newNicknameQuery();
+$query->setUsername('foo');
+$feed = $gdata->getNicknameFeed($query);
 
 foreach ($feed as $nickname) {
-    echo '  * ' . $nickname-&gt;nickname-&gt;name . "\n";
+    echo '  * ' . $nickname->nickname->name . "\n";
 }
-</programlisting>
+]]></programlisting>
         </section>
 
         <section xml:id="zend.gdata.gapps.nicknames.retrievingAll"><info><title>Retrieving all nicknames in a domain</title></info>
@@ -507,14 +505,14 @@ foreach ($feed as $nickname) {
                 convenience method <methodname>retrieveAllNicknames()</methodname>
             </para>
 
-            <programlisting language="php">
-$feed = $gdata-&gt;retrieveAllNicknames();
+            <programlisting language="php"><![CDATA[
+$feed = $gdata->retrieveAllNicknames();
 
 foreach ($feed as $nickname) {
-    echo '  * ' . $nickname-&gt;nickname-&gt;name . ' =&gt; ' .
-        $nickname-&gt;login-&gt;username . "\n";
+    echo '  * ' . $nickname->nickname->name . ' => ' .
+        $nickname->login->username . "\n";
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 This will create a <classname>Zend_Gdata_Gapps_NicknameFeed</classname> object which
@@ -526,14 +524,14 @@ foreach ($feed as $nickname) {
                 service object with no arguments.
             </para>
 
-            <programlisting language="php">
-$feed = $gdata-&gt;getNicknameFeed();
+            <programlisting language="php"><![CDATA[
+$feed = $gdata->getNicknameFeed();
 
 foreach ($feed as $nickname) {
-    echo '  * ' . $nickname-&gt;nickname-&gt;name . ' =&gt; ' .
-        $nickname-&gt;login-&gt;username . "\n";
+    echo '  * ' . $nickname->nickname->name . ' => ' .
+        $nickname->login->username . "\n";
 }
-</programlisting>
+]]></programlisting>
         </section>
 
         <section xml:id="zend.gdata.gapps.nicknames.deleting"><info><title>Deleting a nickname</title></info>
@@ -545,19 +543,19 @@ foreach ($feed as $nickname) {
                 entry.
             </para>
 
-            <programlisting language="php">
-$nickname = $gdata-&gt;retrieveNickname('bar');
-$nickname-&gt;delete();
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$nickname = $gdata->retrieveNickname('bar');
+$nickname->delete();
+]]></programlisting>
 
             <para>
                 For nicknames which you do not hold a NicknameEntry for, use
                 the <methodname>deleteNickname()</methodname> convenience method.
             </para>
 
-            <programlisting language="php">
-$gdata-&gt;deleteNickname('bar');
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$gdata->deleteNickname('bar');
+]]></programlisting>
         </section>
     </section>
 
@@ -587,9 +585,9 @@ $gdata-&gt;deleteNickname('bar');
                 <methodname>createGroup()</methodname> convenience method:
             </para>
 
-            <programlisting language="php">
-$gdata-&gt;createGroup('friends', 'The Friends Group');
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$gdata->createGroup('friends', 'The Friends Group');
+]]></programlisting>
 
             <para>
                 Groups can also be created by instantiating
@@ -598,20 +596,20 @@ $gdata-&gt;createGroup('friends', 'The Friends Group');
                 object to upload the entry to the server.
             </para>
 
-            <programlisting language="php">
-$group = $gdata-&gt;newGroupEntry();
+            <programlisting language="php"><![CDATA[
+$group = $gdata->newGroupEntry();
 
-$properties[0] = $this-&gt;newProperty();
-$properties[0]-&gt;name = 'groupId';
-$properties[0]-&gt;value = 'friends';
-$properties[1] = $this-&gt;newProperty();
-$properties[1]-&gt;name = 'groupName';
-$properties[1]-&gt;value = 'The Friends Group';
+$properties[0] = $this->newProperty();
+$properties[0]->name = 'groupId';
+$properties[0]->value = 'friends';
+$properties[1] = $this->newProperty();
+$properties[1]->name = 'groupName';
+$properties[1]->value = 'The Friends Group';
 
-$group-&gt;property = $properties;
+$group->property = $properties;
 
-$group = $gdata-&gt;insertGroup($group);
-</programlisting>
+$group = $gdata->insertGroup($group);
+]]></programlisting>
         </section>
 
         <section xml:id="zend.gdata.gapps.groups.retrieveGroup"><info><title>Retrieving an individual group</title></info>
@@ -622,14 +620,14 @@ $group = $gdata-&gt;insertGroup($group);
                 <methodname>retrieveGroup()</methodname> convenience method:
             </para>
 
-            <programlisting language="php">
-$entry = $gdata-&gt;retrieveGroup('friends');
+            <programlisting language="php"><![CDATA[
+$entry = $gdata->retrieveGroup('friends');
 
-foreach ($entry-&gt;property as $p) {
-    echo "Property Name: " . $p-&gt;name;
-    echo "\nProperty Value: " . $p-&gt;value . "\n\n";
+foreach ($entry->property as $p) {
+    echo "Property Name: " . $p->name;
+    echo "\nProperty Value: " . $p->value . "\n\n";
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 This will create a <classname>Zend_Gdata_Gapps_GroupEntry</classname>
@@ -643,16 +641,16 @@ foreach ($entry-&gt;property as $p) {
                 on a service object.
             </para>
 
-            <programlisting language="php">
-$query = $gdata-&gt;newGroupQuery();
-$query-&gt;setGroupId('friends');
-$entry = $gdata-&gt;getGroupEntry($query);
+            <programlisting language="php"><![CDATA[
+$query = $gdata->newGroupQuery();
+$query->setGroupId('friends');
+$entry = $gdata->getGroupEntry($query);
 
-foreach ($entry-&gt;property as $p) {
-    echo "Property Name: " . $p-&gt;name;
-    echo "\nProperty Value: " . $p-&gt;value . "\n\n";
+foreach ($entry->property as $p) {
+    echo "Property Name: " . $p->name;
+    echo "\nProperty Value: " . $p->value . "\n\n";
 }
-</programlisting>
+]]></programlisting>
         </section>
 
         <section xml:id="zend.gdata.gapps.groups.retrievingAll"><info><title>Retrieving all groups in a domain</title></info>
@@ -663,17 +661,17 @@ foreach ($entry-&gt;property as $p) {
                 method <methodname>retrieveAllGroups()</methodname>.
             </para>
 
-            <programlisting language="php">
-$feed = $gdata-&gt;retrieveAllGroups();
+            <programlisting language="php"><![CDATA[
+$feed = $gdata->retrieveAllGroups();
 
-foreach ($feed-&gt;entry as $entry) {
-    foreach ($entry-&gt;property as $p) {
-        echo "Property Name: " . $p-&gt;name;
-        echo "\nProperty Value: " . $p-&gt;value . "\n\n";
+foreach ($feed->entry as $entry) {
+    foreach ($entry->property as $p) {
+        echo "Property Name: " . $p->name;
+        echo "\nProperty Value: " . $p->value . "\n\n";
     }
     echo "\n\n";
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 This will create a <classname>Zend_Gdata_Gapps_GroupFeed</classname>
@@ -685,17 +683,17 @@ foreach ($feed-&gt;entry as $entry) {
                 service object with no arguments.
             </para>
 
-            <programlisting language="php">
-$feed = $gdata-&gt;getGroupFeed();
+            <programlisting language="php"><![CDATA[
+$feed = $gdata->getGroupFeed();
 
-foreach ($feed-&gt;entry as $entry) {
-    foreach ($entry-&gt;property as $p) {
-        echo "Property Name: " . $p-&gt;name;
-        echo "\nProperty Value: " . $p-&gt;value . "\n\n";
+foreach ($feed->entry as $entry) {
+    foreach ($entry->property as $p) {
+        echo "Property Name: " . $p->name;
+        echo "\nProperty Value: " . $p->value . "\n\n";
     }
     echo "\n\n";
 }
-</programlisting>
+]]></programlisting>
         </section>
 
         <section xml:id="zend.gdata.gapps.groups.deleting"><info><title>Deleting a group</title></info>
@@ -706,9 +704,9 @@ foreach ($feed-&gt;entry as $entry) {
                 method:
             </para>
 
-            <programlisting language="php">
-$gdata-&gt;deleteGroup('friends');
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$gdata->deleteGroup('friends');
+]]></programlisting>
         </section>
 
         <section xml:id="zend.gdata.gapps.groups.updating"><info><title>Updating a group</title></info>
@@ -719,9 +717,9 @@ $gdata-&gt;deleteGroup('friends');
                 <methodname>updateGroup()</methodname> convenience method:
             </para>
 
-            <programlisting language="php">
-$gdata-&gt;updateGroup('group-id-here', 'Group Name Here');
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$gdata->updateGroup('group-id-here', 'Group Name Here');
+]]></programlisting>
 
             <para>
                 The first parameter is required. The second, third and fourth parameter,
@@ -740,17 +738,17 @@ $gdata-&gt;updateGroup('group-id-here', 'Group Name Here');
                 convenience method:
             </para>
 
-            <programlisting language="php">
-$feed = $gdata-&gt;retrieveGroups('baz@somewhere.com');
+            <programlisting language="php"><![CDATA[
+$feed = $gdata->retrieveGroups('baz@somewhere.com');
 
-foreach ($feed-&gt;entry as $entry) {
-    foreach ($entry-&gt;property as $p) {
-        echo "Property Name: " . $p-&gt;name;
-        echo "\nProperty Value: " . $p-&gt;value . "\n\n";
+foreach ($feed->entry as $entry) {
+    foreach ($entry->property as $p) {
+        echo "Property Name: " . $p->name;
+        echo "\nProperty Value: " . $p->value . "\n\n";
     }
     echo "\n\n";
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 This will create a <classname>Zend_Gdata_Gapps_GroupFeed</classname>
@@ -764,19 +762,19 @@ foreach ($feed-&gt;entry as $entry) {
                 on a service object.
             </para>
 
-            <programlisting language="php">
-$query = $gdata-&gt;newGroupQuery();
-$query-&gt;setMember('baz@somewhere.com');
-$feed = $gdata-&gt;getGroupFeed($query);
+            <programlisting language="php"><![CDATA[
+$query = $gdata->newGroupQuery();
+$query->setMember('baz@somewhere.com');
+$feed = $gdata->getGroupFeed($query);
 
-foreach ($feed-&gt;entry as $entry) {
-    foreach ($entry-&gt;property as $p) {
-        echo "Property Name: " . $p-&gt;name;
-        echo "\nProperty Value: " . $p-&gt;value . "\n\n";
+foreach ($feed->entry as $entry) {
+    foreach ($entry->property as $p) {
+        echo "Property Name: " . $p->name;
+        echo "\nProperty Value: " . $p->value . "\n\n";
     }
     echo "\n\n";
 }
-</programlisting>
+]]></programlisting>
         </section>
     </section>
 
@@ -798,9 +796,9 @@ foreach ($feed-&gt;entry as $entry) {
                 <methodname>addMemberToGroup()</methodname> convenience method:
             </para>
 
-            <programlisting language="php">
-$gdata-&gt;addMemberToGroup('bar@somewhere.com', 'friends');
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$gdata->addMemberToGroup('bar@somewhere.com', 'friends');
+]]></programlisting>
         </section>
 
         <section xml:id="zend.gdata.gapps.groupMembers.check"><info><title>Check to see if member belongs to group</title></info>
@@ -811,10 +809,10 @@ $gdata-&gt;addMemberToGroup('bar@somewhere.com', 'friends');
                 <methodname>isMember()</methodname> convenience method:
             </para>
 
-            <programlisting language="php">
-$isMember = $gdata-&gt;isMember('bar@somewhere.com', 'friends');
+            <programlisting language="php"><![CDATA[
+$isMember = $gdata->isMember('bar@somewhere.com', 'friends');
 var_dump($isMember);
-</programlisting>
+]]></programlisting>
 
             <para>
                 The method returns a boolean value. If the member belongs to the
@@ -831,9 +829,9 @@ var_dump($isMember);
                 method:
             </para>
 
-            <programlisting language="php">
-$gdata-&gt;removeMemberFromGroup('baz', 'friends');
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$gdata->removeMemberFromGroup('baz', 'friends');
+]]></programlisting>
         </section>
 
         <section xml:id="zend.gdata.gapps.groupMembers.retrieving"><info><title>Retrieving the list of members to a group</title></info>
@@ -844,16 +842,16 @@ $gdata-&gt;removeMemberFromGroup('baz', 'friends');
                 can be used to retrieve the list of members of a group:
             </para>
 
-            <programlisting language="php">
-$feed = $gdata-&gt;retrieveAllMembers('friends');
+            <programlisting language="php"><![CDATA[
+$feed = $gdata->retrieveAllMembers('friends');
 
 foreach ($feed as $member) {
-    foreach ($member-&gt;property as $p) {
-        echo "Property Name: " . $p-&gt;name;
-        echo "\nProperty Value: " . $p-&gt;value . "\n\n";
+    foreach ($member->property as $p) {
+        echo "Property Name: " . $p->name;
+        echo "\nProperty Value: " . $p->value . "\n\n";
     }
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 Alternatively, construct a new MemberQuery, set its groupId
@@ -861,18 +859,18 @@ foreach ($feed as $member) {
                 <methodname>getMemberFeed()</methodname> on a service object.
             </para>
 
-            <programlisting language="php">
-$query = $gdata-&gt;newMemberQuery();
-$query-&gt;setGroupId('friends');
-$feed = $gdata-&gt;getMemberFeed($query);
+            <programlisting language="php"><![CDATA[
+$query = $gdata->newMemberQuery();
+$query->setGroupId('friends');
+$feed = $gdata->getMemberFeed($query);
 
 foreach ($feed as $member) {
-    foreach ($member-&gt;property as $p) {
-        echo "Property Name: " . $p-&gt;name;
-        echo "\nProperty Value: " . $p-&gt;value . "\n\n";
+    foreach ($member->property as $p) {
+        echo "Property Name: " . $p->name;
+        echo "\nProperty Value: " . $p->value . "\n\n";
     }
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 This will create a <classname>Zend_Gdata_Gapps_MemberFeed</classname>
@@ -899,9 +897,9 @@ foreach ($feed as $member) {
                 <methodname>addOwnerToGroup()</methodname> convenience method:
             </para>
 
-            <programlisting language="php">
-$gdata-&gt;addOwnerToGroup('bar@somewhere.com', 'friends');
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$gdata->addOwnerToGroup('bar@somewhere.com', 'friends');
+]]></programlisting>
         </section>
 
         <section xml:id="zend.gdata.gapps.groupOwners.retrieving"><info><title>Retrieving the list of the owner of a group</title></info>
@@ -912,16 +910,16 @@ $gdata-&gt;addOwnerToGroup('bar@somewhere.com', 'friends');
                 can be used to retrieve the list of the owners of a group:
             </para>
 
-            <programlisting language="php">
-$feed = $gdata-&gt;retrieveGroupOwners('friends');
+            <programlisting language="php"><![CDATA[
+$feed = $gdata->retrieveGroupOwners('friends');
 
 foreach ($feed as $owner) {
-    foreach ($owner-&gt;property as $p) {
-        echo "Property Name: " . $p-&gt;name;
-        echo "\nProperty Value: " . $p-&gt;value . "\n\n";
+    foreach ($owner->property as $p) {
+        echo "Property Name: " . $p->name;
+        echo "\nProperty Value: " . $p->value . "\n\n";
     }
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 Alternatively, construct a new OwnerQuery, set its groupId
@@ -929,18 +927,18 @@ foreach ($feed as $owner) {
                 <methodname>getOwnerFeed()</methodname> on a service object.
             </para>
 
-            <programlisting language="php">
-$query = $gdata-&gt;newOwnerQuery();
-$query-&gt;setGroupId('friends');
-$feed = $gdata-&gt;getOwnerFeed($query);
+            <programlisting language="php"><![CDATA[
+$query = $gdata->newOwnerQuery();
+$query->setGroupId('friends');
+$feed = $gdata->getOwnerFeed($query);
 
 foreach ($feed as $owner) {
-    foreach ($owner-&gt;property as $p) {
-        echo "Property Name: " . $p-&gt;name;
-        echo "\nProperty Value: " . $p-&gt;value . "\n\n";
+    foreach ($owner->property as $p) {
+        echo "Property Name: " . $p->name;
+        echo "\nProperty Value: " . $p->value . "\n\n";
     }
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 This will create a <classname>Zend_Gdata_Gapps_OwnerFeed</classname>
@@ -956,10 +954,10 @@ foreach ($feed as $owner) {
                 the <methodname>isOwner()</methodname> convenience method:
             </para>
 
-            <programlisting language="php">
-$isOwner = $gdata-&gt;isOwner('bar@somewhere.com', 'friends');
+            <programlisting language="php"><![CDATA[
+$isOwner = $gdata->isOwner('bar@somewhere.com', 'friends');
 var_dump($isOwner);
-</programlisting>
+]]></programlisting>
 
             <para>
                 The method returns a boolean value. If the email is the owner of
@@ -976,9 +974,9 @@ var_dump($isOwner);
                 method:
             </para>
 
-            <programlisting language="php">
-$gdata-&gt;removeOwnerFromGroup('baz@somewhere.com', 'friends');
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$gdata->removeOwnerFromGroup('baz@somewhere.com', 'friends');
+]]></programlisting>
         </section>
     </section>
 
@@ -1005,9 +1003,9 @@ $gdata-&gt;removeOwnerFromGroup('baz@somewhere.com', 'friends');
                 <methodname>createEmailList()</methodname> convenience method:
             </para>
 
-            <programlisting language="php">
-$gdata-&gt;createEmailList('friends');
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$gdata->createEmailList('friends');
+]]></programlisting>
 
             <para>
                 Email lists can also be created by instantiating
@@ -1016,11 +1014,11 @@ $gdata-&gt;createEmailList('friends');
                 the entry to the server.
             </para>
 
-            <programlisting language="php">
-$list = $gdata-&gt;newEmailListEntry();
-$list-&gt;emailList = $gdata-&gt;newEmailList('friends');
-$list = $gdata-&gt;insertEmailList($list);
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$list = $gdata->newEmailListEntry();
+$list->emailList = $gdata->newEmailList('friends');
+$list = $gdata->insertEmailList($list);
+]]></programlisting>
         </section>
 
         <section xml:id="zend.gdata.gapps.emailList.retrieve"><info><title>Retrieving all email lists to which a recipient is subscribed</title></info>
@@ -1032,13 +1030,13 @@ $list = $gdata-&gt;insertEmailList($list);
                 convenience method:
             </para>
 
-            <programlisting language="php">
-$feed = $gdata-&gt;retrieveEmailLists('baz@somewhere.com');
+            <programlisting language="php"><![CDATA[
+$feed = $gdata->retrieveEmailLists('baz@somewhere.com');
 
 foreach ($feed as $list) {
-    echo '  * ' . $list-&gt;emailList-&gt;name . "\n";
+    echo '  * ' . $list->emailList->name . "\n";
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 This will create a <classname>Zend_Gdata_Gapps_EmailListFeed</classname> object
@@ -1052,15 +1050,15 @@ foreach ($feed as $list) {
                 a service object.
             </para>
 
-            <programlisting language="php">
-$query = $gdata-&gt;newEmailListQuery();
-$query-&gt;setRecipient('baz@somewhere.com');
-$feed = $gdata-&gt;getEmailListFeed($query);
+            <programlisting language="php"><![CDATA[
+$query = $gdata->newEmailListQuery();
+$query->setRecipient('baz@somewhere.com');
+$feed = $gdata->getEmailListFeed($query);
 
 foreach ($feed as $list) {
-    echo '  * ' . $list-&gt;emailList-&gt;name . "\n";
+    echo '  * ' . $list->emailList->name . "\n";
 }
-</programlisting>
+]]></programlisting>
         </section>
 
         <section xml:id="zend.gdata.gapps.emailLists.retrievingAll"><info><title>Retrieving all email lists in a domain</title></info>
@@ -1071,13 +1069,13 @@ foreach ($feed as $list) {
                 method <methodname>retrieveAllEmailLists()</methodname>.
             </para>
 
-            <programlisting language="php">
-$feed = $gdata-&gt;retrieveAllEmailLists();
+            <programlisting language="php"><![CDATA[
+$feed = $gdata->retrieveAllEmailLists();
 
 foreach ($feed as $list) {
-    echo '  * ' . $list-&gt;emailList-&gt;name . "\n";
+    echo '  * ' . $list->emailList->name . "\n";
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 This will create a <classname>Zend_Gdata_Gapps_EmailListFeed</classname> object
@@ -1089,13 +1087,13 @@ foreach ($feed as $list) {
                 service object with no arguments.
             </para>
 
-            <programlisting language="php">
-$feed = $gdata-&gt;getEmailListFeed();
+            <programlisting language="php"><![CDATA[
+$feed = $gdata->getEmailListFeed();
 
 foreach ($feed as $list) {
-    echo '  * ' . $list-&gt;emailList-&gt;name . "\n";
+    echo '  * ' . $list->emailList->name . "\n";
 }
-</programlisting>
+]]></programlisting>
         </section>
 
         <section xml:id="zend.gdata.gapps.emailList.deleting"><info><title>Deleting an email list</title></info>
@@ -1106,9 +1104,9 @@ foreach ($feed as $list) {
                 convenience method:
             </para>
 
-            <programlisting language="php">
-$gdata-&gt;deleteEmailList('friends');
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$gdata->deleteEmailList('friends');
+]]></programlisting>
         </section>
     </section>
 
@@ -1130,9 +1128,9 @@ $gdata-&gt;deleteEmailList('friends');
                 <methodname>addRecipientToEmailList()</methodname> convenience method:
             </para>
 
-            <programlisting language="php">
-$gdata-&gt;addRecipientToEmailList('bar@somewhere.com', 'friends');
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$gdata->addRecipientToEmailList('bar@somewhere.com', 'friends');
+]]></programlisting>
         </section>
 
         <section xml:id="zend.gdata.gapps.emailListRecipients.retrieving"><info><title>Retrieving the list of subscribers to an email list</title></info>
@@ -1143,13 +1141,13 @@ $gdata-&gt;addRecipientToEmailList('bar@somewhere.com', 'friends');
                 can be used to retrieve the list of subscribers to an email list:
             </para>
 
-            <programlisting language="php">
-$feed = $gdata-&gt;retrieveAllRecipients('friends');
+            <programlisting language="php"><![CDATA[
+$feed = $gdata->retrieveAllRecipients('friends');
 
 foreach ($feed as $recipient) {
-    echo '  * ' . $recipient-&gt;who-&gt;email . "\n";
+    echo '  * ' . $recipient->who->email . "\n";
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 Alternatively, construct a new EmailListRecipientQuery, set
@@ -1158,15 +1156,15 @@ foreach ($feed as $recipient) {
                 object.
             </para>
 
-            <programlisting language="php">
-$query = $gdata-&gt;newEmailListRecipientQuery();
-$query-&gt;setEmailListName('friends');
-$feed = $gdata-&gt;getEmailListRecipientFeed($query);
+            <programlisting language="php"><![CDATA[
+$query = $gdata->newEmailListRecipientQuery();
+$query->setEmailListName('friends');
+$feed = $gdata->getEmailListRecipientFeed($query);
 
 foreach ($feed as $recipient) {
-    echo '  * ' . $recipient-&gt;who-&gt;email . "\n";
+    echo '  * ' . $recipient->who->email . "\n";
 }
-</programlisting>
+]]></programlisting>
 
             <para>
                 This will create a <classname>Zend_Gdata_Gapps_EmailListRecipientFeed</classname>
@@ -1183,9 +1181,9 @@ foreach ($feed as $recipient) {
                 method:
             </para>
 
-            <programlisting language="php">
-$gdata-&gt;removeRecipientFromEmailList('baz@somewhere.com', 'friends');
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$gdata->removeRecipientFromEmailList('baz@somewhere.com', 'friends');
+]]></programlisting>
         </section>
     </section>
 
@@ -1224,14 +1222,14 @@ $gdata-&gt;removeRecipientFromEmailList('baz@somewhere.com', 'friends');
             resource doesn't exist and handle the fault gracefully:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 function retrieveUser ($username) {
-    $query = $gdata-&gt;newUserQuery($username);
+    $query = $gdata->newUserQuery($username);
     try {
-        $user = $gdata-&gt;getUserEntry($query);
+        $user = $gdata->getUserEntry($query);
     } catch (Zend_Gdata_Gapps_ServiceException $e) {
         // Set the user to null if not found
-        if ($e-&gt;hasError(Zend_Gdata_Gapps_Error::ENTITY_DOES_NOT_EXIST)) {
+        if ($e->hasError(Zend_Gdata_Gapps_Error::ENTITY_DOES_NOT_EXIST)) {
             $user = null;
         } else {
             throw $e;
@@ -1239,6 +1237,6 @@ function retrieveUser ($username) {
     }
     return $user;
 }
-</programlisting>
+]]></programlisting>
     </section>
 </section>

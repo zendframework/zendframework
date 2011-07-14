@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.windows.instance"><info><title>Zend_Service_Amazon_Ec2: Windows Instances</title></info>
     
 
@@ -141,11 +139,11 @@
                 s3Bucket and s3Prefix.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance_Windows('aws_key',
                                                      'aws_secret_key');
-$return = $ec2_instance-&gt;bundle('instanceId', 's3Bucket', 's3Prefix');
-</programlisting>
+$return = $ec2_instance->bundle('instanceId', 's3Bucket', 's3Prefix');
+]]></programlisting>
 
         </example>
 
@@ -162,11 +160,11 @@ $return = $ec2_instance-&gt;bundle('instanceId', 's3Bucket', 's3Prefix');
                 s3Bucket and s3Prefix.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance_Windows('aws_key',
                                                      'aws_secret_key');
-$return = $ec2_instance-&gt;describeBundle('bundleId');
-</programlisting>
+$return = $ec2_instance->describeBundle('bundleId');
+]]></programlisting>
         </example>
 
         <example xml:id="zend.service.amazon.ec2.windows.instance.operations.cancel"><info><title>Cancels an Amazon EC2 bundling operation</title></info>
@@ -182,11 +180,11 @@ $return = $ec2_instance-&gt;describeBundle('bundleId');
                 s3Bucket and s3Prefix.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance_Windows('aws_key',
                                                      'aws_secret_key');
-$return = $ec2_instance-&gt;cancelBundle('bundleId');
-</programlisting>
+$return = $ec2_instance->cancelBundle('bundleId');
+]]></programlisting>
         </example>
     </section>
 </section>

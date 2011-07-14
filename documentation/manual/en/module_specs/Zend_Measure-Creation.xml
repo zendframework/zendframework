@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.creation"><info><title>Creation of Measurements</title></info>
     
 
@@ -28,7 +26,7 @@
         <example xml:id="zend.measure.creation.number.example-1"><info><title>Creation using integer and floating values</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $measurement = 1234.7;
 $unit = new Zend_Measure_Length((integer)$measurement,
                                 Zend_Measure_Length::STANDARD);
@@ -38,7 +36,7 @@ echo $unit;
 $unit = new Zend_Measure_Length($measurement, Zend_Measure_Length::STANDARD);
 echo $unit;
 // outputs '1234.7 m' (meters)
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -61,12 +59,12 @@ echo $unit;
         <example xml:id="zend.measure.creation.string.example-1"><info><title>Creation using strings</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $mystring = "10010100111010111010100001011011101010001";
 $unit = new Zend_Measure_Number($mystring, Zend_Measure_Number::BINARY);
 
 echo $unit;
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -87,7 +85,7 @@ echo $unit;
         <example xml:id="zend.measure.creation.localized.example-1"><info><title>Localized string</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
 $mystring = "1,234.50";
 $unit = new Zend_Measure_Length($mystring,
@@ -100,7 +98,7 @@ $unit = new Zend_Measure_Length($mystring,
                                 Zend_Measure_Length::STANDARD,
                                 'en_US');
 echo $unit; // outputs "1234.50 m"
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -111,13 +109,13 @@ echo $unit; // outputs "1234.50 m"
             want to use the same locale multiple times.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // in your bootstrap file
 $locale = new Zend_Locale('de_AT');
 Zend_Registry::set('Zend_Locale', $locale);
 
 // somewhere in your application
 $length = new Zend_Measure_Length(Zend_Measure_Length::METER();
-</programlisting>
+]]></programlisting>
     </section>
 </section>

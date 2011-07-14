@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.15"><info><title>Zend Framework 1.5</title></info>
     
 
@@ -79,18 +77,18 @@
                     the words of an action with a dash:
                 </para>
 
-                <programlisting language="php">
+                <programlisting language="php"><![CDATA[
 $viewRenderer =
     Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
-$inflector = $viewRenderer-&gt;getInflector();
-$inflector-&gt;setFilterRule(':action', array(
+$inflector = $viewRenderer->getInflector();
+$inflector->setFilterRule(':action', array(
     new Zend_Filter_PregReplace(
         '#[^a-z0-9' . preg_quote(DIRECTORY_SEPARATOR, '#') . ']+#i',
         ''
     ),
     'StringToLower'
 ));
-</programlisting>
+]]></programlisting>
 
                 <para>
                     The above code will modify the inflector to no longer
@@ -113,9 +111,9 @@ $inflector-&gt;setFilterRule(':action', array(
                     flag, <property>useCaseSensitiveActions</property>:
                 </para>
 
-                <programlisting language="php">
-$front-&gt;setParam('useCaseSensitiveActions', true);
-</programlisting>
+                <programlisting language="php"><![CDATA[
+$front->setParam('useCaseSensitiveActions', true);
+]]></programlisting>
 
                 <para>
                     This will allow you to use camelCasing on the url and still

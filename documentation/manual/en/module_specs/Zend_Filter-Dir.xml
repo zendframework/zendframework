@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.dir"><info><title>Dir</title></info>
     
 
@@ -24,21 +22,21 @@
             A basic example of usage is below:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Dir();
 
-print $filter-&gt;filter('/etc/passwd');
-</programlisting>
+print $filter->filter('/etc/passwd');
+]]></programlisting>
 
         <para>
             This returns "<filename>/etc</filename>".
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Dir();
 
-print $filter-&gt;filter('C:/Temp/x');
-</programlisting>
+print $filter->filter('C:/Temp/x');
+]]></programlisting>
 
         <para>
             This returns "<filename>C:/Temp</filename>".

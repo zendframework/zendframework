@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.zones"><info><title>Zend_Service_Amazon_Ec2: Regions and Availability Zones</title></info>
     
 
@@ -44,14 +42,14 @@
                 regions are available. Each array will contain regionName and regionUrl.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $ec2_region = new Zend_Service_Amazon_Ec2_Region('aws_key','aws_secret_key');
-$regions = $ec2_region-&gt;describe();
+$regions = $ec2_region->describe();
 
 foreach($regions as $region) {
-    print $region['regionName'] . ' -- ' . $region['regionUrl'] . '&lt;br /&gt;';
+    print $region['regionName'] . ' -- ' . $region['regionUrl'] . '<br />';
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 
@@ -83,15 +81,15 @@ foreach($regions as $region) {
                 are available. Each array will contain zoneName and zoneState.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $ec2_zones = new Zend_Service_Amazon_Ec2_Availabilityzones('aws_key',
                                                            'aws_secret_key');
-$zones = $ec2_zones-&gt;describe();
+$zones = $ec2_zones->describe();
 
 foreach($zones as $zone) {
-    print $zone['zoneName'] . ' -- ' . $zone['zoneState'] . '&lt;br /&gt;';
+    print $zone['zoneName'] . ' -- ' . $zone['zoneState'] . '<br />';
 }
-</programlisting>
+]]></programlisting>
         </example>
     </section>
 </section>

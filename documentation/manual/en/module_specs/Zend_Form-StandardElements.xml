@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.standardElements"><info><title>Standard Form Elements Shipped With Zend Framework</title></info>
     
 
@@ -64,9 +62,9 @@
             or 'captcha', when specifying a plugin loader prefix path:
         </para>
 
-        <programlisting language="php">
-$element-&gt;addPrefixPath('My_Captcha', 'My/Captcha/', 'captcha');
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$element->addPrefixPath('My_Captcha', 'My/Captcha/', 'captcha');
+]]></programlisting>
 
         <para>
             Captcha's may then be registered using the <methodname>setCaptcha()</methodname>
@@ -74,13 +72,13 @@ $element-&gt;addPrefixPath('My_Captcha', 'My/Captcha/', 'captcha');
             short name of a CAPTCHA adapter:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Concrete instance:
-$element-&gt;setCaptcha(new Zend_Captcha_Figlet());
+$element->setCaptcha(new Zend_Captcha_Figlet());
 
 // Using shortnames:
-$element-&gt;setCaptcha('Dumb');
-</programlisting>
+$element->setCaptcha('Dumb');
+]]></programlisting>
 
         <para>
             If you wish to load your element via configuration, specify either
@@ -88,28 +86,28 @@ $element-&gt;setCaptcha('Dumb');
             both the keys 'captcha' and 'captchaOptions':
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 // Using single captcha key:
 $element = new Zend_Form_Element_Captcha('foo', array(
-    'label' =&gt; "Please verify you're a human",
-    'captcha' =&gt; array(
-        'captcha' =&gt; 'Figlet',
-        'wordLen' =&gt; 6,
-        'timeout' =&gt; 300,
+    'label' => "Please verify you're a human",
+    'captcha' => array(
+        'captcha' => 'Figlet',
+        'wordLen' => 6,
+        'timeout' => 300,
     ),
 ));
 
 // Using both captcha and captchaOptions:
 $element = new Zend_Form_Element_Captcha('foo', array(
-    'label' =&gt; "Please verify you're a human",
-    'captcha' =&gt; 'Figlet',
-    'captchaOptions' =&gt; array(
-        'captcha' =&gt; 'Figlet',
-        'wordLen' =&gt; 6,
-        'timeout' =&gt; 300,
+    'label' => "Please verify you're a human",
+    'captcha' => 'Figlet',
+    'captchaOptions' => array(
+        'captcha' => 'Figlet',
+        'wordLen' => 6,
+        'timeout' => 300,
     ),
 ));
-</programlisting>
+]]></programlisting>
 
         <para>
             The decorator used is determined by querying the captcha adapter. By
@@ -186,18 +184,18 @@ $element = new Zend_Form_Element_Captcha('foo', array(
                 arcane, but actual usage is relatively trivial:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $element = new Zend_Form_Element_File('foo');
-$element-&gt;setLabel('Upload an image:')
-        -&gt;setDestination('/var/www/upload');
+$element->setLabel('Upload an image:')
+        ->setDestination('/var/www/upload');
 // ensure only 1 file
-$element-&gt;addValidator('Count', false, 1);
+$element->addValidator('Count', false, 1);
 // limit to 100K
-$element-&gt;addValidator('Size', false, 102400);
+$element->addValidator('Size', false, 102400);
 // only JPEG, PNG, and GIFs
-$element-&gt;addValidator('Extension', false, 'jpg,png,gif');
-$form-&gt;addElement($element, 'foo');
-</programlisting>
+$element->addValidator('Extension', false, 'jpg,png,gif');
+$form->addElement($element, 'foo');
+]]></programlisting>
 
             <para>
                 You also need to ensure that the correct encoding type is provided to
@@ -205,9 +203,9 @@ $form-&gt;addElement($element, 'foo');
                 by setting the 'enctype' attribute on the form:
             </para>
 
-            <programlisting language="php">
-$form-&gt;setAttrib('enctype', 'multipart/form-data');
-</programlisting>
+            <programlisting language="php"><![CDATA[
+$form->setAttrib('enctype', 'multipart/form-data');
+]]></programlisting>
 
             <para>
                 After the form is validated successfully, you must receive the file
@@ -216,17 +214,17 @@ $form-&gt;setAttrib('enctype', 'multipart/form-data');
                 <methodname>getFileName()</methodname>:
             </para>
 
-            <programlisting language="php">
-if (!$form-&gt;isValid()) {
+            <programlisting language="php"><![CDATA[
+if (!$form->isValid()) {
     print "Uh oh... validation error";
 }
 
-if (!$form-&gt;foo-&gt;receive()) {
+if (!$form->foo->receive()) {
     print "Error receiving the file";
 }
 
-$location = $form-&gt;foo-&gt;getFileName();
-</programlisting>
+$location = $form->foo->getFileName();
+]]></programlisting>
         </example>
 
         <note><info><title>Default Upload Location</title></info>
@@ -255,9 +253,9 @@ $location = $form-&gt;foo-&gt;getFileName();
             that the file itself is the value of the file element.
         </para>
 
-        <programlisting language="php">
-$form-&gt;getValues();
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$form->getValues();
+]]></programlisting>
 
         <note>
             <para>
@@ -282,12 +280,12 @@ $form-&gt;getValues();
                 First call <methodname>setValueDisabled(true)</methodname>.
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $element = new Zend_Form_Element_File('foo');
-$element-&gt;setLabel('Upload an image:')
-        -&gt;setDestination('/var/www/upload')
-        -&gt;setValueDisabled(true);
-</programlisting>
+$element->setLabel('Upload an image:')
+        ->setDestination('/var/www/upload')
+        ->setValueDisabled(true);
+]]></programlisting>
 
             <para>
                 Now the file will not be received when you call
@@ -296,15 +294,15 @@ $element-&gt;setLabel('Upload an image:')
                 <classname>Zend_File_Transfer</classname> yourself.
             </para>
 
-            <programlisting language="php">
-$values = $form-&gt;getValues();
+            <programlisting language="php"><![CDATA[
+$values = $form->getValues();
 
-if ($form-&gt;isValid($form-&gt;getPost())) {
-    if (!$form-&gt;foo-&gt;receive()) {
+if ($form->isValid($form->getPost())) {
+    if (!$form->foo->receive()) {
         print "Upload error";
     }
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -338,19 +336,19 @@ if ($form-&gt;isValid($form-&gt;getPost())) {
         <example xml:id="zend.form.standardElements.file.isuploaded"><info><title>Checking if an optional file has been uploaded</title></info>
             
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $element = new Zend_Form_Element_File('foo');
-$element-&gt;setLabel('Upload an image:')
-        -&gt;setDestination('/var/www/upload')
-        -&gt;setRequired(false);
-$element-&gt;addValidator('Size', false, 102400);
-$form-&gt;addElement($element, 'foo');
+$element->setLabel('Upload an image:')
+        ->setDestination('/var/www/upload')
+        ->setRequired(false);
+$element->addValidator('Size', false, 102400);
+$form->addElement($element, 'foo');
 
 // The foo file element is optional but when it's given go into here
-if ($form-&gt;foo-&gt;isUploaded()) {
+if ($form->foo->isUploaded()) {
     // foo file given... do something
 }
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -368,20 +366,20 @@ if ($form-&gt;foo-&gt;isUploaded()) {
                 Just call <methodname>setMultiFile()</methodname> after the element is created:
             </para>
 
-            <programlisting language="php">
+            <programlisting language="php"><![CDATA[
 $element = new Zend_Form_Element_File('foo');
-$element-&gt;setLabel('Upload an image:')
-        -&gt;setDestination('/var/www/upload');
+$element->setLabel('Upload an image:')
+        ->setDestination('/var/www/upload');
 // ensure minimum 1, maximum 3 files
-$element-&gt;addValidator('Count', false, array('min' =&gt; 1, 'max' =&gt; 3));
+$element->addValidator('Count', false, array('min' => 1, 'max' => 3));
 // limit to 100K
-$element-&gt;addValidator('Size', false, 102400);
+$element->addValidator('Size', false, 102400);
 // only JPEG, PNG, and GIFs
-$element-&gt;addValidator('Extension', false, 'jpg,png,gif');
+$element->addValidator('Extension', false, 'jpg,png,gif');
 // defines 3 identical file elements
-$element-&gt;setMultiFile(3);
-$form-&gt;addElement($element, 'foo');
-</programlisting>
+$element->setMultiFile(3);
+$form->addElement($element, 'foo');
+]]></programlisting>
 
             <para>
                 You now have 3 identical file upload elements
@@ -420,14 +418,14 @@ $form-&gt;addElement($element, 'foo');
             file element.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $element = new Zend_Form_Element_File('foo');
-$element-&gt;setLabel('Upload an image:')
-        -&gt;setDestination('/var/www/upload')
-        -&gt;addValidator('Size', false, 102400) // limit to 100K
-        -&gt;setMaxFileSize(102400); // limits the filesize on the client side
-$form-&gt;addElement($element, 'foo');
-</programlisting>
+$element->setLabel('Upload an image:')
+        ->setDestination('/var/www/upload')
+        ->addValidator('Size', false, 102400) // limit to 100K
+        ->setMaxFileSize(102400); // limits the filesize on the client side
+$form->addElement($element, 'foo');
+]]></programlisting>
 
         <note><info><title>MaxFileSize with Multiple File Elements</title></info>
             
@@ -471,9 +469,9 @@ $form-&gt;addElement($element, 'foo');
             same names and different salts would not collide:
         </para>
 
-        <programlisting language="php">
-$form-&gt;addElement('hash', 'no_csrf_foo', array('salt' =&gt; 'unique'));
-</programlisting>
+        <programlisting language="php"><![CDATA[
+$form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
+]]></programlisting>
 
         <para>
             You can set the salt later using the <methodname>setSalt($salt)</methodname>
@@ -582,18 +580,18 @@ $form-&gt;addElement('hash', 'no_csrf_foo', array('salt' =&gt; 'unique'));
             and "bat":
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $element = new Zend_Form_Element_MultiCheckbox('foo', array(
-    'multiOptions' =&gt; array(
-        'foo' =&gt; 'Foo Option',
-        'bar' =&gt; 'Bar Option',
-        'baz' =&gt; 'Baz Option',
-        'bat' =&gt; 'Bat Option',
+    'multiOptions' => array(
+        'foo' => 'Foo Option',
+        'bar' => 'Bar Option',
+        'baz' => 'Baz Option',
+        'bat' => 'Bat Option',
     );
 ));
 
-$element-&gt;setValue(array('bar', 'bat'));
-</programlisting>
+$element->setValue(array('bar', 'bat'));
+]]></programlisting>
 
         <para>
             Note that even when setting a single value, you must pass an array.

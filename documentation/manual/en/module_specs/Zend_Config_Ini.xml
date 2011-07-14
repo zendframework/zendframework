@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.ini"><info><title>Zend_Config_Ini</title></info>
     
 
@@ -37,12 +35,12 @@
             the <classname>Zend_Config_Ini</classname> object. For example:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $options['nestSeparator'] = ':';
 $config = new Zend_Config_Ini('/path/to/config.ini',
                               'staging',
                               $options);
-</programlisting>
+]]></programlisting>
     </note>
 
     <example xml:id="zend.config.adapters.ini.example.using"><info><title>Using Zend_Config_Ini</title></info>
@@ -60,7 +58,7 @@ $config = new Zend_Config_Ini('/path/to/config.ini',
             <filename>/path/to/config.ini</filename>:
         </para>
 
-        <programlisting language="ini">
+        <programlisting language="ini"><![CDATA[
 ; Production site configuration data
 [production]
 webhost                  = www.example.com
@@ -76,7 +74,7 @@ database.params.dbname   = dbname
 database.params.host     = dev.example.com
 database.params.username = devuser
 database.params.password = devsecret
-</programlisting>
+]]></programlisting>
 
         <para>
             Next, assume that the application developer needs the staging configuration data from
@@ -84,12 +82,12 @@ database.params.password = devsecret
             the <acronym>INI</acronym> file and the staging section:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('/path/to/config.ini', 'staging');
 
-echo $config-&gt;database-&gt;params-&gt;host;   // prints "dev.example.com"
-echo $config-&gt;database-&gt;params-&gt;dbname; // prints "dbname"
-</programlisting>
+echo $config->database->params->host;   // prints "dev.example.com"
+echo $config->database->params->dbname; // prints "dbname"
+]]></programlisting>
     </example>
 
     <note>

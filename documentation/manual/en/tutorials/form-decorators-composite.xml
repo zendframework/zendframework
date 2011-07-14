@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.form.decorators.composite"><info><title>Creating and Rendering Composite Elements</title></info>
     
 
@@ -9,19 +7,19 @@
         example showing a "date of birth element":
     </para>
 
-    <programlisting language="php">
-&lt;div class="element"&gt;
-    &lt;?php echo $form-&gt;dateOfBirth-&gt;renderLabel() ?&gt;
-    &lt;?php echo $this-&gt;formText('dateOfBirth[day]', '', array(
-        'size' =&gt; 2, 'maxlength' =&gt; 2)) ?&gt;
+    <programlisting language="php"><![CDATA[
+<div class="element">
+    <?php echo $form->dateOfBirth->renderLabel() ?>
+    <?php echo $this->formText('dateOfBirth[day]', '', array(
+        'size' => 2, 'maxlength' => 2)) ?>
     /
-    &lt;?php echo $this-&gt;formText('dateOfBirth[month]', '', array(
-        'size' =&gt; 2, 'maxlength' =&gt; 2)) ?&gt;
+    <?php echo $this->formText('dateOfBirth[month]', '', array(
+        'size' => 2, 'maxlength' => 2)) ?>
     /
-    &lt;?php echo $this-&gt;formText('dateOfBirth[year]', '', array(
-        'size' =&gt; 4, 'maxlength' =&gt; 4)) ?&gt;
-&lt;/div&gt;
-</programlisting>
+    <?php echo $this->formText('dateOfBirth[year]', '', array(
+        'size' => 4, 'maxlength' => 4)) ?>
+</div>
+]]></programlisting>
 
     <para>
         How might you represent this element as a <classname>Zend_Form_Element</classname>?
@@ -103,7 +101,7 @@
             Here's what the class would look like:
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class My_Form_Element_Date extends Zend_Form_Element_Xhtml
 {
     protected $_dateFormat = '%year%-%month%-%day%';
@@ -113,57 +111,57 @@ class My_Form_Element_Date extends Zend_Form_Element_Xhtml
 
     public function setDay($value)
     {
-        $this-&gt;_day = (int) $value;
+        $this->_day = (int) $value;
         return $this;
     }
 
     public function getDay()
     {
-        return $this-&gt;_day;
+        return $this->_day;
     }
 
     public function setMonth($value)
     {
-        $this-&gt;_month = (int) $value;
+        $this->_month = (int) $value;
         return $this;
     }
 
     public function getMonth()
     {
-        return $this-&gt;_month;
+        return $this->_month;
     }
 
     public function setYear($value)
     {
-        $this-&gt;_year = (int) $value;
+        $this->_year = (int) $value;
         return $this;
     }
 
     public function getYear()
     {
-        return $this-&gt;_year;
+        return $this->_year;
     }
 
     public function setValue($value)
     {
         if (is_int($value)) {
-            $this-&gt;setDay(date('d', $value))
-                 -&gt;setMonth(date('m', $value))
-                 -&gt;setYear(date('Y', $value));
+            $this->setDay(date('d', $value))
+                 ->setMonth(date('m', $value))
+                 ->setYear(date('Y', $value));
         } elseif (is_string($value)) {
             $date = strtotime($value);
-            $this-&gt;setDay(date('d', $date))
-                 -&gt;setMonth(date('m', $date))
-                 -&gt;setYear(date('Y', $date));
+            $this->setDay(date('d', $date))
+                 ->setMonth(date('m', $date))
+                 ->setYear(date('Y', $date));
         } elseif (is_array($value)
-                  &amp;&amp; (isset($value['day'])
-                      &amp;&amp; isset($value['month'])
-                      &amp;&amp; isset($value['year'])
+                  && (isset($value['day'])
+                      && isset($value['month'])
+                      && isset($value['year'])
                   )
         ) {
-            $this-&gt;setDay($value['day'])
-                 -&gt;setMonth($value['month'])
-                 -&gt;setYear($value['year']);
+            $this->setDay($value['day'])
+                 ->setMonth($value['month'])
+                 ->setYear($value['year']);
         } else {
             throw new Exception('Invalid date value provided');
         }
@@ -175,12 +173,12 @@ class My_Form_Element_Date extends Zend_Form_Element_Xhtml
     {
         return str_replace(
             array('%year%', '%month%', '%day%'),
-            array($this-&gt;getYear(), $this-&gt;getMonth(), $this-&gt;getDay()),
-            $this-&gt;_dateFormat
+            array($this->getYear(), $this->getMonth(), $this->getDay()),
+            $this->_dateFormat
         );
     }
 }
-</programlisting>
+]]></programlisting>
 
         <para>
             This class gives some nice flexibility -- we can set default values from our database,
@@ -208,51 +206,51 @@ class My_Form_Element_Date extends Zend_Form_Element_Xhtml
             will then be aggregated to form the final markup.
         </para>
 
-        <programlisting language="php">
+        <programlisting language="php"><![CDATA[
 class My_Form_Decorator_Date extends Zend_Form_Decorator_Abstract
 {
     public function render($content)
     {
-        $element = $this-&gt;getElement();
+        $element = $this->getElement();
         if (!$element instanceof My_Form_Element_Date) {
             // only want to render Date elements
             return $content;
         }
 
-        $view = $element-&gt;getView();
+        $view = $element->getView();
         if (!$view instanceof Zend_View_Interface) {
             // using view helpers, so do nothing if no view present
             return $content;
         }
 
-        $day   = $element-&gt;getDay();
-        $month = $element-&gt;getMonth();
-        $year  = $element-&gt;getYear();
-        $name  = $element-&gt;getFullyQualifiedName();
+        $day   = $element->getDay();
+        $month = $element->getMonth();
+        $year  = $element->getYear();
+        $name  = $element->getFullyQualifiedName();
 
         $params = array(
-            'size'      =&gt; 2,
-            'maxlength' =&gt; 2,
+            'size'      => 2,
+            'maxlength' => 2,
         );
         $yearParams = array(
-            'size'      =&gt; 4,
-            'maxlength' =&gt; 4,
+            'size'      => 4,
+            'maxlength' => 4,
         );
 
-        $markup = $view-&gt;formText($name . '[day]', $day, $params)
-                . ' / ' . $view-&gt;formText($name . '[month]', $month, $params)
-                . ' / ' . $view-&gt;formText($name . '[year]', $year, $yearParams);
+        $markup = $view->formText($name . '[day]', $day, $params)
+                . ' / ' . $view->formText($name . '[month]', $month, $params)
+                . ' / ' . $view->formText($name . '[year]', $year, $yearParams);
 
-        switch ($this-&gt;getPlacement()) {
+        switch ($this->getPlacement()) {
             case self::PREPEND:
-                return $markup . $this-&gt;getSeparator() . $content;
+                return $markup . $this->getSeparator() . $content;
             case self::APPEND:
             default:
-                return $content . $this-&gt;getSeparator() . $markup;
+                return $content . $this->getSeparator() . $markup;
         }
     }
 }
-</programlisting>
+]]></programlisting>
 
     <para>
         We now have to do a minor tweak to our form element, and tell it that we want to use the
@@ -260,14 +258,14 @@ class My_Form_Decorator_Date extends Zend_Form_Decorator_Abstract
         the decorator path. We can do that in the constructor:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 class My_Form_Element_Date extends Zend_Form_Element_Xhtml
 {
     // ...
 
     public function __construct($spec, $options = null)
     {
-        $this-&gt;addPrefixPath(
+        $this->addPrefixPath(
             'My_Form_Decorator',
             'My/Form/Decorator',
             'decorator'
@@ -277,7 +275,7 @@ class My_Form_Element_Date extends Zend_Form_Element_Xhtml
 
     // ...
 }
-</programlisting>
+]]></programlisting>
 
     <para>
         Note that this is being done in the constructor and not in <methodname>init()</methodname>.
@@ -293,69 +291,69 @@ class My_Form_Element_Date extends Zend_Form_Element_Xhtml
         our new <classname>Date</classname> decorator:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 class My_Form_Element_Date extends Zend_Form_Element_Xhtml
 {
     // ...
 
     public function loadDefaultDecorators()
     {
-        if ($this-&gt;loadDefaultDecoratorsIsDisabled()) {
+        if ($this->loadDefaultDecoratorsIsDisabled()) {
             return;
         }
 
-        $decorators = $this-&gt;getDecorators();
+        $decorators = $this->getDecorators();
         if (empty($decorators)) {
-            $this-&gt;addDecorator('Date')
-                 -&gt;addDecorator('Errors')
-                 -&gt;addDecorator('Description', array(
-                     'tag'   =&gt; 'p',
-                     'class' =&gt; 'description'
+            $this->addDecorator('Date')
+                 ->addDecorator('Errors')
+                 ->addDecorator('Description', array(
+                     'tag'   => 'p',
+                     'class' => 'description'
                  ))
-                 -&gt;addDecorator('HtmlTag', array(
-                     'tag' =&gt; 'dd',
-                     'id'  =&gt; $this-&gt;getName() . '-element'
+                 ->addDecorator('HtmlTag', array(
+                     'tag' => 'dd',
+                     'id'  => $this->getName() . '-element'
                  ))
-                 -&gt;addDecorator('Label', array('tag' =&gt; 'dt'));
+                 ->addDecorator('Label', array('tag' => 'dt'));
         }
     }
 
     // ...
 }
-</programlisting>
+]]></programlisting>
 
     <para>
         What does the final output look like? Let's consider the following element:
     </para>
 
-    <programlisting language="php">
+    <programlisting language="php"><![CDATA[
 $d = new My_Form_Element_Date('dateOfBirth');
-$d-&gt;setLabel('Date of Birth: ')
-  -&gt;setView(new Zend_View());
+$d->setLabel('Date of Birth: ')
+  ->setView(new Zend_View());
 
 // These are equivalent:
-$d-&gt;setValue('20 April 2009');
-$d-&gt;setValue(array('year' =&gt; '2009', 'month' =&gt; '04', 'day' =&gt; '20'));
-</programlisting>
+$d->setValue('20 April 2009');
+$d->setValue(array('year' => '2009', 'month' => '04', 'day' => '20'));
+]]></programlisting>
 
     <para>
         If you then echo this element, you get the following markup (with some slight whitespace
         modifications for readability):
     </para>
 
-    <programlisting language="html">
-&lt;dt id="dateOfBirth-label"&gt;&lt;label for="dateOfBirth" class="optional"&gt;
+    <programlisting language="html"><![CDATA[
+<dt id="dateOfBirth-label"><label for="dateOfBirth" class="optional">
     Date of Birth:
-&lt;/label&gt;&lt;/dt&gt;
-&lt;dd id="dateOfBirth-element"&gt;
-    &lt;input type="text" name="dateOfBirth[day]" id="dateOfBirth-day"
-        value="20" size="2" maxlength="2"&gt; /
-    &lt;input type="text" name="dateOfBirth[month]" id="dateOfBirth-month"
-        value="4" size="2" maxlength="2"&gt; /
-    &lt;input type="text" name="dateOfBirth[year]" id="dateOfBirth-year"
-        value="2009" size="4" maxlength="4"&gt;
-&lt;/dd&gt;
-</programlisting>
+</label></dt>
+<dd id="dateOfBirth-element">
+    <input type="text" name="dateOfBirth[day]" id="dateOfBirth-day"
+        value="20" size="2" maxlength="2"> /
+    <input type="text" name="dateOfBirth[month]" id="dateOfBirth-month"
+        value="4" size="2" maxlength="2"> /
+    <input type="text" name="dateOfBirth[year]" id="dateOfBirth-year"
+        value="2009" size="4" maxlength="4">
+</dd>
+]]></programlisting>
     </section>
 
     <section xml:id="learning.form.decorators.composite.conclusion"><info><title>Conclusion</title></info>

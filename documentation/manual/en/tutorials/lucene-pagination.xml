@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.lucene.pagination">
-    <title>Search result pagination</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.pagination"><info><title>Search result pagination</title></info>
+    
 
     <para>
         As <link linkend="learning.lucene.searching.identifiers">mentioned above</link>, search
@@ -15,34 +16,34 @@
         retrive documents from the index during the next script execution.
     </para>
 
-    <example id="learning.lucene.pagination.example">
-        <title>Search result pagination example</title>
+    <example xml:id="learning.lucene.pagination.example"><info><title>Search result pagination example</title></info>
+        
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $cacheId = md5($query);
 
-if (!$resultSet = $cache->load($cacheId)) {
-    $hits = $index->find($query);
+if (!$resultSet = $cache-&gt;load($cacheId)) {
+    $hits = $index-&gt;find($query);
     $resultSet = array();
     foreach ($hits as $hit) {
         $resultSetEntry          = array();
-        $resultSetEntry['id']    = $hit->id;
-        $resultSetEntry['score'] = $hit->score;
+        $resultSetEntry['id']    = $hit-&gt;id;
+        $resultSetEntry['score'] = $hit-&gt;score;
 
         $resultSet[] = $resultSetEntry;
     }
 
-    $cache->save($resultSet, $cacheId);
+    $cache-&gt;save($resultSet, $cacheId);
 }
 
 $publishedResultSet = array();
-for ($resultId = $startId; $resultId < $endId; $resultId++) {
+for ($resultId = $startId; $resultId &lt; $endId; $resultId++) {
     $publishedResultSet[$resultId] = array(
-        'id'    => $resultSet[$resultId]['id'],
-        'score' => $resultSet[$resultId]['score'],
-        'doc'   => $index->getDocument($resultSet[$resultId]['id']),
+        'id'    =&gt; $resultSet[$resultId]['id'],
+        'score' =&gt; $resultSet[$resultId]['score'],
+        'doc'   =&gt; $index-&gt;getDocument($resultSet[$resultId]['id']),
     );
 }
-]]></programlisting>
+</programlisting>
     </example>
-</sect1>
+</section>

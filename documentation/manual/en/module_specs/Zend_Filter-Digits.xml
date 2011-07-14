@@ -1,45 +1,46 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.digits">
-    <title>Digits</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.digits"><info><title>Digits</title></info>
+    
 
     <para>
         Returns the string <varname>$value</varname>, removing all but digits.
     </para>
 
-     <sect3 id="zend.filter.set.digits.options">
-        <title>Supported options for Zend_Filter_Digits</title>
+     <section xml:id="zend.filter.set.digits.options"><info><title>Supported options for Zend_Filter_Digits</title></info>
+        
 
         <para>
             There are no additional options for <classname>Zend_Filter_Digits</classname>.
         </para>
-    </sect3>
+    </section>
 
-     <sect3 id="zend.filter.set.digits.basic">
-        <title>Basic usage</title>
+     <section xml:id="zend.filter.set.digits.basic"><info><title>Basic usage</title></info>
+        
 
         <para>
             A basic example of usage is below:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $filter = new Zend_Filter_Digits();
 
-print $filter->filter('October 2009');
-]]></programlisting>
+print $filter-&gt;filter('October 2009');
+</programlisting>
 
         <para>
             This returns "2009".
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $filter = new Zend_Filter_Digits();
 
-print $filter->filter('HTML 5 for Dummies');
-]]></programlisting>
+print $filter-&gt;filter('HTML 5 for Dummies');
+</programlisting>
 
         <para>
             This returns "5".
         </para>
-    </sect3>
-</sect2>
+    </section>
+</section>

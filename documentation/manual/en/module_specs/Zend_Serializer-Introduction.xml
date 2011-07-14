@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.serializer.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.serializer.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_Serializer</classname> provides an adapter based interface to simply
@@ -9,29 +10,29 @@
         and recover.
     </para>
 
-    <example id="zend.serializer.introduction.example.dynamic">
-        <title>Using Zend_Serializer dynamic interface</title>
+    <example xml:id="zend.serializer.introduction.example.dynamic"><info><title>Using Zend_Serializer dynamic interface</title></info>
+        
 
         <para>
             To instantiate a serializer you should use the factory method with the name of the
             adapter:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $serializer = Zend_Serializer::factory('PhpSerialize');
 // Now $serializer is an instance of Zend_Serializer_Adapter_AdapterInterface,
 // specifically Zend_Serializer_Adapter_PhpSerialize
 
 try {
-    $serialized = $serializer->serialize($data);
+    $serialized = $serializer-&gt;serialize($data);
     // now $serialized is a string
 
-    $unserialized = $serializer->unserialize($serialized);
+    $unserialized = $serializer-&gt;unserialize($serialized);
     // now $data == $unserialized
 } catch (Zend_Serializer_Exception $e) {
     echo $e;
 }
-]]></programlisting>
+</programlisting>
     </example>
 
     <para>
@@ -51,25 +52,25 @@ try {
         <methodname>serialize()</methodname> and <methodname>unserialize()</methodname> methods:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $serializer = Zend_Serializer::factory('Wddx', array(
-    'comment' => 'serialized by Zend_Serializer',
+    'comment' =&gt; 'serialized by Zend_Serializer',
 ));
 
 try {
-    $serialized = $serializer->serialize(
+    $serialized = $serializer-&gt;serialize(
         $data,
-        array('comment' => 'change comment')
+        array('comment' =&gt; 'change comment')
     );
 
-    $unserialized = $serializer->unserialize(
+    $unserialized = $serializer-&gt;unserialize(
         $serialized,
         array(/* options for unserialize */)
     );
 } catch (Zend_Serializer_Exception $e) {
     echo $e;
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         Options passed to the <methodname>factory()</methodname> are valid for the instantiated
@@ -79,8 +80,8 @@ try {
         method.
     </para>
 
-    <example id="zend.serializer.introduction.example.static.php">
-        <title>Using the Zend_Serializer static interface</title>
+    <example xml:id="zend.serializer.introduction.example.static.php"><info><title>Using the Zend_Serializer static interface</title></info>
+        
 
         <para>
             You can register a specific serializer adapter as a default serialization adapter for
@@ -89,7 +90,7 @@ try {
             option using the <methodname>setDefaultAdapter()</methodname> static method.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 Zend_Serializer::setDefaultAdapter('PhpSerialize', $options);
 // or
 $serializer = Zend_Serializer::factory('PhpSerialize', $options);
@@ -101,9 +102,6 @@ try {
 } catch (Zend_Serializer_Exception $e) {
     echo $e;
 }
-]]></programlisting>
+</programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

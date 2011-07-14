@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.tool.usage.cli">
-    <title>Using Zend_Tool On The Command Line</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.usage.cli"><info><title>Using Zend_Tool On The Command Line</title></info>
+    
 
     <para>
         The <acronym>CLI</acronym>, or command line tool (internally known as the console tool),
@@ -18,11 +19,11 @@
     </sect2>
     -->
 
-    <sect2 id="zend.tool.usage.cli.installation">
-        <title>Installation</title>
+    <section xml:id="zend.tool.usage.cli.installation"><info><title>Installation</title></info>
+        
 
-        <sect3 id="zend.tool.usage.cli.installation.download-and-go">
-            <title>Download And Go</title>
+        <section xml:id="zend.tool.usage.cli.installation.download-and-go"><info><title>Download And Go</title></info>
+            
 
             <para>
                 First download Zend Framework. This can be done by going to framework.zend.com
@@ -33,10 +34,10 @@
                 <emphasis>same</emphasis> directory as the location of the <acronym>PHP</acronym>
                 cli binary.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.tool.usage.cli.installation.pear">
-            <title>Installing Via Pear</title>
+        <section xml:id="zend.tool.usage.cli.installation.pear"><info><title>Installing Via Pear</title></info>
+            
 
             <para>
                 To install via PEAR, you must use the 3rd party zfcampus.org site to retrieve the
@@ -47,20 +48,20 @@
                 system that will allow you to run them without any additional setup.
             </para>
 
-            <programlisting language="text"><![CDATA[
+            <programlisting language="text">
 pear discover-channel pear.zfcampus.org
 pear install zfcampus/zf
-]]></programlisting>
+</programlisting>
 
             <para>
                 That is it. After the initial install, you should be able to continue on by
                 running the zf command. Go good way to check to see if it't there is to run
                 zf --help
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.tool.usage.cli.installation.install-by-hand">
-            <title>Installing by Hand</title>
+        <section xml:id="zend.tool.usage.cli.installation.install-by-hand"><info><title>Installing by Hand</title></info>
+            
 
             <para>
                 Installing by hand refers to the process of forcing the zf.php and Zend Framework
@@ -84,27 +85,27 @@ pear install zfcampus/zf
                 environement". The environment variables for setting the zf.php include_path,
                 ZF_INCLUDE_PATH and ZF_INCLUDE_PATH_PREPEND, are the ones of most interest.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.tool.usage.cli.general-purpose-commands">
-        <title>General Purpose Commands</title>
+    <section xml:id="zend.tool.usage.cli.general-purpose-commands"><info><title>General Purpose Commands</title></info>
+        
 
-        <sect3 id="zend.tool.usage.cli.general-purpose-commands.version">
-            <title>Version</title>
+        <section xml:id="zend.tool.usage.cli.general-purpose-commands.version"><info><title>Version</title></info>
+            
 
             <para>
                 This will show the current version number of the copy of Zend Framework the zf.php
                 tool is using.
             </para>
 
-            <programlisting language="text"><![CDATA[
+            <programlisting language="text">
 zf show version
-]]></programlisting>
-        </sect3>
+</programlisting>
+        </section>
 
-        <sect3 id="zend.tool.usage.cli.general-purpose-commands.built-in-help">
-            <title>Built-in Help</title>
+        <section xml:id="zend.tool.usage.cli.general-purpose-commands.built-in-help"><info><title>Built-in Help</title></info>
+            
 
             <para>
                 The built-in help system is the primary place where you can get up-to-date
@@ -114,9 +115,9 @@ zf show version
                 easiest way to retrieve the help screen is the following:
             </para>
 
-            <programlisting language="text"><![CDATA[
+            <programlisting language="text">
 zf --help
-]]></programlisting>
+</programlisting>
 
             <para>
                 This will give you an overview of the various capabilities of the system.
@@ -127,42 +128,42 @@ zf --help
                 can go in place of the question mark. For example:
             </para>
 
-            <programlisting language="text"><![CDATA[
+            <programlisting language="text">
 zf ? controller
-]]></programlisting>
+</programlisting>
 
             <para>
                 The above means "show me all 'actions' for the provider 'controller'"; while the
                 following:
             </para>
 
-            <programlisting language="text"><![CDATA[
+            <programlisting language="text">
 zf show ?
-]]></programlisting>
+</programlisting>
 
             <para>
                 means "show me all providers that support the 'show' action". This works for
                 drilling down into options as well as you can see in the following examples:
             </para>
 
-            <programlisting language="text"><![CDATA[
+            <programlisting language="text">
 zf show version.? (show any specialties)
 zf show version ? (show any options)
-]]></programlisting>
-        </sect3>
+</programlisting>
+        </section>
 
-        <sect3 id="zend.tool.usage.cli.general-purpose-commands.manifest">
-            <title>Manifest</title>
+        <section xml:id="zend.tool.usage.cli.general-purpose-commands.manifest"><info><title>Manifest</title></info>
+            
 
             <para>
                 This will show what information is in the tooling systems manifest. This is more
                 important for provider developers than casual users of the tooling system.
             </para>
 
-            <programlisting language="text"><![CDATA[
+            <programlisting language="text">
 zf show manifest
-]]></programlisting>
-        </sect3>
+</programlisting>
+        </section>
 
         <!--
         <sect3 id="zend.tool.usage.cli.general-purpose-commands.tool-configuration">
@@ -172,13 +173,13 @@ zf show manifest
 
         </sect3>
         -->
-    </sect2>
+    </section>
 
-    <sect2 id="zend.tool.usage.cli.project-specific-commands">
-        <title>Project Specific Commands</title>
+    <section xml:id="zend.tool.usage.cli.project-specific-commands"><info><title>Project Specific Commands</title></info>
+        
 
-        <sect3 id="zend.tool.usage.cli.project-specific-commands.project">
-            <title>Project</title>
+        <section xml:id="zend.tool.usage.cli.project-specific-commands.project"><info><title>Project</title></info>
+            
 
             <para>
                 The project provider is the first command you might want to run. This will setup the
@@ -186,9 +187,9 @@ zf show manifest
                 providers can be executed.
             </para>
 
-            <programlisting language="text"><![CDATA[
+            <programlisting language="text">
 zf create project MyProjectName
-]]></programlisting>
+</programlisting>
 
             <para>
                 This will create a project in a directory called ./MyProjectName. From this point
@@ -196,10 +197,10 @@ zf create project MyProjectName
                 issued from within the project directory you had just created. So, after creation,
                 changing into that directory is required.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.tool.usage.cli.project-specific-commands.module">
-            <title>Project</title>
+        <section xml:id="zend.tool.usage.cli.project-specific-commands.module"><info><title>Project</title></info>
+            
 
             <para>
                 The module provider allows for the easy creation of a Zend Framework module. A
@@ -209,18 +210,18 @@ zf create project MyProjectName
                 directory without duplicating the modules directory itself. For example:
             </para>
 
-            <programlisting language="text"><![CDATA[
+            <programlisting language="text">
 zf create module Blog
-]]></programlisting>
+</programlisting>
 
             <para>
                 This will create a module named Blog at application/modules/Blog, and all of the
                 artifacts that a module will need.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.tool.usage.cli.project-specific-commands.controller">
-            <title>Controller</title>
+        <section xml:id="zend.tool.usage.cli.project-specific-commands.controller"><info><title>Controller</title></info>
+            
 
             <para>
                 The controller provider is responsible for creating (mostly) empty controllers as
@@ -228,9 +229,9 @@ zf create module Blog
                 create an 'Auth' controlller, for example, execute:
             </para>
 
-            <programlisting language="text"><![CDATA[
+            <programlisting language="text">
 zf create controller Auth
-]]></programlisting>
+</programlisting>
 
             <para>
                 This will create a controller named Auth, specifically it will create a file at
@@ -238,101 +239,101 @@ zf create controller Auth
                 If you wish to create a controller for a module, use any of the following:
             </para>
 
-            <programlisting language="text"><![CDATA[
+            <programlisting language="text">
 zf create controller Post 1 Blog
 zf create controller Post -m Blog
 zf create controller Post --module=Blog
-]]></programlisting>
+</programlisting>
 
             <para>
                 Note: In the first command, 1 is the value for the "includeIndexAction" flag.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.tool.usage.cli.project-specific-commands.action">
-            <title>Action</title>
+        <section xml:id="zend.tool.usage.cli.project-specific-commands.action"><info><title>Action</title></info>
+            
 
             <para>
                 To create an action within an existing controller:
             </para>
 
-            <programlisting language="text"><![CDATA[
+            <programlisting language="text">
 zf create action login Auth
 zf create action login -c Auth
 zf create action login --controller-name=Auth
-]]></programlisting>
-        </sect3>
+</programlisting>
+        </section>
 
-        <sect3 id="zend.tool.usage.cli.project-specific-commands.view">
-            <title>View</title>
+        <section xml:id="zend.tool.usage.cli.project-specific-commands.view"><info><title>View</title></info>
+            
 
             <para>
                 To create a view outside of the normal controller/action creation, you would use
                 one of the following:
             </para>
 
-            <programlisting language="text"><![CDATA[
+            <programlisting language="text">
 zf create view Auth my-script-name
 zf create view -c Auth -a my-script-name
-            ]]></programlisting>
+            </programlisting>
 
             <para>
                 This will create a view script in the controller folder of Auth.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.tool.usage.cli.project-specific-commands.model">
-            <title>Model</title>
+        <section xml:id="zend.tool.usage.cli.project-specific-commands.model"><info><title>Model</title></info>
+            
 
             <para>
                 The model provider is only responsible for creating the proper model files,
                 with the proper name inside the application folder. For example
             </para>
 
-            <programlisting language="text"><![CDATA[
+            <programlisting language="text">
 zf create model User
-]]></programlisting>
+</programlisting>
 
             <para>
                 If you wish to create a model within a specific module:
             </para>
 
-            <programlisting language="text"><![CDATA[
+            <programlisting language="text">
 zf create model Post -m Blog
-]]></programlisting>
+</programlisting>
 
             <para>
                 The above will create a 'Post' model inside of the 'Blog' module.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.tool.usage.cli.project-specific-commands.form">
-            <title>Form</title>
+        <section xml:id="zend.tool.usage.cli.project-specific-commands.form"><info><title>Form</title></info>
+            
 
             <para>
                 The form provider is only responsible for creating the proper form file and
                 init() method, with the proper name inside the application folder. For example:
             </para>
 
-            <programlisting language="text"><![CDATA[
+            <programlisting language="text">
 zf create form Auth
-]]></programlisting>
+</programlisting>
 
             <para>
                 If you wish to create a model within a specific module:
             </para>
 
-            <programlisting language="text"><![CDATA[
+            <programlisting language="text">
 zf create form Comment -m Blog
-]]></programlisting>
+</programlisting>
 
             <para>
                 The above will create a 'Comment' form inside of the 'Blog' module.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.tool.usage.cli.project-specific-commands.database-adapter">
-            <title>DbAdapter</title>
+        <section xml:id="zend.tool.usage.cli.project-specific-commands.database-adapter"><info><title>DbAdapter</title></info>
+            
 
             <para>
                 To configure a DbAdapter, you will need to provide the information as a url
@@ -363,9 +364,9 @@ zf create form Comment -m Blog
                 The following will have to be run on the command line:
             </para>
 
-            <programlisting language="text"><![CDATA[
-zf configure dbadapter "adapter=Pdo_Mysql&username=test&password=test&dbname=test"
-]]></programlisting>
+            <programlisting language="text">
+zf configure dbadapter "adapter=Pdo_Mysql&amp;username=test&amp;password=test&amp;dbname=test"
+</programlisting>
 
             <para>
                 This assumes you wish to store this information inside of the
@@ -374,14 +375,14 @@ zf configure dbadapter "adapter=Pdo_Mysql&username=test&password=test&dbname=tes
                 application config file.
             </para>
 
-            <programlisting language="text"><![CDATA[
-zf configure dbadapter "adapter=Pdo_Sqlite&dbname=../data/test.db" development
-zf configure dbadapter "adapter=Pdo_Sqlite&dbname=../data/test.db" -s development
-]]></programlisting>
-        </sect3>
+            <programlisting language="text">
+zf configure dbadapter "adapter=Pdo_Sqlite&amp;dbname=../data/test.db" development
+zf configure dbadapter "adapter=Pdo_Sqlite&amp;dbname=../data/test.db" -s development
+</programlisting>
+        </section>
 
-        <sect3 id="zend.tool.usage.cli.project-specific-commands.db-table">
-            <title>DbTable</title>
+        <section xml:id="zend.tool.usage.cli.project-specific-commands.db-table"><info><title>DbTable</title></info>
+            
 
             <para>
                 The DbTable provider is responsible for creating
@@ -391,23 +392,23 @@ zf configure dbadapter "adapter=Pdo_Sqlite&dbname=../data/test.db" -s developmen
                 and the <emphasis>actual database table name</emphasis>. For example:
             </para>
 
-            <programlisting language="text"><![CDATA[
+            <programlisting language="text">
 zf create dbtable User user
 zf create dbtable User -a user
 
 // also accepts a force option to overwrite existing files
 zf create dbtable User user -f
 zf create dbtable User user --force-override
-]]></programlisting>
+</programlisting>
 
             <para>
                 The DbTable provider is also capable of creating the proper files by
                 scanning the database configured with the above DbAdapter provider.
             </para>
 
-            <programlisting language="text"><![CDATA[
+            <programlisting language="text">
 zf create dbtable.from-database
-]]></programlisting>
+</programlisting>
 
             <para>
                 When executing the above, it might make sense to use the pretend / "-p"
@@ -415,13 +416,13 @@ zf create dbtable.from-database
                 be found in the database.
             </para>
 
-            <programlisting language="text"><![CDATA[
+            <programlisting language="text">
 zf -p create dbtable.from-database
-]]></programlisting>
-        </sect3>
+</programlisting>
+        </section>
 
-        <sect3 id="zend.tool.usage.cli.project-specific-commands.layout">
-            <title>Layout</title>
+        <section xml:id="zend.tool.usage.cli.project-specific-commands.layout"><info><title>Layout</title></info>
+            
 
             <para>
                 Currently, the only supported action for layouts is simply to enable them
@@ -429,17 +430,17 @@ zf -p create dbtable.from-database
                 resource to work, and create the proper directories and layout.phtml file.
             </para>
 
-            <programlisting language="text"><![CDATA[
+            <programlisting language="text">
 zf enable layout
-]]></programlisting>
-        </sect3>
-    </sect2>
+</programlisting>
+        </section>
+    </section>
 
-    <sect2 id="zend.tool.usage.cli.environment-customization">
-        <title>Environment Customization</title>
+    <section xml:id="zend.tool.usage.cli.environment-customization"><info><title>Environment Customization</title></info>
+        
 
-        <sect3 id="zend.tool.usage.cli.environment-customization.storage-directory">
-            <title>The Storage Directory</title>
+        <section xml:id="zend.tool.usage.cli.environment-customization.storage-directory"><info><title>The Storage Directory</title></info>
+            
 
             <para>
                 The storage directory is important so that providers may have a place to find
@@ -447,13 +448,13 @@ zf enable layout
                 can be found below is the placement of a custom project profile file.
             </para>
 
-            <programlisting language="text"><![CDATA[
+            <programlisting language="text">
 zf --setup storage-directory
-]]></programlisting>
-        </sect3>
+</programlisting>
+        </section>
 
-        <sect3 id="zend.tool.usage.cli.environment-customization.configuration-file">
-            <title>The Configuration File</title>
+        <section xml:id="zend.tool.usage.cli.environment-customization.configuration-file"><info><title>The Configuration File</title></info>
+            
 
             <para>
                 This will create the proper zf.ini file. This <emphasis>should</emphasis>
@@ -462,13 +463,13 @@ zf --setup storage-directory
                 the users storage directory.
             </para>
 
-            <programlisting language="text"><![CDATA[
+            <programlisting language="text">
 zf --setup config-file
-]]></programlisting>
-        </sect3>
+</programlisting>
+        </section>
 
-        <sect3 id="zend.tool.usage.cli.environment-customization.environment-locations">
-            <title>Environment Locations</title>
+        <section xml:id="zend.tool.usage.cli.environment-customization.environment-locations"><info><title>Environment Locations</title></info>
+            
 
             <para>
                 These should be set if you wish to override the default places where zf will
@@ -592,6 +593,6 @@ zf --setup config-file
                     </itemizedlist>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.gdata.docs">
-    <title>Using Google Documents List Data API</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.docs"><info><title>Using Google Documents List Data API</title></info>
+    
 
     <para>
         The Google Documents List Data <acronym>API</acronym> allows client applications to
@@ -12,13 +13,12 @@
     </para>
 
     <para>
-        See <ulink
-            url="http://code.google.com/apis/documents/overview.html">http://code.google.com/apis/documents/overview.html</ulink>
+        See <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/documents/overview.html">http://code.google.com/apis/documents/overview.html</link>
         for more information about the Google Documents List <acronym>API</acronym>.
     </para>
 
-    <sect2 id="zend.gdata.docs.listdocuments">
-        <title>Get a List of Documents</title>
+    <section xml:id="zend.gdata.docs.listdocuments"><info><title>Get a List of Documents</title></info>
+        
 
         <para>
             You can get a list of the Google Documents for a particular user by using
@@ -29,24 +29,24 @@
             user.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $service = Zend_Gdata_Docs::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $docs = new Zend_Gdata_Docs($client);
-$feed = $docs->getDocumentListFeed();
-]]></programlisting>
+$feed = $docs-&gt;getDocumentListFeed();
+</programlisting>
 
         <para>
         The resulting <classname>Zend_Gdata_Docs_DocumentListFeed</classname> object
         represents the response from the server. This feed contains a list of
         <classname>Zend_Gdata_Docs_DocumentListEntry</classname> objects
-        (<command>$feed->entries</command>), each of which represents a single
+        (<command>$feed-&gt;entries</command>), each of which represents a single
         Google Document.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.docs.creating">
-        <title>Upload a Document</title>
+    <section xml:id="zend.gdata.docs.creating"><info><title>Upload a Document</title></info>
+        
 
         <para>
             You can create a new Google Document by uploading a word
@@ -56,7 +56,7 @@ $feed = $docs->getDocumentListFeed();
             information about the result from the server.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 /**
  * Upload the specified document
  *
@@ -84,7 +84,7 @@ function uploadDocument($docs, $html, $originalFileName,
   // Upload the file and convert it into a Google Document. The original
   // file name is used as the title of the document and the MIME type
   // is determined based on the extension on the original file name.
-  $newDocumentEntry = $docs->uploadFile($fileToUpload, $originalFileName,
+  $newDocumentEntry = $docs-&gt;uploadFile($fileToUpload, $originalFileName,
       null, Zend_Gdata_Docs::DOCUMENTS_LIST_FEED_URI);
 
   echo "New Document Title: ";
@@ -92,38 +92,36 @@ function uploadDocument($docs, $html, $originalFileName,
   if ($html) {
       // Find the URL of the HTML view of this document.
       $alternateLink = '';
-      foreach ($newDocumentEntry->link as $link) {
-          if ($link->getRel() === 'alternate') {
-              $alternateLink = $link->getHref();
+      foreach ($newDocumentEntry-&gt;link as $link) {
+          if ($link-&gt;getRel() === 'alternate') {
+              $alternateLink = $link-&gt;getHref();
           }
       }
       // Make the title link to the document on docs.google.com.
-      echo "<a href=\"$alternateLink\">\n";
+      echo "&lt;a href=\"$alternateLink\"&gt;\n";
   }
-  echo $newDocumentEntry->title."\n";
-  if ($html) {echo "</a>\n";}
+  echo $newDocumentEntry-&gt;title."\n";
+  if ($html) {echo "&lt;/a&gt;\n";}
 }
-]]></programlisting>
-    </sect2>
+</programlisting>
+    </section>
 
-    <sect2 id="zend.gdata.docs.queries">
-        <title>Searching the documents feed</title>
+    <section xml:id="zend.gdata.docs.queries"><info><title>Searching the documents feed</title></info>
+        
 
         <para>
-            You can search the Document List using some of the <ulink
-            url="http://code.google.com/apis/gdata/reference.html#Queries">standard
-            Google Data <acronym>API</acronym> query parameters</ulink>. Categories are used to
+            You can search the Document List using some of the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/gdata/reference.html#Queries">standard
+            Google Data <acronym>API</acronym> query parameters</link>. Categories are used to
             restrict the
             type of document (word processor document, spreadsheet) returned.
             The full-text query string is used to search the content of all
             the documents. More detailed information on parameters specific
-            to the Documents List can be found in the <ulink
-                url="http://code.google.com/apis/documents/reference.html#Parameters">Documents List
-                Data <acronym>API</acronym> Reference Guide</ulink>.
+            to the Documents List can be found in the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/documents/reference.html#Parameters">Documents List
+                Data <acronym>API</acronym> Reference Guide</link>.
         </para>
 
-        <sect3 id="zend.gdata.docs.listwpdocuments">
-            <title>Get a List of Word Processing Documents</title>
+        <section xml:id="zend.gdata.docs.listwpdocuments"><info><title>Get a List of Word Processing Documents</title></info>
+            
 
             <para>
                 You can also request a feed containing all of your documents of a specific type. For
@@ -131,27 +129,27 @@ function uploadDocument($docs, $html, $originalFileName,
                 category query as follows.
             </para>
 
-            <programlisting language="php"><![CDATA[
-$feed = $docs->getDocumentListFeed(
+            <programlisting language="php">
+$feed = $docs-&gt;getDocumentListFeed(
     'http://docs.google.com/feeds/documents/private/full/-/document');
-]]></programlisting>
-        </sect3>
+</programlisting>
+        </section>
 
-        <sect3 id="zend.gdata.docs.listspreadsheets">
-            <title>Get a List of Spreadsheets</title>
+        <section xml:id="zend.gdata.docs.listspreadsheets"><info><title>Get a List of Spreadsheets</title></info>
+            
 
             <para>
                 To request a list of your Google Spreadsheets, use the following category query:
             </para>
 
-            <programlisting language="php"><![CDATA[
-$feed = $docs->getDocumentListFeed(
+            <programlisting language="php">
+$feed = $docs-&gt;getDocumentListFeed(
     'http://docs.google.com/feeds/documents/private/full/-/spreadsheet');
-]]></programlisting>
-        </sect3>
+</programlisting>
+        </section>
 
-        <sect3 id="zend.gdata.docs.textquery">
-            <title>Performing a text query</title>
+        <section xml:id="zend.gdata.docs.textquery"><info><title>Performing a text query</title></info>
+            
 
             <para>
                 You can search the content of documents by using a
@@ -161,11 +159,11 @@ $feed = $docs->getDocumentListFeed(
                 the documents list for documents which contain the search string:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $docsQuery = new Zend_Gdata_Docs_Query();
-$docsQuery->setQuery($query);
-$feed = $client->getDocumentListFeed($docsQuery);
-]]></programlisting>
-        </sect3>
-    </sect2>
-</sect1>
+$docsQuery-&gt;setQuery($query);
+$feed = $client-&gt;getDocumentListFeed($docsQuery);
+</programlisting>
+        </section>
+    </section>
+</section>

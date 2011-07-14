@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.search.lucene.advanced">
-    <title>Advanced</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.search.lucene.advanced.format_migration">
-        <title>Starting from 1.6, handling index format transformations</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.advanced"><info><title>Advanced</title></info>
+    
+
+    <section xml:id="zend.search.lucene.advanced.format_migration"><info><title>Starting from 1.6, handling index format transformations</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> component works with Java Lucene 1.4-1.9, 2.1
@@ -12,7 +13,7 @@
         </para>
 
         <para>
-            Current index format may be requested using <code>$index->getFormatVersion()</code>
+            Current index format may be requested using <code>$index-&gt;getFormatVersion()</code>
             call. It returns one of the following values:
 
             <itemizedlist>
@@ -42,7 +43,7 @@
         <para>
             Index modifications are performed <emphasis>only</emphasis> if any index update is done.
             That happens if a new document is added to an index or index optimization is started
-            manually by <code>$index->optimize()</code> call.
+            manually by <code>$index-&gt;optimize()</code> call.
         </para>
 
         <para>
@@ -54,7 +55,7 @@
 
         <para>
             You may manage conversion process and assign target index format by
-            <code>$index->setFormatVersion()</code> which takes
+            <code>$index-&gt;setFormatVersion()</code> which takes
             <constant>Zend_Search_Lucene::FORMAT_2_1</constant> or
             <constant>Zend_Search_Lucene::FORMAT_2_3</constant> constant as a parameter:
 
@@ -78,8 +79,8 @@
             Backward conversions are not supported.
         </para>
 
-        <note>
-            <title>Important!</title>
+        <note><info><title>Important!</title></info>
+            
 
             <para>
                 Once index is converted to upper version it can't be converted back. So make a
@@ -87,10 +88,10 @@
                 possibility to go back.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.advanced.static">
-        <title>Using the index as static property</title>
+    <section xml:id="zend.search.lucene.advanced.static"><info><title>Using the index as static property</title></info>
+        
 
         <para>
             The <classname>Zend_Search_Lucene</classname> object uses the destructor method to
@@ -115,7 +116,7 @@
             line of the executed script.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 class Searcher {
     private static $_index;
 
@@ -125,7 +126,7 @@ class Searcher {
 }
 
 Searcher::initIndex();
-]]></programlisting>
+</programlisting>
 
         <para>
             All the same, the destructor for static properties is correctly invoked at this point in
@@ -155,7 +156,7 @@ Searcher::initIndex();
             destructor has nothing to do and will not throw exception:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 class Searcher {
     private static $_index;
 
@@ -166,7 +167,7 @@ class Searcher {
     ...
 
     public static function commit() {
-        self::$_index->commit();
+        self::$_index-&gt;commit();
     }
 }
 
@@ -178,6 +179,6 @@ Searcher::initIndex();
 ...
 Searcher::commit();
 ...
-]]></programlisting>
-    </sect2>
-</sect1>
+</programlisting>
+    </section>
+</section>

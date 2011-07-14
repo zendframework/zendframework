@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.navigation.pages.mvc">
-    <title>Zend_Navigation_Page_Mvc</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.mvc"><info><title>Zend_Navigation_Page_Mvc</title></info>
+    
 
     <para>
         <acronym>MVC</acronym> pages are defined using <acronym>MVC</acronym> parameters known from
@@ -13,8 +14,8 @@
         with the page's params to determine if the page is active.
     </para>
 
-    <table id="zend.navigation.pages.mvc.options">
-        <title>MVC page options</title>
+    <table xml:id="zend.navigation.pages.mvc.options"><info><title>MVC page options</title></info>
+        
 
         <tgroup cols="4">
             <thead>
@@ -86,48 +87,48 @@
         </para>
     </note>
 
-    <example id="zend.navigation.pages.mvc.example.getHref">
-        <title>getHref() generates the page URI</title>
+    <example xml:id="zend.navigation.pages.mvc.example.getHref"><info><title>getHref() generates the page URI</title></info>
+        
 
         <para>
             This example show that <acronym>MVC</acronym> pages use
             <classname>Zend_Controller_Action_Helper_Url</classname> internally
-            to generate <acronym>URI</acronym>s when calling <code>$page->getHref()</code>.
+            to generate <acronym>URI</acronym>s when calling <code>$page-&gt;getHref()</code>.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // getHref() returns /
 $page = new Zend_Navigation_Page_Mvc(array(
-    'action'     => 'index',
-    'controller' => 'index'
+    'action'     =&gt; 'index',
+    'controller' =&gt; 'index'
 ));
 
 // getHref() returns /blog/post/view
 $page = new Zend_Navigation_Page_Mvc(array(
-    'action'     => 'view',
-    'controller' => 'post',
-    'module'     => 'blog'
+    'action'     =&gt; 'view',
+    'controller' =&gt; 'post',
+    'module'     =&gt; 'blog'
 ));
 
 // getHref() returns /blog/post/view/id/1337
 $page = new Zend_Navigation_Page_Mvc(array(
-    'action'     => 'view',
-    'controller' => 'post',
-    'module'     => 'blog',
-    'params'     => array('id' => 1337)
+    'action'     =&gt; 'view',
+    'controller' =&gt; 'post',
+    'module'     =&gt; 'blog',
+    'params'     =&gt; array('id' =&gt; 1337)
 ));
-]]></programlisting>
+</programlisting>
     </example>
 
-    <example id="zend.navigation.pages.mvc.example.isActive">
-        <title>isActive() determines if page is active</title>
+    <example xml:id="zend.navigation.pages.mvc.example.isActive"><info><title>isActive() determines if page is active</title></info>
+        
 
         <para>
             This example show that <acronym>MVC</acronym> pages determine whether they are active
             by using the params found in the request object.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 /*
  * Dispatched request:
  * - module:     default
@@ -135,17 +136,17 @@ $page = new Zend_Navigation_Page_Mvc(array(
  * - action:     index
  */
 $page1 = new Zend_Navigation_Page_Mvc(array(
-    'action'     => 'index',
-    'controller' => 'index'
+    'action'     =&gt; 'index',
+    'controller' =&gt; 'index'
 ));
 
 $page2 = new Zend_Navigation_Page_Mvc(array(
-    'action'     => 'bar',
-    'controller' => 'index'
+    'action'     =&gt; 'bar',
+    'controller' =&gt; 'index'
 ));
 
-$page1->isActive(); // returns true
-$page2->isActive(); // returns false
+$page1-&gt;isActive(); // returns true
+$page2-&gt;isActive(); // returns false
 
 /*
  * Dispatched request:
@@ -155,13 +156,13 @@ $page2->isActive(); // returns false
  * - id:         1337
  */
 $page = new Zend_Navigation_Page_Mvc(array(
-    'action'     => 'view',
-    'controller' => 'post',
-    'module'     => 'blog'
+    'action'     =&gt; 'view',
+    'controller' =&gt; 'post',
+    'module'     =&gt; 'blog'
 ));
 
 // returns true, because request has the same module, controller and action
-$page->isActive();
+$page-&gt;isActive();
 
 /*
  * Dispatched request:
@@ -170,19 +171,19 @@ $page->isActive();
  * - action:     view
  */
 $page = new Zend_Navigation_Page_Mvc(array(
-    'action'     => 'view',
-    'controller' => 'post',
-    'module'     => 'blog',
-    'params'     => array('id' => null)
+    'action'     =&gt; 'view',
+    'controller' =&gt; 'post',
+    'module'     =&gt; 'blog',
+    'params'     =&gt; array('id' =&gt; null)
 ));
 
 // returns false, because page requires the id param to be set in the request
-$page->isActive(); // returns false
-]]></programlisting>
+$page-&gt;isActive(); // returns false
+</programlisting>
     </example>
 
-    <example id="zend.navigation.pages.mvc.example.routes">
-        <title>Using routes</title>
+    <example xml:id="zend.navigation.pages.mvc.example.routes"><info><title>Using routes</title></info>
+        
 
         <para>
             Routes can be used with <acronym>MVC</acronym> pages. If a page has a route, this
@@ -206,33 +207,33 @@ $page->isActive(); // returns false
             </note>
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // the following route is added to the ZF router
-Zend_Controller_Front::getInstance()->getRouter()->addRoute(
+Zend_Controller_Front::getInstance()-&gt;getRouter()-&gt;addRoute(
     'article_view', // route name
     new Zend_Controller_Router_Route(
         'a/:id',
         array(
-            'module'     => 'news',
-            'controller' => 'article',
-            'action'     => 'view',
-            'id'         => null
+            'module'     =&gt; 'news',
+            'controller' =&gt; 'article',
+            'action'     =&gt; 'view',
+            'id'         =&gt; null
         )
     )
 );
 
 // a page is created with a 'route' option
 $page = new Zend_Navigation_Page_Mvc(array(
-    'label'      => 'A news article',
-    'route'      => 'article_view',
-    'module'     => 'news',    // required for isActive(), see note above
-    'controller' => 'article', // required for isActive(), see note above
-    'action'     => 'view',    // required for isActive(), see note above
-    'params'     => array('id' => 42)
+    'label'      =&gt; 'A news article',
+    'route'      =&gt; 'article_view',
+    'module'     =&gt; 'news',    // required for isActive(), see note above
+    'controller' =&gt; 'article', // required for isActive(), see note above
+    'action'     =&gt; 'view',    // required for isActive(), see note above
+    'params'     =&gt; array('id' =&gt; 42)
 ));
 
 // returns: /a/42
-$page->getHref();
-]]></programlisting>
+$page-&gt;getHref();
+</programlisting>
     </example>
-</sect2>
+</section>

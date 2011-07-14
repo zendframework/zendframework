@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.headmeta">
-    <title>HeadMeta Helper</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headmeta"><info><title>HeadMeta Helper</title></info>
+    
 
     <para>
         The <acronym>HTML</acronym> <emphasis>&lt;meta&gt;</emphasis> element is used to provide
@@ -106,8 +107,8 @@
         <link linkend="zend.view.helpers.initial.placeholder">Placeholder helper</link>.
     </para>
 
-    <example id="zend.view.helpers.initial.headmeta.basicusage">
-        <title>HeadMeta Helper Basic Usage</title>
+    <example xml:id="zend.view.helpers.initial.headmeta.basicusage"><info><title>HeadMeta Helper Basic Usage</title></info>
+        
 
         <para>
             You may specify a new meta tag at any time. Typically, you
@@ -120,66 +121,63 @@
             keywords you wish to associate with your page:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // setting meta keywords
-$this->headMeta()->appendName('keywords', 'framework, PHP, productivity');
-]]></programlisting>
+$this-&gt;headMeta()-&gt;appendName('keywords', 'framework, PHP, productivity');
+</programlisting>
 
         <para>
             If you wished to set some client-side caching rules, you'd set
             http-equiv tags with the rules you wish to enforce:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // disabling client-side cache
-$this->headMeta()->appendHttpEquiv('expires',
+$this-&gt;headMeta()-&gt;appendHttpEquiv('expires',
                                    'Wed, 26 Feb 1997 08:21:57 GMT')
-                 ->appendHttpEquiv('pragma', 'no-cache')
-                 ->appendHttpEquiv('Cache-Control', 'no-cache');
-]]></programlisting>
+                 -&gt;appendHttpEquiv('pragma', 'no-cache')
+                 -&gt;appendHttpEquiv('Cache-Control', 'no-cache');
+</programlisting>
 
         <para>
             Another popular use for meta tags is setting the content type,
             character set, and language:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // setting content type and character set
-$this->headMeta()->appendHttpEquiv('Content-Type',
+$this-&gt;headMeta()-&gt;appendHttpEquiv('Content-Type',
                                    'text/html; charset=UTF-8')
-                 ->appendHttpEquiv('Content-Language', 'en-US');
-]]></programlisting>
+                 -&gt;appendHttpEquiv('Content-Language', 'en-US');
+</programlisting>
 
         <para>
             If you are serving an <acronym>HTML</acronym>5 document, you should provide the
             character set like this:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // setting character set in HTML5
-$this->headMeta()->setCharset('UTF-8'); // Will look like <meta charset="UTF-8">
-]]></programlisting>
+$this-&gt;headMeta()-&gt;setCharset('UTF-8'); // Will look like &lt;meta charset="UTF-8"&gt;
+</programlisting>
 
         <para>
             As a final example, an easy way to display a transitional message
             before a redirect is using a "meta refresh":
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // setting a meta refresh for 3 seconds to a new url:
-$this->headMeta()->appendHttpEquiv('Refresh',
+$this-&gt;headMeta()-&gt;appendHttpEquiv('Refresh',
                                    '3;URL=http://www.some.org/some.html');
-]]></programlisting>
+</programlisting>
 
         <para>
             When you're ready to place your meta tags in the layout, simply echo the helper:
         </para>
 
-        <programlisting language="php"><![CDATA[
-<?php echo $this->headMeta() ?>
-]]></programlisting>
+        <programlisting language="php">
+&lt;?php echo $this-&gt;headMeta() ?&gt;
+</programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

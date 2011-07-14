@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.navigation.pages.uri">
-    <title>Zend_Navigation_Page_Uri</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.uri"><info><title>Zend_Navigation_Page_Uri</title></info>
+    
 
     <para>
         Pages of type <classname>Zend_Navigation_Page_Uri</classname> can be
@@ -9,22 +10,22 @@
         custom logic for the page. <acronym>URI</acronym> pages are simple; in addition
         to the common page options, a <acronym>URI</acronym> page takes only one option —
         <code>uri</code>. The <code>uri</code> will be returned when
-        calling <code>$page->getHref()</code>, and may be a
+        calling <code>$page-&gt;getHref()</code>, and may be a
         <type>String</type> or <constant>NULL</constant>.
     </para>
 
     <note>
         <para>
             <classname>Zend_Navigation_Page_Uri</classname> will not try to determine
-            whether it should be active when calling <code>$page->isActive()</code>.
+            whether it should be active when calling <code>$page-&gt;isActive()</code>.
             It merely returns what currently is set, so to make a <acronym>URI</acronym> page active
-            you have to manually call <code>$page->setActive()</code> or
+            you have to manually call <code>$page-&gt;setActive()</code> or
             specifying <code>active</code> as a page option when constructing.
         </para>
     </note>
 
-    <table id="zend.navigation.pages.uri.options">
-        <title>URI page options</title>
+    <table xml:id="zend.navigation.pages.uri.options"><info><title>URI page options</title></info>
+        
 
         <tgroup cols="4">
             <thead>
@@ -50,4 +51,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect2>
+</section>

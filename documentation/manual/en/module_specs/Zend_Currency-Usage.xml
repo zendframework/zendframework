@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.currency.usage">
-    <title>Using Zend_Currency</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.currency.usage.generic">
-        <title>Generic usage</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.usage"><info><title>Using Zend_Currency</title></info>
+    
+
+    <section xml:id="zend.currency.usage.generic"><info><title>Generic usage</title></info>
+        
 
         <para>
             The simplest usecase within an application is to use the clients locale. When you create
@@ -12,8 +13,8 @@
             clients locale will be used to set the proper currency.
         </para>
 
-        <example id="zend.currency.usage.generic.example-1">
-            <title>Creating a currency with client settings</title>
+        <example xml:id="zend.currency.usage.generic.example-1"><info><title>Creating a currency with client settings</title></info>
+            
 
             <para>
                 Let's assume that your client has set "en_US" as wished language within his browser.
@@ -21,12 +22,12 @@
                 currency which has to be used.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $currency = new Zend_Currency();
 
 // See the default settings which are depending on the client
 // var_dump($currency);
-]]></programlisting>
+</programlisting>
 
             <para>
                 The created object would now contain the currency "US Dollar" as this is the actual
@@ -35,8 +36,8 @@ $currency = new Zend_Currency();
             </para>
         </example>
 
-        <note>
-            <title>Automatic locale detection does not always work</title>
+        <note><info><title>Automatic locale detection does not always work</title></info>
+            
 
             <para>
                 You should note that this automatic locale detection does not always work properly.
@@ -52,25 +53,25 @@ $currency = new Zend_Currency();
                 lead to an exception.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.currency.usage.locale">
-        <title>Currency creation based on a locale</title>
+    <section xml:id="zend.currency.usage.locale"><info><title>Currency creation based on a locale</title></info>
+        
 
         <para>
             To prevent the problems with your client you could simply set the wished locale
             manually.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $currency = new Zend_Currency('en_US');
 
 // You can also use the 'locale' option
-// $currency = new Zend_Currency(array('locale' => 'en_US'));
+// $currency = new Zend_Currency(array('locale' =&gt; 'en_US'));
 
 // See the actual settings which are fixed to 'en_US'
 // var_dump($currency);
-]]></programlisting>
+</programlisting>
 
         <para>
             As within our first example the used currency will be "US Dollar". But now we are no
@@ -84,33 +85,33 @@ $currency = new Zend_Currency('en_US');
             instance when you want to use the same locale throughout the application.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // in your bootstrap file
 $locale = new Zend_Locale('de_AT');
 Zend_Registry::set('Zend_Locale', $locale);
 
 // somewhere in your application
 $currency = new Zend_Currency();
-]]></programlisting>
-    </sect2>
+</programlisting>
+    </section>
 
-    <sect2 id="zend.currency.usage.territory">
-        <title>Currency creation based on a country</title>
+    <section xml:id="zend.currency.usage.territory"><info><title>Currency creation based on a country</title></info>
+        
 
         <para>
             <classname>Zend_Currency</classname> is also able to work on a given country by using
             <classname>Zend_Locale</classname> internally.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $currency = new Zend_Currency('US');
 
 // See the actual settings which are fixed to 'en_US'
 // var_dump($currency);
-]]></programlisting>
+</programlisting>
 
-        <note>
-            <title>Uppercase territories</title>
+        <note><info><title>Uppercase territories</title></info>
+            
 
             <para>
                 When you know that you are using a territory, then you should uppercase it.
@@ -123,5 +124,5 @@ $currency = new Zend_Currency('US');
                 Therefor always uppercase the input when you know that a territory is meant.
             </para>
         </note>
-    </sect2>
-</sect1>
+    </section>
+</section>

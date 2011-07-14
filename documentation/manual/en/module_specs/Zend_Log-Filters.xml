@@ -1,68 +1,69 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.log.filters">
-    <title>Filters</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.filters"><info><title>Filters</title></info>
+    
 
     <para>
         A Filter object blocks a message from being written to the log.
     </para>
 
-    <sect2 id="zend.log.filters.all-writers">
-        <title>Filtering for All Writers</title>
+    <section xml:id="zend.log.filters.all-writers"><info><title>Filtering for All Writers</title></info>
+        
 
         <para>
             To filter before all writers, you can add any number of Filters to a
             Log object using the <methodname>addFilter()</methodname> method:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $logger = new Zend_Log();
 
 $writer = new Zend_Log_Writer_Stream('php://output');
-$logger->addWriter($writer);
+$logger-&gt;addWriter($writer);
 
 $filter = new Zend_Log_Filter_Priority(Zend_Log::CRIT);
-$logger->addFilter($filter);
+$logger-&gt;addFilter($filter);
 
 // blocked
-$logger->info('Informational message');
+$logger-&gt;info('Informational message');
 
 // logged
-$logger->emerg('Emergency message');
-]]></programlisting>
+$logger-&gt;emerg('Emergency message');
+</programlisting>
 
         <para>
             When you add one or more Filters to the Log object, the message must pass
             through all of the Filters before any Writers receives it.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.log.filters.single-writer">
-        <title>Filtering for a Writer Instance</title>
+    <section xml:id="zend.log.filters.single-writer"><info><title>Filtering for a Writer Instance</title></info>
+        
 
         <para>
             To filter only on a specific Writer instance, use the
             <methodname>addFilter()</methodname> method of that Writer:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $logger = new Zend_Log();
 
 $writer1 = new Zend_Log_Writer_Stream('/path/to/first/logfile');
-$logger->addWriter($writer1);
+$logger-&gt;addWriter($writer1);
 
 $writer2 = new Zend_Log_Writer_Stream('/path/to/second/logfile');
-$logger->addWriter($writer2);
+$logger-&gt;addWriter($writer2);
 
 // add a filter only to writer2
 $filter = new Zend_Log_Filter_Priority(Zend_Log::CRIT);
-$writer2->addFilter($filter);
+$writer2-&gt;addFilter($filter);
 
 // logged to writer1, blocked from writer2
-$logger->info('Informational message');
+$logger-&gt;info('Informational message');
 
 // logged by both writers
-$logger->emerg('Emergency message');
-]]></programlisting>
-    </sect2>
-</sect1>
+$logger-&gt;emerg('Emergency message');
+</programlisting>
+    </section>
+</section>

@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.pdf.info">
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.info"><info><title>Document Info and Metadata</title></info>
     <!-- @todo review and revise upon completion of refactoring -->
-    <title>Document Info and Metadata</title>
+    
 
     <para>
         A <acronym>PDF</acronym> document may include general information such as the document's
@@ -15,15 +16,15 @@
         <property>properties</property> public property of <classname>Zend_Pdf</classname> objects:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $pdf = Zend_Pdf::load($pdfPath);
 
-echo $pdf->properties['Title'] . "\n";
-echo $pdf->properties['Author'] . "\n";
+echo $pdf-&gt;properties['Title'] . "\n";
+echo $pdf-&gt;properties['Author'] . "\n";
 
-$pdf->properties['Title'] = 'New Title.';
-$pdf->save($pdfPath);
-]]></programlisting>
+$pdf-&gt;properties['Title'] = 'New Title.';
+$pdf-&gt;save($pdfPath);
+</programlisting>
 
     <para>
         The following keys are defined by <acronym>PDF</acronym> v1.4 (Acrobat 5) standard:
@@ -198,8 +199,7 @@ $pdf->save($pdfPath);
 
     <para>
         Since <acronym>PDF</acronym> v 1.6 metadata can be stored in the special
-        <acronym>XML</acronym> document attached to the <acronym>PDF</acronym> (XMP - <ulink
-            url="http://www.adobe.com/products/xmp/">Extensible Metadata Platform</ulink>).
+        <acronym>XML</acronym> document attached to the <acronym>PDF</acronym> (XMP - <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.adobe.com/products/xmp/">Extensible Metadata Platform</link>).
     </para>
 
     <para>
@@ -208,32 +208,29 @@ $pdf->save($pdfPath);
         <methodname>Zend_Pdf::setMetadata($metadata)</methodname> methods:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $pdf = Zend_Pdf::load($pdfPath);
-$metadata = $pdf->getMetadata();
+$metadata = $pdf-&gt;getMetadata();
 $metadataDOM = new DOMDocument();
-$metadataDOM->loadXML($metadata);
+$metadataDOM-&gt;loadXML($metadata);
 
 $xpath = new DOMXPath($metadataDOM);
-$pdfPreffixNamespaceURI = $xpath->query('/rdf:RDF/rdf:Description')
-                                ->item(0)
-                                ->lookupNamespaceURI('pdf');
-$xpath->registerNamespace('pdf', $pdfPreffixNamespaceURI);
+$pdfPreffixNamespaceURI = $xpath-&gt;query('/rdf:RDF/rdf:Description')
+                                -&gt;item(0)
+                                -&gt;lookupNamespaceURI('pdf');
+$xpath-&gt;registerNamespace('pdf', $pdfPreffixNamespaceURI);
 
-$titleNode = $xpath->query('/rdf:RDF/rdf:Description/pdf:Title')->item(0);
-$title = $titleNode->nodeValue;
+$titleNode = $xpath-&gt;query('/rdf:RDF/rdf:Description/pdf:Title')-&gt;item(0);
+$title = $titleNode-&gt;nodeValue;
 ...
 
-$titleNode->nodeValue = 'New title';
-$pdf->setMetadata($metadataDOM->saveXML());
-$pdf->save($pdfPath);
-]]></programlisting>
+$titleNode-&gt;nodeValue = 'New title';
+$pdf-&gt;setMetadata($metadataDOM-&gt;saveXML());
+$pdf-&gt;save($pdfPath);
+</programlisting>
 
     <para>
         Common document properties are duplicated in the Info structure and Metadata document (if
         presented). It's user application responsibility now to keep them synchronized.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

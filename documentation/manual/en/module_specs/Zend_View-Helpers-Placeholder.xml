@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.placeholder">
-    <title>Placeholder Helper</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.placeholder"><info><title>Placeholder Helper</title></info>
+    
 
     <para>
         The <classname>Placeholder</classname> view helper is used to persist content
@@ -11,8 +12,8 @@
         separators for aggregated content).
     </para>
 
-    <example id="zend.view.helpers.initial.placeholder.usage">
-        <title>Basic Usage of Placeholders</title>
+    <example xml:id="zend.view.helpers.initial.placeholder.usage"><info><title>Basic Usage of Placeholders</title></info>
+        
 
         <para>
             Basic usage of placeholders is to persist view data. Each invocation
@@ -21,18 +22,18 @@
             either manipulate or simply echo out.
         </para>
 
-        <programlisting language="php"><![CDATA[
-<?php $this->placeholder('foo')->set("Some text for later") ?>
+        <programlisting language="php">
+&lt;?php $this-&gt;placeholder('foo')-&gt;set("Some text for later") ?&gt;
 
-<?php
-    echo $this->placeholder('foo');
+&lt;?php
+    echo $this-&gt;placeholder('foo');
     // outputs "Some text for later"
-?>
-]]></programlisting>
+?&gt;
+</programlisting>
     </example>
 
-    <example id="zend.view.helpers.initial.placeholder.aggregation">
-        <title>Using Placeholders to Aggregate Content</title>
+    <example xml:id="zend.view.helpers.initial.placeholder.aggregation"><info><title>Using Placeholders to Aggregate Content</title></info>
+        
 
         <para>
             Aggregating content via placeholders can be useful at times as well.
@@ -84,25 +85,25 @@
             </listitem>
         </itemizedlist>
 
-        <programlisting language="php"><![CDATA[
-<!-- first view script -->
-<?php $this->placeholder('foo')->exchangeArray($this->data) ?>
-]]></programlisting>
+        <programlisting language="php">
+&lt;!-- first view script --&gt;
+&lt;?php $this-&gt;placeholder('foo')-&gt;exchangeArray($this-&gt;data) ?&gt;
+</programlisting>
 
-        <programlisting language="php"><![CDATA[
-<!-- later view script -->
-<?php
-$this->placeholder('foo')->setPrefix("<ul>\n    <li>")
-                         ->setSeparator("</li><li>\n")
-                         ->setIndent(4)
-                         ->setPostfix("</li></ul>\n");
-?>
+        <programlisting language="php">
+&lt;!-- later view script --&gt;
+&lt;?php
+$this-&gt;placeholder('foo')-&gt;setPrefix("&lt;ul&gt;\n    &lt;li&gt;")
+                         -&gt;setSeparator("&lt;/li&gt;&lt;li&gt;\n")
+                         -&gt;setIndent(4)
+                         -&gt;setPostfix("&lt;/li&gt;&lt;/ul&gt;\n");
+?&gt;
 
-<?php
-    echo $this->placeholder('foo');
+&lt;?php
+    echo $this-&gt;placeholder('foo');
     // outputs as unordered list with pretty indentation
-?>
-]]></programlisting>
+?&gt;
+</programlisting>
 
         <para>
             Because the <classname>Placeholder</classname> container objects extend
@@ -112,19 +113,19 @@ $this->placeholder('foo')->setPrefix("<ul>\n    <li>")
             array keys.
         </para>
 
-        <programlisting language="php"><![CDATA[
-<?php $this->placeholder('foo')->bar = $this->data ?>
-<?php echo $this->placeholder('foo')->bar ?>
+        <programlisting language="php">
+&lt;?php $this-&gt;placeholder('foo')-&gt;bar = $this-&gt;data ?&gt;
+&lt;?php echo $this-&gt;placeholder('foo')-&gt;bar ?&gt;
 
-<?php
-$foo = $this->placeholder('foo');
+&lt;?php
+$foo = $this-&gt;placeholder('foo');
 echo $foo['bar'];
-?>
-]]></programlisting>
+?&gt;
+</programlisting>
     </example>
 
-    <example id="zend.view.helpers.initial.placeholder.capture">
-        <title>Using Placeholders to Capture Content</title>
+    <example xml:id="zend.view.helpers.initial.placeholder.capture"><info><title>Using Placeholders to Capture Content</title></info>
+        
 
         <para>
             Occasionally you may have content for a placeholder in a view script
@@ -174,37 +175,37 @@ echo $foo['bar'];
             </listitem>
         </itemizedlist>
 
-        <programlisting language="php"><![CDATA[
-<!-- Default capture: append -->
-<?php $this->placeholder('foo')->captureStart();
-foreach ($this->data as $datum): ?>
-<div class="foo">
-    <h2><?php echo $datum->title ?></h2>
-    <p><?php echo $datum->content ?></p>
-</div>
-<?php endforeach; ?>
-<?php $this->placeholder('foo')->captureEnd() ?>
+        <programlisting language="php">
+&lt;!-- Default capture: append --&gt;
+&lt;?php $this-&gt;placeholder('foo')-&gt;captureStart();
+foreach ($this-&gt;data as $datum): ?&gt;
+&lt;div class="foo"&gt;
+    &lt;h2&gt;&lt;?php echo $datum-&gt;title ?&gt;&lt;/h2&gt;
+    &lt;p&gt;&lt;?php echo $datum-&gt;content ?&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;?php endforeach; ?&gt;
+&lt;?php $this-&gt;placeholder('foo')-&gt;captureEnd() ?&gt;
 
-<?php echo $this->placeholder('foo') ?>
-]]></programlisting>
+&lt;?php echo $this-&gt;placeholder('foo') ?&gt;
+</programlisting>
 
-        <programlisting language="php"><![CDATA[
-<!-- Capture to key -->
-<?php $this->placeholder('foo')->captureStart('SET', 'data');
-foreach ($this->data as $datum): ?>
-<div class="foo">
-    <h2><?php echo $datum->title ?></h2>
-    <p><?php echo $datum->content ?></p>
-</div>
- <?php endforeach; ?>
-<?php $this->placeholder('foo')->captureEnd() ?>
+        <programlisting language="php">
+&lt;!-- Capture to key --&gt;
+&lt;?php $this-&gt;placeholder('foo')-&gt;captureStart('SET', 'data');
+foreach ($this-&gt;data as $datum): ?&gt;
+&lt;div class="foo"&gt;
+    &lt;h2&gt;&lt;?php echo $datum-&gt;title ?&gt;&lt;/h2&gt;
+    &lt;p&gt;&lt;?php echo $datum-&gt;content ?&gt;&lt;/p&gt;
+&lt;/div&gt;
+ &lt;?php endforeach; ?&gt;
+&lt;?php $this-&gt;placeholder('foo')-&gt;captureEnd() ?&gt;
 
-<?php echo $this->placeholder('foo')->data ?>
-]]></programlisting>
+&lt;?php echo $this-&gt;placeholder('foo')-&gt;data ?&gt;
+</programlisting>
     </example>
 
-    <sect4 id="zend.view.helpers.initial.placeholder.implementations">
-        <title>Concrete Placeholder Implementations</title>
+    <section xml:id="zend.view.helpers.initial.placeholder.implementations"><info><title>Concrete Placeholder Implementations</title></info>
+        
 
         <para>
             Zend Framework ships with a number of "concrete" placeholder
@@ -261,8 +262,5 @@ foreach ($this->data as $datum): ?>
                 </para>
             </listitem>
         </itemizedlist>
-    </sect4>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

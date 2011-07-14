@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.plugins.intro">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.plugins.intro"><info><title>Introduction</title></info>
+    
 
     <para>
         Zend Framework makes heavy use of plugin architectures. Plugins allow for easy extensibility
@@ -53,4 +54,4 @@
     <para>
         Now let's turn to using plugins.
     </para>
-</sect1>
+</section>

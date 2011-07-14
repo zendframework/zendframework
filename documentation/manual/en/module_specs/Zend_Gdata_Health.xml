@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.gdata.health">
-    <title>Using Google Health</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.health"><info><title>Using Google Health</title></info>
+    
 
     <para>
         The Google Health Data <acronym>API</acronym> is designed to enable developers to do two
@@ -33,8 +34,7 @@
         <acronym>API</acronym>s, each Google Health feed has a limited set of
         <acronym>HTTP</acronym> operations you can perform on it, depending on which authentication
         method you are using (ClientLogin or AuthSub/OAuth). For a list of permitted operations, see
-        <ulink
-            url="http://code.google.com/apis/health/reference.html#Authentication">http://code.google.com/apis/health/reference.html#Authentication</ulink>.
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/health/reference.html#Authentication">http://code.google.com/apis/health/reference.html#Authentication</link>.
 
         <itemizedlist>
             <listitem>
@@ -62,13 +62,12 @@
     </para>
 
     <para>
-        See <ulink
-            url="http://code.google.com/apis/health/">http://code.google.com/apis/health</ulink>
+        See <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/health/">http://code.google.com/apis/health</link>
         for more information about the Google Health <acronym>API</acronym>.
     </para>
 
-    <sect2 id="zend.gdata.health.connect">
-        <title>Connect To The Health Service</title>
+    <section xml:id="zend.gdata.health.connect"><info><title>Connect To The Health Service</title></info>
+        
 
         <para>
             The Google Health <acronym>API</acronym>, like all Google Data <acronym>API</acronym>s,
@@ -83,8 +82,8 @@
             binding a <classname>Zend_Gdata_Health</classname> service instance to that client.
         </para>
 
-        <sect3 id="zend.gdata.health.connect.authentication">
-            <title>Authentication</title>
+        <section xml:id="zend.gdata.health.connect.authentication"><info><title>Authentication</title></info>
+            
 
             <para>
                 The Google Health <acronym>API</acronym> allows programmatic access to a user's
@@ -117,23 +116,21 @@
                     <para>
                         <firstterm>OAuth</firstterm> is an alternative to AuthSub. Although this
                         authentication scheme is not discussed in this document, more information
-                        can be found in the <ulink
-                            url="http://code.google.com/apis/health/developers_guide_protocol.html#OAuth">Health
-                            Data <acronym>API</acronym> Developer's Guide</ulink>.
+                        can be found in the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/health/developers_guide_protocol.html#OAuth">Health
+                            Data <acronym>API</acronym> Developer's Guide</link>.
                     </para>
                 </listitem>
             </itemizedlist>
 
             <para>
-                See <ulink
-                    url="http://code.google.com/apis/gdata/auth.html">Authentication Overview in the
-                    Google Data <acronym>API</acronym> documentation</ulink> for more
+                See <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/gdata/auth.html">Authentication Overview in the
+                    Google Data <acronym>API</acronym> documentation</link> for more
                 information on each authentication method.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.health.connect.service">
-            <title>Create A Health Service Instance</title>
+        <section xml:id="zend.gdata.health.connect.service"><info><title>Create A Health Service Instance</title></info>
+            
 
             <para>
                 In order to interact with Google Health, the client library provides the
@@ -161,7 +158,7 @@
                 authentication:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 // Parameters for ClientLogin authentication
 $healthServiceName = Zend_Gdata_Health::HEALTH_SERVICE_NAME;
 //$h9ServiceName = Zend_Gdata_Health::H9_SANDBOX_SERVICE_NAME;
@@ -175,7 +172,7 @@ $client = Zend_Gdata_ClientLogin::getHttpClient($user,
 
 // Create an instance of the Health service
 $service = new Zend_Gdata_Health($client);
-]]></programlisting>
+</programlisting>
 
             <para>
                 A Health service using AuthSub can be created in a similar, though slightly more
@@ -185,7 +182,7 @@ $service = new Zend_Gdata_Health($client);
                 requests from your application be digitally signed.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 /*
  * Retrieve the current URL so that the AuthSub server knows where to
  * redirect the user after authentication is complete.
@@ -197,15 +194,15 @@ function getCurrentUrl() {
                                                  "\n\r")),
                                   ENT_QUOTES);
 
-    if (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on') {
+    if (isset($_SERVER['HTTPS']) &amp;&amp; strtolower($_SERVER['HTTPS']) == 'on') {
         $protocol = 'https://';
     } else {
         $protocol = 'http://';
     }
     $host = $_SERVER['HTTP_HOST'];
-    if ($_SERVER['SERVER_PORT'] != '' &&
-       (($protocol == 'http://' && $_SERVER['SERVER_PORT'] != '80') ||
-       ($protocol == 'https://' && $_SERVER['SERVER_PORT'] != '443'))) {
+    if ($_SERVER['SERVER_PORT'] != '' &amp;&amp;
+       (($protocol == 'http://' &amp;&amp; $_SERVER['SERVER_PORT'] != '80') ||
+       ($protocol == 'https://' &amp;&amp; $_SERVER['SERVER_PORT'] != '443'))) {
         $port = ':' . $_SERVER['SERVER_PORT'];
     } else {
         $port = '';
@@ -235,16 +232,16 @@ function setupClient($singleUseToken = null) {
                                                               $session,
                                                               $authSubHandler);
 
-         // 1 - allows posting notices && allows reading profile data
+         // 1 - allows posting notices &amp;&amp; allows reading profile data
         $permission = 1;
-        $authSubURL .= '&permission=' . $permission;
+        $authSubURL .= '&amp;permission=' . $permission;
 
-        echo '<a href="' . $authSubURL . '">Your Google Health Account</a>';
+        echo '&lt;a href="' . $authSubURL . '"&gt;Your Google Health Account&lt;/a&gt;';
     } else {
         $client = new Zend_Gdata_HttpClient();
 
         // This sets your private key to be used to sign subsequent requests
-        $client->setAuthSubPrivateKeyFile('/path/to/your/rsa_private_key.pem',
+        $client-&gt;setAuthSubPrivateKeyFile('/path/to/your/rsa_private_key.pem',
                                           null,
                                           true);
 
@@ -253,12 +250,12 @@ function setupClient($singleUseToken = null) {
                                                        $client);
 
         // Set the long-lived session token for subsequent requests
-        $client->setAuthSubToken($sessionToken);
+        $client-&gt;setAuthSubToken($sessionToken);
     }
     return $client;
 }
 
-// -> Script execution begins here <-
+// -&gt; Script execution begins here &lt;-
 
 session_start();
 
@@ -269,17 +266,17 @@ $userH9Sandbox = false;
 $healthService = new Zend_Gdata_Health($client,
                                        'googleInc-MyTestAppName-v1.0',
                                        $userH9Sandbox);
-]]></programlisting>
+</programlisting>
 
             <para>
                 NOTE: the remainder of this document will assume you are using AuthSub for
                 authentication.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.gdata.health.profilefeed">
-        <title>Profile Feed</title>
+    <section xml:id="zend.gdata.health.profilefeed"><info><title>Profile Feed</title></info>
+        
 
         <para>
             To query the user's profile feed, make sure your initial AuthSub token was requested
@@ -288,8 +285,8 @@ $healthService = new Zend_Gdata_Health($client,
             iterating through the resulting feed.
         </para>
 
-        <sect3 id="zend.gdata.health.profilefeed.query">
-            <title>Send a Structured Query</title>
+        <section xml:id="zend.gdata.health.profilefeed.query"><info><title>Send a Structured Query</title></info>
+            
 
             <para>
                 You can send structured queries to retrieve specific records from a user's profile.
@@ -303,8 +300,8 @@ $healthService = new Zend_Gdata_Health($client,
                 based on the parameters you set.
             </para>
 
-            <sect4 id="zend.gdata.health.profilefeed.query.construct">
-                <title>Query The Feed</title>
+            <section xml:id="zend.gdata.health.profilefeed.query.construct"><info><title>Query The Feed</title></info>
+                
 
                 <para>
                     To execute a query against the profile feed, invoke a new instance of an
@@ -312,19 +309,19 @@ $healthService = new Zend_Gdata_Health($client,
                     <methodname>getHealthProfileFeed()</methodname> method:
                 </para>
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 $healthService = new Zend_Gdata_Health($client);
 
 // example query for the top 10 medications with 2 items each
 $query = new Zend_Gdata_Health_Query();
-$query->setDigest("true");
-$query->setGrouped("true");
-$query->setMaxResultsGroup(10);
-$query->setMaxResultsInGroup(2);
-$query->setCategory("medication");
+$query-&gt;setDigest("true");
+$query-&gt;setGrouped("true");
+$query-&gt;setMaxResultsGroup(10);
+$query-&gt;setMaxResultsInGroup(2);
+$query-&gt;setCategory("medication");
 
-$profileFeed = $healthService->getHealthProfileFeed($query);
-]]></programlisting>
+$profileFeed = $healthService-&gt;getHealthProfileFeed($query);
+</programlisting>
 
                 <para>
                     Using <methodname>setDigest("true")</methodname> returns all of user's CCR data
@@ -341,16 +338,15 @@ $profileFeed = $healthService->getHealthProfileFeed($query);
                 </para>
 
                 <para>
-                    A full list of supported query parameters is available in the <ulink
-                        url="http://code.google.com/apis/health/reference.html#Parameters">query
-                        parameters section</ulink> of the Health <acronym>API</acronym> Reference
+                    A full list of supported query parameters is available in the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/health/reference.html#Parameters">query
+                        parameters section</link> of the Health <acronym>API</acronym> Reference
                     Guide.
                 </para>
-            </sect4>
-        </sect3>
+            </section>
+        </section>
 
-        <sect3 id="zend.gdata.health.profilefeed.iterate">
-            <title>Iterate Through The Profile Entries</title>
+        <section xml:id="zend.gdata.health.profilefeed.iterate"><info><title>Iterate Through The Profile Entries</title></info>
+            
 
             <para>
                 Each Google Health entry contains CCR data, however, using the
@@ -366,29 +362,28 @@ $profileFeed = $healthService->getHealthProfileFeed($query);
                 <classname>Zend_Gdata_Health_Extension_CCR</classname>:
             </para>
 
-            <programlisting language="php"><![CDATA[
-$entries = $profileFeed->getEntries();
+            <programlisting language="php">
+$entries = $profileFeed-&gt;getEntries();
 foreach ($entries as $entry) {
-    $medications = $entry->getCcr()->getMedications();
-    //$conditions = $entry->getCcr()->getConditions();
-    //$immunizations = $entry->getCcr()->getImmunizations();
+    $medications = $entry-&gt;getCcr()-&gt;getMedications();
+    //$conditions = $entry-&gt;getCcr()-&gt;getConditions();
+    //$immunizations = $entry-&gt;getCcr()-&gt;getImmunizations();
 
     // print the CCR xml (this will just be the entry's medications)
     foreach ($medications as $med) {
-        $xmlStr = $med->ownerDocument->saveXML($med);
-        echo "<pre>" . $xmlStr . "</pre>";
+        $xmlStr = $med-&gt;ownerDocument-&gt;saveXML($med);
+        echo "&lt;pre&gt;" . $xmlStr . "&lt;/pre&gt;";
     }
 }
-]]></programlisting>
+</programlisting>
 
             <para>
                 Here, the <methodname>getCcr()</methodname> method is used in conjunction with a
                 magic helper to drill down and extract just the medication data from the entry's
                 CCR. The formentioned magic helper takes the form
                 <methodname>getCATEGORYNAME()</methodname>, where <constant>CATEGORYNAME</constant>
-                is a supported Google Health category. See the <ulink
-                    url="http://code.google.com/apis/health/reference.html#CatQueries">Google Health
-                    reference Guide</ulink> for the possible categories.
+                is a supported Google Health category. See the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/health/reference.html#CatQueries">Google Health
+                    reference Guide</link> for the possible categories.
             </para>
 
             <para>
@@ -396,27 +391,27 @@ foreach ($entries as $entry) {
                 CCR from the Google Health servers. Then, iterate through those results:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $query = new Zend_Gdata_Health_Query();
-$query->setDigest("true");
-$query->setCategory("condition");
-$profileFeed = $healthService->getHealthProfileFeed($query);
+$query-&gt;setDigest("true");
+$query-&gt;setCategory("condition");
+$profileFeed = $healthService-&gt;getHealthProfileFeed($query);
 
 // Since the query contained digest=true, only one Atom entry is returned
-$entry = $profileFeed->entry[0];
-$conditions = $entry->getCcr()->getConditions();
+$entry = $profileFeed-&gt;entry[0];
+$conditions = $entry-&gt;getCcr()-&gt;getConditions();
 
 // print the CCR xml (this will just be the profile's conditions)
 foreach ($conditions as $cond) {
-    $xmlStr = $cond->ownerDocument->saveXML($cond);
-    echo "<pre>" . $xmlStr . "</pre>";
+    $xmlStr = $cond-&gt;ownerDocument-&gt;saveXML($cond);
+    echo "&lt;pre&gt;" . $xmlStr . "&lt;/pre&gt;";
 }
-]]></programlisting>
-        </sect3>
-    </sect2>
+</programlisting>
+        </section>
+    </section>
 
-    <sect2 id="zend.gdata.health.profilelist">
-        <title>Profile List Feed</title>
+    <section xml:id="zend.gdata.health.profilelist"><info><title>Profile List Feed</title></info>
+        
 
         <para>NOTE: This feed is only available when using ClientLogin</para>
 
@@ -428,28 +423,28 @@ foreach ($conditions as $cond) {
             the profile name in the <emphasis>&lt;title&gt;</emphasis> element.
         </para>
 
-        <sect3 id="zend.gdata.health.profilelist.query">
-            <title>Query The Feed</title>
+        <section xml:id="zend.gdata.health.profilelist.query"><info><title>Query The Feed</title></info>
+            
 
             <para>
                 To execute a query against the profile list feed, call the service's
                 <methodname>getHealthProfileListFeed()</methodname> method:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $client = Zend_Gdata_ClientLogin::getHttpClient('user@gmail.com',
                                                 'pa$$word',
                                                 'health');
 $healthService = new Zend_Gdata_Health($client);
-$feed = $healthService->getHealthProfileListFeed();
+$feed = $healthService-&gt;getHealthProfileListFeed();
 
 // print each profile's name and id
-$entries = $feed->getEntries();
+$entries = $feed-&gt;getEntries();
 foreach ($entries as $entry) {
-    echo '<p>Profile name: ' . $entry->getProfileName() . '<br>';
-    echo 'profile ID: ' . $entry->getProfileID() . '</p>';
+    echo '&lt;p&gt;Profile name: ' . $entry-&gt;getProfileName() . '&lt;br&gt;';
+    echo 'profile ID: ' . $entry-&gt;getProfileID() . '&lt;/p&gt;';
 }
-]]></programlisting>
+</programlisting>
 
             <para>
                 Once you've determined which profile to use, call
@@ -458,21 +453,21 @@ foreach ($entries as $entry) {
                 profile:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 // use the first profile
-$profileID = $feed->entry[0]->getProfileID();
-$healthService->setProfileID($profileID);
+$profileID = $feed-&gt;entry[0]-&gt;getProfileID();
+$healthService-&gt;setProfileID($profileID);
 
-$profileFeed = $healthService->getHealthProfileFeed();
+$profileFeed = $healthService-&gt;getHealthProfileFeed();
 
-$profileID = $healthService->getProfileID();
-echo '<p><b>Queried profileID</b>: ' . $profileID . '</p>';
-]]></programlisting>
-        </sect3>
-    </sect2>
+$profileID = $healthService-&gt;getProfileID();
+echo '&lt;p&gt;&lt;b&gt;Queried profileID&lt;/b&gt;: ' . $profileID . '&lt;/p&gt;';
+</programlisting>
+        </section>
+    </section>
 
-    <sect2 id="zend.gdata.health.notice">
-        <title>Sending Notices to the Register Feed</title>
+    <section xml:id="zend.gdata.health.notice"><info><title>Sending Notices to the Register Feed</title></info>
+        
 
         <para>
             Individual posts to the register feed are known as notices. Notice are sent from
@@ -483,46 +478,46 @@ echo '<p><b>Queried profileID</b>: ' . $profileID . '</p>';
             to pick up a prescription, or they might contain lab results in the CCR format.
         </para>
 
-        <sect3 id="zend.gdata.health.notice.send">
-            <title>Sending a notice</title>
+        <section xml:id="zend.gdata.health.notice.send"><info><title>Sending a notice</title></info>
+            
 
             <para>
                 Notices can be sent by using the <methodname>sendHealthNotice()</methodname> method
                 for the Health service:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $healthService = new Zend_Gdata_Health($client);
 
 $subject = "Title of your notice goes here";
-$body = "Notice body can contain <b>html</b> entities";
-$ccr = '<ContinuityOfCareRecord xmlns="urn:astm-org:CCR">
-  <Body>
-   <Problems>
-    <Problem>
-      <DateTime>
-        <Type><Text>Start date</Text></Type>
-        <ExactDateTime>2007-04-04T07:00:00Z</ExactDateTime>
-      </DateTime>
-      <Description>
-        <Text>Aortic valve disorders</Text>
-        <Code>
-          <Value>410.10</Value>
-          <CodingSystem>ICD9</CodingSystem>
-          <Version>2004</Version>
-        </Code>
-      </Description>
-      <Status><Text>Active</Text></Status>
-    </Problem>
-  </Problems>
-  </Body>
-</ContinuityOfCareRecord>';
+$body = "Notice body can contain &lt;b&gt;html&lt;/b&gt; entities";
+$ccr = '&lt;ContinuityOfCareRecord xmlns="urn:astm-org:CCR"&gt;
+  &lt;Body&gt;
+   &lt;Problems&gt;
+    &lt;Problem&gt;
+      &lt;DateTime&gt;
+        &lt;Type&gt;&lt;Text&gt;Start date&lt;/Text&gt;&lt;/Type&gt;
+        &lt;ExactDateTime&gt;2007-04-04T07:00:00Z&lt;/ExactDateTime&gt;
+      &lt;/DateTime&gt;
+      &lt;Description&gt;
+        &lt;Text&gt;Aortic valve disorders&lt;/Text&gt;
+        &lt;Code&gt;
+          &lt;Value&gt;410.10&lt;/Value&gt;
+          &lt;CodingSystem&gt;ICD9&lt;/CodingSystem&gt;
+          &lt;Version&gt;2004&lt;/Version&gt;
+        &lt;/Code&gt;
+      &lt;/Description&gt;
+      &lt;Status&gt;&lt;Text&gt;Active&lt;/Text&gt;&lt;/Status&gt;
+    &lt;/Problem&gt;
+  &lt;/Problems&gt;
+  &lt;/Body&gt;
+&lt;/ContinuityOfCareRecord&gt;';
 
-$responseEntry = $healthService->sendHealthNotice($subject,
+$responseEntry = $healthService-&gt;sendHealthNotice($subject,
                                                   $body,
                                                   "html",
                                                   $ccr);
-]]></programlisting>
-        </sect3>
-    </sect2>
-</sect1>
+</programlisting>
+        </section>
+    </section>
+</section>

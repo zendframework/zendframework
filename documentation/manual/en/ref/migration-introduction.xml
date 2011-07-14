@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="migration.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         When you are working with Zend Framework for a longer time, then you may
@@ -27,7 +28,4 @@
         effect on your code, and examples for you about necessary changes you
         have to do when doing an upgrade.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.ldap.api.reference.zend-ldap-filter">
-    <title>Zend_Ldap_Filter</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <table id="zend.ldap.api.reference.zend-filter.table">
-        <title>Zend_Ldap_Filter API</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap-filter"><info><title>Zend_Ldap_Filter</title></info>
+    
+
+    <table xml:id="zend.ldap.api.reference.zend-filter.table"><info><title>Zend_Ldap_Filter API</title></info>
+        
 
         <tgroup cols="2">
             <thead>
@@ -155,8 +156,8 @@
                         Creates a filter from a string mask. All <varname>$value</varname>
                         parameters will be escaped and substituted into <varname>$mask</varname>
                         by using
-                        <ulink url="http://php.net/sprintf">
-                        <methodname>sprintf()</methodname></ulink>
+                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/sprintf">
+                        <methodname>sprintf()</methodname></link>
                     </entry>
                 </row>
 
@@ -273,4 +274,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect3>
+</section>

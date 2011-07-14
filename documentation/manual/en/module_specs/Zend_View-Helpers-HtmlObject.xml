@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.object">
-    <title>HTML Object Helpers</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.object"><info><title>HTML Object Helpers</title></info>
+    
 
     <para>
-        The <acronym>HTML</acronym> <emphasis><![CDATA[
-<object>]]></emphasis> element is used for embedding
+        The <acronym>HTML</acronym> <emphasis>
+&lt;object&gt;</emphasis> element is used for embedding
         media like Flash or QuickTime in web pages. The object view helpers take
         care of embedding media with minimum effort.
     </para>
@@ -49,40 +50,40 @@
         documentation will only contain examples of two of these helpers.
     </para>
 
-    <example id="zend.view.helpers.initial.object.flash">
-        <title>Flash helper</title>
+    <example xml:id="zend.view.helpers.initial.object.flash"><info><title>Flash helper</title></info>
+        
 
         <para>
             Embedding Flash in your page using the helper is pretty straight-forward.
             The only required argument is the resource <acronym>URI</acronym>.
         </para>
 
-        <programlisting language="php"><![CDATA[
-<?php echo $this->htmlFlash('/path/to/flash.swf'); ?>
-]]></programlisting>
+        <programlisting language="php">
+&lt;?php echo $this-&gt;htmlFlash('/path/to/flash.swf'); ?&gt;
+</programlisting>
 
         <para>
             This outputs the following <acronym>HTML</acronym>:
         </para>
 
-        <programlisting language="html"><![CDATA[
-<object data="/path/to/flash.swf"
+        <programlisting language="html">
+&lt;object data="/path/to/flash.swf"
         type="application/x-shockwave-flash"
         classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-        codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab">
-</object>
-]]></programlisting>
+        codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab"&gt;
+&lt;/object&gt;
+</programlisting>
     </example>
 
     <para>
         Additionally you can specify attributes, parameters and content that can
-        be rendered along with the <emphasis><![CDATA[
-<object>]]></emphasis>. This will
+        be rendered along with the <emphasis>
+&lt;object&gt;</emphasis>. This will
         be demonstrated using the <methodname>htmlObject()</methodname> helper.
     </para>
 
-    <example id="zend.view.helpers.initial.object.object">
-        <title>Customizing the object by passing additional arguments</title>
+    <example xml:id="zend.view.helpers.initial.object.object"><info><title>Customizing the object by passing additional arguments</title></info>
+        
 
         <para>
             The first argument in the object helpers is always required. It is
@@ -93,23 +94,23 @@
             It only accepts an array with key-value pairs. <property>classid</property>
             and <property>codebase</property> are examples of such attributes. The fourth
             argument also only takes a key-value array and uses them to create
-            <emphasis><![CDATA[
-<param>]]></emphasis> elements. You will see an example
+            <emphasis>
+&lt;param&gt;</emphasis> elements. You will see an example
             of this shortly. Lastly, there is the option of providing additional
             content to the object. Now for an example which utilizes all arguments.
         </para>
 
-        <programlisting language="php"><![CDATA[
-echo $this->htmlObject(
+        <programlisting language="php">
+echo $this-&gt;htmlObject(
     '/path/to/file.ext',
     'mime/type',
     array(
-        'attr1' => 'aval1',
-        'attr2' => 'aval2'
+        'attr1' =&gt; 'aval1',
+        'attr2' =&gt; 'aval2'
     ),
     array(
-        'param1' => 'pval1',
-        'param2' => 'pval2'
+        'param1' =&gt; 'pval1',
+        'param2' =&gt; 'pval2'
     ),
     'some content'
 );
@@ -117,16 +118,13 @@ echo $this->htmlObject(
 /*
 This would output:
 
-<object data="/path/to/file.ext" type="mime/type"
-    attr1="aval1" attr2="aval2">
-    <param name="param1" value="pval1" />
-    <param name="param2" value="pval2" />
+&lt;object data="/path/to/file.ext" type="mime/type"
+    attr1="aval1" attr2="aval2"&gt;
+    &lt;param name="param1" value="pval1" /&gt;
+    &lt;param name="param2" value="pval2" /&gt;
     some content
-</object>
+&lt;/object&gt;
 */
-]]></programlisting>
+</programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

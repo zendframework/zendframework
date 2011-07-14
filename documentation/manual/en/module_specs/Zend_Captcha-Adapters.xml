@@ -1,14 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.captcha.adapters">
-    <title>CAPTCHA Adapters</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.captcha.adapters"><info><title>CAPTCHA Adapters</title></info>
+    
 
     <para>
         The following adapters are shipped with Zend Framework by default.
     </para>
 
-    <sect2 id="zend.captcha.adapters.word">
-        <title>Zend_Captcha_Word</title>
+    <section xml:id="zend.captcha.adapters.word"><info><title>Zend_Captcha_Word</title></info>
+        
 
         <para>
             <classname>Zend_Captcha_Word</classname> is an abstract adapter that serves as the base
@@ -110,10 +111,10 @@
                 instantiated directly.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.captcha.adapters.dumb">
-        <title>Zend_Captcha_Dumb</title>
+    <section xml:id="zend.captcha.adapters.dumb"><info><title>Zend_Captcha_Dumb</title></info>
+        
 
         <para>
             The <classname>Zend_Captch_Dumb</classname> adapter is mostly self-descriptive. It
@@ -121,33 +122,31 @@
             not a good <acronym>CAPTCHA</acronym> solution and should only be used for
             testing. It extends <classname>Zend_Captcha_Word</classname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.captcha.adapters.figlet">
-        <title>Zend_Captcha_Figlet</title>
+    <section xml:id="zend.captcha.adapters.figlet"><info><title>Zend_Captcha_Figlet</title></info>
+        
 
         <para>
-            The <classname>Zend_Captcha_Figlet</classname> adapter utilizes <link
-                linkend="zend.text.figlet"><classname>Zend_Text_Figlet</classname></link> to present
+            The <classname>Zend_Captcha_Figlet</classname> adapter utilizes <link linkend="zend.text.figlet"><classname>Zend_Text_Figlet</classname></link> to present
             a figlet to the user.
         </para>
 
         <para>
-            Options passed to the constructor will also be passed to the <link
-                linkend="zend.text.figlet"><classname>Zend_Text_Figlet</classname></link> object.
+            Options passed to the constructor will also be passed to the <link linkend="zend.text.figlet"><classname>Zend_Text_Figlet</classname></link> object.
             See the <link linkend="zend.text.figlet"><classname>Zend_Text_Figlet</classname></link>
             documentation for details on what configuration options are available.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.captcha.adapters.image">
-        <title>Zend_Captcha_Image</title>
+    <section xml:id="zend.captcha.adapters.image"><info><title>Zend_Captcha_Image</title></info>
+        
 
         <para>
             The <classname>Zend_Captcha_Image</classname> adapter takes the generated word and
             renders it as an image, performing various skewing permutations to make it
             difficult to automatically decipher. It
-            requires the <ulink url="http://php.net/gd">GD extension</ulink>
+            requires the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/gd">GD extension</link>
             compiled with TrueType or Freetype support. Currently, the
             <classname>Zend_Captcha_Image</classname> adapter can only generate
             <acronym>PNG</acronym> images.
@@ -262,14 +261,13 @@
             constructor by simply removing the 'set' method prefix and casting
             the initial letter to lowercase: "suffix", "height", "imgUrl", etc.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.captcha.adapters.recaptcha">
-        <title>Zend_Captcha_ReCaptcha</title>
+    <section xml:id="zend.captcha.adapters.recaptcha"><info><title>Zend_Captcha_ReCaptcha</title></info>
+        
 
         <para>
-            The <classname>Zend_Captcha_ReCaptcha</classname> adapter uses <link
-                linkend="zend.service.recaptcha">Zend_Service_ReCaptcha</link>
+            The <classname>Zend_Captcha_ReCaptcha</classname> adapter uses <link linkend="zend.service.recaptcha">Zend_Service_ReCaptcha</link>
             to generate and validate <acronym>CAPTCHA</acronym>s. It exposes the following
             methods:
         </para>
@@ -301,8 +299,5 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

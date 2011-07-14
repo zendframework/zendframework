@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.modular">
-    <title>Using a Conventional Modular Directory Structure</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.controller.modular.introduction">
-        <title>Introduction</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.modular"><info><title>Using a Conventional Modular Directory Structure</title></info>
+    
+
+    <section xml:id="zend.controller.modular.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             The Conventional Modular directory structure allows you to separate
@@ -13,7 +14,7 @@
             directory structure:
         </para>
 
-        <programlisting language="txt"><![CDATA[
+        <programlisting language="txt">
 docroot/
     index.php
 application/
@@ -48,7 +49,7 @@ application/
                 list/
             helpers/
             filters/
-]]></programlisting>
+</programlisting>
 
         <para>
             In this paradigm, the module name serves as a prefix to the
@@ -62,8 +63,8 @@ application/
             this chapter.
         </para>
 
-        <note>
-            <title>No Namespacing in the Default Module</title>
+        <note><info><title>No Namespacing in the Default Module</title></info>
+            
 
             <para>
                 Note that in the default module, controllers do not need a
@@ -80,10 +81,10 @@ application/
             So, how do you implement such a directory layout using the Zend
             Framework <acronym>MVC</acronym> components?
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.modular.directories">
-        <title>Specifying Module Controller Directories</title>
+    <section xml:id="zend.controller.modular.directories"><info><title>Specifying Module Controller Directories</title></info>
+        
 
         <para>
             The first step to making use of modules is to modify how you specify
@@ -103,12 +104,12 @@ application/
             and the <property>default</property> key must be present. As an example:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$front->setControllerDirectory(array(
-    'default' => '/path/to/application/controllers',
-    'blog'    => '/path/to/application/blog/controllers'
+        <programlisting language="php">
+$front-&gt;setControllerDirectory(array(
+    'default' =&gt; '/path/to/application/controllers',
+    'blog'    =&gt; '/path/to/application/blog/controllers'
 ));
-]]></programlisting>
+</programlisting>
 
         <para>
             <methodname>addControllerDirectory()</methodname> will take an optional second
@@ -117,10 +118,10 @@ $front->setControllerDirectory(array(
             <emphasis>default</emphasis> namespace. As an example:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$front->addControllerDirectory('/path/to/application/news/controllers',
+        <programlisting language="php">
+$front-&gt;addControllerDirectory('/path/to/application/news/controllers',
                                'news');
-]]></programlisting>
+</programlisting>
 
         <para>
             Saving the best for last, the easiest way to specify module
@@ -129,7 +130,7 @@ $front->addControllerDirectory('/path/to/application/news/controllers',
             <methodname>addModuleDirectory()</methodname>:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 /**
  * Assuming the following directory structure:
  * application/
@@ -141,8 +142,8 @@ $front->addControllerDirectory('/path/to/application/news/controllers',
  *         bar/
  *             controllers/
  */
-$front->addModuleDirectory('/path/to/application/modules');
-]]></programlisting>
+$front-&gt;addModuleDirectory('/path/to/application/modules');
+</programlisting>
 
         <para>
             The above example will define the <emphasis>default</emphasis>,
@@ -155,7 +156,7 @@ $front->addModuleDirectory('/path/to/application/modules');
             modules by using <methodname>setModuleControllerDirectoryName()</methodname>:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 /**
  * Change the controllers subdirectory to be 'con'
  * application/
@@ -167,9 +168,9 @@ $front->addModuleDirectory('/path/to/application/modules');
  *         bar/
  *             con/
  */
-$front->setModuleControllerDirectoryName('con');
-$front->addModuleDirectory('/path/to/application/modules');
-]]></programlisting>
+$front-&gt;setModuleControllerDirectoryName('con');
+$front-&gt;addModuleDirectory('/path/to/application/modules');
+</programlisting>
 
         <note>
             <para>
@@ -178,10 +179,10 @@ $front->addModuleDirectory('/path/to/application/modules');
                 <methodname>setModuleControllerDirectoryName()</methodname>.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.modular.router">
-        <title>Routing to Modules</title>
+    <section xml:id="zend.controller.modular.router"><info><title>Routing to Modules</title></info>
+        
 
         <para>
             The default route in <classname>Zend_Controller_Router_Rewrite</classname> is
@@ -201,10 +202,10 @@ $front->addModuleDirectory('/path/to/application/modules');
             controller directory array passed to the front controller and
             dispatcher.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.modular.defaultcontroller">
-        <title>Module or Global Default Controller</title>
+    <section xml:id="zend.controller.modular.defaultcontroller"><info><title>Module or Global Default Controller</title></info>
+        
 
         <para>
             In the default router, if a controller was not specified in the <acronym>URL</acronym>,
@@ -220,11 +221,8 @@ $front->addModuleDirectory('/path/to/application/modules');
             <varname>$useDefaultControllerAlways</varname> parameter in the front controller:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$front->setParam('useDefaultControllerAlways', true);
-]]></programlisting>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        <programlisting language="php">
+$front-&gt;setParam('useDefaultControllerAlways', true);
+</programlisting>
+    </section>
+</section>

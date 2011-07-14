@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.translate.adapter">
-    <title>Adapters for Zend_Translate</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.adapter"><info><title>Adapters for Zend_Translate</title></info>
+    
 
     <para>
         <classname>Zend_Translate</classname> can handle different adapters for translation.
@@ -10,8 +11,8 @@
         translation source files.
     </para>
 
-    <table id="zend.translate.adapter.table">
-        <title>Adapters for Zend_Translate</title>
+    <table xml:id="zend.translate.adapter.table"><info><title>Adapters for Zend_Translate</title></info>
+        
 
         <tgroup cols="3">
             <thead>
@@ -112,8 +113,8 @@
         </tgroup>
     </table>
 
-    <sect2 id="zend.translate.adapter.decision">
-        <title>How to decide which translation adapter to use</title>
+    <section xml:id="zend.translate.adapter.decision"><info><title>How to decide which translation adapter to use</title></info>
+        
 
         <para>
             You should decide which Adapter you want to use for
@@ -144,8 +145,8 @@
             </para>
         </note>
 
-        <sect3 id="zend.translate.adapter.array">
-            <title>Zend_Translate_Adapter_Array</title>
+        <section xml:id="zend.translate.adapter.array"><info><title>Zend_Translate_Adapter_Array</title></info>
+            
 
             <para>
                 The Array Adapter is the Adapter which is simplest to use for
@@ -161,10 +162,10 @@
                 of languages, and if you or your programmer team creates the
                 translations yourselves.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.csv">
-            <title>Zend_Translate_Adapter_Csv</title>
+        <section xml:id="zend.translate.adapter.csv"><info><title>Zend_Translate_Adapter_Csv</title></info>
+            
 
             <para>
                 The Csv Adapter is the Adapter which is simplest to use for
@@ -188,17 +189,17 @@
                     locale aware.
                 </para>
             </note>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.gettext">
-            <title>Zend_Translate_Adapter_Gettext</title>
+        <section xml:id="zend.translate.adapter.gettext"><info><title>Zend_Translate_Adapter_Gettext</title></info>
+            
 
             <para>
                 The Gettext Adapter is the Adapter which is used most
                 frequently. Gettext is a translation source format which was
                 introduced by GNU, and is now used worldwide.
                 It is not human readable, but there are several freeware tools
-                (for instance, <ulink url="http://sourceforge.net/projects/poedit/">POEdit</ulink>),
+                (for instance, <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://sourceforge.net/projects/poedit/">POEdit</link>),
                 which are very helpful. The <classname>Zend_Translate</classname> Gettext Adapter is
                 not implemented using <acronym>PHP</acronym>'s gettext extension.
                 You can use the Gettext Adapter even if you do not have
@@ -213,10 +214,10 @@
                 very simple. But gettext data are is stored in a
                 machine-readable format, which is not readable without tools.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.ini">
-            <title>Zend_Translate_Adapter_Ini</title>
+        <section xml:id="zend.translate.adapter.ini"><info><title>Zend_Translate_Adapter_Ini</title></info>
+            
 
             <para>
                 The Ini Adapter is a very simple Adapter which can even be used
@@ -230,8 +231,8 @@
                 himself. Do not use this adapter as generic translation source.
             </para>
 
-            <warning>
-                <title>Regression in PHP 5.3</title>
+            <warning><info><title>Regression in PHP 5.3</title></info>
+                
 
                 <para>
                     Prior to <acronym>PHP</acronym> 5.3, <methodname>parse_ini_file()</methodname>
@@ -244,10 +245,10 @@
                     utilizing a different adapter.
                 </para>
             </warning>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.tbx">
-            <title>Zend_Translate_Adapter_Tbx</title>
+        <section xml:id="zend.translate.adapter.tbx"><info><title>Zend_Translate_Adapter_Tbx</title></info>
+            
 
             <para>
                 The Tbx Adapter is an Adapter which will be used by customers
@@ -266,10 +267,10 @@
                 source files already exist.
                 The files are human readable and system-independent.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.tmx">
-            <title>Zend_Translate_Adapter_Tmx</title>
+        <section xml:id="zend.translate.adapter.tmx"><info><title>Zend_Translate_Adapter_Tmx</title></info>
+            
 
             <para>
                 The Tmx Adapter is the Adapter which will be used by most
@@ -286,10 +287,10 @@
                 Most medium to large companies use this adapter.
                 The files are human readable and system-independent.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.qt">
-            <title>Zend_Translate_Adapter_Qt</title>
+        <section xml:id="zend.translate.adapter.qt"><info><title>Zend_Translate_Adapter_Qt</title></info>
+            
 
             <para>
                 The Qt Adapter is for all customers which have TS files as their
@@ -303,10 +304,10 @@
                 Several big players have build software upon the QT framework.
                 The files are human readable and system-independent.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.xliff">
-            <title>Zend_Translate_Adapter_Xliff</title>
+        <section xml:id="zend.translate.adapter.xliff"><info><title>Zend_Translate_Adapter_Xliff</title></info>
+            
 
             <para>
                 The Xliff Adapter is the Adapter which will be used by most customers which
@@ -321,10 +322,10 @@
                 Most medium companies use this adapter.
                 The files are human readable and system-independent.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.xmltm">
-            <title>Zend_Translate_Adapter_XmlTm</title>
+        <section xml:id="zend.translate.adapter.xmltm"><info><title>Zend_Translate_Adapter_XmlTm</title></info>
+            
 
             <para>
                 The XmlTm Adapter is the Adapter which will be used by customers
@@ -339,11 +340,11 @@
                 This adapter should only be used when source files already exist.
                 The files are human readable and system-independent.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.translate.adapter.selfwritten">
-        <title>Integrate self written Adapters</title>
+    <section xml:id="zend.translate.adapter.selfwritten"><info><title>Integrate self written Adapters</title></info>
+        
 
         <para>
             <classname>Zend_Translate</classname> allows you to integrate and use self written
@@ -366,25 +367,25 @@
             example of how a self written adapter class could be implemented:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 try {
     $translate = new Zend_Translate(
         array(
-            'adapter' => 'Company_Translate_Adapter_MyFormat',
-            'content' => '/path/to/translate.xx',
-            'locale'  => 'en',
-            'myoption' => 'myvalue'
+            'adapter' =&gt; 'Company_Translate_Adapter_MyFormat',
+            'content' =&gt; '/path/to/translate.xx',
+            'locale'  =&gt; 'en',
+            'myoption' =&gt; 'myvalue'
         )
     );
 } catch (Exception $e) {
     // File not found, no adapter class...
     // General failure
 }
-]]></programlisting>
-    </sect2>
+</programlisting>
+    </section>
 
-    <sect2 id="zend.translate.adapter.caching">
-        <title>Speedup all Adapters</title>
+    <section xml:id="zend.translate.adapter.caching"><info><title>Speedup all Adapters</title></info>
+        
 
         <para>
             <classname>Zend_Translate</classname> allows you use internally
@@ -403,7 +404,7 @@ try {
             <methodname>removeCache()</methodname>.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $cache = Zend_Cache::factory('Core',
                              'File',
                              $frontendOptions,
@@ -411,15 +412,15 @@ $cache = Zend_Cache::factory('Core',
 Zend_Translate::setCache($cache);
 $translate = new Zend_Translate(
     array(
-        'adapter' => 'gettext',
-        'content' => '/path/to/translate.mo',
-        'locale'  => 'en'
+        'adapter' =&gt; 'gettext',
+        'content' =&gt; '/path/to/translate.mo',
+        'locale'  =&gt; 'en'
     )
 );
 
 // to clear the cache somewhere later in your code
 Zend_Translate::clearCache();
-]]></programlisting>
+</programlisting>
 
         <note>
             <para>
@@ -442,7 +443,7 @@ Zend_Translate::clearCache();
             <methodname>clearCache()</methodname> to declare which tag you want to delete.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $cache = Zend_Cache::factory('Core',
                              'File',
                              $frontendOptions,
@@ -450,18 +451,15 @@ $cache = Zend_Cache::factory('Core',
 Zend_Translate::setCache($cache);
 $translate = new Zend_Translate(
     array(
-        'adapter' => 'gettext',
-        'content' => '/path/to/translate.mo',
-        'locale'  => 'en',
-        'tag'     => 'MyTag'
+        'adapter' =&gt; 'gettext',
+        'content' =&gt; '/path/to/translate.mo',
+        'locale'  =&gt; 'en',
+        'tag'     =&gt; 'MyTag'
     )
 );
 
 // somewhere later in your code
 Zend_Translate::clearCache('MyTag');
-]]></programlisting>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</programlisting>
+    </section>
+</section>

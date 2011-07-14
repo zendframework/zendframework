@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.navigation">
-    <title>Zend_Application_Resource_Navigation</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.navigation"><info><title>Zend_Application_Resource_Navigation</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Navigation</classname> can be used to configure
-        a <classname>Zend_Navigation</classname> instance. Configuration options are per <link
-            linkend="zend.navigation.pages.common.options">the
+        a <classname>Zend_Navigation</classname> instance. Configuration options are per <link linkend="zend.navigation.pages.common.options">the
             <classname>Zend_Navigation</classname> options</link>.
     </para>
 
@@ -16,15 +16,15 @@
         -- from which you may retrieve it later.
     </para>
 
-    <example id="zend.application.available-resources.navigation.configExample">
-        <title>Sample Navigation resource configuration</title>
+    <example xml:id="zend.application.available-resources.navigation.configExample"><info><title>Sample Navigation resource configuration</title></info>
+        
 
         <para>
             Below is a sample <acronym>INI</acronym> snippet showing how to
             configure the navigation resource.
         </para>
 
-        <programlisting language="ini"><![CDATA[
+        <programlisting language="ini">
 resources.navigation.pages.page1.label = "Label of the first page"
 resources.navigation.pages.page1.route = "Route that belongs to the first page"
 
@@ -32,6 +32,6 @@ resources.navigation.pages.page1.route = "Route that belongs to the first page"
 resources.navigation.pages.page1.pages.page2.type = "Zend_Navigation_Page_Uri"
 resources.navigation.pages.page1.pages.page2.label = "Label of the second page"
 resources.navigation.pages.page1.pages.page2.uri = "/url/to/page/2"
-]]></programlisting>
+</programlisting>
     </example>
-</sect2>
+</section>

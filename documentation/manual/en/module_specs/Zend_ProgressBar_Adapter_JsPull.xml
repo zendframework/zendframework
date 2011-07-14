@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.progressbar.adapter.jspull">
-    <title>Zend_ProgressBar_Adapter_JsPull</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.progressbar.adapter.jspull"><info><title>Zend_ProgressBar_Adapter_JsPull</title></info>
+    
 
     <para>
         <classname>Zend_ProgressBar_Adapter_JsPull</classname> is the opposite of jsPush,
@@ -30,7 +31,4 @@
             </para>
         </listitem>
     </itemizedlist>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

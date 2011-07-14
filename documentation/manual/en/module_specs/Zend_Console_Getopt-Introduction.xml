@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.console.getopt.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         The <classname>Zend_Console_Getopt</classname> class helps command-line
@@ -108,8 +109,8 @@
         code which flags the user specified.
     </para>
 
-    <note>
-        <title>Getopt is not an Application Framework</title>
+    <note><info><title>Getopt is not an Application Framework</title></info>
+        
 
         <para>
             <classname>Zend_Console_Getopt</classname> does <emphasis>not</emphasis>
@@ -127,4 +128,4 @@
     <para>
         The following sections describe usage of <classname>Zend_Console_Getopt</classname>.
     </para>
-</sect1>
+</section>

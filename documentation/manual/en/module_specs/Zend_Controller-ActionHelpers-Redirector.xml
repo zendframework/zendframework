@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.actionhelpers.redirector">
-    <title>Redirector</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect4 id="zend.controller.actionhelper.redirector.introduction">
-        <title>Introduction</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.redirector"><info><title>Redirector</title></info>
+    
+
+    <section xml:id="zend.controller.actionhelper.redirector.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             The <emphasis>Redirector</emphasis> helper allows you to use a redirector
@@ -128,13 +129,13 @@
             Finally, you can determine the current redirect <acronym>URL</acronym> at any time
             using <methodname>getRedirectUrl()</methodname>.
         </para>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelper.redirector.basicusage">
-        <title>Basic Usage Examples</title>
+    <section xml:id="zend.controller.actionhelper.redirector.basicusage"><info><title>Basic Usage Examples</title></info>
+        
 
-        <example id="zend.controller.actionhelper.redirector.basicusage.example-1">
-            <title>Setting Options</title>
+        <example xml:id="zend.controller.actionhelper.redirector.basicusage.example-1"><info><title>Setting Options</title></info>
+            
 
             <para>
                 This example overrides several options, including setting the
@@ -143,7 +144,7 @@
                 redirecting.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 class SomeController extends Zend_Controller_Action
 {
     /**
@@ -155,14 +156,14 @@ class SomeController extends Zend_Controller_Action
 
     public function init()
     {
-        $this->_redirector = $this->_helper->getHelper('Redirector');
+        $this-&gt;_redirector = $this-&gt;_helper-&gt;getHelper('Redirector');
 
         // Set the default options for the redirector
         // Since the object is registered in the helper broker, these
         // become relevant for all actions from this point forward
-        $this->_redirector->setCode(303)
-                          ->setExit(false)
-                          ->setGotoSimple("this-action",
+        $this-&gt;_redirector-&gt;setCode(303)
+                          -&gt;setExit(false)
+                          -&gt;setGotoSimple("this-action",
                                           "some-controller");
     }
 
@@ -172,15 +173,15 @@ class SomeController extends Zend_Controller_Action
 
         // Redirect to a previously registered URL, and force an exit
         // to occur when done:
-        $this->_redirector->redirectAndExit();
+        $this-&gt;_redirector-&gt;redirectAndExit();
         return; // never reached
     }
 }
-]]></programlisting>
+</programlisting>
         </example>
 
-        <example id="zend.controller.actionhelper.redirector.basicusage.example-2">
-            <title>Using Defaults</title>
+        <example xml:id="zend.controller.actionhelper.redirector.basicusage.example-2"><info><title>Using Defaults</title></info>
+            
 
             <para>
                 This example assumes that the defaults are used, which means
@@ -188,7 +189,7 @@ class SomeController extends Zend_Controller_Action
                 <methodname>exit()</methodname>.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 // ALTERNATIVE EXAMPLE
 class AlternativeController extends Zend_Controller_Action
 {
@@ -201,23 +202,23 @@ class AlternativeController extends Zend_Controller_Action
 
     public function init()
     {
-        $this->_redirector = $this->_helper->getHelper('Redirector');
+        $this-&gt;_redirector = $this-&gt;_helper-&gt;getHelper('Redirector');
     }
 
     public function myAction()
     {
         /* do some stuff */
 
-        $this->_redirector
-            ->gotoUrl('/my-controller/my-action/param1/test/param2/test2');
+        $this-&gt;_redirector
+            -&gt;gotoUrl('/my-controller/my-action/param1/test/param2/test2');
         return; // never reached since default is to goto and exit
     }
 }
-]]></programlisting>
+</programlisting>
         </example>
 
-        <example id="zend.controller.actionhelper.redirector.basicusage.example-3">
-            <title>Using goto()'s _forward() API</title>
+        <example xml:id="zend.controller.actionhelper.redirector.basicusage.example-3"><info><title>Using goto()'s _forward() API</title></info>
+            
 
             <para>
                 <methodname>gotoSimple()</methodname>'s <acronym>API</acronym> mimics that of
@@ -228,7 +229,7 @@ class AlternativeController extends Zend_Controller_Action
                 chaining the action.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 class ForwardController extends Zend_Controller_Action
 {
     /**
@@ -240,7 +241,7 @@ class ForwardController extends Zend_Controller_Action
 
     public function init()
     {
-        $this->_redirector = $this->_helper->getHelper('Redirector');
+        $this-&gt;_redirector = $this-&gt;_helper-&gt;getHelper('Redirector');
     }
 
     public function myAction()
@@ -248,39 +249,38 @@ class ForwardController extends Zend_Controller_Action
         /* do some stuff */
 
         // Redirect to 'my-action' of 'my-controller' in the current
-        // module, using the params param1 => test and param2 => test2
-        $this->_redirector->gotoSimple('my-action',
+        // module, using the params param1 =&gt; test and param2 =&gt; test2
+        $this-&gt;_redirector-&gt;gotoSimple('my-action',
                                        'my-controller',
                                        null,
-                                       array('param1' => 'test',
-                                             'param2' => 'test2'
+                                       array('param1' =&gt; 'test',
+                                             'param2' =&gt; 'test2'
                                              )
                                        );
     }
 }
-]]></programlisting>
+</programlisting>
         </example>
 
-        <example id="zend.controller.actionhelper.redirector.basicusage.example-4">
-            <title>Using Route Assembly with gotoRoute()</title>
+        <example xml:id="zend.controller.actionhelper.redirector.basicusage.example-4"><info><title>Using Route Assembly with gotoRoute()</title></info>
+            
 
             <para>
-                The following example uses the <link
-                    linkend="zend.controller.router">router's</link>
+                The following example uses the <link linkend="zend.controller.router">router's</link>
                 <methodname>assemble()</methodname> method to create a <acronym>URL</acronym>
                 based on an associative array of parameters passed. It assumes the following
                 route has been registered:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $route = new Zend_Controller_Router_Route(
     'blog/:year/:month/:day/:id',
-    array('controller' => 'archive',
-          'module' => 'blog',
-          'action' => 'view')
+    array('controller' =&gt; 'archive',
+          'module' =&gt; 'blog',
+          'action' =&gt; 'view')
 );
-$router->addRoute('blogArchive', $route);
-]]></programlisting>
+$router-&gt;addRoute('blogArchive', $route);
+</programlisting>
 
             <para>
                 Given an array with year set to 2006, month to 4, day to 24, and
@@ -288,7 +288,7 @@ $router->addRoute('blogArchive', $route);
                 <filename>/blog/2006/4/24/42</filename>.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 class BlogAdminController extends Zend_Controller_Action
 {
     /**
@@ -300,7 +300,7 @@ class BlogAdminController extends Zend_Controller_Action
 
     public function init()
     {
-        $this->_redirector = $this->_helper->getHelper('Redirector');
+        $this-&gt;_redirector = $this-&gt;_helper-&gt;getHelper('Redirector');
     }
 
     public function returnAction()
@@ -309,19 +309,16 @@ class BlogAdminController extends Zend_Controller_Action
 
         // Redirect to blog archive. Builds the following URL:
         // /blog/2006/4/24/42
-        $this->_redirector->gotoRoute(
-            array('year' => 2006,
-                  'month' => 4,
-                  'day' => 24,
-                  'id' => 42),
+        $this-&gt;_redirector-&gt;gotoRoute(
+            array('year' =&gt; 2006,
+                  'month' =&gt; 4,
+                  'day' =&gt; 24,
+                  'id' =&gt; 42),
             'blogArchive'
         );
     }
 }
-]]></programlisting>
+</programlisting>
         </example>
-    </sect4>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

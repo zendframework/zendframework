@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.actionhelpers.flashmessenger">
-    <title>FlashMessenger</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect4 id="zend.controller.actionhelper.flashmessenger.introduction">
-        <title>Introduction</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.flashmessenger"><info><title>FlashMessenger</title></info>
+    
+
+    <section xml:id="zend.controller.actionhelper.flashmessenger.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             The <emphasis>FlashMessenger</emphasis> helper allows you to pass messages
@@ -18,10 +19,10 @@
             <link linkend="zend.session.advanced_usage.starting_a_session">Zend_Session</link>
             documentation for more details on its usage.)
         </para>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelper.flashmessenger.basicusage">
-        <title>Basic Usage Example</title>
+    <section xml:id="zend.controller.actionhelper.flashmessenger.basicusage"><info><title>Basic Usage Example</title></info>
+        
 
         <para>
             The usage example below shows the use of the flash messenger at its
@@ -31,7 +32,7 @@
             it as well).
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 class SomeController extends Zend_Controller_Action
 {
     /**
@@ -43,9 +44,9 @@ class SomeController extends Zend_Controller_Action
 
     public function init()
     {
-        $this->_flashMessenger =
-            $this->_helper->getHelper('FlashMessenger');
-        $this->initView();
+        $this-&gt;_flashMessenger =
+            $this-&gt;_helper-&gt;getHelper('FlashMessenger');
+        $this-&gt;initView();
     }
 
     public function myAction()
@@ -55,15 +56,15 @@ class SomeController extends Zend_Controller_Action
          * Zend_Controller_Action_Helper_FlashMessenger instance
          * on-demand
          */
-        $this->_flashMessenger->addMessage('Record Saved!');
+        $this-&gt;_flashMessenger-&gt;addMessage('Record Saved!');
     }
 
     public function myNextRequestAction()
     {
-        $this->view->messages = $this->_flashMessenger->getMessages();
-        $this->render();
+        $this-&gt;view-&gt;messages = $this-&gt;_flashMessenger-&gt;getMessages();
+        $this-&gt;render();
     }
 }
-]]></programlisting>
-    </sect4>
-</sect3>
+</programlisting>
+    </section>
+</section>

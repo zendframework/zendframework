@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.search.lucene.extending">
-    <title>Extensibility</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.search.lucene.extending.analysis">
-        <title>Text Analysis</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.extending"><info><title>Extensibility</title></info>
+    
+
+    <section xml:id="zend.search.lucene.extending.analysis"><info><title>Text Analysis</title></info>
+        
 
         <para>
             The <classname>Zend_Search_Lucene_Analysis_Analyzer</classname> class is used by the
@@ -30,12 +31,12 @@
             To switch between analyzers:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 Zend_Search_Lucene_Analysis_Analyzer::setDefault(
     new Zend_Search_Lucene_Analysis_Analyzer_Common_Text());
 ...
-$index->addDocument($doc);
-]]></programlisting>
+$index-&gt;addDocument($doc);
+</programlisting>
 
         <para>
             The <classname>Zend_Search_Lucene_Analysis_Analyzer_Common</classname> class is designed
@@ -54,10 +55,10 @@ $index->addDocument($doc);
         <para>
             Here is an example of a custom analyzer, which accepts words with digits as terms:
 
-            <example id="zend.search.lucene.extending.analysis.example-1">
-                <title>Custom text Analyzer</title>
+            <example xml:id="zend.search.lucene.extending.analysis.example-1"><info><title>Custom text Analyzer</title></info>
+                
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 /**
  * Here is a custom text analyser, which treats words with digits as
  * one term
@@ -72,7 +73,7 @@ class My_Analyzer extends Zend_Search_Lucene_Analysis_Analyzer_Common
      */
     public function reset()
     {
-        $this->_position = 0;
+        $this-&gt;_position = 0;
     }
 
     /**
@@ -84,38 +85,38 @@ class My_Analyzer extends Zend_Search_Lucene_Analysis_Analyzer_Common
      */
     public function nextToken()
     {
-        if ($this->_input === null) {
+        if ($this-&gt;_input === null) {
             return null;
         }
 
-        while ($this->_position < strlen($this->_input)) {
+        while ($this-&gt;_position &lt; strlen($this-&gt;_input)) {
             // skip white space
-            while ($this->_position < strlen($this->_input) &&
-                   !ctype_alnum( $this->_input[$this->_position] )) {
-                $this->_position++;
+            while ($this-&gt;_position &lt; strlen($this-&gt;_input) &amp;&amp;
+                   !ctype_alnum( $this-&gt;_input[$this-&gt;_position] )) {
+                $this-&gt;_position++;
             }
 
-            $termStartPosition = $this->_position;
+            $termStartPosition = $this-&gt;_position;
 
             // read token
-            while ($this->_position < strlen($this->_input) &&
-                   ctype_alnum( $this->_input[$this->_position] )) {
-                $this->_position++;
+            while ($this-&gt;_position &lt; strlen($this-&gt;_input) &amp;&amp;
+                   ctype_alnum( $this-&gt;_input[$this-&gt;_position] )) {
+                $this-&gt;_position++;
             }
 
             // Empty token, end of stream.
-            if ($this->_position == $termStartPosition) {
+            if ($this-&gt;_position == $termStartPosition) {
                 return null;
             }
 
             $token = new Zend_Search_Lucene_Analysis_Token(
-                                      substr($this->_input,
+                                      substr($this-&gt;_input,
                                              $termStartPosition,
-                                             $this->_position -
+                                             $this-&gt;_position -
                                              $termStartPosition),
                                       $termStartPosition,
-                                      $this->_position);
-            $token = $this->normalize($token);
+                                      $this-&gt;_position);
+            $token = $this-&gt;normalize($token);
             if ($token !== null) {
                 return $token;
             }
@@ -128,13 +129,13 @@ class My_Analyzer extends Zend_Search_Lucene_Analysis_Analyzer_Common
 
 Zend_Search_Lucene_Analysis_Analyzer::setDefault(
     new My_Analyzer());
-]]></programlisting>
+</programlisting>
             </example>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.extending.filters">
-        <title>Tokens Filtering</title>
+    <section xml:id="zend.search.lucene.extending.filters"><info><title>Tokens Filtering</title></info>
+        
 
         <para>
             The <classname>Zend_Search_Lucene_Analysis_Analyzer_Common</classname> analyzer also
@@ -187,43 +188,43 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
             pre-defined or custom analyzers like this:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $stopWords = array('a', 'an', 'at', 'the', 'and', 'or', 'is', 'am');
 $stopWordsFilter =
     new Zend_Search_Lucene_Analysis_TokenFilter_StopWords($stopWords);
 
 $analyzer =
     new Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum_CaseInsensitive();
-$analyzer->addFilter($stopWordsFilter);
+$analyzer-&gt;addFilter($stopWordsFilter);
 
 Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
-]]></programlisting>
+</programlisting>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $shortWordsFilter = new Zend_Search_Lucene_Analysis_TokenFilter_ShortWords();
 
 $analyzer =
     new Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum_CaseInsensitive();
-$analyzer->addFilter($shortWordsFilter);
+$analyzer-&gt;addFilter($shortWordsFilter);
 
 Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
-]]></programlisting>
+</programlisting>
 
         <para>
             The <classname>Zend_Search_Lucene_Analysis_TokenFilter_StopWords</classname> constructor
             takes an array of stop-words as an input. But stop-words may be also loaded from a file:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $stopWordsFilter = new Zend_Search_Lucene_Analysis_TokenFilter_StopWords();
-$stopWordsFilter->loadFromFile($my_stopwords_file);
+$stopWordsFilter-&gt;loadFromFile($my_stopwords_file);
 
 $analyzer =
    new Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum_CaseInsensitive();
-$analyzer->addFilter($stopWordsFilter);
+$analyzer-&gt;addFilter($stopWordsFilter);
 
 Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
-]]></programlisting>
+</programlisting>
 
         <para>
             This file should be a common text file with one word in each line. The '#' character
@@ -235,10 +236,10 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
             constructor has one optional argument. This is the word length limit, set by default to
             2.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.extending.scoring">
-        <title>Scoring Algorithms</title>
+    <section xml:id="zend.search.lucene.extending.scoring"><info><title>Scoring Algorithms</title></info>
+        
 
         <para>
             The score of a document <literal>d</literal> for a query <literal>q</literal>
@@ -309,7 +310,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
             method to set it as default.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 class MySimilarity extends Zend_Search_Lucene_Search_Similarity {
     public function lengthNorm($fieldName, $numTerms) {
         return 1.0/sqrt($numTerms);
@@ -342,11 +343,11 @@ class MySimilarity extends Zend_Search_Lucene_Search_Similarity {
 
 $mySimilarity = new MySimilarity();
 Zend_Search_Lucene_Search_Similarity::setDefault($mySimilarity);
-]]></programlisting>
-    </sect2>
+</programlisting>
+    </section>
 
-    <sect2 id="zend.search.lucene.extending.storage">
-        <title>Storage Containers</title>
+    <section xml:id="zend.search.lucene.extending.storage"><info><title>Storage Containers</title></info>
+        
 
         <para>
             The abstract class <classname>Zend_Search_Lucene_Storage_Directory</classname> defines
@@ -379,7 +380,7 @@ Zend_Search_Lucene_Search_Similarity::setDefault($mySimilarity);
             <classname>Zend_Search_Lucene_Storage_Directory</classname> methods:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 abstract class Zend_Search_Lucene_Storage_Directory {
 /**
  * Closes the store.
@@ -455,7 +456,7 @@ abstract function touchFile($filename);
 abstract function getFileObject($filename);
 
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             The <methodname>getFileObject($filename)</methodname> method of a
@@ -478,7 +479,7 @@ abstract function getFileObject($filename);
             overridden in your implementation:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 class MyFile extends Zend_Search_Lucene_Storage_File {
     /**
      * Sets the file position indicator and advances the file pointer.
@@ -510,9 +511,6 @@ class MyFile extends Zend_Search_Lucene_Storage_File {
         ...
     }
 }
-]]></programlisting>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</programlisting>
+    </section>
+</section>

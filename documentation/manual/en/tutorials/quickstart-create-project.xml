@@ -1,19 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.quickstart.create-project">
-    <title>Create Your Project</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.create-project"><info><title>Create Your Project</title></info>
+    
 
     <para>
         In order to create your project, you must first download and extract Zend Framework.
     </para>
 
-    <sect2 id="learning.quickstart.create-project.install-zf">
-        <title>Install Zend Framework</title>
+    <section xml:id="learning.quickstart.create-project.install-zf"><info><title>Install Zend Framework</title></info>
+        
 
         <para>
             The easiest way to get Zend Framework along with a complete <acronym>PHP</acronym> stack
-            is by installing <ulink url="http://www.zend.com/en/products/server-ce/downloads">Zend
-                Server</ulink>. Zend Server has native installers for Mac OSX, Windows, Fedora Core,
+            is by installing <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.com/en/products/server-ce/downloads">Zend
+                Server</link>. Zend Server has native installers for Mac OSX, Windows, Fedora Core,
             and Ubuntu, as well as a universal installation package compatible with most Linux
             distributions.
         </para>
@@ -27,8 +28,8 @@
         </para>
 
         <para>
-            Alternately, you can <ulink url="http://framework.zend.com/download/latest">Download the
-            latest version of Zend Framework</ulink> and extract the contents; make a note of where
+            Alternately, you can <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/download/latest">Download the
+            latest version of Zend Framework</link> and extract the contents; make a note of where
             you have done so.
         </para>
 
@@ -41,13 +42,13 @@
         <para>
             That's it! Zend Framework is now installed and ready to use.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.quickstart.create-project.create-project">
-        <title>Create Your Project</title>
+    <section xml:id="learning.quickstart.create-project.create-project"><info><title>Create Your Project</title></info>
+        
 
-        <note>
-            <title>zf Command Line Tool</title>
+        <note><info><title>zf Command Line Tool</title></info>
+            
 
             <para>
                 In your Zend Framework installation is a <filename>bin/</filename> subdirectory,
@@ -71,21 +72,21 @@
         </note>
 
         <para>
-            Open a terminal (in Windows, <command>Start -> Run</command>, and then use
+            Open a terminal (in Windows, <command>Start -&gt; Run</command>, and then use
             <command>cmd</command>). Navigate to a directory where you would like to start a
             project. Then, use the path to the appropriate script, and execute one of the following:
         </para>
 
-        <programlisting language="shell"><![CDATA[
+        <programlisting language="shell">
 % zf create project quickstart
-]]></programlisting>
+</programlisting>
 
         <para>
             Running this command will create your basic site structure, including your initial
             controllers and views. The tree looks like the following:
         </para>
 
-        <programlisting language="text"><![CDATA[
+        <programlisting language="text">
 quickstart
 |-- application
 |   |-- Bootstrap.php
@@ -112,7 +113,7 @@ quickstart
     |-- library
     |   `-- bootstrap.php
     `-- phpunit.xml
-]]></programlisting>
+</programlisting>
 
         <para>
             At this point, if you haven't added Zend Framework to your
@@ -123,13 +124,13 @@ quickstart
             project. On unix-like systems, that would look like one of the following:
         </para>
 
-        <programlisting language="shell"><![CDATA[
+        <programlisting language="shell">
 # Symlink:
 % cd library; ln -s path/to/ZendFramework/library/Zend .
 
 # Copy:
 % cd library; cp -r path/to/ZendFramework/library/Zend .
-]]></programlisting>
+</programlisting>
 
         <para>
             On Windows systems, it may be easiest to do this from the Explorer.
@@ -139,10 +140,10 @@ quickstart
             Now that the project is created, the main artifacts to begin understanding are the
             bootstrap, configuration, action controllers, and views.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.quickstart.create-project.bootstrap">
-        <title>The Bootstrap</title>
+    <section xml:id="learning.quickstart.create-project.bootstrap"><info><title>The Bootstrap</title></info>
+        
 
         <para>
             Your <classname>Bootstrap</classname> class defines what resources and components to
@@ -152,21 +153,21 @@ quickstart
             for action controllers (more on that later). The class looks like the following:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // application/Bootstrap.php
 
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             As you can see, not much is necessary to begin with.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.quickstart.create-project.configuration">
-        <title>Configuration</title>
+    <section xml:id="learning.quickstart.create-project.configuration"><info><title>Configuration</title></info>
+        
 
         <para>
             While Zend Framework is itself configurationless, you often need to configure your
@@ -177,7 +178,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             class name), and the path to your action controllers. It looks as follows:
         </para>
 
-        <programlisting language="ini"><![CDATA[
+        <programlisting language="ini">
 ; application/configs/application.ini
 
 [production]
@@ -199,7 +200,7 @@ phpSettings.display_errors = 1
 [development : production]
 phpSettings.display_startup_errors = 1
 phpSettings.display_errors = 1
-]]></programlisting>
+</programlisting>
 
         <para>
             Several things about this file should be noted. First, when using
@@ -210,10 +211,10 @@ phpSettings.display_errors = 1
             is a useful way to organize configuration to ensure that appropriate settings are
             available in each stage of application development.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.quickstart.create-project.action-controllers">
-        <title>Action Controllers</title>
+    <section xml:id="learning.quickstart.create-project.action-controllers"><info><title>Action Controllers</title></info>
+        
 
         <para>
             Your application's <emphasis>action controllers</emphasis> contain your application
@@ -240,7 +241,7 @@ phpSettings.display_errors = 1
             The default <classname>IndexController</classname> is as follows:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // application/controllers/IndexController.php
 
 class IndexController extends Zend_Controller_Action
@@ -256,13 +257,13 @@ class IndexController extends Zend_Controller_Action
         // action body
     }
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             And the default <classname>ErrorController</classname> is as follows:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // application/controllers/ErrorController.php
 
 class ErrorController extends Zend_Controller_Action
@@ -270,39 +271,39 @@ class ErrorController extends Zend_Controller_Action
 
     public function errorAction()
     {
-        $errors = $this->_getParam('error_handler');
+        $errors = $this-&gt;_getParam('error_handler');
 
-        switch ($errors->type) {
+        switch ($errors-&gt;type) {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
 
                 // 404 error -- controller or action not found
-                $this->getResponse()->setHttpResponseCode(404);
-                $this->view->message = 'Page not found';
+                $this-&gt;getResponse()-&gt;setHttpResponseCode(404);
+                $this-&gt;view-&gt;message = 'Page not found';
                 break;
             default:
                 // application error
-                $this->getResponse()->setHttpResponseCode(500);
-                $this->view->message = 'Application error';
+                $this-&gt;getResponse()-&gt;setHttpResponseCode(500);
+                $this-&gt;view-&gt;message = 'Application error';
                 break;
         }
 
-        $this->view->exception = $errors->exception;
-        $this->view->request   = $errors->request;
+        $this-&gt;view-&gt;exception = $errors-&gt;exception;
+        $this-&gt;view-&gt;request   = $errors-&gt;request;
     }
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             You'll note that (1) the <classname>IndexController</classname> contains no real code,
             and (2) the <classname>ErrorController</classname> makes reference to a "view" property.
             That leads nicely into our next subject.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.quickstart.create-project.views">
-        <title>Views</title>
+    <section xml:id="learning.quickstart.create-project.views"><info><title>Views</title></info>
+        
 
         <para>
             Views in Zend Framework are written in plain old <acronym>PHP</acronym>. View scripts
@@ -327,9 +328,9 @@ class ErrorController extends Zend_Controller_Action
             <filename>index/index.phtml</filename> view script:
         </para>
 
-        <programlisting language="php"><![CDATA[
-<!-- application/views/scripts/index/index.phtml -->
-<style>
+        <programlisting language="php">
+&lt;!-- application/views/scripts/index/index.phtml --&gt;
+&lt;style&gt;
 
     a:link,
     a:visited
@@ -359,70 +360,69 @@ class ErrorController extends Zend_Controller_Action
         height: 100%;
     }
 
-</style>
-<div id="welcome">
-    <h1>Welcome to the <span id="zf-name">Zend Framework!</span><h1 />
-    <h3>This is your project's main page<h3 />
-    <div id="more-information">
-        <p>
-            <img src="http://framework.zend.com/images/PoweredBy_ZF_4LightBG.png" />
-        </p>
+&lt;/style&gt;
+&lt;div id="welcome"&gt;
+    &lt;h1&gt;Welcome to the &lt;span id="zf-name"&gt;Zend Framework!&lt;/span&gt;&lt;h1 /&gt;
+    &lt;h3&gt;This is your project's main page&lt;h3 /&gt;
+    &lt;div id="more-information"&gt;
+        &lt;p&gt;
+            &lt;img src="http://framework.zend.com/images/PoweredBy_ZF_4LightBG.png" /&gt;
+        &lt;/p&gt;
 
-        <p>
-            Helpful Links: <br />
-            <a href="http://framework.zend.com/">Zend Framework Website</a> |
-            <a href="http://framework.zend.com/manual/en/">Zend Framework
-                Manual</a>
-        </p>
-    </div>
-</div>
-]]></programlisting>
+        &lt;p&gt;
+            Helpful Links: &lt;br /&gt;
+            &lt;a href="http://framework.zend.com/"&gt;Zend Framework Website&lt;/a&gt; |
+            &lt;a href="http://framework.zend.com/manual/en/"&gt;Zend Framework
+                Manual&lt;/a&gt;
+        &lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</programlisting>
 
         <para>
             The <filename>error/error.phtml</filename> view script is slightly more interesting as
             it uses some <acronym>PHP</acronym> conditionals:
         </para>
 
-        <programlisting language="php"><![CDATA[
-<!-- application/views/scripts/error/error.phtml -->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN";
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Zend Framework Default Application</title>
-</head>
-<body>
-  <h1>An error occurred</h1>
-  <h2><?php echo $this->message ?></h2>
+        <programlisting language="php">
+&lt;!-- application/views/scripts/error/error.phtml --&gt;
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN";
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;
+  &lt;title&gt;Zend Framework Default Application&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;An error occurred&lt;/h1&gt;
+  &lt;h2&gt;&lt;?php echo $this-&gt;message ?&gt;&lt;/h2&gt;
 
-  <?php if ('development' == $this->env): ?>
+  &lt;?php if ('development' == $this-&gt;env): ?&gt;
 
-  <h3>Exception information:</h3>
-  <p>
-      <b>Message:</b> <?php echo $this->exception->getMessage() ?>
-  </p>
+  &lt;h3&gt;Exception information:&lt;/h3&gt;
+  &lt;p&gt;
+      &lt;b&gt;Message:&lt;/b&gt; &lt;?php echo $this-&gt;exception-&gt;getMessage() ?&gt;
+  &lt;/p&gt;
 
-  <h3>Stack trace:</h3>
-  <pre><?php echo $this->exception->getTraceAsString() ?>
-  </pre>
+  &lt;h3&gt;Stack trace:&lt;/h3&gt;
+  &lt;pre&gt;&lt;?php echo $this-&gt;exception-&gt;getTraceAsString() ?&gt;
+  &lt;/pre&gt;
 
-  <h3>Request Parameters:</h3>
-  <pre><?php echo var_export($this->request->getParams(), 1) ?>
-  </pre>
-  <?php endif ?>
+  &lt;h3&gt;Request Parameters:&lt;/h3&gt;
+  &lt;pre&gt;&lt;?php echo var_export($this-&gt;request-&gt;getParams(), 1) ?&gt;
+  &lt;/pre&gt;
+  &lt;?php endif ?&gt;
 
-</body>
-</html>
-]]></programlisting>
-    </sect2>
+&lt;/body&gt;
+&lt;/html&gt;
+</programlisting>
+    </section>
 
-    <sect2 id="learning.quickstart.create-project.vhost">
-        <title>Create a virtual host</title>
+    <section xml:id="learning.quickstart.create-project.vhost"><info><title>Create a virtual host</title></info>
+        
 
         <para>
-            For purposes of this quick start, we will assume you are using the <ulink
-                url="http://httpd.apache.org/">Apache web server</ulink>. Zend Framework works
+            For purposes of this quick start, we will assume you are using the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://httpd.apache.org/">Apache web server</link>. Zend Framework works
             perfectly well with other web servers -- including Microsoft Internet Information
             Server, lighttpd, nginx, and more -- but most developers should be famililar with Apache
             at the minimum, and it provides an easy introduction to Zend Framework's directory
@@ -470,21 +470,21 @@ class ErrorController extends Zend_Controller_Action
             "*:80". Second, define a virtual host:
         </para>
 
-        <programlisting language="apache"><![CDATA[
-<VirtualHost *:80>
+        <programlisting language="apache">
+&lt;VirtualHost *:80&gt;
     ServerName quickstart.local
     DocumentRoot /path/to/quickstart/public
 
     SetEnv APPLICATION_ENV "development"
 
-    <Directory /path/to/quickstart/public>
+    &lt;Directory /path/to/quickstart/public&gt;
         DirectoryIndex index.php
         AllowOverride All
         Order allow,deny
         Allow from all
-    </Directory>
-</VirtualHost>
-]]></programlisting>
+    &lt;/Directory&gt;
+&lt;/VirtualHost&gt;
+</programlisting>
 
         <para>
             There are several things to note. First, note that the <varname>DocumentRoot</varname>
@@ -512,22 +512,22 @@ class ErrorController extends Zend_Controller_Action
             the system, the entry will look like the following:
         </para>
 
-        <programlisting language="text"><![CDATA[
+        <programlisting language="text">
 127.0.0.1 quickstart.local
-]]></programlisting>
+</programlisting>
 
         <para>
             Start your webserver (or restart it), and you should be ready to go.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.quickstart.create-project.checkpoint">
-        <title>Checkpoint</title>
+    <section xml:id="learning.quickstart.create-project.checkpoint"><info><title>Checkpoint</title></info>
+        
 
         <para>
             At this point, you should be able to fire up your initial Zend Framework application.
             Point your browser to the server name you configured in the previous section; you should
             be able to see a welcome page at this point.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

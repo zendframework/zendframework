@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.test.phpunit.bootstrapping">
-    <title>Bootstrapping your TestCase</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.bootstrapping"><info><title>Bootstrapping your TestCase</title></info>
+    
 
     <para>
         As noted in the <link linkend="zend.test.phpunit.loginexample">Login
@@ -27,20 +28,20 @@
         to call <methodname>parent::setUp()</methodname> when done:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     public function setUp()
     {
         // Assign and instantiate in one step:
-        $this->bootstrap = new Zend_Application(
+        $this-&gt;bootstrap = new Zend_Application(
             'testing',
             APPLICATION_PATH . '/configs/application.ini'
         );
         parent::setUp();
     }
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         Second, you can set this property to point to a file. If you do
@@ -49,49 +50,48 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         specific needs.
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     public $bootstrap = '/path/to/bootstrap/file.php'
 
     // ...
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         Third, you can provide a <acronym>PHP</acronym> callback to execute in order to bootstrap
-        your application. This method is seen in the <link
-            linkend="zend.test.phpunit.loginexample">Login example</link>. If
+        your application. This method is seen in the <link linkend="zend.test.phpunit.loginexample">Login example</link>. If
         the callback is a function or static method, this could be set at the
         class level:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     public $bootstrap = array('App', 'bootstrap');
 
     // ...
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         In cases where an object instance is necessary, we recommend performing
         this in your <methodname>setUp()</methodname> method:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     public function setUp()
     {
         // Use the 'start' method of a Bootstrap object instance:
         $bootstrap = new Bootstrap('test');
-        $this->bootstrap = array($bootstrap, 'start');
+        $this-&gt;bootstrap = array($bootstrap, 'start');
         parent::setUp();
     }
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         Note the call to <methodname>parent::setUp()</methodname>; this is necessary, as
@@ -146,7 +146,4 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         Once the application is bootstrapped, you can then start creating
         your tests.
     </para>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

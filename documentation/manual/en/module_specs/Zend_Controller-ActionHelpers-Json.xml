@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.actionhelpers.json">
-    <title>JSON</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.json"><info><title>JSON</title></info>
+    
 
     <para>
         <acronym>JSON</acronym> responses are rapidly becoming the response of choice when dealing
@@ -29,9 +30,9 @@
                 <classname>Zend_Json_Expr</classname>.
             </para>
 
-            <programlisting language="php"><![CDATA[
-$this->_helper->json($data, array('enableJsonExprFinder' => true));
-]]></programlisting>
+            <programlisting language="php">
+$this-&gt;_helper-&gt;json($data, array('enableJsonExprFinder' =&gt; true));
+</programlisting>
         </listitem>
 
         <listitem>
@@ -60,26 +61,26 @@ $this->_helper->json($data, array('enableJsonExprFinder' => true));
         <methodname>sendJson()</methodname>:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
     {
         // do some processing...
         // Send the JSON response:
-        $this->_helper->json($data);
+        $this-&gt;_helper-&gt;json($data);
 
         // or...
-        $this->_helper->json->sendJson($data);
+        $this-&gt;_helper-&gt;json-&gt;sendJson($data);
 
         // or retrieve the json:
-        $json = $this->_helper->json->encodeJson($data);
+        $json = $this-&gt;_helper-&gt;json-&gt;encodeJson($data);
     }
 }
-]]></programlisting>
+</programlisting>
 
-    <note>
-        <title>Keeping Layouts</title>
+    <note><info><title>Keeping Layouts</title></info>
+        
 
         <para>
             If you have a separate layout for <acronym>JSON</acronym> responses -- perhaps to wrap
@@ -89,9 +90,9 @@ class FooController extends Zend_Controller_Action
             layouts enabled:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$this->_helper->json($data, true);
-]]></programlisting>
+        <programlisting language="php">
+$this-&gt;_helper-&gt;json($data, true);
+</programlisting>
 
         <para>
             Optionally, you can pass an array as the second parameter. This
@@ -99,13 +100,13 @@ $this->_helper->json($data, true);
             <emphasis>keepLayouts</emphasis> option:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$this->_helper->json($data, array('keepLayouts' => true);
-]]></programlisting>
+        <programlisting language="php">
+$this-&gt;_helper-&gt;json($data, array('keepLayouts' =&gt; true);
+</programlisting>
     </note>
 
-    <note>
-        <title>Enabling encoding using Zend_Json_Expr</title>
+    <note><info><title>Enabling encoding using Zend_Json_Expr</title></info>
+        
 
         <para>
             <methodname>Zend_Json::encode()</methodname> allows the encoding of native
@@ -115,9 +116,9 @@ $this->_helper->json($data, array('keepLayouts' => true);
             option:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$this->_helper->json($data, array('enableJsonExprFinder' => true);
-]]></programlisting>
+        <programlisting language="php">
+$this-&gt;_helper-&gt;json($data, array('enableJsonExprFinder' =&gt; true);
+</programlisting>
 
         <para>
             If you desire to do this, you <emphasis>must</emphasis> pass an
@@ -126,14 +127,11 @@ $this->_helper->json($data, array('enableJsonExprFinder' => true);
             options are then passed to <methodname>Zend_Json::encode()</methodname>.
         </para>
 
-        <programlisting language="php"><![CDATA[
-$this->_helper->json($data, array(
-    'enableJsonExprFinder' => true,
-    'keepLayouts'          => true,
+        <programlisting language="php">
+$this-&gt;_helper-&gt;json($data, array(
+    'enableJsonExprFinder' =&gt; true,
+    'keepLayouts'          =&gt; true,
 ));
-]]></programlisting>
+</programlisting>
     </note>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

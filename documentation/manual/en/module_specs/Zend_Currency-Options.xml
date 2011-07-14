@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.currency.options">
-    <title>Options for currencies</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.options"><info><title>Options for currencies</title></info>
+    
 
     <para>
         Depending on your needs, several options can be specified at instantiation. All of this
@@ -9,7 +10,7 @@
         will be rendered. This includes for example:
     </para>
 
-    <itemizedlist mark='opencircle'>
+    <itemizedlist mark="opencircle">
         <listitem>
             <para>
                 <emphasis>Currency symbol, shortname or name</emphasis>:
@@ -41,8 +42,7 @@
             <para>
                 You could define the script which shall be used to display digits. Detailed
                 information about scripts and their usage can be found in
-                <classname>Zend_Locale</classname>'s chapter <link
-                    linkend="zend.locale.numbersystems">Numeral System Conversion</link>.
+                <classname>Zend_Locale</classname>'s chapter <link linkend="zend.locale.numbersystems">Numeral System Conversion</link>.
             </para>
         </listitem>
 
@@ -66,7 +66,7 @@
         you have to give this options as array.
     </para>
 
-    <itemizedlist mark='opencircle'>
+    <itemizedlist mark="opencircle">
         <listitem>
             <para>
                 <emphasis><property>currency</property></emphasis>: Defines the abbreviation
@@ -78,8 +78,7 @@
             <para>
                 <emphasis><property>display</property></emphasis>: Defines which part of the
                 currency should be used for displaying the currency representation. There are 4
-                representations which can be used and which are all described in <link
-                    linkend="zend.currency.description">this
+                representations which can be used and which are all described in <link linkend="zend.currency.description">this
                     table</link>.
             </para>
         </listitem>
@@ -90,8 +89,7 @@
                 should be used for displaying numbers. This number-format includes for example
                 the thousand separator. You can either use a default format by giving a locale
                 identifier, or define the number-format manually. If no format is set the locale
-                from the <classname>Zend_Currency</classname> object will be used. See <link
-                    linkend="zend.locale.number.localize.table-1">the chapter about number
+                from the <classname>Zend_Currency</classname> object will be used. See <link linkend="zend.locale.number.localize.table-1">the chapter about number
                     formatting</link> for details.
             </para>
         </listitem>
@@ -116,8 +114,7 @@
             <para>
                 <emphasis><property>position</property></emphasis>: Defines the position at
                 which the currency description should be displayed. The supported positions are
-                described <link
-                    linkend="zend.currency.position">this section</link>.
+                described <link linkend="zend.currency.position">this section</link>.
             </para>
         </listitem>
 
@@ -134,8 +131,7 @@
                 <emphasis><property>script</property></emphasis>: Defined which script should
                 be used for displaying digits. The default script for most locales is
                 <emphasis>'Latn'</emphasis>, which includes the digits 0 to 9. Other
-                scripts such as 'Arab' (Arabian) are using other digits. See <link
-                    linkend="zend.locale.numbersystems">the chapter about numbering
+                scripts such as 'Arab' (Arabian) are using other digits. See <link linkend="zend.locale.numbersystems">the chapter about numbering
                     systems</link> for details and available options.
             </para>
         </listitem>
@@ -168,4 +164,4 @@
         default values for this settings conform the official standard for currency
         representation in every country.
     </para>
-</sect1>
+</section>

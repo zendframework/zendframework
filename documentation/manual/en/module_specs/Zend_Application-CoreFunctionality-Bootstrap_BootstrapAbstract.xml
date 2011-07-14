@@ -1,19 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.application.core-functionality.bootstrap-bootstrapabstract">
-    <title>Zend_Application_Bootstrap_BootstrapAbstract</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.core-functionality.bootstrap-bootstrapabstract"><info><title>Zend_Application_Bootstrap_BootstrapAbstract</title></info>
+    
 
     <para>
         <classname>Zend_Application_Bootstrap_BootstrapAbstract</classname> is an abstract class
         which provides the base functionality of a common bootstrap. It implements
         both <link linkend="zend.application.core-functionality.bootstrap-bootstrapper">
-            <classname>Zend_Application_Bootstrap_Bootstrapper</classname></link> and <link
-            linkend="zend.application.core-functionality.bootstrap-resourcebootstrapper">
+            <classname>Zend_Application_Bootstrap_Bootstrapper</classname></link> and <link linkend="zend.application.core-functionality.bootstrap-resourcebootstrapper">
             <classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname></link>.
     </para>
 
-    <table id="zend.application.core-functionality.bootstrap-bootstrapabstract.api.table">
-        <title>Zend_Application_Bootstrap_BootstrapAbstract Methods</title>
+    <table xml:id="zend.application.core-functionality.bootstrap-bootstrapabstract.api.table"><info><title>Zend_Application_Bootstrap_BootstrapAbstract Methods</title></info>
+        
 
         <tgroup cols="4">
             <thead>
@@ -214,8 +214,7 @@
                     <entry>
                         <para>
                             Retrieves the container that stores resources. If no
-                            container is currently registered, it registers a <link
-                                linkend="zend.registry">Zend_Registry</link>
+                            container is currently registered, it registers a <link linkend="zend.registry">Zend_Registry</link>
                             instance before returning it.
                         </para>
                     </entry>
@@ -375,4 +374,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect2>
+</section>

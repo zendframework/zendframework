@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.navigation.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_Navigation</classname> is a component for managing
@@ -10,15 +11,15 @@
         sitemaps, or serve as a model for other navigation related purposes.
     </para>
 
-    <sect2 id="zend.navigation.introduction.concepts">
-        <title>Pages and Containers</title>
+    <section xml:id="zend.navigation.introduction.concepts"><info><title>Pages and Containers</title></info>
+        
 
         <para>
             There are two main concepts in <classname>Zend_Navigation</classname>:
         </para>
 
-        <sect3 id="zend.navigation.introduction.pages">
-            <title>Pages</title>
+        <section xml:id="zend.navigation.introduction.pages"><info><title>Pages</title></info>
+            
 
             <para>
                 A page (<classname>Zend_Navigation_Page</classname>) in
@@ -35,17 +36,17 @@
                 <link linkend="zend.navigation.pages">pages</link>
                 section.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.navigation.introduction.containers">
-            <title>Containers</title>
+        <section xml:id="zend.navigation.introduction.containers"><info><title>Containers</title></info>
+            
 
             <para>
                 A navigation container
                 (<classname>Zend_Navigation_Container</classname>) is a
                 container class for pages. It has methods for
                 adding, retrieving, deleting and iterating pages.
-                It implements the <ulink url="http://php.net/spl">SPL</ulink>
+                It implements the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/spl">SPL</link>
                 interfaces <classname>RecursiveIterator</classname> and
                 <classname>Countable</classname>, and can thus be iterated
                 with SPL iterators such as
@@ -65,11 +66,11 @@
                     means that a page can have sub pages.
                 </para>
             </note>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.navigation.introduction.separation">
-        <title>Separation of data (model) and rendering (view)</title>
+    <section xml:id="zend.navigation.introduction.separation"><info><title>Separation of data (model) and rendering (view)</title></info>
+        
 
         <para>
             Classes in the <classname>Zend_Navigation</classname>
@@ -87,5 +88,5 @@
             <link linkend="zend.view.helpers.initial.navigation">navigation
             helpers</link>.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

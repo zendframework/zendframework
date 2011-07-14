@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.layout.intro">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.layout.intro"><info><title>Introduction</title></info>
+    
 
     <para>
         When building a website using Zend Framework <acronym>MVC</acronym> layers, your view
@@ -11,21 +12,21 @@
         list:
     </para>
 
-    <programlisting language="php"><![CDATA[
-<h2>Users</h2>
-<ul>
-    <?php if (!count($this->users)): ?>
-    <li>No users found</li>
-    <?php else: ?>
-    <?php foreach ($this->users as $user): ?>
-    <li>
-        <?php echo $this->escape($user->fullname) ?>
-        (<?php echo $this->escape($user->email) ?>)
-    </li>
-    <?php endforeach ?>
-    <?php endif ?>
-</ul>
-]]></programlisting>
+    <programlisting language="php">
+&lt;h2&gt;Users&lt;/h2&gt;
+&lt;ul&gt;
+    &lt;?php if (!count($this-&gt;users)): ?&gt;
+    &lt;li&gt;No users found&lt;/li&gt;
+    &lt;?php else: ?&gt;
+    &lt;?php foreach ($this-&gt;users as $user): ?&gt;
+    &lt;li&gt;
+        &lt;?php echo $this-&gt;escape($user-&gt;fullname) ?&gt;
+        (&lt;?php echo $this-&gt;escape($user-&gt;email) ?&gt;)
+    &lt;/li&gt;
+    &lt;?php endforeach ?&gt;
+    &lt;?php endif ?&gt;
+&lt;/ul&gt;
+</programlisting>
 
     <para>
         Since this is just a snippet of <acronym>HTML</acronym>, it's not a valid page; it's missing
@@ -41,7 +42,7 @@
     </para>
 
     <para>
-        The <ulink url="http://martinfowler.com/eaaCatalog/twoStepView.html">Two Step View</ulink>
+        The <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://martinfowler.com/eaaCatalog/twoStepView.html">Two Step View</link>
         design pattern answers many of the issues presented. In this pattern, the "application" view
         is created first, and then injected into the "page" view, which is then presented to the
         client. The page view can be thought of as your site-wide template or layout, and would have
@@ -52,4 +53,4 @@
         Within Zend Framework, <classname>Zend_Layout</classname> implements the Two Step View
         pattern.
     </para>
-</sect1>
+</section>

@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.log.writers.syslog">
-    <title>Writing to the System Log</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers.syslog"><info><title>Writing to the System Log</title></info>
+    
 
     <para>
         <classname>Zend_Log_Writer_Syslog</classname> writes log entries to the
@@ -26,13 +27,13 @@
         constructor or the application accessor:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 // At instantiation, pass the "application" key in the options:
-$writer = new Zend_Log_Writer_Syslog(array('application' => 'FooBar'));
+$writer = new Zend_Log_Writer_Syslog(array('application' =&gt; 'FooBar'));
 
 // Any other time:
-$writer->setApplicationName('BarBaz');
-]]></programlisting>
+$writer-&gt;setApplicationName('BarBaz');
+</programlisting>
 
     <para>
         The system log also allows you to identify the "facility," or
@@ -44,17 +45,17 @@ $writer->setApplicationName('BarBaz');
     <para>
         You may specify the log facility either in the constructor or via an
         accessor. It should be one of the <methodname>openlog()</methodname>
-        constants defined on the <ulink url="http://php.net/openlog">openlog()
-            manual page</ulink>.
+        constants defined on the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/openlog">openlog()
+            manual page</link>.
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 // At instantiation, pass the "facility" key in the options:
-$writer = new Zend_Log_Writer_Syslog(array('facility' => LOG_AUTH));
+$writer = new Zend_Log_Writer_Syslog(array('facility' =&gt; LOG_AUTH));
 
 // Any other time:
-$writer->setFacility(LOG_USER);
-]]></programlisting>
+$writer-&gt;setFacility(LOG_USER);
+</programlisting>
 
     <para>
         When logging, you may continue to use the default
@@ -62,4 +63,4 @@ $writer->setFacility(LOG_USER);
         mapped to the appropriate <methodname>syslog()</methodname> priority
         constants.
     </para>
-</sect2>
+</section>

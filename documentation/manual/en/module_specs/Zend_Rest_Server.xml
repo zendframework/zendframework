@@ -1,33 +1,34 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.rest.server">
-    <title>Zend_Rest_Server</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.rest.server.introduction">
-        <title>Introduction</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.rest.server"><info><title>Zend_Rest_Server</title></info>
+    
+
+    <section xml:id="zend.rest.server.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_Rest_Server</classname> is intended as a fully-featured REST server.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.rest.server.usage">
-        <title>REST Server Usage</title>
+    <section xml:id="zend.rest.server.usage"><info><title>REST Server Usage</title></info>
+        
 
-        <example id="zend.rest.server.usage.example-1">
-            <title>Basic Zend_Rest_Server Usage - Classes</title>
+        <example xml:id="zend.rest.server.usage.example-1"><info><title>Basic Zend_Rest_Server Usage - Classes</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $server = new Zend_Rest_Server();
-$server->setClass('My_Service_Class');
-$server->handle();
-]]></programlisting>
+$server-&gt;setClass('My_Service_Class');
+$server-&gt;handle();
+</programlisting>
         </example>
 
-        <example id="zend.rest.server.usage.example-2">
-            <title>Basic Zend_Rest_Server Usage - Functions</title>
+        <example xml:id="zend.rest.server.usage.example-2"><info><title>Basic Zend_Rest_Server Usage - Functions</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 /**
  * Say Hello
  *
@@ -41,14 +42,14 @@ function sayHello($who, $when)
 }
 
 $server = new Zend_Rest_Server();
-$server->addFunction('sayHello');
-$server->handle();
-]]></programlisting>
+$server-&gt;addFunction('sayHello');
+$server-&gt;handle();
+</programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.rest.server.args">
-        <title>Calling a Zend_Rest_Server Service</title>
+    <section xml:id="zend.rest.server.args"><info><title>Calling a Zend_Rest_Server Service</title></info>
+        
 
         <para>
             To call a <classname>Zend_Rest_Server</classname> service, you must supply a
@@ -59,8 +60,8 @@ $server->handle();
             argument (i.e. "arg1").
         </para>
 
-        <note>
-            <title>Numeric index</title>
+        <note><info><title>Numeric index</title></info>
+            
 
             <para>
                 Numeric arguments use a 1-based index.
@@ -82,20 +83,20 @@ $server->handle();
         <para>
             <code>?method=sayHello&amp;arg1=Davey&amp;arg2=Day</code>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.rest.server.customstatus">
-        <title>Sending A Custom Status</title>
+    <section xml:id="zend.rest.server.customstatus"><info><title>Sending A Custom Status</title></info>
+        
 
         <para>
             When returning values, to return a custom status, you may return an
             array with a <code>status</code> key.
         </para>
 
-        <example id="zend.rest.server.customstatus.example-1">
-            <title>Returning Custom Status</title>
+        <example xml:id="zend.rest.server.customstatus.example-1"><info><title>Returning Custom Status</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 /**
  * Say Hello
  *
@@ -105,18 +106,18 @@ $server->handle();
  */
 function sayHello($who, $when)
 {
-    return array('msg' => "An Error Occurred", 'status' => false);
+    return array('msg' =&gt; "An Error Occurred", 'status' =&gt; false);
 }
 
 $server = new Zend_Rest_Server();
-$server->addFunction('sayHello');
-$server->handle();
-]]></programlisting>
+$server-&gt;addFunction('sayHello');
+$server-&gt;handle();
+</programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.rest.server.customxml">
-        <title>Returning Custom XML Responses</title>
+    <section xml:id="zend.rest.server.customxml"><info><title>Returning Custom XML Responses</title></info>
+        
 
         <para>
             If you wish to return custom <acronym>XML</acronym>, simply return a
@@ -124,10 +125,10 @@ $server->handle();
             <code>SimpleXMLElement</code> object.
         </para>
 
-        <example id="zend.rest.server.customxml.example-1">
-            <title>Return Custom XML</title>
+        <example xml:id="zend.rest.server.customxml.example-1"><info><title>Return Custom XML</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 /**
  * Say Hello
  *
@@ -137,29 +138,26 @@ $server->handle();
  */
 function sayHello($who, $when)
 {
-    $xml ='<?xml version="1.0" encoding="ISO-8859-1"?>
-<mysite>
-    <value>Hey $who! Hope you\'re having a good $when</value>
-    <code>200</code>
-</mysite>';
+    $xml ='&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;
+&lt;mysite&gt;
+    &lt;value&gt;Hey $who! Hope you\'re having a good $when&lt;/value&gt;
+    &lt;code&gt;200&lt;/code&gt;
+&lt;/mysite&gt;';
 
     $xml = simplexml_load_string($xml);
     return $xml;
 }
 
 $server = new Zend_Rest_Server();
-$server->addFunction('sayHello');
+$server-&gt;addFunction('sayHello');
 
-$server->handle();
-]]></programlisting>
+$server-&gt;handle();
+</programlisting>
         </example>
 
         <para>
             The response from the service will be returned without modification
             to the client.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

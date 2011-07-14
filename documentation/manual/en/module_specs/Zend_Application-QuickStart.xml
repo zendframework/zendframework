@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.application.quick-start">
-    <title>Zend_Application Quick Start</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.quick-start"><info><title>Zend_Application Quick Start</title></info>
+    
 
     <para>
         There are two paths to getting started with
@@ -17,8 +18,8 @@
         <link linkend="zend.application.quick-start.manual">skip ahead</link>.
     </para>
 
-    <sect2 id="zend.application.quick-start.zend-tool">
-        <title>Using Zend_Tool</title>
+    <section xml:id="zend.application.quick-start.zend-tool"><info><title>Using Zend_Tool</title></info>
+        
 
         <para>
             The quickest way to start using <classname>Zend_Application</classname> is to use
@@ -30,23 +31,23 @@
             To create a project, execute the <command>zf</command> command (on *nix systems):
         </para>
 
-        <programlisting language="sh"><![CDATA[
+        <programlisting language="sh">
 % zf create project newproject
-]]></programlisting>
+</programlisting>
 
         <para>
             Or the Windows <filename>zf.bat</filename> command:
         </para>
 
-        <programlisting language="dos"><![CDATA[
-C:> zf.bat create project newproject
-]]></programlisting>
+        <programlisting language="dos">
+C:&gt; zf.bat create project newproject
+</programlisting>
 
         <para>
             Both will create a project structure that looks like the following:
         </para>
 
-        <programlisting language="text"><![CDATA[
+        <programlisting language="text">
 newproject
 |-- application
 |   |-- Bootstrap.php
@@ -72,7 +73,7 @@ newproject
     |-- library
     |   `-- bootstrap.php
     `-- phpunit.xml
-]]></programlisting>
+</programlisting>
 
         <para>
             In the above diagram, your bootstrap is in
@@ -80,11 +81,11 @@ newproject
             the following at first:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             You'll also note that a configuration file,
@@ -92,7 +93,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             created. It has the following contents:
         </para>
 
-        <programlisting language="dosini"><![CDATA[
+        <programlisting language="dosini">
 [production]
 phpSettings.display_startup_errors = 0
 phpSettings.display_errors = 0
@@ -110,7 +111,7 @@ phpSettings.display_errors = 1
 [development : production]
 phpSettings.display_startup_errors = 1
 phpSettings.display_errors = 1
-]]></programlisting>
+</programlisting>
 
         <para>
             All settings in this configuration file are for use with
@@ -123,7 +124,7 @@ phpSettings.display_errors = 1
             <classname>Zend_Application</classname> and dispatches it.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Define path to application directory
 defined('APPLICATION_PATH')
     || define('APPLICATION_PATH',
@@ -143,19 +144,18 @@ $application = new Zend_Application(
     APPLICATION_ENV,
     APPLICATION_PATH . '/configs/application.ini'
 );
-$application->bootstrap()
-            ->run();
-]]></programlisting>
+$application-&gt;bootstrap()
+            -&gt;run();
+</programlisting>
 
         <para>
-            To continue the quick start, please <link
-            linkend="zend.application.quick-start.resources">skip to the
+            To continue the quick start, please <link linkend="zend.application.quick-start.resources">skip to the
             Resources section</link>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.application.quick-start.manual">
-        <title>Adding Zend_Application to your application</title>
+    <section xml:id="zend.application.quick-start.manual"><info><title>Adding Zend_Application to your application</title></info>
+        
 
         <para>
             The basics of <classname>Zend_Application</classname> are fairly simple:
@@ -190,11 +190,11 @@ $application->bootstrap()
             <filename>application/Bootstrap.php</filename>, with the following contents:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             Now, create your configuration. For this tutorial, we will use an
@@ -204,7 +204,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             following contents:
         </para>
 
-        <programlisting language="dosini"><![CDATA[
+        <programlisting language="dosini">
 [production]
 phpSettings.display_startup_errors = 0
 phpSettings.display_errors = 0
@@ -222,7 +222,7 @@ phpSettings.display_errors = 1
 [development : production]
 phpSettings.display_startup_errors = 1
 phpSettings.display_errors = 1
-]]></programlisting>
+</programlisting>
 
         <para>
             Now, let's modify your gateway script,
@@ -230,7 +230,7 @@ phpSettings.display_errors = 1
             it; otherwise, replace it with the following contents:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Define path to application directory
 defined('APPLICATION_PATH')
     || define('APPLICATION_PATH',
@@ -257,9 +257,9 @@ $application = new Zend_Application(
     APPLICATION_ENV,
     APPLICATION_PATH . '/configs/application.ini'
 );
-$application->bootstrap()
-            ->run();
-]]></programlisting>
+$application-&gt;bootstrap()
+            -&gt;run();
+</programlisting>
 
         <para>
             You may note that the application environment constant value looks
@@ -270,7 +270,7 @@ $application->bootstrap()
             <filename>public/.htaccess</filename> file:
         </para>
 
-        <programlisting language="conf"><![CDATA[
+        <programlisting language="conf">
 SetEnv APPLICATION_ENV development
 
 RewriteEngine On
@@ -279,18 +279,17 @@ RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
-]]></programlisting>
+</programlisting>
 
-        <note>
-            <title>Learn about mod_rewrite</title>
+        <note><info><title>Learn about mod_rewrite</title></info>
+            
 
             <para>
                 The above rewrite rules allow access to any file under your
                 virtual host's document root. If there are files you do not want
                 exposed in this way, you may want to be more restrictive in your
-                rules. Go to the Apache website to <ulink
-                    url="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">learn
-                more about mod_rewrite</ulink>.
+                rules. Go to the Apache website to <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">learn
+                more about mod_rewrite</link>.
             </para>
         </note>
 
@@ -298,10 +297,10 @@ RewriteRule ^.*$ index.php [NC,L]
             At this point, you're all set to start taking advantage of
             <classname>Zend_Application</classname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.application.quick-start.resources">
-        <title>Adding and creating resources</title>
+    <section xml:id="zend.application.quick-start.resources"><info><title>Adding and creating resources</title></info>
+        
 
         <para>
             If you followed the directions above, then your bootstrap class
@@ -327,7 +326,7 @@ RewriteRule ^.*$ index.php [NC,L]
             To use it, all we need to do is update the configuration file.
         </para>
 
-        <programlisting language="dosini"><![CDATA[
+        <programlisting language="dosini">
 [production]
 phpSettings.display_startup_errors = 0
 phpSettings.display_errors = 0
@@ -347,7 +346,7 @@ phpSettings.display_errors = 1
 [development : production]
 phpSettings.display_startup_errors = 1
 phpSettings.display_errors = 1
-]]></programlisting>
+</programlisting>
 
         <para>
             If you haven't already, create the directory
@@ -357,20 +356,20 @@ phpSettings.display_errors = 1
             next):
         </para>
 
-        <programlisting language="php"><![CDATA[
-<?php echo $this->doctype() ?>
-<html>
-<head>
-    <?php echo $this->headTitle() ?>
-    <?php echo $this->headLink() ?>
-    <?php echo $this->headStyle() ?>
-    <?php echo $this->headScript() ?>
-</head>
-<body>
-    <?php echo $this->layout()->content ?>
-</body>
-</html>
-]]></programlisting>
+        <programlisting language="php">
+&lt;?php echo $this-&gt;doctype() ?&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;?php echo $this-&gt;headTitle() ?&gt;
+    &lt;?php echo $this-&gt;headLink() ?&gt;
+    &lt;?php echo $this-&gt;headStyle() ?&gt;
+    &lt;?php echo $this-&gt;headScript() ?&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;?php echo $this-&gt;layout()-&gt;content ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</programlisting>
 
         <para>
             At this point, you will now have a working layout.
@@ -383,37 +382,37 @@ phpSettings.display_errors = 1
             <classname>Bootstrap</classname> class to add a method:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     protected function _initView()
     {
         // Initialize view
         $view = new Zend_View();
-        $view->doctype('XHTML1_STRICT');
-        $view->headTitle('My First Zend Framework Application');
+        $view-&gt;doctype('XHTML1_STRICT');
+        $view-&gt;headTitle('My First Zend Framework Application');
 
         // Add it to the ViewRenderer
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper(
             'ViewRenderer'
         );
-        $viewRenderer->setView($view);
+        $viewRenderer-&gt;setView($view);
 
         // Return it, so that it can be stored by the bootstrap
         return $view;
     }
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             This method will be automatically executed when you bootstrap the
             application, and will ensure your view is initialized according to
             your application needs.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.application.quick-start.next-steps">
-        <title>Next steps with Zend_Application</title>
+    <section xml:id="zend.application.quick-start.next-steps"><info><title>Next steps with Zend_Application</title></info>
+        
 
         <para>
             The above should get you started with <classname>Zend_Application</classname>
@@ -421,5 +420,5 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             creating resource methods, or, for maximum re-usability, resource
             plugin classes. Continue reading to learn more!
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

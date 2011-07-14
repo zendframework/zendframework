@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.rest.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.rest.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         REST Web Services use service-specific <acronym>XML</acronym> formats. These ad-hoc
@@ -24,12 +25,8 @@
 
     <para>
         In addition to <classname>Zend_Rest_Server</classname> and
-        <classname>Zend_Rest_Client</classname> components, <link
-            linkend="zend.controller.router.routes.rest"><classname>Zend_Rest_Route</classname> and
+        <classname>Zend_Rest_Client</classname> components, <link linkend="zend.controller.router.routes.rest"><classname>Zend_Rest_Route</classname> and
             <classname>Zend_Rest_Controller</classname></link> classes are provided to aid routing
         REST requests to controllers.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

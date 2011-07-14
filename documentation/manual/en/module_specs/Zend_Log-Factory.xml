@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.log.factory">
-    <title>Using the Factory to Create a Log</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.factory"><info><title>Using the Factory to Create a Log</title></info>
+    
 
     <para>
         In addition to direct instantiation, you may also use the static
@@ -15,32 +16,32 @@
         As an example:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $logger = Zend_Log::factory(array(
-    'timestampFormat' => 'Y-m-d',
+    'timestampFormat' =&gt; 'Y-m-d',
     array(
-        'writerName'   => 'Stream',
-        'writerParams' => array(
-            'stream'   => '/tmp/zend.log',
+        'writerName'   =&gt; 'Stream',
+        'writerParams' =&gt; array(
+            'stream'   =&gt; '/tmp/zend.log',
         ),
-        'formatterName' => 'Simple',
-        'formatterParams' => array(
-            'format'   => '%timestamp%: %message% -- %info%',
+        'formatterName' =&gt; 'Simple',
+        'formatterParams' =&gt; array(
+            'format'   =&gt; '%timestamp%: %message% -- %info%',
         ),
-        'filterName'   => 'Priority',
-        'filterParams' => array(
-            'priority' => Zend_Log::WARN,
+        'filterName'   =&gt; 'Priority',
+        'filterParams' =&gt; array(
+            'priority' =&gt; Zend_Log::WARN,
         ),
     ),
     array(
-        'writerName'   => 'Firebug',
-        'filterName'   => 'Priority',
-        'filterParams' => array(
-            'priority' => Zend_Log::INFO,
+        'writerName'   =&gt; 'Firebug',
+        'filterName'   =&gt; 'Priority',
+        'filterParams' =&gt; array(
+            'priority' =&gt; Zend_Log::INFO,
         ),
     ),
 ));
-]]></programlisting>
+</programlisting>
 
     <para>
         The above will instantiate a logger with two writers, one for writing to a local file,
@@ -171,11 +172,11 @@ $logger = Zend_Log::factory(array(
         Each writer and each filter has specific options.
     </para>
 
-    <sect2 id="zend.log.factory.writer-options">
-        <title>Writer Options</title>
+    <section xml:id="zend.log.factory.writer-options"><info><title>Writer Options</title></info>
+        
 
-        <sect3 id="zend.log.factory.writer-options.db">
-            <title>Zend_Log_Writer_Db Options</title>
+        <section xml:id="zend.log.factory.writer-options.db"><info><title>Zend_Log_Writer_Db Options</title></info>
+            
 
             <variablelist>
                 <varlistentry>
@@ -209,21 +210,21 @@ $logger = Zend_Log::factory(array(
                     </listitem>
                 </varlistentry>
             </variablelist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.log.factory.writer-options.firebug">
-            <title>Zend_Log_Writer_Firebug Options</title>
+        <section xml:id="zend.log.factory.writer-options.firebug"><info><title>Zend_Log_Writer_Firebug Options</title></info>
+            
 
             <para>
                 This log writer takes no options; any provided will be ignored.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.log.factory.writer-options.mail">
-            <title>Zend_Log_Writer_Mail Options</title>
+        <section xml:id="zend.log.factory.writer-options.mail"><info><title>Zend_Log_Writer_Mail Options</title></info>
+            
 
-            <table id="zend.log.factory.writer-options.mail.table">
-                <title>Zend_Log_Writer_Mail Options</title>
+            <table xml:id="zend.log.factory.writer-options.mail.table"><info><title>Zend_Log_Writer_Mail Options</title></info>
+                
 
                 <tgroup cols="4">
                     <thead>
@@ -348,7 +349,7 @@ $logger = Zend_Log::factory(array(
                             <entry><constant>NULL</constant></entry>
 
                             <entry>
-                                See the section <xref linked="zend.layout.options" />
+                                See the section <xref linked="zend.layout.options"/>
                             </entry>
                         </row>
 
@@ -364,26 +365,26 @@ $logger = Zend_Log::factory(array(
                     </tbody>
                 </tgroup>
             </table>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.log.factory.writer-options.mock">
-            <title>Zend_Log_Writer_Mock Options</title>
-
-            <para>
-                This log writer takes no options; any provided will be ignored.
-            </para>
-        </sect3>
-
-        <sect3 id="zend.log.factory.writer-options.null">
-            <title>Zend_Log_Writer_Null Options</title>
+        <section xml:id="zend.log.factory.writer-options.mock"><info><title>Zend_Log_Writer_Mock Options</title></info>
+            
 
             <para>
                 This log writer takes no options; any provided will be ignored.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.log.factory.writer-options.stream">
-            <title>Zend_Log_Writer_Stream Options</title>
+        <section xml:id="zend.log.factory.writer-options.null"><info><title>Zend_Log_Writer_Null Options</title></info>
+            
+
+            <para>
+                This log writer takes no options; any provided will be ignored.
+            </para>
+        </section>
+
+        <section xml:id="zend.log.factory.writer-options.stream"><info><title>Zend_Log_Writer_Stream Options</title></info>
+            
 
             <variablelist>
                 <varlistentry>
@@ -406,10 +407,10 @@ $logger = Zend_Log::factory(array(
                     </listitem>
                 </varlistentry>
             </variablelist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.log.factory.writer-options.syslog">
-            <title>Zend_Log_Writer_Syslog Options</title>
+        <section xml:id="zend.log.factory.writer-options.syslog"><info><title>Zend_Log_Writer_Syslog Options</title></info>
+            
 
             <variablelist>
                 <varlistentry>
@@ -432,22 +433,22 @@ $logger = Zend_Log::factory(array(
                     </listitem>
                 </varlistentry>
             </variablelist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.log.factory.writer-options.zendmonitor">
-            <title>Zend_Log_Writer_ZendMonitor Options</title>
+        <section xml:id="zend.log.factory.writer-options.zendmonitor"><info><title>Zend_Log_Writer_ZendMonitor Options</title></info>
+            
 
             <para>
                 This log writer takes no options; any provided will be ignored.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.log.factory.filter-options">
-        <title>Filter Options</title>
+    <section xml:id="zend.log.factory.filter-options"><info><title>Filter Options</title></info>
+        
 
-        <sect3 id="zend.log.factory.filter-options.message">
-            <title>Zend_Log_Filter_Message Options</title>
+        <section xml:id="zend.log.factory.filter-options.message"><info><title>Zend_Log_Filter_Message Options</title></info>
+            
 
             <variablelist>
                 <varlistentry>
@@ -460,10 +461,10 @@ $logger = Zend_Log::factory(array(
                     </listitem>
                 </varlistentry>
             </variablelist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.log.factory.filter-options.priority">
-            <title>Zend_Log_Filter_Priority Options</title>
+        <section xml:id="zend.log.factory.filter-options.priority"><info><title>Zend_Log_Filter_Priority Options</title></info>
+            
 
             <variablelist>
                 <varlistentry>
@@ -487,19 +488,19 @@ $logger = Zend_Log::factory(array(
                     </listitem>
                 </varlistentry>
             </variablelist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.log.factory.filter-options.suppress">
-            <title>Zend_Log_Writer_Suppress Options</title>
+        <section xml:id="zend.log.factory.filter-options.suppress"><info><title>Zend_Log_Writer_Suppress Options</title></info>
+            
 
             <para>
                 This log filter takes no options; any provided will be ignored.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.log.factory.custom">
-        <title>Creating Configurable Writers and Filters</title>
+    <section xml:id="zend.log.factory.custom"><info><title>Creating Configurable Writers and Filters</title></info>
+        
 
         <para>
             If you find yourself needing to write your own log writers and/or filters, you can make
@@ -521,7 +522,7 @@ $logger = Zend_Log::factory(array(
             arguments. As an example:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 class My_Log_Writer_Foo extends Zend_Log_Writer_Abstract
 {
     public function __construct($bar, $baz)
@@ -532,7 +533,7 @@ class My_Log_Writer_Foo extends Zend_Log_Writer_Abstract
     public static function factory($config)
     {
         if ($config instanceof Zend_Config) {
-            $config = $config->toArray();
+            $config = $config-&gt;toArray();
         }
         if (!is_array($config)) {
             throw new Exception(
@@ -541,8 +542,8 @@ class My_Log_Writer_Foo extends Zend_Log_Writer_Abstract
         }
 
         $default = array(
-            'bar' => null,
-            'baz' => null,
+            'bar' =&gt; null,
+            'baz' =&gt; null,
         );
         $config = array_merge($default, $config);
 
@@ -552,14 +553,14 @@ class My_Log_Writer_Foo extends Zend_Log_Writer_Abstract
         );
     }
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             Alternately, you could call appropriate setters after instantiation, but prior to
             returning the instance:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 class My_Log_Writer_Foo extends Zend_Log_Writer_Abstract
 {
     public function __construct($bar = null, $baz = null)
@@ -580,7 +581,7 @@ class My_Log_Writer_Foo extends Zend_Log_Writer_Abstract
     public static function factory($config)
     {
         if ($config instanceof Zend_Config) {
-            $config = $config->toArray();
+            $config = $config-&gt;toArray();
         }
         if (!is_array($config)) {
             throw new Exception(
@@ -590,14 +591,14 @@ class My_Log_Writer_Foo extends Zend_Log_Writer_Abstract
 
         $writer = new self();
         if (isset($config['bar'])) {
-            $writer->setBar($config['bar']);
+            $writer-&gt;setBar($config['bar']);
         }
         if (isset($config['baz'])) {
-            $writer->setBaz($config['baz']);
+            $writer-&gt;setBaz($config['baz']);
         }
         return $writer;
     }
 }
-]]></programlisting>
-    </sect2>
-</sect1>
+</programlisting>
+    </section>
+</section>

@@ -1,13 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.json.xml2json">
-    <title>XML to JSON conversion</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.xml2json"><info><title>XML to JSON conversion</title></info>
+    
 
     <para>
         <classname>Zend_Json</classname> provides a convenience method for transforming
         <acronym>XML</acronym> formatted data into <acronym>JSON</acronym> format. This feature was
-        inspired from an <ulink url="http://www.ibm.com/developerworks/xml/library/x-xml2jsonphp/">
-        IBM developerWorks article</ulink>.
+        inspired from an <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.ibm.com/developerworks/xml/library/x-xml2jsonphp/">
+        IBM developerWorks article</link>.
     </para>
 
     <para>
@@ -21,11 +22,11 @@
         attributes. This function call is made as shown below:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 // fromXml function simply takes a String containing XML contents
 // as input.
 $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
-]]></programlisting>
+</programlisting>
 
     <para>
         <methodname>Zend_Json::fromXml()</methodname> function does the conversion of the
@@ -54,35 +55,35 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
         function:
     </para>
 
-    <programlisting language="php"><![CDATA[
-<?xml version="1.0" encoding="UTF-8"?>
-<books>
-    <book id="1">
-        <title>Code Generation in Action</title>
-        <author><first>Jack</first><last>Herrington</last></author>
-        <publisher>Manning</publisher>
-    </book>
+    <programlisting language="php">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;books&gt;
+    &lt;book id="1"&gt;
+        &lt;title&gt;Code Generation in Action&lt;/title&gt;
+        &lt;author&gt;&lt;first&gt;Jack&lt;/first&gt;&lt;last&gt;Herrington&lt;/last&gt;&lt;/author&gt;
+        &lt;publisher&gt;Manning&lt;/publisher&gt;
+    &lt;/book&gt;
 
-    <book id="2">
-        <title>PHP Hacks</title>
-        <author><first>Jack</first><last>Herrington</last></author>
-        <publisher>O'Reilly</publisher>
-    </book>
+    &lt;book id="2"&gt;
+        &lt;title&gt;PHP Hacks&lt;/title&gt;
+        &lt;author&gt;&lt;first&gt;Jack&lt;/first&gt;&lt;last&gt;Herrington&lt;/last&gt;&lt;/author&gt;
+        &lt;publisher&gt;O'Reilly&lt;/publisher&gt;
+    &lt;/book&gt;
 
-    <book id="3">
-        <title>Podcasting Hacks</title>
-        <author><first>Jack</first><last>Herrington</last></author>
-        <publisher>O'Reilly</publisher>
-    </book>
-</books>
-]]></programlisting>
+    &lt;book id="3"&gt;
+        &lt;title&gt;Podcasting Hacks&lt;/title&gt;
+        &lt;author&gt;&lt;first&gt;Jack&lt;/first&gt;&lt;last&gt;Herrington&lt;/last&gt;&lt;/author&gt;
+        &lt;publisher&gt;O'Reilly&lt;/publisher&gt;
+    &lt;/book&gt;
+&lt;/books&gt;
+</programlisting>
 
     <para>
         <acronym>JSON</acronym> output string returned from
         <methodname>Zend_Json::fromXml()</methodname> function:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 {
    "books" : {
       "book" : [ {
@@ -113,14 +114,11 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
       }
    ]}
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         More details about this xml2json feature can be found in the original proposal itself.
         Take a look at the
-        <ulink url="http://tinyurl.com/2tfa8z">Zend_xml2json proposal</ulink>.
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://tinyurl.com/2tfa8z">Zend_xml2json proposal</link>.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

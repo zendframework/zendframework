@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.server.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.server.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         The <classname>Zend_Server</classname> family of classes provides functionality
@@ -21,7 +22,4 @@
         with <classname>Zend_Server_Interface</classname>'s <methodname>getFunctions()</methodname>
         and <methodname>loadFunctions()</methodname> methods.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

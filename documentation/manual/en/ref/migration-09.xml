@@ -1,22 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="migration.09">
-    <title>Zend Framework 0.9</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.09"><info><title>Zend Framework 0.9</title></info>
+    
 
     <para>
         When upgrading from a previous release to Zend Framework 0.9 or higher you
         should note the following migration notes.
     </para>
 
-    <sect2 id="migration.09.zend.controller">
-        <title>Zend_Controller</title>
+    <section xml:id="migration.09.zend.controller"><info><title>Zend_Controller</title></info>
+        
 
         <para>
-            0.9.3 introduces <link
-                linkend="zend.controller.actionhelpers">action helpers</link>.
+            0.9.3 introduces <link linkend="zend.controller.actionhelpers">action helpers</link>.
             As part of this change, the following methods have been removed as
-            they are now encapsulated in the <link
-                linkend="zend.controller.actionhelpers.redirector">redirector
+            they are now encapsulated in the <link linkend="zend.controller.actionhelpers.redirector">redirector
                 action helper</link>:
         </para>
 
@@ -46,13 +45,9 @@
         <para>
             Read the <link linkend="zend.controller.actionhelpers">action
                 helpers documentation</link> for more information on how to
-            retrieve and manipulate helper objects, and the <link
-                linkend="zend.controller.actionhelpers.redirector">redirector
+            retrieve and manipulate helper objects, and the <link linkend="zend.controller.actionhelpers.redirector">redirector
                 helper documentation</link> for more information on setting
             redirect options (as well as alternate methods for redirecting).
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

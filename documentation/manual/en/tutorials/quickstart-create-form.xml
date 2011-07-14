@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.quickstart.create-form">
-    <title>Create A Form</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.create-form"><info><title>Create A Form</title></info>
+    
 
     <para>
         For our guestbook to be useful, we need a form for submitting new entries.
@@ -12,18 +13,18 @@
         class, execute:
     </para>
 
-    <programlisting language="shell"><![CDATA[
+    <programlisting language="shell">
 % zf create form Guestbook
 Creating a form at application/forms/Guestbook.php
 Updating project profile '.zfproject.xml'
-]]></programlisting>
+</programlisting>
 
     <para>
         This will create the directory <filename>application/forms/</filename> with the classfile
         <filename>Guestbook.php</filename>. Open that file and update it so it reads as follows:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 // application/forms/Guestbook.php
 
 class Application_Form_Guestbook extends Zend_Form
@@ -31,51 +32,51 @@ class Application_Form_Guestbook extends Zend_Form
     public function init()
     {
         // Set the method for the display form to POST
-        $this->setMethod('post');
+        $this-&gt;setMethod('post');
 
         // Add an email element
-        $this->addElement('text', 'email', array(
-            'label'      => 'Your email address:',
-            'required'   => true,
-            'filters'    => array('StringTrim'),
-            'validators' => array(
+        $this-&gt;addElement('text', 'email', array(
+            'label'      =&gt; 'Your email address:',
+            'required'   =&gt; true,
+            'filters'    =&gt; array('StringTrim'),
+            'validators' =&gt; array(
                 'EmailAddress',
             )
         ));
 
         // Add the comment element
-        $this->addElement('textarea', 'comment', array(
-            'label'      => 'Please Comment:',
-            'required'   => true,
-            'validators' => array(
-                array('validator' => 'StringLength', 'options' => array(0, 20))
+        $this-&gt;addElement('textarea', 'comment', array(
+            'label'      =&gt; 'Please Comment:',
+            'required'   =&gt; true,
+            'validators' =&gt; array(
+                array('validator' =&gt; 'StringLength', 'options' =&gt; array(0, 20))
                 )
         ));
 
         // Add a captcha
-        $this->addElement('captcha', 'captcha', array(
-            'label'      => 'Please enter the 5 letters displayed below:',
-            'required'   => true,
-            'captcha'    => array(
-                'captcha' => 'Figlet',
-                'wordLen' => 5,
-                'timeout' => 300
+        $this-&gt;addElement('captcha', 'captcha', array(
+            'label'      =&gt; 'Please enter the 5 letters displayed below:',
+            'required'   =&gt; true,
+            'captcha'    =&gt; array(
+                'captcha' =&gt; 'Figlet',
+                'wordLen' =&gt; 5,
+                'timeout' =&gt; 300
             )
         ));
 
         // Add the submit button
-        $this->addElement('submit', 'submit', array(
-            'ignore'   => true,
-            'label'    => 'Sign Guestbook',
+        $this-&gt;addElement('submit', 'submit', array(
+            'ignore'   =&gt; true,
+            'label'    =&gt; 'Sign Guestbook',
         ));
 
         // And finally add some CSRF protection
-        $this->addElement('hash', 'csrf', array(
-            'ignore' => true,
+        $this-&gt;addElement('hash', 'csrf', array(
+            'ignore' =&gt; true,
         ));
     }
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         The above form defines five elements: an email address field, a comment field, a
@@ -89,7 +90,7 @@ class Application_Form_Guestbook extends Zend_Form
         create the action and related view script, execute the following:
     </para>
 
-    <programlisting language="shell"><![CDATA[
+    <programlisting language="shell">
 % zf create action sign Guestbook
 Creating an action named sign inside controller
     at application/controllers/GuestbookController.php
@@ -97,7 +98,7 @@ Updating project profile '.zfproject.xml'
 Creating a view script for the sign action method
     at application/views/scripts/guestbook/sign.phtml
 Updating project profile '.zfproject.xml'
-]]></programlisting>
+</programlisting>
 
     <para>
         As you can see from the output, this will create a <methodname>signAction()</methodname>
@@ -112,7 +113,7 @@ Updating project profile '.zfproject.xml'
         and save it. The logic might look like this:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 // application/controllers/GuestbookController.php
 
 class GuestbookController extends Zend_Controller_Action
@@ -121,56 +122,54 @@ class GuestbookController extends Zend_Controller_Action
 
     public function signAction()
     {
-        $request = $this->getRequest();
+        $request = $this-&gt;getRequest();
         $form    = new Application_Form_Guestbook();
 
-        if ($this->getRequest()->isPost()) {
-            if ($form->isValid($request->getPost())) {
-                $comment = new Application_Model_Guestbook($form->getValues());
+        if ($this-&gt;getRequest()-&gt;isPost()) {
+            if ($form-&gt;isValid($request-&gt;getPost())) {
+                $comment = new Application_Model_Guestbook($form-&gt;getValues());
                 $mapper  = new Application_Model_GuestbookMapper();
-                $mapper->save($comment);
-                return $this->_helper->redirector('index');
+                $mapper-&gt;save($comment);
+                return $this-&gt;_helper-&gt;redirector('index');
             }
         }
 
-        $this->view->form = $form;
+        $this-&gt;view-&gt;form = $form;
     }
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         Of course, we also need to edit the view script; edit
         <filename>application/views/scripts/guestbook/sign.phtml</filename> to read:
     </para>
 
-    <programlisting language="php"><![CDATA[
-<!-- application/views/scripts/guestbook/sign.phtml -->
+    <programlisting language="php">
+&lt;!-- application/views/scripts/guestbook/sign.phtml --&gt;
 
 Please use the form below to sign our guestbook!
 
-<?php
-$this->form->setAction($this->url());
-echo $this->form;
-]]></programlisting>
+&lt;?php
+$this-&gt;form-&gt;setAction($this-&gt;url());
+echo $this-&gt;form;
+</programlisting>
 
-    <note>
-        <title>Better Looking Forms</title>
+    <note><info><title>Better Looking Forms</title></info>
+        
 
         <para>
             No one will be waxing poetic about the beauty of this form anytime soon. No matter -
-            form appearance is fully customizable! See the <link
-                linkend="zend.form.decorators">decorators section in the reference guide</link>
+            form appearance is fully customizable! See the <link linkend="zend.form.decorators">decorators section in the reference guide</link>
             for details.
         </para>
 
         <para>
-            Additionally, you may be interested in <link
-                linkend="learning.form.decorators.intro">our tutorial on form decorators</link>.
+            Additionally, you may be interested in <link linkend="learning.form.decorators.intro">our tutorial on form decorators</link>.
         </para>
     </note>
 
-    <note>
-        <title>Checkpoint</title>
+    <note><info><title>Checkpoint</title></info>
+        
 
         <para>
             Now browse to "http://localhost/guestbook/sign". You should see the following in your
@@ -178,8 +177,7 @@ echo $this->form;
         </para>
 
         <para>
-            <inlinegraphic width="421" scale="100" align="center" valign="middle"
-                fileref="figures/learning.quickstart.create-form.png" format="PNG" />
+            <inlinemediaobject><imageobject><imagedata width="421" scale="100" align="center" valign="middle" fileref="figures/learning.quickstart.create-form.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
     </note>
-</sect1>
+</section>

@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.ldap.api.reference.zend-ldap-ldif-encoder">
-    <title>Zend_Ldif_Encoder</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <table id="zend.ldap.api.reference.zend-ldap-ldif-encoder.table">
-        <title>Zend_Ldif_Encoder API</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap-ldif-encoder"><info><title>Zend_Ldif_Encoder</title></info>
+    
+
+    <table xml:id="zend.ldap.api.reference.zend-ldap-ldif-encoder.table"><info><title>Zend_Ldif_Encoder API</title></info>
+        
 
         <tgroup cols="2">
             <thead>
@@ -78,4 +79,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect3>
+</section>

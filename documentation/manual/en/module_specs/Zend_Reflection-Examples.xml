@@ -1,95 +1,96 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.reflection.examples">
-    <title>Zend_Reflection Examples</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <example id="zend.reflection.examples.file">
-        <title>Performing reflection on a file</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.reflection.examples"><info><title>Zend_Reflection Examples</title></info>
+    
 
-        <programlisting language="php"><![CDATA[
+    <example xml:id="zend.reflection.examples.file"><info><title>Performing reflection on a file</title></info>
+        
+
+        <programlisting language="php">
 $r = new Zend_Reflection_File($filename);
 printf(
-    "===> The %s file\n".
+    "===&gt; The %s file\n".
     "     has %d lines\n",
-    $r->getFileName(),
-    $r->getEndLine()
+    $r-&gt;getFileName(),
+    $r-&gt;getEndLine()
 );
 
-$classes = $r->getClasses();
+$classes = $r-&gt;getClasses();
 echo "     It has " . count($classes) . ":\n";
 foreach ($classes as $class) {
-    echo "         " . $class->getName() . "\n";
+    echo "         " . $class-&gt;getName() . "\n";
 }
 
-$functions = $r->getFunctions();
+$functions = $r-&gt;getFunctions();
 echo "     It has " . count($functions) . ":\n";
 foreach ($functions as $function) {
-    echo "         " . $function->getName() . "\n";
+    echo "         " . $function-&gt;getName() . "\n";
 }
-]]></programlisting>
+</programlisting>
     </example>
 
-    <example id="zend.reflection.examples.class">
-        <title>Performing reflection on a class</title>
+    <example xml:id="zend.reflection.examples.class"><info><title>Performing reflection on a class</title></info>
+        
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $r = new Zend_Reflection_Class($class);
 
 printf(
     "The class level docblock has the short description: %s\n".
     "The class level docblock has the long description:\n%s\n",
-    $r->getDocblock()->getShortDescription(),
-    $r->getDocblock()->getLongDescription(),
+    $r-&gt;getDocblock()-&gt;getShortDescription(),
+    $r-&gt;getDocblock()-&gt;getLongDescription(),
 );
 
 // Get the declaring file reflection
-$file = $r->getDeclaringFile();
-]]></programlisting>
+$file = $r-&gt;getDeclaringFile();
+</programlisting>
     </example>
 
-    <example id="zend.reflection.examples.method">
-        <title>Performing reflection on a method</title>
+    <example xml:id="zend.reflection.examples.method"><info><title>Performing reflection on a method</title></info>
+        
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $r = new Zend_Reflection_Method($class, $name);
 
 printf(
 "The method '%s' has a return type of %s",
-    $r->getName(),
-    $r->getReturn()
+    $r-&gt;getName(),
+    $r-&gt;getReturn()
 );
 
-foreach ($r->getParameters() as $key => $param) {
+foreach ($r-&gt;getParameters() as $key =&gt; $param) {
     printf(
         "Param at position '%d' is of type '%s'\n",
         $key,
-        $param->getType()
+        $param-&gt;getType()
     );
 }
-]]></programlisting>
+</programlisting>
     </example>
 
-    <example id="zend.reflection.examples.docblock">
-        <title>Performing reflection on a docblock</title>
+    <example xml:id="zend.reflection.examples.docblock"><info><title>Performing reflection on a docblock</title></info>
+        
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $r = new Zend_Reflection_Method($class, $name);
-$docblock = $r->getDocblock();
+$docblock = $r-&gt;getDocblock();
 
 printf(
     "The short description: %s\n".
     "The long description:\n%s\n",
-    $r->getDocblock()->getShortDescription(),
-    $r->getDocblock()->getLongDescription(),
+    $r-&gt;getDocblock()-&gt;getShortDescription(),
+    $r-&gt;getDocblock()-&gt;getLongDescription(),
 );
 
-foreach ($docblock->getTags() as $tag) {
+foreach ($docblock-&gt;getTags() as $tag) {
     printf(
         "Annotation tag '%s' has the description '%s'\n",
-        $tag->getName(),
-        $tag->getDescription()
+        $tag-&gt;getName(),
+        $tag-&gt;getDescription()
     );
 }
-]]></programlisting>
+</programlisting>
     </example>
-</sect1>
+</section>

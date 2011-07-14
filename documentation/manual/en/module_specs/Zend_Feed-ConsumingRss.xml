@@ -1,16 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.feed.consuming-rss">
-    <title>Consuming an RSS Feed</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-rss"><info><title>Consuming an RSS Feed</title></info>
+    
 
     <para>
         Reading an <acronym>RSS</acronym> feed is as simple as instantiating a
         <classname>Zend_Feed_Rss</classname> object with the <acronym>URL</acronym> of the feed:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $channel = new Zend_Feed_Rss('http://rss.example.com/channelName');
-]]></programlisting>
+</programlisting>
 
     <para>
         If any errors occur fetching the feed, a <classname>Zend_Feed_Exception</classname> will be
@@ -22,15 +23,15 @@ $channel = new Zend_Feed_Rss('http://rss.example.com/channelName');
         "channel" properties directly on the object:
     </para>
 
-    <programlisting language="php"><![CDATA[
-echo $channel->title();
-]]></programlisting>
+    <programlisting language="php">
+echo $channel-&gt;title();
+</programlisting>
 
     <para>
         Note the function syntax. <classname>Zend_Feed</classname> uses a convention of treating
         properties as <acronym>XML</acronym> object if they are requested with variable "getter"
-        syntax (<command>$obj->property</command>) and as strings if they are access with method
-        syntax (<command>$obj->property()</command>). This enables access to the full text of any
+        syntax (<command>$obj-&gt;property</command>) and as strings if they are access with method
+        syntax (<command>$obj-&gt;property()</command>). This enables access to the full text of any
         individual node while still allowing full access to all children.
     </para>
 
@@ -39,9 +40,9 @@ echo $channel->title();
         array syntax:
     </para>
 
-    <programlisting language="php"><![CDATA[
-echo $channel->category['domain'];
-]]></programlisting>
+    <programlisting language="php">
+echo $channel-&gt;category['domain'];
+</programlisting>
 
     <para>
         Since <acronym>XML</acronym> attributes cannot have children, method syntax is not necessary
@@ -55,11 +56,11 @@ echo $channel->category['domain'];
         is just a matter of:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 foreach ($channel as $item) {
-    echo $item->title() . "\n";
+    echo $item-&gt;title() . "\n";
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         If you are not familiar with <acronym>RSS</acronym>, here are the standard elements you can
@@ -166,23 +167,19 @@ foreach ($channel as $item) {
         In your code you can always test to see if an element is non-empty with:
     </para>
 
-    <programlisting language="php"><![CDATA[
-if ($item->propname()) {
+    <programlisting language="php">
+if ($item-&gt;propname()) {
     // ... proceed.
 }
-]]></programlisting>
+</programlisting>
 
     <para>
-        If you use <command>$item->propname</command> instead, you will always get an empty object
+        If you use <command>$item-&gt;propname</command> instead, you will always get an empty object
         which will evaluate to <constant>TRUE</constant>, so your check will fail.
     </para>
 
     <para>
         For further information, the official <acronym>RSS</acronym> 2.0 specification is available
-        at: <ulink
-            url="http://blogs.law.harvard.edu/tech/rss">http://blogs.law.harvard.edu/tech/rss</ulink>
+        at: <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://blogs.law.harvard.edu/tech/rss">http://blogs.law.harvard.edu/tech/rss</link>
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

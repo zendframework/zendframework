@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.dojo.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
-        Zend Framework ships <ulink
-            url="http://dojotoolkit.org">Dojo Toolkit</ulink> to support
+        Zend Framework ships <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org">Dojo Toolkit</link> to support
         out-of-the-box rich internet application development. Integration
         points with Dojo include:
     </para>
@@ -32,7 +32,4 @@
         both the official <acronym>AOL</acronym> <acronym>CDN</acronym> as well as the Google
         <acronym>CDN</acronym>).
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

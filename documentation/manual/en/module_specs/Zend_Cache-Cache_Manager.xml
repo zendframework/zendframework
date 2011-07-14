@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.cache.cache.manager">
-    <title>The Cache Manager</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.cache.manager"><info><title>The Cache Manager</title></info>
+    
 
     <para>
         It's the nature of applications to require a multitude of caches of any
@@ -25,46 +26,46 @@
         <methodname>Zend_Cache_Manager::getCache()</methodname>.
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $manager = new Zend_Cache_Manager;
 
 $dbCache = array(
-    'frontend' => array(
-        'name' => 'Core',
-        'options' => array(
-            'lifetime' => 7200,
-            'automatic_serialization' => true
+    'frontend' =&gt; array(
+        'name' =&gt; 'Core',
+        'options' =&gt; array(
+            'lifetime' =&gt; 7200,
+            'automatic_serialization' =&gt; true
         )
     ),
-    'backend' => array(
-        'name' => 'Core',
-        'options' => array(
-            'cache_dir' => '/path/to/cache'
+    'backend' =&gt; array(
+        'name' =&gt; 'Core',
+        'options' =&gt; array(
+            'cache_dir' =&gt; '/path/to/cache'
         )
     )
 );
 
-$manager->setCacheTemplate('database', $dbCache);
+$manager-&gt;setCacheTemplate('database', $dbCache);
 
 /**
  * Anywhere else where the Cache Manager is available...
  */
-$databaseCache = $manager->getCache('database');
-]]></programlisting>
+$databaseCache = $manager-&gt;getCache('database');
+</programlisting>
 
     <para>
         The Cache Manager also allows simple setting of pre-instantiated caches
         using the method <methodname>Zend_Cache_Manager::setCache()</methodname>.
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $frontendOptions = array(
-   'lifetime' => 7200,
-   'automatic_serialization' => true
+   'lifetime' =&gt; 7200,
+   'automatic_serialization' =&gt; true
 );
 
 $backendOptions = array(
-    'cache_dir' => '/path/to/cache'
+    'cache_dir' =&gt; '/path/to/cache'
 );
 
 $dbCache = Zend_Cache::factory('Core',
@@ -73,13 +74,13 @@ $dbCache = Zend_Cache::factory('Core',
                              $backendOptions);
 
 $manager = new Zend_Cache_Manager;
-$manager->setCache('database', $dbCache);
+$manager-&gt;setCache('database', $dbCache);
 
 /**
  * Anywhere else where the Cache Manager is available...
  */
-$databaseCache = $manager->getCache('database');
-]]></programlisting>
+$databaseCache = $manager-&gt;getCache('database');
+</programlisting>
 
     <para>
         If for any reason, you are unsure where the Cache Manager contains a
@@ -88,36 +89,36 @@ $databaseCache = $manager->getCache('database');
         or instance using the method <methodname>Zend_Cache_Manager::hasCache()</methodname>.
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $manager = new Zend_Cache_Manager;
 
 $dbCache = array(
-    'frontend' => array(
-        'name' => 'Core',
-        'options' => array(
-            'lifetime' => 7200,
-            'automatic_serialization' => true
+    'frontend' =&gt; array(
+        'name' =&gt; 'Core',
+        'options' =&gt; array(
+            'lifetime' =&gt; 7200,
+            'automatic_serialization' =&gt; true
         )
     ),
-    'backend' => array(
-        'name' => 'Core',
-        'options' => array(
-            'cache_dir' => '/path/to/cache'
+    'backend' =&gt; array(
+        'name' =&gt; 'Core',
+        'options' =&gt; array(
+            'cache_dir' =&gt; '/path/to/cache'
         )
     )
 );
 
-$manager->setCacheTemplate('database', $dbCache);
+$manager-&gt;setCacheTemplate('database', $dbCache);
 
 /**
  * Anywhere else where the Cache Manager is available...
  */
-if ($manager->hasCache('database')) {
-    $databaseCache = $manager->getCache('database');
+if ($manager-&gt;hasCache('database')) {
+    $databaseCache = $manager-&gt;getCache('database');
 } else {
     // create a cache from scratch if none available from Manager
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         In some scenarios, you may have defined a number of general use caches
@@ -127,26 +128,26 @@ if ($manager->hasCache('database')) {
         using the method <methodname>Zend_Cache_Manager::setTemplateOptions()</methodname>.
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $manager = new Zend_Cache_Manager;
 
 $dbCache = array(
-    'frontend' => array(
-        'name' => 'Core',
-        'options' => array(
-            'lifetime' => 7200,
-            'automatic_serialization' => true
+    'frontend' =&gt; array(
+        'name' =&gt; 'Core',
+        'options' =&gt; array(
+            'lifetime' =&gt; 7200,
+            'automatic_serialization' =&gt; true
         )
     ),
-    'backend' => array(
-        'name' => 'Core',
-        'options' => array(
-            'cache_dir' => '/path/to/cache'
+    'backend' =&gt; array(
+        'name' =&gt; 'Core',
+        'options' =&gt; array(
+            'cache_dir' =&gt; '/path/to/cache'
         )
     )
 );
 
-$manager->setCacheTemplate('database', $dbCache);
+$manager-&gt;setCacheTemplate('database', $dbCache);
 
 /**
  * Anywhere else where the Cache Manager is available...
@@ -154,27 +155,27 @@ $manager->setCacheTemplate('database', $dbCache);
  * of the preconfigured File backend.
  */
 $fineTuning = array(
-    'backend' => array(
-        'name' => 'Memcached',
-        'options' => array(
-            'servers' => array(
+    'backend' =&gt; array(
+        'name' =&gt; 'Memcached',
+        'options' =&gt; array(
+            'servers' =&gt; array(
                 array(
-                    'host' => 'localhost',
-                    'port' => 11211,
-                    'persistent' => true,
-                    'weight' => 1,
-                    'timeout' => 5,
-                    'retry_interval' => 15,
-                    'status' => true,
-                    'failure_callback' => ''
+                    'host' =&gt; 'localhost',
+                    'port' =&gt; 11211,
+                    'persistent' =&gt; true,
+                    'weight' =&gt; 1,
+                    'timeout' =&gt; 5,
+                    'retry_interval' =&gt; 15,
+                    'status' =&gt; true,
+                    'failure_callback' =&gt; ''
                 )
             )
         )
     )
 );
-$manager->setTemplateOptions('database', $fineTuning);
-$databaseCache = $manager->getCache('database');
-]]></programlisting>
+$manager-&gt;setTemplateOptions('database', $fineTuning);
+$databaseCache = $manager-&gt;getCache('database');
+</programlisting>
 
     <para>
         To assist in making the Cache Manager more useful, it is accompanied by
@@ -200,4 +201,4 @@ $databaseCache = $manager->getCache('database');
         <methodname>Zend_Cache_Manager::setCacheTemplate()</methodname> if overloading
         all of their options.
     </para>
-</sect1>
+</section>

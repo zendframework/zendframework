@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.character-sets">
-    <title>Character Sets</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.character-sets"><info><title>Character Sets</title></info>
+    
 
     <para>
         <classname>Zend_Mail</classname> does not check for the correct character set of the mail
@@ -12,16 +13,16 @@
         part.
     </para>
 
-    <note>
-        <title>Only in text format</title>
+    <note><info><title>Only in text format</title></info>
+        
 
         <para>
             Character sets are only applicable for message parts in text format.
         </para>
     </note>
 
-    <example id="zend.mail.character-sets.cjk">
-        <title>Usage in CJK languages</title>
+    <example xml:id="zend.mail.character-sets.cjk"><info><title>Usage in CJK languages</title></info>
+        
 
         <para>
             The following example is how to use <classname>Zend_Mail</classname> in Japanese. This
@@ -30,7 +31,7 @@
             <acronym>ISO-2022-JP</acronym>.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 //We suppose that character encoding of strings is UTF-8 on PHP script.
 function myConvert($string) {
     return mb_convert_encoding($string, 'ISO-2022-JP', 'UTF-8');
@@ -39,19 +40,16 @@ function myConvert($string) {
 $mail = new Zend_Mail('ISO-2022-JP');
 // In this case, you can use ENCODING_7BIT
 // because the ISO-2022-JP does not use MSB.
-$mail->setBodyText(
+$mail-&gt;setBodyText(
     myConvert('This is the text of the mail.'),
     null,
     Zend_Mime::ENCODING_7BIT
 );
-$mail->setHeaderEncoding(Zend_Mime::ENCODING_BASE64);
-$mail->setFrom('somebody@example.com', myConvert('Some Sender'));
-$mail->addTo('somebody_else@example.com', myConvert('Some Recipient'));
-$mail->setSubject(myConvert('TestSubject'));
-$mail->send();
-]]></programlisting>
+$mail-&gt;setHeaderEncoding(Zend_Mime::ENCODING_BASE64);
+$mail-&gt;setFrom('somebody@example.com', myConvert('Some Sender'));
+$mail-&gt;addTo('somebody_else@example.com', myConvert('Some Recipient'));
+$mail-&gt;setSubject(myConvert('TestSubject'));
+$mail-&gt;send();
+</programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

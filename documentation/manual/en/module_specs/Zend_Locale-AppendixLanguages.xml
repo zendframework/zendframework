@@ -1,15 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.locale.appendix">
-    <title>Supported locales</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.locale.appendix"><info><title>Supported locales</title></info>
+    
 
     <para>
         <classname>Zend_Locale</classname> provides information on several locales. The following
         table shows all languages and their related locales, sorted by language:
     </para>
 
-    <table id="zend.locale.appendix.table">
-        <title>List of all supported languages</title>
+    <table xml:id="zend.locale.appendix.table"><info><title>List of all supported languages</title></info>
+        
 
         <tgroup cols="3">
             <thead>
@@ -2913,7 +2914,7 @@
                 </row>
 
                 <row>
-                    <entry morerows="3" valign="middle"></entry>
+                    <entry morerows="3" valign="middle"/>
                     <entry>tzm</entry>
                     <entry>---</entry>
                 </row>
@@ -3214,7 +3215,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.tool.framework.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_Tool_Framework</classname> is a framework for exposing common
@@ -122,4 +123,4 @@
             </para>
         </listitem>
     </itemizedlist>
-</sect1>
+</section>

@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.file.transfer.validators">
-    <title>Validators for Zend_File_Transfer</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.file.transfer.validators"><info><title>Validators for Zend_File_Transfer</title></info>
+    
 
     <para>
         <classname>Zend_File_Transfer</classname> is delivered with several file-related validators
@@ -158,8 +159,8 @@
         </listitem>
     </itemizedlist>
 
-    <sect2 id="zend.file.transfer.validators.usage">
-        <title>Using Validators with Zend_File_Transfer</title>
+    <section xml:id="zend.file.transfer.validators.usage"><info><title>Using Validators with Zend_File_Transfer</title></info>
+        
 
         <para>
             Putting validators to work is quite simple. There are several methods for adding and
@@ -243,29 +244,29 @@
             </listitem>
         </itemizedlist>
 
-        <example id="zend.file.transfer.validators.usage.example">
-            <title>Add Validators to a File Transfer Object</title>
+        <example xml:id="zend.file.transfer.validators.usage.example"><info><title>Add Validators to a File Transfer Object</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $upload = new Zend_File_Transfer();
 
 // Set a file size with 20000 bytes
-$upload->addValidator('Size', false, 20000);
+$upload-&gt;addValidator('Size', false, 20000);
 
 // Set a file size with 20 bytes minimum and 20000 bytes maximum
-$upload->addValidator('Size', false, array('min' => 20, 'max' => 20000));
+$upload-&gt;addValidator('Size', false, array('min' =&gt; 20, 'max' =&gt; 20000));
 
 // Set a file size with 20 bytes minimum and 20000 bytes maximum and
 // a file count in one step
-$upload->setValidators(array(
-    'Size'  => array('min' => 20, 'max' => 20000),
-    'Count' => array('min' => 1, 'max' => 3),
+$upload-&gt;setValidators(array(
+    'Size'  =&gt; array('min' =&gt; 20, 'max' =&gt; 20000),
+    'Count' =&gt; array('min' =&gt; 1, 'max' =&gt; 3),
 ));
-]]></programlisting>
+</programlisting>
         </example>
 
-        <example id="zend.file.transfer.validators.usage.exampletwo">
-            <title>Limit Validators to Single Files</title>
+        <example xml:id="zend.file.transfer.validators.usage.exampletwo"><info><title>Limit Validators to Single Files</title></info>
+            
 
             <para>
                 <methodname>addValidator()</methodname>, <methodname>addValidators()</methodname>,
@@ -275,12 +276,12 @@ $upload->setValidators(array(
                 given validator.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $upload = new Zend_File_Transfer();
 
 // Set a file size with 20000 bytes and limits it only to 'file2'
-$upload->addValidator('Size', false, 20000, 'file2');
-]]></programlisting>
+$upload-&gt;addValidator('Size', false, 20000, 'file2');
+</programlisting>
         </example>
 
         <para>
@@ -288,8 +289,8 @@ $upload->addValidator('Size', false, 20000, 'file2');
             can be called multiple times.
         </para>
 
-        <example id="zend.file.transfer.validators.usage.examplemultiple">
-            <title>Add Multiple Validators</title>
+        <example xml:id="zend.file.transfer.validators.usage.examplemultiple"><info><title>Add Multiple Validators</title></info>
+            
 
             <para>
                 Often it's simpler just to call <methodname>addValidator()</methodname> multiple
@@ -298,14 +299,14 @@ $upload->addValidator('Size', false, 20000, 'file2');
                 couple the calls as shown below:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $upload = new Zend_File_Transfer();
 
 // Set a file size with 20000 bytes
-$upload->addValidator('Size', false, 20000)
-       ->addValidator('Count', false, 2)
-       ->addValidator('Filessize', false, 25000);
-]]></programlisting>
+$upload-&gt;addValidator('Size', false, 20000)
+       -&gt;addValidator('Count', false, 2)
+       -&gt;addValidator('Filessize', false, 25000);
+</programlisting>
         </example>
 
         <note>
@@ -321,8 +322,8 @@ $upload->addValidator('Size', false, 20000)
             <methodname>isValid()</methodname>.
         </para>
 
-        <example id="zend.file.transfer.validators.usage.exampleisvalid">
-            <title>Validate the Files</title>
+        <example xml:id="zend.file.transfer.validators.usage.exampleisvalid"><info><title>Validate the Files</title></info>
+            
 
             <para>
                 <methodname>isValid()</methodname> accepts the file name of the uploaded or
@@ -330,18 +331,18 @@ $upload->addValidator('Size', false, 20000)
                 no parameter or null is given all files will be validated
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $upload = new Zend_File_Transfer();
 
 // Set a file size with 20000 bytes
-$upload->addValidator('Size', false, 20000)
-       ->addValidator('Count', false, 2)
-       ->addValidator('Filessize', false, 25000);
+$upload-&gt;addValidator('Size', false, 20000)
+       -&gt;addValidator('Count', false, 2)
+       -&gt;addValidator('Filessize', false, 25000);
 
-if ($upload->isValid()) {
+if ($upload-&gt;isValid()) {
     print "Validation failure";
 }
-]]></programlisting>
+</programlisting>
         </example>
 
         <note>
@@ -359,10 +360,10 @@ if ($upload->isValid()) {
             <methodname>hasErrors()</methodname> which returns <constant>TRUE</constant> as soon as
             a validation error has been found.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.file.transfer.validators.count">
-        <title>Count Validator</title>
+    <section xml:id="zend.file.transfer.validators.count"><info><title>Count Validator</title></info>
+        
 
         <para>
             The <classname>Count</classname> validator checks for the number of files which are
@@ -409,18 +410,18 @@ if ($upload->isValid()) {
             <methodname>getMax()</methodname> to retrieve the actual set values.
         </para>
 
-        <example id="zend.file.transfer.validators.count.example">
-            <title>Using the Count Validator</title>
+        <example xml:id="zend.file.transfer.validators.count.example"><info><title>Using the Count Validator</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $upload = new Zend_File_Transfer();
 
 // Limit the amount of files to maximum 2
-$upload->addValidator('Count', false, 2);
+$upload-&gt;addValidator('Count', false, 2);
 
 // Limit the amount of files to maximum 5 and minimum 1 file
-$upload->addValidator('Count', false, array('min' =>1, 'max' => 5));
-]]></programlisting>
+$upload-&gt;addValidator('Count', false, array('min' =&gt;1, 'max' =&gt; 5));
+</programlisting>
         </example>
 
         <note>
@@ -429,10 +430,10 @@ $upload->addValidator('Count', false, array('min' =>1, 'max' => 5));
                 which exceeds the maximum will be returned as error.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.file.transfer.validators.crc32">
-        <title>Crc32 Validator</title>
+    <section xml:id="zend.file.transfer.validators.crc32"><info><title>Crc32 Validator</title></info>
+        
 
         <para>
             The <classname>Crc32</classname> validator checks the content of a transferred file by
@@ -454,23 +455,23 @@ $upload->addValidator('Count', false, array('min' =>1, 'max' => 5));
             </listitem>
         </itemizedlist>
 
-        <example id="zend.file.transfer.validators.crc32.example">
-            <title>Using the Crc32 Validator</title>
+        <example xml:id="zend.file.transfer.validators.crc32.example"><info><title>Using the Crc32 Validator</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $upload = new Zend_File_Transfer();
 
 // Checks whether the content of the uploaded file has the given hash
-$upload->addValidator('Crc32', false, '3b3652f');
+$upload-&gt;addValidator('Crc32', false, '3b3652f');
 
 // Limits this validator to two different hashes
-$upload->addValidator('Crc32', false, array('3b3652f', 'e612b69'));
-]]></programlisting>
+$upload-&gt;addValidator('Crc32', false, array('3b3652f', 'e612b69'));
+</programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.file.transfer.validators.excludeextension">
-        <title>ExcludeExtension Validator</title>
+    <section xml:id="zend.file.transfer.validators.excludeextension"><info><title>ExcludeExtension Validator</title></info>
+        
 
         <para>
             The <classname>ExcludeExtension</classname> validator checks the file extension of the
@@ -508,26 +509,26 @@ $upload->addValidator('Crc32', false, array('3b3652f', 'e612b69'));
             values in a case-sensitive fashion.
         </para>
 
-        <example id="zend.file.transfer.validators.excludeextension.example">
-            <title>Using the ExcludeExtension Validator</title>
+        <example xml:id="zend.file.transfer.validators.excludeextension.example"><info><title>Using the ExcludeExtension Validator</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $upload = new Zend_File_Transfer();
 
 // Do not allow files with extension php or exe
-$upload->addValidator('ExcludeExtension', false, 'php,exe');
+$upload-&gt;addValidator('ExcludeExtension', false, 'php,exe');
 
 // Do not allow files with extension php or exe, but use array notation
-$upload->addValidator('ExcludeExtension', false, array('php', 'exe'));
+$upload-&gt;addValidator('ExcludeExtension', false, array('php', 'exe'));
 
 // Check in a case-sensitive fashion
-$upload->addValidator('ExcludeExtension',
+$upload-&gt;addValidator('ExcludeExtension',
                       false,
-                      array('php', 'exe', 'case' => true));
-$upload->addValidator('ExcludeExtension',
+                      array('php', 'exe', 'case' =&gt; true));
+$upload-&gt;addValidator('ExcludeExtension',
                       false,
-                      array('php', 'exe', 'case' => true));
-]]></programlisting>
+                      array('php', 'exe', 'case' =&gt; true));
+</programlisting>
         </example>
 
         <note>
@@ -536,10 +537,10 @@ $upload->addValidator('ExcludeExtension',
                 file's <acronym>MIME</acronym> type.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.file.transfer.validators.excludemimetype">
-        <title>ExcludeMimeType Validator</title>
+    <section xml:id="zend.file.transfer.validators.excludemimetype"><info><title>ExcludeMimeType Validator</title></info>
+        
 
         <para>
             The <classname>ExcludeMimeType</classname> validator checks the <acronym>MIME</acronym>
@@ -578,22 +579,22 @@ $upload->addValidator('ExcludeExtension',
             types.
         </para>
 
-        <example id="zend.file.transfer.validators.excludemimetype.example">
-            <title>Using the ExcludeMimeType Validator</title>
+        <example xml:id="zend.file.transfer.validators.excludemimetype.example"><info><title>Using the ExcludeMimeType Validator</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $upload = new Zend_File_Transfer();
 
 // Does not allow MIME type of gif images for all files
-$upload->addValidator('ExcludeMimeType', false, 'image/gif');
+$upload-&gt;addValidator('ExcludeMimeType', false, 'image/gif');
 
 // Does not allow MIME type of gif and jpg images for all given files
-$upload->addValidator('ExcludeMimeType', false, array('image/gif',
+$upload-&gt;addValidator('ExcludeMimeType', false, array('image/gif',
                                                       'image/jpeg');
 
 // Does not allow MIME type of the group images for all given files
-$upload->addValidator('ExcludeMimeType', false, 'image');
-]]></programlisting>
+$upload-&gt;addValidator('ExcludeMimeType', false, 'image');
+</programlisting>
         </example>
 
         <para>
@@ -612,10 +613,10 @@ $upload->addValidator('ExcludeMimeType', false, 'image');
                 <acronym>MIME</acronym> types instead of complete groups.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.file.transfer.validators.exists">
-        <title>Exists Validator</title>
+    <section xml:id="zend.file.transfer.validators.exists"><info><title>Exists Validator</title></info>
+        
 
         <para>
             The <classname>Exists</classname> validator checks for the existence of specified
@@ -638,20 +639,20 @@ $upload->addValidator('ExcludeMimeType', false, 'image');
             to set and retrieve directories.
         </para>
 
-        <example id="zend.file.transfer.validators.exists.example">
-            <title>Using the Exists Validator</title>
+        <example xml:id="zend.file.transfer.validators.exists.example"><info><title>Using the Exists Validator</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $upload = new Zend_File_Transfer();
 
 // Add the temp directory to check for
-$upload->addValidator('Exists', false, '\temp');
+$upload-&gt;addValidator('Exists', false, '\temp');
 
 // Add two directories using the array notation
-$upload->addValidator('Exists',
+$upload-&gt;addValidator('Exists',
                       false,
                       array('\home\images', '\home\uploads'));
-]]></programlisting>
+</programlisting>
         </example>
 
         <note>
@@ -661,10 +662,10 @@ $upload->addValidator('Exists',
                 given directories.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.file.transfer.validators.extension">
-        <title>Extension Validator</title>
+    <section xml:id="zend.file.transfer.validators.extension"><info><title>Extension Validator</title></info>
+        
 
         <para>
             The <classname>Extension</classname> validator checks the file extension of the
@@ -701,24 +702,24 @@ $upload->addValidator('Exists',
             <constant>TRUE</constant>, will validate the extension in a case-sensitive fashion.
         </para>
 
-        <example id="zend.file.transfer.validators.extension.example">
-            <title>Using the Extension Validator</title>
+        <example xml:id="zend.file.transfer.validators.extension.example"><info><title>Using the Extension Validator</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $upload = new Zend_File_Transfer();
 
 // Limit the extensions to jpg and png files
-$upload->addValidator('Extension', false, 'jpg,png');
+$upload-&gt;addValidator('Extension', false, 'jpg,png');
 
 // Limit the extensions to jpg and png files but use array notation
-$upload->addValidator('Extension', false, array('jpg', 'png'));
+$upload-&gt;addValidator('Extension', false, array('jpg', 'png'));
 
 // Check case sensitive
-$upload->addValidator('Extension', false, array('mo', 'png', 'case' => true));
-if (!$upload->isValid('C:\temp\myfile.MO')) {
+$upload-&gt;addValidator('Extension', false, array('mo', 'png', 'case' =&gt; true));
+if (!$upload-&gt;isValid('C:\temp\myfile.MO')) {
     print 'Not valid because MO and mo do not match with case sensitivity;
 }
-]]></programlisting>
+</programlisting>
         </example>
 
         <note>
@@ -727,10 +728,10 @@ if (!$upload->isValid('C:\temp\myfile.MO')) {
                 file's <acronym>MIME</acronym> type.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.file.transfer.validators.filessize">
-        <title>FilesSize Validator</title>
+    <section xml:id="zend.file.transfer.validators.filessize"><info><title>FilesSize Validator</title></info>
+        
 
         <para>
             The <classname>FilesSize</classname> validator checks for the aggregate size of all
@@ -788,27 +789,27 @@ if (!$upload->isValid('C:\temp\myfile.MO')) {
             bytes, 1MB is equal to 1024kB, and so on.
         </para>
 
-        <example id="zend.file.transfer.validators.filessize.example">
-            <title>Using the FilesSize Validator</title>
+        <example xml:id="zend.file.transfer.validators.filessize.example"><info><title>Using the FilesSize Validator</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $upload = new Zend_File_Transfer();
 
 // Limit the size of all files to be uploaded to 40000 bytes
-$upload->addValidator('FilesSize', false, 40000);
+$upload-&gt;addValidator('FilesSize', false, 40000);
 
 // Limit the size of all files to be uploaded to maximum 4MB and mimimum 10kB
-$upload->addValidator('FilesSize',
+$upload-&gt;addValidator('FilesSize',
                       false,
-                      array('min' => '10kB', 'max' => '4MB'));
+                      array('min' =&gt; '10kB', 'max' =&gt; '4MB'));
 
 // As before, but returns the plain file size instead of a user-friendly string
-$upload->addValidator('FilesSize',
+$upload-&gt;addValidator('FilesSize',
                       false,
-                      array('min' => '10kB',
-                            'max' => '4MB',
-                            'bytestring' => false));
-]]></programlisting>
+                      array('min' =&gt; '10kB',
+                            'max' =&gt; '4MB',
+                            'bytestring' =&gt; false));
+</programlisting>
         </example>
 
         <note>
@@ -817,10 +818,10 @@ $upload->addValidator('FilesSize',
                 which exceeds the size will be returned as an error.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.file.transfer.validators.imagesize">
-        <title>ImageSize Validator</title>
+    <section xml:id="zend.file.transfer.validators.imagesize"><info><title>ImageSize Validator</title></info>
+        
 
         <para>
             The <classname>ImageSize</classname> validator checks the size of image files.
@@ -873,29 +874,29 @@ $upload->addValidator('FilesSize',
             set.
         </para>
 
-        <example id="zend.file.transfer.validators.imagesize.example">
-            <title>Using the ImageSize Validator</title>
+        <example xml:id="zend.file.transfer.validators.imagesize.example"><info><title>Using the ImageSize Validator</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $upload = new Zend_File_Transfer();
 
 // Limit the size of a image to a height of 100-200 and a width of
 // 40-80 pixel
-$upload->addValidator('ImageSize', false,
-                      array('minwidth' => 40,
-                            'maxwidth' => 80,
-                            'minheight' => 100,
-                            'maxheight' => 200)
+$upload-&gt;addValidator('ImageSize', false,
+                      array('minwidth' =&gt; 40,
+                            'maxwidth' =&gt; 80,
+                            'minheight' =&gt; 100,
+                            'maxheight' =&gt; 200)
                       );
 
 // Reset the width for validation
-$upload->setImageWidth(array('minwidth' => 20, 'maxwidth' => 200));
-]]></programlisting>
+$upload-&gt;setImageWidth(array('minwidth' =&gt; 20, 'maxwidth' =&gt; 200));
+</programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.file.transfer.validators.iscompressed">
-        <title>IsCompressed Validator</title>
+    <section xml:id="zend.file.transfer.validators.iscompressed"><info><title>IsCompressed Validator</title></info>
+        
 
         <para>
             The <classname>IsCompressed</classname> validator checks if a transferred file is a
@@ -905,21 +906,21 @@ $upload->setImageWidth(array('minwidth' => 20, 'maxwidth' => 200));
             described there.
         </para>
 
-        <example id="zend.file.transfer.validators.iscompressed.example">
-            <title>Using the IsCompressed Validator</title>
+        <example xml:id="zend.file.transfer.validators.iscompressed.example"><info><title>Using the IsCompressed Validator</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $upload = new Zend_File_Transfer();
 
 // Checks is the uploaded file is a compressed archive
-$upload->addValidator('IsCompressed', false);
+$upload-&gt;addValidator('IsCompressed', false);
 
 // Limits this validator to zip files only
-$upload->addValidator('IsCompressed', false, array('application/zip'));
+$upload-&gt;addValidator('IsCompressed', false, array('application/zip'));
 
 // Limits this validator to zip files only using simpler notation
-$upload->addValidator('IsCompressed', false, 'zip');
-]]></programlisting>
+$upload-&gt;addValidator('IsCompressed', false, 'zip');
+</programlisting>
         </example>
 
         <note>
@@ -930,10 +931,10 @@ $upload->addValidator('IsCompressed', false, 'zip');
                 result in more readable code.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.file.transfer.validators.isimage">
-        <title>IsImage Validator</title>
+    <section xml:id="zend.file.transfer.validators.isimage"><info><title>IsImage Validator</title></info>
+        
 
         <para>
             The <classname>IsImage</classname> validator checks if a transferred file is a image
@@ -942,21 +943,21 @@ $upload->addValidator('IsCompressed', false, 'zip');
             You can limit this validator to particular image types with the methods described there.
         </para>
 
-        <example id="zend.file.transfer.validators.isimage.example">
-            <title>Using the IsImage Validator</title>
+        <example xml:id="zend.file.transfer.validators.isimage.example"><info><title>Using the IsImage Validator</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $upload = new Zend_File_Transfer();
 
 // Checks whether the uploaded file is a image file
-$upload->addValidator('IsImage', false);
+$upload-&gt;addValidator('IsImage', false);
 
 // Limits this validator to gif files only
-$upload->addValidator('IsImage', false, array('application/gif'));
+$upload-&gt;addValidator('IsImage', false, array('application/gif'));
 
 // Limits this validator to jpeg files only using a simpler notation
-$upload->addValidator('IsImage', false, 'jpeg');
-]]></programlisting>
+$upload-&gt;addValidator('IsImage', false, 'jpeg');
+</programlisting>
         </example>
 
         <note>
@@ -967,10 +968,10 @@ $upload->addValidator('IsImage', false, 'jpeg');
                 in more readable code.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.file.transfer.validators.hash">
-        <title>Hash Validator</title>
+    <section xml:id="zend.file.transfer.validators.hash"><info><title>Hash Validator</title></info>
+        
 
         <para>
             The <classname>Hash</classname> validator checks the content of a transferred file by
@@ -1004,38 +1005,38 @@ $upload->addValidator('IsImage', false, 'jpeg');
             </listitem>
         </itemizedlist>
 
-        <example id="zend.file.transfer.validators.hash.example">
-            <title>Using the Hash Validator</title>
+        <example xml:id="zend.file.transfer.validators.hash.example"><info><title>Using the Hash Validator</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $upload = new Zend_File_Transfer();
 
 // Checks if the content of the uploaded file contains the given hash
-$upload->addValidator('Hash', false, '3b3652f');
+$upload-&gt;addValidator('Hash', false, '3b3652f');
 
 // Limits this validator to two different hashes
-$upload->addValidator('Hash', false, array('3b3652f', 'e612b69'));
+$upload-&gt;addValidator('Hash', false, array('3b3652f', 'e612b69'));
 
 // Sets a different algorithm to check against
-$upload->addValidator('Hash',
+$upload-&gt;addValidator('Hash',
                       false,
                       array('315b3cd8273d44912a7',
-                            'algorithm' => 'md5'));
-]]></programlisting>
+                            'algorithm' =&gt; 'md5'));
+</programlisting>
         </example>
 
         <note>
             <para>
                 This validator supports about 34 different hash algorithms. The most common include
                 'crc32', 'md5' and 'sha1'. A comprehesive list of supports hash algorithms can be
-                found at the <ulink url="http://php.net/hash_algos">hash_algos method</ulink> on the
-                <ulink url="http://php.net">php.net site</ulink>.
+                found at the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/hash_algos">hash_algos method</link> on the
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net">php.net site</link>.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.file.transfer.validators.md5">
-        <title>Md5 Validator</title>
+    <section xml:id="zend.file.transfer.validators.md5"><info><title>Md5 Validator</title></info>
+        
 
         <para>
             The <classname>Md5</classname> validator checks the content of a transferred file by
@@ -1056,26 +1057,26 @@ $upload->addValidator('Hash',
             </listitem>
         </itemizedlist>
 
-        <example id="zend.file.transfer.validators.md5.example">
-            <title>Using the Md5 Validator</title>
+        <example xml:id="zend.file.transfer.validators.md5.example"><info><title>Using the Md5 Validator</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $upload = new Zend_File_Transfer();
 
 // Checks if the content of the uploaded file has the given hash
-$upload->addValidator('Md5', false, '3b3652f336522365223');
+$upload-&gt;addValidator('Md5', false, '3b3652f336522365223');
 
 // Limits this validator to two different hashes
-$upload->addValidator('Md5',
+$upload-&gt;addValidator('Md5',
                       false,
                       array('3b3652f336522365223',
                             'eb3365f3365ddc65365'));
-]]></programlisting>
+</programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.file.transfer.validators.mimetype">
-        <title>MimeType Validator</title>
+    <section xml:id="zend.file.transfer.validators.mimetype"><info><title>MimeType Validator</title></info>
+        
 
         <para>
             The <classname>MimeType</classname> validator checks the <acronym>MIME</acronym> type of
@@ -1132,27 +1133,27 @@ $upload->addValidator('Md5',
             of the magicfile parameter. This methods are available since Zend Framework 1.7.1.
         </para>
 
-        <example id="zend.file.transfer.validators.mimetype.example">
-            <title>Using the MimeType Validator</title>
+        <example xml:id="zend.file.transfer.validators.mimetype.example"><info><title>Using the MimeType Validator</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $upload = new Zend_File_Transfer();
 
 // Limit the MIME type of all given files to gif images
-$upload->addValidator('MimeType', false, 'image/gif');
+$upload-&gt;addValidator('MimeType', false, 'image/gif');
 
 // Limit the MIME type of all given files to gif and jpeg images
-$upload->addValidator('MimeType', false, array('image/gif', 'image/jpeg');
+$upload-&gt;addValidator('MimeType', false, array('image/gif', 'image/jpeg');
 
 // Limit the MIME type of all given files to the group images
-$upload->addValidator('MimeType', false, 'image');
+$upload-&gt;addValidator('MimeType', false, 'image');
 
 // Use a different magicfile
-$upload->addValidator('MimeType',
+$upload-&gt;addValidator('MimeType',
                       false,
                       array('image',
-                            'magicfile' => '/path/to/magicfile.mgx'));
-]]></programlisting>
+                            'magicfile' =&gt; '/path/to/magicfile.mgx'));
+</programlisting>
         </example>
 
         <para>
@@ -1188,10 +1189,10 @@ $upload->addValidator('MimeType',
                 secure and can be easily manipulated.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.file.transfer.validators.notexists">
-        <title>NotExists Validator</title>
+    <section xml:id="zend.file.transfer.validators.notexists"><info><title>NotExists Validator</title></info>
+        
 
         <para>
             The <classname>NotExists</classname> validator checks for the existence of the provided
@@ -1214,21 +1215,21 @@ $upload->addValidator('MimeType',
             set and retrieve directories.
         </para>
 
-        <example id="zend.file.transfer.validators.notexists.example">
-            <title>Using the NotExists Validator</title>
+        <example xml:id="zend.file.transfer.validators.notexists.example"><info><title>Using the NotExists Validator</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $upload = new Zend_File_Transfer();
 
 // Add the temp directory to check
-$upload->addValidator('NotExists', false, '\temp');
+$upload-&gt;addValidator('NotExists', false, '\temp');
 
 // Add two directories using the array notation
-$upload->addValidator('NotExists', false,
+$upload-&gt;addValidator('NotExists', false,
                       array('\home\images',
                             '\home\uploads')
                      );
-]]></programlisting>
+</programlisting>
         </example>
 
         <note>
@@ -1238,10 +1239,10 @@ $upload->addValidator('NotExists', false,
                 directories.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.file.transfer.validators.sha1">
-        <title>Sha1 Validator</title>
+    <section xml:id="zend.file.transfer.validators.sha1"><info><title>Sha1 Validator</title></info>
+        
 
         <para>
             The <classname>Sha1</classname> validator checks the content of a transferred file by
@@ -1262,25 +1263,25 @@ $upload->addValidator('NotExists', false,
             </listitem>
         </itemizedlist>
 
-        <example id="zend.file.transfer.validators.sha1.example">
-            <title>Using the sha1 Validator</title>
+        <example xml:id="zend.file.transfer.validators.sha1.example"><info><title>Using the sha1 Validator</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $upload = new Zend_File_Transfer();
 
 // Checks if the content of the uploaded file has the given hash
-$upload->addValidator('sha1', false, '3b3652f336522365223');
+$upload-&gt;addValidator('sha1', false, '3b3652f336522365223');
 
 // Limits this validator to two different hashes
-$upload->addValidator('Sha1',
+$upload-&gt;addValidator('Sha1',
                       false, array('3b3652f336522365223',
                                    'eb3365f3365ddc65365'));
-]]></programlisting>
+</programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.file.transfer.validators.size">
-        <title>Size Validator</title>
+    <section xml:id="zend.file.transfer.validators.size"><info><title>Size Validator</title></info>
+        
 
         <para>
             The <classname>Size</classname> validator checks for the size of a single file. It
@@ -1331,29 +1332,29 @@ $upload->addValidator('Sha1',
             bytes, 1MB is equal to 1024kB, and so on.
         </para>
 
-        <example id="zend.file.transfer.validators.size.example">
-            <title>Using the Size Validator</title>
+        <example xml:id="zend.file.transfer.validators.size.example"><info><title>Using the Size Validator</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $upload = new Zend_File_Transfer();
 
 // Limit the size of a file to 40000 bytes
-$upload->addValidator('Size', false, 40000);
+$upload-&gt;addValidator('Size', false, 40000);
 
 // Limit the size a given file to maximum 4MB and mimimum 10kB
 // Also returns the plain number in case of an error
 // instead of a user-friendly number
-$upload->addValidator('Size',
+$upload-&gt;addValidator('Size',
                       false,
-                      array('min' => '10kB',
-                            'max' => '4MB',
-                            'bytestring' => false));
-]]></programlisting>
+                      array('min' =&gt; '10kB',
+                            'max' =&gt; '4MB',
+                            'bytestring' =&gt; false));
+</programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.file.transfer.validators.wordcount">
-        <title>WordCount Validator</title>
+    <section xml:id="zend.file.transfer.validators.wordcount"><info><title>WordCount Validator</title></info>
+        
 
         <para>
             The <classname>WordCount</classname> validator checks for the number of words within
@@ -1382,21 +1383,18 @@ $upload->addValidator('Size',
             <methodname>getMax()</methodname> to retrieve the actual set values.
         </para>
 
-        <example id="zend.file.transfer.validators.wordcount.example">
-            <title>Using the WordCount Validator</title>
+        <example xml:id="zend.file.transfer.validators.wordcount.example"><info><title>Using the WordCount Validator</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $upload = new Zend_File_Transfer();
 
 // Limit the amount of words within files to maximum 2000
-$upload->addValidator('WordCount', false, 2000);
+$upload-&gt;addValidator('WordCount', false, 2000);
 
 // Limit the amount of words within files to maximum 5000 and minimum 1000 words
-$upload->addValidator('WordCount', false, array('min' => 1000, 'max' => 5000));
-]]></programlisting>
+$upload-&gt;addValidator('WordCount', false, array('min' =&gt; 1000, 'max' =&gt; 5000));
+</programlisting>
         </example>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 tw=80 et:
--->
+    </section>
+</section>

@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.test.phpunit" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Zend_Test_PHPUnit</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit"><info><title>Zend_Test_PHPUnit</title></info>
+    
 
     <para>
         <classname>Zend_Test_PHPUnit</classname> provides a TestCase for <acronym>MVC</acronym>
@@ -10,8 +11,8 @@
         is to see an example.
     </para>
 
-    <example id="zend.test.phpunit.loginexample">
-        <title>Application Login TestCase example</title>
+    <example xml:id="zend.test.phpunit.loginexample"><info><title>Application Login TestCase example</title></info>
+        
 
         <para>
             The following is a simple test case for a
@@ -43,61 +44,61 @@
             (such as the correct controller, plugin, etc).
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     public function setUp()
     {
-        $this->bootstrap = array($this, 'appBootstrap');
+        $this-&gt;bootstrap = array($this, 'appBootstrap');
         parent::setUp();
     }
 
     public function appBootstrap()
     {
-        $this->frontController
-             ->registerPlugin(new Bugapp_Plugin_Initialize('development'));
+        $this-&gt;frontController
+             -&gt;registerPlugin(new Bugapp_Plugin_Initialize('development'));
     }
 
     public function testCallWithoutActionShouldPullFromIndexAction()
     {
-        $this->dispatch('/user');
-        $this->assertController('user');
-        $this->assertAction('index');
+        $this-&gt;dispatch('/user');
+        $this-&gt;assertController('user');
+        $this-&gt;assertAction('index');
     }
 
     public function testIndexActionShouldContainLoginForm()
     {
-        $this->dispatch('/user');
-        $this->assertAction('index');
-        $this->assertQueryCount('form#loginForm', 1);
+        $this-&gt;dispatch('/user');
+        $this-&gt;assertAction('index');
+        $this-&gt;assertQueryCount('form#loginForm', 1);
     }
 
     public function testValidLoginShouldGoToProfilePage()
     {
-        $this->request->setMethod('POST')
-              ->setPost(array(
-                  'username' => 'foobar',
-                  'password' => 'foobar'
+        $this-&gt;request-&gt;setMethod('POST')
+              -&gt;setPost(array(
+                  'username' =&gt; 'foobar',
+                  'password' =&gt; 'foobar'
               ));
-        $this->dispatch('/user/login');
-        $this->assertRedirectTo('/user/view');
+        $this-&gt;dispatch('/user/login');
+        $this-&gt;assertRedirectTo('/user/view');
 
-        $this->resetRequest()
-             ->resetResponse();
+        $this-&gt;resetRequest()
+             -&gt;resetResponse();
 
-        $this->request->setMethod('GET')
-             ->setPost(array());
-        $this->dispatch('/user/view');
-        $this->assertRoute('default');
-        $this->assertModule('default');
-        $this->assertController('user');
-        $this->assertAction('view');
-        $this->assertNotRedirect();
-        $this->assertQuery('dl');
-        $this->assertQueryContentContains('h2', 'User: foobar');
+        $this-&gt;request-&gt;setMethod('GET')
+             -&gt;setPost(array());
+        $this-&gt;dispatch('/user/view');
+        $this-&gt;assertRoute('default');
+        $this-&gt;assertModule('default');
+        $this-&gt;assertController('user');
+        $this-&gt;assertAction('view');
+        $this-&gt;assertNotRedirect();
+        $this-&gt;assertQuery('dl');
+        $this-&gt;assertQueryContentContains('h2', 'User: foobar');
     }
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             This example could be written somewhat simpler -- not all the
@@ -107,11 +108,8 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         </para>
     </example>
 
-    <xi:include href="Zend_Test-PHPUnit-Bootstrapping.xml" />
-    <xi:include href="Zend_Test-PHPUnit-Testing.xml" />
-    <xi:include href="Zend_Test-PHPUnit-Assertions.xml" />
-    <xi:include href="Zend_Test-PHPUnit-Examples.xml" />
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Test-PHPUnit-Bootstrapping.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Test-PHPUnit-Testing.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Test-PHPUnit-Assertions.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Test-PHPUnit-Examples.xml"/>
+</section>

@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.currency.exchange">
-    <title>Exchanging currencies</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.exchange"><info><title>Exchanging currencies</title></info>
+    
 
     <para>
         Within the previous section we discussed currency calculations. But as you can imaging
@@ -20,7 +21,7 @@
         First let's write a simple exchange service.
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 class SimpleExchange implements Zend_Currency_CurrencyInterface
 {
     public function getRate($from, $to)
@@ -39,7 +40,7 @@ class SimpleExchange implements Zend_Currency_CurrencyInterface
        throw new Exception('Unable to exchange $to');
     }
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         We have now created a manual exchange service. It will not fit the real live, but it
@@ -66,36 +67,36 @@ class SimpleExchange implements Zend_Currency_CurrencyInterface
         by simply giving a string with the classname.
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $currency = new Zend_Currency(
     array(
-        'value'    => 1000,
-        'currency' => 'EUR',
+        'value'    =&gt; 1000,
+        'currency' =&gt; 'EUR',
     )
 );
 
 $service  = new SimpleExchange();
 
 // attach the exchange service
-$currency->setService($service);
+$currency-&gt;setService($service);
 
 $currency2 = new Zend_Currency(
     array(
-        'value'    => 1000,
-        'currency' => 'USD',
+        'value'    =&gt; 1000,
+        'currency' =&gt; 'USD',
     )
 );
 
-print $currency->add($currency2);
-]]></programlisting>
+print $currency-&gt;add($currency2);
+</programlisting>
 
     <para>
         The above example will return '$ 3.000' because the 1.000 <acronym>USD</acronym> will be
         converted by a rate of 2 to 2.000 <acronym>EUR</acronym>.
     </para>
 
-    <note>
-        <title>Calculation without exchange service</title>
+    <note><info><title>Calculation without exchange service</title></info>
+        
 
         <para>
             When you try to calculate two currency objects which do not use the same currency
@@ -104,4 +105,4 @@ print $currency->add($currency2);
             different currencies.
         </para>
     </note>
-</sect1>
+</section>

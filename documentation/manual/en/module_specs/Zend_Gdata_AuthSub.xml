@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.gdata.authsub">
-    <title>Authenticating with AuthSub</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.authsub"><info><title>Authenticating with AuthSub</title></info>
+    
 
     <para>
         The AuthSub mechanism enables you to write web applications
@@ -10,8 +11,7 @@
     </para>
 
     <para>
-        See <ulink
-            url="http://code.google.com/apis/accounts/AuthForWebApps.html">http://code.google.com/apis/accounts/AuthForWebApps.html</ulink>
+        See <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/accounts/AuthForWebApps.html">http://code.google.com/apis/accounts/AuthForWebApps.html</link>
         for more information about Google Data AuthSub authentication.
     </para>
 
@@ -31,8 +31,8 @@
         account credentials that are known to that user.
     </para>
 
-    <note>
-        <title>Registered applications</title>
+    <note><info><title>Registered applications</title></info>
+        
 
         <para>
             <classname>Zend_Gdata</classname> currently does not support use of secure tokens,
@@ -41,8 +41,8 @@
         </para>
     </note>
 
-    <sect2 id="zend.gdata.authsub.login">
-        <title>Creating an AuthSub authenticated Http Client</title>
+    <section xml:id="zend.gdata.authsub.login"><info><title>Creating an AuthSub authenticated Http Client</title></info>
+        
 
         <para>
             Your <acronym>PHP</acronym> application should provide a hyperlink to the
@@ -77,7 +77,7 @@
             <acronym>HTTP</acronym> Client.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $my_calendar = 'http://www.google.com/calendar/feeds/default/private/full';
 
 if (!isset($_SESSION['cal_token'])) {
@@ -92,7 +92,7 @@ if (!isset($_SESSION['cal_token'])) {
         $googleUri = Zend_Gdata_AuthSub::getAuthSubTokenUri(
             'http://'. $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'],
             $my_calendar, 0, 1);
-        echo "Click <a href='$googleUri'>here</a> " .
+        echo "Click &lt;a href='$googleUri'&gt;here&lt;/a&gt; " .
              "to authorize this application.";
         exit();
     }
@@ -103,11 +103,11 @@ $client = Zend_Gdata_AuthSub::getHttpClient($_SESSION['cal_token']);
 
 // Create a Gdata object using the authenticated Http Client
 $cal = new Zend_Gdata_Calendar($client);
-]]></programlisting>
-    </sect2>
+</programlisting>
+    </section>
 
-    <sect2 id="zend.gdata.authsub.logout">
-        <title>Revoking AuthSub authentication</title>
+    <section xml:id="zend.gdata.authsub.logout"><info><title>Revoking AuthSub authentication</title></info>
+        
 
         <para>
             To terminate the authenticated status of a given token, use the
@@ -116,7 +116,7 @@ $cal = new Zend_Gdata_Calendar($client);
             some time.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Carefully construct this value to avoid application security problems.
 $php_self = htmlentities(substr($_SERVER['PHP_SELF'],
                          0,
@@ -129,10 +129,10 @@ if (isset($_GET['logout'])) {
     header('Location: ' . $php_self);
     exit();
 }
-]]></programlisting>
+</programlisting>
 
-        <note>
-            <title>Security notes</title>
+        <note><info><title>Security notes</title></info>
+            
 
             <para>
                 The treatment of the <varname>$php_self</varname> variable in the
@@ -149,5 +149,5 @@ if (isset($_GET['logout'])) {
                 a good practice to terminate authenticated access to any service.
             </para>
         </note>
-    </sect2>
-</sect1>
+    </section>
+</section>

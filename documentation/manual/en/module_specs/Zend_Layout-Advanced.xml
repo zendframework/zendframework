@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.layout.advanced">
-    <title>Zend_Layout Advanced Usage</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.advanced"><info><title>Zend_Layout Advanced Usage</title></info>
+    
 
     <para>
         <classname>Zend_Layout</classname> has a number of use cases for the advanced
@@ -43,16 +44,15 @@
         <listitem>
             <para>
                 <emphasis>Custom layout script path resolution</emphasis>.
-                <classname>Zend_Layout</classname> allows you to use your own <link
-                    linkend="zend.filter.inflector">inflector</link> for layout
+                <classname>Zend_Layout</classname> allows you to use your own <link linkend="zend.filter.inflector">inflector</link> for layout
                 script path resolution, or simply to modify the attached
                 inflector to specify your own inflection rules.
             </para>
         </listitem>
     </itemizedlist>
 
-    <sect2 id="zend.layout.advanced.view">
-        <title>Custom View Objects</title>
+    <section xml:id="zend.layout.advanced.view"><info><title>Custom View Objects</title></info>
+        
 
         <para>
             <classname>Zend_Layout</classname> allows you to use any class implementing
@@ -63,13 +63,13 @@
             <methodname>setView()</methodname> accessor:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $view = new My_Custom_View();
-$layout->setView($view);
-]]></programlisting>
+$layout-&gt;setView($view);
+</programlisting>
 
-        <note>
-            <title>Not all Zend_View implementations are equal</title>
+        <note><info><title>Not all Zend_View implementations are equal</title></info>
+            
 
             <para>
                 While <classname>Zend_Layout</classname> allows you to use any class
@@ -94,19 +94,18 @@ $layout->setView($view);
 
             <para>
                 Alternately, if your view implementation supports any sort of plugin capability, you
-                can access the variables via the 'Zend_Layout' placeholder, using the <link
-                    linkend="zend.view.helpers.initial.placeholder">placeholder helper</link>:
+                can access the variables via the 'Zend_Layout' placeholder, using the <link linkend="zend.view.helpers.initial.placeholder">placeholder helper</link>:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $placeholders = new Zend_View_Helper_Placeholder();
-$layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
-]]></programlisting>
+$layoutVars   = $placeholders-&gt;placeholder('Zend_Layout')-&gt;getArrayCopy();
+</programlisting>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.layout.advanced.plugin">
-        <title>Custom Front Controller Plugins</title>
+    <section xml:id="zend.layout.advanced.plugin"><info><title>Custom Front Controller Plugins</title></info>
+        
 
         <para>
             When used with the <acronym>MVC</acronym> components, <classname>Zend_Layout</classname>
@@ -129,10 +128,10 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
             The default plugin class used is
             <classname>Zend_Layout_Controller_Plugin_Layout</classname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.layout.advanced.helper">
-        <title>Custom Action Helpers</title>
+    <section xml:id="zend.layout.advanced.helper"><info><title>Custom Action Helpers</title></info>
+        
 
         <para>
             When used with the <acronym>MVC</acronym> components, <classname>Zend_Layout</classname>
@@ -151,10 +150,10 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
             <methodname>startMvc()</methodname> method. Details of the implementation are
             up to you.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.layout.advanced.inflector">
-        <title>Custom Layout Script Path Resolution: Using the Inflector</title>
+    <section xml:id="zend.layout.advanced.inflector"><info><title>Custom Layout Script Path Resolution: Using the Inflector</title></info>
+        
 
         <para>
             <classname>Zend_Layout</classname> uses <classname>Zend_Filter_Inflector</classname> to
@@ -183,8 +182,8 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
             <methodname>Zend_Layout::setInflector()</methodname>.
         </para>
 
-        <example id="zend.layout.advanced.inflector.accessors">
-            <title>Using Zend_Layout accessors to modify the inflector</title>
+        <example xml:id="zend.layout.advanced.inflector.accessors"><info><title>Using Zend_Layout accessors to modify the inflector</title></info>
+            
 
             <para>
                 The default <classname>Zend_Layout</classname> inflector uses static
@@ -192,17 +191,17 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
                 has accessors for setting these values.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 // Set the inflector target:
-$layout->setInflectorTarget('layouts/:script.:suffix');
+$layout-&gt;setInflectorTarget('layouts/:script.:suffix');
 
 // Set the layout view script suffix:
-$layout->setViewSuffix('php');
-]]></programlisting>
+$layout-&gt;setViewSuffix('php');
+</programlisting>
         </example>
 
-        <example id="zend.layout.advanced.inflector.directmodification">
-            <title>Direct modification of Zend_Layout inflector</title>
+        <example xml:id="zend.layout.advanced.inflector.directmodification"><info><title>Direct modification of Zend_Layout inflector</title></info>
+            
 
             <para>
                 Inflectors have a target and one or more rules. The default
@@ -219,15 +218,15 @@ $layout->setViewSuffix('php');
                 for the script.
             </para>
 
-            <programlisting language="php"><![CDATA[
-$layout->getInflector()->setTarget('layouts/:script.:suffix')
-                       ->setStaticRule('suffix', 'html')
-                       ->setFilterRule(array('Word_CamelCaseToUnderscore'));
-]]></programlisting>
+            <programlisting language="php">
+$layout-&gt;getInflector()-&gt;setTarget('layouts/:script.:suffix')
+                       -&gt;setStaticRule('suffix', 'html')
+                       -&gt;setFilterRule(array('Word_CamelCaseToUnderscore'));
+</programlisting>
         </example>
 
-        <example id="zend.layout.advanced.inflector.custom">
-            <title>Custom inflectors</title>
+        <example xml:id="zend.layout.advanced.inflector.custom"><info><title>Custom inflectors</title></info>
+            
 
             <para>
                 In most cases, modifying the existing inflector will be enough.
@@ -236,18 +235,18 @@ $layout->getInflector()->setTarget('layouts/:script.:suffix')
                 <classname>Zend_Layout</classname> supports this.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $inflector = new Zend_Filter_Inflector('layouts/:script.:suffix');
-$inflector->addRules(array(
-    ':script' => array('Word_CamelCaseToUnderscore'),
-    'suffix'  => 'html'
+$inflector-&gt;addRules(array(
+    ':script' =&gt; array('Word_CamelCaseToUnderscore'),
+    'suffix'  =&gt; 'html'
 ));
-$layout->setInflector($inflector);
-]]></programlisting>
+$layout-&gt;setInflector($inflector);
+</programlisting>
         </example>
 
-        <note>
-            <title>Inflection can be disabled</title>
+        <note><info><title>Inflection can be disabled</title></info>
+            
 
             <para>
                 Inflection can be disabled and enabled using accessors on the
@@ -259,8 +258,5 @@ $layout->setInflector($inflector);
                 <methodname>disableInflection()</methodname> methods.
             </para>
         </note>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

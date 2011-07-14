@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.email_address">
-    <title>EmailAddress</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.email_address"><info><title>EmailAddress</title></info>
+    
 
     <para>
         <classname>Zend_Validate_EmailAddress</classname> allows you to validate an email address.
@@ -9,33 +10,33 @@
         these against known specifications for email addresses and hostnames.
     </para>
 
-    <sect3 id="zend.validate.set.email_address.basic">
-        <title>Basic usage</title>
+    <section xml:id="zend.validate.set.email_address.basic"><info><title>Basic usage</title></info>
+        
 
         <para>
             A basic example of usage is below:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $validator = new Zend_Validate_EmailAddress();
-if ($validator->isValid($email)) {
+if ($validator-&gt;isValid($email)) {
     // email appears to be valid
 } else {
     // email is invalid; print the reasons
-    foreach ($validator->getMessages() as $message) {
+    foreach ($validator-&gt;getMessages() as $message) {
         echo "$message\n";
     }
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             This will match the email address <varname>$email</varname> and on failure populate
             <methodname>getMessages()</methodname> with useful error messages.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.email_address.options">
-        <title>Options for validating Email Addresses</title>
+    <section xml:id="zend.validate.set.email_address.options"><info><title>Options for validating Email Addresses</title></info>
+        
 
         <para>
             <classname>Zend_Validate_EmailAddress</classname> supports several options which can
@@ -93,14 +94,14 @@ if ($validator->isValid($email)) {
             </listitem>
         </itemizedlist>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $validator = new Zend_Validate_EmailAddress();
-$validator->setOptions(array('domain' => false));
-]]></programlisting>
-    </sect3>
+$validator-&gt;setOptions(array('domain' =&gt; false));
+</programlisting>
+    </section>
 
-    <sect3 id="zend.validate.set.email_address.complexlocal">
-        <title>Complex local parts</title>
+    <section xml:id="zend.validate.set.email_address.complexlocal"><info><title>Complex local parts</title></info>
+        
 
         <para>
             <classname>Zend_Validate_EmailAddress</classname> will match any valid email address
@@ -114,10 +115,10 @@ $validator->setOptions(array('domain' => false));
             Some obsolete email formats will not currently validate (e.g. carriage returns or a
             "\" character in an email address).
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.email_address.purelocal">
-        <title>Validating only the local part</title>
+    <section xml:id="zend.validate.set.email_address.purelocal"><info><title>Validating only the local part</title></info>
+        
 
         <para>
             If you need <classname>Zend_Validate_EmailAddress</classname> to check only the local
@@ -127,18 +128,17 @@ $validator->setOptions(array('domain' => false));
             the email address.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $validator = new Zend_Validate_EmailAddress();
-$validator->setOptions(array('domain' => FALSE));
-]]></programlisting>
-    </sect3>
+$validator-&gt;setOptions(array('domain' =&gt; FALSE));
+</programlisting>
+    </section>
 
-    <sect3 id="zend.validate.set.email_address.hostnametype">
-        <title>Validating different types of hostnames</title>
+    <section xml:id="zend.validate.set.email_address.hostnametype"><info><title>Validating different types of hostnames</title></info>
+        
 
         <para>
-            The hostname part of an email address is validated against <link
-                linkend="zend.validate.set.hostname">
+            The hostname part of an email address is validated against <link linkend="zend.validate.set.hostname">
                 <classname>Zend_Validate_Hostname</classname></link>. By default
             only DNS hostnames of the form <filename>domain.com</filename> are accepted, though if
             you wish you can accept IP addresses and Local hostnames too.
@@ -151,23 +151,23 @@ $validator->setOptions(array('domain' => FALSE));
             to accept both DNS and Local hostnames appears below:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $validator = new Zend_Validate_EmailAddress(
                     Zend_Validate_Hostname::ALLOW_DNS |
                     Zend_Validate_Hostname::ALLOW_LOCAL);
-if ($validator->isValid($email)) {
+if ($validator-&gt;isValid($email)) {
     // email appears to be valid
 } else {
     // email is invalid; print the reasons
-    foreach ($validator->getMessages() as $message) {
+    foreach ($validator-&gt;getMessages() as $message) {
         echo "$message\n";
     }
 }
-]]></programlisting>
-    </sect3>
+</programlisting>
+    </section>
 
-    <sect3 id="zend.validate.set.email_address.checkacceptance">
-        <title>Checking if the hostname actually accepts email</title>
+    <section xml:id="zend.validate.set.email_address.checkacceptance"><info><title>Checking if the hostname actually accepts email</title></info>
+        
 
         <para>
             Just because an email address is in the correct format, it doesn't necessarily mean
@@ -182,17 +182,17 @@ if ($validator->isValid($email)) {
             parameter to the <classname>Zend_Validate_EmailAddress</classname> constructor.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $validator = new Zend_Validate_EmailAddress(
     array(
-        'allow' => Zend_Validate_Hostname::ALLOW_DNS,
-        'mx'    => true
+        'allow' =&gt; Zend_Validate_Hostname::ALLOW_DNS,
+        'mx'    =&gt; true
     )
 );
-]]></programlisting>
+</programlisting>
 
-        <note>
-            <title>MX Check under Windows</title>
+        <note><info><title>MX Check under Windows</title></info>
+            
 
             <para>
                 Within Windows environments MX checking is only available when
@@ -223,18 +223,18 @@ $validator = new Zend_Validate_EmailAddress(
             <property>deep</property> option or by using <methodname>setOptions()</methodname>.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $validator = new Zend_Validate_EmailAddress(
     array(
-        'allow' => Zend_Validate_Hostname::ALLOW_DNS,
-        'mx'    => true,
-        'deep'  => true
+        'allow' =&gt; Zend_Validate_Hostname::ALLOW_DNS,
+        'mx'    =&gt; true,
+        'deep'  =&gt; true
     )
 );
-]]></programlisting>
+</programlisting>
 
-        <warning>
-            <title>Performance warning</title>
+        <warning><info><title>Performance warning</title></info>
+            
 
             <para>
                 You should be aware that enabling MX check will slow down you script because of the
@@ -243,8 +243,8 @@ $validator = new Zend_Validate_EmailAddress(
             </para>
         </warning>
 
-        <note>
-            <title>Disallowed IP addresses</title>
+        <note><info><title>Disallowed IP addresses</title></info>
+            
 
             <para>
                 You should note that MX validation is only accepted for external servers. When deep
@@ -252,10 +252,10 @@ $validator = new Zend_Validate_EmailAddress(
                 or <command>169.254.*</command> are not accepted.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.email_address.validateidn">
-        <title>Validating International Domains Names</title>
+    <section xml:id="zend.validate.set.email_address.validateidn"><info><title>Validating International Domains Names</title></info>
+        
 
         <para>
             <classname>Zend_Validate_EmailAddress</classname> will also match international
@@ -265,9 +265,9 @@ $validator = new Zend_Validate_EmailAddress(
             exists within <classname>Zend_Validate_EmailAddress</classname>.
         </para>
 
-        <programlisting language="php"><![CDATA[
-$validator->getHostnameValidator()->setValidateIdn(false);
-]]></programlisting>
+        <programlisting language="php">
+$validator-&gt;getHostnameValidator()-&gt;setValidateIdn(false);
+</programlisting>
 
         <para>
             More information on the usage of <methodname>setValidateIdn()</methodname> appears in
@@ -277,10 +277,10 @@ $validator->getHostnameValidator()->setValidateIdn(false);
         <para>
             Please note IDNs are only validated if you allow DNS hostnames to be validated.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.email_address.validatetld">
-        <title>Validating Top Level Domains</title>
+    <section xml:id="zend.validate.set.email_address.validatetld"><info><title>Validating Top Level Domains</title></info>
+        
 
         <para>
             By default a hostname will be checked against a list of known TLDs. This is enabled by
@@ -289,9 +289,9 @@ $validator->getHostnameValidator()->setValidateIdn(false);
             <classname>Zend_Validate_EmailAddress</classname>.
         </para>
 
-        <programlisting language="php"><![CDATA[
-$validator->getHostnameValidator()->setValidateTld(false);
-]]></programlisting>
+        <programlisting language="php">
+$validator-&gt;getHostnameValidator()-&gt;setValidateTld(false);
+</programlisting>
 
         <para>
             More information on the usage of <methodname>setValidateTld()</methodname> appears in
@@ -301,10 +301,10 @@ $validator->getHostnameValidator()->setValidateTld(false);
         <para>
             Please note TLDs are only validated if you allow DNS hostnames to be validated.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.email_address.setmessage">
-        <title>Setting messages</title>
+    <section xml:id="zend.validate.set.email_address.setmessage"><info><title>Setting messages</title></info>
+        
 
         <para>
             <classname>Zend_Validate_EmailAddress</classname> makes also use of
@@ -314,22 +314,19 @@ $validator->getHostnameValidator()->setValidateTld(false);
             <classname>Zend_Validate_EmailAddress</classname>.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $validator = new Zend_Validate_EmailAddress();
-$validator->setMessages(
+$validator-&gt;setMessages(
     array(
-        Zend_Validate_Hostname::UNKNOWN_TLD => 'I don't know the TLD you gave'
+        Zend_Validate_Hostname::UNKNOWN_TLD =&gt; 'I don't know the TLD you gave'
     )
 );
-]]></programlisting>
+</programlisting>
 
         <para>
             Before Zend Framework 1.10 you had to attach the messages to your own
             <classname>Zend_Validate_Hostname</classname>, and then set this validator within
             <classname>Zend_Validate_EmailAddress</classname> to get your own messages returned.
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.memory.memory-manager">
-    <title>Memory Manager</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.memory.memory-manager.creation">
-        <title>Creating a Memory Manager</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.memory.memory-manager"><info><title>Memory Manager</title></info>
+    
+
+    <section xml:id="zend.memory.memory-manager.creation"><info><title>Creating a Memory Manager</title></info>
+        
 
         <para>
             You can create new a memory manager
@@ -23,17 +24,16 @@
             backend options array.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $backendOptions = array(
-    'cache_dir' => './tmp/' // Directory where to put the swapped memory blocks
+    'cache_dir' =&gt; './tmp/' // Directory where to put the swapped memory blocks
 );
 
 $memoryManager = Zend_Memory::factory('File', $backendOptions);
-]]></programlisting>
+</programlisting>
 
         <para>
-            <classname>Zend_Memory</classname> uses <link
-                linkend="zend.cache.backends"><classname>Zend_Cache backends</classname></link> as
+            <classname>Zend_Memory</classname> uses <link linkend="zend.cache.backends"><classname>Zend_Cache backends</classname></link> as
             storage providers.
         </para>
 
@@ -42,9 +42,9 @@ $memoryManager = Zend_Memory::factory('File', $backendOptions);
             in addition to standard <classname>Zend_Cache</classname> backends.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $memoryManager = Zend_Memory::factory('None');
-]]></programlisting>
+</programlisting>
 
         <para>
             If you use 'None' as the backend name, then the memory
@@ -56,72 +56,72 @@ $memoryManager = Zend_Memory::factory('None');
         <para>
             The 'None' backend doesn't need any option specified.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.memory.memory-manager.objects-management">
-        <title>Managing Memory Objects</title>
+    <section xml:id="zend.memory.memory-manager.objects-management"><info><title>Managing Memory Objects</title></info>
+        
 
         <para>
             This section describes creating and destroying objects in the
             managed memory, and settings to control memory manager behavior.
         </para>
 
-        <sect3 id="zend.memory.memory-manager.objects-management.movable">
-            <title>Creating Movable Objects</title>
+        <section xml:id="zend.memory.memory-manager.objects-management.movable"><info><title>Creating Movable Objects</title></info>
+            
 
             <para>
                 Create movable objects (objects, which may be swapped) using
                 the <methodname>Zend_Memory_Manager::create([$data])</methodname> method:
             </para>
 
-            <programlisting language="php"><![CDATA[
-$memObject = $memoryManager->create($data);
-]]></programlisting>
+            <programlisting language="php">
+$memObject = $memoryManager-&gt;create($data);
+</programlisting>
 
             <para>
                 The <varname>$data</varname> argument is optional and used to
                 initialize the object value. If the <varname>$data</varname>
                 argument is omitted, the value is an empty string.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.memory.memory-manager.objects-management.locked">
-            <title>Creating Locked Objects</title>
+        <section xml:id="zend.memory.memory-manager.objects-management.locked"><info><title>Creating Locked Objects</title></info>
+            
 
             <para>
                 Create locked objects (objects, which are not swapped) using
                 the <methodname>Zend_Memory_Manager::createLocked([$data])</methodname> method:
             </para>
 
-            <programlisting language="php"><![CDATA[
-$memObject = $memoryManager->createLocked($data);
-]]></programlisting>
+            <programlisting language="php">
+$memObject = $memoryManager-&gt;createLocked($data);
+</programlisting>
 
             <para>
                 The <varname>$data</varname> argument is optional and used to
                 initialize the object value. If the <varname>$data</varname>
                 argument is omitted, the value is an empty string.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.memory.memory-manager.objects-management.destruction">
-            <title>Destroying Objects</title>
+        <section xml:id="zend.memory.memory-manager.objects-management.destruction"><info><title>Destroying Objects</title></info>
+            
 
             <para>
                 Memory objects are automatically destroyed and removed from
                 memory when they go out of scope:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 function foo()
 {
     global $memoryManager, $memList;
 
     ...
 
-    $memObject1 = $memoryManager->create($data1);
-    $memObject2 = $memoryManager->create($data2);
-    $memObject3 = $memoryManager->create($data3);
+    $memObject1 = $memoryManager-&gt;create($data1);
+    $memObject2 = $memoryManager-&gt;create($data2);
+    $memObject3 = $memoryManager-&gt;create($data3);
 
     ...
 
@@ -136,19 +136,19 @@ function foo()
     // but $memObject3 object is still referenced by $memList
     // and is not destroyed
 }
-]]></programlisting>
+</programlisting>
 
             <para>
                 This applies to both movable and locked objects.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.memory.memory-manager.settings">
-        <title>Memory Manager Settings</title>
+    <section xml:id="zend.memory.memory-manager.settings"><info><title>Memory Manager Settings</title></info>
+        
 
-        <sect3 id="zend.memory.memory-manager.settings.memory-limit">
-            <title>Memory Limit</title>
+        <section xml:id="zend.memory.memory-manager.settings.memory-limit"><info><title>Memory Limit</title></info>
+            
 
             <para>
                 Memory limit is a number of bytes allowed to be used by loaded
@@ -167,10 +167,10 @@ function foo()
                 <methodname>setMemoryLimit($newLimit)</methodname> methods:
             </para>
 
-            <programlisting language="php"><![CDATA[
-$oldLimit = $memoryManager->getMemoryLimit();  // Get memory limit in bytes
-$memoryManager->setMemoryLimit($newLimit);     // Set memory limit in bytes
-]]></programlisting>
+            <programlisting language="php">
+$oldLimit = $memoryManager-&gt;getMemoryLimit();  // Get memory limit in bytes
+$memoryManager-&gt;setMemoryLimit($newLimit);     // Set memory limit in bytes
+</programlisting>
 
             <para>
                 A negative value for memory limit means 'no limit'.
@@ -181,10 +181,10 @@ $memoryManager->setMemoryLimit($newLimit);     // Set memory limit in bytes
                 'memory_limit' in php.ini or 'no limit' (-1)
                 if 'memory_limit' is not set in php.ini.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.memory.memory-manager.settings.min-size">
-            <title>MinSize</title>
+        <section xml:id="zend.memory.memory-manager.settings.min-size"><info><title>MinSize</title></info>
+            
 
             <para>
                 MinSize is a minimal size of memory objects, which may be
@@ -199,14 +199,14 @@ $memoryManager->setMemoryLimit($newLimit);     // Set memory limit in bytes
                 <methodname>setMinSize($newSize)</methodname> methods:
             </para>
 
-            <programlisting language="php"><![CDATA[
-$oldMinSize = $memoryManager->getMinSize();  // Get MinSize in bytes
-$memoryManager->setMinSize($newSize);        // Set MinSize limit in bytes
-]]></programlisting>
+            <programlisting language="php">
+$oldMinSize = $memoryManager-&gt;getMinSize();  // Get MinSize in bytes
+$memoryManager-&gt;setMinSize($newSize);        // Set MinSize limit in bytes
+</programlisting>
 
             <para>
                 The default minimum size value is 16KB (16384 bytes).
             </para>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

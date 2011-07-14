@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.router.routes.static">
-    <title>Zend_Controller_Router_Route_Static</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.router.routes.static"><info><title>Zend_Controller_Router_Route_Static</title></info>
+    
 
     <para>
         The examples above all use dynamic routes -- routes that contain
@@ -10,13 +11,13 @@
         an overkill. The answer to this situation is to use static routes:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $route = new Zend_Controller_Router_Route_Static(
     'login',
-    array('controller' => 'auth', 'action' => 'login')
+    array('controller' =&gt; 'auth', 'action' =&gt; 'login')
 );
-$router->addRoute('login', $route);
-]]></programlisting>
+$router-&gt;addRoute('login', $route);
+</programlisting>
 
     <para>
         Above route will match a <acronym>URL</acronym> of
@@ -24,8 +25,8 @@ $router->addRoute('login', $route);
         <methodname>AuthController::loginAction()</methodname>.
     </para>
 
-    <note id="zend.controller.router.routes.static.warning">
-        <title>Warning: Static Routes must Contain Sane Defaults</title>
+    <note xml:id="zend.controller.router.routes.static.warning"><info><title>Warning: Static Routes must Contain Sane Defaults</title></info>
+        
 
         <para>
             Since a static route does not pass any part of the <acronym>URL</acronym> to the
@@ -52,16 +53,13 @@ $router->addRoute('login', $route);
             parameter to the front controller during bootstrapping:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$front->setParam('useDefaultControllerAlways', true);
-]]></programlisting>
+        <programlisting language="php">
+$front-&gt;setParam('useDefaultControllerAlways', true);
+</programlisting>
 
         <para>
             However, this is considered a workaround; it is always better to
             explicitly define sane defaults.
         </para>
     </note>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

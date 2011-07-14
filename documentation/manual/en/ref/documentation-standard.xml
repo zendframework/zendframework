@@ -1,13 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<appendix id="doc-standard">
-    <title>Zend Framework Documentation Standard</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect1 id="doc-standard.overview">
-        <title>Overview</title>
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="doc-standard"><info><title>Zend Framework Documentation Standard</title></info>
+    
 
-        <sect2 id="doc-standard.overview.scope">
-            <title>Scope</title>
+    <section xml:id="doc-standard.overview"><info><title>Overview</title></info>
+        
+
+        <section xml:id="doc-standard.overview.scope"><info><title>Scope</title></info>
+            
 
             <para>
                 This document provides guidelines for creation of the end-user
@@ -23,31 +24,31 @@
 
             <para>
                 You may adopt and/or modify these standards in accordance with the terms of our
-                <ulink url="http://framework.zend.com/license">license</ulink>.
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/license">license</link>.
             </para>
 
             <para>
                 Topics covered in Zend Framework's documentation standards include documentation
                 file formatting and recommendations for documentation quality.
             </para>
-        </sect2>
-    </sect1>
+        </section>
+    </section>
 
-    <sect1 id="doc-standard.file-formatting">
-        <title>Documentation File Formatting</title>
+    <section xml:id="doc-standard.file-formatting"><info><title>Documentation File Formatting</title></info>
+        
 
-        <sect2 id="doc-standard.file-formatting.xml-tags">
-            <title>XML Tags</title>
+        <section xml:id="doc-standard.file-formatting.xml-tags"><info><title>XML Tags</title></info>
+            
 
             <para>
                 Each manual file must include the following <acronym>XML</acronym> declarations at
                 the top of the file:
             </para>
 
-            <programlisting language="xml"><![CDATA[
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-]]></programlisting>
+            <programlisting language="xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!-- Reviewed: no --&gt;
+</programlisting>
 
             <para>
                 <acronym>XML</acronym> files from translated languages must also include a revision
@@ -55,68 +56,68 @@
                 translation was based on.
             </para>
 
-            <programlisting language="xml"><![CDATA[
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 14978 -->
-<!-- Reviewed: no -->
-]]></programlisting>
-        </sect2>
+            <programlisting language="xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!-- EN-Revision: 14978 --&gt;
+&lt;!-- Reviewed: no --&gt;
+</programlisting>
+        </section>
 
-        <sect2 id="doc-standard.file-formatting.max-line-length">
-            <title>Maximum Line Length</title>
+        <section xml:id="doc-standard.file-formatting.max-line-length"><info><title>Maximum Line Length</title></info>
+            
 
             <para>
                 The maximum line length, including tags, attributes, and indentation, is not to
                 exceed 100 characters. There is only one exception to this rule: attribute and value
                 pairs are allowed to exceed the 100 chars as they are not allowed to be separated.
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="doc-standard.file-formatting.indentation">
-            <title>Indentation</title>
+        <section xml:id="doc-standard.file-formatting.indentation"><info><title>Indentation</title></info>
+            
 
             <para>Indentation should consist of 4 spaces. Tabs are not allowed.</para>
             <para>Tags which are at the same level must have the same indentation.</para>
 
-            <programlisting language="xml"><![CDATA[
-<sect1>
-</sect1>
+            <programlisting language="xml">
+&lt;sect1&gt;
+&lt;/sect1&gt;
 
-<sect1>
-</sect1>
-]]></programlisting>
+&lt;sect1&gt;
+&lt;/sect1&gt;
+</programlisting>
 
             <para>
                 Tags which are one level under the previous tag must be indented with 4 additional
                 spaces.
             </para>
 
-            <programlisting language="xml"><![CDATA[
-<sect1>
-    <sect2>
-    </sect2>
-</sect1>
-]]></programlisting>
+            <programlisting language="xml">
+&lt;sect1&gt;
+    &lt;sect2&gt;
+    &lt;/sect2&gt;
+&lt;/sect1&gt;
+</programlisting>
 
             <para>
                 Multiple block tags within the same line are not allowed; multiple inline tags are
                 allowed, however.
             </para>
 
-            <programlisting language="xml"><![CDATA[
-<!-- NOT ALLOWED: -->
-<sect1><sect2>
-</sect2></sect1>
+            <programlisting language="xml">
+&lt;!-- NOT ALLOWED: --&gt;
+&lt;sect1&gt;&lt;sect2&gt;
+&lt;/sect2&gt;&lt;/sect1&gt;
 
-<!-- ALLOWED -->
-<para>
-    <classname>Zend_Magic</classname> does not exist. <classname>Zend_Acl</classname> does.
-</para>
-]]></programlisting>
-        </sect2>
+&lt;!-- ALLOWED --&gt;
+&lt;para&gt;
+    &lt;classname&gt;Zend_Magic&lt;/classname&gt; does not exist. &lt;classname&gt;Zend_Acl&lt;/classname&gt; does.
+&lt;/para&gt;
+</programlisting>
+        </section>
 
-        <sect2 id="doc-standard.file-formatting.line-termination">
-            <title>Line Termination</title>
+        <section xml:id="doc-standard.file-formatting.line-termination"><info><title>Line Termination</title></info>
+            
 
             <para>
                 Line termination follows the Unix text file convention. Lines must end with a
@@ -129,141 +130,141 @@
                 Apple OS's (0x0D) or the carriage return - linefeed combination
                 (<acronym>CRLF</acronym>) as is standard for the Windows OS (0x0D, 0x0A).
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="doc-standard.file-formatting.empty-tags">
-            <title>Empty tags</title>
+        <section xml:id="doc-standard.file-formatting.empty-tags"><info><title>Empty tags</title></info>
+            
 
             <para>
                 Empty tags are not allowed; all tags must contain text or child tags.
             </para>
 
-            <programlisting language="xml"><![CDATA[
-<!-- NOT ALLOWED -->
-<para>
-    Some text. <link></link>
-</para>
+            <programlisting language="xml">
+&lt;!-- NOT ALLOWED --&gt;
+&lt;para&gt;
+    Some text. &lt;link&gt;&lt;/link&gt;
+&lt;/para&gt;
 
-<para>
-</para>
-]]></programlisting>
-        </sect2>
+&lt;para&gt;
+&lt;/para&gt;
+</programlisting>
+        </section>
 
-        <sect2 id="doc-standard.file-formatting.whitespace">
-            <title>Usage of whitespace within documents</title>
+        <section xml:id="doc-standard.file-formatting.whitespace"><info><title>Usage of whitespace within documents</title></info>
+            
 
-            <sect3 id="doc-standard.file-formatting.whitespace.trailing">
-                <title>Whitespace within tags</title>
+            <section xml:id="doc-standard.file-formatting.whitespace.trailing"><info><title>Whitespace within tags</title></info>
+                
 
                 <para>
                     Opening block tags should have no whitespace immediately following them other
                     than line breaks (and indentation on the following line).
                 </para>
 
-                <programlisting language="xml"><![CDATA[
-<!-- NOT ALLOWED -->
-<sect1>WHITESPACE
-</sect1>
-]]></programlisting>
+                <programlisting language="xml">
+&lt;!-- NOT ALLOWED --&gt;
+&lt;sect1&gt;WHITESPACE
+&lt;/sect1&gt;
+</programlisting>
 
                 <para>
                     Opening inline tags should have no whitespace immediately following them.
                 </para>
 
-                <programlisting language="xml"><![CDATA[
-<!-- NOT ALLOWED -->
-This is the class <classname> Zend_Class</classname>.
+                <programlisting language="xml">
+&lt;!-- NOT ALLOWED --&gt;
+This is the class &lt;classname&gt; Zend_Class&lt;/classname&gt;.
 
-<!-- OK -->
-This is the class <classname>Zend_Class</classname>.
-]]></programlisting>
+&lt;!-- OK --&gt;
+This is the class &lt;classname&gt;Zend_Class&lt;/classname&gt;.
+</programlisting>
 
                 <para>
                     Closing block tags may be preceded by whitespace equivalent to the current
                     indentation level, but no more than that amount.
                 </para>
 
-                <programlisting language="xml"><![CDATA[
-<!-- NOT ALLOWED -->
-    <sect1>
-     </sect1>
+                <programlisting language="xml">
+&lt;!-- NOT ALLOWED --&gt;
+    &lt;sect1&gt;
+     &lt;/sect1&gt;
 
-<!-- OK -->
-    <sect1>
-    </sect1>
-]]></programlisting>
+&lt;!-- OK --&gt;
+    &lt;sect1&gt;
+    &lt;/sect1&gt;
+</programlisting>
 
                 <para>
                     Closing inline tags must not be preceded by any whitespace.
                 </para>
 
-                <programlisting language="xml"><![CDATA[
-<!-- NOT ALLOWED -->
-This is the class <classname>Zend_Class </classname>
+                <programlisting language="xml">
+&lt;!-- NOT ALLOWED --&gt;
+This is the class &lt;classname&gt;Zend_Class &lt;/classname&gt;
 
-<!-- OK -->
-This is the class <classname>Zend_Class</classname>
-]]></programlisting>
-            </sect3>
+&lt;!-- OK --&gt;
+This is the class &lt;classname&gt;Zend_Class&lt;/classname&gt;
+</programlisting>
+            </section>
 
-            <sect3 id="doc-standard.file-formatting.whitespace.multiple-line-breaks">
-                <title>Multiple line breaks</title>
+            <section xml:id="doc-standard.file-formatting.whitespace.multiple-line-breaks"><info><title>Multiple line breaks</title></info>
+                
 
                 <para>
                     Multiple line breaks within or between tags are not allowed.
                 </para>
 
-                <programlisting language="xml"><![CDATA[
-<!-- NOT ALLOWED -->
-<para>
+                <programlisting language="xml">
+&lt;!-- NOT ALLOWED --&gt;
+&lt;para&gt;
     Some text...
 
     ... and more text
-</para>
+&lt;/para&gt;
 
 
-<para>
+&lt;para&gt;
     Another paragraph.
-</para>
+&lt;/para&gt;
 
-<!-- OK -->
-<para>
+&lt;!-- OK --&gt;
+&lt;para&gt;
     Some text...
     ... and more text
-</para>
+&lt;/para&gt;
 
-<para>
+&lt;para&gt;
     Another paragraph.
-</para>
-]]></programlisting>
-            </sect3>
+&lt;/para&gt;
+</programlisting>
+            </section>
 
-            <sect3 id="doc-standard.file-formatting.whitespace.tag-separation">
-                <title>Separation between tags</title>
+            <section xml:id="doc-standard.file-formatting.whitespace.tag-separation"><info><title>Separation between tags</title></info>
+                
 
                 <para>
                     Tags at the same level must be separated by an empty line to improve
                     readability.
                 </para>
 
-                <programlisting language="xml"><![CDATA[
-<!-- NOT ALLOWED -->
-<para>
+                <programlisting language="xml">
+&lt;!-- NOT ALLOWED --&gt;
+&lt;para&gt;
     Some text...
-</para>
-<para>
+&lt;/para&gt;
+&lt;para&gt;
     More text...
-</para>
+&lt;/para&gt;
 
-<!-- OK -->
-<para>
+&lt;!-- OK --&gt;
+&lt;para&gt;
     Some text...
-</para>
+&lt;/para&gt;
 
-<para>
+&lt;para&gt;
     More text...
-</para>
-]]></programlisting>
+&lt;/para&gt;
+</programlisting>
 
                 <para>
                     The first child tag should open directly below its parent, with no empty line
@@ -271,38 +272,38 @@ This is the class <classname>Zend_Class</classname>
                     its parent.
                 </para>
 
-                <programlisting language="xml"><![CDATA[
-<!-- NOT ALLOWED -->
-<sect1>
+                <programlisting language="xml">
+&lt;!-- NOT ALLOWED --&gt;
+&lt;sect1&gt;
 
-    <sect2>
-    </sect2>
+    &lt;sect2&gt;
+    &lt;/sect2&gt;
 
-    <sect2>
-    </sect2>
+    &lt;sect2&gt;
+    &lt;/sect2&gt;
 
-    <sect2>
-    </sect2>
+    &lt;sect2&gt;
+    &lt;/sect2&gt;
 
-</sect1>
+&lt;/sect1&gt;
 
-<!-- OK -->
-<sect1>
-    <sect2>
-    </sect2>
+&lt;!-- OK --&gt;
+&lt;sect1&gt;
+    &lt;sect2&gt;
+    &lt;/sect2&gt;
 
-    <sect2>
-    </sect2>
+    &lt;sect2&gt;
+    &lt;/sect2&gt;
 
-    <sect2>
-    </sect2>
-</sect1>
-]]></programlisting>
-            </sect3>
-        </sect2>
+    &lt;sect2&gt;
+    &lt;/sect2&gt;
+&lt;/sect1&gt;
+</programlisting>
+            </section>
+        </section>
 
-        <sect2 id="doc-standard.file-formatting.program-listing">
-            <title>Program Listings</title>
+        <section xml:id="doc-standard.file-formatting.program-listing"><info><title>Program Listings</title></info>
+            
 
             <para>
                 The opening <emphasis>&lt;programlisting&gt;</emphasis> tag must indicate the
@@ -310,11 +311,11 @@ This is the class <classname>Zend_Class</classname>
                 blocks.
             </para>
 
-            <programlisting language="xml"><![CDATA[
-<para>Sibling paragraph.</para>
+            <programlisting language="xml">
+&lt;para&gt;Sibling paragraph.&lt;/para&gt;
 
-<programlisting language="php">]]>&lt;<![CDATA[![CDATA[
-]]></programlisting>
+&lt;programlisting language="php"&gt;&lt;![CDATA[
+</programlisting>
 
             <para>
                 <acronym>CDATA</acronym> should be used around all program listings.
@@ -326,42 +327,42 @@ This is the class <classname>Zend_Class</classname>
                 the final output.
             </para>
 
-            <programlisting language="xml"><![CDATA[
-<!-- NOT ALLOWED -->
-<programlisting language="php">]]>&lt;<![CDATA[![CDATA[
+            <programlisting language="xml">
+&lt;!-- NOT ALLOWED --&gt;
+&lt;programlisting language="php"&gt;&lt;![CDATA[
 
 $render = "xxx";
 
-]]]]>&gt;<![CDATA[</programlisting>
+]]&gt;&lt;/programlisting&gt;
 
-<!-- OK -->
-<programlisting language="php">]]>&lt;<![CDATA[![CDATA[
+&lt;!-- OK --&gt;
+&lt;programlisting language="php"&gt;&lt;![CDATA[
 $render = "xxx";
-]]]]>&gt;<![CDATA[</programlisting>
-]]></programlisting>
+]]&gt;&lt;/programlisting&gt;
+</programlisting>
 
             <para>
                 Ending <acronym>CDATA</acronym> and <emphasis>&lt;programlisting&gt;</emphasis>
                 tags should be on the same line, without any indentation.
             </para>
 
-            <programlisting language="xml"><![CDATA[
-<!-- NOT ALLOWED -->
-    <programlisting language="php">]]>&lt;<![CDATA[![CDATA[
+            <programlisting language="xml">
+&lt;!-- NOT ALLOWED --&gt;
+    &lt;programlisting language="php"&gt;&lt;![CDATA[
 $render = "xxx";
-]]]]>&gt;<![CDATA[
-    </programlisting>
+]]&gt;
+    &lt;/programlisting&gt;
 
-<!-- NOT ALLOWED -->
-    <programlisting language="php">]]>&lt;<![CDATA[![CDATA[
+&lt;!-- NOT ALLOWED --&gt;
+    &lt;programlisting language="php"&gt;&lt;![CDATA[
 $render = "xxx";
-    ]]]]>&gt;<![CDATA[</programlisting>
+    ]]&gt;&lt;/programlisting&gt;
 
-<!-- OK -->
-    <programlisting language="php">]]>&lt;<![CDATA[![CDATA[
+&lt;!-- OK --&gt;
+    &lt;programlisting language="php"&gt;&lt;![CDATA[
 $render = "xxx";
-]]]]>&gt;<![CDATA[</programlisting>
-]]></programlisting>
+]]&gt;&lt;/programlisting&gt;
+</programlisting>
 
             <para>
                 The <emphasis>&lt;programlisting&gt;</emphasis> tag should contain the "language"
@@ -369,16 +370,16 @@ $render = "xxx";
                 values include "css", "html", "ini", "javascript", "php", "text", and "xml".
             </para>
 
-            <programlisting language="xml"><![CDATA[
-<!-- PHP -->
-<programlisting language="php">]]>&lt;<![CDATA[![CDATA[
+            <programlisting language="xml">
+&lt;!-- PHP --&gt;
+&lt;programlisting language="php"&gt;&lt;![CDATA[
 
-<!-- Javascript -->
-<programlisting language="javascript">]]>&lt;<![CDATA[![CDATA[
+&lt;!-- Javascript --&gt;
+&lt;programlisting language="javascript"&gt;&lt;![CDATA[
 
-<!-- XML -->
-<programlisting language="xml">]]>&lt;<![CDATA[![CDATA[
-]]></programlisting>
+&lt;!-- XML --&gt;
+&lt;programlisting language="xml"&gt;&lt;![CDATA[
+</programlisting>
 
             <para>
                 For program listings containing only <acronym>PHP</acronym> code,
@@ -387,22 +388,21 @@ $render = "xxx";
                 of the <emphasis>&lt;programlisting&gt;</emphasis> tag.
             </para>
 
-            <programlisting language="xml"><![CDATA[
-<!-- NOT ALLOWED -->
-<programlisting language="php"]]>&lt;<![CDATA[![CDATA[<?php
+            <programlisting language="xml">
+&lt;!-- NOT ALLOWED --&gt;
+&lt;programlisting language="php"&lt;![CDATA[&lt;?php
     // ...
-?>]]]]>&gt;<![CDATA[</programlisting>
+?&gt;]]&gt;&lt;/programlisting&gt;
 
-<programlisting language="php"]]>&lt;<![CDATA[![CDATA[
-<?php
+&lt;programlisting language="php"&lt;![CDATA[
+&lt;?php
     // ...
-?>
-]]]]>&gt;<![CDATA[</programlisting>
-]]></programlisting>
+?&gt;
+]]&gt;&lt;/programlisting&gt;
+</programlisting>
 
             <para>
-                Line lengths within program listings should follow the <link
-                    linkend="coding-standard.php-file-formatting.max-line-length">coding standards
+                Line lengths within program listings should follow the <link linkend="coding-standard.php-file-formatting.max-line-length">coding standards
                 recommendations</link>.
             </para>
 
@@ -414,21 +414,21 @@ $render = "xxx";
                 autoloader. Use them only when they are essential to the example.
             </para>
 
-            <note>
-                <title>Never use short tags</title>
+            <note><info><title>Never use short tags</title></info>
+                
 
                 <para>
                     Short tags (e.g., "&lt;?", "&lt;?=") should never be used within
                     <emphasis>programlisting</emphasis> or the narrative of a document.
                 </para>
             </note>
-        </sect2>
+        </section>
 
-        <sect2 id="doc-standard.file-formatting.inline-tags">
-            <title>Notes on specific inline tags</title>
+        <section xml:id="doc-standard.file-formatting.inline-tags"><info><title>Notes on specific inline tags</title></info>
+            
 
-            <sect3 id="doc-standard.file-formatting.inline-tags.classname">
-                <title>classname</title>
+            <section xml:id="doc-standard.file-formatting.inline-tags.classname"><info><title>classname</title></info>
+                
 
                 <para>
                     The tag <emphasis>&lt;classname&gt;</emphasis> must be used each time a class
@@ -437,15 +437,15 @@ $render = "xxx";
                     the tag.
                 </para>
 
-                <programlisting language="xml"><![CDATA[
-<para>
-    The class <classname>Zend_Class</classname>.
-</para>
-]]></programlisting>
-            </sect3>
+                <programlisting language="xml">
+&lt;para&gt;
+    The class &lt;classname&gt;Zend_Class&lt;/classname&gt;.
+&lt;/para&gt;
+</programlisting>
+            </section>
 
-            <sect3 id="doc-standard.file-formatting.inline-tags.varname">
-                <title>varname</title>
+            <section xml:id="doc-standard.file-formatting.inline-tags.varname"><info><title>varname</title></info>
+                
 
                 <para>
                     Variables must be wrapped in the <emphasis>&lt;varname&gt;</emphasis> tag.
@@ -453,16 +453,16 @@ $render = "xxx";
                     within this tag, unless a class name is used, which indicates a class variable.
                 </para>
 
-                <programlisting language="xml"><![CDATA[
-<para>
-    The variable <varname>$var</varname> and the class variable
-    <varname>Zend_Class::$var</varname>.
-</para>
-]]></programlisting>
-            </sect3>
+                <programlisting language="xml">
+&lt;para&gt;
+    The variable &lt;varname&gt;$var&lt;/varname&gt; and the class variable
+    &lt;varname&gt;Zend_Class::$var&lt;/varname&gt;.
+&lt;/para&gt;
+</programlisting>
+            </section>
 
-            <sect3 id="doc-standard.file-formatting.inline-tags.methodname">
-                <title>methodname</title>
+            <section xml:id="doc-standard.file-formatting.inline-tags.methodname"><info><title>methodname</title></info>
+                
 
                 <para>
                     Methods must be wrapped in the <emphasis>&lt;methodname&gt;</emphasis> tag.
@@ -471,17 +471,17 @@ $render = "xxx";
                     unless a class name is used, which indicates a class method.
                 </para>
 
-                <programlisting language="xml"><![CDATA[
-<para>
-    The method <methodname>foo()</methodname> and the class method
-    <methodname>Zend_Class::foo()</methodname>. A method with a full signature:
-    <methodname>foo($bar, $baz)</methodname>
-</para>
-]]></programlisting>
-            </sect3>
+                <programlisting language="xml">
+&lt;para&gt;
+    The method &lt;methodname&gt;foo()&lt;/methodname&gt; and the class method
+    &lt;methodname&gt;Zend_Class::foo()&lt;/methodname&gt;. A method with a full signature:
+    &lt;methodname&gt;foo($bar, $baz)&lt;/methodname&gt;
+&lt;/para&gt;
+</programlisting>
+            </section>
 
-            <sect3 id="doc-standard.file-formatting.inline-tags.constant">
-                <title>constant</title>
+            <section xml:id="doc-standard.file-formatting.inline-tags.constant"><info><title>constant</title></info>
+                
 
                 <para>
                     Use the <emphasis>&lt;constant&gt;</emphasis> tag when denoting constants.
@@ -490,16 +490,16 @@ $render = "xxx";
                     constant.
                 </para>
 
-                <programlisting language="xml"><![CDATA[
-<para>
-    The constant <constant>FOO</constant> and the class constant
-    <constant>Zend_Class::FOO</constant>.
-</para>
-]]></programlisting>
-            </sect3>
+                <programlisting language="xml">
+&lt;para&gt;
+    The constant &lt;constant&gt;FOO&lt;/constant&gt; and the class constant
+    &lt;constant&gt;Zend_Class::FOO&lt;/constant&gt;.
+&lt;/para&gt;
+</programlisting>
+            </section>
 
-            <sect3 id="doc-standard.file-formatting.inline-tags.filename">
-                <title>filename</title>
+            <section xml:id="doc-standard.file-formatting.inline-tags.filename"><info><title>filename</title></info>
+                
 
                 <para>
                     Filenames and paths must be wrapped in the
@@ -507,15 +507,15 @@ $render = "xxx";
                     tag.
                 </para>
 
-                <programlisting language="xml"><![CDATA[
-<para>
-    The filename <filename>application/Bootstrap.php</filename>.
-</para>
-]]></programlisting>
-            </sect3>
+                <programlisting language="xml">
+&lt;para&gt;
+    The filename &lt;filename&gt;application/Bootstrap.php&lt;/filename&gt;.
+&lt;/para&gt;
+</programlisting>
+            </section>
 
-            <sect3 id="doc-standard.file-formatting.inline-tags.command">
-                <title>command</title>
+            <section xml:id="doc-standard.file-formatting.inline-tags.command"><info><title>command</title></info>
+                
 
                 <para>
                     Commands, shell scripts, and program calls must be wrapped in the
@@ -523,49 +523,49 @@ $render = "xxx";
                     these should also be included within the tag.
                 </para>
 
-                <programlisting language="xml"><![CDATA[
-<para>
-    Execute <command>zf.sh create project</command>.
-</para>
-]]></programlisting>
-            </sect3>
+                <programlisting language="xml">
+&lt;para&gt;
+    Execute &lt;command&gt;zf.sh create project&lt;/command&gt;.
+&lt;/para&gt;
+</programlisting>
+            </section>
 
-            <sect3 id="doc-standard.file-formatting.inline-tags.code">
-                <title>code</title>
+            <section xml:id="doc-standard.file-formatting.inline-tags.code"><info><title>code</title></info>
+                
 
                 <para>
                     Usage of the <emphasis>&lt;code&gt;</emphasis> tag is discouraged, in favor of
                     the other inline tasks discussed previously.
                 </para>
-            </sect3>
-        </sect2>
+            </section>
+        </section>
 
-        <sect2 id="doc-standard.file-formatting.block-tags">
-            <title>Notes on specific block tags</title>
+        <section xml:id="doc-standard.file-formatting.block-tags"><info><title>Notes on specific block tags</title></info>
+            
 
-            <sect3 id="doc-standard.file-formatting.block-tags.title">
-                <title>title</title>
+            <section xml:id="doc-standard.file-formatting.block-tags.title"><info><title>title</title></info>
+                
 
                 <para>
                     The <emphasis>&lt;title&gt;</emphasis> tag is not allowed to hold other tags.
                 </para>
 
-                <programlisting language="xml"><![CDATA[
-<!-- NOT ALLOWED -->
-<title>Using <classname>Zend_Class</classname></title>
+                <programlisting language="xml">
+&lt;!-- NOT ALLOWED --&gt;
+&lt;title&gt;Using &lt;classname&gt;Zend_Class&lt;/classname&gt;&lt;/title&gt;
 
-<!-- OK -->
-<title>Using Zend_Class</title>
-]]></programlisting>
-            </sect3>
-        </sect2>
-    </sect1>
+&lt;!-- OK --&gt;
+&lt;title&gt;Using Zend_Class&lt;/title&gt;
+</programlisting>
+            </section>
+        </section>
+    </section>
 
-    <sect1 id="doc-standard.recommendations">
-        <title>Recommendations</title>
+    <section xml:id="doc-standard.recommendations"><info><title>Recommendations</title></info>
+        
 
-        <sect2 id="doc-standard.recommendations.editors">
-            <title>Use editors without autoformatting</title>
+        <section xml:id="doc-standard.recommendations.editors"><info><title>Use editors without autoformatting</title></info>
+            
 
             <para>
                 For editing the documentation, typically you should not use formal
@@ -580,10 +580,10 @@ $render = "xxx";
                 the lines that have changed using normal <command>diff</command> tools.
                 Autoformatting makes this process more difficult.
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="doc-standard.recommendations.images">
-            <title>Use Images</title>
+        <section xml:id="doc-standard.recommendations.images"><info><title>Use Images</title></info>
+            
 
             <para>
                 Good images and diagrams can improve readability and comprehension. Use them
@@ -591,10 +591,10 @@ $render = "xxx";
                 <filename>documentation/manual/en/figures/</filename> directory, and be named after
                 the section identifier in which they occur.
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="doc-standard.recommendations.examples">
-            <title>Use Case Examples</title>
+        <section xml:id="doc-standard.recommendations.examples"><info><title>Use Case Examples</title></info>
+            
 
             <para>
                 Look for good use cases submitted by the community, especially those posted in
@@ -606,10 +606,10 @@ $render = "xxx";
                 When writing your examples for inclusion in the manual, follow
                 all coding standards and documentation standards.
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="doc-standard.recommendations.phpdoc">
-            <title>Avoid Replicating phpdoc Contents</title>
+        <section xml:id="doc-standard.recommendations.phpdoc"><info><title>Avoid Replicating phpdoc Contents</title></info>
+            
 
             <para>
                 The manual is intended to be a reference guide for end-user usage. Replicating
@@ -618,10 +618,10 @@ $render = "xxx";
                 at this time, we would like the documentation teams to focus on translating the
                 English manual, not the phpdoc comments.
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="doc-standard.recommendations.links">
-            <title>Use Links</title>
+        <section xml:id="doc-standard.recommendations.links"><info><title>Use Links</title></info>
+            
 
             <para>
                 Link to other sections of the manual or to external sources
@@ -633,23 +633,23 @@ $render = "xxx";
                 <emphasis>&lt;link&gt;</emphasis> tag (to which you must provide link text).
             </para>
 
-            <programlisting language="xml"><![CDATA[
-<para>
-    "Link" links to a section, using descriptive text: <link
-        linkend="doc-standard.recommendations.links">documentation on
-        links</link>.
-</para>
-]]></programlisting>
+            <programlisting language="xml">
+&lt;para&gt;
+    "Link" links to a section, using descriptive text: &lt;link
+        linkend="doc-standard.recommendations.links"&gt;documentation on
+        links&lt;/link&gt;.
+&lt;/para&gt;
+</programlisting>
 
             <para>
                 To link to an external resource, use <emphasis>&lt;ulink&gt;</emphasis>:
             </para>
 
-            <programlisting language="xml"><![CDATA[
-<para>
-    The <ulink url="http://framework.zend.com/">Zend Framework site</ulink>.
-</para>
-]]></programlisting>
-        </sect2>
-    </sect1>
+            <programlisting language="xml">
+&lt;para&gt;
+    The &lt;ulink url="http://framework.zend.com/"&gt;Zend Framework site&lt;/ulink&gt;.
+&lt;/para&gt;
+</programlisting>
+        </section>
+    </section>
 </appendix>

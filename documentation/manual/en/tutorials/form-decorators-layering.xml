@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.form.decorators.layering">
-    <title>Layering Decorators</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.form.decorators.layering"><info><title>Layering Decorators</title></info>
+    
 
     <para>
         If you were following closely in <link linkend="learning.form.decorators.simplest">the
@@ -78,66 +79,65 @@
     </para>
 
     <para>
-        To simplify the process, we'll take a look at the example from <link
-            linkend="learning.form.decorators.simplest">the previous section</link>. Recall:
+        To simplify the process, we'll take a look at the example from <link linkend="learning.form.decorators.simplest">the previous section</link>. Recall:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 class My_Decorator_SimpleInput extends Zend_Form_Decorator_Abstract
 {
-    protected $_format = '<label for="%s">%s</label>'
-                       . '<input id="%s" name="%s" type="text" value="%s"/>';
+    protected $_format = '&lt;label for="%s"&gt;%s&lt;/label&gt;'
+                       . '&lt;input id="%s" name="%s" type="text" value="%s"/&gt;';
 
     public function render($content)
     {
-        $element = $this->getElement();
-        $name    = htmlentities($element->getFullyQualifiedName());
-        $label   = htmlentities($element->getLabel());
-        $id      = htmlentities($element->getId());
-        $value   = htmlentities($element->getValue());
+        $element = $this-&gt;getElement();
+        $name    = htmlentities($element-&gt;getFullyQualifiedName());
+        $label   = htmlentities($element-&gt;getLabel());
+        $id      = htmlentities($element-&gt;getId());
+        $value   = htmlentities($element-&gt;getValue());
 
-        $markup  = sprintf($this->_format, $id, $label, $id, $name, $value);
+        $markup  = sprintf($this-&gt;_format, $id, $label, $id, $name, $value);
         return $markup;
     }
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         Let's now remove the label functionality, and build a separate decorator for that.
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 class My_Decorator_SimpleInput extends Zend_Form_Decorator_Abstract
 {
-    protected $_format = '<input id="%s" name="%s" type="text" value="%s"/>';
+    protected $_format = '&lt;input id="%s" name="%s" type="text" value="%s"/&gt;';
 
     public function render($content)
     {
-        $element = $this->getElement();
-        $name    = htmlentities($element->getFullyQualifiedName());
-        $id      = htmlentities($element->getId());
-        $value   = htmlentities($element->getValue());
+        $element = $this-&gt;getElement();
+        $name    = htmlentities($element-&gt;getFullyQualifiedName());
+        $id      = htmlentities($element-&gt;getId());
+        $value   = htmlentities($element-&gt;getValue());
 
-        $markup  = sprintf($this->_format, $id, $name, $value);
+        $markup  = sprintf($this-&gt;_format, $id, $name, $value);
         return $markup;
     }
 }
 
 class My_Decorator_SimpleLabel extends Zend_Form_Decorator_Abstract
 {
-    protected $_format = '<label for="%s">%s</label>';
+    protected $_format = '&lt;label for="%s"&gt;%s&lt;/label&gt;';
 
     public function render($content)
     {
-        $element = $this->getElement();
-        $id      = htmlentities($element->getId());
-        $label   = htmlentities($element->getLabel());
+        $element = $this-&gt;getElement();
+        $id      = htmlentities($element-&gt;getId());
+        $label   = htmlentities($element-&gt;getLabel());
 
-        $markup = sprintf($this->_format, $id, $label);
+        $markup = sprintf($this-&gt;_format, $id, $label);
         return $markup;
     }
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         Now, this may look all well and good, but here's the problem: as written currently, the last
@@ -150,9 +150,9 @@ class My_Decorator_SimpleLabel extends Zend_Form_Decorator_Abstract
         markup somehow:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 return $content . $markup;
-]]></programlisting>
+</programlisting>
 
     <para>
         The problem with the above approach comes when you want to programmatically choose whether
@@ -162,22 +162,22 @@ return $content . $markup;
         specifying a separator to place between the two. Let's make use of those:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 class My_Decorator_SimpleInput extends Zend_Form_Decorator_Abstract
 {
-    protected $_format = '<input id="%s" name="%s" type="text" value="%s"/>';
+    protected $_format = '&lt;input id="%s" name="%s" type="text" value="%s"/&gt;';
 
     public function render($content)
     {
-        $element = $this->getElement();
-        $name    = htmlentities($element->getFullyQualifiedName());
-        $id      = htmlentities($element->getId());
-        $value   = htmlentities($element->getValue());
+        $element = $this-&gt;getElement();
+        $name    = htmlentities($element-&gt;getFullyQualifiedName());
+        $id      = htmlentities($element-&gt;getId());
+        $value   = htmlentities($element-&gt;getValue());
 
-        $markup  = sprintf($this->_format, $id, $name, $value);
+        $markup  = sprintf($this-&gt;_format, $id, $name, $value);
 
-        $placement = $this->getPlacement();
-        $separator = $this->getSeparator();
+        $placement = $this-&gt;getPlacement();
+        $separator = $this-&gt;getSeparator();
         switch ($placement) {
             case self::PREPEND:
                 return $markup . $separator . $content;
@@ -190,18 +190,18 @@ class My_Decorator_SimpleInput extends Zend_Form_Decorator_Abstract
 
 class My_Decorator_SimpleLabel extends Zend_Form_Decorator_Abstract
 {
-    protected $_format = '<label for="%s">%s</label>';
+    protected $_format = '&lt;label for="%s"&gt;%s&lt;/label&gt;';
 
     public function render($content)
     {
-        $element = $this->getElement();
-        $id      = htmlentities($element->getId());
-        $label   = htmlentities($element->getLabel());
+        $element = $this-&gt;getElement();
+        $id      = htmlentities($element-&gt;getId());
+        $label   = htmlentities($element-&gt;getLabel());
 
-        $markup = sprint($this->_format, $id, $label);
+        $markup = sprint($this-&gt;_format, $id, $label);
 
-        $placement = $this->getPlacement();
-        $separator = $this->getSeparator();
+        $placement = $this-&gt;getPlacement();
+        $separator = $this-&gt;getSeparator();
         switch ($placement) {
             case self::APPEND:
                 return $markup . $separator . $content;
@@ -211,7 +211,7 @@ class My_Decorator_SimpleLabel extends Zend_Form_Decorator_Abstract
         }
     }
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         Notice in the above that I'm switching the default case for each; the assumption will be
@@ -222,20 +222,20 @@ class My_Decorator_SimpleLabel extends Zend_Form_Decorator_Abstract
         Now, let's create a form element that uses these:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $element = new Zend_Form_Element('foo', array(
-    'label'      => 'Foo',
-    'belongsTo'  => 'bar',
-    'value'      => 'test',
-    'prefixPath' => array('decorator' => array(
-        'My_Decorator' => 'path/to/decorators/',
+    'label'      =&gt; 'Foo',
+    'belongsTo'  =&gt; 'bar',
+    'value'      =&gt; 'test',
+    'prefixPath' =&gt; array('decorator' =&gt; array(
+        'My_Decorator' =&gt; 'path/to/decorators/',
     )),
-    'decorators' => array(
+    'decorators' =&gt; array(
         'SimpleInput',
         'SimpleLabel',
     ),
 ));
-]]></programlisting>
+</programlisting>
 
     <para>
         How will this work? When we call <methodname>render()</methodname>, the element will iterate
@@ -276,20 +276,20 @@ $element = new Zend_Form_Element('foo', array(
         way to do this is to pass an array of options with the decorator during element creation:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $element = new Zend_Form_Element('foo', array(
-    'label'      => 'Foo',
-    'belongsTo'  => 'bar',
-    'value'      => 'test',
-    'prefixPath' => array('decorator' => array(
-        'My_Decorator' => 'path/to/decorators/',
+    'label'      =&gt; 'Foo',
+    'belongsTo'  =&gt; 'bar',
+    'value'      =&gt; 'test',
+    'prefixPath' =&gt; array('decorator' =&gt; array(
+        'My_Decorator' =&gt; 'path/to/decorators/',
     )),
-    'decorators' => array(
+    'decorators' =&gt; array(
         'SimpleInput'
-        array('SimpleLabel', array('placement' => 'append')),
+        array('SimpleLabel', array('placement' =&gt; 'append')),
     ),
 ));
-]]></programlisting>
+</programlisting>
 
     <para>
         Notice that when passing options, you must wrap the decorator within an array; this hints to
@@ -359,4 +359,4 @@ $element = new Zend_Form_Element('foo', array(
         which gives some Rails-like simplicity to rendering forms. We'll look at that in the next
         section.
     </para>
-</sect1>
+</section>

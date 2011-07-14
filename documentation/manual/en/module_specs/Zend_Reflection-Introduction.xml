@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.reflection.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.reflection.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_Reflection</classname> is a drop-in extension to <acronym>PHP</acronym>'s
-        own <ulink url="http://php.net/reflection">Reflection <acronym>API</acronym></ulink>,
+        own <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/reflection">Reflection <acronym>API</acronym></link>,
         providing several additional features:
     </para>
 
@@ -58,4 +59,4 @@
         Reflection <acronym>API</acronym>, but provides a few additional methods for retrieving
         artifacts not defined in the Reflection <acronym>API</acronym>.
     </para>
-</sect1>
+</section>

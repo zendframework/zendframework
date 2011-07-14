@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.service.audioscrobbler">
-    <title>Zend_Service_Audioscrobbler</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.service.audioscrobbler.introduction">
-        <title>Introduction</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.audioscrobbler"><info><title>Zend_Service_Audioscrobbler</title></info>
+    
+
+    <section xml:id="zend.service.audioscrobbler.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_Service_Audioscrobbler</classname> is a simple <acronym>API</acronym>
@@ -13,14 +14,13 @@
             methods of the <classname>Zend_Service_Audioscrobbler</classname> class begin with one
             of these terms. The syntax and namespaces of the Audioscrobbler Web Service are mirrored
             in <classname>Zend_Service_Audioscrobbler</classname>. For more information about the
-            Audioscrobbler REST Web Service, please visit the <ulink
-                url="http://www.audioscrobbler.net/data/webservices/">Audioscrobbler Web Service
-                site</ulink>.
+            Audioscrobbler REST Web Service, please visit the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.audioscrobbler.net/data/webservices/">Audioscrobbler Web Service
+                site</link>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.audioscrobbler.users">
-        <title>Users</title>
+    <section xml:id="zend.service.audioscrobbler.users"><info><title>Users</title></info>
+        
 
         <para>
             In order to retrieve information for a specific user, the
@@ -194,8 +194,8 @@
             </itemizedlist>
         </para>
 
-        <example id="zend.service.audioscrobbler.users.example.profile_information">
-            <title>Retrieving User Profile Information</title>
+        <example xml:id="zend.service.audioscrobbler.users.example.profile_information"><info><title>Retrieving User Profile Information</title></info>
+            
 
             <para>
                 In this example, we use the <methodname>setUser()</methodname> and
@@ -203,51 +203,51 @@
                 user's profile information:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $as = new Zend_Service_Audioscrobbler();
 // Set the user whose profile information we want to retrieve
-$as->setUser('BigDaddy71');
+$as-&gt;setUser('BigDaddy71');
 // Retrieve BigDaddy71's profile information
-$profileInfo = $as->userGetProfileInformation();
+$profileInfo = $as-&gt;userGetProfileInformation();
 // Display some of it
-print "Information for $profileInfo->realname "
-    . "can be found at $profileInfo->url";
-]]></programlisting>
+print "Information for $profileInfo-&gt;realname "
+    . "can be found at $profileInfo-&gt;url";
+</programlisting>
         </example>
 
-        <example id="zend.service.audioscrobbler.users.example.weekly_artist_chart">
-            <title>Retrieving a User's Weekly Artist Chart</title>
+        <example xml:id="zend.service.audioscrobbler.users.example.weekly_artist_chart"><info><title>Retrieving a User's Weekly Artist Chart</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $as = new Zend_Service_Audioscrobbler();
 // Set the user whose profile weekly artist chart we want to retrieve
-$as->setUser('lo_fye');
+$as-&gt;setUser('lo_fye');
 // Retrieves a list of previous weeks for which there are chart data
-$weeks = $as->userGetWeeklyChartList();
-if (count($weeks) < 1) {
+$weeks = $as-&gt;userGetWeeklyChartList();
+if (count($weeks) &lt; 1) {
     echo 'No data available';
 }
 sort($weeks); // Order the list of weeks
 
-$as->setFromDate($weeks[0]); // Set the starting date
-$as->setToDate($weeks[0]); // Set the ending date
+$as-&gt;setFromDate($weeks[0]); // Set the starting date
+$as-&gt;setToDate($weeks[0]); // Set the ending date
 
-$previousWeeklyArtists = $as->userGetPreviousWeeklyArtistChart();
+$previousWeeklyArtists = $as-&gt;userGetPreviousWeeklyArtistChart();
 
 echo 'Artist Chart For Week Of '
-   . date('Y-m-d h:i:s', $as->from_date)
-   . '<br />';
+   . date('Y-m-d h:i:s', $as-&gt;from_date)
+   . '&lt;br /&gt;';
 
 foreach ($previousWeeklyArtists as $artist) {
     // Display the artists' names with links to their profiles
-    print '<a href="' . $artist->url . '">' . $artist->name . '</a><br />';
+    print '&lt;a href="' . $artist-&gt;url . '"&gt;' . $artist-&gt;name . '&lt;/a&gt;&lt;br /&gt;';
 }
-]]></programlisting>
+</programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.audioscrobbler.artists">
-        <title>Artists</title>
+    <section xml:id="zend.service.audioscrobbler.artists"><info><title>Artists</title></info>
+        
 
         <para>
             <classname>Zend_Service_Audioscrobbler</classname> provides several methods for
@@ -292,25 +292,25 @@ foreach ($previousWeeklyArtists as $artist) {
             </itemizedlist>
         </para>
 
-        <example id="zend.service.audioscrobbler.artists.example.related_artists">
-            <title>Retrieving Related Artists</title>
+        <example xml:id="zend.service.audioscrobbler.artists.example.related_artists"><info><title>Retrieving Related Artists</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $as = new Zend_Service_Audioscrobbler();
 // Set the artist for whom you would like to retrieve related artists
-$as->setArtist('LCD Soundsystem');
+$as-&gt;setArtist('LCD Soundsystem');
 // Retrieve the related artists
-$relatedArtists = $as->artistGetRelatedArtists();
+$relatedArtists = $as-&gt;artistGetRelatedArtists();
 foreach ($relatedArtists as $artist) {
     // Display the related artists
-    print '<a href="' . $artist->url . '">' . $artist->name . '</a><br />';
+    print '&lt;a href="' . $artist-&gt;url . '"&gt;' . $artist-&gt;name . '&lt;/a&gt;&lt;br /&gt;';
 }
-]]></programlisting>
+</programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.audioscrobbler.tracks">
-        <title>Tracks</title>
+    <section xml:id="zend.service.audioscrobbler.tracks"><info><title>Tracks</title></info>
+        
 
         <para>
             <classname>Zend_Service_Audioscrobbler</classname> provides two methods for retrieving
@@ -333,10 +333,10 @@ foreach ($relatedArtists as $artist) {
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.audioscrobbler.tags">
-        <title>Tags</title>
+    <section xml:id="zend.service.audioscrobbler.tags"><info><title>Tags</title></info>
+        
 
         <para>
             <classname>Zend_Service_Audioscrobbler</classname> provides several methods for
@@ -376,10 +376,10 @@ foreach ($relatedArtists as $artist) {
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.audioscrobbler.groups">
-        <title>Groups</title>
+    <section xml:id="zend.service.audioscrobbler.groups"><info><title>Groups</title></info>
+        
 
         <para>
             <classname>Zend_Service_Audioscrobbler</classname> provides several methods for
@@ -457,10 +457,10 @@ foreach ($relatedArtists as $artist) {
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.audioscrobbler.forums">
-        <title>Forums</title>
+    <section xml:id="zend.service.audioscrobbler.forums"><info><title>Forums</title></info>
+        
 
         <para>
             <classname>Zend_Service_Audioscrobbler</classname> provides a method for retrieving data
@@ -476,8 +476,5 @@ foreach ($relatedArtists as $artist) {
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

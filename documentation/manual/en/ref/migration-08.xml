@@ -1,24 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="migration.08">
-    <title>Zend Framework 0.8</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.08"><info><title>Zend Framework 0.8</title></info>
+    
 
     <para>
         When upgrading from a previous release to Zend Framework 0.8 or higher you
         should note the following migration notes.
     </para>
 
-    <sect2 id="migration.08.zend.controller">
-        <title>Zend_Controller</title>
+    <section xml:id="migration.08.zend.controller"><info><title>Zend_Controller</title></info>
+        
 
         <para>
             Per previous changes, the most basic usage of the <acronym>MVC</acronym> components
             remains the same:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 Zend_Controller_Front::run('/path/to/controllers');
-]]></programlisting>
+</programlisting>
 
         <para>
             However, the directory structure underwent an overhaul, several
@@ -49,8 +50,7 @@ Zend_Controller_Front::run('/path/to/controllers');
                     A new route class for use with the rewrite router was
                     introduced,
                     <classname>Zend_Controller_Router_Route_Module</classname>; it covers
-                    the default route used by the <acronym>MVC</acronym>, and has support for <link
-                        linkend="zend.controller.modular">controller
+                    the default route used by the <acronym>MVC</acronym>, and has support for <link linkend="zend.controller.modular">controller
                         modules</link>.
                 </para>
             </listitem>
@@ -75,12 +75,12 @@ Zend_Controller_Front::run('/path/to/controllers');
                     have changed. The signature is now:
                 </para>
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 final protected function _forward($action,
                                   $controller = null,
                                   $module = null,
                                   array $params = null);
-]]></programlisting>
+</programlisting>
 
                 <para>
                     <varname>$action</varname> is always required; if no controller is
@@ -94,8 +94,5 @@ final protected function _forward($action,
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

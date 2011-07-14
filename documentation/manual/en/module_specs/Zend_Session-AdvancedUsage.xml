@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.session.advanced_usage">
-    <title>Advanced Usage</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.advanced_usage"><info><title>Advanced Usage</title></info>
+    
 
     <para>
         While the basic usage examples are a perfectly acceptable way to utilize Zend Framework
@@ -10,20 +11,20 @@
         <classname>Zend_Session</classname> component.
     </para>
 
-    <sect2 id="zend.session.advanced_usage.starting_a_session">
-        <title>Starting a Session</title>
+    <section xml:id="zend.session.advanced_usage.starting_a_session"><info><title>Starting a Session</title></info>
+        
 
         <para>
             If you want all requests to have a session facilitated by
             <classname>Zend_Session</classname>, then start the session in the bootstrap file:
         </para>
 
-        <example id="zend.session.advanced_usage.starting_a_session.example">
-            <title>Starting the Global Session</title>
+        <example xml:id="zend.session.advanced_usage.starting_a_session.example"><info><title>Starting the Global Session</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 Zend_Session::start();
-]]></programlisting>
+</programlisting>
         </example>
 
         <para>
@@ -42,24 +43,22 @@ Zend_Session::start();
         <orderedlist>
             <listitem>
                 <para>
-                    Wrong: Do not enable <acronym>PHP</acronym>'s <ulink
-                        url="http://www.php.net/manual/en/ref.session.php#ini.session.auto-start">
-                        <code>session.auto_start</code> setting</ulink>. If you do not have the
+                    Wrong: Do not enable <acronym>PHP</acronym>'s <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/ref.session.php#ini.session.auto-start">
+                        <code>session.auto_start</code> setting</link>. If you do not have the
                     ability to disable this setting in php.ini, you are using mod_php (or
                     equivalent), and the setting is already enabled in <code>php.ini</code>, then
                     add the following to your <code>.htaccess</code> file (usually in your
                     <acronym>HTML</acronym> document root directory):
                 </para>
 
-                <programlisting language="httpd.conf"><![CDATA[
+                <programlisting language="httpd.conf">
 php_value session.auto_start 0
-]]></programlisting>
+</programlisting>
             </listitem>
 
             <listitem>
                 <para>
-                    Wrong: Do not use <acronym>PHP</acronym>'s <ulink
-                        url="http://www.php.net/session_start"><methodname>session_start()</methodname></ulink>
+                    Wrong: Do not use <acronym>PHP</acronym>'s <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/session_start"><methodname>session_start()</methodname></link>
                     function directly. If you use <methodname>session_start()</methodname> directly,
                     and then start using <classname>Zend_Session_Namespace</classname>, an exception
                     will be thrown by <methodname>Zend_Session::start()</methodname> ("session has
@@ -126,18 +125,18 @@ php_value session.auto_start 0
                     started. This offers extremely simple usage that works well in most situations.
                     However, you then become responsible for ensuring that the first
                     <code>new Zend_Session_Namespace()</code> happens <emphasis>before</emphasis>
-                    any output (e.g., <ulink url="http://www.php.net/headers_sent">HTTP
-                        headers</ulink>) has been sent by <acronym>PHP</acronym> to the client, if
+                    any output (e.g., <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/headers_sent">HTTP
+                        headers</link>) has been sent by <acronym>PHP</acronym> to the client, if
                     you are using the default, cookie-based sessions (strongly recommended). See
                     <link linkend="zend.session.global_session_management.headers_sent">this
                         section</link> for more information.
                 </para>
             </listitem>
         </orderedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.advanced_usage.locking">
-        <title>Locking Session Namespaces</title>
+    <section xml:id="zend.session.advanced_usage.locking"><info><title>Locking Session Namespaces</title></info>
+        
 
         <para>
             Session namespaces can be locked, to prevent further alterations to the data in that
@@ -149,29 +148,28 @@ php_value session.auto_start 0
             prevent the use of the namespace's setter method to remove or replace objects stored
             directly in the namespace. Similarly, locking
             <classname>Zend_Session_Namespace</classname> instances does not prevent the use of
-            symbol table aliases to the same data (see <ulink
-                url="http://www.php.net/references">PHP references</ulink>).
+            symbol table aliases to the same data (see <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/references">PHP references</link>).
         </para>
 
-        <example id="zend.session.advanced_usage.locking.example.basic">
-            <title>Locking Session Namespaces</title>
+        <example xml:id="zend.session.advanced_usage.locking.example.basic"><info><title>Locking Session Namespaces</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $userProfileNamespace = new Zend_Session_Namespace('userProfileNamespace');
 
 // marking session as read only locked
-$userProfileNamespace->lock();
+$userProfileNamespace-&gt;lock();
 
 // unlocking read-only lock
-if ($userProfileNamespace->isLocked()) {
-    $userProfileNamespace->unLock();
+if ($userProfileNamespace-&gt;isLocked()) {
+    $userProfileNamespace-&gt;unLock();
 }
-]]></programlisting>
+</programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.advanced_usage.expiration">
-        <title>Namespace Expiration</title>
+    <section xml:id="zend.session.advanced_usage.expiration"><info><title>Namespace Expiration</title></info>
+        
 
         <para>
             Limits can be placed on the longevity of both namespaces and individual keys in
@@ -181,25 +179,25 @@ if ($userProfileNamespace->isLocked()) {
             elapsed seconds or the number of "hops", where a hop occurs for each successive request.
         </para>
 
-        <example id="zend.session.advanced_usage.expiration.example">
-            <title>Expiration Examples</title>
+        <example xml:id="zend.session.advanced_usage.expiration.example"><info><title>Expiration Examples</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $s = new Zend_Session_Namespace('expireAll');
-$s->a = 'apple';
-$s->p = 'pear';
-$s->o = 'orange';
+$s-&gt;a = 'apple';
+$s-&gt;p = 'pear';
+$s-&gt;o = 'orange';
 
-$s->setExpirationSeconds(5, 'a'); // expire only the key "a" in 5 seconds
+$s-&gt;setExpirationSeconds(5, 'a'); // expire only the key "a" in 5 seconds
 
 // expire entire namespace in 5 "hops"
-$s->setExpirationHops(5);
+$s-&gt;setExpirationHops(5);
 
-$s->setExpirationSeconds(60);
+$s-&gt;setExpirationSeconds(60);
 // The "expireAll" namespace will be marked "expired" on
 // the first request received after 60 seconds have elapsed,
 // or in 5 hops, whichever happens first.
-]]></programlisting>
+</programlisting>
         </example>
 
         <para>
@@ -209,10 +207,10 @@ $s->setExpirationSeconds(60);
             the expiration time, fetch the data into temporary variables, use the namespace to unset
             them, and then set the appropriate keys again.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.advanced_usage.controllers">
-        <title>Session Encapsulation and Controllers</title>
+    <section xml:id="zend.session.advanced_usage.controllers"><info><title>Session Encapsulation and Controllers</title></info>
+        
 
         <para>
             Namespaces can also be used to separate session access by controllers to protect
@@ -221,8 +219,8 @@ $s->setExpirationSeconds(60);
             requirements.
         </para>
 
-        <example id="zend.session.advanced_usage.controllers.example">
-            <title>Namespaced Sessions for Controllers with Automatic Expiration</title>
+        <example xml:id="zend.session.advanced_usage.controllers.example"><info><title>Namespaced Sessions for Controllers with Automatic Expiration</title></info>
+            
 
             <para>
                 The following code, as part of a controller that displays a test question, initiates
@@ -231,15 +229,15 @@ $s->setExpirationSeconds(60);
                 to answer the displayed question.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 // ...
 // in the question view controller
 $testSpace = new Zend_Session_Namespace('testSpace');
 // expire only this variable
-$testSpace->setExpirationSeconds(300, 'accept_answer');
-$testSpace->accept_answer = true;
+$testSpace-&gt;setExpirationSeconds(300, 'accept_answer');
+$testSpace-&gt;accept_answer = true;
 //...
-]]></programlisting>
+</programlisting>
 
             <para>
                 Below, the controller that processes the answers to test questions determines
@@ -247,23 +245,23 @@ $testSpace->accept_answer = true;
                 within the allotted time:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 // ...
 // in the answer processing controller
 $testSpace = new Zend_Session_Namespace('testSpace');
-if ($testSpace->accept_answer === true) {
+if ($testSpace-&gt;accept_answer === true) {
     // within time
 }
 else {
     // not within time
 }
 // ...
-]]></programlisting>
+</programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.advanced_usage.single_instance">
-        <title>Preventing Multiple Instances per Namespace</title>
+    <section xml:id="zend.session.advanced_usage.single_instance"><info><title>Preventing Multiple Instances per Namespace</title></info>
+        
 
         <para>
             Although <link linkend="zend.session.advanced_usage.locking">session locking</link>
@@ -279,10 +277,10 @@ else {
             same namespace would result in a thrown exception.
         </para>
 
-        <example id="zend.session.advanced_usage.single_instance.example">
-            <title>Limiting Session Namespace Access to a Single Instance</title>
+        <example xml:id="zend.session.advanced_usage.single_instance.example"><info><title>Limiting Session Namespace Access to a Single Instance</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 // create an instance of a namespace
 $authSpaceAccessor1 = new Zend_Session_Namespace('Zend_Auth');
 
@@ -293,9 +291,9 @@ $authSpaceAccessor2 = new Zend_Session_Namespace('Zend_Auth', true);
 // making a reference is still possible
 $authSpaceAccessor3 = $authSpaceAccessor2;
 
-$authSpaceAccessor1->foo = 'bar';
+$authSpaceAccessor1-&gt;foo = 'bar';
 
-assert($authSpaceAccessor2->foo, 'bar');
+assert($authSpaceAccessor2-&gt;foo, 'bar');
 
 try {
     $aNamespaceObject = new Zend_Session_Namespace('Zend_Auth');
@@ -303,7 +301,7 @@ try {
     echo 'Cannot instantiate this namespace since ' .
          '$authSpaceAccessor2 was created\n';
 }
-]]></programlisting>
+</programlisting>
         </example>
 
         <para>
@@ -315,15 +313,14 @@ try {
             (<varname>$authSpaceAccessor1</varname>, <varname>$authSpaceAccessor2</varname>, or
             <varname>$authSpaceAccessor3</varname> in the example above) somewhere, if access to the
             session namespace is needed at a later time during the same request. For example, a
-            developer may store the reference in a static variable, add the reference to a <ulink
-                url="http://www.martinfowler.com/eaaCatalog/registry.html">registry</ulink> (see
+            developer may store the reference in a static variable, add the reference to a <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.martinfowler.com/eaaCatalog/registry.html">registry</link> (see
             <link linkend="zend.registry">Zend_Registry</link>), or otherwise make it available to
             other methods that may need access to the session namespace.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.advanced_usage.arrays">
-        <title>Working with Arrays</title>
+    <section xml:id="zend.session.advanced_usage.arrays"><info><title>Working with Arrays</title></info>
+        
 
         <para>
             Due to the implementation history of <acronym>PHP</acronym> magic methods, modifying an
@@ -332,35 +329,35 @@ try {
             may <link linkend="zend.session.advanced_usage.objects">skip to the next section</link>.
         </para>
 
-        <example id="zend.session.advanced_usage.arrays.example.modifying">
-            <title>Modifying Array Data with a Session Namespace</title>
+        <example xml:id="zend.session.advanced_usage.arrays.example.modifying"><info><title>Modifying Array Data with a Session Namespace</title></info>
+            
 
             <para>
                 The following illustrates how the problem may be reproduced:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $sessionNamespace = new Zend_Session_Namespace();
-$sessionNamespace->array = array();
+$sessionNamespace-&gt;array = array();
 
 // may not work as expected before PHP 5.2.1
-$sessionNamespace->array['testKey'] = 1;
-echo $sessionNamespace->array['testKey'];
-]]></programlisting>
+$sessionNamespace-&gt;array['testKey'] = 1;
+echo $sessionNamespace-&gt;array['testKey'];
+</programlisting>
         </example>
 
-        <example id="zend.session.advanced_usage.arrays.example.building_prior">
-            <title>Building Arrays Prior to Session Storage</title>
+        <example xml:id="zend.session.advanced_usage.arrays.example.building_prior"><info><title>Building Arrays Prior to Session Storage</title></info>
+            
 
             <para>
                 If possible, avoid the problem altogether by storing arrays into a session namespace
                 only after all desired array values have been set.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $sessionNamespace = new Zend_Session_Namespace('Foo');
-$sessionNamespace->array = array('a', 'b', 'c');
-]]></programlisting>
+$sessionNamespace-&gt;array = array('a', 'b', 'c');
+</programlisting>
         </example>
 
         <para>
@@ -369,8 +366,8 @@ $sessionNamespace->array = array('a', 'b', 'c');
             following workarounds.
         </para>
 
-        <example id="zend.session.advanced_usage.arrays.example.workaround.reassign">
-            <title>Workaround: Reassign a Modified Array</title>
+        <example xml:id="zend.session.advanced_usage.arrays.example.workaround.reassign"><info><title>Workaround: Reassign a Modified Array</title></info>
+            
 
             <para>
                 In the code that follows, a copy of the stored array is created, modified, and
@@ -378,60 +375,59 @@ $sessionNamespace->array = array('a', 'b', 'c');
                 array.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $sessionNamespace = new Zend_Session_Namespace();
 
 // assign the initial array
-$sessionNamespace->array = array('tree' => 'apple');
+$sessionNamespace-&gt;array = array('tree' =&gt; 'apple');
 
 // make a copy of the array
-$tmp = $sessionNamespace->array;
+$tmp = $sessionNamespace-&gt;array;
 
 // modfiy the array copy
 $tmp['fruit'] = 'peach';
 
 // assign a copy of the array back to the session namespace
-$sessionNamespace->array = $tmp;
+$sessionNamespace-&gt;array = $tmp;
 
-echo $sessionNamespace->array['fruit']; // prints "peach"
-]]></programlisting>
+echo $sessionNamespace-&gt;array['fruit']; // prints "peach"
+</programlisting>
         </example>
 
-        <example id="zend.session.advanced_usage.arrays.example.workaround.reference">
-            <title>Workaround: store array containing reference</title>
+        <example xml:id="zend.session.advanced_usage.arrays.example.workaround.reference"><info><title>Workaround: store array containing reference</title></info>
+            
 
             <para>
                 Alternatively, store an array containing a reference to the desired array, and then
                 access it indirectly.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $myNamespace = new Zend_Session_Namespace('myNamespace');
 $a = array(1, 2, 3);
-$myNamespace->someArray = array( &$a );
+$myNamespace-&gt;someArray = array( &amp;$a );
 $a['foo'] = 'bar';
-echo $myNamespace->someArray['foo']; // prints "bar"
-]]></programlisting>
+echo $myNamespace-&gt;someArray['foo']; // prints "bar"
+</programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.advanced_usage.objects">
-        <title>Using Sessions with Objects</title>
+    <section xml:id="zend.session.advanced_usage.objects"><info><title>Using Sessions with Objects</title></info>
+        
 
         <para>
             If you plan to persist objects in the <acronym>PHP</acronym> session, know that they
-            will be <ulink
-                url="http://www.php.net/manual/en/language.oop.serialization.php">serialized</ulink>
+            will be <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/language.oop.serialization.php">serialized</link>
             for storage. Thus, any object persisted with the <acronym>PHP</acronym> session must be
             unserialized upon retrieval from storage. The implication is that the developer must
             ensure that the classes for the persisted objects must have been defined before the
             object is unserialized from session storage. If an unserialized object's class is not
             defined, then it becomes an instance of <code>stdClass</code>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.advanced_usage.testing">
-        <title>Using Sessions with Unit Tests</title>
+    <section xml:id="zend.session.advanced_usage.testing"><info><title>Using Sessions with Unit Tests</title></info>
+        
 
         <para>
             Zend Framework relies on PHPUnit to facilitate testing of itself. Many developers extend
@@ -461,25 +457,25 @@ echo $myNamespace->someArray['foo']; // prints "bar"
             <methodname>exec()</methodname>.
         </para>
 
-        <example id="zend.session.advanced_usage.testing.example">
-            <title>PHPUnit Testing Code Dependent on Zend_Session</title>
+        <example xml:id="zend.session.advanced_usage.testing.example"><info><title>PHPUnit Testing Code Dependent on Zend_Session</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 // testing setExpirationSeconds()
 $script = 'SessionTestHelper.php';
 $s = new Zend_Session_Namespace('space');
-$s->a = 'apple';
-$s->o = 'orange';
-$s->setExpirationSeconds(5);
+$s-&gt;a = 'apple';
+$s-&gt;o = 'orange';
+$s-&gt;setExpirationSeconds(5);
 
 Zend_Session::regenerateId();
 $id = Zend_Session::getId();
 session_write_close(); // release session so process below can use it
 sleep(4); // not long enough for things to expire
 exec($script . "expireAll $id expireAll", $result);
-$result = $this->sortResult($result);
+$result = $this-&gt;sortResult($result);
 $expect = ';a === apple;o === orange;p === pear';
-$this->assertTrue($result === $expect,
+$this-&gt;assertTrue($result === $expect,
     "iteration over default Zend_Session namespace failed; " .
     "expecting result === '$expect', but got '$result'");
 
@@ -487,7 +483,7 @@ sleep(2); // long enough for things to expire (total of 6 seconds
           // waiting, but expires in 5)
 exec($script . "expireAll $id expireAll", $result);
 $result = array_pop($result);
-$this->assertTrue($result === '',
+$this-&gt;assertTrue($result === '',
     "iteration over default Zend_Session namespace failed; " .
     "expecting result === '', but got '$result')");
 session_start(); // resume artificially suspended session
@@ -496,20 +492,20 @@ session_start(); // resume artificially suspended session
 // leftover from above contaminates the tests below, that is also a
 // bug that we want to know about.
 $s = new Zend_Session_Namespace('expireGuava');
-$s->setExpirationSeconds(5, 'g'); // now try to expire only 1 of the
+$s-&gt;setExpirationSeconds(5, 'g'); // now try to expire only 1 of the
                                   // keys in the namespace
-$s->g = 'guava';
-$s->p = 'peach';
-$s->p = 'plum';
+$s-&gt;g = 'guava';
+$s-&gt;p = 'peach';
+$s-&gt;p = 'plum';
 
 session_write_close(); // release session so process below can use it
 sleep(6); // not long enough for things to expire
 exec($script . "expireAll $id expireGuava", $result);
-$result = $this->sortResult($result);
+$result = $this-&gt;sortResult($result);
 session_start(); // resume artificially suspended session
-$this->assertTrue($result === ';p === plum',
+$this-&gt;assertTrue($result === ';p === plum',
     "iteration over named Zend_Session namespace failed (result=$result)");
-]]></programlisting>
+</programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

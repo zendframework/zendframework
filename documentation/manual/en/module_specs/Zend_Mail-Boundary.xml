@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.boundary">
-    <title>Controlling the MIME Boundary</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.boundary"><info><title>Controlling the MIME Boundary</title></info>
+    
 
     <para>
         In a multipart message, a <acronym>MIME</acronym> boundary for separating the different
@@ -10,16 +11,13 @@
         the <methodname>setMimeBoundary()</methodname> method, as in the following example:
     </para>
 
-    <example id="zend.mail.boundary.example-1">
-        <title>Changing the MIME Boundary</title>
+    <example xml:id="zend.mail.boundary.example-1"><info><title>Changing the MIME Boundary</title></info>
+        
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $mail = new Zend_Mail();
-$mail->setMimeBoundary('=_' . md5(microtime(1) . $someId++));
+$mail-&gt;setMimeBoundary('=_' . md5(microtime(1) . $someId++));
 // build message...
-]]></programlisting>
+</programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

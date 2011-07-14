@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.http.cookies">
-    <title>Zend_Http_Cookie and Zend_Http_CookieJar</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.http.cookies.introduction">
-        <title>Introduction</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.cookies"><info><title>Zend_Http_Cookie and Zend_Http_CookieJar</title></info>
+    
+
+    <section xml:id="zend.http.cookies.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_Http_Cookie</classname>, as expected, is a class that represents an
@@ -29,10 +30,10 @@
             <classname>Zend_Http_CookieJar</classname> object can be serialized and stored in
             $_SESSION when needed.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.cookies.cookie.instantiating">
-        <title>Instantiating Zend_Http_Cookie Objects</title>
+    <section xml:id="zend.http.cookies.cookie.instantiating"><info><title>Instantiating Zend_Http_Cookie Objects</title></info>
+        
 
         <para>
             Instantiating a Cookie object can be done in two ways:
@@ -136,10 +137,10 @@
                 </listitem>
             </itemizedlist>
 
-            <example id="zend.http.cookies.cookie.instantiating.example-1">
-               <title>Instantiating a Zend_Http_Cookie object</title>
+            <example xml:id="zend.http.cookies.cookie.instantiating.example-1"><info><title>Instantiating a Zend_Http_Cookie object</title></info>
+               
 
-               <programlisting language="php"><![CDATA[
+               <programlisting language="php">
 // First, using the constructor. This cookie will expire in 2 hours
 $cookie = new Zend_Http_Cookie('foo',
                                'bar',
@@ -156,7 +157,7 @@ $cookie = Zend_Http_Cookie::fromString('foo=bar; domain=.example.com; ' .
 // If the cookie's domain is not set, you have to manually specify it
 $cookie = Zend_Http_Cookie::fromString('foo=bar; secure;',
                                        'http://www.example.com/path');
-]]></programlisting>
+</programlisting>
             </example>
 
             <note>
@@ -175,10 +176,10 @@ $cookie = Zend_Http_Cookie::fromString('foo=bar; secure;',
             method. This method will produce a <acronym>HTTP</acronym> request "Cookie" header
             string, showing the cookie's name and value, and terminated by a semicolon (';').
             The value will be URL encoded, as expected in a Cookie header:
-            <example id="zend.http.cookies.cookie.instantiating.example-2">
-               <title>Stringifying a Zend_Http_Cookie object</title>
+            <example xml:id="zend.http.cookies.cookie.instantiating.example-2"><info><title>Stringifying a Zend_Http_Cookie object</title></info>
+               
 
-               <programlisting language="php"><![CDATA[
+               <programlisting language="php">
 // Create a new cookie
 $cookie = new Zend_Http_Cookie('foo',
                                'two words',
@@ -187,20 +188,20 @@ $cookie = new Zend_Http_Cookie('foo',
                                '/path');
 
 // Will print out 'foo=two+words;' :
-echo $cookie->__toString();
+echo $cookie-&gt;__toString();
 
 // This is actually the same:
 echo (string) $cookie;
 
 // In PHP 5.2 and higher, this also works:
 echo $cookie;
-]]></programlisting>
+</programlisting>
             </example>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.cookies.cookie.accessors">
-        <title>Zend_Http_Cookie getter methods</title>
+    <section xml:id="zend.http.cookies.cookie.accessors"><info><title>Zend_Http_Cookie getter methods</title></info>
+        
 
         <para>
             Once a <classname>Zend_Http_Cookie</classname> object is instantiated, it provides
@@ -277,10 +278,10 @@ echo $cookie;
         </para>
 
         <para>
-            <example id="zend.http.cookies.cookie.accessors.example-1">
-                <title>Using getter methods with Zend_Http_Cookie</title>
+            <example xml:id="zend.http.cookies.cookie.accessors.example-1"><info><title>Using getter methods with Zend_Http_Cookie</title></info>
+                
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 // First, create the cookie
 $cookie =
     Zend_Http_Cookie::fromString('foo=two+words; ' +
@@ -289,36 +290,36 @@ $cookie =
                                  'secure; ' +
                                  'expires=Wednesday, 28-Feb-05 20:41:22 UTC');
 
-echo $cookie->getName();   // Will echo 'foo'
-echo $cookie->getValue();  // will echo 'two words'
-echo $cookie->getDomain(); // Will echo '.example.com'
-echo $cookie->getPath();   // Will echo '/'
+echo $cookie-&gt;getName();   // Will echo 'foo'
+echo $cookie-&gt;getValue();  // will echo 'two words'
+echo $cookie-&gt;getDomain(); // Will echo '.example.com'
+echo $cookie-&gt;getPath();   // Will echo '/'
 
-echo date('Y-m-d', $cookie->getExpiryTime());
+echo date('Y-m-d', $cookie-&gt;getExpiryTime());
 // Will echo '2005-02-28'
 
-echo ($cookie->isExpired() ? 'Yes' : 'No');
+echo ($cookie-&gt;isExpired() ? 'Yes' : 'No');
 // Will echo 'Yes'
 
-echo ($cookie->isExpired(strtotime('2005-01-01') ? 'Yes' : 'No');
+echo ($cookie-&gt;isExpired(strtotime('2005-01-01') ? 'Yes' : 'No');
 // Will echo 'No'
 
-echo ($cookie->isSessionCookie() ? 'Yes' : 'No');
+echo ($cookie-&gt;isSessionCookie() ? 'Yes' : 'No');
 // Will echo 'No'
-]]></programlisting>
+</programlisting>
             </example>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.cookies.cookie.matching">
-        <title>Zend_Http_Cookie: Matching against a scenario</title>
+    <section xml:id="zend.http.cookies.cookie.matching"><info><title>Zend_Http_Cookie: Matching against a scenario</title></info>
+        
 
         <para>
             The only real logic contained in a <classname>Zend_Http_Cookie</classname> object, is in
             the match() method. This method is used to test a cookie against a given
             <acronym>HTTP</acronym> request scenario, in order to tell whether the cookie should be
             sent in this request or not. The method has the following syntax and parameters:
-            <methodname>Zend_Http_Cookie->match(mixed $uri, [boolean $matchSessionCookies, [int
+            <methodname>Zend_Http_Cookie-&gt;match(mixed $uri, [boolean $matchSessionCookies, [int
                 $now]]);</methodname>
 
             <itemizedlist>
@@ -350,32 +351,32 @@ echo ($cookie->isSessionCookie() ? 'Yes' : 'No');
                 </listitem>
             </itemizedlist>
 
-            <example id="zend.http.cookies.cookie.matching.example-1">
-                <title>Matching cookies</title>
+            <example xml:id="zend.http.cookies.cookie.matching.example-1"><info><title>Matching cookies</title></info>
+                
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 // Create the cookie object - first, a secure session cookie
 $cookie = Zend_Http_Cookie::fromString('foo=two+words; ' +
                                        'domain=.example.com; ' +
                                        'path=/somedir; ' +
                                        'secure;');
 
-$cookie->match('https://www.example.com/somedir/foo.php');
+$cookie-&gt;match('https://www.example.com/somedir/foo.php');
 // Will return true
 
-$cookie->match('http://www.example.com/somedir/foo.php');
+$cookie-&gt;match('http://www.example.com/somedir/foo.php');
 // Will return false, because the connection is not secure
 
-$cookie->match('https://otherexample.com/somedir/foo.php');
+$cookie-&gt;match('https://otherexample.com/somedir/foo.php');
 // Will return false, because the domain is wrong
 
-$cookie->match('https://example.com/foo.php');
+$cookie-&gt;match('https://example.com/foo.php');
 // Will return false, because the path is wrong
 
-$cookie->match('https://www.example.com/somedir/foo.php', false);
+$cookie-&gt;match('https://www.example.com/somedir/foo.php', false);
 // Will return false, because session cookies are not matched
 
-$cookie->match('https://sub.domain.example.com/somedir/otherdir/foo.php');
+$cookie-&gt;match('https://sub.domain.example.com/somedir/otherdir/foo.php');
 // Will return true
 
 // Create another cookie object - now, not secure, with expiration time
@@ -385,34 +386,34 @@ $cookie = Zend_Http_Cookie::fromString('foo=two+words; ' +
                                        'expires='
                                        . date(DATE_COOKIE, time() + 7200));
 
-$cookie->match('http://www.example.com/');
+$cookie-&gt;match('http://www.example.com/');
 // Will return true
 
-$cookie->match('https://www.example.com/');
+$cookie-&gt;match('https://www.example.com/');
 // Will return true - non secure cookies can go over secure connections
 // as well!
 
-$cookie->match('http://subdomain.example.com/');
+$cookie-&gt;match('http://subdomain.example.com/');
 // Will return false, because the domain is wrong
 
-$cookie->match('http://www.example.com/', true, time() + (3 * 3600));
+$cookie-&gt;match('http://www.example.com/', true, time() + (3 * 3600));
 // Will return false, because we added a time offset of +3 hours to
 // current time
-]]></programlisting>
+</programlisting>
             </example>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.cookies.cookiejar">
-        <title>The Zend_Http_CookieJar Class: Instantiation</title>
+    <section xml:id="zend.http.cookies.cookiejar"><info><title>The Zend_Http_CookieJar Class: Instantiation</title></info>
+        
 
         <para>
             In most cases, there is no need to directly instantiate a
             <classname>Zend_Http_CookieJar</classname> object. If you want to attach a new cookie
             jar to your <classname>Zend_Http_Client</classname> object, just call the
-            Zend_Http_Client->setCookieJar() method, and a new, empty cookie jar
+            Zend_Http_Client-&gt;setCookieJar() method, and a new, empty cookie jar
             will be attached to your client. You could later get this cookie jar
-            using Zend_Http_Client->getCookieJar().
+            using Zend_Http_Client-&gt;getCookieJar().
         </para>
 
         <para>
@@ -428,10 +429,10 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
             be used to set the cookie's domain and path, if they are not defined in the Set-Cookie
             headers.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.cookies.cookiejar.adding_cookies">
-        <title>Adding Cookies to a Zend_Http_CookieJar object</title>
+    <section xml:id="zend.http.cookies.cookiejar.adding_cookies"><info><title>Adding Cookies to a Zend_Http_CookieJar object</title></info>
+        
 
         <para>
             Usually, the <classname>Zend_Http_Client</classname> object you attached your CookieJar
@@ -442,7 +443,7 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
             <itemizedlist>
                 <listitem>
                     <para>
-                        <classname>Zend_Http_CookieJar->addCookie($cookie[, $ref_uri])</classname>:
+                        <classname>Zend_Http_CookieJar-&gt;addCookie($cookie[, $ref_uri])</classname>:
                         Add a single cookie to the jar. $cookie can be either a
                         <classname>Zend_Http_Cookie</classname> object or a string, which will be
                         converted automatically into a Cookie object. If a string is provided, you
@@ -454,7 +455,7 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
 
                 <listitem>
                     <para>
-                        <classname>Zend_Http_CookieJar->addCookiesFromResponse($response,
+                        <classname>Zend_Http_CookieJar-&gt;addCookiesFromResponse($response,
                             $ref_uri)</classname>: Add all cookies set in a single
                         <acronym>HTTP</acronym> response to the jar. $response is expected to be a
                         <classname>Zend_Http_Response</classname> object with Set-Cookie headers.
@@ -465,10 +466,10 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.cookies.cookiejar.getting_cookies">
-        <title>Retrieving Cookies From a Zend_Http_CookieJar object</title>
+    <section xml:id="zend.http.cookies.cookiejar.getting_cookies"><info><title>Retrieving Cookies From a Zend_Http_CookieJar object</title></info>
+        
 
         <para>
             Just like with adding cookies, there is usually no need to manually
@@ -524,7 +525,7 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
             <itemizedlist>
                 <listitem>
                     <para>
-                        <classname>Zend_Http_CookieJar->getCookie($uri, $cookie_name[,
+                        <classname>Zend_Http_CookieJar-&gt;getCookie($uri, $cookie_name[,
                             $ret_as])</classname>: Get a single cookie from the jar, according to
                         its <acronym>URI</acronym> (domain and path) and name. $uri is either a
                         string or a <classname>Zend_Uri_Http</classname> object representing the
@@ -536,7 +537,7 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
 
                 <listitem>
                     <para>
-                        <classname>Zend_Http_CookieJar->getAllCookies($ret_as)</classname>: Get all
+                        <classname>Zend_Http_CookieJar-&gt;getAllCookies($ret_as)</classname>: Get all
                         cookies from the jar. $ret_as specifies the return type as described
                         above. If not specified, $ret_type defaults to COOKIE_OBJECT.
                     </para>
@@ -544,7 +545,7 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
 
                 <listitem>
                     <para>
-                        <classname>Zend_Http_CookieJar->getMatchingCookies($uri[,
+                        <classname>Zend_Http_CookieJar-&gt;getMatchingCookies($uri[,
                             $matchSessionCookies[, $ret_as[, $now]]])</classname>: Get all cookies
                         from the jar that match a specified scenario, that is a
                         <acronym>URI</acronym> and expiration time.
@@ -591,8 +592,5 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

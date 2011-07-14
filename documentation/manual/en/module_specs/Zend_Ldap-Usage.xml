@@ -1,177 +1,178 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.ldap.usage">
-    <title>Usage Scenarios</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.ldap.usage.authentication">
-        <title>Authentication scenarios</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.usage"><info><title>Usage Scenarios</title></info>
+    
 
-        <sect3 id="zend.ldap.usage.authentication.openldap">
-            <title>OpenLDAP</title>
+    <section xml:id="zend.ldap.usage.authentication"><info><title>Authentication scenarios</title></info>
+        
+
+        <section xml:id="zend.ldap.usage.authentication.openldap"><info><title>OpenLDAP</title></info>
+            
             <para/>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.ldap.usage.authentication.activedirectory">
-            <title>ActiveDirectory</title>
+        <section xml:id="zend.ldap.usage.authentication.activedirectory"><info><title>ActiveDirectory</title></info>
+            
             <para/>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.ldap.usage.basic">
-        <title>Basic CRUD operations</title>
+    <section xml:id="zend.ldap.usage.basic"><info><title>Basic CRUD operations</title></info>
+        
 
-        <sect3 id="zend.ldap.usage.basic.retrieve">
-            <title>Retrieving data from the LDAP</title>
+        <section xml:id="zend.ldap.usage.basic.retrieve"><info><title>Retrieving data from the LDAP</title></info>
+            
 
-            <example id="zend.ldap.usage.basic.retrieve.dn">
-                <title>Getting an entry by its DN</title>
+            <example xml:id="zend.ldap.usage.basic.retrieve.dn"><info><title>Getting an entry by its DN</title></info>
+                
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
-$ldap->bind();
-$hm = $ldap->getEntry('cn=Hugo Müller,ou=People,dc=my,dc=local');
+$ldap-&gt;bind();
+$hm = $ldap-&gt;getEntry('cn=Hugo Müller,ou=People,dc=my,dc=local');
 /*
 $hm is an array of the following structure
 array(
-    'dn'          => 'cn=Hugo Müller,ou=People,dc=my,dc=local',
-    'cn'          => array('Hugo Müller'),
-    'sn'          => array('Müller'),
-    'objectclass' => array('inetOrgPerson', 'top'),
+    'dn'          =&gt; 'cn=Hugo Müller,ou=People,dc=my,dc=local',
+    'cn'          =&gt; array('Hugo Müller'),
+    'sn'          =&gt; array('Müller'),
+    'objectclass' =&gt; array('inetOrgPerson', 'top'),
     ...
 )
 */
-]]></programlisting>
+</programlisting>
             </example>
 
-            <example id="zend.ldap.usage.basic.retrieve.exists">
-                <title>Check for the existence of a given DN</title>
+            <example xml:id="zend.ldap.usage.basic.retrieve.exists"><info><title>Check for the existence of a given DN</title></info>
+                
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
-$ldap->bind();
-$isThere = $ldap->exists('cn=Hugo Müller,ou=People,dc=my,dc=local');
-]]></programlisting>
+$ldap-&gt;bind();
+$isThere = $ldap-&gt;exists('cn=Hugo Müller,ou=People,dc=my,dc=local');
+</programlisting>
             </example>
 
-            <example id="zend.ldap.usage.basic.retrieve.counting-children">
-                <title>Count children of a given DN</title>
+            <example xml:id="zend.ldap.usage.basic.retrieve.counting-children"><info><title>Count children of a given DN</title></info>
+                
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
-$ldap->bind();
-$childrenCount = $ldap->countChildren(
+$ldap-&gt;bind();
+$childrenCount = $ldap-&gt;countChildren(
                             'cn=Hugo Müller,ou=People,dc=my,dc=local');
-]]></programlisting>
+</programlisting>
             </example>
 
-            <example id="zend.ldap.usage.basic.retrieve.search">
-                <title>Searching the LDAP tree</title>
+            <example xml:id="zend.ldap.usage.basic.retrieve.search"><info><title>Searching the LDAP tree</title></info>
+                
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
-$ldap->bind();
-$result = $ldap->search('(objectclass=*)',
+$ldap-&gt;bind();
+$result = $ldap-&gt;search('(objectclass=*)',
                         'ou=People,dc=my,dc=local',
                         Zend_Ldap_Ext::SEARCH_SCOPE_ONE);
 foreach ($result as $item) {
     echo $item["dn"] . ': ' . $item['cn'][0] . PHP_EOL;
 }
-]]></programlisting>
+</programlisting>
             </example>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.ldap.usage.basic.add">
-            <title>Adding data to the LDAP</title>
+        <section xml:id="zend.ldap.usage.basic.add"><info><title>Adding data to the LDAP</title></info>
+            
 
-            <example>
-                <title>Add a new entry to the LDAP</title>
+            <example><info><title>Add a new entry to the LDAP</title></info>
+                
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
-$ldap->bind();
+$ldap-&gt;bind();
 $entry = array();
 Zend_Ldap_Attribute::setAttribute($entry, 'cn', 'Hans Meier');
 Zend_Ldap_Attribute::setAttribute($entry, 'sn', 'Meier');
 Zend_Ldap_Attribute::setAttribute($entry, 'objectClass', 'inetOrgPerson');
-$ldap->add('cn=Hans Meier,ou=People,dc=my,dc=local', $entry);
-]]></programlisting>
+$ldap-&gt;add('cn=Hans Meier,ou=People,dc=my,dc=local', $entry);
+</programlisting>
             </example>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.ldap.usage.basic.delete">
-            <title>Deleting from the LDAP</title>
+        <section xml:id="zend.ldap.usage.basic.delete"><info><title>Deleting from the LDAP</title></info>
+            
 
-            <example>
-                <title>Delete an existing entry from the LDAP</title>
+            <example><info><title>Delete an existing entry from the LDAP</title></info>
+                
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
-$ldap->bind();
-$ldap->delete('cn=Hans Meier,ou=People,dc=my,dc=local');
-]]></programlisting>
+$ldap-&gt;bind();
+$ldap-&gt;delete('cn=Hans Meier,ou=People,dc=my,dc=local');
+</programlisting>
             </example>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.ldap.usage.basic.update">
-            <title>Updating the LDAP</title>
+        <section xml:id="zend.ldap.usage.basic.update"><info><title>Updating the LDAP</title></info>
+            
 
-            <example>
-                <title>Update an existing entry on the LDAP</title>
+            <example><info><title>Update an existing entry on the LDAP</title></info>
+                
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
-$ldap->bind();
-$hm = $ldap->getEntry('cn=Hugo Müller,ou=People,dc=my,dc=local');
+$ldap-&gt;bind();
+$hm = $ldap-&gt;getEntry('cn=Hugo Müller,ou=People,dc=my,dc=local');
 Zend_Ldap_Attribute::setAttribute($hm, 'mail', 'mueller@my.local');
 Zend_Ldap_Attribute::setPassword($hm,
                                  'newPa$$w0rd',
                                  Zend_Ldap_Attribute::PASSWORD_HASH_SHA1);
-$ldap->update('cn=Hugo Müller,ou=People,dc=my,dc=local', $hm);
-]]></programlisting>
+$ldap-&gt;update('cn=Hugo Müller,ou=People,dc=my,dc=local', $hm);
+</programlisting>
             </example>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.ldap.usage.extended">
-        <title>Extended operations</title>
+    <section xml:id="zend.ldap.usage.extended"><info><title>Extended operations</title></info>
+        
 
-        <sect3 id="zend.ldap.usage.extended.copy-and-move">
-            <title>Copy and move entries in the LDAP</title>
+        <section xml:id="zend.ldap.usage.extended.copy-and-move"><info><title>Copy and move entries in the LDAP</title></info>
+            
 
-            <example id="zend.ldap.usage.extended.copy-and-move.copy">
-                <title>Copy a LDAP entry recursively with all its descendants</title>
+            <example xml:id="zend.ldap.usage.extended.copy-and-move.copy"><info><title>Copy a LDAP entry recursively with all its descendants</title></info>
+                
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
-$ldap->bind();
-$ldap->copy('cn=Hugo Müller,ou=People,dc=my,dc=local',
+$ldap-&gt;bind();
+$ldap-&gt;copy('cn=Hugo Müller,ou=People,dc=my,dc=local',
             'cn=Hans Meier,ou=People,dc=my,dc=local',
             true);
-]]></programlisting>
+</programlisting>
             </example>
 
-            <example id="zend.ldap.usage.extended.copy-and-move.move-to-subtree">
-                <title>
+            <example xml:id="zend.ldap.usage.extended.copy-and-move.move-to-subtree"><info><title>
                     Move a LDAP entry recursively with all its descendants to a different subtree
-                </title>
+                </title></info>
+                
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
-$ldap->bind();
-$ldap->moveToSubtree('cn=Hugo Müller,ou=People,dc=my,dc=local',
+$ldap-&gt;bind();
+$ldap-&gt;moveToSubtree('cn=Hugo Müller,ou=People,dc=my,dc=local',
                      'ou=Dismissed,dc=my,dc=local',
                      true);
-]]></programlisting>
+</programlisting>
             </example>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

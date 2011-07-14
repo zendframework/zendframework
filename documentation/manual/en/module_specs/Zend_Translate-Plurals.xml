@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.translate.plurals">
-    <title>Plural notations for Translation</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.plurals"><info><title>Plural notations for Translation</title></info>
+    
 
     <para>
         As of Zend Framework 1.9, <classname>Zend_Translate</classname> is able to provide plural
@@ -30,8 +31,8 @@
         as normal translations.
     </para>
 
-    <sect2 id="zend.translate.plurals.traditional">
-        <title>Traditional plural translations</title>
+    <section xml:id="zend.translate.plurals.traditional"><info><title>Traditional plural translations</title></info>
+        
 
         <para>
             People who worked with gettext in past will be more common with traditional plural
@@ -39,8 +40,8 @@
             used for plural translations.
         </para>
 
-        <example id="zend.translate.plurals.traditional.example1">
-            <title>Example of traditional plural translations</title>
+        <example xml:id="zend.translate.plurals.traditional.example1"><info><title>Example of traditional plural translations</title></info>
+            
 
             <para>
                 The <methodname>plural()</methodname> method accepts 4 parameters. The first
@@ -54,21 +55,21 @@
                 translation.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $translate = new Zend_Translate(
     array(
-        'adapter' => 'gettext',
-        'content' => '/path/to/german.mo',
-        'locale'  => 'de'
+        'adapter' =&gt; 'gettext',
+        'content' =&gt; '/path/to/german.mo',
+        'locale'  =&gt; 'de'
     )
 );
-$translate->plural('Car', 'Cars', $number);
-]]></programlisting>
+$translate-&gt;plural('Car', 'Cars', $number);
+</programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.translate.plurals.modern">
-        <title>Modern plural translations</title>
+    <section xml:id="zend.translate.plurals.modern"><info><title>Modern plural translations</title></info>
+        
 
         <para>
             As traditional plural translations are restricted to source code using English plurals
@@ -83,24 +84,24 @@ $translate->plural('Car', 'Cars', $number);
             are not in English notation.
         </para>
 
-        <example id="zend.translate.plurals.modern.example1">
-            <title>Example of modern plural translations</title>
+        <example xml:id="zend.translate.plurals.modern.example1"><info><title>Example of modern plural translations</title></info>
+            
 
             <para>
                 When we want to translate the same plural definitions like in the previous our
                 example would have to be defined like below.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $translate = new Zend_Translate(
     array(
-        'adapter' => 'gettext',
-        'content' => '/path/to/german.mo',
-        'locale'  => 'de'
+        'adapter' =&gt; 'gettext',
+        'content' =&gt; '/path/to/german.mo',
+        'locale'  =&gt; 'de'
     )
 );
-$translate->translate(array('Car', 'Cars', $number));
-]]></programlisting>
+$translate-&gt;translate(array('Car', 'Cars', $number));
+</programlisting>
         </example>
 
         <para>
@@ -108,23 +109,23 @@ $translate->translate(array('Car', 'Cars', $number));
             for messageId's.
         </para>
 
-        <example id="zend.translate.plurals.modern.example2">
-            <title>Example of modern plural translations using a different source language</title>
+        <example xml:id="zend.translate.plurals.modern.example2"><info><title>Example of modern plural translations using a different source language</title></info>
+            
 
             <para>
                 Let's expect we want to use Russian and let's also expect that the given
                 messageId's are Russian and not English.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $translate = new Zend_Translate(
     array(
-        'adapter' => 'gettext',
-        'content' => '/path/to/german.mo',
-        'locale'  => 'de'
+        'adapter' =&gt; 'gettext',
+        'content' =&gt; '/path/to/german.mo',
+        'locale'  =&gt; 'de'
     )
 );
-$translate->translate(
+$translate-&gt;translate(
     array(
         'Car',
         'Cars first plural',
@@ -133,7 +134,7 @@ $translate->translate(
         'ru'
     )
 );
-]]></programlisting>
+</programlisting>
         </example>
 
         <para>
@@ -146,17 +147,17 @@ $translate->translate(
             When you omit the plural language then English will be used per default and any
             additional plural definition will be ignored.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.translate.plurals.source">
-        <title>Plural source files</title>
+    <section xml:id="zend.translate.plurals.source"><info><title>Plural source files</title></info>
+        
 
         <para>
             Not all source formats support plural forms. Look into this list for details:
         </para>
 
-        <table id="zend.translate.plurals.source.supportedadapters">
-            <title>Plural support</title>
+        <table xml:id="zend.translate.plurals.source.supportedadapters"><info><title>Plural support</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -219,24 +220,24 @@ $translate->translate(
             Below you can find examples of plural defined source files.
         </para>
 
-        <sect3 id="zend.translate.plurals.source.array">
-            <title>Array source with plural definitions</title>
+        <section xml:id="zend.translate.plurals.source.array"><info><title>Array source with plural definitions</title></info>
+            
 
             <para>
                 An array with plural definitions has to look like the following example.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 array(
-    'plural_0' => array(
+    'plural_0' =&gt; array(
         'plural_0 (ru)',
         'plural_1 (ru)',
         'plural_2 (ru)',
         'plural_3 (ru)'
     ),
-    'plural_1' => ''
+    'plural_1' =&gt; ''
 );
-]]></programlisting>
+</programlisting>
 
             <para>
                 In the above example 'plural_0' and 'plural_1' are the
@@ -245,34 +246,34 @@ array(
                 with real content and translation from English source to German.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 array(
-    'Car' => array(
+    'Car' =&gt; array(
         'Auto',
         'Autos'
     ),
-    'Cars' => ''
+    'Cars' =&gt; ''
 );
-]]></programlisting>
+</programlisting>
 
             <para>
                 When your translated language supports more plural forms then simply add them to
                 the array below the first plural form. When your source language supports more
                 plural forms, than simply add a new empty translation.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.plurals.source.csv">
-            <title>Csv source with plural definitions</title>
+        <section xml:id="zend.translate.plurals.source.csv"><info><title>Csv source with plural definitions</title></info>
+            
 
             <para>
                 A csv file with plural definitions has to look like the following example.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 "plural_0";"plural_0 (ru)";"plural_1 (ru)";"plural_2 (ru)";"plural_3 (ru)"
 "plural_1";
-]]></programlisting>
+</programlisting>
 
             <para>
                 All translated plural forms have to be added after the first plural of the source
@@ -280,10 +281,10 @@ array(
                 below but without translation. Note that you must add a delimiter to empty
                 source plurals.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.plurals.source.gettext">
-            <title>Gettext source with plural definitions</title>
+        <section xml:id="zend.translate.plurals.source.gettext"><info><title>Gettext source with plural definitions</title></info>
+            
 
             <para>
                 Gettext sources support plural forms out of the box. There is no need for adoption
@@ -298,11 +299,11 @@ array(
                     gettext sources.
                 </para>
             </note>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.translate.plurals.customrules">
-        <title>Custom plural rules</title>
+    <section xml:id="zend.translate.plurals.customrules"><info><title>Custom plural rules</title></info>
+        
 
         <para>
             In rare cases it could be useful to be able to define own plural rules. See Chinese for
@@ -325,11 +326,11 @@ array(
             Your rule could look like this:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 public function MyRule($number) {
     return ($number == 10) ? 0 : 1;
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             As you see, your rule must accept one parameter. It is the number which you will use to
@@ -348,9 +349,9 @@ public function MyRule($number) {
             this:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 Zend_Translate_Plural::setPlural('MyPlural', 'zh');
-]]></programlisting>
+</programlisting>
 
         <para>
             Now we linked our plural definition to the Chinese language.
@@ -361,8 +362,8 @@ Zend_Translate_Plural::setPlural('MyPlural', 'zh');
             the plural rules before you are doing translations.
         </para>
 
-        <note>
-            <title>Define custom plurals only when needed</title>
+        <note><info><title>Define custom plurals only when needed</title></info>
+            
 
             <para>
                 <classname>Zend_Translate</classname> defines plurals for most known languages.
@@ -370,8 +371,5 @@ Zend_Translate_Plural::setPlural('MyPlural', 'zh');
                 most of time.
             </para>
         </note>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

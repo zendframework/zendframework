@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.markup.getting-started">
-    <title>Getting Started With Zend_Markup</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.markup.getting-started"><info><title>Getting Started With Zend_Markup</title></info>
+    
 
     <para>
         This guide to get you started with <classname>Zend_Markup</classname> uses the BBCode parser
@@ -9,8 +10,8 @@
         parsers and renderers.
     </para>
 
-    <example id="zend.markup.getting-started.basic-usage">
-        <title>Basic Zend_Markup Usage</title>
+    <example xml:id="zend.markup.getting-started.basic-usage"><info><title>Basic Zend_Markup Usage</title></info>
+        
 
         <para>
             We will first instantiate a <classname>Zend_Markup_Renderer_Html</classname> object
@@ -24,47 +25,47 @@
             of BBCode to <acronym>HTML</acronym>.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Creates instance of Zend_Markup_Renderer_Html,
 // with Zend_Markup_Parser_BbCode as its parser
 $bbcode = Zend_Markup::factory('Bbcode');
 
-echo $bbcode->render('[b]bold text[/b] and [i]cursive text[/i]');
-// Outputs: '<strong>bold text</strong> and <em>cursive text</em>'
-]]></programlisting>
+echo $bbcode-&gt;render('[b]bold text[/b] and [i]cursive text[/i]');
+// Outputs: '&lt;strong&gt;bold text&lt;/strong&gt; and &lt;em&gt;cursive text&lt;/em&gt;'
+</programlisting>
     </example>
 
-    <example id="zend.markup.getting-started.complicated-example">
-        <title>A more complicated example of Zend_Markup</title>
+    <example xml:id="zend.markup.getting-started.complicated-example"><info><title>A more complicated example of Zend_Markup</title></info>
+        
 
         <para>
             This time, we will do exactly the same as above, but with more complicated BBCode
             markup.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $bbcode = Zend_Markup::factory('Bbcode');
 
-$input = <<<EOT
+$input = &lt;&lt;&lt;EOT
 [list]
 [*]Zend Framework
 [*]Foobar
 [/list]
 EOT;
 
-echo $bbcode->render($input);
+echo $bbcode-&gt;render($input);
 /*
 Should output something like:
-<ul>
-<li>Zend Framework</li>
-<li>Foobar</li>
-</ul>
+&lt;ul&gt;
+&lt;li&gt;Zend Framework&lt;/li&gt;
+&lt;li&gt;Foobar&lt;/li&gt;
+&lt;/ul&gt;
 */
-]]></programlisting>
+</programlisting>
     </example>
 
-    <example id="zend.markup.getting-started.incorrect-input">
-        <title>Processing incorrect input</title>
+    <example xml:id="zend.markup.getting-started.incorrect-input"><info><title>Processing incorrect input</title></info>
+        
 
         <para>
             Besides simply parsing and rendering markup such as BBCode,
@@ -74,13 +75,13 @@ Should output something like:
             closes tags that were not closed:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $bbcode = Zend_Markup::factory('Bbcode');
 
-echo $bbcode->render('some [i]wrong [b]sample [/i] text');
+echo $bbcode-&gt;render('some [i]wrong [b]sample [/i] text');
 // Note that the '[b]' tag is never closed, and is also incorrectly
 // nested; regardless, Zend_Markup renders it correctly as:
-// some <em>wrong <strong>sample </strong></em><strong> text</strong>
-]]></programlisting>
+// some &lt;em&gt;wrong &lt;strong&gt;sample &lt;/strong&gt;&lt;/em&gt;&lt;strong&gt; text&lt;/strong&gt;
+</programlisting>
     </example>
-</sect1>
+</section>

@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.paginator.simple">
-    <title>Simple Examples</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.paginator.simple"><info><title>Simple Examples</title></info>
+    
 
     <para>
         In this first example we won't do anything spectacular, but hopefully it will
@@ -12,13 +13,13 @@
         class to get a <classname>Zend_Paginator</classname> object with our array in it.
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 // Create an array with numbers 1 to 100
 $data = range(1, 100);
 
 // Get a Paginator object using Zend_Paginator's built-in factory.
 $paginator = Zend_Paginator::factory($data);
-]]></programlisting>
+</programlisting>
 
     <para>
         We're already almost done! The $paginator variable now contains a reference to the
@@ -30,22 +31,22 @@ $paginator = Zend_Paginator::factory($data);
         numbers 1 to 10, which are the numbers on the first page.
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 // Create an array with numbers 1 to 100
 $data = range(1, 100);
 
 // Get a Paginator object using Zend_Paginator's built-in factory.
 $paginator = Zend_Paginator::factory($data);
 
-?><ul><?php
+?&gt;&lt;ul&gt;&lt;?php
 
 // Render each item for the current page in a list-item
 foreach ($paginator as $item) {
-    echo '<li>' . $item . '</li>';
+    echo '&lt;li&gt;' . $item . '&lt;/li&gt;';
 }
 
-?></ul>
-]]></programlisting>
+?&gt;&lt;/ul&gt;
+</programlisting>
 
     <para>
         Now let's try and render the items on the second page. You can use the
@@ -53,7 +54,7 @@ foreach ($paginator as $item) {
         view.
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 // Create an array with numbers 1 to 100
 $data = range(1, 100);
 
@@ -61,17 +62,17 @@ $data = range(1, 100);
 $paginator = Zend_Paginator::factory($data);
 
 // Select the second page
-$paginator->setCurrentPageNumber(2);
+$paginator-&gt;setCurrentPageNumber(2);
 
-?><ul><?php
+?&gt;&lt;ul&gt;&lt;?php
 
 // Render each item for the current page in a list-item
 foreach ($paginator as $item) {
-    echo '<li>' . $item . '</li>';
+    echo '&lt;li&gt;' . $item . '&lt;/li&gt;';
 }
 
-?></ul>
-]]></programlisting>
+?&gt;&lt;/ul&gt;
+</programlisting>
 
     <para>
         As expected, this little snippet will render an unordered list with the numbers
@@ -92,26 +93,26 @@ foreach ($paginator as $item) {
         Let's dive right in and have a look at a simple example.
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 // Create a select query. $db is a Zend_Db_Adapter object, which we assume
 // already exists in your script.
-$select = $db->select()->from('posts')->order('date_created DESC');
+$select = $db-&gt;select()-&gt;from('posts')-&gt;order('date_created DESC');
 
 // Get a Paginator object using Zend_Paginator's built-in factory.
 $paginator = Zend_Paginator::factory($select);
 
 // Select the second page
-$paginator->setCurrentPageNumber(2);
+$paginator-&gt;setCurrentPageNumber(2);
 
-?><ul><?php
+?&gt;&lt;ul&gt;&lt;?php
 
 // Render each the title of each post for the current page in a list-item
 foreach ($paginator as $item) {
-    echo '<li>' . $item->title . '</li>';
+    echo '&lt;li&gt;' . $item-&gt;title . '&lt;/li&gt;';
 }
 
-?></ul>
-]]></programlisting>
+?&gt;&lt;/ul&gt;
+</programlisting>
 
     <para>
         As you can see, this example is not that different from the previous one.
@@ -121,4 +122,4 @@ foreach ($paginator as $item) {
         is being executed efficiently, see the <classname>Zend_Paginator</classname> chapter in the
         reference manual on the DbSelect and DbTableSelect adapters.
     </para>
-</sect1>
+</section>

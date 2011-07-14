@@ -1,19 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.auth.adapter.ldap">
-    <title>LDAP Authentication</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.auth.adapter.ldap.introduction">
-        <title>Introduction</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.ldap"><info><title>LDAP Authentication</title></info>
+    
+
+    <section xml:id="zend.auth.adapter.ldap.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_Auth_Adapter_Ldap</classname> supports web application authentication
             with <acronym>LDAP</acronym> services. Its features include username and domain name
             canonicalization, multi-domain authentication, and failover capabilities. It has been
             tested to work with
-            <ulink
-                url="http://www.microsoft.com/windowsserver2003/technologies/directory/activedirectory/">Microsoft
-                Active Directory</ulink> and <ulink url="http://www.openldap.org/">OpenLDAP</ulink>,
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.microsoft.com/windowsserver2003/technologies/directory/activedirectory/">Microsoft
+                Active Directory</link> and <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.openldap.org/">OpenLDAP</link>,
             but it should also work with other <acronym>LDAP</acronym> service providers.
         </para>
 
@@ -24,10 +24,10 @@
             information for troubleshooting authentication problems, and example options for both
             Active Directory and OpenLDAP servers.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.ldap.usage">
-        <title>Usage</title>
+    <section xml:id="zend.auth.adapter.ldap.usage"><info><title>Usage</title></info>
+        
 
         <para>
             To incorporate <classname>Zend_Auth_Adapter_Ldap</classname> authentication into your
@@ -35,39 +35,39 @@
             the meat of your code should look something like the following:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$username = $this->_request->getParam('username');
-$password = $this->_request->getParam('password');
+        <programlisting language="php">
+$username = $this-&gt;_request-&gt;getParam('username');
+$password = $this-&gt;_request-&gt;getParam('password');
 
 $auth = Zend_Auth::getInstance();
 
 $config = new Zend_Config_Ini('../application/config/config.ini',
                               'production');
-$log_path = $config->ldap->log_path;
-$options = $config->ldap->toArray();
+$log_path = $config-&gt;ldap-&gt;log_path;
+$options = $config-&gt;ldap-&gt;toArray();
 unset($options['log_path']);
 
 $adapter = new Zend_Auth_Adapter_Ldap($options, $username,
                                       $password);
 
-$result = $auth->authenticate($adapter);
+$result = $auth-&gt;authenticate($adapter);
 
 if ($log_path) {
-    $messages = $result->getMessages();
+    $messages = $result-&gt;getMessages();
 
     $logger = new Zend_Log();
-    $logger->addWriter(new Zend_Log_Writer_Stream($log_path));
+    $logger-&gt;addWriter(new Zend_Log_Writer_Stream($log_path));
     $filter = new Zend_Log_Filter_Priority(Zend_Log::DEBUG);
-    $logger->addFilter($filter);
+    $logger-&gt;addFilter($filter);
 
-    foreach ($messages as $i => $message) {
-        if ($i-- > 1) { // $messages[2] and up are log messages
+    foreach ($messages as $i =&gt; $message) {
+        if ($i-- &gt; 1) { // $messages[2] and up are log messages
             $message = str_replace("\n", "\n  ", $message);
-            $logger->log("Ldap: $i: $message", Zend_Log::DEBUG);
+            $logger-&gt;log("Ldap: $i: $message", Zend_Log::DEBUG);
         }
     }
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             Of course, the logging code is optional, but it is highly recommended that you use a
@@ -89,7 +89,7 @@ if ($log_path) {
             (<emphasis>=</emphasis>) will need to be quoted (like the DNs shown below).
         </para>
 
-        <programlisting language="ini"><![CDATA[
+        <programlisting language="ini">
 [production]
 
 ldap.log_path = /tmp/ldap.log
@@ -111,7 +111,7 @@ ldap.server2.accountDomainName = w.net
 ldap.server2.accountDomainNameShort = W
 ldap.server2.accountCanonicalForm = 3
 ldap.server2.baseDn = "CN=Users,DC=w,DC=net"
-]]></programlisting>
+</programlisting>
 
         <para>
             The above configuration will instruct <classname>Zend_Auth_Adapter_Ldap</classname> to
@@ -131,10 +131,10 @@ ldap.server2.baseDn = "CN=Users,DC=w,DC=net"
             domain name used by Windows, we provide it here for name canonicalization purposes
             (described in the <emphasis>Username Canonicalization</emphasis> section below).
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.ldap.api">
-        <title>The API</title>
+    <section xml:id="zend.auth.adapter.ldap.api"><info><title>The API</title></info>
+        
 
         <para>
             The <classname>Zend_Auth_Adapter_Ldap</classname> constructor accepts three parameters.
@@ -149,40 +149,40 @@ ldap.server2.baseDn = "CN=Users,DC=w,DC=net"
         </para>
 
         <para>
-            Below is <ulink url="http://php.net/print_r"><methodname>print_r()</methodname></ulink>
+            Below is <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/print_r"><methodname>print_r()</methodname></link>
             output of an example options parameter containing two sets of server options for
             <acronym>LDAP</acronym> servers <filename>s0.foo.net</filename> and
             <filename>dc1.w.net</filename> (the same options as the above <acronym>INI</acronym>
             representation):
         </para>
 
-        <programlisting language="output"><![CDATA[
+        <programlisting language="output">
 Array
 (
-    [server2] => Array
+    [server2] =&gt; Array
         (
-            [host] => dc1.w.net
-            [useStartTls] => 1
-            [accountDomainName] => w.net
-            [accountDomainNameShort] => W
-            [accountCanonicalForm] => 3
-            [baseDn] => CN=Users,DC=w,DC=net
+            [host] =&gt; dc1.w.net
+            [useStartTls] =&gt; 1
+            [accountDomainName] =&gt; w.net
+            [accountDomainNameShort] =&gt; W
+            [accountCanonicalForm] =&gt; 3
+            [baseDn] =&gt; CN=Users,DC=w,DC=net
         )
 
-    [server1] => Array
+    [server1] =&gt; Array
         (
-            [host] => s0.foo.net
-            [accountDomainName] => foo.net
-            [accountDomainNameShort] => FOO
-            [accountCanonicalForm] => 3
-            [username] => CN=user1,DC=foo,DC=net
-            [password] => pass1
-            [baseDn] => OU=Sales,DC=foo,DC=net
-            [bindRequiresDn] => 1
+            [host] =&gt; s0.foo.net
+            [accountDomainName] =&gt; foo.net
+            [accountDomainNameShort] =&gt; FOO
+            [accountCanonicalForm] =&gt; 3
+            [username] =&gt; CN=user1,DC=foo,DC=net
+            [password] =&gt; pass1
+            [baseDn] =&gt; OU=Sales,DC=foo,DC=net
+            [bindRequiresDn] =&gt; 1
         )
 
 )
-]]></programlisting>
+</programlisting>
 
         <para>
             The information provided in each set of options above is different mainly because AD
@@ -192,8 +192,8 @@ Array
             the DN for a username being authenticated.
         </para>
 
-        <note>
-            <title>What is a Distinguished Name?</title>
+        <note><info><title>What is a Distinguished Name?</title></info>
+            
 
             <para>
                 A DN or "distinguished name" is a string that represents the path to an object
@@ -223,8 +223,8 @@ Array
             queried.
         </para>
 
-        <note>
-            <title>The Gory Details: What Happens in the Authenticate Method?</title>
+        <note><info><title>The Gory Details: What Happens in the Authenticate Method?</title></info>
+            
 
             <para>
                 When the <methodname>authenticate()</methodname> method is called, the adapter
@@ -259,10 +259,10 @@ Array
             <methodname>setUsername()</methodname> and <methodname>setPassword()</methodname>
             methods.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.ldap.server-options">
-        <title>Server Options</title>
+    <section xml:id="zend.auth.adapter.ldap.server-options"><info><title>Server Options</title></info>
+        
 
         <para>
             Each set of server options <emphasis>in the context of
@@ -271,8 +271,8 @@ Array
             <methodname>Zend_Ldap::setOptions()</methodname>:
         </para>
 
-        <table id="zend.auth.adapter.ldap.server-options.table">
-            <title>Server Options</title>
+        <table xml:id="zend.auth.adapter.ldap.server-options.table"><info><title>Server Options</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -480,8 +480,7 @@ Array
 
                         <entry>
                             The <acronym>LDAP</acronym> search filter used to search for accounts.
-                            This string is a <ulink
-                                url="http://php.net/printf"><methodname>printf()</methodname></ulink>-style
+                            This string is a <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/printf"><methodname>printf()</methodname></link>-style
                             expression that must contain one '<emphasis>%s</emphasis>' to
                             accomodate the username. The default value is
                             '<emphasis>(&amp;(objectClass=user)(sAMAccountName=%s))</emphasis>',
@@ -523,10 +522,10 @@ Array
                 that the OpenLDAP client can validate the server's identity.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.ldap.debugging">
-        <title>Collecting Debugging Messages</title>
+    <section xml:id="zend.auth.adapter.ldap.debugging"><info><title>Collecting Debugging Messages</title></info>
+        
 
         <para>
             <classname>Zend_Auth_Adapter_Ldap</classname> collects debugging information within its
@@ -535,8 +534,8 @@ Array
             <methodname>Zend_Auth_Result::getMessages()</methodname> is described as follows
         </para>
 
-        <table id="zend.auth.adapter.ldap.debugging.table">
-            <title>Debugging Messages</title>
+        <table xml:id="zend.auth.adapter.ldap.debugging.table"><info><title>Debugging Messages</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -581,21 +580,20 @@ Array
             indexes 2 and higher could be logged as well (although the final message always includes
             the string from index 1).
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.ldap.options-common-server-specific">
-        <title>Common Options for Specific Servers</title>
+    <section xml:id="zend.auth.adapter.ldap.options-common-server-specific"><info><title>Common Options for Specific Servers</title></info>
+        
 
-        <sect3 id="zend.auth.adapter.ldap.options-common-server-specific.active-directory">
-            <title>Options for Active Directory</title>
+        <section xml:id="zend.auth.adapter.ldap.options-common-server-specific.active-directory"><info><title>Options for Active Directory</title></info>
+            
 
             <para>
                 For <acronym>ADS</acronym>, the following options are noteworthy:
             </para>
 
-            <table
-                id="zend.auth.adapter.ldap.options-common-server-specific.active-directory.table">
-                <title>Options for Active Directory</title>
+            <table xml:id="zend.auth.adapter.ldap.options-common-server-specific.active-directory.table"><info><title>Options for Active Directory</title></info>
+                
 
                 <tgroup cols="2">
                     <thead>
@@ -696,18 +694,18 @@ Array
                     be the source of security issues, so always try to use qualified account names.
                 </para>
             </note>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.auth.adapter.ldap.options-common-server-specific.openldap">
-            <title>Options for OpenLDAP</title>
+        <section xml:id="zend.auth.adapter.ldap.options-common-server-specific.openldap"><info><title>Options for OpenLDAP</title></info>
+            
 
             <para>
                 For OpenLDAP or a generic <acronym>LDAP</acronym> server using a typical
                 posixAccount style schema, the following options are noteworthy:
             </para>
 
-            <table id="zend.auth.adapter.ldap.options-common-server-specific.openldap.table">
-                <title>Options for OpenLDAP</title>
+            <table xml:id="zend.auth.adapter.ldap.options-common-server-specific.openldap.table"><info><title>Options for OpenLDAP</title></info>
+                
 
                 <tgroup cols="2">
                     <thead>
@@ -824,9 +822,6 @@ Array
                     </tbody>
                 </tgroup>
             </table>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

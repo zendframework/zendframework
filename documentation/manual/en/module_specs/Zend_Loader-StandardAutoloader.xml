@@ -1,23 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.loader.standard-autoloader">
-    <title>The StandardAutoloader</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.loader.standard-autoloader.intro">
-        <title>Overview</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.standard-autoloader"><info><title>The StandardAutoloader</title></info>
+    
+
+    <section xml:id="zend.loader.standard-autoloader.intro"><info><title>Overview</title></info>
+        
 
         <para>
-            <classname>Zend\Loader\StandardAutoloader</classname> is designed as a <ulink
-                url="http://groups.google.com/group/php-standards/web/psr-0-final-proposal">PSR-0</ulink>-compliant
+            <classname>Zend\Loader\StandardAutoloader</classname> is designed as a <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://groups.google.com/group/php-standards/web/psr-0-final-proposal">PSR-0</link>-compliant
             autoloader. It assumes a 1:1 mapping of the namespace+classname to the filesystem,
             wherein namespace separators and underscores are translated to directory separators. A
             simple statement that illustrates how resolution works is as follows:
         </para>
 
-        <programlisting lang="php"><![CDATA[
+        <programlisting xml:lang="php">
 $filename = str_replace(array('_', '\\'), DIRECTORY_SEPARATOR, $classname) 
           . '.php';
-]]></programlisting>
+</programlisting>
 
         <para>
             Previous incarnations of PSR-0-compliant autoloaders in Zend Framework have relied upon
@@ -71,8 +71,8 @@ $filename = str_replace(array('_', '\\'), DIRECTORY_SEPARATOR, $classname)
             SPL autoloader registry.
         </para>
 
-        <note>
-            <title>Vocabulary: Namespaces vs. Vendor Prefixes</title>
+        <note><info><title>Vocabulary: Namespaces vs. Vendor Prefixes</title></info>
+            
 
             <para>
                 In terms of autloading, a "namespace" corresponds to PHP's own definition of
@@ -93,10 +93,10 @@ $filename = str_replace(array('_', '\\'), DIRECTORY_SEPARATOR, $classname)
                 attempting to match them to an appropriate path.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.standard-autoloader.quick-start">
-        <title>Quick Start</title>
+    <section xml:id="zend.loader.standard-autoloader.quick-start"><info><title>Quick Start</title></info>
+        
 
         <para>
             Basic use of the <classname>StandardAutoloader</classname> requires simply registering
@@ -110,11 +110,10 @@ $filename = str_replace(array('_', '\\'), DIRECTORY_SEPARATOR, $classname)
             its own classfile is located on the filesystem.
         </para>
 
-        <example
-            id="zend.loader.standard-autoloader.quick-start.example-manual-configuration">
-            <title>Manual Configuration</title>
+        <example xml:id="zend.loader.standard-autoloader.quick-start.example-manual-configuration"><info><title>Manual Configuration</title></info>
+            
 
-            <programlisting lang="php"><![CDATA[
+            <programlisting xml:lang="php">
 // This example assumes ZF is on your include_path.
 // You could also load the autoloader class from a path relative to the
 // current script, or via an absolute path.
@@ -122,23 +121,22 @@ require_once 'Zend/Loader/StandardAutoloader.php';
 $loader = new Zend\Loader\StandardAutoloader();
 
 // Register the "Phly" namespace:
-$loader->registerNamespace('Phly', APPLICATION_PATH . '/../library/Phly');
+$loader-&gt;registerNamespace('Phly', APPLICATION_PATH . '/../library/Phly');
 
 // Register the "Scapi" vendor prefix:
-$loader->registerPrefix('Scapi', APPLICATION_PATH . '/../library/Scapi');
+$loader-&gt;registerPrefix('Scapi', APPLICATION_PATH . '/../library/Scapi');
 
 // Optionally, specify the autoloader as a "fallback" autoloader;
 // this is not recommended.
-$loader->setFallbackAutoloader(true);
+$loader-&gt;setFallbackAutoloader(true);
 
 // Register with spl_autoload:
-$loader->register();
-]]></programlisting>
+$loader-&gt;register();
+</programlisting>
         </example>
 
-        <example
-            id="zend.loader.standard-autoloader.quick-start.example-constructor-configuration">
-            <title>Configuration at Instantiation</title>
+        <example xml:id="zend.loader.standard-autoloader.quick-start.example-constructor-configuration"><info><title>Configuration at Instantiation</title></info>
+            
 
             <para>
                 The <classname>StandardAutoloader</classname> may also be configured at
@@ -166,33 +164,33 @@ $loader->register();
                 The following is equivalent to the previous example.
             </para>
 
-            <programlisting lang="php"><![CDATA[
+            <programlisting xml:lang="php">
 require_once 'Zend/Loader/StandardAutoloader.php';
 $loader = new Zend\Loader\StandardAutoloader(array(
-    'namespaces' => array(
-        'Phly' => APPLICATION_PATH . '/../library/Phly',
+    'namespaces' =&gt; array(
+        'Phly' =&gt; APPLICATION_PATH . '/../library/Phly',
     ),
-    'prefixes' => array(
-        'Scapi' => APPLICATION_PATH . '/../library/Scapi',
+    'prefixes' =&gt; array(
+        'Scapi' =&gt; APPLICATION_PATH . '/../library/Scapi',
     ),
-    'fallback_autoloader' => true,
+    'fallback_autoloader' =&gt; true,
 ));
 
 // Register with spl_autoload:
-$loader->register();
-]]></programlisting>
+$loader-&gt;register();
+</programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.standard-autoloader.options">
-        <title>Configuration Options</title>
+    <section xml:id="zend.loader.standard-autoloader.options"><info><title>Configuration Options</title></info>
+        
 
         <para>
             The <classname>StandardAutoloader</classname> defines the following options.
         </para>
 
-        <variablelist>
-            <title>StandardAutoloader Options</title>
+        <variablelist><info><title>StandardAutoloader Options</title></info>
+            
 
             <varlistentry>
                 <term>namespaces</term>
@@ -233,12 +231,12 @@ $loader->register();
                 </listitem>
             </varlistentry>
         </variablelist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.standard-autoloader.methods">
-        <title>Available Methods</title>
+    <section xml:id="zend.loader.standard-autoloader.methods"><info><title>Available Methods</title></info>
+        
 
-        <refentry id="zend.loader.standard-autoloader.methods.constructor">
+        <refentry xml:id="zend.loader.standard-autoloader.methods.constructor">
             <refnamediv>
                 <refname>__construct</refname>
                 <refpurpose>Initialize a new instance of the object</refpurpose>
@@ -253,19 +251,18 @@ $loader->register();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>Constructor</title>
+            <refsection><info><title>Constructor</title></info>
+                
 
                 <para>
                     Takes an optional <varname>$options</varname> argument. This argument may be an
                     associative array or <interfacename>Traversable</interfacename> object. If not
-                    null, the argument is passed to <link
-                        linkend="zend.loader.standard-autoloader.methods.set-options"><methodname>setOptions()</methodname></link>.
+                    null, the argument is passed to <link linkend="zend.loader.standard-autoloader.methods.set-options"><methodname>setOptions()</methodname></link>.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.standard-autoloader.methods.set-options">
+        <refentry xml:id="zend.loader.standard-autoloader.methods.set-options">
             <refnamediv>
                 <refname>setOptions</refname>
                 <refpurpose>Set object state based on provided options.</refpurpose>
@@ -280,42 +277,39 @@ $loader->register();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>setOptions()</title>
+            <refsection><info><title>setOptions()</title></info>
+                
 
                 <para>
                     Takes an argument of either an associative array or
                     <interfacename>Traversable</interfacename> object. Recognized keys are detailed
-                    under <xref linkend="zend.loader.standard-autoloader.options" />, with the
+                    under <xref linkend="zend.loader.standard-autoloader.options"/>, with the
                     following behaviors:
                 </para>
 
                 <itemizedlist>
                     <listitem>
                         <para>
-                            The <varname>namespaces</varname> value will be passed to <link
-                                linkend="zend.loader.standard-autoloader.methods.register-namespaces">registerNamespaces()</link>.
+                            The <varname>namespaces</varname> value will be passed to <link linkend="zend.loader.standard-autoloader.methods.register-namespaces">registerNamespaces()</link>.
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            The <varname>prefixes</varname> value will be passed to <link
-                                linkend="zend.loader.standard-autoloader.methods.register-prefixes">registerPrefixes()</link>.
+                            The <varname>prefixes</varname> value will be passed to <link linkend="zend.loader.standard-autoloader.methods.register-prefixes">registerPrefixes()</link>.
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            The <varname>fallback_autoloader</varname> value will be passed to <link
-                                linkend="zend.loader.standard-autoloader.methods.set-fallback-autoloader">setFallbackAutoloader()</link>.
+                            The <varname>fallback_autoloader</varname> value will be passed to <link linkend="zend.loader.standard-autoloader.methods.set-fallback-autoloader">setFallbackAutoloader()</link>.
                         </para>
                     </listitem>
                 </itemizedlist>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.standard-autoloader.methods.set-fallback-autoloader">
+        <refentry xml:id="zend.loader.standard-autoloader.methods.set-fallback-autoloader">
             <refnamediv>
                 <refname>setFallbackAutoloader</refname>
                 <refpurpose>Enable/disable fallback autoloader status</refpurpose>
@@ -330,17 +324,17 @@ $loader->register();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>setFallbackAutoloader()</title>
+            <refsection><info><title>setFallbackAutoloader()</title></info>
+                
 
                 <para>
                     Takes a boolean flag indicating whether or not to act as a fallback autoloader
                     when registered with the SPL autoloader.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.standard-autoloader.methods.is-fallback-autoloader">
+        <refentry xml:id="zend.loader.standard-autoloader.methods.is-fallback-autoloader">
             <refnamediv>
                 <refname>isFallbackAutoloader</refname>
                 <refpurpose>Query fallback autoloader status</refpurpose>
@@ -352,16 +346,16 @@ $loader->register();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>isFallbackAutoloader()</title>
+            <refsection><info><title>isFallbackAutoloader()</title></info>
+                
 
                 <para>
                     Indicates whether or not this instance is flagged as a fallback autoloader.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.standard-autoloader.methods.register-namespace">
+        <refentry xml:id="zend.loader.standard-autoloader.methods.register-namespace">
             <refnamediv>
                 <refname>registerNamespace</refname>
                 <refpurpose>Register a namespace with the autoloader</refpurpose>
@@ -376,18 +370,18 @@ $loader->register();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>registerNamespace()</title>
+            <refsection><info><title>registerNamespace()</title></info>
+                
 
                 <para>
                     Register a namespace with the autoloader, pointing it to a specific directory on
                     the filesystem for class resolution. For classes matching that initial
                     namespace, the autoloader will then perform lookups within that directory.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.standard-autoloader.methods.register-namespaces">
+        <refentry xml:id="zend.loader.standard-autoloader.methods.register-namespaces">
             <refnamediv>
                 <refname>registerNamespaces</refname>
                 <refpurpose>Register multiple namespaces with the autoloader</refpurpose>
@@ -402,18 +396,17 @@ $loader->register();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>registerNamespaces()</title>
+            <refsection><info><title>registerNamespaces()</title></info>
+                
 
                 <para>
                     Accepts either an array or <interfacename>Traversable</interfacename> object. It
-                    will then iterate through the argument, and pass each item to <link
-                        linkend="zend.loader.standard-autoloader.methods.register-namespace">registerNamespace()</link>.
+                    will then iterate through the argument, and pass each item to <link linkend="zend.loader.standard-autoloader.methods.register-namespace">registerNamespace()</link>.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.standard-autoloader.methods.register-prefix">
+        <refentry xml:id="zend.loader.standard-autoloader.methods.register-prefix">
             <refnamediv>
                 <refname>registerPrefix</refname>
                 <refpurpose>Register a vendor prefix with the autoloader.</refpurpose>
@@ -428,8 +421,8 @@ $loader->register();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>registerPrefix()</title>
+            <refsection><info><title>registerPrefix()</title></info>
+                
 
                 <para>
                     Register a vendor prefix with the autoloader, pointing it to a specific
@@ -437,10 +430,10 @@ $loader->register();
                     initial vendor prefix, the autoloader will then perform lookups within that
                     directory.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.standard-autoloader.methods.register-prefixes">
+        <refentry xml:id="zend.loader.standard-autoloader.methods.register-prefixes">
             <refnamediv>
                 <refname>registerPrefixes</refname>
                 <refpurpose>Register many vendor prefixes with the autoloader</refpurpose>
@@ -455,18 +448,17 @@ $loader->register();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>registerPrefixes()</title>
+            <refsection><info><title>registerPrefixes()</title></info>
+                
 
                 <para>
                     Accepts either an array or <interfacename>Traversable</interfacename> object. It
-                    will then iterate through the argument, and pass each item to <link
-                        linkend="zend.loader.standard-autoloader.methods.register-prefix">registerPrefix()</link>.
+                    will then iterate through the argument, and pass each item to <link linkend="zend.loader.standard-autoloader.methods.register-prefix">registerPrefix()</link>.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.standard-autoloader.methods.autoload">
+        <refentry xml:id="zend.loader.standard-autoloader.methods.autoload">
             <refnamediv>
                 <refname>autoload</refname>
                 <refpurpose>Attempt to load a class.</refpurpose>
@@ -481,18 +473,18 @@ $loader->register();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>autoload()</title>
+            <refsection><info><title>autoload()</title></info>
+                
 
                 <para>
                     Attempts to load the class specified. Returns a boolean
                     <constant>false</constant> on failure, or a string indicating the class loaded
                     on success.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.standard-autoloader.methods.register">
+        <refentry xml:id="zend.loader.standard-autoloader.methods.register">
             <refnamediv>
                 <refname>register</refname>
                 <refpurpose>Register with spl_autoload.</refpurpose>
@@ -504,23 +496,23 @@ $loader->register();
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>register()</title>
+            <refsection><info><title>register()</title></info>
+                
 
                 <para>
                     Registers the <methodname>autoload()</methodname> method of the current instance
                     with <function>spl_autoload_register()</function>.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.standard-autoloader.examples">
-        <title>Examples</title>
+    <section xml:id="zend.loader.standard-autoloader.examples"><info><title>Examples</title></info>
+        
 
         <para>
             Please review the <link linkend="zend.loader.standard-autoloader.quick-start">examples
                 in the quick start</link> for usage.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

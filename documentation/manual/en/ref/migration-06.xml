@@ -1,41 +1,42 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="migration.06">
-    <title>Zend Framework 0.6</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.06"><info><title>Zend Framework 0.6</title></info>
+    
 
     <para>
         When upgrading from a previous release to Zend Framework 0.6 or higher you
         should note the following migration notes.
     </para>
 
-    <sect2 id="migration.06.zend.controller">
-        <title>Zend_Controller</title>
+    <section xml:id="migration.06.zend.controller"><info><title>Zend_Controller</title></info>
+        
 
         <para>
             The most basic usage of the <acronym>MVC</acronym> components has not changed; you can
             still do each of the following:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 Zend_Controller_Front::run('/path/to/controllers');
-]]></programlisting>
+</programlisting>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 /* -- create a router -- */
 $router = new Zend_Controller_RewriteRouter();
-$router->addRoute('user',
+$router-&gt;addRoute('user',
                   'user/:username',
-                  array('controller' => 'user', 'action' => 'info')
+                  array('controller' =&gt; 'user', 'action' =&gt; 'info')
 );
 
 /* -- set it in a controller -- */
 $ctrl = Zend_Controller_Front::getInstance();
-$ctrl->setRouter($router);
+$ctrl-&gt;setRouter($router);
 
 /* -- set controller directory and dispatch -- */
-$ctrl->setControllerDirectory('/path/to/controllers');
-$ctrl->dispatch();
-]]></programlisting>
+$ctrl-&gt;setControllerDirectory('/path/to/controllers');
+$ctrl-&gt;dispatch();
+</programlisting>
 
         <para>
             We encourage use of the Response object to aggregate content and
@@ -76,9 +77,9 @@ $ctrl->dispatch();
                             controller:
                         </para>
 
-                        <programlisting language="php"><![CDATA[
-$front->throwExceptions(true);
-]]></programlisting>
+                        <programlisting language="php">
+$front-&gt;throwExceptions(true);
+</programlisting>
                     </listitem>
 
                     <listitem>
@@ -87,17 +88,17 @@ $front->throwExceptions(true);
                             object:
                         </para>
 
-                        <programlisting language="php"><![CDATA[
-$response->renderExceptions(true);
-$front->setResponse($response);
-$front->dispatch();
+                        <programlisting language="php">
+$response-&gt;renderExceptions(true);
+$front-&gt;setResponse($response);
+$front-&gt;dispatch();
 
 // or:
-$front->returnResponse(true);
-$response = $front->dispatch();
-$response->renderExceptions(true);
+$front-&gt;returnResponse(true);
+$response = $front-&gt;dispatch();
+$response-&gt;renderExceptions(true);
 echo $response;
-]]></programlisting>
+</programlisting>
                     </listitem>
                 </itemizedlist>
             </listitem>
@@ -191,25 +192,25 @@ echo $response;
                             as follows:
                         </para>
 
-                        <programlisting language="php"><![CDATA[
+                        <programlisting language="php">
 // Retrieve the requested controller name
-// Access used to be via: $this->_action->getControllerName().
+// Access used to be via: $this-&gt;_action-&gt;getControllerName().
 // The example below uses getRequest(), though you may also directly
 // access the $_request property; using getRequest() is recommended as
 // a parent class may override access to the request object.
-$controller = $this->getRequest()->getControllerName();
+$controller = $this-&gt;getRequest()-&gt;getControllerName();
 
 // Retrieve the requested action name
-// Access used to be via: $this->_action->getActionName().
-$action = $this->getRequest()->getActionName();
+// Access used to be via: $this-&gt;_action-&gt;getActionName().
+$action = $this-&gt;getRequest()-&gt;getActionName();
 
 // Retrieve the request parameters
 // This hasn't changed; the _getParams() and _getParam() methods simply
 // proxy to the request object now.
-$params = $this->_getParams();
+$params = $this-&gt;_getParams();
 // request 'foo' parameter, using 'default' as default value if not found
-$foo = $this->_getParam('foo', 'default');
-]]></programlisting>
+$foo = $this-&gt;_getParam('foo', 'default');
+</programlisting>
                     </listitem>
 
                     <listitem>
@@ -220,18 +221,18 @@ $foo = $this->_getParam('foo', 'default');
                             action is using <methodname>__call()</methodname>:
                         </para>
 
-                        <programlisting language="php"><![CDATA[
+                        <programlisting language="php">
 public function __call($method, $args)
 {
     // If an unmatched 'Action' method was requested, pass on to the
     // default action method:
     if ('Action' == substr($method, -6)) {
-        return $this->defaultAction();
+        return $this-&gt;defaultAction();
     }
 
     throw new Zend_Controller_Exception('Invalid method called');
 }
-]]></programlisting>
+</programlisting>
                     </listitem>
                 </itemizedlist>
             </listitem>
@@ -254,8 +255,5 @@ public function __call($method, $args)
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

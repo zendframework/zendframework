@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.auth.adapter.dbtable">
-    <title>Database Table Authentication</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.auth.adapter.dbtable.introduction">
-        <title>Introduction</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.dbtable"><info><title>Database Table Authentication</title></info>
+    
+
+    <section xml:id="zend.auth.adapter.dbtable.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_Auth_Adapter_DbTable</classname> provides the ability to
@@ -67,8 +68,8 @@
             </listitem>
         </itemizedlist>
 
-        <example id="zend.auth.adapter.dbtable.introduction.example.basic_usage">
-            <title>Basic Usage</title>
+        <example xml:id="zend.auth.adapter.dbtable.introduction.example.basic_usage"><info><title>Basic Usage</title></info>
+            
 
             <para>
                 As explained in the introduction, the
@@ -86,9 +87,9 @@
                 requires the <acronym>PDO</acronym> SQLite extension to be available:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 // Create an in-memory SQLite database connection
-$dbAdapter = new Zend_Db_Adapter_Pdo_Sqlite(array('dbname' =>
+$dbAdapter = new Zend_Db_Adapter_Pdo_Sqlite(array('dbname' =&gt;
                                                   ':memory:'));
 
 // Build a simple table creation query
@@ -99,15 +100,15 @@ $sqlCreate = 'CREATE TABLE [users] ('
            . '[real_name] VARCHAR(150) NULL)';
 
 // Create the authentication credentials table
-$dbAdapter->query($sqlCreate);
+$dbAdapter-&gt;query($sqlCreate);
 
 // Build a query to insert a row for which authentication may succeed
 $sqlInsert = "INSERT INTO users (username, password, real_name) "
            . "VALUES ('my_username', 'my_password', 'My Real Name')";
 
 // Insert the data
-$dbAdapter->query($sqlInsert);
-]]></programlisting>
+$dbAdapter-&gt;query($sqlInsert);
+</programlisting>
 
             <para>
                 With the database connection and table data available, an
@@ -117,7 +118,7 @@ $dbAdapter->query($sqlInsert);
                 instantiation:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 // Configure the instance with constructor parameters...
 $authAdapter = new Zend_Auth_Adapter_DbTable(
     $dbAdapter,
@@ -130,11 +131,11 @@ $authAdapter = new Zend_Auth_Adapter_DbTable(
 $authAdapter = new Zend_Auth_Adapter_DbTable($dbAdapter);
 
 $authAdapter
-    ->setTableName('users')
-    ->setIdentityColumn('username')
-    ->setCredentialColumn('password')
+    -&gt;setTableName('users')
+    -&gt;setIdentityColumn('username')
+    -&gt;setCredentialColumn('password')
 ;
-]]></programlisting>
+</programlisting>
 
             <para>
                 At this point, the authentication adapter instance is ready to
@@ -144,15 +145,15 @@ $authAdapter
                 method:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 // Set the input credential values (e.g., from a login form)
 $authAdapter
-    ->setIdentity('my_username')
-    ->setCredential('my_password')
+    -&gt;setIdentity('my_username')
+    -&gt;setCredential('my_password')
 ;
 
 // Perform the authentication query, saving the result
-]]></programlisting>
+</programlisting>
 
             <para>
                 In addition to the availability of the
@@ -161,34 +162,34 @@ $authAdapter
                 retrieving the table row upon authentication success:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 // Print the identity
-echo $result->getIdentity() . "\n\n";
+echo $result-&gt;getIdentity() . "\n\n";
 
 // Print the result row
-print_r($authAdapter->getResultRowObject());
+print_r($authAdapter-&gt;getResultRowObject());
 
 /* Output:
 my_username
 
 Array
 (
-    [id] => 1
-    [username] => my_username
-    [password] => my_password
-    [real_name] => My Real Name
+    [id] =&gt; 1
+    [username] =&gt; my_username
+    [password] =&gt; my_password
+    [real_name] =&gt; My Real Name
 )
-]]></programlisting>
+</programlisting>
 
             <para>
                 Since the table row contains the credential value, it is
                 important to secure the values against unintended access.
             </para>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.dbtable.advanced.storing_result_row">
-        <title>Advanced Usage: Persisting a DbTable Result Object</title>
+    <section xml:id="zend.auth.adapter.dbtable.advanced.storing_result_row"><info><title>Advanced Usage: Persisting a DbTable Result Object</title></info>
+        
 
         <para>
             By default, <classname>Zend_Auth_Adapter_DbTable</classname> returns the
@@ -201,22 +202,22 @@ Array
             its use:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // authenticate with Zend_Auth_Adapter_DbTable
-$result = $this->_auth->authenticate($adapter);
+$result = $this-&gt;_auth-&gt;authenticate($adapter);
 
-if ($result->isValid()) {
+if ($result-&gt;isValid()) {
     // store the identity as an object where only the username and
     // real_name have been returned
-    $storage = $this->_auth->getStorage();
-    $storage->write($adapter->getResultRowObject(array(
+    $storage = $this-&gt;_auth-&gt;getStorage();
+    $storage-&gt;write($adapter-&gt;getResultRowObject(array(
         'username',
         'real_name',
     )));
 
     // store the identity as an object where the password column has
     // been omitted
-    $storage->write($adapter->getResultRowObject(
+    $storage-&gt;write($adapter-&gt;getResultRowObject(
         null,
         'password'
     ));
@@ -228,11 +229,11 @@ if ($result->isValid()) {
     /* ... */
 
 }
-]]></programlisting>
-    </sect2>
+</programlisting>
+    </section>
 
-    <sect2 id="zend.auth.adapter.dbtable.advanced.advanced_usage">
-        <title>Advanced Usage By Example</title>
+    <section xml:id="zend.auth.adapter.dbtable.advanced.advanced_usage"><info><title>Advanced Usage By Example</title></info>
+        
 
         <para>
             While the primary purpose of <classname>Zend_Auth</classname> (and consequently
@@ -251,7 +252,7 @@ if ($result->isValid()) {
             authentication time to solve some common user problems.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // The status field value of an account is not equal to "compromised"
 $adapter = new Zend_Auth_Adapter_DbTable(
     $db,
@@ -268,7 +269,7 @@ $adapter = new Zend_Auth_Adapter_DbTable(
     'username',
     'password',
     'MD5(?) AND active = "TRUE"'
-]]></programlisting>
+</programlisting>
 
         <para>
             Another scenario can be the implementation of a salting mechanism.
@@ -283,26 +284,26 @@ $adapter = new Zend_Auth_Adapter_DbTable(
             Therefore, we need to modify our table to store our salt string:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $sqlAlter = "ALTER TABLE [users] "
           . "ADD COLUMN [password_salt] "
           . "AFTER [password]";
-]]></programlisting>
+</programlisting>
 
         <para>
             Here's a simple way to generate a salt string for every user at
             registration:
         </para>
 
-        <programlisting language="php"><![CDATA[
-for ($i = 0; $i < 50; $i++) {
+        <programlisting language="php">
+for ($i = 0; $i &lt; 50; $i++) {
     $dynamicSalt .= chr(rand(33, 126));
-]]></programlisting>
+</programlisting>
         <para>
             And now let's build the adapter:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $adapter = new Zend_Auth_Adapter_DbTable(
     $db,
     'users',
@@ -312,7 +313,7 @@ $adapter = new Zend_Auth_Adapter_DbTable(
     . Zend_Registry::get('staticSalt')
     . "', ?, password_salt))"
 );
-]]></programlisting>
+</programlisting>
 
         <note>
             <para>
@@ -341,7 +342,7 @@ $adapter = new Zend_Auth_Adapter_DbTable(
             other words to see if that user's account is enabled.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Continuing with the example from above
 $adapter = new Zend_Auth_Adapter_DbTable(
     $db,
@@ -352,11 +353,11 @@ $adapter = new Zend_Auth_Adapter_DbTable(
 );
 
 // get select object (by reference)
-$select = $adapter->getDbSelect();
-$select->where('active = "TRUE"');
+$select = $adapter-&gt;getDbSelect();
+$select-&gt;where('active = "TRUE"');
 
 // authenticate, this ensures that users.active = TRUE
-$adapter->authenticate();
-]]></programlisting>
-    </sect2>
-</sect1>
+$adapter-&gt;authenticate();
+</programlisting>
+    </section>
+</section>

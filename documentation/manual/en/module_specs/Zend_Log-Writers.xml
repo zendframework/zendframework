@@ -1,19 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.log.writers" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Writers</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers"><info><title>Writers</title></info>
+    
 
     <para>
         A Writer is an object that inherits from <classname>Zend_Log_Writer_Abstract</classname>.
         A Writer's responsibility is to record log data to a storage backend.
     </para>
 
-    <sect2 id="zend.log.writers.stream">
-        <title>Writing to Streams</title>
+    <section xml:id="zend.log.writers.stream"><info><title>Writing to Streams</title></info>
+        
 
         <para>
             <classname>Zend_Log_Writer_Stream</classname> sends log
-            data to a <ulink url="http://www.php.net/stream">PHP stream</ulink>.
+            data to a <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/stream">PHP stream</link>.
         </para>
 
         <para>
@@ -22,25 +23,25 @@
             stream like <constant>STDERR</constant> (<filename>php://stderr</filename>).
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $writer = new Zend_Log_Writer_Stream('php://output');
 $logger = new Zend_Log($writer);
 
-$logger->info('Informational message');
-]]></programlisting>
+$logger-&gt;info('Informational message');
+</programlisting>
 
         <para>
             To write data to a file, use one of the
-            <ulink url="http://www.php.net/manual/en/wrappers.php#wrappers.file">Filesystem
-            URLs</ulink>:
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/wrappers.php#wrappers.file">Filesystem
+            URLs</link>:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $writer = new Zend_Log_Writer_Stream('/path/to/logfile');
 $logger = new Zend_Log($writer);
 
-$logger->info('Informational message');
-]]></programlisting>
+$logger-&gt;info('Informational message');
+</programlisting>
 
         <para>
             By default, the stream opens in the append mode ("a").
@@ -53,7 +54,7 @@ $logger->info('Informational message');
             existing stream resource:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $stream = @fopen('/path/to/logfile', 'a', false);
 if (! $stream) {
     throw new Exception('Failed to open stream');
@@ -62,17 +63,17 @@ if (! $stream) {
 $writer = new Zend_Log_Writer_Stream($stream);
 $logger = new Zend_Log($writer);
 
-$logger->info('Informational message');
-]]></programlisting>
+$logger-&gt;info('Informational message');
+</programlisting>
 
         <para>
             You cannot specify the mode for existing stream resources. Doing so
             causes a <classname>Zend_Log_Exception</classname> to be thrown.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.log.writers.database">
-        <title>Writing to Databases</title>
+    <section xml:id="zend.log.writers.database"><info><title>Writing to Databases</title></info>
+        
 
         <para>
             <classname>Zend_Log_Writer_Db</classname> writes log information to a database table
@@ -82,83 +83,83 @@ $logger->info('Informational message');
             columns to event data items:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$params = array ('host'     => '127.0.0.1',
-                 'username' => 'malory',
-                 'password' => '******',
-                 'dbname'   => 'camelot');
+        <programlisting language="php">
+$params = array ('host'     =&gt; '127.0.0.1',
+                 'username' =&gt; 'malory',
+                 'password' =&gt; '******',
+                 'dbname'   =&gt; 'camelot');
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 
-$columnMapping = array('lvl' => 'priority', 'msg' => 'message');
+$columnMapping = array('lvl' =&gt; 'priority', 'msg' =&gt; 'message');
 $writer = new Zend_Log_Writer_Db($db, 'log_table_name', $columnMapping);
 
 $logger = new Zend_Log($writer);
 
-$logger->info('Informational message');
-]]></programlisting>
+$logger-&gt;info('Informational message');
+</programlisting>
 
         <para>
             The example above writes a single row of log data to the database table named
             'log_table_name' table. The database column named 'lvl'
             receives the priority number and the column named 'msg' receives the log message.
         </para>
-    </sect2>
+    </section>
 
-    <xi:include href="Zend_Log-Writers-Firebug.xml" />
-    <xi:include href="Zend_Log-Writers-Mail.xml" />
-    <xi:include href="Zend_Log-Writers-Syslog.xml" />
-    <xi:include href="Zend_Log-Writers-ZendMonitor.xml" />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Log-Writers-Firebug.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Log-Writers-Mail.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Log-Writers-Syslog.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Log-Writers-ZendMonitor.xml"/>
 
-    <sect2 id="zend.log.writers.null">
-        <title>Stubbing Out the Writer</title>
+    <section xml:id="zend.log.writers.null"><info><title>Stubbing Out the Writer</title></info>
+        
 
         <para>
             The <classname>Zend_Log_Writer_Null</classname> is a stub that does not write log data
             to anything. It is useful for disabling logging or stubbing out logging during tests:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $writer = new Zend_Log_Writer_Null;
 $logger = new Zend_Log($writer);
 
 // goes nowhere
-$logger->info('Informational message');
-]]></programlisting>
-    </sect2>
+$logger-&gt;info('Informational message');
+</programlisting>
+    </section>
 
-    <sect2 id="zend.log.writers.mock">
-        <title>Testing with the Mock</title>
+    <section xml:id="zend.log.writers.mock"><info><title>Testing with the Mock</title></info>
+        
 
         <para>
             The <classname>Zend_Log_Writer_Mock</classname> is a very simple writer that records
             the raw data it receives in an array exposed as a public property.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $mock = new Zend_Log_Writer_Mock;
 $logger = new Zend_Log($mock);
 
-$logger->info('Informational message');
+$logger-&gt;info('Informational message');
 
-var_dump($mock->events[0]);
+var_dump($mock-&gt;events[0]);
 
 // Array
 // (
-//    [timestamp] => 2007-04-06T07:16:37-07:00
-//    [message] => Informational message
-//    [priority] => 6
-//    [priorityName] => INFO
+//    [timestamp] =&gt; 2007-04-06T07:16:37-07:00
+//    [message] =&gt; Informational message
+//    [priority] =&gt; 6
+//    [priorityName] =&gt; INFO
 // )
-]]></programlisting>
+</programlisting>
 
         <para>
             To clear the events logged by the mock, simply set
-            <command>$mock->events = array()</command>.
+            <command>$mock-&gt;events = array()</command>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.log.writers.compositing">
-        <title>Compositing Writers</title>
+    <section xml:id="zend.log.writers.compositing"><info><title>Compositing Writers</title></info>
+        
 
         <para>
             There is no composite Writer object. However, a Log instance can write
@@ -166,16 +167,16 @@ var_dump($mock->events[0]);
             method:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $writer1 = new Zend_Log_Writer_Stream('/path/to/first/logfile');
 $writer2 = new Zend_Log_Writer_Stream('/path/to/second/logfile');
 
 $logger = new Zend_Log();
-$logger->addWriter($writer1);
-$logger->addWriter($writer2);
+$logger-&gt;addWriter($writer1);
+$logger-&gt;addWriter($writer2);
 
 // goes to both writers
-$logger->info('Informational message');
-]]></programlisting>
-    </sect2>
-</sect1>
+$logger-&gt;info('Informational message');
+</programlisting>
+    </section>
+</section>

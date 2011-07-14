@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.currency.calculation">
-    <title>Calculating with currencies</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.calculation"><info><title>Calculating with currencies</title></info>
+    
 
     <para>
         When working with currencies you will sometimes also have to calculate with them.
@@ -9,7 +10,7 @@
         The following methods are supported for calculation:
     </para>
 
-    <itemizedlist mark='opencircle'>
+    <itemizedlist mark="opencircle">
         <listitem>
             <para>
                 <emphasis><methodname>add()</methodname></emphasis>: This method adds the given
@@ -88,33 +89,33 @@
         <classname>Zend_Currency</classname>. See the next snippets as example:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $currency = new Zend_Currency(
     array(
-        'value'    => 1000,
-        'currency' => 'USD',
+        'value'    =&gt; 1000,
+        'currency' =&gt; 'USD',
     )
 );
 
 print $currency; // Could return '$ 1.000,00'
 
-$currency->add(500);
+$currency-&gt;add(500);
 print $currency; // Could return '$ 1.500,00'
-]]></programlisting>
+</programlisting>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $currency_2 = new Zend_Currency(
     array(
-        'value'    => 500,
-        'currency' => 'USD',
+        'value'    =&gt; 500,
+        'currency' =&gt; 'USD',
     )
 );
 
-if ($currency->isMore($currency_2)) {
+if ($currency-&gt;isMore($currency_2)) {
     print "First is more";
 }
 
-$currency->div(5);
+$currency-&gt;div(5);
 print $currency; // Could return '$ 200,00'
-]]></programlisting>
-</sect1>
+</programlisting>
+</section>

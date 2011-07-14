@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<chapter id="introduction.installation">
-    <title>Installation</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="introduction.installation"><info><title>Installation</title></info>
+    
 
     <para>
         See the <link linkend="requirements">requirements appendix</link> for a detailed list of
@@ -18,8 +19,8 @@
     <itemizedlist>
         <listitem>
             <para>
-                <ulink url="http://framework.zend.com/download/latest">Download the latest
-                stable release.</ulink> This version, available in both
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/download/latest">Download the latest
+                stable release.</link> This version, available in both
                 <filename>.zip</filename> and <filename>.tar.gz</filename> formats, is a
                 good choice for those who are new to Zend Framework.
             </para>
@@ -27,8 +28,8 @@
 
         <listitem>
             <para>
-                <ulink url="http://framework.zend.com/download/snapshot">Download the latest
-                nightly snapshot.</ulink> For those who would brave the cutting edge, the
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/download/snapshot">Download the latest
+                nightly snapshot.</link> For those who would brave the cutting edge, the
                 nightly snapshots represent the latest progress of Zend Framework development.
                 Snapshots are bundled with documentation either in English only or in all
                 available languages. If you anticipate working with the latest Zend Framework
@@ -38,7 +39,7 @@
 
         <listitem>
             <para>
-                Using a <ulink url="http://subversion.tigris.org">Subversion</ulink>
+                Using a <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://subversion.tigris.org">Subversion</link>
                 (<acronym>SVN</acronym>) client. Zend Framework is open source software, and the
                 Subversion repository used for its development is publicly available. Consider
                 using <acronym>SVN</acronym> to get Zend Framework if you already use
@@ -48,34 +49,33 @@
             </para>
 
             <para>
-                <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.export.html">
-                Exporting</ulink> is useful if you want to get a particular framework revision
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.export.html">
+                Exporting</link> is useful if you want to get a particular framework revision
                 without the <filename>.svn</filename> directories as created in a working copy.
             </para>
 
             <para>
-                <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.checkout.html">
-                Check out a working copy</ulink> if you want contribute to Zend Framework, a
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.checkout.html">
+                Check out a working copy</link> if you want contribute to Zend Framework, a
                 working copy can be updated any time with
-                <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.update.html">
-                svn update</ulink> and changes can be commited to our <acronym>SVN</acronym>
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.update.html">
+                svn update</link> and changes can be commited to our <acronym>SVN</acronym>
                 repository with the
-                <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.commit.html">
-                svn commit</ulink> command.
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.commit.html">
+                svn commit</link> command.
             </para>
 
             <para>
                 An
-                <ulink url="http://svnbook.red-bean.com/nightly/en/svn.advanced.externals.html">
-                externals definition</ulink> is quite convenient for developers already using
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://svnbook.red-bean.com/nightly/en/svn.advanced.externals.html">
+                externals definition</link> is quite convenient for developers already using
                 <acronym>SVN</acronym> to manage their application's working copies.
             </para>
 
             <para>
                 The <acronym>URL</acronym> for the trunk of Zend Framework's <acronym>SVN</acronym>
-                repository is: <ulink
-                    url="http://framework.zend.com/svn/framework/standard/trunk">
-                    http://framework.zend.com/svn/framework/standard/trunk</ulink>
+                repository is: <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/svn/framework/standard/trunk">
+                    http://framework.zend.com/svn/framework/standard/trunk</link>
             </para>
         </listitem>
     </itemizedlist>
@@ -83,14 +83,14 @@
     <para>
         Once you have a copy of Zend Framework available, your application needs to be able to
         access the framework classes. Though there are
-        <ulink url="http://www.php.net/manual/en/configuration.changes.php">
-        several ways to achieve this</ulink>, your <acronym>PHP</acronym>
-        <ulink url="http://www.php.net/manual/en/ini.core.php#ini.include-path">include_path</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/configuration.changes.php">
+        several ways to achieve this</link>, your <acronym>PHP</acronym>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/ini.core.php#ini.include-path">include_path</link>
         needs to contain the path to Zend Framework's library.
     </para>
 
     <para>
-        Zend provides a <ulink url="http://framework.zend.com/docs/quickstart">QuickStart</ulink>
+        Zend provides a <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/docs/quickstart">QuickStart</link>
         to get you up and running as quickly as possible. This is an excellent way to begin
         learning about the framework with an emphasis on real world examples that you can build
         upon.

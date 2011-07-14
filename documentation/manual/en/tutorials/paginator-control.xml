@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.paginator.control">
-    <title>Pagination Control and ScrollingStyles</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.paginator.control"><info><title>Pagination Control and ScrollingStyles</title></info>
+    
 
     <para>
         Rendering the items for a page on the screen has been a good start. In the code
@@ -22,47 +23,47 @@
         examples of what might go in the view script. Here is one example.
     </para>
 
-    <programlisting language="php"><![CDATA[
-<?php if ($this->pageCount): ?>
-<!-- First page link -->
-<?php if (isset($this->previous)): ?>
-  <a href="<?php echo $this->url(array('page' => $this->first)); ?>">
+    <programlisting language="php">
+&lt;?php if ($this-&gt;pageCount): ?&gt;
+&lt;!-- First page link --&gt;
+&lt;?php if (isset($this-&gt;previous)): ?&gt;
+  &lt;a href="&lt;?php echo $this-&gt;url(array('page' =&gt; $this-&gt;first)); ?&gt;"&gt;
     First
-  </a> |
-<?php else: ?>
-  <span class="disabled">First</span> |
-<?php endif; ?>
+  &lt;/a&gt; |
+&lt;?php else: ?&gt;
+  &lt;span class="disabled"&gt;First&lt;/span&gt; |
+&lt;?php endif; ?&gt;
 
-<!-- Previous page link -->
-<?php if (isset($this->previous)): ?>
-  <a href="<?php echo $this->url(array('page' => $this->previous)); ?>">
-    &lt; Previous
-  </a> |
-<?php else: ?>
-  <span class="disabled">&lt; Previous</span> |
-<?php endif; ?>
+&lt;!-- Previous page link --&gt;
+&lt;?php if (isset($this-&gt;previous)): ?&gt;
+  &lt;a href="&lt;?php echo $this-&gt;url(array('page' =&gt; $this-&gt;previous)); ?&gt;"&gt;
+    &amp;lt; Previous
+  &lt;/a&gt; |
+&lt;?php else: ?&gt;
+  &lt;span class="disabled"&gt;&amp;lt; Previous&lt;/span&gt; |
+&lt;?php endif; ?&gt;
 
-<!-- Next page link -->
-<?php if (isset($this->next)): ?>
-  <a href="<?php echo $this->url(array('page' => $this->next)); ?>">
-    Next &gt;
-  </a> |
-<?php else: ?>
-  <span class="disabled">Next &gt;</span> |
-<?php endif; ?>
+&lt;!-- Next page link --&gt;
+&lt;?php if (isset($this-&gt;next)): ?&gt;
+  &lt;a href="&lt;?php echo $this-&gt;url(array('page' =&gt; $this-&gt;next)); ?&gt;"&gt;
+    Next &amp;gt;
+  &lt;/a&gt; |
+&lt;?php else: ?&gt;
+  &lt;span class="disabled"&gt;Next &amp;gt;&lt;/span&gt; |
+&lt;?php endif; ?&gt;
 
-<!-- Last page link -->
-<?php if (isset($this->next)): ?>
-  <a href="<?php echo $this->url(array('page' => $this->last)); ?>">
+&lt;!-- Last page link --&gt;
+&lt;?php if (isset($this-&gt;next)): ?&gt;
+  &lt;a href="&lt;?php echo $this-&gt;url(array('page' =&gt; $this-&gt;last)); ?&gt;"&gt;
     Last
-  </a>
-<?php else: ?>
-  <span class="disabled">Last</span>
-<?php endif; ?>
+  &lt;/a&gt;
+&lt;?php else: ?&gt;
+  &lt;span class="disabled"&gt;Last&lt;/span&gt;
+&lt;?php endif; ?&gt;
 
-</div>
-<?php endif; ?>
-]]></programlisting>
+&lt;/div&gt;
+&lt;?php endif; ?&gt;
+</programlisting>
 
     <para>
         The next step is to tell <classname>Zend_Paginator</classname> which view partial can be
@@ -70,9 +71,9 @@
         bootstrap file.
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 Zend_View_Helper_PaginationControl::setDefaultViewPartial('controls.phtml');
-]]></programlisting>
+</programlisting>
 
     <para>
         The last step is probably the easiest. Make sure you have assigned your Paginator object
@@ -83,9 +84,9 @@ Zend_View_Helper_PaginationControl::setDefaultViewPartial('controls.phtml');
         The next section will feature a complete example.
     </para>
 
-    <programlisting language="php"><![CDATA[
-<?php echo $this->paginator; ?>
-]]></programlisting>
+    <programlisting language="php">
+&lt;?php echo $this-&gt;paginator; ?&gt;
+</programlisting>
 
     <para>
         <classname>Zend_Paginator</classname>, together with the 'controls.phtml' view script you
@@ -99,12 +100,12 @@ Zend_View_Helper_PaginationControl::setDefaultViewPartial('controls.phtml');
         manual invocation of the view helper in your view script.
     </para>
 
-    <programlisting language="php"><![CDATA[
-// $this->paginator is a Paginator object
-<?php echo $this->paginationControl($this->paginator, 'Elastic', 'controls.phtml'); ?>
-]]></programlisting>
+    <programlisting language="php">
+// $this-&gt;paginator is a Paginator object
+&lt;?php echo $this-&gt;paginationControl($this-&gt;paginator, 'Elastic', 'controls.phtml'); ?&gt;
+</programlisting>
 
     <para>
         For a list of all available ScrollingStyles, see the reference manual.
     </para>
-</sect1>
+</section>

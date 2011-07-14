@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.request">
-    <title>The Request Object</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.controller.request.introduction">
-        <title>Introduction</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.request"><info><title>The Request Object</title></info>
+    
+
+    <section xml:id="zend.controller.request.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             The request object is a simple value object that is passed between
@@ -73,13 +74,13 @@
                 object</link>, elaborate and precise unit testing of <acronym>MVC</acronym>
             applications becomes possible.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.request.http">
-        <title>HTTP Requests</title>
+    <section xml:id="zend.controller.request.http"><info><title>HTTP Requests</title></info>
+        
 
-        <sect3 id="zend.controller.request.http.dataacess">
-            <title>Accessing Request Data</title>
+        <section xml:id="zend.controller.request.http.dataacess"><info><title>Accessing Request Data</title></info>
+            
 
             <para>
                 <classname>Zend_Controller_Request_Http</classname> encapsulates access to
@@ -93,8 +94,8 @@
                 to set or retrieve user parameters.
             </para>
 
-            <note>
-                <title>Superglobal Data</title>
+            <note><info><title>Superglobal Data</title></info>
+                
 
                 <para>
                     When accessing superglobal data through
@@ -117,8 +118,8 @@
                 retrieving request headers.
             </para>
 
-            <note>
-                <title>GET and POST Data</title>
+            <note><info><title>GET and POST Data</title></info>
+                
 
                 <para>
                     Be cautious when accessing data from the request object as
@@ -128,8 +129,8 @@
                 </para>
             </note>
 
-            <note>
-                <title>Retrieving the Raw POST Data</title>
+            <note><info><title>Retrieving the Raw POST Data</title></info>
+                
 
                 <para>
                     As of 1.5.0, you can also retrieve the raw post data via the
@@ -152,8 +153,8 @@
                 the request object.
             </para>
 
-            <note>
-                <title>getParam() Retrieves More than User Parameters</title>
+            <note><info><title>getParam() Retrieves More than User Parameters</title></info>
+                
 
                 <para>
                     In order to do some of its work, <methodname>getParam()</methodname> actually
@@ -181,8 +182,8 @@
                 </para>
             </note>
 
-            <note>
-                <title>Apache Quirks</title>
+            <note><info><title>Apache Quirks</title></info>
+                
 
                 <para>
                     If you are using Apache's 404 handler to pass incoming
@@ -195,10 +196,10 @@
                     of the default <acronym>HTTP</acronym> class for your request object:
                 </para>
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 $request = new Zend_Controller_Request_Apache404();
-$front->setRequest($request);
-]]></programlisting>
+$front-&gt;setRequest($request);
+</programlisting>
 
                 <para>
                     This class extends the
@@ -207,10 +208,10 @@ $front->setRequest($request);
                     used as a drop-in replacement.
                 </para>
             </note>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.request.http.baseurl">
-            <title>Base Url and Subdirectories</title>
+        <section xml:id="zend.controller.request.http.baseurl"><info><title>Base Url and Subdirectories</title></info>
+            
 
             <para>
                 <classname>Zend_Controller_Request_Http</classname> allows
@@ -232,8 +233,8 @@ $front->setRequest($request);
                 <filename>http://example.com/user/martel</filename>.
             </para>
 
-            <note>
-                <title>URL Detection is Case Sensitive</title>
+            <note><info><title>URL Detection is Case Sensitive</title></info>
+                
 
                 <para>
                     Automatic base <acronym>URL</acronym> detection is case sensitive, so make sure
@@ -253,21 +254,21 @@ $front->setRequest($request);
                 set a custom base <acronym>URL</acronym>:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 /**
  * Dispatch Request with custom base URL with Zend_Controller_Front.
  */
 $router     = new Zend_Controller_Router_Rewrite();
 $controller = Zend_Controller_Front::getInstance();
-$controller->setControllerDirectory('./application/controllers')
-           ->setRouter($router)
-           ->setBaseUrl('/projects/myapp'); // set the base url!
-$response   = $controller->dispatch();
-]]></programlisting>
-        </sect3>
+$controller-&gt;setControllerDirectory('./application/controllers')
+           -&gt;setRouter($router)
+           -&gt;setBaseUrl('/projects/myapp'); // set the base url!
+$response   = $controller-&gt;dispatch();
+</programlisting>
+        </section>
 
-        <sect3 id="zend.controller.request.http.method">
-            <title>Determining the Request Method</title>
+        <section xml:id="zend.controller.request.http.method"><info><title>Determining the Request Method</title></info>
+            
 
             <para>
                 <methodname>getMethod()</methodname> allows you to determine the
@@ -290,10 +291,10 @@ $response   = $controller->dispatch();
                 The primary use case for these is for creating RESTful <acronym>MVC</acronym>
                 architectures.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.request.http.ajax">
-            <title>Detecting AJAX Requests</title>
+        <section xml:id="zend.controller.request.http.ajax"><info><title>Detecting AJAX Requests</title></info>
+            
 
             <para>
                 <classname>Zend_Controller_Request_Http</classname> has a rudimentary
@@ -324,11 +325,11 @@ $response   = $controller->dispatch();
                 simply add it as a request header to ensure the
                 <methodname>isXmlHttpRequest()</methodname> method works for you.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.controller.request.subclassing">
-        <title>Subclassing the Request Object</title>
+    <section xml:id="zend.controller.request.subclassing"><info><title>Subclassing the Request Object</title></info>
+        
 
         <para>
             The base request class used for all request objects is the abstract
@@ -336,7 +337,7 @@ $response   = $controller->dispatch();
             basic, it defines the following methods:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 abstract class Zend_Controller_Request_Abstract
 {
     /**
@@ -418,7 +419,7 @@ abstract class Zend_Controller_Request_Abstract
      */
     public function isDispatched();
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             The request object is a container for the request environment. The
@@ -432,13 +433,9 @@ abstract class Zend_Controller_Request_Abstract
         <para>
             Extend this class, or one of its derivatives, when you need the
             request class to interact with a specific environment in order to
-            retrieve data for use in the above tasks. Examples include <link
-                linkend="zend.controller.request.http">the <acronym>HTTP</acronym>
+            retrieve data for use in the above tasks. Examples include <link linkend="zend.controller.request.http">the <acronym>HTTP</acronym>
                 environment</link>, a <acronym>CLI</acronym> environment, or a
             <acronym>PHP</acronym>-GTK environment.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

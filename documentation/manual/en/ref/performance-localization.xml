@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="performance.localization">
-    <title>Internationalization (i18n) and Localization (l10n)</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.localization"><info><title>Internationalization (i18n) and Localization (l10n)</title></info>
+    
 
     <para>
         Internationalizing and localizing a site are fantastic ways to expand
@@ -11,8 +12,8 @@
         l10n.
     </para>
 
-    <sect2 id="performance.localization.translationadapter">
-        <title>Which translation adapter should I use?</title>
+    <section xml:id="performance.localization.translationadapter"><info><title>Which translation adapter should I use?</title></info>
+        
 
         <para>
             Not all translation adapters are made equal. Some have more
@@ -22,8 +23,8 @@
             adapters are fastest?
         </para>
 
-        <sect3 id="performance.localization.translationadapter.fastest">
-            <title>Use non-XML translation adapters for greatest speed</title>
+        <section xml:id="performance.localization.translationadapter.fastest"><info><title>Use non-XML translation adapters for greatest speed</title></info>
+            
 
             <para>
                 Zend Framework ships with a variety of translation adapters.
@@ -76,11 +77,11 @@
                 If high performance is one of your concerns, we suggest
                 utilizing one of the above adapters.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="performance.localization.cache">
-        <title>How can I make translation and localization even faster?</title>
+    <section xml:id="performance.localization.cache"><info><title>How can I make translation and localization even faster?</title></info>
+        
 
         <para>
             Maybe, for business reasons, you're limited to an <acronym>XML</acronym>-based
@@ -89,8 +90,8 @@
             you do this?
         </para>
 
-        <sect3 id="performance.localization.cache.usage">
-            <title>Use translation and localization caches</title>
+        <section xml:id="performance.localization.cache.usage"><info><title>Use translation and localization caches</title></info>
+            
 
             <para>
                 Both <classname>Zend_Translate</classname> and <classname>Zend_Locale</classname>
@@ -109,8 +110,7 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <link
-                            linkend="zend.translate.adapter.caching"><classname>Zend_Translate</classname>
+                        <link linkend="zend.translate.adapter.caching"><classname>Zend_Translate</classname>
                             adapter caching</link>
                     </para>
                 </listitem>
@@ -122,9 +122,6 @@
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.pdf.introduction">
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.introduction"><info><title>Introduction</title></info>
     <!-- @todo review and revise upon completion of refactoring -->
-    <title>Introduction</title>
+    
 
     <para>
         The <classname>Zend_Pdf</classname> component is a <acronym>PDF</acronym> (Portable Document
@@ -77,7 +78,4 @@
             </listitem>
         </itemizedlist>
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

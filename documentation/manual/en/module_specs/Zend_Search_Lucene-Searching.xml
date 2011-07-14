@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.search.lucene.searching">
-    <title>Searching an Index</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.search.lucene.searching.query_building">
-        <title>Building Queries</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.searching"><info><title>Searching an Index</title></info>
+    
+
+    <section xml:id="zend.search.lucene.searching.query_building"><info><title>Building Queries</title></info>
+        
 
         <para>
             There are two ways to search the index. The first method uses
@@ -65,11 +66,11 @@
             Both ways use the same <acronym>API</acronym> method to search through the index:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $index = Zend_Search_Lucene::open('/data/my_index');
 
-$index->find($query);
-]]></programlisting>
+$index-&gt;find($query);
+</programlisting>
 
         <para>
             The <methodname>Zend_Search_Lucene::find()</methodname> method determines the input type
@@ -94,8 +95,8 @@ $index->find($query);
             It's therefore more suitable for computer generated or untokenized fields.
         </para>
 
-        <sect3 id="zend.search.lucene.searching.query_building.parsing">
-            <title>Query Parsing</title>
+        <section xml:id="zend.search.lucene.searching.query_building.parsing"><info><title>Query Parsing</title></info>
+            
 
             <para>
                 <methodname>Zend_Search_Lucene_Search_QueryParser::parse()</methodname> method may
@@ -112,7 +113,7 @@ $index->find($query);
                 fields:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
 
 $pathTerm  = new Zend_Search_Lucene_Index_Term(
@@ -121,21 +122,21 @@ $pathTerm  = new Zend_Search_Lucene_Index_Term(
 $pathQuery = new Zend_Search_Lucene_Search_Query_Term($pathTerm);
 
 $query = new Zend_Search_Lucene_Search_Query_Boolean();
-$query->addSubquery($userQuery, true /* required */);
-$query->addSubquery($pathQuery, true /* required */);
+$query-&gt;addSubquery($userQuery, true /* required */);
+$query-&gt;addSubquery($pathQuery, true /* required */);
 
-$hits = $index->find($query);
-]]></programlisting>
+$hits = $index-&gt;find($query);
+</programlisting>
 
             <para>
                 <methodname>Zend_Search_Lucene_Search_QueryParser::parse()</methodname> method also
                 takes an optional encoding parameter, which can specify query string encoding:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr,
                                                           'iso-8859-5');
-]]></programlisting>
+</programlisting>
 
             <para>
                 If the encoding parameter is omitted, then current locale is used.
@@ -147,28 +148,28 @@ $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr,
                 method:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('iso-8859-5');
 ...
 $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
-]]></programlisting>
+</programlisting>
 
             <para>
                 <methodname>Zend_Search_Lucene_Search_QueryParser::getDefaultEncoding()</methodname>
                 returns the current default query string encoding (the empty string means "current
                 locale").
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.search.lucene.searching.results">
-        <title>Search Results</title>
+    <section xml:id="zend.search.lucene.searching.results"><info><title>Search Results</title></info>
+        
 
         <para>
             The search result is an array of
             <classname>Zend_Search_Lucene_Search_QueryHit</classname> objects. Each of these has two
-            properties: <code>$hit->id</code> is a document number within the index and
-            <code>$hit->score</code> is a score of the hit in a search result. The results are
+            properties: <code>$hit-&gt;id</code> is a document number within the index and
+            <code>$hit-&gt;score</code> is a score of the hit in a search result. The results are
             ordered by score (descending from highest score).
         </para>
 
@@ -179,17 +180,17 @@ $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
             the corresponding document: title and author.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $index = Zend_Search_Lucene::open('/data/my_index');
 
-$hits = $index->find($query);
+$hits = $index-&gt;find($query);
 
 foreach ($hits as $hit) {
-    echo $hit->score;
-    echo $hit->title;
-    echo $hit->author;
+    echo $hit-&gt;score;
+    echo $hit-&gt;title;
+    echo $hit-&gt;author;
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             Stored fields are always returned in UTF-8 encoding.
@@ -203,25 +204,25 @@ foreach ($hits as $hit) {
             <methodname>getFieldValue()</methodname> method:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $index = Zend_Search_Lucene::open('/data/my_index');
 
-$hits = $index->find($query);
+$hits = $index-&gt;find($query);
 foreach ($hits as $hit) {
     // return Zend_Search_Lucene_Document object for this hit
-    echo $document = $hit->getDocument();
+    echo $document = $hit-&gt;getDocument();
 
     // return a Zend_Search_Lucene_Field object
     // from the Zend_Search_Lucene_Document
-    echo $document->getField('title');
+    echo $document-&gt;getField('title');
 
     // return the string value of the Zend_Search_Lucene_Field object
-    echo $document->getFieldValue('title');
+    echo $document-&gt;getFieldValue('title');
 
     // same as getFieldValue()
-    echo $document->title;
+    echo $document-&gt;title;
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             The fields available from the <classname>Zend_Search_Lucene_Document</classname> object
@@ -234,10 +235,10 @@ foreach ($hits as $hit) {
             Note that the document identity ('path' in our example) is also stored
             in the index and must be retrieved from it.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.searching.results-limiting">
-        <title>Limiting the Result Set</title>
+    <section xml:id="zend.search.lucene.searching.results-limiting"><info><title>Limiting the Result Set</title></info>
+        
 
         <para>
             The most computationally expensive part of searching is score calculation. It may take
@@ -250,11 +251,11 @@ foreach ($hits as $hit) {
             <methodname>setResultSetLimit()</methodname> methods:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $currentResultSetLimit = Zend_Search_Lucene::getResultSetLimit();
 
 Zend_Search_Lucene::setResultSetLimit($newLimit);
-]]></programlisting>
+</programlisting>
 
         <para>
             The default value of 0 means 'no limit'.
@@ -269,10 +270,10 @@ Zend_Search_Lucene::setResultSetLimit($newLimit);
                 </para>
             </footnote>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.searching.results-scoring">
-        <title>Results Scoring</title>
+    <section xml:id="zend.search.lucene.searching.results-scoring"><info><title>Results Scoring</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> uses the same scoring algorithms as Java
@@ -290,25 +291,24 @@ Zend_Search_Lucene::setResultSetLimit($newLimit);
             A hit's score can be retrieved by accessing the <code>score</code> property of the hit:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$hits = $index->find($query);
+        <programlisting language="php">
+$hits = $index-&gt;find($query);
 
 foreach ($hits as $hit) {
-    echo $hit->id;
-    echo $hit->score;
+    echo $hit-&gt;id;
+    echo $hit-&gt;score;
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             The <classname>Zend_Search_Lucene_Search_Similarity</classname> class is used to
-            calculate the score for each hit. See <link
-                linkend="zend.search.lucene.extending.scoring">Extensibility. Scoring
+            calculate the score for each hit. See <link linkend="zend.search.lucene.extending.scoring">Extensibility. Scoring
                 Algorithms</link> section for details.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.searching.sorting">
-        <title>Search Result Sorting</title>
+    <section xml:id="zend.search.lucene.searching.sorting"><info><title>Search Result Sorting</title></info>
+        
 
         <para>
             By default, the search results are ordered by score. The programmer can change this
@@ -317,14 +317,14 @@ foreach ($hits as $hit) {
         </para>
 
         <para>
-            <code>$index->find()</code> call may take several optional parameters:
+            <code>$index-&gt;find()</code> call may take several optional parameters:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$index->find($query [, $sortField [, $sortType [, $sortOrder]]]
+        <programlisting language="php">
+$index-&gt;find($query [, $sortField [, $sortType [, $sortOrder]]]
                     [, $sortField2 [, $sortType [, $sortOrder]]]
              ...);
-]]></programlisting>
+</programlisting>
 
         <para>
              A name of stored field by which to sort result should be passed as the
@@ -348,26 +348,26 @@ $index->find($query [, $sortField [, $sortType [, $sortOrder]]]
             Examples:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$index->find($query, 'quantity', SORT_NUMERIC, SORT_DESC);
-]]></programlisting>
+        <programlisting language="php">
+$index-&gt;find($query, 'quantity', SORT_NUMERIC, SORT_DESC);
+</programlisting>
 
-        <programlisting language="php"><![CDATA[
-$index->find($query, 'fname', SORT_STRING, 'lname', SORT_STRING);
-]]></programlisting>
+        <programlisting language="php">
+$index-&gt;find($query, 'fname', SORT_STRING, 'lname', SORT_STRING);
+</programlisting>
 
-        <programlisting language="php"><![CDATA[
-$index->find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);
-]]></programlisting>
+        <programlisting language="php">
+$index-&gt;find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);
+</programlisting>
 
         <para>
             Please use caution when using a non-default search order; the query needs to retrieve
             documents completely from an index, which may dramatically reduce search performance.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.searching.highlighting">
-        <title>Search Results Highlighting</title>
+    <section xml:id="zend.search.lucene.searching.highlighting"><info><title>Search Results Highlighting</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> provides two options for search results
@@ -380,7 +380,7 @@ $index->find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);
                 section</link> for details) using the following methods:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 /**
  * Highlight text with specified color
  *
@@ -389,9 +389,9 @@ $index->find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);
  * @return string
  */
 public function highlight($words, $colour = '#66ffff');
-]]></programlisting>
+</programlisting>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 /**
  * Highlight text using specified View helper or callback function.
  *
@@ -406,7 +406,7 @@ public function highlight($words, $colour = '#66ffff');
  * @throws Zend_Search_Lucene_Exception
  */
 public function highlightExtended($words, $callback, $params = array())
-]]></programlisting>
+</programlisting>
 
         <para>
             To customize highlighting behavior use <methodname>highlightExtended()</methodname>
@@ -436,13 +436,13 @@ public function highlightExtended($words, $callback, $params = array())
             context of view script:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$doc->highlightExtended('word1 word2 word3...', array($this, 'myViewHelper'));
-]]></programlisting>
+        <programlisting language="php">
+$doc-&gt;highlightExtended('word1 word2 word3...', array($this, 'myViewHelper'));
+</programlisting>
 
         <para>
             The result of highlighting operation is retrieved by
-            <code>Zend_Search_Lucene_Document_Html->getHTML()</code> method.
+            <code>Zend_Search_Lucene_Document_Html-&gt;getHTML()</code> method.
         </para>
 
         <note>
@@ -470,15 +470,15 @@ $doc->highlightExtended('word1 word2 word3...', array($this, 'myViewHelper'));
 
         <para>
             The second option is to use
-            <code>Zend_Search_Lucene_Search_Query->highlightMatches(string $inputHTML[,
+            <code>Zend_Search_Lucene_Search_Query-&gt;highlightMatches(string $inputHTML[,
                 $defaultEncoding = 'UTF-8'[,
                 Zend_Search_Lucene_Search_Highlighter_Interface $highlighter]])</code> method:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $query = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
-$highlightedHTML = $query->highlightMatches($sourceHTML);
-]]></programlisting>
+$highlightedHTML = $query-&gt;highlightMatches($sourceHTML);
+</programlisting>
 
         <para>
             Optional second parameter is a default <acronym>HTML</acronym> document encoding. It's
@@ -490,7 +490,7 @@ $highlightedHTML = $query->highlightMatches($sourceHTML);
             <classname>Zend_Search_Lucene_Search_Highlighter_Interface</classname> interface:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 interface Zend_Search_Lucene_Search_Highlighter_Interface
 {
     /**
@@ -515,12 +515,12 @@ interface Zend_Search_Lucene_Search_Highlighter_Interface
      */
     public function highlight($words);
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             Where <classname>Zend_Search_Lucene_Document_Html</classname> object is an object
             constructed from the source <acronym>HTML</acronym> provided to the
-            <classname>Zend_Search_Lucene_Search_Query->highlightMatches()</classname> method.
+            <classname>Zend_Search_Lucene_Search_Query-&gt;highlightMatches()</classname> method.
         </para>
 
         <para>
@@ -540,10 +540,10 @@ interface Zend_Search_Lucene_Search_Highlighter_Interface
         </para>
 
         <para>
-            <code>Zend_Search_Lucene_Search_Query->htmlFragmentHighlightMatches()</code> has similar
+            <code>Zend_Search_Lucene_Search_Query-&gt;htmlFragmentHighlightMatches()</code> has similar
             behavior. The only difference is that it takes as an input and returns
-            <acronym>HTML</acronym> fragment without &lt;>HTML>, &lt;HEAD>, &lt;BODY> tags.
+            <acronym>HTML</acronym> fragment without &lt;&gt;HTML&gt;, &lt;HEAD&gt;, &lt;BODY&gt; tags.
             Nevertheless, fragment is automatically transformed to valid <acronym>XHTML</acronym>.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

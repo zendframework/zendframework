@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.log.formatters">
-    <title>Formatters</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.formatters"><info><title>Formatters</title></info>
+    
 
     <para>
         A Formatter is an object that is responsible for taking an <property>event</property> array
@@ -15,8 +16,8 @@
         set a Formatter.
     </para>
 
-    <sect2 id="zend.log.formatters.simple">
-        <title>Simple Formatting</title>
+    <section xml:id="zend.log.formatters.simple"><info><title>Simple Formatting</title></info>
+        
 
         <para>
             <classname>Zend_Log_Formatter_Simple</classname> is the default formatter. It is
@@ -24,28 +25,28 @@
             equivalent to the following:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $format = '%timestamp% %priorityName% (%priority%): %message%' . PHP_EOL;
 $formatter = new Zend_Log_Formatter_Simple($format);
-]]></programlisting>
+</programlisting>
 
         <para>
             A formatter is set on an individual Writer object using the Writer's
             <methodname>setFormatter()</methodname> method:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $writer = new Zend_Log_Writer_Stream('php://output');
 $formatter = new Zend_Log_Formatter_Simple('hello %message%' . PHP_EOL);
-$writer->setFormatter($formatter);
+$writer-&gt;setFormatter($formatter);
 
 $logger = new Zend_Log();
-$logger->addWriter($writer);
+$logger-&gt;addWriter($writer);
 
-$logger->info('there');
+$logger-&gt;info('there');
 
 // outputs "hello there"
-]]></programlisting>
+</programlisting>
 
         <para>
             The constructor of <classname>Zend_Log_Formatter_Simple</classname> accepts a single
@@ -55,10 +56,10 @@ $logger->info('there');
             You can retrieve the default keys by using the DEFAULT_FORMAT constant from
             <classname>Zend_Log_Formatter_Simple</classname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.log.formatters.xml">
-        <title>Formatting to XML</title>
+    <section xml:id="zend.log.formatters.xml"><info><title>Formatting to XML</title></info>
+        
 
         <para>
             <classname>Zend_Log_Formatter_Xml</classname> formats log data into
@@ -66,29 +67,29 @@ $logger->info('there');
             data array:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $writer = new Zend_Log_Writer_Stream('php://output');
 $formatter = new Zend_Log_Formatter_Xml();
-$writer->setFormatter($formatter);
+$writer-&gt;setFormatter($formatter);
 
 $logger = new Zend_Log();
-$logger->addWriter($writer);
+$logger-&gt;addWriter($writer);
 
-$logger->info('informational message');
-]]></programlisting>
+$logger-&gt;info('informational message');
+</programlisting>
 
         <para>
             The code above outputs the following <acronym>XML</acronym> (space added for clarity):
         </para>
 
-        <programlisting language="xml"><![CDATA[
-<logEntry>
-  <timestamp>2007-04-06T07:24:37-07:00</timestamp>
-  <message>informational message</message>
-  <priority>6</priority>
-  <priorityName>INFO</priorityName>
-</logEntry>
-]]></programlisting>
+        <programlisting language="xml">
+&lt;logEntry&gt;
+  &lt;timestamp&gt;2007-04-06T07:24:37-07:00&lt;/timestamp&gt;
+  &lt;message&gt;informational message&lt;/message&gt;
+  &lt;priority&gt;6&lt;/priority&gt;
+  &lt;priorityName&gt;INFO&lt;/priorityName&gt;
+&lt;/logEntry&gt;
+</programlisting>
 
         <para>
             It's possible to customize the root element as well as specify a mapping
@@ -98,19 +99,19 @@ $logger->info('informational message');
             the element mapping as the second parameter:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $writer = new Zend_Log_Writer_Stream('php://output');
 $formatter = new Zend_Log_Formatter_Xml('log',
-                                        array('msg' => 'message',
-                                              'level' => 'priorityName')
+                                        array('msg' =&gt; 'message',
+                                              'level' =&gt; 'priorityName')
                                        );
-$writer->setFormatter($formatter);
+$writer-&gt;setFormatter($formatter);
 
 $logger = new Zend_Log();
-$logger->addWriter($writer);
+$logger-&gt;addWriter($writer);
 
-$logger->info('informational message');
-]]></programlisting>
+$logger-&gt;info('informational message');
+</programlisting>
 
         <para>
             The code above changes the root element from its default of
@@ -119,11 +120,11 @@ $logger->info('informational message');
             results in the following output:
         </para>
 
-        <programlisting language="xml"><![CDATA[
-<log>
-  <msg>informational message</msg>
-  <level>INFO</level>
-</log>
-]]></programlisting>
-    </sect2>
-</sect1>
+        <programlisting language="xml">
+&lt;log&gt;
+  &lt;msg&gt;informational message&lt;/msg&gt;
+  &lt;level&gt;INFO&lt;/level&gt;
+&lt;/log&gt;
+</programlisting>
+    </section>
+</section>

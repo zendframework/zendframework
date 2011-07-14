@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.modules">
-    <title>Zend_Application_Resource_Modules</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.modules"><info><title>Zend_Application_Resource_Modules</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Modules</classname> is used to initialize
@@ -23,41 +24,40 @@
         configuration, this looks like:
     </para>
 
-    <programlisting language="ini"><![CDATA[
+    <programlisting language="ini">
 resources.modules[] =
-]]></programlisting>
+</programlisting>
 
     <para>
         In <acronym>XML</acronym> style configuration, this looks like:
     </para>
 
-    <programlisting language="xml"><![CDATA[
-<resources>
-    <modules>
-        <!-- Placeholder to ensure an array is created -->
-        <placeholder />
-    </modules>
-</resources>
-]]></programlisting>
+    <programlisting language="xml">
+&lt;resources&gt;
+    &lt;modules&gt;
+        &lt;!-- Placeholder to ensure an array is created --&gt;
+        &lt;placeholder /&gt;
+    &lt;/modules&gt;
+&lt;/resources&gt;
+</programlisting>
 
     <para>
         Using a standard <acronym>PHP</acronym> array, simply create it as an empty array:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $options = array(
-    'resources' => array(
-        'modules' => array(),
+    'resources' =&gt; array(
+        'modules' =&gt; array(),
     ),
 );
-]]></programlisting>
+</programlisting>
 
-    <note>
-        <title>Front Controller Resource Dependency</title>
+    <note><info><title>Front Controller Resource Dependency</title></info>
+        
 
         <para>
-            The Modules resource has a dependency on the <link
-                linkend="zend.application.available-resources.frontcontroller">Front
+            The Modules resource has a dependency on the <link linkend="zend.application.available-resources.frontcontroller">Front
             Controller resource</link>. You can, of course, provide your own
             replacement for that resource via a custom Front Controller resource
             class or a class initializer method -- so long as the resource
@@ -66,8 +66,8 @@ $options = array(
         </para>
     </note>
 
-    <example id="zend.application.available-resources.modules.configExample">
-        <title>Configuring Modules</title>
+    <example xml:id="zend.application.available-resources.modules.configExample"><info><title>Configuring Modules</title></info>
+        
 
         <para>
             You can specify module-specific configuration using the module name
@@ -80,40 +80,40 @@ $options = array(
             configuration of resources in that module.
         </para>
 
-        <programlisting language="ini"><![CDATA[
+        <programlisting language="ini">
 [production]
 news.resources.db.adapter = "pdo_mysql"
 news.resources.db.params.host = "localhost"
 news.resources.db.params.username = "webuser"
 news.resources.db.params.password = "XXXXXXX"
 news.resources.db.params.dbname = "news"
-]]></programlisting>
+</programlisting>
 
-        <programlisting language="xml"><![CDATA[
-<?xml version="1.0"?>
-<config>
-    <production>
-        <news>
-            <resources>
-                <db>
-                    <adapter>pdo_mysql</adapter>
-                    <params>
-                        <host>localhost</host>
-                        <username>webuser</username>
-                        <password>XXXXXXX</password>
-                        <dbname>news</dbname>
-                    </params>
-                    <isDefaultAdapter>true</isDefaultAdapter>
-                </db>
-            </resources>
-        </news>
-    </production>
-</config>
-]]></programlisting>
+        <programlisting language="xml">
+&lt;?xml version="1.0"?&gt;
+&lt;config&gt;
+    &lt;production&gt;
+        &lt;news&gt;
+            &lt;resources&gt;
+                &lt;db&gt;
+                    &lt;adapter&gt;pdo_mysql&lt;/adapter&gt;
+                    &lt;params&gt;
+                        &lt;host&gt;localhost&lt;/host&gt;
+                        &lt;username&gt;webuser&lt;/username&gt;
+                        &lt;password&gt;XXXXXXX&lt;/password&gt;
+                        &lt;dbname&gt;news&lt;/dbname&gt;
+                    &lt;/params&gt;
+                    &lt;isDefaultAdapter&gt;true&lt;/isDefaultAdapter&gt;
+                &lt;/db&gt;
+            &lt;/resources&gt;
+        &lt;/news&gt;
+    &lt;/production&gt;
+&lt;/config&gt;
+</programlisting>
     </example>
 
-    <example id="zend.application.available-resources.modules.retrieveBootstrapExample">
-        <title>Retrieving a specific module bootstrap</title>
+    <example xml:id="zend.application.available-resources.modules.retrieveBootstrapExample"><info><title>Retrieving a specific module bootstrap</title></info>
+        
 
         <para>
             On occasion, you may need to retrieve the bootstrap object for a
@@ -123,10 +123,10 @@ news.resources.db.params.dbname = "news"
             method.
         </para>
 
-        <programlisting language="php"><![CDATA[
-$resource = $bootstrap->getPluginResource('modules');
-$moduleBootstraps = $resource->getExecutedBootstraps();
+        <programlisting language="php">
+$resource = $bootstrap-&gt;getPluginResource('modules');
+$moduleBootstraps = $resource-&gt;getExecutedBootstraps();
 $newsBootstrap = $moduleBootstraps['news'];
-]]></programlisting>
+</programlisting>
     </example>
-</sect2>
+</section>

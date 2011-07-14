@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.text.table.introduction">
-    <title>Zend_Text_Table</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.text.table.introduction"><info><title>Zend_Text_Table</title></info>
+    
 
     <para>
         <classname>Zend_Text_Table</classname> is a component to create text based tables
@@ -12,8 +13,8 @@
         align as well.
     </para>
 
-    <note>
-        <title>Encoding</title>
+    <note><info><title>Encoding</title></info>
+        
 
         <para>
             <classname>Zend_Text_Table</classname> expects your strings to be UTF-8 encoded
@@ -146,42 +147,39 @@
         <command>$tableString = (string) $table</command>.
     </para>
 
-    <example id="zend.text.table.example.using">
-        <title>Using Zend_Text_Table</title>
+    <example xml:id="zend.text.table.example.using"><info><title>Using Zend_Text_Table</title></info>
+        
 
         <para>
             This example illustrates the basic use of <classname>Zend_Text_Table</classname>
             to create a simple table:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$table = new Zend_Text_Table(array('columnWidths' => array(10, 20)));
+        <programlisting language="php">
+$table = new Zend_Text_Table(array('columnWidths' =&gt; array(10, 20)));
 
 // Either simple
-$table->appendRow(array('Zend', 'Framework'));
+$table-&gt;appendRow(array('Zend', 'Framework'));
 
 // Or verbose
 $row = new Zend_Text_Table_Row();
 
-$row->appendColumn(new Zend_Text_Table_Column('Zend'));
-$row->appendColumn(new Zend_Text_Table_Column('Framework'));
+$row-&gt;appendColumn(new Zend_Text_Table_Column('Zend'));
+$row-&gt;appendColumn(new Zend_Text_Table_Column('Framework'));
 
-$table->appendRow($row);
+$table-&gt;appendRow($row);
 
 echo $table;
-]]></programlisting>
+</programlisting>
 
         <para>
             This will result in the following output:
         </para>
 
-        <programlisting language="text"><![CDATA[
+        <programlisting language="text">
 ┌──────────┬────────────────────┐
 │Zend      │Framework           │
 └──────────┴────────────────────┘
-]]></programlisting>
+</programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

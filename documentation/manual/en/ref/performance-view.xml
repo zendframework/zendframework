@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="performance.view">
-    <title>View Rendering</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.view"><info><title>View Rendering</title></info>
+    
 
     <para>
         When using Zend Framework's <acronym>MVC</acronym> layer, chances are you will be using
@@ -15,8 +16,8 @@
         cost.
     </para>
 
-    <sect2 id="performance.view.pluginloader">
-        <title>How can I speed up resolution of view helpers?</title>
+    <section xml:id="performance.view.pluginloader"><info><title>How can I speed up resolution of view helpers?</title></info>
+        
 
         <para>
             Most <classname>Zend_View</classname> "methods" are actually provided via
@@ -30,8 +31,7 @@
         </para>
 
         <para>
-            Internally, <classname>Zend_View</classname> uses the <link
-                linkend="zend.loader.pluginloader">PluginLoader</link> to look
+            Internally, <classname>Zend_View</classname> uses the <link linkend="zend.loader.pluginloader">PluginLoader</link> to look
             up helper classes. This means that for each helper you call,
             <classname>Zend_View</classname> needs to pass the helper name to the
             PluginLoader, which then needs to determine the class name, load the
@@ -45,23 +45,21 @@
             The question, then, is: how can you speed up helper resolution?
         </para>
 
-        <sect3 id="performance.view.pluginloader.cache">
-            <title>Use the PluginLoader include file cache</title>
+        <section xml:id="performance.view.pluginloader.cache"><info><title>Use the PluginLoader include file cache</title></info>
+            
 
             <para>
-                The simplest, cheapest solution is the same as for <link
-                    linkend="performance.classloading.pluginloader">general
-                    PluginLoader performance</link>: <link
-                    linkend="zend.loader.pluginloader.performance.example">use
+                The simplest, cheapest solution is the same as for <link linkend="performance.classloading.pluginloader">general
+                    PluginLoader performance</link>: <link linkend="zend.loader.pluginloader.performance.example">use
                     the PluginLoader include file cache</link>. Anecdotal
                 evidence has shown this technique to provide a 25-30%
                 performance gain on systems without an opcode cache, and a
                 40-65% gain on systems with an opcode cache.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="performance.view.pluginloader.extend">
-            <title>Extend Zend_View to provide often used helper methods</title>
+        <section xml:id="performance.view.pluginloader.extend"><info><title>Extend Zend_View to provide often used helper methods</title></info>
+            
 
             <para>
                 Another solution for those seeking to tune performance even
@@ -72,7 +70,7 @@
                 into the method.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 class My_View extends Zend_View
 {
     /**
@@ -94,12 +92,12 @@ class My_View extends Zend_View
     public function url(array $urlOptions = array(), $name = null,
         $reset = false, $encode = true
     ) {
-        if (!array_key_exists('url', $this->_localHelperObjects)) {
-            $this->_localHelperObjects['url'] = new Zend_View_Helper_Url();
-            $this->_localHelperObjects['url']->setView($this);
+        if (!array_key_exists('url', $this-&gt;_localHelperObjects)) {
+            $this-&gt;_localHelperObjects['url'] = new Zend_View_Helper_Url();
+            $this-&gt;_localHelperObjects['url']-&gt;setView($this);
         }
-        $helper = $this->_localHelperObjects['url'];
-        return $helper->url($urlOptions, $name, $reset, $encode);
+        $helper = $this-&gt;_localHelperObjects['url'];
+        return $helper-&gt;url($urlOptions, $name, $reset, $encode);
     }
 
     /**
@@ -112,10 +110,10 @@ class My_View extends Zend_View
      */
     public function message($string)
     {
-        return "<h1>" . $this->escape($message) . "</h1>\n";
+        return "&lt;h1&gt;" . $this-&gt;escape($message) . "&lt;/h1&gt;\n";
     }
 }
-]]></programlisting>
+</programlisting>
 
             <para>
                 Either way, this technique will substantially reduce the
@@ -123,11 +121,11 @@ class My_View extends Zend_View
                 PluginLoader entirely, and either benefiting from autoloading or
                 bypassing it altogether.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="performance.view.partial">
-        <title>How can I speed up view partials?</title>
+    <section xml:id="performance.view.partial"><info><title>How can I speed up view partials?</title></info>
+        
 
         <para>
             Those who use partials heavily and who profile their applications
@@ -136,8 +134,8 @@ class My_View extends Zend_View
             object. Is it possible to speed this up?
         </para>
 
-        <sect3 id="performance.view.partial.render">
-            <title>Use partial() only when really necessary</title>
+        <section xml:id="performance.view.partial.render"><info><title>Use partial() only when really necessary</title></info>
+            
 
             <para>
                 The <methodname>partial()</methodname> view helper accepts three arguments:
@@ -186,11 +184,11 @@ class My_View extends Zend_View
                 <classname>Zend_View</classname>'s built-in <methodname>render()</methodname>
                 method to render the view script.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="performance.view.action">
-        <title>How can I speed up calls to the action() view helper?</title>
+    <section xml:id="performance.view.action"><info><title>How can I speed up calls to the action() view helper?</title></info>
+        
 
         <para>
             Version 1.5.0 introduced the <methodname>action()</methodname> view helper,
@@ -207,13 +205,12 @@ class My_View extends Zend_View
             How can you speed it up?
         </para>
 
-        <sect3 id="performance.view.action.actionstack">
-            <title>Use the ActionStack when possible</title>
+        <section xml:id="performance.view.action.actionstack"><info><title>Use the ActionStack when possible</title></info>
+            
 
             <para>
                 Introduced at the same time as the <methodname>action()</methodname> view
-                helper, the <link
-                    linkend="zend.controller.actionhelpers.actionstack">ActionStack</link>
+                helper, the <link linkend="zend.controller.actionhelpers.actionstack">ActionStack</link>
                 consists of an action helper and a front controller plugin.
                 Together, they allow you to push additional actions to invoke
                 during the dispatch cycle onto a stack. If you are calling
@@ -224,7 +221,7 @@ class My_View extends Zend_View
                 add a login form box to each page:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 class LoginPlugin extends Zend_Controller_Plugin_Abstract
 {
     protected $_stack;
@@ -232,30 +229,30 @@ class LoginPlugin extends Zend_Controller_Plugin_Abstract
     public function dispatchLoopStartup(
         Zend_Controller_Request_Abstract $request
     ) {
-        $stack = $this->getStack();
+        $stack = $this-&gt;getStack();
         $loginRequest = new Zend_Controller_Request_Simple();
-        $loginRequest->setControllerName('user')
-                     ->setActionName('index')
-                     ->setParam('responseSegment', 'login');
-        $stack->pushStack($loginRequest);
+        $loginRequest-&gt;setControllerName('user')
+                     -&gt;setActionName('index')
+                     -&gt;setParam('responseSegment', 'login');
+        $stack-&gt;pushStack($loginRequest);
     }
 
     public function getStack()
     {
-        if (null === $this->_stack) {
+        if (null === $this-&gt;_stack) {
             $front = Zend_Controller_Front::getInstance();
-            if (!$front->hasPlugin('Zend_Controller_Plugin_ActionStack')) {
+            if (!$front-&gt;hasPlugin('Zend_Controller_Plugin_ActionStack')) {
                 $stack = new Zend_Controller_Plugin_ActionStack();
-                $front->registerPlugin($stack);
+                $front-&gt;registerPlugin($stack);
             } else {
-                $stack = $front->getPlugin('ActionStack')
+                $stack = $front-&gt;getPlugin('ActionStack')
             }
-            $this->_stack = $stack;
+            $this-&gt;_stack = $stack;
         }
-        return $this->_stack;
+        return $this-&gt;_stack;
     }
 }
-]]></programlisting>
+</programlisting>
 
             <para>
                 The <methodname>UserController::indexAction()</methodname> method might then
@@ -264,9 +261,9 @@ class LoginPlugin extends Zend_Controller_Plugin_Abstract
                 then simply render that response segment:
             </para>
 
-            <programlisting language="php"><![CDATA[
-<?php $this->layout()->login ?>
-]]></programlisting>
+            <programlisting language="php">
+&lt;?php $this-&gt;layout()-&gt;login ?&gt;
+</programlisting>
 
             <para>
                 While the ActionStack still requires a dispatch cycle, this is
@@ -277,10 +274,10 @@ class LoginPlugin extends Zend_Controller_Plugin_Abstract
                 front controller plugins for handling <acronym>ACL</acronym>'s to particular
                 actions.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="performance.view.action.model">
-            <title>Favor helpers that query the model over action()</title>
+        <section xml:id="performance.view.action.model"><info><title>Favor helpers that query the model over action()</title></info>
+            
 
             <para>
                 In most cases, using <methodname>action()</methodname> is simply overkill.
@@ -296,77 +293,74 @@ class LoginPlugin extends Zend_Controller_Plugin_Abstract
                 script:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 class BugController extends Zend_Controller_Action
 {
     public function listAction()
     {
         $model = new Bug();
-        $this->view->bugs = $model->fetchActive();
+        $this-&gt;view-&gt;bugs = $model-&gt;fetchActive();
     }
 }
 
 // bug/list.phtml:
-echo "<ul>\n";
-foreach ($this->bugs as $bug) {
-    printf("<li><b>%s</b>: %s</li>\n",
-        $this->escape($bug->id),
-        $this->escape($bug->summary)
+echo "&lt;ul&gt;\n";
+foreach ($this-&gt;bugs as $bug) {
+    printf("&lt;li&gt;&lt;b&gt;%s&lt;/b&gt;: %s&lt;/li&gt;\n",
+        $this-&gt;escape($bug-&gt;id),
+        $this-&gt;escape($bug-&gt;summary)
     );
 }
-echo "</ul>\n";
-]]></programlisting>
+echo "&lt;/ul&gt;\n";
+</programlisting>
 
             <para>
                 Using <methodname>action()</methodname>, you would then invoke it with the
                 following:
             </para>
 
-            <programlisting language="php"><![CDATA[
-<?php $this->action('list', 'bug') ?>
-]]></programlisting>
+            <programlisting language="php">
+&lt;?php $this-&gt;action('list', 'bug') ?&gt;
+</programlisting>
 
             <para>
                 This could be refactored to a view helper that looks like the
                 following:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 class My_View_Helper_BugList extends Zend_View_Helper_Abstract
 {
     public function bugList()
     {
         $model = new Bug();
-        $html  = "<ul>\n";
-        foreach ($model->fetchActive() as $bug) {
+        $html  = "&lt;ul&gt;\n";
+        foreach ($model-&gt;fetchActive() as $bug) {
             $html .= sprintf(
-                "<li><b>%s</b>: %s</li>\n",
-                $this->view->escape($bug->id),
-                $this->view->escape($bug->summary)
+                "&lt;li&gt;&lt;b&gt;%s&lt;/b&gt;: %s&lt;/li&gt;\n",
+                $this-&gt;view-&gt;escape($bug-&gt;id),
+                $this-&gt;view-&gt;escape($bug-&gt;summary)
             );
         }
-        $html .= "</ul>\n";
+        $html .= "&lt;/ul&gt;\n";
         return $html;
     }
 }
-]]></programlisting>
+</programlisting>
 
             <para>
                 You would then invoke the helper as follows:
             </para>
 
-            <programlisting language="php"><![CDATA[
-<?php $this->bugList() ?>
-]]></programlisting>
+            <programlisting language="php">
+&lt;?php $this-&gt;bugList() ?&gt;
+</programlisting>
 
             <para>
                 This has two benefits: it no longer incurs the overhead of the
                 <methodname>action()</methodname> view helper, and also presents a more
                 semantically understandable <acronym>API</acronym>.
             </para>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

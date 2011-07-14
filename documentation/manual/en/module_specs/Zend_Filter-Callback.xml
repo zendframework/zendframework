@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.callback">
-    <title>Callback</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.callback"><info><title>Callback</title></info>
+    
 
     <para>
         This filter allows you to use own methods in conjunction with
@@ -9,8 +10,8 @@
         have a method which does the job.
     </para>
 
-    <sect3 id="zend.filter.set.callback.options">
-        <title>Supported options for Zend_Filter_Callback</title>
+    <section xml:id="zend.filter.set.callback.options"><info><title>Supported options for Zend_Filter_Callback</title></info>
+        
 
         <para>
             The following options are supported for <classname>Zend_Filter_Callback</classname>:
@@ -31,22 +32,22 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.callback.basic">
-        <title>Basic usage</title>
+    <section xml:id="zend.filter.set.callback.basic"><info><title>Basic usage</title></info>
+        
 
         <para>
-            The usage of this filter is quite simple. Let&apos;s expect we want to create a filter which
+            The usage of this filter is quite simple. Let's expect we want to create a filter which
             reverses a string.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $filter = new Zend_Filter_Callback('strrev');
 
-print $filter->filter('Hello!');
+print $filter-&gt;filter('Hello!');
 // returns "!olleH"
-]]></programlisting>
+</programlisting>
 
         <para>
             As you can see it's really simple to use a callback to define a own filter. It is also
@@ -54,7 +55,7 @@ print $filter->filter('Hello!');
             callback.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Our classdefinition
 class MyClass
 {
@@ -63,26 +64,26 @@ class MyClass
 
 // The filter definition
 $filter = new Zend_Filter_Callback(array('MyClass', 'Reverse'));
-print $filter->filter('Hello!');
-]]></programlisting>
+print $filter-&gt;filter('Hello!');
+</programlisting>
 
         <para>
             To get the actual set callback use <methodname>getCallback()</methodname> and to set
             another callback use <methodname>setCallback()</methodname>.
         </para>
 
-        <note>
-            <title>Possible exceptions</title>
+        <note><info><title>Possible exceptions</title></info>
+            
 
             <para>
                 You should note that defining a callback method which can not be called will raise
                 an exception.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.callback.parameters">
-        <title>Default parameters within a callback</title>
+    <section xml:id="zend.filter.set.callback.parameters"><info><title>Default parameters within a callback</title></info>
+        
 
         <para>
             It is also possible to define default parameters, which are given to the called method
@@ -90,22 +91,22 @@ print $filter->filter('Hello!');
             which will be filtered.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $filter = new Zend_Filter_Callback(
     array(
-        'callback' => 'MyMethod',
-        'options'  => array('key' => 'param1', 'key2' => 'param2')
+        'callback' =&gt; 'MyMethod',
+        'options'  =&gt; array('key' =&gt; 'param1', 'key2' =&gt; 'param2')
     )
 );
-$filter->filter(array('value' => 'Hello'));
-]]></programlisting>
+$filter-&gt;filter(array('value' =&gt; 'Hello'));
+</programlisting>
 
         <para>
             When you would call the above method definition manually it would look like this:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $value = MyMethod('Hello', 'param1', 'param2');
-]]></programlisting>
-    </sect3>
-</sect2>
+</programlisting>
+    </section>
+</section>

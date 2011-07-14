@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.cachemanager">
-    <title>Zend_Application_Resource_Cachemanager</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.cachemanager"><info><title>Zend_Application_Resource_Cachemanager</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Cachemanager</classname> may be
@@ -15,8 +16,8 @@
         to option templates used to instantiate a cache object on request.
     </para>
 
-    <example id="zend.application.available-resources.cachemanager.configExample">
-        <title>Sample Cachemanager resource configuration</title>
+    <example xml:id="zend.application.available-resources.cachemanager.configExample"><info><title>Sample Cachemanager resource configuration</title></info>
+        
 
         <para>
             Below is a sample <acronym>INI</acronym> file showing how
@@ -27,7 +28,7 @@
             typical <classname>Zend_Cache</classname> option.
         </para>
 
-        <programlisting language="ini"><![CDATA[
+        <programlisting language="ini">
 resources.cachemanager.database.frontend.name = Core
 resources.cachemanager.database.frontend.customFrontendNaming = false
 resources.cachemanager.database.frontend.options.lifetime = 7200
@@ -36,7 +37,7 @@ resources.cachemanager.database.backend.name = File
 resources.cachemanager.database.backend.customBackendNaming = false
 resources.cachemanager.database.backend.options.cache_dir = "/path/to/cache"
 resources.cachemanager.database.frontendBackendAutoload = false
-]]></programlisting>
+</programlisting>
 
         <para>
             Actually retrieving this cache from the Cache Manager is as simple as
@@ -50,13 +51,13 @@ resources.cachemanager.database.frontendBackendAutoload = false
             of <classname>Zend_Cache_Manager</classname>.
         </para>
 
-        <programlisting language="php"><![CDATA[
-$manager = $this->getFrontController()
-            ->getParam('bootstrap')
-            ->getResource('cachemanager')
-            ->getCacheManager();
-$dbCache = $manager->getCache('database');
-]]></programlisting>
+        <programlisting language="php">
+$manager = $this-&gt;getFrontController()
+            -&gt;getParam('bootstrap')
+            -&gt;getResource('cachemanager')
+            -&gt;getCacheManager();
+$dbCache = $manager-&gt;getCache('database');
+</programlisting>
 
         <para>
             See <methodname>Zend_Cache::factory()</methodname> method to get a
@@ -64,4 +65,4 @@ $dbCache = $manager->getCache('database');
             cache via a configuration file such as out example <acronym>INI</acronym> file above.
         </para>
     </example>
-</sect2>
+</section>

@@ -1,15 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.alnum">
-    <title>Alnum</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.alnum"><info><title>Alnum</title></info>
+    
 
     <para>
         <classname>Zend_Filter_Alnum</classname> is a filter which returns only alphabetic
         characters and digits. All other characters are supressed.
     </para>
 
-    <sect3 id="zend.filter.set.alnum.options">
-        <title>Supported options for Zend_Filter_Alnum</title>
+    <section xml:id="zend.filter.set.alnum.options"><info><title>Supported options for Zend_Filter_Alnum</title></info>
+        
 
         <para>
             The following options are supported for <classname>Zend_Filter_Alnum</classname>:
@@ -24,20 +25,20 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.alnum.basic">
-        <title>Basic usage</title>
+    <section xml:id="zend.filter.set.alnum.basic"><info><title>Basic usage</title></info>
+        
 
         <para>
             See the following example for the default behaviour of this filter.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $filter = new Zend_Filter_Alnum();
-$return = $filter->filter('This is (my) content: 123');
+$return = $filter-&gt;filter('This is (my) content: 123');
 // returns 'Thisismycontent123'
-]]></programlisting>
+</programlisting>
 
         <para>
             The above example returns 'Thisismycontent123'. As you see all whitespaces and also the
@@ -52,21 +53,21 @@ $return = $filter->filter('This is (my) content: 123');
                 itself is detected by using <classname>Zend_Locale</classname>.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.alnum.whitespace">
-        <title>Allow whitespaces</title>
+    <section xml:id="zend.filter.set.alnum.whitespace"><info><title>Allow whitespaces</title></info>
+        
 
         <para>
             <classname>Zend_Filter_Alnum</classname> can also allow whitespaces. This can be usefull
             when you want to strip special chars from a text. See the following example:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$filter = new Zend_Filter_Alnum(array('allowwhitespace' => true));
-$return = $filter->filter('This is (my) content: 123');
+        <programlisting language="php">
+$filter = new Zend_Filter_Alnum(array('allowwhitespace' =&gt; true));
+$return = $filter-&gt;filter('This is (my) content: 123');
 // returns 'This is my content 123'
-]]></programlisting>
+</programlisting>
 
         <para>
             The above example returns 'This is my content 123'. As you see only the brackets are
@@ -78,8 +79,5 @@ $return = $filter->filter('This is (my) content: 123');
             <methodname>setAllowWhiteSpace()</methodname> and
             <methodname>getAllowWhiteSpace()</methodname>.
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.currency.number">
-    <title>How does the currency look like?</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.number"><info><title>How does the currency look like?</title></info>
+    
 
     <para>
         How the value of a currency will be rendered depends mainly on the used locale. There
@@ -16,24 +17,24 @@
         the following example:
     </para>
 
-    <example id="zend.currency.number.example-1">
-        <title>Using a custom script</title>
+    <example xml:id="zend.currency.number.example-1"><info><title>Using a custom script</title></info>
+        
 
         <para>
             Let's expect that we are again using our "Dollar" currency. But now we want to
             render our currency by using the Arabic script.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $currency = new Zend_Currency(
     array(
-        'value'  => 1000,
-        'script' => 'Arab',
+        'value'  =&gt; 1000,
+        'script' =&gt; 'Arab',
     )
 );
 
 print $currency; // Could return '$ ١٬٠٠٠٫٠٠'
-]]></programlisting>
+</programlisting>
     </example>
 
     <para>
@@ -48,17 +49,17 @@ print $currency; // Could return '$ ١٬٠٠٠٫٠٠'
         thousands, which sign will be used as decimal point, and also the used precision.
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $currency = new Zend_Currency(
     array(
-        'value'    => 1000,
-        'currency' => 'USD'
-        'format'   => 'de',
+        'value'    =&gt; 1000,
+        'currency' =&gt; 'USD'
+        'format'   =&gt; 'de',
     )
 );
 
 print $currency; // Could return '$ 1.000'
-]]></programlisting>
+</programlisting>
 
     <para>
         There are two ways to define the format which will be used. You can either give a
@@ -71,26 +72,26 @@ print $currency; // Could return '$ 1.000'
         point. Within English this is reversed.
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $currency_1 = new Zend_Currency(
     array(
-        'value'    => 1000,
-        'currency' => 'USD'
-        'format'   => 'de',
+        'value'    =&gt; 1000,
+        'currency' =&gt; 'USD'
+        'format'   =&gt; 'de',
     )
 );
 
 $currency_2 = new Zend_Currency(
     array(
-        'value'    => 1000,
-        'currency' => 'USD'
-        'format'   => 'en',
+        'value'    =&gt; 1000,
+        'currency' =&gt; 'USD'
+        'format'   =&gt; 'en',
     )
 );
 
 print $currency_1; // Could return '$ 1.000'
 print $currency_2; // Could return '$ 1,000'
-]]></programlisting>
+</programlisting>
 
     <para>
         When you define it manually then you must conform the format as described in
@@ -98,19 +99,19 @@ print $currency_2; // Could return '$ 1,000'
             localizing</link>. See the following:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $currency = new Zend_Currency(
     array(
-        'value'    => 1000,
-        'currency' => 'USD'
-        'format'   => '#0',
+        'value'    =&gt; 1000,
+        'currency' =&gt; 'USD'
+        'format'   =&gt; '#0',
     )
 );
 
 print $currency; // Could return '$ 1000'
-]]></programlisting>
+</programlisting>
 
     <para>
         In the above snippet we deleted the separator and also the precision.
     </para>
-</sect1>
+</section>

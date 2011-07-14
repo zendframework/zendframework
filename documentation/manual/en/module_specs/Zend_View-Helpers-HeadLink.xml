@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.headlink">
-    <title>HeadLink Helper</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headlink"><info><title>HeadLink Helper</title></info>
+    
 
     <para>
         The <acronym>HTML</acronym> <emphasis>&lt;link&gt;</emphasis> element is increasingly used
@@ -96,8 +97,8 @@
             helper</link>.
     </para>
 
-    <example id="zend.view.helpers.initial.headlink.basicusage">
-        <title>HeadLink Helper Basic Usage</title>
+    <example xml:id="zend.view.helpers.initial.headlink.basicusage"><info><title>HeadLink Helper Basic Usage</title></info>
+        
 
         <para>
             You may specify a <emphasis>headLink</emphasis> at any time. Typically, you
@@ -107,22 +108,19 @@
             to output it.
         </para>
 
-        <programlisting language="php"><![CDATA[
-<?php // setting links in a view script:
-$this->headLink()->appendStylesheet('/styles/basic.css')
-                 ->headLink(array('rel' => 'favicon',
-                                  'href' => '/img/favicon.ico'),
+        <programlisting language="php">
+&lt;?php // setting links in a view script:
+$this-&gt;headLink()-&gt;appendStylesheet('/styles/basic.css')
+                 -&gt;headLink(array('rel' =&gt; 'favicon',
+                                  'href' =&gt; '/img/favicon.ico'),
                                   'PREPEND')
-                 ->prependStylesheet('/styles/moz.css',
+                 -&gt;prependStylesheet('/styles/moz.css',
                                      'screen',
                                      true,
-                                     array('id' => 'my_stylesheet'));
-?>
-<?php // rendering the links: ?>
-<?php echo $this->headLink() ?>
-]]></programlisting>
+                                     array('id' =&gt; 'my_stylesheet'));
+?&gt;
+&lt;?php // rendering the links: ?&gt;
+&lt;?php echo $this-&gt;headLink() ?&gt;
+</programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

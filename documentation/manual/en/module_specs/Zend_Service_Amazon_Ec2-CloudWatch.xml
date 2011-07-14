@@ -1,22 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.service.amazon.ec2.cloudwatch">
-    <title>Zend_Service_Amazon_Ec2: CloudWatch Monitoring</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.cloudwatch"><info><title>Zend_Service_Amazon_Ec2: CloudWatch Monitoring</title></info>
+    
 
     <para>
         Amazon CloudWatch is an easy-to-use web service that provides
         comprehensive monitoring for Amazon Elastic Compute Cloud (Amazon
         <acronym>EC2</acronym>) and Elastic Load Balancing. For more details information
-        check cout the <ulink
-            url="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/index.html?SvcIntro.html">
-            Amazon CloudWatch Developers Guide</ulink>
+        check cout the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/index.html?SvcIntro.html">
+            Amazon CloudWatch Developers Guide</link>
     </para>
 
-    <sect2 id="zend.service.amazon.ec2.cloudwatch.usage">
-        <title>CloudWatch Usage</title>
+    <section xml:id="zend.service.amazon.ec2.cloudwatch.usage"><info><title>CloudWatch Usage</title></info>
+        
 
-        <example id="zend.service.amazon.ec2.cloudwatch.usage.list">
-            <title>Listing Aviable Metrics</title>
+        <example xml:id="zend.service.amazon.ec2.cloudwatch.usage.list"><info><title>Listing Aviable Metrics</title></info>
+            
 
             <para>
                 <methodname>listMetrics()</methodname> returns a list of up to 500 valid metrics for
@@ -24,14 +24,14 @@
                 that can be used to query for the next set of results.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $ec2_ebs = new Zend_Service_Amazon_Ec2_CloudWatch('aws_key','aws_secret_key');
-$return = $ec2_ebs->listMetrics();
-]]></programlisting>
+$return = $ec2_ebs-&gt;listMetrics();
+</programlisting>
         </example>
 
-        <example id="zend.service.amazon.ec2.cloudwatch.usage.getmetricstatistics">
-            <title>Return Statistics for a given metric</title>
+        <example xml:id="zend.service.amazon.ec2.cloudwatch.usage.getmetricstatistics"><info><title>Return Statistics for a given metric</title></info>
+            
 
             <para>
                 <methodname>getMetricStatistics()</methodname> Returns data for one or more
@@ -69,9 +69,8 @@ $return = $ec2_ebs->listMetrics();
                         <acronym>CPU</acronym>Utilization, NetworkIn, NetworkOut, DiskWriteOps
                         DiskReadBytes, DiskReadOps, DiskWriteBytes. Valid Elastic
                         Load Balancing Metrics are Latency, RequestCount, HealthyHostCount
-                        UnHealthyHostCount. <ulink
-                            url="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/arch-AmazonCloudWatch-metricscollected.html">For
-                            more information click here</ulink>
+                        UnHealthyHostCount. <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/arch-AmazonCloudWatch-metricscollected.html">For
+                            more information click here</link>
                     </para>
                 </listitem>
 
@@ -81,9 +80,8 @@ $return = $ec2_ebs->listMetrics();
                         metric. Valid values are Average, Maximum, Minimum, Samples, Sum. You can
                         specify this as a string or as an array of values. If you don't specify one
                         it will default to Average instead of failing out. If you specify an
-                        incorrect option it will just skip it. <ulink
-                            url="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/arch-Amazon-CloudWatch-statistics.html">For
-                            more information click here</ulink>
+                        incorrect option it will just skip it. <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/arch-Amazon-CloudWatch-statistics.html">For
+                            more information click here</link>
                     </para>
                 </listitem>
 
@@ -132,12 +130,12 @@ $return = $ec2_ebs->listMetrics();
                 </listitem>
             </itemizedlist>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $ec2_ebs = new Zend_Service_Amazon_Ec2_CloudWatch('aws_key','aws_secret_key');
-$return = $ec2_ebs->getMetricStatistics(
-                                     array('MeasureName' => 'NetworkIn',
-                                           'Statistics' => array('Average')));
-]]></programlisting>
+$return = $ec2_ebs-&gt;getMetricStatistics(
+                                     array('MeasureName' =&gt; 'NetworkIn',
+                                           'Statistics' =&gt; array('Average')));
+</programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

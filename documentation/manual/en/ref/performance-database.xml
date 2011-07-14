@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="performance.database">
-    <title>Zend_Db Performance</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.database"><info><title>Zend_Db Performance</title></info>
+    
 
     <para>
         <classname>Zend_Db</classname> is a database abstraction layer, and is intended to
@@ -13,9 +14,9 @@
         performance overhead.
     </para>
 
-    <sect2 id="performance.database.tableMetadata">
-        <title>How can I reduce overhead introduced by Zend_Db_Table for
-            retrieving table metadata?</title>
+    <section xml:id="performance.database.tableMetadata"><info><title>How can I reduce overhead introduced by Zend_Db_Table for
+            retrieving table metadata?</title></info>
+        
 
         <para>
             In order to keep usage as simple as possible, and also to support
@@ -30,8 +31,8 @@
             Fortunately, there are techniques for improving the situation.
         </para>
 
-        <sect3 id="performance.database.tableMetadata.cache">
-            <title>Use the metadata cache</title>
+        <section xml:id="performance.database.tableMetadata.cache"><info><title>Use the metadata cache</title></info>
+            
 
             <para>
                 <classname>Zend_Db_Table</classname> can optionally utilize
@@ -44,26 +45,25 @@
                 The <link linkend="zend.db.table.metadata.caching"><classname>Zend_Db_Table
                 </classname> documentation includes information on metadata caching</link>.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="performance.database.tableMetadata.hardcoding">
-            <title>Hardcode your metadata in the table definition</title>
+        <section xml:id="performance.database.tableMetadata.hardcoding"><info><title>Hardcode your metadata in the table definition</title></info>
+            
 
             <para>
-                As of 1.7.0, <classname>Zend_Db_Table</classname> also provides <link
-                    linkend="zend.db.table.metadata.caching.hardcoding">support
+                As of 1.7.0, <classname>Zend_Db_Table</classname> also provides <link linkend="zend.db.table.metadata.caching.hardcoding">support
                 for hardcoding metadata in the table definition</link>. This is
                 an advanced use case, and should only be used when you know the
                 table schema is unlikely to change, or that you're able to keep
                 the definitions up-to-date.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="performance.database.select">
-        <title>
+    <section xml:id="performance.database.select"><info><title>
             SQL generated with Zend_Db_Select s not hitting my indexes; how can I make it better?
-        </title>
+        </title></info>
+        
 
         <para>
             <classname>Zend_Db_Select</classname> is relatively good at its job. However,
@@ -71,8 +71,8 @@
             sub-selects, it can often be fairly naive.
         </para>
 
-        <sect3 id="performance.database.select.writeyourown">
-            <title>Write your own tuned SQL</title>
+        <section xml:id="performance.database.select.writeyourown"><info><title>Write your own tuned SQL</title></info>
+            
 
             <para>
                 The only real answer is to write your own <acronym>SQL</acronym>;
@@ -95,17 +95,14 @@
                 inject the values into the <acronym>SQL</acronym>:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 // $adapter is the DB adapter. In Zend_Db_Table, retrieve
-// it using $this->getAdapter().
+// it using $this-&gt;getAdapter().
 $sql = vsprintf(
     self::SELECT_FOO,
     array_walk($values, array($adapter, 'quoteInto'))
 );
-]]></programlisting>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</programlisting>
+        </section>
+    </section>
+</section>

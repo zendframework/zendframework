@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.feed.modifying-feed">
-    <title>Modifying Feed and Entry structures</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.modifying-feed"><info><title>Modifying Feed and Entry structures</title></info>
+    
 
     <para>
         <classname>Zend_Feed</classname>'s natural syntax extends to constructing and modifying
@@ -9,18 +10,18 @@
         back into well-formed <acronym>XML</acronym> for saving to a file or sending to a server.
     </para>
 
-    <example id="zend.feed.modifying-feed.example.modifying">
-        <title>Modifying an Existing Feed Entry</title>
+    <example xml:id="zend.feed.modifying-feed.example.modifying"><info><title>Modifying an Existing Feed Entry</title></info>
+        
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
-$entry = $feed->current();
+$entry = $feed-&gt;current();
 
-$entry->title = 'This is a new title';
-$entry->author->email = 'my_email@example.com';
+$entry-&gt;title = 'This is a new title';
+$entry-&gt;author-&gt;email = 'my_email@example.com';
 
-echo $entry->saveXML();
-]]></programlisting>
+echo $entry-&gt;saveXML();
+</programlisting>
 
         <para>
             This will output a full (includes <command>&lt;?xml ... &gt;</command> prologue)
@@ -45,27 +46,24 @@ echo $entry->saveXML();
         go into the default namespace if you do not explicitly specify another namespace.
     </para>
 
-    <example id="zend.feed.modifying-feed.example.creating">
-        <title>Creating an Atom Entry with Elements of Custom Namespaces</title>
+    <example xml:id="zend.feed.modifying-feed.example.creating"><info><title>Creating an Atom Entry with Elements of Custom Namespaces</title></info>
+        
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $entry = new Zend_Feed_Entry_Atom();
 // id is always assigned by the server in Atom
-$entry->title = 'my custom entry';
-$entry->author->name = 'Example Author';
-$entry->author->email = 'me@example.com';
+$entry-&gt;title = 'my custom entry';
+$entry-&gt;author-&gt;name = 'Example Author';
+$entry-&gt;author-&gt;email = 'me@example.com';
 
 // Now do the custom part.
 Zend_Feed::registerNamespace('myns', 'http://www.example.com/myns/1.0');
 
-$entry->{'myns:myelement_one'} = 'my first custom value';
-$entry->{'myns:container_elt'}->part1 = 'first nested custom part';
-$entry->{'myns:container_elt'}->part2 = 'second nested custom part';
+$entry-&gt;{'myns:myelement_one'} = 'my first custom value';
+$entry-&gt;{'myns:container_elt'}-&gt;part1 = 'first nested custom part';
+$entry-&gt;{'myns:container_elt'}-&gt;part2 = 'second nested custom part';
 
-echo $entry->saveXML();
-]]></programlisting>
+echo $entry-&gt;saveXML();
+</programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

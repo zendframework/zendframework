@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.text.figlet">
-    <title>Zend_Text_Figlet</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.text.figlet"><info><title>Zend_Text_Figlet</title></info>
+    
 
     <para>
         <classname>Zend_Text_Figlet</classname> is a component which enables developers to
@@ -9,11 +10,11 @@
         represented as <acronym>ASCII</acronym> art. FIGlets use a special font format, called
         FLT (FigLet Font). By default, one standard font is shipped with
         <classname>Zend_Text_Figlet</classname>, but you can download additional fonts at
-        <ulink url="http://www.figlet.org/fontdb.cgi">http://www.figlet.org</ulink>.
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.figlet.org/fontdb.cgi">http://www.figlet.org</link>.
     </para>
 
-    <note>
-        <title>Compressed fonts</title>
+    <note><info><title>Compressed fonts</title></info>
+        
 
         <para>
             <classname>Zend_Text_Figlet</classname> supports gzipped fonts. This means that
@@ -24,8 +25,8 @@
         </para>
     </note>
 
-    <note>
-        <title>Encoding</title>
+    <note><info><title>Encoding</title></info>
+        
 
         <para>
             <classname>Zend_Text_Figlet</classname> expects your strings to be UTF-8 encoded
@@ -100,7 +101,7 @@
                     SM_SMUSH. A value of 0 doesn't disable the entire smushing,
                     but forces SM_KERN to be applied, while a value of -1 disables
                     it. An explanation of the different smush modes can be found
-                    <ulink url="http://www.jave.de/figlet/figfont.txt">here</ulink>.
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.jave.de/figlet/figfont.txt">here</link>.
                     By default the setting of the font file is used. The smush mode
                     option is normally used only by font designers testing the various
                     layoutmodes with a new font.
@@ -109,33 +110,30 @@
         </itemizedlist>
     </para>
 
-    <example id="zend.text.figlet.example.using">
-        <title>Using Zend_Text_Figlet</title>
+    <example xml:id="zend.text.figlet.example.using"><info><title>Using Zend_Text_Figlet</title></info>
+        
 
         <para>
             This example illustrates the basic use of <classname>Zend_Text_Figlet</classname>
             to create a simple FIGlet text:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $figlet = new Zend_Text_Figlet();
-echo $figlet->render('Zend');
-]]></programlisting>
+echo $figlet-&gt;render('Zend');
+</programlisting>
 
         <para>
             Assuming you are using a monospace font, this would look as follows:
         </para>
 
-        <programlisting language="text"><![CDATA[
+        <programlisting language="text">
   ______    ______    _  __   ______
  |__  //   |  ___||  | \| || |  __ \\
    / //    | ||__    |  ' || | |  \ ||
   / //__   | ||___   | .  || | |__/ ||
  /_____||  |_____||  |_|\_|| |_____//
  `-----`'  `-----`   `-` -`'  -----`
-]]></programlisting>
+</programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

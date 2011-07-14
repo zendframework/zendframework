@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.multiuser.authentication">
-    <title>Authenticating Users in Zend Framework</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="learning.multiuser.authentication.intro">
-        <title>Introduction to Authentication</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.multiuser.authentication"><info><title>Authenticating Users in Zend Framework</title></info>
+    
+
+    <section xml:id="learning.multiuser.authentication.intro"><info><title>Introduction to Authentication</title></info>
+        
 
         <para>
             Once a web application has been able to distinguish one user from another by
@@ -24,10 +25,10 @@
             information: fingerprint, eye retinal scan, passphrase, or any other obscure personal
             information.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.multiuser.authentication.basic-usage">
-        <title>Basic Usage of Zend_Auth</title>
+    <section xml:id="learning.multiuser.authentication.basic-usage"><info><title>Basic Usage of Zend_Auth</title></info>
+        
 
         <para>
             In the following example, we will be using <classname>Zend_Auth</classname> to
@@ -51,7 +52,7 @@
             Lets assume we have the following database table setup:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 CREATE TABLE users (
     id INTEGER  NOT NULL PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
@@ -59,15 +60,14 @@ CREATE TABLE users (
     password_salt VARCHAR(32) NULL,
     real_name VARCHAR(150) NULL
 )
-]]></programlisting>
+</programlisting>
 
         <para>
             The above demonstrates a user table that includes a username, password, and also a
             password salt column. This salt column is used as part of a technique called salting
             that would improve the security of your database of information against brute force
-            attacks targeting the algorithm of your password hashing. <ulink
-                url="http://en.wikipedia.org/wiki/Salting_%28cryptography%29">More
-                information</ulink> on salting.
+            attacks targeting the algorithm of your password hashing. <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Salting_%28cryptography%29">More
+                information</link> on salting.
         </para>
 
         <para>
@@ -75,35 +75,35 @@ CREATE TABLE users (
             the "login form". We will use <classname>Zend_Form</classname> to accomplish this.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // located at application/forms/Auth/Login.php
 
 class Default_Form_Auth_Login extends Zend_Form
 {
     public function init()
     {
-        $this->setMethod('post');
+        $this-&gt;setMethod('post');
 
-        $this->addElement(
+        $this-&gt;addElement(
             'text', 'username', array(
-                'label' => 'Username:',
-                'required' => true,
-                'filters'    => array('StringTrim'),
+                'label' =&gt; 'Username:',
+                'required' =&gt; true,
+                'filters'    =&gt; array('StringTrim'),
             ));
 
-        $this->addElement('password', 'password', array(
-            'label' => 'Password:',
-            'required' => true,
+        $this-&gt;addElement('password', 'password', array(
+            'label' =&gt; 'Password:',
+            'required' =&gt; true,
             ));
 
-        $this->addElement('submit', 'submit', array(
-            'ignore'   => true,
-            'label'    => 'Login',
+        $this-&gt;addElement('submit', 'submit', array(
+            'ignore'   =&gt; true,
+            'label'    =&gt; 'Login',
             ));
 
     }
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             With the above form, we can now go about creating our login action for
@@ -120,17 +120,17 @@ class Default_Form_Auth_Login extends Zend_Form
             with the form:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 class AuthController extends Zend_Controller_Action
 {
 
     public function loginAction()
     {
-        $db = $this->_getParam('db');
+        $db = $this-&gt;_getParam('db');
 
         $loginForm = new Default_Form_Auth_Login($_POST);
 
-        if ($loginForm->isValid()) {
+        if ($loginForm-&gt;isValid()) {
 
             $adapter = new Zend_Auth_Adapter_DbTable(
                 $db,
@@ -140,25 +140,25 @@ class AuthController extends Zend_Controller_Action
                 'MD5(CONCAT(?, password_salt))'
                 );
 
-            $adapter->setIdentity($loginForm->getValue('username'));
-            $adapter->setCredential($loginForm->getValue('password'));
+            $adapter-&gt;setIdentity($loginForm-&gt;getValue('username'));
+            $adapter-&gt;setCredential($loginForm-&gt;getValue('password'));
 
-            $result = $auth->authenticate($adapter);
+            $result = $auth-&gt;authenticate($adapter);
 
-            if ($result->isValid()) {
-                $this->_helper->FlashMessenger('Successful Login');
-                $this->redirect('/');
+            if ($result-&gt;isValid()) {
+                $this-&gt;_helper-&gt;FlashMessenger('Successful Login');
+                $this-&gt;redirect('/');
                 return;
             }
 
         }
 
-        $this->view->loginForm = $loginForm;
+        $this-&gt;view-&gt;loginForm = $loginForm;
 
     }
 
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             The corresponding view script is quite simple for this action. It will set the current
@@ -166,10 +166,10 @@ class AuthController extends Zend_Controller_Action
             is located at <filename>application/views/scripts/auth/login.phtml</filename>:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$this->form->setAction($this->url());
-echo $this->form;
-]]></programlisting>
+        <programlisting language="php">
+$this-&gt;form-&gt;setAction($this-&gt;url());
+echo $this-&gt;form;
+</programlisting>
 
         <para>
             There you have it. With these basics you can expand the general concepts to include
@@ -177,5 +177,5 @@ echo $this->form;
             <classname>Zend_Auth</classname> adapters, have a look in
             <link linkend="zend.auth">the reference guide</link>.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

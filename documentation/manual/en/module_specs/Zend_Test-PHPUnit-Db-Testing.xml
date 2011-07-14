@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.test.phpunit.db.testing">
-    <title>Usage, API and Extensions Points</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.db.testing"><info><title>Usage, API and Extensions Points</title></info>
+    
 
     <para>
         The Quickstart already gave a good introduction on how database testing can be done using
@@ -10,8 +11,8 @@
         with and how it works internally.
     </para>
 
-    <note>
-        <title>Some Remarks on Database Testing</title>
+    <note><info><title>Some Remarks on Database Testing</title></info>
+        
 
         <para>
             Just as the Controller TestCase is testing an application at an integration level, the
@@ -28,8 +29,8 @@
         </para>
     </note>
 
-    <sect3 id="zend.test.phpunit.db.testing.testcase">
-        <title>The Zend_Test_PHPUnit_DatabaseTestCase class</title>
+    <section xml:id="zend.test.phpunit.db.testing.testcase"><info><title>The Zend_Test_PHPUnit_DatabaseTestCase class</title></info>
+        
 
         <para>
             The <classname>Zend_Test_PHPUnit_DatabaseTestCase</classname> class derives from the
@@ -103,13 +104,12 @@
 
         <para>
             The next table lists only the new methods compared to the
-            <classname>PHPUnit_Extensions_Database_TestCase</classname>, whose <ulink
-                url="http://www.phpunit.de/manual/current/en/database.html">API is documented in
-            the PHPUnit Documentation</ulink>.
+            <classname>PHPUnit_Extensions_Database_TestCase</classname>, whose <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.phpunit.de/manual/current/en/database.html">API is documented in
+            the PHPUnit Documentation</link>.
         </para>
 
-        <table id="zend.test.phpunit.db.testing.testcase.api-methods">
-            <title>Zend_Test_PHPUnit_DatabaseTestCase API Methods</title>
+        <table xml:id="zend.test.phpunit.db.testing.testcase.api-methods"><info><title>Zend_Test_PHPUnit_DatabaseTestCase API Methods</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -187,10 +187,10 @@
                 </tbody>
             </tgroup>
         </table>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.test.phpunit.db.testing.controllerintegration">
-        <title>Integrating Database Testing with the ControllerTestCase</title>
+    <section xml:id="zend.test.phpunit.db.testing.controllerintegration"><info><title>Integrating Database Testing with the ControllerTestCase</title></info>
+        
 
         <para>
             Because <acronym>PHP</acronym> does not support multiple inheritance it is not possible
@@ -201,8 +201,8 @@
             also be accessed and used without the test case.
         </para>
 
-        <example id="zend.test.phpunit.db.testing.controllerintegration.example">
-            <title>Database integration example</title>
+        <example xml:id="zend.test.phpunit.db.testing.controllerintegration.example"><info><title>Database integration example</title></info>
+            
 
             <para>
                 This example extends the User Controller Test from the
@@ -210,13 +210,13 @@
                 a database setup.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     public function setUp()
     {
-        $this->setupDatabase();
-        $this->bootstrap = array($this, 'appBootstrap');
+        $this-&gt;setupDatabase();
+        $this-&gt;bootstrap = array($this, 'appBootstrap');
         parent::setUp();
     }
 
@@ -232,10 +232,10 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
                         dirname(__FILE__) . '/_files/initialUserFixture.xml'
                     );
 
-        $databaseTester->setupDatabase($databaseFixture);
+        $databaseTester-&gt;setupDatabase($databaseFixture);
     }
 }
-]]></programlisting>
+</programlisting>
 
             <para>
                 Now the Flat <acronym>XML</acronym> dataset "initialUserFixture.xml" is used to set
@@ -243,5 +243,5 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
                 works internally.
             </para>
         </example>
-    </sect3>
-</sect2>
+    </section>
+</section>

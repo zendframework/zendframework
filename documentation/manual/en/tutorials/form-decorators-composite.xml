@@ -1,34 +1,35 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.form.decorators.composite">
-    <title>Creating and Rendering Composite Elements</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.form.decorators.composite"><info><title>Creating and Rendering Composite Elements</title></info>
+    
 
     <para>
         In <link linkend="learning.form.decorators.individual">the last section</link>, we had an
         example showing a "date of birth element":
     </para>
 
-    <programlisting language="php"><![CDATA[
-<div class="element">
-    <?php echo $form->dateOfBirth->renderLabel() ?>
-    <?php echo $this->formText('dateOfBirth[day]', '', array(
-        'size' => 2, 'maxlength' => 2)) ?>
+    <programlisting language="php">
+&lt;div class="element"&gt;
+    &lt;?php echo $form-&gt;dateOfBirth-&gt;renderLabel() ?&gt;
+    &lt;?php echo $this-&gt;formText('dateOfBirth[day]', '', array(
+        'size' =&gt; 2, 'maxlength' =&gt; 2)) ?&gt;
     /
-    <?php echo $this->formText('dateOfBirth[month]', '', array(
-        'size' => 2, 'maxlength' => 2)) ?>
+    &lt;?php echo $this-&gt;formText('dateOfBirth[month]', '', array(
+        'size' =&gt; 2, 'maxlength' =&gt; 2)) ?&gt;
     /
-    <?php echo $this->formText('dateOfBirth[year]', '', array(
-        'size' => 4, 'maxlength' => 4)) ?>
-</div>
-]]></programlisting>
+    &lt;?php echo $this-&gt;formText('dateOfBirth[year]', '', array(
+        'size' =&gt; 4, 'maxlength' =&gt; 4)) ?&gt;
+&lt;/div&gt;
+</programlisting>
 
     <para>
         How might you represent this element as a <classname>Zend_Form_Element</classname>?
         How might you write a decorator to render it?
     </para>
 
-    <sect2 id="learning.form.decorators.composite.element">
-        <title>The Element</title>
+    <section xml:id="learning.form.decorators.composite.element"><info><title>The Element</title></info>
+        
 
         <para>
             The questions about how the element would work include:
@@ -102,7 +103,7 @@
             Here's what the class would look like:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 class My_Form_Element_Date extends Zend_Form_Element_Xhtml
 {
     protected $_dateFormat = '%year%-%month%-%day%';
@@ -112,57 +113,57 @@ class My_Form_Element_Date extends Zend_Form_Element_Xhtml
 
     public function setDay($value)
     {
-        $this->_day = (int) $value;
+        $this-&gt;_day = (int) $value;
         return $this;
     }
 
     public function getDay()
     {
-        return $this->_day;
+        return $this-&gt;_day;
     }
 
     public function setMonth($value)
     {
-        $this->_month = (int) $value;
+        $this-&gt;_month = (int) $value;
         return $this;
     }
 
     public function getMonth()
     {
-        return $this->_month;
+        return $this-&gt;_month;
     }
 
     public function setYear($value)
     {
-        $this->_year = (int) $value;
+        $this-&gt;_year = (int) $value;
         return $this;
     }
 
     public function getYear()
     {
-        return $this->_year;
+        return $this-&gt;_year;
     }
 
     public function setValue($value)
     {
         if (is_int($value)) {
-            $this->setDay(date('d', $value))
-                 ->setMonth(date('m', $value))
-                 ->setYear(date('Y', $value));
+            $this-&gt;setDay(date('d', $value))
+                 -&gt;setMonth(date('m', $value))
+                 -&gt;setYear(date('Y', $value));
         } elseif (is_string($value)) {
             $date = strtotime($value);
-            $this->setDay(date('d', $date))
-                 ->setMonth(date('m', $date))
-                 ->setYear(date('Y', $date));
+            $this-&gt;setDay(date('d', $date))
+                 -&gt;setMonth(date('m', $date))
+                 -&gt;setYear(date('Y', $date));
         } elseif (is_array($value)
-                  && (isset($value['day'])
-                      && isset($value['month'])
-                      && isset($value['year'])
+                  &amp;&amp; (isset($value['day'])
+                      &amp;&amp; isset($value['month'])
+                      &amp;&amp; isset($value['year'])
                   )
         ) {
-            $this->setDay($value['day'])
-                 ->setMonth($value['month'])
-                 ->setYear($value['year']);
+            $this-&gt;setDay($value['day'])
+                 -&gt;setMonth($value['month'])
+                 -&gt;setYear($value['year']);
         } else {
             throw new Exception('Invalid date value provided');
         }
@@ -174,12 +175,12 @@ class My_Form_Element_Date extends Zend_Form_Element_Xhtml
     {
         return str_replace(
             array('%year%', '%month%', '%day%'),
-            array($this->getYear(), $this->getMonth(), $this->getDay()),
-            $this->_dateFormat
+            array($this-&gt;getYear(), $this-&gt;getMonth(), $this-&gt;getDay()),
+            $this-&gt;_dateFormat
         );
     }
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             This class gives some nice flexibility -- we can set default values from our database,
@@ -188,10 +189,10 @@ class My_Form_Element_Date extends Zend_Form_Element_Xhtml
             have discrete accessors for each date segment, which we can now use in a decorator to
             create a composite element.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.form.decorators.composite.decorator">
-        <title>The Decorator</title>
+    <section xml:id="learning.form.decorators.composite.decorator"><info><title>The Decorator</title></info>
+        
 
         <para>
             Revisiting the example from the last section, let's assume that we want users to input
@@ -207,51 +208,51 @@ class My_Form_Element_Date extends Zend_Form_Element_Xhtml
             will then be aggregated to form the final markup.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 class My_Form_Decorator_Date extends Zend_Form_Decorator_Abstract
 {
     public function render($content)
     {
-        $element = $this->getElement();
+        $element = $this-&gt;getElement();
         if (!$element instanceof My_Form_Element_Date) {
             // only want to render Date elements
             return $content;
         }
 
-        $view = $element->getView();
+        $view = $element-&gt;getView();
         if (!$view instanceof Zend_View_Interface) {
             // using view helpers, so do nothing if no view present
             return $content;
         }
 
-        $day   = $element->getDay();
-        $month = $element->getMonth();
-        $year  = $element->getYear();
-        $name  = $element->getFullyQualifiedName();
+        $day   = $element-&gt;getDay();
+        $month = $element-&gt;getMonth();
+        $year  = $element-&gt;getYear();
+        $name  = $element-&gt;getFullyQualifiedName();
 
         $params = array(
-            'size'      => 2,
-            'maxlength' => 2,
+            'size'      =&gt; 2,
+            'maxlength' =&gt; 2,
         );
         $yearParams = array(
-            'size'      => 4,
-            'maxlength' => 4,
+            'size'      =&gt; 4,
+            'maxlength' =&gt; 4,
         );
 
-        $markup = $view->formText($name . '[day]', $day, $params)
-                . ' / ' . $view->formText($name . '[month]', $month, $params)
-                . ' / ' . $view->formText($name . '[year]', $year, $yearParams);
+        $markup = $view-&gt;formText($name . '[day]', $day, $params)
+                . ' / ' . $view-&gt;formText($name . '[month]', $month, $params)
+                . ' / ' . $view-&gt;formText($name . '[year]', $year, $yearParams);
 
-        switch ($this->getPlacement()) {
+        switch ($this-&gt;getPlacement()) {
             case self::PREPEND:
-                return $markup . $this->getSeparator() . $content;
+                return $markup . $this-&gt;getSeparator() . $content;
             case self::APPEND:
             default:
-                return $content . $this->getSeparator() . $markup;
+                return $content . $this-&gt;getSeparator() . $markup;
         }
     }
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         We now have to do a minor tweak to our form element, and tell it that we want to use the
@@ -259,14 +260,14 @@ class My_Form_Decorator_Date extends Zend_Form_Decorator_Abstract
         the decorator path. We can do that in the constructor:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 class My_Form_Element_Date extends Zend_Form_Element_Xhtml
 {
     // ...
 
     public function __construct($spec, $options = null)
     {
-        $this->addPrefixPath(
+        $this-&gt;addPrefixPath(
             'My_Form_Decorator',
             'My/Form/Decorator',
             'decorator'
@@ -276,7 +277,7 @@ class My_Form_Element_Date extends Zend_Form_Element_Xhtml
 
     // ...
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         Note that this is being done in the constructor and not in <methodname>init()</methodname>.
@@ -292,73 +293,73 @@ class My_Form_Element_Date extends Zend_Form_Element_Xhtml
         our new <classname>Date</classname> decorator:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 class My_Form_Element_Date extends Zend_Form_Element_Xhtml
 {
     // ...
 
     public function loadDefaultDecorators()
     {
-        if ($this->loadDefaultDecoratorsIsDisabled()) {
+        if ($this-&gt;loadDefaultDecoratorsIsDisabled()) {
             return;
         }
 
-        $decorators = $this->getDecorators();
+        $decorators = $this-&gt;getDecorators();
         if (empty($decorators)) {
-            $this->addDecorator('Date')
-                 ->addDecorator('Errors')
-                 ->addDecorator('Description', array(
-                     'tag'   => 'p',
-                     'class' => 'description'
+            $this-&gt;addDecorator('Date')
+                 -&gt;addDecorator('Errors')
+                 -&gt;addDecorator('Description', array(
+                     'tag'   =&gt; 'p',
+                     'class' =&gt; 'description'
                  ))
-                 ->addDecorator('HtmlTag', array(
-                     'tag' => 'dd',
-                     'id'  => $this->getName() . '-element'
+                 -&gt;addDecorator('HtmlTag', array(
+                     'tag' =&gt; 'dd',
+                     'id'  =&gt; $this-&gt;getName() . '-element'
                  ))
-                 ->addDecorator('Label', array('tag' => 'dt'));
+                 -&gt;addDecorator('Label', array('tag' =&gt; 'dt'));
         }
     }
 
     // ...
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         What does the final output look like? Let's consider the following element:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $d = new My_Form_Element_Date('dateOfBirth');
-$d->setLabel('Date of Birth: ')
-  ->setView(new Zend_View());
+$d-&gt;setLabel('Date of Birth: ')
+  -&gt;setView(new Zend_View());
 
 // These are equivalent:
-$d->setValue('20 April 2009');
-$d->setValue(array('year' => '2009', 'month' => '04', 'day' => '20'));
-]]></programlisting>
+$d-&gt;setValue('20 April 2009');
+$d-&gt;setValue(array('year' =&gt; '2009', 'month' =&gt; '04', 'day' =&gt; '20'));
+</programlisting>
 
     <para>
         If you then echo this element, you get the following markup (with some slight whitespace
         modifications for readability):
     </para>
 
-    <programlisting language="html"><![CDATA[
-<dt id="dateOfBirth-label"><label for="dateOfBirth" class="optional">
+    <programlisting language="html">
+&lt;dt id="dateOfBirth-label"&gt;&lt;label for="dateOfBirth" class="optional"&gt;
     Date of Birth:
-</label></dt>
-<dd id="dateOfBirth-element">
-    <input type="text" name="dateOfBirth[day]" id="dateOfBirth-day"
-        value="20" size="2" maxlength="2"> /
-    <input type="text" name="dateOfBirth[month]" id="dateOfBirth-month"
-        value="4" size="2" maxlength="2"> /
-    <input type="text" name="dateOfBirth[year]" id="dateOfBirth-year"
-        value="2009" size="4" maxlength="4">
-</dd>
-]]></programlisting>
-    </sect2>
+&lt;/label&gt;&lt;/dt&gt;
+&lt;dd id="dateOfBirth-element"&gt;
+    &lt;input type="text" name="dateOfBirth[day]" id="dateOfBirth-day"
+        value="20" size="2" maxlength="2"&gt; /
+    &lt;input type="text" name="dateOfBirth[month]" id="dateOfBirth-month"
+        value="4" size="2" maxlength="2"&gt; /
+    &lt;input type="text" name="dateOfBirth[year]" id="dateOfBirth-year"
+        value="2009" size="4" maxlength="4"&gt;
+&lt;/dd&gt;
+</programlisting>
+    </section>
 
-    <sect2 id="learning.form.decorators.composite.conclusion">
-        <title>Conclusion</title>
+    <section xml:id="learning.form.decorators.composite.conclusion"><info><title>Conclusion</title></info>
+        
 
         <para>
             We now have an element that can render multiple related form input fields, and then
@@ -370,7 +371,7 @@ $d->setValue(array('year' => '2009', 'month' => '04', 'day' => '20'));
 
         <para>
             Additionally, we can use different decorators with the element. If we wanted to use a
-            <ulink url="http://dojotoolkit.org/">Dojo</ulink> <classname>DateTextBox</classname>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org/">Dojo</link> <classname>DateTextBox</classname>
             dijit decorator -- which accepts and returns string values -- we can, with no
             modifications to the element itself.
         </para>
@@ -379,5 +380,5 @@ $d->setValue(array('year' => '2009', 'month' => '04', 'day' => '20'));
             In the end, you get a uniform element <acronym>API</acronym> you can use to describe an
             element representing a composite value.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

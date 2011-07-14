@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.layout">
-    <title>Zend_Application_Resource_Layout</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.layout"><info><title>Zend_Application_Resource_Layout</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Layout</classname> can be used to
@@ -10,17 +11,17 @@
         </classname> options</link>.
     </para>
 
-    <example id="zend.application.available-resources.layout.configExample">
-        <title>Sample Layout configuration</title>
+    <example xml:id="zend.application.available-resources.layout.configExample"><info><title>Sample Layout configuration</title></info>
+        
 
         <para>
             Below is a sample <acronym>INI</acronym> snippet showing how to
             configure the layout resource.
         </para>
 
-        <programlisting language="ini"><![CDATA[
+        <programlisting language="ini">
 resources.layout.layout = "NameOfDefaultLayout"
 resources.layout.layoutPath = "/path/to/layouts"
-]]></programlisting>
+</programlisting>
     </example>
-</sect2>
+</section>

@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.filter.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         The <classname>Zend_Filter</classname> component provides a set of commonly needed data
@@ -10,8 +11,8 @@
         order.
     </para>
 
-    <sect2 id="zend.filter.introduction.definition">
-        <title>What is a filter?</title>
+    <section xml:id="zend.filter.introduction.definition"><info><title>What is a filter?</title></info>
+        
 
         <para>
             In the physical world, a filter is typically used for removing
@@ -42,10 +43,10 @@
             <classname>Zend_Filter</classname>, means to perform some transformations upon input
             data.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.introduction.using">
-        <title>Basic usage of filters</title>
+    <section xml:id="zend.filter.introduction.using"><info><title>Basic usage of filters</title></info>
+        
 
         <para>
             Having this filter definition established provides the foundation
@@ -57,19 +58,19 @@
         <para>
             Following is a basic example of using a filter upon two input data,
             the ampersand (<emphasis>&amp;</emphasis>) and double quote
-            (<emphasis>&quot;</emphasis>) characters:
+            (<emphasis>"</emphasis>) characters:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $htmlEntities = new Zend_Filter_HtmlEntities();
 
-echo $htmlEntities->filter('&'); // &amp;
-echo $htmlEntities->filter('"'); // &quot;
-]]></programlisting>
-    </sect2>
+echo $htmlEntities-&gt;filter('&amp;'); // &amp;amp;
+echo $htmlEntities-&gt;filter('"'); // &amp;quot;
+</programlisting>
+    </section>
 
-    <sect2 id="zend.filter.introduction.static">
-        <title>Using the static staticFilter() method</title>
+    <section xml:id="zend.filter.introduction.static"><info><title>Using the static staticFilter() method</title></info>
+        
 
         <para>
             If it is inconvenient to load a given filter class and create an
@@ -84,20 +85,20 @@ echo $htmlEntities->filter('"'); // &quot;
             input.
         </para>
 
-        <programlisting language="php"><![CDATA[
-echo Zend_Filter::filterStatic('&', 'HtmlEntities');
-]]></programlisting>
+        <programlisting language="php">
+echo Zend_Filter::filterStatic('&amp;', 'HtmlEntities');
+</programlisting>
 
         <para>
             You can also pass an array of constructor arguments, if they
             are needed for the filter class.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 echo Zend_Filter::filterStatic('"',
                                'HtmlEntities',
-                               array('quotestyle' => ENT_QUOTES));
-]]></programlisting>
+                               array('quotestyle' =&gt; ENT_QUOTES));
+</programlisting>
 
         <para>
             The static usage can be convenient for invoking a filter ad hoc,
@@ -113,8 +114,8 @@ echo Zend_Filter::filterStatic('"',
             sets of input data. See <link linkend="zend.filter.input">Zend_Filter_Input</link>.
         </para>
 
-        <sect3 id="zend.filter.introduction.static.namespaces">
-            <title>Namespaces</title>
+        <section xml:id="zend.filter.introduction.static.namespaces"><info><title>Namespaces</title></info>
+            
 
             <para>
                 When working with self defined filters you can give a fourth parameter
@@ -122,14 +123,14 @@ echo Zend_Filter::filterStatic('"',
                 where your filter can be found.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 echo Zend_Filter::filterStatic(
     '"',
     'MyFilter',
     array($parameters),
     array('FirstNamespace', 'SecondNamespace')
 );
-]]></programlisting>
+</programlisting>
 
             <para>
                 <classname>Zend_Filter</classname> allows also to set namespaces as default.
@@ -138,11 +139,11 @@ echo Zend_Filter::filterStatic(
                 The following code snippet is identical to the above one.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 Zend_Filter::setDefaultNamespaces(array('FirstNamespace', 'SecondNamespace'));
 echo Zend_Filter::filterStatic('"', 'MyFilter', array($parameters));
 echo Zend_Filter::filterStatic('"', 'OtherFilter', array($parameters));
-]]></programlisting>
+</programlisting>
 
             <para>
                 For your convenience there are following methods which allow the handling of
@@ -181,11 +182,11 @@ echo Zend_Filter::filterStatic('"', 'OtherFilter', array($parameters));
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.filter.introduction.caveats">
-        <title>Double filtering</title>
+    <section xml:id="zend.filter.introduction.caveats"><info><title>Double filtering</title></info>
+        
 
         <para>
             When using two filters after each other you have to keep in mind that it is often not
@@ -193,17 +194,17 @@ echo Zend_Filter::filterStatic('"', 'OtherFilter', array($parameters));
             example:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $original = "my_original_content";
 
 // Attach a filter
 $filter   = new Zend_Filter_Word_UnderscoreToCamelCase();
-$filtered = $filter->filter($original);
+$filtered = $filter-&gt;filter($original);
 
 // Use it's opposite
 $filter2  = new Zend_Filter_Word_CamelCaseToUnderscore();
-$filtered = $filter2->filter($filtered)
-]]></programlisting>
+$filtered = $filter2-&gt;filter($filtered)
+</programlisting>
 
         <para>
             The above code example could lead to the impression that you will get the original
@@ -217,8 +218,5 @@ $filtered = $filter2->filter($filtered)
             As you can see it is not always possible to get the original output by using a filter
             which seems to be the opposite. It depends on the filter and also on the given input.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

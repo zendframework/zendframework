@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.application.core-functionality.resource-resourceabstract">
-    <title>Zend_Application_Resource_ResourceAbstract</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.core-functionality.resource-resourceabstract"><info><title>Zend_Application_Resource_ResourceAbstract</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_ResourceAbstract</classname> is an abstract
-        class implementing <link
-            linkend="zend.application.core-functionality.resource-resource">Zend_Application_Resource_Resource</link>,
+        class implementing <link linkend="zend.application.core-functionality.resource-resource">Zend_Application_Resource_Resource</link>,
         and is a good starting point for creating your own custom plugin
         resources.
     </para>
@@ -17,8 +17,8 @@
         class.
     </para>
 
-    <table id="zend.application.core-functionality.resource-resourceabstract.api">
-        <title>Zend_Application_Resource_ResourceAbstract Methods</title>
+    <table xml:id="zend.application.core-functionality.resource-resourceabstract.api"><info><title>Zend_Application_Resource_ResourceAbstract Methods</title></info>
+        
 
         <tgroup cols="4">
             <thead>
@@ -112,8 +112,8 @@
         </tgroup>
     </table>
 
-    <sect3 id="zend.application.core-functionality.resource-resourceabstract.names">
-        <title>Resource Names</title>
+    <section xml:id="zend.application.core-functionality.resource-resourceabstract.names"><info><title>Resource Names</title></info>
+        
 
         <para>
             When registering plugin resources, one issue that arises is how you
@@ -132,30 +132,30 @@
             short name:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $app = new Zend_Application(APPLICATION_ENV, array(
-    'pluginPaths' => array(
-        'My_Resource' => 'My/Resource/',
+    'pluginPaths' =&gt; array(
+        'My_Resource' =&gt; 'My/Resource/',
     ),
-    'resources' => array(
+    'resources' =&gt; array(
         // if the following class exists:
-        'My_Resource_View' => array(),
+        'My_Resource_View' =&gt; array(),
 
         // then this is equivalent:
-        'View' => array(),
+        'View' =&gt; array(),
     ),
 ));
-]]></programlisting>
+</programlisting>
 
         <para>
             In each case, you can then bootstrap the resource and retrieve it
             later using the short name:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$bootstrap->bootstrap('view');
-$view = $bootstrap->getResource('view');
-]]></programlisting>
+        <programlisting language="php">
+$bootstrap-&gt;bootstrap('view');
+$view = $bootstrap-&gt;getResource('view');
+</programlisting>
 
         <para>
             Second, if no matching plugin path is defined, you may still pass a
@@ -163,26 +163,26 @@ $view = $bootstrap->getResource('view');
             using the resource's full class name:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $app = new Zend_Application(APPLICATION_ENV, array(
-    'resources' => array(
+    'resources' =&gt; array(
         // This will load the standard 'View' resource:
-        'View' => array(),
+        'View' =&gt; array(),
 
         // While this loads a resource with a specific class name:
-        'My_Resource_View' => array(),
+        'My_Resource_View' =&gt; array(),
     ),
 ));
-]]></programlisting>
+</programlisting>
 
         <para>
             Obviously, this makes referencing the resource much more verbose:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$bootstrap->bootstrap('My_Resource_View');
-$view = $bootstrap->getResource('My_Resource_View');
-]]></programlisting>
+        <programlisting language="php">
+$bootstrap-&gt;bootstrap('My_Resource_View');
+$view = $bootstrap-&gt;getResource('My_Resource_View');
+</programlisting>
 
         <para>
             This brings us to the third option. You can specify an explicit name
@@ -193,7 +193,7 @@ $view = $bootstrap->getResource('My_Resource_View');
             bootstrap. As an example, let's define our own view class:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 class My_Resource_View extends Zend_Application_Resource_ResourceAbstract
 {
     public $_explicitType = 'My_View';
@@ -203,22 +203,22 @@ class My_Resource_View extends Zend_Application_Resource_ResourceAbstract
         // do some initialization...
     }
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             We can then bootstrap that resource or retrieve it by the name
             "<classname>My_View</classname>":
         </para>
 
-        <programlisting language="php"><![CDATA[
-$bootstrap->bootstrap('My_View');
-$view = $bootstrap->getResource('My_View');
-]]></programlisting>
+        <programlisting language="php">
+$bootstrap-&gt;bootstrap('My_View');
+$view = $bootstrap-&gt;getResource('My_View');
+</programlisting>
 
         <para>
             Using these various naming approaches, you can override existing
             resources, add your own, mix multiple resources to achieve complex
             initialization, and more.
         </para>
-    </sect3>
-</sect2>
+    </section>
+</section>

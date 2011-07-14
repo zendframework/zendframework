@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.measure.output">
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <title>Outputting measurements</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.output"><info><title>Outputting measurements</title></info>
+
+    
 
     <para>
         Measurements can be output in a number of different ways.
@@ -24,16 +25,16 @@
         <link linkend="zend.measure.output.unit">Output as localized string</link>
     </para>
 
-    <sect2 id="zend.measure.output.auto">
-        <title>Automatic output</title>
+    <section xml:id="zend.measure.output.auto"><info><title>Automatic output</title></info>
+        
 
         <para>
             <classname>Zend_Measure</classname> supports outputting of strings automatically.
 
-            <example id="zend.measure.output.auto.example-1">
-                <title>Automatic output</title>
+            <example xml:id="zend.measure.output.auto.example-1"><info><title>Automatic output</title></info>
+                
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 $locale = new Zend_Locale('de');
 $mystring = "1.234.567,89";
 $unit = new Zend_Measure_Length($mystring,
@@ -41,39 +42,39 @@ $unit = new Zend_Measure_Length($mystring,
                                 $locale);
 
 echo $unit;
-]]></programlisting>
+</programlisting>
             </example>
         </para>
 
-        <note>
-            <title>Measurement output</title>
+        <note><info><title>Measurement output</title></info>
+            
 
             <para>
                 Output can be achieved simply by using
-                <ulink url="http://php.net/echo">echo</ulink> or
-                <ulink url="http://php.net/print">print</ulink>.
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/echo">echo</link> or
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/print">print</link>.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.measure.output.value">
-        <title>Outputting values</title>
+    <section xml:id="zend.measure.output.value"><info><title>Outputting values</title></info>
+        
 
         <para>
             The value of a measurement can be output using <methodname>getValue()</methodname>.
 
-            <example id="zend.measure.output.value.example-1">
-                <title>Output a value</title>
+            <example xml:id="zend.measure.output.value.example-1"><info><title>Output a value</title></info>
+                
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 $locale = new Zend_Locale('de');
 $mystring = "1.234.567,89";
 $unit = new Zend_Measure_Length($mystring,
                                 Zend_Measure_Length::STANDARD,
                                 $locale);
 
-echo $unit->getValue();
-]]></programlisting>
+echo $unit-&gt;getValue();
+</programlisting>
             </example>
         </para>
 
@@ -82,40 +83,37 @@ echo $unit->getValue();
             <property>round</property> which allows to define a precision for the generated
             output. The standard precision is '2'.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.measure.output.unit">
-        <title>Output with unit of measurement</title>
+    <section xml:id="zend.measure.output.unit"><info><title>Output with unit of measurement</title></info>
+        
 
         <para>
             The function <methodname>getType()</methodname> returns the current unit of measurement.
 
-            <example id="zend.measure.output.unit.example-1">
-                <title>Outputting units</title>
+            <example xml:id="zend.measure.output.unit.example-1"><info><title>Outputting units</title></info>
+                
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 $locale = new Zend_Locale('de');
 $mystring = "1.234.567,89";
 $unit = new Zend_Measure_Weight($mystring,
                                 Zend_Measure_Weight::POUND,
                                 $locale);
 
-echo $unit->getType();
-]]></programlisting>
+echo $unit-&gt;getType();
+</programlisting>
             </example>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.measure.output.localized">
-        <title>Output as localized string</title>
+    <section xml:id="zend.measure.output.localized"><info><title>Output as localized string</title></info>
+        
 
         <para>
             Outputting a string in a format common in the users' country is usually desirable. For
             example, the measurement "1234567.8" would become "1.234.567,8" for Germany. This
             functionality will be supported in a future release.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

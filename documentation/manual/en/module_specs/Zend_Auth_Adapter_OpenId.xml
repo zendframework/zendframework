@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.auth.adapter.openid">
-    <title>Open ID Authentication</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.auth.adapter.openid.introduction">
-        <title>Introduction</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.openid"><info><title>Open ID Authentication</title></info>
+    
+
+    <section xml:id="zend.auth.adapter.openid.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             The <classname>Zend_Auth_Adapter_OpenId</classname> adapter can be used to authenticate
@@ -20,7 +21,7 @@
             with information about a user, along with special tags that
             describes which server to use and which identity to submit there.
             You can read more about OpenID at the
-            <ulink url="http://www.openid.net/">OpenID official site</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.openid.net/">OpenID official site</link>.
         </para>
 
         <para>
@@ -31,16 +32,15 @@
 
         <note>
             <para>
-                <classname>Zend_OpenId</classname> takes advantage of the <ulink
-                    url="http://php.net/gmp">GMP extension</ulink>, where available. Consider
+                <classname>Zend_OpenId</classname> takes advantage of the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/gmp">GMP extension</link>, where available. Consider
                 enabling the <acronym>GMP</acronym> extension for better performance when using
                 <classname>Zend_Auth_Adapter_OpenId</classname>.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.openid.specifics">
-        <title>Specifics</title>
+    <section xml:id="zend.auth.adapter.openid.specifics"><info><title>Specifics</title></info>
+        
 
         <para>
             As is the case for all <classname>Zend_Auth</classname> adapters, the
@@ -77,48 +77,48 @@
             <varname>$_POST['openid_mode']</varname> set.
         </para>
 
-        <programlisting language="php"><![CDATA[
-<?php
+        <programlisting language="php">
+&lt;?php
 $status = "";
 $auth = Zend_Auth::getInstance();
-if ((isset($_POST['openid_action']) &&
-     $_POST['openid_action'] == "login" &&
+if ((isset($_POST['openid_action']) &amp;&amp;
+     $_POST['openid_action'] == "login" &amp;&amp;
      !empty($_POST['openid_identifier'])) ||
     isset($_GET['openid_mode']) ||
     isset($_POST['openid_mode'])) {
-    $result = $auth->authenticate(
+    $result = $auth-&gt;authenticate(
         new Zend_Auth_Adapter_OpenId(@$_POST['openid_identifier']));
-    if ($result->isValid()) {
+    if ($result-&gt;isValid()) {
         $status = "You are logged in as "
-                . $auth->getIdentity()
-                . "<br>\n";
+                . $auth-&gt;getIdentity()
+                . "&lt;br&gt;\n";
     } else {
-        $auth->clearIdentity();
-        foreach ($result->getMessages() as $message) {
-            $status .= "$message<br>\n";
+        $auth-&gt;clearIdentity();
+        foreach ($result-&gt;getMessages() as $message) {
+            $status .= "$message&lt;br&gt;\n";
         }
     }
-} else if ($auth->hasIdentity()) {
-    if (isset($_POST['openid_action']) &&
+} else if ($auth-&gt;hasIdentity()) {
+    if (isset($_POST['openid_action']) &amp;&amp;
         $_POST['openid_action'] == "logout") {
-        $auth->clearIdentity();
+        $auth-&gt;clearIdentity();
     } else {
         $status = "You are logged in as "
-                . $auth->getIdentity()
-                . "<br>\n";
+                . $auth-&gt;getIdentity()
+                . "&lt;br&gt;\n";
     }
 }
-?>
-<html><body>
-<?php echo htmlspecialchars($status);?>
-<form method="post"><fieldset>
-<legend>OpenID Login</legend>
-<input type="text" name="openid_identifier" value="">
-<input type="submit" name="openid_action" value="login">
-<input type="submit" name="openid_action" value="logout">
-</fieldset></form></body></html>
+?&gt;
+&lt;html&gt;&lt;body&gt;
+&lt;?php echo htmlspecialchars($status);?&gt;
+&lt;form method="post"&gt;&lt;fieldset&gt;
+&lt;legend&gt;OpenID Login&lt;/legend&gt;
+&lt;input type="text" name="openid_identifier" value=""&gt;
+&lt;input type="submit" name="openid_action" value="login"&gt;
+&lt;input type="submit" name="openid_action" value="logout"&gt;
+&lt;/fieldset&gt;&lt;/form&gt;&lt;/body&gt;&lt;/html&gt;
 */
-]]></programlisting>
+</programlisting>
 
         <para>
             You may customize the OpenID authentication process in several way.
@@ -131,8 +131,5 @@ if ((isset($_POST['openid_action']) &&
             in more detail in the <classname>Zend_OpenId_Consumer</classname>
             chapter.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

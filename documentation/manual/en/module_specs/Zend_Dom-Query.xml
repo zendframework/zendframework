@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.dom.query">
-    <title>Zend_Dom_Query</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dom.query"><info><title>Zend_Dom_Query</title></info>
+    
 
     <para>
         <classname>Zend_Dom_Query</classname> provides mechanisms for querying
@@ -17,14 +18,14 @@
         structures. The notation should be familiar to anybody who has developed
         Cascading Style Sheets or who utilizes Javascript toolkits that provide
         functionality for selecting nodes utilizing <acronym>CSS</acronym> selectors
-        (<ulink url="http://prototypejs.org/api/utility/dollar-dollar">Prototype's
-            $$()</ulink> and
-        <ulink url="http://api.dojotoolkit.org/jsdoc/dojo/HEAD/dojo.query">Dojo's
-            dojo.query</ulink> were both inspirations for the component).
+        (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://prototypejs.org/api/utility/dollar-dollar">Prototype's
+            $$()</link> and
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://api.dojotoolkit.org/jsdoc/dojo/HEAD/dojo.query">Dojo's
+            dojo.query</link> were both inspirations for the component).
     </para>
 
-    <sect2 id="zend.dom.query.operation">
-        <title>Theory of Operation</title>
+    <section xml:id="zend.dom.query.operation"><info><title>Theory of Operation</title></info>
+        
 
         <para>
             To use <classname>Zend_Dom_Query</classname>, you instantiate a
@@ -107,7 +108,7 @@
             <listitem>
                 <para>
                     <emphasis>direct descendents</emphasis>: utilize '&gt;' between
-                    selectors to denote direct descendents. 'div > span' would
+                    selectors to denote direct descendents. 'div &gt; span' would
                     select only 'span' elements that are direct descendents of a
                     'div'. Can also be used with any of the selectors above.
                 </para>
@@ -126,24 +127,24 @@
                     the word 'One' in the listing below:
                 </para>
 
-                <programlisting language="html"><![CDATA[
-<div>
-<table>
-    <tr>
-        <td class="foo">
-            <div>
-                Lorem ipsum <span class="bar">
-                    <a href="/foo/bar" id="one">One</a>
-                    <a href="/foo/baz" id="two">Two</a>
-                    <a href="/foo/bat" id="three">Three</a>
-                    <a href="/foo/bla" id="four">Four</a>
-                </span>
-            </div>
-        </td>
-    </tr>
-</table>
-</div>
-]]></programlisting>
+                <programlisting language="html">
+&lt;div&gt;
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td class="foo"&gt;
+            &lt;div&gt;
+                Lorem ipsum &lt;span class="bar"&gt;
+                    &lt;a href="/foo/bar" id="one"&gt;One&lt;/a&gt;
+                    &lt;a href="/foo/baz" id="two"&gt;Two&lt;/a&gt;
+                    &lt;a href="/foo/bat" id="three"&gt;Three&lt;/a&gt;
+                    &lt;a href="/foo/bla" id="four"&gt;Four&lt;/a&gt;
+                &lt;/span&gt;
+            &lt;/div&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+</programlisting>
             </listitem>
         </itemizedlist>
 
@@ -157,15 +158,15 @@
             that selects against the <acronym>HTML</acronym> above:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $dom = new Zend_Dom_Query($html);
-$results = $dom->query('.foo .bar a');
+$results = $dom-&gt;query('.foo .bar a');
 
 $count = count($results); // get number of matches: 4
 foreach ($results as $result) {
     // $result is a DOMElement
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             <classname>Zend_Dom_Query</classname> also allows straight XPath queries
@@ -173,18 +174,18 @@ foreach ($results as $result) {
             valid XPath query to this method, and it will return a
             <classname>Zend_Dom_Query_Result</classname> object.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.dom.query.methods">
-        <title>Methods Available</title>
+    <section xml:id="zend.dom.query.methods"><info><title>Methods Available</title></info>
+        
 
         <para>
             The <classname>Zend_Dom_Query</classname> family of classes have the following
             methods available.
         </para>
 
-        <sect3 id="zend.dom.query.methods.zenddomquery">
-            <title>Zend_Dom_Query</title>
+        <section xml:id="zend.dom.query.methods.zenddomquery"><info><title>Zend_Dom_Query</title></info>
+            
 
             <para>
                 The following methods are available to
@@ -251,10 +252,10 @@ foreach ($results as $result) {
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.dom.query.methods.zenddomqueryresult">
-            <title>Zend_Dom_Query_Result</title>
+        <section xml:id="zend.dom.query.methods.zenddomqueryresult"><info><title>Zend_Dom_Query_Result</title></info>
+            
 
             <para>
                 As mentioned previously, <classname>Zend_Dom_Query_Result</classname>
@@ -289,9 +290,6 @@ foreach ($results as $result) {
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

@@ -1,34 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.mime.message">
-    <title>Zend_Mime_Message</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.mime.message.introduction">
-        <title>Introduction</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.message"><info><title>Zend_Mime_Message</title></info>
+    
+
+    <section xml:id="zend.mime.message.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_Mime_Message</classname> represents a <acronym>MIME</acronym> compliant
-            message that can contain one or more separate Parts (Represented as <link
-                linkend="zend.mime.part"><classname>Zend_Mime_Part</classname></link> objects). With
+            message that can contain one or more separate Parts (Represented as <link linkend="zend.mime.part"><classname>Zend_Mime_Part</classname></link> objects). With
             <classname>Zend_Mime_Message</classname>, <acronym>MIME</acronym> compliant multipart
             messages can be generated from <classname>Zend_Mime_Part</classname> objects. Encoding
             and Boundary handling are handled transparently by the class.
             <classname>Zend_Mime_Message</classname> objects can also be reconstructed from given
-            strings (experimental). Used by <link
-                linkend="zend.mail"><classname>Zend_Mail</classname></link>.
+            strings (experimental). Used by <link linkend="zend.mail"><classname>Zend_Mail</classname></link>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mime.message.instantiation">
-        <title>Instantiation</title>
+    <section xml:id="zend.mime.message.instantiation"><info><title>Instantiation</title></info>
+        
 
         <para>
             There is no explicit constructor for <classname>Zend_Mime_Message</classname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mime.message.addparts">
-        <title>Adding MIME Parts</title>
+    <section xml:id="zend.mime.message.addparts"><info><title>Adding MIME Parts</title></info>
+        
 
         <para>
             <link linkend="zend.mime.part"><classname>Zend_Mime_Part</classname></link>
@@ -37,14 +36,12 @@
         </para>
 
         <para>
-            An array with all <link
-                linkend="zend.mime.part"><classname>Zend_Mime_Part</classname></link>
+            An array with all <link linkend="zend.mime.part"><classname>Zend_Mime_Part</classname></link>
             objects in the <classname>Zend_Mime_Message</classname> is returned from the method
             <methodname>getParts()</methodname>. The <classname>Zend_Mime_Part</classname>
             objects can then be changed since they are stored in the array as references. If
             parts are added to the array or the sequence is changed, the array needs
-            to be given back to the <link
-                linkend="zend.mime.part"><classname>Zend_Mime_Part</classname></link>
+            to be given back to the <link linkend="zend.mime.part"><classname>Zend_Mime_Part</classname></link>
             object by calling <methodname>setParts($partsArray)</methodname>.
         </para>
 
@@ -54,10 +51,10 @@
             <classname>Zend_Mime_Message</classname> object and thus the object would generate a
             Multipart-Mime-Message when generating the actual output.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mime.message.bondary">
-        <title>Boundary handling</title>
+    <section xml:id="zend.mime.message.bondary"><info><title>Boundary handling</title></info>
+        
 
         <para>
             <classname>Zend_Mime_Message</classname> usually creates and uses its own
@@ -81,10 +78,10 @@
             <methodname>generateMessage()</methodname> renders the
             <classname>Zend_Mime_Message</classname> content to a string.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mime.message.parse">
-        <title>parsing a string to create a Zend_Mime_Message object (experimental)</title>
+    <section xml:id="zend.mime.message.parse"><info><title>parsing a string to create a Zend_Mime_Message object (experimental)</title></info>
+        
 
         <para>
             A given <acronym>MIME</acronym> compliant message in string form can be used to
@@ -98,8 +95,5 @@
             decodes the given string and returns a <classname>Zend_Mime_Message</classname>
             Object that can then be examined using <methodname>getParts()</methodname>
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

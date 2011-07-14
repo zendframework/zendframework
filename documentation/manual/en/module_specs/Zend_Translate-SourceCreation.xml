@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.translate.sourcecreation">
-    <title>Creating source files</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.sourcecreation"><info><title>Creating source files</title></info>
+    
 
     <para>
         Below you will find a description of the different source formats
@@ -17,8 +18,8 @@
         </para>
     </note>
 
-    <sect2 id="zend.translate.sourcecreation.array">
-        <title>Creating Array source files</title>
+    <section xml:id="zend.translate.sourcecreation.array"><info><title>Creating Array source files</title></info>
+        
 
         <para>
             Array source files are plain arrays. But you have to define them
@@ -28,26 +29,26 @@
             adapter to get started with translation business.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $english = array(
-    'message1' => 'message1',
-    'message2' => 'message2',
-    'message3' => 'message3');
+    'message1' =&gt; 'message1',
+    'message2' =&gt; 'message2',
+    'message3' =&gt; 'message3');
 
 $german = array(
-    'message1' => 'Nachricht1',
-    'message2' => 'Nachricht2',
-    'message3' => 'Nachricht3');
+    'message1' =&gt; 'Nachricht1',
+    'message2' =&gt; 'Nachricht2',
+    'message3' =&gt; 'Nachricht3');
 
 $translate = new Zend_Translate(
     array(
-        'adapter' => 'array',
-        'content' => $english,
-        'locale'  => 'en'
+        'adapter' =&gt; 'array',
+        'content' =&gt; $english,
+        'locale'  =&gt; 'en'
     )
 );
-$translate->addTranslation(array('content' => $german, 'locale' => 'de'));
-]]></programlisting>
+$translate-&gt;addTranslation(array('content' =&gt; $german, 'locale' =&gt; 'de'));
+</programlisting>
 
         <para>
             Since release 1.5 it is also supported to have arrays included within an external file.
@@ -55,22 +56,22 @@ $translate->addTranslation(array('content' => $german, 'locale' => 'de'));
             automatically include it and look for the array. See the following example for details:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // myarray.php
 return array(
-    'message1' => 'Nachricht1',
-    'message2' => 'Nachricht2',
-    'message3' => 'Nachricht3');
+    'message1' =&gt; 'Nachricht1',
+    'message2' =&gt; 'Nachricht2',
+    'message3' =&gt; 'Nachricht3');
 
 // controller
 $translate = new Zend_Translate(
     array(
-        'adapter' => 'array',
-        'content' => '/path/to/myarray.php',
-        'locale'  => 'de'
+        'adapter' =&gt; 'array',
+        'content' =&gt; '/path/to/myarray.php',
+        'locale'  =&gt; 'de'
     )
 );
-]]></programlisting>
+</programlisting>
 
         <note>
             <para>
@@ -78,10 +79,10 @@ $translate = new Zend_Translate(
                 Also any output within this file will be ignored and suppressed.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.translate.sourcecreation.gettext">
-        <title>Creating Gettext source files</title>
+    <section xml:id="zend.translate.sourcecreation.gettext"><info><title>Creating Gettext source files</title></info>
+        
 
         <para>
             Gettext source files are created by GNU's gettext library.
@@ -90,26 +91,26 @@ $translate = new Zend_Translate(
             These have the extension <emphasis>*.mo</emphasis>
             and they are binary files.
             An open source tool for creating the files is
-            <ulink url="http://sourceforge.net/projects/poedit/">poEdit</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://sourceforge.net/projects/poedit/">poEdit</link>.
             This tool also supports you during the translation process itself.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // We accume that we have created the mo files and translated them
 $translate = new Zend_Translate(
     array(
-        'adapter' => 'gettext',
-        'content' => '/path/to/english.mo',
-        'locale'  => 'en'
+        'adapter' =&gt; 'gettext',
+        'content' =&gt; '/path/to/english.mo',
+        'locale'  =&gt; 'en'
     )
 );
-$translate->addTranslation(
+$translate-&gt;addTranslation(
     array(
-        'content' => '/path/to/german.mo',
-        'locale' => 'de'
+        'content' =&gt; '/path/to/german.mo',
+        'locale' =&gt; 'de'
     )
 );
-]]></programlisting>
+</programlisting>
 
         <para>
             As you can see the adapters are used exactly the same way,
@@ -149,21 +150,21 @@ $translate->addTranslation(
             filename as key.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Getting the adapter informations
 $translate = new Zend_Translate(
     array(
-        'adapter' => 'gettext',
-        'content' => '/path/to/english.mo',
-        'locale'  => 'en'
+        'adapter' =&gt; 'gettext',
+        'content' =&gt; '/path/to/english.mo',
+        'locale'  =&gt; 'en'
     )
 );
-print_r($translate->getAdapterInfo());
-]]></programlisting>
-    </sect2>
+print_r($translate-&gt;getAdapterInfo());
+</programlisting>
+    </section>
 
-    <sect2 id="zend.translate.sourcecreation.tmx">
-        <title>Creating TMX source files</title>
+    <section xml:id="zend.translate.sourcecreation.tmx"><info><title>Creating TMX source files</title></info>
+        
 
         <para>
             TMX source files are a new industry standard.
@@ -174,39 +175,39 @@ print_r($translate->getAdapterInfo());
             creating TMX source files are not freely available.
         </para>
 
-        <example id="zend.translate.sourcecreation.tmx.example">
-            <title>Example TMX file</title>
+        <example xml:id="zend.translate.sourcecreation.tmx.example"><info><title>Example TMX file</title></info>
+            
 
-            <programlisting language="xml"><![CDATA[
-<?xml version="1.0" ?>
-<!DOCTYPE tmx SYSTEM "tmx14.dtd">
-<tmx version="1.4">
-   <header creationtoolversion="1.0.0" datatype="winres" segtype="sentence"
+            <programlisting language="xml">
+&lt;?xml version="1.0" ?&gt;
+&lt;!DOCTYPE tmx SYSTEM "tmx14.dtd"&gt;
+&lt;tmx version="1.4"&gt;
+   &lt;header creationtoolversion="1.0.0" datatype="winres" segtype="sentence"
            adminlang="en-us" srclang="de-at" o-tmf="abc"
-           creationtool="XYZTool" >
-   </header>
-   <body>
-       <tu tuid='message1'>
-           <tuv xml:lang="de"><seg>Nachricht1</seg></tuv>
-           <tuv xml:lang="en"><seg>message1</seg></tuv>
-       </tu>
-       <tu tuid='message2'>
-           <tuv xml:lang="de"><seg>Nachricht2</seg></tuv>
-           <tuv xml:lang="en"><seg>message2</seg></tuv>
-       </tu>
-   </body>
-</tmx>
-]]></programlisting>
+           creationtool="XYZTool" &gt;
+   &lt;/header&gt;
+   &lt;body&gt;
+       &lt;tu tuid='message1'&gt;
+           &lt;tuv xml:lang="de"&gt;&lt;seg&gt;Nachricht1&lt;/seg&gt;&lt;/tuv&gt;
+           &lt;tuv xml:lang="en"&gt;&lt;seg&gt;message1&lt;/seg&gt;&lt;/tuv&gt;
+       &lt;/tu&gt;
+       &lt;tu tuid='message2'&gt;
+           &lt;tuv xml:lang="de"&gt;&lt;seg&gt;Nachricht2&lt;/seg&gt;&lt;/tuv&gt;
+           &lt;tuv xml:lang="en"&gt;&lt;seg&gt;message2&lt;/seg&gt;&lt;/tuv&gt;
+       &lt;/tu&gt;
+   &lt;/body&gt;
+&lt;/tmx&gt;
+</programlisting>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $translate = new Zend_Translate(
     array(
-        'adapter' => 'tmx',
-        'content' => 'path/to/mytranslation.tmx',
-        'locale'  => 'en'
+        'adapter' =&gt; 'tmx',
+        'content' =&gt; 'path/to/mytranslation.tmx',
+        'locale'  =&gt; 'en'
     )
 );
-]]></programlisting>
+</programlisting>
         </example>
 
         <para>
@@ -223,8 +224,8 @@ $translate = new Zend_Translate(
             languages.
         </para>
 
-        <note>
-            <title>Option useId</title>
+        <note><info><title>Option useId</title></info>
+            
 
             <para>
                 When you set the <emphasis>useId</emphasis> option to <constant>FALSE</constant>
@@ -244,10 +245,10 @@ $translate = new Zend_Translate(
                 <emphasis>tuv</emphasis> entry which is set like shown in the above example.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.translate.sourcecreation.csv">
-        <title>Creating CSV source files</title>
+    <section xml:id="zend.translate.sourcecreation.csv"><info><title>Creating CSV source files</title></info>
+        
 
         <para>
             CSV source files are small and human readable.
@@ -255,30 +256,30 @@ $translate = new Zend_Translate(
             you will probably use the CSV adapter.
         </para>
 
-        <example id="zend.translate.sourcecreation.csv.example">
-            <title>Example CSV file</title>
+        <example xml:id="zend.translate.sourcecreation.csv.example"><info><title>Example CSV file</title></info>
+            
 
-            <programlisting language="txt"><![CDATA[
+            <programlisting language="txt">
 ﻿#Example csv file
 message1;Nachricht1
 message2;Nachricht2
-]]></programlisting>
+</programlisting>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $translate = new Zend_Translate(
     array(
-        'adapter' => 'csv',
-        'content' => '/path/to/mytranslation.csv',
-        'locale'  => 'de'
+        'adapter' =&gt; 'csv',
+        'content' =&gt; '/path/to/mytranslation.csv',
+        'locale'  =&gt; 'de'
     )
 );
-$translate->addTranslation(
+$translate-&gt;addTranslation(
     array(
-        'content' => 'path/to/other.csv',
-        'locale' => 'fr'
+        'content' =&gt; 'path/to/other.csv',
+        'locale' =&gt; 'fr'
     )
 );
-]]></programlisting>
+</programlisting>
         </example>
 
         <para>
@@ -305,33 +306,33 @@ $translate->addTranslation(
             set a different one using the option <emphasis>enclosure</emphasis>.
         </para>
 
-        <example id="zend.translate.sourcecreation.csv.example2">
-            <title>Second CSV file example</title>
+        <example xml:id="zend.translate.sourcecreation.csv.example2"><info><title>Second CSV file example</title></info>
+            
 
-            <programlisting language="txt"><![CDATA[
+            <programlisting language="txt">
 ﻿# Example CSV file
 "message,1",Nachricht1
 message2,"Nachricht,2"
 "message3,",Nachricht3
-]]></programlisting>
+</programlisting>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $translate = new Zend_Translate(
     array(
-        'adapter' => 'csv',
-        'content' => '/path/to/mytranslation.csv',
-        'locale'  => 'de',
-        'delimiter' => ','
+        'adapter' =&gt; 'csv',
+        'content' =&gt; '/path/to/mytranslation.csv',
+        'locale'  =&gt; 'de',
+        'delimiter' =&gt; ','
     )
 );
 
-$translate->addTranslation(
+$translate-&gt;addTranslation(
     array(
-        'content' => '/path/to/other.csv',
-        'locale' => 'fr'
+        'content' =&gt; '/path/to/other.csv',
+        'locale' =&gt; 'fr'
     )
 );
-]]></programlisting>
+</programlisting>
         </example>
 
         <note>
@@ -341,10 +342,10 @@ $translate->addTranslation(
                 missing characters in your translation.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.translate.sourcecreation.ini">
-        <title>Creating INI source files</title>
+    <section xml:id="zend.translate.sourcecreation.ini"><info><title>Creating INI source files</title></info>
+        
 
         <para>
             <acronym>INI</acronym> source files are human readable but normally not very small as
@@ -352,32 +353,32 @@ $translate->addTranslation(
             editable by your customers you can use the <acronym>INI</acronym> adapter.
         </para>
 
-        <example id="zend.translate.sourcecreation.ini.example">
-            <title>Example INI file</title>
+        <example xml:id="zend.translate.sourcecreation.ini.example"><info><title>Example INI file</title></info>
+            
 
-            <programlisting language="txt"><![CDATA[
+            <programlisting language="txt">
 [Test]
 ;TestPage Comment
 Message_1="Nachricht 1 (de)"
 Message_2="Nachricht 2 (de)"
 Message_3="Nachricht :3 (de)"
-]]></programlisting>
+</programlisting>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $translate = new Zend_Translate(
     array(
-        'adapter' => 'ini',
-        'content' => '/path/to/mytranslation.ini',
-        'locale'  => 'de'
+        'adapter' =&gt; 'ini',
+        'content' =&gt; '/path/to/mytranslation.ini',
+        'locale'  =&gt; 'de'
     )
 );
-$translate->addTranslation(
+$translate-&gt;addTranslation(
     array(
-        'content' => '/path/to/other.ini',
-        'locale' => 'it'
+        'content' =&gt; '/path/to/other.ini',
+        'locale' =&gt; 'it'
     )
 );
-]]></programlisting>
+</programlisting>
         </example>
 
         <para>
@@ -392,8 +393,5 @@ $translate->addTranslation(
             <emphasis>{}|&amp;~![()"</emphasis> must not be used anywhere in the key and have a
             special meaning in the value. Do not use them as it will produce unexpected behaviour.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

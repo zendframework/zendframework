@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.date.definition.theory">
-    <title>Theory of Operation</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.definition.theory"><info><title>Theory of Operation</title></info>
+    
 
     <para>
         Why is there only one class <classname>Zend_Date</classname> for handling dates and times in
@@ -22,10 +23,10 @@
         inheritance hierarchy.
     </para>
 
-    <sect2 id="zend.date.theory.internals">
-        <title>Internals</title>
+    <section xml:id="zend.date.theory.internals"><info><title>Internals</title></info>
+        
 
-        <itemizedlist mark='opencircle'>
+        <itemizedlist mark="opencircle">
             <listitem>
                 <para>
                     <acronym>UNIX</acronym> Timestamp
@@ -69,6 +70,5 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
-<!--vim:se ts=4 sw=4 et:-->
+    </section>
+</section>

@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.json">
-    <title>JSON Helper</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.json"><info><title>JSON Helper</title></info>
+    
 
     <para>
         When creating views that return <acronym>JSON</acronym>, it's important to also set the
@@ -14,9 +15,9 @@
         The <acronym>JSON</acronym> helper sets the following header:
     </para>
 
-    <programlisting language="text"><![CDATA[
+    <programlisting language="text">
 Content-Type: application/json
-]]></programlisting>
+</programlisting>
 
     <para>
         Most <acronym>AJAX</acronym> libraries look for this header when parsing responses to
@@ -27,12 +28,12 @@ Content-Type: application/json
         Usage of the <acronym>JSON</acronym> helper is very straightforward:
     </para>
 
-    <programlisting language="php"><![CDATA[
-<?php echo $this->json($this->data) ?>
-]]></programlisting>
+    <programlisting language="php">
+&lt;?php echo $this-&gt;json($this-&gt;data) ?&gt;
+</programlisting>
 
-    <note>
-        <title>Keeping layouts and enabling encoding using Zend_Json_Expr</title>
+    <note><info><title>Keeping layouts and enabling encoding using Zend_Json_Expr</title></info>
+        
 
         <para>
             Each method in the <acronym>JSON</acronym> helper accepts a second, optional argument.
@@ -48,13 +49,13 @@ Content-Type: application/json
             with a value of a boolean <constant>TRUE</constant>.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Boolean true as second argument enables layouts:
-echo $this->json($this->data, true);
+echo $this-&gt;json($this-&gt;data, true);
 
 // Or boolean true as "keepLayouts" key:
-echo $this->json($this->data, array('keepLayouts' => true));
-]]></programlisting>
+echo $this-&gt;json($this-&gt;data, array('keepLayouts' =&gt; true));
+</programlisting>
 
         <para>
             <classname>Zend_Json::encode</classname> allows the encoding of native
@@ -64,14 +65,11 @@ echo $this->json($this->data, array('keepLayouts' => true));
             the options array:
         </para>
 
-        <programlisting language="php"><![CDATA[
-<?php echo $this->json($this->data, array(
-    'enableJsonExprFinder' => true,
-    'keepLayouts'          => true,
-)) ?>
-]]></programlisting>
+        <programlisting language="php">
+&lt;?php echo $this-&gt;json($this-&gt;data, array(
+    'enableJsonExprFinder' =&gt; true,
+    'keepLayouts'          =&gt; true,
+)) ?&gt;
+</programlisting>
     </note>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

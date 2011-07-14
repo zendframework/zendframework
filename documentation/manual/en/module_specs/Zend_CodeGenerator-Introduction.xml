@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.codegenerator.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.codegenerator.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_CodeGenerator</classname> provides facilities to generate
@@ -12,8 +13,8 @@
         JavaScript, configuration files, apache vhosts, etc.
     </para>
 
-    <sect2 id="zend.codegenerator.introduction.theory">
-        <title>Theory of Operation</title>
+    <section xml:id="zend.codegenerator.introduction.theory"><info><title>Theory of Operation</title></info>
+        
 
         <para>
             In the most typical use case, you will simply instantiate a code
@@ -22,16 +23,16 @@
             simply echo the object or call its <methodname>generate()</methodname> method.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Passing configuration to the constructor:
 $file = new Zend_CodeGenerator_Php_File(array(
-    'classes' => array(
+    'classes' =&gt; array(
         new Zend_CodeGenerator_Php_Class(array(
-            'name'    => 'World',
-            'methods' => array(
+            'name'    =&gt; 'World',
+            'methods' =&gt; array(
                 new Zend_CodeGenerator_Php_Method(array(
-                    'name' => 'hello',
-                    'body' => 'echo \'Hello world!\';',
+                    'name' =&gt; 'hello',
+                    'body' =&gt; 'echo \'Hello world!\';',
                 )),
             ),
         )),
@@ -40,29 +41,29 @@ $file = new Zend_CodeGenerator_Php_File(array(
 
 // Configuring after instantiation
 $method = new Zend_CodeGenerator_Php_Method();
-$method->setName('hello')
-       ->setBody('echo \'Hello world!\';');
+$method-&gt;setName('hello')
+       -&gt;setBody('echo \'Hello world!\';');
 
 $class = new Zend_CodeGenerator_Php_Class();
-$class->setName('World')
-      ->setMethod($method);
+$class-&gt;setName('World')
+      -&gt;setMethod($method);
 
 $file = new Zend_CodeGenerator_Php_File();
-$file->setClass($class);
+$file-&gt;setClass($class);
 
 // Render the generated file
 echo $file;
 
 // or write it to a file:
-file_put_contents('World.php', $file->generate());
-]]></programlisting>
+file_put_contents('World.php', $file-&gt;generate());
+</programlisting>
 
         <para>
             Both of the above samples will render the same result:
         </para>
 
-        <programlisting language="php"><![CDATA[
-<?php
+        <programlisting language="php">
+&lt;?php
 
 class World
 {
@@ -73,7 +74,7 @@ class World
     }
 
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             Another common use case is to update existing code -- for instance,
@@ -89,32 +90,32 @@ class World
             following:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $class = Zend_CodeGenerator_Php_Class::fromReflection(
     new Zend_Reflection_Class('World')
 );
 
 $method = new Zend_CodeGenerator_Php_Method();
-$method->setName('mrMcFeeley')
-       ->setBody('echo \'Hello, Mr. McFeeley!\';');
-$class->setMethod($method);
+$method-&gt;setName('mrMcFeeley')
+       -&gt;setBody('echo \'Hello, Mr. McFeeley!\';');
+$class-&gt;setMethod($method);
 
 $file = new Zend_CodeGenerator_Php_File();
-$file->setClass($class);
+$file-&gt;setClass($class);
 
 // Render the generated file
 echo $file;
 
 // Or, better yet, write it back to the original file:
-file_put_contents('World.php', $file->generate());
-]]></programlisting>
+file_put_contents('World.php', $file-&gt;generate());
+</programlisting>
 
         <para>
             The resulting class file will now look like this:
         </para>
 
-        <programlisting language="php"><![CDATA[
-<?php
+        <programlisting language="php">
+&lt;?php
 
 class World
 {
@@ -130,6 +131,6 @@ class World
     }
 
 }
-]]></programlisting>
-    </sect2>
-</sect1>
+</programlisting>
+    </section>
+</section>

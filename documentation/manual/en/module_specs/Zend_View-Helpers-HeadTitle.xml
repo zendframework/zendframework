@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.headtitle">
-    <title>HeadTitle Helper</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headtitle"><info><title>HeadTitle Helper</title></info>
+    
 
     <para>
         The <acronym>HTML</acronym> <emphasis>&lt;title&gt;</emphasis> element is used to provide a
@@ -30,8 +31,8 @@
         pass a different attach order as the second parameter.
     </para>
 
-    <example id="zend.view.helpers.initial.headtitle.basicusage">
-        <title>HeadTitle Helper Basic Usage</title>
+    <example xml:id="zend.view.helpers.initial.headtitle.basicusage"><info><title>HeadTitle Helper Basic Usage</title></info>
+        
 
         <para>
             You may specify a title tag at any time. A typical usage would have
@@ -39,30 +40,27 @@
             application: site, controller, action, and potentially resource.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
  // setting the controller and action name as title segments:
-$request = Zend_Controller_Front::getInstance()->getRequest();
-$this->headTitle($request->getActionName())
-     ->headTitle($request->getControllerName());
+$request = Zend_Controller_Front::getInstance()-&gt;getRequest();
+$this-&gt;headTitle($request-&gt;getActionName())
+     -&gt;headTitle($request-&gt;getControllerName());
 
 // setting the site in the title; possibly in the layout script:
-$this->headTitle('Zend Framework');
+$this-&gt;headTitle('Zend Framework');
 
 // setting a separator string for segments:
-$this->headTitle()->setSeparator(' / ');
-]]></programlisting>
+$this-&gt;headTitle()-&gt;setSeparator(' / ');
+</programlisting>
 
         <para>
             When you're finally ready to render the title in your layout
             script, simply echo the helper:
         </para>
 
-        <programlisting language="php"><![CDATA[
-<!-- renders <action> / <controller> / Zend Framework -->
-<?php echo $this->headTitle() ?>
-]]></programlisting>
+        <programlisting language="php">
+&lt;!-- renders &lt;action&gt; / &lt;controller&gt; / Zend Framework --&gt;
+&lt;?php echo $this-&gt;headTitle() ?&gt;
+</programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

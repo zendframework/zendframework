@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.actionhelpers.contextswitch">
-    <title>ContextSwitch and AjaxContext</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.contextswitch"><info><title>ContextSwitch and AjaxContext</title></info>
+    
 
     <para>
         The <emphasis>ContextSwitch</emphasis> action helper is intended for
@@ -49,7 +50,7 @@
         As an example, let's consider the following controller:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 class NewsController extends Zend_Controller_Action
 {
     /**
@@ -57,7 +58,7 @@ class NewsController extends Zend_Controller_Action
      */
     public function indexAction()
     {
-        $this->_forward('list');
+        $this-&gt;_forward('list');
     }
 
     /**
@@ -74,7 +75,7 @@ class NewsController extends Zend_Controller_Action
     {
     }
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         Let's say that we want the <methodname>listAction()</methodname> to also be
@@ -82,19 +83,19 @@ class NewsController extends Zend_Controller_Action
         can hint that it can return an <acronym>XML</acronym> response:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 class NewsController extends Zend_Controller_Action
 {
     public function init()
     {
-        $contextSwitch = $this->_helper->getHelper('contextSwitch');
-        $contextSwitch->addActionContext('list', 'xml')
-                      ->initContext();
+        $contextSwitch = $this-&gt;_helper-&gt;getHelper('contextSwitch');
+        $contextSwitch-&gt;addActionContext('list', 'xml')
+                      -&gt;initContext();
     }
 
     // ...
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         What this will do is:
@@ -151,8 +152,8 @@ class NewsController extends Zend_Controller_Action
         processing.
     </para>
 
-    <sect4 id="zend.controller.actionhelpers.contextswitch.contexts">
-        <title>Default Contexts Available</title>
+    <section xml:id="zend.controller.actionhelpers.contextswitch.contexts"><info><title>Default Contexts Available</title></info>
+        
 
         <para>
             By default, two contexts are available to the
@@ -179,9 +180,9 @@ class NewsController extends Zend_Controller_Action
                     <acronym>JSON</acronym> serialization:
                 </para>
 
-                <programlisting language="php"><![CDATA[
-$this->_helper->contextSwitch()->setAutoJsonSerialization(false);
-]]></programlisting>
+                <programlisting language="php">
+$this-&gt;_helper-&gt;contextSwitch()-&gt;setAutoJsonSerialization(false);
+</programlisting>
             </listitem>
 
             <listitem>
@@ -193,10 +194,10 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
                 </para>
             </listitem>
         </itemizedlist>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelpers.contextswitch.custom">
-        <title>Creating Custom Contexts</title>
+    <section xml:id="zend.controller.actionhelpers.contextswitch.custom"><info><title>Creating Custom Contexts</title></info>
+        
 
         <para>
             Sometimes, the default contexts are not enough. For instance, you may wish to return
@@ -327,10 +328,10 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
                 </para>
             </listitem>
         </itemizedlist>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelpers.contextswitch.actions">
-        <title>Setting Contexts Per Action</title>
+    <section xml:id="zend.controller.actionhelpers.contextswitch.actions"><info><title>Setting Contexts Per Action</title></info>
+        
 
         <para>
             There are two mechanisms for setting available contexts. You can
@@ -346,7 +347,7 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
             following controller class:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 class FooController extends Zend_Controller_Action
 {
     public function listAction()
@@ -365,7 +366,7 @@ class FooController extends Zend_Controller_Action
     {
     }
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             Let's say we wanted to add an <acronym>XML</acronym> context to the 'list' action, and
@@ -373,38 +374,38 @@ class FooController extends Zend_Controller_Action
             We could do so in the <methodname>init()</methodname> method:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 class FooController extends Zend_Controller_Action
 {
     public function init()
     {
-        $this->_helper->contextSwitch()
-             ->addActionContext('list', 'xml')
-             ->addActionContext('comments', array('xml', 'json'))
-             ->initContext();
+        $this-&gt;_helper-&gt;contextSwitch()
+             -&gt;addActionContext('list', 'xml')
+             -&gt;addActionContext('comments', array('xml', 'json'))
+             -&gt;initContext();
     }
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             Alternately, you could simply define the array property
             <varname>$contexts</varname>:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 class FooController extends Zend_Controller_Action
 {
     public $contexts = array(
-        'list'     => array('xml'),
-        'comments' => array('xml', 'json')
+        'list'     =&gt; array('xml'),
+        'comments' =&gt; array('xml', 'json')
     );
 
     public function init()
     {
-        $this->_helper->contextSwitch()->initContext();
+        $this-&gt;_helper-&gt;contextSwitch()-&gt;initContext();
     }
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             The above is less overhead, but also prone to potential errors.
@@ -495,25 +496,25 @@ class FooController extends Zend_Controller_Action
                 </para>
             </listitem>
         </itemizedlist>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelpers.contextswitch.initcontext">
-        <title>Initializing Context Switching</title>
+    <section xml:id="zend.controller.actionhelpers.contextswitch.initcontext"><info><title>Initializing Context Switching</title></info>
+        
 
         <para>
             To initialize context switching, you need to call
             <methodname>initContext()</methodname> in your action controller:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 class NewsController extends Zend_Controller_Action
 {
     public function init()
     {
-        $this->_helper->contextSwitch()->initContext();
+        $this-&gt;_helper-&gt;contextSwitch()-&gt;initContext();
     }
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             In some cases, you may want to force the context used; for instance,
@@ -522,13 +523,13 @@ class NewsController extends Zend_Controller_Action
             <methodname>initContext()</methodname>:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$contextSwitch->initContext('xml');
-]]></programlisting>
-    </sect4>
+        <programlisting language="php">
+$contextSwitch-&gt;initContext('xml');
+</programlisting>
+    </section>
 
-    <sect4 id="zend.controller.actionhelpers.contextswitch.misc">
-        <title>Additional Functionality</title>
+    <section xml:id="zend.controller.actionhelpers.contextswitch.misc"><info><title>Additional Functionality</title></info>
+        
 
         <para>
             A variety of methods can be used to alter the behaviour of the
@@ -546,10 +547,10 @@ $contextSwitch->initContext('xml');
                     <methodname>initContext()</methodname>.
                 </para>
 
-                <programlisting language="php"><![CDATA[
-$contextSwitch->setAutoJsonSerialization(false);
-$contextSwitch->initContext();
-]]></programlisting>
+                <programlisting language="php">
+$contextSwitch-&gt;setAutoJsonSerialization(false);
+$contextSwitch-&gt;initContext();
+</programlisting>
 
                 <para>
                     You can retrieve the value of the flag with
@@ -735,10 +736,10 @@ $contextSwitch->initContext();
                 </para>
             </listitem>
         </itemizedlist>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelpers.contextswitch.ajaxcontext">
-        <title>AjaxContext Functionality</title>
+    <section xml:id="zend.controller.actionhelpers.contextswitch.ajaxcontext"><info><title>AjaxContext Functionality</title></info>
+        
 
         <para>
             The <emphasis>AjaxContext</emphasis> helper extends
@@ -771,8 +772,8 @@ $contextSwitch->initContext();
             request. No additional headers are returned.
         </para>
 
-        <example id="zend.controller.actionhelpers.contextswitch.ajaxcontext.example">
-            <title>Allowing Actions to Respond To Ajax Requests</title>
+        <example xml:id="zend.controller.actionhelpers.contextswitch.ajaxcontext.example"><info><title>Allowing Actions to Respond To Ajax Requests</title></info>
+            
 
             <para>
                 In this following example, we're allowing requests to the
@@ -782,16 +783,16 @@ $contextSwitch->initContext();
                 latter, we'll return <acronym>JSON</acronym>.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 class CommentController extends Zend_Controller_Action
 {
     public function init()
     {
-        $ajaxContext = $this->_helper->getHelper('AjaxContext');
-        $ajaxContext->addActionContext('view', 'html')
-                    ->addActionContext('form', 'html')
-                    ->addActionContext('process', 'json')
-                    ->initContext();
+        $ajaxContext = $this-&gt;_helper-&gt;getHelper('AjaxContext');
+        $ajaxContext-&gt;addActionContext('view', 'html')
+                    -&gt;addActionContext('form', 'html')
+                    -&gt;addActionContext('process', 'json')
+                    -&gt;initContext();
     }
 
     public function viewAction()
@@ -815,7 +816,7 @@ class CommentController extends Zend_Controller_Action
         // view variables, and JSON will be returned.
     }
 }
-]]></programlisting>
+</programlisting>
 
             <para>
                 On the client end, your <acronym>AJAX</acronym> library will simply request the
@@ -834,8 +835,5 @@ class CommentController extends Zend_Controller_Action
                 appropriate response format.
             </para>
         </example>
-    </sect4>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

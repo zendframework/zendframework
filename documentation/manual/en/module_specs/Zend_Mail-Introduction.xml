@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.mail.introduction.getting-started">
-        <title>Getting started</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.introduction"><info><title>Introduction</title></info>
+    
+
+    <section xml:id="zend.mail.introduction.getting-started"><info><title>Getting started</title></info>
+        
 
         <para>
             <classname>Zend_Mail</classname> provides generalized functionality to compose and send
@@ -14,8 +15,8 @@
             <classname>Zend_Mail_Transport_Smtp</classname>.
         </para>
 
-        <example id="zend.mail.introduction.example-1">
-            <title>Simple E-Mail with Zend_Mail</title>
+        <example xml:id="zend.mail.introduction.example-1"><info><title>Simple E-Mail with Zend_Mail</title></info>
+            
 
             <para>
                 A simple e-mail consists of some recipients, a subject, a body and a sender. To send
@@ -23,18 +24,18 @@
                 following:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $mail = new Zend_Mail();
-$mail->setBodyText('This is the text of the mail.');
-$mail->setFrom('somebody@example.com', 'Some Sender');
-$mail->addTo('somebody_else@example.com', 'Some Recipient');
-$mail->setSubject('TestSubject');
-$mail->send();
-]]></programlisting>
+$mail-&gt;setBodyText('This is the text of the mail.');
+$mail-&gt;setFrom('somebody@example.com', 'Some Sender');
+$mail-&gt;addTo('somebody_else@example.com', 'Some Recipient');
+$mail-&gt;setSubject('TestSubject');
+$mail-&gt;send();
+</programlisting>
         </example>
 
-        <note>
-            <title>Minimum definitions</title>
+        <note><info><title>Minimum definitions</title></info>
+            
 
             <para>
                 In order to send an e-mail with <classname>Zend_Mail</classname> you have to specify
@@ -63,67 +64,63 @@ $mail->send();
             convenient fluent interface.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $mail = new Zend_Mail();
-$mail->setBodyText('This is the text of the mail.')
-    ->setFrom('somebody@example.com', 'Some Sender')
-    ->addTo('somebody_else@example.com', 'Some Recipient')
-    ->setSubject('TestSubject')
-    ->send();
-]]></programlisting>
-    </sect2>
+$mail-&gt;setBodyText('This is the text of the mail.')
+    -&gt;setFrom('somebody@example.com', 'Some Sender')
+    -&gt;addTo('somebody_else@example.com', 'Some Recipient')
+    -&gt;setSubject('TestSubject')
+    -&gt;send();
+</programlisting>
+    </section>
 
-    <sect2 id="zend.mail.introduction.sendmail">
-        <title>Configuring the default sendmail transport</title>
+    <section xml:id="zend.mail.introduction.sendmail"><info><title>Configuring the default sendmail transport</title></info>
+        
 
         <para>
             The default transport for a <classname>Zend_Mail</classname> instance is
             <classname>Zend_Mail_Transport_Sendmail</classname>. It is essentially a wrapper to the
-            <acronym>PHP</acronym> <ulink
-                url="http://php.net/mail"><methodname>mail()</methodname></ulink> function. If you
-            wish to pass additional parameters to the <ulink
-                url="http://php.net/mail"><methodname>mail()</methodname></ulink> function, simply
+            <acronym>PHP</acronym> <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mail"><methodname>mail()</methodname></link> function. If you
+            wish to pass additional parameters to the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mail"><methodname>mail()</methodname></link> function, simply
             create a new transport instance and pass your parameters to the constructor. The new
             transport instance can then act as the default <classname>Zend_Mail</classname>
             transport, or it can be passed to the <methodname>send()</methodname> method of
             <classname>Zend_Mail</classname>.
         </para>
 
-        <example id="zend.mail.introduction.sendmail.example-1">
-            <title>
+        <example xml:id="zend.mail.introduction.sendmail.example-1"><info><title>
                 Passing additional parameters to the Zend_Mail_Transport_Sendmail transport
-            </title>
+            </title></info>
+            
 
             <para>
-                This example shows how to change the Return-Path of the <ulink
-                    url="http://php.net/mail"><methodname>mail()</methodname></ulink> function.
+                This example shows how to change the Return-Path of the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mail"><methodname>mail()</methodname></link> function.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $tr = new Zend_Mail_Transport_Sendmail('-freturn_to_me@example.com');
 Zend_Mail::setDefaultTransport($tr);
 
 $mail = new Zend_Mail();
-$mail->setBodyText('This is the text of the mail.');
-$mail->setFrom('somebody@example.com', 'Some Sender');
-$mail->addTo('somebody_else@example.com', 'Some Recipient');
-$mail->setSubject('TestSubject');
-$mail->send();
-]]></programlisting>
+$mail-&gt;setBodyText('This is the text of the mail.');
+$mail-&gt;setFrom('somebody@example.com', 'Some Sender');
+$mail-&gt;addTo('somebody_else@example.com', 'Some Recipient');
+$mail-&gt;setSubject('TestSubject');
+$mail-&gt;send();
+</programlisting>
         </example>
 
-        <note>
-            <title>Safe mode restrictions</title>
+        <note><info><title>Safe mode restrictions</title></info>
+            
 
             <para>
-                The optional additional parameters will be cause the <ulink
-                    url="http://php.net/mail"><methodname>mail()</methodname></ulink> function to
+                The optional additional parameters will be cause the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mail"><methodname>mail()</methodname></link> function to
                 fail if <acronym>PHP</acronym> is running in safe mode.
             </para>
         </note>
 
-        <warning>
-            <title>Sendmail Transport and Windows</title>
+        <warning><info><title>Sendmail Transport and Windows</title></info>
+            
 
             <para>
                 As the <acronym>PHP</acronym> manual states the <methodname>mail()</methodname>
@@ -139,8 +136,5 @@ $mail->send();
                 transport for sending!
             </para>
         </warning>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

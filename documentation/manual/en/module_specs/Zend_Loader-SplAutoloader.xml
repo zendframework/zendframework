@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.loader.spl-autoloader">
-    <title>The SplAutoloader Interface</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.loader.spl-autoloader.intro">
-        <title>Overview</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.spl-autoloader"><info><title>The SplAutoloader Interface</title></info>
+    
+
+    <section xml:id="zend.loader.spl-autoloader.intro"><info><title>Overview</title></info>
+        
 
         <para>
             While any valid PHP callback may be registered with
@@ -19,10 +20,10 @@
             method that may be invoked to attempt to load a class, and a method for registering with
             the SPL autoloading mechanism.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.spl-autoloader.quick-start">
-        <title>Quick Start</title>
+    <section xml:id="zend.loader.spl-autoloader.quick-start"><info><title>Quick Start</title></info>
+        
 
         <para>
             To create your own autoloading mechanism, simply create a class implementing the
@@ -32,7 +33,7 @@
             for a class file named after the class within a list of registered directories.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 namespace Custom;
 
 use Zend\Loader\SplAutoloader;
@@ -44,19 +45,19 @@ class ModifiedIncludePathAutoloader implements SplAutoloader
     public function __construct($options = null)
     {
         if (null !== $options) {
-            $this->setOptions($options);
+            $this-&gt;setOptions($options);
         }
     }
 
     public function setOptions($options)
     {
-        if (!is_array($options) && !($options instanceof \Traversable)) {
+        if (!is_array($options) &amp;&amp; !($options instanceof \Traversable)) {
             throw new \InvalidArgumentException();
         }
 
         foreach ($options as $path) {
-            if (!in_array($path, $this->paths)) {
-                $this->paths[] = $path;
+            if (!in_array($path, $this-&gt;paths)) {
+                $this-&gt;paths[] = $path;
             }
         }
         return $this;
@@ -65,7 +66,7 @@ class ModifiedIncludePathAutoloader implements SplAutoloader
     public function autoload($classname)
     {
         $filename = $classname . '.php';
-        foreach ($this->paths as $path) {
+        foreach ($this-&gt;paths as $path) {
             $test = $path . DIRECTORY_SEPARATOR . $filename;
             if (file_exists($test)) {
                 return include($test);
@@ -79,21 +80,21 @@ class ModifiedIncludePathAutoloader implements SplAutoloader
         spl_autoload_register(array($this, 'autoload'));
     }
 }
-]]></programlisting>
-    </sect2>
+</programlisting>
+    </section>
 
-    <sect2 id="zend.loader.spl-autoloader.options">
-        <title>Configuration Options</title>
+    <section xml:id="zend.loader.spl-autoloader.options"><info><title>Configuration Options</title></info>
+        
 
         <para>
             This component defines no configuration options, as it is an interface.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.spl-autoloader.methods">
-        <title>Available Methods</title>
+    <section xml:id="zend.loader.spl-autoloader.methods"><info><title>Available Methods</title></info>
+        
 
-        <refentry id="zend.loader.spl-autoloader.methods.constructor">
+        <refentry xml:id="zend.loader.spl-autoloader.methods.constructor">
             <refnamediv>
                 <refname>__construct</refname>
                 <refpurpose>Initialize and configure an autoloader</refpurpose>
@@ -108,18 +109,18 @@ class ModifiedIncludePathAutoloader implements SplAutoloader
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>Constructor</title>
+            <refsection><info><title>Constructor</title></info>
+                
 
                 <para>
                     Autoloader constructors should optionally receive configuration options.
                     Typically, if received, these will be passed to the
                     <methodname>setOptions()</methodname> method to process.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.spl-autoloader.methods.set-options">
+        <refentry xml:id="zend.loader.spl-autoloader.methods.set-options">
             <refnamediv>
                 <refname>setOptions</refname>
                 <refpurpose>Configure the autoloader state</refpurpose>
@@ -134,8 +135,8 @@ class ModifiedIncludePathAutoloader implements SplAutoloader
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>setOptions()</title>
+            <refsection><info><title>setOptions()</title></info>
+                
 
                 <para>
                     Used to configure the autoloader. Typically, it should expect either an array or
@@ -143,10 +144,10 @@ class ModifiedIncludePathAutoloader implements SplAutoloader
                     options is left to implementation. Additionally, it is recommended that the
                     method return the autoloader instance in order to implement a fluent interface.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.spl-autoloader.methods.autoload">
+        <refentry xml:id="zend.loader.spl-autoloader.methods.autoload">
             <refnamediv>
                 <refname>autoload</refname>
                 <refpurpose>Attempt to resolve a class name to the file defining it</refpurpose>
@@ -161,18 +162,18 @@ class ModifiedIncludePathAutoloader implements SplAutoloader
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>autoload()</title>
+            <refsection><info><title>autoload()</title></info>
+                
 
                 <para>
                     This method should be used to resolve a class name to the file defining it. When
                     a positive match is found, return the class name; otherwise, return a boolean
                     false.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.spl-autoloader.methods.register">
+        <refentry xml:id="zend.loader.spl-autoloader.methods.register">
             <refnamediv>
                 <refname>register</refname>
                 <refpurpose>Register the autoloader with the SPL autoloader</refpurpose>
@@ -184,8 +185,8 @@ class ModifiedIncludePathAutoloader implements SplAutoloader
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>register()</title>
+            <refsection><info><title>register()</title></info>
+                
 
                 <para>
                     Should be used to register the autoloader instance with
@@ -193,22 +194,22 @@ class ModifiedIncludePathAutoloader implements SplAutoloader
                     should look like the following:
                 </para>
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 public function register()
 {
     spl_autoload_register(array($this, 'autoload'));
 }
-]]></programlisting>
-            </refsect1>
+</programlisting>
+            </refsection>
         </refentry>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.spl-autoloader.examples">
-        <title>Examples</title>
+    <section xml:id="zend.loader.spl-autoloader.examples"><info><title>Examples</title></info>
+        
 
         <para>
             Please see the <link linkend="zend.loader.spl-autoloader.quick-start">Quick Start</link>
             for a complete example.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

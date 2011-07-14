@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.dispatcher">
-    <title>The Dispatcher</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.controller.dispatcher.overview">
-        <title>Overview</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.dispatcher"><info><title>The Dispatcher</title></info>
+    
+
+    <section xml:id="zend.controller.dispatcher.overview"><info><title>Overview</title></info>
+        
 
         <para>
             Dispatching is the process of taking the request object,
@@ -22,8 +23,8 @@
             <methodname>setDefaultModule()</methodname> methods, respectively.
         </para>
 
-        <note>
-            <title>Default Module</title>
+        <note><info><title>Default Module</title></info>
+            
 
             <para>
                 When creating modular applications, you may find that you want
@@ -34,13 +35,13 @@
                 <constant>TRUE</constant> in either the front controller or your dispatcher:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 // In your front controller:
-$front->setParam('prefixDefaultModule', true);
+$front-&gt;setParam('prefixDefaultModule', true);
 
 // In your dispatcher:
-$dispatcher->setParam('prefixDefaultModule', true);
-]]></programlisting>
+$dispatcher-&gt;setParam('prefixDefaultModule', true);
+</programlisting>
 
             <para>
                 This allows you to re-purpose an existing module to be the
@@ -73,11 +74,11 @@ $dispatcher->setParam('prefixDefaultModule', true);
             send to the new action:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 public function fooAction()
 {
     // forward to another action in the current controller and module:
-    $this->_forward('bar', null, null, array('baz' => 'bogus'));
+    $this-&gt;_forward('bar', null, null, array('baz' =&gt; 'bogus'));
 }
 
 public function barAction()
@@ -85,20 +86,20 @@ public function barAction()
     // forward to an action in another controller:
     // FooController::bazAction(),
     // in the current module:
-    $this->_forward('baz', 'foo', null, array('baz' => 'bogus'));
+    $this-&gt;_forward('baz', 'foo', null, array('baz' =&gt; 'bogus'));
 }
 
 public function bazAction()
 {
     // forward to an action in another controller in another module,
     // Foo_BarController::bazAction():
-    $this->_forward('baz', 'bar', 'foo', array('baz' => 'bogus'));
+    $this-&gt;_forward('baz', 'bar', 'foo', array('baz' =&gt; 'bogus'));
 }
-]]></programlisting>
-    </sect2>
+</programlisting>
+    </section>
 
-    <sect2 id="zend.controller.dispatcher.subclassing">
-        <title>Subclassing the Dispatcher</title>
+    <section xml:id="zend.controller.dispatcher.subclassing"><info><title>Subclassing the Dispatcher</title></info>
+        
 
         <para>
             <classname>Zend_Controller_Front</classname> will first call the router to
@@ -119,7 +120,7 @@ public function bazAction()
             following methods as required for any dispatcher implementation:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 interface Zend_Controller_Dispatcher_Interface
 {
     /**
@@ -273,7 +274,7 @@ interface Zend_Controller_Dispatcher_Interface
      */
     public function getDefaultAction();
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             In most cases, however, you should simply extend the abstract class
@@ -290,8 +291,5 @@ interface Zend_Controller_Dispatcher_Interface
             such as dispatching to action files under controller directories
             (instead of dispatching to class methods).
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

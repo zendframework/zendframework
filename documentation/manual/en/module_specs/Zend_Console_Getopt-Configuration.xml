@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.console.getopt.configuration">
-    <title>Configuring Zend_Console_Getopt</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.console.getopt.configuration.addrules">
-        <title>Adding Option Rules</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.configuration"><info><title>Configuring Zend_Console_Getopt</title></info>
+    
+
+    <section xml:id="zend.console.getopt.configuration.addrules"><info><title>Adding Option Rules</title></info>
+        
 
         <para>
             You can add more option rules in addition to those you specified
@@ -18,17 +19,17 @@
             for details on the syntax for specifying options.
         </para>
 
-        <example id="zend.console.getopt.configuration.addrules.example">
-            <title>Using addRules()</title>
+        <example xml:id="zend.console.getopt.configuration.addrules.example"><info><title>Using addRules()</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $opts = new Zend_Console_Getopt('abp:');
-$opts->addRules(
+$opts-&gt;addRules(
   array(
-    'verbose|v' => 'Print verbose output'
+    'verbose|v' =&gt; 'Print verbose output'
   )
 );
-]]></programlisting>
+</programlisting>
         </example>
 
         <para>
@@ -38,10 +39,10 @@ $opts->addRules(
             short format options and long format options in the same instance
             of <classname>Zend_Console_Getopt</classname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.console.getopt.configuration.addhelp">
-        <title>Adding Help Messages</title>
+    <section xml:id="zend.console.getopt.configuration.addhelp"><info><title>Adding Help Messages</title></info>
+        
 
         <para>
             In addition to specifying the help strings when declaring option
@@ -52,19 +53,19 @@ $opts->addRules(
             corresponding help string.
         </para>
 
-        <example id="zend.console.getopt.configuration.addhelp.example">
-            <title>Using setHelp()</title>
+        <example xml:id="zend.console.getopt.configuration.addhelp.example"><info><title>Using setHelp()</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $opts = new Zend_Console_Getopt('abp:');
-$opts->setHelp(
+$opts-&gt;setHelp(
     array(
-        'a' => 'apple option, with no parameter',
-        'b' => 'banana option, with required integer parameter',
-        'p' => 'pear option, with optional string parameter'
+        'a' =&gt; 'apple option, with no parameter',
+        'b' =&gt; 'banana option, with required integer parameter',
+        'p' =&gt; 'pear option, with optional string parameter'
     )
 );
-]]></programlisting>
+</programlisting>
         </example>
 
         <para>
@@ -76,10 +77,10 @@ $opts->setHelp(
             The <methodname>setHelp()</methodname> method is the only way to define help
             strings if you declared the options using the short syntax.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.console.getopt.configuration.addaliases">
-        <title>Adding Option Aliases</title>
+    <section xml:id="zend.console.getopt.configuration.addaliases"><info><title>Adding Option Aliases</title></info>
+        
 
         <para>
             You can declare aliases for options using the <methodname>setAliases()</methodname>
@@ -95,19 +96,19 @@ $opts->setHelp(
             an alias, a <classname>Zend_Console_Getopt_Exception</classname> is thrown.
         </para>
 
-        <example id="zend.console.getopt.configuration.addaliases.example">
-            <title>Using setAliases()</title>
+        <example xml:id="zend.console.getopt.configuration.addaliases.example"><info><title>Using setAliases()</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $opts = new Zend_Console_Getopt('abp:');
-$opts->setAliases(
+$opts-&gt;setAliases(
     array(
-        'a' => 'apple',
-        'a' => 'apfel',
-        'p' => 'pear'
+        'a' =&gt; 'apple',
+        'a' =&gt; 'apfel',
+        'p' =&gt; 'pear'
     )
 );
-]]></programlisting>
+</programlisting>
         </example>
 
         <para>
@@ -122,10 +123,10 @@ $opts->setAliases(
             The <methodname>setAliases()</methodname> method is the only way to define aliases
             if you declared the options using the short syntax.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.console.getopt.configuration.addargs">
-        <title>Adding Argument Lists</title>
+    <section xml:id="zend.console.getopt.configuration.addargs"><info><title>Adding Argument Lists</title></info>
+        
 
         <para>
             By default, <classname>Zend_Console_Getopt</classname> uses
@@ -141,24 +142,24 @@ $opts->setAliases(
             current arguments.
         </para>
 
-        <example id="zend.console.getopt.configuration.addargs.example">
-            <title>Using addArguments() and setArguments()</title>
+        <example xml:id="zend.console.getopt.configuration.addargs.example"><info><title>Using addArguments() and setArguments()</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 // By default, the constructor uses $_SERVER['argv']
 $opts = new Zend_Console_Getopt('abp:');
 
 // Append an array to the existing arguments
-$opts->addArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
+$opts-&gt;addArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
 
 // Substitute a new array for the existing arguments
-$opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
-]]></programlisting>
+$opts-&gt;setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
+</programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.console.getopt.configuration.config">
-        <title>Adding Configuration</title>
+    <section xml:id="zend.console.getopt.configuration.config"><info><title>Adding Configuration</title></info>
+        
 
         <para>
             The third parameter to the <classname>Zend_Console_Getopt</classname>
@@ -169,8 +170,8 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             <methodname>setOption()</methodname> method.
         </para>
 
-        <note>
-            <title>Clarifying the Term "option"</title>
+        <note><info><title>Clarifying the Term "option"</title></info>
+            
 
             <para>
                 The term "option" is used for configuration of the
@@ -237,13 +238,13 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             a configuration option name and an option value.
         </para>
 
-        <example id="zend.console.getopt.configuration.config.example.setoption">
-            <title>Using setOption()</title>
+        <example xml:id="zend.console.getopt.configuration.config.example.setoption"><info><title>Using setOption()</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $opts = new Zend_Console_Getopt('abp:');
-$opts->setOption('ignoreCase', true);
-]]></programlisting>
+$opts-&gt;setOption('ignoreCase', true);
+</programlisting>
         </example>
 
         <para>
@@ -255,18 +256,18 @@ $opts->setOption('ignoreCase', true);
             configuration; you don't have to list all options.
         </para>
 
-        <example id="zend.console.getopt.configuration.config.example.setoptions">
-            <title>Using setOptions()</title>
+        <example xml:id="zend.console.getopt.configuration.config.example.setoptions"><info><title>Using setOptions()</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $opts = new Zend_Console_Getopt('abp:');
-$opts->setOptions(
+$opts-&gt;setOptions(
     array(
-        'ignoreCase' => true,
-        'dashDash'   => false
+        'ignoreCase' =&gt; true,
+        'dashDash'   =&gt; false
     )
 );
-]]></programlisting>
+</programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

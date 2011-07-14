@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.lucene.queries">
-    <title>Supported queries</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.queries"><info><title>Supported queries</title></info>
+    
 
     <para>
         <classname>Zend_Search_Lucene</classname> and Java Lucene support a powerful query language.
@@ -10,8 +11,7 @@
     </para>
 
     <para>
-        A detailed query language description can be found in the <link
-            linkend="zend.search.lucene.query-language">
+        A detailed query language description can be found in the <link linkend="zend.search.lucene.query-language">
             Zend_Search_Lucene component documentation</link>.
     </para>
 
@@ -19,20 +19,20 @@
         What follows are examples of some common query types and strategies.
     </para>
 
-    <example id="learning.lucene.queries.keyword">
-        <title>Querying for a single word</title>
+    <example xml:id="learning.lucene.queries.keyword"><info><title>Querying for a single word</title></info>
+        
 
-        <programlisting language="text"><![CDATA[
+        <programlisting language="text">
 hello
-]]></programlisting>
+</programlisting>
 
         <para>
             Searches for the word "hello" through all document fields.
         </para>
     </example>
 
-    <note>
-        <title>Default search field</title>
+    <note><info><title>Default search field</title></info>
+        
 
         <para>
             Important note! Java Lucene searches only through the "contents" field by default, but
@@ -42,12 +42,12 @@ hello
         </para>
     </note>
 
-    <example id="learning.lucene.queries.multiple-words">
-        <title>Querying for multiple words</title>
+    <example xml:id="learning.lucene.queries.multiple-words"><info><title>Querying for multiple words</title></info>
+        
 
-        <programlisting language="text"><![CDATA[
+        <programlisting language="text">
 hello dolly
-]]></programlisting>
+</programlisting>
 
         <para>
             Searches for two words. Both words are optional; at least one of them must be present in
@@ -55,24 +55,24 @@ hello dolly
         </para>
     </example>
 
-    <example id="learning.lucene.queries.required-words">
-        <title>Requiring words in a query</title>
+    <example xml:id="learning.lucene.queries.required-words"><info><title>Requiring words in a query</title></info>
+        
 
-        <programlisting language="text"><![CDATA[
+        <programlisting language="text">
 +hello dolly
-]]></programlisting>
+</programlisting>
 
         <para>
             Searches for two words; "hello" is required, "dolly" is optional.
         </para>
     </example>
 
-    <example id="learning.lucene.queries.prohibited-words">
-        <title>Prohibiting words in queried documents</title>
+    <example xml:id="learning.lucene.queries.prohibited-words"><info><title>Prohibiting words in queried documents</title></info>
+        
 
-        <programlisting language="text"><![CDATA[
+        <programlisting language="text">
 +hello -dolly
-]]></programlisting>
+</programlisting>
 
         <para>
             Searches for two words; "hello" is required, 'dolly' is prohibited. In other words, if
@@ -81,12 +81,12 @@ hello dolly
         </para>
     </example>
 
-    <example id="learning.lucene.queries.phrases">
-        <title>Querying for phrases</title>
+    <example xml:id="learning.lucene.queries.phrases"><info><title>Querying for phrases</title></info>
+        
 
-        <programlisting language="text"><![CDATA[
+        <programlisting language="text">
 "hello dolly"
-]]></programlisting>
+</programlisting>
 
         <para>
             Searches for the phrase "hello dolly"; a document only matches if that exact string is
@@ -94,12 +94,12 @@ hello dolly
         </para>
     </example>
 
-    <example id="learning.lucene.queries.fields">
-        <title>Querying against specific fields</title>
+    <example xml:id="learning.lucene.queries.fields"><info><title>Querying against specific fields</title></info>
+        
 
-        <programlisting language="text"><![CDATA[
+        <programlisting language="text">
 title:"The Right Way" AND text:go
-]]></programlisting>
+</programlisting>
 
         <para>
             Searches for the phrase "The Right Way" within the <property>title</property> field and
@@ -107,12 +107,12 @@ title:"The Right Way" AND text:go
         </para>
     </example>
 
-    <example id="learning.lucene.queries.fields-and-document">
-        <title>Querying against specific fields as well as the entire document</title>
+    <example xml:id="learning.lucene.queries.fields-and-document"><info><title>Querying against specific fields as well as the entire document</title></info>
+        
 
-        <programlisting language="text"><![CDATA[
+        <programlisting language="text">
 title:"The Right Way" AND  go
-]]></programlisting>
+</programlisting>
 
         <para>
             Searches for the phrase "The Right Way" within the <property>title</property> field and
@@ -120,12 +120,12 @@ title:"The Right Way" AND  go
         </para>
     </example>
 
-    <example id="learning.lucene.queries.fields-and-document-alt">
-        <title>Querying against specific fields as well as the entire document (alternate)</title>
+    <example xml:id="learning.lucene.queries.fields-and-document-alt"><info><title>Querying against specific fields as well as the entire document (alternate)</title></info>
+        
 
-        <programlisting language="text"><![CDATA[
+        <programlisting language="text">
 title:Do it right
-]]></programlisting>
+</programlisting>
 
         <para>
             Searches for the word "Do" within the <property>title</property> field and the words
@@ -134,24 +134,24 @@ title:Do it right
         </para>
     </example>
 
-    <example id="learning.lucene.queries.wildcard-question">
-        <title>Querying with the wildcard "?"</title>
+    <example xml:id="learning.lucene.queries.wildcard-question"><info><title>Querying with the wildcard "?"</title></info>
+        
 
-        <programlisting language="text"><![CDATA[
+        <programlisting language="text">
 te?t
-]]></programlisting>
+</programlisting>
 
         <para>
             Search for words matching the pattern "te?t", where "?" is any single character.
         </para>
     </example>
 
-    <example id="learning.lucene.queries.wildcard-asterisk">
-        <title>Querying with the wildcard "*"</title>
+    <example xml:id="learning.lucene.queries.wildcard-asterisk"><info><title>Querying with the wildcard "*"</title></info>
+        
 
-        <programlisting language="text"><![CDATA[
+        <programlisting language="text">
 test*
-]]></programlisting>
+</programlisting>
 
         <para>
             Search for words matching the pattern "test*", where "*" is any sequence of zero or more
@@ -159,48 +159,48 @@ test*
         </para>
     </example>
 
-    <example id="learning.lucene.queries.range-inclusive">
-        <title>Querying for an inclusive range of terms</title>
+    <example xml:id="learning.lucene.queries.range-inclusive"><info><title>Querying for an inclusive range of terms</title></info>
+        
 
-        <programlisting language="text"><![CDATA[
+        <programlisting language="text">
 mod_date:[20020101 TO 20030101]
-]]></programlisting>
+</programlisting>
 
         <para>
             Search for the range of terms (inclusive).
         </para>
     </example>
 
-    <example id="learning.lucene.queries.range-exclusive">
-        <title>Querying for an exclusive range of terms</title>
+    <example xml:id="learning.lucene.queries.range-exclusive"><info><title>Querying for an exclusive range of terms</title></info>
+        
 
-        <programlisting language="text"><![CDATA[
+        <programlisting language="text">
 title:{Aida to Carmen}
-]]></programlisting>
+</programlisting>
 
         <para>
             Search for the range of terms (exclusive).
         </para>
     </example>
 
-    <example id="learning.lucene.queries.fuzzy">
-        <title>Fuzzy searches</title>
+    <example xml:id="learning.lucene.queries.fuzzy"><info><title>Fuzzy searches</title></info>
+        
 
-        <programlisting language="text"><![CDATA[
+        <programlisting language="text">
 roam~
-]]></programlisting>
+</programlisting>
 
         <para>
             Fuzzy search for the word "roam".
         </para>
     </example>
 
-    <example id="learning.lucene.queries.boolean">
-        <title>Boolean searches</title>
+    <example xml:id="learning.lucene.queries.boolean"><info><title>Boolean searches</title></info>
+        
 
-        <programlisting language="text"><![CDATA[
+        <programlisting language="text">
 (framework OR library) AND php
-]]></programlisting>
+</programlisting>
 
         <para>
             Boolean query.
@@ -214,15 +214,15 @@ roam~
         combined:
     </para>
 
-    <example id="learning.lucene.queries.combining">
-        <title>Combining parsed and constructed queries</title>
+    <example xml:id="learning.lucene.queries.combining"><info><title>Combining parsed and constructed queries</title></info>
+        
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
 
 $query = new Zend_Search_Lucene_Search_Query_Boolean();
-$query->addSubquery($userQuery, true  /* required */);
-$query->addSubquery($constructedQuery, true  /* required */);
-]]></programlisting>
+$query-&gt;addSubquery($userQuery, true  /* required */);
+$query-&gt;addSubquery($constructedQuery, true  /* required */);
+</programlisting>
     </example>
-</sect1>
+</section>

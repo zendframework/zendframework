@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.smtp-secure">
-    <title>Securing SMTP Transport</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-secure"><info><title>Securing SMTP Transport</title></info>
+    
 
     <para>
         <classname>Zend_Mail</classname> also supports the use of either TLS or
@@ -12,24 +13,21 @@
         <acronym>SSL</acronym>.
     </para>
 
-    <example id="zend.mail.smtp-secure.example-1">
-        <title>Enabling a secure connection within Zend_Mail_Transport_Smtp</title>
+    <example xml:id="zend.mail.smtp-secure.example-1"><info><title>Enabling a secure connection within Zend_Mail_Transport_Smtp</title></info>
+        
 
-        <programlisting language="php"><![CDATA[
-$config = array('ssl' => 'tls',
-                'port' => 25); // Optional port number supplied
+        <programlisting language="php">
+$config = array('ssl' =&gt; 'tls',
+                'port' =&gt; 25); // Optional port number supplied
 
 $transport = new Zend_Mail_Transport_Smtp('mail.server.com', $config);
 
 $mail = new Zend_Mail();
-$mail->setBodyText('This is the text of the mail.');
-$mail->setFrom('sender@test.com', 'Some Sender');
-$mail->addTo('recipient@test.com', 'Some Recipient');
-$mail->setSubject('TestSubject');
-$mail->send($transport);
-]]></programlisting>
+$mail-&gt;setBodyText('This is the text of the mail.');
+$mail-&gt;setFrom('sender@test.com', 'Some Sender');
+$mail-&gt;addTo('recipient@test.com', 'Some Recipient');
+$mail-&gt;setSubject('TestSubject');
+$mail-&gt;send($transport);
+</programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

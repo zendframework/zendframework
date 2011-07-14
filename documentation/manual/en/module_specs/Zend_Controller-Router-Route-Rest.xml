@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.router.routes.rest">
-    <title>Zend_Rest_Route</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.router.routes.rest"><info><title>Zend_Rest_Route</title></info>
+    
 
     <para>
         The <classname>Zend_Rest</classname> component contains a RESTful route
@@ -12,13 +13,13 @@
         of how request methods and <acronym>URI</acronym>'s are routed.
     </para>
 
-    <table frame="all">
-        <title>Zend_Rest_Route Behavior</title>
+    <table frame="all"><info><title>Zend_Rest_Route Behavior</title></info>
+        
 
-        <tgroup cols='3' align='left' colsep='1' rowsep='1'>
-            <colspec colname='method' />
-            <colspec colname='URI' />
-            <colspec colname='route' />
+        <tgroup cols="3" align="left" colsep="1" rowsep="1">
+            <colspec colname="method"/>
+            <colspec colname="URI"/>
+            <colspec colname="route"/>
 
             <thead>
                 <row>
@@ -80,8 +81,8 @@
         </tgroup>
     </table>
 
-    <sect4 id="zend.rest.route_usage">
-        <title>Zend_Rest_Route Usage</title>
+    <section xml:id="zend.rest.route_usage"><info><title>Zend_Rest_Route Usage</title></info>
+        
 
         <para>
             To enable <classname>Zend_Rest_Route</classname> for an entire
@@ -89,11 +90,11 @@
             default route on the front controller:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $front     = Zend_Controller_Front::getInstance();
 $restRoute = new Zend_Rest_Route($front);
-$front->getRouter()->addRoute('default', $restRoute);
-]]></programlisting>
+$front-&gt;getRouter()-&gt;addRoute('default', $restRoute);
+</programlisting>
 
         <note>
             <para>
@@ -108,39 +109,39 @@ $front->getRouter()->addRoute('default', $restRoute);
             construct it with an array of module names as the 3rd constructor argument:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $front     = Zend_Controller_Front::getInstance();
 $restRoute = new Zend_Rest_Route($front, array(), array('product'));
-$front->getRouter()->addRoute('rest', $restRoute);
-]]></programlisting>
+$front-&gt;getRouter()-&gt;addRoute('rest', $restRoute);
+</programlisting>
 
         <para>
             To enable <classname>Zend_Rest_Route</classname> for specific
             controllers, add an array of controller names as the value of each module array element.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $front     = Zend_Controller_Front::getInstance();
 $restRoute = new Zend_Rest_Route($front, array(), array(
-    'product' => array('ratings')
+    'product' =&gt; array('ratings')
 ));
-$front->getRouter()->addRoute('rest', $restRoute);
-]]></programlisting>
-    </sect4>
+$front-&gt;getRouter()-&gt;addRoute('rest', $restRoute);
+</programlisting>
+    </section>
 
-    <sect4 id="zend.rest.route_config">
-        <title>Zend_Rest_Route with Zend_Config_Ini</title>
+    <section xml:id="zend.rest.route_config"><info><title>Zend_Rest_Route with Zend_Config_Ini</title></info>
+        
 
         <para>
             To use <classname>Zend_Rest_Route</classname> from an <acronym>INI</acronym> config
             file, use a route type parameter and set the config options:
         </para>
 
-        <programlisting language="ini"><![CDATA[
+        <programlisting language="ini">
 routes.rest.type = Zend_Rest_Route
 routes.rest.defaults.controller = object
 routes.rest.mod = project,user
-]]></programlisting>
+</programlisting>
 
         <para>
             The 'type' option designates the RESTful routing config type. The 'defaults' option is
@@ -155,15 +156,15 @@ routes.rest.mod = project,user
             Then use the <methodname>addConfig()</methodname> method of the Rewrite router object:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $config = new Zend_Config_Ini('path/to/routes.ini');
 $router = new Zend_Controller_Router_Rewrite();
-$router->addConfig($config, 'routes');
-]]></programlisting>
-    </sect4>
+$router-&gt;addConfig($config, 'routes');
+</programlisting>
+    </section>
 
-    <sect4 id="zend.rest.controller">
-        <title>Zend_Rest_Controller</title>
+    <section xml:id="zend.rest.controller"><info><title>Zend_Rest_Controller</title></info>
+        
 
         <para>
             To help or guide development of Controllers for use with
@@ -212,8 +213,5 @@ $router->addConfig($config, 'routes');
                 </para>
             </listitem>
         </itemizedlist>
-    </sect4>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

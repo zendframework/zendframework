@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.lessthan">
-    <title>LessThan</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.lessthan"><info><title>LessThan</title></info>
+    
 
     <para>
         <classname>Zend_Validate_LessThan</classname> allows you to validate if a given value is
@@ -9,8 +10,8 @@
         <classname>Zend_Validate_GreaterThan</classname>.
     </para>
 
-    <note>
-        <title>Zend_Validate_LessThan supports only number validation</title>
+    <note><info><title>Zend_Validate_LessThan supports only number validation</title></info>
+        
 
         <para>
             It should be noted that <classname>Zend_Validate_LessThan</classname> supports only the
@@ -18,8 +19,8 @@
         </para>
     </note>
 
-    <sect3 id="zend.validate.set.lessthan.options">
-        <title>Supported options for Zend_Validate_LessThan</title>
+    <section xml:id="zend.validate.set.lessthan.options"><info><title>Supported options for Zend_Validate_LessThan</title></info>
+        
 
         <para>
             The following options are supported for <classname>Zend_Validate_LessThan</classname>:
@@ -32,29 +33,26 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.lessthan.basic">
-        <title>Basic usage</title>
+    <section xml:id="zend.validate.set.lessthan.basic"><info><title>Basic usage</title></info>
+        
 
         <para>
             To validate if a given value is less than a defined border simply use the following
             example.
         </para>
 
-        <programlisting language="php"><![CDATA[
-$valid  = new Zend_Validate_LessThan(array('max' => 10));
+        <programlisting language="php">
+$valid  = new Zend_Validate_LessThan(array('max' =&gt; 10));
 $value  = 10;
-$return = $valid->isValid($value);
+$return = $valid-&gt;isValid($value);
 // returns true
-]]></programlisting>
+</programlisting>
 
         <para>
             The above example returns <constant>TRUE</constant> for all values which are equal to 10
             or lower than 10.
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

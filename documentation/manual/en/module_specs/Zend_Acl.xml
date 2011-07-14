@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.acl.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_Acl</classname> provides a lightweight and flexible access control list
@@ -42,8 +43,8 @@
         how roles are granted access to resources.
     </para>
 
-    <sect2 id="zend.acl.introduction.resources">
-        <title>Resources</title>
+    <section xml:id="zend.acl.introduction.resources"><info><title>Resources</title></info>
+        
 
         <para>
             Creating a resource in <classname>Zend_Acl</classname> is very simple.
@@ -75,10 +76,10 @@
             "read", "update", "delete"), so the developer can assign rules that affect all
             privileges or specific privileges on one or more resources.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.roles">
-        <title>Roles</title>
+    <section xml:id="zend.acl.introduction.roles"><info><title>Roles</title></info>
+        
 
         <para>
             As with resources, creating a role is also very simple. All roles must implement
@@ -102,8 +103,8 @@
             ambiguity condition and how <classname>Zend_Acl</classname> solves it.
         </para>
 
-        <example id="zend.acl.introduction.roles.example.multiple_inheritance">
-            <title>Multiple Inheritance among Roles</title>
+        <example xml:id="zend.acl.introduction.roles.example.multiple_inheritance"><info><title>Multiple Inheritance among Roles</title></info>
+            
 
             <para>
                 The following code defines three base roles - "guest",
@@ -117,23 +118,23 @@
                 "admin"):
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $acl = new Zend_Acl();
 
-$acl->addRole(new Zend_Acl_Role('guest'))
-    ->addRole(new Zend_Acl_Role('member'))
-    ->addRole(new Zend_Acl_Role('admin'));
+$acl-&gt;addRole(new Zend_Acl_Role('guest'))
+    -&gt;addRole(new Zend_Acl_Role('member'))
+    -&gt;addRole(new Zend_Acl_Role('admin'));
 
 $parents = array('guest', 'member', 'admin');
-$acl->addRole(new Zend_Acl_Role('someUser'), $parents);
+$acl-&gt;addRole(new Zend_Acl_Role('someUser'), $parents);
 
-$acl->add(new Zend_Acl_Resource('someResource'));
+$acl-&gt;add(new Zend_Acl_Resource('someResource'));
 
-$acl->deny('guest', 'someResource');
-$acl->allow('member', 'someResource');
+$acl-&gt;deny('guest', 'someResource');
+$acl-&gt;allow('member', 'someResource');
 
-echo $acl->isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
-]]></programlisting>
+echo $acl-&gt;isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
+</programlisting>
 
             <para>
                 Since there is no rule specifically defined for the "someUser" role and
@@ -166,10 +167,10 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
                 listed is the first one searched for rules applicable to an authorization query.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.creating">
-        <title>Creating the Access Control List</title>
+    <section xml:id="zend.acl.introduction.creating"><info><title>Creating the Access Control List</title></info>
+        
 
         <para>
             An Access Control List (<acronym>ACL</acronym>) can represent any set of physical or
@@ -180,9 +181,9 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
             <acronym>ACL</acronym> with no parameters:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $acl = new Zend_Acl();
-]]></programlisting>
+</programlisting>
 
         <note>
             <para>
@@ -190,10 +191,10 @@ $acl = new Zend_Acl();
                 access to every privilege upon every resource by every role.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.role_registry">
-        <title>Registering Roles</title>
+    <section xml:id="zend.acl.introduction.role_registry"><info><title>Registering Roles</title></info>
+        
 
         <para>
             <acronym>CMS</acronym>'s will nearly always require a hierarchy of permissions to
@@ -209,8 +210,8 @@ $acl = new Zend_Acl();
             expressed as follows:
         </para>
 
-        <table id="zend.acl.introduction.role_registry.table.example_cms_access_controls">
-            <title>Access Controls for an Example CMS</title>
+        <table xml:id="zend.acl.introduction.role_registry.table.example_cms_access_controls"><info><title>Access Controls for an Example CMS</title></info>
+            
             <tgroup cols="3">
                 <thead>
                     <row>
@@ -254,32 +255,32 @@ $acl = new Zend_Acl();
             can be added to the role registry as follows:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $acl = new Zend_Acl();
 
 // Add groups to the Role registry using Zend_Acl_Role
 // Guest does not inherit access controls
 $roleGuest = new Zend_Acl_Role('guest');
-$acl->addRole($roleGuest);
+$acl-&gt;addRole($roleGuest);
 
 // Staff inherits from guest
-$acl->addRole(new Zend_Acl_Role('staff'), $roleGuest);
+$acl-&gt;addRole(new Zend_Acl_Role('staff'), $roleGuest);
 
 /*
 Alternatively, the above could be written:
-$acl->addRole(new Zend_Acl_Role('staff'), 'guest');
+$acl-&gt;addRole(new Zend_Acl_Role('staff'), 'guest');
 */
 
 // Editor inherits from staff
-$acl->addRole(new Zend_Acl_Role('editor'), 'staff');
+$acl-&gt;addRole(new Zend_Acl_Role('editor'), 'staff');
 
 // Administrator does not inherit access controls
-$acl->addRole(new Zend_Acl_Role('administrator'));
-]]></programlisting>
-    </sect2>
+$acl-&gt;addRole(new Zend_Acl_Role('administrator'));
+</programlisting>
+    </section>
 
-    <sect2 id="zend.acl.introduction.defining">
-        <title>Defining Access Controls</title>
+    <section xml:id="zend.acl.introduction.defining"><info><title>Defining Access Controls</title></info>
+        
 
         <para>
             Now that the <acronym>ACL</acronym> contains the relevant roles, rules can be
@@ -303,43 +304,43 @@ $acl->addRole(new Zend_Acl_Role('administrator'));
             code. To apply the base permissions as defined above:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $acl = new Zend_Acl();
 
 $roleGuest = new Zend_Acl_Role('guest');
-$acl->addRole($roleGuest);
-$acl->addRole(new Zend_Acl_Role('staff'), $roleGuest);
-$acl->addRole(new Zend_Acl_Role('editor'), 'staff');
-$acl->addRole(new Zend_Acl_Role('administrator'));
+$acl-&gt;addRole($roleGuest);
+$acl-&gt;addRole(new Zend_Acl_Role('staff'), $roleGuest);
+$acl-&gt;addRole(new Zend_Acl_Role('editor'), 'staff');
+$acl-&gt;addRole(new Zend_Acl_Role('administrator'));
 
 // Guest may only view content
-$acl->allow($roleGuest, null, 'view');
+$acl-&gt;allow($roleGuest, null, 'view');
 
 /*
 Alternatively, the above could be written:
-$acl->allow('guest', null, 'view');
+$acl-&gt;allow('guest', null, 'view');
 //*/
 
 // Staff inherits view privilege from guest, but also needs additional
 // privileges
-$acl->allow('staff', null, array('edit', 'submit', 'revise'));
+$acl-&gt;allow('staff', null, array('edit', 'submit', 'revise'));
 
 // Editor inherits view, edit, submit, and revise privileges from
 // staff, but also needs additional privileges
-$acl->allow('editor', null, array('publish', 'archive', 'delete'));
+$acl-&gt;allow('editor', null, array('publish', 'archive', 'delete'));
 
 // Administrator inherits nothing, but is allowed all privileges
-$acl->allow('administrator');
-]]></programlisting>
+$acl-&gt;allow('administrator');
+</programlisting>
 
         <para>
             The <constant>NULL</constant> values in the above <methodname>allow()</methodname> calls
             are used to indicate that the allow rules apply to all resources.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.querying">
-        <title>Querying an ACL</title>
+    <section xml:id="zend.acl.introduction.querying"><info><title>Querying an ACL</title></info>
+        
 
         <para>
             We now have a flexible <acronym>ACL</acronym> that can be used to determine whether
@@ -348,41 +349,38 @@ $acl->allow('administrator');
             method:
         </para>
 
-        <programlisting language="php"><![CDATA[
-echo $acl->isAllowed('guest', null, 'view') ?
+        <programlisting language="php">
+echo $acl-&gt;isAllowed('guest', null, 'view') ?
      "allowed" : "denied";
 // allowed
 
-echo $acl->isAllowed('staff', null, 'publish') ?
+echo $acl-&gt;isAllowed('staff', null, 'publish') ?
      "allowed" : "denied";
 // denied
 
-echo $acl->isAllowed('staff', null, 'revise') ?
+echo $acl-&gt;isAllowed('staff', null, 'revise') ?
      "allowed" : "denied";
 // allowed
 
-echo $acl->isAllowed('editor', null, 'view') ?
+echo $acl-&gt;isAllowed('editor', null, 'view') ?
      "allowed" : "denied";
 // allowed because of inheritance from guest
 
-echo $acl->isAllowed('editor', null, 'update') ?
+echo $acl-&gt;isAllowed('editor', null, 'update') ?
      "allowed" : "denied";
 // denied because no allow rule for 'update'
 
-echo $acl->isAllowed('administrator', null, 'view') ?
+echo $acl-&gt;isAllowed('administrator', null, 'view') ?
      "allowed" : "denied";
 // allowed because administrator is allowed all privileges
 
-echo $acl->isAllowed('administrator') ?
+echo $acl-&gt;isAllowed('administrator') ?
      "allowed" : "denied";
 // allowed because administrator is allowed all privileges
 
-echo $acl->isAllowed('administrator', null, 'update') ?
+echo $acl-&gt;isAllowed('administrator', null, 'update') ?
      "allowed" : "denied";
 // allowed because administrator is allowed all privileges
-]]></programlisting>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</programlisting>
+    </section>
+</section>

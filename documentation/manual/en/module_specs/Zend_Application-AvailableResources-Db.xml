@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.db">
-    <title>Zend_Application_Resource_Db</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.db"><info><title>Zend_Application_Resource_Db</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Db</classname> will initialize a
         <classname>Zend_Db</classname> adapter based on the options passed to it. By
         default, it also sets the adapter as the default adapter for use with
         <classname>Zend_Db_Table</classname>. If you want to use mutliple databases
-        simultaneously, you can use the <link
-        linkend="zend.application.available-resources.multidb">Multidb Resource
+        simultaneously, you can use the <link linkend="zend.application.available-resources.multidb">Multidb Resource
         Plugin</link>.
     </para>
 
@@ -48,15 +48,15 @@
         </listitem>
     </itemizedlist>
 
-    <example id="zend.application.available-resources.db.configExample">
-        <title>Sample DB adapter resource configuration</title>
+    <example xml:id="zend.application.available-resources.db.configExample"><info><title>Sample DB adapter resource configuration</title></info>
+        
 
         <para>
             Below is an example <acronym>INI</acronym> configuration that can be used to initialize
             the DB resource.
         </para>
 
-        <programlisting language="ini"><![CDATA[
+        <programlisting language="ini">
 [production]
 resources.db.adapter = "pdo_mysql"
 resources.db.params.host = "localhost"
@@ -67,11 +67,11 @@ resources.db.isDefaultTableAdapter = true
 
 ; Optionally you can also the cache template to use for metadata caching:
 resources.db.defaultMetadataCache = "database"
-]]></programlisting>
+</programlisting>
     </example>
 
-    <note>
-        <title>Retrieving the Adapter instance</title>
+    <note><info><title>Retrieving the Adapter instance</title></info>
+        
 
         <para>
             If you choose not to make the adapter instantiated with this
@@ -84,17 +84,17 @@ resources.db.defaultMetadataCache = "database"
             from your bootstrap:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$resource = $bootstrap->getPluginResource('db');
-]]></programlisting>
+        <programlisting language="php">
+$resource = $bootstrap-&gt;getPluginResource('db');
+</programlisting>
 
         <para>
             Once you have the resource object, you can fetch the DB adapter
             using the <methodname>getDbAdapter()</methodname> method:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$db = $resource->getDbAdapter();
-]]></programlisting>
+        <programlisting language="php">
+$db = $resource-&gt;getDbAdapter();
+</programlisting>
     </note>
-</sect2>
+</section>

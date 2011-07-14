@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.locale">
-    <title>Zend_Application_Resource_Locale</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.locale"><info><title>Zend_Application_Resource_Locale</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Locale</classname> can be used to
@@ -16,8 +17,8 @@
         should be used depending on the applications need.
     </para>
 
-    <sect3 id="zend.application.available-resources.locale.auto">
-        <title>Autodetect the locale to use</title>
+    <section xml:id="zend.application.available-resources.locale.auto"><info><title>Autodetect the locale to use</title></info>
+        
 
         <para>
             Without specifying any options for
@@ -88,14 +89,13 @@
         </itemizedlist>
 
         <para>
-            For more informations about locale detection take a look into <link
-                linkend="zend.locale.selection.automatic">this chapter on Zend_Locale's automatic
+            For more informations about locale detection take a look into <link linkend="zend.locale.selection.automatic">this chapter on Zend_Locale's automatic
                 detection</link>.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.application.available-resources.locale.fallback">
-        <title>Autodetect the locale and adding a own fallback</title>
+    <section xml:id="zend.application.available-resources.locale.fallback"><info><title>Autodetect the locale and adding a own fallback</title></info>
+        
 
         <para>
             The above autodetection could lead to problems when the locale could not be detected and
@@ -104,24 +104,24 @@
             which will be used in the case that the locale could not be detected.
         </para>
 
-        <example id="zend.application.available-resources.locale.configExampleDetectAndFallback">
-            <title>Autodetect locale and setting a fallback</title>
+        <example xml:id="zend.application.available-resources.locale.configExampleDetectAndFallback"><info><title>Autodetect locale and setting a fallback</title></info>
+            
 
             <para>
                 The following snippet shows how to set a own default locale which will be used when
                 the client does not send a locale himself.
             </para>
 
-            <programlisting language="ini"><![CDATA[
+            <programlisting language="ini">
 ; Try to determine automatically first,
 ; if unsuccessful, use nl_NL as fallback.
 resources.locale.default = "nl_NL"
-]]></programlisting>
+</programlisting>
         </example>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.application.available-resources.locale.forcing">
-        <title>Forcing a specific locale to use</title>
+    <section xml:id="zend.application.available-resources.locale.forcing"><info><title>Forcing a specific locale to use</title></info>
+        
 
         <para>
             Sometimes it is useful to define a single locale which has to be used. This can be done
@@ -133,18 +133,18 @@ resources.locale.default = "nl_NL"
             off.
         </para>
 
-        <example id="zend.application.available-resources.locale.configExampleFallbackOnly">
-            <title>Defining a single locale to use</title>
+        <example xml:id="zend.application.available-resources.locale.configExampleFallbackOnly"><info><title>Defining a single locale to use</title></info>
+            
 
             <para>
                 The following snippet shows how to set a single locale for your entire application.
             </para>
 
-            <programlisting language="ini"><![CDATA[
+            <programlisting language="ini">
 ; No matter what, the nl_NL locale will be used.
 resources.locale.default = "nl_NL"
 resources.locale.force = true
-]]></programlisting>
+</programlisting>
         </example>
-    </sect3>
-</sect2>
+    </section>
+</section>

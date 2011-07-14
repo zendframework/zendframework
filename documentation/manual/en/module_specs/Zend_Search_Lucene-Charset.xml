@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.search.lucene.charset">
-    <title>Character Set</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.search.lucene.charset.description">
-        <title>UTF-8 and single-byte character set support</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.charset"><info><title>Character Set</title></info>
+    
+
+    <section xml:id="zend.search.lucene.charset.description"><info><title>UTF-8 and single-byte character set support</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> works with the UTF-8 charset internally. Index
@@ -36,10 +37,10 @@
             <classname>Zend_Search_Lucene</classname> <acronym>API</acronym>. Data will be
             automatically converted into UTF-8 encoding.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.charset.default_analyzer">
-        <title>Default text analyzer</title>
+    <section xml:id="zend.search.lucene.charset.default_analyzer"><info><title>Default text analyzer</title></info>
+        
 
         <para>
             However, the default text analyzer (which is also used within query parser) uses
@@ -58,17 +59,17 @@
             </footnote>
         </para>
 
-        <note>
-            <title/>
+        <note><info><title/></info>
+            
             <para>
                 Default analyzer doesn't treats numbers as parts of terms. Use corresponding 'Num'
                 analyzer if you don't want words to be broken by numbers.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.charset.utf_analyzer">
-        <title>UTF-8 compatible text analyzers</title>
+    <section xml:id="zend.search.lucene.charset.utf_analyzer"><info><title>UTF-8 compatible text analyzers</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> also contains a set of UTF-8 compatible
@@ -82,13 +83,13 @@
             Any of this analyzers can be enabled with the code like this:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 Zend_Search_Lucene_Analysis_Analyzer::setDefault(
     new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8());
-]]></programlisting>
+</programlisting>
 
-        <warning>
-            <title/>
+        <warning><info><title/></info>
+            
             <para>
                 UTF-8 compatible analyzers were improved in Zend Framework 1.5. Early versions of
                 analyzers assumed all non-ascii characters are letters. New analyzers implementation
@@ -113,17 +114,16 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
             Use the following code to check, if PCRE UTF-8 support is enabled:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 if (@preg_match('/\pL/u', 'a') == 1) {
     echo "PCRE unicode support is turned on.\n";
 } else {
     echo "PCRE unicode support is turned off.\n";
 }
-]]></programlisting>
+</programlisting>
 
         <para>
-            Case insensitive versions of UTF-8 compatible analyzers also need <ulink
-                url="http://www.php.net/manual/en/ref.mbstring.php">mbstring</ulink> extension to
+            Case insensitive versions of UTF-8 compatible analyzers also need <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/ref.mbstring.php">mbstring</link> extension to
             be enabled.
         </para>
 
@@ -133,7 +133,7 @@ if (@preg_match('/\pL/u', 'a') == 1) {
             string before searching by converting them to lowercase:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Indexing
 setlocale(LC_CTYPE, 'de_DE.iso-8859-1');
 
@@ -146,18 +146,18 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 
 $doc = new Zend_Search_Lucene_Document();
 
-$doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
+$doc-&gt;addField(Zend_Search_Lucene_Field::UnStored('contents',
                                                   strtolower($contents)));
 
 // Title field for search through (indexed, unstored)
-$doc->addField(Zend_Search_Lucene_Field::UnStored('title',
+$doc-&gt;addField(Zend_Search_Lucene_Field::UnStored('title',
                                                   strtolower($title)));
 
 // Title field for retrieving (unindexed, stored)
-$doc->addField(Zend_Search_Lucene_Field::UnIndexed('_title', $title));
-]]></programlisting>
+$doc-&gt;addField(Zend_Search_Lucene_Field::UnIndexed('_title', $title));
+</programlisting>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 // Searching
 setlocale(LC_CTYPE, 'de_DE.iso-8859-1');
 
@@ -168,7 +168,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 
 ...
 
-$hits = $index->find(strtolower($query));
-]]></programlisting>
-    </sect2>
-</sect1>
+$hits = $index-&gt;find(strtolower($query));
+</programlisting>
+    </section>
+</section>

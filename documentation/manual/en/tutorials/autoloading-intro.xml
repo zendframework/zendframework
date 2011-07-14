@@ -1,12 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.autoloading.intro">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.intro"><info><title>Introduction</title></info>
+    
 
     <para>
         Autoloading is a mechanism that eliminates the need to manually require dependencies within
-        your <acronym>PHP</acronym> code. Per <ulink url="http://php.net/autoload">the PHP
-        autoload manual</ulink>, once an autoloader has been defined, it "is automatically called
+        your <acronym>PHP</acronym> code. Per <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/autoload">the PHP
+        autoload manual</link>, once an autoloader has been defined, it "is automatically called
         in case you are trying to use a class or an interface which hasn't been defined yet."
     </para>
 
@@ -29,4 +30,4 @@
         autoloading of both library code as well as application code. This tutorial covers these
         tools, as well as how to use them effectively.
     </para>
-</sect1>
+</section>

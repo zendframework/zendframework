@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.test.phpunit.db.adapter">
-    <title>Using the Database Testing Adapter</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.db.adapter"><info><title>Using the Database Testing Adapter</title></info>
+    
 
     <para>
         There are times when you don't want to test parts of your application with a real database,
@@ -19,22 +20,22 @@
         userland code.
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $adapter   = new Zend_Test_DbAdapter();
-$stmt1Rows = array(array('foo' => 'bar'), array('foo' => 'baz'));
+$stmt1Rows = array(array('foo' =&gt; 'bar'), array('foo' =&gt; 'baz'));
 $stmt1     = Zend_Test_DbStatement::createSelectStatement($stmt1Rows);
-$adapter->appendStatementToStack($stmt1);
+$adapter-&gt;appendStatementToStack($stmt1);
 
-$stmt2Rows = array(array('foo' => 'bar'), array('foo' => 'baz'));
+$stmt2Rows = array(array('foo' =&gt; 'bar'), array('foo' =&gt; 'baz'));
 $stmt2     = Zend_Test_DbStatement::createSelectStatement($stmt2Rows);
-$adapter->appendStatementToStack($stmt2);
+$adapter-&gt;appendStatementToStack($stmt2);
 
-$rs = $adapter->query('SELECT ...'); // Returns Statement 2
-while ($row = $rs->fetch()) {
+$rs = $adapter-&gt;query('SELECT ...'); // Returns Statement 2
+while ($row = $rs-&gt;fetch()) {
     echo $rs['foo']; // Prints "Bar", "Baz"
 }
-$rs = $adapter->query('SELECT ...'); // Returns Statement 1
-]]></programlisting>
+$rs = $adapter-&gt;query('SELECT ...'); // Returns Statement 1
+</programlisting>
 
     <para>
         Behaviour of any real database adapter is simulated as much as possible such that methods
@@ -45,35 +46,35 @@ $rs = $adapter->query('SELECT ...'); // Returns Statement 1
     <para>
         You can also put INSERT, UPDATE and DELETE statement onto the result stack, these however
         only return a statement which allows to specifiy the result of
-        <methodname>$stmt->rowCount()</methodname>.
+        <methodname>$stmt-&gt;rowCount()</methodname>.
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $adapter = new Zend_Test_DbAdapter();
-$adapter->appendStatementToStack(
+$adapter-&gt;appendStatementToStack(
     Zend_Test_DbStatement::createInsertStatement(1)
 );
-$adapter->appendStatementToStack(
+$adapter-&gt;appendStatementToStack(
     Zend_Test_DbStatement::createUpdateStatement(2)
 );
-$adapter->appendStatementToStack(
+$adapter-&gt;appendStatementToStack(
     Zend_Test_DbStatement::createDeleteStatement(10
 ));
-]]></programlisting>
+</programlisting>
 
     <para>
         By default the query profiler is enabled, so that you can retrieve the executed SQL
         statements and their bound parameters to check for the correctness of the execution.
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $adapter = new Zend_Test_DbAdapter();
-$stmt = $adapter->query("SELECT * FROM bugs");
+$stmt = $adapter-&gt;query("SELECT * FROM bugs");
 
-$qp = $adapter->getProfiler()->getLastQueryProfile();
+$qp = $adapter-&gt;getProfiler()-&gt;getLastQueryProfile();
 
-echo $qp->getQuerY(); // SELECT * FROM bugs
-]]></programlisting>
+echo $qp-&gt;getQuerY(); // SELECT * FROM bugs
+</programlisting>
 
     <para>
         The test adapter never checks if the query specified is really of the type SELECT, DELETE,
@@ -88,4 +89,4 @@ echo $qp->getQuerY(); // SELECT * FROM bugs
         <methodname>setQuoteIdentifierSymbol()</methodname> you can specify which
         symbol should be used for quoting, by default none is used.
     </para>
-</sect2>
+</section>

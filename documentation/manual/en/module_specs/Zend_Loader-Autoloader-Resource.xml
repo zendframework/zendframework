@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.loader.autoloader-resource">
-    <title>Resource Autoloaders</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.autoloader-resource"><info><title>Resource Autoloaders</title></info>
+    
 
     <para>
         Resource autoloaders are intended to manage namespaced library code that
@@ -12,21 +13,20 @@
     </para>
 
     <para>
-        Resource autoloaders register with the <link
-            linkend="zend.loader.autoloader">autoloader</link> on instantiation,
+        Resource autoloaders register with the <link linkend="zend.loader.autoloader">autoloader</link> on instantiation,
         with the namespace to which they are associated. This allows you to
         easily namespace code in specific directories, and still reap the
         benefits of autoloading.
     </para>
 
-    <sect2 id="zend.loader.autoloader-resource.usage">
-        <title>Resource autoloader usage</title>
+    <section xml:id="zend.loader.autoloader-resource.usage"><info><title>Resource autoloader usage</title></info>
+        
 
         <para>
             Let's consider the following directory structure:
         </para>
 
-        <programlisting language="text"><![CDATA[
+        <programlisting language="text">
 path/to/some/directory/
     acls/
         Site.php
@@ -34,7 +34,7 @@ path/to/some/directory/
         Login.php
     models/
         User.php
-]]></programlisting>
+</programlisting>
 
         <para>
             Within this directory, all code is prefixed with the namespace
@@ -51,15 +51,15 @@ path/to/some/directory/
             responsible for:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
-    'basePath'  => 'path/to/some/directory',
-    'namespace' => 'My',
+    'basePath'  =&gt; 'path/to/some/directory',
+    'namespace' =&gt; 'My',
 ));
-]]></programlisting>
+</programlisting>
 
-        <note>
-            <title>Base namespace</title>
+        <note><info><title>Base namespace</title></info>
+            
 
             <para>
                 In <classname>Zend_Loader_Autoloader</classname>, you are expected to
@@ -83,11 +83,11 @@ $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
             namespace. As an example, let's add each of our resource types.
         </para>
 
-        <programlisting language="php"><![CDATA[
-$resourceLoader->addResourceType('acl', 'acls/', 'Acl')
-               ->addResourceType('form', 'forms/', 'Form')
-               ->addResourceType('model', 'models/');
-]]></programlisting>
+        <programlisting language="php">
+$resourceLoader-&gt;addResourceType('acl', 'acls/', 'Acl')
+               -&gt;addResourceType('form', 'forms/', 'Form')
+               -&gt;addResourceType('model', 'models/');
+</programlisting>
 
         <para>
             Alternately, you could pass these as an array to
@@ -95,21 +95,21 @@ $resourceLoader->addResourceType('acl', 'acls/', 'Acl')
             above:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$resourceLoader->addResourceTypes(array(
-    'acl' => array(
-        'path'      => 'acls/',
-        'namespace' => 'Acl',
+        <programlisting language="php">
+$resourceLoader-&gt;addResourceTypes(array(
+    'acl' =&gt; array(
+        'path'      =&gt; 'acls/',
+        'namespace' =&gt; 'Acl',
     ),
-    'form' => array(
-        'path'      => 'forms/',
-        'namespace' => 'Form',
+    'form' =&gt; array(
+        'path'      =&gt; 'forms/',
+        'namespace' =&gt; 'Form',
     ),
-    'model' => array(
-        'path'      => 'models/',
+    'model' =&gt; array(
+        'path'      =&gt; 'models/',
     ),
 ));
-]]></programlisting>
+</programlisting>
 
         <para>
             Finally, you can specify all of this when instantiating the object,
@@ -117,29 +117,29 @@ $resourceLoader->addResourceTypes(array(
             a structure like that above:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
-    'basePath'      => 'path/to/some/directory',
-    'namespace'     => 'My',
-    'resourceTypes' => array(
-        'acl' => array(
-            'path'      => 'acls/',
-            'namespace' => 'Acl',
+    'basePath'      =&gt; 'path/to/some/directory',
+    'namespace'     =&gt; 'My',
+    'resourceTypes' =&gt; array(
+        'acl' =&gt; array(
+            'path'      =&gt; 'acls/',
+            'namespace' =&gt; 'Acl',
         ),
-        'form' => array(
-            'path'      => 'forms/',
-            'namespace' => 'Form',
+        'form' =&gt; array(
+            'path'      =&gt; 'forms/',
+            'namespace' =&gt; 'Form',
         ),
-        'model' => array(
-            'path'      => 'models/',
+        'model' =&gt; array(
+            'path'      =&gt; 'models/',
         ),
     ),
 ));
-]]></programlisting>
-    </sect2>
+</programlisting>
+    </section>
 
-    <sect2 id="zend.loader.autoloader-resource.module">
-        <title>The Module Resource Autoloader</title>
+    <section xml:id="zend.loader.autoloader-resource.module"><info><title>The Module Resource Autoloader</title></info>
+        
 
         <para>
             Zend Framework ships with a concrete implementation of
@@ -150,17 +150,17 @@ $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
             following mappings:
         </para>
 
-        <programlisting language="text"><![CDATA[
-forms/       => Form
-models/      => Model
-    DbTable/ => Model_DbTable
-    mappers/ => Model_Mapper
-plugins/     => Plugin
-services/    => Service
+        <programlisting language="text">
+forms/       =&gt; Form
+models/      =&gt; Model
+    DbTable/ =&gt; Model_DbTable
+    mappers/ =&gt; Model_Mapper
+plugins/     =&gt; Plugin
+services/    =&gt; Service
 views/
-    helpers  => View_Helper
-    filters  => View_Filter
-]]></programlisting>
+    helpers  =&gt; View_Helper
+    filters  =&gt; View_Filter
+</programlisting>
 
         <para>
             As an example, if you have a module with the prefix of "Blog_", and
@@ -175,19 +175,19 @@ views/
             created by default for each discrete module, allowing you to
             autoload module resources.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.autoloader-resource.factory">
-        <title>Using Resource Autoloaders as Object Factories</title>
-        <para></para>
+    <section xml:id="zend.loader.autoloader-resource.factory"><info><title>Using Resource Autoloaders as Object Factories</title></info>
+        
+        <para/>
         <!-- @todo -->
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.autoloader-resource.reference">
-        <title>Resource Autoloader Reference</title>
-        <para></para>
+    <section xml:id="zend.loader.autoloader-resource.reference"><info><title>Resource Autoloader Reference</title></info>
+        
+        <para/>
         <!-- @todo -->
-    </sect2>
+    </section>
 
     <!-- @todo
             Write section on using load() functionality
@@ -195,4 +195,4 @@ views/
                 Show how to use overloading to retrieve class instances
             Write reference section
     -->
-</sect1>
+</section>

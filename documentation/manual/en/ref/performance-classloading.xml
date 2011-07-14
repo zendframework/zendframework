@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="performance.classloading">
-    <title>Class Loading</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.classloading"><info><title>Class Loading</title></info>
+    
 
     <para>
         Anyone who ever performs profiling of a Zend Framework application will
@@ -14,8 +15,8 @@
         some concrete solutions to these issues.
     </para>
 
-    <sect2 id="performance.classloading.includepath">
-        <title>How can I optimize my include_path?</title>
+    <section xml:id="performance.classloading.includepath"><info><title>How can I optimize my include_path?</title></info>
+        
 
         <para>
             One trivial optimization you can do to increase the speed of class
@@ -27,8 +28,8 @@
             include_path.
         </para>
 
-        <sect3 id="performance.classloading.includepath.abspath">
-            <title>Use absolute paths</title>
+        <section xml:id="performance.classloading.includepath.abspath"><info><title>Use absolute paths</title></info>
+            
 
             <para>
                 While this may seem a micro-optimization, the fact is that if
@@ -45,36 +46,36 @@
                 setting your include_path:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $paths = array(
     realpath(dirname(__FILE__) . '/../library'),
     '.',
 );
 set_include_path(implode(PATH_SEPARATOR, $paths);
-]]></programlisting>
+</programlisting>
 
             <para>
                 You <emphasis>can</emphasis> use relative paths -- so long as
                 they are relative to an absolute path:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 define('APPLICATION_PATH', realpath(dirname(__FILE__)));
 $paths = array(
     APPLICATION_PATH . '/../library'),
     '.',
 );
 set_include_path(implode(PATH_SEPARATOR, $paths);
-]]></programlisting>
+</programlisting>
 
             <para>
                 However, even so, it's typically a trivial task to simply pass
                 the path to <methodname>realpath()</methodname>.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="performance.classloading.includepath.reduce">
-            <title>Reduce the number of include paths you define</title>
+        <section xml:id="performance.classloading.includepath.reduce"><info><title>Reduce the number of include paths you define</title></info>
+            
 
             <para>
                 Include paths are scanned in the order in which they appear in
@@ -96,10 +97,10 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                 by something as simple as symlinking one or more libraries into
                 a common directory.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="performance.classloading.includepath.early">
-            <title>Define your Zend Framework include_path as early as possible</title>
+        <section xml:id="performance.classloading.includepath.early"><info><title>Define your Zend Framework include_path as early as possible</title></info>
+            
 
             <para>
                 Continuing from the previous suggestion, another obvious
@@ -108,10 +109,10 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                 be the first path in the list. This ensures that files included
                 from Zend Framework are found on the first scan.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="performance.classloading.includepath.currentdir">
-            <title>Define the current directory last, or not at all</title>
+        <section xml:id="performance.classloading.includepath.currentdir"><info><title>Define the current directory last, or not at all</title></info>
+            
 
             <para>
                 Most include_path examples show using the current directory, or
@@ -124,8 +125,8 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                 safely pushed to the last item in the list.
             </para>
 
-            <example id="performance.classloading.includepath.example">
-                <title>Example: Optimized include_path</title>
+            <example xml:id="performance.classloading.includepath.example"><info><title>Example: Optimized include_path</title></info>
+                
 
                 <para>
                     Let's put all of these suggestions together. Our assumption will be that you
@@ -142,13 +143,13 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                     installation:
                 </para>
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 library
     Archive/
     PEAR/
     PHPUnit/
     Zend/
-]]></programlisting>
+</programlisting>
 
                 <para>
                     This allows us to add our own library code if necessary, while
@@ -171,19 +172,19 @@ library
                     here -- we're going to end up with only two paths.
                 </para>
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 $paths = array(
     realpath(dirname(__FILE__) . '/../library'),
     '.'
 );
 set_include_path(implode(PATH_SEPARATOR, $paths));
-]]></programlisting>
+</programlisting>
             </example>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="performance.classloading.striprequires">
-        <title>How can I eliminate unnecessary require_once statements?</title>
+    <section xml:id="performance.classloading.striprequires"><info><title>How can I eliminate unnecessary require_once statements?</title></info>
+        
 
         <para>
             Lazy loading is an optimization technique designed to push the
@@ -203,8 +204,8 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
             autoloader performance?
         </para>
 
-        <sect3 id="performance.classloading.striprequires.sed">
-            <title>Strip require_once calls with find and sed</title>
+        <section xml:id="performance.classloading.striprequires.sed"><info><title>Strip require_once calls with find and sed</title></info>
+            
 
             <para>
                 An easy way to strip <methodname>require_once()</methodname> calls is to use the
@@ -213,12 +214,12 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
                 indicates the shell prompt):
             </para>
 
-            <programlisting language="shell"><![CDATA[
+            <programlisting language="shell">
 % cd path/to/ZendFramework/library
 % find . -name '*.php' -not -wholename '*/Loader/Autoloader.php' \
   -not -wholename '*/Application.php' -print0 | \
   xargs -0 sed --regexp-extended --in-place 's/(require_once)/\/\/ \1/g'
-]]></programlisting>
+</programlisting>
 
             <para>
                 This one-liner (broken into two lines for readability) iterates
@@ -240,15 +241,15 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
                 following code:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 require_once 'Zend/Loader/Autoloader.php';
 Zend_Loader_Autoloader::getInstance();
-]]></programlisting>
-        </sect3>
-    </sect2>
+</programlisting>
+        </section>
+    </section>
 
-    <sect2 id="performance.classloading.pluginloader">
-        <title>How can I speed up plugin loading?</title>
+    <section xml:id="performance.classloading.pluginloader"><info><title>How can I speed up plugin loading?</title></info>
+        
 
         <para>
             Many components have plugins, which allow you to create your own
@@ -331,9 +332,8 @@ Zend_Loader_Autoloader::getInstance();
             How can you reduce the number of such calls made?
         </para>
 
-        <sect3
-            id="performance.classloading.pluginloader.includefilecache">
-            <title>Use the PluginLoader include file cache</title>
+        <section xml:id="performance.classloading.pluginloader.includefilecache"><info><title>Use the PluginLoader include file cache</title></info>
+            
 
             <para>
                 Zend Framework 1.7.0 adds an include file cache to the
@@ -344,13 +344,9 @@ Zend_Loader_Autoloader::getInstance();
             </para>
 
             <para>
-                The PluginLoader documentation <link
-                    linkend="zend.loader.pluginloader.performance.example">includes
+                The PluginLoader documentation <link linkend="zend.loader.pluginloader.performance.example">includes
                 a complete example of its use</link>.
             </para>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

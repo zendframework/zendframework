@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.layout.usage">
-    <title>Using Zend_Layout</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.layout.usage"><info><title>Using Zend_Layout</title></info>
+    
 
     <para>
         Basic usage of <classname>Zend_Layout</classname> is fairly trivial. Assuming you're using
@@ -9,15 +10,15 @@
         options and create a layout view script.
     </para>
 
-    <sect2 id="learning.layout.usage.configuration">
-        <title>Layout Configuration</title>
+    <section xml:id="learning.layout.usage.configuration"><info><title>Layout Configuration</title></info>
+        
 
         <para>
             The recommended location of layouts is in a "<filename>layouts/scripts/</filename>"
             subdirectory of your application:
         </para>
 
-        <programlisting language="text"><![CDATA[
+        <programlisting language="text">
 application
 |-- Bootstrap.php
 |-- configs
@@ -26,27 +27,27 @@ application
 |-- layouts
 |   `-- scripts
 |       |-- layout.phtml
-]]></programlisting>
+</programlisting>
 
         <para>
             To initialize <classname>Zend_Layout</classname>, add the following to your
             configuration file ("<filename>application/configs/application.ini</filename>"):
         </para>
 
-        <programlisting language="dosini"><![CDATA[
+        <programlisting language="dosini">
 resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts"
 resources.layout.layout = "layout"
-]]></programlisting>
+</programlisting>
 
         <para>
             The first line indicates where to look for layout scripts; the second line gives the
             name of the layout to use, minus the view script extension (which is assumed to be
             "<filename>.phtml</filename>" by default).
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.layout.usage.layout-script">
-        <title>Create a Layout Script</title>
+    <section xml:id="learning.layout.usage.layout-script"><info><title>Create a Layout Script</title></info>
+        
 
         <para>
             Now that you have your configuration in place, you need to create your layout script.
@@ -56,16 +57,16 @@ resources.layout.layout = "layout"
             scripts, with some slight differences.
         </para>
 
-        <programlisting language="php"><![CDATA[
-<html>
-<head>
-    <title>My Site</title>
-</head>
-<body>
-    <?php echo $this->layout()->content ?>
-</body>
-</html>
-]]></programlisting>
+        <programlisting language="php">
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;My Site&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;?php echo $this-&gt;layout()-&gt;content ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</programlisting>
 
         <para>
             In the example above, you'll note the call to a <methodname>layout()</methodname> view
@@ -82,10 +83,10 @@ resources.layout.layout = "layout"
             At this point, you have a working layout script, and your application is informed of its
             location and knows to render it.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.layout.usage.access">
-        <title>Accessing the Layout Object</title>
+    <section xml:id="learning.layout.usage.access"><info><title>Accessing the Layout Object</title></info>
+        
 
         <para>
             On occasion, you may need direct access to the layout object. There are three ways you
@@ -101,9 +102,9 @@ resources.layout.layout = "layout"
                     plugin.
                 </para>
 
-                <programlisting language="php"><![CDATA[
-<?php $layout = $this->layout(); ?>
-]]></programlisting>
+                <programlisting language="php">
+&lt;?php $layout = $this-&gt;layout(); ?&gt;
+</programlisting>
 
                 <para>
                     Since it returns the layout instance, you can also simply call methods on it,
@@ -118,14 +119,14 @@ resources.layout.layout = "layout"
                     helper.
                 </para>
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 // Calling helper as a method of the helper broker:
-$layout = $this->_helper->layout();
+$layout = $this-&gt;_helper-&gt;layout();
 
 // Or, more verbosely:
-$helper = $this->_helper->getHelper('Layout');
-$layout = $helper->getLayoutInstance();
-]]></programlisting>
+$helper = $this-&gt;_helper-&gt;getHelper('Layout');
+$layout = $helper-&gt;getLayoutInstance();
+</programlisting>
 
                 <para>
                     As with the view helper, since the action helper returns the layout instance,
@@ -140,9 +141,9 @@ $layout = $helper->getLayoutInstance();
                     registered by the bootstrap resource.
                 </para>
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 $layout = Zend_Layout::getMvcInstance();
-]]></programlisting>
+</programlisting>
             </listitem>
 
             <listitem>
@@ -151,9 +152,9 @@ $layout = Zend_Layout::getMvcInstance();
                     will be the <classname>Zend_Layout</classname> instance.
                 </para>
 
-                <programlisting language="php"><![CDATA[
-$layout = $bootstrap->getResource('Layout');
-]]></programlisting>
+                <programlisting language="php">
+$layout = $bootstrap-&gt;getResource('Layout');
+</programlisting>
 
                 <para>
                     Anywhere you have access to the bootstrap object, this method is preferred over
@@ -161,16 +162,15 @@ $layout = $bootstrap->getResource('Layout');
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.layout.usage.other-operations">
-        <title>Other Operations</title>
+    <section xml:id="learning.layout.usage.other-operations"><info><title>Other Operations</title></info>
+        
 
         <para>
             In most cases, the above configuration and layout script (with modifications) will get
             you what you need. However, some other functionality exists you will likely use sooner
-            or later. In all of the following examples, you may use one of the <link
-                linkend="learning.layout.usage.access">methods listed above</link> for retrieving
+            or later. In all of the following examples, you may use one of the <link linkend="learning.layout.usage.access">methods listed above</link> for retrieving
             the layout object.
         </para>
 
@@ -185,19 +185,19 @@ $layout = $bootstrap->getResource('Layout');
                     <methodname>assign()</methodname> method.
                 </para>
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 // Setting content:
-$layout->somekey = "foo"
+$layout-&gt;somekey = "foo"
 
 // Echoing that same content:
-echo $layout->somekey; // 'foo'
+echo $layout-&gt;somekey; // 'foo'
 
 // Using the assign() method:
-$layout->assign('someotherkey', 'bar');
+$layout-&gt;assign('someotherkey', 'bar');
 
 // Access to assign()'d variables remains the same:
-echo $layout->someotherkey; // 'bar'
-]]></programlisting>
+echo $layout-&gt;someotherkey; // 'bar'
+</programlisting>
             </listitem>
 
             <listitem>
@@ -208,9 +208,9 @@ echo $layout->someotherkey; // 'bar'
                     <methodname>disableLayout()</methodname> method on your layout object.
                 </para>
 
-                <programlisting language="php"><![CDATA[
-$layout->disableLayout();
-]]></programlisting>
+                <programlisting language="php">
+$layout-&gt;disableLayout();
+</programlisting>
 
                 <para>
                     The opposite of this method is, of course,
@@ -227,10 +227,10 @@ $layout->disableLayout();
                     by specifying the name of the layout script without the file suffix.
                 </para>
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 // Use the layout script "alternate.phtml":
-$layout->setLayout('alternate');
-]]></programlisting>
+$layout-&gt;setLayout('alternate');
+</programlisting>
 
                 <para>
                     The layout script should reside in the <varname>$layoutPath</varname> directory
@@ -239,5 +239,5 @@ $layout->setLayout('alternate');
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

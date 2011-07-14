@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.exceptions">
-    <title>MVC Exceptions</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.controller.exceptions.introduction">
-        <title>Introduction</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.exceptions"><info><title>MVC Exceptions</title></info>
+    
+
+    <section xml:id="zend.controller.exceptions.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             The <acronym>MVC</acronym> components in Zend Framework utilize a Front Controller,
@@ -22,10 +23,10 @@
             registers them with the response object; in turn, by default, the
             response object does not display exception messages.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.exceptions.handling">
-        <title>Handling Exceptions</title>
+    <section xml:id="zend.controller.exceptions.handling"><info><title>Handling Exceptions</title></info>
+        
 
         <para>
             Several mechanisms are built in to the <acronym>MVC</acronym> components already to
@@ -35,8 +36,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    By default, the <link
-                        linkend="zend.controller.plugins.standard.errorhandler">error
+                    By default, the <link linkend="zend.controller.plugins.standard.errorhandler">error
                     handler plugin</link> is registered and active. This plugin
                     was designed to handle:
                 </para>
@@ -69,14 +69,14 @@
                     you'd rather handle them yourself. As an example:
                 </para>
 
-                <programlisting language="php"><![CDATA[
-$front->throwExceptions(true);
+                <programlisting language="php">
+$front-&gt;throwExceptions(true);
 try {
-    $front->dispatch();
+    $front-&gt;dispatch();
 } catch (Exception $e) {
     // handle exceptions yourself
 }
-]]></programlisting>
+</programlisting>
 
                 <para>
                     This method is probably the easiest way to add custom
@@ -116,17 +116,17 @@ try {
                     example:
                 </para>
 
-                <programlisting language="php"><![CDATA[
-$front->returnResponse(true);
-$response = $front->dispatch();
-if ($response->isException()) {
-    $exceptions = $response->getException();
+                <programlisting language="php">
+$front-&gt;returnResponse(true);
+$response = $front-&gt;dispatch();
+if ($response-&gt;isException()) {
+    $exceptions = $response-&gt;getException();
     // handle exceptions ...
 } else {
-    $response->sendHeaders();
-    $response->outputBody();
+    $response-&gt;sendHeaders();
+    $response-&gt;outputBody();
 }
-]]></programlisting>
+</programlisting>
 
                 <para>
                     The primary advantage this method offers over
@@ -137,10 +137,10 @@ if ($response->isException()) {
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.exceptions.internal">
-        <title>MVC Exceptions You May Encounter</title>
+    <section xml:id="zend.controller.exceptions.internal"><info><title>MVC Exceptions You May Encounter</title></info>
+        
 
         <para>
             The various <acronym>MVC</acronym> components -- request, router, dispatcher, action
@@ -172,13 +172,13 @@ if ($response->isException()) {
                             the following directive:
                         </para>
 
-                        <programlisting language="php"><![CDATA[
-$front->setParam('useDefaultControllerAlways', true);
+                        <programlisting language="php">
+$front-&gt;setParam('useDefaultControllerAlways', true);
 
 // or
 
-$dispatcher->setParam('useDefaultControllerAlways', true);
-]]></programlisting>
+$dispatcher-&gt;setParam('useDefaultControllerAlways', true);
+</programlisting>
 
                         <para>
                             When this flag is set, the dispatcher will use the
@@ -195,8 +195,7 @@ $dispatcher->setParam('useDefaultControllerAlways', true);
                             The exception thrown by <methodname>dispatch()</methodname> is
                             a <classname>Zend_Controller_Dispatcher_Exception</classname>
                             containing the text 'Invalid controller specified'.
-                            Use one of the methods outlined in <link
-                                linkend="zend.controller.exceptions.handling">the
+                            Use one of the methods outlined in <link linkend="zend.controller.exceptions.handling">the
                                 previous section</link> to catch the exception,
                             and then redirect to a generic error page or the
                             home page.
@@ -222,21 +221,21 @@ $dispatcher->setParam('useDefaultControllerAlways', true);
                             example:
                         </para>
 
-                        <programlisting language="php"><![CDATA[
+                        <programlisting language="php">
 class My_Controller_Action extends Zend_Controller_Action
 {
     public function __call($method, $args)
     {
         if ('Action' == substr($method, -6)) {
-            $controller = $this->getRequest()->getControllerName();
+            $controller = $this-&gt;getRequest()-&gt;getControllerName();
             $url = '/' . $controller . '/index';
-            return $this->_redirect($url);
+            return $this-&gt;_redirect($url);
         }
 
         throw new Exception('Invalid method');
     }
 }
-]]></programlisting>
+</programlisting>
 
                         <para>
                             The example above intercepts any undefined action
@@ -252,30 +251,30 @@ class My_Controller_Action extends Zend_Controller_Action
                             verify the action exists. As an example:
                         </para>
 
-                        <programlisting language="php"><![CDATA[
+                        <programlisting language="php">
 class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
 {
     public function getAction($request)
     {
-        $action = $request->getActionName();
+        $action = $request-&gt;getActionName();
         if (empty($action)) {
-            $action = $this->getDefaultAction();
-            $request->setActionName($action);
-            $action = $this->formatActionName($action);
+            $action = $this-&gt;getDefaultAction();
+            $request-&gt;setActionName($action);
+            $action = $this-&gt;formatActionName($action);
         } else {
-            $controller = $this->getController();
-            $action     = $this->formatActionName($action);
+            $controller = $this-&gt;getController();
+            $action     = $this-&gt;formatActionName($action);
             if (!method_exists($controller, $action)) {
-                $action = $this->getDefaultAction();
-                $request->setActionName($action);
-                $action = $this->formatActionName($action);
+                $action = $this-&gt;getDefaultAction();
+                $request-&gt;setActionName($action);
+                $action = $this-&gt;formatActionName($action);
             }
         }
 
         return $action;
     }
 }
-]]></programlisting>
+</programlisting>
 
                         <para>
                             The above code checks to see that the requested
@@ -325,33 +324,33 @@ class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
                             As an example:
                         </para>
 
-                        <programlisting language="php"><![CDATA[
+                        <programlisting language="php">
 class My_Controller_PreDispatchPlugin extends Zend_Controller_Plugin_Abstract
 {
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
         $front      = Zend_Controller_Front::getInstance();
-        $dispatcher = $front->getDispatcher();
-        $class      = $dispatcher->getControllerClass($request);
+        $dispatcher = $front-&gt;getDispatcher();
+        $class      = $dispatcher-&gt;getControllerClass($request);
         if (!$class) {
-            $class = $dispatcher->getDefaultControllerClass($request);
+            $class = $dispatcher-&gt;getDefaultControllerClass($request);
         }
 
         $r      = new ReflectionClass($class);
-        $action = $dispatcher->getActionMethod($request);
+        $action = $dispatcher-&gt;getActionMethod($request);
 
-        if (!$r->hasMethod($action)) {
-            $defaultAction  = $dispatcher->getDefaultAction();
-            $controllerName = $request->getControllerName();
-            $response       = $front->getResponse();
-            $response->setRedirect('/' . $controllerName
+        if (!$r-&gt;hasMethod($action)) {
+            $defaultAction  = $dispatcher-&gt;getDefaultAction();
+            $controllerName = $request-&gt;getControllerName();
+            $response       = $front-&gt;getResponse();
+            $response-&gt;setRedirect('/' . $controllerName
                                   . '/' . $defaultAction);
-            $response->sendHeaders();
+            $response-&gt;sendHeaders();
             exit;
         }
     }
 }
-]]></programlisting>
+</programlisting>
 
                         <para>
                             In this example, we check to see if the action
@@ -363,8 +362,5 @@ class My_Controller_PreDispatchPlugin extends Zend_Controller_Plugin_Abstract
                 </itemizedlist>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

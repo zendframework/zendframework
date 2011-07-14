@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.cache.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_Cache</classname> provides a generic way to cache any data.
@@ -22,8 +23,8 @@
         <emphasis>File</emphasis>, <emphasis>Function</emphasis> and <emphasis>Class</emphasis>.
     </para>
 
-    <example id="zend.cache.introduction.example-1">
-        <title>Getting a Frontend with Zend_Cache::factory()</title>
+    <example xml:id="zend.cache.introduction.example-1"><info><title>Getting a Frontend with Zend_Cache::factory()</title></info>
+        
 
         <para>
             <methodname>Zend_Cache::factory()</methodname> instantiates correct objects and ties
@@ -31,14 +32,14 @@
             together with <emphasis>File</emphasis> backend.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $frontendOptions = array(
-   'lifetime' => 7200, // cache lifetime of 2 hours
-   'automatic_serialization' => true
+   'lifetime' =&gt; 7200, // cache lifetime of 2 hours
+   'automatic_serialization' =&gt; true
 );
 
 $backendOptions = array(
-    'cache_dir' => './tmp/' // Directory where to put the cache files
+    'cache_dir' =&gt; './tmp/' // Directory where to put the cache files
 );
 
 // getting a Zend_Cache_Core object
@@ -46,11 +47,11 @@ $cache = Zend_Cache::factory('Core',
                              'File',
                              $frontendOptions,
                              $backendOptions);
-]]></programlisting>
+</programlisting>
     </example>
 
-    <note>
-        <title>Frontends and Backends Consisting of Multiple Words</title>
+    <note><info><title>Frontends and Backends Consisting of Multiple Words</title></info>
+        
 
         <para>
             Some frontends and backends are named using multiple words, such
@@ -60,8 +61,8 @@ $cache = Zend_Cache::factory('Core',
         </para>
     </note>
 
-    <example id="zend.cache.introduction.example-2">
-        <title>Caching a Database Query Result</title>
+    <example xml:id="zend.cache.introduction.example-2"><info><title>Caching a Database Query Result</title></info>
+        
 
         <para>
             Now that we have a frontend, we can cache any type of data (we turned on serialization).
@@ -70,19 +71,19 @@ $cache = Zend_Cache::factory('Core',
             and unserialized.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // $cache initialized in previous example
 
 // see if a cache already exists:
-if(!$result = $cache->load('myresult')) {
+if(!$result = $cache-&gt;load('myresult')) {
 
     // cache miss; connect to the database
 
     $db = Zend_Db::factory( [...] );
 
-    $result = $db->fetchAll('SELECT * FROM huge_table');
+    $result = $db-&gt;fetchAll('SELECT * FROM huge_table');
 
-    $cache->save($result, 'myresult');
+    $cache-&gt;save($result, 'myresult');
 
 } else {
 
@@ -92,11 +93,11 @@ if(!$result = $cache->load('myresult')) {
 }
 
 print_r($result);
-]]></programlisting>
+</programlisting>
     </example>
 
-    <example id="zend.cache.introduction.example-3">
-        <title>Caching Output with Zend_Cache Output Frontend</title>
+    <example xml:id="zend.cache.introduction.example-3"><info><title>Caching Output with Zend_Cache Output Frontend</title></info>
+        
 
         <para>
             We 'mark up' sections in which we want to cache output by adding some conditional logic,
@@ -111,13 +112,13 @@ print_r($result);
             skipped in favor of fetching data from cache (as long as the cache record is valid).
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $frontendOptions = array(
-   'lifetime' => 30,                   // cache lifetime of 30 seconds
-   'automatic_serialization' => false  // this is the default anyways
+   'lifetime' =&gt; 30,                   // cache lifetime of 30 seconds
+   'automatic_serialization' =&gt; false  // this is the default anyways
 );
 
-$backendOptions = array('cache_dir' => './tmp/');
+$backendOptions = array('cache_dir' =&gt; './tmp/');
 
 $cache = Zend_Cache::factory('Output',
                              'File',
@@ -125,17 +126,17 @@ $cache = Zend_Cache::factory('Output',
                              $backendOptions);
 
 // we pass a unique identifier to the start() method
-if(!$cache->start('mypage')) {
+if(!$cache-&gt;start('mypage')) {
     // output as usual:
 
     echo 'Hello world! ';
     echo 'This is cached ('.time().') ';
 
-    $cache->end(); // the output is saved and sent to the browser
+    $cache-&gt;end(); // the output is saved and sent to the browser
 }
 
 echo 'This is never cached ('.time().').';
-]]></programlisting>
+</programlisting>
 
         <para>
             Notice that we output the result of <methodname>time()</methodname> twice; this is
@@ -157,7 +158,4 @@ echo 'This is never cached ('.time().').';
             place of the other.
         </para>
     </note>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

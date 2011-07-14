@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.locale.functions">
-    <title>Using Zend_Locale</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.locale.functions"><info><title>Using Zend_Locale</title></info>
+    
 
     <para>
         <classname>Zend_Locale</classname> also provides localized information about locales for
@@ -9,99 +10,97 @@
         etc.
     </para>
 
-    <sect2 id="zend.locale.copying">
-        <title>Copying, Cloning, and Serializing Locale Objects</title>
+    <section xml:id="zend.locale.copying"><info><title>Copying, Cloning, and Serializing Locale Objects</title></info>
+        
 
         <para>
-            Use <ulink url="http://php.net/language.oop5.cloning">object cloning</ulink> to
+            Use <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/language.oop5.cloning">object cloning</link> to
             duplicate a locale object exactly and efficiently. Most locale-aware methods also accept
             string representations of locales, such as the result of
-            <command>$locale->toString()</command>.
+            <command>$locale-&gt;toString()</command>.
         </para>
 
-        <example id="zend.locale.copying.example-1">
-            <title>clone</title>
+        <example xml:id="zend.locale.copying.example-1"><info><title>clone</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $locale = new Zend_Locale('ar');
 
 // Save the $locale object as a serialization
-$serializedLocale = $locale->serialize();
+$serializedLocale = $locale-&gt;serialize();
 // re-create the original object
 $localeObject = unserialize($serializedLocale);
 
 // Obtain a string identification of the locale
-$stringLocale = $locale->toString();
+$stringLocale = $locale-&gt;toString();
 
 // Make a cloned copy of the $local object
 $copiedLocale = clone $locale;
 
-print "copied: ", $copiedLocale->toString();
+print "copied: ", $copiedLocale-&gt;toString();
 
 // PHP automatically calls toString() via __toString()
 print "copied: ", $copiedLocale;
-]]></programlisting>
+</programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.equals">
-        <title>Equality</title>
+    <section xml:id="zend.locale.equals"><info><title>Equality</title></info>
+        
 
         <para>
             <classname>Zend_Locale</classname> also provides a convenience function to compare two
             locales. All locale-aware classes should provide a similar equality check.
         </para>
 
-        <example id="zend.locale.equals.example-1">
-            <title>Check for equal locales</title>
+        <example xml:id="zend.locale.equals.example-1"><info><title>Check for equal locales</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $locale = new Zend_Locale();
 $mylocale = new Zend_Locale('en_US');
 
 // Check if locales are equal
-if ($locale->equals($mylocale)) {
+if ($locale-&gt;equals($mylocale)) {
     print "Locales are equal";
 }
-]]></programlisting>
+</programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.getdefault">
-        <title>Default locales</title>
+    <section xml:id="zend.locale.getdefault"><info><title>Default locales</title></info>
+        
 
         <para>
             The method <methodname>getDefault()</methodname> returns an array of relevant locales
             using information from the user's web browser (if available), information from the
             environment of the host server, and Zend Framework settings. As with the constructor
             for <classname>Zend_Locale</classname>, the first parameter selects a preference of
-            which information to consider <link
-                linkend="zend.locale.selection">(<constant>BROWSER</constant>,
+            which information to consider <link linkend="zend.locale.selection">(<constant>BROWSER</constant>,
                 <constant>ENVIRONMENT</constant>, or <constant>FRAMEWORK)</constant></link> first.
             The second parameter toggles between returning all matching locales or only the
             first or best match. Locale-aware components normally use only the first locale. A
             quality rating is included, when available.
         </para>
 
-        <example id="zend.locale.getdefault.example-1">
-            <title>Get default locales</title>
+        <example xml:id="zend.locale.getdefault.example-1"><info><title>Get default locales</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $locale = new Zend_Locale();
 
 // Return all default locales
-$found = $locale->getDefault();
+$found = $locale-&gt;getDefault();
 print_r($found);
 
 // Return only browser locales
-$found2 = $locale->getDefault(Zend_Locale::BROWSER,TRUE);
+$found2 = $locale-&gt;getDefault(Zend_Locale::BROWSER,TRUE);
 print_r($found2);
-]]></programlisting>
+</programlisting>
         </example>
 
         <para>
-            To obtain only the default locales relevant to the <link
-                linkend="zend.locale.selection"><constant>BROWSER</constant>,
+            To obtain only the default locales relevant to the <link linkend="zend.locale.selection"><constant>BROWSER</constant>,
                 <constant>ENVIRONMENT</constant>, or <constant>FRAMEWORK</constant></link>, use
             the corresponding method:
 
@@ -125,10 +124,10 @@ print_r($found2);
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.setlocale">
-        <title>Set a new locale</title>
+    <section xml:id="zend.locale.setlocale"><info><title>Set a new locale</title></info>
+        
 
         <para>
             A new locale can be set with the function <methodname>setLocale()</methodname>. This
@@ -136,24 +135,24 @@ print_r($found2);
             <link linkend="zend.locale.selection">automatically selected</link>.
         </para>
 
-        <example id="zend.locale.setlocale.example-1">
-            <title>setLocale</title>
+        <example xml:id="zend.locale.setlocale.example-1"><info><title>setLocale</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $locale = new Zend_Locale();
 
 // Actual locale
-print $locale->toString();
+print $locale-&gt;toString();
 
 // new locale
-$locale->setLocale('aa_DJ');
-print $locale->toString();
-]]></programlisting>
+$locale-&gt;setLocale('aa_DJ');
+print $locale-&gt;toString();
+</programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.getlocale">
-        <title>Getting the language and region</title>
+    <section xml:id="zend.locale.getlocale"><info><title>Getting the language and region</title></info>
+        
 
         <para>
             Use <methodname>getLanguage()</methodname> to obtain a string containing the two
@@ -162,23 +161,23 @@ print $locale->toString();
             region code from the string locale identifier.
         </para>
 
-        <example id="zend.locale.getlocale.example-1">
-            <title>getLanguage and getRegion</title>
+        <example xml:id="zend.locale.getlocale.example-1"><info><title>getLanguage and getRegion</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $locale = new Zend_Locale();
 
 // if locale is 'de_AT' then 'de' will be returned as language
-print $locale->getLanguage();
+print $locale-&gt;getLanguage();
 
 // if locale is 'de_AT' then 'AT' will be returned as region
-print $locale->getRegion();
-]]></programlisting>
+print $locale-&gt;getRegion();
+</programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.getlocaletoterritory">
-        <title>Get the locale by giving a territory</title>
+    <section xml:id="zend.locale.getlocaletoterritory"><info><title>Get the locale by giving a territory</title></info>
+        
 
         <para>
             When you only have the territory or country then it's also possible to get a locale
@@ -188,17 +187,17 @@ print $locale->getRegion();
             been found.
         </para>
 
-        <example id="zend.locale.getlocaletoterritory.example-1">
-            <title>getLocaleToTerritory</title>
+        <example xml:id="zend.locale.getlocaletoterritory.example-1"><info><title>getLocaleToTerritory</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $locale = Zend_Locale::getLocaleToTerritory('US');
 // returns 'en_US'
-]]></programlisting>
+</programlisting>
         </example>
 
-        <note>
-            <title>Uppercase territories</title>
+        <note><info><title>Uppercase territories</title></info>
+            
 
             <para>
                 When you know that you are using a territory, then you should uppercase it.
@@ -215,10 +214,10 @@ $locale = Zend_Locale::getLocaleToTerritory('US');
                 or uppercase the input.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.getdata">
-        <title>Obtaining localized strings</title>
+    <section xml:id="zend.locale.getdata"><info><title>Obtaining localized strings</title></info>
+        
 
         <para>
             <methodname>getTranslationList()</methodname> gives you access to localized information
@@ -233,22 +232,22 @@ $locale = Zend_Locale::getLocaleToTerritory('US');
             to give an array instead of multiple values.
         </para>
 
-        <example id="zend.locale.getdata.example-1">
-            <title>getTranslationList</title>
+        <example xml:id="zend.locale.getdata.example-1"><info><title>getTranslationList</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $list = Zend_Locale::getTranslationList('language', 'de_AT');
 
 print_r ($list);
-// example key -> value pairs...
-// [de] -> Deutsch
-// [en] -> Englisch
+// example key -&gt; value pairs...
+// [de] -&gt; Deutsch
+// [en] -&gt; Englisch
 
 // use one of the returned key as value for the getTranslation() method
 // of another language
 print Zend_Locale::getTranslation('de', 'language', 'zh');
 // returns the translation for the language 'de' in chinese
-]]></programlisting>
+</programlisting>
         </example>
 
         <para>
@@ -257,10 +256,10 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
             an own function for simplicity. See this list for detailed information.
         </para>
 
-        <table id="zend.locale.getdata.table-1">
-            <title>
+        <table xml:id="zend.locale.getdata.table-1"><info><title>
                 Details for getTranslationList($type = null, $locale = null, $value = null)
-            </title>
+            </title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -369,8 +368,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             are several different representations which are all returned as sub
                             array. If you omit the value you will get a list of all months from the
                             'gregorian' calendar returned. You can give any known calendar as value
-                            to get a list of months from this calendar returned. Use <link
-                                linkend="zend.date.introduction">Zend_Date</link> for simplicity
+                            to get a list of months from this calendar returned. Use <link linkend="zend.date.introduction">Zend_Date</link> for simplicity
                         </entry>
                     </row>
 
@@ -397,8 +395,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             several different representations which are all returned as sub array.
                             If you omit the value you will get a list of all days from the
                             'gregorian' calendar returned. You can give any known calendar as value
-                            to get a list of days from this calendar returned. Use <link
-                                linkend="zend.date.introduction">Zend_Date</link> for simplicity
+                            to get a list of days from this calendar returned. Use <link linkend="zend.date.introduction">Zend_Date</link> for simplicity
                         </entry>
                     </row>
 
@@ -485,8 +482,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             of the dateformat is used as key and the format itself as value.If you
                             omit the value you will get the date formats for the gregorian calendar
                             returned. You can get the date formats for different calendars if you
-                            give the wished calendar as string. Use <link
-                                linkend="zend.date.introduction">Zend_Date</link> for simplicity
+                            give the wished calendar as string. Use <link linkend="zend.date.introduction">Zend_Date</link> for simplicity
                         </entry>
                     </row>
 
@@ -498,8 +494,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             of the timeformat is used as key and the format itself as value. If you
                             omit the value you will get the time formats for the gregorian calendar
                             returned. You can get the time formats for different calendars if you
-                            give the wished calendar as string. Use <link
-                                linkend="zend.date.introduction">Zend_Date</link> for simplicity
+                            give the wished calendar as string. Use <link linkend="zend.date.introduction">Zend_Date</link> for simplicity
                         </entry>
                     </row>
 
@@ -511,8 +506,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             The name of the date-time format is used as key and the format itself as
                             value. If you omit the value you will get the date-time formats for the
                             gregorian calendar returned. You can get the date-time formats for
-                            different calendars if you give the wished calendar as string. Use <link
-                                linkend="zend.date.introduction">Zend_Date</link> for simplicity
+                            different calendars if you give the wished calendar as string. Use <link linkend="zend.date.introduction">Zend_Date</link> for simplicity
                         </entry>
                     </row>
 
@@ -572,8 +566,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
 
                         <entry>
                             Returns a localized list of names for currencies. The currency is used
-                            as key and the translated name as value. Use <link
-                                linkend="zend.currency.introduction">Zend_Currency</link> for
+                            as key and the translated name as value. Use <link linkend="zend.currency.introduction">Zend_Currency</link> for
                             simplicity
                         </entry>
                     </row>
@@ -583,8 +576,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
 
                         <entry>
                             Returns a list of currencies for localized names. The translated name is
-                            used as key and the currency as value. Use  <link
-                                linkend="zend.currency.introduction">Zend_Currency</link> for
+                            used as key and the currency as value. Use  <link linkend="zend.currency.introduction">Zend_Currency</link> for
                             simplicity
                         </entry>
                     </row>
@@ -594,8 +586,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
 
                         <entry>
                             Returns a list of known localized currency symbols for currencies. The
-                            currency is used as key and the symbol as value. Use <link
-                                linkend="zend.currency.introduction">Zend_Currency</link> for
+                            currency is used as key and the symbol as value. Use <link linkend="zend.currency.introduction">Zend_Currency</link> for
                             simplicity
                         </entry>
                     </row>
@@ -605,8 +596,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
 
                         <entry>
                             Returns a list of localized strings for acceptance ('yes') and
-                            negation ('no'). Use <link
-                                linkend="zend.locale.getquestion">Zend_Locale's getQuestion
+                            negation ('no'). Use <link linkend="zend.locale.getquestion">Zend_Locale's getQuestion
                                 method</link> for simplicity
                         </entry>
                     </row>
@@ -616,8 +606,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
 
                         <entry>
                             Returns a list of fractions for currency values. The currency is used as
-                            key and the fraction as integer value. Use <link
-                                linkend="zend.currency.introduction">Zend_Currency</link> for
+                            key and the fraction as integer value. Use <link linkend="zend.currency.introduction">Zend_Currency</link> for
                             simplicity
                         </entry>
                     </row>
@@ -627,8 +616,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
 
                         <entry>
                             Returns a list of how to round which currency. The currency is used as
-                            key and the rounding as integer value. Use <link
-                                linkend="zend.currency.introduction">Zend_Currency</link> for
+                            key and the rounding as integer value. Use <link linkend="zend.currency.introduction">Zend_Currency</link> for
                             simplicity
                         </entry>
                     </row>
@@ -653,8 +641,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             <constant>ISO4217</constant> value ('currency') is used as array key and
                             the <constant>ISO3166</constant> value ('region') as array value. When a
                             currency is used in several regions these regions are separated with a
-                            whitespace. Use <link
-                                linkend="zend.currency.introduction">Zend_Currency</link> for
+                            whitespace. Use <link linkend="zend.currency.introduction">Zend_Currency</link> for
                             simplicity
                         </entry>
                     </row>
@@ -930,8 +917,8 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
             See the following table for detailed information:
         </para>
 
-        <table id="zend.locale.getdata.table-2">
-            <title>Details for getTranslation($value = null, $type = null, $locale = null)</title>
+        <table xml:id="zend.locale.getdata.table-2"><info><title>Details for getTranslation($value = null, $type = null, $locale = null)</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -996,8 +983,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
 
                         <entry>
                             Returns the default calendar for the given locale. For most locales this
-                            will be 'gregorian'. Use <link
-                                linkend="zend.date.introduction">Zend_Date</link> for simplicity
+                            will be 'gregorian'. Use <link linkend="zend.date.introduction">Zend_Date</link> for simplicity
                         </entry>
                     </row>
 
@@ -1034,8 +1020,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             has to look like this: <command>array( 'calendar', 'context', 'format',
                                 'month number')</command>. If you give only an integer then the
                             default values are the 'gregorian' calendar, the context 'format' and
-                            the format 'wide'. Use <link
-                                linkend="zend.date.introduction">Zend_Date</link> for simplicity
+                            the format 'wide'. Use <link linkend="zend.date.introduction">Zend_Date</link> for simplicity
                         </entry>
                     </row>
 
@@ -1072,8 +1057,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             array has to look like this: <methodname>array('calendar', 'context',
                                 'format', 'day abbreviation')</methodname>. If you give only an
                             string then the default values are the 'gregorian' calendar, the context
-                            'format' and the format 'wide'. Use <link
-                                linkend="zend.date.introduction">Zend_Date</link> for simplicity
+                            'format' and the format 'wide'. Use <link linkend="zend.date.introduction">Zend_Date</link> for simplicity
                         </entry>
                     </row>
 
@@ -1099,8 +1083,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             Returns translation for 'AM' in the expected locale. If you want to
                             receive data for other calendars provide a string with the expected
                             calendar. If you omit the value then the 'gregorian' calendar will be
-                            used. Use <link
-                                linkend="zend.date.introduction">Zend_Date</link> for simplicity
+                            used. Use <link linkend="zend.date.introduction">Zend_Date</link> for simplicity
                         </entry>
                     </row>
 
@@ -1150,8 +1133,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             the 'medium' format. If you give a string then the 'gregorian' calendar
                             will be used with the given format. Or you can also give an array which
                             will have to look like this: <methodname>array('calendar',
-                                'format')</methodname>. Use <link
-                                linkend="zend.date.introduction">Zend_Date</link> for simplicity
+                                'format')</methodname>. Use <link linkend="zend.date.introduction">Zend_Date</link> for simplicity
                         </entry>
                     </row>
 
@@ -1174,8 +1156,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             the 'medium' format. If you give a string then the 'gregorian' calendar
                             will be used with the given format. Or you can also give an array which
                             will have to look like this:
-                            <methodname>array('calendar', 'format')</methodname>. Use <link
-                                linkend="zend.date.introduction">Zend_Date</link> for simplicity
+                            <methodname>array('calendar', 'format')</methodname>. Use <link linkend="zend.date.introduction">Zend_Date</link> for simplicity
                         </entry>
                     </row>
 
@@ -1240,8 +1221,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>DecimalNumber</emphasis></entry>
 
                         <entry>
-                            Returns the format for decimal numbers within a given locale. Use <link
-                                linkend="zend.locale.parsing">Zend_Locale_Format</link> for
+                            Returns the format for decimal numbers within a given locale. Use <link linkend="zend.locale.parsing">Zend_Locale_Format</link> for
                             simplicity
                         </entry>
                     </row>
@@ -1267,8 +1247,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
 
                         <entry>
                             Returns the format for displaying currency numbers within a given
-                            locale. Use <link
-                                linkend="zend.currency.introduction">Zend_Currency</link> for
+                            locale. Use <link linkend="zend.currency.introduction">Zend_Currency</link> for
                             simplicity
                         </entry>
                     </row>
@@ -1279,8 +1258,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>
                             Returns the translated name for a given currency. The currency has to be
                             given in <acronym>ISO</acronym> format which is for example 'EUR' for
-                            the currency 'euro'. Use <link
-                                linkend="zend.currency.introduction">Zend_Currency</link> for
+                            the currency 'euro'. Use <link linkend="zend.currency.introduction">Zend_Currency</link> for
                             simplicity
                         </entry>
                     </row>
@@ -1289,8 +1267,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>CurrencyToName</emphasis></entry>
 
                         <entry>
-                            Returns a currency for a given localized name. Use <link
-                                linkend="zend.currency.introduction">Zend_Currency</link> for
+                            Returns a currency for a given localized name. Use <link linkend="zend.currency.introduction">Zend_Currency</link> for
                             simplicity
                         </entry>
                     </row>
@@ -1322,8 +1299,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
 
                         <entry>
                             Returns the fraction to use for a given currency. You must give the
-                            currency as <acronym>ISO</acronym> value. Use <link
-                                linkend="zend.currency.introduction">Zend_Currency</link>
+                            currency as <acronym>ISO</acronym> value. Use <link linkend="zend.currency.introduction">Zend_Currency</link>
                             for simplicity
                         </entry>
                     </row>
@@ -1334,8 +1310,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>
                             Returns how to round a given currency. You must give the currency as
                             <acronym>ISO</acronym> value. If you omit the currency then the
-                            'DEFAULT' rounding will be returned. Use <link
-                                linkend="zend.currency.introduction">Zend_Currency</link>
+                            'DEFAULT' rounding will be returned. Use <link linkend="zend.currency.introduction">Zend_Currency</link>
                             for simplicity
                         </entry>
                     </row>
@@ -1358,8 +1333,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             Returns the regions where a currency is used. The currency has to be
                             given as <constant>ISO4217</constant> code for example 'EUR' for euro.
                             When a currency is used in multiple regions, these regions are separated
-                            with a whitespace character. Use <link
-                                linkend="zend.currency.introduction">Zend_Currency</link> for
+                            with a whitespace character. Use <link linkend="zend.currency.introduction">Zend_Currency</link> for
                             simplicity
                         </entry>
                     </row>
@@ -1601,8 +1575,8 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
             </para>
         </note>
 
-        <table id="zend.locale.getdata.table-3">
-            <title>Differences between Zend Framework 1.0 and 1.5</title>
+        <table xml:id="zend.locale.getdata.table-3"><info><title>Differences between Zend Framework 1.0 and 1.5</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -1695,13 +1669,13 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
             The example below demonstrates how to obtain the names of things in different languages.
         </para>
 
-        <example id="zend.locale.getdata.example-3">
-            <title>getTranslationList</title>
+        <example xml:id="zend.locale.getdata.example-3"><info><title>getTranslationList</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 // prints the names of all countries in German language
 print_r(Zend_Locale::getTranslationList('country', 'de'));
-]]></programlisting>
+</programlisting>
         </example>
 
         <para>
@@ -1709,16 +1683,16 @@ print_r(Zend_Locale::getTranslationList('country', 'de'));
             two letter iso country code is not known.
         </para>
 
-        <example id="zend.locale.getdata.example-4">
-            <title>Converting country name in one language to another</title>
+        <example xml:id="zend.locale.getdata.example-4"><info><title>Converting country name in one language to another</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $code2name = Zend_Locale::getTranslationList('language', 'en_US');
 $name2code = array_flip($code2name);
 $frenchCode = $name2code['French'];
 echo Zend_Locale::getTranslation($frenchCode, 'language', 'de_AT');
 // output is the German name of the French language
-]]></programlisting>
+</programlisting>
         </example>
 
         <para>
@@ -1732,28 +1706,28 @@ echo Zend_Locale::getTranslation($frenchCode, 'language', 'de_AT');
             example, below exceptions are ignored to prevent early termination.
         </para>
 
-        <example id="zend.locale.getdata.example-6">
-            <title>All Languages written in their native language</title>
+        <example xml:id="zend.locale.getdata.example-6"><info><title>All Languages written in their native language</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $list = Zend_Locale::getTranslationList('language', 'auto');
 
-foreach($list as $language => $content) {
+foreach($list as $language =&gt; $content) {
     try {
         $output = Zend_Locale::getTranslation($language, 'language', $language);
         if (is_string($output)) {
-            print "\n<br>[".$language."] ".$output;
+            print "\n&lt;br&gt;[".$language."] ".$output;
         }
     } catch (Exception $e) {
         continue;
     }
 }
-]]></programlisting>
+</programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.getquestion">
-        <title>Obtaining translations for "yes" and "no"</title>
+    <section xml:id="zend.locale.getquestion"><info><title>Obtaining translations for "yes" and "no"</title></info>
+        
 
         <para>
             Frequently, programs need to solicit a "yes" or "no" response from the user. Use
@@ -1788,36 +1762,36 @@ foreach($list as $language => $content) {
             following example for the information you can receive:
         </para>
 
-        <example id="zend.locale.getquestion.example-1">
-            <title>getQuestion()</title>
+        <example xml:id="zend.locale.getquestion.example-1"><info><title>getQuestion()</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $locale = new Zend_Locale();
 // Question strings
-print_r($locale->getQuestion('de'));
+print_r($locale-&gt;getQuestion('de'));
 
 - - - Output - - -
 
 Array
 (
-    [yes] => ja
-    [no] => nein
-    [yesarray] => Array
+    [yes] =&gt; ja
+    [no] =&gt; nein
+    [yesarray] =&gt; Array
         (
-            [0] => ja
-            [1] => j
+            [0] =&gt; ja
+            [1] =&gt; j
         )
 
-    [noarray] => Array
+    [noarray] =&gt; Array
         (
-            [0] => nein
-            [1] => n
+            [0] =&gt; nein
+            [1] =&gt; n
         )
 
-    [yesexpr] => ^([jJ][aA]?)|([jJ]?)
-    [noexpr] => ^([nN]([eE][iI][nN])?)|([nN]?)
+    [yesexpr] =&gt; ^([jJ][aA]?)|([jJ]?)
+    [noexpr] =&gt; ^([nN]([eE][iI][nN])?)|([nN]?)
 )
-]]></programlisting>
+</programlisting>
         </example>
 
         <note>
@@ -1827,10 +1801,10 @@ Array
                 will find the information from it within <emphasis>yesarray</emphasis>.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.getlocalelist">
-        <title>Get a list of all known locales</title>
+    <section xml:id="zend.locale.getlocalelist"><info><title>Get a list of all known locales</title></info>
+        
 
         <para>
             Sometimes you will want to get a list of all known locales. This can be used for several
@@ -1839,12 +1813,12 @@ Array
             locales.
         </para>
 
-        <example id="zend.locale.getlocalelist.example-1">
-            <title>getLocaleList()</title>
+        <example xml:id="zend.locale.getlocalelist.example-1"><info><title>getLocaleList()</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $localelist = Zend_Locale::getLocaleList();
-]]></programlisting>
+</programlisting>
         </example>
 
         <note>
@@ -1853,10 +1827,10 @@ $localelist = Zend_Locale::getLocaleList();
                 is always a boolean <constant>TRUE</constant>.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.detection">
-        <title>Detecting locales</title>
+    <section xml:id="zend.locale.detection"><info><title>Detecting locales</title></info>
+        
 
         <para>
             When you want to detect if a given input, regardless of its source, is a locale you
@@ -1864,17 +1838,17 @@ $localelist = Zend_Locale::getLocaleList();
             this method is the string which you want to check.
         </para>
 
-        <example id="zend.locale.detection.example-1">
-            <title>Simple locale detection</title>
+        <example xml:id="zend.locale.detection.example-1"><info><title>Simple locale detection</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $input = 'to_RU';
 if (Zend_Locale::isLocale($input)) {
     print "'{$input}' is a locale";
 } else {
     print "Sorry... the given input is no locale";
 }
-]]></programlisting>
+</programlisting>
         </example>
 
         <para>
@@ -1900,17 +1874,17 @@ if (Zend_Locale::isLocale($input)) {
             used to prevent degrading when set to <constant>TRUE</constant>.
         </para>
 
-        <example id="zend.locale.detection.example-2">
-            <title>Strict locale detection</title>
+        <example xml:id="zend.locale.detection.example-2"><info><title>Strict locale detection</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $input = 'to_RU';
 if (Zend_Locale::isLocale($input, true)) {
     print "'{$input}' is a locale";
 } else {
     print "Sorry... the given input is no locale";
 }
-]]></programlisting>
+</programlisting>
         </example>
 
         <para>
@@ -1919,10 +1893,10 @@ if (Zend_Locale::isLocale($input, true)) {
             the same 15 lines of code. Something like the following example:
         </para>
 
-        <example id="zend.locale.detection.example-3">
-            <title>Implement locale aware behaviour</title>
+        <example xml:id="zend.locale.detection.example-3"><info><title>Implement locale aware behaviour</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 if ($locale === null) {
     $locale = new Zend_Locale();
 }
@@ -1937,9 +1911,9 @@ if (!Zend_Locale::isLocale($locale, true, false)) {
 }
 
 if ($locale instanceof Zend_Locale) {
-    $locale = $locale->toString();
+    $locale = $locale-&gt;toString();
 }
-]]></programlisting>
+</programlisting>
         </example>
 
         <para>
@@ -2003,15 +1977,12 @@ if ($locale instanceof Zend_Locale) {
             one single call:
         </para>
 
-        <example id="zend.locale.detection.example-4">
-            <title>Locale aware behaviour as with Zend Framework 1.8</title>
+        <example xml:id="zend.locale.detection.example-4"><info><title>Locale aware behaviour as with Zend Framework 1.8</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $locale = Zend_Locale::findLocale($inputstring);
-]]></programlisting>
+</programlisting>
         </example>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

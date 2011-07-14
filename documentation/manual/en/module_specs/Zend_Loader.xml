@@ -1,31 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.loader.load">
-    <title>Loading Files and Classes Dynamically</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.load"><info><title>Loading Files and Classes Dynamically</title></info>
+    
 
     <para>
         The <classname>Zend_Loader</classname> class includes methods to help you load files
         dynamically.
     </para>
 
-    <sect2 id="zend.loader.load.file">
-        <title>Loading Files</title>
+    <section xml:id="zend.loader.load.file"><info><title>Loading Files</title></info>
+        
 
         <para>
             The static method <methodname>Zend_Loader::loadFile()</methodname> loads a
             <acronym>PHP</acronym> file. The file loaded may contain any <acronym>PHP</acronym>
             code. The method is a wrapper for the <acronym>PHP</acronym> function
-            <ulink url="http://php.net/include"><methodname>include()</methodname></ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/include"><methodname>include()</methodname></link>.
             This method returns boolean <constant>FALSE</constant> on failure, for example
             if the specified file does not exist.
         </para>
 
-        <example id="zend.loader.load.file.example">
-            <title>Example of the loadFile() Method</title>
+        <example xml:id="zend.loader.load.file.example"><info><title>Example of the loadFile() Method</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 Zend_Loader::loadFile($filename, $dirs=null, $once=false);
-]]></programlisting>
+</programlisting>
     </example>
 
         <para>
@@ -47,16 +48,15 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
         <para>
             The <varname>$once</varname> argument is a boolean. If <constant>TRUE</constant>,
             <methodname>Zend_Loader::loadFile()</methodname> uses the <acronym>PHP</acronym>
-            function <ulink
-                url="http://php.net/include"><methodname>include_once()</methodname></ulink>
+            function <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/include"><methodname>include_once()</methodname></link>
             for loading the file, otherwise the <acronym>PHP</acronym> function
-            <ulink url="http://php.net/include_once"><methodname>include()</methodname></ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/include_once"><methodname>include()</methodname></link>
             is used.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.load.isreadable">
-        <title>Testing if a File is Readable</title>
+    <section xml:id="zend.loader.load.isreadable"><info><title>Testing if a File is Readable</title></info>
+        
 
         <para>
             The static method <methodname>Zend_Loader::isReadable($pathname)</methodname>
@@ -64,27 +64,24 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
             and is readable, <constant>FALSE</constant> otherwise.
         </para>
 
-        <example id="zend.loader.load.isreadable.example">
-            <title>Example of isReadable() method</title>
+        <example xml:id="zend.loader.load.isreadable.example"><info><title>Example of isReadable() method</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 if (Zend_Loader::isReadable($filename)) {
     // do something with $filename
 }
-]]></programlisting>
+</programlisting>
         </example>
 
         <para>
             The <varname>$filename</varname> argument specifies the filename to
             check. This may contain path information.
             This method is a wrapper for the <acronym>PHP</acronym> function
-            <ulink url="http://php.net/is_readable"><methodname>is_readable()</methodname></ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/is_readable"><methodname>is_readable()</methodname></link>.
             The <acronym>PHP</acronym> function does not search the
             <property>include_path</property>, while
             <methodname>Zend_Loader::isReadable()</methodname> does.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

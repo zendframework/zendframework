@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.feed.importing">
-    <title>Importing Feeds</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.importing"><info><title>Importing Feeds</title></info>
+    
 
     <para>
         <classname>Zend_Feed</classname> enables developers to retrieve feeds very easily. If you
@@ -9,22 +10,22 @@
         <methodname>Zend_Feed::import()</methodname> method:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $feed = Zend_Feed::import('http://feeds.example.com/feedName');
-]]></programlisting>
+</programlisting>
 
     <para>
         You can also use <classname>Zend_Feed</classname> to fetch the contents of a feed from a
         file or the contents of a <acronym>PHP</acronym> string variable:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 // importing a feed from a text file
 $feedFromFile = Zend_Feed::importFile('feed.xml');
 
 // importing a feed from a PHP string variable
 $feedFromPHP = Zend_Feed::importString($feedString);
-]]></programlisting>
+</programlisting>
 
     <para>
         In each of the examples above, an object of a class that extends
@@ -36,8 +37,8 @@ $feedFromPHP = Zend_Feed::importString($feedString);
         object upon failure, such as an unreadable or malformed feed.
     </para>
 
-    <sect2 id="zend.feed.importing.custom">
-        <title>Custom feeds</title>
+    <section xml:id="zend.feed.importing.custom"><info><title>Custom feeds</title></info>
+        
 
         <para>
             <classname>Zend_Feed</classname> enables developers to create custom feeds very easily.
@@ -48,10 +49,10 @@ $feedFromPHP = Zend_Feed::importString($feedString);
             <classname>Zend_Feed_Builder_Interface</classname>.
         </para>
 
-        <sect3 id="zend.feed.importing.custom.importarray">
-            <title>Importing a custom array</title>
+        <section xml:id="zend.feed.importing.custom.importarray"><info><title>Importing a custom array</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 // importing a feed from an array
 $atomFeedFromArray = Zend_Feed::importArray($array);
 
@@ -61,73 +62,73 @@ $atomFeedFromArray = Zend_Feed::importArray($array, 'atom');
 
 // importing a rss feed from an array
 $rssFeedFromArray = Zend_Feed::importArray($array, 'rss');
-]]></programlisting>
+</programlisting>
 
             <para>
                 The format of the array must conform to this structure:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 array(
     //required
-    'title' => 'title of the feed',
-    'link'  => 'canonical url to the feed',
+    'title' =&gt; 'title of the feed',
+    'link'  =&gt; 'canonical url to the feed',
 
     // optional
-    'lastUpdate' => 'timestamp of the update date',
-    'published'  => 'timestamp of the publication date',
+    'lastUpdate' =&gt; 'timestamp of the update date',
+    'published'  =&gt; 'timestamp of the publication date',
 
     // required
-    'charset' => 'charset of the textual data',
+    'charset' =&gt; 'charset of the textual data',
 
     // optional
-    'description' => 'short description of the feed',
-    'author'      => 'author/publisher of the feed',
-    'email'       => 'email of the author',
+    'description' =&gt; 'short description of the feed',
+    'author'      =&gt; 'author/publisher of the feed',
+    'email'       =&gt; 'email of the author',
 
     // optional, ignored if atom is used
-    'webmaster' => 'email address for person responsible '
+    'webmaster' =&gt; 'email address for person responsible '
                 .  'for technical issues',
 
     // optional
-    'copyright' => 'copyright notice',
-    'image'     => 'url to image',
-    'generator' => 'generator',
-    'language'  => 'language the feed is written in',
+    'copyright' =&gt; 'copyright notice',
+    'image'     =&gt; 'url to image',
+    'generator' =&gt; 'generator',
+    'language'  =&gt; 'language the feed is written in',
 
     // optional, ignored if atom is used
-    'ttl'    => 'how long in minutes a feed can be cached '
+    'ttl'    =&gt; 'how long in minutes a feed can be cached '
              .  'before refreshing',
-    'rating' => 'The PICS rating for the channel.',
+    'rating' =&gt; 'The PICS rating for the channel.',
 
     // optional, ignored if atom is used
     // a cloud to be notified of updates
-    'cloud'       => array(
+    'cloud'       =&gt; array(
         // required
-        'domain' => 'domain of the cloud, e.g. rpc.sys.com',
+        'domain' =&gt; 'domain of the cloud, e.g. rpc.sys.com',
 
         // optional, defaults to 80
-        'port' => 'port to connect to',
+        'port' =&gt; 'port to connect to',
 
         // required
-        'path'              => 'path of the cloud, e.g. /RPC2',
-        'registerProcedure' => 'procedure to call, e.g. myCloud.rssPlsNotify',
-        'protocol'          => 'protocol to use, e.g. soap or xml-rpc'
+        'path'              =&gt; 'path of the cloud, e.g. /RPC2',
+        'registerProcedure' =&gt; 'procedure to call, e.g. myCloud.rssPlsNotify',
+        'protocol'          =&gt; 'protocol to use, e.g. soap or xml-rpc'
     ),
 
     // optional, ignored if atom is used
     // a text input box that can be displayed with the feed
-    'textInput'   => array(
+    'textInput'   =&gt; array(
         // required
-        'title'       => 'label of the Submit button in the text input area',
-        'description' => 'explains the text input area',
-        'name'        => 'the name of the text object in the text input area',
-        'link'        => 'URL of the CGI script processing text input requests'
+        'title'       =&gt; 'label of the Submit button in the text input area',
+        'description' =&gt; 'explains the text input area',
+        'name'        =&gt; 'the name of the text object in the text input area',
+        'link'        =&gt; 'URL of the CGI script processing text input requests'
     ),
 
     // optional, ignored if atom is used
     // Hint telling aggregators which hours they can skip
-    'skipHours' => array(
+    'skipHours' =&gt; array(
         // up to 24 rows whose value is a number between 0 and 23
         // e.g 13 (1pm)
         'hour in 24 format'
@@ -135,7 +136,7 @@ array(
 
     // optional, ignored if atom is used
     // Hint telling aggregators which days they can skip
-    'skipDays ' => array(
+    'skipDays ' =&gt; array(
         // up to 7 rows whose value is
         // Monday, Tuesday, Wednesday, Thursday, Friday, Saturday or Sunday
         // e.g Monday
@@ -144,81 +145,81 @@ array(
 
     // optional, ignored if atom is used
     // Itunes extension data
-    'itunes' => array(
+    'itunes' =&gt; array(
         // optional, default to the main author value
-        'author' => 'Artist column',
+        'author' =&gt; 'Artist column',
 
         // optional, default to the main author value
         // Owner of the podcast
-        'owner' => array(
-            'name'  => 'name of the owner',
-            'email' => 'email of the owner'
+        'owner' =&gt; array(
+            'name'  =&gt; 'name of the owner',
+            'email' =&gt; 'email of the owner'
         ),
 
         // optional, default to the main image value
-        'image' => 'album/podcast art',
+        'image' =&gt; 'album/podcast art',
 
         // optional, default to the main description value
-        'subtitle' => 'short description',
-        'summary'  => 'longer description',
+        'subtitle' =&gt; 'short description',
+        'summary'  =&gt; 'longer description',
 
         // optional
-        'block' => 'Prevent an episode from appearing (yes|no)',
+        'block' =&gt; 'Prevent an episode from appearing (yes|no)',
 
         // required, Category column and in iTunes Music Store Browse
-        'category' => array(
+        'category' =&gt; array(
             // up to 3 rows
             array(
                 // required
-                'main' => 'main category',
+                'main' =&gt; 'main category',
 
                 // optional
-                'sub'  => 'sub category'
+                'sub'  =&gt; 'sub category'
             )
         ),
 
         // optional
-        'explicit'     => 'parental advisory graphic (yes|no|clean)',
-        'keywords'     => 'a comma separated list of 12 keywords maximum',
-        'new-feed-url' => 'used to inform iTunes of new feed URL location'
+        'explicit'     =&gt; 'parental advisory graphic (yes|no|clean)',
+        'keywords'     =&gt; 'a comma separated list of 12 keywords maximum',
+        'new-feed-url' =&gt; 'used to inform iTunes of new feed URL location'
     ),
 
-    'entries' => array(
+    'entries' =&gt; array(
         array(
             //required
-            'title' => 'title of the feed entry',
-            'link'  => 'url to a feed entry',
+            'title' =&gt; 'title of the feed entry',
+            'link'  =&gt; 'url to a feed entry',
 
             // required, only text, no html
-            'description' => 'short version of a feed entry',
+            'description' =&gt; 'short version of a feed entry',
 
             // optional
-            'guid' => 'id of the article, '
+            'guid' =&gt; 'id of the article, '
                    .  'if not given link value will used',
 
             // optional, can contain html
-            'content' => 'long version',
+            'content' =&gt; 'long version',
 
             // optional
-            'lastUpdate' => 'timestamp of the publication date',
-            'comments'   => 'comments page of the feed entry',
-            'commentRss' => 'the feed url of the associated comments',
+            'lastUpdate' =&gt; 'timestamp of the publication date',
+            'comments'   =&gt; 'comments page of the feed entry',
+            'commentRss' =&gt; 'the feed url of the associated comments',
 
             // optional, original source of the feed entry
-            'source' => array(
+            'source' =&gt; array(
                 // required
-                'title' => 'title of the original source',
-                'url'   => 'url of the original source'
+                'title' =&gt; 'title of the original source',
+                'url'   =&gt; 'url of the original source'
             ),
 
             // optional, list of the attached categories
-            'category' => array(
+            'category' =&gt; array(
                 array(
                     // required
-                    'term' => 'first category label',
+                    'term' =&gt; 'first category label',
 
                     // optional
-                    'scheme' => 'url that identifies a categorization scheme'
+                    'scheme' =&gt; 'url that identifies a categorization scheme'
                 ),
 
                 array(
@@ -227,14 +228,14 @@ array(
             ),
 
             // optional, list of the enclosures of the feed entry
-            'enclosure'    => array(
+            'enclosure'    =&gt; array(
                 array(
                     // required
-                    'url' => 'url of the linked enclosure',
+                    'url' =&gt; 'url of the linked enclosure',
 
                     // optional
-                    'type' => 'mime type of the enclosure',
-                    'length' => 'length of the linked content in octets'
+                    'type' =&gt; 'mime type of the enclosure',
+                    'length' =&gt; 'length of the linked content in octets'
                 ),
 
                 array(
@@ -248,7 +249,7 @@ array(
         )
     )
 );
-]]></programlisting>
+</programlisting>
 
             <para>
                 References:
@@ -257,38 +258,34 @@ array(
             <itemizedlist>
                 <listitem>
                     <para>
-                        <acronym>RSS</acronym> 2.0 specification: <ulink
-                            url="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</ulink>
+                        <acronym>RSS</acronym> 2.0 specification: <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</link>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        Atom specification: <ulink
-                            url="http://tools.ietf.org/html/rfc4287">RFC 4287</ulink>
+                        Atom specification: <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://tools.ietf.org/html/rfc4287">RFC 4287</link>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <acronym>WFW</acronym> specification: <ulink
-                            url="http://wellformedweb.org/news/wfw_namespace_elements">Well
-                            Formed Web</ulink>
+                        <acronym>WFW</acronym> specification: <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wellformedweb.org/news/wfw_namespace_elements">Well
+                            Formed Web</link>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        iTunes specification: <ulink
-                            url="http://www.apple.com/itunes/store/podcaststechspecs.html">iTunes
-                            Technical Specifications</ulink>
+                        iTunes specification: <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.apple.com/itunes/store/podcaststechspecs.html">iTunes
+                            Technical Specifications</link>
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.feed.importing.custom.importbuilder">
-            <title>Importing a custom data source</title>
+        <section xml:id="zend.feed.importing.custom.importbuilder"><info><title>Importing a custom data source</title></info>
+            
 
             <para>
                 You can create a <classname>Zeed_Feed</classname> instance from any data source
@@ -317,7 +314,7 @@ array(
                 Here is an example of <methodname>Zend_Feed::importBuilder()</methodname> usage:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 // importing a feed from a custom builder source
 $atomFeedFromArray =
     Zend_Feed::importBuilder(new Zend_Feed_Builder($array));
@@ -330,11 +327,11 @@ $atomFeedFromArray =
 // importing a rss feed from a custom builder array
 $rssFeedFromArray =
     Zend_Feed::importBuilder(new Zend_Feed_Builder($array), 'rss');
-]]></programlisting>
-        </sect3>
+</programlisting>
+        </section>
 
-        <sect3 id="zend.feed.importing.custom.dump">
-            <title>Dumping the contents of a feed</title>
+        <section xml:id="zend.feed.importing.custom.dump"><info><title>Dumping the contents of a feed</title></info>
+            
 
             <para>
                 To dump the contents of a <classname>Zend_Feed_Abstract</classname> instance, you
@@ -342,18 +339,15 @@ $rssFeedFromArray =
                 methods.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 assert($feed instanceof Zend_Feed_Abstract);
 
 // dump the feed to standard output
-print $feed->saveXML();
+print $feed-&gt;saveXML();
 
 // send http headers and dump the feed
-$feed->send();
-]]></programlisting>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+$feed-&gt;send();
+</programlisting>
+        </section>
+    </section>
+</section>

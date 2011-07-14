@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.config.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_Config</classname> is designed to simplify the access to, and the use of,
@@ -9,34 +10,32 @@
         interface for accessing this configuration data within application code. The configuration
         data may come from a variety of media supporting hierarchical data storage. Currently
         <classname>Zend_Config</classname> provides adapters for configuration data that are stored
-        in text files with <link
-            linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link> and
+        in text files with <link linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link> and
         <link linkend="zend.config.adapters.xml"><classname>Zend_Config_Xml</classname></link>.
     </para>
 
-    <example id="zend.config.introduction.example.using">
-        <title>Using Zend_Config</title>
+    <example xml:id="zend.config.introduction.example.using"><info><title>Using Zend_Config</title></info>
+        
 
         <para>
-            Normally it is expected that users would use one of the adapter classes such as <link
-                linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link> or
+            Normally it is expected that users would use one of the adapter classes such as <link linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link> or
             <link linkend="zend.config.adapters.xml"><classname>Zend_Config_Xml</classname></link>,
             but if configuration data are available in a <acronym>PHP</acronym> array, one may
             simply pass the data to the <classname>Zend_Config</classname> constructor in order to
             utilize a simple object-oriented interface:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Given an array of configuration data
 $configArray = array(
-    'webhost'  => 'www.example.com',
-    'database' => array(
-        'adapter' => 'pdo_mysql',
-        'params'  => array(
-            'host'     => 'db.example.com',
-            'username' => 'dbuser',
-            'password' => 'secret',
-            'dbname'   => 'mydatabase'
+    'webhost'  =&gt; 'www.example.com',
+    'database' =&gt; array(
+        'adapter' =&gt; 'pdo_mysql',
+        'params'  =&gt; array(
+            'host'     =&gt; 'db.example.com',
+            'username' =&gt; 'dbuser',
+            'password' =&gt; 'secret',
+            'dbname'   =&gt; 'mydatabase'
         )
     )
 );
@@ -45,16 +44,16 @@ $configArray = array(
 $config = new Zend_Config($configArray);
 
 // Print a configuration datum (results in 'www.example.com')
-echo $config->webhost;
+echo $config-&gt;webhost;
 
 // Use the configuration data to connect to the database
-$db = Zend_Db::factory($config->database->adapter,
-                       $config->database->params->toArray());
+$db = Zend_Db::factory($config-&gt;database-&gt;adapter,
+                       $config-&gt;database-&gt;params-&gt;toArray());
 
 // Alternative usage: simply pass the Zend_Config object.
 // The Zend_Db factory knows how to interpret it.
-$db = Zend_Db::factory($config->database);
-]]></programlisting>
+$db = Zend_Db::factory($config-&gt;database);
+</programlisting>
     </example>
 
     <para>
@@ -68,43 +67,40 @@ $db = Zend_Db::factory($config->database);
         return the supplied default value if the data element doesn't exist. For example:
     </para>
 
-    <programlisting language="php"><![CDATA[
-$host = $config->database->get('host', 'localhost');
-]]></programlisting>
+    <programlisting language="php">
+$host = $config-&gt;database-&gt;get('host', 'localhost');
+</programlisting>
 
-    <example id="zend.config.introduction.example.file.php">
-        <title>Using Zend_Config with a PHP Configuration File</title>
+    <example xml:id="zend.config.introduction.example.file.php"><info><title>Using Zend_Config with a PHP Configuration File</title></info>
+        
 
         <para>
             It is often desirable to use a pure <acronym>PHP</acronym>-based configuration file.
             The following code illustrates how easily this can be accomplished:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // config.php
 return array(
-    'webhost'  => 'www.example.com',
-    'database' => array(
-        'adapter' => 'pdo_mysql',
-        'params'  => array(
-            'host'     => 'db.example.com',
-            'username' => 'dbuser',
-            'password' => 'secret',
-            'dbname'   => 'mydatabase'
+    'webhost'  =&gt; 'www.example.com',
+    'database' =&gt; array(
+        'adapter' =&gt; 'pdo_mysql',
+        'params'  =&gt; array(
+            'host'     =&gt; 'db.example.com',
+            'username' =&gt; 'dbuser',
+            'password' =&gt; 'secret',
+            'dbname'   =&gt; 'mydatabase'
         )
     )
 );
-]]></programlisting>
+</programlisting>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Configuration consumption
 $config = new Zend_Config(require 'config.php');
 
 // Print a configuration datum (results in 'www.example.com')
-echo $config->webhost;
-]]></programlisting>
+echo $config-&gt;webhost;
+</programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

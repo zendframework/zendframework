@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.currency.additional">
-    <title>Additional informations on Zend_Currency</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.currency.additional.informations">
-        <title>Currency informations</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.additional"><info><title>Additional informations on Zend_Currency</title></info>
+    
+
+    <section xml:id="zend.currency.additional.informations"><info><title>Currency informations</title></info>
+        
 
         <para>
             Sometimes it is necessary to get informations which are related to a currency.
@@ -12,7 +13,7 @@
             informations. Available methods include the following:
         </para>
 
-        <itemizedlist mark='opencircle'>
+        <itemizedlist mark="opencircle">
             <listitem>
                 <para>
                     <emphasis><methodname>getCurrencyList()</methodname></emphasis>: Returns a list
@@ -78,34 +79,34 @@
             Let's see some code snippets as example:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $currency = new Zend_Currency();
 
-var_dump($currency->getValue());
+var_dump($currency-&gt;getValue());
 // returns 0
 
-var_dump($currency->getRegionList());
+var_dump($currency-&gt;getRegionList());
 // could return an array with all regions where USD is used
 
-var_dump($currency->getRegionList('EUR'));
+var_dump($currency-&gt;getRegionList('EUR'));
 // returns an array with all regions where EUR is used
 
-var_dump($currency->getName());
+var_dump($currency-&gt;getName());
 // could return 'US Dollar'
 
-var_dump($currency->getName('EUR'));
+var_dump($currency-&gt;getName('EUR'));
 // returns 'Euro'
-]]></programlisting>
+</programlisting>
 
         <para>
             As you can see, several methods allow to use additional parameters to override the
             actual object to get informations for other currencies. Omitting this parameters will
             return informations from the actual set currency.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.currency.additional.cache">
-        <title>Currency Performance Optimization</title>
+    <section xml:id="zend.currency.additional.cache"><info><title>Currency Performance Optimization</title></info>
+        
 
         <para>
             <classname>Zend_Currency</classname>'s performance can be optimized using
@@ -118,19 +119,19 @@ var_dump($currency->getName('EUR'));
             <methodname>clearCache()</methodname> and <methodname>removeCache()</methodname>.
         </para>
 
-        <example id="zend.currency.usage.cache.example">
-            <title>Caching currencies</title>
+        <example xml:id="zend.currency.usage.cache.example"><info><title>Caching currencies</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 // creating a cache object
 $cache = Zend_Cache::factory('Core',
                              'File',
-                             array('lifetime' => 120,
-                                   'automatic_serialization' => true),
+                             array('lifetime' =&gt; 120,
+                                   'automatic_serialization' =&gt; true),
                              array('cache_dir'
-                                       => dirname(__FILE__) . '/_files/'));
+                                       =&gt; dirname(__FILE__) . '/_files/'));
 Zend_Currency::setCache($cache);
-]]></programlisting>
+</programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

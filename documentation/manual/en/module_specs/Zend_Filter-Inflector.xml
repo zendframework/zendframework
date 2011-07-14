@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.filter.inflector">
-    <title>Zend_Filter_Inflector</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.inflector"><info><title>Zend_Filter_Inflector</title></info>
+    
 
     <para>
         <classname>Zend_Filter_Inflector</classname> is a general purpose tool for
@@ -21,28 +22,28 @@
         <methodname>filter()</methodname> on the object instance.
     </para>
 
-    <example id="zend.filter.inflector.camel_case_example">
-        <title>Transforming MixedCase and camelCaseText to another format</title>
+    <example xml:id="zend.filter.inflector.camel_case_example"><info><title>Transforming MixedCase and camelCaseText to another format</title></info>
+        
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $inflector = new Zend_Filter_Inflector('pages/:page.:suffix');
-$inflector->setRules(array(
-    ':page'  => array('Word_CamelCaseToDash', 'StringToLower'),
-    'suffix' => 'html'
+$inflector-&gt;setRules(array(
+    ':page'  =&gt; array('Word_CamelCaseToDash', 'StringToLower'),
+    'suffix' =&gt; 'html'
 ));
 
 $string   = 'camelCasedWords';
-$filtered = $inflector->filter(array('page' => $string));
+$filtered = $inflector-&gt;filter(array('page' =&gt; $string));
 // pages/camel-cased-words.html
 
 $string   = 'this_is_not_camel_cased';
-$filtered = $inflector->filter(array('page' => $string));
+$filtered = $inflector-&gt;filter(array('page' =&gt; $string));
 // pages/this_is_not_camel_cased.html
-]]></programlisting>
+</programlisting>
     </example>
 
-    <sect2 id="zend.filter.inflector.operation">
-        <title>Operation</title>
+    <section xml:id="zend.filter.inflector.operation"><info><title>Operation</title></info>
+        
 
         <para>
             An inflector requires a <emphasis>target</emphasis> and one or more
@@ -72,10 +73,10 @@ $filtered = $inflector->filter(array('page' => $string));
             '<classname>Zend_Filter_StringToLower</classname>', you'd specify
             only '<classname>Alpha</classname>' or '<classname>StringToLower</classname>'.
         </para>
-    </sect2>
+    </section>
 
-     <sect2 id="zend.filter.inflector.paths">
-        <title>Setting Paths To Alternate Filters</title>
+     <section xml:id="zend.filter.inflector.paths"><info><title>Setting Paths To Alternate Filters</title></info>
+        
 
         <para>
             <classname>Zend_Filter_Inflector</classname> uses
@@ -86,10 +87,10 @@ $filtered = $inflector->filter(array('page' => $string));
             various Word filters, simply strip off the <classname>Zend_Filter</classname> prefix:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // use Zend_Filter_Word_CamelCaseToDash as a rule
-$inflector->addRules(array('script' => 'Word_CamelCaseToDash'));
-]]></programlisting>
+$inflector-&gt;addRules(array('script' =&gt; 'Word_CamelCaseToDash'));
+</programlisting>
 
         <para>
             To set alternate paths, <classname>Zend_Filter_Inflector</classname> has a
@@ -97,29 +98,28 @@ $inflector->addRules(array('script' => 'Word_CamelCaseToDash'));
             <methodname>addFilterPrefixPath()</methodname>:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$inflector->addFilterPrefixPath('My_Filter', 'My/Filter/');
-]]></programlisting>
+        <programlisting language="php">
+$inflector-&gt;addFilterPrefixPath('My_Filter', 'My/Filter/');
+</programlisting>
 
         <para>
             Alternatively, you can retrieve the plugin loader from the
             inflector, and interact with it directly:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$loader = $inflector->getPluginLoader();
-$loader->addPrefixPath('My_Filter', 'My/Filter/');
-]]></programlisting>
+        <programlisting language="php">
+$loader = $inflector-&gt;getPluginLoader();
+$loader-&gt;addPrefixPath('My_Filter', 'My/Filter/');
+</programlisting>
 
         <para>
-            For more options on modifying the paths to filters, please see <link
-                linkend="zend.loader.pluginloader">the PluginLoader
+            For more options on modifying the paths to filters, please see <link linkend="zend.loader.pluginloader">the PluginLoader
                 documentation</link>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.inflector.targets">
-        <title>Setting the Inflector Target</title>
+    <section xml:id="zend.filter.inflector.targets"><info><title>Setting the Inflector Target</title></info>
+        
 
         <para>
             The inflector target is a string with some placeholders for
@@ -135,13 +135,13 @@ $loader->addPrefixPath('My_Filter', 'My/Filter/');
             as the third argument to the constructor:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Via constructor:
 $inflector = new Zend_Filter_Inflector('#foo/#bar.#sfx', null, '#');
 
 // Via accessor:
-$inflector->setTargetReplacementIdentifier('#');
-]]></programlisting>
+$inflector-&gt;setTargetReplacementIdentifier('#');
+</programlisting>
 
         <para>
             Typically, you will set the target via the constructor. However, you
@@ -151,10 +151,10 @@ $inflector->setTargetReplacementIdentifier('#');
             <methodname>setTarget()</methodname> can be used for this purpose:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$inflector = $layout->getInflector();
-$inflector->setTarget('layouts/:script.phtml');
-]]></programlisting>
+        <programlisting language="php">
+$inflector = $layout-&gt;getInflector();
+$inflector-&gt;setTarget('layouts/:script.phtml');
+</programlisting>
 
         <para>
             Additionally, you may wish to have a class member for your class
@@ -164,7 +164,7 @@ $inflector->setTarget('layouts/:script.phtml');
             this:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 class Foo
 {
     /**
@@ -178,8 +178,8 @@ class Foo
      */
     public function __construct()
     {
-        $this->_inflector = new Zend_Filter_Inflector();
-        $this->_inflector->setTargetReference($this->_target);
+        $this-&gt;_inflector = new Zend_Filter_Inflector();
+        $this-&gt;_inflector-&gt;setTargetReference($this-&gt;_target);
     }
 
     /**
@@ -190,15 +190,15 @@ class Foo
      */
     public function setTarget($target)
     {
-        $this->_target = $target;
+        $this-&gt;_target = $target;
         return $this;
     }
 }
-]]></programlisting>
-    </sect2>
+</programlisting>
+    </section>
 
-    <sect2 id="zend.filter.inflector.rules">
-        <title>Inflection Rules</title>
+    <section xml:id="zend.filter.inflector.rules"><info><title>Inflection Rules</title></info>
+        
 
         <para>
             As mentioned in the introduction, there are two types of rules:
@@ -218,8 +218,8 @@ class Foo
             </para>
         </note>
 
-        <sect3 id="zend.filter.inflector.rules.static">
-            <title>Static Rules</title>
+        <section xml:id="zend.filter.inflector.rules.static"><info><title>Static Rules</title></info>
+            
 
             <para>
                 Static rules do simple string substitution; use them when you
@@ -228,13 +228,13 @@ class Foo
                 <methodname>setStaticRule()</methodname> method to set or modify the rule:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $inflector = new Zend_Filter_Inflector(':script.:suffix');
-$inflector->setStaticRule('suffix', 'phtml');
+$inflector-&gt;setStaticRule('suffix', 'phtml');
 
 // change it later:
-$inflector->setStaticRule('suffix', 'php');
-]]></programlisting>
+$inflector-&gt;setStaticRule('suffix', 'php');
+</programlisting>
 
             <para>
                 Much like the target itself, you can also bind a static rule to
@@ -246,7 +246,7 @@ $inflector->setStaticRule('suffix', 'php');
                 accomplish this:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 class Foo
 {
     /**
@@ -260,8 +260,8 @@ class Foo
      */
     public function __construct()
     {
-        $this->_inflector = new Zend_Filter_Inflector(':script.:suffix');
-        $this->_inflector->setStaticRuleReference('suffix', $this->_suffix);
+        $this-&gt;_inflector = new Zend_Filter_Inflector(':script.:suffix');
+        $this-&gt;_inflector-&gt;setStaticRuleReference('suffix', $this-&gt;_suffix);
     }
 
     /**
@@ -272,15 +272,15 @@ class Foo
      */
     public function setSuffix($suffix)
     {
-        $this->_suffix = $suffix;
+        $this-&gt;_suffix = $suffix;
         return $this;
     }
 }
-]]></programlisting>
-        </sect3>
+</programlisting>
+        </section>
 
-        <sect3 id="zend.filter.inflector.rules.filters">
-            <title>Filter Inflector Rules</title>
+        <section xml:id="zend.filter.inflector.rules.filters"><info><title>Filter Inflector Rules</title></info>
+            
 
             <para>
                 <classname>Zend_Filter</classname> filters may be used as inflector rules
@@ -325,25 +325,25 @@ class Foo
                 </listitem>
             </itemizedlist>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $inflector = new Zend_Filter_Inflector(':script.:suffix');
 
 // Set rule to use Zend_Filter_Word_CamelCaseToDash filter
-$inflector->setFilterRule('script', 'Word_CamelCaseToDash');
+$inflector-&gt;setFilterRule('script', 'Word_CamelCaseToDash');
 
 // Add rule to lowercase string
-$inflector->addFilterRule('script', new Zend_Filter_StringToLower());
+$inflector-&gt;addFilterRule('script', new Zend_Filter_StringToLower());
 
 // Set rules en-masse
-$inflector->setFilterRule('script', array(
+$inflector-&gt;setFilterRule('script', array(
     'Word_CamelCaseToDash',
     new Zend_Filter_StringToLower()
 ));
-]]></programlisting>
-        </sect3>
+</programlisting>
+        </section>
 
-        <sect3 id="zend.filter.inflector.rules.multiple">
-            <title>Setting Many Rules At Once</title>
+        <section xml:id="zend.filter.inflector.rules.multiple"><info><title>Setting Many Rules At Once</title></info>
+            
 
             <para>
                 Typically, it's easier to set many rules at once than to
@@ -374,26 +374,26 @@ $inflector->setFilterRule('script', array(
                 </listitem>
             </itemizedlist>
 
-            <example id="zend.filter.inflector.rules.multiple.example">
-                <title>Setting Multiple Rules at Once</title>
+            <example xml:id="zend.filter.inflector.rules.multiple.example"><info><title>Setting Multiple Rules at Once</title></info>
+                
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 // Could also use setRules() with this notation:
-$inflector->addRules(array(
+$inflector-&gt;addRules(array(
     // filter rules:
-    ':controller' => array('CamelCaseToUnderscore','StringToLower'),
-    ':action'     => array('CamelCaseToUnderscore','StringToLower'),
+    ':controller' =&gt; array('CamelCaseToUnderscore','StringToLower'),
+    ':action'     =&gt; array('CamelCaseToUnderscore','StringToLower'),
 
     // Static rule:
-    'suffix'      => 'phtml'
+    'suffix'      =&gt; 'phtml'
 ));
-]]></programlisting>
+</programlisting>
             </example>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.filter.inflector.utility">
-        <title>Utility Methods</title>
+    <section xml:id="zend.filter.inflector.utility"><info><title>Utility Methods</title></info>
+        
 
         <para>
             <classname>Zend_Filter_Inflector</classname> has a number of utility methods
@@ -447,10 +447,10 @@ $inflector->addRules(array(
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.inflector.config">
-        <title>Using Zend_Config with Zend_Filter_Inflector</title>
+    <section xml:id="zend.filter.inflector.config"><info><title>Using Zend_Config with Zend_Filter_Inflector</title></info>
+        
 
         <para>
             You can use <classname>Zend_Config</classname> to set rules, filter prefix
@@ -498,21 +498,18 @@ $inflector->addRules(array(
             </listitem>
         </itemizedlist>
 
-        <example id="zend.filter.inflector.config.example">
-            <title>Using Zend_Config with Zend_Filter_Inflector</title>
+        <example xml:id="zend.filter.inflector.config.example"><info><title>Using Zend_Config with Zend_Filter_Inflector</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 // With the constructor:
 $config    = new Zend_Config($options);
 $inflector = new Zend_Filter_Inflector($config);
 
 // Or with setOptions():
 $inflector = new Zend_Filter_Inflector();
-$inflector->setOptions($config);
-]]></programlisting>
+$inflector-&gt;setOptions($config);
+</programlisting>
         </example>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

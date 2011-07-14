@@ -1,15 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.pregreplace">
-    <title>PregReplace</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.pregreplace"><info><title>PregReplace</title></info>
+    
 
     <para>
         <classname>Zend_Filter_PregReplace</classname> performs a search using regular expressions
         and replaces all found elements.
     </para>
 
-    <sect3 id="zend.filter.set.pregreplace.options">
-        <title>Supported options for Zend_Filter_PregReplace</title>
+    <section xml:id="zend.filter.set.pregreplace.options"><info><title>Supported options for Zend_Filter_PregReplace</title></info>
+        
 
         <para>
             The following options are supported for <classname>Zend_Filter_PregReplace</classname>:
@@ -30,10 +31,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.pregreplace.basic">
-        <title>Basic usage</title>
+    <section xml:id="zend.filter.set.pregreplace.basic"><info><title>Basic usage</title></info>
+        
 
         <para>
             To use this filter properly you must give two options:
@@ -51,16 +52,16 @@
             an array of strings for multiple pattern.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $filter = new Zend_Filter_PregReplace(array(
-    'match'   => '/bob/',
-    'replace' => 'john',
+    'match'   =&gt; '/bob/',
+    'replace' =&gt; 'john',
 ));
 $input  = 'Hy bob!";
 
-$filter->filter($input);
+$filter-&gt;filter($input);
 // returns 'Hy john!'
-]]></programlisting>
+</programlisting>
 
         <para>
             You can use <methodname>getMatchPattern()</methodname> and
@@ -69,20 +70,19 @@ $filter->filter($input);
             <methodname>setReplacement()</methodname>.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $filter = new Zend_Filter_PregReplace();
-$filter->setMatchPattern(array('bob', 'Hy'))
-      ->setReplacement(array('john', 'Bye'));
+$filter-&gt;setMatchPattern(array('bob', 'Hy'))
+      -&gt;setReplacement(array('john', 'Bye'));
 $input  = 'Hy bob!";
 
-$filter->filter($input);
+$filter-&gt;filter($input);
 // returns 'Bye john!'
-]]></programlisting>
+</programlisting>
 
         <para>
-            For a more complex usage take a look into <acronym>PHP</acronym>'s <ulink
-               url="http://www.php.net/manual/en/reference.pcre.pattern.modifiers.php">PCRE
-                Pattern Chapter</ulink>.
+            For a more complex usage take a look into <acronym>PHP</acronym>'s <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/reference.pcre.pattern.modifiers.php">PCRE
+                Pattern Chapter</link>.
         </para>
-    </sect3>
-</sect2>
+    </section>
+</section>

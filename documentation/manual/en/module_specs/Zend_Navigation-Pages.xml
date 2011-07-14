@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.navigation.pages" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Pages</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages"><info><title>Pages</title></info>
+    
 
     <para>
         <classname>Zend_Navigation</classname> ships with two page types:
@@ -31,9 +32,9 @@
         <code>&lt;a href="#"&gt;foo&lt;a&gt;</code>).
     </para>
 
-    <xi:include href="Zend_Navigation-Pages-Common.xml" />
-    <xi:include href="Zend_Navigation-Pages-MVC.xml" />
-    <xi:include href="Zend_Navigation-Pages-URI.xml" />
-    <xi:include href="Zend_Navigation-Pages-Custom.xml" />
-    <xi:include href="Zend_Navigation-Pages-Factory.xml" />
-</sect1>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Navigation-Pages-Common.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Navigation-Pages-MVC.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Navigation-Pages-URI.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Navigation-Pages-Custom.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Navigation-Pages-Factory.xml"/>
+</section>

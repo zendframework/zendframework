@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.null">
-    <title>Null</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.null"><info><title>Null</title></info>
+    
 
     <para>
         This filter will change the given input to be <constant>NULL</constant> if it meets specific
@@ -9,8 +10,8 @@
         <constant>NULL</constant> value instead of a boolean or any other type.
     </para>
 
-    <sect3 id="zend.filter.set.null.options">
-        <title>Supported options for Zend_Filter_Null</title>
+    <section xml:id="zend.filter.set.null.options"><info><title>Supported options for Zend_Filter_Null</title></info>
+        
 
         <para>
             The following options are supported for <classname>Zend_Filter_Null</classname>:
@@ -24,10 +25,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.null.default">
-        <title>Default behaviour for Zend_Filter_Null</title>
+    <section xml:id="zend.filter.set.null.default"><info><title>Default behaviour for Zend_Filter_Null</title></info>
+        
 
         <para>
             Per default this filter works like <acronym>PHP</acronym>'s
@@ -36,12 +37,12 @@
             <constant>NULL</constant> value will be returned.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $filter = new Zend_Filter_Null();
 $value  = '';
-$result = $filter->filter($value);
+$result = $filter-&gt;filter($value);
 // returns null instead of the empty string
-]]></programlisting>
+</programlisting>
 
         <para>
             This means that without providing any configuration,
@@ -52,10 +53,10 @@ $result = $filter->filter($value);
         <para>
             Any other value will be returned as is, without any changes.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.null.types">
-        <title>Changing behaviour for Zend_Filter_Null</title>
+    <section xml:id="zend.filter.set.null.types"><info><title>Changing behaviour for Zend_Filter_Null</title></info>
+        
 
         <para>
             Sometimes it's not enough to filter based on <methodname>empty()</methodname>. Therefor
@@ -118,7 +119,7 @@ $result = $filter->filter($value);
             give a textual string. See the following examples:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // converts false to null
 $filter = new Zend_Filter_Null(Zend_Filter_Null::BOOLEAN);
 
@@ -138,14 +139,11 @@ $filter = new Zend_Filter_Null(array(
     'boolean',
     'integer',
 ));
-]]></programlisting>
+</programlisting>
 
         <para>
             You can also give an instance of <classname>Zend_Config</classname> to set the wished
             types. To set types afterwards use <methodname>setType()</methodname>.
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.tool.framework.extending">
-    <title>Extending and Configuring Zend_Tool_Framework</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.tool.framework.console-client">
-        <title>Customizing Zend_Tool Console Client</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.extending"><info><title>Extending and Configuring Zend_Tool_Framework</title></info>
+    
+
+    <section xml:id="zend.tool.framework.console-client"><info><title>Customizing Zend_Tool Console Client</title></info>
+        
 
         <para>
             As of Zend Framework 1.9, <classname>Zend_Tool_Framework</classname> allows developers
@@ -30,8 +31,8 @@
             place to find this configuration file.
         </para>
 
-        <sect3 id="zend.tool.framework.console-client.home-directory">
-            <title>The Home Directory</title>
+        <section xml:id="zend.tool.framework.console-client.home-directory"><info><title>The Home Directory</title></info>
+            
 
             <para>
                 Before the Console Client can start searching for a <classname>Zend_Tool</classname>
@@ -60,10 +61,10 @@
                 directory, you can provide an environment variable named
                 <constant>ZF_HOME</constant> to specify where to find the home directory.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.tool.framework.console-client.local-storage">
-            <title>Local Storage</title>
+        <section xml:id="zend.tool.framework.console-client.local-storage"><info><title>Local Storage</title></info>
+            
 
             <para>
                 Once a home directory can be located, <classname>Zend_Tool_Framework</classname>'s
@@ -91,10 +92,10 @@
                 <classname>Zend_Tool_Framework</classname> runtime, as it will not be created for
                 you.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.tool.framework.console-client.configuration-file">
-            <title>User Configuration</title>
+        <section xml:id="zend.tool.framework.console-client.configuration-file"><info><title>User Configuration</title></info>
+            
 
             <para>
                 Like local storage, once a home directory can be located,
@@ -135,10 +136,10 @@
                 will not be used as <classname>Zend_Tool_Framework</classname> does not attempt to
                 create the file automatically.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.tool.framework.console-client.configuration-content">
-            <title>User Configuration File Content</title>
+        <section xml:id="zend.tool.framework.console-client.configuration-content"><info><title>User Configuration File Content</title></info>
+            
 
             <para>
                 The configuration file should be structured as a <classname>Zend_Config</classname>
@@ -149,9 +150,9 @@
                 <acronym>INI</acronym> key value pair:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 project.profile = some/path/to/some-directory
-]]></programlisting>
+</programlisting>
 
             <para>
                 The only reserved <acronym>INI</acronym> prefix is the value "php". The "php" prefix
@@ -162,10 +163,10 @@ project.profile = some/path/to/some-directory
                 <acronym>INI</acronym> value, a developer would set:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 php.include_path = "/path/to/includes1:/path/to/includes2"
 php.error_reporting = 1
-]]></programlisting>
+</programlisting>
 
             <important>
                 <para>
@@ -174,6 +175,6 @@ php.error_reporting = 1
                     <acronym>PHP</acronym> or <acronym>XML</acronym> config.
                 </para>
             </important>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

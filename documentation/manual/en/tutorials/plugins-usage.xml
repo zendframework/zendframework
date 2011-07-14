@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.plugins.usage">
-    <title>Using Plugins</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.plugins.usage"><info><title>Using Plugins</title></info>
+    
 
     <para>
         Components that make use of plugins typically use
@@ -17,8 +18,8 @@
         Some examples will make all of this more clear.
     </para>
 
-    <example id="learning.plugins.usage.basic">
-        <title>Basic Plugin Example: Adding a single prefix path</title>
+    <example xml:id="learning.plugins.usage.basic"><info><title>Basic Plugin Example: Adding a single prefix path</title></info>
+        
 
         <para>
             In this example, we will assume some validators have been written and placed in the
@@ -29,13 +30,13 @@
             12). The tree might look like this:
         </para>
 
-        <programlisting language="text"><![CDATA[
+        <programlisting language="text">
 foo/
 |-- plugins/
 |   |-- validators/
 |   |   |-- Even.php
 |   |   |-- Dozens.php
-]]></programlisting>
+</programlisting>
 
         <para>
             Now, we'll inform a <classname>Zend_Form_Element</classname> instance of this prefix
@@ -45,9 +46,9 @@ foo/
             "validate" plugin.
         </para>
 
-        <programlisting language="php"><![CDATA[
-$element->addPrefixPath('Foo_Validate', 'foo/plugins/validators/', 'validate');
-]]></programlisting>
+        <programlisting language="php">
+$element-&gt;addPrefixPath('Foo_Validate', 'foo/plugins/validators/', 'validate');
+</programlisting>
 
         <para>
             Now we can simply tell the element the short name of the validators we want to use. In
@@ -55,12 +56,12 @@ $element->addPrefixPath('Foo_Validate', 'foo/plugins/validators/', 'validate');
             custom validators ("Even", "Dozens"):
         </para>
 
-        <programlisting language="php"><![CDATA[
-$element->addValidator('NotEmpty')
-        ->addValidator('Int')
-        ->addValidator('Even')
-        ->addValidator('Dozens');
-]]></programlisting>
+        <programlisting language="php">
+$element-&gt;addValidator('NotEmpty')
+        -&gt;addValidator('Int')
+        -&gt;addValidator('Even')
+        -&gt;addValidator('Dozens');
+</programlisting>
 
         <para>
             When the element needs to validate, it will then request the plugin class from the
@@ -72,8 +73,8 @@ $element->addValidator('NotEmpty')
         </para>
     </example>
 
-    <note>
-        <title>What happens if a plugin is not found?</title>
+    <note><info><title>What happens if a plugin is not found?</title></info>
+        
 
         <para>
             What happens if a plugin is requested, but the PluginLoader is unable to find a class
@@ -93,8 +94,8 @@ $element->addValidator('NotEmpty')
         </para>
     </note>
 
-    <example id="learning.plugins.usage.override">
-        <title>Intermediate Plugin Usage: Overriding existing plugins</title>
+    <example xml:id="learning.plugins.usage.override"><info><title>Intermediate Plugin Usage: Overriding existing plugins</title></info>
+        
 
         <para>
             One strength of the PluginLoader is that its use of a LIFO stack allows you to override
@@ -134,18 +135,18 @@ $element->addValidator('NotEmpty')
             view:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Zend_View::addHelperPath() utilizes the PluginLoader; however, it inverts
 // the arguments, as it provides a default value of "Zend_View_Helper" for the
 // plugin prefix.
 //
 // The below assumes your class is in the directory 'foo/view/helpers/'.
-$view->addHelperPath('foo/view/helpers', 'Foo_View_Helper');
-]]></programlisting>
+$view-&gt;addHelperPath('foo/view/helpers', 'Foo_View_Helper');
+</programlisting>
 
         <para>
             Once done, anywhere you now use the "Button" helper will delegate to your custom
             <classname>Foo_View_Helper_Button</classname> class!
         </para>
     </example>
-</sect1>
+</section>

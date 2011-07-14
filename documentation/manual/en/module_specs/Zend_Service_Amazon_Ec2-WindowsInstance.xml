@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.service.amazon.ec2.windows.instance">
-    <title>Zend_Service_Amazon_Ec2: Windows Instances</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.windows.instance"><info><title>Zend_Service_Amazon_Ec2: Windows Instances</title></info>
+    
 
     <para>
         Using Amazon EC2 instances running Windows is similar to using instances
@@ -99,11 +100,11 @@
         </listitem>
     </itemizedlist>
 
-    <sect2 id="zend.service.amazon.ec2.windows.instance.operations">
-        <title>Windows Instances Usage</title>
+    <section xml:id="zend.service.amazon.ec2.windows.instance.operations"><info><title>Windows Instances Usage</title></info>
+        
 
-        <example id="zend.service.amazon.ec2.windows.instance.operations.bundle">
-            <title>Bundles an Amazon EC2 instance running Windows</title>
+        <example xml:id="zend.service.amazon.ec2.windows.instance.operations.bundle"><info><title>Bundles an Amazon EC2 instance running Windows</title></info>
+            
 
             <para>
                 <methodname>bundle()</methodname> has three require paramters and one optional
@@ -140,16 +141,16 @@
                 s3Bucket and s3Prefix.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance_Windows('aws_key',
                                                      'aws_secret_key');
-$return = $ec2_instance->bundle('instanceId', 's3Bucket', 's3Prefix');
-]]></programlisting>
+$return = $ec2_instance-&gt;bundle('instanceId', 's3Bucket', 's3Prefix');
+</programlisting>
 
         </example>
 
-        <example id="zend.service.amazon.ec2.windows.instance.operations.describe">
-            <title>Describes current bundling tasks</title>
+        <example xml:id="zend.service.amazon.ec2.windows.instance.operations.describe"><info><title>Describes current bundling tasks</title></info>
+            
 
             <para>
                 <methodname>describeBundle()</methodname> Describes current bundling tasks
@@ -161,15 +162,15 @@ $return = $ec2_instance->bundle('instanceId', 's3Bucket', 's3Prefix');
                 s3Bucket and s3Prefix.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance_Windows('aws_key',
                                                      'aws_secret_key');
-$return = $ec2_instance->describeBundle('bundleId');
-]]></programlisting>
+$return = $ec2_instance-&gt;describeBundle('bundleId');
+</programlisting>
         </example>
 
-        <example id="zend.service.amazon.ec2.windows.instance.operations.cancel">
-            <title>Cancels an Amazon EC2 bundling operation</title>
+        <example xml:id="zend.service.amazon.ec2.windows.instance.operations.cancel"><info><title>Cancels an Amazon EC2 bundling operation</title></info>
+            
 
             <para>
                 <methodname>cancelBundle()</methodname> Cancels an Amazon EC2 bundling operation
@@ -181,11 +182,11 @@ $return = $ec2_instance->describeBundle('bundleId');
                 s3Bucket and s3Prefix.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance_Windows('aws_key',
                                                      'aws_secret_key');
-$return = $ec2_instance->cancelBundle('bundleId');
-]]></programlisting>
+$return = $ec2_instance-&gt;cancelBundle('bundleId');
+</programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

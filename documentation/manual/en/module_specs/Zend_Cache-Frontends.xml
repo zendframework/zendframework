@@ -1,13 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.cache.frontends">
-    <title>Zend_Cache Frontends</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.cache.frontends.core">
-        <title>Zend_Cache_Core</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.frontends"><info><title>Zend_Cache Frontends</title></info>
+    
 
-        <sect3 id="zend.cache.frontends.core.introduction">
-            <title>Introduction</title>
+    <section xml:id="zend.cache.frontends.core"><info><title>Zend_Cache_Core</title></info>
+        
+
+        <section xml:id="zend.cache.frontends.core.introduction"><info><title>Introduction</title></info>
+            
 
             <para>
                 <classname>Zend_Cache_Core</classname> is a special frontend because it is the core
@@ -21,17 +22,17 @@
                     frontends, therefore they won't be documented there.
                 </para>
             </note>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.core.options">
-            <title>Available options</title>
+        <section xml:id="zend.cache.frontends.core.options"><info><title>Available options</title></info>
+            
 
             <para>
                 These options are passed to the factory method as demonstrated in previous examples.
             </para>
 
-            <table id="zend.cache.frontends.core.options.table">
-                <title>Core Frontend Options</title>
+            <table xml:id="zend.cache.frontends.core.options.table"><info><title>Core Frontend Options</title></info>
+                
 
                 <tgroup cols="4">
                     <thead>
@@ -145,10 +146,10 @@
                     </tbody>
                 </tgroup>
             </table>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.core.examples">
-            <title>Examples</title>
+        <section xml:id="zend.cache.core.examples"><info><title>Examples</title></info>
+            
 
             <para>
                 An example is given in the manual at the very beginning.
@@ -159,45 +160,45 @@
                 it's possible to store some booleans), you can use a more compact construction like:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 // we assume you already have $cache
 
 $id = 'myBigLoop'; // cache id of "what we want to cache"
 
-if (!($data = $cache->load($id))) {
+if (!($data = $cache-&gt;load($id))) {
     // cache miss
 
     $data = '';
-    for ($i = 0; $i < 10000; $i++) {
+    for ($i = 0; $i &lt; 10000; $i++) {
         $data = $data . $i;
     }
 
-    $cache->save($data);
+    $cache-&gt;save($data);
 
 }
 
 // [...] do something with $data (echo it, pass it on etc.)
-]]></programlisting>
+</programlisting>
 
             <para>
                 If you want to cache multiple blocks or data instances, the idea is the same:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 // make sure you use unique identifiers:
 $id1 = 'foo';
 $id2 = 'bar';
 
 // block 1
-if (!($data = $cache->load($id1))) {
+if (!($data = $cache-&gt;load($id1))) {
     // cache missed
 
     $data = '';
-    for ($i=0;$i<10000;$i++) {
+    for ($i=0;$i&lt;10000;$i++) {
         $data = $data . $i;
     }
 
-    $cache->save($data);
+    $cache-&gt;save($data);
 
 }
 echo($data);
@@ -206,19 +207,19 @@ echo($data);
 echo('NEVER CACHED! ');
 
 // block 2
-if (!($data = $cache->load($id2))) {
+if (!($data = $cache-&gt;load($id2))) {
     // cache missed
 
     $data = '';
-    for ($i=0;$i<10000;$i++) {
+    for ($i=0;$i&lt;10000;$i++) {
         $data = $data . '!';
     }
 
-    $cache->save($data);
+    $cache-&gt;save($data);
 
 }
 echo($data);
-]]></programlisting>
+</programlisting>
 
             <para>
                 If you want to cache special values (boolean with "automatic_serialization" option)
@@ -226,16 +227,16 @@ echo($data);
                 test formally the cache record.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 // the compact construction
 // (not good if you cache empty strings and/or booleans)
-if (!($data = $cache->load($id))) {
+if (!($data = $cache-&gt;load($id))) {
 
     // cache missed
 
     // [...] we make $data
 
-    $cache->save($data);
+    $cache-&gt;save($data);
 
 }
 
@@ -244,32 +245,32 @@ if (!($data = $cache->load($id))) {
 // [...]
 
 // the complete construction (works in any case)
-if (!($cache->test($id))) {
+if (!($cache-&gt;test($id))) {
 
     // cache missed
 
     // [...] we make $data
 
-    $cache->save($data);
+    $cache-&gt;save($data);
 
 } else {
 
     // cache hit
 
-    $data = $cache->load($id);
+    $data = $cache-&gt;load($id);
 
 }
 
 // we do something with $data
-]]></programlisting>
-        </sect3>
-    </sect2>
+</programlisting>
+        </section>
+    </section>
 
-    <sect2 id="zend.cache.frontends.output">
-        <title>Zend_Cache_Frontend_Output</title>
+    <section xml:id="zend.cache.frontends.output"><info><title>Zend_Cache_Frontend_Output</title></info>
+        
 
-        <sect3 id="zend.cache.frontends.output.introduction">
-            <title>Introduction</title>
+        <section xml:id="zend.cache.frontends.output.introduction"><info><title>Introduction</title></info>
+            
 
             <para>
                 <classname>Zend_Cache_Frontend_Output</classname> is an output-capturing frontend.
@@ -277,65 +278,65 @@ if (!($cache->test($id))) {
                 between its <methodname>start()</methodname> and <methodname>end()</methodname>
                 methods.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.output.options">
-            <title>Available Options</title>
+        <section xml:id="zend.cache.frontends.output.options"><info><title>Available Options</title></info>
+            
 
             <para>
                 This frontend doesn't have any specific options other than those of
                 <classname>Zend_Cache_Core</classname>.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.output.examples">
-            <title>Examples</title>
+        <section xml:id="zend.cache.frontends.output.examples"><info><title>Examples</title></info>
+            
 
             <para>
                 An example is given in the manual at the very beginning. Here it is with minor
                 changes:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 // if it is a cache miss, output buffering is triggered
-if (!($cache->start('mypage'))) {
+if (!($cache-&gt;start('mypage'))) {
 
     // output everything as usual
     echo 'Hello world! ';
     echo 'This is cached ('.time().') ';
 
-    $cache->end(); // output buffering ends
+    $cache-&gt;end(); // output buffering ends
 
 }
 
 echo 'This is never cached ('.time().').';
-]]></programlisting>
+</programlisting>
 
             <para>
                 Using this form it is fairly easy to set up output caching in your already working
                 project with little or no code refactoring.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.cache.frontends.function">
-        <title>Zend_Cache_Frontend_Function</title>
+    <section xml:id="zend.cache.frontends.function"><info><title>Zend_Cache_Frontend_Function</title></info>
+        
 
-        <sect3 id="zend.cache.frontends.function.introduction">
-            <title>Introduction</title>
+        <section xml:id="zend.cache.frontends.function.introduction"><info><title>Introduction</title></info>
+            
 
             <para>
                 <classname>Zend_Cache_Frontend_Function</classname> caches the results of function
                 calls. It has a single main method named <methodname>call()</methodname> which takes
                 a function name and parameters for the call in an array.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.function.options">
-            <title>Available Options</title>
+        <section xml:id="zend.cache.frontends.function.options"><info><title>Available Options</title></info>
+            
 
-            <table id="zend.cache.frontends.function.options.table">
-                <title>Function Frontend Options</title>
+            <table xml:id="zend.cache.frontends.function.options.table"><info><title>Function Frontend Options</title></info>
+                
 
                 <tgroup cols="4">
                     <thead>
@@ -362,37 +363,37 @@ echo 'This is never cached ('.time().').';
                         <row>
                             <entry><emphasis>cached_functions</emphasis></entry>
                             <entry><type>Array</type></entry>
-                            <entry></entry>
+                            <entry/>
                             <entry>function names which will always be cached</entry>
                         </row>
 
                         <row>
                             <entry><emphasis>non_cached_functions</emphasis></entry>
                             <entry><type>Array</type></entry>
-                            <entry></entry>
+                            <entry/>
                             <entry>function names which must never be cached</entry>
                         </row>
                     </tbody>
                 </tgroup>
             </table>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.function.examples">
-            <title>Examples</title>
+        <section xml:id="zend.cache.frontends.function.examples"><info><title>Examples</title></info>
+            
 
             <para>
                 Using the <methodname>call()</methodname> function is the same as using
                 <methodname>call_user_func_array()</methodname> in <acronym>PHP</acronym>:
             </para>
 
-            <programlisting language="php"><![CDATA[
-$cache->call('veryExpensiveFunc', $params);
+            <programlisting language="php">
+$cache-&gt;call('veryExpensiveFunc', $params);
 
 // $params is an array
 // For example to call veryExpensiveFunc(1, 'foo', 'bar') with
 // caching, you can use
-// $cache->call('veryExpensiveFunc', array(1, 'foo', 'bar'))
-]]></programlisting>
+// $cache-&gt;call('veryExpensiveFunc', array(1, 'foo', 'bar'))
+</programlisting>
 
             <para>
                 <classname>Zend_Cache_Frontend_Function</classname> is smart enough to cache both
@@ -409,27 +410,27 @@ $cache->call('veryExpensiveFunc', $params);
                     <methodname>unset()</methodname>.
                 </para>
             </note>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.cache.frontends.class">
-        <title>Zend_Cache_Frontend_Class</title>
+    <section xml:id="zend.cache.frontends.class"><info><title>Zend_Cache_Frontend_Class</title></info>
+        
 
-        <sect3 id="zend.cache.frontends.class.introduction">
-            <title>Introduction</title>
+        <section xml:id="zend.cache.frontends.class.introduction"><info><title>Introduction</title></info>
+            
 
             <para>
                 <classname>Zend_Cache_Frontend_Class</classname> is different from
                 <classname>Zend_Cache_Frontend_Function</classname> because it allows caching of
                 object and static method calls.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.class.options">
-            <title>Available Options</title>
+        <section xml:id="zend.cache.frontends.class.options"><info><title>Available Options</title></info>
+            
 
-            <table id="zend.cache.frontends.class.options.table">
-                <title>Class Frontend Options</title>
+            <table xml:id="zend.cache.frontends.class.options.table"><info><title>Class Frontend Options</title></info>
+                
 
                 <tgroup cols="4">
                     <thead>
@@ -445,7 +446,7 @@ $cache->call('veryExpensiveFunc', $params);
                         <row>
                             <entry><emphasis>cached_entity</emphasis> (required)</entry>
                             <entry><type>Mixed</type></entry>
-                            <entry></entry>
+                            <entry/>
 
                             <entry>
                                   if set to a class name, we will cache an abstract class and will
@@ -465,28 +466,28 @@ $cache->call('veryExpensiveFunc', $params);
                         <row>
                             <entry><emphasis>cached_methods</emphasis></entry>
                             <entry><type>Array</type></entry>
-                            <entry></entry>
+                            <entry/>
                             <entry>method names which will always be cached</entry>
                         </row>
                         <row>
                             <entry><emphasis>non_cached_methods</emphasis></entry>
                             <entry><type>Array</type></entry>
-                            <entry></entry>
+                            <entry/>
                             <entry>method names which must never be cached</entry>
                         </row>
                     </tbody>
                 </tgroup>
             </table>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.class.examples">
-            <title>Examples</title>
+        <section xml:id="zend.cache.frontends.class.examples"><info><title>Examples</title></info>
+            
 
             <para>
                 For example, to cache static calls :
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 class Test {
 
     // Static method
@@ -499,25 +500,25 @@ class Test {
 
 // [...]
 $frontendOptions = array(
-    'cached_entity' => 'Test' // The name of the class
+    'cached_entity' =&gt; 'Test' // The name of the class
 );
 // [...]
 
 // The cached call
-$result = $cache->foobar('1', '2');
-]]></programlisting>
+$result = $cache-&gt;foobar('1', '2');
+</programlisting>
 
             <para>
                 To cache classic method calls :
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 class Test {
 
     private $_string = 'hello !';
 
     public function foobar2($param1, $param2) {
-        echo($this->_string);
+        echo($this-&gt;_string);
         echo "foobar2_output($param1, $param2)";
         return "foobar2_return($param1, $param2)";
     }
@@ -526,21 +527,21 @@ class Test {
 
 // [...]
 $frontendOptions = array(
-    'cached_entity' => new Test() // An instance of the class
+    'cached_entity' =&gt; new Test() // An instance of the class
 );
 // [...]
 
 // The cached call
-$result = $cache->foobar2('1', '2');
-]]></programlisting>
-        </sect3>
-    </sect2>
+$result = $cache-&gt;foobar2('1', '2');
+</programlisting>
+        </section>
+    </section>
 
-    <sect2 id="zend.cache.frontends.file">
-        <title>Zend_Cache_Frontend_File</title>
+    <section xml:id="zend.cache.frontends.file"><info><title>Zend_Cache_Frontend_File</title></info>
+        
 
-        <sect3 id="zend.cache.frontends.file.introduction">
-            <title>Introduction</title>
+        <section xml:id="zend.cache.frontends.file.introduction"><info><title>Introduction</title></info>
+            
 
             <para>
                 <classname>Zend_Cache_Frontend_File</classname> is a frontend driven by the
@@ -559,12 +560,12 @@ $result = $cache->foobar2('1', '2');
                 <acronym>XML</acronym> config file is modified, the cache is immediately
                 invalidated.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.file.options">
-            <title>Available Options</title>
-            <table id="zend.cache.frontends.file.options.table">
-                <title>File Frontend Options</title>
+        <section xml:id="zend.cache.frontends.file.options"><info><title>Available Options</title></info>
+            
+            <table xml:id="zend.cache.frontends.file.options.table"><info><title>File Frontend Options</title></info>
+                
                 <tgroup cols="4">
                     <thead>
                         <row>
@@ -614,24 +615,24 @@ $result = $cache->foobar2('1', '2');
                     </tbody>
                 </tgroup>
             </table>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.file.examples">
-            <title>Examples</title>
+        <section xml:id="zend.cache.frontends.file.examples"><info><title>Examples</title></info>
+            
 
             <para>
                 Use of this frontend is the same than of <classname>Zend_Cache_Core</classname>.
                 There is no need of a specific example - the only thing to do is to
                 define the <emphasis>master_file</emphasis> when using the factory.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.cache.frontends.page">
-        <title>Zend_Cache_Frontend_Page</title>
+    <section xml:id="zend.cache.frontends.page"><info><title>Zend_Cache_Frontend_Page</title></info>
+        
 
-        <sect3 id="zend.cache.frontends.page.introduction">
-            <title>Introduction</title>
+        <section xml:id="zend.cache.frontends.page.introduction"><info><title>Introduction</title></info>
+            
 
             <para>
                 <classname>Zend_Cache_Frontend_Page</classname> is like
@@ -664,19 +665,19 @@ $result = $cache->foobar2('1', '2');
                     this, the output buffering used by the Dispatcher <emphasis>must</emphasis> be
                     disabled by calling <classname>Zend_Controller_Front</classname>'s
                     <methodname>setParam()</methodname> method, for example,
-                    <command>$front->setParam('disableOutputBuffering', true);</command> or adding
+                    <command>$front-&gt;setParam('disableOutputBuffering', true);</command> or adding
                     "resources.frontcontroller.params.disableOutputBuffering = true"
                     to your bootstrap configuration file (assumed <acronym>INI</acronym>) if using
                     <classname>Zend_Application</classname>.
                 </para>
             </note>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.page.options">
-            <title>Available Options</title>
+        <section xml:id="zend.cache.frontends.page.options"><info><title>Available Options</title></info>
+            
 
-            <table id="zend.cache.frontends.page.options.table">
-                <title>Page Frontend Options</title>
+            <table xml:id="zend.cache.frontends.page.options.table"><info><title>Page Frontend Options</title></info>
+                
 
                 <tgroup cols="4">
                     <thead>
@@ -887,31 +888,31 @@ $result = $cache->foobar2('1', '2');
                     </tbody>
                 </tgroup>
             </table>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.page.examples">
-            <title>Examples</title>
+        <section xml:id="zend.cache.frontends.page.examples"><info><title>Examples</title></info>
+            
 
             <para>
                 Use of <classname>Zend_Cache_Frontend_Page</classname> is really trivial:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 // [...] // require, configuration and factory
 
-$cache->start();
+$cache-&gt;start();
 // if the cache is hit, the result is sent to the browser
 // and the script stop here
 
 // rest of the page ...
-]]></programlisting>
+</programlisting>
 
             <para>
                 a more complex example which shows a way to get a centralized cache management in a
                 bootstrap file (for using with <classname>Zend_Controller</classname> for example)
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 /*
  * You should avoid putting too many lines before the cache section.
  * For example, for optimal performances, "require_once" or
@@ -919,33 +920,33 @@ $cache->start();
  */
 
 $frontendOptions = array(
-   'lifetime' => 7200,
-   'debug_header' => true, // for debugging
-   'regexps' => array(
+   'lifetime' =&gt; 7200,
+   'debug_header' =&gt; true, // for debugging
+   'regexps' =&gt; array(
        // cache the whole IndexController
-       '^/$' => array('cache' => true),
+       '^/$' =&gt; array('cache' =&gt; true),
 
        // cache the whole IndexController
-       '^/index/' => array('cache' => true),
+       '^/index/' =&gt; array('cache' =&gt; true),
 
        // we don't cache the ArticleController...
-       '^/article/' => array('cache' => false),
+       '^/article/' =&gt; array('cache' =&gt; false),
 
        // ... but we cache the "view" action of this ArticleController
-       '^/article/view/' => array(
-           'cache' => true,
+       '^/article/view/' =&gt; array(
+           'cache' =&gt; true,
 
            // and we cache even there are some variables in $_POST
-           'cache_with_post_variables' => true,
+           'cache_with_post_variables' =&gt; true,
 
            // but the cache will be dependent on the $_POST array
-           'make_id_with_post_variables' => true
+           'make_id_with_post_variables' =&gt; true
        )
    )
 );
 
 $backendOptions = array(
-    'cache_dir' => '/tmp/'
+    'cache_dir' =&gt; '/tmp/'
 );
 
 // getting a Zend_Cache_Frontend_Page object
@@ -954,17 +955,17 @@ $cache = Zend_Cache::factory('Page',
                              $frontendOptions,
                              $backendOptions);
 
-$cache->start();
+$cache-&gt;start();
 // if the cache is hit, the result is sent to the browser and the
 // script stop here
 
 // [...] the end of the bootstrap file
 // these lines won't be executed if the cache is hit
-]]></programlisting>
-        </sect3>
+</programlisting>
+        </section>
 
-        <sect3 id="zend.cache.frontends.page.cancel">
-            <title>The Specific Cancel Method</title>
+        <section xml:id="zend.cache.frontends.page.cancel"><info><title>The Specific Cancel Method</title></info>
+            
 
             <para>
                 Because of design issues, in some cases (for example when using non
@@ -973,28 +974,28 @@ $cache->start();
                 <methodname>cancel()</methodname> method.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 // [...] // require, configuration and factory
 
-$cache->start();
+$cache-&gt;start();
 
 // [...]
 
 if ($someTest) {
-    $cache->cancel();
+    $cache-&gt;cancel();
     // [...]
 }
 
 // [...]
-]]></programlisting>
-        </sect3>
-    </sect2>
+</programlisting>
+        </section>
+    </section>
 
-    <sect2 id="zend.cache.frontends.capture">
-        <title>Zend_Cache_Frontend_Capture</title>
+    <section xml:id="zend.cache.frontends.capture"><info><title>Zend_Cache_Frontend_Capture</title></info>
+        
 
-        <sect3 id="zend.cache.frontends.capture.introduction">
-            <title>Introduction</title>
+        <section xml:id="zend.cache.frontends.capture.introduction"><info><title>Introduction</title></info>
+            
 
             <para>
                 <classname>Zend_Cache_Frontend_Capture</classname> is like
@@ -1020,15 +1021,12 @@ if ($someTest) {
                     this, the output buffering used by the Dispatcher <emphasis>must</emphasis> be
                     disabled by calling <classname>Zend_Controller_Front</classname>'s
                     <methodname>setParam()</methodname> method, for example,
-                    <command>$front->setParam('disableOutputBuffering', true);</command> or adding
+                    <command>$front-&gt;setParam('disableOutputBuffering', true);</command> or adding
                     "resources.frontcontroller.params.disableOutputBuffering = true"
                     to your bootstrap configuration file (assumed <acronym>INI</acronym>) if using
                     <classname>Zend_Application</classname>.
                 </para>
             </note>
-        </sect3>
-     </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+     </section>
+</section>

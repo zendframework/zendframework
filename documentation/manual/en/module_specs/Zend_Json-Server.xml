@@ -1,26 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.json.server">
-    <title>Zend_Json_Server - JSON-RPC server</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.server"><info><title>Zend_Json_Server - JSON-RPC server</title></info>
+    
 
     <para>
-        <classname>Zend_Json_Server</classname> is a <ulink
-            url="http://groups.google.com/group/json-rpc/">JSON-RPC</ulink> server implementation.
-        It supports both the <ulink url="http://json-rpc.org/wiki/specification">JSON-RPC
-            version 1 specification</ulink> as well as the <ulink
-            url="http://groups.google.com/group/json-rpc/web/json-rpc-1-2-proposal">version 2
-            specification</ulink>; additionally, it provides a <acronym>PHP</acronym> implementation
-        of the <ulink
-            url="http://groups.google.com/group/json-schema/web/service-mapping-description-proposal">Service
-            Mapping Description (SMD) specification</ulink>
+        <classname>Zend_Json_Server</classname> is a <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://groups.google.com/group/json-rpc/">JSON-RPC</link> server implementation.
+        It supports both the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://json-rpc.org/wiki/specification">JSON-RPC
+            version 1 specification</link> as well as the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://groups.google.com/group/json-rpc/web/json-rpc-1-2-proposal">version 2
+            specification</link>; additionally, it provides a <acronym>PHP</acronym> implementation
+        of the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://groups.google.com/group/json-schema/web/service-mapping-description-proposal">Service
+            Mapping Description (SMD) specification</link>
         for providing service metadata to service consumers.
     </para>
 
     <para>
         JSON-RPC is a lightweight Remote Procedure Call protocol that utilizes
         <acronym>JSON</acronym> for its messaging envelopes. This JSON-RPC implementation follows
-        <acronym>PHP</acronym>'s <ulink
-            url="http://www.php.net/manual/en/class.soapserver.php">SoapServer</ulink>
+        <acronym>PHP</acronym>'s <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/class.soapserver.php">SoapServer</link>
         <acronym>API</acronym>. This means, in a typical situation, you will simply:
     </para>
 
@@ -35,8 +32,7 @@
     </itemizedlist>
 
     <para>
-        <classname>Zend_Json_Server</classname> utilizes <link
-            linkend="zend.server.reflection">Zend_Server_Reflection</link>
+        <classname>Zend_Json_Server</classname> utilizes <link linkend="zend.server.reflection">Zend_Server_Reflection</link>
         to perform reflection on any attached classes or functions, and uses that
         information to build both the SMD and enforce method call signatures. As
         such, it is imperative that any attached functions and/or class methods
@@ -56,8 +52,8 @@
         well as to deliver the service SMD, as is shown in the next example.
     </para>
 
-    <example id="zend.json.server.usage">
-        <title>Zend_Json_Server Usage</title>
+    <example xml:id="zend.json.server.usage"><info><title>Zend_Json_Server Usage</title></info>
+        
 
         <para>
             First, let's define a class we wish to expose via the JSON-RPC
@@ -65,7 +61,7 @@
             'add', 'subtract', 'multiply', and 'divide':
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 /**
  * Calculator - sample class to expose via JSON-RPC
  */
@@ -119,7 +115,7 @@ class Calculator
         return $x / $y;
     }
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             Note that each method has a docblock with entries indicating each
@@ -133,15 +129,15 @@ class Calculator
             Now we'll create a script to handle the requests:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $server = new Zend_Json_Server();
 
 // Indicate what functionality is available:
-$server->setClass('Calculator');
+$server-&gt;setClass('Calculator');
 
 // Handle the request:
-$server->handle();
-]]></programlisting>
+$server-&gt;handle();
+</programlisting>
 
         <para>
             However, this will not address the issue of returning an SMD so that
@@ -150,17 +146,17 @@ $server->handle();
             specifying some server metadata:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $server = new Zend_Json_Server();
-$server->setClass('Calculator');
+$server-&gt;setClass('Calculator');
 
 if ('GET' == $_SERVER['REQUEST_METHOD']) {
     // Indicate the URL endpoint, and the JSON-RPC version used:
-    $server->setTarget('/json-rpc.php')
-           ->setEnvelope(Zend_Json_Server_Smd::ENV_JSONRPC_2);
+    $server-&gt;setTarget('/json-rpc.php')
+           -&gt;setEnvelope(Zend_Json_Server_Smd::ENV_JSONRPC_2);
 
     // Grab the SMD
-    $smd = $server->getServiceMap();
+    $smd = $server-&gt;getServiceMap();
 
     // Return the SMD to the client
     header('Content-Type: application/json');
@@ -168,8 +164,8 @@ if ('GET' == $_SERVER['REQUEST_METHOD']) {
     return;
 }
 
-$server->handle();
-]]></programlisting>
+$server-&gt;handle();
+</programlisting>
 
         <para>
             If utilizing the JSON-RPC server with Dojo toolkit, you will also
@@ -177,29 +173,29 @@ $server->handle();
             interoperate properly:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $server = new Zend_Json_Server();
-$server->setClass('Calculator');
+$server-&gt;setClass('Calculator');
 
 if ('GET' == $_SERVER['REQUEST_METHOD']) {
-    $server->setTarget('/json-rpc.php')
-           ->setEnvelope(Zend_Json_Server_Smd::ENV_JSONRPC_2);
-    $smd = $server->getServiceMap();
+    $server-&gt;setTarget('/json-rpc.php')
+           -&gt;setEnvelope(Zend_Json_Server_Smd::ENV_JSONRPC_2);
+    $smd = $server-&gt;getServiceMap();
 
     // Set Dojo compatibility:
-    $smd->setDojoCompatible(true);
+    $smd-&gt;setDojoCompatible(true);
 
     header('Content-Type: application/json');
     echo $smd;
     return;
 }
 
-$server->handle();
-]]></programlisting>
+$server-&gt;handle();
+</programlisting>
     </example>
 
-    <sect2 id="zend.json.server.details">
-        <title>Advanced Details</title>
+    <section xml:id="zend.json.server.details"><info><title>Advanced Details</title></info>
+        
 
         <para>
             While most functionality for <classname>Zend_Json_Server</classname> is
@@ -207,8 +203,8 @@ $server->handle();
             advanced functionality is available.
         </para>
 
-        <sect3 id="zend.json.server.details.zendjsonserver">
-            <title>Zend_Json_Server</title>
+        <section xml:id="zend.json.server.details.zendjsonserver"><info><title>Zend_Json_Server</title></info>
+            
 
             <para>
                 <classname>Zend_Json_Server</classname> is the core class in the JSON-RPC
@@ -307,10 +303,10 @@ $server->handle();
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.json.server.details.zendjsonserverrequest">
-            <title>Zend_Json_Server_Request</title>
+        <section xml:id="zend.json.server.details.zendjsonserverrequest"><info><title>Zend_Json_Server_Request</title></info>
+            
 
             <para>
                 The JSON-RPC request environment is encapsulated in the
@@ -443,10 +439,10 @@ $server->handle();
                 retrieve the request via <filename>php://input</filename>, and allows access to the
                 raw <acronym>JSON</acronym> via the <methodname>getRawJson()</methodname> method.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.json.server.details.zendjsonserverresponse">
-            <title>Zend_Json_Server_Response</title>
+        <section xml:id="zend.json.server.details.zendjsonserverresponse"><info><title>Zend_Json_Server_Response</title></info>
+            
 
             <para>
                 The JSON-RPC response payload is encapsulated in the
@@ -551,10 +547,10 @@ $server->handle();
                 send the appropriate <acronym>HTTP</acronym> headers as well as serialize the
                 response as <acronym>JSON</acronym>.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.json.server.details.zendjsonservererror">
-            <title>Zend_Json_Server_Error</title>
+        <section xml:id="zend.json.server.details.zendjsonservererror"><info><title>Zend_Json_Server_Error</title></info>
+            
 
             <para>
                 JSON-RPC has a special format for reporting error conditions.
@@ -564,9 +560,8 @@ $server->handle();
             </para>
 
             <para>
-                Error codes are derived from those recommended by <ulink
-                    url="http://xmlrpc-epi.sourceforge.net/specs/rfc.fault_codes.php">the
-                    XML-RPC EPI project</ulink>. <classname>Zend_Json_Server</classname>
+                Error codes are derived from those recommended by <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://xmlrpc-epi.sourceforge.net/specs/rfc.fault_codes.php">the
+                    XML-RPC EPI project</link>. <classname>Zend_Json_Server</classname>
                 appropriately assigns the code based on the error condition. For
                 application exceptions, the code '-32000' is used.
             </para>
@@ -631,16 +626,15 @@ $server->handle();
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.json.server.details.zendjsonserversmd">
-            <title>Zend_Json_Server_Smd</title>
+        <section xml:id="zend.json.server.details.zendjsonserversmd"><info><title>Zend_Json_Server_Smd</title></info>
+            
 
             <para>
                 SMD stands for Service Mapping Description, a <acronym>JSON</acronym> schema that
                 defines how a client can interact with a particular web service.
-                At the time of this writing, the <ulink
-                    url="http://groups.google.com/group/json-schema/web/service-mapping-description-proposal">specification</ulink>
+                At the time of this writing, the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://groups.google.com/group/json-schema/web/service-mapping-description-proposal">specification</link>
                 has not yet been formally ratified, but it is in use already
                 within Dojo toolkit as well as other JSON-RPC consumer clients.
             </para>
@@ -1018,9 +1012,6 @@ $server->handle();
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

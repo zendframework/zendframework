@@ -1,15 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.ip">
-    <title>Ip</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.ip"><info><title>Ip</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Ip</classname> allows you to validate if a given value is an IP
         address. It supports the IPv4 and also the IPv6 standard.
     </para>
 
-    <sect3 id="zend.validate.set.ip.options">
-        <title>Supported options for Zend_Validate_Ip</title>
+    <section xml:id="zend.validate.set.ip.options"><info><title>Supported options for Zend_Validate_Ip</title></info>
+        
 
         <para>
             The following options are supported for <classname>Zend_Validate_Ip</classname>:
@@ -30,26 +31,26 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.ip.basic">
-        <title>Basic usage</title>
+    <section xml:id="zend.validate.set.ip.basic"><info><title>Basic usage</title></info>
+        
 
         <para>
             A basic example of usage is below:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $validator = new Zend_Validate_Ip();
-if ($validator->isValid($ip)) {
+if ($validator-&gt;isValid($ip)) {
     // ip appears to be valid
 } else {
     // ip is invalid; print the reasons
 }
-]]></programlisting>
+</programlisting>
 
-        <note>
-            <title>Invalid IP addresses</title>
+        <note><info><title>Invalid IP addresses</title></info>
+            
 
             <para>
                 Keep in mind that <classname>Zend_Validate_Ip</classname> only validates IP
@@ -60,8 +61,8 @@ if ($validator->isValid($ip)) {
             </para>
         </note>
 
-        <note>
-            <title>IPv6 validation</title>
+        <note><info><title>IPv6 validation</title></info>
+            
 
             <para>
                 <classname>Zend_Validate_Ip</classname> validates IPv6 addresses with regex. The
@@ -70,10 +71,10 @@ if ($validator->isValid($ip)) {
                 it.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.ip.singletype">
-        <title>Validate IPv4 or IPV6 alone</title>
+    <section xml:id="zend.validate.set.ip.singletype"><info><title>Validate IPv4 or IPV6 alone</title></info>
+        
 
         <para>
             Sometimes it's useful to validate only one of the supported formats. For example when
@@ -88,25 +89,22 @@ if ($validator->isValid($ip)) {
             constructor or by using <methodname>setOptions()</methodname> afterwards.
         </para>
 
-        <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Ip(array('allowipv6' => false));
-if ($validator->isValid($ip)) {
+        <programlisting language="php">
+$validator = new Zend_Validate_Ip(array('allowipv6' =&gt; false));
+if ($validator-&gt;isValid($ip)) {
     // ip appears to be valid ipv4 address
 } else {
     // ip is no ipv4 address
 }
-]]></programlisting>
+</programlisting>
 
-        <note>
-            <title>Default behaviour</title>
+        <note><info><title>Default behaviour</title></info>
+            
 
             <para>
                 The default behaviour which <classname>Zend_Validate_Ip</classname> follows is to
                 allow both standards.
             </para>
         </note>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

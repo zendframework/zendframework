@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.doctype">
-    <title>Doctype Helper</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.doctype"><info><title>Doctype Helper</title></info>
+    
 
     <para>
         Valid <acronym>HTML</acronym> and <acronym>XHTML</acronym> documents should include a
@@ -37,8 +38,8 @@
         <link linkend="zend.view.helpers.initial.placeholder">Placeholder helper</link>.
     </para>
 
-    <example id="zend.view.helpers.initial.doctype.basicusage">
-        <title>Doctype Helper Basic Usage</title>
+    <example xml:id="zend.view.helpers.initial.doctype.basicusage"><info><title>Doctype Helper Basic Usage</title></info>
+        
 
         <para>
             You may specify the doctype at any time. However, helpers that
@@ -47,22 +48,22 @@
             bootstrap:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $doctypeHelper = new Zend_View_Helper_Doctype();
-$doctypeHelper->doctype('XHTML1_STRICT');
-]]></programlisting>
+$doctypeHelper-&gt;doctype('XHTML1_STRICT');
+</programlisting>
 
         <para>
             And then print it out on top of your layout script:
         </para>
 
-        <programlisting language="php"><![CDATA[
-<?php echo $this->doctype() ?>
-]]></programlisting>
+        <programlisting language="php">
+&lt;?php echo $this-&gt;doctype() ?&gt;
+</programlisting>
     </example>
 
-    <example id="zend.view.helpers.initial.doctype.retrieving">
-        <title>Retrieving the Doctype</title>
+    <example xml:id="zend.view.helpers.initial.doctype.retrieving"><info><title>Retrieving the Doctype</title></info>
+        
 
         <para>
             If you need to know the doctype, you can do so by calling
@@ -70,32 +71,29 @@ $doctypeHelper->doctype('XHTML1_STRICT');
             invoking the helper.
         </para>
 
-        <programlisting language="php"><![CDATA[
-$doctype = $view->doctype()->getDoctype();
-]]></programlisting>
+        <programlisting language="php">
+$doctype = $view-&gt;doctype()-&gt;getDoctype();
+</programlisting>
 
         <para>
             Typically, you'll simply want to know if the doctype is <acronym>XHTML</acronym> or
             not; for this, the <methodname>isXhtml()</methodname> method will suffice:
         </para>
 
-        <programlisting language="php"><![CDATA[
-if ($view->doctype()->isXhtml()) {
+        <programlisting language="php">
+if ($view-&gt;doctype()-&gt;isXhtml()) {
     // do something differently
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             You can also check if the doctype represents an <acronym>HTML5</acronym> document
         </para>
 
-        <programlisting language="php"><![CDATA[
-if ($view->doctype()->isHtml5()) {
+        <programlisting language="php">
+if ($view-&gt;doctype()-&gt;isHtml5()) {
     // do something differently
 }
-]]></programlisting>
+</programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

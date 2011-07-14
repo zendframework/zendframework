@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.view.placeholders.intro">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.view.placeholders.intro"><info><title>Introduction</title></info>
+    
 
     <para>
         In <link linkend="learning.layout">the previous chapter</link>, we looked at primarily the
@@ -31,11 +32,10 @@
     </itemizedlist>
 
     <para>
-        These questions are addressed in the <ulink
-            url="http://java.sun.com/blueprints/corej2eepatterns/Patterns/CompositeView.html">Composite
-        View</ulink> design pattern. One approach to that pattern is to provide "hints" or content
+        These questions are addressed in the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://java.sun.com/blueprints/corej2eepatterns/Patterns/CompositeView.html">Composite
+        View</link> design pattern. One approach to that pattern is to provide "hints" or content
         to the sitewide layout. In Zend Framework, this is achieved through specialized view helpers
         called "placeholders." Placeholders allow you to aggregate content, and then render that
         aggregate content elsewhere.
     </para>
-</sect1>
+</section>

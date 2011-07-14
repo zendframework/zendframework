@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.amf.server">
-    <title>Zend_Amf_Server</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.amf.server"><info><title>Zend_Amf_Server</title></info>
+    
 
     <para>
         <classname>Zend_Amf_Server</classname> provides an <acronym>RPC</acronym>-style server for
@@ -10,8 +11,8 @@
         <acronym>API</acronym>, providing an easy to remember interface for creating servers.
     </para>
 
-    <example id="zend.amf.server.basic">
-        <title>Basic AMF Server</title>
+    <example xml:id="zend.amf.server.basic"><info><title>Basic AMF Server</title></info>
+        
 
         <para>
             Let's assume that you have created a class <classname>Foo</classname> with a
@@ -19,24 +20,24 @@
             following code:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $server = new Zend_Amf_Server();
-$server->setClass('Foo');
-$response = $server->handle();
+$server-&gt;setClass('Foo');
+$response = $server-&gt;handle();
 echo $response;
-]]></programlisting>
+</programlisting>
 
         <para>
             Alternately, you may choose to attach a simple function as a
             callback instead:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $server = new Zend_Amf_Server();
-$server->addFunction('myUberCoolFunction');
-$response = $server->handle();
+$server-&gt;addFunction('myUberCoolFunction');
+$response = $server-&gt;handle();
 echo $response;
-]]></programlisting>
+</programlisting>
 
         <para>
             You could also mix and match multiple classes and functions. When
@@ -46,14 +47,14 @@ echo $response;
             <methodname>setClass()</methodname>:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $server = new Zend_Amf_Server();
-$server->addFunction('myUberCoolFunction', 'my')
-       ->setClass('Foo', 'foo')
-       ->setClass('Bar', 'bar');
-$response = $server->handle();
+$server-&gt;addFunction('myUberCoolFunction', 'my')
+       -&gt;setClass('Foo', 'foo')
+       -&gt;setClass('Bar', 'bar');
+$response = $server-&gt;handle();
 echo $response;
-]]></programlisting>
+</programlisting>
 
         <para>
             The <classname>Zend_Amf_Server</classname> also allows services to be dynamically
@@ -64,10 +65,10 @@ echo $response;
             <methodname>addDirectory()</methodname> method.
         </para>
 
-        <programlisting language="php"><![CDATA[
-$server->addDirectory(dirname(__FILE__) .'/../services/');
-$server->addDirectory(dirname(__FILE__) .'/../package/');
-]]></programlisting>
+        <programlisting language="php">
+$server-&gt;addDirectory(dirname(__FILE__) .'/../services/');
+$server-&gt;addDirectory(dirname(__FILE__) .'/../package/');
+</programlisting>
 
         <para>
             When calling remote services your source name can have underscore ("_") and dot (".")
@@ -87,8 +88,8 @@ $server->addDirectory(dirname(__FILE__) .'/../package/');
         </para>
     </example>
 
-    <note>
-        <title>All Attached Methods and Functions Need Docblocks</title>
+    <note><info><title>All Attached Methods and Functions Need Docblocks</title></info>
+        
 
         <para>
             Like all other server components in Zend Framework, you must document your class
@@ -97,7 +98,7 @@ $server->addDirectory(dirname(__FILE__) .'/../package/');
             the return value. As examples:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Function to attach:
 
 /**
@@ -109,9 +110,9 @@ function helloWorld($name, $greeting = 'Hello')
 {
     return $greeting . ', ' . $name;
 }
-]]></programlisting>
+</programlisting>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Attached class
 
 class World
@@ -126,15 +127,15 @@ class World
         return $greeting . ', ' . $name;
     }
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             Other annotations may be used, but will be ignored.
         </para>
     </note>
 
-    <sect2 id="zend.amf.server.flex">
-        <title>Connecting to the Server from Flex</title>
+    <section xml:id="zend.amf.server.flex"><info><title>Connecting to the Server from Flex</title></info>
+        
 
         <para>
             Connecting to your <classname>Zend_Amf_Server</classname> from your Flex
@@ -185,32 +186,32 @@ class World
             save the file.
         </para>
 
-        <programlisting language="xml"><![CDATA[
-<?xml version="1.0" encoding="UTF-8"?>
-<services-config>
-    <services>
-        <service id="zend-service"
+        <programlisting language="xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;services-config&gt;
+    &lt;services&gt;
+        &lt;service id="zend-service"
             class="flex.messaging.services.RemotingService"
-            messageTypes="flex.messaging.messages.RemotingMessage">
-            <destination id="zend">
-                <channels>
-                    <channel ref="zend-endpoint"/>
-                </channels>
-                <properties>
-                    <source>*</source>
-                </properties>
-            </destination>
-        </service>
-    </services>
-    <channels>
-        <channel-definition id="zend-endpoint"
-            class="mx.messaging.channels.AMFChannel">
-            <endpoint uri="http://example.com/server.php"
-                class="flex.messaging.endpoints.AMFEndpoint"/>
-        </channel-definition>
-    </channels>
-</services-config>
-]]></programlisting>
+            messageTypes="flex.messaging.messages.RemotingMessage"&gt;
+            &lt;destination id="zend"&gt;
+                &lt;channels&gt;
+                    &lt;channel ref="zend-endpoint"/&gt;
+                &lt;/channels&gt;
+                &lt;properties&gt;
+                    &lt;source&gt;*&lt;/source&gt;
+                &lt;/properties&gt;
+            &lt;/destination&gt;
+        &lt;/service&gt;
+    &lt;/services&gt;
+    &lt;channels&gt;
+        &lt;channel-definition id="zend-endpoint"
+            class="mx.messaging.channels.AMFChannel"&gt;
+            &lt;endpoint uri="http://example.com/server.php"
+                class="flex.messaging.endpoints.AMFEndpoint"/&gt;
+        &lt;/channel-definition&gt;
+    &lt;/channels&gt;
+&lt;/services-config&gt;
+</programlisting>
 
         <para>
             There are two key points in the example. First, but last in the
@@ -218,12 +219,12 @@ class World
             <acronym>URL</acronym> to our <classname>Zend_Amf_Server</classname>:
         </para>
 
-        <programlisting language="xml"><![CDATA[
-<channel-definition id="zend-endpoint"
-    <endpoint uri="http://example.com/server.php"
-        class="flex.messaging.endpoints.AMFEndpoint"/>
-</channel-definition>
-]]></programlisting>
+        <programlisting language="xml">
+&lt;channel-definition id="zend-endpoint"
+    &lt;endpoint uri="http://example.com/server.php"
+        class="flex.messaging.endpoints.AMFEndpoint"/&gt;
+&lt;/channel-definition&gt;
+</programlisting>
 
         <para>
             Notice that we've given this channel an identifier, "zend-endpoint".
@@ -236,12 +237,12 @@ class World
             service. In <acronym>MXML</acronym>, this might be done as follows:
         </para>
 
-        <programlisting language="xml"><![CDATA[
-<mx:RemoteObject id="myservice"
+        <programlisting language="xml">
+&lt;mx:RemoteObject id="myservice"
     fault="faultHandler(event)"
     showBusyCursor="true"
-    destination="zend">
-]]></programlisting>
+    destination="zend"&gt;
+</programlisting>
 
         <para>
             Here, we've defined a new remote object identified by "myservice"
@@ -251,28 +252,27 @@ class World
             As an example:
         </para>
 
-        <programlisting language="ActionScript"><![CDATA[
+        <programlisting language="ActionScript">
 myservice.hello("Wade");
-]]></programlisting>
+</programlisting>
 
         <para>
             When namespacing, you would use
             "myservice.&lt;namespace&gt;.&lt;method&gt;":
         </para>
 
-        <programlisting language="ActionScript"><![CDATA[
+        <programlisting language="ActionScript">
 myservice.world.hello("Wade");
-]]></programlisting>
+</programlisting>
 
         <para>
-            For more information on Flex RemoteObject invocation, <ulink
-            url="http://livedocs.adobe.com/flex/3/html/help.html?content=data_access_4.html">
-            visit the Adobe Flex 3 Help site</ulink>.
+            For more information on Flex RemoteObject invocation, <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://livedocs.adobe.com/flex/3/html/help.html?content=data_access_4.html">
+            visit the Adobe Flex 3 Help site</link>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.amf.server.errors">
-        <title>Error Handling</title>
+    <section xml:id="zend.amf.server.errors"><info><title>Error Handling</title></info>
+        
 
         <para>
             By default, all exceptions thrown in your attached classes or
@@ -292,20 +292,20 @@ myservice.world.hello("Wade");
             To disable production mode, do the following:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$server->setProduction(false);
-]]></programlisting>
+        <programlisting language="php">
+$server-&gt;setProduction(false);
+</programlisting>
 
         <para>
             To re-enable it, pass a <constant>TRUE</constant> boolean value instead:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$server->setProduction(true);
-]]></programlisting>
+        <programlisting language="php">
+$server-&gt;setProduction(true);
+</programlisting>
 
-        <note>
-            <title>Disable production mode sparingly!</title>
+        <note><info><title>Disable production mode sparingly!</title></info>
+            
 
             <para>
                 We recommend disabling production mode only when in development.
@@ -324,10 +324,10 @@ $server->setProduction(true);
             response payload. We suggest turning off the <property>display_errors</property>
             directive in production to prevent such problems
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.amf.server.response">
-        <title>AMF Responses</title>
+    <section xml:id="zend.amf.server.response"><info><title>AMF Responses</title></info>
+        
 
         <para>
             Occasionally you may desire to manipulate the response object
@@ -336,24 +336,24 @@ $server->setProduction(true);
             object, allowing you to do so.
         </para>
 
-        <example id="zend.amf.server.response.messageHeaderExample">
-            <title>Adding Message Headers to the AMF Response</title>
+        <example xml:id="zend.amf.server.response.messageHeaderExample"><info><title>Adding Message Headers to the AMF Response</title></info>
+            
 
             <para>
                 In this example, we add a 'foo' MessageHeader with the value
                 'bar' to the response prior to returning it.
             </para>
 
-            <programlisting language="php"><![CDATA[
-$response = $server->handle();
-$response->addAmfHeader(new Zend_Amf_Value_MessageHeader('foo', true, 'bar'))
+            <programlisting language="php">
+$response = $server-&gt;handle();
+$response-&gt;addAmfHeader(new Zend_Amf_Value_MessageHeader('foo', true, 'bar'))
 echo $response;
-]]></programlisting>
+</programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.amf.server.typedobjects">
-        <title>Typed Objects</title>
+    <section xml:id="zend.amf.server.typedobjects"><info><title>Typed Objects</title></info>
+        
 
         <para>
             Similar to <acronym>SOAP</acronym>, <acronym>AMF</acronym> allows passing objects
@@ -375,10 +375,10 @@ echo $response;
                     class name it maps to:
                 </para>
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 // Map the ActionScript class 'ContactVO' to the PHP class 'Contact':
-$server->setClassMap('ContactVO', 'Contact');
-]]></programlisting>
+$server-&gt;setClassMap('ContactVO', 'Contact');
+</programlisting>
             </listitem>
 
             <listitem>
@@ -388,12 +388,12 @@ $server->setClassMap('ContactVO', 'Contact');
                     value representing the ActionScript class to map to:
                 </para>
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 class Contact
 {
     public $_explicitType = 'ContactVO';
 }
-]]></programlisting>
+</programlisting>
             </listitem>
 
             <listitem>
@@ -403,7 +403,7 @@ class Contact
                     this method should return the appropriate ActionScript class:
                 </para>
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 class Contact
 {
     public function getASClassName()
@@ -411,7 +411,7 @@ class Contact
         return 'ContactVO';
     }
 }
-]]></programlisting>
+</programlisting>
             </listitem>
         </itemizedlist>
 
@@ -421,12 +421,12 @@ class Contact
         </para>
 
         <para>
-            Right click on the src folder of the Flex project and select New -> ActionScript
+            Right click on the src folder of the Flex project and select New -&gt; ActionScript
             File. Name the file ContactVO and press finish to see the new file. Copy the
             following code into the file to finish creating the class.
         </para>
 
-        <programlisting language="as"><![CDATA[
+        <programlisting language="as">
 package
 {
     [Bindable]
@@ -442,7 +442,7 @@ package
         }
     }
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             The class is syntactically equivalent to the <acronym>PHP</acronym> of the same name.
@@ -455,24 +455,24 @@ package
             is the <acronym>PHP</acronym> class are strictly equivalent.
         </para>
 
-        <programlisting language="as"><![CDATA[
+        <programlisting language="as">
 [Bindable]
 private var myContact:ContactVO;
 
 private function getContactHandler(event:ResultEvent):void {
     myContact = ContactVO(event.result);
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             The following result event from the service call is cast instantly onto the Flex
             ContactVO. Anything that is bound to myContact will be updated with the returned
             ContactVO data.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.amf.server.resources">
-        <title>Resources</title>
+    <section xml:id="zend.amf.server.resources"><info><title>Resources</title></info>
+        
 
         <para>
             <classname>Zend_Amf</classname> provides tools for mapping resource types
@@ -494,12 +494,12 @@ private function getContactHandler(event:ResultEvent):void {
             <classname>Zend_Amf</classname> type loader:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 Zend_Amf_Parse_TypeLoader::addResourceDirectory(
     "My",
     "application/library/resources/My"
 );
-]]></programlisting>
+</programlisting>
 
         <para>
             For detailed discussion of loading plugins, please see
@@ -512,7 +512,7 @@ Zend_Amf_Parse_TypeLoader::addResourceDirectory(
             resources.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Example class implementing handling resources of type mysql result
 class Zend_Amf_Parse_Resource_MysqlResult
 {
@@ -530,16 +530,16 @@ class Zend_Amf_Parse_Resource_MysqlResult
         return $result;
     }
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             Trying to return unknown resource type (i.e., one for which no handler plugin exists)
             will result in an exception.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.amf.server.flash">
-        <title>Connecting to the Server from Flash</title>
+    <section xml:id="zend.amf.server.flash"><info><title>Connecting to the Server from Flash</title></info>
+        
 
         <para>
             Connecting to your <classname>Zend_Amf_Server</classname> from your Flash project is
@@ -569,7 +569,7 @@ class Zend_Amf_Parse_Resource_MysqlResult
             and then we will walk through the code to describe what each element's role is.
         </para>
 
-        <programlisting language="as"><![CDATA[
+        <programlisting language="as">
 package {
   import flash.display.MovieClip;
   import flash.events.*;
@@ -601,7 +601,7 @@ package {
     }
   }
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             We first need to import two ActionScript libraries that perform the bulk of the work.
@@ -610,10 +610,10 @@ package {
             server related to the success or failure of the call.
         </para>
 
-        <programlisting language="as"><![CDATA[
+        <programlisting language="as">
 import flash.net.NetConnection;
 import flash.net.Responder;
-]]></programlisting>
+</programlisting>
 
         <para>
             In the class we need three variables to represent the NetConnection, Responder, and
@@ -621,11 +621,11 @@ import flash.net.Responder;
             installation.
         </para>
 
-        <programlisting language="as"><![CDATA[
+        <programlisting language="as">
 private var gateway:String = "http://example.com/server.php";
 private var connection:NetConnection;
 private var responder:Responder;
-]]></programlisting>
+</programlisting>
 
         <para>
             In the Main constructor we create a responder and a new connection to the
@@ -634,21 +634,21 @@ private var responder:Responder;
             onResult and onFault.
         </para>
 
-        <programlisting language="as"><![CDATA[
+        <programlisting language="as">
 responder = new Responder(onResult, onFault);
 connection = new NetConnection;
 connection.connect(gateway);
-]]></programlisting>
+</programlisting>
 
         <para>
             In the onComplete function which is run as soon as the construct has completed we send
             the data to the server. We need to add one more line that makes a call to the
-            <classname>Zend_Amf_Server</classname> World->hello function.
+            <classname>Zend_Amf_Server</classname> World-&gt;hello function.
         </para>
 
-        <programlisting language="as"><![CDATA[
+        <programlisting language="as">
 connection.call("World.hello", responder, params);
-]]></programlisting>
+</programlisting>
 
         <para>
             When we created the responder variable we defined an onResult and onFault function to
@@ -657,12 +657,12 @@ connection.call("World.hello", responder, params);
             properly to the server.
         </para>
 
-        <programlisting language="as"><![CDATA[
+        <programlisting language="as">
 private function onResult(result:Object):void {
     // Display the returned data
     trace(String(result));
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             The onFault function, is called if there was an invalid response from the server. This
@@ -671,11 +671,11 @@ private function onResult(result:Object):void {
             related issues.
         </para>
 
-        <programlisting language="as"><![CDATA[
+        <programlisting language="as">
 private function onFault(fault:Object):void {
     trace(String(fault.description));
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             Adding in the ActionScript to make the remoting connection is now complete. Running the
@@ -684,10 +684,10 @@ private function onFault(fault:Object):void {
             what methods should be used when your application receives a response from the server,
             and finally displayed the returned data to output via <methodname>trace()</methodname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.amf.server.auth">
-        <title>Authentication</title>
+    <section xml:id="zend.amf.server.auth"><info><title>Authentication</title></info>
+        
 
         <para>
             <classname>Zend_Amf_Server</classname> allows you to specify authentication and
@@ -726,20 +726,20 @@ private function onFault(fault:Object):void {
             The adapter is connected to the server using <methodname>setAuth()</methodname> method:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$server->setAuth(new My_Amf_Auth());
-]]></programlisting>
+        <programlisting language="php">
+$server-&gt;setAuth(new My_Amf_Auth());
+</programlisting>
 
         <para>
             Access control is performed by using <classname>Zend_Acl</classname> object set by
             <methodname>setAcl()</methodname> method:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $acl = new Zend_Acl();
 createPermissions($acl); // create permission structure
-$server->setAcl($acl);
-]]></programlisting>
+$server-&gt;setAcl($acl);
+</programlisting>
 
         <para>
             If the <acronym>ACL</acronym> object is set, and the class being called defines
@@ -758,16 +758,13 @@ $server->setAcl($acl);
             otherwise the access will be denied.
         </para>
 
-        <programlisting language="php"><![CDATA[
-if($this->_acl->isAllowed($role, $class, $function)) {
+        <programlisting language="php">
+if($this-&gt;_acl-&gt;isAllowed($role, $class, $function)) {
     return true;
 } else {
     require_once 'Zend/Amf/Server/Exception.php';
     throw new Zend_Amf_Server_Exception("Access not allowed");
 }
-]]></programlisting>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</programlisting>
+    </section>
+</section>

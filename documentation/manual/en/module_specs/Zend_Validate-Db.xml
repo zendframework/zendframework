@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.Db">
-    <title>Db_RecordExists and Db_NoRecordExists</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.Db"><info><title>Db_RecordExists and Db_NoRecordExists</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Db_RecordExists</classname> and
@@ -10,8 +11,8 @@
         value.
     </para>
 
-    <sect3 id="zend.validate.set.db.options">
-        <title>Supported options for Zend_Validate_Db_*</title>
+    <section xml:id="zend.validate.set.db.options"><info><title>Supported options for Zend_Validate_Db_*</title></info>
+        
 
         <para>
             The following options are supported for
@@ -55,33 +56,33 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.db.basic-usage">
-        <title>Basic usage</title>
+    <section xml:id="zend.validate.db.basic-usage"><info><title>Basic usage</title></info>
+        
 
         <para>
             An example of basic usage of the validators:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 //Check that the email address exists in the database
 $validator = new Zend_Validate_Db_RecordExists(
     array(
-        'table' => 'users',
-        'field' => 'emailaddress'
+        'table' =&gt; 'users',
+        'field' =&gt; 'emailaddress'
     )
 );
 
-if ($validator->isValid($emailaddress)) {
+if ($validator-&gt;isValid($emailaddress)) {
     // email address appears to be valid
 } else {
     // email address is invalid; print the reasons
-    foreach ($validator->getMessages() as $message) {
+    foreach ($validator-&gt;getMessages() as $message) {
         echo "$message\n";
     }
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             The above will test that a given email address is in the database
@@ -90,24 +91,24 @@ if ($validator->isValid($emailaddress)) {
             message is displayed.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 //Check that the username is not present in the database
 $validator = new Zend_Validate_Db_NoRecordExists(
     array(
-        'table' => 'users',
-        'field' => 'username'
+        'table' =&gt; 'users',
+        'field' =&gt; 'username'
     )
 );
-if ($validator->isValid($username)) {
+if ($validator-&gt;isValid($username)) {
     // username appears to be valid
 } else {
     // username is invalid; print the reason
-    $messages = $validator->getMessages();
+    $messages = $validator-&gt;getMessages();
     foreach ($messages as $message) {
         echo "$message\n";
     }
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             The above will test that a given username is not in the database
@@ -115,10 +116,10 @@ if ($validator->isValid($username)) {
             <varname>$username</varname> in the specified column, then an error
             message is displayed.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.db.excluding-records">
-        <title>Excluding records</title>
+    <section xml:id="zend.validate.db.excluding-records"><info><title>Excluding records</title></info>
+        
 
         <para>
             <classname>Zend_Validate_Db_RecordExists</classname> and
@@ -134,30 +135,30 @@ if ($validator->isValid($username)) {
             before altering a record (for example on a user profile form)
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 //Check no other users have the username
-$user_id   = $user->getId();
+$user_id   = $user-&gt;getId();
 $validator = new Zend_Validate_Db_NoRecordExists(
     array(
-        'table' => 'users',
-        'field' => 'username',
-        'exclude' => array(
-            'field' => 'id',
-            'value' => $user_id
+        'table' =&gt; 'users',
+        'field' =&gt; 'username',
+        'exclude' =&gt; array(
+            'field' =&gt; 'id',
+            'value' =&gt; $user_id
         )
     )
 );
 
-if ($validator->isValid($username)) {
+if ($validator-&gt;isValid($username)) {
     // username appears to be valid
 } else {
     // username is invalid; print the reason
-    $messages = $validator->getMessages();
+    $messages = $validator-&gt;getMessages();
     foreach ($messages as $message) {
         echo "$message\n";
     }
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             The above example will check the table to ensure no records other
@@ -171,37 +172,37 @@ if ($validator->isValid($username)) {
             testing against composite keys.
         </para>
 
-        <programlisting language="php"><![CDATA[
-$post_id   = $post->getId();
-$clause    = $db->quoteInto('post_id = ?', $category_id);
+        <programlisting language="php">
+$post_id   = $post-&gt;getId();
+$clause    = $db-&gt;quoteInto('post_id = ?', $category_id);
 $validator = new Zend_Validate_Db_RecordExists(
     array(
-        'table'   => 'posts_categories',
-        'field'   => 'post_id',
-        'exclude' => $clause
+        'table'   =&gt; 'posts_categories',
+        'field'   =&gt; 'post_id',
+        'exclude' =&gt; $clause
     )
 );
 
-if ($validator->isValid($username)) {
+if ($validator-&gt;isValid($username)) {
     // username appears to be valid
 } else {
     // username is invalid; print the reason
-    $messages = $validator->getMessages();
+    $messages = $validator-&gt;getMessages();
     foreach ($messages as $message) {
         echo "$message\n";
     }
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             The above example will check the 'posts_categories' table
             to ensure that a record with the 'post_id' has a value
             matching <varname>$category_id</varname>
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.db.database-adapters">
-        <title>Database Adapters</title>
+    <section xml:id="zend.validate.db.database-adapters"><info><title>Database Adapters</title></info>
+        
 
         <para>
             You can also specify an adapter. This will allow you to work with
@@ -209,19 +210,19 @@ if ($validator->isValid($username)) {
             set a default adapter. As in the example below:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $validator = new Zend_Validate_Db_RecordExists(
     array(
-        'table' => 'users',
-        'field' => 'id',
-        'adapter' => $dbAdapter
+        'table' =&gt; 'users',
+        'field' =&gt; 'id',
+        'adapter' =&gt; $dbAdapter
     )
 );
-]]></programlisting>
-    </sect3>
+</programlisting>
+    </section>
 
-    <sect3 id="zend.validate.db.database-schemas">
-        <title>Database Schemas</title>
+    <section xml:id="zend.validate.db.database-schemas"><info><title>Database Schemas</title></info>
+        
 
         <para>
             You can specify a schema within your database for adapters such as
@@ -230,14 +231,14 @@ $validator = new Zend_Validate_Db_RecordExists(
             below:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $validator = new Zend_Validate_Db_RecordExists(
     array(
-        'table'  => 'users',
-        'schema' => 'my',
-        'field'  => 'id'
+        'table'  =&gt; 'users',
+        'schema' =&gt; 'my',
+        'field'  =&gt; 'id'
     )
 );
-]]></programlisting>
-    </sect3>
-</sect2>
+</programlisting>
+    </section>
+</section>

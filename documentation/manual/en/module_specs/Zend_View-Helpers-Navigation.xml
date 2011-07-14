@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.navigation">
-    <title>Navigation Helpers</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.navigation"><info><title>Navigation Helpers</title></info>
+    
 
     <para>
         The navigation helpers are used for rendering navigational elements
@@ -16,8 +17,7 @@
     <itemizedlist>
         <listitem>
             <para>
-                <link
-                    linkend="zend.view.helpers.initial.navigation.breadcrumbs">Breadcrumbs</link>,
+                <link linkend="zend.view.helpers.initial.navigation.breadcrumbs">Breadcrumbs</link>,
                 used for rendering the path to the currently active page.
             </para>
         </listitem>
@@ -40,16 +40,14 @@
         <listitem>
             <para>
                 <link linkend="zend.view.helpers.initial.navigation.sitemap">Sitemap</link>,
-                used for rendering sitemaps conforming to the <ulink
-                    url="http://www.sitemaps.org/protocol.php">Sitemaps <acronym>XML</acronym>
-                    format</ulink>.
+                used for rendering sitemaps conforming to the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.sitemaps.org/protocol.php">Sitemaps <acronym>XML</acronym>
+                    format</link>.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <link
-                    linkend="zend.view.helpers.initial.navigation.navigation">Navigation</link>,
+                <link linkend="zend.view.helpers.initial.navigation.navigation">Navigation</link>,
                 used for proxying calls to other navigational helpers.
             </para>
         </listitem>
@@ -164,8 +162,7 @@
             <para>
                 <methodname>__call()</methodname> is used for proxying calls to the
                 container registered in the helper, which means you can
-                call methods on a helper as if it was a container. See <link
-                    linkend="zend.view.helpers.initial.navigation.proxy.example">example</link>
+                call methods on a helper as if it was a container. See <link linkend="zend.view.helpers.initial.navigation.proxy.example">example</link>
                 below.
             </para>
         </listitem>
@@ -218,16 +215,16 @@
 
     <para>
         If a navigation container is not explicitly set in a helper using
-        <command>$helper->setContainer($nav)</command>, the helper will look
+        <command>$helper-&gt;setContainer($nav)</command>, the helper will look
         for a container instance with the key <classname>Zend_Navigation</classname> in
         <link linkend="zend.registry">the registry</link>.
         If a container is not explicitly set or found in the registry, the
         helper will create an empty <classname>Zend_Navigation</classname>
-        container when calling <command>$helper->getContainer()</command>.
+        container when calling <command>$helper-&gt;getContainer()</command>.
     </para>
 
-    <example id="zend.view.helpers.initial.navigation.proxy.example">
-        <title>Proxying calls to the navigation container</title>
+    <example xml:id="zend.view.helpers.initial.navigation.proxy.example"><info><title>Proxying calls to the navigation container</title></info>
+        
 
         <para>
             Navigation view helpers use the magic method <methodname>__call()</methodname>
@@ -235,11 +232,11 @@
             registered in the view helper.
         </para>
 
-        <programlisting language="php"><![CDATA[
-$this->navigation()->addPage(array(
-    'type' => 'uri',
-    'label' => 'New page'));
-]]></programlisting>
+        <programlisting language="php">
+$this-&gt;navigation()-&gt;addPage(array(
+    'type' =&gt; 'uri',
+    'label' =&gt; 'New page'));
+</programlisting>
 
         <para>
             The call above will add a page to the container in the
@@ -247,14 +244,14 @@ $this->navigation()->addPage(array(
         </para>
     </example>
 
-    <sect4 id="zend.view.helpers.initial.navigation.i18n">
-        <title>Translation of labels and titles</title>
+    <section xml:id="zend.view.helpers.initial.navigation.i18n"><info><title>Translation of labels and titles</title></info>
+        
 
         <para>
             The navigation helpers support translation of page labels and titles.
             You can set a translator of type <classname>Zend_Translate</classname>
             or <classname>Zend_Translate_Adapter</classname> in the helper using
-            <command>$helper->setTranslator($translator)</command>, or like with other
+            <command>$helper-&gt;setTranslator($translator)</command>, or like with other
             I18n-enabled components; by adding the translator to
             <link linkend="zend.registry">the registry</link> by using the key
             <classname>Zend_Translate</classname>.
@@ -262,7 +259,7 @@ $this->navigation()->addPage(array(
 
         <para>
             If you want to disable translation, use
-            <command>$helper->setUseTranslator(false)</command>.
+            <command>$helper-&gt;setUseTranslator(false)</command>.
         </para>
 
         <para>
@@ -278,18 +275,18 @@ $this->navigation()->addPage(array(
                 are no page labels or titles involved in an <acronym>XML</acronym> sitemap.
             </para>
         </note>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.view.helpers.initial.navigation.acl">
-        <title>Integration with ACL</title>
+    <section xml:id="zend.view.helpers.initial.navigation.acl"><info><title>Integration with ACL</title></info>
+        
 
         <para>
             All navigational view helpers support <acronym>ACL</acronym> inherently from the
             class <classname>Zend_View_Helper_Navigation_HelperAbstract</classname>.
             A <classname>Zend_Acl</classname> object can be assigned to
-            a helper instance with <code>$helper->setAcl($acl)</code>, and role
-            with <code>$helper->setRole('member')</code> or
-            <code>$helper->setRole(new Zend_Acl_Role('member'))</code> . If <acronym>ACL</acronym>
+            a helper instance with <code>$helper-&gt;setAcl($acl)</code>, and role
+            with <code>$helper-&gt;setRole('member')</code> or
+            <code>$helper-&gt;setRole(new Zend_Acl_Role('member'))</code> . If <acronym>ACL</acronym>
             is used in the helper, the role in the helper must be allowed by
             the <acronym>ACL</acronym> to access a page's <code>resource</code> and/or have the
             page's <code>privilege</code> for the page to be included when
@@ -311,10 +308,10 @@ $this->navigation()->addPage(array(
         <para>
             The examples below all show how <acronym>ACL</acronym> affects rendering.
         </para>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.view.helpers.initial.navigation.setup">
-        <title>Navigation setup used in examples</title>
+    <section xml:id="zend.view.helpers.initial.navigation.setup"><info><title>Navigation setup used in examples</title></info>
+        
 
         <para>
             This example shows the setup of a navigation container for a
@@ -356,7 +353,7 @@ $this->navigation()->addPage(array(
             </listitem>
         </itemizedlist>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 /*
  * Navigation container (config/array)
 
@@ -366,152 +363,152 @@ $this->navigation()->addPage(array(
  */
 $pages = array(
     array(
-        'label'      => 'Home',
-        'title'      => 'Go Home',
-        'module'     => 'default',
-        'controller' => 'index',
-        'action'     => 'index',
-        'order'      => -100 // make sure home is the first page
+        'label'      =&gt; 'Home',
+        'title'      =&gt; 'Go Home',
+        'module'     =&gt; 'default',
+        'controller' =&gt; 'index',
+        'action'     =&gt; 'index',
+        'order'      =&gt; -100 // make sure home is the first page
     ),
     array(
-        'label'      => 'Special offer this week only!',
-        'module'     => 'store',
-        'controller' => 'offer',
-        'action'     => 'amazing',
-        'visible'    => false // not visible
+        'label'      =&gt; 'Special offer this week only!',
+        'module'     =&gt; 'store',
+        'controller' =&gt; 'offer',
+        'action'     =&gt; 'amazing',
+        'visible'    =&gt; false // not visible
     ),
     array(
-        'label'      => 'Products',
-        'module'     => 'products',
-        'controller' => 'index',
-        'action'     => 'index',
-        'pages'      => array(
+        'label'      =&gt; 'Products',
+        'module'     =&gt; 'products',
+        'controller' =&gt; 'index',
+        'action'     =&gt; 'index',
+        'pages'      =&gt; array(
             array(
-                'label'      => 'Foo Server',
-                'module'     => 'products',
-                'controller' => 'server',
-                'action'     => 'index',
-                'pages'      => array(
+                'label'      =&gt; 'Foo Server',
+                'module'     =&gt; 'products',
+                'controller' =&gt; 'server',
+                'action'     =&gt; 'index',
+                'pages'      =&gt; array(
                     array(
-                        'label'      => 'FAQ',
-                        'module'     => 'products',
-                        'controller' => 'server',
-                        'action'     => 'faq',
-                        'rel'        => array(
-                            'canonical' => 'http://www.example.com/?page=faq',
-                            'alternate' => array(
-                                'module'     => 'products',
-                                'controller' => 'server',
-                                'action'     => 'faq',
-                                'params'     => array('format' => 'xml')
+                        'label'      =&gt; 'FAQ',
+                        'module'     =&gt; 'products',
+                        'controller' =&gt; 'server',
+                        'action'     =&gt; 'faq',
+                        'rel'        =&gt; array(
+                            'canonical' =&gt; 'http://www.example.com/?page=faq',
+                            'alternate' =&gt; array(
+                                'module'     =&gt; 'products',
+                                'controller' =&gt; 'server',
+                                'action'     =&gt; 'faq',
+                                'params'     =&gt; array('format' =&gt; 'xml')
                             )
                         )
                     ),
                     array(
-                        'label'      => 'Editions',
-                        'module'     => 'products',
-                        'controller' => 'server',
-                        'action'     => 'editions'
+                        'label'      =&gt; 'Editions',
+                        'module'     =&gt; 'products',
+                        'controller' =&gt; 'server',
+                        'action'     =&gt; 'editions'
                     ),
                     array(
-                        'label'      => 'System Requirements',
-                        'module'     => 'products',
-                        'controller' => 'server',
-                        'action'     => 'requirements'
+                        'label'      =&gt; 'System Requirements',
+                        'module'     =&gt; 'products',
+                        'controller' =&gt; 'server',
+                        'action'     =&gt; 'requirements'
                     )
                 )
             ),
             array(
-                'label'      => 'Foo Studio',
-                'module'     => 'products',
-                'controller' => 'studio',
-                'action'     => 'index',
-                'pages'      => array(
+                'label'      =&gt; 'Foo Studio',
+                'module'     =&gt; 'products',
+                'controller' =&gt; 'studio',
+                'action'     =&gt; 'index',
+                'pages'      =&gt; array(
                     array(
-                        'label'      => 'Customer Stories',
-                        'module'     => 'products',
-                        'controller' => 'studio',
-                        'action'     => 'customers'
+                        'label'      =&gt; 'Customer Stories',
+                        'module'     =&gt; 'products',
+                        'controller' =&gt; 'studio',
+                        'action'     =&gt; 'customers'
                     ),
                     array(
-                        'label'      => 'Support',
-                        'module'     => 'prodcts',
-                        'controller' => 'studio',
-                        'action'     => 'support'
-                    )
-                )
-            )
-        )
-    ),
-    array(
-        'label'      => 'Company',
-        'title'      => 'About us',
-        'module'     => 'company',
-        'controller' => 'about',
-        'action'     => 'index',
-        'pages'      => array(
-            array(
-                'label'      => 'Investor Relations',
-                'module'     => 'company',
-                'controller' => 'about',
-                'action'     => 'investors'
-            ),
-            array(
-                'label'      => 'News',
-                'class'      => 'rss', // class
-                'module'     => 'company',
-                'controller' => 'news',
-                'action'     => 'index',
-                'pages'      => array(
-                    array(
-                        'label'      => 'Press Releases',
-                        'module'     => 'company',
-                        'controller' => 'news',
-                        'action'     => 'press'
-                    ),
-                    array(
-                        'label'      => 'Archive',
-                        'route'      => 'archive', // route
-                        'module'     => 'company',
-                        'controller' => 'news',
-                        'action'     => 'archive'
+                        'label'      =&gt; 'Support',
+                        'module'     =&gt; 'prodcts',
+                        'controller' =&gt; 'studio',
+                        'action'     =&gt; 'support'
                     )
                 )
             )
         )
     ),
     array(
-        'label'      => 'Community',
-        'module'     => 'community',
-        'controller' => 'index',
-        'action'     => 'index',
-        'pages'      => array(
+        'label'      =&gt; 'Company',
+        'title'      =&gt; 'About us',
+        'module'     =&gt; 'company',
+        'controller' =&gt; 'about',
+        'action'     =&gt; 'index',
+        'pages'      =&gt; array(
             array(
-                'label'      => 'My Account',
-                'module'     => 'community',
-                'controller' => 'account',
-                'action'     => 'index',
-                'resource'   => 'mvc:community.account' // resource
+                'label'      =&gt; 'Investor Relations',
+                'module'     =&gt; 'company',
+                'controller' =&gt; 'about',
+                'action'     =&gt; 'investors'
             ),
             array(
-                'label' => 'Forums',
-                'uri'   => 'http://forums.example.com/',
-                'class' => 'external' // class
+                'label'      =&gt; 'News',
+                'class'      =&gt; 'rss', // class
+                'module'     =&gt; 'company',
+                'controller' =&gt; 'news',
+                'action'     =&gt; 'index',
+                'pages'      =&gt; array(
+                    array(
+                        'label'      =&gt; 'Press Releases',
+                        'module'     =&gt; 'company',
+                        'controller' =&gt; 'news',
+                        'action'     =&gt; 'press'
+                    ),
+                    array(
+                        'label'      =&gt; 'Archive',
+                        'route'      =&gt; 'archive', // route
+                        'module'     =&gt; 'company',
+                        'controller' =&gt; 'news',
+                        'action'     =&gt; 'archive'
+                    )
+                )
             )
         )
     ),
     array(
-        'label'      => 'Administration',
-        'module'     => 'admin',
-        'controller' => 'index',
-        'action'     => 'index',
-        'resource'   => 'mvc:admin', // resource
-        'pages'      => array(
+        'label'      =&gt; 'Community',
+        'module'     =&gt; 'community',
+        'controller' =&gt; 'index',
+        'action'     =&gt; 'index',
+        'pages'      =&gt; array(
             array(
-                'label'      => 'Write new article',
-                'module'     => 'admin',
-                'controller' => 'post',
-                'aciton'     => 'write'
+                'label'      =&gt; 'My Account',
+                'module'     =&gt; 'community',
+                'controller' =&gt; 'account',
+                'action'     =&gt; 'index',
+                'resource'   =&gt; 'mvc:community.account' // resource
+            ),
+            array(
+                'label' =&gt; 'Forums',
+                'uri'   =&gt; 'http://forums.example.com/',
+                'class' =&gt; 'external' // class
+            )
+        )
+    ),
+    array(
+        'label'      =&gt; 'Administration',
+        'module'     =&gt; 'admin',
+        'controller' =&gt; 'index',
+        'action'     =&gt; 'index',
+        'resource'   =&gt; 'mvc:admin', // resource
+        'pages'      =&gt; array(
+            array(
+                'label'      =&gt; 'Write new article',
+                'module'     =&gt; 'admin',
+                'controller' =&gt; 'post',
+                'aciton'     =&gt; 'write'
             )
         )
     )
@@ -521,66 +518,65 @@ $pages = array(
 $container = new Zend_Navigation($pages);
 
 // Store the container in the proxy helper:
-$view->getHelper('navigation')->setContainer($container);
+$view-&gt;getHelper('navigation')-&gt;setContainer($container);
 
 // ...or simply:
-$view->navigation($container);
+$view-&gt;navigation($container);
 
 // ...or store it in the reigstry:
 Zend_Registry::set('Zend_Navigation', $container);
-]]></programlisting>
+</programlisting>
 
         <para>
             In addition to the container above, the following setup is assumed:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Setup router (default routes and 'archive' route):
 $front = Zend_Controller_Front::getInstance();
-$router = $front->getRouter();
-$router->addDefaultRoutes();
-$router->addRoute(
+$router = $front-&gt;getRouter();
+$router-&gt;addDefaultRoutes();
+$router-&gt;addRoute(
     'archive',
     new Zend_Controller_Router_Route(
         '/archive/:year',
         array(
-            'module'     => 'company',
-            'controller' => 'news',
-            'action'     => 'archive',
-            'year'       => (int) date('Y') - 1
+            'module'     =&gt; 'company',
+            'controller' =&gt; 'news',
+            'action'     =&gt; 'archive',
+            'year'       =&gt; (int) date('Y') - 1
         ),
-        array('year' => '\d+')
+        array('year' =&gt; '\d+')
     )
 );
 
 // Setup ACL:
 $acl = new Zend_Acl();
-$acl->addRole(new Zend_Acl_Role('member'));
-$acl->addRole(new Zend_Acl_Role('admin'));
-$acl->add(new Zend_Acl_Resource('mvc:admin'));
-$acl->add(new Zend_Acl_Resource('mvc:community.account'));
-$acl->allow('member', 'mvc:community.account');
-$acl->allow('admin', null);
+$acl-&gt;addRole(new Zend_Acl_Role('member'));
+$acl-&gt;addRole(new Zend_Acl_Role('admin'));
+$acl-&gt;add(new Zend_Acl_Resource('mvc:admin'));
+$acl-&gt;add(new Zend_Acl_Resource('mvc:community.account'));
+$acl-&gt;allow('member', 'mvc:community.account');
+$acl-&gt;allow('admin', null);
 
 // Store ACL and role in the proxy helper:
-$view->navigation()->setAcl($acl)->setRole('member');
+$view-&gt;navigation()-&gt;setAcl($acl)-&gt;setRole('member');
 
 // ...or set default ACL and role statically:
 Zend_View_Helper_Navigation_HelperAbstract::setDefaultAcl($acl);
 Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('member');
-]]></programlisting>
-    </sect4>
+</programlisting>
+    </section>
 
-    <sect4 id="zend.view.helpers.initial.navigation.breadcrumbs">
-        <title>Breadcrumbs Helper</title>
+    <section xml:id="zend.view.helpers.initial.navigation.breadcrumbs"><info><title>Breadcrumbs Helper</title></info>
+        
 
         <para>
             Breadcrumbs are used for indicating where in a sitemap
             a user is currently browsing, and are typically rendered
-            like this: "You are here: Home > Products > FantasticProduct 1.0".
-            The breadcrumbs helper follows the guidelines from <ulink
-                url="http://developer.yahoo.com/ypatterns/pattern.php?pattern=breadcrumbs">Breadcrumbs
-                Pattern - Yahoo! Design Pattern Library</ulink>,
+            like this: "You are here: Home &gt; Products &gt; FantasticProduct 1.0".
+            The breadcrumbs helper follows the guidelines from <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://developer.yahoo.com/ypatterns/pattern.php?pattern=breadcrumbs">Breadcrumbs
+                Pattern - Yahoo! Design Pattern Library</link>,
             and allows simple customization (minimum/maximum depth, indentation,
             separator, and whether the last element should be linked), or
             rendering using a partial view script.
@@ -656,83 +652,83 @@ Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('member');
            </listitem>
        </itemizedlist>
 
-        <example id="zend.view.helpers.initial.navigation.breadcrumbs.example1">
-            <title>Rendering breadcrumbs</title>
+        <example xml:id="zend.view.helpers.initial.navigation.breadcrumbs.example1"><info><title>Rendering breadcrumbs</title></info>
+            
 
             <para>
                 This example shows how to render breadcrumbs with default
                 settings.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 In a view script or layout:
-<?php echo $this->navigation()->breadcrumbs(); ?>
+&lt;?php echo $this-&gt;navigation()-&gt;breadcrumbs(); ?&gt;
 
 The two calls above take advantage of the magic __toString() method,
 and are equivalent to:
-<?php echo $this->navigation()->breadcrumbs()->render(); ?>
+&lt;?php echo $this-&gt;navigation()-&gt;breadcrumbs()-&gt;render(); ?&gt;
 
 Output:
-<a href="/products">Products</a> &gt; <a href="/products/server">Foo Server</a> &gt; FAQ
-]]></programlisting>
+&lt;a href="/products"&gt;Products&lt;/a&gt; &amp;gt; &lt;a href="/products/server"&gt;Foo Server&lt;/a&gt; &amp;gt; FAQ
+</programlisting>
         </example>
 
-        <example id="zend.view.helpers.initial.navigation.breadcrumbs.example2">
-            <title>Specifying indentation</title>
+        <example xml:id="zend.view.helpers.initial.navigation.breadcrumbs.example2"><info><title>Specifying indentation</title></info>
+            
 
             <para>
                 This example shows how to render breadcrumbs with initial
                 indentation.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 Rendering with 8 spaces indentation:
-<?php echo $this->navigation()->breadcrumbs()->setIndent(8);?>
+&lt;?php echo $this-&gt;navigation()-&gt;breadcrumbs()-&gt;setIndent(8);?&gt;
 
 Output:
-        <a href="/products">Products</a> &gt; <a href="/products/server">Foo Server</a> &gt; FAQ
-]]></programlisting>
+        &lt;a href="/products"&gt;Products&lt;/a&gt; &amp;gt; &lt;a href="/products/server"&gt;Foo Server&lt;/a&gt; &amp;gt; FAQ
+</programlisting>
         </example>
 
-        <example id="zend.view.helpers.initial.navigation.breadcrumbs.example3">
-            <title>Customize breadcrumbs output</title>
+        <example xml:id="zend.view.helpers.initial.navigation.breadcrumbs.example3"><info><title>Customize breadcrumbs output</title></info>
+            
 
             <para>
                 This example shows how to customze breadcrumbs output by
                 specifying various options.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 In a view script or layout:
 
-<?php
-echo $this->navigation()
-          ->breadcrumbs()
-          ->setLinkLast(true)                   // link last page
-          ->setMaxDepth(1)                      // stop at level 1
-          ->setSeparator(' &#9654;' . PHP_EOL); // cool separator with newline
-?>
+&lt;?php
+echo $this-&gt;navigation()
+          -&gt;breadcrumbs()
+          -&gt;setLinkLast(true)                   // link last page
+          -&gt;setMaxDepth(1)                      // stop at level 1
+          -&gt;setSeparator(' &amp;#9654;' . PHP_EOL); // cool separator with newline
+?&gt;
 
 Output:
-<a href="/products">Products</a> &#9654;
-<a href="/products/server">Foo Server</a>
+&lt;a href="/products"&gt;Products&lt;/a&gt; &amp;#9654;
+&lt;a href="/products/server"&gt;Foo Server&lt;/a&gt;
 
 /////////////////////////////////////////////////////
 
 Setting minimum depth required to render breadcrumbs:
 
-<?php
-$this->navigation()->breadcrumbs()->setMinDepth(10);
-echo $this->navigation()->breadcrumbs();
-?>
+&lt;?php
+$this-&gt;navigation()-&gt;breadcrumbs()-&gt;setMinDepth(10);
+echo $this-&gt;navigation()-&gt;breadcrumbs();
+?&gt;
 
 Output:
 Nothing, because the deepest active page is not at level 10 or deeper.
-]]></programlisting>
+</programlisting>
         </example>
 
-        <example id="zend.view.helpers.initial.navigation.breadcrumbs.example4">
-            <title>Rendering breadcrumbs using a partial view script</title>
+        <example xml:id="zend.view.helpers.initial.navigation.breadcrumbs.example4"><info><title>Rendering breadcrumbs using a partial view script</title></info>
+            
 
             <para>
                 This example shows how to render customized breadcrumbs using
@@ -749,45 +745,44 @@ Nothing, because the deepest active page is not at level 10 or deeper.
                 In a layout:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $partial = ;
-echo $this->navigation()->breadcrumbs()
-                        ->setPartial(array('breadcrumbs.phtml', 'default'));
-]]></programlisting>
+echo $this-&gt;navigation()-&gt;breadcrumbs()
+                        -&gt;setPartial(array('breadcrumbs.phtml', 'default'));
+</programlisting>
 
             <para>
                 Contents of
                 <code>application/modules/default/views/breadcrumbs.phtml</code>:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 echo implode(', ', array_map(
-        create_function('$a', 'return $a->getLabel();'),
-        $this->pages));
-]]></programlisting>
+        create_function('$a', 'return $a-&gt;getLabel();'),
+        $this-&gt;pages));
+</programlisting>
 
             <para>
                 Output:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 Products, Foo Server, FAQ
-]]></programlisting>
+</programlisting>
         </example>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.view.helpers.initial.navigation.links">
-        <title>Links Helper</title>
+    <section xml:id="zend.view.helpers.initial.navigation.links"><info><title>Links Helper</title></info>
+        
 
         <para>
             The links helper is used for rendering <acronym>HTML</acronym> <constant>LINK</constant>
             elements. Links are used for describing document relationships
             of the currently active page. Read more about links and link
-            types at <ulink url="http://www.w3.org/TR/html4/struct/links.html#h-12.3">Document
-                relationships: the LINK element (HTML4 W3C Rec.)</ulink>
-            and <ulink
-                url="http://www.w3.org/TR/html4/types.html#h-6.12">Link types (HTML4 W3C
-                Rec.)</ulink> in the <acronym>HTML</acronym>4 W3C Recommendation.
+            types at <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/html4/struct/links.html#h-12.3">Document
+                relationships: the LINK element (HTML4 W3C Rec.)</link>
+            and <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/html4/types.html#h-6.12">Link types (HTML4 W3C
+                Rec.)</link> in the <acronym>HTML</acronym>4 W3C Recommendation.
         </para>
 
         <para>
@@ -805,8 +800,8 @@ Products, Foo Server, FAQ
             by traversing the container registered in the helper. The method
             <methodname>findRelation($page, $rel, $type)</methodname> will first try
             to find the given <varname>$rel</varname> of <varname>$type</varname> from
-            the <varname>$page</varname> by calling <code>$page->findRel($type)</code>
-            or <code>$page->findRel($type)</code>. If the <varname>$page</varname>
+            the <varname>$page</varname> by calling <code>$page-&gt;findRel($type)</code>
+            or <code>$page-&gt;findRel($type)</code>. If the <varname>$page</varname>
             has a relation that can be converted to a page instance, that
             relation will be used. If the <varname>$page</varname> instance doesn't
             have the specified <varname>$type</varname>, the helper will look for
@@ -890,8 +885,8 @@ Products, Foo Server, FAQ
         <note>
             <para>
                 When looking for relations in the page instance
-                (<code>$page->getRel($type)</code> or
-                <code>$page->getRev($type)</code>), the helper accepts the
+                (<code>$page-&gt;getRel($type)</code> or
+                <code>$page-&gt;getRev($type)</code>), the helper accepts the
                 values of type <type>String</type>, <type>Array</type>,
                 <classname>Zend_Config</classname>, or
                 <classname>Zend_Navigation_Page</classname>. If a string
@@ -911,11 +906,11 @@ Products, Foo Server, FAQ
         <para>
             The helper also supports magic methods for finding relations.
             E.g. to find forward alternate relations, call
-            <code>$helper->findRelAlternate($page)</code>, and to find
+            <code>$helper-&gt;findRelAlternate($page)</code>, and to find
             reverse section relations, call
-            <code>$helper->findRevSection($page)</code>. Those calls correspond
-            to <code>$helper->findRelation($page, 'rel', 'alternate');</code>
-            and <code>$helper->findRelation($page, 'rev', 'section');</code>
+            <code>$helper-&gt;findRevSection($page)</code>. Those calls correspond
+            to <code>$helper-&gt;findRelation($page, 'rel', 'alternate');</code>
+            and <code>$helper-&gt;findRelation($page, 'rev', 'section');</code>
             respectively.
         </para>
 
@@ -923,8 +918,8 @@ Products, Foo Server, FAQ
             To customize which relations should be rendered, the helper
             uses a render flag. The render flag is an integer value, and will be
             used in a
-            <ulink url="http://php.net/manual/en/language.operators.bitwise.php">bitwse
-            <code>and</code> (<code>&amp;</code>) operation</ulink> against the
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/manual/en/language.operators.bitwise.php">bitwse
+            <code>and</code> (<code>&amp;</code>) operation</link> against the
             helper's render constants to determine if the relation that belongs
             to the render constant should be rendered.
         </para>
@@ -1099,134 +1094,134 @@ Products, Foo Server, FAQ
             </listitem>
         </itemizedlist>
 
-        <example id="zend.view.helpers.initial.navigation.links.example1">
-            <title>Specify relations in pages</title>
+        <example xml:id="zend.view.helpers.initial.navigation.links.example1"><info><title>Specify relations in pages</title></info>
+            
 
             <para>
                 This example shows how to specify relations in pages.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $container = new Zend_Navigation(array(
     array(
-        'label' => 'Relations using strings',
-        'rel'   => array(
-            'alternate' => 'http://www.example.org/'
+        'label' =&gt; 'Relations using strings',
+        'rel'   =&gt; array(
+            'alternate' =&gt; 'http://www.example.org/'
         ),
-        'rev'   => array(
-            'alternate' => 'http://www.example.net/'
+        'rev'   =&gt; array(
+            'alternate' =&gt; 'http://www.example.net/'
         )
     ),
     array(
-        'label' => 'Relations using arrays',
-        'rel'   => array(
-            'alternate' => array(
-                'label' => 'Example.org',
-                'uri'   => 'http://www.example.org/'
+        'label' =&gt; 'Relations using arrays',
+        'rel'   =&gt; array(
+            'alternate' =&gt; array(
+                'label' =&gt; 'Example.org',
+                'uri'   =&gt; 'http://www.example.org/'
             )
         )
     ),
     array(
-        'label' => 'Relations using configs',
-        'rel'   => array(
-            'alternate' => new Zend_Config(array(
-                'label' => 'Example.org',
-                'uri'   => 'http://www.example.org/'
+        'label' =&gt; 'Relations using configs',
+        'rel'   =&gt; array(
+            'alternate' =&gt; new Zend_Config(array(
+                'label' =&gt; 'Example.org',
+                'uri'   =&gt; 'http://www.example.org/'
             ))
         )
     ),
     array(
-        'label' => 'Relations using pages instance',
-        'rel'   => array(
-            'alternate' => Zend_Navigation_Page::factory(array(
-                'label' => 'Example.org',
-                'uri'   => 'http://www.example.org/'
+        'label' =&gt; 'Relations using pages instance',
+        'rel'   =&gt; array(
+            'alternate' =&gt; Zend_Navigation_Page::factory(array(
+                'label' =&gt; 'Example.org',
+                'uri'   =&gt; 'http://www.example.org/'
             ))
         )
     )
 ));
-]]></programlisting>
+</programlisting>
         </example>
 
-        <example id="zend.view.helpers.initial.navigation.links.example2">
-            <title>Default rendering of links</title>
+        <example xml:id="zend.view.helpers.initial.navigation.links.example2"><info><title>Default rendering of links</title></info>
+            
 
             <para>
                 This example shows how to render a menu from a container
                 registered/found in the view helper.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 In a view script or layout:
-<?php echo $this->view->navigation()->links(); ?>
+&lt;?php echo $this-&gt;view-&gt;navigation()-&gt;links(); ?&gt;
 
 Output:
-<link rel="alternate" href="/products/server/faq/format/xml">
-<link rel="start" href="/" title="Home">
-<link rel="next" href="/products/server/editions" title="Editions">
-<link rel="prev" href="/products/server" title="Foo Server">
-<link rel="chapter" href="/products" title="Products">
-<link rel="chapter" href="/company/about" title="Company">
-<link rel="chapter" href="/community" title="Community">
-<link rel="canonical" href="http://www.example.com/?page=server-faq">
-<link rev="subsection" href="/products/server" title="Foo Server">
-]]></programlisting>
+&lt;link rel="alternate" href="/products/server/faq/format/xml"&gt;
+&lt;link rel="start" href="/" title="Home"&gt;
+&lt;link rel="next" href="/products/server/editions" title="Editions"&gt;
+&lt;link rel="prev" href="/products/server" title="Foo Server"&gt;
+&lt;link rel="chapter" href="/products" title="Products"&gt;
+&lt;link rel="chapter" href="/company/about" title="Company"&gt;
+&lt;link rel="chapter" href="/community" title="Community"&gt;
+&lt;link rel="canonical" href="http://www.example.com/?page=server-faq"&gt;
+&lt;link rev="subsection" href="/products/server" title="Foo Server"&gt;
+</programlisting>
         </example>
 
-        <example id="zend.view.helpers.initial.navigation.links.example3">
-            <title>Specify which relations to render</title>
+        <example xml:id="zend.view.helpers.initial.navigation.links.example3"><info><title>Specify which relations to render</title></info>
+            
 
             <para>
                 This example shows how to specify which relations to find
                 and render.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 Render only start, next, and prev:
-$helper->setRenderFlag(Zend_View_Helper_Navigation_Links::RENDER_START |
+$helper-&gt;setRenderFlag(Zend_View_Helper_Navigation_Links::RENDER_START |
                        Zend_View_Helper_Navigation_Links::RENDER_NEXT |
                        Zend_View_Helper_Navigation_Links::RENDER_PREV);
 
 Output:
-<link rel="start" href="/" title="Home">
-<link rel="next" href="/products/server/editions" title="Editions">
-<link rel="prev" href="/products/server" title="Foo Server">
-]]></programlisting>
+&lt;link rel="start" href="/" title="Home"&gt;
+&lt;link rel="next" href="/products/server/editions" title="Editions"&gt;
+&lt;link rel="prev" href="/products/server" title="Foo Server"&gt;
+</programlisting>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 Render only native link types:
-$helper->setRenderFlag(Zend_View_Helper_Navigation_Links::RENDER_ALL ^
+$helper-&gt;setRenderFlag(Zend_View_Helper_Navigation_Links::RENDER_ALL ^
                        Zend_View_Helper_Navigation_Links::RENDER_CUSTOM);
 
 Output:
-<link rel="alternate" href="/products/server/faq/format/xml">
-<link rel="start" href="/" title="Home">
-<link rel="next" href="/products/server/editions" title="Editions">
-<link rel="prev" href="/products/server" title="Foo Server">
-<link rel="chapter" href="/products" title="Products">
-<link rel="chapter" href="/company/about" title="Company">
-<link rel="chapter" href="/community" title="Community">
-<link rev="subsection" href="/products/server" title="Foo Server">
-]]></programlisting>
+&lt;link rel="alternate" href="/products/server/faq/format/xml"&gt;
+&lt;link rel="start" href="/" title="Home"&gt;
+&lt;link rel="next" href="/products/server/editions" title="Editions"&gt;
+&lt;link rel="prev" href="/products/server" title="Foo Server"&gt;
+&lt;link rel="chapter" href="/products" title="Products"&gt;
+&lt;link rel="chapter" href="/company/about" title="Company"&gt;
+&lt;link rel="chapter" href="/community" title="Community"&gt;
+&lt;link rev="subsection" href="/products/server" title="Foo Server"&gt;
+</programlisting>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 Render all but chapter:
-$helper->setRenderFlag(Zend_View_Helper_Navigation_Links::RENDER_ALL ^
+$helper-&gt;setRenderFlag(Zend_View_Helper_Navigation_Links::RENDER_ALL ^
                        Zend_View_Helper_Navigation_Links::RENDER_CHAPTER);
 
 Output:
-<link rel="alternate" href="/products/server/faq/format/xml">
-<link rel="start" href="/" title="Home">
-<link rel="next" href="/products/server/editions" title="Editions">
-<link rel="prev" href="/products/server" title="Foo Server">
-<link rel="canonical" href="http://www.example.com/?page=server-faq">
-<link rev="subsection" href="/products/server" title="Foo Server">
-]]></programlisting>
+&lt;link rel="alternate" href="/products/server/faq/format/xml"&gt;
+&lt;link rel="start" href="/" title="Home"&gt;
+&lt;link rel="next" href="/products/server/editions" title="Editions"&gt;
+&lt;link rel="prev" href="/products/server" title="Foo Server"&gt;
+&lt;link rel="canonical" href="http://www.example.com/?page=server-faq"&gt;
+&lt;link rev="subsection" href="/products/server" title="Foo Server"&gt;
+</programlisting>
         </example>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.view.helpers.initial.navigation.menu">
-        <title>Menu Helper</title>
+    <section xml:id="zend.view.helpers.initial.navigation.menu"><info><title>Menu Helper</title></info>
+        
 
         <para>
             The Menu helper is used for rendering menus from navigation
@@ -1385,8 +1380,8 @@ Output:
             </listitem>
        </itemizedlist>
 
-        <example id="zend.view.helpers.initial.navigation.menu.example1">
-            <title>Rendering a menu</title>
+        <example xml:id="zend.view.helpers.initial.navigation.menu.example1"><info><title>Rendering a menu</title></info>
+            
 
             <para>
                 This example shows how to render a menu from a container
@@ -1394,84 +1389,84 @@ Output:
                 are filtered out based on visibility and <acronym>ACL</acronym>.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 In a view script or layout:
-<?php echo $this->navigation()->menu()->render() ?>
+&lt;?php echo $this-&gt;navigation()-&gt;menu()-&gt;render() ?&gt;
 
 Or simply:
-<?php echo $this->navigation()->menu() ?>
+&lt;?php echo $this-&gt;navigation()-&gt;menu() ?&gt;
 
 Output:
-<ul class="navigation">
-    <li>
-        <a title="Go Home" href="/">Home</a>
-    </li>
-    <li class="active">
-        <a href="/products">Products</a>
-        <ul>
-            <li class="active">
-                <a href="/products/server">Foo Server</a>
-                <ul>
-                    <li class="active">
-                        <a href="/products/server/faq">FAQ</a>
-                    </li>
-                    <li>
-                        <a href="/products/server/editions">Editions</a>
-                    </li>
-                    <li>
-                        <a href="/products/server/requirements">System Requirements</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="/products/studio">Foo Studio</a>
-                <ul>
-                    <li>
-                        <a href="/products/studio/customers">Customer Stories</a>
-                    </li>
-                    <li>
-                        <a href="/prodcts/studio/support">Support</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </li>
-    <li>
-        <a title="About us" href="/company/about">Company</a>
-        <ul>
-            <li>
-                <a href="/company/about/investors">Investor Relations</a>
-            </li>
-            <li>
-                <a class="rss" href="/company/news">News</a>
-                <ul>
-                    <li>
-                        <a href="/company/news/press">Press Releases</a>
-                    </li>
-                    <li>
-                        <a href="/archive">Archive</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </li>
-    <li>
-        <a href="/community">Community</a>
-        <ul>
-            <li>
-                <a href="/community/account">My Account</a>
-            </li>
-            <li>
-                <a class="external" href="http://forums.example.com/">Forums</a>
-            </li>
-        </ul>
-    </li>
-</ul>
-]]></programlisting>
+&lt;ul class="navigation"&gt;
+    &lt;li&gt;
+        &lt;a title="Go Home" href="/"&gt;Home&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li class="active"&gt;
+        &lt;a href="/products"&gt;Products&lt;/a&gt;
+        &lt;ul&gt;
+            &lt;li class="active"&gt;
+                &lt;a href="/products/server"&gt;Foo Server&lt;/a&gt;
+                &lt;ul&gt;
+                    &lt;li class="active"&gt;
+                        &lt;a href="/products/server/faq"&gt;FAQ&lt;/a&gt;
+                    &lt;/li&gt;
+                    &lt;li&gt;
+                        &lt;a href="/products/server/editions"&gt;Editions&lt;/a&gt;
+                    &lt;/li&gt;
+                    &lt;li&gt;
+                        &lt;a href="/products/server/requirements"&gt;System Requirements&lt;/a&gt;
+                    &lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;a href="/products/studio"&gt;Foo Studio&lt;/a&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;
+                        &lt;a href="/products/studio/customers"&gt;Customer Stories&lt;/a&gt;
+                    &lt;/li&gt;
+                    &lt;li&gt;
+                        &lt;a href="/prodcts/studio/support"&gt;Support&lt;/a&gt;
+                    &lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a title="About us" href="/company/about"&gt;Company&lt;/a&gt;
+        &lt;ul&gt;
+            &lt;li&gt;
+                &lt;a href="/company/about/investors"&gt;Investor Relations&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;a class="rss" href="/company/news"&gt;News&lt;/a&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;
+                        &lt;a href="/company/news/press"&gt;Press Releases&lt;/a&gt;
+                    &lt;/li&gt;
+                    &lt;li&gt;
+                        &lt;a href="/archive"&gt;Archive&lt;/a&gt;
+                    &lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href="/community"&gt;Community&lt;/a&gt;
+        &lt;ul&gt;
+            &lt;li&gt;
+                &lt;a href="/community/account"&gt;My Account&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;a class="external" href="http://forums.example.com/"&gt;Forums&lt;/a&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+</programlisting>
         </example>
 
-        <example id="zend.view.helpers.initial.navigation.menu.example2">
-            <title>Calling renderMenu() directly</title>
+        <example xml:id="zend.view.helpers.initial.navigation.menu.example2"><info><title>Calling renderMenu() directly</title></info>
+            
 
             <para>
                 This example shows how to render a menu that is not
@@ -1480,32 +1475,32 @@ Output:
                 options.
             </para>
 
-            <programlisting language="php"><![CDATA[
-<?php
+            <programlisting language="php">
+&lt;?php
 // render only the 'Community' menu
-$community = $this->navigation()->findOneByLabel('Community');
+$community = $this-&gt;navigation()-&gt;findOneByLabel('Community');
 $options = array(
-    'indent'  => 16,
-    'ulClass' => 'community'
+    'indent'  =&gt; 16,
+    'ulClass' =&gt; 'community'
 );
-echo $this->navigation()
-          ->menu()
-          ->renderMenu($community, $options);
-?>
+echo $this-&gt;navigation()
+          -&gt;menu()
+          -&gt;renderMenu($community, $options);
+?&gt;
 Output:
-                <ul class="community">
-                    <li>
-                        <a href="/community/account">My Account</a>
-                    </li>
-                    <li>
-                        <a class="external" href="http://forums.example.com/">Forums</a>
-                    </li>
-                </ul>
-]]></programlisting>
+                &lt;ul class="community"&gt;
+                    &lt;li&gt;
+                        &lt;a href="/community/account"&gt;My Account&lt;/a&gt;
+                    &lt;/li&gt;
+                    &lt;li&gt;
+                        &lt;a class="external" href="http://forums.example.com/"&gt;Forums&lt;/a&gt;
+                    &lt;/li&gt;
+                &lt;/ul&gt;
+</programlisting>
         </example>
 
-        <example id="zend.view.helpers.initial.navigation.menu.example3">
-            <title>Rendering the deepest active menu</title>
+        <example xml:id="zend.view.helpers.initial.navigation.menu.example3"><info><title>Rendering the deepest active menu</title></info>
+            
 
             <para>
                 This example shows how the <methodname>renderSubMenu()</methodname>
@@ -1518,282 +1513,282 @@ Output:
                 with the following options:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 array(
-    'ulClass'          => $ulClass,
-    'indent'           => $indent,
-    'minDepth'         => null,
-    'maxDepth'         => null,
-    'onlyActiveBranch' => true,
-    'renderParents'    => false
+    'ulClass'          =&gt; $ulClass,
+    'indent'           =&gt; $indent,
+    'minDepth'         =&gt; null,
+    'maxDepth'         =&gt; null,
+    'onlyActiveBranch' =&gt; true,
+    'renderParents'    =&gt; false
 );
-]]></programlisting>
+</programlisting>
 
-            <programlisting language="php"><![CDATA[
-<?php
-echo $this->navigation()
-          ->menu()
-          ->renderSubMenu(null, 'sidebar', 4);
-?>
+            <programlisting language="php">
+&lt;?php
+echo $this-&gt;navigation()
+          -&gt;menu()
+          -&gt;renderSubMenu(null, 'sidebar', 4);
+?&gt;
 
 The output will be the same if 'FAQ' or 'Foo Server' is active:
-    <ul class="sidebar">
-        <li class="active">
-            <a href="/products/server/faq">FAQ</a>
-        </li>
-        <li>
-            <a href="/products/server/editions">Editions</a>
-        </li>
-        <li>
-            <a href="/products/server/requirements">System Requirements</a>
-        </li>
-    </ul>
-]]></programlisting>
+    &lt;ul class="sidebar"&gt;
+        &lt;li class="active"&gt;
+            &lt;a href="/products/server/faq"&gt;FAQ&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;a href="/products/server/editions"&gt;Editions&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;a href="/products/server/requirements"&gt;System Requirements&lt;/a&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+</programlisting>
         </example>
 
-        <example id="zend.view.helpers.initial.navigation.menu.example4">
-            <title>Rendering a menu with maximum depth</title>
+        <example xml:id="zend.view.helpers.initial.navigation.menu.example4"><info><title>Rendering a menu with maximum depth</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
-<?php
-echo $this->navigation()
-          ->menu()
-          ->setMaxDepth(1);
-?>
+            <programlisting language="php">
+&lt;?php
+echo $this-&gt;navigation()
+          -&gt;menu()
+          -&gt;setMaxDepth(1);
+?&gt;
 
 Output:
-<ul class="navigation">
-    <li>
-        <a title="Go Home" href="/">Home</a>
-    </li>
-    <li class="active">
-        <a href="/products">Products</a>
-        <ul>
-            <li class="active">
-                <a href="/products/server">Foo Server</a>
-            </li>
-            <li>
-                <a href="/products/studio">Foo Studio</a>
-            </li>
-        </ul>
-    </li>
-    <li>
-        <a title="About us" href="/company/about">Company</a>
-        <ul>
-            <li>
-                <a href="/company/about/investors">Investor Relations</a>
-            </li>
-            <li>
-                <a class="rss" href="/company/news">News</a>
-            </li>
-        </ul>
-    </li>
-    <li>
-        <a href="/community">Community</a>
-        <ul>
-            <li>
-                <a href="/community/account">My Account</a>
-            </li>
-            <li>
-                <a class="external" href="http://forums.example.com/">Forums</a>
-            </li>
-        </ul>
-    </li>
-</ul>
-]]></programlisting>
+&lt;ul class="navigation"&gt;
+    &lt;li&gt;
+        &lt;a title="Go Home" href="/"&gt;Home&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li class="active"&gt;
+        &lt;a href="/products"&gt;Products&lt;/a&gt;
+        &lt;ul&gt;
+            &lt;li class="active"&gt;
+                &lt;a href="/products/server"&gt;Foo Server&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;a href="/products/studio"&gt;Foo Studio&lt;/a&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a title="About us" href="/company/about"&gt;Company&lt;/a&gt;
+        &lt;ul&gt;
+            &lt;li&gt;
+                &lt;a href="/company/about/investors"&gt;Investor Relations&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;a class="rss" href="/company/news"&gt;News&lt;/a&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href="/community"&gt;Community&lt;/a&gt;
+        &lt;ul&gt;
+            &lt;li&gt;
+                &lt;a href="/community/account"&gt;My Account&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;a class="external" href="http://forums.example.com/"&gt;Forums&lt;/a&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+</programlisting>
         </example>
 
-        <example id="zend.view.helpers.initial.navigation.menu.example5">
-            <title>Rendering a menu with minimum depth</title>
+        <example xml:id="zend.view.helpers.initial.navigation.menu.example5"><info><title>Rendering a menu with minimum depth</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
-<?php
-echo $this->navigation()
-          ->menu()
-          ->setMinDepth(1);
-?>
+            <programlisting language="php">
+&lt;?php
+echo $this-&gt;navigation()
+          -&gt;menu()
+          -&gt;setMinDepth(1);
+?&gt;
 
 Output:
-<ul class="navigation">
-    <li class="active">
-        <a href="/products/server">Foo Server</a>
-        <ul>
-            <li class="active">
-                <a href="/products/server/faq">FAQ</a>
-            </li>
-            <li>
-                <a href="/products/server/editions">Editions</a>
-            </li>
-            <li>
-                <a href="/products/server/requirements">System Requirements</a>
-            </li>
-        </ul>
-    </li>
-    <li>
-        <a href="/products/studio">Foo Studio</a>
-        <ul>
-            <li>
-                <a href="/products/studio/customers">Customer Stories</a>
-            </li>
-            <li>
-                <a href="/prodcts/studio/support">Support</a>
-            </li>
-        </ul>
-    </li>
-    <li>
-        <a href="/company/about/investors">Investor Relations</a>
-    </li>
-    <li>
-        <a class="rss" href="/company/news">News</a>
-        <ul>
-            <li>
-                <a href="/company/news/press">Press Releases</a>
-            </li>
-            <li>
-                <a href="/archive">Archive</a>
-            </li>
-        </ul>
-    </li>
-    <li>
-        <a href="/community/account">My Account</a>
-    </li>
-    <li>
-        <a class="external" href="http://forums.example.com/">Forums</a>
-    </li>
-</ul>
-]]></programlisting>
+&lt;ul class="navigation"&gt;
+    &lt;li class="active"&gt;
+        &lt;a href="/products/server"&gt;Foo Server&lt;/a&gt;
+        &lt;ul&gt;
+            &lt;li class="active"&gt;
+                &lt;a href="/products/server/faq"&gt;FAQ&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;a href="/products/server/editions"&gt;Editions&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;a href="/products/server/requirements"&gt;System Requirements&lt;/a&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href="/products/studio"&gt;Foo Studio&lt;/a&gt;
+        &lt;ul&gt;
+            &lt;li&gt;
+                &lt;a href="/products/studio/customers"&gt;Customer Stories&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;a href="/prodcts/studio/support"&gt;Support&lt;/a&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href="/company/about/investors"&gt;Investor Relations&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a class="rss" href="/company/news"&gt;News&lt;/a&gt;
+        &lt;ul&gt;
+            &lt;li&gt;
+                &lt;a href="/company/news/press"&gt;Press Releases&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;a href="/archive"&gt;Archive&lt;/a&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href="/community/account"&gt;My Account&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a class="external" href="http://forums.example.com/"&gt;Forums&lt;/a&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+</programlisting>
         </example>
 
-        <example id="zend.view.helpers.initial.navigation.menu.example6">
-            <title>Rendering only the active branch of a menu</title>
+        <example xml:id="zend.view.helpers.initial.navigation.menu.example6"><info><title>Rendering only the active branch of a menu</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
-<?php
-echo $this->navigation()
-          ->menu()
-          ->setOnlyActiveBranch(true);
-?>
+            <programlisting language="php">
+&lt;?php
+echo $this-&gt;navigation()
+          -&gt;menu()
+          -&gt;setOnlyActiveBranch(true);
+?&gt;
 
 Output:
-<ul class="navigation">
-    <li class="active">
-        <a href="/products">Products</a>
-        <ul>
-            <li class="active">
-                <a href="/products/server">Foo Server</a>
-                <ul>
-                    <li class="active">
-                        <a href="/products/server/faq">FAQ</a>
-                    </li>
-                    <li>
-                        <a href="/products/server/editions">Editions</a>
-                    </li>
-                    <li>
-                        <a href="/products/server/requirements">System Requirements</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </li>
-</ul>
-]]></programlisting>
+&lt;ul class="navigation"&gt;
+    &lt;li class="active"&gt;
+        &lt;a href="/products"&gt;Products&lt;/a&gt;
+        &lt;ul&gt;
+            &lt;li class="active"&gt;
+                &lt;a href="/products/server"&gt;Foo Server&lt;/a&gt;
+                &lt;ul&gt;
+                    &lt;li class="active"&gt;
+                        &lt;a href="/products/server/faq"&gt;FAQ&lt;/a&gt;
+                    &lt;/li&gt;
+                    &lt;li&gt;
+                        &lt;a href="/products/server/editions"&gt;Editions&lt;/a&gt;
+                    &lt;/li&gt;
+                    &lt;li&gt;
+                        &lt;a href="/products/server/requirements"&gt;System Requirements&lt;/a&gt;
+                    &lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+</programlisting>
         </example>
 
-        <example id="zend.view.helpers.initial.navigation.menu.example7">
-            <title>
+        <example xml:id="zend.view.helpers.initial.navigation.menu.example7"><info><title>
                 Rendering only the active branch of a menu with minimum depth
-            </title>
+            </title></info>
+            
 
-            <programlisting language="php"><![CDATA[
-<?php
-echo $this->navigation()
-          ->menu()
-          ->setOnlyActiveBranch(true)
-          ->setMinDepth(1);
-?>
+            <programlisting language="php">
+&lt;?php
+echo $this-&gt;navigation()
+          -&gt;menu()
+          -&gt;setOnlyActiveBranch(true)
+          -&gt;setMinDepth(1);
+?&gt;
 
 Output:
-<ul class="navigation">
-    <li class="active">
-        <a href="/products/server">Foo Server</a>
-        <ul>
-            <li class="active">
-                <a href="/products/server/faq">FAQ</a>
-            </li>
-            <li>
-                <a href="/products/server/editions">Editions</a>
-            </li>
-            <li>
-                <a href="/products/server/requirements">System Requirements</a>
-            </li>
-        </ul>
-    </li>
-</ul>
-]]></programlisting>
+&lt;ul class="navigation"&gt;
+    &lt;li class="active"&gt;
+        &lt;a href="/products/server"&gt;Foo Server&lt;/a&gt;
+        &lt;ul&gt;
+            &lt;li class="active"&gt;
+                &lt;a href="/products/server/faq"&gt;FAQ&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;a href="/products/server/editions"&gt;Editions&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;a href="/products/server/requirements"&gt;System Requirements&lt;/a&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+</programlisting>
         </example>
 
-        <example id="zend.view.helpers.initial.navigation.menu.example8">
-            <title>
+        <example xml:id="zend.view.helpers.initial.navigation.menu.example8"><info><title>
                 Rendering only the active branch of a menu with maximum depth
-            </title>
+            </title></info>
+            
 
-            <programlisting language="php"><![CDATA[
-<?php
-echo $this->navigation()
-          ->menu()
-          ->setOnlyActiveBranch(true)
-          ->setMaxDepth(1);
-?>
+            <programlisting language="php">
+&lt;?php
+echo $this-&gt;navigation()
+          -&gt;menu()
+          -&gt;setOnlyActiveBranch(true)
+          -&gt;setMaxDepth(1);
+?&gt;
 
 Output:
-<ul class="navigation">
-    <li class="active">
-        <a href="/products">Products</a>
-        <ul>
-            <li class="active">
-                <a href="/products/server">Foo Server</a>
-            </li>
-            <li>
-                <a href="/products/studio">Foo Studio</a>
-            </li>
-        </ul>
-    </li>
-</ul>
-]]></programlisting>
+&lt;ul class="navigation"&gt;
+    &lt;li class="active"&gt;
+        &lt;a href="/products"&gt;Products&lt;/a&gt;
+        &lt;ul&gt;
+            &lt;li class="active"&gt;
+                &lt;a href="/products/server"&gt;Foo Server&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;a href="/products/studio"&gt;Foo Studio&lt;/a&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+</programlisting>
         </example>
 
-        <example id="zend.view.helpers.initial.navigation.menu.example9">
-            <title>
+        <example xml:id="zend.view.helpers.initial.navigation.menu.example9"><info><title>
                 Rendering only the active branch of a menu with maximum depth
                 and no parents
-            </title>
+            </title></info>
+            
 
             <para>
             </para>
 
-            <programlisting language="php"><![CDATA[
-<?php
-echo $this->navigation()
-          ->menu()
-          ->setOnlyActiveBranch(true)
-          ->setRenderParents(false)
-          ->setMaxDepth(1);
-?>
+            <programlisting language="php">
+&lt;?php
+echo $this-&gt;navigation()
+          -&gt;menu()
+          -&gt;setOnlyActiveBranch(true)
+          -&gt;setRenderParents(false)
+          -&gt;setMaxDepth(1);
+?&gt;
 
 Output:
-<ul class="navigation">
-    <li class="active">
-        <a href="/products/server">Foo Server</a>
-    </li>
-    <li>
-        <a href="/products/studio">Foo Studio</a>
-    </li>
-</ul>
-]]></programlisting>
+&lt;ul class="navigation"&gt;
+    &lt;li class="active"&gt;
+        &lt;a href="/products/server"&gt;Foo Server&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href="/products/studio"&gt;Foo Studio&lt;/a&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+</programlisting>
         </example>
 
-        <example id="zend.view.helpers.initial.navigation.menu.example10">
-            <title>Rendering a custom menu using a partial view script</title>
+        <example xml:id="zend.view.helpers.initial.navigation.menu.example10"><info><title>Rendering a custom menu using a partial view script</title></info>
+            
 
             <para>
                 This example shows how to render a custom menu using
@@ -1807,47 +1802,45 @@ Output:
 
             <para>In a layout:</para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $partial = array('menu.phtml', 'default');
-$this->navigation()->menu()->setPartial($partial);
-echo $this->navigation()->menu()->render();
-]]></programlisting>
+$this-&gt;navigation()-&gt;menu()-&gt;setPartial($partial);
+echo $this-&gt;navigation()-&gt;menu()-&gt;render();
+</programlisting>
 
             <para>In application/modules/default/views/menu.phtml:</para>
 
-            <programlisting language="php"><![CDATA[
-foreach ($this->container as $page) {
-    echo $this->navigation()->menu()->htmlify($page), PHP_EOL;
+            <programlisting language="php">
+foreach ($this-&gt;container as $page) {
+    echo $this-&gt;navigation()-&gt;menu()-&gt;htmlify($page), PHP_EOL;
 }
-]]></programlisting>
+</programlisting>
 
             <para>Output:</para>
 
-            <programlisting language="php"><![CDATA[
-<a title="Go Home" href="/">Home</a>
-<a href="/products">Products</a>
-<a title="About us" href="/company/about">Company</a>
-<a href="/community">Community</a>
-]]></programlisting>
+            <programlisting language="php">
+&lt;a title="Go Home" href="/"&gt;Home&lt;/a&gt;
+&lt;a href="/products"&gt;Products&lt;/a&gt;
+&lt;a title="About us" href="/company/about"&gt;Company&lt;/a&gt;
+&lt;a href="/community"&gt;Community&lt;/a&gt;
+</programlisting>
         </example>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.view.helpers.initial.navigation.sitemap">
-        <title>Sitemap Helper</title>
+    <section xml:id="zend.view.helpers.initial.navigation.sitemap"><info><title>Sitemap Helper</title></info>
+        
 
         <para>
             The Sitemap helper is used for generating <acronym>XML</acronym> sitemaps, as
-            defined by the <ulink
-                url="http://www.sitemaps.org/protocol.php">Sitemaps <acronym>XML</acronym>
-                format</ulink>. Read more about <ulink
-                url="http://en.wikipedia.org/wiki/Sitemaps">Sitemaps on Wikpedia</ulink>.
+            defined by the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.sitemaps.org/protocol.php">Sitemaps <acronym>XML</acronym>
+                format</link>. Read more about <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Sitemaps">Sitemaps on Wikpedia</link>.
         </para>
 
         <para>
             By default, the sitemap helper uses
             <link linkend="zend.validate.sitemap">sitemap validators</link>
             to validate each element that is rendered. This can be disabled by
-            calling <code>$helper->setUseSitemapValidators(false)</code>.
+            calling <code>$helper-&gt;setUseSitemapValidators(false)</code>.
         </para>
 
         <note>
@@ -1858,16 +1851,15 @@ foreach ($this->container as $page) {
         </note>
 
         <para>
-            The sitemap helper also supports <ulink
-                url="http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">Sitemap XSD
-                Schema</ulink> validation of the generated sitemap. This is disabled by default,
+            The sitemap helper also supports <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">Sitemap XSD
+                Schema</link> validation of the generated sitemap. This is disabled by default,
             since it will require a request to the Schema file. It can be
             enabled with
-            <code>$helper->setUseSchemaValidation(true)</code>.
+            <code>$helper-&gt;setUseSchemaValidation(true)</code>.
         </para>
 
-        <table id="zend.view.helpers.initial.navigation.sitemap.elements">
-            <title>Sitemap XML elements</title>
+        <table xml:id="zend.view.helpers.initial.navigation.sitemap.elements"><info><title>Sitemap XML elements</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -1892,8 +1884,7 @@ foreach ($this->container as $page) {
 
                         <entry>
                             <para>
-                                The date of last modification of the file, in <ulink
-                                    url="http://www.w3.org/TR/NOTE-datetime">W3C Datetime</ulink>
+                                The date of last modification of the file, in <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/NOTE-datetime">W3C Datetime</link>
                                 format. This time portion can be omitted if desired, and only use
                                 YYYY-MM-DD.
                             </para>
@@ -1975,7 +1966,7 @@ foreach ($this->container as $page) {
                     corresponds to the <code>formatOutput</code> property
                     of the native <classname>DOMDocument</classname> class.
                     Read more at
-                    <ulink url="http://php.net/domdocument">PHP: DOMDocument - Manual</ulink>.
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/domdocument">PHP: DOMDocument - Manual</link>.
                     Default is <constant>FALSE</constant>.
                 </para>
            </listitem>
@@ -2030,30 +2021,30 @@ foreach ($this->container as $page) {
            </listitem>
        </itemizedlist>
 
-        <example id="zend.view.helpers.initial.navigation.sitemap.example">
-            <title>Rendering an XML sitemap</title>
+        <example xml:id="zend.view.helpers.initial.navigation.sitemap.example"><info><title>Rendering an XML sitemap</title></info>
+            
 
             <para>
                 This example shows how to render an <acronym>XML</acronym> sitemap based
                 on the setup we did further up.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 // In a view script or layout:
 
 // format output
-$this->navigation()
-      ->sitemap()
-      ->setFormatOutput(true); // default is false
+$this-&gt;navigation()
+      -&gt;sitemap()
+      -&gt;setFormatOutput(true); // default is false
 
 // other possible methods:
-// ->setUseXmlDeclaration(false); // default is true
-// ->setServerUrl('http://my.otherhost.com');
+// -&gt;setUseXmlDeclaration(false); // default is true
+// -&gt;setServerUrl('http://my.otherhost.com');
 // default is to detect automatically
 
 // print sitemap
-echo $this->navigation()->sitemap();
-]]></programlisting>
+echo $this-&gt;navigation()-&gt;sitemap();
+</programlisting>
 
             <para>
                 Notice how pages that are invisible or pages with
@@ -2061,179 +2052,179 @@ echo $this->navigation()->sitemap();
                 out:
             </para>
 
-            <programlisting language="xml"><![CDATA[
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>http://www.example.com/</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/products</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/products/server</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/products/server/faq</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/products/server/editions</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/products/server/requirements</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/products/studio</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/products/studio/customers</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/prodcts/studio/support</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/company/about</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/company/about/investors</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/company/news</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/company/news/press</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/archive</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/community</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/community/account</loc>
-  </url>
-  <url>
-    <loc>http://forums.example.com/</loc>
-  </url>
-</urlset>
-]]></programlisting>
+            <programlisting language="xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/products&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/products/server&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/products/server/faq&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/products/server/editions&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/products/server/requirements&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/products/studio&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/products/studio/customers&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/prodcts/studio/support&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/company/about&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/company/about/investors&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/company/news&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/company/news/press&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/archive&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/community&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/community/account&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://forums.example.com/&lt;/loc&gt;
+  &lt;/url&gt;
+&lt;/urlset&gt;
+</programlisting>
 
             <para>
                 Render the sitemap using no <acronym>ACL</acronym> role (should filter out
                 /community/account):
             </para>
 
-            <programlisting language="php"><![CDATA[
-echo $this->navigation()
-          ->sitemap()
-          ->setFormatOutput(true)
-          ->setRole();
-]]></programlisting>
+            <programlisting language="php">
+echo $this-&gt;navigation()
+          -&gt;sitemap()
+          -&gt;setFormatOutput(true)
+          -&gt;setRole();
+</programlisting>
 
-            <programlisting language="xml"><![CDATA[
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>http://www.example.com/</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/products</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/products/server</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/products/server/faq</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/products/server/editions</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/products/server/requirements</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/products/studio</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/products/studio/customers</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/prodcts/studio/support</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/company/about</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/company/about/investors</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/company/news</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/company/news/press</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/archive</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/community</loc>
-  </url>
-  <url>
-    <loc>http://forums.example.com/</loc>
-  </url>
-</urlset>
-]]></programlisting>
+            <programlisting language="xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/products&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/products/server&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/products/server/faq&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/products/server/editions&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/products/server/requirements&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/products/studio&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/products/studio/customers&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/prodcts/studio/support&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/company/about&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/company/about/investors&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/company/news&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/company/news/press&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/archive&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/community&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://forums.example.com/&lt;/loc&gt;
+  &lt;/url&gt;
+&lt;/urlset&gt;
+</programlisting>
 
             <para>
                 Render the sitemap using a maximum depth of 1.
             </para>
 
-            <programlisting language="php"><![CDATA[
-echo $this->navigation()
-          ->sitemap()
-          ->setFormatOutput(true)
-          ->setMaxDepth(1);
-]]></programlisting>
+            <programlisting language="php">
+echo $this-&gt;navigation()
+          -&gt;sitemap()
+          -&gt;setFormatOutput(true)
+          -&gt;setMaxDepth(1);
+</programlisting>
 
-            <programlisting language="xml"><![CDATA[
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>http://www.example.com/</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/products</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/products/server</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/products/studio</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/company/about</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/company/about/investors</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/company/news</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/community</loc>
-  </url>
-  <url>
-    <loc>http://www.example.com/community/account</loc>
-  </url>
-  <url>
-    <loc>http://forums.example.com/</loc>
-  </url>
-</urlset>
-]]></programlisting>
+            <programlisting language="xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/products&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/products/server&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/products/studio&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/company/about&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/company/about/investors&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/company/news&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/community&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.example.com/community/account&lt;/loc&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://forums.example.com/&lt;/loc&gt;
+  &lt;/url&gt;
+&lt;/urlset&gt;
+</programlisting>
         </example>
 
-        <note>
-            <title>UTF-8 encoding used by default</title>
+        <note><info><title>UTF-8 encoding used by default</title></info>
+            
 
             <para>
                 By default, Zend Framework uses <acronym>UTF-8</acronym> as its default encoding,
@@ -2254,10 +2245,10 @@ echo $this->navigation()
                 view implementation.
             </para>
         </note>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.view.helpers.initial.navigation.navigation">
-        <title>Navigation Helper</title>
+    <section xml:id="zend.view.helpers.initial.navigation.navigation"><info><title>Navigation Helper</title></info>
+        
 
         <para>
             The Navigation helper is a proxy helper
@@ -2334,5 +2325,5 @@ echo $this->navigation()
                </para>
            </listitem>
        </itemizedlist>
-    </sect4>
-</sect3>
+    </section>
+</section>

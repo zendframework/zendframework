@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.queue.custom">
-    <title>Customizing Zend_Queue</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.queue.custom.adapter">
-        <title>Creating your own adapter</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.custom"><info><title>Customizing Zend_Queue</title></info>
+    
+
+    <section xml:id="zend.queue.custom.adapter"><info><title>Creating your own adapter</title></info>
+        
 
         <para>
             <classname>Zend_Queue</classname> will accept any adapter that
@@ -17,7 +18,7 @@
             this adapter is the easiest to conceptualize.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 class Custom_DbForUpdate extends Zend_Queue_Adapter_Db
 {
     /**
@@ -35,74 +36,74 @@ class Custom_DbForUpdate extends Zend_Queue_Adapter_Db
 }
 
 $options = array(
-    'name'          => 'queue1',
-    'driverOptions' => array(
-        'host'      => '127.0.0.1',
-        'port'      => '3306',
-        'username'  => 'queue',
-        'password'  => 'queue',
-        'dbname'    => 'queue',
-        'type'      => 'pdo_mysql'
+    'name'          =&gt; 'queue1',
+    'driverOptions' =&gt; array(
+        'host'      =&gt; '127.0.0.1',
+        'port'      =&gt; '3306',
+        'username'  =&gt; 'queue',
+        'password'  =&gt; 'queue',
+        'dbname'    =&gt; 'queue',
+        'type'      =&gt; 'pdo_mysql'
     )
 );
 
 $adapter = new Custom_DbForUpdate($options);
 $queue = new Zend_Queue($adapter, $options);
-]]></programlisting>
+</programlisting>
 
         <para>
             You can also change the adapter on the fly as well.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $adapter = new MyCustom_Adapter($options);
 $queue   = new Zend_Queue($options);
-$queue->setAdapter($adapter);
-echo "Adapter: ", get_class($queue->getAdapter()), "\n";
-]]></programlisting>
+$queue-&gt;setAdapter($adapter);
+echo "Adapter: ", get_class($queue-&gt;getAdapter()), "\n";
+</programlisting>
 
         <para>or</para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $options = array(
-    'name'           => 'queue1',
-    'namespace'      => 'Custom',
-    'driverOptions'  => array(
-        'host'       => '127.0.0.1',
-        'port'       => '3306',
-        'username'   => 'queue',
-        'password'   => 'queue',
-        'dbname'     => 'queue',
-        'type'       => 'pdo_mysql'
+    'name'           =&gt; 'queue1',
+    'namespace'      =&gt; 'Custom',
+    'driverOptions'  =&gt; array(
+        'host'       =&gt; '127.0.0.1',
+        'port'       =&gt; '3306',
+        'username'   =&gt; 'queue',
+        'password'   =&gt; 'queue',
+        'dbname'     =&gt; 'queue',
+        'type'       =&gt; 'pdo_mysql'
     )
 );
 $queue = new Zend_Queue('DbForUpdate', $config); // loads Custom_DbForUpdate
-]]></programlisting>
-    </sect2>
+</programlisting>
+    </section>
 
-    <sect2 id="zend.queue.custom.message">
-        <title>Creating your own message class</title>
+    <section xml:id="zend.queue.custom.message"><info><title>Creating your own message class</title></info>
+        
 
         <para>
             <classname>Zend_Queue</classname> will also accept your own message class.
             Our variables start with an underscore. For example:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 class Zend_Queue_Message
 {
     protected $_data = array();
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             You can extend the existing messaging class. See the example code in
             <filename>tests/Zend/Queue/Custom/Message.php</filename>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.queue.custom-iterator">
-        <title>Creating your own message iterator class</title>
+    <section xml:id="zend.queue.custom-iterator"><info><title>Creating your own message iterator class</title></info>
+        
 
         <para>
             <classname>Zend_Queue</classname> will also accept your own message
@@ -119,10 +120,10 @@ class Zend_Queue_Message
             See the example filename in
             <filename>tests/Zend/Queue/Custom/Messages.php</filename>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.queue.custom.queue">
-        <title>Creating your own queue class </title>
+    <section xml:id="zend.queue.custom.queue"><info><title>Creating your own queue class </title></info>
+        
 
         <para>
             <classname>Zend_Queue</classname> can also be overloaded easily.
@@ -131,5 +132,5 @@ class Zend_Queue_Message
         <para>
             See the example filename in <filename>tests/Zend/Queue/Custom/Queue.php</filename>.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

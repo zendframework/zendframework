@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.paginator.usage">
-    <title>Usage</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.paginator.usage.paginating">
-        <title>Paginating data collections</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.paginator.usage"><info><title>Usage</title></info>
+    
+
+    <section xml:id="zend.paginator.usage.paginating"><info><title>Paginating data collections</title></info>
+        
 
         <para>
             In order to paginate items into pages, <classname>Zend_Paginator</classname>
@@ -13,8 +14,8 @@
             adapters ship with Zend Framework by default:
         </para>
 
-        <table id="zend.paginator.usage.paginating.adapters">
-            <title>Adapters for Zend_Paginator</title>
+        <table xml:id="zend.paginator.usage.paginating.adapters"><info><title>Adapters for Zend_Paginator</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -34,8 +35,7 @@
                         <entry>DbSelect</entry>
 
                         <entry>
-                            Use a <link
-                                linkend="zend.db.select"><classname>Zend_Db_Select</classname></link>
+                            Use a <link linkend="zend.db.select"><classname>Zend_Db_Select</classname></link>
                             instance, which will return an array
                         </entry>
                     </row>
@@ -44,8 +44,7 @@
                         <entry>DbTableSelect</entry>
 
                         <entry>
-                            Use a <link
-                                linkend="zend.db.table.fetch-all"><classname>Zend_Db_Table_Select</classname></link>
+                            Use a <link linkend="zend.db.table.fetch-all"><classname>Zend_Db_Table_Select</classname></link>
                             instance, which will return an instance of
                             <classname>Zend_Db_Table_Rowset_Abstract</classname>.
                             This provides additional information about the
@@ -57,8 +56,7 @@
                         <entry>Iterator</entry>
 
                         <entry>
-                            Use an <ulink
-                                url="http://www.php.net/~helly/php/ext/spl/interfaceIterator.html"><classname>Iterator</classname></ulink>
+                            Use an <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/~helly/php/ext/spl/interfaceIterator.html"><classname>Iterator</classname></link>
                             instance
                         </entry>
                     </row>
@@ -97,9 +95,9 @@
             supply an adapter to the constructor:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $paginator = new Zend_Paginator(new Zend_Paginator_Adapter_Array($array));
-]]></programlisting>
+</programlisting>
 
         <para>
             For convenience, you may take advantage of the static
@@ -107,9 +105,9 @@ $paginator = new Zend_Paginator(new Zend_Paginator_Adapter_Array($array));
             Framework:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $paginator = Zend_Paginator::factory($array);
-]]></programlisting>
+</programlisting>
 
         <note>
             <para>
@@ -125,9 +123,9 @@ $paginator = Zend_Paginator::factory($array);
             paginated data.
         </para>
 
-        <programlisting language="php"><![CDATA[
-$paginator->setCurrentPageNumber($page);
-]]></programlisting>
+        <programlisting language="php">
+$paginator-&gt;setCurrentPageNumber($page);
+</programlisting>
 
         <para>
             The simplest way to keep track of this value is through a <acronym>URL</acronym>.
@@ -141,23 +139,23 @@ $paginator->setCurrentPageNumber($page);
             configuration file:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 routes.example.route = articles/:articleName/:page
 routes.example.defaults.controller = articles
 routes.example.defaults.action = view
 routes.example.defaults.page = 1
 routes.example.reqs.articleName = \w+
 routes.example.reqs.page = \d+
-]]></programlisting>
+</programlisting>
 
         <para>
             With the above route (and using Zend Framework <acronym>MVC</acronym> components),
             you might set the current page number like this:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$paginator->setCurrentPageNumber($this->_getParam('page'));
-]]></programlisting>
+        <programlisting language="php">
+$paginator-&gt;setCurrentPageNumber($this-&gt;_getParam('page'));
+</programlisting>
 
         <para>
             There are other options available; see
@@ -171,13 +169,13 @@ $paginator->setCurrentPageNumber($this->_getParam('page'));
             helper, the following will work:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$this->view->paginator = $paginator;
-]]></programlisting>
-    </sect2>
+        <programlisting language="php">
+$this-&gt;view-&gt;paginator = $paginator;
+</programlisting>
+    </section>
 
-    <sect2 id="zend.paginator.usage.dbselect">
-        <title>The DbSelect and DbTableSelect adapter</title>
+    <section xml:id="zend.paginator.usage.dbselect"><info><title>The DbSelect and DbTableSelect adapter</title></info>
+        
 
         <para>
             The usage of most adapters is pretty straight-forward. However, the
@@ -211,20 +209,20 @@ $this->view->paginator = $paginator;
             faster count query with the following setup:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$adapter = new Zend_Paginator_Adapter_DbSelect($db->select()->from('posts'));
-$adapter->setRowCount(
-    $db->select()
-       ->from(
+        <programlisting language="php">
+$adapter = new Zend_Paginator_Adapter_DbSelect($db-&gt;select()-&gt;from('posts'));
+$adapter-&gt;setRowCount(
+    $db-&gt;select()
+       -&gt;from(
             'item_counts',
             array(
-               Zend_Paginator_Adapter_DbSelect::ROW_COUNT_COLUMN => 'post_count'
+               Zend_Paginator_Adapter_DbSelect::ROW_COUNT_COLUMN =&gt; 'post_count'
             )
          )
 );
 
 $paginator = new Zend_Paginator($adapter);
-]]></programlisting>
+</programlisting>
 
         <para>
             This approach will probably not give you a huge performance gain on
@@ -232,10 +230,10 @@ $paginator = new Zend_Paginator($adapter);
             queries and large collections, a similar approach could give you a
             significant performance boost.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.paginator.rendering">
-        <title>Rendering pages with view scripts</title>
+    <section xml:id="zend.paginator.rendering"><info><title>Rendering pages with view scripts</title></info>
+        
 
         <para>
             The view script is used to render the page items (if you're using
@@ -245,29 +243,28 @@ $paginator = new Zend_Paginator($adapter);
 
         <para>
             Because <classname>Zend_Paginator</classname> implements the <acronym>SPL</acronym>
-            interface <ulink
-                url="http://www.php.net/~helly/php/ext/spl/interfaceIteratorAggregate.html"><classname>IteratorAggregate</classname></ulink>,
+            interface <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/~helly/php/ext/spl/interfaceIteratorAggregate.html"><classname>IteratorAggregate</classname></link>,
             looping over your items and displaying them is simple.
         </para>
 
-        <programlisting language="php"><![CDATA[
-<html>
-<body>
-<h1>Example</h1>
-<?php if (count($this->paginator)): ?>
-<ul>
-<?php foreach ($this->paginator as $item): ?>
-  <li><?php echo $item; ?></li>
-<?php endforeach; ?>
-</ul>
-<?php endif; ?>
+        <programlisting language="php">
+&lt;html&gt;
+&lt;body&gt;
+&lt;h1&gt;Example&lt;/h1&gt;
+&lt;?php if (count($this-&gt;paginator)): ?&gt;
+&lt;ul&gt;
+&lt;?php foreach ($this-&gt;paginator as $item): ?&gt;
+  &lt;li&gt;&lt;?php echo $item; ?&gt;&lt;/li&gt;
+&lt;?php endforeach; ?&gt;
+&lt;/ul&gt;
+&lt;?php endif; ?&gt;
 
-<?php echo $this->paginationControl($this->paginator,
+&lt;?php echo $this-&gt;paginationControl($this-&gt;paginator,
                                     'Sliding',
-                                    'my_pagination_control.phtml'); ?>
-</body>
-</html>
-]]></programlisting>
+                                    'my_pagination_control.phtml'); ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</programlisting>
 
         <para>
             Notice the view helper call near the end. PaginationControl
@@ -284,9 +281,7 @@ $paginator = new Zend_Paginator($adapter);
         </para>
 
         <para>
-            <inlinegraphic align="center" valign="middle"
-                fileref="figures/zend.paginator.usage.rendering.control.png"
-                format="PNG"/>
+            <inlinemediaobject><imageobject><imagedata align="center" valign="middle" fileref="figures/zend.paginator.usage.rendering.control.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
         <para>
@@ -303,8 +298,8 @@ $paginator = new Zend_Paginator($adapter);
             There are four scrolling styles packaged with Zend Framework:
         </para>
 
-        <table id="zend.paginator.usage.rendering.scrolling-styles">
-            <title>Scrolling styles for Zend_Paginator</title>
+        <table xml:id="zend.paginator.usage.rendering.scrolling-styles"><info><title>Scrolling styles for Zend_Paginator</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -373,22 +368,22 @@ $paginator = new Zend_Paginator($adapter);
             PaginationControl completely:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 Zend_Paginator::setDefaultScrollingStyle('Sliding');
 Zend_View_Helper_PaginationControl::setDefaultViewPartial(
     'my_pagination_control.phtml'
 );
-$paginator->setView($view);
-]]></programlisting>
+$paginator-&gt;setView($view);
+</programlisting>
 
         <para>
             When all of these values are set, you can render the pagination
             control inside your view script with a simple echo statement:
         </para>
 
-        <programlisting language="php"><![CDATA[
-<?php echo $this->paginator; ?>
-]]></programlisting>
+        <programlisting language="php">
+&lt;?php echo $this-&gt;paginator; ?&gt;
+</programlisting>
 
         <note>
             <para>
@@ -397,21 +392,21 @@ $paginator->setView($view);
                 might do the following:
             </para>
 
-            <programlisting language="php"><![CDATA[
-$smarty->assign('pages', $paginator->getPages());
-]]></programlisting>
+            <programlisting language="php">
+$smarty-&gt;assign('pages', $paginator-&gt;getPages());
+</programlisting>
 
             <para>
                 You could then access paginator values from a template like so:
             </para>
 
-            <programlisting language="php"><![CDATA[
-{$pages->pageCount}
-]]></programlisting>
+            <programlisting language="php">
+{$pages-&gt;pageCount}
+</programlisting>
         </note>
 
-        <sect3 id="zend.paginator.usage.rendering.example-controls">
-            <title>Example pagination controls</title>
+        <section xml:id="zend.paginator.usage.rendering.example-controls"><info><title>Example pagination controls</title></info>
+            
 
             <para>
                 The following example pagination controls will hopefully help
@@ -422,137 +417,137 @@ $smarty->assign('pages', $paginator->getPages());
                 Search pagination:
             </para>
 
-            <programlisting language="php"><![CDATA[
-<!--
+            <programlisting language="php">
+&lt;!--
 See http://developer.yahoo.com/ypatterns/pattern.php?pattern=searchpagination
--->
+--&gt;
 
-<?php if ($this->pageCount): ?>
-<div class="paginationControl">
-<!-- Previous page link -->
-<?php if (isset($this->previous)): ?>
-  <a href="<?php echo $this->url(array('page' => $this->previous)); ?>">
-    &lt; Previous
-  </a> |
-<?php else: ?>
-  <span class="disabled">&lt; Previous</span> |
-<?php endif; ?>
+&lt;?php if ($this-&gt;pageCount): ?&gt;
+&lt;div class="paginationControl"&gt;
+&lt;!-- Previous page link --&gt;
+&lt;?php if (isset($this-&gt;previous)): ?&gt;
+  &lt;a href="&lt;?php echo $this-&gt;url(array('page' =&gt; $this-&gt;previous)); ?&gt;"&gt;
+    &amp;lt; Previous
+  &lt;/a&gt; |
+&lt;?php else: ?&gt;
+  &lt;span class="disabled"&gt;&amp;lt; Previous&lt;/span&gt; |
+&lt;?php endif; ?&gt;
 
-<!-- Numbered page links -->
-<?php foreach ($this->pagesInRange as $page): ?>
-  <?php if ($page != $this->current): ?>
-    <a href="<?php echo $this->url(array('page' => $page)); ?>">
-        <?php echo $page; ?>
-    </a> |
-  <?php else: ?>
-    <?php echo $page; ?> |
-  <?php endif; ?>
-<?php endforeach; ?>
+&lt;!-- Numbered page links --&gt;
+&lt;?php foreach ($this-&gt;pagesInRange as $page): ?&gt;
+  &lt;?php if ($page != $this-&gt;current): ?&gt;
+    &lt;a href="&lt;?php echo $this-&gt;url(array('page' =&gt; $page)); ?&gt;"&gt;
+        &lt;?php echo $page; ?&gt;
+    &lt;/a&gt; |
+  &lt;?php else: ?&gt;
+    &lt;?php echo $page; ?&gt; |
+  &lt;?php endif; ?&gt;
+&lt;?php endforeach; ?&gt;
 
-<!-- Next page link -->
-<?php if (isset($this->next)): ?>
-  <a href="<?php echo $this->url(array('page' => $this->next)); ?>">
-    Next &gt;
-  </a>
-<?php else: ?>
-  <span class="disabled">Next &gt;</span>
-<?php endif; ?>
-</div>
-<?php endif; ?>
-]]></programlisting>
+&lt;!-- Next page link --&gt;
+&lt;?php if (isset($this-&gt;next)): ?&gt;
+  &lt;a href="&lt;?php echo $this-&gt;url(array('page' =&gt; $this-&gt;next)); ?&gt;"&gt;
+    Next &amp;gt;
+  &lt;/a&gt;
+&lt;?php else: ?&gt;
+  &lt;span class="disabled"&gt;Next &amp;gt;&lt;/span&gt;
+&lt;?php endif; ?&gt;
+&lt;/div&gt;
+&lt;?php endif; ?&gt;
+</programlisting>
 
             <para>
                 Item pagination:
             </para>
 
-            <programlisting language="php"><![CDATA[
-<!--
+            <programlisting language="php">
+&lt;!--
 See http://developer.yahoo.com/ypatterns/pattern.php?pattern=itempagination
--->
+--&gt;
 
-<?php if ($this->pageCount): ?>
-<div class="paginationControl">
-<?php echo $this->firstItemNumber; ?> - <?php echo $this->lastItemNumber; ?>
-of <?php echo $this->totalItemCount; ?>
+&lt;?php if ($this-&gt;pageCount): ?&gt;
+&lt;div class="paginationControl"&gt;
+&lt;?php echo $this-&gt;firstItemNumber; ?&gt; - &lt;?php echo $this-&gt;lastItemNumber; ?&gt;
+of &lt;?php echo $this-&gt;totalItemCount; ?&gt;
 
-<!-- First page link -->
-<?php if (isset($this->previous)): ?>
-  <a href="<?php echo $this->url(array('page' => $this->first)); ?>">
+&lt;!-- First page link --&gt;
+&lt;?php if (isset($this-&gt;previous)): ?&gt;
+  &lt;a href="&lt;?php echo $this-&gt;url(array('page' =&gt; $this-&gt;first)); ?&gt;"&gt;
     First
-  </a> |
-<?php else: ?>
-  <span class="disabled">First</span> |
-<?php endif; ?>
+  &lt;/a&gt; |
+&lt;?php else: ?&gt;
+  &lt;span class="disabled"&gt;First&lt;/span&gt; |
+&lt;?php endif; ?&gt;
 
-<!-- Previous page link -->
-<?php if (isset($this->previous)): ?>
-  <a href="<?php echo $this->url(array('page' => $this->previous)); ?>">
-    &lt; Previous
-  </a> |
-<?php else: ?>
-  <span class="disabled">&lt; Previous</span> |
-<?php endif; ?>
+&lt;!-- Previous page link --&gt;
+&lt;?php if (isset($this-&gt;previous)): ?&gt;
+  &lt;a href="&lt;?php echo $this-&gt;url(array('page' =&gt; $this-&gt;previous)); ?&gt;"&gt;
+    &amp;lt; Previous
+  &lt;/a&gt; |
+&lt;?php else: ?&gt;
+  &lt;span class="disabled"&gt;&amp;lt; Previous&lt;/span&gt; |
+&lt;?php endif; ?&gt;
 
-<!-- Next page link -->
-<?php if (isset($this->next)): ?>
-  <a href="<?php echo $this->url(array('page' => $this->next)); ?>">
-    Next &gt;
-  </a> |
-<?php else: ?>
-  <span class="disabled">Next &gt;</span> |
-<?php endif; ?>
+&lt;!-- Next page link --&gt;
+&lt;?php if (isset($this-&gt;next)): ?&gt;
+  &lt;a href="&lt;?php echo $this-&gt;url(array('page' =&gt; $this-&gt;next)); ?&gt;"&gt;
+    Next &amp;gt;
+  &lt;/a&gt; |
+&lt;?php else: ?&gt;
+  &lt;span class="disabled"&gt;Next &amp;gt;&lt;/span&gt; |
+&lt;?php endif; ?&gt;
 
-<!-- Last page link -->
-<?php if (isset($this->next)): ?>
-  <a href="<?php echo $this->url(array('page' => $this->last)); ?>">
+&lt;!-- Last page link --&gt;
+&lt;?php if (isset($this-&gt;next)): ?&gt;
+  &lt;a href="&lt;?php echo $this-&gt;url(array('page' =&gt; $this-&gt;last)); ?&gt;"&gt;
     Last
-  </a>
-<?php else: ?>
-  <span class="disabled">Last</span>
-<?php endif; ?>
+  &lt;/a&gt;
+&lt;?php else: ?&gt;
+  &lt;span class="disabled"&gt;Last&lt;/span&gt;
+&lt;?php endif; ?&gt;
 
-</div>
-<?php endif; ?>
-]]></programlisting>
+&lt;/div&gt;
+&lt;?php endif; ?&gt;
+</programlisting>
 
             <para>
                 Dropdown pagination:
             </para>
 
-            <programlisting language="php"><![CDATA[
-<?php if ($this->pageCount): ?>
-<select id="paginationControl" size="1">
-<?php foreach ($this->pagesInRange as $page): ?>
-  <?php $selected = ($page == $this->current) ? ' selected="selected"' : ''; ?>
-  <option value="<?php
-        echo $this->url(array('page' => $page));?>"<?php echo $selected ?>>
-    <?php echo $page; ?>
-  </option>
-<?php endforeach; ?>
-</select>
-<?php endif; ?>
+            <programlisting language="php">
+&lt;?php if ($this-&gt;pageCount): ?&gt;
+&lt;select id="paginationControl" size="1"&gt;
+&lt;?php foreach ($this-&gt;pagesInRange as $page): ?&gt;
+  &lt;?php $selected = ($page == $this-&gt;current) ? ' selected="selected"' : ''; ?&gt;
+  &lt;option value="&lt;?php
+        echo $this-&gt;url(array('page' =&gt; $page));?&gt;"&lt;?php echo $selected ?&gt;&gt;
+    &lt;?php echo $page; ?&gt;
+  &lt;/option&gt;
+&lt;?php endforeach; ?&gt;
+&lt;/select&gt;
+&lt;?php endif; ?&gt;
 
-<script type="text/javascript"
-     src="http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.2/prototype.js">
-</script>
-<script type="text/javascript">
+&lt;script type="text/javascript"
+     src="http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.2/prototype.js"&gt;
+&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
 $('paginationControl').observe('change', function() {
     window.location = this.options[this.selectedIndex].value;
 })
-</script>
-]]></programlisting>
-        </sect3>
+&lt;/script&gt;
+</programlisting>
+        </section>
 
-        <sect3 id="zend.paginator.usage.rendering.properties">
-            <title>Listing of properties</title>
+        <section xml:id="zend.paginator.usage.rendering.properties"><info><title>Listing of properties</title></info>
+            
 
             <para>
                 The following options are available to pagination control
                 view partials:
             </para>
 
-            <table id="zend.paginator.usage.rendering.properties.table">
-                <title>Properties available to view partials</title>
+            <table xml:id="zend.paginator.usage.rendering.properties.table"><info><title>Properties available to view partials</title></info>
+                
 
                 <tgroup cols="3">
                     <thead>
@@ -650,9 +645,6 @@ $('paginationControl').observe('change', function() {
                     </tbody>
                 </tgroup>
             </table>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

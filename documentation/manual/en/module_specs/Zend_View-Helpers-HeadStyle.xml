@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.headstyle">
-    <title>HeadStyle Helper</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headstyle"><info><title>HeadStyle Helper</title></info>
+    
 
     <para>
         The <acronym>HTML</acronym> <emphasis>&lt;style&gt;</emphasis> element is used to include
@@ -9,8 +10,8 @@
         <emphasis>&lt;head&gt;</emphasis> element.
     </para>
 
-    <note>
-        <title>Use HeadLink to link CSS files</title>
+    <note><info><title>Use HeadLink to link CSS files</title></info>
+        
 
         <para>
             <link linkend="zend.view.helpers.initial.headlink">HeadLink</link>
@@ -57,8 +58,8 @@
         <property>style</property> tag: lang, title, media, or dir are all permissible.
     </para>
 
-    <note>
-        <title>Setting Conditional Comments</title>
+    <note><info><title>Setting Conditional Comments</title></info>
+        
 
         <para>
             <classname>HeadStyle</classname> allows you to wrap the style tag in conditional
@@ -67,13 +68,13 @@
             in the method calls.
         </para>
 
-        <example id="zend.view.helpers.initial.headstyle.conditional">
-            <title>Headstyle With Conditional Comments</title>
+        <example xml:id="zend.view.helpers.initial.headstyle.conditional"><info><title>Headstyle With Conditional Comments</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 // adding scripts
-$this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7'));
-]]></programlisting>
+$this-&gt;headStyle()-&gt;appendStyle($styles, array('conditional' =&gt; 'lt IE 7'));
+</programlisting>
         </example>
     </note>
 
@@ -107,8 +108,8 @@ $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7'));
             helper</link>.
     </para>
 
-    <note>
-        <title>UTF-8 encoding used by default</title>
+    <note><info><title>UTF-8 encoding used by default</title></info>
+        
 
         <para>
             By default, Zend Framework uses <acronym>UTF-8</acronym> as its default encoding, and,
@@ -129,17 +130,17 @@ $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7'));
         </para>
     </note>
 
-    <example id="zend.view.helpers.initial.headstyle.basicusage">
-        <title>HeadStyle Helper Basic Usage</title>
+    <example xml:id="zend.view.helpers.initial.headstyle.basicusage"><info><title>HeadStyle Helper Basic Usage</title></info>
+        
 
         <para>
             You may specify a new style tag at any time:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // adding styles
-$this->headStyle()->appendStyle($styles);
-]]></programlisting>
+$this-&gt;headStyle()-&gt;appendStyle($styles);
+</programlisting>
 
         <para>
             Order is very important with <acronym>CSS</acronym>; you may need to ensure that
@@ -148,31 +149,31 @@ $this->headStyle()->appendStyle($styles);
             to aid in this task:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Putting styles in order
 
 // place at a particular offset:
-$this->headStyle()->offsetSetStyle(100, $customStyles);
+$this-&gt;headStyle()-&gt;offsetSetStyle(100, $customStyles);
 
 // place at end:
-$this->headStyle()->appendStyle($finalStyles);
+$this-&gt;headStyle()-&gt;appendStyle($finalStyles);
 
 // place at beginning
-$this->headStyle()->prependStyle($firstStyles);
-]]></programlisting>
+$this-&gt;headStyle()-&gt;prependStyle($firstStyles);
+</programlisting>
 
         <para>
             When you're finally ready to output all style declarations in your
             layout script, simply echo the helper:
         </para>
 
-        <programlisting language="php"><![CDATA[
-<?php echo $this->headStyle() ?>
-]]></programlisting>
+        <programlisting language="php">
+&lt;?php echo $this-&gt;headStyle() ?&gt;
+</programlisting>
     </example>
 
-    <example id="zend.view.helpers.initial.headstyle.capture">
-        <title>Capturing Style Declarations Using the HeadStyle Helper</title>
+    <example xml:id="zend.view.helpers.initial.headstyle.capture"><info><title>Capturing Style Declarations Using the HeadStyle Helper</title></info>
+        
 
         <para>
             Sometimes you need to generate <acronym>CSS</acronym> style declarations
@@ -182,13 +183,13 @@ $this->headStyle()->prependStyle($firstStyles);
             <classname>HeadStyle</classname> lets you do just that, capturing it to the stack:
         </para>
 
-        <programlisting language="php"><![CDATA[
-<?php $this->headStyle()->captureStart() ?>
+        <programlisting language="php">
+&lt;?php $this-&gt;headStyle()-&gt;captureStart() ?&gt;
 body {
-    background-color: <?php echo $this->bgColor ?>;
+    background-color: &lt;?php echo $this-&gt;bgColor ?&gt;;
 }
-<?php $this->headStyle()->captureEnd() ?>
-]]></programlisting>
+&lt;?php $this-&gt;headStyle()-&gt;captureEnd() ?&gt;
+</programlisting>
 
         <para>
             The following assumptions are made:
@@ -213,7 +214,4 @@ body {
             </listitem>
         </itemizedlist>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

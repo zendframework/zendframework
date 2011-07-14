@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.autoloading.usage">
-    <title>Basic Autoloader Usage</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.usage"><info><title>Basic Autoloader Usage</title></info>
+    
 
     <para>
         Now that we have an understanding of what autoloading is and the goals and design of Zend
@@ -16,10 +17,10 @@
         <methodname>getInstance()</methodname> to retrieve an instance.
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 require_once 'Zend/Loader/Autoloader.php';
 Zend_Loader_Autoloader::getInstance();
-]]></programlisting>
+</programlisting>
 
     <para>
         By default, this will allow loading any classes with the class namespace prefixes of "Zend_"
@@ -32,12 +33,12 @@ Zend_Loader_Autoloader::getInstance();
         can pass a single namespace prefix, or an array of them:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 require_once 'Zend/Loader/Autoloader.php';
 $loader = Zend_Loader_Autoloader::getInstance();
-$loader->registerNamespace('Foo_');
-$loader->registerNamespace(array('Foo_', 'Bar_'));
-]]></programlisting>
+$loader-&gt;registerNamespace('Foo_');
+$loader-&gt;registerNamespace(array('Foo_', 'Bar_'));
+</programlisting>
 
     <para>
         Alternately, you can tell <classname>Zend_Loader_Autoloader</classname> to act as a
@@ -45,12 +46,12 @@ $loader->registerNamespace(array('Foo_', 'Bar_'));
         namespace prefix.
     </para>
 
-    <programlisting language="php"><![CDATA[
-$loader->setFallbackAutoloader(true);
-]]></programlisting>
+    <programlisting language="php">
+$loader-&gt;setFallbackAutoloader(true);
+</programlisting>
 
-    <warning>
-        <title>Do not use as a fallback autoloader</title>
+    <warning><info><title>Do not use as a fallback autoloader</title></info>
+        
 
         <para>
             While it's tempting to use <classname>Zend_Loader_Autoloader</classname> as a fallback
@@ -91,8 +92,8 @@ $loader->setFallbackAutoloader(true);
         </para>
     </warning>
 
-    <note>
-        <title>Namespace Prefixes vs PHP Namespaces</title>
+    <note><info><title>Namespace Prefixes vs PHP Namespaces</title></info>
+        
 
         <para>
             At the time this is written, <acronym>PHP</acronym> 5.3 has been released. With that
@@ -147,13 +148,13 @@ $loader->setFallbackAutoloader(true);
         Autoloaders managed this way may be any valid <acronym>PHP</acronym> callback.
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 // Append function 'my_autoloader' to the stack,
 // to manage classes with the prefix 'My_':
-$loader->pushAutoloader('my_autoloader', 'My_');
+$loader-&gt;pushAutoloader('my_autoloader', 'My_');
 
 // Prepend static method Foo_Loader::autoload() to the stack,
 // to manage classes with the prefix 'Foo_':
-$loader->unshiftAutoloader(array('Foo_Loader', 'autoload'), 'Foo_');
-]]></programlisting>
-</sect1>
+$loader-&gt;unshiftAutoloader(array('Foo_Loader', 'autoload'), 'Foo_');
+</programlisting>
+</section>

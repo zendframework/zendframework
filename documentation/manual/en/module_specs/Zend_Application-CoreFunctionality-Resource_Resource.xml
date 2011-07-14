@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.application.core-functionality.resource-resource">
-    <title>Zend_Application_Resource_Resource</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.core-functionality.resource-resource"><info><title>Zend_Application_Resource_Resource</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Resource</classname> is an interface for
@@ -11,8 +12,8 @@
         implement a strategy pattern for initializing the resource.
     </para>
 
-    <table id="zend.application.core-functionality.resource-resource.api">
-        <title>Zend_Application_Resource_Resource Interface</title>
+    <table xml:id="zend.application.core-functionality.resource-resource.api"><info><title>Zend_Application_Resource_Resource Interface</title></info>
+        
 
         <tgroup cols="4">
             <thead>
@@ -116,4 +117,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect2>
+</section>

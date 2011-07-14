@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.loader.autoloader-factory">
-    <title>The AutoloaderFactory</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.loader.autoloader-factory.intro">
-        <title>Overview</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.autoloader-factory"><info><title>The AutoloaderFactory</title></info>
+    
+
+    <section xml:id="zend.loader.autoloader-factory.intro"><info><title>Overview</title></info>
+        
 
         <para>
             Starting with version 2.0, Zend Framework now offers multiple autoloader strategies.
@@ -18,67 +19,67 @@
             the autoloader configuration somewhere and cache it. For these cases, the
             <classname>AutoloaderFactory</classname> will be useful.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.autoloader-factory.quick-start">
-        <title>Quick Start</title>
+    <section xml:id="zend.loader.autoloader-factory.quick-start"><info><title>Quick Start</title></info>
+        
 
         <para>
             Configuration may be stored as a PHP array, or in some form of configuration file. As an
             example, consider the following PHP array:
         </para>
 
-        <programlisting lang="php"><![CDATA[
+        <programlisting xml:lang="php">
 $config = array(
-    'Zend\Loader\ClassMapAutoloader' => array(
-        'application' => APPLICATION_PATH . '/.classmap.php',
-        'zf'          => APPLICATION_PATH . '/../library/Zend/.classmap.php',
+    'Zend\Loader\ClassMapAutoloader' =&gt; array(
+        'application' =&gt; APPLICATION_PATH . '/.classmap.php',
+        'zf'          =&gt; APPLICATION_PATH . '/../library/Zend/.classmap.php',
     ),
-    'Zend\Loader\StandardAutoloader' => array(
-        'namespaces' => array(
-            'Phly\Mustache' => APPLICATION_PATH . '/../library/Phly/Mustache',
-            'Doctrine'      => APPLICATION_PATH . '/../library/Doctrine',
+    'Zend\Loader\StandardAutoloader' =&gt; array(
+        'namespaces' =&gt; array(
+            'Phly\Mustache' =&gt; APPLICATION_PATH . '/../library/Phly/Mustache',
+            'Doctrine'      =&gt; APPLICATION_PATH . '/../library/Doctrine',
         ),
     ),
 );
-]]></programlisting>
+</programlisting>
 
         <para>
             An equivalent INI-style configuration might look like the following:
         </para>
 
-        <programlisting lang="ini"><![CDATA[
+        <programlisting xml:lang="ini">
 Zend\Loader\ClassMapAutoloader.application = APPLICATION_PATH "/.classmap.php"
 Zend\Loader\ClassMapAutoloader.zf          = APPLICATION_PATH "/../library/Zend/.classmap.php"
 Zend\Loader\StandardAutoloader.namespaces.Phly\Mustache = APPLICATION_PATH "/../library/Phly/Mustache"
 Zend\Loader\StandardAutoloader.namespaces.Doctrine       = APPLICATION_PATH "/../library/Doctrine"
-]]></programlisting>
+</programlisting>
 
         <para>
             Once you have your configuration in a PHP array, you simply pass it to the
             <classname>AutoloaderFactory</classname>.
         </para>
 
-        <programlisting lang="php"><![CDATA[
+        <programlisting xml:lang="php">
 // This example assumes ZF is on your include_path.
 // You could also load the factory class from a path relative to the
 // current script, or via an absolute path.
 require_once 'Zend/Loader/AutoloaderFactory.php';
 Zend\Loader\AutoloaderFactory::factory($config);
-]]></programlisting>
+</programlisting>
 
         <para>
             The <classname>AutoloaderFactory</classname> will instantiate each autoloader with the
             given options, and also call its <methodname>register()</methodname> method to register
             it with the SPL autoloader.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.autoloader-factory.options">
-        <title>Configuration Options</title>
+    <section xml:id="zend.loader.autoloader-factory.options"><info><title>Configuration Options</title></info>
+        
 
-        <variablelist>
-            <title>AutoloaderFactory Options</title>
+        <variablelist><info><title>AutoloaderFactory Options</title></info>
+            
 
             <varlistentry>
                 <term>$options</term>
@@ -93,8 +94,7 @@ Zend\Loader\AutoloaderFactory::factory($config);
 
                     <para>
                         Internally, the <classname>AutoloaderFactory</classname> checks to see if
-                        the autoloader class referenced exists. If not, it will use the <link
-                            linkend="zend.loader.standard-autoloader">StandardAutoloader</link> to
+                        the autoloader class referenced exists. If not, it will use the <link linkend="zend.loader.standard-autoloader">StandardAutoloader</link> to
                         attempt to load the class via the <varname>include_path</varname> (or, in
                         the case of "Zend"-namespaced classes, using the Zend Framework library
                         path). If the class is not found, or does not implement the
@@ -104,12 +104,12 @@ Zend\Loader\AutoloaderFactory::factory($config);
                 </listitem>
             </varlistentry>
         </variablelist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.autoloader-factory.methods">
-        <title>Available Methods</title>
+    <section xml:id="zend.loader.autoloader-factory.methods"><info><title>Available Methods</title></info>
+        
 
-        <refentry id="zend.loader.autoloader-factory.methods.factory">
+        <refentry xml:id="zend.loader.autoloader-factory.methods.factory">
             <refnamediv>
                 <refname>factory</refname>
                 <refpurpose>Instantiate and register autoloaders</refpurpose>
@@ -124,8 +124,8 @@ Zend\Loader\AutoloaderFactory::factory($config);
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>factory()</title>
+            <refsection><info><title>factory()</title></info>
+                
 
                 <para>
                     This method is <emphasis>static</emphasis>, and is used to instantiate
@@ -133,10 +133,10 @@ Zend\Loader\AutoloaderFactory::factory($config);
                     array or <interfacename>Traversable</interfacename> object as denoted in the
                     <link linkend="zend.loader.autoloader-factory.options">Options section</link>.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.autoloader-factory.methods.get-registered-autoloaders">
+        <refentry xml:id="zend.loader.autoloader-factory.methods.get-registered-autoloaders">
             <refnamediv>
                 <refname>getRegisteredAutoloaders</refname>
                 <refpurpose>Retrieve a list of all autoloaders registered using the factory</refpurpose>
@@ -148,24 +148,24 @@ Zend\Loader\AutoloaderFactory::factory($config);
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>getRegisteredAutoloaders()</title>
+            <refsection><info><title>getRegisteredAutoloaders()</title></info>
+                
 
                 <para>
                     This method is <emphasis>static</emphasis>, and may be used to retrieve a list
                     of all autoloaders registered via the <methodname>factory()</methodname> method.
                     It returns simply an array of autoloader instances.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.autoloader-factory.examples">
-        <title>Examples</title>
+    <section xml:id="zend.loader.autoloader-factory.examples"><info><title>Examples</title></info>
+        
 
         <para>
             Please see the <link linkend="zend.loader.autoloader-factory.quick-start">Quick
                 Start</link> for a detailed example.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

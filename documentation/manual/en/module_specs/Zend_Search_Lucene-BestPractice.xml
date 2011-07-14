@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.search.lucene.best-practice">
-    <title>Best Practices</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.search.lucene.best-practice.field-names">
-        <title>Field names</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.best-practice"><info><title>Best Practices</title></info>
+    
+
+    <section xml:id="zend.search.lucene.best-practice.field-names"><info><title>Field names</title></info>
+        
 
         <para>
             There are no limitations for field names in <classname>Zend_Search_Lucene</classname>.
@@ -24,36 +25,36 @@
             <methodname>getDocument()</methodname> method to access them:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$hits = $index->find($query);
+        <programlisting language="php">
+$hits = $index-&gt;find($query);
 
 foreach ($hits as $hit) {
     // Get 'title' document field
-    $title = $hit->title;
+    $title = $hit-&gt;title;
 
     // Get 'contents' document field
-    $contents = $hit->contents;
+    $contents = $hit-&gt;contents;
 
     // Get internal Lucene document id
-    $id = $hit->id;
+    $id = $hit-&gt;id;
 
     // Get query hit score
-    $score = $hit->score;
+    $score = $hit-&gt;score;
 
     // Get 'id' document field
-    $docId = $hit->getDocument()->id;
+    $docId = $hit-&gt;getDocument()-&gt;id;
 
     // Get 'score' document field
-    $docId = $hit->getDocument()->score;
+    $docId = $hit-&gt;getDocument()-&gt;score;
 
     // Another way to get 'title' document field
-    $title = $hit->getDocument()->title;
+    $title = $hit-&gt;getDocument()-&gt;title;
 }
-]]></programlisting>
-    </sect2>
+</programlisting>
+    </section>
 
-    <sect2 id="zend.search.lucene.best-practice.indexing-performance">
-        <title>Indexing performance</title>
+    <section xml:id="zend.search.lucene.best-practice.indexing-performance"><info><title>Indexing performance</title></info>
+        
 
         <para>
             Indexing performance is a compromise between used resources, indexing time and index
@@ -79,11 +80,11 @@ foreach ($hits as $hit) {
             method:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $index = Zend_Search_Lucene::open($indexPath);
 
-$index->optimize();
-]]></programlisting>
+$index-&gt;optimize();
+</programlisting>
 
         <para>
             Index optimization works with data streams and doesn't take a lot of memory but does
@@ -102,8 +103,7 @@ $index->optimize();
         </para>
 
         <para>
-            There are three options to control the behavior of auto-optimization (see <link
-                linkend="zend.search.lucene.index-creation.optimization">Index optimization</link>
+            There are three options to control the behavior of auto-optimization (see <link linkend="zend.search.lucene.index-creation.optimization">Index optimization</link>
             section):
 
             <itemizedlist>
@@ -268,10 +268,10 @@ $index->optimize();
             course-grained. So use the estimation above for tuning <emphasis>MergeFactor</emphasis>,
             then play with <emphasis>MaxMergeDocs</emphasis> to get best batch indexing performance.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.best-practice.shutting-down">
-        <title>Index during Shut Down</title>
+    <section xml:id="zend.search.lucene.best-practice.shutting-down"><info><title>Index during Shut Down</title></info>
+        
 
         <para>
             The <classname>Zend_Search_Lucene</classname> instance performs some work at exit time
@@ -317,33 +317,32 @@ $index->optimize();
             The first is to force going out of scope:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $index = Zend_Search_Lucene::open($indexPath);
 
 ...
 
 unset($index);
-]]></programlisting>
+</programlisting>
 
         <para>
             And the second is to perform a commit operation before the end of script execution:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $index = Zend_Search_Lucene::open($indexPath);
 
-$index->commit();
-]]></programlisting>
+$index-&gt;commit();
+</programlisting>
 
         <para>
-            This possibility is also described in the "<link
-                linkend="zend.search.lucene.advanced.static">Advanced. Using index as static
+            This possibility is also described in the "<link linkend="zend.search.lucene.advanced.static">Advanced. Using index as static
                 property</link>" section.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.best-practice.unique-id">
-        <title>Retrieving documents by unique id</title>
+    <section xml:id="zend.search.lucene.best-practice.unique-id"><info><title>Retrieving documents by unique id</title></info>
+        
 
         <para>
             It's a common practice to store some unique document id in the index. Examples include
@@ -359,13 +358,13 @@ $index->commit();
             This is more efficient than using the <methodname>find()</methodname> method:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Retrieving documents with find() method using a query string
 $query = $idFieldName . ':' . $docId;
-$hits  = $index->find($query);
+$hits  = $index-&gt;find($query);
 foreach ($hits as $hit) {
-    $title    = $hit->title;
-    $contents = $hit->contents;
+    $title    = $hit-&gt;title;
+    $contents = $hit-&gt;contents;
     ...
 }
 ...
@@ -373,10 +372,10 @@ foreach ($hits as $hit) {
 // Retrieving documents with find() method using the query API
 $term = new Zend_Search_Lucene_Index_Term($docId, $idFieldName);
 $query = new Zend_Search_Lucene_Search_Query_Term($term);
-$hits  = $index->find($query);
+$hits  = $index-&gt;find($query);
 foreach ($hits as $hit) {
-    $title    = $hit->title;
-    $contents = $hit->contents;
+    $title    = $hit-&gt;title;
+    $contents = $hit-&gt;contents;
     ...
 }
 
@@ -384,18 +383,18 @@ foreach ($hits as $hit) {
 
 // Retrieving documents with termDocs() method
 $term = new Zend_Search_Lucene_Index_Term($docId, $idFieldName);
-$docIds  = $index->termDocs($term);
+$docIds  = $index-&gt;termDocs($term);
 foreach ($docIds as $id) {
-    $doc = $index->getDocument($id);
-    $title    = $doc->title;
-    $contents = $doc->contents;
+    $doc = $index-&gt;getDocument($id);
+    $title    = $doc-&gt;title;
+    $contents = $doc-&gt;contents;
     ...
 }
-]]></programlisting>
-    </sect2>
+</programlisting>
+    </section>
 
-    <sect2 id="zend.search.lucene.best-practice.memory-usage">
-        <title>Memory Usage</title>
+    <section xml:id="zend.search.lucene.best-practice.memory-usage"><info><title>Memory Usage</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> is a relatively memory-intensive module.
@@ -450,10 +449,10 @@ foreach ($docIds as $id) {
             Index optimization (full or partial) uses stream-style data processing and doesn't
             require a lot of memory.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.best-practice.encoding">
-        <title>Encoding</title>
+    <section xml:id="zend.search.lucene.best-practice.encoding"><info><title>Encoding</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> works with UTF-8 strings internally. So all
@@ -478,15 +477,15 @@ foreach ($docIds as $id) {
             Encoding may be explicitly specified as an optional parameter of field creation methods:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $doc = new Zend_Search_Lucene_Document();
-$doc->addField(Zend_Search_Lucene_Field::Text('title',
+$doc-&gt;addField(Zend_Search_Lucene_Field::Text('title',
                                               $title,
                                               'iso-8859-1'));
-$doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
+$doc-&gt;addField(Zend_Search_Lucene_Field::UnStored('contents',
                                                   $contents,
                                                   'utf-8'));
-]]></programlisting>
+</programlisting>
 
         <para>
             This is the best way to avoid ambiguity in the encoding used.
@@ -497,7 +496,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
             locale may contain character encoding data in addition to the language specification:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 setlocale(LC_ALL, 'fr_FR');
 ...
 
@@ -506,7 +505,7 @@ setlocale(LC_ALL, 'de_DE.iso-8859-1');
 
 setlocale(LC_ALL, 'ru_RU.UTF-8');
 ...
-]]></programlisting>
+</programlisting>
 
         <para>
             The same approach is used to set query string encoding.
@@ -521,23 +520,23 @@ setlocale(LC_ALL, 'ru_RU.UTF-8');
             before search:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $query =
     Zend_Search_Lucene_Search_QueryParser::parse($queryStr, 'iso-8859-5');
-$hits = $index->find($query);
+$hits = $index-&gt;find($query);
 ...
-]]></programlisting>
+</programlisting>
 
         <para>
             The default encoding may also be specified with
             <methodname>setDefaultEncoding()</methodname> method:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('iso-8859-1');
-$hits = $index->find($queryStr);
+$hits = $index-&gt;find($queryStr);
 ...
-]]></programlisting>
+</programlisting>
 
         <para>
             The empty string implies 'current locale'.
@@ -545,14 +544,13 @@ $hits = $index->find($queryStr);
 
         <para>
             If the correct encoding is specified it can be correctly processed by analyzer. The
-            actual behavior depends on which analyzer is used. See the <link
-                linkend="zend.search.lucene.charset">Character Set</link> documentation section for
+            actual behavior depends on which analyzer is used. See the <link linkend="zend.search.lucene.charset">Character Set</link> documentation section for
             details.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.best-practice.maintenance">
-        <title>Index maintenance</title>
+    <section xml:id="zend.search.lucene.best-practice.maintenance"><info><title>Index maintenance</title></info>
+        
 
         <para>
             It should be clear that <classname>Zend_Search_Lucene</classname> as well as any other
@@ -585,5 +583,5 @@ $hits = $index->find($queryStr);
             restoration and roll-forward operations if necessary. This practice dramatically reduces
             index restoration time.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

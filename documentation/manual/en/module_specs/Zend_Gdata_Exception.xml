@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.gdata.exception">
-    <title>Catching Gdata Exceptions</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.exception"><info><title>Catching Gdata Exceptions</title></info>
+    
 
     <para>
         The <classname>Zend_Gdata_App_Exception</classname> class is a base class
@@ -10,15 +11,15 @@
         <classname>Zend_Gdata_App_Exception</classname>.
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 try {
     $client =
         Zend_Gdata_ClientLogin::getHttpClient($username, $password);
 } catch(Zend_Gdata_App_Exception $ex) {
     // Report the exception to the user
-    die($ex->getMessage());
+    die($ex-&gt;getMessage());
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         The following exception subclasses are used by <classname>Zend_Gdata</classname>:
@@ -46,7 +47,7 @@ try {
                     indicates that an <acronym>HTTP</acronym> request was not successful.
                     Provides the ability to get the full <classname>Zend_Http_Response</classname>
                     object to determine the exact cause of the failure in
-                    cases where <command>$e->getMessage()</command> does not provide
+                    cases where <command>$e-&gt;getMessage()</command> does not provide
                     enough details.
                 </para>
             </listitem>
@@ -75,7 +76,7 @@ try {
                     image, the response can be included with the next
                     ClientLogin attempt.The user can alternatively be
                     directed to this website:
-                    <ulink url="https://www.google.com/accounts/DisplayUnlockCaptcha"/>
+                    <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.google.com/accounts/DisplayUnlockCaptcha">https://www.google.com/accounts/DisplayUnlockCaptcha</uri>
                     Further information can be found in the
                     <link linkend="zend.gdata.clientlogin">ClientLogin documentation</link>.
                 </para>
@@ -89,7 +90,7 @@ try {
         exception subclasses are thrown by which methods in <classname>Zend_Gdata</classname>.
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 try {
     $client = Zend_Gdata_ClientLogin::getHttpClient($username,
                                                     $password,
@@ -100,6 +101,6 @@ try {
     ...
 } catch(Zend_Gdata_App_HttpException $httpEx) {
     // Google Data servers cannot be contacted.
-    die($httpEx->getMessage);}
-]]></programlisting>
-</sect1>
+    die($httpEx-&gt;getMessage);}
+</programlisting>
+</section>

@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.router.routes.standard">
-    <title>Zend_Controller_Router_Route</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.router.routes.standard"><info><title>Zend_Controller_Router_Route</title></info>
+    
 
     <para>
         <classname>Zend_Controller_Router_Route</classname> is the standard framework
@@ -19,17 +20,17 @@
         functionality could look like:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $route = new Zend_Controller_Router_Route(
     'author/:username',
     array(
-        'controller' => 'profile',
-        'action'     => 'userinfo'
+        'controller' =&gt; 'profile',
+        'action'     =&gt; 'userinfo'
     )
 );
 
-$router->addRoute('user', $route);
-]]></programlisting>
+$router-&gt;addRoute('user', $route);
+</programlisting>
 
     <para>
         The first parameter in the <classname>Zend_Controller_Router_Route</classname>
@@ -40,8 +41,8 @@ $router->addRoute('user', $route);
         prepending a colon to the variable name: <command>:username</command>.
     </para>
 
-    <note>
-        <title>Character Usage</title>
+    <note><info><title>Character Usage</title></info>
+        
 
         <para>
             The current implementation allows you to use any character (except a
@@ -61,13 +62,13 @@ $router->addRoute('user', $route);
         the following key and value pairs:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $values = array(
-    'username'   => 'martel',
-    'controller' => 'profile',
-    'action'     => 'userinfo'
+    'username'   =&gt; 'martel',
+    'controller' =&gt; 'profile',
+    'action'     =&gt; 'userinfo'
 );
-]]></programlisting>
+</programlisting>
 
     <para>
         Later on, <classname>Zend_Controller_Dispatcher_Standard</classname> should invoke
@@ -78,33 +79,33 @@ $values = array(
         <methodname>Zend_Controller_Request::getParam()</methodname> methods:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 public function userinfoAction()
 {
-    $request = $this->getRequest();
-    $username = $request->getParam('username');
+    $request = $this-&gt;getRequest();
+    $username = $request-&gt;getParam('username');
 
-    $username = $this->_getParam('username');
+    $username = $this-&gt;_getParam('username');
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         Route definition can contain one more special character - a wildcard
         - represented by '*' symbol. It is used to gather parameters similarly
-        to the default Module route (var => value pairs defined in the <acronym>URI</acronym>). The
+        to the default Module route (var =&gt; value pairs defined in the <acronym>URI</acronym>). The
         following route more-or-less mimics the Module route behavior:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $route = new Zend_Controller_Router_Route(
     ':module/:controller/:action/*',
-    array('module' => 'default')
+    array('module' =&gt; 'default')
 );
-$router->addRoute('default', $route);
-]]></programlisting>
+$router-&gt;addRoute('default', $route);
+</programlisting>
 
-    <sect4 id="zend.controller.router.routes.standard.variable-defaults">
-        <title>Variable Defaults</title>
+    <section xml:id="zend.controller.router.routes.standard.variable-defaults"><info><title>Variable Defaults</title></info>
+        
 
         <para>
             Every variable in the route can have a default and this is what the
@@ -113,13 +114,13 @@ $router->addRoute('default', $route);
             representing variable names and with values as desired defaults:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $route = new Zend_Controller_Router_Route(
     'archive/:year',
-    array('year' => 2006)
+    array('year' =&gt; 2006)
 );
-$router->addRoute('archive', $route);
-]]></programlisting>
+$router-&gt;addRoute('archive', $route);
+</programlisting>
 
         <para>
             The above route will match <acronym>URL</acronym>s like
@@ -138,27 +139,27 @@ $router->addRoute('archive', $route);
             action as the route's defaults:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $route = new Zend_Controller_Router_Route(
     'archive/:year',
     array(
-        'year'       => 2006,
-        'controller' => 'archive',
-        'action'     => 'show'
+        'year'       =&gt; 2006,
+        'controller' =&gt; 'archive',
+        'action'     =&gt; 'show'
     )
 );
-$router->addRoute('archive', $route);
-]]></programlisting>
+$router-&gt;addRoute('archive', $route);
+</programlisting>
 
         <para>
             This route will then result in dispatching to the method
             <methodname>showAction()</methodname> of the class
             <classname>ArchiveController</classname>.
         </para>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.router.routes.standard.variable-requirements">
-        <title>Variable Requirements</title>
+    <section xml:id="zend.controller.router.routes.standard.variable-requirements"><info><title>Variable Requirements</title></info>
+        
 
         <para>
             One can add a third parameter to the
@@ -167,18 +168,18 @@ $router->addRoute('archive', $route);
             expression:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $route = new Zend_Controller_Router_Route(
     'archive/:year',
     array(
-        'year'       => 2006,
-        'controller' => 'archive',
-        'action'     => 'show'
+        'year'       =&gt; 2006,
+        'controller' =&gt; 'archive',
+        'action'     =&gt; 'show'
     ),
-    array('year' => '\d+')
+    array('year' =&gt; '\d+')
 );
-$router->addRoute('archive', $route);
-]]></programlisting>
+$router-&gt;addRoute('archive', $route);
+</programlisting>
 
         <para>
             With a route defined like above, the router will match it only when
@@ -187,10 +188,10 @@ $router->addRoute('archive', $route);
             <filename>http://example.com/archive/test</filename> will not be matched and
             control will be passed to the next route in the chain instead.
         </para>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.router.routes.standard.translated-segments">
-        <title>Translated segments</title>
+    <section xml:id="zend.controller.router.routes.standard.translated-segments"><info><title>Translated segments</title></info>
+        
 
         <para>
             The standard route supports translated segments. To use this
@@ -265,8 +266,8 @@ $router->addRoute('archive', $route);
             <acronym>URL</acronym> will be reverted to the message ID again.
         </para>
 
-        <note>
-            <title>Message IDs and separate language file</title>
+        <note><info><title>Message IDs and separate language file</title></info>
+            
 
             <para>
                 Occasionally a message ID which you want to use in one
@@ -281,107 +282,104 @@ $router->addRoute('archive', $route);
             translated segment usage:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Prepare the translator
 $translator = new Zend_Translate(
     array(
-        'adapter' => 'array',
-        'content' => array(),
-        'locale'  => 'en'
+        'adapter' =&gt; 'array',
+        'content' =&gt; array(),
+        'locale'  =&gt; 'en'
     )
 );
-$translator->addTranslation(
+$translator-&gt;addTranslation(
     array(
-        'content' =>
+        'content' =&gt;
             array(
-                'archive' => 'archiv',
-                'year'    => 'jahr',
-                'month'   => 'monat',
-                'index'   => 'uebersicht'
+                'archive' =&gt; 'archiv',
+                'year'    =&gt; 'jahr',
+                'month'   =&gt; 'monat',
+                'index'   =&gt; 'uebersicht'
             ),
-        'locale'  => 'de'
+        'locale'  =&gt; 'de'
     )
 );
 
 // Set the current locale for the translator
-$translator->setLocale('en');
+$translator-&gt;setLocale('en');
 
 // Set it as default translator for routes
 Zend_Controller_Router_Route::setDefaultTranslator($translator);
-]]></programlisting>
+</programlisting>
 
         <para>
             This example demonstrates the usage of static segments:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Create the route
 $route = new Zend_Controller_Router_Route(
     '@archive',
     array(
-        'controller' => 'archive',
-        'action'     => 'index'
+        'controller' =&gt; 'archive',
+        'action'     =&gt; 'index'
     )
 );
-$router->addRoute('archive', $route);
+$router-&gt;addRoute('archive', $route);
 
 // Assemble the URL in default locale: archive
-$route->assemble(array());
+$route-&gt;assemble(array());
 
 // Assemble the URL in german: archiv
-$route->assemble(array());
-]]></programlisting>
+$route-&gt;assemble(array());
+</programlisting>
 
         <para>
             You can use the dynamic segments to create a module-route like
             translated version:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Create the route
 $route = new Zend_Controller_Router_Route(
     ':@controller/:@action/*',
     array(
-        'controller' => 'index',
-        'action'     => 'index'
+        'controller' =&gt; 'index',
+        'action'     =&gt; 'index'
     )
 );
-$router->addRoute('archive', $route);
+$router-&gt;addRoute('archive', $route);
 
 // Assemble the URL in default locale: archive/index/foo/bar
-$route->assemble(array('controller' => 'archive', 'foo' => 'bar'));
+$route-&gt;assemble(array('controller' =&gt; 'archive', 'foo' =&gt; 'bar'));
 
 // Assemble the URL in german: archiv/uebersicht/foo/bar
-$route->assemble(array('controller' => 'archive', 'foo' => 'bar'));
-]]></programlisting>
+$route-&gt;assemble(array('controller' =&gt; 'archive', 'foo' =&gt; 'bar'));
+</programlisting>
 
         <para>
             You can also mix static and dynamic segments:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Create the route
 $route = new Zend_Controller_Router_Route(
     '@archive/:@mode/:value',
     array(
-        'mode'       => 'year'
-        'value'      => 2005,
-        'controller' => 'archive',
-        'action'     => 'show'
+        'mode'       =&gt; 'year'
+        'value'      =&gt; 2005,
+        'controller' =&gt; 'archive',
+        'action'     =&gt; 'show'
     ),
-    array('mode'  => '(month|year)'
-          'value' => '\d+')
+    array('mode'  =&gt; '(month|year)'
+          'value' =&gt; '\d+')
 );
-$router->addRoute('archive', $route);
+$router-&gt;addRoute('archive', $route);
 
 // Assemble the URL in default locale: archive/month/5
-$route->assemble(array('mode' => 'month', 'value' => '5'));
+$route-&gt;assemble(array('mode' =&gt; 'month', 'value' =&gt; '5'));
 
 // Assemble the URL in german: archiv/monat/5
-$route->assemble(array('mode' => 'month', 'value' => '5', '@locale' => 'de'));
-]]></programlisting>
-    </sect4>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+$route-&gt;assemble(array('mode' =&gt; 'month', 'value' =&gt; '5', '@locale' =&gt; 'de'));
+</programlisting>
+    </section>
+</section>

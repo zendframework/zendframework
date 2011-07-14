@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.gdata.books">
-    <title>Using the Book Search Data API</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.books"><info><title>Using the Book Search Data API</title></info>
+    
 
     <para>
         The Google Book Search Data <acronym>API</acronym> allows client applications to view
@@ -12,20 +13,20 @@
         Your client application can use the Book Search Data <acronym>API</acronym> to issue
         full-text searches for books and to retrieve standard book information,
         ratings, and reviews. You can also access individual users'
-        <ulink url="http://books.google.com/googlebooks/mylibrary/">library collections and
-            public reviews</ulink>. Finally, your application can submit authenticated requests
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://books.google.com/googlebooks/mylibrary/">library collections and
+            public reviews</link>. Finally, your application can submit authenticated requests
         to enable users to create and modify library collections, ratings, labels,
         reviews, and other account-specific entities.
     </para>
 
     <para>
         For more information on the Book Search Data <acronym>API</acronym>, please refer to the
-        official <ulink url="http://code.google.com/apis/books/gdata/developers_guide_php.html">PHP
-            Developer's Guide</ulink> on code.google.com.
+        official <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/books/gdata/developers_guide_php.html">PHP
+            Developer's Guide</link> on code.google.com.
     </para>
 
-    <sect2 id="zend.gdata.books.authentication">
-        <title>Authenticating to the Book Search service</title>
+    <section xml:id="zend.gdata.books.authentication"><info><title>Authenticating to the Book Search service</title></info>
+        
 
         <para>
             You can access both public and private feeds using the Book Search
@@ -34,14 +35,13 @@
             ratings, or add labels, then your client needs to authenticate before
             requesting private feeds. It can authenticate using either of two
             approaches: AuthSub proxy authentication or ClientLogin username/password
-            authentication. Please refer to the <ulink
-                url="http://code.google.com/apis/books/gdata/developers_guide_php.html#Authentication">Authentication
-                section in the <acronym>PHP</acronym> Developer's Guide</ulink> for more detail.
+            authentication. Please refer to the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/books/gdata/developers_guide_php.html#Authentication">Authentication
+                section in the <acronym>PHP</acronym> Developer's Guide</link> for more detail.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.books.searching_for_books">
-        <title>Searching for books</title>
+    <section xml:id="zend.gdata.books.searching_for_books"><info><title>Searching for books</title></info>
+        
 
         <para>
             The Book Search Data <acronym>API</acronym> provides a number of feeds that list
@@ -63,21 +63,21 @@
             the query term "domino":
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $books = new Zend_Gdata_Books();
-$query = $books->newVolumeQuery();
+$query = $books-&gt;newVolumeQuery();
 
-$query->setQuery('domino');
-$query->setMinViewability('partial_view');
+$query-&gt;setQuery('domino');
+$query-&gt;setMinViewability('partial_view');
 
-$feed = $books->getVolumeFeed($query);
+$feed = $books-&gt;getVolumeFeed($query);
 
 foreach ($feed as $entry) {
-    echo $entry->getVolumeId();
-    echo $entry->getTitle();
-    echo $entry->getViewability();
+    echo $entry-&gt;getVolumeId();
+    echo $entry-&gt;getTitle();
+    echo $entry-&gt;getViewability();
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             The <classname>Query</classname> class, and subclasses like
@@ -86,9 +86,9 @@ foreach ($feed as $entry) {
             equivalent to the following:
         </para>
 
-        <programlisting language="php"><![CDATA[
-http://www.google.com/books/feeds/volumes?q=keyword&amp;min-viewability=partial
-]]></programlisting>
+        <programlisting language="php">
+http://www.google.com/books/feeds/volumes?q=keyword&amp;amp;min-viewability=partial
+</programlisting>
 
         <para>
             Note: Since Book Search results are
@@ -110,8 +110,8 @@ http://www.google.com/books/feeds/volumes?q=keyword&amp;min-viewability=partial
             space). To search for an exact phrase, enclose the phrase in quotation marks.
             For example, to search for books matching the phrase "spy plane", set
             the <property>q</property> parameter to <command>%22spy+plane%22</command>.
-            You can also use any of the <ulink url="http://books.google.com/advanced_book_search">
-            advanced search operators</ulink> supported by Book Search. For example,
+            You can also use any of the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://books.google.com/advanced_book_search">
+            advanced search operators</link> supported by Book Search. For example,
             <command>jane+austen+-inauthor:austen</command> returns matches that mention
             (but are not authored by) Jane Austen.
         </para>
@@ -146,9 +146,8 @@ http://www.google.com/books/feeds/volumes?q=keyword&amp;min-viewability=partial
 
         <para>
             <methodname>setMinViewability()</methodname>: Allows you to filter the results according
-            to the books' <ulink
-                url="http://code.google.com/apis/books/docs/dynamic-links.html#terminology">viewability
-                status</ulink>. This parameter accepts one of three values:
+            to the books' <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/books/docs/dynamic-links.html#terminology">viewability
+                status</link>. This parameter accepts one of three values:
             <emphasis>'none'</emphasis> (the default, returning all matching books regardless of
             viewability), <emphasis>'partial_view'</emphasis> (returning only books
             that the user can preview or view in their entirety), or
@@ -156,13 +155,12 @@ http://www.google.com/books/feeds/volumes?q=keyword&amp;min-viewability=partial
             view in their entirety).
         </para>
 
-        <sect3 id="zend.gdata.books.partner_restrict">
-            <title>Partner Co-Branded Search</title>
+        <section xml:id="zend.gdata.books.partner_restrict"><info><title>Partner Co-Branded Search</title></info>
+            
 
             <para>
-                Google Book Search provides <ulink
-                    url="http://books.google.com/support/partner/bin/answer.py?hl=en&amp;answer=65113">Co-Branded
-                    Search</ulink>, which lets content partners provide full-text search of
+                Google Book Search provides <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://books.google.com/support/partner/bin/answer.py?hl=en&amp;answer=65113">Co-Branded
+                    Search</link>, which lets content partners provide full-text search of
                 their books from their own websites.
             </para>
 
@@ -174,41 +172,41 @@ http://www.google.com/books/feeds/volumes?q=keyword&amp;min-viewability=partial
                 <acronym>URL</acronym>:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 http://www.google.com/books/p/PARTNER_COBRAND_ID?q=ball
-]]></programlisting>
+</programlisting>
 
             <para>
                 then you can obtain the same results using the Book Search Data
                 <acronym>API</acronym> at the following <acronym>URL</acronym>:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 http://www.google.com/books/feeds/p/PARTNER_COBRAND_ID/volumes?q=ball+-soccer
-]]></programlisting>
+</programlisting>
 
             <para>
                 To specify an alternate <acronym>URL</acronym> when querying a volume feed, you can
                 provide an extra parameter to <methodname>newVolumeQuery()</methodname>
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $query =
-    $books->newVolumeQuery('http://www.google.com/books/p/PARTNER_COBRAND_ID');
-]]></programlisting>
+    $books-&gt;newVolumeQuery('http://www.google.com/books/p/PARTNER_COBRAND_ID');
+</programlisting>
 
             <para>
                 For additional information or support, visit our
-                <ulink url="http://books.google.com/support/partner/">Partner help center</ulink>.
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://books.google.com/support/partner/">Partner help center</link>.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.gdata.books.community_features">
-        <title>Using community features</title>
+    <section xml:id="zend.gdata.books.community_features"><info><title>Using community features</title></info>
+        
 
-        <sect3 id="zend.gdata.books.adding_ratings">
-            <title>Adding a rating</title>
+        <section xml:id="zend.gdata.books.adding_ratings"><info><title>Adding a rating</title></info>
+            
 
             <para>
                 A user can add a rating to a book. Book Search uses a 1-5
@@ -222,26 +220,25 @@ $query =
                 example below, we start from an empty <classname>VolumeEntry</classname> object.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $entry = new Zend_Gdata_Books_VolumeEntry();
-$entry->setId(new Zend_Gdata_App_Extension_Id(VOLUME_ID));
-$entry->setRating(new Zend_Gdata_Extension_Rating(3, 1, 5, 1));
-$books->insertVolume($entry, Zend_Gdata_Books::MY_ANNOTATION_FEED_URI);
-]]></programlisting>
-        </sect3>
+$entry-&gt;setId(new Zend_Gdata_App_Extension_Id(VOLUME_ID));
+$entry-&gt;setRating(new Zend_Gdata_Extension_Rating(3, 1, 5, 1));
+$books-&gt;insertVolume($entry, Zend_Gdata_Books::MY_ANNOTATION_FEED_URI);
+</programlisting>
+        </section>
 
-        <sect3 id="zend.gdata.books.reviews">
-            <title>Reviews</title>
+        <section xml:id="zend.gdata.books.reviews"><info><title>Reviews</title></info>
+            
 
             <para>
                 In addition to ratings, authenticated users can submit reviews or
                 edit their reviews. For information on how to request previously
-                submitted reviews, see <ulink
-                    url="#zend.gdata.books.retrieving_annotations">Retrieving annotations</ulink>.
+                submitted reviews, see <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#zend.gdata.books.retrieving_annotations">Retrieving annotations</link>.
             </para>
 
-            <sect4 id="zend.gdata.books.adding_review">
-                <title>Adding a review</title>
+            <section xml:id="zend.gdata.books.adding_review"><info><title>Adding a review</title></info>
+                
 
                 <para>
                     To add a review, add a <classname>Review</classname> object to a
@@ -250,18 +247,18 @@ $books->insertVolume($entry, Zend_Gdata_Books::MY_ANNOTATION_FEED_URI);
                     <classname>VolumeEntry</classname> object.
                 </para>
 
-                <programlisting language="php"><![CDATA[
-$annotationUrl = $entry->getAnnotationLink()->href;
+                <programlisting language="php">
+$annotationUrl = $entry-&gt;getAnnotationLink()-&gt;href;
 $review        = new Zend_Gdata_Books_Extension_Review();
 
-$review->setText("This book is amazing!");
-$entry->setReview($review);
-$books->insertVolume($entry, $annotationUrl);
-]]></programlisting>
-            </sect4>
+$review-&gt;setText("This book is amazing!");
+$entry-&gt;setReview($review);
+$books-&gt;insertVolume($entry, $annotationUrl);
+</programlisting>
+            </section>
 
-            <sect4 id="zend.gdata.books.editing_review">
-                <title>Editing a review</title>
+            <section xml:id="zend.gdata.books.editing_review"><info><title>Editing a review</title></info>
+                
 
                 <para>
                     To update an existing review, first you retrieve the
@@ -269,29 +266,29 @@ $books->insertVolume($entry, $annotationUrl);
                     then you submit it to the annotation feed.
                 </para>
 
-                <programlisting language="php"><![CDATA[
-$entryUrl = $entry->getId()->getText();
+                <programlisting language="php">
+$entryUrl = $entry-&gt;getId()-&gt;getText();
 $review   = new Zend_Gdata_Books_Extension_Review();
 
-$review->setText("This book is actually not that good!");
-$entry->setReview($review);
-$books->updateVolume($entry, $entryUrl);
-]]></programlisting>
-            </sect4>
-        </sect3>
+$review-&gt;setText("This book is actually not that good!");
+$entry-&gt;setReview($review);
+$books-&gt;updateVolume($entry, $entryUrl);
+</programlisting>
+            </section>
+        </section>
 
-        <sect3 id="zend.gdata.books.labels">
-            <title>Labels</title>
+        <section xml:id="zend.gdata.books.labels"><info><title>Labels</title></info>
+            
 
             <para>
                 You can use the Book Search Data <acronym>API</acronym> to label volumes with
                 keywords. A user can submit, retrieve and modify labels. See
-                <ulink url="#zend.gdata.books.retrieving_annotations">Retrieving
-                    annotations</ulink> for how to read previously submitted labels.
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#zend.gdata.books.retrieving_annotations">Retrieving
+                    annotations</link> for how to read previously submitted labels.
             </para>
 
-            <sect4 id="zend.gdata.books.submitting_labels">
-                <title>Submitting a set of labels</title>
+            <section xml:id="zend.gdata.books.submitting_labels"><info><title>Submitting a set of labels</title></info>
+                
 
                 <para>
                     To submit labels, add a <classname>Category</classname> object
@@ -299,19 +296,19 @@ $books->updateVolume($entry, $entryUrl);
                     <classname>VolumeEntry</classname> and post it to the annotation feed.
                 </para>
 
-                <programlisting language="php"><![CDATA[
-$annotationUrl = $entry->getAnnotationLink()->href;
+                <programlisting language="php">
+$annotationUrl = $entry-&gt;getAnnotationLink()-&gt;href;
 $category      = new Zend_Gdata_App_Extension_Category(
     'rated',
     'http://schemas.google.com/books/2008/labels');
-$entry->setCategory(array($category));
-$books->insertVolume($entry, Zend_Gdata_Books::MY_ANNOTATION_FEED_URI);
-]]></programlisting>
-            </sect4>
-        </sect3>
+$entry-&gt;setCategory(array($category));
+$books-&gt;insertVolume($entry, Zend_Gdata_Books::MY_ANNOTATION_FEED_URI);
+</programlisting>
+            </section>
+        </section>
 
-        <sect3 id="zend.gdata.books.retrieving_annotations">
-            <title>Retrieving annotations: reviews, ratings, and labels</title>
+        <section xml:id="zend.gdata.books.retrieving_annotations"><info><title>Retrieving annotations: reviews, ratings, and labels</title></info>
+            
 
             <para>
                 You can use the Book Search Data <acronym>API</acronym> to retrieve annotations
@@ -322,32 +319,32 @@ $books->insertVolume($entry, Zend_Gdata_Books::MY_ANNOTATION_FEED_URI);
                 ID.
             </para>
 
-            <programlisting language="php"><![CDATA[
-$feed = $books->getVolumeFeed(
+            <programlisting language="php">
+$feed = $books-&gt;getVolumeFeed(
             'http://www.google.com/books/feeds/users/USER_ID/volumes');
-<i>(or)</i>
-$feed = $books->getUserAnnotationFeed();
+&lt;i&gt;(or)&lt;/i&gt;
+$feed = $books-&gt;getUserAnnotationFeed();
 
 // print title(s) and rating value
 foreach ($feed as $entry) {
-    foreach ($feed->getTitles() as $title) {
+    foreach ($feed-&gt;getTitles() as $title) {
         echo $title;
     }
-    if ($entry->getRating()) {
-        echo 'Rating: ' . $entry->getRating()->getAverage();
+    if ($entry-&gt;getRating()) {
+        echo 'Rating: ' . $entry-&gt;getRating()-&gt;getAverage();
     }
 }
-]]></programlisting>
+</programlisting>
 
             <para>
                 For a list of the supported query parameters, see the
-                <ulink url="#zend.gdata.books.query_parameters">query parameters</ulink>
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#zend.gdata.books.query_parameters">query parameters</link>
                 section.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.books.deleting_annotations">
-            <title>Deleting Annotations</title>
+        <section xml:id="zend.gdata.books.deleting_annotations"><info><title>Deleting Annotations</title></info>
+            
 
             <para>
                 If you retrieved an annotation entry containing ratings,
@@ -355,14 +352,14 @@ foreach ($feed as $entry) {
                 by calling <methodname>deleteVolume()</methodname> on that entry.
             </para>
 
-            <programlisting language="php"><![CDATA[
-$books->deleteVolume($entry);
-]]></programlisting>
-        </sect3>
-    </sect2>
+            <programlisting language="php">
+$books-&gt;deleteVolume($entry);
+</programlisting>
+        </section>
+    </section>
 
-    <sect2 id="zend.gdata.books.sharing_with_my_library">
-        <title>Book collections and My Library</title>
+    <section xml:id="zend.gdata.books.sharing_with_my_library"><info><title>Book collections and My Library</title></info>
+        
 
         <para>
             Google Book Search provides a number of user-specific
@@ -373,12 +370,12 @@ $books->deleteVolume($entry);
             The most important collection is the user's My Library, which
             represents the books the user would like to remember, organize, and
             share with others. This is the collection the user sees when accessing
-            his or her <ulink url="http://books.google.com/books?op=library">My Library
-                page</ulink>.
+            his or her <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://books.google.com/books?op=library">My Library
+                page</link>.
         </para>
 
-        <sect3 id="zend.gdata.books.retrieving_books_in_library">
-            <title>Retrieving books in a user's library</title>
+        <section xml:id="zend.gdata.books.retrieving_books_in_library"><info><title>Retrieving books in a user's library</title></info>
+            
 
             <para>
                 The following sections describe how to retrieve a list
@@ -390,8 +387,8 @@ $books->deleteVolume($entry);
                 You can query a Book Search public feed without authentication.
             </para>
 
-            <sect4 id="zend.gdata.books.retrieving_all_books_in_library">
-                <title>Retrieving all books in a user's library</title>
+            <section xml:id="zend.gdata.books.retrieving_all_books_in_library"><info><title>Retrieving all books in a user's library</title></info>
+                
 
                 <para>
                     To retrieve the user's books, send a query to the
@@ -399,24 +396,23 @@ $books->deleteVolume($entry);
                     user, use <emphasis>me</emphasis> in place of <constant>USER_ID</constant>.
                 </para>
 
-                <programlisting language="php"><![CDATA[
-$feed = $books->getUserLibraryFeed();
-]]></programlisting>
+                <programlisting language="php">
+$feed = $books-&gt;getUserLibraryFeed();
+</programlisting>
 
                 <para>
                     Note: The feed may not contain all of the user's books, because
                     there's a default limit on the number of results returned. For
                     more information, see the <property>max-results</property> query parameter in
-                    <ulink url="#zend.gdata.books.searching_for_books">Searching for books</ulink>.
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#zend.gdata.books.searching_for_books">Searching for books</link>.
                 </para>
-            </sect4>
+            </section>
 
-            <sect4 id="zend.gdata.books.retrieving_books_in_library_with_query">
-                <title>Searching for books in a user's library</title>
+            <section xml:id="zend.gdata.books.retrieving_books_in_library_with_query"><info><title>Searching for books in a user's library</title></info>
+                
 
                 <para>
-                    Just as you can <ulink
-                        url="#zend.gdata.books.searching_for_books">search across all books</ulink>,
+                    Just as you can <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#zend.gdata.books.searching_for_books">search across all books</link>,
                     you can do a full-text search over just the books in a
                     user's library. To do this, just set the appropriate
                     paramters on the <classname>VolumeQuery</classname> object.
@@ -427,45 +423,44 @@ $feed = $books->getUserLibraryFeed();
                     your library that contain the word "bear":
                 </para>
 
-                <programlisting language="php"><![CDATA[
-$query = $books->newVolumeQuery(
+                <programlisting language="php">
+$query = $books-&gt;newVolumeQuery(
     'http://www.google.com/books/feeds/users' .
     '/USER_ID/collections/library/volumes');
-$query->setQuery('bear');
-$feed = $books->getVolumeFeed($query);
-]]></programlisting>
+$query-&gt;setQuery('bear');
+$feed = $books-&gt;getVolumeFeed($query);
+</programlisting>
 
                 <para>
                     For a list of the supported query parameters, see the
-                    <ulink url="#zend.gdata.books.query_pParameters">query parameters</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#zend.gdata.books.query_pParameters">query parameters</link>
                     section. In addition, you can search for books that have been
-                    <ulink url="#zend.gdata.books.labels">labeled by the user</ulink>:
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#zend.gdata.books.labels">labeled by the user</link>:
                 </para>
 
-                <programlisting language="php"><![CDATA[
-$query = $books->newVolumeQuery(
+                <programlisting language="php">
+$query = $books-&gt;newVolumeQuery(
     'http://www.google.com/books/feeds/users/' .
     'USER_ID/collections/library/volumes');
-$query->setCategory(
-$query->setCategory('favorites');
-$feed = $books->getVolumeFeed($query);
-]]></programlisting>
-            </sect4>
-        </sect3>
+$query-&gt;setCategory(
+$query-&gt;setCategory('favorites');
+$feed = $books-&gt;getVolumeFeed($query);
+</programlisting>
+            </section>
+        </section>
 
-        <sect3 id="zend.gdata.books.updating_library">
-            <title>Updating books in a user's library</title>
+        <section xml:id="zend.gdata.books.updating_library"><info><title>Updating books in a user's library</title></info>
+            
 
             <para>
                 You can use the Book Search Data <acronym>API</acronym> to add a book to, or remove
                 a book from, a user's library. Ratings, reviews, and labels are valid
                 across all the collections of a user, and are thus edited using the
-                annotation feed (see <ulink
-                    url="#zend.gdata.books.community_features">Using community features</ulink>).
+                annotation feed (see <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#zend.gdata.books.community_features">Using community features</link>).
             </para>
 
-            <sect4 id="zend.gdata.books.library_book_add">
-                <title>Adding a book to a library</title>
+            <section xml:id="zend.gdata.books.library_book_add"><info><title>Adding a book to a library</title></info>
+                
 
                 <para>
                     After authenticating, you can add books to the current user's library.
@@ -480,30 +475,30 @@ $feed = $books->getVolumeFeed($query);
                     The following example creates a new entry and adds it to the library:
                 </para>
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 $entry = new Zend_Gdata_Books_VolumeEntry();
-$entry->setId(new Zend_Gdata_App_Extension_Id(VOLUME_ID));
-$books->insertVolume(
+$entry-&gt;setId(new Zend_Gdata_App_Extension_Id(VOLUME_ID));
+$books-&gt;insertVolume(
     $entry,
     Zend_Gdata_Books::MY_LIBRARY_FEED_URI
 );
-]]></programlisting>
+</programlisting>
 
                 <para>
                     The following example adds an existing
                     <classname>VolumeEntry</classname> object to the library:
                 </para>
 
-                <programlisting language="php"><![CDATA[
-$books->insertVolume(
+                <programlisting language="php">
+$books-&gt;insertVolume(
     $entry,
     Zend_Gdata_Books::MY_LIBRARY_FEED_URI
 );
-]]></programlisting>
-            </sect4>
+</programlisting>
+            </section>
 
-            <sect4 id="zend.gdata.books.library_book_remove">
-                <title>Removing a book from a library</title>
+            <section xml:id="zend.gdata.books.library_book_remove"><info><title>Removing a book from a library</title></info>
+                
 
                 <para>
                     To remove a book from a user's library, call
@@ -511,10 +506,10 @@ $books->insertVolume(
                     <classname>VolumeEntry</classname> object.
                 </para>
 
-                <programlisting language="php"><![CDATA[
-$books->deleteVolume($entry);
-]]></programlisting>
-            </sect4>
-        </sect3>
-    </sect2>
-</sect1>
+                <programlisting language="php">
+$books-&gt;deleteVolume($entry);
+</programlisting>
+            </section>
+        </section>
+    </section>
+</section>

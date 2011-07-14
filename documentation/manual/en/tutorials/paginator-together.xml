@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.paginator.together">
-    <title>Putting it all Together</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.paginator.together"><info><title>Putting it all Together</title></info>
+    
 
     <para>
         You have seen how to create a Paginator object, how to render the items on the current page,
@@ -22,7 +23,7 @@
         purposes only. A real application should not use controllers in this manner.
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 class IndexController extends Zend_Controller_Action
 {
     public function indexAction()
@@ -35,19 +36,19 @@ class IndexController extends Zend_Controller_Action
         $db = Zend_Registry::get('db');
 
         // Create a select object which fetches blog posts, sorted decending by date of creation
-        $select = $db->select()->from('posts')->sort('date_created DESC');
+        $select = $db-&gt;select()-&gt;from('posts')-&gt;sort('date_created DESC');
 
         // Create a Paginator for the blog posts query
         $paginator = Zend_Paginator::factory($select);
 
         // Read the current page number from the request. Default to 1 if no explicit page number is provided.
-        $paginator->setCurrentPageNumber($this->_getParam('page', 1));
+        $paginator-&gt;setCurrentPageNumber($this-&gt;_getParam('page', 1));
 
         // Assign the Paginator object to the view
-        $this->view->paginator = $paginator;
+        $this-&gt;view-&gt;paginator = $paginator;
     }
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         The following view script is the index.phtml view script for the IndexController's
@@ -55,17 +56,17 @@ class IndexController extends Zend_Controller_Action
         ScrollingStyle.
     </para>
 
-    <programlisting language="php"><![CDATA[
-<ul>
-<?php
+    <programlisting language="php">
+&lt;ul&gt;
+&lt;?php
 // Render each the title of each post for the current page in a list-item
-foreach ($this->paginator as $item) {
-    echo '<li>' . $item->title . '</li>';
+foreach ($this-&gt;paginator as $item) {
+    echo '&lt;li&gt;' . $item-&gt;title . '&lt;/li&gt;';
 }
-?>
-</ul>
-<?php echo $this->paginator; ?>
-]]></programlisting>
+?&gt;
+&lt;/ul&gt;
+&lt;?php echo $this-&gt;paginator; ?&gt;
+</programlisting>
 
     <para>
         Now navigate to your project's index and see Paginator in action. What we have discussed
@@ -73,4 +74,4 @@ foreach ($this->paginator as $item) {
         <acronym>API</acronym> documentation can tell you more about what you can do with
         <classname>Zend_Paginator</classname>.
     </para>
-</sect1>
+</section>

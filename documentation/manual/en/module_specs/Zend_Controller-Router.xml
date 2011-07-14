@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.router" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>The Standard Router</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.controller.router.introduction">
-        <title>Introduction</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.router"><info><title>The Standard Router</title></info>
+    
+
+    <section xml:id="zend.controller.router.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_Controller_Router_Rewrite</classname> is the standard
@@ -28,36 +29,36 @@
             with a single Apache mod_rewrite rule (one of):
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 RewriteEngine on
 RewriteRule !\.(js|ico|gif|jpg|png|css|html)$ index.php
-]]></programlisting>
+</programlisting>
 
         <para>
             or (preferred):
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
-]]></programlisting>
+</programlisting>
 
         <para>
             The rewrite router can also be used with the <acronym>IIS</acronym> webserver (versions
-            &lt;= 7.0) if <ulink url="http://www.isapirewrite.com">Isapi_Rewrite</ulink> has been
+            &lt;= 7.0) if <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.isapirewrite.com">Isapi_Rewrite</link> has been
             installed as an Isapi extension with the following rewrite rule:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.php [I]
-]]></programlisting>
+</programlisting>
 
-        <note>
-            <title>IIS Isapi_Rewrite</title>
+        <note><info><title>IIS Isapi_Rewrite</title></info>
+            
 
             <para>
                 When using <acronym>IIS</acronym>, <varname>$_SERVER['REQUEST_URI']</varname> will
@@ -73,49 +74,49 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
             and it can be configured as follows:
         </para>
 
-        <programlisting language="xml"><![CDATA[
-<?xml version="1.0" encoding="UTF-8"?>
-<configuration>
-     <system.webServer>
-         <rewrite>
-             <rules>
-                 <rule name="Imported Rule 1" stopProcessing="true">
-                     <match url="^.*$" />
-                     <conditions logicalGrouping="MatchAny">
-                         <add input="{REQUEST_FILENAME}"
+        <programlisting language="xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;configuration&gt;
+     &lt;system.webServer&gt;
+         &lt;rewrite&gt;
+             &lt;rules&gt;
+                 &lt;rule name="Imported Rule 1" stopProcessing="true"&gt;
+                     &lt;match url="^.*$" /&gt;
+                     &lt;conditions logicalGrouping="MatchAny"&gt;
+                         &lt;add input="{REQUEST_FILENAME}"
                              matchType="IsFile" pattern=""
-                             ignoreCase="false" />
-                         <add input="{REQUEST_FILENAME}"
+                             ignoreCase="false" /&gt;
+                         &lt;add input="{REQUEST_FILENAME}"
                              matchType="IsDirectory"
-                             pattern="" ignoreCase="false" />
-                     </conditions>
-                     <action type="None" />
-                 </rule>
-                 <rule name="Imported Rule 2" stopProcessing="true">
-                     <match url="^.*$" />
-                     <action type="Rewrite" url="index.php" />
-                 </rule>
-             </rules>
-         </rewrite>
-     </system.webServer>
-</configuration>
-]]></programlisting>
+                             pattern="" ignoreCase="false" /&gt;
+                     &lt;/conditions&gt;
+                     &lt;action type="None" /&gt;
+                 &lt;/rule&gt;
+                 &lt;rule name="Imported Rule 2" stopProcessing="true"&gt;
+                     &lt;match url="^.*$" /&gt;
+                     &lt;action type="Rewrite" url="index.php" /&gt;
+                 &lt;/rule&gt;
+             &lt;/rules&gt;
+         &lt;/rewrite&gt;
+     &lt;/system.webServer&gt;
+&lt;/configuration&gt;
+</programlisting>
 
         <para>
             If using Lighttpd, the following rewrite rule is valid:
         </para>
 
-        <programlisting language="lighttpd"><![CDATA[
+        <programlisting language="lighttpd">
 url.rewrite-once = (
-    ".*\?(.*)$" => "/index.php?$1",
-    ".*\.(js|ico|gif|jpg|png|css|html)$" => "$0",
-    "" => "/index.php"
+    ".*\?(.*)$" =&gt; "/index.php?$1",
+    ".*\.(js|ico|gif|jpg|png|css|html)$" =&gt; "$0",
+    "" =&gt; "/index.php"
 )
-]]></programlisting>
-    </sect2>
+</programlisting>
+    </section>
 
-    <sect2 id="zend.controller.router.usage">
-        <title>Using a Router</title>
+    <section xml:id="zend.controller.router.usage"><info><title>Using a Router</title></info>
+        
 
         <para>
             To properly use the rewrite router you have to instantiate it, add
@@ -123,21 +124,21 @@ url.rewrite-once = (
             following code illustrates the procedure:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Create a router
 
-$router = $ctrl->getRouter(); // returns a rewrite router by default
-$router->addRoute(
+$router = $ctrl-&gt;getRouter(); // returns a rewrite router by default
+$router-&gt;addRoute(
     'user',
     new Zend_Controller_Router_Route('user/:username',
-                                     array('controller' => 'user',
-                                           'action' => 'info'))
+                                     array('controller' =&gt; 'user',
+                                           'action' =&gt; 'info'))
 );
-]]></programlisting>
-    </sect2>
+</programlisting>
+    </section>
 
-    <sect2 id="zend.controller.router.basic">
-        <title>Basic Rewrite Router Operation</title>
+    <section xml:id="zend.controller.router.basic"><info><title>Basic Rewrite Router Operation</title></info>
+        
 
         <para>
             The heart of the RewriteRouter is the definition of user defined
@@ -146,10 +147,10 @@ $router->addRoute(
             <classname>Zend_Controller_Router_Route_Interface</classname>. Eg.:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$router->addRoute('user',
+        <programlisting language="php">
+$router-&gt;addRoute('user',
                   new Zend_Controller_Router_Route('user/:username'));
-]]></programlisting>
+</programlisting>
 
         <para>
             Rewrite Router comes with six basic types of routes (one of which
@@ -159,43 +160,37 @@ $router->addRoute('user',
         <itemizedlist mark="opencircle">
             <listitem>
                 <para>
-                    <link
-                        linkend="zend.controller.router.routes.standard">Zend_Controller_Router_Route</link>
+                    <link linkend="zend.controller.router.routes.standard">Zend_Controller_Router_Route</link>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <link
-                        linkend="zend.controller.router.routes.static">Zend_Controller_Router_Route_Static</link>
+                    <link linkend="zend.controller.router.routes.static">Zend_Controller_Router_Route_Static</link>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <link
-                        linkend="zend.controller.router.routes.regex">Zend_Controller_Router_Route_Regex</link>
+                    <link linkend="zend.controller.router.routes.regex">Zend_Controller_Router_Route_Regex</link>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <link
-                        linkend="zend.controller.router.routes.hostname">Zend_Controller_Router_Route_Hostname</link>
+                    <link linkend="zend.controller.router.routes.hostname">Zend_Controller_Router_Route_Hostname</link>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <link
-                        linkend="zend.controller.router.routes.chain">Zend_Controller_Router_Route_Chain</link>
+                    <link linkend="zend.controller.router.routes.chain">Zend_Controller_Router_Route_Chain</link>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <link
-                        linkend="zend.controller.router.default-routes">Zend_Controller_Router_Rewrite</link>
+                    <link linkend="zend.controller.router.default-routes">Zend_Controller_Router_Rewrite</link>
                     *
                 </para>
             </listitem>
@@ -221,10 +216,10 @@ $router->addRoute('user',
                 <classname>Zend_View</classname> url helper:
             </para>
 
-            <programlisting language="php"><![CDATA[
-<a href=
-"<?php echo $this->url(array('username' => 'martel'), 'user') ?>">Martel</a>
-]]></programlisting>
+            <programlisting language="php">
+&lt;a href=
+"&lt;?php echo $this-&gt;url(array('username' =&gt; 'martel'), 'user') ?&gt;"&gt;Martel&lt;/a&gt;
+</programlisting>
 
             <para>
                 Which would result in the href: <filename>user/martel</filename>.
@@ -249,8 +244,8 @@ $router->addRoute('user',
             <methodname>getCurrentRoute()</methodname>.
         </para>
 
-        <note>
-            <title>Reverse Matching</title>
+        <note><info><title>Reverse Matching</title></info>
+            
 
             <para>
                 Routes are matched in reverse order so make sure your most
@@ -258,8 +253,8 @@ $router->addRoute('user',
             </para>
         </note>
 
-        <note>
-            <title>Returned Values</title>
+        <note><info><title>Returned Values</title></info>
+            
 
             <para>
                 Values returned from routing come from <acronym>URL</acronym> parameters or user
@@ -276,8 +271,8 @@ $router->addRoute('user',
             action to dispatch to.
         </para>
 
-        <note>
-            <title>Special Variables</title>
+        <note><info><title>Special Variables</title></info>
+            
 
             <para>
                 The names of these special variables may be different if you
@@ -288,10 +283,10 @@ $router->addRoute('user',
             </para>
         </note>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.router.default-routes">
-        <title>Default Routes</title>
+    <section xml:id="zend.controller.router.default-routes"><info><title>Default Routes</title></info>
+        
 
         <para>
             <classname>Zend_Controller_Router_Rewrite</classname> comes preconfigured with a default
@@ -307,13 +302,13 @@ $router->addRoute('user',
             Some examples of how such routes are matched:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Assuming the following:
-$ctrl->setControllerDirectory(
+$ctrl-&gt;setControllerDirectory(
     array(
-        'default' => '/path/to/default/controllers',
-        'news'    => '/path/to/news/controllers',
-        'blog'    => '/path/to/blog/controllers'
+        'default' =&gt; '/path/to/default/controllers',
+        'news'    =&gt; '/path/to/news/controllers',
+        'blog'    =&gt; '/path/to/blog/controllers'
     )
 );
 
@@ -343,7 +338,7 @@ http://example/blog/archive/list/sort/alpha/date/desc
     action     == list
     sort       == alpha
     date       == desc
-]]></programlisting>
+</programlisting>
 
         <para>
             The default route is simply a
@@ -352,12 +347,12 @@ http://example/blog/archive/list/sort/alpha/date/desc
             more-or-less like below:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $compat = new Zend_Controller_Router_Route_Module(array(),
                                                   $dispatcher,
                                                   $request);
-$this->addRoute('default', $compat);
-]]></programlisting>
+$this-&gt;addRoute('default', $compat);
+</programlisting>
 
         <para>
             If you do not want this particular default route in your routing
@@ -366,14 +361,14 @@ $this->addRoute('default', $compat);
             altogether by using <methodname>removeDefaultRoutes()</methodname>:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Remove any default routes
-$router->removeDefaultRoutes();
-]]></programlisting>
-    </sect2>
+$router-&gt;removeDefaultRoutes();
+</programlisting>
+    </section>
 
-    <sect2 id="zend.controller.router.rewritebase">
-        <title>Base URL and Subdirectories</title>
+    <section xml:id="zend.controller.router.rewritebase"><info><title>Base URL and Subdirectories</title></info>
+        
 
         <para>
             The rewrite router can be used in subdirectories (e.g.,
@@ -388,17 +383,16 @@ $router->removeDefaultRoutes();
             Should the base <acronym>URL</acronym> be detected incorrectly you can override it with
             your own base path by using
             <classname>Zend_Controller_Request_Http</classname> and calling the
-            <methodname>setBaseUrl()</methodname> method (see <link
-                linkend="zend.controller.request.http.baseurl">Base URL and Subdirectories</link>):
+            <methodname>setBaseUrl()</methodname> method (see <link linkend="zend.controller.request.http.baseurl">Base URL and Subdirectories</link>):
         </para>
 
-        <programlisting language="php"><![CDATA[
-$request->setBaseUrl('/~user/application-root/');
-]]></programlisting>
-    </sect2>
+        <programlisting language="php">
+$request-&gt;setBaseUrl('/~user/application-root/');
+</programlisting>
+    </section>
 
-    <sect2 id="zend.controller.router.global.parameters">
-        <title>Global Parameters</title>
+    <section xml:id="zend.controller.router.global.parameters"><info><title>Global Parameters</title></info>
+        
 
         <para>
             You can set global parameters in a router which are automatically
@@ -409,23 +403,23 @@ $request->setBaseUrl('/~user/application-root/');
             way:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$router->setGlobalParam('lang', 'en');
-]]></programlisting>
-    </sect2>
+        <programlisting language="php">
+$router-&gt;setGlobalParam('lang', 'en');
+</programlisting>
+    </section>
 
-    <sect2 id="zend.controller.router.routes">
-        <title>Route Types</title>
-        <xi:include href="Zend_Controller-Router-Route.xml" />
-        <xi:include href="Zend_Controller-Router-Route-Static.xml" />
-        <xi:include href="Zend_Controller-Router-Route-Regex.xml" />
-        <xi:include href="Zend_Controller-Router-Route-Hostname.xml" />
-        <xi:include href="Zend_Controller-Router-Route-Chain.xml" />
-        <xi:include href="Zend_Controller-Router-Route-Rest.xml" />
-    </sect2>
+    <section xml:id="zend.controller.router.routes"><info><title>Route Types</title></info>
+        
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-Router-Route.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-Router-Route-Static.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-Router-Route-Regex.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-Router-Route-Hostname.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-Router-Route-Chain.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-Router-Route-Rest.xml"/>
+    </section>
 
-    <sect2 id="zend.controller.router.add-config">
-        <title>Using Zend_Config with the RewriteRouter</title>
+    <section xml:id="zend.controller.router.add-config"><info><title>Using Zend_Config with the RewriteRouter</title></info>
+        
 
         <para>
             Sometimes it is more convenient to update a configuration file with
@@ -439,7 +433,7 @@ $router->setGlobalParam('lang', 'en');
             As an example, consider the following <acronym>INI</acronym> file:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 [production]
 routes.archive.route = "archive/:year/*"
 routes.archive.defaults.controller = archive
@@ -458,18 +452,18 @@ routes.archive.defaults.controller = "archive"
 routes.archive.defaults.action = "show"
 routes.archive.map.1 = "year"
 ; OR: routes.archive.map.year = 1
-]]></programlisting>
+</programlisting>
 
         <para>
             The above <acronym>INI</acronym> file can then be read into a
             <classname>Zend_Config</classname> object as follows:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $config = new Zend_Config_Ini('/path/to/config.ini', 'production');
 $router = new Zend_Controller_Router_Rewrite();
-$router->addConfig($config, 'routes');
-]]></programlisting>
+$router-&gt;addConfig($config, 'routes');
+</programlisting>
 
         <para>
             In the above example, we tell the router to use the 'routes' section
@@ -486,10 +480,10 @@ $router->addConfig($config, 'routes');
             'news' route is defined to use
             <classname>Zend_Controller_Router_Route_Static</classname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.router.subclassing">
-        <title>Subclassing the Router</title>
+    <section xml:id="zend.controller.router.subclassing"><info><title>Subclassing the Router</title></info>
+        
 
         <para>
             The standard rewrite router should provide most functionality you
@@ -506,7 +500,7 @@ $router->addConfig($config, 'routes');
             method.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 interface Zend_Controller_Router_Interface
 {
   /**
@@ -516,7 +510,7 @@ interface Zend_Controller_Router_Interface
    */
   public function route(Zend_Controller_Request_Abstract $request);
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             Routing only occurs once: when the request is first received into
@@ -527,8 +521,5 @@ interface Zend_Controller_Router_Interface
             route to a dispatch token, the router should do nothing to the
             request object.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.feed.findFeeds">
-    <title>Retrieving Feeds from Web Pages</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.findFeeds"><info><title>Retrieving Feeds from Web Pages</title></info>
+    
 
     <para>
         Web pages often contain <emphasis>&lt;link&gt;</emphasis> tags that refer to feeds with
@@ -9,9 +10,9 @@
         retrieve all feeds referenced by a web page with one simple method call:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $feedArray = Zend_Feed::findFeeds('http://www.example.com/news.html');
-]]></programlisting>
+</programlisting>
 
     <para>
         Here the <methodname>findFeeds()</methodname> method returns an array of
@@ -23,7 +24,4 @@ $feedArray = Zend_Feed::findFeeds('http://www.example.com/news.html');
         a <classname>Zend_Feed_Exception</classname> upon failure, such as an
         <acronym>HTTP</acronym> 404 response code or a malformed feed.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

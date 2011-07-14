@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.queue.framework">
-    <title>Framework</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.framework"><info><title>Framework</title></info>
+    
 
     <para>
         The <classname>Zend_Queue</classname> is a proxy that hides the details
@@ -15,23 +16,23 @@
         Below is an example for using database tables for a queuing system:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $options = array(
-    'name'          => 'queue1',
-    'driverOptions' => array(
-        'host'      => '127.0.0.1',
-        'port'      => '3306',
-        'username'  => 'queue',
-        'password'  => 'queue',
-        'dbname'    => 'queue',
-        'type'      => 'pdo_mysql'
+    'name'          =&gt; 'queue1',
+    'driverOptions' =&gt; array(
+        'host'      =&gt; '127.0.0.1',
+        'port'      =&gt; '3306',
+        'username'  =&gt; 'queue',
+        'password'  =&gt; 'queue',
+        'dbname'    =&gt; 'queue',
+        'type'      =&gt; 'pdo_mysql'
     )
 );
 
 // Create a database queue.
 // Zend_Queue will prepend Zend_Queue_Adapter_ to 'Db' for the class name.
 $queue = new Zend_Queue('Db', $options);
-]]></programlisting>
+</programlisting>
 
     <para>
         The <classname>Zend_Queue</classname> constructor will create a
@@ -53,20 +54,20 @@ $queue = new Zend_Queue('Db', $options);
         <classname>Zend_Queue_Message</classname> objects.
     </para>
 
-    <programlisting language="php"><![CDATA[
-$messages = $queue->receive(5);
-foreach ($messages as $i => $message) {
-    echo "$i) Message => ", $message->body, "\n";
+    <programlisting language="php">
+$messages = $queue-&gt;receive(5);
+foreach ($messages as $i =&gt; $message) {
+    echo "$i) Message =&gt; ", $message-&gt;body, "\n";
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         Any exceptions thrown are of class
         <classname>Zend_Queue_Exception</classname>.
     </para>
 
-    <sect2 id="zend.queue.framework.basics">
-        <title>Introduction</title>
+    <section xml:id="zend.queue.framework.basics"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_Queue</classname> is a proxy class that represents
@@ -85,10 +86,10 @@ foreach ($messages as $i => $message) {
             <methodname>deleteQueue()</methodname> methods are used to manage
             queues.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.queue.framework.support">
-        <title>Commonality among adapters</title>
+    <section xml:id="zend.queue.framework.support"><info><title>Commonality among adapters</title></info>
+        
 
         <para>
             The queue services supported by <classname>Zend_Queue</classname> do
@@ -174,5 +175,5 @@ foreach ($messages as $i => $message) {
             <methodname>deleteQueue()</methodname> methods are used to manage
             queues.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

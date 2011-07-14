@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.alnum">
-    <title>Alnum</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.alnum"><info><title>Alnum</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Alnum</classname> allows you to validate if a given value contains
@@ -9,8 +10,8 @@
         you want to validate.
     </para>
 
-    <sect3 id="zend.validate.set.alnum.options">
-        <title>Supported options for Zend_Validate_Alnum</title>
+    <section xml:id="zend.validate.set.alnum.options"><info><title>Supported options for Zend_Validate_Alnum</title></info>
+        
 
         <para>
             The following options are supported for <classname>Zend_Validate_Alnum</classname>:
@@ -24,27 +25,27 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.alnum.basic">
-        <title>Basic usage</title>
+    <section xml:id="zend.validate.set.alnum.basic"><info><title>Basic usage</title></info>
+        
 
         <para>
             A basic example is the following one:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $validator = new Zend_Validate_Alnum();
-if ($validator->isValid('Abcd12')) {
+if ($validator-&gt;isValid('Abcd12')) {
     // value contains only allowed chars
 } else {
     // false
 }
-]]></programlisting>
-    </sect3>
+</programlisting>
+    </section>
 
-    <sect3 id="zend.validate.set.alnum.whitespace">
-        <title>Using whitespaces</title>
+    <section xml:id="zend.validate.set.alnum.whitespace"><info><title>Using whitespaces</title></info>
+        
 
         <para>
             Per default whitespaces are not accepted because they are not part of the alphabet.
@@ -59,18 +60,18 @@ if ($validator->isValid('Abcd12')) {
             To get the actual state you can use <methodname>getAllowWhiteSpace()</methodname>.
         </para>
 
-        <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Alnum(array('allowWhiteSpace' => true));
-if ($validator->isValid('Abcd and 12')) {
+        <programlisting language="php">
+$validator = new Zend_Validate_Alnum(array('allowWhiteSpace' =&gt; true));
+if ($validator-&gt;isValid('Abcd and 12')) {
     // value contains only allowed chars
 } else {
     // false
 }
-]]></programlisting>
-    </sect3>
+</programlisting>
+    </section>
 
-    <sect3 id="zend.validate.set.alnum.languages">
-        <title>Using different languages</title>
+    <section xml:id="zend.validate.set.alnum.languages"><info><title>Using different languages</title></info>
+        
 
         <para>
             When using <classname>Zend_Validate_Alnum</classname> then the language which the user
@@ -96,8 +97,5 @@ if ($validator->isValid('Abcd and 12')) {
             In the case you are using these languages, the input will only be validated by using
             the english alphabet.
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

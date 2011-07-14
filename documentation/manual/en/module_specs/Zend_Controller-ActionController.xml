@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.action">
-    <title>Action Controllers</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.controller.action.introduction">
-        <title>Introduction</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.action"><info><title>Action Controllers</title></info>
+    
+
+    <section xml:id="zend.controller.action.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_Controller_Action</classname> is an abstract class you may use
@@ -28,7 +29,7 @@
             For example, let's say your class is defined as follows:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -41,7 +42,7 @@ class FooController extends Zend_Controller_Action
         // do something
     }
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             The above <emphasis>FooController</emphasis> class (controller
@@ -57,38 +58,37 @@ class FooController extends Zend_Controller_Action
             action controller functionality
         </para>
 
-        <note>
-            <title>Default Behaviour</title>
+        <note><info><title>Default Behaviour</title></info>
+            
 
             <para>
                 By default, the <link linkend="zend.controller.front">front
-                    controller</link> enables the <link
-                    linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>
+                    controller</link> enables the <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>
                 action helper. This helper takes care of injecting the view
                 object into the controller, as well as automatically rendering
                 views. You may disable it within your action controller via one
                 of the following methods:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 class FooController extends Zend_Controller_Action
 {
     public function init()
     {
         // Local to this controller only; affects all actions,
         // as loaded in init:
-        $this->_helper->viewRenderer->setNoRender(true);
+        $this-&gt;_helper-&gt;viewRenderer-&gt;setNoRender(true);
 
         // Globally:
-        $this->_helper->removeHelper('viewRenderer');
+        $this-&gt;_helper-&gt;removeHelper('viewRenderer');
 
         // Also globally, but would need to be in conjunction with the
         // local version in order to propagate for this controller:
         Zend_Controller_Front::getInstance()
-            ->setParam('noViewRenderer', true);
+            -&gt;setParam('noViewRenderer', true);
     }
 }
-]]></programlisting>
+</programlisting>
 
             <para>
                 <methodname>initView()</methodname>, <methodname>getViewScript()</methodname>,
@@ -104,16 +104,16 @@ class FooController extends Zend_Controller_Action
                 flag:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
     {
         // disable autorendering for this action only:
-        $this->_helper->viewRenderer->setNoRender();
+        $this-&gt;_helper-&gt;viewRenderer-&gt;setNoRender();
     }
 }
-]]></programlisting>
+</programlisting>
 
             <para>
                 The primary reasons to disable the <emphasis>ViewRenderer</emphasis> are
@@ -125,10 +125,10 @@ class FooController extends Zend_Controller_Action
                 selectively within individual controllers or actions.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.action.initialization">
-        <title>Object Initialization</title>
+    <section xml:id="zend.controller.action.initialization"><info><title>Object Initialization</title></info>
+        
 
         <para>
             While you can always override the action controller's constructor, we
@@ -147,24 +147,24 @@ class FooController extends Zend_Controller_Action
             a database at instantiation:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 class FooController extends Zend_Controller_Action
 {
     public function init()
     {
-        $this->db = Zend_Db::factory('Pdo_Mysql', array(
-            'host'     => 'myhost',
-            'username' => 'user',
-            'password' => 'XXXXXXX',
-            'dbname'   => 'website'
+        $this-&gt;db = Zend_Db::factory('Pdo_Mysql', array(
+            'host'     =&gt; 'myhost',
+            'username' =&gt; 'user',
+            'password' =&gt; 'XXXXXXX',
+            'dbname'   =&gt; 'website'
         ));
     }
 }
-]]></programlisting>
-    </sect2>
+</programlisting>
+    </section>
 
-    <sect2 id="zend.controller.action.prepostdispatch">
-        <title>Pre- and Post-Dispatch Hooks</title>
+    <section xml:id="zend.controller.action.prepostdispatch"><info><title>Pre- and Post-Dispatch Hooks</title></info>
+        
 
         <para>
             <classname>Zend_Controller_Action</classname> specifies two methods that may
@@ -177,8 +177,8 @@ class FooController extends Zend_Controller_Action
             (<methodname>postDispatch()</methodname>).
         </para>
 
-        <note>
-            <title>Usage of init() vs. preDispatch()</title>
+        <note><info><title>Usage of init() vs. preDispatch()</title></info>
+            
 
             <para>
                 In the <link linkend="zend.controller.action.initialization">previous
@@ -209,10 +209,10 @@ class FooController extends Zend_Controller_Action
                 intentions of the two methods.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.action.accessors">
-        <title>Accessors</title>
+    <section xml:id="zend.controller.action.accessors"><info><title>Accessors</title></info>
+        
 
         <para>
             A number of objects and variables are registered with the object,
@@ -235,10 +235,10 @@ class FooController extends Zend_Controller_Action
                     calls might look like:
                 </para>
 
-                <programlisting language="php"><![CDATA[
-$this->getResponse()->setHeader('Content-Type', 'text/xml');
-$this->getResponse()->appendBody($content);
-]]></programlisting>
+                <programlisting language="php">
+$this-&gt;getResponse()-&gt;setHeader('Content-Type', 'text/xml');
+$this-&gt;getResponse()-&gt;appendBody($content);
+</programlisting>
             </listitem>
 
             <listitem>
@@ -277,27 +277,27 @@ $this->getResponse()->appendBody($content);
                         retrieving a value:
                     </para>
 
-                    <programlisting language="php"><![CDATA[
+                    <programlisting language="php">
 // Use default value of 1 if id is not set
-$id = $this->_getParam('id', 1);
+$id = $this-&gt;_getParam('id', 1);
 
 // Instead of:
-if ($this->_hasParam('id') {
-    $id = $this->_getParam('id');
+if ($this-&gt;_hasParam('id') {
+    $id = $this-&gt;_getParam('id');
 } else {
     $id = 1;
 }
-]]></programlisting>
+</programlisting>
                 </note>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.action.viewintegration">
-        <title>View Integration</title>
+    <section xml:id="zend.controller.action.viewintegration"><info><title>View Integration</title></info>
+        
 
-        <note id="zend.controller.action.viewintegration.viewrenderer">
-            <title>Default View Integration is Via the ViewRenderer</title>
+        <note xml:id="zend.controller.action.viewintegration.viewrenderer"><info><title>Default View Integration is Via the ViewRenderer</title></info>
+            
 
             <para>
                 The content in this section is only valid when you have explicitly disabled the
@@ -315,8 +315,8 @@ if ($this->_hasParam('id') {
             the directory hierarchy to determine the script path.
         </para>
 
-        <sect3 id="zend.controller.action.viewintegration.initview">
-            <title>View Initialization</title>
+        <section xml:id="zend.controller.action.viewintegration.initview"><info><title>View Initialization</title></info>
+            
 
             <para>
                 <methodname>initView()</methodname> initializes the view object.
@@ -334,7 +334,7 @@ if ($this->_hasParam('id') {
                 the directory structure:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 applicationOrModule/
     controllers/
         IndexController.php
@@ -344,7 +344,7 @@ applicationOrModule/
                 index.phtml
         helpers/
         filters/
-]]></programlisting>
+</programlisting>
 
             <para>
                 In other words, view scripts are assumed to be in the
@@ -355,20 +355,20 @@ applicationOrModule/
                 will be used as the base path, with directories named after the
                 individual controllers providing a hierarchy of view scripts.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.action.viewintegration.render">
-            <title>Rendering Views</title>
+        <section xml:id="zend.controller.action.viewintegration.render"><info><title>Rendering Views</title></info>
+            
 
             <para>
                 <methodname>render()</methodname> has the following signature:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 string render(string $action = null,
               string $name = null,
               bool $noController = false);
-]]></programlisting>
+</programlisting>
 
             <para>
                 <methodname>render()</methodname> renders a view script. If no arguments are
@@ -380,8 +380,7 @@ string render(string $action = null,
                 override using the <filename>/[controller]/</filename> subdirectory, pass
                 a <constant>TRUE</constant> value for <varname>$noController</varname>. Finally,
                 templates are rendered into the response object; if you wish to render to
-                a specific <link
-                    linkend="zend.controller.response.namedsegments">named
+                a specific <link linkend="zend.controller.response.namedsegments">named
                     segment</link> in the response object, pass a value to
                 <varname>$name</varname>.
             </para>
@@ -405,41 +404,41 @@ string render(string $action = null,
                 Some examples:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 class MyController extends Zend_Controller_Action
 {
     public function fooAction()
     {
         // Renders my/foo.phtml
-        $this->render();
+        $this-&gt;render();
 
         // Renders my/bar.phtml
-        $this->render('bar');
+        $this-&gt;render('bar');
 
         // Renders baz.phtml
-        $this->render('baz', null, true);
+        $this-&gt;render('baz', null, true);
 
         // Renders my/login.phtml to the 'form' segment of the
         // response object
-        $this->render('login', 'form');
+        $this-&gt;render('login', 'form');
 
         // Renders site.phtml to the 'page' segment of the response
         // object; does not use the 'my/' subirectory
-        $this->render('site', 'page', true);
+        $this-&gt;render('site', 'page', true);
     }
 
     public function bazBatAction()
     {
         // Renders my/baz-bat.phtml
-        $this->render();
+        $this-&gt;render();
     }
 }
-]]></programlisting>
-        </sect3>
-    </sect2>
+</programlisting>
+        </section>
+    </section>
 
-    <sect2 id="zend.controller.action.utilmethods">
-        <title>Utility Methods</title>
+    <section xml:id="zend.controller.action.utilmethods"><info><title>Utility Methods</title></info>
+        
 
         <para>
             Besides the accessors and view integration methods,
@@ -517,10 +516,10 @@ class MyController extends Zend_Controller_Action
                 </itemizedlist>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.action.subclassing">
-        <title>Subclassing the Action Controller</title>
+    <section xml:id="zend.controller.action.subclassing"><info><title>Subclassing the Action Controller</title></info>
+        
 
         <para>
             By design, <classname>Zend_Controller_Action</classname> must be subclassed
@@ -536,8 +535,8 @@ class MyController extends Zend_Controller_Action
             <classname>Zend_Controller_Action</classname> could solve such redundancy.
         </para>
 
-        <example id="zend.controller.action.subclassing.example-call">
-            <title>Handling Non-Existent Actions</title>
+        <example xml:id="zend.controller.action.subclassing.example-call"><info><title>Handling Non-Existent Actions</title></info>
+            
 
             <para>
                 If a request to a controller is made that includes an undefined
@@ -564,7 +563,7 @@ class MyController extends Zend_Controller_Action
                 message, you might write something like this:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 class MyController extends Zend_Controller_Action
 {
     public function __call($method, $args)
@@ -572,7 +571,7 @@ class MyController extends Zend_Controller_Action
         if ('Action' == substr($method, -6)) {
             // If the action method was not found, render the error
             // template
-            return $this->render('error');
+            return $this-&gt;render('error');
         }
 
         // all other methods throw an exception
@@ -582,19 +581,19 @@ class MyController extends Zend_Controller_Action
                             500);
     }
 }
-]]></programlisting>
+</programlisting>
 
             <para>
                 Another possibility is that you may want to forward on to a
                 default controller page:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 class MyController extends Zend_Controller_Action
 {
     public function indexAction()
     {
-        $this->render();
+        $this-&gt;render();
     }
 
     public function __call($method, $args)
@@ -602,7 +601,7 @@ class MyController extends Zend_Controller_Action
         if ('Action' == substr($method, -6)) {
             // If the action method was not found, forward to the
             // index action
-            return $this->_forward('index');
+            return $this-&gt;_forward('index');
         }
 
         // all other methods throw an exception
@@ -612,7 +611,7 @@ class MyController extends Zend_Controller_Action
                             500);
     }
 }
-]]></programlisting>
+</programlisting>
         </example>
 
         <para>
@@ -624,32 +623,29 @@ class MyController extends Zend_Controller_Action
             <methodname>initView()</methodname> method with code resembling the following:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 abstract class My_Base_Controller extends Zend_Controller_Action
 {
     public function initView()
     {
-        if (null === $this->view) {
+        if (null === $this-&gt;view) {
             if (Zend_Registry::isRegistered('view')) {
-                $this->view = Zend_Registry::get('view');
+                $this-&gt;view = Zend_Registry::get('view');
             } else {
-                $this->view = new Zend_View();
-                $this->view->setBasePath(dirname(__FILE__) . '/../views');
+                $this-&gt;view = new Zend_View();
+                $this-&gt;view-&gt;setBasePath(dirname(__FILE__) . '/../views');
             }
         }
 
-        return $this->view;
+        return $this-&gt;view;
     }
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             Hopefully, from the information in this chapter, you can see the
             flexibility of this particular component and how you can shape it to
             your application's or site's needs.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

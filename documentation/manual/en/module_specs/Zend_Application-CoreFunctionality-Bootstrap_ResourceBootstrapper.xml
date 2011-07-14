@@ -1,16 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.application.core-functionality.bootstrap-resourcebootstrapper">
-    <title>Zend_Application_Bootstrap_ResourceBootstrapper</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.core-functionality.bootstrap-resourcebootstrapper"><info><title>Zend_Application_Bootstrap_ResourceBootstrapper</title></info>
+    
 
     <para>
         <classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname> is an
         interface to use when a bootstrap class will be loading external
         resources -- i.e., one or more resources will not be defined directly in
-        the class, but rather via plugins. It should be used in conjunction with <link
-            linkend="zend.application.core-functionality.bootstrap-bootstrapper">Zend_Application_Bootstrap_Bootstrapper</link>;
-        <link
-            linkend="zend.application.core-functionality.bootstrap-bootstrapabstract">Zend_Application_Bootstrap_BootstrapAbstract</link>
+        the class, but rather via plugins. It should be used in conjunction with <link linkend="zend.application.core-functionality.bootstrap-bootstrapper">Zend_Application_Bootstrap_Bootstrapper</link>;
+        <link linkend="zend.application.core-functionality.bootstrap-bootstrapabstract">Zend_Application_Bootstrap_BootstrapAbstract</link>
         implements this functionality.
     </para>
 
@@ -18,8 +17,8 @@
         The following methods make up the definition of the interface.
     </para>
 
-    <table id="zend.application.core-functionality.bootstrap-resourcebootstrapper.methods-table">
-        <title>Zend_Application_Bootstrap_ResourceBootstrapper Interface</title>
+    <table xml:id="zend.application.core-functionality.bootstrap-resourcebootstrapper.methods-table"><info><title>Zend_Application_Bootstrap_ResourceBootstrapper Interface</title></info>
+        
 
         <tgroup cols="4">
             <thead>
@@ -179,4 +178,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect2>
+</section>

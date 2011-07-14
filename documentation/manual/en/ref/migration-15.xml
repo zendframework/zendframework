@@ -1,15 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="migration.15">
-    <title>Zend Framework 1.5</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.15"><info><title>Zend Framework 1.5</title></info>
+    
 
     <para>
         When upgrading from a previous release to Zend Framework 1.5 or higher you
         should note the following migration notes.
     </para>
 
-    <sect2 id="migration.15.zend.controller">
-        <title>Zend_Controller</title>
+    <section xml:id="migration.15.zend.controller"><info><title>Zend_Controller</title></info>
+        
 
         <para>
             Though most basic functionality remains the same, and all documented
@@ -78,18 +79,18 @@
                     the words of an action with a dash:
                 </para>
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 $viewRenderer =
     Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
-$inflector = $viewRenderer->getInflector();
-$inflector->setFilterRule(':action', array(
+$inflector = $viewRenderer-&gt;getInflector();
+$inflector-&gt;setFilterRule(':action', array(
     new Zend_Filter_PregReplace(
         '#[^a-z0-9' . preg_quote(DIRECTORY_SEPARATOR, '#') . ']+#i',
         ''
     ),
     'StringToLower'
 ));
-]]></programlisting>
+</programlisting>
 
                 <para>
                     The above code will modify the inflector to no longer
@@ -112,9 +113,9 @@ $inflector->setFilterRule(':action', array(
                     flag, <property>useCaseSensitiveActions</property>:
                 </para>
 
-                <programlisting language="php"><![CDATA[
-$front->setParam('useCaseSensitiveActions', true);
-]]></programlisting>
+                <programlisting language="php">
+$front-&gt;setParam('useCaseSensitiveActions', true);
+</programlisting>
 
                 <para>
                     This will allow you to use camelCasing on the url and still
@@ -131,8 +132,5 @@ $front->setParam('useCaseSensitiveActions', true);
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

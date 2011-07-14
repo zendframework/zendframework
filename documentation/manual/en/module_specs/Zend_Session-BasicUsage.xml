@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.session.basic_usage">
-    <title>Basic Usage</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.basic_usage"><info><title>Basic Usage</title></info>
+    
 
     <para>
         <classname>Zend_Session_Namespace</classname> instances provide the primary
@@ -21,11 +22,11 @@
         the <varname>$_SESSION</varname> superglobal array, where the namespace is used as the key.
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $myNamespace = new Zend_Session_Namespace('myNamespace');
 
 // $myNamespace corresponds to $_SESSION['myNamespace']
-]]></programlisting>
+</programlisting>
 
     <para>
         It is possible to use <classname>Zend_Session</classname> in conjunction with other code
@@ -34,8 +35,8 @@ $myNamespace = new Zend_Session_Namespace('myNamespace');
         correspond to instances of <classname>Zend_Session_Namespace</classname>.
     </para>
 
-    <sect2 id="zend.session.basic_usage.basic_examples">
-        <title>Tutorial Examples</title>
+    <section xml:id="zend.session.basic_usage.basic_examples"><info><title>Tutorial Examples</title></info>
+        
 
         <para>
             If no namespace is specified when instantiating
@@ -47,22 +48,22 @@ $myNamespace = new Zend_Session_Namespace('myNamespace');
             session:
         </para>
 
-        <example id="zend.session.basic_usage.basic_examples.example.counting_page_views">
-            <title>Counting Page Views</title>
+        <example xml:id="zend.session.basic_usage.basic_examples.example.counting_page_views"><info><title>Counting Page Views</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $defaultNamespace = new Zend_Session_Namespace('Default');
 
-if (isset($defaultNamespace->numberOfPageRequests)) {
+if (isset($defaultNamespace-&gt;numberOfPageRequests)) {
     // this will increment for each page load.
-    $defaultNamespace->numberOfPageRequests++;
+    $defaultNamespace-&gt;numberOfPageRequests++;
 } else {
-    $defaultNamespace->numberOfPageRequests = 1; // first time
+    $defaultNamespace-&gt;numberOfPageRequests = 1; // first time
 }
 
 echo "Page requests this session: ",
-    $defaultNamespace->numberOfPageRequests;
-]]></programlisting>
+    $defaultNamespace-&gt;numberOfPageRequests;
+</programlisting>
         </example>
 
         <para>
@@ -81,18 +82,18 @@ echo "Page requests this session: ",
             starting with "<code>Zend</code>".
         </para>
 
-        <example id="zend.session.basic_usage.basic_examples.example.namespaces.new">
-            <title>New Way: Namespaces Avoid Collisions</title>
+        <example xml:id="zend.session.basic_usage.basic_examples.example.namespaces.new"><info><title>New Way: Namespaces Avoid Collisions</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 // in the Zend_Auth component
 $authNamespace = new Zend_Session_Namespace('Zend_Auth');
-$authNamespace->user = "myusername";
+$authNamespace-&gt;user = "myusername";
 
 // in a web services component
 $webServiceNamespace = new Zend_Session_Namespace('Some_Web_Service');
-$webServiceNamespace->user = "mywebusername";
-]]></programlisting>
+$webServiceNamespace-&gt;user = "mywebusername";
+</programlisting>
         </example>
 
         <para>
@@ -100,68 +101,66 @@ $webServiceNamespace->user = "mywebusername";
             objects above preserve encapsulation of session data within their respective namespaces.
         </para>
 
-        <example id="zend.session.basic_usage.basic_examples.example.namespaces.old">
-            <title>Old Way: PHP Session Access</title>
+        <example xml:id="zend.session.basic_usage.basic_examples.example.namespaces.old"><info><title>Old Way: PHP Session Access</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $_SESSION['Zend_Auth']['user'] = "myusername";
 $_SESSION['Some_Web_Service']['user'] = "mywebusername";
-]]></programlisting>
+</programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.basic_usage.iteration">
-        <title>Iterating Over Session Namespaces</title>
+    <section xml:id="zend.session.basic_usage.iteration"><info><title>Iterating Over Session Namespaces</title></info>
+        
 
         <para>
-            <classname>Zend_Session_Namespace</classname> provides the full <ulink
-                url="http://www.php.net/~helly/php/ext/spl/interfaceIteratorAggregate.html">IteratorAggregate
-                interface</ulink>, including support for the <code>foreach</code> statement:
+            <classname>Zend_Session_Namespace</classname> provides the full <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/~helly/php/ext/spl/interfaceIteratorAggregate.html">IteratorAggregate
+                interface</link>, including support for the <code>foreach</code> statement:
         </para>
 
-        <example id="zend.session.basic_usage.iteration.example">
-            <title>Session Iteration</title>
+        <example xml:id="zend.session.basic_usage.iteration.example"><info><title>Session Iteration</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $aNamespace =
     new Zend_Session_Namespace('some_namespace_with_data_present');
 
-foreach ($aNamespace as $index => $value) {
-    echo "aNamespace->$index = '$value';\n";
+foreach ($aNamespace as $index =&gt; $value) {
+    echo "aNamespace-&gt;$index = '$value';\n";
 }
-]]></programlisting>
+</programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.basic_usage.accessors">
-        <title>Accessors for Session Namespaces</title>
+    <section xml:id="zend.session.basic_usage.accessors"><info><title>Accessors for Session Namespaces</title></info>
+        
 
         <para>
             <classname>Zend_Session_Namespace</classname> implements the
             <methodname>__get()</methodname>, <methodname>__set()</methodname>,
-            <methodname>__isset()</methodname>, and <methodname>__unset()</methodname> <ulink
-                url="http://www.php.net/manual/en/language.oop5.overloading.php">magic
-                methods</ulink>, which should not be invoked directly, except from within a
+            <methodname>__isset()</methodname>, and <methodname>__unset()</methodname> <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/language.oop5.overloading.php">magic
+                methods</link>, which should not be invoked directly, except from within a
             subclass. Instead, the normal operators automatically invoke these methods, such as in
             the following example:
         </para>
 
-        <example id="zend.session.basic_usage.accessors.example">
-            <title>Accessing Session Data</title>
+        <example xml:id="zend.session.basic_usage.accessors.example"><info><title>Accessing Session Data</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $namespace = new Zend_Session_Namespace(); // default namespace
 
-$namespace->foo = 100;
+$namespace-&gt;foo = 100;
 
-echo "\$namespace->foo = $namespace->foo\n";
+echo "\$namespace-&gt;foo = $namespace-&gt;foo\n";
 
-if (!isset($namespace->bar)) {
-    echo "\$namespace->bar not set\n";
+if (!isset($namespace-&gt;bar)) {
+    echo "\$namespace-&gt;bar not set\n";
 }
 
-unset($namespace->foo);
-]]></programlisting>
+unset($namespace-&gt;foo);
+</programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

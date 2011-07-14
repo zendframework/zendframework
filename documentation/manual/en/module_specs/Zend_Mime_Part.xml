@@ -1,24 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.mime.part">
-    <title>Zend_Mime_Part</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.mime.part.introduction">
-        <title>Introduction</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.part"><info><title>Zend_Mime_Part</title></info>
+    
+
+    <section xml:id="zend.mime.part.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             This class represents a single part of a <acronym>MIME</acronym> message. It contains
             the actual content of the message part plus information about its encoding,
             content type and original filename. It provides a method for generating a
             string from the stored data. <classname>Zend_Mime_Part</classname> objects can be
-            added to <link
-                linkend="zend.mime.message"><classname>Zend_Mime_Message</classname></link> to
+            added to <link linkend="zend.mime.message"><classname>Zend_Mime_Message</classname></link> to
             assemble a complete multipart message.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mime.part.instantiation">
-        <title>Instantiation</title>
+    <section xml:id="zend.mime.part.instantiation"><info><title>Instantiation</title></info>
+        
 
         <para>
             <classname>Zend_Mime_Part</classname> is instantiated with a string that
@@ -28,7 +28,7 @@
             attributes directly:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 public $type = Zend_Mime::TYPE_OCTETSTREAM;
 public $encoding = Zend_Mime::ENCODING_8BIT;
 public $id;
@@ -39,11 +39,11 @@ public $charset;
 public $boundary;
 public $location;
 public $language;
-]]></programlisting>
-    </sect2>
+</programlisting>
+    </section>
 
-    <sect2 id="zend.mime.part.methods">
-        <title>Methods for rendering the message part to a string</title>
+    <section xml:id="zend.mime.part.methods"><info><title>Methods for rendering the message part to a string</title></info>
+        
 
         <para>
             <methodname>getContent()</methodname> returns the encoded content of the
@@ -109,8 +109,5 @@ public $language;
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

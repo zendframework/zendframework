@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.tool.extending">
-    <title>Extending Zend_Tool</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.tool.extending.overview">
-        <title>Overview of Zend_Tool</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.extending"><info><title>Extending Zend_Tool</title></info>
+    
+
+    <section xml:id="zend.tool.extending.overview"><info><title>Overview of Zend_Tool</title></info>
+        
 
         <para>
             <classname>Zend_Tool_Framework</classname> is a framework for exposing common
@@ -24,13 +25,13 @@
             generally are a collection of resources. These resources can be files, directories,
             databases, schemas, images, styles, and more.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.tool.extending.zend-tool-framework">
-        <title>Zend_Tool_Framework Extensions</title>
+    <section xml:id="zend.tool.extending.zend-tool-framework"><info><title>Zend_Tool_Framework Extensions</title></info>
+        
 
-        <sect3 id="zend.tool.extending.zend-tool-framework.architecture">
-            <title>Overall Architecture</title>
+        <section xml:id="zend.tool.extending.zend-tool-framework.architecture"><info><title>Overall Architecture</title></info>
+            
 
             <para>
                 <classname>Zend_Tool_Framework</classname> provides the following:
@@ -141,10 +142,10 @@
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.tool.extending.zend-tool-framework.cli-client">
-            <title>Understanding the CLI Client</title>
+        <section xml:id="zend.tool.extending.zend-tool-framework.cli-client"><info><title>Understanding the CLI Client</title></info>
+            
 
             <para>
                 The <acronym>CLI</acronym>, or command line tool (internally known as the console
@@ -156,8 +157,8 @@
                 <filename>cmd.exe</filename>, console2 and also with the Cygwin project.
             </para>
 
-            <sect4 id="zend.tool.extending.zend-tool-framework.cli-client.setup-general">
-                <title>Setting up the CLI tool</title>
+            <section xml:id="zend.tool.extending.zend-tool-framework.cli-client.setup-general"><info><title>Setting up the CLI tool</title></info>
+                
 
                 <para>
                     To issue tooling requests via the command line client, you first
@@ -165,8 +166,7 @@
                     command. The command line client, for all intents and purposes, is
                     the <filename>.sh</filename> or <filename>.bat</filename> file that is provided
                     with your Zend Framework distribution. In trunk, it can be found here:
-                    <ulink
-                        url="http://framework.zend.com/svn/framework/standard/trunk/bin/">http://framework.zend.com/svn/framework/standard/trunk/bin/</ulink>.
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/svn/framework/standard/trunk/bin/">http://framework.zend.com/svn/framework/standard/trunk/bin/</link>.
                 </para>
 
                 <para>
@@ -214,10 +214,10 @@
                         to work as <filename>./path/to/zf.php</filename> some command.
                     </para>
                 </note>
-            </sect4>
+            </section>
 
-            <sect4 id="zend.tool.extending.zend-tool-framework.cli-client.setup-starnix">
-                <title>Setting up the CLI tool on Unix-like Systems</title>
+            <section xml:id="zend.tool.extending.zend-tool-framework.cli-client.setup-starnix"><info><title>Setting up the CLI tool on Unix-like Systems</title></info>
+                
 
                 <para>
                     The most common setup in the *nix environment, is to copy the
@@ -226,12 +226,12 @@
                     one of the following places:
                 </para>
 
-                <programlisting language="text"><![CDATA[
+                <programlisting language="text">
 /usr/bin
 /usr/local/bin
 /usr/local/ZendServer/bin/
 /Applications/ZendServer/bin/
-]]></programlisting>
+</programlisting>
 
                 <para>
                     To find out the location of your <acronym>PHP</acronym> binary, you can execute
@@ -262,8 +262,7 @@
                 </para>
 
                 <para>
-                    <inlinegraphic scale="100" align="center" valign="middle"
-                        fileref="figures/zend.tool.framework.cliversionunix.png" format="PNG" />
+                    <inlinemediaobject><imageobject><imagedata scale="100" align="center" valign="middle" fileref="figures/zend.tool.framework.cliversionunix.png" format="PNG"/></imageobject></inlinemediaobject>
                 </para>
 
                 <para>
@@ -294,21 +293,21 @@
                     command similar to this:
                 </para>
 
-                <programlisting language="sh"><![CDATA[
+                <programlisting language="sh">
 ln -s /usr/local/share/ZendFramework/bin/zf.sh /usr/local/bin/zf
 
 # OR (for example)
 ln -s /home/username/lib/ZendFramework/bin/zf.sh /home/username/bin/zf
-]]></programlisting>
+</programlisting>
 
                 <para>
                     This will create a link which you should be able to access globally
                     on the command line.
                 </para>
-            </sect4>
+            </section>
 
-            <sect4 id="zend.tool.extending.zend-tool-framework.cli-client.setup-windows">
-                <title>Setting up the CLI tool on Windows</title>
+            <section xml:id="zend.tool.extending.zend-tool-framework.cli-client.setup-windows"><info><title>Setting up the CLI tool on Windows</title></info>
+                
 
                 <para>
                     The most common setup in the Windows Win32 environment, is to copy
@@ -317,11 +316,11 @@ ln -s /home/username/lib/ZendFramework/bin/zf.sh /home/username/bin/zf
                     one of the following places:
                 </para>
 
-                <programlisting language="text"><![CDATA[
+                <programlisting language="text">
 C:\PHP
 C:\Program Files\ZendServer\bin\
 C:\WAMP\PHP\bin
-]]></programlisting>
+</programlisting>
 
                 <para>
                     You should be able to run <filename>php.exe</filename> on the command line.
@@ -354,8 +353,7 @@ C:\WAMP\PHP\bin
                 </para>
 
                 <para>
-                    <inlinegraphic scale="100" align="center" valign="middle"
-                        fileref="figures/zend.tool.framework.cliversionwin32.png" format="PNG" />
+                    <inlinemediaobject><imageobject><imagedata scale="100" align="center" valign="middle" fileref="figures/zend.tool.framework.cliversionwin32.png" format="PNG"/></imageobject></inlinemediaobject>
                 </para>
 
                 <para>
@@ -380,10 +378,10 @@ C:\WAMP\PHP\bin
                     <filename>C:\Path\To\ZendFramework\library</filename> is in your
                     <property>include_path</property>.
                 </para>
-            </sect4>
+            </section>
 
-            <sect4 id="zend.tool.extending.zend-tool-framework.cli-client.setup-othernotes">
-                <title>Other Setup Considerations</title>
+            <section xml:id="zend.tool.extending.zend-tool-framework.cli-client.setup-othernotes"><info><title>Other Setup Considerations</title></info>
+                
 
                 <para>
                     If for some reason you do not want Zend Framework library inside
@@ -407,11 +405,11 @@ C:\WAMP\PHP\bin
                     for one that makes sense specifically for the <command>zf</command>
                     command line tool.
                 </para>
-            </sect4>
-        </sect3>
+            </section>
+        </section>
 
-        <sect3 id="zend.tool.extending.zend-tool-framework.providers-and-manifests">
-            <title>Creating Providers</title>
+        <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests"><info><title>Creating Providers</title></info>
+            
 
             <para>
                 In general, a provider, on its own, is nothing more than the shell for a
@@ -420,8 +418,8 @@ C:\WAMP\PHP\bin
                 "controller" is inside of your <acronym>MVC</acronym> application.
             </para>
 
-            <sect4 id="zend.tool.extending.zend-tool-framework.providers-and-manifests.loading">
-                <title>How Zend_Tool finds your Providers</title>
+            <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.loading"><info><title>How Zend_Tool finds your Providers</title></info>
+                
 
                 <para>
                     By default <classname>Zend_Tool</classname> uses the BasicLoader to find all
@@ -475,9 +473,8 @@ C:\WAMP\PHP\bin
                     they have to be physically present in the include paths.</para>
                 </note>
 
-                <example
-                    id="zend.tool.extending.zend-tool-framework.providers-and-manifests.loading.example">
-                    <title>Exposing Your Providers with a Manifest</title>
+                <example xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.loading.example"><info><title>Exposing Your Providers with a Manifest</title></info>
+                    
 
                     <para>
                         You can expose your providers to <classname>Zend_Tool</classname> by
@@ -490,7 +487,7 @@ C:\WAMP\PHP\bin
                         we will create the following manifest:
                     </para>
 
-                    <programlisting language="php"><![CDATA[
+                    <programlisting language="php">
 class My_Component_Manifest
     implements Zend_Tool_Framework_Manifest_ProviderManifestable
 {
@@ -501,12 +498,12 @@ class My_Component_Manifest
         );
     }
 }
-]]></programlisting>
+</programlisting>
                 </example>
-            </sect4>
+            </section>
 
-            <sect4 id="zend.tool.extending.zend-tool-framework.providers-and-manifests.basic">
-                <title>Basic Instructions for Creating Providers</title>
+            <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.basic"><info><title>Basic Instructions for Creating Providers</title></info>
+                
 
                 <para>
                     As an example, if a developer wants to add the capability of showing
@@ -520,7 +517,7 @@ class My_Component_Manifest
                     this file would only have to look like the following:
                 </para>
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 class My_Component_HelloProvider
     implements Zend_Tool_Framework_Provider_Interface
 {
@@ -529,7 +526,7 @@ class My_Component_HelloProvider
         echo 'Hello from my provider!';
     }
 }
-]]></programlisting>
+</programlisting>
 
                 <para>
                     Given that code above, and assuming the developer wishes to access
@@ -537,14 +534,14 @@ class My_Component_HelloProvider
                     like this:
                 </para>
 
-                <programlisting language="sh"><![CDATA[
+                <programlisting language="sh">
 % zf say hello
 Hello from my provider!
-]]></programlisting>
-            </sect4>
+</programlisting>
+            </section>
 
-            <sect4 id="zend.tool.extending.zend-tool-framework.providers-and-manifests.response">
-                <title>The response object</title>
+            <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.response"><info><title>The response object</title></info>
+                
 
                 <para>
                     As discussed in the architecture section <classname>Zend_Tool</classname> allows
@@ -555,17 +552,17 @@ Hello from my provider!
                     hello provider with this knowledge it looks like:
                 </para>
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 class My_Component_HelloProvider
     extends Zend_Tool_Framework_Provider_Abstract
 {
     public function say()
     {
-        $this->_registry->getResponse
-                        ->appendContent("Hello from my provider!");
+        $this-&gt;_registry-&gt;getResponse
+                        -&gt;appendContent("Hello from my provider!");
     }
 }
-]]></programlisting>
+</programlisting>
 
                 <para>
                     As you can see one has to extend the
@@ -573,14 +570,13 @@ class My_Component_HelloProvider
                     the Registry which holds the
                     <classname>Zend_Tool_Framework_Client_Response</classname> instance.
                 </para>
-            </sect4>
+            </section>
 
-            <sect4 id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced">
-                <title>Advanced Development Information</title>
+            <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced"><info><title>Advanced Development Information</title></info>
+                
 
-                <sect5
-                    id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.variables">
-                    <title>Passing Variables to a Provider</title>
+                <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.variables"><info><title>Passing Variables to a Provider</title></info>
+                    
 
                     <para>
                         The above "Hello World" example is great for simple commands, but
@@ -600,7 +596,7 @@ class My_Component_HelloProvider
                         would probably do this in OO code:
                     </para>
 
-                    <programlisting language="php"><![CDATA[
+                    <programlisting language="php">
 class My_Component_HelloProvider
     implements Zend_Tool_Framework_Provider_Interface
 {
@@ -609,7 +605,7 @@ class My_Component_HelloProvider
         echo 'Hello' . $name . ', from my provider!';
     }
 }
-]]></programlisting>
+</programlisting>
 
                     <para>
                         The above example can then be called via the command line
@@ -619,11 +615,10 @@ class My_Component_HelloProvider
                         line, so that <command>zf say hello</command> will still work, and default
                         to the name "Ralph".
                     </para>
-                </sect5>
+                </section>
 
-                <sect5
-                    id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.prompt">
-                    <title>Prompt the User for Input</title>
+                <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.prompt"><info><title>Prompt the User for Input</title></info>
+                    
 
                     <para>
                         There are cases when the workflow of your provider requires
@@ -631,32 +626,31 @@ class My_Component_HelloProvider
                         the client to ask for more the required input by calling:
                     </para>
 
-                    <programlisting language="php"><![CDATA[
+                    <programlisting language="php">
 class My_Component_HelloProvider
     extends Zend_Tool_Framework_Provider_Abstract
 {
     public function say($name = 'Ralph')
     {
-        $nameResponse = $this->_registry
-                             ->getClient()
-                             ->promptInteractiveInput("Whats your name?");
-        $name = $name->getContent();
+        $nameResponse = $this-&gt;_registry
+                             -&gt;getClient()
+                             -&gt;promptInteractiveInput("Whats your name?");
+        $name = $name-&gt;getContent();
 
         echo 'Hello' . $name . ', from my provider!';
     }
 }
-]]></programlisting>
+</programlisting>
 
                     <para>
                         This command throws an exception if the current client is not
                         able to handle interactive requests. In case of the default Console Client
                         however you will be asked to enter the name.
                     </para>
-                </sect5>
+                </section>
 
-                <sect5
-                    id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.pretendable">
-                    <title>Pretending to execute a Provider Action</title>
+                <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.pretendable"><info><title>Pretending to execute a Provider Action</title></info>
+                    
 
                     <para>
                         Another interesting feature you might wish to implement is
@@ -677,35 +671,34 @@ class My_Component_HelloProvider
                         sample below.
                     </para>
 
-                    <programlisting language="php"><![CDATA[
+                    <programlisting language="php">
 class My_Component_HelloProvider
     extends    Zend_Tool_Framework_Provider_Abstract
     implements Zend_Tool_Framework_Provider_Pretendable
 {
     public function say($name = 'Ralph')
     {
-        if ($this->_registry->getRequest()->isPretend()) {
+        if ($this-&gt;_registry-&gt;getRequest()-&gt;isPretend()) {
             echo 'I would say hello to ' . $name . '.';
         } else {
             echo 'Hello' . $name . ', from my provider!';
         }
     }
 }
-]]></programlisting>
+</programlisting>
 
                     <para>
                         To run the provider in pretend mode just call:
                     </para>
 
-                    <programlisting language="sh"><![CDATA[
+                    <programlisting language="sh">
 % zf --pretend say hello Ralph
 I would say hello Ralph.
-]]></programlisting>
-                </sect5>
+</programlisting>
+                </section>
 
-                <sect5
-                    id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.verbosedebug">
-                    <title>Verbose and Debug modes</title>
+                <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.verbosedebug"><info><title>Verbose and Debug modes</title></info>
+                    
 
                     <para>
                         You can also run your provider actions in "verbose" or "debug" modes.
@@ -714,26 +707,25 @@ I would say hello Ralph.
                         with:
                     </para>
 
-                    <programlisting language="php"><![CDATA[
+                    <programlisting language="php">
 class My_Component_HelloProvider
     implements Zend_Tool_Framework_Provider_Interface
 {
     public function say($name = 'Ralph')
     {
-        if($this->_registry->getRequest()->isVerbose()) {
+        if($this-&gt;_registry-&gt;getRequest()-&gt;isVerbose()) {
             echo "Hello::say has been called\n";
         }
-        if($this->_registry->getRequest()->isDebug()) {
+        if($this-&gt;_registry-&gt;getRequest()-&gt;isDebug()) {
             syslog(LOG_INFO, "Hello::say has been called\n");
         }
     }
 }
-]]></programlisting>
-                </sect5>
+</programlisting>
+                </section>
 
-                <sect5
-                    id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.configstorage">
-                    <title>Accessing User Config and Storage</title>
+                <section xml:id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.configstorage"><info><title>Accessing User Config and Storage</title></info>
+                    
 
                     <para>
                         Using the Enviroment variable <property>ZF_CONFIG_FILE</property> or the
@@ -743,13 +735,13 @@ class My_Component_HelloProvider
                         <classname>Zend_Tool_Framework_Provider_Abstract</classname>.
                     </para>
 
-                    <programlisting language="php"><![CDATA[
+                    <programlisting language="php">
 class My_Component_HelloProvider
     extends Zend_Tool_Framework_Provider_Abstract
 {
     public function say()
     {
-        $username = $this->_registry->getConfig()->username;
+        $username = $this-&gt;_registry-&gt;getConfig()-&gt;username;
         if(!empty($username)) {
             echo "Hello $username!";
         } else {
@@ -757,7 +749,7 @@ class My_Component_HelloProvider
         }
     }
 }
-]]></programlisting>
+</programlisting>
 
                     <para>
                         The returned configuration is of the type
@@ -773,23 +765,23 @@ class My_Component_HelloProvider
                         access the storage in a similar way like the configuration:
                     </para>
 
-                    <programlisting language="php"><![CDATA[
+                    <programlisting language="php">
 class My_Component_HelloProvider
     extends Zend_Tool_Framework_Provider_Abstract
 {
     public function say()
     {
-        $aValue = $this->_registry->getStorage()->get("myUsername");
+        $aValue = $this-&gt;_registry-&gt;getStorage()-&gt;get("myUsername");
         echo "Hello $aValue!";
     }
 }
-]]></programlisting>
+</programlisting>
 
                     <para>
                         The <acronym>API</acronym> of the storage is very simple:
                     </para>
 
-                    <programlisting language="php"><![CDATA[
+                    <programlisting language="php">
 class Zend_Tool_Framework_Client_Storage
 {
     public function setAdapter($adapter);
@@ -800,7 +792,7 @@ class Zend_Tool_Framework_Client_Storage
     public function remove($name);
     public function getStreamUri($name);
 }
-]]></programlisting>
+</programlisting>
 
                     <important>
                         <para>
@@ -810,13 +802,13 @@ class Zend_Tool_Framework_Client_Storage
                             though, since empty ones are created upon request.
                         </para>
                     </important>
-                </sect5>
-            </sect4>
-        </sect3>
-    </sect2>
+                </section>
+            </section>
+        </section>
+    </section>
 
-    <sect2 id="zend.tool.extending.zend-tool-project">
-        <title>Zend_Tool_Project Extensions</title>
+    <section xml:id="zend.tool.extending.zend-tool-project"><info><title>Zend_Tool_Project Extensions</title></info>
+        
 
         <para>
             <classname>Zend_Tool_Project</classname> exposes a rich set of functionality and
@@ -824,8 +816,8 @@ class Zend_Tool_Framework_Client_Storage
             project easier and more manageable.
         </para>
 
-        <sect3 id="zend.tool.extending.zend-tool-project.architecture">
-            <title>Overall Architecture</title>
+        <section xml:id="zend.tool.extending.zend-tool-project.architecture"><info><title>Overall Architecture</title></info>
+            
 
             <para>
                 This same concept applies to Zend Framework projects. In Zend Framework projects,
@@ -852,11 +844,11 @@ class Zend_Tool_Framework_Client_Storage
                 <emphasis>what</emphasis> resources are part of a project at any given time, but
                 also <emphasis>where</emphasis> they are in relation to one another.
             </para>
-        </sect3>
+        </section>
 
 
-        <sect3 id="zend.tool.extending.zend-tool-project.providers">
-            <title>Creating Providers</title>
+        <section xml:id="zend.tool.extending.zend-tool-project.providers"><info><title>Creating Providers</title></info>
+            
 
             <para>
                 Project specific providers are created in the same fashion as plain framework
@@ -867,21 +859,21 @@ class Zend_Tool_Framework_Client_Storage
                 to the current project profile.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 class My_Component_HelloProvider
     extends Zend_Tool_Project_Provider_Abstract
 {
     public function say()
     {
-        $profile = $this->_loadExistingProfile();
+        $profile = $this-&gt;_loadExistingProfile();
 
         /* ... do project stuff here */
 
-        $this->_storeProfile();
+        $this-&gt;_storeProfile();
     }
 }
-]]></programlisting>
-        </sect3>
+</programlisting>
+        </section>
 
         <!--
         <sect3 id="zend.tool.extending.zend-tool-project.resources-and-contexts">
@@ -891,5 +883,5 @@ class My_Component_HelloProvider
 
         </sect3>
         -->
-    </sect2>
-</sect1>
+    </section>
+</section>

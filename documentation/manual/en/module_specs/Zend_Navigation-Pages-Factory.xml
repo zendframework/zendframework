@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.navigation.pages.factory">
-    <title>Creating pages using the page factory</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.factory"><info><title>Creating pages using the page factory</title></info>
+    
 
     <para>
         All pages (also custom classes), can be created using the page
@@ -22,88 +23,88 @@
         <code>mvc</code> or <code>uri</code> and <acronym>MVC</acronym>/URI page will be created.
     </para>
 
-    <example id="zend.navigation.pages.factory.example.mvc">
-        <title>Creating an MVC page using the page factory</title>
+    <example xml:id="zend.navigation.pages.factory.example.mvc"><info><title>Creating an MVC page using the page factory</title></info>
+        
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $page = Zend_Navigation_Page::factory(array(
-    'label'  => 'My MVC page',
-    'action' => 'index'
+    'label'  =&gt; 'My MVC page',
+    'action' =&gt; 'index'
 ));
 
 $page = Zend_Navigation_Page::factory(array(
-    'label'      => 'Search blog',
-    'action'     => 'index',
-    'controller' => 'search',
-    'module'     => 'blog'
+    'label'      =&gt; 'Search blog',
+    'action'     =&gt; 'index',
+    'controller' =&gt; 'search',
+    'module'     =&gt; 'blog'
 ));
 
 $page = Zend_Navigation_Page::factory(array(
-    'label'      => 'Home',
-    'action'     => 'index',
-    'controller' => 'index',
-    'module'     => 'index',
-    'route'      => 'home'
+    'label'      =&gt; 'Home',
+    'action'     =&gt; 'index',
+    'controller' =&gt; 'index',
+    'module'     =&gt; 'index',
+    'route'      =&gt; 'home'
 ));
 
 $page = Zend_Navigation_Page::factory(array(
-    'type'   => 'mvc',
-    'label'  => 'My MVC page'
+    'type'   =&gt; 'mvc',
+    'label'  =&gt; 'My MVC page'
 ));
-]]></programlisting>
+</programlisting>
     </example>
 
-    <example id="zend.navigation.pages.factory.example.uri">
-        <title>Creating a URI page using the page factory</title>
+    <example xml:id="zend.navigation.pages.factory.example.uri"><info><title>Creating a URI page using the page factory</title></info>
+        
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $page = Zend_Navigation_Page::factory(array(
-    'label' => 'My URI page',
-    'uri'   => 'http://www.example.com/'
+    'label' =&gt; 'My URI page',
+    'uri'   =&gt; 'http://www.example.com/'
 ));
 
 $page = Zend_Navigation_Page::factory(array(
-    'label'  => 'Search',
-    'uri'    => 'http://www.example.com/search',
-    'active' => true
+    'label'  =&gt; 'Search',
+    'uri'    =&gt; 'http://www.example.com/search',
+    'active' =&gt; true
 ));
 
 $page = Zend_Navigation_Page::factory(array(
-    'label' => 'My URI page',
-    'uri'   => '#'
+    'label' =&gt; 'My URI page',
+    'uri'   =&gt; '#'
 ));
 
 $page = Zend_Navigation_Page::factory(array(
-    'type'   => 'uri',
-    'label'  => 'My URI page'
+    'type'   =&gt; 'uri',
+    'label'  =&gt; 'My URI page'
 ));
-]]></programlisting>
+</programlisting>
     </example>
 
-    <example id="zend.navigation.pages.factory.example.custom">
-        <title>Creating a custom page type using the page factory</title>
+    <example xml:id="zend.navigation.pages.factory.example.custom"><info><title>Creating a custom page type using the page factory</title></info>
+        
 
         <para>
             To create a custom page type using the factory, use the option
             <code>type</code> to specify a class name to instantiate.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 class My_Navigation_Page extends Zend_Navigation_Page
 {
     protected $_fooBar = 'ok';
 
     public function setFooBar($fooBar)
     {
-        $this->_fooBar = $fooBar;
+        $this-&gt;_fooBar = $fooBar;
     }
 }
 
 $page = Zend_Navigation_Page::factory(array(
-    'type'    => 'My_Navigation_Page',
-    'label'   => 'My custom page',
-    'foo_bar' => 'foo bar'
+    'type'    =&gt; 'My_Navigation_Page',
+    'label'   =&gt; 'My custom page',
+    'foo_bar' =&gt; 'foo bar'
 ));
-]]></programlisting>
+</programlisting>
     </example>
-</sect2>
+</section>

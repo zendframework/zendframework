@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.application.core-functionality.application">
-    <title>Zend_Application</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.core-functionality.application"><info><title>Zend_Application</title></info>
+    
 
     <para>
         <classname>Zend_Application</classname> provides the base functionality of the
@@ -17,8 +18,8 @@
         illustrate both use cases.
     </para>
 
-    <table id="zend.application.core-functionality.application.api.options">
-        <title>Zend_Application options</title>
+    <table xml:id="zend.application.core-functionality.application.api.options"><info><title>Zend_Application options</title></info>
+        
 
         <tgroup cols="2">
             <thead>
@@ -77,16 +78,16 @@
         </tgroup>
     </table>
 
-    <note>
-        <title>Option names</title>
+    <note><info><title>Option names</title></info>
+        
 
         <para>
             Please note that option names are case insensitive.
         </para>
     </note>
 
-    <table id="zend.application.core-functionality.application.api.table">
-        <title>Zend_Application Methods</title>
+    <table xml:id="zend.application.core-functionality.application.api.table"><info><title>Zend_Application Methods</title></info>
+        
 
         <tgroup cols="4">
             <thead>
@@ -149,7 +150,7 @@
                                             single key "configs" whose value is an array of the
                                             files to merge. Note: this means you either pass a
                                             literal path, or
-                                            <command>array("configs"=>array("/path1","/path2"[,...]));</command>.
+                                            <command>array("configs"=&gt;array("/path1","/path2"[,...]));</command>.
                                         </para>
                                     </listitem>
 
@@ -422,4 +423,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect2>
+</section>

@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.file-transport">
-    <title>Using File Transport</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.file-transport"><info><title>Using File Transport</title></info>
+    
     
     <para>
         <classname>Zend_Mail_Transport_File</classname> is useful in a
@@ -23,17 +24,17 @@
         hash as the filename:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $mail = new Zend_Mail();
-$mail->addTo('somebody@example.com', 'Some Recipient');
+$mail-&gt;addTo('somebody@example.com', 'Some Recipient');
 // build message...
-$tr = new Zend_Mail_Transport_File(array('callback' => function ($transport){
-    return $transport->recipients . '_' . mt_rand() . '.tmp';
+$tr = new Zend_Mail_Transport_File(array('callback' =&gt; function ($transport){
+    return $transport-&gt;recipients . '_' . mt_rand() . '.tmp';
 }));
-$mail->send($tr);
-]]></programlisting>
+$mail-&gt;send($tr);
+</programlisting>
 
     <para>
         The resulting file will be something like <filename>somebody@example.com_1493362665.tmp</filename>
     </para>
-</sect1>
+</section>

@@ -1,23 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.translate.using">
-    <title>Using Translation Adapters</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.using"><info><title>Using Translation Adapters</title></info>
+    
 
     <para>
         The next step is to use the adapter within your code.
     </para>
 
-    <example id="zend.translate.using.example1">
-        <title>Example of single-language PHP code</title>
+    <example xml:id="zend.translate.using.example1"><info><title>Example of single-language PHP code</title></info>
+        
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 print "Example\n";
 print "=======\n";
 print "Here is line one\n";
 print "Today is the " . date("d.m.Y") . "\n";
 print "\n";
 print "Here is line two\n";
-]]></programlisting>
+</programlisting>
     </example>
 
     <para>
@@ -33,33 +34,33 @@ print "Here is line two\n";
         translation in mind, than changing your code afterwards.
     </para>
 
-    <example id="zend.translate.using.example2">
-        <title>Example of multi-lingual PHP code</title>
+    <example xml:id="zend.translate.using.example2"><info><title>Example of multi-lingual PHP code</title></info>
+        
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $translate = new Zend_Translate(
     array(
-        'adapter' => 'gettext',
-        'content' => '/my/path/source-de.mo',
-        'locale'  => 'de'
+        'adapter' =&gt; 'gettext',
+        'content' =&gt; '/my/path/source-de.mo',
+        'locale'  =&gt; 'de'
     )
 );
-$translate->addTranslation(
+$translate-&gt;addTranslation(
     array(
-        'content' => '/path/to/translation/fr-source.mo',
-        'locale'  => 'fr'
+        'content' =&gt; '/path/to/translation/fr-source.mo',
+        'locale'  =&gt; 'fr'
     )
 );
 
-print $translate->_("Example") . "\n";
+print $translate-&gt;_("Example") . "\n";
 print "=======\n";
-print $translate->_("Here is line one") . "\n";
-printf($translate->_("Today is the %1\$s") . "\n", date('d.m.Y'));
+print $translate-&gt;_("Here is line one") . "\n";
+printf($translate-&gt;_("Today is the %1\$s") . "\n", date('d.m.Y'));
 print "\n";
 
-$translate->setLocale('fr');
-print $translate->_("Here is line two") . "\n";
-]]></programlisting>
+$translate-&gt;setLocale('fr');
+print $translate-&gt;_("Here is line two") . "\n";
+</programlisting>
     </example>
 
     <para>
@@ -71,15 +72,15 @@ print $translate->_("Here is line two") . "\n";
         Create a new <classname>Zend_Translate</classname> object and define the base adapter:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $translate = new Zend_Translate
     array(
-        'adapter' => 'gettext',
-        'content' => '/path/to/translation/source-de.mo',
-        'locale'  => 'de'
+        'adapter' =&gt; 'gettext',
+        'content' =&gt; '/path/to/translation/source-de.mo',
+        'locale'  =&gt; 'de'
     )
 );
-]]></programlisting>
+</programlisting>
 
     <para>
         In this example we chose the
@@ -96,11 +97,11 @@ $translate = new Zend_Translate
         like this:
     </para>
 
-    <programlisting language="php"><![CDATA[
-print $translate->_("Example") . "\n";
+    <programlisting language="php">
+print $translate-&gt;_("Example") . "\n";
 print "=======\n";
-print $translate->_("Here is line one") . "\n";
-]]></programlisting>
+print $translate-&gt;_("Here is line one") . "\n";
+</programlisting>
 
     <para>
         Some strings do not needed to be translated.
@@ -113,9 +114,9 @@ print $translate->_("Here is line one") . "\n";
         supported through the use of embedded parameters.
     </para>
 
-    <programlisting language="php"><![CDATA[
-printf($translate->_("Today is the %1\$s") . "\n", date("d.m.Y"));
-]]></programlisting>
+    <programlisting language="php">
+printf($translate-&gt;_("Today is the %1\$s") . "\n", date("d.m.Y"));
+</programlisting>
 
     <para>
         Instead of <methodname>print()</methodname>, use the <methodname>printf()</methodname>
@@ -132,11 +133,11 @@ printf($translate->_("Today is the %1\$s") . "\n", date("d.m.Y"));
         You can use message IDs instead of strings in your code, like this:
     </para>
 
-    <programlisting language="php"><![CDATA[
-print $translate->_(1) . "\n";
+    <programlisting language="php">
+print $translate-&gt;_(1) . "\n";
 print "=======\n";
-print $translate->_(2) . "\n";
-]]></programlisting>
+print $translate-&gt;_(2) . "\n";
+</programlisting>
 
     <para>
         But doing this has several disadvantages:
@@ -164,8 +165,8 @@ print $translate->_(2) . "\n";
         strings.
     </para>
 
-    <sect2 id="zend.translate.using.structure">
-        <title>Translation Source Structures</title>
+    <section xml:id="zend.translate.using.structure"><info><title>Translation Source Structures</title></info>
+        
 
         <para>
             Your next step is to create the translation sources for the
@@ -186,13 +187,13 @@ print $translate->_(2) . "\n";
                     Single structured source
                 </para>
 
-                <programlisting language="txt"><![CDATA[
+                <programlisting language="txt">
 /application/
 /languages/
 /languages/lang.en
 /languages/lang.de
 /library/
-]]></programlisting>
+</programlisting>
 
                 <para>
                     Positive: all source files for every languages are stored
@@ -205,7 +206,7 @@ print $translate->_(2) . "\n";
                     Language structured source
                 </para>
 
-                <programlisting language="txt"><![CDATA[
+                <programlisting language="txt">
 /application/
 /languages/
 /languages/en/
@@ -215,7 +216,7 @@ print $translate->_(2) . "\n";
 /languages/de/first.de
 /languages/de/second.de
 /library
-]]></programlisting>
+</programlisting>
 
                 <para>
                     Positive: Every language is stored in their own directories.
@@ -229,7 +230,7 @@ print $translate->_(2) . "\n";
                     Application structured source
                 </para>
 
-                <programlisting language="txt"><![CDATA[
+                <programlisting language="txt">
 /application/
 /application/languages/
 /application/languages/first.en
@@ -237,7 +238,7 @@ print $translate->_(2) . "\n";
 /application/languages/second.en
 /application/languages/second.de
 /library/
-]]></programlisting>
+</programlisting>
 
                 <para>
                     Positive: all source files for every language are stored
@@ -255,7 +256,7 @@ print $translate->_(2) . "\n";
                     Gettext structured source
                 </para>
 
-                <programlisting language="txt"><![CDATA[
+                <programlisting language="txt">
 /application/
 /languages/
 /languages/de/
@@ -267,7 +268,7 @@ print $translate->_(2) . "\n";
 /languages/en/LC_MESSAGES/first.mo
 /languages/en/LC_MESSAGES/second.mo
 /library/
-]]></programlisting>
+</programlisting>
 
                 <para>
                     Positive: existing gettext sources can be used without changing
@@ -285,7 +286,7 @@ print $translate->_(2) . "\n";
                    File structured source
                 </para>
 
-                <programlisting language="txt"><![CDATA[
+                <programlisting language="txt">
 /application/
 /application/models/
 /application/models/MyModel.php
@@ -296,7 +297,7 @@ print $translate->_(2) . "\n";
 /application/controllers/MyController.de
 /application/controllers/MyController.en
 /library/
-]]></programlisting>
+</programlisting>
 
                 <para>
                     Positive: translation files are localted near their source.
@@ -319,8 +320,5 @@ print $translate->_(2) . "\n";
             So now, that we know which structure we want to have,
             we should create our translation source files.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

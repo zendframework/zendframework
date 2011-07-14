@@ -1,14 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.captcha.operation">
-    <title>Captcha Operation</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.captcha.operation"><info><title>Captcha Operation</title></info>
+    
 
     <para>
         All <acronym>CAPTCHA</acronym> adapter implement
         <classname>Zend_Captcha_Adapter</classname>, which looks like the following:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 interface Zend_Captcha_Adapter extends Zend_Validate_Interface
 {
     public function generate();
@@ -28,7 +29,7 @@ interface Zend_Captcha_Adapter extends Zend_Validate_Interface
 
     public function getErrors();
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         The name setter and getter are used to specify and retrieve the
@@ -47,30 +48,27 @@ interface Zend_Captcha_Adapter extends Zend_Validate_Interface
         A typical use case might look like the following:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 // Creating a Zend_View instance
 $view = new Zend_View();
 
 // Originating request:
 $captcha = new Zend_Captcha_Figlet(array(
-    'name' => 'foo',
-    'wordLen' => 6,
-    'timeout' => 300,
+    'name' =&gt; 'foo',
+    'wordLen' =&gt; 6,
+    'timeout' =&gt; 300,
 ));
 
-$id = $captcha->generate();
-echo "<form method=\"post\" action=\"\">";
-echo $captcha->render($view);
-echo "</form>";
+$id = $captcha-&gt;generate();
+echo "&lt;form method=\"post\" action=\"\"&gt;";
+echo $captcha-&gt;render($view);
+echo "&lt;/form&gt;";
 
 // On subsequent request:
 // Assume captcha setup as before, the value of $_POST['foo']
-// would be key/value array: id => captcha ID, input => captcha value
-if ($captcha->isValid($_POST['foo'], $_POST)) {
+// would be key/value array: id =&gt; captcha ID, input =&gt; captcha value
+if ($captcha-&gt;isValid($_POST['foo'], $_POST)) {
     // Validated!
 }
-]]></programlisting>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</programlisting>
+</section>

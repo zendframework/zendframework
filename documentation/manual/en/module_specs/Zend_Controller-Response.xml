@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.response">
-    <title>The Response Object</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.controller.response.usage">
-        <title>Usage</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.response"><info><title>The Response Object</title></info>
+    
+
+    <section xml:id="zend.controller.response.usage"><info><title>Usage</title></info>
+        
 
         <para>
-            The response object is the logical counterpart to the <link
-                linkend="zend.controller.request">request object</link>. Its
+            The response object is the logical counterpart to the <link linkend="zend.controller.request">request object</link>. Its
             purpose is to collate content and/or headers so that they may be
             returned en masse. Additionally, the front controller will pass any
             caught exceptions to the response object, allowing the developer to
@@ -17,18 +17,18 @@
             <methodname>Zend_Controller_Front::throwExceptions(true)</methodname>:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$front->throwExceptions(true);
-]]></programlisting>
+        <programlisting language="php">
+$front-&gt;throwExceptions(true);
+</programlisting>
 
         <para>
             To send the response output, including headers, use
             <methodname>sendResponse()</methodname>.
         </para>
 
-        <programlisting language="php"><![CDATA[
-$response->sendResponse();
-]]></programlisting>
+        <programlisting language="php">
+$response-&gt;sendResponse();
+</programlisting>
 
         <note>
             <para>
@@ -40,14 +40,14 @@ $response->sendResponse();
                 <methodname>Zend_Controller_Front::returnResponse(true)</methodname>:
             </para>
 
-            <programlisting language="php"><![CDATA[
-$front->returnResponse(true);
-$response = $front->dispatch();
+            <programlisting language="php">
+$front-&gt;returnResponse(true);
+$response = $front-&gt;dispatch();
 
 // do some more processing, such as logging...
 // and then send the output:
-$response->sendResponse();
-]]></programlisting>
+$response-&gt;sendResponse();
+</programlisting>
         </note>
 
         <para>
@@ -56,13 +56,13 @@ $response->sendResponse();
             headers, push them to the response object:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Within an action controller action:
 // Set a header
-$this->getResponse()
-    ->setHeader('Content-Type', 'text/html')
-    ->appendBody($content);
-]]></programlisting>
+$this-&gt;getResponse()
+    -&gt;setHeader('Content-Type', 'text/html')
+    -&gt;appendBody($content);
+</programlisting>
 
         <para>
             By doing this, all headers get sent at once, just prior to
@@ -71,8 +71,7 @@ $this->getResponse()
 
         <note>
             <para>
-                If using the action controller <link
-                    linkend="zend.controller.action.viewintegration">view
+                If using the action controller <link linkend="zend.controller.action.viewintegration">view
                     integration</link>, you do not need to set the rendered view
                 script content in the response object, as
                 <methodname>Zend_Controller_Action::render()</methodname> does this by default.
@@ -94,23 +93,23 @@ $this->getResponse()
             response object instead of rendering output.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // retrieve post-dispatch:
-$front->dispatch();
-$response = $front->getResponse();
-if ($response->isException()) {
+$front-&gt;dispatch();
+$response = $front-&gt;getResponse();
+if ($response-&gt;isException()) {
     // log, mail, etc...
 }
 
 // Or, have the front controller dispatch() process return it
-$front->returnResponse(true);
-$response = $front->dispatch();
+$front-&gt;returnResponse(true);
+$response = $front-&gt;dispatch();
 
 // do some processing...
 
 // finally, echo the response
-$response->sendResponse();
-]]></programlisting>
+$response-&gt;sendResponse();
+</programlisting>
 
         <para>
             By default, exception messages are not displayed. This behaviour may be
@@ -118,24 +117,24 @@ $response->sendResponse();
             front controller to <methodname>throwExceptions()</methodname>, as shown above:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$response->renderExceptions(true);
-$front->dispatch($request, $response);
+        <programlisting language="php">
+$response-&gt;renderExceptions(true);
+$front-&gt;dispatch($request, $response);
 
 // or:
-$front->returnResponse(true);
-$response = $front->dispatch();
-$response->renderExceptions();
-$response->sendResponse();
+$front-&gt;returnResponse(true);
+$response = $front-&gt;dispatch();
+$response-&gt;renderExceptions();
+$response-&gt;sendResponse();
 
 // or:
-$front->throwExceptions(true);
-$front->dispatch();
-]]></programlisting>
-    </sect2>
+$front-&gt;throwExceptions(true);
+$front-&gt;dispatch();
+</programlisting>
+    </section>
 
-    <sect2 id="zend.controller.response.headers">
-        <title>Manipulating Headers</title>
+    <section xml:id="zend.controller.response.headers"><info><title>Manipulating Headers</title></info>
+        
 
         <para>
             As stated previously, one aspect of the response object's duties is
@@ -236,10 +235,10 @@ $front->dispatch();
             <methodname>setHttpResponseCode()</methodname> and
             <methodname>getHttpResponseCode()</methodname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.response.namedsegments">
-        <title>Named Segments</title>
+    <section xml:id="zend.controller.response.namedsegments"><info><title>Named Segments</title></info>
+        
 
         <para>
             The response object has support for "named segments". This allows
@@ -257,26 +256,26 @@ $front->dispatch();
             footer:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Assume that this plugin class is registered with the front controller
 class MyPlugin extends Zend_Controller_Plugin_Abstract
 {
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
-        $response = $this->getResponse();
+        $response = $this-&gt;getResponse();
         $view = new Zend_View();
-        $view->setBasePath('../views/scripts');
+        $view-&gt;setBasePath('../views/scripts');
 
-        $response->prepend('header', $view->render('header.phtml'));
+        $response-&gt;prepend('header', $view-&gt;render('header.phtml'));
     }
 
     public function postDispatch(Zend_Controller_Request_Abstract $request)
     {
-        $response = $this->getResponse();
+        $response = $this-&gt;getResponse();
         $view = new Zend_View();
-        $view->setBasePath('../views/scripts');
+        $view-&gt;setBasePath('../views/scripts');
 
-        $response->append('footer', $view->render('footer.phtml'));
+        $response-&gt;append('footer', $view-&gt;render('footer.phtml'));
     }
 }
 
@@ -285,10 +284,10 @@ class MyController extends Zend_Controller_Action
 {
     public function fooAction()
     {
-        $this->render();
+        $this-&gt;render();
     }
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             In the above example, a call to <filename>/my/foo</filename> will cause the
@@ -296,13 +295,13 @@ class MyController extends Zend_Controller_Action
             structure:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 array(
-    'header'  => ..., // header content
-    'default' => ..., // body content from MyController::fooAction()
-    'footer'  => ...  // footer content
+    'header'  =&gt; ..., // header content
+    'default' =&gt; ..., // body content from MyController::fooAction()
+    'footer'  =&gt; ...  // footer content
 );
-]]></programlisting>
+</programlisting>
 
         <para>
             When this is rendered, it will render in the order in which elements
@@ -379,10 +378,10 @@ array(
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.response.exceptions">
-        <title>Testing for Exceptions in the Response Object</title>
+    <section xml:id="zend.controller.response.exceptions"><info><title>Testing for Exceptions in the Response Object</title></info>
+        
 
         <para>
             As mentioned earlier, by default, exceptions caught during dispatch
@@ -474,10 +473,10 @@ array(
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.response.subclassing">
-        <title>Subclassing the Response Object</title>
+    <section xml:id="zend.controller.response.subclassing"><info><title>Subclassing the Response Object</title></info>
+        
 
         <para>
             The purpose of the response object is to collect headers and content
@@ -500,8 +499,5 @@ array(
             requests), adding functionality to return a final view based on content stored in named
             segments, etc.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

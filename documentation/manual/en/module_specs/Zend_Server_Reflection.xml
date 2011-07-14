@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.server.reflection">
-    <title>Zend_Server_Reflection</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.server.reflection.introduction">
-        <title>Introduction</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.server.reflection"><info><title>Zend_Server_Reflection</title></info>
+    
+
+    <section xml:id="zend.server.reflection.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_Server_Reflection</classname> provides a standard mechanism for
@@ -19,43 +20,43 @@
             Typically, this functionality will only be used by developers of
             server classes for the framework.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.server.reflection.usage">
-        <title>Usage</title>
+    <section xml:id="zend.server.reflection.usage"><info><title>Usage</title></info>
+        
 
         <para>
             Basic usage is simple:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $class    = Zend_Server_Reflection::reflectClass('My_Class');
 $function = Zend_Server_Reflection::reflectFunction('my_function');
 
 // Get prototypes
-$prototypes = $reflection->getPrototypes();
+$prototypes = $reflection-&gt;getPrototypes();
 
 // Loop through each prototype for the function
 foreach ($prototypes as $prototype) {
 
     // Get prototype return type
-    echo "Return type: ", $prototype->getReturnType(), "\n";
+    echo "Return type: ", $prototype-&gt;getReturnType(), "\n";
 
     // Get prototype parameters
-    $parameters = $prototype->getParameters();
+    $parameters = $prototype-&gt;getParameters();
 
     echo "Parameters: \n";
     foreach ($parameters as $parameter) {
         // Get parameter type
-        echo "    ", $parameter->getType(), "\n";
+        echo "    ", $parameter-&gt;getType(), "\n";
     }
 }
 
 // Get namespace for a class, function, or method.
 // Namespaces may be set at instantiation time (second argument), or using
 // setNamespace()
-$reflection->getNamespace();
-]]></programlisting>
+$reflection-&gt;getNamespace();
+</programlisting>
 
         <para>
             <methodname>reflectFunction()</methodname> returns a
@@ -64,8 +65,5 @@ $reflection->getNamespace();
             <classname>Zend_Server_Reflection_Class</classname> object. Please refer to
             the <acronym>API</acronym> documentation to see what methods are available to each.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.debug.dumping">
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <title>Dumping Variables</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.debug.dumping"><info><title>Dumping Variables</title></info>
+
+    
 
     <para>
         The static method <methodname>Zend_Debug::dump()</methodname> prints or returns
@@ -11,12 +12,12 @@
         initialization, special tools, or debugging environment.
     </para>
 
-    <example id="zend.debug.dumping.example">
-        <title>Example of dump() method</title>
+    <example xml:id="zend.debug.dumping.example"><info><title>Example of dump() method</title></info>
+        
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 Zend_Debug::dump($var, $label = null, $echo = true);
-]]></programlisting>
+</programlisting>
     </example>
 
     <para>
@@ -43,15 +44,14 @@ Zend_Debug::dump($var, $label = null, $echo = true);
     <para>
         It may be helpful to understand that
         <methodname>Zend_Debug::dump()</methodname> method wraps the <acronym>PHP</acronym> function
-        <ulink url="http://php.net/var_dump"><methodname>var_dump()</methodname></ulink>.
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/var_dump"><methodname>var_dump()</methodname></link>.
         If the output stream is detected as a web presentation,
-        the output of <methodname>var_dump()</methodname> is escaped using <ulink
-            url="http://php.net/htmlspecialchars"><methodname>htmlspecialchars()</methodname></ulink>
+        the output of <methodname>var_dump()</methodname> is escaped using <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/htmlspecialchars"><methodname>htmlspecialchars()</methodname></link>
         and wrapped with (X)HTML <command>&lt;pre&gt;</command> tags.
     </para>
 
-    <tip>
-        <title>Debugging with Zend_Log</title>
+    <tip><info><title>Debugging with Zend_Log</title></info>
+        
 
         <para>
             Using <methodname>Zend_Debug::dump()</methodname> is best for ad hoc
@@ -67,7 +67,4 @@ Zend_Debug::dump($var, $label = null, $echo = true);
             output the string returned by <methodname>Zend_Debug::dump()</methodname>.
         </para>
     </tip>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

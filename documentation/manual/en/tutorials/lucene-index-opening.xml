@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.lucene.index-opening">
-    <title>Index Opening and Creation</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.index-opening"><info><title>Index Opening and Creation</title></info>
+    
 
     <para>
         All index operations (e.g., creating a new index, adding a document to the index, deleting a
@@ -9,19 +10,19 @@
         of the following two methods.
     </para>
 
-    <example id="learning.lucene.index-opening.creation">
-        <title>Lucene Index Creation</title>
+    <example xml:id="learning.lucene.index-opening.creation"><info><title>Lucene Index Creation</title></info>
+        
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $index = Zend_Search_Lucene::create($indexPath);
-]]></programlisting>
+</programlisting>
     </example>
 
-    <example id="learning.lucene.index-opening.opening">
-        <title>Lucene Index Opening</title>
+    <example xml:id="learning.lucene.index-opening.opening"><info><title>Lucene Index Opening</title></info>
+        
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $index = Zend_Search_Lucene::open($indexPath);
-]]></programlisting>
+</programlisting>
     </example>
-</sect1>
+</section>

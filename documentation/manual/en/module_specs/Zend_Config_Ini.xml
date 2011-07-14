@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.config.adapters.ini">
-    <title>Zend_Config_Ini</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.ini"><info><title>Zend_Config_Ini</title></info>
+    
 
     <para>
         <classname>Zend_Config_Ini</classname> enables developers to store configuration data in a
@@ -14,12 +15,11 @@
         ("<emphasis>:</emphasis>) and the name of the section from which data are to be inherited.
     </para>
 
-    <note>
-        <title>Parsing the INI File</title>
+    <note><info><title>Parsing the INI File</title></info>
+        
 
         <para>
-            <classname>Zend_Config_Ini</classname> utilizes the <ulink
-                url="http://php.net/parse_ini_file"><methodname>parse_ini_file()</methodname></ulink>
+            <classname>Zend_Config_Ini</classname> utilizes the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/parse_ini_file"><methodname>parse_ini_file()</methodname></link>
             <acronym>PHP</acronym> function. Please review this documentation to be aware of its
             specific behaviors, which propagate to <classname>Zend_Config_Ini</classname>, such as
             how the special values of "<constant>TRUE</constant>", "<constant>FALSE</constant>",
@@ -27,8 +27,8 @@
         </para>
     </note>
 
-    <note>
-        <title>Key Separator</title>
+    <note><info><title>Key Separator</title></info>
+        
 
         <para>
             By default, the key separator character is the period character
@@ -37,16 +37,16 @@
             the <classname>Zend_Config_Ini</classname> object. For example:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $options['nestSeparator'] = ':';
 $config = new Zend_Config_Ini('/path/to/config.ini',
                               'staging',
                               $options);
-]]></programlisting>
+</programlisting>
     </note>
 
-    <example id="zend.config.adapters.ini.example.using">
-        <title>Using Zend_Config_Ini</title>
+    <example xml:id="zend.config.adapters.ini.example.using"><info><title>Using Zend_Config_Ini</title></info>
+        
 
         <para>
             This example illustrates a basic use of <classname>Zend_Config_Ini</classname> for
@@ -60,7 +60,7 @@ $config = new Zend_Config_Ini('/path/to/config.ini',
             <filename>/path/to/config.ini</filename>:
         </para>
 
-        <programlisting language="ini"><![CDATA[
+        <programlisting language="ini">
 ; Production site configuration data
 [production]
 webhost                  = www.example.com
@@ -76,7 +76,7 @@ database.params.dbname   = dbname
 database.params.host     = dev.example.com
 database.params.username = devuser
 database.params.password = devsecret
-]]></programlisting>
+</programlisting>
 
         <para>
             Next, assume that the application developer needs the staging configuration data from
@@ -84,17 +84,17 @@ database.params.password = devsecret
             the <acronym>INI</acronym> file and the staging section:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $config = new Zend_Config_Ini('/path/to/config.ini', 'staging');
 
-echo $config->database->params->host;   // prints "dev.example.com"
-echo $config->database->params->dbname; // prints "dbname"
-]]></programlisting>
+echo $config-&gt;database-&gt;params-&gt;host;   // prints "dev.example.com"
+echo $config-&gt;database-&gt;params-&gt;dbname; // prints "dbname"
+</programlisting>
     </example>
 
     <note>
-        <table id="zend.config.adapters.ini.table">
-            <title>Zend_Config_Ini Constructor Parameters</title>
+        <table xml:id="zend.config.adapters.ini.table"><info><title>Zend_Config_Ini Constructor Parameters</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -153,7 +153,4 @@ echo $config->database->params->dbname; // prints "dbname"
             </tgroup>
         </table>
     </note>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

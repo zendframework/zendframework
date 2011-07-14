@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.dojo.form" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Dojo Form Elements and Decorators</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.form"><info><title>Dojo Form Elements and Decorators</title></info>
+    
 
     <para>
         Building on the <link linkend="zend.dojo.view.dijit">dijit view
@@ -49,8 +50,8 @@
         </listitem>
     </itemizedlist>
 
-    <example id="zend.dojo.form.enable">
-        <title>Enabling Dojo in your existing forms</title>
+    <example xml:id="zend.dojo.form.enable"><info><title>Enabling Dojo in your existing forms</title></info>
+        
 
         <para>
             "But wait," you say; "I'm already extending <classname>Zend_Form</classname> with my own
@@ -72,7 +73,7 @@
             them:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 class My_Form_Custom extends Zend_Form
 {
     public function init()
@@ -83,12 +84,12 @@ class My_Form_Custom extends Zend_Form
         // ... continue form definition from here
 
         // Dojo-enable all sub forms:
-        foreach ($this->getSubForms() as $subForm) {
+        foreach ($this-&gt;getSubForms() as $subForm) {
             Zend_Dojo::enableForm($subForm);
         }
     }
 }
-]]></programlisting>
+</programlisting>
     </example>
 
     <para>
@@ -96,10 +97,7 @@ class My_Form_Custom extends Zend_Form
         using any other form decorator or element.
     </para>
 
-    <xi:include href="Zend_Dojo-Form-Decorators.xml" />
-    <xi:include href="Zend_Dojo-Form-Elements.xml" />
-    <xi:include href="Zend_Dojo-Form-Examples.xml" />
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Dojo-Form-Decorators.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Dojo-Form-Elements.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Dojo-Form-Examples.xml"/>
+</section>

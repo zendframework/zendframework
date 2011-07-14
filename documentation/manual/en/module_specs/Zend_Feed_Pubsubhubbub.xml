@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.feed.pubsubhubbub.introduction">
-    <title>Zend_Feed_Pubsubhubbub</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.pubsubhubbub.introduction"><info><title>Zend_Feed_Pubsubhubbub</title></info>
+    
 
     <para>
         <classname>Zend_Feed_Pubsubhubbub</classname> is an implementation of the PubSubHubbub Core
@@ -9,8 +10,8 @@
         Subscriber suited to Zend Framework and other <acronym>PHP</acronym> applications.
     </para>
 
-    <sect2 id="zend.feed.pubsubhubbub.what.is.pubsubhubbub">
-        <title>What is Pubsubhubbub?</title>
+    <section xml:id="zend.feed.pubsubhubbub.what.is.pubsubhubbub"><info><title>What is Pubsubhubbub?</title></info>
+        
 
         <para>
             Pubsubhubbub is an open, simple web-scale pubsub protocol. A common use case to enable
@@ -48,10 +49,10 @@
             including in Google Reader, Feedburner, and there are plugins available for Wordpress
             blogs.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.feed.pubsubhubbub.architecture">
-        <title>Architecture</title>
+    <section xml:id="zend.feed.pubsubhubbub.architecture"><info><title>Architecture</title></info>
+        
 
         <para>
             <classname>Zend_Feed_Pubsubhubbub</classname> implements two sides of the Pubsubhubbub
@@ -92,10 +93,10 @@
             <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname>. These classes, their
             use cases, and <acronym>API</acronym>s are covered in subsequent sections.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.publisher">
-        <title>Zend_Feed_Pubsubhubbub_Publisher</title>
+    <section xml:id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.publisher"><info><title>Zend_Feed_Pubsubhubbub_Publisher</title></info>
+        
 
         <para>
             In Pubsubhubbub, the Publisher is the party who publishes a live feed and frequently
@@ -134,21 +135,21 @@
             job queue though such extra steps are optional.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $publisher = new Zend_Feed_Pubsubhubbub_Publisher;
-$publisher->addHubUrls(array(
+$publisher-&gt;addHubUrls(array(
     'http://pubsubhubbub.appspot.com/',
     'http://hubbub.example.com',
 ));
-$publisher->addUpdatedTopicUrls(array(
+$publisher-&gt;addUpdatedTopicUrls(array(
     'http://www.example.net/rss',
     'http://www.example.net/atom',
 ));
-$publisher->notifyAll();
+$publisher-&gt;notifyAll();
 
-if (!$publisher->isSuccess()) {
+if (!$publisher-&gt;isSuccess()) {
     // check for errors
-    $errors     = $publisher->getErrors();
+    $errors     = $publisher-&gt;getErrors();
     $failedHubs = array()
     foreach ($errors as $error) {
         $failedHubs[] = $error['hubUrl'];
@@ -156,7 +157,7 @@ if (!$publisher->isSuccess()) {
 }
 
 // reschedule notifications for the failed Hubs in $failedHubs
-]]></programlisting>
+</programlisting>
 
         <para>
             If you prefer having more concrete control over the Publisher, the methods
@@ -182,10 +183,10 @@ if (!$publisher->isSuccess()) {
             feeds to offer some additional tolerance for failures both in terms of their own
             temporary downtime or Publisher errors or downtime.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber">
-        <title>Zend_Feed_Pubsubhubbub_Subscriber</title>
+    <section xml:id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber"><info><title>Zend_Feed_Pubsubhubbub_Subscriber</title></info>
+        
 
         <para>
             In Pubsubhubbub, the Subscriber is the party who wishes to receive updates to any Topic
@@ -231,9 +232,8 @@ if (!$publisher->isSuccess()) {
             </para>
         </important>
 
-        <sect3
-            id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.subscribing.and.unsubscribing">
-            <title>Subscribing and Unsubscribing</title>
+        <section xml:id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.subscribing.and.unsubscribing"><info><title>Subscribing and Unsubscribing</title></info>
+            
 
             <para>
                 <classname>Zend_Feed_Pubsubhubbub_Subscriber</classname> implements a full
@@ -266,16 +266,16 @@ if (!$publisher->isSuccess()) {
                 demonstrated below:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $storage = new Zend_Feed_Pubsubhubbub_Model_Subscription;
 
 $subscriber = new Zend_Feed_Pubsubhubbub_Subscriber;
-$subscriber->setStorage($storage);
-$subscriber->addHubUrl('http://hubbub.example.com');
-$subscriber->setTopicUrl('http://www.example.net/rss.xml');
-$subscriber->setCallbackUrl('http://www.mydomain.com/hubbub/callback');
-$subscriber->subscribeAll();
-]]></programlisting>
+$subscriber-&gt;setStorage($storage);
+$subscriber-&gt;addHubUrl('http://hubbub.example.com');
+$subscriber-&gt;setTopicUrl('http://www.example.net/rss.xml');
+$subscriber-&gt;setCallbackUrl('http://www.mydomain.com/hubbub/callback');
+$subscriber-&gt;subscribeAll();
+</programlisting>
 
             <para>
                 In order to store subscriptions and offer access to this data for general use,
@@ -302,7 +302,7 @@ $subscriber->subscribeAll();
                 may look similar to:
             </para>
 
-            <programlisting language="sql"><![CDATA[
+            <programlisting language="sql">
 CREATE TABLE IF NOT EXISTS `subscription` (
   `id` varchar(32) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `topic_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -315,16 +315,15 @@ CREATE TABLE IF NOT EXISTS `subscription` (
   `subscription_state` varchar(12) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-]]></programlisting>
+</programlisting>
 
             <para>
                 Behind the scenes, the Subscriber above will send a request to the Hub endpoint
                 containing the following parameters (based on the previous example):
             </para>
 
-            <table
-                id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.subscribing.and.unsubscribing.table">
-                <title>Subscription request parameters</title>
+            <table xml:id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.subscribing.and.unsubscribing.table"><info><title>Subscription request parameters</title></info>
+                
 
                 <tgroup cols="3">
                     <thead>
@@ -507,10 +506,10 @@ CREATE TABLE IF NOT EXISTS `subscription` (
                 new instance of <classname>Zend_Db_Table_Abstract</classname> to the default Model's
                 constructor to change the used table name.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.handling.hub.callbacks">
-            <title>Handling Subscriber Callbacks</title>
+        <section xml:id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.handling.hub.callbacks"><info><title>Handling Subscriber Callbacks</title></info>
+            
 
             <para>
                 Whenever a subscription or unsubscription request is made, the Hub must verify the
@@ -528,12 +527,12 @@ CREATE TABLE IF NOT EXISTS `subscription` (
                 internally.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $storage = new Zend_Feed_Pubsubhubbub_Model_Subscription;
 $callback = new Zend_Feed_Pubsubhubbub_Subscriber_Callback;
-$callback->setStorage($storage);
-$callback->handle();
-$callback->sendResponse();
+$callback-&gt;setStorage($storage);
+$callback-&gt;handle();
+$callback-&gt;sendResponse();
 
 /**
  * Check if the callback resulting in the receipt of a feed update.
@@ -541,13 +540,13 @@ $callback->sendResponse();
  * Typically we need do nothing other than add feed update handling - the rest
  * is handled internally by the class.
  */
-if ($callback->hasFeedUpdate()) {
-    $feedString = $callback->getFeedUpdate();
+if ($callback-&gt;hasFeedUpdate()) {
+    $feedString = $callback-&gt;getFeedUpdate();
     /**
      *  Process the feed update asynchronously to avoid a Hub timeout.
      */
 }
-]]></programlisting>
+</programlisting>
 
             <note>
                 <para>
@@ -580,11 +579,10 @@ if ($callback->hasFeedUpdate()) {
                     scheduled task) as much as possible.
                 </para>
             </important>
-        </sect3>
+        </section>
 
-        <sect3
-            id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.setting.up.and.using.a.callback.url.route">
-            <title>Setting Up And Using A Callback URL Route</title>
+        <section xml:id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.setting.up.and.using.a.callback.url.route"><info><title>Setting Up And Using A Callback URL Route</title></info>
+            
 
             <para>
                 As noted earlier, the
@@ -622,7 +620,7 @@ if ($callback->hasFeedUpdate()) {
                 demonstrates this using a Zend Framework controller.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 class CallbackController extends Zend_Controller_Action
 {
 
@@ -630,15 +628,15 @@ class CallbackController extends Zend_Controller_Action
     {
         $storage = new Zend_Feed_Pubsubhubbub_Model_Subscription;
         $callback = new Zend_Feed_Pubsubhubbub_Subscriber_Callback;
-        $callback->setStorage($storage);
+        $callback-&gt;setStorage($storage);
         /**
          * Inject subscription key parsing from URL path using
          * a parameter from Router.
          */
-        $subscriptionKey = $this->_getParam('subkey');
-        $callback->setSubscriptionKey($subscriptionKey);
-        $callback->handle();
-        $callback->sendResponse();
+        $subscriptionKey = $this-&gt;_getParam('subkey');
+        $callback-&gt;setSubscriptionKey($subscriptionKey);
+        $callback-&gt;handle();
+        $callback-&gt;sendResponse();
 
         /**
          * Check if the callback resulting in the receipt of a feed update.
@@ -646,8 +644,8 @@ class CallbackController extends Zend_Controller_Action
          * request. Typically we need do nothing other than add feed update
          * handling - the rest is handled internally by the class.
          */
-        if ($callback->hasFeedUpdate()) {
-            $feedString = $callback->getFeedUpdate();
+        if ($callback-&gt;hasFeedUpdate()) {
+            $feedString = $callback-&gt;getFeedUpdate();
             /**
              *  Process the feed update asynchronously to avoid a Hub timeout.
              */
@@ -655,7 +653,7 @@ class CallbackController extends Zend_Controller_Action
     }
 
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             Actually adding the route which would map the path-appended key
@@ -664,13 +662,13 @@ class CallbackController extends Zend_Controller_Action
             use with <classname>Zend_Application</classname> bootstrapping.
         </para>
 
-        <programlisting language="dosini"><![CDATA[
+        <programlisting language="dosini">
 ; Callback Route to enable appending a PuSH Subscription's lookup key
 resources.router.routes.callback.route = "callback/:subkey"
 resources.router.routes.callback.defaults.module = "default"
 resources.router.routes.callback.defaults.controller = "callback"
 resources.router.routes.callback.defaults.action = "index"
-]]></programlisting>
-        </sect3>
-    </sect2>
-</sect1>
+</programlisting>
+        </section>
+    </section>
+</section>

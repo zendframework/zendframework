@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.queue.example">
-    <title>Example usage</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.example"><info><title>Example usage</title></info>
+    
 
     <para>
         The below example of <classname>Zend_Queue</classname> shows a variety of
@@ -9,41 +10,41 @@
         message deletion, and sending messages.
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 // For configuration options
 // @see Zend_Queue_Adapater::__construct()
 $options = array(
-    'name' => 'queue1',
+    'name' =&gt; 'queue1',
 );
 
 // Create an array queue
 $queue = new Zend_Queue('Array', $options);
 
 // Get list of queues
-foreach ($queue->getQueues() as $name) {
+foreach ($queue-&gt;getQueues() as $name) {
     echo $name, "\n";
 }
 
 // Create a new queue
-$queue2 = $queue->createQueue('queue2');
+$queue2 = $queue-&gt;createQueue('queue2');
 
 // Get number of messages in a queue (supports Countable interface from SPL)
 echo count($queue);
 
 // Get up to 5 messages from a queue
-$messages = $queue->receive(5);
+$messages = $queue-&gt;receive(5);
 
-foreach ($messages as $i => $message) {
-    echo $message->body, "\n";
+foreach ($messages as $i =&gt; $message) {
+    echo $message-&gt;body, "\n";
 
     // We have processed the message; now we remove it from the queue.
-    $queue->deleteMessage($message);
+    $queue-&gt;deleteMessage($message);
 }
 
 // Send a message to the currently active queue
-$queue->send('My Test Message');
+$queue-&gt;send('My Test Message');
 
 // Delete a queue we created and all of it's messages
-$queue->deleteQueue('queue2');
-]]></programlisting>
-</sect1>
+$queue-&gt;deleteQueue('queue2');
+</programlisting>
+</section>

@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.plugins.standard.puthandler">
-    <title>Zend_Controller_Plugin_PutHandler</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.plugins.standard.puthandler"><info><title>Zend_Controller_Plugin_PutHandler</title></info>
+    
 
     <para>
         <classname>Zend_Controller_Plugin_PutHandler</classname> provides a drop-in
@@ -11,34 +12,34 @@
         into an array of params which is then set on the request. E.g.,
     </para>
 
-    <programlisting language="txt"><![CDATA[
+    <programlisting language="txt">
 PUT /notes/5.xml HTTP/1.1
 
-title=Hello&body=World
-]]></programlisting>
+title=Hello&amp;body=World
+</programlisting>
 
     <para>
         To receive the 'title' and 'body' params as regular request params,
         register the plugin:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $front = Zend_Controller_Front::getInstance();
-$front->registerPlugin(new Zend_Controller_Plugin_PutHandler());
-]]></programlisting>
+$front-&gt;registerPlugin(new Zend_Controller_Plugin_PutHandler());
+</programlisting>
 
     <para>
         Then you can access the <constant>PUT</constant> body params by name from the request inside
         your controller:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 ...
 public function putAction()
 {
-    $title = $this->getRequest()->getParam('title'); // $title = "Hello"
-    $body = $this->getRequest()->getParam('body'); // $body = "World"
+    $title = $this-&gt;getRequest()-&gt;getParam('title'); // $title = "Hello"
+    $body = $this-&gt;getRequest()-&gt;getParam('body'); // $body = "World"
 }
 ...
-]]></programlisting>
-</sect3>
+</programlisting>
+</section>

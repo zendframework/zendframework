@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.service.amazon.ec2.securitygroups">
-    <title>Zend_Service_Amazon_Ec2: Security Groups</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.securitygroups"><info><title>Zend_Service_Amazon_Ec2: Security Groups</title></info>
+    
 
     <para>
          A security group is a named collection of access rules. These access
@@ -16,17 +17,17 @@
         launched in the future.
     </para>
 
-    <note>
-        <title>Maximum Security Groups</title>
+    <note><info><title>Maximum Security Groups</title></info>
+        
 
         <para>You can create up to 100 security groups.</para>
     </note>
 
-    <sect2 id="zend.service.amazon.ec2.securitygroups.maintenance">
-        <title>Security Group Maintenance</title>
+    <section xml:id="zend.service.amazon.ec2.securitygroups.maintenance"><info><title>Security Group Maintenance</title></info>
+        
 
-        <example id="zend.service.amazon.ec2.securitygroups.maintenance.create">
-            <title>Create a new Security Group</title>
+        <example xml:id="zend.service.amazon.ec2.securitygroups.maintenance.create"><info><title>Create a new Security Group</title></info>
+            
 
             <para>
                 <code>create</code> a new security group. Every instance is
@@ -42,15 +43,15 @@
                 <constant>FALSE</constant>
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $ec2_sg = new Zend_Service_Amazon_Ec2_Securitygroups('aws_key',
                                                      'aws_secret_key');
-$return = $ec2_sg->create('mygroup', 'my group description');
-]]></programlisting>
+$return = $ec2_sg-&gt;create('mygroup', 'my group description');
+</programlisting>
         </example>
 
-        <example id="zend.service.amazon.ec2.securitygroups.maintenance.describe">
-            <title>Describe a Security Group</title>
+        <example xml:id="zend.service.amazon.ec2.securitygroups.maintenance.describe"><info><title>Describe a Security Group</title></info>
+            
 
             <para>
                 <code>describe</code> returns information about security groups that
@@ -70,15 +71,15 @@ $return = $ec2_sg->create('mygroup', 'my group description');
                 group.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $ec2_sg = new Zend_Service_Amazon_Ec2_Securitygroups('aws_key',
                                                      'aws_secret_key');
-$return = $ec2_sg->describe('mygroup');
-]]></programlisting>
+$return = $ec2_sg-&gt;describe('mygroup');
+</programlisting>
         </example>
 
-        <example id="zend.service.amazon.ec2.securitygroups.maintenance.delete">
-            <title>Delete a Security Group</title>
+        <example xml:id="zend.service.amazon.ec2.securitygroups.maintenance.delete"><info><title>Delete a Security Group</title></info>
+            
 
             <para>
                 <code>delete</code> will remove the security group. If you attempt to
@@ -94,19 +95,19 @@ $return = $ec2_sg->describe('mygroup');
                 <constant>FALSE</constant>.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $ec2_sg = new Zend_Service_Amazon_Ec2_Securitygroups('aws_key',
                                                      'aws_secret_key');
-$return = $ec2_sg->delete('mygroup');
-]]></programlisting>
+$return = $ec2_sg-&gt;delete('mygroup');
+</programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.amazon.ec2.securitygroups.authorize">
-        <title>Authorizing Access</title>
+    <section xml:id="zend.service.amazon.ec2.securitygroups.authorize"><info><title>Authorizing Access</title></info>
+        
 
-        <example id="zend.service.amazon.ec2.securitygroups.authorize.ip">
-            <title>Authorizing by IP</title>
+        <example xml:id="zend.service.amazon.ec2.securitygroups.authorize.ip"><info><title>Authorizing by IP</title></info>
+            
 
             <para>
                 <code>authorizeIp</code> Adds permissions to a security group based on
@@ -132,19 +133,19 @@ $return = $ec2_sg->delete('mygroup');
                 <constant>FALSE</constant>
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $ec2_sg = new Zend_Service_Amazon_Ec2_Securitygroups('aws_key',
                                                      'aws_secret_key');
-$return = $ec2_sg->authorizeIp('mygroup',
+$return = $ec2_sg-&gt;authorizeIp('mygroup',
                                 'protocol',
                                 'fromPort',
                                 'toPort',
                                 'ipRange');
-]]></programlisting>
+</programlisting>
         </example>
 
-        <example id="zend.service.amazon.ec2.securitygroups.authorize.group">
-            <title>Authorize By Group</title>
+        <example xml:id="zend.service.amazon.ec2.securitygroups.authorize.group"><info><title>Authorize By Group</title></info>
+            
 
             <para>
                 <code>authorizeGroup</code> Adds permissions to a security group.
@@ -161,19 +162,19 @@ $return = $ec2_sg->authorizeIp('mygroup',
                 <constant>FALSE</constant>.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $ec2_sg = new Zend_Service_Amazon_Ec2_Securitygroups('aws_key',
                                                      'aws_secret_key');
-$return = $ec2_sg->authorizeGroup('mygroup', 'securityGroupName', 'ownerId');
-]]></programlisting>
+$return = $ec2_sg-&gt;authorizeGroup('mygroup', 'securityGroupName', 'ownerId');
+</programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.amazon.ec2.securitygroups.revoke">
-        <title>Revoking Access</title>
+    <section xml:id="zend.service.amazon.ec2.securitygroups.revoke"><info><title>Revoking Access</title></info>
+        
 
-        <example id="zend.service.amazon.ec2.securitygroups.revoke.ip">
-            <title>Revoke by IP</title>
+        <example xml:id="zend.service.amazon.ec2.securitygroups.revoke.ip"><info><title>Revoke by IP</title></info>
+            
 
             <para>
                 <code>revokeIp</code> Revokes permissions to a security group based on
@@ -200,19 +201,19 @@ $return = $ec2_sg->authorizeGroup('mygroup', 'securityGroupName', 'ownerId');
                 <constant>FALSE</constant>
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $ec2_sg = new Zend_Service_Amazon_Ec2_Securitygroups('aws_key',
                                                      'aws_secret_key');
-$return = $ec2_sg->revokeIp('mygroup',
+$return = $ec2_sg-&gt;revokeIp('mygroup',
                              'protocol',
                              'fromPort',
                              'toPort',
                              'ipRange');
-]]></programlisting>
+</programlisting>
         </example>
 
-        <example id="zend.service.amazon.ec2.securitygroups.revoke.group">
-            <title>Revoke By Group</title>
+        <example xml:id="zend.service.amazon.ec2.securitygroups.revoke.group"><info><title>Revoke By Group</title></info>
+            
 
             <para>
                 <code>revokeGroup</code> Adds permissions to a security group. The permissions
@@ -231,11 +232,11 @@ $return = $ec2_sg->revokeIp('mygroup',
                 <constant>FALSE</constant>.
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $ec2_sg = new Zend_Service_Amazon_Ec2_Securitygroups('aws_key',
                                                      'aws_secret_key');
-$return = $ec2_sg->revokeGroup('mygroup', 'securityGroupName', 'ownerId');
-]]></programlisting>
+$return = $ec2_sg-&gt;revokeGroup('mygroup', 'securityGroupName', 'ownerId');
+</programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

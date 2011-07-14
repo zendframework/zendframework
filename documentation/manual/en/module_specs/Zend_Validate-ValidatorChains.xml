@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.validate.validator_chains">
-    <title>Validator Chains</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.validator_chains"><info><title>Validator Chains</title></info>
+    
 
     <para>
         Often multiple validations should be applied to some value in a particular order. The
@@ -10,24 +11,24 @@
         between 6 and 12 alphanumeric characters:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 // Create a validator chain and add validators to it
 $validatorChain = new Zend_Validate();
-$validatorChain->addValidator(
-                    new Zend_Validate_StringLength(array('min' => 6,
-                                                         'max' => 12)))
-               ->addValidator(new Zend_Validate_Alnum());
+$validatorChain-&gt;addValidator(
+                    new Zend_Validate_StringLength(array('min' =&gt; 6,
+                                                         'max' =&gt; 12)))
+               -&gt;addValidator(new Zend_Validate_Alnum());
 
 // Validate the username
-if ($validatorChain->isValid($username)) {
+if ($validatorChain-&gt;isValid($username)) {
     // username passed validation
 } else {
     // username failed validation; print reasons
-    foreach ($validatorChain->getMessages() as $message) {
+    foreach ($validatorChain-&gt;getMessages() as $message) {
         echo "$message\n";
     }
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         Validators are run in the order they were added to <classname>Zend_Validate</classname>. In
@@ -50,19 +51,16 @@ if ($validatorChain->isValid($username)) {
         length validation fails:
     </para>
 
-    <programlisting language="php"><![CDATA[
-$validatorChain->addValidator(
-                    new Zend_Validate_StringLength(array('min' => 6,
-                                                         'max' => 12)),
+    <programlisting language="php">
+$validatorChain-&gt;addValidator(
+                    new Zend_Validate_StringLength(array('min' =&gt; 6,
+                                                         'max' =&gt; 12)),
                     true)
-               ->addValidator(new Zend_Validate_Alnum());
-]]></programlisting>
+               -&gt;addValidator(new Zend_Validate_Alnum());
+</programlisting>
 
     <para>
         Any object that implements <classname>Zend_Validate_Interface</classname> may be used in a
         validator chain.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

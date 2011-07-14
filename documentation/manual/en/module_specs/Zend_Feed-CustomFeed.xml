@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.feed.custom-feed">
-    <title>Custom Feed and Entry Classes</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.custom-feed"><info><title>Custom Feed and Entry Classes</title></info>
+    
 
     <para>
         Finally, you can extend the <classname>Zend_Feed</classname> classes if you'd like to
@@ -16,10 +17,10 @@
         worry about namespaces at all.
     </para>
 
-    <example id="zend.feed.custom-feed.example.extending">
-        <title>Extending the Atom Entry Class with Custom Namespaces</title>
+    <example xml:id="zend.feed.custom-feed.example.extending"><info><title>Extending the Atom Entry Class with Custom Namespaces</title></info>
+        
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 /**
  * The custom entry class automatically knows the feed URI (optional) and
  * can automatically add extra namespaces.
@@ -73,24 +74,21 @@ class MyEntry extends Zend_Feed_Entry_Atom
         }
     }
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             Then to use this class, you'd just instantiate it directly and set the
             <property>myUpdated</property> property:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $entry = new MyEntry();
-$entry->myUpdated = '2005-04-19T15:30';
+$entry-&gt;myUpdated = '2005-04-19T15:30';
 
 // method-style call is handled by __call function
-$entry->myUpdated();
+$entry-&gt;myUpdated();
 // property-style call is handled by __get function
-$entry->myUpdated;
-]]></programlisting>
+$entry-&gt;myUpdated;
+</programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.alpha">
-    <title>Alpha</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.alpha"><info><title>Alpha</title></info>
+    
 
     <para>
         <classname>Zend_Filter_Alpha</classname> is a filter which returns the string
@@ -9,8 +10,8 @@
         option to also allow white space characters.
     </para>
 
-    <sect3 id="zend.filter.set.alpha.options">
-        <title>Supported options for Zend_Filter_Alpha</title>
+    <section xml:id="zend.filter.set.alpha.options"><info><title>Supported options for Zend_Filter_Alpha</title></info>
+        
 
         <para>
             The following options are supported for <classname>Zend_Filter_Alpha</classname>:
@@ -25,20 +26,20 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.alpha.basic">
-        <title>Basic usage</title>
+    <section xml:id="zend.filter.set.alpha.basic"><info><title>Basic usage</title></info>
+        
 
         <para>
             A basic example of usage is below:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $filter = new Zend_Filter_Alpha();
 
-print $filter->filter('This is (my) content: 123');
-]]></programlisting>
+print $filter-&gt;filter('This is (my) content: 123');
+</programlisting>
 
         <para>
             The above example returns 'Thisismycontent'. Notice that the whitespace characters and
@@ -53,10 +54,10 @@ print $filter->filter('This is (my) content: 123');
                 <classname>Zend_Locale</classname>.
             </para>
         </note>
-    </sect3>
+    </section>
 
-     <sect3 id="zend.filter.set.alpha.whitespace">
-         <title>Allow whitespace characters</title>
+     <section xml:id="zend.filter.set.alpha.whitespace"><info><title>Allow whitespace characters</title></info>
+         
 
         <para>
             <classname>Zend_Filter_Alpha</classname> can also allow whitespace characters. This can
@@ -64,11 +65,11 @@ print $filter->filter('This is (my) content: 123');
             example:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$filter = new Zend_Filter_Alpha(array('allowwhitespace' => true));
+        <programlisting language="php">
+$filter = new Zend_Filter_Alpha(array('allowwhitespace' =&gt; true));
 
-print $filter->filter('This is (my) content: 123');
-]]></programlisting>
+print $filter-&gt;filter('This is (my) content: 123');
+</programlisting>
 
         <para>
             The above example returns 'This is my content '. Notice that the parenthesis, colon, and
@@ -84,8 +85,5 @@ print $filter->filter('This is (my) content: 123');
             To query the current value of <property>allowWhiteSpace</property> the method
             <methodname>getAllowWhiteSpace()</methodname> may be used.
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

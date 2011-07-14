@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.view.scripts">
-    <title>View Scripts</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.scripts"><info><title>View Scripts</title></info>
+    
 
     <para>
         Once your controller has assigned variables and called <methodname>render()</methodname>,
@@ -15,7 +16,7 @@
         Variables assigned to the view from the controller are referred
         to as instance properties. For example, if the controller were
         to assign a variable 'something', you would refer to it as
-        $this->something in the view script. (This allows you to keep
+        $this-&gt;something in the view script. (This allows you to keep
         track of which values were assigned to the script, and which are
         internal to the script itself.)
     </para>
@@ -25,34 +26,34 @@
         <classname>Zend_View</classname> introduction.
     </para>
 
-    <programlisting language="php"><![CDATA[
-<?php if ($this->books): ?>
+    <programlisting language="php">
+&lt;?php if ($this-&gt;books): ?&gt;
 
-    <!-- A table of some books. -->
-    <table>
-        <tr>
-            <th>Author</th>
-            <th>Title</th>
-        </tr>
+    &lt;!-- A table of some books. --&gt;
+    &lt;table&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Author&lt;/th&gt;
+            &lt;th&gt;Title&lt;/th&gt;
+        &lt;/tr&gt;
 
-        <?php foreach ($this->books as $key => $val): ?>
-        <tr>
-            <td><?php echo $this->escape($val['author']) ?></td>
-            <td><?php echo $this->escape($val['title']) ?></td>
-        </tr>
-        <?php endforeach; ?>
+        &lt;?php foreach ($this-&gt;books as $key =&gt; $val): ?&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;?php echo $this-&gt;escape($val['author']) ?&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;?php echo $this-&gt;escape($val['title']) ?&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;?php endforeach; ?&gt;
 
-    </table>
+    &lt;/table&gt;
 
-<?php else: ?>
+&lt;?php else: ?&gt;
 
-    <p>There are no books to display.</p>
+    &lt;p&gt;There are no books to display.&lt;/p&gt;
 
-<?php endif;?>
-]]></programlisting>
+&lt;?php endif;?&gt;
+</programlisting>
 
-    <sect2 id="zend.view.scripts.escaping">
-        <title>Escaping Output</title>
+    <section xml:id="zend.view.scripts.escaping"><info><title>Escaping Output</title></info>
+        
 
         <para>
             One of the most important tasks to perform in a view script
@@ -68,13 +69,13 @@
             escaping for you.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // bad view-script practice:
-echo $this->variable;
+echo $this-&gt;variable;
 
 // good view-script practice:
-echo $this->escape($this->variable);
-]]></programlisting>
+echo $this-&gt;escape($this-&gt;variable);
+</programlisting>
 
         <para>
             By default, the escape() method uses the <acronym>PHP</acronym> htmlspecialchars()
@@ -84,33 +85,33 @@ echo $this->escape($this->variable);
             what escaping callback to use.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // create a Zend_View instance
 $view = new Zend_View();
 
 // tell it to use htmlentities as the escaping callback
-$view->setEscape('htmlentities');
+$view-&gt;setEscape('htmlentities');
 
 // or tell it to use a static class method as the callback
-$view->setEscape(array('SomeClass', 'methodName'));
+$view-&gt;setEscape(array('SomeClass', 'methodName'));
 
 // or even an instance method
 $obj = new SomeClass();
-$view->setEscape(array($obj, 'methodName'));
+$view-&gt;setEscape(array($obj, 'methodName'));
 
 // and then render your view
-echo $view->render(...);
-]]></programlisting>
+echo $view-&gt;render(...);
+</programlisting>
 
         <para>
             The callback function or method should take the value to be
             escaped as its first parameter, and all other parameters should
             be optional.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.scripts.templates">
-        <title>Using Alternate Template Systems</title>
+    <section xml:id="zend.view.scripts.templates"><info><title>Using Alternate Template Systems</title></info>
+        
 
         <para>
             Although <acronym>PHP</acronym> is itself a powerful template system, many developers
@@ -120,8 +121,8 @@ echo $view->render(...);
             second by implementing <classname>Zend_View_Interface</classname>.
         </para>
 
-        <sect3 id="zend.view.scripts.templates.scripts">
-            <title>Template Systems Using View Scripts</title>
+        <section xml:id="zend.view.scripts.templates.scripts"><info><title>Template Systems Using View Scripts</title></info>
+            
 
             <para>
                 A view script may be used to instantiate and manipulate a
@@ -130,56 +131,56 @@ echo $view->render(...);
                 this:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 include_once 'template.inc';
 $tpl = new Template();
 
-if ($this->books) {
-    $tpl->setFile(array(
-        "booklist" => "booklist.tpl",
-        "eachbook" => "eachbook.tpl",
+if ($this-&gt;books) {
+    $tpl-&gt;setFile(array(
+        "booklist" =&gt; "booklist.tpl",
+        "eachbook" =&gt; "eachbook.tpl",
     ));
 
-    foreach ($this->books as $key => $val) {
-        $tpl->set_var('author', $this->escape($val['author']);
-        $tpl->set_var('title', $this->escape($val['title']);
-        $tpl->parse("books", "eachbook", true);
+    foreach ($this-&gt;books as $key =&gt; $val) {
+        $tpl-&gt;set_var('author', $this-&gt;escape($val['author']);
+        $tpl-&gt;set_var('title', $this-&gt;escape($val['title']);
+        $tpl-&gt;parse("books", "eachbook", true);
     }
 
-    $tpl->pparse("output", "booklist");
+    $tpl-&gt;pparse("output", "booklist");
 } else {
-    $tpl->setFile("nobooks", "nobooks.tpl")
-    $tpl->pparse("output", "nobooks");
+    $tpl-&gt;setFile("nobooks", "nobooks.tpl")
+    $tpl-&gt;pparse("output", "nobooks");
 }
-]]></programlisting>
+</programlisting>
 
             <para>
                 These would be the related template files:
             </para>
 
-            <programlisting language="html"><![CDATA[
-<!-- booklist.tpl -->
-<table>
-    <tr>
-        <th>Author</th>
-        <th>Title</th>
-    </tr>
+            <programlisting language="html">
+&lt;!-- booklist.tpl --&gt;
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Author&lt;/th&gt;
+        &lt;th&gt;Title&lt;/th&gt;
+    &lt;/tr&gt;
     {books}
-</table>
+&lt;/table&gt;
 
-<!-- eachbook.tpl -->
-    <tr>
-        <td>{author}</td>
-        <td>{title}</td>
-    </tr>
+&lt;!-- eachbook.tpl --&gt;
+    &lt;tr&gt;
+        &lt;td&gt;{author}&lt;/td&gt;
+        &lt;td&gt;{title}&lt;/td&gt;
+    &lt;/tr&gt;
 
-<!-- nobooks.tpl -->
-<p>There are no books to display.</p>
-]]></programlisting>
-        </sect3>
+&lt;!-- nobooks.tpl --&gt;
+&lt;p&gt;There are no books to display.&lt;/p&gt;
+</programlisting>
+        </section>
 
-        <sect3 id="zend.view.scripts.templates.interface">
-            <title>Template Systems Using Zend_View_Interface</title>
+        <section xml:id="zend.view.scripts.templates.interface"><info><title>Template Systems Using Zend_View_Interface</title></info>
+            
 
             <para>
                 Some may find it easier to simply provide a
@@ -188,7 +189,7 @@ if ($this->books) {
                 compatability:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 /**
  * Return the actual template engine object
  */
@@ -237,7 +238,7 @@ public function clearVars();
  * Render the template named $name
  */
 public function render($name);
-]]></programlisting>
+</programlisting>
 
             <para>
                 Using this interface, it becomes relatively easy to wrap a
@@ -245,7 +246,7 @@ public function render($name);
                 As an example, the following is one potential wrapper for Smarty:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 class Zend_View_Smarty implements Zend_View_Interface
 {
     /**
@@ -263,14 +264,14 @@ class Zend_View_Smarty implements Zend_View_Interface
      */
     public function __construct($tmplPath = null, $extraParams = array())
     {
-        $this->_smarty = new Smarty;
+        $this-&gt;_smarty = new Smarty;
 
         if (null !== $tmplPath) {
-            $this->setScriptPath($tmplPath);
+            $this-&gt;setScriptPath($tmplPath);
         }
 
-        foreach ($extraParams as $key => $value) {
-            $this->_smarty->$key = $value;
+        foreach ($extraParams as $key =&gt; $value) {
+            $this-&gt;_smarty-&gt;$key = $value;
         }
     }
 
@@ -281,7 +282,7 @@ class Zend_View_Smarty implements Zend_View_Interface
      */
     public function getEngine()
     {
-        return $this->_smarty;
+        return $this-&gt;_smarty;
     }
 
     /**
@@ -293,7 +294,7 @@ class Zend_View_Smarty implements Zend_View_Interface
     public function setScriptPath($path)
     {
         if (is_readable($path)) {
-            $this->_smarty->template_dir = $path;
+            $this-&gt;_smarty-&gt;template_dir = $path;
             return;
         }
 
@@ -307,7 +308,7 @@ class Zend_View_Smarty implements Zend_View_Interface
      */
     public function getScriptPaths()
     {
-        return array($this->_smarty->template_dir);
+        return array($this-&gt;_smarty-&gt;template_dir);
     }
 
     /**
@@ -319,7 +320,7 @@ class Zend_View_Smarty implements Zend_View_Interface
      */
     public function setBasePath($path, $prefix = 'Zend_View')
     {
-        return $this->setScriptPath($path);
+        return $this-&gt;setScriptPath($path);
     }
 
     /**
@@ -331,7 +332,7 @@ class Zend_View_Smarty implements Zend_View_Interface
      */
     public function addBasePath($path, $prefix = 'Zend_View')
     {
-        return $this->setScriptPath($path);
+        return $this-&gt;setScriptPath($path);
     }
 
     /**
@@ -343,7 +344,7 @@ class Zend_View_Smarty implements Zend_View_Interface
      */
     public function __set($key, $val)
     {
-        $this->_smarty->assign($key, $val);
+        $this-&gt;_smarty-&gt;assign($key, $val);
     }
 
     /**
@@ -354,7 +355,7 @@ class Zend_View_Smarty implements Zend_View_Interface
      */
     public function __isset($key)
     {
-        return (null !== $this->_smarty->get_template_vars($key));
+        return (null !== $this-&gt;_smarty-&gt;get_template_vars($key));
     }
 
     /**
@@ -365,18 +366,18 @@ class Zend_View_Smarty implements Zend_View_Interface
      */
     public function __unset($key)
     {
-        $this->_smarty->clear_assign($key);
+        $this-&gt;_smarty-&gt;clear_assign($key);
     }
 
     /**
      * Assign variables to the template
      *
      * Allows setting a specific key to the specified value, OR passing
-     * an array of key => value pairs to set en masse.
+     * an array of key =&gt; value pairs to set en masse.
      *
      * @see __set()
      * @param string|array $spec The assignment strategy to use (key or
-     * array of key => value pairs)
+     * array of key =&gt; value pairs)
      * @param mixed $value (Optional) If assigning a named variable,
      * use this as the value.
      * @return void
@@ -384,11 +385,11 @@ class Zend_View_Smarty implements Zend_View_Interface
     public function assign($spec, $value = null)
     {
         if (is_array($spec)) {
-            $this->_smarty->assign($spec);
+            $this-&gt;_smarty-&gt;assign($spec);
             return;
         }
 
-        $this->_smarty->assign($spec, $value);
+        $this-&gt;_smarty-&gt;assign($spec, $value);
     }
 
     /**
@@ -402,7 +403,7 @@ class Zend_View_Smarty implements Zend_View_Interface
      */
     public function clearVars()
     {
-        $this->_smarty->clear_all_assign();
+        $this-&gt;_smarty-&gt;clear_all_assign();
     }
 
     /**
@@ -413,10 +414,10 @@ class Zend_View_Smarty implements Zend_View_Interface
      */
     public function render($name)
     {
-        return $this->_smarty->fetch($name);
+        return $this-&gt;_smarty-&gt;fetch($name);
     }
 }
-]]></programlisting>
+</programlisting>
 
             <para>
                 In this example, you would instantiate the
@@ -425,24 +426,24 @@ class Zend_View_Smarty implements Zend_View_Interface
                 fashion as <classname>Zend_View</classname>:
             </para>
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 //Example 1. In initView() of initializer.
 $view = new Zend_View_Smarty('/path/to/templates');
 $viewRenderer =
     Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer');
-$viewRenderer->setView($view)
-             ->setViewBasePathSpec($view->_smarty->template_dir)
-             ->setViewScriptPathSpec(':controller/:action.:suffix')
-             ->setViewScriptPathNoControllerSpec(':action.:suffix')
-             ->setViewSuffix('tpl');
+$viewRenderer-&gt;setView($view)
+             -&gt;setViewBasePathSpec($view-&gt;_smarty-&gt;template_dir)
+             -&gt;setViewScriptPathSpec(':controller/:action.:suffix')
+             -&gt;setViewScriptPathNoControllerSpec(':action.:suffix')
+             -&gt;setViewSuffix('tpl');
 
 //Example 2. Usage in action controller remains the same...
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
     {
-        $this->view->book   = 'Zend PHP 5 Certification Study Guide';
-        $this->view->author = 'Davey Shafik and Ben Ramsey'
+        $this-&gt;view-&gt;book   = 'Zend PHP 5 Certification Study Guide';
+        $this-&gt;view-&gt;author = 'Davey Shafik and Ben Ramsey'
     }
 }
 
@@ -451,18 +452,15 @@ class FooController extends Zend_Controller_Action
 {
     public function init()
     {
-        $this->view   = new Zend_View_Smarty('/path/to/templates');
-        $viewRenderer = $this->_helper->getHelper('viewRenderer');
-        $viewRenderer->setView($this->view)
-                     ->setViewBasePathSpec($view->_smarty->template_dir)
-                     ->setViewScriptPathSpec(':controller/:action.:suffix')
-                     ->setViewScriptPathNoControllerSpec(':action.:suffix')
-                     ->setViewSuffix('tpl');
+        $this-&gt;view   = new Zend_View_Smarty('/path/to/templates');
+        $viewRenderer = $this-&gt;_helper-&gt;getHelper('viewRenderer');
+        $viewRenderer-&gt;setView($this-&gt;view)
+                     -&gt;setViewBasePathSpec($view-&gt;_smarty-&gt;template_dir)
+                     -&gt;setViewScriptPathSpec(':controller/:action.:suffix')
+                     -&gt;setViewScriptPathNoControllerSpec(':action.:suffix')
+                     -&gt;setViewSuffix('tpl');
     }
-]]></programlisting>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</programlisting>
+        </section>
+    </section>
+</section>

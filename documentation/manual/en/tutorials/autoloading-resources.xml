@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.autoloading.resources">
-    <title>Resource Autoloading</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.resources"><info><title>Resource Autoloading</title></info>
+    
 
     <para>
         Often, when developing an application, it's either difficult to package classes in the 1:1
@@ -23,12 +24,12 @@
         the autoloader's base path). In action, you'd do something like this:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $loader = new Zend_Application_Module_Autoloader(array(
-    'namespace' => 'Blog',
-    'basePath'  => APPLICATION_PATH . '/modules/blog',
+    'namespace' =&gt; 'Blog',
+    'basePath'  =&gt; APPLICATION_PATH . '/modules/blog',
 ));
-]]></programlisting>
+</programlisting>
 
     <para>
         Once you have the loader in place, you then need to inform it of the various resource types
@@ -39,7 +40,7 @@ $loader = new Zend_Application_Module_Autoloader(array(
         As an example, consider the following tree:
     </para>
 
-    <programlisting language="text"><![CDATA[
+    <programlisting language="text">
 path/to/some/resources/
 |-- forms/
 |   `-- Guestbook.php        // Foo_Form_Guestbook
@@ -48,18 +49,18 @@ path/to/some/resources/
 |   |   `-- Guestbook.php    // Foo_Model_DbTable_Guestbook
 |   |-- Guestbook.php        // Foo_Model_Guestbook
 |   `-- GuestbookMapper.php  // Foo_Model_GuestbookMapper
-]]></programlisting>
+</programlisting>
 
     <para>
         Our first step is creating the resource loader:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $loader = new Zend_Loader_Autoloader_Resource(array(
-    'basePath'  => 'path/to/some/resources/',
-    'namespace' => 'Foo',
+    'basePath'  =&gt; 'path/to/some/resources/',
+    'namespace' =&gt; 'Foo',
 ));
-]]></programlisting>
+</programlisting>
 
     <para>
         Next, we need to define some resource types.
@@ -73,23 +74,23 @@ $loader = new Zend_Loader_Autoloader_Resource(array(
         follows:
     </para>
 
-    <programlisting language="php"><![CDATA[
-$loader->addResourceType('form', 'forms', 'Form')
-       ->addResourceType('model', 'models', 'Model')
-       ->addResourceType('dbtable', 'models/DbTable', 'Model_DbTable');
-]]></programlisting>
+    <programlisting language="php">
+$loader-&gt;addResourceType('form', 'forms', 'Form')
+       -&gt;addResourceType('model', 'models', 'Model')
+       -&gt;addResourceType('dbtable', 'models/DbTable', 'Model_DbTable');
+</programlisting>
 
     <para>
         Once defined, we can simply use these classes:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $form      = new Foo_Form_Guestbook();
 $guestbook = new Foo_Model_Guestbook();
-]]></programlisting>
+</programlisting>
 
-    <note>
-        <title>Module Resource Autoloading</title>
+    <note><info><title>Module Resource Autoloading</title></info>
+        
 
         <para>
             Zend Framework's <acronym>MVC</acronym> layer encourages the use of "modules", which
@@ -100,9 +101,8 @@ $guestbook = new Foo_Model_Guestbook();
             quite useful in this paradigm -- so useful that they are enabled by default when you
             create a bootstrap class for your module that extends
             <classname>Zend_Application_Module_Bootstrap</classname>. For more information, read
-            the <link
-                linkend="zend.loader.autoloader-resource.module">Zend_Loader_Autoloader_Module
+            the <link linkend="zend.loader.autoloader-resource.module">Zend_Loader_Autoloader_Module
                 documentation</link>.
         </para>
     </note>
-</sect1>
+</section>

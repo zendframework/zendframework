@@ -1,18 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="migration.18">
-    <title>Zend Framework 1.8</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.18"><info><title>Zend Framework 1.8</title></info>
+    
 
     <para>
         When upgrading from a previous release to Zend Framework 1.8 or higher you
         should note the following migration notes.
     </para>
 
-    <sect2 id="migration.18.zend.controller">
-        <title>Zend_Controller</title>
+    <section xml:id="migration.18.zend.controller"><info><title>Zend_Controller</title></info>
+        
 
-        <sect3 id="migration.18.zend.controller.router">
-            <title>Standard Route Changes</title>
+        <section xml:id="migration.18.zend.controller.router"><info><title>Standard Route Changes</title></info>
+            
 
             <para>
                 As translated segments were introduced into the new standard
@@ -22,14 +23,14 @@
                 '<emphasis>@</emphasis>' character. The same rule now applies for the
                 '<emphasis>:</emphasis>' character.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="migration.18.zend.locale">
-        <title>Zend_Locale</title>
+    <section xml:id="migration.18.zend.locale"><info><title>Zend_Locale</title></info>
+        
 
-        <sect3 id="migration.18.zend.locale.defaultcaching">
-            <title>Default caching</title>
+        <section xml:id="migration.18.zend.locale.defaultcaching"><info><title>Default caching</title></info>
+            
 
             <para>
                 As with Zend Framework 1.8 a default caching was added. The reason behind this
@@ -44,16 +45,13 @@
                 <methodname>disableCache()</methodname> method.
             </para>
 
-            <example id="migration.18.zend.locale.defaultcaching.example">
-                <title>Disabling default caching</title>
+            <example xml:id="migration.18.zend.locale.defaultcaching.example"><info><title>Disabling default caching</title></info>
+                
 
-                <programlisting language="php"><![CDATA[
+                <programlisting language="php">
 Zend_Locale::disableCache(true);
-]]></programlisting>
+</programlisting>
             </example>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

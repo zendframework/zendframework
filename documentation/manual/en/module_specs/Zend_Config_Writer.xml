@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.config.writer.introduction">
-    <title>Zend_Config_Writer</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.writer.introduction"><info><title>Zend_Config_Writer</title></info>
+    
 
     <para>
         <classname>Zend_Config_Writer</classname> gives you the ability to write config
@@ -40,7 +41,7 @@
     <para>
         The <acronym>INI</acronym> writer has two modes for rendering with regard to sections.
         By default the top-level configuration is always written into section names.
-        By calling <command>$writer->setRenderWithoutSections();</command> all options are written
+        By calling <command>$writer-&gt;setRenderWithoutSections();</command> all options are written
         into the global namespace of the <acronym>INI</acronym> file and no sections are applied.
     </para>
 
@@ -62,45 +63,45 @@
         on the root <classname>Zend_Config</classname> object.
     </para>
 
-    <example id="zend.config.writer.example.using">
-        <title>Using Zend_Config_Writer</title>
+    <example xml:id="zend.config.writer.example.using"><info><title>Using Zend_Config_Writer</title></info>
+        
 
         <para>
             This example illustrates the basic use of
             <classname>Zend_Config_Writer_Xml</classname> to create a new config file:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Create the config object
 $config = new Zend_Config(array(), true);
-$config->production = array();
-$config->staging    = array();
+$config-&gt;production = array();
+$config-&gt;staging    = array();
 
-$config->setExtend('staging', 'production');
+$config-&gt;setExtend('staging', 'production');
 
-$config->production->db = array();
-$config->production->db->hostname = 'localhost';
-$config->production->db->username = 'production';
+$config-&gt;production-&gt;db = array();
+$config-&gt;production-&gt;db-&gt;hostname = 'localhost';
+$config-&gt;production-&gt;db-&gt;username = 'production';
 
-$config->staging->db = array();
-$config->staging->db->username = 'staging';
+$config-&gt;staging-&gt;db = array();
+$config-&gt;staging-&gt;db-&gt;username = 'staging';
 
 // Write the config file in one of the following ways:
 // a)
-$writer = new Zend_Config_Writer_Xml(array('config'   => $config,
-                                           'filename' => 'config.xml'));
-$writer->write();
+$writer = new Zend_Config_Writer_Xml(array('config'   =&gt; $config,
+                                           'filename' =&gt; 'config.xml'));
+$writer-&gt;write();
 
 // b)
 $writer = new Zend_Config_Writer_Xml();
-$writer->setConfig($config)
-       ->setFilename('config.xml')
-       ->write();
+$writer-&gt;setConfig($config)
+       -&gt;setFilename('config.xml')
+       -&gt;write();
 
 // c)
 $writer = new Zend_Config_Writer_Xml();
-$writer->write('config.xml', $config);
-]]></programlisting>
+$writer-&gt;write('config.xml', $config);
+</programlisting>
 
         <para>
             This will create an <acronym>XML</acronym> config file with the sections production
@@ -108,32 +109,32 @@ $writer->write('config.xml', $config);
         </para>
     </example>
 
-    <example id="zend.config.writer.modifying">
-        <title>Modifying an Existing Config</title>
+    <example xml:id="zend.config.writer.modifying"><info><title>Modifying an Existing Config</title></info>
+        
 
         <para>
             This example demonstrates how to edit an existing config file.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Load all sections from an existing config file, while skipping the extends.
 $config = new Zend_Config_Ini('config.ini',
                               null,
-                              array('skipExtends'        => true,
-                                    'allowModifications' => true));
+                              array('skipExtends'        =&gt; true,
+                                    'allowModifications' =&gt; true));
 
 // Modify a value
-$config->production->hostname = 'foobar';
+$config-&gt;production-&gt;hostname = 'foobar';
 
 // Write the config file
-$writer = new Zend_Config_Writer_Ini(array('config'   => $config,
-                                           'filename' => 'config.ini'));
-$writer->write();
-]]></programlisting>
+$writer = new Zend_Config_Writer_Ini(array('config'   =&gt; $config,
+                                           'filename' =&gt; 'config.ini'));
+$writer-&gt;write();
+</programlisting>
     </example>
 
-    <note>
-        <title>Loading a Config File</title>
+    <note><info><title>Loading a Config File</title></info>
+        
 
         <para>
             When loading an existing config file for modifications it is very
@@ -149,7 +150,4 @@ $writer->write();
         build the configuration string. This method can be used from the outside also if you need
         to access the string-representation of the configuration data.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

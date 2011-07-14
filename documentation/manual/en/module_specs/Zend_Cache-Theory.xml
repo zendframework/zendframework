@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.cache.theory">
-    <title>The Theory of Caching</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.theory"><info><title>The Theory of Caching</title></info>
+    
 
     <para>
         There are three key concepts in <classname>Zend_Cache</classname>. One is the unique
@@ -36,15 +37,15 @@
         </para>
     </note>
 
-    <sect2 id="zend.cache.factory">
-        <title>The Zend_Cache Factory Method</title>
+    <section xml:id="zend.cache.factory"><info><title>The Zend_Cache Factory Method</title></info>
+        
 
         <para>
             A good way to build a usable instance of a <classname>Zend_Cache</classname> Frontend is
             given in the following example :
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // We choose a backend (for example 'File' or 'Sqlite'...)
 $backendName = '[...]';
 
@@ -63,7 +64,7 @@ $cache = Zend_Cache::factory($frontendName,
                              $backendName,
                              $frontendOptions,
                              $backendOptions);
-]]></programlisting>
+</programlisting>
 
         <para>
             In the following examples we will assume that the <varname>$cache</varname> variable
@@ -77,10 +78,10 @@ $cache = Zend_Cache::factory($frontendName,
                 Instantiating frontends and backends yourself will not work as expected.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.cache.tags">
-        <title>Tagging Records</title>
+    <section xml:id="zend.cache.tags"><info><title>Tagging Records</title></info>
+        
 
         <para>
             Tags are a way to categorize cache records. When you save a cache with the
@@ -89,9 +90,9 @@ $cache = Zend_Cache::factory($frontendName,
             tags):
         </para>
 
-        <programlisting language="php"><![CDATA[
-$cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
-]]></programlisting>
+        <programlisting language="php">
+$cache-&gt;save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
+</programlisting>
 
         <note>
             <para>
@@ -100,65 +101,65 @@ $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
                 it sets a specific lifetime for this particular cache record)
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.cache.clean">
-        <title>Cleaning the Cache</title>
+    <section xml:id="zend.cache.clean"><info><title>Cleaning the Cache</title></info>
+        
 
         <para>
             To remove or invalidate in particular cache id, you can use the
             <methodname>remove()</methodname> method :
         </para>
 
-        <programlisting language="php"><![CDATA[
-$cache->remove('idToRemove');
-]]></programlisting>
+        <programlisting language="php">
+$cache-&gt;remove('idToRemove');
+</programlisting>
 
         <para>
             To remove or invalidate several cache ids in one operation, you can use the
             <methodname>clean()</methodname> method. For example to remove all cache records :
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // clean all records
-$cache->clean(Zend_Cache::CLEANING_MODE_ALL);
+$cache-&gt;clean(Zend_Cache::CLEANING_MODE_ALL);
 
 // clean only outdated
-$cache->clean(Zend_Cache::CLEANING_MODE_OLD);
-]]></programlisting>
+$cache-&gt;clean(Zend_Cache::CLEANING_MODE_OLD);
+</programlisting>
 
         <para>
             If you want to remove cache entries matching the tags 'tagA' and 'tagC':
         </para>
 
-        <programlisting language="php"><![CDATA[
-$cache->clean(
+        <programlisting language="php">
+$cache-&gt;clean(
     Zend_Cache::CLEANING_MODE_MATCHING_TAG,
     array('tagA', 'tagC')
 );
-]]></programlisting>
+</programlisting>
 
         <para>
             If you want to remove cache entries not matching the tags 'tagA' or 'tagC':
         </para>
 
-        <programlisting language="php"><![CDATA[
-$cache->clean(
+        <programlisting language="php">
+$cache-&gt;clean(
     Zend_Cache::CLEANING_MODE_NOT_MATCHING_TAG,
     array('tagA', 'tagC')
 );
-]]></programlisting>
+</programlisting>
 
         <para>
             If you want to remove cache entries matching the tags 'tagA' or 'tagC':
         </para>
 
-        <programlisting language="php"><![CDATA[
-$cache->clean(
+        <programlisting language="php">
+$cache-&gt;clean(
     Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG,
     array('tagA', 'tagC')
 );
-]]></programlisting>
+</programlisting>
 
         <para>
             Available cleaning modes are: <constant>CLEANING_MODE_ALL</constant>,
@@ -167,8 +168,5 @@ $cache->clean(
             <constant>CLEANING_MODE_MATCHING_ANY_TAG</constant>. The latter are, as their names
             suggest, combined with an array of tags in cleaning operations.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

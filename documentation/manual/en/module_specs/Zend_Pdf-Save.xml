@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.pdf.save">
-    <title>Save Changes to PDF Documents</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.save"><info><title>Save Changes to PDF Documents</title></info>
+    
 
     <para>
         There are two methods that save changes to <acronym>PDF</acronym> documents: the
@@ -23,26 +24,23 @@
         returned.
     </para>
 
-    <example id="zend.pdf.save.example-1">
-        <title>Saving PDF Documents</title>
+    <example xml:id="zend.pdf.save.example-1"><info><title>Saving PDF Documents</title></info>
+        
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 ...
 // Load the PDF document
 $pdf = Zend_Pdf::load($fileName);
 ...
 // Update the PDF document
-$pdf->save($fileName, true);
+$pdf-&gt;save($fileName, true);
 // Save document as a new file
-$pdf->save($newFileName);
+$pdf-&gt;save($newFileName);
 
 // Return the PDF document as a string
-$pdfString = $pdf->render();
+$pdfString = $pdf-&gt;render();
 
 ...
-]]></programlisting>
+</programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

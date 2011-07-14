@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.service.akismet">
-    <title>Zend_Service_Akismet</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="zend.service.akismet.introduction">
-        <title>Introduction</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.akismet"><info><title>Zend_Service_Akismet</title></info>
+    
+
+    <section xml:id="zend.service.akismet.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
-            <classname>Zend_Service_Akismet</classname> provides a client for the <ulink
-                url="http://akismet.com/development/api/">Akismet <acronym>API</acronym></ulink>.
+            <classname>Zend_Service_Akismet</classname> provides a client for the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://akismet.com/development/api/">Akismet <acronym>API</acronym></link>.
             The Akismet service is used to determine if incoming data is
             potentially spam. It also exposes methods for submitting data as
             known spam or as false positives (ham). It was originally intended to help
@@ -18,7 +18,7 @@
 
         <para>
             Akismet requires an <acronym>API</acronym> key for usage. You can get one by signing
-            up for a <ulink url="http://wordpress.com/">WordPress.com</ulink>
+            up for a <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wordpress.com/">WordPress.com</link>
             account. You do not need to activate a blog. Simply acquiring the
             account will provide you with the <acronym>API</acronym> key.
         </para>
@@ -32,10 +32,10 @@
             <methodname>setBlogUrl()</methodname> method, or overridden by specifying a
             'blog' key in the various method calls.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.akismet.verifykey">
-        <title>Verify an API key</title>
+    <section xml:id="zend.service.akismet.verifykey"><info><title>Verify an API key</title></info>
+        
 
         <para>
             <methodname>Zend_Service_Akismet::verifyKey($key)</methodname> is used to
@@ -45,17 +45,17 @@
             so with this method.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Instantiate with the API key and a URL to the application or
 // resource being used
 $akismet = new Zend_Service_Akismet($apiKey,
                                     'http://framework.zend.com/wiki/');
-if ($akismet->verifyKey($apiKey) {
+if ($akismet-&gt;verifyKey($apiKey) {
     echo "Key is valid.\n";
 } else {
     echo "Key is not valid\n";
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             If called with no arguments, <methodname>verifyKey()</methodname> uses
@@ -66,10 +66,10 @@ if ($akismet->verifyKey($apiKey) {
             <methodname>verifyKey()</methodname> implements Akismet's
             <code>verify-key</code> REST method.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.akismet.isspam">
-        <title>Check for spam</title>
+    <section xml:id="zend.service.akismet.isspam"><info><title>Check for spam</title></info>
+        
 
         <para>
             <methodname>Zend_Service_Akismet::isSpam($data)</methodname> is used to
@@ -175,36 +175,36 @@ if ($akismet->verifyKey($apiKey) {
             <acronym>API</acronym> key is invalid.
         </para>
 
-        <example id="zend.service.akismet.isspam.example-1">
-            <title>isSpam() Usage</title>
+        <example xml:id="zend.service.akismet.isspam.example-1"><info><title>isSpam() Usage</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $data = array(
-    'user_ip'              => '111.222.111.222',
-    'user_agent'           => 'Mozilla/5.0 ' . (Windows; U; Windows NT ' .
+    'user_ip'              =&gt; '111.222.111.222',
+    'user_agent'           =&gt; 'Mozilla/5.0 ' . (Windows; U; Windows NT ' .
                               '5.2; en-GB; rv:1.8.1) Gecko/20061010 ' .
                               'Firefox/2.0',
-    'comment_type'         => 'contact',
-    'comment_author'       => 'John Doe',
-    'comment_author_email' => 'nospam@myhaus.net',
-    'comment_content'      => "I'm not a spammer, honest!"
+    'comment_type'         =&gt; 'contact',
+    'comment_author'       =&gt; 'John Doe',
+    'comment_author_email' =&gt; 'nospam@myhaus.net',
+    'comment_content'      =&gt; "I'm not a spammer, honest!"
 );
-if ($akismet->isSpam($data)) {
+if ($akismet-&gt;isSpam($data)) {
     echo "Sorry, but we think you're a spammer.";
 } else {
     echo "Welcome to our site!";
 }
-]]></programlisting>
+</programlisting>
         </example>
 
         <para>
             <methodname>isSpam()</methodname> implements the <code>comment-check</code>
             Akismet <acronym>API</acronym> method.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.akismet.submitspam">
-        <title>Submitting known spam</title>
+    <section xml:id="zend.service.akismet.submitspam"><info><title>Submitting known spam</title></info>
+        
 
         <para>
             Spam data will occasionally get through the filter. If you discover spam that you feel
@@ -217,31 +217,31 @@ if ($akismet->isSpam($data)) {
             value. An exception will be raised if the <acronym>API</acronym> key used is invalid.
         </para>
 
-        <example id="zend.service.akismet.submitspam.example-1">
-            <title>submitSpam() Usage</title>
+        <example xml:id="zend.service.akismet.submitspam.example-1"><info><title>submitSpam() Usage</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $data = array(
-    'user_ip'              => '111.222.111.222',
-    'user_agent'           => 'Mozilla/5.0 (Windows; U; Windows NT 5.2;' .
+    'user_ip'              =&gt; '111.222.111.222',
+    'user_agent'           =&gt; 'Mozilla/5.0 (Windows; U; Windows NT 5.2;' .
                               'en-GB; rv:1.8.1) Gecko/20061010 Firefox/2.0',
-    'comment_type'         => 'contact',
-    'comment_author'       => 'John Doe',
-    'comment_author_email' => 'nospam@myhaus.net',
-    'comment_content'      => "I'm not a spammer, honest!"
+    'comment_type'         =&gt; 'contact',
+    'comment_author'       =&gt; 'John Doe',
+    'comment_author_email' =&gt; 'nospam@myhaus.net',
+    'comment_content'      =&gt; "I'm not a spammer, honest!"
 );
-$akismet->submitSpam($data));
-]]></programlisting>
+$akismet-&gt;submitSpam($data));
+</programlisting>
         </example>
 
         <para>
             <methodname>submitSpam()</methodname> implements the <code>submit-spam</code>
             Akismet <acronym>API</acronym> method.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.akismet.submitham">
-        <title>Submitting false positives (ham)</title>
+    <section xml:id="zend.service.akismet.submitham"><info><title>Submitting false positives (ham)</title></info>
+        
 
         <para>
             Data will occasionally be trapped erroneously as spam by Akismet. For this reason,
@@ -258,31 +258,31 @@ $akismet->submitSpam($data));
             used is invalid.
         </para>
 
-        <example id="zend.service.akismet.submitham.example-1">
-            <title>submitHam() Usage</title>
+        <example xml:id="zend.service.akismet.submitham.example-1"><info><title>submitHam() Usage</title></info>
+            
 
-            <programlisting language="php"><![CDATA[
+            <programlisting language="php">
 $data = array(
-    'user_ip'              => '111.222.111.222',
-    'user_agent'           => 'Mozilla/5.0 (Windows; U; Windows NT 5.2;' .
+    'user_ip'              =&gt; '111.222.111.222',
+    'user_agent'           =&gt; 'Mozilla/5.0 (Windows; U; Windows NT 5.2;' .
                               'en-GB; rv:1.8.1) Gecko/20061010 Firefox/2.0',
-    'comment_type'         => 'contact',
-    'comment_author'       => 'John Doe',
-    'comment_author_email' => 'nospam@myhaus.net',
-    'comment_content'      => "I'm not a spammer, honest!"
+    'comment_type'         =&gt; 'contact',
+    'comment_author'       =&gt; 'John Doe',
+    'comment_author_email' =&gt; 'nospam@myhaus.net',
+    'comment_content'      =&gt; "I'm not a spammer, honest!"
 );
-$akismet->submitHam($data));
-]]></programlisting>
+$akismet-&gt;submitHam($data));
+</programlisting>
         </example>
 
         <para>
             <methodname>submitHam()</methodname> implements the <code>submit-ham</code>
             Akismet <acronym>API</acronym> method.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.akismet.accessors">
-        <title>Zend-specific Methods</title>
+    <section xml:id="zend.service.akismet.accessors"><info><title>Zend-specific Methods</title></info>
+        
 
         <para>
             While the Akismet <acronym>API</acronym> only specifies four methods,
@@ -341,8 +341,5 @@ $akismet->submitHam($data));
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

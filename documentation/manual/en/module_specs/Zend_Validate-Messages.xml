@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.validate.messages">
-    <title>Validation Messages</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.messages"><info><title>Validation Messages</title></info>
+    
 
     <para>
         Each validator which is based on <classname>Zend_Validate</classname> provides
@@ -15,11 +16,11 @@
         Let's look into <classname>Zend_Validate_GreaterThan</classname> for an descriptive example:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 protected $_messageTemplates = array(
-    self::NOT_GREATER => "'%value%' is not greater than '%min%'",
+    self::NOT_GREATER =&gt; "'%value%' is not greater than '%min%'",
 );
-]]></programlisting>
+</programlisting>
 
     <para>
         As you can see the constant <constant>self::NOT_GREATER</constant> refers to the failure and
@@ -32,31 +33,31 @@ protected $_messageTemplates = array(
         contains all messages a validator could return in the case of a failed validation.
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $validator = new Zend_Validate_GreaterThan();
-$messages  = $validator->getMessageTemplates();
-]]></programlisting>
+$messages  = $validator-&gt;getMessageTemplates();
+</programlisting>
 
     <para>
         Using the <methodname>setMessage()</methodname> method you can set another message to be
         returned in case of the specified failure.
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $validator = new Zend_Validate_GreaterThan();
-$validator->setMessage(
+$validator-&gt;setMessage(
     'Please enter a lower value',
     Zend_Validate_GreaterThan::NOT_GREATER
 );
-]]></programlisting>
+</programlisting>
 
     <para>
         The second parameter defines the failure which will be overridden. When you omit this
         parameter, then the given message will be set for all possible failures of this validator.
     </para>
 
-    <sect2 id="zend.validate.messages.pretranslated">
-        <title>Using pre-translated validation messages</title>
+    <section xml:id="zend.validate.messages.pretranslated"><info><title>Using pre-translated validation messages</title></info>
+        
 
         <para>
             Zend Framework is shipped with more than 45 different validators with more than 200
@@ -66,8 +67,8 @@ $validator->setMessage(
             Zend Framework installation.
         </para>
 
-        <note>
-            <title>Used path</title>
+        <note><info><title>Used path</title></info>
+            
 
             <para>
                 The resource files are outside of the library path because all of your translations
@@ -80,20 +81,20 @@ $validator->setMessage(
             attach a translator to <classname>Zend_Validate</classname> using these resource files.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $translator = new Zend_Translate(
     array(
-        'adapter' => 'array',
-        'content' => '/resources/languages',
-        'locale'  => $language,
-        'scan' => Zend_Translate::LOCALE_DIRECTORY
+        'adapter' =&gt; 'array',
+        'content' =&gt; '/resources/languages',
+        'locale'  =&gt; $language,
+        'scan' =&gt; Zend_Translate::LOCALE_DIRECTORY
     )
 );
 Zend_Validate_Abstract::setDefaultTranslator($translator);
-]]></programlisting>
+</programlisting>
 
-        <note>
-            <title>Used translation adapter</title>
+        <note><info><title>Used translation adapter</title></info>
+            
 
             <para>
                 As translation adapter Zend Framework chose the array adapter. It is simple to
@@ -101,8 +102,8 @@ Zend_Validate_Abstract::setDefaultTranslator($translator);
             </para>
         </note>
 
-        <note>
-            <title>Supported languages</title>
+        <note><info><title>Supported languages</title></info>
+            
 
             <para>
                 This feature is very young, so the amount of supported languages may not be
@@ -115,10 +116,10 @@ Zend_Validate_Abstract::setDefaultTranslator($translator);
                 are not in need to create these files manually yourself.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.validate.messages.limitation">
-        <title>Limit the size of a validation message</title>
+    <section xml:id="zend.validate.messages.limitation"><info><title>Limit the size of a validation message</title></info>
+        
 
         <para>
             Sometimes it is necessary to limit the maximum size a validation message can have.
@@ -141,20 +142,17 @@ Zend_Validate_Abstract::setDefaultTranslator($translator);
             the rest of the message.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 Zend_Validate::setMessageLength(100);
-]]></programlisting>
+</programlisting>
 
-        <note>
-            <title>Where is this parameter used?</title>
+        <note><info><title>Where is this parameter used?</title></info>
+            
 
             <para>
                 The set message length is used for all validators, even for self defined ones,
                 as long as they extend <classname>Zend_Validate_Abstract</classname>.
             </para>
         </note>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

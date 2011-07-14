@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.form.decorators.intro">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.form.decorators.intro"><info><title>Introduction</title></info>
+    
 
     <para>
         <link linkend="zend.form">Zend_Form</link> utilizes the <emphasis>decorator</emphasis>
-        pattern in order to render elements and forms. Unlike the classic <ulink
-            url="http://en.wikipedia.org/wiki/Decorator_pattern">decorator pattern</ulink>, in
+        pattern in order to render elements and forms. Unlike the classic <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Decorator_pattern">decorator pattern</link>, in
         which you pass an object to a wrapping class, decorators in <classname>Zend_Form</classname>
-        implement a <ulink url="http://en.wikipedia.org/wiki/Strategy_pattern">strategy
-            pattern</ulink>, and utilize the metadata contained in an element or form in order to
+        implement a <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Strategy_pattern">strategy
+            pattern</link>, and utilize the metadata contained in an element or form in order to
         create a representation of it
     </para>
 
@@ -19,4 +19,4 @@
         follow should help you along the way. They will guide you through the basics of decoration,
         all the way to creating decorators for composite elements.
     </para>
-</sect1>
+</section>

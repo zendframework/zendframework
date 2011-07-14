@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.quickstart.create-model">
-    <title>Create a Model and Database Table</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.create-model"><info><title>Create a Model and Database Table</title></info>
+    
 
     <para>
         Before we get started, let's consider something: where will these classes live, and how will
@@ -38,7 +39,7 @@
         model <acronym>API</acronym> might look something like this:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 // application/models/Guestbook.php
 
 class Application_Model_Guestbook
@@ -70,7 +71,7 @@ class Application_Model_GuestbookMapper
     public function find($id);
     public function fetchAll();
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         <methodname>__get()</methodname> and <methodname>__set()</methodname> will provide a
@@ -96,29 +97,29 @@ class Application_Model_GuestbookMapper
         <command>zf configure db-adapter</command> command:
     </para>
 
-    <programlisting language="shell"><![CDATA[
+    <programlisting language="shell">
 % zf configure db-adapter \
-> 'adapter=PDO_SQLITE&dbname=APPLICATION_PATH "/../data/db/guestbook.db"' \
-> production
+&gt; 'adapter=PDO_SQLITE&amp;dbname=APPLICATION_PATH "/../data/db/guestbook.db"' \
+&gt; production
 A db configuration for the production has been written to the application config file.
 
 % zf configure db-adapter \
-> 'adapter=PDO_SQLITE&dbname=APPLICATION_PATH "/../data/db/guestbook-testing.db"' \
-> testing
+&gt; 'adapter=PDO_SQLITE&amp;dbname=APPLICATION_PATH "/../data/db/guestbook-testing.db"' \
+&gt; testing
 A db configuration for the production has been written to the application config file.
 
 % zf configure db-adapter \
-> 'adapter=PDO_SQLITE&dbname=APPLICATION_PATH "/../data/db/guestbook-dev.db"' \
-> development
+&gt; 'adapter=PDO_SQLITE&amp;dbname=APPLICATION_PATH "/../data/db/guestbook-dev.db"' \
+&gt; development
 A db configuration for the production has been written to the application config file.
-]]></programlisting>
+</programlisting>
 
     <para>
         Now edit your <filename>application/configs/application.ini</filename> file, where you'll
         see the following lines were added in the appropriate sections.
     </para>
 
-    <programlisting language="ini"><![CDATA[
+    <programlisting language="ini">
 ; application/configs/application.ini
 
 [production]
@@ -135,13 +136,13 @@ resources.db.params.dbname = APPLICATION_PATH "/../data/db/guestbook-testing.db"
 ; ...
 resources.db.adapter = "PDO_SQLITE"
 resources.db.params.dbname = APPLICATION_PATH "/../data/db/guestbook-dev.db"
-]]></programlisting>
+</programlisting>
 
     <para>
         Your final configuration file should look like the following:
     </para>
 
-    <programlisting language="ini"><![CDATA[
+    <programlisting language="ini">
 ; application/configs/application.ini
 
 [production]
@@ -170,7 +171,7 @@ phpSettings.display_startup_errors = 1
 phpSettings.display_errors = 1
 resources.db.adapter = "PDO_SQLITE"
 resources.db.params.dbname = APPLICATION_PATH "/../data/db/guestbook-dev.db"
-]]></programlisting>
+</programlisting>
 
     <para>
         Note that the database(s) will be stored in <filename>data/db/</filename>. Create those
@@ -178,9 +179,9 @@ resources.db.params.dbname = APPLICATION_PATH "/../data/db/guestbook-dev.db"
         follows:
     </para>
 
-    <programlisting language="shell"><![CDATA[
+    <programlisting language="shell">
 % mkdir -p data/db; chmod -R a+rwX data
-]]></programlisting>
+</programlisting>
 
     <para>
         On Windows, you will need to create the directories in Explorer and set the permissions to
@@ -193,7 +194,7 @@ resources.db.params.dbname = APPLICATION_PATH "/../data/db/guestbook-dev.db"
         design a simple table that will hold our guestbook entries.
     </para>
 
-    <programlisting language="sql"><![CDATA[
+    <programlisting language="sql">
 -- scripts/schema.sqlite.sql
 --
 -- You will need load your database schema with this SQL.
@@ -206,14 +207,14 @@ CREATE TABLE guestbook (
 );
 
 CREATE INDEX "id" ON "guestbook" ("id");
-]]></programlisting>
+</programlisting>
 
     <para>
         And, so that we can have some working data out of the box, lets create a few rows of
         information to make our application interesting.
     </para>
 
-    <programlisting language="sql"><![CDATA[
+    <programlisting language="sql">
 -- scripts/data.sqlite.sql
 --
 -- You can begin populating the database with the following SQL statements.
@@ -226,7 +227,7 @@ INSERT INTO guestbook (email, comment, created) VALUES
     ('foo@bar.com',
     'Baz baz baz, baz baz Baz baz baz - baz baz baz.',
     DATETIME('NOW'));
-]]></programlisting>
+</programlisting>
 
     <para>
         Now that we have both the schema and some data defined. Lets get a script together that we
@@ -236,7 +237,7 @@ INSERT INTO guestbook (email, comment, created) VALUES
         <filename>scripts/load.sqlite.php</filename> with the following contents:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 // scripts/load.sqlite.php
 
 /**
@@ -255,27 +256,27 @@ Zend_Loader_Autoloader::getInstance();
 
 // Define some CLI options
 $getopt = new Zend_Console_Getopt(array(
-    'withdata|w' => 'Load database with sample data',
-    'env|e-s'    => 'Application environment for which to create database (defaults to development)',
-    'help|h'     => 'Help -- usage message',
+    'withdata|w' =&gt; 'Load database with sample data',
+    'env|e-s'    =&gt; 'Application environment for which to create database (defaults to development)',
+    'help|h'     =&gt; 'Help -- usage message',
 ));
 try {
-    $getopt->parse();
+    $getopt-&gt;parse();
 } catch (Zend_Console_Getopt_Exception $e) {
     // Bad options passed: report usage
-    echo $e->getUsageMessage();
+    echo $e-&gt;getUsageMessage();
     return false;
 }
 
 // If help requested, report usage message
-if ($getopt->getOption('h')) {
-    echo $getopt->getUsageMessage();
+if ($getopt-&gt;getOption('h')) {
+    echo $getopt-&gt;getUsageMessage();
     return true;
 }
 
 // Initialize values based on presence or absence of CLI options
-$withData = $getopt->getOption('w');
-$env      = $getopt->getOption('e');
+$withData = $getopt-&gt;getOption('w');
+$env      = $getopt-&gt;getOption('e');
 defined('APPLICATION_ENV')
     || define('APPLICATION_ENV', (null === $env) ? 'development' : $env);
 
@@ -286,21 +287,21 @@ $application = new Zend_Application(
 );
 
 // Initialize and retrieve DB resource
-$bootstrap = $application->getBootstrap();
-$bootstrap->bootstrap('db');
-$dbAdapter = $bootstrap->getResource('db');
+$bootstrap = $application-&gt;getBootstrap();
+$bootstrap-&gt;bootstrap('db');
+$dbAdapter = $bootstrap-&gt;getResource('db');
 
 // let the user know whats going on (we are actually creating a
 // database here)
 if ('testing' != APPLICATION_ENV) {
     echo 'Writing Database Guestbook in (control-c to cancel): ' . PHP_EOL;
-    for ($x = 5; $x > 0; $x--) {
+    for ($x = 5; $x &gt; 0; $x--) {
         echo $x . "\r"; sleep(1);
     }
 }
 
 // Check to see if we have a database file already
-$options = $bootstrap->getOption('resources');
+$options = $bootstrap-&gt;getOption('resources');
 $dbFile  = $options['db']['params']['dbname'];
 if (file_exists($dbFile)) {
     unlink($dbFile);
@@ -311,7 +312,7 @@ if (file_exists($dbFile)) {
 try {
     $schemaSql = file_get_contents(dirname(__FILE__) . '/schema.sqlite.sql');
     // use the connection directly to load sql in batches
-    $dbAdapter->getConnection()->exec($schemaSql);
+    $dbAdapter-&gt;getConnection()-&gt;exec($schemaSql);
     chmod($dbFile, 0666);
 
     if ('testing' != APPLICATION_ENV) {
@@ -323,7 +324,7 @@ try {
     if ($withData) {
         $dataSql = file_get_contents(dirname(__FILE__) . '/data.sqlite.sql');
         // use the connection directly to load sql in batches
-        $dbAdapter->getConnection()->exec($dataSql);
+        $dbAdapter-&gt;getConnection()-&gt;exec($dataSql);
         if ('testing' != APPLICATION_ENV) {
             echo 'Data Loaded.';
             echo PHP_EOL;
@@ -332,33 +333,33 @@ try {
 
 } catch (Exception $e) {
     echo 'AN ERROR HAS OCCURED:' . PHP_EOL;
-    echo $e->getMessage() . PHP_EOL;
+    echo $e-&gt;getMessage() . PHP_EOL;
     return false;
 }
 
 // generally speaking, this script will be run from the command line
 return true;
-]]></programlisting>
+</programlisting>
 
     <para>
         Now, let's execute this script. From a terminal or the DOS command line, do the following:
     </para>
 
-    <programlisting language="shell"><![CDATA[
+    <programlisting language="shell">
 % php scripts/load.sqlite.php --withdata
-]]></programlisting>
+</programlisting>
 
     <para>
         You should see output like the following:
     </para>
 
-    <programlisting language="text"><![CDATA[
+    <programlisting language="text">
 path/to/ZendFrameworkQuickstart/scripts$ php load.sqlite.php --withdata
 Writing Database Guestbook in (control-c to cancel):
 1
 Database Created
 Data Loaded.
-]]></programlisting>
+</programlisting>
 
     <para>
         Now we have a fully working database and table for our guestbook application. Our next few
@@ -369,8 +370,8 @@ Data Loaded.
     </para>
 
     <para>
-        We'll use a <ulink url="http://martinfowler.com/eaaCatalog/tableDataGateway.html">Table Data
-            Gateway</ulink> to connect to our data source; <classname>Zend_Db_Table</classname>
+        We'll use a <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://martinfowler.com/eaaCatalog/tableDataGateway.html">Table Data
+            Gateway</link> to connect to our data source; <classname>Zend_Db_Table</classname>
         provides this functionality. To get started, lets create a
         <classname>Zend_Db_Table</classname>-based table class. Just as we've done for layouts and
         the database adapter, we can use the <command>zf</command> tool to assist, using the command
@@ -378,11 +379,11 @@ Data Loaded.
         you want to refer to the class, and the database table it maps to.
     </para>
 
-    <programlisting language="shell"><![CDATA[
+    <programlisting language="shell">
 % zf create db-table Guestbook guestbook
 Creating a DbTable at application/models/DbTable/Guestbook.php
 Updating project profile 'zfproject.xml'
-]]></programlisting>
+</programlisting>
 
     <para>
         Looking at your directory tree, you'll now see that a new directory,
@@ -391,7 +392,7 @@ Updating project profile 'zfproject.xml'
         contents:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 // application/models/DbTable/Guestbook.php
 
 /**
@@ -402,7 +403,7 @@ class Application_Model_DbTable_Guestbook extends Zend_Db_Table_Abstract
     /** Table name */
     protected $_name    = 'guestbook';
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         Note the class prefix: <classname>Application_Model_DbTable</classname>. The class prefix
@@ -417,14 +418,14 @@ class Application_Model_DbTable_Guestbook extends Zend_Db_Table_Abstract
     </para>
 
     <para>
-        Now let's create a <ulink url="http://martinfowler.com/eaaCatalog/dataMapper.html">Data
-            Mapper</ulink>. A <emphasis>Data Mapper</emphasis> maps a domain object to the database.
+        Now let's create a <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://martinfowler.com/eaaCatalog/dataMapper.html">Data
+            Mapper</link>. A <emphasis>Data Mapper</emphasis> maps a domain object to the database.
         In our case, it will map our model, <classname>Application_Model_Guestbook</classname>, to
         our data source, <classname>Application_Model_DbTable_Guestbook</classname>. A typical
         <acronym>API</acronym> for a data mapper is as follows:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 // application/models/GuestbookMapper.php
 
 class Application_Model_GuestbookMapper
@@ -433,25 +434,25 @@ class Application_Model_GuestbookMapper
     public function find($id, $model);
     public function fetchAll();
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         In addition to these methods, we'll add methods for setting and retrieving the Table Data
         Gateway. To create the initial class, use the <command>zf</command> CLI tool:
     </para>
 
-    <programlisting language="shell"><![CDATA[
+    <programlisting language="shell">
 % zf create model GuestbookMapper
 Creating a model at application/models/GuestbookMapper.php
 Updating project profile '.zfproject.xml'
-]]></programlisting>
+</programlisting>
 
     <para>
         Now, edit the class <classname>Application_Model_GuestbookMapper</classname> found in
         <filename>application/models/GuestbookMapper.php</filename> to read as follows:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 // application/models/GuestbookMapper.php
 
 class Application_Model_GuestbookMapper
@@ -466,74 +467,74 @@ class Application_Model_GuestbookMapper
         if (!$dbTable instanceof Zend_Db_Table_Abstract) {
             throw new Exception('Invalid table data gateway provided');
         }
-        $this->_dbTable = $dbTable;
+        $this-&gt;_dbTable = $dbTable;
         return $this;
     }
 
     public function getDbTable()
     {
-        if (null === $this->_dbTable) {
-            $this->setDbTable('Application_Model_DbTable_Guestbook');
+        if (null === $this-&gt;_dbTable) {
+            $this-&gt;setDbTable('Application_Model_DbTable_Guestbook');
         }
-        return $this->_dbTable;
+        return $this-&gt;_dbTable;
     }
 
     public function save(Application_Model_Guestbook $guestbook)
     {
         $data = array(
-            'email'   => $guestbook->getEmail(),
-            'comment' => $guestbook->getComment(),
-            'created' => date('Y-m-d H:i:s'),
+            'email'   =&gt; $guestbook-&gt;getEmail(),
+            'comment' =&gt; $guestbook-&gt;getComment(),
+            'created' =&gt; date('Y-m-d H:i:s'),
         );
 
-        if (null === ($id = $guestbook->getId())) {
+        if (null === ($id = $guestbook-&gt;getId())) {
             unset($data['id']);
-            $this->getDbTable()->insert($data);
+            $this-&gt;getDbTable()-&gt;insert($data);
         } else {
-            $this->getDbTable()->update($data, array('id = ?' => $id));
+            $this-&gt;getDbTable()-&gt;update($data, array('id = ?' =&gt; $id));
         }
     }
 
     public function find($id, Application_Model_Guestbook $guestbook)
     {
-        $result = $this->getDbTable()->find($id);
+        $result = $this-&gt;getDbTable()-&gt;find($id);
         if (0 == count($result)) {
             return;
         }
-        $row = $result->current();
-        $guestbook->setId($row->id)
-                  ->setEmail($row->email)
-                  ->setComment($row->comment)
-                  ->setCreated($row->created);
+        $row = $result-&gt;current();
+        $guestbook-&gt;setId($row-&gt;id)
+                  -&gt;setEmail($row-&gt;email)
+                  -&gt;setComment($row-&gt;comment)
+                  -&gt;setCreated($row-&gt;created);
     }
 
     public function fetchAll()
     {
-        $resultSet = $this->getDbTable()->fetchAll();
+        $resultSet = $this-&gt;getDbTable()-&gt;fetchAll();
         $entries   = array();
         foreach ($resultSet as $row) {
             $entry = new Application_Model_Guestbook();
-            $entry->setId($row->id)
-                  ->setEmail($row->email)
-                  ->setComment($row->comment)
-                  ->setCreated($row->created);
+            $entry-&gt;setId($row-&gt;id)
+                  -&gt;setEmail($row-&gt;email)
+                  -&gt;setComment($row-&gt;comment)
+                  -&gt;setCreated($row-&gt;created);
             $entries[] = $entry;
         }
         return $entries;
     }
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         Now it's time to create our model class. We'll do so, once again, using the
         <command>zf create model</command> command:
     </para>
 
-    <programlisting language="shell"><![CDATA[
+    <programlisting language="shell">
 % zf create model Guestbook
 Creating a model at application/models/Guestbook.php
 Updating project profile '.zfproject.xml'
-]]></programlisting>
+</programlisting>
 
     <para>
         We'll modify this empty <acronym>PHP</acronym> class to make it easy to populate the model
@@ -542,7 +543,7 @@ Updating project profile '.zfproject.xml'
         <filename>application/models/Guestbook.php</filename>, should look like this:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 // application/models/Guestbook.php
 
 class Application_Model_Guestbook
@@ -555,7 +556,7 @@ class Application_Model_Guestbook
     public function __construct(array $options = null)
     {
         if (is_array($options)) {
-            $this->setOptions($options);
+            $this-&gt;setOptions($options);
         }
     }
 
@@ -565,7 +566,7 @@ class Application_Model_Guestbook
         if (('mapper' == $name) || !method_exists($this, $method)) {
             throw new Exception('Invalid guestbook property');
         }
-        $this->$method($value);
+        $this-&gt;$method($value);
     }
 
     public function __get($name)
@@ -574,16 +575,16 @@ class Application_Model_Guestbook
         if (('mapper' == $name) || !method_exists($this, $method)) {
             throw new Exception('Invalid guestbook property');
         }
-        return $this->$method();
+        return $this-&gt;$method();
     }
 
     public function setOptions(array $options)
     {
         $methods = get_class_methods($this);
-        foreach ($options as $key => $value) {
+        foreach ($options as $key =&gt; $value) {
             $method = 'set' . ucfirst($key);
             if (in_array($method, $methods)) {
-                $this->$method($value);
+                $this-&gt;$method($value);
             }
         }
         return $this;
@@ -591,49 +592,49 @@ class Application_Model_Guestbook
 
     public function setComment($text)
     {
-        $this->_comment = (string) $text;
+        $this-&gt;_comment = (string) $text;
         return $this;
     }
 
     public function getComment()
     {
-        return $this->_comment;
+        return $this-&gt;_comment;
     }
 
     public function setEmail($email)
     {
-        $this->_email = (string) $email;
+        $this-&gt;_email = (string) $email;
         return $this;
     }
 
     public function getEmail()
     {
-        return $this->_email;
+        return $this-&gt;_email;
     }
 
     public function setCreated($ts)
     {
-        $this->_created = $ts;
+        $this-&gt;_created = $ts;
         return $this;
     }
 
     public function getCreated()
     {
-        return $this->_created;
+        return $this-&gt;_created;
     }
 
     public function setId($id)
     {
-        $this->_id = (int) $id;
+        $this-&gt;_id = (int) $id;
         return $this;
     }
 
     public function getId()
     {
-        return $this->_id;
+        return $this-&gt;_id;
     }
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         Lastly, to connect these elements all together, lets create a guestbook controller that will
@@ -644,7 +645,7 @@ class Application_Model_Guestbook
         To create a new controller, use the <command>zf create controller</command> command:
     </para>
 
-    <programlisting language="shell"><![CDATA[
+    <programlisting language="shell">
 % zf create controller Guestbook
 Creating a controller at
     application/controllers/GuestbookController.php
@@ -654,7 +655,7 @@ Creating a view script for the index action method at
 Creating a controller test file at
     tests/application/controllers/GuestbookControllerTest.php
 Updating project profile '.zfproject.xml'
-]]></programlisting>
+</programlisting>
 
     <para>
         This will create a new controller, <classname>GuestbookController</classname>, in
@@ -674,7 +675,7 @@ Updating project profile '.zfproject.xml'
         like the following:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 // application/controllers/GuestbookController.php
 
 class GuestbookController extends Zend_Controller_Action
@@ -682,38 +683,38 @@ class GuestbookController extends Zend_Controller_Action
     public function indexAction()
     {
         $guestbook = new Application_Model_GuestbookMapper();
-        $this->view->entries = $guestbook->fetchAll();
+        $this-&gt;view-&gt;entries = $guestbook-&gt;fetchAll();
     }
 }
-]]></programlisting>
+</programlisting>
 
     <para>
         And, of course, we need a view script to go along with that. Edit
         <filename>application/views/scripts/guestbook/index.phtml</filename> to read as follows:
     </para>
 
-    <programlisting language="php"><![CDATA[
-<!-- application/views/scripts/guestbook/index.phtml -->
+    <programlisting language="php">
+&lt;!-- application/views/scripts/guestbook/index.phtml --&gt;
 
-<p><a href="<?php echo $this->url(
+&lt;p&gt;&lt;a href="&lt;?php echo $this-&gt;url(
     array(
-        'controller' => 'guestbook',
-        'action'     => 'sign'
+        'controller' =&gt; 'guestbook',
+        'action'     =&gt; 'sign'
     ),
     'default',
-    true) ?>">Sign Our Guestbook</a></p>
+    true) ?&gt;"&gt;Sign Our Guestbook&lt;/a&gt;&lt;/p&gt;
 
-Guestbook Entries: <br />
-<dl>
-    <?php foreach ($this->entries as $entry): ?>
-    <dt><?php echo $this->escape($entry->email) ?></dt>
-    <dd><?php echo $this->escape($entry->comment) ?></dd>
-    <?php endforeach ?>
-</dl>
-]]></programlisting>
+Guestbook Entries: &lt;br /&gt;
+&lt;dl&gt;
+    &lt;?php foreach ($this-&gt;entries as $entry): ?&gt;
+    &lt;dt&gt;&lt;?php echo $this-&gt;escape($entry-&gt;email) ?&gt;&lt;/dt&gt;
+    &lt;dd&gt;&lt;?php echo $this-&gt;escape($entry-&gt;comment) ?&gt;&lt;/dd&gt;
+    &lt;?php endforeach ?&gt;
+&lt;/dl&gt;
+</programlisting>
 
-    <note>
-        <title>Checkpoint</title>
+    <note><info><title>Checkpoint</title></info>
+        
 
         <para>
             Now browse to "http://localhost/guestbook". You should see the following in your
@@ -721,13 +722,12 @@ Guestbook Entries: <br />
         </para>
 
         <para>
-            <inlinegraphic width="525" scale="100" align="center" valign="middle"
-                fileref="figures/learning.quickstart.create-model.png" format="PNG" />
+            <inlinemediaobject><imageobject><imagedata width="525" scale="100" align="center" valign="middle" fileref="figures/learning.quickstart.create-model.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
     </note>
 
-    <note>
-        <title>Using the data loader script</title>
+    <note><info><title>Using the data loader script</title></info>
+        
 
         <para>
             The data loader script introduced in this section
@@ -738,13 +738,13 @@ Guestbook Entries: <br />
             you the available options:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 Usage: load.sqlite.php [ options ]
 --withdata|-w         Load database with sample data
 --env|-e [  ]         Application environment for which to create database
                       (defaults to development)
 --help|-h             Help -- usage message)]]
-]]></programlisting>
+</programlisting>
 
         <para>
             The "-e" switch allows you to specify the value to use for the constant
@@ -753,4 +753,4 @@ Usage: load.sqlite.php [ options ]
             you choose for your application when deploying.
         </para>
     </note>
-</sect1>
+</section>

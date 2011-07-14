@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.ldap.api.reference.zend-ldap-dn">
-    <title>Zend_Ldap_Dn</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap-dn"><info><title>Zend_Ldap_Dn</title></info>
+    
 
     <para>
         <classname>Zend_Ldap_Dn</classname> provides an object-oriented interface to
@@ -46,8 +47,8 @@
         checks if the index is within the bounds.
     </para>
 
-    <table id="zend.ldap.api.reference.zend-ldap-dn.table">
-        <title>Zend_Ldap_Dn API</title>
+    <table xml:id="zend.ldap.api.reference.zend-ldap-dn.table"><info><title>Zend_Ldap_Dn API</title></info>
+        
 
         <tgroup cols="2">
             <thead>
@@ -267,14 +268,14 @@
                             DN values. The resulting array will be of type
                         </para>
 
-                        <programlisting language="php"><![CDATA[
+                        <programlisting language="php">
 array(
-array("cn" => "name1", "uid" => "user"),
-array("cn" => "name2"),
-array("dc" => "example"),
-array("dc" => "org")
+array("cn" =&gt; "name1", "uid" =&gt; "user"),
+array("cn" =&gt; "name2"),
+array("dc" =&gt; "example"),
+array("dc" =&gt; "org")
 )
-]]></programlisting>
+</programlisting>
 
                         <para>
                             for a DN of <code>cn=name1+uid=user,cn=name2,dc=example,dc=org</code>.
@@ -325,14 +326,14 @@ array("dc" => "org")
                             must of type
                         </para>
 
-                        <programlisting language="php"><![CDATA[
+                        <programlisting language="php">
 array(
-array("cn" => "name1", "uid" => "user"),
-array("cn" => "name2"),
-array("dc" => "example"),
-array("dc" => "org")
+array("cn" =&gt; "name1", "uid" =&gt; "user"),
+array("cn" =&gt; "name2"),
+array("dc" =&gt; "example"),
+array("dc" =&gt; "org")
 )
-]]></programlisting>
+</programlisting>
                     </entry>
                 </row>
 
@@ -350,4 +351,4 @@ array("dc" => "org")
             </tbody>
         </tgroup>
     </table>
-</sect3>
+</section>

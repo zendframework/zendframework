@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.mail">
-    <title>Zend_Application_Resource_Mail</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.mail"><info><title>Zend_Application_Resource_Mail</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Mail</classname> can be used
@@ -16,15 +17,15 @@
         behaviour does no more occur.
     </para>
 
-    <example id="zend.application.available-resources.mail.configExample">
-        <title>Sample Mail Resource Configuration</title>
+    <example xml:id="zend.application.available-resources.mail.configExample"><info><title>Sample Mail Resource Configuration</title></info>
+        
 
         <para>
             Below is a sample <acronym>INI</acronym> snippet showing how to
             configure the mail resource plugin.
         </para>
 
-        <programlisting language="ini"><![CDATA[
+        <programlisting language="ini">
 resources.mail.transport.type = smtp
 resources.mail.transport.host = "smtp.example.com"
 resources.mail.transport.auth = login
@@ -36,7 +37,7 @@ resources.mail.defaultFrom.email = john@example.com
 resources.mail.defaultFrom.name = "John Doe"
 resources.mail.defaultReplyTo.email = Jane@example.com
 resources.mail.defaultReplyTo.name = "Jane Doe"
-]]></programlisting>
+</programlisting>
 
     </example>
-</sect2>
+</section>

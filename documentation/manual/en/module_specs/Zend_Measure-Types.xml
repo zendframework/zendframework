@@ -1,15 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.measure.types">
-    <title>Types of measurements</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.types"><info><title>Types of measurements</title></info>
+    
 
     <para>
         All supported measurement types are listed below, each with an example of the standard usage
         for such measurements.
     </para>
 
-    <table id="zend.measure.types.table-1">
-        <title>List of measurement types</title>
+    <table xml:id="zend.measure.types.table-1"><info><title>List of measurement types</title></info>
+        
 
         <tgroup cols="4">
             <thead>
@@ -341,8 +342,8 @@
         </tgroup>
     </table>
 
-    <sect2 id="zend.measure.types.binary">
-        <title>Hints for Zend_Measure_Binary</title>
+    <section xml:id="zend.measure.types.binary"><info><title>Hints for Zend_Measure_Binary</title></info>
+        
 
         <para>
             Some popular binary conventions, include terms like kilo-, mega-, giga, etc. in normal
@@ -360,10 +361,10 @@
             marked with the SI-notation, but almost all harddisks are marked in computer binary
             notation.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.measure.types.decimal">
-        <title>Hints for Zend_Measure_Number</title>
+    <section xml:id="zend.measure.types.decimal"><info><title>Hints for Zend_Measure_Number</title></info>
+        
 
         <para>
             The best known number format is the decimal system. Additionally this class supports the
@@ -371,10 +372,10 @@
             some other less popular systems. Note that only the decimal part of numbers is handled.
             Any fractional part will be stripped.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.measure.types.roman">
-        <title>Roman numbers</title>
+    <section xml:id="zend.measure.types.roman"><info><title>Roman numbers</title></info>
+        
 
         <para>
             For the roman number system digits greater 4000 are supported. In reality these digits
@@ -382,16 +383,13 @@
             the computer, an underline has to be used instead of it.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $great = '_X';
 $locale = new Zend_Locale('en');
 $unit = new Zend_Measure_Number($great,Zend_Measure_Number::ROMAN, $locale);
 
 // convert to the decimal system
-echo $unit->convertTo(Zend_Measure_Number::DECIMAL);
-]]></programlisting>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+echo $unit-&gt;convertTo(Zend_Measure_Number::DECIMAL);
+</programlisting>
+    </section>
+</section>

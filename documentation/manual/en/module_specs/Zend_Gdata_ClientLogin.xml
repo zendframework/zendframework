@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.gdata.clientlogin">
-    <title>Authenticating with ClientLogin</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.clientlogin"><info><title>Authenticating with ClientLogin</title></info>
+    
 
     <para>
         The ClientLogin mechanism enables you to write <acronym>PHP</acronym> application
@@ -10,8 +11,7 @@
     </para>
 
     <para>
-        See <ulink
-            url="http://code.google.com/apis/accounts/AuthForInstalledApps.html">http://code.google.com/apis/accounts/AuthForInstalledApps.html</ulink>
+        See <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/accounts/AuthForInstalledApps.html">http://code.google.com/apis/accounts/AuthForInstalledApps.html</link>
         for more information about Google Data ClientLogin authentication.
     </para>
 
@@ -31,8 +31,8 @@
         to be those of the user who is using the <acronym>PHP</acronym> application.
     </para>
 
-    <sect2 id="zend.gdata.clientlogin.login">
-        <title>Creating a ClientLogin authenticated Http Client</title>
+    <section xml:id="zend.gdata.clientlogin.login"><info><title>Creating a ClientLogin authenticated Http Client</title></info>
+        
 
         <para>
             The process of creating an authenticated <acronym>HTTP</acronym> client using
@@ -86,25 +86,25 @@
             <classname>Zend_Http_Client</classname>.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 // Enter your Google account credentials
 $email = 'johndoe@gmail.com';
 $passwd = 'xxxxxxxx';
 try {
    $client = Zend_Gdata_ClientLogin::getHttpClient($email, $passwd, 'cl');
 } catch (Zend_Gdata_App_CaptchaRequiredException $cre) {
-    echo 'URL of CAPTCHA image: ' . $cre->getCaptchaUrl() . "\n";
-    echo 'Token ID: ' . $cre->getCaptchaToken() . "\n";
+    echo 'URL of CAPTCHA image: ' . $cre-&gt;getCaptchaUrl() . "\n";
+    echo 'Token ID: ' . $cre-&gt;getCaptchaToken() . "\n";
 } catch (Zend_Gdata_App_AuthException $ae) {
-   echo 'Problem authenticating: ' . $ae->exception() . "\n";
+   echo 'Problem authenticating: ' . $ae-&gt;exception() . "\n";
 }
 
 $cal = new Zend_Gdata_Calendar($client);
-]]></programlisting>
-    </sect2>
+</programlisting>
+    </section>
 
-    <sect2 id="zend.gdata.clientlogin.terminating">
-        <title>Terminating a ClientLogin authenticated Http Client</title>
+    <section xml:id="zend.gdata.clientlogin.terminating"><info><title>Terminating a ClientLogin authenticated Http Client</title></info>
+        
 
         <para>
             There is no method to revoke ClientLogin authentication as there
@@ -113,5 +113,5 @@ $cal = new Zend_Gdata_Calendar($client);
             to a Google account, and therefore these can be used repeatedly
             in the future.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

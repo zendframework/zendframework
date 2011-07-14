@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.hex">
-    <title>Hex</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.hex"><info><title>Hex</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Hex</classname> allows you to validate if a given value contains
@@ -10,17 +11,17 @@
         you want to validate.
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $validator = new Zend_Validate_Hex();
-if ($validator->isValid('123ABC')) {
+if ($validator-&gt;isValid('123ABC')) {
     // value contains only hex chars
 } else {
     // false
 }
-]]></programlisting>
+</programlisting>
 
-    <note>
-        <title>Invalid characters</title>
+    <note><info><title>Invalid characters</title></info>
+        
 
         <para>
             All other characters will return false, including whitespace and decimal point. Also
@@ -28,14 +29,11 @@ if ($validator->isValid('123ABC')) {
         </para>
     </note>
 
-    <sect3 id="zend.validate.set.hex.options">
-        <title>Supported options for Zend_Validate_Hex</title>
+    <section xml:id="zend.validate.set.hex.options"><info><title>Supported options for Zend_Validate_Hex</title></info>
+        
 
         <para>
             There are no additional options for <classname>Zend_Validate_Hex</classname>:
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

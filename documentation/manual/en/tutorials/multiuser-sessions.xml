@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.multiuser.sessions">
-    <title>Managing User Sessions In ZF</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
 
-    <sect2 id="learning.multiuser.sessions.intro">
-        <title>Introduction to Sessions</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.multiuser.sessions"><info><title>Managing User Sessions In ZF</title></info>
+    
+
+    <section xml:id="learning.multiuser.sessions.intro"><info><title>Introduction to Sessions</title></info>
+        
 
         <para>
             The success of the web is deeply rooted in the protocol that drives the web:
@@ -29,10 +30,10 @@
             <classname>Zend_Session</classname> adds value to the <acronym>PHP</acronym> session
             extension making it easier to use and depend on inside object-oriented applications.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.multiuser.sessions.basic-usage">
-        <title>Basic Usage of Zend_Session</title>
+    <section xml:id="learning.multiuser.sessions.basic-usage"><info><title>Basic Usage of Zend_Session</title></info>
+        
 
         <para>
             The <classname>Zend_Session</classname> component is both a session manager as well as
@@ -57,11 +58,11 @@
             following code to your application.ini file:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 resources.session.save_path = APPLICATION_PATH "/../data/session"
 resources.session.use_only_cookies = true
 resources.session.remember_me_seconds = 864000
-]]></programlisting>
+</programlisting>
 
         <para>
             As you can see, the options passed in are the same options that you'd expect to find
@@ -88,19 +89,19 @@ resources.session.remember_me_seconds = 864000
             incrementing counter, starting at 1000 and resetting itself after 1999.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $mysession = new Zend_Session_Namespace('mysession');
 
-if (!isset($mysession->counter)) {
-    $mysession->counter = 1000;
+if (!isset($mysession-&gt;counter)) {
+    $mysession-&gt;counter = 1000;
 } else {
-    $mysession->counter++;
+    $mysession-&gt;counter++;
 }
 
-if ($mysession->counter > 1999) {
-    unset($mysession->counter);
+if ($mysession-&gt;counter &gt; 1999) {
+    unset($mysession-&gt;counter);
 }
-]]></programlisting>
+</programlisting>
 
         <para>
             As you can see above, the session namespace object uses the magic __get, __set,
@@ -108,10 +109,10 @@ if ($mysession->counter > 1999) {
             The information stored in the above example is stored at
             $_SESSION['mysession']['counter'].
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.multiuser.sessions.advanced-usage">
-        <title>Advanced Usage of Zend_Session</title>
+    <section xml:id="learning.multiuser.sessions.advanced-usage"><info><title>Advanced Usage of Zend_Session</title></info>
+        
 
         <para>
             Additionally, if you wanted to use the DbTable
@@ -119,7 +120,7 @@ if ($mysession->counter > 1999) {
             your application.ini:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 resources.session.saveHandler.class = "Zend_Session_SaveHandler_DbTable"
 resources.session.saveHandler.options.name = "session"
 resources.session.saveHandler.options.primary.session_id = "session_id"
@@ -131,6 +132,6 @@ resources.session.saveHandler.options.primaryAssignment.sessionName = "sessionNa
 resources.session.saveHandler.options.modifiedColumn = "modified"
 resources.session.saveHandler.options.dataColumn = "session_data"
 resources.session.saveHandler.options.lifetimeColumn = "lifetime"
-]]></programlisting>
-    </sect2>
-</sect1>
+</programlisting>
+    </section>
+</section>

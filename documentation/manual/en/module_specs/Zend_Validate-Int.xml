@@ -1,15 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.int">
-    <title>Int</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.int"><info><title>Int</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Int</classname> validates if a given value is an integer. Also
         localized integer values are recognised and can be validated.
     </para>
 
-    <sect3 id="zend.validate.set.int.options">
-        <title>Supported options for Zend_Validate_Int</title>
+    <section xml:id="zend.validate.set.int.options"><info><title>Supported options for Zend_Validate_Int</title></info>
+        
 
         <para>
             The following options are supported for <classname>Zend_Validate_Int</classname>:
@@ -23,32 +24,32 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.int.basic">
-        <title>Simple integer validation</title>
+    <section xml:id="zend.validate.set.int.basic"><info><title>Simple integer validation</title></info>
+        
 
         <para>
             The simplest way to validate an integer is by using the system settings. When no option
             is used, the environment locale is used for validation:
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $validator = new Zend_Validate_Int();
 
-$validator->isValid(1234);   // returns true
-$validator->isValid(1234.5); // returns false
-$validator->isValid('1,234'); // returns true
-]]></programlisting>
+$validator-&gt;isValid(1234);   // returns true
+$validator-&gt;isValid(1234.5); // returns false
+$validator-&gt;isValid('1,234'); // returns true
+</programlisting>
 
         <para>
             In the above example we expected that our environment is set to "en" as locale. As you
             can see in the third example also grouping is recognised.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.int.localized">
-        <title>Localized integer validation</title>
+    <section xml:id="zend.validate.set.int.localized"><info><title>Localized integer validation</title></info>
+        
 
         <para>
             Often it's useful to be able to validate also localized values. Integer values are often
@@ -63,13 +64,13 @@ $validator->isValid('1,234'); // returns true
             it validates if the correct separator is used. See the following code:
         </para>
 
-        <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Int(array('locale' => 'de'));
+        <programlisting language="php">
+$validator = new Zend_Validate_Int(array('locale' =&gt; 'de'));
 
-$validator->isValid(1234); // returns true
-$validator->isValid("1,234"); // returns false
-$validator->isValid("1.234"); // returns true
-]]></programlisting>
+$validator-&gt;isValid(1234); // returns true
+$validator-&gt;isValid("1,234"); // returns false
+$validator-&gt;isValid("1.234"); // returns true
+</programlisting>
 
         <para>
             As you can see, by using a locale, your input is validated localized. Using the english
@@ -81,8 +82,5 @@ $validator->isValid("1.234"); // returns true
             The locale can also be set afterwards by using <methodname>setLocale()</methodname> and
             retrieved by using <methodname>getLocale()</methodname>.
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

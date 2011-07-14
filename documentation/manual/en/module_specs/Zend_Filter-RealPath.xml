@@ -1,15 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.realpath">
-    <title>RealPath</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.realpath"><info><title>RealPath</title></info>
+    
 
     <para>
         This filter will resolve given links and pathnames and returns canonicalized absolute
         pathnames.
     </para>
 
-    <sect3 id="zend.filter.set.realpath.options">
-        <title>Supported options for Zend_Filter_RealPath</title>
+    <section xml:id="zend.filter.set.realpath.options"><info><title>Supported options for Zend_Filter_RealPath</title></info>
+        
 
         <para>
             The following options are supported for <classname>Zend_Filter_RealPath</classname>:
@@ -23,52 +24,52 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.realpath.basic">
-        <title>Basic usage</title>
+    <section xml:id="zend.filter.set.realpath.basic"><info><title>Basic usage</title></info>
+        
 
         <para>
             For any given link of pathname its absolute path will be returned.
-            References to &apos;<filename>/./</filename>&apos;, &apos;<filename>/../</filename>&apos; and extra
-            &apos;<filename>/</filename>&apos; characters in the input path will be stripped. The resulting
-            path will not have any symbolic link, &apos;<filename>/./</filename>&apos; or
-            &apos;<filename>/../</filename>&apos; character.
+            References to '<filename>/./</filename>', '<filename>/../</filename>' and extra
+            '<filename>/</filename>' characters in the input path will be stripped. The resulting
+            path will not have any symbolic link, '<filename>/./</filename>' or
+            '<filename>/../</filename>' character.
         </para>
 
         <para>
             <classname>Zend_Filter_RealPath</classname> will return <constant>FALSE</constant> on
             failure, e.g. if the file does not exist. On <acronym>BSD</acronym> systems
-            <classname>Zend_Filter_RealPath</classname> doesn&apos;t fail if only the last path component
-            doesn&apos;t exist, while other systems will return <constant>FALSE</constant>.
+            <classname>Zend_Filter_RealPath</classname> doesn't fail if only the last path component
+            doesn't exist, while other systems will return <constant>FALSE</constant>.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $filter = new Zend_Filter_RealPath();
 $path   = '/www/var/path/../../mypath';
-$filtered = $filter->filter($path);
+$filtered = $filter-&gt;filter($path);
 
 // returns '/www/mypath'
-]]></programlisting>
-    </sect3>
+</programlisting>
+    </section>
 
-    <sect3 id="zend.filter.set.realpath.exists">
-        <title>Non existing paths</title>
+    <section xml:id="zend.filter.set.realpath.exists"><info><title>Non existing paths</title></info>
+        
 
        <para>
-            Sometimes it is useful to get also paths when they don&apos;t exist, f.e. when you want to
+            Sometimes it is useful to get also paths when they don't exist, f.e. when you want to
             get the real path for a path which you want to create. You can then either give a
             <constant>FALSE</constant> at initiation, or use <methodname>setExists()</methodname> to
             set it.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $filter = new Zend_Filter_RealPath(false);
 $path   = '/www/var/path/../../non/existing/path';
-$filtered = $filter->filter($path);
+$filtered = $filter-&gt;filter($path);
 
 // returns '/www/non/existing/path'
 // even when file_exists or realpath would return false
-]]></programlisting>
-    </sect3>
-</sect2>
+</programlisting>
+    </section>
+</section>

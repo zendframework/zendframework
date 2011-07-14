@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.log.writers.mail">
-    <title>Writing to Email</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers.mail"><info><title>Writing to Email</title></info>
+    
 
     <para>
         <classname>Zend_Log_Writer_Mail</classname> writes log entries in an email message
@@ -23,29 +24,29 @@
         Basic usage is outlined below:
     </para>
 
-    <programlisting language="php"><![CDATA[
+    <programlisting language="php">
 $mail = new Zend_Mail();
-$mail->setFrom('errors@example.org')
-     ->addTo('project_developers@example.org');
+$mail-&gt;setFrom('errors@example.org')
+     -&gt;addTo('project_developers@example.org');
 
 $writer = new Zend_Log_Writer_Mail($mail);
 
 // Set subject text for use; summary of number of errors is appended to the
 // subject line before sending the message.
-$writer->setSubjectPrependText('Errors with script foo.php');
+$writer-&gt;setSubjectPrependText('Errors with script foo.php');
 
 // Only email warning level entries and higher.
-$writer->addFilter(Zend_Log::WARN);
+$writer-&gt;addFilter(Zend_Log::WARN);
 
 $log = new Zend_Log();
-$log->addWriter($writer);
+$log-&gt;addWriter($writer);
 
 // Something bad happened!
-$log->error('unable to connect to database');
+$log-&gt;error('unable to connect to database');
 
 // On writer shutdown, Zend_Mail::send() is triggered to send an email with
 // all log entries at or above the Zend_Log filter level.
-]]></programlisting>
+</programlisting>
 
     <para>
         <classname>Zend_Log_Writer_Mail</classname> will render the email body as plain
@@ -59,8 +60,8 @@ $log->error('unable to connect to database');
         a total of seven log entries.
     </para>
 
-    <sect3 id="zend.log.writers.mail.layoutusage">
-        <title>Zend_Layout Usage</title>
+    <section xml:id="zend.log.writers.mail.layoutusage"><info><title>Zend_Layout Usage</title></info>
+        
 
         <para>
             A <classname>Zend_Layout</classname> instance may be used to generate the
@@ -81,10 +82,10 @@ $log->error('unable to connect to database');
             below.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting language="php">
 $mail = new Zend_Mail();
-$mail->setFrom('errors@example.org')
-     ->addTo('project_developers@example.org');
+$mail-&gt;setFrom('errors@example.org')
+     -&gt;addTo('project_developers@example.org');
 // Note that a subject line is not being set on the Zend_Mail instance!
 
 // Use a simple Zend_Layout instance with its defaults.
@@ -92,30 +93,30 @@ $layout = new Zend_Layout();
 
 // Create a formatter that wraps the entry in a listitem tag.
 $layoutFormatter = new Zend_Log_Formatter_Simple(
-    '<li>' . Zend_Log_Formatter_Simple::DEFAULT_FORMAT . '</li>'
+    '&lt;li&gt;' . Zend_Log_Formatter_Simple::DEFAULT_FORMAT . '&lt;/li&gt;'
 );
 
 $writer = new Zend_Log_Writer_Mail($mail, $layout);
 
 // Apply the formatter for entries as rendered with Zend_Layout.
-$writer->setLayoutFormatter($layoutFormatter);
-$writer->setSubjectPrependText('Errors with script foo.php');
-$writer->addFilter(Zend_Log::WARN);
+$writer-&gt;setLayoutFormatter($layoutFormatter);
+$writer-&gt;setSubjectPrependText('Errors with script foo.php');
+$writer-&gt;addFilter(Zend_Log::WARN);
 
 $log = new Zend_Log();
-$log->addWriter($writer);
+$log-&gt;addWriter($writer);
 
 // Something bad happened!
-$log->error('unable to connect to database');
+$log-&gt;error('unable to connect to database');
 
 // On writer shutdown, Zend_Mail::send() is triggered to send an email with
 // all log entries at or above the Zend_Log filter level. The email will
 // contain both plain text and HTML parts.
-]]></programlisting>
-    </sect3>
+</programlisting>
+    </section>
 
-    <sect3 id="zend.log.writers.mail.dynamicsubjectline">
-        <title>Subject Line Error Level Summary</title>
+    <section xml:id="zend.log.writers.mail.dynamicsubjectline"><info><title>Subject Line Error Level Summary</title></info>
+        
 
         <para>
             The <methodname>setSubjectPrependText()</methodname> method may be used in place
@@ -128,10 +129,10 @@ $log->error('unable to connect to database');
             <classname>Zend_Log_Writer_Mail</classname>, the <classname>Zend_Mail</classname>
             subject line, if any, is used.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.log.writers.mail.caveats">
-        <title>Caveats</title>
+    <section xml:id="zend.log.writers.mail.caveats"><info><title>Caveats</title></info>
+        
 
         <para>
             Sending log entries via email can be dangerous. If error conditions
@@ -155,8 +156,5 @@ $log->error('unable to connect to database');
             being put in place to prevent those circumstances in the future,
             then email-based notification of errors can be a valuable tool.
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

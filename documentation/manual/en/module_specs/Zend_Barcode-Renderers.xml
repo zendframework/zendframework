@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.barcode.renderers">
-    <title>Zend_Barcode Renderers</title>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Converted by db4-upgrade version 1.0 -->
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.barcode.renderers"><info><title>Zend_Barcode Renderers</title></info>
+    
 
     <para>
         Renderers have some common options. These options can be set in four ways:
@@ -33,44 +34,44 @@
         </listitem>
     </itemizedlist>
 
-    <example id="zend.barcode.renderers.configuration">
-        <title>Different ways to parameterize a renderer object</title>
+    <example xml:id="zend.barcode.renderers.configuration"><info><title>Different ways to parameterize a renderer object</title></info>
+        
 
-        <programlisting language="php"><![CDATA[
-$options = array('topOffset' => 10);
+        <programlisting language="php">
+$options = array('topOffset' =&gt; 10);
 
 // Case 1
 $renderer = new Zend_Barcode_Renderer_Pdf($options);
 
 // Case 2
 $renderer = new Zend_Barcode_Renderer_Pdf();
-$renderer->setOptions($options);
+$renderer-&gt;setOptions($options);
 
 // Case 3
 $config   = new Zend_Config($options);
 $renderer = new Zend_Barcode_Renderer_Pdf();
-$renderer->setConfig($config);
+$renderer-&gt;setConfig($config);
 
 // Case 4
 $renderer = new Zend_Barcode_Renderer_Pdf();
-$renderer->setTopOffset(10);
-]]></programlisting>
+$renderer-&gt;setTopOffset(10);
+</programlisting>
     </example>
 
-    <sect2 id="zend.barcode.renderers.common.options">
-        <title>Common Options</title>
+    <section xml:id="zend.barcode.renderers.common.options"><info><title>Common Options</title></info>
+        
 
         <para>
             In the following list, the values have no unit; we will use the term "unit." For
             example, the default value of the "thin bar" is "1 unit." The real units depend on the
             rendering support. The individual setters are obtained by uppercasing the initial
-            letter of the option and prefixing the name with "set" (e.g. "barHeight" =>
+            letter of the option and prefixing the name with "set" (e.g. "barHeight" =&gt;
             "setBarHeight"). All options have a correspondant getter prefixed with "get" (e.g.
             "getBarHeight"). Available options are:
         </para>
 
-        <table id="zend.barcode.renderers.common.options.table">
-            <title>Common Options</title>
+        <table xml:id="zend.barcode.renderers.common.options.table"><info><title>Common Options</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -175,10 +176,10 @@ $renderer->setTopOffset(10);
             the renderer class without the namespace (e.g.
             <classname>Zend_Barcode_Renderer_Image</classname> returns "image").
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.barcode.renderers.image">
-        <title>Zend_Barcode_Renderer_Image</title>
+    <section xml:id="zend.barcode.renderers.image"><info><title>Zend_Barcode_Renderer_Image</title></info>
+        
 
         <para>
             The Image renderer will draw the instruction list of the barcode object in an image
@@ -188,8 +189,8 @@ $renderer->setTopOffset(10);
 
         <para>Available option are:</para>
 
-        <table id="zend.barcode.renderers.image.table">
-            <title>Zend_Barcode_Renderer_Image Options</title>
+        <table xml:id="zend.barcode.renderers.image.table"><info><title>Zend_Barcode_Renderer_Image Options</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -236,10 +237,10 @@ $renderer->setTopOffset(10);
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.barcode.renderers.pdf">
-        <title>Zend_Barcode_Renderer_Pdf</title>
+    <section xml:id="zend.barcode.renderers.pdf"><info><title>Zend_Barcode_Renderer_Pdf</title></info>
+        
 
         <para>
             The <acronym>PDF</acronym> renderer will draw the instruction list of the barcode
@@ -250,5 +251,5 @@ $renderer->setTopOffset(10);
         <para>
             There are no particular options for this renderer.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

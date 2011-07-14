@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Converted by db4-upgrade version 1.0 -->
+
 
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.classmap-generator"><info><title>The Class Map Generator utility: bin/classmap_generator.php</title></info>
     

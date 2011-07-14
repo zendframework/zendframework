@@ -56,7 +56,7 @@ abstract class AbstractProvider
      */
     protected $_loadedProfile = null;
 
-    public function __construct()
+    public function initialize()
     {
         // initialize the ZF Contexts (only once per php request)
         if (!self::$_isInitialized) {

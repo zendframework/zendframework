@@ -211,8 +211,7 @@ class PhpMethod extends PhpMember\AbstractMember
         $output .= ')' . self::LINE_FEED . $indent . '{' . self::LINE_FEED;
 
         if ($this->_body) {
-            $output .= '        '
-                    .  str_replace(self::LINE_FEED, self::LINE_FEED . $indent . $indent, trim($this->_body))
+            $output .= preg_replace('#^(.+?)$#m', $indent . $indent . '$1', trim($this->_body))
                     .  self::LINE_FEED;
         }
 

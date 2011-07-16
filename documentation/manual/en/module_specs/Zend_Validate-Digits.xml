@@ -4,7 +4,7 @@
     <title>Digits</title>
 
     <para>
-        <classname>Zend_Validate_Digit</classname> validates if a given value contains only digits.
+        <classname>Zend_Validate_Digits</classname> validates if a given value contains only digits.
     </para>
 
     <sect3 id="zend.validate.set.digits.options">

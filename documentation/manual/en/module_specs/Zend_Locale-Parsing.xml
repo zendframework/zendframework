@@ -4,7 +4,7 @@
     <title>Normalization and Localization</title>
 
     <para>
-        <classname>Zend_Locale_Format</classname> is a internal component used by
+        <classname>Zend_Locale_Format</classname> is an internal component used by
         <classname>Zend_Locale</classname>. All locale aware classes use
         <classname>Zend_Locale_Format</classname> for normalization and localization of numbers and
         dates. Normalization involves parsing input from a variety of data representations, like
@@ -402,7 +402,7 @@ print $number;
 
         <para>
             <methodname>isInteger($value, array $options = array())</methodname> checks if a given
-            string is a integer value and returns <constant>TRUE</constant> or
+            string is an integer value and returns <constant>TRUE</constant> or
             <constant>FALSE</constant>.
         </para>
 
@@ -411,10 +411,10 @@ print $number;
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
-if (Zend_Locale_Format::isInteger('13.445', array('locale' => $locale)) {
+if (Zend_Locale_Format::isInteger('13.445', array('locale' => $locale))) {
     print "integer";
 } else {
-    print "not a integer";
+    print "not an integer";
 }
 ]]></programlisting>
         </example>

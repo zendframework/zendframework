@@ -112,7 +112,7 @@ class PhpMethod extends PhpMember\AbstractMember
      * @param array $parameters
      * @return \Zend\CodeGenerator\Php\PhpMethod
      */
-    public function setParameters(Array $parameters)
+    public function setParameters(array $parameters)
     {
         foreach ($parameters as $parameter) {
             $this->setParameter($parameter);
@@ -130,12 +130,10 @@ class PhpMethod extends PhpMember\AbstractMember
     {
         if (is_array($parameter)) {
             $parameter = new PhpParameter($parameter);
-            $parameterName = $parameter->getName();
-        } elseif ($parameter instanceof PhpParameter) {
-            $parameterName = $parameter->getName();
-        } else {
+        } elseif (!$parameter instanceof PhpParameter) {
             throw new Exception\InvalidArgumentException('setParameter() expects either an array of method options or an instance of Zend_CodeGenerator_Php_Parameter');
         }
+        $parameterName = $parameter->getName();
 
         $this->_parameters[$parameterName] = $parameter;
         return $this;

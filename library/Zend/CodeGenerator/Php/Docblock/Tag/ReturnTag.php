@@ -40,11 +40,6 @@ class ReturnTag extends \Zend\CodeGenerator\Php\PhpDocblockTag
     protected $_datatype = null;
 
     /**
-     * @var string
-     */
-    protected $_description = null;
-
-    /**
      * fromReflection()
      *
      * @param \Zend\Reflection\ReflectionDocblockTag $reflectionTagReturn
@@ -52,7 +47,7 @@ class ReturnTag extends \Zend\CodeGenerator\Php\PhpDocblockTag
      */
     public static function fromReflection(\Zend\Reflection\ReflectionDocblockTag $reflectionTagReturn)
     {
-        $returnTag = new \self();
+        $returnTag = new self();
 
         $returnTag->setName('return');
         $returnTag->setDatatype($reflectionTagReturn->getType()); // @todo rename

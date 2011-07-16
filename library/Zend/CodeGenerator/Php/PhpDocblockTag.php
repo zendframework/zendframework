@@ -56,6 +56,11 @@ class PhpDocblockTag extends AbstractPhp
     protected $_name = null;
 
     /**
+     * @var string
+     */
+    protected $_description = null;
+
+    /**
      * fromReflection()
      *
      * @param \Zend\Reflection\ReflectionDocblockTag $reflectionTag

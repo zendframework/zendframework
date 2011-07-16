@@ -32,6 +32,7 @@ use Zend\Log,
  * Basic adapter class for each translation source adapter
  *
  * @uses       RecursiveDirectoryIterator
+ * @uses       RecursiveRegexIterator
  * @uses       RecursiveIteratorIterator
  * @uses       \Zend\Cache\Cache
  * @uses       \Zend\Locale\Locale
@@ -227,7 +228,6 @@ abstract class Adapter
             throw new InvalidArgumentException('Instance of Zend_Log_Logger expected for option log');
         }
 
-
         try {
             if (!($options['content'] instanceof \Zend\Translator\Translator) && !($options['content'] instanceof \Zend\Translator\Adapter)) {
                 if (empty($options['locale'])) {
@@ -244,25 +244,53 @@ abstract class Adapter
         if (is_string($options['content']) and is_dir($options['content'])) {
             $options['content'] = realpath($options['content']);
             $prev = '';
+            if (DIRECTORY_SEPARATOR == '\\') {
+                $separator = '\\\\';
+            } else {
+                $separator = DIRECTORY_SEPARATOR;
+            }
+            if (is_array($options['ignore'])) {
+                $ignore = '/';
+                foreach($options['ignore'] as $key => $match) {
+                    if (strpos($key, 'regex') !== false) {
+                        $ignore .= $match . '|';
+                    } else {
+                        $ignore .= $separator . $match . '|';
+                    }
+                }
+                $ignore = substr($ignore, 0, -1) . '/u';
+            } else {
+                $ignore = '/' . $separator . $options['ignore'] . '/u';
+            }
+var_dump($ignore);
+            // array('regex_1' => '.svn', 'regex_2' => '.csv')
+            // (.svn|.csv)
+            // array('.svn', '.csv')
+            // (\.svn|\.csv)
             foreach (new \RecursiveIteratorIterator(
+                     new \RecursiveRegexIterator(
                      new \RecursiveDirectoryIterator($options['content'], \RecursiveDirectoryIterator::KEY_AS_PATHNAME),
+                     $ignore, \RecursiveRegexIterator::MATCH),
                      \RecursiveIteratorIterator::SELF_FIRST) as $directory => $info) {
                 $file = $info->getFilename();
                 if (is_array($options['ignore'])) {
                     foreach ($options['ignore'] as $key => $ignore) {
                         if (strpos($key, 'regex') !== false) {
                             if (preg_match($ignore, $directory)) {
-                                // ignore files matching the given regex from option 'ignore' and all files below
+                              // ignore files matching the given regex from option 'ignore' and all files below
+var_dump('1:' . $ignore);
                                 continue 2;
                             }
                         } else if (strpos($directory, DIRECTORY_SEPARATOR . $ignore) !== false) {
-                            // ignore files matching first characters from option 'ignore' and all files below
+                          // ignore files matching first characters from option 'ignore' and all files below
+var_dump('2:' . $ignore);
                             continue 2;
                         }
                     }
                 } else {
                     if (strpos($directory, DIRECTORY_SEPARATOR . $options['ignore']) !== false) {
-                        // ignore files matching first characters from option 'ignore' and all files below
+                      // ignore files matching first characters from option 'ignore' and all files below
+var_dump('3:' .DIRECTORY_SEPARATOR . $options['ignore']);
                         continue;
                     }
                 }

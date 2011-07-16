@@ -37,8 +37,6 @@ namespace Zend\Pdf;
  */
 use Zend\Pdf\Resource\Font;
 
-use Zend\Acl;
-
 use Zend\Pdf\Exception;
 
 use Zend\Pdf\InternalType;

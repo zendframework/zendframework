@@ -36,13 +36,14 @@
             There are many <link xmlns:xlink="http://www.w3.org/1999/xlink"
                 xlink:href="http://en.wikipedia.org/wiki/Numeral">number systems</link>
             different from the common <link xmlns:xlink="http://www.w3.org/1999/xlink"
-                xlink:href="http://en.wikipedia.org/wiki/Decimal">decimal system</ulin> (e.g. "3.14").
+                xlink:href="http://en.wikipedia.org/wiki/Decimal">decimal
+                system</link> (e.g. "3.14").
             Numbers can be normalized with the <methodname>getNumber()</methodname> function to
             obtain the standard decimal representation. for all number-related discussions in this
             manual, <link xmlns:xlink="http://www.w3.org/1999/xlink"
                 xlink:href="http://en.wikipedia.org/wiki/Arabic_numerals">Arabic/European
                 numerals</link>
-                (0,1,2,3,4,5,6,7,8,9)</ulink> are implied, unless explicitly stated otherwise. The
+                (0,1,2,3,4,5,6,7,8,9) are implied, unless explicitly stated otherwise. The
             options array may contain a 'locale' to define grouping and decimal characters. The
             array may also have a 'precision' to truncate excess digits from the result.
         </para>
@@ -68,7 +69,7 @@ print $number; // will return 13524.678
                 Since <methodname>getNumber($value, array $options = array())</methodname> can
                 normalize extremely large numbers, check the result carefully before using finite
                 precision calculations, such as ordinary <acronym>PHP</acronym> math operations. For
-                example, <command>if ((string)int_val($number) != $number) {<command> use <link
+                example, <command>if ((string)int_val($number) != $number) {</command> use <link
                     xmlns:xlink="http://www.w3.org/1999/xlink"
                     xlink:href="http://www.php.net/bc">BCMath</link> or <link
                     xmlns:xlink="http://www.w3.org/1999/xlink"

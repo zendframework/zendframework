@@ -26,6 +26,8 @@
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-StringToLower.xml"/>
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-StringToUpper.xml"/>
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-StringTrim.xml"/>
-    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-StripNewLines.xml"/>
-    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-StripTags.xml"/>
+    <!-- xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+    href="Zend_Filter-StripNewLines.xml"/ -->
+    <!-- xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+    href="Zend_Filter-StripTags.xml"/ -->
 </section>

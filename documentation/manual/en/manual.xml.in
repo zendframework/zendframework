@@ -1213,21 +1213,22 @@
                     <xi:include href="../en/module_specs/Zend_Loader.xml" parse="xml"/>
                 </xi:fallback>
             </xi:include>
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Loader-Autoloader.xml" parse="xml">
+            <!-- xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+            href="module_specs/Zend_Loader-Autoloader.xml" parse="xml">
                 <xi:fallback>
                     <xi:include href="../en/module_specs/Zend_Loader-Autoloader.xml" parse="xml"/>
                 </xi:fallback>
-            </xi:include>
+            </xi:include -->
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Loader-Autoloader-Resource.xml" parse="xml">
                 <xi:fallback>
                     <xi:include href="../en/module_specs/Zend_Loader-Autoloader-Resource.xml" parse="xml"/>
                 </xi:fallback>
             </xi:include>
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Loader-PluginLoader.xml" parse="xml">
+            <!-- xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Loader-PluginLoader.xml" parse="xml">
                 <xi:fallback>
                     <xi:include href="../en/module_specs/Zend_Loader-PluginLoader.xml" parse="xml"/>
                 </xi:fallback>
-            </xi:include>
+            </xi:include -->
         </chapter>
 
         <chapter xml:id="zend.locale"><info><title>Zend_Locale</title></info>
@@ -1903,11 +1904,11 @@
                     <xi:include href="../en/module_specs/Zend_Service_WindowsAzure_Blob.xml" parse="xml"/>
                 </xi:fallback>
             </xi:include>
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Service_WindowsAzure_Manager.xml" parse="xml">
+            <!-- xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Service_WindowsAzure_Manager.xml" parse="xml">
                 <xi:fallback>
                     <xi:include href="../en/module_specs/Zend_Service_WindowsAzure_Manager.xml" parse="xml"/>
                 </xi:fallback>
-            </xi:include>
+            </xi:include -->
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Service_WindowsAzure_Queue.xml" parse="xml">
                 <xi:fallback>
                     <xi:include href="../en/module_specs/Zend_Service_WindowsAzure_Queue.xml" parse="xml"/>

@@ -16,6 +16,7 @@
 <!ENTITY chapter.introduction.title             'Introduction to Zend Framework'>
 
 <!ENTITY part.learning.title                    'Learning Zend Framework'>
+<!ENTITY part.learning.di.title                 'Learning Dependency Injection'>
 <!ENTITY part.learning.quickstart.title         'Zend Framework Quick Start'>
 <!ENTITY part.learning.autoloading.title        'Autoloading in Zend Framework'>
 <!ENTITY part.learning.plugins.title            'Plugins in Zend Framework'>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 20763 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.application.quick-start">
-    <title>Inicio rápido con Zend_Application</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.quick-start"><info><title>Inicio rápido con Zend_Application</title></info>
+    
 
     <para>
         Hay dos caminos para empezar con
@@ -27,8 +25,8 @@
         .
     </para>
 
-    <sect2 id="zend.application.quick-start.zend-tool">
-        <title>Usando Zend_Tool</title>
+    <section xml:id="zend.application.quick-start.zend-tool"><info><title>Usando Zend_Tool</title></info>
+        
 
         <para>
             La forma más rápida para comenzar a utilizar
@@ -179,10 +177,10 @@ $application->bootstrap()
                 vaya a la sección de Recursos</link>
             .
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.application.quick-start.manual">
-        <title>Añadir Zend_Application a su aplicación</title>
+    <section xml:id="zend.application.quick-start.manual"><info><title>Añadir Zend_Application a su aplicación</title></info>
+        
 
         <para>
             Los fundamentos de
@@ -339,8 +337,8 @@ RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
 ]]></programlisting>
 
-        <note>
-            <title>Más información sobre mod_rewrite</title>
+        <note><info><title>Más información sobre mod_rewrite</title></info>
+            
 
             <para>
                 Las reglas de reescritura le permitin reescribir el acceso a
@@ -348,7 +346,7 @@ RewriteRule ^.*$ index.php [NC,L]
                 Si hay archivos que no desea que esten expuestos y desea ocualtarlos, puedes
                 ser mas restrictivo en tus reglas
                 Ir a la página web de Apache
-                <ulink url="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">para obtener más información acerca de about mod_rewrite</ulink>
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">para obtener más información acerca de about mod_rewrite</link>
                 .
             </para>
 
@@ -359,10 +357,10 @@ RewriteRule ^.*$ index.php [NC,L]
             <classname>Zend_Application</classname>
             .
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.application.quick-start.resources">
-        <title>Agregando y Creando Recursos</title>
+    <section xml:id="zend.application.quick-start.resources"><info><title>Agregando y Creando Recursos</title></info>
+        
 
         <para>
             Si ha seguido las instrucciones anteriores, entonces su clase de
@@ -491,10 +489,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             su vista sea inicializada según las necesidades
             de su aplicación.
        </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.application.quick-start.next-steps">
-        <title>Próximos pasos con Zend_Application</title>
+    <section xml:id="zend.application.quick-start.next-steps"><info><title>Próximos pasos con Zend_Application</title></info>
+        
 
         <para>
             Con lo anterior debería poder comenzar con
@@ -505,5 +503,5 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             clases de recursos de plugin. Y
             seguir leyendo para aprender más!
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

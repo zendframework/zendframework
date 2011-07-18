@@ -1,13 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20766 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.db.profiler" xmlns:xi="http://www.w3.org/2001/XInclude">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.profiler"><info><title>Zend_Db_Profiler</title></info>
 
-    <title>Zend_Db_Profiler</title>
+    
 
-    <sect2 id="zend.db.profiler.introduction">
+    <section xml:id="zend.db.profiler.introduction"><info><title>Introducción</title></info>
 
-        <title>Introducción</title>
+        
 
         <para>
             <classname>Zend_Db_Profiler</classname> puede ser habilitado para
@@ -122,11 +120,11 @@ $params['profiler'] = $config;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.profiler.using">
+    <section xml:id="zend.db.profiler.using"><info><title>Usando el Perfilador</title></info>
 
-        <title>Usando el Perfilador</title>
+        
 
         <para> En este punto, obtenemos el perfilador usando el método
                 <methodname>getProfiler()</methodname> del adaptador: </para>
@@ -243,19 +241,19 @@ echo 'Tardanza de la consulta más lenta: ' . $longestTime . "\n";
 echo "Consulta más lenta: \n" . $longestQuery . "\n";
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.profiler.advanced">
+    <section xml:id="zend.db.profiler.advanced"><info><title>Uso avanzado del Perfilador</title></info>
 
-        <title>Uso avanzado del Perfilador</title>
+        
 
         <para> Además de la inspección de consultas, el perfilador también le
             permite al desarrollador filtrar que consultas serán perfiladas. El
             siguiente método opera en una instancia de
                 <classname>Zend_Db_Profiler</classname> : </para>
 
-        <sect3 id="zend.db.profiler.advanced.filtertime">
-            <title>Filtrar por tiempo transcurrido en consulta</title>
+        <section xml:id="zend.db.profiler.advanced.filtertime"><info><title>Filtrar por tiempo transcurrido en consulta</title></info>
+            
 
             <para>
                 <methodname>setFilterElapsedSecs()</methodname> le permite al
@@ -270,10 +268,10 @@ $profiler->setFilterElapsedSecs(5);
 // Perfilar todas las consultas sin importar el tiempo:
 $profiler->setFilterElapsedSecs(null);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.profiler.advanced.filtertype">
-            <title>Filtrar por tipo de consulta</title>
+        <section xml:id="zend.db.profiler.advanced.filtertype"><info><title>Filtrar por tipo de consulta</title></info>
+            
 
             <para>
                 <methodname>setFilterQueryType()</methodname> le permite al
@@ -347,10 +345,10 @@ $profiler->setFilterQueryType(Zend_Db_Profiler::DELETE);
 $profiler->setFilterQueryType(null);
 ]]></programlisting>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.profiler.advanced.getbytype">
-            <title>Obtener perfiles por tipo de consulta</title>
+        <section xml:id="zend.db.profiler.advanced.getbytype"><info><title>Obtener perfiles por tipo de consulta</title></info>
+            
 
             <para> Usando <methodname>setFilterQueryType()</methodname> puedes
                 reducir los perfiles generados. Sin embargo, a veces puede ser
@@ -358,8 +356,7 @@ $profiler->setFilterQueryType(null);
                 necesita en un determinado momento. Otra característica de
                     <methodname>getQueryProfiles()</methodname> es que puede
                 este filtrado al-vuelo, pasando un tipo de consulta(o una
-                combinación lógica de tipos de consulta) en el primer; vea <xref
-                    linkend="zend.db.profiler.advanced.filtertype"/> para una
+                combinación lógica de tipos de consulta) en el primer; vea <xref linkend="zend.db.profiler.advanced.filtertype"/> para una
                 lista las constantes de tipo de consulta. </para>
 
             <programlisting language="php"><![CDATA[
@@ -375,19 +372,19 @@ $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::SELECT |
 $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::DELETE);
 ]]></programlisting>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.profiler.profilers">
-        <title>Perfiladores Especializados</title>
+    <section xml:id="zend.db.profiler.profilers"><info><title>Perfiladores Especializados</title></info>
+        
 
         <para> Un Perfilador Especializado es un objeto que hereda de
                 <classname>Zend_Db_Profiler</classname> . Los Perfiladores
             Especializados tratan la información de perfilado de maneras más
             especificas. </para>
 
-        <xi:include href="Zend_Db_Profiler-Firebug.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Db_Profiler-Firebug.xml"/>
 
-    </sect2>
-</sect1>
+    </section>
+</section>

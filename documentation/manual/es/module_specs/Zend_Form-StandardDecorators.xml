@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.form.standardDecorators">
-    <title>Decoradores de Formulario (Form Decorartors) estándar contenidos en
-        Zend Framework</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.standardDecorators"><info><title>Decoradores de Formulario (Form Decorartors) estándar contenidos en
+        Zend Framework</title></info>
+    
 
     <para>
         <classname>Zend_Form</classname> se distribuye con distintos decoradores
@@ -11,8 +9,8 @@
         vea <link linkend="zend.form.decorators">la sección sobre
             decoradores</link> . </para>
 
-    <sect2 id="zend.form.standardDecorators.callback">
-        <title>Zend_Form_Decorator_Callback</title>
+    <section xml:id="zend.form.standardDecorators.callback"><info><title>Zend_Form_Decorator_Callback</title></info>
+        
 
         <para> El decorador Callback (llamada de retorno) permite ejecutar una
             llamada de retorno para mostrar el contenido. Las llamadas de
@@ -44,13 +42,12 @@ class Util
             opción placement (colocación), que reemplazará el contenido original
             con el valor devuelto de la llamada de retorno; 'prepend'
             (anteponer) y 'append' (postponer) siguen siendo válidas. </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.captcha">
-        <title>Zend_Form_Decorator_Captcha</title>
+    <section xml:id="zend.form.standardDecorators.captcha"><info><title>Zend_Form_Decorator_Captcha</title></info>
+        
 
-        <para> El decorador Captcha se usa junto con el <link
-                linkend="zend.form.standardElements.captcha">elemento de
+        <para> El decorador Captcha se usa junto con el <link linkend="zend.form.standardElements.captcha">elemento de
                 formulario Captcha</link> . Utiliza el método
                 <methodname>render()</methodname> del adaptador del captcha para
             generar la salida. </para>
@@ -60,10 +57,10 @@ class Util
             El id indica el identificador de sesión que hay que comparar, y la
             entrada es para la verificación de usuario del captcha. Éstos
             elementos son validados como un sólo elemento. </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.description">
-        <title>Zend_Form_Decorator_Description</title>
+    <section xml:id="zend.form.standardDecorators.description"><info><title>Zend_Form_Decorator_Description</title></info>
+        
 
         <para> El decorador Description puede ser usado para mostrar un conjunto
             de descripciones de un elemento <classname>Zend_Form</classname> ,
@@ -88,10 +85,10 @@ class Util
             por defecto del objeto de vista. Puede desactivar esto pasando un
             valor <constant>FALSE</constant> a la opción 'escape' del decorador
             o el método <methodname>setEscape()</methodname> . </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.dtDdWrapper">
-        <title>Zend_Form_Decorator_DtDdWrapper</title>
+    <section xml:id="zend.form.standardDecorators.dtDdWrapper"><info><title>Zend_Form_Decorator_DtDdWrapper</title></info>
+        
 
         <para> Los decoradores por defecto utilizan listas de definición (
                 <methodname>&lt;dl&gt;</methodname> ) para generar
@@ -117,10 +114,10 @@ class Util
         <para> Este decorador reemplaza el contenido que se le provee
             envolviéndolo dentro del elemento
                 <methodname>&lt;dd&gt;</methodname> . </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.errors">
-        <title>Zend_Form_Decorator_Errors</title>
+    <section xml:id="zend.form.standardDecorators.errors"><info><title>Zend_Form_Decorator_Errors</title></info>
+        
 
         <para> Los errores de elemento obtienen su propio decorador con el
             decorador de errores. Este decorador sustituye al view helper
@@ -131,10 +128,10 @@ class Util
 
         <para> El decorador de Errores puede anteponerse o postponerse al
             contenido que se le provee. </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.fieldset">
-        <title>Zend_Form_Decorator_Fieldset</title>
+    <section xml:id="zend.form.standardDecorators.fieldset"><info><title>Zend_Form_Decorator_Fieldset</title></info>
+        
 
         <para> Por defecto, los grupos de visualización y subformularios generan
             sus contenidos dentro de fieldsets, EL decorador Fieldset busca la
@@ -145,10 +142,10 @@ class Util
             reemplazando al contenido original. Cualquier atributo pasado al
             elemento decorado será generado como atributo del fieldset
                 <acronym>HTML</acronym> . </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.file">
-        <title>Zend_Form_Decorator_File</title>
+    <section xml:id="zend.form.standardDecorators.file"><info><title>Zend_Form_Decorator_File</title></info>
+        
 
         <para> Los elementos de tipo "File" (upload de ficheros) tienen una
             notación especial cuando se usan múltiples elementos file o
@@ -156,10 +153,10 @@ class Util
                 <classname>Zend_Form_Element_File</classname> y permite fijar
             múltiples elementos file con una única llamada al método. Se usa
             automáticamente y fija el nombre de cada elemento. </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.form">
-        <title>Zend_Form_Decorator_Form</title>
+    <section xml:id="zend.form.standardDecorators.form"><info><title>Zend_Form_Decorator_Form</title></info>
+        
 
         <para> Los objetos <classname>Zend_Form</classname> normalmente
             necesitan generar una etiqueta <acronym>HTML</acronym> "form". El
@@ -167,10 +164,10 @@ class Util
             cualquier contenido provista en un elemento <acronym>HTML</acronym>
             form, usando la acción y el método del objeto Zend Form, y cualquier
             atributo como atributo <acronym>HTML</acronym> . </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.formElements">
-        <title>Zend_Form_Decorator_FormElements</title>
+    <section xml:id="zend.form.standardDecorators.formElements"><info><title>Zend_Form_Decorator_FormElements</title></info>
+        
 
         <para> Los formularios(forms), grupos de visualización y subformularios
             son colecciones de elementos. Para poder generar estos elementos,
@@ -178,10 +175,10 @@ class Util
             elementos, llamando a <methodname>render()</methodname> en cada uno
             de ellos y uniéndolos con el separador indicado. Puede anteponer o
             postponer al contenido que se le envía. </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.formErrors">
-        <title>Zend_Form_Decorator_FormErrors</title>
+    <section xml:id="zend.form.standardDecorators.formErrors"><info><title>Zend_Form_Decorator_FormErrors</title></info>
+        
 
         <para> Algunos desarrolladores y diseñadores prefieren agrupar todos los
             mensajes de error en la parte superior del formulario. El decorador
@@ -264,10 +261,10 @@ class Util
 
         <para> El decorador FormErrors puede anteponerse o postponerse al
             contenido que se le provee. </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.htmlTag">
-        <title>Zend_Form_Decorator_HtmlTag</title>
+    <section xml:id="zend.form.standardDecorators.htmlTag"><info><title>Zend_Form_Decorator_HtmlTag</title></info>
+        
 
         <para> El decorador HtmlTag le permite utilizar etiquetas
                 <acronym>HTML</acronym> para decorador el contenido; la etiqueta
@@ -277,10 +274,10 @@ class Util
             en la etiqueta dada. De cualquier forma, se permite especificar una
             localización de tipo 'append' (postponer) o 'prepend' (anteponer).
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.image">
-        <title>Zend_Form_Decorator_Image</title>
+    <section xml:id="zend.form.standardDecorators.image"><info><title>Zend_Form_Decorator_Image</title></info>
+        
 
         <para> El decorador Image le permite crear un input
                 <acronym>HTML</acronym> de tipo image (
@@ -300,10 +297,10 @@ class Util
         <para> Para especificar una etiqueta <acronym>HTML</acronym> que
             utilizar con el elemento, pase la opción 'tag' al decorador, o llame
             explícitamente a <methodname>setTag()</methodname> . </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.label">
-        <title>Zend_Form_Decorator_Label</title>
+    <section xml:id="zend.form.standardDecorators.label"><info><title>Zend_Form_Decorator_Label</title></info>
+        
 
         <para> Comúnmente, los elementos de formulario tienen etiquetas (labels)
             y se usa el decorador Label para generar esas etiquetas. Utiliza la
@@ -371,15 +368,13 @@ class Util
         <para> Por defecto, el decorador Label antecede al contenido provisto;
             especifique la opción 'placement' (colocación) como 'append' para
             colocarlo después del contenido. </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.prepareElements">
-        <title>Zend_Form_Decorator_PrepareElements</title>
+    <section xml:id="zend.form.standardDecorators.prepareElements"><info><title>Zend_Form_Decorator_PrepareElements</title></info>
+        
 
         <para> Formularios, grupos de visualización, y subformularios son
-            colecciones de elementos. Al usar el decorador <link
-                linkend="zend.form.standardDecorators.viewScript"
-                >ViewScript</link> con un formulario o subformulario, resulta
+            colecciones de elementos. Al usar el decorador <link linkend="zend.form.standardDecorators.viewScript">ViewScript</link> con un formulario o subformulario, resulta
             útil el poder fijar recursívamente el objeto de vista, el traductor
             (translator)y todos los nombres relacionados (determinados por la
             notiación de tabla del subformulario). Esta tarea puede realizarse
@@ -392,10 +387,10 @@ $form->setDecorators(array(
     array('ViewScript', array('viewScript' => 'form.phtml')),
 ));
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.viewHelper">
-        <title>Zend_Form_Decorator_ViewHelper</title>
+    <section xml:id="zend.form.standardDecorators.viewHelper"><info><title>Zend_Form_Decorator_ViewHelper</title></info>
+        
 
         <para> La mayoría de los elementos utiliza helpers
                 <classname>Zend_View</classname> para generar el contenido, y
@@ -412,10 +407,10 @@ $form->setDecorators(array(
         <para> Por defecto, este decorador postpone el contenido; utilice la
             opción 'placement' para especificar una localización distinta.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.viewScript">
-        <title>Zend_Form_Decorator_ViewScript</title>
+    <section xml:id="zend.form.standardDecorators.viewScript"><info><title>Zend_Form_Decorator_ViewScript</title></info>
+        
 
         <para> A veces es necesario usar un view script para crear elementos; De
             esta forma, se puede tener un control preciso sobre los elementos;
@@ -489,9 +484,9 @@ $element->setDecorators(array(array('ViewScript',
 </div>
 ]]></programlisting>
 
-        <note>
-            <title>Reemplazar contenido con un script de vista (view
-                script)</title>
+        <note><info><title>Reemplazar contenido con un script de vista (view
+                script)</title></info>
+            
 
             <para> Resulta interesante que el script de vista reemplace el
                 contenido provisto por el decorador -- por ejemplo, si desea
@@ -515,5 +510,5 @@ $this->decorator->setOption('placement', false);
 
         <para> Se recomienda usar el decorador ViewScript cuando necesite un
             control muy preciso sobre cómo generados sus elementos. </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

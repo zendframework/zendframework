@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20854 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.pdf.save">
-    <title>Guardar Cambios a Documentos PDF</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.save"><info><title>Guardar Cambios a Documentos PDF</title></info>
+    
     <para> Hay dos métodos que guardan los cambios a los documentos
             <acronym>PDF</acronym> : los métodos son
             <methodname>Zend_Pdf::save()</methodname> y
@@ -21,8 +19,8 @@
         $newSegmentOnly es verdadero, entonces sólo el nuevo segmento del
         archivo <acronym>PDF</acronym> es devuelto. </para>
 
-    <example id="zend.pdf.save.example-1">
-        <title>Guardando Documentos PDF</title>
+    <example xml:id="zend.pdf.save.example-1"><info><title>Guardando Documentos PDF</title></info>
+        
         <programlisting language="php"><![CDATA[
 ...
 // Cargar el documento PDF
@@ -40,4 +38,4 @@ $pdfString = $pdf->render();
 ]]></programlisting>
     </example>
 
-</sect1>
+</section>

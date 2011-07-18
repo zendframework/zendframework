@@ -1,13 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20766 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.db.table.rowset">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.rowset"><info><title>Zend_Db_Table_Rowset</title></info>
 
-    <title>Zend_Db_Table_Rowset</title>
+    
 
-    <sect2 id="zend.db.table.rowset.introduction">
+    <section xml:id="zend.db.table.rowset.introduction"><info><title>Introduction</title></info>
 
-        <title>Introduction</title>
+        
 
         <para> When you run a query against a Table class using the
                 <methodname>find()</methodname> or
@@ -19,11 +17,11 @@
             iterate through the Rowset and access individual Row objects,
             reading or modifying data in the Rows. </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.rowset.fetch">
+    <section xml:id="zend.db.table.rowset.fetch"><info><title>Fetching a Rowset</title></info>
 
-        <title>Fetching a Rowset</title>
+        
 
         <para>
             <classname>Zend_Db_Table_Abstract</classname> provides methods
@@ -32,9 +30,9 @@
             object of type <classname>Zend_Db_Table_Rowset_Abstract</classname>
             . </para>
 
-        <example id="zend.db.table.rowset.fetch.example">
+        <example xml:id="zend.db.table.rowset.fetch.example"><info><title>Example of fetching a rowset</title></info>
 
-            <title>Example of fetching a rowset</title>
+            
 
             <programlisting language="php"><![CDATA[
 $bugs   = new Bugs();
@@ -43,11 +41,11 @@ $rowset = $bugs->fetchAll("bug_status = 'NEW'");
 
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.rowset.rows">
+    <section xml:id="zend.db.table.rowset.rows"><info><title>Retrieving Rows from a Rowset</title></info>
 
-        <title>Retrieving Rows from a Rowset</title>
+        
 
         <para> The Rowset itself is usually less interesting than the Rows that
             it contains. This section illustrates how to get the Rows that
@@ -61,9 +59,9 @@ $rowset = $bugs->fetchAll("bug_status = 'NEW'");
                 <methodname>count()</methodname> to determine the number of Rows
             in the Rowset. </para>
 
-        <example id="zend.db.table.rowset.rows.counting.example">
+        <example xml:id="zend.db.table.rowset.rows.counting.example"><info><title>Counting the Rows in a Rowset</title></info>
 
-            <title>Counting the Rows in a Rowset</title>
+            
 
             <programlisting language="php"><![CDATA[
 $rowset   = $bugs->fetchAll("bug_status = 'FIXED'");
@@ -79,9 +77,9 @@ if ($rowCount > 0) {
 
         </example>
 
-        <example id="zend.db.table.rowset.rows.current.example">
+        <example xml:id="zend.db.table.rowset.rows.current.example"><info><title>Reading a Single Row from a Rowset</title></info>
 
-            <title>Reading a Single Row from a Rowset</title>
+            
 
             <para> The simplest way to access a Row from a Rowset is to use the
                     <methodname>current()</methodname> method. This is
@@ -100,9 +98,9 @@ $row    = $rowset->current();
                 <methodname>current()</methodname> returns PHP's
                 <constant>NULL</constant> value. </para>
 
-        <example id="zend.db.table.rowset.rows.iterate.example">
+        <example xml:id="zend.db.table.rowset.rows.iterate.example"><info><title>Iterating through a Rowset</title></info>
 
-            <title>Iterating through a Rowset</title>
+            
 
             <para> Objects descending from
                     <classname>Zend_Db_Table_Rowset_Abstract</classname>
@@ -137,9 +135,9 @@ foreach ($rowset as $row) {
 
         </example>
 
-        <example id="zend.db.table.rowset.rows.seek.example">
+        <example xml:id="zend.db.table.rowset.rows.seek.example"><info><title>Seeking to a known position into a Rowset</title></info>
 
-            <title>Seeking to a known position into a Rowset</title>
+            
 
             <para>
                 <methodname>SeekableIterator</methodname> allows you to seek to
@@ -197,14 +195,13 @@ $row9->save();
 ]]></programlisting>
 
         <para> After you have access to an individual Row object, you can
-            manipulate the Row using methods described in <xref
-                linkend="zend.db.table.row"/> . </para>
+            manipulate the Row using methods described in <xref linkend="zend.db.table.row"/> . </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.rowset.to-array">
+    <section xml:id="zend.db.table.rowset.to-array"><info><title>Retrieving a Rowset as an Array</title></info>
 
-        <title>Retrieving a Rowset as an Array</title>
+        
 
         <para> You can access all the data in the Rowset as an array using the
                 <methodname>toArray()</methodname> method of the Rowset object.
@@ -212,9 +209,9 @@ $row9->save();
             associative array having keys that correspond to column names and
             elements that correspond to the respective column values. </para>
 
-        <example id="zend.db.table.rowset.to-array.example">
+        <example xml:id="zend.db.table.rowset.to-array.example"><info><title>Using toArray()</title></info>
 
-            <title>Using toArray()</title>
+            
 
             <programlisting language="php"><![CDATA[
 $bugs   = new Bugs();
@@ -239,20 +236,20 @@ foreach ($rowsetArray as $rowArray) {
             with any array, but changes to the array data are not propagated to
             the database. </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.rowset.serialize">
+    <section xml:id="zend.db.table.rowset.serialize"><info><title>Serializing and Unserializing a Rowset</title></info>
 
-        <title>Serializing and Unserializing a Rowset</title>
+        
 
         <para> Objects of type
                 <classname>Zend_Db_Table_Rowset_Abstract</classname> are
             serializable. In a similar fashion to serializing an individual Row
             object, you can serialize a Rowset and unserialize it later. </para>
 
-        <example id="zend.db.table.rowset.serialize.example.serialize">
+        <example xml:id="zend.db.table.rowset.serialize.example.serialize"><info><title>Serializing a Rowset</title></info>
 
-            <title>Serializing a Rowset</title>
+            
 
             <para> Simply use PHP's <methodname>serialize()</methodname>
                 function to create a string containing a byte-stream
@@ -270,9 +267,9 @@ $serializedRowset = serialize($rowset);
 
         </example>
 
-        <example id="zend.db.table.rowset.serialize.example.unserialize">
+        <example xml:id="zend.db.table.rowset.serialize.example.unserialize"><info><title>Unserializing a Serialized Rowset</title></info>
 
-            <title>Unserializing a Serialized Rowset</title>
+            
 
             <para> Use PHP's <methodname>unserialize()</methodname> function to
                 restore a string containing a byte-stream representation of an
@@ -295,8 +292,8 @@ echo $row->bug_description;
 
         </example>
 
-        <note>
-            <title>Why do Rowsets unserialize in a disconnected state?</title>
+        <note><info><title>Why do Rowsets unserialize in a disconnected state?</title></info>
+            
             <para> A serialized object is a string that is readable to anyone
                 who possesses it. It could be a security risk to store
                 parameters such as database account and password in plain,
@@ -318,9 +315,9 @@ echo $row->bug_description;
             the Row objects contained in the Rowset and save the changes to the
             database. </para>
 
-        <example id="zend.db.table.rowset.serialize.example.set-table">
+        <example xml:id="zend.db.table.rowset.serialize.example.set-table"><info><title>Reactivating a Rowset as Live Data</title></info>
 
-            <title>Reactivating a Rowset as Live Data</title>
+            
 
             <programlisting language="php"><![CDATA[
 $rowset = unserialize($serializedRowset);
@@ -343,11 +340,11 @@ $row->save();
         <para> Reactivating a Rowset with <methodname>setTable()</methodname>
             also reactivates all the Row objects contained in that Rowset. </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.rowset.extending">
+    <section xml:id="zend.db.table.rowset.extending"><info><title>Extending the Rowset class</title></info>
 
-        <title>Extending the Rowset class</title>
+        
 
         <para> You can use an alternative concrete class for instances of
             Rowsets by extending
@@ -357,8 +354,8 @@ $row->save();
             class, or in the array argument of the constructor of a Table
             object. </para>
 
-        <example id="zend.db.table.rowset.extending.example">
-            <title>Specifying a custom Rowset class</title>
+        <example xml:id="zend.db.table.rowset.extending.example"><info><title>Specifying a custom Rowset class</title></info>
+            
             <programlisting language="php"><![CDATA[
 class MyRowset extends Zend_Db_Table_Rowset_Abstract
 {
@@ -385,8 +382,8 @@ $bugs = new Bugs(array('rowsetClass' => 'MyRowset'));
             For example, a new method could calculate an aggregate over all the
             Rows in the Rowset. </para>
 
-        <example id="zend.db.table.rowset.extending.example-aggregate">
-            <title>Example of Rowset class with a new method</title>
+        <example xml:id="zend.db.table.rowset.extending.example-aggregate"><info><title>Example of Rowset class with a new method</title></info>
+            
             <programlisting language="php"><![CDATA[
 class MyBugsRowset extends Zend_Db_Table_Rowset_Abstract
 {
@@ -415,6 +412,6 @@ class Bugs extends Zend_Db_Table_Abstract
 ]]></programlisting>
         </example>
 
-    </sect2>
+    </section>
 
-</sect1>
+</section>

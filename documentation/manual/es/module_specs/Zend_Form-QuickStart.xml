@@ -1,15 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.form.quickstart">
-    <title>Inicio rápido a Zend_Form</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.quickstart"><info><title>Inicio rápido a Zend_Form</title></info>
+    
 
     <para> Esta guía rápida pretende cubrir los fundamentos para crear, validar
         y presentar formularios usando <classname>Zend_Form</classname>
     </para>
 
-    <sect2 id="zend.form.quickstart.create">
-        <title>Creando un objeto formulario</title>
+    <section xml:id="zend.form.quickstart.create"><info><title>Creando un objeto formulario</title></info>
+        
 
         <para> Crear un objeto de formulario es muy simple: solo instancíe
                 <classname>Zend_Form</classname>
@@ -49,10 +47,10 @@ $form->setAction('/resource/process')
         <programlisting language="php"><![CDATA[
 $form->setAttrib('id', 'login');
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.elements">
-        <title>Añadir elementos al formulario</title>
+    <section xml:id="zend.form.quickstart.elements"><info><title>Añadir elementos al formulario</title></info>
+        
 
         <para> Un formulario no es nada sin sus elementos.
                 <classname>Zend_Form</classname> contiene de manera
@@ -224,10 +222,10 @@ $form->addElement('text', 'username', array(
                 subclase de <classname>Zend_Form_Element</classname> y utilizar
                 ésta; a largo plazo le permitirá escribir menos. </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.render">
-        <title>Generar un formulario</title>
+    <section xml:id="zend.form.quickstart.render"><info><title>Generar un formulario</title></info>
+        
 
         <para> Generar un formulario es simple. La mayoría de los elementos
             utilizan un auxiliar de <classname>Zend_View</classname> para
@@ -316,10 +314,10 @@ $element->setOrder(10);
         <programlisting language="php"><![CDATA[
 $form->addElement('text', 'username', array('order' => 10));
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.validate">
-        <title>Comprobar si un formulario es válido</title>
+    <section xml:id="zend.form.quickstart.validate"><info><title>Comprobar si un formulario es válido</title></info>
+        
 
         <para>Después que un formulario es enviado, necesitará comprobar y ver
             si pasa las validaciones. Cada elemento es valuado contra los datos
@@ -381,10 +379,10 @@ $unfiltered = $form->getUnfilteredValues();
 $values = $form->getValidValues($_POST);
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.errorstatus">
-        <title>Obteniendo el estado de error</title>
+    <section xml:id="zend.form.quickstart.errorstatus"><info><title>Obteniendo el estado de error</title></info>
+        
 
         <para>Entonces, ¿su formulario no es válido? En la mayoría de los casos,
             simplemente puede generar el formulario nuevamente y los errores se
@@ -408,10 +406,10 @@ if (!$form->isValid($_POST)) {
             (donde mensajes es una matriz asociativa de pares código de error /
             mensaje de error). Si un elemento no tiene ningún error, no será
             incluido en la matriz. </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.puttingtogether">
-        <title>Poniendo todo junto</title>
+    <section xml:id="zend.form.quickstart.puttingtogether"><info><title>Poniendo todo junto</title></info>
+        
 
         <para>Construyamos un simple formulario de login. Necesitaremos
             elementos que representen:</para>
@@ -512,10 +510,10 @@ class UserController extends Zend_Controller_Action
             hacer: mientras la información enviada sea válida, necesitará
             todavía realizar la autenticación usando
                 <classname>Zend_Auth</classname> , por ejemplo. </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.config">
-        <title>Usando un objeto Zend_Config</title>
+    <section xml:id="zend.form.quickstart.config"><info><title>Usando un objeto Zend_Config</title></info>
+        
 
         <para> Todas las clases <classname>Zend_Form</classname> son
             configurables mediante <classname>Zend_Config</classname> ; puede
@@ -563,14 +561,14 @@ $form   = new Zend_Form($config->user->login);
 ]]></programlisting>
 
         <para>y el formulario entero será definido.</para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.conclusion">
-        <title>Conclusión</title>
+    <section xml:id="zend.form.quickstart.conclusion"><info><title>Conclusión</title></info>
+        
 
         <para> Esperamos que después de este pequeño tutorial sea capaz de
             descubrir el poder y flexibilidad de
                 <classname>Zend_Form</classname> . Continúe leyendo para
             profundizar más en el tema. </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

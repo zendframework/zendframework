@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 20765 -->
-    <!-- Reviewed: no -->
-<sect3 id="zend.controller.actionhelpers.flashmessenger">
-    <title>FlashMessenger</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.flashmessenger"><info><title>FlashMessenger</title></info>
+    
 
-    <sect4 id="zend.controller.actionhelper.flashmessenger.introduction">
-        <title>Introducción</title>
+    <section xml:id="zend.controller.actionhelper.flashmessenger.introduction"><info><title>Introducción</title></info>
+        
         <para>
             El ayudante
             <emphasis>FlashMessenger</emphasis>
@@ -31,10 +29,10 @@
             ).
         </para>
 
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelper.flashmessenger.basicusage">
-        <title>Ejemplo Básico de Uso</title>
+    <section xml:id="zend.controller.actionhelper.flashmessenger.basicusage"><info><title>Ejemplo Básico de Uso</title></info>
+        
         <para>
             El ejemplo de uso de abajo muestra el uso del flash messenger en
             su forma más elemental.
@@ -80,5 +78,5 @@ class SomeController extends Zend_Controller_Action
     }
 }
 ]]></programlisting>
-    </sect4>
-</sect3>
+    </section>
+</section>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 19996 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.quickstart.conclusion">
-    <title>¡Felicitaciones!</title>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.conclusion"><info><title>¡Felicitaciones!</title></info>
+    
     <para>
         Ahora ha creado una aplicación muy sencilla utilizando algunas de los componentes mas
         usados en Zend Framework. Zend Framework ha creado muchos componentes que se ocupan de la
@@ -14,4 +14,4 @@
         así como otros componentes.    Esperamos que encuentre util Zend Framework y mas importante lo
         encuentre divertido!
     </para>
-</sect1>
+</section>

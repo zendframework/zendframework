@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 19689 -->
-    <!-- Reviewed: no -->
-<sect2 id="zend.application.core-functionality.bootstrap-bootstrap">
-    <title>Zend_Application_Bootstrap_Bootstrap</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.core-functionality.bootstrap-bootstrap"><info><title>Zend_Application_Bootstrap_Bootstrap</title></info>
+    
 
     <para>
         <classname>Zend_Application_Bootstrap_Bootstrap</classname>
@@ -25,8 +23,8 @@
         o simplemente utilizar esta clase y proporcionar una lista de los plugins de recursos a
         utilizar.</para>
 
-    <sect3 id="zend.application.core-functionality.bootstrap-bootstrap.autoloading">
-        <title>Enabling Application Autoloading</title>
+    <section xml:id="zend.application.core-functionality.bootstrap-bootstrap.autoloading"><info><title>Enabling Application Autoloading</title></info>
+        
 
         <para>
             Additionally, this bootstrap implementation provides the ability to specify the
@@ -75,5 +73,5 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected $_appNamespace = 'Application';
 }
 ]]></programlisting>
-    </sect3>
-</sect2>
+    </section>
+</section>

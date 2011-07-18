@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 20765 -->
-    <!-- Reviewed: no -->
-<sect3 id="zend.controller.actionhelpers.actionstack">
-    <title>ActionStack</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.actionstack"><info><title>ActionStack</title></info>
+    
 
     <para>
         El helper
@@ -18,9 +16,9 @@
         nueva solicitud action - controller - module.
     </para>
 
-    <note>
-        <title>Invocando al Ayudante ActionStack Inicializa el Plugin de
-            ActionStack</title>
+    <note><info><title>Invocando al Ayudante ActionStack Inicializa el Plugin de
+            ActionStack</title></info>
+        
 
         <para>
             Invocando al helper
@@ -35,9 +33,9 @@
         </para>
     </note>
 
-    <example id="zend.controller.actionhelpers.actionstack.simple">
-        <title>Agregando una Tarea Usando Nombres de Acción, Controllador y
-            Módulo</title>
+    <example xml:id="zend.controller.actionhelpers.actionstack.simple"><info><title>Agregando una Tarea Usando Nombres de Acción, Controllador y
+            Módulo</title></info>
+        
 
         <para>
             A menudo, es más sencillo simplemente especificar la acción, el
@@ -70,8 +68,8 @@ class FooController extends Zend_Controller_Action
 
     </example>
 
-    <example id="zend.controller.actionhelpers.actionstack.simple2">
-        <title>Agregando una Tarea al Objeto Solicitud (Request)</title>
+    <example xml:id="zend.controller.actionhelpers.actionstack.simple2"><info><title>Agregando una Tarea al Objeto Solicitud (Request)</title></info>
+        
 
         <para>
             A veces la naturaleza
@@ -108,4 +106,4 @@ class FooController extends Zend_Controller_Action
 }
 ]]></programlisting>
     </example>
-</sect3>
+</section>

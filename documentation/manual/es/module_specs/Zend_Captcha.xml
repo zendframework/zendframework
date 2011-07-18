@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 15681 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.captcha.introduction">
-    <title>Introducción</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.captcha.introduction"><info><title>Introducción</title></info>
+    
 
     <para>
-        <ulink url="http://en.wikipedia.org/wiki/Captcha">
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Captcha">
             CAPTCHA
-        </ulink>
+        </link>
         es el acrónimo de "Completely Automated Public Turing test to
         tell Computers and Humans
         Apart" (Prueba de Turing pública y
@@ -32,7 +32,4 @@
         <classname>Zend_Form</classname>
         .
     </para>
-</sect1>
-    <!--
-    vim:se ts=4 sw=4 et:
--->
+</section>

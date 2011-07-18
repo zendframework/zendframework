@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20212 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.form.standardElements">
-    <title>Elementos Enviados en el Formulario Estandard de Zend
-        Framework</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.standardElements"><info><title>Elementos Enviados en el Formulario Estandard de Zend
+        Framework</title></info>
+    
 
     <para> Zend Framework viene con clases de elementos concretos cubriendo la
         mayoría de los elementos de los formularios <acronym>HTML</acronym> . La
@@ -12,13 +10,12 @@
         siguiente es una lista de todas las clases, así como también una
         descripción de la funcionalidad que ofrecen. </para>
 
-    <sect2 id="zend.form.standardElements.button">
-        <title>Zend_Form_Element_Button</title>
+    <section xml:id="zend.form.standardElements.button"><info><title>Zend_Form_Element_Button</title></info>
+        
 
         <para> Usada para crear elementos <acronym>HTML</acronym> de tipo
             button, <classname>Zend_Form_Element_Button</classname> extiende
-                <link linkend="zend.form.standardElements.submit"
-                >Zend_Form_Element_Submit</link> , derivandi sy funcionalidad
+                <link linkend="zend.form.standardElements.submit">Zend_Form_Element_Submit</link> , derivandi sy funcionalidad
             personalizada. It specifies the 'formButton' view helper for
             decoration. </para>
 
@@ -28,25 +25,20 @@
             translated if a translation adapter is present.</para>
 
         <para> Because the label is used as part of the element, the button
-            element uses only the <link
-                linkend="zend.form.standardDecorators.viewHelper"
-                >ViewHelper</link> and <link
-                linkend="zend.form.standardDecorators.dtDdWrapper"
-                >DtDdWrapper</link> decorators. </para>
+            element uses only the <link linkend="zend.form.standardDecorators.viewHelper">ViewHelper</link> and <link linkend="zend.form.standardDecorators.dtDdWrapper">DtDdWrapper</link> decorators. </para>
 
         <para> Después de llenar o validar un formulario, se puede verificar si
             el botón dado fue pulsado usando el método
                 <methodname>isChecked()</methodname> . </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardElements.captcha">
-        <title>Zend_Form_Element_Captcha</title>
+    <section xml:id="zend.form.standardElements.captcha"><info><title>Zend_Form_Element_Captcha</title></info>
+        
 
         <para>Los CAPTCHAs son usados para prevenir el envio automático de
             formularios por los robots y otros procesos automatizados.</para>
 
-        <para> The Captcha form element allows you to specify which <link
-                linkend="zend.captcha.adapters">Zend_Captcha adapter</link> you
+        <para> The Captcha form element allows you to specify which <link linkend="zend.captcha.adapters">Zend_Captcha adapter</link> you
             wish to utilize as a form captcha. It then sets this adapter as a
             validator to the object, and uses a Captcha decorator for rendering
             (which proxies to the CAPTCHA adapter). </para>
@@ -102,8 +94,7 @@ $element = new Zend_Form_Element_Captcha('foo', array(
 ]]></programlisting>
 
         <para> El decorador usado es determinado consultando el adaptador
-            captcha. Por defecto, es usado el <link
-                linkend="zend.form.standardDecorators.captcha">Captcha
+            captcha. Por defecto, es usado el <link linkend="zend.form.standardDecorators.captcha">Captcha
                 decorator</link> , pero un adaptador puede especificar uno
             diferente vía su método <methodname>getDecorator()</methodname> . </para>
 
@@ -112,10 +103,10 @@ $element = new Zend_Form_Element_Captcha('foo', array(
             es usado y el elemento es marcado como requerido. En la mayoría de
             los casos, usted no necesitará hacer nada más para tener un captcha
             presente en su formulario.</para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardElements.checkbox">
-        <title>Zend_Form_Element_Checkbox</title>
+    <section xml:id="zend.form.standardElements.checkbox"><info><title>Zend_Form_Element_Checkbox</title></info>
+        
 
         <para> Las casillas de verificación (checkboxes) <acronym>HTML</acronym>
             le permiten devolver un valor específico, pero básicamente funcionan
@@ -145,15 +136,13 @@ $element = new Zend_Form_Element_Captcha('foo', array(
             <classname>Zend_Form_Element_Checkbox</classname> uses the
             'formCheckbox' view helper. The checked value is always used to
             populate it. </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardElements.file">
-        <title>Zend_Form_Element_File</title>
+    <section xml:id="zend.form.standardElements.file"><info><title>Zend_Form_Element_File</title></info>
+        
 
         <para> The File form element provides a mechanism for supplying file
-            upload fields to your form. It utilizes <link
-                linkend="zend.file.transfer.introduction"
-                >Zend_File_Transfer</link> internally to provide this
+            upload fields to your form. It utilizes <link linkend="zend.file.transfer.introduction">Zend_File_Transfer</link> internally to provide this
             functionality, and the <methodname>FormFile</methodname> view helper
             as also the <methodname>File</methodname> decorator to display the
             form element. </para>
@@ -164,8 +153,8 @@ $element = new Zend_Form_Element_Captcha('foo', array(
             attached to the form element will be attached to the transfer
             adapter. </para>
 
-        <example id="zend.form.standardElements.file.usage">
-            <title>File form element usage</title>
+        <example xml:id="zend.form.standardElements.file.usage"><info><title>File form element usage</title></info>
+            
 
             <para>The above explanation of using the File form element may seem
                 arcane, but actual usage is relatively trivial:</para>
@@ -212,15 +201,15 @@ $location = $form->foo->getFileName();
 
         </example>
 
-        <note>
-            <title>Ubicaciones Predeterminadas para la Carga de Archivos</title>
+        <note><info><title>Ubicaciones Predeterminadas para la Carga de Archivos</title></info>
+            
 
             <para>Por defecto, los archivos son cargados al directorio temp del
                 sistema.</para>
         </note>
 
-        <note>
-            <title>Valores de archivo</title>
+        <note><info><title>Valores de archivo</title></info>
+            
 
             <para> Dentro de <acronym>HTTP</acronym> , un elemento file no tiene
                 valor. Por tanto y a causa de razones de seguridad usted solo
@@ -254,8 +243,8 @@ $form->getValues();
             actual value of this flag you can call
                 <methodname>isValueDisabled()</methodname> . </para>
 
-        <example id="zend.form.standardElements.file.retrievement">
-            <title>Explicit file retrievement</title>
+        <example xml:id="zend.form.standardElements.file.retrievement"><info><title>Explicit file retrievement</title></info>
+            
 
             <para> First call <methodname>setValueDisabled(true)</methodname> . </para>
 
@@ -307,8 +296,8 @@ if ($form->isValid($form->getPost())) {
             </listitem>
         </itemizedlist>
 
-        <example id="zend.form.standardElements.file.isuploaded">
-            <title>Checking if an optional file has been uploaded</title>
+        <example xml:id="zend.form.standardElements.file.isuploaded"><info><title>Checking if an optional file has been uploaded</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $element = new Zend_Form_Element_File('foo');
@@ -332,8 +321,8 @@ if ($form->foo->isUploaded()) {
             establecer la cantidad de elementos file que usted desea crear. Esto
             le previene de establecer la misma configuración varias veces. </para>
 
-        <example id="zend.form.standardElements.file.multiusage">
-            <title>Configuración de múltiples archivos</title>
+        <example xml:id="zend.form.standardElements.file.multiusage"><info><title>Configuración de múltiples archivos</title></info>
+            
 
             <para> Crear un elemento multi archivo es lo mismo que querer
                 configurar un elemento único. Sólo tiene que llamar a
@@ -362,8 +351,8 @@ $form->addElement($element, 'foo');
 
         </example>
 
-        <note>
-            <title>Elementos File en Subformularios</title>
+        <note><info><title>Elementos File en Subformularios</title></info>
+            
 
             <para>Cuando usted use elementos file en subformularios debería
                 establecer nombres únicos. Así, cuando usted nombre su elemento
@@ -396,8 +385,8 @@ $element->setLabel('Upload an image:')
 $form->addElement($element, 'foo');
 ]]></programlisting>
 
-        <note>
-            <title>MaxFileSize con elementos file múltiples</title>
+        <note><info><title>MaxFileSize con elementos file múltiples</title></info>
+            
 
             <para> Cuando usted usa elementos file múltiples en los formularios
                 tiene que establecer el <constant>MAX_FILE_SIZE</constant> una
@@ -408,19 +397,19 @@ $form->addElement($element, 'foo');
                     <constant>MAX_FILE_SIZE</constant> una sola vez, incluso si
                 usa múltiples formularios. </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardElements.hidden">
-        <title>Zend_Form_Element_Hidden</title>
+    <section xml:id="zend.form.standardElements.hidden"><info><title>Zend_Form_Element_Hidden</title></info>
+        
 
         <para> Los elementos Hidden simplemente inyectan datos que deben ser
             enviados, pero que el usuario no debe manipular.
                 <classname>Zend_Form_Element_Hidden</classname> logra esto a
             través del uso del helper de vista 'formHidden'. </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardElements.hash">
-        <title>Zend_Form_Element_Hash</title>
+    <section xml:id="zend.form.standardElements.hash"><info><title>Zend_Form_Element_Hash</title></info>
+        
 
         <para>Este elemento provee protección de ataques desde CSRF sobre
             formularios, asegurando que el dato es enviado por la sesión del
@@ -447,10 +436,10 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
 
         <para>El helper de vista 'formHidden' es usado para generar el elemento
             en el formulario. </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardElements.Image">
-        <title>Zend_Form_Element_Image</title>
+    <section xml:id="zend.form.standardElements.Image"><info><title>Zend_Form_Element_Image</title></info>
+        
 
         <para>Las imágenes pueden ser usadas como elementos de formulario, y le
             permiten especificar elementos gráficos como botones de
@@ -468,21 +457,18 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
             el método de acceso <methodname>isChecked()</methodname> devolverá
                 <constant>TRUE</constant> . </para>
 
-        <para> Los elementos Image usan el <link
-                linkend="zend.form.standardDecorators.image">Decorador de Imagen
+        <para> Los elementos Image usan el <link linkend="zend.form.standardDecorators.image">Decorador de Imagen
             </link> para generar (así como el estandard Errors, HtmlTag, y
             decorador Label). Opcionalmente, puede especificar una etiqueta para
             el decorador <methodname>Image</methodname> que luego envuelva al
             elemento imagen. </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardElements.multiCheckbox">
-        <title>Zend_Form_Element_MultiCheckbox</title>
+    <section xml:id="zend.form.standardElements.multiCheckbox"><info><title>Zend_Form_Element_MultiCheckbox</title></info>
+        
 
         <para> En ocasiones, se tiene un conjunto de checkboxes, y se desea
-            agrupar los resultados. Esto es como un <link
-                linkend="zend.form.standardElements.multiselect"
-                >Multiselect</link> , pero en lugar de estar en una lista
+            agrupar los resultados. Esto es como un <link linkend="zend.form.standardElements.multiselect">Multiselect</link> , pero en lugar de estar en una lista
             desplegable, necesita mostrarlos en pares checkbox/value (casilla de
             verificación/valor). </para>
 
@@ -563,10 +549,10 @@ $element->setValue(array('bar', 'bat'));
 
         <para>Note que cuando se determina un asimple variable, se debe pasar un
             array.</para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardElements.multiselect">
-        <title>Zend_Form_Element_Multiselect</title>
+    <section xml:id="zend.form.standardElements.multiselect"><info><title>Zend_Form_Element_Multiselect</title></info>
+        
 
         <para>
             <acronym>XHTML</acronym>
@@ -574,8 +560,7 @@ $element->setValue(array('bar', 'bat'));
             atributos, indicando multiples opciones pueden ser seleccionados por
             submision, en vez de lo usual.
                 <classname>Zend_Form_Element_Multiselect</classname> extiende
-                <link linkend="zend.form.standardElements.select"
-                >Zend_Form_Element_Select</link> , y define los atributos
+                <link linkend="zend.form.standardElements.select">Zend_Form_Element_Select</link> , y define los atributos
                 <methodname>multiple</methodname> a 'multiple'. Como las otras
             clases que heredan de la clase base
                 <classname>Zend_Form_Element_Multi</classname> , se puede
@@ -632,10 +617,10 @@ $element->setValue(array('bar', 'bat'));
                 <methodname>setRegisterInArrayValidator(false)</methodname> , o
             pasando un valor <constant>FALSE</constant> a la configuracion de llaves
                 <methodname>registerInArrayValidator</methodname> . </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardElements.password">
-        <title>Zend_Form_Element_Password</title>
+    <section xml:id="zend.form.standardElements.password"><info><title>Zend_Form_Element_Password</title></info>
+        
 
         <para>Elementos contraseña son basicamente elementos de texto -- excepto
             que tipicamente no se quiera desplegar la contraseña en los mensajes
@@ -648,10 +633,10 @@ $element->setValue(array('bar', 'bat'));
             validador (asegurando que la contraseña este oculta en mensajes de
             validación de errores), y usando la vista ayuda 'formPassword' (el
             cual no desplega el valor pasado). </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardElements.radio">
-        <title>Zend_Form_Element_Radio</title>
+    <section xml:id="zend.form.standardElements.radio"><info><title>Zend_Form_Element_Radio</title></info>
+        
 
         <para> elementos de Radio permite especificar muchas opciones, de los
             cuales se necesita retornar un solo valor.
@@ -712,10 +697,10 @@ $element->setValue(array('bar', 'bat'));
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardElements.reset">
-        <title>Zend_Form_Element_Reset</title>
+    <section xml:id="zend.form.standardElements.reset"><info><title>Zend_Form_Element_Reset</title></info>
+        
 
         <para>Botones Reset son tipicamente usados para limpiar un formulario, y
             no son parte de la información sometida. Como sea, como ellos sirven
@@ -723,17 +708,15 @@ $element->setValue(array('bar', 'bat'));
             estándar.</para>
 
         <para>
-            <classname>Zend_Form_Element_Reset</classname> extends <link
-                linkend="zend.form.standardElements.submit"
-                >Zend_Form_Element_Submit</link> . Tal cual, la etiqueta es
+            <classname>Zend_Form_Element_Reset</classname> extends <link linkend="zend.form.standardElements.submit">Zend_Form_Element_Submit</link> . Tal cual, la etiqueta es
             usada para desplegar el botón y será traducido si el adaptador
             traducción esta presente. Se utiliza sólo los decoradores
             'ViewHelper' y 'DtDdWrapper', nunca debería existir mensajes de
             error para tales elementos, no se necesitará una etiqueta. </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardElements.select">
-        <title>Zend_Form_Element_Select</title>
+    <section xml:id="zend.form.standardElements.select"><info><title>Zend_Form_Element_Select</title></info>
+        
 
         <para> Cajas selectoras son una manera común de limitar espeficias
             opciones para un dado formulario datum.
@@ -795,10 +778,10 @@ $element->setValue(array('bar', 'bat'));
         <para>
             <classname>Zend_Form_Element_Select</classname> usa la vista ayuda
             'formSelect' para decoración. </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardElements.submit">
-        <title>Zend_Form_Element_Submit</title>
+    <section xml:id="zend.form.standardElements.submit"><info><title>Zend_Form_Element_Submit</title></info>
+        
 
         <para> Submit buttons are used to submit a form. You may use multiple
             submit buttons; you can use the button used to submit the form to
@@ -816,27 +799,24 @@ $element->setValue(array('bar', 'bat'));
             verifica el valor sometido contra la etiqueta en orden to determinar
             si el botón ha sido usado. </para>
 
-        <para> El <link linkend="zend.form.standardDecorators.viewHelper"
-                >ViewHelper</link> y <link
-                linkend="zend.form.standardDecorators.dtDdWrapper"
-                >DtDdWrapper</link> decoradores generan al elemento. no
+        <para> El <link linkend="zend.form.standardDecorators.viewHelper">ViewHelper</link> y <link linkend="zend.form.standardDecorators.dtDdWrapper">DtDdWrapper</link> decoradores generan al elemento. no
             decorador de etiquetas es usado, como el botón etiqueta es usado
             cuando se generan los elementos; asi tipicamente, no se asociarán
             errores con el elemnto sometido. </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardElements.text">
-        <title>Zend_Form_Element_Text</title>
+    <section xml:id="zend.form.standardElements.text"><info><title>Zend_Form_Element_Text</title></info>
+        
 
         <para> Lejos el mas prevaleciente tipo de formulario es el elemento
             texto, permitido para entrada de texto limitado; es un elemento
             ideal para la entrada de la información.
                 <classname>Zend_Form_Element_Text</classname> simplemente usa la
             vista ayuda 'formText' para desplegar el elemento. </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardElements.textarea">
-        <title>Zend_Form_Element_Textarea</title>
+    <section xml:id="zend.form.standardElements.textarea"><info><title>Zend_Form_Element_Textarea</title></info>
+        
 
         <para> Textareas son usadas cuando se espera una larga cantidad de texto
             y no limites en la cantidad de texto sometido ( otro que el máximo
@@ -844,5 +824,5 @@ $element->setValue(array('bar', 'bat'));
                 <classname>Zend_Form_Element_Textarea</classname> usa la vista
             ayuda 'textArea' para desplegar tales elementos, ocupando el valor
             como el contendio del elemento. </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,13 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 20763 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.auth.adapter.openid">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.openid"><info><title>Autenticación con Open ID </title></info>
 
-    <title>Autenticación con Open ID </title>
+    
 
-    <sect2 id="zend.auth.adapter.openid.introduction">
+    <section xml:id="zend.auth.adapter.openid.introduction"><info><title>Introducción</title></info>
 
-        <title>Introducción</title>
+        
         <para>
             El adaptador
             <classname>Zend_Auth_Adapter_OpenId</classname>
@@ -30,8 +28,8 @@
             describe que servidor usar y que información (identidad) se debe
             enviar. Puedes leer más
             información acerca de OpenID en el
-            <ulink url="http://www.openid.net/">sitio oficial de
-                OpenId</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.openid.net/">sitio oficial de
+                OpenId</link>
             .
         </para>
         <para>
@@ -48,7 +46,7 @@
             <para>
                 <classname>Zend_OpenId</classname>
                 aprovecha las
-                <ulink url="http://php.net/gmp">GMP extension</ulink>
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/gmp">GMP extension</link>
                 , cuando estén
                 disponibles. Considere la posibilidad de usar
                 <acronym>GMP</acronym>
@@ -58,10 +56,10 @@
                 .
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.openid.specifics">
-        <title>Características</title>
+    <section xml:id="zend.auth.adapter.openid.specifics"><info><title>Características</title></info>
+        
         <para>
             Como es el caso de todos los adaptadores
             <classname>Zend_Auth</classname>
@@ -195,5 +193,5 @@ if ((isset($_POST['openid_action']) &&
             .
         </para>
 
-    </sect2>
-</sect1>
+    </section>
+</section>

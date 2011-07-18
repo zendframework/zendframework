@@ -1,13 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 20763 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.acl.advanced">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.advanced"><info><title>Uso Avanzado</title></info>
 
-    <title>Uso Avanzado</title>
+    
 
-    <sect2 id="zend.acl.advanced.storing">
+    <section xml:id="zend.acl.advanced.storing"><info><title>Almacenamiento Permanente de los Datos ACL</title></info>
 
-        <title>Almacenamiento Permanente de los Datos ACL</title>
+        
 
         <para>
             <classname>Zend_Acl</classname>
@@ -40,9 +38,9 @@
             es serializable, los objetos
             <acronym>ACL</acronym>
             pueden serializarse con la función
-            <ulink url="http://php.net/serialize">
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/serialize">
                 <methodname>serialize()</methodname>
-            </ulink>
+            </link>
             de
             <acronym>PHP</acronym>
             , y los resultados pueden ser almacenados donde sea
@@ -50,11 +48,11 @@
             archivo, base de datos, o mecanismo de cache
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.advanced.assertions">
+    <section xml:id="zend.acl.advanced.assertions"><info><title> Escribiendo reglas condicionales ACL con aserciones </title></info>
 
-        <title> Escribiendo reglas condicionales ACL con aserciones </title>
+        
 
         <para>
             A veces, una regla para permitir o negar una función de acceso a un recurso no debería
@@ -140,6 +138,6 @@ $acl->allow(null, null, null, new CleanIPAssertion());
             cuando fuera necesario.
         </para>
 
-    </sect2>
+    </section>
 
-</sect1>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.form.elements">
-    <title>Creando elementos de formulario usando Zend_Form_Element</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.elements"><info><title>Creando elementos de formulario usando Zend_Form_Element</title></info>
+    
 
     <para> Un formulario esta compuesto de elementos, que normalmente
         corresponden al elemento HTML input.
@@ -39,17 +37,14 @@
         por defecto para varios casos, pero es mejor extender la clase para
         elementos con fines especiales de uso común. Adicionalmente, Zend
         Framework contiene un número de elementos <acronym>XHTML</acronym>
-        estándar; puede leer de ellos <link linkend="zend.form.standardElements"
-            >en el capítulo Elementos Estándares</link>
+        estándar; puede leer de ellos <link linkend="zend.form.standardElements">en el capítulo Elementos Estándares</link>
     </para>
 
-    <sect2 id="zend.form.elements.loaders">
-        <title>Cargadores de Plugin</title>
+    <section xml:id="zend.form.elements.loaders"><info><title>Cargadores de Plugin</title></info>
+        
 
         <para>
-            <classname>Zend_Form_Element</classname> hace uso de <link
-                linkend="zend.loader.pluginloader"
-                >Zend_Loader_PluginLoader</link> para permitir a los
+            <classname>Zend_Form_Element</classname> hace uso de <link linkend="zend.loader.pluginloader">Zend_Loader_PluginLoader</link> para permitir a los
             desarrolladores especificar ubicaciones de validadores, filtros y
             decoradores alternos. Cada uno tiene su propio cargador de plugin
             asociado a él y métodos de acceso generales usados para su
@@ -67,7 +62,7 @@
                 <para>
                     <methodname>setPluginLoader($loader, $type)</methodname> :
                         <varname>$loader</varname> es el propio objeto cargador,
-                    mientras <varname></varname> es uno de los tipos arriba
+                    mientras <varname/> es uno de los tipos arriba
                     mencionados. Esto establece el cargador de plugin para el
                     tipo dado en el objeto cargador recién especificado. </para>
             </listitem>
@@ -75,7 +70,7 @@
             <listitem>
                 <para>
                     <methodname>getPluginLoader()</methodname> : obtiene el
-                    cargador de plugin asociado con <varname></varname> .
+                    cargador de plugin asociado con <varname/> .
                 </para>
             </listitem>
 
@@ -106,8 +101,8 @@
             simple de compartir funcionalidad entre formularios y encapsular
             funcionalidad personalizada.</para>
 
-        <example id="zend.form.elements.loaders.customLabel">
-            <title>Etiqueta personalizada</title>
+        <example xml:id="zend.form.elements.loaders.customLabel"><info><title>Etiqueta personalizada</title></info>
+            
 
             <para>Un uso común de los plugins es proveer reemplazos para las
                 clases estándares. Por ejemplo, si desea proveer una
@@ -181,10 +176,10 @@ $form->addElementPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
                 'My_Decorator_Label' ahora será utilizado cuando el decorador
                 'Label' sea requerido.</para>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.elements.filters">
-        <title>Filters</title>
+    <section xml:id="zend.form.elements.filters"><info><title>Filters</title></info>
+        
 
         <para> A menudo es útil y/o necesario realizar alguna normalización en
             la entrada antes de la validación – por ejemplo, puede querer
@@ -237,8 +232,8 @@ $element->addFilter('alnum');
             'Zend_Filter_'. Además, la primera letra no necesita estar en
             mayúscula.</para>
 
-        <note>
-            <title>Usando clases de filtros personalizados</title>
+        <note><info><title>Usando clases de filtros personalizados</title></info>
+            
 
             <para> Si tiene su propio conjunto de clases de filtro, puede
                 informarle de ellas a <classname>Zend_Form_Element</classname>
@@ -262,8 +257,7 @@ $element->addPrefixPath('My_Filter', 'My/Filter/', 'filter');
 $unfiltered = $element->getUnfilteredValue();
 ]]></programlisting>
 
-        <para> Para mayor información sobre filtros, vea la <link
-                linkend="zend.filter.introduction">documentación de
+        <para> Para mayor información sobre filtros, vea la <link linkend="zend.filter.introduction">documentación de
                 Zend_Filter</link> . </para>
 
         <para>Métodos asociados con filtros incluyen:</para>
@@ -312,10 +306,10 @@ $unfiltered = $element->getUnfilteredValue();
                     filtros) </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.elements.validators">
-        <title>Validadores</title>
+    <section xml:id="zend.form.elements.validators"><info><title>Validadores</title></info>
+        
 
         <para> Si sigue el mantra de seguridad "filtrar la entrada, escapar la
             salida" querrá validar ("filtrar la entrada") los datos de los
@@ -355,8 +349,8 @@ $element->addValidator('alnum');
             'Zend_Validate_'. Además, la primera letra no necesita estar en
             mayúscula.</para>
 
-        <note>
-            <title>Usando clases de validación personalizadas</title>
+        <note><info><title>Usando clases de validación personalizadas</title></info>
+            
 
             <para> Si tiene su propio conjunto de clases de validación, puede
                 informarle de ellas a <classname>Zend_Form_Element</classname>
@@ -399,9 +393,9 @@ $element->addValidator('StringLength', false, array(6, 20));
 $validator = new Zend_Validate_StringLength(6, 20);
 ]]></programlisting>
 
-        <note>
-            <title>Estipulando mensajes de error de validación
-                personalizados</title>
+        <note><info><title>Estipulando mensajes de error de validación
+                personalizados</title></info>
+            
 
             <para> Algunos desarrolladores querrán estipular mensajes de error
                 personalizados para un validador. El argumento
@@ -480,26 +474,26 @@ if ($element->isValid($value)) {
 }
 ]]></programlisting>
 
-        <note>
-            <title>Validación operando en valores filtrados</title>
+        <note><info><title>Validación operando en valores filtrados</title></info>
+            
 
             <para>
-                <methodname>Zend_Form_Element::isValid()</methodname> > siempre
+                <methodname>Zend_Form_Element::isValid()</methodname> &gt; siempre
                 filtra los valores antes de la validación a través de la cadena
                 de filtros. Vea <link linkend="zend.form.elements.filters">la
                     sección de filtros</link> para más información. </para>
         </note>
 
-        <note>
-            <title>Contexto de validación</title>
+        <note><info><title>Contexto de validación</title></info>
+            
 
             <para>
-                <methodname>Zend_Form_Element::isValid()</methodname> > soporta
+                <methodname>Zend_Form_Element::isValid()</methodname> &gt; soporta
                 un argumento adicional, <varname>$context</varname> .
                     <methodname>Zend_Form::isValid()</methodname> pasa todo el
                 conjunto de datos procesados a <varname>$context</varname>
                 cuando valida un formulario, y
-                    <methodname>Zend_Form_Element::isValid()</methodname> >, a
+                    <methodname>Zend_Form_Element::isValid()</methodname> &gt;, a
                 su vez, lo pasa a cada validador. Esto significa que puede
                 escribir validadores que son conscientes de los datos pasados a
                 otros elementos del formulario. Como ejemplo, considere un
@@ -597,13 +591,12 @@ $messages = $element->getMessages();
             </listitem>
         </itemizedlist>
 
-        <para> Para mayor información sobre validadores, vea la <link
-                linkend="zend.validate.introduction">documentación de
+        <para> Para mayor información sobre validadores, vea la <link linkend="zend.validate.introduction">documentación de
                 Zend_Validate</link> . </para>
 
-        <note>
-            <title>Usando Zend_Form_Elements como validador de propósito
-                general</title>
+        <note><info><title>Usando Zend_Form_Elements como validador de propósito
+                general</title></info>
+            
 
             <para>
                 <classname>Zend_Form_Element</classname> implementa
@@ -691,8 +684,8 @@ $messages = $element->getMessages();
             </listitem>
         </itemizedlist>
 
-        <sect3 id="zend.form.elements.validators.errors">
-            <title>Errores de mensaje personalizados</title>
+        <section xml:id="zend.form.elements.validators.errors"><info><title>Errores de mensaje personalizados</title></info>
+            
 
             <para>Alguna veces, querrá especificar uno o más mensajes de error
                 para usarlos en lugar de los mensajes de error generados por los
@@ -784,11 +777,11 @@ $messages = $element->getMessages();
                 para representar el valor del elemento; este valor actual del
                 elemento será sustituido cuando el mensaje de error sea
                 recuperado.</para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.form.elements.decorators">
-        <title>Decoradores</title>
+    <section xml:id="zend.form.elements.decorators"><info><title>Decoradores</title></info>
+        
 
         <para> Una dolencia particular para muchos desarrolladores web es la
             creación del <acronym>XHTML</acronym> para formularios por ellos
@@ -803,8 +796,7 @@ $messages = $element->getMessages();
             problema mediante el uso de "decoradores". Los decoradores son
             clases simples que tienen métodos de acceso al elemento y métodos
             para generar el contenido. Para obtener mayor información sobre cómo
-            trabajan los decoradores, consulte por favor la sección sobre <link
-                linkend="zend.form.decorators">Zend_Form_Decorator</link> . </para>
+            trabajan los decoradores, consulte por favor la sección sobre <link linkend="zend.form.decorators">Zend_Form_Decorator</link> . </para>
 
         <para> Los decoradores usados por defecto por
                 <classname>Zend_Form_Element</classname> son: </para>
@@ -853,8 +845,8 @@ $messages = $element->getMessages();
             </listitem>
         </itemizedlist>
 
-        <note>
-            <title>Decoradores por defecto no necesitan ser cargados</title>
+        <note><info><title>Decoradores por defecto no necesitan ser cargados</title></info>
+            
 
             <para>Por defecto, los decoradores por defecto son cargados durante
                 la inicialización del objeto. Puede deshabilitar esto pasando la
@@ -916,12 +908,11 @@ $this->addDecorators(array(
 </dd>
 ]]></programlisting>
 
-        <para> Para más información sobre decoradores, lea la <link
-                linkend="zend.form.decorators"> sección de
+        <para> Para más información sobre decoradores, lea la <link linkend="zend.form.decorators"> sección de
                 Zend_Form_Decorator</link> . </para>
 
-        <note>
-            <title>Usando múltiples decoradores al mismo tiempo</title>
+        <note><info><title>Usando múltiples decoradores al mismo tiempo</title></info>
+            
 
             <para> Internamente, <classname>Zend_Form_Element</classname>
                 utiliza una clase decorador como mecanismo de búsqueda para la
@@ -1031,10 +1022,10 @@ echo $element->renderHtmlTag("This is the html tag content");
 ]]></programlisting>
 
         <para>Si el decorador no existe, una excepción es lanzada.</para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.elements.metadata">
-        <title>Metadatos y atributos</title>
+    <section xml:id="zend.form.elements.metadata"><info><title>Metadatos y atributos</title></info>
+        
 
         <para>
             <classname>Zend_Form_Element</classname> manipula una variedad de
@@ -1162,20 +1153,19 @@ $element->class = 'text;
         <para>Por defecto, todos los atributos son pasados al auxiliar vista
             usado por el elemento durante la generación, y generados como
             atributos de la etiqueta del elemento.</para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.elements.standard">
-        <title>Elementos Estándar</title>
+    <section xml:id="zend.form.elements.standard"><info><title>Elementos Estándar</title></info>
+        
 
         <para>
             <classname>Zend_Form</classname> contiene un buen número de
-            elementos estándar; por favor lea el capítulo <link
-                linkend="zend.form.standardElements">Elementos Estándar</link>
+            elementos estándar; por favor lea el capítulo <link linkend="zend.form.standardElements">Elementos Estándar</link>
             para todos los detalles. </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.elements.methods">
-        <title>Métodos de Zend_Form_Element</title>
+    <section xml:id="zend.form.elements.methods"><info><title>Métodos de Zend_Form_Element</title></info>
+        
 
         <para>
             <classname>Zend_Form_Element</classname> tiene muchos, muchos
@@ -1545,10 +1535,10 @@ $element->class = 'text;
                 </itemizedlist>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.elements.config">
-        <title>Configuración</title>
+    <section xml:id="zend.form.elements.config"><info><title>Configuración</title></info>
+        
 
         <para> El constructor de <classname>Zend_Form_Element</classname> acepta
             tanto una matriz de opciones como un objeto
@@ -1657,10 +1647,10 @@ decorators.element.decorator = "ViewHelper"
 decorators.element.options.helper = "FormText"
 decorators.label.decorator = "Label"
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.elements.custom">
-        <title>Elementos personalizados</title>
+    <section xml:id="zend.form.elements.custom"><info><title>Elementos personalizados</title></info>
+        
 
         <para> Usted puede crear sus propios elementos personalizados
             simplemente extendiendo la clase
@@ -1749,5 +1739,5 @@ class My_Element_Text extends Zend_Form_Element
             la documentación de la <acronym>API</acronym> de
                 <classname>Zend_Form_Element</classname> para conocer todos los
             métodos disponibles. </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

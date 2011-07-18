@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 15103 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.controller.migration">
-    <title>Migración de versiones anteriores</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.migration"><info><title>Migración de versiones anteriores</title></info>
+    
 
     <para>
         La
@@ -15,11 +13,11 @@
         migrar sus acripts para usar la arquitectura nueva.
     </para>
 
-    <sect2 id="zend.controller.migration.fromoneseventooneeight">
-        <title>Migración de 1.7.x a 1.8.0 o nuevas versiones</title>
+    <section xml:id="zend.controller.migration.fromoneseventooneeight"><info><title>Migración de 1.7.x a 1.8.0 o nuevas versiones</title></info>
+        
 
-        <sect3 id="zend.controller.migration.fromoneseventooneeight.router">
-            <title>Cambios en Standard Route </title>
+        <section xml:id="zend.controller.migration.fromoneseventooneeight.router"><info><title>Cambios en Standard Route </title></info>
+            
 
             <para>
                 Como los segmentos traducidos fueron presentados en la nueva
@@ -37,14 +35,14 @@
                 <methodname>:</methodname>
                 .
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.controller.migration.fromonesixtooneseven">
-        <title>Migración de 1.6.x a 1.7.0 o nuevas versiones</title>
+    <section xml:id="zend.controller.migration.fromonesixtooneseven"><info><title>Migración de 1.6.x a 1.7.0 o nuevas versiones</title></info>
+        
 
-        <sect3 id="zend.controller.migration.fromonesixtooneseven.dispatcher">
-            <title>Cambios en la interfaz del Dispatcher</title>
+        <section xml:id="zend.controller.migration.fromonesixtooneseven.dispatcher"><info><title>Cambios en la interfaz del Dispatcher</title></info>
+            
 
             <para>
                 Los usuarios llamaron nuestra atención el hecho de que
@@ -70,14 +68,14 @@
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.controller.migration.fromoneohtoonesix">
-        <title>Migrando desde 1.5.x to 1.6.0 o versiones posteriores</title>
+    <section xml:id="zend.controller.migration.fromoneohtoonesix"><info><title>Migrando desde 1.5.x to 1.6.0 o versiones posteriores</title></info>
+        
 
-        <sect3 id="zend.controller.migration.fromoneohtoonesix.dispatcher">
-            <title>Cambios en la interfaz del Dispatcher</title>
+        <section xml:id="zend.controller.migration.fromoneohtoonesix.dispatcher"><info><title>Cambios en la interfaz del Dispatcher</title></info>
+            
 
             <para>
                 Los usuarios atrajeron nuestra atención con el hecho de que
@@ -116,11 +114,11 @@
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.controller.migration.fromoneohtoonefive">
-        <title>Migranado desde 1.0.x a 1.5.0 o versiones posteriores</title>
+    <section xml:id="zend.controller.migration.fromoneohtoonefive"><info><title>Migranado desde 1.0.x a 1.5.0 o versiones posteriores</title></info>
+        
 
         <para>
             Aunque la mayoría de la funcionalidad básica sigue siendo la misma, y todas las
@@ -283,10 +281,10 @@ $front->setParam('useCaseSensitiveActions', true);
                </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.migration.fromzeroninethree">
-        <title>Migrando desde 0.9.3 a 1.0.0RC1 o versiones posteriores</title>
+    <section xml:id="zend.controller.migration.fromzeroninethree"><info><title>Migrando desde 0.9.3 a 1.0.0RC1 o versiones posteriores</title></info>
+        
 
         <para>
             Los cambios principales introducidos en 1.0.0RC1 son la introducción de
@@ -532,10 +530,10 @@ $viewRenderer->setView($view);
             , ya que son
             ahora funcionalidad básica.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.migration.fromzeroninetwo">
-        <title>Migrando desde 0.9.2 to 0.9.3 o nuevas versiones</title>
+    <section xml:id="zend.controller.migration.fromzeroninetwo"><info><title>Migrando desde 0.9.2 to 0.9.3 o nuevas versiones</title></info>
+        
 
         <para>
             0.9.3 introduce
@@ -587,10 +585,10 @@ $viewRenderer->setView($view);
             para obtener más información sobre la configuración
             de reorientar las opciones (así como los alternativos métodos para la redirección).
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.migration.fromzerosix">
-        <title>Migrando desde 0.6.0 to 0.8.0 o versiones nuevas</title>
+    <section xml:id="zend.controller.migration.fromzerosix"><info><title>Migrando desde 0.6.0 to 0.8.0 o versiones nuevas</title></info>
+        
 
         <para>
             Por los cambios previos, el más básico uso de los componentes
@@ -698,10 +696,10 @@ final protected function _forward($action,
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.migration.fromzerotwo">
-        <title>Migrando desde 0.2.0 o antes de 0.6.0</title>
+    <section xml:id="zend.controller.migration.fromzerotwo"><info><title>Migrando desde 0.2.0 o antes de 0.6.0</title></info>
+        
 
         <para>
             El mas basico uso de los componentes de
@@ -1008,8 +1006,5 @@ public function __call($method, $args)
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
-    <!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

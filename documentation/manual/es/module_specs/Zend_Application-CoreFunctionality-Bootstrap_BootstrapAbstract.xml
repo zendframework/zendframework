@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 20763 -->
-    <!-- Reviewed: no -->
-<sect2 id="zend.application.core-functionality.bootstrap-bootstrapabstract">
-    <title>Zend_Application_Bootstrap_BootstrapAbstract</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.core-functionality.bootstrap-bootstrapabstract"><info><title>Zend_Application_Bootstrap_BootstrapAbstract</title></info>
+    
 
     <para>
         <classname>Zend_Application_Bootstrap_BootstrapAbstract</classname>
@@ -19,8 +19,8 @@
         .
     </para>
 
-    <table id="zend.application.core-functionality.bootstrap-bootstrapabstract.api.table">
-        <title>Métodos de Zend_Application_Bootstrap_BootstrapAbstract</title>
+    <table xml:id="zend.application.core-functionality.bootstrap-bootstrapabstract.api.table"><info><title>Métodos de Zend_Application_Bootstrap_BootstrapAbstract</title></info>
+        
         <tgroup cols="4">
             <thead>
                 <row>
@@ -479,4 +479,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect2>
+</section>

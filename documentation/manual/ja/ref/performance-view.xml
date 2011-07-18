@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20876 -->
-<sect1 id="performance.view">
-    <title>ビューのレンダリング</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.view"><info><title>ビューのレンダリング</title></info>
+    
 
     <para>
         Zend Frameworkの<acronym>MVC</acronym>レイヤを使うときには、
@@ -18,8 +16,8 @@
         性能面でのコストもあります。
     </para>
 
-    <sect2 id="performance.view.pluginloader">
-        <title>どのようにしたらビューヘルパの解決を速くできますか？</title>
+    <section xml:id="performance.view.pluginloader"><info><title>どのようにしたらビューヘルパの解決を速くできますか？</title></info>
+        
 
         <para>
             ほとんどの<classname>Zend_View</classname>の "メソッド" は、
@@ -51,8 +49,8 @@
             それでは質問です: どのようにしたらヘルパの解決を速くできますか？
         </para>
 
-        <sect3 id="performance.view.pluginloader.cache">
-            <title>ファイルキャッシュを含むプラグインローダーを使う</title>
+        <section xml:id="performance.view.pluginloader.cache"><info><title>ファイルキャッシュを含むプラグインローダーを使う</title></info>
+            
 
             <para>
                 最も簡単で安く済む方法は
@@ -63,10 +61,10 @@
                 この技術のおかげでopcodeキャッシュがないシステム上では25から30%の、
                 opcodeキャッシュがあるシステム上では40から65%の利得があるそうです。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="performance.view.pluginloader.extend">
-            <title>よく使われるヘルパメソッドを提供するようにZend_Viewを拡張する</title>
+        <section xml:id="performance.view.pluginloader.extend"><info><title>よく使われるヘルパメソッドを提供するようにZend_Viewを拡張する</title></info>
+            
 
             <para>
                 さらにもっと性能を調整することを探求する他の方法は、
@@ -124,11 +122,11 @@ class My_View extends Zend_View
                 あるいはまったくそれを迂回したり、
                 いずれかの方法でヘルパシステムのオーバーヘッドを十分に減らすでしょう。
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="performance.view.partial">
-        <title>どのようにしたらビューを部分的に高速化できますか？</title>
+    <section xml:id="performance.view.partial"><info><title>どのようにしたらビューを部分的に高速化できますか？</title></info>
+        
 
         <para>
             部分的に頻繁に利用したり、アプリケーションのプロファイルを実行したりする人は、
@@ -137,8 +135,8 @@ class My_View extends Zend_View
             これを速度向上させられるでしょうか？
         </para>
 
-        <sect3 id="performance.view.partial.render">
-            <title>本当に必要な時だけpartial()を使う</title>
+        <section xml:id="performance.view.partial.render"><info><title>本当に必要な時だけpartial()を使う</title></info>
+            
 
             <para>
                 <methodname>partial()</methodname> ビューヘルパには３つの引数があります:
@@ -183,11 +181,11 @@ class My_View extends Zend_View
                 その代わり、ビュースクリプトをレンダリングするために、
                 <classname>Zend_View</classname>組込みの<methodname>render()</methodname>メソッドを使ってください。
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="performance.view.action">
-        <title>どのようにしたらアクションメソッドのビューヘルパの呼び出しを速くできますか？</title>
+    <section xml:id="performance.view.action"><info><title>どのようにしたらアクションメソッドのビューヘルパの呼び出しを速くできますか？</title></info>
+        
 
         <para>
             バージョン1.5.0で <methodname>action()</methodname> ビューヘルパが導入されました。
@@ -204,8 +202,8 @@ class My_View extends Zend_View
             どうしたら速くできるでしょう？
         </para>
 
-        <sect3 id="performance.view.action.actionstack">
-            <title>可能な場合はアクションスタックを使う</title>
+        <section xml:id="performance.view.action.actionstack"><info><title>可能な場合はアクションスタックを使う</title></info>
+            
 
             <para>
                 <methodname>action()</methodname> ビューヘルパと同時期に導入されましたが、
@@ -272,10 +270,10 @@ class LoginPlugin extends Zend_Controller_Plugin_Abstract
                 それは、特別なアクションのために<acronym>ACL</acronym>を処理するフロントコントローラプラグインをもし使っているなら、
                 特別に関心があることかもしれません。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="performance.view.action.model">
-            <title>action()を通じてモデルに問い合わせるお好みヘルパ</title>
+        <section xml:id="performance.view.action.model"><info><title>action()を通じてモデルに問い合わせるお好みヘルパ</title></info>
+            
 
             <para>
                 ほとんどの場合、<methodname>action()</methodname> を使うのは過剰です。
@@ -358,9 +356,6 @@ class My_View_Helper_BugList extends Zend_View_Helper_Abstract
                 それはもはや <methodname>action()</methodname> ビューヘルパのオーバーヘッドを受けず、
                 より意味的に理解できる<acronym>API</acronym>も表現します。
             </para>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

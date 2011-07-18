@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21241 -->
-<sect2 id="zend.validate.set.email_address">
-    <title>メールアドレス</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.email_address"><info><title>メールアドレス</title></info>
+    
 
     <para>
         <classname>Zend_Validate_EmailAddress</classname> は、メールアドレスの検証を行います。
@@ -11,8 +9,8 @@
         に分割し、メールアドレスやホスト名の仕様にあわせて検証します。
     </para>
 
-    <sect3 id="zend.validate.set.email_address.basic">
-        <title>基本的な使用法</title>
+    <section xml:id="zend.validate.set.email_address.basic"><info><title>基本的な使用法</title></info>
+        
 
         <para>
             基本的な使用法は、以下のようになります。
@@ -33,12 +31,12 @@ if ($validator->isValid($email)) {
         <para>
             これは、メールアドレス <varname>$email</varname> を検証し、失敗した場合は
             その原因を表す便利なエラーメッセージを
-            <code>$validator->getMessages()</code> で取得します。
+            <code>$validator-&gt;getMessages()</code> で取得します。
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.email_address.options">
-        <title>メールアドレス検証のオプション</title>
+    <section xml:id="zend.validate.set.email_address.options"><info><title>メールアドレス検証のオプション</title></info>
+        
 
         <para>
             <classname>Zend_Validate_EmailAddress</classname>は、
@@ -102,10 +100,10 @@ if ($validator->isValid($email)) {
 $validator = new Zend_Validate_EmailAddress();
 $validator->setOptions(array('domain' => false));
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.email_address.complexlocal">
-        <title>複雑なローカルパート</title>
+    <section xml:id="zend.validate.set.email_address.complexlocal"><info><title>複雑なローカルパート</title></info>
+        
 
         <para>
             <classname>Zend_Validate_EmailAddress</classname> は、メールアドレスの検証を
@@ -119,10 +117,10 @@ $validator->setOptions(array('domain' => false));
             かつて使われていたものの、現在は有効とはみなされないフォーマットもあります
             (たとえば、メールアドレスに改行文字や "\" を使用するなど)。
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.email_address.purelocal">
-        <title>ローカルパートのみの検証</title>
+    <section xml:id="zend.validate.set.email_address.purelocal"><info><title>ローカルパートのみの検証</title></info>
+        
 
         <para>
             もしメールアドレスのローカルパートのみをチェックするために
@@ -137,10 +135,10 @@ $validator->setOptions(array('domain' => false));
 $validator = new Zend_Validate_EmailAddress();
 $validator->setOptions(array('domain' => FALSE));
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.email_address.hostnametype">
-        <title>さまざまな形式のホスト名の検証</title>
+    <section xml:id="zend.validate.set.email_address.hostnametype"><info><title>さまざまな形式のホスト名の検証</title></info>
+        
 
         <para>
             メールアドレスのホスト名部分の検証は、
@@ -171,10 +169,10 @@ if ($validator->isValid($email)) {
     }
 }
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.email_address.checkacceptance">
-        <title>そのホスト名が実際にメールを受け付けるかどうかのチェック</title>
+    <section xml:id="zend.validate.set.email_address.checkacceptance"><info><title>そのホスト名が実際にメールを受け付けるかどうかのチェック</title></info>
+        
 
         <para>
             ただ単にメールアドレスが正しい書式であるというだけでは、
@@ -201,8 +199,8 @@ $validator = new Zend_Validate_EmailAddress(
 );
 ]]></programlisting>
 
-        <note>
-            <title>WindowsでのMX のチェック</title>
+        <note><info><title>WindowsでのMX のチェック</title></info>
+            
 
             <para>
                 Windows 環境の範囲内では、
@@ -214,7 +212,7 @@ $validator = new Zend_Validate_EmailAddress(
 
         <para>
             あるいは、<constant>TRUE</constant> または <constant>FALSE</constant> を
-            <code>$validator->setValidateMx()</code> に渡すことで、
+            <code>$validator-&gt;setValidateMx()</code> に渡すことで、
             MX の検証を有効あるいは無効にすることもできます。
         </para>
 
@@ -244,8 +242,8 @@ $validator = new Zend_Validate_EmailAddress(
 );
 ]]></programlisting>
 
-        <warning>
-            <title>パフォーマンスの警告</title>
+        <warning><info><title>パフォーマンスの警告</title></info>
+            
 
             <para>
                 MX チェックを有効にすると、使用されるネットワーク機能のせいで
@@ -255,8 +253,8 @@ $validator = new Zend_Validate_EmailAddress(
             </para>
         </warning>
 
-        <note>
-            <title>許可されないIPアドレス</title>
+        <note><info><title>許可されないIPアドレス</title></info>
+            
 
             <para>
                 MX 検証は外部のサーバでのみ受け付けられることを注意すべきです。
@@ -265,10 +263,10 @@ $validator = new Zend_Validate_EmailAddress(
                 ローカル IP アドレスは受け付けません。
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.email_address.validateidn">
-        <title>国際化ドメイン名の検証</title>
+    <section xml:id="zend.validate.set.email_address.validateidn"><info><title>国際化ドメイン名の検証</title></info>
+        
 
         <para>
             <classname>Zend_Validate_EmailAddress</classname> は、ドメインの中に国際文字が使われている場合も処理できます。
@@ -290,10 +288,10 @@ $validator->getHostnameValidator()->setValidateIdn(false);
         <para>
             IDN の検証は、DNS ホスト名の検証を有効にしている場合にのみ行われることに注意しましょう。
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.email_address.validatetld">
-        <title>トップレベルドメインの検証</title>
+    <section xml:id="zend.validate.set.email_address.validatetld"><info><title>トップレベルドメインの検証</title></info>
+        
 
         <para>
             デフォルトでは、ホスト名の検証は既知の TLD の一覧に基づいて行われます。
@@ -314,10 +312,10 @@ $validator->getHostnameValidator()->setValidateTld(false);
         <para>
             TLD の検証は、DNS ホスト名の検証を有効にしている場合にのみ行われることに注意しましょう。
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.email_address.setmessage">
-        <title>メッセージの設定</title>
+    <section xml:id="zend.validate.set.email_address.setmessage"><info><title>メッセージの設定</title></info>
+        
 
         <para>
             <classname>Zend_Validate_EmailAddress</classname> は、
@@ -342,8 +340,5 @@ $validator->setMessages(
             <classname>Zend_Validate_Hostname</classname> にメッセージをアタッチしてからそれを
             <classname>Zend_Validate_EmailAddress</classname> に設定しないと独自のメッセージを返せませんでした。
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

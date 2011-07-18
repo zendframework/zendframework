@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20522 -->
-<sect1 id="zend.queue.framework">
-    <title>フレームワーク</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.framework"><info><title>フレームワーク</title></info>
+    
 
     <para>
         <classname>Zend_Queue</classname>は、
@@ -63,8 +61,8 @@ foreach ($messages as $i => $message) {
         投げられるどんな例外も、クラス<classname>Zend_Queue_Exception</classname>です。
     </para>
 
-    <sect2 id="zend.queue.framework.basics">
-        <title>導入</title>
+    <section xml:id="zend.queue.framework.basics"><info><title>導入</title></info>
+        
 
         <para>
             <classname>Zend_Queue</classname>は、
@@ -82,10 +80,10 @@ foreach ($messages as $i => $message) {
             <methodname>createQueue()</methodname>及び
             <methodname>deleteQueue()</methodname>メソッドは待ち行列を管理するために使われます。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.queue.framework.support">
-        <title>アダプタの間の互換性</title>
+    <section xml:id="zend.queue.framework.support"><info><title>アダプタの間の互換性</title></info>
+        
 
         <para>
             <classname>Zend_Queue</classname>によってサポートされる待ち行列サービスは、
@@ -165,5 +163,5 @@ foreach ($messages as $i => $message) {
             <methodname>createQueue()</methodname>及び
             <methodname>deleteQueue()</methodname>メソッドは待ち行列を管理するために使われます。
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

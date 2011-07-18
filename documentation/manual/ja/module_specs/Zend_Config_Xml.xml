@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20765 -->
-<sect1 id="zend.config.adapters.xml">
-    <title>Zend_Config_Xml</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.xml"><info><title>Zend_Config_Xml</title></info>
+    
     <para>
         <classname>Zend_Config_Xml</classname> を使用すると、シンプルな <acronym>XML</acronym>
         形式で保存した設定データを、オブジェクトのプロパティとして扱えるようになります。
@@ -16,16 +14,16 @@
         でサポートされます。この属性の値が、
         データを継承しているセクション名を表します。
     </para>
-    <note>
-        <title>返り値の型</title>
+    <note><info><title>返り値の型</title></info>
+        
         <para>
             <classname>Zend_Config_Xml</classname> で読み込んだ設定データは、
             常に文字列形式で返されます。必要に応じて、
             文字列から適切な型に変換してください。
         </para>
     </note>
-    <example id="zend.config.adapters.xml.example.using">
-        <title>Zend_Config_Xml の使用法</title>
+    <example xml:id="zend.config.adapters.xml.example.using"><info><title>Zend_Config_Xml の使用法</title></info>
+        
         <para>
             この例は、<classname>Zend_Config_Xml</classname> を使用して
             <acronym>XML</acronym> ファイルから設定データを読み込むための基本的な方法を説明するものです。
@@ -74,8 +72,8 @@ echo $config->database->params->host;   // "dev.example.com" と出力します
 echo $config->database->params->dbname; // "dbname" と出力します
 ]]></programlisting>
     </example>
-    <example id="zend.config.adapters.xml.example.attributes">
-        <title>Zend_Config_Xml におけるタグの属性の使用</title>
+    <example xml:id="zend.config.adapters.xml.example.attributes"><info><title>Zend_Config_Xml におけるタグの属性の使用</title></info>
+        
         <para>
             <classname>Zend_Config_Xml</classname> では、設定内でノードを定義する際にさらに 2 通りの方法を用意しています。
             どちらも属性を使用するものです。<emphasis>extends</emphasis> 属性や
@@ -133,8 +131,8 @@ echo $config->database->params->dbname; // "dbname" と出力します
 </configdata>
 ]]></programlisting>
     </example>
-<note>
-        <title>XML 文字列</title>
+<note><info><title>XML 文字列</title></info>
+        
         <para>
             <classname>Zend_Config_Xml</classname> は、データベースなどから取得した
             <acronym>XML</acronym> 文字列を直接読み込むこともできます。
@@ -166,8 +164,8 @@ EOT;
 $config = new Zend_Config_Xml($string, 'staging');
 ]]></programlisting>
     </note>
-<note>
-        <title>Zend_Config XML 名前空間</title>
+<note><info><title>Zend_Config XML 名前空間</title></info>
+        
         <para>
             <classname>Zend_Config</classname> は独自の <acronym>XML</acronym>
             名前空間を持っており、パース処理に機能を追加できます。
@@ -213,7 +211,4 @@ $config = new Zend_Config_Xml($string, 'staging');
 echo $config->includePath; // "/var/www/something/library" と表示します
 ]]></programlisting>
     </note>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

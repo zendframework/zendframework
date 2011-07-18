@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 17171 -->
-<sect3 id="zend.controller.actionhelpers.redirector">
-    <title>Redirector</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.redirector"><info><title>Redirector</title></info>
+    
 
-    <sect4 id="zend.controller.actionhelper.redirector.introduction">
-        <title>導入</title>
+    <section xml:id="zend.controller.actionhelper.redirector.introduction"><info><title>導入</title></info>
+        
 
         <para>
             <emphasis>Redirector</emphasis> ヘルパーは、
@@ -126,13 +124,13 @@
             <methodname>getRedirectUrl()</methodname> を使用します。
             これはいつでも使用できます。
         </para>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelper.redirector.basicusage">
-        <title>基本的な使用例</title>
+    <section xml:id="zend.controller.actionhelper.redirector.basicusage"><info><title>基本的な使用例</title></info>
+        
 
-        <example id="zend.controller.actionhelper.redirector.basicusage.example-1">
-            <title>オプションの設定</title>
+        <example xml:id="zend.controller.actionhelper.redirector.basicusage.example-1"><info><title>オプションの設定</title></info>
+            
 
             <para>
                 この例ではデフォルトのオプションを少し変更します。
@@ -177,8 +175,8 @@ class SomeController extends Zend_Controller_Action
 ]]></programlisting>
         </example>
 
-        <example id="zend.controller.actionhelper.redirector.basicusage.example-2">
-            <title>デフォルト設定の使用</title>
+        <example xml:id="zend.controller.actionhelper.redirector.basicusage.example-2"><info><title>デフォルト設定の使用</title></info>
+            
 
             <para>
                 この例ではデフォルト設定を使用しています。
@@ -214,8 +212,8 @@ class AlternativeController extends Zend_Controller_Action
 ]]></programlisting>
         </example>
 
-        <example id="zend.controller.actionhelper.redirector.basicusage.example-3">
-            <title>goto() での _forward() API の使用</title>
+        <example xml:id="zend.controller.actionhelper.redirector.basicusage.example-3"><info><title>goto() での _forward() API の使用</title></info>
+            
 
             <para>
                 <methodname>gotoSimple()</methodname> の <acronym>API</acronym> は、
@@ -260,12 +258,11 @@ class ForwardController extends Zend_Controller_Action
 ]]></programlisting>
         </example>
 
-        <example id="zend.controller.actionhelper.redirector.basicusage.example-4">
-            <title>gotoRoute() でのルートアセンブリの使用</title>
+        <example xml:id="zend.controller.actionhelper.redirector.basicusage.example-4"><info><title>gotoRoute() でのルートアセンブリの使用</title></info>
+            
 
             <para>
-                次の例は、<link
-                    linkend="zend.controller.router">ルータ</link>
+                次の例は、<link linkend="zend.controller.router">ルータ</link>
                 の <methodname>assemble()</methodname> メソッドを使用して、
                 パラメータで指定した連想配列に基づく <acronym>URL</acronym> を作成しています。
                 次のようなルートが登録されているものと仮定します。
@@ -319,8 +316,5 @@ class BlogAdminController extends Zend_Controller_Action
 }
 ]]></programlisting>
         </example>
-    </sect4>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

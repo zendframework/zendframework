@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 16658 -->
-<sect1 id="zend.controller.dispatcher">
-    <title>ディスパッチャ</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.dispatcher"><info><title>ディスパッチャ</title></info>
+    
 
-    <sect2 id="zend.controller.dispatcher.overview">
-        <title>概要</title>
+    <section xml:id="zend.controller.dispatcher.overview"><info><title>概要</title></info>
+        
 
         <para>
             ディスパッチ処理は、リクエストオブジェクトである
@@ -21,8 +19,8 @@
             <methodname>setDefaultModule()</methodname> でこれらを変更することもできます。
         </para>
 
-        <note>
-            <title>デフォルトモジュール</title>
+        <note><info><title>デフォルトモジュール</title></info>
+            
 
             <para>
                 モジュール構造のアプリケーションを作成する場合に、
@@ -93,10 +91,10 @@ public function bazAction()
     $this->_forward('baz', 'bar', 'foo', array('baz' => 'bogus'));
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.dispatcher.subclassing">
-        <title>ディスパッチャのサブクラスの作成</title>
+    <section xml:id="zend.controller.dispatcher.subclassing"><info><title>ディスパッチャのサブクラスの作成</title></info>
+        
 
         <para>
             <classname>Zend_Controller_Front</classname> は、
@@ -290,8 +288,5 @@ interface Zend_Controller_Dispatcher_Interface
             コントローラディレクトリは以下のアクションファイルに振り分けるなど、
             異なるディスパッチ方式を使用したい場合にもサブクラスを作成する必要があります。
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

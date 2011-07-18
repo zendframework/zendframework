@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20766 -->
-<sect1 id="zend.date.overview">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.overview"><info><title>Zend_Date API の概要</title></info>
 
-    <title>Zend_Date API の概要</title>
+    
 
     <para>
         <classname>Zend_Date</classname> の <acronym>API</acronym> はシンプルで統一性がありますが、
@@ -11,29 +9,29 @@
         さまざまな操作や演算ができます。
     </para>
 
-    <sect2 id="zend.date.options">
-        <title>Zend_Date のオプション</title>
+    <section xml:id="zend.date.options"><info><title>Zend_Date のオプション</title></info>
+        
 
-        <sect3 id="zend.date.options.formattype">
-            <title>日付の書式の型の選択</title>
+        <section xml:id="zend.date.options.formattype"><info><title>日付の書式の型の選択</title></info>
+            
 
             <para>
                 いくつかのメソッドでは、<acronym>PHP</acronym> の <methodname>date()</methodname> 関数と似た形式の日付書式文字列を使用します。
                 <acronym>PHP</acronym> の日付書式指定子のほうが <acronym>ISO</acronym> 書式指定子よりなじみがあるという場合は、
-                <methodname>Zend_Date::setOptions(array('format_type' => 'php'))</methodname>
+                <methodname>Zend_Date::setOptions(array('format_type' =&gt; 'php'))</methodname>
                 とできます。こうすると、<varname>$format</varname>
                 パラメータを持つすべての関数で <acronym>PHP</acronym> の日付書式指定子が使用できるようになります。
-                <methodname>Zend_Date::setOptions(array('format_type' => 'iso'))</methodname>
+                <methodname>Zend_Date::setOptions(array('format_type' =&gt; 'iso'))</methodname>
                 とすると、デフォルトのモードに戻ります。このモードは、
                 <acronym>ISO</acronym> 日付書式トークンのみをサポートするものです。
                 サポートする書式コードの一覧は、
                 <link linkend="zend.date.constants.phpformats">PHP の date() 関数の書式指定子を使用して
                 自分で定義する出力フォーマット</link> を参照ください。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.date.options.fixdst">
-            <title>夏時間と月</title>
+        <section xml:id="zend.date.options.fixdst"><info><title>夏時間と月</title></info>
+            
 
             <para>
                 日付を処理する際には、夏時間の適用前後をまたがってしまうこともあります。
@@ -53,7 +51,7 @@
                 このオプションのデフォルトは <constant>TRUE</constant> で、この場合は夏時間が
                 "月" の計算 (<methodname>addMonth()</methodname>、
                 <methodname>subMonth()</methodname>) に影響を与えなくなります。
-                <methodname>Zend_Date::setOptions(array('fix_dst' => false))</methodname> とすると、
+                <methodname>Zend_Date::setOptions(array('fix_dst' =&gt; false))</methodname> とすると、
                 夏時間にあわせた時間の加減算を "月" の計算時にも適用します。
             </para>
 
@@ -66,10 +64,10 @@
                 その前に設定されていた 'fix_dst' オプションの値を
                 "月" の計算時に適用します。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.date.options.extendmonth">
-            <title>月の計算</title>
+        <section xml:id="zend.date.options.extendmonth"><info><title>月の計算</title></info>
+            
 
             <para>
                 ある日付に対して月を足したり引いたりすると、
@@ -87,13 +85,13 @@
                 デフォルトでは、<classname>Zend_Date</classname> は月の計算をする際に
                 (必要に応じて) 日を切り詰めます。計算した結果に該当する日がその月に存在しなかった場合に、
                 翌月にまたがることはありません。
-                <methodname>Zend_Date::setOptions(array('extend_month' => true))</methodname>
+                <methodname>Zend_Date::setOptions(array('extend_month' =&gt; true))</methodname>
                 とすると、表計算ソフトと同様の方式で計算することになります。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.date.options.cache">
-            <title>日付の地域化や正規化の、Zend_Cache による高速化</title>
+        <section xml:id="zend.date.options.cache"><info><title>日付の地域化や正規化の、Zend_Cache による高速化</title></info>
+            
 
             <para>
                 <classname>Zend_Date</classname> を高速に動作させるには <classname>Zend_Cache</classname>
@@ -102,34 +100,34 @@
                 たとえば、定数 <constant>Zend_Date::DATE</constant> や
                 <constant>Zend_Date::TIME</constant> を扱うメソッドは、すべてこの影響を受けます。
                 <classname>Zend_Cache</classname> アダプタを <classname>Zend_Date</classname> に設定するには、
-                <methodname>Zend_Date::setOptions(array('cache' => $adapter))</methodname>
+                <methodname>Zend_Date::setOptions(array('cache' =&gt; $adapter))</methodname>
                 とするだけです。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.date.options.timesync">
-            <title>Zend_TimeSync による同期したタイムスタンプの取得</title>
+        <section xml:id="zend.date.options.timesync"><info><title>Zend_TimeSync による同期したタイムスタンプの取得</title></info>
+            
 
             <para>
                 通常は、サーバやコンピュータの時刻はそれぞれ異なります。
                 <classname>Zend_Date</classname> は、この問題を
                 <classname>Zend_TimeSync</classname> で解決できます。
-                タイムサーバを <methodname>Zend_Date::setOptions(array('timesync' => $timeserver))</methodname>
+                タイムサーバを <methodname>Zend_Date::setOptions(array('timesync' =&gt; $timeserver))</methodname>
                 で設定すると、すべての <classname>Zend_Date</classname> インスタンスについて、
                 そのタイムスタンプと実際のタイムスタンプを間のオフセットを設定します。
                 このオプションを使用しても、既存のインスタンスのタイムスタンプは変わりません。
                 そこで、これを用いる場合は起動ファイルで設定することをおすすめします。
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.date.values">
-        <title>日付の値の操作</title>
+    <section xml:id="zend.date.values"><info><title>日付の値の操作</title></info>
+        
 
         <para>
             <classname>Zend_Date</classname> オブジェクトの作成によって入力が正規化されると、
             このオブジェクトはタイムゾーンに関連付けられます。しかし、内部的な形式としては通常の
-            <ulink url="http://en.wikipedia.org/wiki/Unix_Time">UNIX タイムスタンプ</ulink>を使用します。
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Unix_Time">UNIX タイムスタンプ</link>を使用します。
             各地域固有の方式で日付を表示するには、まずタイムゾーンを知る必要があります。
             デフォルトのタイムゾーンは常に <acronym>GMT</acronym>/UTC です。オブジェクトのタイムゾーンを調べるには
             <methodname>getTimeZone()</methodname> を使用します。オブジェクトのタイムゾーンを変更するには
@@ -164,8 +162,8 @@
             のいずれかである場合は別です。
         </para>
 
-        <example id="zend.date.values.example-1">
-            <title>ユーザ定義の入力日付書式</title>
+        <example xml:id="zend.date.values.example-1"><info><title>ユーザ定義の入力日付書式</title></info>
+            
             <programlisting language="php"><![CDATA[
 $date1 = new Zend_Date('Feb 31, 2007', null, 'en_US');
 echo $date1, "\n"; // 出力は "Mar 3, 2007 12:00:00 AM" となります
@@ -220,10 +218,10 @@ Zend_Registry::set('Zend_Locale', $locale);
 // アプリケーションのどこかで
 $date = new Zend_Date('31.Feb.2007');
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="id.date.basic">
-        <title>多くの日付要素で共通に使用できる、Zend_Date の基本操作</title>
+    <section xml:id="id.date.basic"><info><title>多くの日付要素で共通に使用できる、Zend_Date の基本操作</title></info>
+        
 
         <para>
             メソッド <methodname>add()</methodname>, <methodname>sub()</methodname>,
@@ -246,8 +244,8 @@ $date = new Zend_Date('31.Feb.2007');
             以外のメソッドは、処理の結果としてオブジェクト内の日付が変更されます。
         </para>
 
-        <example id="zend.date.basic.example-1">
-            <title>日付要素の操作</title>
+        <example xml:id="zend.date.basic.example-1"><info><title>日付要素の操作</title></info>
+            
             <programlisting language="php"><![CDATA[
 $date = new Zend_Date(); // $date のタイムスタンプは time() の返す値と等しくなります
 
@@ -282,12 +280,12 @@ print $date;
             メソッド名によって ("Year" や "Minute" などに) 決まるということです。
         </para>
 
-        <sect3 id="id.date.basic.parts">
+        <section xml:id="id.date.basic.parts"><info><title>日付要素の一覧</title></info>
 
-            <title>日付要素の一覧</title>
+            
 
-            <table id="id.date.basic.parts.table">
-                <title>日付要素</title>
+            <table xml:id="id.date.basic.parts.table"><info><title>日付要素</title></info>
+                
                 <tgroup cols="2">
                     <thead>
                         <row>
@@ -298,7 +296,7 @@ print $date;
                     <tbody>
                         <row>
                             <entry>
-                                <ulink url="http://en.wikipedia.org/wiki/Unix_Time">Timestamp (タイムスタンプ)</ulink>
+                                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Unix_Time">Timestamp (タイムスタンプ)</link>
                             </entry>
                             <entry>
                             UNIX タイムスタンプ。January 1st, 1970 00:00:00 <acronym>GMT</acronym>/UTC
@@ -307,37 +305,37 @@ print $date;
                         </row>
                         <row>
                             <entry>
-                                <ulink url="http://ja.wikipedia.org/wiki/%E3%82%B0%E3%83%AC%E3%82%B4%E3%83%AA%E3%82%AA%E6%9A%A6">Year (年)</ulink>
+                                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ja.wikipedia.org/wiki/%E3%82%B0%E3%83%AC%E3%82%B4%E3%83%AA%E3%82%AA%E6%9A%A6">Year (年)</link>
                             </entry>
                             <entry>グレゴリオ暦の年 (例: 2006)。</entry>
                         </row>
                         <row>
                             <entry>
-                                <ulink url="http://ja.wikipedia.org/wiki/%E6%9C%88_%28%E6%9A%A6%29#.E5.A4.AA.E9.99.BD.E6.9A.A6">Month (月)</ulink>
+                                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ja.wikipedia.org/wiki/%E6%9C%88_%28%E6%9A%A6%29#.E5.A4.AA.E9.99.BD.E6.9A.A6">Month (月)</link>
                             </entry>
                             <entry>グレゴリオ暦の月 (1-12、各地域固有の名前もサポートしています)。</entry>
                         </row>
                         <row>
                             <entry>
-                                <ulink url="http://en.wikipedia.org/wiki/24-hour_clock">24 hour clock (24 時間の時間)</ulink>
+                                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/24-hour_clock">24 hour clock (24 時間の時間)</link>
                             </entry>
                             <entry>その日の時間 (0-23)。これは、その日がはじまってからの経過時間数を表します。</entry>
                         </row>
                         <row>
                             <entry>
-                                <ulink url="http://ja.wikipedia.org/wiki/%E5%88%86">minute (分)</ulink>
+                                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ja.wikipedia.org/wiki/%E5%88%86">minute (分)</link>
                             </entry>
                             <entry>時間内の分 (0-59)。これは、その時間がはじまってからの経過分数を表します。</entry>
                         </row>
                         <row>
                             <entry>
-                                <ulink url="http://ja.wikipedia.org/wiki/%E7%A7%92">Second (秒)</ulink>
+                                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ja.wikipedia.org/wiki/%E7%A7%92">Second (秒)</link>
                             </entry>
                             <entry>分内の秒 (0-59)。これは、その分が始まってからの経過秒数を表します。</entry>
                         </row>
                         <row>
                             <entry>
-                                <ulink url="http://en.wikipedia.org/wiki/Millisecond">millisecond (ミリ秒)</ulink>
+                                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Millisecond">millisecond (ミリ秒)</link>
                             </entry>
                             <entry>
                              ミリ秒 (0-999)。これは、千分の一秒を表します。
@@ -348,13 +346,13 @@ print $date;
                              精度を変更するには <methodname>setFractionalPrecision($precision)</methodname>
                              を使用します。しかし、精度は事実上ミリ秒までに制限されます。
                              というのも、<classname>Zend_Date</classname> は <code>
-                             <ulink url="http://php.net/microtime">microtime()</ulink></code>
+                             <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/microtime">microtime()</link></code>
                              を使用しているからです。
                             </entry>
                         </row>
                         <row>
                             <entry>
-                                <ulink url="http://ja.wikipedia.org/wiki/%E6%97%A5">Day (日)</ulink>
+                                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ja.wikipedia.org/wiki/%E6%97%A5">Day (日)</link>
                             </entry>
                             <entry>
                              <constant>Zend_Date::DAY_SHORT</constant> は <varname>$date</varname>
@@ -369,7 +367,7 @@ print $date;
                         </row>
                         <row>
                             <entry>
-                                <ulink url="http://ja.wikipedia.org/wiki/%E9%80%B1">Week (週)</ulink>
+                                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ja.wikipedia.org/wiki/%E9%80%B1">Week (週)</link>
                             </entry>
                             <entry>
                              <constant>Zend_Date::WEEK</constant> は <varname>$date</varname>
@@ -415,7 +413,7 @@ print $date;
                         </row>
                         <row>
                             <entry>
-                                <ulink url="http://www.faqs.org/rfcs/rfc822.html">Arpa</ulink>
+                                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.faqs.org/rfcs/rfc822.html">Arpa</link>
                             </entry>
                             <entry>
                              Arpa 日付 (つまり <acronym>RFC</acronym> 822 形式の日付) をサポートしています。
@@ -423,14 +421,14 @@ print $date;
                              (<acronym>RFC</acronym> 822 の section 5 を参照ください)。
                              <acronym>PHP</acronym> 5.2.2 より前のバージョンでは、定数 DATE_RFC822 を
                              <acronym>PHP</acronym> の日付関数で使用したときに
-                             <ulink url="http://bugs.php.net/bug.php?id=40308">おかしな結果</ulink>
+                             <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://bugs.php.net/bug.php?id=40308">おかしな結果</link>
                              となる場合がありました。<classname>Zend_Date</classname> は、正しい結果を返します。
                              例: <code>Mon, 31 Dec 06 23:59:59 GMT</code>
                             </entry>
                         </row>
                         <row>
                             <entry>
-                                <ulink url="http://ja.wikipedia.org/wiki/ISO_8601">Iso</ulink>
+                                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ja.wikipedia.org/wiki/ISO_8601">Iso</link>
                             </entry>
                             <entry>
                              出力形式として、完全な <acronym>ISO</acronym> 8601 日付のみをサポートしています。
@@ -440,10 +438,10 @@ print $date;
                     </tbody>
                 </tgroup>
             </table>
-        </sect3>
+        </section>
 
-        <sect3 id="id.date.basic.operations">
-            <title>日付操作の一覧</title>
+        <section xml:id="id.date.basic.operations"><info><title>日付操作の一覧</title></info>
+            
 
             <para>
                 便利なメソッド群ではなく以下の基本操作を使用する場合には、
@@ -451,8 +449,8 @@ print $date;
                 を <varname>$part</varname> パラメータで指定します。
             </para>
 
-            <table id="id.date.basic.operations.table">
-                <title>基本操作</title>
+            <table xml:id="id.date.basic.operations.table"><info><title>基本操作</title></info>
+                
                 <tgroup cols="2">
                     <thead>
                         <row>
@@ -556,11 +554,11 @@ print $date;
                     </tbody>
                 </tgroup>
             </table>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.date.others.comparison">
-        <title>日付の比較</title>
+    <section xml:id="zend.date.others.comparison"><info><title>日付の比較</title></info>
+        
 
         <para>
             以下の基本操作については、
@@ -568,8 +566,8 @@ print $date;
             の一覧にある各日付要素に特化した便利なメソッドは存在しません。
         </para>
 
-        <table id="zend.date.others.comparison.table">
-            <title>日付の比較用メソッド</title>
+        <table xml:id="zend.date.others.comparison.table"><info><title>日付の比較用メソッド</title></info>
+            
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -690,17 +688,17 @@ print $date;
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.date.others.gettingparts">
-        <title>日付および日付要素の取得</title>
+    <section xml:id="zend.date.others.gettingparts"><info><title>日付および日付要素の取得</title></info>
+        
 
         <para>
             <classname>Zend_Date</classname> インスタンスに関する情報の取得をサポートするメソッド群について説明します。
         </para>
 
-        <table id="zend.date.others.gettingparts.table">
-            <title>日付出力用のメソッド</title>
+        <table xml:id="zend.date.others.gettingparts.table"><info><title>日付出力用のメソッド</title></info>
+            
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -736,7 +734,7 @@ print $date;
                             <para>
                                 選択した日付を、そのオブジェクトのロケールにもとづいて配列形式で返します。
                                 返される配列は
-                                <acronym>PHP</acronym> の <ulink url="http://php.net/getdate">getdate()</ulink>
+                                <acronym>PHP</acronym> の <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/getdate">getdate()</link>
                                 関数が返すものと同じ形式で、次のような要素を含みます。
                             </para>
                             <para>
@@ -861,17 +859,17 @@ print $date;
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.date.others.fractions">
-        <title>一秒未満の単位の扱い</title>
+    <section xml:id="zend.date.others.fractions"><info><title>一秒未満の単位の扱い</title></info>
+        
 
         <para>
             <classname>Zend_Date</classname> インスタンスに関する情報の取得をサポートするメソッド群について説明します。
         </para>
 
-        <table id="zend.date.others.fractions.table">
-            <title>日付の出力用メソッド</title>
+        <table xml:id="zend.date.others.fractions.table"><info><title>日付の出力用メソッド</title></info>
+            
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -899,18 +897,18 @@ print $date;
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.date.other.sun">
-        <title>日の出 / 日の入り</title>
+    <section xml:id="zend.date.other.sun"><info><title>日の出 / 日の入り</title></info>
+        
 
         <para>
             これらの三つのメソッドにより、各地域に特化した太陽の情報を取得できます。
             たとえば日の出や日の入りの時刻などが得られます。
         </para>
 
-        <table id="zend.date.other.sun.table">
-            <title>雑多なメソッド</title>
+        <table xml:id="zend.date.other.sun.table"><info><title>雑多なメソッド</title></info>
+            
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -946,8 +944,5 @@ print $date;
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

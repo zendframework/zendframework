@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20827 -->
-<sect3 id="zend.progressbar.adapter.console">
-    <title>Zend_ProgressBar_Adapter_Console</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.progressbar.adapter.console"><info><title>Zend_ProgressBar_Adapter_Console</title></info>
+    
     <para>
         <classname>Zend_ProgressBar_Adapter_Console</classname> は、
         ターミナル用に使用するテキストベースのアダプタです。
@@ -11,8 +11,8 @@
         プログレスバーとともに表示する要素や、その順序も変更できます。
         また、プログレスバーそのものの形式も設定できます。
     </para>
-    <note>
-        <title>自動的なコンソール幅の認識</title>
+    <note><info><title>自動的なコンソール幅の認識</title></info>
+        
         <para>
             この機能を *nix 系のシステムで使用するには
             <code>shell_exec</code> が必要です。Windows
@@ -107,7 +107,4 @@
             </para>
         </listitem>
     </itemizedlist>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

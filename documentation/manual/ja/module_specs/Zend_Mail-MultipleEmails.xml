@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20819 -->
-<sect1 id="zend.mail.multiple-emails">
-    <title>SMTP 接続による複数のメールの送信</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.multiple-emails"><info><title>SMTP 接続による複数のメールの送信</title></info>
+    
 
     <para>
         デフォルトでは、ひとつの SMTP トランスポートが
@@ -22,9 +20,9 @@
         <methodname>clearDefaultReplyTo</methodname> を使って消去されます。
     </para>
 
-    <example id="zend.mail.multiple-emails.example-1">
+    <example xml:id="zend.mail.multiple-emails.example-1"><info><title>SMTP 接続による複数のメールの送信</title></info>
 
-        <title>SMTP 接続による複数のメールの送信</title>
+        
 
         <programlisting language="php"><![CDATA[
 // トランスポートを作成します
@@ -61,9 +59,9 @@ Zend_Mail::clearDefaultReplyTo();
         各配送の接続を操作することもできます。
     </para>
 
-    <example id="zend.mail.multiple-emails.example-2">
+    <example xml:id="zend.mail.multiple-emails.example-2"><info><title>トランスポートの接続の手動制御</title></info>
 
-        <title>トランスポートの接続の手動制御</title>
+        
 
         <programlisting language="php"><![CDATA[
 // トランスポートを作成します
@@ -96,7 +94,4 @@ $protocol->disconnect();
 
     </example>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

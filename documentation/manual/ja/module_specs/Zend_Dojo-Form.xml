@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 17166 -->
-<sect1 id="zend.dojo.form" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Dojoフォーム要素とデコレーター</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.form"><info><title>Dojoフォーム要素とデコレーター</title></info>
+    
 
     <para>
         <link linkend="zend.dojo.view.dijit">dijit表示ヘルパーに基き</link>、
@@ -47,8 +45,8 @@
         </listitem>
     </itemizedlist>
 
-    <example id="zend.dojo.form.enable">
-        <title>既存のフォームでDojoを使用可能にする</title>
+    <example xml:id="zend.dojo.form.enable"><info><title>既存のフォームでDojoを使用可能にする</title></info>
+        
 
         <para>
             "ちょっと待って" とあなたは言います;
@@ -97,10 +95,7 @@ class My_Form_Custom extends Zend_Form
         まるで他全てのフォーム・デコレーターまたは要素の使い方のようです。
     </para>
 
-    <xi:include href="Zend_Dojo-Form-Decorators.xml" />
-    <xi:include href="Zend_Dojo-Form-Elements.xml" />
-    <xi:include href="Zend_Dojo-Form-Examples.xml" />
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Dojo-Form-Decorators.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Dojo-Form-Elements.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Dojo-Form-Examples.xml"/>
+</section>

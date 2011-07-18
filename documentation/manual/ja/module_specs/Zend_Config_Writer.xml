@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20765 -->
-<sect1 id="zend.config.writer.introduction">
-    <title>Zend_Config_Writer</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.writer.introduction"><info><title>Zend_Config_Writer</title></info>
+    
 
     <para>
         <classname>Zend_Config_Writer</classname> は、設定ファイルに
@@ -42,7 +40,7 @@
      <para>
         <acronym>INI</acronym> ライターでは、セクションについてのレンダリング用のモードが２つあります。
         既定では、トップレベルの構成節は、常にセクション名に含まれます。
-        <command>$writer->setRenderWithoutSections()</command> を呼ぶことにより、
+        <command>$writer-&gt;setRenderWithoutSections()</command> を呼ぶことにより、
         オプションの全てが <acronym>INI</acronym> ファイルのグローバル名前空間に含まれます。
         そして、セクションは使用されません。
     </para>
@@ -66,8 +64,8 @@
         <methodname>setExtend()</methodname> メソッドをコールします。
     </para>
 
-    <example id="zend.config.writer.example.using">
-        <title>Zend_Config_Writer の使用法</title>
+    <example xml:id="zend.config.writer.example.using"><info><title>Zend_Config_Writer の使用法</title></info>
+        
 
         <para>
             この例では、<classname>Zend_Config_Writer_Xml</classname>
@@ -112,8 +110,8 @@ $writer->write('config.xml', $config);
         </para>
     </example>
 
-    <example id="zend.config.writer.modifying">
-        <title>既存の設定の変更</title>
+    <example xml:id="zend.config.writer.modifying"><info><title>既存の設定の変更</title></info>
+        
 
         <para>
             この例では、既存の設定ファイルを編集する方法を説明します。
@@ -136,8 +134,8 @@ $writer->write();
 ]]></programlisting>
     </example>
 
-    <note>
-        <title>設定ファイルの読み込み</title>
+    <note><info><title>設定ファイルの読み込み</title></info>
+        
         <para>
             既存の設定ファイルを読み込んで変更をする場合は、
             すべてのセクションを読み込んで継承を読み飛ばすことが大切です。
@@ -155,7 +153,4 @@ $writer->write();
         このメソッドを外部からも使用できます。
     </para>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

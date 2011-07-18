@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21815 -->
-<sect1 id="zend.gdata.photos">
-    <title>Picasa Web Albums の使用法</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.photos"><info><title>Picasa Web Albums の使用法</title></info>
+    
 
     <para>
         Picasa Web Albums は、自分の写真のアルバムを管理したり
@@ -20,14 +18,13 @@
 
     <para>
         <acronym>API</acronym> についての詳細な情報、
-        たとえば <acronym>API</acronym> へのアクセスを有効にする方法などは <ulink
-        url="http://code.google.com/apis/picasaweb/overview.html">Picasa
-        Web Albums Data <acronym>API</acronym> の概要</ulink>
+        たとえば <acronym>API</acronym> へのアクセスを有効にする方法などは <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/picasaweb/overview.html">Picasa
+        Web Albums Data <acronym>API</acronym> の概要</link>
         を参照ください。
     </para>
 
-    <note>
-        <title>認証</title>
+    <note><info><title>認証</title></info>
+        
         <para>
             この <acronym>API</acronym> は、AuthSub (推奨)
             および ClientAuth による認証に対応しています。
@@ -36,8 +33,8 @@
         </para>
     </note>
 
-    <sect2 id="zend.gdata.photos.connecting">
-        <title>サービスへの接続</title>
+    <section xml:id="zend.gdata.photos.connecting"><info><title>サービスへの接続</title></info>
+        
         <para>
             Picasa Web Albums <acronym>API</acronym> は、その他の GData <acronym>API</acronym> と同様に
             Atom Publishing Protocol (APP) を使用しています。これは、<acronym>XML</acronym>
@@ -54,8 +51,8 @@
             サービスのインスタンスをそこにバインドするという手順で行います。
         </para>
 
-        <sect3 id="zend.gdata.photos.connecting.authentication">
-            <title>認証</title>
+        <section xml:id="zend.gdata.photos.connecting.authentication"><info><title>認証</title></info>
+            
             <para>
                 Google Picasa <acronym>API</acronym> を使用すると、公開カレンダーだけでなく
                 プライベートカレンダーのフィードにもアクセスできます。
@@ -97,14 +94,14 @@
                 詳細な情報は、このマニュアルの
                 <link linkend="zend.gdata.introduction.authentication">認証に関するセクション</link>
                 か、あるいは
-                <ulink url="http://code.google.com/apis/gdata/auth.html">Google Data <acronym>API</acronym> Developer's Guide
-                の Authentication Overview</ulink>
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/gdata/auth.html">Google Data <acronym>API</acronym> Developer's Guide
+                の Authentication Overview</link>
                 を参照ください。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.photos.connecting.service">
-            <title>サービスのインスタンスの作成</title>
+        <section xml:id="zend.gdata.photos.connecting.service"><info><title>サービスのインスタンスの作成</title></info>
+            
             <para>
                 サーバとのやりとりを行うためのクラスとして、このライブラリでは
                 <classname>Zend_Gdata_Photos</classname> サービスクラスを用意しています。
@@ -237,11 +234,11 @@ $service = new Zend_Gdata_Photos(getAuthSubHttpClient());
 // サービスのインスタンスを、未認証の HTTP クライアントで作成します
 $service = new Zend_Gdata_Photos();
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.gdata.photos.queries">
-        <title>クエリの仕組みと作成方法</title>
+    <section xml:id="zend.gdata.photos.queries"><info><title>クエリの仕組みと作成方法</title></info>
+        
         <para>
             サービスに対してデータを要求するために最初にやることは、
             クエリを作成することです。以下の形式用のクエリクラスが用意されています。
@@ -380,17 +377,17 @@ $query->setUser("sample.user");
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.photos.retrieval">
-        <title>フィードやエントリの取得</title>
+    <section xml:id="zend.gdata.photos.retrieval"><info><title>フィードやエントリの取得</title></info>
+        
         <para>
             このサービスには、ユーザやアルバムそして写真に関する
             フィードや個々のエントリを取得する機能があります。
         </para>
 
-        <sect3 id="zend.gdata.photos.user_retrieval">
-            <title>ユーザの取得</title>
+        <section xml:id="zend.gdata.photos.user_retrieval"><info><title>ユーザの取得</title></info>
+            
             <para>
                 このサービスは、ユーザのフィードおよびユーザのコンテンツ一覧の取得をサポートしています。
                 指定したユーザが認証済みユーザである場合は、
@@ -442,10 +439,10 @@ try {
     echo "エラー: " . $e->getMessage();
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.photos.album_retrieval">
-            <title>アルバムの取得</title>
+        <section xml:id="zend.gdata.photos.album_retrieval"><info><title>アルバムの取得</title></info>
+            
             <para>このサービスには、アルバムのフィードやアルバムのコンテンツ一覧を取得する機能があります。</para>
 
             <para>
@@ -491,10 +488,10 @@ try {
     echo "エラー: " . $e->getMessage();
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.photos.photo_retrieval">
-            <title>写真の取得</title>
+        <section xml:id="zend.gdata.photos.photo_retrieval"><info><title>写真の取得</title></info>
+            
             <para>このサービスには、写真のフィードやコメント・タグ一覧を取得する機能があります。</para>
 
             <para>
@@ -535,10 +532,10 @@ try {
     echo "エラー: " . $e->getMessage();
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.photos.comment_retrieval">
-            <title>コメントの取得</title>
+        <section xml:id="zend.gdata.photos.comment_retrieval"><info><title>コメントの取得</title></info>
+            
             <para>
                 このサービスには、さまざまな形式のフィードからのコメントの取得をサポートしています。
                 クエリが返す結果の種類として "comment" を指定することで、
@@ -569,10 +566,10 @@ try {
     echo "エラー: " . $e->getMessage();
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.photos.tag_retrieval">
-            <title>タグの取得</title>
+        <section xml:id="zend.gdata.photos.tag_retrieval"><info><title>タグの取得</title></info>
+            
             <para>
                 このサービスには、さまざまな形式のフィードからのタグの取得をサポートしています。
                 クエリが返す結果の種類として "tag" を指定することで、
@@ -603,16 +600,16 @@ try {
     echo "エラー: " . $e->getMessage();
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.photos.creation">
-        <title>エントリの作成</title>
+    <section xml:id="zend.gdata.photos.creation"><info><title>エントリの作成</title></info>
+        
         <para>このサービスには、アルバムや写真、コメント、そしてタグを作成する機能があります。</para>
 
-        <sect3 id="zend.gdata.photos.album_creation">
-            <title>アルバムの作成</title>
+        <section xml:id="zend.gdata.photos.album_creation"><info><title>アルバムの作成</title></info>
+            
             <para>このサービスは、認証済みユーザ用の新しいアルバムの作成をサポートしています。</para>
             <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
@@ -624,10 +621,10 @@ $entry->setTitle($service->newTitle("test album"));
 
 $service->insertAlbumEntry($entry);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.photos.photo_creation">
-            <title>写真の作成</title>
+        <section xml:id="zend.gdata.photos.photo_creation"><info><title>写真の作成</title></info>
+            
             <para>このサービスは、認証済みユーザ用の新しい写真の作成をサポートしています。</para>
             <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
@@ -651,10 +648,10 @@ $albumEntry = $service->getAlbumEntry($albumQuery);
 
 $service->insertPhotoEntry($entry, $albumEntry);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.photos.comment_creation">
-            <title>コメントの作成</title>
+        <section xml:id="zend.gdata.photos.comment_creation"><info><title>コメントの作成</title></info>
+            
             <para>このサービスは、写真への新しいコメントの作成をサポートしています。</para>
             <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
@@ -675,10 +672,10 @@ $photoEntry = $service->getPhotoEntry($photoQuery);
 
 $service->insertCommentEntry($entry, $photoEntry);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.photos.tag_creation">
-            <title>タグの作成</title>
+        <section xml:id="zend.gdata.photos.tag_creation"><info><title>タグの作成</title></info>
+            
             <para>このサービスは、写真への新しいタグの作成をサポートしています。</para>
             <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
@@ -698,16 +695,16 @@ $photoEntry = $service->getPhotoEntry($photoQuery);
 
 $service->insertTagEntry($entry, $photoEntry);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.photos.deletion">
-        <title>エントリの削除</title>
+    <section xml:id="zend.gdata.photos.deletion"><info><title>エントリの削除</title></info>
+        
         <para>このサービスには、アルバムや写真、コメント、そしてタグを削除する機能があります。</para>
 
-        <sect3 id="zend.gdata.photos.album_deletion">
-            <title>アルバムの削除</title>
+        <section xml:id="zend.gdata.photos.album_deletion"><info><title>アルバムの削除</title></info>
+            
             <para>このサービスは、認証済みユーザ用のアルバムの削除をサポートしています。</para>
             <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
@@ -723,10 +720,10 @@ $entry = $service->getAlbumEntry($albumQuery);
 
 $service->deleteAlbumEntry($entry, true);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.photos.photo_deletion">
-            <title>写真の削除</title>
+        <section xml:id="zend.gdata.photos.photo_deletion"><info><title>写真の削除</title></info>
+            
             <para>このサービスは、認証済みユーザ用の写真の削除をサポートしています。</para>
             <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
@@ -743,10 +740,10 @@ $entry = $service->getPhotoEntry($photoQuery);
 
 $service->deletePhotoEntry($entry, true);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.photos.comment_deletion">
-            <title>コメントの削除</title>
+        <section xml:id="zend.gdata.photos.comment_deletion"><info><title>コメントの削除</title></info>
+            
             <para>このサービスは、認証済みユーザのコメントの削除をサポートしています。</para>
             <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
@@ -765,10 +762,10 @@ $entry = $service->getCommentEntry($path);
 
 $service->deleteCommentEntry($entry, true);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.photos.tag_deletion">
-            <title>タグの削除</title>
+        <section xml:id="zend.gdata.photos.tag_deletion"><info><title>タグの削除</title></info>
+            
             <para>このサービスは、認証済みユーザのタグの削除をサポートしています。</para>
             <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
@@ -794,10 +791,10 @@ foreach ($photoFeed as $entry) {
 
 $service->deleteTagEntry($tagEntry, true);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.photos.optimistic_concurrenty">
-            <title>楽観的な同時並行性 (削除時の注意)</title>
+        <section xml:id="zend.gdata.photos.optimistic_concurrenty"><info><title>楽観的な同時並行性 (削除時の注意)</title></info>
+            
             <para>
                 Picasa Web Albums サービスを含めた GData のフィードは、
                 楽観的な同時並行性 (optimistic concurrency) を実装しています。
@@ -826,7 +823,7 @@ try {
     }
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-    </sect2>
-</sect1>
+    </section>
+</section>

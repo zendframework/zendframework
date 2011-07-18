@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20876 -->
-<sect1 id="migration.introduction">
-    <title>導入</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.introduction"><info><title>導入</title></info>
+    
 
     <para>
         長いこと Zend Framework で作業していると、
@@ -27,7 +27,4 @@
         以降では、更新するときに、行なわなければいけない変更についての見本と、
         コードに影響する既知の全ての変更についての情報を見つけるでしょう。
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

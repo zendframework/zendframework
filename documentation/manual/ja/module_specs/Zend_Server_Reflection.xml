@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21119-->
-<sect1 id="zend.server.reflection">
-    <title>Zend_Server_Reflection</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.server.reflection"><info><title>Zend_Server_Reflection</title></info>
+    
 
-    <sect2 id="zend.server.reflection.introduction">
-        <title>導入</title>
+    <section xml:id="zend.server.reflection.introduction"><info><title>導入</title></info>
+        
 
         <para>
             <classname>Zend_Server_Reflection</classname> は、サーバクラス群で
@@ -18,9 +16,9 @@
         <para>
             この機能は、フレームワーク用のサーバクラス群の開発者のみが使用します。
         </para>
-    </sect2>
-    <sect2 id="zend.server.reflection.usage">
-        <title>使用法</title>
+    </section>
+    <section xml:id="zend.server.reflection.usage"><info><title>使用法</title></info>
+        
 
         <para>
             基本的な使用法は簡単です。
@@ -63,8 +61,5 @@ $reflection->getNamespace();
             これらのオブジェクトで使用できるメソッドについては
             <acronym>API</acronym> ドキュメントを参照ください。
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

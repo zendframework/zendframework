@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21684 -->
-<sect1 id="zend.controller.exceptions">
-    <title>MVC での例外</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.exceptions"><info><title>MVC での例外</title></info>
+    
 
-    <sect2 id="zend.controller.exceptions.introduction">
-        <title>導入</title>
+    <section xml:id="zend.controller.exceptions.introduction"><info><title>導入</title></info>
+        
 
         <para>
             Zend Framework の <acronym>MVC</acronym> コンポーネントは、
@@ -26,10 +24,10 @@
             また、レスポンスオブジェクトは、
             デフォルトではそれらの例外メッセージを表示しません。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.exceptions.handling">
-        <title>例外の処理</title>
+    <section xml:id="zend.controller.exceptions.handling"><info><title>例外の処理</title></info>
+        
 
         <para>
             <acronym>MVC</acronym> コンポーネント内で例外を処理するための仕組みが組み込まれています。
@@ -137,10 +135,10 @@ if ($response->isException()) {
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.exceptions.internal">
-        <title>MVC で遭遇するであろう例外</title>
+    <section xml:id="zend.controller.exceptions.internal"><info><title>MVC で遭遇するであろう例外</title></info>
+        
 
         <para>
             各 <acronym>MVC</acronym> コンポーネント群 -- リクエスト、ルータ、ディスパッチャ、
@@ -356,8 +354,5 @@ class My_Controller_PreDispatchPlugin extends Zend_Controller_Plugin_Abstract
                 </itemizedlist>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

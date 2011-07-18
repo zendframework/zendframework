@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20854 -->
-<sect1 id="zend.paginator.usage">
-    <title>使用法</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.paginator.usage"><info><title>使用法</title></info>
+    
 
-    <sect2 id="zend.paginator.usage.paginating">
-        <title>データコレクションのページ処理</title>
+    <section xml:id="zend.paginator.usage.paginating"><info><title>データコレクションのページ処理</title></info>
+        
 
         <para>
             ページ処理を行うには、<classname>Zend_Paginator</classname>
@@ -14,8 +12,8 @@
             Zend Framework には、いくつかのアダプタが標準で同梱されています。
         </para>
 
-        <table id="zend.paginator.usage.paginating.adapters">
-            <title>Zend_Paginator 用のアダプタ</title>
+        <table xml:id="zend.paginator.usage.paginating.adapters"><info><title>Zend_Paginator 用のアダプタ</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -50,7 +48,7 @@
                     <row>
                         <entry>Iterator</entry>
                         <entry>
-                            <ulink url="http://www.php.net/~helly/php/ext/spl/interfaceIterator.html"><classname>Iterator</classname></ulink>
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/~helly/php/ext/spl/interfaceIterator.html"><classname>Iterator</classname></link>
                             のインスタンスを使用します。
                         </entry>
                     </row>
@@ -159,10 +157,10 @@ $paginator->setCurrentPageNumber($this->_getParam('page'));
         <programlisting language="php"><![CDATA[
 $this->view->paginator = $paginator;
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.paginator.usage.dbselect">
-        <title>DbSelect および DbTableSelect アダプタ</title>
+    <section xml:id="zend.paginator.usage.dbselect"><info><title>DbSelect および DbTableSelect アダプタ</title></info>
+        
         <para>
             大半のアダプタの使用法は非常にわかりやすいものです。
             しかし、データベースアダプタについては、
@@ -219,10 +217,10 @@ $paginator = new Zend_Paginator($adapter);
             しかし、複雑なクエリや大規模なデータを扱う場合は
             かなりパフォーマンスが向上することでしょう。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.paginator.rendering">
-        <title>ビュースクリプトによるページのレンダリング</title>
+    <section xml:id="zend.paginator.rendering"><info><title>ビュースクリプトによるページのレンダリング</title></info>
+        
 
         <para>
             ビュースクリプトを使用してページ項目のレンダリング
@@ -232,7 +230,7 @@ $paginator = new Zend_Paginator($adapter);
 
         <para>
             <classname>Zend_Paginator</classname> は <acronym>SPL</acronym> の
-            <ulink url="http://www.php.net/~helly/php/ext/spl/interfaceIteratorAggregate.html"><classname>IteratorAggregate</classname></ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/~helly/php/ext/spl/interfaceIteratorAggregate.html"><classname>IteratorAggregate</classname></link>
             インターフェイスを実装しているので、
             項目を順次処理したり表示したりするのは簡単です。
         </para>
@@ -273,9 +271,7 @@ $paginator = new Zend_Paginator($adapter);
         </para>
 
         <para>
-            <inlinegraphic align="center" valign="middle"
-                fileref="figures/zend.paginator.usage.rendering.control.png"
-                format="PNG"/>
+            <inlinemediaobject><imageobject><imagedata align="center" valign="middle" fileref="figures/zend.paginator.usage.rendering.control.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
         <para>
@@ -293,8 +289,8 @@ $paginator = new Zend_Paginator($adapter);
             4 種類のスクロール形式が Zend Framework に組み込まれています。
         </para>
 
-        <table id="zend.paginator.usage.rendering.scrolling-styles">
-            <title>Zend_Paginator のスクロール形式</title>
+        <table xml:id="zend.paginator.usage.rendering.scrolling-styles"><info><title>Zend_Paginator のスクロール形式</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -394,8 +390,8 @@ $smarty->assign('pages', $paginator->getPages());
 ]]></programlisting>
         </note>
 
-        <sect3 id="zend.paginator.usage.rendering.example-controls">
-            <title>ページ処理コントロールの例</title>
+        <section xml:id="zend.paginator.usage.rendering.example-controls"><info><title>ページ処理コントロールの例</title></info>
+            
 
             <para>
                 次のページ処理コントロールの例が、
@@ -416,10 +412,10 @@ See http://developer.yahoo.com/ypatterns/pattern.php?pattern=searchpagination
 <!-- 前のページへのリンク -->
 <?php if (isset($this->previous)): ?>
   <a href="<?php echo $this->url(array('page' => $this->previous)); ?>">
-    &lt; Previous
+    < Previous
   </a> |
 <?php else: ?>
-  <span class="disabled">&lt; Previous</span> |
+  <span class="disabled">< Previous</span> |
 <?php endif; ?>
 
 <!-- ページ番号へのリンク -->
@@ -436,10 +432,10 @@ See http://developer.yahoo.com/ypatterns/pattern.php?pattern=searchpagination
 <!-- 次のページへのリンク -->
 <?php if (isset($this->next)): ?>
   <a href="<?php echo $this->url(array('page' => $this->next)); ?>">
-    Next &gt;
+    Next >
   </a>
 <?php else: ?>
-  <span class="disabled">Next &gt;</span>
+  <span class="disabled">Next ></span>
 <?php endif; ?>
 </div>
 <?php endif; ?>
@@ -471,19 +467,19 @@ of <?php echo $this->totalItemCount; ?>
 <!-- 前のページへのリンク -->
 <?php if (isset($this->previous)): ?>
   <a href="<?php echo $this->url(array('page' => $this->previous)); ?>">
-    &lt; Previous
+    < Previous
   </a> |
 <?php else: ?>
-  <span class="disabled">&lt; Previous</span> |
+  <span class="disabled">< Previous</span> |
 <?php endif; ?>
 
 <!-- 次のページへのリンク -->
 <?php if (isset($this->next)): ?>
   <a href="<?php echo $this->url(array('page' => $this->next)); ?>">
-    Next &gt;
+    Next >
   </a> |
 <?php else: ?>
-  <span class="disabled">Next &gt;</span> |
+  <span class="disabled">Next ></span> |
 <?php endif; ?>
 
 <!-- 最後のページへのリンク -->
@@ -525,18 +521,18 @@ $('paginationControl').observe('change', function() {
 })
 </script>
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.paginator.usage.rendering.properties">
-            <title>プロパティの一覧</title>
+        <section xml:id="zend.paginator.usage.rendering.properties"><info><title>プロパティの一覧</title></info>
+            
 
             <para>
                 次のオプションが、ページ処理コントロールのビュー
                 partial で使用可能です。
             </para>
 
-            <table id="zend.paginator.usage.rendering.properties.table">
-                <title>ビュー partial のプロパティ</title>
+            <table xml:id="zend.paginator.usage.rendering.properties.table"><info><title>ビュー partial のプロパティ</title></info>
+                
 
                 <tgroup cols="3">
                     <thead>
@@ -630,9 +626,6 @@ $('paginationControl').observe('change', function() {
                     </tbody>
                 </tgroup>
             </table>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20765 -->
-<sect1 id="zend.controller.action">
-    <title>アクションコントローラ</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.action"><info><title>アクションコントローラ</title></info>
+    
 
-    <sect2 id="zend.controller.action.introduction">
-        <title>導入</title>
+    <section xml:id="zend.controller.action.introduction"><info><title>導入</title></info>
+        
 
         <para>
             <classname>Zend_Controller_Action</classname> は、
@@ -61,8 +59,8 @@ class FooController extends Zend_Controller_Action
             この章では、アクションコントローラの機能の概要を説明します。
         </para>
 
-        <note>
-            <title>デフォルトの挙動</title>
+        <note><info><title>デフォルトの挙動</title></info>
+            
 
             <para>
                 デフォルトでは、<link linkend="zend.controller.front">フロントコントローラ
@@ -130,10 +128,10 @@ class FooController extends Zend_Controller_Action
                 無効にするとすれば、個々のコントローラやアクション単位で行うことになります。
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.action.initialization">
-        <title>オブジェクトの初期化</title>
+    <section xml:id="zend.controller.action.initialization"><info><title>オブジェクトの初期化</title></info>
+        
 
         <para>
             アクションコントローラのコンストラクタをオーバーライドすることもできますが、
@@ -167,10 +165,10 @@ class FooController extends Zend_Controller_Action
     }
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.action.prepostdispatch">
-        <title>ディスパッチ前後のフック</title>
+    <section xml:id="zend.controller.action.prepostdispatch"><info><title>ディスパッチ前後のフック</title></info>
+        
 
         <para>
             <classname>Zend_Controller_Action</classname> には、
@@ -185,8 +183,8 @@ class FooController extends Zend_Controller_Action
             全サイト共通のテンプレートに配置したりといったことが考えられます。
         </para>
         
-        <note>
-            <title>init() 対 preDispatch() の使用法</title>
+        <note><info><title>init() 対 preDispatch() の使用法</title></info>
+            
 
             <para>
                 <link linkend="zend.controller.action.initialization">前述のセクション</link>では、
@@ -220,10 +218,10 @@ class FooController extends Zend_Controller_Action
                 それは、２つのメソッドの意図が形になったものです。
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.action.accessors">
-        <title>アクセス用メソッド</title>
+    <section xml:id="zend.controller.action.accessors"><info><title>アクセス用メソッド</title></info>
+        
 
         <para>
             さまざまなオブジェクトや変数がオブジェクトに登録されており、
@@ -305,13 +303,13 @@ if ($this->_hasParam('id') {
                 </note>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.action.viewintegration">
-        <title>ビューの統合</title>
+    <section xml:id="zend.controller.action.viewintegration"><info><title>ビューの統合</title></info>
+        
 
-        <note id="zend.controller.action.viewintegration.viewrenderer">
-            <title>Default view integration is via the ViewRenderer</title>
+        <note xml:id="zend.controller.action.viewintegration.viewrenderer"><info><title>Default view integration is via the ViewRenderer</title></info>
+            
 
             <para>
                 この節の内容は、
@@ -331,8 +329,8 @@ if ($this->_hasParam('id') {
             その際に、ディレクトリ階層をもとにスクリプトのパスを決定します。
         </para>
 
-        <sect3 id="zend.controller.action.viewintegration.initview">
-            <title>ビューの初期化</title>
+        <section xml:id="zend.controller.action.viewintegration.initview"><info><title>ビューの初期化</title></info>
+            
 
             <para>
                 <methodname>initView()</methodname> はビューオブジェクトを初期化します。
@@ -370,10 +368,10 @@ applicationOrModule/
                 <filename>/views/scripts/</filename> が用いられます。
                 その中に、ビュースクリプトを実行するコントローラ名に基づいた名前のディレクトリが作成されます。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.action.viewintegration.render">
-            <title>ビューのレンダリング</title>
+        <section xml:id="zend.controller.action.viewintegration.render"><info><title>ビューのレンダリング</title></info>
+            
 
             <para>
                 <methodname>render()</methodname> のシグネチャは次のとおりです。
@@ -450,11 +448,11 @@ class MyController extends Zend_Controller_Action
     }
 }
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.controller.action.utilmethods">
-        <title>ユーティリティメソッド</title>
+    <section xml:id="zend.controller.action.utilmethods"><info><title>ユーティリティメソッド</title></info>
+        
 
         <para>
             アクセス用メソッドやビューの統合用メソッド以外にも、<classname>Zend_Controller_Action</classname>
@@ -531,10 +529,10 @@ class MyController extends Zend_Controller_Action
                 </itemizedlist>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.action.subclassing">
-        <title>アクションコントローラのサブクラスの作成</title>
+    <section xml:id="zend.controller.action.subclassing"><info><title>アクションコントローラのサブクラスの作成</title></info>
+        
 
         <para>
             アクションコントローラを作成するには、必ず
@@ -550,8 +548,8 @@ class MyController extends Zend_Controller_Action
             共通処理をそこにまとめていくようにしましょう。
         </para>
 
-        <example id="zend.controller.action.subclassing.example-call">
-            <title>存在しないアクションの処理</title>
+        <example xml:id="zend.controller.action.subclassing.example-call"><info><title>存在しないアクションの処理</title></info>
+            
 
             <para>
                 コントローラへのリクエストの際に未定義のアクションメソッドが指定された場合は、
@@ -658,8 +656,5 @@ abstract class My_Base_Controller extends Zend_Controller_Action
             この章の情報をもとに、それぞれの機能の柔軟性をもとにして
             アプリケーションやサイトの要求に応じたコントローラを作成していくとよいでしょう。
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

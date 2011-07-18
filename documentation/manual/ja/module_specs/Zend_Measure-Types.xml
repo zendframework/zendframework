@@ -1,17 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21815 -->
-<sect1 id="zend.measure.types">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.types"><info><title>計測値の型</title></info>
 
-    <title>計測値の型</title>
+    
 
     <para>
         サポートするすべての計測値の型の一覧を以下にまとめます。
         それぞれについて、標準的な使用例も示します。
     </para>
 
-    <table id="zend.measure.types.table-1">
-        <title>計測値の型の一覧</title>
+    <table xml:id="zend.measure.types.table-1"><info><title>計測値の型の一覧</title></info>
+        
         <tgroup cols="4">
             <thead>
                 <row>
@@ -259,9 +257,9 @@
         </tgroup>
     </table>
 
-    <sect2 id="zend.measure.types.binary">
+    <section xml:id="zend.measure.types.binary"><info><title>Zend_Measure_Binary のヒント</title></info>
 
-        <title>Zend_Measure_Binary のヒント</title>
+        
 
         <para>
             よく使われるバイナリの規約では、キロ、メガ、ギガ
@@ -282,11 +280,11 @@
             ほとんどすべてのハードディスクではバイナリ記法が使用されています。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.measure.types.decimal">
+    <section xml:id="zend.measure.types.decimal"><info><title>Zend_Measure_Number のヒント</title></info>
 
-        <title>Zend_Measure_Number のヒント</title>
+        
 
         <para>
             いちばんよく知られている形式は、十進法です。
@@ -295,11 +293,11 @@
             整数部分のみが処理の対象となることに注意しましょう。小数部分は捨てられます。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.measure.types.roman">
+    <section xml:id="zend.measure.types.roman"><info><title>ローマ数字</title></info>
 
-        <title>ローマ数字</title>
+        
 
         <para>
             ローマ数字では 4000 以上の数字もサポートしています。
@@ -317,9 +315,6 @@ $unit = new Zend_Measure_Number($great,Zend_Measure_Number::ROMAN, $locale);
 echo $unit->convertTo(Zend_Measure_Number::DECIMAL);
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

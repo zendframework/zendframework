@@ -1,14 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20765 -->
-<sect1 id="zend.codegenerator.reference">
-    <title>Zend_CodeGenerator リファレンス</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.codegenerator.reference"><info><title>Zend_CodeGenerator リファレンス</title></info>
+    
 
-    <sect2 id="zend.codegenerator.reference.abstracts">
-        <title>抽象クラスとインターフェース</title>
+    <section xml:id="zend.codegenerator.reference.abstracts"><info><title>抽象クラスとインターフェース</title></info>
+        
 
-        <sect3 id="zend.codegenerator.reference.abstracts.abstract">
-            <title>Zend_CodeGenerator_Abstract</title>
+        <section xml:id="zend.codegenerator.reference.abstracts.abstract"><info><title>Zend_CodeGenerator_Abstract</title></info>
+            
 
             <para>
                 すべての CodeGenerator クラスが継承する基底のクラスは、
@@ -55,10 +53,10 @@ abstract class Zend_CodeGenerator_Abstract
                 デフォルト・コンテンツを生成されたコードに設定するか、
                 一旦すべての生成作業が完了した前述のコンテンツと入れ替えることを目的とします。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.abstracts.php-abstract">
-            <title>Zend_CodeGenerator_Php_Abstract</title>
+        <section xml:id="zend.codegenerator.reference.abstracts.php-abstract"><info><title>Zend_CodeGenerator_Php_Abstract</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Abstract</classname> は
@@ -78,10 +76,10 @@ abstract class Zend_CodeGenerator_Php_Abstract
     public function getIndentation()
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.abstracts.php-member-abstract">
-            <title>Zend_CodeGenerator_Php_Member_Abstract</title>
+        <section xml:id="zend.codegenerator.reference.abstracts.php-member-abstract"><info><title>Zend_CodeGenerator_Php_Member_Abstract</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Member_Abstract</classname> は
@@ -105,14 +103,14 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract
     public function getName()
 }
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.codegenerator.reference.concrete">
-        <title>CodeGenerator クラスを確立</title>
+    <section xml:id="zend.codegenerator.reference.concrete"><info><title>CodeGenerator クラスを確立</title></info>
+        
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-body">
-            <title>Zend_CodeGenerator_Php_Body</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-body"><info><title>Zend_CodeGenerator_Php_Body</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Body</classname> は、
@@ -134,10 +132,10 @@ class Zend_CodeGenerator_Php_Body extends Zend_CodeGenerator_Php_Abstract
     public function generate()
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-class">
-            <title>Zend_CodeGenerator_Php_Class</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-class"><info><title>Zend_CodeGenerator_Php_Class</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Class</classname> は、
@@ -199,10 +197,10 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
                 <methodname>setDocBlock()</methodname> が <classname>Zend_CodeGenerator_Php_DocBlock</classname> の
                 インスタンスを期待することも注意してください。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-docblock">
-            <title>Zend_CodeGenerator_Php_Docblock</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-docblock"><info><title>Zend_CodeGenerator_Php_Docblock</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Docblock</classname> は、
@@ -237,10 +235,10 @@ class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
     public function generate()
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-docblock-tag">
-            <title>Zend_CodeGenerator_Php_Docblock_Tag</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-docblock-tag"><info><title>Zend_CodeGenerator_Php_Docblock_Tag</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Docblock_Tag</classname> は、
@@ -266,10 +264,10 @@ class Zend_CodeGenerator_Php_Docblock_Tag
     public function generate()
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-docblock-tag-param">
-            <title>Zend_CodeGenerator_Php_DocBlock_Tag_Param</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-docblock-tag-param"><info><title>Zend_CodeGenerator_Php_DocBlock_Tag_Param</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_DocBlock_Tag_Param</classname> は
@@ -298,10 +296,10 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
     public function generate()
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-docblock-tag-return">
-            <title>Zend_CodeGenerator_Php_DocBlock_Tag_Return</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-docblock-tag-return"><info><title>Zend_CodeGenerator_Php_DocBlock_Tag_Return</title></info>
+            
 
             <para>
                 param docblock <!-- TODO -->tag variant のように、
@@ -326,10 +324,10 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
     public function generate()
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-file">
-            <title>Zend_CodeGenerator_Php_File</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-file"><info><title>Zend_CodeGenerator_Php_File</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_File</classname> は、
@@ -374,10 +372,10 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
     public function generate()
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-member-container">
-            <title>Zend_CodeGenerator_Php_Member_Container</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-member-container"><info><title>Zend_CodeGenerator_Php_Member_Container</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Member_Container</classname> は、
@@ -395,10 +393,10 @@ class Zend_CodeGenerator_Php_Member_Container extends ArrayObject
     public function __construct($type = self::TYPE_PROPERTY)
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-method">
-            <title>Zend_CodeGenerator_Php_Method</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-method"><info><title>Zend_CodeGenerator_Php_Method</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Method</classname> は、
@@ -437,10 +435,10 @@ class Zend_CodeGenerator_Php_Method
     public function generate()
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-parameter">
-            <title>Zend_CodeGenerator_Php_Parameter</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-parameter"><info><title>Zend_CodeGenerator_Php_Parameter</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Parameter</classname> は、
@@ -497,10 +495,10 @@ $parameter->setDefaultValue(
                 <acronym>PHP</acronym> で表現できない値をバリューホルダーに変換します。
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-property">
-            <title>Zend_CodeGenerator_Php_Property</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-property"><info><title>Zend_CodeGenerator_Php_Property</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Property</classname> はクラスのプロパティを記述します。
@@ -528,6 +526,6 @@ class Zend_CodeGenerator_Php_Property
     public function generate()
 }
 ]]></programlisting>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

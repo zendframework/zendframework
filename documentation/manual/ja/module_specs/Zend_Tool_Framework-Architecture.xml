@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20807 -->
-<sect1 id="zend.tool.framework.architecture">
-    <title>アーキテクチャ</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.architecture"><info><title>アーキテクチャ</title></info>
+    
 
-    <sect2 id="zend.tool.framework.architecture.registry">
-        <title>レジストリ</title>
+    <section xml:id="zend.tool.framework.architecture.registry"><info><title>レジストリ</title></info>
+        
 
         <para>
             <property>include_path</property>のどこからでもプロバイダとマニフェストが由来するかもしれないので、
@@ -63,10 +61,10 @@ interface Zend_Tool_Framework_Registry_EnabledInterface
     );
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.tool.framework.architecture.providers">
-        <title>プロバイダ</title>
+    <section xml:id="zend.tool.framework.architecture.providers"><info><title>プロバイダ</title></info>
+        
 
         <para>
             <classname>Zend_Tool_Framework_Provider</classname>は、
@@ -107,10 +105,10 @@ abstract class Zend_Tool_Framework_Provider_Abstract
 }
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.tool.framework.architecture.loaders">
-        <title>ローダ</title>
+    <section xml:id="zend.tool.framework.architecture.loaders"><info><title>ローダ</title></info>
+        
 
         <para>
             ローダの目的は、<classname>Zend_Tool_Framework_Provider_Interface</classname>か
@@ -174,10 +172,10 @@ class Zend_Tool_Framework_Loader_IncludePathLoader
             <varname>$_filterDenyDirectoryPattern</varname>にマッチしないファイルを求めて、
             すべてのinclude_pathsを検索します。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.tool.framework.architecture.manifests">
-        <title>マニフェスト</title>
+    <section xml:id="zend.tool.framework.architecture.manifests"><info><title>マニフェスト</title></info>
+        
 
         <para>
             要するに、マニフェストはプロバイダ・リポジトリにどんなさらなるプロバイダでもロードする役割を果たしうるばかりではなく、
@@ -337,10 +335,10 @@ class Zend_Tool_Framework_Manifest_Repository
             によってアクセスできるならば、
             それは「見つかった」オブジェクト・メタデータとしてユーザーへ渡されます。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.tool.framework.architecture.clients">
-        <title>クライアント</title>
+    <section xml:id="zend.tool.framework.architecture.clients"><info><title>クライアント</title></info>
+        
 
         <para>
             クライアントは、<classname>Zend_Tool_Framework</classname>システムと
@@ -389,10 +387,9 @@ abstract class Zend_Tool_Framework_Client_Abstract
             （他の２つは提案されます）
             初期化、前処理と後処理
             コマンド・ライン・クライアントが動く方法についてより深く研究するには、
-            <ulink
-                url="http://framework.zend.com/svn/framework/standard/branches/release-1.8/library/Zend/Tool/Framework/Client/Console.php">ソースコード</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/svn/framework/standard/branches/release-1.8/library/Zend/Tool/Framework/Client/Console.php">ソースコード</link>
             を見てください。
         </para>
 
-    </sect2>
-</sect1>
+    </section>
+</section>

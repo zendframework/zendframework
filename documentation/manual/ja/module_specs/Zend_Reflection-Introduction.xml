@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20818 -->
-<sect1 id="zend.reflection.introduction">
-    <title>導入</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.reflection.introduction"><info><title>導入</title></info>
+    
 
     <para>
         <classname>Zend_Reflection</classname>はPHP自身の
-        <ulink url="http://php.net/reflection">Reflection <acronym>API</acronym></ulink>に対応する
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/reflection">Reflection <acronym>API</acronym></link>に対応する
         <!-- TODO -->drop-in 拡張です。
         いくつかの追加の機能を提供します。
     </para>
@@ -45,4 +45,4 @@
         一般的に、<classname>Zend_Reflection</classname>ではちょうど標準的なReflection <acronym>API</acronym>のように働きますが、
         Reflection <acronym>API</acronym>で定義されていない人工物を参照する追加のメソッドを提供します。
     </para>
-</sect1>
+</section>

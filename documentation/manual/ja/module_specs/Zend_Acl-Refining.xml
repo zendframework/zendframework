@@ -1,13 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20763 -->
-<sect1 id="zend.acl.refining">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.refining"><info><title>アクセス制御の洗練</title></info>
 
-    <title>アクセス制御の洗練</title>
+    
 
-    <sect2 id="zend.acl.refining.precise">
+    <section xml:id="zend.acl.refining.precise"><info><title>的確なアクセス制御</title></info>
 
-        <title>的確なアクセス制御</title>
+        
 
         <para>
         <link linkend="zend.acl.introduction">先ほどの節</link>で定義した基本的な <acronym>ACL</acronym>
@@ -119,11 +117,11 @@ echo $acl->isAllowed('administrator', 'announcement', 'archive') ?
 // denied となります
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.refining.removing">
+    <section xml:id="zend.acl.refining.removing"><info><title>アクセス制御の削除</title></info>
 
-        <title>アクセス制御の削除</title>
+        
 
         <para>
         <acronym>ACL</acronym> からひとつあるいは複数のアクセス規則を削除するには、
@@ -178,9 +176,6 @@ echo $acl->isAllowed('marketing', 'latest', 'anything') ?
 // allowed となります
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

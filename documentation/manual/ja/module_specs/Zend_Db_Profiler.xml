@@ -1,13 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20766 -->
-<sect1 id="zend.db.profiler" xmlns:xi="http://www.w3.org/2001/XInclude">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.profiler"><info><title>Zend_Db_Profiler</title></info>
 
-    <title>Zend_Db_Profiler</title>
+    
 
-    <sect2 id="zend.db.profiler.introduction">
+    <section xml:id="zend.db.profiler.introduction"><info><title>導入</title></info>
 
-        <title>導入</title>
+        
 
         <para>
             <classname>Zend_Db_Profiler</classname> を使用すると、クエリの情報を取得できます。
@@ -132,11 +130,11 @@ $params['profiler'] = $config;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.profiler.using">
+    <section xml:id="zend.db.profiler.using"><info><title>プロファイラの使用</title></info>
 
-        <title>プロファイラの使用</title>
+        
 
         <para>
             好きなところでアダプタの
@@ -269,11 +267,11 @@ echo '所要時間の最大値: ' . $longestTime . "\n";
 echo "一番時間のかかっているクエリ: \n" . $longestQuery . "\n";
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.profiler.advanced">
+    <section xml:id="zend.db.profiler.advanced"><info><title>プロファイラの高度な使用法</title></info>
 
-        <title>プロファイラの高度な使用法</title>
+        
 
         <para>
             単にクエリを調べるだけでなく、どのクエリを調べるのかという
@@ -281,8 +279,8 @@ echo "一番時間のかかっているクエリ: \n" . $longestQuery . "\n";
             <classname>Zend_Db_Profiler</classname> インスタンスのメソッドです。
         </para>
 
-        <sect3 id="zend.db.profiler.advanced.filtertime">
-            <title>クエリの実行所要時間による絞り込み</title>
+        <section xml:id="zend.db.profiler.advanced.filtertime"><info><title>クエリの実行所要時間による絞り込み</title></info>
+            
 
             <para>
                 <methodname>setFilterElapsedSecs()</methodname> は、クエリの情報を取得する条件として
@@ -297,10 +295,10 @@ $profiler->setFilterElapsedSecs(5);
 // 所要時間にかかわらず、すべてのクエリを調べます
 $profiler->setFilterElapsedSecs(null);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.profiler.advanced.filtertype">
-            <title>クエリの形式による絞り込み</title>
+        <section xml:id="zend.db.profiler.advanced.filtertype"><info><title>クエリの形式による絞り込み</title></info>
+            
 
             <para>
                 <methodname>setFilterQueryType()</methodname> は、クエリの情報を取得する条件として
@@ -384,10 +382,10 @@ $profiler->setFilterQueryType(Zend_Db_Profiler::DELETE);
 $profiler->setFilterQueryType(null);
 ]]></programlisting>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.profiler.advanced.getbytype">
-            <title>クエリの型を指定することによる情報の取得</title>
+        <section xml:id="zend.db.profiler.advanced.getbytype"><info><title>クエリの型を指定することによる情報の取得</title></info>
+            
 
             <para>
                 <methodname>setFilterQueryType()</methodname> を使用すると、
@@ -397,8 +395,7 @@ $profiler->setFilterQueryType(null);
                 <methodname>getQueryProfiles()</methodname> のもうひとつの機能として、
                 最初の引数にクエリの型 (あるいは複数の型の論理和)
                 を指定することによるその場での絞り込みが可能です。
-                クエリの型を表す定数については <link
-                    linkend="zend.db.profiler.advanced.filtertype">この節</link>
+                クエリの型を表す定数については <link linkend="zend.db.profiler.advanced.filtertype">この節</link>
                 を参照ください。
             </para>
 
@@ -415,12 +412,12 @@ $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::SELECT |
 $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::DELETE);
 ]]></programlisting>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.profiler.profilers">
-        <title>特化型のプロファイラ</title>
+    <section xml:id="zend.db.profiler.profilers"><info><title>特化型のプロファイラ</title></info>
+        
 
         <para>
             特化型のプロファイラは <classname>Zend_Db_Profiler</classname>
@@ -428,10 +425,7 @@ $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::DELETE);
             プロファイリング情報を特別な方法で処理します。
         </para>
 
-        <xi:include href="Zend_Db_Profiler-Firebug.xml" />
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Db_Profiler-Firebug.xml"/>
 
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

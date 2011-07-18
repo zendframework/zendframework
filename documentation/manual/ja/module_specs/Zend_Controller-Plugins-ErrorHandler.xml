@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20765 -->
-<sect3 id="zend.controller.plugins.standard.errorhandler">
-    <title>Zend_Controller_Plugin_ErrorHandler</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.plugins.standard.errorhandler"><info><title>Zend_Controller_Plugin_ErrorHandler</title></info>
+    
 
     <para>
         <classname>Zend_Controller_Plugin_ErrorHandler</classname>
@@ -95,8 +93,8 @@
         その際に、レスポンスオブジェクトに格納された直近の例外を再度スローします。
     </para>
 
-    <sect4 id="zend.controller.plugins.standard.errorhandler.fourohfour">
-        <title>404 ハンドラとしての ErrorHandler の使用</title>
+    <section xml:id="zend.controller.plugins.standard.errorhandler.fourohfour"><info><title>404 ハンドラとしての ErrorHandler の使用</title></info>
+        
 
         <para>
             <emphasis>ErrorHandler</emphasis> プラグインが捕捉するのは、
@@ -125,7 +123,7 @@ class ErrorController extends Zend_Controller_Action
 
         <para>
             エラーオブジェクトを取得したら、次に
-            <command>$errors->type</command> でその型を調べます。
+            <command>$errors-&gt;type</command> でその型を調べます。
             これは、次のいずれかとなります。
         </para>
 
@@ -229,10 +227,10 @@ public function errorAction()
         }
 }
 ]]></programlisting>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.plugins.standard.errorhandler.buffer">
-        <title>前回のレンダリング結果の扱い</title>
+    <section xml:id="zend.controller.plugins.standard.errorhandler.buffer"><info><title>前回のレンダリング結果の扱い</title></info>
+        
 
         <para>
             ひとつのリクエストで複数のアクションにディスパッチする場合、
@@ -252,13 +250,13 @@ public function errorAction()
         <programlisting language="php"><![CDATA[
 $this->getResponse()->clearBody();
 ]]></programlisting>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.plugins.standard.errorhandler.examples">
-        <title>プラグインの使用例</title>
+    <section xml:id="zend.controller.plugins.standard.errorhandler.examples"><info><title>プラグインの使用例</title></info>
+        
 
-        <example id="zend.controller.plugins.standard.errorhandler.examples.example-1">
-            <title>標準的な使用法</title>
+        <example xml:id="zend.controller.plugins.standard.errorhandler.examples.example-1"><info><title>標準的な使用法</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
@@ -266,8 +264,8 @@ $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler());
 ]]></programlisting>
         </example>
 
-        <example id="zend.controller.plugins.standard.errorhandler.examples.example-2">
-            <title>別のエラーハンドラの設定</title>
+        <example xml:id="zend.controller.plugins.standard.errorhandler.examples.example-2"><info><title>別のエラーハンドラの設定</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
@@ -279,8 +277,8 @@ $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler(array(
 ]]></programlisting>
         </example>
 
-        <example id="zend.controller.plugins.standard.errorhandler.examples.example-3">
-            <title>アクセス用メソッドの使用</title>
+        <example xml:id="zend.controller.plugins.standard.errorhandler.examples.example-3"><info><title>アクセス用メソッドの使用</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $plugin = new Zend_Controller_Plugin_ErrorHandler();
@@ -292,10 +290,10 @@ $front = Zend_Controller_Front::getInstance();
 $front->registerPlugin($plugin);
 ]]></programlisting>
         </example>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.plugins.standard.errorhandler.controllerexamples">
-        <title>エラーコントローラの例</title>
+    <section xml:id="zend.controller.plugins.standard.errorhandler.controllerexamples"><info><title>エラーコントローラの例</title></info>
+        
 
         <para>
             エラーハンドラプラグインを使用するには、
@@ -337,8 +335,5 @@ EOH;
     }
 }
 ]]></programlisting>
-    </sect4>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

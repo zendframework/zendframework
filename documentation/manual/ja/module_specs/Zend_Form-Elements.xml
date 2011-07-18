@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21988 -->
-<sect1 id="zend.form.elements">
-    <title>Zend_Form_Element を用いたフォーム要素の作成</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.elements"><info><title>Zend_Form_Element を用いたフォーム要素の作成</title></info>
+    
 
     <para>
         フォームは、いくつかの要素から構成されています。
@@ -45,12 +43,11 @@
         を参照ください。
     </para>
 
-    <sect2 id="zend.form.elements.loaders">
-        <title>プラグインローダー</title>
+    <section xml:id="zend.form.elements.loaders"><info><title>プラグインローダー</title></info>
+        
 
         <para>
-            <classname>Zend_Form_Element</classname> は、<link
-                linkend="zend.loader.pluginloader">Zend_Loader_PluginLoader</link>
+            <classname>Zend_Form_Element</classname> は、<link linkend="zend.loader.pluginloader">Zend_Loader_PluginLoader</link>
             を使用しており、バリデータやフィルタ、デコレータの場所を指定できます。
             それぞれに独自のプラグインローダーが関連付けられており、
             アクセサを使用して個別に取得したり変更したりできます。
@@ -105,8 +102,8 @@
             複数のフォームで機能を共有したり独自の機能をカプセル化したりすることが簡単になります。
         </para>
 
-        <example id="zend.form.elements.loaders.customLabel">
-            <title>独自のラベル</title>
+        <example xml:id="zend.form.elements.loaders.customLabel"><info><title>独自のラベル</title></info>
+            
 
             <para>
                 プラグインの使用例としてよくあるのは、
@@ -190,10 +187,10 @@ $form->addElementPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
                 'My_Decorator_Label' が使われることになるわけです。
             </para>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.elements.filters">
-        <title>フィルタ</title>
+    <section xml:id="zend.form.elements.filters"><info><title>フィルタ</title></info>
+        
 
         <para>
             バリデーションの前に、入力の正規化を行えると便利です。
@@ -250,8 +247,8 @@ $element->addFilter('alnum');
             また、最初の文字は大文字でも小文字でもかまいません。
         </para>
 
-        <note>
-            <title>独自のフィルタクラスの使用</title>
+        <note><info><title>独自のフィルタクラスの使用</title></info>
+            
 
             <para>
                 自作のフィルタクラスを使う場合は、
@@ -280,8 +277,7 @@ $unfiltered = $element->getUnfilteredValue();
 ]]></programlisting>
 
         <para>
-            フィルタについての詳細な情報は <link
-                linkend="zend.filter.introduction">Zend_Filter
+            フィルタについての詳細な情報は <link linkend="zend.filter.introduction">Zend_Filter
                 のドキュメント</link> を参照ください。
         </para>
 
@@ -318,10 +314,10 @@ $unfiltered = $element->getUnfilteredValue();
                 <code>clearFilters()</code> (すべてのフィルタを削除します)
             </para></listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.elements.validators">
-        <title>バリデータ</title>
+    <section xml:id="zend.form.elements.validators"><info><title>バリデータ</title></info>
+        
 
         <para>
             セキュリティ界で有名なお言葉 "入力はフィルタリングせよ。
@@ -364,8 +360,8 @@ $element->addValidator('alnum');
             また、最初の文字は大文字でも小文字でもかまいません。
         </para>
 
-        <note>
-            <title>独自のバリデータクラスの使用</title>
+        <note><info><title>独自のバリデータクラスの使用</title></info>
+            
 
             <para>
                 自作のバリデータクラスを使う場合は、
@@ -415,8 +411,8 @@ $element->addValidator('StringLength', false, array(6, 20));
 $validator = new Zend_Validate_StringLength(6, 20);
 ]]></programlisting>
 
-        <note>
-            <title>独自のバリデートエラーメッセージの指定</title>
+        <note><info><title>独自のバリデートエラーメッセージの指定</title></info>
+            
 
             <para>
                 バリデータのエラーメッセージをカスタマイズしたいこともあるでしょう。
@@ -502,20 +498,19 @@ if ($element->isValid($value)) {
 }
 ]]></programlisting>
 
-        <note>
-            <title>フィルタリング後の値の検証</title>
+        <note><info><title>フィルタリング後の値の検証</title></info>
+            
 
             <para>
                 <methodname>Zend_Form_Element::isValid()</methodname> は、
                 フィルタチェインを通した後の値を検証します。
-                詳細は <link
-                linkend="zend.form.elements.filters">フィルタの説明
+                詳細は <link linkend="zend.form.elements.filters">フィルタの説明
                 </link> を参照ください。
             </para>
         </note>
 
-        <note>
-            <title>バリデーションコンテキスト</title>
+        <note><info><title>バリデーションコンテキスト</title></info>
+            
 
             <para>
                 <methodname>Zend_Form_Element::isValid()</methodname> は、
@@ -639,13 +634,12 @@ $messages = $element->getMessages();
         </itemizedlist>
 
         <para>
-            バリデータについての詳細な情報は <link
-                linkend="zend.validate.introduction">Zend_Validate
+            バリデータについての詳細な情報は <link linkend="zend.validate.introduction">Zend_Validate
                 のドキュメント</link> を参照ください。
         </para>
 
-        <note>
-            <title>Zend_Form_Elements の汎用バリデータとしての使用法</title>
+        <note><info><title>Zend_Form_Elements の汎用バリデータとしての使用法</title></info>
+            
 
             <para>
                 <classname>Zend_Form_Element</classname> は
@@ -655,8 +649,8 @@ $messages = $element->getMessages();
             </para>
         </note>
 
-        <note>
-            <title>When is an element detected as empty?</title>
+        <note><info><title>When is an element detected as empty?</title></info>
+            
 
             <para>
                 As mentioned the 'NotEmpty' validator is used to detect if an element is empty
@@ -669,8 +663,7 @@ $messages = $element->getMessages();
                 <emphasis>'0'</emphasis> then the element will be seen as not empty. If you want to
                 have a different behaviour you must create your own instance of
                 <classname>Zend_Validate_NotEmpty</classname>. There you can define the behaviour of
-                this validator. See <ulink
-                    url="zend.validate.set.notempty">Zend_Validate_NotEmpty</ulink> for details.
+                this validator. See <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="zend.validate.set.notempty">Zend_Validate_NotEmpty</link> for details.
             </para>
         </note>
 
@@ -730,8 +723,8 @@ $messages = $element->getMessages();
             </para></listitem>
         </itemizedlist>
 
-        <sect3 id="zend.form.elements.validators.errors">
-            <title>独自のエラーメッセージ</title>
+        <section xml:id="zend.form.elements.validators.errors"><info><title>独自のエラーメッセージ</title></info>
+            
 
             <para>
                 時には、要素にアタッチされたバリデータが生成するエラーメッセージではなく
@@ -802,11 +795,11 @@ $messages = $element->getMessages();
                 さらに、プレースホルダ "%value%" を使用して要素の値を表すこともできます。
                 エラーメッセージを取得する際に、この部分が現在の要素の値に置き換えられます。
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.form.elements.decorators">
-        <title>デコレータ</title>
+    <section xml:id="zend.form.elements.decorators"><info><title>デコレータ</title></info>
+        
 
         <para>
             多くのウェブ開発者にとって、<acronym>XHTML</acronym>
@@ -821,8 +814,7 @@ $messages = $element->getMessages();
             <classname>Zend_Form_Element</classname> は、この問題を解決するために
             "デコレータ" を使用します。デコレータは、
             要素にアクセスしてその中身をレンダリングするためのメソッドを持つクラスです。
-            デコレータの動作原理については、<link
-                linkend="zend.form.decorators">Zend_Form_Decorator</link>
+            デコレータの動作原理については、<link linkend="zend.form.decorators">Zend_Form_Decorator</link>
             のセクションを参照ください。
         </para>
 
@@ -867,8 +859,8 @@ $messages = $element->getMessages();
             </para></listitem>
         </itemizedlist>
 
-        <note>
-            <title>読み込み不要なデフォルトのデコレータ</title>
+        <note><info><title>読み込み不要なデフォルトのデコレータ</title></info>
+            
 
             <para>
                 デフォルトのデコレータは、
@@ -939,13 +931,12 @@ $this->addDecorators(array(
 ]]></programlisting>
 
         <para>
-            デコレータについての詳細な情報は <link
-                linkend="zend.form.decorators">Zend_Form_Decorator
+            デコレータについての詳細な情報は <link linkend="zend.form.decorators">Zend_Form_Decorator
                 のセクション</link> を参照ください。
         </para>
 
-        <note>
-            <title>同じ型の複数のデコレータの使用法</title>
+        <note><info><title>同じ型の複数のデコレータの使用法</title></info>
+            
 
             <para>
                 内部的には、<classname>Zend_Form_Element</classname>
@@ -1048,10 +1039,10 @@ echo $element->renderHtmlTag("This is the html tag content");
         <para>
             デコレータが存在しない場合は、例外が発生します。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.elements.metadata">
-        <title>メタデータおよび属性</title>
+    <section xml:id="zend.form.elements.metadata"><info><title>メタデータおよび属性</title></info>
+        
 
         <para>
             <classname>Zend_Form_Element</classname> は、
@@ -1164,20 +1155,20 @@ $element->class = 'text;
             要素の描画時に使用します。これらの属性は、要素タグの
             <acronym>HTML</acronym> 属性として設定されます。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.elements.standard">
-        <title>標準の要素</title>
+    <section xml:id="zend.form.elements.standard"><info><title>標準の要素</title></info>
+        
 
         <para>
             <classname>Zend_Form</classname> には、標準的な要素が同梱されています。詳細は
             <link linkend="zend.form.standardElements">標準要素</link>
             の章を参照ください。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.elements.methods">
-        <title>Zend_Form_Element のメソッド</title>
+    <section xml:id="zend.form.elements.methods"><info><title>Zend_Form_Element のメソッド</title></info>
+        
 
         <para>
             <classname>Zend_Form_Element</classname> には非常にたくさんのメソッドがあります。
@@ -1281,10 +1272,10 @@ $element->class = 'text;
                 </itemizedlist>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.elements.config">
-        <title>設定</title>
+    <section xml:id="zend.form.elements.config"><info><title>設定</title></info>
+        
 
         <para>
             <classname>Zend_Form_Element</classname> のコンストラクタには、配列あるいは
@@ -1372,10 +1363,10 @@ decorators.element.decorator = "ViewHelper"
 decorators.element.options.helper = "FormText"
 decorators.label.decorator = "Label"
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.elements.custom">
-        <title>カスタム要素</title>
+    <section xml:id="zend.form.elements.custom"><info><title>カスタム要素</title></info>
+        
 
         <para>
             独自の要素を作成するには <classname>Zend_Form_Element</classname>
@@ -1468,8 +1459,5 @@ class My_Element_Text extends Zend_Form_Element
             <classname>Zend_Form_Element</classname> の <acronym>API</acronym> ドキュメントを熟読し、
             どんな機能が使用できるのかを覚えていきましょう。
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 tw=80 et:
--->
+    </section>
+</section>

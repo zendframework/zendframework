@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21825 -->
-<sect3 id="zend.view.helpers.initial.headmeta">
-    <title>HeadMeta ヘルパー</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headmeta"><info><title>HeadMeta ヘルパー</title></info>
+    
 
     <para>
         <acronym>HTML</acronym> の <emphasis>&lt;meta&gt;</emphasis> 要素は、
@@ -105,8 +103,8 @@
         ヘルパー</link> の具象実装です。
     </para>
 
-    <example id="zend.view.helpers.initial.headmeta.basicusage">
-        <title>HeadMeta ヘルパーの基本的な使用法</title>
+    <example xml:id="zend.view.helpers.initial.headmeta.basicusage"><info><title>HeadMeta ヘルパーの基本的な使用法</title></info>
+        
 
         <para>
             meta タグは、いつでも好きなときに指定できます。
@@ -180,7 +178,4 @@ $this->headMeta()->appendHttpEquiv('Refresh',
 <?php echo $this->headMeta() ?>
 ]]></programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

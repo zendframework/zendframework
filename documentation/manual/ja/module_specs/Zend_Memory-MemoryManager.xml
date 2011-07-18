@@ -1,12 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20827 -->
-<sect1 id="zend.memory.memory-manager">
-    <title>メモリマネージャ</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.memory.memory-manager"><info><title>メモリマネージャ</title></info>
+    
 
-    <sect2 id="zend.memory.memory-manager.creation">
+    <section xml:id="zend.memory.memory-manager.creation"><info><title>メモリマネージャの作成</title></info>
 
-        <title>メモリマネージャの作成</title>
+        
 
         <para>
             新しいメモリマネージャ
@@ -58,20 +56,20 @@ $memoryManager = Zend_Memory::factory('None');
             '<code>None</code>' バックエンドには何もオプションを指定する必要がありません。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.memory.memory-manager.objects-management">
+    <section xml:id="zend.memory.memory-manager.objects-management"><info><title>メモリオブジェクトの管理</title></info>
 
-        <title>メモリオブジェクトの管理</title>
+        
 
         <para>
             この節では、管理しているメモリ内でのオブジェクトの作成や破棄の方法、
             そしてメモリマネージャの挙動を設定する方法を説明します。
         </para>
 
-        <sect3 id="zend.memory.memory-manager.objects-management.movable">
+        <section xml:id="zend.memory.memory-manager.objects-management.movable"><info><title>移動可能なオブジェクトの作成</title></info>
 
-            <title>移動可能なオブジェクトの作成</title>
+            
 
             <para>
                 移動可能なオブジェクト (スワップされる可能性のあるオブジェクト)
@@ -89,11 +87,11 @@ $memObject = $memoryManager->create($data);
                 引数 <code>$data</code> を省略した場合は、値は空の文字列となります。
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.memory.memory-manager.objects-management.locked">
+        <section xml:id="zend.memory.memory-manager.objects-management.locked"><info><title>ロックされたオブジェクトの作成</title></info>
 
-            <title>ロックされたオブジェクトの作成</title>
+            
 
             <para>
                 ロックされたオブジェクト (スワップされないオブジェクト)
@@ -110,11 +108,11 @@ $memObject = $memoryManager->createLocked($data);
                 引数 <code>$data</code> を省略した場合は、値は空の文字列となります。
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.memory.memory-manager.objects-management.destruction">
+        <section xml:id="zend.memory.memory-manager.objects-management.destruction"><info><title>オブジェクトの破棄</title></info>
 
-            <title>オブジェクトの破棄</title>
+            
 
             <para>
                 メモリオブジェクトは、それがスコープの外に出た際に
@@ -152,17 +150,17 @@ function foo()
                 どちらにもあてはまります。
             </para>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.memory.memory-manager.settings">
+    <section xml:id="zend.memory.memory-manager.settings"><info><title>メモリオブジェクトの設定</title></info>
 
-        <title>メモリオブジェクトの設定</title>
+        
 
-        <sect3 id="zend.memory.memory-manager.settings.memory-limit">
+        <section xml:id="zend.memory.memory-manager.settings.memory-limit"><info><title>メモリの制限</title></info>
 
-            <title>メモリの制限</title>
+            
 
             <para>
                 メモリの制限とは、移動可能なオブジェクトを読み込む際に
@@ -196,11 +194,11 @@ $memoryManager->setMemoryLimit($newLimit);     // メモリの制限バイト数
                 '制限なし' (-1) となります。
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.memory.memory-manager.settings.min-size">
+        <section xml:id="zend.memory.memory-manager.settings.min-size"><info><title>MinSize</title></info>
 
-            <title>MinSize</title>
+            
 
             <para>
                 MinSize は、メモリマネージャがスワップの対象とするメモリオブジェクトの最小サイズです。
@@ -222,8 +220,8 @@ $memoryManager->setMinSize($newSize);        // MinSize をバイト数で設定
                 デフォルト値は 16KB (16384 バイト) です。
             </para>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-</sect1>
+</section>

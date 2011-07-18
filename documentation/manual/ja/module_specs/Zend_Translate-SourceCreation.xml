@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21992 -->
-<sect1 id="zend.translate.sourcecreation">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.sourcecreation"><info><title>ソースファイルの作成</title></info>
 
-    <title>ソースファイルの作成</title>
+    
 
     <para>
         <classname>Zend_Translate</classname> で使用できる
@@ -18,9 +16,9 @@
         </para>
     </note>
 
-    <sect2 id="zend.translate.sourcecreation.array">
+    <section xml:id="zend.translate.sourcecreation.array"><info><title>Array ソースファイルの作成</title></info>
 
-        <title>Array ソースファイルの作成</title>
+        
 
         <para>
             Array ソースファイルは、単なる配列です。
@@ -83,11 +81,11 @@ $translate = new Zend_Translate(
 
         </note>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.translate.sourcecreation.gettext">
+    <section xml:id="zend.translate.sourcecreation.gettext"><info><title>Gettext ソースファイルの作成</title></info>
 
-        <title>Gettext ソースファイルの作成</title>
+        
 
         <para>
             Gettext ソースファイルは、GNU の gettext ライブラリで作成します。
@@ -95,7 +93,7 @@ $translate = new Zend_Translate(
             フリーで公開されています。このファイルは、拡張子が
             <emphasis>*.mo</emphasis> のバイナリファイルとなります。
             ファイルを作成するためのフリーソフトウェアのひとつに
-            <ulink url="http://sourceforge.net/projects/poedit/">poEdit</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://sourceforge.net/projects/poedit/">poEdit</link>
             があります。これは、ファイルの作成だけでなく翻訳作業自体もサポートしています。
         </para>
 
@@ -169,11 +167,11 @@ $translate = new Zend_Translate(
 print_r($translate->getAdapterInfo());
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.translate.sourcecreation.tmx">
+    <section xml:id="zend.translate.sourcecreation.tmx"><info><title>TMX ソースファイルの作成</title></info>
 
-        <title>TMX ソースファイルの作成</title>
+        
 
         <para>
             TMX ソースファイルは、新しい業界標準です。
@@ -185,8 +183,8 @@ print_r($translate->getAdapterInfo());
             フリーソフトウェアではありません。
         </para>
 
-        <example id="zend.translate.sourcecreation.tmx.example">
-            <title>TMX ファイルの例</title>
+        <example xml:id="zend.translate.sourcecreation.tmx.example"><info><title>TMX ファイルの例</title></info>
+            
 
             <programlisting language="xml"><![CDATA[
 <?xml version="1.0" ?>
@@ -235,8 +233,8 @@ $translate = new Zend_Translate(
             全言語を対象とするようになっています。
         </para>
 
-        <note>
-            <title>Option useId</title>
+        <note><info><title>Option useId</title></info>
+            
 
             <para>
                 When you set the <emphasis>useId</emphasis> option to <constant>FALSE</constant>
@@ -256,11 +254,11 @@ $translate = new Zend_Translate(
                 <emphasis>tuv</emphasis> entry which is set like shown in the above example.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.translate.sourcecreation.csv">
+    <section xml:id="zend.translate.sourcecreation.csv"><info><title>CSV ソースファイルの作成</title></info>
 
-        <title>CSV ソースファイルの作成</title>
+        
 
         <para>
             CSV ソースファイルは、サイズが小さく可読性があります。
@@ -268,8 +266,8 @@ $translate = new Zend_Translate(
             おそらく CSV アダプタを使用することになるでしょう。
         </para>
 
-        <example id="zend.translate.sourcecreation.csv.example">
-            <title>CSV ファイルの例</title>
+        <example xml:id="zend.translate.sourcecreation.csv.example"><info><title>CSV ファイルの例</title></info>
+            
 
             <programlisting language="txt"><![CDATA[
 # csv ファイルの例
@@ -325,8 +323,8 @@ $translate->addTranslation(
             別の文字を使用する場合は '<code>enclosure</code>' オプションを設定します。
         </para>
 
-        <example id="zend.translate.sourcecreation.csv.example2">
-            <title>CSV ファイルの例 その 2</title>
+        <example xml:id="zend.translate.sourcecreation.csv.example2"><info><title>CSV ファイルの例 その 2</title></info>
+            
 
             <programlisting language="txt"><![CDATA[
 # csv ファイルの例
@@ -364,11 +362,11 @@ $translate->addTranslation(
 
         </note>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.translate.sourcecreation.ini">
+    <section xml:id="zend.translate.sourcecreation.ini"><info><title>INI ソースファイルの作成</title></info>
 
-        <title>INI ソースファイルの作成</title>
+        
 
         <para>
             <acronym>INI</acronym> ソースファイルは可読性がありますが、
@@ -377,8 +375,8 @@ $translate->addTranslation(
             <acronym>INI</acronym> アダプタが使えるでしょう。
         </para>
 
-        <example id="zend.translate.sourcecreation.ini.example">
-            <title>INI ファイルの例</title>
+        <example xml:id="zend.translate.sourcecreation.ini.example"><info><title>INI ファイルの例</title></info>
+            
 
             <programlisting language="txt"><![CDATA[
 [Test]
@@ -420,9 +418,6 @@ $translate->addTranslation(
             予期せぬ挙動を起こすようなら、このアダプタを使わないようにしましょう。
         </para>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

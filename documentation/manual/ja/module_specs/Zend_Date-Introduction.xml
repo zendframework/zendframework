@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 17986 -->
-<sect1 id="zend.date.introduction">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.introduction"><info><title>導入</title></info>
 
-    <title>導入</title>
+    
 
     <para>
         <classname>Zend_Date</classname> コンポーネントは、
@@ -12,8 +10,8 @@
         さまざまな機能がもたらす可能性は、<acronym>PHP</acronym>
         の既存の日付関連の関数をはるかに上回っています。
         最新のマニュアルは、
-        <ulink url="http://framework.zend.com/wiki/display/ZFDOCDEV/Home">オンライン版
-        (Subversion の更新と同期しています)</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/wiki/display/ZFDOCDEV/Home">オンライン版
+        (Subversion の更新と同期しています)</link>
         を参照ください。
     </para>
 
@@ -36,26 +34,26 @@
         それを他の地域での表記に変換することもできます。
     </para>
 
-    <sect2 id="zend.date.setdefaulttimezone">
+    <section xml:id="zend.date.setdefaulttimezone"><info><title>デフォルトタイムゾーンの設定</title></info>
 
-        <title>デフォルトタイムゾーンの設定</title>
+        
 
         <para>
             日付関連の関数を <acronym>PHP</acronym> や Zend Framework で使う前には、
             まずアプリケーションにデフォルトタイムゾーンが設定されているかどうかを確認しましょう。
             これは、環境変数 TZ で指定するか、あるいは php.ini の設定
             <property>date.timezone</property> か
-            <ulink url="http://php.net/date_default_timezone_set">date_default_timezone_set()</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/date_default_timezone_set">date_default_timezone_set()</link>
             を使用して行います。
             <acronym>PHP</acronym> では、日付や時刻関連の関数が特定のユーザに対して動作するようにするには
             デフォルトのタイムゾーンを設定します。
             タイムゾーン設定の完全な一覧は、
-            <ulink url="http://unicode.org/cldr/data/diff/supplemental/territory_containment_un_m_49.html">CLDR Timezone Identifier List</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://unicode.org/cldr/data/diff/supplemental/territory_containment_un_m_49.html">CLDR Timezone Identifier List</link>
             を参照ください。
         </para>
 
-        <example id="zend.date.setdefaulttimezone.example-1">
-            <title>デフォルトタイムゾーンの設定</title>
+        <example xml:id="zend.date.setdefaulttimezone.example-1"><info><title>デフォルトタイムゾーンの設定</title></info>
+            
             <programlisting language="php"><![CDATA[
 // カリフォルニアのアメリカ人用のタイムゾーン
 date_default_timezone_set('America/Los_Angeles');
@@ -78,18 +76,18 @@ date_default_timezone_set('Europe/Berlin');
             <acronym>UTC</acronym> や <acronym>GMT</acronym> に設定された <classname>Zend_Date</classname>
             のインスタンスはその影響を受けないということです。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.date.why">
+    <section xml:id="zend.date.why"><info><title>なぜ Zend_Date なのか?</title></info>
 
-        <title>なぜ Zend_Date なのか?</title>
+        
 
         <para>
             <classname>Zend_Date</classname> が提供する機能は次のとおりで、これは
             <acronym>PHP</acronym> の日付関数群を拡張したものです。
         </para>
 
-        <itemizedlist mark='opencircle'>
+        <itemizedlist mark="opencircle">
             <listitem>
                 <para>
                     シンプルな <acronym>API</acronym>
@@ -125,7 +123,7 @@ date_default_timezone_set('Europe/Berlin');
                     "float の大きさはプラットフォーム依存です。ただし、通常はおよそ 10
                     進数で 14 桁の精度があり、最大値は <command>~1.8e308</command> (これは 64ビット <acronym>IEEE</acronym>
                     フォーマットです) となります。" [
-                    <ulink url="http://www.php.net/float">http://www.php.net/float</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/float">http://www.php.net/float</link>
                     ]
                     さらに、float 型そのものの特性により、計算結果に丸め誤差が生じる問題があります。
                     これを避けるため、Zend Framework の I18n コンポーネントでは
@@ -141,7 +139,7 @@ date_default_timezone_set('Europe/Berlin');
                     <acronym>ISO-8601</acronym> の日付仕様の一部にのみ準拠しているものについても識別できます。
                     これらの日付書式は、データベースを使用する際に特に有用です。
                     たとえば、MsSQL と
-                    <ulink url="http://dev.mysql.com/doc/refman/5.0/en/date-and-time-functions.html">MySQL</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dev.mysql.com/doc/refman/5.0/en/date-and-time-functions.html">MySQL</link>
                     の日付書式は微妙に異なりますが、
                     <classname>Zend_Date</classname> は、書式指定定数
                     <link linkend="zend.date.constants.list">Zend_Date::ISO_8601</link>
@@ -163,9 +161,6 @@ date_default_timezone_set('Europe/Berlin');
             </listitem>
         </itemizedlist>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

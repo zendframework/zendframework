@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21741 -->
-<sect3 id="zend.view.helpers.initial.translate">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.translate"><info><title>翻訳ヘルパー</title></info>
 
-    <title>翻訳ヘルパー</title>
+    
 
     <para>
         ウェブサイトを複数言語で提供することもよくあります。
@@ -53,9 +51,9 @@
         </para>
     </note>
 
-    <example id="zend.view.helpers.initial.translate.registered">
+    <example xml:id="zend.view.helpers.initial.translate.registered"><info><title>登録済みのインスタンス</title></info>
 
-        <title>登録済みのインスタンス</title>
+        
 
         <para>
             登録済みのインスタンスを使用するには、まず <classname>Zend_Translate</classname> あるいは
@@ -87,9 +85,9 @@ echo $this->translate('simple');
         ビューの中でインスタンスを作成し、ヘルパーのインスタンスは後で作成することもできます。
     </para>
 
-    <example id="zend.view.helpers.initial.translate.afterwards">
+    <example xml:id="zend.view.helpers.initial.translate.afterwards"><info><title>ビューの中で</title></info>
 
-        <title>ビューの中で</title>
+        
 
         <para>
             流れるようなインターフェイスで <classname>Zend_Translate</classname> あるいは
@@ -118,9 +116,9 @@ $this->translate()->setTranslator($adapter)->translate('simple');
         ヘルパーを直接使用することもできます。
     </para>
 
-    <example id="zend.view.helpers.initial.translate.directly">
+    <example xml:id="zend.view.helpers.initial.translate.directly"><info><title>直接使用する方法</title></info>
 
-        <title>直接使用する方法</title>
+        
 
         <programlisting language="php"><![CDATA[
 // サンプルアダプタ
@@ -153,9 +151,9 @@ print $translate->translate('simple'); // これは 'einfach' を返します
         たとえば次のようになります。
     </para>
 
-    <example id="zend.view.helpers.initial.translate.parameter">
+    <example xml:id="zend.view.helpers.initial.translate.parameter"><info><title>単一のパラメータ</title></info>
 
-        <title>単一のパラメータ</title>
+        
 
         <para>
             単一のパラメータを使用するには、単にそれをメソッドに追加します。
@@ -177,9 +175,9 @@ $this->translate("Today is %1\$s", $date);
         </para>
     </note>
 
-    <example id="zend.view.helpers.initial.translate.parameterlist">
+    <example xml:id="zend.view.helpers.initial.translate.parameterlist"><info><title>パラメータのリスト</title></info>
 
-        <title>パラメータのリスト</title>
+        
 
         <para>
             パラメータのリストを使用して、それをメソッドに追加することもできます。
@@ -199,9 +197,9 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s",
 
     </example>
 
-    <example id="zend.view.helpers.initial.translate.parameterarray">
+    <example xml:id="zend.view.helpers.initial.translate.parameterarray"><info><title>パラメータの配列</title></info>
 
-        <title>パラメータの配列</title>
+        
 
         <para>
             パラメータの配列を使用して、それをメソッドに追加することもできます。
@@ -224,9 +222,9 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
         どひらの形式の場合も、ロケールは最後のパラメータとして指定します。
     </para>
 
-    <example id="zend.view.helpers.initial.translate.dynamic">
+    <example xml:id="zend.view.helpers.initial.translate.dynamic"><info><title>ロケールの動的な変更</title></info>
 
-        <title>ロケールの動的な変更</title>
+        
 
         <programlisting language="php"><![CDATA[
 // ビューの中で
@@ -244,9 +242,9 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date, 'it');
         しかし、ロケールの設定をヘルパー内で行うこともできます。
     </para>
 
-    <example id="zend.view.helpers.initial.translate.static">
+    <example xml:id="zend.view.helpers.initial.translate.static"><info><title>ロケールの静的な変更</title></info>
 
-        <title>ロケールの静的な変更</title>
+        
 
         <programlisting language="php"><![CDATA[
 // ビューの中で
@@ -267,9 +265,9 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
         <methodname>getLocale()</methodname> もあります。
     </para>
 
-    <example id="zend.view.helpers.initial.translate.getlocale">
+    <example xml:id="zend.view.helpers.initial.translate.getlocale"><info><title>現在設定されているロケールの取得</title></info>
 
-        <title>現在設定されているロケールの取得</title>
+        
 
         <programlisting language="php"><![CDATA[
 // ビューの中で
@@ -287,7 +285,4 @@ $this->translate()->getLocale();
 
     </example>
 
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21661 -->
-<sect1 id="zend.validate.introduction">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.introduction"><info><title>導入</title></info>
 
-    <title>導入</title>
+    
 
     <para>
         <classname>Zend_Validate</classname> コンポーネントは、一般的に必要となるバリデータを提供します。
@@ -11,9 +9,9 @@
         ひとつのデータに対して複数のバリデータを指定した順に適用できます。
     </para>
 
-    <sect2 id="zend.validate.introduction.definition">
+    <section xml:id="zend.validate.introduction.definition"><info><title>バリデータとは?</title></info>
 
-        <title>バリデータとは?</title>
+        
 
         <para>
             バリデータは、入力が何らかの要件を満たしているかどうかを調べ、
@@ -32,11 +30,11 @@
             どちらの条件に反していたのかを知ることができるので便利です。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.validate.introduction.using">
+    <section xml:id="zend.validate.introduction.using"><info><title>バリデータの基本的な使用法</title></info>
 
-        <title>バリデータの基本的な使用法</title>
+        
 
         <para>
             ここで考えたバリデータについての定義をもとにして
@@ -88,11 +86,11 @@ if ($validator->isValid($email)) {
 
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.validate.introduction.messages">
+    <section xml:id="zend.validate.introduction.messages"><info><title>メッセージのカスタマイズ</title></info>
 
-        <title>メッセージのカスタマイズ</title>
+        
 
         <para>
             バリデータクラスの <methodname>setMessage()</methodname> メソッドを使用すると、
@@ -175,11 +173,11 @@ if (!validator->isValid('word')) {
 ]]></programlisting>
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.validate.introduction.static">
+    <section xml:id="zend.validate.introduction.static"><info><title>静的メソッド is() の使用法</title></info>
 
-        <title>静的メソッド is() の使用法</title>
+        
 
         <para>
             指定したバリデーションクラスを読み込んでそのインスタンスを作成するというのが面倒ならば、
@@ -229,12 +227,12 @@ if (Zend_Validate::is($value, 'Between', array('min' => 1, 'max' => 12))) {
         <para>
             また、<classname>Zend_Filter_Input</classname> クラスでも、特定の入力データのセットを処理する際に
             複数のフィルタやバリデータを必要に応じて実行させる機能も提供しています。
-            詳細は <xref linkend="zend.filter.input" /> を参照ください。
+            詳細は <xref linkend="zend.filter.input"/> を参照ください。
         </para>
 
-        <sect3 id="zend.validate.introduction.static.namespaces">
+        <section xml:id="zend.validate.introduction.static.namespaces"><info><title>名前空間</title></info>
 
-            <title>名前空間</title>
+            
 
             <para>
                 自分で定義したバリデータを使う際に、
@@ -303,12 +301,12 @@ iif (Zend_Validate::is($value, 'OtherValidator', array('min' => 1, 'max' => 12))
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.validate.introduction.translation">
+    <section xml:id="zend.validate.introduction.translation"><info><title>メッセージの翻訳</title></info>
 
-        <title>メッセージの翻訳</title>
+        
 
         <para>
             Validate クラスには <methodname>setTranslator()</methodname> メソッドがあり、
@@ -379,8 +377,5 @@ if (!$validator->isTranslatorDisabled()) {
             その場合は独自に設定したメッセージについても翻訳器が動作することに注意しましょう。
         </para>
 
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

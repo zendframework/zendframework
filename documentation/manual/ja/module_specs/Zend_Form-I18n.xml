@@ -1,16 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 17987 -->
-<sect1 id="zend.form.i18n">
-    <title>Zend_Form の国際化</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.i18n"><info><title>Zend_Form の国際化</title></info>
+    
 
     <para>
         作成したコンテンツを複数の言語や地域に対応させるという作業は、
         日増しに重要になってきています。
         <classname>Zend_Form</classname> はそんな作業も簡単にできるように作られており、
-        <link
-            linkend="zend.translate">Zend_Translate</link> と <link
-            linkend="zend.validate">Zend_Validate</link>
+        <link linkend="zend.translate">Zend_Translate</link> と <link linkend="zend.validate">Zend_Validate</link>
         の機能を使うことで国際化を実現できます。
     </para>
 
@@ -24,8 +20,8 @@
         のドキュメント</link> を参照ください。
     </para>
 
-    <note>
-        <title>項目単位での翻訳の無効化</title>
+    <note><info><title>項目単位での翻訳の無効化</title></info>
+        
 
         <para>
             個々のフォームや要素、表示グループ、サブフォームなどの単位で翻訳を無効にするには、
@@ -36,8 +32,8 @@
         </para>
     </note>
 
-    <sect2 id="zend.form.i18n.initialization">
-        <title>フォームでの I18n 機能の初期化</title>
+    <section xml:id="zend.form.i18n.initialization"><info><title>フォームでの I18n 機能の初期化</title></info>
+        
 
         <para>
             フォームの I18n 機能を初期化するには
@@ -113,10 +109,10 @@ $element->setTranslator($translate);
 ]]></programlisting>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.i18n.standard">
-        <title>標準的な I18N の対象</title>
+    <section xml:id="zend.form.i18n.standard"><info><title>標準的な I18N の対象</title></info>
+        
 
         <para>
             これで翻訳オブジェクトがアタッチできました。
@@ -130,8 +126,7 @@ $element->setTranslator($translate);
                     検証エラーメッセージを翻訳させることができます。
                     そのためには、<classname>Zend_Validate</classname>
                     のバリデーションクラスのエラーコード定数をメッセージ ID として使用します。
-                    エラーコードについての詳細は <link
-                        linkend="zend.validate">Zend_Validate</link>
+                    エラーコードについての詳細は <link linkend="zend.validate">Zend_Validate</link>
                     のドキュメントを参照ください。
                 </para>
 
@@ -188,8 +183,5 @@ $element->setTranslator($translate);
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 tw=80 et:
--->
+    </section>
+</section>

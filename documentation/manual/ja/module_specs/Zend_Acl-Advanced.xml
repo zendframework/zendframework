@@ -1,13 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20763 -->
-<sect1 id="zend.acl.advanced">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.advanced"><info><title>高度な使用法</title></info>
 
-    <title>高度な使用法</title>
+    
 
-    <sect2 id="zend.acl.advanced.storing">
+    <section xml:id="zend.acl.advanced.storing"><info><title>ACL データの保存による永続性の確保</title></info>
 
-        <title>ACL データの保存による永続性の確保</title>
+        
 
         <para>
         <classname>Zend_Acl</classname> は、特定のバックエンド技術 (たとえばデータベースやキャッシュサーバを使用した
@@ -23,16 +21,16 @@
         データの使用法にはさまざまなものが考えられるので、
         <acronym>ACL</acronym> データの保存は、場面に応じて開発者側で考えることになります。
         <classname>Zend_Acl</classname> はシリアライズ可能なので、<acronym>ACL</acronym> オブジェクトを <acronym>PHP</acronym> の
-        <ulink url="http://php.net/serialize"><methodname>serialize()</methodname></ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/serialize"><methodname>serialize()</methodname></link>
         関数でシリアライズできます。シリアライズした結果を、
         ファイルやデータベースあるいはキャッシュなどのお好みの場所に保存できます。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.advanced.assertions">
+    <section xml:id="zend.acl.advanced.assertions"><info><title>アサーションを使用した条件付き ACL 規則の作成</title></info>
 
-        <title>アサーションを使用した条件付き ACL 規則の作成</title>
+        
 
         <para>
         あるリソースに対する特定のロールのアクセス権限が、
@@ -99,9 +97,6 @@ $acl->allow(null, null, null, new CleanIPAssertion());
         条件を判断します。
         </para>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

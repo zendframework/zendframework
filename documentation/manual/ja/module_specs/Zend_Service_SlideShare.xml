@@ -1,12 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20855 -->
-<sect1 id="zend.service.slideshare">
-    <title>Zend_Service_SlideShare</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.slideshare"><info><title>Zend_Service_SlideShare</title></info>
+    
 
     <para>
         <classname>Zend_Service_SlideShare</classname> コンポーネントは、
-        <ulink url="http://www.slideshare.net/">slideshare.net</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.slideshare.net/">slideshare.net</link>
         ウェブサービスを操作するためのものです。
         これは、スライドショーをオンラインで公開するためのサービスです。
         このコンポーネントを使用すると、
@@ -14,14 +12,14 @@
         新しいスライドショーを自分のアカウントにアップロードしたりできます。
     </para>
 
-    <sect2 id="zend.service.slideshare.basicusage">
+    <section xml:id="zend.service.slideshare.basicusage"><info><title>Zend_Service_SlideShare の使い方</title></info>
 
-        <title>Zend_Service_SlideShare の使い方</title>
+        
 
         <para>
             <classname>Zend_Service_SlideShare</classname> コンポーネントを使うには、まず
             slideshare.net のアカウントを作成して (詳細は
-            <ulink url="http://www.slideshare.net/developers/">こちら</ulink> を参照ください)
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.slideshare.net/developers/">こちら</link> を参照ください)
             <acronym>API</acronym> キーやユーザ名、パスワード、そして共有する秘密の値を取得しなければなりません。
             <classname>Zend_Service_SlideShare</classname> コンポーネントを使用するには、これらすべてが必要です。
         </para>
@@ -40,11 +38,11 @@ $ss = new Zend_Service_SlideShare('APIKEY',
                                   'PASSWORD');
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.slideshare.slideshowobj">
+    <section xml:id="zend.service.slideshare.slideshowobj"><info><title>SlideShow オブジェクト</title></info>
 
-        <title>SlideShow オブジェクト</title>
+        
 
         <para>
             <classname>Zend_Service_SlideShare</classname> コンポーネントのすべてのスライドショーは
@@ -205,11 +203,11 @@ class Zend_Service_SlideShare_SlideShow {
             このデータクラスを使用してスライドショーの閲覧や追加を行うことになります。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.slideshare.getslideshow">
+    <section xml:id="zend.service.slideshare.getslideshow"><info><title>単一のスライドショーの取得</title></info>
 
-        <title>単一のスライドショーの取得</title>
+        
 
         <para>
             <classname>Zend_Service_SlideShare</classname> コンポーネントのもっともシンプルな使用法は、
@@ -233,11 +231,11 @@ print "スライドショーのタイトル: {$slideshow->getTitle()}<br/>\n";
 print "閲覧回数: {$slideshow->getNumViews()}<br/>\n";
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.slideshare.getslideshowlist">
+    <section xml:id="zend.service.slideshare.getslideshowlist"><info><title>スライドショーのグループの取得</title></info>
 
-        <title>スライドショーのグループの取得</title>
+        
 
         <para>
             取得したいスライドショーの ID がわからない場合は、
@@ -308,18 +306,18 @@ foreach($ss_user as $slideshow) {
 }
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.slideshare.caching">
+    <section xml:id="zend.service.slideshare.caching"><info><title>Zend_Service_SlideShare のキャッシュ処理のポリシー</title></info>
 
-        <title>Zend_Service_SlideShare のキャッシュ処理のポリシー</title>
+        
 
         <para>
             デフォルトでは、<classname>Zend_Service_SlideShare</classname>
             はウェブサービスに対する任意のリクエストを自動的にキャッシュします。
             キャッシュは、ファイルシステム上 (デフォルトのパスは <code>/tmp</code>)
             に 12 時間保存されます。この振る舞いを変更したい場合は、独自の
-            <xref linkend="zend.cache" /> オブジェクトを作成してそれを
+            <xref linkend="zend.cache"/> オブジェクトを作成してそれを
             <methodname>setCacheObject()</methodname> メソッドでこのように指定します。
         </para>
 
@@ -344,17 +342,17 @@ $ss->setCacheObject($cache);
 $ss_user = $ss->getSlideShowsByUser('username', $starting_offset, $limit);
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.slideshare.httpclient">
+    <section xml:id="zend.service.slideshare.httpclient"><info><title>HTTP クライアントの振る舞いの変更</title></info>
 
-        <title>HTTP クライアントの振る舞いの変更</title>
+        
 
         <para>
             何らかの理由でウェブサービスにリクエストを送る
             <acronym>HTTP</acronym> クライアントの振る舞いを変更したくなったとしましょう。
             そんな場合は、独自の <classname>Zend_Http_Client</classname> オブジェクトのインスタンスを作成します
-            (<xref linkend="zend.http" /> を参照ください)。これは、
+            (<xref linkend="zend.http"/> を参照ください)。これは、
             たとえば接続のタイムアウト秒数をデフォルトから変更したい場合などに便利です。
         </para>
 
@@ -370,6 +368,6 @@ $ss->setHttpClient($client);
 $ss_user = $ss->getSlideShowsByUser('username', $starting_offset, $limit);
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-</sect1>
+</section>

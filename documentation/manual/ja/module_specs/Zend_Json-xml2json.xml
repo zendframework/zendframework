@@ -1,14 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20792 -->
-<sect1 id="zend.json.xml2json">
-    <title>XML から JSON への変換</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.xml2json"><info><title>XML から JSON への変換</title></info>
+    
     <para>
         <classname>Zend_Json</classname> には、<acronym>XML</acronym> 形式のデータを
         <acronym>JSON</acronym> 形式に変換するための便利なメソッドがあります。
         この機能は
-        <ulink url="http://www.ibm.com/developerworks/xml/library/x-xml2jsonphp/">
-        IBM developerWorks の記事</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.ibm.com/developerworks/xml/library/x-xml2jsonphp/">
+        IBM developerWorks の記事</link>
         に触発されて追加したものです。
     </para>
 
@@ -115,11 +113,8 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
 
     <para>
         xml2json の機能についての詳細は、
-        <ulink url="http://tinyurl.com/2tfa8z">Zend_xml2json のプロポーザル</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://tinyurl.com/2tfa8z">Zend_xml2json のプロポーザル</link>
         を参照ください。
     </para>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

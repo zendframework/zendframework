@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20765 -->
-<sect1 id="zend.captcha.operation">
-    <title>Captcha の方法</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.captcha.operation"><info><title>Captcha の方法</title></info>
+    
 
     <para>
         すべての <acronym>CAPTCHA</acronym> アダプタは
@@ -73,7 +71,4 @@ if ($captcha->isValid($_POST['foo'], $_POST)) {
     // 正解!
 }
 ]]></programlisting>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

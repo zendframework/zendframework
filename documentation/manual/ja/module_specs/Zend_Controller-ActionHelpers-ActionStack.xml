@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20765 -->
-<sect3 id="zend.controller.actionhelpers.actionstack">
-    <title>ActionStack</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.actionstack"><info><title>ActionStack</title></info>
+    
 
     <para>
         <emphasis>ActionStack</emphasis> ヘルパーは、リクエストをフロントコントローラの
@@ -14,8 +12,8 @@
         アクション - コントローラ - モジュール の設定を指定するかのいずれかを用います。
     </para>
 
-    <note>
-        <title>ActionStack ヘルパーを起動すると ActionStack プラグインが初期化される</title>
+    <note><info><title>ActionStack ヘルパーを起動すると ActionStack プラグインが初期化される</title></info>
+        
 
         <para>
             <emphasis>ActionStack</emphasis> を起動すると、暗黙のうちに
@@ -25,8 +23,8 @@
         </para>
     </note>
 
-    <example id="zend.controller.actionhelpers.actionstack.simple">
-        <title>アクション、コントローラおよびモジュール名によるタスクの追加</title>
+    <example xml:id="zend.controller.actionhelpers.actionstack.simple"><info><title>アクション、コントローラおよびモジュール名によるタスクの追加</title></info>
+        
 
         <para>
             単純にアクションとコントローラそしてモジュール
@@ -57,8 +55,8 @@ class FooController extends Zend_Controller_Action
 
     </example>
 
-    <example id="zend.controller.actionhelpers.actionstack.simple2">
-        <title>リクエストオブジェクトによるタスクの追加</title>
+    <example xml:id="zend.controller.actionhelpers.actionstack.simple2"><info><title>リクエストオブジェクトによるタスクの追加</title></info>
+        
 
         <para>
             時にはリクエストオブジェクトのオブジェクト指向的な部分が使いたいこともあるでしょう。
@@ -91,7 +89,4 @@ class FooController extends Zend_Controller_Action
 }
 ]]></programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

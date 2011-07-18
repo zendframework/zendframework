@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21823 -->
-<sect1 id="zend.config.adapters.ini">
-    <title>Zend_Config_Ini</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.ini"><info><title>Zend_Config_Ini</title></info>
+    
 
     <para>
         <classname>Zend_Config_Ini</classname> は、おなじみの <acronym>INI</acronym>
@@ -17,12 +15,12 @@
         そしてその後に継承元のセクション名を指定することで表します。
     </para>
 
-    <note>
-        <title>INI ファイルのパース</title>
+    <note><info><title>INI ファイルのパース</title></info>
+        
 
         <para>
             <classname>Zend_Config_Ini</classname> は、<acronym>PHP</acronym> の
-            <ulink url="http://php.net/parse_ini_file"><methodname>parse_ini_file()</methodname></ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/parse_ini_file"><methodname>parse_ini_file()</methodname></link>
             関数を使用しています。このドキュメントでは、<classname>Zend_Config_Ini</classname>
             固有の挙動に注意しましょう。例えば、特殊な値として
             "<constant>TRUE</constant>" や "<constant>FALSE</constant>"、
@@ -31,8 +29,8 @@
         </para>
     </note>
 
-    <note>
-        <title>キーの区切り文字</title>
+    <note><info><title>キーの区切り文字</title></info>
+        
 
         <para>
             デフォルトでは、キーの区切り文字はピリオド (<emphasis>.</emphasis>) です。
@@ -47,13 +45,13 @@ $options['nestSeparator'] = ':';
 $config = new Zend_Config_Ini('/path/to/config.ini',
                               'staging',
                               $options);
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
     </note>
 
-    <example id="zend.config.adapters.ini.example.using">
-        <title>Zend_Config_Ini の使用法</title>
+    <example xml:id="zend.config.adapters.ini.example.using"><info><title>Zend_Config_Ini の使用法</title></info>
+        
 
         <para>
             この例は、<classname>Zend_Config_Ini</classname> を使用して
@@ -83,8 +81,8 @@ database.params.dbname   = dbname
 database.params.host     = dev.example.com
 database.params.username = devuser
 database.params.password = devsecret
-]]>
-</programlisting>
+
+]]></programlisting>
 
         <para>
             次に、開発者が開発環境用の設定データを <acronym>INI</acronym> ファイルから読み込むことを考えます。
@@ -96,13 +94,13 @@ $config = new Zend_Config_Ini('/path/to/config.ini', 'staging');
 
 echo $config->database->params->host;   // "dev.example.com" と出力します
 echo $config->database->params->dbname; // "dbname" と出力します
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
 
     <note>
-    <table id="zend.config.adapters.ini.table">
-        <title>Zend_Config_Ini コンストラクタのパラメータ</title>
+    <table xml:id="zend.config.adapters.ini.table"><info><title>Zend_Config_Ini コンストラクタのパラメータ</title></info>
+        
         <tgroup cols="2">
             <thead>
                   <row>
@@ -150,7 +148,4 @@ echo $config->database->params->dbname; // "dbname" と出力します
         </tgroup>
     </table>
     </note>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

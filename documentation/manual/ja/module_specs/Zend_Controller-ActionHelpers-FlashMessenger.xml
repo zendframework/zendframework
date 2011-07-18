@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20765 -->
-<sect3 id="zend.controller.actionhelpers.flashmessenger">
-    <title>FlashMessenger</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.flashmessenger"><info><title>FlashMessenger</title></info>
+    
 
-    <sect4 id="zend.controller.actionhelper.flashmessenger.introduction">
-        <title>導入</title>
+    <section xml:id="zend.controller.actionhelper.flashmessenger.introduction"><info><title>導入</title></info>
+        
 
         <para>
             <emphasis>FlashMessenger</emphasis> ヘルパーは、
@@ -19,10 +17,10 @@
             のドキュメントを参照ください)。
         </para>
 
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelper.flashmessenger.basicusage">
-        <title>基本的な使用例</title>
+    <section xml:id="zend.controller.actionhelper.flashmessenger.basicusage"><info><title>基本的な使用例</title></info>
+        
 
         <para>
             以下の使用例は、もっとも基本的なフラッシュメッセンジャーの使用法を示すものです。
@@ -66,5 +64,5 @@ class SomeController extends Zend_Controller_Action
     }
 }
 ]]></programlisting>
-    </sect4>
-</sect3>
+    </section>
+</section>

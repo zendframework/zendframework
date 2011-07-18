@@ -1,10 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20792 -->
-<sect1 id="zend.ldap.ldif">
-    <title>LDIFへ、または、からのLDAPデータシリアライズ</title>
-    <sect2 id="zend.ldap.ldif.encode">
-        <title>LDIFへのLDAP項目シリアライズ</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.ldif"><info><title>LDIFへ、または、からのLDAPデータシリアライズ</title></info>
+    
+    <section xml:id="zend.ldap.ldif.encode"><info><title>LDIFへのLDAP項目シリアライズ</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $data = array(
@@ -64,10 +62,10 @@ title;lang-en: Sales, Director
 */
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.ldap.ldif.decode">
-        <title>LDIF文字列をLDAP項目に非シリアライズ化</title>
+    <section xml:id="zend.ldap.ldif.decode"><info><title>LDIF文字列をLDAP項目に非シリアライズ化</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $ldif = "dn:: dWlkPXJvZ2FzYXdhcmEsb3U95Za25qWt6YOoLG89QWlyaXVz
@@ -125,6 +123,5 @@ $data = array(
 */
 ]]></programlisting>
 
-    </sect2>
-</sect1>
-
+    </section>
+</section>

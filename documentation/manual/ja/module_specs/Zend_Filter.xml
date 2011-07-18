@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21606 -->
-<sect1 id="zend.filter.introduction">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.introduction"><info><title>導入</title></info>
 
-    <title>導入</title>
+    
 
     <para>
         <classname>Zend_Filter</classname> コンポーネントは、データのフィルタリングに必要となる一般的な機能を提供します。
@@ -11,9 +9,9 @@
         ひとつのデータに対して複数のフィルタを指定した順に適用できます。
     </para>
 
-    <sect2 id="zend.filter.introduction.definition">
+    <section xml:id="zend.filter.introduction.definition"><info><title>フィルタとは?</title></info>
 
-        <title>フィルタとは?</title>
+        
 
         <para>
             自然界におけるフィルタの典型的な使用法は、
@@ -43,11 +41,11 @@
             それは入力データに対して何らかの変換を行うことを意味します。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.introduction.using">
+    <section xml:id="zend.filter.introduction.using"><info><title>フィルタの基本的な使用法</title></info>
 
-        <title>フィルタの基本的な使用法</title>
+        
 
         <para>
             ここで考えたフィルタについての定義をもとにして
@@ -57,23 +55,23 @@
         </para>
 
         <para>
-            以下の例は、アンパサンド (<emphasis>&amp;</emphasis>) およびダブルクォート (<emphasis>&quot;</emphasis>)
+            以下の例は、アンパサンド (<emphasis>&amp;</emphasis>) およびダブルクォート (<emphasis>"</emphasis>)
             の二つの入力データに対してフィルタを適用するものです。
 
             <programlisting language="php"><![CDATA[
 $htmlEntities = new Zend_Filter_HtmlEntities();
 
-echo $htmlEntities->filter('&'); // &amp;
-echo $htmlEntities->filter('"'); // &quot;
+echo $htmlEntities->filter('&'); // &
+echo $htmlEntities->filter('"'); // "
 ]]></programlisting>
 
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.introduction.static">
+    <section xml:id="zend.filter.introduction.static"><info><title>静的メソッド staticFilter() の使用法</title></info>
 
-        <title>静的メソッド staticFilter() の使用法</title>
+        
 
         <para>
             指定したフィルタクラスを読み込んでそのインスタンスを作成するというのが面倒ならば、
@@ -113,12 +111,12 @@ echo Zend_Filter::filterStatic('"',
         <para>
             また、<classname>Zend_Filter_Input</classname> クラスでも、特定の入力データのセットを処理する際に
             複数のフィルタやバリデータを必要に応じて実行させる機能も提供しています。
-            詳細は <xref linkend="zend.filter.input" /> を参照ください。
+            詳細は <xref linkend="zend.filter.input"/> を参照ください。
         </para>
 
-        <sect3 id="zend.filter.introduction.static.namespaces">
+        <section xml:id="zend.filter.introduction.static.namespaces"><info><title>名前空間</title></info>
 
-            <title>名前空間</title>
+            
 
             <para>
                 自分で定義したフィルタを使う際に、
@@ -186,9 +184,6 @@ echo Zend_Filter::filterStatic('"', 'OtherFilter', array($parameters));
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

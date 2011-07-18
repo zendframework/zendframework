@@ -1,19 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20763 -->
-<sect1 id="zend.auth.adapter.http">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.http"><info><title>HTTP 認証アダプタ</title></info>
 
-    <title>HTTP 認証アダプタ</title>
+    
 
-    <sect2 id="zend.auth.adapter.http.introduction">
+    <section xml:id="zend.auth.adapter.http.introduction"><info><title>導入</title></info>
 
-        <title>導入</title>
+        
 
         <para>
             <classname>Zend_Auth_Adapter_Http</classname> は、
-            <ulink url="http://tools.ietf.org/html/rfc2617">RFC-2617</ulink> や
-            <ulink url="http://en.wikipedia.org/wiki/Basic_authentication_scheme">ベーシック</ulink>、
-            <ulink url="http://en.wikipedia.org/wiki/Digest_access_authentication">ダイジェスト</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://tools.ietf.org/html/rfc2617">RFC-2617</link> や
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Basic_authentication_scheme">ベーシック</link>、
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Digest_access_authentication">ダイジェスト</link>
             <acronym>HTTP</acronym> 認証にほぼ準拠した実装を提供します。ダイジェスト認証とは
             <acronym>HTTP</acronym> 認証方式のひとつで、パスワードを平文でネットワークに送信する必要がないという点で
             ベーシック認証より優れています。
@@ -71,11 +69,11 @@
             </listitem>
         </itemizedlist>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.design_overview">
+    <section xml:id="zend.auth.adapter.design_overview"><info><title>設計の概要</title></info>
 
-        <title>設計の概要</title>
+        
 
         <para>
             このアダプタはふたつのサブコンポーネントで構成されています。
@@ -86,11 +84,11 @@
             されると、クライアントから送信された値に基づいて認証が成功したかどうかを判断します。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.configuration_options">
+    <section xml:id="zend.auth.adapter.configuration_options"><info><title>設定オプション</title></info>
 
-        <title>設定オプション</title>
+        
 
         <para>
             <classname>Zend_Auth_Adapter_Http</classname> クラスのコンストラクタには、
@@ -98,8 +96,8 @@
             その中には必須のものもあります。
         </para>
 
-        <table id="zend.auth.adapter.configuration_options.table">
-            <title>設定オプション</title>
+        <table xml:id="zend.auth.adapter.configuration_options.table"><info><title>設定オプション</title></info>
+            
             <tgroup cols="3">
                 <thead>
                     <row>
@@ -168,11 +166,11 @@
             </para>
         </note>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.http.resolvers">
+    <section xml:id="zend.auth.adapter.http.resolvers"><info><title>リゾルバ</title></info>
 
-        <title>リゾルバ</title>
+        
 
         <para>
             リゾルバの仕事は、ユーザ名とレルムを受け取って何らかの証明を返すことです。
@@ -191,9 +189,9 @@
             その他のリゾルバも簡単に作成できます。
         </para>
 
-        <sect3 id="zend.auth.adapter.http.resolvers.file">
+        <section xml:id="zend.auth.adapter.http.resolvers.file"><info><title>File リゾルバ</title></info>
 
-            <title>File リゾルバ</title>
+            
 
             <para>
                 ファイルリゾルバは、非常にシンプルなクラスです。
@@ -242,13 +240,13 @@ $resolver->setFile($path);
                 例外をスローします。
             </para>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.http.basic_usage">
+    <section xml:id="zend.auth.adapter.http.basic_usage"><info><title>基本的な使用法</title></info>
 
-        <title>基本的な使用法</title>
+        
 
         <para>
             まず、必須設定項目を含む配列を作成します。
@@ -315,9 +313,6 @@ if (!$result->isValid()) {
 }
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

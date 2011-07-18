@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20807 -->
-<sect1 id="zend.tool.framework.system-providers">
-    <title>出荷されたシステムプロバイダー</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.system-providers"><info><title>出荷されたシステムプロバイダー</title></info>
+    
 
     <para>
         <classname>Zend_Tool_Project</classname>とともに出荷された、
@@ -15,8 +15,8 @@
         開発者を援助することを目的とするものもあります。
     </para>
 
-    <sect2 id="zend.tool.framework.system-providers.version">
-        <title>バージョンプロバイダー</title>
+    <section xml:id="zend.tool.framework.system-providers.version"><info><title>バージョンプロバイダー</title></info>
+        
 
         <para>
             <command>zf</command>または<classname>Zend_Tool</classname>が動作するために現行設定されている
@@ -27,10 +27,10 @@
             コマンドラインで、<command>zf show version</command>とだけ実行してください。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.tool.framework.system-providers.manifest">
-        <title>マニフェストプロバイダー</title>
+    <section xml:id="zend.tool.framework.system-providers.manifest"><info><title>マニフェストプロバイダー</title></info>
+        
 
         <para>
             <classname>Zend_Tool</classname>実行中にどのような "manifest" 情報を利用できるか決定するかもしれないように、
@@ -46,5 +46,5 @@
         <para>
             コマンド・ラインで、<command>zf show manifest</command>とだけ実行してください。
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

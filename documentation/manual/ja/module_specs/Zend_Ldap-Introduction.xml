@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20792 -->
-<sect1 id="zend.ldap.introduction">
-    <title>導入</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.introduction"><info><title>導入</title></info>
+    
 
     <para>
         <classname>Zend_Ldap</classname> は <acronym>LDAP</acronym>操作を行うクラスです。
@@ -10,8 +8,8 @@
         <acronym>LDAP</acronym> ディレクトリ内のエントリの検索や変更には対応していません。
     </para>
 
-    <sect2 id="zend.ldap.introduction.theory-of-operations">
-        <title>動作原理</title>
+    <section xml:id="zend.ldap.introduction.theory-of-operations"><info><title>動作原理</title></info>
+        
 
         <para>
             現在このコンポーネントは、OpenLDAPまたはActiveDirectory（AD）サーバのような
@@ -98,8 +96,8 @@ echo "$acctname\n";
             これはただ単に、このクラスに現在存在するコードの例をできるだけ多く見せたいからです。
         </para>
 
-        <sect3 id="zend.ldap.introduction.theory-of-operations.automatic-username-canonicalization">
-            <title>バインド時のユーザ名自動正規化</title>
+        <section xml:id="zend.ldap.introduction.theory-of-operations.automatic-username-canonicalization"><info><title>バインド時のユーザ名自動正規化</title></info>
+            
 
             <para>
                 <emphasis>bindRequiresDN</emphasis> が <constant>TRUE</constant>で、
@@ -112,8 +110,7 @@ echo "$acctname\n";
             </para>
 
             <para>
-                この振る舞いは<link
-                    linkend="zend.auth.adapter.ldap"><classname>Zend_Auth_Adapter_Ldap</classname></link>
+                この振る舞いは<link linkend="zend.auth.adapter.ldap"><classname>Zend_Auth_Adapter_Ldap</classname></link>
                 にとっては重要です。
                 これは、ユーザが指定したユーザ名を直接 <methodname>bind()</methodname> に渡します。
             </para>
@@ -149,10 +146,10 @@ echo "$acctname\n";
                 '<command>CN=Alice Baker,OU=Sales,DC=foo,DC=net</command>'
                 でバインドしなおします。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.ldap.introduction.theory-of-operations.account-name-canonicalization">
-            <title>アカウント名の正規化</title>
+        <section xml:id="zend.ldap.introduction.theory-of-operations.account-name-canonicalization"><info><title>アカウント名の正規化</title></info>
+            
 
             <para>
                 <emphasis>accountDomainName</emphasis>および
@@ -165,8 +162,8 @@ echo "$acctname\n";
                 このオプションの値は、次のいずれかとなります:
             </para>
 
-            <table id="zend.ldap.using.theory-of-operation.account-name-canonicalization.table">
-                <title>accountCanonicalFormのオプション</title>
+            <table xml:id="zend.ldap.using.theory-of-operation.account-name-canonicalization.table"><info><title>accountCanonicalFormのオプション</title></info>
+                
                 <tgroup cols="3">
                     <thead>
                         <row>
@@ -228,10 +225,10 @@ echo "$acctname\n";
                 が 3 に設定されていれば正規化後の名前は
                 <emphasis>EXAMPLE\abaker</emphasis> となります。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.ldap.introduction.theory-of-operations.multi-domain-failover">
-            <title>複数ドメインの認証とフェイルオーバー</title>
+        <section xml:id="zend.ldap.introduction.theory-of-operations.multi-domain-failover"><info><title>複数ドメインの認証とフェイルオーバー</title></info>
+            
 
             <para>
                 <classname>Zend_Ldap</classname> コンポーネント自身は、
@@ -326,12 +323,11 @@ foreach ($multiOptions as $name => $options) {
             </para>
 
             <para>
-                上のコードは、<link
-                    linkend="zend.auth.adapter.ldap"><classname>Zend_Auth_Adapter_Ldap</classname></link>
+                上のコードは、<link linkend="zend.auth.adapter.ldap"><classname>Zend_Auth_Adapter_Ldap</classname></link>
                 の中で使用するコードと非常によく似ています。実際のところ、
                 複数ドメインとフェイルオーバー機能をもつ <acronym>LDAP</acronym> 基本認証を行うのなら、
                 この認証アダプタを使用する (あるいはコードをコピーする) ことをおすすめします。
             </para>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

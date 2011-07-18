@@ -1,29 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20818 -->
-<sect1 id="zend.service.amazon.ec2" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Zend_Service_Amazon_Ec2</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2"><info><title>Zend_Service_Amazon_Ec2</title></info>
+    
 
-    <sect2 id="zend.service.amazon.ec2.introduction">
-        <title>導入</title>
+    <section xml:id="zend.service.amazon.ec2.introduction"><info><title>導入</title></info>
+        
 
         <para>
             <classname>Zend_Service_Amazon_Ec2</classname>は融通性のあるクランドコンピューティング(EC2)へのインターフェイスを提供します。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.amazon.ec2.whatis">
-        <title>Amazon Ec2とは？</title>
+    <section xml:id="zend.service.amazon.ec2.whatis"><info><title>Amazon Ec2とは？</title></info>
+        
 
         <para>
             Amazon EC2は、<acronym>API</acronym>や役に立つツールやユーティリティーを使って、
             Amazonのデータセンターにあるサーバインスタンスを起動したり管理したりできるWebサービスです。
             あなたはいつでも必要なだけ、合法な限り、Amazon EC2サーバインスタンスを使うことができます。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.amazon.ec2.staticmethods">
-        <title>静的メソッド</title>
+    <section xml:id="zend.service.amazon.ec2.staticmethods"><info><title>静的メソッド</title></info>
+        
 
         <para>
             Ec2 クラスの使い勝手をよくするために、ふたつの静的メソッドが用意されています。
@@ -34,8 +32,8 @@
             コンストラクタにキーを渡す必要がなくなります。
         </para>
 
-        <example id="zend.service.amazon.ec2.staticmethods.setkeys">
-            <title>setKeys() の例</title>
+        <example xml:id="zend.service.amazon.ec2.staticmethods.setkeys"><info><title>setKeys() の例</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 Zend_Service_Amazon_Ec2_Ebs::setKeys('aws_key','aws_secret_key');
@@ -50,22 +48,22 @@ Zend_Service_Amazon_Ec2_Ebs::setKeys('aws_key','aws_secret_key');
             無効な値を渡した場合は例外をスローします。
         </para>
 
-        <example id="zend.service.amazon.ec2.staticmethods.setregion">
-            <title>setRegion() の例</title>
+        <example xml:id="zend.service.amazon.ec2.staticmethods.setregion"><info><title>setRegion() の例</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 Zend_Service_Amazon_Ec2_Ebs::setRegion('us-east-1');
 ]]></programlisting>
         </example>
 
-        <note id="zend.service.amazon.ec2.staticmethods.setregion.note">
-            <title>Amazon Ec2 リージョンの設定</title>
+        <note xml:id="zend.service.amazon.ec2.staticmethods.setregion.note"><info><title>Amazon Ec2 リージョンの設定</title></info>
+            
 
             <para>
                 別の方法として、各クラスを作成する際のコンストラクタの
                 3 番目の引数としてリージョンを設定することもできます。
             </para>
         </note>
-    </sect2>
+    </section>
 
-</sect1>
+</section>

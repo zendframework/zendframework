@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 19434 -->
-<sect3 id="zend.view.helpers.initial.json">
-    <title>JSON ヘルパー</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.json"><info><title>JSON ヘルパー</title></info>
+    
 
     <para>
         <acronym>JSON</acronym> を返すビューを作成する際に大事なのは、
@@ -33,8 +31,8 @@ Content-Type: application/json
 <?php echo $this->json($this->data) ?>
 ]]></programlisting>
 
-    <note>
-        <title>レイアウトの維持、およびZend_Json_Expr によるエンコードの有効化</title>
+    <note><info><title>レイアウトの維持、およびZend_Json_Expr によるエンコードの有効化</title></info>
+        
 
         <para>
             <acronym>JSON</acronym> ヘルパーの各メソッドには、オプションで 2 番目の引数を指定できます。
@@ -74,7 +72,4 @@ echo $this->json($this->data, array('keepLayouts' => true));
 )) ?>
 ]]></programlisting>
     </note>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

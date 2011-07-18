@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 19689 -->
-<sect2 id="zend.application.available-resources.log">
-    <title>Zend_Application_Resource_Log</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.log"><info><title>Zend_Application_Resource_Log</title></info>
+    
 
     <para>
         任意の数のログ・ライタとともに <classname>Zend_Log</classname>インスタンスを
@@ -13,8 +11,8 @@
         後でブートストラップから取得されることがあります。
     </para>
 
-    <example id="zend.application.available-resources.log.configExample">
-        <title>ログ・リソース構成サンプル</title>
+    <example xml:id="zend.application.available-resources.log.configExample"><info><title>ログ・リソース構成サンプル</title></info>
+        
 
         <para>
             下記は、ログ・リソースを設定する方法を示す、
@@ -30,9 +28,8 @@ resources.log.stream.filterParams.priority = 4
 ]]></programlisting>
 
         <para>
-            利用可能なオプションについての詳細は、<link
-                linkend="zend.log.factory">Zend_Log::factory() ドキュメント</link>
+            利用可能なオプションについての詳細は、<link linkend="zend.log.factory">Zend_Log::factory() ドキュメント</link>
             をチェックしてください。
         </para>
     </example>
-</sect2>
+</section>

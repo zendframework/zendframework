@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21080 -->
-<sect1 id="zend.db.adapter">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.adapter"><info><title>Zend_Db_Adapter</title></info>
 
-    <title>Zend_Db_Adapter</title>
+    
 
     <para>
         <classname>Zend_Db</classname> とその関連クラス群は、Zend Framework
@@ -22,7 +20,7 @@
 
     <para>
         アダプタクラスのインターフェイスは、
-        <ulink url="http://www.php.net/pdo">PHP Data Objects</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/pdo">PHP Data Objects</link>
         拡張モジュールのインターフェイスと似ています。
         <classname>Zend_Db</classname> では、次の <acronym>RDBMS</acronym> 用の <acronym>PDO</acronym> ドライバに対するアダプタクラスを用意しています。
     </para>
@@ -30,32 +28,32 @@
     <itemizedlist>
         <listitem>
             <para>
-                IBM DB2 および Informix Dynamic Server (IDS) (<ulink url="http://www.php.net/pdo-ibm">pdo_ibm</ulink> <acronym>PHP</acronym> 拡張モジュールを使用)
+                IBM DB2 および Informix Dynamic Server (IDS) (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/pdo-ibm">pdo_ibm</link> <acronym>PHP</acronym> 拡張モジュールを使用)
             </para>
         </listitem>
         <listitem>
             <para>
-                MySQL (<ulink url="http://www.php.net/pdo-mysql">pdo_mysql</ulink> <acronym>PHP</acronym> 拡張モジュールを使用)
+                MySQL (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/pdo-mysql">pdo_mysql</link> <acronym>PHP</acronym> 拡張モジュールを使用)
             </para>
         </listitem>
         <listitem>
             <para>
-                Microsoft SQL Server (<ulink url="http://www.php.net/pdo-dblib">pdo_dblib</ulink> <acronym>PHP</acronym> 拡張モジュールを使用)
+                Microsoft SQL Server (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/pdo-dblib">pdo_dblib</link> <acronym>PHP</acronym> 拡張モジュールを使用)
             </para>
         </listitem>
         <listitem>
             <para>
-                Oracle (<ulink url="http://www.php.net/pdo-oci">pdo_oci</ulink> <acronym>PHP</acronym> 拡張モジュールを使用)
+                Oracle (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/pdo-oci">pdo_oci</link> <acronym>PHP</acronym> 拡張モジュールを使用)
             </para>
         </listitem>
         <listitem>
             <para>
-                PostgreSQL (<ulink url="http://www.php.net/pdo-pgsql">pdo_pgsql</ulink> <acronym>PHP</acronym> 拡張モジュールを使用)
+                PostgreSQL (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/pdo-pgsql">pdo_pgsql</link> <acronym>PHP</acronym> 拡張モジュールを使用)
             </para>
         </listitem>
         <listitem>
             <para>
-                SQLite (<ulink url="http://www.php.net/pdo-sqlite">pdo_sqlite</ulink> <acronym>PHP</acronym> 拡張モジュールを使用)
+                SQLite (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/pdo-sqlite">pdo_sqlite</link> <acronym>PHP</acronym> 拡張モジュールを使用)
             </para>
         </listitem>
 
@@ -69,22 +67,22 @@
     <itemizedlist>
         <listitem>
             <para>
-                MySQL (<ulink url="http://www.php.net/mysqli">mysqli</ulink> を使用します)
+                MySQL (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/mysqli">mysqli</link> を使用します)
             </para>
         </listitem>
         <listitem>
             <para>
-                Oracle (<ulink url="http://www.php.net/oci8">oci8</ulink> を使用します)
+                Oracle (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/oci8">oci8</link> を使用します)
             </para>
         </listitem>
         <listitem>
             <para>
-                IBM DB2 および DB2/i5 (<ulink url="http://www.php.net/ibm_db2">ibm_db2</ulink> を使用します)
+                IBM DB2 および DB2/i5 (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/ibm_db2">ibm_db2</link> を使用します)
             </para>
         </listitem>
         <listitem>
             <para>
-                Firebird/Interbase (<ulink url="http://www.php.net/ibase">php_interbase</ulink> を使用します)
+                Firebird/Interbase (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/ibase">php_interbase</link> を使用します)
             </para>
         </listitem>
     </itemizedlist>
@@ -100,9 +98,9 @@
         </para>
     </note>
 
-    <sect2 id="zend.db.adapter.connecting">
+    <section xml:id="zend.db.adapter.connecting"><info><title>アダプタを使用したデータベース接続</title></info>
 
-        <title>アダプタを使用したデータベース接続</title>
+        
 
         <para>
             ここでは、データベースアダプタのインスタンスを作成する方法を説明します。
@@ -110,9 +108,9 @@
             サーバへの接続を確立することに対応します。
         </para>
 
-        <sect3 id="zend.db.adapter.connecting.constructor">
+        <section xml:id="zend.db.adapter.connecting.constructor"><info><title>Zend_Db アダプタのコンストラクタの使用</title></info>
 
-            <title>Zend_Db アダプタのコンストラクタの使用</title>
+            
 
             <para>
                 コンストラクタを使用して、アダプタのインスタンスを作成できます。
@@ -120,8 +118,8 @@
                 接続を確立するために必要なパラメータを配列で渡します。
             </para>
 
-            <example id="zend.db.adapter.connecting.constructor.example">
-                <title>アダプタのコンストラクタの使用</title>
+            <example xml:id="zend.db.adapter.connecting.constructor.example"><info><title>アダプタのコンストラクタの使用</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $db = new Zend_Db_Adapter_Pdo_Mysql(array(
     'host'     => '127.0.0.1',
@@ -132,11 +130,11 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
 ]]></programlisting>
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.connecting.factory">
+        <section xml:id="zend.db.adapter.connecting.factory"><info><title>Zend_Db のファクトリの使用</title></info>
 
-            <title>Zend_Db のファクトリの使用</title>
+            
 
             <para>
                 コンストラクタを直接使用する以外の方法として、静的メソッド
@@ -153,8 +151,8 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
                 アダプタのコンストラクタに指定するのと同じ形式の配列となります。
             </para>
 
-            <example id="zend.db.adapter.connecting.factory.example">
-                <title>ファクトリメソッドの使用</title>
+            <example xml:id="zend.db.adapter.connecting.factory.example"><info><title>ファクトリメソッドの使用</title></info>
+                
                 <programlisting language="php"><![CDATA[
 // 次の文は不要です。Zend_Db_Adapter_Pdo_Mysql ファイルは
 // Zend_Db の factory メソッドが読み込みます。
@@ -181,8 +179,8 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
                 'adapterNamespace' で指定します。
             </para>
 
-            <example id="zend.db.adapter.connecting.factory.example2">
-                <title>自作のアダプタクラスをアダプタのファクトリメソッドで使用する方法</title>
+            <example xml:id="zend.db.adapter.connecting.factory.example2"><info><title>自作のアダプタクラスをアダプタのファクトリメソッドで使用する方法</title></info>
+                
                 <programlisting language="php"><![CDATA[
 // アダプタのクラスファイルの読み込みは不要です
 // Zend_Db の factory メソッドが読み込みます
@@ -199,11 +197,11 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
 ]]></programlisting>
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.connecting.factory-config">
+        <section xml:id="zend.db.adapter.connecting.factory-config"><info><title>Zend_Db ファクトリでの Zend_Config の使用</title></info>
 
-            <title>Zend_Db ファクトリでの Zend_Config の使用</title>
+            
 
             <para>
                 <methodname>factory()</methodname> メソッドの引数として、
@@ -221,8 +219,8 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
                 2 番目のパラメータを省略した場合にのみ読み込まれます。
             </para>
 
-            <example id="zend.db.adapter.connecting.factory.example1">
-                <title>アダプタのファクトリメソッドでの Zend_Config オブジェクトの使用</title>
+            <example xml:id="zend.db.adapter.connecting.factory.example1"><info><title>アダプタのファクトリメソッドでの Zend_Config オブジェクトの使用</title></info>
+                
                 <para>
                     次の例では、配列から <classname>Zend_Config</classname> オブジェクトを作成します。
                     それ以外にも、
@@ -257,11 +255,11 @@ $db = Zend_Db::factory($config->database);
                 2 番目の引数は無視されます。
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.connecting.parameters">
+        <section xml:id="zend.db.adapter.connecting.parameters"><info><title>アダプタのパラメータ</title></info>
 
-            <title>アダプタのパラメータ</title>
+            
 
             <para>
                 <classname>Zend_Db</classname> のアダプタクラスで使用できるパラメータを以下にまとめます。
@@ -336,8 +334,8 @@ $db = Zend_Db::factory($config->database);
                 </listitem>
             </itemizedlist>
 
-            <example id="zend.db.adapter.connecting.parameters.example1">
-                <title>ファクトリでの大文字小文字変換オプションの指定</title>
+            <example xml:id="zend.db.adapter.connecting.parameters.example1"><info><title>ファクトリでの大文字小文字変換オプションの指定</title></info>
+                
                 <para>
                     このオプションは、定数
                     <constant>Zend_Db::CASE_FOLDING</constant> で指定します。
@@ -366,8 +364,8 @@ $db = Zend_Db::factory('Db2', $params);
 ]]></programlisting>
             </example>
 
-            <example id="zend.db.adapter.connecting.parameters.example2">
-                <title>ファクトリでの自動クォートオプションの指定</title>
+            <example xml:id="zend.db.adapter.connecting.parameters.example2"><info><title>ファクトリでの自動クォートオプションの指定</title></info>
+                
                 <para>
                     このオプションは、定数
                     <constant>Zend_Db::AUTO_QUOTE_IDENTIFIERS</constant> で指定します。
@@ -397,8 +395,8 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
 ]]></programlisting>
             </example>
 
-            <example id="zend.db.adapter.connecting.parameters.example3">
-                <title>ファクトリでの PDO ドライバのオプションの指定</title>
+            <example xml:id="zend.db.adapter.connecting.parameters.example3"><info><title>ファクトリでの PDO ドライバのオプションの指定</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $pdoParams = array(
     PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
@@ -419,8 +417,8 @@ echo $db->getConnection()
 ]]></programlisting>
             </example>
 
-            <example id="zend.db.adapter.connecting.parameters.example4">
-                <title>ファクトリでのシリアライズオプションの指定</title>
+            <example xml:id="zend.db.adapter.connecting.parameters.example4"><info><title>ファクトリでのシリアライズオプションの指定</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $options = array(
     Zend_Db::ALLOW_SERIALIZATION => false
@@ -438,10 +436,10 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
 ]]></programlisting>
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.connecting.getconnection">
-            <title>遅延接続の管理</title>
+        <section xml:id="zend.db.adapter.connecting.getconnection"><info><title>遅延接続の管理</title></info>
+            
 
             <para>
                 アダプタクラスのインスタンスを作成した時点では、
@@ -487,8 +485,8 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
                 を渡します。
             </para>
 
-            <example id="zend.db.adapter.connecting.getconnection.example">
-                <title>接続時の例外処理</title>
+            <example xml:id="zend.db.adapter.connecting.getconnection.example"><info><title>接続時の例外処理</title></info>
+                
                 <programlisting language="php"><![CDATA[
 try {
     $db = Zend_Db::factory('Pdo_Mysql', $parameters);
@@ -501,13 +499,13 @@ try {
 ]]></programlisting>
             </example>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.example-database">
+    <section xml:id="zend.db.adapter.example-database"><info><title>サンプルデータベース</title></info>
 
-        <title>サンプルデータベース</title>
+        
 
         <para>
             <classname>Zend_Db</classname> クラスのドキュメントでは、
@@ -591,24 +589,23 @@ CREATE TABLE bugs_products (
         </para>
 
         <para>
-            <inlinegraphic width="387" scale="100" align="center" valign="middle"
-                fileref="figures/zend.db.adapter.example-database.png" format="PNG" />
+            <inlinemediaobject><imageobject><imagedata width="387" scale="100" align="center" valign="middle" fileref="figures/zend.db.adapter.example-database.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.select">
+    <section xml:id="zend.db.adapter.select"><info><title>クエリ結果の読み込み</title></info>
 
-        <title>クエリ結果の読み込み</title>
+        
 
         <para>
             ここでは、 <acronym>SELECT</acronym> クエリを実行してその結果を取得するための
             アダプタのメソッドについて説明します。
         </para>
 
-        <sect3 id="zend.db.adapter.select.fetchall">
+        <section xml:id="zend.db.adapter.select.fetchall"><info><title>結果セット全体の取得</title></info>
 
-            <title>結果セット全体の取得</title>
+            
 
             <para>
                 <acronym>SQL</acronym> の <acronym>SELECT</acronym> クエリの実行とその結果の取得を一度に行うには
@@ -629,8 +626,8 @@ CREATE TABLE bugs_products (
                 <acronym>SQL</acronym> 文中のパラメータプレースホルダを置換する値の配列となります。
             </para>
 
-            <example id="zend.db.adapter.select.fetchall.example">
-                <title>fetchAll() の使用</title>
+            <example xml:id="zend.db.adapter.select.fetchall.example"><info><title>fetchAll() の使用</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE bug_id = ?';
 
@@ -638,11 +635,11 @@ $result = $db->fetchAll($sql, 2);
 ]]></programlisting>
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.select.fetch-mode">
+        <section xml:id="zend.db.adapter.select.fetch-mode"><info><title>フェッチモードの変更</title></info>
 
-            <title>フェッチモードの変更</title>
+            
 
             <para>
                 デフォルトでは、<methodname>fetchAll()</methodname>
@@ -679,7 +676,7 @@ $result = $db->fetchAll($sql, 2);
                         大文字小文字を指定するには、<constant>Zend_Db::CASE_FOLDING</constant>
                         オプションを使用します。これは、
                         アダプタのインスタンスを作成する際に使用します。
-                        <xref linkend="zend.db.adapter.connecting.parameters.example1" />
+                        <xref linkend="zend.db.adapter.connecting.parameters.example1"/>
                         を参照ください。
                     </para>
                 </listitem>
@@ -718,8 +715,8 @@ $result = $db->fetchAll($sql, 2);
                 </listitem>
             </itemizedlist>
 
-            <example id="zend.db.adapter.select.fetch-mode.example">
-                <title>setFetchMode() の使用</title>
+            <example xml:id="zend.db.adapter.select.fetch-mode.example"><info><title>setFetchMode() の使用</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
@@ -730,11 +727,11 @@ echo $result[0]->bug_description;
 ]]></programlisting>
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.select.fetchassoc">
+        <section xml:id="zend.db.adapter.select.fetchassoc"><info><title>連想配列形式での結果セットの取得</title></info>
 
-            <title>連想配列形式での結果セットの取得</title>
+            
 
             <para>
                 <methodname>fetchAssoc()</methodname> メソッドは、
@@ -743,8 +740,8 @@ echo $result[0]->bug_description;
                 結果のデータを連想配列の配列で返します。
             </para>
 
-            <example id="zend.db.adapter.select.fetchassoc.example">
-                <title>fetchAssoc() の使用</title>
+            <example xml:id="zend.db.adapter.select.fetchassoc.example"><info><title>fetchAssoc() の使用</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
@@ -756,11 +753,11 @@ echo $result[1]['bug_description']; // Description of Bug #1
 ]]></programlisting>
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.select.fetchcol">
+        <section xml:id="zend.db.adapter.select.fetchcol"><info><title>結果セットの単一のカラムの取得</title></info>
 
-            <title>結果セットの単一のカラムの取得</title>
+            
 
             <para>
                 <methodname>fetchCol()</methodname> メソッドは、
@@ -769,12 +766,12 @@ echo $result[1]['bug_description']; // Description of Bug #1
                 これは、クエリの最初のカラムのみを返します。
                 それ以外のカラムの内容は破棄されます。
                 別のカラムが必要な場合は
-                <xref linkend="zend.db.statement.fetching.fetchcolumn" />
+                <xref linkend="zend.db.statement.fetching.fetchcolumn"/>
                 を参照ください。
             </para>
 
-            <example id="zend.db.adapter.select.fetchcol.example">
-                <title>fetchCol() の使用</title>
+            <example xml:id="zend.db.adapter.select.fetchcol.example"><info><title>fetchCol() の使用</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
@@ -786,11 +783,11 @@ echo $result[0];
 ]]></programlisting>
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.select.fetchpairs">
+        <section xml:id="zend.db.adapter.select.fetchpairs"><info><title>結果セットからの キー/値 のペアの取得</title></info>
 
-            <title>結果セットからの キー/値 のペアの取得</title>
+            
 
             <para>
                 <methodname>fetchPairs()</methodname> メソッドは、データを キー/値
@@ -805,8 +802,8 @@ echo $result[0];
                 もし最初のカラムに重複する値があれば、連想配列のエントリが上書きされてしまいます。
             </para>
 
-            <example id="zend.db.adapter.select.fetchpairs.example">
-                <title>fetchPairs() の例</title>
+            <example xml:id="zend.db.adapter.select.fetchpairs.example"><info><title>fetchPairs() の例</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
@@ -815,11 +812,11 @@ $result = $db->fetchPairs('SELECT bug_id, bug_status FROM bugs');
 echo $result[2];
 ]]></programlisting>
             </example>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.select.fetchrow">
+        <section xml:id="zend.db.adapter.select.fetchrow"><info><title>結果セットからの単一の行の取得</title></info>
 
-            <title>結果セットからの単一の行の取得</title>
+            
 
             <para>
                 <methodname>fetchRow()</methodname> メソッドは、
@@ -827,8 +824,8 @@ echo $result[2];
                 ただ、返すのは結果セットから取得した最初の行のみです。
             </para>
 
-            <example id="zend.db.adapter.select.fetchrow.example">
-                <title>fetchRow() の使用</title>
+            <example xml:id="zend.db.adapter.select.fetchrow.example"><info><title>fetchRow() の使用</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
@@ -838,11 +835,11 @@ $result = $db->fetchRow('SELECT * FROM bugs WHERE bug_id = 2');
 echo $result->bug_description;
 ]]></programlisting>
             </example>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.select.fetchone">
+        <section xml:id="zend.db.adapter.select.fetchone"><info><title>結果セットからの単一のスカラー値の取得</title></info>
 
-            <title>結果セットからの単一のスカラー値の取得</title>
+            
 
             <para>
                 <methodname>fetchOne()</methodname> メソッドは
@@ -852,8 +849,8 @@ echo $result->bug_description;
                 したがって、このメソッドの返り値は配列やオブジェクトではなく単一のスカラー値となります。
             </para>
 
-            <example id="zend.db.adapter.select.fetchone.example">
-                <title>fetchOne() の使用法</title>
+            <example xml:id="zend.db.adapter.select.fetchone.example"><info><title>fetchOne() の使用法</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $result = $db->fetchOne('SELECT bug_status FROM bugs WHERE bug_id = 2');
 
@@ -861,13 +858,13 @@ $result = $db->fetchOne('SELECT bug_status FROM bugs WHERE bug_id = 2');
 echo $result;
 ]]></programlisting>
             </example>
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.write">
+    <section xml:id="zend.db.adapter.write"><info><title>データベースへの変更の書き出し</title></info>
 
-        <title>データベースへの変更の書き出し</title>
+        
 
         <para>
             アダプタクラスを使用して、
@@ -876,9 +873,9 @@ echo $result;
             ここでは、そのためのメソッドについて説明します。
         </para>
 
-        <sect3 id="zend.db.adapter.write.insert">
+        <section xml:id="zend.db.adapter.write.insert"><info><title>データの挿入</title></info>
 
-            <title>データの挿入</title>
+            
 
             <para>
                 データベースのテーブルに新しい行を追加するには、
@@ -887,8 +884,8 @@ echo $result;
                 その次の引数はカラム名とデータの値を関連付けた連想配列となります。
             </para>
 
-            <example id="zend.db.adapter.write.insert.example">
-                <title>テーブルへのデータの挿入</title>
+            <example xml:id="zend.db.adapter.write.insert.example"><info><title>テーブルへのデータの挿入</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $data = array(
     'created_on'      => '2007-03-22',
@@ -922,8 +919,8 @@ $db->insert('bugs', $data);
                 文字列ではなく <classname>Zend_Db_Expr</classname> 型のオブジェクトをデータ配列に渡します。
             </para>
 
-            <example id="zend.db.adapter.write.insert.example2">
-                <title>テーブルへの式の挿入</title>
+            <example xml:id="zend.db.adapter.write.insert.example2"><info><title>テーブルへの式の挿入</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $data = array(
     'created_on'      => new Zend_Db_Expr('CURDATE()'),
@@ -935,11 +932,11 @@ $db->insert('bugs', $data);
 ]]></programlisting>
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.write.lastinsertid">
+        <section xml:id="zend.db.adapter.write.lastinsertid"><info><title>生成された値の取得</title></info>
 
-            <title>生成された値の取得</title>
+            
 
             <para>
                 <acronym>RDBMS</acronym> によっては、主キーの自動インクリメントをサポートしているものもあります。
@@ -958,8 +955,8 @@ $db->insert('bugs', $data);
                 現在のデータベース接続において最後に自動生成された値を返します。
             </para>
 
-            <example id="zend.db.adapter.write.lastinsertid.example-1">
-                <title>自動インクリメントのキーにおける lastInsertId() の使用法</title>
+            <example xml:id="zend.db.adapter.write.lastinsertid.example-1"><info><title>自動インクリメントのキーにおける lastInsertId() の使用法</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $db->insert('bugs', $data);
 
@@ -982,8 +979,8 @@ $id = $db->lastInsertId();
                 という名前のシーケンスを使用することになります。
             </para>
 
-            <example id="zend.db.adapter.write.lastinsertid.example-2">
-                <title>シーケンスにおける lastInsertId() の使用法</title>
+            <example xml:id="zend.db.adapter.write.lastinsertid.example-2"><info><title>シーケンスにおける lastInsertId() の使用法</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $db->insert('bugs', $data);
 
@@ -1001,8 +998,8 @@ $id = $db->lastInsertId('bugs');
                 このメソッドの引数には、シーケンスの名前を直接指定します。
             </para>
 
-            <example id="zend.db.adapter.write.lastinsertid.example-3">
-                <title>lastSequenceId() の使用法</title>
+            <example xml:id="zend.db.adapter.write.lastinsertid.example-3"><info><title>lastSequenceId() の使用法</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $db->insert('bugs', $data);
 
@@ -1021,8 +1018,8 @@ $id = $db->lastSequenceId('bugs_id_gen');
                 となります。
             </para>
 
-            <note>
-                <title>"SELECT MAX(id) FROM table" じゃあダメなんですか?</title>
+            <note><info><title>"SELECT MAX(id) FROM table" じゃあダメなんですか?</title></info>
+                
                 <para>
                     たしかにこのクエリは、最後にテーブルに追加された主キーの値を返すこともあります。
                     しかしこれは、複数のクライアントがデータベースにレコードを追加するという環境では
@@ -1057,10 +1054,10 @@ $id = $db->lastSequenceId('bugs_id_gen');
                 </para>
             </note>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.write.update">
-            <title>データの更新</title>
+        <section xml:id="zend.db.adapter.write.update"><info><title>データの更新</title></info>
+            
 
             <para>
                 データベースのテーブルの行を更新するには、アダプタの
@@ -1072,7 +1069,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
             <para>
                 配列で指定した値は、文字列リテラルとして扱われます。
                 データ配列で <acronym>SQL</acronym> の式を扱う方法については
-                <xref linkend="zend.db.adapter.write.insert" />
+                <xref linkend="zend.db.adapter.write.insert"/>
                 を参照ください。
             </para>
 
@@ -1081,7 +1078,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
                 これが、変更する行を絞り込むための条件となります。
                 ここで指定した値や識別子に対しては、クォートやエスケープは行ないません。
                 何らかの動的な値を使用する場合は、その内容が安全であることを確認するようにしましょう。
-                <xref linkend="zend.db.adapter.quoting" />
+                <xref linkend="zend.db.adapter.quoting"/>
                 で説明しているメソッドを使用するといいでしょう。
             </para>
 
@@ -1089,8 +1086,8 @@ $id = $db->lastSequenceId('bugs_id_gen');
                 このメソッドの返り値は、更新操作によって変更された行の数となります。
             </para>
 
-            <example id="zend.db.adapter.write.update.example">
-                <title>行の更新</title>
+            <example xml:id="zend.db.adapter.write.update.example"><info><title>行の更新</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $data = array(
     'updated_on'      => '2007-03-23',
@@ -1117,8 +1114,8 @@ $n = $db->update('bugs', $data, 'bug_id = 2');
                 <constant>AND</constant> 演算子で区切られます。
             </para>
 
-            <example id="zend.db.adapter.write.update.example-array">
-                <title>式の配列を指定することによる行の更新</title>
+            <example xml:id="zend.db.adapter.write.update.example-array"><info><title>式の配列を指定することによる行の更新</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $data = array(
     'updated_on'      => '2007-03-23',
@@ -1136,8 +1133,8 @@ $n = $db->update('bugs', $data, $where);
 ]]></programlisting>
             </example>
 
-            <example id="zend.db.adapter.write.update.example-arrayofarrays">
-                <title>配列の配列を使う行の更新</title>
+            <example xml:id="zend.db.adapter.write.update.example-arrayofarrays"><info><title>配列の配列を使う行の更新</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $data = array(
     'updated_on'      => '2007-03-23',
@@ -1154,10 +1151,10 @@ $n = $db->update('bugs', $data, $where);
 //  WHERE ("reported_by" = 'goofy') AND ("bug_status" = 'OPEN')
 ]]></programlisting>
             </example>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.write.delete">
-            <title>行の削除</title>
+        <section xml:id="zend.db.adapter.write.delete"><info><title>行の削除</title></info>
+            
             <para>
                 データベースのテーブルから行を削除するには
                 <methodname>delete()</methodname> メソッドを使用します。このメソッドに渡す引数は 2 つで、
@@ -1169,7 +1166,7 @@ $n = $db->update('bugs', $data, $where);
                 これが、削除する行を絞り込むための条件となります。
                 ここで指定した値や識別子に対しては、クォートやエスケープは行ないません。
                 何らかの動的な値を使用する場合は、その内容が安全であることを確認するようにしましょう。
-                <xref linkend="zend.db.adapter.quoting" />
+                <xref linkend="zend.db.adapter.quoting"/>
                 で説明しているメソッドを使用するといいでしょう。
             </para>
 
@@ -1177,8 +1174,8 @@ $n = $db->update('bugs', $data, $where);
                 このメソッドの返り値は、削除操作によって変更された行の数となります。
 　            </para>
 
-            <example id="zend.db.adapter.write.delete.example">
-                <title>行の削除</title>
+            <example xml:id="zend.db.adapter.write.delete.example"><info><title>行の削除</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $n = $db->delete('bugs', 'bug_id = 3');
 ]]></programlisting>
@@ -1200,13 +1197,13 @@ $n = $db->delete('bugs', 'bug_id = 3');
                 <constant>AND</constant> 演算子で区切られます。
             </para>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.quoting">
+    <section xml:id="zend.db.adapter.quoting"><info><title>値や識別子のクォート</title></info>
 
-        <title>値や識別子のクォート</title>
+        
 
         <para>
             <acronym>SQL</acronym> を作成する際には、<acronym>PHP</acronym> の変数の値を
@@ -1232,8 +1229,8 @@ echo $sql;
             (たとえば、その人の権限では見えないはずのデータを見られてしまうなど)。
             これは、アプリケーションのセキュリティ問題としては非常に有名な手法で、
             "<acronym>SQL</acronym> インジェクション" と呼ばれています
-            (<ulink url="http://ja.wikipedia.org/wiki/SQL%E3%82%A4%E3%83%B3%E3%82%B8%E3%82%A7%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">
-            http://ja.wikipedia.org/wiki/SQL%E3%82%A4%E3%83%B3%E3%82%B8%E3%82%A7%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3</ulink>
+            (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ja.wikipedia.org/wiki/SQL%E3%82%A4%E3%83%B3%E3%82%B8%E3%82%A7%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">
+            http://ja.wikipedia.org/wiki/SQL%E3%82%A4%E3%83%B3%E3%82%B8%E3%82%A7%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3</link>
             を参照ください)。
         </para>
 
@@ -1246,9 +1243,9 @@ echo $sql;
             <acronym>SQL</acronym> に特殊文字が埋め込まれてしまうことを防ぎます。
         </para>
 
-        <sect3 id="zend.db.adapter.quoting.quote">
+        <section xml:id="zend.db.adapter.quoting.quote"><info><title>quote() の使用法</title></info>
 
-            <title>quote() の使用法</title>
+            
 
             <para>
                 <methodname>quote()</methodname> メソッドは、引数として文字列を受け取ります。
@@ -1260,8 +1257,8 @@ echo $sql;
                 ではシングルクォート (') となります。
             </para>
 
-            <example id="zend.db.adapter.quoting.quote.example">
-                <title>quote() の使用法</title>
+            <example xml:id="zend.db.adapter.quoting.quote.example"><info><title>quote() の使用法</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $name = $db->quote("O'Reilly");
 echo $name;
@@ -1277,7 +1274,7 @@ echo $sql;
             <para>
                 <methodname>quote()</methodname> の返り値には、文字列の両端に区切り文字が追加されていることに注意しましょう。
                 これは、たとえば
-                <ulink url="http://www.php.net/mysqli_real_escape_string">mysql_real_escape_string()</ulink>
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/mysqli_real_escape_string">mysql_real_escape_string()</link>
                 のようなエスケープ用関数の挙動とは異なります。
             </para>
 
@@ -1301,8 +1298,8 @@ SELECT * FROM atable WHERE intColumn = '123'
                 <acronym>SQL</acronym> のデータ型に応じてクォートするかどうかを選択できます。
             </para>
 
-            <example id="zend.db.adapter.quoting.quote.example-2">
-                <title>quote() での SQL データ型の指定</title>
+            <example xml:id="zend.db.adapter.quoting.quote.example-2"><info><title>quote() での SQL データ型の指定</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $value = '1234';
 $sql = 'SELECT * FROM atable WHERE intColumn = '
@@ -1326,11 +1323,11 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
                 自動的に <acronym>SQL</acronym> データ型を <methodname>quote()</methodname> に指定します。
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.quoting.quote-into">
+        <section xml:id="zend.db.adapter.quoting.quote-into"><info><title>quoteInto() の使用法</title></info>
 
-            <title>quoteInto() の使用法</title>
+            
 
             <para>
                 クォートを使用する場面としていちばんよくあるのが、
@@ -1353,8 +1350,8 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
                 サーバでパースするといったことは行いません。
             </para>
 
-            <example id="zend.db.adapter.quoting.quote-into.example">
-                <title>quoteInto() の使用法</title>
+            <example xml:id="zend.db.adapter.quoting.quote-into.example"><info><title>quoteInto() の使用法</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $sql = $db->quoteInto("SELECT * FROM bugs WHERE reported_by = ?", "O'Reilly");
 
@@ -1369,8 +1366,8 @@ echo $sql;
                 数値型はクォートをせず、それ以外の型についてはクォートを行います。
             </para>
 
-            <example id="zend.db.adapter.quoting.quote-into.example-2">
-                <title>quoteInto() での SQL データ型の指定</title>
+            <example xml:id="zend.db.adapter.quoting.quote-into.example-2"><info><title>quoteInto() での SQL データ型の指定</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $sql = $db
     ->quoteInto("SELECT * FROM bugs WHERE bug_id = ?", '1234', 'INTEGER');
@@ -1380,10 +1377,10 @@ echo $sql;
 ]]></programlisting>
             </example>
 
-        </sect3>
-        <sect3 id="zend.db.adapter.quoting.quote-identifier">
+        </section>
+        <section xml:id="zend.db.adapter.quoting.quote-identifier"><info><title>quoteIdentifier() の使用法</title></info>
 
-            <title>quoteIdentifier() の使用法</title>
+            
 
             <para>
                 変数を使用する可能性があるのは、<acronym>SQL</acronym> 文中の値だけとは限りません。
@@ -1419,8 +1416,8 @@ echo $sql;
                 文字列引数内の特殊文字のエスケープも行います。
             </para>
 
-            <example id="zend.db.adapter.quoting.quote-identifier.example">
-                <title>quoteIdentifier() の使用法</title>
+            <example xml:id="zend.db.adapter.quoting.quote-identifier.example"><info><title>quoteIdentifier() の使用法</title></info>
+                
                 <programlisting language="php"><![CDATA[
 // テーブル名に、SQL の予約語を使用します
 $tableName = $db->quoteIdentifier("order");
@@ -1446,17 +1443,17 @@ echo $sql
                 この挙動を変更するには、オプション
                 <constant>Zend_Db::AUTO_QUOTE_IDENTIFIERS</constant>
                 を変更します。これは、アダプタのインスタンスを作成する際に指定します。
-                <xref linkend="zend.db.adapter.connecting.parameters.example2" />
+                <xref linkend="zend.db.adapter.connecting.parameters.example2"/>
                 を参照ください。
             </para>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.transactions">
+    <section xml:id="zend.db.adapter.transactions"><info><title>データベースのトランザクションの制御</title></info>
 
-        <title>データベースのトランザクションの制御</title>
+        
 
         <para>
             データベースには「トランザクション」と呼ばれる論理的な作業単位があります。
@@ -1504,8 +1501,8 @@ echo $sql
             <methodname>beginTransaction()</methodname> をもう一度コールします。
         </para>
 
-        <example id="zend.db.adapter.transactions.example">
-            <title>一貫性を保持するためのトランザクション管理</title>
+        <example xml:id="zend.db.adapter.transactions.example"><info><title>一貫性を保持するためのトランザクション管理</title></info>
+            
             <programlisting language="php"><![CDATA[
 // トランザクションを明示的に開始します
 $db->beginTransaction();
@@ -1531,11 +1528,11 @@ try {
 ]]></programlisting>
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.list-describe">
+    <section xml:id="zend.db.adapter.list-describe"><info><title>テーブルの情報の取得</title></info>
 
-        <title>テーブルの情報の取得</title>
+        
 
         <para>
             <methodname>listTables()</methodname> メソッドは文字列の配列を返します。
@@ -1554,8 +1551,8 @@ try {
             各キーに関連付けられた値も連想配列で、以下のキーが存在します。
         </para>
 
-        <table frame="all" cellpadding="5" id="zend.db.adapter.list-describe.metadata">
-            <title>describeTable() が返す連想配列のフィールド</title>
+        <table frame="all" cellpadding="5" xml:id="zend.db.adapter.list-describe.metadata"><info><title>describeTable() が返す連想配列のフィールド</title></info>
+            
             <tgroup cols="3" align="left" colsep="1" rowsep="1">
                 <thead>
                     <row>
@@ -1640,8 +1637,8 @@ try {
             </tgroup>
         </table>
 
-        <note>
-            <title>各 RDBMS における IDENTITY メタデータフィールドの対応</title>
+        <note><info><title>各 RDBMS における IDENTITY メタデータフィールドの対応</title></info>
+            
             <para>
                 IDENTITY メタデータフィールドの名前は、サロゲートキーを表す
                 '慣用的な' 名前として選択されたものです。
@@ -1676,11 +1673,11 @@ try {
             <methodname>describeTable()</methodname> は空の配列を返します。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.closing">
+    <section xml:id="zend.db.adapter.closing"><info><title>接続の終了</title></info>
 
-        <title>接続の終了</title>
+        
 
         <para>
             通常は、データベースとの接続を閉じる必要はありません。
@@ -1709,23 +1706,23 @@ try {
             1.7.2 より前でも <acronym>PDO</acronym> アダプタは同じ挙動でしたが、それ以外のアダプタは違いました。
         </para>
 
-        <example id="zend.db.adapter.closing.example">
-            <title>データベースとの接続の解除</title>
+        <example xml:id="zend.db.adapter.closing.example"><info><title>データベースとの接続の解除</title></info>
+            
             <programlisting language="php"><![CDATA[
 $db->closeConnection();
 ]]></programlisting>
         </example>
 
-        <note>
-            <title>Zend_Db は持続的な接続をサポートしていますか？</title>
+        <note><info><title>Zend_Db は持続的な接続をサポートしていますか？</title></info>
+            
             <para>
                 はい。<classname>Zend_Db</classname> のアダプタの設定
                 (driver_configuration ではありません) で、
                 <property>persistent</property> フラグを <constant>TRUE</constant> に設定することで対応します。
             </para>
 
-            <example id="zend.db.adapter.connecting.persistence.example">
-                <title>Oracle アダプタでの持続的接続の使用</title>
+            <example xml:id="zend.db.adapter.connecting.persistence.example"><info><title>Oracle アダプタでの持続的接続の使用</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $db = Zend_Db::factory('Oracle', array(
@@ -1763,11 +1760,11 @@ $db = Zend_Db::factory('Oracle', array(
             </para>
         </note>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.other-statements">
+    <section xml:id="zend.db.adapter.other-statements"><info><title>その他のステートメントの実行</title></info>
 
-        <title>その他のステートメントの実行</title>
+        
 
         <para>
             <acronym>PHP</acronym> のデータベース関連拡張モジュールが提供する接続オブジェクトを、
@@ -1784,8 +1781,8 @@ $db = Zend_Db::factory('Oracle', array(
             たとえば、CREATE や ALTER のような DDL は、
             MySQL ではプリペアドステートメントとすることができません。
             また、MySQL 5.1.17 より前のバージョンでは
-            <ulink url="http://dev.mysql.com/doc/refman/5.1/en/query-cache-how.html">MySQL
-            クエリキャッシュ</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dev.mysql.com/doc/refman/5.1/en/query-cache-how.html">MySQL
+            クエリキャッシュ</link>
             の機能を活用することができません。
         </para>
 
@@ -1798,8 +1795,8 @@ $db = Zend_Db::factory('Oracle', array(
             <methodname>getConnection()</methodname> を使用します。
         </para>
 
-        <example id="zend.db.adapter.other-statements.example">
-            <title>PDO アダプタによる、プリペアド形式ではないクエリの実行</title>
+        <example xml:id="zend.db.adapter.other-statements.example"><info><title>PDO アダプタによる、プリペアド形式ではないクエリの実行</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $result = $db->getConnection()->exec('DROP TABLE bugs');
@@ -1821,10 +1818,10 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
             これは、過去のバージョンとの互換性を損なうことはありません。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.server-version">
-        <title>サーバのバージョンの取得</title>
+    <section xml:id="zend.db.adapter.server-version"><info><title>サーバのバージョンの取得</title></info>
+        
 
         <para>
             リリース 1.7.2 以降では、サーバのバージョンを取得できます。これは、
@@ -1832,8 +1829,8 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
             情報が取得できない場合は <constant>NULL</constant> が返されます。
         </para>
 
-        <example id="zend.db.adapter.server-version.example">
-            <title>サーバのバージョンを取得してからクエリを実行する</title>
+        <example xml:id="zend.db.adapter.server-version.example"><info><title>サーバのバージョンを取得してからクエリを実行する</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $version = $db->getServerVersion();
@@ -1848,19 +1845,19 @@ if (!is_null($version)) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.adapter-notes">
+    <section xml:id="zend.db.adapter.adapter-notes"><info><title>各アダプタ固有の注意点</title></info>
 
-        <title>各アダプタ固有の注意点</title>
+        
 
         <para>
             ここでは、使用するアダプタごとに
             注意すべき点をまとめます。
         </para>
 
-        <sect3 id="zend.db.adapter.adapter-notes.ibm-db2">
-            <title>IBM DB2</title>
+        <section xml:id="zend.db.adapter.adapter-notes.ibm-db2"><info><title>IBM DB2</title></info>
+            
 
             <itemizedlist>
                 <listitem>
@@ -1889,10 +1886,10 @@ if (!is_null($version)) {
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.adapter-notes.mysqli">
-            <title>MySQLi</title>
+        <section xml:id="zend.db.adapter.adapter-notes.mysqli"><info><title>MySQLi</title></info>
+            
 
             <itemizedlist>
                 <listitem>
@@ -1918,10 +1915,10 @@ if (!is_null($version)) {
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.adapter-notes.oracle">
-            <title>Oracle</title>
+        <section xml:id="zend.db.adapter.adapter-notes.oracle"><info><title>Oracle</title></info>
+            
 
             <itemizedlist>
                 <listitem>
@@ -1972,10 +1969,10 @@ if (!is_null($version)) {
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.adapter-notes.sqlsrv">
-            <title>Microsoft SQL Server</title>
+        <section xml:id="zend.db.adapter.adapter-notes.sqlsrv"><info><title>Microsoft SQL Server</title></info>
+            
 
             <itemizedlist>
                 <listitem>
@@ -2018,8 +2015,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         オプション配列のキーに <property>driver_options</property>
-                        を指定できます。この値は <ulink
-                            url="http://msdn.microsoft.com/ja-jp/library/cc296161(SQL.90).aspx">http://msdn.microsoft.com/ja-jp/library/cc296161(SQL.90).aspx</ulink>
+                        を指定できます。この値は <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://msdn.microsoft.com/ja-jp/library/cc296161(SQL.90).aspx">http://msdn.microsoft.com/ja-jp/library/cc296161(SQL.90).aspx</link>
                         に書かれているものとなります。
                     </para>
                 </listitem>
@@ -2045,10 +2041,10 @@ if (!is_null($version)) {
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.adapter-notes.pdo-ibm">
-            <title>PDO for IBM DB2 and Informix Dynamic Server (IDS)</title>
+        <section xml:id="zend.db.adapter.adapter-notes.pdo-ibm"><info><title>PDO for IBM DB2 and Informix Dynamic Server (IDS)</title></info>
+            
 
             <itemizedlist>
                 <listitem>
@@ -2072,10 +2068,10 @@ if (!is_null($version)) {
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.adapter-notes.pdo-mssql">
-            <title>PDO Microsoft SQL Server</title>
+        <section xml:id="zend.db.adapter.adapter-notes.pdo-mssql"><info><title>PDO Microsoft SQL Server</title></info>
+            
 
             <itemizedlist>
                 <listitem>
@@ -2108,7 +2104,7 @@ if (!is_null($version)) {
                         で使用する場合は、アプリケーションのコード内での変換処理
                         あるいはバイナリカラムへのデータ格納が必要となります。
                         詳細な情報は
-                        <ulink url="http://support.microsoft.com/kb/232580">Microsoft's Knowledge Base</ulink>
+                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://support.microsoft.com/kb/232580">Microsoft's Knowledge Base</link>
                         を参照ください。
                     </para>
                 </listitem>
@@ -2132,19 +2128,19 @@ if (!is_null($version)) {
                         <acronym>DSN</acronym> プレフィックスに影響を与えます。"freetds" および
                         "sybase" を指定した場合のプレフィックスは
                         "sybase:" となります。これは
-                        <ulink url="http://www.freetds.org/">FreeTDS</ulink>
+                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.freetds.org/">FreeTDS</link>
                         系のライブラリで用いられるものです。
                         このドライバで使用できる <acronym>DSN</acronym> プレフィックスの詳細は
-                        <ulink url="http://www.php.net/manual/ja/ref.pdo-dblib.connection.php">
-                        http://www.php.net/manual/ja/ref.pdo-dblib.connection.php</ulink>
+                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/ja/ref.pdo-dblib.connection.php">
+                        http://www.php.net/manual/ja/ref.pdo-dblib.connection.php</link>
                         を参照ください。
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.adapter-notes.pdo-mysql">
-            <title>PDO MySQL</title>
+        <section xml:id="zend.db.adapter.adapter-notes.pdo-mysql"><info><title>PDO MySQL</title></info>
+            
 
             <itemizedlist>
                 <listitem>
@@ -2170,10 +2166,10 @@ if (!is_null($version)) {
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.adapter-notes.pdo-oci">
-            <title>PDO Oracle</title>
+        <section xml:id="zend.db.adapter.adapter-notes.pdo-oci"><info><title>PDO Oracle</title></info>
+            
 
             <itemizedlist>
                 <listitem>
@@ -2198,10 +2194,10 @@ if (!is_null($version)) {
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.adapter-notes.pdo-pgsql">
-            <title>PDO PostgreSQL</title>
+        <section xml:id="zend.db.adapter.adapter-notes.pdo-pgsql"><info><title>PDO PostgreSQL</title></info>
+            
 
             <itemizedlist>
                 <listitem>
@@ -2230,10 +2226,10 @@ if (!is_null($version)) {
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.adapter-notes.pdo-sqlite">
-            <title>PDO SQLite</title>
+        <section xml:id="zend.db.adapter.adapter-notes.pdo-sqlite"><info><title>PDO SQLite</title></info>
+            
 
             <itemizedlist>
                 <listitem>
@@ -2264,7 +2260,7 @@ if (!is_null($version)) {
                         SQLite2 データベースに接続するには、
                         <classname>Pdo_Sqlite</classname> アダプタのインスタンスを作成する際に
                         パラメータの配列で
-                        <command>'sqlite2' => true</command> を指定します。
+                        <command>'sqlite2' =&gt; true</command> を指定します。
                     </para>
                 </listitem>
 
@@ -2273,7 +2269,7 @@ if (!is_null($version)) {
                         メモリ上の SQLite データベースに接続するには、
                         <classname>Pdo_Sqlite</classname> アダプタのインスタンスを作成する際に
                         パラメータの配列で
-                        <command>'dbname' => ':memory:'</command> を指定します。
+                        <command>'dbname' =&gt; ':memory:'</command> を指定します。
                     </para>
                 </listitem>
 
@@ -2288,10 +2284,10 @@ if (!is_null($version)) {
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.adapter-notes.firebird">
-            <title>Firebird/Interbase</title>
+        <section xml:id="zend.db.adapter.adapter-notes.firebird"><info><title>Firebird/Interbase</title></info>
+            
 
             <itemizedlist>
                 <listitem>
@@ -2337,11 +2333,8 @@ if (!is_null($version)) {
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20765 -->
-<sect1 id="zend.controller.plugins" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>プラグイン</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.plugins"><info><title>プラグイン</title></info>
+    
 
-    <sect2 id="zend.controller.plugins.introduction">
-        <title>導入</title>
+    <section xml:id="zend.controller.plugins.introduction"><info><title>導入</title></info>
+        
 
         <para>
             コントローラにはプラグイン機構が組み込まれており、
@@ -74,10 +72,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.plugins.writing">
-        <title>プラグインの書き方</title>
+    <section xml:id="zend.controller.plugins.writing"><info><title>プラグインの書き方</title></info>
+        
 
         <para>
             プラグインクラスを書くには、単に抽象クラス
@@ -105,10 +103,10 @@ class MyPlugin extends Zend_Controller_Plugin_Abstract
             それぞれ、<methodname>getRequest()</methodname> メソッドおよび
             <methodname>getResponse()</methodname> メソッドを使用します。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.plugins.using">
-        <title>プラグインの使用法</title>
+    <section xml:id="zend.controller.plugins.using"><info><title>プラグインの使用法</title></info>
+        
         <para>
             プラグインクラスを登録するには、
             <methodname>Zend_Controller_Front::registerPlugin()</methodname> をコールします。
@@ -185,10 +183,10 @@ $front->dispatch();
                 そのメソッドは実行されません。
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.plugins.manipulating">
-        <title>プラグインの取得と操作</title>
+    <section xml:id="zend.controller.plugins.manipulating"><info><title>プラグインの取得と操作</title></info>
+        
 
         <para>
             時には、プラグインの登録を解除したりプラグインの情報を取得したいこともあるでしょう。
@@ -220,21 +218,18 @@ $front->dispatch();
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.plugins.standard">
-        <title>標準の配布パッケージに含まれるプラグイン</title>
+    <section xml:id="zend.controller.plugins.standard"><info><title>標準の配布パッケージに含まれるプラグイン</title></info>
+        
 
         <para>
             Zend Framework の配布パッケージには、
             エラー処理用のプラグインが標準で組み込まれています。
         </para>
 
-        <xi:include href="Zend_Controller-Plugins-ActionStack.xml" />
-        <xi:include href="Zend_Controller-Plugins-ErrorHandler.xml" />
-        <xi:include href="Zend_Controller-Plugins-PutHandler.xml" />
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-Plugins-ActionStack.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-Plugins-ErrorHandler.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-Plugins-PutHandler.xml"/>
+    </section>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20792 -->
-<sect1 id="zend.layout.options">
-    <title>Zend_Layout の設定オプション</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.options"><info><title>Zend_Layout の設定オプション</title></info>
+    
 
     <para>
         <classname>Zend_Layout</classname> にはさまざまな設定オプションがあります。
@@ -87,8 +85,7 @@
         <listitem><para>
                 <emphasis>inflector</emphasis>:
                 レイアウト名をレイアウトビュースクリプトのパスに解決する際に使用するインフレクタ。
-                詳細は <link
-                    linkend="zend.layout.advanced.inflector">
+                詳細は <link linkend="zend.layout.advanced.inflector">
                     <classname>Zend_Layout</classname> インフレクタのドキュメント
                     </link> を参照ください。
                 アクセサは <methodname>setInflector()</methodname> と
@@ -96,8 +93,8 @@
         </para></listitem>
     </itemizedlist>
 
-    <note>
-        <title>helperClass と pluginClass は startMvc() で渡す必要がある</title>
+    <note><info><title>helperClass と pluginClass は startMvc() で渡す必要がある</title></info>
+        
 
         <para>
             <code>helperClass</code> と
@@ -107,8 +104,8 @@
         </para>
     </note>
 
-    <sect2 id="zend.layout.options.examples">
-        <title>例</title>
+    <section xml:id="zend.layout.options.examples"><info><title>例</title></info>
+        
 
         <para>
             以下の例では、次のような <code>$options</code>
@@ -133,8 +130,8 @@ contentKey = "CONTENT"
 $config = new Zend_Config_Ini('/path/to/layout.ini', 'layout');
 ]]></programlisting>
 
-        <example id="zend.layout.options.examples.constructor">
-            <title>オプションをコンストラクタあるいは startMvc() で渡す</title>
+        <example xml:id="zend.layout.options.examples.constructor"><info><title>オプションをコンストラクタあるいは startMvc() で渡す</title></info>
+            
 
             <para>
                 コンストラクタおよび静的メソッド <methodname>startMvc()</methodname>
@@ -176,8 +173,8 @@ $layout = Zend_Layout::startMvc($config);
             </para>
         </example>
 
-        <example id="zend.layout.options.examples.setoptionsconfig">
-            <title>setOption() および setConfig() の使用</title>
+        <example xml:id="zend.layout.options.examples.setoptionsconfig"><info><title>setOption() および setConfig() の使用</title></info>
+            
 
             <para>
                 時には、インスタンスを作成した後で <classname>Zend_Layout</classname>
@@ -203,8 +200,8 @@ $layout->setConfig($options);
             </para>
         </example>
 
-        <example id="zend.layout.options.examples.accessors">
-            <title>アクセサの使用</title>
+        <example xml:id="zend.layout.options.examples.accessors"><info><title>アクセサの使用</title></info>
+            
 
             <para>
                 最後に、<classname>Zend_Layout</classname>
@@ -219,8 +216,5 @@ $layout->setLayout('foo')
        ->setContentKey('CONTENT');
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

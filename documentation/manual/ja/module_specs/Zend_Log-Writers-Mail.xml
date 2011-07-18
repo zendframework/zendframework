@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21825 -->
-<sect2 id="zend.log.writers.mail">
-    <title>Email への書き込み</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers.mail"><info><title>Email への書き込み</title></info>
+    
 
     <para>
         <classname>Zend_Log_Writer_Mail</classname> は、
@@ -62,8 +60,8 @@ $log->error('unable to connect to database');
         メールには 7 つのログエントリが含まれることになります。
     </para>
 
-    <sect3 id="zend.log.writers.mail.layoutusage">
-        <title>Zend_Layout の使用法</title>
+    <section xml:id="zend.log.writers.mail.layoutusage"><info><title>Zend_Layout の使用法</title></info>
+        
 
         <para>
             <classname>Zend_Layout</classname> のインスタンスを使用して、
@@ -114,10 +112,10 @@ $log->error('unable to connect to database');
 // 上の Zend_Log フィルタレベル以上のすべてのログメッセージが送信されます
 // メールは、プレーンテキストと HTML パートの両方を含む形式になります
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.log.writers.mail.dynamicsubjectline">
-        <title>件名でのエラーの概要</title>
+    <section xml:id="zend.log.writers.mail.dynamicsubjectline"><info><title>件名でのエラーの概要</title></info>
+        
 
         <para>
             <methodname>setSubjectPrependText()</methodname> メソッドを
@@ -130,10 +128,10 @@ $log->error('unable to connect to database');
             で件名のテキストを設定しなかった場合、もし <classname>Zend_Mail</classname>
             で設定されていればそれを使用します。
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.log.writers.mail.caveats">
-        <title>警告</title>
+    <section xml:id="zend.log.writers.mail.caveats"><info><title>警告</title></info>
+        
 
         <para>
             ログエントリをメールでおくるのは危険なこともあります。
@@ -155,8 +153,5 @@ $log->error('unable to connect to database');
             このような状況が避けられるような機能が実装されたときには、
             メールによるエラー通知は便利な道具となることでしょう。
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

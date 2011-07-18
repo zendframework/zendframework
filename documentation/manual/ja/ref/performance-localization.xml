@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20876 -->
-<sect1 id="performance.localization">
-    <title>国際化(i18n)とローカライズ(l10n)</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.localization"><info><title>国際化(i18n)とローカライズ(l10n)</title></info>
+    
 
     <para>
         サイトを国際化したり、ローカライズしたりすることはあなたの観客を増やし、
@@ -11,8 +11,8 @@
         下記はあなたが国際化とローカライズのオーバーヘッドを減らすために利用できる戦略のいくつかです。
     </para>
 
-    <sect2 id="performance.localization.translationadapter">
-        <title>どの翻訳アダプタを使うべきですか？</title>
+    <section xml:id="performance.localization.translationadapter"><info><title>どの翻訳アダプタを使うべきですか？</title></info>
+        
 
         <para>
             翻訳アダプタのすべてが同じことを引き起こすとは限りません。
@@ -22,8 +22,8 @@
             しかしながら、もしあなたに好みがあるなら、どのアダプタがもっとも速いでしょうか？
         </para>
 
-        <sect3 id="performance.localization.translationadapter.fastest">
-            <title>最速にするためにXML以外の翻訳アダプタを使う</title>
+        <section xml:id="performance.localization.translationadapter.fastest"><info><title>最速にするためにXML以外の翻訳アダプタを使う</title></info>
+            
 
             <para>
                 Zend Frameworkはさまざまな翻訳アダプタとともに出荷されています。
@@ -65,11 +65,11 @@
                 もしあなたの目的のひとつが高い性能なら、上記のアダプタのうちの
                 ひとつを利用することを提案します。
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="performance.localization.cache">
-        <title>どのようにしたら翻訳やローカライズをもっと速くできますか？</title>
+    <section xml:id="performance.localization.cache"><info><title>どのようにしたら翻訳やローカライズをもっと速くできますか？</title></info>
+        
 
         <para>
             もしかするとビジネス上の理由であなたは<acronym>XML</acronym>ベースの翻訳アダプタに制限されているかもしれません。
@@ -78,8 +78,8 @@
             それにはどうしたら良いでしょう？
         </para>
 
-        <sect3 id="performance.localization.cache.usage">
-            <title>翻訳およびローカライズのキャッシュを使う</title>
+        <section xml:id="performance.localization.cache.usage"><info><title>翻訳およびローカライズのキャッシュを使う</title></info>
+            
 
             <para>
                 <classname>Zend_Translate</classname>と<classname>Zend_Locale</classname>の両方とも
@@ -108,9 +108,6 @@
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

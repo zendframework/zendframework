@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20779 -->
-<sect1 id="zend.gdata.docs">
-    <title>Google Documents List Data API の使用法</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.docs"><info><title>Google Documents List Data API の使用法</title></info>
+    
 
     <para>
         Google Documents List Data <acronym>API</acronym> は、
@@ -16,12 +14,12 @@
 
     <para>
         Google Documents List <acronym>API</acronym> についての詳細は
-        <ulink url="http://code.google.com/apis/documents/overview.html">http://code.google.com/apis/documents/overview.html</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/documents/overview.html">http://code.google.com/apis/documents/overview.html</link>
         を参照ください。
     </para>
 
-    <sect2 id="zend.gdata.docs.listdocuments">
-        <title>ドキュメントの一覧の取得</title>
+    <section xml:id="zend.gdata.docs.listdocuments"><info><title>ドキュメントの一覧の取得</title></info>
+        
         <para>
             特定のユーザの Google Documents の一覧を取得するには、docs サービスの
             <methodname>getDocumentListFeed</methodname> メソッドを使用します。
@@ -41,13 +39,13 @@ $feed = $docs->getDocumentListFeed();
         結果として得られる <classname>Zend_Gdata_Docs_DocumentListFeed</classname>
         オブジェクトが、サーバからの応答を表します。
         このフィードには <classname>Zend_Gdata_Docs_DocumentListEntry</classname>
-        オブジェクトの一覧 (<command>$feed->entries</command>) が含まれ、
+        オブジェクトの一覧 (<command>$feed-&gt;entries</command>) が含まれ、
         それぞれがひとつの Google Document を表します。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.docs.creating">
-        <title>ドキュメントのアップロード</title>
+    <section xml:id="zend.gdata.docs.creating"><info><title>ドキュメントのアップロード</title></info>
+        
         <para>
             新しい Google Document を作成するには、
             ワープロ文書やスプレッドシート、あるいはプレゼンテーションをアップロードします。
@@ -104,25 +102,23 @@ function uploadDocument($docs, $html, $originalFileName,
   if ($html) {echo "</a>\n";}
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.docs.queries">
-        <title>ドキュメントのフィードの検索</title>
+    <section xml:id="zend.gdata.docs.queries"><info><title>ドキュメントのフィードの検索</title></info>
+        
         <para>
-            ドキュメントの一覧を検索するには、<ulink
-            url="http://code.google.com/apis/gdata/reference.html#Queries">
-            標準的な Google Data <acronym>API</acronym> クエリパラメータ</ulink> を使用します。
+            ドキュメントの一覧を検索するには、<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/gdata/reference.html#Queries">
+            標準的な Google Data <acronym>API</acronym> クエリパラメータ</link> を使用します。
             カテゴリを使用して、ドキュメントの種類 (ワープロ文書、
             スプレッドシート) を絞り込みます。
             フルテキストのクエリ文字列を使用して、ドキュメントの全文検索を行います。
-            ドキュメントの一覧に固有のパラメータについての詳細な情報は、 <ulink
-            url="http://code.google.com/apis/documents/reference.html#Parameters">
-            Documents List Data <acronym>API</acronym> リファレンスガイド</ulink>
+            ドキュメントの一覧に固有のパラメータについての詳細な情報は、 <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/documents/reference.html#Parameters">
+            Documents List Data <acronym>API</acronym> リファレンスガイド</link>
             を参照ください。
         </para>
 
-        <sect3 id="zend.gdata.docs.listwpdocuments">
-            <title>ワープロ文書の一覧の取得</title>
+        <section xml:id="zend.gdata.docs.listwpdocuments"><info><title>ワープロ文書の一覧の取得</title></info>
+            
             <para>
                 指定した型のすべてのドキュメントを含むフィードを取得することもできます。
                 たとえば、ワープロ文書の一覧を取得するには、
@@ -132,10 +128,10 @@ function uploadDocument($docs, $html, $originalFileName,
             <programlisting language="php"><![CDATA[
 $feed = $docs->getDocumentListFeed(
     'http://docs.google.com/feeds/documents/private/full/-/document');]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.docs.listspreadsheets">
-            <title>スプレッドシートの一覧の取得</title>
+        <section xml:id="zend.gdata.docs.listspreadsheets"><info><title>スプレッドシートの一覧の取得</title></info>
+            
             <para>
                 Google Spreadsheets の一覧を取得するには、
                 次のようなカテゴリクエリを使用します。
@@ -144,10 +140,10 @@ $feed = $docs->getDocumentListFeed(
             <programlisting language="php"><![CDATA[
 $feed = $docs->getDocumentListFeed(
     'http://docs.google.com/feeds/documents/private/full/-/spreadsheet');]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.docs.textquery">
-            <title>テキストクエリの実行</title>
+        <section xml:id="zend.gdata.docs.textquery"><info><title>テキストクエリの実行</title></info>
+            
             <para>
                 ドキュメントの中身を検索するには、リクエスト内で
                 <classname>Zend_Gdata_Docs_Query</classname> を使用します。
@@ -159,8 +155,8 @@ $feed = $docs->getDocumentListFeed(
 $docsQuery = new Zend_Gdata_Docs_Query();
 $docsQuery->setQuery($query);
 $feed = $client->getDocumentListFeed($docsQuery);]]></programlisting>
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-</sect1>
+</section>

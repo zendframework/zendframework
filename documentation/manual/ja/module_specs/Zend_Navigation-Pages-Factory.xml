@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21829 -->
-<sect2 id="zend.navigation.pages.factory">
-    <title>ページ・ファクトリを使ってページを作成</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.factory"><info><title>ページ・ファクトリを使ってページを作成</title></info>
+    
 
     <para>
         すべてのページ（また、カスタマイズしたクラス）を、
@@ -28,8 +26,8 @@
         <code>mvc</code> or <code>uri</code> and <acronym>MVC</acronym>/URI page will be created.
     </para>
 
-    <example id="zend.navigation.pages.factory.example.mvc">
-        <title>ページ・ファクトリを使ってMVCページを作成</title>
+    <example xml:id="zend.navigation.pages.factory.example.mvc"><info><title>ページ・ファクトリを使ってMVCページを作成</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $page = Zend_Navigation_Page::factory(array(
@@ -59,8 +57,8 @@ $page = Zend_Navigation_Page::factory(array(
 ]]></programlisting>
     </example>
 
-    <example id="zend.navigation.pages.factory.example.uri">
-        <title>ページ・ファクトリを使ってURIページを作成</title>
+    <example xml:id="zend.navigation.pages.factory.example.uri"><info><title>ページ・ファクトリを使ってURIページを作成</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $page = Zend_Navigation_Page::factory(array(
@@ -86,8 +84,8 @@ $page = Zend_Navigation_Page::factory(array(
 ]]></programlisting>
     </example>
 
-    <example id="zend.navigation.pages.factory.example.custom">
-        <title>ページ・ファクトリを使ってカスタムページ型を作成</title>
+    <example xml:id="zend.navigation.pages.factory.example.custom"><info><title>ページ・ファクトリを使ってカスタムページ型を作成</title></info>
+        
 
      <para>
          ページ・ファクトリを使ってカスタムページ型を作成するには、
@@ -113,4 +111,4 @@ $page = Zend_Navigation_Page::factory(array(
 ));
 ]]></programlisting>
     </example>
-</sect2>
+</section>

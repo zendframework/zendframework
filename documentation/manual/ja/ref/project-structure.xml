@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 19711 -->
-<appendix id="project-structure">
-    <title>Zend Framework MVC アプリケーションのために推奨されるプロジェクト構造</title>
+<?xml version="1.0" encoding="utf-8"?>
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="project-structure"><info><title>Zend Framework MVC アプリケーションのために推奨されるプロジェクト構造</title></info>
+    
 
-    <sect1 id="project-structure.overview">
-        <title>概要</title>
+    <section xml:id="project-structure.overview"><info><title>概要</title></info>
+        
 
         <para>
             たくさんの開発者が、比較的柔軟な環境でZend Frameworkプロジェクトのための
@@ -39,10 +37,10 @@
             しかし、この構造でサポートされない必要条件を持つアプリケーションでは、
             カスタム・プロジェクト・プロフィールを使わなければなりません。
         </para>
-    </sect1>
+    </section>
 
-    <sect1 id="project-structure.project">
-        <title>推奨されるプロジェクト・ディレクトリ構造</title>
+    <section xml:id="project-structure.project"><info><title>推奨されるプロジェクト・ディレクトリ構造</title></info>
+        
 
         <programlisting language="text"><![CDATA[
 <project name>/
@@ -159,8 +157,7 @@
                             <emphasis><filename>services/</filename></emphasis>:
                             このディレクトリは、
                             アプリケーションによって、
-                            またはモデルのための<ulink
-                                url="http://www.martinfowler.com/eaaCatalog/serviceLayer.html">サービス・レイヤ</ulink>
+                            またはモデルのための<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.martinfowler.com/eaaCatalog/serviceLayer.html">サービス・レイヤ</link>
                             を実装するために提供される、
                             アプリケーションに依存したウェブ・サービス・ファイルのためのものです。
                         </para>
@@ -206,8 +203,8 @@
                     このディレクトリは、アプリケーションが依存する共通ライブラリのため、
                     <acronym>PHP</acronym> <property>include_path</property> 上になければなりません。
                     開発者は、 <acronym>PHP</acronym> のマニュアル（ゼンド自体によって確立されるそれらだけでなく）の
-                     <ulink url="http://www.php.net/manual/ja/userlandnaming.php">ユーザレベルでの命名の
-                        手引き</ulink> に沿って、一意の名前空間内のこのディレクトリ配下に
+                     <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/ja/userlandnaming.php">ユーザレベルでの命名の
+                        手引き</link> に沿って、一意の名前空間内のこのディレクトリ配下に
                     それらのアプリケーション・ライブラリーのコードを置かなければなりません。
                     このディレクトリは、 Zend Framework 自体も含むかもしれません。
                     もしそうなら、それを <filename>library/Zend/</filename> にしまうでしょう。
@@ -263,10 +260,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect1>
+    </section>
 
-    <sect1 id="project-structure.filesystem">
-        <title>モジュール構造</title>
+    <section xml:id="project-structure.filesystem"><info><title>モジュール構造</title></info>
+        
 
         <para>
             モジュールのためのディレクトリ構造は、推奨されたプロジェクト構造の中の
@@ -296,10 +293,10 @@
         <para>
             これらのディレクトリの目的は、推奨されたプロジェクト・ディレクトリ構造に関してと全く同じままです。
         </para>
-    </sect1>
+    </section>
 
-    <sect1 id="project-structure.rewrite">
-        <title>リライト設定ガイド</title>
+    <section xml:id="project-structure.rewrite"><info><title>リライト設定ガイド</title></info>
+        
 
         <para>
             <acronym>URL</acronym> リライトは、 <acronym>HTTP</acronym> サーバの共通機能です。
@@ -308,20 +305,19 @@
             多少の共通するアプローチです。
         </para>
 
-        <sect2 id="project-structure.rewrite.apache">
-            <title>Apache HTTPサーバ</title>
+        <section xml:id="project-structure.rewrite.apache"><info><title>Apache HTTPサーバ</title></info>
+            
 
             <para>
                 移行の例では全て、 <property>mod_rewrite</property> （ Apache にバンドルされた公式モジュール）
                 を使います。
                 それを使うために、 <property>mod_rewrite</property> はコンパイル時に含まれるか、
                 動的共用オブジェクト (<acronym>DSO</acronym>) として許可されなければなりません。
-                詳しくは、あなたのバージョンの <ulink
-                    url="http://httpd.apache.org/docs/">Apache ドキュメント</ulink>を参照してください。
+                詳しくは、あなたのバージョンの <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://httpd.apache.org/docs/">Apache ドキュメント</link>を参照してください。
             </para>
 
-            <sect3 id="project-structure.rewrite.apache.vhost">
-                <title>バーチャルホスト内でのリライト</title>
+            <section xml:id="project-structure.rewrite.apache.vhost"><info><title>バーチャルホスト内でのリライト</title></info>
+                
 
                 <para>
                     これは非常に基本的なバーチャルホスト定義です。
@@ -351,10 +347,10 @@
                     <filename>index.php</filename> の前におかれたスラッシュ ("/") に注意してください。
                     <filename>.htaccess</filename> でのルールはこの点に関しては異なります。
                 </para>
-            </sect3>
+            </section>
 
-            <sect3 id="project-structure.rewrite.apache.htaccess">
-                <title>.htaccessファイル内でのリライト</title>
+            <section xml:id="project-structure.rewrite.apache.htaccess"><info><title>.htaccessファイル内でのリライト</title></info>
+                
 
                 <para>
                     下記は<property>mod_rewrite</property>を利用する
@@ -375,16 +371,15 @@ RewriteRule ^.*$ index.php [NC,L]
 
                 <para>
                     <property>mod_rewrite</property>を設定する方法はたくさんあります。
-                    もし、詳細をお好みでしたら、Jayson Minard の<ulink
-                        url="http://devzone.zend.com/a/70">Blueprint for PHP Applications:
-                    Bootstrapping</ulink>をご覧下さい。
+                    もし、詳細をお好みでしたら、Jayson Minard の<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://devzone.zend.com/a/70">Blueprint for PHP Applications:
+                    Bootstrapping</link>をご覧下さい。
                 </para>
-            </sect3>
+            </section>
 
-        </sect2>
+        </section>
 
-        <sect2 id="project-structure.rewrite.iis">
-            <title>Microsoft Internet Information サーバ</title>
+        <section xml:id="project-structure.rewrite.iis"><info><title>Microsoft Internet Information サーバ</title></info>
+            
 
             <para>
                 バージョン 7.0 現在、 <acronym>IIS</acronym> には現在標準的なリライト・エンジンが含まれます。
@@ -419,6 +414,6 @@ RewriteRule ^.*$ index.php [NC,L]
     </system.webServer>
 </configuration>
 ]]></programlisting>
-        </sect2>
-    </sect1>
+        </section>
+    </section>
 </appendix>

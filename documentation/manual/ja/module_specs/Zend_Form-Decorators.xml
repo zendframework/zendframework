@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21825 -->
-<sect1 id="zend.form.decorators">
-    <title>Zend_Form_Decorator による独自のフォームマークアップの作成</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.decorators"><info><title>Zend_Form_Decorator による独自のフォームマークアップの作成</title></info>
+    
 
     <para>
         フォームオブジェクトのレンダリングは、完全に別の処理です。
@@ -39,8 +37,8 @@
         ひとつの項目に対して複雑なマークアップを行うことができます。
     </para>
 
-    <sect2 id="zend.form.decorators.operation">
-        <title>操作方法</title>
+    <section xml:id="zend.form.decorators.operation"><info><title>操作方法</title></info>
+        
 
         <para>
             デコレータを設定するには、オプションの配列あるいは
@@ -122,20 +120,20 @@
             コンテンツの前後に文字列を追加したりします。
             前後に文字列を追加するときには、オプションで指定した区切り文字を使用します。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.decorators.standard">
-        <title>標準のデコレータ</title>
+    <section xml:id="zend.form.decorators.standard"><info><title>標準のデコレータ</title></info>
+        
 
         <para>
             <classname>Zend_Form</classname> には、多くのデコレータが標準で組み込まれています。
             詳細は <link linkend="zend.form.standardDecorators">標準のデコレータについての章</link>
             を参照ください。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.decorators.custom">
-        <title>独自のデコレータ</title>
+    <section xml:id="zend.form.decorators.custom"><info><title>独自のデコレータ</title></info>
+        
 
         <para>
             複雑なレンダリングを要したり大幅なカスタマイズが必要な場合は、
@@ -336,10 +334,10 @@ class My_Decorator_Errors
             既存のデコレータとあわせた名前のデコレータを作成すれば、
             要素のデコレータを変更しなくても出力を変更できます。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.decorators.individual">
-        <title>個々のデコレータのレンダリング</title>
+    <section xml:id="zend.form.decorators.individual"><info><title>個々のデコレータのレンダリング</title></info>
+        
 
         <para>
             デコレータは特定の要素のメタデータやフォームを対象にしてデコレートすることが可能なので、
@@ -376,8 +374,5 @@ echo $form->renderHtmlTag('wrap this content');
             各要素にアタッチされているデコレータでコンテンツを生成させることで、
             より手の込んだ制御が可能となります。
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

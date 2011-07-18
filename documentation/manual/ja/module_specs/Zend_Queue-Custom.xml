@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20063 -->
-<sect1 id="zend.queue.custom">
-    <title>Zend_Queueのカスタマイズ</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.custom"><info><title>Zend_Queueのカスタマイズ</title></info>
+    
 
-    <sect2 id="zend.queue.custom.adapter">
-        <title>独自のアダプタ作成</title>
+    <section xml:id="zend.queue.custom.adapter"><info><title>独自のアダプタ作成</title></info>
+        
 
         <para>
             <classname>Zend_Queue</classname>は、
@@ -78,10 +76,10 @@ $options = array(
 );
 $queue = new Zend_Queue('DbForUpdate', $config); // Custom_DbForUpdate をロード
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.queue.custom.message">
-        <title>独自のメッセージクラスを作成</title>
+    <section xml:id="zend.queue.custom.message"><info><title>独自のメッセージクラスを作成</title></info>
+        
 
         <para>
             <classname>Zend_Queue</classname>は、独自のメッセージクラスも扱います。
@@ -100,10 +98,10 @@ class Zend_Queue_Message
             既存のメッセージクラスを拡張できます。
             <filename>tests/Zend/Queue/Custom/Message.php</filename>でコード例をご覧下さい。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.queue.custom-iterator">
-        <title>独自のメッセージ・イテレータクラスを作成</title>
+    <section xml:id="zend.queue.custom-iterator"><info><title>独自のメッセージ・イテレータクラスを作成</title></info>
+        
 
         <para>
             <classname>Zend_Queue</classname>は、独自のメッセージ・イテレータ・クラスも扱います。
@@ -117,10 +115,10 @@ class Zend_Queue_Message
         <para>
             <filename>tests/Zend/Queue/Custom/Messages.php</filename>でファイル名の例をご覧ください。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.queue.custom.queue">
-        <title>独自の待ち行列クラスを作成</title>
+    <section xml:id="zend.queue.custom.queue"><info><title>独自の待ち行列クラスを作成</title></info>
+        
 
         <para>
             <classname>Zend_Queue</classname>は上書きすることも簡単にできます。
@@ -129,5 +127,5 @@ class Zend_Queue_Message
         <para>
             <filename>tests/Zend/Queue/Custom/Queue.php</filename>でファイル名の例をご覧ください。
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

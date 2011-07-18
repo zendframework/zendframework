@@ -1,28 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20792 -->
-<sect1 id="zend.json.server">
-    <title>Zend_Json_Server - JSON-RPCサーバー</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.server"><info><title>Zend_Json_Server - JSON-RPCサーバー</title></info>
+    
 
     <para>
-        <classname>Zend_Json_Server</classname>は<ulink
-            url="http://groups.google.com/group/json-rpc/">JSON-RPC</ulink>
+        <classname>Zend_Json_Server</classname>は<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://groups.google.com/group/json-rpc/">JSON-RPC</link>
         サーバー実装です。それは
-        <ulink url="http://groups.google.com/group/json-rpc/web/json-rpc-1-2-proposal">バージョン 2 仕様</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://groups.google.com/group/json-rpc/web/json-rpc-1-2-proposal">バージョン 2 仕様</link>
         と同様に
-        <ulink url="http://json-rpc.org/wiki/specification">JSON-RPCバージョン 1 仕様</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://json-rpc.org/wiki/specification">JSON-RPCバージョン 1 仕様</link>
         の両方をサポートします;
         それは、サービスのメタデータをサービス利用者に提供するために、
-        <ulink url="http://groups.google.com/group/json-schema/web/service-mapping-description-proposal">サービス
-            マッピング定義 (SMD) 仕様</ulink>の
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://groups.google.com/group/json-schema/web/service-mapping-description-proposal">サービス
+            マッピング定義 (SMD) 仕様</link>の
         <acronym>PHP</acronym>実装を提供します。
     </para>
 
     <para>
         JSON-RPCは、軽量なリモート・プロシージャ呼出しプロトコルです。
         そのプロトコルでは、<acronym>JSON</acronym>をそのメッセージのエンベロープのために利用します。
-        このJSON-RPC実装は<acronym>PHP</acronym>の<ulink
-            url="http://www.php.net/manual/ja/class.soapserver.php">SoapServer</ulink>
+        このJSON-RPC実装は<acronym>PHP</acronym>の<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/ja/class.soapserver.php">SoapServer</link>
         <acronym>API</acronym>に従います。
         このことにより典型的状況では、簡単に下記のことができます:
     </para>
@@ -35,7 +31,7 @@
 
     <para>
         <classname>Zend_Json_Server</classname>は
-        どんな付属のクラスまたは関数でも<xref linkend="zend.server.reflection" />Reflectionを実行することを利用します。
+        どんな付属のクラスまたは関数でも<xref linkend="zend.server.reflection"/>Reflectionを実行することを利用します。
         また、SMDと実施するメソッド呼び出しのシグナチュアとの両方をビルドするためにその情報を使います。
         そのように、それはどんな付属の関数またはクラス・メソッドでも完全な<acronym>PHP</acronym> docblock文書を最小限、持つ命令文です:
     </para>
@@ -54,8 +50,8 @@
         同じサーバーエンドポイントを簡単に利用できるようにします。
     </para>
 
-    <example id="zend.json.server.usage">
-        <title>Zend_Json_Server利用方法</title>
+    <example xml:id="zend.json.server.usage"><info><title>Zend_Json_Server利用方法</title></info>
+        
 
         <para>
             最初に、JSON-RPCサーバーによって公開したいクラスを定義しましょう。
@@ -195,17 +191,17 @@ $server->handle();
 ]]></programlisting>
     </example>
 
-    <sect2 id="zend.json.server.details">
-        <title>高度な詳細</title>
+    <section xml:id="zend.json.server.details"><info><title>高度な詳細</title></info>
+        
 
         <para>
             <classname>Zend_Json_Server</classname>の機能の大半が
-            <xref linkend="zend.json.server.usage" />で説明されており、
+            <xref linkend="zend.json.server.usage"/>で説明されており、
             より高度な機能を利用できます。
         </para>
 
-        <sect3 id="zend.json.server.details.zendjsonserver">
-            <title>Zend_Json_Server</title>
+        <section xml:id="zend.json.server.details.zendjsonserver"><info><title>Zend_Json_Server</title></info>
+            
 
             <para>
                 <classname>Zend_Json_Server</classname>は、
@@ -262,10 +258,10 @@ $server->handle();
                     サービス・マップ記述を取得します
                 </para></listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.json.server.details.zendjsonserverrequest">
-            <title>Zend_Json_Server_Request</title>
+        <section xml:id="zend.json.server.details.zendjsonserverrequest"><info><title>Zend_Json_Server_Request</title></info>
+            
 
             <para>
                 JSON-RPCのリクエスト環境は、
@@ -341,10 +337,10 @@ $server->handle();
                 このクラスは<code>php://input</code>を通じてリクエストを取得し、
                 <methodname>getRawJson()</methodname>メソッドを通じて生の<acronym>JSON</acronym>へのアクセスを可能にします。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.json.server.details.zendjsonserverresponse">
-            <title>Zend_Json_Server_Response</title>
+        <section xml:id="zend.json.server.details.zendjsonserverresponse"><info><title>Zend_Json_Server_Response</title></info>
+            
 
             <para>
                 JSON-RPCレスポンス・ペイロードは、
@@ -409,10 +405,10 @@ $server->handle();
                 このクラスは<acronym>JSON</acronym>としてレスポンスをシリアライズ化するだけでなく、
                 適切な<acronym>HTTP</acronym>ヘッダを送ります。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.json.server.details.zendjsonservererror">
-            <title>Zend_Json_Server_Error</title>
+        <section xml:id="zend.json.server.details.zendjsonservererror"><info><title>Zend_Json_Server_Error</title></info>
+            
 
             <para>
                 JSON-RPCには、エラー状況を報告するために、特別なフォーマットがあります。
@@ -422,8 +418,8 @@ $server->handle();
 
             <para>
                 エラーコードは、
-                <ulink url="http://xmlrpc-epi.sourceforge.net/specs/rfc.fault_codes.php">
-                XML-RPC EPIプロジェクト</ulink>によって推奨されるコードに由来します。
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://xmlrpc-epi.sourceforge.net/specs/rfc.fault_codes.php">
+                XML-RPC EPIプロジェクト</link>によって推奨されるコードに由来します。
                 <classname>Zend_Json_Server</classname>は、エラー状態に基づくコードを適切に割り当てます。
                 アプリケーション例外のためには、コード '-32000' が使われます。
             </para>
@@ -463,17 +459,17 @@ $server->handle();
                     エラーをJSON-RPCエラー表現にキャストします。
                 </para></listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.json.server.details.zendjsonserversmd">
-            <title>Zend_Json_Server_Smd</title>
+        <section xml:id="zend.json.server.details.zendjsonserversmd"><info><title>Zend_Json_Server_Smd</title></info>
+            
 
             <para>
                 SMDは、サービス・マッピング記述、
                 特定のウェブ・サービスとクライアントが相互作用できる方法を定義する<acronym>JSON</acronym>スキーマ、を表します。
                 この文書の時点では、
-                <ulink url="http://groups.google.com/group/json-schema/web/service-mapping-description-proposal">
-                仕様</ulink>は正式にまだ批准されませんでした、
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://groups.google.com/group/json-schema/web/service-mapping-description-proposal">
+                仕様</link>は正式にまだ批准されませんでした、
                 しかし、それは他のJSON-RPC利用者のクライアントだけでなく、
                 Dojoツールキットの範囲内ですでに使用中です。
             </para>
@@ -695,9 +691,6 @@ $server->handle();
                     サービスを<acronym>JSON</acronym>表現にキャストします。
                 </para></listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

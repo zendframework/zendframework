@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21815 -->
-<sect1 id="zend.session.basic_usage">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.basic_usage"><info><title>基本的な使用法</title></info>
 
-    <title>基本的な使用法</title>
+    
 
     <para>
         <classname>Zend_Session_Namespace</classname>
@@ -36,9 +34,9 @@ $myNamespace = new Zend_Session_Namespace('myNamespace');
         のインスタンスに関連しないキーに限るようにしましょう。
     </para>
 
-    <sect2 id="zend.session.basic_usage.basic_examples">
+    <section xml:id="zend.session.basic_usage.basic_examples"><info><title>チュートリアル</title></info>
 
-        <title>チュートリアル</title>
+        
 
         <para>
             何も名前空間を指定せずに <classname>Zend_Session_Namespace</classname> のインスタンスを作成すると、
@@ -50,9 +48,9 @@ $myNamespace = new Zend_Session_Namespace('myNamespace');
             セッション内でのクライアントからのリクエストの回数を数えるものです。
         </para>
 
-        <example id="zend.session.basic_usage.basic_examples.example.counting_page_views">
+        <example xml:id="zend.session.basic_usage.basic_examples.example.counting_page_views"><info><title>ページビューの数え方</title></info>
 
-            <title>ページビューの数え方</title>
+            
 
             <programlisting language="php"><![CDATA[
 $defaultNamespace = new Zend_Session_Namespace('Default');
@@ -87,9 +85,9 @@ echo "このセッションでページがリクエストされた回数: ",
             Zend Framework に同梱されるコアコンポーネントだけです。
         </para>
 
-        <example id="zend.session.basic_usage.basic_examples.example.namespaces.new">
+        <example xml:id="zend.session.basic_usage.basic_examples.example.namespaces.new"><info><title>新しい方法: 名前空間の衝突を避ける</title></info>
 
-            <title>新しい方法: 名前空間の衝突を避ける</title>
+            
 
             <programlisting language="php"><![CDATA[
 // Zend_Auth コンポーネント用
@@ -108,9 +106,9 @@ $webServiceNamespace->user = "mywebusername";
             ただ、上の例ではセッションデータがそれぞれの名前空間でカプセル化されています。
         </para>
 
-        <example id="zend.session.basic_usage.basic_examples.example.namespaces.old">
+        <example xml:id="zend.session.basic_usage.basic_examples.example.namespaces.old"><info><title>古い方法: PHP のセッションへのアクセス</title></info>
 
-            <title>古い方法: PHP のセッションへのアクセス</title>
+            
 
             <programlisting language="php"><![CDATA[
 $_SESSION['Zend_Auth']['user'] = "myusername";
@@ -119,21 +117,21 @@ $_SESSION['Some_Web_Service']['user'] = "mywebusername";
 
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.basic_usage.iteration">
+    <section xml:id="zend.session.basic_usage.iteration"><info><title>セッション名前空間の順次処理</title></info>
 
-        <title>セッション名前空間の順次処理</title>
+        
 
         <para>
             <classname>Zend_Session_Namespace</classname> は
-            <ulink url="http://www.php.net/~helly/php/ext/spl/interfaceIteratorAggregate.html">IteratorAggregate インターフェイス</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/~helly/php/ext/spl/interfaceIteratorAggregate.html">IteratorAggregate インターフェイス</link>
             を完全に実装しており、<code>foreach</code> 文をサポートしています。
         </para>
 
-        <example id="zend.session.basic_usage.iteration.example">
+        <example xml:id="zend.session.basic_usage.iteration.example"><info><title>セッションの順次処理</title></info>
 
-            <title>セッションの順次処理</title>
+            
 
             <programlisting language="php"><![CDATA[
 $aNamespace =
@@ -146,23 +144,23 @@ foreach ($aNamespace as $index => $value) {
 
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.basic_usage.accessors">
+    <section xml:id="zend.session.basic_usage.accessors"><info><title>セッション名前空間へのアクセス方法</title></info>
 
-        <title>セッション名前空間へのアクセス方法</title>
+        
 
         <para>
             <classname>Zend_Session_Namespace</classname> は <methodname>__get()</methodname>、<methodname>__set()</methodname>、
             <methodname>__isset()</methodname> そして <methodname>__unset()</methodname> といった
-            <ulink url="http://www.php.net/manual/ja/language.oop5.overloading.php">マジックメソッド</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/ja/language.oop5.overloading.php">マジックメソッド</link>
             を実装しています。これらは、自分のサブクラス以外から直接コールされることはありません。
             次の例に示すように、通常の演算の際に自動的にコールされることになります。
         </para>
 
-        <example id="zend.session.basic_usage.accessors.example">
+        <example xml:id="zend.session.basic_usage.accessors.example"><info><title>セッションデータへのアクセス</title></info>
 
-            <title>セッションデータへのアクセス</title>
+            
 
             <programlisting language="php"><![CDATA[
 $namespace = new Zend_Session_Namespace(); // デフォルトの名前空間
@@ -180,6 +178,6 @@ unset($namespace->foo);
 
         </example>
 
-    </sect2>
+    </section>
 
-</sect1>
+</section>

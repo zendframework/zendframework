@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20827 -->
-<sect1 id="zend.markup.parsers">
-    <title>Zend_Markup パーサー</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.markup.parsers"><info><title>Zend_Markup パーサー</title></info>
+    
 
     <para>
         <classname>Zend_Markup</classname> には現在 BBCode パーサーと Textile パーサー
         という２つのパーサーが同梱されています。
     </para>
 
-    <sect2 id="zend.markup.parsers.theory">
-        <title>パーサーの仕組み</title>
+    <section xml:id="zend.markup.parsers.theory"><info><title>パーサーの仕組み</title></info>
+        
 
         <para>
             <classname>Zend_Markup</classname> のパーサは、マークアップによる文をトークン木へと
@@ -61,10 +59,10 @@
             あるだけということに注意してください。実際の木構造は、タグの属性とその名について
             より多くの情報を含んでいます。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.markup.parsers.bbcode">
-        <title>BBCode パーサー</title>
+    <section xml:id="zend.markup.parsers.bbcode"><info><title>BBCode パーサー</title></info>
+        
 
         <para>
             BBCode パーサーは BBCode をトークン木へ変換する
@@ -89,10 +87,10 @@
         <para>
             標準で、 '[/tagname]' フォーマットを用いて閉じられます.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.markup.parsers.textile">
-        <title>Textile パーサー</title>
+    <section xml:id="zend.markup.parsers.textile"><info><title>Textile パーサー</title></info>
+        
 
         <para>
             Textile パーサーは、Textile からトークン木へと変換する <classname>Zend_Markup</classname>
@@ -100,8 +98,8 @@
             以下は見本例のタグのリストです:
         </para>
 
-        <table id="zend.markup.parsers.textile.tags">
-            <title>基本的な Textile タグのリスト</title>
+        <table xml:id="zend.markup.parsers.textile.tags"><info><title>基本的な Textile タグのリスト</title></info>
+            
 
             <tgroup cols="2" align="left" colsep="1" rowsep="1">
                 <thead>
@@ -116,56 +114,56 @@
                     <row>
                         <entry>*foo*</entry>
 
-                        <entry><![CDATA[<strong>foo</strong>]]></entry>
+                        <entry>&lt;strong&gt;foo&lt;/strong&gt;</entry>
                     </row>
 
                     <row>
                         <entry>_foo_</entry>
 
-                        <entry><![CDATA[<em>foo</em>]]></entry>
+                        <entry>&lt;em&gt;foo&lt;/em&gt;</entry>
                     </row>
 
                     <row>
                         <entry>??foo??</entry>
 
-                        <entry><![CDATA[<cite>foo</cite>]]></entry>
+                        <entry>&lt;cite&gt;foo&lt;/cite&gt;</entry>
                     </row>
 
                     <row>
                         <entry>-foo-</entry>
 
-                        <entry><![CDATA[<del>foo</del>]]></entry>
+                        <entry>&lt;del&gt;foo&lt;/del&gt;</entry>
                     </row>
 
                     <row>
                         <entry>+foo+</entry>
 
-                        <entry><![CDATA[<ins>foo</ins>]]></entry>
+                        <entry>&lt;ins&gt;foo&lt;/ins&gt;</entry>
                     </row>
 
                     <row>
                         <entry>^foo^</entry>
 
-                        <entry><![CDATA[<sup>foo</sup>]]></entry>
+                        <entry>&lt;sup&gt;foo&lt;/sup&gt;</entry>
                     </row>
 
                     <row>
                         <entry>~foo~</entry>
 
-                        <entry><![CDATA[<sub>foo</sub>]]></entry>
+                        <entry>&lt;sub&gt;foo&lt;/sub&gt;</entry>
                     </row>
 
                     <row>
                         <entry>%foo%</entry>
 
-                        <entry><![CDATA[<span>foo</span>]]></entry>
+                        <entry>&lt;span&gt;foo&lt;/span&gt;</entry>
                     </row>
 
                     <row>
                         <entry>PHP(PHP Hypertext Preprocessor)</entry>
 
                         <entry>
-                            <![CDATA[<acronym title="PHP Hypertext Preprocessor">PHP</acronym>]]>
+                            &lt;acronym title="PHP Hypertext Preprocessor"&gt;PHP&lt;/acronym&gt;
                         </entry>
                     </row>
 
@@ -173,27 +171,27 @@
                         <entry>"Zend Framework":http://framework.zend.com/</entry>
 
                         <entry>
-                            <![CDATA[<a href="http://framework.zend.com/">Zend Framework</a>]]>
+                            &lt;a href="http://framework.zend.com/"&gt;Zend Framework&lt;/a&gt;
                         </entry>
                     </row>
 
                     <row>
                         <entry>h1. foobar</entry>
 
-                        <entry><![CDATA[<h1>foobar</h1>]]></entry>
+                        <entry>&lt;h1&gt;foobar&lt;/h1&gt;</entry>
                     </row>
 
                     <row>
                         <entry>h6. foobar</entry>
 
-                        <entry><![CDATA[<h6>foobar</h6>]]></entry>
+                        <entry>&lt;h6&gt;foobar&lt;/h6&gt;</entry>
                     </row>
 
                     <row>
                         <entry>!http://framework.zend.com/images/logo.gif!</entry>
 
                         <entry>
-                            <![CDATA[<img src="http://framework.zend.com/images/logo.gif" />]]>
+                            &lt;img src="http://framework.zend.com/images/logo.gif" /&gt;
                         </entry>
                     </row>
                 </tbody>
@@ -205,8 +203,8 @@
             段落は2行の新しい行で終わり、よりタグがあった場合、新しい段落が加えられます。
         </para>
 
-        <sect3 id="zend.markup.parsers.textile.lists">
-            <title>リスト</title>
+        <section xml:id="zend.markup.parsers.textile.lists"><info><title>リスト</title></info>
+            
 
             <para>
                 Textile パーサーは2種類のリストをサポートします。"#"記号を用いた数値型と
@@ -227,6 +225,6 @@
                 （'h1'などのように）新しい行にて始まっている必要があり、リスト内で用いることは
                 できません。
             </para>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

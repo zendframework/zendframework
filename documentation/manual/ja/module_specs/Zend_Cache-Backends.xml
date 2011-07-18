@@ -1,14 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 22140 -->
-<sect1 id="zend.cache.backends">
-    <title><classname>Zend_Cache</classname> のバックエンド</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.backends"><info><title><classname>Zend_Cache</classname> のバックエンド</title></info>
+    
     <para>
         バックエンドには、標準と拡張の 2 種類があります。
         もちろん、拡張バックエンドのほうがより高機能となります。
     </para>
-    <sect2 id="zend.cache.backends.file">
-        <title>Zend_Cache_Backend_File</title>
+    <section xml:id="zend.cache.backends.file"><info><title>Zend_Cache_Backend_File</title></info>
+        
         <para>
             この (拡張) バックエンドは、キャッシュレコードを
             (指定したディレクトリの) ファイルに保存します。
@@ -16,8 +14,8 @@
         <para>
             使用可能なオプションは次のとおりです。
         </para>
-        <table id="zend.cache.backends.file.table">
-            <title>File バックエンドのオプション</title>
+        <table xml:id="zend.cache.backends.file.table"><info><title>File バックエンドのオプション</title></info>
+            
             <tgroup cols="4">
                  <thead>
                       <row>
@@ -123,9 +121,9 @@
                   </tbody>
               </tgroup>
           </table>
-    </sect2>
-    <sect2 id="zend.cache.backends.sqlite">
-        <title>Zend_Cache_Backend_Sqlite</title>
+    </section>
+    <section xml:id="zend.cache.backends.sqlite"><info><title>Zend_Cache_Backend_Sqlite</title></info>
+        
         <para>
             この (拡張) バックエンドは、キャッシュレコードを
             SQLite データベースに保存します。
@@ -133,8 +131,8 @@
         <para>
             使用可能なオプションは次のとおりです。
         </para>
-        <table id="zend.cache.backends.sqlite.table">
-            <title>Sqlite バックエンドのオプション</title>
+        <table xml:id="zend.cache.backends.sqlite.table"><info><title>Sqlite バックエンドのオプション</title></info>
+            
             <tgroup cols="4">
                  <thead>
                       <row>
@@ -173,15 +171,15 @@
                   </tbody>
               </tgroup>
           </table>
-    </sect2>
-    <sect2 id="zend.cache.backends.memcached">
-        <title>Zend_Cache_Backend_Memcached</title>
+    </section>
+    <section xml:id="zend.cache.backends.memcached"><info><title>Zend_Cache_Backend_Memcached</title></info>
+        
         <para>
             この (拡張) バックエンドは、キャッシュレコードを memcached サーバに保存します。
-            <ulink url="http://www.danga.com/memcached/">memcached</ulink> は、
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.danga.com/memcached/">memcached</link> は、
             高性能な分散メモリオブジェクトキャッシュシステムです。このバックエンドを使用するには、
             memcached デーモンおよび
-            <ulink url="http://pecl.php.net/package/memcache">memcache <acronym>PECL</acronym> 拡張モジュール</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://pecl.php.net/package/memcache">memcache <acronym>PECL</acronym> 拡張モジュール</link>
             が必要です。
         </para>
         <para>
@@ -191,8 +189,8 @@
         <para>
             使用可能なオプションは次のとおりです。
         </para>
-        <table id="zend.cache.backends.memcached.table">
-            <title>Memcached バックエンドのオプション</title>
+        <table xml:id="zend.cache.backends.memcached.table"><info><title>Memcached バックエンドのオプション</title></info>
+            
             <tgroup cols="4">
                  <thead>
                       <row>
@@ -207,22 +205,22 @@
                           <entry><emphasis>servers</emphasis></entry>
                           <entry><type>Array</type></entry>
                           <entry>
-                              <command>array(array('host' => 'localhost', 'port' => 11211,
-                                  'persistent' => true, 'weight' => 1, 'timeout' => 5,
-                                  'retry_interval' => 15, 'status' => true,
-                                  'failure_callback' => '' ))</command>
+                              <command>array(array('host' =&gt; 'localhost', 'port' =&gt; 11211,
+                                  'persistent' =&gt; true, 'weight' =&gt; 1, 'timeout' =&gt; 5,
+                                  'retry_interval' =&gt; 15, 'status' =&gt; true,
+                                  'failure_callback' =&gt; '' ))</command>
                           </entry>
                           <entry>
                               memcached サーバの配列です。各 memcached サーバの情報は、
                               以下のような連想配列で指定します。
-                              'host' => (string) : memcached サーバのサーバ名
-                              'port' => (int) : memcached サーバのポート番号
-                              'persistent' => (bool) : この memcached サーバに対して持続的な接続を使用するかどうか
-                              'weight' => (int) : memcached サーバの重み付け
-                              'timeout' => (int) : memcached サーバのタイムアウト
-                              'retry_interval' => (int) : memcached サーバの再試行間隔
-                              'status' => (bool) : memcached サーバのステータス
-                              'failure_callback' => (callback) : memcached サーバのコールバック関数
+                              'host' =&gt; (string) : memcached サーバのサーバ名
+                              'port' =&gt; (int) : memcached サーバのポート番号
+                              'persistent' =&gt; (bool) : この memcached サーバに対して持続的な接続を使用するかどうか
+                              'weight' =&gt; (int) : memcached サーバの重み付け
+                              'timeout' =&gt; (int) : memcached サーバのタイムアウト
+                              'retry_interval' =&gt; (int) : memcached サーバの再試行間隔
+                              'status' =&gt; (bool) : memcached サーバのステータス
+                              'failure_callback' =&gt; (callback) : memcached サーバのコールバック関数
                           </entry>
                       </row>
                       <row>
@@ -245,12 +243,12 @@
                   </tbody>
               </tgroup>
           </table>
-    </sect2>
-    <sect2 id="zend.cache.backends.apc">
-        <title>Zend_Cache_Backend_Apc</title>
+    </section>
+    <section xml:id="zend.cache.backends.apc"><info><title>Zend_Cache_Backend_Apc</title></info>
+        
         <para>
             この (拡張) バックエンドは、キャッシュレコードを共有メモリに保存する際に
-            <ulink url="http://pecl.php.net/package/APC">APC</ulink> (Alternative <acronym>PHP</acronym> Cache)
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://pecl.php.net/package/APC">APC</link> (Alternative <acronym>PHP</acronym> Cache)
             拡張モジュールを使用します
             (当然、このバックエンドを使用するにはこの拡張モジュールが必要です)。
         </para>
@@ -261,12 +259,12 @@
         <para>
             このバックエンドではオプションを使用しません。
         </para>
-    </sect2>
-    <sect2 id="zend.cache.backends.xcache">
-        <title>Zend_Cache_Backend_Xcache</title>
+    </section>
+    <section xml:id="zend.cache.backends.xcache"><info><title>Zend_Cache_Backend_Xcache</title></info>
+        
         <para>
             このバックエンドは、キャッシュレコードを共有メモリに保存する際に
-            <ulink url="http://xcache.lighttpd.net/">XCache</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://xcache.lighttpd.net/">XCache</link>
             拡張モジュールを使用します
             (当然、このバックエンドを使うにはこの拡張モジュールが必要となります)。
         </para>
@@ -277,8 +275,8 @@
         <para>
             使用可能なオプションは次のとおりです。
         </para>
-        <table id="zend.cache.backends.xcache.table">
-            <title>Xcache バックエンドのオプション</title>
+        <table xml:id="zend.cache.backends.xcache.table"><info><title>Xcache バックエンドのオプション</title></info>
+            
             <tgroup cols="4">
                  <thead>
                       <row>
@@ -310,11 +308,11 @@
                   </tbody>
               </tgroup>
           </table>
-    </sect2>
-    <sect2 id="zend.cache.backends.platform">
-        <title>Zend_Cache_Backend_ZendPlatform</title>
+    </section>
+    <section xml:id="zend.cache.backends.platform"><info><title>Zend_Cache_Backend_ZendPlatform</title></info>
+        
         <para>
-            このバックエンドは、<ulink url="http://www.zend.co.jp/product/zendplatform.html">Zend Platform</ulink>
+            このバックエンドは、<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.co.jp/product/zendplatform.html">Zend Platform</link>
             製品のコンテンツキャッシング <acronym>API</acronym> を使用します。当然、このバックエンドを使用するには
             Zend Platform をインストールする必要があります。
         </para>
@@ -333,9 +331,9 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
         <para>
             このバックエンドではオプションを使用しません。
         </para>
-    </sect2>
-    <sect2 id="zend.cache.backends.twolevels">
-        <title>Zend_Cache_Backend_TwoLevels</title>
+    </section>
+    <section xml:id="zend.cache.backends.twolevels"><info><title>Zend_Cache_Backend_TwoLevels</title></info>
+        
         <para>
             この (拡張) バックエンドは複合型です。
             キャッシュレコードを、
@@ -357,8 +355,8 @@ $cache = Zend_Cache::factory('Core', 'Two Levels');
         <para>
             使用可能なオプションは次のとおりです。
         </para>
-        <table id="zend.cache.backends.twolevels.table">
-            <title>TwoLevels バックエンドのオプション</title>
+        <table xml:id="zend.cache.backends.twolevels.table"><info><title>TwoLevels バックエンドのオプション</title></info>
+            
             <tgroup cols="4">
                  <thead>
                       <row>
@@ -462,12 +460,12 @@ $cache = Zend_Cache::factory('Core', 'Two Levels');
                   </tbody>
               </tgroup>
           </table>
-    </sect2>
-    <sect2 id="zend.cache.backends.zendserver">
-        <title>Zend_Cache_Backend_ZendServer_Disk および Zend_Cache_Backend_ZendServer_ShMem</title>
+    </section>
+    <section xml:id="zend.cache.backends.zendserver"><info><title>Zend_Cache_Backend_ZendServer_Disk および Zend_Cache_Backend_ZendServer_ShMem</title></info>
+        
         <para>
             これらのバックエンドは、キャッシュレコードの保存に
-            <ulink url="http://www.zend.com/en/products/server/downloads-all?zfs=zf_download">Zend Server</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.com/en/products/server/downloads-all?zfs=zf_download">Zend Server</link>
             のキャッシュ機能を使用します。
         </para>
         <para>
@@ -491,10 +489,10 @@ $cache = Zend_Cache::factory('Core', 'Zend_Cache_Backend_ZendServer_Disk',
         <para>
             このバックエンドにはオプションはありません。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.cache.backends.static">
-        <title>Zend_Cache_Backend_Static</title>
+    <section xml:id="zend.cache.backends.static"><info><title>Zend_Cache_Backend_Static</title></info>
+        
         <para>
             This backend works in concert with <classname>
             Zend_Cache_Frontend_Capture</classname> (the two must be used
@@ -512,7 +510,7 @@ $cache = Zend_Cache::factory('Core', 'Zend_Cache_Backend_ZendServer_Disk',
                 this, the output buffering used by the Dispatcher <emphasis>must</emphasis> be
                 disabled by calling <classname>Zend_Controller_Front</classname>'s
                 <methodname>setParam()</methodname> method, for example,
-                <command>$front->setParam('disableOutputBuffering', true);</command> or adding
+                <command>$front-&gt;setParam('disableOutputBuffering', true);</command> or adding
                 "resources.frontcontroller.params.disableOutputBuffering = true"
                 to your bootstrap configuration file (assumed <acronym>INI</acronym>) if using
                 <classname>Zend_Application</classname>.
@@ -603,8 +601,8 @@ RewriteRule ^.*$ index.php [NC,L]
                 setInnerCache()</methodname> method.
             </para>
         </note>
-        <table id="zend.cache.backends.static.table">
-            <title>Static Backend Options</title>
+        <table xml:id="zend.cache.backends.static.table"><info><title>Static Backend Options</title></info>
+            
             <tgroup cols="4">
                  <thead>
                       <row>
@@ -722,8 +720,5 @@ RewriteRule ^.*$ index.php [NC,L]
                   </tbody>
               </tgroup>
           </table>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

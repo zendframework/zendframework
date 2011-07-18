@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21825 -->
-<sect1 id="zend.infocard.basics">
-    <title>導入</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.infocard.basics"><info><title>導入</title></info>
+    
 
     <para>
         <classname>Zend_InfoCard</classname> コンポーネントは、
@@ -17,12 +15,12 @@
     <para>
         情報カードについて、
         あるいはインターネット上の識別メタシステムにおける情報カードの重要性については、
-        <ulink url="http://www.identityblog.com/">IdentityBlog</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.identityblog.com/">IdentityBlog</link>
         を参照ください。
     </para>
 
-    <sect2 id="zend.infocard.basics.theory">
-        <title>基本的な使用法</title>
+    <section xml:id="zend.infocard.basics.theory"><info><title>基本的な使用法</title></info>
+        
 
         <para>
             <classname>Zend_InfoCard</classname> の使用法は、
@@ -73,10 +71,10 @@
             <acronym>SSL</acronym> による暗号化を設定する方法については、
             ウェブサーバのドキュメントを参照ください。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.infocard.basics.auth">
-        <title>Zend_Auth の部品としての使用法</title>
+    <section xml:id="zend.infocard.basics.auth"><info><title>Zend_Auth の部品としての使用法</title></info>
+        
 
         <para>
             このコンポーネントを <classname>Zend_Auth</classname>
@@ -161,10 +159,10 @@ if (isset($_POST['xmlToken'])) {
             <classname>Zend_Auth</classname> の標準機能を使って情報カードトークンの検証を行い、
             <methodname>getIdentity()</methodname> で取得した識別情報をもとにユーザの認証を行います。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.infocard.basics.standalone">
-        <title>Zend_InfoCard コンポーネント単体での使用法</title>
+    <section xml:id="zend.infocard.basics.standalone"><info><title>Zend_InfoCard コンポーネント単体での使用法</title></info>
+        
 
         <para>
             <classname>Zend_InfoCard</classname> コンポーネントを、
@@ -221,10 +219,10 @@ if (isset($_POST['xmlToken'])) {
             設定がすんだら、<methodname>process()</methodname>
             メソッドで情報カードの処理を行ってその結果を返します。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.infocard.basics.claims">
-        <title>Claims オブジェクトの使用法</title>
+    <section xml:id="zend.infocard.basics.claims"><info><title>Claims オブジェクトの使用法</title></info>
+        
 
         <para>
             <classname>Zend_InfoCard</classname> の使用方法
@@ -264,10 +262,10 @@ if (isset($_POST['xmlToken'])) {
             オブジェクトには <methodname>getIssuer()</methodname> メソッドが用意されています。
             このメソッドは、情報カードの claim の発行元 <acronym>URI</acronym> を返します。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.infocard.basics.attaching">
-        <title>既存のアカウントへの情報カードの添付</title>
+    <section xml:id="zend.infocard.basics.attaching"><info><title>既存のアカウントへの情報カードの添付</title></info>
+        
 
         <para>
             既存の認証システムに情報カードのサポートを追加することもできます。
@@ -332,10 +330,10 @@ public function submitinfocardAction()
     }
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.infocard.basics.adapters">
-        <title>Zend_InfoCard アダプタの作成</title>
+    <section xml:id="zend.infocard.basics.adapters"><info><title>Zend_InfoCard アダプタの作成</title></info>
+        
 
         <para>
             <classname>Zend_InfoCard</classname> コンポーネントは、
@@ -396,8 +394,5 @@ $infoCard->setAdapter($adapter);
 
 $claims = $infoCard->process($_POST['xmlToken']);
 ]]></programlisting>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

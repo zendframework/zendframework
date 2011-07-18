@@ -1,23 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20854 -->
-<sect1 id="zend.rest.client">
-    <title>Zend_Rest_Client</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.rest.client"><info><title>Zend_Rest_Client</title></info>
+    
 
-    <sect2 id="zend.rest.client.introduction">
-        <title>導入</title>
+    <section xml:id="zend.rest.client.introduction"><info><title>導入</title></info>
+        
 
         <para>
             <classname>Zend_Rest_Client</classname> の使用法は、
-            <code>SoapClient</code> オブジェクト (<ulink
-            url="http://www.php.net/soap">SOAP ウェブサービス拡張モジュール</ulink>)
+            <code>SoapClient</code> オブジェクト (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/soap">SOAP ウェブサービス拡張モジュール</link>)
             の使用法と非常によく似ています。REST サービスのプロシージャは、簡単に
             <classname>Zend_Rest_Client</classname> のメソッドとしてコールできます。
             まず、そのサービスのアドレスを <classname>Zend_Rest_Client</classname> のコンストラクタに指定します。
         </para>
 
-        <example id="zend.rest.client.introduction.example-1">
-            <title>基本的な REST リクエスト</title>
+        <example xml:id="zend.rest.client.introduction.example-1"><info><title>基本的な REST リクエスト</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 /**
@@ -29,8 +26,8 @@ echo $client->sayHello('Davey', 'Day')->get(); // "Hello Davey, Good Day"
 ]]></programlisting>
         </example>
 
-        <note>
-            <title>コール方法の違い</title>
+        <note><info><title>コール方法の違い</title></info>
+            
 
             <para>
                 <classname>Zend_Rest_Client</classname> は、
@@ -47,10 +44,10 @@ $client->sayHello('Davey', 'Day');
 echo $client->get();
 ]]></programlisting>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.rest.client.return">
-        <title>レスポンス</title>
+    <section xml:id="zend.rest.client.return"><info><title>レスポンス</title></info>
+        
 
         <para>
             <classname>Zend_Rest_Client</classname> を使用して行ったリクエストは、すべて
@@ -64,8 +61,8 @@ echo $client->get();
             たとえばレスポンスステータス (成功あるいは失敗) や返り値の型などです。
         </para>
 
-        <example id="zend.rest.client.return.example-1">
-            <title>レスポンスステータス</title>
+        <example xml:id="zend.rest.client.return.example-1"><info><title>レスポンスステータス</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $result = $client->sayHello('Davey', 'Day')->get();
@@ -97,8 +94,8 @@ if ($result->isSuccess()) {
             <acronym>PHP</acronym> の値あるいは値の配列としてそのオブジェクトを取得できます。
         </para>
 
-        <example id="zend.rest.client.return.example-2">
-            <title>Technorati の Rest サービスの使用</title>
+        <example xml:id="zend.rest.client.return.example-2"><info><title>Technorati の Rest サービスの使用</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $technorati = new Zend_Rest_Client('http://api.technorati.com/bloginfo');
@@ -109,8 +106,8 @@ echo $result->firstname() .' '. $result->lastname();
 ]]></programlisting>
         </example>
 
-        <example id="zend.rest.client.return.example-3">
-            <title>Technorati からのレスポンスの例</title>
+        <example xml:id="zend.rest.client.return.example-3"><info><title>Technorati からのレスポンスの例</title></info>
+            
 
             <programlisting language="xml"><![CDATA[
 <?xml version="1.0" encoding="utf-8"?>
@@ -155,8 +152,8 @@ echo $result->firstname() .' '. $result->lastname();
             名前を指定するだけで自動的に取得できます。
         </para>
 
-        <note>
-            <title>複数の要素</title>
+        <note><info><title>複数の要素</title></info>
+            
 
             <para>
                 名前でアクセスしているときにもし複数の項目が見つかったら、
@@ -164,10 +161,10 @@ echo $result->firstname() .' '. $result->lastname();
                 <acronym>PHP</acronym> の値の配列を返します。
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.rest.client.args">
-        <title>リクエストの引数</title>
+    <section xml:id="zend.rest.client.args"><info><title>リクエストの引数</title></info>
+        
 
         <para>
             <classname>Zend_Rest_Server</classname> ベースのサービスにリクエストを送るのではない場合は、
@@ -181,8 +178,8 @@ echo $result->firstname() .' '. $result->lastname();
             サービスをコールする際のメソッドとみなされます。
         </para>
 
-        <example id="zend.rest.client.args.example-1">
-            <title>リクエストの引数の設定</title>
+        <example xml:id="zend.rest.client.args.example-1"><info><title>リクエストの引数の設定</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $client = new Zend_Rest_Client('http://example.org/rest');
@@ -203,15 +200,15 @@ $client->arg('value1')->arg2('value2')->get();
         </para>
 
         <para>
-            最初の <code>$client->arg('value1');</code> のコールが
+            最初の <code>$client-&gt;arg('value1');</code> のコールが
             <code>method=arg&amp;arg1=value1</code> および <code>arg=value1</code>
             の二通りの結果となることにお気づきでしょう。これによって、
             <classname>Zend_Rest_Server</classname> がリクエストを適切に理解できるようになるのです。
             そのサービスを使用するにあたっての前提知識を必要としなくなります。
         </para>
 
-        <warning>
-            <title>Zend_Rest_Client の厳格性</title>
+        <warning><info><title>Zend_Rest_Client の厳格性</title></info>
+            
 
             <para>
                 受け取る引数について厳格な REST サービスでは、
@@ -220,9 +217,5 @@ $client->arg('value1')->arg2('value2')->get();
                 これはそう頻繁に起こることではないので、特に問題とはならないでしょう。
             </para>
         </warning>
-    </sect2>
-</sect1>
-
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

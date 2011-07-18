@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 19432 -->
-<sect3 id="zend.view.helpers.initial.headscript">
-    <title>HeadScript ヘルパー</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headscript"><info><title>HeadScript ヘルパー</title></info>
+    
 
     <para>
         HTML の <code>&lt;script&gt;</code> 要素を使用して、
@@ -43,8 +41,8 @@
         はその要素に使用したいクライアント側のスクリプトとなります。
     </para>
 
-    <note>
-        <title>条件コメントの設定</title>
+    <note><info><title>条件コメントの設定</title></info>
+        
 
         <para>
             <code>HeadScript</code> では、script タグを条件コメントで囲むことができます。
@@ -53,8 +51,8 @@
             <varname>$attrs</varname> パラメータで渡します。
         </para>
 
-        <example id="zend.view.helpers.initial.headscript.conditional">
-            <title>Headscript で条件コメントを使う例</title>
+        <example xml:id="zend.view.helpers.initial.headscript.conditional"><info><title>Headscript で条件コメントを使う例</title></info>
+            
             <programlisting language="php"><![CDATA[
 // スクリプトを追加します
 $this->headScript()->appendFile(
@@ -101,13 +99,12 @@ $this->headScript()->appendFile(
         ヘルパー</link> の具象実装です。
     </para>
 
-    <note>
-        <title>HTML Body スクリプトでの InlineScript の使用</title>
+    <note><info><title>HTML Body スクリプトでの InlineScript の使用</title></info>
+        
 
         <para>
             HTML の <code>body</code> 部にスクリプトを埋め込みたい場合は、
-            <code>HeadScript</code> の姉妹版である <link
-                linkend="zend.view.helpers.initial.inlinescript">InlineScript</link>
+            <code>HeadScript</code> の姉妹版である <link linkend="zend.view.helpers.initial.inlinescript">InlineScript</link>
             を使わなければなりません。
             スクリプトをドキュメントの最後のほうに配置するようにすると、
             ページの表示速度が向上します。特に、
@@ -115,8 +112,8 @@ $this->headScript()->appendFile(
         </para>
     </note>
 
-    <note>
-        <title>すべての属性はデフォルトで無効</title>
+    <note><info><title>すべての属性はデフォルトで無効</title></info>
+        
 
         <para>
             デフォルトでは、<code>HeadScript</code> がレンダリングする
@@ -124,7 +121,7 @@ $this->headScript()->appendFile(
             に認められているものだけです。
             'type' や 'charset'、'defer'、'language' そして 'src' が該当します。
             しかし、Javascript のフレームワーク
-            (<ulink url="http://www.dojotoolkit.org/">Dojo</ulink> など)
+            (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.dojotoolkit.org/">Dojo</link> など)
             では独自の属性を用いることでその挙動を変更しています。
             このような属性を許可するには、
             <methodname>setAllowArbitraryAttributes()</methodname> メソッドを使用します。
@@ -135,8 +132,8 @@ $this->headScript()->setAllowArbitraryAttributes(true);
 ]]></programlisting>
     </note>
 
-    <example id="zend.view.helpers.initial.headscript.basicusage">
-        <title>HeadScript ヘルパーの基本的な使用法</title>
+    <example xml:id="zend.view.helpers.initial.headscript.basicusage"><info><title>HeadScript ヘルパーの基本的な使用法</title></info>
+        
 
         <para>
             上で説明したように、新しい script タグを、好きなときに指定できます。
@@ -180,8 +177,8 @@ $this->headScript()->prependFile('/js/prototype.js');
 ]]></programlisting>
     </example>
 
-    <example id="zend.view.helpers.initial.headscript.capture">
-        <title>HeadScript ヘルパーによるスクリプトのキャプチャ</title>
+    <example xml:id="zend.view.helpers.initial.headscript.capture"><info><title>HeadScript ヘルパーによるスクリプトのキャプチャ</title></info>
+        
 
         <para>
             時にはクライアント側のスクリプトをプログラムで生成しなければならないこともあるでしょう。
@@ -221,7 +218,4 @@ $('foo_form').action = action;
             </para></listitem>
         </itemizedlist>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

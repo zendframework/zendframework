@@ -1,19 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 22756 -->
-<sect1 id="zend.log.writers" xmlns:xi="http://www.w3.org/2001/XInclude">
-  <title>ライター</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers"><info><title>ライター</title></info>
+  
   <para>
     ライターは、<classname>Zend_Log_Writer_Abstract</classname>
     を継承したオブジェクトです。ライターの役割は、
     ログのデータをバックエンドのストレージに記録することです。
   </para>
 
-  <sect2 id="zend.log.writers.stream">
-    <title>ストリームへの書き出し</title>
+  <section xml:id="zend.log.writers.stream"><info><title>ストリームへの書き出し</title></info>
+    
     <para>
       <classname>Zend_Log_Writer_Stream</classname> は、ログデータを
-      <ulink url="http://www.php.net/stream">PHP のストリーム</ulink>
+      <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/stream">PHP のストリーム</link>
       に書き出します。
     </para>
 
@@ -32,8 +30,8 @@ $logger->info('Informational message');
 
     <para>
       データをファイルに書き出すには、
-      <ulink url="http://www.php.net/manual/ja/wrappers.php#wrappers.file">ファイルシステム
-      URL</ulink> のいずれかを使用します。
+      <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/ja/wrappers.php#wrappers.file">ファイルシステム
+      URL</link> のいずれかを使用します。
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -70,10 +68,10 @@ $logger->info('通知メッセージ');
       既存のストリームリソースに対してモードを指定することはできません。
       指定しようとすると <classname>Zend_Log_Exception</classname> をスローします。
     </para>
-  </sect2>
+  </section>
 
-  <sect2 id="zend.log.writers.database">
-    <title>データベースへの書き出し</title>
+  <section xml:id="zend.log.writers.database"><info><title>データベースへの書き出し</title></info>
+    
 
     <para>
       <classname>Zend_Log_Writer_Db</classname> は、
@@ -105,17 +103,17 @@ $logger->info('通知メッセージ');
       というカラムにログのメッセージが格納されます。
     </para>
 
-  </sect2>
+  </section>
 
-  <xi:include href="Zend_Log-Writers-Firebug.xml" />
-  <xi:include href="Zend_Log-Writers-Mail.xml" />
-  <xi:include href="Zend_Log-Writers-Syslog.xml" />
-  <xi:include href="Zend_Log-Writers-ZendMonitor.xml">
-      <xi:fallback><xi:include href="../../en/module_specs/Zend_Log-Writers-ZendMonitor.xml" /></xi:fallback>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Log-Writers-Firebug.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Log-Writers-Mail.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Log-Writers-Syslog.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Log-Writers-ZendMonitor.xml">
+      <xi:fallback><xi:include href="../../en/module_specs/Zend_Log-Writers-ZendMonitor.xml"/></xi:fallback>
   </xi:include>
 
-  <sect2 id="zend.log.writers.null">
-    <title>ライターのスタブ</title>
+  <section xml:id="zend.log.writers.null"><info><title>ライターのスタブ</title></info>
+    
 
     <para>
       <classname>Zend_Log_Writer_Null</classname> はスタブで、ログデータをどこにも書き出しません。
@@ -129,10 +127,10 @@ $logger = new Zend_Log($writer);
 // どこにも出力されません
 $logger->info('通知メッセージ');
 ]]></programlisting>
-  </sect2>
+  </section>
 
-  <sect2 id="zend.log.writers.mock">
-    <title>モックによるテスト</title>
+  <section xml:id="zend.log.writers.mock"><info><title>モックによるテスト</title></info>
+    
 
     <para>
       <classname>Zend_Log_Writer_Mock</classname> は非常にシンプルなライターです。
@@ -157,13 +155,13 @@ var_dump($mock->events[0]);
 ]]></programlisting>
 
     <para>
-      モックが記録したイベントを消去するには、単純に <command>$mock->events = array()</command>
+      モックが記録したイベントを消去するには、単純に <command>$mock-&gt;events = array()</command>
       とします。
     </para>
-  </sect2>
+  </section>
 
-  <sect2 id="zend.log.writers.compositing">
-    <title>ライターを組み合わせる</title>
+  <section xml:id="zend.log.writers.compositing"><info><title>ライターを組み合わせる</title></info>
+    
 
     <para>
       合成ライターオブジェクトはありません。
@@ -182,5 +180,5 @@ $logger->addWriter($writer2);
 // 両方のライターに書き出されます
 $logger->info('通知メッセージ');
 ]]></programlisting>
-  </sect2>
-</sect1>
+  </section>
+</section>

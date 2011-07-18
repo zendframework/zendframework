@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20854 -->
-<sect1 id="zend.search.lucene.charset">
-    <title>文字セット</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.charset"><info><title>文字セット</title></info>
+    
 
-    <sect2 id="zend.search.lucene.charset.description">
-        <title>UTF-8 およびシングルバイト文字セットのサポート</title>
+    <section xml:id="zend.search.lucene.charset.description"><info><title>UTF-8 およびシングルバイト文字セットのサポート</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> は、内部的には UTF-8 文字セットで動作します。
@@ -36,10 +34,10 @@
             <classname>Zend_Search_Lucene</classname> の <acronym>API</acronym> を使用します。
             データは、自動的に UTF-8 エンコーディングに変換されます。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.charset.default_analyzer">
-        <title>デフォルトのテキスト解析器</title>
+    <section xml:id="zend.search.lucene.charset.default_analyzer"><info><title>デフォルトのテキスト解析器</title></info>
+        
         <para>
             しかし、デフォルトのテキスト解析器
             (クエリパーサの中でもこれが用いられます) は、
@@ -61,17 +59,17 @@
             </footnote>
         </para>
 
-        <note>
-            <title/>
+        <note><info><title/></info>
+            
             <para>
                 デフォルトの解析器は、数字は単語の一部として扱いません。
                 数字で単語を分断されたくない場合は、'Num' 解析器を使用しましょう。
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.charset.utf_analyzer">
-        <title>UTF-8 互換のテキスト解析器</title>
+    <section xml:id="zend.search.lucene.charset.utf_analyzer"><info><title>UTF-8 互換のテキスト解析器</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> には、
@@ -91,8 +89,8 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 ]]></programlisting>
         </para>
 
-        <warning>
-            <title/>
+        <warning><info><title/></info>
+            
             <para>
                 UTF-8 互換の解析器は Zend Framework 1.5 で改良されました。
                 以前のバージョンの解析器は非アスキーキャラクタをすべて文字とみなしていましたが、
@@ -128,7 +126,7 @@ if (@preg_match('/\pL/u', 'a') == 1) {
 
         <para>
             大文字小文字を区別しないバージョンの UTF-8 互換解析器を使用する場合は、さらに
-            <ulink url="http://www.php.net/manual/ja/ref.mbstring.php">mbstring</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/ja/ref.mbstring.php">mbstring</link>
             拡張モジュールが必要です。
         </para>
 
@@ -176,5 +174,5 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 $hits = $index->find(strtolower($query));
 ]]></programlisting>
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

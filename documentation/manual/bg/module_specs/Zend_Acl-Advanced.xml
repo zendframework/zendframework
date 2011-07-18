@@ -1,10 +1,11 @@
-<sect1 id="zend.acl.advanced">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.advanced"><info><title>По - слжони неща</title></info>
 
-    <title>По - слжони неща</title>
+    
 
-    <sect2 id="zend.acl.advanced.storing">
+    <section xml:id="zend.acl.advanced.storing"><info><title>Съхраняване на ACL информация за заазване на състоянието</title></info>
 
-        <title>Съхраняване на ACL информация за заазване на състоянието</title>
+        
 
         <para>
 
@@ -18,16 +19,16 @@
         <para>
         Storage of ACL data is therefore left as a task for the developer, since use cases are expected to
         vary widely for various situations. Because Zend_Acl is serializable, ACL objects may be serialized
-        with PHP's <ulink url="http://php.net/serialize"><code>serialize()</code></ulink> function, and the
+        with PHP's <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/serialize"><code>serialize()</code></link> function, and the
         results may be stored anywhere the developer should desire, such as a file, database, or caching
         mechanism.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.advanced.assertions">
+    <section xml:id="zend.acl.advanced.assertions"><info><title>Writing Conditional ACL Rules with Assertions</title></info>
 
-        <title>Writing Conditional ACL Rules with Assertions</title>
+        
 
         <para>
         Sometimes a rule for allowing or denying an Role access to a Resource should not be absolute but dependent
@@ -58,8 +59,8 @@ class CleanIPAssertion implements Zend_Acl_Assert_Interface
     {
         // ...
     }
-}]]>
-        </programlisting>
+}
+        ]]></programlisting>
 
         <para>
         Once an assertion class is available, the developer must supply an instance of the assertion class
@@ -71,8 +72,8 @@ class CleanIPAssertion implements Zend_Acl_Assert_Interface
 require_once 'Zend/Acl.php';
 
 $acl = new Zend_Acl();
-$acl->allow(null, null, null, new CleanIPAssertion());]]>
-        </programlisting>
+$acl->allow(null, null, null, new CleanIPAssertion());
+        ]]></programlisting>
 
         <para>
         The above code creates a conditional allow rule that allows access to all privileges on everything
@@ -90,9 +91,6 @@ $acl->allow(null, null, null, new CleanIPAssertion());]]>
         a context for the assertion class to determine its conditions where needed.
         </para>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

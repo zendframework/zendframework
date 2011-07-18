@@ -1,10 +1,11 @@
-<sect1 id="zend.json.xml2json">
-    <title>Převod XML do JSON</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.xml2json"><info><title>Převod XML do JSON</title></info>
+    
     <para>
         <code>Zend_Json</code> poskytuje metodu pro převod dat formátovaných
         pomocí XML do JSON formátu. Tato vlastnost je inspirována
-        <ulink url="http://www.ibm.com/developerworks/xml/library/x-xml2jsonphp/">
-        článkem na IBM developerWorks</ulink>.
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.ibm.com/developerworks/xml/library/x-xml2jsonphp/">
+        článkem na IBM developerWorks</link>.
     </para>
 
     <para>
@@ -18,8 +19,8 @@
     </para>
     <programlisting role="php"><![CDATA[
         // Funkce fromXml jednoduše přijme String obsahující XML data jak vstup.
-        $jsonContents = Zend_Json::fromXml($xmlStringContents, true);?>]]>
-    </programlisting>
+        $jsonContents = Zend_Json::fromXml($xmlStringContents, true);?>
+    ]]></programlisting>
 
     <para>
         Funkce <code>Zend_Json::fromXml()</code> provádí konverzi vstupního XML
@@ -63,8 +64,8 @@
         <author><first>Jack</first><last>Herrington</last></author>
         <publisher>O'Reilly</publisher>
     </book>
-</books> ?>]]>
-    </programlisting>
+</books> ?>
+    ]]></programlisting>
 
     <para>
         JSON výstup vrácený z funkce <code>Zend_Json::fromXml()</code>:
@@ -100,16 +101,13 @@
          "publisher" : "O'Reilly"
       }
    ]}
-}  ?>]]>
-    </programlisting>
+}  ?>
+    ]]></programlisting>
 
     <para>
         Více podrobností o funkci xml2json můžete najít v původním návrhu.
         Podívejte se na
-        <ulink url="http://tinyurl.com/2tfa8z">návrh Zend_xml2json</ulink>.
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://tinyurl.com/2tfa8z">návrh Zend_xml2json</link>.
     </para>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

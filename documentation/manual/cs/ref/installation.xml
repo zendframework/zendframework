@@ -1,6 +1,9 @@
-<sect1 id="introduction.installation">
+<?xml version="1.0" encoding="utf-8"?>
 
-    <title>Instalace</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="introduction.installation"><info><title>Instalace</title></info>
+
+    
 
     <para>
         Zend Framework je vytvořen s využitím objektově orientovaného PHP 5
@@ -14,14 +17,14 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <ulink url="http://framework.zend.com/download">Stáhnout poslední stabilní verzi.</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/download">Stáhnout poslední stabilní verzi.</link>
                     Tato verze, dostupná v <code>.zip</code> nebo <code>.tar.gz</code>, je správná volba pro
                     začátečníky se Zend Frameworkem.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <ulink url="http://framework.zend.com/download/snapshot">Stáhnout poslední noční snapshot.</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/download/snapshot">Stáhnout poslední noční snapshot.</link>
                     Těm, kteří jsou ochotni pracovat na ostří nože, poskytuje noční snapshot poslední pokrok ve vývoji Zend Frameworku.
                     Snapshoty jsou zabaleny buď jen s dokumentací v angličtině nebo ve všech dostupných jazycích. Pokud hodláte
                     pracovat s nejnovějšími změnami ve vývoji Zend Frameworku, zvažte použití Subversion (SVN) klienta.
@@ -29,29 +32,29 @@
             </listitem>
             <listitem>
                 <para>
-                    Použití <ulink url="http://subversion.tigris.org">Subversion</ulink> (SVN) klienta. Zend Framework
+                    Použití <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://subversion.tigris.org">Subversion</link> (SVN) klienta. Zend Framework
                     je open source software a Subversion repositář použitý pro jeho vývoj je veřejně přístupný. Zvažte
                     využítí SVN pokud už používáte SVN pro vývoj svých aplikací, chcete přispívat zpět do frameworku
                     nebo potřebuje využívat ještě nevydané verze frameworku.
                 </para>
                 <para>
-                    <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.export.html">Exportování</ulink> je
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.export.html">Exportování</link> je
                     užitečné, pokud potřebuje získat konkrétní revizi frameworku bez <code>.svn</code> adresářů, které
                     jsou vytvořeny v pracovní kopii.
                 </para>
                 <para>
-                    <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.checkout.html">Checkout pracovní kopie</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.checkout.html">Checkout pracovní kopie</link>
                     je je vhodný pokud chcete přispívat do Zend Frameworku a pracovní kopie může být kdykoliv aktualizována pomocí
-                    <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.update.html"><code>svn
-                    update</code></ulink>.
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.update.html"><code>svn
+                    update</code></link>.
                 </para>
                 <para>
-                    <ulink url="http://svnbook.red-bean.com/nightly/en/svn.advanced.externals.html">Externals definition</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://svnbook.red-bean.com/nightly/en/svn.advanced.externals.html">Externals definition</link>
                     je vhodná pro vývojáře používající SVN pro správu pracovních kopií svých aplikací.
                 </para>
                 <para>
                     URL hlavního vývojového stromu (trunk) Zend Framework repositáře je:
-                    <ulink url="http://framework.zend.com/svn/framework/trunk">http://framework.zend.com/svn/framework/trunk</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/svn/framework/trunk">http://framework.zend.com/svn/framework/trunk</link>
                 </para>
             </listitem>
         </itemizedlist>
@@ -59,17 +62,17 @@
 
     <para>
         Až získáte kopii Zend Frameworku, musíte vaší aplikace umožnit přístup k třídám frameworku.
-        Existuje <ulink url="http://www.php.net/manual/en/configuration.changes.php">
-        několik cest, jak toho dosáhnout</ulink>, vaše PHP
-        <ulink url="http://www.php.net/manual/en/ini.core.php#ini.include-path"><code>include_path</code></ulink>
+        Existuje <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/configuration.changes.php">
+        několik cest, jak toho dosáhnout</link>, vaše PHP
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/ini.core.php#ini.include-path"><code>include_path</code></link>
         musí obsahovat cestu ke knihovně Zend Framework.
     </para>
 
     <para>
         Jedna z nejdůležitějších vlastností Zend Frameworku je vlastní implementace
-        <ulink url="http://www.martinfowler.com/eaaCatalog/frontController.html">Front Controlleru</ulink> a
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.martinfowler.com/eaaCatalog/frontController.html">Front Controlleru</link> a
         návrhového vzoru
-        <ulink url="http://en.wikipedia.org/wiki/Model-view-controller">Model-View-Controller</ulink> (MVC).
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Model-view-controller">Model-View-Controller</link> (MVC).
         <link linkend="zend.controller.quickstart">Začněte se Zend Framework MVC!</link>
     </para>
 
@@ -78,4 +81,4 @@
         Každá z následujících kapitol popisuje použití konkrétní komponenty.
     </para>
 
-</sect1>
+</section>

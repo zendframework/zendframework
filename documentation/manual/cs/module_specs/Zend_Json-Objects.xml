@@ -1,5 +1,6 @@
-<sect1 id="zend.json.objects">
-    <title>JSON Objekty</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.objects"><info><title>JSON Objekty</title></info>
+    
     <para>
         Při převádění PHP objektů do JSON, budou veškere vlastnosti označené
         jako public převedeny do JSON objektu.
@@ -25,8 +26,8 @@
     </para>
     <programlisting role="php"><![CDATA[<?php
 // Dekódovat JSON objekty jako PHP objekty
-$phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);]]>
-    </programlisting>
+$phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
+    ]]></programlisting>
     <para>
         Jakýkoliv objekt takto převedený je typu <code>StdClass</code>
         s vlastnostmi odpovídajícími dvojicím klíč/hodnota z JSON zápisu.
@@ -37,7 +38,4 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);]]>
         typu, tak může být vytvořen vlastním kódem a naplněn hodnotami
         získanými dekódováním pomocí <code>Zend_Json</code>.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

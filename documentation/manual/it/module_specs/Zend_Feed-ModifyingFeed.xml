@@ -1,13 +1,14 @@
-<sect1 id="zend.feed.modifying-feed">
-    <title>Modifica della struttura e degli elementi di un feed</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.modifying-feed"><info><title>Modifica della struttura e degli elementi di un feed</title></info>
+    
 
     <para>
         La sintassi intuitiva di <code>Zend_Feed</code> si può utilizzare sia per costruire o modificare i feed ed gli elementi dei feed, sia per leggerli.
         Un oggetto nuovo o modificato può essere facilmente riconvertito in XML per il salvataggio in un file o l'invio ad un server.
     </para>
 
-    <example id="zend.feed.modifying-feed.example.modifying">
-        <title>Modifica di un elemento esistente in un feed</title>
+    <example xml:id="zend.feed.modifying-feed.example.modifying"><info><title>Modifica di un elemento esistente in un feed</title></info>
+        
         <programlisting role="php"><![CDATA[<?php
 $feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
 $entry = $feed->current();
@@ -15,8 +16,8 @@ $entry = $feed->current();
 $entry->title = 'Questo è un nuovo titolo';
 $entry->author->email = 'my_email@example.com';
 
-echo $entry->saveXML();]]>
-        </programlisting>
+echo $entry->saveXML();
+        ]]></programlisting>
         <para>
             Questo codice esegue l'output di una rappresentazione XML completa dell'elemento, inclusa la dichiarazione <code>&lt;?xml ... &gt;</code> e qualsiasi namespace XML necessario.
         </para>
@@ -33,8 +34,8 @@ echo $entry->saveXML();]]>
         Un nuovo elemento sarà invece inserito nel namespace predefinito se non si specifica esplicitamente un namespace alternativo.
     </para>
 
-    <example id="zend.feed.modifying-feed.example.creating">
-        <title>Creazione di un elemento di un feed Atom con namespace personalizzato</title>
+    <example xml:id="zend.feed.modifying-feed.example.creating"><info><title>Creazione di un elemento di un feed Atom con namespace personalizzato</title></info>
+        
         <programlisting role="php"><![CDATA[<?php
 $entry = new Zend_Feed_Entry_Atom();
 // id è sempre assegnato dal server ad Atom
@@ -49,10 +50,7 @@ $entry->{'mions:mioelemento_uno'} = 'il mio primo valore personalizzato';
 $entry->{'mions:contenitore_elem'}->parte1 = 'prima parte personalizzata';
 $entry->{'mions:contenitore_elem'}->parte2 = 'seconda parte personalizzata;
 
-echo $entry->saveXML();]]>
-        </programlisting>
+echo $entry->saveXML();
+        ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

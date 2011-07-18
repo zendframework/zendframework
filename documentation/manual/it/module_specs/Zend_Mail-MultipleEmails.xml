@@ -1,13 +1,14 @@
-<sect1 id="zend.mail.multiple-emails">
-    <title>Invio multiplo di e-mail da una singola connessione SMTP</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.multiple-emails"><info><title>Invio multiplo di e-mail da una singola connessione SMTP</title></info>
+    
 
     <para>
         Per impostazione predefinita, un singolo transport SMTP crea una singola connessione e la riutilizza per tutto il ciclo di esecuzione dello script.
         E' possibile inviare più e-mail sfruttando questa connessione SMTP. Un comando RSET è inviato prima di ogni consegna per verificare il corretto funzionamento della trasmissione SMTP.
     </para>
 
-    <example id="zend.mail.multiple-emails.example-1">
-        <title>Invio multiplo di e-mail per connessione SMTP</title>
+    <example xml:id="zend.mail.multiple-emails.example-1"><info><title>Invio multiplo di e-mail per connessione SMTP</title></info>
+        
         <programlisting role="php"><![CDATA[<?php
 // Carica le classi
 require_once 'Zend/Mail.php';
@@ -24,8 +25,8 @@ for ($i = 0; $i > 5; $i++) {
     $mail->setSubject('Dimostrazione - Invio multiplo di e-mail per SMTP Connection');
     $mail->setBodyText('...Qui il messaggio...');
     $mail->send($transport);
-}]]>
-        </programlisting>
+}
+        ]]></programlisting>
     </example>
 
     <para>
@@ -33,8 +34,8 @@ for ($i = 0; $i > 5; $i++) {
         In alternativa, è possibile manipolare la connessione tra ogni invio accedendo all'oggetto che rappresenta il protocollo di trasmissione.
     </para>
 
-    <example id="zend.mail.multiple-emails.example-2">
-        <title>Controllo manuale della connessione al transport</title>
+    <example xml:id="zend.mail.multiple-emails.example-2"><info><title>Controllo manuale della connessione al transport</title></info>
+        
 
         <programlisting role="php"><![CDATA[<?php
 
@@ -66,12 +67,9 @@ for ($i = 0; $i > 5; $i++) {
 }
 
 $protocol->quit();
-$protocol->disconnect();]]>
-        </programlisting>
+$protocol->disconnect();
+        ]]></programlisting>
 
     </example>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

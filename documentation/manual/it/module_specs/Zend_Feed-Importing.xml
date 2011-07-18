@@ -1,6 +1,7 @@
-<sect1 id="zend.feed.importing">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.importing"><info><title>Importazione di feed</title></info>
 
-    <title>Importazione di feed</title>
+    
 
     <para>
         <code>Zend_Feed</code> consente agli sviluppatori di recuperare i feed con facilità.
@@ -8,8 +9,8 @@
     </para>
 
     <programlisting role="php"><![CDATA[<?php
-$feed = Zend_Feed::import('http://feeds.example.com/feedName');]]>
-    </programlisting>
+$feed = Zend_Feed::import('http://feeds.example.com/feedName');
+    ]]></programlisting>
 
     <para>
         E' anche possibile usare <code>Zend_Feed</code> per recuperare il contenuto di un feed da un file o da una variabile stringa in PHP:
@@ -20,8 +21,8 @@ $feed = Zend_Feed::import('http://feeds.example.com/feedName');]]>
 $feedDaFile = Zend_Feed::importFile('feed.xml');
 
 // importazione di un feed da una variabile stringa in PHP
-$feedDaPHP = Zend_Feed::importString($stringaFeed);]]>
-    </programlisting>
+$feedDaPHP = Zend_Feed::importString($stringaFeed);
+    ]]></programlisting>
 
     <para>
         Ciascuno degli esempi precedenti restituisce un oggetto di una classe che estende <code>Zend_Feed_Abstract</code>, a seconda del tipo di feed.
@@ -29,9 +30,9 @@ $feedDaPHP = Zend_Feed::importString($stringaFeed);]]>
         I metodi d'importazione generano un'eccezione <code>Zend_Feed_Exception</code> in caso di errore, come ad esempio un feed non leggibile o non valido.
     </para>
 
-    <sect2 id="zend.feed.importing.custom">
+    <section xml:id="zend.feed.importing.custom"><info><title>Feed personalizzati</title></info>
 
-        <title>Feed personalizzati</title>
+        
 
         <para>
             <code>Zend_Feed</code> consente agli sviluppatori di creare facilmente i propri feed.
@@ -39,9 +40,9 @@ $feedDaPHP = Zend_Feed::importString($stringaFeed);]]>
             L'array può essere importato con <code>Zend_Feed::importArray()</code> o con <code>Zend_Feed::importBuilder()</code>. Nell'ultimo caso l'array sarà elaborato al volo da una sorgente di dati personalizzata che implementa <code>Zend_Feed_Builder_Interface</code>.
         </para>
 
-        <sect3 id="zend.feed.importing.custom.importarray">
+        <section xml:id="zend.feed.importing.custom.importarray"><info><title>Importazione di un array personalizzato</title></info>
 
-            <title>Importazione di un array personalizzato</title>
+            
 
             <programlisting role="php"><![CDATA[<?php
 // importazione di un feed da un array
@@ -52,8 +53,8 @@ $feedAtomDaArray = Zend_Feed::importArray($array);
 $feedAtomDaArray = Zend_Feed::importArray($array, 'atom');
 
 // importazione di un feed RSS da un array
-$feedRssDaArray = Zend_Feed::importArray($array, 'rss');]]>
-            </programlisting>
+$feedRssDaArray = Zend_Feed::importArray($array, 'rss');
+            ]]></programlisting>
 
             <para>
                 Il formato dell'array deve essere conforme alla seguente struttura:
@@ -155,42 +156,42 @@ array(
                                    // dati per il secondo elemento del feed ed elementi successivi
                                    )
                              )
-       );]]>
-            </programlisting>
+       );
+            ]]></programlisting>
 
             <para>
                 Riferimenti:
                 <itemizedlist>
                     <listitem>
                         <para>
-                            Specifiche RSS 2.0: <ulink url="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</ulink>
+                            Specifiche RSS 2.0: <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</link>
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            Specifiche Atom: <ulink url="http://tools.ietf.org/html/rfc4287">RFC 4287</ulink>
+                            Specifiche Atom: <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://tools.ietf.org/html/rfc4287">RFC 4287</link>
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            Specifiche WFW: <ulink url="http://wellformedweb.org/news/wfw_namespace_elements">Well
-                            Formed Web</ulink>
+                            Specifiche WFW: <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wellformedweb.org/news/wfw_namespace_elements">Well
+                            Formed Web</link>
                         </para>
                     </listitem>
                     <listitem>
                         <para>
                             Specifiche iTunes:
-                            <ulink url="http://www.apple.com/itunes/store/podcaststechspecs.html">Specifiche Tecniche iTunes</ulink>
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.apple.com/itunes/store/podcaststechspecs.html">Specifiche Tecniche iTunes</link>
                         </para>
                     </listitem>
                 </itemizedlist>
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.feed.importing.custom.importbuilder">
+        <section xml:id="zend.feed.importing.custom.importbuilder"><info><title>Importazione di una sorgente di dati personalizzata</title></info>
 
-            <title>Importazione di una sorgente di dati personalizzata</title>
+            
 
             <para>
                 E' possibile creare un'istanza di <code>Zend_Feed</code> da una qualsiasi sorgente di dati che implementa <code>Zend_Feed_Builder_Interface</code>.
@@ -219,14 +220,14 @@ $feedAtomDaArray = Zend_Feed::importBuilder(new Zend_Feed_Builder($array));
 $feedAtomDaArray = Zend_Feed::importArray(new Zend_Feed_Builder($array), 'atom');
 
 // importazione di un feed RSS da un costruttore personalizzato
-$feedRssDaArray = Zend_Feed::importArray(new Zend_Feed_Builder($array), 'rss');]]>
-            </programlisting>
+$feedRssDaArray = Zend_Feed::importArray(new Zend_Feed_Builder($array), 'rss');
+            ]]></programlisting>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.feed.importing.custom.dump">
+        <section xml:id="zend.feed.importing.custom.dump"><info><title>Stampa del contenuto di un feed</title></info>
 
-            <title>Stampa del contenuto di un feed</title>
+            
 
             <para>
                 Per stampare il contenuto di un'istanza di <code>Zend_Feed_Abstract</code> è possibile utilizzare i metodi <code>send()</code> o <code>saveXml()</code>.
@@ -239,14 +240,11 @@ assert($feed instanceof Zend_Feed_Abstract);
 print $feed->saveXML();
 
 // invia gli header http e stampa il feed
-$feed->send();]]>
-            </programlisting>
+$feed->send();
+            ]]></programlisting>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

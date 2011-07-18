@@ -1,8 +1,11 @@
-<sect1 id="zend.json.introduction">
-    <title>Introduzione</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.introduction"><info><title>Introduzione</title></info>
+    
     <para>
         <code>Zend_Json</code> fornisce dei metodi di supporto per serializzare codice PHP in JSON e viceversa.
-        Per maggiori informazioni su JSON è possibile <ulink url="http://www.json.org/">visitare il sito del progetto JSON</ulink>.
+        Per maggiori informazioni su JSON è possibile <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.json.org/">visitare il sito del progetto JSON</link>.
     </para>
     <para>
         JSON, JavaScript Object Notation, può essere utilizzato per lo scambio di dati tra JavaScript ed altri linguaggi.
@@ -16,7 +19,4 @@
         Si tratta di una funzione utile che permette di scrivere tecniche per processare in modo più semplice i dati specifici di un'applicazione.
     </para>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

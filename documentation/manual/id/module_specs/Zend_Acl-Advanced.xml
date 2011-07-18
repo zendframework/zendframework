@@ -1,10 +1,11 @@
-<sect1 id="zend.acl.advanced">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.advanced"><info><title>Penggunaan Tingkat Lanjut</title></info>
 
-    <title>Penggunaan Tingkat Lanjut</title>
+    
 
-    <sect2 id="zend.acl.advanced.storing">
+    <section xml:id="zend.acl.advanced.storing"><info><title>Menyimpan data ACL</title></info>
 
-        <title>Menyimpan data ACL</title>
+        
 
         <para>
         Zend_Acl didesain sedemikian rupa sehingga ia tidak bergantung pada teknologi backend seperti database
@@ -19,16 +20,16 @@
         Dengan kata lain, penyimpanan data ACL diserahkan sepenuhnya kepada developer, karena penggunaan tempat
         penyimpanan data ACL sangat beragam dan berbeda untuk tiap aplikasi. Yang jelas, objek Zend_Acl
         dapat diserialisasikan, dan dengan menggunakan fungsi
-        <ulink url="http://php.net/serialize"><code>serialize()</code></ulink> di PHP, anda dapat menyimpan
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/serialize"><code>serialize()</code></link> di PHP, anda dapat menyimpan
         hasil keluarannya ke tempat penyimpanan sesuai keinginan anda. Bisa ke dalam file, database atau
         mekanisme caching.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.advanced.assertions">
+    <section xml:id="zend.acl.advanced.assertions"><info><title>Aturan Kondisional ACL dengan Assertion</title></info>
 
-        <title>Aturan Kondisional ACL dengan Assertion</title>
+        
 
         <para>
         Terkadang aturan ACL untuk memperbolehkan atau melarang akses ke resource tertentu tidak absolut melainkan
@@ -63,8 +64,8 @@ class CleanIPAssertion implements Zend_Acl_Assert_Interface
             // ...
     }
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
         Setelah class assertion ini siap, anda tinggal menambahkan instance class tersebut dalam penentuan
@@ -75,8 +76,8 @@ class CleanIPAssertion implements Zend_Acl_Assert_Interface
         <programlisting role="php"><![CDATA[
 $acl = new Zend_Acl();
 $acl->allow(null, null, null, new CleanIPAssertion());
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
         Kode di atas membuat aturan yang memperbolehkan siapapun untuk melakukan apapun
@@ -98,9 +99,6 @@ $acl->allow(null, null, null, new CleanIPAssertion());
         dan hak akses tertentu.
         </para>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

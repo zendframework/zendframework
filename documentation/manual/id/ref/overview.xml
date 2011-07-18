@@ -1,6 +1,9 @@
-<sect1 id="introduction.overview">
+<?xml version="1.0" encoding="utf-8"?>
 
-    <title>Gambaran Umum</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="introduction.overview"><info><title>Gambaran Umum</title></info>
+
+    
 
     <para>
         Zend Framework (ZF) adalah framework open source yang dibuat untuk mengembangkan aplikasi web
@@ -24,7 +27,7 @@
         dengan stabilitas framework ini.
     </para>
     <para>
-            Sponsor utama Zend Framework adalah <ulink url="http://www.zend.com">Zend Technologies</ulink>,
+            Sponsor utama Zend Framework adalah <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.com">Zend Technologies</link>,
         tapi banyak perusahaan besar telah memberikan kontribusinya dalam bentuk komponen atau fitur yang signifikan
         untuk ZF. Perusahaan seperti Google, Microsoft, dan StrikeIron telah bekerjasama dengan Zend
         untuk menyediakan interface ke web service mereka atau teknologi lain yang mereka dedikasikan
@@ -33,11 +36,8 @@
     <para>
         Zend Framework tidak dapat menyediakan dan mendukung semua fitur yang ada saat ini tanpa bantuan komunitas
         pengembang dan pengguna ZF yang penuh semangat dan dedikasi tinggi. Anggota komunitas, termasuk kontributor,
-        menyediakan waktu mereka di <ulink url="http://framework.zend.com/archives">mailing list</ulink>,
-        <ulink url="http://www.zftalk.com">channel IRC</ulink>, dan berbagai forum lain. Apapun pertanyaan yang
+        menyediakan waktu mereka di <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/archives">mailing list</link>,
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zftalk.com">channel IRC</link>, dan berbagai forum lain. Apapun pertanyaan yang
         mungkin anda miliki untuk ZF, komunitas ZF akan selalu bersedia membantu anda.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

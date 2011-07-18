@@ -1,6 +1,9 @@
-<sect1 id="introduction.installation">
+<?xml version="1.0" encoding="utf-8"?>
 
-    <title>Instalasi</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="introduction.installation"><info><title>Instalasi</title></info>
+
+    
 
     <para>
         Zend Framework membutuhkan PHP 5.1.4 atau yang lebih baru, walaupun Zend sangat merekomendasikan 5.2.3 atau yang
@@ -16,14 +19,14 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <ulink url="http://framework.zend.com/download">Unduh versi stabil yang terkhir dirilis.</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/download">Unduh versi stabil yang terkhir dirilis.</link>
                     Versi ini tersedia dalam format <code>.zip</code> dan <code>.tar.gz</code>. Untuk anda yang baru
                     menggunakan Zend Framework, versi ini adalah yang paling cocok buat anda.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <ulink url="http://framework.zend.com/download/snapshot">Unduh nighly snapshot versi terakhir.</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/download/snapshot">Unduh nighly snapshot versi terakhir.</link>
                     Untuk anda yang ingin mengetahui komponen-komponen Zend Framework paling baru yang sedang dikembangkan
                     namun belum dikategorikan stabil, nightly snapshot adalah tempatnya. Snapshot ini berisi selain
                     komponen ZF juga disertai dokumentasi dalam bahasa Inggris atau bahasa lain yang tersedia.
@@ -32,31 +35,31 @@
             </listitem>
             <listitem>
                 <para>
-                    Menggunakan program <ulink url="http://subversion.tigris.org">Subversion</ulink> (SVN) client.
+                    Menggunakan program <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://subversion.tigris.org">Subversion</link> (SVN) client.
                     Zend Framework adalah perangkat lunak open source, dan Subversion repository yang digunakan dalam
                     pengembangannya dapat diakses oleh publik. Gunakan SVN jika anda sudah biasa menggunakan SVN untuk
                     pengembangan aplikasi anda, atau ingin ikut berkontribusi dalam pengembangan ZF, atau sekedar meng-upgrade
                     versi framework anda dengan yang paling terakhir.
                 </para>
                 <para>
-                    <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.export.html">Exporting</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.export.html">Exporting</link>
                     berguna jika anda ingin mendapatkan revisi framework tanpa direktori <code>.svn</code> di folder
                     tempat anda bekerja.
                 </para>
                 <para>
-                    <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.checkout.html">Check out</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.checkout.html">Check out</link>
                     untuk anda yang ingin berkontribusi dalam pengembangan Zend Framework, dan folder lokal tempat anda
-                    bekerja dapat diupdate kapanpun dengan  <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.update.html"><code>svn
-                    update</code></ulink>.
+                    bekerja dapat diupdate kapanpun dengan  <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.update.html"><code>svn
+                    update</code></link>.
                 </para>
                 <para>
-                    <ulink url="http://svnbook.red-bean.com/nightly/en/svn.advanced.externals.html">External
-                    definition</ulink> untuk anda yang sudah terbiasa menggunakan SVN untuk mengelola folder lokal
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://svnbook.red-bean.com/nightly/en/svn.advanced.externals.html">External
+                    definition</link> untuk anda yang sudah terbiasa menggunakan SVN untuk mengelola folder lokal
                     tempat anda bekerja.
                 </para>
                 <para>
                     URL trunk dari repository SVN Zend Framework adalah
-                    <ulink url="http://framework.zend.com/svn/framework/standard/trunk">http://framework.zend.com/svn/framework/standard/trunk</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/svn/framework/standard/trunk">http://framework.zend.com/svn/framework/standard/trunk</link>
                 </para>
             </listitem>
         </itemizedlist>
@@ -64,15 +67,15 @@
 
     <para>
         Begitu anda sudah mendapatkan salinan Zend Framework, aplikasi anda harus dapat mengakses class-class
-        di dalam framework. Meskipun <ulink url="http://www.php.net/manual/en/configuration.changes.php">
-        ada berbagai cara untuk melakukan ini</ulink>, setting
-        <ulink url="http://www.php.net/manual/en/ini.core.php#ini.include-path"><code>include_path</code></ulink>
+        di dalam framework. Meskipun <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/configuration.changes.php">
+        ada berbagai cara untuk melakukan ini</link>, setting
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/ini.core.php#ini.include-path"><code>include_path</code></link>
         di PHP anda mesti menyertakan path ke library Zend Framework.
     </para>
 
     <para>
-        Zend menyediakan artikel berisi <ulink url="http://framework.zend.com/docs/quickstart">panduan cepat untuk mulai menggunakan
-        Zend Framework</ulink>. Artikel ini adalah tempat yang cocok bagi anda yang baru mulai menggunakan
+        Zend menyediakan artikel berisi <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/docs/quickstart">panduan cepat untuk mulai menggunakan
+        Zend Framework</link>. Artikel ini adalah tempat yang cocok bagi anda yang baru mulai menggunakan
         Zend Framework, dengan penekanan pada kasus-kasus real yang sering kita temui saat membangun aplikasi
         web.
     </para>
@@ -83,4 +86,4 @@
         Bab-bab berikutnya akan menjelaskan secara komprehensif dari tiap-tiap komponen Zend Framework.
     </para>
 
-</sect1>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20827 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.navigation.pages.mvc">
-    <title>Zend_Navigation_Page_Mvc</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.mvc"><info><title>Zend_Navigation_Page_Mvc</title></info>
+    
 
     <para>
         Les pages de type <acronym>MVC</acronym> utilisent des paramètres <acronym>MVC</acronym>
@@ -14,8 +12,8 @@
         internes à la page.
     </para>
 
-    <table id="zend.navigation.pages.mvc.options">
-        <title>Options des pages de type MV</title>
+    <table xml:id="zend.navigation.pages.mvc.options"><info><title>Options des pages de type MV</title></info>
+        
         <tgroup cols="4">
             <thead>
                 <row>
@@ -91,13 +89,13 @@
         </para>
     </note>
 
-    <example id="zend.navigation.pages.mvc.example.getHref">
-        <title>getHref() génères les URI de la page</title>
+    <example xml:id="zend.navigation.pages.mvc.example.getHref"><info><title>getHref() génères les URI de la page</title></info>
+        
 
         <para>
             Cet exemple montre que les pages de type <acronym>MVC</acronym> utilisent
             <classname>Zend_Controller_Action_Helper_Url</classname> en interne pour générer
-            les <acronym>URI</acronym>s suite à l'appel à <code>$page->getHref()</code>.
+            les <acronym>URI</acronym>s suite à l'appel à <code>$page-&gt;getHref()</code>.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -124,8 +122,8 @@ $page = new Zend_Navigation_Page_Mvc(array(
 ]]></programlisting>
     </example>
 
-    <example id="zend.navigation.pages.mvc.example.isActive">
-        <title>isActive() détermine si la page est active</title>
+    <example xml:id="zend.navigation.pages.mvc.example.isActive"><info><title>isActive() détermine si la page est active</title></info>
+        
 
         <para>
             Cet exemple montre que les pages de type <acronym>MVC</acronym> utilisent l'objet de
@@ -186,8 +184,8 @@ $page->isActive(); // retourne false
 ]]></programlisting>
     </example>
 
-    <example id="zend.navigation.pages.mvc.example.routes">
-        <title>Utiliser les routes</title>
+    <example xml:id="zend.navigation.pages.mvc.example.routes"><info><title>Utiliser les routes</title></info>
+        
 
         <para>
             Les routes sont utilisables dans les pages de type <acronym>MVC</acronym>. Si une page a une route,
@@ -239,4 +237,4 @@ $page = new Zend_Navigation_Page_Mvc(array(
 $page->getHref();
 ]]></programlisting>
     </example>
-</sect2>
+</section>

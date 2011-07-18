@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21087 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.currency.number">
-    <title>A quoi ressemble une monnaie?</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.number"><info><title>A quoi ressemble une monnaie?</title></info>
+    
 
     <para>
         Le rendu visuel d'une monnaie va dépendre de la locale. La locale stocke plusieurs informations
@@ -15,8 +13,8 @@
         va utiliser le rendu arabe pour toutes les monnaies, voyez l'exemple:
     </para>
 
-    <example id="zend.currency.number.example-1">
-        <title>Utiliser un script personnalisé</title>
+    <example xml:id="zend.currency.number.example-1"><info><title>Utiliser un script personnalisé</title></info>
+        
 
         <para>
             Imagnons que nous utisons la monnaie "Dollar". Mais nous voulons rendre notre page
@@ -110,4 +108,4 @@ print $currency; // Retournerait '$ 1000'
     <para>
         Dans l'exemple ci-dessus nous avons supprimé le séparateur et l'indicateur de précision.
     </para>
-</sect1>
+</section>

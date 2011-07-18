@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20763 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.acl.refining">
-    <title>Affiner les Contrôles d'Accès</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.refining"><info><title>Affiner les Contrôles d'Accès</title></info>
+    
 
-    <sect2 id="zend.acl.refining.precise">
-        <title>Mieux définir les Contrôles d'Accès</title>
+    <section xml:id="zend.acl.refining.precise"><info><title>Mieux définir les Contrôles d'Accès</title></info>
+        
 
         <para>
             L'<acronym>ACL</acronym> basique définie dans le
@@ -46,7 +44,7 @@ $acl->addRole(new Zend_Acl_Role('marketing'), 'staff');
         <para>
             Ensuite, notez que les contrôles d'accès plus haut font référence à des
             ressources (ex. "newsletters", "dernières news", "annonces"). Maintenant, nous ajoutons
-            ces Ressources&#160;:
+            ces Ressources :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -67,7 +65,7 @@ $acl->addResource(new Zend_Acl_Resource('announcement'), 'news');
 
         <para>
             Ensuite c'est simplement une manière de définir ces règles spécifiques sur les
-            parties cibles de l'<acronym>ACL</acronym>&#160;:
+            parties cibles de l'<acronym>ACL</acronym> :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -88,7 +86,7 @@ $acl->deny(null, 'annonce', 'archive');
 
         <para>
             On peut maintenant interroger les <acronym>ACL</acronym> sur base des dernières
-            modifications&#160;:
+            modifications :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -116,17 +114,17 @@ echo $acl->isAllowed('editor', 'announcement', 'archive') ?
 echo $acl->isAllowed('administrator', 'announcement', 'archive') ?
      "autorisé" : "refusé"; // refusé
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.refining.removing">
-        <title>Retirer les Contrôles d'Accès</title>
+    <section xml:id="zend.acl.refining.removing"><info><title>Retirer les Contrôles d'Accès</title></info>
+        
 
         <para>
             Pour retirer une ou plusieurs règles des <acronym>ACL</acronym>, utilisez simplement la
             méthode <methodname>removeAllow()</methodname> ou <methodname>removeDeny()</methodname>.
             Comme pour <methodname>allow()</methodname> et <methodname>deny()</methodname>, vous
             pouvez utiliser une valeur <constant>NULL</constant> pour indiquer que la méthode
-            s'applique à tous les rôles, ressources et&#160;/&#160;ou privilèges.
+            s'applique à tous les rôles, ressources et / ou privilèges.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -170,5 +168,5 @@ echo $acl->isAllowed('marketing', 'latest', 'archive') ?
 echo $acl->isAllowed('marketing', 'latest', 'anything') ?
      "autorisé" : "refusé"; // autorisé
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

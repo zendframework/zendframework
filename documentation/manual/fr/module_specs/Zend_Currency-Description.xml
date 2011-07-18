@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20102 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.currency.description">
-    <title>Qu'est ce qui définit une monnaie?</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.description"><info><title>Qu'est ce qui définit une monnaie?</title></info>
+    
 
     <para>
         Une monnaie consiste en plusieurs informations. Un nom, une abbréviation et un signe.
@@ -15,8 +13,8 @@
         la monnaie  en cours à l'affichage. Les constantes suivantes sont utilisées:
     </para>
 
-    <table id="zend.currency.description.table-1">
-        <title>Informations rendues pour une monnaie</title>
+    <table xml:id="zend.currency.description.table-1"><info><title>Informations rendues pour une monnaie</title></info>
+        
 
         <tgroup cols="2" align="left">
             <thead>
@@ -61,8 +59,8 @@
         </tgroup>
     </table>
 
-    <example id="zend.currency.description.example-1">
-        <title>Sélectionner la description de la monnaie</title>
+    <example xml:id="zend.currency.description.example-1"><info><title>Sélectionner la description de la monnaie</title></info>
+        
 
         <para>
             Imaginons que le client utilise la locale "en_US". Sans autre option, la valeur de monnaie
@@ -100,8 +98,8 @@ print $currency; // Pourrait retourner 'USD 100'
         </para>
     </example>
 
-    <note>
-        <title>Toutes les monnaies n'ont pas de signe</title>
+    <note><info><title>Toutes les monnaies n'ont pas de signe</title></info>
+        
 
         <para>
             Toutes les monnaies ne possèdent pas forcément un signe. Ceci signifie que s'il n'y a pas
@@ -114,8 +112,8 @@ print $currency; // Pourrait retourner 'USD 100'
         Pour changer des options concernant les monnaies, voyez le paragraphe ci-après.
     </para>
 
-    <example id="zend.currency.description.example-2">
-        <title>Changer la description de la monnaie</title>
+    <example xml:id="zend.currency.description.example-2"><info><title>Changer la description de la monnaie</title></info>
+        
 
         <para>
             Imaginons que le client utilise la locale "en_US". Nous ne voulons pas des paramètres par défaut,
@@ -150,8 +148,8 @@ print $currency; // Retournerait '$$$ 100'
 ]]></programlisting>
     </example>
 
-    <note>
-        <title>Paramètres de rendu automatiques</title>
+    <note><info><title>Paramètres de rendu automatiques</title></info>
+        
 
         <para>
             Lorsque vous précisez un nom, une abbréviation ou un signe, alors ces informations seront rendues
@@ -165,4 +163,4 @@ print $currency; // Retournerait '$$$ 100'
             '<constant>USE_SYMBOL</constant>'.
         </para>
     </note>
-</sect1>
+</section>

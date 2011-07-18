@@ -1,26 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21815 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.isbn">
-    <title>Isbn</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.isbn"><info><title>Isbn</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Isbn</classname> permet de valider des valeurs
         <acronym>ISBN-10</acronym> ou <acronym>ISBN-13</acronym>.
     </para>
 
-    <sect3 id="zend.validate.set.isbn.options">
-        <title>Options supportées par Zend_Validate_Isbn</title>
+    <section xml:id="zend.validate.set.isbn.options"><info><title>Options supportées par Zend_Validate_Isbn</title></info>
+        
 
         <para>
             Les options suivantes sont supportées par
-            <classname>Zend_Validate_Isbn</classname>&#160;:
+            <classname>Zend_Validate_Isbn</classname> :
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis><property>separator</property></emphasis>&#160;: définit le séparateur
+                    <emphasis><property>separator</property></emphasis> : définit le séparateur
                     autorisé pour la valeur <acronym>ISBN</acronym>. Par défaut, il s'agit d'une
                     chaîne vide.
                 </para>
@@ -28,7 +26,7 @@
 
             <listitem>
                 <para>
-                    <emphasis><property>type</property></emphasis>&#160;: définit le type des
+                    <emphasis><property>type</property></emphasis> : définit le type des
                     valeurs <acronym>ISBN</acronym> autorisées. Par défaut, il s'agit de
                     <constant>Zend_Validate_Isbn::AUTO</constant>. Pour plus de détails reportez
                     vous à
@@ -36,13 +34,13 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.isbn.basic">
-        <title>Utilisation classique</title>
+    <section xml:id="zend.validate.set.isbn.basic"><info><title>Utilisation classique</title></info>
+        
 
         <para>
-            Voici un exemple banal&#160;:
+            Voici un exemple banal :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -58,13 +56,13 @@ if ($validator->isValid($isbn)) {
             Ceci valide tout <acronym>ISBN-10</acronym> et <acronym>ISBN-13</acronym> sans
             séparateur.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.isbn.type-explicit">
-        <title>Configurer un type de validation ISBN explicite</title>
+    <section xml:id="zend.validate.set.isbn.type-explicit"><info><title>Configurer un type de validation ISBN explicite</title></info>
+        
 
         <para>
-            Voici comment effectuer une restriction de type de l'<acronym>ISBN</acronym>&#160;:
+            Voici comment effectuer une restriction de type de l'<acronym>ISBN</acronym> :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -87,7 +85,7 @@ if ($validator->isValid($isbn)) {
         </para>
 
         <para>
-            Les types valides sont&#160;:
+            Les types valides sont :
         </para>
 
         <itemizedlist>
@@ -103,13 +101,13 @@ if ($validator->isValid($isbn)) {
                 <para><constant>Zend_Validate_Isbn::ISBN13</constant></para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.isbn.separator">
-        <title>Spécifier une restriction de séparateur</title>
+    <section xml:id="zend.validate.set.isbn.separator"><info><title>Spécifier une restriction de séparateur</title></info>
+        
 
         <para>
-            Voici un exemple de restriction de séparateur&#160;:
+            Voici un exemple de restriction de séparateur :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -127,8 +125,8 @@ if ($validator->isValid($isbn)) {
 }
 ]]></programlisting>
 
-        <note>
-            <title>Valeurs sans séparateur</title>
+        <note><info><title>Valeurs sans séparateur</title></info>
+            
 
             <para>
                 La valeur <constant>FALSE</constant> est retournée si <varname>$isbn</varname>
@@ -138,7 +136,7 @@ if ($validator->isValid($isbn)) {
         </note>
 
         <para>
-            Séparateurs valides&#160;:
+            Séparateurs valides :
         </para>
 
         <itemizedlist>
@@ -152,5 +150,5 @@ if ($validator->isValid($isbn)) {
                 <para>" " (espace)</para>
             </listitem>
         </itemizedlist>
-    </sect3>
-</sect2>
+    </section>
+</section>

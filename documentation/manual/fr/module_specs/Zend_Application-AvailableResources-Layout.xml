@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 21321 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.layout">
-    <title>Zend_Application_Resource_Layout</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.layout"><info><title>Zend_Application_Resource_Layout</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Layout</classname> peut être utilisé pour configurer
@@ -10,8 +8,8 @@
         celles de <link linkend="zend.layout.options"><classname>Zend_Layout</classname></link>.
     </para>
 
-    <example id="zend.application.available-resources.layout.configExample">
-        <title>Exemple de configuration de layout</title>
+    <example xml:id="zend.application.available-resources.layout.configExample"><info><title>Exemple de configuration de layout</title></info>
+        
 
         <para>
             Ci-dessous un exemple de code <acronym>INI</acronym> montrant comment configurer
@@ -23,4 +21,4 @@ resources.layout.layout = "NomDuLayoutParDefaut"
 resources.layout.layoutPath = "/chemin/vers/layouts"
 ]]></programlisting>
     </example>
-</sect2>
+</section>

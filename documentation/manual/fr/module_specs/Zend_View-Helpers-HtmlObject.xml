@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.object">
-    <title>L'aide de vue HTML Object</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.object"><info><title>L'aide de vue HTML Object</title></info>
+    
 
     <para>
         L'élément HTML <code>&lt;object&gt;</code> est utilisé pour inclure un média comme
@@ -47,8 +45,8 @@
         documentation ne présentera des exemples que pour deux de ces aides.
     </para>
 
-    <example id="zend.view.helpers.initial.object.flash">
-        <title>Aide de vue Flash</title>
+    <example xml:id="zend.view.helpers.initial.object.flash"><info><title>Aide de vue Flash</title></info>
+        
 
         <para>
             Inclure du Flash dans votre page est assez simple. Le seul argument requis est
@@ -75,8 +73,8 @@
         l'aide de vue <code>htmlObject</code>.
     </para>
 
-    <example id="zend.view.helpers.initial.object.object">
-        <title>Personnalisation d'un objet en fournissant des arguments additionnels</title>
+    <example xml:id="zend.view.helpers.initial.object.object"><info><title>Personnalisation d'un objet en fournissant des arguments additionnels</title></info>
+        
 
         <para>
             Le premier argument de l'aide <code>Object</code> est toujours requis. Il s'agit
@@ -119,4 +117,4 @@
 </object>
 ]]></programlisting></para>
         </example>
-    </sect3>
+    </section>

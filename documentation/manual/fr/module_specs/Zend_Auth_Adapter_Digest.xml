@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20763 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.auth.adapter.digest">
-    <title>Authentification "Digest"</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.digest"><info><title>Authentification "Digest"</title></info>
+    
 
-    <sect2 id="zend.auth.adapter.digest.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.auth.adapter.digest.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
-            <ulink url="http://fr.wikipedia.org/wiki/HTTP_Authentification#M.C3.A9thode_Digest">
-            L'authentification "Digest"</ulink> est une méthode d'authentification
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://fr.wikipedia.org/wiki/HTTP_Authentification#M.C3.A9thode_Digest">
+            L'authentification "Digest"</link> est une méthode d'authentification
             <acronym>HTTP</acronym> qui améliore
-            <ulink url="http://fr.wikipedia.org/wiki/HTTP_Authentification#M.C3.A9thode_Basic">
-            l'authentification basique</ulink> en fournissant un moyen d'authentifier sans avoir à
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://fr.wikipedia.org/wiki/HTTP_Authentification#M.C3.A9thode_Basic">
+            l'authentification basique</link> en fournissant un moyen d'authentifier sans avoir à
             transmettre le mot de passe en clair sur le réseau.
         </para>
 
         <para>
             Cet adaptateur permet l'authentification en utilisant un fichier texte contenant
-            des lignes comportant les éléments de base d'une authentification Digest&#160;:
+            des lignes comportant les éléments de base d'une authentification Digest :
         </para>
 
         <itemizedlist>
@@ -42,42 +40,42 @@
         <para>
             Les éléments ci-dessus sont séparés par des caractères deux-points, comme dans
             l'exemple suivant (dans lequel le mot de passe est
-            "<emphasis>unMotdepasse</emphasis>")&#160;:
+            "<emphasis>unMotdepasse</emphasis>") :
         </para>
 
         <programlisting language="txt"><![CDATA[
 unUtilisateur:Un domaine:3b17d7f3a9374666e892cbce58aa724f
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.digest.specifics">
-        <title>Spécifications</title>
+    <section xml:id="zend.auth.adapter.digest.specifics"><info><title>Spécifications</title></info>
+        
 
         <para>
             L'adaptateur d'authentification Digest, <classname>Zend_Auth_Adapter_Digest</classname>
-            requiert plusieurs paramètres d'entrée&#160;:
+            requiert plusieurs paramètres d'entrée :
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    filename&#160;: fichier utilisé pour réaliser
+                    filename : fichier utilisé pour réaliser
                     l'authentification
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    realm&#160;: domaine d'authentification Digest ("realm" en anglais)
+                    realm : domaine d'authentification Digest ("realm" en anglais)
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    username&#160;: identifiant d'authentification Digest
+                    username : identifiant d'authentification Digest
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    password&#160;: mot de passe pour l'identifiant dans le domaine
+                    password : mot de passe pour l'identifiant dans le domaine
                 </para>
             </listitem>
         </itemizedlist>
@@ -86,10 +84,10 @@ unUtilisateur:Un domaine:3b17d7f3a9374666e892cbce58aa724f
             Ces paramètres doivent être définis avant l'appel de
             <methodname>authenticate()</methodname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.digest.identity">
-        <title>Identité</title>
+    <section xml:id="zend.auth.adapter.digest.identity"><info><title>Identité</title></info>
+        
 
         <para>
             L'adaptateur d'authentification Digest retourne un objet
@@ -120,5 +118,5 @@ Array
 )
 */
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

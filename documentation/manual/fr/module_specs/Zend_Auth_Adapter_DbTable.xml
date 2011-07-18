@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.auth.adapter.dbtable">
-    <title>Authentification avec une table de base de données</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.dbtable"><info><title>Authentification avec une table de base de données</title></info>
+    
 
-    <sect2 id="zend.auth.adapter.dbtable.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.auth.adapter.dbtable.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_Auth_Adapter_DbTable</classname> fournit la possibilité d'authentifier
@@ -18,20 +16,20 @@
         </para>
 
         <para>
-            Les options de configuration disponibles incluent&#160;:
+            Les options de configuration disponibles incluent :
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis><property>tableName</property></emphasis>&#160;: il s'agit du nom de
+                    <emphasis><property>tableName</property></emphasis> : il s'agit du nom de
                     la table dans la base de données qui contient les crédits d'authentification,
                     et envers laquelle la requête d'authentification sera réalisée.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis><property>identityColumn</property></emphasis>&#160;: il s'agit du
+                    <emphasis><property>identityColumn</property></emphasis> : il s'agit du
                     nom de la colonne dans la table utilisée pour représenter l'identité. La
                     colonne d'identité doit contenir une valeur unique, comme un "username" ou
                     une adresse émail.
@@ -39,7 +37,7 @@
             </listitem>
             <listitem>
                 <para>
-                    <emphasis><property>credentialColumn</property></emphasis>&#160;: il s'agit
+                    <emphasis><property>credentialColumn</property></emphasis> : il s'agit
                     du nom de la colonne dans la table utilisée pour représenter le crédit. Dans
                     le cas d'une simple authentification par identité / mot de passe, la valeur
                     de crédit correspond au mot de passe. Voir aussi l'option
@@ -48,7 +46,7 @@
             </listitem>
             <listitem>
                 <para>
-                    <emphasis><property>credentialTreatment</property></emphasis>&#160;: dans la
+                    <emphasis><property>credentialTreatment</property></emphasis> : dans la
                     plupart des cas, les mots de passe et autres données sensibles sont cryptés,
                     hachés, encodés, masqués, ou sinon traités à travers une fonction ou un
                     algorithme. En spécifiant un traitement paramétrable de chaîne avec cette
@@ -63,8 +61,8 @@
             </listitem>
         </itemizedlist>
 
-        <example id="zend.auth.adapter.dbtable.introduction.example.basic_usage">
-            <title>Utilisation basique</title>
+        <example xml:id="zend.auth.adapter.dbtable.introduction.example.basic_usage"><info><title>Utilisation basique</title></info>
+            
 
             <para>
                 Comme expliqué dans l'introduction, le constructeur de
@@ -78,7 +76,7 @@
                 Le code suivant crée un adaptateur pour une base de données en mémoire, crée
                 un schéma avec une table unique, et insère une ligne sur laquelle nous pouvons
                 réaliser une requête d'authentification plus tard. Cet exemple requiert que
-                l'extension <acronym>PDO</acronym> SQLite soit disponible&#160;:
+                l'extension <acronym>PDO</acronym> SQLite soit disponible :
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -110,7 +108,7 @@ $dbAdapter->query($sqlInsert);
                 table, une instance de <classname>Zend_Auth_Adapter_DbTable</classname> peut être
                 créée. Les valeurs d'options de configuration peuvent être fournies au
                 constructeur ou en tant que paramètres aux méthodes de réglage après
-                l'instanciation&#160;:
+                l'instanciation :
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -131,7 +129,7 @@ $authAdapter->setTableName('users')
                 A cet instant, l'instance de l'adaptateur d'authentification est prête à
                 recevoir des requêtes d'authentification. Dans le but de réaliser une requête
                 d'authentification, les valeurs des crédits requêtés sont fournies à l'adaptateur
-                avant d'appeler la méthode <methodname>authenticate()</methodname>&#160;:
+                avant d'appeler la méthode <methodname>authenticate()</methodname> :
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -148,7 +146,7 @@ $result = $authAdapter->authenticate();
                 En plus de la disponibilité de la méthode <methodname>getIdentity()</methodname>
                 pour récupérer l'objet du résultat d'authentification,
                 <classname>Zend_Auth_Adapter_DbTable</classname> supporte aussi la récupération de
-                la ligne de la table qui a réussi l'authentification&#160;:
+                la ligne de la table qui a réussi l'authentification :
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -176,10 +174,10 @@ Array
                 garantir ces valeurs contre l'accès fortuit.
             </para>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.dbtable.advanced.storing_result_row">
-        <title>Utilisation avancée : maintenir persistant l'objet de résultat DbTable</title>
+    <section xml:id="zend.auth.adapter.dbtable.advanced.storing_result_row"><info><title>Utilisation avancée : maintenir persistant l'objet de résultat DbTable</title></info>
+        
 
         <para>
             Par défaut, <classname>Zend_Auth_Adapter_DbTable</classname> retourne l'identité
@@ -189,7 +187,7 @@ Array
             informations utiles, est résolu en utilisant la méthode
             <methodname>getResultRowObject()</methodname> retournant un objet
             <emphasis>stdClass</emphasis>. Le petit bout de code suivant illustre cette
-            utilisation&#160;:
+            utilisation :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -216,10 +214,10 @@ if ($result->isValid()) {
 
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.dbtable.advanced.advanced_usage">
-        <title>Utilisation avancée par l'exemple</title>
+    <section xml:id="zend.auth.adapter.dbtable.advanced.advanced_usage"><info><title>Utilisation avancée par l'exemple</title></info>
+        
 
         <para>
             Bien que le but initial de <classname>Zend_Auth</classname> (et par extension celui de
@@ -268,7 +266,7 @@ $adapter = new Zend_Auth_Adapter_DbTable($db,
 
         <para>
             Par conséquent nous devons modifier notre table pour stocker notre chaîne de
-            "salt" aléatoire&#160;:
+            "salt" aléatoire :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -281,7 +279,7 @@ $dbAdapter->query($sqlAlter);
 
         <para>
             Voici une méthode simple pour générer une chaîne aléatoire pour chaque
-            utilisateur à leur enregistrement&#160;:
+            utilisateur à leur enregistrement :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -291,7 +289,7 @@ for ($i = 0; $i < 50; $i++)
 }
 ]]></programlisting>
 
-        <para>Et maintenant, construisons l'adaptateur&#160;:</para>
+        <para>Et maintenant, construisons l'adaptateur :</para>
 
         <programlisting language="php"><![CDATA[
 $adapter = new Zend_Auth_Adapter_DbTable(
@@ -350,5 +348,5 @@ $select->where('active = "TRUE"');
 // Authentification, ceci s'assure que users.active = TRUE
 $adapter->authenticate();
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

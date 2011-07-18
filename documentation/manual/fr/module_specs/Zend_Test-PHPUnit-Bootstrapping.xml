@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20807 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.test.phpunit.bootstrapping">
-    <title>Amorcer votre TestCase</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.bootstrapping"><info><title>Amorcer votre TestCase</title></info>
+    
 
     <para>
         Comme noté dans <link linkend="zend.test.phpunit.loginexample">l'exemple de
@@ -23,8 +21,8 @@
         Premièrement, et probablement le plus simple, créez simplement une instance de
         <classname>Zend_Application</classname> comme vous la souhaitez dans votre fichier
         <filename>index.php</filename>, et assignez la à la propriété <varname>$bootstrap</varname>.
-        Typiquement, vous réaliserez ceci dans votre méthode <methodname>setUp()</methodname>&#160;;
-        vous devrez ensuite <methodname>parent::setUp()</methodname>&#160;:
+        Typiquement, vous réaliserez ceci dans votre méthode <methodname>setUp()</methodname> ;
+        vous devrez ensuite <methodname>parent::setUp()</methodname> :
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -59,8 +57,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 
     <para>
         Troisièmement, vous pouvez fournir un callback <acronym>PHP</acronym> qui doit être exécuter pour amorcer
-        votre application. Cet exemple est montré dans <link
-        linkend="zend.test.phpunit.loginexample">l'exemple de login</link>. Si le callback est une
+        votre application. Cet exemple est montré dans <link linkend="zend.test.phpunit.loginexample">l'exemple de login</link>. Si le callback est une
         fonction ou une méthode statique, ceci peut être paramétrer au niveau de la classe :
     </para>
 
@@ -140,4 +137,4 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         Une fois que votre application est amorcée, vous pouvez commencer à écrire vos
         tests.
     </para>
-</sect2>
+</section>

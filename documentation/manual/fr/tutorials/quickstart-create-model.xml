@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22312 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.quickstart.create-model">
-    <title>Créer un modèle et une table en base de données</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.create-model"><info><title>Créer un modèle et une table en base de données</title></info>
+    
 
     <para>
         Avant de démarrer, considérons ceci: où vont se trouver ces classes et comment les retrouver?
@@ -367,8 +365,8 @@ Data Loaded.
     </para>
 
     <para>
-        Nous allons utiliser un <ulink url="http://martinfowler.com/eaaCatalog/tableDataGateway.html">Table
-        Data Gateway</ulink> pour se connecter à notre source de données; <classname>Zend_Db_Table</classname>
+        Nous allons utiliser un <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://martinfowler.com/eaaCatalog/tableDataGateway.html">Table
+        Data Gateway</link> pour se connecter à notre source de données; <classname>Zend_Db_Table</classname>
         propose cette fonctionnalité. Créons les classes basées sur <classname>Zend_Db_Table</classname>.
         Comme nous avons opéré pour les layouts ou la base, nous pouvons utiliser la commande
         <command>zf</command> pour nous aider, avec la commande complète
@@ -413,8 +411,8 @@ class Application_Model_DbTable_Guestbook extends Zend_Db_Table_Abstract
     </para>
 
     <para>
-        Créons maintenant un <ulink url="http://martinfowler.com/eaaCatalog/dataMapper.html">Data
-            Mapper</ulink>. Un <emphasis>Data Mapper</emphasis> fait correspondre un objet métier à la
+        Créons maintenant un <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://martinfowler.com/eaaCatalog/dataMapper.html">Data
+            Mapper</link>. Un <emphasis>Data Mapper</emphasis> fait correspondre un objet métier à la
         base de données. Dans notre cas <classname>Application_Model_Guestbook</classname> vers la
         source de données <classname>Application_Model_DbTable_Guestbook</classname>. Une
         <acronym>API</acronym> typique pour un data mapper est:
@@ -709,8 +707,8 @@ Guestbook Entries: <br />
 </dl>
 ]]></programlisting>
 
-    <note>
-        <title>Checkpoint</title>
+    <note><info><title>Checkpoint</title></info>
+        
 
         <para>
             Naviguez maintenant vers "http://localhost/guestbook". Vous devriez voir ceci
@@ -718,13 +716,12 @@ Guestbook Entries: <br />
         </para>
 
         <para>
-            <inlinegraphic width="525" scale="100" align="center" valign="middle"
-                fileref="figures/learning.quickstart.create-model.png" format="PNG" />
+            <inlinemediaobject><imageobject><imagedata width="525" scale="100" align="center" valign="middle" fileref="figures/learning.quickstart.create-model.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
     </note>
 
-    <note>
-        <title>Utiliser le script de chargement des données</title>
+    <note><info><title>Utiliser le script de chargement des données</title></info>
+        
 
         <para>
             Le script de chargement des données montré dans la section en question
@@ -750,4 +747,4 @@ Usage: load.sqlite.php [ options ]
             lorsque vous utilisez ce script.
         </para>
     </note>
-</sect1>
+</section>

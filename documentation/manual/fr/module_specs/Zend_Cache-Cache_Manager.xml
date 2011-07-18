@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21109 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.cache.cache.manager">
-    <title>Le gestionnaire de Cache</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.cache.manager"><info><title>Le gestionnaire de Cache</title></info>
+    
 
     <para>
         Une application comporte par nature plusieurs caches de types différents fonctions du
@@ -195,4 +193,4 @@ $databaseCache = $manager->getCache('database');
         <methodname>Zend_Cache_Manager::setTemplateOptions()</methodname> ou même
         <methodname>Zend_Cache_Manager::setCacheTemplate()</methodname>.
     </para>
-</sect1>
+</section>

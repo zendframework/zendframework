@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.basics">
-    <title>Fondations de Zend_Controller</title>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.basics"><info><title>Fondations de Zend_Controller</title></info>
+    
 
     <para>
         Le système <classname>Zend_Controller</classname> est conçu pour être léger,
@@ -14,12 +14,11 @@
 
     <para>
         Le diagramme suivant décrit le déroulement des opérations, et ce qui suit décrit en
-        détail les interactions&#160;:
+        détail les interactions :
     </para>
 
     <para>
-        <inlinegraphic align="center" fileref="figures/zend.controller.basics.png"
-        format="PNG" scale="100" valign="middle" width="483" />
+        <inlinemediaobject><imageobject><imagedata align="center" fileref="figures/zend.controller.basics.png" format="PNG" scale="100" valign="middle" width="483"/></imageobject></inlinemediaobject>
     </para>
 
     <para>
@@ -65,7 +64,7 @@
                 recevoir la requête. Ces contrôleur, action, et paramètres facultatifs sont alors
                 placés dans l'objet de requête à traiter par
                 <classname>Zend_Controller_Dispatcher_Standard</classname>. Le routage se produit
-                seulement une fois&#160;: quand la demande est initialement reçue et avant que le
+                seulement une fois : quand la demande est initialement reçue et avant que le
                 premier contrôleur ne soit distribué.
             </para>
             <para>
@@ -79,7 +78,7 @@
             </para>
             <para>
                 <classname>Zend_Controller_Router_Rewrite</classname> peut également être
-                utilisé pour faire correspondre des chemins arbitraires&#160;; voir
+                utilisé pour faire correspondre des chemins arbitraires ; voir
                 <link linkend="zend.controller.router">la documentation du routeur</link>pour plus
                 d'information.
             </para>
@@ -112,8 +111,8 @@
                 <methodname>FooController::barAction()</methodname>. Dans ce cas-ci, le contrôleur est désigné
                 comme <code>foo</code> et l'action comme <code>bar</code>.
             </para>
-            <note>
-                <title>Conventions de nommage (casse)</title>
+            <note><info><title>Conventions de nommage (casse)</title></info>
+                
                 <para>
                     Puisque les humains sont notoirement incompatibles avec le respect des
                     majuscules et des minuscules quand ils tapent des liens, Zend Framework
@@ -173,4 +172,4 @@
         boucle continue et une autre distribution est effectuée. Sinon, le processus se
         termine.
     </para>
-</sect1>
+</section>

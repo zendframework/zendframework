@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.log.writers.mail">
-    <title>Écrire vers un courriel</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers.mail"><info><title>Écrire vers un courriel</title></info>
+    
 
     <para>
         <classname>Zend_Log_Writer_Mail</classname> va écrire les entrées du log dans un message
@@ -21,7 +19,7 @@
     </para>
 
     <para>
-        Voici un exemple d'utilisation basique&#160;:
+        Voici un exemple d'utilisation basique :
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -58,8 +56,8 @@ $log->error('unable to connect to database');
         évènements seront envoyés.
     </para>
 
-    <sect3 id="zend.log.writers.mail.layoutusage">
-        <title>Utilisation avec Zend_Layout</title>
+    <section xml:id="zend.log.writers.mail.layoutusage"><info><title>Utilisation avec Zend_Layout</title></info>
+        
 
         <para>
             Une instance de <classname>Zend_Layout</classname> peut être utilisée pour générer
@@ -73,7 +71,7 @@ $log->error('unable to connect to database');
             <classname>Zend_Layout</classname> vous pouvez utiliser un formateur
             personnalisé grâce à <methodname>setLayoutFormatter()</methodname>. Si aucun formateur spécifique
             <classname>Zend_Layout</classname> n'est indiqué, le formateur en cours d'utilisation
-            sera appelé. Voici un exemple&#160;:
+            sera appelé. Voici un exemple :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -107,10 +105,10 @@ $log->error('unable to connect to database');
 // tous les logs passés dans le filtre.
 // l'email contiendra une partie "plain text", et une partie HTML
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.log.writers.mail.dynamicsubjectline">
-        <title>Ligne du sujet dynamique</title>
+    <section xml:id="zend.log.writers.mail.dynamicsubjectline"><info><title>Ligne du sujet dynamique</title></info>
+        
 
         <para>
             La méthode <methodname>setSubjectPrependText()</methodname> est utilisée à la place de
@@ -122,10 +120,10 @@ $log->error('unable to connect to database');
             via <classname>Zend_Log_Writer_Mail</classname>, la ligne de sujet
             de <classname>Zend_Mail</classname>, si il y en a une, sera utilisée.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.log.writers.mail.caveats">
-        <title>Attention</title>
+    <section xml:id="zend.log.writers.mail.caveats"><info><title>Attention</title></info>
+        
 
         <para>
             Envoyer des rapports d'erreurs par emails peut être dangereux.
@@ -145,5 +143,5 @@ $log->error('unable to connect to database');
             est la notification d'un humain au sujet d'une erreur. Si ce système est
             clairement contrôlé, alors il peut devenir un avantage très appréciable.
         </para>
-    </sect3>
-</sect2>
+    </section>
+</section>

@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.search.lucene.advanced">
-    <title>Avancé</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.advanced"><info><title>Avancé</title></info>
+    
 
-    <sect2 id="zend.search.lucene.advanced.format_migration">
-        <title>Depuis Zend Framework 1.6, gestion des transformations de format d'index</title>
+    <section xml:id="zend.search.lucene.advanced.format_migration"><info><title>Depuis Zend Framework 1.6, gestion des transformations de format d'index</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> fonctionne avec les index Lucene Java
@@ -79,8 +77,8 @@
             supportées.
         </para>
 
-        <note>
-            <title>Important!</title>
+        <note><info><title>Important!</title></info>
+            
 
             <para>
                 Les formats ne peuvent pas être convertis vers des versions antérieures.
@@ -88,10 +86,10 @@
                 il ne sera plus possible de faire marche arrière.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.advanced.static">
-        <title>Utiliser les propriétés statiques de l'index</title>
+    <section xml:id="zend.search.lucene.advanced.static"><info><title>Utiliser les propriétés statiques de l'index</title></info>
+        
 
         <para>
             L'objet <classname>Zend_Search_Lucene</classname> utilise la méthode de
@@ -175,5 +173,5 @@ Searcher::initIndex();
 Searcher::commit();
 ...
 ]]></programlisting></para>
-        </sect2>
-    </sect1>
+        </section>
+    </section>

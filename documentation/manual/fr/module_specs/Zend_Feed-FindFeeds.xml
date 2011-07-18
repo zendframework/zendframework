@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 17502 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.feed.findFeeds">
-    <title>Obtenir des flux à partir de pages Web</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.findFeeds"><info><title>Obtenir des flux à partir de pages Web</title></info>
+    
 
     <para>
         Les pages Web contiennent souvent des balises <code>&lt;link&gt;</code> qui font
         référence à des flux dont le contenu est lié à la page. <classname>Zend_Feed</classname>
         vous permet d'obtenir tous les flux référencés par une page Web en appelant simplement une
-        méthode&#160;:
+        méthode :
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -26,4 +24,4 @@ $tableauFlux =
         <classname>Zend_Feed_Exception</classname> en cas d'échec, par exemple en cas de code <acronym>HTTP</acronym>
         404 renvoyé en réponse ou si le flux est malformé.
     </para>
-</sect1>
+</section>

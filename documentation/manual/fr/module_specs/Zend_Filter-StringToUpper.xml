@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17891 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.stringtoupper">
-    <title>StringToUpper</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.stringtoupper"><info><title>StringToUpper</title></info>
+    
 
     <para>
         Ce filtre convertit toute entrée vers une casse majuscule.
@@ -27,4 +25,4 @@ $filter = new Zend_Filter_StringToUpper(array('encoding' => 'UTF-8'));
 // ou encore
 $filter->setEncoding('ISO-8859-1');
 ]]></programlisting>
-</sect2>
+</section>

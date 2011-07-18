@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19782 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.autoloading.usage">
-    <title>Utilisation de base de l'autoloader</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.usage"><info><title>Utilisation de base de l'autoloader</title></info>
+    
 
     <para>
         Maintenant que vous savez les buts et le fonctionnement des autoloaders de
@@ -49,8 +47,8 @@ $loader->registerNamespace(array('Foo_', 'Bar_'));
 $loader->setFallbackAutoloader(true);
 ]]></programlisting>
 
-    <warning>
-        <title>N'utilisez pas l'autoloader de secours</title>
+    <warning><info><title>N'utilisez pas l'autoloader de secours</title></info>
+        
 
         <para>
             Ce peut être tentant de se reposer abondamment sur
@@ -92,8 +90,8 @@ $loader->setFallbackAutoloader(true);
         </para>
     </warning>
 
-    <note>
-        <title>Préfixes d'espaces de nom et espaces de noms PHP</title>
+    <note><info><title>Préfixes d'espaces de nom et espaces de noms PHP</title></info>
+        
 
         <para>
             A l'heure de l'écriture de ces lignes, <acronym>PHP</acronym> 5.3 est sorti. Avec
@@ -161,4 +159,4 @@ $loader->pushAutoloader('my_autoloader', 'My_');
 // pour charger des classes commençant par 'Foo_':
 $loader->unshiftAutoloader(array('Foo_Loader', 'autoload'), 'Foo_');
 ]]></programlisting>
-</sect1>
+</section>

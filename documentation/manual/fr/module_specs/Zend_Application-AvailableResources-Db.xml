@@ -1,36 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20763 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.db">
-    <title>Zend_Application_Resource_Db</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.db"><info><title>Zend_Application_Resource_Db</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Db</classname> initialisera un adaptateur
         <classname>Zend_Db</classname> basé sur les options qui lui seront fournis. Par
         défaut, il spécifiera aussi cet adaptateur comme adaptateur par défaut à utiliser
         avec <classname>Zend_Db_Table</classname>. Si vous souhaitez utiliser simultanément
-        de multiples bases de données, vous pouvez utiliser la <link
-        linkend="zend.application.available-resources.multidb">plugin de ressource Multidb</link>.
+        de multiples bases de données, vous pouvez utiliser la <link linkend="zend.application.available-resources.multidb">plugin de ressource Multidb</link>.
     </para>
 
     <para>
-        Les clés de configuration suivantes sont reconnues&#160;:
+        Les clés de configuration suivantes sont reconnues :
     </para>
 
     <itemizedlist>
         <listitem><para>
-            <emphasis><property>adapter</property></emphasis>&#160;: le type de l'adaptateur
+            <emphasis><property>adapter</property></emphasis> : le type de l'adaptateur
             <classname>Zend_Db</classname>.
         </para></listitem>
 
         <listitem><para>
-            <emphasis><property>params</property></emphasis>&#160;: un tableau associatif des
+            <emphasis><property>params</property></emphasis> : un tableau associatif des
             paramètres de configuration à utiliser pour la récupération de l'instance de
             l'adaptateur.
         </para></listitem>
 
         <listitem><para>
-            <emphasis><property>isDefaultTableAdapter</property></emphasis>&#160;: spécifie
+            <emphasis><property>isDefaultTableAdapter</property></emphasis> : spécifie
             si l'adaptateur est celui par défaut des tables.
         </para></listitem>
 
@@ -41,8 +38,8 @@
         </para></listitem>
     </itemizedlist>
 
-    <example id="zend.application.available-resources.db.configExample">
-        <title>Exemple de configuration d'une ressource d'adaptateur de base données</title>
+    <example xml:id="zend.application.available-resources.db.configExample"><info><title>Exemple de configuration d'une ressource d'adaptateur de base données</title></info>
+        
 
         <para>
             Voici un exmple de configuration <acronym>INI</acronym> qui peut-être utilisé pour
@@ -63,18 +60,18 @@ resources.db.defaultMetadataCache = "database"
 ]]></programlisting>
     </example>
 
-    <note>
-        <title>Récupération de l'instance de l'adaptateur</title>
+    <note><info><title>Récupération de l'instance de l'adaptateur</title></info>
+        
 
         <para>
             Si vous choisissez de ne pas utiliser l'adaptateur instancié avec cette ressource
             comme adaptateur par défaut pour les tables, comment pourrez-vous récupérer
-            l'instance&#160;?
+            l'instance ?
         </para>
 
         <para>
             Comme tout plugin de ressource, vous pouvez extraire votre plugin de ressource de votre
-            fichier d'initialisation&#160;:
+            fichier d'initialisation :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -83,11 +80,11 @@ $resource = $bootstrap->getPluginResource('db');
 
         <para>
             Une fois que vous avez l'objet ressource, vous pouvez récupérer l'adaptateur de base de
-            données en utilisant la méthode <methodname>getDbAdapter()</methodname>&#160;:
+            données en utilisant la méthode <methodname>getDbAdapter()</methodname> :
         </para>
 
         <programlisting language="php"><![CDATA[
 $db = $resource->getDbAdapter();
 ]]></programlisting>
     </note>
-</sect2>
+</section>

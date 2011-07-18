@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 22129 -->
-<sect2 id="zend.validate.set.barcode">
-    <title>Barcode</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.barcode"><info><title>Barcode</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Barcode</classname> permet de vérifier si une donnée représente
@@ -346,8 +344,8 @@
         </listitem>
     </itemizedlist>
 
-    <sect3 id="zend.validate.set.barcode.options">
-        <title>Options supportées par Zend_Validate_Barcode</title>
+    <section xml:id="zend.validate.set.barcode.options"><info><title>Options supportées par Zend_Validate_Barcode</title></info>
+        
 
         <para>
             Les options suivantes sont supportées par <classname>Zend_Validate_Barcode</classname>:
@@ -377,10 +375,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.barcode.basic">
-        <title>Utilisation classique</title>
+    <section xml:id="zend.validate.set.barcode.basic"><info><title>Utilisation classique</title></info>
+        
 
         <para>
             Pour valider si une chaine est un code barres, vous devez juste connaitre son type. Voyez l'exemple
@@ -395,10 +393,10 @@ if ($valid->isValid($input)) {
     // input est invalide
 }
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.barcode.checksum">
-        <title>Somme de contrôle optionnelle</title>
+    <section xml:id="zend.validate.set.barcode.checksum"><info><title>Somme de contrôle optionnelle</title></info>
+        
 
         <para>
             Certains codes barres proposent une somme de contrôle. Ils peuvent être valides sans cette
@@ -419,8 +417,8 @@ if ($valid->isValid($input)) {
 }
 ]]></programlisting>
 
-        <note>
-            <title>Sécurité moindre en désactivant la validation de la somme de contrôle</title>
+        <note><info><title>Sécurité moindre en désactivant la validation de la somme de contrôle</title></info>
+            
 
             <para>
                  En désactivant la validation de la somme de contrôle vous réduirez la sécurité du
@@ -429,10 +427,10 @@ if ($valid->isValid($input)) {
                  qui ne le sont pas en réalité.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.barcode.custom">
-        <title>Ecrire des validateurs personnalisés</title>
+    <section xml:id="zend.validate.set.barcode.custom"><info><title>Ecrire des validateurs personnalisés</title></info>
+        
 
         <para>
             Vous pouvez créer vos propres validateurs pour <classname>Zend_Validate_Barcode</classname>;
@@ -530,8 +528,5 @@ if ($valid->isValid($input)) {
     // input est invalide
 }
 ]]></programlisting>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

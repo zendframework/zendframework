@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20766 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.date.creation">
-    <title>Créer des dates</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.creation"><info><title>Créer des dates</title></info>
+    
 
     <para>
         <classname>Zend_Date</classname> permet de créer des instances d'elle même de
         plusieurs manières différentes. Nous allons voir ceci.
     </para>
 
-    <sect2 id="zend.date.creation.actual">
-        <title>Créer la date actuelle</title>
+    <section xml:id="zend.date.creation.actual"><info><title>Créer la date actuelle</title></info>
+        
 
         <para>
             La manière la plus simple de créer la date actuelle est d'utiliser le
@@ -20,8 +18,8 @@
             date calendaire et un temps pour le fuseau horaire actuel du serveur.
         </para>
 
-        <example id="zend.date.creation.actual.example-1">
-            <title>Créer une date par instance</title>
+        <example xml:id="zend.date.creation.actual.example-1"><info><title>Créer une date par instance</title></info>
+            
 
             <para>
                 Il n'y a pas de paramètres à passer au constructeur pour récupérer un objet
@@ -34,8 +32,8 @@ $date = new Zend_Date();
 ]]></programlisting>
         </example>
 
-        <example id="zend.date.creation.actual.example-2">
-            <title>Créer une date par méthode statique</title>
+        <example xml:id="zend.date.creation.actual.example-2"><info><title>Créer une date par méthode statique</title></info>
+            
 
             <para>
                 La méthode statique <methodname>now()</methodname> a exactement le même effet qu'un
@@ -47,10 +45,10 @@ $date = new Zend_Date();
 $date = Zend_Date::now();
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.date.creation.database">
-        <title>Créer une date depuis une base de données</title>
+    <section xml:id="zend.date.creation.database"><info><title>Créer une date depuis une base de données</title></info>
+        
 
         <para>
             Les bases de données sont souvent utilisées pour stocker des informations de
@@ -72,8 +70,8 @@ $date = Zend_Date::now();
             données.
         </para>
 
-        <example id="zend.date.creation.database.example-1">
-            <title>Création d'une date depuis une base de données</title>
+        <example xml:id="zend.date.creation.database.example-1"><info><title>Création d'une date depuis une base de données</title></info>
+            
 
             <para>
                 Toutes les bases de données doivent répondre extrêmement rapidement à leurs
@@ -90,8 +88,8 @@ $date = new Zend_Date($unixtimestamp, Zend_Date::TIMESTAMP);
 
         </example>
 
-        <example id="zend.date.creation.database.example-2">
-            <title>Création d'une date depuis une base de données dans un format</title>
+        <example xml:id="zend.date.creation.database.example-2"><info><title>Création d'une date depuis une base de données dans un format</title></info>
+            
 
             <para>
                 La sortie de chaque base de données est différente même si elles se
@@ -111,54 +109,54 @@ $date = new Zend_Date($unixtimestamp, Zend_Date::TIMESTAMP);
 $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.date.creation.array">
-        <title>Créer des dates depuis un tableau</title>
+    <section xml:id="zend.date.creation.array"><info><title>Créer des dates depuis un tableau</title></info>
+        
 
         <para>
             Créer une date depuis un tableau est fréquent et pratique. Les clés du tableau
-            sont&#160;:
+            sont :
         </para>
 
         <para>
             <itemizedlist mark="opencircle">
                 <listitem>
-                        <para><emphasis>day</emphasis>&#160;: jour de la date, un
+                        <para><emphasis>day</emphasis> : jour de la date, un
                         nombre
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis>month</emphasis>&#160;: mois de la date, un
+                        <emphasis>month</emphasis> : mois de la date, un
                         nombre
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis>year</emphasis>&#160;: année complète de la
+                        <emphasis>year</emphasis> : année complète de la
                         date
                     </para>
                 </listitem>
 
                 <listitem>
-                    <para><emphasis>hour</emphasis>&#160;: heures de la date</para>
+                    <para><emphasis>hour</emphasis> : heures de la date</para>
                 </listitem>
 
                 <listitem>
-                    <para><emphasis>minute</emphasis>&#160;: minutes de la date</para>
+                    <para><emphasis>minute</emphasis> : minutes de la date</para>
                 </listitem>
 
                 <listitem>
-                    <para><emphasis>second</emphasis>&#160;: secondes de la date</para>
+                    <para><emphasis>second</emphasis> : secondes de la date</para>
                 </listitem>
             </itemizedlist>
         </para>
 
-        <example id="zend.date.creation.array.example">
-            <title>Créer une date depuis un tableau</title>
+        <example xml:id="zend.date.creation.array.example"><info><title>Créer une date depuis un tableau</title></info>
+            
 
             <para>
                 En temps normal on utilisera un tableau avec toutes ses clés. Si une clé est
@@ -182,5 +180,5 @@ $datearray = array('year' => 2006, 'month' => 4, 'day' => 18);
 $date = new Zend_Date($datearray);
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

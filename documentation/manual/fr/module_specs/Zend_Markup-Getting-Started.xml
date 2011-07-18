@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21818 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.markup.getting-started">
-    <title>Guide de démarrage avec Zend_Markup</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.markup.getting-started"><info><title>Guide de démarrage avec Zend_Markup</title></info>
+    
 
     <para>
         Ce guide pour vous aider à démarrer avec <classname>Zend_Markup</classname> utilisera le parseur BBCode
         et le moteur de rendu <acronym>HTML</acronym>. Les principes utilisés s'adaptent à d'autres formats.
     </para>
 
-    <example id="zend.markup.getting-started.basic-usage">
-        <title>Utilisation classique de Zend_Markup</title>
+    <example xml:id="zend.markup.getting-started.basic-usage"><info><title>Utilisation classique de Zend_Markup</title></info>
+        
 
         <para>
             Nous allons d'abord instancier un objet <classname>Zend_Markup_Renderer_Html</classname> en utilisant
@@ -33,8 +31,8 @@ echo $bbcode->render('[b]bold text[/b] and [i]cursive text[/i]');
 ]]></programlisting>
     </example>
 
-    <example id="zend.markup.getting-started.complicated-example">
-        <title>Un exemple plus complexe de Zend_Markup</title>
+    <example xml:id="zend.markup.getting-started.complicated-example"><info><title>Un exemple plus complexe de Zend_Markup</title></info>
+        
 
         <para>
             Même chose ici, mais avec un bout de BBCode plus complexe.
@@ -61,8 +59,8 @@ Devrait afficher quelque chose comme:
 ]]></programlisting>
     </example>
 
-    <example id="zend.markup.getting-started.incorrect-input">
-        <title>Traitement des entrées incorrectes</title>
+    <example xml:id="zend.markup.getting-started.incorrect-input"><info><title>Traitement des entrées incorrectes</title></info>
+        
 
         <para>
             En plus d'analyser et rendre des codes de type BBCode, <classname>Zend_Markup</classname>
@@ -81,4 +79,4 @@ echo $bbcode->render('some [i]wrong [b]sample [/i] text');
 // some <em>wrong <strong>sample </strong></em><strong> text</strong>
 ]]></programlisting>
     </example>
-</sect1>
+</section>

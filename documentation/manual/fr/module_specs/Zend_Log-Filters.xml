@@ -1,13 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22432 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.log.filters">
-    <title>Filtres</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.filters"><info><title>Filtres</title></info>
+    
 
     <para>Un objet <code>Filter</code> bloque les messages avant l'écriture dans le log.</para>
 
-    <sect2 id="zend.log.filters.all-writers">
-        <title>Filtrer pour tous les rédacteurs (Writers)</title>
+    <section xml:id="zend.log.filters.all-writers"><info><title>Filtrer pour tous les rédacteurs (Writers)</title></info>
+        
 
         <para>
             Pour filtrer avant tous les rédacteurs, vous pouvez ajouter autant de filtres que
@@ -30,10 +28,10 @@ $logger->emerg("Message d'urgence");
             message doit passer par tous les filtres avant que tous les rédacteurs le
             reçoive.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.log.filters.single-writer">
-        <title>Filtrer pour une seule instance de rédacteur</title>
+    <section xml:id="zend.log.filters.single-writer"><info><title>Filtrer pour une seule instance de rédacteur</title></info>
+        
 
         <para>
             Pour filtrer seulement sur un instance spécifique de rédacteur, employer la
@@ -58,5 +56,5 @@ $logger->info("Message d'information");
 // écrit dans les 2 logs
 $logger->emerg("Message d'urgence");
 ]]></programlisting></para>
-    </sect2>
-</sect1>
+    </section>
+</section>

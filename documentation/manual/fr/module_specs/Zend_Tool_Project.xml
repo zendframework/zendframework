@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20799 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.tool.project.introduction">
-    <title>Introduction</title>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.project.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_Tool_Project</classname> est construit à partir de
@@ -17,7 +17,7 @@
         Ce même concept s'applique aux projets Zend Framework. Dans les projets Zend Framework,
         vous avez des contrôleurs, des actions, des vues, des modèles, des bases de données et
         ainsi de suite. En terme de <classname>Zend_Tool</classname>, nous avons besoin d'un
-        moyen de pister ce type de ressources&#160;- c'est-à-dire
+        moyen de pister ce type de ressources - c'est-à-dire
         <classname>Zend_Tool_Project</classname>.
     </para>
 
@@ -39,4 +39,4 @@
         <emphasis>quelles</emphasis> ressources de font partie d'un projet à un moment donné,
         mais également <emphasis>où</emphasis> elles sont les unes par rapport aux autres.
     </para>
-</sect1>
+</section>

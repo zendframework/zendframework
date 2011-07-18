@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20766 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.db.table.definition">
-    <title>Zend_Db_Table_Definition</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.definition"><info><title>Zend_Db_Table_Definition</title></info>
+    
 
-    <sect2 id="zend.db.table.definition.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.db.table.definition.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_Db_Table_Definition</classname> est une classe qui peut être
@@ -13,10 +11,10 @@
             être utilisées lorsque <classname>Zend_Db_Table</classname> est manipulée par
             instantiation concrête.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.definition.usage">
-        <title>Utilisation de base</title>
+    <section xml:id="zend.db.table.definition.usage"><info><title>Utilisation de base</title></info>
+        
 
         <para>
             Les options décrites dans un objet de définition sont les mêmes que celles
@@ -32,8 +30,8 @@
             c'est le cas dans notre exemple avec 'genre'.
         </para>
 
-        <example id="zend.db.table.definition.example1">
-            <title>Décrire un modèle de base de données</title>
+        <example xml:id="zend.db.table.definition.example1"><info><title>Décrire un modèle de base de données</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $definition = new Zend_Db_Table_Definition(array(
@@ -83,8 +81,8 @@ $definition = new Zend_Db_Table_Definition(array(
             de données:
         </para>
 
-        <example id="zend.db.table.definition.example2">
-            <title>Intéragir avec la définition utilisée</title>
+        <example xml:id="zend.db.table.definition.example2"><info><title>Intéragir avec la définition utilisée</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $authorTable = new Zend_Db_Table('author', $definition);
@@ -104,10 +102,10 @@ foreach ($authors as $author) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.definition.advanced-usage">
-        <title>Utilisation avancée</title>
+    <section xml:id="zend.db.table.definition.advanced-usage"><info><title>Utilisation avancée</title></info>
+        
 
         <para>
             Quelques fois vous voudriez mixer les utilisations, via la définition et
@@ -122,8 +120,8 @@ foreach ($authors as $author) {
             alors comment les faire intéragir.
         </para>
 
-        <example id="zend.db.table.definition.example3">
-            <title>Mixer la définition et l'extension concrête</title>
+        <example xml:id="zend.db.table.definition.example3"><info><title>Mixer la définition et l'extension concrête</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 class MyBook extends Zend_Db_Table_Abstract
@@ -177,5 +175,5 @@ foreach ($authors as $author) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

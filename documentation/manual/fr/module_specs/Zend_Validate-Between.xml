@@ -1,24 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21821 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.between">
-    <title>Between</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.between"><info><title>Between</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Between</classname> permet de valider qu'une valeur
         soit bien comprise entre deux bornes.
     </para>
 
-    <note>
-        <title>Zend_Validate_Between ne supporte que les nombres</title>
+    <note><info><title>Zend_Validate_Between ne supporte que les nombres</title></info>
+        
 
         <para>
             Zend_Validate_Between ne supporte pas les chaines ou les dates.
         </para>
     </note>
 
-    <sect3 id="zend.validate.set.between.options">
-        <title>Options gérées par Zend_Validate_Between</title>
+    <section xml:id="zend.validate.set.between.options"><info><title>Options gérées par Zend_Validate_Between</title></info>
+        
 
         <para>
             Les options suivantes sont reconnues par <classname>Zend_Validate_Between</classname>:
@@ -44,10 +42,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.between.basic">
-        <title>Comportement par défaut de Zend_Validate_Between</title>
+    <section xml:id="zend.validate.set.between.basic"><info><title>Comportement par défaut de Zend_Validate_Between</title></info>
+        
 
         <para>
             Par défaut ce validateur vérifie sur la valeur est entre <property>min</property> et
@@ -66,10 +64,10 @@ $result = $valid->isValid($value);
             supérieures et inférieures sont inclusives. Toute valeur depuis '0' à '10' sont donc
             autorisées et reconnues. '-1' et '11' auraient retourné <constant>FALSE</constant>.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.between.inclusively">
-        <title>Validation exclusive sur les bornes</title>
+    <section xml:id="zend.validate.set.between.inclusively"><info><title>Validation exclusive sur les bornes</title></info>
+        
 
         <para>
             Il peut être nécessaire d'exclure les bornes dans la validation. Voyez l'exemple qui suit:
@@ -91,8 +89,5 @@ $result = $valid->isValid($value);
         <para>
             L'exemple ci-dessus fait en sorte que '0' et '10' retournent <constant>FALSE</constant>.
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

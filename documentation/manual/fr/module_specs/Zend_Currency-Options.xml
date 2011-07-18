@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21087 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.currency.options">
-    <title>Options des monnaies</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.options"><info><title>Options des monnaies</title></info>
+    
 
     <para>
         En fonction de vos besoins, certaines options peuvent être passées à l'instanciation, elles ont toutes
         des valeurs par défaut. Voici quelques exemples:
     </para>
 
-    <itemizedlist mark='opencircle'>
+    <itemizedlist mark="opencircle">
         <listitem>
             <para>
                 <emphasis>Symbole des monnaies, noms courts ou noms</emphasis>:
@@ -41,8 +41,7 @@
             <para>
                 Vous pouvez définit les scripts à utiliser pour le rendu des chiffres des monnaies.
                 Vous trouverez des détails sur les scripts dans le chapitre de
-                <classname>Zend_Locale</classname> concernant <link
-                    linkend="zend.locale.numbersystems">Les systèmes de conversion des nombres</link>.
+                <classname>Zend_Locale</classname> concernant <link linkend="zend.locale.numbersystems">Les systèmes de conversion des nombres</link>.
             </para>
         </listitem>
 
@@ -64,7 +63,7 @@
         ou via la méthode <methodname>setFormat()</methodname>, sous forme de tableau.
     </para>
 
-    <itemizedlist mark='opencircle'>
+    <itemizedlist mark="opencircle">
         <listitem>
             <para>
                 <emphasis><property>currency</property></emphasis>: Précise l'abbréviation.
@@ -85,8 +84,7 @@
                 les nombres. Ce format inclut par exemple le séparateur des milliers. Vous pouvez vous reposer
                 sur la locale en passant un identifiant de locale, ou définir un format manuellement.
                 Si aucun format n'est précisé, la locale dans <classname>Zend_Currency</classname>
-                sera utilisée. Voyez <link
-                    linkend="zend.locale.number.localize.table-1">le chapitre sur le formattage des
+                sera utilisée. Voyez <link linkend="zend.locale.number.localize.table-1">le chapitre sur le formattage des
                     nombres</link>.
             </para>
         </listitem>
@@ -109,8 +107,7 @@
         <listitem>
             <para>
                 <emphasis><property>position</property></emphasis>: Définit la position de la monnaie.
-                Pour plus d'informations, voyez <link
-                    linkend="zend.currency.position">cette section</link>.
+                Pour plus d'informations, voyez <link linkend="zend.currency.position">cette section</link>.
             </para>
         </listitem>
 
@@ -127,8 +124,7 @@
                 <emphasis><property>script</property></emphasis>: Indique le script à utiliser
                 pour représenter les chiffres. Souvent par défaut <emphasis>'Latn'</emphasis>,
                 qui inclut les chiffres de 0 à 9. Les autres scripts comme 'Arab' utilisent
-                d'autres chiffres. Voyez <link
-                    linkend="zend.locale.numbersystems">Le chapitre sur les système numérraires
+                d'autres chiffres. Voyez <link linkend="zend.locale.numbersystems">Le chapitre sur les système numérraires
                     </link> pour plus de détails.
             </para>
         </listitem>
@@ -158,4 +154,4 @@
         Beaucoup d'options sont donc ajustables, et la plupart trouvent leurs valeurs par défaut
         dans les représentations normalisées de la monnaie utilisée.
     </para>
-</sect1>
+</section>

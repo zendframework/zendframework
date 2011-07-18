@@ -1,23 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20854 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.rest.client">
-    <title>Zend_Rest_Client</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.rest.client"><info><title>Zend_Rest_Client</title></info>
+    
 
-    <sect2 id="zend.rest.client.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.rest.client.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             Utiliser le <classname>Zend_Rest_Client</classname> est très semblable à
-            l'utilisation des objets de <code>SoapClient</code> (<ulink
-            url="http://www.php.net/soap">SOAP web service extension</ulink>). Vous pouvez
+            l'utilisation des objets de <code>SoapClient</code> (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/soap">SOAP web service extension</link>). Vous pouvez
             simplement appeler les procédures de service de REST comme méthodes de
             <classname>Zend_Rest_Client</classname>. Vous devez indiquer l'adresse complète du
             service dans le constructeur de <classname>Zend_Rest_Client</classname>.
         </para>
 
-        <example id="zend.rest.client.introduction.example-1">
-            <title>Une requête REST basique</title>
+        <example xml:id="zend.rest.client.introduction.example-1"><info><title>Une requête REST basique</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 /**
@@ -32,8 +29,8 @@ echo $client->sayHello('Davey', 'Day')->get();
 ]]></programlisting>
         </example>
 
-        <note>
-            <title>Différences dans les appels</title>
+        <note><info><title>Différences dans les appels</title></info>
+            
 
             <para>
                 <classname>Zend_Rest_Client</classname> tente de rendre les méthodes distantes
@@ -49,10 +46,10 @@ $client->sayHello('Davey', 'Day');
 echo $client->get();
 ]]></programlisting>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.rest.client.return">
-        <title>Réponses</title>
+    <section xml:id="zend.rest.client.return"><info><title>Réponses</title></info>
+        
 
         <para>
             Toutes les demandes faites en utilisant <classname>Zend_Rest_Client</classname>
@@ -66,8 +63,8 @@ echo $client->get();
             statut de réponse (succès ou échec) et le type de retour.
         </para>
 
-        <example id="zend.rest.client.return.example-1">
-            <title>État de la réponse</title>
+        <example xml:id="zend.rest.client.return.example-1"><info><title>État de la réponse</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $result = $client->sayHello('Davey', 'Day')->get();
@@ -97,8 +94,8 @@ if ($result->isSuccess()) {
             méthode, vous recevrez la valeur de <acronym>PHP</acronym> pour l'objet, ou un tableau de résultats.
         </para>
 
-        <example id="zend.rest.client.return.example-2">
-            <title>Utiliser le service REST Technorati</title>
+        <example xml:id="zend.rest.client.return.example-2"><info><title>Utiliser le service REST Technorati</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $technorati = new Zend_Rest_Client('http://api.technorati.com/bloginfo');
@@ -109,8 +106,8 @@ echo $result->firstname() .' '. $result->lastname();
 ]]></programlisting>
         </example>
 
-        <example id="zend.rest.client.return.example-3">
-            <title>Exemple de réponse Technorati</title>
+        <example xml:id="zend.rest.client.return.example-3"><info><title>Exemple de réponse Technorati</title></info>
+            
 
             <programlisting language="xml"><![CDATA[
 <?xml version="1.0" encoding="utf-8"?>
@@ -150,8 +147,8 @@ echo $result->firstname() .' '. $result->lastname();
             automatiquement retournées quand on accède par le nom.
         </para>
 
-        <note>
-            <title>Éléments multiples</title>
+        <note><info><title>Éléments multiples</title></info>
+            
 
             <para>
                 Si des éléments multiples sont trouvés en accédant à une valeur de nom, un
@@ -159,10 +156,10 @@ echo $result->firstname() .' '. $result->lastname();
                 notation de méthode retournera un tableau de valeurs.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.rest.client.args">
-        <title>Arguments de requêtes</title>
+    <section xml:id="zend.rest.client.args"><info><title>Arguments de requêtes</title></info>
+        
 
         <para>
             A moins que vous ne fassiez une demande à un service basé sur
@@ -175,8 +172,8 @@ echo $result->firstname() .' '. $result->lastname();
             <classname>Zend_Rest_Server</classname>.
         </para>
 
-        <example id="zend.rest.client.args.example-1">
-            <title>Affecter des arguments de requêtes</title>
+        <example xml:id="zend.rest.client.args.example-1"><info><title>Affecter des arguments de requêtes</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $client = new Zend_Rest_Client('http://example.org/rest');
@@ -204,8 +201,8 @@ $client->arg('value1')->arg2('value2')->get();
             correctement, plutôt que d'exiger la connaissance préalable du service.
         </para>
 
-        <warning>
-            <title>Sévérité de Zend_Rest_Client</title>
+        <warning><info><title>Sévérité de Zend_Rest_Client</title></info>
+            
 
             <para>
                 Tout service REST qui est strict au sujet des arguments qu'il reçoit échouera
@@ -214,5 +211,5 @@ $client->arg('value1')->arg2('value2')->get();
                 poser des problèmes.
             </para>
         </warning>
-    </sect2>
-</sect1>
+    </section>
+</section>

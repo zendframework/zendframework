@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21129 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.realpath">
-    <title>RealPath</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.realpath"><info><title>RealPath</title></info>
+    
 
     <para>
         Ce filtre va résoudre un lien ou un chemin en chemin absolu canonique. Toutes références à
@@ -40,4 +38,4 @@ $filtered = $filter->filter($path);
 // retourne '/www/non/existing/path' même si file_exists ou realpath retourneraient false
 ]]></programlisting>
 
-</sect2>
+</section>

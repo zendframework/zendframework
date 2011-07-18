@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 21815 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.captcha.adapters">
-    <title>Adaptateurs CAPTCHA</title>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.captcha.adapters"><info><title>Adaptateurs CAPTCHA</title></info>
+    
 
     <para>Les adaptateurs suivants sont fournis dans Zend Framework par défaut.</para>
 
-    <sect2 id="zend.captcha.adapters.word">
-        <title>Zend_Captcha_Word</title>
+    <section xml:id="zend.captcha.adapters.word"><info><title>Zend_Captcha_Word</title></info>
+        
 
         <para>
             <classname>Zend_Captcha_Word</classname> est un adaptateur abstrait qui sert de classe
@@ -29,7 +29,7 @@
         <para>
             En plus des méthodes standards fournies par
             <classname>Zend_Captcha_Adapter</classname>, <classname>Zend_Captcha_Word</classname>
-            propose les méthodes suivantes&#160;:
+            propose les méthodes suivantes :
         </para>
 
         <itemizedlist>
@@ -100,10 +100,10 @@
                 utilisée directement.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.captcha.adapters.dumb">
-        <title>Zend_Captcha_Dumb</title>
+    <section xml:id="zend.captcha.adapters.dumb"><info><title>Zend_Captcha_Dumb</title></info>
+        
 
         <para>
             L'adaptateur <classname>Zend_Captch_Dumb</classname> propose une chaine aléatoire qui
@@ -112,10 +112,10 @@
             comme solution de remplacement extrême, ou pour les tests. Il étend
             <classname>Zend_Captcha_Word</classname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.captcha.adapters.figlet">
-        <title>Zend_Captcha_Figlet</title>
+    <section xml:id="zend.captcha.adapters.figlet"><info><title>Zend_Captcha_Figlet</title></info>
+        
 
         <para>
             L'adaptateur <classname>Zend_Captcha_Figlet</classname> utilise
@@ -126,19 +126,18 @@
         <para>
             Les options passées au constructeur le seront pour l'objet
             <link linkend="zend.text.figlet"><classname>Zend_Text_Figlet</classname></link> que
-            l'adaptateur va utiliser. Voyez la documentation de <link
-                linkend="zend.text.figlet"><classname>Zend_Text_Figlet</classname></link>pour plus
+            l'adaptateur va utiliser. Voyez la documentation de <link linkend="zend.text.figlet"><classname>Zend_Text_Figlet</classname></link>pour plus
             d'informations.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.captcha.adapters.image">
-        <title>Zend_Captcha_Image</title>
+    <section xml:id="zend.captcha.adapters.image"><info><title>Zend_Captcha_Image</title></info>
+        
 
         <para>
             L'adaptateur <classname>Zend_Captcha_Image</classname> prend le mot généré et le
             transforme en image difficile à analyser pour un programme informatique (robot). Pour
-            cela, il nécessite l'<ulink url="http://php.net/gd">extension GD</ulink>,
+            cela, il nécessite l'<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/gd">extension GD</link>,
             compilée avec le support TrueType et Freetype. Actuellement, l'adaptateur
             <classname>Zend_Captcha_Image</classname> ne génère que des images
             <acronym>PNG</acronym>.
@@ -147,7 +146,7 @@
         <para>
             <classname>Zend_Captcha_Image</classname> étend
             <classname>Zend_Captcha_Word</classname>, et propose les méthodes additionnelles
-            suivantes&#160;:
+            suivantes :
         </para>
 
         <itemizedlist>
@@ -168,7 +167,7 @@
                     <methodname>getGcFreg()</methodname> vous
                     permettent de manipuler la fréquence de collecte du ramasse-miettes des images.
                     Le ramasse-miettes passera à une fréquence de <command>1/$gcFreq</command>.
-                    Par défaut 1&#160;/&#160;100, soit toutes les 100 requêtes.
+                    Par défaut 1 / 100, soit toutes les 100 requêtes.
                 </para>
             </listitem>
             <listitem>
@@ -185,7 +184,7 @@
                     <methodname>setFontSize($fsize)</methodname> et
                     <methodname>getFontSize()</methodname> servent pour spécifier et récupérer la
                     taille de la police à utiliser (en pixels) pour générer l
-                    <acronym>CAPTCHA</acronym>. Par défaut&#160;: 24px.
+                    <acronym>CAPTCHA</acronym>. Par défaut : 24px.
                 </para>
             </listitem>
             <listitem>
@@ -193,7 +192,7 @@
                     <methodname>setHeight($height)</methodname> et
                     <methodname>getHeight()</methodname> servent pour spécifier et récupérer la
                     hauteur de la police à utiliser (en pixels) pour générer le
-                    <acronym>CAPTCHA</acronym>. Par défaut&#160;: 50px.
+                    <acronym>CAPTCHA</acronym>. Par défaut : 50px.
                 </para>
             </listitem>
             <listitem>
@@ -201,7 +200,7 @@
                     <methodname>setWidth($width)</methodname> et
                     <methodname>getWidth()</methodname> servent pour spécifier et récupérer la
                     largeur de la police à utiliser (en pixels) pour générer le
-                    <acronym>CAPTCHA</acronym>. Par défaut&#160;: 200px.
+                    <acronym>CAPTCHA</acronym>. Par défaut : 200px.
                 </para>
             </listitem>
             <listitem>
@@ -242,7 +241,7 @@
                     niveau de bruit sous forme de points et de lignes que l'image va contenir.
                     Chaque unité de <varname>$level</varname> produit un point ou une ligne
                     aléatoire. Les valeurs par défaut sont 100 points et 5 lignes. Le bruit est
-                    ajouté deux fois&#160;: avant et après la transformation de l'image.
+                    ajouté deux fois : avant et après la transformation de l'image.
                 </para>
             </listitem>
         </itemizedlist>
@@ -253,15 +252,15 @@
             pour avoir les clés du tableau d'options que le constructeur utilise. ("suffix",
             "height", "imgUrl", etc...).
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.captcha.adapters.recaptcha">
-        <title>Zend_Captcha_ReCaptcha</title>
+    <section xml:id="zend.captcha.adapters.recaptcha"><info><title>Zend_Captcha_ReCaptcha</title></info>
+        
 
         <para>
             L'adaptateur <classname>Zend_Captcha_ReCaptcha</classname> utilise
             <link linkend="zend.service.recaptcha">Zend_Service_ReCaptcha</link> pour générer des
-            <acronym>CAPTCHA</acronym>. Les méthodes suivantes lui sont propres&#160;:
+            <acronym>CAPTCHA</acronym>. Les méthodes suivantes lui sont propres :
         </para>
 
         <itemizedlist>
@@ -289,5 +288,5 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20799 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.view.controllers">
-    <title>Scripts de contrôleur</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.controllers"><info><title>Scripts de contrôleur</title></info>
+    
 
     <para>
         Le contrôleur est l'endroit où vous instanciez et configurez
@@ -10,8 +8,8 @@
         comment effectuer le rendu en utilisant un script particulier.
     </para>
 
-    <sect2 id="zend.view.controllers.assign">
-        <title>Assigner des variables</title>
+    <section xml:id="zend.view.controllers.assign"><info><title>Assigner des variables</title></info>
+        
 
         <para>
             Votre script de contrôleur devrait assigner les variables nécessaires à la vue
@@ -70,10 +68,10 @@ $view->assign('a', "Ha");
 $view->assign('b', "Bé");
 $view->assign('c', "Cé");
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.controllers.render">
-        <title>Effectuer le rendu d'un script de vue</title>
+    <section xml:id="zend.view.controllers.render"><info><title>Effectuer le rendu d'un script de vue</title></info>
+        
 
         <para>
             Une fois que vous avez assigné toutes les variables dont vous avez besoin, le
@@ -91,10 +89,10 @@ $view->b = "Bé";
 $view->c = "Cé";
 echo $view->render('uneVue.php');
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.controllers.script-paths">
-        <title>Chemin des scripts de vue</title>
+    <section xml:id="zend.view.controllers.script-paths"><info><title>Chemin des scripts de vue</title></info>
+        
 
         <para>
             Par défaut, <classname>Zend_View</classname> s'attend à ce que vos scripts de vues
@@ -141,9 +139,9 @@ $view->addScriptPath('/chemin/des/vues-personnalisees');
 // courant pour trouver le fichier "listelivre.php".
 ]]></programlisting>
 
-        <note>
-            <title>Ne jamais utiliser une entrée utilisateur pour spécifier les chemins vers les
-            scripts de vues</title>
+        <note><info><title>Ne jamais utiliser une entrée utilisateur pour spécifier les chemins vers les
+            scripts de vues</title></info>
+            
 
             <para>
                 <classname>Zend_View</classname> utilise des chemins dans lesquels elle
@@ -168,5 +166,5 @@ $view->render('passwd');
                 vous assurer que ces chemins sont contrôlés par votre application.
             </para>
         </note>
-    </sect2>
-</sect1>
+    </section>
+</section>

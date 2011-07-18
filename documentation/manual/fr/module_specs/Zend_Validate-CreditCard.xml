@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22183 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.creditcard">
-    <title>CreditCard</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.creditcard"><info><title>CreditCard</title></info>
+    
 
     <para>
         <classname>Zend_Validate_CreditCard</classname> permet de valider si une valeur est susceptible
@@ -85,8 +83,8 @@
         </listitem>
     </itemizedlist>
 
-    <note>
-        <title>Institutions non valides</title>
+    <note><info><title>Institutions non valides</title></info>
+        
 
         <para>
             <emphasis>Bankcard</emphasis> et <emphasis>Diners Club
@@ -99,34 +97,34 @@
         </para>
     </note>
 
-    <sect3 id="zend.validate.set.creditcard.options">
-        <title>Options supportées par  Zend_Validate_CreditCard</title>
+    <section xml:id="zend.validate.set.creditcard.options"><info><title>Options supportées par  Zend_Validate_CreditCard</title></info>
+        
 
         <para>
             Les options suivantes sont supportées par
-            <classname>Zend_Validate_CreditCard</classname>&#160;:
+            <classname>Zend_Validate_CreditCard</classname> :
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis><property>service</property></emphasis>&#160;: une fonction de rappel
+                    <emphasis><property>service</property></emphasis> : une fonction de rappel
                     vers un service en ligne qui sera utilisé en plus pour la validation.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis><property>type</property></emphasis>&#160;: le type de carte crédit
+                    <emphasis><property>type</property></emphasis> : le type de carte crédit
                     qui sera validée. Voir ci-dessous la liste des institutions pour de plus
                     amples détails.
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.creditcard.basic">
-        <title>Utilisation classique</title>
+    <section xml:id="zend.validate.set.creditcard.basic"><info><title>Utilisation classique</title></info>
+        
 
         <para>
             Il y a plusieurs institutions qui peuvent être validées par
@@ -146,10 +144,10 @@ if ($valid->isValid($input)) {
         <para>
             L'exemple ci-dessus valide le numéro pour toutes les institutions connues.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.creditcard.institute">
-        <title>Accepter seulement certains types de cartes</title>
+    <section xml:id="zend.validate.set.creditcard.institute"><info><title>Accepter seulement certains types de cartes</title></info>
+        
 
         <para>
             Il peut arriver que vous ne vouliez valider que certains types de cartes plutôt que
@@ -195,8 +193,8 @@ $valid = new Zend_Validate_CreditCard(array(
 ));
 ]]></programlisting>
 
-        <table id="zend.validate.set.creditcard.institute.table">
-            <title>Constante représentant les institutions</title>
+        <table xml:id="zend.validate.set.creditcard.institute.table"><info><title>Constante représentant les institutions</title></info>
+            
             <tgroup cols="5">
                 <thead>
                     <row>
@@ -289,8 +287,8 @@ $valid->setType(array(
 ));
 ]]></programlisting>
 
-        <note>
-            <title>Institution par défaut</title>
+        <note><info><title>Institution par défaut</title></info>
+            
 
             <para>
                 Si vous ne précisez pas d'institution à la construction, alors <constant>ALL</constant>
@@ -301,10 +299,10 @@ $valid->setType(array(
                 Dans ce cas, utiliser <methodname>addType()</methodname> ne sert à rien.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.creditcard.servicecheck">
-        <title>Validation par fonction de rappel</title>
+    <section xml:id="zend.validate.set.creditcard.servicecheck"><info><title>Validation par fonction de rappel</title></info>
+        
 
         <para>
             Comme déja dit, <classname>Zend_Validate_CreditCard</classname> ne valide que le numéro
@@ -331,8 +329,7 @@ $valid->setType(array(
             <methodname>setService()</methodname> et
             <methodname>getService()</methodname> sont utilisée pour la fonction de rappel.
             La clé de configuration à utiliser, si vous le souhaitez, est '<property>service</property>'
-            (à la construction). Des détails peuvent être trouvés sur la documentation du validateur<link
-                linkend="zend.validate.set.callback">Callback</link>.
+            (à la construction). Des détails peuvent être trouvés sur la documentation du validateur<link linkend="zend.validate.set.callback">Callback</link>.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -355,8 +352,5 @@ $valid->setService(array($service, 'checkOnline'));
             Ici le service sera appelé avec le numéro de carte comme premier paramètre,
             et les types accéptés comme second.
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

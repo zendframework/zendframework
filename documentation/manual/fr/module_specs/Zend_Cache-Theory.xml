@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 21109 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.cache.theory">
-    <title>Aspect théorique</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.theory"><info><title>Aspect théorique</title></info>
+    
 
     <para>
         Il y a trois concepts clés dans <classname>Zend_Cache</classname>. Le premier est
         l'identifiant unique (une chaîne) qui est utilisé pour identifier les enregistrements de
         cache. Le second est la directive <emphasis>"lifeTime"</emphasis> vue dans les
-        exemples&#160;; elle définit combien de temps la ressource de cache est considérée comme à
+        exemples ; elle définit combien de temps la ressource de cache est considérée comme à
         jour. Le troisième est l'exécution conditionnelle, ainsi chaque partie de votre code peut
         être évitée entièrement, pour améliorer methodname performances. La fonction principale du
         frontend (<methodname>Zend_Cache_Core::get()</methodname>) est toujours faite pour retourner
@@ -39,12 +37,12 @@
         </para>
     </note>
 
-    <sect2 id="zend.cache.factory">
-        <title>La méthode de fabrique de Zend_Cache</title>
+    <section xml:id="zend.cache.factory"><info><title>La méthode de fabrique de Zend_Cache</title></info>
+        
 
         <para>
             Une bonne manière de construire une instance utilisable d'un frontend
-            <classname>Zend_Cache</classname> est donnée dans l'exemple suivant&#160;:
+            <classname>Zend_Cache</classname> est donnée dans l'exemple suivant :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -82,17 +80,17 @@ $cache = Zend_Cache::factory($frontendName,
                 fonctionnera pas comme prévu.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.cache.tags">
-        <title>Baliser les enregistrements</title>
+    <section xml:id="zend.cache.tags"><info><title>Baliser les enregistrements</title></info>
+        
 
         <para>
             Les balises sont un moyen de catégoriser les enregistrements de cache. Quand vous
             sauvegardez un cache avec la méthode <methodname>save()</methodname> vous pouvez
             définir un tableau de balises qui s'appliqueront à cet enregistrement. Ensuite vous
             serez en mesure de nettoyer tous les enregistrements de cache identifiés par
-            une balise (ou plusieurs) donnée&#160;:
+            une balise (ou plusieurs) donnée :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -109,14 +107,14 @@ $cache->save($grande_donnees,
                 cet enregistrement de cache particulier).
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.cache.clean">
-        <title>Nettoyer le cache</title>
+    <section xml:id="zend.cache.clean"><info><title>Nettoyer le cache</title></info>
+        
 
         <para>
-            Pour supprimer&#160;/&#160;invalider un identifiant de cache particulier, vous pouvez
-            utiliser la méthode <methodname>remove()</methodname>&#160;:
+            Pour supprimer / invalider un identifiant de cache particulier, vous pouvez
+            utiliser la méthode <methodname>remove()</methodname> :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -124,9 +122,9 @@ $cache->remove('idAEffacer');
 ]]></programlisting>
 
         <para>
-            Pour effacer&#160;/&#160;invalider plusieurs identifiants de caches en une seule
+            Pour effacer / invalider plusieurs identifiants de caches en une seule
             opération, vous pouvez utiliser la méthode <methodname>clean()</methodname>. Par
-            exemple, pour supprimer tous les caches&#160;:
+            exemple, pour supprimer tous les caches :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -138,7 +136,7 @@ $cache->clean(Zend_Cache::CLEANING_MODE_OLD);
 ]]></programlisting>
 
         <para>
-            Si vous voulez effacer les caches correspondant aux balises "tagA" et "tagC"&#160;:
+            Si vous voulez effacer les caches correspondant aux balises "tagA" et "tagC" :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -148,7 +146,7 @@ $cache->clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG,
 
         <para>
             Si vous voulez effacer les caches ne correspondant pas aux balises "tagA" et
-            "tagC"&#160;:
+            "tagC" :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -157,7 +155,7 @@ $cache->clean(Zend_Cache::CLEANING_MODE_NOT_MATCHING_TAG,
 ]]></programlisting>
 
         <para>
-            Si vous voulez effacer les caches correspondant aux balises "tagA" ou "tagC"&#160;:
+            Si vous voulez effacer les caches correspondant aux balises "tagA" ou "tagC" :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -173,5 +171,5 @@ $cache->clean(Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG,
             l'indique, sont à combiner avec un tableau de balises pour réaliser les opérations de
             nettoyage.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

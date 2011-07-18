@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22081 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.uri.chapter">
-    <title>Zend_Uri</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.uri.chapter"><info><title>Zend_Uri</title></info>
+    
 
-    <sect2 id="zend.uri.overview">
-        <title>Aperçu</title>
+    <section xml:id="zend.uri.overview"><info><title>Aperçu</title></info>
+        
 
         <para>
             <classname>Zend_Uri</classname> est un composant destiné à aider à la manipulation
-            et à la validation des <ulink url="http://www.w3.org/Addressing/"> Uniform Resource
-            Identifiers</ulink> (URIs). <classname>Zend_Uri</classname> existe dans le but d'aider
+            et à la validation des <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/Addressing/"> Uniform Resource
+            Identifiers</link> (URIs). <classname>Zend_Uri</classname> existe dans le but d'aider
             les autres composants de Zend Framework tels que <classname>Zend_Http_Client</classname>
             mais peut aussi être utilisé comme composant individuel.
         </para>
@@ -25,18 +23,18 @@
             première lettre. Une exception à cette règle est <acronym>HTTPS</acronym>, qui est aussi géré par
             <classname>Zend_Uri_Http</classname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.uri.creation">
-        <title>Créer un nouvel URI</title>
+    <section xml:id="zend.uri.creation"><info><title>Créer un nouvel URI</title></info>
+        
 
         <para>
             <classname>Zend_Uri</classname> fabriquera un <acronym>URI</acronym> vierge, si seul son schéma est
             passé à <methodname>Zend_Uri::factory()</methodname>.
         </para>
 
-        <example id="zend.uri.creation.example-1">
-            <title>Créer un URI avec <methodname>Zend_Uri::factory()</methodname></title>
+        <example xml:id="zend.uri.creation.example-1"><info><title>Créer un URI avec <methodname>Zend_Uri::factory()</methodname></title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Création d'un URI vierge
@@ -63,8 +61,8 @@ $uri = Zend_Uri::factory('http');
             spécialisée pour le schéma à créer.
         </para>
 
-        <sect3>
-            <title>Creating a New Custom-Class URI</title>
+        <section><info><title>Creating a New Custom-Class URI</title></info>
+            
 
             <para>
                 Starting from Zend Framework 1.10.5, you can specify a custom class to be
@@ -82,8 +80,8 @@ $uri = Zend_Uri::factory('http');
                 must be in your include_path.
             </para>
 
-            <example id="zend.uri.creation.custom.example-1">
-                <title>Creating a URI using a custom class</title>
+            <example xml:id="zend.uri.creation.custom.example-1"><info><title>Creating a URI using a custom class</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 // Create a new 'ftp' URI based on a custom class
@@ -95,20 +93,20 @@ $ftpUri = Zend_Uri::factory(
 // $ftpUri is an instance of MyLibrary_Uri_Ftp, which is a subclass of Zend_Uri
 ]]></programlisting>
             </example>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.uri.manipulation">
-        <title>Manipuler un URI existant</title>
+    <section xml:id="zend.uri.manipulation"><info><title>Manipuler un URI existant</title></info>
+        
 
         <para>
             Pour manipuler un <acronym>URI</acronym> existant, passez le entièrement à
             <methodname>Zend_Uri::factory()</methodname>.
         </para>
 
-        <example id="zend.uri.manipulation.example-1">
-            <title>Manipuler un URI existant avec
-            <methodname>Zend_Uri::factory()</methodname></title>
+        <example xml:id="zend.uri.manipulation.example-1"><info><title>Manipuler un URI existant avec
+            <methodname>Zend_Uri::factory()</methodname></title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Passez l'URI complet à la fabrique
@@ -124,18 +122,18 @@ $uri = Zend_Uri::factory('http://www.zend.com');
             <methodname>Zend_Uri::factory()</methodname> retournera une sous classe d'elle-même qui
             spécialisera le schéma manipulé.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.uri.validation">
-        <title>Validation d'URI</title>
+    <section xml:id="zend.uri.validation"><info><title>Validation d'URI</title></info>
+        
 
         <para>
             La méthode <methodname>Zend_Uri::check()</methodname> peut être utilisée pour
             valider un <acronym>URI</acronym>.
         </para>
 
-        <example id="zend.uri.validation.example-1">
-            <title>Validation d'URI avec <methodname>Zend_Uri::check()</methodname></title>
+        <example xml:id="zend.uri.validation.example-1"><info><title>Validation d'URI avec <methodname>Zend_Uri::check()</methodname></title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Valide si l'URI passé est bien formé
@@ -151,8 +149,8 @@ $valid = Zend_Uri::check('http://uri.en.question');
             capturer les exceptions.
         </para>
 
-        <sect3 id="zend.uri.validation.allowunwise">
-            <title>Autoriser les caractères "imprudents" dans les URIs</title>
+        <section xml:id="zend.uri.validation.allowunwise"><info><title>Autoriser les caractères "imprudents" dans les URIs</title></info>
+            
 
             <para>
                 Par défaut, <classname>Zend_Uri</classname> n'acceptera pas les caractères
@@ -167,8 +165,8 @@ $valid = Zend_Uri::check('http://uri.en.question');
                 utilisant la méthode <methodname>Zend_Uri::setConfig()</methodname> :
             </para>
 
-            <example id="zend.uri.validation.allowunwise.example-1">
-                <title>Autoriser les caractères spéciaux dans les URIs</title>
+            <example xml:id="zend.uri.validation.allowunwise.example-1"><info><title>Autoriser les caractères spéciaux dans les URIs</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 // Normalement, ceci devrait retourner false :
@@ -192,27 +190,27 @@ Zend_Uri::setConfig(array('allow_unwise' => false));
                     globale.
                 </para>
             </note>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.uri.instance-methods">
-        <title>Méthodes communes</title>
+    <section xml:id="zend.uri.instance-methods"><info><title>Méthodes communes</title></info>
+        
 
         <para>
             Toute instance sous-classe de <classname>Zend_Uri</classname> (par exemple
             <classname>Zend_Uri_Http</classname>) possède plusieurs méthodes utiles :
         </para>
 
-        <sect3 id="zend.uri.instance-methods.getscheme">
-            <title>Retrouver le schéma d'un URI</title>
+        <section xml:id="zend.uri.instance-methods.getscheme"><info><title>Retrouver le schéma d'un URI</title></info>
+            
 
             <para>
                 Le schéma d'un <acronym>URI</acronym> est la partie précédent les double-points (:). Par exemple,
                 le schéma de <code>http://www.zend.com</code> est <code>http</code>.
             </para>
 
-            <example id="zend.uri.instance-methods.getscheme.example-1">
-                <title>Récupérer le schéma d'un objet <classname>Zend_Uri_*</classname></title>
+            <example xml:id="zend.uri.instance-methods.getscheme.example-1"><info><title>Récupérer le schéma d'un objet <classname>Zend_Uri_*</classname></title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $uri = Zend_Uri::factory('http://www.zend.com');
@@ -222,14 +220,14 @@ $scheme = $uri->getScheme();  // "http"
             </example>
 
             <para>La méthode <methodname>getScheme()</methodname> retourne une chaîne de caractères.</para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.uri.instance-methods.geturi">
-            <title>Récupérer l'URI entier</title>
+        <section xml:id="zend.uri.instance-methods.geturi"><info><title>Récupérer l'URI entier</title></info>
+            
 
-            <example id="zend.uri.instance-methods.geturi.example-1">
-                <title>Récupérer l'URI entier depuis un objet
-                <classname>Zend_Uri_*</classname></title>
+            <example xml:id="zend.uri.instance-methods.geturi.example-1"><info><title>Récupérer l'URI entier depuis un objet
+                <classname>Zend_Uri_*</classname></title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $uri = Zend_Uri::factory('http://www.zend.com');
@@ -242,10 +240,10 @@ echo $uri->getUri();  // "http://www.zend.com"
                 La méthode <methodname>getUri()</methodname> retourne une chaîne de caractères
                 représentant l'URI entier.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.uri.instance-methods.valid">
-            <title>Valider l'URI</title>
+        <section xml:id="zend.uri.instance-methods.valid"><info><title>Valider l'URI</title></info>
+            
 
             <para>
                 <methodname>Zend_Uri::factory()</methodname> validera de toute façon
@@ -253,8 +251,8 @@ echo $uri->getUri();  // "http://www.zend.com"
                 devenir invalide après, s'il est modifié.
             </para>
 
-            <example id="zend.uri.instance-methods.valid.example-1">
-                <title>Valider un objet <classname>Zend_Uri_*</classname></title>
+            <example xml:id="zend.uri.instance-methods.valid.example-1"><info><title>Valider un objet <classname>Zend_Uri_*</classname></title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $uri = Zend_Uri::factory('http://www.zend.com');
@@ -267,6 +265,6 @@ $isValid = $uri->valid();  // TRUE
                 La méthode <methodname>valid()</methodname> propose une façon de vérifier si l'URI est
                 toujours valide.
             </para>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

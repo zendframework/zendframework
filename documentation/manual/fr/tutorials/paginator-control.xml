@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21821 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.paginator.control">
-    <title>Contrôles de la pagination et styles de défilement</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.paginator.control"><info><title>Contrôles de la pagination et styles de défilement</title></info>
+    
 
     <para>
         Rendre visuellement les éléments d'une page est un bon départ. Dans les sections précédentes, nous
@@ -34,19 +32,19 @@
 <!-- Previous page link -->
 <?php if (isset($this->previous)): ?>
   <a href="<?php echo $this->url(array('page' => $this->previous)); ?>">
-    &lt; Previous
+    < Previous
   </a> |
 <?php else: ?>
-  <span class="disabled">&lt; Previous</span> |
+  <span class="disabled">< Previous</span> |
 <?php endif; ?>
 
 <!-- Next page link -->
 <?php if (isset($this->next)): ?>
   <a href="<?php echo $this->url(array('page' => $this->next)); ?>">
-    Next &gt;
+    Next >
   </a> |
 <?php else: ?>
-  <span class="disabled">Next &gt;</span> |
+  <span class="disabled">Next ></span> |
 <?php endif; ?>
 
 <!-- Last page link -->
@@ -99,4 +97,4 @@ Zend_View_Helper_PaginationControl::setDefaultViewPartial('controls.phtml');
     <para>
         Pour une liste de tous les styles de défilement, consultez le manuel.
     </para>
-</sect1>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21992 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.validate.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         Le composant <classname>Zend_Validate</classname> fournit un ensemble de validateurs
@@ -10,8 +8,8 @@
         multiples validateurs à une donnée dans un ordre défini par l'utilisateur.
     </para>
 
-    <sect2 id="zend.validate.introduction.definition">
-        <title>Qu'est-ce qu'un validateur ?</title>
+    <section xml:id="zend.validate.introduction.definition"><info><title>Qu'est-ce qu'un validateur ?</title></info>
+        
 
         <para>
             Un validateur examine ce qui lui est soumis suivant certaines règles et retourne
@@ -27,10 +25,10 @@
             Si un identifiant donné ne respecte pas l'une ou plusieurs de ces règles, il sera utile
             de savoir laquelle ou lesquelles en particulier.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.validate.introduction.using">
-        <title>Utilisation basique des validateurs</title>
+    <section xml:id="zend.validate.introduction.using"><info><title>Utilisation basique des validateurs</title></info>
+        
 
         <para>
             Avoir défini la validation de cette manière fournit la fondation de
@@ -73,8 +71,7 @@
         </note>
 
         <para>
-            L'exemple suivant illustre la validation d'une adresse émail : <programlisting
-            role="php"><![CDATA[
+            L'exemple suivant illustre la validation d'une adresse émail : <programlisting role="php"><![CDATA[
 $validator = new Zend_Validate_EmailAddress();
 
 if ($validator->isValid($email)) {
@@ -86,10 +83,10 @@ if ($validator->isValid($email)) {
     }
 }
 ]]></programlisting></para>
-        </sect2>
+        </section>
 
-        <sect2 id="zend.validate.introduction.messages">
-            <title>Messages personnalisés</title>
+        <section xml:id="zend.validate.introduction.messages"><info><title>Messages personnalisés</title></info>
+            
 
         <para>
             Les classes de validation fournissent une méthode <methodname>setMessage()</methodname> avec
@@ -154,8 +151,7 @@ $validator->setMessages( array(
             que les balises de message supportées par une classe de validation donnée. La propriété
             <code>value</code> est toujours accessible dans un validateur ; il s'agit de la valeur
             fournie comme argument à <methodname>isValid()</methodname>. D'autres propriétés peuvent être
-            supportées au cas par cas par chaque classe de validation. <programlisting
-            role="php"><![CDATA[
+            supportées au cas par cas par chaque classe de validation. <programlisting role="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(array('min' => 8, 'max' => 12));
 
 if (!validator->isValid('word')) {
@@ -168,10 +164,10 @@ if (!validator->isValid('word')) {
         . "\n";
 }
 ]]></programlisting></para>
-        </sect2>
+        </section>
 
-        <sect2 id="zend.validate.introduction.static">
-            <title>Utilisation de la méthode statique <methodname>is()</methodname></title>
+        <section xml:id="zend.validate.introduction.static"><info><title>Utilisation de la méthode statique <methodname>is()</methodname></title></info>
+            
 
         <para>
             S'il est peu pratique de charger une classe de validation donnée et créer une
@@ -190,8 +186,7 @@ if (Zend_Validate::is($email, 'EmailAddress')) {
 
         <para>
             Vous pouvez aussi fournir un tableau de paramètres destinés au constructeur de la
-            classe, s'ils sont nécessaires pour votre classe de validation. <programlisting
-            role="php"><![CDATA[
+            classe, s'ils sont nécessaires pour votre classe de validation. <programlisting role="php"><![CDATA[
 if (Zend_Validate::is($value,
                       'Between',
                       array(array('min' => 1, 'max' => 12)))) {
@@ -215,13 +210,12 @@ if (Zend_Validate::is($value,
         <para>
             De plus, la classe <classname>Zend_Filter_Input</classname> vous permet
             d'instancier et d'exécuter des filtres multiples et des classes de validateurs sur
-            demande pour traiter l'ensemble de données saisies. Voir <xref
-            linkend="zend.filter.input" />.
+            demande pour traiter l'ensemble de données saisies. Voir <xref linkend="zend.filter.input"/>.
         </para>
 
-        <sect3 id="zend.validate.introduction.static.namespaces">
+        <section xml:id="zend.validate.introduction.static.namespaces"><info><title>Espaces de noms</title></info>
 
-            <title>Espaces de noms</title>
+            
 
             <para>
                 When working with self defined validators you can give a forth parameter
@@ -297,11 +291,11 @@ if (Zend_Validate::is($value,
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.validate.introduction.translation">
-        <title>Translating messages</title>
+    <section xml:id="zend.validate.introduction.translation"><info><title>Translating messages</title></info>
+        
 
         <para>
             Validate classes provide a <methodname>setTranslator()</methodname> method with
@@ -372,5 +366,5 @@ if (!$validator->isTranslatorDisabled()) {
             <methodname>setMessage()</methodname>. But doing so, you should keep in mind, that the
             translator works also on messages you set your own.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

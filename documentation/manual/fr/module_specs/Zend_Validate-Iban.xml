@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 22129 -->
-<sect2 id="zend.validate.set.iban">
-    <title>Iban</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.iban"><info><title>Iban</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Iban</classname> valide si un nombre donnée est un numéro
@@ -10,8 +8,8 @@
         "International Bank Account Number".
     </para>
 
-    <sect3 id="zend.validate.set.iban.options">
-        <title>Options supportées par Zend_Validate_Iban</title>
+    <section xml:id="zend.validate.set.iban.options"><info><title>Options supportées par Zend_Validate_Iban</title></info>
+        
 
         <para>
             Les options suivantes sont supportées par <classname>Zend_Validate_Iban</classname>:
@@ -25,10 +23,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.iban.basic">
-        <title>Validation IBAN</title>
+    <section xml:id="zend.validate.set.iban.basic"><info><title>Validation IBAN</title></info>
+        
 
         <para>
             Les numéros <acronym>IBAN</acronym> sont toujours relatifs à un pays. Ceci signifie que différents
@@ -37,8 +35,8 @@
             savons déja utiliser <classname>Zend_Validate_Iban</classname>.
         </para>
 
-        <sect4 id="zend.validate.set.iban.basic.application">
-            <title>Locale globale à l'application</title>
+        <section xml:id="zend.validate.set.iban.basic.application"><info><title>Locale globale à l'application</title></info>
+            
 
             <para>
                 Nous pourrions utiliser la locale globale à l'application. Ainsi si on ne passe aucune
@@ -60,8 +58,8 @@ if ($validator->isValid('AT611904300234573201')) {
 }
 ]]></programlisting>
 
-            <note>
-                <title>Locale globale à l'application</title>
+            <note><info><title>Locale globale à l'application</title></info>
+                
 
                 <para>
                     Bien sûr cela ne fonctionne que lorsqu'une locale globale a été spécifiée et enregistrée
@@ -70,10 +68,10 @@ if ($validator->isValid('AT611904300234573201')) {
                     utilisée. Méfiez-vous cela peut mener à des comportements non voulus lors de la validation.
                 </para>
             </note>
-        </sect4>
+        </section>
 
-        <sect4 id="zend.validate.set.iban.basic.false">
-            <title>Validation IBAN simplifiée</title>
+        <section xml:id="zend.validate.set.iban.basic.false"><info><title>Validation IBAN simplifiée</title></info>
+            
 
             <para>
                 Il peut arriver parfois que vous ayiez juste besoin de vérifier le format du numéro
@@ -97,10 +95,10 @@ if ($validator->isValid('AT611904300234573201')) {
                 Ainsi <emphasis>tout</emphasis> numéro <acronym>IBAN</acronym> sera valide. Notez que
                 ceci ne devrait pas être utilisé si vous ne supportez qu'un seul pays.
             </para>
-        </sect4>
+        </section>
 
-        <sect4 id="zend.validate.set.iban.basic.aware">
-            <title>Validation IBAN en fonction d'un pays</title>
+        <section xml:id="zend.validate.set.iban.basic.aware"><info><title>Validation IBAN en fonction d'un pays</title></info>
+            
 
             <para>
                 Pour valider par rapport à un pays/région, passez simplement la locale désirée.
@@ -118,17 +116,14 @@ if ($validator->isValid('AT611904300234573201')) {
 }
 ]]></programlisting>
 
-            <note>
-                <title>Utilisez des locales pleinement qualifiées</title>
+            <note><info><title>Utilisez des locales pleinement qualifiées</title></info>
+                
 
                 <para>
                     Vous devez passer une locale pleinement qualifiée sinon le nom de la région ne
                     pourra être trouvé et utilisé.
                 </para>
             </note>
-        </sect4>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

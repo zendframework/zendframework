@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 16674 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.config.theory_of_operation">
-    <title>Aspect théorique</title>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.theory_of_operation"><info><title>Aspect théorique</title></info>
+    
 
     <para>
         Les données de configuration sont transmis au constructeur de
@@ -29,16 +29,16 @@
         <classname>Zend_Config</classname> implémente les interfaces <emphasis>Countable</emphasis>
         et <emphasis>Iterator</emphasis> afin de faciliter l'accès simple aux données de
         configuration. Ainsi, on peut employer la fonction
-        <ulink url="http://fr.php.net/count"><methodname>count()</methodname></ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://fr.php.net/count"><methodname>count()</methodname></link>
         et des constructions de <acronym>PHP</acronym> telles que
-        <ulink url="http://fr.php.net/foreach"><emphasis>foreach</emphasis></ulink> sur des objets
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://fr.php.net/foreach"><emphasis>foreach</emphasis></link> sur des objets
         <classname>Zend_Config</classname>.
     </para>
 
     <para>
         Par défaut, les données de configuration fournies par <classname>Zend_Config</classname> ne
         sont pas modifiables (lecture seule), et une affectation (par exemple,
-        <command>$config->database->host = 'example.com';</command>) lèvera une exception. Ce
+        <command>$config-&gt;database-&gt;host = 'example.com';</command>) lèvera une exception. Ce
         comportement par défaut peut cependant être surchargé par le constructeur pour permettre la
         modification des valeurs de données. De plus, quand les modifications sont autorisées,
         <classname>Zend_Config</classname> supporte l'effacement de valeurs (c'est-à-dire
@@ -57,7 +57,7 @@
             spécifique. Les outils pour créer et modifier des données de configuration pour
             différents supports de stockage ne concernent pas
             <classname>Zend_Config</classname>. Des solutions tiers open-source sont facilement
-            disponibles afin de créer et&#160;/&#160;ou de modifier les données de configuration
+            disponibles afin de créer et / ou de modifier les données de configuration
             pour différents supports de stockage.
         </para>
     </note>
@@ -90,7 +90,7 @@
         un objet unique en utilisant la fonction <methodname>merge()</methodname>. Par exemple,
         prenons <varname>$config</varname> et <varname>$localConfig</varname>, vous pouvez fusionner
         <varname>$localConfig</varname> dans <varname>$config</varname> en utilisant
-        <command>$config->merge($localConfig);</command>. Les éléments de
+        <command>$config-&gt;merge($localConfig);</command>. Les éléments de
         <varname>$localConfig</varname> surchargeront les éléments nommés de la même manière dans
         <varname>$config</varname>.
     </para>
@@ -104,4 +104,4 @@
             modification après la fin de la fusion.
         </para>
     </note>
-</sect1>
+</section>

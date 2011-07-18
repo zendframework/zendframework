@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20774 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.null">
-    <title>Null</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.null"><info><title>Null</title></info>
+    
 
     <para>
         Ce filtre retournera la valeur <constant>NULL</constant> si des critères précis sont rencontrés.
@@ -10,8 +8,8 @@
         valeur <constant>NULL</constant> plutôt qu'un booléen ou tout autre type.
     </para>
 
-    <sect3 id="zend.filter.set.null.default">
-        <title>Comportement par défaut de Zend_Filter_Null</title>
+    <section xml:id="zend.filter.set.null.default"><info><title>Comportement par défaut de Zend_Filter_Null</title></info>
+        
 
         <para>
             Par défaut, ce filtre fonctionne comme la fonction <acronym>PHP</acronym>
@@ -36,10 +34,10 @@ $result = $filter->filter($value);
         <para>
             Toute autre valeur sera retournée telle quelle, sans aucune modification.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.null.types">
-        <title>Changer le comportement de Zend_Filter_Null</title>
+    <section xml:id="zend.filter.set.null.types"><info><title>Changer le comportement de Zend_Filter_Null</title></info>
+        
 
         <para>
             Quelques fois ça ne suffit pas de filtrer en se basant sur <methodname>empty()</methodname>. Ainsi,
@@ -126,8 +124,5 @@ $filter = new Zend_Filter_Null(array(
             Un objet <classname>Zend_Config</classname> peut aussi être utilisé pour préciser les types.
             La méthode <methodname>setType()</methodname> existe de même.
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 22140 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.cache.frontends">
-    <title>Les frontends Zend_Cache</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.frontends"><info><title>Les frontends Zend_Cache</title></info>
+    
 
-    <sect2 id="zend.cache.frontends.core">
-        <title>Zend_Cache_Core</title>
+    <section xml:id="zend.cache.frontends.core"><info><title>Zend_Cache_Core</title></info>
+        
 
-        <sect3 id="zend.cache.frontends.core.introduction">
-            <title>Introduction</title>
+        <section xml:id="zend.cache.frontends.core.introduction"><info><title>Introduction</title></info>
+            
 
             <para>
                 <classname>Zend_Cache_Core</classname> est un frontend spécial parce qu'il est le
@@ -23,18 +21,18 @@
                     autres frontends, cependant ils ne sont pas documentés ici.
                 </para>
             </note>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.core.options">
-            <title>Options disponibles</title>
+        <section xml:id="zend.cache.frontends.core.options"><info><title>Options disponibles</title></info>
+            
 
             <para>
                 Ces options sont passées à la méthode de fabrique comme montrées dans les
                 exemples précédents.
             </para>
 
-            <table id="zend.cache.frontends.core.options.table">
-                <title>Options du frontend Core</title>
+            <table xml:id="zend.cache.frontends.core.options.table"><info><title>Options du frontend Core</title></info>
+                
 
                 <tgroup cols="4">
                     <thead>
@@ -136,17 +134,17 @@
                     </tbody>
                 </tgroup>
             </table>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.core.examples">
-            <title>Exemples</title>
+        <section xml:id="zend.cache.core.examples"><info><title>Exemples</title></info>
+            
 
             <para>Un exemple est donné dans le manuel, tout au début.</para>
 
             <para>
                 Si vous stocker uniquement des chaînes de caractères dans le cache (parce
                 qu'avec l'option "automatic_serialization", il est possible de stocker
-                des booléens), vous pouvez utiliser une construction plus compact comme&#160;:
+                des booléens), vous pouvez utiliser une construction plus compact comme :
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -172,7 +170,7 @@ if (!($data = $cache->load($id))) {
 
             <para>
                 Si vous voulez cacher des blocs multiples ou des instances de données, l'idée
-                reste la même&#160;:
+                reste la même :
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -255,14 +253,14 @@ if (!($cache->test($id))) {
 
 // on fait qqch avec $data
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.cache.frontends.output">
-        <title>Zend_Cache_Frontend_Output</title>
+    <section xml:id="zend.cache.frontends.output"><info><title>Zend_Cache_Frontend_Output</title></info>
+        
 
-        <sect3 id="zend.cache.frontends.output.introduction">
-            <title>Introduction</title>
+        <section xml:id="zend.cache.frontends.output.introduction"><info><title>Introduction</title></info>
+            
 
             <para>
                 <classname>Zend_Cache_Frontend_Output</classname> est un frontend capturant la
@@ -270,23 +268,23 @@ if (!($cache->test($id))) {
                 capturer tout ce qui passe entre les méthodes <methodname>start()</methodname> et
                 <methodname>end()</methodname>.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.output.options">
-            <title>Options disponibles</title>
+        <section xml:id="zend.cache.frontends.output.options"><info><title>Options disponibles</title></info>
+            
 
             <para>
                 Ce frontend n'a pas d'options spécifiques autres que celles de
                 <classname>Zend_Cache_Core</classname>.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.output.examples">
-            <title>Exemples</title>
+        <section xml:id="zend.cache.frontends.output.examples"><info><title>Exemples</title></info>
+            
 
             <para>
                 Un exemple est donnée dans le manuel, tout au début. Le voici avec des
-                changements mineurs&#160;:
+                changements mineurs :
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -308,14 +306,14 @@ echo 'This is never cached ('.time().').';
                 sortie dans vos projets déjà en production, avec peu de refactorisation de
                 code.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.cache.frontends.function">
-        <title>Zend_Cache_Frontend_Function</title>
+    <section xml:id="zend.cache.frontends.function"><info><title>Zend_Cache_Frontend_Function</title></info>
+        
 
-        <sect3 id="zend.cache.frontends.function.introduction">
-            <title>Introduction</title>
+        <section xml:id="zend.cache.frontends.function.introduction"><info><title>Introduction</title></info>
+            
 
             <para>
                 <classname>Zend_Cache_Frontend_Function</classname> met en cache les résultats des
@@ -323,13 +321,13 @@ echo 'This is never cached ('.time().').';
                 <methodname>call()</methodname> qui prend un nom de fonction et des paramètres pour
                 l'appel dans un tableau.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.function.options">
-            <title>Options disponibles</title>
+        <section xml:id="zend.cache.frontends.function.options"><info><title>Options disponibles</title></info>
+            
 
-            <table id="zend.cache.frontends.function.options.table">
-                <title>Options du frontend Function</title>
+            <table xml:id="zend.cache.frontends.function.options.table"><info><title>Options du frontend Function</title></info>
+                
 
                 <tgroup cols="4">
                     <thead>
@@ -368,14 +366,14 @@ echo 'This is never cached ('.time().').';
                     </tbody>
                 </tgroup>
             </table>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.function.examples">
-            <title>Exemples</title>
+        <section xml:id="zend.cache.frontends.function.examples"><info><title>Exemples</title></info>
+            
 
             <para>
                 Utiliser la fonction <methodname>call()</methodname> est la même chose qu'utiliser
-                <methodname>call_user_func_array()</methodname> en <acronym>PHP</acronym>&#160;:
+                <methodname>call_user_func_array()</methodname> en <acronym>PHP</acronym> :
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -402,27 +400,27 @@ $cache->call('veryExpensiveFunc', array(1, 'foo', 'bar'));
                     et <methodname>unset()</methodname>.
                 </para>
             </note>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.cache.frontends.class">
-        <title>Zend_Cache_Frontend_Class</title>
+    <section xml:id="zend.cache.frontends.class"><info><title>Zend_Cache_Frontend_Class</title></info>
+        
 
-        <sect3 id="zend.cache.frontends.class.introduction">
-            <title>Introduction</title>
+        <section xml:id="zend.cache.frontends.class.introduction"><info><title>Introduction</title></info>
+            
 
             <para>
                 <classname>Zend_Cache_Frontend_Class</classname> est différent de
                 <classname>Zend_Cache_Frontend_Function</classname> parce qu'elle permet de mettre
                 en cache les objets et les méthodes statiques.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.class.options">
-            <title>Options disponibles</title>
+        <section xml:id="zend.cache.frontends.class.options"><info><title>Options disponibles</title></info>
+            
 
-            <table id="zend.cache.frontends.class.options.table">
-                <title>Options du frontend Class</title>
+            <table xml:id="zend.cache.frontends.class.options.table"><info><title>Options du frontend Class</title></info>
+                
 
                 <tgroup cols="4">
                     <thead>
@@ -437,11 +435,11 @@ $cache->call('veryExpensiveFunc', array(1, 'foo', 'bar'));
                         <row>
                             <entry><emphasis>cached_entity</emphasis> (requis)</entry>
                             <entry><type>Mixed</type></entry>
-                            <entry></entry>
+                            <entry/>
                             <entry>
                                 si défini avec un nom de classe, nous allons mettre en cache
                                 une classe abstraite et utiliser uniquement les appels
-                                statiques&#160;; si défini avec un objet, nous allons mettre en
+                                statiques ; si défini avec un objet, nous allons mettre en
                                 cache les méthodes de cet objet.
                             </entry>
                         </row>
@@ -457,7 +455,7 @@ $cache->call('veryExpensiveFunc', array(1, 'foo', 'bar'));
                         <row>
                             <entry><emphasis>cached_methods</emphasis></entry>
                             <entry><type>Array</type></entry>
-                            <entry></entry>
+                            <entry/>
                             <entry>
                                 les noms des méthodes qui seront toujours mis en
                                 cache
@@ -466,7 +464,7 @@ $cache->call('veryExpensiveFunc', array(1, 'foo', 'bar'));
                         <row>
                             <entry><emphasis>non_cached_methods</emphasis></entry>
                             <entry><type>Array</type></entry>
-                            <entry></entry>
+                            <entry/>
                             <entry>
                                 les noms des méthodes qui ne doivent jamais être mises en
                                 cache
@@ -475,12 +473,12 @@ $cache->call('veryExpensiveFunc', array(1, 'foo', 'bar'));
                     </tbody>
                 </tgroup>
             </table>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.class.examples">
-            <title>Exemples</title>
+        <section xml:id="zend.cache.frontends.class.examples"><info><title>Exemples</title></info>
+            
 
-            <para>Par exemple, pour mettre en cache des appels statiques&#160;:</para>
+            <para>Par exemple, pour mettre en cache des appels statiques :</para>
 
             <programlisting language="php"><![CDATA[
 class test {
@@ -503,7 +501,7 @@ $frontendOptions = array(
 $res = $cache->foobar('1', '2');
 ]]></programlisting>
 
-            <para>Pour mettre en cache des appels classiques aux méthodes&#160;:</para>
+            <para>Pour mettre en cache des appels classiques aux méthodes :</para>
 
             <programlisting language="php"><![CDATA[
 class test {
@@ -527,14 +525,14 @@ $frontendOptions = array(
 // L'appel mis en cache
 $res = $cache->foobar2('1', '2');
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.cache.frontends.file">
-        <title>Zend_Cache_Frontend_File</title>
+    <section xml:id="zend.cache.frontends.file"><info><title>Zend_Cache_Frontend_File</title></info>
+        
 
-        <sect3 id="zend.cache.frontends.file.introduction">
-            <title>Introduction</title>
+        <section xml:id="zend.cache.frontends.file.introduction"><info><title>Introduction</title></info>
+            
 
             <para>
                 <classname>Zend_Cache_Frontend_File</classname> est un frontend piloté par la
@@ -553,13 +551,13 @@ $res = $cache->foobar2('1', '2');
                 fichier maître. Ainsi si le fichier <acronym>XML</acronym> de configuration est
                 modifié, le cache est immédiatement invalide.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.file.options">
-            <title>Options disponibles</title>
+        <section xml:id="zend.cache.frontends.file.options"><info><title>Options disponibles</title></info>
+            
 
-            <table id="zend.cache.frontends.file.options.table">
-                <title>Options du frontend File</title>
+            <table xml:id="zend.cache.frontends.file.options.table"><info><title>Options du frontend File</title></info>
+                
 
                 <tgroup cols="4">
                     <thead>
@@ -608,10 +606,10 @@ $res = $cache->foobar2('1', '2');
                     </tbody>
                 </tgroup>
             </table>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.file.examples">
-            <title>Exemples</title>
+        <section xml:id="zend.cache.frontends.file.examples"><info><title>Exemples</title></info>
+            
 
             <para>
                 L'utilisation de ce frontend est la même que celle de
@@ -619,14 +617,14 @@ $res = $cache->foobar2('1', '2');
                 la seule chose à faire est de définir le <emphasis>master_file</emphasis> lors de
                 l'utilisation de la fabrique.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.cache.frontends.page">
-        <title>Zend_Cache_Frontend_Page</title>
+    <section xml:id="zend.cache.frontends.page"><info><title>Zend_Cache_Frontend_Page</title></info>
+        
 
-        <sect3 id="zend.cache.frontends.page.introduction">
-            <title>Introduction</title>
+        <section xml:id="zend.cache.frontends.page.introduction"><info><title>Introduction</title></info>
+            
 
             <para>
                 <classname>Zend_Cache_Frontend_Page</classname> est comme
@@ -661,19 +659,19 @@ $res = $cache->foobar2('1', '2');
                     <emphasis>doit</emphasis> être désactivé en appelant la méthode
                     <methodname>setParam()</methodname> de
                     <classname>Zend_Controller_Front</classname>, par exemple
-                    <command>$front->setParam('disableOutputBuffering', true);</command> ou en
+                    <command>$front-&gt;setParam('disableOutputBuffering', true);</command> ou en
                     ajoutant "resources.frontcontroller.params.disableOutputBuffering = true"
                     à votre fichier d'amorçage (présumé de type <acronym>INI</acronym>) si vous
                     utilisez <classname>Zend_Application</classname>.
                 </para>
             </note>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.page.options">
-            <title>Options disponibles</title>
+        <section xml:id="zend.cache.frontends.page.options"><info><title>Options disponibles</title></info>
+            
 
-            <table id="zend.cache.frontends.page.options.table">
-                <title>Options du frontend Page</title>
+            <table xml:id="zend.cache.frontends.page.options.table"><info><title>Options du frontend Page</title></info>
+                
 
                 <tgroup cols="4">
                     <thead>
@@ -708,19 +706,19 @@ $res = $cache->foobar2('1', '2');
                             <entry><type>Array</type></entry>
                             <entry><methodname>array(...see below...)</methodname></entry>
                             <entry>
-                                un tableau associatif d'options par défaut&#160;:
+                                un tableau associatif d'options par défaut :
                                 <itemizedlist>
                                     <listitem>
                                         <para>
                                             <emphasis>(boolean, <constant>TRUE</constant> par
-                                            défaut) cache</emphasis>&#160;:
+                                            défaut) cache</emphasis> :
                                             le cache est activé si <constant>TRUE</constant>
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
                                             <emphasis>(boolean, <constant>FALSE</constant> par
-                                            défaut) cache_with_get_variables</emphasis>&#160;: si
+                                            défaut) cache_with_get_variables</emphasis> : si
                                             <constant>TRUE</constant>, le cache est toujours activé
                                             même s'il y a des variables dans le tableau
                                             <varname>$_GET</varname>
@@ -729,7 +727,7 @@ $res = $cache->foobar2('1', '2');
                                     <listitem>
                                         <para>
                                             <emphasis>(boolean, <constant>FALSE</constant> par
-                                            défaut) cache_with_post_variables</emphasis>&#160;: si
+                                            défaut) cache_with_post_variables</emphasis> : si
                                             <constant>TRUE</constant>, le cache est toujours activé
                                             même s'il y a des variables dans le tableau
                                             <varname>$_POST</varname>
@@ -738,7 +736,7 @@ $res = $cache->foobar2('1', '2');
                                     <listitem>
                                         <para>
                                             <emphasis>(boolean, <constant>FALSE</constant> par
-                                            défaut) cache_with_session_variables</emphasis>&#160;:
+                                            défaut) cache_with_session_variables</emphasis> :
                                             si <constant>TRUE</constant>, le cache est toujours
                                             activé s'il y a des variables dans le tableau
                                             <varname>$_SESSION</varname>
@@ -747,7 +745,7 @@ $res = $cache->foobar2('1', '2');
                                     <listitem>
                                         <para>
                                             <emphasis>(boolean, <constant>FALSE</constant> par
-                                            défaut) cache_with_files_variables</emphasis>&#160;: si
+                                            défaut) cache_with_files_variables</emphasis> : si
                                             <constant>TRUE</constant>, le cache est toujours activé
                                             s'il y a des variables dans le tableau
                                             <varname>$_FILES</varname>
@@ -756,7 +754,7 @@ $res = $cache->foobar2('1', '2');
                                     <listitem>
                                         <para>
                                             <emphasis>(boolean, <constant>FALSE</constant> par
-                                            défaut) cache_with_cookie_variables</emphasis>&#160;: si
+                                            défaut) cache_with_cookie_variables</emphasis> : si
                                             <constant>TRUE</constant>, le cache est toujours activé
                                             s'il y a des variables dans le tableau
                                             <varname>$_COOKIE</varname>
@@ -765,7 +763,7 @@ $res = $cache->foobar2('1', '2');
                                     <listitem>
                                         <para>
                                             <emphasis>(boolean, <constant>TRUE</constant> par
-                                            défaut) make_id_with_get_variables</emphasis>&#160;: si
+                                            défaut) make_id_with_get_variables</emphasis> : si
                                             <constant>TRUE</constant>, l'identifiant du cache sera
                                             dépendant du contenu du tableau <varname>$_GET</varname>
                                         </para>
@@ -773,7 +771,7 @@ $res = $cache->foobar2('1', '2');
                                     <listitem>
                                         <para>
                                             <emphasis>(boolean, <constant>TRUE</constant> par
-                                            défaut) make_id_with_post_variables</emphasis>&#160;:
+                                            défaut) make_id_with_post_variables</emphasis> :
                                             si <constant>TRUE</constant>, l'identifiant du cache
                                             sera dépendant du contenu du tableau
                                             <varname>$_POST</varname>
@@ -782,7 +780,7 @@ $res = $cache->foobar2('1', '2');
                                     <listitem>
                                         <para>
                                             <emphasis>(boolean, <constant>TRUE</constant> par
-                                            défaut) make_id_with_session_variables</emphasis>&#160;:
+                                            défaut) make_id_with_session_variables</emphasis> :
                                             si <constant>TRUE</constant>, l'identifiant du cache
                                             sera dépendant du contenu du tableau
                                             <varname>$_SESSION</varname>
@@ -791,7 +789,7 @@ $res = $cache->foobar2('1', '2');
                                     <listitem>
                                         <para>
                                             <emphasis>(boolean, <constant>TRUE</constant> par
-                                            défaut) make_id_with_files_variables</emphasis>&#160;:
+                                            défaut) make_id_with_files_variables</emphasis> :
                                             si <constant>TRUE</constant>, l'identifiant du cache
                                             sera dépendant du contenu du tableau
                                             <varname>$_FILES</varname>
@@ -800,7 +798,7 @@ $res = $cache->foobar2('1', '2');
                                     <listitem>
                                         <para>
                                             <emphasis>(boolean, <constant>TRUE</constant> par
-                                            défaut) make_id_with_cookie_variables</emphasis>&#160;:
+                                            défaut) make_id_with_cookie_variables</emphasis> :
                                             si <constant>TRUE</constant>, l'identifiant du cache
                                             sera dépendant du contenu du tableau
                                             <varname>$_COOKIE</varname>
@@ -809,7 +807,7 @@ $res = $cache->foobar2('1', '2');
                                     <listitem>
                                         <para>
                                             <emphasis>(int, <constant>FALSE</constant> par défaut)
-                                            specific_lifetime</emphasis>&#160;: si
+                                            specific_lifetime</emphasis> : si
                                             <constant>TRUE</constant>, la durée de vie fournie sera
                                             utilisée pour l'expression régulière choisie
                                         </para>
@@ -817,14 +815,14 @@ $res = $cache->foobar2('1', '2');
                                     <listitem>
                                         <para>
                                             <emphasis>(array, <methodname>array()</methodname> par
-                                                défaut) tags</emphasis>&#160;:
+                                                défaut) tags</emphasis> :
                                             balises pour l'enregistrement en cache
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
                                             <emphasis>(int, <constant>NULL</constant> par défaut)
-                                                priority</emphasis>&#160;:
+                                                priority</emphasis> :
                                             priorité (si le backend le supporte)
                                         </para>
                                     </listitem>
@@ -860,14 +858,14 @@ $res = $cache->foobar2('1', '2');
                     </tbody>
                 </tgroup>
             </table>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.page.examples">
-            <title>Exemples</title>
+        <section xml:id="zend.cache.frontends.page.examples"><info><title>Exemples</title></info>
+            
 
             <para>
                 L'utilisation de <classname>Zend_Cache_Frontend_Page</classname> est vraiment
-                trivial&#160;:
+                trivial :
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -936,10 +934,10 @@ $cache->start();
 // [...] la fin du fichier de démarrage
 // (ces lignes ne seront pas exécutées si on trouve un cache)
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.page.cancel">
-            <title>La méthode spécifique cancel()</title>
+        <section xml:id="zend.cache.frontends.page.cancel"><info><title>La méthode spécifique cancel()</title></info>
+            
 
             <para>
                 A cause de problèmes de design, dans certains cas (par exemple quand on
@@ -963,14 +961,14 @@ if ($unTest) {
 
 // [...]
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.cache.frontends.capture">
-        <title>Zend_Cache_Frontend_Capture</title>
+    <section xml:id="zend.cache.frontends.capture"><info><title>Zend_Cache_Frontend_Capture</title></info>
+        
 
-        <sect3 id="zend.cache.frontends.capture.introduction">
-            <title>Introduction</title>
+        <section xml:id="zend.cache.frontends.capture.introduction"><info><title>Introduction</title></info>
+            
 
             <para>
                 <classname>Zend_Cache_Frontend_Capture</classname> is like
@@ -996,12 +994,12 @@ if ($unTest) {
                     this, the output buffering used by the Dispatcher <emphasis>must</emphasis> be
                     disabled by calling <classname>Zend_Controller_Front</classname>'s
                     <methodname>setParam()</methodname> method, for example,
-                    <command>$front->setParam('disableOutputBuffering', true);</command> or adding
+                    <command>$front-&gt;setParam('disableOutputBuffering', true);</command> or adding
                     "resources.frontcontroller.params.disableOutputBuffering = true"
                     to your bootstrap configuration file (assumed <acronym>INI</acronym>) if using
                     <classname>Zend_Application</classname>.
                 </para>
             </note>
-        </sect3>
-     </sect2>
-</sect1>
+        </section>
+     </section>
+</section>

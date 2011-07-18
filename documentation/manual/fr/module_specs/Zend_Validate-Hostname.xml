@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20794 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.hostname">
-    <title>Hostname</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.hostname"><info><title>Hostname</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Hostname</classname> vous permet de valider un nom de domaine
@@ -62,8 +60,7 @@ if ($validateur->isValid($hostname)) {
         Vous pouvez utiliser <constant>ALLOW_ALL</constant> pour accepter tous les types de domaines.
         De même, vous pouvez créer des configurations combinant ces différents types. Par exemple,
         pour accepter les domaines qualifiés et les domaines locaux, instanciez votre objet
-        <classname>Zend_Validate_Hostname</classname> de la manière suivante : <programlisting
-        role="php"><![CDATA[
+        <classname>Zend_Validate_Hostname</classname> de la manière suivante : <programlisting role="php"><![CDATA[
 $validateur = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
                                          Zend_Validate_Hostname::ALLOW_IP);
 ]]></programlisting></para>
@@ -92,8 +89,7 @@ $validateur = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
 
     <para>
         Vous pouvez aussi désactiver la validation IDN en passant un second paramètre au
-        constructeur du <classname>Zend_Validate_Hostname</classname> comme ceci : <programlisting
-        role="php"><![CDATA[
+        constructeur du <classname>Zend_Validate_Hostname</classname> comme ceci : <programlisting role="php"><![CDATA[
 $validator =
     new Zend_Validate_Hostname(
         array(
@@ -141,4 +137,4 @@ $validator =
         Notez cependant que les TLDs sont seulement validés si vous autorisez la validation
         des noms de domaine.
     </para>
-</sect2>
+</section>

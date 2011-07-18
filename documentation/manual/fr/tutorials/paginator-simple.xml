@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.paginator.simple">
-    <title>Exemples simples</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.paginator.simple"><info><title>Exemples simples</title></info>
+    
 
     <para>
         Dans ce premier exemple nous n'allons rien faire de magnifique, mais ça donnera une
@@ -120,4 +118,4 @@ foreach ($paginator as $item) {
         <classname>Zend_Paginator</classname>.
     </para>
 
-</sect1>
+</section>

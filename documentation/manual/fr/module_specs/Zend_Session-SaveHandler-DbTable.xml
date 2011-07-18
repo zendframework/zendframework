@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20810 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.session.savehandler.dbtable">
-    <title>Zend_Session_SaveHandler_DbTable</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.savehandler.dbtable"><info><title>Zend_Session_SaveHandler_DbTable</title></info>
+    
 
     <para>
         Le paramétrage basique pour <classname>Zend_Session_SaveHandler_DbTable</classname>
@@ -15,8 +13,8 @@
         session.
     </para>
 
-    <example id="zend.session.savehandler.dbtable.basic">
-        <title>Paramétrage basique</title>
+    <example xml:id="zend.session.savehandler.dbtable.basic"><info><title>Paramétrage basique</title></info>
+        
 
         <programlisting language="SQL"><![CDATA[
 CREATE TABLE `session` (
@@ -64,8 +62,8 @@ Zend_Session::start();
         <classname>Zend_Session_SaveHandler_DbTable</classname>.
     </para>
 
-    <example id="zend.session.savehandler.dbtable.multi-column-key">
-        <title>Utilisation d'une clé primaire multi-colonnes</title>
+    <example xml:id="zend.session.savehandler.dbtable.multi-column-key"><info><title>Utilisation d'une clé primaire multi-colonnes</title></info>
+        
 
         <programlisting language="SQL"><![CDATA[
 CREATE TABLE `session` (
@@ -122,4 +120,4 @@ Zend_Session::start();
 // Utilisez Zend_Session normalement
 ]]></programlisting>
     </example>
-</sect1>
+</section>

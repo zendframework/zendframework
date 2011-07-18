@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20774 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.normalizedtolocalized">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.normalizedtolocalized"><info><title>NormalizedToLocalized</title></info>
 
-    <title>NormalizedToLocalized</title>
+    
 
     <para>
         Ce filtre est l'inverse de
@@ -63,9 +61,9 @@
         Tout autre type d'entrée sera retourné tel quel, sans transformation.
     </para>
 
-    <sect3 id="zend.filter.set.normalizedtolocalized.numbers">
+    <section xml:id="zend.filter.set.normalizedtolocalized.numbers"><info><title>Localisation des nombres</title></info>
 
-        <title>Localisation des nombres</title>
+        
 
         <para>
             Tout type de nombre peut être localisé, à l'exception des nombres représentant une notation scientifique.
@@ -133,11 +131,11 @@ $filter->filter(123456.78901);
 // retourne '123.456,79'
 ]]></programlisting>
 
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.normalizedtolocalized.dates">
+    <section xml:id="zend.filter.set.normalizedtolocalized.dates"><info><title>Localiser des dates et des temps</title></info>
 
-        <title>Localiser des dates et des temps</title>
+        
 
         <para>
             Les dates et les temps peuvent aussi être localisés. Des chaines de caractères sont alors retournées,
@@ -170,10 +168,6 @@ $filter = new Zend_Filter_LocalizedToNormalized(
 $filter->filter(array('hour' => '33', 'minute' => '22', 'second' => '11'));
 // retourne '11:22:33'
 ]]></programlisting>
-    </sect3>
+    </section>
 
-</sect2>
-
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

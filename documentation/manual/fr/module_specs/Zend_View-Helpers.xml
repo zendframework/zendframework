@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.view.helpers" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Aides de vue</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers"><info><title>Aides de vue</title></info>
+    
 
     <para>
         Dans vos scripts de vue, il est souvent nécessaire d'effectuer certaines actions
@@ -21,8 +19,8 @@
         méthode, nommée comme l'aide avec la notationCamel : <methodname>fooBar()</methodname>.
     </para>
 
-    <note>
-        <title>Surveillez la casse</title>
+    <note><info><title>Surveillez la casse</title></info>
+        
 
         <para>
             Les noms des aides sont toujours en notationCamel, c'est-à-dire qu'ils ne
@@ -40,8 +38,8 @@
         futurs à <code>$this-&gt;nomAide()</code>.
     </para>
 
-    <sect2 id="zend.view.helpers.initial">
-        <title>Aides initiales</title>
+    <section xml:id="zend.view.helpers.initial"><info><title>Aides initiales</title></info>
+        
 
         <para>
             <classname>Zend_View</classname> fournit avec un jeu initial de classes d'aides,
@@ -375,35 +373,35 @@ array('us' => 'Etats-Unis', 'fr' => 'France', 'de' => 'Allemagne').
 </form>
 ]]></programlisting>
 
-        <xi:include href="Zend_View-Helpers-Action.xml" />
-        <xi:include href="Zend_View-Helpers-BaseUrl.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-BaseUrl.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Action.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-BaseUrl.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-BaseUrl.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-Currency.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Currency.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Currency.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Currency.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-Cycle.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Cycle.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Cycle.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Cycle.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-Partial.xml" />
-        <xi:include href="Zend_View-Helpers-Placeholder.xml" />
-        <xi:include href="Zend_View-Helpers-Doctype.xml" />
-        <xi:include href="Zend_View-Helpers-HeadLink.xml" />
-        <xi:include href="Zend_View-Helpers-HeadMeta.xml" />
-        <xi:include href="Zend_View-Helpers-HeadScript.xml" />
-        <xi:include href="Zend_View-Helpers-HeadStyle.xml" />
-        <xi:include href="Zend_View-Helpers-HeadTitle.xml" />
-        <xi:include href="Zend_View-Helpers-HtmlObject.xml" />
-        <xi:include href="Zend_View-Helpers-InlineScript.xml" />
-        <xi:include href="Zend_View-Helpers-Json.xml" />
-        <xi:include href="Zend_View-Helpers-Navigation.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Navigation.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Partial.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Placeholder.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Doctype.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadLink.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadMeta.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadScript.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadStyle.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadTitle.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HtmlObject.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-InlineScript.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Json.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Navigation.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Navigation.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-Translate.xml" />
-    </sect2>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Translate.xml"/>
+    </section>
 
-    <sect2 id="zend.view.helpers.paths">
-        <title>Chemin des aides</title>
+    <section xml:id="zend.view.helpers.paths"><info><title>Chemin des aides</title></info>
+        
 
         <para>
             Comme pour les scripts de vue, votre contrôleur peut spécifier une pile de chemins
@@ -450,10 +448,10 @@ $view->addHelperPath('/autre/chemin/vers/des/aides',
 // Zend/View/Helpers/HelperName.php en utilisant la classe
 // "Zend_View_Helper_HelperName"
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.helpers.custom">
-        <title>Écrire des aides personnalisées</title>
+    <section xml:id="zend.view.helpers.custom"><info><title>Écrire des aides personnalisées</title></info>
+        
 
         <para>
             Écrire des aides personnalisées est facile, vous devez juste suivre ces règles
@@ -589,10 +587,10 @@ class Ma_View_Helper_ScriptPath
             courante. Il est de votre responsabilité de maintenir la persistance de l'objet dans
             votre classe, de même que de déterminer la façon dont il peut être accéder.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.helpers.registering-concrete">
-        <title>Registering Concrete Helpers</title>
+    <section xml:id="zend.view.helpers.registering-concrete"><info><title>Registering Concrete Helpers</title></info>
+        
 
         <para>
             Sometimes it is convenient to instantiate a view helper, and then register it with the
@@ -613,8 +611,8 @@ $view->registerHelper($helper, 'foo');
             this and inject itself into the helper on registration.
         </para>
 
-        <note>
-            <title>Helper name should match a method</title>
+        <note><info><title>Helper name should match a method</title></info>
+            
 
             <para>
                 The second argument to <methodname>registerHelper()</methodname> is the name of the
@@ -623,5 +621,5 @@ $view->registerHelper($helper, 'foo');
                 helper, raising a fatal PHP error.
             </para>
         </note>
-    </sect2>
-</sect1>
+    </section>
+</section>

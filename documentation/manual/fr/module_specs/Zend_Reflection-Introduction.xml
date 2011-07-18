@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20818 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.reflection.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.reflection.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_Reflection</classname> est un ensemble de fonctionnalités écrites par
-        dessus <ulink url="http://php.net/reflection">l'API Reflection de <acronym>PHP</acronym></ulink>, et propose un
-        ensemble de nouvelles fonctionnalités&#160;:
+        dessus <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/reflection">l'API Reflection de <acronym>PHP</acronym></link>, et propose un
+        ensemble de nouvelles fonctionnalités :
     </para>
 
     <itemizedlist>
@@ -51,4 +51,4 @@
         En général, <classname>Zend_Reflection</classname> fonctionne de la même manière que
         l'API Reflection de <acronym>PHP</acronym>, elle propose par contre de nouvelles fonctionnalités.
     </para>
-</sect1>
+</section>

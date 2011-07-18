@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20794 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.partial">
-    <title>L'aide de vue Partial</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.partial"><info><title>L'aide de vue Partial</title></info>
+    
 
     <para>
         L'aide de vue <code>Partial</code> est utilisée pour effectuer le rendu d'un modèle
@@ -18,8 +16,8 @@
         élément.
     </para>
 
-    <note>
-        <title>Compteur de PartialLoop</title>
+    <note><info><title>Compteur de PartialLoop</title></info>
+        
 
         <para>
             L'aide de vue <code>PartialLoop</code> assigne une variable à la vue nommée
@@ -29,8 +27,8 @@
         </para>
     </note>
 
-    <example id="zend.view.helpers.initial.partial.usage">
-        <title>Utilisation de base des Partials</title>
+    <example xml:id="zend.view.helpers.initial.partial.usage"><info><title>Utilisation de base des Partials</title></info>
+        
 
         <para>
             L'utilisation de base des <code>Partials</code> est d'effectuer le rendu d'un
@@ -67,8 +65,8 @@
 ]]></programlisting>
     </example>
 
-    <note>
-        <title>Qu'est qu'un modèle ?</title>
+    <note><info><title>Qu'est qu'un modèle ?</title></info>
+        
 
         <para>
             Un modèle utilisé avec l'aide de vue <code>Partial</code> peut être un des
@@ -125,8 +123,8 @@ $view->partialLoop()->setObjectKey('model');
         </para>
     </note>
 
-    <example id="zend.view.helpers.initial.partial.partialloop">
-        <title>Utiliser PartialLoop pour effectuer le rendu d'éléments itératifs</title>
+    <example xml:id="zend.view.helpers.initial.partial.partialloop"><info><title>Utiliser PartialLoop pour effectuer le rendu d'éléments itératifs</title></info>
+        
 
         <para>
             Typiquement, vous voudrez employer des <code>Partials</code> dans une boucle, pour
@@ -192,8 +190,8 @@ $model = array(
 ]]></programlisting>
     </example>
 
-    <example id="zend.view.helpers.initial.partial.modules">
-        <title>Effectuer le rendu partiel dans des modules différents</title>
+    <example xml:id="zend.view.helpers.initial.partial.modules"><info><title>Effectuer le rendu partiel dans des modules différents</title></info>
+        
 
         <para>
             Parfois un partiel existera dans un module différent. Si vous connaissez le nom du
@@ -217,4 +215,4 @@ $model = array(
             partiels réutilisables dans des dossiers partagés de script de vue.
         </para>
     </example>
-</sect3>
+</section>

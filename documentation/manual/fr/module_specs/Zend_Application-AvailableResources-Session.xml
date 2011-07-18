@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20763 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.session">
-    <title>Zend_Application_Resource_Session</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.session"><info><title>Zend_Application_Resource_Session</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Session</classname> est utilisé pour configurer
@@ -12,24 +10,24 @@
 
     <para>
         Pour créer un support de sauvegarde session, passez la clé <property>saveHandler</property>
-        (case insensitive) à la ressource. La valeur d'une telle option peut être&#160;:
+        (case insensitive) à la ressource. La valeur d'une telle option peut être :
     </para>
 
     <itemizedlist>
         <listitem><para>
-            <type>String</type>&#160;: cette chaîne indique le nom d'une classe implémentant
+            <type>String</type> : cette chaîne indique le nom d'une classe implémentant
             <classname>Zend_Session_SaveHandler_Interface</classname>.
         </para></listitem>
 
         <listitem><para>
-            <type>Array</type>&#160;: avec les clés "class" et optionnellement
+            <type>Array</type> : avec les clés "class" et optionnellement
             "options", indiquant une classe à instancier (implémentant
             <classname>Zend_Session_SaveHandler_Interface</classname>) et un tableau d'options
             à passer à son constructeur.
         </para></listitem>
 
         <listitem><para>
-            <classname>Zend_Session_SaveHandler_Interface</classname>&#160;: un objet
+            <classname>Zend_Session_SaveHandler_Interface</classname> : un objet
             implémentant cette interface.
         </para></listitem>
     </itemizedlist>
@@ -40,8 +38,8 @@
         <classname>Zend_Session</classname>.
     </para>
 
-    <example id="zend.application.available-resources.session.configExample">
-        <title>Exemple de ressource session</title>
+    <example xml:id="zend.application.available-resources.session.configExample"><info><title>Exemple de ressource session</title></info>
+        
 
         <para>
             Voici un fichier <acronym>INI</acronym> permettant de configurer une session via la
@@ -67,18 +65,17 @@ resources.session.saveHandler.options.lifetimeColumn = "lifetime"
 ]]></programlisting>
     </example>
 
-    <note>
-        <title>Configurez votre base de données avant&#160;!</title>
+    <note><info><title>Configurez votre base de données avant !</title></info>
+        
 
         <para>
             Si vous configurez le gestionnaire
             <classname>Zend_Session_SaveHandler_DbTable</classname>, vous devez configurer
-            votre base de données avant. Pour cela, servez vous de la ressource <link
-                linkend="zend.application.available-resources.db">Db</link> et assurez vous
+            votre base de données avant. Pour cela, servez vous de la ressource <link linkend="zend.application.available-resources.db">Db</link> et assurez vous
             que la clé "<property>resources.db</property>" apparaît bien avant la clé
             "<property>resources.session</property>". Vous pouvez aussi utiliser votre propre
             ressource qui initialise la base de données et affecte l'adaptateur
             <classname>Zend_Db_Table</classname> par défaut.
         </para>
     </note>
-</sect2>
+</section>

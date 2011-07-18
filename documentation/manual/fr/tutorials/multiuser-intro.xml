@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.multiuser.intro">
-    <title>Fabrique une application Multi-Utilisateurs avec Zend Framework</title>
+<?xml version="1.0" encoding="utf-8"?>
 
-    <sect2 id="learning.multiuser.intro.zf">
-        <title>Zend Framework</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.multiuser.intro"><info><title>Fabrique une application Multi-Utilisateurs avec Zend Framework</title></info>
+    
+
+    <section xml:id="learning.multiuser.intro.zf"><info><title>Zend Framework</title></info>
+        
 
         <para>
             Lorsque le web a été crée, il s'agissait d'un média permettant de consulter des
@@ -45,8 +45,8 @@
             </listitem>
         </itemizedlist>
 
-        <note>
-            <title>Client contre Utilisateur</title>
+        <note><info><title>Client contre Utilisateur</title></info>
+            
 
             <para>
                 Nous utilisons le terme "client" et pas utilisateur. Les applications web deviennent
@@ -68,5 +68,5 @@
             <classname>Zend_Acl</classname>; nous montrerons des exemples concrets et des possibilités
             d'extension.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.date.additional">
-    <title>Exemples concrets</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.additional"><info><title>Exemples concrets</title></info>
+    
 
     <para>
         Dans ce chapitre, nous décrirons plusieurs fonctionnalités disponibles dans
         <classname>Zend_Date</classname>. Ceci sera fait au travers d'exemples concrets.
     </para>
 
-    <sect2 id="zend.date.additional.checking">
-        <title>Vérifier des dates</title>
+    <section xml:id="zend.date.additional.checking"><info><title>Vérifier des dates</title></info>
+        
 
         <para>
             La plupart du temps vous devrez traiter des dates issues d'entrées de vos
@@ -22,7 +20,7 @@
             mois, par exemple, sera reconnu et sera retourné comme entier. Étant donnée que le rôle
             de <classname>Zend_Locale</classname> est l'aide à la localisation et
             l'internationalisation, c'est <classname>Zend_Date</classname> qui propose une fonction
-            de vérification&#160;:<methodname>isDate($date)</methodname>.
+            de vérification :<methodname>isDate($date)</methodname>.
         </para>
 
         <para>
@@ -49,8 +47,8 @@
             <constant>FALSE</constant> sur "31.February.2000" car cette date n'existe pas.
         </para>
 
-        <example id="zend.date.additional.checking.example-1">
-            <title>Vérifier des dates</title>
+        <example xml:id="zend.date.additional.checking.example-1"><info><title>Vérifier des dates</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Vérification de dates
@@ -78,10 +76,10 @@ if (Zend_Date::isDate($date,'dd MMMM yyyy', 'en')) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.date.additional.sunrise-sunset">
-        <title>Levé et couché du soleil</title>
+    <section xml:id="zend.date.additional.sunrise-sunset"><info><title>Levé et couché du soleil</title></info>
+        
 
         <para>
             <classname>Zend_Date</classname> possède aussi des fonctionnalités pour se
@@ -104,8 +102,8 @@ if (Zend_Date::isDate($date,'dd MMMM yyyy', 'en')) {
             classe d'aide.
         </para>
 
-        <example id="zend.date.additional.sunrise-sunset.example-1">
-            <title>Récupérer toutes les villes disponibles</title>
+        <example xml:id="zend.date.additional.sunrise-sunset.example-1"><info><title>Récupérer toutes les villes disponibles</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Affiche la liste complète de toutes les villes disponibles
@@ -131,8 +129,8 @@ print_r (Zend_Date_Cities::getCityList());
             sera attribuée par défaut.
         </para>
 
-        <table id="zend.date.additional.sunrise-sunset.table">
-            <title>Valeurs d'horizons supportées pour les levé et couché de soleil</title>
+        <table xml:id="zend.date.additional.sunrise-sunset.table"><info><title>Valeurs d'horizons supportées pour les levé et couché de soleil</title></info>
+            
 
             <tgroup cols="3">
                 <thead>
@@ -179,8 +177,8 @@ print_r (Zend_Date_Cities::getCityList());
             plus du paramètre optionnel "<code>horizon</code>".
         </para>
 
-        <example id="zend.date.additional.sunrise-sunset.example-2">
-            <title>Trouver la localisation d'une ville</title>
+        <example xml:id="zend.date.additional.sunrise-sunset.example-2"><info><title>Trouver la localisation d'une ville</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Trouve la localisation d'une ville avec l'horizon effectif
@@ -197,14 +195,14 @@ $mylocation = array('latitude' => 41.5, 'longitude' => 13.2446);
         <para>
             Dès lors, il faut créer un objet <classname>Zend_Date</classname> contenant la
             date dont on veut connaître les informations de levé et de couché du soleil. 3 méthodes
-            nous seront proposées&#160;: <methodname>getSunset()</methodname>, <methodname>getSunrise()</methodname> et
+            nous seront proposées : <methodname>getSunset()</methodname>, <methodname>getSunrise()</methodname> et
             <methodname>getSunInfo()</methodname>. Ces 3 méthodes s'appliquent sur un objet
             <classname>Zend_Date</classname> et retournent un objet
             <classname>Zend_Date</classname>.
         </para>
 
-        <example id="zend.date.additional.sunrise-sunset.example-3">
-            <title>Calculer les informations relatives au soleil</title>
+        <example xml:id="zend.date.additional.sunrise-sunset.example-3"><info><title>Calculer les informations relatives au soleil</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Retrouve la localisation d'une ville
@@ -225,10 +223,10 @@ foreach ($info as $sun) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.date.additional.timezones">
-        <title>Fuseaux horaires (Timezones)</title>
+    <section xml:id="zend.date.additional.timezones"><info><title>Fuseaux horaires (Timezones)</title></info>
+        
 
         <para>
             Les zones de temps (Timezones) sont aussi importantes que les dates en
@@ -260,8 +258,8 @@ foreach ($info as $sun) {
             <classname>Zend_Date</classname> banal.
         </para>
 
-        <example id="zend.date.additional.timezones.example-1">
-            <title>Travailler avec les fuseaux horaires (timezones)</title>
+        <example xml:id="zend.date.additional.timezones.example-1"><info><title>Travailler avec les fuseaux horaires (timezones)</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Règle le fuseau horaire PHP par défaut.
@@ -301,12 +299,12 @@ print $date->getIso();
 
         <para>
             Coupler le fuseau dans l'objet <classname>Zend_Date</classname> a un autre effet
-            positif&#160;: il est possible de posséder plusieurs objets de date, avec chacun un
+            positif : il est possible de posséder plusieurs objets de date, avec chacun un
             fuseau horaire différent.
         </para>
 
-        <example id="zend.date.additional.timezones.example-2">
-            <title>Plusieurs fuseaux horaires</title>
+        <example xml:id="zend.date.additional.timezones.example-2"><info><title>Plusieurs fuseaux horaires</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Règle le fuseau horaire PHP par défaut.
@@ -338,5 +336,5 @@ $lastdate->setTimezone();
 print $lastdate->getIso();
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

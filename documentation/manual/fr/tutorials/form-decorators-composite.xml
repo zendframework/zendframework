@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.form.decorators.composite">
-    <title>Créer et rendre des éléments composites</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.form.decorators.composite"><info><title>Créer et rendre des éléments composites</title></info>
+    
 
     <para>
         Dans <link linkend="learning.form.decorators.individual">la dernière section</link>, nous
@@ -29,8 +27,8 @@
         Comment écrire un décorateur qui s'assure de son rendu ?
     </para>
 
-    <sect2 id="learning.form.decorators.composite.element">
-        <title>L'élément</title>
+    <section xml:id="learning.form.decorators.composite.element"><info><title>L'élément</title></info>
+        
 
         <para>
             Les questions à se poser sur le fonctionnement de l'élément sont:
@@ -190,10 +188,10 @@ class My_Form_Element_Date extends Zend_Form_Element_Xhtml
             accesseurs distincts pour chaque segment de la date, un décorateur pourra donc créer
             l'élément comme il le voudra.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.form.decorators.composite.decorator">
-        <title>Le décorateur</title>
+    <section xml:id="learning.form.decorators.composite.decorator"><info><title>Le décorateur</title></info>
+        
 
         <para>
             Toujours en suivant notre exemple, imaginons que nous voulions que notre utilisateur
@@ -358,10 +356,10 @@ $d->setValue(array('year' => '2009', 'month' => '04', 'day' => '20'));
         value="2009" size="4" maxlength="4">
 </dd>
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.form.decorators.composite.conclusion">
-        <title>Conclusion</title>
+    <section xml:id="learning.form.decorators.composite.conclusion"><info><title>Conclusion</title></info>
+        
 
         <para>
             Nous avons maintenant un élément qui peut rendre de multiples champs de formulaire,
@@ -373,7 +371,7 @@ $d->setValue(array('year' => '2009', 'month' => '04', 'day' => '20'));
         <para>
             Aussi, nous pouvons toujours utiliser des décorateurs différents avec l'élément. Si
             nous avions voulu utiliser un décorateur
-            <ulink url="http://dojotoolkit.org/">Dojo</ulink> <classname>DateTextBox</classname>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org/">Dojo</link> <classname>DateTextBox</classname>
             -- qui accepte et retourne des chaines -- we aurions pu, sans modification sur
             l'élément lui-même.
         </para>
@@ -382,5 +380,5 @@ $d->setValue(array('year' => '2009', 'month' => '04', 'day' => '20'));
             Enfin, vous avez une API uniforme pour décrire un élement se composant se plusieurs
             segments distincts.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

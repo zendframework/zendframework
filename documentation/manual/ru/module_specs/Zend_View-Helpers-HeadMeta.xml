@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.headmeta">
-    <title>Помощник HeadMeta</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headmeta"><info><title>Помощник HeadMeta</title></info>
+    
 
     <para>
         Элемент <code>&lt;meta&gt;</code> используется для добавления
@@ -73,8 +72,8 @@
             Placeholder</link>.
     </para>
 
-    <example id="zend.view.helpers.initial.headmeta.basicusage">
-        <title>Использование помощника HeadMeta</title>
+    <example xml:id="zend.view.helpers.initial.headmeta.basicusage"><info><title>Использование помощника HeadMeta</title></info>
+        
 
         <para>
             Вы можете указывать новые метатеги в любой момент времени. Обычно
@@ -139,7 +138,4 @@ $this->headMeta()->appendHttpEquiv('Refresh',
 <?php echo $this->headMeta() ?>
 ]]></programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

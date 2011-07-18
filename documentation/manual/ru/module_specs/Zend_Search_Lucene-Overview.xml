@@ -1,8 +1,9 @@
-<sect1 id="zend.search.lucene.overview">
-    <title>Обзор</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.overview"><info><title>Обзор</title></info>
+    
 
-    <sect2 id="zend.search.lucene.introduction">
-        <title>Введение</title>
+    <section xml:id="zend.search.lucene.introduction"><info><title>Введение</title></info>
+        
         <para>
             Zend_Search_Lucene является поисковым движком общего
             назначения для полнотекстового поиска, написанным полностью на PHP 5.
@@ -62,12 +63,12 @@
             Zend_Search_Lucene was derived from the Apache Lucene project.  For more
             information on Lucene, visit
 -->
-            <ulink url="http://lucene.apache.org/java/docs/"/>.
+            <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://lucene.apache.org/java/docs/">http://lucene.apache.org/java/docs/</uri>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.documents-and-fields">
-        <title>Объекты документа и поля<!--Document and Field Objects--></title>
+    <section xml:id="zend.search.lucene.index-creation.documents-and-fields"><info><title>Объекты документа и поля<!--Document and Field Objects--></title></info>
+        
             <para>
                 Zend_Search_Lucene оперирует с документами как с элементарными
                 объектами для индексации. Документ делится на именованные поля,
@@ -232,10 +233,10 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $contents));
                 See <link linkend="zend.search.lucene.query-language.fields">"Default search field"</link> chapter for details.
 -->
             </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.understanding-field-types">
-        <title>Значение типов полей<!--Understanding Field Types--></title>
+    <section xml:id="zend.search.lucene.index-creation.understanding-field-types"><info><title>Значение типов полей<!--Understanding Field Types--></title></info>
+        
         <itemizedlist>
             <listitem>
                 <para>
@@ -317,8 +318,8 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $contents));
 -->
                </para>
 
-                <table>
-                    <title>Типы Zend_Search_Lucene_Field<!--Zend_Search_Lucene_Field Types--></title>
+                <table><info><title>Типы Zend_Search_Lucene_Field<!--Zend_Search_Lucene_Field Types--></title></info>
+                    
                     <tgroup cols="5">
                         <thead>
                             <row>
@@ -370,10 +371,10 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $contents));
                 </table>
            </listitem>
        </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.html-documents">
-        <title>HTML-документы<!--HTML documents--></title>
+    <section xml:id="zend.search.lucene.index-creation.html-documents"><info><title>HTML-документы<!--HTML documents--></title></info>
+        
         <para>
             Zend_Search_Lucene предоставляет возможность парсинга HTML.
             Документы могут создаваться непосредственно из HTML-файла или
@@ -504,6 +505,6 @@ $linksArray = $doc->getLinks();
 $headerLinksArray = $doc->getHeaderLinks();
 ?>]]></programlisting>
         </para>
-    </sect2>
+    </section>
 
-</sect1>
+</section>

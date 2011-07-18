@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.xmlrpc.introduction">
-    <title>Введение</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.xmlrpc.introduction"><info><title>Введение</title></info>
+    
 
     <para>
         Согласно информации, размещенной на стартовой странице
-        <ulink url="http://www.xmlrpc.com/">официального сайта</ulink>, XML-RPC
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.xmlrpc.com/">официального сайта</link>, XML-RPC
         является "... удаленным вызовом процедур с использованием HTTP для
         передачи данных и XML для кодирования. XML-RPC разработан в расчете
         на максимально простое использование, и в то же время позволяет
@@ -16,7 +17,4 @@
         Zend Framework поддерживает как использование удаленных XML-RPC
         сервисов, так и создание новых XML-RPC серверов.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

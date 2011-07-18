@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.cache.theory">
-    <title>Теория кэширования</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.theory"><info><title>Теория кэширования</title></info>
+    
     <para>
         Есть три ключевых понятия в <classname>Zend_Cache</classname>. Первое — уникальный
         идентификатор (строка), который служит для идентификации записей кэша.
@@ -32,8 +31,8 @@
         которые помещаются в кэш. С другой стороны, если есть "попадание",
         то бэкэнд автоматически извлечет запись из кэша.
     </para></note>
-    <sect2 id="zend.cache.factory">
-        <title>Фабричный метод Zend_Cache</title>
+    <section xml:id="zend.cache.factory"><info><title>Фабричный метод Zend_Cache</title></info>
+        
         <para>
             Корректным способом создания рабочего экземпляра
             фронтэнда <classname>Zend_Cache</classname> является код показанный в
@@ -70,10 +69,10 @@ $cache = Zend_Cache::factory($frontendName,
             экземпляров фронтэнда. Непосредственно созданные экземпляры
             фронтэндов и бэкэндов будут работать не так, как ожидается.
         </para></note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.cache.tags">
-        <title>Добавление тегов к записям</title>
+    <section xml:id="zend.cache.tags"><info><title>Добавление тегов к записям</title></info>
+        
         <para>
             Теги являются средством категоризации записей кэша. Когда вы
             производите сохранение в кэш методом <methodname>save()</methodname>, то можете
@@ -91,9 +90,9 @@ $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
                 текущей записи кэша.
             </para>
         </note>
-    </sect2>
-    <sect2 id="zend.cache.clean">
-        <title>Очистка кэша</title>
+    </section>
+    <section xml:id="zend.cache.clean"><info><title>Очистка кэша</title></info>
+        
         <para>
             Для того, чтобы удалить или сделать недействительной запись с
             определенным идентификатором, вы можете использовать метод
@@ -150,8 +149,5 @@ $cache->clean(
             тегом). Последние два, как ясно из названия, передаются вместе с
             массивом тегов.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

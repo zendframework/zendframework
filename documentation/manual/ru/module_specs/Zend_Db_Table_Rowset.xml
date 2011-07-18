@@ -1,10 +1,11 @@
-<sect1 id="zend.db.table.rowset">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.rowset"><info><title>Zend_Db_Table_Rowset</title></info>
 
-    <title>Zend_Db_Table_Rowset</title>
+    
 
-    <sect2 id="zend.db.table.rowset.introduction">
+    <section xml:id="zend.db.table.rowset.introduction"><info><title>Введение</title></info>
 
-        <title>Введение</title>
+        
 
         <para>
             Когда вы производите запрос через класс таблицы, используя методы
@@ -17,11 +18,11 @@
             объектами строк, считывая или изменяя данные в строках.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.rowset.fetch">
+    <section xml:id="zend.db.table.rowset.fetch"><info><title>Получение набора строк</title></info>
 
-        <title>Получение набора строк</title>
+        
 
         <para>
             <code>Zend_Db_Table_Abstract</code> предоставляет методы
@@ -29,23 +30,23 @@
             объект типа <code>Zend_Db_Table_Rowset_Abstract</code>.
         </para>
 
-        <example id="zend.db.table.rowset.fetch.example">
+        <example xml:id="zend.db.table.rowset.fetch.example"><info><title>Пример извлечения набора строк</title></info>
 
-            <title>Пример извлечения набора строк</title>
+            
 
             <programlisting language="php"><![CDATA[
 $bugs   = new Bugs();
 $rowset = $bugs->fetchAll("bug_status = 'NEW'");
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.rowset.rows">
+    <section xml:id="zend.db.table.rowset.rows"><info><title>Получение строк из набора</title></info>
 
-        <title>Получение строк из набора</title>
+        
 
         <para>
             Обычно сам по себе набор строк представляет меньший интерес, чем
@@ -63,9 +64,9 @@ $rowset = $bugs->fetchAll("bug_status = 'NEW'");
             строк.
         </para>
 
-        <example id="zend.db.table.rowset.rows.example.counting">
+        <example xml:id="zend.db.table.rowset.rows.example.counting"><info><title>Подсчет количества строк в наборе строк</title></info>
 
-            <title>Подсчет количества строк в наборе строк</title>
+            
 
             <programlisting language="php"><![CDATA[
 $rowset   = $bugs->fetchAll("bug_status = 'FIXED'");
@@ -77,14 +78,14 @@ if ($rowCount > 0) {
 } else {
     echo 'no rows matched the query';
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </example>
 
-        <example id="zend.db.table.rowset.rows.example.current">
+        <example xml:id="zend.db.table.rowset.rows.example.current"><info><title>Чтение одной строки из набора строк</title></info>
 
-            <title>Чтение одной строки из набора строк</title>
+            
 
             <para>
                 Наиболее простой способ получения доступа к строке из набора
@@ -97,8 +98,8 @@ if ($rowCount > 0) {
 $bugs   = new Bugs();
 $rowset = $bugs->fetchAll("bug_id = 1");
 $row    = $rowset->current();
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </example>
 
@@ -107,9 +108,9 @@ $row    = $rowset->current();
             <code>current()</code> вернет значение <constant>NULL</constant>.
         </para>
 
-        <example id="zend.db.table.rowset.iterate.example">
+        <example xml:id="zend.db.table.rowset.iterate.example"><info><title>&gt;Итерация по набору строк</title></info>
 
-            <title>>Итерация по набору строк</title>
+            
 
             <para>
                 Объекты, наследующие от
@@ -142,8 +143,8 @@ foreach ($rowset as $row) {
     // сохранение изменений в БД
     $row->save();
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </example>
 
@@ -173,20 +174,20 @@ $row9->getRow(8);
 // и ее применение:
 $row9->assigned_to = 'mmouse';
 $row9->save();
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         <para>
             После того, как получен отдельный объект строки, вы можете
             работать с ним, используя методы, описанные в
-            <xref linkend="zend.db.table.row" />
+            <xref linkend="zend.db.table.row"/>
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.rowset.to-array">
+    <section xml:id="zend.db.table.rowset.to-array"><info><title>Получение набора строк в виде массива</title></info>
 
-        <title>Получение набора строк в виде массива</title>
+        
 
         <para>
             Вы можете работать с данными в наборе строк как с массивом,
@@ -196,9 +197,9 @@ $row9->save();
             соответствуют именам столбцов, а элементы - значениям этих столбцов.
         </para>
 
-        <example id="zend.db.table.rowset.to-array.example">
+        <example xml:id="zend.db.table.rowset.to-array.example"><info><title>Использование toArray()</title></info>
 
-            <title>Использование toArray()</title>
+            
 
             <programlisting language="php"><![CDATA[
 $bugs   = new Bugs();
@@ -215,8 +216,8 @@ foreach ($rowsetArray as $rowArray) {
     ++$rowCount;
     echo "\n";
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </example>
 
         <para>
@@ -226,11 +227,11 @@ foreach ($rowsetArray as $rowArray) {
             эти изменения не сохраняются в БД.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.rowset.serialize">
+    <section xml:id="zend.db.table.rowset.serialize"><info><title>Сериализация и десериализация наборов строк</title></info>
 
-        <title>Сериализация и десериализация наборов строк</title>
+        
 
         <para>
             Объекты типа <code>Zend_Db_Table_Rowset_Abstract</code> доступны для
@@ -239,9 +240,9 @@ foreach ($rowsetArray as $rowArray) {
             восстановить его позднее.
         </para>
 
-        <example id="zend.db.table.rowset.serialize.example.serialize">
+        <example xml:id="zend.db.table.rowset.serialize.example.serialize"><info><title>Сериализация набора строк</title></info>
 
-            <title>Сериализация набора строк</title>
+            
 
             <para>
                 Используйте PHP-функцию <code>serialize()</code> для
@@ -257,14 +258,14 @@ $rowset = $bugs->fetchAll();
 $serializedRowset = serialize($rowset);
 
 // Теперь вы можете записать $serializedRowset в файл и т.п.
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </example>
 
-        <example id="zend.db.table.rowset.serialize.example.unserialize">
+        <example xml:id="zend.db.table.rowset.serialize.example.unserialize"><info><title>Десериализация набора строк</title></info>
 
-            <title>Десериализация набора строк</title>
+            
 
             <para>
                 Используйте функцию <code>unserialize()</code> для
@@ -288,13 +289,13 @@ $rowsetDisconnected = unserialize($serializedRowset);
 // Теперь вы можете использовать свойства и методы объекта, но только для чтения
 $row = $rowsetDisconnected->current();
 echo $row->bug_description;
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </example>
 
-        <note>
-            <title>Почему объекты наборов строк десериализируются без соединения с БД?</title>
+        <note><info><title>Почему объекты наборов строк десериализируются без соединения с БД?</title></info>
+            
             <para>
                 Сериализованный объект является строкой, которая доступна
                 для чтения всем, кто ею обладает.
@@ -323,9 +324,9 @@ echo $row->bug_description;
             в БД.
         </para>
 
-        <example id="zend.db.table.rowset.serialize.example.set-table">
+        <example xml:id="zend.db.table.rowset.serialize.example.set-table"><info><title>Пример восстановления соединения для набора строк</title></info>
 
-            <title>Пример восстановления соединения для набора строк</title>
+            
 
             <programlisting language="php"><![CDATA[
 $rowset = unserialize($serializedRowset);
@@ -341,8 +342,8 @@ $row = $rowset->current();
 // Теперь можно производить изменения в строке и сохранять их
 $row->bug_status = 'FIXED';
 $row->save();
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </example>
 
@@ -352,11 +353,11 @@ $row->save();
             строк, содержащихся в этом наборе строк.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.rowset.extending">
+    <section xml:id="zend.db.table.rowset.extending"><info><title>Расширение класса набора строк</title></info>
 
-        <title>Расширение класса набора строк</title>
+        
 
         <para>
             Вы можете использовать альтернативный класс для наборов
@@ -366,9 +367,9 @@ $row->save();
             передаваемом в качестве аргумента конструктору объекта таблицы.
         </para>
 
-        <example id="zend.db.table.rowset.extending.example">
+        <example xml:id="zend.db.table.rowset.extending.example"><info><title>Указание своего класса набора строк</title></info>
 
-            <title>Указание своего класса набора строк</title>
+            
 
             <programlisting language="php"><![CDATA[
 class MyRowset extends Zend_Db_Table_Rowset_Abstract
@@ -386,8 +387,8 @@ class Products extends Zend_Db_Table_Abstract
 
 // Или укажите свой класс набора строк для использования
 // в конкретном экземпляре класса таблицы
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </example>
 
@@ -399,9 +400,9 @@ class Products extends Zend_Db_Table_Abstract
             всех строк в наборе.
         </para>
 
-        <example id="zend.db.table.rowset.extending.example-aggregate">
+        <example xml:id="zend.db.table.rowset.extending.example-aggregate"><info><title>Пример класса набора строк с новым методом</title></info>
 
-            <title>Пример класса набора строк с новым методом</title>
+            
 
             <programlisting language="php"><![CDATA[
 class MyBugsRowset extends Zend_Db_Table_Rowset_Abstract
@@ -428,15 +429,12 @@ class Bugs extends Zend_Db_Table_Abstract
     protected $_name = 'bugs';
     protected $_rowsetClass = 'MyBugsRowset';
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </example>
 
-    </sect2>
+    </section>
 
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

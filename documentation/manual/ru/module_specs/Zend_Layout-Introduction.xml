@@ -1,5 +1,8 @@
-<sect1 id="zend.layout.introduction">
-    <title>Введение</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.introduction"><info><title>Введение</title></info>
+    
 
     <para>
         <code>Zend_Layout</code> реализует классический паттерн "двухэтапное
@@ -46,7 +49,4 @@
                 Возможность использования без компонент MVC Zend Framework-а.
         </para></listitem>
     </itemizedlist>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

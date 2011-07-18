@@ -1,8 +1,9 @@
-<sect1 id="zend.search.lucene.charset">
-    <title>Кодировки<!--Character set.--></title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.charset"><info><title>Кодировки<!--Character set.--></title></info>
+    
 
-    <sect2 id="zend.search.lucene.charset.description">
-        <title>Поддержка UTF-8 и однобайтных наборов символов<!--UTF-8 and single-byte character sets support.--></title>
+    <section xml:id="zend.search.lucene.charset.description"><info><title>Поддержка UTF-8 и однобайтных наборов символов<!--UTF-8 and single-byte character sets support.--></title></info>
+        
 
         <para>
             Zend_Search_Lucene в своей работе использует кодировку UTF-8.
@@ -56,10 +57,10 @@
             be automatically converted into UTF-8 encoding.
 -->
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.charset.default_analyzer">
-        <title>Используемый по умолчанию анализатор текста<!--Default text analyzer--></title>
+    <section xml:id="zend.search.lucene.charset.default_analyzer"><info><title>Используемый по умолчанию анализатор текста<!--Default text analyzer--></title></info>
+        
 
         <para>
             Несмотря на это, используемый по умолчанию анализатор текста
@@ -91,10 +92,10 @@
                </para>
             </footnote>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.charset.utf_analyzer">
-        <title>Совместимый с UTF-8 анализатор текста<!--UTF-8 compatible text analyzer.--></title>
+    <section xml:id="zend.search.lucene.charset.utf_analyzer"><info><title>Совместимый с UTF-8 анализатор текста<!--UTF-8 compatible text analyzer.--></title></info>
+        
 
         <para>
             Zend_Search_Lucene также содержит совместимый с UTF-8 анализатор
@@ -195,9 +196,5 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 
 $hits = $index->find(strtolower($query));]]></programlisting>
         </para>
-    </sect2>
-</sect1>
-
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

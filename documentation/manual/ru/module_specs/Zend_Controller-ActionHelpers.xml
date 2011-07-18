@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.actionhelpers" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Помощники действий</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers"><info><title>Помощники действий</title></info>
+    
 
-    <sect2 id="zend.controller.actionhelper.introduction">
-        <title>Введение</title>
+    <section xml:id="zend.controller.actionhelper.introduction"><info><title>Введение</title></info>
+        
         <para>
             Помощники действий (action helpers) дают разработчикам возможность
             добавлять функционал во время выполнения или по требованию в любые
@@ -27,10 +26,10 @@
             (init()). Для того, чтобы лучше разобраться с этим, см. ниже раздел
             по использованию.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.actionhelper.initialization">
-        <title>Инициализация помощника</title>
+    <section xml:id="zend.controller.actionhelper.initialization"><info><title>Инициализация помощника</title></info>
+        
 
         <para>
             Помощник может быть инициализирован несколькими различными
@@ -98,10 +97,10 @@ $this->_helper->FlashMessenger('We did something in the last request');
             любых действиях. Инстанцирование производится так же, как и для
             любого другого класса PHP.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.actionhelper.broker">
-        <title>Брокер помощников</title>
+    <section xml:id="zend.controller.actionhelper.broker"><info><title>Брокер помощников</title></info>
+        
 
         <para>
             <classname>Zend_Controller_Action_HelperBroker</classname> управляет
@@ -165,8 +164,7 @@ Zend_Controller_Action_HelperBroker::addPath('./Plugins/Helpers',
         </para>
 
         <para>
-            Внутри себя брокер помощников использует <link
-                linkend="zend.loader.pluginloader">экземпляр PluginLoader</link>
+            Внутри себя брокер помощников использует <link linkend="zend.loader.pluginloader">экземпляр PluginLoader</link>
             для поддержки путей. Вы можете извлечь PluginLoader, используя
             статический метод <code>getPluginLoader()</code>, или
             добавить свой экземпляр PluginLoader, используя
@@ -232,10 +230,10 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
     Zend_Controller_Action_HelperBroker::removeHelper('redirector')
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.actionhelper.stockhelpers">
-        <title>Встроенные помощники действий</title>
+    <section xml:id="zend.controller.actionhelper.stockhelpers"><info><title>Встроенные помощники действий</title></info>
+        
 
         <para>
             Zend Framework уже содержит в себе набор помощников действий:
@@ -251,31 +249,31 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
             объекта вида в контроллерах и рендеринга видов.
         </para>
 
-        <xi:include href="Zend_Controller-ActionHelpers-ActionStack.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-ActionHelpers-ActionStack.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-ActionStack.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-ActionHelpers-ActionStack.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_Controller-ActionHelpers-AutoComplete.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-ActionHelpers-AutoComplete.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-AutoComplete.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-ActionHelpers-AutoComplete.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_Controller-ActionHelpers-ContextSwitch.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-ActionHelpers-ContextSwitch.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-ContextSwitch.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-ActionHelpers-ContextSwitch.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_Controller-ActionHelpers-FlashMessenger.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-ActionHelpers-FlashMessenger.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-FlashMessenger.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-ActionHelpers-FlashMessenger.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_Controller-ActionHelpers-Json.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-ActionHelpers-Json.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-Json.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-ActionHelpers-Json.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_Controller-ActionHelpers-Redirector.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-ActionHelpers-Redirector.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-Redirector.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-ActionHelpers-Redirector.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_Controller-ActionHelpers-ViewRenderer.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-ActionHelpers-ViewRenderer.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-ViewRenderer.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-ActionHelpers-ViewRenderer.xml"/></xi:fallback>
         </xi:include>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.actionhelper.writingyourown">
-        <title>Написание собственных помощников</title>
+    <section xml:id="zend.controller.actionhelper.writingyourown"><info><title>Написание собственных помощников</title></info>
+        
 
         <para>
             Помощники действий наследуют от абстрактного класса
@@ -371,8 +369,5 @@ $this->_helper->redirector('item', 'view', 'blog', array('id' => 42));
             Создав собственный класс помощника, вы можете предоставить доступ к
             нему, как описано в разделах выше.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

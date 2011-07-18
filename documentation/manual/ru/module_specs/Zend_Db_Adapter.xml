@@ -1,6 +1,7 @@
-<sect1 id="zend.db.adapter">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.adapter"><info><title>Zend_Db_Adapter</title></info>
 
-    <title>Zend_Db_Adapter</title>
+    
 
     <para>
         Zend_Db и его родственные классы предоставляют простой интерфейс к базам
@@ -19,7 +20,7 @@
 
     <para>
         Интерфейс класса адаптера подобен интерфейсу расширения
-        <ulink url="http://www.php.net/pdo">PHP Data Objects (PDO)</ulink>.
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/pdo">PHP Data Objects (PDO)</link>.
         Zend_Db предоставляет классы адаптеров к драйверам PDO для следующих
         популярных СУРБД:
     </para>
@@ -28,32 +29,32 @@
         <listitem>
             <para>
                 IBM DB2 и Informix Dynamic Server (IDS), с использованием
-                расширения <ulink url="http://www.php.net/pdo-ibm">pdo_ibm</ulink>
+                расширения <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/pdo-ibm">pdo_ibm</link>
             </para>
         </listitem>
         <listitem>
             <para>
-                MySQL, с использованием расширения <ulink url="http://www.php.net/pdo-mysql">pdo_mysql</ulink>
+                MySQL, с использованием расширения <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/pdo-mysql">pdo_mysql</link>
             </para>
         </listitem>
         <listitem>
             <para>
-                Microsoft SQL Server, с использованием расширения <ulink url="http://www.php.net/pdo-mssql">pdo_mssql</ulink>
+                Microsoft SQL Server, с использованием расширения <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/pdo-mssql">pdo_mssql</link>
             </para>
         </listitem>
         <listitem>
             <para>
-                Oracle, с использованием расширения <ulink url="http://www.php.net/pdo-oci">pdo_oci</ulink>
+                Oracle, с использованием расширения <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/pdo-oci">pdo_oci</link>
             </para>
         </listitem>
         <listitem>
             <para>
-                PostgreSQL, с использованием расширения <ulink url="http://www.php.net/pdo-pgsql">pdo_pgsql</ulink>
+                PostgreSQL, с использованием расширения <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/pdo-pgsql">pdo_pgsql</link>
             </para>
         </listitem>
         <listitem>
             <para>
-                SQLite, с использованием расширения <ulink url="http://www.php.net/pdo-sqlite">pdo_sqlite</ulink>
+                SQLite, с использованием расширения <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/pdo-sqlite">pdo_sqlite</link>
             </para>
         </listitem>
     </itemizedlist>
@@ -65,22 +66,22 @@
     <itemizedlist>
         <listitem>
             <para>
-                MySQL, с использованием расширения <ulink url="http://www.php.net/mysqli">mysqli</ulink>
+                MySQL, с использованием расширения <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/mysqli">mysqli</link>
             </para>
         </listitem>
         <listitem>
             <para>
-                Oracle, с использованием расширения <ulink url="http://www.php.net/oci8">oci8</ulink>
+                Oracle, с использованием расширения <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/oci8">oci8</link>
             </para>
         </listitem>
         <listitem>
             <para>
-                IBM DB2, с использованием расширения <ulink url="http://www.php.net/ibm_db2">ibm_db2</ulink>
+                IBM DB2, с использованием расширения <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/ibm_db2">ibm_db2</link>
             </para>
         </listitem>
         <listitem>
             <para>
-                Firebird/Interbase, с использованием расширения <ulink url="http://www.php.net/ibase">php_interbase</ulink>
+                Firebird/Interbase, с использованием расширения <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/ibase">php_interbase</link>
             </para>
         </listitem>
     </itemizedlist>
@@ -95,9 +96,9 @@
         </para>
     </note>
 
-    <sect2 id="zend.db.adapter.connecting">
+    <section xml:id="zend.db.adapter.connecting"><info><title>Соединение с БД с использованием адаптера</title></info>
 
-        <title>Соединение с БД с использованием адаптера</title>
+        
 
         <para>
             Этот раздел описывает, как создавать экземпляр адаптера БД. Это
@@ -105,9 +106,9 @@
             приложения PHP.
         </para>
 
-        <sect3 id="zend.db.adapter.connecting.constructor">
+        <section xml:id="zend.db.adapter.connecting.constructor"><info><title>Использование конструктора адаптера Zend_Db</title></info>
 
-            <title>Использование конструктора адаптера Zend_Db</title>
+            
 
             <para>
                 Вы можете создавать экземпляр адаптера с помощью его
@@ -116,8 +117,8 @@
                 для описания соединения.
             </para>
 
-            <example id="zend.db.adapter.connecting.constructor.example">
-                <title>Использование конструктора адаптера</title>
+            <example xml:id="zend.db.adapter.connecting.constructor.example"><info><title>Использование конструктора адаптера</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $db = new Zend_Db_Adapter_Pdo_Mysql(array(
     'host'     => '127.0.0.1',
@@ -125,15 +126,15 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
     'password' => 'xxxxxxxx',
     'dbname'   => 'test'
 ));
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.connecting.factory">
+        <section xml:id="zend.db.adapter.connecting.factory"><info><title>Использование фабрики Zend_Db</title></info>
 
-            <title>Использование фабрики Zend_Db</title>
+            
 
             <para>
                 Вместо непосредственного использования конструктора
@@ -151,8 +152,8 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
                 конструктору адаптера.
             </para>
 
-            <example id="zend.db.adapter.connecting.factory.example">
-                <title>Использование метода-фабрики адаптеров</title>
+            <example xml:id="zend.db.adapter.connecting.factory.example"><info><title>Использование метода-фабрики адаптеров</title></info>
+                
                 <programlisting language="php"><![CDATA[
 // Нам не нужно использовать следующее предложение, поскольку
 // файл Zend_Db_Adapter_Pdo_Mysql будет загружен через
@@ -168,8 +169,8 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
     'password' => 'xxxxxxxx',
     'dbname'   => 'test'
 ));
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </example>
 
             <para>
@@ -181,8 +182,8 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
                 'adapterNamespace' в массиве параметров.
             </para>
 
-            <example id="zend.db.adapter.connecting.factory.example2">
-                <title>Использование метода-фабрики для пользовательского класса адаптера</title>
+            <example xml:id="zend.db.adapter.connecting.factory.example2"><info><title>Использование метода-фабрики для пользовательского класса адаптера</title></info>
+                
                 <programlisting language="php"><![CDATA[
 // Нам не нужно загружать файл с классом адаптера,
 // поскольку он будет загружен через метод-фабрику Zend_Db
@@ -196,15 +197,15 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
     'dbname'           => 'test',
     'adapterNamespace' => 'MyProject_Db_Adapter'
 ));
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.connecting.factory-config">
+        <section xml:id="zend.db.adapter.connecting.factory-config"><info><title>Использование Zend_Config с фабрикой Zend_Db</title></info>
 
-            <title>Использование Zend_Config с фабрикой Zend_Db</title>
+            
 
             <para>
                 Опционально вы можете заменить оба аргумента метода
@@ -221,8 +222,8 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
                 параметрам адаптера.
             </para>
 
-            <example id="zend.db.adapter.connecting.factory.example1">
-                <title>Использование метода-фабрики адаптеров с объектом Zend_Config</title>
+            <example xml:id="zend.db.adapter.connecting.factory.example1"><info><title>Использование метода-фабрики адаптеров с объектом Zend_Config</title></info>
+                
                 <para>
                     В примере ниже объект Zend_Config создан из массива. Вы
                     можете также загружать данные из внешнего файла с помощью
@@ -244,8 +245,8 @@ $config = new Zend_Config(
 );
 
 $db = Zend_Db::factory($config->database);
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </example>
 
             <para>
@@ -257,11 +258,11 @@ $db = Zend_Db::factory($config->database);
                 параметры, и второй аргумент игнорируется.
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.connecting.parameters">
+        <section xml:id="zend.db.adapter.connecting.parameters"><info><title>Параметры адаптера</title></info>
 
-            <title>Параметры адаптера</title>
+            
 
             <para>
                 Список ниже описывает общие параметры, которые распознаются
@@ -335,8 +336,8 @@ $db = Zend_Db::factory($config->database);
                 </listitem>
             </itemizedlist>
 
-            <example id="zend.db.adapter.connecting.parameters.example1">
-                <title>Передача фабрике опции перевода регистра (case-folding)</title>
+            <example xml:id="zend.db.adapter.connecting.parameters.example1"><info><title>Передача фабрике опции перевода регистра (case-folding)</title></info>
+                
                 <para>
                     Вы можете установить эту опцию посредством константы
                     <code>Zend_Db::CASE_FOLDING</code>. Она соответствует
@@ -361,12 +362,12 @@ $params = array(
 );
 
 $db = Zend_Db::factory('Db2', $params);
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </example>
 
-            <example id="zend.db.adapter.connecting.parameters.example2">
-                <title>Передача фабрике опции автоматического заключения в кавычки</title>
+            <example xml:id="zend.db.adapter.connecting.parameters.example2"><info><title>Передача фабрике опции автоматического заключения в кавычки</title></info>
+                
                 <para>
                     Вы можете задавать эту опцию через константу
                     <code>Zend_Db::AUTO_QUOTE_IDENTIFIERS</code>. Если ее
@@ -395,12 +396,12 @@ $params = array(
 );
 
 $db = Zend_Db::factory('Pdo_Mysql', $params);
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </example>
 
-            <example id="zend.db.adapter.connecting.parameters.example3">
-                <title>Передача фабрике опций драйвера PDO</title>
+            <example xml:id="zend.db.adapter.connecting.parameters.example3"><info><title>Передача фабрике опций драйвера PDO</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $pdoParams = array(
     PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
@@ -418,14 +419,14 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
 
 echo $db->getConnection()
         ->getAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY);
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.connecting.getconnection">
-            <title>Управление отложенными соединениями</title>
+        <section xml:id="zend.db.adapter.connecting.getconnection"><info><title>Управление отложенными соединениями</title></info>
+            
 
             <para>
                 Создание экземпляра класса адаптера не приведет к немедленному
@@ -460,8 +461,8 @@ echo $db->getConnection()
                 производится первый запрос к БД.
             </para>
 
-            <example id="zend.db.adapter.connecting.getconnection.example">
-                <title>Обработка исключений при соединении</title>
+            <example xml:id="zend.db.adapter.connecting.getconnection.example"><info><title>Обработка исключений при соединении</title></info>
+                
                 <programlisting language="php"><![CDATA[
 try {
     $db = Zend_Db::factory('Pdo_Mysql', $parameters);
@@ -471,17 +472,17 @@ try {
 } catch (Zend_Exception $e) {
     // возможно, попытка загрузки требуемого класса адаптера потерпела неудачу
 }
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </example>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.example-database">
+    <section xml:id="zend.db.adapter.example-database"><info><title>Пример базы данных</title></info>
 
-        <title>Пример базы данных</title>
+        
 
         <para>
             В документации к классам Zend_Db мы использовали набор простых
@@ -555,8 +556,8 @@ CREATE TABLE bugs_products (
   product_id        INTEGER NOT NULL REFERENCES products,
   PRIMARY KEY       (bug_id, product_id)
 );
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Также обратите внимание, что таблица <code>bugs</code> содержит
@@ -571,24 +572,23 @@ CREATE TABLE bugs_products (
         </para>
 
         <para>
-            <inlinegraphic width="387" scale="100" align="center" valign="middle"
-                fileref="figures/zend.db.adapter.example-database.png" format="PNG" />
+            <inlinemediaobject><imageobject><imagedata width="387" scale="100" align="center" valign="middle" fileref="figures/zend.db.adapter.example-database.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.select">
+    <section xml:id="zend.db.adapter.select"><info><title>Чтение результатов запроса</title></info>
 
-        <title>Чтение результатов запроса</title>
+        
 
         <para>
             Этот раздел описывает методы класса адаптера, с помощью которых вы
             можете производить запросы SELECT и извлекать их результаты.
         </para>
 
-        <sect3 id="zend.db.adapter.select.fetchall">
+        <section xml:id="zend.db.adapter.select.fetchall"><info><title>Извлечение полного набора результатов</title></info>
 
-            <title>Извлечение полного набора результатов</title>
+            
 
             <para>
                 Вы можете запустить запрос SELECT и извлечь его результаты за
@@ -609,21 +609,21 @@ CREATE TABLE bugs_products (
                 в операторе SQL.
             </para>
 
-            <example id="zend.db.adapter.select.fetchall.example">
-                <title>Использование fetchAll()</title>
+            <example xml:id="zend.db.adapter.select.fetchall.example"><info><title>Использование fetchAll()</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE bug_id = ?';
 
 $result = $db->fetchAll($sql, 2);
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.select.fetch-mode">
+        <section xml:id="zend.db.adapter.select.fetch-mode"><info><title>Изменение режима извлечения</title></info>
 
-            <title>Изменение режима извлечения</title>
+            
 
             <para>
                 По умолчанию <code>fetchAll()</code> возвращает массив строк,
@@ -664,7 +664,7 @@ $result = $db->fetchAll($sql, 2);
                         задать регистр для этих строк, используя опцию.
                         <code>Zend_Db::CASE_FOLDING</code>. Задавайте его во
                         время инстанцирования адаптера. См.
-                        <xref linkend="zend.db.adapter.connecting.parameters.example1" />.
+                        <xref linkend="zend.db.adapter.connecting.parameters.example1"/>.
                     </para>
                 </listitem>
                 <listitem>
@@ -704,8 +704,8 @@ $result = $db->fetchAll($sql, 2);
                 </listitem>
             </itemizedlist>
 
-            <example id="zend.db.adapter.select.fetch-mode.example">
-                <title>Использование setFetchMode()</title>
+            <example xml:id="zend.db.adapter.select.fetch-mode.example"><info><title>Использование setFetchMode()</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
@@ -713,15 +713,15 @@ $result = $db->fetchAll('SELECT * FROM bugs WHERE bug_id = ?', 2);
 
 // $result является массивом объектов
 echo $result[0]->bug_description;
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.select.fetchassoc">
+        <section xml:id="zend.db.adapter.select.fetchassoc"><info><title>Извлечение результатов выборки в виде ассоциативного массива</title></info>
 
-            <title>Извлечение результатов выборки в виде ассоциативного массива</title>
+            
 
             <para>
                 Метод <code>fetchAssoc()</code> возвращает данные в массиве
@@ -729,8 +729,8 @@ echo $result[0]->bug_description;
                 установили для режима извлечения.
             </para>
 
-            <example id="zend.db.adapter.select.fetchassoc.example">
-                <title>Использование fetchAssoc()</title>
+            <example xml:id="zend.db.adapter.select.fetchassoc.example"><info><title>Использование fetchAssoc()</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
@@ -739,15 +739,15 @@ $result = $db->fetchAssoc('SELECT * FROM bugs WHERE bug_id = ?', 2);
 // $result является массивом ассоциативных массивов, независимо
 // от установленного режима извлечения
 echo $result[0]['bug_description'];
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.select.fetchcol">
+        <section xml:id="zend.db.adapter.select.fetchcol"><info><title>Извлечение единственного столбца из результатов выборки</title></info>
 
-            <title>Извлечение единственного столбца из результатов выборки</title>
+            
 
             <para>
                 Метод <code>fetchCol()</code> возвращает данные в массиве
@@ -756,11 +756,11 @@ echo $result[0]['bug_description'];
                 столбец из возвращенных запросом. Все остальные столбцы,
                 возвращенные запросом, не учитываются. Если вам нужно извлечь
                 столбец, отличный от первого, то см.
-                <xref linkend="zend.db.statement.fetching.fetchcolumn" />.
+                <xref linkend="zend.db.statement.fetching.fetchcolumn"/>.
             </para>
 
-            <example id="zend.db.adapter.select.fetchcol.example">
-                <title>Использование fetchCol()</title>
+            <example xml:id="zend.db.adapter.select.fetchcol.example"><info><title>Использование fetchCol()</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
@@ -769,15 +769,15 @@ $result = $db->fetchCol(
 
 // содержит bug_description; bug_id не возвращается
 echo $result[0];
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.select.fetchpairs">
+        <section xml:id="zend.db.adapter.select.fetchpairs"><info><title>Извлечение пар ключ-значение из результатов выборки</title></info>
 
-            <title>Извлечение пар ключ-значение из результатов выборки</title>
+            
 
             <para>
                 Метод <code>fetchPairs()</code> возвращает данные в массиве пар
@@ -795,22 +795,22 @@ echo $result[0];
                 массиве будут перезаписываться.
             </para>
 
-            <example id="zend.db.adapter.select.fetchpairs.example">
-                <title>Использование fetchPairs()</title>
+            <example xml:id="zend.db.adapter.select.fetchpairs.example"><info><title>Использование fetchPairs()</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
 $result = $db->fetchPairs('SELECT bug_id, bug_status FROM bugs');
 
 echo $result[2];
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </example>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.select.fetchrow">
+        <section xml:id="zend.db.adapter.select.fetchrow"><info><title>Извлечение единственной строки из результатов выборки</title></info>
 
-            <title>Извлечение единственной строки из результатов выборки</title>
+            
 
             <para>
                 Метод <code>fetchRow()</code> возвращает данные с использованием
@@ -818,8 +818,8 @@ echo $result[2];
                 из результатов выборки.
             </para>
 
-            <example id="zend.db.adapter.select.fetchrow.example">
-                <title>Использование fetchRow()</title>
+            <example xml:id="zend.db.adapter.select.fetchrow.example"><info><title>Использование fetchRow()</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
@@ -827,14 +827,14 @@ $result = $db->fetchRow('SELECT * FROM bugs WHERE bug_id = 2');
 
 // обратите внимание, что $result - единственный объект, а не массив объектов
 echo $result->bug_description;
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </example>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.select.fetchone">
+        <section xml:id="zend.db.adapter.select.fetchone"><info><title>Извлечение единственного скалярного значения из результатов выборки</title></info>
 
-            <title>Извлечение единственного скалярного значения из результатов выборки</title>
+            
 
             <para>
                 Метод <code>fetchOne()</code> является как бы комбинацией
@@ -844,23 +844,23 @@ echo $result->bug_description;
                 значение, а не массив или объект.
             </para>
 
-            <example id="zend.db.adapter.select.fetchone.example">
-                <title>Использование fetchOne()</title>
+            <example xml:id="zend.db.adapter.select.fetchone.example"><info><title>Использование fetchOne()</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $result = $db->fetchOne('SELECT bug_status FROM bugs WHERE bug_id = 2');
 
 // это единственное строковое значение
 echo $result;
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </example>
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.write">
+    <section xml:id="zend.db.adapter.write"><info><title>Изменение данных в БД</title></info>
 
-        <title>Изменение данных в БД</title>
+        
 
         <para>
             Вы можете использовать класс адаптера для добавления новых данных
@@ -868,9 +868,9 @@ echo $result;
             описываются методы для произведения этих операций.
         </para>
 
-        <sect3 id="zend.db.adapter.write.insert">
+        <section xml:id="zend.db.adapter.write.insert"><info><title>Добавление данных</title></info>
 
-            <title>Добавление данных</title>
+            
 
             <para>
                 Вы можете добавлять новые строки в таблицы в своей базе данных,
@@ -880,8 +880,8 @@ echo $result;
                 значениями.
             </para>
 
-            <example id="zend.db.adapter.write.insert.example">
-                <title>Добавление в таблицу</title>
+            <example xml:id="zend.db.adapter.write.insert.example"><info><title>Добавление в таблицу</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $data = array(
     'created_on'      => '2007-03-22',
@@ -890,8 +890,8 @@ $data = array(
 );
 
 $db->insert('bugs', $data);
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </example>
 
             <para>
@@ -920,8 +920,8 @@ $db->insert('bugs', $data);
                 строки.
             </para>
 
-            <example id="zend.db.adapter.write.insert.example2">
-                <title>Добавление выражений в таблицу</title>
+            <example xml:id="zend.db.adapter.write.insert.example2"><info><title>Добавление выражений в таблицу</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $data = array(
     'created_on'      => new Zend_Db_Expr('CURDATE()'),
@@ -930,15 +930,15 @@ $data = array(
 );
 
 $db->insert('bugs', $data);
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.write.lastinsertid">
+        <section xml:id="zend.db.adapter.write.lastinsertid"><info><title>Получение сгенерированного значения</title></info>
 
-            <title>Получение сгенерированного значения</title>
+            
 
             <para>
                 Некоторые СУРБД поддерживают автоинкремент первичных ключей.
@@ -959,15 +959,15 @@ $db->insert('bugs', $data);
                 сгенерированное в области видимости текущего соединения с БД.
             </para>
 
-            <example id="zend.db.adapter.write.lastinsertid.example-1">
-                <title>Использование lastInsertId() для автоинкрементного ключа</title>
+            <example xml:id="zend.db.adapter.write.lastinsertid.example-1"><info><title>Использование lastInsertId() для автоинкрементного ключа</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $db->insert('bugs', $data);
 
 // возвращает последнее значение, сгенерированное автоинкрементным столбцом
 $id = $db->lastInsertId();
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </example>
 
             <para>
@@ -987,8 +987,8 @@ $id = $db->lastInsertId();
                 "bugs_bug_id_seq".
             </para>
 
-            <example id="zend.db.adapter.write.lastinsertid.example-2">
-                <title>Использование lastInsertId() для последовательности</title>
+            <example xml:id="zend.db.adapter.write.lastinsertid.example-2"><info><title>Использование lastInsertId() для последовательности</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $db->insert('bugs', $data);
 
@@ -999,8 +999,8 @@ $id = $db->lastInsertId('bugs', 'bug_id');
 // альтернативно, возвращает последнее значение, сгенерированное
 // последовательностью 'bugs_seq'.
 $id = $db->lastInsertId('bugs');
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </example>
 
             <para>
@@ -1011,16 +1011,16 @@ $id = $db->lastInsertId('bugs');
                 последовательности
             </para>
 
-            <example id="zend.db.adapter.write.lastinsertid.example-3">
-                <title>Использование lastSequenceId()</title>
+            <example xml:id="zend.db.adapter.write.lastinsertid.example-3"><info><title>Использование lastSequenceId()</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $db->insert('bugs', $data);
 
 // возвращает последнее значение, сгенерированное
 // последовательностью 'bugs_id_gen'.
 $id = $db->lastSequenceId('bugs_id_gen');
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </example>
 
             <para>
@@ -1032,8 +1032,8 @@ $id = $db->lastSequenceId('bugs_id_gen');
                 lastSequenceId() всегда будет возвращать <constant>NULL</constant>.
             </para>
 
-            <note>
-                <title>Почему не используется "SELECT MAX(id) FROM table"?</title>
+            <note><info><title>Почему не используется "SELECT MAX(id) FROM table"?</title></info>
+                
                 <para>
                     Иногда этот запрос возвращает последнее значение первичного
                     ключа, добавленное в таблицу. Однако этот способ небезопасен
@@ -1073,10 +1073,10 @@ $id = $db->lastSequenceId('bugs_id_gen');
                 </para>
             </note>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.write.update">
-            <title>Обновление данных</title>
+        <section xml:id="zend.db.adapter.write.update"><info><title>Обновление данных</title></info>
+            
 
             <para>
                 Вы можете обновлять строки в таблице БД, используя метод
@@ -1090,7 +1090,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
                 Значения в массиве данных интерпретируются как строковые
                 константы. Информацию об использовании выражений SQL в массиве
                 данных см. в разделе
-                <xref linkend="zend.db.adapter.write.insert" />.
+                <xref linkend="zend.db.adapter.write.insert"/>.
             </para>
 
             <para>
@@ -1101,7 +1101,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
                 ответственны за то, чтобы все динамическое содержимое было
                 безопасным образом включено в эту строку. Информацию о методах,
                 которые помогут вам в этом, см. в разделе
-                <xref linkend="zend.db.adapter.quoting" />.
+                <xref linkend="zend.db.adapter.quoting"/>.
             </para>
 
             <para>
@@ -1109,8 +1109,8 @@ $id = $db->lastSequenceId('bugs_id_gen');
                 операции обновления.
             </para>
 
-            <example id="zend.db.adapter.write.update.example">
-                <title>Обновление строк</title>
+            <example xml:id="zend.db.adapter.write.update.example"><info><title>Обновление строк</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $data = array(
     'updated_on'      => '2007-03-23',
@@ -1118,8 +1118,8 @@ $data = array(
 );
 
 $n = $db->update('bugs', $data, 'bug_id = 2');
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </example>
 
             <para>
@@ -1133,8 +1133,8 @@ $n = $db->update('bugs', $data, 'bug_id = 2');
                 операторами <code>AND</code>.
             </para>
 
-            <example id="zend.db.adapter.write.update.example-array">
-                <title>Обновление строк с использованием массива выражений</title>
+            <example xml:id="zend.db.adapter.write.update.example-array"><info><title>Обновление строк с использованием массива выражений</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $data = array(
     'updated_on'      => '2007-03-23',
@@ -1149,14 +1149,14 @@ $n = $db->update('bugs', $data, $where);
 // Результирующий SQL:
 //  UPDATE "bugs" SET "update_on" = '2007-03-23', "bug_status" = 'FIXED'
 //  WHERE ("reported_by" = 'goofy') AND ("bug_status" = 'OPEN')
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.write.delete">
-            <title>Удаление данных</title>
+        <section xml:id="zend.db.adapter.write.delete"><info><title>Удаление данных</title></info>
+            
             <para>
                 Вы можете удалять строки из таблицы БД, используя метод
                 <code>delete()</code>. Этот метод принимает два аргумента,
@@ -1170,7 +1170,7 @@ $n = $db->update('bugs', $data, $where);
                 заключаются в кавычки и не экранируются. Вы ответственны за то,
                 чтобы весь динамический контент был безопасным образом включен в
                 эту строку. Информацию о методах, которые помогут вам в этом,
-                см. в разделе <xref linkend="zend.db.adapter.quoting" />.
+                см. в разделе <xref linkend="zend.db.adapter.quoting"/>.
             </para>
 
             <para>
@@ -1178,12 +1178,12 @@ $n = $db->update('bugs', $data, $where);
                 операции удаления.
             </para>
 
-            <example id="zend.db.adapter.write.delete.example">
-                <title>Удаление строк</title>
+            <example xml:id="zend.db.adapter.write.delete.example"><info><title>Удаление строк</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $n = $db->delete('bugs', 'bug_id = 3');
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </example>
 
             <para>
@@ -1197,13 +1197,13 @@ $n = $db->delete('bugs', 'bug_id = 3');
                 операторами <code>AND</code>.
             </para>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.quoting">
+    <section xml:id="zend.db.adapter.quoting"><info><title>Заключение в кавычки значений и идентификаторов</title></info>
 
-        <title>Заключение в кавычки значений и идентификаторов</title>
+        
 
         <para>
             При построении запросов SQL часто требуется включить значения
@@ -1218,8 +1218,8 @@ $sql = "SELECT * FROM bugs WHERE reported_by = '$name'";
 
 echo $sql;
 // SELECT * FROM bugs WHERE reported_by = 'O'Reilly'
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </para>
 
         <para>
@@ -1231,7 +1231,7 @@ echo $sql;
             предназначены - например, возвращение данных, на чтение которых лицо
             не имеет прав. Это серьезное и широко распространенное нарушение
             безопасности приложения, известное под названием "SQL-инъекции"
-            (см. <ulink url="http://ru.wikipedia.org/wiki/%D0%98%D0%BD%D1%8A%D0%B5%D0%BA%D1%86%D0%B8%D1%8F_SQL">http://ru.wikipedia.org/wiki/Инъекция_SQL</ulink>).
+            (см. <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ru.wikipedia.org/wiki/%D0%98%D0%BD%D1%8A%D0%B5%D0%BA%D1%86%D0%B8%D1%8F_SQL">http://ru.wikipedia.org/wiki/Инъекция_SQL</link>).
         </para>
 
         <para>
@@ -1244,9 +1244,9 @@ echo $sql;
             содержащие специальные символы.
         </para>
 
-        <sect3 id="zend.db.adapter.quoting.quote">
+        <section xml:id="zend.db.adapter.quoting.quote"><info><title>Использование <code>quote()</code></title></info>
 
-            <title>Использование <code>quote()</code></title>
+            
 
             <para>
                 Метод <code>quote()</code> принимает единственный аргумент -
@@ -1257,8 +1257,8 @@ echo $sql;
                 в SQL является одинарная кавычка (<code>'</code>).
             </para>
 
-            <example id="zend.db.adapter.quoting.quote.example">
-                <title>Использование quote()</title>
+            <example xml:id="zend.db.adapter.quoting.quote.example"><info><title>Использование quote()</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $name = $db->quote("O'Reilly");
 echo $name;
@@ -1268,8 +1268,8 @@ $sql = "SELECT * FROM bugs WHERE reported_by = $name";
 
 echo $sql;
 // SELECT * FROM bugs WHERE reported_by = 'O\'Reilly'
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </example>
 
             <para>
@@ -1277,7 +1277,7 @@ echo $sql;
                 значение включает в себя окружающие кавычки. Этим
                 метод отличается от некоторых функций, которые экранируют
                 специальные символы, но не добавляют кавычки, например,
-                <ulink url="http://www.php.net/mysqli_real_escape_string">mysql_real_escape_string()</ulink>.
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/mysqli_real_escape_string">mysql_real_escape_string()</link>.
             </para>
 
             <para>
@@ -1292,8 +1292,8 @@ echo $sql;
 
                 <programlisting language="php"><![CDATA[
 SELECT * FROM atable WHERE intColumn = '123'
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </para>
 
             <para>
@@ -1302,14 +1302,14 @@ SELECT * FROM atable WHERE intColumn = '123'
                 тех типов данных SQL, которые вы укажете.
             </para>
 
-            <example id="zend.db.adapter.quoting.quote.example-2">
-                <title>Использование quote() с указанием типа SQL</title>
+            <example xml:id="zend.db.adapter.quoting.quote.example-2"><info><title>Использование quote() с указанием типа SQL</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $value = '1234';
 $sql = 'SELECT * FROM atable WHERE intColumn = '
      . $db->quote($value, 'INTEGER');
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </example>
 
             <para>
@@ -1327,11 +1327,11 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
                 ключевые столбцы таблицы.
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.quoting.quote-into">
+        <section xml:id="zend.db.adapter.quoting.quote-into"><info><title>Использование <code>quoteInto()</code></title></info>
 
-            <title>Использование <code>quoteInto()</code></title>
+            
 
             <para>
                 Наиболее типичным случаем использования операции заключения в
@@ -1355,15 +1355,15 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
                 запроса анализируется сервером СУРБД.
             </para>
 
-            <example id="zend.db.adapter.quoting.quote-into.example">
-                <title>Использование quoteInto()</title>
+            <example xml:id="zend.db.adapter.quoting.quote-into.example"><info><title>Использование quoteInto()</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $sql = $db->quoteInto("SELECT * FROM bugs WHERE reported_by = ?", "O'Reilly");
 
 echo $sql;
 // SELECT * FROM bugs WHERE reported_by = 'O\'Reilly'
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </example>
 
             <para>
@@ -1372,21 +1372,21 @@ echo $sql;
                 типы данных не заключаются в кавычки, остальные заключаются.
             </para>
 
-            <example id="zend.db.adapter.quoting.quote-into.example-2">
-                <title>Использование quoteInto() с указанием типа SQL</title>
+            <example xml:id="zend.db.adapter.quoting.quote-into.example-2"><info><title>Использование quoteInto() с указанием типа SQL</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $sql = $db->quoteInto("SELECT * FROM bugs WHERE bug_id = ?", '1234', 'INTEGER');
 
 echo $sql;
 // SELECT * FROM bugs WHERE reported_by = 1234
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </example>
 
-        </sect3>
-        <sect3 id="zend.db.adapter.quoting.quote-identifier">
+        </section>
+        <section xml:id="zend.db.adapter.quoting.quote-identifier"><info><title>Использование <code>quoteIdentifier()</code></title></info>
 
-            <title>Использование <code>quoteIdentifier()</code></title>
+            
 
             <para>
                 Значения являются не единственной частью синтаксиса SQL, которая
@@ -1427,8 +1427,8 @@ echo $sql;
                 символы в строковом аргументе.
             </para>
 
-            <example id="zend.db.adapter.quoting.quote-identifier.example">
-                <title>Использование quoteIdentifier()</title>
+            <example xml:id="zend.db.adapter.quoting.quote-identifier.example"><info><title>Использование quoteIdentifier()</title></info>
+                
                 <programlisting language="php"><![CDATA[
 // мы можем иметь имя таблицы,
 // которое является зарезервированным в SQL словом
@@ -1438,8 +1438,8 @@ $sql = "SELECT * FROM $tableName";
 
 echo $sql
 // SELECT * FROM "order"
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </example>
 
             <para>
@@ -1456,16 +1456,16 @@ echo $sql
                 ограничители. Вы можете изменить это поведение с помощью опции
                 <code>Zend_Db::AUTO_QUOTE_IDENTIFIERS</code>. Указывайте ее при
                 инстанцировании объекта адаптера. См.
-                <xref linkend="zend.db.adapter.connecting.parameters.example2" />.
+                <xref linkend="zend.db.adapter.connecting.parameters.example2"/>.
             </para>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.transactions">
+    <section xml:id="zend.db.adapter.transactions"><info><title>Управление транзакциями</title></info>
 
-        <title>Управление транзакциями</title>
+        
 
         <para>
             Базы данных описывают транзакции как логические единицы работы,
@@ -1511,8 +1511,8 @@ echo $sql
             фиксации до того, как вы не вызовете <code>beginTransaction()</code> снова.
         </para>
 
-        <example id="zend.db.adapter.transactions.example">
-            <title>Управление транзакциями для обеспечения согласованности данных</title>
+        <example xml:id="zend.db.adapter.transactions.example"><info><title>Управление транзакциями для обеспечения согласованности данных</title></info>
+            
             <programlisting language="php"><![CDATA[
 // Старт транзакции явным образом
 $db->beginTransaction();
@@ -1535,15 +1535,15 @@ try {
     $db->rollBack();
     echo $e->getMessage();
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.list-describe">
+    <section xml:id="zend.db.adapter.list-describe"><info><title>Листинг и описание таблиц</title></info>
 
-        <title>Листинг и описание таблиц</title>
+        
 
         <para>
             Метод <code>listTables()</code> возвращает массив имен всех
@@ -1563,8 +1563,8 @@ try {
             ассоциативными массивами со следующими ключами и значениями:
         </para>
 
-        <table frame="all" cellpadding="5" id="zend.db.adapter.list-describe.metadata">
-            <title>Поля метаданных, возвращаемых методом describeTable()</title>
+        <table frame="all" cellpadding="5" xml:id="zend.db.adapter.list-describe.metadata"><info><title>Поля метаданных, возвращаемых методом describeTable()</title></info>
+            
             <tgroup cols="3" align="left" colsep="1" rowsep="1">
                 <thead>
                     <row>
@@ -1654,8 +1654,8 @@ try {
             возвращает пустой массив.
         </para>
 
-        <note>
-            <title>Как поле метаданных IDENTITY соотносится с типом СУРБД</title>
+        <note><info><title>Как поле метаданных IDENTITY соотносится с типом СУРБД</title></info>
+            
             <para>
                 Поле метаданных IDENTITY было выбрано в качестве
                 "идиоматического" термина для представления связи с
@@ -1686,11 +1686,11 @@ try {
             </itemizedlist>
         </note>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.closing">
+    <section xml:id="zend.db.adapter.closing"><info><title>Закрытие соединения</title></info>
 
-        <title>Закрытие соединения</title>
+        
 
         <para>
             Обычно нет необходимости в том, чтобы закрывать соединение с БД.
@@ -1708,16 +1708,16 @@ try {
             в основе соединения с БД.
         </para>
 
-        <example id="zend.db.adapter.closing.example">
-            <title>Закрытие соединения с БД</title>
+        <example xml:id="zend.db.adapter.closing.example"><info><title>Закрытие соединения с БД</title></info>
+            
             <programlisting language="php"><![CDATA[
 $db->closeConnection();
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </example>
 
-        <note>
-            <title>Поддерживает ли Zend_Db постоянные соединения?</title>
+        <note><info><title>Поддерживает ли Zend_Db постоянные соединения?</title></info>
+            
             <para>
                 Использование постоянных соединений не поддерживается или
                 рекомендуется в Zend_Db.
@@ -1740,11 +1740,11 @@ $db->closeConnection();
             </para>
         </note>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.other-statements">
+    <section xml:id="zend.db.adapter.other-statements"><info><title>Запуск других операторов БД</title></info>
 
-        <title>Запуск других операторов БД</title>
+        
 
         <para>
             Может потребоваться получить прямой доступ к
@@ -1760,7 +1760,7 @@ $db->closeConnection();
             данных несовместим с подготовленными операторами. Операторы DDL,
             такие, как CREATE и ALTER, не могут подготавливаться в MySQL. Также
             операторы SQL не дают выигрыша от
-            <ulink url="http://dev.mysql.com/doc/refman/5.1/en/query-cache-how.html">кэширования запросов MySQL</ulink> в версиях MySQL до 5.1.17.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dev.mysql.com/doc/refman/5.1/en/query-cache-how.html">кэширования запросов MySQL</link> в версиях MySQL до 5.1.17.
         </para>
 
         <para>
@@ -1770,12 +1770,12 @@ $db->closeConnection();
             к объекту соединения в расширении PHP, используя getConnection().
         </para>
 
-        <example id="zend.db.adapter.other-statements.example">
-            <title>Запуск неподготовленного оператора в адаптере PDO</title>
+        <example xml:id="zend.db.adapter.other-statements.example"><info><title>Запуск неподготовленного оператора в адаптере PDO</title></info>
+            
             <programlisting language="php"><![CDATA[
 $result = $db->getConnection()->exec('DROP TABLE bugs');
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </example>
 
         <para>
@@ -1792,19 +1792,19 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
             расширений PHP. Это не нарушит обратную совместимость.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.adapter-notes">
+    <section xml:id="zend.db.adapter.adapter-notes"><info><title>Примечания к отдельным адаптерам</title></info>
 
-        <title>Примечания к отдельным адаптерам</title>
+        
 
         <para>
             В данный разделе описываются различия между классами адаптеров, о
             которых следует знать.
         </para>
 
-        <sect3 id="zend.db.adapter.adapter-notes.ibm-db2">
-            <title>IBM DB2</title>
+        <section xml:id="zend.db.adapter.adapter-notes.ibm-db2"><info><title>IBM DB2</title></info>
+            
             <itemizedlist>
                 <listitem>
                     <para>
@@ -1830,10 +1830,10 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.adapter-notes.mysqli">
-            <title>MySQLi</title>
+        <section xml:id="zend.db.adapter.adapter-notes.mysqli"><info><title>MySQLi</title></info>
+            
             <itemizedlist>
                 <listitem>
                     <para>
@@ -1856,10 +1856,10 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.adapter-notes.oracle">
-            <title>Oracle</title>
+        <section xml:id="zend.db.adapter.adapter-notes.oracle"><info><title>Oracle</title></info>
+            
             <itemizedlist>
                 <listitem>
                     <para>
@@ -1894,10 +1894,10 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.adapter-notes.pdo-ibm">
-            <title>PDO для IBM DB2 и Informix Dynamic Server (IDS)</title>
+        <section xml:id="zend.db.adapter.adapter-notes.pdo-ibm"><info><title>PDO для IBM DB2 и Informix Dynamic Server (IDS)</title></info>
+            
             <itemizedlist>
                 <listitem>
                     <para>
@@ -1918,10 +1918,10 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.adapter-notes.pdo-mssql">
-            <title>PDO Microsoft SQL Server</title>
+        <section xml:id="zend.db.adapter.adapter-notes.pdo-mssql"><info><title>PDO Microsoft SQL Server</title></info>
+            
             <itemizedlist>
                 <listitem>
                     <para>
@@ -1963,18 +1963,18 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
                         префикс DSN, который используется адаптером, когда
                         строится строка DSN. "Freetds" и "sybase" подразумевают
                         префикс "sybase:", который используется для набора
-                        библиотек <ulink url="http://www.freetds.org/">FreeTDS</ulink>. Более
+                        библиотек <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.freetds.org/">FreeTDS</link>. Более
                         подробную информацию о префиксах, используемых в этих
                         драйверах, читайте на
-                        <ulink url="http://www.php.net/manual/en/ref.pdo-dblib.connection.php">
-                        http://www.php.net/manual/en/ref.pdo-dblib.connection.php</ulink>.
+                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/ref.pdo-dblib.connection.php">
+                        http://www.php.net/manual/en/ref.pdo-dblib.connection.php</link>.
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.adapter-notes.pdo-mysql">
-            <title>PDO MySQL</title>
+        <section xml:id="zend.db.adapter.adapter-notes.pdo-mysql"><info><title>PDO MySQL</title></info>
+            
             <itemizedlist>
                 <listitem>
                     <para>
@@ -1997,10 +1997,10 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.adapter-notes.pdo-oci">
-            <title>PDO Oracle</title>
+        <section xml:id="zend.db.adapter.adapter-notes.pdo-oci"><info><title>PDO Oracle</title></info>
+            
             <itemizedlist>
                 <listitem>
                     <para>
@@ -2021,10 +2021,10 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.adapter-notes.pdo-pgsql">
-            <title>PDO PostgreSQL</title>
+        <section xml:id="zend.db.adapter.adapter-notes.pdo-pgsql"><info><title>PDO PostgreSQL</title></info>
+            
             <itemizedlist>
                 <listitem>
                     <para>
@@ -2050,10 +2050,10 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.adapter-notes.pdo-sqlite">
-            <title>PDO SQLite</title>
+        <section xml:id="zend.db.adapter.adapter-notes.pdo-sqlite"><info><title>PDO SQLite</title></info>
+            
             <itemizedlist>
                 <listitem>
                     <para>
@@ -2078,14 +2078,14 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
                 <listitem>
                     <para>
                         Для того, чтобы соединится с базой данных SQLite2,
-                        указывайте <code>'sqlite2'=>true</code> в массиве
+                        указывайте <code>'sqlite2'=&gt;true</code> в массиве
                         параметров при создании экземпляра адаптера Pdo_Sqlite.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         Для соединения с базой данных SQLite в памяти указывайте
-                        <code>'dbname'=>':memory:'</code> в массиве параметров
+                        <code>'dbname'=&gt;':memory:'</code> в массиве параметров
                         при создании экземпляра адаптера Pdo_Sqlite.
                     </para>
                 </listitem>
@@ -2099,10 +2099,10 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.adapter.adapter-notes.firebird">
-            <title>Firebird/Interbase</title>
+        <section xml:id="zend.db.adapter.adapter-notes.firebird"><info><title>Firebird/Interbase</title></info>
+            
             <itemizedlist>
                 <listitem>
                     <para>
@@ -2128,11 +2128,8 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

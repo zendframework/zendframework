@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.actionhelpers.contextswitch">
-    <title>ContextSwitch и AjaxContext</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.contextswitch"><info><title>ContextSwitch и AjaxContext</title></info>
+    
 
     <para>
         Помощник действий <code>ContextSwitch</code> предназначен для облегчения
@@ -139,8 +138,8 @@ class NewsController extends Zend_Controller_Action
         обратного вызова для инициализации и пост-обработки.
     </para>
 
-    <sect4 id="zend.controller.actionhelpers.contextswitch.contexts">
-        <title>Доступные по умолчанию контексты</title>
+    <section xml:id="zend.controller.actionhelpers.contextswitch.contexts"><info><title>Доступные по умолчанию контексты</title></info>
+        
 
         <para>
             По умолчанию через помощник <code>ContextSwitch</code> используются
@@ -181,10 +180,10 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
                 </para>
             </listitem>
         </itemizedlist>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelpers.contextswitch.custom">
-        <title>Создание своего контекста</title>
+    <section xml:id="zend.controller.actionhelpers.contextswitch.custom"><info><title>Создание своего контекста</title></info>
+        
 
         <para>
             Иногда доступных по умолчанию контекстов может быть недостаточно.
@@ -294,10 +293,10 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
                 <code>clearContexts()</code>: удаляет все контексты.
             </para></listitem>
         </itemizedlist>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelpers.contextswitch.actions">
-        <title>Установка контекстов для действий</title>
+    <section xml:id="zend.controller.actionhelpers.contextswitch.actions"><info><title>Установка контекстов для действий</title></info>
+        
 
         <para>
             Есть два способа установки доступных для действий контекстов.
@@ -457,10 +456,10 @@ class FooController extends Zend_Controller_Action
                     действий с контекстами.
             </para></listitem>
         </itemizedlist>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelpers.contextswitch.initcontext">
-        <title>Инициализация переключения контекста</title>
+    <section xml:id="zend.controller.actionhelpers.contextswitch.initcontext"><info><title>Инициализация переключения контекста</title></info>
+        
 
         <para>
             Для того, чтобы инициализировать переключение контекста, необходимо
@@ -487,10 +486,10 @@ class NewsController extends Zend_Controller_Action
         <programlisting language="php"><![CDATA[
 $contextSwitch->initContext('xml');
 ]]></programlisting>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelpers.contextswitch.misc">
-        <title>Дополнительный функционал</title>
+    <section xml:id="zend.controller.actionhelpers.contextswitch.misc"><info><title>Дополнительный функционал</title></info>
+        
 
         <para>
             Для управления помощником <code>ContextSwitch</code> могут
@@ -705,10 +704,10 @@ $contextSwitch->initContext();
                 </para>
             </listitem>
         </itemizedlist>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelpers.contextswitch.ajaxcontext">
-        <title>Функционал AjaxContext</title>
+    <section xml:id="zend.controller.actionhelpers.contextswitch.ajaxcontext"><info><title>Функционал AjaxContext</title></info>
+        
 
         <para>
             Помощник <code>AjaxContext</code> наследует от
@@ -743,8 +742,8 @@ $contextSwitch->initContext();
             запросов. Дополнительные заголовки не возвращаются.
         </para>
 
-        <example id="zend.controller.actionhelpers.contextswitch.ajaxcontext.example">
-            <title>Установка действий для ответов на AJAX-запросы</title>
+        <example xml:id="zend.controller.actionhelpers.contextswitch.ajaxcontext.example"><info><title>Установка действий для ответов на AJAX-запросы</title></info>
+            
 
             <para>
                 В следующем примере мы указываем, что действия 'view', 'form' и
@@ -805,8 +804,5 @@ class CommentController extends Zend_Controller_Action
                 требуемом формате.
             </para>
         </example>
-    </sect4>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

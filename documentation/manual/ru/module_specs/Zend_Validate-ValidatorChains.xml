@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.validate.validator_chains">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.validator_chains"><info><title>Цепочки валидаторов</title></info>
 
-    <title>Цепочки валидаторов</title>
+    
 
     <para>
         Часто к одному и тому же значению должно быть применено несколько
@@ -65,7 +64,4 @@ $validatorChain->addValidator(new Zend_Validate_StringLength(6, 12), true)
         использованы в цепочке валидаторов.
     </para>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

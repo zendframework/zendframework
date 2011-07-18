@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.action">
-    <title>Помощник Action</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.action"><info><title>Помощник Action</title></info>
+    
 
     <para>
         Помощник видов <code>Action</code> позволяет скриптам вида
@@ -27,8 +26,8 @@
         модуль по умолчанию.
     </para>
 
-    <example id="zend.view.helpers.initial.action.usage">
-        <title>Использование помощника Action</title>
+    <example xml:id="zend.view.helpers.initial.action.usage"><info><title>Использование помощника Action</title></info>
+        
 
         <para>
             Допустим, вы имеете контроллер
@@ -48,7 +47,4 @@
 </div>
 ]]></programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

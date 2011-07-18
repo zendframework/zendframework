@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.doctype">
-    <title>Помощник Doctype</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.doctype"><info><title>Помощник Doctype</title></info>
+    
 
     <para>
         Валидные HTML- и XHTML-документы должны включать в себя декларацию
@@ -40,8 +39,8 @@
             Placeholder</link>.
     </para>
 
-    <example id="zend.view.helpers.initial.doctype.basicusage">
-        <title>Использование помощника Doctype</title>
+    <example xml:id="zend.view.helpers.initial.doctype.basicusage"><info><title>Использование помощника Doctype</title></info>
+        
 
         <para>
             Вы можете указать декларацию DOCTYPE в любой момент времени. Но
@@ -65,8 +64,8 @@ $doctypeHelper->doctype('XHTML1_STRICT');
 
     </example>
 
-    <example id="zend.view.helpers.initial.doctype.retrieving">
-        <title>Извлечение DOCTYPE</title>
+    <example xml:id="zend.view.helpers.initial.doctype.retrieving"><info><title>Извлечение DOCTYPE</title></info>
+        
 
         <para>
             Если нужно узнать тип документа, то вы можете сделать
@@ -90,7 +89,4 @@ if ($view->doctype()->isXhtml()) {
 }
 ]]></programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

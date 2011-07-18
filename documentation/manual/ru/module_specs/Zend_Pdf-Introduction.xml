@@ -1,6 +1,9 @@
-<sect1 id="zend.pdf.introduction">
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.introduction"><info><title>Введение</title></info>
     <!-- @todo review and revise upon completion of refactoring -->
-    <title>Введение</title>
+    
     <para>
     Модуль Zend_Pdf является механизмом для работы с PDF (Portable Document
     Format — переносимый формат документов), который написан целиком на PHP 5.
@@ -99,7 +102,4 @@
     </itemizedlist>
     </para>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

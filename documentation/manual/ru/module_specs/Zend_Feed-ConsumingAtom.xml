@@ -1,5 +1,6 @@
-<sect1 id="zend.feed.consuming-atom">
-<title>Работа с лентой Atom</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom"><info><title>Работа с лентой Atom</title></info>
+
 
     <para>
         <code>Zend_Feed_Atom</code> используется в основном так же, как и
@@ -12,8 +13,8 @@
         <code>&lt;summary&gt;</code> (анонс) и <code>&lt;content&gt;</code> (содержимое).
     </para>
 
-    <example id="zend.feed.consuming-atom.example.usage">
-        <title>Основы использования ленты Atom</title>
+    <example xml:id="zend.feed.consuming-atom.example.usage"><info><title>Основы использования ленты Atom</title></info>
+        
         <para>
             Чтение ленты Atom, вывод <code>title</code> и <code>summary</code>
             для каждого сообщения:
@@ -24,8 +25,8 @@ echo 'The feed contains ' . $feed->count() . ' entries.' . "\n\n";
 foreach ($feed as $entry) {
     echo 'Title: ' . $entry->title() . "\n";
     echo 'Summary: ' . $entry->summary() . "\n\n";
-}]]>
-        </programlisting>
+}
+        ]]></programlisting>
     </example>
 
     <para>
@@ -62,10 +63,10 @@ foreach ($feed as $entry) {
                     <code>subtitle</code> — описание ленты, эквивалентен описанию RSS-канала
                 </para>
                 <para>
-                    <code>author->name()</code> — имя автора ленты
+                    <code>author-&gt;name()</code> — имя автора ленты
                 </para>
                 <para>
-                    <code>author->email()</code> — e-mail автора ленты
+                    <code>author-&gt;email()</code> — e-mail автора ленты
                 </para>
             </listitem>
         </itemizedlist>
@@ -127,9 +128,6 @@ foreach ($feed as $entry) {
 
     <para>
         Другие ресурсы и дополнительную информацию по Atom ищите на сайте:
-        <ulink url="http://www.atomenabled.org/">http://www.atomenabled.org/</ulink>.
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.atomenabled.org/">http://www.atomenabled.org/</link>.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

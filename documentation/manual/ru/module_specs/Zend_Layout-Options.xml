@@ -1,5 +1,6 @@
-<sect1 id="zend.layout.options">
-    <title>Опции конфигурирования Zend_Layout</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.options"><info><title>Опции конфигурирования Zend_Layout</title></info>
+    
 
     <para>
         <code>Zend_Layout</code> имеет свой набор конфигурационных опций. Они
@@ -50,8 +51,7 @@
                 рендеринга. При использовании с компонентами MVC
                 <code>Zend_Layout</code> будет пытаться использовать объект
                 вида, зарегистрированный в
-                <link
-                    linkend="zend.controller.actionhelpers.viewrenderer"> ViewRenderer</link>, если объект вида не был передан явным
+                <link linkend="zend.controller.actionhelpers.viewrenderer"> ViewRenderer</link>, если объект вида не был передан явным
                     образом. Аксессоры - <code>setView()</code> и
                 <code>getView()</code>.
         </para></listitem>
@@ -77,15 +77,14 @@
         <listitem><para>
                 <emphasis>inflector</emphasis>: инфлектор, используемый для
                 определения путей к скрипту вида по имени макета, подробнее об
-                этом читайте в <link
-                    linkend="zend.layout.advanced.inflector">документации по инфлектору <code>Zend_Layout</code></link>.
+                этом читайте в <link linkend="zend.layout.advanced.inflector">документации по инфлектору <code>Zend_Layout</code></link>.
                 Аксессоры - <code>setInflector()</code>
                 и <code>getInflector()</code>.
         </para></listitem>
     </itemizedlist>
 
-    <note>
-        <title>helperClass и pluginClass должны передаваться startMvc()</title>
+    <note><info><title>helperClass и pluginClass должны передаваться startMvc()</title></info>
+        
 
         <para>
             Для того чтобы установка опций <code>helperClass</code> и
@@ -95,8 +94,8 @@
         </para>
     </note>
 
-    <sect2 id="zend.layout.options.examples">
-        <title>Примеры</title>
+    <section xml:id="zend.layout.options.examples"><info><title>Примеры</title></info>
+        
 
         <para>
             Следующие примеры предполагают наличие следующих массива опций и
@@ -121,8 +120,8 @@ contentKey = "CONTENT"
 $config = new Zend_Config_Ini('/path/to/layout.ini', 'layout');
 ?>]]></programlisting>
 
-        <example id="zend.layout.options.examples.constructor">
-            <title>Передача опций конструктору или startMvc()</title>
+        <example xml:id="zend.layout.options.examples.constructor"><info><title>Передача опций конструктору или startMvc()</title></info>
+            
 
             <para>
                 Как конструктор, так и статический метод <code>startMvc()</code>
@@ -163,8 +162,8 @@ $layout = Zend_Layout::startMvc($config);
             </para>
         </example>
 
-        <example id="zend.layout.options.examples.setoptionsconfig">
-            <title>Использование setOption() и setConfig()</title>
+        <example xml:id="zend.layout.options.examples.setoptionsconfig"><info><title>Использование setOption() и setConfig()</title></info>
+            
 
             <para>
                 Иногда нужно сконфигурировать объект <code>Zend_Layout</code>
@@ -190,8 +189,8 @@ $layout->setConfig($options);
             </para>
         </example>
 
-        <example id="zend.layout.options.examples.accessors">
-            <title>Использование аксессоров</title>
+        <example xml:id="zend.layout.options.examples.accessors"><info><title>Использование аксессоров</title></info>
+            
 
             <para>
                 И наконец, вы можете конфигурировать свой экземпляр с
@@ -206,8 +205,5 @@ $layout->setLayout('foo')
        ->setContentKey('CONTENT');
 ?>]]></programlisting>
         </example>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

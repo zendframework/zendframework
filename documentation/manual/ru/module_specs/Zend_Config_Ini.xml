@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.config.adapters.ini">
-    <title>Zend_Config_Ini</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.ini"><info><title>Zend_Config_Ini</title></info>
+    
 
     <para>
         <classname>Zend_Config_Ini</classname> дает разработчикам возможность
@@ -18,13 +17,12 @@
         раздела, от которого наследуются данные, после него.
     </para>
 
-    <note>
-        <title>Синтаксический разбор INI-файла</title>
+    <note><info><title>Синтаксический разбор INI-файла</title></info>
+        
 
         <para>
             <classname>Zend_Config_Ini</classname> использует функцию
-            <acronym>PHP</acronym> <ulink
-                url="http://php.net/parse_ini_file"><methodname>parse_ini_file()</methodname></ulink>.
+            <acronym>PHP</acronym> <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/parse_ini_file"><methodname>parse_ini_file()</methodname></link>.
             Пожалуйста, прочитайте документацию, чтобы получить представление об
             особенностях ее поведения, которые распространяются и на
             <classname>Zend_Config_Ini</classname> — например, о том, как обрабатываются
@@ -34,8 +32,8 @@
         </para>
     </note>
 
-    <note>
-        <title>Разделитель ключей</title>
+    <note><info><title>Разделитель ключей</title></info>
+        
 
         <para>
             По умолчанию разделителем ключей является символ точки
@@ -54,8 +52,8 @@ $config = new Zend_Config_Ini('/path/to/config.ini',
 
     </note>
 
-    <example id="zend.config.adapters.ini.example.using">
-        <title>Использование Zend_Config_Ini</title>
+    <example xml:id="zend.config.adapters.ini.example.using"><info><title>Использование Zend_Config_Ini</title></info>
+        
 
         <para>
             Данный пример демонстрирует использование <classname>Zend_Config_Ini</classname>
@@ -106,8 +104,8 @@ echo $config->database->params->dbname; // выведет "dbname"
     </example>
 
     <note>
-    <table id="zend.config.adapters.ini.table">
-        <title>Параметры конструктора Zend_Config_Ini</title>
+    <table xml:id="zend.config.adapters.ini.table"><info><title>Параметры конструктора Zend_Config_Ini</title></info>
+        
         <tgroup cols="2">
             <thead>
                 <row>
@@ -160,7 +158,4 @@ echo $config->database->params->dbname; // выведет "dbname"
         </tgroup>
     </table>
     </note>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

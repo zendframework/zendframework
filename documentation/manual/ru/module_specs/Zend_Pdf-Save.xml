@@ -1,5 +1,6 @@
-<sect1 id="zend.pdf.save">
-    <title>Сохранение изменений в документе PDF<!-- Save changes to the PDF document. --></title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.save"><info><title>Сохранение изменений в документе PDF<!-- Save changes to the PDF document. --></title></info>
+    
     <para>
     Есть два метода, с помощью которых производится сохранение изменений в документе
     PDF. Это методы <code>Zend_Pdf::save()</code> и <code>Zend_Pdf::render()</code>.
@@ -30,8 +31,8 @@
 -->
     </para>
 
-    <example>
-        <title>Сохранение документа PDF<!-- Save PDF document. --></title>
+    <example><info><title>Сохранение документа PDF<!-- Save PDF document. --></title></info>
+        
         <programlisting language="php"><![CDATA[<?php
 ...
 // Загрузка документа PDF
@@ -49,7 +50,4 @@ $pdfString = $pdf->render();
 ?>]]></programlisting>
     </example>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

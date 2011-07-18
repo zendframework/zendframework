@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.view.controllers">
-    <title>Скрипты контроллеров</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.controllers"><info><title>Скрипты контроллеров</title></info>
+    
 
     <para>
         В контроллере вы создаете и конфигурируете экземпляр
@@ -10,9 +9,9 @@
         указанный скрипт вида.
     </para>
 
-    <sect2 id="zend.view.controllers.assign">
+    <section xml:id="zend.view.controllers.assign"><info><title>Установка переменных</title></info>
 
-        <title>Установка переменных</title>
+        
 
         <para>
             Ваш скрипт контроллера должен установить
@@ -75,11 +74,11 @@ $view->assign('b', "Bee");
 $view->assign('c', "Sea");
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.controllers.render">
+    <section xml:id="zend.view.controllers.render"><info><title>Выполнение скрипта вида</title></info>
 
-        <title>Выполнение скрипта вида</title>
+        
 
         <para>
             После того, как вы определили все необходимые переменные, контроллер
@@ -100,18 +99,18 @@ $view->c = "Sea";
 echo $view->render('someView.php');
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.controllers.script-paths">
+    <section xml:id="zend.view.controllers.script-paths"><info><title>Пути к скриптам вида</title></info>
 
-        <title>Пути к скриптам вида</title>
+        
 
         <para>
             По умолчанию <classname>Zend_View</classname> ищет скрипты
             вида относительно вызывающего скрипта.
             Например, если скрипт контроллера находится в директории
             "/path/to/app/controllers" и он вызывает скрипт вида
-            следующим образом: <varname>$view->render('someView.php')</varname>, то
+            следующим образом: <varname>$view-&gt;render('someView.php')</varname>, то
             <classname>Zend_View</classname> будет искать скрипт вида по пути
             "/path/to/app/controllers/someView.php".
         </para>
@@ -128,7 +127,7 @@ $view->setScriptPath('/path/to/app/views');
 ]]></programlisting>
 
         <para>
-            Теперь, когда вы вызываете <varname>$view->render('someView.php')</varname>,
+            Теперь, когда вы вызываете <varname>$view-&gt;render('someView.php')</varname>,
             он будет искать файл "/path/to/app/views/someView.php".
         </para>
 
@@ -153,9 +152,9 @@ $view->addScriptPath('/path/to/custom/');
 // и, наконец, "booklist.php" в текущем каталоге.
 ]]></programlisting>
 
-        <note>
-            <title>Никогда не используйте пользовательский ввод при установке
-            путей к скриптам вида</title>
+        <note><info><title>Никогда не используйте пользовательский ввод при установке
+            путей к скриптам вида</title></info>
+            
 
             <para>
                 <classname>Zend_View</classname> использует пути к скриптам для поиска
@@ -181,8 +180,5 @@ $view->render('passwd');
                 вашего приложения.
             </para>
         </note>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

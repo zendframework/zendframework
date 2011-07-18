@@ -1,8 +1,9 @@
-<sect1 id="zend.search.lucene.searching">
-    <title>Поиск по индексу<!--Searching an Index--></title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.searching"><info><title>Поиск по индексу<!--Searching an Index--></title></info>
+    
 
-    <sect2 id="zend.search.lucene.searching.query_building">
-        <title>Построение запросов<!--Building Queries--></title>
+    <section xml:id="zend.search.lucene.searching.query_building"><info><title>Построение запросов<!--Building Queries--></title></info>
+        
 
         <para>
             Производить поиск по индексу можно двумя способами. Первый способ
@@ -107,7 +108,7 @@ require_once('Zend/Search/Lucene.php');
 
 $index = Zend_Search_Lucene::open('/data/my_index');
 
-$index->find($query);]]>   </programlisting>
+$index->find($query);   ]]></programlisting>
 
         <para>
             Метод <code>Zend_Search_Lucene::find()</code> автоматически определяет
@@ -150,8 +151,8 @@ $index->find($query);]]>   </programlisting>
 -->
         </para>
 
-        <sect3 id="zend.search.lucene.searching.query_building.parsing">
-            <title>Парсинг запроса<!--Query parsing--></title>
+        <section xml:id="zend.search.lucene.searching.query_building.parsing"><info><title>Парсинг запроса<!--Query parsing--></title></info>
+            
             <para>
                 Метод <code>Zend_Search_Lucene_Search_QueryParser::parse()</code>
                 может использоваться для парсинга строки запроса и
@@ -234,16 +235,16 @@ $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);]]></progra
                 string encoding (empty string means "current locale").
 -->
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.search.lucene.searching.results">
-        <title>Результаты поиска<!--Search Results--></title>
+    <section xml:id="zend.search.lucene.searching.results"><info><title>Результаты поиска<!--Search Results--></title></info>
+        
         <para>
             Результат поиска является массивом объектов
             Zend_Search_Lucene_Search_QueryHit. Все эти объекты имеют два
-            свойства: <varname>$hit->document</varname> - номер документа в индексе,
-            <varname>$hit->score</varname> - ранг "хита" в результате поиска.
+            свойства: <varname>$hit-&gt;document</varname> - номер документа в индексе,
+            <varname>$hit-&gt;score</varname> - ранг "хита" в результате поиска.
             Результат упорядочен по рангу ("хиты" с наибольшим рангом идут
             первыми).
 
@@ -347,11 +348,11 @@ foreach ($hits as $hit) {
 -->
         </para>
 
-    </sect2>
+    </section>
 
 
-    <sect2 id="zend.search.lucene.searching.results-scoring">
-        <title>Ранжирование результата<!--Results Scoring--></title>
+    <section xml:id="zend.search.lucene.searching.results-scoring"><info><title>Ранжирование результата<!--Results Scoring--></title></info>
+        
         <para>
             Zend_Search_Lucene использует тот же самый алгоритм ранжирования,
             что и Java Lucene. Результаты поиска по умолчанию сортируются по
@@ -388,7 +389,7 @@ $hits = $index->find($query);
 foreach ($hits as $hit) {
     echo $hit->id;
     echo $hit->score;
-}]]>   </programlisting>
+}   ]]></programlisting>
 
         <para>
             Для вычисления ранга используется класс Zend_Search_Lucene_Search_Similarity.
@@ -400,10 +401,10 @@ foreach ($hits as $hit) {
 -->
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.searching.sorting">
-        <title>Сортировка результатов поиска<!--Search Result Sorting--></title>
+    <section xml:id="zend.search.lucene.searching.sorting"><info><title>Сортировка результатов поиска<!--Search Result Sorting--></title></info>
+        
         <para>
             По умолчанию результаты поиска сортируются по рангу. Вы можете
             изменить это поведение установкой поля (полей) для сортировки, типа
@@ -415,7 +416,7 @@ foreach ($hits as $hit) {
         </para>
 
         <para>
-            <varname>$index->find()</varname> может принимать несколько необязательных
+            <varname>$index-&gt;find()</varname> может принимать несколько необязательных
             параметров:
 <!--
             <varname>$index->find()</varname> call may take several optional parameters:
@@ -478,10 +479,10 @@ $index->find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);]
             It needs to retrive documents completely from an index and may drammatically slow down search performance.
 -->
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.searching.highlighting">
-        <title>Подсветка результатов поиска<!--Search Results Highlighting--></title>
+    <section xml:id="zend.search.lucene.searching.highlighting"><info><title>Подсветка результатов поиска<!--Search Results Highlighting--></title></info>
+        
         <para>
             Метод
             <code>Zend_Search_Lucene_Search_Query::highlightMatches()</code>
@@ -513,10 +514,6 @@ $highlightedHTML = $query->highlightMatches($sourceHTML);]]></programlisting>
             for HTML processing. So it has the same requirements for HTML source.
 -->
         </para>
-    </sect2>
+    </section>
 
-</sect1>
-
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

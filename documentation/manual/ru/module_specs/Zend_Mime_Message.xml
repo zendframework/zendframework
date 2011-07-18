@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.mime.message">
-    <title>Zend_Mime_Message</title>
+<?xml version="1.0" encoding="utf-8"?>
 
-    <sect2 id="zend.mime.message.introduction">
-        <title>Введение</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.message"><info><title>Zend_Mime_Message</title></info>
+    
+
+    <section xml:id="zend.mime.message.introduction"><info><title>Введение</title></info>
+        
         <para>
             <classname>Zend_Mime_Message</classname> представляет сообщения,
             составленные в соответствии со спецификациями
@@ -20,17 +21,17 @@
             Используется
             <link linkend="zend.mail"><classname>Zend_Mail</classname></link>-ом.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mime.message.instantiation">
-        <title>Инстанцирование</title>
+    <section xml:id="zend.mime.message.instantiation"><info><title>Инстанцирование</title></info>
+        
         <para>
             Нет явного конструктора для <classname>Zend_Mime_Message</classname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mime.message.addparts">
-        <title>Добавление частей MIME</title>
+    <section xml:id="zend.mime.message.addparts"><info><title>Добавление частей MIME</title></info>
+        
 
         <para>
             Объекты <link linkend="zend.mime.part"><classname>Zend_Mime_Part</classname></link>
@@ -58,10 +59,10 @@
             одна часть в объекте <classname>Zend_Mime_Message</classname>
             и, следовательно, объект должен сгенерировать сообщение MIME multipart.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mime.message.bondary">
-        <title>Управление разделителями</title>
+    <section xml:id="zend.mime.message.bondary"><info><title>Управление разделителями</title></info>
+        
 
         <para>
             <classname>Zend_Mime_Message</classname> обычно создает и использует свой
@@ -85,10 +86,10 @@
             <code>-&gt;generateMessage()</code> формирует содержимое
             <classname>Zend_Mime_Message</classname> в строке.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mime.message.parse">
-        <title>Создание объекта Zend_Mime_Message из строки (экспериментальная возможность)</title>
+    <section xml:id="zend.mime.message.parse"><info><title>Создание объекта Zend_Mime_Message из строки (экспериментальная возможность)</title></info>
+        
 
         <para>
             Если имеется сообщение MIME в виде строки, то оно может
@@ -105,8 +106,5 @@
             <classname>Zend_Mime_Message</classname>,
             который затем может быть исследован с помощью <code>-&gt;getParts()</code>.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

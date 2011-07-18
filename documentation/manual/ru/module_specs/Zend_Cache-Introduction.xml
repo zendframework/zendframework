@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.cache.introduction">
-    <title>Введение</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.introduction"><info><title>Введение</title></info>
+    
     <para>
         <classname>Zend_Cache</classname> предназначен для кэширования любых данных.
     </para>
@@ -21,8 +20,8 @@
         <classname>Zend_Cache_Core</classname>: <emphasis>Output</emphasis>,
         <emphasis>File</emphasis>, <emphasis>Function</emphasis> и <emphasis>Class</emphasis>.
     </para>
-    <example id="zend.cache.introduction.example-1">
-        <title>Получение фронтэнда с помощью Zend_Cache::factory()</title>
+    <example xml:id="zend.cache.introduction.example-1"><info><title>Получение фронтэнда с помощью Zend_Cache::factory()</title></info>
+        
         <para>
             <methodname>Zend_Cache::factory()</methodname> инстанцирует нужные объекты и
             связывает их. В этом первом примере мы будем использовать
@@ -46,8 +45,8 @@ $cache = Zend_Cache::factory('Core',
 ]]></programlisting>
     </example>
 
-    <note>
-        <title>Фронтэнды и бэкэнды, содержащие несколько слов в названии</title>
+    <note><info><title>Фронтэнды и бэкэнды, содержащие несколько слов в названии</title></info>
+        
         <para>
             Некоторые фронтэнды и бэкэнды имеют имена, состоящие из нескольких
             слов, например, 'ZendPlatform'. Когда задаете их через фабрику,
@@ -56,8 +55,8 @@ $cache = Zend_Cache::factory('Core',
         </para>
     </note>
 
-    <example id="zend.cache.introduction.example-2">
-        <title>Кэширование результатов запросов к базе данных</title>
+    <example xml:id="zend.cache.introduction.example-2"><info><title>Кэширование результатов запросов к базе данных</title></info>
+        
 
         <para>
             Теперь, имея фронтэнд, мы можем кэшировать любые типы данных,
@@ -92,8 +91,8 @@ print_r($result);
 ]]></programlisting>
     </example>
 
-    <example id="zend.cache.introduction.example-3">
-        <title>Кэширование вывода с помощью фронтэнда Zend_Cache</title>
+    <example xml:id="zend.cache.introduction.example-3"><info><title>Кэширование вывода с помощью фронтэнда Zend_Cache</title></info>
+        
         <para>
             Мы размечаем участки, выходные данные которых хотим поместить в кэш,
             добавлением условной логики, окружая участок методами
@@ -151,7 +150,4 @@ echo 'This is never cached ('.time().').';
         ресурса, иначе не связанные записи кэша могут затирать друг
         друга, или, что еще хуже, отображаться вместо других.
     </para></note>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

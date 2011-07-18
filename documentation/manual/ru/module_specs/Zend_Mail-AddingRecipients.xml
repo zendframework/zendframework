@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.adding-recipients">
-    <title>Добавление получателей</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.adding-recipients"><info><title>Добавление получателей</title></info>
+    
     <para>
         Получатели могут быть добавлены тремя способами:
         <itemizedlist>
@@ -26,8 +27,8 @@
         <methodname>getRecipients()</methodname> возвращает список получателей.
         <methodname>clearRecipients()</methodname> очищает список.
     </para>
-    <note>
-        <title>Дополнительный параметр</title>
+    <note><info><title>Дополнительный параметр</title></info>
+        
         <para>
             <methodname>addTo()</methodname> и <methodname>addCc()</methodname>
             принимают второй необязательный
@@ -36,7 +37,4 @@
             угловые скобки на квадратные.
         </para>
     </note>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

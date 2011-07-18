@@ -1,5 +1,6 @@
-<sect1 id="zend.feed.consuming-rss">
-    <title>Работа с лентой RSS</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-rss"><info><title>Работа с лентой RSS</title></info>
+    
     <para>
         Чтение ленты такое же простое, как создание объекта <code>Zend_Feed_Rss</code>
         с URI ленты:
@@ -7,8 +8,8 @@
 
     <programlisting language="php"><![CDATA[
 $channel = new Zend_Feed_Rss('http://rss.example.com/channelName');
-]]>
-    </programlisting>
+
+    ]]></programlisting>
 
     <para>
         Если при извлечении ленты произошла ошибка, то будет сгенерировано исключение
@@ -22,14 +23,14 @@ $channel = new Zend_Feed_Rss('http://rss.example.com/channelName');
 
     <programlisting language="php"><![CDATA[
 echo $channel->title();
-]]>
-    </programlisting>
+
+    ]]></programlisting>
 
     <para>
         Обратите внимание на синтаксис функции. <code>Zend_Feed</code> использует соглашение
         об интерпретации свойств как объекта XML, если они запрошены в синтаксисе
-        получения переменной (<varname>$obj->property</varname> и как строки, если они запрошены
-        в синтаксисе метода (<varname>$obj->property()</varname>). Это позволяет получить доступ
+        получения переменной (<varname>$obj-&gt;property</varname> и как строки, если они запрошены
+        в синтаксисе метода (<varname>$obj-&gt;property()</varname>). Это позволяет получить доступ
         к полному тексту любого отдельного узла, что одновременно дает полный доступ
         и ко всем дочерним элементам.
     </para>
@@ -41,8 +42,8 @@ echo $channel->title();
 
     <programlisting language="php"><![CDATA[
 echo $channel->category['domain'];
-]]>
-    </programlisting>
+
+    ]]></programlisting>
 
     <para>
         Поскольку атрибуты не могут иметь дочерние элементы, то нет
@@ -60,8 +61,8 @@ echo $channel->category['domain'];
 foreach ($channel as $item) {
     echo $item->title() . "\n";
 }
-]]>
-    </programlisting>
+
+    ]]></programlisting>
 
     <para>
         На тот случай, если вы не знакомы с RSS, здесь приведены стандартные
@@ -181,11 +182,11 @@ foreach ($channel as $item) {
 if ($item->propname()) {
     // ... обработка
 }
-]]>
-    </programlisting>
+
+    ]]></programlisting>
 
     <para>
-        Если вместо этого использовать <varname>$item->propname</varname>, то всегда будете
+        Если вместо этого использовать <varname>$item-&gt;propname</varname>, то всегда будете
         получать объект. Пустой объект расценивается как <constant>TRUE</constant>,
         поэтому такая проверка будет некорректной.
     </para>
@@ -193,9 +194,6 @@ if ($item->propname()) {
     <para>
         Для получения более подробной информации читайте официальное описание
         спецификации RSS 2.0:
-        <ulink url="http://blogs.law.harvard.edu/tech/rss">http://blogs.law.harvard.edu/tech/rss</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://blogs.law.harvard.edu/tech/rss">http://blogs.law.harvard.edu/tech/rss</link>
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,5 +1,6 @@
-<sect1 id="zend.feed.introduction">
-    <title>Введение</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.introduction"><info><title>Введение</title></info>
+    
     <para>
         <code>Zend_Feed</code> предназначен для работы с
         лентами RSS и Atom. Он предоставляет естетственный синтаксис
@@ -27,8 +28,8 @@
         может быть использован для распечатки, сохранения в БД и т.д.
     </para>
 
-    <note>
-        <title>Внимание</title>
+    <note><info><title>Внимание</title></info>
+        
         <para>
             Многие ленты RSS различаются по набору доступных свойств каналов и
             сообщений. Спецификация RSS предоставляет множество необязательных
@@ -37,8 +38,8 @@
         </para>
     </note>
 
-    <example id="zend.feed.introduction.example.rss">
-        <title>Использование Zend_Feed в работе с данными ленты RSS</title>
+    <example xml:id="zend.feed.introduction.example.rss"><info><title>Использование Zend_Feed в работе с данными ленты RSS</title></info>
+        
         <programlisting language="php"><![CDATA[
 // Извлечение последних новостей Slashdot
 try {
@@ -66,10 +67,7 @@ foreach ($slashdotRss as $item) {
         'description' => $item->description()
         );
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

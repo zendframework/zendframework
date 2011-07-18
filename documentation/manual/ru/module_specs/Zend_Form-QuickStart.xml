@@ -1,5 +1,6 @@
-<sect1 id="zend.form.quickstart">
-    <title>Zend_Form - Быстрый старт</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.quickstart"><info><title>Zend_Form - Быстрый старт</title></info>
+    
 
     <para>
         Данное руководство охватывает основы создания форм,
@@ -7,8 +8,8 @@
         <code>Zend_Form</code>.
     </para>
 
-    <sect2 id="zend.form.quickstart.create">
-        <title>Создание объекта формы</title>
+    <section xml:id="zend.form.quickstart.create"><info><title>Создание объекта формы</title></info>
+        
 
         <para>
             Объекты форм создаются через простое инстанцирование
@@ -17,8 +18,8 @@
 
         <programlisting language="php"><![CDATA[
 $form = new Zend_Form;
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Для более сложных случаев использования вы можете создавать
@@ -36,8 +37,8 @@ $form = new Zend_Form;
         <programlisting language="php"><![CDATA[
 $form->setAction('/resource/process')
      ->setMethod('post');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Приведенный выше код устанавливает значение атрибута
@@ -55,12 +56,12 @@ $form->setAction('/resource/process')
 
         <programlisting language="php"><![CDATA[
 $form->setAttrib('id', 'login');
-]]>
-        </programlisting>
-    </sect2>
 
-    <sect2 id="zend.form.quickstart.elements">
-        <title>Добавление элементов в форму</title>
+        ]]></programlisting>
+    </section>
+
+    <section xml:id="zend.form.quickstart.elements"><info><title>Добавление элементов в форму</title></info>
+        
 
         <para>
             Форма без элементов бесмысленна. <code>Zend_Form</code>
@@ -133,8 +134,8 @@ $form->addElement(new Zend_Form_Element_Text('username'));
 
 // Передача типа элемента объекту формы
 $form->addElement('text', 'username');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             По умолчанию элементы не имеют никаких валидаторов или фильтров. Это
@@ -171,8 +172,8 @@ $username->addValidator('alnum');
         <programlisting language="php"><![CDATA[
 // Передача шаблона
 $username->addValidator('regex', false, array('/^[a-z]/i'));
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             (Второй параметр используется для указания того, должен ли валидатор
@@ -189,8 +190,8 @@ $username->addValidator('regex', false, array('/^[a-z]/i'));
         <programlisting language="php"><![CDATA[
 // Указание того, что элемент обязателен для заполнения:
 $username->setRequired(true);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Если элемент обязателен для заполнения, то в начало цепочки
@@ -206,8 +207,8 @@ $username->setRequired(true);
 
         <programlisting language="php"><![CDATA[
 $username->addFilter('StringToLower');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Таким образом, окончательно установка элемента получится
@@ -226,8 +227,8 @@ $username->addValidators(array('alnum',
     ))
     ->setRequired(true)
     ->addFilters(array('StringToLower'));
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Выполнение этих действий для каждого элемента по отдельности может
@@ -248,8 +249,8 @@ $form->addElement('text', 'username', array(
     'required' => true,
     'filters'  => array('StringToLower'),
 ));
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <note><para>
             Если вы обнаружили, что настраиваете элементы, используя одни и те
@@ -257,10 +258,10 @@ $form->addElement('text', 'username', array(
             <code>Zend_Form_Element</code> и использовать его вместо выполнения
             этих процедур; это может избавить от лишней работы по набору кода.
         </para></note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.render">
-        <title>Визуализация формы</title>
+    <section xml:id="zend.form.quickstart.render"><info><title>Визуализация формы</title></info>
+        
 
         <para>
             Визуализация формы производится легко. Большинство элементов
@@ -276,8 +277,8 @@ echo $form->render($view);
 
 // Предполагается, что объект вида уже был установлен ранее через setView():
 echo $form;
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             По умолчанию <code>Zend_Form</code> будет пытаться использовать
@@ -289,8 +290,8 @@ echo $form;
 
         <programlisting language="php"><![CDATA[
 <?php echo $this->form ?>
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Внутри себя <code>Zend_Form</code> использует "декораторы" для
@@ -310,8 +311,8 @@ $element->addDecorators(array(
     array('HtmlTag', array('tag' => 'dd')),
     array('Label', array('tag' => 'dt')),
 ));
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Код выше создает вывод наподобие следующего:
@@ -326,8 +327,8 @@ $element->addDecorators(array(
         <li>'123-abc' does not match against pattern '/^[a-z]/i'</li>
     </ul>
 </dd>
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Вы можете изменить набор декораторов, используемый элементом, если
@@ -354,8 +355,8 @@ $element->addDecorators(array(
 
         <programlisting language="php"><![CDATA[
 $element->setOrder(10);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Или путем передачи в качестве опции при создании элемента:
@@ -363,12 +364,12 @@ $element->setOrder(10);
 
         <programlisting language="php"><![CDATA[
 $form->addElement('text', 'username', array('order' => 10));
-]]>
-        </programlisting>
-    </sect2>
 
-    <sect2 id="zend.form.quickstart.validate">
-        <title>Проверка корректности данных формы</title>
+        ]]></programlisting>
+    </section>
+
+    <section xml:id="zend.form.quickstart.validate"><info><title>Проверка корректности данных формы</title></info>
+        
 
         <para>
             После того, как получены данные формы, нужно их проверить
@@ -391,8 +392,8 @@ if ($form->isValid($_POST)) {
 } else {
     // неудача
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Вам может прийти в голову идея проверять данные одного элемента или
@@ -410,8 +411,8 @@ if ($form->isValidPartial($_POST)) {
 } else {
     // один или более элементов не прошли проверку на корректность
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Для проверки части формы может также использоваться метод
@@ -427,8 +428,8 @@ if ($form->isValidPartial($_POST)) {
 
         <programlisting language="php"><![CDATA[
 $values = $form->getValues();
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Для того, чтобы извлечь нефильтрованные данные, используйте:
@@ -436,12 +437,12 @@ $values = $form->getValues();
 
         <programlisting language="php"><![CDATA[
 $unfiltered = $form->getUnfilteredValues();
-]]>
-        </programlisting>
-    </sect2>
 
-    <sect2 id="zend.form.quickstart.errorstatus">
-        <title>Получение статуса ошибки</title>
+        ]]></programlisting>
+    </section>
+
+    <section xml:id="zend.form.quickstart.errorstatus"><info><title>Получение статуса ошибки</title></info>
+        
 
         <para>
             А что в том случае, если форма не прошла проверку на корректность?
@@ -458,8 +459,8 @@ if (!$form->isValid($_POST)) {
     $this->view->form = $form;
     return $this->render('form');
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Если нужно проанализировать ошибки, то есть два способа их
@@ -471,10 +472,10 @@ if (!$form->isValid($_POST)) {
             ошибки'/'сообщение об ошибке'). Если элемент не имеет ошибок, то он
             не будет включен в массив.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.puttingtogether">
-        <title>Объединяя изложенное</title>
+    <section xml:id="zend.form.quickstart.puttingtogether"><info><title>Объединяя изложенное</title></info>
+        
 
         <para>
             Давайте создадим простую форму для входа на сайт. Для нее будут
@@ -526,8 +527,8 @@ $form->addElement($username)
      // addElement() используется в качестве "фабрики"
      // для создания кнопки 'Login':
      ->addElement('submit', 'login', array('label' => 'Login'));
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Затем создается контроллер для отображения формы и ее обработки:
@@ -565,8 +566,8 @@ class UserController extends Zend_Controller_Action
         // аутентификация...
     }
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             ...и скрипт вида для отображения формы:
@@ -575,18 +576,18 @@ class UserController extends Zend_Controller_Action
         <programlisting language="php"><![CDATA[
 <h2>Please login:</h2>
 <?= $this->form ?>
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Как вы наверное заметили, код контроллера не является полным -
             после успешно проведенной проверки должна производиться авторизация
             пользователя (например, используя <code>Zend_Auth</code>).
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.config">
-        <title>Использование объекта Zend_Config</title>
+    <section xml:id="zend.form.quickstart.config"><info><title>Использование объекта Zend_Config</title></info>
+        
 
         <para>
             Все классы <code>Zend_Form</code> можно конфигурировать, используя
@@ -639,10 +640,10 @@ $form   = new Zend_Form($config->user->login);
         <para>
             ... и вся форма будет определена.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.conclusion">
-        <title>Заключение</title>
+    <section xml:id="zend.form.quickstart.conclusion"><info><title>Заключение</title></info>
+        
 
         <para>
             Надеемся, что благодаря этому небольшому обучающему руководству вы
@@ -650,8 +651,5 @@ $form   = new Zend_Form($config->user->login);
             <code>Zend_Form</code>. Для получения более подробной
             информации читайте раздел далее.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

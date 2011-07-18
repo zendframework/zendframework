@@ -1,5 +1,6 @@
-<sect1 id="zend.pdf.pages">
-    <title>Stránky dokumentu</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.pages"><info><title>Stránky dokumentu</title></info>
+    
     <para>
         Stránky v PDF dokumente sú reprezentované triedou <code>Zend_Pdf_Page</code>.
     </para>
@@ -50,8 +51,8 @@
         a je sním možné manipulovať ako klasickým poľom:
     </para>
 
-    <example>
-        <title>PDF document pages management.</title>
+    <example><info><title>PDF document pages management.</title></info>
+        
         <programlisting role="php"><![CDATA[<?php
 ...
 // Otočenie poradia stránok
@@ -69,7 +70,4 @@ unset($pdf->pages[$id]);
 ?>]]></programlisting>
     </example>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

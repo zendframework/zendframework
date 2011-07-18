@@ -1,5 +1,6 @@
-<sect1 id="zend.config.introduction">
-    <title>Úvod</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.introduction"><info><title>Úvod</title></info>
+    
     <para>
         <code>Zend_Config</code> je navrhnutý pre zjednodušenie prístupu a použitia
         konfiguračných údajov v rámci aplikácie. Poskytuje vnorené vlastnosti pre
@@ -10,8 +11,8 @@
         <link linkend="zend.config.adapters.ini"><code>Zend_Config_Ini</code></link> a
         <link linkend="zend.config.adapters.xml"><code>Zend_Config_Xml</code></link>.
     </para>
-    <example id="zend.config.introduction.example.using">
-        <title>Použitie Zend_Config</title>
+    <example xml:id="zend.config.introduction.example.using"><info><title>Použitie Zend_Config</title></info>
+        
         <para>
             Očakáva sa, že sa použije jeden z adaptérov ako napríklad
             <link linkend="zend.config.adapters.ini"><code>Zend_Config_Ini</code></link>, alebo
@@ -59,7 +60,4 @@ $myApplicationObject->databaseConnect($config->database->type,
     <programlisting role="php"><![CDATA[<?php
     $host = $config->database->get('host', 'localhost');
     ]]></programlisting>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,5 +1,6 @@
-<sect1 id="zend.mail.smtp-authentication">
-  <title>SMTP Autentifikácia</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-authentication"><info><title>SMTP Autentifikácia</title></info>
+  
 
   <para>
   <code>Zend_Mail</code> podporuje použitie SMTP autentifikacie, ktorá môže
@@ -9,37 +10,34 @@
   v konfiguračnom poli.
   </para>
 
-  <example>
-    <title>Nastavenie SMTP autentifikácie v Zend_Mail_Transport_Smtp</title>
+  <example><info><title>Nastavenie SMTP autentifikácie v Zend_Mail_Transport_Smtp</title></info>
+    
 
-    <programlisting role="php">&lt;?php
+    <programlisting role="php"><![CDATA[<?php
 
 require_once 'Zend/Mail.php';
 require_once 'Zend/Mail/Transport/Smtp.php';
 
-$config = array('auth' =&gt; 'login',
-                'username' =&gt; 'myusername',
-                'password' =&gt; 'password');
+$config = array('auth' => 'login',
+                'username' => 'myusername',
+                'password' => 'password');
 
 $transport = new Zend_Mail_Transport_Smtp('mail.server.com', $config);
 
 $mail = new Zend_Mail();
-$mail-&gt;setBodyText('This is the text of the mail.');
-$mail-&gt;setFrom('sender@test.com', 'Some Sender');
-$mail-&gt;addTo('recipient@test.com', 'Some Recipient');
-$mail-&gt;setSubject('TestSubject');
-$mail-&gt;send($transport);</programlisting>
+$mail->setBodyText('This is the text of the mail.');
+$mail->setFrom('sender@test.com', 'Some Sender');
+$mail->addTo('recipient@test.com', 'Some Recipient');
+$mail->setSubject('TestSubject');
+$mail->send($transport);]]></programlisting>
   </example>
 
-  <note>
-    <title>Druhy autentifikácie</title>
+  <note><info><title>Druhy autentifikácie</title></info>
+    
 
     <para>
     Typy autentifikácie sú nezávislé na veľkosti písmen ale bez interpunkcie. Pre použitie napr.
     CRAM-MD5 zadajte 'auth' =&gt; 'crammd5' v konštruktore <code>Zend_Mail_Transport_Smtp</code>.
     </para>
   </note>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

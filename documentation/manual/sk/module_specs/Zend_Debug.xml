@@ -1,6 +1,7 @@
-<sect1 id="zend.debug.dumping">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.debug.dumping"><info><title>Zobrazovanie obsahu premenených</title></info>
 
-    <title>Zobrazovanie obsahu premenených</title>
+    
 
     <para>
         Statická metóda <code>Zend_Debug::dump()</code> vypíše, alebo vráti informáciu
@@ -8,8 +9,8 @@
         nepotrebuje inicializáciu, špeciálne nástroje, alebo ladiace prostredie.
     </para>
 
-    <example id="zend.debug.dumping.example">
-        <title>Príklad metódy dump() </title>
+    <example xml:id="zend.debug.dumping.example"><info><title>Príklad metódy dump() </title></info>
+        
         <programlisting role="php"><![CDATA[<?php
 
 Zend_Debug::dump($var, $label=null, $echo=true)
@@ -38,15 +39,15 @@ Zend_Debug::dump($var, $label=null, $echo=true)
     <para>
         Môže byť užitočné vedieť ako funguje metóda <code>Zend_Debug::dump()</code>
         vnútorne. Je to obalenie PHP funkcie
-        <ulink url="http://php.net/var_dump"><code>var_dump()</code></ulink>.
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/var_dump"><code>var_dump()</code></link>.
         Ak je výstup detekovaný ako web, potom je výstup z <code>var_dump()</code>
         escapovaný pomocou
-       <ulink url="http://php.net/htmlspecialchars"><code>htmlspecialchars()</code></ulink>
+       <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/htmlspecialchars"><code>htmlspecialchars()</code></link>
        a obalený (X)HTML značkou <code>&lt;pre&gt;</code>.
     </para>
 
-    <tip>
-        <title>Ladenie s Zend_Log</title>
+    <tip><info><title>Ladenie s Zend_Log</title></info>
+        
         <para>
             Použitie <code>Zend_Debug::dump()</code> je najlepšie pre okamžité
             použitie počas vývoja aplikácie. Pridanie a odobratie kódu pre zobrazenie
@@ -60,7 +61,4 @@ Zend_Debug::dump($var, $label=null, $echo=true)
         </para>
     </tip>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

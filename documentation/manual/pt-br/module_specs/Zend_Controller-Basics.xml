@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.basics">
-    <title>O Básico de Zend_Controller</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.basics"><info><title>O Básico de Zend_Controller</title></info>
+    
 
     <para>
         O sistema <classname>Zend_Controller</classname> é projetado para ser leve, modular, e
@@ -18,8 +18,7 @@
     </para>
 
     <para>
-        <inlinegraphic width="483" scale="100" align="center" valign="middle"
-            fileref="figures/zend.controller.basics.png" format="PNG" />
+        <inlinemediaobject><imageobject><imagedata width="483" scale="100" align="center" valign="middle" fileref="figures/zend.controller.basics.png" format="PNG"/></imageobject></inlinemediaobject>
     </para>
 
     <para>
@@ -85,8 +84,7 @@
 
             <para>
                 <classname>Zend_Controller_Router_Rewrite</classname> também pode ser usado
-                para combinar caminhos arbitrários; veja a <link
-                    linkend="zend.controller.router">documentação do roteador</link>
+                para combinar caminhos arbitrários; veja a <link linkend="zend.controller.router">documentação do roteador</link>
                 para mais informações.
             </para>
         </listitem>
@@ -121,8 +119,8 @@
                 <emphasis>bar</emphasis>.
             </para>
 
-            <note>
-                <title>Convenções de Nomenclatura para Maiúsculas e Minúsculas</title>
+            <note><info><title>Convenções de Nomenclatura para Maiúsculas e Minúsculas</title></info>
+                
 
                 <para>
                     Desde que os seres humanos são notoriamente incapazes de preservar
@@ -187,8 +185,4 @@
         para ser despachado através do reinicio do status de requisição, o laço continua e outro
         despacho é executado. De outra maneira, o processo termina.
     </para>
-</sect1>
-
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

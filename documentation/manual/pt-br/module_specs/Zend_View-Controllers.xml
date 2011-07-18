@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20799 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.view.controllers">
-    <title>Scripts Controladores</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.controllers"><info><title>Scripts Controladores</title></info>
+    
 
     <para>
         O controlador é onde você instancia e configura o <classname>Zend_View</classname>. Você
@@ -10,8 +8,8 @@
         particular.
     </para>
 
-    <sect2 id="zend.view.controllers.assign">
-        <title>Atribuindo Variáveis</title>
+    <section xml:id="zend.view.controllers.assign"><info><title>Atribuindo Variáveis</title></info>
+        
 
         <para>
             Seu script controlador deverá atribuir as variáveis necessárias ao visualizador antes de
@@ -70,10 +68,10 @@ $view->assign('a', "Hay");
 $view->assign('b', "Bee");
 $view->assign('c', "Sea");
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.controllers.render">
-        <title>Renderizando um Script de Visualização</title>
+    <section xml:id="zend.view.controllers.render"><info><title>Renderizando um Script de Visualização</title></info>
+        
 
         <para>
             Uma vez que tenhamos atribuído todas as variáveis necessárias, o controlador irá
@@ -90,16 +88,16 @@ $view->b = "Bee";
 $view->c = "Sea";
 echo $view->render('someView.php');
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.controllers.script-paths">
-        <title>Caminhos do Script de Visualização</title>
+    <section xml:id="zend.view.controllers.script-paths"><info><title>Caminhos do Script de Visualização</title></info>
+        
 
         <para>
             Por padrão, <classname>Zend_View</classname> espera encontrar os scripts de visualização
             localizados no mesmo diretório onde reside o script controlador. Por exemplo, se o seu
             script controlador estiver em "/path/to/app/controllers" e chamar
-            $view->render('someView.php'), <classname>Zend_View</classname> irá procurar por ele em
+            $view-&gt;render('someView.php'), <classname>Zend_View</classname> irá procurar por ele em
             "/path/to/app/controllers/someView.php".
         </para>
 
@@ -115,7 +113,7 @@ $view->setScriptPath('/path/to/app/views');
 ]]></programlisting>
 
         <para>
-            Agora quando você chamar $view->render('someView.php'), ele irá procurar em
+            Agora quando você chamar $view-&gt;render('someView.php'), ele irá procurar em
             "/path/to/app/views/someView.php".
         </para>
 
@@ -138,8 +136,8 @@ $view->addScriptPath('/path/to/custom/');
 // diretório corrente, por "booklist.php".
 ]]></programlisting>
 
-        <note>
-            <title>Nunca utilize uma entrada do usuário para definir caminhos de script</title>
+        <note><info><title>Nunca utilize uma entrada do usuário para definir caminhos de script</title></info>
+            
 
             <para>
                 <classname>Zend_View</classname> utiliza caminhos de script para pesquisar e
@@ -164,8 +162,5 @@ $view->render('passwd');
                 caminhos sejam controlados por sua aplicação.
             </para>
         </note>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

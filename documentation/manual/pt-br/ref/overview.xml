@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21740 -->
-<!-- Reviewed: no -->
-<chapter id="introduction.overview">
-    <title>Resumo</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="introduction.overview"><info><title>Resumo</title></info>
+    
 
     <para>
         Zend Framework é um framework de código aberto para o desenvolvimento de aplicações web e
@@ -31,7 +31,7 @@
 
     <para>
         A principal patrocinadora do projeto 'Zend Framework' é a
-        <ulink url="http://www.zend.com">Zend Technologies</ulink>, mas muitas empresas têm
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.com">Zend Technologies</link>, mas muitas empresas têm
         contribuído com componentes ou com características significativas para o framework.
         Empresas como Google, Microsoft e StrikeIron mantêm parcerias com a Zend para fornecer
         interfaces de web services e outras tecnologias que pretendam disponibilizar aos
@@ -41,11 +41,8 @@
     <para>
         Zend Framework não poderia distribuir e dar suporte a todos esses recursos sem a ajuda da
         vibrante comunidade do Zend Framework. Os membros da comunidade, incluindo colaboradores,
-        se dispõem em <ulink url="http://framework.zend.com/archives">listas de discussão</ulink>,
-        <ulink url="http://www.zftalk.com">canais IRC</ulink>, e outros fóruns. Seja qual for a sua
+        se dispõem em <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/archives">listas de discussão</link>,
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zftalk.com">canais IRC</link>, e outros fóruns. Seja qual for a sua
         pergunta sobre o Zend Framework, a comunidade estará sempre disponível para lhe responder.
     </para>
 </chapter>
-<!--
-vim:se ts=4 sw=4 et:
--->

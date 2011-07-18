@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21740 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.json.advanced">
-    <title>Uso Avançado do Zend_Json</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.advanced"><info><title>Uso Avançado do Zend_Json</title></info>
+    
 
-    <sect2 id="zend.json.advanced.objects1">
-        <title>Objetos JSON</title>
+    <section xml:id="zend.json.advanced.objects1"><info><title>Objetos JSON</title></info>
+        
 
         <para>
             Quando codificamos objetos <acronym>PHP</acronym> como <acronym>JSON</acronym>, todas
@@ -54,10 +52,10 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
             criado, pode ser criado no código do desenvolvedor e ser populado com os valores
             descodificados usando <classname>Zend_Json</classname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.json.advanced.objects2">
-        <title>Codificando Objetos PHP</title>
+    <section xml:id="zend.json.advanced.objects2"><info><title>Codificando Objetos PHP</title></info>
+        
 
         <para>
             Se você estiver codificando objetos <acronym>PHP</acronym> por padrão, o mecanismo de
@@ -66,10 +64,10 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
             <classname>Zend_Json</classname> chama esse método e espera que o objeto retorne uma
             representação <acronym>JSON</acronym> de seu estado interno.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.json.advanced.internal">
-        <title>Codificador/Descodificador Interno</title>
+    <section xml:id="zend.json.advanced.internal"><info><title>Codificador/Descodificador Interno</title></info>
+        
 
         <para>
             <classname>Zend_Json</classname> tem dois modos diferentes, dependendo se ext/json
@@ -90,10 +88,10 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
         <programlisting language="php"><![CDATA[
 Zend_Json::$useBuiltinEncoderDecoder = true:
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.json.advanced.expr">
-        <title>Expressões do JSON</title>
+    <section xml:id="zend.json.advanced.expr"><info><title>Expressões do JSON</title></info>
+        
 
         <para>
             Javascript faz uso pesado de funções de callback anônimas, que podem ser guardadas
@@ -129,8 +127,5 @@ $jsonObjectWithExpression = Zend_Json::encode(
     array('enableJsonExprFinder' => true)
 );
 ]]></programlisting>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

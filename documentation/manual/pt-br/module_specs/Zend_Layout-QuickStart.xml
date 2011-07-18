@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.layout.quickstart">
-    <title>Guia Rápido Zend_Layout</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.quickstart"><info><title>Guia Rápido Zend_Layout</title></info>
+    
 
     <para>
         Há dois casos de uso primários para <classname>Zend_Layout</classname>: com o
         <acronym>MVC</acronym> do Zend Framework, e sem.
     </para>
 
-    <sect2 id="zend.layout.quickstart.layouts">
-        <title>Scripts de Layout</title>
+    <section xml:id="zend.layout.quickstart.layouts"><info><title>Scripts de Layout</title></info>
+        
 
         <para>
             Em ambos os casos, entretanto, você precisará criar um script de layout.
@@ -82,18 +80,15 @@
 </body>
 </html>
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.layout.quickstart.mvc">
-        <title>Usando Zend_Layout com o MVC do Zend Framework</title>
+    <section xml:id="zend.layout.quickstart.mvc"><info><title>Usando Zend_Layout com o MVC do Zend Framework</title></info>
+        
 
         <para>
             <classname>Zend_Controller</classname> oferece um rico conjunto de funcionalidades
-            para extensão por meio de seus <link
-            linkend="zend.controller.plugins">front controller plugins</link> e <link
-            linkend="zend.controller.actionhelpers">action controller helpers</link>.
-            <classname>Zend_View</classname> também tem <link
-            linkend="zend.view.helpers">helpers</link>. <classname>Zend_Layout</classname>
+            para extensão por meio de seus <link linkend="zend.controller.plugins">front controller plugins</link> e <link linkend="zend.controller.actionhelpers">action controller helpers</link>.
+            <classname>Zend_View</classname> também tem <link linkend="zend.view.helpers">helpers</link>. <classname>Zend_Layout</classname>
             toma vantagem desses diversos pontos de extensão quando usado com os
             componentes <acronym>MVC</acronym>.
         </para>
@@ -121,7 +116,7 @@ Zend_Layout::startMvc();
         <para>
             <methodname>startMvc()</methodname> pode tomar uma matriz opcional de opções ou
             um objeto <classname>Zend_Config</classname> para customizar a instância; essas
-            opções são detalhadas na <xref linkend="zend.layout.options" />.
+            opções são detalhadas na <xref linkend="zend.layout.options"/>.
         </para>
 
         <para>
@@ -204,10 +199,10 @@ $layout = Zend_Layout::getMvcInstance();
             ActionStack, o qual você pode usar para configurar uma pilha de ações através da
             qual itertamos, e então criamos páginas widgetizadas.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.layout.quickstart.standalone">
-        <title>Usando Zend_Layout como um Componente</title>
+    <section xml:id="zend.layout.quickstart.standalone"><info><title>Usando Zend_Layout como um Componente</title></info>
+        
 
         <para>
             Como um componente autônomo, <classname>Zend_Layout</classname> não oferece tantas
@@ -251,10 +246,10 @@ $layout->setLayout('foo');
 // Renderiza o layout final
 echo $layout->render();
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.layout.quickstart.example">
-        <title>Exemplo de Layout</title>
+    <section xml:id="zend.layout.quickstart.example"><info><title>Exemplo de Layout</title></info>
+        
 
         <para>
             Algumas vezes uma imagem vale mais que mil palavras. A seguir temos
@@ -262,8 +257,7 @@ echo $layout->render();
         </para>
 
         <para>
-            <inlinegraphic align="center" valign="middle"
-                fileref="figures/zend.layout.quickstart.example.png" format="PNG" />
+            <inlinemediaobject><imageobject><imagedata align="center" valign="middle" fileref="figures/zend.layout.quickstart.example.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
         <para>
@@ -273,8 +267,5 @@ echo $layout->render();
             mostrar-se no topo; o mesmo poderia ser dito para a barra lateral ou o cabeçalho.
             A mecânica real de puxar o conteúdo permanece a mesma, entretanto.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20854 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.pdf.introduction">
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.introduction"><info><title>Introdução</title></info>
     <!-- @todo review and revise upon completion of refactoring -->
-    <title>Introdução</title>
+    
 
     <para>
         O componente <classname>Zend_Pdf</classname> é um motor para manipulação de
@@ -80,7 +80,4 @@
             </listitem>
         </itemizedlist>
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

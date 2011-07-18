@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17327 -->
-<!-- Reviewed: no -->
-<appendix id="requirements" xmlns:xi="http://www.w3.org/2001/XInclude">
+<?xml version="1.0" encoding="utf-8"?>
 
-    <title>Követelmények</title>
 
-    <sect1 id="requirements.introduction">
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="requirements"><info><title>Követelmények</title></info>
 
-        <title>Bevezetés</title>
+    
+
+    <section xml:id="requirements.introduction"><info><title>Bevezetés</title></info>
+
+        
 
         <para>
             A Zend Framework futtatásához egy <acronym>PHP</acronym> 5 értelmező
@@ -29,9 +29,9 @@
             közvetlen hatással az alkalmazás funkcionalitására.
         </para>
 
-        <sect2 id="requirements.version">
+        <section xml:id="requirements.version"><info><title>PHP verzió</title></info>
 
-            <title>PHP verzió</title>
+            
 
             <para>
                 Ajánlott a <acronym>PHP</acronym> legújabb kiadása a válságos
@@ -44,11 +44,11 @@
                 PHPUnit 3.3.0-val vagy későbbivel futtathatók.
             </para>
 
-        </sect2>
+        </section>
 
-        <sect2 id="requirements.extensions">
+        <section xml:id="requirements.extensions"><info><title>PHP kiterjesztések</title></info>
 
-            <title>PHP kiterjesztések</title>
+            
 
             <para>
                 Alább található egy táblázat, mely felsorolja a
@@ -71,12 +71,12 @@
                 eredménnyel, ha nincsenek telepítve.
             </para>
 
-            <xi:include href="requirements-php-extensions-table.xml" />
-        </sect2>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="requirements-php-extensions-table.xml"/>
+        </section>
 
-        <sect2 id="requirements.zendcomponents">
+        <section xml:id="requirements.zendcomponents"><info><title>Összetevők</title></info>
 
-            <title>Összetevők</title>
+            
 
             <para>
                 Alább található az összes rendelkezésre álló Zend Framework
@@ -98,12 +98,12 @@
                 eredménnyel, ha nincsenek telepítve.
             </para>
 
-            <xi:include href="requirements-zendcomponents-table.xml" />
-        </sect2>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="requirements-zendcomponents-table.xml"/>
+        </section>
 
-        <sect2 id="requirements.dependencies">
+        <section xml:id="requirements.dependencies"><info><title>Függőségek</title></info>
 
-            <title>Függőségek</title>
+            
 
             <para>
                 Alább található a Zend Framework összetevőit és azok más
@@ -132,12 +132,9 @@
                 </para>
             </note>
 
-            <xi:include href="requirements-dependencies-table.xml" />
-        </sect2>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="requirements-dependencies-table.xml"/>
+        </section>
 
-    </sect1>
+    </section>
 
 </appendix>
-<!--
-vim:se ts=4 sw=4 et:
--->

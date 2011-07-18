@@ -1,4 +1,34 @@
-Required software:
+Zend Framework Docbook End-User Documentation
+=============================================
+
+To build the documentation, you have two options: using the standard
+xsltproc toolchain, or using PhD (http://docs.php.net/phd/), PHP's
+Documentation renderer (preferred).
+
+Using PhD
+---------
+
+To generate using PhD, you need the following tools:
+
+- xsltproc
+- The ZF build tools:
+  You can check these out locally within this directory by running the
+  following command:
+  "svn co http://framework.zend.com/svn/framework/build-tools/trunk/build/tools/docs phd"
+
+From here, you need to collate the docbook sources to a single file, and
+then run PhD:
+
+- run "xsltproc --xinclude ./phd/db4-upgrade.xl manual.xml.in > manual.full.xml | tee -a err.txt"
+- run "./phd/pear/phd -g 'phpdotnet\phd\Highlighter_GeSHi' --xinclude -f zfpackage -d manual.full.xml -o ./output"
+
+The manual will now be in "output/zf-package-chunked-xhtml/manual.html"
+
+
+Using the xsltproc toolchain
+----------------------------
+
+Using the xsltproc toolchain requires the following tools:
 
 - autoconf
 - make
@@ -8,7 +38,6 @@ Required software:
 On Windows, you should use Cygwin software or another port of GNU 
 development tools.
 
-How to build the DocBook documentation:
 
 - run "autoconf" in this dir
 - run "./configure" in this dir

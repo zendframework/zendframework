@@ -2365,6 +2365,4 @@
                 <xi:include href="../en/ref/copyrights.xml" parse="xml"/>
             </xi:fallback>
     </xi:include>
-
-    <index xml:id="the.index"/>
 </book>

@@ -39,6 +39,7 @@ class Files extends RackspaceAbstract
     const ERROR_PARAM_NO_NAME_SOURCE_OBJECT    = 'You must specify the source object name';
     const ERROR_PARAM_NO_NAME_DEST_CONTAINER   = 'You must specify the destination container name';
     const ERROR_PARAM_NO_NAME_DEST_OBJECT      = 'You must specify the destination object name';
+    const ERROR_PARAM_NO_METADATA              = 'You must specify the metadata array';
     const ERROR_CDN_TTL_OUT_OF_RANGE           = 'TTL must be a number in seconds, min is 900 sec and maximum is 1577836800 (50 years)';
     const ERROR_PARAM_UPDATE_CDN               = 'You must specify at least one the parameters: ttl, cdn_enabled or log_retention';
     const HEADER_CONTENT_TYPE                  = 'Content-type';
@@ -323,7 +324,7 @@ class Files extends RackspaceAbstract
         if (empty($object)) {
             throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_OBJECT);
         }
-        $result= $this->httpCall($this->getStorageUrl().'/'.rawurlencode($container).'/'.rawurlencode($object),HttpClient::GET);
+        $result= $this->httpCall($this->getStorageUrl().'/'.rawurlencode($container).'/'.rawurlencode($object),HttpClient::GET,$headers);
         $status= $result->getStatus();
         switch ($status) {
             case '200': // break intentionally omitted
@@ -524,7 +525,7 @@ class Files extends RackspaceAbstract
      * @param array $metadata
      * @return boolean
      */
-    public function setMetadataObject($container,$object,$metadata=array())
+    public function setMetadataObject($container,$object,$metadata)
     {
         if (empty($container)) {
             throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
@@ -532,11 +533,12 @@ class Files extends RackspaceAbstract
         if (empty($object)) {
             throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_OBJECT);
         }
+        if (empty($metadata) || !is_array($metadata)) {
+            throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_OBJECT);
+        }
         $headers=array();
-        if (!empty($metadata) && is_array($metadata)) {
-            foreach ($metadata as $key => $value) {
-                $headers[self::METADATA_OBJECT_HEADER.$key]= $value;
-            }
+        foreach ($metadata as $key => $value) {
+            $headers[self::METADATA_OBJECT_HEADER.$key]= $value;
         }
         $result= $this->httpCall($this->getStorageUrl().'/'.rawurlencode($container).'/'.rawurlencode($object),HttpClient::POST,$headers);
         $status= $result->getStatus();
@@ -648,12 +650,12 @@ class Files extends RackspaceAbstract
         return false;
     }
     /**
-     * Get the information about a Cdn container
+     * Get the information of a Cdn container
      *
      * @param string $container
      * @return array|boolean
      */
-    public function getInfoCdn($container) {
+    public function getInfoCdnContainer($container) {
         if (empty($container)) {
             throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
         }

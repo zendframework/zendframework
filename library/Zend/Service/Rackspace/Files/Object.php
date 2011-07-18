@@ -260,7 +260,7 @@ class Object
      */
     public function getCdnUrl() 
     {
-        $result= $this->service->getInfoCdn($this->container);
+        $result= $this->service->getInfoCdnContainer($this->container);
         if ($result!==false) {
             if ($result['cdn_enabled']) {
                 return $result['cdn_uri'].'/'.$this->name;
@@ -275,7 +275,7 @@ class Object
      */
     public function getCdnUrlSsl() 
     {
-        $result= $this->service->getInfoCdn($this->container);
+        $result= $this->service->getInfoCdnContainer($this->container);
         if ($result!==false) {
             if ($result['cdn_enabled']) {
                 return $result['cdn_uri_ssl'].'/'.$this->name;

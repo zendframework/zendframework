@@ -8,7 +8,7 @@
 
         <para>
             The <classname>Zend\Service\Rackspace\Files</classname> is a class that
-            provides a simple <acronym>API</acronym> to manage the Rackspace Cloud Files.
+            provides a simple <acronym>API</acronym> to manage the <ulink url="http://www.rackspace.com/cloud/cloud_hosting_products/files/">Rackspace Cloud Files</ulink>.
         </para>
     </sect2>
 
@@ -74,10 +74,12 @@
         
         <programlisting language="php"><![CDATA[  
             $container= $rackspace->createContainer('test');
-            if ($container===false) {
-               die("ERROR: %s",$rackspace->getErrorMsg());
+            
+            if (!$rackspace->isSuccessful()) {
+               die('ERROR: '.$rackspace->getErrorMsg());
             } 
-            printf("Name: %s,$container->getName());
+            
+            printf("Name: %s",$container->getName());
 ]]></programlisting>
 
         <para>
@@ -92,10 +94,14 @@
         <programlisting language="php"><![CDATA[
             $name= 'example.jpg';
             $file= file_get_contents($name);
+            
             $metadata= array (
                 'foo' => 'bar'
             );
-            if ($rackspace->storeObject('test',$name,$file,$metadata)!==false) {
+            
+            $rackspace->storeObject('test',$name,$file,$metadata);
+            
+            if ($rackspace->isSuccessful()) {
                 echo 'Object stored successfully';
             } else {
                 printf("ERROR: %s",$rackspace->getErrorMsg());
@@ -112,7 +118,9 @@
         </para>
         
         <programlisting language="php"><![CDATA[           
-            if ($rackspace->deleteObject('test','example.jpg')!==false) {
+            $rackspace->deleteObject('test','example.jpg');
+            
+            if ($rackspace->isSuccessful()) {
                 echo 'Object deleted successfully';
             } else {
                 printf("ERROR: %s",$rackspace->getErrorMsg());
@@ -130,7 +138,7 @@
         <programlisting language="php"><![CDATA[     
             $cdnInfo= $rackspace->enableCdnContainer('test');
             
-            if ($cdnInfo!==false) {
+            if ($rackspace->isSuccessful()) {
                 print_r($cdnInfo);
             } else {
                 printf("ERROR: %s",$rackspace->getErrorMsg());
@@ -160,19 +168,150 @@
         <title>Available Methods</title>
  
         <variablelist>
-            <varlistentry id="zend.service.rackspace.files.methods.get-containers">
+            
+            <varlistentry id="zend.service.rackspace.files.methods.copy-object">
                 <term>
                     <methodsynopsis>
-                        <methodname>getContainers</methodname>
+                        <methodname>copyObject</methodname>
                         <methodparam>
-                            <funcparams>$options=aray()</funcparams>
+                            <funcparams>string $container_source,string $obj_source,string $container_dest,string $obj_dest,$metadata=array(),string $content_type=null</funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
                 
                 <listitem>
                     <para>
-                        Returns all the containers available. The return is an instance of <classname>Zend\Service\Rackspace\Files\ContainerList</classname>
+                        Copy an object from a container to another. 
+                        The return is <emphasis>true</emphasis> in case of success and <emphasis>false</emphasis> in case of error.
+                    </para>
+                    <para>
+                        The <emphasis>$container_source</emphasis> is the name of the source container.
+                    </para>    
+                    <para>
+                        The <emphasis>$obj_source</emphasis> is the name of the source object.   
+                    </para>
+                    <para>
+                        The <emphasis>$container_dest</emphasis> is the name of the destination container.   
+                    </para>
+                    <para>
+                        The <emphasis>$obj_dest</emphasis> is the name of the destination object.   
+                    </para>
+                    <para>
+                        The <emphasis>$metadata</emphasis> array contains the metadata information related to the destination object.   
+                    </para>    
+                    <para>
+                        The <emphasis>$content_type</emphasis> is the optional content type of the destination object (file).
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry id="zend.service.rackspace.files.methods.create-container">
+                <term>
+                    <methodsynopsis>
+                        <methodname>createContainer</methodname>
+                        <methodparam>
+                            <funcparams>string $container, $metadata=array()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Create a container. The return is an instance of <classname>Zend\Service\Rackspace\Files\Container</classname>.
+                        In case of error the return is <emphasis>false</emphasis>.
+                    </para>
+                    <para>
+                        The <emphasis>$container</emphasis> is the name of the container to create.
+                    </para>    
+                    <para>
+                        The <emphasis>$metadata</emphasis> array contains the metadata information related to the container.   
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry id="zend.service.rackspace.files.methods.delete-container">
+                <term>
+                    <methodsynopsis>
+                        <methodname>deleteContainer</methodname>
+                        <methodparam>
+                            <funcparams>string $container</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Delete a container. The return is <emphasis>true</emphasis> in case of success and <emphasis>false</emphasis> in case of error.
+                    </para>
+                    <para>
+                        The <emphasis>$container</emphasis> is the name of the container to delete.
+                    </para>    
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry id="zend.service.rackspace.files.methods.delete-object">
+                <term>
+                    <methodsynopsis>
+                        <methodname>deleteObject</methodname>
+                        <methodparam>
+                            <funcparams>string $container,string $object</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Delete an object in a specific container. Return <emphasis>true</emphasis> in case of success, <emphasis>false</emphasis> in case of error.
+                    </para>
+                    <para>
+                        The <emphasis>$container</emphasis> is the name of the container.
+                    </para>
+                    <para>
+                        The <emphasis>$object</emphasis> is the name of the object to delete.
+                    </para>   
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry id="zend.service.rackspace.files.methods.enable-cdn-container">
+                <term>
+                    <methodsynopsis>
+                        <methodname>enableCdnContainer</methodname>
+                        <methodparam>
+                            <funcparams>string $container,integer $ttl=900</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Publish a container as <acronym>CDN</acronym> (Content Delivery Network). Return an associative array contains the CDN url and SSL url.
+                        In case of error the return is <emphasis>false</emphasis>.
+                    </para>
+                    <para>
+                        The <emphasis>$container</emphasis> is the name of the container.
+                    </para>
+                    <para>
+                        The <emphasis>$ttl</emphasis> is the time to live for the CDN cache content. The default value is 15 minutes (900 seconds).
+                        The minimum TTL that can be set is 15 minutes (900 seconds); the maximum TTL is
+                        50 years (range of 900 to 1577836800 seconds).
+                    </para>   
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry id="zend.service.rackspace.files.methods.get-cdn-containers">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getCdnContainers</methodname>
+                        <methodparam>
+                            <funcparams>$options=array()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Returns all the CDN containers available. The return is an instance of <classname>Zend\Service\Rackspace\Files\ContainerList</classname>.
+                        In case of error the return is <emphasis>false</emphasis>.
                     </para>
                     <para>
                         The <emphasis>$options</emphasis> contains the following optional parameters:
@@ -188,6 +327,439 @@
                                 </para>
                             </listitem>
                         </itemizedlist>    
+                    </para>
+                </listitem>
+            </varlistentry>
+        
+            <varlistentry id="zend.service.rackspace.files.methods.get-containers">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getContainers</methodname>
+                        <methodparam>
+                            <funcparams>$options=array()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Returns all the containers available. The return is an instance of <classname>Zend\Service\Rackspace\Files\ContainerList</classname>
+                        In case of error the return is <emphasis>false</emphasis>.
+                    </para>
+                    <para>
+                        The <emphasis>$options</emphasis> contains the following optional parameters:
+                        <itemizedlist mark='opencircle'>
+                            <listitem>
+                                <para>
+                                    <emphasis>limit</emphasis>, for an integer value n, limits the number of results to at most n values.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>marker</emphasis>, given a string value x, return object names greater in value than the specified marker.
+                                </para>
+                            </listitem>
+                        </itemizedlist>    
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry id="zend.service.rackspace.files.methods.get-container">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getContainer</methodname>
+                        <methodparam>
+                            <funcparams>string $container</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Returns the container specified as instance of  <classname>Zend\Service\Rackspace\Files\Container</classname>
+                        In case of error the return is <emphasis>false</emphasis>.
+                    </para>
+                    <para>
+                        The <emphasis>$container</emphasis> is the name of the container.
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry id="zend.service.rackspace.files.methods.get-count-containers">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getCountContainers</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Return the total count of containers.
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry id="zend.service.rackspace.files.methods.get-count-objects">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getCountObjects</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Return the count of objects contained in all the containers.
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry id="zend.service.rackspace.files.methods.get-info-cdn-container">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getInfoCdnContainer</methodname>
+                        <methodparam>
+                            <funcparams>string $container</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Get the information of a CDN container. The result is an associative array with all the CDN information.
+                        In case of error the return is <emphasis>false</emphasis>.
+                    </para>
+                    <para>
+                        The <emphasis>$container</emphasis> is the name of the container.
+                    </para>    
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry id="zend.service.rackspace.files.methods.get-info-containers">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getInfoContainers</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Get the information about all the containers available.
+                        Return an associative array with the following values:
+                        <itemizedlist mark='opencircle'>
+                            <listitem>
+                                <para>
+                                    <emphasis>tot_containers</emphasis>, the total number of containers stored
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>size_containers</emphasis>, the total size, in byte, of all the containers.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>tot_objects</emphasis>, the total number of objects (file) stored in all the containers.
+                                </para>
+                            </listitem>
+                        </itemizedlist> 
+                        In case of error the return is <emphasis>false</emphasis>.
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry id="zend.service.rackspace.files.methods.get-metadata-container">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getMetadataContainer</methodname>
+                        <methodparam>
+                            <funcparams>string $container</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Get the metadata information of a container. The result is an associative array with all the metadata keys/values.
+                        In case of error the return is <emphasis>false</emphasis>.
+                    </para>
+                    <para>
+                        The <emphasis>$container</emphasis> is the name of the container.
+                    </para>    
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry id="zend.service.rackspace.files.methods.get-metadata-object">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getMetadataObject</methodname>
+                        <methodparam>
+                            <funcparams>string $container, string $object</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Get the metadata information of an object. The result is an associative array with all the metadata keys/values.
+                        In case of error the return is <emphasis>false</emphasis>.
+                    </para>
+                    <para>
+                        The <emphasis>$container</emphasis> is the name of the container.
+                    </para>  
+                    <para>
+                        The <emphasis>$object</emphasis> is the name of the object.
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry id="zend.service.rackspace.files.methods.get-objects">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getObjects</methodname>
+                        <methodparam>
+                            <funcparams>string $container, $options=array()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Returns all the objects of a container. The return is an instance of <classname>Zend\Service\Rackspace\Files\ObjectList</classname>
+                        In case of error the return is <emphasis>false</emphasis>.
+                    </para>
+                    <para>
+                        The <emphasis>$container</emphasis> is the name of the container.
+                    </para>
+                    <para>
+                        The <emphasis>$options</emphasis> contains the following optional parameters:
+                        <itemizedlist mark='opencircle'>
+                            <listitem>
+                                <para>
+                                    <emphasis>limit</emphasis>, for an integer value n, limits the number of results
+                                    to at most n values.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>marker</emphasis>, given a string value x, return object names greater
+                                    in value than the specified marker.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>prefix</emphasis>, for a string value x, causes the results to be
+                                    limited to object names beginning with the substring x.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>path</emphasis>, for a string value x, return the object names nested
+                                    in the pseudo path.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>delimiter</emphasis>, for a character c, return all the object names
+                                    nested in the container (without the need for the directory marker objects).
+                                </para>
+                            </listitem>
+                        </itemizedlist>    
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry id="zend.service.rackspace.files.methods.get-object">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getObject</methodname>
+                        <methodparam>
+                            <funcparams>string $container, string $object, $headers=array()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Returns an object of a container. The return is an instance of <classname>Zend\Service\Rackspace\Files\Object</classname>
+                        In case of error the return is <emphasis>false</emphasis>.
+                    </para>
+                    <para>
+                        The <emphasis>$container</emphasis> is the name of the container.
+                    </para>
+                    <para>
+                        The <emphasis>$object</emphasis> is the name of the object.
+                    </para>
+                    <para>
+                        The <emphasis>$headers</emphasis> contains the following optional parameters (See the <ulink url="http://www.ietf.org/rfc/rfc2616.txt">RFC-2616</ulink> for more info):
+                        <itemizedlist mark='opencircle'>
+                            <listitem>
+                                <para>
+                                    <emphasis>If-Match</emphasis>, a client that has one or more entities previously
+                                    obtained from the resource can verify that one of those entities is
+                                    current by including a list of their associated entity tags in the
+                                    If-Match header field. 
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>If-None-Match</emphasis>, a client that has one or more entities previously
+                                    obtained from the resource can verify that none of those entities is
+                                    current by including a list of their associated entity tags in the
+                                    If-None-Match header field.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>If-Modified-Since</emphasis>, if the requested variant has not been modified
+                                    since the time specified in this field, an entity will not be returned from the server.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>If-Unmodified-Since</emphasis>, if the requested resource has not been modified
+                                    since the time specified in this field, the server SHOULD perform the
+                                    requested operation as if the If-Unmodified-Since header were not present.
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>Range</emphasis>, Rackspace supports a sub-set of Range and do not adhere to the full RFC-2616 specification. We support
+                                    specifying OFFSET-LENGTH where either OFFSET or LENGTH can be optional (not both at
+                                    the same time). The following are supported forms of the header:
+                                    <itemizedlist mark='bullet'>
+                                        <listitem>
+                                            <para>
+                                                <emphasis>Range: bytes=-5</emphasis>, last five bytes of the object
+                                            </para>
+                                        </listitem>
+                                        <listitem>
+                                            <para>
+                                                <emphasis>Range: bytes=10-15</emphasis>, the five bytes after a 10-byte offset
+                                            </para>
+                                        </listitem>   
+                                        <listitem>
+                                            <para>
+                                                <emphasis>Range: bytes=32-</emphasis>, all data after the first 32 bytes of the object
+                                            </para>
+                                        </listitem>
+                                    </itemizedlist>    
+                                </para>
+                            </listitem>
+                        </itemizedlist>    
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry id="zend.service.rackspace.files.methods.get-size-containers">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getSizeContainers</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Return the size, in bytes, of all the containers.
+                    </para>
+                </listitem>
+            </varlistentry>
+        
+            <varlistentry id="zend.service.rackspace.files.methods.set-metadata-object">
+                <term>
+                    <methodsynopsis>
+                        <methodname>setMetadataObject</methodname>
+                        <methodparam>
+                            <funcparams>string $container,string $object, array $metadata</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Update metadata information to the object (all the previous metadata will be deleted). 
+                        Return <emphasis>true</emphasis> in case of success, <emphasis>false</emphasis> in case of error.
+                    </para>
+                    <para>
+                        The <emphasis>$container</emphasis> is the name of the container.
+                    </para>
+                    <para>
+                        The <emphasis>$object</emphasis> is the name of the object to store.
+                    </para>
+                    <para>
+                        The <emphasis>$metadata</emphasis> array contains the metadata information related to the object.   
+                    </para>    
+                </listitem>
+            </varlistentry>
+        
+            <varlistentry id="zend.service.rackspace.files.methods.store-object">
+                <term>
+                    <methodsynopsis>
+                        <methodname>storeObject</methodname>
+                        <methodparam>
+                            <funcparams>string $container,string $object,string $file,$metadata=array()</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Store an object in a specific container. Return <emphasis>true</emphasis> in case of success, <emphasis>false</emphasis> in case of error.
+                    </para>
+                    <para>
+                        The <emphasis>$container</emphasis> is the name of the container.
+                    </para>
+                    <para>
+                        The <emphasis>$object</emphasis> is the name of the object to store.
+                    </para>
+                    <para>
+                        The <emphasis>$file</emphasis> is the content of the object to store.
+                    </para>
+                    <para>
+                        The <emphasis>$metadata</emphasis> array contains the metadata information related to the object to store.   
+                    </para>    
+                </listitem>
+            </varlistentry>
+            
+             <varlistentry id="zend.service.rackspace.files.methods.update-cdn-container">
+                <term>
+                    <methodsynopsis>
+                        <methodname>updateCdnContainer</methodname>
+                        <methodparam>
+                            <funcparams>string $container,integer $ttl=null,$cdn_enabled=null,$log=null</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Update the attribute of a <acronym>CDN</acronym> container. Return an associative array contains the CDN url and SSL url.
+                        In case of error the return is <emphasis>false</emphasis>.
+                    </para>
+                    <para>
+                        The <emphasis>$container</emphasis> is the name of the container.
+                    </para>
+                    <para>
+                        The <emphasis>$ttl</emphasis> is the time to live for the CDN cache content. The default value is 15 minutes (900 seconds).
+                        The minimum TTL that can be set is 15 minutes (900 seconds); the maximum TTL is
+                        50 years (range of 900 to 1577836800 seconds).
+                    </para>   
+                    <para>
+                        The <emphasis>$cdn_enabled</emphasis> is the flag to swith on/off the CDN. <emphasis>True</emphasis> switch on, <emphasis>false</emphasis> switch off.
+                    </para>
+                    <para>
+                        The <emphasis>$log</emphasis> enable or disable the log retention. <emphasis>True</emphasis> switch on, <emphasis>false</emphasis> switch off.
                     </para>
                 </listitem>
             </varlistentry>
@@ -215,6 +787,130 @@
             }
 ]]></programlisting>
         </example>
+        
+        <example id="zend.service.rackspace.files.examples.get-object">
+            <title>Get an object</title>
+ 
+            <para>Get an image file (<emphasis>example.gif</emphasis>) from the cloud and render it in the browser</para>
+ 
+            <programlisting language="php"><![CDATA[
+            $user = 'username';
+            $key  = 'secret key';
+
+            $rackspace = new Zend\Service\Rackspace\Files($user,$key);
+
+            $object= $rackspace->getObject('test','example.gif');
+
+            if (!$rackspace->isSuccessful()) {
+                die('ERROR: '.$rackspace->getErrorMsg());
+            }
+            
+            header('Content-type: image/gif');
+            echo $object->getFile();
+]]></programlisting>
+        </example>
+        
+        <example id="zend.service.rackspace.files.examples.create-container">
+            <title>Create a container with metadata</title>
+ 
+            <para>Create a container (<emphasis>test</emphasis>) with some metadata information (<emphasis>$metadata</emphasis>)</para>
+ 
+            <programlisting language="php"><![CDATA[
+            $user = 'username';
+            $key  = 'secret key';
+
+            $rackspace = new Zend\Service\Rackspace\Files($user,$key);
+
+            $metadata= array (
+                'foo' => 'bar',
+                'foo2' => 'bar2'
+            );
+            
+            $container= $rackspace->createContainer('test',$metadata);
+            
+            if ($rackspace->isSuccessful()) {
+                echo 'Container created successfully';
+            }    
+]]></programlisting>
+        </example>
+        
+        <example id="zend.service.rackspace.files.examples.get-metadata-container">
+            <title>Get the metadata of a container</title>
+ 
+            <para>Get the metadata of the container <emphasis>test</emphasis></para>
+ 
+            <programlisting language="php"><![CDATA[
+            $user = 'username';
+            $key  = 'secret key';
+
+            $rackspace = new Zend\Service\Rackspace\Files($user,$key);
+
+            $container= $rackspace->getContainer('test');
+            
+            if (!$rackspace->isSuccessful()) {
+                die('ERROR: '.$rackspace->getErrorMsg());
+            }
+
+            $metadata= $container->getMetadata();
+            print_r($metadata);
+]]></programlisting>
+        </example>
+        
+        <example id="zend.service.rackspace.files.examples.store-object-container">
+            <title>Store an object in a container</title>
+ 
+            <para>Store an object using a <classname>Zend\Service\Rackspace\Files\Container</classname> instance</para>
+ 
+            <programlisting language="php"><![CDATA[
+            $user = 'username';
+            $key  = 'secret key';
+
+            $rackspace = new Zend\Service\Rackspace\Files($user,$key);
+
+            $container= $rackspace->getContainer('test');
+            
+            if (!$rackspace->isSuccessful()) {
+                die('ERROR: '.$rackspace->getErrorMsg());
+            }
+
+            $file= file_get_contents('test.jpg');
+            $metadata= array (
+                'foo' => 'bar'
+            );
+            
+            if ($container->addObject('test.jpg',$file,$metadata)) {
+                echo 'Object stored successfully';
+            } 
+]]></programlisting>
+        </example>
+        
+        <example id="zend.service.rackspace.files.examples.check-cdn-enabled">
+            <title>Check if a container is CDN enabled</title>
+ 
+            <para>Check if the <emphasis>test</emphasis> container is CDN enabled. If it is not we enable it.</para>
+ 
+            <programlisting language="php"><![CDATA[
+            $user = 'username';
+            $key  = 'secret key';
+
+            $rackspace = new Zend\Service\Rackspace\Files($user,$key);
+
+            $container= $rackspace->getContainer('test');
+            
+            if (!$rackspace->isSuccessful()) {
+                die('ERROR: '.$rackspace->getErrorMsg());
+            }
+
+            if (!$container->isCdnEnabled()) {
+                if (!$container->enableCdn()) {
+                    die('ERROR: '.$rackspace->getErrorMsg());
+                }
+            }
+            printf ("The container is CDN enabled with the following URLs:\n %s\n %s\n",
+                    $container->getCdnUri(), $container->getCdnUriSsl());
+]]></programlisting>
+        </example>
+        
     </sect2>
     
 </sect1>

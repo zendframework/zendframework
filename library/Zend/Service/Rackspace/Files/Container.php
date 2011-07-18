@@ -433,7 +433,7 @@ class Container
      */
     public function updateCdnInfo() 
     {
-        $result=  $this->service->getInfoCdn($this->getName());
+        $result=  $this->service->getInfoCdnContainer($this->getName());
         if ($result!==false) {
             $this->cdn= (strtolower($result['cdn_enabled'])!=='false');
             $this->ttl= $result['ttl'];

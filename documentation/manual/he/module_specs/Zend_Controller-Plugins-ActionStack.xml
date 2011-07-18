@@ -1,5 +1,8 @@
-<sect3 id="zend.controller.plugins.standard.actionstack">
-    <title>ActionStack</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.plugins.standard.actionstack"><info><title>ActionStack</title></info>
+    
 
     <para>
         פלאגין ה <code>ActionStack</code> מאפשר לך לנהל את הערמה של הבקשות, ופועלת בתור פלאגין <code>postDispatch</code>.
@@ -40,7 +43,4 @@
         מתודה נוספת <code>forward()</code>, מקבלת פרמטר בתור אובייקט ניתוב, ומגדירה את המצב של האובייקט הנוכחי בקונטרולר הראשי למצב של האובייקט שהוזן, ומסמנת אותו בתור לא ניתן לניתוב.
         ובכך מכריחה איטרציה נוספת של לולאת הניתוב.
     </para>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

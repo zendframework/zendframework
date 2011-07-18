@@ -1,12 +1,13 @@
-<sect1 id="zend.mail.attachments">
-    <title>צירופים</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.attachments"><info><title>צירופים</title></info>
+    
     <para>
         ניתן לצרף קבצים לאימייל בעזרת מתודת ה <code>createAttachment()</code>. פעולת ברירת המחדל של <code>Zend_Mail</code> היא לחשוב שהצירוף הוא קובץ בינארי
         (application/octet-stream), ולכן ידרוש העברה בעזרת קידוד base64, ומטופל כצירוף.
         השערות אלו ניתנות לדריסה על ידי העברת פרמטרים נוספים למתודה <code>createAttachment()</code>:
     </para>
-    <example id="zend.mail.attachments.example-1">
-        <title>שליחת אימיילים עם צירוף קבצים</title>
+    <example xml:id="zend.mail.attachments.example-1"><info><title>שליחת אימיילים עם צירוף קבצים</title></info>
+        
         <programlisting role="php"><![CDATA[
 $mail = new Zend_Mail();
 // build message...
@@ -15,8 +16,8 @@ $mail->createAttachment($myImage,
                         'image/gif',
                         Zend_Mime::DISPOSITION_INLINE,
                         Zend_Mime::ENCODING_8BIT);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
     <para>
         אם דרושה שליטה נוספת על סוג ה MIME שנוצר ונשלח לאותו צירוף, ניתן להשתמש בערך שמוחזר ממתודת ה <code>createAttachment()</code> כדי לערוך את הערכים שלה.
@@ -32,8 +33,8 @@ $at->encoding    = Zend_Mime::ENCODING_8BIT;
 $at->filename    = 'test.gif';
 
 $mail->send();
-]]>
-    </programlisting>
+
+    ]]></programlisting>
     <para>
         לחלופין ניתן ליצור אובייקט של <code>Zend_Mime_Part</code> ולהוסיף אותו ל <code>addAttachment()</code>:
     </para>
@@ -49,9 +50,6 @@ $at->filename    = 'test.gif';
 $mail->addAttachment($at);
 
 $mail->send();
-]]>
-    </programlisting>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+
+    ]]></programlisting>
+</section>

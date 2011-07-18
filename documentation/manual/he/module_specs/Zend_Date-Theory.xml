@@ -1,6 +1,9 @@
-<sect1 id="zend.date.definition.theory">
+<?xml version="1.0" encoding="utf-8"?>
 
-    <title>תאורית הפעולות</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.definition.theory"><info><title>תאורית הפעולות</title></info>
+
+    
 
     <para>
         למה יש רק מחלקה אחת <code>Zend_Date</code> לניהול ותפעול בתאריכים וזמן במערכת ה Zend Framework?
@@ -14,12 +17,12 @@
         מחלקה אחת מפחיתה את שכפול אותם קודים אשר מבצעים את אותם הפעולות, ללא צורך בהיררכיה מסובכת.
     </para>
 
-    <sect2 id="zend.date.theory.internals">
+    <section xml:id="zend.date.theory.internals"><info><title>מידע נוסף</title></info>
 
-        <title>מידע נוסף</title>
+        
 
         <para>
-            <itemizedlist mark='opencircle'>
+            <itemizedlist mark="opencircle">
                 <listitem>
                     <para>
                         זמן ב UNIX
@@ -52,7 +55,6 @@
             </itemizedlist>
         </para>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--vim:se ts=4 sw=4 et:-->
+</section>

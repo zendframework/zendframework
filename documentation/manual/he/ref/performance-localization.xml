@@ -1,21 +1,24 @@
-<sect1 id="performance.localization">
-    <title>גלובאליזציה (i18n) ותמיכה בשפות שונות (l10n)</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.localization"><info><title>גלובאליזציה (i18n) ותמיכה בשפות שונות (l10n)</title></info>
+    
 
     <para>
         גלובאליזציה ותמיכה בשפות שונות הינם גורם הכרחי כדי לפנות לקהל יעד רחב יותר, ולוודא שכל המשתמשים מקבלים את המידע שהם צריכים.
         למרות זאת, זה בדרך כלל מגיע עם בעיות משמעותיות בביצועי המערכת. להלן כמה דרכים שניתן למנוע את בעיות הביצועים שנגרמים עקב שימוש בגלובאליזציה ותמיכה בשפות שונות בעת פיתוח המערכת.
     </para>
 
-    <sect2 id="performance.localization.translationadapter">
-        <title>באיזו מתאם תרגום כדי לי להשתמש?</title>
+    <section xml:id="performance.localization.translationadapter"><info><title>באיזו מתאם תרגום כדי לי להשתמש?</title></info>
+        
 
         <para>
             לא כל מתאמי התרגום הם שווים. לחלקם יש יותר אפשרויות מאחרים, וחלקם עובדים טוב יותר מאחרים.
             בנוסף, יתכן ומסיבות פיתוח שלכם תדרשו להשתמש במתאם תרגום מסויים. למרות שאם יש לכם את אפשרות הבחירה, איזה מתאם הוא המהיר ביותר?
         </para>
 
-        <sect3 id="performance.localization.translationadapter.fastest">
-            <title>השתמשו במתאם תרגום ללא שימוש ב XML למיטב הביצועים והמהירות</title>
+        <section xml:id="performance.localization.translationadapter.fastest"><info><title>השתמשו במתאם תרגום ללא שימוש ב XML למיטב הביצועים והמהירות</title></info>
+            
 
             <para>
                 Zend Framework מגיע עם מגוון מתאמי תרגום שונים לשימוש.
@@ -48,19 +51,19 @@
             <para>
                 אם הנכם דואגים לביצועי המערכת שלכם, אנו ממליצים שימוש באחד מהמתאמים המצויינים מעלה.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="performance.localization.cache">
-        <title>כיצד ניתן להאיץ את התרגום והמתאמים אף יותר?</title>
+    <section xml:id="performance.localization.cache"><info><title>כיצד ניתן להאיץ את התרגום והמתאמים אף יותר?</title></info>
+        
 
         <para>
             אולי, מסיבות עסקיות, הנכם מוגבלים לשימוש במתאם תרגום לקבצי XML.
             או שאולי תרצו להאיץ את הדברים אף יותר. איך תוכלו לעשות זאת?
         </para>
 
-        <sect3 id="performance.localization.cache.usage">
-            <title>שימוש במטמון</title>
+        <section xml:id="performance.localization.cache.usage"><info><title>שימוש במטמון</title></info>
+            
 
             <para>
                 גם <code>Zend_Translate</code> ו <code>Zend_Locale</code> מאפשרים שימוש במטמון אשר מאיצים ומשפרים את הביצועים בצורה משמעותית.
@@ -86,9 +89,6 @@
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

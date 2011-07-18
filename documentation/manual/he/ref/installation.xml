@@ -1,6 +1,9 @@
-<sect1 id="introduction.installation">
+<?xml version="1.0" encoding="utf-8"?>
 
-    <title>התקנה</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="introduction.installation"><info><title>התקנה</title></info>
+
+    
 
     <para>
         ראו את <link linkend="requirements">נספח דרישות המערכת</link> לרשימה מלאה של כל האלמנטים הדרושים לשימוש ב Zend Framework.
@@ -12,44 +15,44 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <ulink url="http://framework.zend.com/download/latest">הורידו את הגרסא היציבה האחרונה של המערכת.</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/download/latest">הורידו את הגרסא היציבה האחרונה של המערכת.</link>
                     הגרסא זמינה בשני סוגי פורמטים <code>.zip</code> ו <code>.tar.gz</code>.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <ulink url="http://framework.zend.com/download/snapshot">הורד את הגרסא 'הלילית' האחרונה</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/download/snapshot">הורד את הגרסא 'הלילית' האחרונה</link>
                     לאלו מכם שרוצים לנסות ולהשתתף בתהליך הבדיקות של המערכת, ניתן להוריד את גרסאת הפיתוח האחרונה ישירות מה SVN של המערכת.
                      גרסאות הפיתוח מגיעות עם הדוקומנטציה של המערכת באנגלית בלבד או בכל השפות. אם גם אתה רוצה להשתתף בפיתוח המערכת, תצטרך לשקלו שימוש ב subversion (SVN) לניהול קבצים.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    שימוש ב <ulink url="http://subversion.tigris.org">Subversion (SVN)</ulink> בתור תוכנה לניהול הקבצים.
+                    שימוש ב <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://subversion.tigris.org">Subversion (SVN)</link> בתור תוכנה לניהול הקבצים.
                     Zend Framework שהינה מערכת קוד פתוח, ולכן כל הקבצים אשר המתכנתים עובדים עליהם פתוחים לקהל הרחב. בעזרת שימוש בתוכנה לניהול הקבצים כגון Subversion (SVN)
                     ניתן לגשת ישירות לקוד מקור של המערכת, כמובן שלא יהיה ניתן לשנות את הקוד מקור בשרת של המערכת.
                     ניתן לשקול את האפשרות של קבלת הקבצים ישירות מהשרת של Zend אל האפליקציה שלכם בשרת או במחשב.
                     כמו כן במידה ותרצו לתת בחזרה ל Zend תוכלו לעשות זאת על ידי שליחת פנייה באימייל לאחראי הצוותים לקבלת אפשרות עריכה בשרת ותוכלו גם אתם לקחת חלק בפיתוח.
                 </para>
                 <para>
-                    <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.export.html">ייצא</ulink> של כל המערכת הינו דבר שימושי
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.export.html">ייצא</link> של כל המערכת הינו דבר שימושי
                     במידה והכנם מעוניינים להשיג גרסא מסויימת של המערכת ללא כל תיקיות וקבצי ה <code>.svn</code>
                     אשר משמשות למערכת ניהול הקבצים בלבד.
                 </para>
                 <para>
-                    <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.checkout.html">הורידו גרסא עדכנית</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.checkout.html">הורידו גרסא עדכנית</link>
                     ישירות מהשרת במידה ותרצו להשתתף בתהליך הפיתוח של המערכת, הגרסא האחרונה שהנה הגרסא הנוכחית והעדכנית מאפשרת
-                    <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.update.html"><code>קבלת העדכונים האחרונים שנעשו</code></ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.update.html"><code>קבלת העדכונים האחרונים שנעשו</code></link>
                     ושינויים ניתן להוסיף למערכת המקורית שנמצאת בשרתים של Zend על ידי שימוש בפקודות
-                     <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.commit.html"><code>כתיבה</code></ulink>.
+                     <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.commit.html"><code>כתיבה</code></link>.
                 </para>
                 <para>
-                    שימוש בהגדרות <ulink url="http://svnbook.red-bean.com/nightly/en/svn.advanced.externals.html">חיצוניות</ulink>
+                    שימוש בהגדרות <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://svnbook.red-bean.com/nightly/en/svn.advanced.externals.html">חיצוניות</link>
                     הינו דבר שימושי ויעיל למתכנתים שכבר משתמשים במערכת ניהול קבצים מסוג SVN כדי לנהל את גרסאות המערכת של Zend באפליקציות שלהם.
                 </para>
                 <para>
                     קישור ישיר למאגר הקבצים של המערכת:
-                    <ulink url="http://framework.zend.com/svn/framework/standard/trunk">http://framework.zend.com/svn/framework/standard/trunk</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/svn/framework/standard/trunk">http://framework.zend.com/svn/framework/standard/trunk</link>
                 </para>
             </listitem>
         </itemizedlist>
@@ -57,14 +60,14 @@
 
     <para>
         ברגע שיש לכם עותק של המערכת של Zend Framework, האפליקציה שלכם תצטרך לדעת לגשת לתיקיה של המערכת של Zend ולגשת לכל המחלקות שלה.
-        <ulink url="http://www.php.net/manual/en/configuration.changes.php">ישנם כמה דברים לבצע זאת</ulink>, ההגדרה של
-        <ulink url="http://www.php.net/manual/en/ini.core.php#ini.include-path"><code>include_path</code></ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/configuration.changes.php">ישנם כמה דברים לבצע זאת</link>, ההגדרה של
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/ini.core.php#ini.include-path"><code>include_path</code></link>
          בהגדרות ה PHP בשרתם שלכם צריכה להכיל את הנתיב לתיקיה של Zend היכן שכל הספריות והמחלקות שלה נמצאות.
     </para>
 
     <para>
         Zend מספקת
-         <ulink url="http://framework.zend.com/docs/quickstart">מדריך מהיר</ulink> לשימוש במערכת כדי שתוכלו להתחיל להשתמש בה בקלות וביעילות.
+         <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/docs/quickstart">מדריך מהיר</link> לשימוש במערכת כדי שתוכלו להתחיל להשתמש בה בקלות וביעילות.
           זוהי דרך נהדרת להתחיל ללמוד אודות מערכת Zend Framework עם דגש ודוגמאות מהעולם האמיתי.
     </para>
 
@@ -73,4 +76,4 @@
         שהמערכת מכילה ועל ידי כך לעשות שימוש רק בחלק מהמחלקות באפליקציות שלכם. הפרק הבא מכיל מאגר נתונים מורחב לגבי כל ספריה/מחלקה שנמצאת במערכת ה Zend Framework.
     </para>
 
-</sect1>
+</section>

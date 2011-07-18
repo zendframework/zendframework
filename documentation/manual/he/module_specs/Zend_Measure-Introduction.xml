@@ -1,6 +1,7 @@
-<sect1 id="zend.measure.introduction">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.introduction"><info><title>הקדמה</title></info>
 
-    <title>הקדמה</title>
+    
 
     <para>
         מחלקות ה <code>Zend_Measure_*</code> מספקות דרך כללית וקלה לעבודה עם מדידות.
@@ -8,8 +9,8 @@
         הם יכולים להתווסף, להחסיר ולהשוואת אחד מול השני. מערך שהתקבל ממשתמש בשפה המקומית שלו, ניתן לקבל את יחידת המדידה המדוייקת. עשרות יחידות מדידה נתמכות.
     </para>
 
-    <example id="zend.measure.introduction.example-1">
-        <title>המרת מדידות</title>
+    <example xml:id="zend.measure.introduction.example-1"><info><title>המרת מדידות</title></info>
+        
         <para>
             הדוגמאות המקדימות הבאות מציגות כיצד ניתן להמיר יחידות מדידה אוטומטית. כדי להמיר מדידה, הערך שלו והסוג חייבים להיות ידועים מראש. הערך יכול להיות מסוג מספר שלם, עשרוני ואפילו סטרינג עם המספר המייצג אותו.
             המרות ניתן לבצע רק אם שני היחידות מאותו סוג, לא בין שני סוגים שונים.
@@ -20,8 +21,8 @@ $unit = new Zend_Measure_Length(100, Zend_Measure_Length::METER, $locale);
 
 // Convert meters to yards
 echo $unit->convertTo(Zend_Measure_Length::YARD);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
 
     <para>
@@ -30,8 +31,8 @@ echo $unit->convertTo(Zend_Measure_Length::YARD);
         לכל יחידת מדידה יש גורם המרה ויחידת תצוגה. רשימה מלאה אודות יחידות התצוגה וההמרה ניתן לקרוא ב  <link linkend="zend.measure.types"><code>סוגי מדידה</code></link>.
     </para>
 
-    <example id="zend.measure.introduction.example-2">
-        <title>יחידת המדידה <code>meter</code></title>
+    <example xml:id="zend.measure.introduction.example-2"><info><title>יחידת המדידה <code>meter</code></title></info>
+        
         <para>
             יחידת המדידה <code>meter</code> נועדה למדידת מרחק, לכן הערך הקבוע שלה נתן למציאה במחלקת <code>Length</code>.
             כדי להשתמש בסוג מדידה זה, יש להשתמש בסוג הציון <code>Length::METER</code>. יחידת התצוגה של סוג מדידה זה היא <code>m</code>.
@@ -43,11 +44,8 @@ echo Zend_Measure_Length::KILOMETER; // outputs 'Length::KILOMETER'
 $unit = new Zend_Measure_Length(100,'METER');
 echo $unit;
 // outputs '100 m'
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

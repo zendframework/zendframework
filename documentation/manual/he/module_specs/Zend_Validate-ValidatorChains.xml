@@ -1,6 +1,7 @@
-<sect1 id="zend.validate.validator_chains">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.validator_chains"><info><title>שרשור פונקציות אימות</title></info>
 
-    <title>שרשור פונקציות אימות</title>
+    
 
     <para>
         לפעמים יהיה צורך בלבצע מספר בדיקות ואימותים שונים על אותו ערך בסדר מסויים. הדוגמא הבאה מציגה כיצד לפתור את הבעיה אשר מוצגת <link linkend="zend.validate.introduction">בהקדמה</link>,
@@ -21,8 +22,8 @@ if ($validatorChain->isValid($username)) {
         echo "$message\n";
     }
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
         הפונקציות מורצות בסדר בהם הם מתווספות ל <code>Zend_Validate</code>. בדוגמא למעלה, שם המשתמש קודם נבדדק שהוא בין 6 ל 12 תווים, ואז הוא נבדק כדי לוודאות שהוא מכיל רק אותיות ומספרים.
         הבדיקה השנייה תמיד תרוץ, גם אם שם המשתמש הוא לא בטווח של 6 עד 12 והבדיקה הראשונה תחזיר שגיאה הבדיקה השנייה תרוץ גם כן ובמידה והיא גם תחזיר פסוק שקר גם היא תחזיר שגיאה,
         לאחר מכן במידה ושני הבדיקות נכשלו <code>getMessages()</code> יחזיר את הודעות השגיאה משני הבדיקות.
@@ -37,8 +38,8 @@ if ($validatorChain->isValid($username)) {
         <programlisting role="php"><![CDATA[
 $validatorChain->addValidator(new Zend_Validate_StringLength(6, 12), true)
         ->addValidator(new Zend_Validate_Alnum());
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
     </para>
 
@@ -46,7 +47,4 @@ $validatorChain->addValidator(new Zend_Validate_StringLength(6, 12), true)
         כל אובייקט אשר מיישם את <code>Zend_Validate_Interface</code> יכול להתקיים בתור שרשרת האימות.
     </para>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

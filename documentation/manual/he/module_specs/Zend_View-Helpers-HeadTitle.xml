@@ -1,5 +1,6 @@
-<sect3 id="zend.view.helpers.initial.headtitle">
-    <title>תוסף העזרה HeadTitle</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headtitle"><info><title>תוסף העזרה HeadTitle</title></info>
+    
 
     <para>
         אלמנט תגית <code>&lt;title&gt;</code> ב HTML נועד להצגת כותרת העמוד שכרגע מוצג.
@@ -12,8 +13,8 @@
         השימוש במתודה זו היא <code>headTitle($title, $setType = 'APPEND')</code>; כברירת מחדל, הערך שנוסף מצורף לקבוצת האלמנטים שכבר קיימים, אבל ניתן להגדיר או 'PREPEND' כדי להוסיף בראש הרשימה או 'SET' לשכתב את כל הרשימה בערך זה.
     </para>
 
-    <example id="zend.view.helpers.initial.headtitle.basicusage">
-        <title>שימוש בסיסי בתוסף</title>
+    <example xml:id="zend.view.helpers.initial.headtitle.basicusage"><info><title>שימוש בסיסי בתוסף</title></info>
+        
 
         <para>
             תוכל להגדיר תג כותרת בכל שלב. שימוש נכון בדרך כלל הוא לשמור כותרת בכל שלב במערכת: אתר, קונטרולר, מתודה ולפעמים גם דברים נוספים.
@@ -30,8 +31,8 @@ $this->headTitle('Zend Framework');
 
 // setting a separator string for segments:
 $this->headTitle()->setSeparator(' / ');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             ברגע שהינך מוכן להציג את הכותרת בתבנית התצוגה, פשוט יש להדפיס את התוסף:
@@ -40,10 +41,7 @@ $this->headTitle()->setSeparator(' / ');
         <programlisting role="php"><![CDATA[
 <!-- renders <action> / <controller> / Zend Framework -->
 <?= $this->headTitle() ?>
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,8 +1,11 @@
-<sect1 id="zend.captcha.introduction">
-    <title>הקדמה</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.captcha.introduction"><info><title>הקדמה</title></info>
+    
 
     <para>
-        <ulink url="http://en.wikipedia.org/wiki/Captcha">CAPTCHA</ulink> היא בעצם רכיב אשר מאפשר שימוש בבדיקה מסויימת כדי לבדוק אם אכן המשתמש הוא משתמש אנושי ולא מחשב או בוט.
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Captcha">CAPTCHA</link> היא בעצם רכיב אשר מאפשר שימוש בבדיקה מסויימת כדי לבדוק אם אכן המשתמש הוא משתמש אנושי ולא מחשב או בוט.
         בדרך כלל שימוש ברכיב זה נעשה בטפסים או היכן שצריך להתחבר.
     </para>
 
@@ -10,7 +13,4 @@
         בדיקות אלו מוצגות בשלל דרכים, ביניהם שאילת שאלות לוגיות, הצגת פונטים משונים וקשים לקריאה, והצגת תמונות ולשאול את המשותף ביניהם. הרכיב Zend_Captcha מאפשר שימוש
         בשלל אפשרויות שניתן להשתמש באופן עצמאי ברכיב זה בלבד או בשיתוף עם הרכיב  <code>Zend_Form</code>.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

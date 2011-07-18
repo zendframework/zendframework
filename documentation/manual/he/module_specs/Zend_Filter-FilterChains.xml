@@ -1,6 +1,7 @@
-<sect1 id="zend.filter.filter_chains">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.filter_chains"><info><title>שרשור פילטרים</title></info>
 
-    <title>שרשור פילטרים</title>
+    
 
     <para>
         לעיתים קרובות יהיה צורך בשימוש בכמה פילטרים על ערך כלשהו בסדר כלשהו. לדוגמא טופס התחברות מאפשר הזנת שם משתמש שצריך להיות באותיות בלבד וכל האותיות צריכות להיות קטנות.
@@ -14,8 +15,8 @@ $filterChain->addFilter(new Zend_Filter_Alpha())
 
 // Filter the username
 $username = $filterChain->filter($_POST['username']);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         פילטרים מורצים בסדר בהם הם נופסים ל <code>Zend_Filter</code>. בדוגמא למעלה, כל מה שלא אותיות ומספרים מערך של השם משתמש בטופס ההתחברות מוסר, ורק לאחר מכן כל אותיות גדולות הופכות לקטנות.
     </para>
@@ -24,7 +25,4 @@ $username = $filterChain->filter($_POST['username']);
         כל אובייקט אשר משתמש ב <code>Zend_Filter_Interface</code> ניתן להשתמש בו בשרשור פילטרים.
     </para>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

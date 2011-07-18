@@ -1,5 +1,6 @@
-<sect1 id="zend.cache.introduction">
-    <title>مقدمة</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.introduction"><info><title>مقدمة</title></info>
+    
     <para>
         <code>Zend_Cache</code> يوفر إمكانية عمل cache للبيانات.
     </para>
@@ -19,8 +20,8 @@
 
 
     </para>
-    <example>
-        <title>إنشاء frontend بواسطة <code>()Zend_Cache::factory</code></title>
+    <example><info><title>إنشاء frontend بواسطة <code>()Zend_Cache::factory</code></title></info>
+        
 
         <para>
             <code>()Zend_Cache::factory</code> ينشئ الـ objects المتوافقة معا و التى
@@ -77,8 +78,8 @@ print_r($result);
 ?>]]></programlisting>
        </para>
     </example>
-    <example>
-        <title>عمل cache للخرج بإستخدام الـ Output frontend الخاصة بـ <code>Zend_Cache</code></title>
+    <example><info><title>عمل cache للخرج بإستخدام الـ Output frontend الخاصة بـ <code>Zend_Cache</code></title></info>
+        
         <para>
            سنقوم بتحديد الأماكن التى نريد عمل cache لخرجها و ذلك بإستخدامنا لبعض الأكواد الشرطية,
 سنضع بلوك الكود المحدد ما بين الـ method المسمى <code>()start</code> و الأخر المسمى <code>()end</code> .
@@ -110,7 +111,7 @@ if(!$cache->start('mypage')) {
 
 echo 'This is never cached ('.time().').';
 
-?>]]>       </programlisting>
+?>       ]]></programlisting>
        </para>
        <para>
            لاحظ اننا نقوم بإخراج ناتج الدالة <code>()time</code> مرتين; و هذا نستخدمه هنا فقط للتوضيح.
@@ -127,7 +128,4 @@ echo 'This is never cached ('.time().').';
  <code>()start</code> و <code>()save</code> ) و يجب الا يتكرر فى عمليات cache اخرى.
 الوقوع فى هذا الخطأ سيسبب تداخل بين البيانات و اسوأ ما سيحدث هو أن هذه البيانات ستظهر فى اماكن ظهور بيانات أخرى.
     </para></note>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

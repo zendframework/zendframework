@@ -654,6 +654,20 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
         $loadedResource = $application->getBootstrap()->getBroker()->load('zf30');  
         $this->assertFalse(($loadedResource->getInitCount() > 1), 'Resource Zf30 initilized '.$loadedResource->getInitCount().' times');
     }
+    
+    /**
+     * @group ZF2-36
+     */
+    public function testMultipleBrokersInitialization()
+    {
+        define('APPLICATION_PATH', __DIR__);
+        $application = new Application\Application('testing', APPLICATION_PATH.'/TestAsset/Zf2-36.ini');        
+        $application->bootstrap();      
+        $broker1 = $application->getBootstrap()->getBroker();
+        $application->getBootstrap()->setOptions(array('test'=>true));
+        $broker2 = $application->getBootstrap()->getBroker();
+        $this->assertFalse(($broker1 !== $broker2), 'Application broker initialized second time');
+    }
 }
 
 class Layout extends AbstractResource

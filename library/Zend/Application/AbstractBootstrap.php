@@ -120,7 +120,6 @@ abstract class AbstractBootstrap
         $options           = array_change_key_case($options, CASE_LOWER);
         $this->_options    = $this->mergeOptions($this->_options, $options);
         $this->_optionKeys = array_merge($this->_optionKeys, array_keys($options));
-        $options           = $this->_options;
 
         $methods = get_class_methods($this);
         foreach ($methods as $key => $method) {

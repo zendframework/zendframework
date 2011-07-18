@@ -1,10 +1,11 @@
-<sect1 id="zend.db.profiler">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.profiler"><info><title>Zend_Db_Profiler</title></info>
 
-    <title>Zend_Db_Profiler</title>
+    
 
-    <sect2 id="zend.db.profiler.introduction">
+    <section xml:id="zend.db.profiler.introduction"><info><title>Giriş</title></info>
 
-        <title>Giriş</title>
+        
 
         <para>
         <code>Zend_Db_Profiler</code> sorgularınızın profillenmesine imkan
@@ -38,8 +39,8 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
 $db->getProfiler()->setEnabled(false);
 
 // profilleyiciyi aç:
-$db->getProfiler()->setEnabled(true);]]>
-        </programlisting>
+$db->getProfiler()->setEnabled(true);
+        ]]></programlisting>
 
         <para>
             <code>profiler</code> seçeneğinin değeri esnektir.Tipine göre farklı yorumlanır. Çoğu zaman basit bir boole
@@ -53,8 +54,8 @@ $db->getProfiler()->setEnabled(true);]]>
         örneğin <code>Zend_Db_Profiler</code>.
             <programlisting role="php"><![CDATA[
 $params['profiler'] = true;
-$db = Zend_Db::factory('PDO_MYSQL', $params);]]>
-            </programlisting>
+$db = Zend_Db::factory('PDO_MYSQL', $params);
+            ]]></programlisting>
         </para>
 
         <para>
@@ -65,8 +66,8 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);]]>
 $profiler = MyProject_Db_Profiler();
 $profiler->setEnabled(true);
 $params['profiler'] = $profiler;
-$db = Zend_Db::factory('PDO_MYSQL', $params);]]>
-            </programlisting>
+$db = Zend_Db::factory('PDO_MYSQL', $params);
+            ]]></programlisting>
         </para>
 
         <para>
@@ -82,8 +83,8 @@ $params['profiler'] = array(
     'enabled' => true,
     'class'   => 'MyProject_Db_Profiler'
 );
-$db = Zend_Db::factory('PDO_MYSQL', $params);]]>
-            </programlisting>
+$db = Zend_Db::factory('PDO_MYSQL', $params);
+            ]]></programlisting>
         </para>
 
         <para>
@@ -94,16 +95,16 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);]]>
             <programlisting role="ini"><![CDATA[
 [main]
 db.profiler.class   = "MyProject_Db_Profiler"
-db.profiler.enabled = true]]>
-            </programlisting>
+db.profiler.enabled = true
+            ]]></programlisting>
 
             Yapılandırma takip eden PHP kodu ile uygulanabilir:
 
             <programlisting role="php"><![CDATA[
 $config = new Zend_Config_Ini('config.ini', 'main');
 $params['profiler'] = $config->db->profiler;
-$db = Zend_Db::factory('PDO_MYSQL', $params);]]>
-            </programlisting>
+$db = Zend_Db::factory('PDO_MYSQL', $params);
+            ]]></programlisting>
 
             '<code>instance</code>' özelliği aşağıdaki gibi kullanılabilir:
 
@@ -115,16 +116,16 @@ $configData = array(
     );
 $config = new Zend_Config($configData);
 $params['profiler'] = $config;
-$db = Zend_Db::factory('PDO_MYSQL', $params);]]>
-            </programlisting>
+$db = Zend_Db::factory('PDO_MYSQL', $params);
+            ]]></programlisting>
 
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.profiler.using">
+    <section xml:id="zend.db.profiler.using"><info><title>Profilleyiciyi Kullanma</title></info>
 
-        <title>Profilleyiciyi Kullanma</title>
+        
 
         <para>
        Herhangi bir noktada bağdaştırıcının <code>getProfiler()</code> metodu
@@ -132,8 +133,8 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);]]>
         </para>
 
         <programlisting role="php"><![CDATA[<?php
-$profiler = $db->getProfiler();]]>
-        </programlisting>
+$profiler = $db->getProfiler();
+        ]]></programlisting>
 
         <para>
         Bu <code>Zend_Db_Profiler</code> nesnesinin instance'ını döndürür.
@@ -210,8 +211,8 @@ $profiler = $db->getProfiler();]]>
         <programlisting role="php"><![CDATA[<?php
 $query = $profiler->getLastQueryProfile();
 
-echo $query->getQuery();]]>
-        </programlisting>
+echo $query->getQuery();
+        ]]></programlisting>
 
         <para>
             Muhtemelen sayfa yavaş oluşturuluyor;ilk önce profilleyici ile tüm sorgular için
@@ -237,14 +238,14 @@ echo $totalTime . ' saniye içinde '. $queryCount .' adet sorgu çalıştırıld
 echo 'Ortalama sorgu süresi : ' . $totalTime / $queryCount . ' saniye' . "\n";
 echo 'Saniye başı sorgu sayısı: ' . $queryCount / $totalTime . "\n";
 echo 'En uzun sorgu süresi: ' . $longestTime . "\n";
-echo "En uzun sorgu: \n" . $longestQuery . "\n";]]>
-        </programlisting>
+echo "En uzun sorgu: \n" . $longestQuery . "\n";
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.profiler.advanced">
+    <section xml:id="zend.db.profiler.advanced"><info><title>İleri Profilleyici Kullanımı</title></info>
 
-        <title>İleri Profilleyici Kullanımı</title>
+        
 
         <para>
             Sorgu denetlemeye ek olarak , profilleyici geliştiriciye hangi
@@ -252,8 +253,8 @@ echo "En uzun sorgu: \n" . $longestQuery . "\n";]]>
         eden metodlar <code>Zend_Db_Profiler</code> isntance'ında çalışır:
         </para>
 
-        <sect3 id="zend.db.profiler.advanced.filtertime">
-            <title>Sorgu için harcanan süreye göre filtreleme</title>
+        <section xml:id="zend.db.profiler.advanced.filtertime"><info><title>Sorgu için harcanan süreye göre filtreleme</title></info>
+            
 
             <para>
         <code>setFilterElapsedSecs()</code>  geliştiriciye sorgunun profillenmesi
@@ -266,12 +267,12 @@ echo "En uzun sorgu: \n" . $longestQuery . "\n";]]>
 $profiler->setFilterElapsedSecs(5);
 
 // Süresine bakmaksızın tüm sorguları profille:
-$profiler->setFilterElapsedSecs(null);]]>
-            </programlisting>
-        </sect3>
+$profiler->setFilterElapsedSecs(null);
+            ]]></programlisting>
+        </section>
 
-        <sect3 id="zend.db.profiler.advanced.filtertype">
-            <title>Sorgu tipine göre filtreleme</title>
+        <section xml:id="zend.db.profiler.advanced.filtertype"><info><title>Sorgu tipine göre filtreleme</title></info>
+            
 
             <para>
             <code>setFilterQueryType()</code> geliştiriciye hangi tip sorguların
@@ -341,13 +342,13 @@ $profiler->setFilterQueryType(Zend_Db_Profiler::SELECT | Zend_Db_Profiler::INSER
 $profiler->setFilterQueryType(Zend_Db_Profiler::DELETE);
 
 // Tüml filtreleri kaldır
-$profiler->setFilterQueryType(null);]]>
-            </programlisting>
+$profiler->setFilterQueryType(null);
+            ]]></programlisting>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.profiler.advanced.getbytype">
-            <title>Sorgu tipine göre profillere erişmek</title>
+        <section xml:id="zend.db.profiler.advanced.getbytype"><info><title>Sorgu tipine göre profillere erişmek</title></info>
+            
 
             <para>
         <code>setFilterQueryType()</code> kullanmak oluşturulan profilleri
@@ -355,7 +356,7 @@ $profiler->setFilterQueryType(null);]]>
         bunlara ihtiyacınız olduğu anda bakın. <code>getQueryProfiles()</code> 'ın
         bir diğer özelliği ise ilk argüman olarak sorgu tipini (veya sorgu tiplerinin mantıksal kombinasyonu)
         vererek bu filtrelemeyi anında yapabilmesidir ;  sorgu tipi sabitleri listesi için bakınız
-        <xref linkend="zend.db.profiler.advanced.filtertype" />.
+        <xref linkend="zend.db.profiler.advanced.filtertype"/>.
             </para>
 
             <programlisting role="php"><![CDATA[<?php
@@ -367,14 +368,11 @@ $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::SELECT | Zend_Db_Profi
 
 // DELETE sorgularına eriş ( böylece verinin neden kaybolmaya devam ettiğini
 // anlayabilelim)
-$profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::DELETE);]]>
-            </programlisting>
+$profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::DELETE);
+            ]]></programlisting>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

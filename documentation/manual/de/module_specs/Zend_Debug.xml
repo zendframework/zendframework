@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20766 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.debug.dumping">
-    <title>Variablen ausgeben</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.debug.dumping"><info><title>Variablen ausgeben</title></info>
+    
 
     <para>
         Die statische Methode <methodname>Zend_Debug::dump()</methodname> druckt oder gibt
@@ -11,8 +9,8 @@
         Tools oder eine Debuggingumgebung benötigt.
     </para>
 
-    <example id="zend.debug.dumping.example">
-        <title>Beispiel der dump() Methode</title>
+    <example xml:id="zend.debug.dumping.example"><info><title>Beispiel der dump() Methode</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 Zend_Debug::dump($var, $label = null, $echo = true);
@@ -43,15 +41,14 @@ Zend_Debug::dump($var, $label = null, $echo = true);
     <para>
         Es könnte hilfreich sein, zu verstehen, dass die <methodname>Zend_Debug::dump()</methodname>
         Methode die <acronym>PHP</acronym> Funktion
-        <ulink url="http://php.net/var_dump"><methodname>var_dump()</methodname></ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/var_dump"><methodname>var_dump()</methodname></link>
         verwendet. Wenn der Ausgabestream als Webdarstellung erkannt wird, wird die
-        Ausgabe von <methodname>var_dump()</methodname> mit Hilfe von <ulink
-            url="http://php.net/htmlspecialchars"><methodname>htmlspecialchars()</methodname></ulink>
+        Ausgabe von <methodname>var_dump()</methodname> mit Hilfe von <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/htmlspecialchars"><methodname>htmlspecialchars()</methodname></link>
         ausgeführt und mit (X)HTML <command>&lt;pre&gt;</command> Tags umschlossen.
     </para>
 
-    <tip>
-        <title>Debuggen mit Zend_Log</title>
+    <tip><info><title>Debuggen mit Zend_Log</title></info>
+        
 
         <para>
             Die Verwendung von <methodname>Zend_Debug::dump()</methodname>eignet sich am besten für
@@ -69,4 +66,4 @@ Zend_Debug::dump($var, $label = null, $echo = true);
             zurückgegeben wird.
         </para>
     </tip>
-</sect1>
+</section>

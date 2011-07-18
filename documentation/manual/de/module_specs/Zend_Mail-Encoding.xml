@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22748 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.encoding">
-    <title>Kodierung</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.encoding"><info><title>Kodierung</title></info>
+    
 
     <para>
         Text und <acronym>HTML</acronym> Nachrichten werden standardmäßig mit dem "quotedprintable"
@@ -39,4 +37,4 @@ $mail->setHeaderEncoding(Zend_Mime::ENCODING_BASE64);
         <classname>Zend_Mail_Transport_Smtp</classname> kodiert die Zeilen beginnend mit einem oder
         zwei Punkten, so dass die Mail das SMTP Protokoll nicht missachtet.
     </para>
-</sect1>
+</section>

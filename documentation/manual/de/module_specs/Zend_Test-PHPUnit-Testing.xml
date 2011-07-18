@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22741 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.test.phpunit.testing">
-    <title>Testen eigener Controller und MVC Anwendungen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.testing"><info><title>Testen eigener Controller und MVC Anwendungen</title></info>
+    
 
     <para>
         Sobald man sein Bootstrap hat, kann man mit dem Testen beginnen. Testen funktioniert
@@ -79,8 +77,8 @@ class FooControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         Jetzt wurde die Anfrage durchgeführt, es ist also Zeit Behauptungen zu prüfen.
     </para>
 
-    <sect3 id="zend.test.phpunit.testing.redirector">
-        <title>Controller Tests und der Redirector Action Helper</title>
+    <section xml:id="zend.test.phpunit.testing.redirector"><info><title>Controller Tests und der Redirector Action Helper</title></info>
+        
 
         <important>
             <para>
@@ -127,5 +125,5 @@ class MyController extends Zend_Controller_Action
                 aktuell mit Zend_Test auf keine vernünftige Weise behandelt werden.
             </para>
         </important>
-    </sect3>
-</sect2>
+    </section>
+</section>

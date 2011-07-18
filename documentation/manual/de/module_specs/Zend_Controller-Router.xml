@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.router" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Der Standard Router</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.router"><info><title>Der Standard Router</title></info>
+    
 
-    <sect2 id="zend.controller.router.introduction">
-        <title>Einführung</title>
+    <section xml:id="zend.controller.router.introduction"><info><title>Einführung</title></info>
+        
 
         <para>
             <classname>Zend_Controller_Router_Rewrite</classname> ist der Standard Router des
@@ -48,8 +46,7 @@ RewriteRule ^.*$ index.php [NC,L]
 
         <para>
             Der Rewrite Router kann auch mit dem <acronym>IIS</acronym> Webserver verwendet werden
-            (Versionen &lt;= 7.0), wenn <ulink
-                url="http://www.isapirewrite.com">Isapi_Rewrite</ulink> als Isapi
+            (Versionen &lt;= 7.0), wenn <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.isapirewrite.com">Isapi_Rewrite</link> als Isapi
             Erweiterung installiert wurde und folgende Umschreibungsregel verwendet wird:
         </para>
 
@@ -57,8 +54,8 @@ RewriteRule ^.*$ index.php [NC,L]
 RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.php [I]
 ]]></programlisting>
 
-        <note>
-            <title>IIS Isapi_Rewrite</title>
+        <note><info><title>IIS Isapi_Rewrite</title></info>
+            
 
             <para>
                 Bei Verwendung von <acronym>IIS</acronym>, wird
@@ -114,10 +111,10 @@ url.rewrite-once = (
     "" => "/index.php"
 )
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.router.usage">
-        <title>Einen Router verwenden</title>
+    <section xml:id="zend.controller.router.usage"><info><title>Einen Router verwenden</title></info>
+        
 
         <para>
             Um den Rewrite Router richtig zu verwenden, muß er instanziiert, einige
@@ -136,10 +133,10 @@ $router->addRoute(
                                            'action' => 'info'))
 );
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.router.basic">
-        <title>Grundsätzliche Rewrite Router Operationen</title>
+    <section xml:id="zend.controller.router.basic"><info><title>Grundsätzliche Rewrite Router Operationen</title></info>
+        
 
         <para>
             Das Herz des RewriteRouters ist die Definition von Benutzerdefinierten Routen. Routen
@@ -161,43 +158,37 @@ $router->addRoute('user',
         <itemizedlist mark="opencircle">
             <listitem>
                 <para>
-                    <link
-                        linkend="zend.controller.router.routes.standard">Zend_Controller_Router_Route</link>
+                    <link linkend="zend.controller.router.routes.standard">Zend_Controller_Router_Route</link>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <link
-                        linkend="zend.controller.router.routes.static">Zend_Controller_Router_Route_Static</link>
+                    <link linkend="zend.controller.router.routes.static">Zend_Controller_Router_Route_Static</link>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <link
-                        linkend="zend.controller.router.routes.regex">Zend_Controller_Router_Route_Regex</link>
+                    <link linkend="zend.controller.router.routes.regex">Zend_Controller_Router_Route_Regex</link>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <link
-                        linkend="zend.controller.router.routes.hostname">Zend_Controller_Router_Route_Hostname</link>
+                    <link linkend="zend.controller.router.routes.hostname">Zend_Controller_Router_Route_Hostname</link>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <link
-                        linkend="zend.controller.router.routes.chain">Zend_Controller_Router_Route_Chain</link>
+                    <link linkend="zend.controller.router.routes.chain">Zend_Controller_Router_Route_Chain</link>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <link
-                        linkend="zend.controller.router.default-routes">Zend_Controller_Router_Rewrite</link>
+                    <link linkend="zend.controller.router.default-routes">Zend_Controller_Router_Rewrite</link>
                     *
                 </para>
             </listitem>
@@ -251,8 +242,8 @@ $router->addRoute('user',
             verwendet werden.
         </para>
 
-        <note>
-            <title>Umgekehrter Vergleich</title>
+        <note><info><title>Umgekehrter Vergleich</title></info>
+            
 
             <para>
                 Routen werden in umgekehrter Reihenfolge verglichen. Deswegen muß sichergestellt
@@ -260,8 +251,8 @@ $router->addRoute('user',
             </para>
         </note>
 
-        <note>
-            <title>Zurückgegebene Werte</title>
+        <note><info><title>Zurückgegebene Werte</title></info>
+            
 
             <para>
                 Werte die vom Routen zurückgegeben werden kommen von <acronym>URL</acronym>
@@ -278,8 +269,8 @@ $router->addRoute('user',
             Aktion zu funden zu der verwiesen wird.
         </para>
 
-        <note>
-            <title>Spezielle Variablen</title>
+        <note><info><title>Spezielle Variablen</title></info>
+            
 
             <para>
                 Die Namen dieser speziellen Variablen kann unterschiedlich sein wenn entschieden
@@ -288,10 +279,10 @@ $router->addRoute('user',
                 <methodname>setActionKey()</methodname> Methode zu Ändern.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.router.default-routes">
-        <title>Standard Routen</title>
+    <section xml:id="zend.controller.router.default-routes"><info><title>Standard Routen</title></info>
+        
 
         <para>
             <classname>Zend_Controller_Router_Rewrite</classname> kommt mit einer Standard Route
@@ -370,10 +361,10 @@ $this->addRoute('default', $compat);
 // Löschen aller Standard Routen
 $router->removeDefaultRoutes();
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.router.rewritebase">
-        <title>Basis URL und Unterverzeichnisse</title>
+    <section xml:id="zend.controller.router.rewritebase"><info><title>Basis URL und Unterverzeichnisse</title></info>
+        
 
         <para>
             Der Rewrite Router kann in Unterverzeichnissen verwendet werden (z.B.
@@ -387,18 +378,17 @@ $router->removeDefaultRoutes();
             Sollte die Basis <acronym>URL</acronym> nicht richtig erkannt werden kann diese mit
             eigenen Basispfad überschrieben werden durch Verwendung von
             <classname>Zend_Controller_Request_Http</classname> und Auruf der
-            <methodname>setBaseUrl()</methodname> Methode (siehe <link
-                linkend="zend.controller.request.http.baseurl">Basis URL und
+            <methodname>setBaseUrl()</methodname> Methode (siehe <link linkend="zend.controller.request.http.baseurl">Basis URL und
                 Unterverzeichnisse</link>):
         </para>
 
         <programlisting language="php"><![CDATA[
 $request->setBaseUrl('/~user/application-root/');
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.router.global.parameters">
-        <title>Globale Parameter</title>
+    <section xml:id="zend.controller.router.global.parameters"><info><title>Globale Parameter</title></info>
+        
 
         <para>
             Man kann in einem Router globale Parameter setzen die der Route automatisch zur
@@ -411,20 +401,20 @@ $request->setBaseUrl('/~user/application-root/');
         <programlisting language="php"><![CDATA[
 $router->setGlobalParam('lang', 'en');
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.router.routes">
-        <title>Router Typen</title>
-        <xi:include href="Zend_Controller-Router-Route.xml" />
-        <xi:include href="Zend_Controller-Router-Route-Static.xml" />
-        <xi:include href="Zend_Controller-Router-Route-Regex.xml" />
-        <xi:include href="Zend_Controller-Router-Route-Hostname.xml" />
-        <xi:include href="Zend_Controller-Router-Route-Chain.xml" />
-        <xi:include href="Zend_Controller-Router-Route-Rest.xml" />
-    </sect2>
+    <section xml:id="zend.controller.router.routes"><info><title>Router Typen</title></info>
+        
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-Router-Route.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-Router-Route-Static.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-Router-Route-Regex.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-Router-Route-Hostname.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-Router-Route-Chain.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-Router-Route-Rest.xml"/>
+    </section>
 
-    <sect2 id="zend.controller.router.add-config">
-        <title>Zend_Config mit dem RewriteRouter verwenden</title>
+    <section xml:id="zend.controller.router.add-config"><info><title>Zend_Config mit dem RewriteRouter verwenden</title></info>
+        
 
         <para>
             Manchmal ist es praktischer, eine Konfigurationsdatei mit neuen Routen zu
@@ -485,10 +475,10 @@ $router->addConfig($config, 'routes');
             die 'news' Route definiert, um
             <classname>Zend_Controller_Router_Route_Static</classname> zu verwenden.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.router.subclassing">
-        <title>Erben vom Router</title>
+    <section xml:id="zend.controller.router.subclassing"><info><title>Erben vom Router</title></info>
+        
 
         <para>
             Der Standard Rewrite Router sollte die meisten Funktionalitäten die benötigt werden zur
@@ -523,5 +513,5 @@ interface Zend_Controller_Router_Interface
             an den Dispatcher übergeben. Wenn es nicht möglich ist, eine Route auf einen Dispatch
             Token abzubilden, soll der Router nichts mit dem Request Objekt machen.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

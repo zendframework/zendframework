@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20807 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.timesync.introduction">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.timesync.introduction"><info><title>Einführung</title></info>
+    
 
     <para>
         <classname>Zend_TimeSync</classname> ist fähig, die Internet- oder Netzwerkzeit von einem
@@ -18,8 +18,8 @@
         über NTP oder SNTP empfangenen und der internen Zeit des Servers.
     </para>
 
-    <note>
-        <title>Hintergrund</title>
+    <note><info><title>Hintergrund</title></info>
+        
 
         <para>
             <classname>Zend_TimeSync</classname> ist nicht fähig die Zeit des Servers zu ändern,
@@ -28,8 +28,8 @@
         </para>
     </note>
 
-    <sect2 id="zend.timesync.introduction.why">
-        <title>Warum Zend_TimeSync ?</title>
+    <section xml:id="zend.timesync.introduction.why"><info><title>Warum Zend_TimeSync ?</title></info>
+        
 
         <para>
             Warum würde jemand <classname>Zend_TimeSync</classname> verwenden ?
@@ -47,7 +47,7 @@
             Hier sind ein paar Beispiele, wo <classname>Zend_TimeSync</classname> perfekt passt:
         </para>
 
-        <itemizedlist mark='opencircle'>
+        <itemizedlist mark="opencircle">
             <listitem>
                 <para><emphasis>Server ohne Zeitservice</emphasis></para>
 
@@ -96,23 +96,22 @@
             und kann verwendet werden, wenn man nicht in der Lage ist, Services auf dem Server zu
             starten.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.timesync.introduction.ntp">
-        <title>Was ist NTP ?</title>
+    <section xml:id="zend.timesync.introduction.ntp"><info><title>Was ist NTP ?</title></info>
+        
 
         <para>
             Das Network Time Protocol (<emphasis>NTP</emphasis>) ist
             ein Protokoll für die Synchronisierung von mehreren Systemuhren über
             Paket-geführte, variabel laufende Datennetzwerke. NTP verwendet den UDP Port 123 als
-            Transportschicht. Siehe <ulink
-                url="http://en.wikipedia.org/wiki/Network_Time_Protocol">diesen Wikipedia
-                Artikel</ulink> für Details über das Protokoll.
+            Transportschicht. Siehe <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Network_Time_Protocol">diesen Wikipedia
+                Artikel</link> für Details über das Protokoll.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.timesync.introduction.sntp">
-        <title>Was ist SNTP?</title>
+    <section xml:id="zend.timesync.introduction.sntp"><info><title>Was ist SNTP?</title></info>
+        
 
         <para>
             Das Simple Network Time Protocol (<emphasis>SNTP</emphasis>)
@@ -121,10 +120,10 @@
             Transportschicht. Es ist fast identisch mit dem Network Time Protokoll, aber
             einfacher.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.timesync.introduction.problematic">
-        <title>Problematische Verwendung</title>
+    <section xml:id="zend.timesync.introduction.problematic"><info><title>Problematische Verwendung</title></info>
+        
 
         <para>
             Vorsicht das man sich, wenn <classname>Zend_TimeSync</classname> verwendet wird, einige
@@ -133,17 +132,17 @@
             Bevor man <classname>Zend_TimeSync</classname> verwendet, sollte das hier sorgfältig
             durchgelesen werden.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.timesync.introduction.decision">
-        <title>Auswählen welcher Server verwendet werden soll</title>
+    <section xml:id="zend.timesync.introduction.decision"><info><title>Auswählen welcher Server verwendet werden soll</title></info>
+        
 
         <para>
             Der Zeitserver, der verwendet werden soll, muß anhand der folgenden Kriterien, sehr
             sorgfältig ausgewählt werden:
         </para>
 
-        <itemizedlist mark='opencircle'>
+        <itemizedlist mark="opencircle">
             <listitem>
                 <para>Distanz</para>
 
@@ -191,10 +190,10 @@
         </para>
 
         <para>
-            Siehe <ulink url="http://www.pool.ntp.org">pool.ntp.org</ulink>, um den
+            Siehe <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.pool.ntp.org">pool.ntp.org</link>, um den
             am nächsten liegenden Serverpool zu finden. Wenn zum Beispiel der eigene Server also
             in Deutschland liegt, kann man sich auf <emphasis>0.europe.pool.ntp.org</emphasis>
             verbinden.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

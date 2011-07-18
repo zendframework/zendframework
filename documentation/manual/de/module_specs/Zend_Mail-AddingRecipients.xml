@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21818 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.adding-recipients">
-    <title>Empfänger hinzufügen</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.adding-recipients"><info><title>Empfänger hinzufügen</title></info>
+    
 
     <para>
         Empfänger können über drei Wege hinzugefügt werden:
@@ -36,8 +36,8 @@
         <methodname>clearRecipients()</methodname> löscht die Liste.
     </para>
 
-    <note>
-        <title>Zusätzliche Parameter</title>
+    <note><info><title>Zusätzliche Parameter</title></info>
+        
 
         <para>
             <methodname>addTo()</methodname> und <methodname>addCc()</methodname> akzeptieren einen
@@ -47,8 +47,8 @@
         </para>
     </note>
 
-    <note>
-        <title>Optionale Verwendung</title>
+    <note><info><title>Optionale Verwendung</title></info>
+        
 
         <para>
             Alle drei Methoden akzeptieren auch ein Array von Email Adressen das hinzugefügt werden
@@ -57,4 +57,4 @@
             Schlüssel ein menschlich lesbarer Name für den Empfänger ist.
         </para>
     </note>
-</sect1>
+</section>

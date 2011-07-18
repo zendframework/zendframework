@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16589 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.baseurl">
-    <title>BaseUrl Helper</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.baseurl"><info><title>BaseUrl Helper</title></info>
+    
 
     <para>
         Wärend die meisten <acronym>URL</acronym>s die vom Framework erstellt werden automatisch
@@ -40,8 +38,8 @@
             "<filename>index.php</filename>") von der Basis <acronym>URL</acronym> die in
             <classname>Zend_Controller</classname> enthalten war. Trotzdem kann das in einigen
             Situationen Probleme verursachen. Wenn eines Eintritt kann man
-            <methodname>$this->getHelper('BaseUrl')->setBaseUrl()</methodname> verwenden um
+            <methodname>$this-&gt;getHelper('BaseUrl')-&gt;setBaseUrl()</methodname> verwenden um
             seine eigene BasisUrl zu setzen.
         </para>
     </note>
-</sect3>
+</section>

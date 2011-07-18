@@ -1,56 +1,54 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.ldap.node">
-    <title>Objektorientierter Zugriff auf den LDAP Baum durch Verwendung von Zend_Ldap_Node</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.node"><info><title>Objektorientierter Zugriff auf den LDAP Baum durch Verwendung von Zend_Ldap_Node</title></info>
+    
 
-    <sect2 id="zend.ldap.node.basic">
-        <title>Grundsätzliche CRUD Operationen</title>
+    <section xml:id="zend.ldap.node.basic"><info><title>Grundsätzliche CRUD Operationen</title></info>
+        
 
-        <sect3 id="zend.ldap.node.basic.retrieve">
-            <title>Daten von LDAP holen</title>
+        <section xml:id="zend.ldap.node.basic.retrieve"><info><title>Daten von LDAP holen</title></info>
+            
 
-            <sect4 id="zend.ldap.node.basic.retrieve.dn">
-                <title>Einen Node durch seinen DN erhalten</title>
+            <section xml:id="zend.ldap.node.basic.retrieve.dn"><info><title>Einen Node durch seinen DN erhalten</title></info>
+                
                 <para/>
-            </sect4>
+            </section>
 
-            <sect4 id="zend.ldap.node.basic.retrieve.search">
-                <title>Den Subbaum eines Nodes durchsuchen</title>
+            <section xml:id="zend.ldap.node.basic.retrieve.search"><info><title>Den Subbaum eines Nodes durchsuchen</title></info>
+                
                 <para/>
-            </sect4>
-        </sect3>
+            </section>
+        </section>
 
-        <sect3 id="zend.ldap.node.basic.add">
-            <title>Einen neuen Node in LDAP hinzufügen</title>
+        <section xml:id="zend.ldap.node.basic.add"><info><title>Einen neuen Node in LDAP hinzufügen</title></info>
+            
             <para/>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.ldap.node.basic.delete">
-            <title>Einen Node von LDAP löschen</title>
+        <section xml:id="zend.ldap.node.basic.delete"><info><title>Einen Node von LDAP löschen</title></info>
+            
             <para/>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.ldap.node.basic.update">
-            <title>Einen Node in LDAP aktualisieren</title>
+        <section xml:id="zend.ldap.node.basic.update"><info><title>Einen Node in LDAP aktualisieren</title></info>
+            
             <para/>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.ldap.node.extended">
-        <title>Erweiterte Operationen</title>
+    <section xml:id="zend.ldap.node.extended"><info><title>Erweiterte Operationen</title></info>
+        
 
-        <sect3 id="zend.ldap.node.extended.copy-and-move">
-            <title>Nodes in LDAP kopieren und verschieben</title>
+        <section xml:id="zend.ldap.node.extended.copy-and-move"><info><title>Nodes in LDAP kopieren und verschieben</title></info>
+            
             <para/>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.ldap.node.traversal">
-        <title>Baum Durchlaufen</title>
+    <section xml:id="zend.ldap.node.traversal"><info><title>Baum Durchlaufen</title></info>
+        
 
-        <example>
-            <title>Einen LDAP Baum rekursiv durchlaufen</title>
+        <example><info><title>Einen LDAP Baum rekursiv durchlaufen</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
@@ -63,5 +61,5 @@ foreach ($ri as $rdn => $n) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

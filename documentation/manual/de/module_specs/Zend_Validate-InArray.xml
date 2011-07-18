@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21243 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.in_array">
-    <title>InArray</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.in_array"><info><title>InArray</title></info>
+    
 
     <para>
         <classname>Zend_Validate_InArray</classname> erlaubt es zu prüfen ob ein gegebener Wert
         in einem Array enthalten ist. Er ist auch in der Lage mehrdimensionale Arrays zu prüfen.
     </para>
 
-    <sect3 id="zend.validate.set.in_array.options">
-        <title>Unterstützte Optionen für Zend_Validate_InArray</title>
+    <section xml:id="zend.validate.set.in_array.options"><info><title>Unterstützte Optionen für Zend_Validate_InArray</title></info>
+        
 
         <para>
             Die folgenden Optionen werden für <classname>Zend_Validate_InArray</classname>
@@ -41,10 +39,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.in_array.basic">
-        <title>Einfache Array Prüfung</title>
+    <section xml:id="zend.validate.set.in_array.basic"><info><title>Einfache Array Prüfung</title></info>
+        
 
         <para>
             Der einfachste Weg ist es, das Array welches durchsucht werden soll, bei der
@@ -89,10 +87,10 @@ if ($validator->isValid('value')) {
     // Wert nicht gefunden
 }
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.in_array.strict">
-        <title>Strikte Array Prüfung</title>
+    <section xml:id="zend.validate.set.in_array.strict"><info><title>Strikte Array Prüfung</title></info>
+        
 
         <para>
             Wie vorher erwähnt kann man auch eine Strikte Prüfung im Array durchführen.
@@ -141,10 +139,10 @@ if ($validator->isValid('value')) {
                 <constant>FALSE</constant> ist.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.in_array.recursive">
-        <title>Rekursive Array Prüfung</title>
+    <section xml:id="zend.validate.set.in_array.recursive"><info><title>Rekursive Array Prüfung</title></info>
+        
 
         <para>
             Zusätzlich zu <acronym>PHP</acronym>'s <methodname>in_array()</methodname> Methode kann
@@ -200,16 +198,16 @@ if ($validator->isValid('value')) {
 }
 ]]></programlisting>
 
-        <note>
-            <title>Standardwert für die Rekursion</title>
+        <note><info><title>Standardwert für die Rekursion</title></info>
+            
 
             <para>
                 Standardmäßig ist die rekursive Prüfung ausgeschaltet.
             </para>
         </note>
 
-        <note>
-            <title>Optionsschlüssel im Haystack</title>
+        <note><info><title>Optionsschlüssel im Haystack</title></info>
+            
 
             <para>
                 Wenn man die Schlüssel '<property>haystack</property>',
@@ -218,5 +216,5 @@ if ($validator->isValid('value')) {
                 Schlüssel einhüllen.
             </para>
         </note>
-    </sect3>
-</sect2>
+    </section>
+</section>

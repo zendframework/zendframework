@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20100 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.currency.value">
-    <title>Wie viel Währung habe ich?</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.value"><info><title>Wie viel Währung habe ich?</title></info>
+    
 
     <para>
         Wenn man mit Währungen arbeitet will man normalerweise eine Menge an Geld darstellen. Und
@@ -11,8 +9,8 @@
         Wechselkurs verwenden.
     </para>
 
-    <sect2 id="zend.currency.value.money">
-        <title>Arbeiten mit Währungswerten</title>
+    <section xml:id="zend.currency.value.money"><info><title>Arbeiten mit Währungswerten</title></info>
+        
 
         <para>
             Der Wert einer Währung, auch als Geld bekannt, welchen man verwenden will kann durch
@@ -51,10 +49,10 @@ print $currency->setValue(2000); // Könnte '$ 2.000' zurückgeben
             Mit der Methode <methodname>getValue()</methodname> erhält man den aktuell gesetzten
             Wert.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.currency.value.precision">
-        <title>Verwendung von Genauigkeit bei Währungen</title>
+    <section xml:id="zend.currency.value.precision"><info><title>Verwendung von Genauigkeit bei Währungen</title></info>
+        
 
         <para>
             Wenn man mit Währungen arbeitet muss man möglicherweise auch eine Genauigkeit verwenden.
@@ -108,5 +106,5 @@ $currency = new Zend_Currency(
 
 print $currency; // Könnte '$ 1.000' zurückgeben
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

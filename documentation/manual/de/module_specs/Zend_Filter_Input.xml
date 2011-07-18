@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22743 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.filter.input">
-    <title>Zend_Filter_Input</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.input"><info><title>Zend_Filter_Input</title></info>
+    
 
     <para>
         <classname>Zend_Filter_Input</classname> bietet ein ausgezeichnetes Interface um mehrere
@@ -76,8 +74,8 @@
         Die folgenden Sektionen beschreiben die Schritte für die Verwendung dieser Klasse.
     </para>
 
-    <sect2 id="zend.filter.input.declaring">
-        <title>Filter und Prüfregeln deklarieren</title>
+    <section xml:id="zend.filter.input.declaring"><info><title>Filter und Prüfregeln deklarieren</title></info>
+        
 
         <para>
             Vor der Erstellung einer Instanz von <classname>Zend_Filter_Input</classname>, muß ein
@@ -190,10 +188,10 @@ $filters = array(
     'month' => 'Digits'
 );
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.input.running">
-        <title>Filter und Prüfbearbeiter erstellen</title>
+    <section xml:id="zend.filter.input.running"><info><title>Filter und Prüfbearbeiter erstellen</title></info>
+        
 
         <para>
             Nachdem die Filter und Prüfarrays deklariert wurden, können diese als Argumente im
@@ -237,10 +235,10 @@ $input->setData($newData);
             Prüfregeln zu verändern. Wenn diese Methode verwendet wird können die selben Regeln, an
             anderen Sets von Eingabedaten, wieder verwendet werden.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.input.results">
-        <title>Geprüfte Felder und andere Reporte empfangen</title>
+    <section xml:id="zend.filter.input.results"><info><title>Geprüfte Felder und andere Reporte empfangen</title></info>
+        
 
         <para>
             Nachdem Filter und Prüfer deklariert wurden und der Eingabeprozessor erstellt wurde,
@@ -248,8 +246,8 @@ $input->setData($newData);
             kann auch die Werte der Felder erhalten, nachdem die Filter angewendet wurden.
         </para>
 
-        <sect3 id="zend.filter.input.results.isvalid">
-            <title>Abfragen ob die Eingabe gültig ist</title>
+        <section xml:id="zend.filter.input.results.isvalid"><info><title>Abfragen ob die Eingabe gültig ist</title></info>
+            
 
             <para>
                 Wenn alle Eingabedaten die Prüfregeln bestanden haben, gibt die
@@ -276,10 +274,10 @@ if ($input->isValid('month')) {
   echo "Feld 'month' ist OK\n";
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.filter.input.results.reports">
-            <title>Ungültige, fehlende oder unbekannte Felder erhalten</title>
+        <section xml:id="zend.filter.input.results.reports"><info><title>Ungültige, fehlende oder unbekannte Felder erhalten</title></info>
+            
 
             <itemizedlist>
                 <listitem>
@@ -293,8 +291,7 @@ if ($input->isValid('month')) {
                     <para>
                         <emphasis>Fehlende</emphasis> Felder sind jene die nicht in den
                         Eingabedaten vorhanden sind, aber im Metakommando
-                        <command>'presence'=>'required'</command> (Siehe die <link
-                            linkend="zend.filter.input.metacommands.presence">spätere Sektion</link>
+                        <command>'presence'=&gt;'required'</command> (Siehe die <link linkend="zend.filter.input.metacommands.presence">spätere Sektion</link>
                         über Metakommandos) deklariert wurden.
                     </para>
                 </listitem>
@@ -402,10 +399,10 @@ $input->setTranslator($translate);
                 diesem Fall als Arrayschlüssel verwendet, statt als Regelnamen, weil keine Regel
                 die Feld erwähnt die unbekannte Felder sind.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.filter.input.results.escaping">
-            <title>Gültige Felder bekommen</title>
+        <section xml:id="zend.filter.input.results.escaping"><info><title>Gültige Felder bekommen</title></info>
+            
 
             <para>
                 Alle Felder die entweder ungültig, fehlend oder unbekannt sind, werden als gültig
@@ -438,8 +435,8 @@ $m = $input->getUnescaped('month'); // nicht kommentieren
                 </para>
             </note>
 
-            <warning>
-                <title>Ungeprüfte Felder escapen</title>
+            <warning><info><title>Ungeprüfte Felder escapen</title></info>
+                
 
                 <para>
                     Wie vorher erwähnt gibt <methodname>getEscaped()</methodname> nur geprüfte
@@ -508,11 +505,11 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
                 <classname>Zend_Filter_Input</classname> erweitert werden und neue Methoden in der
                 Subklasse implementiert werden um Wert auf unterschiedlichen Wegen zu erhalten.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.filter.input.metacommands">
-        <title>Metakommandos verwenden um Filter oder Prüfregeln zu kontrollieren</title>
+    <section xml:id="zend.filter.input.metacommands"><info><title>Metakommandos verwenden um Filter oder Prüfregeln zu kontrollieren</title></info>
+        
 
         <para>
             Zusätzlich zum deklarieren der Übereinstimmungen von Feldern zu Filtern oder Prüfer,
@@ -522,8 +519,8 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
             Filter- oder Prüfarray Wert auf.
         </para>
 
-        <sect3 id="zend.filter.input.metacommands.fields">
-            <title>Das FIELDS Metakommando</title>
+        <section xml:id="zend.filter.input.metacommands.fields"><info><title>Das FIELDS Metakommando</title></info>
+            
 
             <para>
                 Wenn der Name der Regel für einen Filter oder Prüfer anders lautet als das Feld in
@@ -587,10 +584,10 @@ $validators = array(
                 ('password') im Rückgabewert von <methodname>getInvalid()</methodname>
                 verwendet und nicht eine der benannten Felder im 'fields' Metakommando.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.filter.input.metacommands.presence">
-            <title>Das PRESENCE Metakommando</title>
+        <section xml:id="zend.filter.input.metacommands.presence"><info><title>Das PRESENCE Metakommando</title></info>
+            
 
             <para>
                 Jeder Eintrag im Prüfarray kann ein Metakommando haben das 'presence' heißt. Wenn
@@ -615,10 +612,10 @@ $validators = array(
             <para>
                 Der Standardwert dieses Metakommandos ist 'optional'.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.filter.input.metacommands.default">
-            <title>Das DEFAULT_VALUE Metakommando</title>
+        <section xml:id="zend.filter.input.metacommands.default"><info><title>Das DEFAULT_VALUE Metakommando</title></info>
+            
 
             <para>
                 Wenn ein Feld, für das ein Wert mit dem 'default' Metakommando für diese Regel, in
@@ -667,10 +664,10 @@ echo $input->month; // gibt 1 aus
             <para>
                 Es gibt keinen Standardwert für dieses Metakommando.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.filter.input.metacommands.allow-empty">
-            <title>Das ALLOW_EMPTY Metakommando</title>
+        <section xml:id="zend.filter.input.metacommands.allow-empty"><info><title>Das ALLOW_EMPTY Metakommando</title></info>
+            
 
             <para>
                 Standardmäßig, wenn ein Feld in den Eingabedaten existiert, wird Ihm der Prüfer
@@ -729,10 +726,10 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
 $input = new Zend_Filter_Input($filters, $validators, $data);
 $input->setOptions($options);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.filter.input.metacommands.break-chain">
-            <title>Das BREAK_CHAIN Metakommando</title>
+        <section xml:id="zend.filter.input.metacommands.break-chain"><info><title>Das BREAK_CHAIN Metakommando</title></info>
+            
 
             <para>
                 Standardmäßig, wenn eine Regel mehr als einen Prüfer hat werden alle Prüfer auf die
@@ -796,10 +793,10 @@ $validators = array(
 );
 $input = new Zend_Filter_Input(null, $validators);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.filter.input.metacommands.messages">
-            <title>Das MESSAGES Metakommando</title>
+        <section xml:id="zend.filter.input.metacommands.messages"><info><title>Das MESSAGES Metakommando</title></info>
+            
 
             <para>
                 Man kann Fehlermeldungen für jeden Prüfer in einer Regel spezifizieren indem das
@@ -911,10 +908,10 @@ $validators = array(
     )
 );
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.filter.input.metacommands.global">
-            <title>Verwenden von Optionen um Metakommandos für alle Regeln zu setzen</title>
+        <section xml:id="zend.filter.input.metacommands.global"><info><title>Verwenden von Optionen um Metakommandos für alle Regeln zu setzen</title></info>
+            
 
             <para>
                 Der Standardwert für die 'allowEmpty', 'breakChainOnFailure', und 'presence'
@@ -945,11 +942,11 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
                 Die 'fields', 'messages', und 'default' Metakommandos können nicht mit dieser
                 Technik gesetzt werden.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.filter.input.namespaces">
-        <title>Namensräume für Filterklassen hinzufügen</title>
+    <section xml:id="zend.filter.input.namespaces"><info><title>Namensräume für Filterklassen hinzufügen</title></info>
+        
 
         <para>
             Standardmäßig, wenn ein Filter oder Prüfer als String deklariert wird, sucht
@@ -1028,5 +1025,5 @@ $input->addFilterPrefixPath('Foo_Namespace', 'Foo/Namespace');
                 zu werden.
             </para>
         </note>
-    </sect2>
-</sect1>
+    </section>
+</section>

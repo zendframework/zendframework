@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22752 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.loader.pluginloader">
-    <title>Plugins laden</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.pluginloader"><info><title>Plugins laden</title></info>
+    
 
     <para>
         Eine Anzahl von Zend Framework Komponenten ist steckbar, und erlaubt es Funktionen dynamisch
@@ -22,8 +20,8 @@
         Weise Plugins zu überladen die vorher registriert wurden.
     </para>
 
-    <sect2 id="zend.loader.pluginloader.usage">
-        <title>Grundsätzliche Verwendung</title>
+    <section xml:id="zend.loader.pluginloader.usage"><info><title>Grundsätzliche Verwendung</title></info>
+        
 
         <para>
             Nehmen wir zuerst die folgende Verzeichnis Struktur und Klassendateien an, und dass das
@@ -86,8 +84,8 @@ $formSubmitClass = $loader->load('FormSubmit'); // 'Bar_View_Helper_FormSubmit'
             Sobald die Klasse geladen wurde, kann diese Instanziiert werden.
         </para>
 
-        <note>
-            <title>Mehrere Pfade können für einen gegebenen Präfix registriert werden</title>
+        <note><info><title>Mehrere Pfade können für einen gegebenen Präfix registriert werden</title></info>
+            
 
             <para>
                 In einigen Fällen kann es gewünscht sein den gleichen Präfix für mehrere Pfade zu
@@ -130,10 +128,10 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
             gleichen Registry Namen verwenden haben dann Zugriff auf bereits geladene Pfade und
             Plugins.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.pluginloader.paths">
-        <title>Plugin Pfade manipulieren</title>
+    <section xml:id="zend.loader.pluginloader.paths"><info><title>Plugin Pfade manipulieren</title></info>
+        
 
         <para>
             Das Beispiel der vorherigen Sektion zeigt wie Pfade zu einem Plugin Loader hinzugefügt
@@ -169,10 +167,10 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.pluginloader.checks">
-        <title>Testen auf Plugins und Klassennamen erhalten</title>
+    <section xml:id="zend.loader.pluginloader.checks"><info><title>Testen auf Plugins und Klassennamen erhalten</title></info>
+        
 
         <para>
             Hier und da soll einfach eruiert werden ob eine Pluginklasse bereits geladen wurde bevor
@@ -193,10 +191,10 @@ if ($loader->isLoaded('Adapter')) {
     $adapter = call_user_func(array($class, 'getInstance'));
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.pluginloader.performance">
-        <title>Bessere Performance für Plugins erhalten</title>
+    <section xml:id="zend.loader.pluginloader.performance"><info><title>Bessere Performance für Plugins erhalten</title></info>
+        
 
         <para>
             Das Laden von Plugins kann eine teure Operation sein. Im Innersten muß es durch jeden
@@ -216,8 +214,8 @@ if ($loader->isLoaded('Adapter')) {
             Strategie, kann die Performance für Produktive Server sehr stark verbessert werden.
         </para>
 
-        <example id="zend.loader.pluginloader.performance.example">
-            <title>Verwendung des integrierten Klassendatei Caches des PluginLoaders</title>
+        <example xml:id="zend.loader.pluginloader.performance.example"><info><title>Verwendung des integrierten Klassendatei Caches des PluginLoaders</title></info>
+            
 
             <para>
                 Um den integrierten Klassendatei Cache zu verwenden muß einfach der folgende Code in
@@ -259,5 +257,5 @@ if ($config->enablePluginLoaderCache) {
                 nicht im Code.
             </para>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22757 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.search.lucene.query-language">
-    <title>Abfragesprache</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.query-language"><info><title>Abfragesprache</title></info>
+    
 
     <para>
         Java Lucene und <classname>Zend_Search_Lucene</classname> bieten sehr mächtige
@@ -16,12 +14,12 @@
 
     <para>
         Die komplette Java Lucene Syntax Dokumentation der Abfragesprache kann
-        <ulink url="http://lucene.apache.org/java/2_3_0/queryparsersyntax.html">hier</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://lucene.apache.org/java/2_3_0/queryparsersyntax.html">hier</link>
         gefunden werden.
     </para>
 
-    <sect2 id="zend.search.lucene.query-language.terms">
-        <title>Ausdrücke</title>
+    <section xml:id="zend.search.lucene.query-language.terms"><info><title>Ausdrücke</title></info>
+        
 
         <para>
             Eine Abfrage wird in Ausdrücke und Operatoren zerteilt. Es gibt drei Arten von
@@ -45,10 +43,10 @@
             Mehrere Ausdrücke können mithilfe eines boolschen Operators miteinander kombiniert
             werden um komplexere Abfragen zu formen (siehe anbei).
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.query-language.fields">
-        <title>Felder</title>
+    <section xml:id="zend.search.lucene.query-language.fields"><info><title>Felder</title></info>
+        
 
         <para>
             Lucene unterstützt Felder von Daten. Wenn eine Suche durchgeführt wird kann man entweder
@@ -119,10 +117,10 @@ title:Mach es richtig
             das Standardfeld gesetzt ist) oder in allen indizierten Felder (wenn das Standardfeld
             auf <constant>NULL</constant> gesetzt ist).
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.query-language.wildcard">
-        <title>Wildcards</title>
+    <section xml:id="zend.search.lucene.query-language.wildcard"><info><title>Wildcards</title></info>
+        
 
         <para>
             Lucene unterstützt Einzelzeichen und Mehrfachzeichen Suchen mit Wildcards in einzelnen
@@ -191,10 +189,10 @@ Test*
             <methodname>Zend_Search_Lucene_Search_Query_Wildcard::setMinPrefixLength()</methodname>
             geändert werden.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.query-language.modifiers">
-        <title>Ausdrücke verändern</title>
+    <section xml:id="zend.search.lucene.query-language.modifiers"><info><title>Ausdrücke verändern</title></info>
+        
 
         <para>
             Lucene unterstützt die Veränderung von Abfrageausdrücken und bietet damit ein beites
@@ -205,10 +203,10 @@ Test*
             Der "~" Modifikator kann für verwendet werden um eine annähernde Suche auf Phrasen oder
             Fuzzy Suchen für individuelle Ausdrücke durchzuführen.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.query-language.range">
-        <title>Bereichs Suchen</title>
+    <section xml:id="zend.search.lucene.query-language.range"><info><title>Bereichs Suchen</title></info>
+        
 
         <para>
             Bereichsabfragen erlauben es Entwicklern passende Dokumente zu finden deren Werte der
@@ -249,10 +247,10 @@ title:{Aida TO Carmen}
         <programlisting language="querystring"><![CDATA[
 {Aida TO Carmen}
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.query-language.fuzzy">
-        <title>Fuzzy Suchen</title>
+    <section xml:id="zend.search.lucene.query-language.fuzzy"><info><title>Fuzzy Suchen</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> unterstützt, genauso wie Java Lucene, die
@@ -280,10 +278,10 @@ roam~0.8
         <para>
             Der verwendete Standardwert wenn der Parameter nicht angegeben wurde ist 0.5.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.query-language.matched-terms-limitations">
-        <title>Einschränkung passender Ausdrücke</title>
+    <section xml:id="zend.search.lucene.query-language.matched-terms-limitations"><info><title>Einschränkung passender Ausdrücke</title></info>
+        
 
         <para>
             Wildcard, Bereichs- und Fuzzy Suchabfragen können bei zu vielen Ausdrücken passen.
@@ -301,10 +299,10 @@ roam~0.8
         <para>
             Das standardmäßige Limit für passende Ausdrücke ist 1024.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.query-language.proximity-search">
-        <title>Angenäherte Suchen</title>
+    <section xml:id="zend.search.lucene.query-language.proximity-search"><info><title>Angenäherte Suchen</title></info>
+        
 
         <para>
             Lucene unterstützt das Finden von Wörtern aus einer Phrase die einen spezifizierten
@@ -317,10 +315,10 @@ roam~0.8
         <programlisting language="querystring"><![CDATA[
 "Zend Framework"~10
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.query-language.boosting">
-        <title>Einen Ausdruck schneller machen</title>
+    <section xml:id="zend.search.lucene.query-language.boosting"><info><title>Einen Ausdruck schneller machen</title></info>
+        
 
         <para>
             Java Lucene und <classname>Zend_Search_Lucene</classname> bieten einen Level der
@@ -362,10 +360,10 @@ PHP^4 framework
             Standardwert ist der Boost Faktor 1. Auch wenn der Boost Faktor positiv sein muß, kann
             er kleiner als 1 sein (z.B. 0.2).
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.query-language.boolean">
-        <title>Boolsche Operatoren</title>
+    <section xml:id="zend.search.lucene.query-language.boolean"><info><title>Boolsche Operatoren</title></info>
+        
 
         <para>
             Boolsche Operatoren erlauben es Ausdrücke durch logische Operatoren zu kombinieren.
@@ -387,8 +385,8 @@ PHP^4 framework
             Das unterscheidet sich vom Verhalten von Java Lucene.
         </para>
 
-        <sect3 id="zend.search.lucene.query-language.boolean.and">
-            <title>AND</title>
+        <section xml:id="zend.search.lucene.query-language.boolean.and"><info><title>AND</title></info>
+            
 
             <para>
                 Der AND Operator bedeutet das alle Ausdrücke der "AND Gruppe" in einigen Teilen der
@@ -403,10 +401,10 @@ PHP^4 framework
             <programlisting language="querystring"><![CDATA[
 "PHP Framework" AND "Zend Framework"
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.search.lucene.query-language.boolean.or">
-            <title>OR</title>
+        <section xml:id="zend.search.lucene.query-language.boolean.or"><info><title>OR</title></info>
+            
 
             <para>
                 Der OR Operator teilt die Abfrage in verschiedene optionale Begriffe.
@@ -420,10 +418,10 @@ PHP^4 framework
             <programlisting language="querystring"><![CDATA[
 "PHP Framework" OR "Zend Framework"
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.search.lucene.query-language.boolean.not">
-            <title>NOT</title>
+        <section xml:id="zend.search.lucene.query-language.boolean.not"><info><title>NOT</title></info>
+            
 
             <para>
                 Der NOT Operator scheidet Dokumente aus die den Ausdruck nach NOT enthalten. Aber
@@ -439,18 +437,18 @@ PHP^4 framework
             <programlisting language="querystring"><![CDATA[
 "PHP Framework" AND NOT "Zend Framework"
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.search.lucene.query-language.boolean.other-form">
-            <title>&amp;&amp;, ||, und ! Operatoren</title>
+        <section xml:id="zend.search.lucene.query-language.boolean.other-form"><info><title>&amp;&amp;, ||, und ! Operatoren</title></info>
+            
 
             <para>
                 &amp;&amp;, ||, und ! können statt den AND, OR und NOT Notation verwendet werden.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.search.lucene.query-language.boolean.plus">
-            <title>+</title>
+        <section xml:id="zend.search.lucene.query-language.boolean.plus"><info><title>+</title></info>
+            
 
             <para>
                 Der "+" oder benötigende Operator erfordert das der Ausdruck nach dem "+" Symbol im
@@ -465,10 +463,10 @@ PHP^4 framework
             <programlisting language="querystring"><![CDATA[
 +Zend Framework
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.search.lucene.query-language.boolean.minus">
-            <title>-</title>
+        <section xml:id="zend.search.lucene.query-language.boolean.minus"><info><title>-</title></info>
+            
 
             <para>
                 Der "-" oder ausschließende Operator schließt Dokumente aus die dem Ausdruck nach
@@ -483,10 +481,10 @@ PHP^4 framework
             <programlisting language="querystring"><![CDATA[
 "PHP Framework" -"Zend Framework"
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.search.lucene.query-language.boolean.no-operator">
-            <title>kein Operator</title>
+        <section xml:id="zend.search.lucene.query-language.boolean.no-operator"><info><title>kein Operator</title></info>
+            
 
             <para>
                 Wenn kein Operator verwendet wird, dann wird das Suchverhalten durch den
@@ -525,11 +523,11 @@ PHP^4 framework
                 <classname>Zend_Search_Lucene_Search_QueryParser::B_AND</classname> und
                 <classname>Zend_Search_Lucene_Search_QueryParser::B_OR</classname> Konstanten.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.search.lucene.query-language.grouping">
-        <title>Gruppieren</title>
+    <section xml:id="zend.search.lucene.query-language.grouping"><info><title>Gruppieren</title></info>
+        
 
         <para>
             Java Lucene und <classname>Zend_Search_Lucene</classname> unterstützen die Verwendung
@@ -546,10 +544,10 @@ PHP^4 framework
             <classname>Zend_Search_Lucene</classname> unterstützt Unterabfragen von beliebigen
             Ebenen.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.query-language.field-grouping">
-        <title>Felder gruppieren</title>
+    <section xml:id="zend.search.lucene.query-language.field-grouping"><info><title>Felder gruppieren</title></info>
+        
 
         <para>
             Lucene unterstützt auch die Verwendung von Klammern um mehrere Fälle in ein einzelnes
@@ -564,10 +562,10 @@ PHP^4 framework
         <programlisting language="querystring"><![CDATA[
 title:(+Rückkehr +"rosaroter Panther")
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.query-language.escaping">
-        <title>Escapen von speziellen Zeichen</title>
+    <section xml:id="zend.search.lucene.query-language.escaping"><info><title>Escapen von speziellen Zeichen</title></info>
+        
 
         <para>
             Lucene unterstützt das Escapen von speziellen Zeichen die in der Abfragesyntax verwendet
@@ -591,5 +589,5 @@ title:(+Rückkehr +"rosaroter Panther")
         <programlisting language="querystring"><![CDATA[
 \(1\+1\)\:2
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

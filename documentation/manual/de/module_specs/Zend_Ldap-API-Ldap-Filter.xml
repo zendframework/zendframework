@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.ldap.api.reference.zend-ldap-filter">
-    <title>Zend_Ldap_Filter</title>
+<?xml version="1.0" encoding="utf-8"?>
 
-    <table id="zend.ldap.api.reference.zend-filter.table">
-        <title>Zend_Ldap_Filter API</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap-filter"><info><title>Zend_Ldap_Filter</title></info>
+    
+
+    <table xml:id="zend.ldap.api.reference.zend-filter.table"><info><title>Zend_Ldap_Filter API</title></info>
+        
 
         <tgroup cols="2">
             <thead>
@@ -130,8 +130,7 @@
                     <entry>
                         Erstellt einen Filter von einer String Maske. Alle <varname>$value</varname>
                         Parameter werden kommentiert und in <varname>$mask</varname> umgewandelt
-                        indem <ulink
-                            url="http://php.net/sprintf"><methodname>sprintf()</methodname></ulink>
+                        indem <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/sprintf"><methodname>sprintf()</methodname></link>
                         verwendet wird.
                     </entry>
                 </row>
@@ -247,4 +246,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect3>
+</section>

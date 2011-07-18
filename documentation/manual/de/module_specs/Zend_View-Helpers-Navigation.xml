@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.navigation">
-    <title>Navigations Helfer</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.navigation"><info><title>Navigations Helfer</title></info>
+    
 
     <para>
         Die Navigations Helfer werden von
@@ -17,8 +15,7 @@
     <itemizedlist>
         <listitem>
             <para>
-                <link
-                    linkend="zend.view.helpers.initial.navigation.breadcrumbs">Breadcrumbs</link>,
+                <link linkend="zend.view.helpers.initial.navigation.breadcrumbs">Breadcrumbs</link>,
                 wird für die Darstellung des Pfades der aktuell aktiven Seite verwendet.
             </para>
         </listitem>
@@ -42,15 +39,14 @@
             <para>
                 <link linkend="zend.view.helpers.initial.navigation.sitemap">Sitemap</link>,
                 wird für die Darstellung von Sitemaps verwendet die dem
-                <ulink url="http://www.sitemaps.org/protocol.php">Sitemaps <acronym>XML</acronym>
-                    Format</ulink> entsprechen.
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.sitemaps.org/protocol.php">Sitemaps <acronym>XML</acronym>
+                    Format</link> entsprechen.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <link
-                    linkend="zend.view.helpers.initial.navigation.navigation">Navigation</link>,
+                <link linkend="zend.view.helpers.initial.navigation.navigation">Navigation</link>,
                 wird für die Weiterleitung von Aufrufen zu anderen Navigations Helfern
                 verwendet.
             </para>
@@ -60,8 +56,7 @@
     <para>
         Alle eingebauten Helfer erweitern
         <classname>Zend_View_Helper_Navigation_HelperAbstract</classname>, welches die Integration
-        von <link linkend="zend.acl">ACL</link> und <link
-            linkend="zend.translate">Übersetzung</link> hinzufügt. Die abstrakte Klasse
+        von <link linkend="zend.acl">ACL</link> und <link linkend="zend.translate">Übersetzung</link> hinzufügt. Die abstrakte Klasse
         implementiert das Interface <classname>Zend_View_Helper_Navigation_Helper</classname>
         welches die folgenden Methoden definiert:
     </para>
@@ -169,8 +164,7 @@
                 <methodname>__call()</methodname> wird verwendet um Aufrufe zum Container, der
                 im Helfer registriert ist, weiterzuleiten, was bedeutet das man Methoden in
                 einem Helfer aufrufen kann wie wenn Sie im Container wären. Siehe das folgende
-                <link
-                    linkend="zend.view.helpers.initial.navigation.proxy.example">Beispiel</link>.
+                <link linkend="zend.view.helpers.initial.navigation.proxy.example">Beispiel</link>.
             </para>
         </listitem>
 
@@ -223,16 +217,16 @@
 
     <para>
         Wenn ein Navigations Container nicht explizit in einem Helfer durch Verwendung von
-        <command>$helper->setContainer($nav)</command> gesetzt ist, schaut der Helfer in
+        <command>$helper-&gt;setContainer($nav)</command> gesetzt ist, schaut der Helfer in
         <link linkend="zend.registry">der Registry</link> nach einer Container Instanz mit dem
         Schlüssel <classname>Zend_Navigation</classname>. Wenn ein Container nicht explizit gesetzt
         wurde, oder nicht in der Registry gefunden wird, erstellt der Helfer einen leeren
         <classname>Zend_Navigation</classname> Container wenn
-        <command>$helper->getContainer()</command> aufgerufen wird.
+        <command>$helper-&gt;getContainer()</command> aufgerufen wird.
     </para>
 
-    <example id="zend.view.helpers.initial.navigation.proxy.example">
-        <title>Aufrufe an den Navigations Container weiterleiten</title>
+    <example xml:id="zend.view.helpers.initial.navigation.proxy.example"><info><title>Aufrufe an den Navigations Container weiterleiten</title></info>
+        
 
         <para>
             Navigations View Helfer verwenden die magisch <methodname>__call()</methodname> Methode
@@ -252,14 +246,14 @@ $this->navigation()->addPage(array(
         </para>
     </example>
 
-    <sect4 id="zend.view.helpers.initial.navigation.i18n">
-        <title>Übersetzung von Labels und Titeln</title>
+    <section xml:id="zend.view.helpers.initial.navigation.i18n"><info><title>Übersetzung von Labels und Titeln</title></info>
+        
 
         <para>
             Der Navigations Helfer unterstützt die Übersetzung von SeitenLabels und Überschriften.
             Man kann einen Übersetzer vom Typ <classname>Zend_Translate</classname> oder
             <classname>Zend_Translate_Adapter</classname> im Helfer setzen indem
-            <command>$helper->setTranslator($translator)</command> verwendet wird, oder wie in allen
+            <command>$helper-&gt;setTranslator($translator)</command> verwendet wird, oder wie in allen
             anderen I18n-fähigen Komponenten; durch das Hinzufügen des Übersetzers in
             <link linkend="zend.registry">die Registry</link> indem der Schlüssel
             <classname>Zend_Translate</classname> verwendet wird.
@@ -267,7 +261,7 @@ $this->navigation()->addPage(array(
 
         <para>
             Wenn man die Übersetzung ausschalten will, sollte man
-            <command>$helper->setUseTranslator(false)</command> verwenden.
+            <command>$helper-&gt;setUseTranslator(false)</command> verwenden.
         </para>
 
         <para>
@@ -282,18 +276,18 @@ $this->navigation()->addPage(array(
                 Überschriften in einer <acronym>XML</acronym> Sitemap enthalten sind.
             </para>
         </note>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.view.helpers.initial.navigation.acl">
-        <title>Integration mit ACL</title>
+    <section xml:id="zend.view.helpers.initial.navigation.acl"><info><title>Integration mit ACL</title></info>
+        
 
         <para>
             Alle navigatorischen View Helfer unterstützen <acronym>ACL</acronym> abgeleitet von der
             <classname>Zend_View_Helper_Navigation_HelperAbstract</classname> Klasse. Ein
             <classname>Zend_Acl</classname> Objekt kann einer Instanz eines Helfers mit
-            <code>$helper->setAcl($acl)</code> hinzugefügt werden, und eine Rolle mit
-            <code>$helper->setRole('member')</code> oder
-            <code>$helper->setRole(new Zend_Acl_Role('member'))</code>. Wenn <acronym>ACL</acronym>
+            <code>$helper-&gt;setAcl($acl)</code> hinzugefügt werden, und eine Rolle mit
+            <code>$helper-&gt;setRole('member')</code> oder
+            <code>$helper-&gt;setRole(new Zend_Acl_Role('member'))</code>. Wenn <acronym>ACL</acronym>
             im Helfer verwendet wird, muß es der Rolle im Helfer vom <acronym>ACL</acronym> erlaubt
             sein auf die <code>Ressourcen</code> zuzugreifen und/oder das die
             <code>Privilegien</code> für diese Seite bei der Darstellung eingefügt werden dürfen.
@@ -313,10 +307,10 @@ $this->navigation()->addPage(array(
         <para>
             Das Beispiel von unten zeigt wie <acronym>ACL</acronym> die Darstellung beeinflusst.
         </para>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.view.helpers.initial.navigation.setup">
-        <title>Setup der Navigation das in Beispielen verwendet wird</title>
+    <section xml:id="zend.view.helpers.initial.navigation.setup"><info><title>Setup der Navigation das in Beispielen verwendet wird</title></info>
+        
 
         <para>
             Dieses Beispiel zeigt das Setup eines Navigations Container für eine fiktive Software
@@ -570,17 +564,16 @@ $view->navigation()->setAcl($acl)->setRole('member');
 Zend_View_Helper_Navigation_HelperAbstract::setDefaultAcl($acl);
 Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('member');
 ]]></programlisting>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.view.helpers.initial.navigation.breadcrumbs">
-        <title>Breadcrumbs Helfer</title>
+    <section xml:id="zend.view.helpers.initial.navigation.breadcrumbs"><info><title>Breadcrumbs Helfer</title></info>
+        
 
         <para>
             Breadcrumbs werden verwendet um anzuzeigen wo in einer Sitemap ein Benutzer aktuell
-            browst, und werden typischerweise wie folgt angezeigt: "Du bist hier: Home > Produkte
-            > FantastischesProdukt 1.0". Der BreakCrumbs Helfer folgt den Richtlinien von <ulink
-                url="http://developer.yahoo.com/ypatterns/pattern.php?pattern=breadcrumbs">Breadcrumbs
-                Pattern - Yahoo! Design Pattern Library</ulink>, und erlaubt eine einfache Anpassung
+            browst, und werden typischerweise wie folgt angezeigt: "Du bist hier: Home &gt; Produkte
+            &gt; FantastischesProdukt 1.0". Der BreakCrumbs Helfer folgt den Richtlinien von <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://developer.yahoo.com/ypatterns/pattern.php?pattern=breadcrumbs">Breadcrumbs
+                Pattern - Yahoo! Design Pattern Library</link>, und erlaubt eine einfache Anpassung
             (Minimale/Maximale Tiefe, Einrückung, Trennzeichen, und ob das letzte Element verlinkt
             sein soll), oder die Darstellung durch Verwendung eines partiellen View Skripts.
         </para>
@@ -651,8 +644,8 @@ Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('member');
            </listitem>
        </itemizedlist>
 
-        <example id="zend.view.helpers.initial.navigation.breadcrumbs.example1">
-            <title>Darstellung von Breadcrumbs</title>
+        <example xml:id="zend.view.helpers.initial.navigation.breadcrumbs.example1"><info><title>Darstellung von Breadcrumbs</title></info>
+            
 
             <para>
                 Dieses Beispiel zeigt wie Breadcrumbs mit Standardsettings dargestellt werden.
@@ -667,12 +660,12 @@ und sind identisch mit:
 <?php echo $this->navigation()->breadcrumbs()->render(); ?>
 
 Ausgabe:
-<a href="/products">Produkte</a> &gt; <a href="/products/server">Foo Server</a> &gt; FAQ
+<a href="/products">Produkte</a> > <a href="/products/server">Foo Server</a> > FAQ
 ]]></programlisting>
         </example>
 
-        <example id="zend.view.helpers.initial.navigation.breadcrumbs.example2">
-            <title>Einrückung spezifizieren</title>
+        <example xml:id="zend.view.helpers.initial.navigation.breadcrumbs.example2"><info><title>Einrückung spezifizieren</title></info>
+            
 
             <para>
                 Dieses Beispiel zeigt wie Breadcrumbs mit anfänglicher Einrückung dargestellt
@@ -684,12 +677,12 @@ Darstellung mit 8 Leerzeichen Einrückung:
 <?php echo $this->navigation()->breadcrumbs()->setIndent(8); ?>
 
 Ausgabe:
-        <a href="/products">Products</a> &gt; <a href="/products/server">Foo Server</a> &gt; FAQ
+        <a href="/products">Products</a> > <a href="/products/server">Foo Server</a> > FAQ
 ]]></programlisting>
         </example>
 
-        <example id="zend.view.helpers.initial.navigation.breadcrumbs.example3">
-            <title>Eigene Ausgabe für Breakcrumbs</title>
+        <example xml:id="zend.view.helpers.initial.navigation.breadcrumbs.example3"><info><title>Eigene Ausgabe für Breakcrumbs</title></info>
+            
 
             <para>
                 Dieses Beispiel zeigt wie man eine eigene Breadcrumbs Ausgabe durch die
@@ -704,11 +697,11 @@ echo $this->navigation()
           ->breadcrumbs()
           ->setLinkLast(true)                   // Letzte Seite verlinken
           ->setMaxDepth(1)                      // Bei Level 1 stoppen
-          ->setSeparator(' &#9654;' . PHP_EOL); // Cooler Seperator mit Umbruch
+          ->setSeparator(' ▶' . PHP_EOL); // Cooler Seperator mit Umbruch
 ?>
 
 Output:
-<a href="/products">Produkte</a> &#9654;
+<a href="/products">Produkte</a> ▶
 <a href="/products/server">Foo Server</a>
 
 /////////////////////////////////////////////////////
@@ -725,8 +718,8 @@ Nichts, weil die tiefste aktive Seite nicht auf Level 10 oder tiefer ist.
 ]]></programlisting>
         </example>
 
-        <example id="zend.view.helpers.initial.navigation.breadcrumbs.example4">
-            <title>Darstellung von Breadcrumbs mit Verwendung eines partiellen View Skripts</title>
+        <example xml:id="zend.view.helpers.initial.navigation.breadcrumbs.example4"><info><title>Darstellung von Breadcrumbs mit Verwendung eines partiellen View Skripts</title></info>
+            
 
             <para>
                 Dieses Beispiel zeigt wir eigene Breakcrumbs durch Verwendung eines partiellen
@@ -768,20 +761,18 @@ echo implode(', ', array_map(
 Produkte, Foo Server, FAQ
 ]]></programlisting>
         </example>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.view.helpers.initial.navigation.links">
-        <title>Link Helfer</title>
+    <section xml:id="zend.view.helpers.initial.navigation.links"><info><title>Link Helfer</title></info>
+        
 
         <para>
             Der Link Helfer wird für die Darstellung von <acronym>HTML</acronym>
             <constant>LINK</constant> Elementen verwendet. Links werden für die Beschreibung von
             Dokument-Beziehungen der aktuell aktiven Seite verwendet. Mehr über Links und Linktypen
-            kann unter <ulink
-                url="http://www.w3.org/TR/html4/struct/links.html#h-12.3">Dokument-Beziehung: Das
-                LINK Element (HTML4 W3C Rec.)</ulink> und <ulink
-                url="http://www.w3.org/TR/html4/types.html#h-6.12">Link Typen (HTML4 W3C
-                Rec.)</ulink> in der <acronym>HTML</acronym>4 W3C Empfehlung nachgelesen werden.
+            kann unter <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/html4/struct/links.html#h-12.3">Dokument-Beziehung: Das
+                LINK Element (HTML4 W3C Rec.)</link> und <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/html4/types.html#h-6.12">Link Typen (HTML4 W3C
+                Rec.)</link> in der <acronym>HTML</acronym>4 W3C Empfehlung nachgelesen werden.
         </para>
 
         <para>
@@ -798,8 +789,8 @@ Produkte, Foo Server, FAQ
             das Durchlaufen des Containers, der im Helfer registriert ist, gefunden. Die Methode
             <methodname>findRelation($page, $rel, $type)</methodname> versucht zuerst den gegebenen
             <varname>$rel</varname> von <varname>$type</varname> von der <varname>$page</varname>
-            durch den Aufruf von <code>$page->findRel($type)</code> oder
-            <code>$page->findRel($type)</code> zu finden. Wenn <varname>$page</varname> eine
+            durch den Aufruf von <code>$page-&gt;findRel($type)</code> oder
+            <code>$page-&gt;findRel($type)</code> zu finden. Wenn <varname>$page</varname> eine
             Beziehung hat die zu der Instanz einer Seite konvertiert werden kann, wird diese
             Beziehung verwendet. Wenn die Instanz von <varname>$page</varname> keinen
             <varname>$type</varname> spezifiziert hat, schaut der Helfer nach einer Methode im
@@ -881,7 +872,7 @@ Produkte, Foo Server, FAQ
         <note>
             <para>
                 Wenn in der Instanz der Seite nach Beziehungen gesehen wird (
-                (<code>$page->getRel($type)</code> oder <code>$page->getRev($type)</code>),
+                (<code>$page-&gt;getRel($type)</code> oder <code>$page-&gt;getRev($type)</code>),
                 akzeptiert der Helfer Wert vom Typ <type>String</type>, <type>Array</type>,
                 <classname>Zend_Config</classname>, oder
                 <classname>Zend_Navigation_Page</classname>. Wenn ein String gefunden wird, wird
@@ -897,17 +888,17 @@ Produkte, Foo Server, FAQ
         <para>
             Der Helfer unterstützt auch magische Methoden für das Finden von Beziehungen. Um z.B.
             alternative vorwärts Beziehungen zu finden muß
-            <code>$helper->findRelAlternate($page)</code> aufgerufen werden, und um rückwärts
-            gerichtete Kapitel Beziehungen zu finden <code>$helper->findRevSection($page)</code>.
-            Diese Aufrufe korrespondieren mit <code>$helper->findRelation($page, 'rel',
-            'alternate');</code> und <code>$helper->findRelation($page, 'rev', 'section');</code>.
+            <code>$helper-&gt;findRelAlternate($page)</code> aufgerufen werden, und um rückwärts
+            gerichtete Kapitel Beziehungen zu finden <code>$helper-&gt;findRevSection($page)</code>.
+            Diese Aufrufe korrespondieren mit <code>$helper-&gt;findRelation($page, 'rel',
+            'alternate');</code> und <code>$helper-&gt;findRelation($page, 'rev', 'section');</code>.
         </para>
 
         <para>
             Um zu Steuern welche Beziehung dargestellt werden soll, verwendet der Helfer ein render
             Flag. Das render Flag ist ein Integer Wert, und kann in
-            <ulink url="http://php.net/manual/en/language.operators.bitwise.php">binären
-            <code>und</code> (<code>&amp;</code>) Operationen</ulink> mit den render Konstanten des
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/manual/en/language.operators.bitwise.php">binären
+            <code>und</code> (<code>&amp;</code>) Operationen</link> mit den render Konstanten des
             Helfers verwendet werden um festzustellen ob die Beziehung zu der die render Konstante
             gehört, dargestellt werden soll.
         </para>
@@ -1080,8 +1071,8 @@ Produkte, Foo Server, FAQ
             </listitem>
         </itemizedlist>
 
-        <example id="zend.view.helpers.initial.navigation.links.example1">
-            <title>Beziehungen in Seiten spezifizieren</title>
+        <example xml:id="zend.view.helpers.initial.navigation.links.example1"><info><title>Beziehungen in Seiten spezifizieren</title></info>
+            
 
             <para>
                 Dieses Beispiel zeigt wir Beziehungen in Seiten spezifiziert werden können.
@@ -1129,8 +1120,8 @@ $container = new Zend_Navigation(array(
 ]]></programlisting>
         </example>
 
-        <example id="zend.view.helpers.initial.navigation.links.example2">
-            <title>Standardmäßige Darstellung von Links</title>
+        <example xml:id="zend.view.helpers.initial.navigation.links.example2"><info><title>Standardmäßige Darstellung von Links</title></info>
+            
 
             <para>
                 Dieses Beispiel zeigt wie ein Menü von einem Container dargestellt wird, der im
@@ -1154,8 +1145,8 @@ Ausgabe:
 ]]></programlisting>
         </example>
 
-        <example id="zend.view.helpers.initial.navigation.links.example3">
-            <title>Spezifizieren welche Beziehungen dargestellt werden sollen</title>
+        <example xml:id="zend.view.helpers.initial.navigation.links.example3"><info><title>Spezifizieren welche Beziehungen dargestellt werden sollen</title></info>
+            
 
             <para>
                 Dieses Beispiel zeigt wie spezifiziert werden kann, welche Beziehungen zu finden
@@ -1204,10 +1195,10 @@ Ausgabe:
 <link rev="subsection" href="/products/server" title="Foo Server">
 ]]></programlisting>
         </example>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.view.helpers.initial.navigation.menu">
-        <title>Menu Helfer</title>
+    <section xml:id="zend.view.helpers.initial.navigation.menu"><info><title>Menu Helfer</title></info>
+        
 
         <para>
             Der Menu Helfer wird für die Darstellung von Menüs aus Navigations Containern
@@ -1359,8 +1350,8 @@ Ausgabe:
             </listitem>
        </itemizedlist>
 
-        <example id="zend.view.helpers.initial.navigation.menu.example1">
-            <title>Darstellung eines Menüs</title>
+        <example xml:id="zend.view.helpers.initial.navigation.menu.example1"><info><title>Darstellung eines Menüs</title></info>
+            
 
             <para>
                 Dieses Beispiel zeigt wie ein Menü von einem registrierten/im View Helfer
@@ -1444,8 +1435,8 @@ Ausgabe:
 ]]></programlisting>
         </example>
 
-        <example id="zend.view.helpers.initial.navigation.menu.example2">
-            <title>renderMenu() direkt aufrufen</title>
+        <example xml:id="zend.view.helpers.initial.navigation.menu.example2"><info><title>renderMenu() direkt aufrufen</title></info>
+            
 
             <para>
                 Dieses Beispiel zeigt wie ein Menü dargestellt werden kann das nicht im View
@@ -1477,8 +1468,8 @@ Output:
 ]]></programlisting>
         </example>
 
-        <example id="zend.view.helpers.initial.navigation.menu.example3">
-            <title>Das tiefste aktive Menü darstellen</title>
+        <example xml:id="zend.view.helpers.initial.navigation.menu.example3"><info><title>Das tiefste aktive Menü darstellen</title></info>
+            
 
             <para>
                 Dieses Beispiel zeigt wie <methodname>renderSubMenu()</methodname> das tiefste
@@ -1525,8 +1516,8 @@ Die Ausgabe ist die gleiche wenn 'FAQ' oder 'Foo Server' aktiv sind:
 ]]></programlisting>
         </example>
 
-        <example id="zend.view.helpers.initial.navigation.menu.example4">
-            <title>Darstellung eines Menüs mit maximaler Tiefe</title>
+        <example xml:id="zend.view.helpers.initial.navigation.menu.example4"><info><title>Darstellung eines Menüs mit maximaler Tiefe</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 <?php
@@ -1577,8 +1568,8 @@ Ausgabe:
 ]]></programlisting>
         </example>
 
-        <example id="zend.view.helpers.initial.navigation.menu.example5">
-            <title>Darstellung eines Menüs mit minimaler Tiefe</title>
+        <example xml:id="zend.view.helpers.initial.navigation.menu.example5"><info><title>Darstellung eines Menüs mit minimaler Tiefe</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 <?php
@@ -1638,8 +1629,8 @@ Ausgabe:
 ]]></programlisting>
         </example>
 
-        <example id="zend.view.helpers.initial.navigation.menu.example6">
-            <title>Nur den aktiven Branch eines Menüs darstellen</title>
+        <example xml:id="zend.view.helpers.initial.navigation.menu.example6"><info><title>Nur den aktiven Branch eines Menüs darstellen</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 <?php
@@ -1673,10 +1664,10 @@ Ausgabe:
 ]]></programlisting>
         </example>
 
-        <example id="zend.view.helpers.initial.navigation.menu.example7">
-            <title>
+        <example xml:id="zend.view.helpers.initial.navigation.menu.example7"><info><title>
                 Nur den aktiven Branch eines Menüs mit minimaler Tiefe darstellen
-            </title>
+            </title></info>
+            
 
             <programlisting language="php"><![CDATA[
 <?php
@@ -1706,10 +1697,10 @@ Ausgabe:
 ]]></programlisting>
         </example>
 
-        <example id="zend.view.helpers.initial.navigation.menu.example8">
-            <title>
+        <example xml:id="zend.view.helpers.initial.navigation.menu.example8"><info><title>
                 Nur den aktiven Branch eines Menüs mit maximaler Tiefe darstellen
-            </title>
+            </title></info>
+            
 
             <programlisting language="php"><![CDATA[
 <?php
@@ -1736,10 +1727,10 @@ Ausgabe:
 ]]></programlisting>
         </example>
 
-        <example id="zend.view.helpers.initial.navigation.menu.example9">
-            <title>
+        <example xml:id="zend.view.helpers.initial.navigation.menu.example9"><info><title>
                 Nur den aktiven Branch eines Menüs mit maximaler Tiefe aber ohne Eltern darstellen
-            </title>
+            </title></info>
+            
 
             <para>
             </para>
@@ -1765,10 +1756,10 @@ Ausgabe:
 ]]></programlisting>
         </example>
 
-        <example id="zend.view.helpers.initial.navigation.menu.example10">
-            <title>
+        <example xml:id="zend.view.helpers.initial.navigation.menu.example10"><info><title>
                 Darstellen eines eigenen Menüs durch Verwendung eines partiellen View Skripts
-            </title>
+            </title></info>
+            
 
             <para>
                 Dieses Beispiel zeigt wie ein eigenes Menü, durch Verwendung eines partiellen View
@@ -1805,16 +1796,15 @@ foreach ($this->container as $page) {
 <a href="/community">Community</a>
 ]]></programlisting>
         </example>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.view.helpers.initial.navigation.sitemap">
-        <title>Sitemap Helfer</title>
+    <section xml:id="zend.view.helpers.initial.navigation.sitemap"><info><title>Sitemap Helfer</title></info>
+        
 
         <para>
             Der Sitemap Helfer wird für die Erzeugung von <acronym>XML</acronym> Sitemaps verwendet
-            wie im <ulink url="http://www.sitemaps.org/protocol.php">Sitemaps <acronym>XML</acronym>
-                Format</ulink> definiert. Mehr darüber kann unter <ulink
-                url="http://en.wikipedia.org/wiki/Sitemaps"> Sitemaps in Wikipedia</ulink>
+            wie im <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.sitemaps.org/protocol.php">Sitemaps <acronym>XML</acronym>
+                Format</link> definiert. Mehr darüber kann unter <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Sitemaps"> Sitemaps in Wikipedia</link>
             nachgelesen werden.
         </para>
 
@@ -1822,7 +1812,7 @@ foreach ($this->container as $page) {
             Standardmäßig verwendet der Sitemap Helfer
             <link linkend="zend.validate.sitemap">Sitemap Prüfungen</link> um jedes Element zu
             prüfen das dargestellt werden soll. Das kann deaktiviert werden indem man
-            <code>$helper->setUseSitemapValidators(false)</code> aufruft.
+            <code>$helper-&gt;setUseSitemapValidators(false)</code> aufruft.
         </para>
 
         <note>
@@ -1834,14 +1824,14 @@ foreach ($this->container as $page) {
 
         <para>
             Der Sitemap Helfer unterstützt auch die Pürfung von
-            <ulink url="http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">Sitemap XSD
-            Schemas</ulink> der erzeugten Sitemap. Das ist standardmäßig deaktiviert, da es eine
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">Sitemap XSD
+            Schemas</link> der erzeugten Sitemap. Das ist standardmäßig deaktiviert, da es eine
             Anfrage auf die Schema Datei benötigt. Es kann mit
-            <code>$helper->setUseSchemaValidation(true)</code> aktiviert werden.
+            <code>$helper-&gt;setUseSchemaValidation(true)</code> aktiviert werden.
         </para>
 
-        <table id="zend.view.helpers.initial.navigation.sitemap.elements">
-            <title>Sitemap XML Elemente</title>
+        <table xml:id="zend.view.helpers.initial.navigation.sitemap.elements"><info><title>Sitemap XML Elemente</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -1867,8 +1857,8 @@ foreach ($this->container as $page) {
                         <entry>
                             <para>
                                 Das Datum der letzten Änderung der Datei, im
-                                <ulink url="http://www.w3.org/TR/NOTE-datetime">W3C
-                                Datetime</ulink> Format. Dieser Zeitabschnitt kann bei Bedarf
+                                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/NOTE-datetime">W3C
+                                Datetime</link> Format. Dieser Zeitabschnitt kann bei Bedarf
                                 unterdrückt, und nur YYYY-MM-DD verwendet werden.
                             </para>
 
@@ -1942,8 +1932,7 @@ foreach ($this->container as $page) {
                     <code>{get|set}FormatOutput()</code> empfängt/setzt ein Flag das anzeigt ob
                     <acronym>XML</acronym> Ausgaben formatiert werden sollen. Das entspricht der
                     Eigenschaft <code>formatOutput</code> der nativen
-                    <classname>DOMDocument</classname> Klasse. Mehr kann man unter <ulink
-                        url="http://php.net/domdocument">PHP: DOMDocument - Handbuch</ulink>
+                    <classname>DOMDocument</classname> Klasse. Mehr kann man unter <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/domdocument">PHP: DOMDocument - Handbuch</link>
                     nachlesen. Der Standardwert ist <constant>FALSE</constant>.
                 </para>
            </listitem>
@@ -1997,8 +1986,8 @@ foreach ($this->container as $page) {
            </listitem>
        </itemizedlist>
 
-        <example id="zend.view.helpers.initial.navigation.sitemap.example">
-            <title>Eine XML Sitemap darstellen</title>
+        <example xml:id="zend.view.helpers.initial.navigation.sitemap.example"><info><title>Eine XML Sitemap darstellen</title></info>
+            
 
             <para>
                 Dieses Beispiel zeigt wie eine <acronym>XML</acronym> Sitemap, basierend auf dem
@@ -2198,8 +2187,8 @@ echo $this->navigation()
 ]]></programlisting>
         </example>
 
-        <note>
-            <title>Standardmäßig wird die UTF-8 Kodierung verwendet</title>
+        <note><info><title>Standardmäßig wird die UTF-8 Kodierung verwendet</title></info>
+            
 
             <para>
                 Standardmäßig verwendet Zend Framework <acronym>UTF-8</acronym> als seine
@@ -2220,10 +2209,10 @@ echo $this->navigation()
                 <methodname>getEncoding()</methodname> Methode implementieren.
             </para>
         </note>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.view.helpers.initial.navigation.navigation">
-        <title>Navigation Helfer</title>
+    <section xml:id="zend.view.helpers.initial.navigation.navigation"><info><title>Navigation Helfer</title></info>
+        
 
         <para>
             Der Navigation Helfer ist ein Proxy Helfer der Aufrufe zu anderen Navigations Helfern
@@ -2297,5 +2286,5 @@ echo $this->navigation()
                </para>
            </listitem>
        </itemizedlist>
-    </sect4>
-</sect3>
+    </section>
+</section>

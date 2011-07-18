@@ -1,19 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22762 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.navigation.containers">
-    <title>Container</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.containers"><info><title>Container</title></info>
+    
 
     <para>
         Container haben Methoden für das Hinzufügen, Empfangen, Löschen und Durchlaufen von Seiten.
-        Container implementieren die <ulink url="http://php.net/spl">SPL</ulink> Interfaces
+        Container implementieren die <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/spl">SPL</link> Interfaces
         <classname>RecursiveIterator</classname> und <classname>Countable</classname>, was bedeutet
         das ein Container durchlaufen werden kann indem die SPL Klasse
         <classname>RecursiveIteratorIterator</classname> verwendet wird.
     </para>
 
-    <sect2 id="zend.navigation.containers.creating">
-        <title>Erstellen von Containern</title>
+    <section xml:id="zend.navigation.containers.creating"><info><title>Erstellen von Containern</title></info>
+        
 
         <para>
             <classname>Zend_Navigation_Container</classname> ist abstrakt, und kann nicht direkt
@@ -30,8 +28,8 @@
             sein kann, oder eine Instanz von <classname>Zend_Navigation_Page</classname>.
         </para>
 
-        <example id="zend.navigation.containers.creating.example.array">
-            <title>Erstellt einen Container indem ein Array verwendet wird</title>
+        <example xml:id="zend.navigation.containers.creating.example.array"><info><title>Erstellt einen Container indem ein Array verwendet wird</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 /*
@@ -203,8 +201,8 @@ $container = new Zend_Navigation(array(
 ]]></programlisting>
         </example>
 
-        <example id="zend.navigation.containers.creating.example.config">
-            <title>Erstellung eines Containers indem ein Config Objekt erstellt wird</title>
+        <example xml:id="zend.navigation.containers.creating.example.config"><info><title>Erstellung eines Containers indem ein Config Objekt erstellt wird</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 /* INHALT VON /path/to/navigation.xml:
@@ -398,10 +396,10 @@ $config = new Zend_Config_Xml('/path/to/navigation.xml', 'nav');
 $container = new Zend_Navigation($config);
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.navigation.containers.adding">
-        <title>Hinzufügen von Seiten</title>
+    <section xml:id="zend.navigation.containers.adding"><info><title>Hinzufügen von Seiten</title></info>
+        
 
         <para>
             Das Hinzufügen von Seiten in einen Container kann mit den Methoden
@@ -410,8 +408,8 @@ $container = new Zend_Navigation($config);
             eine Erklärung des ganzen.
         </para>
 
-        <example id="zend.navigation.containers.adding.example">
-            <title>Hinzufügen von Seiten zu einem Container</title>
+        <example xml:id="zend.navigation.containers.adding.example"><info><title>Hinzufügen von Seiten zu einem Container</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Container erstellen
@@ -450,10 +448,10 @@ $container->addPages($pages);
 $container->setPages($pages);
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.navigation.containers.removing">
-        <title>Seiten löschen</title>
+    <section xml:id="zend.navigation.containers.removing"><info><title>Seiten löschen</title></info>
+        
 
         <para>
             Das Löschen von Seiten kann mit <methodname>removePage()</methodname> oder
@@ -463,8 +461,8 @@ $container->setPages($pages);
             Seiten vom Container.
         </para>
 
-        <example id="zend.navigation.containers.removing.example">
-            <title>Seiten von einem Container entfernen</title>
+        <example xml:id="zend.navigation.containers.removing.example"><info><title>Seiten von einem Container entfernen</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $container = new Zend_Navigation(array(
@@ -497,10 +495,10 @@ $container->removePage(200);    // Entfernt Seite 2
 $container->removePages();      // Entfernt alle Seiten
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.navigation.containers.finding">
-        <title>Seiten finden</title>
+    <section xml:id="zend.navigation.containers.finding"><info><title>Seiten finden</title></info>
+        
 
         <para>
             Container haben Finder Methoden für das Empfangen von Seiten. Es gibt
@@ -508,7 +506,7 @@ $container->removePages();      // Entfernt alle Seiten
             <methodname>findAllBy($property, $value)</methodname> und
             <methodname>findBy($property, $value, $all = false)</methodname>. Diese Methoden
             durchsuchen rekursiv den Container nach Seiten die dem angegebenen
-            <command>$page->$property == $value</command> entsprechen. Die erste Methode,
+            <command>$page-&gt;$property == $value</command> entsprechen. Die erste Methode,
             <methodname>findOneBy()</methodname>, gibt eine einzelne Seite zurück die der
             angegebenen Eigenschaft mit dem angegebenen Wert entspricht, oder
             <constant>NULL</constant> wenn Sie nicht gefunden werden kann. Die zweite Methode wird
@@ -528,8 +526,8 @@ $container->removePages();      // Entfernt alle Seiten
             auch mit eigenen Eigenschaften, so wie z.B. <methodname>findByFoo('bar')</methodname>.
         </para>
 
-        <example id="zend.navigation.containers.finding.example">
-            <title>Seiten in einem Container finden</title>
+        <example xml:id="zend.navigation.containers.finding.example"><info><title>Seiten in einem Container finden</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $container = new Zend_Navigation(array(
@@ -612,10 +610,10 @@ $found = $container->findAllByfoo('bar');
 $found = $container->findAllByController('index'); // Gibt Seite 2 und 3 zurück
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.navigation.containers.iterating">
-        <title>Container durchsuchen</title>
+    <section xml:id="zend.navigation.containers.iterating"><info><title>Container durchsuchen</title></info>
+        
 
         <para>
             <classname>Zend_Navigation_Container</classname> implementiert
@@ -625,8 +623,8 @@ $found = $container->findAllByController('index'); // Gibt Seite 2 und 3 zurück
             Klasse verwendet werden.
         </para>
 
-        <example id="zend.navigation.containers.iterating.example">
-            <title>Einen Container durchsuchen</title>
+        <example xml:id="zend.navigation.containers.iterating.example"><info><title>Einen Container durchsuchen</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 /*
@@ -673,16 +671,16 @@ foreach ($it as $page) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.navigation.containers.other">
-        <title>Andere Operationen</title>
+    <section xml:id="zend.navigation.containers.other"><info><title>Andere Operationen</title></info>
+        
 
         <para>
             Die Methode <methodname>hasPage(Zend_Navigation_Page $page)</methodname> prüft ob der
             Container die angegebene Seite besitzt. Die Methode <methodname>hasPages()</methodname>
             prüft ob irgendeine Seite im Container existiert, und ist gleich mit
-            <command>count($container) > 1</command>.
+            <command>count($container) &gt; 1</command>.
         </para>
 
         <para>
@@ -690,8 +688,8 @@ foreach ($it as $page) {
             in Ihm zu einem Array. Das kann für eine Serialisierung und das Debugging nützlich sein.
         </para>
 
-        <example id="zend.navigation.containers.other.example.toarray">
-            <title>Einen Container in ein Array konvertieren</title>
+        <example xml:id="zend.navigation.containers.other.example.toarray"><info><title>Einen Container in ein Array konvertieren</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $container = new Zend_Navigation(array(
@@ -804,5 +802,5 @@ array(2) {
 */
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

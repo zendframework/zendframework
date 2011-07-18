@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22146 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.identical">
-    <title>Identical</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.identical"><info><title>Identical</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Identical</classname> erlaubt es zu prüfen ob ein angegebener Wert
         mit einem angegebenen Vergleichswert identisch ist.
     </para>
 
-    <sect3 id="zend.validate.set.identical.options">
-        <title>Unterstützte Optionen für Zend_Validate_Identical</title>
+    <section xml:id="zend.validate.set.identical.options"><info><title>Unterstützte Optionen für Zend_Validate_Identical</title></info>
+        
 
         <para>
             Die folgenden Optionen werden für <classname>Zend_Validate_Identical</classname>
@@ -32,10 +30,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.identical.basic">
-        <title>Grundsätzliche Verwendung</title>
+    <section xml:id="zend.validate.set.identical.basic"><info><title>Grundsätzliche Verwendung</title></info>
+        
 
         <para>
             Um zu prüfen ob zwei Werte identisch sind muss man den originalen Wert als
@@ -59,10 +57,10 @@ if ($valid->isValid($value) {
             <methodname>setToken()</methodname> setzen und mit <methodname>getToken()</methodname>
             den aktuell gesetzten Token erhalten.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.identical.types">
-        <title>Identische Objekte</title>
+    <section xml:id="zend.validate.set.identical.types"><info><title>Identische Objekte</title></info>
+        
 
         <para>
             Natürlich kann <classname>Zend_Validate_Identical</classname> nicht nur Strings prüfen,
@@ -79,8 +77,8 @@ if ($valid->isValid($input)) {
 }
 ]]></programlisting>
 
-        <note>
-            <title>Vergleich des Typs</title>
+        <note><info><title>Vergleich des Typs</title></info>
+            
 
             <para>
                 Man sollte darauf acht geben das der Typ einer Variable für die Prüfung verwendet
@@ -89,10 +87,10 @@ if ($valid->isValid($input)) {
                 durchführen will muss man die <property>strict</property> Option setzen.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.identical.formelements">
-        <title>Formular Elemente</title>
+    <section xml:id="zend.validate.set.identical.formelements"><info><title>Formular Elemente</title></info>
+        
 
         <para>
             <classname>Zend_Validate_Identical</classname> unterstützt auch den Vergleich von
@@ -115,10 +113,10 @@ $form->addElement('password', 'elementTwo', array(
             ist. Im Falle das der Benutzer keine zwei identischen Werte eingegeben hat, erhält man
             einen Prüffehler.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.identical.strict">
-        <title>Strikte Prüfung</title>
+    <section xml:id="zend.validate.set.identical.strict"><info><title>Strikte Prüfung</title></info>
+        
 
         <para>
             Wie vorher erwähnt prüft <classname>Zend_Validate_Identical</classname> die Token
@@ -146,10 +144,10 @@ if ($valid->isValid($input)) {
             Der Bequemlichkeit halber kann man auch <methodname>setStrict()</methodname> und
             <methodname>getStrict()</methodname> verwenden.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.identical.configuration">
-        <title>Konfiguration</title>
+    <section xml:id="zend.validate.set.identical.configuration"><info><title>Konfiguration</title></info>
+        
 
         <para>
             Wie alle anderen Prüfungen unterstützt <classname>Zend_Validate_Identical</classname>
@@ -193,5 +191,5 @@ if ($valid->isValid($input)) {
     // Der Wert ist ungültig
 }
 ]]></programlisting>
-    </sect3>
-</sect2>
+    </section>
+</section>

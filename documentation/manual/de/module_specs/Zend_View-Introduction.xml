@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.view.introduction">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.introduction"><info><title>Einführung</title></info>
+    
 
     <para>
         <classname>Zend_View</classname> ist eine Klasse für die Verarbeitung des "View" Teils des
@@ -25,8 +23,8 @@
         wird die Kontrolle an das View Skript übergeben, welches die Ausgabe erstellt.
     </para>
 
-    <sect2 id="zend.view.introduction.controller">
-        <title>Controller Skript</title>
+    <section xml:id="zend.view.introduction.controller"><info><title>Controller Skript</title></info>
+        
 
         <para>
             In einem einfachen Beispiel hat dein Controller Skript eine Liste von Buchdaten, die
@@ -59,10 +57,10 @@ $view->books = $data;
 // und verarbeite ein View Skript mit Namen "booklist.php"
 echo $view->render('booklist.php');
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.introduction.view">
-        <title>View Skript</title>
+    <section xml:id="zend.view.introduction.view"><info><title>View Skript</title></info>
+        
 
         <para>
             Nun benötigen wir das zugehörige View Skript "booklist.php". Dies ist ein
@@ -103,10 +101,10 @@ echo $view->render('booklist.php');
             Beachte, wie wir die "escape()" Methode verwenden, um die Variablen für die Ausgabe zu
             maskieren.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.introduction.options">
-        <title>Optionen</title>
+    <section xml:id="zend.view.introduction.options"><info><title>Optionen</title></info>
+        
 
         <para>
             <classname>Zend_View</classname> hat einige Optionen die gesetzt werden können um
@@ -173,16 +171,15 @@ base/path/
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.introduction.shortTags">
-        <title>View Skripte mit Short Tags</title>
+    <section xml:id="zend.view.introduction.shortTags"><info><title>View Skripte mit Short Tags</title></info>
+        
 
         <para>
             In unseren Beispielen verwenden wir <acronym>PHP</acronym> Long
-            Tags: <emphasis>&lt;?php</emphasis>. Wir empfehlen auch die <ulink
-                url="http://us.php.net/manual/en/control-structures.alternative-syntax.php">
-                alternative Syntax für Kontrollstrukturen</ulink>. Diese sind übliche Abkürzungen
+            Tags: <emphasis>&lt;?php</emphasis>. Wir empfehlen auch die <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://us.php.net/manual/en/control-structures.alternative-syntax.php">
+                alternative Syntax für Kontrollstrukturen</link>. Diese sind übliche Abkürzungen
             die Verwendet werden wenn View Skripte geschrieben werden, da Sie Konstrukte
             verständlicher machen, die Anweisungen auf einer einzelnen Zeile belassen und die
             Notwendigkeit eleminieren nach Klammern im <acronym>HTML</acronym> zu suchen.
@@ -241,8 +238,8 @@ $view->setUseStreamWrapper(true);
             </listitem>
         </itemizedlist>
 
-        <warning>
-            <title>View Stream Wrapper verringert die Geschwindigkeit</title>
+        <warning><info><title>View Stream Wrapper verringert die Geschwindigkeit</title></info>
+            
 
             <para>
                 Die Verwendung des Stream Wrapper <emphasis>wird</emphasis> die Geschwindigkeit der
@@ -252,10 +249,10 @@ $view->setUseStreamWrapper(true);
                 das Cachen von partiellen, und/oder volle Seiteninhalten vorhanden ist.
             </para>
         </warning>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.introduction.accessors">
-        <title>Zugriff auf Dienstprogramme</title>
+    <section xml:id="zend.view.introduction.accessors"><info><title>Zugriff auf Dienstprogramme</title></info>
+        
 
         <para>
             Typischerweise ist es nur notwendig <methodname>assign()</methodname>,
@@ -322,5 +319,5 @@ $view->setUseStreamWrapper(true);
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

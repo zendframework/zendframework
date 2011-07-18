@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
-<!-- Reviewed: no -->
-<sect1 id="migration.15">
-    <title>Zend Framework 1.5</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.15"><info><title>Zend Framework 1.5</title></info>
+    
 
     <para>
         Wenn man von einem älteren Release auf Zend Framework 1.5 oder höher hochrüstet sollte
         man die folgenden Migrations Hinweise beachten.
     </para>
 
-    <sect2 id="migration.15.zend.controller">
-        <title>Zend_Controller</title>
+    <section xml:id="migration.15.zend.controller"><info><title>Zend_Controller</title></info>
+        
 
         <para>
             Obwohl die meisten grundsätzlichen Funktionalitäten die gleichen bleiben und alle
@@ -127,5 +125,5 @@ $front->setParam('useCaseSensitiveActions', true);
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

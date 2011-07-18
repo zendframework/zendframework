@@ -1,13 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21741 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.translate">
-    <title>Übersetzungs Helfer</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.translate"><info><title>Übersetzungs Helfer</title></info>
+    
 
     <para>
         Oft sind Webseiten in verschiedenen Sprachen vorhanden. Um den Inhalt einer Site zu
-        übersetzen sollte ganz einfach <link
-            linkend="zend.translate.introduction">Zend_Translate</link> verwendet werden, und um
+        übersetzen sollte ganz einfach <link linkend="zend.translate.introduction">Zend_Translate</link> verwendet werden, und um
         <classname>Zend_Translate</classname> in der eigenen View zu integrieren sollte der
         <emphasis>Translate</emphasis> View Helfer verwendet werden.
     </para>
@@ -55,8 +52,8 @@
         </para>
     </note>
 
-    <example id="zend.view.helpers.initial.translate.registered">
-        <title>Registrierte Instanz</title>
+    <example xml:id="zend.view.helpers.initial.translate.registered"><info><title>Registrierte Instanz</title></info>
+        
 
         <para>
             Um eine registrierte Instanz zu verwenden muß einfach eine Instanz von
@@ -87,8 +84,8 @@ echo $this->translate('simple');
         erstellt werden und der Helfer im Nachhinein initiiert werden.
     </para>
 
-    <example id="zend.view.helpers.initial.translate.afterwards">
-        <title>In der View</title>
+    <example xml:id="zend.view.helpers.initial.translate.afterwards"><info><title>In der View</title></info>
+        
 
         <para>
             Um das Fluid Interface zu verwenden muß eine Instanz von
@@ -116,8 +113,8 @@ $this->translate()->setTranslator($adapter)->translate('simple');
         direkt angesprochen werden.
     </para>
 
-    <example id="zend.view.helpers.initial.translate.directly">
-        <title>Direkte Verwendung</title>
+    <example xml:id="zend.view.helpers.initial.translate.directly"><info><title>Direkte Verwendung</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 // unser Beispieladapter
@@ -148,8 +145,8 @@ print $translate->translate('simple'); // das gibt 'einfach' zurück
         Parametern, oder als Array von Parametern. Als Beispiel:
     </para>
 
-    <example id="zend.view.helpers.initial.translate.parameter">
-        <title>Einzelne Parameter</title>
+    <example xml:id="zend.view.helpers.initial.translate.parameter"><info><title>Einzelne Parameter</title></info>
+        
 
         <para>
             Um einen einzelnen Parameter zu verwenden muss dieser einfach der Methode angefügt
@@ -171,8 +168,8 @@ $this->translate("Today is %1\$s", $date);
         </para>
     </note>
 
-    <example id="zend.view.helpers.initial.translate.parameterlist">
-        <title>Liste von Parametern</title>
+    <example xml:id="zend.view.helpers.initial.translate.parameterlist"><info><title>Liste von Parametern</title></info>
+        
 
         <para>
             Oder eine Liste von Parametern verwenden und diese der Methode hinzufügen.
@@ -191,8 +188,8 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s",
 ]]></programlisting>
     </example>
 
-    <example id="zend.view.helpers.initial.translate.parameterarray">
-        <title>Array von Parametern</title>
+    <example xml:id="zend.view.helpers.initial.translate.parameterarray"><info><title>Array von Parametern</title></info>
+        
 
         <para>
             Oder ein Array von Parametern verwenden und dieses der Methode hinzufügen.
@@ -214,8 +211,8 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
         werden.
     </para>
 
-    <example id="zend.view.helpers.initial.translate.dynamic">
-        <title>Das Gebietsschema dynamisch wechseln</title>
+    <example xml:id="zend.view.helpers.initial.translate.dynamic"><info><title>Das Gebietsschema dynamisch wechseln</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 // innerhalb der View
@@ -232,8 +229,8 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date, 'it');
         gesetzt werden:
     </para>
 
-    <example id="zend.view.helpers.initial.translate.static">
-        <title>Das Gebietsschema statisch wechseln</title>
+    <example xml:id="zend.view.helpers.initial.translate.static"><info><title>Das Gebietsschema statisch wechseln</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 // innerhalb der View
@@ -253,8 +250,8 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
         gesetzte Gebietsschema zu erhalten.
     </para>
 
-    <example id="zend.view.helpers.initial.translate.getlocale">
-        <title>Das aktuell gesetzte Gebietsschema erhalten</title>
+    <example xml:id="zend.view.helpers.initial.translate.getlocale"><info><title>Das aktuell gesetzte Gebietsschema erhalten</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 // innerhalb der View
@@ -271,7 +268,4 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
 $this->translate()->getLocale();
 ]]></programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

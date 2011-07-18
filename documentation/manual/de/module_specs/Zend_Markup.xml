@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.markup.introduction">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.markup.introduction"><info><title>Einführung</title></info>
+    
 
     <para>
         Die Komponente <classname>Zend_Markup</classname> bietet einen erweiterbaren Weg für das
@@ -19,4 +19,4 @@
         Drittens ein Array mit Optionen die spezifiziert werden können und mit dem Renderer
         verwendet werden.
     </para>
-</sect1>
+</section>

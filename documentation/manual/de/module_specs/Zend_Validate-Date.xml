@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22066 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.date">
-    <title>Date</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.date"><info><title>Date</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Date</classname> erlaubt es zu prüfen ob ein angegebener Wert ein
         Datum enthält. Diese Prüfung prüft auch lokalisierte Eingaben.
     </para>
 
-    <sect3 id="zend.validate.set.date.options">
-        <title>Unterstützte Optionen für Zend_Validate_Date</title>
+    <section xml:id="zend.validate.set.date.options"><info><title>Unterstützte Optionen für Zend_Validate_Date</title></info>
+        
 
         <para>
             Die folgenden Optionen werden für <classname>Zend_Validate_Date</classname> unterstützt:
@@ -31,10 +29,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.date.basic">
-        <title>Standardmäßige Datumsprüfung</title>
+    <section xml:id="zend.validate.set.date.basic"><info><title>Standardmäßige Datumsprüfung</title></info>
+        
 
         <para>
             Der einfachste Weg um ein Datum zu prüfen ist die Verwendung des Standardmäßigen
@@ -53,10 +51,10 @@ $validator->isValid('10.10.2000'); // Gibt false zurück
             Das standardmäßige Datumsformat für <classname>Zend_Validate_Date</classname> ist
             'yyyy-MM-dd'.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.date.localized">
-        <title>Lokalisierte Datumsprüfung</title>
+    <section xml:id="zend.validate.set.date.localized"><info><title>Lokalisierte Datumsprüfung</title></info>
+        
 
         <para>
             <classname>Zend_Validate_Date</classname> prüft auch Daten welche in einem lokalisierten
@@ -77,10 +75,10 @@ $validator->isValid('10.May.2010'); // Gibt false zurück
             Beispiel ist dies 'dd.MM.yyyy' welches als Standardmäßige Datumsformat für 'de'
             definiert ist.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.date.formats">
-        <title>Selbst definierte Datumsprüfung</title>
+    <section xml:id="zend.validate.set.date.formats"><info><title>Selbst definierte Datumsprüfung</title></info>
+        
 
         <para>
             <classname>Zend_Validate_Date</classname> unterstützt auch selbst definierte
@@ -106,8 +104,5 @@ $validator = new Zend_Validate_Date(array('format' => 'yyyy MMMM', 'locale' => '
 $validator->isValid('2010 Dezember'); // Gibt true zurück
 $validator->isValid('2010 June');     // Gibt false zurück
 ]]></programlisting>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

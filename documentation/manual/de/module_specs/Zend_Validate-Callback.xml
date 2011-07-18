@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21740 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.callback">
-    <title>Callback</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.callback"><info><title>Callback</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Callback</classname> erlaubt es einen Callback anzugeben der
         verwendet wird um einen angegebenen Wert zu prüfen.
     </para>
 
-    <sect3 id="zend.validate.set.callback.options">
-        <title>Unterstützte Optionen für Zend_Validate_Callback</title>
+    <section xml:id="zend.validate.set.callback.options"><info><title>Unterstützte Optionen für Zend_Validate_Callback</title></info>
+        
 
         <para>
             Die folgenden Optionen werden für <classname>Zend_Validate_Callback</classname>
@@ -32,10 +30,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.callback.basic">
-        <title>Grundsätzliche Verwendung</title>
+    <section xml:id="zend.validate.set.callback.basic"><info><title>Grundsätzliche Verwendung</title></info>
+        
 
         <para>
             Der einfachste Anwendungsfall besteht darin eine einzelne Funktion zu haben und diese
@@ -63,14 +61,13 @@ if ($valid->isValid($input)) {
     // Input ist ungültig
 }
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.callback.closure">
-        <title>Verwendung mit Closures</title>
+    <section xml:id="zend.validate.set.callback.closure"><info><title>Verwendung mit Closures</title></info>
+        
 
         <para>
-            <acronym>PHP</acronym> 5.3 führt <ulink
-                url="http://php.net/functions.anonymous">Closures</ulink> ein,
+            <acronym>PHP</acronym> 5.3 führt <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/functions.anonymous">Closures</link> ein,
             welche grundsätzlich selbst-enthaltene oder <emphasis>anonyme</emphasis> Funktionen
             sind. <acronym>PHP</acronym> nimmt an das Closures eine andere Form eines Callbacks
             sind, und können daher als solche mit <classname>Zend_Validate_Callback</classname>
@@ -89,10 +86,10 @@ if ($valid->isValid($input)) {
     // Input ist ungültig
 }
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.callback.class">
-        <title>Verwendung mit klassenbasierten Callbacks</title>
+    <section xml:id="zend.validate.set.callback.class"><info><title>Verwendung mit klassenbasierten Callbacks</title></info>
+        
 
         <para>
             Natürlich ist es auch möglich eine Klassenmethode als Callback zu verwenden. Angenommen
@@ -172,10 +169,10 @@ if ($valid->isValid($input)) {
     // Input ist ungültig
 }
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.callback.options2">
-        <title>Optionen hinzufügen</title>
+    <section xml:id="zend.validate.set.callback.options2"><info><title>Optionen hinzufügen</title></info>
+        
 
         <para>
             <classname>Zend_Validate_Callback</classname> erlaubt auch die Verwendung von Optionen
@@ -259,8 +256,5 @@ if ($valid->isValid($input, $additional)) {
             folgen Ihm. Die Anzahl und der Typ der Optionen welche verwendet werden ist nicht
             limitiert.
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

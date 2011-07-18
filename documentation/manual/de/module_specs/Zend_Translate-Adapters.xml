@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22585 -->
-<!-- Reviewed: 21661 -->
-<sect1 id="zend.translate.adapter">
-    <title>Adapter für Zend_Translate</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.adapter"><info><title>Adapter für Zend_Translate</title></info>
+    
 
     <para>
         <classname>Zend_Translate</classname> kann unterschiedliche Adapter für die Übersetzung
@@ -10,8 +8,8 @@
         Liste aller unterstützten Adapter für Übersetzungsquelldateien.
     </para>
 
-    <table id="zend.translate.adapter.table">
-        <title>Adapter für Zend_Translate</title>
+    <table xml:id="zend.translate.adapter.table"><info><title>Adapter für Zend_Translate</title></info>
+        
 
         <tgroup cols="3">
             <thead>
@@ -116,8 +114,8 @@
         </tgroup>
     </table>
 
-    <sect2 id="zend.translate.adapter.decision">
-        <title>Wie man entscheidet welchen Adapter man benutzen soll</title>
+    <section xml:id="zend.translate.adapter.decision"><info><title>Wie man entscheidet welchen Adapter man benutzen soll</title></info>
+        
 
         <para>
             Zuerst muss man die Entscheidung treffen welchen der Adapter man für
@@ -150,8 +148,8 @@
             </para>
         </note>
 
-        <sect3 id="zend.translate.adapter.array">
-            <title>Zend_Translate_Adapter_Array</title>
+        <section xml:id="zend.translate.adapter.array"><info><title>Zend_Translate_Adapter_Array</title></info>
+            
 
             <para>
                 Der Array-Adapter ist der Adapter, welcher für Programmierer am einfachsten
@@ -166,10 +164,10 @@
                 verwendet werden und wenn man selbst oder das eigene Team die Übersetzungen
                 erstellen kann.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.csv">
-            <title>Zend_Translate_Adapter_Csv</title>
+        <section xml:id="zend.translate.adapter.csv"><info><title>Zend_Translate_Adapter_Csv</title></info>
+            
 
             <para>
                 Der CSV-Adapter ist der Adapter, der am einfachsten für Kunden zu benutzen ist.
@@ -192,18 +190,17 @@
                     <acronym>PHP</acronym> nicht unabhängig vom Gebietsschema ist.
                 </para>
             </note>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.gettext">
-            <title>Zend_Translate_Adapter_Gettext</title>
+        <section xml:id="zend.translate.adapter.gettext"><info><title>Zend_Translate_Adapter_Gettext</title></info>
+            
 
             <para>
                 Der Gettext-Adapter ist der Adapter, der am meisten verwendet wird.
                 Gettext ist ein Übersetzungsformat, welches durch GNU eingeführt wurde
                 und jetzt weltweit Verwendung findet.
                 Es ist nicht menschenlesbar, allerdings existieren einige kostenlose
-                Freeware Tools (zum Beispiel, <ulink
-                    url="http://sourceforge.net/projects/poedit/">POEdit</ulink>),
+                Freeware Tools (zum Beispiel, <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://sourceforge.net/projects/poedit/">POEdit</link>),
                 welche sehr nützlich sind. Der <classname>Zend_Translate</classname> Gettext-Adapter
                 ist nicht mit Hilfe von <acronym>PHP</acronym>s Gettext-Erweiterung realisiert
                 worden. Der Gettext-Adapter kann also verwendet werden, selbst wenn
@@ -218,10 +215,10 @@
                 Aber Gettext-Dateien werden in einem machinenlesbaren Format gespeichert
                 und sind nicht ohne Tools lesbar.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.ini">
-            <title>Zend_Translate_Adapter_Ini</title>
+        <section xml:id="zend.translate.adapter.ini"><info><title>Zend_Translate_Adapter_Ini</title></info>
+            
 
             <para>
                 Der <acronym>INI</acronym> Adapter ist ein sehr einfacher Adapter, welcher sogar
@@ -234,10 +231,10 @@
                 Dieser Adapter sollte nur dann verwendet werden, wenn ein Kunde Übersetzungen selbst
                 machen will. Verwenden Sie diesen Adapter nicht als generelle Übersetzungsquelle.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.tbx">
-            <title>Zend_Translate_Adapter_Tbx</title>
+        <section xml:id="zend.translate.adapter.tbx"><info><title>Zend_Translate_Adapter_Tbx</title></info>
+            
 
             <para>
                 Der TBX Adapter ist ein Adapter, der von Kunden benutzt wird, die bereits das TBX
@@ -255,8 +252,8 @@
                 verwenden. Die Dateien sind menschenlesbar und unabhängig vom Betriebsystem.
             </para>
 
-            <warning>
-                <title>Rückschritt in PHP 5.3</title>
+            <warning><info><title>Rückschritt in PHP 5.3</title></info>
+                
 
                 <para>
                     Vor <acronym>PHP</acronym> 5.3 haben <methodname>parse_ini_file()</methodname>
@@ -269,10 +266,10 @@
                     das der Fall ist, wird empfohlen einen anderen Adapter zu verwenden.
                 </para>
             </warning>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.tmx">
-            <title>Zend_Translate_Adapter_Tmx</title>
+        <section xml:id="zend.translate.adapter.tmx"><info><title>Zend_Translate_Adapter_Tmx</title></info>
+            
 
             <para>
                 Der TMX-Adapter wird meistens benutzt, wenn Kunden
@@ -287,10 +284,10 @@
                 Die meisten mittleren Firmen und Großfirmen werden diesen Adapter benutzen.
                 Die Dateien sind menschenlesbar und systemunabhängig.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.qt">
-            <title>Zend_Translate_Adapter_Qt</title>
+        <section xml:id="zend.translate.adapter.qt"><info><title>Zend_Translate_Adapter_Qt</title></info>
+            
 
             <para>
                 Der Qt-Adapter ist der Adapter für alle Kunden, welche TS-Dateien
@@ -304,10 +301,10 @@
                 Einige "Big Player" haben Ihre Software auf dem QT Framework ausgebaut.
                 Die Dateien sind menschenlesbar und betriebsystemunabhängig.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.xliff">
-            <title>Zend_Translate_Adapter_Xliff</title>
+        <section xml:id="zend.translate.adapter.xliff"><info><title>Zend_Translate_Adapter_Xliff</title></info>
+            
 
             <para>
                 Der XLIFF Adapter wird meistens von Kunden benutzt,
@@ -323,10 +320,10 @@
                 Die meisten Mittelständigen Unternehmen werden diesen Adapter benutzen.
                 Die Dateien sind menschenlesbar und systemunabhängig.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.xmltm">
-            <title>Zend_Translate_Adapter_XmlTm</title>
+        <section xml:id="zend.translate.adapter.xmltm"><info><title>Zend_Translate_Adapter_XmlTm</title></info>
+            
 
             <para>
                 Der XmlTm Adapter ist ein Adapter der von Kunden verwendet wird, die das Layout
@@ -340,11 +337,11 @@
                 Dieser Adapter sollte nur verwendet werden, wenn bereits Quelldateien dieses Formats
                 existieren. Die Dateien sind menschenlesbar und systemunabhängig.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.translate.adapter.selfwritten">
-        <title>Selbst geschriebene Adapter integrieren</title>
+    <section xml:id="zend.translate.adapter.selfwritten"><info><title>Selbst geschriebene Adapter integrieren</title></info>
+        
 
         <para>
             <classname>Zend_Translate</classname> erlaubt es, selbst geschriebene Adapterklassen zu
@@ -382,10 +379,10 @@ try {
     // Genereller Fehler
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.translate.adapter.caching">
-        <title>Alle Adapter beschleunigen</title>
+    <section xml:id="zend.translate.adapter.caching"><info><title>Alle Adapter beschleunigen</title></info>
+        
 
         <para>
             <classname>Zend_Translate</classname> erlaubt intern die Verwendung von
@@ -464,5 +461,5 @@ $translate = new Zend_Translate(
 // irgendwo später im Code
 Zend_Translate::clearCache('MyTag');
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

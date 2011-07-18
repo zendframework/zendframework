@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22745 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.character-sets">
-    <title>Zeichensätze</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.character-sets"><info><title>Zeichensätze</title></info>
+    
 
     <para>
         <classname>Zend_Mail</classname> prüft nicht auf die richtigen Zeichensätze für die
@@ -14,16 +12,16 @@
         werden.
     </para>
 
-    <note>
-        <title>Nur im Textformat</title>
+    <note><info><title>Nur im Textformat</title></info>
+        
 
         <para>
             Zeichensätze sind nur auf Mailbestandteile im Textformat anwendbar.
         </para>
     </note>
 
-    <example id="zend.mail.character-sets.cjk">
-        <title>Verwendung in CJK Sprachen</title>
+    <example xml:id="zend.mail.character-sets.cjk"><info><title>Verwendung in CJK Sprachen</title></info>
+        
 
         <para>
             Das folgende Beispiel zeigt wie <classname>Zend_Mail</classname> im japanischen
@@ -51,4 +49,4 @@ $mail->setSubject(myConvert('TestSubject'));
 $mail->send();
 ]]></programlisting>
     </example>
-</sect1>
+</section>

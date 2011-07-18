@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21823 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.config.adapters.ini">
-    <title>Zend_Config_Ini</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.ini"><info><title>Zend_Config_Ini</title></info>
+    
 
     <para>
         <classname>Zend_Config_Ini</classname> ermöglicht es Entwicklern, Konfigurations-Daten in
@@ -16,13 +14,12 @@
         (<emphasis>:</emphasis>) notiert, gefolgt vom Namen der zu beerbenden Sektion.
     </para>
 
-    <note>
-        <title>Die Ini Datei parsen</title>
+    <note><info><title>Die Ini Datei parsen</title></info>
+        
 
         <para>
             <classname>Zend_Config_Ini</classname> verwendet die <acronym>PHP</acronym> Funktion
-            <ulink
-                url="http://php.net/parse_ini_file"><methodname>parse_ini_file()</methodname></ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/parse_ini_file"><methodname>parse_ini_file()</methodname></link>.
             Deren Dokumentation klärt über spezielle Verhaltensweisen auf, die sich auch auf
             <classname>Zend_Config_Ini</classname> auswirken, z. B. wie die besonderen Werte
             "<constant>TRUE</constant>", "<constant>FALSE</constant>", "yes", "no" und
@@ -30,8 +27,8 @@
         </para>
     </note>
 
-    <note>
-        <title>Schlüssel Trenner</title>
+    <note><info><title>Schlüssel Trenner</title></info>
+        
 
         <para>
             Standardmäßig ist das Schlüssel Trennzeichen der Punkt (<emphasis>.</emphasis>). Dies
@@ -49,8 +46,8 @@ $config = new Zend_Config_Ini('/path/to/config.ini',
 ]]></programlisting>
     </note>
 
-    <example id="zend.config.adapters.ini.example.using">
-        <title>Zend_Config_Ini benutzen</title>
+    <example xml:id="zend.config.adapters.ini.example.using"><info><title>Zend_Config_Ini benutzen</title></info>
+        
 
         <para>
             Dieses Beispiel zeigt die grundlegende Nutzung von
@@ -99,8 +96,8 @@ echo $config->database->params->dbname; // Ausgabe "dbname"
     </example>
 
     <note>
-        <table id="zend.config.adapters.ini.table">
-            <title>Zend_Config_Ini Kontruktor Parameter</title>
+        <table xml:id="zend.config.adapters.ini.table"><info><title>Zend_Config_Ini Kontruktor Parameter</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -160,4 +157,4 @@ echo $config->database->params->dbname; // Ausgabe "dbname"
             </tgroup>
         </table>
     </note>
-</sect1>
+</section>

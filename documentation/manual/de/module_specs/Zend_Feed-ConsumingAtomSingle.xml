@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21586 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.feed.consuming-atom-single-entry">
-    <title>Einen einzelnen Atom Eintrag konsumieren</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom-single-entry"><info><title>Einen einzelnen Atom Eintrag konsumieren</title></info>
+    
 
     <para>
         Einzelne Atom <command>&lt;entry&gt;</command> Elemente sind auch für sich selber gültig.
@@ -18,8 +16,8 @@
         "anonymer" Feed erstellt, welcher den Eintrag enthält.
     </para>
 
-    <example id="zend.feed.consuming-atom-single-entry.example.atom">
-        <title>Lesen eines Atom Feeds mit einem Eintrag</title>
+    <example xml:id="zend.feed.consuming-atom-single-entry.example.atom"><info><title>Lesen eines Atom Feeds mit einem Eintrag</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
@@ -34,14 +32,14 @@ $entry = $feed->current();
         dass du ein Dokument mit nur einem <command>&lt;entry&gt;</command> Eintrag abrufst:
     </para>
 
-    <example id="zend.feed.consuming-atom-single-entry.example.entryatom">
-        <title>
+    <example xml:id="zend.feed.consuming-atom-single-entry.example.entryatom"><info><title>
             Direkte Verwendung des Eintragsobjekts für einen Atom Feed mit nur einem Eintrag
-        </title>
+        </title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $entry = new Zend_Feed_Entry_Atom('http://atom.example.com/feed/1');
 echo $entry->title();
 ]]></programlisting>
     </example>
-</sect1>
+</section>

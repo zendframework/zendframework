@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.search.lucene.advanced">
-    <title>Erweitert</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.advanced"><info><title>Erweitert</title></info>
+    
 
-    <sect2 id="zend.search.lucene.advanced.format_migration">
-        <title>Beginnend mit 1.6, Behandlung von Index Format Veränderungen</title>
+    <section xml:id="zend.search.lucene.advanced.format_migration"><info><title>Beginnend mit 1.6, Behandlung von Index Format Veränderungen</title></info>
+        
 
         <para>
             Die <classname>Zend_Search_Lucene</classname> Komponente arbeitet mit den Index Formaten
@@ -14,7 +12,7 @@
 
         <para>
             Das aktuelle Indexformat kann durch den Aufruf von
-            <code>$index->getFormatVersion()</code> abgefragt werden. Er gibt eine der folgenden
+            <code>$index-&gt;getFormatVersion()</code> abgefragt werden. Er gibt eine der folgenden
              Werte zurück:
 
             <itemizedlist>
@@ -45,7 +43,7 @@
             Indexveränderungen werden <emphasis>nur</emphasis> durchgeführt wenn irgendein
             Update des Index durchgeführt wird. Das passiert wenn ein neues Dokument zu einem Index
             hinzugefügt wird, oder wenn manuell eine Indexoptimierung durch den Aufruf von
-            <code>$index->optimize()</code> gestartet wird.
+            <code>$index-&gt;optimize()</code> gestartet wird.
         </para>
 
         <para>
@@ -57,7 +55,7 @@
 
         <para>
             Man kann den Konvertierungsprozess managen und Ziel-Indexformate durch
-            <code>$index->setFormatVersion()</code> zuweisen welches entweder die
+            <code>$index-&gt;setFormatVersion()</code> zuweisen welches entweder die
             <constant>Zend_Search_Lucene::FORMAT_2_1</constant> oder
             <constant>Zend_Search_Lucene::FORMAT_2_3</constant> Konstante entgegennimmt:
 
@@ -82,8 +80,8 @@
             Rückwärts Konvertierungen werden nicht unterstützt.
         </para>
 
-        <note>
-            <title>Wichtig!</title>
+        <note><info><title>Wichtig!</title></info>
+            
 
             <para>
                 Sobald Indezes in eine höhere Version konvertiert wurden können Sie nicht zurück
@@ -93,10 +91,10 @@
             </para>
         </note>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.advanced.static">
-        <title>Den Index als statische Eigenschaft verwenden</title>
+    <section xml:id="zend.search.lucene.advanced.static"><info><title>Den Index als statische Eigenschaft verwenden</title></info>
+        
 
         <para>
             Das <classname>Zend_Search_Lucene</classname> Objekt verwendet einen Objekt Destruktor
@@ -187,5 +185,5 @@ Searcher::initIndex();
 Searcher::commit();
 ...
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

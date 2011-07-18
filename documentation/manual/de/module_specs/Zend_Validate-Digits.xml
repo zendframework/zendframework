@@ -1,24 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21762 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.digits">
-    <title>Digits</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.digits"><info><title>Digits</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Digit</classname> prüft ob ein angegebener Wert nur Ziffern
         enthält.
     </para>
 
-    <sect3 id="zend.validate.set.digits.options">
-        <title>Unterstützte Optionen für Zend_Validate_Digits</title>
+    <section xml:id="zend.validate.set.digits.options"><info><title>Unterstützte Optionen für Zend_Validate_Digits</title></info>
+        
 
         <para>
             Es gibt keine zusätzlichen Optionen für <classname>Zend_Validate_Digits</classname>:
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.digits.basic">
-        <title>Prüfen von Ziffern</title>
+    <section xml:id="zend.validate.set.digits.basic"><info><title>Prüfen von Ziffern</title></info>
+        
 
         <para>
             Um zu prüfen ob ein angegebener Wert nur Ziffern und keine anderen Zeichen enthält, muss
@@ -33,8 +31,8 @@ $validator->isValid(1234);         // Gibt true zurück
 $validator->isValid('1a234');      // Gibt false zurück
 ]]></programlisting>
 
-        <note>
-            <title>Nummern prüfen</title>
+        <note><info><title>Nummern prüfen</title></info>
+            
 
             <para>
                 Wenn man Nummern oder nummerische Werte prüfen will, muss man darauf achten dass
@@ -44,5 +42,5 @@ $validator->isValid('1a234');      // Gibt false zurück
                 <classname>Zend_Validate_Float</classname> verwenden.
             </para>
         </note>
-    </sect3>
-</sect2>
+    </section>
+</section>

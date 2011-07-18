@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16658 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.dispatcher">
-    <title>Der Dispatcher</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.dispatcher"><info><title>Der Dispatcher</title></info>
+    
 
-    <sect2 id="zend.controller.dispatcher.overview">
-        <title>Überblick</title>
+    <section xml:id="zend.controller.dispatcher.overview"><info><title>Überblick</title></info>
+        
 
         <para>
             Dispatching ist der Prozess, das Request Objekt
@@ -22,8 +20,8 @@
             <methodname>setDefaultModule()</methodname> Methoden zu verändern.
         </para>
 
-        <note>
-            <title>Standard Module</title>
+        <note><info><title>Standard Module</title></info>
+            
 
             <para>
                 Bei der Erstellung von modularen Anwendungen kann es sein das man auch einen
@@ -93,10 +91,10 @@ public function bazAction()
     $this->_forward('baz', 'bar', 'foo', array('baz' => 'bogus'));
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.dispatcher.subclassing">
-        <title>Erben vom Dispatcher</title>
+    <section xml:id="zend.controller.dispatcher.subclassing"><info><title>Erben vom Dispatcher</title></info>
+        
 
         <para>
             <classname>Zend_Controller_Front</classname> ruft zuerst den Router auf, um die erste
@@ -284,8 +282,5 @@ interface Zend_Controller_Dispatcher_Interface
             den Wunsch ein anderes Verarbeitungs Paradigma wie das Verarbeiten zu Aktionsdateien
             unter den Controller Verzeichnissen (statt auf Klassen Methoden zu verarbeiten).
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

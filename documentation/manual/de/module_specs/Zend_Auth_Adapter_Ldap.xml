@@ -1,19 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20763 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.auth.adapter.ldap">
-    <title>LDAP Authentifizierung</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.ldap"><info><title>LDAP Authentifizierung</title></info>
+    
 
-    <sect2 id="zend.auth.adapter.ldap.introduction">
-        <title>Einführung</title>
+    <section xml:id="zend.auth.adapter.ldap.introduction"><info><title>Einführung</title></info>
+        
 
         <para>
             <classname>Zend_Auth_Adapter_Ldap</classname> unterstützt Webanwendungen bei der
             Authentifizierung mit <acronym>LDAP</acronym> Services. Die Features beinhalten
             Kanonisierung von Benutzernamen und Domainnamen, Mehrfach-Domain Authentifizierung, und
-            Fehlerbehandlungs Features. Es wurde getestet mit <ulink
-                url="http://www.microsoft.com/windowsserver2003/technologies/directory/activedirectory/">Microsoft
-                Active Directory</ulink> und <ulink url="http://www.openldap.org/">OpenLDAP</ulink>,
+            Fehlerbehandlungs Features. Es wurde getestet mit <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.microsoft.com/windowsserver2003/technologies/directory/activedirectory/">Microsoft
+                Active Directory</link> und <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.openldap.org/">OpenLDAP</link>,
             sollte auch mit anderen <acronym>LDAP</acronym> Service Provider zusammenarbeiten.
         </para>
 
@@ -24,10 +21,10 @@
             Informationen für die Fehlerbehandlung bei Authentifizierungs Problemen, und Beispiel
             Optionen für beide, Active Directory und OpenLDAP Server.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.ldap.usage">
-        <title>Verwendung</title>
+    <section xml:id="zend.auth.adapter.ldap.usage"><info><title>Verwendung</title></info>
+        
 
         <para>
             Um <classname>Zend_Auth_Adapter_Ldap</classname> Authentifizierung in eigene Anwendungen
@@ -135,10 +132,10 @@ ldap.server2.baseDn = "CN=Users,DC=w,DC=net"
             wegen der Kanonifizierung der Namen (beschrieben im
             <emphasis>Kanonifizierung von Benutzernamen</emphasis> Kapitel anbei).
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.ldap.api">
-        <title>Die API</title>
+    <section xml:id="zend.auth.adapter.ldap.api"><info><title>Die API</title></info>
+        
 
         <para>
             Der <classname>Zend_Auth_Adapter_Ldap</classname> Konstruktor akzeptiert drei Parameter.
@@ -147,15 +144,13 @@ ldap.server2.baseDn = "CN=Users,DC=w,DC=net"
         <para>
             Der <varname>$options</varname> Parameter wird benötigt und muß ein Array sein das ein
             oder mehrere Sets von Optionen enthält. Es ist zu beachten das es sich um
-            <emphasis>Array von Arrays</emphasis> von <link
-                linkend="zend.ldap"><classname>Zend_Ldap</classname></link> Optionen handelt. Selbst
+            <emphasis>Array von Arrays</emphasis> von <link linkend="zend.ldap"><classname>Zend_Ldap</classname></link> Optionen handelt. Selbst
             wenn nur ein einzelner <acronym>LDAP</acronym> Server verwendet wird, müssen die
             Optionen trotzdem in einem anderen Array sein.
         </para>
 
         <para>
-            Anbei ist eine <ulink
-                url="http://php.net/print_r"><methodname>print_r()</methodname></ulink>
+            Anbei ist eine <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/print_r"><methodname>print_r()</methodname></link>
             Ausgabe von beispielhaften Optionsparameters die zwei Sets von Serveroptionen für
             <acronym>LDAP</acronym> Server enthalten, <filename>s0.foo.net</filename> und
             <filename>dc1.w.net</filename> (die gleichen Optionen wie in der oberen
@@ -199,8 +194,8 @@ Array
             werden soll, assoziierten Optionen, unterdrückt werden kann.
         </para>
 
-        <note>
-            <title>Was ist ein ausgezeichneter Name?</title>
+        <note><info><title>Was ist ein ausgezeichneter Name?</title></info>
+            
 
             <para>
                 Ein DN oder "distinguished name" ist ein String der den Pfad zu einem Objekt im
@@ -230,8 +225,8 @@ Array
             ein anderer abgefragt wird.
         </para>
 
-        <note>
-            <title>Die glorreichen Details: Was passiert bei der Authentifizierungs Methode?</title>
+        <note><info><title>Die glorreichen Details: Was passiert bei der Authentifizierungs Methode?</title></info>
+            
 
             <para>
                 Wenn die <methodname>authenticate()</methodname> Methode aufgerufen wird, iteriert
@@ -269,10 +264,10 @@ Array
             <methodname>setUsername()</methodname> und <methodname>setPassword()</methodname>
             Methoden gesetzt werden.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.ldap.server-options">
-        <title>Server Optionen</title>
+    <section xml:id="zend.auth.adapter.ldap.server-options"><info><title>Server Optionen</title></info>
+        
 
         <para>
             Jedes Set von Serveroptionen <emphasis>im Kontext von
@@ -281,8 +276,8 @@ Array
             <methodname>Zend_Ldap::setOptions()</methodname> übergeben werden:
         </para>
 
-        <table id="zend.auth.adapter.ldap.server-options.table">
-            <title>Server Optionen</title>
+        <table xml:id="zend.auth.adapter.ldap.server-options.table"><info><title>Server Optionen</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -497,8 +492,7 @@ Array
 
                         <entry>
                             Der <acronym>LDAP</acronym> Suchfilter der für die Suche nach Accounts
-                            verwendet wird. Dieser String ist ein <ulink
-                                url="http://php.net/printf"><methodname>printf()</methodname></ulink>-Stil
+                            verwendet wird. Dieser String ist ein <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/printf"><methodname>printf()</methodname></link>-Stil
                             Ausdruck der ein '<emphasis>%s</emphasis>' enthalten muß um den
                             Benutzernamen unterzubringen. Der Standardwert ist
                             '<emphasis>(&amp;(objectClass=user)(sAMAccountName=%s))</emphasis>',
@@ -542,10 +536,10 @@ Array
                 dass der OpenLDAP Client die Identität des Servers prüfen kann.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.ldap.debugging">
-        <title>Debug Nachrichten sammeln</title>
+    <section xml:id="zend.auth.adapter.ldap.debugging"><info><title>Debug Nachrichten sammeln</title></info>
+        
 
         <para>
             <classname>Zend_Auth_Adapter_Ldap</classname> sammelt Debug Informationen in seiner
@@ -555,8 +549,8 @@ Array
             folgt beschrieben werden:
         </para>
 
-        <table id="zend.auth.adapter.ldap.debugging.table">
-            <title>Debug Nachrichten</title>
+        <table xml:id="zend.auth.adapter.ldap.debugging.table"><info><title>Debug Nachrichten</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -602,21 +596,20 @@ Array
             Debugging Information gesammelt wird, sollten die Indezes 2 und höher auch geloggt
             werden (auch wenn die letzte Nachricht immer den String vom Index 1 enthält).
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.ldap.options-common-server-specific">
-        <title>Übliche Optionen für spezielle Server</title>
+    <section xml:id="zend.auth.adapter.ldap.options-common-server-specific"><info><title>Übliche Optionen für spezielle Server</title></info>
+        
 
-        <sect3 id="zend.auth.adapter.ldap.options-common-server-specific.active-directory">
-            <title>Optionen für Active Directory</title>
+        <section xml:id="zend.auth.adapter.ldap.options-common-server-specific.active-directory"><info><title>Optionen für Active Directory</title></info>
+            
 
             <para>
                 Für <acronym>ADS</acronym> sind die folgenden Optionen beachtenswert:
             </para>
 
-            <table
-                id="zend.auth.adapter.ldap.options-common-server-specific.active-directory.table">
-                <title>Optionen für Active Directory</title>
+            <table xml:id="zend.auth.adapter.ldap.options-common-server-specific.active-directory.table"><info><title>Optionen für Active Directory</title></info>
+                
 
                 <tgroup cols="2">
                     <thead>
@@ -717,18 +710,18 @@ Array
                     Accountnamen zu verwenden.
                 </para>
             </note>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.auth.adapter.ldap.options-common-server-specific.openldap">
-            <title>Optionen für OpenLDAP</title>
+        <section xml:id="zend.auth.adapter.ldap.options-common-server-specific.openldap"><info><title>Optionen für OpenLDAP</title></info>
+            
 
             <para>
                 Für OpenLDAP oder einen generellen <acronym>LDAP</acronym> Server der ein typisches
                 posixAccount Stil Schema verwendet sind die folgenden Optionen beachtenswert:
             </para>
 
-            <table id="zend.auth.adapter.ldap.options-common-server-specific.openldap.table">
-                <title>Optionen für OpenLDAP</title>
+            <table xml:id="zend.auth.adapter.ldap.options-common-server-specific.openldap.table"><info><title>Optionen für OpenLDAP</title></info>
+                
 
                 <tgroup cols="2">
                     <thead>
@@ -841,6 +834,6 @@ Array
                     </tbody>
                 </tgroup>
             </table>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

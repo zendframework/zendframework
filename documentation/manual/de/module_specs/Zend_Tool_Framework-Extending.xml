@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21824 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.tool.framework.extending">
-    <title>Extending and Configuring Zend_Tool_Framework</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.extending"><info><title>Extending and Configuring Zend_Tool_Framework</title></info>
+    
 
-    <sect2 id="zend.tool.framework.console-client">
-        <title>Anpassen des Zend_Tool Konsolen Clients</title>
+    <section xml:id="zend.tool.framework.console-client"><info><title>Anpassen des Zend_Tool Konsolen Clients</title></info>
+        
 
         <para>
             Mit Zend Framework 1.9 erlaubt es <classname>Zend_Tool_Framework</classname> Entwicklern
@@ -33,8 +31,8 @@
             diese Konfigurationsdatei finden können.
         </para>
 
-        <sect3 id="zend.tool.framework.console-client.home-directory">
-            <title>Das Home Verzeichnis</title>
+        <section xml:id="zend.tool.framework.console-client.home-directory"><info><title>Das Home Verzeichnis</title></info>
+            
 
             <para>
                 Bevor der Konsolen Client beginnen kann nach einer <classname>Zend_Tool</classname>
@@ -65,10 +63,10 @@
                 <constant>ZF_HOME</constant> heißt angeben um zu spezifizieren wo das Home
                 Verzeichnis gefunden werden kann.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.tool.framework.console-client.local-storage">
-            <title>Lokaler Speicher</title>
+        <section xml:id="zend.tool.framework.console-client.local-storage"><info><title>Lokaler Speicher</title></info>
+            
 
             <para>
                 Sobald das Home Verzeichnis gefunden werden kann, kann
@@ -97,10 +95,10 @@
                 <classname>Zend_Tool_Framework</classname> Runtime übergeben werden kann, da dieses
                 für Sie nicht erstellt wird.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.tool.framework.console-client.configuration-file">
-            <title>Benutzer Konfiguration</title>
+        <section xml:id="zend.tool.framework.console-client.configuration-file"><info><title>Benutzer Konfiguration</title></info>
+            
 
             <para>
                 Wie beim lokalen Speicher kann <classname>Zend_Tool_Framework</classname>'s
@@ -144,10 +142,10 @@
                 <classname>Zend_Tool_Framework</classname> nicht versucht diese Datei automatisch
                 zu erstellen.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.tool.framework.console-client.configuration-content">
-            <title>Inhalt der Benutzer Konfigurationsdatei</title>
+        <section xml:id="zend.tool.framework.console-client.configuration-content"><info><title>Inhalt der Benutzer Konfigurationsdatei</title></info>
+            
 
             <para>
                 Die Konfigurationdatei sollte als <classname>Zend_Config</classname>
@@ -185,6 +183,6 @@ php.error_reporting = 1
                     <acronym>PHP</acronym> oder <acronym>XML</acronym> Konfigurationen setzen.
                 </para>
             </important>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

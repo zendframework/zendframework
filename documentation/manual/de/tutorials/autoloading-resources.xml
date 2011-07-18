@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19782 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.autoloading.resources">
-    <title>Automatisches Laden von Ressourcen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.resources"><info><title>Automatisches Laden von Ressourcen</title></info>
+    
 
     <para>
         Oft ist es kompliziert, wenn eine Anwendung entwickelt wird, Klassen in den 1:1
@@ -90,8 +88,8 @@ $form      = new Foo_Form_Guestbook();
 $guestbook = new Foo_Model_Guestbook();
 ]]></programlisting>
 
-    <note>
-        <title>Modul Ressource Autoloading</title>
+    <note><info><title>Modul Ressource Autoloading</title></info>
+        
 
         <para>
             Zend Framework's <acronym>MVC</acronym> Layer empfiehlt die Verwendung von "Modulen",
@@ -102,9 +100,8 @@ $guestbook = new Foo_Model_Guestbook();
             Paradigma -- so nützlich das Sie standardmäßig aktiviert sind wenn man eine Bootstrap
             Klasse für eigene Module erstellt welche
             <classname>Zend_Application_Module_Bootstrap</classname> erweitert. Für weitere
-            Informationen kann in der <link
-                linkend="zend.loader.autoloader-resource.module">Zend_Loader_Autoloader_Module
+            Informationen kann in der <link linkend="zend.loader.autoloader-resource.module">Zend_Loader_Autoloader_Module
                 Dokumentation</link> nachgelesen werden.
         </para>
     </note>
-</sect1>
+</section>

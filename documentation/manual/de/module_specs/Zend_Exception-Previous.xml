@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21586 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.exception.previous">
-    <title>Vorherige Exceptions</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.previous"><info><title>Vorherige Exceptions</title></info>
+    
 
     <para>
         Seit Zend Framework 1.10 implementiert <classname>Zend_Exception</classname> die
@@ -17,8 +15,8 @@
         Vorherige Exceptions werden als drittes Argument an den Contructor der Exceptions indiziert.
     </para>
 
-    <example id="zend.exception.previous.example">
-        <title>Vorherige Exceptions</title>
+    <example xml:id="zend.exception.previous.example"><info><title>Vorherige Exceptions</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 try {
@@ -41,7 +39,4 @@ try {
 }
 ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

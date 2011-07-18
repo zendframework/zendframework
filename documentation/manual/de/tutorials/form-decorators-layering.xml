@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20649 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.form.decorators.layering">
-    <title>Layeraufbau von Decorators</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.form.decorators.layering"><info><title>Layeraufbau von Decorators</title></info>
+    
 
     <para>
         Wenn man <link linkend="learning.form.decorators.simplest">dem vorigen Abschnitt</link>
@@ -80,8 +78,7 @@
     </para>
 
     <para>
-        Um den Prozess zu vereinfachen sehen wir in der Beispiel <link
-            linkend="learning.form.decorators.simplest">des vorherigen Abschnitts</link>. Nochmals:
+        Um den Prozess zu vereinfachen sehen wir in der Beispiel <link linkend="learning.form.decorators.simplest">des vorherigen Abschnitts</link>. Nochmals:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -366,4 +363,4 @@ $element = new Zend_Form_Element('foo', array(
         ermöglichen -- das gibt eine Rails-artige Einfachheit der Darstellung von Formularen. Wir
         sehen uns das im nächsten Abschnitt an.
     </para>
-</sect1>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22756 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.read">
-    <title>Lesen von Mail Nachrichten</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.read"><info><title>Lesen von Mail Nachrichten</title></info>
+    
 
     <para>
         <classname>Zend_Mail</classname> kann Mail Nachrichten von verschiedenen lokalen oder
@@ -12,8 +10,8 @@
         implementierten Speicher kann in die folgende Tabelle gesehen werden.
     </para>
 
-    <table id="zend.mail.read.table-1">
-        <title>Übersicht der Lesefeatures für Mails</title>
+    <table xml:id="zend.mail.read.table-1"><info><title>Übersicht der Lesefeatures für Mails</title></info>
+        
 
         <tgroup cols="5">
             <thead>
@@ -86,8 +84,8 @@
         </tgroup>
     </table>
 
-    <sect2 id="zend.mail.read-example">
-        <title>Einfaches Beispiel für POP3</title>
+    <section xml:id="zend.mail.read-example"><info><title>Einfaches Beispiel für POP3</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'localhost',
@@ -99,10 +97,10 @@ foreach ($mail as $message) {
     echo "Mail von '{$message->from}': {$message->subject}\n";
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mail.read-open-local">
-        <title>Öffnen eines lokalen Speichers</title>
+    <section xml:id="zend.mail.read-open-local"><info><title>Öffnen eines lokalen Speichers</title></info>
+        
 
         <para>
             Mbox und Maildir sind zwei unterstützte Formate für lokale Mailspeicher, beide in Ihrem
@@ -130,10 +128,10 @@ $mail = new Zend_Mail_Storage_Maildir(array('dirname' =>
             Beide Konstruktoren werfen eine <classname>Zend_Mail_Exception</classname> Ausnahme
             wenn der Speicher nicht gelesen werden kann.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mail.read-open-remote">
-        <title>Öffnen eines entfernten Speichers</title>
+    <section xml:id="zend.mail.read-open-remote"><info><title>Öffnen eines entfernten Speichers</title></info>
+        
 
         <para>
             Für entfernte Speicher werden die zwei populärsten Protokolle unterstützt: Pop3 und
@@ -189,10 +187,10 @@ $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'example.com',
             <classname>Zend_Mail_Protocol_Exception</classname> werfen (erweitert
             <classname>Zend_Mail_Exception</classname>), abhängig vom Typ des Fehlers.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mail.read-fetching">
-        <title>Nachrichten holen und einfache Methoden</title>
+    <section xml:id="zend.mail.read-fetching"><info><title>Nachrichten holen und einfache Methoden</title></info>
+        
 
         <para>
             Wenn der Speicher einmal geöffnet wurde können Nachrichten geholt werden. Man benötigt
@@ -249,10 +247,10 @@ $mail->removeMessage($messageNum);
 // Array Zugriff
 unset($mail[$messageNum]);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mail.read-message">
-        <title>Arbeiten mit Nachrichten</title>
+    <section xml:id="zend.mail.read-message"><info><title>Arbeiten mit Nachrichten</title></info>
+        
 
         <para>
             Nachdem die Nachrichten mit <methodname>getMessage()</methodname> geholt wurden, wird
@@ -392,10 +390,10 @@ if (!$foundPart) {
     echo "Reiner Text-Teil: \n" . $foundPart;
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mail.read-flags">
-        <title>Auf Flags prüfen</title>
+    <section xml:id="zend.mail.read-flags"><info><title>Auf Flags prüfen</title></info>
+        
 
         <para>
             Maildir und IMAP unterstützen das Speichern von Flags. Die Klasse
@@ -462,10 +460,10 @@ if (!$message->hasFlag('$SpamTested')) {
     echo 'Diese Nachricht ist Speck';
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mail.read-folders">
-        <title>Verwenden von Ordnern</title>
+    <section xml:id="zend.mail.read-folders"><info><title>Verwenden von Ordnern</title></info>
+        
 
         <para>
             Alle Speicher, ausser Pop3, unterstützen Ordner, welche Mailboxen genannt werden. Das
@@ -530,8 +528,8 @@ $mail = new Zend_Mail_Storage_Imap(array('host'     => 'example.com',
             Begrenzer), der lokale Name ist der Name im Elternordner.
         </para>
 
-        <table id="zend.mail.read-folders.table-1">
-            <title>Namen für Nachrichtenordner</title>
+        <table xml:id="zend.mail.read-folders.table-1"><info><title>Namen für Nachrichtenordner</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -609,13 +607,13 @@ echo 'Der letzte Ordner war '
    . "neuer Ordner ist $folder\n";
 $mail->selectFolder($folder);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mail.read-advanced">
-        <title>Fortgeschrittene Verwendung</title>
+    <section xml:id="zend.mail.read-advanced"><info><title>Fortgeschrittene Verwendung</title></info>
+        
 
-        <sect3 id="zend.mail.read-advanced.noop">
-            <title>NOOP verwenden</title>
+        <section xml:id="zend.mail.read-advanced.noop"><info><title>NOOP verwenden</title></info>
+            
 
             <para>
                 Wenn ein entfernter Speicher verwendet werden soll und einige lange Aufgaben
@@ -634,10 +632,10 @@ foreach ($mail as $message) {
     $mail->noop(); // am Leben halten
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.mail.read-advanced.caching">
-            <title>Instanzen cachen</title>
+        <section xml:id="zend.mail.read-advanced.caching"><info><title>Instanzen cachen</title></info>
+            
 
             <para>
                 <classname>Zend_Mail_Storage_Mbox</classname>,
@@ -675,10 +673,10 @@ if (!$cache->isCached($cache_id) ||
 
 $cache->set($cache_id, $mail);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.mail.read-advanced.extending">
-            <title>Prokoll Klassen erweitern</title>
+        <section xml:id="zend.mail.read-advanced.extending"><info><title>Prokoll Klassen erweitern</title></info>
+            
 
             <para>
                 Entfernte Speicher verwenden zwei Klassen:
@@ -771,10 +769,10 @@ $mail = new Example_Mail_Pop3_Knock(array('host'        => 'localhost',
                 sichergestellt werden dass das durchgeführt wird, da sonst die nächste Methode
                 fehlschlagen wird wenn der Server das im aktuellen Status nicht zulässt.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.mail.read-advanced.quota">
-            <title>Quote verwenden (seit 1.5)</title>
+        <section xml:id="zend.mail.read-advanced.quota"><info><title>Quote verwenden (seit 1.5)</title></info>
+            
 
             <para>
                 <classname>Zend_Mail_Storage_Writable_Maildir</classname> bietet Unterstützung für
@@ -861,9 +859,6 @@ class Example_Mail_Storage_Maildir extends Zend_Mail_Storage_Writable_Maildir {
     }
 }
 ]]></programlisting>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

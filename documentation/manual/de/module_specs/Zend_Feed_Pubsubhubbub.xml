@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22741 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.feed.pubsubhubbub.introduction">
-    <title>Zend_Feed_Pubsubhubbub</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.pubsubhubbub.introduction"><info><title>Zend_Feed_Pubsubhubbub</title></info>
+    
 
     <para>
         <classname>Zend_Feed_Pubsubhubbub</classname> ist eine Implementation der PubSubHubbub Core
@@ -11,8 +9,8 @@
         Anwendungen.
     </para>
 
-    <sect2 id="zend.feed.pubsubhubbub.what.is.pubsubhubbub">
-        <title>Was ist Pubsubhubbub?</title>
+    <section xml:id="zend.feed.pubsubhubbub.what.is.pubsubhubbub"><info><title>Was ist Pubsubhubbub?</title></info>
+        
 
         <para>
             Pubsubhubbub ist ein offenes, einfaches Web-skalierbares Pubsub Protokoll. Der normale
@@ -53,10 +51,10 @@
             bereits in Verwendung unter anderem bei Google Reader, Feedburner und es sind Plugins
             für Wordpress Blogs vorhanden.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.feed.pubsubhubbub.architecture">
-        <title>Architektur</title>
+    <section xml:id="zend.feed.pubsubhubbub.architecture"><info><title>Architektur</title></info>
+        
 
         <para>
             <classname>Zend_Feed_Pubsubhubbub</classname> implementiert zwei Seiten der Pubsubhubbub
@@ -101,10 +99,10 @@
             Klassen, deren Verwendungszweck, und die <acronym>API</acronym>s werden in den
             weiterführenden Abschnitten behandelt.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.publisher">
-        <title>Zend_Feed_Pubsubhubbub_Publisher</title>
+    <section xml:id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.publisher"><info><title>Zend_Feed_Pubsubhubbub_Publisher</title></info>
+        
 
         <para>
             In Pubsubhubbub ist der Publizist der Teilnehmer welcher einen lebenden Feed
@@ -199,10 +197,10 @@ if (!$publisher->isSuccess()) {
             sowohl wegen deren eigenen temporären Downtime als auch den Fehlern und der Downtime
             des Publizisten.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber">
-        <title>Zend_Feed_Pubsubhubbub_Subscriber</title>
+    <section xml:id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber"><info><title>Zend_Feed_Pubsubhubbub_Subscriber</title></info>
+        
 
         <para>
             In Pubsubhubbub ist der Abonnent ein Teilnehmer welcher Aktualisierungen zu irgendeinem
@@ -252,9 +250,8 @@ if (!$publisher->isSuccess()) {
             </para>
         </important>
 
-        <sect3
-            id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.subscribing.and.unsubscribing">
-            <title>Abonnieren und Abos löschen</title>
+        <section xml:id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.subscribing.and.unsubscribing"><info><title>Abonnieren und Abos löschen</title></info>
+            
 
             <para>
                 <classname>Zend_Feed_Pubsubhubbub_Subscriber</classname> implementiert einen
@@ -344,9 +341,8 @@ CREATE TABLE IF NOT EXISTS `subscription` (
                 folgenden Parameter enthält (basierend auf dem vorhergehenden Beispiel):
             </para>
 
-            <table
-                id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.subscribing.and.unsubscribing.table">
-                <title>Anfrageparameter beim Abonnieren</title>
+            <table xml:id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.subscribing.and.unsubscribing.table"><info><title>Anfrageparameter beim Abonnieren</title></info>
+                
 
                 <tgroup cols="3">
                     <thead>
@@ -536,10 +532,10 @@ CREATE TABLE IF NOT EXISTS `subscription` (
                 <classname>Zend_Db_Table_Abstract</classname> an dem Constructor des standardmäßigen
                 Modells um den verwendeten Tabellennamen zu verändern.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.handling.hub.callbacks">
-            <title>Callbacks von Abonnenten behandeln</title>
+        <section xml:id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.handling.hub.callbacks"><info><title>Callbacks von Abonnenten behandeln</title></info>
+            
 
             <para>
                 Wann auch immer eine Aboanfrage oder eine Anfrage auf Löschen eines Abos gemacht
@@ -614,11 +610,10 @@ if ($callback->hasFeedUpdate()) {
                     Queue oder sogar in einem geplanten Cron Task) soweit das möglich ist.
                 </para>
             </important>
-        </sect3>
+        </section>
 
-        <sect3
-            id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.setting.up.and.using.a.callback.url.route">
-            <title>Eine Callback URL Route einstellen und verwenden</title>
+        <section xml:id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.setting.up.and.using.a.callback.url.route"><info><title>Eine Callback URL Route einstellen und verwenden</title></info>
+            
 
             <para>
                 Wie vorher erwähnt empfängt die Klasse
@@ -710,6 +705,6 @@ resources.router.routes.callback.defaults.module = "default"
 resources.router.routes.callback.defaults.controller = "callback"
 resources.router.routes.callback.defaults.action = "index"
 ]]></programlisting>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

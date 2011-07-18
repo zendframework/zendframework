@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20799 -->
-<!-- Reviewed: 20794 -->
-<sect1 id="zend.wildfire.chapter">
-    <title>Zend_Wildfire</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.wildfire.chapter"><info><title>Zend_Wildfire</title></info>
+    
 
     <para>
         <classname>Zend_Wildfire</classname> ist eine Komponente, welche die Kommunikation zwischen
-        <acronym>PHP</acronym> Code und <ulink url="http://www.wildfirehq.org/">Wildfire</ulink>
+        <acronym>PHP</acronym> Code und <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.wildfirehq.org/">Wildfire</link>
         Client Komponenten ermöglicht.
     </para>
 
@@ -15,12 +15,11 @@
         großen Vielzahl von Komponenten und eine dynamische und skriptfähige Plugin Architektur zu
         entwickeln. Aktuell ist der primäre Fokus ein System anzubieten, welches es serverseitigem
         <acronym>PHP</acronym> Code erlaubt, Loggingnachrichten in die
-        <ulink url="http://www.getfirebug.com/">Firebug Console</ulink> zu übertragen.
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.getfirebug.com/">Firebug Console</link> zu übertragen.
     </para>
 
     <para>
-        Die Komponente <link
-            linkend="zend.log.writers.firebug"><classname>Zend_Log_Writer_Firebug</classname></link>
+        Die Komponente <link linkend="zend.log.writers.firebug"><classname>Zend_Log_Writer_Firebug</classname></link>
         wird für den Zweck des Loggens in Firebug angeboten und es wurde ein Kommunikationsprotokoll
         entwickelt das <acronym>HTTP</acronym> Requests und Response Header verwendet um Daten
         zwischen Server und Client Komponenten auszutauschen. Es eignet sich hervorragend um
@@ -31,8 +30,7 @@
     </para>
 
     <para>
-        Es gibt auch eine <link
-            linkend="zend.db.profiler.profilers.firebug"><classname>Zend_Db_Profiler_Firebug</classname></link>
+        Es gibt auch eine <link linkend="zend.db.profiler.profilers.firebug"><classname>Zend_Db_Profiler_Firebug</classname></link>
         Komponente, um Datenbank Profilinginformationen in Firebug zu loggen.
     </para>
-</sect1>
+</section>

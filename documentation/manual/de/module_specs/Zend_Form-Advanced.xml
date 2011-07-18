@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.form.advanced">
-    <title>Fortgeschrittene Verwendung von Zend_Form</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.advanced"><info><title>Fortgeschrittene Verwendung von Zend_Form</title></info>
+    
 
     <para>
         <classname>Zend_Form</classname> hat eine Vielzahl an Funktionalitäten, von denen viele auf
@@ -10,8 +8,8 @@
         Funktionalitäten mit Beispielen und Usecases.
     </para>
 
-    <sect2 id="zend.form.advanced.arrayNotation">
-        <title>Array Schreibweise</title>
+    <section xml:id="zend.form.advanced.arrayNotation"><info><title>Array Schreibweise</title></info>
+        
 
         <para>
             Viele fortgeschrittene Entwickler gruppieren zusammengehörige Formularelemente durch
@@ -206,10 +204,10 @@
             implzit über das Formular -- kann die Zugriffsmethode
             <methodname>getBelongsTo()</methodname> verwendet werden.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.advanced.multiPage">
-        <title>Mehrseitige Formulare</title>
+    <section xml:id="zend.form.advanced.multiPage"><info><title>Mehrseitige Formulare</title></info>
+        
 
         <para>
             Aktuell werden mehrseitige Formulare nicht offiziell in <classname>Zend_Form</classname>
@@ -224,8 +222,8 @@
             Formular nicht zu bearbeiten bis alle weiteren Unterformulare komplett sind.
         </para>
 
-        <example id="zend.form.advanced.multiPage.registration">
-            <title>Beispiel: Anmeldeformular</title>
+        <example xml:id="zend.form.advanced.multiPage.registration"><info><title>Beispiel: Anmeldeformular</title></info>
+            
 
             <para>
                 Verwenden wir also ein Anmeldeformular als Beispiel. Für unsere Zwecke wollen wir
@@ -731,5 +729,5 @@ endforeach ?>
                 werden kann.
             </para>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

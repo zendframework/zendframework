@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.search.lucene.extending">
-    <title>Erweiterbarkeit</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.extending"><info><title>Erweiterbarkeit</title></info>
+    
 
-    <sect2 id="zend.search.lucene.extending.analysis">
-        <title>Textanalyse</title>
+    <section xml:id="zend.search.lucene.extending.analysis"><info><title>Textanalyse</title></info>
+        
 
         <para>
             Die <classname>Zend_Search_Lucene_Analysis_Analyzer</classname> Klasse wird vom Indexer
@@ -58,8 +56,8 @@ $index->addDocument($doc);
             Hier ist ein Beispiel für einen eigenen Analysator, welcher Wörter mit Ziffern als
             Begriffe akzeptiert:
 
-            <example id="zend.search.lucene.extending.analysis.example-1">
-                <title>Eigener Textanalysator</title>
+            <example xml:id="zend.search.lucene.extending.analysis.example-1"><info><title>Eigener Textanalysator</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 /**
@@ -135,10 +133,10 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 ]]></programlisting>
             </example>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.extending.filters">
-        <title>Filtern von Tokens</title>
+    <section xml:id="zend.search.lucene.extending.filters"><info><title>Filtern von Tokens</title></info>
+        
 
         <para>
             Der <classname>Zend_Search_Lucene_Analysis_Analyzer_Common</classname> Analisator bietet
@@ -241,10 +239,10 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
             Konstruktor hat ein optionales Argument. Es ist das Limit für die Wortlänge, der
             standardmäßig 2 ist.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.extending.scoring">
-        <title>Algorithmen für Punktwertermittlung</title>
+    <section xml:id="zend.search.lucene.extending.scoring"><info><title>Algorithmen für Punktwertermittlung</title></info>
+        
 
         <para>
             Der Punktwert einer Abfrage <literal>q</literal> für das Dokument <literal>d</literal>
@@ -353,10 +351,10 @@ class MySimilarity extends Zend_Search_Lucene_Search_Similarity {
 $mySimilarity = new MySimilarity();
 Zend_Search_Lucene_Search_Similarity::setDefault($mySimilarity);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.extending.storage">
-        <title>Storage Container</title>
+    <section xml:id="zend.search.lucene.extending.storage"><info><title>Storage Container</title></info>
+        
 
         <para>
             Die abstrakte Klasse <classname>Zend_Search_Lucene_Storage_Directory</classname>
@@ -522,5 +520,5 @@ class MyFile extends Zend_Search_Lucene_Storage_File {
     }
 }
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

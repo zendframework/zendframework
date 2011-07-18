@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22760 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.text.figlet">
-    <title>Zend_Text_Figlet</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.text.figlet"><info><title>Zend_Text_Figlet</title></info>
+    
 
     <para>
         <classname>Zend_Text_Figlet</classname> ist eine Komponente die es Entwicklern erlaubt einen
@@ -10,12 +8,12 @@
         <acronym>ASCII</acronym> Kunst repräsentiert. FIGlets sind ein spezielles Schriftformat, das
         FLT (FigLet Font) genannt wird. Standardmäßig wird eine Schriftart mit
         <classname>Zend_Text_Figlet</classname> ausgeliefert, aber man kann zusätzliche Schriftarten
-        unter <ulink url="http://www.figlet.org/fontdb.cgi">http://www.figlet.org</ulink>
+        unter <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.figlet.org/fontdb.cgi">http://www.figlet.org</link>
         herunterladen.
     </para>
 
-    <note>
-        <title>Komprimierte Schriftarten</title>
+    <note><info><title>Komprimierte Schriftarten</title></info>
+        
 
         <para>
             <classname>Zend_Text_Figlet</classname> unterstützt gezippte Schriftarten. Das bedeutet
@@ -27,8 +25,8 @@
         </para>
     </note>
 
-    <note>
-        <title>Encoding</title>
+    <note><info><title>Encoding</title></info>
+        
 
         <para>
             <classname>Zend_Text_Figlet</classname> erwartet das Strings standardmäßig UTF-8 kodiert
@@ -101,8 +99,7 @@
                     gibt die folgenden Smush-Modi: SM_EQUAL, SM_LOWLINE, SM_HIERARCHY, SM_PAIR,
                     SM_BIGX, SM_HARDBLANK, SM_KERN und SM_SMUSH. Ein Wert von 0 schaltet das
                     Smushing nicht aus sondern erzwingt die Anwendung von SM_KERN, wärend es ein
-                    Wert von -1 ausschaltet. Eine Erklärung der verschiedenen Smush-Modi kann <ulink
-                        url="http://www.jave.de/figlet/figfont.txt">hier</ulink> gefunden werden.
+                    Wert von -1 ausschaltet. Eine Erklärung der verschiedenen Smush-Modi kann <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.jave.de/figlet/figfont.txt">hier</link> gefunden werden.
                     Die Smush-Mode Option wird normalerweise nur von Schriftart-Designer verwendet
                     um die verschiedenen Layoutmodi mit einer neuen Schriftart zu testen.
                 </para>
@@ -110,8 +107,8 @@
         </itemizedlist>
     </para>
 
-    <example id="zend.text.figlet.example.using">
-        <title>Verwendung von Zend_Text_Figlet</title>
+    <example xml:id="zend.text.figlet.example.using"><info><title>Verwendung von Zend_Text_Figlet</title></info>
+        
 
         <para>
             Dieses Beispiel zeigt die einfache Verwendung von
@@ -137,4 +134,4 @@ echo $figlet->render('Zend');
  `-----`'  `-----`   `-` -`'  -----`
 ]]></programlisting>
     </example>
-</sect1>
+</section>

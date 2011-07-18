@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19777 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.lucene.pagination">
-    <title>Seitendarstellung von Suchergebnissen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.pagination"><info><title>Seitendarstellung von Suchergebnissen</title></info>
+    
 
     <para>
         Wie <link linkend="learning.lucene.searching.identifiers">vorher erwähnt</link>, verwenden
@@ -17,8 +15,8 @@
         Skripts zu erhalten.
     </para>
 
-    <example id="learning.lucene.pagination.example">
-        <title>Beispiel für die seitendarstellung von Suchergebnissen</title>
+    <example xml:id="learning.lucene.pagination.example"><info><title>Beispiel für die seitendarstellung von Suchergebnissen</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $cacheId = md5($query);
@@ -47,4 +45,4 @@ for ($resultId = $startId; $resultId < $endId; $resultId++) {
 }
 ]]></programlisting>
     </example>
-</sect1>
+</section>

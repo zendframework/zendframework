@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22741 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.oauth.introduction.getting-started">
-    <title>Beginnen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.oauth.introduction.getting-started"><info><title>Beginnen</title></info>
+    
 
     <para>
         Da das OAuth Protokoll jetzt erklärt wurde sehen wir uns ein einfaches Beispiel mit
@@ -222,4 +220,4 @@ echo $result;
         verwenden um damit den Standardclient zu ersetzen welcher andernfalls verwendet werden
         würde.
     </para>
-</sect2>
+</section>

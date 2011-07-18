@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19766 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.form.decorators.conclusion">
-    <title>Fazit</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.form.decorators.conclusion"><info><title>Fazit</title></info>
+    
 
     <para>
         Formular Dekoratore sind ein System welches einige Zeit in Anspruch nimmt um es zu lernen.
@@ -10,4 +10,4 @@
         Themen die in diesem Kapitel beschrieben sind wie beide arbeiten, sowie Strategien für
         deren effektive Verwendung in eigenen Formularen.
     </para>
-</sect1>
+</section>

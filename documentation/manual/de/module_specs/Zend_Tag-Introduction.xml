@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20807 -->
-<!-- Reviewed: 17789 -->
-<sect1 id="zend.tag.introduction">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tag.introduction"><info><title>Einführung</title></info>
+    
 
     <para>
         <classname>Zend_Tag</classname> ist eine Komponenten Suite welche zwei Klassen anbietet
@@ -28,8 +26,8 @@
         relativen Gewicht jedes Elements in diesem, zu kalkulieren.
     </para>
 
-    <example id="zend.tag.example.using">
-        <title>Verwenden von Zend_Tag</title>
+    <example xml:id="zend.tag.example.using"><info><title>Verwenden von Zend_Tag</title></info>
+        
 
         <para>
             Dieses Beispiel zeigt wie eine Liste von Tags erstellt, und Werte des absoluten Gewichts
@@ -59,4 +57,4 @@ foreach ($list as $item) {
             absoluten Werten 10, 1 und 2, ausgeben.
         </para>
     </example>
-</sect1>
+</section>

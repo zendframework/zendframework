@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20818 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.service.amazon.ec2.reserved.instance">
-    <title>Zend_Service_Amazon_Ec2: Reservierte Instanzen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.reserved.instance"><info><title>Zend_Service_Amazon_Ec2: Reservierte Instanzen</title></info>
+    
 
     <para>
         Mit Amazon <acronym>EC2</acronym> Reservierte Instanzen, kann man eine geringe
@@ -16,8 +14,8 @@
         und sind nur für Linux oder UNIX Instanzen erhältlich.
     </para>
 
-    <sect2 id="zend.service.amazon.ec2.reserved.instance.howitworks">
-        <title>Wie werden Reservierte Instanzen angehängt</title>
+    <section xml:id="zend.service.amazon.ec2.reserved.instance.howitworks"><info><title>Wie werden Reservierte Instanzen angehängt</title></info>
+        
 
         <para>
             Reservierte Instanzen werden an Instanzen angehängt welche den Typen- und Ortskriterien
@@ -64,13 +62,13 @@
             in einer anderen Vorhandenen Zone sind und es fügt auch nicht die m1.xlarge
             Reservierten Instanzen hinzu weil es keine laufenden m1.xlarge Instanzen gibt.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.amazon.ec2.reserved.instance.operations">
-        <title>Verwendung Reservierter Instanzen</title>
+    <section xml:id="zend.service.amazon.ec2.reserved.instance.operations"><info><title>Verwendung Reservierter Instanzen</title></info>
+        
 
-        <example id="zend.service.amazon.ec2.reserved.instance.operations.describe">
-            <title>Beschreibt Reservierte Instanzen die man gekauft hat</title>
+        <example xml:id="zend.service.amazon.ec2.reserved.instance.operations.describe"><info><title>Beschreibt Reservierte Instanzen die man gekauft hat</title></info>
+            
 
             <para>
                 <methodname>describeInstances()</methodname> gibt Informationen über eine
@@ -91,8 +89,8 @@ $return = $ec2_instance->describeInstances('instanceId');
 ]]></programlisting>
         </example>
 
-        <example id="zend.service.amazon.ec2.reserved.instance.offerings.describe">
-            <title>Beschreiben der aktuell vorhandenen Reservierten Instanz Angebote</title>
+        <example xml:id="zend.service.amazon.ec2.reserved.instance.offerings.describe"><info><title>Beschreiben der aktuell vorhandenen Reservierten Instanz Angebote</title></info>
+            
 
             <para>
                 <methodname>describeOfferings()</methodname> beschreibt Angebote für Reservierte
@@ -116,8 +114,8 @@ $return = $ec2_instance->describeOfferings();
 ]]></programlisting>
         </example>
 
-        <example id="zend.service.amazon.ec2.reserved.instance.offerings.purchase">
-            <title>Das CloudWatch Monitoring bei Instanzen ausschalten</title>
+        <example xml:id="zend.service.amazon.ec2.reserved.instance.offerings.purchase"><info><title>Das CloudWatch Monitoring bei Instanzen ausschalten</title></info>
+            
 
             <para>
                 <methodname>purchaseOffering()</methodname> erwirbt eine Reservierte Instanz für
@@ -138,5 +136,5 @@ $ec2_instance = new Zend_Service_Amazon_Ec2_Instance_Reserved('aws_key',
 $return = $ec2_instance->purchaseOffering('offeringId', 'instanceCount');
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

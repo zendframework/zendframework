@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.multiuser.authentication">
-    <title>Benutzer im Zend Framework authentifizieren</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.multiuser.authentication"><info><title>Benutzer im Zend Framework authentifizieren</title></info>
+    
 
-    <sect2 id="learning.multiuser.authentication.intro">
-        <title>Einführung in die Authentifizierung</title>
+    <section xml:id="learning.multiuser.authentication.intro"><info><title>Einführung in die Authentifizierung</title></info>
+        
 
         <para>
             Sobald eine Web Anwendung in der Lage ist Benutzer von anderen Benutzern zu
@@ -26,10 +24,10 @@
             in Form von geschützten privaten Informationen kommen: Fingerabdrücke, Augen Retinascan,
             Passphrase, oder jede andere obskure personelle Information.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.multiuser.authentication.basic-usage">
-        <title>Grundsätzliche Verwendung von Zend_Auth</title>
+    <section xml:id="learning.multiuser.authentication.basic-usage"><info><title>Grundsätzliche Verwendung von Zend_Auth</title></info>
+        
 
         <para>
             Im folgenden Beispiel verwenden wir <classname>Zend_Auth</classname> um zu komplettieren
@@ -69,9 +67,8 @@ CREATE TABLE users (
             Passwort und auch eine Passwort Salt Spalte enthält. Diese Salt Spalte wird als Teil
             einer Technik verwendet welche Salting genannt wird und die Sicherheit der Datenbank
             für Informationen gegen Brute Force Attacken erhöht welche auf den Algorithmus des
-            Hashings vom Passwort abziehlt. <ulink
-                url="http://en.wikipedia.org/wiki/Salting_%28cryptography%29">Weitere
-                Informationen</ulink> über Salting.
+            Hashings vom Passwort abziehlt. <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Salting_%28cryptography%29">Weitere
+                Informationen</link> über Salting.
         </para>
 
         <para>
@@ -180,8 +177,7 @@ echo $this->form;
         <para>
             Das ist es. Mit diesen Grundsätzen kann man die generellen Konzepte erweitern um
             komplexere Authentifizierungs Szenarien zu inkludieren. Für mehr Informationen über
-            andere <classname>Zend_Auth</classname> Adapter sollte in <link
-                linkend="zend.auth">das Referenz Handbuch</link> gesehen werden.
+            andere <classname>Zend_Auth</classname> Adapter sollte in <link linkend="zend.auth">das Referenz Handbuch</link> gesehen werden.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

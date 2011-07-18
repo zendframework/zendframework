@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21358 -->
-<!-- Reviewed: 21358 -->
-<sect1 id="zend.dom.introduction">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dom.introduction"><info><title>Einführung</title></info>
+    
 
     <para>
         <classname>Zend_Dom</classname> bietet Werkzeuge für das Arbeiten mit <acronym>DOM</acronym>
@@ -10,4 +10,4 @@
         welche ein vereinheitlichtes Interface für das Abfragen von <acronym>DOM</acronym>
         Dokumenten anbietet und beide, XPath und <acronym>CSS</acronym> Selektoren verwendet.
     </para>
-</sect1>
+</section>

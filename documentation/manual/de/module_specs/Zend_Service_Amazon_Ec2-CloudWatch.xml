@@ -1,22 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20818 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.service.amazon.ec2.cloudwatch">
-    <title>Zend_Service_Amazon_Ec2: CloudWatch Monitoring</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.cloudwatch"><info><title>Zend_Service_Amazon_Ec2: CloudWatch Monitoring</title></info>
+    
 
     <para>
         Amazon CloudWatch ist ein einfach zu verwendender Web Service der vollständiges Monitoring
         für Amazon Elastic Compute Cloud (Amazon <acronym>EC2</acronym>) und Elastic Load
-        Balancing bietet. Für detailiertere Informationen sehen Sie in den <ulink
-            url="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/index.html?SvcIntro.html">Amazon
-            CloudWatch Developers Guide</ulink>.
+        Balancing bietet. Für detailiertere Informationen sehen Sie in den <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/index.html?SvcIntro.html">Amazon
+            CloudWatch Developers Guide</link>.
     </para>
 
-    <sect2 id="zend.service.amazon.ec2.cloudwatch.usage">
-        <title>Verwendung von CloudWatch</title>
+    <section xml:id="zend.service.amazon.ec2.cloudwatch.usage"><info><title>Verwendung von CloudWatch</title></info>
+        
 
-        <example id="zend.service.amazon.ec2.cloudwatch.usage.list">
-            <title>Liste der vorhandenen Metrik</title>
+        <example xml:id="zend.service.amazon.ec2.cloudwatch.usage.list"><info><title>Liste der vorhandenen Metrik</title></info>
+            
 
             <para>
                 <methodname>listMetrics()</methodname> gibt eine Liste von bis zu 500 gültigen
@@ -31,8 +28,8 @@ $return = $ec2_ebs->listMetrics();
 ]]></programlisting>
         </example>
 
-        <example id="zend.service.amazon.ec2.cloudwatch.usage.getmetricstatistics">
-            <title>Gibt Statistiken für eine gegebene Metrik zurück</title>
+        <example xml:id="zend.service.amazon.ec2.cloudwatch.usage.getmetricstatistics"><info><title>Gibt Statistiken für eine gegebene Metrik zurück</title></info>
+            
 
             <para>
                 <methodname>getMetricStatistics()</methodname> gibt Daten für ein oder mehrere
@@ -72,9 +69,8 @@ $return = $ec2_ebs->listMetrics();
                         <acronym>EC2</acronym> Werte sind <acronym>CPU</acronym>Utilization,
                         NetworkIn, NetworkOut, DiskWriteOps, DiskReadBytes, DiskReadOps,
                         DiskWriteBytes. Gültige Elastic Load Balancing Metriken sind Latency,
-                        RequestCount, HealthyHostCount, UnHealthyHostCount. <ulink
-                            url="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/arch-AmazonCloudWatch-metricscollected.html">Für
-                            weitere Informationen hier klicken</ulink>.
+                        RequestCount, HealthyHostCount, UnHealthyHostCount. <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/arch-AmazonCloudWatch-metricscollected.html">Für
+                            weitere Informationen hier klicken</link>.
                     </para>
                 </listitem>
 
@@ -85,9 +81,8 @@ $return = $ec2_ebs->listMetrics();
                         Samples, Sum. Man kann diese als String oder Array von Strings definieren.
                         Wenn man keine spezifiziert dann wird als Standard Average genommen statt
                         nichts zu tun. Wenn man eine ungültige Option spezifiziert wird diese
-                        einfach ignoriert. <ulink
-                            url="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/arch-Amazon-CloudWatch-statistics.html">Für
-                            weitere Informationen hier klicken</ulink>.
+                        einfach ignoriert. <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/arch-Amazon-CloudWatch-statistics.html">Für
+                            weitere Informationen hier klicken</link>.
                     </para>
                 </listitem>
 
@@ -145,5 +140,5 @@ $return = $ec2_ebs->getMetricStatistics(
                                            'Statistics' => array('Average')));
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

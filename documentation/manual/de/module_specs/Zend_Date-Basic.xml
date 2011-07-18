@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20766 -->
-<!-- Reviewed: 20766 -->
-<sect1 id="zend.date.basic">
-    <title>Basis Methoden</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.basic"><info><title>Basis Methoden</title></info>
+    
 
     <para>
         Der folgende Abschnitt zeigt die grundsätzliche Benutzung von
@@ -24,21 +22,21 @@
         der Anzahl an Sekunden, die seit diesem dem Startpunkt vergangen sind.
     </para>
 
-    <sect2 id="zend.date.basic.creation">
-        <title>Aktuelles Datum</title>
+    <section xml:id="zend.date.basic.creation"><info><title>Aktuelles Datum</title></info>
+        
 
         <para>
             Ohne jegliche Argumente bedeutet die Erstellung einer Instanz, dass ein Objekt mit dem
             aktuellen Gebietsschema und dem aktuellen lokalen Datum zurückgegeben wird, durch
             Verwendung von <acronym>PHP</acronym>'s <methodname>time()</methodname> Funktion um den
-            aktuellen <ulink url="http://en.wikipedia.org/wiki/Unix_Time">UNIX Zeitpunkt</ulink> für
+            aktuellen <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Unix_Time">UNIX Zeitpunkt</link> für
             das Objekt zu erhalten. Man muß sicherstellen, dass die <acronym>PHP</acronym> Umgebung
             die richtige <link linkend="zend.date.setdefaulttimezone">Standardzeitzone</link>
             gesetzt hat.
         </para>
 
-        <example id="zend.date.basic.creation.example-1">
-            <title>Erstellen des aktuellen Datums</title>
+        <example xml:id="zend.date.basic.creation.example-1"><info><title>Erstellen des aktuellen Datums</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
@@ -47,10 +45,10 @@ $date = new Zend_Date();
 print $date;
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.date.basic.functions">
-        <title>Zend_Date durch Beispiele</title>
+    <section xml:id="zend.date.basic.functions"><info><title>Zend_Date durch Beispiele</title></info>
+        
 
         <para>
             Das Durchschauen der Basismethoden von <classname>Zend_Date</classname> ist ein guter
@@ -59,8 +57,8 @@ print $date;
             Beispiel.
         </para>
 
-        <sect3 id="zend.date.simple.functions.get">
-            <title>Ein Datum ausgeben</title>
+        <section xml:id="zend.date.simple.functions.get"><info><title>Ein Datum ausgeben</title></info>
+            
 
             <para>
                 Ein Datum in einem <classname>Zend_Date</classname> Objekt kann als Integer oder
@@ -69,8 +67,8 @@ print $date;
                 in einem späteren Abschnitt beschrieben werden.
             </para>
 
-            <example id="zend.date.simple.functions.get.example-1">
-                <title>get() - Ausgabe eines Datums</title>
+            <example xml:id="zend.date.simple.functions.get.example-1"><info><title>get() - Ausgabe eines Datums</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
@@ -79,10 +77,10 @@ $date = new Zend_Date();
 print $date->get();
 ]]></programlisting>
             </example>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.date.simple.functions.set">
-            <title>Setzen eines Datums</title>
+        <section xml:id="zend.date.simple.functions.set"><info><title>Setzen eines Datums</title></info>
+            
 
             <para>
                 Die <methodname>set()</methodname> Methode verändert das Datum, welches im Objekt
@@ -91,8 +89,8 @@ print $date->get();
                 werden.
             </para>
 
-            <example id="zend.date.simple.functions.set.example-1">
-                <title>set() - Setzen eines Datums</title>
+            <example xml:id="zend.date.simple.functions.set.example-1"><info><title>set() - Setzen eines Datums</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
@@ -102,10 +100,10 @@ $date->set('13:00:00',Zend_Date::TIMES);
 print $date->get(Zend_Date::W3C);
 ]]></programlisting>
             </example>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.date.simple.functions.add">
-            <title>Addieren und Subtrahieren von Daten</title>
+        <section xml:id="zend.date.simple.functions.add"><info><title>Addieren und Subtrahieren von Daten</title></info>
+            
 
             <para>
                 Das Addieren von zwei Daten mit <methodname>add()</methodname> bedeutet
@@ -116,8 +114,8 @@ print $date->get(Zend_Date::W3C);
                 <methodname>set()</methodname>, welche später erklärt werden.
             </para>
 
-            <example id="zend.date.simple.functions.add.example-1">
-                <title>add() - Addieren von Daten</title>
+            <example xml:id="zend.date.simple.functions.add.example-1"><info><title>add() - Addieren von Daten</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
@@ -132,10 +130,10 @@ echo "Datum über get() = ", $date->get(Zend_Date::W3C), "\n";
 echo "Datum über toString() = ", $date, "\n";
 ]]></programlisting>
             </example>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.date.simple.functions.compare">
-            <title>Vergleichen von Daten</title>
+        <section xml:id="zend.date.simple.functions.compare"><info><title>Vergleichen von Daten</title></info>
+            
 
             <para>
                 Alle Basismethoden von <classname>Zend_Date</classname> können mit kompletten
@@ -146,8 +144,8 @@ echo "Datum über toString() = ", $date, "\n";
                 <methodname>compare()</methodname> wie im nachfolgenden Beispiel beschrieben.
             </para>
 
-            <example id="zend.date.simple.functions.compare.example-1">
-                <title>compare() - Vergleichen von Daten</title>
+            <example xml:id="zend.date.simple.functions.compare.example-1"><info><title>compare() - Vergleichen von Daten</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
@@ -166,8 +164,8 @@ if ($date->compare(10, Zend_Date::MINUTE) == -1) {
                 verwendet werden, welches ein Boolean zurückgibt.
             </para>
 
-            <example id="zend.date.simple.functions.compare.example-2">
-                <title>equals() - Identifizieren eines Datums oder Datumsabschnittes</title>
+            <example xml:id="zend.date.simple.functions.compare.example-2"><info><title>equals() - Identifizieren eines Datums oder Datumsabschnittes</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
@@ -180,6 +178,6 @@ if ($date->equals(10, Zend_Date::HOUR)) {
 }
 ]]></programlisting>
             </example>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

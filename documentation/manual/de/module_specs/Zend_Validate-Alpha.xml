@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21987 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.alpha">
-    <title>Alpha</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.alpha"><info><title>Alpha</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Alpha</classname> erlaubt es zu prüfen ob ein angegebener Wert nur
@@ -11,8 +9,8 @@
         Prüfung mit der Ausnahme dass Sie keine Ziffern akzeptiert.
     </para>
 
-    <sect3 id="zend.validate.set.alpha.options">
-        <title>Unterstützte Optionen für Zend_Validate_Alpha</title>
+    <section xml:id="zend.validate.set.alpha.options"><info><title>Unterstützte Optionen für Zend_Validate_Alpha</title></info>
+        
 
         <para>
             Die folgenden Optionen werden von <classname>Zend_Validate_Alpha</classname>
@@ -27,10 +25,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.alpha.basic">
-        <title>Standardverhalten</title>
+    <section xml:id="zend.validate.set.alpha.basic"><info><title>Standardverhalten</title></info>
+        
 
         <para>
             Das folgende ist ein standardmäßiges Beispiel:
@@ -44,10 +42,10 @@ if ($validator->isValid('Abcd')) {
     // false
 }
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.alpha.whitespace">
-        <title>Verwendung von Leerzeichen</title>
+    <section xml:id="zend.validate.set.alpha.whitespace"><info><title>Verwendung von Leerzeichen</title></info>
+        
 
         <para>
             Standardmäßig werden Leerzeichen nicht akzeptiert weil Sie nicht Teil des Alphabeths
@@ -71,10 +69,10 @@ if ($validator->isValid('Abcd and efg')) {
     // false
 }
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.alpha.languages">
-        <title>Andere Sprachen verwenden</title>
+    <section xml:id="zend.validate.set.alpha.languages"><info><title>Andere Sprachen verwenden</title></info>
+        
 
         <para>
             Wenn <classname>Zend_Validate_Alpha</classname> verwendet wird dann wird jene Sprache
@@ -101,5 +99,5 @@ if ($validator->isValid('Abcd and efg')) {
             Im Falle das diese Sprachen verwendet werden wird der Inhalt nur durch Verwendung des
             englischen Alphabeths geprüft.
         </para>
-    </sect3>
-</sect2>
+    </section>
+</section>

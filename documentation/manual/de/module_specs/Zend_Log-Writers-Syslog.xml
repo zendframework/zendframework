@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17880 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.log.writers.syslog">
-    <title>In das Systemlog schreiben</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers.syslog"><info><title>In das Systemlog schreiben</title></info>
+    
 
     <para>
         <classname>Zend_Log_Writer_Syslog</classname> schreibt Logeinträge in das Systemlog
@@ -43,7 +41,7 @@ $writer->setApplicationName('BarBaz');
     <para>
         Man kann die Log Facility entweder über den Constructor oder über einen Accessor
         spezifizieren. Das sollte eine der <methodname>openlog()</methodname> Konstanten sein die
-        in der <ulink url="http://php.net/openlog">openlog() Dokumentations Seite</ulink>
+        in der <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/openlog">openlog() Dokumentations Seite</link>
         definiert sind.
     </para>
 
@@ -60,4 +58,4 @@ $writer->setFacility(LOG_USER);
         Prioritäts Konstanten verwenden; intern entsprechen diese den Prioritäts Konstanten von
         <methodname>syslog()</methodname>.
     </para>
-</sect2>
+</section>

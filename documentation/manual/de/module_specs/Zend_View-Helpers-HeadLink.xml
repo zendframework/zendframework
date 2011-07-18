@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.headlink">
-    <title>HeadLink Helfer</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headlink"><info><title>HeadLink Helfer</title></info>
+    
 
     <para>
         Das <acronym>HTML</acronym> <emphasis>&lt;link&gt;</emphasis> Element wird immer mehr für
@@ -97,8 +95,8 @@
         <link linkend="zend.view.helpers.initial.placeholder">Platzhalter Helfers</link>.
     </para>
 
-    <example id="zend.view.helpers.initial.headlink.basicusage">
-        <title>Grundsätzliche Verwendung des HeadLink Helfers</title>
+    <example xml:id="zend.view.helpers.initial.headlink.basicusage"><info><title>Grundsätzliche Verwendung des HeadLink Helfers</title></info>
+        
 
         <para>
             <emphasis>headLink</emphasis> kann jederzeit spezifiziert werden. Typischerweise wird
@@ -122,7 +120,4 @@ $this->headLink()->appendStylesheet('/styles/basic.css')
 <?php echo $this->headLink() ?>
 ]]></programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

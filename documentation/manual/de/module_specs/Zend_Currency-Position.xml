@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21087 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.currency.position">
-    <title>Wo ist die Währung?</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.position"><info><title>Wo ist die Währung?</title></info>
+    
 
     <para>
         Die Position an welche das Währungssymbol oder der Namen angezeigt werden hängt vom
@@ -11,8 +9,8 @@
         Konstanten angegeben wird:
     </para>
 
-    <table id="zend.currency.position.table-1">
-        <title>Vorhadene Positionen für die Währung</title>
+    <table xml:id="zend.currency.position.table-1"><info><title>Vorhadene Positionen für die Währung</title></info>
+        
 
         <tgroup cols="2" align="left">
             <thead>
@@ -47,8 +45,8 @@
         </tgroup>
     </table>
 
-    <example id="zend.currency.position.example-1">
-        <title>Setzen der Währungsposition</title>
+    <example xml:id="zend.currency.position.example-1"><info><title>Setzen der Währungsposition</title></info>
+        
 
         <para>
             Angenommen der Client hat wieder mal "en_US" als Gebietsschema gesetzt. Wenn keine
@@ -87,4 +85,4 @@ print $currency; // Könnte '100 $' zurückgeben
             fixiert ist, unabhängig vom verwendeten Gebietsschema oder der Währung.
         </para>
     </example>
-</sect1>
+</section>

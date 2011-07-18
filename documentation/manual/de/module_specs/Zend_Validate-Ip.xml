@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22146 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.ip">
-    <title>Ip</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.ip"><info><title>Ip</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Ip</classname> erlaubt es zu Prüfen ob ein gegebener Wert eine IP
         Adresse ist. Er unterstützt den IPv4 und auch den IPv6 Standard.
     </para>
 
-    <sect3 id="zend.validate.set.ip.options">
-        <title>Unterstützte Optionen für Zend_Validate_Ip</title>
+    <section xml:id="zend.validate.set.ip.options"><info><title>Unterstützte Optionen für Zend_Validate_Ip</title></info>
+        
 
         <para>
             Die folgenden Optionen werden für <classname>Zend_Validate_Ip</classname> unterstützt:
@@ -31,10 +29,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.ip.basic">
-        <title>Grundsätzliche Verwendung</title>
+    <section xml:id="zend.validate.set.ip.basic"><info><title>Grundsätzliche Verwendung</title></info>
+        
 
         <para>
             Ein einfaches Beispiel für die Verwendung ist anbei:
@@ -49,8 +47,8 @@ if ($validator->isValid($ip)) {
 }
 ]]></programlisting>
 
-        <note>
-            <title>Ungültige IP Adressen</title>
+        <note><info><title>Ungültige IP Adressen</title></info>
+            
 
             <para>
                 Es ist zu beachten das <classname>Zend_Validate_Ip</classname> nur IP Adressen
@@ -61,8 +59,8 @@ if ($validator->isValid($ip)) {
             </para>
         </note>
 
-        <note>
-            <title>IPv6 Prüfung</title>
+        <note><info><title>IPv6 Prüfung</title></info>
+            
 
             <para>
                 <classname>Zend_Validate_Ip</classname> prüft IPv6 Adressen mit einer Regex. Der
@@ -71,10 +69,10 @@ if ($validator->isValid($ip)) {
                 nicht.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.ip.singletype">
-        <title>IPv4 oder IPv6 alleine prüfen</title>
+    <section xml:id="zend.validate.set.ip.singletype"><info><title>IPv4 oder IPv6 alleine prüfen</title></info>
+        
 
         <para>
             Manchmal ist es nützlich nur eines der unterstützten Formate zu prüfen. Zum Beispiel
@@ -99,13 +97,13 @@ if ($validator->isValid($ip)) {
 }
 ]]></programlisting>
 
-        <note>
-            <title>Standard Verhalten</title>
+        <note><info><title>Standard Verhalten</title></info>
+            
 
             <para>
                 Das Standardverhalten dem <classname>Zend_Validate_Ip</classname> folgt, ist es
                 beide Standards zu erlauben.
             </para>
         </note>
-    </sect3>
-</sect2>
+    </section>
+</section>

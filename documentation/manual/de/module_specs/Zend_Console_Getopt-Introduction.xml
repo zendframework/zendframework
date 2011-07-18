@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.console.getopt.introduction">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.introduction"><info><title>Einführung</title></info>
+    
 
     <para>
         Die <classname>Zend_Console_Getopt</classname> Klasse hilft Kommandozeilen Anwendungen
@@ -106,8 +106,8 @@
         welche Flags der Benutzer definiert hat.
     </para>
 
-    <note>
-        <title>Getopt ist kein Framework für eine Anwendung</title>
+    <note><info><title>Getopt ist kein Framework für eine Anwendung</title></info>
+        
 
         <para>
             <classname>Zend_Console_Getopt</classname> kann <emphasis>nicht</emphasis>
@@ -126,4 +126,4 @@
         Die folgende Sektion beschreibt die Verwendung von
         <classname>Zend_Console_Getopt</classname>.
     </para>
-</sect1>
+</section>

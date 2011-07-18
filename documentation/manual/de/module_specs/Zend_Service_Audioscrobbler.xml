@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20872 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.service.audioscrobbler">
-    <title>Zend_Service_Audioscrobbler</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.audioscrobbler"><info><title>Zend_Service_Audioscrobbler</title></info>
+    
 
-    <sect2 id="zend.service.audioscrobbler.introduction">
-        <title>Einführung</title>
+    <section xml:id="zend.service.audioscrobbler.introduction"><info><title>Einführung</title></info>
+        
 
         <para>
             <classname>Zend_Service_Audioscrobbler</classname> ist eine einfache
@@ -15,14 +13,13 @@
             <classname>Zend_Service_Audioscrobbler</classname> Klasse beginnt mit einem dieser
             Bezeichner. Der Syntax und der Namensraum des Audioscrobbler Web Services sind in
             <classname>Zend_Service_Audioscrobbler</classname> gespiegelt. Für weitere Informationen
-            über das Audioscrobbler REST Web Service, siehe die <ulink
-                url="http://www.audioscrobbler.net/data/webservices/">Audioscrobbler Web Service
-                Seite</ulink>.
+            über das Audioscrobbler REST Web Service, siehe die <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.audioscrobbler.net/data/webservices/">Audioscrobbler Web Service
+                Seite</link>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.audioscrobbler.users">
-        <title>Benutzer</title>
+    <section xml:id="zend.service.audioscrobbler.users"><info><title>Benutzer</title></info>
+        
 
         <para>
             Um Informationen über einen bestimmten Benutzer zu erhalten, wird zuerst die
@@ -204,8 +201,8 @@
             </itemizedlist>
         </para>
 
-        <example id="zend.service.audioscrobbler.users.example.profile_information">
-            <title>Informationen von Benutzerprofilen erhalten</title>
+        <example xml:id="zend.service.audioscrobbler.users.example.profile_information"><info><title>Informationen von Benutzerprofilen erhalten</title></info>
+            
 
             <para>
                 In diesem Beispiel werden die <methodname>setUser()</methodname> und
@@ -225,8 +222,8 @@ print "Informationen für $profileInfo->realname können unter "
 ]]></programlisting>
         </example>
 
-        <example id="zend.service.audioscrobbler.users.example.weekly_artist_chart">
-            <title>Die wöchentlichen Artistencharts eines Benutzers erhalten</title>
+        <example xml:id="zend.service.audioscrobbler.users.example.weekly_artist_chart"><info><title>Die wöchentlichen Artistencharts eines Benutzers erhalten</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $as = new Zend_Service_Audioscrobbler();
@@ -254,10 +251,10 @@ foreach ($previousWeeklyArtists as $artist) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.audioscrobbler.artists">
-        <title>Artisten</title>
+    <section xml:id="zend.service.audioscrobbler.artists"><info><title>Artisten</title></info>
+        
 
         <para>
             <classname>Zend_Service_Audioscrobbler</classname> bietet verschiedene Methoden um Daten
@@ -307,8 +304,8 @@ foreach ($previousWeeklyArtists as $artist) {
             </itemizedlist>
         </para>
 
-        <example id="zend.service.audioscrobbler.artists.example.related_artists">
-            <title>Ähnliche Artisten erhalten</title>
+        <example xml:id="zend.service.audioscrobbler.artists.example.related_artists"><info><title>Ähnliche Artisten erhalten</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $as = new Zend_Service_Audioscrobbler();
@@ -322,10 +319,10 @@ foreach ($relatedArtists as $artist) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.audioscrobbler.tracks">
-        <title>Lieder</title>
+    <section xml:id="zend.service.audioscrobbler.tracks"><info><title>Lieder</title></info>
+        
 
         <para>
             <classname>Zend_Service_Audioscrobbler</classname> bietet zwei Methoden für das
@@ -350,10 +347,10 @@ foreach ($relatedArtists as $artist) {
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.audioscrobbler.tags">
-        <title>Tags</title>
+    <section xml:id="zend.service.audioscrobbler.tags"><info><title>Tags</title></info>
+        
 
         <para>
             <classname>Zend_Service_Audioscrobbler</classname> bietet verschiedene Methoden für das
@@ -394,10 +391,10 @@ foreach ($relatedArtists as $artist) {
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.audioscrobbler.groups">
-        <title>Gruppen</title>
+    <section xml:id="zend.service.audioscrobbler.groups"><info><title>Gruppen</title></info>
+        
 
         <para>
             <classname>Zend_Service_Audioscrobbler</classname> bietet verschiedene Methoden um Daten
@@ -475,10 +472,10 @@ foreach ($relatedArtists as $artist) {
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.audioscrobbler.forums">
-        <title>Foren</title>
+    <section xml:id="zend.service.audioscrobbler.forums"><info><title>Foren</title></info>
+        
 
         <para>
             <classname>Zend_Service_Audioscrobbler</classname> bietet eine Methode für das Empfangen
@@ -494,5 +491,5 @@ foreach ($relatedArtists as $artist) {
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

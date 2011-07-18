@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21119 -->
-<!-- Reviewed: 21119 -->
-<sect1 id="zend.server.introduction">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.server.introduction"><info><title>Einführung</title></info>
+    
 
     <para>
         Die <classname>Zend_Server</classname> Klassenfamilie stellt Funktionalitäten für die
@@ -21,4 +21,4 @@
         <classname>Zend_Server_Interface</classname>'s <methodname>getFunctions()</methodname> und
         <methodname>loadFunctions()</methodname> Methoden bereit.
     </para>
-</sect1>
+</section>

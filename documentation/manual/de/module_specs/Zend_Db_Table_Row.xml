@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20766 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.db.table.row">
-    <title>Zend_Db_Table_Row</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.row"><info><title>Zend_Db_Table_Row</title></info>
+    
 
-    <sect2 id="zend.db.table.row.introduction">
-        <title>Einführung</title>
+    <section xml:id="zend.db.table.row.introduction"><info><title>Einführung</title></info>
+        
 
         <para>
             <classname>Zend_Db_Table_Row</classname> ist eine Klasse, die eine einzelne Zeile eines
@@ -17,13 +15,13 @@
 
         <para>
             <classname>Zend_Db_Table_Row</classname> ist eine Implementierung des
-            <ulink url="http://www.martinfowler.com/eaaCatalog/rowDataGateway.html">Row Data
-                Gateway</ulink>-Entwurfsmusters.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.martinfowler.com/eaaCatalog/rowDataGateway.html">Row Data
+                Gateway</link>-Entwurfsmusters.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.row.read">
-        <title>Eine Zeile lesen</title>
+    <section xml:id="zend.db.table.row.read"><info><title>Eine Zeile lesen</title></info>
+        
 
         <para>
             <classname>Zend_Db_Table_Abstract</classname> enthält die Methoden
@@ -33,8 +31,8 @@
             <classname>Zend_Db_Table_Row</classname> zurückgibt.
         </para>
 
-        <example id="zend.db.table.row.read.example">
-            <title>Beispiel des Lesen einer Zeile</title>
+        <example xml:id="zend.db.table.row.read.example"><info><title>Beispiel des Lesen einer Zeile</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
@@ -48,8 +46,8 @@ $row = $bugs->fetchRow($bugs->select()->where('bug_id = ?', 1));
             <link linkend="zend.db.table.rowset">Tabellen Zeilensets</link> für Details.
         </para>
 
-        <example id="zend.db.table.row.read.example-rowset">
-            <title>Beispiel des Lesens einer Zeile aus einem Rowset</title>
+        <example xml:id="zend.db.table.row.read.example-rowset"><info><title>Beispiel des Lesens einer Zeile aus einem Rowset</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
@@ -58,16 +56,16 @@ $row = $rowset->current();
 ]]></programlisting>
         </example>
 
-        <sect3 id="zend.db.table.row.read.get">
-            <title>Spaltenwerte aus einer Zeile lesen</title>
+        <section xml:id="zend.db.table.row.read.get"><info><title>Spaltenwerte aus einer Zeile lesen</title></info>
+            
 
             <para>
                 <classname>Zend_Db_Table_Row_Abstract</classname> bietet Zugriffsmethoden an, damit
                 die Spalten einer Zeile als Objekteigenschaften angesprochen werden können.
             </para>
 
-            <example id="zend.db.table.row.read.get.example">
-                <title>Beispiel für das Lesens einer Spalte aus einer Zeile</title>
+            <example xml:id="zend.db.table.row.read.get.example"><info><title>Beispiel für das Lesens einer Spalte aus einer Zeile</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
@@ -91,10 +89,10 @@ echo $row->bug_description;
                     geschrieben sein, wie die Spalte in der Datenbank heißt.
                 </para>
             </note>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.row.read.to-array">
-            <title>Zeilendaten als ein Array lesen</title>
+        <section xml:id="zend.db.table.row.read.to-array"><info><title>Zeilendaten als ein Array lesen</title></info>
+            
 
             <para>
                 Die Tabellenzeile kann mithilfe der <methodname>toArray()</methodname> Methode des
@@ -102,8 +100,8 @@ echo $row->bug_description;
                 zurück, mit Spaltennamen als Index und ihren Inhalten als Werten.
             </para>
 
-            <example id="zend.db.table.row.read.to-array.example">
-                <title>Beispiel der Benutzung der toArray()-Methode</title>
+            <example xml:id="zend.db.table.row.read.to-array.example"><info><title>Beispiel der Benutzung der toArray()-Methode</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
@@ -125,10 +123,10 @@ foreach ($rowArray as $column => $value) {
                 updatefähig. Die Werte des Arrays können wie in jedem Array modifiziert werden,
                 aber Änderungen an diesem Array werden nicht direkt in der Datenbank gespeichert.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.row.read.relationships">
-            <title>Daten aus verwandten Tabellen lesen</title>
+        <section xml:id="zend.db.table.row.read.relationships"><info><title>Daten aus verwandten Tabellen lesen</title></info>
+            
 
             <para>
                 Die Klasse <classname>Zend_Db_Table_Row_Abstract</classname> bietet Methoden, um
@@ -136,14 +134,14 @@ foreach ($rowArray as $column => $value) {
                 <link linkend="zend.db.table.relationships">Kapitel über Beziehungen</link> für
                 weitere Informationen über Tabellenbeziehungen.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.db.table.row.write">
-        <title>Zeilen in die Datenbank schreiben</title>
+    <section xml:id="zend.db.table.row.write"><info><title>Zeilen in die Datenbank schreiben</title></info>
+        
 
-        <sect3 id="zend.db.table.row.write.set">
-            <title>Spaltenwerte einer Zeile verändern</title>
+        <section xml:id="zend.db.table.row.write.set"><info><title>Spaltenwerte einer Zeile verändern</title></info>
+            
 
             <para>
                 Individuelle Werte von Spalten können mit Hilfe der Zugriffsvariablen gesetzt
@@ -157,8 +155,8 @@ foreach ($rowArray as $column => $value) {
                 übernommen. Das wird mit der Methode <methodname>save()</methodname> erledigt.
             </para>
 
-            <example id="zend.db.table.row.write.set.example">
-                <title>Beispiel der Änderung eines Spaltenwertes einer Zeile</title>
+            <example xml:id="zend.db.table.row.write.set.example"><info><title>Beispiel der Änderung eines Spaltenwertes einer Zeile</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
@@ -171,10 +169,10 @@ $row->bug_status = 'FIXED';
 $row->save();
 ]]></programlisting>
             </example>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.row.write.insert">
-            <title>Eine neue Zeile einfügen</title>
+        <section xml:id="zend.db.table.row.write.insert"><info><title>Eine neue Zeile einfügen</title></info>
+            
 
             <para>
                 Eine neue Zeile kann in einer Tabelle mit der <methodname>createRow()</methodname>
@@ -184,8 +182,8 @@ $row->save();
                 wird.
             </para>
 
-            <example id="zend.db.table.row.write.insert.example">
-                <title>Beispiel der Erstellung einer neuen Zeile für eine Tabelle</title>
+            <example xml:id="zend.db.table.row.write.insert.example"><info><title>Beispiel der Erstellung einer neuen Zeile für eine Tabelle</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
@@ -205,8 +203,8 @@ $newRow->save();
                 assoziatives Array, mit dem Felder der neuen Zeile eingefügt werden können.
             </para>
 
-            <example id="zend.db.table.row.write.insert.example2">
-                <title>Beispiel der Bekanntgabe einer neuen Zeile für eine Tabelle</title>
+            <example xml:id="zend.db.table.row.write.insert.example2"><info><title>Beispiel der Bekanntgabe einer neuen Zeile für eine Tabelle</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $data = array(
@@ -230,10 +228,10 @@ $newRow->save();
                     alte Name weiterhin funktioniert, um Abwärtskompatibilität zu gewährleisten.
                 </para>
             </note>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.row.write.set-from-array">
-            <title>Werte mehrerer Spalten ändern</title>
+        <section xml:id="zend.db.table.row.write.set-from-array"><info><title>Werte mehrerer Spalten ändern</title></info>
+            
 
             <para>
                 <classname>Zend_Db_Table_Row_Abstract</classname> beinhaltet eine Methode namens
@@ -243,11 +241,11 @@ $newRow->save();
                 aktualisiert werden müssen, zu setzen.
             </para>
 
-            <example id="zend.db.table.row.write.set-from-array.example">
-                <title>
+            <example xml:id="zend.db.table.row.write.set-from-array.example"><info><title>
                     Beispiel der Verwendung von setFromArray() um neue Werte in einer Tabelle zu
                     setzen
-                </title>
+                </title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
@@ -266,10 +264,10 @@ $newRow->setFromArray($data);
 $newRow->save();
 ]]></programlisting>
             </example>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.row.write.delete">
-            <title>Eine Zeile löschen</title>
+        <section xml:id="zend.db.table.row.write.delete"><info><title>Eine Zeile löschen</title></info>
+            
 
             <para>
                 Das Zeilenobjekt hat eine Methode namens <methodname>delete()</methodname>. Diese
@@ -277,8 +275,8 @@ $newRow->save();
                 entspricht.
             </para>
 
-            <example id="zend.db.table.row.write.delete.example">
-                <title>Beispiel für das Löschen einer Zeile</title>
+            <example xml:id="zend.db.table.row.write.delete.example"><info><title>Beispiel für das Löschen einer Zeile</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
@@ -293,11 +291,11 @@ $row->delete();
                 <methodname>save()</methodname> muss nicht aufgerufen werden, um den Löschvorgang
                 abzuschließen; er wird sofort auf der Datenbank ausgeführt.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.db.table.row.serialize">
-        <title>Serialisieren und Deserialisieren von Zeilen</title>
+    <section xml:id="zend.db.table.row.serialize"><info><title>Serialisieren und Deserialisieren von Zeilen</title></info>
+        
 
         <para>
             Es ist oft nützlich, Inhalte einer Datenbankzeile für spätere Benutzung zu speichern.
@@ -307,8 +305,8 @@ $row->delete();
             Objekte sind serialisierbar.
         </para>
 
-        <sect3 id="zend.db.table.row.serialize.serializing">
-            <title>Eine Zeile Serialisieren</title>
+        <section xml:id="zend.db.table.row.serialize.serializing"><info><title>Eine Zeile Serialisieren</title></info>
+            
 
             <para>
                 Es kann einfach <acronym>PHP</acronym>s <methodname>serialize()</methodname>
@@ -316,8 +314,8 @@ $row->delete();
                 enthält welcher das Zeilen-Objekt repräsentiert.
             </para>
 
-            <example id="zend.db.table.row.serialize.serializing.example">
-                <title>Beispiel: Eine Zeile serialisieren</title>
+            <example xml:id="zend.db.table.row.serialize.serializing.example"><info><title>Beispiel: Eine Zeile serialisieren</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
@@ -329,10 +327,10 @@ $serializedRow = serialize($row);
 // Jetzt kann $serializedRow z.B. in einer Datei gespeichert werden
 ]]></programlisting>
             </example>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.row.serialize.unserializing">
-            <title>Zeilen deserialisieren</title>
+        <section xml:id="zend.db.table.row.serialize.unserializing"><info><title>Zeilen deserialisieren</title></info>
+            
 
             <para>
                 <acronym>PHP</acronym>s <methodname>unserialize()</methodname> Funktion stellt ein
@@ -348,8 +346,8 @@ $serializedRow = serialize($row);
                 Datenbankverbindung benötigen.
             </para>
 
-            <example id="zend.db.table.row.serialize.unserializing.example">
-                <title>Beispiel für das deserialisieren eines serialisiertes Zeilenobjektes</title>
+            <example xml:id="zend.db.table.row.serialize.unserializing.example"><info><title>Beispiel für das deserialisieren eines serialisiertes Zeilenobjektes</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $rowClone = unserialize($serializedRow);
@@ -360,8 +358,8 @@ echo $rowClone->bug_description;
 ]]></programlisting>
             </example>
 
-            <note>
-                <title>Warum werden Zeilenobjekte unverbunden deserialisiert?</title>
+            <note><info><title>Warum werden Zeilenobjekte unverbunden deserialisiert?</title></info>
+                
 
                 <para>
                     Ein serialisiertes Objekt ist eine Zeichenkette, die lesbar für jeden ist, dem
@@ -374,10 +372,10 @@ echo $rowClone->bug_description;
                     Zugriff zur Datenbank zu erhalten, ohne richtige Logindaten zu kennen.
                 </para>
             </note>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.row.serialize.set-table">
-            <title>Ein Zeilenobjekt als Live-Daten reaktivieren</title>
+        <section xml:id="zend.db.table.row.serialize.set-table"><info><title>Ein Zeilenobjekt als Live-Daten reaktivieren</title></info>
+            
 
             <para>
                 Ein nicht verbundenes Zeilenobjekt kann mithilfe der Methode
@@ -390,8 +388,8 @@ echo $rowClone->bug_description;
                 gespeichert werden.
             </para>
 
-            <example id="zend.db.table.row.serialize.set-table.example">
-                <title>Ein Zeilenobjekt reaktivieren</title>
+            <example xml:id="zend.db.table.row.serialize.set-table.example"><info><title>Ein Zeilenobjekt reaktivieren</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $rowClone = unserialize($serializedRow);
@@ -407,11 +405,11 @@ $rowClone->bug_status = 'FIXED';
 $rowClone->save();
 ]]></programlisting>
             </example>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.db.table.row.extending">
-        <title>Die Zeilenklasse erweitern</title>
+    <section xml:id="zend.db.table.row.extending"><info><title>Die Zeilenklasse erweitern</title></info>
+        
 
         <para>
             <classname>Zend_Db_Table_Row</classname> ist die standardmäßige Implementierung der
@@ -424,8 +422,8 @@ $rowClone->save();
             Konstruktors eines Tabellenobjekts angegeben werden.
         </para>
 
-        <example id="zend.db.table.row.extending.example">
-            <title>Eine eigene Zeilenklasse angeben</title>
+        <example xml:id="zend.db.table.row.extending.example"><info><title>Eine eigene Zeilenklasse angeben</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 class MyRow extends Zend_Db_Table_Row_Abstract
@@ -447,8 +445,8 @@ $bugs = new Bugs(array('rowClass' => 'MyRow'));
 ]]></programlisting>
         </example>
 
-        <sect3 id="zend.db.table.row.extending.overriding">
-            <title>Initialisierung einer Zeile</title>
+        <section xml:id="zend.db.table.row.extending.overriding"><info><title>Initialisierung einer Zeile</title></info>
+            
 
             <para>
                 Wenn Anwendungs-spezifische Logik benötigt wird die initialisiert werden soll wenn
@@ -459,8 +457,8 @@ $bugs = new Bugs(array('rowClass' => 'MyRow'));
                 programtechnisch verändert werden müssen.
             </para>
 
-            <example id="zend.db.table.row.init.usage.example">
-                <title>Beispiel der Verwendung der init() Methode</title>
+            <example xml:id="zend.db.table.row.init.usage.example"><info><title>Beispiel der Verwendung der init() Methode</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 class MyApplicationRow extends Zend_Db_Table_Row_Abstract
@@ -474,12 +472,12 @@ class MyApplicationRow extends Zend_Db_Table_Row_Abstract
 }
 ]]></programlisting>
             </example>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.row.extending.insert-update">
-            <title>
+        <section xml:id="zend.db.table.row.extending.insert-update"><info><title>
                 Eigene Logik für Einfügen, Aktualisieren und Löschen in Zend_Db_Table_Row definieren
-            </title>
+            </title></info>
+            
 
             <para>
                 Die Zeilenklasse ruft geschützte Methoden namens
@@ -505,8 +503,8 @@ class MyApplicationRow extends Zend_Db_Table_Row_Abstract
                 eigene Logik in der Zeilenklasse anstatt der Tabellenklasse einzubauen:
             </para>
 
-            <example id="zend.db.table.row.extending.overriding-example1">
-                <title>Beispiel einer eigenen Logik in einer Zeilenklasse</title>
+            <example xml:id="zend.db.table.row.extending.overriding-example1"><info><title>Beispiel einer eigenen Logik in einer Zeilenklasse</title></info>
+                
 
                 <para>
                     Es ist möglich, dass es nicht in allen Fällen nötig ist, diese Logik
@@ -545,8 +543,8 @@ if ($loggingEnabled) {
 ]]></programlisting>
             </example>
 
-            <example id="zend.db.table.row.extending.overriding-example2">
-                <title>Zeilenklasse, die Insert Daten für verschiedene Tabellen loggt</title>
+            <example xml:id="zend.db.table.row.extending.overriding-example2"><info><title>Zeilenklasse, die Insert Daten für verschiedene Tabellen loggt</title></info>
+                
 
                 <para>
                     Es könnte sein, dass eigene Anwendungslogik für mehrere Tabellen angewendet
@@ -586,10 +584,10 @@ class Products extends Zend_Db_Table_Abstract
 }
 ]]></programlisting>
             </example>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.row.extending.inflection">
-            <title>Inflection in Zend_Db_Table_Row einbauen</title>
+        <section xml:id="zend.db.table.row.extending.inflection"><info><title>Inflection in Zend_Db_Table_Row einbauen</title></info>
+            
 
             <para>
                 Manche Personen ziehen es vor, dass der Klassenname der Tabelle dem Tabellennamen
@@ -599,8 +597,7 @@ class Products extends Zend_Db_Table_Abstract
 
             <para>
                 <classname>Zend_Db</classname> Klassen implementieren Inflection standardmäßig
-                nicht. Siehe das Kapitel über die <link
-                    linkend="zend.db.table.extending.inflection">Erweiterung der Inflection</link>
+                nicht. Siehe das Kapitel über die <link linkend="zend.db.table.extending.inflection">Erweiterung der Inflection</link>
                 für eine Erklärung diesr Richtlinie.
             </para>
 
@@ -611,8 +608,8 @@ class Products extends Zend_Db_Table_Abstract
                 Abfragen an die Datenbank genutzt werden.
             </para>
 
-            <example id="zend.db.table.row.extending.inflection.example">
-                <title>Inflection-Methode definieren</title>
+            <example xml:id="zend.db.table.row.extending.inflection.example"><info><title>Inflection-Methode definieren</title></info>
+                
 
                 <para>
                     Das definieren einer Methode für Inflection erlaubt es, inflection-ierte
@@ -653,6 +650,6 @@ $row->bugDescription = 'New description';
                 schreiben. Zend Framework bietet solche Funktionen wie bereits erwähnt von Haus aus
                 nicht an.
             </para>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21819 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.log.writers.zendmonitor">
-    <title>Auf den Zend Server Montior schreiben</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers.zendmonitor"><info><title>Auf den Zend Server Montior schreiben</title></info>
+    
 
     <para>
         <classname>Zend_Log_Writer_ZendMonitor</classname> erlaubt es Events über Zend Server's
@@ -20,8 +18,8 @@
         im Zend Server Event Monitor inspizieren.
     </para>
 
-    <note>
-        <title>Zend Monitor muss installiert und aktiviert sein</title>
+    <note><info><title>Zend Monitor muss installiert und aktiviert sein</title></info>
+        
 
         <para>
             Um diesen Log Writer zu verwenden muss Zend Monitor sowohl installiert als auch
@@ -75,7 +73,7 @@ $log->info('Exception gefunden', array(
     </para>
 
     <para>
-        <inlinegraphic fileref="figures/zend.log.writers.zendmonitor-events.png" format="PNG" />
+        <inlinemediaobject><imageobject><imagedata fileref="figures/zend.log.writers.zendmonitor-events.png" format="PNG"/></imageobject></inlinemediaobject>
     </para>
 
     <para>
@@ -89,7 +87,7 @@ $log->info('Exception gefunden', array(
     </para>
 
     <para>
-        <inlinegraphic fileref="figures/zend.log.writers.zendmonitor-event.png" format="PNG" />
+        <inlinemediaobject><imageobject><imagedata fileref="figures/zend.log.writers.zendmonitor-event.png" format="PNG"/></imageobject></inlinemediaobject>
     </para>
 
     <para>
@@ -103,13 +101,12 @@ $log->info('Exception gefunden', array(
         in diesem Beispiel das Request Objekt geloggt wurde.
     </para>
 
-    <note>
-        <title>Integration mit Zend_Application</title>
+    <note><info><title>Integration mit Zend_Application</title></info>
+        
 
         <para>
             Standardmäßig fügen die Kommandos <command>zf.sh</command> und <command>zf.bat</command>
-            die Konfguration für die <link
-                linkend="zend.application.available-resources.log"><classname>Zend_Application</classname>
+            die Konfguration für die <link linkend="zend.application.available-resources.log"><classname>Zend_Application</classname>
                 Log Ressource</link> hinzu, welcher die Konfiguration für den
             <classname>ZendMonitor</classname> Log Writer enthält. Zusätzlich verwendet der
             <classname>ErrorController</classname> den konfigurierten Logger um Exceptions der
@@ -123,4 +120,4 @@ $log->info('Exception gefunden', array(
             <constant>NULL</constant> Logger.
         </para>
     </note>
-</sect2>
+</section>

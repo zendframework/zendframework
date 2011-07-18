@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20807 -->
-<!-- Reviewed: 20807 -->
-<sect2 id="zend.test.phpunit.bootstrapping">
-    <title>Bootstrapping der eigenen Testfälle</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.bootstrapping"><info><title>Bootstrapping der eigenen Testfälle</title></info>
+    
 
     <para>
         Wie im <link linkend="zend.test.phpunit.loginexample">Login-Beispiel</link> gezeigt, sollten
@@ -60,8 +58,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 
     <para>
         Drittens kann ein <acronym>PHP</acronym>-Callback angegeben werden, der nach dem Bootstrap
-        der Anwendung ausgeführt wird. Diese Methode kann im <link
-            linkend="zend.test.phpunit.loginexample">Login-Beispiel</link> gesehen werden. Wenn das
+        der Anwendung ausgeführt wird. Diese Methode kann im <link linkend="zend.test.phpunit.loginexample">Login-Beispiel</link> gesehen werden. Wenn das
         Callback eine Funktion oder statische Methode ist, könnte sie auch in der Klasse gesetzt
         werden:
     </para>
@@ -142,4 +139,4 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         Sobald die Anwendung das Bootstrapping ausgeführt hat, kann damit begonnen werden, eigene
         Tests zu erstellen.
     </para>
-</sect2>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20763 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.auth.introduction">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.introduction"><info><title>Einführung</title></info>
+    
 
     <para>
         <classname>Zend_Auth</classname> bietet eine <acronym>API</acronym> für das Authentifizieren
@@ -18,8 +16,7 @@
         Entscheidens ob es einer Entität erlaubt wird auf andere Entitäten Zugriff zu erhalten,
         oder um auf diesen Operationen durchzuführen, ist ausserhalb der Möglichkeit von
         <classname>Zend_Auth</classname>. Für weitere Informationen über Authorisierung und
-        Zugriffskontrolle mit dem Zend Framework, sollte <link
-            linkend="zend.acl"><classname>Zend_Acl</classname></link> angeschaut werden.
+        Zugriffskontrolle mit dem Zend Framework, sollte <link linkend="zend.acl"><classname>Zend_Acl</classname></link> angeschaut werden.
     </para>
 
     <note>
@@ -33,8 +30,8 @@
         </para>
     </note>
 
-    <sect2 id="zend.auth.introduction.adapters">
-        <title>Adapter</title>
+    <section xml:id="zend.auth.introduction.adapters"><info><title>Adapter</title></info>
+        
 
         <para>
             Ein <classname>Zend_Auth</classname> Adapter wird verwendet um sich gegenüber einem
@@ -101,10 +98,10 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
             ist, sollte <methodname>authenticate()</methodname> eine Ausnahme werfen die von
             <classname>Zend_Auth_Adapter_Exception</classname> abgeleitet ist.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.introduction.results">
-        <title>Ergebnisse</title>
+    <section xml:id="zend.auth.introduction.results"><info><title>Ergebnisse</title></info>
+        
 
         <para>
             <classname>Zend_Auth</classname> Adapter geben eine Instanz von
@@ -205,10 +202,10 @@ switch ($result->getCode()) {
         break;
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.introduction.persistence">
-        <title>Dauerhafte Identitäten</title>
+    <section xml:id="zend.auth.introduction.persistence"><info><title>Dauerhafte Identitäten</title></info>
+        
 
         <para>
             Eine Anfrage zu authentifizieren die Authentifizierungs Zeugnisse enthält ist per se
@@ -222,8 +219,8 @@ switch ($result->getCode()) {
             Server-seitigen Web Anwendungen zu erhalten.
         </para>
 
-        <sect3 id="zend.auth.introduction.persistence.default">
-            <title>Normale Persistenz in PHP Sessions</title>
+        <section xml:id="zend.auth.introduction.persistence.default"><info><title>Normale Persistenz in PHP Sessions</title></info>
+            
 
             <para>
                  Standardmäßig bietet <classname>Zend_Auth</classname> dauerhafte Speicherung der
@@ -248,8 +245,8 @@ switch ($result->getCode()) {
                 </para>
             </note>
 
-            <example id="zend.auth.introduction.persistence.default.example">
-                <title>Den Namensraum der Session ändern</title>
+            <example xml:id="zend.auth.introduction.persistence.default.example"><info><title>Den Namensraum der Session ändern</title></info>
+                
 
                 <para>
                     <classname>Zend_Auth_Storage_Session</classname> verwendet einen Session
@@ -278,10 +275,10 @@ $auth->setStorage(new Zend_Auth_Storage_Session('someNamespace'));
 $result = $auth->authenticate($authAdapter);
 ]]></programlisting>
             </example>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.auth.introduction.persistence.custom">
-            <title>Eigene Speicher implementieren</title>
+        <section xml:id="zend.auth.introduction.persistence.custom"><info><title>Eigene Speicher implementieren</title></info>
+            
 
             <para>
                 Zeitweise wollen Entwickler einen anderen Speichermechanismus für Identitäten
@@ -291,8 +288,8 @@ $result = $auth->authenticate($authAdapter);
                 der Klasse an <methodname>Zend_Auth::setStorage()</methodname> übergeben.
             </para>
 
-            <example id="zend.auth.introduction.persistence.custom.example">
-                <title>Eine eigene Speicher Klasse verwenden</title>
+            <example xml:id="zend.auth.introduction.persistence.custom.example"><info><title>Eine eigene Speicher Klasse verwenden</title></info>
+                
 
                 <para>
                     Um eine andere Speicherklasse für die Persistenz von Identitäten zu verwenden
@@ -384,11 +381,11 @@ Zend_Auth::getInstance()->setStorage(new MyStorage());
 $result = Zend_Auth::getInstance()->authenticate($authAdapter);
 ]]></programlisting>
             </example>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.auth.introduction.using">
-        <title>Verwendung</title>
+    <section xml:id="zend.auth.introduction.using"><info><title>Verwendung</title></info>
+        
 
         <para>
             Es gibt zwei vorhandene Wege um <classname>Zend_Auth</classname> Adapter zu verwenden:
@@ -489,5 +486,5 @@ if (!$result->isValid()) {
     // $result->getIdentity() === $username
 }
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

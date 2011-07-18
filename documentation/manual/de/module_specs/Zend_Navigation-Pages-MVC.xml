@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20827 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.navigation.pages.mvc">
-    <title>Zend_Navigation_Page_Mvc</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.mvc"><info><title>Zend_Navigation_Page_Mvc</title></info>
+    
 
     <para>
         <acronym>MVC</acronym> Seiten werden definiert indem <acronym>MVC</acronym> Parameter
@@ -14,8 +12,8 @@
         um zu erkennen ob die Seite aktiv ist.
     </para>
 
-    <table id="zend.navigation.pages.mvc.options">
-        <title>MVC Seiten Optionen</title>
+    <table xml:id="zend.navigation.pages.mvc.options"><info><title>MVC Seiten Optionen</title></info>
+        
 
         <tgroup cols="4">
             <thead>
@@ -107,13 +105,13 @@
         </para>
     </note>
 
-    <example id="zend.navigation.pages.mvc.example.getHref">
-        <title>getHref() erstellt die Seiten URI</title>
+    <example xml:id="zend.navigation.pages.mvc.example.getHref"><info><title>getHref() erstellt die Seiten URI</title></info>
+        
 
         <para>
             Dieses Beispiel zeigt das <acronym>MVC</acronym> Seiten intern
             <classname>Zend_Controller_Action_Helper_Url</classname> verwenden um
-            <acronym>URI</acronym>s zu erstellen wenn <code>$page->getHref()</code> aufgerufen wird.
+            <acronym>URI</acronym>s zu erstellen wenn <code>$page-&gt;getHref()</code> aufgerufen wird.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -140,8 +138,8 @@ $page = new Zend_Navigation_Page_Mvc(array(
 ]]></programlisting>
     </example>
 
-    <example id="zend.navigation.pages.mvc.example.isActive">
-        <title>isActive() erkennt ob eine Seite aktiv ist</title>
+    <example xml:id="zend.navigation.pages.mvc.example.isActive"><info><title>isActive() erkennt ob eine Seite aktiv ist</title></info>
+        
 
         <para>
             Dieses Beispiel zeigt das <acronym>MVC</acronym> Seiten erkennen ob sie aktiv sind indem
@@ -204,8 +202,8 @@ $page->isActive(); // gibt false zurück
 ]]></programlisting>
     </example>
 
-    <example id="zend.navigation.pages.mvc.example.routes">
-        <title>Routen verwenden</title>
+    <example xml:id="zend.navigation.pages.mvc.example.routes"><info><title>Routen verwenden</title></info>
+        
 
         <para>
             Routen können mit <acronym>MVC</acronym> Seite verwendet werden. Wenn eine Seite eine
@@ -258,4 +256,4 @@ $page = new Zend_Navigation_Page_Mvc(array(
 $page->getHref();
 ]]></programlisting>
     </example>
-</sect2>
+</section>

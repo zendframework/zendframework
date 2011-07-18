@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19996 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.quickstart.conclusion">
-    <title>Gratulation!</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.conclusion"><info><title>Gratulation!</title></info>
+    
 
     <para>
         Es wurde eine sehr einfache Anwendung erstellt indem einige der üblichsten Zend Framework
@@ -14,4 +14,4 @@
         über andere Komponenten. Wir hoffen das Sie Zend Framework nützlich finden - und wichtiger -
         Spass damit haben!
     </para>
-</sect1>
+</section>

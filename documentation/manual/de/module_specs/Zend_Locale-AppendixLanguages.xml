@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.locale.appendix">
-    <title>Unterstützte Gebietsschemata</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.locale.appendix"><info><title>Unterstützte Gebietsschemata</title></info>
+    
 
     <para>
         <classname>Zend_Locale</classname> bietet Informationen über verschiedenste Gebietsschemata.
@@ -10,8 +10,8 @@
         Sprache:
     </para>
 
-    <table id="zend.locale.appendix.table">
-        <title>Liste aller unterstützten Sprachen</title>
+    <table xml:id="zend.locale.appendix.table"><info><title>Liste aller unterstützten Sprachen</title></info>
+        
 
         <tgroup cols="3">
             <thead>
@@ -2165,4 +2165,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect1>
+</section>

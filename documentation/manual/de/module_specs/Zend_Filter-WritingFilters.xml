@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21129 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.filter.writing_filters">
-    <title>Filter schreiben</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.writing_filters"><info><title>Filter schreiben</title></info>
+    
 
     <para>
         <classname>Zend_Filter</classname> bietet ein Set von normalerweise benötigten Filtern, aber
@@ -43,4 +41,4 @@ class MyFilter implements Zend_Filter_Interface
 $filterChain = new Zend_Filter();
 $filterChain->addFilter(new MyFilter());
 ]]></programlisting>
-</sect1>
+</section>

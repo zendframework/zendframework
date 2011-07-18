@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.config.adapters.xml">
-    <title>Zend_Config_Xml</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.xml"><info><title>Zend_Config_Xml</title></info>
+    
 
     <para>
         <classname>Zend_Config_Xml</classname> ermöglicht es Entwicklern, Konfigurations-Daten in
@@ -19,8 +17,8 @@
         sollen.
     </para>
 
-    <note>
-        <title>Rückgabe Typen</title>
+    <note><info><title>Rückgabe Typen</title></info>
+        
 
         <para>
             Konfigurations-Daten, die in <classname>Zend_Config_Xml</classname> eingelesen wurden,
@@ -29,8 +27,8 @@
         </para>
     </note>
 
-    <example id="zend.config.adapters.xml.example.using">
-        <title>Zend_Config_Xml benutzen</title>
+    <example xml:id="zend.config.adapters.xml.example.using"><info><title>Zend_Config_Xml benutzen</title></info>
+        
 
         <para>
             Dieses Beispiel zeigt die grundlegende Nutzung von
@@ -87,8 +85,8 @@ echo $config->database->params->dbname; // ausgabe "dbname"
 ]]></programlisting>
     </example>
 
-    <example id="zend.config.adapters.xml.example.attributes">
-        <title>Tag Attribute in Zend_Config_Xml verwenden</title>
+    <example xml:id="zend.config.adapters.xml.example.attributes"><info><title>Tag Attribute in Zend_Config_Xml verwenden</title></info>
+        
 
         <para>
             <classname>Zend_Config_Xml</classname> unterstützt auch zwei zusätzliche Wege der
@@ -152,8 +150,8 @@ echo $config->database->params->dbname; // ausgabe "dbname"
 ]]></programlisting>
     </example>
 
-    <note>
-        <title>XML Strings</title>
+    <note><info><title>XML Strings</title></info>
+        
 
         <para>
             <classname>Zend_Config_Xml</classname> ist dazu in der Lage <acronym>XML</acronym>
@@ -188,8 +186,8 @@ $config = new Zend_Config_Xml($string, 'staging');
 ]]></programlisting>
     </note>
 
-    <note>
-        <title>Zend_Config XML Namespace</title>
+    <note><info><title>Zend_Config XML Namespace</title></info>
+        
 
         <para>
             <classname>Zend_Config</classname> kommt mit seinem eigenen <acronym>XML</acronym>
@@ -236,4 +234,4 @@ $config = new Zend_Config_Xml($string, 'staging');
 echo $config->includePath; // Ausgabe "/var/www/something/library"
 ]]></programlisting>
     </note>
-</sect1>
+</section>

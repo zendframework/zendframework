@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20799 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.tool.framework.system-providers">
-    <title>Mitgelieferte System Provider</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.system-providers"><info><title>Mitgelieferte System Provider</title></info>
+    
 
     <para>
         Zusätzlich zu den nützlicheren Projekt basierten Providern die mit
@@ -14,8 +14,8 @@
         erstellt.
     </para>
 
-    <sect2 id="zend.tool.framework.system-providers.version">
-        <title>Der Version Provider</title>
+    <section xml:id="zend.tool.framework.system-providers.version"><info><title>Der Version Provider</title></info>
+        
 
         <para>
             Der Version Provider ist enthalten, sodas man feststellen kann mit welcher Version vom
@@ -25,10 +25,10 @@
         <para>
             Über die Kommandozeile, einfach <command>zf show version</command> ausführen.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.tool.framework.system-providers.manifest">
-        <title>Der Manifest Provider</title>
+    <section xml:id="zend.tool.framework.system-providers.manifest"><info><title>Der Manifest Provider</title></info>
+        
 
         <para>
             Der Manifest Provider ist enthalten, sodas man feststellen kann welche Art von
@@ -43,5 +43,5 @@
         <para>
             Über die Kommandozeile, einfach <command>zf show manifest</command> ausführen.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

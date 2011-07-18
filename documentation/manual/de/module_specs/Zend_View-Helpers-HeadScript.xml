@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.headscript">
-    <title>HeadScript Helfer</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headscript"><info><title>HeadScript Helfer</title></info>
+    
 
     <para>
         Das <acronym>HTML</acronym> <emphasis>&lt;script&gt;</emphasis> Element wird verwendet um
@@ -78,8 +76,8 @@
         Element verwendet werden sollen.
     </para>
 
-    <note>
-        <title>Abhängige Kommentare setzen</title>
+    <note><info><title>Abhängige Kommentare setzen</title></info>
+        
 
         <para>
             <classname>HeadScript</classname> erlaubt es ein Script Tag in abhängige Kommentare zu
@@ -88,8 +86,8 @@
             Methodenaufruf übergeben werden.
         </para>
 
-        <example id="zend.view.helpers.initial.headscript.conditional">
-            <title>Headscript mit abhängigen Kommentaren</title>
+        <example xml:id="zend.view.helpers.initial.headscript.conditional"><info><title>Headscript mit abhängigen Kommentaren</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Scripte hinzufügen
@@ -132,8 +130,8 @@ $this->headScript()->appendFile(
         <link linkend="zend.view.helpers.initial.placeholder">Platzhalter Helfers</link>.
     </para>
 
-    <note>
-        <title>InlineScript für HTML Body Skripte verwenden</title>
+    <note><info><title>InlineScript für HTML Body Skripte verwenden</title></info>
+        
 
         <para>
             <classname>HeadScript</classname>'s Schwester Helfer,
@@ -145,15 +143,14 @@ $this->headScript()->appendFile(
         </para>
     </note>
 
-    <note>
-        <title>Andere Attribute werden stanadrdmäßig ausgeschaltet</title>
+    <note><info><title>Andere Attribute werden stanadrdmäßig ausgeschaltet</title></info>
+        
 
         <para>
             Standardmäßig wird <classname>HeadScript</classname> nur
             <emphasis>&lt;script&gt;</emphasis> Attribute darstellen die von W3C abgesegnet sind.
             Diese beinhalten 'type', 'charset', 'defer', 'language', und 'src'. Trotzdem, verwenden
-            einige Javascript Frameworks, vorallem <ulink
-                url="http://www.dojotoolkit.org/">Dojo</ulink>, eigene Attribute um Verhalten
+            einige Javascript Frameworks, vorallem <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.dojotoolkit.org/">Dojo</link>, eigene Attribute um Verhalten
             zu ändern. Um solche Attribute zu erlauben, können diese über die
             <methodname>setAllowArbitraryAttributes()</methodname> Methode eingeschaltet werden:
         </para>
@@ -163,8 +160,8 @@ $this->headScript()->setAllowArbitraryAttributes(true);
 ]]></programlisting>
     </note>
 
-    <example id="zend.view.helpers.initial.headscript.basicusage">
-        <title>Grundsätzliche Verwendung des HeadScript Helfers</title>
+    <example xml:id="zend.view.helpers.initial.headscript.basicusage"><info><title>Grundsätzliche Verwendung des HeadScript Helfers</title></info>
+        
 
         <para>
             Neue Skript Tags können jederzeit spezifiziert werden. Wie vorher beschrieben können
@@ -208,8 +205,8 @@ $this->headScript()->prependFile('/js/prototype.js');
 ]]></programlisting>
     </example>
 
-    <example id="zend.view.helpers.initial.headscript.capture">
-        <title>Skripte einfachen mit Hilfe des HeadScript Helfers</title>
+    <example xml:id="zend.view.helpers.initial.headscript.capture"><info><title>Skripte einfachen mit Hilfe des HeadScript Helfers</title></info>
+        
 
         <para>
             Manchmal mit ein Clientseitiges Skript programmtechnisch erstellt werden. Wärend man
@@ -256,4 +253,4 @@ $('foo_form').action = action;
             </listitem>
         </itemizedlist>
     </example>
-</sect3>
+</section>

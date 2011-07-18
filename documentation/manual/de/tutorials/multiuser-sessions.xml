@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21826 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.multiuser.sessions">
-    <title>User Session im Zend Framework managen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.multiuser.sessions"><info><title>User Session im Zend Framework managen</title></info>
+    
 
-    <sect2 id="learning.multiuser.sessions.intro">
-        <title>Einführung in Sessions</title>
+    <section xml:id="learning.multiuser.sessions.intro"><info><title>Einführung in Sessions</title></info>
+        
 
         <para>
             Der Erfolg des Webs ist tief verwurzelt im Protokoll welches das Web antreibt:
@@ -31,10 +29,10 @@
             zu <acronym>PHP</acronym>'s Session Erweiterung hinzu, welche es einfacher machen diese
             zu verwenden und auf objekt-orientierten Anwendungen beruht.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.multiuser.sessions.basic-usage">
-        <title>Grundsätzliche Verwendung von Zend_Session</title>
+    <section xml:id="learning.multiuser.sessions.basic-usage"><info><title>Grundsätzliche Verwendung von Zend_Session</title></info>
+        
 
         <para>
             Die Komponente <classname>Zend_Session</classname> ist sowohl ein Session Manager als
@@ -115,10 +113,10 @@ if ($mysession->counter > 1999) {
             erlauben. Die Information welche im obigen Beispiel gespeichert wird, wird unter
             $_SESSION['mysession']['counter'] gespeichert.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.multiuser.sessions.advanced-usage">
-        <title>Gehobenere Verwendung von Zend_Session</title>
+    <section xml:id="learning.multiuser.sessions.advanced-usage"><info><title>Gehobenere Verwendung von Zend_Session</title></info>
+        
 
         <para>
             Wenn man zusätzlich den DbTable Speicher Handler für <classname>Zend_Session</classname>
@@ -138,5 +136,5 @@ resources.session.saveHandler.options.modifiedColumn = "modified"
 resources.session.saveHandler.options.dataColumn = "session_data"
 resources.session.saveHandler.options.lifetimeColumn = "lifetime"
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

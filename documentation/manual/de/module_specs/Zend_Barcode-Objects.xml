@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21667 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.barcode.objects" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Zend_Barcode Objekte</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.barcode.objects"><info><title>Zend_Barcode Objekte</title></info>
+    
 
     <para>
         Barcode Objekte erlauben es Barcodes unabhängig von der Unterstützung eines Renderers zu
@@ -41,8 +39,8 @@
         </listitem>
     </itemizedlist>
 
-    <example id="zend.barcode.objects.configuration">
-        <title>Unterschiedliche Wege ein Barcode Objekt zu parametrisieren</title>
+    <example xml:id="zend.barcode.objects.configuration"><info><title>Unterschiedliche Wege ein Barcode Objekt zu parametrisieren</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $options = array('text' => 'ZEND-FRAMEWORK', 'barHeight' => 40);
@@ -66,8 +64,8 @@ $barcode->setText('ZEND-FRAMEWORK')
 ]]></programlisting>
     </example>
 
-    <sect2 id="zend.barcode.objects.common.options">
-        <title>Gemeinsame Optionen</title>
+    <section xml:id="zend.barcode.objects.common.options"><info><title>Gemeinsame Optionen</title></info>
+        
 
         <para>
             In der folgenden Liste haben die Werte keine Einheit; wir werden den Ausdruck "Einheit"
@@ -75,13 +73,13 @@ $barcode->setText('ZEND-FRAMEWORK')
             echte Einheit hängt von der Unterstützung beim Darstellen ab (siehe
             <link linkend="zend.barcode.renderers">die Renderer Dokumentation</link> für mehr
             Informationen). Setter werden benannt indem der erste Buchstabe der Option
-            großgeschrieben und dem Namen "set" vorangestellt wird (z.B. "barHeight" =>
+            großgeschrieben und dem Namen "set" vorangestellt wird (z.B. "barHeight" =&gt;
             "setBarHeight"). Alle Optionen haben einen entsprechenden Getter dem "get" vorangestellt
             ist (z.B. "getBarHeight"). Die vorhandenen Optionen sind:
         </para>
 
-        <table id="zend.barcode.objects.common.options.table">
-            <title>Gemeinsame Optionen</title>
+        <table xml:id="zend.barcode.objects.common.options.table"><info><title>Gemeinsame Optionen</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -260,8 +258,8 @@ $barcode->setText('ZEND-FRAMEWORK')
             </tgroup>
         </table>
 
-        <sect3 id="zend.barcode.objects.common.options.barcodefont">
-            <title>Spezieller Fall der statischen setBarcodeFont()</title>
+        <section xml:id="zend.barcode.objects.common.options.barcodefont"><info><title>Spezieller Fall der statischen setBarcodeFont()</title></info>
+            
 
             <para>
                 Man kann eine gemeinsame Schriftart für alle eigenen Objekte setzen indem die
@@ -291,16 +289,16 @@ Zend_Barcode::render(
     )
 ); // will use the 3rd GD internal font
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.barcode.objects.common.getters">
-        <title>Gemeinsame zusätzliche Getter</title>
+    <section xml:id="zend.barcode.objects.common.getters"><info><title>Gemeinsame zusätzliche Getter</title></info>
+        
 
-        <para></para>
+        <para/>
 
-        <table id="zend.barcode.objects.common.getters.table">
-            <title>Gemeinsame Getter</title>
+        <table xml:id="zend.barcode.objects.common.getters.table"><info><title>Gemeinsame Getter</title></info>
+            
 
             <tgroup cols="3">
                 <thead>
@@ -400,7 +398,7 @@ Zend_Barcode::render(
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
+    </section>
 
-    <xi:include href="Zend_Barcode-Objects_Details.xml" />
-</sect1>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Barcode-Objects_Details.xml"/>
+</section>

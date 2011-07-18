@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21241 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.hex">
-    <title>Hex</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.hex"><info><title>Hex</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Hex</classname> erlaubt es zu prüfen ob ein angegebener Wert nur
@@ -20,8 +18,8 @@ if ($validator->isValid('123ABC')) {
 }
 ]]></programlisting>
 
-    <note>
-        <title>Ungültige Zeichen</title>
+    <note><info><title>Ungültige Zeichen</title></info>
+        
 
         <para>
             Alle anderen Zeichen geben false zurück, inklusive Leerzeichen und Kommazeichen. Auch
@@ -30,11 +28,11 @@ if ($validator->isValid('123ABC')) {
         </para>
     </note>
 
-    <sect3 id="zend.validate.set.hex.options">
-        <title>Unterstützte Optionen für Zend_Validate_Hex</title>
+    <section xml:id="zend.validate.set.hex.options"><info><title>Unterstützte Optionen für Zend_Validate_Hex</title></info>
+        
 
         <para>
             Es gibt keine zusätzlichen Optionen für <classname>Zend_Validate_Hex</classname>:
         </para>
-    </sect3>
-</sect2>
+    </section>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.actionhelpers.json">
-    <title>JSON</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.json"><info><title>JSON</title></info>
+    
 
     <para>
         <acronym>JSON</acronym> Antworten sind die Antworten der Wahl wenn mit
@@ -80,8 +78,8 @@ class FooController extends Zend_Controller_Action
 }
 ]]></programlisting>
 
-    <note>
-        <title>Layouts behalten</title>
+    <note><info><title>Layouts behalten</title></info>
+        
 
         <para>
             Wenn man ein separates Layout für <acronym>JSON</acronym> Antworten hat --
@@ -105,8 +103,8 @@ $this->_helper->json($data, array('keepLayouts' => true);
 ]]></programlisting>
     </note>
 
-    <note>
-        <title>Kodierung einschalten durch Verwendung von Zend_Json_Expr</title>
+    <note><info><title>Kodierung einschalten durch Verwendung von Zend_Json_Expr</title></info>
+        
 
         <para>
             <methodname>Zend_Json::encode()</methodname> erlaubt die Kodierung von nativen
@@ -134,4 +132,4 @@ $this->_helper->json($data, array(
 ));
 ]]></programlisting>
     </note>
-</sect3>
+</section>

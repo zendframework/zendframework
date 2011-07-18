@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21997 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.form.decorators.individual">
-    <title>Darstellung individueller Decorators</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.form.decorators.individual"><info><title>Darstellung individueller Decorators</title></info>
+    
 
     <para>
         Im <link linkend="learning.form.decorators.layering">vorigen Abschnitt</link> haben wir uns
@@ -294,4 +292,4 @@ foreach ($form->getElements() as $element) {
         Abschnitt sehen wir uns das Datumselement von oben nochmals an, und demonstrieren wie ein
         eigenes Element und ein Decorator für kombinierte Elemente erstellt werden kann.
     </para>
-</sect1>
+</section>

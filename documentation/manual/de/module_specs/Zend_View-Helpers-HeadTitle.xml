@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22090 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.headtitle">
-    <title>HeadTitle Helfer</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headtitle"><info><title>HeadTitle Helfer</title></info>
+    
 
     <para>
         Das <acronym>HTML</acronym> <emphasis>&lt;title&gt;</emphasis> Element wird verwendet um
@@ -32,8 +30,8 @@
         solange man nicht eine andere Reihenfolge explizit als zweiten Parameter übergibt.
     </para>
 
-    <example id="zend.view.helpers.initial.headtitle.basicusage">
-        <title>Grundsätzliche Verwendung des HeadTitle Helfers</title>
+    <example xml:id="zend.view.helpers.initial.headtitle.basicusage"><info><title>Grundsätzliche Verwendung des HeadTitle Helfers</title></info>
+        
 
         <para>
             Es kann jederzeit ein Titel Tag spezifiziert werden. Die typische Verwendung besteht
@@ -64,7 +62,4 @@ $this->headTitle()->setSeparator(' / ');
 <?php echo $this->headTitle() ?>
 ]]></programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17171 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.actionhelpers.redirector">
-    <title>Redirector</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.redirector"><info><title>Redirector</title></info>
+    
 
-    <sect4 id="zend.controller.actionhelper.redirector.introduction">
-        <title>Einführung</title>
+    <section xml:id="zend.controller.actionhelper.redirector.introduction"><info><title>Einführung</title></info>
+        
 
         <para>
             Der <emphasis>Redirector</emphasis> Helfer erlaubt die Verwendung eines Redirector
@@ -133,13 +131,13 @@
             Letztendlich kann die aktuelle Umleitungs <acronym>URL</acronym> jederzeit
             festgestellt werden durch Verwendung von <methodname>getRedirectUrl()</methodname>.
         </para>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelper.redirector.basicusage">
-        <title>Beispiel für die grundsätzliche Verwendung</title>
+    <section xml:id="zend.controller.actionhelper.redirector.basicusage"><info><title>Beispiel für die grundsätzliche Verwendung</title></info>
+        
 
-        <example id="zend.controller.actionhelper.redirector.basicusage.example-1">
-            <title>Optionen setzen</title>
+        <example xml:id="zend.controller.actionhelper.redirector.basicusage.example-1"><info><title>Optionen setzen</title></info>
+            
 
             <para>
                 Dieses Beispiel überschreibt diverse Optionen, inklusive dem Setzen des
@@ -184,8 +182,8 @@ class SomeController extends Zend_Controller_Action
 ]]></programlisting>
         </example>
 
-        <example id="zend.controller.actionhelper.redirector.basicusage.example-2">
-            <title>Standardwerte verwenden</title>
+        <example xml:id="zend.controller.actionhelper.redirector.basicusage.example-2"><info><title>Standardwerte verwenden</title></info>
+            
 
             <para>
                 Diese Beispiel nimmt an das die Standardwerte verwendet werden, was bedeutet das
@@ -220,8 +218,8 @@ class AlternativeController extends Zend_Controller_Action
 ]]></programlisting>
         </example>
 
-        <example id="zend.controller.actionhelper.redirector.basicusage.example-3">
-            <title>Verwenden von goto()'s _forward() API</title>
+        <example xml:id="zend.controller.actionhelper.redirector.basicusage.example-3"><info><title>Verwenden von goto()'s _forward() API</title></info>
+            
 
             <para>
                 <methodname>gotoSimple()</methodname>'s <acronym>API</acronym> entspricht der von
@@ -264,8 +262,8 @@ class ForwardController extends Zend_Controller_Action
 ]]></programlisting>
         </example>
 
-        <example id="zend.controller.actionhelper.redirector.basicusage.example-4">
-            <title>Verwenden von Routen die mit gotoRoute() zusammengebaut wurden</title>
+        <example xml:id="zend.controller.actionhelper.redirector.basicusage.example-4"><info><title>Verwenden von Routen die mit gotoRoute() zusammengebaut wurden</title></info>
+            
 
             <para>
                 Das folgende Beispiel verwendet die <methodname>assemble()</methodname> Methode des
@@ -322,8 +320,5 @@ class BlogAdminController extends Zend_Controller_Action
 }
 ]]></programlisting>
         </example>
-    </sect4>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

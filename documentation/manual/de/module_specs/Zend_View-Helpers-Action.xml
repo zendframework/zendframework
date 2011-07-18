@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19436 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.action">
-    <title>Action View Helfer</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.action"><info><title>Action View Helfer</title></info>
+    
 
     <para>
         Der <classname>Action</classname> View Helfer ermöglicht es View Skripten eine gegebene
@@ -24,8 +22,8 @@
         werden benötigt; wenn kein Modul angegeben wird, dann wird das Standardmodul angenommen.
     </para>
 
-    <example id="zend.view.helpers.initial.action.usage">
-        <title>Grundsätzliche Verwendung von Action View Helfern</title>
+    <example xml:id="zend.view.helpers.initial.action.usage"><info><title>Grundsätzliche Verwendung von Action View Helfern</title></info>
+        
 
         <para>
             Als Beispiel, könnte man einen <classname>CommentController</classname> mit einer
@@ -44,7 +42,4 @@
 </div>
 ]]></programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

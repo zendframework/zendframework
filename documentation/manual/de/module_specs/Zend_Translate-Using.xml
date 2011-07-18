@@ -1,15 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22760 -->
-<!-- Reviewed: 22760 -->
-<sect1 id="zend.translate.using">
-    <title>Verwendung der Übersetzungsadapter</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.using"><info><title>Verwendung der Übersetzungsadapter</title></info>
+    
 
     <para>
         Der nächste Schritt ist die Benutzung des Adapters im eigenen Code.
     </para>
 
-    <example id="zend.translate.using.example1">
-        <title>Beispiel eines einsprachigen PHP Codes</title>
+    <example xml:id="zend.translate.using.example1"><info><title>Beispiel eines einsprachigen PHP Codes</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 print "Beispiel\n";
@@ -33,8 +31,8 @@ print "Hier ist Zeile zwei\n";
         an die Übersetzung gedacht wurde, anstatt ihn im Nachhinein dafür zu ändern.
     </para>
 
-    <example id="zend.translate.using.example2">
-        <title>Beispiel für mehrsprachigen PHP Code</title>
+    <example xml:id="zend.translate.using.example2"><info><title>Beispiel für mehrsprachigen PHP Code</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate(
@@ -158,8 +156,8 @@ print $translate->_(2) . "\n";
         niemals eine Exception oder einen Fehler ausgeben, wenn ein String übersetzt werden soll.
     </para>
 
-    <sect2 id="zend.translate.using.structure">
-        <title>Strukturen für Übersetzungdateien</title>
+    <section xml:id="zend.translate.using.structure"><info><title>Strukturen für Übersetzungdateien</title></info>
+        
 
         <para>
             Der nächste Schritt besteht in der Erstellung der Übersetzungsdateien für die
@@ -304,5 +302,5 @@ print $translate->_(2) . "\n";
             Da jetzt bekannt ist, welche Struktur verwendet wird,
             sollten nun die einzelnen Übersetzungsdateien erstellt werden.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

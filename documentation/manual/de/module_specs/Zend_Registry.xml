@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22745 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.registry.using">
-    <title>Die Registry verwenden</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.registry.using"><info><title>Die Registry verwenden</title></info>
+    
 
     <para>
         Eine Registry ist ein Container für das Speichern von Objekten und Werten im
@@ -18,16 +16,16 @@
         wurden durch ein gewöhnliches Array-artiges Interface verwendet werden.
     </para>
 
-    <sect2 id="zend.registry.using.storing">
-        <title>Werte in die Registry speichern</title>
+    <section xml:id="zend.registry.using.storing"><info><title>Werte in die Registry speichern</title></info>
+        
 
         <para>
             Verwende die statische Methode <methodname>set()</methodname> um einen Eintrag in der
             Registry zu Speichern.
         </para>
 
-        <example id="zend.registry.using.storing.example">
-            <title>Beispiel der Verwendung der set() Methode</title>
+        <example xml:id="zend.registry.using.storing.example"><info><title>Beispiel der Verwendung der set() Methode</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 Zend_Registry::set('index', $value);
@@ -45,18 +43,18 @@ Zend_Registry::set('index', $value);
             Der Index kann ein Skalar (<constant>NULL</constant>, String oder Nummer),
             sowie ein gewöhnliches Array sein.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.registry.using.retrieving">
-        <title>Werte aus der Registry lesen</title>
+    <section xml:id="zend.registry.using.retrieving"><info><title>Werte aus der Registry lesen</title></info>
+        
 
         <para>
             Um einen Eintrag von der Registry zu erhalten, kann die statische
             <methodname>get()</methodname> Methode verwendet werden.
         </para>
 
-        <example id="zend.registry.using.retrieving.example">
-            <title>Beispiel der Verwendung der get() Methode</title>
+        <example xml:id="zend.registry.using.retrieving.example"><info><title>Beispiel der Verwendung der get() Methode</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $value = Zend_Registry::get('index');
@@ -69,8 +67,8 @@ $value = Zend_Registry::get('index');
             gespeicherten Werte einfach zuzugreifen.
         </para>
 
-        <example id="zend.registry.using.retrieving.example-iterating">
-            <title>Beispiel des Durchsuchens der Registry</title>
+        <example xml:id="zend.registry.using.retrieving.example-iterating"><info><title>Beispiel des Durchsuchens der Registry</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $registry = Zend_Registry::getInstance();
@@ -81,10 +79,10 @@ foreach ($registry as $index => $value) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.registry.using.constructing">
-        <title>Erstellen eines Registry Objektes</title>
+    <section xml:id="zend.registry.using.constructing"><info><title>Erstellen eines Registry Objektes</title></info>
+        
 
         <para>
             Zusätzlich zur Verwendung der statischen Registry über die statischen Methoden,
@@ -105,8 +103,8 @@ foreach ($registry as $index => $value) {
             in der Registry einfach durch die Verwendung eines assoziativen Arrays als Argument.
         </para>
 
-        <example id="zend.registry.using.constructing.example">
-            <title>Beispiel für das Erstellen einer Registry</title>
+        <example xml:id="zend.registry.using.constructing.example"><info><title>Beispiel für das Erstellen einer Registry</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $registry = new Zend_Registry(array('index' => $value));
@@ -120,8 +118,8 @@ $registry = new Zend_Registry(array('index' => $value));
             <methodname>setInstance()</methodname> gesetzt wird.
         </para>
 
-        <example id="zend.registry.using.constructing.example-setinstance">
-            <title>Beispiel der Initialisierung der Singleton Registry</title>
+        <example xml:id="zend.registry.using.constructing.example-setinstance"><info><title>Beispiel der Initialisierung der Singleton Registry</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $registry = new Zend_Registry(array('index' => $value));
@@ -135,18 +133,18 @@ Zend_Registry::setInstance($registry);
             <classname>Zend_Exception</classname> wenn die statische Registry bereits initialisiert
             wurde.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.registry.using.array-access">
-        <title>Auf die Registry als Array zugreifen</title>
+    <section xml:id="zend.registry.using.array-access"><info><title>Auf die Registry als Array zugreifen</title></info>
+        
 
         <para>
             Wenn mehrere Werte gesetzt oder gelesen werden sollen, kann es einfacher
             sein auf die Registry in Array Schreibweise zuzugreifen.
         </para>
 
-        <example id="zend.registry.using.array-access.example">
-            <title>Beispiel eines Array-zugriffs</title>
+        <example xml:id="zend.registry.using.array-access.example"><info><title>Beispiel eines Array-zugriffs</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $registry = Zend_Registry::getInstance();
@@ -156,10 +154,10 @@ $registry['index'] = $value;
 var_dump( $registry['index'] );
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.registry.using.array-object">
-        <title>Zugriff auf die Registry als Objekt</title>
+    <section xml:id="zend.registry.using.array-object"><info><title>Zugriff auf die Registry als Objekt</title></info>
+        
 
         <para>
             Manchmal ist es einfacher auf die Registry in einer Objekt-Orientierten
@@ -177,8 +175,8 @@ var_dump( $registry['index'] );
             </note>
         </para>
 
-        <warning>
-            <title>Bekannte Probleme mit der ArrayObject::ARRAY_AS_PROPS Option</title>
+        <warning><info><title>Bekannte Probleme mit der ArrayObject::ARRAY_AS_PROPS Option</title></info>
+            
 
             <para>
                 Einige Versionen von <acronym>PHP</acronym> sind bekanntermaßen sehr fehlerhaft wenn
@@ -187,8 +185,8 @@ var_dump( $registry['index'] );
             </para>
         </warning>
 
-        <example id="zend.registry.using.array-object.example">
-            <title>Beispiel eines Objektzugriffs</title>
+        <example xml:id="zend.registry.using.array-object.example"><info><title>Beispiel eines Objektzugriffs</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // In der Anwendungs Bootstrap Datei:
@@ -210,18 +208,18 @@ $registry->index = $value;
 var_dump($registry->index);
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.registry.using.isset">
-        <title>Abfragen ob ein Index existiert</title>
+    <section xml:id="zend.registry.using.isset"><info><title>Abfragen ob ein Index existiert</title></info>
+        
 
         <para>
             Um herauszufinden ob ein bestimmter Index in der Registry gesetzt wurde,
             kann die statische Methode <methodname>isRegistered()</methodname> verwendet werden.
         </para>
 
-        <example id="zend.registry.using.isset.example-isregistered">
-            <title>Beispiel der Verwendung der isRegistered() Methode</title>
+        <example xml:id="zend.registry.using.isset.example-isregistered"><info><title>Beispiel der Verwendung der isRegistered() Methode</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 if (Zend_Registry::isRegistered($index)) {
@@ -236,8 +234,8 @@ if (Zend_Registry::isRegistered($index)) {
             bei einem gewöhnlichen Array.
         </para>
 
-        <example id="zend.registry.using.isset.example-isset">
-            <title>Beispiel der Verwendung der isset() Methode</title>
+        <example xml:id="zend.registry.using.isset.example-isset"><info><title>Beispiel der Verwendung der isset() Methode</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $registry = Zend_Registry::getInstance();
@@ -253,10 +251,10 @@ if (isset($registry->index)) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.registry.using.subclassing">
-        <title>Erweitern der Registry</title>
+    <section xml:id="zend.registry.using.subclassing"><info><title>Erweitern der Registry</title></info>
+        
 
         <para>
             Die statische Registry ist eine Instanz der Klasse <classname>Zend_Registry</classname>.
@@ -273,8 +271,8 @@ if (isset($registry->index)) {
             </note>
         </para>
 
-        <example id="zend.registry.using.subclassing.example">
-            <title>Beispiel des Definierens des Singleton Registry Klassennamens</title>
+        <example xml:id="zend.registry.using.subclassing.example"><info><title>Beispiel des Definierens des Singleton Registry Klassennamens</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 Zend_Registry::setClassName('Meine_Registry');
@@ -289,10 +287,10 @@ Zend_Registry::set('index', $value);
             deshalb notwendig den Klassennamen für die statische Registry in der Bootstrap
             Datei der Anwendung zu definieren.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.registry.using.unsetting">
-        <title>Entfernen der statischen Registry</title>
+    <section xml:id="zend.registry.using.unsetting"><info><title>Entfernen der statischen Registry</title></info>
+        
 
         <para>
             Obwohl es normalerweise nicht notwendig ist, kann die Singleton Instanz
@@ -300,8 +298,8 @@ Zend_Registry::set('index', $value);
             <methodname>_unsetInstance()</methodname> verwendet werden, um das zu tun.
         </para>
 
-        <warning>
-            <title>Risiko des Datenverlustes</title>
+        <warning><info><title>Risiko des Datenverlustes</title></info>
+            
 
             <para>
                 Wenn <methodname>_unsetInstance()</methodname> verwendet wird,
@@ -320,8 +318,8 @@ Zend_Registry::set('index', $value);
             und Umgebungen nicht empfohlen.
         </para>
 
-        <example id="zend.registry.using.unsetting.example">
-            <title>Beispiel der Verwendung der _unsetInstance() Methode</title>
+        <example xml:id="zend.registry.using.unsetting.example"><info><title>Beispiel der Verwendung der _unsetInstance() Methode</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 Zend_Registry::set('index', $value);
@@ -334,5 +332,5 @@ Zend_Registry::setClassName('Meine_Registry');
 Zend_Registry::set('index', $value);
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

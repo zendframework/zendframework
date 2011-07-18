@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21740 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.serializer.introduction">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.serializer.introduction"><info><title>Einführung</title></info>
+    
 
     <para>
         <classname>Zend_Serializer</classname> bietet ein Adapter-basierendes Interface um
@@ -10,8 +8,8 @@
         Arten zu bieten und diese wiederherzustellen.
     </para>
 
-    <example id="zend.serializer.introduction.example.dynamic">
-        <title>Verwenden des dynamischen Interfaces von Zend_Serializer</title>
+    <example xml:id="zend.serializer.introduction.example.dynamic"><info><title>Verwenden des dynamischen Interfaces von Zend_Serializer</title></info>
+        
 
         <para>
             Um einen Serializer zu instanzieren sollte man die Factory Methode mit dem Namen des
@@ -84,8 +82,8 @@ try {
         <methodname>unserialize()</methodname> übergeben werden.
     </para>
 
-    <example id="zend.serializer.introduction.example.static.php">
-        <title>Das statische Interface von Zend_Serializer verwenden</title>
+    <example xml:id="zend.serializer.introduction.example.static.php"><info><title>Das statische Interface von Zend_Serializer verwenden</title></info>
+        
 
         <para>
             Man kann einen spezifischen Serialisierungs-Adapter als standardmäßigen
@@ -109,4 +107,4 @@ try {
 }
 ]]></programlisting>
     </example>
-</sect1>
+</section>

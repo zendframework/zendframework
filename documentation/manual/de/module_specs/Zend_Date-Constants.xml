@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21215 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.date.constants">
-    <title>Konstanten für generelle Datums Funktionen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.constants"><info><title>Konstanten für generelle Datums Funktionen</title></info>
+    
 
     <para>
         Wo auch immer eine <classname>Zend_Date</classname> Methode einen <varname>$parts</varname>
@@ -11,8 +9,8 @@
         bestimmtes Datumsformat benutzt werden oder gewünscht ist (z.B. <acronym>RFC</acronym> 822).
     </para>
 
-    <sect2 id="zend.date.constants.using">
-        <title>Konstanten benutzen</title>
+    <section xml:id="zend.date.constants.using"><info><title>Konstanten benutzen</title></info>
+        
 
         <para>
             Zum Beispiel kann die Konstante <constant>Zend_Date::HOUR</constant> in den anbei
@@ -27,8 +25,8 @@
             mit Europe/GMT+1 Stunden (z.B. Österreich, Deutschland, Frankreich).
         </para>
 
-        <table id="zend.date.constants.using.table">
-            <title>Berechnungen die Zend_Date::HOUR beinhalten</title>
+        <table xml:id="zend.date.constants.using.table"><info><title>Berechnungen die Zend_Date::HOUR beinhalten</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -73,7 +71,7 @@
                         <entry><methodname>compare(12, Zend_Date::HOUR)</methodname></entry>
                         <entry>Stunden vergleichen, gibt 0, 1 oder -1 zurück</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
-                        <entry>1 (wenn Objekt > Argument)</entry>
+                        <entry>1 (wenn Objekt &gt; Argument)</entry>
                     </row>
 
                     <row>
@@ -121,10 +119,10 @@
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.date.constants.list">
-        <title>Liste aller Konstanten</title>
+    <section xml:id="zend.date.constants.list"><info><title>Liste aller Konstanten</title></info>
+        
 
         <para>
             Jeder Teil von Datum oder Zeit hat eine eindeutige Konstante in
@@ -132,8 +130,8 @@
             unterstützten Konstanten sind anbei aufgelistet.
         </para>
 
-        <table id="zend.date.constants.list.table-1">
-            <title>Konstanten für den Tag</title>
+        <table xml:id="zend.date.constants.list.table-1"><info><title>Konstanten für den Tag</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -237,8 +235,8 @@
             </tgroup>
         </table>
 
-        <table id="zend.date.constants.list.table-2">
-            <title>Konstanten für die Woche</title>
+        <table xml:id="zend.date.constants.list.table-2"><info><title>Konstanten für die Woche</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -261,8 +259,8 @@
             </tgroup>
         </table>
 
-        <table id="zend.date.constants.list.table-3">
-            <title>Konstanten für das Monat</title>
+        <table xml:id="zend.date.constants.list.table-3"><info><title>Konstanten für das Monat</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -328,8 +326,8 @@
             </tgroup>
         </table>
 
-        <table id="zend.date.constants.list.table-4">
-            <title>Konstanten für das Jahr</title>
+        <table xml:id="zend.date.constants.list.table-4"><info><title>Konstanten für das Jahr</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -385,8 +383,8 @@
             </tgroup>
         </table>
 
-        <table id="zend.date.constants.list.table-5">
-            <title>Konstanten für die Zeit</title>
+        <table xml:id="zend.date.constants.list.table-5"><info><title>Konstanten für die Zeit</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -479,8 +477,8 @@
             </tgroup>
         </table>
 
-        <table id="zend.date.constants.list.table-6">
-            <title>Konstanten für die Zeitzone</title>
+        <table xml:id="zend.date.constants.list.table-6"><info><title>Konstanten für die Zeitzone</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -555,8 +553,8 @@
             </tgroup>
         </table>
 
-        <table id="zend.date.constants.list.table-7">
-            <title>Konstanten für Datumsformate (Formate beinhalten die Zeitzone)</title>
+        <table xml:id="zend.date.constants.list.table-7"><info><title>Konstanten für Datumsformate (Formate beinhalten die Zeitzone)</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -591,7 +589,7 @@
                         <entry><constant>Zend_Date::TIMESTAMP</constant></entry>
 
                         <entry>
-                            <ulink url="http://en.wikipedia.org/wiki/Unix_Time">Unix Zeit</ulink>
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Unix_Time">Unix Zeit</link>
                             (Sekunden seit 1.1.1970, gemischt)
                         </entry>
 
@@ -682,8 +680,8 @@
             Tage wenn möglich.
         </para>
 
-        <table id="zend.date.constants.list.table-8">
-            <title>Datums- und Zeitformate (Formate variieren laut Gebietsschema)</title>
+        <table xml:id="zend.date.constants.list.table-8"><info><title>Datums- und Zeitformate (Formate variieren laut Gebietsschema)</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -828,10 +826,10 @@
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.date.constants.selfdefinedformats">
-        <title>Selbst-Definierte AUSGABE Formate mit ISO</title>
+    <section xml:id="zend.date.constants.selfdefinedformats"><info><title>Selbst-Definierte AUSGABE Formate mit ISO</title></info>
+        
 
         <para>
             Wenn ein Datumsformat benötigt wird, das oben nicht angeführt ist, kann auch ein
@@ -848,16 +846,15 @@
             Wie auch immer, nicht alle Format welche in der <acronym>ISO</acronym> Norm definiert
             sind, werden durch <acronym>PHP</acronym>'s date Formatbezeichner unterstützt. Die
             Verwendung der
-            <methodname>Zend_Date::setOptions(array('format_type' => 'php'))</methodname> Methode
+            <methodname>Zend_Date::setOptions(array('format_type' =&gt; 'php'))</methodname> Methode
             erlaubt es, für alle <classname>Zend_Date</classname> Methoden, zwischen der
             Unterstützung von <acronym>ISO</acronym> Formatbezeichnern und <acronym>PHP</acronym>
-            <methodname>date()</methodname> Typbezeichner zu wählen (siehe <link
-                linkend="zend.date.constants.phpformats">selbst definierte AUSGABE Formate bei
+            <methodname>date()</methodname> Typbezeichner zu wählen (siehe <link linkend="zend.date.constants.phpformats">selbst definierte AUSGABE Formate bei
                 Verwendung von PHP's date() Formatzeichen</link>).
         </para>
 
-        <example id="zend.date.constants.selfdefinedformats.example-1">
-            <title>Selbstdefinition von ISO Formaten</title>
+        <example xml:id="zend.date.constants.selfdefinedformats.example-1"><info><title>Selbstdefinition von ISO Formaten</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
@@ -866,8 +863,8 @@ print $date->toString("'Epoche:GGGG='GGGG, ' Datum:yy.MMMM.dd'yy.MMMM.dd");
 ]]></programlisting>
         </example>
 
-        <table id="zend.date.constants.selfdefinedformats.table">
-            <title>Konstanten für ISO 8601 Datums Ausgaben</title>
+        <table xml:id="zend.date.constants.selfdefinedformats.table"><info><title>Konstanten für ISO 8601 Datums Ausgaben</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -1301,36 +1298,35 @@ print $date->toString("'Epoche:GGGG='GGGG, ' Datum:yy.MMMM.dd'yy.MMMM.dd");
                 der richtige Bezeichner verwendet wurde.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.date.constants.phpformats">
-        <title>
+    <section xml:id="zend.date.constants.phpformats"><info><title>
             Selbst-definierte AUSGABE Formate welche PHP's date() Formatdefinition verwenden
-        </title>
+        </title></info>
+        
 
         <para>
             Wenn man mit <acronym>PHP</acronym>'s date Formatdefinition vertrauter ist als mit den
             <acronym>ISO</acronym> Formatdefinitionen, dann kann man durch Verwendung der Methode
-            <methodname>Zend_Date::setOptions(array('format_type' => 'php'))</methodname> das
+            <methodname>Zend_Date::setOptions(array('format_type' =&gt; 'php'))</methodname> das
             Wechseln von <acronym>ISO</acronym> Formatdefinition zu <acronym>PHP</acronym>
             <methodname>date()</methodname> Formatdefinition welche dann für alle
             <classname>Zend_Date</classname> Methoden verwendet werden wechseln. Danach müssen alle
-            Format Parameter in <ulink url="http://php.net/date">PHP's
-                <methodname>date()</methodname> Formatdefintion</ulink> angegeben werden. Das
+            Format Parameter in <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/date">PHP's
+                <methodname>date()</methodname> Formatdefintion</link> angegeben werden. Das
             <acronym>PHP</acronym> date Format vermisst einige der Formate welche durch
             <acronym>ISO</acronym> unterstützt werden und umgekehrt. Wenn keine Erfahrung damit
             besteht sollte auf alle Fälle das <acronym>ISO</acronym> Format genommen werden. Und
             wenn Altlast-Code vorhanden ist der <acronym>PHP</acronym>'s date Format verwendet, kann
             dieser entweder manuell in das <acronym>ISO</acronym> Format konvertiert werden indem
-            <link
-                linkend="zend.locale.date.normalize">Zend_Locale_Format::convertPhpToIsoFormat()</link>
+            <link linkend="zend.locale.date.normalize">Zend_Locale_Format::convertPhpToIsoFormat()</link>
             verwendet wird, oder durch Verwendung von <methodname>setOptions()</methodname>. Die
             folgenden Beispiel zeigen die Verwendung der Konstanten anhand der unteren Tabelle für
             die Erstellung von selbst-definierten Formaten.
         </para>
 
-        <example id="zend.date.constants.phpformats.example-1">
-            <title>Selbstdefinierte Formate mit PHP Bezeichnern</title>
+        <example xml:id="zend.date.constants.phpformats.example-1"><info><title>Selbstdefinierte Formate mit PHP Bezeichnern</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
@@ -1344,8 +1340,8 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
 ]]></programlisting>
         </example>
 
-        <important>
-            <title>PHP Datums Format und die Verwendung von Konstanten</title>
+        <important><info><title>PHP Datums Format und die Verwendung von Konstanten</title></info>
+            
 
             <para>
                 Es ist wichtig anzumerken das die Konstanten von <classname>Zend_Date</classname>
@@ -1370,8 +1366,8 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
             "<acronym>ISO</acronym>" Formatcode.
         </para>
 
-        <table id="zend.date.constants.phpformats.table">
-            <title>Konstanten für PHP date Ausgaben</title>
+        <table xml:id="zend.date.constants.phpformats.table"><info><title>Konstanten für PHP date Ausgaben</title></info>
+            
 
             <tgroup cols="5">
                 <thead>
@@ -1684,5 +1680,5 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
-</sect1>
+    </section>
+</section>

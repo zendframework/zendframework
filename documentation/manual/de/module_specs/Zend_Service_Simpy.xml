@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20818 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.service.simpy">
-    <title>Zend_Service_Simpy</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.simpy"><info><title>Zend_Service_Simpy</title></info>
+    
 
-    <sect2 id="zend.service.simpy.introduction">
-        <title>Einführung</title>
+    <section xml:id="zend.service.simpy.introduction"><info><title>Einführung</title></info>
+        
 
         <para>
             <classname>Zend_Service_Simpy</classname> ist ein schlanker Wrapper für das freie REST
@@ -15,10 +13,10 @@
         <para>
             Um <classname>Zend_Service_Simpy</classname> zu nutzen, solltest du bereits ein
             Simpy-Konto besitzen. Falls dies nicht der Fall ist, kannst du dies auf der
-            <ulink url="http://simpy.com">Simpy Webseite</ulink> tun. Für weitere Informationen über
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://simpy.com">Simpy Webseite</link> tun. Für weitere Informationen über
             das Simpy REST <acronym>API</acronym>, kannst du in der
-            <ulink url="http://www.simpy.com/doc/api/rest">Simpy REST <acronym>API</acronym>
-                Dokumentation</ulink> nachlesen.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.simpy.com/doc/api/rest">Simpy REST <acronym>API</acronym>
+                Dokumentation</link> nachlesen.
         </para>
 
         <para>
@@ -45,10 +43,10 @@
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.simpy.links">
-        <title>Links</title>
+    <section xml:id="zend.service.simpy.links"><info><title>Links</title></info>
+        
 
         <para>
             Beim Anfragen von Links, werden diese absteigend nach deren Datum - wann es
@@ -56,13 +54,13 @@
             der Tags, der Notizen oder sogar des Inhalts der verknüpften Webseite gesucht werden.
             Simpy erlaubt es, jegliche oder alle dieser Felder mit Phrasen, booleschen
             Operatoren und Wildcards zu durchsuchen. Siehe in den
-            <ulink url="http://www.simpy.com/faq#searchSyntax">Suchsyntax</ulink>- und
-            <ulink url="http://www.simpy.com/faq#searchFieldsLinks">Suchfelder</ulink>-Sektionen
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.simpy.com/faq#searchSyntax">Suchsyntax</link>- und
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.simpy.com/faq#searchFieldsLinks">Suchfelder</link>-Sektionen
             der Simipy FAQ für weitere Informationen.
         </para>
 
-        <example id="zend.service.simpy.links.querying">
-            <title>Abfragen von Links</title>
+        <example xml:id="zend.service.simpy.links.querying"><info><title>Abfragen von Links</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $simpy = new Zend_Service_Simpy('yourusername', 'yourpassword');
@@ -119,8 +117,8 @@ $linkQuery->setAfterDate('2006-12-09');
             alten Links mit den neuen Daten überschrieben.
         </para>
 
-        <example id="zend.service.simpy.links.modifying">
-            <title>Modifizieren von Links</title>
+        <example xml:id="zend.service.simpy.links.modifying"><info><title>Modifizieren von Links</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $simpy = new Zend_Service_Simpy('yourusername', 'yourpassword');
@@ -160,10 +158,10 @@ foreach ($linkSet as $link) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.simpy.tags">
-        <title>Tags</title>
+    <section xml:id="zend.service.simpy.tags"><info><title>Tags</title></info>
+        
 
         <para>
             Wenn die Tags zurückgegeben werden, werden sie in absteigender
@@ -171,8 +169,8 @@ foreach ($linkSet as $link) {
             Benutzung durch die Links sortiert.
         </para>
 
-        <example id="zend.service.simpy.tags.working">
-            <title>Arbeiten mit Tags</title>
+        <example xml:id="zend.service.simpy.tags.working"><info><title>Arbeiten mit Tags</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $simpy = new Zend_Service_Simpy('yourusername', 'yourpassword');
@@ -214,18 +212,18 @@ zusammen; vereinfacht ist es das Gegenteil, ein Tag zu splitten */
 $simpy->mergeTags('framework', 'development', 'frameworks');
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.simpy.notes">
-        <title>Notizen</title>
+    <section xml:id="zend.service.simpy.notes"><info><title>Notizen</title></info>
+        
 
         <para>
             Notizen können gespeichert, geladen und gelöscht werden. Sie sind
             eindeutig durch eine numerische ID definiert.
         </para>
 
-        <example id="zend.service.simpy.notes.working">
-            <title>Arbeiten mit Notizen</title>
+        <example xml:id="zend.service.simpy.notes.working"><info><title>Arbeiten mit Notizen</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $simpy = new Zend_Service_Simpy('yourusername', 'yourpassword');
@@ -270,10 +268,10 @@ $noteSet = $simpy->getNotes('+title:PHP -description:framework');
 $simpy->deleteNote($note->getId());
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.simpy.watchlists">
-        <title>Watchlists</title>
+    <section xml:id="zend.service.simpy.watchlists"><info><title>Watchlists</title></info>
+        
 
         <para>
             Watchlisten können durch das <acronym>API</acronym> nicht erstellt oder entfernt
@@ -282,8 +280,8 @@ $simpy->deleteNote($note->getId());
             über das <acronym>API</acronym> nutzt.
         </para>
 
-        <example id="zend.service.simpy.watchlists.retrieving">
-            <title>Zurückgeben von Watchlisten</title>
+        <example xml:id="zend.service.simpy.watchlists.retrieving"><info><title>Zurückgeben von Watchlisten</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $simpy = new Zend_Service_Simpy('yourusername', 'yourpassword');
@@ -322,5 +320,5 @@ $watchlist = $simpy->getWatchlist($watchlist->getId());
 $watchlist = $simpy->getWatchlist(1);
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

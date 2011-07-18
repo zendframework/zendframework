@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21826 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.request">
-    <title>Das Request Objekt</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.request"><info><title>Das Request Objekt</title></info>
+    
 
-    <sect2 id="zend.controller.request.introduction">
-        <title>Einführung</title>
+    <section xml:id="zend.controller.request.introduction"><info><title>Einführung</title></info>
+        
 
         <para>
             Das Request Objekt ist eine einfaches Wertobjekt, das zwischen
@@ -71,13 +69,13 @@
             <link linkend="zend.controller.response">Response Objekt</link> sind durchdachte und
             genaue Unit Tests für eine <acronym>MVC</acronym> Applikation möglich.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.request.http">
-        <title>HTTP Anfragen</title>
+    <section xml:id="zend.controller.request.http"><info><title>HTTP Anfragen</title></info>
+        
 
-        <sect3 id="zend.controller.request.http.dataacess">
-            <title>Auf Request Daten zugreifen</title>
+        <section xml:id="zend.controller.request.http.dataacess"><info><title>Auf Request Daten zugreifen</title></info>
+            
 
             <para>
                 <classname>Zend_Controller_Request_Http</classname> kapselt den Zugriff auf
@@ -91,8 +89,8 @@
                 Methoden um Benutzerparameter zu setzen oder zu erhalten.
             </para>
 
-            <note>
-                <title>Superglobale Daten</title>
+            <note><info><title>Superglobale Daten</title></info>
+                
 
                 <para>
                     Beim Zugriff auf superglobale Daten über die öffentlichen Eigenschaften von
@@ -115,8 +113,8 @@
                 <methodname>getHeader()</methodname>, um Request Header zu erhalten.
             </para>
 
-            <note>
-                <title>GET und POST Daten</title>
+            <note><info><title>GET und POST Daten</title></info>
+                
 
                 <para>
                     Vorsicht wenn auf Daten von einem Anfrage Objekt zugegriffen wird da diese in
@@ -126,8 +124,8 @@
                 </para>
             </note>
 
-            <note>
-                <title>Empfangen der rohen POST Daten!</title>
+            <note><info><title>Empfangen der rohen POST Daten!</title></info>
+                
 
                 <para>
                     Mit 1.5.0 können auch die rohen Post Daten über die
@@ -150,8 +148,8 @@
                 Anfrage Objekt zu setzen.
             </para>
 
-            <note>
-                <title>getParam() empfängt mehr als Benutzer Parameter</title>
+            <note><info><title>getParam() empfängt mehr als Benutzer Parameter</title></info>
+                
 
                 <para>
                     Um einiges Ihrer Arbeit zu tun, empfängt <methodname>getParam()</methodname>
@@ -177,8 +175,8 @@
                 </para>
             </note>
 
-            <note>
-                <title>Apache Quirks</title>
+            <note><info><title>Apache Quirks</title></info>
+                
 
                 <para>
                     Wenn Apache's 404 Handler verwendet wird um eingehende Anfragen an den Front
@@ -201,10 +199,10 @@ $front->setRequest($request);
                     <acronym>URI</acronym>. Sie kann als einfache Ersetzung verwendet werden.
                 </para>
             </note>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.request.http.baseurl">
-            <title>Basis Url und Unterverzeichnisse</title>
+        <section xml:id="zend.controller.request.http.baseurl"><info><title>Basis Url und Unterverzeichnisse</title></info>
+            
 
             <para>
                 <classname>Zend_Controller_Request_Http</classname> erlaubt, dass
@@ -225,8 +223,8 @@ $front->setRequest($request);
                 <filename>http://example.com/user/martel</filename>.
             </para>
 
-            <note>
-                <title>URL Erkennung beachtet Groß- und Kleinschreibung</title>
+            <note><info><title>URL Erkennung beachtet Groß- und Kleinschreibung</title></info>
+                
 
                 <para>
                     Die automatische Erkennung der Basis <acronym>URL</acronym> beachtet die Groß-
@@ -257,10 +255,10 @@ $controller->setControllerDirectory('./application/controllers')
            ->setBaseUrl('/projects/myapp'); // Setze die Basis URL!
 $response   = $controller->dispatch();
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.request.http.method">
-            <title>Erkennen der Anfrage Methode</title>
+        <section xml:id="zend.controller.request.http.method"><info><title>Erkennen der Anfrage Methode</title></info>
+            
 
             <para>
                 <methodname>getMethod()</methodname> erlaubt es die <acronym>HTTP</acronym> Anfrage
@@ -282,10 +280,10 @@ $response   = $controller->dispatch();
                 Der grundsätzliche Verwendungszweck hierfür ist die Erstellung von RESTvollen
                 <acronym>MVC</acronym> Architekturen.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.request.http.ajax">
-            <title>Erkennen von AJAX Anfragen</title>
+        <section xml:id="zend.controller.request.http.ajax"><info><title>Erkennen von AJAX Anfragen</title></info>
+            
 
             <para>
                 <classname>Zend_Controller_Request_Http</classname> hat eine rudimentäre Methode für
@@ -320,11 +318,11 @@ $response   = $controller->dispatch();
                 sicherzustellen das die <methodname>isXmlHttpRequest()</methodname> Methode
                 funktioniert.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.controller.request.subclassing">
-        <title>Vererben des Anfrage Objektes</title>
+    <section xml:id="zend.controller.request.subclassing"><info><title>Vererben des Anfrage Objektes</title></info>
+        
 
         <para>
             Die Basis Anfrage Klasse die für alle Anfrage Objekte verwendet wird ist die abstrakte
@@ -431,5 +429,5 @@ abstract class Zend_Controller_Request_Abstract
                 <acronym>HTTP</acronym> Umgebung</link>, eine <acronym>CLI</acronym> Umgebung, oder
             eine <acronym>PHP</acronym>-GTK Umgebung.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

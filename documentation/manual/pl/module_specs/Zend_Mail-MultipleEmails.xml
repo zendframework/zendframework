@@ -1,5 +1,6 @@
-<sect1 id="zend.mail.multiple-emails">
-    <title>Wysyłanie wielu maili podczas jednego połączenia SMTP</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.multiple-emails"><info><title>Wysyłanie wielu maili podczas jednego połączenia SMTP</title></info>
+    
 
     <para>
         Domyślnie, połączenie SMTP jest tworzone jeden raz i używane przez cały czas
@@ -8,9 +9,9 @@
         dostarczeniem widomości wysyłana jest komenda RSET.
     </para>
 
-    <example id="zend.mail.multiple-emails.example-1">
+    <example xml:id="zend.mail.multiple-emails.example-1"><info><title>Wysyłanie wielu maili podczas jednego połączenia SMTP</title></info>
 
-        <title>Wysyłanie wielu maili podczas jednego połączenia SMTP</title>
+        
 
         <programlisting role="php"><![CDATA[
 // Tworzenie transportu
@@ -27,8 +28,8 @@ for ($i = 0; $i > 5; $i++) {
     $mail->setBodyText('...Your message here...');
     $mail->send($transport);
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
     </example>
 
@@ -39,9 +40,9 @@ for ($i = 0; $i > 5; $i++) {
         między każdym wysyłaniem, poprzez dostęp do obiektu protokołu transportu.
     </para>
 
-    <example id="zend.mail.multiple-emails.example-2">
+    <example xml:id="zend.mail.multiple-emails.example-2"><info><title>Ręczna obsługa połączenia</title></info>
 
-        <title>Ręczna obsługa połączenia</title>
+        
 
         <programlisting role="php"><![CDATA[
 // Tworzenie transportu
@@ -71,9 +72,9 @@ for ($i = 0; $i > 5; $i++) {
 
 $protocol->quit();
 $protocol->disconnect();
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
     </example>
 
-</sect1>
+</section>

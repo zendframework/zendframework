@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.cache.theory">
-    <title>Teoria buforowania</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.theory"><info><title>Teoria buforowania</title></info>
+    
     <para>
         Są trzy kluczowe składniki w <classname>Zend_Cache</classname>. Pierwszym jest unikalny
         identyfikator (łańcuch znakow) który jest używany do identyfikowania
@@ -32,8 +31,8 @@
         buforze. Z drugiej strony, gdy bufor istnieje, backend automatycznie
         pobierze rekord z bufora.
     </para></note>
-    <sect2 id="zend.cache.factory">
-        <title>Metoda fabryki Zend_Cache</title>
+    <section xml:id="zend.cache.factory"><info><title>Metoda fabryki Zend_Cache</title></info>
+        
         <para>
             Dobrym sposobem utworzenia użytecznej instancji frontendu
             <classname>Zend_Cache</classname> jest ten pokazany w poniższym przykładzie:
@@ -68,10 +67,10 @@ $cache = Zend_Cache::factory($frontendName,
             instancje frontendu. Tworzenie instancji frontendu czy backendu
             nie będzie przynosiło oczekiwanych rezultatów.
         </para></note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.cache.tags">
-        <title>Nadawanie etykiet rekordom</title>
+    <section xml:id="zend.cache.tags"><info><title>Nadawanie etykiet rekordom</title></info>
+        
         <para>
             Etykiety są sposobem kategoryzowania rekordów bufora. Kiedy zapisujesz bufor
             za pomocą metody <methodname>save()</methodname>, możesz ustawić tablicę etykiet, które
@@ -87,9 +86,9 @@ $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
             inna od false, ustawiany jest określony czas ważności dla
             konkretnego rekordu bufora.
         </para></note>
-    </sect2>
-    <sect2 id="zend.cache.clean">
-        <title>Czyszczenie bufora</title>
+    </section>
+    <section xml:id="zend.cache.clean"><info><title>Czyszczenie bufora</title></info>
+        
         <para>
             Aby usunąć/unieważnić rekord bufora o określonym id, możesz użyć
             metody <methodname>remove()</methodname>:
@@ -144,5 +143,5 @@ $cache->clean(
             nazwa wskazuje, mogą w operacji czyszczenia być użyte wraz z tablicą
             etykiet.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

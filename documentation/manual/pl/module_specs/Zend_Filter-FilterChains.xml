@@ -1,6 +1,7 @@
-<sect1 id="zend.filter.filter_chains">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.filter_chains"><info><title>Łańcuchy filtrów</title></info>
 
-    <title>Łańcuchy filtrów</title>
+    
 
     <para>
         Często do pewnej wartości potrzebujemy zastosować wiele filtrów w
@@ -18,8 +19,8 @@ $filterChain->addFilter(new Zend_Filter_Alpha())
 
 // Filtrujemy nazwę użytkownika
 $username = $filterChain->filter($_POST['username']);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         Filtry są uruchamiane w takiej kolejności, w jakiej zostają dodane do
         <code>Zend_Filter</code>. W powyższym przykładzie z nazwy użytkownika
@@ -33,4 +34,4 @@ $username = $filterChain->filter($_POST['username']);
         interfejs <code>Zend_Filter_Interface</code>.
     </para>
 
-</sect1>
+</section>

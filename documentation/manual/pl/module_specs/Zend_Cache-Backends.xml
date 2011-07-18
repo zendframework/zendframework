@@ -1,18 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.cache.backends">
-    <title>Backendy Zend_Cache</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.backends"><info><title>Backendy Zend_Cache</title></info>
+    
 
-    <sect2 id="zend.cache.backends.file">
-        <title>Zend_Cache_Backend_File</title>
+    <section xml:id="zend.cache.backends.file"><info><title>Zend_Cache_Backend_File</title></info>
+        
         <para>
             Ten backend przechowuje rekordy bufora w plikach (w wybranym katalogu).
         </para>
         <para>
             Dostępne opcje to:
         </para>
-        <table id="zend.cache.backends.file.table">
-            <title>Opcje backendu File</title>
+        <table xml:id="zend.cache.backends.file.table"><info><title>Opcje backendu File</title></info>
+            
             <tgroup cols="4">
                  <thead>
                       <row>
@@ -115,17 +114,17 @@
                   </tbody>
               </tgroup>
           </table>
-    </sect2>
-    <sect2 id="zend.cache.backends.sqlite">
-        <title>Zend_Cache_Backend_Sqlite</title>
+    </section>
+    <section xml:id="zend.cache.backends.sqlite"><info><title>Zend_Cache_Backend_Sqlite</title></info>
+        
         <para>
             Ten backend przechowuje rekordy bufora w bazie SQLite.
         </para>
         <para>
             Dostępne opcje to:
         </para>
-        <table id="zend.cache.backends.sqlite.table">
-            <title>Opcje backendu Sqlite</title>
+        <table xml:id="zend.cache.backends.sqlite.table"><info><title>Opcje backendu Sqlite</title></info>
+            
             <tgroup cols="4">
                  <thead>
                       <row>
@@ -154,19 +153,19 @@
                               gdy wywoływane są metody clean() lub delete():
                               0 oznacza brak automatycznego czyszczenia ;
                               1 oznacza systematyczne czyszczenie (gdy wywoływane są metody delete() lub clean()) ;
-                              x (integer) > 1 => automatyczne czyszczenie losow 1 raz na x wywołań clean() lub delete().
+                              x (integer) &gt; 1 =&gt; automatyczne czyszczenie losow 1 raz na x wywołań clean() lub delete().
                           </entry>
                       </row>
                   </tbody>
               </tgroup>
           </table>
-    </sect2>
-    <sect2 id="zend.cache.backends.memcached">
-        <title>Zend_Cache_Backend_Memcached</title>
+    </section>
+    <section xml:id="zend.cache.backends.memcached"><info><title>Zend_Cache_Backend_Memcached</title></info>
+        
         <para>
-            Ten backend przechowuje rekordy bufora w serwerze memcached. <ulink url="http://www.danga.com/memcached/">memcached</ulink>
+            Ten backend przechowuje rekordy bufora w serwerze memcached. <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.danga.com/memcached/">memcached</link>
             jest systemem buforowania w pamięci rozdzielonej o wysokiej wydajności. Aby użyć tego backendu,
-            potrzebujesz działającego serwera memcached oraz <ulink url="http://pecl.php.net/package/memcache">rozszerzenia PECL memcache</ulink>.
+            potrzebujesz działającego serwera memcached oraz <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://pecl.php.net/package/memcache">rozszerzenia PECL memcache</link>.
         </para>
         <para>
             Bądź odstrożny: w tym backendzie nie są obecnie obsługiwane etykiety,
@@ -175,8 +174,8 @@
         <para>
             Dostępne opcje to:
         </para>
-        <table id="zend.cache.backends.memcached.table">
-            <title>Opcje backendu Memcached</title>
+        <table xml:id="zend.cache.backends.memcached.table"><info><title>Opcje backendu Memcached</title></info>
+            
             <tgroup cols="4">
                  <thead>
                       <row>
@@ -191,20 +190,20 @@
                           <entry><emphasis>servers</emphasis></entry>
                           <entry><type>Array</type></entry>
                           <entry>
-                              array(array('host' => 'localhost', 'port' => 11211, 'persistent' =>
-                                     true, 'weight' => 1, 'timeout' => 5, 'retry_interval' => 15,
-                                     'status' => true, 'failure_callback' => '' ))
+                              array(array('host' =&gt; 'localhost', 'port' =&gt; 11211, 'persistent' =&gt;
+                                     true, 'weight' =&gt; 1, 'timeout' =&gt; 5, 'retry_interval' =&gt; 15,
+                                     'status' =&gt; true, 'failure_callback' =&gt; '' ))
                           </entry>
                           <entry>
                               Tablica serwerów memcached ; każdy serwer memcached jest 
-                              opisany przez asocjacyjną tablicę : 'host' => (string) : nazwa 
-                              serwera memcached, 'port' => (int) : port serwera memcached,
-                              'persistent' => (bool) : używać czy nie używać stałych 
-                              połączeń do tego serwera memcached, 'weight' => (int) : 
-                              waga serwera memcached, 'timeout' => (int) : timeout 
-                              serwera memcached, 'retry_interval' => (int) : przerwa
-                              między ponowieniami, 'status' => (bool) : status serwera 
-                              memcached, 'failure_callback' => (callback) : opcja  
+                              opisany przez asocjacyjną tablicę : 'host' =&gt; (string) : nazwa 
+                              serwera memcached, 'port' =&gt; (int) : port serwera memcached,
+                              'persistent' =&gt; (bool) : używać czy nie używać stałych 
+                              połączeń do tego serwera memcached, 'weight' =&gt; (int) : 
+                              waga serwera memcached, 'timeout' =&gt; (int) : timeout 
+                              serwera memcached, 'retry_interval' =&gt; (int) : przerwa
+                              między ponowieniami, 'status' =&gt; (bool) : status serwera 
+                              memcached, 'failure_callback' =&gt; (callback) : opcja  
                               failure_callback serwera memcached
                           </entry>
                       </row>
@@ -228,12 +227,12 @@
                   </tbody>
               </tgroup>
           </table>
-    </sect2>
-    <sect2 id="zend.cache.backends.apc">
-        <title>Zend_Cache_Backend_Apc</title>
+    </section>
+    <section xml:id="zend.cache.backends.apc"><info><title>Zend_Cache_Backend_Apc</title></info>
+        
         <para>
             Ten backend przechowuje rekordy bufora we współdzielonej pamięci za
-            pomocą rozszerzenia <ulink url="http://pecl.php.net/package/APC">APC</ulink>
+            pomocą rozszerzenia <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://pecl.php.net/package/APC">APC</link>
             (Alternatywny bufor PHP), które oczywiście jest wymagane jeśli chcemy
             użyć tego backendu.
         </para>
@@ -244,12 +243,12 @@
         <para>
             Ten backend nie ma żadnych opcji.
         </para>
-    </sect2>
-    <sect2 id="zend.cache.backends.xcache">
-        <title>Zend_Cache_Backend_Xcache</title>
+    </section>
+    <section xml:id="zend.cache.backends.xcache"><info><title>Zend_Cache_Backend_Xcache</title></info>
+        
         <para>
             Ten backend przechowuje rekordy buforu we współdzielonej pamięci
-            za pomocą rozszerzenia <ulink url="http://xcache.lighttpd.net/">XCache</ulink>
+            za pomocą rozszerzenia <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://xcache.lighttpd.net/">XCache</link>
             (które oczywiście jest potrzebne aby móc używać tego backendu).
         </para>
         <para>
@@ -259,8 +258,8 @@
         <para>
             Dostępne opcje to:
         </para>
-        <table id="zend.cache.backends.xcache.table">
-            <title>Opcje backendu Xcache</title>
+        <table xml:id="zend.cache.backends.xcache.table"><info><title>Opcje backendu Xcache</title></info>
+            
             <tgroup cols="4">
                  <thead>
                       <row>
@@ -290,11 +289,11 @@
                   </tbody>
               </tgroup>
           </table>
-    </sect2>
-    <sect2 id="zend.cache.backends.platform">
-        <title>Zend_Cache_Backend_ZendPlatform</title>
+    </section>
+    <section xml:id="zend.cache.backends.platform"><info><title>Zend_Cache_Backend_ZendPlatform</title></info>
+        
         <para>
-            Ten backend używa API produktu <ulink url="http://www.zend.com/products/platform">Zend Platform</ulink> do buforowania zawartości. Oczywiście aby użyć tego backendu, musisz mieć zainstalowaną aplikację Zend Platform.
+            Ten backend używa API produktu <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.com/products/platform">Zend Platform</link> do buforowania zawartości. Oczywiście aby użyć tego backendu, musisz mieć zainstalowaną aplikację Zend Platform.
         </para>
         <para>
             Ten backend obsługuje etykiety, ale nie obsługuje trybu <constant>CLEANING_MODE_NOT_MATCHING_TAG</constant> czyszczenia bufora.
@@ -311,9 +310,9 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
         <para>
             Ten backend nie ma żadnych opcji.
         </para>
-    </sect2>
-    <sect2 id="zend.cache.backends.twolevels">
-        <title>Zend_Cache_Backend_TwoLevels</title>
+    </section>
+    <section xml:id="zend.cache.backends.twolevels"><info><title>Zend_Cache_Backend_TwoLevels</title></info>
+        
         <para>
             Ten backend jest backendem hybrydowym. PRzechowuje on rekordu buforu 
             w dwóch innych backendach : w szybkim (ale ograniczonym) jak Apc, Memcache... 
@@ -328,8 +327,8 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
         <para>
             Dostępne opcje to :
         </para>
-        <table id="zend.cache.backends.twolevels.table">
-            <title>Opcje backendu TwoLevels</title>
+        <table xml:id="zend.cache.backends.twolevels.table"><info><title>Opcje backendu TwoLevels</title></info>
+            
             <tgroup cols="4">
                  <thead>
                       <row>
@@ -438,13 +437,12 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
                   </tbody>
               </tgroup>
           </table>
-    </sect2>
-    <sect2 id="zend.cache.backends.zendserver">
-        <title>Zend_Cache_Backend_ZendServer_Disk oraz Zend_Cache_Backend_ZendServer_ShMem</title>
+    </section>
+    <section xml:id="zend.cache.backends.zendserver"><info><title>Zend_Cache_Backend_ZendServer_Disk oraz Zend_Cache_Backend_ZendServer_ShMem</title></info>
+        
         <para>
-            Te backendy przechowują rekordu bufora używając metod buforowania serwera <ulink
-                url="http://www.zend.com/en/products/server/downloads-all?zfs=zf_download">Zend
-                Server</ulink>.
+            Te backendy przechowują rekordu bufora używając metod buforowania serwera <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.com/en/products/server/downloads-all?zfs=zf_download">Zend
+                Server</link>.
         </para>
         <para>
              Bądź ostrożny: te backendy nie obsługują opcji "etykiet" oraz
@@ -457,5 +455,5 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
         <para>
             Te backendy nie posiadaja opcji.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

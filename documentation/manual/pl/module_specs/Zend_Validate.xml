@@ -1,6 +1,7 @@
-<sect1 id="zend.validate.introduction">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.introduction"><info><title>Wprowadzenie</title></info>
 
-    <title>Wprowadzenie</title>
+    
 
     <para>
         Komponent Zend_Validate zapewnia zestaw najczęściej potrzebnych
@@ -9,9 +10,9 @@
         danej w kolejności zdefiniowanej przez programistę.
     </para>
 
-    <sect2 id="zend.validate.introduction.definition">
+    <section xml:id="zend.validate.introduction.definition"><info><title>Czym jest weryfikator?</title></info>
 
-        <title>Czym jest weryfikator?</title>
+        
 
         <para>
             Weryfikator bada dane wejściowe w oparciu o pewne wymagania i tworzy
@@ -30,11 +31,11 @@
             by było wiedzieć, które z wymagań nie zostało spełnione.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.validate.introduction.using">
+    <section xml:id="zend.validate.introduction.using"><info><title>Podstawowe użycie weryfikatorów</title></info>
 
-        <title>Podstawowe użycie weryfikatorów</title>
+        
 
         <para>
             Mająć ustaloną w ten sposób definicję weryfikacji, możemy zapewnić
@@ -86,16 +87,16 @@ if ($validator->isValid($email)) {
         echo "Weryfikacja nieudana '$messageId': $message\n";
     }
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.validate.introduction.messages">
+    <section xml:id="zend.validate.introduction.messages"><info><title>Własne komunikaty</title></info>
 
-        <title>Własne komunikaty</title>
+        
 
         <para>
             Klasy weryfikatorów zapewniają metodę <code>setMessage()</code> za
@@ -142,8 +143,8 @@ if (!$validator->isValid('word')) {
     // "Łańcuch znaków 'word' jest za krotki;
     // musi składać się z przynajmniej 8 znaków"
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </para>
 
         <para>
@@ -160,8 +161,8 @@ $validator->setMessages( array(
     Zend_Validate_StringLength::TOO_LONG  =>
         'Łańcuch znaków \'%value%\' jest za długi'
 ));
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </para>
 
@@ -186,15 +187,15 @@ if (!validator->isValid('word')) {
         . $validator->max
         . "\n";
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.validate.introduction.static">
+    <section xml:id="zend.validate.introduction.static"><info><title>Użycie statycznej metody <code>is()</code></title></info>
 
-        <title>Użycie statycznej metody <code>is()</code></title>
+        
 
         <para>
             Jeśli niewygodne jest ładowanie danej klasy weryfikatora i tworzenie
@@ -211,8 +212,8 @@ if (!validator->isValid('word')) {
 if (Zend_Validate::is($email, 'EmailAddress')) {
     // Tak, adres email jest poprawny
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </para>
 
@@ -224,8 +225,8 @@ if (Zend_Validate::is($email, 'EmailAddress')) {
 if (Zend_Validate::is($value, 'Between', array(1, 12))) {
     // Tak, wartość $value jest pomiędzy 1 i 12
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </para>
 
@@ -247,9 +248,9 @@ if (Zend_Validate::is($value, 'Between', array(1, 12))) {
             Dodatkowo klasa <code>Zend_Filter_Input</code> pozwala na utworzenie
             instancji i wywołanie większej ilości klas filtrów i weryfikatorów w
             celu przetworzenia zestawu danych wejściowych. Zobacz
-            <xref linkend="zend.filter.input" />.
+            <xref linkend="zend.filter.input"/>.
         </para>
 
-    </sect2>
+    </section>
 
-</sect1>
+</section>

@@ -1,9 +1,11 @@
-<sect1 id="zend.dojo.introduction">
-    <title>Wprowadzenie</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.introduction"><info><title>Wprowadzenie</title></info>
+    
 
     <para>
-        Od wersji 1.6.0, Zend Framework zawiera bibliotekę <ulink
-            url="http://dojotoolkit.org">Dojo Toolkit</ulink> aby umożliwić
+        Od wersji 1.6.0, Zend Framework zawiera bibliotekę <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org">Dojo Toolkit</link> aby umożliwić
         tworzenie nowoczesnych aplikacji bez konieczności instalowania
         dodatkowych bibliotek. ZF został zintegrowany z Dojo w następujących
         zakresach:
@@ -28,7 +30,4 @@
         Network), które oferują Dojo (ZF obsługuje zarówno oficjalny AOL CDN jak
         i Google CDN).
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

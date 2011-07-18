@@ -1,13 +1,14 @@
-<sect1 id="zend.feed.consuming-rss">
-    <title>Odbieranie danych z kanału informacyjnego RSS</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-rss"><info><title>Odbieranie danych z kanału informacyjnego RSS</title></info>
+    
     <para>
         Odczytywanie kanału RSS jest tak proste jak utworzenie obiektu <code>Zend_Feed_Rss</code> z adresem
         URL kanału przekazanym do konstruktora:
     </para>
     <programlisting role="php"><![CDATA[
 $channel = new Zend_Feed_Rss('http://rss.example.com/channelName');
-]]>
-    </programlisting>
+
+    ]]></programlisting>
     <para>
         Jeśli wystąpi jakiś błąd podczas obróbki danych pochodzących z kanału,
         zostanie wyrzucony wyjątek <code>Zend_Feed_Exception</code>.
@@ -19,13 +20,13 @@ $channel = new Zend_Feed_Rss('http://rss.example.com/channelName');
     </para>
     <programlisting role="php"><![CDATA[
 echo $channel->title();
-]]>
-    </programlisting>
+
+    ]]></programlisting>
     <para>
         Zwróć uwagę na składnie funkcji. <code>Zend_Feed</code> używa konwencji
         traktującej właściwości jak obiekt XML gdy próbujemy uzyskać do nich dostęp
-        za pomocą składni "getter" (<code>$obj->property</code>) i jako łańcuch
-        znaków gdy próbujemy uzyskać dostęp jak do metody (<code>$obj->property()</code>).
+        za pomocą składni "getter" (<code>$obj-&gt;property</code>) i jako łańcuch
+        znaków gdy próbujemy uzyskać dostęp jak do metody (<code>$obj-&gt;property()</code>).
         To pozwala na pełny dostęp do danych tekstowych przy jednoczesnym dostępie
         do wszystkich niższych składników.
     </para>
@@ -36,8 +37,8 @@ echo $channel->title();
     </para>
     <programlisting role="php"><![CDATA[
 echo $channel->category['domain'];
-]]>
-    </programlisting>
+
+    ]]></programlisting>
     <para>
         Since XML attributes cannot have children, method syntax is not necessary for accessing attribute
         values.
@@ -53,8 +54,8 @@ echo $channel->category['domain'];
 foreach ($channel as $item) {
     echo $item->title() . "\n";
 }
-]]>
-    </programlisting>
+
+    ]]></programlisting>
     <para>
         Jeśli nie jesteś obeznany z RSS, poniżej znajdziesz opis podstawowych
         składników, które możesz znaleść w kanale RSS i w jego indywidualnych
@@ -140,17 +141,17 @@ foreach ($channel as $item) {
 if ($item->propname()) {
     // ... kontynuuj.
 }
-]]>
-    </programlisting>
+
+    ]]></programlisting>
 
     <para>
-        Jeśli zamiast tego użyjesz <code>$item->propname</code>, zawsze dostaniesz
+        Jeśli zamiast tego użyjesz <code>$item-&gt;propname</code>, zawsze dostaniesz
         pusty obiekt który zostanie skonwertowany do wartości <code>TRUE</code>,
         więc test zawiedzie.
     </para>
 
     <para>
         Więcej informacji dostępnych jest w oficjalnej specyfikacji RSS 2.0:
-        <ulink url="http://blogs.law.harvard.edu/tech/rss">http://blogs.law.harvard.edu/tech/rss</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://blogs.law.harvard.edu/tech/rss">http://blogs.law.harvard.edu/tech/rss</link>
     </para>
-</sect1>
+</section>

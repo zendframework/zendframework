@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21819 -->
-<!-- Reviewed: yes -->
-<sect1 id="learning.quickstart.create-model">
-    <title>Utworzenie modelu oraz tabeli w bazie danych</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.create-model"><info><title>Utworzenie modelu oraz tabeli w bazie danych</title></info>
+    
 
     <para>
         Przed rozpoczęciem należy zastanowić się nad następującym zagadnieniem: gdzie tworzone
@@ -374,8 +372,8 @@ Data Loaded.
 
     <para>
         Aby łączyć się ze źródłem danych użyty zostanie wzorzec
-        <ulink url="http://martinfowler.com/eaaCatalog/tableDataGateway.html">Table Data
-        Gateway</ulink> udostępniany poprzez klasę <classname>Zend_Db_Table</classname>.
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://martinfowler.com/eaaCatalog/tableDataGateway.html">Table Data
+        Gateway</link> udostępniany poprzez klasę <classname>Zend_Db_Table</classname>.
         Na początek należy utworzyć klasę opartą o  <classname>Zend_Db_Table</classname>.
         Podobnie jak przy layoucie oraz adapterze bazy danych - można skorzystać z narzędzia
         <command>zf</command> i jego komendy <command>create db-table</command>. Należy przy tym
@@ -424,7 +422,7 @@ class Application_Model_DbTable_Guestbook extends Zend_Db_Table_Abstract
 
     <para>
         Teraz należy utworzyć klasę mapującą obiekt w aplikacji na obiekt w bazie danych czyli
-        <ulink url="http://martinfowler.com/eaaCatalog/dataMapper.html">Data Mapper</ulink>.
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://martinfowler.com/eaaCatalog/dataMapper.html">Data Mapper</link>.
         Obiektem w bazie danych jest <classname>Application_Model_Guestbook</classname> natomiast
         za obiekt bazy danych odpowiada <classname>Application_Model_DbTable_Guestbook</classname>.
         Typowe <acronym>API</acronym> takiej klasy wygląda następująco:
@@ -721,8 +719,8 @@ Guestbook Entries: <br />
 </dl>
 ]]></programlisting>
 
-    <note>
-        <title>Punkt kontrolny</title>
+    <note><info><title>Punkt kontrolny</title></info>
+        
 
         <para>
             Teraz, po przejściu do "http://localhost/guestbook" powinna się pojawić lista
@@ -730,13 +728,12 @@ Guestbook Entries: <br />
         </para>
 
         <para>
-            <inlinegraphic width="525" scale="100" align="center" valign="middle"
-                fileref="figures/learning.quickstart.create-model.png" format="PNG" />
+            <inlinemediaobject><imageobject><imagedata width="525" scale="100" align="center" valign="middle" fileref="figures/learning.quickstart.create-model.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
     </note>
 
-    <note>
-        <title>Użycie skryptu ładującego dane</title>
+    <note><info><title>Użycie skryptu ładującego dane</title></info>
+        
 
         <para>
             Skrypt ładujący dane pokazany we wcześniejszej części tego rozdziału
@@ -762,4 +759,4 @@ Usage: load.sqlite.php [ options ]
             odpowiednią wartością tego parametru dla każdego ze środowisk.
         </para>
     </note>
-</sect1>
+</section>

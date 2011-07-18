@@ -1,19 +1,21 @@
-<sect3 id="zend.view.helpers.initial.inlinescript">
-    <title>Helper InlineScript</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.inlinescript"><info><title>Helper InlineScript</title></info>
+    
 
     <para>
         Znacznik HTML <code>&lt;script&gt;</code> używany jest zarówno do
         wstawiania kodu skryptów wykonujących się po stronie klienta do treści
         dokumentu jak i do załączania zewnętrznych plików zawierających taki
         skrypty. Helper <code>InlineScript</code> pozwala ci na obsłużenie obu
-        sposobów. Wywodzi się on z <link
-            linkend="zend.view.helpers.initial.headscript">helpera HeadScript</link>
+        sposobów. Wywodzi się on z <link linkend="zend.view.helpers.initial.headscript">helpera HeadScript</link>
         więc dostępne są wszystkie jego metody; z tą różnicą, że tu używaj metody
         <code>inlineScript()</code> zamiast metody <code>headScript()</code>.
     </para>
 
-    <note>
-        <title>Używaj helpera InlineScript dla skryptów w sekcji HTML Body</title>
+    <note><info><title>Używaj helpera InlineScript dla skryptów w sekcji HTML Body</title></info>
+        
 
         <para>
             Helpera <code>InlineScript</code> powinieneś użyć gdy chcesz dołączyć
@@ -29,7 +31,4 @@
             dla tych skryptów.
         </para>
     </note>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

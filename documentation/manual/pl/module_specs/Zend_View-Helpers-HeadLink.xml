@@ -1,5 +1,6 @@
-<sect3 id="zend.view.helpers.initial.headlink">
-    <title>Helper HeadLink</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headlink"><info><title>Helper HeadLink</title></info>
+    
 
     <para>
         Element HTML <code>&lt;link&gt;</code> jest używany do dołączania różnego
@@ -62,8 +63,8 @@
             Placeholder</link>.
     </para>
 
-    <example id="zend.view.helpers.initial.headlink.basicusage">
-        <title>Proste użycie helpera HeadLink</title>
+    <example xml:id="zend.view.helpers.initial.headlink.basicusage"><info><title>Proste użycie helpera HeadLink</title></info>
+        
 
         <para>
             Możesz użyć helpera <code>headLink</code> w dowolnym momencie.
@@ -83,7 +84,7 @@ $this->headLink()->appendStylesheet('/styles/basic.css')
 ?>
 <?php // generowaie łącz: ?>
 <?= $this->headLink() ?>
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
-</sect3>
+</section>

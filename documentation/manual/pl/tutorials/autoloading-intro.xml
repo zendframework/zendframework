@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19782 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.autoloading.intro">
-    <title>Wprowadzenie</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.intro"><info><title>Wprowadzenie</title></info>
+    
 
     <para>
         Autoloader to mechanizm, który eliminuje potrzebę ręcznego dołączania
         plików w kodzie <acronym>PHP</acronym>. Według
-        <ulink url="http://php.net/autoload">dokumentacji autoloadera PHP</ulink> po skonfigurowaniu
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/autoload">dokumentacji autoloadera PHP</link> po skonfigurowaniu
         autoloadera, będzie on uruchomiony automatycznie w sytuacji, w której zajdzie
         próba użycia niezdefiniowanej klasy bądź interfejsu.
     </para>
@@ -31,4 +31,4 @@
         automatycznego dołączania bibliotek jak i kodu samej aplikacji. Niniejszy tutorial opisuje
         te narzędzia jak i sposób ich efektywnego użycia.
     </para>
-</sect1>
+</section>

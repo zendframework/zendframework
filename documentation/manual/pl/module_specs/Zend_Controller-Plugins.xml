@@ -1,8 +1,9 @@
-<sect1 id="zend.controller.plugins" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Wtyczki</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.plugins"><info><title>Wtyczki</title></info>
+    
 
-    <sect2 id="zend.controller.plugins.introduction">
-        <title>Wprowadzenie</title>
+    <section xml:id="zend.controller.plugins.introduction"><info><title>Wprowadzenie</title></info>
+        
 
         <para>
             Architektura kontrolera zawiera także system wtyczek, który pozwala
@@ -24,8 +25,7 @@
             <listitem>
                 <para>
                     Metoda <code>routeStartup()</code> jest wywoływana zanim
-                    <code>Zend_Controller_Front</code> wywoła <link
-                        linkend="zend.controller.router">router</link> w celu
+                    <code>Zend_Controller_Front</code> wywoła <link linkend="zend.controller.router">router</link> w celu
                     sprawdzenia żądania pod kątem zarejestrowanych tras.
                 </para>
             </listitem>
@@ -80,10 +80,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.plugins.writing">
-        <title>Pisanie wtyczek</title>
+    <section xml:id="zend.controller.plugins.writing"><info><title>Pisanie wtyczek</title></info>
+        
 
         <para>
             W celu napisania klasy wtyczki, w prosty sposób rozszerz klasę
@@ -95,8 +95,8 @@ class MyPlugin extends Zend_Controller_Plugin_Abstract
 {
     // ...
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Żadna z metod klasy <code>Zend_Controller_Plugin_Abstract</code> nie
@@ -110,10 +110,10 @@ class MyPlugin extends Zend_Controller_Plugin_Abstract
             obiekty żądania i odpowiedzi wtyczkom kontrolera za pomocą metod
             <code>getRequest()</code> oraz <code>getResponse()</code>, odpowiednio.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.plugins.using">
-        <title>Użycie wtyczek</title>
+    <section xml:id="zend.controller.plugins.using"><info><title>Użycie wtyczek</title></info>
+        
         <para>
             Klasy wtyczek są rejestrowane za pomocą metody
             <code>Zend_Controller_Front::registerPlugin()</code> i mogą być
@@ -160,8 +160,8 @@ $front->setControllerDirectory('/path/to/controllers')
       ->setRouter(new Zend_Controller_Router_Rewrite())
       ->registerPlugin(new MyPlugin());
 $front->dispatch();
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
            Zakładając, że żadne wywołana akcja nie wyświetliła żadnych danych, i
@@ -176,8 +176,8 @@ $front->dispatch();
 <p>Wywołano metodę preDispatch()</p>
 <p>Wywołano metodę postDispatch()</p>
 <p>Wywołano metodę dispatchLoopShutdown()</p>
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <note>
             <para>
@@ -187,21 +187,21 @@ $front->dispatch();
                 metoda ta będzie ominięta.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.plugins.standard">
-        <title>Wtyczki dołączone do standardowej dystrybucji</title>
+    <section xml:id="zend.controller.plugins.standard"><info><title>Wtyczki dołączone do standardowej dystrybucji</title></info>
+        
 
         <para>
             Zend Framework w standardowej dystrybucji zawiera wtyczkę służącą do
             obsługi błędów.
         </para>
 
-        <xi:include href="Zend_Controller-Plugins-ActionStack.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-Plugins-ActionStack.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-Plugins-ActionStack.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-Plugins-ActionStack.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_Controller-Plugins-ErrorHandler.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-Plugins-ErrorHandler.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-Plugins-ErrorHandler.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-Plugins-ErrorHandler.xml"/></xi:fallback>
         </xi:include>
-    </sect2>
-</sect1>
+    </section>
+</section>

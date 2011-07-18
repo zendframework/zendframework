@@ -1,5 +1,6 @@
-<sect3 id="zend.view.helpers.initial.doctype">
-    <title>Helper Doctype</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.doctype"><info><title>Helper Doctype</title></info>
+    
 
     <para>
         Poprawne dokumenty HTML oraz XHTML powinny zawierać deklarację typu
@@ -36,8 +37,8 @@
             </link>.
     </para>
 
-    <example id="zend.view.helpers.initial.doctype.basicusage">
-        <title>Podstawowe użycie helpera Doctype</title>
+    <example xml:id="zend.view.helpers.initial.doctype.basicusage"><info><title>Podstawowe użycie helpera Doctype</title></info>
+        
 
         <para>
             Możesz określić typ dokumentu w dowolnej chwili.
@@ -50,8 +51,8 @@
         <programlisting role="php"><![CDATA[
 $doctypeHelper = new Zend_View_Helper_Doctype();
 $doctypeHelper->doctype('XHTML1_STRICT');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             I teraz wyświetl definicję typu dokumentu w swoim skrypcie layoutu:
@@ -59,13 +60,13 @@ $doctypeHelper->doctype('XHTML1_STRICT');
 
         <programlisting role="php"><![CDATA[
 <?php echo $this->doctype() ?>
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
     </example>
 
-    <example id="zend.view.helpers.initial.doctype.retrieving">
-        <title>Pobieranie typu dokumentu</title>
+    <example xml:id="zend.view.helpers.initial.doctype.retrieving"><info><title>Pobieranie typu dokumentu</title></info>
+        
 
         <para>
             Jeśli potrzebujesz sprawdzić typ dokumentu, możesz to zrobić
@@ -75,8 +76,8 @@ $doctypeHelper->doctype('XHTML1_STRICT');
 
         <programlisting role="php"><![CDATA[
 $doctype = $view->doctype()->getDoctype();
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Najczęściej będzie potrzebował sprawdzić czy dany typ dokumentu jest
@@ -87,7 +88,7 @@ $doctype = $view->doctype()->getDoctype();
 if ($view->doctype()->isXhtml()) {
     // zrób coś w inny sposób
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
-</sect3>
+</section>

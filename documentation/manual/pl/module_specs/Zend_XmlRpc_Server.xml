@@ -1,20 +1,21 @@
-<sect1 id="zend.xmlrpc.server">
-    <title>Zend_XmlRpc_Server</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.xmlrpc.server"><info><title>Zend_XmlRpc_Server</title></info>
+    
 
-    <sect2 id="zend.xmlrpc.server.introduction">
-        <title>Wprowadzenie</title>
+    <section xml:id="zend.xmlrpc.server.introduction"><info><title>Wprowadzenie</title></info>
+        
 
         <para>Klasa Zend_XmlRpc_Server jest przeznaczona do użycia jako
             pełnofunkcjonalny serwer XML-RPC, zgodny ze
-            <ulink url="http://www.xmlrpc.com/spec">specyfikacją przedstawioną
-            na www.xmlrpc.com</ulink>. Dodatkowo implementuje ona metodę
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.xmlrpc.com/spec">specyfikacją przedstawioną
+            na www.xmlrpc.com</link>. Dodatkowo implementuje ona metodę
             system.multicall(), pozwalającą na wywołanie wielu metod podczas
             jednego żądania.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.xmlrpc.server.usage">
-        <title>Podstawowe użycie</title>
+    <section xml:id="zend.xmlrpc.server.usage"><info><title>Podstawowe użycie</title></info>
+        
 
         <para>
             Przykład najbardziej podstawowego przypadku użycia:
@@ -24,12 +25,12 @@
 $server = new Zend_XmlRpc_Server();
 $server->setClass('My_Service_Class');
 echo $server->handle();
-]]>
-        </programlisting>
-    </sect2>
 
-    <sect2 id="zend.xmlrpc.server.structure">
-        <title>Struktura serwera</title>
+        ]]></programlisting>
+    </section>
+
+    <section xml:id="zend.xmlrpc.server.structure"><info><title>Struktura serwera</title></info>
+        
 
         <para>
             Zend_XmlRpc_Server składa się z wielu różnych komponentów, od
@@ -60,10 +61,10 @@ echo $server->handle();
             dostępne metody <code>__toString()</code>, ktore tworzą poprawne
             odpowiedzi XML-RPC, pozwalając na bezpośrednie ich wyświetlenie.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.xmlrpc.server.conventions">
-        <title>Konwencje</title>
+    <section xml:id="zend.xmlrpc.server.conventions"><info><title>Konwencje</title></info>
+        
         <para>
             Zend_XmlRpc_Server pozwala programiście dołączać funkcje oraz metody
             klas jako uruchamialne metody XML-RPC. Poprzez Zend_Server_Reflection,
@@ -103,8 +104,8 @@ echo $server->handle();
 function myFunc($val1, $val2, $val3)
 {
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             PhpDocumentor nie przeprowadza weryfikacji typów określonych dla
@@ -135,18 +136,18 @@ function myFunc($val1, $val2, $val3)
 function myFunc($val1, $val2, $val3)
 {
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Jedna uwaga: dopuszczanie do utworzenia wielu różnych sygnatur może
             doprowadzić do dezorientacji programistów używających serwisów;
             W zasadzie metoda XML-RPC powinna mieć tylko jedną sygnaturę.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.xmlrpc.server.namespaces">
-        <title>Używanie przestrzeni nazw</title>
+    <section xml:id="zend.xmlrpc.server.namespaces"><info><title>Używanie przestrzeni nazw</title></info>
+        
 
         <para>
             XML-RPC posiada system przestrzeni nazw; najprościej mówiąc, pozwala
@@ -180,12 +181,12 @@ $server->setClass('My_Service_Class', 'myservice');
 
 // Funkcja 'somefunc' będzie dostępna jako funcs.somefunc
 $server->addFunction('somefunc', 'funcs');
-]]>
-        </programlisting>
-    </sect2>
 
-    <sect2 id="zend.xmlrpc.server.request">
-        <title>Własny obiekt żądania</title>
+        ]]></programlisting>
+    </section>
+
+    <section xml:id="zend.xmlrpc.server.request"><info><title>Własny obiekt żądania</title></info>
+        
 
         <para>
             W większości przypadków będziesz używał domyślnego obiektu żądania
@@ -199,10 +200,10 @@ $server->addFunction('somefunc', 'funcs');
             pozwoli na to, że serwer XML-RPC będzie mógł pobrać te informacje w
             celu uruchomienia żądania.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.xmlrpc.server.response">
-        <title>Własne odpowiedzi</title>
+    <section xml:id="zend.xmlrpc.server.response"><info><title>Własne odpowiedzi</title></info>
+        
 
         <para>
             Podobnie jak obiekty żądania, Zend_XmlRpc_Server może zwracać własne
@@ -217,10 +218,10 @@ $server->addFunction('somefunc', 'funcs');
             Aby użyć własnej klasy odpowiedzi, użyj metody
             Zend_XmlRpc_Server::setResponseClass() przed wywołaniem handle().
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.xmlrpc.server.fault">
-        <title>Obsługa wyjątków poprzez odpowiedzi błędów</title>
+    <section xml:id="zend.xmlrpc.server.fault"><info><title>Obsługa wyjątków poprzez odpowiedzi błędów</title></info>
+        
 
         <para>
             Obiekt Zend_XmlRpc_Server łapie wyjątki wyrzucone przez uruchomioną
@@ -241,8 +242,8 @@ $server->addFunction('somefunc', 'funcs');
 
         <programlisting role="php"><![CDATA[
 Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Jeśli dodasz do listy wyjątków klasę wyjątku z którego dziedziczą
@@ -258,10 +259,10 @@ Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
             wygenerowanie odpowiedzi błędu o kodzie '404' i informacji
             'Unknown error' (Nieznany błąd).
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.xmlrpc.server.caching">
-        <title>Buforowanie definicji serwera pomiędzy żądaniami</title>
+    <section xml:id="zend.xmlrpc.server.caching"><info><title>Buforowanie definicji serwera pomiędzy żądaniami</title></info>
+        
         <para>
             Dołączanie wielu klas do instancji serwera XML-RPC może zajmować
             wiele zasobów; za pomocą Reflection API (przez Zend_Server_Reflection)
@@ -300,8 +301,8 @@ if (!Zend_XmlRpc_Server_Cache::get($cacheFile, $server)) {
 }
 
 echo $server->handle();
-]]>
-        </programlisting>
+
+        ]]></programlisting>
         <para>
             Powyższy przykład próbuje pobrać definicję serwera z pliku bufora
             xmlrpc.cache znajdującego się w tym samym katalogu co skrypt. Jeśli
@@ -309,17 +310,17 @@ echo $server->handle();
             instancji serwera i spróbuje utworzyć nowy plik bufora z definicją
             sderwera.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.xmlrpc.server.use">
-        <title>Przykład użycia</title>
+    <section xml:id="zend.xmlrpc.server.use"><info><title>Przykład użycia</title></info>
+        
         <para>
             Poniżej znajduje się kilka przykładów użycia, pokazując pełne
             spektrum opcji dostępnych dla programistów. Każdy z przykładów
             użycia jest oparty na poprzednich przykładach.
         </para>
-        <sect3 id="zend.xmlrpc.server.use.case1">
-            <title>Podstawowe użycie</title>
+        <section xml:id="zend.xmlrpc.server.use.case1"><info><title>Podstawowe użycie</title></info>
+            
 
             <para>
                 Poniższy przykład dołącza funkcję jaką uruchamialną przez
@@ -341,12 +342,12 @@ function md5Value($value)
 $server = new Zend_XmlRpc_Server();
 $server->addFunction('md5Value');
 echo $server->handle();
-]]>
-            </programlisting>
-        </sect3>
 
-        <sect3 id="zend.xmlrpc.server.use.case2">
-            <title>Dołączanie klasy</title>
+            ]]></programlisting>
+        </section>
+
+        <section xml:id="zend.xmlrpc.server.use.case2"><info><title>Dołączanie klasy</title></info>
+            
 
             <para>
                 Poniższy przykład pokazuje dołączanie publicznych metod klasy
@@ -357,12 +358,12 @@ echo $server->handle();
 $server = new Zend_XmlRpc_Server();
 $server->setClass('Services_Comb');
 echo $server->handle();
-]]>
-            </programlisting>
-        </sect3>
 
-        <sect3 id="zend.xmlrpc.server.use.case3">
-            <title>Dołączanie wielu klas używając przestrzeni nazw</title>
+            ]]></programlisting>
+        </section>
+
+        <section xml:id="zend.xmlrpc.server.use.case3"><info><title>Dołączanie wielu klas używając przestrzeni nazw</title></info>
+            
 
             <para>
                 Poniższy przykład pokazuje dołączanie kilku klas, każdej z
@@ -375,12 +376,12 @@ $server->setClass('Services_Comb', 'comb');   // metody wywoływane jako comb.*
 $server->setClass('Services_Brush', 'brush'); // metody wywoływane jako brush.*
 $server->setClass('Services_Pick', 'pick');   // metody wywoływane jako pick.*
 echo $server->handle();
-]]>
-            </programlisting>
-        </sect3>
 
-        <sect3 id="zend.xmlrpc.server.use.case4">
-            <title>Określenie wyjątków dla odpowiedzi błędów</title>
+            ]]></programlisting>
+        </section>
+
+        <section xml:id="zend.xmlrpc.server.use.case4"><info><title>Określenie wyjątków dla odpowiedzi błędów</title></info>
+            
 
             <para>
                 Poniższy przykład pozwala dowolnej klasie pochodzącej od
@@ -397,12 +398,12 @@ $server->setClass('Services_Comb', 'comb');   // metody wywoływane jako comb.*
 $server->setClass('Services_Brush', 'brush'); // metody wywoływane jako brush.*
 $server->setClass('Services_Pick', 'pick');   // metody wywoływane jako pick.*
 echo $server->handle();
-]]>
-            </programlisting>
-        </sect3>
 
-        <sect3 id="zend.xmlrpc.server.use.case5">
-            <title>Użycie własnego obiektu żądania</title>
+            ]]></programlisting>
+        </section>
+
+        <section xml:id="zend.xmlrpc.server.use.case5"><info><title>Użycie własnego obiektu żądania</title></info>
+            
 
             <para>
                 Poniższy przykład tworzy instancję własnego obiektu żądania i
@@ -422,12 +423,12 @@ $server->setClass('Services_Pick', 'pick');   // metody wywoływane jako pick.*
 $request = new Services_Request();
 
 echo $server->handle($request);
-]]>
-            </programlisting>
-        </sect3>
 
-        <sect3 id="zend.xmlrpc.server.use.case6">
-            <title>Użycie własnego obiektu odpowiedzi</title>
+            ]]></programlisting>
+        </section>
+
+        <section xml:id="zend.xmlrpc.server.use.case6"><info><title>Użycie własnego obiektu odpowiedzi</title></info>
+            
 
             <para>
                 Poniższy przykład pokazuje określanie własnej klasy odpowiedzi
@@ -450,12 +451,12 @@ $request = new Services_Request();
 $server->setResponseClass('Services_Response');
 
 echo $server->handle($request);
-]]>
-            </programlisting>
-        </sect3>
 
-        <sect3 id="zend.xmlrpc.server.use.case7">
-            <title>Buforowanie definicji serwera pomiędzy żądaniami</title>
+            ]]></programlisting>
+        </section>
+
+        <section xml:id="zend.xmlrpc.server.use.case7"><info><title>Buforowanie definicji serwera pomiędzy żądaniami</title></info>
+            
 
             <para>
                 Poniższy przykład pokazuje buforowanie definicji serwera pomiędzy
@@ -488,8 +489,8 @@ $request = new Services_Request();
 $server->setResponseClass('Services_Response');
 
 echo $server->handle($request);
-]]>
-            </programlisting>
-        </sect3>
-    </sect2>
-</sect1>
+
+            ]]></programlisting>
+        </section>
+    </section>
+</section>

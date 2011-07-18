@@ -1,10 +1,11 @@
-<sect1 id="zend.db.profiler" xmlns:xi="http://www.w3.org/2001/XInclude">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.profiler"><info><title>Zend_Db_Profiler</title></info>
 
-    <title>Zend_Db_Profiler</title>
+    
 
-    <sect2 id="zend.db.profiler.introduction">
+    <section xml:id="zend.db.profiler.introduction"><info><title>Wprowadzenie</title></info>
 
-        <title>Wprowadzenie</title>
+        
 
         <para>
             <code>Zend_Db_Profiler</code> może być włączony aby pozwolić na
@@ -35,8 +36,8 @@ $db->getProfiler()->setEnabled(false);
 
 // włącz profiler:
 $db->getProfiler()->setEnabled(true);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Wartość opcji '<code>profiler</code>' jest dość elastyczna. Jest
@@ -52,8 +53,8 @@ $db->getProfiler()->setEnabled(true);
             <programlisting role="php"><![CDATA[
 $params['profiler'] = true;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </para>
 
         <para>
@@ -66,8 +67,8 @@ $profiler = MyProject_Db_Profiler();
 $profiler->setEnabled(true);
 $params['profiler'] = $profiler;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </para>
 
         <para>
@@ -87,8 +88,8 @@ $params['profiler'] = array(
     'class'   => 'MyProject_Db_Profiler'
 );
 $db = Zend_Db::factory('PDO_MYSQL', $params);
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </para>
 
         <para>
@@ -100,8 +101,8 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
 [main]
 db.profiler.class   = "MyProject_Db_Profiler"
 db.profiler.enabled = true
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
             Konfiguracja może być przekazana za pomocą takiego kodu PHP:
 
@@ -109,8 +110,8 @@ db.profiler.enabled = true
 $config = new Zend_Config_Ini('config.ini', 'main');
 $params['profiler'] = $config->db->profiler;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
             Właściwość '<code>instance</code>' może być użyta w następujący sposób:
             <programlisting role="php"><![CDATA[
@@ -122,16 +123,16 @@ $configData = array(
 $config = new Zend_Config($configData);
 $params['profiler'] = $config;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.profiler.using">
+    <section xml:id="zend.db.profiler.using"><info><title>Użycie profilera</title></info>
 
-        <title>Użycie profilera</title>
+        
 
         <para>
             W dowolnym momencie możesz pobrać profiler używając metody
@@ -140,8 +141,8 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
 
         <programlisting role="php"><![CDATA[
 $profiler = $db->getProfiler();
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Zwraca to instancję <code>Zend_Db_Profiler</code>. Używając tej
@@ -227,8 +228,8 @@ $profiler = $db->getProfiler();
 $query = $profiler->getLastQueryProfile();
 
 echo $query->getQuery();
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Możliwe, że strona generuje się powoli; użyj profilera aby ustalić
@@ -254,14 +255,14 @@ echo 'Średni czas trwania zapytania: ' . $totalTime / $queryCount . ' sekund' .
 echo 'Zapytań na sekundę:: ' . $queryCount / $totalTime . "\n";
 echo 'Czas trwania najdłuższego zapytania: ' . $longestTime . "\n";
 echo "Najdłuższe zapytanie: \n" . $longestQuery . "\n";
-]]>
-        </programlisting>
 
-    </sect2>
+        ]]></programlisting>
 
-    <sect2 id="zend.db.profiler.advanced">
+    </section>
 
-        <title>Zaawansowane użycie profilera</title>
+    <section xml:id="zend.db.profiler.advanced"><info><title>Zaawansowane użycie profilera</title></info>
+
+        
 
         <para>
             Oprócz sprawdzania zapytań, profiler pozwala także programiście na
@@ -269,8 +270,8 @@ echo "Najdłuższe zapytanie: \n" . $longestQuery . "\n";
             metody operują na instancji <code>Zend_Db_Profiler</code>:
         </para>
 
-        <sect3 id="zend.db.profiler.advanced.filtertime">
-            <title>Filtrowanie ze względu na czas trwania zapytania</title>
+        <section xml:id="zend.db.profiler.advanced.filtertime"><info><title>Filtrowanie ze względu na czas trwania zapytania</title></info>
+            
 
             <para>
                 <code>setFilterElapsedSecs()</code> pozwala programiście ustalić
@@ -285,12 +286,12 @@ $profiler->setFilterElapsedSecs(5);
 
 // Profiluj wszystkie zapytania, niezależnie od czasu ich trwania:
 $profiler->setFilterElapsedSecs(null);
-]]>
-            </programlisting>
-        </sect3>
 
-        <sect3 id="zend.db.profiler.advanced.filtertype">
-            <title>Filtrowanie ze względu na typ zapytania</title>
+            ]]></programlisting>
+        </section>
+
+        <section xml:id="zend.db.profiler.advanced.filtertype"><info><title>Filtrowanie ze względu na typ zapytania</title></info>
+            
 
             <para>
                 <code>setFilterQueryType()</code> pozwala programiście określić,
@@ -363,13 +364,13 @@ $profiler->setFilterQueryType(Zend_Db_Profiler::DELETE);
 
 // Usuń wszystkie filtry
 $profiler->setFilterQueryType(null);
-]]>
-            </programlisting>
 
-        </sect3>
+            ]]></programlisting>
 
-        <sect3 id="zend.db.profiler.advanced.getbytype">
-            <title>Pobieranie profili na podstawie typów zapytań</title>
+        </section>
+
+        <section xml:id="zend.db.profiler.advanced.getbytype"><info><title>Pobieranie profili na podstawie typów zapytań</title></info>
+            
 
             <para>
                 Użycie metody <code>setFilterQueryType()</code> może zmniejszyć
@@ -379,7 +380,7 @@ $profiler->setFilterQueryType(null);
                 metody <code>getQueryProfiles()</code> jest to, że może ona
                 przeprowadzić te filtrowanie w locie, po przekazaniu typu
                 zapytań (lub logicznej kombinacji typów zapytań) jako pierwszego
-                argumentu; przejdź do <xref linkend="zend.db.profiler.advanced.filtertype" />
+                argumentu; przejdź do <xref linkend="zend.db.profiler.advanced.filtertype"/>
                 aby zobaczyć listę stałych określających typy zapytań.
             </para>
 
@@ -392,15 +393,15 @@ $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::SELECT | Zend_Db_Profi
 
 // Pobierz jedynie profile zapytań DELETE
 $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::DELETE);
-]]>
-            </programlisting>
 
-        </sect3>
+            ]]></programlisting>
 
-    </sect2>
+        </section>
 
-    <sect2 id="zend.db.profiler.profilers">
-        <title>Wyspecjalizowane profilery</title>
+    </section>
+
+    <section xml:id="zend.db.profiler.profilers"><info><title>Wyspecjalizowane profilery</title></info>
+        
 
         <para>
             Wyspecjalizowany profiler jest obiektem klasy dziedziczącej po
@@ -408,10 +409,10 @@ $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::DELETE);
             traktują profilowane informacje w szczególny sposób.
         </para>
 
-        <xi:include href="Zend_Db_Profiler-Firebug.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_Db_Profiler-Firebug.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Db_Profiler-Firebug.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_Db_Profiler-Firebug.xml"/></xi:fallback>
         </xi:include>
 
-    </sect2>
+    </section>
 
-</sect1>
+</section>

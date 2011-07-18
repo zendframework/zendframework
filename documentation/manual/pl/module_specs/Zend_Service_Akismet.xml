@@ -1,12 +1,12 @@
-<sect1 id="zend.service.akismet">
-    <title>Zend_Service_Akismet</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.akismet"><info><title>Zend_Service_Akismet</title></info>
+    
 
-    <sect2 id="zend.service.akismet.introduction">
-        <title>Wprowadzenie</title>
+    <section xml:id="zend.service.akismet.introduction"><info><title>Wprowadzenie</title></info>
+        
 
         <para>
-            Komponent <code>Zend_Service_Akismet</code> jest klientem dla <ulink
-                url="http://akismet.com/development/api/">API serwisu Akismet</ulink>.
+            Komponent <code>Zend_Service_Akismet</code> jest klientem dla <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://akismet.com/development/api/">API serwisu Akismet</link>.
             Serwis Akismet jest używany do określenia czy nadesłane dane są
             potencjalnym spamem; udostępnia on także metody do nadsyłania danych,
             które uznamy za spam, oraz danych, które niesłusznie zostały uznane
@@ -18,7 +18,7 @@
         <para>
             Do użycia serwisu Akismet wymagane jest posiadanie klucza API. Możesz
             go otrzymać rejestrując konto w serwisie
-            <ulink url="http://wordpress.com/">WordPress.com</ulink>. Nie musisz
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wordpress.com/">WordPress.com</link>. Nie musisz
             aktywować bloga; samo założenie konta umożliwi ci otrzymanie klucza
             API.
         </para>
@@ -32,10 +32,10 @@
             metody dostępowej <code>setBlogUrl()</code> lub nadpisana przez
             określenie klucza 'blog' w różnych wywołaniach metod.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.akismet.verifykey">
-        <title>Weryfikowanie klucza API</title>
+    <section xml:id="zend.service.akismet.verifykey"><info><title>Weryfikowanie klucza API</title></info>
+        
 
         <para>
             Metoda <code>Zend_Service_Akismet::verifyKey($key)</code> jest
@@ -55,8 +55,8 @@ if ($akismet->verifyKey($apiKey) {
 } else {
     echo "Key is not valid\n";
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Jeśli metoda <code>verifyKey()</code> jest wywołana bez żadnych
@@ -68,10 +68,10 @@ if ($akismet->verifyKey($apiKey) {
             Metoda <code>verifyKey()</code> implementuje metodę REST
             <code>verify-key</code> serwisu Akismet.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.akismet.isspam">
-        <title>Sprawdzanie czy dane są spamem</title>
+    <section xml:id="zend.service.akismet.isspam"><info><title>Sprawdzanie czy dane są spamem</title></info>
+        
 
         <para>
             Metoda <code>Zend_Service_Akismet::isSpam($data)</code> jest używana
@@ -173,8 +173,8 @@ if ($akismet->verifyKey($apiKey) {
             a w przypadku gdy klucz API jest nieprawidłowy, wyrzuci wyjątek.
         </para>
 
-        <example id="zend.service.akismet.isspam.example-1">
-            <title>Użycie metody isSpam()</title>
+        <example xml:id="zend.service.akismet.isspam.example-1"><info><title>Użycie metody isSpam()</title></info>
+            
 
             <programlisting role="php"><![CDATA[
 $data = array(
@@ -192,18 +192,18 @@ if ($akismet->isSpam($data)) {
 } else {
     echo "Welcome to our site!";
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </example>
 
         <para>
             Metoda <code>isSpam()</code> implementuje metodę <code>comment-check</code>
             API serwisu Akismet.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.akismet.submitspam">
-        <title>Wysyłanie informacji o spamie</title>
+    <section xml:id="zend.service.akismet.submitspam"><info><title>Wysyłanie informacji o spamie</title></info>
+        
 
         <para>
             Czasem dane, które są spamem mogą przejść przez filtr. Jeśli
@@ -219,8 +219,8 @@ if ($akismet->isSpam($data)) {
             wyrzucony wyjątek.
         </para>
 
-        <example id="zend.service.akismet.submitspam.example-1">
-            <title>Użycie metody submitSpam()</title>
+        <example xml:id="zend.service.akismet.submitspam.example-1"><info><title>Użycie metody submitSpam()</title></info>
+            
 
             <programlisting role="php"><![CDATA[
 $data = array(
@@ -234,18 +234,18 @@ $data = array(
     'comment_content'      => "I'm not a spammer, honest!"
 );
 $akismet->submitSpam($data));
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </example>
 
         <para>
             Metoda <code>submitSpam()</code> implementuje metodę <code>submit-spam</code>
             API serwisu Akismet.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.akismet.submitham">
-        <title>Wysyłanie informacji o fałszywym spamie (ham)</title>
+    <section xml:id="zend.service.akismet.submitham"><info><title>Wysyłanie informacji o fałszywym spamie (ham)</title></info>
+        
 
         <para>
             Czasem dane zostaną przez Akismet błędnie uznane za spam. Z tego
@@ -263,8 +263,8 @@ $akismet->submitSpam($data));
             nieprawidłowy, zostanie wyrzucony wyjątek.
         </para>
 
-        <example id="zend.service.akismet.submitham.example-1">
-            <title>Użycie metody submitHam()</title>
+        <example xml:id="zend.service.akismet.submitham.example-1"><info><title>Użycie metody submitHam()</title></info>
+            
 
             <programlisting role="php"><![CDATA[
 $data = array(
@@ -278,18 +278,18 @@ $data = array(
     'comment_content'      => "I'm not a spammer, honest!"
 );
 $akismet->submitHam($data));
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </example>
 
         <para>
             Metoda <code>submitHam()</code> implementuje metodę <code>submit-ham</code>
             API serwisu Akismet.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.akismet.accessors">
-        <title>Specyficzne metody dostępowe</title>
+    <section xml:id="zend.service.akismet.accessors"><info><title>Specyficzne metody dostępowe</title></info>
+        
 
         <para>
             O ile API serwisu Akismet określa jedynie cztery metody,
@@ -352,5 +352,5 @@ $akismet->submitHam($data));
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

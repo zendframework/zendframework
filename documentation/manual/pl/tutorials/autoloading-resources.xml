@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19782 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.autoloading.resources">
-    <title>Automatyczne ładowanie zasobów</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.resources"><info><title>Automatyczne ładowanie zasobów</title></info>
+    
 
     <para>
         Często, podczas tworzenia aplikacji, zachowanie zalecanego przez Zend Framework standardu
@@ -88,8 +86,8 @@ $form      = new Foo_Form_Guestbook();
 $guestbook = new Foo_Model_Guestbook();
 ]]></programlisting>
 
-    <note>
-        <title>automatyczne ładowanie zasobu modułu</title>
+    <note><info><title>automatyczne ładowanie zasobu modułu</title></info>
+        
 
         <para>
             Implementacja wzorca projektowego <acronym>MVC</acronym> w Zend Framework zachęca do
@@ -104,4 +102,4 @@ $guestbook = new Foo_Model_Guestbook();
             Zend_Loader_Autoloader_Module</link>.
         </para>
     </note>
-</sect1>
+</section>

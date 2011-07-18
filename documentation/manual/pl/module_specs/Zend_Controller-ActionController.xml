@@ -1,8 +1,9 @@
-<sect1 id="zend.controller.action">
-    <title>Action Controllers</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.action"><info><title>Action Controllers</title></info>
+    
 
-    <sect2 id="zend.controller.action.introduction">
-        <title>Wprowadzenie</title>
+    <section xml:id="zend.controller.action.introduction"><info><title>Wprowadzenie</title></info>
+        
         <para>
             <code>Zend_Controller_Action</code> jest klasą abstrakcyjną, której
             możesz użyć do implementacji kontrolerów akcji, których wraz z
@@ -39,8 +40,8 @@ class FooController extends Zend_Controller_Action
         // zrób coś
     }
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Powyższa klasa <code>FooController</code> (kontroler <code>foo</code>)
@@ -55,13 +56,12 @@ class FooController extends Zend_Controller_Action
             Ten rozdział jest rozeznaniem w funkcjonalnościach kontrolera akcji.
         </para>
 
-        <note>
-            <title>Domyślne zachowanie</title>
+        <note><info><title>Domyślne zachowanie</title></info>
+            
 
             <para>
                 Domyślnie <link linkend="zend.controller.front">kontroler
-                frontowy</link> włącza klasę pomocniczą akcji <link
-                    linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>.
+                frontowy</link> włącza klasę pomocniczą akcji <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>.
                 Ta klasa zajmuje się przekazywaniem widoku do kontrolera, a
                 także automatycznym renderowaniem widoków. Możesz to wyłączyć
                 w swoim kontrolerze akcji używając jednej z poniższych metod:
@@ -83,8 +83,8 @@ class FooController extends Zend_Controller_Action
         Zend_Controller_Front::getInstance()->setParam('noViewRenderer', true);
     }
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
             <para>
                 <code>initView()</code>, <code>getViewScript()</code>,
@@ -109,8 +109,8 @@ class FooController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender();
     }
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
             <para>
                 Możesz chcieć wyłączyć klasę <code>ViewRenderer</code>
@@ -123,10 +123,10 @@ class FooController extends Zend_Controller_Action
                 wewnątrz pojedynczego kontrolera lub akcji.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.action.initialization">
-        <title>Inicjalizacja obiektu</title>
+    <section xml:id="zend.controller.action.initialization"><info><title>Inicjalizacja obiektu</title></info>
+        
 
         <para>
             O ile zawsze możesz nadpisać konstruktor kontrolera akcji, nie
@@ -158,13 +158,13 @@ class FooController extends Zend_Controller_Action
         ));
     }
 }
-]]>
-        </programlisting>
 
-    </sect2>
+        ]]></programlisting>
 
-    <sect2 id="zend.controller.action.prepostdispatch">
-        <title>Metody Pre-Dispatch oraz Post-Dispatch</title>
+    </section>
+
+    <section xml:id="zend.controller.action.prepostdispatch"><info><title>Metody Pre-Dispatch oraz Post-Dispatch</title></info>
+        
 
         <para>
             Klasa <code>Zend_Controller_Action</code> definiuje dwie metody,
@@ -177,10 +177,10 @@ class FooController extends Zend_Controller_Action
             wygenerowanej zawartości w głównym szablonie
             (<code>postDispatch()</code>).
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.action.accessors">
-        <title>Metody dostępowe</title>
+    <section xml:id="zend.controller.action.accessors"><info><title>Metody dostępowe</title></info>
+        
 
         <para>
             W obiekcie zarejestrowanych jest wiele obiektów oraz zmiennych i
@@ -205,8 +205,8 @@ class FooController extends Zend_Controller_Action
                 <programlisting role="php"><![CDATA[
 $this->getResponse()->setHeader('Content-Type', 'text/xml');
 $this->getResponse()->appendBody($content);
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </listitem>
 
             <listitem>
@@ -257,15 +257,15 @@ if ($this->_hasParam('id') {
 } else {
     $id = 1;
 }
-]]>
-                    </programlisting>
+
+                    ]]></programlisting>
                 </note>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.action.viewintegration">
-        <title>Integracja z widokiem</title>
+    <section xml:id="zend.controller.action.viewintegration"><info><title>Integracja z widokiem</title></info>
+        
 
         <para>
             <code>Zend_Controller_Action</code> provides a rudimentary and
@@ -279,8 +279,8 @@ if ($this->_hasParam('id') {
             using the directory hierarchy to determine the script path.
         </para>
 
-        <sect3 id="zend.controller.action.viewintegration.initview">
-            <title>Inicjowanie obiektu widoku</title>
+        <section xml:id="zend.controller.action.viewintegration.initview"><info><title>Inicjowanie obiektu widoku</title></info>
+            
 
             <para>
                 Metoda <code>initView()</code> inicjuje obiekt widoku. Metoda
@@ -308,8 +308,8 @@ applicationOrModule/
                 index.phtml
         helpers/
         filters/
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
             <para>
                 Innymi słowy, założone jest, że skrypty widoków znajdują się w
@@ -320,10 +320,10 @@ applicationOrModule/
                 katalog bazowy. Zawiera on katalogi o nazwach pochodzących od
                 kontrolerów, co zapewnia hierarchię skryptów widoków.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.action.viewintegration.render">
-            <title>Renderowanie widoków</title>
+        <section xml:id="zend.controller.action.viewintegration.render"><info><title>Renderowanie widoków</title></info>
+            
 
             <para>
                 Metoda <code>render()</code> ma taką sygnaturę:
@@ -331,8 +331,8 @@ applicationOrModule/
 
             <programlisting role="php"><![CDATA[
 string render(string $action = null, string $name = null, bool $noController = false);
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
             <para>
                 <code>render()</code> renderuje skrypt widoku. Jeśli nie
@@ -345,8 +345,7 @@ string render(string $action = null, string $name = null, bool $noController = f
                 podkatalogu <code>[kontroler]</code>, przekaż logiczną wartość
                 true dla  <code>$noController</code>. Na koniec szablony są
                 renderowane i przekazywane do obiektu odpowiedzi; jeśli chcesz
-                zrenderować do konkretnego <link
-                    linkend="zend.controller.response.namedsegments">nazwanego
+                zrenderować do konkretnego <link linkend="zend.controller.response.namedsegments">nazwanego
                     segmentu</link> w obiekcie odpowiedzi, przekaż wartość dla
                 parametru <code>$name</code>.
             </para>
@@ -397,13 +396,13 @@ class MyController extends Zend_Controller_Action
         $this->render();
     }
 }
-]]>
-            </programlisting>
-        </sect3>
-    </sect2>
 
-    <sect2 id="zend.controller.action.utilmethods">
-        <title>Metody narzędziowe</title>
+            ]]></programlisting>
+        </section>
+    </section>
+
+    <section xml:id="zend.controller.action.utilmethods"><info><title>Metody narzędziowe</title></info>
+        
 
         <para>
             Oprócz metod dostępowych i metod integracji z widokiem, klasa
@@ -486,10 +485,10 @@ class MyController extends Zend_Controller_Action
                 </itemizedlist>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.action.subclassing">
-        <title>Rozszerzanie klasy kontrolera akcji</title>
+    <section xml:id="zend.controller.action.subclassing"><info><title>Rozszerzanie klasy kontrolera akcji</title></info>
+        
 
         <para>
             By design, <code>Zend_Controller_Action</code> must be subclassed
@@ -505,8 +504,8 @@ class MyController extends Zend_Controller_Action
             <code>Zend_Controller_Action</code> could solve such redundancy.
         </para>
 
-        <example id="zend.controller.action.subclassing.example-call">
-            <title>Jak obsługiwać nieistniejące akcje</title>
+        <example xml:id="zend.controller.action.subclassing.example-call"><info><title>Jak obsługiwać nieistniejące akcje</title></info>
+            
 
             <para>
                 Jeśli zażądamy nieistniejącej akcji kontrolera, wywołana zostanie
@@ -546,8 +545,8 @@ class MyController extends Zend_Controller_Action
         throw new Exception('Invalid method "' . $method . '" called', 500);
     }
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
             <para>
                 Inną możliwością jest przeniesienie do domyślnego kontrolera:
@@ -572,8 +571,8 @@ class MyController extends Zend_Controller_Action
         throw new Exception('Invalid method "' . $method . '" called', 500);
     }
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </example>
 
         <para>
@@ -602,13 +601,13 @@ abstract class My_Base_Controller extends Zend_Controller_Action
         return $this->view;
     }
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Hopefully, from the information in this chapter, you can see the
             flexibility of this particular component and how you can shape it to
             your application's or site's needs.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

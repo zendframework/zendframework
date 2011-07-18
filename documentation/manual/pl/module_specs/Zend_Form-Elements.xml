@@ -1,5 +1,6 @@
-<sect1 id="zend.form.elements">
-    <title>Tworzenie elementów formularza za pomocą klasy Zend_Form_Element</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.elements"><info><title>Tworzenie elementów formularza za pomocą klasy Zend_Form_Element</title></info>
+    
 
     <para>
         Formularz składa się z elementów, które zazwyczaj odpowiadają elementom
@@ -36,16 +37,14 @@
         Klasa bazowa <code>Zend_Form_Element</code> jest domyślnie skonfigurowana
         dla wielu przypadków użycia, jednak najlepiej jest rozszerzyć tę klasę
         aby utworzyć najczęściej używane elementy. Dodatkowo Zend Framework
-        zawiera pewną ilość standardowych elementów XHTML; możesz o nich przeczytać <link
-            linkend="zend.form.standardElements">w rozdziale Standardowe Elementy</link>.
+        zawiera pewną ilość standardowych elementów XHTML; możesz o nich przeczytać <link linkend="zend.form.standardElements">w rozdziale Standardowe Elementy</link>.
     </para>
 
-    <sect2 id="zend.form.elements.loaders">
-        <title>Ładowanie wtyczek</title>
+    <section xml:id="zend.form.elements.loaders"><info><title>Ładowanie wtyczek</title></info>
+        
 
         <para>
-            Klasa <code>Zend_Form_Element</code> używa klasy <link
-                linkend="zend.loader.pluginloader">Zend_Loader_PluginLoader</link>
+            Klasa <code>Zend_Form_Element</code> używa klasy <link linkend="zend.loader.pluginloader">Zend_Loader_PluginLoader</link>
             aby umożliwić programistom określenie ścieżek, w których znajdują
             się alternatywne weryfikatory, filtry i dekoratory. Każda z tych wtyczek
             ma przypisaną własną klasę ładującą je, a do ich modyfikacji
@@ -100,8 +99,8 @@
             użycie pewnej własnej funkcjonalności w wielu formularzach.
         </para>
 
-        <example id="zend.form.elements.loaders.customLabel">
-            <title>Własna etykieta</title>
+        <example xml:id="zend.form.elements.loaders.customLabel"><info><title>Własna etykieta</title></info>
+            
 
             <para>
                 One common use case for plugins is to provide replacements for
@@ -157,8 +156,8 @@ class My_Decorator_Label extends Zend_Form_Decorator_Abstract
         }
     }
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
             <para>
                 Now we can tell the element to use this plugin path when looking
@@ -167,8 +166,8 @@ class My_Decorator_Label extends Zend_Form_Decorator_Abstract
 
             <programlisting role="php"><![CDATA[
 $element->addPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
             <para>
                 Alternately, we can do that at the form level to ensure all
@@ -177,8 +176,8 @@ $element->addPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
 
             <programlisting role="php"><![CDATA[
 $form->addElementPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
             <para>
                 With this path added, when you add a decorator, the
@@ -187,10 +186,10 @@ $form->addElementPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
                 now be used when the 'Label' decorator is requested.
             </para>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.elements.filters">
-        <title>Filtry</title>
+    <section xml:id="zend.form.elements.filters"><info><title>Filtry</title></info>
+        
 
         <para>
             It's often useful and/or necessary to perform some normalization on
@@ -208,8 +207,8 @@ $form->addElementPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
 
         <programlisting role="php"><![CDATA[
 $filtered = $element->getValue();
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Filtry mogą być dodane na dwa sposoby:
@@ -239,8 +238,8 @@ $element->addFilter('Zend_Filter_Alnum');
 // Krótka nazwa filtra:
 $element->addFilter('Alnum');
 $element->addFilter('alnum');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Krótkie nazwy są zazwyczaj nazwą klasy filtra pozbawioną
@@ -249,8 +248,8 @@ $element->addFilter('alnum');
             aby pierwsza litera była wielka.
         </para>
 
-        <note>
-            <title>Użycie własnych klas filtrów</title>
+        <note><info><title>Użycie własnych klas filtrów</title></info>
+            
 
             <para>
                 Jeśli posiadasz własny zestaw klas filtrów, możesz przekazać
@@ -262,8 +261,8 @@ $element->addFilter('alnum');
 
             <programlisting role="php"><![CDATA[
 $element->addPrefixPath('My_Filter', 'My/Filter/', 'filter');
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
             <para>
                 (Zauważ że trzeci argument oznacza typ wtyczek dla którego
@@ -278,12 +277,11 @@ $element->addPrefixPath('My_Filter', 'My/Filter/', 'filter');
 
         <programlisting role="php"><![CDATA[
 $unfiltered = $element->getUnfilteredValue();
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
-            Aby uzyskać więcej informacji o filtrach zobacz <link
-                linkend="zend.filter.introduction">dokumentację klasy Zend_Filter</link>.
+            Aby uzyskać więcej informacji o filtrach zobacz <link linkend="zend.filter.introduction">dokumentację klasy Zend_Filter</link>.
         </para>
 
         <para>
@@ -319,10 +317,10 @@ $unfiltered = $element->getUnfilteredValue();
                 <code>clearFilters()</code> (usuwa wszystkie filtry)
             </para></listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.elements.validators">
-        <title>Weryfikatory</title>
+    <section xml:id="zend.form.elements.validators"><info><title>Weryfikatory</title></info>
+        
 
         <para>
             If you subscribe to the security mantra of "filter input, escape
@@ -359,8 +357,8 @@ $element->addValidator('Zend_Validate_Alnum');
 // Krótka nazwa weryfikatora:
 $element->addValidator('Alnum');
 $element->addValidator('alnum');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Krótkie nazwy są zazwyczaj nazwą klasy weryfikatora pozbawioną
@@ -369,8 +367,8 @@ $element->addValidator('alnum');
             aby pierwsza litera była wielka.
         </para>
 
-        <note>
-            <title>Użycie własnych klas weryfikatorów</title>
+        <note><info><title>Użycie własnych klas weryfikatorów</title></info>
+            
 
             <para>
                 Jeśli posiadasz własny zestaw klas weryfikatorów, możesz przekazać
@@ -382,8 +380,8 @@ $element->addValidator('alnum');
 
             <programlisting role="php"><![CDATA[
 $element->addPrefixPath('My_Validator', 'My/Validator/', 'validate');
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
             <para>
                 (Zauważ że trzeci argument oznacza typ wtyczek dla którego
@@ -398,8 +396,8 @@ $element->addPrefixPath('My_Validator', 'My/Validator/', 'validate');
 
         <programlisting role="php"><![CDATA[
 $element->addValidator('alnum', true);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             If you are using a string name to add a validator, and the
@@ -410,8 +408,8 @@ $element->addValidator('alnum', true);
 
         <programlisting role="php"><![CDATA[
 $element->addValidator('StringLength', false, array(6, 20));
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Arguments passed in this way should be in the order in which they
@@ -422,11 +420,11 @@ $element->addValidator('StringLength', false, array(6, 20));
 
         <programlisting role="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(6, 20);
-]]>
-        </programlisting>
 
-        <note>
-            <title>Określanie własnych komunikatów o błędach</title>
+        ]]></programlisting>
+
+        <note><info><title>Określanie własnych komunikatów o błędach</title></info>
+            
 
             <para>
                 Some developers may wish to provide custom error messages for a
@@ -460,8 +458,8 @@ $element->addValidators(array(
     array('alnum'),
     array('stringLength', false, array(6, 20)),
 ));
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             If you want to be more verbose or explicit, you can use the array
@@ -478,8 +476,8 @@ $element->addValidators(array(
         'validator' => 'stringLength',
         'options'   => array(6, 20)),
 ));
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Ten przykład pokazuje w jaki sposób możesz skonfigurować
@@ -493,8 +491,8 @@ element.validators.alnum.validator = "Alnum"
 element.validators.strlen.validator = "StringLength"
 element.validators.strlen.options.min = 6
 element.validators.strlen.options.max = 20
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Notice that every item has a key, whether or not it needs one; this
@@ -514,23 +512,22 @@ if ($element->isValid($value)) {
 } else {
     // nieprawidłowy
 }
-]]>
-        </programlisting>
 
-        <note>
-            <title>Weryfikowane są przefiltrowane wartości</title>
+        ]]></programlisting>
+
+        <note><info><title>Weryfikowane są przefiltrowane wartości</title></info>
+            
 
             <para>
                 <code>Zend_Form_Element::isValid()</code> filtruje wartości
                 za pomocą ustawionych filtrów zanim zostanie przeprowadzona
-                weryfikacja. Zobacz <link
-                    linkend="zend.form.elements.filters">rozdział Filtry</link>
+                weryfikacja. Zobacz <link linkend="zend.form.elements.filters">rozdział Filtry</link>
                 aby uzyskać więcej informacji.
             </para>
         </note>
 
-        <note>
-            <title>Weryfikacja w kontekście</title>
+        <note><info><title>Weryfikacja w kontekście</title></info>
+            
 
             <para>
                 <code>Zend_Form_Element::isValid()</code> supports an
@@ -574,8 +571,8 @@ class My_Validate_PasswordConfirmation extends Zend_Validate_Abstract
         return false;
     }
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </note>
 
         <para>
@@ -592,8 +589,8 @@ class My_Validate_PasswordConfirmation extends Zend_Validate_Abstract
         <programlisting role="php"><![CDATA[
 $errors   = $element->getErrors();
 $messages = $element->getMessages();
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             (Uwaga: komunikaty o błędach są zwracane jako asocjacyjna
@@ -644,12 +641,11 @@ $messages = $element->getMessages();
         </itemizedlist>
 
         <para>
-            Aby uzyskać więcej informacji o weryfikatorach, zobacz <link
-                linkend="zend.validate.introduction">dokumentację klasy Zend_Validate</link>.
+            Aby uzyskać więcej informacji o weryfikatorach, zobacz <link linkend="zend.validate.introduction">dokumentację klasy Zend_Validate</link>.
         </para>
 
-        <note>
-            <title>Użycie klasy Zend_Form_Elements jako weryfikatora</title>
+        <note><info><title>Użycie klasy Zend_Form_Elements jako weryfikatora</title></info>
+            
 
             <para>
                 Klasa <code>Zend_Form_Element</code> implementuje interfejs
@@ -717,8 +713,8 @@ $messages = $element->getMessages();
             </para></listitem>
         </itemizedlist>
 
-        <sect3 id="zend.form.elements.validators.errors">
-            <title>Custom Error Messages</title>
+        <section xml:id="zend.form.elements.validators.errors"><info><title>Custom Error Messages</title></info>
+            
 
             <para>
                 At times, you may want to specify one or more specific error
@@ -790,11 +786,11 @@ $messages = $element->getMessages();
                 element value; this current element value will be substituted
                 when the error messages are retrieved.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.form.elements.decorators">
-        <title>Dekoratory</title>
+    <section xml:id="zend.form.elements.decorators"><info><title>Dekoratory</title></info>
+        
 
         <para>
             One particular pain point for many web developers is the creation
@@ -809,8 +805,7 @@ $messages = $element->getMessages();
             <code>Zend_Form_Element</code> tries to solve this issue through
             the use of "decorators". Decorators are simply classes that have
             access to the element and a method for rendering content. For more
-            information on how decorators work, please see the section on <link
-                linkend="zend.form.decorators">Zend_Form_Decorator</link>.
+            information on how decorators work, please see the section on <link linkend="zend.form.decorators">Zend_Form_Decorator</link>.
         </para>
 
         <para>
@@ -846,8 +841,8 @@ $messages = $element->getMessages();
             </para></listitem>
         </itemizedlist>
 
-        <note>
-            <title>Domyślne dekoratory nie muszą być ładowane</title>
+        <note><info><title>Domyślne dekoratory nie muszą być ładowane</title></info>
+            
 
             <para>
                 Domyślny zestaw dekoratorów jest ładowany podczas inicjowania
@@ -860,8 +855,8 @@ $element = new Zend_Form_Element('foo',
                                  array('disableLoadDefaultDecorators' =>
                                       true)
                                  );
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
             <para>
                 Ta opcja może być użyta równolegle wraz z dowolnymi innymi
@@ -887,8 +882,8 @@ $this->addDecorators(array(
     array('HtmlTag', array('tag' => 'dd')),
     array('Label', array('tag' => 'dt')),
 ));
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             The initial content is created by the 'ViewHelper' decorator, which
@@ -911,16 +906,15 @@ $this->addDecorators(array(
         <li>"123" is not an alphanumeric value</li>
     </ul>
 </dd>
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
-            Aby uzyskać więcej informacji o dekoratorach, zobacz <link
-                linkend="zend.form.decorators">dokumentację klasy Zend_Form_Decorator</link>.
+            Aby uzyskać więcej informacji o dekoratorach, zobacz <link linkend="zend.form.decorators">dokumentację klasy Zend_Form_Decorator</link>.
         </para>
 
-        <note>
-            <title>Użycie wielu dekoratorów tego samego typu</title>
+        <note><info><title>Użycie wielu dekoratorów tego samego typu</title></info>
+            
 
             <para>
                 Internally, <code>Zend_Form_Element</code> uses a decorator's
@@ -945,8 +939,8 @@ $element->addDecorator(array('FooBar' => 'HtmlTag'),
 
 // Pobieramy dekorator:
 $decorator = $element->getDecorator('FooBar');
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
             <para>
                 Do metod <code>addDecorators()</code> oraz
@@ -967,8 +961,8 @@ $element->addDecorators(
 // I pobranie ich póżniej:
 $htmlTag = $element->getDecorator('HtmlTag');
 $fooBar  = $element->getDecorator('FooBar');
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </note>
 
         <para>
@@ -1004,10 +998,10 @@ $fooBar  = $element->getDecorator('FooBar');
                 <code>clearDecorators()</code> (usuwa wszystkie dekoratory)
             </para></listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.elements.metadata">
-        <title>Dane meta i atrybuty</title>
+    <section xml:id="zend.form.elements.metadata"><info><title>Dane meta i atrybuty</title></info>
+        
 
         <para>
             <code>Zend_Form_Element</code> obsługuje wiele atrybutów i danych
@@ -1106,18 +1100,18 @@ $fooBar  = $element->getDecorator('FooBar');
         <programlisting role="php"><![CDATA[
 // Odpowiednik metody $element->setAttrib('class', 'text'):
 $element->class = 'text;
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             By default, all attributes are passed to the view helper used by
             the element during rendering, and rendered as HTML attributes of
             the element tag.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.elements.standard">
-        <title>Standardowe elementy</title>
+    <section xml:id="zend.form.elements.standard"><info><title>Standardowe elementy</title></info>
+        
 
         <para>
             Komponent <code>Zend_Form</code> posiada duży zestaw standardowych
@@ -1125,10 +1119,10 @@ $element->class = 'text;
             <link linkend="zend.form.standardElements">Standardowe Elementy</link>
             aby poznać więcej szczegółów.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.elements.methods">
-        <title>Metody klasy Zend_Form_Element</title>
+    <section xml:id="zend.form.elements.methods"><info><title>Metody klasy Zend_Form_Element</title></info>
+        
 
         <para>
             Klasa <code>Zend_Form_Element</code> posiada bardzo dużo metod. Poniżej
@@ -1232,10 +1226,10 @@ $element->class = 'text;
                 </itemizedlist>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.elements.config">
-        <title>Konfiguracja</title>
+    <section xml:id="zend.form.elements.config"><info><title>Konfiguracja</title></info>
+        
 
         <para>
             Konstruktor klasy <code>Zend_Form_Element</code>przyjmuje w
@@ -1323,12 +1317,12 @@ filters.ucase.filter = "StringToUpper"
 decorators.element.decorator = "ViewHelper"
 decorators.element.options.helper = "FormText"
 decorators.label.decorator = "Label"
-]]>
-        </programlisting>
-    </sect2>
 
-    <sect2 id="zend.form.elements.custom">
-        <title>Własne elementy</title>
+        ]]></programlisting>
+    </section>
+
+    <section xml:id="zend.form.elements.custom"><info><title>Własne elementy</title></info>
+        
 
         <para>
             Możesz tworzyć własne elementy po prostu rozszerzając klasę
@@ -1377,8 +1371,8 @@ class My_Element_Text extends Zend_Form_Element
              ->setAttrib('class', 'text');
     }
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             You could then inform your form object about the prefix path for
@@ -1388,8 +1382,8 @@ class My_Element_Text extends Zend_Form_Element
         <programlisting role="php"><![CDATA[<?php
 $form->addPrefixPath('My_Element', 'My/Element/', 'element')
      ->addElement('foo', 'text');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             The 'foo' element will now be of type <code>My_Element_Text</code>,
@@ -1417,16 +1411,13 @@ class My_Element_Text extends Zend_Form_Element
                             array('tag' => 'div', 'class' => 'element'));
     }
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             There are many ways to customize elements; be sure to read the API
             documentation of <code>Zend_Form_Element</code> to know all the
             methods available.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 tw=80 et:
--->
+    </section>
+</section>

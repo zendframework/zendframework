@@ -1,5 +1,8 @@
-<sect1 id="zend.layout.introduction">
-    <title>Wprowadzenie</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.introduction"><info><title>Wprowadzenie</title></info>
+    
 
     <para>
         Komponent <code>Zend_Layout</code> implementuje klasyczny wzorzec
@@ -36,8 +39,7 @@
         </para></listitem>
 
         <listitem><para>
-                Te same zasady generowania nazw skryptów jak w klasie <link
-                linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>,
+                Te same zasady generowania nazw skryptów jak w klasie <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>,
                 ale z możliwością zdefiniowania innych zasad.
         </para></listitem>
 
@@ -45,7 +47,4 @@
                 Możliwość użycia komponentu bez komponentów MVC Zend Framework.
         </para></listitem>
     </itemizedlist>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,6 +1,7 @@
-<sect1 id="zend.filter.introduction">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.introduction"><info><title>Wprowadzenie</title></info>
 
-    <title>Wprowadzenie</title>
+    
 
     <para>
         Komponent Zend_Filter zapewnia zestaw najczęściej potrzebnych filtrów
@@ -9,9 +10,9 @@
         kolejności zdefiniowanej przez programistę.
     </para>
 
-    <sect2 id="zend.filter.introduction.definition">
+    <section xml:id="zend.filter.introduction.definition"><info><title>Czym jest filtr?</title></info>
 
-        <title>Czym jest filtr?</title>
+        
 
         <para>
             W fizycznym świecie, filtr najczęściej jest używany do usuwania
@@ -44,11 +45,11 @@
             danych wejściowych.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.introduction.using">
+    <section xml:id="zend.filter.introduction.using"><info><title>Basic usage of filters</title></info>
 
-        <title>Basic usage of filters</title>
+        
 
         <para>
             Mająć ustaloną w ten sposób definicję filtra, możemy zapewnić podstawę
@@ -60,23 +61,23 @@
        <para>
             Poniżej jest podstawowy przykład użycia filtra na dwóch danych
             wyjściowych, na znaku Et (<code>&amp;</code>) oraz na znaku podwójnego
-            cudzysłowu (<code>&quot;</code>):
+            cudzysłowu (<code>"</code>):
 
             <programlisting role="php"><![CDATA[
 $htmlEntities = new Zend_Filter_HtmlEntities();
 
-echo $htmlEntities->filter('&'); // &amp;
-echo $htmlEntities->filter('"'); // &quot;
-]]>
-            </programlisting>
+echo $htmlEntities->filter('&'); // &
+echo $htmlEntities->filter('"'); // "
+
+            ]]></programlisting>
 
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.introduction.static">
+    <section xml:id="zend.filter.introduction.static"><info><title>Użycie statycznej metody <code>get()</code></title></info>
 
-        <title>Użycie statycznej metody <code>get()</code></title>
+        
 
         <para>
             Jeśli niewygodne jest ładowanie danej klasy filtra i tworzenie
@@ -91,8 +92,8 @@ echo $htmlEntities->filter('"'); // &quot;
 
             <programlisting role="php"><![CDATA[
 echo Zend_Filter::get('&', 'HtmlEntities');
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </para>
 
@@ -102,8 +103,8 @@ echo Zend_Filter::get('&', 'HtmlEntities');
 
             <programlisting role="php"><![CDATA[
 echo Zend_Filter::get('"', 'HtmlEntities', array(ENT_QUOTES));
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </para>
 
@@ -119,12 +120,9 @@ echo Zend_Filter::get('"', 'HtmlEntities', array(ENT_QUOTES));
             Dodatkowo klasa Zend_Filter_Input pozwala na utworzenie instancji
             i wywołanie większej ilości klas filtrów i weryfikatorów w celu
             przetworzenia zestawu danych wejściowych. Zobacz
-            <xref linkend="zend.filter.input" />.
+            <xref linkend="zend.filter.input"/>.
         </para>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

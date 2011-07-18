@@ -1,5 +1,6 @@
-<sect1 id="zend.mail.attachments">
-    <title>Załączniki</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.attachments"><info><title>Załączniki</title></info>
+    
     <para>
         Pliki mogą być dołączone do e-maila za pomocą metody <code>createAttachment()</code>.
         Domyślnie <code>Zend_Mail</code> założy, że załącznik jest obiektem binarnym
@@ -7,8 +8,8 @@
         może być nadpisane przez przekazanie opcjonalnych parametrów do metody
         <code>createAttachment()</code>:
     </para>
-    <example id="zend.mail.attachments.example-1">
-        <title>Wiadomości e-mail z załącznikami</title>
+    <example xml:id="zend.mail.attachments.example-1"><info><title>Wiadomości e-mail z załącznikami</title></info>
+        
         <programlisting role="php"><![CDATA[
 $mail = new Zend_Mail();
 // tworzymy wiadomość
@@ -17,8 +18,8 @@ $mail->createAttachment($myImage,
                         'image/gif',
                         Zend_Mime::DISPOSITION_INLINE,
                         Zend_Mime::ENCODING_8BIT);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
     <para>
         Jeśli chcesz mieć większą kontrolę nad częścią MIME wygenerowaną dla tego
@@ -36,8 +37,8 @@ $at->encoding    = Zend_Mime::ENCODING_8BIT;
 $at->filename    = 'test.gif';
 
 $mail->send();
-]]>
-    </programlisting>
+
+    ]]></programlisting>
     <para>
         Alternatywą jest utworzenie instancji klasy <code>Zend_Mime_Part</code> i dodanie jej
         za pomocą metody <code>createAttachment()</code>:
@@ -54,6 +55,6 @@ $at->filename    = 'test.gif';
 $mail->createAttachment($at);
 
 $mail->send();
-]]>
-    </programlisting>
-</sect1>
+
+    ]]></programlisting>
+</section>

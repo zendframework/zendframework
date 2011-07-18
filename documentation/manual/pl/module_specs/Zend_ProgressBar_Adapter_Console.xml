@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20827 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.progressbar.adapter.console">
-    <title>Zend_ProgressBar_Adapter_Console</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.progressbar.adapter.console"><info><title>Zend_ProgressBar_Adapter_Console</title></info>
+    
 
     <para>
         <classname>Zend_ProgressBar_Adapter_Console</classname> to adapter tekstowy przeznaczony
@@ -12,8 +12,8 @@
         paska postępu.
     </para>
 
-    <note>
-        <title>Automatyczne rozpoznawanie szerokości konsoli</title>
+    <note><info><title>Automatyczne rozpoznawanie szerokości konsoli</title></info>
+        
 
         <para>
             W przypadku systemów *nix niezbędny dla tej funkcjonalności jest
@@ -114,7 +114,4 @@
             </para>
         </listitem>
     </itemizedlist>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

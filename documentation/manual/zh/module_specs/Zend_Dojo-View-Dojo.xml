@@ -1,5 +1,6 @@
-<sect2 id="zend.dojo.view.dojo">
-    <title>dojo() 视图助手</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.view.dojo"><info><title>dojo() 视图助手</title></info>
+    
 
     <para>
         <code>dojo()</code> 视图助手用来简化设置 Dojo 环境，包括下列职责:
@@ -18,8 +19,8 @@
         并可能从布局脚本被直接显示。
     </para>
 
-    <example id="zend.dojo.view.dojo.usage">
-        <title>dojo() 视图助手用法范例</title>
+    <example xml:id="zend.dojo.view.dojo.usage"><info><title>dojo() 视图助手用法范例</title></info>
+        
 
         <para>
             对本范例，假设开发者将从本地路径使用 Dojo 表单，需要请求若干个 dijits，
@@ -94,8 +95,8 @@ $this->dojo()->enable()
         </para>
     </example>
 
-    <sect3 id="zend.dojo.view.dojo.declarative">
-        <title> Dojo 的 Programmatic 和 Declarative 用法</title>
+    <section xml:id="zend.dojo.view.dojo.declarative"><info><title> Dojo 的 Programmatic 和 Declarative 用法</title></info>
+        
 
         <para>
             Dojo 在其许多功能上使用 <emphasis>declarative</emphasis> 和
@@ -124,8 +125,8 @@ $this->dojo()->enable()
             为使用此功能，同时也使用 declarative 语法，有许多静态方法可以全局使用。
         </para>
 
-        <example id="zend.dojo.view.dojo.declarative.usage">
-            <title>指定 Declarative 和 Programmatic Dojo 用法范例</title>
+        <example xml:id="zend.dojo.view.dojo.declarative.usage"><info><title>指定 Declarative 和 Programmatic Dojo 用法范例</title></info>
+            
 
             <para>
                 为指定 declarative 用法，简单地调用静态方法
@@ -154,10 +155,10 @@ Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
 Zend_Dojo_View_Helper_Dojo::setUseProgrammatic(-1);
 ]]></programlisting>
         </example>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.view.dojo.themes">
-        <title>主题</title>
+    <section xml:id="zend.dojo.view.dojo.themes"><info><title>主题</title></info>
+        
 
         <para>
             Dojo 允许为它的 dijits（小部件）生成主题。你可以通过传递模块路径来选择一个：
@@ -180,10 +181,10 @@ $view->dojo()->addStylesheetModule('dijit.themes.tundra');
         <programlisting role="html"><![CDATA[
 <body class="tundra">
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.view.dojo.layers">
-        <title>使用 Layers （定制）</title>
+    <section xml:id="zend.dojo.view.dojo.layers"><info><title>使用 Layers （定制）</title></info>
+        
 
         <para>
             缺省地，当你使用 dojo.require 语句，dojo 将请求服务器抓取适当的 javascript 文件。
@@ -226,14 +227,13 @@ $view->dojo()->addLayer('/js/foo/foo.js');
 ]]></programlisting>
 
         <para>
-            更多关于生成定制的信息，请 <ulink
-                url="http://dojotoolkit.org/book/dojo-book-0-9/part-4-meta-dojo/package-system-and-custom-builds">refer
-            参考 Dojo 构造文档</ulink>.
+            更多关于生成定制的信息，请 <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org/book/dojo-book-0-9/part-4-meta-dojo/package-system-and-custom-builds">refer
+            参考 Dojo 构造文档</link>.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.view.dojo.methods">
-        <title>可用方法</title>
+    <section xml:id="zend.dojo.view.dojo.methods"><info><title>可用方法</title></info>
+        
 
         <para>
             <code>dojo()</code> 视图助手总返回 dojo 占位符容器的实例。
@@ -351,8 +351,5 @@ $view->dojo()->addLayer('/js/foo/foo.js');
                     转换容器为字符串；解析所有的 HTMl 风格和脚本元素。
                     </para></listitem>
         </itemizedlist>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

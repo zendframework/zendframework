@@ -1,12 +1,13 @@
-<sect1 id="zend.log.filters">
-    <title>过滤器</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.filters"><info><title>过滤器</title></info>
+    
 
     <para>
       一个Filter对象阻塞一个消息被写入到日志.
     </para>
 
-    <sect2 id="zend.log.filters.all-writers">
-      <title>对所有Writer过滤</title>
+    <section xml:id="zend.log.filters.all-writers"><info><title>对所有Writer过滤</title></info>
+      
 
       <para>
         要在所有writer之前过滤消息,你可以使用<code>addFilter()</code>方法添加任意数量的Filter到Log对象:
@@ -25,15 +26,15 @@ $logger->info('Informational message');
 
 // logged
 $logger->emerg('Emergency message');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         当你添加一个或多个Filter到Log对象后,消息在任何Writer接收之前必须通过所有的Filter.
       </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.log.filters.single-writer">
-      <title>过滤一个Writer实例</title>
+    <section xml:id="zend.log.filters.single-writer"><info><title>过滤一个Writer实例</title></info>
+      
 
       <para>
         要在一个特定的Writer上进行消息过滤,使用该Writer对象的<code>addFilter()</code>方法:
@@ -56,8 +57,8 @@ $logger->info('Informational message');
 
 // logged by both writers
 $logger->emerg('Emergency message');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </para>
-  </sect2>
-</sect1>
+  </section>
+</section>

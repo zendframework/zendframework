@@ -1,5 +1,6 @@
-<sect1 id="zend.layout.options">
-    <title>Zend_Layout 配置选项</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.options"><info><title>Zend_Layout 配置选项</title></info>
+    
 
     <para>
         <code>Zend_Layout</code>有多种配置选项。这些都可以用调用适当的访问器来设置，传递数组或<code>Zend_Config</code>对象给构造器或<code>startMvc()</code>，传递选项数组给<code>setOptions()</code>，或传递<code>Zend_Config</code>对象给to <code>setConfig()</code>。
@@ -39,16 +40,16 @@
         </para></listitem>
     </itemizedlist>
 
-    <note>
-        <title>助手类和插件类必须传递给startMvc()</title>
+    <note><info><title>助手类和插件类必须传递给startMvc()</title></info>
+        
 
         <para>
             为了<code>helperClass</code>和<code>pluginClass</code>设置有效，它们必须作为选项传递给<code>startMvc()</code>；如果以后设置，它们就没有影响。
         </para>
     </note>
 
-    <sect2 id="zend.layout.options.examples">
-        <title>范例</title>
+    <section xml:id="zend.layout.options.examples"><info><title>范例</title></info>
+        
 
         <para>
             下面的例子假定使用<code>$options</code>数组和<code>$config</code>对象：
@@ -72,8 +73,8 @@ contentKey = "CONTENT"
 $config = new Zend_Config_Ini('/path/to/layout.ini', 'layout');
 ?>]]></programlisting>
 
-        <example id="zend.layout.options.examples.constructor">
-            <title>传递选项给构造器或startMvc()</title>
+        <example xml:id="zend.layout.options.examples.constructor"><info><title>传递选项给构造器或startMvc()</title></info>
+            
 
             <para>
                 为了配置<code>Zend_Layout</code>实例，构造器和<code>startMvc()</code> 静态方法都可以接受选项数组或带有选项的<code>Zend_Config</code> 对象。
@@ -110,8 +111,8 @@ $layout = Zend_Layout::startMvc($config);
             </para>
         </example>
 
-        <example id="zend.layout.options.examples.setoptionsconfig">
-            <title>使用setOption() 和 setConfig()</title>
+        <example xml:id="zend.layout.options.examples.setoptionsconfig"><info><title>使用setOption() 和 setConfig()</title></info>
+            
 
             <para>
                 有时候在<code>Zend_Layout</code> 对象初始化以后才需要配置；<code>setOptions()</code> 和 <code>setConfig()</code>让你快速而起容易地来做：
@@ -130,8 +131,8 @@ $layout->setConfig($options);
             </para>
         </example>
 
-        <example id="zend.layout.options.examples.accessors">
-            <title>使用访问器</title>
+        <example xml:id="zend.layout.options.examples.accessors"><info><title>使用访问器</title></info>
+            
 
             <para>
                 最后，通过访问器来配置<code>Zend_Layout</code> 实例。所有的访问器实现一个流畅的接口，意味这它们的调用可能被链接：
@@ -143,8 +144,5 @@ $layout->setLayout('foo')
        ->setContentKey('CONTENT');
 ?>]]></programlisting>
         </example>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

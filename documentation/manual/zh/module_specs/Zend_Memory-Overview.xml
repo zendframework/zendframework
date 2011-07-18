@@ -1,8 +1,9 @@
-<sect1 id="zend.memory.overview">
-    <title>概述</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.memory.overview"><info><title>概述</title></info>
+    
 
-    <sect2 id="zend.memory.introduction">
-        <title> 简介 </title>
+    <section xml:id="zend.memory.introduction"><info><title> 简介 </title></info>
+        
         <para>
             Zend_Memory组件用于在一个受限制的内存环境下管理数据.
         </para>
@@ -20,8 +21,8 @@
             内存管理器使用<link linkend="zend.cache.backends">Zend_Cache backends</link>作为存储提供者
         </para>
 
-        <example id="zend.memory.introduction.example-1">
-            <title>使用 Zend_Memory 组件</title>
+        <example xml:id="zend.memory.introduction.example-1"><info><title>使用 Zend_Memory 组件</title></info>
+            
             <para>
                 <code>Zend_Memory::factory()</code> 用指定的后端选项实例化内存管理器对象.
             </para>
@@ -49,14 +50,14 @@ echo $loadedFiles[$index1]->value;
 $loadedFiles[$index2]->value = $newValue;
 
 $loadedFiles[$index3]->value[$charIndex] = '_';
-]]>
-                </programlisting>
+
+                ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.memory.theory-of-operation">
+    <section xml:id="zend.memory.theory-of-operation"><info><title>操作原理</title></info>
 
-        <title>操作原理</title>
+        
 
         <para>
             Zend_Memory 组件操作有如下的概念:
@@ -76,19 +77,19 @@ $loadedFiles[$index3]->value[$charIndex] = '_';
             </itemizedlist>
         </para>
 
-        <sect3 id="zend.memory.theory-of-operation.manager">
+        <section xml:id="zend.memory.theory-of-operation.manager"><info><title>内存管理器</title></info>
 
-            <title>内存管理器</title>
+            
 
             <para>
                 内存管理器按照用户应用程序的请求生成内存对象(锁定的或可移动的)并返回已交换到内存容器对象中的那些.
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.memory.theory-of-operation.container">
+        <section xml:id="zend.memory.theory-of-operation.container"><info><title>内存容器</title></info>
 
-            <title>内存容器</title>
+            
 
             <para>
                 内存容器有一个虚拟的或者实际的字符串类型的<code>值</code>.
@@ -110,8 +111,8 @@ $memObject->value[$index] = '_';
 echo ord($memObject->value[$index1]);
 
 $memObject->value = substr($memObject->value, $start, $length);
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </para>
 
             <note>
@@ -121,21 +122,21 @@ $memObject->value = substr($memObject->value, $start, $length);
                 </para>
             </note>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.memory.theory-of-operation.locked">
+        <section xml:id="zend.memory.theory-of-operation.locked"><info><title>锁定的内存</title></info>
 
-            <title>锁定的内存</title>
+            
 
             <para>
                 锁定的内存对象总是存储在内存中.存储在锁定内存对象中的数据绝不会被交换到缓存后端中去.
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.memory.theory-of-operation.movable">
+        <section xml:id="zend.memory.theory-of-operation.movable"><info><title>可移动内存</title></info>
 
-            <title>可移动内存</title>
+            
 
             <para>
                 当需要时,可移动内存对象由Zend_Memory透明的交换到缓存后端或则从缓存后端加载.
@@ -143,11 +144,11 @@ $memObject->value = substr($memObject->value, $start, $length);
 
             <para>
                 由于性能的考虑,内存管理器不会交换小于指定大小的内存对象.细节请查看
-                <xref linkend="zend.memory.memory-manager.settings.min-size" />
+                <xref linkend="zend.memory.memory-manager.settings.min-size"/>
             </para>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-</sect1>
+</section>

@@ -1,6 +1,7 @@
-<sect1 id="zend.view.helpers" xmlns:xi="http://www.w3.org/2001/XInclude">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers"><info><title>视图助手（View Helper）</title></info>
 
-    <title>视图助手（View Helper）</title>
+    
 
     <para>
         在你的视图脚本中，经常需要执行某些特定的复杂的功能：例如，格式化日期，生成表单对象，或者显示action的链接等等。你可以使用助手类来完成这些工作。
@@ -10,14 +11,14 @@
         助手就是简单的类。假设你想要一个名为'fooBar'的助手，缺省地，类的前缀是<code>'Zend_View_Helper_'</code> （当设定助手路径时，你可以指定定制的前缀），类名的最后一部分就是助手名称；这一部分应该是TitleCapped（即像英文文章的标题一样，例如fooBar就要写成FooBar，by Jason Qi）;所以，类的全名就是<code>Zend_View_Helper_FooBar</code> 。这个类应当至少有一个在助手之后命名的方法，并且是驼峰格式（即首字母小写，之后的每个单词首字母大写，例如thisIsAnExample。详见http://c2.com/cgi/wiki?CamelCase　-- Haohappy注）：<code>fooBar()</code> 。
     </para>
 
-    <note>
-        <title> 注意大小写 </title>
+    <note><info><title> 注意大小写 </title></info>
+        
         <para>
             助手名称总是遵循驼峰格式，例如，它们从不以大写字母开头。类名是混合大小写字格式，但方法在执行时是驼峰格式。
         </para>
     </note>
-    <note>
-        <title> 缺省助手路径 </title>
+    <note><info><title> 缺省助手路径 </title></info>
+        
 
         <para>
             即使调用 <code>setHelperPath()</code> 来重写当前的路径，缺省助手路径总是指向 Zend Framework 视图助手， 例如：'Zend/View/Helper/'，设置这个路径来确保缺省的助手工作。
@@ -27,12 +28,12 @@
 
 
     <para>
-       在视图脚本中，你可以用<code>$this->helperName()</code>来调用helper。这时<code>Zend_View</code>会加载 <code>Zend_View_Helper_HelperName</code>类，建立一个对象实例，并调用它的<code>helperName()</code>方法。对象的实例会在 <code>Zend_View</code>的实例内一直存在，并可以被<code>$this->helperName()</code>重复调用。
+       在视图脚本中，你可以用<code>$this-&gt;helperName()</code>来调用helper。这时<code>Zend_View</code>会加载 <code>Zend_View_Helper_HelperName</code>类，建立一个对象实例，并调用它的<code>helperName()</code>方法。对象的实例会在 <code>Zend_View</code>的实例内一直存在，并可以被<code>$this-&gt;helperName()</code>重复调用。
     </para>
 
 
-    <sect2 id="zend.view.helpers.initial">
-        <title>基本的助手</title>
+    <section xml:id="zend.view.helpers.initial"><info><title>基本的助手</title></info>
+        
 
         <para>
             <code>Zend_View</code>自带了几个helper类，大部分是用来生成组件的和有自动转义变量的功能。另外，有些助手用来创建基于路由的URL和HTML列表以及声明变量。当前的助手包括：
@@ -226,8 +227,8 @@ echo $this->formCheckbox('foo', null, array('checked' => false), array('bar', 'b
     <p><label>Would you like to opt in?
         <?php echo $this->formCheckbox('opt_in', 'yes', null, array('yes', 'no')) ?>
     </label></p>
-</form>]]>
-        </programlisting>
+</form>
+        ]]></programlisting>
 
         <para>
             以上视图脚本会输出这样的结果：
@@ -248,27 +249,27 @@ echo $this->formCheckbox('foo', null, array('checked' => false), array('bar', 'b
         <input type="hidden" name="opt_in" value="no" />
         <input type="checkbox" name="opt_in" value="yes" checked="checked" />
     </label></p>
-</form>]]>
-        </programlisting>
+</form>
+        ]]></programlisting>
 
-        <xi:include href="Zend_View-Helpers-Action.xml" />
-        <xi:include href="Zend_View-Helpers-Partial.xml" />
-        <xi:include href="Zend_View-Helpers-Placeholder.xml" />
-        <xi:include href="Zend_View-Helpers-Doctype.xml" />
-        <xi:include href="Zend_View-Helpers-HeadLink.xml" />
-        <xi:include href="Zend_View-Helpers-HeadMeta.xml" />
-        <xi:include href="Zend_View-Helpers-HeadScript.xml" />
-        <xi:include href="Zend_View-Helpers-HeadStyle.xml" />
-        <xi:include href="Zend_View-Helpers-HeadTitle.xml" />
-        <xi:include href="Zend_View-Helpers-HtmlObject.xml" />
-        <xi:include href="Zend_View-Helpers-InlineScript.xml" />
-        <xi:include href="Zend_View-Helpers-Json.xml" />
-        <xi:include href="Zend_View-Helpers-Translate.xml" />
-    </sect2>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Action.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Partial.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Placeholder.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Doctype.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadLink.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadMeta.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadScript.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadStyle.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadTitle.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HtmlObject.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-InlineScript.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Json.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Translate.xml"/>
+    </section>
 
-    <sect2 id="zend.view.helpers.paths">
+    <section xml:id="zend.view.helpers.paths"><info><title>助手的路径</title></info>
 
-        <title>助手的路径</title>
+        
 
         <para>
             就像可以指定视图脚本的路径，控制器也可以为<code>Zend_View</code>设定助手类的路径。默认地，<code>Zend_View</code>会到 “Zend/View/Helper/”下查找助手类。可以用 <code>setHelperPath()</code> 和 <code>addHelperPath()</code> 方法来告诉 <code>Zend_View</code> 从其它地方来找路径。另外，你也可以指定类名的前缀，用于指定助手类所在的路径，允许给助手类命名空间。默认情况下，如果没有给出前缀，会假设使用“Zend_View_Helper_”。
@@ -278,8 +279,8 @@ echo $this->formCheckbox('foo', null, array('checked' => false), array('bar', 'b
 $view = new Zend_View();
 
 // 设置路径为：/path/to/more/helpers, 通过使用前缀 'My_View_Helper'
-$view->setHelperPath('/path/to/more/helpers', 'My_View_Helper');]]>
-        </programlisting>
+$view->setHelperPath('/path/to/more/helpers', 'My_View_Helper');
+        ]]></programlisting>
 
 
         <para>
@@ -296,14 +297,14 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
 // now when you call $this->helperName(), Zend_View will look first for
 // "/path/to/some/helpers/HelperName" using class name "Your_View_Helper_HelperName",
 // then for "/other/path/to/helpers/HelperName.php" using class name "My_View_Helper_HelperName",
-// and finally for "Zend/View/Helper/HelperName.php" using class name "Zend_View_Helper_HelperName".]]>
-        </programlisting>
+// and finally for "Zend/View/Helper/HelperName.php" using class name "Zend_View_Helper_HelperName".
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.helpers.custom">
+    <section xml:id="zend.view.helpers.custom"><info><title>编写自定义的助手类</title></info>
 
-        <title>编写自定义的助手类</title>
+        
 
         <para>
             编写自定义的助手类很容易，只要遵循以下几个原则即可：
@@ -316,7 +317,7 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
             </para></listitem>
 
             <listitem><para>
-                类中必须有一个public的方法，该方法名与helper类名相同。该方法将在你的模板调用"$this->specialPurpose()"时执行。在我们的“specialPurpose”例子中，相应的方法声明可以是“public function specialPurpose()”。
+                类中必须有一个public的方法，该方法名与helper类名相同。该方法将在你的模板调用"$this-&gt;specialPurpose()"时执行。在我们的“specialPurpose”例子中，相应的方法声明可以是“public function specialPurpose()”。
             </para></listitem>
 
             <listitem><para>
@@ -346,8 +347,8 @@ class My_View_Helper_SpecialPurpose
         $output = "I have seen 'The Jerk' {$this->_count} time(s).";
         return htmlspecialchars($output);
     }
-}]]>
-        </programlisting>
+}
+        ]]></programlisting>
 
         <para>
             在视图代码中，可以调用 <code>SpecialPurpose</code> 助手任意次。它将被实例化一次，并且会在<code>Zend_View</code>实例的生命周期内持久存在。
@@ -357,16 +358,16 @@ class My_View_Helper_SpecialPurpose
 // remember, in a view script, $this refers to the Zend_View instance.
 echo $this->specialPurpose();
 echo $this->specialPurpose();
-echo $this->specialPurpose();]]>
-        </programlisting>
+echo $this->specialPurpose();
+        ]]></programlisting>
 
         <para>
             输出结果如下所示：
         </para>
         <programlisting role="php"><![CDATA[I have seen 'The Jerk' 1 time(s).
 I have seen 'The Jerk' 2 time(s).
-I have seen 'The Jerk' 3 time(s).]]>
-        </programlisting>
+I have seen 'The Jerk' 3 time(s).
+        ]]></programlisting>
 
         <para>
             有时候需要访问调用<code>Zend_View</code> 对象－例如，如果需要使用已指定的编码字符集，或想解析其它视图脚本作为助手的一部分。为了访问视图对象，助手类应该有一个 <code>setView($view)</code> 方法，如下：
@@ -386,15 +387,12 @@ class My_View_Helper_ScriptPath
     {
         return $this->view->getScriptPath($script);
     }
-}]]>
-        </programlisting>
+}
+        ]]></programlisting>
 
         <para>
             如果助手类有一个 <code>setView()</code> 方法，它将在助手类第一次实例化时被调用，并接受当前视图对象作为参数。是否让它在类里持久和如何访问，都完全取决于你。
         </para>
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

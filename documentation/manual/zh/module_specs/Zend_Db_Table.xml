@@ -1,21 +1,22 @@
-<sect1 id="zend.db.table">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table"><info><title>Zend_Db_Table</title></info>
 
-    <title>Zend_Db_Table</title>
+    
 
-    <sect2 id="zend.db.table.简介">
+    <section xml:id="zend.db.table.简介"><info><title>简介</title></info>
 
-        <title>简介</title>
+        
 
         <para>
             Zend_Db_Table 是Zend Framework的表模块.它通过zend_db_adapter连接到
             数据库,为数据库模式检查表对象,并对该表进行操作和查询.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.getting-started">
+    <section xml:id="zend.db.table.getting-started"><info><title>开始</title></info>
 
-        <title>开始</title>
+        
 
         <para>
             首先需要为抽象类zend_db_table(ares注:该类为抽象类,所以不能直接实例
@@ -39,8 +40,8 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
 // 为所有的Zend_Db_Table对象设定默认的adapter
 require_once 'Zend/Db/Table.php';
 Zend_Db_Table::setDefaultAdapter($db);
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
         <para>
             接下来,我们假定数据库中存在一个名为”round_table”的表.要对该表
@@ -52,14 +53,14 @@ Zend_Db_Table::setDefaultAdapter($db);
         <programlisting role="php"><![CDATA[<?php
 class RoundTable extends Zend_Db_Table {}
 $table = new RoundTable();
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.name-and-key">
+    <section xml:id="zend.db.table.name-and-key"><info><title>表名和主键</title></info>
 
-        <title>表名和主键</title>
+        
 
         <para>
             默认情况下,zend_db_table类会将其类名当作数据库中表名(大小写不同
@@ -75,8 +76,8 @@ class ClassName extends Zend_Db_Table
     // 但是我们也可以对应其它表
     protected $_name = 'another_table_name';
 }
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
         <para>
             zend_db_table类默认字段”id”为表的主键(该字段最好为自增的,但并不
@@ -91,8 +92,8 @@ class ClassName extends Zend_Db_Table
     // 但我们也可以设定其他列名为主键
     protected $_primary = 'another_column_name';
 }
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
         <para>
             你也可以通过表实体类中_setup()方法设定这些变量;但是需要确保在修改
@@ -109,14 +110,14 @@ class ClassName extends Zend_Db_Table
         parent::_setup();
     }
 }
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.insert">
+    <section xml:id="zend.db.table.insert"><info><title>插入数据</title></info>
 
-        <title>插入数据</title>
+        
 
         <para>
             要在表中插入一行新数据,只需要将列名:数据的关联数组作为参数,调
@@ -143,14 +144,14 @@ $data = array(
 )
 
 $id = $table->insert($data);
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.udpate">
+    <section xml:id="zend.db.table.udpate"><info><title>更新数据</title></info>
 
-        <title>更新数据</title>
+        
 
         <para>
             要修改表中的任意行数据,我们可以设定一个列名:数据的关联数组作为参数,调
@@ -182,14 +183,14 @@ $set = array(
 $where = $db->quoteInto('first_name = ?', 'Robin');
 
 $rows_affected = $table->update($set, $where);
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.delete">
+    <section xml:id="zend.db.table.delete"><info><title>Deleting Rows</title></info>
 
-        <title>Deleting Rows</title>
+        
 
         <para>
             要删除表中的数据,我们可以调用delete()方法,同时通过一个where条件
@@ -215,14 +216,14 @@ $db = $table->getAdapter();
 $where = $db->quoteInto('first_name = ?', 'Patsy');
 
 $rows_affected = $table->delete($where);
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.findbykey">
+    <section xml:id="zend.db.table.findbykey"><info><title>根据主键查找数据</title></info>
 
-        <title>根据主键查找数据</title>
+        
 
         <para>
             通过调用find()方法,可以使用主键值轻松地在表中检索数据.假如你只想要查询某
@@ -239,14 +240,14 @@ $row = $table->find(1);
 
 // SELECT * FROM round_table WHERE id IN("1", "2", 3")
 $rowset = $table->find(array(1, 2, 3));
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.fetchonerow">
+    <section xml:id="zend.db.table.fetchonerow"><info><title>取回一条记录</title></info>
 
-        <title>取回一条记录</title>
+        
 
         <para>
             虽然通过主键找到相应数据行是很便利的事情,但是在更多的时候,我们是
@@ -280,14 +281,14 @@ $where = $db->quoteInto('noble_title = ?', 'Sir')
 $order = 'favorite_color';
 
 $row = $table->fetchRow($where, $order);
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.fetchmultiple">
+    <section xml:id="zend.db.table.fetchmultiple"><info><title>取回多条记录</title></info>
 
-        <title>取回多条记录</title>
+        
 
         <para>
             假如需要一次检索多条记录.可以使用fetchAll()方法.和使用fetchRow()方法类
@@ -318,14 +319,14 @@ $count = 10;
 $offset = 20;
 
 $rowset = $table->fetchAll($where, $order, $count, $offset);
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.domain-logic">
+    <section xml:id="zend.db.table.domain-logic"><info><title>Adding Domain Logic</title></info>
 
-        <title>Adding Domain Logic</title>
+        
 
         <para>
             作为Zend Framework的表模块,Zend_Db_Table将它自己很好的封装到独特的domain logic下.
@@ -354,8 +355,8 @@ class RoundTable extends Zend_Db_Table
         return parent::update($data);
     }
 }
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
         <para>
             类似的,你也可以设定自己的find()方法,通过主键外的其他字段来查询数据.
@@ -372,12 +373,9 @@ class RoundTable extends Zend_Db_Table
         return $this->fetchAll($where, $order);
     }
 }
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

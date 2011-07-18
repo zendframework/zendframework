@@ -1,13 +1,14 @@
-<sect1 id="zend.exception.using">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.using"><info><title> 使用“异常” </title></info>
 
-    <title> 使用“异常” </title>
+    
 
     <para>
         Zend Framework 抛出的所有异常都必须是 Zend_Exception 的子类的对象。
     </para>
 
-    <example id="zend.exception.using.example">
-        <title> 捕捉一个异常的例子 </title>
+    <example xml:id="zend.exception.using.example"><info><title> 捕捉一个异常的例子 </title></info>
+        
         <programlisting role="php"><![CDATA[<?php
 
 try {
@@ -23,7 +24,4 @@ try {
         请仔细查看ZF手册，了解具体的每种异常是由哪些方法抛出的，其抛出条件，还有具体是 Zend_Exception 的哪个子类的实例。
     </para>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

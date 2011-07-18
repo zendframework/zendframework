@@ -1,6 +1,7 @@
-<sect1 id="zend.validate.writing_validators">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.writing_validators"><info><title>编写校验器</title></info>
 
-    <title>编写校验器</title>
+    
 
     <para>
         尽管提供了一组通用的校验器，但不可避免地，开发者还将为他们特定的需求来编写定制的校验器。编写定制的校验器的任务将在本节描述。
@@ -22,9 +23,9 @@
        一般地，<code>isValid()</code>方法不应该抛出任何异常，除了不可能决定输入值是否有效。一些抛出异常的合情合理的例子可能是如果文件不能被打开，LDAP服务器不能被联系，或者数据库连接无效，并且有些事情必须由校验成功或失败来决定。
     </para>
 
-    <example id="zend.validate.writing_validators.example.simple">
+    <example xml:id="zend.validate.writing_validators.example.simple"><info><title>创建简单校验类</title></info>
 
-        <title>创建简单校验类</title>
+        
 
         <para>
             下面的例子演示如何编写一个非常简单的定制的校验器。在这个例子中，校验规则简单，输入值必须是浮点数值。
@@ -49,17 +50,17 @@ class MyValid_Float extends Zend_Validate_Abstract
         return true;
     }
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
             这个类为它的单个校验失败消息定义了一个模板，它包括内置的魔术参数，<code>%value%</code>。如果校验失败，对<code>_setValue()</code>的调用准备了自动插入被测试的值到失败消息的对象。对<code>_error()</code>的调用跟踪校验失败的原因。因为这个类只定义了一个失败消息，没有必要为<code>_error()</code>提供带有失败消息名字的模板。
         </para>
 
     </example>
 
-    <example id="zend.validate.writing_validators.example.conditions.dependent">
+    <example xml:id="zend.validate.writing_validators.example.conditions.dependent"><info><title>编写有独立条件的校验类</title></info>
 
-        <title>编写有独立条件的校验类</title>
+        
 
         <para>
             下面的例子演示一组稍微复杂的校验规则，要求输入值是数字并有最小值和最大值的范围。由于下面确切的原因之一，输入值校验失败：
@@ -123,8 +124,8 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
         return true;
     }
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
             Public 属性<code>$minimum</code> 和 <code>$maximum</code> 分别为成功校验一个值被建立用来提供最小和最大值边界。这个类也定义了两个消息变量和public属性相对应并允许<code>min</code> 和 <code>max</code> 与 <code>value</code> 一起被用在作为魔术参数的消息模板，
         </para>
@@ -136,9 +137,9 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
 
     </example>
 
-    <example id="zend.validate.writing_validators.example.conditions.independent">
+    <example xml:id="zend.validate.writing_validators.example.conditions.independent"><info><title>带有独立条件、多重失败原因的校验</title></info>
 
-        <title>带有独立条件、多重失败原因的校验</title>
+        
 
         <para>
            考虑编写一个为密码加强强度的校验类－当用户被要求为帮助使用户账户安全而选择符合一定条件的密码。让我们假设口令安全条件加强那个密码：
@@ -206,15 +207,12 @@ class MyValid_PasswordStrength extends Zend_Validate_Abstract
         return $isValid;
     }
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
             注意在<code>isValid()</code>中的四个条件测试不立即返回<code>false</code>。这允许校验类提供<emphasis role="bold">所有的</emphasis>输入的密码不符合要求的原因。如果例如一个用户打算输入"<code>#$%</code>"字符串作为密码，<code>isValid()</code>将导致所有四个校验失败消息被后来的<code>getMessages()</code>调用返回。
         </para>
 
     </example>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

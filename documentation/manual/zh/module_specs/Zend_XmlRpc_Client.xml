@@ -1,8 +1,9 @@
-<sect1 id="zend.xmlrpc.client">
-    <title>Zend_XmlRpc_Client</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.xmlrpc.client"><info><title>Zend_XmlRpc_Client</title></info>
+    
 
-    <sect2 id="zend.xmlrpc.client.introduction">
-        <title>介绍</title>
+    <section xml:id="zend.xmlrpc.client.introduction"><info><title>介绍</title></info>
+        
 
         <para>
             Zend Framework 通过 <code>Zend_XmlRpc_Client</code> 作为客户端提供了调用远程
@@ -11,11 +12,11 @@
             （introspection capabilities）。
         </para>
 
-    </sect2>
+    </section>
 
 
-    <sect2 id="zend.xmlrpc.client.method-calls">
-        <title>方法调用</title>
+    <section xml:id="zend.xmlrpc.client.method-calls"><info><title>方法调用</title></info>
+        
 
         <para>
             <code>Zend_XmlRpc_Client</code> 的构造函数接受 XML-RPC 服务器端 URL
@@ -28,8 +29,8 @@
             你可以使用它测试和学习 <code>Zend_XmlRpc</code> 组件。
         </para>
 
-        <example id="zend.xmlrpc.client.method-calls.example-1">
-            <title>XML-RPC 方法调用</title>
+        <example xml:id="zend.xmlrpc.client.method-calls.example-1"><info><title>XML-RPC 方法调用</title></info>
+            
             <programlisting role="php"><![CDATA[
 require_once 'Zend/XmlRpc/Client.php';
 
@@ -38,8 +39,8 @@ $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
 echo $client->call('test.sayHello');
 
 // hello
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </example>
 
         <para>
@@ -53,8 +54,8 @@ echo $client->call('test.sayHello');
             的形式传递到远程方法。
         </para>
 
-        <example id="zend.xmlrpc.client.method-calls.example-2">
-            <title>XML-RPC 带参数的方法调用</title>
+        <example xml:id="zend.xmlrpc.client.method-calls.example-2"><info><title>XML-RPC 带参数的方法调用</title></info>
+            
             <programlisting role="php"><![CDATA[
 require_once 'Zend/XmlRpc/Client.php';
 
@@ -66,8 +67,8 @@ $arg2 = 'foo';
 $result = $client->call('test.sayHello', array($arg1, $arg2));
 
 // $result is a native PHP type
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </example>
 
         <para>
@@ -81,10 +82,10 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
             返回值的 <code>Zend_XmlRpc_Response</code> 对象也可以在调用之后使用
             <code>getLastResponse()</code> 方法获得。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.xmlrpc.value.parameters">
-        <title>类型及转换</title>
+    <section xml:id="zend.xmlrpc.value.parameters"><info><title>类型及转换</title></info>
+        
         <para>
             一些远程方法调用时需要参数。它们作为数组传递到 <code>Zend_XmlRpc_Client</code>
             的 <code>call()</code> 方法的第二个参数。每个参数，不论是原始的 PHP 类型，
@@ -92,8 +93,8 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
             对象）都会自动转换。
         </para>
 
-        <sect3 id="zend.xmlrpc.value.parameters.php-native">
-            <title>PHP 原始类型作为参数</title>
+        <section xml:id="zend.xmlrpc.value.parameters.php-native"><info><title>PHP 原始类型作为参数</title></info>
+            
             <para>
                 原始 PHP 变量如 <code>string</code>，<code>integer</code>，
                 <code>float</code>，<code>boolean</code>，<code>array</code> 或者
@@ -102,8 +103,8 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                 如下表所示：
             </para>
 
-            <table id="zend.xmlrpc.value.parameters.php-native.table-1">
-                <title>PHP 与 XML-RPC 的类型转换</title>
+            <table xml:id="zend.xmlrpc.value.parameters.php-native.table-1"><info><title>PHP 与 XML-RPC 的类型转换</title></info>
+                
                 <tgroup cols="2">
                     <thead>
                         <row>
@@ -144,8 +145,8 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                 </tgroup>
             </table>
 
-            <note>
-                <title>一个空的数组会如何转换？</title>
+            <note><info><title>一个空的数组会如何转换？</title></info>
+                
 
                 <para>
                     传递空数组到 XML-RPC 方法，由于它既可表示为一个数组也可表示为一个结构，
@@ -167,13 +168,13 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                 <programlisting role="php"><![CDATA[
 $client->setSkipSystemLookup(true);
 $result = $client->call('foo.bar', array(array()));
-]]>
-                </programlisting>
-            </note>
-        </sect3>
 
-        <sect3 id="zend.xmlrpc.value.parameters.xmlrpc-value">
-            <title><code>Zend_XmlRpc_Value</code> 对象作为参数</title>
+                ]]></programlisting>
+            </note>
+        </section>
+
+        <section xml:id="zend.xmlrpc.value.parameters.xmlrpc-value"><info><title><code>Zend_XmlRpc_Value</code> 对象作为参数</title></info>
+            
             <para>
                 也可以创建 <code>Zend_XmlRpc_Value</code> 实例作为参数，以表示特定的
                 XML-RPC 类型。这样做的主要原因如下：
@@ -207,8 +208,8 @@ $result = $client->call('foo.bar', array(array()));
                 <code>Zend_XmlRpc_Value::getXmlRpcValue()</code>。
             </para>
 
-            <table id="zend.xmlrpc.value.parameters.xmlrpc-value.table-1">
-                <title><code>Zend_XmlRpc_Value</code> 对象作为 XML-RPC 类型</title>
+            <table xml:id="zend.xmlrpc.value.parameters.xmlrpc-value.table-1"><info><title><code>Zend_XmlRpc_Value</code> 对象作为 XML-RPC 类型</title></info>
+                
                 <tgroup cols="3">
                     <thead>
                         <row>
@@ -263,8 +264,8 @@ $result = $client->call('foo.bar', array(array()));
             </table>
 
             <para>
-                <note>
-                    <title>自动转换</title>
+                <note><info><title>自动转换</title></info>
+                    
                     <para>
                         当创建新的 <code>Zend_XmlRpc_Value</code> 对象时，它的值通过
                         PHP 类型设置。PHP 类型将会通过 PHP 类型转换到指定的类型。例如，
@@ -273,11 +274,11 @@ $result = $client->call('foo.bar', array(array()));
                     </para>
                 </note>
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.xmlrpc.client.requests-and-responses">
-        <title>服务代理对象</title>
+    <section xml:id="zend.xmlrpc.client.requests-and-responses"><info><title>服务代理对象</title></info>
+        
         <para>
             另一个使用 XML-RPC 客户端调用远程方法的途径是使用服务代理。这是一个 PHP
             对象代理远程 XML-RPC 名字空间，使其工作方式尽可能的贴近原始的 PHP 对象。
@@ -290,8 +291,8 @@ $result = $client->call('foo.bar', array(array()));
             PHP 方法一样。
         </para>
 
-        <example id="zend.xmlrpc.client.requests-and-responses.example-1">
-            <title>代理默认命名空间</title>
+        <example xml:id="zend.xmlrpc.client.requests-and-responses.example-1"><info><title>代理默认命名空间</title></info>
+            
             <programlisting role="php"><![CDATA[
 require_once 'Zend/XmlRpc/Client.php';
 
@@ -300,8 +301,8 @@ $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
 $server = $client->getProxy();           // Proxy the default namespace
 
 $hello = $server->test->sayHello(1, 2);  // test.Hello(1, 2) returns "hello"
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </example>
 
         <para>
@@ -310,35 +311,35 @@ $hello = $server->test->sayHello(1, 2);  // test.Hello(1, 2) returns "hello"
             <code>test</code> 将会被代理。
         </para>
 
-        <example id="zend.xmlrpc.client.requests-and-responses.example-2">
-            <title>代理任意命名空间</title>
+        <example xml:id="zend.xmlrpc.client.requests-and-responses.example-2"><info><title>代理任意命名空间</title></info>
+            
             <programlisting role="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
 
 $test  = $client->getProxy('test');     // Proxy the "test" namespace
 
 $hello = $test->sayHello(1, 2);         // test.Hello(1,2) returns "hello"
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </example>
 
         <para>
             若远端服务器支持任意深度嵌套的命名空间，仍然可以通过服务器代理使用。例如，
             如果上面的例子有一个方法 <code>test.foo.bar()</code>，则可以使用
-            <code>$test->foo->bar()</code> 来调用。
+            <code>$test-&gt;foo-&gt;bar()</code> 来调用。
         </para>
-    </sect2>
+    </section>
 
 
-    <sect2 id="zend.xmlrpc.client.error-handling">
-        <title>错误处理</title>
+    <section xml:id="zend.xmlrpc.client.error-handling"><info><title>错误处理</title></info>
+        
         <para>
             在 XML-RPC 方法中可能出现两种错误：HTTP 错误和 XML-RPC 失败。
             <code>Zend_XmlRpc_Client</code> 可以识别并分别检测并捕获它们。
         </para>
 
-        <sect3 id="zend.xmlrpc.client.error-handling.http">
-            <title>HTTP 错误</title>
+        <section xml:id="zend.xmlrpc.client.error-handling.http"><info><title>HTTP 错误</title></info>
+            
 
             <para>
                 当 HTTP 错误发生时，例如远端 HTTP 服务器返回
@@ -346,8 +347,8 @@ $hello = $test->sayHello(1, 2);         // test.Hello(1,2) returns "hello"
                 <code>Zend_XmlRpc_Client_HttpException</code> 异常。
             </para>
 
-            <example id="zend.xmlrpc.client.error-handling.http.example-1">
-                <title>处理 HTTP 错误</title>
+            <example xml:id="zend.xmlrpc.client.error-handling.http.example-1"><info><title>处理 HTTP 错误</title></info>
+                
 
                 <programlisting role="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://foo/404');
@@ -362,18 +363,18 @@ try {
     // $e->getMessage() returns "Not Found"
 
 }
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </example>
 
             <para>
                 不论是如何使用 XML-RPC 客户端的，当 HTTP 错误发生时，都会抛出
                 <code>Zend_XmlRpc_Client_HttpException</code> 异常。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.xmlrpc.client.error-handling.faults">
-            <title>XML-RPC 失败</title>
+        <section xml:id="zend.xmlrpc.client.error-handling.faults"><info><title>XML-RPC 失败</title></info>
+            
 
             <para>
                 XML-RPC 失败类似于 PHP 异常。它是从 XML-RPC 方法调用返回的，有着指定的类型，
@@ -387,8 +388,8 @@ try {
                 异常。异常代码和消息会直接映射到原始的 XML-RPC 失败相应的内容上去。
             </para>
 
-            <example id="zend.xmlrpc.client.error-handling.faults.example-1">
-                <title>处理 XML-RPC 失败</title>
+            <example xml:id="zend.xmlrpc.client.error-handling.faults.example-1"><info><title>处理 XML-RPC 失败</title></info>
+                
 
                 <programlisting role="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
@@ -403,8 +404,8 @@ try {
     // $e->getMessage() returns "Unknown method"
 
 }
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </example>
 
             <para>
@@ -419,12 +420,12 @@ try {
                 <code>Zend_XmlRpc_Response</code> 对象。可以使用 <code>Zend_XmlRpc_Response</code>
                 示例的 <code>isFault()</code> 方法检查。
             </para>
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.xmlrpc.client.introspection">
-        <title>服务器自省（introspection）</title>
+    <section xml:id="zend.xmlrpc.client.introspection"><info><title>服务器自省（introspection）</title></info>
+        
         <para>
             一些 XML-RPC 服务器支持 <code>system.</code> 命名空间下的自省。<code>Zend_XmlRpc_Client</code>
             对这些服务器的这种功能特别进行了支持。
@@ -435,10 +436,10 @@ try {
             方法可以获得 <code>Zend_XmlRpc_Client_ServerIntrospection</code> 实例。
             通过它可以使用服务器的自省功能。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.xmlrpc.client.request-to-response">
-        <title>从请求作出回应</title>
+    <section xml:id="zend.xmlrpc.client.request-to-response"><info><title>从请求作出回应</title></info>
+        
         <para>
             本质上说，<code>Zend_XmlRpc_Client</code> 实例的 <code>call()</code>
             方法创建了请求对象（<code>Zend_XmlRpc_Request</code>）并将其传递给另一个方法
@@ -449,8 +450,8 @@ try {
             <code>doRequest()</code> 方法也可直接调用。
         </para>
 
-        <example id="zend.xmlrpc.client.request-to-response.example-1">
-            <title>处理请求作出回应</title>
+        <example xml:id="zend.xmlrpc.client.request-to-response.example-1"><info><title>处理请求作出回应</title></info>
+            
 
             <programlisting role="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
@@ -463,8 +464,8 @@ $client->doRequest($request);
 
 // $server->getLastRequest() returns instanceof Zend_XmlRpc_Request
 // $server->getLastResponse() returns instanceof Zend_XmlRpc_Response
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </example>
 
         <para>
@@ -472,10 +473,10 @@ $client->doRequest($request);
             <code>doRequest()</code> 方法或者服务器代理，最后一个请求对象以及对应的响应对象总是可以分别调用
             <code>getLastRequest()</code> 和 <code>getLastResponse()</code> 获得。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.xmlrpc.client.http-client">
-        <title>HTTP 客户端和测试</title>
+    <section xml:id="zend.xmlrpc.client.http-client"><info><title>HTTP 客户端和测试</title></info>
+        
 
         <para>
             在前面所有的例子中，从未指定 HTTP 客户端。这是因为在使用 <code>Zend_XmlRpc_Client</code>
@@ -492,9 +493,6 @@ $client->doRequest($request);
             <code>setHttpClient()</code> 在单元测试时特别有用。在 <code>Zend_Http_Client_Adapter_Test</code>
             中测试时可以欺骗远程服务器。阅读 <code>Zend_XmlRpc_Client</code> 的单元测试了解如何这样做。
         </para>
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

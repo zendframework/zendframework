@@ -1,15 +1,16 @@
-<sect1 id="zend.controller.migration">
-    <title>从以前的版本移植</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.migration"><info><title>从以前的版本移植</title></info>
+    
 
     <para>
         随着时间的推移，MVC组件的API修改了许多。如果你从Zend Framework早期的版本开始使用，遵照下面的方针来移植你的脚本来使用新的架构。
     </para>
 
-        <sect2 id="zend.controller.migration.fromoneohtoonesix">
-        <title> 从 1.5.x 移植到 1.6.0 或更新的版本 </title>
+        <section xml:id="zend.controller.migration.fromoneohtoonesix"><info><title> 从 1.5.x 移植到 1.6.0 或更新的版本 </title></info>
+        
 
-        <sect3 id="zend.controller.migration.fromoneohtoonesix.dispatcher">
-            <title> 分发器接口修改 </title>
+        <section xml:id="zend.controller.migration.fromoneohtoonesix.dispatcher"><info><title> 分发器接口修改 </title></info>
+            
 
             <para>
                 引起我们注意的是<code>Zend_Controller_Front</code> 和
@@ -30,11 +31,11 @@
                     <code>getDefaultAction()</code>: 应当返回缺省动作的名称。
                 </para></listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.controller.migration.fromoneohtoonefive">
-        <title> 从 1.0.x 到 1.5.0 或更新的版本的移植 </title>
+    <section xml:id="zend.controller.migration.fromoneohtoonefive"><info><title> 从 1.0.x 到 1.5.0 或更新的版本的移植 </title></info>
+        
 
         <para>
             尽管大部分基本功能和所有有文档的功能保持不变，但有一个特别的 <emphasis> 未披露的（undocumented）</emphasis> “功能”发生了改变。
@@ -77,8 +78,8 @@ $inflector->setFilterRule(':action', array(
     'StringToLower'
 ));
 
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
                 <para>
                     上面的代码修改变形器使之不再使用短横线作为字分隔符，如果你<emphasis>确实</emphasis>也想用驼峰命名实际的视图脚本，可能要删除 'StringToLower'过滤器。
@@ -97,8 +98,8 @@ $inflector->setFilterRule(':action', array(
                 <programlisting role="php"><![CDATA[
 $front->setParam('useCaseSensitiveActions', true);
 
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
                 <para>
                     这将允许你再 url 中使用驼峰命名并且仍把它解析到和用字分隔符命名的同一动作。然而，这将意味着原有的问题接踵而来，你将可能使用上述第二种办法以确保可靠工作。
@@ -109,10 +110,10 @@ $front->setParam('useCaseSensitiveActions', true);
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.migration.fromzeroninethree">
-        <title> 从 0.9.3 到 1.0.0RC1 或更新的版本的移植 </title>
+    <section xml:id="zend.controller.migration.fromzeroninethree"><info><title> 从 0.9.3 到 1.0.0RC1 或更新的版本的移植 </title></info>
+        
 
         <para>
             在1.0.0RC1中的主要变化是<link linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler</link>插件的缺省激活 和 <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>的动作助手的简介。请阅读整个的文档来看它们是如何工作的和对你的应用程序有什么影响。
@@ -124,8 +125,8 @@ $front->setParam('useCaseSensitiveActions', true);
 
         <programlisting role="php"><![CDATA[
 $front->setParam('noErrorHandler', true);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             基于当前版本，<code>ViewRenderer</code>动作助手使视图注入到动作控制器和视图脚本的自动调用自动化。你可能遇到的主要问题是如果你有没有调用视图脚本的动作并且不转发也不重定向，因为<code>ViewRenderer</code>将基于动作名来尝试调用一个视图脚本。
@@ -138,8 +139,8 @@ $front->setParam('noErrorHandler', true);
         <programlisting role="php"><![CDATA[
 // Assuming $front is an instance of Zend_Controller_Front
 $front->setParam('noViewRenderer', true);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             然而，这不是一个好的长期策略，因为它意味着最大可能你要写更多的代码。
@@ -162,8 +163,8 @@ $front->setParam('noViewRenderer', true);
 
         <programlisting role="php"><![CDATA[
 $this->_helper->viewRenderer->setNoRender();
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             如果你发现没有动作方法调用，转发或重定向，你可能需要把上面一行放到<code>preDispatch()</code> 或 <code>init()</code>方法：
@@ -176,8 +177,8 @@ public function preDispatch()
     $this->_helper->viewRenderer->setNoRender()
     // .. do other things...
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             如果你调用<code>render()</code>并使用<link linkend="zend.controller.modular">传统模块目录结构</link>，你将想修改你的代码去利用自动调用：
@@ -219,8 +220,8 @@ public function preDispatch()
 // Assuming $view has already been defined
 $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer($view);
 Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </listitem>
 
             <listitem>
@@ -231,8 +232,8 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
                 <programlisting role="php"><![CDATA[
 $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 $viewRenderer->setView($view);
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </listitem>
         </itemizedlist>
 
@@ -243,10 +244,10 @@ $viewRenderer->setView($view);
         <para>
             我们鼓励你用<code>ErrorHandler</code> 和 <code>ViewRenderer</code>改编你的代码，因为它们现在是核心功能。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.migration.fromzeroninetwo">
-        <title>从 0.9.2 移植到 0.9.3 或更新的版本</title>
+    <section xml:id="zend.controller.migration.fromzeroninetwo"><info><title>从 0.9.2 移植到 0.9.3 或更新的版本</title></info>
+        
 
         <para>
             0.9.3 介绍了<link linkend="zend.controller.actionhelpers">action helpers</link>。作为这个改变的一部分，下面的方法已经删除因为它们现在被封装到<link linkend="zend.controller.actionhelpers.redirector">重定向动作助手</link>：
@@ -273,10 +274,10 @@ $viewRenderer->setView($view);
         <para>
             阅读<link linkend="zend.controller.actionhelpers">动作助手文档</link>有更多的信息关于如何获取和操作助手对象，还有<link linkend="zend.controller.actionhelpers.redirector">重定向助手文档</link>有更多信息关于设置重定向选项（还有重定向的替代方法）。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.migration.fromzerosix">
-        <title>从 0.6.0 移植到 0.8.0 或更新的版本 </title>
+    <section xml:id="zend.controller.migration.fromzerosix"><info><title>从 0.6.0 移植到 0.8.0 或更新的版本 </title></info>
+        
 
         <para>
             每次修改，MVC组件的最基本用法保持不变：
@@ -284,8 +285,8 @@ $viewRenderer->setView($view);
 
         <programlisting role="php"><![CDATA[
 Zend_Controller_Front::run('/path/to/controllers');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             然而，目录结构经历了检查，数个组件被删除，同时若干个其它的被改名或添加。变化包括：
@@ -329,18 +330,18 @@ Zend_Controller_Front::run('/path/to/controllers');
 
                 <programlisting role="php"><![CDATA[
 final protected function _forward($action, $controller = null, $module = null, array $params = null);
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
                 <para>
                     <code>$action</code>总是被要求的；如果没有指定控制器，在当前控制器中的动作被使用。<code>$module</code> 总是被忽略除非 <code>$controller</code> 被指定。最后，任何提供的<code>$params</code> 将被追加到请求对象。如果你不请求控制器或模块，当仍需要传递参数，简单地指定null到这些值。
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.migration.fromzerotwo">
-        <title>从 0.2.0 或以前的版本移植到 0.6.0</title>
+    <section xml:id="zend.controller.migration.fromzerotwo"><info><title>从 0.2.0 或以前的版本移植到 0.6.0</title></info>
+        
 
         <para>
             （这段就让它保持原样吧 Jason Qi）
@@ -353,8 +354,8 @@ final protected function _forward($action, $controller = null, $module = null, a
 
         <programlisting role="php"><![CDATA[
 Zend_Controller_Front::run('/path/to/controllers');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <programlisting role="php"><![CDATA[
 /* -- create a router -- */
@@ -369,8 +370,8 @@ $ctrl->setRouter($router);
 /* -- set controller directory and dispatch -- */
 $ctrl->setControllerDirectory('/path/to/controllers');
 $ctrl->dispatch();
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             We encourage use of the Response object to aggregate content and
@@ -411,8 +412,8 @@ $ctrl->dispatch();
                         </para>
                         <programlisting role="php"><![CDATA[
 $front->throwExceptions(true);
-]]>
-                        </programlisting>
+
+                        ]]></programlisting>
                     </listitem>
 
                     <listitem>
@@ -430,21 +431,21 @@ $front->returnResponse(true);
 $response = $front->dispatch();
 $response->renderExceptions(true);
 echo $response;
-]]>
-                        </programlisting>
+
+                        ]]></programlisting>
                     </listitem>
                 </itemizedlist>
             </listitem>
 
             <listitem><para>
                 <code>Zend_Controller_Dispatcher_Interface::dispatch()</code>
-                now accepts and returns a <xref linkend="zend.controller.request" />
+                now accepts and returns a <xref linkend="zend.controller.request"/>
                 object instead of a dispatcher token.
             </para></listitem>
 
             <listitem><para>
                 <code>Zend_Controller_Router_Interface::route()</code>
-                now accepts and returns a <xref linkend="zend.controller.request" />
+                now accepts and returns a <xref linkend="zend.controller.request"/>
                 object instead of a dispatcher token.
             </para></listitem>
 
@@ -525,8 +526,8 @@ $action = $this->getRequest()->getActionName();
 $params = $this->_getParams();
 $foo = $this->_getParam('foo', 'default'); // request 'foo' parameter, using
                                            // 'default' as default value if not found
-]]>
-                        </programlisting>
+
+                        ]]></programlisting>
                     </listitem>
 
                     <listitem>
@@ -548,8 +549,8 @@ public function __call($method, $args)
 
     throw new Zend_Controller_Exception('Invalid method called');
 }
-]]>
-                        </programlisting>
+
+                        ]]></programlisting>
                     </listitem>
                 </itemizedlist>
             </listitem>
@@ -564,12 +565,9 @@ public function __call($method, $args)
             <listitem><para>
                 <code>Zend_Controller_Plugin_Interface</code> was replaced
                 by <code>Zend_Controller_Plugin_Abstract</code>. All methods now
-                accept and return a <xref linkend="zend.controller.request" />
+                accept and return a <xref linkend="zend.controller.request"/>
                 object instead of a dispatcher token.
             </para></listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

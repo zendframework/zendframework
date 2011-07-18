@@ -1,8 +1,9 @@
-<sect1 id="zend.controller.actionhelpers" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>动作助手</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers"><info><title>动作助手</title></info>
+    
 
-    <sect2 id="zend.controller.actionhelper.introduction">
-        <title>介绍</title>
+    <section xml:id="zend.controller.actionhelper.introduction"><info><title>介绍</title></info>
+        
         <para>
            动作助手可以向任何Zend_Controller_Action的衍生动作控制器中，即时的加入功能(runtime and/or on-demand functionality)，以使得增加公共的动作控制器功能时，尽量减少衍生动作控制器类的必要。
         </para>
@@ -10,10 +11,10 @@
         <para>
            动作助手有多种使用方式。动作助手使用了一套经纪系统(brokerage system)，与<link linkend="zend.view.helpers">Zend_View_Helper</link>中使用的，也就是<link linkend="zend.controller.plugins">Zend_Controller_Plugin</link>的经纪系统类似。动作助手（like <code>Zend_View_Helper</code>）在需要调用时加载，可以在请求的时候(bootstrap)或者动作控制器创建的时候(init())实例化。要充分了解这些细节，请阅读下面的章节。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.actionhelper.initialization">
-        <title>初始化助手</title>
+    <section xml:id="zend.controller.actionhelper.initialization"><info><title>初始化助手</title></info>
+        
 
         <para>
            根据需求以及助手的功能，可有几种不同的初始化方式。
@@ -32,8 +33,8 @@
                 <programlisting role="php"><![CDATA[
 $flashMessenger = $this->_helper->getHelper('FlashMessenger');
 $flashMessenger->addMessage('We did something in the last request');
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </listitem>
 
             <listitem>
@@ -44,8 +45,8 @@ $flashMessenger->addMessage('We did something in the last request');
                 <programlisting role="php"><![CDATA[
 $flashMessenger = $this->_helper->FlashMessenger;
 $flashMessenger->addMessage('We did something in the last request');
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </listitem>
 
             <listitem>
@@ -55,8 +56,8 @@ $flashMessenger->addMessage('We did something in the last request');
 
                 <programlisting role="php"><![CDATA[
 $this->_helper->FlashMessenger('We did something in the last request');
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </listitem>
         </itemizedlist>
 
@@ -67,10 +68,10 @@ $this->_helper->FlashMessenger('We did something in the last request');
         <para>
            也可以显式的实例化助手。如果你要在动作控制器之外使用助手，或者给助手经纪人传入一个助手供所有的动作使用，你可能希望直接这么做。实例化助手和实例化其他PHP类的方法一样。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.actionhelper.broker">
-        <title>助手经纪人</title>
+    <section xml:id="zend.controller.actionhelper.broker"><info><title>助手经纪人</title></info>
+        
 
         <para>
             <code>Zend_Controller_Action_HelperBroker</code>处理注册助手对象和助手路径，即时的获取助手等细节。
@@ -82,8 +83,8 @@ $this->_helper->FlashMessenger('We did something in the last request');
 
         <programlisting role="php"><![CDATA[
 Zend_Controller_Action_HelperBroker::addHelper($helper);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
            实例化助手并传入经纪人有点耗费时间和资源，不过<code>addPrefix()</code>和<code>addPath()</code>两个方法能够很容易的自动完成这些工作：
@@ -98,8 +99,8 @@ Zend_Controller_Action_HelperBroker::addHelper($helper);
                 <programlisting role="php"><![CDATA[
 // Add helpers prefixed with My_Action_Helpers in My/Action/Helpers/
 Zend_Controller_Action_HelperBroker::addPrefix('My_Action_Helpers');
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </listitem>
 
             <listitem>
@@ -111,8 +112,8 @@ Zend_Controller_Action_HelperBroker::addPrefix('My_Action_Helpers');
 // Add helpers prefixed with Helper in Plugins/Helpers/
 Zend_Controller_Action_HelperBroker::addPath('./Plugins/Helpers',
                                              'Helper');
-]]>
-                </programlisting>
+
+                ]]></programlisting>
             </listitem>
         </itemizedlist>
 
@@ -129,8 +130,8 @@ Zend_Controller_Action_HelperBroker::addPath('./Plugins/Helpers',
 if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
     echo 'Redirector helper registered';
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             从助手经纪人中获取助手有两个静态方法：<code>getExistingHelper()</code> 和 <code>getStaticHelper()</code> 。<code>getExistingHelper()</code>将获取助手仅当它以前调用过或者显性地通过助手经纪人注册过，否则就抛出一个异常。<code>getStaticHelper()</code> 的做法和<code>getExistingHelper()</code>一样，但如果还没有注册助手堆栈，它将尝试初始化助手，为获取你要配置的的助手，<code>getStaticHelper()</code>是一个好的选择。
@@ -152,8 +153,8 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
 $redirector =
     Zend_Controller_Action_HelperBroker::getStaticHelper('redirector');
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
            最后，使用<code>removeHelper($name)</code>来删除助手经纪人中的某个助手，<code>$name</code>是助手的短名称。
@@ -164,28 +165,28 @@ $redirector =
 if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
     Zend_Controller_Action_HelperBroker::removeHelper('redirector')
 }
-]]>
-        </programlisting>
-    </sect2>
 
-    <sect2 id="zend.controller.actionhelper.stockhelpers">
-        <title>内建的动作助手</title>
+        ]]></programlisting>
+    </section>
+
+    <section xml:id="zend.controller.actionhelper.stockhelpers"><info><title>内建的动作助手</title></info>
+        
 
         <para>
            Zend Framework 默认包含若干个动作助手：<code>AutoComplete</code> 自动响应 AJAX 的自动完成；<code>ContextSwitch</code> 和 <code>AjaxContext</code> 为你的动作提供替代响应格式；<code>FlashMessenger</code> 用来处理Flash Messenger会话；<code>Json</code> 用来解码和发送 JSON 响应；<code>Redirector</code> 提供另一种实现方式，帮助程序重定向到内部或者外部页面；<code>ViewRenderer</code> 自动的完成在控制器内建立视图对象并渲染视图的过程。
         </para>
 
-        <xi:include href="Zend_Controller-ActionHelpers-ActionStack.xml" />
-        <xi:include href="Zend_Controller-ActionHelpers-AutoComplete.xml" />
-        <xi:include href="Zend_Controller-ActionHelpers-ContextSwitch.xml" />
-        <xi:include href="Zend_Controller-ActionHelpers-FlashMessenger.xml" />
-        <xi:include href="Zend_Controller-ActionHelpers-Json.xml" />
-        <xi:include href="Zend_Controller-ActionHelpers-Redirector.xml" />
-        <xi:include href="Zend_Controller-ActionHelpers-ViewRenderer.xml" />
-    </sect2>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-ActionStack.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-AutoComplete.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-ContextSwitch.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-FlashMessenger.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-Json.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-Redirector.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-ViewRenderer.xml"/>
+    </section>
 
-    <sect2 id="zend.controller.actionhelper.writingyourown">
-        <title>编写自己的助手</title>
+    <section xml:id="zend.controller.actionhelper.writingyourown"><info><title>编写自己的助手</title></info>
+        
 
         <para>
            动作助手继承抽象类<code>Zend_Controller_Action_Helper_Abstract</code>，该类提供了助手经纪人要求的基本接口和功能，包含下列方法：
@@ -242,8 +243,8 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
         <programlisting role="php"><![CDATA[
 // Redirect to /blog/view/item/id/42
 $this->_helper->redirector('item', 'view', 'blog', array('id' => 42));
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
            在内部，助手经纪人的<code>__call()</code>方法先寻找名叫<code>redirector</code>的助手，然后检查该助手的<code>direct</code>方法是否定义，然后使用所提供的参数来调用该方法。
@@ -252,8 +253,5 @@ $this->_helper->redirector('item', 'view', 'blog', array('id' => 42));
         <para>
            如果创建了自己的助手，可以按照前面章节所述的提供相应的访问方法。
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

@@ -1,5 +1,6 @@
-<sect2 id="zend.dojo.form.elements">
-    <title>Dijit-Specific 表单元素</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.form.elements"><info><title>Dijit-Specific 表单元素</title></info>
+    
 
     <para>
         每个被提供视图助手的 dijit 表单都有相应的<code>Zend_Form</code>元素。它们都有下列方法来处理 dijit 参数：
@@ -71,8 +72,8 @@ $element->addDecorator('DijitElement')
         下列 dijit 元素随标准的 Zend Framework 版本发行。
     </para>
 
-    <sect3 id="zend.dojo.form.elements.button">
-        <title>按钮</title>
+    <section xml:id="zend.dojo.form.elements.button"><info><title>按钮</title></info>
+        
 
         <para>
             虽然不是从 <link linkend="zend.form.standardElements.button">标准 Button 元素</link>中派生，
@@ -95,8 +96,8 @@ $element->addDecorator('DijitElement')
             另外，只有 <code>DijitElement</code> 和 <code>DtDdWrapper</code> 装饰器用于按钮元素。
         </para>
 
-        <example id="zend.dojo.form.elements.button.example">
-            <title> 按钮 dijit 元素用法范例 </title>
+        <example xml:id="zend.dojo.form.elements.button.example"><info><title> 按钮 dijit 元素用法范例 </title></info>
+            
 
             <programlisting role="php"><![CDATA[
 $form->addElement(
@@ -108,10 +109,10 @@ $form->addElement(
 );
 ]]></programlisting>
         </example>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.form.elements.checkBox">
-        <title>检查框</title>
+    <section xml:id="zend.dojo.form.elements.checkBox"><info><title>检查框</title></info>
+        
 
         <para>
             虽然不是从 <link linkend="zend.form.standardElements.checkbox"> 标准检查框元素 </link> 里派生，
@@ -144,8 +145,8 @@ $form->addElement(
             </para></listitem>
         </itemizedlist>
 
-        <example id="zend.dojo.form.elements.checkBox.example">
-            <title> 检查框 dijit 元素用法范例 </title>
+        <example xml:id="zend.dojo.form.elements.checkBox.example"><info><title> 检查框 dijit 元素用法范例 </title></info>
+            
 
             <programlisting role="php"><![CDATA[
 $form->addElement(
@@ -160,10 +161,10 @@ $form->addElement(
 );
 ]]></programlisting>
         </example>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.form.elements.comboBox">
-        <title> 组合框（ComboBox）和 FilteringSelect</title>
+    <section xml:id="zend.dojo.form.elements.comboBox"><info><title> 组合框（ComboBox）和 FilteringSelect</title></info>
+        
 
         <para>
             正如在组合框 <link linkend="zend.dojo.view.dijit.form">dijit 视图助手文档 </link> 里的注释，
@@ -171,8 +172,8 @@ $form->addElement(
             FilteringSelect 也一样，但不允许任意输入。
         </para>
 
-        <note>
-            <title>组合框（ComboBoxes） 返回标签值</title>
+        <note><info><title>组合框（ComboBoxes） 返回标签值</title></info>
+            
 
             <para>
                 组合框返回标签值而不是选项值，它可期望导致分离（disconnect）。
@@ -234,8 +235,8 @@ $form->addElement(
             来禁止该行为。
         </para>
 
-        <example id="zend.dojo.form.elements.comboBox.selectExample">
-            <title> 使用组合框 dijit 元素做选择输入的范例 </title>
+        <example xml:id="zend.dojo.form.elements.comboBox.selectExample"><info><title> 使用组合框 dijit 元素做选择输入的范例 </title></info>
+            
 
             <programlisting role="php"><![CDATA[
 $form->addElement(
@@ -258,8 +259,8 @@ $form->addElement(
 ]]></programlisting>
         </example>
 
-        <example id="zend.dojo.form.elements.comboBox.datastoreExample">
-            <title> 带数据存储的组合框 dijit 元素用法范例</title>
+        <example xml:id="zend.dojo.form.elements.comboBox.datastoreExample"><info><title> 带数据存储的组合框 dijit 元素用法范例</title></info>
+            
 
             <programlisting role="php"><![CDATA[
 $form->addElement(
@@ -283,20 +284,18 @@ $form->addElement(
         <para>
             上述例子也可以使用 <code>FilteringSelect</code> 来代替 <code>ComboBox</code>。
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.form.elements.currencyTextBox">
-        <title> 货币文字框 </title>
+    <section xml:id="zend.dojo.form.elements.currencyTextBox"><info><title> 货币文字框 </title></info>
+        
 
         <para>
             货币文字框主要用来支持货币输入。货币可以是本地化的，并且支持带小数的和不带小数的数值。
         </para>
 
         <para>
-            在内部，货币文字框由 <link
-                linkend="zend.dojo.form.elements.numberTextBox">NumberTextBox</link>、
-            <link
-                linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>
+            在内部，货币文字框由 <link linkend="zend.dojo.form.elements.numberTextBox">NumberTextBox</link>、
+            <link linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>
             和 <link linkend="zend.dojo.form.elements.textBox">TextBox</link> 派生，
             所有对这些类可用的方法也对它可用。另外，也可用下列约束方法：
         </para>
@@ -304,7 +303,7 @@ $form->addElement(
         <itemizedlist>
             <listitem><para>
                 <code>setCurrency($currency)</code>: 设置要使用的货币类型；
-                遵循 <ulink url="http://en.wikipedia.org/wiki/ISO_4217">ISO-4217</ulink> 规范。
+                遵循 <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/ISO_4217">ISO-4217</link> 规范。
             </para></listitem>
 
             <listitem><para>
@@ -312,8 +311,7 @@ $form->addElement(
             </para></listitem>
 
             <listitem><para>
-                <code>setSymbol($symbol)</code>: 设置 3-letter <ulink
-                    url="http://en.wikipedia.org/wiki/ISO_4217">ISO-4217</ulink> 货币符号。
+                <code>setSymbol($symbol)</code>: 设置 3-letter <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/ISO_4217">ISO-4217</link> 货币符号。
             </para></listitem>
 
             <listitem><para>
@@ -329,8 +327,8 @@ $form->addElement(
             </para></listitem>
         </itemizedlist>
 
-        <example id="zend.dojo.form.elements.currencyTextBox.example">
-            <title> 货币文字框 dijit 元素用法范例 </title>
+        <example xml:id="zend.dojo.form.elements.currencyTextBox.example"><info><title> 货币文字框 dijit 元素用法范例 </title></info>
+            
 
             <programlisting role="php"><![CDATA[
 $form->addElement(
@@ -346,18 +344,17 @@ $form->addElement(
 );
 ]]></programlisting>
         </example>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.form.elements.dateTextBox">
-        <title> 日期文字框 </title>
+    <section xml:id="zend.dojo.form.elements.dateTextBox"><info><title> 日期文字框 </title></info>
+        
 
         <para>
             日期文字框提供一个下拉式日历用来选择日期，也有一个客户端的日期校验和格式化。
         </para>
 
         <para>
-            在内部，日期文字框从 <link
-                linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>
+            在内部，日期文字框从 <link linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>
             和 <link linkend="zend.dojo.form.elements.textBox">TextBox</link> 派生，
             所有对这些类可用的方法也对它可用。另外，下列方法也可以独立使用：
         </para>
@@ -379,9 +376,8 @@ $form->addElement(
 
             <listitem><para>
                 <code>setDatePattern($pattern)</code> 和
-                <code>getDatePattern()</code>: 提供和读取 <ulink
-                    url="http://www.unicode.org/reports/tr35/#Date_Format_Patterns">unicode
-                    日期格式模型 </ulink> 来格式化日期。
+                <code>getDatePattern()</code>: 提供和读取 <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.unicode.org/reports/tr35/#Date_Format_Patterns">unicode
+                    日期格式模型 </link> 来格式化日期。
             </para></listitem>
 
             <listitem><para>
@@ -396,8 +392,8 @@ $form->addElement(
             </para></listitem>
         </itemizedlist>
 
-        <example id="zend.dojo.form.elements.dateTextBox.example">
-            <title> 日期文字框 dijit 元素用法范例 </title>
+        <example xml:id="zend.dojo.form.elements.dateTextBox.example"><info><title> 日期文字框 dijit 元素用法范例 </title></info>
+            
 
             <programlisting role="php"><![CDATA[
 $form->addElement(
@@ -412,10 +408,10 @@ $form->addElement(
 );
 ]]></programlisting>
         </example>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.form.elements.horizontalSlider">
-        <title> 水平滑尺（HorizontalSlider）</title>
+    <section xml:id="zend.dojo.form.elements.horizontalSlider"><info><title> 水平滑尺（HorizontalSlider）</title></info>
+        
 
         <para>
             水平滑尺提供了一个滑尺 UI 小部件用来在一个范围内选择数值。
@@ -423,8 +419,7 @@ $form->addElement(
         </para>
 
         <para>
-            水平滑尺从 <link
-                linkend="zend.dojo.form.elements.slider">abstract Slider dijit
+            水平滑尺从 <link linkend="zend.dojo.form.elements.slider">abstract Slider dijit
                 element</link> 派生。另外，有许多方法用来设置和配置滑尺刻度和刻度标签。
         </para>
 
@@ -480,8 +475,8 @@ $form->addElement(
             </listitem>
         </itemizedlist>
 
-        <example id="zend.dojo.form.elements.horizontalSlider.example">
-            <title> 水平滑尺 dijit 元素用法范例 </title>
+        <example xml:id="zend.dojo.form.elements.horizontalSlider.example"><info><title> 水平滑尺 dijit 元素用法范例 </title></info>
+            
 
             <para>
                 下面创建一个整数范围为 -10到10的水平滑尺。顶上有 20%、 40%、 60% 和 80%标记。
@@ -534,10 +529,10 @@ $form->addElement(
 );
 ]]></programlisting>
         </example>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.form.elements.numberSpinner">
-        <title> 数字微调控制器（NumberSpinner）</title>
+    <section xml:id="zend.dojo.form.elements.numberSpinner"><info><title> 数字微调控制器（NumberSpinner）</title></info>
+        
 
         <para>
             数字微调控制器是一个文本元素用来输入数字值；它也包括用于增加和减少一定值的元素。
@@ -591,8 +586,8 @@ $form->addElement(
             </para></listitem>
         </itemizedlist>
 
-        <example id="zend.dojo.form.elements.numberSpinner.example">
-            <title> 数字微调控制器 dijit 元素用法范例 </title>
+        <example xml:id="zend.dojo.form.elements.numberSpinner.example"><info><title> 数字微调控制器 dijit 元素用法范例 </title></info>
+            
 
             <programlisting role="php"><![CDATA[
 $form->addElement(
@@ -613,10 +608,10 @@ $form->addElement(
 );
 ]]></programlisting>
         </example>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.form.elements.numberTextBox">
-        <title> 数字框 </title>
+    <section xml:id="zend.dojo.form.elements.numberTextBox"><info><title> 数字框 </title></info>
+        
 
         <para>
             数字框是一个文本元素用来输入数字值，不象数字增变器，数字框用手工输入。
@@ -624,8 +619,7 @@ $form->addElement(
         </para>
 
         <para>
-            在内部，数字框从 <link
-                linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>
+            在内部，数字框从 <link linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>
             和 <link linkend="zend.dojo.form.elements.textBox">TextBox</link>派生；
             所有对这些类可用的方法都可用，另外，下列方法可以独立使用：
         </para>
@@ -638,9 +632,8 @@ $form->addElement(
 
             <listitem><para>
                 <code>setPattern($pattern)</code> 和
-                <code>getPattern()</code>: 设置和获取一个 <ulink
-                    url="http://www.unicode.org/reports/tr35/#Number_Format_Patterns">数字模型格式
-                    </ulink> 来格式化数字。
+                <code>getPattern()</code>: 设置和获取一个 <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.unicode.org/reports/tr35/#Number_Format_Patterns">数字模型格式
+                    </link> 来格式化数字。
             </para></listitem>
 
             <listitem><para>
@@ -658,8 +651,8 @@ $form->addElement(
             </para></listitem>
         </itemizedlist>
 
-        <example id="zend.dojo.form.elements.numberTextBox.example">
-            <title> 数字框 dijit 元素用法范例 </title>
+        <example xml:id="zend.dojo.form.elements.numberTextBox.example"><info><title> 数字框 dijit 元素用法范例 </title></info>
+            
 
             <programlisting role="php"><![CDATA[
 $form->addElement(
@@ -678,10 +671,10 @@ $form->addElement(
 );
 ]]></programlisting>
         </example>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.form.elements.passwordTextBox">
-        <title>密码框</title>
+    <section xml:id="zend.dojo.form.elements.passwordTextBox"><info><title>密码框</title></info>
+        
 
         <para>
             密码框是个 ValidationTextBox，它和密码输入有联系；它唯一的意图是允许
@@ -689,14 +682,13 @@ $form->addElement(
         </para>
 
         <para>
-            在内部，密码框从 <link
-                linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>
+            在内部，密码框从 <link linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>
             和 <link linkend="zend.dojo.form.elements.textBox">TextBox</link> 派生；
             所有对这些类可用的方法都可用。
         </para>
 
-        <example id="zend.dojo.form.elements.passwordTextBox.example">
-            <title>密码框 dijit 元素用法范例</title>
+        <example xml:id="zend.dojo.form.elements.passwordTextBox.example"><info><title>密码框 dijit 元素用法范例</title></info>
+            
 
             <programlisting role="php"><![CDATA[
 $form->addElement(
@@ -713,10 +705,10 @@ $form->addElement(
 );
 ]]></programlisting>
         </example>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.form.elements.radioButton">
-        <title>单选按钮</title>
+    <section xml:id="zend.dojo.form.elements.radioButton"><info><title>单选按钮</title></info>
+        
 
         <para>
             单选按钮封装了标准单选输入元素来提供一个和其它 dojo dijits 一致的外观。
@@ -733,8 +725,8 @@ $form->addElement(
             <code>registerInArrayValidator</code>配置键来禁止该行为。
         </para>
 
-        <example id="zend.dojo.form.elements.radioButton.example">
-            <title> 单选按钮 dijit 元素用法范例 </title>
+        <example xml:id="zend.dojo.form.elements.radioButton.example"><info><title> 单选按钮 dijit 元素用法范例 </title></info>
+            
 
             <programlisting role="php"><![CDATA[
 $form->addElement(
@@ -752,10 +744,10 @@ $form->addElement(
 );
 ]]></programlisting>
         </example>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.form.elements.slider">
-        <title>滑尺摘要元素</title>
+    <section xml:id="zend.dojo.form.elements.slider"><info><title>滑尺摘要元素</title></info>
+        
 
         <para>
             <link linkend="zend.dojo.form.elements.horizontalSlider">水平滑尺</link> 和
@@ -805,10 +797,10 @@ $form->addElement(
         <para>
             范例在每个具体的继承类里提供。
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.form.elements.submitButton">
-        <title>提交按钮</title>
+    <section xml:id="zend.dojo.form.elements.submitButton"><info><title>提交按钮</title></info>
+        
 
         <para>
             虽然没有叫提交按钮的 Dijit，但我们还是在此提供一个按钮 dijit 用来提交
@@ -816,8 +808,8 @@ $form->addElement(
             <link linkend="zend.dojo.form.elements.button">按钮 dijit</link> 一模一样。
         </para>
 
-        <example id="zend.dojo.form.elements.submitButton.example">
-            <title>Example SubmitButton dijit element usage</title>
+        <example xml:id="zend.dojo.form.elements.submitButton.example"><info><title>Example SubmitButton dijit element usage</title></info>
+            
 
             <programlisting role="php"><![CDATA[
 $form->addElement(
@@ -831,10 +823,10 @@ $form->addElement(
 );
 ]]></programlisting>
         </example>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.form.elements.textBox">
-        <title>文字框</title>
+    <section xml:id="zend.dojo.form.elements.textBox"><info><title>文字框</title></info>
+        
 
         <para>
             文字框用来输入文字，在外观上和其它 dijit 保持一致。然而，它有一些过滤和校验的功能，详见下列方法：
@@ -866,8 +858,8 @@ $form->addElement(
             </para></listitem>
         </itemizedlist>
 
-        <example id="zend.dojo.form.elements.textBox.example">
-            <title> 文字框 dijit 元素用法范例 </title>
+        <example xml:id="zend.dojo.form.elements.textBox.example"><info><title> 文字框 dijit 元素用法范例 </title></info>
+            
 
             <programlisting role="php"><![CDATA[
 $form->addElement(
@@ -882,18 +874,18 @@ $form->addElement(
 );
 ]]></programlisting>
         </example>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.form.elements.textarea">
-        <title>Textarea</title>
+    <section xml:id="zend.dojo.form.elements.textarea"><info><title>Textarea</title></info>
+        
 
         <para>
             Textarea 就像标准的 HTML textarea一样。然而，它不支持行列的设置。
             作为替代，textarea 宽度可以用标准的 CSS 来设置，行就完全忽略了。当输入字符增加时，textarea 就垂直增长。
         </para>
 
-        <example id="zend.dojo.form.elements.textarea.example">
-            <title> Textarea dijit 元素用法范例 </title>
+        <example xml:id="zend.dojo.form.elements.textarea.example"><info><title> Textarea dijit 元素用法范例 </title></info>
+            
 
             <programlisting role="php"><![CDATA[
 $form->addElement(
@@ -907,20 +899,18 @@ $form->addElement(
 );
 ]]></programlisting>
         </example>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.form.elements.timeTextBox">
-        <title> 时间文字框 </title>
+    <section xml:id="zend.dojo.form.elements.timeTextBox"><info><title> 时间文字框 </title></info>
+        
 
         <para>
             时间文字框是提供下拉式选择时间的文字输入框。下拉框可配置为显示一特定的时间窗口，带有特定的增量。
         </para>
 
         <para>
-            在内部，时间文字框从 <link
-                linkend="zend.dojo.form.elements.dateTextBox">日期文字框</link>、
-            <link
-                linkend="zend.dojo.form.elements.validationTextBox">校验文字框</link>
+            在内部，时间文字框从 <link linkend="zend.dojo.form.elements.dateTextBox">日期文字框</link>、
+            <link linkend="zend.dojo.form.elements.validationTextBox">校验文字框</link>
             和 <link linkend="zend.dojo.form.elements.textBox">文字框</link> 派生。
             所有对这些类可用的方法都可用。另外，下列方法可以独立使用：
         </para>
@@ -928,15 +918,13 @@ $form->addElement(
         <itemizedlist>
             <listitem><para>
                 <code>setTimePattern($pattern)</code> 和
-                <code>getTimePattern()</code>: 设置和获取 <ulink
-                    url="http://www.unicode.org/reports/tr35/#Date_Format_Patterns">unicode
-                    时间格式模型</ulink> 来格式化时间。
+                <code>getTimePattern()</code>: 设置和获取 <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.unicode.org/reports/tr35/#Date_Format_Patterns">unicode
+                    时间格式模型</link> 来格式化时间。
             </para></listitem>
 
             <listitem><para>
                 <code>setClickableIncrement($format)</code> 和
-                <code>getClickableIncrement()</code>: 设置 <ulink
-                    url="http://en.wikipedia.org/wiki/ISO_8601">ISO-8601</ulink> 字符串，来表示
+                <code>getClickableIncrement()</code>: 设置 <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/ISO_8601">ISO-8601</link> 字符串，来表示
                     每个在时间 picker increses 的可点击的元素的数量。
             </para></listitem>
 
@@ -952,8 +940,8 @@ $form->addElement(
             </para></listitem>
         </itemizedlist>
 
-        <example id="zend.dojo.form.elements.timeTextBox.example">
-            <title> 时间文字框 dijit 元素用法范例 </title>
+        <example xml:id="zend.dojo.form.elements.timeTextBox.example"><info><title> 时间文字框 dijit 元素用法范例 </title></info>
+            
 
             <para>
                 下面讲生成一个时间文字框，每次显示 2 小时，增量是 10 分钟。
@@ -973,10 +961,10 @@ $form->addElement(
 );
 ]]></programlisting>
         </example>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.form.elements.validationTextBox">
-        <title>校验文字框</title>
+    <section xml:id="zend.dojo.form.elements.validationTextBox"><info><title>校验文字框</title></info>
+        
 
         <para>
             校验文字框添加校验和限制给文字输入。
@@ -1022,8 +1010,8 @@ $form->addElement(
             </para></listitem>
         </itemizedlist>
 
-        <example id="zend.dojo.form.elements.validationTextBox.example">
-            <title> 校验文字框 dijit 元素用法范例 </title>
+        <example xml:id="zend.dojo.form.elements.validationTextBox.example"><info><title> 校验文字框 dijit 元素用法范例 </title></info>
+            
 
             <para>
                 下面生成一个校验文字框，要求只包含字符的单个字符串（例如，没有空格，大部分标点符号无效）。
@@ -1042,10 +1030,10 @@ $form->addElement(
 );
 ]]></programlisting>
         </example>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.form.elements.verticalSlider">
-        <title>垂直滑尺（VerticalSlider）</title>
+    <section xml:id="zend.dojo.form.elements.verticalSlider"><info><title>垂直滑尺（VerticalSlider）</title></info>
+        
 
         <para>
             垂直滑尺是<link linkend="zend.dojo.form.elements.horizontalSlider">水平滑尺</link>的兄弟，
@@ -1054,8 +1042,8 @@ $form->addElement(
             分别替代了 HorizontalRule 和 HorizontalRuleLabels。
         </para>
 
-        <example id="zend.dojo.form.elements.verticalSlider.example">
-            <title> 垂直 dijit 元素使用范例 </title>
+        <example xml:id="zend.dojo.form.elements.verticalSlider.example"><info><title> 垂直 dijit 元素使用范例 </title></info>
+            
 
             <para>
                 下面创建一个整数范围为 -10到10的垂直滑尺。左边有 20%、 40%、 60% 和 80%标记。
@@ -1096,8 +1084,5 @@ $form->addElement(
 );
 ]]></programlisting>
         </example>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

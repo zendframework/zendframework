@@ -1,14 +1,15 @@
-<sect1 id="zend.validate.introduction">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.introduction"><info><title> 简介 </title></info>
 
-    <title> 简介 </title>
+    
 
     <para>
       Zend_Validate 组件提供一组通用的校验器。它也提供了一个简单的校验器链机制，即在用户定义的顺序下，多个校验器可以被用于单个的数据。
     </para>
 
-    <sect2 id="zend.validate.introduction.definition">
+    <section xml:id="zend.validate.introduction.definition"><info><title> 什么是校验器（validator）? </title></info>
 
-        <title> 什么是校验器（validator）? </title>
+        
 
         <para>
             校验器根据要求检查它的输入并产生一个布尔结果--是否输入被成功校验。如果输入不符合要求，校验器另外地提供信息来说明输入不符合要求。
@@ -18,11 +19,11 @@
             例如，一个 web 应用可能要求一个用户名的长度在6 到12个字符并可能只包含数字和文字。一个校验器可以被用来确保用户名符合要求。如果一个用户名不符合一个或者全部两个要求，知道它到底不符合哪个要求将非常有用。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.validate.introduction.using">
+    <section xml:id="zend.validate.introduction.using"><info><title>校验器的基本用法</title></info>
 
-        <title>校验器的基本用法</title>
+        
 
         <para>
            用这种方法定义校验为<code>Zend_Validate_Interface</code>提供了基础，它定义了两个方法，<code>isValid()</code> 和 <code>getMessages()</code>。<code>isValid()</code>方法根据提供的值来校验，当且仅当这个值通过校验条件，它返回<code>true</code>。
@@ -54,16 +55,16 @@ if ($validator->isValid($email)) {
         echo "Validation failure '$messageID': $message\n";
     }
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.validate.introduction.messages">
+    <section xml:id="zend.validate.introduction.messages"><info><title> 定制消息 </title></info>
 
-        <title> 定制消息 </title>
+        
 
         <para>
             校验类提供了一个<code>setMessage()</code>方法，你可以指定校验失败后由<code>getMessages()</code>返回的消息的格式。这个方法的第一个参数是一个包含错误信息的的字符串。你可以在字符串中包含令牌，它将被和校验器相关的数据替换。所有的校验器都支持令牌 <code>%value%</code>；这被你传递给<code>isValid()</code>的值替换。其它的令牌按情况在每个校验类中被支持。例如，<code>%max%</code>是一个被<code>Zend_Validate_LessThan</code>支持的令牌。The <code>getMessageVariables()</code>方法返回一个被校验器支持的令牌变量的数组。
@@ -89,8 +90,8 @@ if (!$validator->isValid('word')) {
 
     // echoes "The string 'word' is too short; it must be at least 8 characters"
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </para>
 
         <para>
@@ -105,8 +106,8 @@ $validator->setMessages( array(
     Zend_Validate_StringLength::TOO_SHORT => 'The string \'%value%\' is too short',
     Zend_Validate_StringLength::TOO_LONG  => 'The string \'%value%\' is too long'
 ));
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </para>
 
@@ -127,15 +128,15 @@ if (!validator->isValid('word')) {
         . $validator->max
         . "\n";
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.validate.introduction.static">
+    <section xml:id="zend.validate.introduction.static"><info><title> 使用静态 <code>is()</code> 方法 </title></info>
 
-        <title> 使用静态 <code>is()</code> 方法 </title>
+        
 
         <para>
             如果加载一个校验类并创建这个校验器的实例不方便，你可以使用静态方法<code>Zend_Validate::is()</code>作为可选的调用风格。第一个参数是一个数据输入值，你将把它传递给<code>isValid()</code>方法。第二个参数是一个字符串，它和校验类的基本名字对应，和<code>Zend_Validate</code>名字空间相关。<code>is()</code>方法自动加载这个类，创建一个实例，并应用<code>isValid()</code>方法到数据输入。
@@ -146,8 +147,8 @@ require_once 'Zend/Validate.php';
 if (Zend_Validate::is($email, 'EmailAddress')) {
     // 是, email 有效
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </para>
 
         <para>
@@ -159,8 +160,8 @@ require_once 'Zend/Validate.php';
 if (Zend_Validate::is($value, 'Between', array(1, 12))) {
     // Yes, $value is between 1 and 12
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </para>
 
         <para>
@@ -172,14 +173,11 @@ if (Zend_Validate::is($value, 'Between', array(1, 12))) {
         </para>
 
         <para>
-            并且，<code>Zend_Filter_Input</code> 类允许你按需求实例化和运行多个过滤器和校验器类来处理输入数据集合，参见<xref linkend="zend.filter.input" />。
+            并且，<code>Zend_Filter_Input</code> 类允许你按需求实例化和运行多个过滤器和校验器类来处理输入数据集合，参见<xref linkend="zend.filter.input"/>。
 
         </para>
 
-    </sect2>
+    </section>
 
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

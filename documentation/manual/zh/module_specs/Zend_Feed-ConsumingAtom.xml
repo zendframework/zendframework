@@ -1,13 +1,14 @@
-<sect1 id="zend.feed.consuming-atom">
-<title>Atom Feed的使用</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom"><info><title>Atom Feed的使用</title></info>
+
 
     <para>
         <code>Zend_Feed_Atom</code>在使用上有许多方法与<code>Zend_Feed_Rss</code>是大相径庭的。它提供了相同的方法访问Feed中的属性和遍历所有Feed中的所有条目。不同之处在于Atom协议结构自身。Atom作为RSS的继承者，它是一个更广泛的协议，在处理Feed中提供的所有内容方面它被设计的更加容易，RSS中的<code>description</code>标记在Atom中被分割成两个元素<code>summary</code> 和
          <code>content</code>就是为了这个目的。
     </para>
 
-    <example id="zend.feed.consuming-atom.example.usage">
-        <title>Atom Feed的基本用法</title>
+    <example xml:id="zend.feed.consuming-atom.example.usage"><info><title>Atom Feed的基本用法</title></info>
+        
         <para>
             读取一个Atom Feed并打印出每个条目的<code>title</code> 和 <code>summary</code>：
         </para>
@@ -42,8 +43,8 @@ foreach ($feed as $entry) {
             <listitem>
                 <para><code>subtitle</code> - Feed的描述，等同于RSS中的频道描述
                 </para>
-                <para><code>author->name()</code> - Feed作者名</para>
-                <para><code>author->email()</code> - Feed作者的email地址</para>
+                <para><code>author-&gt;name()</code> - Feed作者名</para>
+                <para><code>author-&gt;email()</code> - Feed作者的email地址</para>
             </listitem>
         </itemizedlist>
     </para>
@@ -82,9 +83,6 @@ foreach ($feed as $entry) {
     </para>
 
     <para>
-        更多关于Atom的信息和丰富的资源，请参看<ulink url="http://www.atomenabled.org/">http://www.atomenabled.org/</ulink>.
+        更多关于Atom的信息和丰富的资源，请参看<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.atomenabled.org/">http://www.atomenabled.org/</link>.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

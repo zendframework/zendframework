@@ -1,8 +1,9 @@
-<sect1 id="zend.controller.response">
-    <title>响应对象</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.response"><info><title>响应对象</title></info>
+    
 
-    <sect2 id="zend.controller.response.usage">
-        <title>用法</title>
+    <section xml:id="zend.controller.response.usage"><info><title>用法</title></info>
+        
 
         <para>
             响应对象逻辑上是<link linkend="zend.controller.request">请求对象</link>的搭档.目的在于收集消息体和/或消息头，因而可能返回大批的结果。另外前端控制器可能传递任何异常到响应对象，允许开发人员优美的处理异常。可以通过设置            <code>Zend_Controller_Front::throwExceptions(true)</code>覆盖这项功能：
@@ -10,8 +11,8 @@
 
         <programlisting role="php"><![CDATA[
 $front->throwExceptions(true);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             如果要发送响应输出包括消息头，使用<code>sendResponse()</code>。
@@ -19,8 +20,8 @@ $front->throwExceptions(true);
 
         <programlisting role="php"><![CDATA[
 $response->sendResponse();
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <note>
             <para>
@@ -34,8 +35,8 @@ $response = $front->dispatch();
 // do some more processing, such as logging...
 // and then send the output:
 $response->sendResponse();
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </note>
 
         <para>
@@ -48,8 +49,8 @@ $response->sendResponse();
 $this->getResponse()
     ->setHeader('Content-Type', 'text/html')
     ->appendBody($content);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             这样做，可以在显示内容之前，将所有消息头一次发送。
@@ -85,8 +86,8 @@ $response = $front->dispatch();
 
 // finally, echo the response
 $response->sendResponse();
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
                   默认地，异常消息是不显示的。可以通过调用<code>renderExceptions()</code>覆盖默认设置。或者启用前端控制器的throwExceptions():
@@ -105,12 +106,12 @@ $response->sendResponse();
 // or:
 $front->throwExceptions(true);
 $front->dispatch();
-]]>
-        </programlisting>
-    </sect2>
 
-    <sect2 id="zend.controller.response.headers">
-        <title>处理消息头</title>
+        ]]></programlisting>
+    </section>
+
+    <section xml:id="zend.controller.response.headers"><info><title>处理消息头</title></info>
+        
 
         <para>
                   如上文所述，响应对象的一项重要职责是收集和发出HTTP响应消息头，相应地存在大量的方法:
@@ -183,10 +184,10 @@ $front->dispatch();
         <para>
                   除了上述方法，还有获取和设置当前请求HTTP响应码的访问器，            <code>setHttpResponseCode()</code> 和            <code>getHttpResponseCode()</code>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.response.namedsegments">
-        <title>命名片段</title>
+    <section xml:id="zend.controller.response.namedsegments"><info><title>命名片段</title></info>
+        
 
         <para>
                   相应对象支持“命名片段”。允许你将消息体分割成不同的片段，并呈一定顺序排列。因此输出的是以特定次序返回的。在其内部，主体内容被存储为一个数组，大量的访问器方法可以用来指示数组内位置和名称。
@@ -227,8 +228,8 @@ class MyController extends Zend_Controller_Action
         $this->render();
     }
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
                   上面的例子中，调用<code>/my/foo</code>会使得最终响应对象中的内容呈现下面的结构：
@@ -240,8 +241,8 @@ array(
     'default' => ..., // body content from MyController::fooAction()
     'footer'  => ...  // footer content
 );
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             渲染响应时，会按照数组中元素顺序来渲染。
@@ -288,10 +289,10 @@ array(
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.response.exceptions">
-        <title>在响应对象中测试异常</title>
+    <section xml:id="zend.controller.response.exceptions"><info><title>在响应对象中测试异常</title></info>
+        
 
         <para>
                   如上文所述，默认的，分发过程中的异常发生会在响应对象中注册。异常会注册在一个堆中，允许你抛出所有异常--程序异常，分发异常，插件异常等。如果你要检查或者记录特定的异常，你可能想要使用响应对象的异常API：
@@ -358,10 +359,10 @@ array(
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.response.subclassing">
-        <title>子类化响应对象</title>
+    <section xml:id="zend.controller.response.subclassing"><info><title>子类化响应对象</title></info>
+        
 
         <para>
                   响应对象的目的首先在于从大量的动作和插件中收集消息头和内容，然后返回到客户端；其次，响应对象也收集发生的任何异常，以处理或者返回这些异常，再或者对终端用户隐藏它们。
@@ -374,9 +375,5 @@ array(
         <para>
                   子类化响应对象的原因包括基于请求环境修改返回的内容的输出方式（例如：在CLI和PHP-GTK请求中不发送消息头）增加返回存储在命名片段中内容的最终视图的功能等等。
         </para>
-    </sect2>
-</sect1>
-
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

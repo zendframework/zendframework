@@ -1,5 +1,6 @@
-<sect1 id="zend.cache.introduction">
-    <title>Introducere</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.introduction"><info><title>Introducere</title></info>
+    
     <para>
         <code>Zend_Cache</code> oferă un mod generic de a stoca temporar orice fel de date.
     </para>
@@ -14,8 +15,8 @@
         Totuşi, pentru nevoi specifice, există interfeţe care extind <code>Zend_Cache_Core</code>
         pentru convenienţă: <code>Output</code>, <code>File</code>, <code>Function</code> şi <code>Class</code>.
     </para>
-    <example>
-        <title>Obţinerea unei interfeţe (frontend) cu <code>Zend_Cache::factory()</code></title>
+    <example><info><title>Obţinerea unei interfeţe (frontend) cu <code>Zend_Cache::factory()</code></title></info>
+        
         <para>
             <code>Zend_Cache::factory()</code> creează instanţe ale obiectelor şi face legătura între ele.
             În acest prim exemplu, vom folosi interfaţa <code>Core</code> împreună cu adaptorul <code>File</code>
@@ -35,12 +36,12 @@ $backendOptions = array(
 );
 
 // getting a Zend_Cache_Core object
-$cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);?>]]>
-            </programlisting>
+$cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);?>
+            ]]></programlisting>
     </example>
 
-    <note>
-        <title>Frontend şi backend construit din mai multe cuvinte</title>
+    <note><info><title>Frontend şi backend construit din mai multe cuvinte</title></info>
+        
         <para>
             Numele unor interfeţe şi backend-uri este construit din mai multe
             cuvinte, cum ar fi „ZendPlatform”. Când le specificaţi fabricii,
@@ -49,8 +50,8 @@ $cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
         </para>
     </note>
 
-    <example id="zend.cache.introduction.example-2">
-        <title>Păstrarea în cache a unui rezultat de interogare</title>
+    <example xml:id="zend.cache.introduction.example-2"><info><title>Păstrarea în cache a unui rezultat de interogare</title></info>
+        
 
        <para>
                Acum că avem o interfaţă, putem stoca orice tip de date (am pornit serializarea). De
@@ -79,12 +80,12 @@ if(!$result = $cache->load('myresult')) {
 
 }
 
-print_r($result);?>]]>
-        </programlisting>
+print_r($result);?>
+        ]]></programlisting>
     </example>
 
-    <example id="zend.cache.introduction.example-3">
-        <title>Punerea în cache a textelor afişate cu interfaţa de ieşire din <code>Zend_Cache</code></title>
+    <example xml:id="zend.cache.introduction.example-3"><info><title>Punerea în cache a textelor afişate cu interfaţa de ieşire din <code>Zend_Cache</code></title></info>
+        
         <para>
             Marcăm secţiuni în care dorim să punem în cache textele care vor fi afişate adăugând nişte condiţii,
             mai exact încapsulăm fiecare secţiune între metodele <code>start()</code> şi <code>end()</code>
@@ -114,8 +115,8 @@ if(!$cache->start('mypage')) {
     $cache->end(); // ieşirea este salvată şi trimisă navigatorului
 }
 
-echo 'Acest text nu este păstrat în cache niciodată ('.time().').';?>]]>
-        </programlisting>
+echo 'Acest text nu este păstrat în cache niciodată ('.time().').';?>
+        ]]></programlisting>
         <para>
            Notaţi că afişăm rezultatul funcţiei <code>time()</code> de două ori; o facem în scop
            demonstrativ. Încercaţi să reîmprospătaţi pagina de mai multe ori; veţi vedea că primul
@@ -131,7 +132,4 @@ echo 'Acest text nu este păstrat în cache niciodată ('.time().').';?>]]>
         şi metodei <code>start()</code>). Trebuie să fie unic pentru fiecare resursă pe care o puneţi în cache,
         altfel înregistrările se vor suprapune, sau se vor şterge reciproc.
     </para></note>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

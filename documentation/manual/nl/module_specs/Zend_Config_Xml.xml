@@ -1,5 +1,6 @@
-<sect1 id="zend.config.adapters.xml">
-    <title>Zend_Config_Xml</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.xml"><info><title>Zend_Config_Xml</title></info>
+    
     <para>
         <code>Zend_Config_Xml</code> staat programmeurs toe om configuratiedate in een eenvoudig
         XML bestand op te slaan en deze via geneste objecteigenschap syntax te lezen. Het root
@@ -11,16 +12,16 @@
         attribuut genaamd <code>extends</code>, en de waarde van dit attribuut komt overeen met de
         naam van de sectie waarvan de data moet worden overgeërfd door de uitbreidende sectie.
     </para>
-    <note>
-        <title>Teruggeef type</title>
+    <note><info><title>Teruggeef type</title></info>
+        
         <para>
             Configuratiedata die door <code>Zend_Config_Xml</code> word ingelezen wordt altijd als
             string terug gegeven. Omzetting van data van strings naar andere types wordt aan de
             programmeur overgelaten om aan hun specifieke behoeften te voldoen.
         </para>
     </note>
-    <example id="zend.config.adapters.xml.example.using">
-        <title>Zend_Config_Xml gebruiken</title>
+    <example xml:id="zend.config.adapters.xml.example.using"><info><title>Zend_Config_Xml gebruiken</title></info>
+        
         <para>
             Dit voorbeeld illustreert een basisgebruik van <code>Zend_Config_Xml</code> voor het
             inladen van configuratiedata vanuit een XML bestand. In dit voorbeeld vind je
@@ -65,7 +66,4 @@ $config = new Zend_Config_Xml('/path/to/config.xml', 'preproductie');
 echo $config->database->host; // geeft "dev.example.com"
 echo $config->database->name; // geeft "dbname"]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,8 +1,9 @@
-<sect1 id="zend.search.lucene.queries">
-    <title>Query Types</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.queries"><info><title>Query Types</title></info>
+    
 
-    <sect2 id="zend.search.lucene.queries.term-query">
-        <title>Term Query</title>
+    <section xml:id="zend.search.lucene.queries.term-query"><info><title>Term Query</title></info>
+        
         <para>
         Term queries zijn bedoeld voor het zoeken met een enkele term.
         </para>
@@ -11,8 +12,8 @@
         Query string:
         </para>
         <programlisting role="php"><![CDATA[
-    $hits = $index->find('word1');]]>
-        </programlisting>
+    $hits = $index->find('word1');
+        ]]></programlisting>
 
         <para>of</para>
 
@@ -26,10 +27,10 @@
     $hits  = $index->find($query);
 
 ?>]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.queries.multiterm-query">
-        <title>Multi-Term Query</title>
+    <section xml:id="zend.search.lucene.queries.multiterm-query"><info><title>Multi-Term Query</title></info>
+        
         <para>
             Multi term queries zijn bedoeld voor het zoeken op een set met termen.
         </para>
@@ -135,10 +136,10 @@ $hits = $index->find('+word1 author:word2 -word3');
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.queries.phrase-query">
-        <title>Phrase Query</title>
+    <section xml:id="zend.search.lucene.queries.phrase-query"><info><title>Phrase Query</title></info>
+        
         <para>
             Phrase Queries zijn bedoeld voor het zoeken op zinnen (uitdrukkingen?).
         </para>
@@ -304,5 +305,5 @@ $hits2 = $index->find($query);
 
 ?>]]></programlisting>
 
-    </sect2>
-</sect1>
+    </section>
+</section>

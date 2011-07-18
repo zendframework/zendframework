@@ -1,5 +1,6 @@
-<sect1 id="zend.feed.importing">
-    <title>Feeds importeren met Zend_Feed</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.importing"><info><title>Feeds importeren met Zend_Feed</title></info>
+    
     <para>
         <code>Zend_Feed</code> laat ontwikkelaars toe heel gemakkelijk feeds te verkrijgen. Indien je de URI
         van een feed kent, gebruik dan eenvoudigweg de <code>Zend_Feed::import()</code> methode:
@@ -9,7 +10,7 @@
 
 $feed = Zend_Feed::import('http://feeds.example.com/feedName');
 
-?>]]>   </programlisting>
+?>   ]]></programlisting>
     <para>
         Je kan <code>Zend_Feed</code> ook gebruiken om de inhoud van een feed vanuit een bestand of een
         PHP string variabele te verkrijgen:
@@ -32,7 +33,4 @@ $feedFromPHP = Zend_Feed::importString($feedString);
         worden verkregen. De importmethodes zullen ook een <code>Zend_Feed_Exception</code> opwerpen indien
         ze mislukken, zoals bij het importeren van een onleesbare of slecht gevormde feed.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

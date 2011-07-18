@@ -1,13 +1,14 @@
-<sect1 id="zend.layout.quickstart">
-    <title>Zend_Layout Snelle Start</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.quickstart"><info><title>Zend_Layout Snelle Start</title></info>
+    
 
     <para>
         Er zijn twee belangrijke gebruiksomgevingen voor <code>Zend_Layout</code>:
         mét en zonder Zend Framework MVC-componenten
     </para>
 
-    <sect2 id="zend.layout.quickstart.layouts">
-        <title>Layout scripts</title>
+    <section xml:id="zend.layout.quickstart.layouts"><info><title>Layout scripts</title></info>
+        
 
         <para>
             In beide gevallen heb je een layout script nodig.
@@ -53,8 +54,7 @@
             Doordat <code>Zend_Layout</code> <code>Zend_View</code> gebruikt om
             het layout script te renderen kun je alle geregistreerde View Helpers
             gebruiken en heb je ook toegang tot alle viewvariabelen die reeds
-            zijn ingesteld. Vooral handig zijn de verschillende <link
-                linkend="zend.view.helpers.initial.placeholder">placeholder
+            zijn ingesteld. Vooral handig zijn de verschillende <link linkend="zend.view.helpers.initial.placeholder">placeholder
             helpers</link>, die je in staat stellen om velerlei gegevens voor
             bijvoorbeeld de &lt;head&gt;-sectie, navigatie, etc. op te vragen:
         </para>
@@ -82,18 +82,16 @@
 </body>
 </html>
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.layout.quickstart.mvc">
-        <title>Zend_Layout met Zend Framework MVC-componenten</title>
+    <section xml:id="zend.layout.quickstart.mvc"><info><title>Zend_Layout met Zend Framework MVC-componenten</title></info>
+        
 
         <para>
             <code>Zend_Controller</code> biedt een uitgebreide set aan
-            uitbreidingsfunctionaliteiten via de <link
-            linkend="zend.controller.plugins">front controller plugins</link>
+            uitbreidingsfunctionaliteiten via de <link linkend="zend.controller.plugins">front controller plugins</link>
             en <link linkend="zend.controller.actionhelpers">actiiecontroller
-            helpers</link>. <code>Zend_View</code> heeft ook <link
-            linkend="zend.view.helpers">helpers</link>. <code>Zend_Layout</code>
+            helpers</link>. <code>Zend_View</code> heeft ook <link linkend="zend.view.helpers">helpers</link>. <code>Zend_Layout</code>
             gebruikt deze verschillende uitbreidingsmogelijkheden als het wordt
             gebruikt in een MVC-context.
         </para>
@@ -124,7 +122,7 @@ Zend_Layout::startMvc();
             configuratieopties of een instantie van <code>Zend_Config</code>
             meegeven om de instantie aan te passen aan jouw wensen.
             De verschillende beschikbare opties worden uitgelegd in
-            <xref linkend="zend.layout.options" />.
+            <xref linkend="zend.layout.options"/>.
         </para>
 
         <para>
@@ -209,15 +207,14 @@ $layout = Zend_Layout::getMvcInstance();
             Deze functionaliteit is vooral handig als hij wordt gebruikt samen
             met de ActionStack
             <link linkend="zend.controller.actionhelpers.actionstack">action
-                helper</link> en <link
-            linkend="zend.controller.plugins.standard.actionstack">plugin</link>.
+                helper</link> en <link linkend="zend.controller.plugins.standard.actionstack">plugin</link>.
             Hiermee kun je een lijst van uit te voeren acties aanleggen,
             waardoor je allerlei widgets kunt laden binnen één layout.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.layout.quickstart.standalone">
-        <title>Zend_Layout als standalone component</title>
+    <section xml:id="zend.layout.quickstart.standalone"><info><title>Zend_Layout als standalone component</title></info>
+        
 
         <para>
             Zonder de Zend Framework MVC-context is Zend_Layout niet half zo
@@ -261,10 +258,10 @@ $layout->setLayout('foo');
 // Render de uiteindelijke layout
 echo $layout->render();
 ?>]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.layout.quickstart.example">
-        <title>Voorbeeld</title>
+    <section xml:id="zend.layout.quickstart.example"><info><title>Voorbeeld</title></info>
+        
 
         <para>
             Soms zegt een plaatje meer dan duizend woorden. Vandaar de volgende
@@ -272,8 +269,7 @@ echo $layout->render();
         </para>
 
          <para>
-            <inlinegraphic align="center" valign="middle"
-                fileref="figures/zend.layout.quickstart.example.png" format="PNG" />
+            <inlinemediaobject><imageobject><imagedata align="center" valign="middle" fileref="figures/zend.layout.quickstart.example.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
         <para>
@@ -285,8 +281,5 @@ echo $layout->render();
             technische kant van het bij elkaar renderen van verschillende
             stukken inhoud blijft echter hetzelfde.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

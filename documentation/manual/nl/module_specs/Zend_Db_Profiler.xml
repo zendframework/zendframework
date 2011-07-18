@@ -1,10 +1,11 @@
-<sect1 id="zend.db.profiler">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.profiler"><info><title>Zend_Db_Profiler</title></info>
 
-    <title>Zend_Db_Profiler</title>
+    
 
-    <sect2 id="zend.db.profiler.introduction">
+    <section xml:id="zend.db.profiler.introduction"><info><title>Inleiding</title></info>
 
-        <title>Inleiding</title>
+        
 
         <para>
             <code>Zend_Db_Profiler</code> kan worden geactiveerd om queries te profileren.
@@ -39,11 +40,11 @@ $db->getProfiler()->setEnabled(false);
 // profiler activeren:
 $db->getProfiler()->setEnabled(true);
 ?>]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.profiler.using">
+    <section xml:id="zend.db.profiler.using"><info><title>De Profiler Gebruiken</title></info>
 
-        <title>De Profiler Gebruiken</title>
+        
 
         <para>
             De profiler kan op eender welk moment worden aangeroepen
@@ -151,11 +152,11 @@ echo 'Langste query tijd: ' . $longestTime . "\n";
 echo "Langste query: \n" . $longestQuery . "\n";
 ?>]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.profiler.advanced">
+    <section xml:id="zend.db.profiler.advanced"><info><title>Geavanceerd Profiler Gebruik</title></info>
 
-        <title>Geavanceerd Profiler Gebruik</title>
+        
 
         <para>
             Bovenop query inspectie staat de profiler je ook toe de queries die worden
@@ -163,8 +164,8 @@ echo "Langste query: \n" . $longestQuery . "\n";
             <code>Zend_Db_Profiler</code> instantie worden uitgevoerd:
         </para>
 
-        <sect3 id="zend.db.profiler.advanced.filtertime">
-            <title>Filteren op afgelopen tijd</title>
+        <section xml:id="zend.db.profiler.advanced.filtertime"><info><title>Filteren op afgelopen tijd</title></info>
+            
 
             <para>
                 <code>setFilterElapsedSecs()</code> laat je toe om een minimum
@@ -179,10 +180,10 @@ $profiler->setFilterElapsedSecs(5);
 // Profileer alle queries ongeacht de uitvoeringstijd:
 $profiler->setFilterElapsedSecs(null);
 ?>]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.profiler.advanced.filtertype">
-            <title>Filteren per type query</title>
+        <section xml:id="zend.db.profiler.advanced.filtertype"><info><title>Filteren per type query</title></info>
+            
 
             <para>
                 <code>setFilterQueryType()</code> laat je toe welk type queries moeten worden
@@ -256,10 +257,10 @@ $profiler->setFilterQueryType(Zend_Db_Profiler::DELETE);
 $profiler->setFilterQueryType(null);
 ?>]]></programlisting>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.profiler.advanced.getbytype">
-            <title>Profielen per type query verkrijgen</title>
+        <section xml:id="zend.db.profiler.advanced.getbytype"><info><title>Profielen per type query verkrijgen</title></info>
+            
 
             <para>
                 Het gebruik van <code>setFilterQueryType()</code> kan het aantal gegenereerde profielen
@@ -267,7 +268,7 @@ $profiler->setFilterQueryType(null);
                 bekijken die je op dat moment nodig hebt. Een andere eigenschap van <code>getQueryProfiles()</code>
                 is dat het kan filteren terwijl de code loopt, door het een type query (of een logische
                 combinatie van querytypes) als eerste argument door te geven; zie
-                <xref linkend="zend.db.profiler.advanced.filtertype" /> voor een lijst van de querytype
+                <xref linkend="zend.db.profiler.advanced.filtertype"/> voor een lijst van de querytype
                 constanten.
             </para>
 
@@ -282,11 +283,8 @@ $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::SELECT | Zend_Db_Profi
 $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::DELETE);
 ?>]]></programlisting>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

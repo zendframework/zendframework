@@ -1,5 +1,6 @@
-<sect1 id="zend.pdf.usage">
-    <title>Een gebruiksvoorbeeld voor de Zend_Pdf module</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.usage"><info><title>Een gebruiksvoorbeeld voor de Zend_Pdf module</title></info>
+    
     <para>
     Deze sectie geeft een voorbeeld van het gebruik van de Zend_Pdf module.
     </para>
@@ -11,8 +12,8 @@
     Er is ook een <filename>test.pdf</filename> bestand dat met dit voorbeeld kan gebruikt worden om te testen.
     </para>
 
-    <example>
-        <title>Zend_Pdf module voorbeeld</title>
+    <example><info><title>Zend_Pdf module voorbeeld</title></info>
+        
         <programlisting role="php"><![CDATA[<?php
 /**
  * @package Zend_Pdf
@@ -137,7 +138,4 @@ if (isset($argv[2])) {
 ]]></programlisting>
     </example>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

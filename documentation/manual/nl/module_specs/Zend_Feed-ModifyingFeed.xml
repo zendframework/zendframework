@@ -1,5 +1,6 @@
-<sect1 id="zend.feed.modifying-feed">
-    <title>Feed en Entry structuren wijzigen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.modifying-feed"><info><title>Feed en Entry structuren wijzigen</title></info>
+    
 
     <para>
         De intuïtieve syntax van <code>Zend_Feed</code> breidt zich uit voor het bouwen en wijzigen van feeds en
@@ -7,8 +8,8 @@
         goedgevormde XML terugsturen om het in een bestand op te slaan of naar een server te sturen.
     </para>
 
-    <example>
-        <title>Wijzigen van een bestaande Feed Entry</title>
+    <example><info><title>Wijzigen van een bestaande Feed Entry</title></info>
+        
         <programlisting role="php"><![CDATA[
 <?php
 
@@ -20,7 +21,7 @@ $entry->author->email = 'my_email@example.com';
 
 echo $entry->saveXML();
 
-?>]]>   </programlisting>
+?>   ]]></programlisting>
         <para>
             Dit zal een volledige (inclusief <code>&lt;?xml ... &gt;</code> proloog) XML representatie van de
             nieuwe entry weergeven, met inbegrip van alle nodige XML namespaces.
@@ -40,8 +41,8 @@ echo $entry->saveXML();
         namespace gaan als je niet uitdrukkelijk een andere namespace toewijst.
     </para>
 
-    <example>
-        <title>Een Atom Entry met elementen van een aangepaste namespace</title>
+    <example><info><title>Een Atom Entry met elementen van een aangepaste namespace</title></info>
+        
         <programlisting role="php"><![CDATA[
 <?php
 
@@ -60,9 +61,6 @@ $entry->{'myns:container_elt'}->part2 = 'tweede genesteld aangepast deel';
 
 echo $entry->saveXML();
 
-?>]]>   </programlisting>
+?>   ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

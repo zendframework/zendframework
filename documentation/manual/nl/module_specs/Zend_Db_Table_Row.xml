@@ -1,10 +1,11 @@
-<sect1 id="zend.db.table.row">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.row"><info><title>Zend_Db_Table_Row</title></info>
 
-    <title>Zend_Db_Table_Row</title>
+    
 
-    <sect2 id="zend.db.table.row.introduction">
+    <section xml:id="zend.db.table.row.introduction"><info><title>Inleiding</title></info>
 
-        <title>Inleiding</title>
+        
 
         <para>
             Zend_Db_Table_Row is een datarij gateway voor het Zend Framework. In het
@@ -15,11 +16,11 @@
             wijzigingen terug naar de oorspronkelijke tabel sturen via save().
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.row.fetch">
+    <section xml:id="zend.db.table.row.fetch"><info><title>Een rij ophalen</title></info>
 
-        <title>Een rij ophalen</title>
+        
 
         <para>
             Het eerste wat je moet doen is een Zend_Db_Table klasse instantiëren.
@@ -44,8 +45,8 @@ Zend_Db_Table::setDefaultAdapter($db);
 // verbinden met een tabel in de database
 class RoundTable extends Zend_Db_Table {}
 $table = new RoundTable();
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
         <para>
             Verkrijg één record van de database door Zend_Db_Table::find()
@@ -71,14 +72,14 @@ $row = $table->fetchRow('first_name = "Robin"');
 // $row->favoriteColor = 'yellow'
 //
 
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.row.modify">
+    <section xml:id="zend.db.table.row.modify"><info><title>Waarden wijzigen</title></info>
 
-        <title>Waarden wijzigen</title>
+        
 
         <para>
             Het wijzigen van rijwaarden is heel eenvoudig: werk gewoon met de object
@@ -106,8 +107,8 @@ $row = $table->fetchRow('first_name = "Robin"');
 // wijzig de leivelingskleur en schrijf de rij terug naar de tabel.
 $row->favoriteColor = 'blue';'
 $row->save();
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
         <para>
             Het is evenwel verboden de waarden van primaire keys te wijzigen; indien
@@ -129,11 +130,8 @@ try {
 } catch (Zend_Db_Table_RowException $e) {
     echo $e->getMessage();
 }
-?>]]>
-        </programlisting>
-    </sect2>
+?>
+        ]]></programlisting>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

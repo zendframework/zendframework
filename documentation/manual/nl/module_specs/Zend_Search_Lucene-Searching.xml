@@ -1,8 +1,9 @@
-<sect1 id="zend.search.lucene.searching">
-    <title>Het doorzoeken van een index</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.searching"><info><title>Het doorzoeken van een index</title></info>
+    
 
-    <sect2 id="zend.search.lucene.searching.query-parser">
-        <title>Opbouwen van Queries</title>
+    <section xml:id="zend.search.lucene.searching.query-parser"><info><title>Opbouwen van Queries</title></info>
+        
 
         <para>
             Er zijn twee manieren om door een index te zoeken. De eerste methode gebruikt de Query Parser om een query op te bouwen van een string. De tweede bied de mogelijkheid je eigen queries te maken via de Zend_Search_Lucene API.
@@ -52,12 +53,12 @@ $index->find($query);
         <para>
             Het is belangrijk om te zien dat <code>find()</code> case sensitive is. Standaard normaliseert LuceneIndexCreation.jar alle documenten naar kleine letters. Dit kan uitgezet worden met een command line switch (type LuceneIndexCreation.jar zonder argumenten voor hulp). De case van de tekst die aan <code>find()</code> wordt doorgegeven moet overeenkomen met die in de index. Als de index is genormaliseerd naar kleine letters, dan dient alle tekst die aan <code>find()</code> wordt doorgegeven worden onderworpen aan <code>strtolower()</code>, anders worden mogelijk geen resultaten gevonden.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.searching.results">
-        <title>Zoek resultaten</title>
+    <section xml:id="zend.search.lucene.searching.results"><info><title>Zoek resultaten</title></info>
+        
         <para>
-            Het zoek resultaat is een array van Zend_Search_Lucene_Search_QueryHit objecten.  Ieder van deze objecten heeft twee eigenschappen: <code>$hit->document</code> is een documentnummer binnen de index en <code>$hit->score</code> is een score van het resultaat binnen het volledige zoekresultaat. Resultaat wordt geordend op score (hoogste score komt eerst).
+            Het zoek resultaat is een array van Zend_Search_Lucene_Search_QueryHit objecten.  Ieder van deze objecten heeft twee eigenschappen: <code>$hit-&gt;document</code> is een documentnummer binnen de index en <code>$hit-&gt;score</code> is een score van het resultaat binnen het volledige zoekresultaat. Resultaat wordt geordend op score (hoogste score komt eerst).
         </para>
 
         <para>
@@ -117,11 +118,11 @@ foreach ($hits as $hit) {
         Let op dat de document identiteit ('path' in het voorbeeld) ook wordt opgeslagen in de index en vanuit de index opgehaald dient te worden.
         </para>
 
-    </sect2>
+    </section>
 
 
-    <sect2 id="zend.search.lucene.searching.results-scoring">
-        <title>Resultaten Scoring</title>
+    <section xml:id="zend.search.lucene.searching.results-scoring"><info><title>Resultaten Scoring</title></info>
+        
         <para>
             Zend_Search_Lucene gebruikt hetzelfde score algoritme als Java Lucene.
             Zoek resultaten worden geordend op score, met de hoogste score als eerst.
@@ -152,7 +153,6 @@ foreach ($hits as $hit) {
             Zend_Search_Lucene_Search_Similarity klasse wordt gebruikt om de score te berekenen. Zie <link linkend="zend.search.lucene.extending.scoring">Uitbreidbaarheid. Scoring Algoritmes</link> sectie voor details.
         </para>
 
-    </sect2>
+    </section>
 
-</sect1>
-
+</section>

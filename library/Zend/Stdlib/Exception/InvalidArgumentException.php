@@ -1,8 +1,8 @@
 <?php
 
-namespace Zend\Http\Exception;
+namespace Zend\Stdlib\Exception;
 
-use Zend\Http\Exception;
+use Zend\Stdlib\Exception;
 
 class InvalidArgumentException 
     extends \InvalidArgumentException 

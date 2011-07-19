@@ -660,11 +660,11 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
      */
     public function testMultipleBrokersInitialization()
     {
-        define('APPLICATION_PATH', __DIR__);
-        $application = new Application\Application('testing', APPLICATION_PATH.'/TestAsset/Zf2-36.ini');        
+        $application = new Application\Application('testing', __DIR__ . '/TestAsset/Zf2-36.ini');        
         $application->bootstrap();      
         $broker1 = $application->getBootstrap()->getBroker();
-        $application->getBootstrap()->setOptions(array('test'=>true));
+        $application->getBootstrap()
+                    ->setOptions(array('test' => true));
         $broker2 = $application->getBootstrap()->getBroker();
         $this->assertFalse(($broker1 !== $broker2), 'Application broker initialized second time');
     }

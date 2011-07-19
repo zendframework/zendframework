@@ -214,14 +214,11 @@ class Ec2 extends AbstractAdapter
     /**
      * Return a list of the available instancies
      *
-     * @return InstanceList|boolean
+     * @return InstanceList
      */ 
     public function listInstances() 
     {
         $this->adapterResult = $this->ec2->describe();
-        if (empty($this->adapterResult)) {
-            return false;
-        }
 
         $result = array();
         foreach ($this->adapterResult['instances'] as $instance) {
@@ -239,7 +236,7 @@ class Ec2 extends AbstractAdapter
     public function statusInstance($id)
     {
         $this->adapterResult = $this->ec2->describe($id);
-        if (empty($this->adapterResult)) {
+        if (empty($this->adapterResult['instances'])) {
             return false;
         }    
         $result = $this->adapterResult['instances'][0];
@@ -255,7 +252,7 @@ class Ec2 extends AbstractAdapter
     public function publicDnsInstance($id) 
     {
         $this->adapterResult = $this->ec2->describe($id);
-        if (empty($this->adapterResult)) {
+        if (empty($this->adapterResult['instances'])) {
             return false;
         }    
         $result = $this->adapterResult['instances'][0];
@@ -270,7 +267,8 @@ class Ec2 extends AbstractAdapter
      */ 
     public function rebootInstance($id)
     {
-        return $this->ec2->reboot($id);
+        $this->adapterResult= $this->ec2->reboot($id);
+        return $this->adapterResult;
     }
 
     /**
@@ -284,9 +282,10 @@ class Ec2 extends AbstractAdapter
     {
         // @todo instance's name management?
         $this->adapterResult = $this->ec2->run($options);
-        if (empty($this->adapterResult)) {
+        if (empty($this->adapterResult['instances'])) {
             return false;
         }
+        $this->error= false;
         return new Instance($this, $this->convertAttributes($this->adapterResult['instances'][0]));
     }
 
@@ -336,7 +335,8 @@ class Ec2 extends AbstractAdapter
         }
 
         $this->adapterResult = $this->ec2Image->describe();
-        $images              = array();
+                
+        $images = array();
 
         foreach ($this->adapterResult as $result) {
             switch (strtolower($result['platform'])) {
@@ -371,6 +371,7 @@ class Ec2 extends AbstractAdapter
             $this->ec2Zone = new Ec2Zone($this->accessKey,$this->accessSecret,$this->region);
         }
         $this->adapterResult = $this->ec2Zone->describe();
+
         $zones = array();
         foreach ($this->adapterResult as $zone) {
             if (strtolower($zone['zoneState'])==='available') {
@@ -388,7 +389,7 @@ class Ec2 extends AbstractAdapter
      * @param  string $id
      * @param  string $metric
      * @param  null|array $options
-     * @return array|boolean
+     * @return array
      */ 
     public function monitorInstance($id, $metric, $options = null)
     {
@@ -427,6 +428,7 @@ class Ec2 extends AbstractAdapter
         }
 
         $this->adapterResult = $this->ec2Monitor->getMetricStatistics($param);
+
         $monitor             = array();
         $num                 = 0;
         $average             = 0;

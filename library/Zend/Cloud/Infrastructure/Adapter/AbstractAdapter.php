@@ -42,7 +42,7 @@ abstract class AbstractAdapter implements Adapter
      * @var array
      */
     protected $adapterResult;
-
+    
     /**
      * Valid metrics for monitor
      * 

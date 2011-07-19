@@ -47,7 +47,7 @@ class PhpValue extends AbstractPhp
 
     const OUTPUT_MULTIPLE_LINE = 'multipleLine';
     const OUTPUT_SINGLE_LINE = 'singleLine';
-    
+
     /**
      * @var array of reflected constants
      */
@@ -72,12 +72,12 @@ class PhpValue extends AbstractPhp
      * @var string
      */
     protected $_outputMode = self::OUTPUT_MULTIPLE_LINE;
-    
+
     /**
      * @var array
      */
     protected $_allowedTypes = null;
-    
+
     /**
      * _init()
      *
@@ -281,7 +281,7 @@ class PhpValue extends AbstractPhp
                 $output .= ( $value ? 'true' : 'false' );
                 break;
             case self::TYPE_STRING:
-                $output .= "'" . addcslashes($value, "'") . "'";
+                $output .= self::escape($value);
                 break;
             case self::TYPE_NULL:
                 $output .= 'null';
@@ -300,7 +300,7 @@ class PhpValue extends AbstractPhp
                 if (count($value) > 1) {
                     $curArrayMultiblock = true;
                     if ($this->_outputMode == self::OUTPUT_MULTIPLE_LINE) {
-                        $output .= self::LINE_FEED . str_repeat($this->_indentation, $this->_arrayDepth+1);
+                        $output .= self::LINE_FEED . str_repeat($this->_indentation, $this->_arrayDepth + 1);
                     }
                 }
                 $outputParts = array();
@@ -312,15 +312,15 @@ class PhpValue extends AbstractPhp
                         $outputParts[] = $partV;
                         $noKeyIndex++;
                     } else {
-                        $outputParts[] = (is_int($n) ? $n : "'" . addcslashes($n, "'") . "'") . ' => ' . $partV;
+                        $outputParts[] = (is_int($n) ? $n : self::escape($n)) . ' => ' . $partV;
                     }
                 }
                 $padding = ($this->_outputMode == self::OUTPUT_MULTIPLE_LINE)
-                    ? self::LINE_FEED . str_repeat($this->_indentation, $this->_arrayDepth+1)
+                    ? self::LINE_FEED . str_repeat($this->_indentation, $this->_arrayDepth + 1)
                     : ' ';
                 $output .= implode(',' . $padding, $outputParts);
                 if ($curArrayMultiblock == true && $this->_outputMode == self::OUTPUT_MULTIPLE_LINE) {
-                    $output .= self::LINE_FEED . str_repeat($this->_indentation, $this->_arrayDepth+1);
+                    $output .= self::LINE_FEED . str_repeat($this->_indentation, $this->_arrayDepth + 1);
                 }
                 $output .= ')';
                 break;
@@ -329,6 +329,25 @@ class PhpValue extends AbstractPhp
                 throw new Exception\RuntimeException(
                     "Type '".get_class($value)."' is unknown or cannot be used as property default value."
                 );
+        }
+
+        return $output;
+    }
+
+    /**
+     * Quotes value for PHP code.
+     *
+     * @param string $input Raw string.
+     * @param bool $quote Whether add surrounding quotes or not.
+     * @return string PHP-ready code.
+     */
+    public static function escape($input, $quote = true)
+    {
+        $output = addcslashes($input, "'");
+
+        // adds quoting strings
+        if ($quote) {
+            $output = "'" . $output . "'";
         }
 
         return $output;

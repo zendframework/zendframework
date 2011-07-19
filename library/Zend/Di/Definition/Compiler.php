@@ -2,16 +2,17 @@
 
 namespace Zend\Di\Definition;
 
-use Zend\Code\Scanner\ClassScanner,
+use Zend\Code\Scanner\AggregateScanner,
+    Zend\Code\Scanner\ClassScanner,
     Zend\Code\Scanner\DirectoryScanner,
     Zend\Code\Scanner\FileScanner;
 
 class Compiler
 {
     protected $introspectionRuleset = null;
-    protected $codeScanners = array();
+    protected $codeScanners = null;
     protected $codeReflectors = array();
-    
+        
     public function setIntrospectionRuleset(IntrospectionRuleset $introspectionRuleset)
     {
         $this->introspectionRuleset = $introspectionRuleset;
@@ -29,50 +30,72 @@ class Compiler
         return $this->introspectionRuleset;
     }
     
-    public function addCodeScannerDirectory(DirectoryScanner $scannerDirectory)
+    public function addCodeScannerDirectory(DirectoryScanner $directoryScanner)
     {
-        $this->codeScanners[] = $scannerDirectory;
+        if ($this->codeScanners == null) {
+            $this->codeScanners = new AggregateScanner();
+        }
+        
+        $this->codeScanners->addScanner($directoryScanner);
     }
     
-    public function addCodeScannerFile(FileScanner $scannerFile)
+    public function addCodeScannerFile(FileScanner $fileScanner)
     {
-        $this->codeScanners[] = $scannerFile;
+        if ($this->codeScanners == null) {
+            $this->codeScanners = new AggregateScanner();
+        }
+        
+        $this->codeScanners->addScanner($fileScanner);
     }
     
+    /*
     public function addCodeReflection($reflectionFileOrClass, $followTypes = true)
     {
         //$this->codeScanners[] = array($reflectionFileOrClass, $followTypes);
     }
+    */
     
     public function compile()
     {
         $data = array();
         
+        $introspectionRuleset = $this->getIntrospectionRuleset();
+        
         foreach ($this->codeScanners as $codeScanner) {
             
-            $scannerClasses = $codeScanner->getClasses(true);
+            $classScanners = $codeScanner->getClasses(true);
             
             /* @var $class Zend\Code\Scanner\ClassScanner */
-            foreach ($scannerClasses as $scannerClass) {
+            foreach ($classScanners as $classScanner) {
                 
-                if ($scannerClass->isAbstract() || $scannerClass->isInterface()) {
+                if ($classScanner->isAbstract() || $classScanner->isInterface()) {
                     continue;
                 }
                 
+                // build the combined scanner (this + parents - interfaces)
+                $combinedScanners = array($classScanner);
+                $currentScanner = $classScanner;
+                
+                while ($currentScanner->hasParentClass()
+                    && $this->codeScanners->hasClass($currentScanner->getParentClass())) {
+                    $combinedScanners[]
+                }
+                
+                
                 // determine supertypes
                 $superTypes = array();
-                if (($parentClass = $scannerClass->getParentClass()) !== null) {
+                if (($parentClass = $classScanner->getParentClass()) !== null) {
                     $superTypes[] = $parentClass;
                 }
-                if (($interfaces = $scannerClass->getInterfaces())) {
+                if (($interfaces = $classScanner->getInterfaces())) {
                     $superTypes = array_merge($superTypes, $interfaces);
                 }
                 
-                $className = $scannerClass->getName();
+                $className = $classScanner->getName();
                 $data[$className] = array(
                     'superTypes'       => $superTypes,
-                    'instantiator'     => $this->compileScannerInstantiator($scannerClass),
-                    'injectionMethods' => $this->compileScannerInjectionMethods($scannerClass),
+                    'instantiator'     => $this->compileScannerInstantiator($classScanner),
+                    'injectionMethods' => $this->compileScannerInjectionMethods($classScanner),
                 );
             }
         }
@@ -98,13 +121,11 @@ class Compiler
     {
         $data      = array();
         $className = $scannerClass->getName();
-        //$strategy  = $this->getStrategy();
+
         foreach ($scannerClass->getMethods(true) as $scannerMethod) {
             $methodName = $scannerMethod->getName();
             
             // determine initiator & constructor dependencies
-            //$constructorRules = $strategy->getConstructorRules();
-            //if ($constructorRules[''])
             if ($methodName === '__construct' && $scannerMethod->isPublic()) {
                 $params = $scannerMethod->getParameters(true);
                 if ($params) {

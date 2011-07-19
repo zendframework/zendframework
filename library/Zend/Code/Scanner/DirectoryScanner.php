@@ -77,6 +77,11 @@ class DirectoryScanner implements Scanner
         return $classes;
     }
     
+    public function hasClass($class)
+    {
+        return (in_array($class, $this->getClasses()));
+    }
+    
     public function getClass($class, $returnScannerClass = true)
     {
         $this->scan();
@@ -89,7 +94,7 @@ class DirectoryScanner implements Scanner
             }
         }
         
-        throw new \InvalidArgumentException('Class not found.');
+        throw new Exception\InvalidArgumentException('Class not found.');
     }
 
     public static function export() {}

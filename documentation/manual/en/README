@@ -19,7 +19,7 @@ To generate using PhD, you need the following tools:
 From here, you need to collate the docbook sources to a single file, and
 then run PhD:
 
-- run "xsltproc --xinclude ./phd/db4-upgrade.xl manual.xml.in > manual.full.xml | tee -a err.txt"
+- run "xsltproc --xinclude ./phd/db4-upgrade.xsl manual.xml.in > manual.full.xml | tee -a err.txt"
 - run "./phd/pear/phd -g 'phpdotnet\phd\Highlighter_GeSHi' --xinclude -f zfpackage -d manual.full.xml -o ./output"
 
 The manual will now be in "output/zf-package-chunked-xhtml/manual.html"

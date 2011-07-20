@@ -37,7 +37,7 @@ interface Adapter
     /**
      * Return a list of the available instances
      *
-     * @return Zend\Cloud\Infrastructure\InstanceList
+     * @return InstanceList
      */ 
     public function listInstances(); 
  
@@ -57,7 +57,7 @@ interface Adapter
      * @param  integer $timeout 
      * @return boolean
      */
-    public function waitStatusInstance($id,$status,$timeout=self::TIMEOUT_STATUS_CHANGE);
+    public function waitStatusInstance($id, $status, $timeout = static::TIMEOUT_STATUS_CHANGE);
     
     /**
      * Return the public DNS name of the instance
@@ -82,7 +82,7 @@ interface Adapter
      * @param  array $options
      * @return boolean
      */ 
-    public function createInstance($name,$options); 
+    public function createInstance($name, $options); 
  
     /**
      * Stop the execution of an instance
@@ -111,7 +111,7 @@ interface Adapter
     /**
      * Return all the available instances images
      *
-     * @return Zend\Cloud\Infrastructure\ImageList
+     * @return ImageList
      */ 
     public function imagesInstance(); 
     
@@ -130,7 +130,7 @@ interface Adapter
      * @param  array $options
      * @return array
      */ 
-    public function monitorInstance($id,$metric,$options=null); 
+    public function monitorInstance($id, $metric, $options = null); 
  
     /**
      * Run arbitrary shell script on an instance
@@ -140,7 +140,7 @@ interface Adapter
      * @param  string|array $cmd
      * @return string|array
      */ 
-    public function deployInstance($id,$param,$cmd);
+    public function deployInstance($id, $param, $cmd);
             
     /**
      * Get the adapter instance

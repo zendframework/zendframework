@@ -55,7 +55,7 @@ abstract class AbstractAdapter implements Adapter
         Instance::MONITOR_DISK_READ,
         Instance::MONITOR_DISK_WRITE,
         Instance::MONITOR_NETWORK_IN,
-        Instance::MONITOR_NETWORK_OUT
+        Instance::MONITOR_NETWORK_OUT,
     );
 
     /**
@@ -76,7 +76,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  integer $timeout 
      * @return boolean
      */
-    public function waitStatusInstance($id, $status, $timeout = self::TIMEOUT_STATUS_CHANGE)
+    public function waitStatusInstance($id, $status, $timeout = static::TIMEOUT_STATUS_CHANGE)
     {
         if (empty($id) || empty($status)) {
             return false;
@@ -89,6 +89,7 @@ abstract class AbstractAdapter implements Adapter
         }
         return ($num < $timeout);
     }
+
     /**
      * Run arbitrary shell script on an instance
      *
@@ -102,12 +103,15 @@ abstract class AbstractAdapter implements Adapter
         if (!function_exists("ssh2_connect")) {
             throw new Exception\RuntimeException('Deployment requires the PHP "SSH" extension (ext/ssh2)');
         }
+
         if (empty($id)) {
             throw new Exception\InvalidArgumentException('You must specify the instance where to deploy');
         }
+
         if (empty($cmd)) {
             throw new Exception\InvalidArgumentException('You must specify the shell commands to run on the instance');
         }
+
         if (empty($params) 
             || empty($params[Instance::SSH_USERNAME]) 
             || (empty($params[Instance::SSH_PASSWORD]) 
@@ -115,12 +119,15 @@ abstract class AbstractAdapter implements Adapter
         ) {
             throw new Exception\InvalidArgumentException('You must specify the params for the SSH connection');
         }
+
         $host = $this->publicDnsInstance($id);
         if (empty($host)) {
             throw new Exception\RuntimeException(sprintf(
-                'The instance identified by "%s" does not exist', $id
+                'The instance identified by "%s" does not exist', 
+                $id
             ));
         }
+
         $conn = ssh2_connect($host);
         if (!ssh2_auth_password($conn, $params[Instance::SSH_USERNAME], $params[Instance::SSH_PASSWORD])) {
             throw new Exception\RuntimeException('SSH authentication failed');
@@ -129,12 +136,14 @@ abstract class AbstractAdapter implements Adapter
         if (is_array($cmd)) {
             $result = array();
             foreach ($cmd as $command) {
-                $stream = ssh2_exec($conn, $command);     
+                $stream      = ssh2_exec($conn, $command);
                 $errorStream = ssh2_fetch_stream($stream, SSH2_STREAM_STDERR);
+
                 stream_set_blocking($errorStream, true);
                 stream_set_blocking($stream, true); 
-                $output= stream_get_contents($stream);
-                $error= stream_get_contents($errorStream);
+
+                $output = stream_get_contents($stream);
+                $error  = stream_get_contents($errorStream);
                 
                 if (empty($error)) {
                     $result[$command] = $output;
@@ -143,13 +152,15 @@ abstract class AbstractAdapter implements Adapter
                 }
             }
         } else {
-            $stream = ssh2_exec($conn, $cmd);
-            $result = stream_set_blocking($stream, true); 
+            $stream      = ssh2_exec($conn, $cmd);
+            $result      = stream_set_blocking($stream, true);
             $errorStream = ssh2_fetch_stream($stream, SSH2_STREAM_STDERR);
+
             stream_set_blocking($errorStream, true);
             stream_set_blocking($stream, true); 
-            $output= stream_get_contents($stream);
-            $error= stream_get_contents($errorStream);
+
+            $output = stream_get_contents($stream);
+            $error  = stream_get_contents($errorStream);
             
             if (empty($error)) {
                 $result = $output;

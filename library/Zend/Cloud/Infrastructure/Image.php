@@ -1,7 +1,5 @@
 <?php
 /**
- * Instance of an infrastructure service
- *
  * @category   Zend
  * @package    Zend\Cloud
  * @subpackage Infrastructure
@@ -40,7 +38,7 @@ class Image
      * 
      * @var array
      */
-    protected $attributes= array();
+    protected $attributes = array();
 
     /**
      * The Image adapter (if exists)
@@ -67,7 +65,7 @@ class Image
      * @param array $data
      * @param object $adapter 
      */
-    public function __construct($data, $adapter=null) 
+    public function __construct($data, $adapter = null) 
     {
         if (is_object($data)) {
             if (method_exists($data, 'toArray')) {
@@ -85,7 +83,8 @@ class Image
             if (empty($data[$key])) {
                 throw new Exception\InvalidArgumentException(sprintf(
                     'The param "%s" is a required parameter for class %s',
-                    $key, __CLASS__
+                    $key,
+                    __CLASS__
                 ));
             }
         }

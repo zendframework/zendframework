@@ -1,7 +1,5 @@
 <?php
 /**
- * Amazon EC2 adapter for infrastructure service
- *
  * @category   Zend
  * @package    Zend\Cloud\Infrastructure
  * @subpackage Adapter
@@ -15,6 +13,7 @@ use Zend\Service\Amazon\Ec2\Instance as Ec2Instance,
     Zend\Service\Amazon\Ec2\Image as Ec2Image,
     Zend\Service\Amazon\Ec2\AvailabilityZones as Ec2Zone,
     Zend\Service\Amazon\Ec2\CloudWatch as Ec2Monitor,
+    Zend\Service\Amazon\Ec2\Exception as Ec2Exception,
     Zend\Cloud\Infrastructure\Instance,    
     Zend\Cloud\Infrastructure\InstanceList,
     Zend\Cloud\Infrastructure\Image,
@@ -135,7 +134,9 @@ class Ec2 extends AbstractAdapter
             throw new Exception\InvalidArgumentException('Invalid options provided');
         }
         
-        if (!isset($options[self::AWS_ACCESS_KEY]) || !isset($options[self::AWS_SECRET_KEY])) {
+        if (!isset($options[self::AWS_ACCESS_KEY]) 
+            || !isset($options[self::AWS_SECRET_KEY])
+        ) {
             throw new Exception\InvalidArgumentException('AWS keys not specified!');
         }
 
@@ -149,7 +150,7 @@ class Ec2 extends AbstractAdapter
 
         try {
             $this->ec2 = new Ec2Instance($options[self::AWS_ACCESS_KEY], $options[self::AWS_SECRET_KEY], $this->region);
-        } catch (\Zend\Service\Amazon\Ec2\Exception  $e) {
+        } catch (Ec2Exception  $e) {
             throw new Exception\RuntimeException('Error on create: ' . $e->getMessage(), $e->getCode(), $e);
         }
 
@@ -170,7 +171,6 @@ class Ec2 extends AbstractAdapter
         if (!empty($attr) && is_array($attr)) {
             $result[Instance::INSTANCE_ID]         = $attr['instanceId'];
             $result[Instance::INSTANCE_STATUS]     = $this->mapStatus[$attr['instanceState']['name']];
-            $result[Instance::INSTANCE_PUBLICDNS]  = $attr['dnsName'];
             $result[Instance::INSTANCE_IMAGEID]    = $attr['imageId'];
             $result[Instance::INSTANCE_ZONE]       = $attr['availabilityZone'];
             $result[Instance::INSTANCE_LAUNCHTIME] = $attr['launchTime'];
@@ -374,7 +374,7 @@ class Ec2 extends AbstractAdapter
 
         $zones = array();
         foreach ($this->adapterResult as $zone) {
-            if (strtolower($zone['zoneState'])==='available') {
+            if (strtolower($zone['zoneState']) === 'available') {
                 $zones[] = array (
                     Instance::INSTANCE_ZONE => $zone['zoneName'],
                 );
@@ -396,12 +396,18 @@ class Ec2 extends AbstractAdapter
         if (empty($id) || empty($metric)) {
             return false;
         }
+
         if (!in_array($metric,$this->validMetrics)) {
-            throw new Exception\InvalidArgumentException(sprintf('The metric "%s" is not valid', $metric));
+            throw new Exception\InvalidArgumentException(sprintf(
+                'The metric "%s" is not valid', 
+                $metric
+            ));
         }
+
         if (!empty($options) && !is_array($options)) {
             throw new Exception\InvalidArgumentException('The options must be an array');
         }
+
         if (!empty($options) 
             && (empty($options[Instance::MONITOR_START_TIME]) 
                 || empty($options[Instance::MONITOR_END_TIME]))
@@ -412,6 +418,7 @@ class Ec2 extends AbstractAdapter
                 $options[Instance::MONITOR_END_TIME]
             ));
         }      
+
         if (!isset($this->ec2Monitor)) {
             $this->ec2Monitor = new Ec2Monitor($this->accessKey, $this->accessSecret, $this->region);
         }
@@ -444,11 +451,13 @@ class Ec2 extends AbstractAdapter
             }
         }
 
-        if ($num>0) {
-            $monitor['average'] = $average/$num;
+        if ($num > 0) {
+            $monitor['average'] = $average / $num;
         }
+
         return $monitor;
     }
+
     /**
      * Get the adapter 
      * 

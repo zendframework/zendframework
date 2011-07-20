@@ -26,15 +26,18 @@ namespace ZendTest\Cloud\Infrastructure\Adapter;
 
 use Zend\Cloud\Infrastructure\Adapter,
     Zend\Cloud\Infrastructure\Adapter\Ec2,
+    Zend\Cloud\Infrastructure\Factory as Factory,
     Zend\Http\Client\Adapter\Socket,
-    Zend\Cloud\Infrastructure\Instance;
+    Zend\Cloud\Infrastructure\Instance,
+    PHPUnit_Framework_TestCase as TestCase;
 
-class Ec2OnlineTest extends \PHPUnit_Framework_TestCase
+class Ec2OnlineTest extends TestCase
 {
     /**
      * Timeout in seconds for status change
      */
     const STATUS_TIMEOUT= 60;
+
     /**
      * Reference to Infrastructure object
      *
@@ -70,14 +73,14 @@ class Ec2OnlineTest extends \PHPUnit_Framework_TestCase
             self::markTestSkipped('Constants AccessKeyId and SecretKey have to be set.');
         }
 
-        self::$infrastructure = \Zend\Cloud\Infrastructure\Factory::getAdapter(array( 
-            \Zend\Cloud\Infrastructure\Factory::INFRASTRUCTURE_ADAPTER_KEY => 'Zend\Cloud\Infrastructure\Adapter\Ec2', 
-            \Zend\Cloud\Infrastructure\Adapter\Ec2::AWS_ACCESS_KEY => constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'), 
-            \Zend\Cloud\Infrastructure\Adapter\Ec2::AWS_SECRET_KEY => constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY'), 
-            \Zend\Cloud\Infrastructure\Adapter\Ec2::AWS_REGION     => constant('TESTS_ZEND_SERVICE_AMAZON_EC2_ZONE')   
+        self::$infrastructure = Factory::getAdapter(array( 
+            Factory::INFRASTRUCTURE_ADAPTER_KEY => 'Zend\Cloud\Infrastructure\Adapter\Ec2', 
+            Ec2::AWS_ACCESS_KEY => constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'), 
+            Ec2::AWS_SECRET_KEY => constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY'), 
+            Ec2::AWS_REGION     => constant('TESTS_ZEND_SERVICE_AMAZON_EC2_ZONE')   
         )); 
 
-        self::$httpClientAdapterSocket = new \Zend\Http\Client\Adapter\Socket();
+        self::$httpClientAdapterSocket = new Socket();
 
 
         self::$infrastructure->getAdapter()
@@ -85,6 +88,7 @@ class Ec2OnlineTest extends \PHPUnit_Framework_TestCase
                              ->setAdapter(self::$httpClientAdapterSocket);
 
     }
+
     /**
      * Setup for each test
      */
@@ -103,6 +107,7 @@ class Ec2OnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('aws_secretkey', Ec2::AWS_SECRET_KEY);
         $this->assertEquals('aws_region', Ec2::AWS_REGION);
     }
+
     /**
      * Test construct with missing params
      */
@@ -114,6 +119,7 @@ class Ec2OnlineTest extends \PHPUnit_Framework_TestCase
         );
         $image = new Ec2('foo');
     }
+
     /**
      * Test getAdapter
      */
@@ -121,6 +127,7 @@ class Ec2OnlineTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf('Zend\Service\Amazon\Ec2\Instance',self::$infrastructure->getAdapter());
     }
+
     /**
      * Test create an instance
      */
@@ -128,13 +135,14 @@ class Ec2OnlineTest extends \PHPUnit_Framework_TestCase
     {
         $options = array (
             Instance::INSTANCE_IMAGEID => constant('TESTS_ZEND_SERVICE_AMAZON_EC2_IMAGE_ID'),
-            Ec2::AWS_SECURITY_GROUP => array(constant('TESTS_ZEND_SERVICE_AMAZON_EC2_SECURITY_GROUP'))
+            Ec2::AWS_SECURITY_GROUP    => array(constant('TESTS_ZEND_SERVICE_AMAZON_EC2_SECURITY_GROUP'))
         );
         $instance = self::$infrastructure->createInstance('test', $options);
         self::$instanceId= $instance->getId();
         $this->assertEquals(constant('TESTS_ZEND_SERVICE_AMAZON_EC2_IMAGE_ID'), $instance->getImageId());
         $this->assertTrue(self::$infrastructure->WaitStatusInstance(self::$instanceId, Instance::STATUS_RUNNING));
     }
+
     /**
      * Test last HTTP request
      */
@@ -143,6 +151,7 @@ class Ec2OnlineTest extends \PHPUnit_Framework_TestCase
         $lastHttpRequest = self::$infrastructure->getLastHttpRequest();
         $this->assertTrue(!empty($lastHttpRequest));
     }
+
     /**
      * Test last HTTP response
      */
@@ -151,6 +160,7 @@ class Ec2OnlineTest extends \PHPUnit_Framework_TestCase
         $lastHttpResponse = self::$infrastructure->getLastHttpResponse();
         $this->assertTrue(!empty($lastHttpResponse));
     }
+
     /**
      * Test adapter result
      */
@@ -159,6 +169,7 @@ class Ec2OnlineTest extends \PHPUnit_Framework_TestCase
         $adapterResult = self::$infrastructure->getAdapterResult();
         $this->assertTrue(!empty($adapterResult));
     }
+
     /**
      * Test list of an instance
      */
@@ -175,6 +186,7 @@ class Ec2OnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($found);
         unset($instances);
     }
+
     /**
      * Test images instance
      */
@@ -184,6 +196,7 @@ class Ec2OnlineTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(!empty($images));
         unset($images);
     }
+
     /**
      * Test zones instance
      */
@@ -192,16 +205,18 @@ class Ec2OnlineTest extends \PHPUnit_Framework_TestCase
         $zones = self::$infrastructure->zonesInstance();
         $this->assertTrue(!empty($zones));
     }
+
     /**
      * Test monitor instance
      */
     public function testMonitorInstance()
     {
-        $monitor= self::$infrastructure->monitorInstance(self::$instanceId,Instance::MONITOR_CPU);
-        $adapterResult= self::$infrastructure->getAdapterResult();
+        $monitor       = self::$infrastructure->monitorInstance(self::$instanceId,Instance::MONITOR_CPU);
+        $adapterResult = self::$infrastructure->getAdapterResult();
         $this->assertTrue(!empty($adapterResult['label']));
         unset($monitor);
     }
+
     /**
      * Test deploy instance
      */
@@ -209,6 +224,7 @@ class Ec2OnlineTest extends \PHPUnit_Framework_TestCase
     {
         $this->markTestSkipped('Test deploy instance skipped');
     }
+
     /**
      * Test stop an instance
      */
@@ -216,6 +232,7 @@ class Ec2OnlineTest extends \PHPUnit_Framework_TestCase
     {
         $this->markTestSkipped('Test stop instance skipped');
     }
+
     /**
      * Test start an instance
      */
@@ -223,6 +240,7 @@ class Ec2OnlineTest extends \PHPUnit_Framework_TestCase
     {
         $this->markTestSkipped('Test start instance skipped');   
     }
+
     /**
      * Test reboot and instance
      */
@@ -234,6 +252,7 @@ class Ec2OnlineTest extends \PHPUnit_Framework_TestCase
              $this->markTestSkipped('I cannot reboot the instance because is not in the running state');
         }    
     }
+
     /**
      * Test destroy instance
      */
@@ -253,7 +272,7 @@ class Ec2OnlineTest extends \PHPUnit_Framework_TestCase
  * @group      Zend\Cloud\Infrastructure
  * @group      Zend\Cloud\Infrastructure\Adapter\Ec2
  */
-class Skip extends \PHPUnit_Framework_TestCase
+class Skip extends TestCase
 {
     public function setUp()
     {

@@ -1,7 +1,5 @@
 <?php
 /**
- * Instance of an infrastructure service
- *
  * @category   Zend
  * @package    Zend\Cloud
  * @subpackage Infrastructure
@@ -104,13 +102,15 @@ class Instance
         }
         
         if (empty($data) || !is_array($data)) {
-            throw new Exception\InvalidArgumentException ("You must pass an array of params");
+            throw new Exception\InvalidArgumentException("You must pass an array of parameters");
         }
 
         foreach ($this->attributeRequired as $key) {
             if (empty($data[$key])) {
                 throw new Exception\InvalidArgumentException(sprintf(
-                    'The param "%s" is a required param for %s', $key, __CLASS__
+                    'The param "%s" is a required param for %s', 
+                    $key,
+                    __CLASS__
                 ));
             }
         }
@@ -190,7 +190,7 @@ class Instance
      * @param  integer $timeout 
      * @return boolean
      */
-    public function waitStatus($status,$timeout=Adapter::TIMEOUT_STATUS_CHANGE)
+    public function waitStatus($status, $timeout = Adapter::TIMEOUT_STATUS_CHANGE)
     {
         return $this->adapter->waitStatusInstance($this->attributes[self::INSTANCE_ID], $status, $timeout);
     }
@@ -203,7 +203,7 @@ class Instance
     public function getPublicDns()
     {
         if (!isset($this->attributes[self::INSTANCE_PUBLICDNS])) {
-            $this->attributes[self::INSTANCE_PUBLICDNS]= $this->adapter->publicDnsInstance($this->attributes[self::INSTANCE_ID]);
+            $this->attributes[self::INSTANCE_PUBLICDNS] =  $this->adapter->publicDnsInstance($this->attributes[self::INSTANCE_ID]);
         }
         return $this->attributes[self::INSTANCE_PUBLICDNS];
     }

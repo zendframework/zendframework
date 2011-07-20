@@ -64,8 +64,18 @@ class Compiler
     {
         $data = array();
         
+        $gRules = $this->getIntrospectionRuleset()->getGeneralRules();
+        
         /* @var $classScanner Zend\Code\Scanner\DerivedClassScanner */
         foreach ($this->directoryScanner->getClasses(true, true) as $classScanner) {
+            
+            if ($gRules['excludedClassPatterns']) {
+                foreach ($gRules['excludedClassPatterns'] as $ecPattern) {
+                    if (preg_match($ecPattern, $classScanner->getName())) {
+                        continue 2;
+                    }
+                }
+            }
             
             // determine supertypes
             $superTypes = array();

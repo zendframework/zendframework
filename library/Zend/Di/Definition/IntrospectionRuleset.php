@@ -4,9 +4,14 @@ namespace Zend\Di\Definition;
 
 class IntrospectionRuleset
 {
+    const TYPE_GENERAL = 'general';
     const TYPE_CONSTRUCTOR = 'constructor';
     const TYPE_SETTER = 'setter';
     const TYPE_INTERFACE = 'interface';
+    
+    protected $generalRules = array(
+        'excludedClassPatterns' => array('/[\w\\\\]*Exception\w*/')
+        );
     
     protected $constructorRules = array(
         'enabled'		  => true,
@@ -38,6 +43,9 @@ class IntrospectionRuleset
     public function addRule($strategy, $name, $value)
     {
         switch ($strategy) {
+            case self::TYPE_GENERAL:
+                $rule = &$this->generalRules;
+                break;
             case self::TYPE_CONSTRUCTOR:
                 $rule = &$this->constructorRules;
                 break;
@@ -72,17 +80,29 @@ class IntrospectionRuleset
     {
         if (!$ruleType) {
             return array(
+                self::TYPE_GENERAL => $this->generalRules,
                 self::TYPE_CONSTRUCTOR => $this->constructorRules,
                 self::TYPE_SETTER => $this->setterRules,
                 self::TYPE_INTERFACE => $this->interfaceRules
             );
         } else {
             switch ($ruleType) {
+                case self::TYPE_GENERAL: return $this->generalRules;
                 case self::TYPE_CONSTRUCTOR: return $this->constructorRules;
                 case self::TYPE_SETTER: return $this->setterRules;
                 case self::TYPE_INTERFACE: return $this->interfaceRules;
             }
         }
+    }
+    
+    public function addGeneralRule($name, $value)
+    {
+        $this->addRule(self::TYPE_GENERAL, $name, $value);
+    }
+    
+    public function getGeneralRules()
+    {
+        return $this->generalRules;
     }
     
     public function addConstructorRule($name, $value)

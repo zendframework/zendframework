@@ -220,8 +220,13 @@ class ClassScanner implements Scanner
             'name'        => null,
         );
         
+        // start on first token, not second
+        $fastForward--;
+        $tokenIndex--;
+            
         $braceCount = 0;
         while (true) {
+            
             $fastForward++;
             $tokenIndex++;
             if (!isset($this->tokens[$tokenIndex])) {
@@ -244,11 +249,11 @@ class ClassScanner implements Scanner
                 }
             }
             
-            if ($token[0] === T_FUNCTION) {
+            if ($info['name'] === null && $token[0] === T_FUNCTION) {
                 // next token after T_WHITESPACE is name
                 $info['name'] = $this->tokens[$tokenIndex+2][1];
                 continue;
-            } 
+            }
             
             if (is_array($token)) {
                 $info['lineEnd'] = $token[2];
@@ -451,7 +456,9 @@ class ClassScanner implements Scanner
                 return false;
             }
         }
-        
+        if (!isset($info)) {
+            die();
+        }
         $m = new $returnScannerClass(
             array_slice($this->tokens, $info['tokenStart'], $info['tokenEnd'] - $info['tokenStart'] + 1),
             $this->namespace,

@@ -13,6 +13,7 @@ class DirectoryScanner implements Scanner
     protected $directories          = array();
     protected $fileScannerFileClass = 'Zend\Code\Scanner\FileScanner';
     protected $fileScanners         = array();
+    protected $classToFileScanner   = null;
     
     public function __construct($directory = null)
     {
@@ -95,49 +96,74 @@ class DirectoryScanner implements Scanner
     {
         $this->scan();
         
-        $classes = array();
-        foreach ($this->fileScanners as $scannerFile) {
-            /* @var $scannerFile Zend\Code\Scanner\FileScanner */
-            $classes = array_merge($classes, $scannerFile->getClasses($returnScannerClass));
+        if ($this->classToFileScanner === null) {
+            $this->createClassToFileScannerCache();
         }
         
-        if ($returnDerivedScannerClass) {
-            foreach ($classes as $index => $class) {
-                if ($class instanceof ClassScanner) {
-                    $classes[$index] = new DerivedClassScanner($class, $this);
-                }
+        if ($returnScannerClass == false) {
+            return array_keys($this->classToFileScanner);
+        }
+        
+        $returnClasses = array();
+        foreach ($this->classToFileScanner as $className => $fsIndex) {
+            $classScanner = $this->fileScanners[$fsIndex]->getClass($className, $returnScannerClass);
+            if ($returnDerivedScannerClass) {
+                $classScanner = new DerivedClassScanner($classScanner, $this);
             }
+            $returnClasses[] = $classScanner;
         }
         
-        return $classes;
+        return $returnClasses;
     }
     
     public function hasClass($class)
     {
-        return (in_array($class, $this->getClasses()));
+        $this->scan();
+        
+        if ($this->classToFileScanner === null) {
+            $this->createClassToFileScannerCache();
+        }
+        
+        return (isset($this->classToFileScanner[$class]));
     }
     
     public function getClass($class, $returnScannerClass = true, $returnDerivedScannerClass = false)
     {
         $this->scan();
         
-        foreach ($this->fileScanners as $scannerFile) {
-            /* @var $scannerFile Zend\Code\Scanner\FileScanner */
-            $classesInFileScanner = $scannerFile->getClasses(false);
-            if (in_array($class, $classesInFileScanner)) {
-                $returnClass = $scannerFile->getClass($class, $returnScannerClass);
-            }
+        if ($this->classToFileScanner === null) {
+            $this->createClassToFileScannerCache();
         }
         
-        if (isset($returnClass) && $returnClass instanceof ClassScanner && $returnDerivedScannerClass) {
+        if (!isset($this->classToFileScanner[$class])) {
+            throw new Exception\InvalidArgumentException('Class not found.');
+        }
+        
+        $fs = $this->fileScanners[$this->classToFileScanner[$class]];
+        $returnClass = $fs->getClass($class, $returnScannerClass);
+        
+        if (($returnClass instanceof ClassScanner) && $returnDerivedScannerClass) {
             return new DerivedClassScanner($returnClass, $this);
-        } elseif (isset($returnClass)) {
-            return $returnClass;
         }
-        
-        throw new Exception\InvalidArgumentException('Class not found.');
+
+        return $returnClass;
     }
 
+    protected function createClassToFileScannerCache()
+    {
+        if ($this->classToFileScanner !== null) {
+            return;
+        }
+        
+        $this->classToFileScanner = array();
+        foreach ($this->fileScanners as $fsIndex => $fileScanner) {
+            $fsClasses = $fileScanner->getClasses();
+            foreach ($fsClasses as $fsClassName) {
+                $this->classToFileScanner[$fsClassName] = $fsIndex;
+            }
+        }
+    }
+    
     public static function export() {}
     public function __toString() {} 
 }

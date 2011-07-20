@@ -1,67 +1,77 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.service.rackspace.servers">
-    <title>Zend\Service\Rackspace\Servers</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.rackspace.servers">
+    <info><title>Zend\Service\Rackspace\Servers</title></info>
 
-    <sect2 id="zend.service.rackspace.servers.intro">
-        <title>Overview</title>
+    <section xml:id="zend.service.rackspace.servers.intro">
+        <info><title>Overview</title></info>
 
         <para>
-            The <classname>Zend\Service\Rackspace\Servers</classname> is a class that
-            provides a simple <acronym>API</acronym> to manage the <ulink url="http://www.rackspace.com/cloud/cloud_hosting_products/servers/">Rackspace Cloud Servers</ulink>.
-            Using this class you can:
-            <itemizedlist mark='bullet'>
-                <listitem>
-                    <para>
-                        Create new servers
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        List and get information on each server
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        Delete a server
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        Manage the public/private IP addresses of a server
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        Resize the server capacity
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        Reboot a server
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        Create new images for a server
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        Manage the backup of a server
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        Create a group of server to share the IP addresses for High Availability architecture
-                    </para>
-                </listitem>
-            </itemizedlist> 
+            The <classname>Zend\Service\Rackspace\Servers</classname> is a class that provides a
+            simple <acronym>API</acronym> to manage the <link
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                xlink:href="http://www.rackspace.com/cloud/cloud_hosting_products/servers/">Rackspace
+                Cloud Servers</link>.  Using this class you can:
         </para>
-    </sect2>
 
-    <sect2 id="zend.service.rackspace.servers.terminology">
-        <title>Terminology</title>
+        <itemizedlist mark="bullet">
+            <listitem>
+                <para>
+                    Create new servers
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    List and get information on each server
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Delete a server
+                </para>
+            </listitem>
+            
+            <listitem>
+                <para>
+                    Manage the public/private IP addresses of a server
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Resize the server capacity
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Reboot a server
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Create new images for a server
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Manage the backup of a server
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Create a group of server to share the IP addresses for High Availability architecture
+                </para>
+            </listitem>
+        </itemizedlist> 
+    </section>
+
+    <section xml:id="zend.service.rackspace.servers.terminology">
+        <info><title>Terminology</title></info>
         
         <para>
             A <emphasis>server</emphasis> is a virtual machine instance in the Cloud Servers system. Flavor and image are
@@ -113,10 +123,10 @@
         <para>
             A <emphasis>shared IP group</emphasis> is managed using the the class <classname>Zend\Service\Rackspace\Servers\SharedIpGroup</classname>.
         </para>
-    </sect2>
+    </section>
     
-    <sect2 id="zend.service.rackspace.servers.quick-start">
-        <title>Quick Start</title>
+    <section xml:id="zend.service.rackspace.servers.quick-start">
+        <info><title>Quick Start</title></info>
         
         <para>
             To use this class you have to pass the username and the API's key
@@ -124,10 +134,10 @@
         </para>
         
          <programlisting language="php"><![CDATA[
-            $user = 'username';
-            $key  = 'secret key';
+$user = 'username';
+$key  = 'secret key';
 
-            $rackspace = new Zend\Service\Rackspace\Servers($user,$key);
+$rackspace = new Zend\Service\Rackspace\Servers($user,$key);
 ]]></programlisting>
                 
         <para>
@@ -135,80 +145,85 @@
         </para>
         
         <programlisting language="php"><![CDATA[  
-            $data = array (
-                'name'     => 'test',
-                'imageId'  => '49',
-                'flavorId' => '1'
-            );
-            
-            $server= $rackspace->createServer($data);
-            
-            if (!$rackspace->isSuccessful()) {
-               die('ERROR: '.$rackspace->getErrorMsg());
-            } 
-            
-            printf("Server name    : %s\n",$server->getName());
-            printf("Server Id      : %s\n",$server->getId());
-            printf("Admin password : %s\n",$server->getAdminPass());
+$data = array (
+    'name'     => 'test',
+    'imageId'  => '49',
+    'flavorId' => '1',
+);
+
+$server= $rackspace->createServer($data);
+
+if (!$rackspace->isSuccessful()) {
+    die('ERROR: '.$rackspace->getErrorMsg());
+} 
+
+printf("Server name    : %s\n",$server->getName());
+printf("Server Id      : %s\n",$server->getId());
+printf("Admin password : %s\n",$server->getAdminPass());
 ]]></programlisting>
 
         <para>
-            This example create a server with name <emphasis>test</emphasis>, imageId 49, and flavorId 1. The attributes <emphasis>name</emphasis>, <emphasis>imageId</emphasis> and <emphasis>flavorId</emphasis> are required to create a new server.
-            The result of <emphasis>createServer</emphasis> is an instance of <classname>Zend\Service\Rackspace\Servers\Server</classname>.
+            This example create a server with name <emphasis>test</emphasis>, imageId 49, and
+            flavorId 1. The attributes <emphasis>name</emphasis>, <emphasis>imageId</emphasis> and
+            <emphasis>flavorId</emphasis> are required to create a new server.  The result of
+            <emphasis>createServer</emphasis> is an instance of
+            <classname>Zend\Service\Rackspace\Servers\Server</classname>.
         </para>
         
         <para>
-            To get the public and private IP addresses of a server you can use the <emphasis>getServerIp</emphasis> method.
+            To get the public and private IP addresses of a server you can use the
+            <emphasis>getServerIp</emphasis> method.
         </para>
         
         <programlisting language="php"><![CDATA[
-            $id= '20054631';
-            $ips= $rackspace->getServerIp($id);
-            
-            if (!$rackspace->isSuccessful()) {
-                die('ERROR: '.$rackspace->getErrorMsg());
-            } 
-            
-            echo "Private IPs:\n";
-            print_r($ips['private']);
-            echo "Public IPs:\n";
-            print_r($ips['public']);
+$id  = '20054631';
+$ips = $rackspace->getServerIp($id);
+
+if (!$rackspace->isSuccessful()) {
+    die('ERROR: '.$rackspace->getErrorMsg());
+} 
+
+echo "Private IPs:\n";
+print_r($ips['private']);
+echo "Public IPs:\n";
+print_r($ips['public']);
 ]]></programlisting>
 
         <para>
             This example get the IP addresses of the server with Id <emphasis>20054631</emphasis>.
-            The result of <emphasis>getServerIp</emphasis> is an associative arrays with keys 'private' and 'public'
-            contains all the private IP addresses and the public IP addresses of the server.
+            The result of <emphasis>getServerIp</emphasis> is an associative arrays with keys
+            'private' and 'public' contains all the private IP addresses and the public IP addresses
+            of the server.
         </para>
         
         <para>
-            To get the list of all the available servers you can use the <emphasis>listServers</emphasis> method.
+            To get the list of all the available servers you can use the
+            <emphasis>listServers</emphasis> method.
         </para>
         
         <programlisting language="php"><![CDATA[           
-            $servers= $rackspace->listServer(true);
-            
-            if (!$rackspace->isSuccessful()) {
-                die('ERROR: '.$rackspace->getErrorMsg());
-            } 
-            
-            foreach ($servers as $srv) {
-                printf("Name      : %s\n",$srv->getName());
-                printf("Server Id : %s\n",$srv->getId());
-                printf("Image  Id : %s\n",$srv->getImageId());
-                printf("Flavor Id : %s\n",$srv->getFlavorId());
-                printf("Status    : %s (%d\%)\n",$srv->getStatus(),$srv->getProgress());
-            }
+$servers= $rackspace->listServer(true);
+
+if (!$rackspace->isSuccessful()) {
+    die('ERROR: '.$rackspace->getErrorMsg());
+} 
+
+foreach ($servers as $srv) {
+    printf("Name      : %s\n",$srv->getName());
+    printf("Server Id : %s\n",$srv->getId());
+    printf("Image  Id : %s\n",$srv->getImageId());
+    printf("Flavor Id : %s\n",$srv->getFlavorId());
+    printf("Status    : %s (%d\%)\n",$srv->getStatus(),$srv->getProgress());
+}
 ]]></programlisting>
             
-    </sect2>
+    </section>
  
-    <sect2 id="zend.service.rackspace.servers.methods">
-        <title>Available Methods</title>
+    <section xml:id="zend.service.rackspace.servers.methods">
+        <info><title>Available Methods</title></info>
  
         <variablelist>
-            
-            <varlistentry id="zend.service.rackspace.servers.methods.change-backup-schedule">
+            <varlistentry xml:id="zend.service.rackspace.servers.methods.change-backup-schedule">
                 <term>
                     <methodsynopsis>
                         <methodname>changeBackupSchedule</methodname>
@@ -236,7 +251,7 @@
                 </listitem>
             </varlistentry>
             
-            <varlistentry id="zend.service.rackspace.servers.methods.change-server-name">
+            <varlistentry xml:id="zend.service.rackspace.servers.methods.change-server-name">
                 <term>
                     <methodsynopsis>
                         <methodname>changeServerName</methodname>
@@ -260,7 +275,7 @@
                 </listitem>
             </varlistentry>
             
-            <varlistentry id="zend.service.rackspace.servers.methods.change-server-password">
+            <varlistentry xml:id="zend.service.rackspace.servers.methods.change-server-password">
                 <term>
                     <methodsynopsis>
                         <methodname>changeServerPassword</methodname>
@@ -284,7 +299,7 @@
                 </listitem>
             </varlistentry>
             
-            <varlistentry id="zend.service.rackspace.servers.methods.confirm-resize-server">
+            <varlistentry xml:id="zend.service.rackspace.servers.methods.confirm-resize-server">
                 <term>
                     <methodsynopsis>
                         <methodname>confirmResizeServer</methodname>
@@ -309,7 +324,7 @@
                 </listitem>
             </varlistentry>
             
-            <varlistentry id="zend.service.rackspace.servers.methods.create-image">
+            <varlistentry xml:id="zend.service.rackspace.servers.methods.create-image">
                 <term>
                     <methodsynopsis>
                         <methodname>createImage</methodname>
@@ -334,7 +349,7 @@
                 </listitem>
             </varlistentry>
             
-            <varlistentry id="zend.service.rackspace.servers.methods.create-shared-ip-group">
+            <varlistentry xml:id="zend.service.rackspace.servers.methods.create-shared-ip-group">
                 <term>
                     <methodsynopsis>
                         <methodname>createSharedIpGroup</methodname>
@@ -360,7 +375,7 @@
                 </listitem>
             </varlistentry>
             
-            <varlistentry id="zend.service.rackspace.servers.methods.create-server">
+            <varlistentry xml:id="zend.service.rackspace.servers.methods.create-server">
                 <term>
                     <methodsynopsis>
                         <methodname>createServer</methodname>
@@ -376,14 +391,14 @@
                         optional parameters: <emphasis>metadata</emphasis> and <emphasis>files</emphasis>.
                         Metadata is an array contains key/value of metadata related to the server and files is an array
                         contains the paths of some files to upload into the server. The syntax used for the uploading
-                        of the files is 'serverPath' => 'localPath'.
+                        of the files is 'serverPath' =&gt; 'localPath'.
                         Return a new instance of <classname>Zend\Service\Rackspace\Servers\Server</classname>.
                         In case of error the return is <emphasis>false</emphasis>.
                     </para>
                     <para>
                         <emphasis>$data</emphasis> contains the parameters for the server.
                         The required attributes to create a new server are:
-                        <itemizedlist mark='bullet'>
+                        <itemizedlist mark="bullet">
                             <listitem>
                                 <para>
                                     <emphasis>name</emphasis>, contains the name of the server
@@ -406,12 +421,12 @@
                     </para>
                     <para>
                         <emphasis>$files</emphasis>, contains the path of the files to upload in the server
-                        using the syntax 'serverPath' => 'localPath'.
+                        using the syntax 'serverPath' =&gt; 'localPath'.
                     </para>
                 </listitem>
             </varlistentry>
             
-            <varlistentry id="zend.service.rackspace.servers.methods.disable-backup-schedule">
+            <varlistentry xml:id="zend.service.rackspace.servers.methods.disable-backup-schedule">
                 <term>
                     <methodsynopsis>
                         <methodname>disableBackupSchedule</methodname>
@@ -432,7 +447,7 @@
                 </listitem>
             </varlistentry>
             
-            <varlistentry id="zend.service.rackspace.servers.methods.delete-image">
+            <varlistentry xml:id="zend.service.rackspace.servers.methods.delete-image">
                 <term>
                     <methodsynopsis>
                         <methodname>deleteImage</methodname>
@@ -453,7 +468,7 @@
                 </listitem>
             </varlistentry>
             
-            <varlistentry id="zend.service.rackspace.servers.methods.delete-shared-ip-group">
+            <varlistentry xml:id="zend.service.rackspace.servers.methods.delete-shared-ip-group">
                 <term>
                     <methodsynopsis>
                         <methodname>deleteSharedIpGroup</methodname>
@@ -474,7 +489,7 @@
                 </listitem>
             </varlistentry>
             
-            <varlistentry id="zend.service.rackspace.servers.methods.delete-server">
+            <varlistentry xml:id="zend.service.rackspace.servers.methods.delete-server">
                 <term>
                     <methodsynopsis>
                         <methodname>deleteServer</methodname>
@@ -495,7 +510,7 @@
                 </listitem>
             </varlistentry>
             
-            <varlistentry id="zend.service.rackspace.servers.methods.get-backup-schedule">
+            <varlistentry xml:id="zend.service.rackspace.servers.methods.get-backup-schedule">
                 <term>
                     <methodsynopsis>
                         <methodname>getBackupSchedule</methodname>
@@ -516,7 +531,7 @@
                 </listitem>
             </varlistentry>
             
-            <varlistentry id="zend.service.rackspace.servers.methods.get-flavor">
+            <varlistentry xml:id="zend.service.rackspace.servers.methods.get-flavor">
                 <term>
                     <methodsynopsis>
                         <methodname>getFlavor</methodname>
@@ -537,7 +552,7 @@
                 </listitem>
             </varlistentry>
             
-            <varlistentry id="zend.service.rackspace.servers.methods.get-image">
+            <varlistentry xml:id="zend.service.rackspace.servers.methods.get-image">
                 <term>
                     <methodsynopsis>
                         <methodname>getImage</methodname>
@@ -558,7 +573,7 @@
                 </listitem>
             </varlistentry>
             
-            <varlistentry id="zend.service.rackspace.servers.methods.get-shared-ip-group">
+            <varlistentry xml:id="zend.service.rackspace.servers.methods.get-shared-ip-group">
                 <term>
                     <methodsynopsis>
                         <methodname>getSharedIpGroup</methodname>
@@ -579,7 +594,7 @@
                 </listitem>
             </varlistentry>
             
-            <varlistentry id="zend.service.rackspace.servers.methods.get-server">
+            <varlistentry xml:id="zend.service.rackspace.servers.methods.get-server">
                 <term>
                     <methodsynopsis>
                         <methodname>getServer</methodname>
@@ -600,7 +615,7 @@
                 </listitem>
             </varlistentry>
             
-            <varlistentry id="zend.service.rackspace.servers.methods.get-server-ip">
+            <varlistentry xml:id="zend.service.rackspace.servers.methods.get-server-ip">
                 <term>
                     <methodsynopsis>
                         <methodname>getServerIp</methodname>
@@ -622,7 +637,7 @@
                 </listitem>
             </varlistentry>
             
-            <varlistentry id="zend.service.rackspace.servers.methods.get-server-private-ip">
+            <varlistentry xml:id="zend.service.rackspace.servers.methods.get-server-private-ip">
                 <term>
                     <methodsynopsis>
                         <methodname>getServerPrivateIp</methodname>
@@ -644,7 +659,7 @@
                 </listitem>
             </varlistentry>
             
-            <varlistentry id="zend.service.rackspace.servers.methods.get-server-public-ip">
+            <varlistentry xml:id="zend.service.rackspace.servers.methods.get-server-public-ip">
                 <term>
                     <methodsynopsis>
                         <methodname>getServerPublicIp</methodname>
@@ -666,7 +681,7 @@
                 </listitem>
             </varlistentry>
             
-            <varlistentry id="zend.service.rackspace.servers.methods.list-flavors">
+            <varlistentry xml:id="zend.service.rackspace.servers.methods.list-flavors">
                 <term>
                     <methodsynopsis>
                         <methodname>listFlavors</methodname>
@@ -687,7 +702,7 @@
                 </listitem>
             </varlistentry>
             
-            <varlistentry id="zend.service.rackspace.servers.methods.list-images">
+            <varlistentry xml:id="zend.service.rackspace.servers.methods.list-images">
                 <term>
                     <methodsynopsis>
                         <methodname>listImages</methodname>
@@ -708,7 +723,7 @@
                 </listitem>
             </varlistentry>
             
-            <varlistentry id="zend.service.rackspace.servers.methods.list-server">
+            <varlistentry xml:id="zend.service.rackspace.servers.methods.list-server">
                 <term>
                     <methodsynopsis>
                         <methodname>listServer</methodname>
@@ -729,7 +744,7 @@
                 </listitem>
             </varlistentry>
             
-            <varlistentry id="zend.service.rackspace.servers.methods.list-shared-ip-groups">
+            <varlistentry xml:id="zend.service.rackspace.servers.methods.list-shared-ip-groups">
                 <term>
                     <methodsynopsis>
                         <methodname>listSharedIpGroups</methodname>
@@ -750,7 +765,7 @@
                 </listitem>
             </varlistentry>
             
-            <varlistentry id="zend.service.rackspace.servers.methods.reboot-server">
+            <varlistentry xml:id="zend.service.rackspace.servers.methods.reboot-server">
                 <term>
                     <methodsynopsis>
                         <methodname>rebootServer</methodname>
@@ -777,7 +792,7 @@
                 </listitem>
             </varlistentry>
             
-            <varlistentry id="zend.service.rackspace.servers.methods.rebuild-server">
+            <varlistentry xml:id="zend.service.rackspace.servers.methods.rebuild-server">
                 <term>
                     <methodsynopsis>
                         <methodname>rebuildServer</methodname>
@@ -802,7 +817,7 @@
                 </listitem>
             </varlistentry>
             
-            <varlistentry id="zend.service.rackspace.servers.methods.resize-server">
+            <varlistentry xml:id="zend.service.rackspace.servers.methods.resize-server">
                 <term>
                     <methodsynopsis>
                         <methodname>resizeServer</methodname>
@@ -830,7 +845,7 @@
                 </listitem>
             </varlistentry>
             
-            <varlistentry id="zend.service.rackspace.servers.methods.revert-resize-server">
+            <varlistentry xml:id="zend.service.rackspace.servers.methods.revert-resize-server">
                 <term>
                     <methodsynopsis>
                         <methodname>revertResizeServer</methodname>
@@ -855,7 +870,7 @@
                 </listitem>
             </varlistentry>
             
-            <varlistentry id="zend.service.rackspace.servers.methods.share-ip-address">
+            <varlistentry xml:id="zend.service.rackspace.servers.methods.share-ip-address">
                 <term>
                     <methodsynopsis>
                         <methodname>shareIpAddress</methodname>
@@ -887,7 +902,7 @@
                 </listitem>
             </varlistentry>
             
-            <varlistentry id="zend.service.rackspace.servers.methods.unshare-ip-address">
+            <varlistentry xml:id="zend.service.rackspace.servers.methods.unshare-ip-address">
                 <term>
                     <methodsynopsis>
                         <methodname>unshareIpAddress</methodname>
@@ -911,7 +926,7 @@
                 </listitem>
             </varlistentry>
             
-            <varlistentry id="zend.service.rackspace.servers.methods.update-server">
+            <varlistentry xml:id="zend.service.rackspace.servers.methods.update-server">
                 <term>
                     <methodsynopsis>
                         <methodname>updateServer</methodname>
@@ -937,105 +952,100 @@
                     </para>
                 </listitem>
             </varlistentry>
-            
-            
         </variablelist>
-    </sect2>
+    </section>
  
-    <sect2 id="zend.service.rackspace.servers.examples">
-        <title>Examples</title>
+    <section xml:id="zend.service.rackspace.servers.examples">
+        <info><title>Examples</title></info>
  
-        <example id="zend.service.rackspace.servers.examples.authenticate">
-            <title>Authenticate</title>
+        <example xml:id="zend.service.rackspace.servers.examples.authenticate">
+            <info><title>Authenticate</title></info>
  
             <para>Check if the username and the key are valid for the Rackspace authentication.</para>
  
             <programlisting language="php"><![CDATA[
-            $user = 'username';
-            $key  = 'secret key';
+$user = 'username';
+$key  = 'secret key';
 
-            $rackspace = new Zend\Service\Rackspace\Servers($user,$key);
+$rackspace = new Zend\Service\Rackspace\Servers($user,$key);
 
-            if ($rackspace->authenticate()) {
-                printf("Authenticated with token: %s",$rackspace->getToken());
-            } else {
-                printf("ERROR: %s",$rackspace->getErrorMsg());
-            }
+if ($rackspace->authenticate()) {
+    printf("Authenticated with token: %s",$rackspace->getToken());
+} else {
+    printf("ERROR: %s",$rackspace->getErrorMsg());
+}
 ]]></programlisting>
         </example>
         
-        <example id="zend.service.rackspace.servers.examples.create-server">
-            <title>Create a server with metadata information and upload of a file</title>
- 
+        <example xml:id="zend.service.rackspace.servers.examples.create-server">
+            <info><title>Create a server with metadata information and upload of a file</title></info>
+            
             <para>
                 Create a server with some metadata information and upload the file <emphasis>build.sh</emphasis>
                 from the local path <emphasis>/home/user</emphasis> to the remote path <emphasis>/root</emphasis>.
              </para>   
  
             <programlisting language="php"><![CDATA[
-            $data = array (
-                'name'     => 'test',
-                'imageId'  => '49',
-                'flavorId' => '1'
-            );
-            $metadata = array (
-                'foo' => 'bar'
-            );
-            $files = array (   
-                '/root/build.sh' => '/home/user/build.sh'
-            );
-            $server= $rackspace->createServer($data,$metadata,$files);
-            
-            if (!$rackspace->isSuccessful()) {
-               die('ERROR: '.$rackspace->getErrorMsg());
-            } 
-            
-            $publicIp= $server->getPublicIp();
-            
-            printf("Server name    : %s\n",$server->getName());
-            printf("Server Id      : %s\n",$server->getId());
-            printf("Public IP      : %s\n",$publicIp[0]);
-            printf("Admin password : %s\n",$server->getAdminPass());
+$data = array (
+    'name'     => 'test',
+    'imageId'  => '49',
+    'flavorId' => '1',
+);
+$metadata = array (
+    'foo' => 'bar',
+);
+$files = array (   
+    '/root/build.sh' => '/home/user/build.sh',
+);
+$server= $rackspace->createServer($data,$metadata,$files);
+
+if (!$rackspace->isSuccessful()) {
+    die('ERROR: '.$rackspace->getErrorMsg());
+} 
+
+$publicIp= $server->getPublicIp();
+
+printf("Server name    : %s\n",$server->getName());
+printf("Server Id      : %s\n",$server->getId());
+printf("Public IP      : %s\n",$publicIp[0]);
+printf("Admin password : %s\n",$server->getAdminPass());
 ]]></programlisting>
         </example>
         
-        <example id="zend.service.rackspace.servers.examples.reboot-server">
-            <title>Reboot a server</title>
- 
+        <example xml:id="zend.service.rackspace.servers.examples.reboot-server">
+            <info><title>Reboot a server</title></info>
+            
             <para>
                 Reboot a server in hard mode (is the equivalent of power cycling the server).
              </para>   
  
             <programlisting language="php"><![CDATA[
+$flavors= $rackspace->rebootServer('server id',true)
 
-            $flavors= $rackspace->rebootServer('server id',true)
-            
-            if (!$rackspace->isSuccessful()) {
-               die('ERROR: '.$rackspace->getErrorMsg());
-            } 
-            
-            echo "The server has been rebooted successfully";
+if (!$rackspace->isSuccessful()) {
+    die('ERROR: '.$rackspace->getErrorMsg());
+} 
+
+echo "The server has been rebooted successfully";
 ]]></programlisting>
         </example>
 
-        <example id="zend.service.rackspace.servers.examples.list-flavors">
-            <title>List all the available flavors</title>
+        <example xml:id="zend.service.rackspace.servers.examples.list-flavors">
+            <info><title>List all the available flavors</title></info>
  
             <para>
                 List all the available flavors with all the detailed information.
              </para>   
  
             <programlisting language="php"><![CDATA[
+$flavors= $rackspace->listFlavors(true);
 
-            $flavors= $rackspace->listFlavors(true);
-            
-            if (!$rackspace->isSuccessful()) {
-               die('ERROR: '.$rackspace->getErrorMsg());
-            } 
-            
-            print_r($flavors);
+if (!$rackspace->isSuccessful()) {
+    die('ERROR: '.$rackspace->getErrorMsg());
+} 
+
+print_r($flavors);
 ]]></programlisting>
         </example>
-    </sect2>
-    
-</sect1>
+    </section>
+</section>

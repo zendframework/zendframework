@@ -83,6 +83,8 @@ class DirectoryScanner implements Scanner
                 }
             }
         }
+        
+        $this->isScanned = true;
     }
     
     public function getNamespaces()

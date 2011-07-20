@@ -19,6 +19,7 @@ class DerivedClassScanner extends ClassScanner
      */  
     protected $classScanner = null;
     protected $parentClassScanners = array();
+    protected $interfaceClassScanners = array();
     
     public function __construct(ClassScanner $classScanner, DirectoryScanner $directoryScanner)
     {
@@ -29,7 +30,7 @@ class DerivedClassScanner extends ClassScanner
         
         while ($currentScannerClass && $currentScannerClass->hasParentClass()) {
             $currentParentClassName = $currentScannerClass->getParentClass(); 
-            $this->parentClassScanners[$currentParentClassName] = null;
+            //$this->parentClassScanners[$currentParentClassName] = null;
             if ($directoryScanner->hasClass($currentParentClassName)) {
                 $currentParentClass = $directoryScanner->getClass($currentParentClassName);
                 $this->parentClassScanners[$currentParentClassName] = $currentParentClass;
@@ -38,6 +39,14 @@ class DerivedClassScanner extends ClassScanner
                 $currentScannerClass = false;
             }
         }
+        
+        foreach ($interfaces = $this->classScanner->getInterfaces() as $iName) {
+            if ($directoryScanner->hasClass($iName)) {
+                $this->interfaceClassScanners[$iName] = $directoryScanner->getClass($iName);
+            }
+        }
+        
+        
     }
     
     public function getName()
@@ -85,8 +94,12 @@ class DerivedClassScanner extends ClassScanner
         return $this->classScanner->getParentClass();
     }
     
-    public function getInterfaces()
+    public function getInterfaces($returnClassScanners = false)
     {
+        if ($returnClassScanners) {
+            return $this->interfaceClassScanners;
+        }
+        
         $interfaces = $this->classScanner->getInterfaces();
         foreach ($this->parentClassScanners as $pClassScanner) {
             $interfaces = array_merge($interfaces, $pClassScanner->getInterfaces());

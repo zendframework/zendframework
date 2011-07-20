@@ -180,7 +180,8 @@ class Compiler
         $iRules = $this->getIntrospectionRuleset()->getInterfaceRules();
         
         if ($iRules['enabled']) {
-            foreach ($c->getInterfaces() as $i) {
+            foreach ($c->getInterfaces(true) as $i) {
+
                 // explicitly in the include interfaces
                 if ($iRules['includedInterfaces'] && !in_array($i->getName(), $iRules['includedInterfaces'])) {
                     continue;

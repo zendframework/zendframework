@@ -37,7 +37,7 @@ interface Adapter
     /**
      * Return a list of the available instances
      *
-     * @return array
+     * @return Zend\Cloud\Infrastructure\InstanceList
      */ 
     public function listInstances(); 
  
@@ -111,12 +111,14 @@ interface Adapter
     /**
      * Return all the available instances images
      *
-     * @return array
+     * @return Zend\Cloud\Infrastructure\ImageList
      */ 
     public function imagesInstance(); 
     
     /**
      * Return all the available zones
+     * 
+     * @return array
      */
     public function zonesInstance();
     

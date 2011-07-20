@@ -493,7 +493,22 @@
             </xi:include>
         </chapter>
 
-        <chapter xml:id="zend.codegenerator"><info><title>Zend_CodeGenerator</title></info>
+        <chapter xml:id="zend.cloud">
+            <info><title>Zend_Cloud</title></info>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Cloud_Infrastructure.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Cloud_Infrastructure.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Cloud_Infrastructure_Adapter.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Cloud_Infrastructure_Adapter.xml" />
+                </xi:fallback>
+            </xi:include>
+        </chapter>
+
+        <chapter xml:id="zend.codegenerator">
+            <info><title>Zend_CodeGenerator</title></info>
             
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_CodeGenerator-Introduction.xml" parse="xml">
                 <xi:fallback>
@@ -1852,6 +1867,21 @@
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Service_Nirvanix.xml" parse="xml">
                 <xi:fallback>
                     <xi:include href="../en/module_specs/Zend_Service_Nirvanix.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Service_Rackspace.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Service_Rackspace.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Service_Rackspace_Files.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Service_Rackspace_Files.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Service_Rackspace_Servers.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Service_Rackspace_Servers.xml" />
                 </xi:fallback>
             </xi:include>
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Service-ReCaptcha.xml" parse="xml">

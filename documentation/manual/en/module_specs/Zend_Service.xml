@@ -66,6 +66,12 @@
 
         <listitem>
             <para>
+                <link linkend="zend.service.rackspace">Rackspace</link>
+            </para>
+        </listitem>
+        
+        <listitem>
+            <para>
                 <link linkend="zend.service.recaptcha">ReCaptcha</link>
             </para>
         </listitem>

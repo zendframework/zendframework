@@ -1,6 +1,6 @@
 <?php
 
-namespace Zend\Code\Scanner\DerivedScanner;
+namespace Zend\Code\Scanner;
 
 use Zend\Code\Scanner,
     Zend\Code\Scanner\DirectoryScanner,
@@ -29,8 +29,10 @@ class AggregateDirectoryScanner extends DirectoryScanner
     public function getNamespaces($returnScannerClass = false)
     {}
     
+    /*
     public function getUses($returnScannerClass = false)
     {}
+    */
     
     public function getIncludes($returnScannerClass = false)
     {}
@@ -57,7 +59,7 @@ class AggregateDirectoryScanner extends DirectoryScanner
         return (isset($scanner));
     }
     
-    public function getClass($class, $returnScannerClass = true)
+    public function getClass($class, $returnScannerClass = 'Zend\Code\Scanner\ClassScanner')
     {
         foreach ($this->scanners as $scanner) {
             if ($scanner->hasClass($class)) {

@@ -16,8 +16,9 @@ class DerivedClassScannerTest extends \PHPUnit_Framework_TestCase
         $ads = new AggregateDirectoryScanner();
         $ads->addScanner($ds);
         $c = $ads->getClass('ZendTest\Code\Scanner\TestAsset\MapperExample\RepositoryB');
-        echo get_class($c);
-        echo $c->getName();
+        //echo $c->getName();
+        //var_dump($c->getMethods(true));
+        var_dump($c->getProperties());
     }
     
     

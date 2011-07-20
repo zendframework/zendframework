@@ -317,6 +317,12 @@ class ClassScanner implements Scanner
         return $this->isFinal;
     }
 
+    public function isInstantiable()
+    {
+        $this->scan();
+        return (!$this->isAbstract && !$this->isInterface);
+    }
+    
     public function isAbstract()
     {
         $this->scan();
@@ -458,6 +464,8 @@ class ClassScanner implements Scanner
     
     public function hasMethod($name)
     {
+        $this->scan();
+        
         foreach ($this->infos as $infoIndex => $info) {
             if ($info['type'] === 'method' && $info['name'] === $name) {
                 return true;

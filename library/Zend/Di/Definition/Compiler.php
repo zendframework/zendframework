@@ -2,16 +2,21 @@
 
 namespace Zend\Di\Definition;
 
-use Zend\Code\Scanner\AggregateScanner,
-    Zend\Code\Scanner\ClassScanner,
+use Zend\Code\Scanner\DerivedClassScanner,
     Zend\Code\Scanner\DirectoryScanner,
-    Zend\Code\Scanner\FileScanner;
+    Zend\Code\Scanner\FileScanner,
+    Zend\Code\Scanner\MethodScanner;
 
 class Compiler
 {
     protected $introspectionRuleset = null;
-    protected $codeScanners = null;
-    protected $codeReflectors = array();
+    
+    /**
+     * @var Zend\Code\Scanner\DirectoryScanner
+     */
+    protected $directoryScanner = null;
+    
+    //protected $codeReflectors = array();
         
     public function setIntrospectionRuleset(IntrospectionRuleset $introspectionRuleset)
     {
@@ -32,20 +37,20 @@ class Compiler
     
     public function addCodeScannerDirectory(DirectoryScanner $directoryScanner)
     {
-        if ($this->codeScanners == null) {
-            $this->codeScanners = new AggregateScanner();
+        if ($this->directoryScanner == null) {
+            $this->directoryScanner = new DirectoryScanner();
         }
         
-        $this->codeScanners->addScanner($directoryScanner);
+        $this->directoryScanner->addDirectoryScanner($directoryScanner);
     }
     
     public function addCodeScannerFile(FileScanner $fileScanner)
     {
-        if ($this->codeScanners == null) {
-            $this->codeScanners = new AggregateScanner();
+        if ($this->directoryScanner == null) {
+            $this->directoryScanner = new DirectoryScanner();
         }
         
-        $this->codeScanners->addScanner($fileScanner);
+        $this->directoryScanner->addFileScanner($fileScanner);
     }
     
     /*
@@ -59,51 +64,31 @@ class Compiler
     {
         $data = array();
         
-        $introspectionRuleset = $this->getIntrospectionRuleset();
-        
-        foreach ($this->codeScanners as $codeScanner) {
+        /* @var $classScanner Zend\Code\Scanner\DerivedClassScanner */
+        foreach ($this->directoryScanner->getClasses(true, true) as $classScanner) {
             
-            $classScanners = $codeScanner->getClasses(true);
-            
-            /* @var $class Zend\Code\Scanner\ClassScanner */
-            foreach ($classScanners as $classScanner) {
-                
-                if ($classScanner->isAbstract() || $classScanner->isInterface()) {
-                    continue;
-                }
-                
-                // build the combined scanner (this + parents - interfaces)
-                $combinedScanners = array($classScanner);
-                $currentScanner = $classScanner;
-                
-                while ($currentScanner->hasParentClass()
-                    && $this->codeScanners->hasClass($currentScanner->getParentClass())) {
-                    $combinedScanners[]
-                }
-                
-                
-                // determine supertypes
-                $superTypes = array();
-                if (($parentClass = $classScanner->getParentClass()) !== null) {
-                    $superTypes[] = $parentClass;
-                }
-                if (($interfaces = $classScanner->getInterfaces())) {
-                    $superTypes = array_merge($superTypes, $interfaces);
-                }
-                
-                $className = $classScanner->getName();
-                $data[$className] = array(
-                    'superTypes'       => $superTypes,
-                    'instantiator'     => $this->compileScannerInstantiator($classScanner),
-                    'injectionMethods' => $this->compileScannerInjectionMethods($classScanner),
-                );
+            // determine supertypes
+            $superTypes = array();
+            if (($parentClasses = $classScanner->getParentClasses()) !== null) {
+                $superTypes = array_merge($superTypes, $parentClasses);
             }
+            if (($interfaces = $classScanner->getInterfaces())) {
+                $superTypes = array_merge($superTypes, $interfaces);
+            }
+            
+            $className = $classScanner->getName();
+            $data[$className] = array(
+                'superTypes'       => $superTypes,
+                'instantiator'     => $this->compileScannerInstantiator($classScanner),
+                'injectionMethods' => $this->compileScannerInjectionMethods($classScanner),
+            );
+
         }
-        
+
         return new ArrayDefinition($data);
     }
     
-    public function compileScannerInstantiator(ClassScanner $scannerClass)
+    public function compileScannerInstantiator(DerivedClassScanner $scannerClass)
     {
         if ($scannerClass->hasMethod('__construct')) {
             $construct = $scannerClass->getMethod('__construct');
@@ -113,50 +98,168 @@ class Compiler
         }
         
         return null;
-        
-        // @todo scan parent classes for instantiator
     }
     
-    public function compileScannerInjectionMethods(ClassScanner $scannerClass)
+    public function compileScannerInjectionMethods(DerivedClassScanner $c)
     {
-        $data      = array();
-        $className = $scannerClass->getName();
+        // return value
+        $methods = array();
 
-        foreach ($scannerClass->getMethods(true) as $scannerMethod) {
-            $methodName = $scannerMethod->getName();
-            
-            // determine initiator & constructor dependencies
-            if ($methodName === '__construct' && $scannerMethod->isPublic()) {
-                $params = $scannerMethod->getParameters(true);
-                if ($params) {
-                    $data[$methodName] = array();
-                    foreach ($params as $param) {
-                        $data[$methodName][$param->getName()] = $param->getClass();
-                    }
-                }
-            }
-            
-            // scan for setter injection
-            if (preg_match('#^set[A-Z]#', $methodName)) {
-                $data[$methodName] = $scannerMethod->getParameters();
-                $params = $scannerMethod->getParameters(true);
-                $data[$methodName] = array();
-                foreach ($params as $param) {
-                    $data[$methodName][$param->getName()] = $param->getClass();
+        // name of top level class (only, not derived)
+        $className = $c->getName();
+        
+        // constructor injection      
+        $cRules = $this->getIntrospectionRuleset()->getConstructorRules();
+        
+        if ($cRules['enabled']) {
+            if ($c->hasMethod('__construct')) {
+                $constructScanner = $c->getMethod('__construct');
+                if ($constructScanner->isPublic() && $constructScanner->getNumberOfParameters() > 0) {
+                    do {
+                        // explicity in included classes
+                        if ($cRules['includedClasses'] && !in_array($className, $cRules['includedClasses'])) {
+                            break;
+                        }
+                        // explicity NOT in excluded classes
+                        if ($cRules['excludedClasses'] && in_array($className, $cRules['excludedClasses'])) {
+                            break;
+                        }
+                        gettype($constructScanner);
+                        $methods['__construct'] = $this->compileScannerInjectionMethodParmeters(
+                            $constructScanner,
+                            IntrospectionRuleset::TYPE_CONSTRUCTOR
+                        );
+                    } while (false);
                 }
             }
         }
-        return $data;
+        
+            // setter injection
+        $sRules = $this->getIntrospectionRuleset()->getSetterRules();
+        
+        if ($sRules['enabled']) {
+            /* @var $m ReflectionMethod */
+            foreach ($c->getMethods(true) as $m) {
+                //$declaringClassName = $m->getDeclaringClass()->getName();
+                
+                if (!$m->isPublic() || $m->getNumberOfParameters() == 0) {
+                    continue;
+                }
+                
+                // explicitly in the include classes
+                if ($sRules['includedClasses'] && !in_array($className, $sRules['includedClasses'])) {
+                    continue;
+                }
+
+                // explicity NOT in excluded classes
+                if ($sRules['excludedClasses']
+                    && (in_array($className, $sRules['excludedClasses'])
+                        //|| in_array($declaringClassName, $sRules['excludedClasses'])) 
+                    )) {
+                    continue;
+                }
+                
+                // declaring class 
+                
+                // if there is a pattern & it does not match
+                if ($sRules['pattern'] && !preg_match('/' . $sRules['pattern'] . '/', $m->getName())) {
+                    continue;
+                }
+                // if there are more than methodsMaxParameters, continue
+                if ($sRules['methodMaximumParams'] && ($m->getNumberOfParameters() > $sRules['methodMaximumParams'])) {
+                    continue;
+                }
+                $methods[$m->getName()] = $this->compileScannerInjectionMethodParmeters(
+                    $m,
+                    IntrospectionRuleset::TYPE_SETTER
+                );
+            }
+        }
+
+        // interface injection
+        $iRules = $this->getIntrospectionRuleset()->getInterfaceRules();
+        
+        if ($iRules['enabled']) {
+            foreach ($c->getInterfaces() as $i) {
+                // explicitly in the include interfaces
+                if ($iRules['includedInterfaces'] && !in_array($i->getName(), $iRules['includedInterfaces'])) {
+                    continue;
+                }
+                // explicity NOT in excluded classes
+                if ($iRules['excludedInterfaces'] && in_array($i->getName(), $iRules['excludedInterfaces'])) {
+                    continue;
+                }
+                // if there is a pattern, and it does not match, continue
+                if ($iRules['pattern'] && !preg_match('#' . preg_quote($iRules['pattern'], '#') . '#', $i->getName())) {
+                    continue;
+                }
+                foreach ($i->getMethods() as $m) {
+                    $methods[$m->getName()] = $this->compileScannerInjectionMethodParmeters(
+                        $m,
+                        IntrospectionRuleset::TYPE_INTERFACE
+                    );
+                }
+            }
+        }
+        
+        
+        return $methods;
+
     }
     
-    
-    /*
-    public function hasClass($class);
-    public function getClassSupertypes($class);
-    public function getInstantiator($class);
-    public function hasInjectionMethods($class);
-    public function hasInjectionMethod($class, $method);
-    public function getInjectionMethods($class);
-    public function getInjectionMethodParameters($class, $method);    
+    /**
+     * Return the parameters for a method
+     * 
+     * 3 item array:
+     *     #1 - Class name, string if it exists, else null
+     *     #2 - Optional?, boolean
+     *     #3 - Instantiable, boolean if class exists, otherwise null
+     * 
+     * @return array 
      */
+    public function compileScannerInjectionMethodParmeters(MethodScanner $methodScanner, $introspectionType)
+    {
+        $params = array();
+        $parameterScanners = $methodScanner->getParameters(true);
+        
+        // rules according to type
+        $rules = $this->getIntrospectionRuleset()->getRules($introspectionType);
+        
+        /* @var $p Zend\Code\Scanner\ParameterScanner */
+        foreach ($parameterScanners as $p) {
+            
+            $paramName = $p->getName();
+            
+            // create array for this parameter
+            $params[$paramName] = array();
+            
+            // get name, and class if it exists
+            $pcName = $p->getClass();
+            if ($this->directoryScanner->hasClass($pcName)) {
+                $pc = $this->directoryScanner->getClass($pcName);
+            }
+            
+            if ($pcName) {
+                // @todo Should we throw an exception if its an unknown type?
+                $params[$paramName][] = $pcName;
+            } else {
+                $params[$paramName][] = null;
+            }
+            
+            if ($introspectionType == IntrospectionRuleset::TYPE_SETTER && $rules['paramCanBeOptional']) {
+                $params[$paramName][] = true;
+            } else {
+                $params[$paramName][] = $p->isOptional(); 
+            }
+            
+            if (isset($pc)) {
+                $params[$paramName][] = ($pc->isInstantiable()) ? true : false;
+            } else {
+                $params[$paramName][] = null;
+            }
+            
+        }
+        return $params;
+    }
+
 }

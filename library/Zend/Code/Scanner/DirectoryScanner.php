@@ -12,7 +12,7 @@ class DirectoryScanner implements Scanner
     protected $isScanned            = false;
     protected $directories          = array();
     protected $fileScannerFileClass = 'Zend\Code\Scanner\FileScanner';
-    protected $scannerFiles         = array();
+    protected $fileScanners         = array();
     
     public function __construct($directory = null)
     {
@@ -34,13 +34,31 @@ class DirectoryScanner implements Scanner
     
     public function addDirectory($directory)
     {
-        $realDir = realpath($directory);
-        if (!$realDir) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'Directory "%s" does not exist', $realDir
-            ));
+        if ($directory instanceof DirectoryScanner) {
+            $this->directories[] = $directory;
+        } elseif (is_string($directory)) {
+            $realDir = realpath($directory);
+            if (!$realDir || !is_dir($realDir)) {
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'Directory "%s" does not exist', $realDir
+                ));
+            }
+            $this->directories[] = $realDir;
+        } else {
+            throw new Exception\InvalidArgumentException(
+                'The argument provided was neither a DirectoryScanner or directory path'
+            );
         }
-        $this->directories[] = $realDir;
+    }
+    
+    public function addDirectoryScanner(DirectoryScanner $directoryScanner)
+    {
+        $this->addDirectory($directoryScanner);
+    }
+    
+    public function addFileScanner(FileScanner $fileScanner)
+    {
+        $this->fileScanners[] = $fileScanner;
     }
     
     protected function scan()
@@ -51,10 +69,17 @@ class DirectoryScanner implements Scanner
         
         // iterate directories creating file scanners
         foreach ($this->directories as $directory) {
-            $rdi = new RecursiveDirectoryIterator($directory);
-            foreach (new RecursiveIteratorIterator($rdi) as $item) {
-                if ($item->isFile() && preg_match('#\.php$#', $item->getRealPath())) {
-                    $this->scannerFiles[] = new FileScanner($item->getRealPath());
+            if ($directory instanceof DirectoryScanner) {
+                $directory->scan();
+                if ($directory->fileScanners) {
+                    $this->fileScanners = array_merge($this->fileScanners, $directory->fileScanners);
+                }
+            } else {
+                $rdi = new RecursiveDirectoryIterator($directory);
+                foreach (new RecursiveIteratorIterator($rdi) as $item) {
+                    if ($item->isFile() && preg_match('#\.php$#', $item->getRealPath())) {
+                        $this->fileScanners[] = new FileScanner($item->getRealPath());
+                    }
                 }
             }
         }
@@ -64,14 +89,22 @@ class DirectoryScanner implements Scanner
     {
     }
     
-    public function getClasses($returnScannerClass = false)
+    public function getClasses($returnScannerClass = false, $returnDerivedScannerClass = false)
     {
         $this->scan();
         
         $classes = array();
-        foreach ($this->scannerFiles as $scannerFile) {
+        foreach ($this->fileScanners as $scannerFile) {
             /* @var $scannerFile Zend\Code\Scanner\FileScanner */
             $classes = array_merge($classes, $scannerFile->getClasses($returnScannerClass));
+        }
+        
+        if ($returnDerivedScannerClass) {
+            foreach ($classes as $index => $class) {
+                if ($class instanceof ClassScanner) {
+                    $classes[$index] = new DerivedClassScanner($class, $this);
+                }
+            }
         }
         
         return $classes;
@@ -82,16 +115,22 @@ class DirectoryScanner implements Scanner
         return (in_array($class, $this->getClasses()));
     }
     
-    public function getClass($class, $returnScannerClass = true)
+    public function getClass($class, $returnScannerClass = true, $returnDerivedScannerClass = false)
     {
         $this->scan();
         
-        foreach ($this->scannerFiles as $scannerFile) {
+        foreach ($this->fileScanners as $scannerFile) {
             /* @var $scannerFile Zend\Code\Scanner\FileScanner */
             $classesInFileScanner = $scannerFile->getClasses(false);
             if (in_array($class, $classesInFileScanner)) {
-                return $scannerFile->getClass($class, $returnScannerClass);
+                $returnClass = $scannerFile->getClass($class, $returnScannerClass);
             }
+        }
+        
+        if (isset($returnClass) && $returnClass instanceof ClassScanner && $returnDerivedScannerClass) {
+            return new DerivedClassScanner($returnClass, $this);
+        } elseif (isset($returnClass)) {
+            return $returnClass;
         }
         
         throw new Exception\InvalidArgumentException('Class not found.');

@@ -1,5 +1,17 @@
 TODO
 
+- Make compiler able to be definition-aware for purposes of derived class
+  information. Basically, allow attaching other Definition objects to a compiler
+  which it will then consult during compile() in order to flesh out dependency
+  details. Use case: a concrete DbTable object in a user library. In this case,
+  currently compiling against that object will provide no supertypes; having the
+  ability to attach a previously created definition would allow the compiler to
+  check against those and provide information as it locates it.
+
+- Integrate the EventManager into the Compiler and Code\Scanner in order to
+  allow attaching listeners to interesting events. Use cases include logging and
+  debugging during definition compilation.
+
 - Ability to provide both class properties and method-specific parameters via
   configuration (which solves disambiguation when multiple methods specify the
   same parameter names)

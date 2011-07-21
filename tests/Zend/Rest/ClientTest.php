@@ -58,18 +58,18 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $client = new Client\RestClient('http://framework.zend.com/rest/');
         $uri = $client->getUri();
-        $this->assertTrue($uri instanceof URI\URI);
-        $this->assertEquals('http://framework.zend.com/rest/', $uri->generate());
+        $this->assertTrue($uri instanceof Uri\Uri);
+        $this->assertEquals('http://framework.zend.com/rest/', $uri->toString());
 
-        $client->setUri(new Uri\Url('http://framework.zend.com/soap/'));
+        $client->setUri(Uri\UriFactory::factory('http://framework.zend.com/soap/'));
         $uri = $client->getUri();
-        $this->assertTrue($uri instanceof Uri\Url);
-        $this->assertEquals('http://framework.zend.com/soap/', $uri->generate());
+        $this->assertTrue($uri instanceof Uri\Uri);
+        $this->assertEquals('http://framework.zend.com/soap/', $uri->toString());
 
         $client->setUri('http://framework.zend.com/xmlrpc/');
         $uri = $client->getUri();
-        $this->assertTrue($uri instanceof Uri\Url);
-        $this->assertEquals('http://framework.zend.com/xmlrpc/', $uri->generate());
+        $this->assertTrue($uri instanceof Uri\Uri);
+        $this->assertEquals('http://framework.zend.com/xmlrpc/', $uri->toString());
     }
 
     public function testRestGetThrowsExceptionWithNoUri()

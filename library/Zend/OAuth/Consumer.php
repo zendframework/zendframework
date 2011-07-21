@@ -24,14 +24,6 @@
 namespace Zend\OAuth;
 
 /**
- * @uses       \Zend\OAuth\OAuth
- * @uses       \Zend\OAuth\Config\Config
- * @uses       \Zend\OAuth\Exception
- * @uses       \Zend\OAuth\Http\AccessToken
- * @uses       \Zend\OAuth\Http\RequestToken
- * @uses       \Zend\OAuth\Http\UserAuthorization
- * @uses       \Zend\OAuth\Token\AuthorizedRequest
- * @uses       \Zend\Uri\Uri
  * @category   Zend
  * @package    Zend_OAuth
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)

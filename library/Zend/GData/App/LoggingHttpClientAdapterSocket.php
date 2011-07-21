@@ -30,7 +30,6 @@ namespace Zend\GData\App;
  * in the config as $config['logfile'].  Requests and responses are logged after
  * they are sent and received/processed, thus an error could prevent logging.
  *
- * @uses       \Zend\Http\Client\Adapter\Socket
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App
@@ -80,7 +79,7 @@ class LoggingHttpClientAdapterSocket extends \Zend\Http\Client\Adapter\Socket
      * Send request to the remote server
      *
      * @param string        $method
-     * @param \Zend\Uri\Http $uri
+     * @param \Zend\Uri\Uri $uri
      * @param string        $http_ver
      * @param array         $headers
      * @param string        $body

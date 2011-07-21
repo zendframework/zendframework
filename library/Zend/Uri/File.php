@@ -40,15 +40,19 @@ class File extends Uri
     /**
      * Check if the URI is a valid File URI
      * 
-     * This applys additional specific validation rules beyond the ones 
-     * required by the generic URI syntax
+     * This applies additional specific validation rules beyond the ones 
+     * required by the generic URI syntax.
      * 
      * @return boolean
      * @see    Uri::isValid()
      */
     public function isValid()
     {
-        
+        if ($this->query) {
+            return false;
+        }
+
+        return parent::isValid();
     }
     
     /**
@@ -76,17 +80,17 @@ class File extends Uri
     /**
      * Convert a UNIX file path to a valid file:// URL
      * 
-     * @param  srting $path
+     * @param  string $path
      * @return File
      */
-    static public function fromUnixPath($path)
+    public static function fromUnixPath($path)
     {
         $url = new self('file:');
         if (substr($path, 0, 1) == '/') {
             $url->setHost('');
         }
+
         $url->setPath($path);
-        
         return $url;
     }
     
@@ -96,7 +100,7 @@ class File extends Uri
      * @param  string $path
      * @return File
      */
-    static public function fromWindowsPath($path)
+    public static function fromWindowsPath($path)
     {
         $url = new self('file:');
 
@@ -107,6 +111,8 @@ class File extends Uri
         if (preg_match('|^([a-zA-Z]:)?/|', $path)) {
             $url->setHost('');
         }
+
         $url->setPath($path);
+        return $url;
     }
 }

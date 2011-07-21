@@ -23,6 +23,7 @@
  * @namespace
  */
 namespace Zend\Tool\Framework\System\Provider;
+
 use Zend\Tool\Framework,
     Zend\Tool\Framework\Provider\AbstractProvider,
     Zend\Tool\Framework\Exception\RuntimeException;
@@ -72,7 +73,7 @@ class Config extends AbstractProvider
 
         $homeDirectory = $this->_detectHomeDirectory();
 
-        $writer = new Zend\Config\Writer\Ini();
+        $writer = new \Zend\Config\Writer\Ini();
         $writer->setRenderWithoutSections();
         $filename = $homeDirectory."/.zf.ini";
 
@@ -81,7 +82,7 @@ class Config extends AbstractProvider
                 'include_path' => get_include_path(),
             ),
         );
-        $writer->write($filename, new Zend\Config\Config($config));
+        $writer->write($filename, new \Zend\Config\Config($config));
 
         $resp = $this->_registry->getResponse();
         $resp->appendContent("Successfully written Zend Tool config.");
@@ -100,7 +101,7 @@ class Config extends AbstractProvider
                 return $homeDirectory;
             }
         }
-        throw new Framework\Exception("Cannot detect user home directory, set ZF_HOME enviroment variable.");
+        throw new RuntimeException("Cannot detect user home directory, set ZF_HOME enviroment variable.");
     }
 
     /**
@@ -188,7 +189,7 @@ class Config extends AbstractProvider
     public function enableProvider($className)
     {
         $reflClass = new \ReflectionClass($className);
-        if (!in_array("Zend\Tool\Framework\Provider", $reflClass->getInterfaceNames())) {
+        if (!in_array("Zend\\Tool\\Framework\\Provider", $reflClass->getInterfaceNames())) {
             throw new RuntimeException("Given class is not a provider");
         }
         $this->_doEnable($className);

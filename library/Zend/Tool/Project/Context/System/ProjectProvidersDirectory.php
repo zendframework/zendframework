@@ -71,7 +71,7 @@ class ProjectProvidersDirectory
 
             $providerRepository = $registry->getProviderRepository();
             
-            foreach (new DirectoryIterator($this->getPath()) as $item) {
+            foreach (new \DirectoryIterator($this->getPath()) as $item) {
                 if ($item->isFile() && (($suffixStart = strpos($item->getFilename(), 'Provider.php')) !== false)) {
                     $className = substr($item->getFilename(), 0, $suffixStart+8);
                     // $loadableFiles[$className] = $item->getPathname();

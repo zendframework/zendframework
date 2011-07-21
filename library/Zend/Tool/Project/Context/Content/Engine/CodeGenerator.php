@@ -95,7 +95,7 @@ class CodeGenerator
         $codeGenerator = include $streamUri;
 
         if (!$codeGenerator instanceof \Zend\CodeGenerator\AbstractCodeGenerator) {
-            throw new \Zend\Tool\Project\Exception('Custom file at ' . $streamUri . ' did not return the $codeGenerator object.');
+            throw new \Zend\Tool\Project\Exception\RuntimeException('Custom file at ' . $streamUri . ' did not return the $codeGenerator object.');
         }
 
         return $codeGenerator->generate();

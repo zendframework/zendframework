@@ -78,7 +78,7 @@ class IncludePathLoader extends AbstractLoader
             $rdi = new \RecursiveDirectoryIterator($path);
 
             // pass in the RecursiveDirectoryIterator & the patterns
-            $filter = new RecursiveFilterIterator(
+            $filter = new \RecursiveFilterIterator(
                 $rdi,
                 $filterDenyDirectoryPattern,
                 $filterAcceptFilePattern

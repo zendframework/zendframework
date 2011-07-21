@@ -119,7 +119,7 @@ class ArgumentParser implements RegistryEnabled
     {
 
         if ($this->_request == null || $this->_response == null) {
-            throw new Client\Exception\RuntimeException('The client registry must have both a request and response registered.');
+            throw new Exception\RuntimeException('The client registry must have both a request and response registered.');
         }
 
         // setup the help options
@@ -304,7 +304,7 @@ class ArgumentParser implements RegistryEnabled
         
         // if no action, handle error
         if (!$actionMetadata) {
-            throw new Client\Exception\RuntimeException('Action \'' . $consoleActionName . '\' is not a valid action.');
+            throw new Exception\RuntimeException('Action \'' . $consoleActionName . '\' is not a valid action.');
         }
 
         // prepare action request name
@@ -355,7 +355,7 @@ class ArgumentParser implements RegistryEnabled
         }
             
         if (!$providerMetadata) {
-            throw new Client\Exception\RuntimeException(
+            throw new Exception\RuntimeException(
                 'Provider \'' . $consoleProviderFull . '\' is not a valid provider.'
                 );
         }
@@ -386,7 +386,7 @@ class ArgumentParser implements RegistryEnabled
         }
         
         if (!$providerSpecialtyMetadata) {
-            throw new Client\Exception\RuntimeException(
+            throw new Exception\RuntimeException(
                 'Provider \'' . $consoleSpecialtyName . '\' is not a valid specialty.'
                 );
         }

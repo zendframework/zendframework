@@ -29,11 +29,6 @@ use Zend\Http,
 /**
  * Akismet REST service implementation
  *
- * @uses       Zend_Http_Client
- * @uses       Zend\Service\AbstractService
- * @uses       Zend\Service\Exception
- * @uses       Zend_Uri
- * @uses       Zend_Version
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Akismet
@@ -105,7 +100,7 @@ class Akismet extends \Zend\Service\AbstractService
      */
     public function setBlogUrl($blogUrl)
     {
-        if (!Uri\Url::validate($blogUrl)) {
+        if (!Uri\UriFactory::factory($blogUrl)->isValid()) {
             throw new Exception\InvalidArgumentException('Invalid url provided for blog');
         }
 

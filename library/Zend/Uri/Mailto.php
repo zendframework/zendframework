@@ -23,6 +23,9 @@
  */
 namespace Zend\Uri;
 
+use Zend\Validator\Validator,
+    Zend\Validator\EmailAddress as EmailValidator;
+
 /**
  * "Mailto" URI handler
  *
@@ -35,7 +38,13 @@ namespace Zend\Uri;
  */
 class Mailto extends Uri
 {
-    static protected $validSchemes = array('mailto');
+    protected static $validSchemes = array('mailto');
+
+    /**
+     * Validator for use when validating email address
+     * @var Validator
+     */
+    protected $emailValidator;
     
     /**
      * Check if the URI is a valid Mailto URI
@@ -48,7 +57,20 @@ class Mailto extends Uri
      */
     public function isValid()
     {
-        
+        if ($this->host || $this->userInfo || $this->port) {
+            return false;
+        }
+
+        if (empty($this->path)) {
+            return false;
+        }
+
+        if (0 === strpos($this->path, '/')) {
+            return false;
+        }
+
+        $validator = $this->getValidator();
+        return $validator->isValid($this->path);
     }
     
     /**
@@ -74,5 +96,33 @@ class Mailto extends Uri
     public function getEmail()
     {
         return $this->getPath();
+    }
+
+    /**
+     * Set validator to use when validating email address
+     * 
+     * @param  Validator $validator 
+     * @return Mailto
+     */
+    public function setValidator(Validator $validator)
+    {
+        $this->emailValidator = $validator;
+        return $this;
+    }
+
+    /**
+     * Retrieve validator for use with validating email address
+     *
+     * If none is currently set, an EmailValidator instance with default options
+     * will be used.
+     * 
+     * @return Validator
+     */
+    public function getValidator()
+    {
+        if (null === $this->emailValidator) {
+            $this->setValidator(new EmailValidator());
+        }
+        return $this->emailValidator;
     }
 }

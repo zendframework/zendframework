@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -24,7 +23,9 @@
  * @namespace
  */
 namespace ZendTest\Uri;
-use Zend\Uri\Http as HttpUri;
+
+use Zend\Uri\Http as HttpUri,
+    PHPUnit_Framework_TestCase as TestCase;
 
 /**
  * @category   Zend
@@ -36,7 +37,7 @@ use Zend\Uri\Http as HttpUri;
  * @group      Zend_Uri_Http
  * @group      Zend_Http
  */
-class HttpTest extends \PHPUnit_Framework_TestCase
+class HttpTest extends TestCase
 {
     /**
      * Data Providers
@@ -105,11 +106,11 @@ class HttpTest extends \PHPUnit_Framework_TestCase
      * 
      * @param string $scheme
      * @dataProvider invalidSchemeProvider
-     * @expectedException \Zend\Uri\Exception\InvalidUriPartException
      */
     public function testInvalidScheme($scheme)
     {
         $uri = new HttpUri;
+        $this->setExpectedException('Zend\Uri\Exception\InvalidUriPartException');
         $uri->setScheme($scheme);
     }
 

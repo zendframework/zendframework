@@ -96,10 +96,10 @@ class UriTest extends \PHPUnit_Framework_TestCase
      
      * @param  mixed $input
      * @dataProvider notStringInputProvider
-     * @expectedException \Zend\Uri\Exception\InvalidArgumentException
      */
     public function testParseSchemeInvalidInput($input)
     {
+        $this->setExpectedException('Zend\Uri\Exception\InvalidArgumentException')
         $scheme = Uri::parseScheme($input);
     }
     
@@ -117,10 +117,10 @@ class UriTest extends \PHPUnit_Framework_TestCase
      * Test that toString() (not magic) throws an exception if URI is invalid
      * 
      * @dataProvider invalidUriObjectProvider
-     * @expectedException \Zend\Uri\Exception\InvalidUriException
      */
     public function testToStringThrowsExceptionIfInvalid(Uri $uri)
     {
+        $this->setExpectedException('Zend\Uri\Exception\InvalidUriException')
         echo $uri->toString();
     }
     
@@ -313,11 +313,11 @@ class UriTest extends \PHPUnit_Framework_TestCase
      * 
      * @param string $scheme
      * @dataProvider invalidSchemeProvider
-     * @expectedException \Zend\Uri\Exception\InvalidUriPartException
      */
     public function testSetInvalidScheme($scheme)
     {
         $uri = new Uri;
+        $this->setExpectedException('Zend\Uri\Exception\InvalidUriPartException')
         $uri->setScheme($scheme);
     }
     
@@ -339,11 +339,11 @@ class UriTest extends \PHPUnit_Framework_TestCase
      * 
      * @param string $host
      * @dataProvider invalidHostProvider
-     * @expectedException \Zend\Uri\Exception\InvalidUriPartException
      */
     public function testSetInvalidHost($host)
     {
         $uri = new Uri;
+        $this->setExpectedException('Zend\Uri\Exception\InvalidUriPartException')
         $uri->setHost($host);
     }
     
@@ -755,10 +755,10 @@ class UriTest extends \PHPUnit_Framework_TestCase
      * 
      * @param mixed $input
      * @dataProvider invalidConstructorInputProvider
-     * @expectedException \Zend\Uri\Exception\InvalidArgumentException
      */
     public function testConstructorInvalidInput($input)
     {
+        $this->setExpectedException('Zend\Uri\Exception\InvalidArgumentException');
         $uri = new Uri($input);
     }
     

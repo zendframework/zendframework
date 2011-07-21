@@ -36,12 +36,12 @@ class Http extends Uri
     /**
      * @see Uri::$validSchemes
      */
-    static protected $validSchemes = array('http', 'https');
+    protected static $validSchemes = array('http', 'https');
     
     /**
      * @see Uri::$defaultPorts
      */
-    static protected $defaultPorts = array(
+    protected static $defaultPorts = array(
         'http'  => 80,
         'https' => 443,
     );
@@ -141,7 +141,7 @@ class Http extends Uri
      * @param  integer $allowed
      * @return boolean
      */
-    static public function validateHost($host, $allowed = self::HOST_DNSORIPV4)
+    public static function validateHost($host, $allowed = self::HOST_DNSORIPV4)
     {
         return parent::validateHost($host, $allowed);
     }

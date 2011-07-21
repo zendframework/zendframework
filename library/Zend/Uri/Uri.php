@@ -121,7 +121,7 @@ class Uri
      *
      * @var array
      */
-    static protected $validSchemes = array();
+    protected static $validSchemes = array();
     
     /**
      * List of default ports per scheme
@@ -132,7 +132,7 @@ class Uri
      * 
      * @var array
      */
-    static protected $defaultPorts = array();
+    protected static $defaultPorts = array();
     
     /**
      * Create a new URI object
@@ -764,7 +764,7 @@ class Uri
      * @param  string $scheme
      * @return boolean
      */
-    static public function validateScheme($scheme)
+    public static function validateScheme($scheme)
     {
         if (!empty(static::$validSchemes) 
             && !in_array(strtolower($scheme), static::$validSchemes)
@@ -781,7 +781,7 @@ class Uri
      * @param  string $userInfo
      * @return boolean
      */
-    static public function validateUserInfo($userInfo)
+    public static function validateUserInfo($userInfo)
     {
         $regex = '/^(?:[' . self::CHAR_UNRESERVED . self::CHAR_SUB_DELIMS . ':]+|%[A-Fa-f0-9]{2})*$/';
         return (boolean) preg_match($regex, $userInfo);
@@ -804,7 +804,7 @@ class Uri
      * @param  integer $allowed bitmask of allowed host types 
      * @return boolean
      */
-    static public function validateHost($host, $allowed = self::HOST_ALL)
+    public static function validateHost($host, $allowed = self::HOST_ALL)
     {
         if ($allowed & self::HOST_REGNAME) { 
             if (static::isValidRegName($host)) {
@@ -835,7 +835,7 @@ class Uri
      * @param  integer $port
      * @return boolean
      */
-    static public function validatePort($port)
+    public static function validatePort($port)
     {
         if ($port === 0) {
             return false; 
@@ -857,7 +857,7 @@ class Uri
      * @param  string $path
      * @return boolean
      */
-    static public function validatePath($path)
+    public static function validatePath($path)
     {
         $pchar   = '(?:[' . self::CHAR_UNRESERVED . ':@&=\+\$,]+|%[A-Fa-f0-9]{2})*';
         $segment = $pchar . "(?:;{$pchar})*";
@@ -877,7 +877,7 @@ class Uri
      * @param  string $input
      * @return boolean 
      */
-    static public function validateQueryFragment($input)
+    public static function validateQueryFragment($input)
     {
         $regex = '/^(?:[' . self::CHAR_UNRESERVED . self::CHAR_SUB_DELIMS . ':@\/\?]+|%[A-Fa-f0-9]{2})*$/';
         return (boolean) preg_match($regex, $input);
@@ -890,7 +890,7 @@ class Uri
      * @return string
      * @throws Exception\InvalidArgumentException
      */
-    static public function encodeUserInfo($userInfo)
+    public static function encodeUserInfo($userInfo)
     {
         if (!is_string($userInfo)) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -916,7 +916,7 @@ class Uri
      * @param  string $path
      * @return string
      */
-    static public function encodePath($path)
+    public static function encodePath($path)
     {
         if (!is_string($path)) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -943,7 +943,7 @@ class Uri
      * @param  string $input
      * @return string
      */
-    static public function encodeQueryFragment($input)
+    public static function encodeQueryFragment($input)
     {
         if (!is_string($input)) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -974,7 +974,7 @@ class Uri
      * @return string|null
      * @throws InvalidArgumentException
      */
-    static public function parseScheme($uriString)
+    public static function parseScheme($uriString)
     {
         if (! is_string($uriString)) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -1001,7 +1001,7 @@ class Uri
      * @param  string $path
      * @return string
      */
-    static public function removePathDotSegments($path)
+    public static function removePathDotSegments($path)
     {
         $output = '';
         
@@ -1061,7 +1061,7 @@ class Uri
      * @param  Uri|string $relativeUri 
      * @return Uri
      */
-    static public function merge($baseUri, $relativeUri)
+    public static function merge($baseUri, $relativeUri)
     {
         $uri = new self($relativeUri);
         return $uri->resolve($baseUri);
@@ -1074,7 +1074,7 @@ class Uri
      * @param  integer $allowed allowed address types
      * @return boolean
      */
-    static protected function isValidIpAddress($host, $allowed)
+    protected static function isValidIpAddress($host, $allowed)
     {
         $validatorParams = array(
             'allowipv4' => (bool) ($allowed & self::HOST_IPV4),
@@ -1109,7 +1109,7 @@ class Uri
      * @param  string $host
      * @return boolean
      */
-    static protected function isValidDnsHostname($host)
+    protected static function isValidDnsHostname($host)
     {
         $validator = new Validator\Hostname(array(
             'allow' => Validator\Hostname::ALLOW_DNS | Validator\Hostname::ALLOW_LOCAL,
@@ -1124,7 +1124,7 @@ class Uri
      * @param  string $host
      * @return boolean
      */
-    static protected function isValidRegName($host)
+    protected static function isValidRegName($host)
     {
         $regex = '/^(?:[' . self::CHAR_UNRESERVED . self::CHAR_SUB_DELIMS . ':@\/\?]+|%[A-Fa-f0-9]{2})+$/';
         return (bool) preg_match($regex, $host);
@@ -1146,7 +1146,7 @@ class Uri
      * @param  string $scheme
      * @return string
      */
-    static protected function normalizeScheme($scheme)
+    protected static function normalizeScheme($scheme)
     {
         return strtolower($scheme);
     }
@@ -1159,7 +1159,7 @@ class Uri
      * @param  string $host
      * @return string
      */
-    static protected function normalizeHost($host)
+    protected static function normalizeHost($host)
     {
         return strtolower($host);
     } 
@@ -1174,7 +1174,7 @@ class Uri
      * @param  string  $scheme 
      * @return integer|null
      */
-    static protected function normalizePort($port, $scheme = null)
+    protected static function normalizePort($port, $scheme = null)
     {
         if ($scheme 
             && isset(static::$defaultPorts[$scheme]) 
@@ -1195,7 +1195,7 @@ class Uri
      * @param  string $path
      * @return string
      */
-    static protected function normalizePath($path)
+    protected static function normalizePath($path)
     {
         $path = self::encodePath(
             self::decodeUrlEncodedChars(
@@ -1216,7 +1216,7 @@ class Uri
      * @param  string $query
      * @return string
      */
-    static protected function normalizeQuery($query)
+    protected static function normalizeQuery($query)
     {
         $query = self::encodeQueryFragment(
             self::decodeUrlEncodedChars(
@@ -1236,7 +1236,7 @@ class Uri
      * @param  string $fragment
      * @return string
      */
-    static protected function normalizeFragment($fragment)
+    protected static function normalizeFragment($fragment)
     {
         return static::normalizeQuery($fragment);
     }
@@ -1249,7 +1249,7 @@ class Uri
      * @param string $input
      * @param string $allowed Pattern of allowed characters
      */
-    static protected function decodeUrlEncodedChars($input, $allowed = '')
+    protected static function decodeUrlEncodedChars($input, $allowed = '')
     {
         $decodeCb = function($match) use ($allowed) {
             $char = rawurldecode($match[0]);

@@ -158,7 +158,7 @@ abstract class AbstractProvider
             array_pop($parentDirectoriesArray);
         }
 
-        return $profile;
+        return false;
     }
 
     /**

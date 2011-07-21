@@ -159,7 +159,6 @@ class Repository implements RegistryEnabled, \IteratorAggregate, \Countable
      */
     public function process()
     {
-
         // process all providers in the unprocessedProviders array
         //foreach ($this->_unprocessedProviders as $providerName => $provider) {
         reset($this->_unprocessedProviders);
@@ -183,7 +182,7 @@ class Repository implements RegistryEnabled, \IteratorAggregate, \Countable
             $this->_providerSignatures[$providerName] = $providerSignature;
             $this->_providers[$providerName]          = $providerSignature->getProvider();
 
-            if ($provider instanceof Zend_Tool_Framework_Provider_Initializable) {
+            if ($provider instanceof \Zend\Tool\Framework\Provider\Initializable) {
                 $provider->initialize();
             }
         }

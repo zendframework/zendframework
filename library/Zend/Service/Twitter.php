@@ -23,9 +23,11 @@
  * @namespace
  */
 namespace Zend\Service;
-use Zend\Http;
-use Zend\Rest;
-use Zend\OAuth;
+
+use Zend\Http,
+    Zend\OAuth,
+    Zend\Rest,
+    Zend\Uri;
 
 /**
  * @category   Zend
@@ -959,7 +961,7 @@ class Twitter extends Rest\Client\RestClient
     protected function _prepare($path)
     {
         // Get the URI object and configure it
-        if (!$this->_uri instanceof \Zend\Uri\Url) {
+        if (!$this->_uri instanceof Uri\Uri) {
             throw new Rest\Client\Exception(
                 'URI object must be set before performing call'
             );

@@ -22,17 +22,17 @@
 * @namespace
 */
 namespace Zend\Feed\Reader;
-use Zend\Uri;
+
+use ArrayObject,
+    Zend\Uri;
 
 /**
-* @uses \Zend\Feed\Reader\Reader
-* @uses \Zend\Uri\Uri
 * @category Zend
 * @package Zend_Feed_Reader
 * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
 * @license http://framework.zend.com/license/new-bsd New BSD License
 */
-class FeedSet extends \ArrayObject
+class FeedSet extends ArrayObject
 {
 
     public $rss = null;
@@ -84,16 +84,16 @@ class FeedSet extends \ArrayObject
      */
     protected function _absolutiseUri($link, $uri = null)
     {
-        if (!Uri\Url::validate($link)) {
+        if (!Uri\UriFactory::factory($link)->isValid()) {
             if ($uri !== null) {
-                $uri = new Uri\Url($uri);
+                $uri = Uri\UriFactory::factory($uri);
 
                 if ($link[0] !== '/') {
                     $link = $uri->getPath() . '/' . $link;
                 }
 
                 $link = $uri->getScheme() . '://' . $uri->getHost() . '/' . $this->_canonicalizePath($link);
-                if (!URI\URL::validate($link)) {
+                if (!Uri\UriFactory::factory($link)->isValid()) {
                     $link = null;
                 }
             }

@@ -24,13 +24,14 @@
  */
 namespace Zend\Validator\Sitemap;
 
+use Zend\Uri;
+
 /**
  * Validates whether a given value is valid as a sitemap <loc> value
  *
  * @link       http://www.sitemaps.org/protocol.php Sitemaps XML format
  *
- * @see        Zend_Uri
- * @uses       \Zend\Validator\AbstractValidator
+ * @see        Zend\Uri\Uri
  * @category   Zend
  * @package    Zend_Validate
  * @subpackage Sitemap
@@ -72,8 +73,7 @@ class Loc extends \Zend\Validator\AbstractValidator
         }
 
         $this->_setValue($value);
-        $uri = new \Zend\Uri\Url($value);
-        $uri->setAllowUnwise(false);
+        $uri = Uri\UriFactory::factory($value);
         if (!$uri->isValid()) {
             $this->_error(self::NOT_VALID);
             return false;

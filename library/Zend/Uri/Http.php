@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -17,7 +16,6 @@
  * @package   Zend_Uri
  * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id$
  */
 
 /**
@@ -36,22 +34,22 @@ namespace Zend\Uri;
 class Http extends Uri
 {
     /**
-     * @see \Zend\Uri\Uri::$_validSchemes
+     * @see Uri::$validSchemes
      */
-    static protected $_validSchemes = array('http', 'https');
+    static protected $validSchemes = array('http', 'https');
     
     /**
-     * @see \Zend\Uri\Uri::$_defaultPorts
+     * @see Uri::$defaultPorts
      */
-    static protected $_defaultPorts = array(
+    static protected $defaultPorts = array(
         'http'  => 80,
-        'https' => 443
+        'https' => 443,
     );
     
     /**
-     * @see \Zend\Uri\Uri::$_validHostTypes
+     * @see Uri::$validHostTypes
      */
-    protected $_validHostTypes = self::HOST_DNSORIPV4;
+    protected $validHostTypes = self::HOST_DNSORIPV4;
     
     /**
      * Check if the URI is a valid HTTP URI
@@ -60,7 +58,7 @@ class Http extends Uri
      * required by the generic URI syntax
      * 
      * @return boolean
-     * @see    \Zend\Uri\Uri::isValid()
+     * @see    Uri::isValid()
      */
     public function isValid()
     {
@@ -74,7 +72,6 @@ class Http extends Uri
      */
     public function getUser()
     {
-        
     }
     
     /**
@@ -84,29 +81,28 @@ class Http extends Uri
      */
     public function getPassword()
     {
-        
     }
 
     /**
      * Set the username part (before the ':') of the userInfo URI part
      * 
      * @param  string $user
-     * @return \Zend\Uri\Http
+     * @return Http
      */
     public function setUser($user)
     {
-        
+        return $this;
     }
     
     /**
      * Set the password part (after the ':') of the userInfo URI part
      * 
      * @param  string $password
-     * @return \Zend\Uri\Http
+     * @return Http
      */
     public function setPassword($password)
     {
-        
+        return $this;
     }
     
     /**

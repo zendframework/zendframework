@@ -54,11 +54,11 @@ abstract class UriFactory
      * 
      * @var array
      */
-    static protected $_schemeClasses = array(
-        'http'   => '\Zend\Uri\Http',
-        'https'  => '\Zend\Uri\Http',
-        'mailto' => '\Zend\Uri\Mailto',
-        'file'   => '\Zend\Uri\File'
+    static protected $schemeClasses = array(
+        'http'   => 'Zend\Uri\Http',
+        'https'  => 'Zend\Uri\Http',
+        'mailto' => 'Zend\Uri\Mailto',
+        'file'   => 'Zend\Uri\File',
     );
     
     /**
@@ -82,21 +82,28 @@ abstract class UriFactory
      */
     static public function factory($uriString, $defaultScheme = null)
     {
-        if (! is_string($uriString)) {
-            throw new \InvalidArgumentException('Expecting a string, got ' . gettype($uriString));
+        if (!is_string($uriString)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Expecting a string, received "%s"',
+                (is_object($uriString) ? get_class($uriString) : gettype($uriString))
+            ));
         }
         
-        $uri = new Uri($uriString);
+        $uri    = new Uri($uriString);
         $scheme = strtolower($uri->getScheme());
-        if (! $scheme && $defaultScheme) { 
+        if (!$scheme && $defaultScheme) { 
             $scheme = $defaultScheme;
         }
         
-        if ($scheme && isset(static::$_schemeClasses[$scheme])) {
-            $class = static::$_schemeClasses[$scheme];
+        if ($scheme && isset(static::$schemeClasses[$scheme])) {
+            $class = static::$schemeClasses[$scheme];
             $uri = new $class($uri);
             if (! $uri instanceof Uri) { 
-                throw new \InvalidArgumentException("class '$class' registered for scheme '$scheme' is not a subclass of \\Zend\\Uri\\Uri");
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'class "%s" registered for scheme "%s" is not a subclass of Zend\Uri\Uri',
+                    $class,
+                    $scheme
+                ));
             }
         }
         

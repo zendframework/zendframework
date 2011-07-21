@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -15,9 +14,8 @@
  *
  * @category  Zend
  * @package   Zend_Uri
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id$
  */
 
 /**
@@ -37,7 +35,7 @@ namespace Zend\Uri;
  */
 class File extends Uri
 {
-    static protected $_validSchemes = array('file');
+    static protected $validSchemes = array('file');
 
     /**
      * Check if the URI is a valid File URI
@@ -46,7 +44,7 @@ class File extends Uri
      * required by the generic URI syntax
      * 
      * @return boolean
-     * @see    \Zend\Uri\Uri::isValid()
+     * @see    Uri::isValid()
      */
     public function isValid()
     {
@@ -56,30 +54,30 @@ class File extends Uri
     /**
      * User Info part is not used in file URIs
      * 
-     * @see    \Zend\Uri\Uri::setUserInfo()
-     * @throws InvalidUriPartException
+     * @see    Uri::setUserInfo()
+     * @throws Exception\InvalidUriPartException
      */
     public function setUserInfo($userInfo)
     {
-        
+        return $this;
     }
     
     /**
      * Fragment part is not used in file URIs
      * 
-     * @see    \Zend\Uri\Uri::setFragment()
-     * @throws InvalidUriPartException
+     * @see    Uri::setFragment()
+     * @throws Exception\InvalidUriPartException
      */
     public function setFragment($fragment)
     {
-        
+        return $this;
     }
     
     /**
      * Convert a UNIX file path to a valid file:// URL
      * 
      * @param  srting $path
-     * @return \Zend\Uri\File
+     * @return File
      */
     static public function fromUnixPath($path)
     {
@@ -96,7 +94,7 @@ class File extends Uri
      * Convert a Windows file path to a valid file:// URL
      * 
      * @param  string $path
-     * @return \Zend\Uri\File
+     * @return File
      */
     static public function fromWindowsPath($path)
     {

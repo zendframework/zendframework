@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -30,9 +29,6 @@ use Zend\Validator;
 /**
  * Generic URI handler
  *
- * @uses      \Zend\Uri\Exception
- * @uses      \Zend\Validator\Hostname
- * @uses      \Zend\Validator\Ip
  * @category  Zend
  * @package   Zend_Uri
  * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -65,56 +61,56 @@ class Uri
      * 
      * @var string
      */
-    protected $_scheme;
+    protected $scheme;
     
     /**
      * URI userInfo part (usually user:password in HTTP URLs)
      * 
      * @var string
      */
-    protected $_userInfo;
+    protected $userInfo;
     
     /**
      * URI hostname
      *  
      * @var string
      */
-    protected $_host;
+    protected $host;
     
     /**
      * URI port
      * 
      * @var integer
      */
-    protected $_port;
+    protected $port;
     
     /**
      * URI path
      * 
      * @var string
      */
-    protected $_path;
+    protected $path;
     
     /**
      * URI query string
      * 
      * @var string
      */
-    protected $_query;
+    protected $query;
     
     /**
      * URI fragment
      * 
      * @var string
      */
-    protected $_fragment;
+    protected $fragment;
 
     /**
      * Which host part types are valid for this URI?
      *
      * @var integer
      */
-    protected $_validHostTypes = self::HOST_ALL;
+    protected $validHostTypes = self::HOST_ALL;
     
     /**
      * Array of valid schemes.
@@ -125,7 +121,7 @@ class Uri
      *
      * @var array
      */
-    static protected $_validSchemes = array();
+    static protected $validSchemes = array();
     
     /**
      * List of default ports per scheme
@@ -136,7 +132,7 @@ class Uri
      * 
      * @var array
      */
-    static protected $_defaultPorts = array();
+    static protected $defaultPorts = array();
     
     /**
      * Create a new URI object
@@ -148,8 +144,7 @@ class Uri
     {
         if (is_string($uri)) {
             $this->parse($uri);
-            
-        } elseif ($uri instanceof URI) {
+        } elseif ($uri instanceof Uri) {
             // Copy constructor
             $this->setScheme($uri->getScheme());
             $this->setUserInfo($uri->getUserInfo());
@@ -158,9 +153,11 @@ class Uri
             $this->setPath($uri->getPath());
             $this->setQuery($uri->getQuery());
             $this->setFragment($uri->getFragment());
-            
         } elseif ($uri !== null) {
-            throw new Exception\InvalidArgumentException('expecting a string or a URI object, got ' . gettype($uri));
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Expecting a string or a URI object, received "%s"',
+                (is_object($uri) ? get_class($uri) : gettype($uri))
+            ));
         }
     }
 
@@ -173,19 +170,28 @@ class Uri
      */
     public function isValid()
     {
-        if ($this->_host) {
-            if (strlen($this->_path) > 0 && substr($this->_path, 0, 1) != '/') return false; 
-        } else {
-            if ($this->_userInfo || $this->_port) return false;
-            
-            if ($this->_path) { 
-                // Check path-only (no host) URI
-                if (substr($this->_path, 0, 2) == '//') return false; 
-                
-            } elseif (! ($this->_query || $this->_fragment)) {
-                // No host, path, query or fragment - this is not a valid URI 
-                return false;
+        if ($this->host) {
+            if (strlen($this->path) > 0 && substr($this->path, 0, 1) != '/') {
+                return false; 
             }
+            return true;
+        }
+
+        if ($this->userInfo || $this->port) {
+            return false;
+        }
+        
+        if ($this->path) { 
+            // Check path-only (no host) URI
+            if (substr($this->path, 0, 2) == '//') {
+                return false; 
+            }
+            return true;
+        } 
+
+        if (! ($this->query || $this->fragment)) {
+            // No host, path, query or fragment - this is not a valid URI 
+            return false;
         }
         
         return true;
@@ -198,19 +204,19 @@ class Uri
      */
     public function isAbsolute()
     {
-        return ($this->_scheme != null);
+        return ($this->scheme !== null);
     }
     
     /**
      * Parse a URI string
      *
      * @param  string $uri
-     * @return \Zend\Uri\Uri
+     * @return Uri
      */
     public function parse($uri)
     {
         // Capture scheme
-        if (($scheme = self::parseScheme($uri)) != null) {  
+        if (($scheme = self::parseScheme($uri)) !== null) {  
             $this->setScheme($scheme);
             $uri = substr($uri, strlen($scheme) + 1);
         }
@@ -218,7 +224,7 @@ class Uri
         // Capture authority part
         if (preg_match('|^//([^/\?#]*)|', $uri, $match)) {
             $authority = $match[1];
-            $uri = substr($uri, strlen($match[0]));
+            $uri       = substr($uri, strlen($match[0]));
             
             // Split authority into userInfo and host
             if (strpos($authority, '@') !== false) {
@@ -229,27 +235,36 @@ class Uri
             $colonPos = strrpos($authority, ':');
             if ($colonPos !== false) {
                 $port = substr($authority, $colonPos + 1);
-                if ($port) $this->setPort((int) $port);
+                if ($port) {
+                    $this->setPort((int) $port);
+                }
                 $authority = substr($authority, 0, $colonPos);
             }
             
             $this->setHost($authority);
         }
-        if (! $uri) return $this;
+
+        if (!$uri) {
+            return $this;
+        }
         
         // Capture the path
         if (preg_match('|^[^\?#]*|', $uri, $match)) {
             $this->setPath($match[0]);
             $uri = substr($uri, strlen($match[0]));
         }
-        if (! $uri) return $this;
+        if (!$uri) {
+            return $this;
+        }
         
         // Capture the query
         if (preg_match('|^\?([^#]*)|', $uri, $match)) {
             $this->setQuery($match[1]);
             $uri = substr($uri, strlen($match[0]));
         }
-        if (! $uri) return $this;
+        if (!$uri) {
+            return $this;
+        }
         
         // All that's left is the fragment
         if ($uri && substr($uri, 0, 1) == '#') {
@@ -266,29 +281,40 @@ class Uri
      */
     public function toString()
     {
-        if (! $this->isValid()) {
-            throw new Exception\InvalidUriException("URI is not valid and cannot be converted into a string");
+        if (!$this->isValid()) {
+            throw new Exception\InvalidUriException('URI is not valid and cannot be converted into a string');
         }
         
         $uri = '';
 
-        if ($this->_scheme) $uri = "$this->_scheme:"; 
+        if ($this->scheme) {
+            $uri .= $this->scheme . ':'; 
+        }
         
-        if ($this->_host !== null) {
+        if ($this->host !== null) {
             $uri .= '//';
-            if ($this->_userInfo) $uri .= $this->_userInfo . '@';
-            $uri .= $this->_host;
-            if ($this->_port) $uri .= ":$this->_port";
+            if ($this->userInfo) {
+                $uri .= $this->userInfo . '@';
+            }
+            $uri .= $this->host;
+            if ($this->port) {
+                $uri .= ':' . $this->port;
+            }
         }
 
-        if ($this->_path) {
-            $uri .= self::encodePath($this->_path);
-        } elseif ($this->_host && ($this->_query || $this->_fragment)) {
+        if ($this->path) {
+            $uri .= self::encodePath($this->path);
+        } elseif ($this->host && ($this->query || $this->fragment)) {
             $uri .= '/';
         }
         
-        if ($this->_query) $uri .= "?" . self::encodeQueryFragment($this->_query);
-        if ($this->_fragment) $uri .= "#" . self::encodeQueryFragment($this->_fragment);
+        if ($this->query) {
+            $uri .= "?" . self::encodeQueryFragment($this->query);
+        }
+
+        if ($this->fragment) {
+            $uri .= "#" . self::encodeQueryFragment($this->fragment);
+        }
 
         return $uri;
     }
@@ -304,37 +330,37 @@ class Uri
      * Eventually, two normalized URLs pointing to the same resource should be 
      * equal even if they were originally represented by two different strings 
      * 
-     * @return \Zend\Uri\Uri
+     * @return Uri
      */
     public function normalize()
     {
-        if ($this->_scheme) { 
-            $this->_scheme = static::_normalizeScheme($this->_scheme);
+        if ($this->scheme) { 
+            $this->scheme = static::normalizeScheme($this->scheme);
         }
         
-        if ($this->_host) { 
-            $this->_host = static::_normalizeHost($this->_host);
+        if ($this->host) { 
+            $this->host = static::normalizeHost($this->host);
         }
         
-        if ($this->_port) { 
-            $this->_port = static::_normalizePort($this->_port, $this->_scheme);
+        if ($this->port) { 
+            $this->port = static::normalizePort($this->port, $this->scheme);
         }
         
-        if ($this->_path) { 
-            $this->_path = static::_normalizePath($this->_path);
+        if ($this->path) { 
+            $this->path = static::normalizePath($this->path);
         }
         
-        if ($this->_query) { 
-            $this->_query = static::_normalizeQuery($this->_query);
+        if ($this->query) { 
+            $this->query = static::normalizeQuery($this->query);
         }
         
-        if ($this->_fragment) { 
-            $this->_fragment = static::_normalizeFragment($this->_fragment);
+        if ($this->fragment) { 
+            $this->fragment = static::normalizeFragment($this->fragment);
         }
         
         // If path is empty (and we have a host), path should be '/'
-        if ($this->_host && empty($this->_path)) { 
-            $this->_path = '/';
+        if ($this->host && empty($this->path)) { 
+            $this->path = '/';
         }
         
         return $this;
@@ -344,47 +370,49 @@ class Uri
      * Convert a relative URI into an absolute URI using a base absolute URI as 
      * a reference.
      * 
-     * This is similar to ::merge() - only it uses the supplied URI as the 
+     * This is similar to merge() - only it uses the supplied URI as the 
      * base reference instead of using the current URI as the base reference.
      * 
      * Merging algorithm is adapted from RFC-3986 section 5.2 
      * (@link http://tools.ietf.org/html/rfc3986#section-5.2)
      * 
-     * @param  \Zend\Uri\Uri | string $baseUri
-     * @return \Zend\Uri\Uri
+     * @param  Uri|string $baseUri
+     * @return Uri
      */
     public function resolve($baseUri)
     {
         // Ignore if URI is absolute
-        if ($this->isAbsolute()) return $this;
+        if ($this->isAbsolute()) {
+            return $this;
+        }
             
         if (is_string($baseUri)) {
             $baseUri = new static($baseUri);
         }
         
-        /* @var $baseUrl \Zend\Uri\Uri */
-        if (! $baseUri instanceof static) {
-            throw new Exception\InvalidUriTypeException("Provided base URL is not an instance of " . get_class($this));
+        if (!$baseUri instanceof static) {
+            throw new Exception\InvalidUriTypeException(sprintf(
+                'Provided base URL is not an instance of "%s"',
+                get_class($this)
+            ));
         }
         
         // Merging starts here...
         if ($this->getHost()) {
             $this->setPath(static::removePathDotSegments($this->getPath()));
-            
         } else { 
             $basePath = $baseUri->getPath();
             $relPath  = $this->getPath();
-            if (! $relPath) {
+            if (!$relPath) {
                 $this->setPath($basePath);
-                if (! $this->getQuery()) {
+                if (!$this->getQuery()) {
                     $this->setQuery($baseUri->getQuery());
                 }
-                
             } else {
                 if (substr($relPath, 0, 1) == '/') {
                     $this->setPath(static::removePathDotSegments($relPath));
                 } else {
-                    if ($baseUri->getHost() && ! $basePath) {
+                    if ($baseUri->getHost() && !$basePath) {
                         $mergedPath = '/';
                     } else {
                         $mergedPath = substr($basePath, 0, strrpos($basePath, '/') + 1);
@@ -400,7 +428,6 @@ class Uri
         }
         
         $this->setScheme($baseUri->getScheme());
-        
         return $this;
     } 
     
@@ -414,8 +441,8 @@ class Uri
      *  If the two URIs do not intersect (e.g. the original URI is not in any
      *  way related to the base URI) the URI will not be modified. 
      * 
-     * @param  \Zend\Uri\Uri | string $baseUri 
-     * @return \Zend\Uri\Uri
+     * @param  Uri|string $baseUri 
+     * @return Uri
      */
     public function makeRelative($baseUri)
     {
@@ -425,17 +452,23 @@ class Uri
         $this->normalize();
         $baseUri->normalize();
         
-        if ($this->getHost() && $baseUri->getHost() && ($this->getHost() != $baseUri->getHost())) {
+        $host     = $this->getHost();
+        $baseHost = $baseUri->getHost();
+        if ($host && $baseHost && ($host != $baseHost)) {
             // Not the same hostname 
             return $this; 
         }
         
-        if ($this->getPort() && $baseUri->getPort() && ($this->getPort() != $baseUri->getPort())) { 
+        $port     = $this->getPort();
+        $basePort = $baseUri->getPort();
+        if ($port && $basePort && ($port != $basePort)) {
             // Not the same port
             return $this;
         }
         
-        if ($this->getScheme() && $baseUri->getScheme() && ($this->getScheme() != $baseUri->getScheme())) {
+        $scheme     = $this->getScheme();
+        $baseScheme = $baseUri->getScheme();
+        if ($scheme && $baseScheme && ($scheme != $baseScheme)) {
             // Not the same scheme (e.g. HTTP vs. HTTPS) 
             return $this;
         }
@@ -448,75 +481,93 @@ class Uri
         // Is path the same? 
         if ($this->getPath() == $baseUri->getPath()) { 
             $this->setPath('');
+            return $this;
         }
         
-        $pathParts = preg_split('|(/)|', $this->getPath(), null, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+        $pathParts = preg_split('|(/)|', $this->getPath(),    null, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
         $baseParts = preg_split('|(/)|', $baseUri->getPath(), null, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
         
+        // Get the intersection of existing path parts and those from the 
+        // provided URI
         $matchingParts = array_intersect_assoc($pathParts, $baseParts);
-        var_dump($matchingParts);
-        
+
+        // Loop through the matches
+        foreach ($matchingParts as $index => $segment) {
+            // If we skip an index at any point, we have parent traversal, and 
+            // need to prepend the path accordingly
+            if ($index && !isset($matchingParts[$index - 1])) {
+                array_unshift($pathParts, '../');
+                continue;
+            }
+
+            // Otherwise, we simply unset the given path segment
+            unset($pathParts[$index]);
+        }
+
+        // Reset the path by imploding path segments
+        $this->setPath(implode($pathParts));
+
         return $this;
     }
     
     /**
      * Get the scheme part of the URI 
      * 
-     * @return string | null
+     * @return string|null
      */
     public function getScheme()
     {
-        return $this->_scheme;
+        return $this->scheme;
     }
 
     /**
      * Get the User-info (usually user:password) part
      * 
-     * @return string | null
+     * @return string|null
      */
     public function getUserInfo()
     {
-        return $this->_userInfo;
+        return $this->userInfo;
     }
 
     /**
      * Get the URI host
      * 
-     * @return string | null
+     * @return string|null
      */
     public function getHost()
     {
-        return $this->_host;
+        return $this->host;
     }
 
     /**
      * Get the URI port
      * 
-     * @return integer | null
+     * @return integer|null
      */
     public function getPort()
     {
-        return $this->_port;
+        return $this->port;
     }
 
     /**
      * Get the URI path
      * 
-     * @return string | null
+     * @return string|null
      */
     public function getPath()
     {
-        return $this->_path;
+        return $this->path;
     }
 
     /**
      * Get the URI query
      * 
-     * @return string | null
+     * @return string|null
      */
     public function getQuery()
     {
-        return $this->_query;
+        return $this->query;
     }
     
     /**
@@ -530,8 +581,8 @@ class Uri
     public function getQueryAsArray()
     {
         $query = array();
-        if ($this->_query) {
-            parse_str($this->_query, $query);
+        if ($this->query) {
+            parse_str($this->query, $query);
         }
         
         return $query;
@@ -540,11 +591,11 @@ class Uri
     /**
      * Get the URI fragment
      *  
-     * @return string | null
+     * @return string|null
      */
     public function getFragment()
     {
-        return $this->_fragment;
+        return $this->fragment;
     }
 
 	/**
@@ -552,26 +603,27 @@ class Uri
 	 * 
 	 * If the scheme is not valid according to the generic scheme syntax or 
 	 * is not acceptable by the specific URI class (e.g. 'http' or 'https' are 
-	 * the only acceptable schemes for the Zend\Uri\HTTTP class) an exception
+	 * the only acceptable schemes for the Zend\Uri\Http class) an exception
 	 * will be thrown. 
 	 * 
 	 * You can check if a scheme is valid before setting it using the 
 	 * validateScheme() method. 
 	 * 
      * @param  string $scheme
-     * @throws \Zend\Uri\Exception\InvalidUriPartException
-     * @return \Zend\Uri\Uri
+     * @throws Exception\InvalidUriPartException
+     * @return Uri
      */
     public function setScheme($scheme)
     {
-        if ($scheme !== null && (! self::validateScheme($scheme))) {
-            throw new Exception\InvalidUriPartException(
-            	"Scheme '$scheme' is not valid or is not accepted by " . get_class($this), 
-                Exception\InvalidUriPartException::INVALID_SCHEME
-            );
+        if (($scheme !== null) && (!self::validateScheme($scheme))) {
+            throw new Exception\InvalidUriPartException(sprintf(
+            	'Scheme "%s" is not valid or is not accepted by %s',
+                $scheme,
+                get_class($this)
+            ), Exception\InvalidUriPartException::INVALID_SCHEME);
         }
         
-        $this->_scheme = $scheme;
+        $this->scheme = $scheme;
         return $this;
     }
 
@@ -579,11 +631,11 @@ class Uri
      * Set the URI User-info part (usually user:password)
      * 
      * @param  string $userInfo
-     * @return \Zend\Uri\Uri
+     * @return Uri
      */
     public function setUserInfo($userInfo)
     {
-        $this->_userInfo = $userInfo;
+        $this->userInfo = $userInfo;
         return $this;
     }
 
@@ -597,24 +649,27 @@ class Uri
      * for example, tilda (~) and underscore (_) which are not allowed in DNS
      * names. 
      * 
-     * Subclasses of \Zend\Uri\Uri may impose more strict validation of host
-     * names - for example the HTTP RFC clearly states that only IPv4 and 
-     * valid DNS names are allowed in HTTP URIs.  
+     * Subclasses of Uri may impose more strict validation of host names - for 
+     * example the HTTP RFC clearly states that only IPv4 and valid DNS names 
+     * are allowed in HTTP URIs.  
      *  
      * @param  string $host
-     * @return \Zend\Uri\Uri
+     * @return Uri
      */
     public function setHost($host)
     {
-        
-        if ($host !== '' && $host !== null && ! self::validateHost($host, $this->_validHostTypes)) {
-            throw new Exception\InvalidUriPartException(
-            	"Host '$host' is not valid or is not accepted by " . get_class($this), 
-                Exception\InvalidUriPartException::INVALID_HOSTNAME
-            );
+        if (($host !== '') 
+            && ($host !== null) 
+            && !self::validateHost($host, $this->validHostTypes)
+        ) {
+            throw new Exception\InvalidUriPartException(sprintf(
+                'Host "%s" is not valid or is not accepted by %s',
+                $host,
+                get_class($this)
+            ), Exception\InvalidUriPartException::INVALID_HOSTNAME);
         }
         
-        $this->_host = $host;
+        $this->host = $host;
         return $this;
     }
 
@@ -622,11 +677,11 @@ class Uri
      * Set the port part of the URI
      * 
      * @param  integer $port
-     * @return \Zend\Uri\Uri
+     * @return Uri
      */
     public function setPort($port)
     {
-        $this->_port = $port;
+        $this->port = $port;
         return $this;
     }
 
@@ -634,11 +689,11 @@ class Uri
      * Set the path
      * 
      * @param  string $path
-     * @return \Zend\Uri\Uri
+     * @return Uri
      */
     public function setPath($path)
     {
-        $this->_path = $path;
+        $this->path = $path;
         return $this;
     }
 
@@ -649,8 +704,8 @@ class Uri
      * query string. Array values will be represented in the query string using
      * PHP's common square bracket notation. 
      * 
-     * @param  string | array $query
-     * @return \Zend\Uri\Uri
+     * @param  string|array $query
+     * @return Uri
      */
     public function setQuery($query)
     {
@@ -660,7 +715,7 @@ class Uri
             $query = str_replace('+', '%20', http_build_query($query));
         }
         
-        $this->_query = $query;
+        $this->query = $query;
         return $this;
     }
 
@@ -668,11 +723,11 @@ class Uri
      * Set the URI fragment part
      * 
      * @param  string $fragment
-     * @return \Zend\Uri\Uri
+     * @return Uri
      */
     public function setFragment($fragment)
     {
-        $this->_fragment = $fragment;
+        $this->fragment = $fragment;
         return $this;
     }
 
@@ -685,7 +740,7 @@ class Uri
     {
         try {
             return $this->toString();
-        } catch (\Exception $ex) { 
+        } catch (\Exception $e) { 
             return '';
         }
     }
@@ -706,9 +761,9 @@ class Uri
      */
     static public function validateScheme($scheme)
     {
-        if (! empty(static::$_validSchemes) &&
-            ! in_array(strtolower($scheme), static::$_validSchemes)) {
-            
+        if (!empty(static::$validSchemes) 
+            && !in_array(strtolower($scheme), static::$validSchemes)
+        ) {
             return false;
         }
         
@@ -747,15 +802,21 @@ class Uri
     static public function validateHost($host, $allowed = self::HOST_ALL)
     {
         if ($allowed & self::HOST_REGNAME) { 
-            if (static::_isValidRegName($host)) return true;
+            if (static::isValidRegName($host)) {
+                return true;
+            }
         }
         
         if ($allowed & self::HOST_DNSNAME) { 
-            if (static::_isValidDnsHostname($host)) return true;
+            if (static::isValidDnsHostname($host)) {
+                return true;
+            }
         }
         
         if ($allowed & self::HOST_IPVANY) {
-            if (static::_isValidIpAddress($host, $allowed)) return true; 
+            if (static::isValidIpAddress($host, $allowed)) {
+                return true; 
+            }
         }
         
         return false;
@@ -777,7 +838,9 @@ class Uri
         
         if ($port) {
             $port = (int) $port;
-            if ($port < 1 || $port > 0xffff) return false;
+            if ($port < 1 || $port > 0xffff) {
+                return false;
+            }
         }
         
         return true;
@@ -791,9 +854,9 @@ class Uri
      */
     static public function validatePath($path)
     {
-        $pchar = '(?:[' . self::CHAR_UNRESERVED . ':@&=\+\$,]+|%[A-Fa-f0-9]{2})*';
+        $pchar   = '(?:[' . self::CHAR_UNRESERVED . ':@&=\+\$,]+|%[A-Fa-f0-9]{2})*';
         $segment = $pchar . "(?:;{$pchar})*";
-        $regex = "/^{$segment}(?:\/{$segment})*$/";
+        $regex   = "/^{$segment}(?:\/{$segment})*$/";
         return (boolean) preg_match($regex, $path);
     }
 
@@ -824,11 +887,14 @@ class Uri
      */
     static public function encodeUserInfo($userInfo)
     {
-        if (! is_string($userInfo)) {
-            throw new Exception\InvalidArgumentException("Expecting a string, got " . gettype($userInfo));
+        if (!is_string($userInfo)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Expecting a string, got %s',
+                (is_object($userInfo) ? get_class($userInfo) : gettype($userInfo))
+            ));
         }
         
-        $regex = '/(?:[^' . self::CHAR_UNRESERVED . self::CHAR_SUB_DELIMS . '%:]|%(?![A-Fa-f0-9]{2}))/'; 
+        $regex   = '/(?:[^' . self::CHAR_UNRESERVED . self::CHAR_SUB_DELIMS . '%:]|%(?![A-Fa-f0-9]{2}))/'; 
         $replace = function($match) {
             return rawurlencode($match[0]);
         };
@@ -847,12 +913,14 @@ class Uri
      */
     static public function encodePath($path)
     {
-        if (! is_string($path)) {
-            throw new Exception\InvalidArgumentException("Expecting a string, got " . gettype($path));
+        if (!is_string($path)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Expecting a string, got %s',
+                (is_object($path) ? get_class($path) : gettype($path))
+            ));
         }   
         
-        $regex = '/(?:[^' . self::CHAR_UNRESERVED . ':@&=\+\$,\/;%]+|%(?![A-Fa-f0-9]{2}))/';
-         
+        $regex   = '/(?:[^' . self::CHAR_UNRESERVED . ':@&=\+\$,\/;%]+|%(?![A-Fa-f0-9]{2}))/';
         $replace = function($match) {
             return rawurlencode($match[0]);
         };
@@ -872,11 +940,14 @@ class Uri
      */
     static public function encodeQueryFragment($input)
     {
-        if (! is_string($input)) {
-            throw new Exception\InvalidArgumentException("Expecting a string, got " . gettype($input));
+        if (!is_string($input)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Expecting a string, got %s',
+                (is_object($input) ? get_class($input) : gettype($input))
+            ));
         }   
         
-        $regex = '/(?:[^' . self::CHAR_UNRESERVED . self::CHAR_SUB_DELIMS . '%:@\/\?]+|%(?![A-Fa-f0-9]{2}))/'; 
+        $regex   = '/(?:[^' . self::CHAR_UNRESERVED . self::CHAR_SUB_DELIMS . '%:@\/\?]+|%(?![A-Fa-f0-9]{2}))/'; 
         $replace = function($match) {
             return rawurlencode($match[0]);
         };
@@ -895,20 +966,23 @@ class Uri
      * still be valid, but not full)
      * 
      * @param  string $uriString
-     * @return string | null
+     * @return string|null
      * @throws InvalidArgumentException
      */
     static public function parseScheme($uriString)
     {
         if (! is_string($uriString)) {
-            throw new Exception\InvalidArgumentException("Expecting a string, got " . gettype($uriString));
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Expecting a string, got %s',
+                (is_object($uriString) ? get_class($uriString) : gettype($uriString))
+            ));
         }
         
         if (preg_match('/^([A-Za-z][A-Za-z0-9\.\+\-]*):/', $uriString, $match)) {
             return $match[1];
-        } else {
-            return null;
-        }
+        } 
+
+        return null;
     }
     
     /**
@@ -927,38 +1001,42 @@ class Uri
         $output = '';
         
         while ($path) {
-            if ($path == '..' || $path == '.') break;
+            if ($path == '..' || $path == '.') {
+                break;
+            }
             
-            if ($path == '/.') {
-                $path = '/';
-                
-            } elseif ($path == '/..') {
-                $path = '/';
-                $output = substr($output, 0, strrpos($output, '/', -1));
-                
-            } elseif (substr($path, 0, 4) == '/../') {
-                $path = '/' . substr($path, 4);
-                $output = substr($output, 0, strrpos($output, '/', -1));
-                
-            } elseif (substr($path, 0, 3) == '/./') {
-                $path = substr($path, 2);
-                
-            } elseif (substr($path, 0, 2) == './') { 
-                $path = substr($path, 2);
-                
-            } elseif (substr($path, 0, 3) == '../') {
-                $path = substr($path, 3);
-                  
-            } else {
-                $slash = strpos($path, '/', 1);
-                if ($slash === false) { 
-                    $seg = $path;
-                } else {
-                    $seg = substr($path, 0, $slash); 
-                }
-                
-                $output .= $seg;
-                $path = substr($path, strlen($seg));
+            switch (true) {
+                case ($path == '/.'):
+                    $path = '/';
+                    break;
+                case ($path == '/..'):
+                    $path   = '/';
+                    $output = substr($output, 0, strrpos($output, '/', -1));
+                    break;
+                case (substr($path, 0, 4) == '/../'):
+                    $path   = '/' . substr($path, 4);
+                    $output = substr($output, 0, strrpos($output, '/', -1));
+                    break;
+                case (substr($path, 0, 3) == '/./'):
+                    $path = substr($path, 2);
+                    break;
+                case (substr($path, 0, 2) == './'):
+                    $path = substr($path, 2);
+                    break;
+                case (substr($path, 0, 3) == '../'):
+                    $path = substr($path, 3);
+                    break;
+                default:
+                    $slash = strpos($path, '/', 1);
+                    if ($slash === false) { 
+                        $seg = $path;
+                    } else {
+                        $seg = substr($path, 0, $slash); 
+                    }
+                    
+                    $output .= $seg;
+                    $path    = substr($path, strlen($seg));
+                    break;
             }
         }
         
@@ -974,13 +1052,13 @@ class Uri
      * 
      * If objects are passed in, none of the passed objects will be modified.
      *  
-     * @param  \Zend\Uri\Uri | string $baseUri
-     * @param  \Zend\Uri\Uri | string $relativeUri 
-     * @return \Zend\Uri\Uri
+     * @param  Uri|string $baseUri
+     * @param  Uri|string $relativeUri 
+     * @return Uri
      */
     static public function merge($baseUri, $relativeUri)
     {
-        $uri = new Uri($relativeUri);
+        $uri = new self($relativeUri);
         return $uri->resolve($baseUri);
     }
     
@@ -991,11 +1069,11 @@ class Uri
      * @param  integer $allowed allowed address types
      * @return boolean
      */
-    static protected function _isValidIpAddress($host, $allowed)
+    static protected function isValidIpAddress($host, $allowed)
     {
         $validatorParams = array(
             'allowipv4' => (bool) ($allowed & self::HOST_IPV4),
-            'allowipv6' => (bool) ($allowed & self::HOST_IPV6)
+            'allowipv6' => (bool) ($allowed & self::HOST_IPV6),
         );
         
         if ($allowed & (self::HOST_IPV6 | self::HOST_IPVF)) {
@@ -1007,7 +1085,9 @@ class Uri
         
         if ($allowed & (self::HOST_IPV4 | self::HOST_IPV6)) {
             $validator = new Validator\Ip($validatorParams);
-            if ($validator->isValid($host)) return true;
+            if ($validator->isValid($host)) {
+                return true;
+            }
         }
         
         if ($allowed & self::HOST_IPVF) { 
@@ -1024,10 +1104,10 @@ class Uri
      * @param  string $host
      * @return boolean
      */
-    static protected function _isValidDnsHostname($host)
+    static protected function isValidDnsHostname($host)
     {
         $validator = new Validator\Hostname(array(
-            'allow' => Validator\Hostname::ALLOW_DNS | Validator\Hostname::ALLOW_LOCAL
+            'allow' => Validator\Hostname::ALLOW_DNS | Validator\Hostname::ALLOW_LOCAL,
         ));
         
         return $validator->isValid($host);
@@ -1039,7 +1119,7 @@ class Uri
      * @param  string $host
      * @return boolean
      */
-    static protected function _isValidRegName($host)
+    static protected function isValidRegName($host)
     {
         $regex = '/^(?:[' . self::CHAR_UNRESERVED . self::CHAR_SUB_DELIMS . ':@\/\?]+|%[A-Fa-f0-9]{2})+$/';
         return (bool) preg_match($regex, $host);
@@ -1061,7 +1141,7 @@ class Uri
      * @param  string $scheme
      * @return string
      */
-    static protected function _normalizeScheme($scheme)
+    static protected function normalizeScheme($scheme)
     {
         return strtolower($scheme);
     }
@@ -1074,7 +1154,7 @@ class Uri
      * @param  string $host
      * @return string
      */
-    static protected function _normalizeHost($host)
+    static protected function normalizeHost($host)
     {
         return strtolower($host);
     } 
@@ -1087,14 +1167,14 @@ class Uri
      * 
      * @param  integer $port
      * @param  string  $scheme 
-     * @return integer | null
+     * @return integer|null
      */
-    static protected function _normalizePort($port, $scheme = null)
+    static protected function normalizePort($port, $scheme = null)
     {
-        if ($scheme && 
-            isset(static::$_defaultPorts[$scheme]) && 
-            $port == static::$_defaultPorts[$scheme]) {
-
+        if ($scheme 
+            && isset(static::$defaultPorts[$scheme]) 
+            && ($port == static::$defaultPorts[$scheme])
+        ) {
             return null;
         }
         
@@ -1110,10 +1190,10 @@ class Uri
      * @param  string $path
      * @return string
      */
-    static protected function _normalizePath($path)
+    static protected function normalizePath($path)
     {
         $path = self::encodePath(
-            self::_decodeUrlEncodedChars(
+            self::decodeUrlEncodedChars(
                 self::removePathDotSegments($path),
                 '/[' . self::CHAR_UNRESERVED . ':@&=\+\$,\/;%]/'
             )
@@ -1131,10 +1211,10 @@ class Uri
      * @param  string $query
      * @return string
      */
-    static protected function _normalizeQuery($query)
+    static protected function normalizeQuery($query)
     {
         $query = self::encodeQueryFragment(
-            self::_decodeUrlEncodedChars(
+            self::decodeUrlEncodedChars(
                 $query,
                 '/[' . self::CHAR_UNRESERVED . self::CHAR_SUB_DELIMS . '%:@\/\?]/'
             )
@@ -1151,9 +1231,9 @@ class Uri
      * @param  string $fragment
      * @return string
      */
-    static protected function _normalizeFragment($fragment)
+    static protected function normalizeFragment($fragment)
     {
-        return static::_normalizeQuery($fragment);
+        return static::normalizeQuery($fragment);
     }
     
     /**
@@ -1164,16 +1244,14 @@ class Uri
      * @param string $input
      * @param string $allowed Pattern of allowed characters
      */
-    static protected function _decodeUrlEncodedChars($input, $allowed = '')
+    static protected function decodeUrlEncodedChars($input, $allowed = '')
     {
-        $decodeCb = function($match) use ($allowed)
-        {
+        $decodeCb = function($match) use ($allowed) {
             $char = rawurldecode($match[0]);
             if (preg_match($allowed, $char)) { 
                 return $char;
-            } else {
-                return $match[0];
             }
+            return $match[0];
         };
         
         return preg_replace_callback('/%[A-Fa-f0-9]{2}/', $decodeCb, $input);

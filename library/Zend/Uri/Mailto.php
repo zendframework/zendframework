@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -15,9 +14,8 @@
  *
  * @category  Zend
  * @package   Zend_Uri
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id$
  */
 
 /**
@@ -37,7 +35,7 @@ namespace Zend\Uri;
  */
 class Mailto extends Uri
 {
-    static protected $_validSchemes = array('mailto');
+    static protected $validSchemes = array('mailto');
     
     /**
      * Check if the URI is a valid Mailto URI
@@ -46,7 +44,7 @@ class Mailto extends Uri
      * required by the generic URI syntax
      * 
      * @return boolean
-     * @see    \Zend\Uri\Uri::isValid()
+     * @see    Uri::isValid()
      */
     public function isValid()
     {
@@ -59,7 +57,7 @@ class Mailto extends Uri
      * This is infact equivalent to setPath() - but provides a more clear interface
      * 
      * @param  string $email
-     * @return \Zend\Uri\Mailto
+     * @return Mailto
      */
     public function setEmail($email)
     {

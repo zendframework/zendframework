@@ -22,14 +22,10 @@
  * @namespace
  */
 namespace Zend\Feed\PubSubHubbub;
+
 use Zend\Uri;
 
 /**
- * @uses       \Zend\Feed\PubSubHubbub\PubSubHubbub
- * @uses       \Zend\Feed\PubSubHubbub\Exception
- * @uses       \Zend\Http\Client
- * @uses       \Zend\Uri\Uri
- * @uses       \Zend\Version
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -118,7 +114,7 @@ class Publisher
      */
     public function addHubUrl($url)
     {
-        if (empty($url) || !is_string($url) || !\Zend\Uri\Url::validate($url)) {
+        if (empty($url) || !is_string($url) || !Uri\UriFactory::factory($url)->isValid()) {
             throw new Exception('Invalid parameter "url"'
                 .' of "' . $url . '" must be a non-empty string and a valid'
                 .'URL');
@@ -176,7 +172,7 @@ class Publisher
      */
     public function addUpdatedTopicUrl($url)
     {
-        if (empty($url) || !is_string($url) || !\Zend\Uri\Url::validate($url)) {
+        if (empty($url) || !is_string($url) || !Uri\UriFactory::factory($url)->isValid()) {
             throw new Exception('Invalid parameter "url"'
                 .' of "' . $url . '" must be a non-empty string and a valid'
                 .'URL');
@@ -235,7 +231,7 @@ class Publisher
      */
     public function notifyHub($url)
     {
-        if (empty($url) || !is_string($url) || !Uri\Url::validate($url)) {
+        if (empty($url) || !is_string($url) || !Uri\UriFactory::factory($url)->isValid()) {
             throw new Exception('Invalid parameter "url"'
                 .' of "' . $url . '" must be a non-empty string and a valid'
                 .'URL');

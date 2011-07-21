@@ -228,7 +228,12 @@ class Uri
             
             // Split authority into userInfo and host
             if (strpos($authority, '@') !== false) {
-                list($userInfo, $authority) = explode('@', $authority, 2);
+                // The userInfo can also contain '@' symbols; split $authority
+                // into segments, and set it to the last segment.
+                $segments  = explode('@', $authority);
+                $authority = array_pop($segments);
+                $userInfo  = implode('@', $segments);
+                unset($segments);
                 $this->setUserInfo($userInfo);
             }
             

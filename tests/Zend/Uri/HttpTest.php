@@ -39,6 +39,55 @@ use Zend\Uri\Http as HttpUri;
 class HttpTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * Data Providers
+     */
+    
+    /**
+     * Valid HTTP schemes
+     * 
+     * @return array
+     */
+    static public function validSchemeProvider()
+    {
+        return array(
+            array('http'),
+            array('https'),
+            array('HTTP'),
+            array('Https'),
+        );
+    }
+    
+    /**
+     * Invalid HTTP schemes
+     * 
+     * @return array
+     */
+    static public function invalidSchemeProvider()
+    {
+        return array(
+            array('file'),
+            array('mailto'),
+            array('g'),
+            array('http:')
+        );
+    }
+    
+    static public function portNormalizationTestsProvider()
+    {
+        return array(
+            array('http://www.example.com:80/foo/bar', 'http://www.example.com/foo/bar'),
+            array('http://www.example.com:1234/foo/bar', 'http://www.example.com:1234/foo/bar'),
+            array('https://www.example.com:443/foo/bar', 'https://www.example.com/foo/bar'),
+            array('https://www.example.com:80/foo/bar', 'https://www.example.com:80/foo/bar'),
+            array('http://www.example.com:443/foo/bar', 'http://www.example.com:443/foo/bar'),
+        );
+    }
+
+    /**
+     * Tests
+     */
+
+    /**
      * Test that specific schemes are valid for this class
      * 
      * @param string $scheme
@@ -89,50 +138,65 @@ class HttpTest extends \PHPUnit_Framework_TestCase
         $uri->normalize();
         $this->assertEquals($expected, $uri->toString());
     }
-    
-    /**
-     * Data Providers
-     */
-    
-    /**
-     * Valid HTTP schemes
-     * 
-     * @return array
-     */
-    static public function validSchemeProvider()
+
+    public function testUserIsNullByDefaultWhenNoUserInfoIsProvided()
     {
-        return array(
-            array('http'),
-            array('https'),
-            array('HTTP'),
-            array('Https'),
-        );
+        $uri = new HttpUri('http://example.com/');
+        $uri->normalize();
+        $this->assertNull($uri->getUser());
     }
-    
-    /**
-     * Invalid HTTP schemes
-     * 
-     * @return array
-     */
-    static public function invalidSchemeProvider()
+
+    public function testPasswordIsNullByDefaultWhenNoUserInfoIsProvided()
     {
-        return array(
-            array('file'),
-            array('mailto'),
-            array('g'),
-            array('http:')
-        );
+        $uri = new HttpUri('http://example.com/');
+        $uri->normalize();
+        $this->assertNull($uri->getPassword());
     }
-    
-    static public function portNormalizationTestsProvider()
+
+    public function testCanParseUsernameAndPasswordFromUriNotContainingPort()
     {
-        return array(
-            array('http://www.example.com:80/foo/bar', 'http://www.example.com/foo/bar'),
-            array('http://www.example.com:1234/foo/bar', 'http://www.example.com:1234/foo/bar'),
-            array('https://www.example.com:443/foo/bar', 'https://www.example.com/foo/bar'),
-            array('https://www.example.com:80/foo/bar', 'https://www.example.com:80/foo/bar'),
-            array('http://www.example.com:443/foo/bar', 'http://www.example.com:443/foo/bar'),
-        );
+        $uri = new HttpUri('http://user:pass@example.com/');
+        $uri->normalize();
+        $this->assertEquals('user', $uri->getUser());
+        $this->assertEquals('pass', $uri->getPassword());
+        $this->assertEquals('example.com', $uri->getHost());
     }
+
+    public function testCanParseUsernameAndPasswordFromUriContainingPort()
+    {
+        $uri = new HttpUri('http://user:pass@example.com:80/');
+        $uri->normalize();
+        $this->assertEquals('user', $uri->getUser());
+        $this->assertEquals('pass', $uri->getPassword());
+        $this->assertEquals('example.com', $uri->getHost());
+    }
+
+    public function testCanParseUsernameContainingAtMarkFromUri()
+    {
+        $uri = new HttpUri('http://user@foo.com:pass@example.com/');
+        $uri->normalize();
+        $this->assertEquals('user@foo.com', $uri->getUser());
+        $this->assertEquals('pass', $uri->getPassword());
+        $this->assertEquals('example.com', $uri->getHost());
+    }
+
+    public function testCanParsePasswordContainingAtMarkFromUri()
+    {
+        $uri = new HttpUri('http://user:p@ss@example.com/');
+        $uri->normalize();
+        $this->assertEquals('user', $uri->getUser());
+        $this->assertEquals('p@ss', $uri->getPassword());
+        $this->assertEquals('example.com', $uri->getHost());
+    }
+
+    public function testUserInfoCanOmitPassword()
+    {
+        $uri = new HttpUri('http://user@example.com@example.com/');
+        $uri->normalize();
+        $this->assertEquals('user@example.com', $uri->getUser());
+        $this->assertNull($uri->getPassword());
+        $this->assertEquals('example.com', $uri->getHost());
+    }
+
 }
 

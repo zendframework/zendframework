@@ -50,6 +50,18 @@ class Http extends Uri
      * @see Uri::$validHostTypes
      */
     protected $validHostTypes = self::HOST_DNSORIPV4;
+
+    /**
+     * User name as provided in authority of URI
+     * @var null|string
+     */
+    protected $user;
+
+    /**
+     * Password as provided in authority of URI
+     * @var null|string
+     */
+    protected $password;
     
     /**
      * Check if the URI is a valid HTTP URI
@@ -68,10 +80,16 @@ class Http extends Uri
     /**
      * Get the username part (before the ':') of the userInfo URI part
      * 
-     * @return string
+     * @return null|string
      */
     public function getUser()
     {
+        if (null !== $this->user) {
+            return $this->user;
+        }
+
+        $this->parseUserInfo();
+        return $this->user;
     }
     
     /**
@@ -81,6 +99,12 @@ class Http extends Uri
      */
     public function getPassword()
     {
+        if (null !== $this->password) {
+            return $this->password;
+        }
+
+        $this->parseUserInfo();
+        return $this->password;
     }
 
     /**
@@ -91,6 +115,7 @@ class Http extends Uri
      */
     public function setUser($user)
     {
+        $this->user = $user;
         return $this;
     }
     
@@ -102,6 +127,7 @@ class Http extends Uri
      */
     public function setPassword($password)
     {
+        $this->password = $password;
         return $this;
     }
     
@@ -118,5 +144,32 @@ class Http extends Uri
     static public function validateHost($host, $allowed = self::HOST_DNSORIPV4)
     {
         return parent::validateHost($host, $allowed);
+    }
+
+    /**
+     * Parse the user info into username and password segments
+     *
+     * Parses the user information into username and password segments, and 
+     * then sets the appropriate values.
+     * 
+     * @return void
+     */
+    protected function parseUserInfo()
+    {
+        // No user information? we're done
+        if (null === $this->userInfo) {
+            return;
+        }
+
+        // If no ':' separator, we only have a username
+        if (false === strpos($this->userInfo, ':')) {
+            $this->setUser($this->userInfo);
+            return;
+        }
+
+        // Split on the ':', and set both user and password
+        list($user, $password) = explode(':', $this->userInfo, 2);
+        $this->setUser($user);
+        $this->setPassword($password);
     }
 }

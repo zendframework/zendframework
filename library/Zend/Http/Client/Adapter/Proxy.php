@@ -35,11 +35,6 @@ use Zend\Http\Client,
  * default Socket adapter, this adapter does not require any special extensions
  * installed.
  *
- * @uses       \Zend\Http\Client\Client
- * @uses       \Zend\Http\Client\Adapter\Exception
- * @uses       \Zend\Http\Client\Adapter\Socket
- * @uses       \Zend\Http\Response
- * @uses       \Zend\Uri\Url
  * @category   Zend
  * @package    Zend_Http
  * @subpackage Client_Adapter
@@ -107,7 +102,7 @@ class Proxy extends Socket
      * Send request to the proxy server
      *
      * @param string        $method
-     * @param \Zend\Uri\Url $uri
+     * @param \Zend\Uri\Uri $uri
      * @param string        $http_ver
      * @param array         $headers
      * @param string        $body

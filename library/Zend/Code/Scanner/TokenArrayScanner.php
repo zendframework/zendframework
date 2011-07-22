@@ -354,7 +354,8 @@ class TokenArrayScanner implements Scanner
         $info['tokenEnd'] = $tokenIndex;
         $this->infos[]    = $info;
     }
-            
+
+    // @todo hasNamespace(), getNamespace()
     
     public function getNamespaces($returnScannerClass = false)
     {

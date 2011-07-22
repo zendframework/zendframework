@@ -19,25 +19,20 @@
  */
 
 /**
-* @namespace
-*/
+ * @namespace
+ */
 namespace Zend\Feed\Reader\Extension\Atom;
-use Zend\Feed\Reader;
-use Zend\Date;
-use Zend\Feed\Reader\Collection;
-use Zend\Feed\Reader\Extension;
-use Zend\URI;
+
+use DOMDocument,
+    DOMElement,
+    stdClass,
+    Zend\Date,
+    Zend\Feed\Reader,
+    Zend\Feed\Reader\Collection,
+    Zend\Feed\Reader\Extension,
+    Zend\Uri;
 
 /**
-* @uses DOMDocument
-* @uses stdClass
-* @uses \Zend\Date\Date
-* @uses \Zend\Feed\Reader\Reader
-* @uses \Zend\Feed\Reader\Feed\Atom\Source
-* @uses \Zend\Feed\Reader\Collection\Author
-* @uses \Zend\Feed\Reader\Collection\Category
-* @uses \Zend\Feed\Reader\Extension\EntryAbstract
-* @uses \Zend\Uri\Uri
 * @category Zend
 * @package Reader\Reader
 * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -134,7 +129,7 @@ class Entry extends Extension\AbstractEntry
                     $xhtml = $this->getXpath()->query(
                         $this->getXpathPrefix() . '/atom:content/xhtml:div'
                     )->item(0);
-                    $d = new \DOMDocument('1.0', $this->getEncoding());
+                    $d = new DOMDocument('1.0', $this->getEncoding());
                     $xhtmls = $d->importNode($xhtml, true);
                     $d->appendChild($xhtmls);
                     $content = $this->_collectXhtml(
@@ -267,7 +262,7 @@ class Entry extends Extension\AbstractEntry
         $nodeList = $this->getXpath()->query($this->getXpathPrefix() . '/atom:link[@rel="enclosure"]');
 
         if ($nodeList->length > 0) {
-            $enclosure = new \stdClass();
+            $enclosure         = new stdClass();
             $enclosure->url    = $nodeList->item(0)->getAttribute('href');
             $enclosure->length = $nodeList->item(0)->getAttribute('length');
             $enclosure->type   = $nodeList->item(0)->getAttribute('type');
@@ -567,10 +562,10 @@ class Entry extends Extension\AbstractEntry
      */
     protected function _absolutiseUri($link)
     {
-        if (!\Zend\Uri\Url::validate($link)) {
+        if (!Uri\UriFactory::factory($link)->isValid()) {
             if (!is_null($this->getBaseUrl())) {
                 $link = $this->getBaseUrl() . $link;
-                if (!\Zend\Uri\Url::validate($link)) {
+                if (!Uri\UriFactory::factory($link)->isValid()) {
                     $link = null;
                 }
             }
@@ -584,7 +579,7 @@ class Entry extends Extension\AbstractEntry
      * @param DOMElement $element
      * @return string
      */
-    protected function _getAuthor(\DOMElement $element)
+    protected function _getAuthor(DOMElement $element)
     {
         $author = array();
 

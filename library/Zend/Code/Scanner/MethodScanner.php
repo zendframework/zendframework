@@ -241,6 +241,11 @@ class MethodScanner implements Scanner
         return $this->isStatic;
     }
     
+    public function getNumberOfParameters()
+    {
+        return count($this->getParameters());
+    }
+    
     public function getParameters($returnScanner = false)
     {
         $this->scan();

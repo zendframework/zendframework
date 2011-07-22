@@ -220,8 +220,13 @@ class ClassScanner implements Scanner
             'name'        => null,
         );
         
+        // start on first token, not second
+        $fastForward--;
+        $tokenIndex--;
+            
         $braceCount = 0;
         while (true) {
+            
             $fastForward++;
             $tokenIndex++;
             if (!isset($this->tokens[$tokenIndex])) {
@@ -244,11 +249,11 @@ class ClassScanner implements Scanner
                 }
             }
             
-            if ($token[0] === T_FUNCTION) {
+            if ($info['name'] === null && $token[0] === T_FUNCTION) {
                 // next token after T_WHITESPACE is name
                 $info['name'] = $this->tokens[$tokenIndex+2][1];
                 continue;
-            } 
+            }
             
             if (is_array($token)) {
                 $info['lineEnd'] = $token[2];
@@ -317,6 +322,12 @@ class ClassScanner implements Scanner
         return $this->isFinal;
     }
 
+    public function isInstantiable()
+    {
+        $this->scan();
+        return (!$this->isAbstract && !$this->isInterface);
+    }
+    
     public function isAbstract()
     {
         $this->scan();
@@ -329,6 +340,12 @@ class ClassScanner implements Scanner
         return $this->isInterface;
     }
 
+    public function hasParentClass()
+    {
+        $this->scan();
+        return ($this->parentClass != null);
+    }
+    
     public function getParentClass()
     {
         $this->scan();
@@ -439,7 +456,9 @@ class ClassScanner implements Scanner
                 return false;
             }
         }
-        
+        if (!isset($info)) {
+            die();
+        }
         $m = new $returnScannerClass(
             array_slice($this->tokens, $info['tokenStart'], $info['tokenEnd'] - $info['tokenStart'] + 1),
             $this->namespace,
@@ -452,6 +471,8 @@ class ClassScanner implements Scanner
     
     public function hasMethod($name)
     {
+        $this->scan();
+        
         foreach ($this->infos as $infoIndex => $info) {
             if ($info['type'] === 'method' && $info['name'] === $name) {
                 return true;

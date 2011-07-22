@@ -719,28 +719,28 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         // Apache
         $_SERVER = array('REQUEST_URI' => '/my_script.php?wsdl', 'HTTP_HOST' => 'localhost');
         $server = new AutoDiscover();
-        $uri = $server->getUri()->generate();
+        $uri = $server->getUri()->toString();
         $this->assertNotContains("?wsdl", $uri);
         $this->assertEquals("http://localhost/my_script.php", $uri);
 
         // Apache plus SSL
         $_SERVER = array('REQUEST_URI' => '/my_script.php?wsdl', 'HTTP_HOST' => 'localhost', 'HTTPS' => 'on');
         $server = new AutoDiscover();
-        $uri = $server->getUri()->generate();
+        $uri = $server->getUri()->toString();
         $this->assertNotContains("?wsdl", $uri);
         $this->assertEquals("https://localhost/my_script.php", $uri);
 
         // IIS 5 + PHP as FastCGI
         $_SERVER = array('ORIG_PATH_INFO' => '/my_script.php?wsdl', 'SERVER_NAME' => 'localhost');
         $server = new AutoDiscover();
-        $uri = $server->getUri()->generate();
+        $uri = $server->getUri()->toString();
         $this->assertNotContains("?wsdl", $uri);
         $this->assertEquals("http://localhost/my_script.php", $uri);
 
         // IIS
         $_SERVER = array('HTTP_X_REWRITE_URL' => '/my_script.php?wsdl', 'SERVER_NAME' => 'localhost');
         $server = new AutoDiscover();
-        $uri = $server->getUri()->generate();
+        $uri = $server->getUri()->toString();
         $this->assertNotContains("?wsdl", $uri);
         $this->assertEquals("http://localhost/my_script.php", $uri);
     }

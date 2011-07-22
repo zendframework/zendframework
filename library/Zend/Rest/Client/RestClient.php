@@ -27,11 +27,6 @@ namespace Zend\Rest\Client;
 use Zend\Uri;
 
 /**
- * @uses       Zend\Rest\Client\Exception\UnexpectedValueException
- * @uses       Zend\Rest\Client\Result
- * @uses       Zend\Service\AbstractService
- * @uses       Zend\Uri\Uri
- * @uses       Zend\Uri\Url
  * @category   Zend
  * @package    Zend_Rest
  * @subpackage Client
@@ -47,15 +42,15 @@ class RestClient extends \Zend\Service\AbstractService
     protected $_data = array();
 
      /**
-     * Zend_Uri of this web service
-     * @var \Zend\Uri\Http
+     * URI of this web service
+     * @var Uri\Uri
      */
     protected $_uri = null;
 
     /**
      * Constructor
      *
-     * @param string|\Zend\Uri\Http $uri URI for the web service
+     * @param string|Uri\Uri $uri URI for the web service
      * @return void
      */
     public function __construct($uri = null)
@@ -68,15 +63,15 @@ class RestClient extends \Zend\Service\AbstractService
     /**
      * Set the URI to use in the request
      *
-     * @param string|Zend\Uri\Uri $uri URI for the web service
-     * @return Zend\Rest\Client\RestClient
+     * @param  string|Uri\Uri $uri URI for the web service
+     * @return RestClient
      */
     public function setUri($uri)
     {
-        if ($uri instanceof URI\Uri) {
+        if ($uri instanceof Uri\Uri) {
             $this->_uri = $uri;
         } else {
-            $this->_uri = new Uri\Url($uri);
+            $this->_uri = Uri\UriFactory::factory($uri);
         }
 
         return $this;
@@ -85,7 +80,7 @@ class RestClient extends \Zend\Service\AbstractService
     /**
      * Retrieve the current request URI object
      *
-     * @return Zend\Uri\Uri
+     * @return Uri\Uri
      */
     public function getUri()
     {
@@ -102,11 +97,11 @@ class RestClient extends \Zend\Service\AbstractService
     final private function _prepareRest($path)
     {
         // Get the URI object and configure it
-        if (!$this->_uri instanceof URI\Uri) {
+        if (!$this->_uri instanceof Uri\Uri) {
             throw new Exception\UnexpectedValueException('URI object must be set before performing call');
         }
 
-        $uri = $this->_uri->generate();
+        $uri = $this->_uri->toString();
 
         if ($path[0] != '/' && $uri[strlen($uri)-1] != '/') {
             $path = '/' . $path;

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -35,15 +34,6 @@ use Zend\Config\Config,
  * authentication and cookie persistence (using a Zend_Http_CookieJar object)
  *
  * @todo Implement proxy settings
- * @uses       Zend\Http\Client\Adapter
- * @uses       Zend\Http\Client\Exception
- * @uses       Zend\Http\Cookie
- * @uses       Zend\Http\CookieJar
- * @uses       Zend\Http\Response
- * @uses       Zend\Http\Response\Stream
- * @uses       Zend\Loader
- * @uses       Zend\Uri\Uri
- * @uses       Zend\Uri\Url
  * @category   Zend
  * @package    Zend_Http
  * @subpackage Client
@@ -119,7 +109,7 @@ class Client
     /**
      * Request URI
      *
-     * @var \Zend\Uri\Url
+     * @var Uri\Uri
      */
     protected $uri = null;
 
@@ -231,7 +221,7 @@ class Client
      * Constructor method. Will create a new HTTP client. Accepts the target
      * URL and optionally configuration array.
      *
-     * @param \Zend\Uri\Url|string $uri
+     * @param Uri\Uri|string $uri
      * @param array $config Configuration key-value pairs.
      */
     public function __construct($uri = null, $config = null)
@@ -247,32 +237,33 @@ class Client
     /**
      * Set the URI for the next request
      *
-     * @param  \Zend\Uri\Url|string $uri
-     * @return \Zend\Http\Client
-     * @throws \Zend\Http\Client\Exception
+     * @param  Uri\Url|string $uri
+     * @return Client
+     * @throws Client\Exception
      */
     public function setUri($uri)
     {
         if (is_string($uri)) {
             try {
-                $uri = new Uri\Url($uri);
+                $uri = Uri\UriFactory::factory($uri, 'http');
+                $uri = new Uri\Uri($uri);
             } catch (Uri\Exception $e) {
-                throw new Client\Exception('Passed parameter is not a valid HTTP URI.');
+                throw new Client\Exception\InvalidArgumentException('Passed parameter is not a valid HTTP URI', $e->getCode(), $e);
             } 
         }
 
         $scheme = strtolower($uri->getScheme());
         if (!empty($scheme) && !in_array($scheme, array('http', 'https'))) {
-            throw new Client\Exception\InvalidArgumentException('Passed parameter is not a valid HTTP URI.');
+            throw new Client\Exception\InvalidArgumentException('Passed parameter is not a valid HTTP URI');
         }
 
         // Set auth if username and password has been specified in the uri
-        if ($uri->getUsername() && $uri->getPassword()) {
-            $this->setAuth($uri->getUsername(), $uri->getPassword());
+        if ($uri instanceof Uri\Http && $uri->getUser() && $uri->getPassword()) {
+            $this->setAuth($uri->getUser(), $uri->getPassword());
         }
 
         // We have no ports, set the defaults
-        if (! $uri->getPort()) {
+        if (!$uri->getPort()) {
             $uri->setPort(($uri->getScheme() == 'https' ? 443 : 80));
         }
 
@@ -285,15 +276,15 @@ class Client
      * Get the URI for the next request
      *
      * @param boolean $as_string If true, will return the URI as a string
-     * @return \Zend\Uri\Url|string
+     * @return Uri\Uri|string
      */
     public function getUri($as_string = false)
     {
-        if ($as_string && $this->uri instanceof Uri\Url) {
+        if ($as_string && $this->uri instanceof Uri\Uri) {
             return $this->uri->__toString();
-        } else {
-            return $this->uri;
-        }
+        } 
+
+        return $this->uri;
     }
 
     /**
@@ -535,8 +526,8 @@ class Client
             $this->auth = null;
 
             // Clear the auth information in the uri instance as well
-            if ($this->uri instanceof Uri\Url) {
-                $this->getUri()->setUsername('');
+            if ($this->uri instanceof Uri\Http) {
+                $this->getUri()->setUser('');
                 $this->getUri()->setPassword('');
             }
         // Else, set up authentication
@@ -883,12 +874,12 @@ class Client
      * Send the HTTP request and return an HTTP response object
      *
      * @param string $method
-     * @return \Zend\Http\Response
-     * @throws \Zend\Http\Client\Exception
+     * @return Response
+     * @throws Client\Exception
      */
     public function request($method = null)
     {
-        if (! $this->uri instanceof Uri\Url) {
+        if (!$this->uri instanceof Uri\Uri) {
             throw new Client\Exception\RuntimeException('No valid URI has been passed to the client');
         }
 
@@ -907,11 +898,11 @@ class Client
         do {
             // Clone the URI and add the additional GET parameters to it
             $uri = clone $this->uri;
-            if (! empty($this->paramsGet)) {
+            if (!empty($this->paramsGet)) {
                 $query = $uri->getQuery();
-                   if (! empty($query)) {
-                       $query .= '&';
-                   }
+                if (! empty($query)) {
+                    $query .= '&';
+                }
                 $query .= http_build_query($this->paramsGet, null, '&');
 
                 $uri->setQuery($query);
@@ -983,14 +974,12 @@ class Client
                 }
 
                 // If we got a well formed absolute URI
-                $url = new Uri\Url($location);
+                $url = Uri\UriFactory($location, 'http');
                 
                 if ($url->isValid()) {
                     $this->setHeaders('host', null);
                     $this->setUri($location);
-
                 } else {
-
                     // Split into path and query and set the query
                     if (strpos($location, '?') !== false) {
                         list($location, $query) = explode('?', $location, 2);
@@ -1002,9 +991,8 @@ class Client
                     // Else, if we got just an absolute path, set it
                     if(strpos($location, '/') === 0) {
                         $this->uri->setPath($location);
-
-                        // Else, assume we have a relative path
                     } else {
+                        // Else, assume we have a relative path
                         // Get the current path directory, removing any trailing slashes
                         $path = $this->uri->getPath();
                         $path = rtrim(substr($path, 0, strrpos($path, '/')), "/");

@@ -144,7 +144,8 @@ class RuntimeDefinition implements Definition
         $cRules = $introspectionRuleset->getConstructorRules();
 
         if ($cRules['enabled']) {
-            if ($c->hasMethod('__construct') && $c->getMethod('__construct')->getNumberOfParameters() > 0) {
+            $m = ($c->hasMethod('__construct')) ? $c->getMethod('__construct') : null;
+            if ($m && $m->isPublic() && $m->getNumberOfParameters() > 0) {
                 do {
                     // explicity in included classes
                     if ($cRules['includedClasses'] && !in_array($className, $cRules['includedClasses'])) {
@@ -167,7 +168,7 @@ class RuntimeDefinition implements Definition
             foreach ($c->getMethods() as $m) {
                 $declaringClassName = $m->getDeclaringClass()->getName();
                 
-                if ($m->getNumberOfParameters() == 0) {
+                if (!$m->isPublic() || $m->getNumberOfParameters() == 0) {
                     continue;
                 }
                 
@@ -228,7 +229,12 @@ class RuntimeDefinition implements Definition
     /**
      * Return the parameters for a method
      * 
-     * @return array
+     * 3 item array:
+     *     #1 - Class name, string if it exists, else null
+     *     #2 - Optional?, boolean
+     *     #3 - Instantiable, boolean if class exists, otherwise null
+     * 
+     * @return array 
      */
     public function getInjectionMethodParameters($class, $method)
     {
@@ -255,14 +261,20 @@ class RuntimeDefinition implements Definition
             /* @var $p ReflectionParameter */
             $pc = $p->getClass();
             $paramName = $p->getName();
+            
+            $params[$paramName] = array();
+            
+            // set the clas name, if it exists
             $params[$paramName][] = ($pc !== null) ? $pc->getName() : null;
 
+            // optional?
             if ($introspectionType == IntrospectionRuleset::TYPE_SETTER && $rules['paramCanBeOptional']) {
                 $params[$paramName][] = true;
             } else {
                 $params[$paramName][] = $p->isOptional(); 
             }
             
+            // instantiable?
             if ($pc !== null) {
                 $params[$paramName][] = ($pc->isInstantiable()) ? true : false;
             } else {

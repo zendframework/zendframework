@@ -4,11 +4,16 @@ namespace Zend\Di\Definition;
 
 class IntrospectionRuleset
 {
+    const TYPE_GENERAL = 'general';
     const TYPE_CONSTRUCTOR = 'constructor';
     const TYPE_SETTER = 'setter';
     const TYPE_INTERFACE = 'interface';
     
-    protected $construtorRules = array(
+    protected $generalRules = array(
+        'excludedClassPatterns' => array('/[\w\\\\]*Exception\w*/')
+        );
+    
+    protected $constructorRules = array(
         'enabled'		  => true,
         'includedClasses' => array(),
         'excludedClasses' => array(),
@@ -38,8 +43,11 @@ class IntrospectionRuleset
     public function addRule($strategy, $name, $value)
     {
         switch ($strategy) {
+            case self::TYPE_GENERAL:
+                $rule = &$this->generalRules;
+                break;
             case self::TYPE_CONSTRUCTOR:
-                $rule = &$this->construtorRules;
+                $rule = &$this->constructorRules;
                 break;
             case self::TYPE_SETTER:
                 $rule = &$this->setterRules;
@@ -52,19 +60,19 @@ class IntrospectionRuleset
         if (!isset($rule[$name])) {
             throw new \InvalidArgumentException('The rule name provided is not a valid rule name.');
         }
-        
+
         switch (gettype($rule[$name])) {
             case 'array':
                 array_push($rule[$name], $value);
                 break;
-            case 'bool':
+            case 'boolean':
                 $rule[$name] = (bool) $value;
                 break;
             case 'string':
                 $rule[$name] = (string) $value;
                 break;
         }
-        
+
         return $this;
     }
     
@@ -72,17 +80,29 @@ class IntrospectionRuleset
     {
         if (!$ruleType) {
             return array(
-                self::TYPE_CONSTRUCTOR => $this->construtorRules,
+                self::TYPE_GENERAL => $this->generalRules,
+                self::TYPE_CONSTRUCTOR => $this->constructorRules,
                 self::TYPE_SETTER => $this->setterRules,
                 self::TYPE_INTERFACE => $this->interfaceRules
             );
         } else {
             switch ($ruleType) {
-                case self::TYPE_CONSTRUCTOR: return $this->construtorRules;
+                case self::TYPE_GENERAL: return $this->generalRules;
+                case self::TYPE_CONSTRUCTOR: return $this->constructorRules;
                 case self::TYPE_SETTER: return $this->setterRules;
                 case self::TYPE_INTERFACE: return $this->interfaceRules;
             }
         }
+    }
+    
+    public function addGeneralRule($name, $value)
+    {
+        $this->addRule(self::TYPE_GENERAL, $name, $value);
+    }
+    
+    public function getGeneralRules()
+    {
+        return $this->generalRules;
     }
     
     public function addConstructorRule($name, $value)
@@ -92,7 +112,7 @@ class IntrospectionRuleset
     
     public function getConstructorRules()
     {
-        return $this->construtorRules;
+        return $this->constructorRules;
     }
     
     public function addSetterRule($name, $value)

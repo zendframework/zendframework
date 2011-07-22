@@ -23,7 +23,7 @@
  * @namespace
  */
 namespace ZendTest\Http\Client;
-use Zend\URI,
+use Zend\Uri,
     Zend\Http\Client as HTTPClient,
     Zend\Http;
 
@@ -83,7 +83,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         $this->_client->setUri($uristr);
 
         $uri = $this->_client->getUri();
-        $this->assertTrue($uri instanceof Uri\Url, 'Returned value is not a Uri object as expected');
+        $this->assertTrue($uri instanceof Uri\Uri, 'Returned value is not a Uri object as expected');
         $this->assertEquals($uri->__toString(), $uristr, 'Returned Uri object does not hold the expected URI');
 
         $uri = $this->_client->getUri(true);
@@ -97,12 +97,12 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetGetUriObject()
     {
-        $uriobj = new Uri\Url('http://www.zend.com:80/');
+        $uriobj = new Uri\Uri('http://www.zend.com:80/');
 
         $this->_client->setUri($uriobj);
 
         $uri = $this->_client->getUri();
-        $this->assertTrue($uri instanceof Uri\Url, 'Returned value is not a Uri object as expected');
+        $this->assertTrue($uri instanceof Uri\Uri, 'Returned value is not a Uri object as expected');
         $this->assertEquals($uri, $uriobj, 'Returned object is not the excepted Uri object');
     }
 
@@ -122,7 +122,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
     public function testInvalidUriObjectException()
     {
         try {
-            $uri = new Uri\Url('mailto:nobody@example.com');
+            $uri = new Uri\Uri('mailto:nobody@example.com');
             $this->_client->setUri($uri);
             $this->fail('Excepted invalid URI object exception was not thrown');
         } catch (HTTPClient\Exception $e) {
@@ -570,7 +570,6 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      * Testing if the connection isn't closed
      * 
      * @group ZF-9685
-     * @group fml
      */
     public function testOpenTempStreamWithValidFileDoesntThrowsException()
     {

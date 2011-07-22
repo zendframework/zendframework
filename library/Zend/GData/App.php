@@ -24,24 +24,15 @@
  * @namespace
  */
 namespace Zend\GData;
-use Zend\Http;
+
+use Zend\Http,
+    Zend\Uri;
 
 /**
  * Provides Atom Publishing Protocol (APP) functionality.  This class and all
  * other components of Zend_Gdata_App are designed to work independently from
  * other Zend_Gdata components in order to interact with generic APP services.
  *
- * @uses       \Zend\GData\App\Exception
- * @uses       \Zend\GData\App\MediaSource
- * @uses       \Zend\GData\App\HttpException
- * @uses       \Zend\GData\App\InvalidArgumentException
- * @uses       \Zend\GData\Feed
- * @uses       \Zend\GData\HttpAdapterStreamingProxy
- * @uses       \Zend\GData\HttpAdapterStreamingSocket
- * @uses       \Zend\GData\HttpClient
- * @uses       \Zend\Http\Client\Exception
- * @uses       \Zend\Loader
- * @uses       \Zend\Version
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App
@@ -630,7 +621,7 @@ class App
 
         // Set the params for the new request to be performed
         $this->_httpClient->setHeaders($headers);
-        $urlObj = new \Zend\Uri\Url($url);
+        $urlObj = Uri\UriFactory::factory($url);
         preg_match("/^(.*?)(\?.*)?$/", $url, $matches);
         $this->_httpClient->setUri($matches[1]);
         $queryArray = $urlObj->getQueryAsArray();

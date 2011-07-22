@@ -19,31 +19,25 @@
  */
 
 /**
-* @namespace
-*/
+ * @namespace
+ */
 namespace Zend\Feed\Writer\Renderer\Entry;
-use Zend\Feed\Writer\Renderer;
-use Zend\Feed\Writer;
-use Zend\Date;
-use Zend\URI;
-use Zend\Validator;
+
+use DOMDocument,
+    DOMElement,
+    Zend\Date,
+    Zend\Feed\Writer,
+    Zend\Feed\Writer\Renderer,
+    Zend\Uri,
+    Zend\Validator;
 
 /**
-* @uses DOMDocument
-* @uses \Zend\Date\Date
-* @uses \Zend\Feed\Exception
-* @uses \Zend\Feed\Writer\Writer
-* @uses \Zend\Feed\Writer\Renderer\Feed\Atom\Source
-* @uses \Zend\Feed\Writer\Renderer\RendererAbstract
-* @uses \Zend\Feed\Writer\Renderer\RendererInterface
-* @uses \Zend\Uri\Url
-* @uses \Zend\Validator
-* @uses tidy
-* @category Zend
-* @package Zend_Feed_Writer
-* @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
-*/
+ * @uses tidy
+ * @category Zend
+ * @package Zend_Feed_Writer
+ * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license http://framework.zend.com/license/new-bsd New BSD License
+ */
 class Atom extends Renderer\AbstractRenderer implements Renderer\Renderer
 {
     /**
@@ -64,7 +58,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\Renderer
      */
     public function render()
     {
-        $this->_dom = new \DOMDocument('1.0', $this->_container->getEncoding());
+        $this->_dom = new DOMDocument('1.0', $this->_container->getEncoding());
         $this->_dom->formatOutput = true;
         $entry = $this->_dom->createElementNS(Writer\Writer::NAMESPACE_ATOM_10, 'entry');
         $this->_dom->appendChild($entry);
@@ -94,11 +88,11 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\Renderer
     /**
      * Set entry title
      * 
-     * @param  \DOMDocument $dom 
-     * @param  \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setTitle(\DOMDocument $dom, \DOMElement $root)
+    protected function _setTitle(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getTitle()) {
             $message = 'Atom 1.0 entry elements MUST contain exactly one'
@@ -121,11 +115,11 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\Renderer
     /**
      * Set entry description
      * 
-     * @param  \DOMDocument $dom 
-     * @param  \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setDescription(\DOMDocument $dom, \DOMElement $root)
+    protected function _setDescription(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getDescription()) {
             return; // unless src content or base64
@@ -142,11 +136,11 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\Renderer
     /**
      * Set date entry was modified
      * 
-     * @param  \DOMDocument $dom 
-     * @param  \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setDateModified(\DOMDocument $dom, \DOMElement $root)
+    protected function _setDateModified(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getDateModified()) {
             $message = 'Atom 1.0 entry elements MUST contain exactly one'
@@ -171,11 +165,11 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\Renderer
     /**
      * Set date entry was created
      * 
-     * @param  \DOMDocument $dom 
-     * @param  \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setDateCreated(\DOMDocument $dom, \DOMElement $root)
+    protected function _setDateCreated(DOMDocument $dom, DOMElement $root)
     {
         if (!$this->getDataContainer()->getDateCreated()) {
             return;
@@ -191,11 +185,11 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\Renderer
     /**
      * Set entry authors 
      * 
-     * @param  \DOMDocument $dom 
-     * @param  \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setAuthors(\DOMDocument $dom, \DOMElement $root)
+    protected function _setAuthors(DOMDocument $dom, DOMElement $root)
     {
         $authors = $this->_container->getAuthors();
         if ((!$authors || empty($authors))) {
@@ -230,11 +224,11 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\Renderer
     /**
      * Set entry enclosure
      * 
-     * @param  \DOMDocument $dom 
-     * @param  \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setEnclosure(\DOMDocument $dom, \DOMElement $root)
+    protected function _setEnclosure(DOMDocument $dom, DOMElement $root)
     {
         $data = $this->_container->getEnclosure();
         if ((!$data || empty($data))) {
@@ -252,7 +246,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\Renderer
         $root->appendChild($enclosure);
     }
     
-    protected function _setLink(\DOMDocument $dom, \DOMElement $root)
+    protected function _setLink(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getLink()) {
             return;
@@ -267,11 +261,11 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\Renderer
     /**
      * Set entry identifier 
      * 
-     * @param  \DOMDocument $dom 
-     * @param  \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setId(\DOMDocument $dom, \DOMElement $root)
+    protected function _setId(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getId()
         && !$this->getDataContainer()->getLink()) {
@@ -292,10 +286,12 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\Renderer
             $this->getDataContainer()->setId(
                 $this->getDataContainer()->getLink());
         }
-        if (!URI\URL::validate($this->getDataContainer()->getId()) &&
-        !preg_match("#^urn:[a-zA-Z0-9][a-zA-Z0-9\-]{1,31}:([a-zA-Z0-9\(\)\+\,\.\:\=\@\;\$\_\!\*\-]|%[0-9a-fA-F]{2})*#",
-            $this->getDataContainer()->getId()
-        ) && !$this->_validateTagUri($this->getDataContainer()->getId())) {
+        if (!Uri\UriFactory::factory($this->getDataContainer()->getId())->isValid() 
+            && !preg_match(
+                "#^urn:[a-zA-Z0-9][a-zA-Z0-9\-]{1,31}:([a-zA-Z0-9\(\)\+\,\.\:\=\@\;\$\_\!\*\-]|%[0-9a-fA-F]{2})*#",
+                $this->getDataContainer()->getId()) 
+            && !$this->_validateTagUri($this->getDataContainer()->getId())
+        ) {
             throw new Exception('Atom 1.0 IDs must be a valid URI/IRI');
         }
         $id = $dom->createElement('id');
@@ -339,11 +335,11 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\Renderer
     /**
      * Set entry content 
      * 
-     * @param  \DOMDocument $dom 
-     * @param  \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setContent(\DOMDocument $dom, \DOMElement $root)
+    protected function _setContent(DOMDocument $dom, DOMElement $root)
     {
         $content = $this->getDataContainer()->getContent();
         if (!$content && !$this->getDataContainer()->getLink()) {
@@ -393,7 +389,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\Renderer
         $xhtml = preg_replace(array(
             "/(<[\/]?)([a-zA-Z]+)/"   
         ), '$1xhtml:$2', $xhtml);
-        $dom = new \DOMDocument('1.0', $this->getEncoding());
+        $dom = new DOMDocument('1.0', $this->getEncoding());
         $dom->loadXML('<xhtml:div xmlns:xhtml="http://www.w3.org/1999/xhtml">'
             . $xhtml . '</xhtml:div>');
         return $dom->documentElement;
@@ -402,11 +398,11 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\Renderer
     /**
      * Set entry cateories 
      * 
-     * @param  \DOMDocument $dom 
-     * @param  \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setCategories(\DOMDocument $dom, \DOMElement $root)
+    protected function _setCategories(DOMDocument $dom, DOMElement $root)
     {
         $categories = $this->getDataContainer()->getCategories();
         if (!$categories) {
@@ -430,11 +426,11 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\Renderer
     /**
      * Append Source element (Atom 1.0 Feed Metadata)
      *
-     * @param  \DOMDocument $dom 
-     * @param  \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setSource(\DOMDocument $dom, \DOMElement $root)
+    protected function _setSource(DOMDocument $dom, DOMElement $root)
     {
         $source = $this->getDataContainer()->getSource();
         if (!$source) {

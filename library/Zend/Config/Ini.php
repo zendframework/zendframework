@@ -163,10 +163,16 @@ class Ini extends Config
      */
     protected function _loadIniFile($filename)
     {
-        $loaded = @parse_ini_file($filename, true);
+        $this->_setErrorHandler();
+        $loaded = parse_ini_file($filename, true);
+        $errorMessages = $this->_restoreErrorHandler();
         if ($loaded === false) {
-            $err = error_get_last();
-            throw new Exception\RuntimeException($err['message']);
+            $e = null;
+            foreach ($errorMessages as $errMsg) {
+                $e = new Exception\RuntimeException($errMsg, 0, $e);
+            }
+            $e = new Exception\RuntimeException("Can't parse ini file '{$filename}'", 0, $e);
+            throw $e;
         }
 
         $iniArray = array();

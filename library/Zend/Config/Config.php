@@ -86,6 +86,13 @@ class Config implements \Countable, \Iterator
     protected $_extends = array();
 
     /**
+     * Internal error messages
+     *
+     * @var null|array
+     */
+    protected $_errorMessages = array();
+
+    /**
      * Zend_Config provides a property based interface to
      * an array. The data are read-only unless $allowModifications
      * is set to true on construction.
@@ -320,7 +327,6 @@ class Config implements \Countable, \Iterator
         return $this->_loadedSection === null;
     }
 
-
     /**
      * Merge another Zend_Config with this one. The items
      * in $merge will override the same named items in
@@ -453,4 +459,42 @@ class Config implements \Countable, \Iterator
 
         return $firstArray;
     }
+
+    /**
+     * Set internal error handler
+     *
+     * @return void
+     */
+    protected function _setErrorHandler()
+    {
+        set_error_handler(array($this, '_handleError'));
+    }
+
+    /**
+     * Restore internal error handler
+     *
+     * @return array Handled error messages
+     */
+    protected function _restoreErrorHandler()
+    {
+        restore_error_handler();
+        $errorMessages = $this->_errorMessages;
+        $this->_errorMessages = array();
+        return $errorMessages;
+    }
+
+    /**
+     * Handle internal errors
+     *
+     * @param integer $errno
+     * @param string $errstr
+     * @param string $errfile
+     * @param integer $errline
+     * @return void
+     */
+    protected function _handleError($errno, $errstr, $errfile, $errline)
+    {
+        $this->_errorMessages[] = trim($errstr);
+    }
+
 }

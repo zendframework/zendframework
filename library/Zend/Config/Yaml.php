@@ -158,12 +158,19 @@ class Yaml extends Config
             }
         }
 
-        // read the yaml file
-        $yaml = @file_get_contents($yaml);
-        if ($yaml === false) {
-            $err = error_get_last();
-            throw new Exception\RuntimeException($err['message']);
+        // read yaml file
+        $this->_setErrorHandler();
+        $content = file_get_contents($yaml, true);
+        $errorMessages = $this->_restoreErrorHandler();
+        if ($content === false) {
+            $e = null;
+            foreach ($errorMessages as $errMsg) {
+                $e = new Exception\RuntimeException($errMsg, 0, $e);
+            }
+            $e = new Exception\RuntimeException("Can't read file '{$yaml}'", 0, $e);
+            throw $e;
         }
+        $yaml = $content;
 
         // Override static value for ignore_constants if provided in $options
         self::setIgnoreConstants($ignoreConstants);

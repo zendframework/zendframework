@@ -102,7 +102,10 @@ class XmlTest extends \PHPUnit_Framework_TestCase
         $config = new Xml($this->_xmlFileConfig, 'extendserror');
     }
 
-    public function testZF413_MultiSections()
+    /**
+     * @group ZF-413
+     */
+    public function testMultiSections()
     {
         $config = new Xml($this->_xmlFileAllSectionsConfig, array('staging','other_staging'));
 
@@ -110,14 +113,20 @@ class XmlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('staging', $config->hostname);
     }
 
-    public function testZF413_AllSections()
+    /**
+     * @group ZF-413
+     */
+    public function testAllSections()
     {
         $config = new Xml($this->_xmlFileAllSectionsConfig, null);
         $this->assertEquals('otherStaging', $config->other_staging->only_in);
         $this->assertEquals('staging', $config->staging->hostname);
     }
 
-    public function testZF414()
+    /**
+     * @group ZF-414
+     */
+    public function testGetSectionNameAndAreAllSectionsLoaded()
     {
         $config = new Xml($this->_xmlFileAllSectionsConfig, null);
         $this->assertEquals(null, $config->getSectionName());
@@ -132,7 +141,10 @@ class XmlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(false, $config->areAllSectionsLoaded());
     }
 
-    public function testZF415()
+    /**
+     * @group ZF-415
+     */
+    public function testErrorCircularInheritance()
     {
         $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'circular inheritance');
         $config = new Xml($this->_xmlFileCircularConfig, null);
@@ -144,7 +156,10 @@ class XmlTest extends \PHPUnit_Framework_TestCase
         $config = new Xml('',null);
     }
 
-    public function testZF2162_TopLevelString()
+    /**
+     * @group ZF-2162
+     */
+    public function testTopLevelString()
     {
         $config = new Xml($this->_xmlFileTopLevelStringConfig, null);
         $this->assertEquals('one', $config->one);
@@ -159,7 +174,10 @@ class XmlTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testZF2285_MultipleKeysOfTheSameName()
+    /**
+     * @group ZF-2285
+     */
+    public function testMultipleKeysOfTheSameName()
     {
         $config = new Xml($this->_xmlFileSameNameKeysConfig, null);
         $this->assertEquals('2a', $config->one->two->{0});
@@ -168,7 +186,10 @@ class XmlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('5', $config->three->four->{0}->five);
     }
 
-    public function testZF2437_ArraysWithMultipleChildren()
+    /**
+     * @group ZF-2437
+     */
+    public function testArraysWithMultipleChildren()
     {
         $config = new Xml($this->_xmlFileSameNameKeysConfig, null);
         $this->assertEquals('1', $config->six->seven->{0}->eight);
@@ -188,7 +209,7 @@ class XmlTest extends \PHPUnit_Framework_TestCase
         try {
             $config = new Xml($this->_xmlFileInvalid);
             $this->fail('Missing expected exception');
-        } catch (\Zend\Config\Exception\InvalidArgumentException $e) {
+        } catch (\Zend\Config\Exception\RuntimeException $e) {
             // read exception stack
             do {
                 $stack[] = $e;
@@ -206,7 +227,7 @@ class XmlTest extends \PHPUnit_Framework_TestCase
      */
     public function testMissingXmlFile()
     {
-        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'failed to load');
+        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'failed to load');
         $config = new Xml('I/dont/exist');
     }
 
@@ -284,9 +305,8 @@ EOT;
         $this->assertEquals('bar', $config->staging->foo);
     }
 
-    /*
-     * @group 3702
-     *
+    /**
+     * @group ZF-3702
      */
     public function testLoadAnXMLString()
     {
@@ -318,9 +338,8 @@ EOT;
 
     }
 
-    /*
+    /**
      * @group ZF-5800
-     *
      */
     public function testArraysOfKeysCreatedUsingAttributesAndKeys()
     {

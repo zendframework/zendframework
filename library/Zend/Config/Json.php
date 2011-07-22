@@ -103,11 +103,19 @@ class Json extends Config
         }
 
         if ($json[0] != '{') {
-            $json = @file_get_contents($json);
-            if ($json === false) {
-                $err = error_get_last();
-                throw new Exception\RuntimeException($err['message']);
+            // read json file
+            $this->_setErrorHandler();
+            $content = file_get_contents($json, true);
+            $errorMessages = $this->_restoreErrorHandler();
+            if ($content === false) {
+                $e = null;
+                foreach ($errorMessages as $errMsg) {
+                    $e = new Exception\RuntimeException($errMsg, 0, $e);
+                }
+                $e = new Exception\RuntimeException("Can't read file '{$json}'", 0, $e);
+                throw $e;
             }
+            $json = $content;
         }
 
         // Replace constants

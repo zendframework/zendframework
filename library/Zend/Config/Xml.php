@@ -104,11 +104,11 @@ class Xml extends Config
             // create and throw exception stack
             $e = null;
             foreach ($xmlErrors as $xmlError) {
-                $e = new Exception\InvalidArgumentException(
-                    trim($xmlError->message)
-                    . ' @ line/column ' . $xmlError->line . '/' . $xmlError->column,
-                    0,
-                    $e
+                $msg  = trim($xmlError->message);
+                $line = $xmlError->line;
+                $col  = $xmlError->column;
+                $e = new Exception\RuntimeException(
+                    $msg . ' @ line/column ' . $line . '/' . $col, 0, $e
                 );
             }
             throw $e;

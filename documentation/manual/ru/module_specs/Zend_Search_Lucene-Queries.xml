@@ -1,5 +1,6 @@
-<sect1 id="zend.search.lucene.query-api">
-    <title>API для построения запросов<!--Query Construction API--></title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.query-api"><info><title>API для построения запросов<!--Query Construction API--></title></info>
+    
 
     <para>
         В дополнение к автоматическому парсингу запросов есть возможность
@@ -20,8 +21,8 @@ $query = Zend_Search_Lucene_Search_QueryParser::parse($queryString);]]></program
     </para>
 
 
-    <sect2 id="zend.search.lucene.queries.exceptions">
-        <title>Исключения, бросаемые парсером запросов<!--Query Parser Exceptions--></title>
+    <section xml:id="zend.search.lucene.queries.exceptions"><info><title>Исключения, бросаемые парсером запросов<!--Query Parser Exceptions--></title></info>
+        
         <para>
         Парсер запросов может генерировать два типа исключений:
 <!--
@@ -69,10 +70,10 @@ try {
             The same technique may (and should) be used for find() method of Zend_Search_Lucene object.
 -->
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.queries.term-query">
-            <title>Простой запрос (запрос по одному ключевому слову)<!--Term Query--></title>
+    <section xml:id="zend.search.lucene.queries.term-query"><info><title>Простой запрос (запрос по одному ключевому слову)<!--Term Query--></title></info>
+            
         <para>
         Простые запросы предназначены для поиска по одному элементу.
 <!--
@@ -86,8 +87,8 @@ try {
         Query string:
 -->
         </para>
-        <programlisting language="querystring"><![CDATA[word1]]>
-        </programlisting>
+        <programlisting language="querystring"><![CDATA[word1
+        ]]></programlisting>
 
         <para>или</para>
 
@@ -115,10 +116,10 @@ $query = new Zend_Search_Lucene_Search_Query_Term($term);
 $hits  = $index->find($query);]]></programlisting>
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.queries.multiterm-query">
-        <title>Составной запрос (запрос по нескольким ключевым словам)<!--Multi-Term Query--></title>
+    <section xml:id="zend.search.lucene.queries.multiterm-query"><info><title>Составной запрос (запрос по нескольким ключевым словам)<!--Multi-Term Query--></title></info>
+        
         <para>
             Составные запросы предназначены для поиска по набору элементов.
 <!--
@@ -278,10 +279,10 @@ $hits  = $index->find($query);]]></programlisting>
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.queries.phrase-query">
-        <title>Фразовый запрос<!--Phrase Query--></title>
+    <section xml:id="zend.search.lucene.queries.phrase-query"><info><title>Фразовый запрос<!--Phrase Query--></title></info>
+        
         <para>
             Фразовые запросы предназначены для поиска по фразам.
 <!--
@@ -568,9 +569,5 @@ $hits1 = $index->find($query);
 $query->setSlop(2);
 $hits2 = $index->find($query);]]></programlisting>
 
-    </sect2>
-</sect1>
-
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

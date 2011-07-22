@@ -1,15 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.exception.basic">
-    <title>Basic usage</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.basic"><info><title>Basic usage</title></info>
+    
 
     <para>
         <classname>Zend_Exception</classname> is the base class for all exceptions thrown by Zend
         Framework.  This class extends the base <classname>Exception</classname> class of PHP.
     </para>
 
-    <example id="zend.exception.catchall.example">
-        <title>Catch all Zend Framework exceptions</title>
+    <example xml:id="zend.exception.catchall.example"><info><title>Catch all Zend Framework exceptions</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 try {
@@ -20,8 +19,8 @@ try {
 ]]></programlisting>
     </example>
 
-    <example id="zend.exception.catchcomponent.example">
-        <title>Catch exceptions thrown by a specific component of Zend Framework</title>
+    <example xml:id="zend.exception.catchcomponent.example"><info><title>Catch exceptions thrown by a specific component of Zend Framework</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 try {
@@ -31,7 +30,4 @@ try {
 }
 ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.session.savehandler.dbtable">
-    <title>Zend_Session_SaveHandler_DbTable</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.savehandler.dbtable"><info><title>Zend_Session_SaveHandler_DbTable</title></info>
+    
 
     <para>
         The basic setup for <classname>Zend_Session_SaveHandler_DbTable</classname> must at least
@@ -10,12 +9,12 @@
         id which by default is a string of length 32;
         modified, which is the unix timestamp of the last modified date;
         lifetime, which is the lifetime of the session
-        (<command>modified + lifetime > time();</command>);
+        (<command>modified + lifetime &gt; time();</command>);
         and data, which is the serialized data stored in the session
     </para>
 
-    <example id="zend.session.savehandler.dbtable.basic">
-            <title>Basic Setup</title>
+    <example xml:id="zend.session.savehandler.dbtable.basic"><info><title>Basic Setup</title></info>
+            
 
             <programlisting language="SQL"><![CDATA[
 CREATE TABLE `session` (
@@ -63,8 +62,8 @@ Zend_Session::start();
         <classname>Zend_Session_SaveHandler_DbTable</classname>.
     </para>
 
-    <example id="zend.session.savehandler.dbtable.multi-column-key">
-        <title>Using a Multi-Column Primary Key</title>
+    <example xml:id="zend.session.savehandler.dbtable.multi-column-key"><info><title>Using a Multi-Column Primary Key</title></info>
+        
 
         <programlisting language="SQL"><![CDATA[
 CREATE TABLE `session` (
@@ -110,7 +109,4 @@ Zend_Session::start();
 //use Zend_Session as normal
 ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.encoding">
-    <title>Кодировка</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.encoding"><info><title>Кодировка</title></info>
+    
     <para>
         Тела сообщений в текстовом и HTML форматах по умолчанию кодируются
         по алгоритму quoted-printable, если только вы не указали
@@ -40,7 +39,4 @@ $mail->setHeaderEncoding(Zend_Mime::ENCODING_BASE64);
         начинающиеся с одной или двух точек, поэтому сообщение не будет нарушать
         протокол SMTP.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

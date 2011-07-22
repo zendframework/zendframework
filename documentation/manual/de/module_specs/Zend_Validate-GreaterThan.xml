@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21821 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.greaterthan">
-    <title>GreaterThan</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.greaterthan"><info><title>GreaterThan</title></info>
+    
 
     <para>
         <classname>Zend_Validate_GreaterThan</classname> erlaubt es zu prüfen ob ein angegebener
         Wert größer ist als ein minimaler Grenzwert.
     </para>
 
-    <note>
-        <title>Zend_Validate_GreaterThan unterstützt nur die Überprüfung von Nummern</title>
+    <note><info><title>Zend_Validate_GreaterThan unterstützt nur die Überprüfung von Nummern</title></info>
+        
 
         <para>
             Es sollte beachtet werden das <classname>Zend_Validate_GreaterThan</classname> nur die
@@ -19,8 +17,8 @@
         </para>
     </note>
 
-    <sect3 id="zend.validate.set.greaterthan.options">
-        <title>Unterstützte Optionen für Zend_Validate_GreaterThan</title>
+    <section xml:id="zend.validate.set.greaterthan.options"><info><title>Unterstützte Optionen für Zend_Validate_GreaterThan</title></info>
+        
 
         <para>
             Die folgenden Optionen werden für <classname>Zend_Validate_GreaterThan</classname>
@@ -35,10 +33,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.greaterthan.basic">
-        <title>Normale Verwendung</title>
+    <section xml:id="zend.validate.set.greaterthan.basic"><info><title>Normale Verwendung</title></info>
+        
 
         <para>
             Um zu prüfen ob ein angegebener Wert größer als eine definierte Grenze ist kann einfach
@@ -56,5 +54,5 @@ $return = $valid->isValid($value);
             Das obige Beispiel gibt für alle Werte <constant>TRUE</constant> zurück die 10 sind
             oder größer als 10.
         </para>
-    </sect3>
-</sect2>
+    </section>
+</section>

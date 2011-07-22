@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20774 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.callback">
-    <title>Callback</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.callback"><info><title>Callback</title></info>
+    
     <para>
         Ce filtre vous permet d'utiliser votre propre fonction en tant que filtre de
         <classname>Zend_Filter</classname>. Nul besoin de créer un filtre si une fonction ou
@@ -72,4 +70,4 @@ $value = MyMethod('Hello', 'param1', 'param2');
         </para>
     </note>
 
-</sect2>
+</section>

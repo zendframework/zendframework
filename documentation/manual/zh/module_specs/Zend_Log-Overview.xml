@@ -1,5 +1,6 @@
-<sect1 id="zend.log.overview">
-    <title>概述</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.overview"><info><title>概述</title></info>
+    
 
     <para>
       <code>Zend_Log</code> 是一个通用日志组件.
@@ -29,8 +30,8 @@
       </itemizedlist>
     </para>
 
-    <sect2 id="zend.log.overview.creating-a-logger">
-      <title>创建Log</title>
+    <section xml:id="zend.log.overview.creating-a-logger"><info><title>创建Log</title></info>
+      
       <para>
         如要启动日志纪录,实例化一个Writer并把它传递给Log实例:
         <programlisting role="php"><![CDATA[
@@ -38,8 +39,8 @@ $logger = new Zend_Log();
 $writer = new Zend_Log_Writer_Stream('php://output');
 
 $logger->addWriter($writer);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         注意Log必须至少有一个Writer.你可以用<code>addWriter</code>方法添加任意数量的Writer.
       </para>
@@ -50,23 +51,23 @@ $logger->addWriter($writer);
         <programlisting role="php"><![CDATA[
 $writer = new Zend_Log_Writer_Stream('php://output');
 $logger = new Zend_Log($writer);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         现在Log就可以使用了.
       </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.log.overview.logging-messages">
-      <title>日志消息</title>
+    <section xml:id="zend.log.overview.logging-messages"><info><title>日志消息</title></info>
+      
 
       <para>
         要纪录消息,调用Log实例的<code>log()</code>方法,并向其传递消息和消息等级.
 
       <programlisting role="php"><![CDATA[
 $logger->log('Informational message', Zend_Log::INFO);
-]]>
-      </programlisting>
+
+      ]]></programlisting>
 
       <code>log()</code>方法的第一个参数是是一个字符串<code>message</code>,第二个参数是一个整数<code>priority</code>.
       priortiy必须是一个可以被Log实例识别的消息等级之一.这会在下一节解释.
@@ -81,13 +82,13 @@ $logger->info('Informational message');
 
 $logger->log('Emergency message', Zend_Log::EMERG);
 $logger->emerg('Emergency message');
-]]>
-      </programlisting>
-    </para>
-  </sect2>
 
-  <sect2 id="zend.log.overview.destroying-a-logger">
-    <title>销毁Log</title>
+      ]]></programlisting>
+    </para>
+  </section>
+
+  <section xml:id="zend.log.overview.destroying-a-logger"><info><title>销毁Log</title></info>
+    
     <para>
 
       如果Log对象不再需要,设置包含Log实例的变量为<code>null</code>即可销毁它.
@@ -95,15 +96,15 @@ $logger->emerg('Emergency message');
 
       <programlisting role="php"><![CDATA[
 $logger = null;
-]]>
-      </programlisting>
+
+      ]]></programlisting>
 
       在此方法中明确的销毁日志是可选的,并且在PHP关闭是自动执行.
     </para>
-  </sect2>
+  </section>
 
-  <sect2 id="zend.log.overview.builtin-priorities">
-    <title>使用内建的消息等级</title>
+  <section xml:id="zend.log.overview.builtin-priorities"><info><title>使用内建的消息等级</title></info>
+    
     <para>
       <code>Zend_Log</code> 类定义了下面的消息等级:
 
@@ -115,17 +116,17 @@ ERR     = 3;  // Error: 错误
 WARN    = 4;  // Warning: 警告
 NOTICE  = 5;  // Notice: 通知
 INFO    = 6;  // Informational: 一般信息
-DEBUG   = 7;  // Debug: 小时消息]]>
-      </programlisting>
+DEBUG   = 7;  // Debug: 小时消息
+      ]]></programlisting>
 
       这些属性总是可用的.同样还可以使用其对应的快捷方法.
     </para>
 
     <para>
       消息等级不是任意的,它们来自BSD的<code>syslog</code>协议,它们在
-      <ulink url="http://tools.ietf.org/html/rfc3164">RFC-3164</ulink>
+      <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://tools.ietf.org/html/rfc3164">RFC-3164</link>
       RFC文档中有阐述.名字和对应的消息等级号于其他PHP日志系统是兼容的,
-      例如<ulink url="http://pear.php.net/package/log">PEAR Log</ulink>,
+      例如<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://pear.php.net/package/log">PEAR Log</link>,
       它也许能够和<code>Zend_Log</code>进行互操作.
 
     </para>
@@ -135,18 +136,18 @@ DEBUG   = 7;  // Debug: 小时消息]]>
       <code>DEBUG</code> (7) 是内建属性中的次重要的消息等级.你可以定义重要性低于<code>DEBUG</code>的属性.
       当在日志消息中选择消息等级时,要知道消息等级的层次并选择合适的消息等级.
     </para>
-  </sect2>
+  </section>
 
-  <sect2 id="zend.log.overview.user-defined-priorities">
-    <title>添加用户定义的日志等级</title>
+  <section xml:id="zend.log.overview.user-defined-priorities"><info><title>添加用户定义的日志等级</title></info>
+    
 
     <para>
       用户定义的消息等级可以在运行时通过Log对象的<code>addPriority()</code>方法添加:
 
       <programlisting role="php"><![CDATA[
 $logger->addPriority('FOO', 8);
-]]>
-      </programlisting>
+
+      ]]></programlisting>
 
     上面的代码片断创建了一个新的日志消息等级, <code>FOO</code>,它的值为 <code>8</code>,
     这个新的消息等级可以被用于日志:
@@ -154,15 +155,15 @@ $logger->addPriority('FOO', 8);
       <programlisting role="php"><![CDATA[
 $logger->log('Foo message', 8);
 $logger->foo('Foo Message');
-]]>
-      </programlisting>
+
+      ]]></programlisting>
 
       新的消息等级不能覆盖已有的.
     </para>
-  </sect2>
+  </section>
 
-  <sect2 id="zend.log.overview.understanding-fields">
-    <title>理解日志事件</title>
+  <section xml:id="zend.log.overview.understanding-fields"><info><title>理解日志事件</title></info>
+    
 
     <para>
       当你调用<code>log()</code>方法或它们的快捷方式时,日志事件即被创建.这是一个简单的关联数组,
@@ -181,8 +182,8 @@ $logger->foo('Foo Message');
 
       <programlisting role="php"><![CDATA[
 $logger->setEventItem('pid', getmypid());
-]]>
-      </programlisting>
+
+      ]]></programlisting>
 
       上面的例子设置了一个名为<code>pid</code>的新项并设置它为当前进程的PID.一旦一个新的项被设置,
       在日志纪录中,它自动对其他所有writer和所有事件数据可用.一个项可以在任何时候再次调用<code>setEventItem()</code>
@@ -194,5 +195,5 @@ $logger->setEventItem('pid', getmypid());
       这不能保证writer实际地纪录了该项.这是由于writer并不知道该怎么做,除非formatter通告了一个新项.
       要了解更多,请查看Formatter.
     </para>
-  </sect2>
-</sect1>
+  </section>
+</section>

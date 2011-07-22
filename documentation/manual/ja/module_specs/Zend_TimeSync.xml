@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20807 -->
-<sect1 id="zend.timesync.introduction">
+<?xml version="1.0" encoding="utf-8"?>
 
-    <title>導入</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.timesync.introduction"><info><title>導入</title></info>
+
+    
 
     <para>
         <classname>Zend_TimeSync</classname> は、インターネット時刻
@@ -20,9 +20,9 @@
         NTP や SNTP 経由の実際の時刻とサーバの時刻との差を考慮して動作します。
     </para>
 
-    <note>
+    <note><info><title>背景</title></info>
 
-        <title>背景</title>
+        
 
         <para>
             <classname>Zend_TimeSync</classname> はサーバの時刻を変更することはできません。
@@ -32,9 +32,9 @@
 
     </note>
 
-    <sect2 id="zend.timesync.introduction.why">
+    <section xml:id="zend.timesync.introduction.why"><info><title>なぜ Zend_TimeSync ?</title></info>
 
-        <title>なぜ Zend_TimeSync ?</title>
+        
 
         <para>
             いったいなぜ <classname>Zend_TimeSync</classname> を使うのでしょう?
@@ -53,7 +53,7 @@
             <classname>Zend_TimeSync</classname> の使用に適した例をいくつかあげてみます。
         </para>
 
-        <itemizedlist mark='opencircle'>
+        <itemizedlist mark="opencircle">
             <listitem>
                 <para>
                     <emphasis>タイムサービスのないサーバ</emphasis>
@@ -102,26 +102,26 @@
             サーバ上で何らかのサービスを実行することができない場合にも使用できます。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.timesync.introduction.ntp">
+    <section xml:id="zend.timesync.introduction.ntp"><info><title>NTP とは?</title></info>
 
-        <title>NTP とは?</title>
+        
 
         <para>
             Network Time Protocol (<emphasis>NTP</emphasis>)
             は、ネットワーク上のパケット交換によってコンピュータシステムの時刻を同期させるプロトコルです。
             NTP は UDP ポート 123 を使用します。このプロトコルについての詳細は
-            <ulink url="http://en.wikipedia.org/wiki/Network_Time_Protocol">wikipedia の記事</ulink>
-            (<ulink url="http://ja.wikipedia.org/wiki/Network_Time_Protocol">日本語</ulink>)
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Network_Time_Protocol">wikipedia の記事</link>
+            (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ja.wikipedia.org/wiki/Network_Time_Protocol">日本語</link>)
             を参照ください。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.timesync.introduction.sntp">
+    <section xml:id="zend.timesync.introduction.sntp"><info><title>SNTP とは?</title></info>
 
-        <title>SNTP とは?</title>
+        
 
         <para>
             Simple Network Time Protocol (<emphasis>SNTP</emphasis>)
@@ -130,11 +130,11 @@
             プロトコルに似ていますが、よりシンプルです。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.timesync.introduction.problematic">
+    <section xml:id="zend.timesync.introduction.problematic"><info><title>問題のある使用法</title></info>
 
-        <title>問題のある使用法</title>
+        
 
         <para>
             <classname>Zend_TimeSync</classname> を使用する際は、
@@ -144,18 +144,18 @@
             を使う前に熟読しておきましょう。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.timesync.introduction.decision">
+    <section xml:id="zend.timesync.introduction.decision"><info><title>どのサーバを使用するか</title></info>
 
-        <title>どのサーバを使用するか</title>
+        
 
         <para>
             どのタイムサーバを使用するかは注意して決めなければいけません。
             これには、次のような理由があります。
         </para>
 
-        <itemizedlist mark='opencircle'>
+        <itemizedlist mark="opencircle">
             <listitem>
                 <para>
                     距離
@@ -207,12 +207,12 @@
         </para>
 
         <para>
-            まずは <ulink url="http://www.pool.ntp.org">pool.ntp.org</ulink>
+            まずは <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.pool.ntp.org">pool.ntp.org</link>
             で一番近いサーバプールを見つけましょう。たとえばサーバがドイツ国内にあるのなら
             <emphasis>0.europe.pool.ntp.org</emphasis>
             を使用することになるでしょう。
         </para>
 
-    </sect2>
+    </section>
 
-</sect1>
+</section>

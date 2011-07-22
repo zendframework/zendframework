@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21829 -->
-<sect1 id="zend.memory.overview">
-    <title>概要</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.memory.overview"><info><title>概要</title></info>
+    
 
-    <sect2 id="zend.memory.introduction">
-        <title>導入</title>
+    <section xml:id="zend.memory.introduction"><info><title>導入</title></info>
+        
 
         <para>
             <classname>Zend_Memory</classname> コンポーネントは、
@@ -33,8 +31,8 @@
             を使用しています。
         </para>
 
-        <example id="zend.memory.introduction.example-1">
-            <title>Zend_Memory コンポーネントの使用法</title>
+        <example xml:id="zend.memory.introduction.example-1"><info><title>Zend_Memory コンポーネントの使用法</title></info>
+            
 
             <para>
                 <methodname>Zend_Memory::factory()</methodname> は、
@@ -65,11 +63,11 @@ $loadedFiles[$index2]->value = $newValue;
 $loadedFiles[$index3]->value[$charIndex] = '_';
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.memory.theory-of-operation">
+    <section xml:id="zend.memory.theory-of-operation"><info><title>動作原理</title></info>
 
-        <title>動作原理</title>
+        
 
         <para>
             <classname>Zend_Memory</classname> コンポーネントは、以下の概念で構成されています。
@@ -93,9 +91,9 @@ $loadedFiles[$index3]->value[$charIndex] = '_';
             </itemizedlist>
         </para>
 
-        <sect3 id="zend.memory.theory-of-operation.manager">
+        <section xml:id="zend.memory.theory-of-operation.manager"><info><title>メモリマネージャ</title></info>
 
-            <title>メモリマネージャ</title>
+            
 
             <para>
                 メモリマネージャは、アプリケーションからの要求に応じて
@@ -103,11 +101,11 @@ $loadedFiles[$index3]->value[$charIndex] = '_';
                 それをメモリコンテナオブジェクトにラッピングしたものを返します。
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.memory.theory-of-operation.container">
+        <section xml:id="zend.memory.theory-of-operation.container"><info><title>メモリコンテナ</title></info>
 
-            <title>メモリコンテナ</title>
+            
 
             <para>
                 メモリコンテナは、文字列型の属性 <code>value</code> を
@@ -142,11 +140,11 @@ $memObject->value = substr($memObject->value, $start, $length);
                 </para>
             </note>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.memory.theory-of-operation.locked">
+        <section xml:id="zend.memory.theory-of-operation.locked"><info><title>ロックされたメモリ</title></info>
 
-            <title>ロックされたメモリ</title>
+            
 
             <para>
                 ロックされたメモリオブジェクトは、常にメモリ内に保持されます。
@@ -154,11 +152,11 @@ $memObject->value = substr($memObject->value, $start, $length);
                 決してキャッシュにスワップされることはありません。
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.memory.theory-of-operation.movable">
+        <section xml:id="zend.memory.theory-of-operation.movable"><info><title>移動可能なメモリ</title></info>
 
-            <title>移動可能なメモリ</title>
+            
 
             <para>
                 移動可能なメモリオブジェクトは、
@@ -169,12 +167,12 @@ $memObject->value = substr($memObject->value, $start, $length);
             <para>
                 メモリマネージャは、指定した最小値より小さいサイズのオブジェクトはスワップしません。
                 これは、パフォーマンスを考慮した判断です。詳細は
-                <xref linkend="zend.memory.memory-manager.settings.min-size" />
+                <xref linkend="zend.memory.memory-manager.settings.min-size"/>
                 を参照ください。
             </para>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-</sect1>
+</section>

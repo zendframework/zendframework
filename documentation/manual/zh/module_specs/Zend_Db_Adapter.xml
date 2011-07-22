@@ -1,10 +1,11 @@
-﻿<sect1 id="zend.db.adapter">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.adapter"><info><title>Zend_Db_Adapter</title></info>
 
-    <title>Zend_Db_Adapter</title>
+    
 
-    <sect2 id="zend.db.adapter.introduction">
+    <section xml:id="zend.db.adapter.introduction"><info><title>简介 </title></info>
 
-        <title>简介 </title>
+        
 
         <para>
             <code>Zend_Db_Adapter</code>是zendfrmaeword的数据库抽象层api.
@@ -48,11 +49,11 @@ $db = Zend_Db::factory('PDO_SQLITE', $params);
         <para>
           任一种方法都可以让你使用同样的api查询数据库。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.quoting">
+    <section xml:id="zend.db.adapter.quoting"><info><title>添加引号防止数据库攻击</title></info>
 
-        <title>添加引号防止数据库攻击</title>
+        
 
         <para>
             你应该处理将在sql语句中使用的条件值；这对于防止sql语句攻击是很有好处的。
@@ -99,11 +100,11 @@ $where = $db->quoteInto('id IN(?)', array(1, 2, 3));
 // $where 现在为 'id IN("1", "2", "3")' (一个逗号分隔的字符串)
 
 ?>]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.查询">
+    <section xml:id="zend.db.adapter.查询"><info><title>直接查询</title></info>
 
-        <title>直接查询</title>
+        
 
         <para>
             一旦你得到了一个<code>Zend_Db_Adapter</code> 实例, 你可以直接
@@ -166,11 +167,11 @@ $stmt->execute();
 $rows = $stmt->fetchAll();
 
 ?>]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.事务处理">
+    <section xml:id="zend.db.adapter.事务处理"><info><title>事务处理</title></info>
 
-        <title>事务处理</title>
+        
 
         <para>
             默认情况下，PDO(因此 <code> Zend_Db_Adapter</code> 也是)是采用自动commit模式。
@@ -197,11 +198,11 @@ try {
 }
 
 ?>]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.insert">
+    <section xml:id="zend.db.adapter.insert"><info><title>插入数据行</title></info>
 
-        <title>插入数据行</title>
+        
 
         <para>
             为了方便起见，你可以使用 <code> insert()</code>方法将要插入的数据绑定并创建
@@ -238,11 +239,11 @@ $rows_affected = $db->insert($table, $row);
 $last_insert_id = $db->lastInsertId();
 
 ?>]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.update">
+    <section xml:id="zend.db.adapter.update"><info><title>更新数据行</title></info>
 
-        <title>更新数据行</title>
+        
 
         <para>
             为了方便起见，你可以使用 <code>update() </code>方法确定需要update的数据并且创建一个
@@ -278,11 +279,11 @@ $where = $db->quoteInto('first_name = ?', 'Robin');
 $rows_affected = $db->update($table, $set, $where);
 
 ?>]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.delete">
+    <section xml:id="zend.db.adapter.delete"><info><title>删除数据行</title></info>
 
-        <title>删除数据行</title>
+        
 
         <para>
             为了方便起见，你可以使用 <code>delete() </code>方法创建一个delete语句；你
@@ -308,11 +309,11 @@ $where = $db->quoteInto('first_name = ?', 'Patsy');
 $rows_affected = $db->delete($table, $where);
 
 ?>]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.fetch">
+    <section xml:id="zend.db.adapter.fetch"><info><title>取回查询结果</title></info>
 
-        <title>取回查询结果</title>
+        
 
         <para>
             尽管你可以使用<code>query()</code>方法直接对数据库进行操作，但是通常情况
@@ -375,9 +376,6 @@ $result = $db->fetchRow(
 );
 
 ?>]]></programlisting>
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

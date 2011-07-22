@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.feed.modifying-feed">
-    <title>Modifying Feed and Entry structures</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.modifying-feed"><info><title>Modifying Feed and Entry structures</title></info>
+    
 
     <para>
         <classname>Zend_Feed</classname>'s natural syntax extends to constructing and modifying
@@ -9,8 +8,8 @@
         back into well-formed <acronym>XML</acronym> for saving to a file or sending to a server.
     </para>
 
-    <example id="zend.feed.modifying-feed.example.modifying">
-        <title>Modifying an Existing Feed Entry</title>
+    <example xml:id="zend.feed.modifying-feed.example.modifying"><info><title>Modifying an Existing Feed Entry</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
@@ -45,8 +44,8 @@ echo $entry->saveXML();
         go into the default namespace if you do not explicitly specify another namespace.
     </para>
 
-    <example id="zend.feed.modifying-feed.example.creating">
-        <title>Creating an Atom Entry with Elements of Custom Namespaces</title>
+    <example xml:id="zend.feed.modifying-feed.example.creating"><info><title>Creating an Atom Entry with Elements of Custom Namespaces</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $entry = new Zend_Feed_Entry_Atom();
@@ -65,7 +64,4 @@ $entry->{'myns:container_elt'}->part2 = 'second nested custom part';
 echo $entry->saveXML();
 ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.feed.findFeeds">
-    <title>Retrieving Feeds from Web Pages</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.findFeeds"><info><title>Retrieving Feeds from Web Pages</title></info>
+    
 
     <para>
         Web pages often contain <emphasis>&lt;link&gt;</emphasis> tags that refer to feeds with
@@ -23,7 +22,4 @@ $feedArray = Zend_Feed::findFeeds('http://www.example.com/news.html');
         a <classname>Zend_Feed_Exception</classname> upon failure, such as an
         <acronym>HTTP</acronym> 404 response code or a malformed feed.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

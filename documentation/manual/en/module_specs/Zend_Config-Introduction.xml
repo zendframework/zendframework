@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.config.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_Config</classname> is designed to simplify the access to, and the use of,
@@ -9,17 +8,15 @@
         interface for accessing this configuration data within application code. The configuration
         data may come from a variety of media supporting hierarchical data storage. Currently
         <classname>Zend_Config</classname> provides adapters for configuration data that are stored
-        in text files with <link
-            linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link> and
+        in text files with <link linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link> and
         <link linkend="zend.config.adapters.xml"><classname>Zend_Config_Xml</classname></link>.
     </para>
 
-    <example id="zend.config.introduction.example.using">
-        <title>Using Zend_Config</title>
+    <example xml:id="zend.config.introduction.example.using"><info><title>Using Zend_Config</title></info>
+        
 
         <para>
-            Normally it is expected that users would use one of the adapter classes such as <link
-                linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link> or
+            Normally it is expected that users would use one of the adapter classes such as <link linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link> or
             <link linkend="zend.config.adapters.xml"><classname>Zend_Config_Xml</classname></link>,
             but if configuration data are available in a <acronym>PHP</acronym> array, one may
             simply pass the data to the <classname>Zend_Config</classname> constructor in order to
@@ -72,8 +69,8 @@ $db = Zend_Db::factory($config->database);
 $host = $config->database->get('host', 'localhost');
 ]]></programlisting>
 
-    <example id="zend.config.introduction.example.file.php">
-        <title>Using Zend_Config with a PHP Configuration File</title>
+    <example xml:id="zend.config.introduction.example.file.php"><info><title>Using Zend_Config with a PHP Configuration File</title></info>
+        
 
         <para>
             It is often desirable to use a pure <acronym>PHP</acronym>-based configuration file.
@@ -104,7 +101,4 @@ $config = new Zend_Config(require 'config.php');
 echo $config->webhost;
 ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

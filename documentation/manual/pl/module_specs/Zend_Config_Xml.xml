@@ -1,5 +1,6 @@
-<sect1 id="zend.config.adapters.xml">
-    <title>Zend_Config_Xml</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.xml"><info><title>Zend_Config_Xml</title></info>
+    
     <para>
         <code>Zend_Config_Xml</code> pozwala programistom przechowywać dane
         konfiguracyjne w prostym formacie XML a następnie odczytywać je w aplikacji
@@ -13,8 +14,8 @@
         a wartość tego atrybutu odpowiada nazwie sekcji, której dane mają być
         odziedziczone przez rozszerzającą sekcję.
     </para>
-    <note>
-        <title>Zwracany typ</title>
+    <note><info><title>Zwracany typ</title></info>
+        
         <para>
             Dane konfiguracyjne odczytywane przez <code>Zend_Config_Xml</code> są
             zawsze zwracane jako łańcuchy znaków. Konwersja danych z łańcuchów znaków
@@ -22,8 +23,8 @@
             do własnych potrzeb.
         </para>
     </note>
-    <example id="zend.config.adapters.xml.example.using">
-        <title>Użycie Zend_Config_Xml</title>
+    <example xml:id="zend.config.adapters.xml.example.using"><info><title>Użycie Zend_Config_Xml</title></info>
+        
         <para>
             Ten przykład pokazuje podstawowe użycie klasy <code>Zend_Config_Xml</code>
             do ładowania danych konfiguracyjnych z pliku XML. W tym przykładzie
@@ -62,8 +63,8 @@
         </database>
     </staging>
 </configdata>
-]]>
-        </programlisting>
+
+        ]]></programlisting>
         <para>
             Następnie załóżmy, że programista aplikacji potrzebuje danych
             konfiguracyjnych aplikacji rozbudowywanej z pliku XML. Prostą 
@@ -75,11 +76,11 @@ $config = new Zend_Config_Xml('/path/to/config.xml', 'staging');
 
 echo $config->database->params->host; // wyświetla "dev.example.com"
 echo $config->database->params->dbname; // wyświetla "dbname"
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
-    <example id="zend.config.adapters.xml.example.attributes">
-        <title>Używanie atrybutów znaczników w Zend_Config_Xml</title>
+    <example xml:id="zend.config.adapters.xml.example.attributes"><info><title>Używanie atrybutów znaczników w Zend_Config_Xml</title></info>
+        
         <para>
             Komponent Zend_Config_Xml obsługuje także dwa inne sposoby
             definiowania elementów w pliku konfiguracyjnym. Oba sposoby używają
@@ -103,8 +104,8 @@ echo $config->database->params->dbname; // wyświetla "dbname"
         </database>
     </staging>
 </configdata>
-]]>
-        </programlisting>
+
+        ]]></programlisting>
         <para>
             Kolejny sposób tak naprawdę nie zmniejsza objętości pliku
             konfiguracyjnego, ale ułatwia zarządzanie nim, ponieważ eliminuje
@@ -137,7 +138,7 @@ echo $config->database->params->dbname; // wyświetla "dbname"
         </database>
     </staging>
 </configdata>
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
-</sect1>
+</section>

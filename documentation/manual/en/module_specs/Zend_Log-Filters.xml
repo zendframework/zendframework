@@ -1,14 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.log.filters">
-    <title>Filters</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.filters"><info><title>Filters</title></info>
+    
 
     <para>
         A Filter object blocks a message from being written to the log.
     </para>
 
-    <sect2 id="zend.log.filters.all-writers">
-        <title>Filtering for All Writers</title>
+    <section xml:id="zend.log.filters.all-writers"><info><title>Filtering for All Writers</title></info>
+        
 
         <para>
             To filter before all writers, you can add any number of Filters to a
@@ -35,10 +34,10 @@ $logger->emerg('Emergency message');
             When you add one or more Filters to the Log object, the message must pass
             through all of the Filters before any Writers receives it.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.log.filters.single-writer">
-        <title>Filtering for a Writer Instance</title>
+    <section xml:id="zend.log.filters.single-writer"><info><title>Filtering for a Writer Instance</title></info>
+        
 
         <para>
             To filter only on a specific Writer instance, use the
@@ -64,5 +63,5 @@ $logger->info('Informational message');
 // logged by both writers
 $logger->emerg('Emergency message');
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

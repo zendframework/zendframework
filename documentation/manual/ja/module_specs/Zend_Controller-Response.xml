@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 17583 -->
-<sect1 id="zend.controller.response">
-    <title>レスポンスオブジェクト</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.response"><info><title>レスポンスオブジェクト</title></info>
+    
 
-    <sect2 id="zend.controller.response.usage">
-        <title>使用法</title>
+    <section xml:id="zend.controller.response.usage"><info><title>使用法</title></info>
+        
 
         <para>
             レスポンスオブジェクトは、
@@ -73,8 +71,7 @@ $this->getResponse()
 
         <note>
             <para>
-                アクションコントローラで <link
-                    linkend="zend.controller.action.viewintegration">ビューの統合
+                アクションコントローラで <link linkend="zend.controller.action.viewintegration">ビューの統合
                     </link> を使用する場合は、
                 レンダリングされたビュースクリプトの内容をレスポンスオブジェクトに設定する必要はありません。
                 <methodname>Zend_Controller_Action::render()</methodname> がデフォルトでこれを行います。
@@ -136,10 +133,10 @@ $response->sendResponse();
 $front->throwExceptions(true);
 $front->dispatch();
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.response.headers">
-        <title>ヘッダの操作</title>
+    <section xml:id="zend.controller.response.headers"><info><title>ヘッダの操作</title></info>
+        
 
         <para>
             先ほど説明したように、レスポンスオブジェクトの役割のひとつは
@@ -236,10 +233,10 @@ $front->dispatch();
             <methodname>setHttpResponseCode()</methodname> と
             <methodname>getHttpResponseCode()</methodname> が用意されています。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.response.namedsegments">
-        <title>名前つきセグメント</title>
+    <section xml:id="zend.controller.response.namedsegments"><info><title>名前つきセグメント</title></info>
+        
 
         <para>
             レスポンスオブジェクトでは「名前つきセグメント」をサポートしています。
@@ -373,10 +370,10 @@ array(
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.response.exceptions">
-        <title>レスポンスオブジェクト内での例外の検査</title>
+    <section xml:id="zend.controller.response.exceptions"><info><title>レスポンスオブジェクト内での例外の検査</title></info>
+        
 
         <para>
             先ほど説明したように、デフォルトでは
@@ -466,10 +463,10 @@ array(
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.response.subclassing">
-        <title>レスポンスオブジェクトのサブクラスの作成</title>
+    <section xml:id="zend.controller.response.subclassing"><info><title>レスポンスオブジェクトのサブクラスの作成</title></info>
+        
 
         <para>
             レスポンスオブジェクトの役割は、
@@ -494,8 +491,5 @@ array(
             <acronym>PHP</acronym>-<acronym>GTK</acronym> の場合はヘッダを送信しないなど)
             名前つきセグメントに保存された内容の最終結果を返す機能を追加したりといったことが考えられます。
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

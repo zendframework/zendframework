@@ -61,6 +61,11 @@ abstract class AbstractDb extends AbstractValidator
     );
 
     /**
+     * @var null|DBSelect
+     */
+    protected $_select;
+
+    /**
      * @var string
      */
     protected $_schema = null;
@@ -219,6 +224,16 @@ abstract class AbstractDb extends AbstractValidator
     }
 
     /**
+     * Get select statement generated during validation
+     * 
+     * @return DBSelect
+     */
+    public function getSelect()
+    {
+        return $this->_select;
+    }
+
+    /**
      * Returns the set table
      *
      * @return string
@@ -284,8 +299,12 @@ abstract class AbstractDb extends AbstractValidator
          * Build select object
          */
         $select = new DBSelect($this->_adapter);
-        $select->from($this->_table, array($this->_field), $this->_schema)
-               ->where($this->_adapter->quoteIdentifier($this->_field, true).' = ?', $value);
+        $select->from($this->_table, array($this->_field), $this->_schema);
+        if ($this->_adapter->supportsParameters('named')) {
+            $select->where($this->_adapter->quoteIdentifier($this->_field, true) . ' = :value'); // named
+        } else {
+            $select->where($this->_adapter->quoteIdentifier($this->_field, true) . ' = ?'); // positional
+        }
         if ($this->_exclude !== null) {
             if (is_array($this->_exclude)) {
                 $select->where($this->_adapter->quoteIdentifier($this->_exclude['field'], true).' != ?', $this->_exclude['value']);
@@ -294,11 +313,16 @@ abstract class AbstractDb extends AbstractValidator
             }
         }
         $select->limit(1);
+        $this->_select = $select;
 
         /**
          * Run query
          */
-        $result = $this->_adapter->fetchRow($select, array(), Db::FETCH_ASSOC);
+        $result = $this->_adapter->fetchRow(
+            $select,
+            array('value' => $value), // this should work whether db supports positional or named params
+            Db::FETCH_ASSOC
+        );
 
         return $result;
     }

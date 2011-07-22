@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.server.reflection">
-    <title>Zend_Server_Reflection</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.server.reflection"><info><title>Zend_Server_Reflection</title></info>
+    
 
-    <sect2 id="zend.server.reflection.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.server.reflection.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_Server_Reflection</classname> provides a standard mechanism for
@@ -19,10 +18,10 @@
             Typically, this functionality will only be used by developers of
             server classes for the framework.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.server.reflection.usage">
-        <title>Usage</title>
+    <section xml:id="zend.server.reflection.usage"><info><title>Usage</title></info>
+        
 
         <para>
             Basic usage is simple:
@@ -64,8 +63,5 @@ $reflection->getNamespace();
             <classname>Zend_Server_Reflection_Class</classname> object. Please refer to
             the <acronym>API</acronym> documentation to see what methods are available to each.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

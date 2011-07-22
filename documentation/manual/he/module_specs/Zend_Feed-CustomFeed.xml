@@ -1,5 +1,6 @@
-<sect1 id="zend.feed.custom-feed">
-    <title>מחלקות סנדקציה מותאמות אישית</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.custom-feed"><info><title>מחלקות סנדקציה מותאמות אישית</title></info>
+    
 
     <para>
         לבסוף, ניתן להרחיב את מחלקות ה <code>Zend_Feed</code> אם תרצה להזין ולספק פורמט מותאם אישית שלך, או להוסיף פונקציונליות מדוייקת יותר לניהול ותפעול של אלמנטים.
@@ -10,8 +11,8 @@
         דע שזה גם מבצע את הקריאה אל <code>registerNamespace()</code>, כדי שהמשתמש הסופי לא יצטרך לדאוג לגבי שם התגית הזאת.
     </para>
 
-    <example id="zend.feed.custom-feed.example.extending">
-        <title>הרחבת מחלקת ניהול הסנדקציה של Atom</title>
+    <example xml:id="zend.feed.custom-feed.example.extending"><info><title>הרחבת מחלקת ניהול הסנדקציה של Atom</title></info>
+        
         <programlisting role="php"><![CDATA[
 /**
  * The custom entry class automatically knows the feed URI (optional) and
@@ -66,8 +67,8 @@ class MyEntry extends Zend_Feed_Entry_Atom
         }
     }
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
         <para>
             אז כדי להשתמש במחלקה זו, יהיה צורך רק בליצור אובייקט שלה ולקרוא לערך <code>myUpdated</code>:
         </para>
@@ -79,11 +80,8 @@ $entry->myUpdated = '2005-04-19T15:30';
 $entry->myUpdated();
 // property-style call is handled by __get function
 $entry->myUpdated;
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

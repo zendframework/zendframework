@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22140 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.cache.backends">
-    <title>Zend_Cache Backends</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.backends"><info><title>Zend_Cache Backends</title></info>
+    
 
     <para>
         Es gibt zwei Arten von Backends: Standard und erweiterte. Natürlich bieten erweiterte
         Backends mehr Features.
     </para>
 
-    <sect2 id="zend.cache.backends.file">
-        <title>Zend_Cache_Backend_File</title>
+    <section xml:id="zend.cache.backends.file"><info><title>Zend_Cache_Backend_File</title></info>
+        
 
         <para>
             Dieses (erweiterte) Backend speichert Cache Datensätze in Dateien (in einem gewählten
@@ -21,8 +19,8 @@
             Mögliche Optionen sind :
         </para>
 
-        <table id="zend.cache.backends.file.table">
-            <title>File Backend Optionen</title>
+        <table xml:id="zend.cache.backends.file.table"><info><title>File Backend Optionen</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -138,10 +136,10 @@
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.cache.backends.sqlite">
-        <title>Zend_Cache_Backend_Sqlite</title>
+    <section xml:id="zend.cache.backends.sqlite"><info><title>Zend_Cache_Backend_Sqlite</title></info>
+        
 
         <para>
             Dieses (erweiterte) Backend speichert die Cache Datensätze in einer SQLite Datenbank.
@@ -151,8 +149,8 @@
             Mögliche Optionen sind :
         </para>
 
-        <table id="zend.cache.backends.sqlite.table">
-            <title>Sqlite Backend Optionen</title>
+        <table xml:id="zend.cache.backends.sqlite.table"><info><title>Sqlite Backend Optionen</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -184,7 +182,7 @@
                             <methodname>delete()</methodname> aufgerufen wird: 0 bedeutet kein
                             automatisches Vakuum; 1 bedeutet systematisches Vakuum (wenn die
                             <methodname>delete()</methodname> or <methodname>clean()</methodname>
-                            Methoden aufgerufen werden; x (integer) > 1 => automatisches Vakuum
+                            Methoden aufgerufen werden; x (integer) &gt; 1 =&gt; automatisches Vakuum
                             zufällig einmal pro x <methodname>clean()</methodname> oder
                             <methodname>delete()</methodname> Aufrufe.
                         </entry>
@@ -192,17 +190,16 @@
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.cache.backends.memcached">
-        <title>Zend_Cache_Backend_Memcached</title>
+    <section xml:id="zend.cache.backends.memcached"><info><title>Zend_Cache_Backend_Memcached</title></info>
+        
 
         <para>
-            Dieses (erweiterte) Backend speichert Cache Datensätze in einem Memcached Server. <ulink
-                url="http://www.danga.com/memcached/">memcached</ulink> ist ein hoch-performantes,
+            Dieses (erweiterte) Backend speichert Cache Datensätze in einem Memcached Server. <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.danga.com/memcached/">memcached</link> ist ein hoch-performantes,
             verteiltes Speicher Objekt Caching System. Um dieses Backend zu benutzen, wird ein
-            Memcached Dämon benötigt und <ulink url="http://pecl.php.net/package/memcache">die
-                Memcached <acronym>PECL</acronym> Erweiterung</ulink>.
+            Memcached Dämon benötigt und <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://pecl.php.net/package/memcache">die
+                Memcached <acronym>PECL</acronym> Erweiterung</link>.
         </para>
 
         <para>
@@ -214,8 +211,8 @@
             Mögliche Optionen sind :
         </para>
 
-        <table id="zend.cache.backends.memcached.table">
-            <title>Memcached Backend Optionen</title>
+        <table xml:id="zend.cache.backends.memcached.table"><info><title>Memcached Backend Optionen</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -233,22 +230,22 @@
                         <entry><type>Array</type></entry>
 
                         <entry>
-                            <command>array(array('host' => 'localhost','port' => 11211,
-                                'persistent' => true, 'weight' => 1, 'timeout' => 5,
-                                'retry_interval' => 15, 'status' => true,
-                                'failure_callback' => '' ))</command>
+                            <command>array(array('host' =&gt; 'localhost','port' =&gt; 11211,
+                                'persistent' =&gt; true, 'weight' =&gt; 1, 'timeout' =&gt; 5,
+                                'retry_interval' =&gt; 15, 'status' =&gt; true,
+                                'failure_callback' =&gt; '' ))</command>
                         </entry>
 
                         <entry>
                             Ein Array von Memcached Servern; jeder Memcached Server wird durch ein
-                            assoziatives Array beschrieben : 'host' => (string) : Der Name des
-                            Memcached Servers, 'port' => (int) : Der Port des Memcached Servers,
-                            'persistent' => (bool) : Persistente Verbindungen für diesen Memcached
-                            Server verwenden oder nicht 'weight' => (int) : Das Gewicht des
-                            Memcached Servers, 'timeout' => (int) : Das Timeout des Memcached
-                            Servers, 'retry_interval' => (int) : Das Wiederholungsintervall des
-                            Memcached Servers, 'status' => (bool) : Der Status des Memcached
-                            Servers, 'failure_callback' => (callback) : Der failure_callback des
+                            assoziatives Array beschrieben : 'host' =&gt; (string) : Der Name des
+                            Memcached Servers, 'port' =&gt; (int) : Der Port des Memcached Servers,
+                            'persistent' =&gt; (bool) : Persistente Verbindungen für diesen Memcached
+                            Server verwenden oder nicht 'weight' =&gt; (int) : Das Gewicht des
+                            Memcached Servers, 'timeout' =&gt; (int) : Das Timeout des Memcached
+                            Servers, 'retry_interval' =&gt; (int) : Das Wiederholungsintervall des
+                            Memcached Servers, 'status' =&gt; (bool) : Der Status des Memcached
+                            Servers, 'failure_callback' =&gt; (callback) : Der failure_callback des
                             Memcached Servers
                         </entry>
                     </row>
@@ -277,14 +274,14 @@
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.cache.backends.apc">
-        <title>Zend_Cache_Backend_Apc</title>
+    <section xml:id="zend.cache.backends.apc"><info><title>Zend_Cache_Backend_Apc</title></info>
+        
 
         <para>
             Dieses (erweiterte) Backend speichert Cache Datensätze im Shared Memory durch die
-            <ulink url="http://pecl.php.net/package/APC">APC</ulink> (Alternativer
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://pecl.php.net/package/APC">APC</link> (Alternativer
             <acronym>PHP</acronym> Cache) Erweiterung (welche natürlich für die Verwendung dieses
             Backends benötigt wird).
         </para>
@@ -297,14 +294,14 @@
         <para>
             Es gibt keine Optionen für dieses Backend.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.cache.backends.xcache">
-        <title>Zend_Cache_Backend_Xcache</title>
+    <section xml:id="zend.cache.backends.xcache"><info><title>Zend_Cache_Backend_Xcache</title></info>
+        
 
         <para>
             Dieses Backend speichert Cache Einträge im Shared Memory durch die
-            <ulink url="http://xcache.lighttpd.net/">XCache</ulink> Erweiterung (welche natürlich
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://xcache.lighttpd.net/">XCache</link> Erweiterung (welche natürlich
             benötigt wird, damit dieses Backend verwendet werden kann).
         </para>
 
@@ -317,8 +314,8 @@
             Mögliche Optionen sind:
         </para>
 
-        <table id="zend.cache.backends.xcache.table">
-            <title>Xcache backend options</title>
+        <table xml:id="zend.cache.backends.xcache.table"><info><title>Xcache backend options</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -356,14 +353,14 @@
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.cache.backends.platform">
-        <title>Zend_Cache_Backend_ZendPlatform</title>
+    <section xml:id="zend.cache.backends.platform"><info><title>Zend_Cache_Backend_ZendPlatform</title></info>
+        
 
         <para>
             Dieses Backend verwendet die Content Caching <acronym>API</acronym> des
-            <ulink url="http://www.zend.com/en/products/platform">Zend Platform</ulink> Produktes.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.com/en/products/platform">Zend Platform</link> Produktes.
             Natürlich muss man die Zend Platform installiert haben, um dieses Backend verwenden zu
             können.
         </para>
@@ -386,10 +383,10 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
         <para>
             Es gibt keine Optionen für dieses Backend.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.cache.backends.twolevels">
-        <title>Zend_Cache_Backend_TwoLevels</title>
+    <section xml:id="zend.cache.backends.twolevels"><info><title>Zend_Cache_Backend_TwoLevels</title></info>
+        
 
         <para>
             Dieses (erweiterte) Backend ist ein Hybrides. Es speichert Cache Einträge in zwei
@@ -417,8 +414,8 @@ $cache = Zend_Cache::factory('Core', 'Two Levels');
             Vorhandene Optionen sind:
         </para>
 
-        <table id="zend.cache.backends.twolevels.table">
-            <title>TwoLevels Backend Optionen</title>
+        <table xml:id="zend.cache.backends.twolevels.table"><info><title>TwoLevels Backend Optionen</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -535,15 +532,14 @@ $cache = Zend_Cache::factory('Core', 'Two Levels');
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.cache.backends.zendserver">
-        <title>Zend_Cache_Backend_ZendServer_Disk und Zend_Cache_Backend_ZendServer_ShMem</title>
+    <section xml:id="zend.cache.backends.zendserver"><info><title>Zend_Cache_Backend_ZendServer_Disk und Zend_Cache_Backend_ZendServer_ShMem</title></info>
+        
 
         <para>
-            Diese Backends speichern Cacheeinträge indem Sie die Caching Funktionalitäten von <ulink
-                url="http://www.zend.com/en/products/server/downloads-all?zfs=zf_download">Zend
-                Server</ulink> verwenden.
+            Diese Backends speichern Cacheeinträge indem Sie die Caching Funktionalitäten von <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.com/en/products/server/downloads-all?zfs=zf_download">Zend
+                Server</link> verwenden.
         </para>
 
         <para>
@@ -571,10 +567,10 @@ $cache = Zend_Cache::factory('Core', 'Zend_Cache_Backend_ZendServer_Disk',
         <para>
             Es gibt keine Optionen für diese Backends.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.cache.backends.static">
-        <title>Zend_Cache_Backend_Static</title>
+    <section xml:id="zend.cache.backends.static"><info><title>Zend_Cache_Backend_Static</title></info>
+        
 
         <para>
             Dieses Backend arbeitet in Verbindung mit
@@ -593,7 +589,7 @@ $cache = Zend_Cache::factory('Core', 'Zend_Cache_Backend_ZendServer_Disk',
                 welcher vom Dispacher verwendet wird ausgeschaltet sein indem
                 <classname>Zend_Controller_Front</classname>'s Methode
                 <methodname>setParam()</methodname> verwendet wird, zum Beispiel
-                <command>$front->setParam('disableOutputBuffering', true);</command> oder indem
+                <command>$front-&gt;setParam('disableOutputBuffering', true);</command> oder indem
                 "resources.frontcontroller.params.disableOutputBuffering = true" in der Bootstrap
                 Konfigurationsdatei (wir nehmen <acronym>INI</acronym> an) wenn
                 <classname>Zend_Application</classname> verwendet wird.
@@ -694,8 +690,8 @@ RewriteRule ^.*$ index.php [NC,L]
             </para>
         </note>
 
-        <table id="zend.cache.backends.static.table">
-            <title>Statische Backend Optionen</title>
+        <table xml:id="zend.cache.backends.static.table"><info><title>Statische Backend Optionen</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -830,5 +826,5 @@ RewriteRule ^.*$ index.php [NC,L]
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22189 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.view.placeholders.standard">
-    <title>Placeholders standards</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.view.placeholders.standard"><info><title>Placeholders standards</title></info>
+    
 
     <para>
         Dans la <link linkend="learning.view.placeholders.basics">section précédente</link>, nous
@@ -28,8 +26,8 @@
         et encore d'autres.
     </para>
 
-    <sect2 id="learning.view.placeholders.standard.doctype">
-        <title>Changer le DocType</title>
+    <section xml:id="learning.view.placeholders.standard.doctype"><info><title>Changer le DocType</title></info>
+        
 
         <para>
             Les déclarations de <acronym>DocType</acronym> sont difficiles à mémoriser et souvent
@@ -147,10 +145,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             que le docType est précisé avant le rendu du layout et qu'il n'existe qu'un seul endroit
             logique pour le changer.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.view.placeholders.standard.head-title">
-        <title>Spécifier le titre de la page</title>
+    <section xml:id="learning.view.placeholders.standard.head-title"><info><title>Spécifier le titre de la page</title></info>
+        
 
         <para>
             Souvent, le site incluera le nom de la société dans le titre de la page et ajoutera
@@ -227,10 +225,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 <!-- Si prepend() a été utilisé: -->
 <title>Some Page :: My Site</title>
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.view.placeholders.standard.head-link">
-        <title>Spécifier des feuilles de style avec HeadLink</title>
+    <section xml:id="learning.view.placeholders.standard.head-link"><info><title>Spécifier des feuilles de style avec HeadLink</title></info>
+        
 
         <para>
             Les bons développeurs <acronym>CSS</acronym> créront souvent une feuille de style
@@ -314,10 +312,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 <link rel="stylesheet" type="text/css" href="/styles/site.css" />
 <link rel="stylesheet" type="text/css" href="/styles/user-list.css" />
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.view.placeholders.standard.head-script">
-        <title>Aggréger des scripts avec HeadScript</title>
+    <section xml:id="learning.view.placeholders.standard.head-script"><info><title>Aggréger des scripts avec HeadScript</title></info>
+        
 
         <para>
             Un autre moyen de ne pas surcharger la page est de ne charger le JavaScript que lorsque
@@ -421,8 +419,8 @@ site = {
 </script>
 ]]></programlisting>
 
-        <note>
-            <title>Variante InlineScript</title>
+        <note><info><title>Variante InlineScript</title></info>
+            
 
             <para>
                 La plupart des navigateur bloquent l'affichage tant que tous les scritps et les feuilles
@@ -434,7 +432,7 @@ site = {
             <para>
                 Pour cela, vous pouvez par exemple écrire vos tags <emphasis>&lt;script&gt;</emphasis>
                 après avoir fermé <emphasis>&lt;body&gt;</emphasis>. (C'est une pratique recommandée
-                par <ulink url="http://developer.yahoo.com/yslow/">Y! Slow project</ulink>.)
+                par <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://developer.yahoo.com/yslow/">Y! Slow project</link>.)
             </para>
 
             <para>
@@ -459,5 +457,5 @@ site = {
                 </listitem>
             </itemizedlist>
         </note>
-    </sect2>
-</sect1>
+    </section>
+</section>

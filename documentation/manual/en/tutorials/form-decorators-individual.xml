@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.form.decorators.individual">
-    <title>Rendering Individual Decorators</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.form.decorators.individual"><info><title>Rendering Individual Decorators</title></info>
+    
 
     <para>
         In the <link linkend="learning.form.decorators.layering">previous section</link>, we
@@ -280,4 +279,4 @@ foreach ($form->getElements() as $element) {
         we'll revisit the date element from above, and demonstrate how to create a custom element
         and decorator for composite elements.
     </para>
-</sect1>
+</section>

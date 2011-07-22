@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 22585 -->
-<sect1 id="zend.translate.adapter">
-    <title>Zend_Translate のアダプタ</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.adapter"><info><title>Zend_Translate のアダプタ</title></info>
+    
 
     <para>
         <classname>Zend_Translate</classname> は、さまざまなアダプタを使用して翻訳を行えます。
@@ -10,8 +8,8 @@
         以下に、翻訳の入力ファイルとしてサポートしているすべてのアダプタについてまとめます。
     </para>
 
-    <table id="zend.translate.adapter.table">
-        <title><classname>Zend_Translate</classname> のアダプタ</title>
+    <table xml:id="zend.translate.adapter.table"><info><title><classname>Zend_Translate</classname> のアダプタ</title></info>
+        
 
         <tgroup cols="3">
             <thead>
@@ -86,8 +84,8 @@
         </tgroup>
     </table>
 
-    <sect2 id="zend.translate.adapter.decision">
-        <title>使用するアダプタを決める方法</title>
+    <section xml:id="zend.translate.adapter.decision"><info><title>使用するアダプタを決める方法</title></info>
+        
 
         <para>
             <classname>Zend_Translate</classname> でどのアダプタを使用するのかを決める必要があります。
@@ -120,8 +118,8 @@
             </para>
         </note>
 
-        <sect3 id="zend.translate.adapter.array">
-            <title>Zend_Translate_Adapter_Array</title>
+        <section xml:id="zend.translate.adapter.array"><info><title>Zend_Translate_Adapter_Array</title></info>
+            
 
             <para>
                 Array アダプタは、プログラマにとっては
@@ -136,10 +134,10 @@
                 このアダプタを使うのは、小さめのサイトで少なめの言語を扱い、
                 かつプログラマ自身で翻訳も行う場合だけにしましょう。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.csv">
-            <title>Zend_Translate_Adapter_Csv</title>
+        <section xml:id="zend.translate.adapter.csv"><info><title>Zend_Translate_Adapter_Csv</title></info>
+            
 
             <para>
                 Csv アダプタは、顧客にとっては最もシンプルに使えるアダプタです。
@@ -162,16 +160,16 @@
                     (<acronym>PHP</acronym> の制約のせいで) それがロケール対応でないということに注意しなければなりません。
                 </para>
             </note>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.gettext">
-            <title>Zend_Translate_Adapter_Gettext</title>
+        <section xml:id="zend.translate.adapter.gettext"><info><title>Zend_Translate_Adapter_Gettext</title></info>
+            
 
             <para>
                 Gettext アダプタは、最もよく用いられるアダプタです。
                 Gettext は GNU が提供している翻訳フォーマットで、世界中で使用されています。
                 可読形式ではありませんが、便利なフリーウェア
-                (<ulink url="http://sourceforge.net/projects/poedit/">POEdit</ulink> など)
+                (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://sourceforge.net/projects/poedit/">POEdit</link> など)
                 が公開されています。
                 <classname>Zend_Translate</classname> の Gettext アダプタは、<acronym>PHP</acronym> の gettext
                 拡張モジュールを使わずに実装しています。
@@ -187,10 +185,10 @@
                 しかし、gettext のデータは機械が読める形式で保存されるので、
                 何らかのツールがないと人間が読むことはできません。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.ini">
-            <title>Zend_Translate_Adapter_Ini</title>
+        <section xml:id="zend.translate.adapter.ini"><info><title>Zend_Translate_Adapter_Ini</title></info>
+            
 
             <para>
                 Ini アダプタは非常にシンプルなアダプタであり、
@@ -205,8 +203,8 @@
                 汎用的な翻訳ソースとしては使用しないようにしましょう。
             </para>
 
-            <warning>
-                <title>PHP 5.3 でのリグレッション</title>
+            <warning><info><title>PHP 5.3 でのリグレッション</title></info>
+                
 
                 <para>
                     <acronym>PHP</acronym> 5.3 より前のバージョンでは、<methodname>parse_ini_file()</methodname>
@@ -219,10 +217,10 @@
                     そのような場合は別のアダプタを使用することを推奨します。
                 </para>
             </warning>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.tbx">
-            <title>Zend_Translate_Adapter_Tbx</title>
+        <section xml:id="zend.translate.adapter.tbx"><info><title>Zend_Translate_Adapter_Tbx</title></info>
+            
 
             <para>
                 Tbx アダプタは、内部ですでに TBX フォーマットの翻訳システムを使用している顧客などが使用します。
@@ -239,10 +237,10 @@
                 このアダプタは、すでにこの形式の翻訳ファイルを持っている企業に最適です。
                 ファイルは可読形式で、システムに依存しない形式になります。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.tmx">
-            <title>Zend_Translate_Adapter_Tmx</title>
+        <section xml:id="zend.translate.adapter.tmx"><info><title>Zend_Translate_Adapter_Tmx</title></info>
+            
 
             <para>
                 Tmx アダプタは、複数のシステムで同一の翻訳ソースを使用している顧客などが使用します。
@@ -256,10 +254,10 @@
                 中規模から大規模の会社はこのアダプタを使用します。
                 ファイルは可読形式で、システムに依存しない形式になります。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.qt">
-            <title>Zend_Translate_Adapter_Qt</title>
+        <section xml:id="zend.translate.adapter.qt"><info><title>Zend_Translate_Adapter_Qt</title></info>
+            
 
             <para>
                 Qt アダプタは、QtLinguist で作成した TS
@@ -273,10 +271,10 @@
                 大手企業の中には QT フレームワークを使用したソフトウェアを作成しているところがあります。
                 ファイルは可読形式で、システムに依存しない形式になります。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.xliff">
-            <title>Zend_Translate_Adapter_Xliff</title>
+        <section xml:id="zend.translate.adapter.xliff"><info><title>Zend_Translate_Adapter_Xliff</title></info>
+            
 
             <para>
                 Xliff アダプタは、<acronym>XML</acronym> ファイルを使用したいけれど
@@ -291,10 +289,10 @@
                 中規模の会社はこのアダプタを使用します。
                 ファイルは可読形式で、システムに依存しない形式になります。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.xmltm">
-            <title>Zend_Translate_Adapter_XmlTm</title>
+        <section xml:id="zend.translate.adapter.xmltm"><info><title>Zend_Translate_Adapter_XmlTm</title></info>
+            
 
             <para>
                 XmlTm アダプタは、すでにこのレイアウトを採用している顧客が使用するアダプタです。
@@ -308,12 +306,12 @@
                 このアダプタは、すでにソースファイルが存在する場合にのみ使用するようにしましょう。
                 ファイルは可読形式で、システムに依存しない形式になります。
             </para>
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.translate.adapter.selfwritten">
-        <title>自作のアダプタの組み込み</title>
+    <section xml:id="zend.translate.adapter.selfwritten"><info><title>自作のアダプタの組み込み</title></info>
+        
 
         <para>
             <classname>Zend_Translate</classname> に、自作のアダプタクラスを組み込むこともできます。
@@ -350,10 +348,10 @@ try {
 }
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.translate.adapter.caching">
-        <title>全アダプタの高速化</title>
+    <section xml:id="zend.translate.adapter.caching"><info><title>全アダプタの高速化</title></info>
+        
 
         <para>
             <classname>Zend_Translate</classname> では、内部的に <classname>Zend_Cache</classname>
@@ -434,8 +432,5 @@ $translate = new Zend_Translate(
 // somewhere later in your code
 Zend_Translate::clearCache('MyTag');
 ]]></programlisting>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

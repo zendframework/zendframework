@@ -1,41 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21818 -->
-<sect1 id="zend.loader.load">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.load"><info><title>ファイルやクラスの動的な読み込み</title></info>
 
-    <title>ファイルやクラスの動的な読み込み</title>
+    
 
     <para>
         <classname>Zend_Loader</classname> クラスは、ファイルを動的に読み込むためのメソッドを提供します。
     </para>
 
-    <tip>
-        <title>Zend_Loader 対 require_once()</title>
+    <tip><info><title>Zend_Loader 対 require_once()</title></info>
+        
         <para>
             <classname>Zend_Loader</classname> のメソッドは、読み込みたいファイルの名前が変化する場合に便利です。
             たとえば、ユーザの入力やメソッドの引数などのパラメータに基づいたファイル名を使用する場合などです。
             もし読み込むファイルやクラスの名前が決まっている場合は、
-            <ulink url="http://php.net/require_once"><methodname>require_once()</methodname></ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/require_once"><methodname>require_once()</methodname></link>
             のような <acronym>PHP</acronym> の関数ではなくあえて <classname>Zend_Loader</classname> を使用するメリットはありません。
         </para>
     </tip>
 
-    <sect2 id="zend.loader.load.file">
+    <section xml:id="zend.loader.load.file"><info><title>ファイルの読み込み</title></info>
 
-        <title>ファイルの読み込み</title>
+        
 
         <para>
             静的メソッド <methodname>Zend_Loader::loadFile()</methodname>
             は、<acronym>PHP</acronym> ファイルを読み込みます。
             読み込まれるファイルには任意の <acronym>PHP</acronym> コードを含めることができます。
             このメソッドは <acronym>PHP</acronym> 関数
-            <ulink url="http://php.net/include"><methodname>include()</methodname></ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/include"><methodname>include()</methodname></link>
             のラッパーで、失敗した場合 (たとえば指定したファイルが存在しないなど)
             には <constant>FALSE</constant> を返します。
         </para>
 
-        <example id="zend.loader.load.file.example">
-            <title>loadFile() メソッドの例</title>
+        <example xml:id="zend.loader.load.file.example"><info><title>loadFile() メソッドの例</title></info>
+            
             <programlisting language="php"><![CDATA[
 Zend_Loader::loadFile($filename, $dirs=null, $once=false);
 ]]></programlisting>
@@ -60,25 +58,25 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
         <para>
             引数 <code>$once</code> は論理値です。<constant>TRUE</constant> を指定すると、
             <methodname>Zend_Loader::loadFile()</methodname> は <acronym>PHP</acronym> の関数
-            <ulink url="http://php.net/include"><methodname>include_once()</methodname></ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/include"><methodname>include_once()</methodname></link>
             でファイルを読み込みます。それ以外の場合は
-            <ulink url="http://php.net/include_once"><methodname>include()</methodname></ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/include_once"><methodname>include()</methodname></link>
             を使用します。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.load.class">
+    <section xml:id="zend.loader.load.class"><info><title>クラスの読み込み</title></info>
 
-        <title>クラスの読み込み</title>
+        
 
         <para>
             静的メソッド <methodname>Zend_Loader::loadClass($class, $dirs)</methodname>
             は、<acronym>PHP</acronym> ファイルを読み込んでクラスが存在するかどうかを確かめます。
         </para>
 
-        <example id="zend.loader.load.class.example">
-            <title>loadClass() メソッドの例</title>
+        <example xml:id="zend.loader.load.class.example"><info><title>loadClass() メソッドの例</title></info>
+            
             <programlisting language="php"><![CDATA[
 Zend_Loader::loadClass('Container_Tree',
     array(
@@ -115,15 +113,14 @@ Zend_Loader::loadClass('Container_Tree',
             英数字とハイフン ('-')、アンダースコア ('_') そしてピリオド ('.') だけです。
         </para>
 
-        <note>
-            <title>Loading Classes from PHP Namespaces</title>
+        <note><info><title>Loading Classes from PHP Namespaces</title></info>
+            
 
             <para>
                 Starting in version 1.10.0, Zend Framework now allows loading classes from <acronym>PHP</acronym>
                 namespaces. This support follows the same guidelines and implementation as that
-                found in the <ulink
-                    url="http://groups.google.com/group/php-standards/web/psr-0-final-proposal">PHP
-                Framework Interop Group PSR-0</ulink> reference implementation.
+                found in the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://groups.google.com/group/php-standards/web/psr-0-final-proposal">PHP
+                Framework Interop Group PSR-0</link> reference implementation.
             </para>
 
             <para>
@@ -181,11 +178,11 @@ Zend_Loader::loadClass('Container_Tree',
                 </listitem>
             </itemizedlist>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.load.isreadable">
+    <section xml:id="zend.loader.load.isreadable"><info><title>ファイルが読み込み可能かどうかの確認</title></info>
 
-        <title>ファイルが読み込み可能かどうかの確認</title>
+        
 
         <para>
             静的メソッド <methodname>Zend_Loader::isReadable($pathname)</methodname>
@@ -193,8 +190,8 @@ Zend_Loader::loadClass('Container_Tree',
             <constant>TRUE</constant>、それ以外の場合に <constant>FALSE</constant> を返します。
         </para>
 
-        <example id="zend.loader.load.isreadable.example">
-            <title>isReadable() メソッドの例</title>
+        <example xml:id="zend.loader.load.isreadable.example"><info><title>isReadable() メソッドの例</title></info>
+            
             <programlisting language="php"><![CDATA[
 if (Zend_Loader::isReadable($filename)) {
     // $filename で何かをします
@@ -206,17 +203,17 @@ if (Zend_Loader::isReadable($filename)) {
             引数 <code>$filename</code> で、調べたいファイル名を指定します。
             ここにはパス情報を含めることもできます。
             このメソッドは、<acronym>PHP</acronym> の関数
-            <ulink url="http://php.net/is_readable"><methodname>is_readable()</methodname></ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/is_readable"><methodname>is_readable()</methodname></link>
             のラッパーです。この関数は <code>include_path</code>
             を探しませんが、<methodname>Zend_Loader::isReadable()</methodname>
             は <code>include_path</code> も検索対象に含めます。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.load.autoload">
+    <section xml:id="zend.loader.load.autoload"><info><title>Autoloader の使用法</title></info>
 
-        <title>Autoloader の使用法</title>
+        
 
         <para>
             <classname>Zend_Loader</classname> クラスには、<acronym>PHP</acronym> の SPL
@@ -228,8 +225,8 @@ if (Zend_Loader::isReadable($filename)) {
             <methodname>registerAutoload()</methodname> メソッドは <classname>Zend_Exception</classname> をスローします。
         </para>
 
-        <example id="zend.loader.load.autoload.example">
-            <title>自動ローダー用コールバックメソッドの登録例</title>
+        <example xml:id="zend.loader.load.autoload.example"><info><title>自動ローダー用コールバックメソッドの登録例</title></info>
+            
             <programlisting language="php"><![CDATA[
 Zend_Loader::registerAutoload();
 ]]></programlisting>
@@ -248,8 +245,8 @@ Zend_Loader::registerAutoload();
             <methodname>autoload()</methodname> メソッドを登録するのかを指定します。
         </para>
 
-        <example id="zend.loader.load.autoload.example-extended">
-            <title>autoload コールバックメソッドを継承クラスから登録する例</title>
+        <example xml:id="zend.loader.load.autoload.example-extended"><info><title>autoload コールバックメソッドを継承クラスから登録する例</title></info>
+            
             <para>
                 <acronym>PHP</acronym> における静的関数の参照の方法上、
                 <methodname>loadClass()</methodname> と <methodname>autoload()</methodname>
@@ -291,9 +288,6 @@ Zend_Loader::registerAutoload('My_Loader');
             指定したコールバックが SPL の autoload スタックから削除されます。
         </para>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

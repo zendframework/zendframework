@@ -1,5 +1,6 @@
-<sect1 id="zend.json.objects">
-    <title>JSON 对象</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.objects"><info><title>JSON 对象</title></info>
+    
     <para>
         当编码PHP对象为JSON时, 它的所有的公有属性将被编码为JSON格式（到JSON对象中）.
     </para>
@@ -15,15 +16,12 @@
         <programlisting role="php"><![CDATA[
 // 解码 JSON 对象作为 PHP 对象
 $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
-]]>
-    </programlisting>
+
+    ]]></programlisting>
     <para>
         这样任何解码后的对象将被作为一个<code>StdClass</code>的对象来返回，对象带有根据JSON对象的key/value对生成的一系列属性。
     </para>
     <para>
         Zend Framework推荐每个开发者应该决定怎样来解码JSON对象。 如果一个特定类型的对象需要被构建，它可以由开发者的代码创建，然后用 <code>Zend_Json</code> 解码后的值来组装。
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

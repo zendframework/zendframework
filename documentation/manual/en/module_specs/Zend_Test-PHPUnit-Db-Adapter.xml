@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.test.phpunit.db.adapter">
-    <title>Using the Database Testing Adapter</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.db.adapter"><info><title>Using the Database Testing Adapter</title></info>
+    
 
     <para>
         There are times when you don't want to test parts of your application with a real database,
@@ -45,7 +44,7 @@ $rs = $adapter->query('SELECT ...'); // Returns Statement 1
     <para>
         You can also put INSERT, UPDATE and DELETE statement onto the result stack, these however
         only return a statement which allows to specifiy the result of
-        <methodname>$stmt->rowCount()</methodname>.
+        <methodname>$stmt-&gt;rowCount()</methodname>.
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -88,4 +87,4 @@ echo $qp->getQuerY(); // SELECT * FROM bugs
         <methodname>setQuoteIdentifierSymbol()</methodname> you can specify which
         symbol should be used for quoting, by default none is used.
     </para>
-</sect2>
+</section>

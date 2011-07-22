@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20799 -->
-<sect1 id="zend.validate.writing_validators">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.writing_validators"><info><title>バリデータの書き方</title></info>
 
-    <title>バリデータの書き方</title>
+    
 
     <para>
         <classname>Zend_Validate</classname> には、よく使うバリデータ群が付属しています。しかし、
@@ -51,9 +49,9 @@
         といった原因で入力値が正しいのかどうかが判断できない場合が考えられます。
     </para>
 
-    <example id="zend.validate.writing_validators.example.simple">
+    <example xml:id="zend.validate.writing_validators.example.simple"><info><title>単純なバリデーションクラスの作成</title></info>
 
-        <title>単純なバリデーションクラスの作成</title>
+        
 
         <para>
             次の例は、非常に単純なバリデータの書き方を説明するものです。
@@ -95,9 +93,9 @@ class MyValid_Float extends Zend_Validate_Abstract
 
     </example>
 
-    <example id="zend.validate.writing_validators.example.conditions.dependent">
+    <example xml:id="zend.validate.writing_validators.example.conditions.dependent"><info><title>依存条件を伴うバリデーションクラスの作成</title></info>
 
-        <title>依存条件を伴うバリデーションクラスの作成</title>
+        
 
         <para>
             次の例は、複数の検証規則を組み合わせた複雑なものとなります。
@@ -188,9 +186,9 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
 
     </example>
 
-    <example id="zend.validate.writing_validators.example.conditions.independent">
+    <example xml:id="zend.validate.writing_validators.example.conditions.independent"><info><title>個々に独立した条件による検証を行い、失敗時に複数の原因を返す</title></info>
 
-        <title>個々に独立した条件による検証を行い、失敗時に複数の原因を返す</title>
+        
 
         <para>
             パスワードの強度を確認するバリデーションクラスを書くことを考えてみましょう。
@@ -268,7 +266,4 @@ class MyValid_PasswordStrength extends Zend_Validate_Abstract
 
     </example>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

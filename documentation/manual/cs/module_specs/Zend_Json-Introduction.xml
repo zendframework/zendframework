@@ -1,9 +1,12 @@
-<sect1 id="zend.json.introduction">
-    <title>Úvod</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.introduction"><info><title>Úvod</title></info>
+    
     <para>
         <code>Zend_Json</code> poskytuje užitečné metody pro serializaci PHP
         do JSON a pro dekódování JSON do PHP. Pro více informací o JSON,
-        <ulink url="http://www.json.org/">navštivte web JSON projektu</ulink>.
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.json.org/">navštivte web JSON projektu</link>.
     </para>
     <para>
         JSON, JavaScript Object Notation, může být použit pro výměnu dat mezi
@@ -22,7 +25,4 @@
         dat v aplikaci.
     </para>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

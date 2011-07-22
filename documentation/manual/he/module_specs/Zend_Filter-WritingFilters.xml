@@ -1,6 +1,7 @@
-<sect1 id="zend.filter.writing_filters">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.writing_filters"><info><title>כתיבת פילטרים</title></info>
 
-    <title>כתיבת פילטרים</title>
+    
 
     <para>
         Zend_Filter מספק כמה פילטרים שימושיים ונפוצים, אבל לעיתים מתכנתים ירצו לכתוב פילטרים בעצמם לדרישות שלהם.
@@ -25,8 +26,8 @@ class MyFilter implements Zend_Filter_Interface
         return $valueFiltered;
     }
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
     </para>
 
@@ -36,12 +37,9 @@ class MyFilter implements Zend_Filter_Interface
         <programlisting role="php"><![CDATA[
 $filterChain = new Zend_Filter();
 $filterChain->addFilter(new MyFilter());
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
     </para>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

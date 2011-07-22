@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20774 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.callback">
-    <title>Callback</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.callback"><info><title>Callback</title></info>
+    
 
     <para>
         Dieser Filter erlaubt es einem eigene Methoden in Verbindung mit
@@ -76,4 +74,4 @@ $value = MyMethod('Hello', 'param1', 'param2');
             aufgerufen werden kann, eine Exception auslöst.
         </para>
     </note>
-</sect2>
+</section>

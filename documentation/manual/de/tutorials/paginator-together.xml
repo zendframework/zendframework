@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21821 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.paginator.together">
-    <title>Alles zusammenfügen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.paginator.together"><info><title>Alles zusammenfügen</title></info>
+    
 
     <para>
         Wir haben gesehen wie ein Paginator Objekt erstellt wurd, wie die Elemente der aktuellen
@@ -79,4 +77,4 @@ foreach ($this->paginator as $item) {
         <acronym>API</acronym> Dokumentation können mehr darüber sagen das mit
         <classname>Zend_Paginator</classname> alles getan werden kann.
     </para>
-</sect1>
+</section>

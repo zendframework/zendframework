@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15854 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.form.introduction">
-    <title>Zend_Form</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.introduction"><info><title>Zend_Form</title></info>
+    
 
     <para>
         Komponent Zend_Form upraszcza tworzenie i obsługę formularzy w 
@@ -23,7 +23,4 @@
         <code>Zend_Filter</code>, <code>Zend_Loader_PluginLoader</code> oraz
         opcjonalnie <code>Zend_View</code>.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

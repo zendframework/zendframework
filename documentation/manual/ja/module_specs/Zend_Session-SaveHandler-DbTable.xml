@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20810 -->
-<sect1 id="zend.session.savehandler.dbtable">
-    <title>Zend_Session_SaveHandler_DbTable</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.savehandler.dbtable"><info><title>Zend_Session_SaveHandler_DbTable</title></info>
+    
 
     <para>
         <classname>Zend_Session_SaveHandler_DbTable</classname> の基本セットアップには、少なくとも
@@ -10,12 +8,12 @@
         primary は主キーで、デフォルトは単なるセッション ID となります。
         デフォルトでは 32 桁の文字列です。
         modified は、最終更新日付を表す Unix タイムスタンプです。
-        lifetime は、セッションの有効期間です (<command>modified + lifetime > time()</command>)。
+        lifetime は、セッションの有効期間です (<command>modified + lifetime &gt; time()</command>)。
         そして data が、セッションに保存されているデータをシリアライズしたものです。
     </para>
 
-    <example id="zend.session.savehandler.dbtable.basic">
-            <title>基本的な設定</title>
+    <example xml:id="zend.session.savehandler.dbtable.basic"><info><title>基本的な設定</title></info>
+            
 
             <programlisting language="SQL"><![CDATA[
 CREATE TABLE `session` (
@@ -63,8 +61,8 @@ Zend_Session::start();
         複数カラムの主キーを使用することもできます。
     </para>
 
-    <example id="zend.session.savehandler.dbtable.multi-column-key">
-        <title>複数カラムの主キーの使用</title>
+    <example xml:id="zend.session.savehandler.dbtable.multi-column-key"><info><title>複数カラムの主キーの使用</title></info>
+        
 
         <programlisting language="SQL"><![CDATA[
 CREATE TABLE `session` (
@@ -110,7 +108,4 @@ Zend_Session::start();
 // ふつうに Zend_Session を使用します
 ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

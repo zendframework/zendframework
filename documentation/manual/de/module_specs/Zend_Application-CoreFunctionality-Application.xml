@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21357 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.application.core-functionality.application">
-    <title>Zend_Application</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.core-functionality.application"><info><title>Zend_Application</title></info>
+    
 
     <para>
         <classname>Zend_Application</classname> bietet die Basisfunktionalität der Komponente, und
@@ -18,8 +18,8 @@
         dazu beide Fälle zu zeigen.
     </para>
 
-    <table id="zend.application.core-functionality.application.api.options">
-        <title>Optionen für Zend_Application</title>
+    <table xml:id="zend.application.core-functionality.application.api.options"><info><title>Optionen für Zend_Application</title></info>
+        
 
         <tgroup cols="2">
             <thead>
@@ -79,16 +79,16 @@
         </tgroup>
     </table>
 
-    <note>
-        <title>Namen der Optionen</title>
+    <note><info><title>Namen der Optionen</title></info>
+        
 
         <para>
             Beachten Sie das die Namen für die Optionen von der Groß- und Kleinschreibung abhängen.
         </para>
     </note>
 
-    <table id="zend.application.core-functionality.application.api.table">
-        <title>Zend_Application Methoden</title>
+    <table xml:id="zend.application.core-functionality.application.api.table"><info><title>Zend_Application Methoden</title></info>
+        
 
         <tgroup cols="4">
             <thead>
@@ -152,7 +152,7 @@
                                             "configs" dessen Wert ein Array von Dateien ist welche
                                             zusammengefügt werden. Beachte: Dies bedeutet das man
                                             entweder einen literalen Pfad übergibt, oder
-                                            <command>array("configs"=>array("/path1","/path2"[,...]));</command>.
+                                            <command>array("configs"=&gt;array("/path1","/path2"[,...]));</command>.
                                         </para>
                                     </listitem>
 
@@ -437,4 +437,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect2>
+</section>

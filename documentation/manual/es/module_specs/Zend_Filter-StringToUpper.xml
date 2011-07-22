@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 19940 -->
-    <!-- Reviewed: no -->
-<sect2 id="zend.filter.set.stringtoupper">
-    <title>StringToUpper</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.stringtoupper"><info><title>StringToUpper</title></info>
+    
 
     <para>
         Este filtro convierte cualquier entrada en Mayúculas
@@ -31,4 +29,4 @@ $filter = new Zend_Filter_StringToUpper(array('encoding' => 'UTF-8'));
 // or do this afterwards
 $filter->setEncoding('ISO-8859-1');
 ]]></programlisting>
-</sect2>
+</section>

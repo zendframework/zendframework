@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.paginator.simple">
-    <title>Einfaches Beispiel</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.paginator.simple"><info><title>Einfaches Beispiel</title></info>
+    
 
     <para>
         In diesem ersten Beispiel wollen wir nichts spektakuläres, aber hoffentlich gibt es eine
@@ -123,4 +121,4 @@ foreach ($paginator as $item) {
         Anfragen effizient ausgeführt werden, sollte in das <classname>Zend_Paginator</classname>
         Kapitel im Referenz Handbuch bei den Adaptern DbSelect und DbTableSelect nachgesehen werden.
     </para>
-</sect1>
+</section>

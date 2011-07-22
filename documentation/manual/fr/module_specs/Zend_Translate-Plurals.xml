@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21661 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.translate.plurals">
-    <title>Notation des pluriels pour Translation</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.plurals"><info><title>Notation des pluriels pour Translation</title></info>
+    
 
     <para>
         Depuis Zend Framework 1.9, <classname>Zend_Translate</classname> gère les pluriels.
@@ -27,16 +25,16 @@
         la moderne, qui permet d'utiliser la même méthode pour plusieurs pluriels.
     </para>
 
-    <sect2 id="zend.translate.plurals.traditional">
-        <title>Méthode traditionnelle</title>
+    <section xml:id="zend.translate.plurals.traditional"><info><title>Méthode traditionnelle</title></info>
+        
 
         <para>
             Les personnes connaissant gettext vont reconnaitre cette méthodologie. Il existe une seule méthode
             <methodname>plural()</methodname> qui rend le pluriel.
         </para>
 
-        <example id="zend.translate.plurals.traditional.example1">
-            <title>Exemple avec la méthode traditionnelle</title>
+        <example xml:id="zend.translate.plurals.traditional.example1"><info><title>Exemple avec la méthode traditionnelle</title></info>
+            
 
             <para>
                 La méthode <methodname>plural()</methodname> accepte 4 paramètres. Le premier est le messageId au singulier, le second
@@ -59,10 +57,10 @@ $translate = new Zend_Translate(
 $translate->plural('Car', 'Cars', $number);
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.translate.plurals.modern">
-        <title>Méthode moderne de traduction du pluriel</title>
+    <section xml:id="zend.translate.plurals.modern"><info><title>Méthode moderne de traduction du pluriel</title></info>
+        
 
         <para>
             Utilisez la méthode <methodname>translate()</methodname> pour la traduction des pluriels.
@@ -74,8 +72,8 @@ $translate->plural('Car', 'Cars', $number);
             une quantité et optionnellement une locale.
         </para>
 
-        <example id="zend.translate.plurals.modern.example1">
-            <title>Exemple de la méthode moderne de traduction du pluriel</title>
+        <example xml:id="zend.translate.plurals.modern.example1"><info><title>Exemple de la méthode moderne de traduction du pluriel</title></info>
+            
 
             <para>
                 Pour traduire un pluriel avec la méthode moderne, agissez comme suit:
@@ -97,8 +95,8 @@ $translate->translate(array('Car', 'Cars', $number));
             Avec cette méthode, vous pouvez utiliser n'importe quelle langue comme messageId original.
         </para>
 
-        <example id="zend.translate.plurals.modern.example2">
-            <title>Exemple de la méthode moderne de traduction du pluriel utilisant un langage source différent</title>
+        <example xml:id="zend.translate.plurals.modern.example2"><info><title>Exemple de la méthode moderne de traduction du pluriel utilisant un langage source différent</title></info>
+            
 
             <para>
                 Imaginons que nous voulions utiliser du russe et que le messageId est russe et non anglais.
@@ -128,17 +126,17 @@ $translate->translate(array('Car',
         <para>
             Si vous omettez la langue, l'anglais sera utilisé et tout pluriel superflu sera ignoré.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.translate.plurals.source">
-        <title>Fichiers sources de pluriels</title>
+    <section xml:id="zend.translate.plurals.source"><info><title>Fichiers sources de pluriels</title></info>
+        
 
         <para>
             Toutes les sources ne supportent pas les pluriels. Voyez la liste ci-après pour les détails:
         </para>
 
-        <table id="zend.translate.plurals.source.supportedadapters">
-            <title>Support du pluriel</title>
+        <table xml:id="zend.translate.plurals.source.supportedadapters"><info><title>Support du pluriel</title></info>
+            
             <tgroup cols="4">
                 <thead>
                     <row>
@@ -191,8 +189,8 @@ $translate->translate(array('Car',
             Lisez la suite pour des exemples.
         </para>
 
-        <sect3 id="zend.translate.plurals.source.array">
-            <title>Source tableau contenant des pluriels</title>
+        <section xml:id="zend.translate.plurals.source.array"><info><title>Source tableau contenant des pluriels</title></info>
+            
 
             <para>
                 Un tableau de traduction contenant des pluriels devrait ressembler à ceci:
@@ -230,10 +228,10 @@ array(
                 Si votre langue supporte plusieurs pluriels, ajoutez les simplement dans le tableau à la
                 suite du premier pluriel.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.plurals.source.csv">
-            <title>Csv et pluriels</title>
+        <section xml:id="zend.translate.plurals.source.csv"><info><title>Csv et pluriels</title></info>
+            
 
             <para>
                 Un fichier csv gérant des pluriels ressemble à ceci:
@@ -249,10 +247,10 @@ array(
                 tout les pluriels suivants doivent être ajoutés après, mais sans traduction.
                 Notez que le délimiteur est nécessaire pour les pluriels vides.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.plurals.source.gettext">
-            <title>Gettext et pluriels</title>
+        <section xml:id="zend.translate.plurals.source.gettext"><info><title>Gettext et pluriels</title></info>
+            
 
             <para>
                 Gettext supporte nativement les pluriels, les fichiers
@@ -265,11 +263,11 @@ array(
                     un autre adaptateur dans ce cas là.
                 </para>
             </note>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.translate.plurals.customrules">
-        <title>Custom plural rules</title>
+    <section xml:id="zend.translate.plurals.customrules"><info><title>Custom plural rules</title></info>
+        
 
         <para>
             In rare cases it could be useful to be able to define own plural rules. See chinese for
@@ -328,8 +326,8 @@ Zend_Translate_Plural::setPlural('MyPlural', 'zh');
             the plural rules before you are doing translations.
         </para>
 
-        <note>
-            <title>Define custom plurals only when needed</title>
+        <note><info><title>Define custom plurals only when needed</title></info>
+            
 
             <para>
                 <classname>Zend_Translate</classname> defines plurals for most known languages.
@@ -337,8 +335,5 @@ Zend_Translate_Plural::setPlural('MyPlural', 'zh');
                 most of time.
             </para>
         </note>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

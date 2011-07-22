@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20855 -->
-<sect1 id="zend.service.introduction">
-    <title>導入</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.introduction"><info><title>導入</title></info>
+    
     <para>
         <classname>Zend_Service</classname> は、<acronym>SOAP</acronym> や REST
         などのウェブサービスの実装基盤となる抽象クラスです。
@@ -108,7 +108,4 @@
         将来的には、さらにいろいろ追加されるでしょう。
     </para>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

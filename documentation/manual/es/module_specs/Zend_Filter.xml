@@ -1,17 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.filter.introduction">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.introduction"><info><title>Introducción</title></info>
 
-    <title>Introducción</title>
+    
 
     <para> El componente <classname>Zend_Filter</classname> proporciona un
         conjunto de filtros de datos comúnmente necesarios. También proporciona
         un sencillo mecanismo de encadenar varios filtros que se puedan aplicar
         a un solo dato en un orden definido por el usuario. </para>
 
-    <sect2 id="zend.filter.introduction.definition">
-        <title>¿Qué es un filtro?</title>
+    <section xml:id="zend.filter.introduction.definition"><info><title>¿Qué es un filtro?</title></info>
+        
         <para>En el mundo físico, un filtro se suele utilizar para eliminar
             partes no deseadas de lo ingresado, y la vez lo ingresado pasa a
             través de un filtro de salida (por ejemplo, el café). En este caso,
@@ -60,11 +58,11 @@
             <code> &amp;amp;</code> "). El Apoyo a los casos de uso como
         para la web los desarrolladores es importante, y "filtrar", en el
         contexto de la utilización de <classname> Zend_Filter </classname> , los
-        medios para realizar algunas transformaciones en los datos de entrada. </sect2>
+        medios para realizar algunas transformaciones en los datos de entrada. </section>
 
-    <sect2 id="zend.filter.introduction.using">
+    <section xml:id="zend.filter.introduction.using"><info><title>Uso básico de los filtros</title></info>
 
-        <title>Uso básico de los filtros</title>
+        
 
         <para> Having this filter definition established provides the foundation
             for <classname>Zend_Filter_Interface</classname> , which requires a
@@ -73,19 +71,19 @@
 
         <para> Following is a basic example of using a filter upon two input
             data, the ampersand ( <code>&amp;</code> ) and double quote (
-                <code>&quot;</code> ) characters: <programlisting language="php"><![CDATA[
+                <code>"</code> ) characters: <programlisting language="php"><![CDATA[
 $htmlEntities = new Zend_Filter_HtmlEntities();
 
-echo $htmlEntities->filter('&'); // &amp;
-echo $htmlEntities->filter('"'); // &quot;
+echo $htmlEntities->filter('&'); // &
+echo $htmlEntities->filter('"'); // "
 ]]></programlisting>
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.introduction.static">
+    <section xml:id="zend.filter.introduction.static"><info><title> Usando el método estático staticFilter()</title></info>
 
-        <title> Usando el método estático staticFilter()</title>
+        
 
         <para> If it is inconvenient to load a given filter class and create an
             instance of the filter, you can use the static method
@@ -116,12 +114,11 @@ echo Zend_Filter::filterStatic('"', 'HtmlEntities', array(ENT_QUOTES));
 
         <para> Also, the <classname>Zend_Filter_Input</classname> class allows
             you to instantiate and run multiple filter and validator classes on
-            demand to process sets of input data. See <xref
-                linkend="zend.filter.input"/> . </para>
+            demand to process sets of input data. See <xref linkend="zend.filter.input"/> . </para>
 
-        <sect3 id="zend.filter.introduction.static.namespaces">
+        <section xml:id="zend.filter.introduction.static.namespaces"><info><title>Namespaces</title></info>
 
-            <title>Namespaces</title>
+            
 
             <para> When working with self defined filters you can give a forth
                 parameter to
@@ -190,6 +187,6 @@ echo Zend_Filter::filterStatic('"', 'OtherFilter', array($parameters));
                         are set. </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

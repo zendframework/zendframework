@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.headmeta">
-    <title>HeadMeta Helfer</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headmeta"><info><title>HeadMeta Helfer</title></info>
+    
 
     <para>
         Das <acronym>HTML</acronym> Element <emphasis>&lt;meta&gt;</emphasis> wird verwendet um Meta
@@ -107,8 +105,8 @@
         <link linkend="zend.view.helpers.initial.placeholder">Platzhalter Helfers</link>.
     </para>
 
-    <example id="zend.view.helpers.initial.headmeta.basicusage">
-        <title>Grundsätzliche Verwendung des HeadMeta Helfers</title>
+    <example xml:id="zend.view.helpers.initial.headmeta.basicusage"><info><title>Grundsätzliche Verwendung des HeadMeta Helfers</title></info>
+        
 
         <para>
             Neue Meta Tags können jederzeit spezifiziert werden. Typischerweise werden Clientseitige
@@ -181,4 +179,4 @@ $this->headMeta()->appendHttpEquiv('Refresh',
 <?php echo $this->headMeta() ?>
 ]]></programlisting>
     </example>
-</sect3>
+</section>

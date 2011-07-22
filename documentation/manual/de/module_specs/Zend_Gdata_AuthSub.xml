@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22741 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.gdata.authsub">
-    <title>Authentifizierung mit AuthSub</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.authsub"><info><title>Authentifizierung mit AuthSub</title></info>
+    
 
     <para>
         Der AuthSub Mechanismum erlaubt es Web Anwendungen zu schreiben die einen authentifizierten
@@ -11,8 +9,7 @@
     </para>
 
     <para>
-        Siehe <ulink
-            url="http://code.google.com/apis/accounts/AuthForWebApps.html">http://code.google.com/apis/accounts/AuthForWebApps.html</ulink>
+        Siehe <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/accounts/AuthForWebApps.html">http://code.google.com/apis/accounts/AuthForWebApps.html</link>
         für weitere Informationen über Google Data AuthSub Authentifizierung.
     </para>
 
@@ -31,8 +28,8 @@
         bekannt sind.
     </para>
 
-    <note>
-        <title>Registrierte Anwendungen</title>
+    <note><info><title>Registrierte Anwendungen</title></info>
+        
 
         <para>
             <classname>Zend_Gdata</classname> unterstützt aktuell die Verwendung von sicheren Tokens
@@ -41,8 +38,8 @@
         </para>
     </note>
 
-    <sect2 id="zend.gdata.authsub.login">
-        <title>Einen AuthSub authentifizierten Http Clienten erstellen</title>
+    <section xml:id="zend.gdata.authsub.login"><info><title>Einen AuthSub authentifizierten Http Clienten erstellen</title></info>
+        
 
         <para>
             Die <acronym>PHP</acronym> Anwendung sollte einen Hyperlink zur Google
@@ -105,10 +102,10 @@ $client = Zend_Gdata_AuthSub::getHttpClient($_SESSION['cal_token']);
 // Erstellt ein Gdara Objekt das den authentifizierten Http Client verwendet
 $cal = new Zend_Gdata_Calendar($client);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.authsub.logout">
-        <title>Beenden der AuthSub Authentifizierung</title>
+    <section xml:id="zend.gdata.authsub.logout"><info><title>Beenden der AuthSub Authentifizierung</title></info>
+        
 
         <para>
             Um den authentifizierten Status eines gegebenen Status zu beenden, kann die statische
@@ -131,8 +128,8 @@ if (isset($_GET['logout'])) {
 }
 ]]></programlisting>
 
-        <note>
-            <title>Sicherheitshinweise</title>
+        <note><info><title>Sicherheitshinweise</title></info>
+            
 
             <para>
                 Das Vermeiden der <varname>$php_self</varname> Variable im obigen Beispiel ist eine
@@ -149,5 +146,5 @@ if (isset($_GET['logout'])) {
                 authentifizierten Zugriff auf jegliche Services zu beenden.
             </para>
         </note>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.loader.autoloader">
-    <title>Автозагрузчик</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.autoloader"><info><title>Автозагрузчик</title></info>
+    
 
     <para>
         <classname>Zend_Loader_Autoloader</classname> представляет собой
@@ -38,8 +37,8 @@
         в любой момент выполнения, когда это необходимо.
     </para>
 
-    <sect2 id="zend.loader.autoloader.usage">
-        <title>Использование автозагрузчика</title>
+    <section xml:id="zend.loader.autoloader.usage"><info><title>Использование автозагрузчика</title></info>
+        
 
         <para>
             Когда экземпляр автозагрузчика извлекается в первый раз,
@@ -65,8 +64,8 @@ $autoloader = Zend_Loader_Autoloader::getInstance();
 $autoloader->registerNamespace('My_');
 ]]></programlisting>
 
-        <note>
-            <title>Префиксы пространств имен</title>
+        <note><info><title>Префиксы пространств имен</title></info>
+            
 
             <para>
                 Обратите внимание, что предыдущий пример использует в
@@ -139,10 +138,10 @@ $autoloader->suppressNotFoundWarnings(true);
         <programlisting language="php"><![CDATA[
 $autoloader->setFallbackAutoloader(true);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.autoloader.interface">
-        <title>Итерфейс автозагрузчика</title>
+    <section xml:id="zend.loader.autoloader.interface"><info><title>Итерфейс автозагрузчика</title></info>
+        
 
         <para>
             Кроме возможности указывать любые обратные вызовы в качестве
@@ -170,18 +169,18 @@ $foo = new Foo_Autoloader();
 
 $autoloader->pushAutoloader($foo, 'Foo_');
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.autoloader.reference">
-        <title>Справка по автозагрузчику</title>
+    <section xml:id="zend.loader.autoloader.reference"><info><title>Справка по автозагрузчику</title></info>
+        
 
         <para>
             Ниже приведено руководство по методам, доступным в классе
             <classname>Zend_Loader_Autoloader</classname>.
         </para>
 
-        <table id="zend.loader.autoloader.reference.api">
-            <title>Методы Zend_Loader_Autoloader-а</title>
+        <table xml:id="zend.loader.autoloader.reference.api"><info><title>Методы Zend_Loader_Autoloader-а</title></info>
+            
             <tgroup cols="4">
                 <thead>
                     <row>
@@ -495,5 +494,5 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
-</sect1>
+    </section>
+</section>

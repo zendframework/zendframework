@@ -1,22 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.layout.quickstart">
-    <title>Zend_Layout - Démarrage rapide</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.quickstart"><info><title>Zend_Layout - Démarrage rapide</title></info>
+    
 
     <para>
         Il y a deux modes d'utilisation de <classname>Zend_Layout</classname> : avec Zend
         Framework <acronym>MVC</acronym>, et sans.
     </para>
 
-    <sect2 id="zend.layout.quickstart.layouts">
-        <title>Scripts de layout</title>
+    <section xml:id="zend.layout.quickstart.layouts"><info><title>Scripts de layout</title></info>
+        
 
         <para>
             Dans tous les cas, un script de layout est nécessaire. Les scripts de layout
             utilisent simplement Zend_View (ou une implémentation particulière personnalisée). Les
-            variables de layout sont enregistrées dans le <link
-            linkend="zend.view.helpers.initial.placeholder">placeholder</link> <code>Layout</code>,
+            variables de layout sont enregistrées dans le <link linkend="zend.view.helpers.initial.placeholder">placeholder</link> <code>Layout</code>,
             et peuvent être accédées via l'aide de vue placeholder ou directement en tant que
             propriétés de l'objet layout.
         </para>
@@ -52,8 +49,7 @@
         <para>
             Toutes les aides de vue enregistrées sont accessibles dans
             <classname>Zend_Layout</classname> car il utilise <classname>Zend_View</classname> pour
-            son propre rendu. Vous pouvez aussi accéder aux variables de la vue. Les aides <link
-            linkend="zend.view.helpers.initial.placeholder">placeholder </link> sont très pratiques
+            son propre rendu. Vous pouvez aussi accéder aux variables de la vue. Les aides <link linkend="zend.view.helpers.initial.placeholder">placeholder </link> sont très pratiques
             pour l'accès aux éléments tels que &lt;head&gt;, les scripts, les méta, etc. :
         </para>
 
@@ -79,17 +75,16 @@
 </body>
 </html>
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.layout.quickstart.mvc">
-        <title>Utilisation de Zend_Layout avec le système MVC de Zend Framework</title>
+    <section xml:id="zend.layout.quickstart.mvc"><info><title>Utilisation de Zend_Layout avec le système MVC de Zend Framework</title></info>
+        
 
         <para>
             <classname>Zend_Controller</classname> propose une manière d'étendre ses
             fonctionnalités au travers de <link linkend="zend.controller.plugins">plugins de
             contrôleur frontal</link> et <link linkend="zend.controller.actionhelpers">d'aides
-            d'action</link>. <classname>Zend_View</classname> propose aussi des <link
-            linkend="zend.view.helpers">aides</link>. <classname>Zend_Layout</classname> utilise
+            d'action</link>. <classname>Zend_View</classname> propose aussi des <link linkend="zend.view.helpers">aides</link>. <classname>Zend_Layout</classname> utilise
             toutes ces possibilités lorsqu'employé avec les composants <acronym>MVC</acronym>.
         </para>
 
@@ -115,7 +110,7 @@ Zend_Layout::startMvc();
         <para>
             <methodname>startMvc()</methodname> peut prendre en paramètre un tableau d'options ou un objet
             <classname>Zend_Config</classname> pour personnaliser l'instance. Ces options sont
-            détaillées dans <xref linkend="zend.layout.options" />.
+            détaillées dans <xref linkend="zend.layout.options"/>.
         </para>
 
         <para>
@@ -193,16 +188,15 @@ $layout = Zend_Layout::getMvcInstance();
 ]]></programlisting>
 
         <para>
-            Cette approche est particulièrement utile avec <link
-            linkend="zend.controller.actionhelpers.actionstack">l'aide d'action</link> ActionStack
+            Cette approche est particulièrement utile avec <link linkend="zend.controller.actionhelpers.actionstack">l'aide d'action</link> ActionStack
             et son <link linkend="zend.controller.plugins.standard.actionstack"> plugin</link> du
             même nom. Vous pouvez les utiliser pour gérer une pile d'actions et ainsi décomposer vos
             processus.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.layout.quickstart.standalone">
-        <title>Utilisation de Zend_Layout en composant indépendant</title>
+    <section xml:id="zend.layout.quickstart.standalone"><info><title>Utilisation de Zend_Layout en composant indépendant</title></info>
+        
 
         <para>
             Pris indépendamment des composants <acronym>MVC</acronym>, Zend_Layout n'offre pas tout à fait les
@@ -245,10 +239,10 @@ $layout->setLayout('foo');
 // rendu du layout :
 echo $layout->render();
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.layout.quickstart.example">
-        <title>Layout d'exemple</title>
+    <section xml:id="zend.layout.quickstart.example"><info><title>Layout d'exemple</title></info>
+        
 
         <para>
             Une image valant mieux qu'un paragraphe, voyez donc celle-ci qui décrit
@@ -256,8 +250,7 @@ echo $layout->render();
         </para>
 
         <para>
-            <inlinegraphic align="center" fileref="figures/zend.layout.quickstart.example.png"
-            format="PNG" valign="middle" />
+            <inlinemediaobject><imageobject><imagedata align="center" fileref="figures/zend.layout.quickstart.example.png" format="PNG" valign="middle"/></imageobject></inlinemediaobject>
         </para>
 
         <para>
@@ -265,5 +258,5 @@ echo $layout->render();
             absolu, par exemple, vous pourriez rendre la barre de navigation plus tard, en fin. Le
             mécanisme d'obtention du contenu reste le même cependant.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

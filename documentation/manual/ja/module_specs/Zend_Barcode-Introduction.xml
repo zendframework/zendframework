@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 19731 -->
-<sect1 id="zend.barcode.introduction">
-    <title>導入</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.barcode.introduction"><info><title>導入</title></info>
+    
 
     <para>
         <classname>Zend_Barcode</classname> は、バーコードを生成する一般的な方法を提示します。
@@ -11,4 +11,4 @@
         オブジェクトによって、レンダラと独立してバーコードを作成できます。
         与える人は、定められたサポートに基づくバーコードを描けます。
     </para>
-</sect1>
+</section>

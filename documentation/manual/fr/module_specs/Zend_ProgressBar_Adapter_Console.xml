@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20827 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.progressbar.adapter.console">
-    <title>Zend_ProgressBar_Adapter_Console</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.progressbar.adapter.console"><info><title>Zend_ProgressBar_Adapter_Console</title></info>
+    
 
     <para>
         <classname>Zend_ProgressBar_Adapter_Console</classname> est un adaptateur de type
@@ -12,8 +12,8 @@
         le style de la barre de progression elle-même.
     </para>
 
-    <note>
-        <title>Reconnaissance automatique de la largeur de la console</title>
+    <note><info><title>Reconnaissance automatique de la largeur de la console</title></info>
+        
 
         <para>
             <code>shell_exec</code> est nécessaire pour que ceci fonctionne sur les systèmes
@@ -26,13 +26,13 @@
         Vous pouvez paramétrer les options de l'adaptateur soit via les méthodes
         <code>set*</code> soit en fournissant un tableau ("array") ou une instance
         <classname>Zend_Config</classname> en tant que premier paramètre du constructeur. Les
-        options disponibles sont&#160;:
+        options disponibles sont :
     </para>
 
     <itemizedlist>
          <listitem>
              <para>
-                <code>outputStream</code>&#160;: un flux de sortie différent, si vous ne souhaitez pas
+                <code>outputStream</code> : un flux de sortie différent, si vous ne souhaitez pas
                 utiliser STDOUT. Peut être n'importe quel autre flux come <code>php://stderr</code>
                 ou un chemin vers un fichier.
             </para>
@@ -40,37 +40,37 @@
 
         <listitem>
             <para>
-                <code>width</code>&#160;: soit un entier ou la constante <constant>AUTO</constant> de
+                <code>width</code> : soit un entier ou la constante <constant>AUTO</constant> de
                 <classname>Zend_Console_ProgressBar</classname>.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>elements</code>&#160;: soit <constant>NULL</constant> par défaut ou un tableau avec
+                <code>elements</code> : soit <constant>NULL</constant> par défaut ou un tableau avec
                 au moins l'une des constantes de <classname>Zend_Console_ProgressBar</classname>
-                suivantes comme valeur&#160;:
+                suivantes comme valeur :
             </para>
 
             <itemizedlist>
                 <listitem>
                     <para>
-                        <constant>ELEMENT_PERCENT</constant>&#160;: la valeur courante en
+                        <constant>ELEMENT_PERCENT</constant> : la valeur courante en
                         pourcentage.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <constant>ELEMENT_BAR</constant>&#160;: la barre qui va représenter le
+                        <constant>ELEMENT_BAR</constant> : la barre qui va représenter le
                         pourcentage.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <constant>ELEMENT_ETA</constant>&#160;: le calcul automatique du temps restant
-                        estimé (NDT.&#160;: "Estimated Time for Accomplishment"). Cet élément est affiché
+                        <constant>ELEMENT_ETA</constant> : le calcul automatique du temps restant
+                        estimé (NDT. : "Estimated Time for Accomplishment"). Cet élément est affiché
                         pour la première fois qu'après cinq secondes, car durant ce temps, il n'est
                         pas possible de calculer des résultats précis.
                     </para>
@@ -78,7 +78,7 @@
 
                 <listitem>
                     <para>
-                        <constant>ELEMENT_TEXT</constant>&#160;: un message de statut optionnel concernant
+                        <constant>ELEMENT_TEXT</constant> : un message de statut optionnel concernant
                         le processus courant.
                     </para>
                 </listitem>
@@ -87,37 +87,37 @@
 
         <listitem>
             <para>
-                <code>textWidth</code>&#160;: largeur en caractères de l'élément
+                <code>textWidth</code> : largeur en caractères de l'élément
                 <constant>ELEMENT_TEXT</constant>. Par défaut vaut 20.
             </para>
         </listitem>
 
          <listitem>
              <para>
-                <code>charset</code>&#160;: encodage de l'élément <constant>ELEMENT_TEXT</constant>. Par défaut
+                <code>charset</code> : encodage de l'élément <constant>ELEMENT_TEXT</constant>. Par défaut
                 vaut "utf-8".
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>barLeftChar</code>&#160;: un caractère qui est utilisé du côté gauche de
+                <code>barLeftChar</code> : un caractère qui est utilisé du côté gauche de
                 l'indicateur de la barre de progression.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>barRightChar</code>&#160;: un caractère qui est utilisé du côté droit de
+                <code>barRightChar</code> : un caractère qui est utilisé du côté droit de
                 l'indicateur de la barre de progression.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>barIndicatorChar</code>&#160;: un caractère qui est utilisé pour l'indicateur
+                <code>barIndicatorChar</code> : un caractère qui est utilisé pour l'indicateur
                 de la barre de progression. Celui-ci peut être vide.
             </para>
         </listitem>
     </itemizedlist>
-</sect3>
+</section>

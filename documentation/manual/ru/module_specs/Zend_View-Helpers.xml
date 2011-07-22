@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.view.helpers" xmlns:xi="http://www.w3.org/2001/XInclude">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers"><info><title>Помощники видов</title></info>
 
-    <title>Помощники видов</title>
+    
 
     <para>
         Часто бывает так, что в скриптах вида необходимо повторно выполнять
@@ -23,8 +22,8 @@
         camelCase: <code>fooBar()</code>.
     </para>
 
-    <note>
-        <title>Следите за регистром</title>
+    <note><info><title>Следите за регистром</title></info>
+        
         <para>
             Имена помощников всегда должны быть в стиле camelCased, т.е. они
             никогда не начинаются с символа в верхнем регистре. Имя класса
@@ -33,8 +32,8 @@
         </para>
     </note>
 
-    <note>
-        <title>Используемый по умолчанию путь к помощникам</title>
+    <note><info><title>Используемый по умолчанию путь к помощникам</title></info>
+        
 
         <para>
             Используемый по умолчанию путь к помощникам всегда указывает на
@@ -48,18 +47,18 @@
 
     <para>
         Для того, чтобы использовать помощника в своем скрипте вида, вызывайте
-        его, используя <varname>$this->имяПомощника()</varname>.
+        его, используя <varname>$this-&gt;имяПомощника()</varname>.
         В этом случае <classname>Zend_View</classname> загрузит класс
         <code>Zend_View_Helper_ИмяПомощника</code>, создаст его экземпляр и
         вызовет его метод <code>имяПомощника()</code>. Экземпляр объекта
         сохраняется в экземпляре <classname>Zend_View</classname> и будет повторно
         использоваться им во всех будущих вызовах
-        <varname>$this->имяПомощника()</varname>.
+        <varname>$this-&gt;имяПомощника()</varname>.
     </para>
 
-    <sect2 id="zend.view.helpers.initial">
+    <section xml:id="zend.view.helpers.initial"><info><title>Начальный набор помощников</title></info>
 
-        <title>Начальный набор помощников</title>
+        
 
         <para>
             <classname>Zend_View</classname> поставляется с начальным набором помощников,
@@ -382,56 +381,56 @@ echo $this->formCheckbox('foo',
 </form>
 ]]></programlisting>
 
-        <xi:include href="Zend_View-Helpers-Action.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Action.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Action.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Action.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-Cycle.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Cycle.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Cycle.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Cycle.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-Partial.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Partial.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Partial.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Partial.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-Placeholder.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Placeholder.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Placeholder.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Placeholder.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-Doctype.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Doctype.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Doctype.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Doctype.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-HeadLink.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-HeadLink.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadLink.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-HeadLink.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-HeadMeta.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-HeadMeta.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadMeta.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-HeadMeta.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-HeadScript.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-HeadScript.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadScript.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-HeadScript.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-HeadStyle.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-HeadStyle.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadStyle.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-HeadStyle.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-HeadTitle.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-HeadTitle.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadTitle.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-HeadTitle.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-HtmlObject.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-HtmlObject.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HtmlObject.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-HtmlObject.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-InlineScript.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-InlineScript.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-InlineScript.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-InlineScript.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-Json.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Json.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Json.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Json.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-Navigation.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Navigation.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Navigation.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Navigation.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-Translate.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Translate.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Translate.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Translate.xml"/></xi:fallback>
         </xi:include>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.helpers.paths">
+    <section xml:id="zend.view.helpers.paths"><info><title>Пути к классам помощников</title></info>
 
-        <title>Пути к классам помощников</title>
+        
 
         <para>
             Как и для скриптов вида, ваш контроллер может задать
@@ -476,11 +475,11 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
 // "Zend/View/Helper/HelperName.php" с классом "Zend_View_Helper_HelperName".
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.helpers.custom">
+    <section xml:id="zend.view.helpers.custom"><info><title>Написание собственных помощников</title></info>
 
-        <title>Написание собственных помощников</title>
+        
 
         <para>
             Написать собственного помощника довольно легко, просто следуйте
@@ -518,7 +517,7 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
                 Класс должен иметь открытый метод, имя которого
                 соответствует имени помощника. Это метод, который будет
                 вызываться, когда в вашем шаблоне производится вызов
-                <varname>$this->specialPurpose()</varname>. В нашем примере с
+                <varname>$this-&gt;specialPurpose()</varname>. В нашем примере с
                 помощником "specialPurpose" объявление требуемого метода должно
                 быть <code>public function specialPurpose()</code>.
             </para></listitem>
@@ -622,9 +621,6 @@ class My_View_Helper_ScriptPath
             этот метод, поскольку он уже определен в родительском классе.
         </para>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

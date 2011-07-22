@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.exceptions">
-    <title>MVC Exceptions</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.exceptions"><info><title>MVC Exceptions</title></info>
+    
 
-    <sect2 id="zend.controller.exceptions.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.controller.exceptions.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             The <acronym>MVC</acronym> components in Zend Framework utilize a Front Controller,
@@ -22,10 +21,10 @@
             registers them with the response object; in turn, by default, the
             response object does not display exception messages.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.exceptions.handling">
-        <title>Handling Exceptions</title>
+    <section xml:id="zend.controller.exceptions.handling"><info><title>Handling Exceptions</title></info>
+        
 
         <para>
             Several mechanisms are built in to the <acronym>MVC</acronym> components already to
@@ -35,8 +34,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    By default, the <link
-                        linkend="zend.controller.plugins.standard.errorhandler">error
+                    By default, the <link linkend="zend.controller.plugins.standard.errorhandler">error
                     handler plugin</link> is registered and active. This plugin
                     was designed to handle:
                 </para>
@@ -137,10 +135,10 @@ if ($response->isException()) {
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.exceptions.internal">
-        <title>MVC Exceptions You May Encounter</title>
+    <section xml:id="zend.controller.exceptions.internal"><info><title>MVC Exceptions You May Encounter</title></info>
+        
 
         <para>
             The various <acronym>MVC</acronym> components -- request, router, dispatcher, action
@@ -195,8 +193,7 @@ $dispatcher->setParam('useDefaultControllerAlways', true);
                             The exception thrown by <methodname>dispatch()</methodname> is
                             a <classname>Zend_Controller_Dispatcher_Exception</classname>
                             containing the text 'Invalid controller specified'.
-                            Use one of the methods outlined in <link
-                                linkend="zend.controller.exceptions.handling">the
+                            Use one of the methods outlined in <link linkend="zend.controller.exceptions.handling">the
                                 previous section</link> to catch the exception,
                             and then redirect to a generic error page or the
                             home page.
@@ -363,8 +360,5 @@ class My_Controller_PreDispatchPlugin extends Zend_Controller_Plugin_Abstract
                 </itemizedlist>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

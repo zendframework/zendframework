@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20819 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.different-transports">
-    <title>Utiliser différents transports</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.different-transports"><info><title>Utiliser différents transports</title></info>
+    
 
     <para>
         Au cas où vous voudriez envoyer différent émail via des connexions différentes, vous
@@ -11,8 +9,8 @@
         transport par défaut pour la requête <methodname>send()</methodname> courante.
     </para>
 
-    <example id="zend.mail.different-transports.example-1">
-        <title>Utiliser différents transports</title>
+    <example xml:id="zend.mail.different-transports.example-1"><info><title>Utiliser différents transports</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
@@ -25,12 +23,12 @@ $mail->send();  // utilisation du transport par défaut
 ]]></programlisting>
     </example>
 
-    <note>
-        <title>Transports additionnels</title>
+    <note><info><title>Transports additionnels</title></info>
+        
 
         <para>
             Des transports additionnels peuvent-être écrit en implémentant
             <classname>Zend_Mail_Transport_Interface</classname>.
         </para>
     </note>
-</sect1>
+</section>

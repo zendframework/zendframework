@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21740 -->
-<sect1 id="zend.json.advanced">
-    <title>Zend_Json の高度な使用法</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.advanced"><info><title>Zend_Json の高度な使用法</title></info>
+    
 
-    <sect2 id="zend.json.advanced.objects1">
-        <title>JSON オブジェクト</title>
+    <section xml:id="zend.json.advanced.objects1"><info><title>JSON オブジェクト</title></info>
+        
         <para>
             <acronym>PHP</acronym> オブジェクトを <acronym>JSON</acronym> にエンコードすると、
             オブジェクトの public プロパティがすべて <acronym>JSON</acronym>
@@ -48,10 +46,10 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
             お望みの型のオブジェクトを開発者自身が作成したうえで、
             <classname>Zend_Json</classname> がデコードした値をそこに代入していけばいいのです。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.json.advanced.objects2">
-        <title>PHP オブジェクトのエンコード</title>
+    <section xml:id="zend.json.advanced.objects2"><info><title>PHP オブジェクトのエンコード</title></info>
+        
 
         <para>
             <acronym>PHP</acronym> オブジェクトをエンコードする際に、
@@ -61,10 +59,10 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
             <classname>Zend_Json</classname> はこのメソッドを実行します。
             このメソッドは、オブジェクトの内部状態を <acronym>JSON</acronym> 表現で返すものと期待されています。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.json.advanced.internal">
-        <title>内部エンコーダ/デコーダ</title>
+    <section xml:id="zend.json.advanced.internal"><info><title>内部エンコーダ/デコーダ</title></info>
+        
 
         <para>
             <classname>Zend_Json</classname> には二通りのモードがあり、<acronym>PHP</acronym> 環境で ext/json
@@ -87,10 +85,10 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
         <programlisting language="php"><![CDATA[
 Zend_Json::$useBuiltinEncoderDecoder = true:
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.json.advanced.expr">
-        <title>JSON 式</title>
+    <section xml:id="zend.json.advanced.expr"><info><title>JSON 式</title></info>
+        
 
         <para>
             Javascript では無名関数のコールバックを多用します。
@@ -127,8 +125,5 @@ $jsonObjectWithExpression = Zend_Json::encode(
     array('enableJsonExprFinder' => true)
 );
 ]]></programlisting>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

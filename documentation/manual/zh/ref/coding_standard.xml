@@ -1,10 +1,11 @@
-<appendix id="coding-standard">
-  <title>Zend Framework 的 PHP 编码标准 </title>
-    <sect1 id="coding-standard.overview">
-        <title> 绪论 </title>
+<?xml version="1.0" encoding="utf-8"?>
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="coding-standard"><info><title>Zend Framework 的 PHP 编码标准 </title></info>
+  
+    <section xml:id="coding-standard.overview"><info><title> 绪论 </title></info>
+        
 
-        <sect2 id="coding-standard.overview.scope">
-            <title> 适用范围 </title>
+        <section xml:id="coding-standard.overview.scope"><info><title> 适用范围 </title></info>
+            
 
             <para>
                 本文档提供的代码格式和文档的指南是给参与 Zend Framework 的个人和团队使用的，许多使用 Zend Framework 的开发者
@@ -12,7 +13,7 @@
                 详细说明编码标准。
 
                 注：有时候开发者认为在最详细的设计级别上标准的建立比标准所建议的更重要。Zend Framework 编码标准的指南
-                实践上很好地工作于 ZF 项目。你可以根据我们的 <ulink url="http://framework.zend.com/license">license</ulink> 中的条款来修改或使用它们。
+                实践上很好地工作于 ZF 项目。你可以根据我们的 <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/license">license</link> 中的条款来修改或使用它们。
             </para>
             <para>
                 ZF 编码标准的话题包括：
@@ -35,49 +36,49 @@
                     </listitem>
                 </itemizedlist>
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.overview.goals">
-            <title> 目标 </title>
+        <section xml:id="coding-standard.overview.goals"><info><title> 目标 </title></info>
+            
 
             <para>
                 编码标准对任何开发项目都很重要，特别是很多开发者在同一项目上工作。编码标准帮助确保代码的高质量、少 bug 和容易维护。
             </para>
-        </sect2>
-    </sect1>
+        </section>
+    </section>
 
-    <sect1 id="coding-standard.php-file-formatting">
-        <title>PHP File 文件格式 </title>
+    <section xml:id="coding-standard.php-file-formatting"><info><title>PHP File 文件格式 </title></info>
+        
 
-        <sect2 id="coding-standard.php-file-formatting.general">
-            <title> 常规 </title>
+        <section xml:id="coding-standard.php-file-formatting.general"><info><title> 常规 </title></info>
+            
 
             <para>
-                对于只包含有 PHP 代码的文件，结束标志（"?>"）是不允许存在的，PHP自身不需要（"?>"）, 这样做, 可以防止它的末尾的被意外地注入相应。
+                对于只包含有 PHP 代码的文件，结束标志（"?&gt;"）是不允许存在的，PHP自身不需要（"?&gt;"）, 这样做, 可以防止它的末尾的被意外地注入相应。
             </para>
 
             <para>
                 <emphasis> 重要：</emphasis> 由 <code>__HALT_COMPILER()</code> 允许的任意的二进制代码的内容被 Zend Framework 中的 PHP 文件或由它们产生的文件禁止。
                 这个功能的使用只对一些安装脚本开放。
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.php-file-formatting.indentation">
-            <title> 缩进 </title>
+        <section xml:id="coding-standard.php-file-formatting.indentation"><info><title> 缩进 </title></info>
+            
 
             <para> 缩进由四个空格组成，禁止使用制表符 TAB 。</para>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.php-file-formatting.max-line-length">
-            <title> 行的最大长度 </title>
+        <section xml:id="coding-standard.php-file-formatting.max-line-length"><info><title> 行的最大长度 </title></info>
+            
 
             <para>
                 一行 80 字符以内是比较合适，就是说，ZF 的开发者应当努力在可能的情况下保持每行代码少于 80 个字符，在有些情况下，长点也可以, 但最多为 120 个字符。
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.php-file-formatting.line-termination">
-            <title> 行结束标志 </title>
+        <section xml:id="coding-standard.php-file-formatting.line-termination"><info><title> 行结束标志 </title></info>
+            
 
             <para>
                 行结束标志遵循 Unix 文本文件的约定，行必需以单个换行符（LF）结束。换行符在文件中表示为 10，或16进制的 0x0A。
@@ -86,14 +87,14 @@
             <para>
                 注：不要使用 苹果操作系统的回车（0x0D）或 Windows 电脑的回车换行组合如（0x0D,0x0A）。
             </para>
-        </sect2>
-    </sect1>
+        </section>
+    </section>
 
-    <sect1 id="coding-standard.naming-conventions">
-        <title> 命名约定 </title>
+    <section xml:id="coding-standard.naming-conventions"><info><title> 命名约定 </title></info>
+        
 
-        <sect2 id="coding-standard.naming-conventions.classes">
-            <title> 类 </title>
+        <section xml:id="coding-standard.naming-conventions.classes"><info><title> 类 </title></info>
+            
 
             <para>
                 Zend Framework 的类命名总是对应于其所属文件的目录结构的，ZF 标准库的根目录是 “Zend/”，ZF 特别（extras）库的根目录是 "ZendX/"，所有 Zend Framework 的类在其下按等级存放。
@@ -116,10 +117,10 @@
 
                 <emphasis>重要：</emphasis> 依靠 ZF 库展开的代码，但又不是标准或特别库的一部分（例如程序代码或不是 Zend 发行的库），不要以 "Zend_" 或 "ZendX_" 开头。
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.naming-conventions.filenames">
-            <title> 文件名 </title>
+        <section xml:id="coding-standard.naming-conventions.filenames"><info><title> 文件名 </title></info>
+            
 
             <para>
                 对于其它文件，只有字母数字字符、下划线和短横线（"-"）可用，空格是绝对不允许的。
@@ -133,15 +134,15 @@ Zend/Db.php
 
 Zend/Controller/Front.php
 
-Zend/View/Helper/FormRadio.php]]>
-                </programlisting>
+Zend/View/Helper/FormRadio.php
+                ]]></programlisting>
 
                 文件名必须遵循上述的对应类名的规则。
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.naming-conventions.functions-and-methods">
-            <title> 函数和方法 </title>
+        <section xml:id="coding-standard.naming-conventions.functions-and-methods"><info><title> 函数和方法 </title></info>
+            
 
             <para>
                 函数名只包含字母数字字符，下划线是不允许的。数字是允许的但大多数情况下不鼓励。
@@ -163,8 +164,8 @@ filterInput()
 
 getElementById()
 
-widgetFactory()]]>
-                </programlisting>
+widgetFactory()
+                ]]></programlisting>
             </para>
 
             <para>
@@ -180,10 +181,10 @@ widgetFactory()]]>
                 全局函数 (如："floating functions") 允许但大多数情况下不鼓励，建议把这类函数封装到静态类里。
 
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.naming-conventions.variables">
-            <title> 变量 </title>
+        <section xml:id="coding-standard.naming-conventions.variables"><info><title> 变量 </title></info>
+            
 
             <para>
                 变量只包含数字字母字符，大多数情况下不鼓励使用数字，下划线不接受。
@@ -200,10 +201,10 @@ widgetFactory()]]>
             <para>
                 我们一般鼓励使用冗长的名字，这样容易理解代码，开发者知道把数据存到哪里。除非在小循环里，不鼓励使用简洁的名字如 "$i" 和 "$n" 。如果一个循环超过 20 行代码，索引的变量名必须有个具有描述意义的名字。
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.naming-conventions.constants">
-            <title> 常量 </title>
+        <section xml:id="coding-standard.naming-conventions.constants"><info><title> 常量 </title></info>
+            
 
             <para>
                 常量包含数字字母字符和下划线，数字允许作为常量名。
@@ -220,14 +221,14 @@ widgetFactory()]]>
             <para>
                 常量必须通过 "const" 定义为类的成员，强烈不鼓励使用 "define" 定义的全局常量。
             </para>
-        </sect2>
-    </sect1>
+        </section>
+    </section>
 
-    <sect1 id="coding-standard.coding-style">
-        <title> 编码风格 </title>
+    <section xml:id="coding-standard.coding-style"><info><title> 编码风格 </title></info>
+        
 
-        <sect2 id="coding-standard.coding-style.php-code-demarcation">
-            <title>PHP 代码划分（Demarcation）</title>
+        <section xml:id="coding-standard.coding-style.php-code-demarcation"><info><title>PHP 代码划分（Demarcation）</title></info>
+            
 
             <para>
                 PHP 代码总是用完整的标准的 PHP 标签定界：
@@ -238,41 +239,41 @@ widgetFactory()]]>
             </para>
 
             <para>
-                短标签（ ）是不允许的，只包含 PHP 代码的文件，不要结束标签 （参见 <xref linkend="coding-standard.php-file-formatting.general" />）。
+                短标签（ ）是不允许的，只包含 PHP 代码的文件，不要结束标签 （参见 <xref linkend="coding-standard.php-file-formatting.general"/>）。
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.coding-style.strings">
-            <title> 字符串 </title>
+        <section xml:id="coding-standard.coding-style.strings"><info><title> 字符串 </title></info>
+            
 
-            <sect3 id="coding-standard.coding-style.strings.literals">
-                <title> 字符串文字 </title>
+            <section xml:id="coding-standard.coding-style.strings.literals"><info><title> 字符串文字 </title></info>
+                
 
                 <para>
                     当字符串是文字(不包含变量)，应当用单引号（ apostrophe ）来括起来：
 
                     <programlisting role="php"><![CDATA[
-$a = 'Example String';]]>
-                    </programlisting>
+$a = 'Example String';
+                    ]]></programlisting>
                 </para>
-            </sect3>
+            </section>
 
-            <sect3 id="coding-standard.coding-style.strings.literals-containing-apostrophes">
-                <title> 包含单引号（'）的字符串文字 </title>
+            <section xml:id="coding-standard.coding-style.strings.literals-containing-apostrophes"><info><title> 包含单引号（'）的字符串文字 </title></info>
+                
 
                 <para>
                     当文字字符串包含单引号（apostrophe ）就用双引号括起来，特别在 SQL 语句中有用：
 
                     <programlisting role="php"><![CDATA[
-$sql = "SELECT `id`, `name` from `people` WHERE `name`='Fred' OR `name`='Susan'";]]>
-                    </programlisting>
+$sql = "SELECT `id`, `name` from `people` WHERE `name`='Fred' OR `name`='Susan'";
+                    ]]></programlisting>
 
                     在转义单引号时，上述语法是首选的，因为很容易阅读。
                 </para>
-            </sect3>
+            </section>
 
-            <sect3 id="coding-standard.coding-style.strings.variable-substitution">
-                <title> 变量替换 </title>
+            <section xml:id="coding-standard.coding-style.strings.variable-substitution"><info><title> 变量替换 </title></info>
+                
 
                 <para>
                     变量替换有下面这些形式：
@@ -280,28 +281,28 @@ $sql = "SELECT `id`, `name` from `people` WHERE `name`='Fred' OR `name`='Susan'"
                     <programlisting role="php"><![CDATA[
 $greeting = "Hello $name, welcome back!";
 
-$greeting = "Hello {$name}, welcome back!";]]>
-                    </programlisting>
+$greeting = "Hello {$name}, welcome back!";
+                    ]]></programlisting>
                 </para>
 
                 <para>
                     为保持一致，这个形式不允许：
 
                     <programlisting role="php"><![CDATA[
-$greeting = "Hello ${name}, welcome back!";]]>
-                    </programlisting>
+$greeting = "Hello ${name}, welcome back!";
+                    ]]></programlisting>
                 </para>
-            </sect3>
+            </section>
 
-            <sect3 id="coding-standard.coding-style.strings.string-concatenation">
-                <title> 字符串连接 </title>
+            <section xml:id="coding-standard.coding-style.strings.string-concatenation"><info><title> 字符串连接 </title></info>
+                
 
                 <para>
                     字符串必需用 "." 操作符连接，在它的前后加上空格以提高可读性：
 
                     <programlisting role="php"><![CDATA[
-$company = 'Zend' . ' ' . 'Technologies';]]>
-                    </programlisting>
+$company = 'Zend' . ' ' . 'Technologies';
+                    ]]></programlisting>
                 </para>
 
                 <para>
@@ -310,17 +311,17 @@ $company = 'Zend' . ' ' . 'Technologies';]]>
                     <programlisting role="php"><![CDATA[
 $sql = "SELECT `id`, `name` FROM `people` "
      . "WHERE `name` = 'Susan' "
-     . "ORDER BY `name` ASC ";]]>
-                    </programlisting>
+     . "ORDER BY `name` ASC ";
+                    ]]></programlisting>
                 </para>
-            </sect3>
-        </sect2>
+            </section>
+        </section>
 
-        <sect2 id="coding-standard.coding-style.arrays">
-            <title> 数组 </title>
+        <section xml:id="coding-standard.coding-style.arrays"><info><title> 数组 </title></info>
+            
 
-            <sect3 id="coding-standard.coding-style.arrays.numerically-indexed">
-                <title> 数字索引数组 </title>
+            <section xml:id="coding-standard.coding-style.arrays.numerically-indexed"><info><title> 数字索引数组 </title></info>
+                
 
                 <para> 索引不能为负数 </para>
 
@@ -332,8 +333,8 @@ $sql = "SELECT `id`, `name` FROM `people` "
                     当用 <code>array</code> 函数声明有索引的数组，在每个逗号的后面间隔空格以提高可读性：
 
                     <programlisting role="php"><![CDATA[
-$sampleArray = array(1, 2, 3, 'Zend', 'Studio');]]>
-                    </programlisting>
+$sampleArray = array(1, 2, 3, 'Zend', 'Studio');
+                    ]]></programlisting>
                 </para>
 
                 <para>
@@ -342,30 +343,30 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio');]]>
                     <programlisting role="php"><![CDATA[
 $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
                      $a, $b, $c,
-                     56.44, $d, 500);]]>
-                    </programlisting>
+                     56.44, $d, 500);
+                    ]]></programlisting>
                 </para>
-            </sect3>
+            </section>
 
-            <sect3 id="coding-standard.coding-style.arrays.associative">
-                <title> 关联数组 </title>
+            <section xml:id="coding-standard.coding-style.arrays.associative"><info><title> 关联数组 </title></info>
+                
 
                 <para>
                     当用声明关联数组，<code>array</code> 我们鼓励把代码分成多行，在每个连续行的开头用空格填补来对齐键和值：
 
                     <programlisting role="php"><![CDATA[
 $sampleArray = array('firstKey'  => 'firstValue',
-                     'secondKey' => 'secondValue');]]>
-                    </programlisting>
+                     'secondKey' => 'secondValue');
+                    ]]></programlisting>
                 </para>
-            </sect3>
-        </sect2>
+            </section>
+        </section>
 
-        <sect2 id="coding-standard.coding-style.classes">
-            <title> 类 </title>
+        <section xml:id="coding-standard.coding-style.classes"><info><title> 类 </title></info>
+            
 
-            <sect3 id="coding-standard.coding-style.classes.declaration">
-                <title> 类的声明 </title>
+            <section xml:id="coding-standard.coding-style.classes.declaration"><info><title> 类的声明 </title></info>
+                
 
                 <para>
                     用 Zend Framework 的命名约定来命名类。
@@ -390,13 +391,13 @@ class SampleClass
 {
     // 类的所有内容
     // 必需缩进四个空格
-}]]>
-                    </programlisting>
+}
+                    ]]></programlisting>
                 </para>
-            </sect3>
+            </section>
 
-            <sect3 id="coding-standard.coding-style.classes.member-variables">
-                <title> 类成员变量 </title>
+            <section xml:id="coding-standard.coding-style.classes.member-variables"><info><title> 类成员变量 </title></info>
+                
 
                 <para>
                     必须用Zend Framework的变量名约定来命名类成员变量。
@@ -406,14 +407,14 @@ class SampleClass
                     不允许使用 <code>var</code> （因为 ZF 是基于 PHP 5 的 ），要用 <code>private</code>、 <code>protected</code> 或  <code>public</code>。
                     直接访问 public 变量是允许的但不鼓励，最好使用访问器 （set/get）。
                 </para>
-            </sect3>
-        </sect2>
+            </section>
+        </section>
 
-        <sect2 id="coding-standard.coding-style.functions-and-methods">
-            <title> 函数和方法 </title>
+        <section xml:id="coding-standard.coding-style.functions-and-methods"><info><title> 函数和方法 </title></info>
+            
 
-            <sect3 id="coding-standard.coding-style.functions-and-methods.declaration">
-                <title> 函数和方法声明 </title>
+            <section xml:id="coding-standard.coding-style.functions-and-methods.declaration"><info><title> 函数和方法声明 </title></info>
+                
 
                 <para>
                     必须用Zend Framework的函数名约定来命名函数。
@@ -443,8 +444,8 @@ class Foo
         // 函数的所有内容
         // 必需缩进四个空格
     }
-}]]>
-                    </programlisting>
+}
+                    ]]></programlisting>
                 </para>
 
                 <para>
@@ -461,8 +462,8 @@ class Foo
      */
     public function bar(&$baz)
     {}
-}]]>
-                    </programlisting>
+}
+                    ]]></programlisting>
                 </para>
 
                 <para>
@@ -494,21 +495,21 @@ class Foo
     {
         return $this->bar;
     }
-}]]>
-                    </programlisting>
+}
+                    ]]></programlisting>
                 </para>
 
-            </sect3>
+            </section>
 
-            <sect3 id="coding-standard.coding-style.functions-and-methods.usage">
-                <title> 函数和方法的用法 </title>
+            <section xml:id="coding-standard.coding-style.functions-and-methods.usage"><info><title> 函数和方法的用法 </title></info>
+                
 
                 <para>
                     函数的参数应当用逗号和紧接着的空格分开，下面可接受的调用的例子中的函数带有三个参数：
 
                     <programlisting role="php"><![CDATA[
-threeArguments(1, 2, 3);]]>
-                    </programlisting>
+threeArguments(1, 2, 3);
+                    ]]></programlisting>
                 </para>
 
                 <para>
@@ -522,17 +523,17 @@ threeArguments(array(1, 2, 3), 2, 3);
 
 threeArguments(array(1, 2, 3, 'Zend', 'Studio',
                      $a, $b, $c,
-                     56.44, $d, 500), 2, 3);]]>
-                    </programlisting>
+                     56.44, $d, 500), 2, 3);
+                    ]]></programlisting>
                 </para>
-            </sect3>
-        </sect2>
+            </section>
+        </section>
 
-        <sect2 id="coding-standard.coding-style.control-statements">
-            <title> 控制语句 </title>
+        <section xml:id="coding-standard.coding-style.control-statements"><info><title> 控制语句 </title></info>
+            
 
-            <sect3 id="coding-standard.coding-style.control-statements.if-else-elseif">
-                <title>if/Else/Elseif</title>
+            <section xml:id="coding-standard.coding-style.control-statements.if-else-elseif"><info><title>if/Else/Elseif</title></info>
+                
 
                 <para>
                     使用 <code>if</code> and <code>elseif</code> 的控制语句在条件语句的圆括号前后都必须有一个空格。
@@ -548,8 +549,8 @@ threeArguments(array(1, 2, 3, 'Zend', 'Studio',
                     <programlisting role="php"><![CDATA[
 if ($a != 2) {
     $a = 2;
-}]]>
-                    </programlisting>
+}
+                    ]]></programlisting>
                 </para>
 
                 <para>
@@ -570,18 +571,18 @@ if ($a != 2) {
     $a = 4;
 } else {
     $a = 7;
-}]]>
-                    </programlisting>
+}
+                    ]]></programlisting>
                     在有些情况下， PHP 允许这些语句不用花括号，但在(ZF) 代码标准里，它们（"if"、 "elseif" 或 "else" 语句）必须使用花括号。
                 </para>
 
                 <para>
                     "elseif" 是允许的但强烈不鼓励，我们支持 "else if" 组合。
                 </para>
-            </sect3>
+            </section>
 
-            <sect3 id="coding-standards.coding-style.control-statements.switch">
-                <title>Switch</title>
+            <section xml:id="coding-standards.coding-style.control-statements.switch"><info><title>Switch</title></info>
+                
 
                 <para>
                     在 "switch" 结构里的控制语句在条件语句的圆括号前后必须都有一个单个的空格。
@@ -601,8 +602,8 @@ switch ($numPeople) {
 
     default:
         break;
-}]]>
-                </programlisting>
+}
+                ]]></programlisting>
 
                 <para>
                     <code>switch</code> 语句应当有 <code>default</code>。
@@ -612,26 +613,26 @@ switch ($numPeople) {
                     <emphasis>注：</emphasis> 有时候，在 falls through 到下个 case 的 <code>case</code> 语句中不写 <code>break</code> or <code>return</code> 很有用。
                     为了区别于 bug，任何 <code>case</code> 语句中，所有不写 <code>break</code> or <code>return</code> 的地方应当有一个 "// break intentionally omitted" 这样的注释来表明 break 是故意忽略的。
                 </para>
-            </sect3>
-        </sect2>
+            </section>
+        </section>
 
-        <sect2 id="coding-standards.inline-documentation">
-            <title> 注释文档 </title>
+        <section xml:id="coding-standards.inline-documentation"><info><title> 注释文档 </title></info>
+            
 
-            <sect3 id="coding-standards.inline-documentation.documentation-format">
-                <title> 格式 </title>
+            <section xml:id="coding-standards.inline-documentation.documentation-format"><info><title> 格式 </title></info>
+                
 
                 <para>
-                    所有文档块 ("docblocks") 必须和 phpDocumentor 格式兼容，phpDocumentor 格式的描述超出了本文档的范围，关于它的详情，参考：<ulink url="http://phpdoc.org/">http://phpdoc.org/</ulink>。
+                    所有文档块 ("docblocks") 必须和 phpDocumentor 格式兼容，phpDocumentor 格式的描述超出了本文档的范围，关于它的详情，参考：<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://phpdoc.org/">http://phpdoc.org/</link>。
                 </para>
 
                 <para>
                     所有类文件必须在文件的顶部包含文件级 （"file-level"）的 docblock ，在每个类的顶部放置一个 "class-level" 的 docblock。下面是一些例子：
                 </para>
-            </sect3>
+            </section>
 
-            <sect3 id="coding-standards.inline-documentation.files">
-                <title> 文件 </title>
+            <section xml:id="coding-standards.inline-documentation.files"><info><title> 文件 </title></info>
+                
 
                 <para>
                     每个包含 PHP 代码的文件必须至少在文件顶部的 docblock 包含这些 phpDocumentor 标签：
@@ -648,13 +649,13 @@ switch ($numPeople) {
  * @license    http://framework.zend.com/license/3_0.txt   BSD License
  * @link       http://framework.zend.com/package/PackageName
  * @since      File available since Release 1.5.0
-*/]]>
-                    </programlisting>
+*/
+                    ]]></programlisting>
                 </para>
-            </sect3>
+            </section>
 
-            <sect3 id="coding-standards.inline-documentation.classes">
-                <title> 类 </title>
+            <section xml:id="coding-standards.inline-documentation.classes"><info><title> 类 </title></info>
+                
 
                 <para>
                     每个类必须至少包含这些 phpDocumentor 标签：
@@ -671,13 +672,13 @@ switch ($numPeople) {
  * @link       http://framework.zend.com/package/PackageName
  * @since      Class available since Release 1.5.0
  * @deprecated Class deprecated in Release 2.0.0
- */]]>
-                    </programlisting>
+ */
+                    ]]></programlisting>
                 </para>
-            </sect3>
+            </section>
 
-            <sect3 id="coding-standards.inline-documentation.functions">
-                <title> 函数 </title>
+            <section xml:id="coding-standards.inline-documentation.functions"><info><title> 函数 </title></info>
+                
 
                 <para>
                     每个函数，包括对象方法，必须有最少包含下列内容的文档块（docblock）：
@@ -697,14 +698,11 @@ switch ($numPeople) {
                     如果函数/方法抛出一个异常，使用 @throws 于所有已知的异常类：
 
                     <programlisting role="php"><![CDATA[
-@throws exceptionclass [description]]]>
-                    </programlisting>
+@throws exceptionclass [description]
+                    ]]></programlisting>
                 </para>
-            </sect3>
-        </sect2>
-    </sect1>
+            </section>
+        </section>
+    </section>
 
 </appendix>
-<!--
-vim:se ts=4 sw=4 et:
--->

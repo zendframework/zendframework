@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20774 -->
-<sect1 id="zend.feed.custom-feed">
-    <title>独自のフィードクラスおよびエントリクラス</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.custom-feed"><info><title>独自のフィードクラスおよびエントリクラス</title></info>
+    
 
     <para>
         独自のフォーマットを提供したい、
@@ -17,8 +15,8 @@
         このクラスの使用者は、名前空間について心配する必要がなくなります。
     </para>
 
-    <example id="zend.feed.custom-feed.example.extending">
-        <title>独自の名前空間を使用しての Atom エントリクラスの拡張</title>
+    <example xml:id="zend.feed.custom-feed.example.extending"><info><title>独自の名前空間を使用しての Atom エントリクラスの拡張</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 /**
@@ -92,7 +90,4 @@ $entry->myUpdated;
 ]]></programlisting>
     </example>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

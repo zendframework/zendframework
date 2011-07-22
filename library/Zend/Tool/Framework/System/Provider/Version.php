@@ -62,7 +62,7 @@ class Version implements Provider, RegistryEnabled
      * Show Action
      *
      * @param string $mode The mode switch can be one of: major, minor, or mini (default)
-     * @param bool $nameincluded
+     * @param bool $nameIncluded
      */
     public function show($mode = self::MODE_MINI, $nameIncluded = true)
     {

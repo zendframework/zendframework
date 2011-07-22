@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.queue.custom">
-    <title>Customizing Zend_Queue</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.custom"><info><title>Customizing Zend_Queue</title></info>
+    
 
-    <sect2 id="zend.queue.custom.adapter">
-        <title>Creating your own adapter</title>
+    <section xml:id="zend.queue.custom.adapter"><info><title>Creating your own adapter</title></info>
+        
 
         <para>
             <classname>Zend_Queue</classname> will accept any adapter that
@@ -78,10 +77,10 @@ $options = array(
 );
 $queue = new Zend_Queue('DbForUpdate', $config); // loads Custom_DbForUpdate
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.queue.custom.message">
-        <title>Creating your own message class</title>
+    <section xml:id="zend.queue.custom.message"><info><title>Creating your own message class</title></info>
+        
 
         <para>
             <classname>Zend_Queue</classname> will also accept your own message class.
@@ -99,10 +98,10 @@ class Zend_Queue_Message
             You can extend the existing messaging class. See the example code in
             <filename>tests/Zend/Queue/Custom/Message.php</filename>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.queue.custom-iterator">
-        <title>Creating your own message iterator class</title>
+    <section xml:id="zend.queue.custom-iterator"><info><title>Creating your own message iterator class</title></info>
+        
 
         <para>
             <classname>Zend_Queue</classname> will also accept your own message
@@ -119,10 +118,10 @@ class Zend_Queue_Message
             See the example filename in
             <filename>tests/Zend/Queue/Custom/Messages.php</filename>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.queue.custom.queue">
-        <title>Creating your own queue class </title>
+    <section xml:id="zend.queue.custom.queue"><info><title>Creating your own queue class </title></info>
+        
 
         <para>
             <classname>Zend_Queue</classname> can also be overloaded easily.
@@ -131,5 +130,5 @@ class Zend_Queue_Message
         <para>
             See the example filename in <filename>tests/Zend/Queue/Custom/Queue.php</filename>.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

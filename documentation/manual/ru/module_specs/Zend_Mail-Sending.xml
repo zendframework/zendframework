@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.sending">
-    <title>Отправка через SMTP</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.sending"><info><title>Отправка через SMTP</title></info>
+    
     <para>
         Если требуется отправить сообщение электронной почты через SMTP,
         то прежде чем будет вызван метод <methodname>send()</methodname>,
@@ -10,8 +9,8 @@
         Для всех последующих вызовов <methodname>Zend_Mail::send()</methodname>
         в текущем скрипте будет использоваться SMTP:
     </para>
-    <example id="zend.mail.sending.example-1">
-        <title>Отправка сообщений через SMTP</title>
+    <example xml:id="zend.mail.sending.example-1"><info><title>Отправка сообщений через SMTP</title></info>
+        
         <programlisting language="php"><![CDATA[
 $tr = new Zend_Mail_Transport_Smtp('mail.example.com');
 Zend_Mail::setDefaultTransport($tr);
@@ -25,10 +24,7 @@ Zend_Mail::setDefaultTransport($tr);
         поведение класса <classname>Zend_Mail</classname> для остальной
         части скрипта. Это позволяет хранить конфигурационные данные
         отдельно от логики приложения — отправляется ли почта через SMTP или
-        <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink>,
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mail"><methodname>mail()</methodname></link>,
         какой почтовый сервер используется и т.д.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21829 -->
-<sect1 id="zend.view.introduction">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.introduction"><info><title>導入</title></info>
 
-    <title>導入</title>
+    
 
     <para>
         <classname>Zend_View</classname> は、モデル - ビュー - コントローラ パターンにおける
@@ -31,9 +29,9 @@
         そこでビューの出力が作成されます。
     </para>
 
-    <sect2 id="zend.view.introduction.controller">
+    <section xml:id="zend.view.introduction.controller"><info><title>コントローラスクリプト</title></info>
 
-        <title>コントローラスクリプト</title>
+        
 
         <para>
             単純な例として、本の一覧を扱うコントローラがあることにしましょう。
@@ -67,11 +65,11 @@ $view->books = $data;
 echo $view->render('booklist.php');
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.introduction.view">
+    <section xml:id="zend.view.introduction.view"><info><title>ビュースクリプト</title></info>
 
-        <title>ビュースクリプト</title>
+        
 
         <para>
             次に必要なのは、関連付けるビュースクリプト "booklist.php" です。
@@ -115,10 +113,10 @@ echo $view->render('booklist.php');
             メソッドでエスケープ処理をしていることに注意しましょう。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.introduction.options">
-        <title>オプション</title>
+    <section xml:id="zend.view.introduction.options"><info><title>オプション</title></info>
+        
 
         <para>
             <classname>Zend_View</classname> のオプションを設定すると、
@@ -184,17 +182,16 @@ base/path/
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.introduction.shortTags">
-        <title>ビュースクリプトでの短いタグ</title>
+    <section xml:id="zend.view.introduction.shortTags"><info><title>ビュースクリプトでの短いタグ</title></info>
+        
 
         <para>
             我々が用意する例では、<acronym>PHP</acronym> の長いタグ
             <emphasis>&lt;?php</emphasis> を用います。
-            我々はまた、<ulink
-                url="http://www.php.net/manual/ja/control-structures.alternative-syntax.php">
-                制御構造に関する別の構文</ulink>の使用に賛成します。
+            我々はまた、<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/ja/control-structures.alternative-syntax.php">
+                制御構造に関する別の構文</link>の使用に賛成します。
             これらはビュースクリプトを書く際に便利なものです。
             より簡潔に書くことができ、文を１行にまとめられ、
             <acronym>HTML</acronym> 内で括弧を捜す必要を削減するからです。
@@ -252,8 +249,8 @@ $view->setUseStreamWrapper(true);
             </listitem>
         </itemizedlist>
 
-        <warning>
-            <title>ビューストリームラッパーによるパフォーマンスの低下</title>
+        <warning><info><title>ビューストリームラッパーによるパフォーマンスの低下</title></info>
+            
 
             <para>
                 ストリームラッパーを使用すると、アプリケーションのパフォーマンスは
@@ -265,10 +262,10 @@ $view->setUseStreamWrapper(true);
                 あるいはコンテンツのキャッシュをうまく行うなどの対策を推奨します。
             </para>
         </warning>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.introduction.accessors">
-        <title>ユーティリティメソッド</title>
+    <section xml:id="zend.view.introduction.accessors"><info><title>ユーティリティメソッド</title></info>
+        
 
         <para>
             通常は、<methodname>assign()</methodname> と <methodname>render()</methodname>、
@@ -335,8 +332,5 @@ $view->setUseStreamWrapper(true);
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

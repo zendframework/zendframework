@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.serializer.adapter">
-    <title>Zend_Serializer_Adapter</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.serializer.adapter"><info><title>Zend_Serializer_Adapter</title></info>
+    
 
     <para>
         <classname>Zend_Serializer</classname> adapters create a bridge for different methods of
@@ -20,8 +21,8 @@
         Below is a list of available adapters.
     </para>
 
-    <sect2 id="zend.serializer.adapter.phpserialize">
-        <title>Zend_Serializer_Adapter_PhpSerialize</title>
+    <section xml:id="zend.serializer.adapter.phpserialize"><info><title>Zend_Serializer_Adapter_PhpSerialize</title></info>
+        
 
         <para>
             This adapter uses the built-in <methodname>un/serialize</methodname>
@@ -31,13 +32,13 @@
         <para>
             There are no configurable options for this adapter.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.serializer.adapter.igbinary">
-        <title>Zend_Serializer_Adapter_IgBinary</title>
+    <section xml:id="zend.serializer.adapter.igbinary"><info><title>Zend_Serializer_Adapter_IgBinary</title></info>
+        
 
         <para>
-            <ulink url="http://opensource.dynamoid.com">Igbinary</ulink> is Open Source Software
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://opensource.dynamoid.com">Igbinary</link> is Open Source Software
             released by Sulake Dynamoid Oy. It's a drop-in replacement for the standard
             <acronym>PHP</acronym> serializer. Instead of time and space consuming textual
             representation, igbinary stores <acronym>PHP</acronym> data structures in a compact
@@ -53,27 +54,25 @@
         <para>
             There adapter takes no configuration options.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.serializer.adapter.wddx">
-        <title>Zend_Serializer_Adapter_Wddx</title>
+    <section xml:id="zend.serializer.adapter.wddx"><info><title>Zend_Serializer_Adapter_Wddx</title></info>
+        
 
         <para>
-            <ulink url="http://wikipedia.org/wiki/WDDX">WDDX</ulink> (Web Distributed Data eXchange)
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wikipedia.org/wiki/WDDX">WDDX</link> (Web Distributed Data eXchange)
             is a programming-language-, platform-, and transport-neutral data interchange mechanism
             for passing data between different environments and different computers.
         </para>
 
         <para>
-            The adapter simply uses the <ulink
-                url="http://php.net/manual/book.wddx.php">wddx_*()</ulink> <acronym>PHP</acronym>
+            The adapter simply uses the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/manual/book.wddx.php">wddx_*()</link> <acronym>PHP</acronym>
             functions. Please read the <acronym>PHP</acronym> manual to determine how you may enable
             them in your <acronym>PHP</acronym> installation.
         </para>
 
         <para>
-            Additionally, the <ulink
-                url="http://php.net/manual/book.simplexml.php">SimpleXML</ulink>
+            Additionally, the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/manual/book.simplexml.php">SimpleXML</link>
             <acronym>PHP</acronym> extension is used to check if a returned
             <constant>NULL</constant> value from <methodname>wddx_unserialize()</methodname> is
             based on a serialized <constant>NULL</constant> or on invalid data.
@@ -83,8 +82,8 @@
             Available options include:
         </para>
 
-        <table id="zend.serializer.adapter.wddx.table.options">
-            <title>Zend_Serializer_Adapter_Wddx Options</title>
+        <table xml:id="zend.serializer.adapter.wddx.table.options"><info><title>Zend_Serializer_Adapter_Wddx Options</title></info>
+            
 
             <tgroup cols="4">
                  <thead>
@@ -100,21 +99,20 @@
                       <row>
                           <entry><emphasis>comment</emphasis></entry>
                           <entry><type>string</type></entry>
-                          <entry></entry>
+                          <entry/>
                           <entry>An optional comment that appears in the packet header.</entry>
                       </row>
                   </tbody>
              </tgroup>
         </table>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.serializer.adapter.json">
-        <title>Zend_Serializer_Adapter_Json</title>
+    <section xml:id="zend.serializer.adapter.json"><info><title>Zend_Serializer_Adapter_Json</title></info>
+        
 
         <para>
             The <acronym>JSON</acronym> adapter provides a bridge to the
-            <classname>Zend_Json</classname> component and/or ext/json. Please read the <link
-                linkend= "zend.json.introduction">Zend_Json documentation</link> for further
+            <classname>Zend_Json</classname> component and/or ext/json. Please read the <link linkend="zend.json.introduction">Zend_Json documentation</link> for further
             information.
         </para>
 
@@ -122,8 +120,8 @@
             Available options include:
         </para>
 
-        <table id="zend.serializer.adapter.json.table.options">
-            <title>Zend_Serializer_Adapter_Json Options</title>
+        <table xml:id="zend.serializer.adapter.json.table.options"><info><title>Zend_Serializer_Adapter_Json Options</title></info>
+            
 
             <tgroup cols="4">
                  <thead>
@@ -152,7 +150,7 @@
                           <entry>Zend_Json::TYPE_ARRAY</entry>
 
                           <entry>
-                              See <link linkend= "zend.json.advanced.objects1">this section</link>
+                              See <link linkend="zend.json.advanced.objects1">this section</link>
                           </entry>
                       </row>
 
@@ -162,36 +160,34 @@
                           <entry>false</entry>
 
                           <entry>
-                              See <link linkend= "zend.json.advanced.expr">this section</link>
+                              See <link linkend="zend.json.advanced.expr">this section</link>
                           </entry>
                       </row>
                   </tbody>
              </tgroup>
         </table>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.serializer.adapter.amf03">
-        <title>Zend_Serializer_Adapter_Amf 0 and 3</title>
+    <section xml:id="zend.serializer.adapter.amf03"><info><title>Zend_Serializer_Adapter_Amf 0 and 3</title></info>
+        
 
         <para>
             The <acronym>AMF</acronym> adapters, <classname>Zend_Serializer_Adapter_Amf0</classname>
             and <classname>Zend_Serializer_Adapter_Amf3</classname>, provide a bridge to the
-            serializer of the <classname>Zend_Amf</classname> component. Please read the <link
-                linkend= "zend.amf.introduction">Zend_Amf documentation</link> for further
+            serializer of the <classname>Zend_Amf</classname> component. Please read the <link linkend="zend.amf.introduction">Zend_Amf documentation</link> for further
             information.
         </para>
 
         <para>
             There are no options for these adapters.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.serializer.adapter.pythonpickle">
-        <title>Zend_Serializer_Adapter_PythonPickle</title>
+    <section xml:id="zend.serializer.adapter.pythonpickle"><info><title>Zend_Serializer_Adapter_PythonPickle</title></info>
+        
 
         <para>
-            This adapter converts <acronym>PHP</acronym> types to a <ulink
-                url="http://docs.python.org/library/pickle.html">Python Pickle</ulink> string
+            This adapter converts <acronym>PHP</acronym> types to a <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://docs.python.org/library/pickle.html">Python Pickle</link> string
             representation. With it, you can read the serialized data with Python and read Pickled
             data of Python with <acronym>PHP</acronym>.
         </para>
@@ -200,8 +196,8 @@
             Available options include:
         </para>
 
-        <table id="zend.serializer.adapter.pythonpickle.table.options">
-            <title>Zend_Serializer_Adapter_PythonPickle Options</title>
+        <table xml:id="zend.serializer.adapter.pythonpickle.table.options"><info><title>Zend_Serializer_Adapter_PythonPickle Options</title></info>
+            
 
             <tgroup cols="4">
                  <thead>
@@ -232,8 +228,8 @@
             Datatype merging (PHP to Python) occurs as follows:
         </para>
 
-        <table id="zend.serializer.adapter.pythonpickle.table.php2python">
-            <title>Datatype merging (PHP to Python)</title>
+        <table xml:id="zend.serializer.adapter.pythonpickle.table.php2python"><info><title>Datatype merging (PHP to Python)</title></info>
+            
 
             <tgroup cols="2">
                  <thead>
@@ -291,8 +287,8 @@
             Datatype merging (Python to <acronym>PHP</acronym>) occurs per the following:
         </para>
 
-        <table id="zend.serializer.adapter.pythonpickle.table.python2php">
-            <title>Datatype merging (Python to PHP)</title>
+        <table xml:id="zend.serializer.adapter.pythonpickle.table.python2php"><info><title>Datatype merging (Python to PHP)</title></info>
+            
 
             <tgroup cols="2">
                  <thead>
@@ -369,35 +365,33 @@
                   </tbody>
              </tgroup>
         </table>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.serializer.adapter.phpcode">
-        <title>Zend_Serializer_Adapter_PhpCode</title>
+    <section xml:id="zend.serializer.adapter.phpcode"><info><title>Zend_Serializer_Adapter_PhpCode</title></info>
+        
 
         <para>
             This adapter generates a parsable <acronym>PHP</acronym> code representation using
-            <ulink url="http://php.net/manual/function.var-export.php">var_export()</ulink>. On
-            restoring, the data will be executed using <ulink
-                url="http://php.net/manual/function.eval.php">eval</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/manual/function.var-export.php">var_export()</link>. On
+            restoring, the data will be executed using <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/manual/function.eval.php">eval</link>.
         </para>
 
         <para>
             There are no configuration options for this adapter.
         </para>
 
-        <warning>
-            <title>Unserializing objects</title>
+        <warning><info><title>Unserializing objects</title></info>
+            
 
             <para>
-                Objects will be serialized using the <ulink
-                    url="http://php.net/manual/language.oop5.magic.php#language.oop5.magic.set-state">__set_state</ulink>
+                Objects will be serialized using the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/manual/language.oop5.magic.php#language.oop5.magic.set-state">__set_state</link>
                 magic method. If the class doesn't implement this method, a fatal error will occur
                 during execution.
             </para>
         </warning>
 
-        <warning>
-            <title>Uses eval()</title>
+        <warning><info><title>Uses eval()</title></info>
+            
 
             <para>
                 The <classname>PhpCode</classname> adapter utilizes <methodname>eval()</methodname>
@@ -407,8 +401,5 @@
                 of the serialized data.
             </para>
         </warning>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

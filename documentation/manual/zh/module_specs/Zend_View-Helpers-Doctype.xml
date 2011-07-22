@@ -1,5 +1,6 @@
-<sect3 id="zend.view.helpers.initial.doctype">
-    <title>文档类型助手（Doctype Helper）</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.doctype"><info><title>文档类型助手（Doctype Helper）</title></info>
+    
 
     <para>
         有效的HTML和XHTML文档应当包括一个 <code>DOCTYPE</code> 声明。但是文档类型声明很难记忆，而且会影响到文档中的特定元素的解析（例如，在 <code>&lt;script&gt;</code> 和 <code>&lt;style&gt;</code> 元素中转义的CDATA）。
@@ -28,8 +29,8 @@
         <code>Doctype</code>助手是 <link linkend="zend.view.helpers.initial.placeholder"> 占位符助手 </link> 的一个具体的实现。
     </para>
 
-    <example id="zend.view.helpers.initial.doctype.basicusage">
-        <title>Doctype 助手的基本用法 </title>
+    <example xml:id="zend.view.helpers.initial.doctype.basicusage"><info><title>Doctype 助手的基本用法 </title></info>
+        
 
         <para>
             在任何时候都可以指定 doctype。然而，依赖 doctype 输出的助手只在你设置后才认识它，所以最简单的用法是在 bootstrap 脚本中指定：
@@ -50,8 +51,8 @@ $doctypeHelper->doctype('XHTML1_STRICT');
 
     </example>
 
-    <example id="zend.view.helpers.initial.doctype.retrieving">
-        <title>获取 Doctype</title>
+    <example xml:id="zend.view.helpers.initial.doctype.retrieving"><info><title>获取 Doctype</title></info>
+        
 
         <para>
             如果需要知道文档类型，可以在由调用助手返回的对象中调用<code>getDoctype()</code>。
@@ -71,7 +72,4 @@ if ($view->doctype()->isXhtml()) {
 }
 ?>]]></programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

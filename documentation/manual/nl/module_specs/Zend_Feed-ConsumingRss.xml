@@ -1,5 +1,6 @@
-<sect1 id="zend.feed.consuming-rss">
-    <title>Een RSS Feed lezen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-rss"><info><title>Een RSS Feed lezen</title></info>
+    
     <para>
         Een RSS feed lezen is zo eenvoudig als het instantiëren van een <code>Zend_Feed_Rss</code> object
         met het URI van de feed:
@@ -28,7 +29,7 @@ echo $channel->title();
     <para>
         Merk de functiesyntax op. <code>Zend_Feed</code> gebruikt een overeenkomst om eigenschappen als
         XML objecten te behandelen indien ze werden opgevraagd met de variabele "getter" syntax
-        (<code>$obj->property()</code>). Dit laat het toe de volledige tekst van eender welke individuele
+        (<code>$obj-&gt;property()</code>). Dit laat het toe de volledige tekst van eender welke individuele
         node te verkrijgen en toch volledig toegang te hebben tot alle childnodes.
     </para>
 
@@ -150,15 +151,12 @@ if ($item->propname()) {
 ?>]]></programlisting>
 
     <para>
-        Indien je in de plaats daarvan <code>$item->propname</code> gebruikt, zal je altijd een leeg
+        Indien je in de plaats daarvan <code>$item-&gt;propname</code> gebruikt, zal je altijd een leeg
         object verkrijgen dat geëvalueerd zal worden als <code>TRUE</code> en je test zal niet juist zijn.
     </para>
 
     <para>
         Voor verdere informatie kan je terecht op de officiële RSS 2.0 specificatie:
-        <ulink url="http://blogs.law.harvard.edu/tech/rss">http://blogs.law.harvard.edu/tech/rss</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://blogs.law.harvard.edu/tech/rss">http://blogs.law.harvard.edu/tech/rss</link>
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

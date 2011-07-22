@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17397 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.application.theory-of-operation">
-    <title>Működési elv</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.theory-of-operation"><info><title>Működési elv</title></info>
+    
 
     <para>
         Egy <acronym>MVC</acronym> alkalmazás beállítása és felkészítése az indulásra egyre növekvő
@@ -131,8 +129,8 @@
         vagy egy konfigurációs állomány elérési útja képében.
     </para>
 
-    <sect2 id="zend.application.theory-of-operation.bootstrap">
-        <title>Rendszertöltés</title>
+    <section xml:id="zend.application.theory-of-operation.bootstrap"><info><title>Rendszertöltés</title></info>
+        
 
         <para>
             A <classname>Zend_Application</classname> felelősségi körébe tartozik az alkalmazás
@@ -171,8 +169,8 @@ interface Zend_Application_Bootstrap_Bootstrapper
             Ezek mellett egy sor más dolog is van, mellyel érdemes megismerkedni.
         </para>
 
-        <sect3 id="zend.application.theory-of-operation.bootstrap.resource-methods">
-            <title>Erőforrás tagfüggvények</title>
+        <section xml:id="zend.application.theory-of-operation.bootstrap.resource-methods"><info><title>Erőforrás tagfüggvények</title></info>
+            
 
             <para>
                 A <classname>Zend_Application_Bootstrap_BootstrapAbstract</classname> megvalósítás
@@ -241,17 +239,16 @@ $bootstrap->bootstrap(array('foo', 'bar'));
             <programlisting language="php"><![CDATA[
 $bootstrap->bootstrap();
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.application.theory-of-operation.bootstrap.resource-plugins">
-            <title>Bootstraps that use resource plugins</title>
+        <section xml:id="zend.application.theory-of-operation.bootstrap.resource-plugins"><info><title>Bootstraps that use resource plugins</title></info>
+            
 
             <para>
                 To make your bootstraps more re-usable, we have provided the
                 ability to push your resources into resource plugin classes.
                 This allows you to mix and match resources simply via
-                configuration. We will cover <link
-                    linkend="zend.application.theory-of-operation.resources">how
+                configuration. We will cover <link linkend="zend.application.theory-of-operation.resources">how
                     to create resources</link> later; in
                 this section we will show you how to utilize them only.
             </para>
@@ -370,10 +367,10 @@ $bootstrap->bootstrap(array('FrontController', 'Foo'));
 // Execute all resource methods and plugins:
 $bootstrap->bootstrap();
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.application.theory-of-operation.bootstrap.registry">
-            <title>Resource Registry</title>
+        <section xml:id="zend.application.theory-of-operation.bootstrap.registry"><info><title>Resource Registry</title></info>
+            
 
             <para>
                 Many, if not all, of your resource methods or plugins will
@@ -461,10 +458,10 @@ class FooController extends Zend_Controller_Action
     }
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.application.theory-of-operation.bootstrap.dependency-tracking">
-            <title>Dependency Tracking</title>
+        <section xml:id="zend.application.theory-of-operation.bootstrap.dependency-tracking"><info><title>Dependency Tracking</title></info>
+            
 
             <para>
                 In addition to executing resource methods and plugins, it's
@@ -519,15 +516,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     }
 }
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.application.theory-of-operation.resources">
-        <title>Resource Plugins</title>
+    <section xml:id="zend.application.theory-of-operation.resources"><info><title>Resource Plugins</title></info>
+        
 
         <para>
-            <link
-                linkend="zend.application.theory-of-operation.bootstrap.resource-plugins">As noted
+            <link linkend="zend.application.theory-of-operation.bootstrap.resource-plugins">As noted
                 previously</link>, a good way to create re-usable bootstrap resources and to
             offload much of your coding to discrete classes is to utilize resource
             plugins. While Zend Framework ships with a number of standard
@@ -617,5 +613,5 @@ class My_Resource_View extends Zend_Application_Resource_ResourceAbstract
             uses the plugin loader, you are effectively overriding the shipped
             "View" resource plugin, ensuring that your own is used instead.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

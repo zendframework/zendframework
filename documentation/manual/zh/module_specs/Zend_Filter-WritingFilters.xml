@@ -1,6 +1,7 @@
-<sect1 id="zend.filter.writing_filters">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.writing_filters"><info><title>编写过滤器</title></info>
 
-    <title>编写过滤器</title>
+    
 
     <para>
         Zend_Filter提供了一系列常用的过滤器，但是开发者经常需要为他们特殊的用例编写定制的过滤器。编写定制的过滤器很容易，只要实现<code>Zend_Filter_Interface</code>接口。
@@ -23,8 +24,8 @@ class MyFilter implements Zend_Filter_Interface
         return $valueFiltered;
     }
 }
-]]>
-       </programlisting>
+
+       ]]></programlisting>
 
     </para>
 
@@ -34,12 +35,9 @@ class MyFilter implements Zend_Filter_Interface
         <programlisting role="php"><![CDATA[
 $filterChain = new Zend_Filter();
 $filterChain->addFilter(new MyFilter());
-]]>
-       </programlisting>
+
+       ]]></programlisting>
 
     </para>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

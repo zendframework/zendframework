@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21826 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.http.cookies">
-    <title>Zend_Http_Cookie and Zend_Http_CookieJar</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.cookies"><info><title>Zend_Http_Cookie and Zend_Http_CookieJar</title></info>
+    
 
-    <sect2 id="zend.http.cookies.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.http.cookies.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_Http_Cookie</classname>, comme son nom l'indique, est une classe
@@ -29,10 +27,10 @@
             successives. De plus, l'objet <classname>Zend_Http_CookieJar</classname> peut être
             sérialisé et mis en session.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.cookies.cookie.instantiating">
-        <title>Instancier des objets Zend_Http_Cookie</title>
+    <section xml:id="zend.http.cookies.cookie.instantiating"><info><title>Instancier des objets Zend_Http_Cookie</title></info>
+        
 
         <para>
             L'instanciation se fait de deux manières différentes : <itemizedlist>
@@ -98,7 +96,7 @@
                         selon lequel le cookie cherchera son domaine et son chemin.
                     </para>
                     <para>
-                        La méthode <code>fromString</code> accepte les paramètres suivants&#160;:
+                        La méthode <code>fromString</code> accepte les paramètres suivants :
                     </para>
                     <itemizedlist>
                         <listitem>
@@ -122,8 +120,8 @@
                         </listitem>
                     </itemizedlist>
                 </listitem>
-            </itemizedlist> <example id="zend.http.cookies.cookie.instantiating.example-1">
-                <title>Créer un objet Zend_Http_Cookie</title>
+            </itemizedlist> <example xml:id="zend.http.cookies.cookie.instantiating.example-1"><info><title>Créer un objet Zend_Http_Cookie</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 // D'abord, en utilisant son constructeur.
@@ -160,9 +158,8 @@ $cookie = Zend_Http_Cookie::fromString(
             <methodname>__toString()</methodname>, vous pouvez récupérer une chaîne représentant le cookie, à
             partir de l'objet <classname>Zend_Http_Cookie</classname>. La chaîne alors retournée est
             la même que celle utilisée dans l'en-tête HTTP "Cookie", à savoir une chaîne encodée,
-            terminée par un point-virgule (;) : <example
-                    id="zend.http.cookies.cookie.instantiating.example-2">
-                    <title>Passer de l'objet Zend_Http_Cookie à la chaîne</title>
+            terminée par un point-virgule (;) : <example xml:id="zend.http.cookies.cookie.instantiating.example-2"><info><title>Passer de l'objet Zend_Http_Cookie à la chaîne</title></info>
+                    
 
                     <programlisting language="php"><![CDATA[
 // Création d'un nouveau cookie
@@ -183,10 +180,10 @@ echo $cookie;
 ]]></programlisting>
                 </example>
             </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.cookies.cookie.accessors">
-        <title>Zend_Http_Cookie méthodes getter</title>
+    <section xml:id="zend.http.cookies.cookie.accessors"><info><title>Zend_Http_Cookie méthodes getter</title></info>
+        
 
         <para>
             Une fois l'objet <classname>Zend_Http_Cookie</classname> crée, il existe des
@@ -254,8 +251,8 @@ echo $cookie;
             </para>
 
         <para>
-            <example id="zend.http.cookies.cookie.accessors.example-1">
-                    <title>Utilisation des méthodes getter de Zend_Http_Cookie</title>
+            <example xml:id="zend.http.cookies.cookie.accessors.example-1"><info><title>Utilisation des méthodes getter de Zend_Http_Cookie</title></info>
+                    
 
                     <programlisting language="php"><![CDATA[
 // Création d'un cookie
@@ -285,10 +282,10 @@ echo ($cookie->isSessionCookie() ? 'Yes' : 'No');
 ]]></programlisting>
                 </example>
             </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.cookies.cookie.matching">
-        <title>Zend_Http_Cookie: Correspondance de scénario</title>
+    <section xml:id="zend.http.cookies.cookie.matching"><info><title>Zend_Http_Cookie: Correspondance de scénario</title></info>
+        
 
         <para>
             La vraie valeur ajoutée d'un objet <classname>Zend_Http_Cookie</classname> est sa
@@ -321,8 +318,8 @@ echo ($cookie->isSessionCookie() ? 'Yes' : 'No');
                         considération.
                     </para>
                 </listitem>
-            </itemizedlist> <example id="zend.http.cookies.cookie.matching.example-1">
-                <title>Correspondance de cookies</title>
+            </itemizedlist> <example xml:id="zend.http.cookies.cookie.matching.example-1"><info><title>Correspondance de cookies</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 // Création de l'objet cookie - d'abord un cookie sécurisé
@@ -368,10 +365,10 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
 ]]></programlisting>
                 </example>
             </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.cookies.cookiejar">
-        <title>Classe Zend_Http_CookieJar : Instanciation</title>
+    <section xml:id="zend.http.cookies.cookiejar"><info><title>Classe Zend_Http_CookieJar : Instanciation</title></info>
+        
 
         <para>
             Dans la plupart des cas, il ne sera pas nécessaire d'instancier soi-même un objet
@@ -395,10 +392,10 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
             les paramètres "domain" et "path" des cookies, si jamais ils n'ont pas été définis dans
             les en-têtes "Set-Cookie".
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.cookies.cookiejar.adding_cookies">
-        <title>Ajouter des cookies à un objet Zend_Http_CookieJar</title>
+    <section xml:id="zend.http.cookies.cookiejar.adding_cookies"><info><title>Ajouter des cookies à un objet Zend_Http_CookieJar</title></info>
+        
 
         <para>
             En temps normal, c'est l'objet <classname>Zend_Http_Client</classname> qui
@@ -430,10 +427,10 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
                 </listitem>
                 </itemizedlist>
             </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.cookies.cookiejar.getting_cookies">
-        <title>Récupérer les cookies présents dans un objet Zend_Http_CookieJar</title>
+    <section xml:id="zend.http.cookies.cookiejar.getting_cookies"><info><title>Récupérer les cookies présents dans un objet Zend_Http_CookieJar</title></info>
+        
 
         <para>
             Comme pour l'ajout de cookies, en théorie, vous n'aurez pas besoin de récupérer
@@ -540,10 +537,10 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
                                 </para>
                             </listitem>
                         </itemizedlist> Vous pouvez en apprendre plus sur la correspondance des
-                        cookies ici : <xref linkend="zend.http.cookies.cookie.matching" />.
+                        cookies ici : <xref linkend="zend.http.cookies.cookie.matching"/>.
                     </para>
                 </listitem>
                 </itemizedlist>
             </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

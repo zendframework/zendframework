@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21358 -->
-<sect1 id="zend.dojo.introduction">
-    <title>導入</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.introduction"><info><title>導入</title></info>
+    
 
     <para>
-        Zend Framework には <ulink
-            url="http://dojotoolkit.org">Dojo Toolkit</ulink>
+        Zend Framework には <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org">Dojo Toolkit</link>
         が同梱されています。これにより、
         リッチなインターネットアプリケーションを開発できるようになります。
         Dojo との統合のポイントは次のとおりです。
@@ -35,7 +34,4 @@
         (Zend Framework は、公式の <acronym>AOL</acronym> <acronym>CDN</acronym>
         だけでなく Google <acronym>CDN</acronym> もサポートします)。
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

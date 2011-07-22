@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 17166 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.dojo.form" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Elementos y Decoradores de Dojo Form</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.form"><info><title>Elementos y Decoradores de Dojo Form</title></info>
+    
 
     <para>
         Sobre la base de los ayudantes de vista dijit
@@ -70,8 +68,8 @@
         </listitem>
     </itemizedlist>
 
-    <example id="zend.dojo.form.enable">
-        <title>Habilitando Dojo en sus formularios existentes</title>
+    <example xml:id="zend.dojo.form.enable"><info><title>Habilitando Dojo en sus formularios existentes</title></info>
+        
 
         <para>
             "Pero espere", podría decir; "Ya extendí
@@ -128,7 +126,7 @@ class My_Form_Custom extends Zend_Form
         como usar cualquier otro
         decorador o elemento de formularios.</para>
 
-    <xi:include href="Zend_Dojo-Form-Decorators.xml"/>
-    <xi:include href="Zend_Dojo-Form-Elements.xml"/>
-    <xi:include href="Zend_Dojo-Form-Examples.xml"/>
-</sect1>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Dojo-Form-Decorators.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Dojo-Form-Elements.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Dojo-Form-Examples.xml"/>
+</section>

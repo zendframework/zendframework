@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21357 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.dojo">
-    <title>Zend_Application_Resource_Dojo</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.dojo"><info><title>Zend_Application_Resource_Dojo</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Dojo</classname> peut être utiliser pour configurer
         les aides de vue <classname>Zend_Dojo</classname>.
     </para>
 
-    <example id="zend.application.available-resources.dojo.configExample">
-        <title>Exemple de configuration de ressource Dojo</title>
+    <example xml:id="zend.application.available-resources.dojo.configExample"><info><title>Exemple de configuration de ressource Dojo</title></info>
+        
 
         <para>
             Ci-dessous vous trouverez un exemple de fichier <acronym>INI</acronym> montrant comment
@@ -28,4 +26,4 @@ resources.dojo.enable = true ; Toujours charger les fichiers Javascript Dojo
             <link linkend="zend.dojo">Zend_Dojo</link> pour plus d'informations.
         </para>
     </example>
-</sect2>
+</section>

@@ -1,19 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
-<!-- Reviewed: no -->
-<sect1 id="migration.18">
-    <title>Zend Framework 1.8</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.18"><info><title>Zend Framework 1.8</title></info>
+    
 
     <para>
         Wenn man von einem älteren Release auf Zend Framework 1.8 oder höher hochrüstet sollte
         man die folgenden Migrations Hinweise beachten.
     </para>
 
-    <sect2 id="migration.18.zend.controller">
-        <title>Zend_Controller</title>
+    <section xml:id="migration.18.zend.controller"><info><title>Zend_Controller</title></info>
+        
 
-        <sect3 id="migration.18.zend.controller.router">
-            <title>Änderungen der Standard Route</title>
+        <section xml:id="migration.18.zend.controller.router"><info><title>Änderungen der Standard Route</title></info>
+            
 
             <para>
                 Da übersetzte Segmente in der neuen Standard Route eingeführt wurden, ist das
@@ -22,14 +20,14 @@
                 durch das Voranstellen eines zweiten '<emphasis>@</emphasis>' Zeichens escapt
                 werden. Die selbe Regel trifft für das '<emphasis>:</emphasis>' Zeichen zu:
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="migration.18.zend.locale">
-        <title>Zend_Locale</title>
+    <section xml:id="migration.18.zend.locale"><info><title>Zend_Locale</title></info>
+        
 
-        <sect3 id="migration.18.zend.locale.defaultcaching">
-            <title>Standard Caching</title>
+        <section xml:id="migration.18.zend.locale.defaultcaching"><info><title>Standard Caching</title></info>
+            
 
             <para>
                 Ab Zend Framework 1.8 wurde ein standardmäßiges Caching hinzugefügt. Der Grund
@@ -45,13 +43,13 @@
                 <methodname>disableCache()</methodname> Methode abgeschaltet werden.
             </para>
 
-            <example id="migration.18.zend.locale.defaultcaching.example">
-                <title>Standardmäßiges Caching abschalten</title>
+            <example xml:id="migration.18.zend.locale.defaultcaching.example"><info><title>Standardmäßiges Caching abschalten</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 Zend_Locale::disableCache(true);
 ]]></programlisting>
             </example>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

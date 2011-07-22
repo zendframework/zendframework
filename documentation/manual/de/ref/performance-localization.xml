@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
-<!-- Reviewed: no -->
-<sect1 id="performance.localization">
-    <title>Internationalisierung (I18n) und Lokalisierung (L10n)</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.localization"><info><title>Internationalisierung (I18n) und Lokalisierung (L10n)</title></info>
+    
 
     <para>
         Internationalisierte und Lokalisierte Sites sind ein fantastischer Weg um seine
@@ -12,8 +12,8 @@
         verkleinern.
     </para>
 
-    <sect2 id="performance.localization.translationadapter">
-        <title>Welchen Übersetzungsadapter sollte ich verwenden?</title>
+    <section xml:id="performance.localization.translationadapter"><info><title>Welchen Übersetzungsadapter sollte ich verwenden?</title></info>
+        
 
         <para>
             Nicht alle Übersetzungadapter sind gleich gemacht. Einige haben mehr Feature als
@@ -22,8 +22,8 @@
             verwenden. Trotzdem, welcher Adapter ist der schnellste, wenn man die Wahl hat?
         </para>
 
-        <sect3 id="performance.localization.translationadapter.fastest">
-            <title>Verwende nicht-XML Übersetzungsadapter für die größte Geschwindigkeit</title>
+        <section xml:id="performance.localization.translationadapter.fastest"><info><title>Verwende nicht-XML Übersetzungsadapter für die größte Geschwindigkeit</title></info>
+            
 
             <para>
                 Zend Framework wird mit einer Vielzahl von Übersetzungsadaptern ausgeliefert. Die
@@ -77,11 +77,11 @@
                 Wenn hohe Geschwindigkeit eine der eigenen Bedenken sind, empfehlen wir die
                 Verwendung einer der obigen Adapter.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="performance.localization.cache">
-        <title>Wie kann ich Übersetzungen und Lokalisierungen sogar noch schneller machen?</title>
+    <section xml:id="performance.localization.cache"><info><title>Wie kann ich Übersetzungen und Lokalisierungen sogar noch schneller machen?</title></info>
+        
 
         <para>
             Aus Geschäftsgründen kann es möglich sein, das man auf einen
@@ -90,8 +90,8 @@
             Operationen schneller machen. Wie kann man das tun?
         </para>
 
-        <sect3 id="performance.localization.cache.usage">
-            <title>Verwenden von Übersetzungs und Lokalisierungs Caches</title>
+        <section xml:id="performance.localization.cache.usage"><info><title>Verwenden von Übersetzungs und Lokalisierungs Caches</title></info>
+            
 
             <para>
                 Beide, <classname>Zend_Translate</classname> und <classname>Zend_Locale</classname>
@@ -109,8 +109,7 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <link
-                            linkend="zend.translate.adapter.caching"><classname>Zend_Translate</classname>
+                        <link linkend="zend.translate.adapter.caching"><classname>Zend_Translate</classname>
                             Adapter Caching</link>
                     </para>
                 </listitem>
@@ -122,6 +121,6 @@
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

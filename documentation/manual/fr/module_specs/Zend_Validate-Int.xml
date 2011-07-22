@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 22129 -->
-<sect2 id="zend.validate.set.int">
-    <title>Int</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.int"><info><title>Int</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Int</classname> valide une valeur envers un entier. Les entiers localisés sont
         aussi gérés.
     </para>
 
-    <sect3 id="zend.validate.set.int.options">
-        <title>Options supportées par Zend_Validate_Int</title>
+    <section xml:id="zend.validate.set.int.options"><info><title>Options supportées par Zend_Validate_Int</title></info>
+        
 
         <para>
             Les options suivantes sont supportées par <classname>Zend_Validate_Int</classname>:
@@ -24,10 +22,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.int.basic">
-        <title>Validation simple d'entiers</title>
+    <section xml:id="zend.validate.set.int.basic"><info><title>Validation simple d'entiers</title></info>
+        
 
         <para>
             La manière la plus simple de valider un entier est d'utiliser les paramètres systèmes. Lorsqu'aucune
@@ -46,10 +44,10 @@ $validator->isValid('1,234'); // retourne true
             Dans l'exemple ci-dessus l'environnement est supposé réglé sur la locale "en". Comme vous le voyez,
             le regroupement de chiffres est supporté (troisième exemple).
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.int.localized">
-        <title>Validation d'entiers localisés</title>
+    <section xml:id="zend.validate.set.int.localized"><info><title>Validation d'entiers localisés</title></info>
+        
 
         <para>
             Il est parfois nécessaire de valider des entiers localisés. Les entiers sont souvent écrits de
@@ -80,8 +78,5 @@ $validator->isValid("1.234"); // retourne true
             La locale peut être affectée/récupérée après la création du validateur au moyen des méthodes
             <methodname>setLocale()</methodname> et <methodname>getLocale()</methodname>.
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

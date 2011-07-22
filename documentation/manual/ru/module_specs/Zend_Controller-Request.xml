@@ -1,13 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.request">
-    <title>Объект запроса</title>
-    <sect2 id="zend.controller.request.introduction">
-        <title>Введение</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.request"><info><title>Объект запроса</title></info>
+    
+    <section xml:id="zend.controller.request.introduction"><info><title>Введение</title></info>
+        
         <para>
             Объект запроса - это простой "объект значений"
-            (<ulink url="http://www.patternsforphp.com/wiki/Value_Object">value
-            object</ulink>), который передается между
+            (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.patternsforphp.com/wiki/Value_Object">value
+            object</link>), который передается между
             <classname>Zend_Controller_Front</classname>, маршрутизатором,
             диспетчером и контроллерами. Он хранит в себе имена запрошенных
             модуля, контроллера, действия и необязательные параметры, а также
@@ -69,13 +68,13 @@
             то становится возможным тщательное и точное юнит-тестирование
             приложений MVC.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.request.http">
-        <title>HTTP-запросы</title>
+    <section xml:id="zend.controller.request.http"><info><title>HTTP-запросы</title></info>
+        
 
-        <sect3 id="zend.controller.request.http.dataacess">
-            <title>Доступ к данным запроса</title>
+        <section xml:id="zend.controller.request.http.dataacess"><info><title>Доступ к данным запроса</title></info>
+            
 
             <para>
                 <classname>Zend_Controller_Request_Http</classname> инкапсулирует доступ к
@@ -90,8 +89,8 @@
                 параметров.
             </para>
 
-            <note>
-                <title>Суперглобальные данные</title>
+            <note><info><title>Суперглобальные данные</title></info>
+                
                 <para>
                     Когда получаете доступ к суперглобальным данным через
                     <classname>Zend_Controller_Request_Http</classname> как к публичным
@@ -112,8 +111,8 @@
                 для получения заголовков запроса.
             </para>
 
-            <note>
-                <title>Данные GET и POST</title>
+            <note><info><title>Данные GET и POST</title></info>
+                
                 <para>
                     Будьте осторожны, когда извлекаете данные из объекта
                     запроса, поскольку они совсем не фильтруются. Маршрутизатор
@@ -123,8 +122,8 @@
                 </para>
             </note>
 
-            <note>
-                <title>Извлечение Raw POST данных</title>
+            <note><info><title>Извлечение Raw POST данных</title></info>
+                
 
                 <para>
                     Начиная с версии 1.5.0 вы можете также извлекать данные POST
@@ -148,9 +147,9 @@
                 обнаруженных в URI запроса, в объекте запроса.
             </para>
 
-            <note>
-                <title>getParam() извлекает не только пользовательские
-                параметры</title>
+            <note><info><title>getParam() извлекает не только пользовательские
+                параметры</title></info>
+                
 
                 <para>
                     <code>getParam()</code> извлекает значения из нескольких
@@ -180,8 +179,8 @@
                 </para>
             </note>
 
-            <note>
-                <title>Причуды Apache</title>
+            <note><info><title>Причуды Apache</title></info>
+                
                 <para>
                     Если вы используете обработчик ошибок 404 веб-сервера Apache
                     для передачи приходящих запросов фронт-контроллеру или
@@ -209,10 +208,10 @@ $front->setRequest($request);
                 </para>
             </note>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.request.http.baseurl">
-            <title>Базовый URL и поддиректории</title>
+        <section xml:id="zend.controller.request.http.baseurl"><info><title>Базовый URL и поддиректории</title></info>
+            
 
             <para>
                 <classname>Zend_Controller_Request_Http</classname> позволяет использовать
@@ -236,8 +235,8 @@ $front->setRequest($request);
                 <code>http://example.com/user/martel</code>.
             </para>
 
-            <note>
-                <title>Определение URL чувствительно к регистру</title>
+            <note><info><title>Определение URL чувствительно к регистру</title></info>
+                
                 <para>
                     Автоматическое определение базового URL чувствительно к
                     регистру, поэтому убедитесь, что ваш URL соответствует имени
@@ -271,10 +270,10 @@ $controller->setControllerDirectory('./application/controllers')
 $response   = $controller->dispatch();
 ]]></programlisting>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.request.http.method">
-            <title>Определение HTTP-метода запроса</title>
+        <section xml:id="zend.controller.request.http.method"><info><title>Определение HTTP-метода запроса</title></info>
+            
 
             <para>
                 <code>getMethod()</code> позволяет определить HTTP-метод
@@ -296,10 +295,10 @@ $response   = $controller->dispatch();
                 Эти методы могут использоваться в основном для создания т.н.
                 RESTful-архитектуры.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.request.http.ajax">
-            <title>Определение запросов AJAX</title>
+        <section xml:id="zend.controller.request.http.ajax"><info><title>Определение запросов AJAX</title></info>
+            
 
             <para>
                 <classname>Zend_Controller_Request_Http</classname> имеет
@@ -329,11 +328,11 @@ $response   = $controller->dispatch();
                 чтобы быть уверенным в том, что метод
                 <code>isXmlHttpRequest()</code> работает в вашем случае.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.controller.request.subclassing">
-        <title>Создание подклассов объекта запроса</title>
+    <section xml:id="zend.controller.request.subclassing"><info><title>Создание подклассов объекта запроса</title></info>
+        
 
         <para>
             Базовый класс запроса, используемый для всех объектов запроса, -
@@ -438,12 +437,8 @@ abstract class Zend_Controller_Request_Abstract
             Расширяйте этот класс или один из его производных классов, если вам
             нужен класс запроса, взаимодействующий с определенной средой для
             получения данных, использующихся в упомянутых выше задачах.
-            Примерами могут быть <link
-            linkend="zend.controller.request.http">среда
+            Примерами могут быть <link linkend="zend.controller.request.http">среда
             HTTP</link>, среда CLI или PHP-GTK.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

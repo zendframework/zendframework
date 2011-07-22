@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.plugins.standard.errorhandler">
-    <title>Zend_Controller_Plugin_ErrorHandler</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.plugins.standard.errorhandler"><info><title>Zend_Controller_Plugin_ErrorHandler</title></info>
+    
 
     <para>
         <classname>Zend_Controller_Plugin_ErrorHandler</classname> bietet ein Plugin für die
@@ -84,8 +82,7 @@
 
     <para>
         <classname>Zend_Controller_Plugin_ErrorHandler</classname> benötigt einen
-        <methodname>postDispatch()</methodname> Hook und prüft auf Ausnahmen die im <link
-            linkend="zend.controller.response">Antwort Objekt</link> registriert sind. Wenn welche
+        <methodname>postDispatch()</methodname> Hook und prüft auf Ausnahmen die im <link linkend="zend.controller.response">Antwort Objekt</link> registriert sind. Wenn welche
         gefunden werden, versucht es zur registrieren Fehler Handler Aktion weiterzuleiten.
     </para>
 
@@ -95,8 +92,8 @@
         Ausnahme im Antwort Objekt wird nocheinmal geworfen.
     </para>
 
-    <sect4 id="zend.controller.plugins.standard.errorhandler.fourohfour">
-        <title>Den Fehler Handler als 404 Handler verwenden</title>
+    <section xml:id="zend.controller.plugins.standard.errorhandler.fourohfour"><info><title>Den Fehler Handler als 404 Handler verwenden</title></info>
+        
 
         <para>
             Da das <emphasis>ErrorHandler</emphasis> Plugin nicht nur Anwendungsfehler erfasst,
@@ -123,7 +120,7 @@
 
         <para>
             Sobald das Fehler Objekt vorhanden ist, kann man es über den Typ mit
-            <command>$errors->type;</command> erhalten. Es wird eines der folgenden sein:
+            <command>$errors-&gt;type;</command> erhalten. Es wird eines der folgenden sein:
         </para>
 
         <itemizedlist>
@@ -227,10 +224,10 @@ public function errorAction()
         }
 }
 ]]></programlisting>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.plugins.standard.errorhandler.buffer">
-        <title>Zuvor gerenderte Ausgaben erhalten</title>
+    <section xml:id="zend.controller.plugins.standard.errorhandler.buffer"><info><title>Zuvor gerenderte Ausgaben erhalten</title></info>
+        
 
         <para>
             Wenn mehrfache Aktionen in einer Anfrage behandelt werden, oder wenn die Aktion mehrere
@@ -248,13 +245,13 @@ public function errorAction()
         <programlisting language="php"><![CDATA[
 $this->getResponse()->clearBody();
 ]]></programlisting>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.plugins.standard.errorhandler.examples">
-        <title>Beispiele für die Verwendung des Plugins</title>
+    <section xml:id="zend.controller.plugins.standard.errorhandler.examples"><info><title>Beispiele für die Verwendung des Plugins</title></info>
+        
 
-        <example id="zend.controller.plugins.standard.errorhandler.examples.example-1">
-            <title>Standardverwendung</title>
+        <example xml:id="zend.controller.plugins.standard.errorhandler.examples.example-1"><info><title>Standardverwendung</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
@@ -262,8 +259,8 @@ $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler());
 ]]></programlisting>
         </example>
 
-        <example id="zend.controller.plugins.standard.errorhandler.examples.example-2">
-            <title>Einen anderen Fehler Handler setzen</title>
+        <example xml:id="zend.controller.plugins.standard.errorhandler.examples.example-2"><info><title>Einen anderen Fehler Handler setzen</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
@@ -275,8 +272,8 @@ $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler(array(
 ]]></programlisting>
         </example>
 
-        <example id="zend.controller.plugins.standard.errorhandler.examples.example-3">
-            <title>Zugriffsmethoden verwenden</title>
+        <example xml:id="zend.controller.plugins.standard.errorhandler.examples.example-3"><info><title>Zugriffsmethoden verwenden</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $plugin = new Zend_Controller_Plugin_ErrorHandler();
@@ -288,10 +285,10 @@ $front = Zend_Controller_Front::getInstance();
 $front->registerPlugin($plugin);
 ]]></programlisting>
         </example>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.plugins.standard.errorhandler.controllerexamples">
-        <title>Beispiel für den Fehler Controller</title>
+    <section xml:id="zend.controller.plugins.standard.errorhandler.controllerexamples"><info><title>Beispiel für den Fehler Controller</title></info>
+        
 
         <para>
             Um das Fehler Handler Plugin zu verwenden, benötigt man einen Fehler Controller.
@@ -334,5 +331,5 @@ EOH;
     }
 }
 ]]></programlisting>
-    </sect4>
-</sect3>
+    </section>
+</section>

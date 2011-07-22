@@ -49,7 +49,7 @@ class PdoSqliteTest extends AbstractPdoTest
     {
         $this->markTestSkipped('This suite is skipped until Zend\Db can be refactored.');
     }
-    
+
     /**
      * Test AUTO_QUOTE_IDENTIFIERS option
      * Case: Zend_Db::AUTO_QUOTE_IDENTIFIERS = true
@@ -189,8 +189,7 @@ class PdoSqliteTest extends AbstractPdoTest
     }
 
     /**
-     * @return void
-     * @see    http://framework.zend.com/issues/browse/ZF-2293
+     * @group  ZF-2293
      */
     public function testAdapterSupportsLengthInTableMetadataForVarcharFields()
     {

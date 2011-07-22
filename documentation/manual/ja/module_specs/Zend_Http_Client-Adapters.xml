@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21815 -->
-<sect1 id="zend.http.client.adapters">
-    <title>Zend_Http_Client - 接続アダプタ</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.client.adapters"><info><title>Zend_Http_Client - 接続アダプタ</title></info>
+    
 
-    <sect2 id="zend.http.client.adapters.overview">
-        <title>概要</title>
+    <section xml:id="zend.http.client.adapters.overview"><info><title>概要</title></info>
+        
 
         <para>
             <classname>Zend_Http_Client</classname> は、接続アダプタとして設計されています。
@@ -53,13 +51,13 @@
             'adapter' にアダプタの名前 (たとえば 'Zend_Http_Client_Adapter_Socket' など)
             を指定できます。あるいは、アダプタオブジェクトの変数
             (たとえば <code>new Zend_Http_Client_Adapter_Test</code> など) を指定することもできます。
-            <classname>Zend_Http_Client->setConfig()</classname> メソッドを使用し、
+            <classname>Zend_Http_Client-&gt;setConfig()</classname> メソッドを使用し、
             アダプタを後で設定することも可能です。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.client.adapters.socket">
-        <title>ソケットアダプタ</title>
+    <section xml:id="zend.http.client.adapters.socket"><info><title>ソケットアダプタ</title></info>
+        
 
         <para>
             デフォルトの接続アダプタは <classname>Zend_Http_Client_Adapter_Socket</classname>
@@ -70,11 +68,11 @@
 
         <para>
             ソケットアダプタには、追加の設定オプションを指定できます。これは
-            <classname>Zend_Http_Client->setConfig()</classname> で指定するか、
+            <classname>Zend_Http_Client-&gt;setConfig()</classname> で指定するか、
             あるいはクライアントのコンストラクタに渡します。
 
-            <table id="zend.http.client.adapter.socket.configuration.table">
-                <title>Zend_Http_Client_Adapter_Socket の設定パラメータ</title>
+            <table xml:id="zend.http.client.adapter.socket.configuration.table"><info><title>Zend_Http_Client_Adapter_Socket の設定パラメータ</title></info>
+                
 
                 <tgroup cols="4">
                     <thead>
@@ -143,8 +141,8 @@
                 </tgroup>
             </table>
 
-            <note>
-                <title>持続的な TCP 接続</title>
+            <note><info><title>持続的な TCP 接続</title></info>
+                
 
                 <para>
                     持続的な <acronym>TCP</acronym> 接続を使用すると、<acronym>HTTP</acronym>
@@ -163,14 +161,14 @@
 
                 <para>
                     さらに、持続的な接続を使用するときには
-                    <xref linkend="zend.http.client.configuration" />
+                    <xref linkend="zend.http.client.configuration"/>
                     で説明した Keep-Alive <acronym>HTTP</acronym> リクエストも有効にしておくことを推奨します。
                     そうしないと、持続的な接続の効果はほとんどといっていいほどなくなってしまいます。
                 </para>
             </note>
 
-            <note>
-                <title>HTTPS SSL ストリームパラメータ</title>
+            <note><info><title>HTTPS SSL ストリームパラメータ</title></info>
+                
 
                 <para>
                     <code>ssltransport, sslcert</code> および <code>sslpassphrase</code>
@@ -182,15 +180,14 @@
                     接続先のサーバが特別なクライアント設定を要求している場合は
                     それにあわせた設定をする必要があるかもしれません。
                     その場合は、
-                    <ulink
-                        url="http://www.php.net/manual/ja/transports.php#transports.inet">ここ</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/ja/transports.php#transports.inet">ここ</link>
                     で <acronym>SSL</acronym> トランスポート層やオプションについての説明を参照ください。
                 </para>
             </note>
         </para>
 
-        <example id="zend.http.client.adapters.socket.example-1">
-            <title>HTTPS トランスポート層の変更</title>
+        <example xml:id="zend.http.client.adapters.socket.example-1"><info><title>HTTPS トランスポート層の変更</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // 設定パラメータを指定します
@@ -216,13 +213,12 @@ $response = $client->request();
             <methodname>fsockopen('tls://www.example.com', 443)</methodname>
         </para>
 
-        <sect3 id="zend.http.client.adapters.socket.streamcontext">
-            <title>ソケットアダプタのストリームコンテキストへのアクセスとカスタマイズ</title>
+        <section xml:id="zend.http.client.adapters.socket.streamcontext"><info><title>ソケットアダプタのストリームコンテキストへのアクセスとカスタマイズ</title></info>
+            
 
             <para>
                 Zend Framework 1.9 以降、<classname>Zend_Http_Client_Adapter_Socket</classname>
-                は、リモートサーバへの接続に使用している <ulink
-                    url="http://www.php.net/manual/ja/stream.contexts.php">ストリームコンテキスト</ulink>
+                は、リモートサーバへの接続に使用している <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/ja/stream.contexts.php">ストリームコンテキスト</link>
                 に直接アクセスできるようになります。これを使用すると、
                 <acronym>TCP</acronym> ストリーム (<acronym>HTTPS</acronym> 接続の場合は <acronym>SSL</acronym> ラッパー)
                 固有のオプションやパラメータを渡せるようになります。
@@ -238,8 +234,7 @@ $response = $client->request();
                         <para>
                             <firstterm><methodname>setStreamContext($context)</methodname></firstterm>
                             アダプタが使用するストリームコンテキストを設定します。
-                            <acronym>PHP</acronym> の <ulink
-                                url="http://php.net/manual/ja/function.stream-context-create.php"><methodname>stream_context_create()</methodname></ulink>
+                            <acronym>PHP</acronym> の <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/manual/ja/function.stream-context-create.php"><methodname>stream_context_create()</methodname></link>
                             関数で作成したストリームコンテキストリソースか、
                             この関数に渡すのと同じ形式のストリームコンテキストオプションの配列のいずれかを指定できます。
                             配列を渡すと、そのオプションを用いて新たなストリームコンテキストを作成し、
@@ -260,8 +255,8 @@ $response = $client->request();
                 </itemizedlist>
             </para>
 
-            <example id="zend.http.client.adapters.socket.streamcontext.example-1">
-                <title>ソケットアダプタのストリームコンテキストオプションの設定</title>
+            <example xml:id="zend.http.client.adapters.socket.streamcontext.example-1"><info><title>ソケットアダプタのストリームコンテキストオプションの設定</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 // オプションの配列
@@ -316,11 +311,11 @@ echo $opts['ssl']['peer_certificate'];
                     <methodname>getStreamContext()</methodname> メソッドを使用します。
                 </para>
             </note>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.http.client.adapters.proxy">
-        <title>プロキシアダプタ</title>
+    <section xml:id="zend.http.client.adapters.proxy"><info><title>プロキシアダプタ</title></info>
+        
 
         <para>
             <classname>Zend_Http_Client_Adapter_Proxy</classname> アダプタはデフォルトのソケットアダプタとほぼ同じです。
@@ -335,8 +330,8 @@ echo $opts['ssl']['peer_certificate'];
             デフォルトの 'adapter' オプション以外に
             いくつか追加のパラメータを設定する必要があります。
 
-            <table id="zend.http.client.adapters.proxy.table">
-                <title>Zend_Http_Client の設定パラメータ</title>
+            <table xml:id="zend.http.client.adapters.proxy.table"><info><title>Zend_Http_Client の設定パラメータ</title></info>
+                
 
                 <tgroup cols="4">
                     <thead>
@@ -410,8 +405,8 @@ echo $opts['ssl']['peer_certificate'];
             (Zend_Http_Client::AUTH_BASIC) のみをサポートしています。
         </para>
 
-        <example id="zend.http.client.adapters.proxy.example-1">
-            <title>プロキシサーバを使用した Zend_Http_Client の使用法</title>
+        <example xml:id="zend.http.client.adapters.proxy.example-1"><info><title>プロキシサーバを使用した Zend_Http_Client の使用法</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // 接続パラメータを設定します
@@ -440,15 +435,15 @@ $client = new Zend_Http_Client('http://www.example.com', $config);
             <para>
                 プロキシアダプタは <classname>Zend_Http_Client_Adapter_Socket</classname>
                 を継承しているので、ストリームコンテキストへのアクセスメソッド
-                (<xref linkend="zend.http.client.adapters.socket.streamcontext" /> を参照ください)
+                (<xref linkend="zend.http.client.adapters.socket.streamcontext"/> を参照ください)
                 を使用してプロキシ接続におけるストリームコンテキストオプションを設定できます。
                 その方法については上で説明しました。
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.client.adapters.curl">
-        <title>cURL アダプタ</title>
+    <section xml:id="zend.http.client.adapters.curl"><info><title>cURL アダプタ</title></info>
+        
 
         <para>
             cURL は標準的な <acronym>HTTP</acronym> クライアントライブラリで、
@@ -460,8 +455,8 @@ $client = new Zend_Http_Client('http://www.example.com', $config);
             大きなファイルをサーバ間で移動させるときなどにも使用できます。
         </para>
 
-        <example id="zend.http.client.adapters.curl.example-1">
-            <title>cURL オプションの設定</title>
+        <example xml:id="zend.http.client.adapters.curl.example-1"><info><title>cURL オプションの設定</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $config = array(
@@ -481,11 +476,11 @@ $client = new Zend_Http_Client($uri, $config);
             <methodname>setCurlOption($name, $value)</methodname> をコールします。
             <code>$name</code> は、cURL 拡張モジュールの
             CURL_* 定数に対応します。Curl ハンドルにアクセスするには
-            <code>$adapter->getHandle();</code> をコールします。
+            <code>$adapter-&gt;getHandle();</code> をコールします。
         </para>
 
-        <example id="zend.http.client.adapters.curl.example-2">
-            <title>ハンドルによるファイル転送</title>
+        <example xml:id="zend.http.client.adapters.curl.example-2"><info><title>ハンドルによるファイル転送</title></info>
+            
 
             <para>
                 cURL を使用して、巨大なファイルを <acronym>HTTP</acronym> 越しに転送できます。
@@ -507,10 +502,10 @@ $adapter->setConfig(array(
 $client->request("PUT");
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.client.adapters.test">
-        <title>テストアダプタ</title>
+    <section xml:id="zend.http.client.adapters.test"><info><title>テストアダプタ</title></info>
+        
 
         <para>
             <acronym>HTTP</acronym> 接続に依存するテストコードを書くのは非常に難しいものです。
@@ -533,8 +528,8 @@ $client->request("PUT");
             実際の <acronym>HTTP</acronym> リクエストは行いません。
         </para>
 
-        <example id="zend.http.client.adapters.test.example-1">
-            <title>HTTP レスポンススタブを使用したテスト</title>
+        <example xml:id="zend.http.client.adapters.test.example-1"><info><title>HTTP レスポンススタブを使用したテスト</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // 新しいアダプタとクライアントのインスタンスを作成します
@@ -577,8 +572,8 @@ $response = $client->request('GET');
             結果が呼び出し元に返ってくるまで次のレスポンスを設定できないからです。
         </para>
 
-        <example id="zend.http.client.adapters.test.example-2">
-            <title>複数の HTTP レスポンススタブを使用したテスト</title>
+        <example xml:id="zend.http.client.adapters.test.example-2"><info><title>複数の HTTP レスポンススタブを使用したテスト</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // 新しいアダプタおよびクライアントのインスタンスを作成します
@@ -647,8 +642,8 @@ $adapter->addResponse(
             (外部サイトがダウンしていたときの) 挙動をテストする際に有用です。
         </para>
 
-        <example id="zend.http.client.adapters.test.example-3">
-            <title>アダプタを失敗させる</title>
+        <example xml:id="zend.http.client.adapters.test.example-3"><info><title>アダプタを失敗させる</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // 新たなアダプタとクライアントを作成します
@@ -671,10 +666,10 @@ try {
 //通常通りに行います
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.client.adapters.extending">
-        <title>独自の接続アダプタの作成</title>
+    <section xml:id="zend.http.client.adapters.extending"><info><title>独自の接続アダプタの作成</title></info>
+        
 
         <para>
             独自の接続アダプタを作成し、それを使用することもできます。
@@ -691,8 +686,8 @@ try {
             アダプタで定義する必要があります。
         </para>
 
-        <example id="zend.http.client.adapters.extending.example-1">
-            <title>独自の接続アダプタの作成</title>
+        <example xml:id="zend.http.client.adapters.extending.example-1"><info><title>独自の接続アダプタの作成</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 class MyApp_Http_Client_Adapter_BananaProtocol
@@ -768,5 +763,5 @@ $client = new Zend_Http_Client(array(
 ));
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

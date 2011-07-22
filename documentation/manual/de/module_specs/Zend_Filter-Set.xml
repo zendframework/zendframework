@@ -1,45 +1,45 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22254 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.filter.set" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Standard Filter Klassen</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set"><info><title>Standard Filter Klassen</title></info>
+    
 
     <para>
         Zend Framework kommt mit einem Standardset von Filtern, welche bereits zur Verwendung fertig
         sind.
     </para>
 
-    <xi:include href="Zend_Filter-Alnum.xml" />
-    <xi:include href="Zend_Filter-Alpha.xml" />
-    <xi:include href="Zend_Filter-BaseName.xml" />
-    <xi:include href="Zend_Filter-Boolean.xml" />
-    <xi:include href="Zend_Filter-Callback.xml" />
-    <xi:include href="Zend_Filter-Compress.xml" />
-    <xi:include href="Zend_Filter-Decryption.xml" />
-    <xi:include href="Zend_Filter-Digits.xml" />
-    <xi:include href="Zend_Filter-Dir.xml" />
-    <xi:include href="Zend_Filter-Encryption.xml" />
-    <xi:include href="Zend_Filter-HtmlEntities.xml" />
-    <xi:include href="Zend_Filter-Int.xml" />
-    <xi:include href="Zend_Filter-LocalizedToNormalized.xml" />
-    <xi:include href="Zend_Filter-NormalizedToLocalized.xml" />
-    <xi:include href="Zend_Filter-Null.xml" />
-    <xi:include href="Zend_Filter-PregReplace.xml" />
-    <xi:include href="Zend_Filter-RealPath.xml" />
-    <xi:include href="Zend_Filter-StringToLower.xml" />
-    <xi:include href="Zend_Filter-StringToUpper.xml" />
-    <xi:include href="Zend_Filter-StringTrim.xml" />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-Alnum.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-Alpha.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-BaseName.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-Boolean.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-Callback.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-Compress.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-Decryption.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-Digits.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-Dir.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-Encryption.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-HtmlEntities.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-Int.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-LocalizedToNormalized.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-NormalizedToLocalized.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-Null.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-PregReplace.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-RealPath.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-StringToLower.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-StringToUpper.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-StringTrim.xml"/>
 
-    <sect2 id="zend.filter.set.stripnewlines">
-        <title>StripNewlines</title>
+    <section xml:id="zend.filter.set.stripnewlines"><info><title>StripNewlines</title></info>
+        
 
         <para>
             Gibt den String <varname>$value</varname> ohne Zeilenumbruch Zeichen zurück.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.set.striptags">
-        <title>StripTags</title>
+    <section xml:id="zend.filter.set.striptags"><info><title>StripTags</title></info>
+        
 
         <para>
             Dieser Filter gibt den Eingabestring zurück, wobei alle <acronym>HTML</acronym> und
@@ -48,5 +48,5 @@
             Entwickler definieren welche Attribute über alle erlaubten Tags erlaubt sind und auch
             nur für spezielle Tags.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,12 +1,13 @@
-<sect3 id="zend.view.helpers.initial.placeholder">
-    <title> 占位符助手（Placeholder Helper） </title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.placeholder"><info><title> 占位符助手（Placeholder Helper） </title></info>
+    
 
     <para>
         <code>Placeholder</code> 视图助手用来在视图脚本和视图实例之间持久化内容。它也提供一些有用的功能如：聚合内容、抓取视图脚本内容以后来用和添加前置（pre-）和后置（post-）文本到内容 （还可以为聚合内容定制分隔符等）。
     </para>
 
-    <example id="zend.view.helpers.initial.placeholder.usage">
-        <title> 占位符的基本用法 </title>
+    <example xml:id="zend.view.helpers.initial.placeholder.usage"><info><title> 占位符的基本用法 </title></info>
+        
 
         <para>
             占位符的基本用法是将视图中的数据持久化。每个<code>Placeholder</code>助手的启用都需要一个占位符名称，助手接着返回一个占位符容器对象，你可以用来处理或者简单地输出。
@@ -22,8 +23,8 @@
 ]]></programlisting>
     </example>
 
-    <example id="zend.view.helpers.initial.placeholder.aggregation">
-        <title> 用占位符来聚合内容 </title>
+    <example xml:id="zend.view.helpers.initial.placeholder.aggregation"><info><title> 用占位符来聚合内容 </title></info>
+        
 
         <para>
             通过占位符来聚合内容有时候很有用。例如视图脚本可拥有一个变量数组来存放数据，而视图脚本可以决定这些数据如何显示出来。
@@ -86,8 +87,8 @@ echo $foo['bar'];
 ]]></programlisting>
     </example>
 
-    <example id="zend.view.helpers.initial.placeholder.capture">
-        <title> 使用占位符（Placeholders）来抓取内容 </title>
+    <example xml:id="zend.view.helpers.initial.placeholder.capture"><info><title> 使用占位符（Placeholders）来抓取内容 </title></info>
+        
 
         <para>
             有时你可能会在视图脚本（最容易的模板）为占位符放些内容，<code>Placeholder</code> 视图助手允许你抓取任意的内容，在以后用下列的 API 来解析并输出（本功能类似于缓冲输出－－Haohappy注）：
@@ -146,8 +147,8 @@ foreach ($this->data as $datum): ?>
 ]]></programlisting>
     </example>
 
-    <sect4 id="zend.view.helpers.initial.placeholder.implementations">
-        <title> 具体占位符实现 </title>
+    <section xml:id="zend.view.helpers.initial.placeholder.implementations"><info><title> 具体占位符实现 </title></info>
+        
 
         <para>
             Zend Framework 自带有若干个具体实现的占位符，包括常用的占位符：doctype、page title、以及各种 &lt;head&gt; 元素。对所有情况，不带参数调用占位符将返回元素自己。
@@ -186,8 +187,5 @@ foreach ($this->data as $datum): ?>
                     <link linkend="zend.view.helpers.initial.inlinescript">InlineScript</link>
             </para></listitem>
         </itemizedlist>
-    </sect4>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

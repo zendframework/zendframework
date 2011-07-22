@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<sect3 id="zend.view.helpers.initial.json">
-    <title>Helper JSON</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.json"><info><title>Helper JSON</title></info>
+    
 
     <para>
         Przy tworzeniu widoków które zwracają obiekt JSON trzeba ustawić
@@ -12,8 +12,8 @@
 
     <programlisting role="text"><![CDATA[
 Content-Type: application/json
-]]>
-    </programlisting>
+
+    ]]></programlisting>
 
     <para>
         Większość bibliotek Ajaxowych szuka tego nagłowka podczas parsowania
@@ -24,6 +24,6 @@ Content-Type: application/json
 
     <programlisting role="php"><![CDATA[
 <?= $this->json($this->data) ?>
-]]>
-    </programlisting>
-</sect3>
+
+    ]]></programlisting>
+</section>

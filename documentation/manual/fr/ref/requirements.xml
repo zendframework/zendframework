@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
-<!-- Reviewed: no -->
-<appendix id="requirements" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Configuration système requise par Zend Framework</title>
+<?xml version="1.0" encoding="utf-8"?>
 
-    <sect1 id="requirements.introduction">
-        <title>Introduction</title>
+
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="requirements"><info><title>Configuration système requise par Zend Framework</title></info>
+    
+
+    <section xml:id="requirements.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             Zend Framework requière un interpréteur PHP5 avec un serveur Web configuré pour
@@ -23,8 +23,8 @@
             n'affectent pas directement le fonctionnement de l'application.
         </para>
 
-        <sect2 id="requirements.version">
-            <title>Version de PHP requise</title>
+        <section xml:id="requirements.version"><info><title>Version de PHP requise</title></info>
+            
 
             <para>
                 Zend recommande la version la plus récente de PHP pour des questions de
@@ -36,10 +36,10 @@
                 Zend Framework possède une collection étendue de tests automatisés, que vous
                 pouvez lancer avec PHPUnit 3.3.0 ou plus.
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="requirements.extensions">
-            <title>Extensions PHP</title>
+        <section xml:id="requirements.extensions"><info><title>Extensions PHP</title></info>
+            
 
             <para>
                 Ci-dessous, la table recense toutes les extensions typiquement trouvées dans
@@ -59,11 +59,11 @@
                 similaire dans le propre code du composant si elles ne le sont pas.
             </para>
 
-            <xi:include href="../../en/ref/requirements-php-extensions-table.xml" />
-        </sect2>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="../../en/ref/requirements-php-extensions-table.xml"/>
+        </section>
 
-        <sect2 id="requirements.zendcomponents">
-            <title>Les composants de Zend Framework</title>
+        <section xml:id="requirements.zendcomponents"><info><title>Les composants de Zend Framework</title></info>
+            
 
             <para>
                 Ci-dessous vous trouverez un tableau qui liste tous les composants disponibles
@@ -82,11 +82,11 @@
                 similaire dans le propre code du composant si elles ne le sont pas.
             </para>
 
-            <xi:include href="../../en/ref/requirements-zendcomponents-table.xml" />
-        </sect2>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="../../en/ref/requirements-zendcomponents-table.xml"/>
+        </section>
 
-        <sect2 id="requirements.dependencies">
-            <title>Dépendances internes de Zend Framework</title>
+        <section xml:id="requirements.dependencies"><info><title>Dépendances internes de Zend Framework</title></info>
+            
 
             <para>
                 Ci-dessous vous trouverez un tableau listant les composants de Zend Framework
@@ -111,7 +111,7 @@
                 </para>
             </note>
 
-            <xi:include href="../../en/ref/requirements-dependencies-table.xml" />
-        </sect2>
-    </sect1>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="../../en/ref/requirements-dependencies-table.xml"/>
+        </section>
+    </section>
 </appendix>

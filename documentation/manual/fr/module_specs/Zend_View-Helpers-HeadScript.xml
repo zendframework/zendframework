@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.headscript">
-    <title>L'aide de vue HeadScript</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headscript"><info><title>L'aide de vue HeadScript</title></info>
+    
 
     <para>
         L'élément HTML <code>&lt;script&gt;</code> est utilisé pour à la fois pour fournir des
@@ -79,8 +77,8 @@
         dans l'élément.
     </para>
 
-    <note>
-        <title>Paramétrez des commentaires conditionnels</title>
+    <note><info><title>Paramétrez des commentaires conditionnels</title></info>
+        
 
         <para>
             <code>HeadScript</code> vous permet d'englober vos balises de script avec des
@@ -90,8 +88,8 @@
             l'appel de la méthode.
         </para>
 
-        <example id="zend.view.helpers.initial.headscript.conditional">
-            <title>Headscript avec des commentaires conditionnels</title>
+        <example xml:id="zend.view.helpers.initial.headscript.conditional"><info><title>Headscript avec des commentaires conditionnels</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // adding scripts
@@ -128,16 +126,14 @@ $this->headScript()->appendFile('/js/prototype.js',
     </para>
 
     <para>
-        L'aide <code>HeadScript</code> est une implémentation concrète de l'<link
-        linkend="zend.view.helpers.initial.placeholder">aide Conteneur</link>.
+        L'aide <code>HeadScript</code> est une implémentation concrète de l'<link linkend="zend.view.helpers.initial.placeholder">aide Conteneur</link>.
     </para>
 
-    <note>
-        <title>Utilisez InlineScript pour les scripts dans le corps ("body") du HTML</title>
+    <note><info><title>Utilisez InlineScript pour les scripts dans le corps ("body") du HTML</title></info>
+        
 
         <para>
-            L'aide de vue, <link
-            linkend="zend.view.helpers.initial.inlinescript">InlineScript</link>, similaire à
+            L'aide de vue, <link linkend="zend.view.helpers.initial.inlinescript">InlineScript</link>, similaire à
             <code>HeadScript</code> devrait être utilisée quand vous souhaitez inclure des scripts
             dans le corps ("<classname>body</classname>") du HTML. Placer ces scripts en fin du
             document est une bonne pratique pour accélérer l'envoi de votre page, particulièrement
@@ -145,15 +141,14 @@ $this->headScript()->appendFile('/js/prototype.js',
         </para>
     </note>
 
-    <note>
-        <title>Les attributs arbitraires sont désactivées par défaut</title>
+    <note><info><title>Les attributs arbitraires sont désactivées par défaut</title></info>
+        
 
         <para>
             Par défaut, <code>HeadScript</code> affichera seulement les attributs de
             <code>&lt;script&gt;</code> approuvés par le W3C. Ceux-ci inclus "<code>type</code>",
             "<code>charset</code>", "<code>defer</code>", "<code>language</code>", et
-            "<code>src</code>". Cependant, certaines bibliothèques javascript, notamment <ulink
-            url="http://www.dojotoolkit.org/">Dojo</ulink>, utilise des attributs personnalisés dans
+            "<code>src</code>". Cependant, certaines bibliothèques javascript, notamment <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.dojotoolkit.org/">Dojo</link>, utilise des attributs personnalisés dans
             le but de modifier le comportement. Pour autoriser ce type d'attribut, vous pouvez les
             activer grâce à la méthode <methodname>setAllowArbitraryAttributes()</methodname> :
         </para>
@@ -163,8 +158,8 @@ $this->headScript()->setAllowArbitraryAttributes(true);
 ]]></programlisting>
     </note>
 
-    <example id="zend.view.helpers.initial.headscript.basicusage">
-        <title>Utilisation basique de l'aide HeadScript</title>
+    <example xml:id="zend.view.helpers.initial.headscript.basicusage"><info><title>Utilisation basique de l'aide HeadScript</title></info>
+        
 
         <para>
             Vous devriez ajouter une nouvelle balise de script à chaque fois. Comme noté
@@ -212,8 +207,8 @@ $this->headScript()->prependFile('/js/prototype.js');
 ]]></programlisting>
     </example>
 
-    <example id="zend.view.helpers.initial.headscript.capture">
-        <title>Capturer les scripts en utilisant l'aide HeadScript</title>
+    <example xml:id="zend.view.helpers.initial.headscript.capture"><info><title>Capturer les scripts en utilisant l'aide HeadScript</title></info>
+        
 
         <para>
             Parfois vous devez générer des scripts côté-client par programme. Même si vous
@@ -259,4 +254,4 @@ $('foo_form').action = action;
             </listitem>
         </itemizedlist>
     </example>
-</sect3>
+</section>

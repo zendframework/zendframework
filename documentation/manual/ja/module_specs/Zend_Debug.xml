@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20766 -->
-<sect1 id="zend.debug.dumping">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.debug.dumping"><info><title>変数の出力</title></info>
 
-    <title>変数の出力</title>
+    
 
     <para>
         静的メソッド <methodname>Zend_Debug::dump()</methodname> は、
@@ -13,8 +11,8 @@
         この単純なデバッグ手法は、一般的によく用いられています。
     </para>
 
-    <example id="zend.debug.dumping.example">
-        <title>dump() メソッドの例</title>
+    <example xml:id="zend.debug.dumping.example"><info><title>dump() メソッドの例</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 Zend_Debug::dump($var, $label = null, $echo = true);
@@ -41,16 +39,16 @@ Zend_Debug::dump($var, $label = null, $echo = true);
 
     <para>
         <methodname>Zend_Debug::dump()</methodname> メソッドが、PHP の関数
-        <ulink url="http://php.net/var_dump"><methodname>var_dump()</methodname></ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/var_dump"><methodname>var_dump()</methodname></link>
         をラップしたものであることを理解すると有益でしょう。
         出力ストリームがウェブに渡された場合、
         <methodname>var_dump()</methodname> の出力は
-        <ulink url="http://php.net/htmlspecialchars"><methodname>htmlspecialchars()</methodname></ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/htmlspecialchars"><methodname>htmlspecialchars()</methodname></link>
         でエスケープされ、(X)HTML の <command>&lt;pre&gt;</command> タグで囲まれます。
     </para>
 
-    <tip>
-        <title>Zend_Log を使用したデバッグ</title>
+    <tip><info><title>Zend_Log を使用したデバッグ</title></info>
+        
 
         <para>
             <methodname>Zend_Debug::dump()</methodname> は、ソフトウェアの開発中の
@@ -68,7 +66,4 @@ Zend_Debug::dump($var, $label = null, $echo = true);
         </para>
     </tip>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

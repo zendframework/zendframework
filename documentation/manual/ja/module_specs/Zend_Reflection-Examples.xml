@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
-<sect1 id="zend.reflection.examples">
-    <title>Zend_Reflectionサンプル</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.reflection.examples"><info><title>Zend_Reflectionサンプル</title></info>
+    
 
-    <example id="zend.reflection.examples.file">
-        <title>ファイルでreflectionを実行</title>
+    <example xml:id="zend.reflection.examples.file"><info><title>ファイルでreflectionを実行</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $r = new Zend_Reflection_File($filename);
@@ -30,8 +28,8 @@ foreach ($functions as $function) {
 ]]></programlisting>
     </example>
 
-    <example id="zend.reflection.examples.class">
-        <title>クラスでreflectionを実行</title>
+    <example xml:id="zend.reflection.examples.class"><info><title>クラスでreflectionを実行</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $r = new Zend_Reflection_Class($class);
@@ -48,8 +46,8 @@ $file = $r->getDeclaringFile();
 ]]></programlisting>
     </example>
 
-    <example id="zend.reflection.examples.method">
-        <title>メソッドでreflectionを実行</title>
+    <example xml:id="zend.reflection.examples.method"><info><title>メソッドでreflectionを実行</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $r = new Zend_Reflection_Method($class, $name);
@@ -70,8 +68,8 @@ foreach ($r->getParameters() as $key => $param) {
 ]]></programlisting>
     </example>
 
-    <example id="zend.reflection.examples.docblock">
-        <title>docblockでreflectionを実行</title>
+    <example xml:id="zend.reflection.examples.docblock"><info><title>docblockでreflectionを実行</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $r = new Zend_Reflection_Method($class, $name);
@@ -93,4 +91,4 @@ foreach ($docblock->getTags() as $tag) {
 }
 ]]></programlisting>
     </example>
-</sect1>
+</section>

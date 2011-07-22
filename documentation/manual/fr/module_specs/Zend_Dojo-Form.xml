@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 17166 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.dojo.form" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Les éléments de formulaire et les décorateurs Dojo</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.form"><info><title>Les éléments de formulaire et les décorateurs Dojo</title></info>
+    
 
     <para>
         Bâtie sur les
@@ -13,7 +11,7 @@
 
     <para>
         Il existe trois options pour utiliser les éléments de formulaires Dojo avec vos
-        formulaires&#160;:
+        formulaires :
     </para>
 
     <itemizedlist>
@@ -51,13 +49,13 @@
         </listitem>
     </itemizedlist>
 
-    <example id="zend.dojo.form.enable">
-        <title>Activation de Dojo dans vos formulaires existants</title>
+    <example xml:id="zend.dojo.form.enable"><info><title>Activation de Dojo dans vos formulaires existants</title></info>
+        
 
         <para>
-            "Mais attendez," vous allez me dire&#160;; "j'étends déjà
+            "Mais attendez," vous allez me dire ; "j'étends déjà
             <classname>Zend_Form</classname> avec ma propre classe de formulaire
-            personnalisé&#160;! Comment puis-je activer Dojo&#160;?'"
+            personnalisé ! Comment puis-je activer Dojo ?'"
         </para>
 
         <para>
@@ -72,7 +70,7 @@
             Une seconde approche consiste en un appel à
             <methodname>Zend_Dojo::enableForm()</methodname> dans la méthode <methodname>init()</methodname> de
             vos formulaires ; quand la définition du formulaire est complète, bouclez à travers
-            tous les sous-formulaires pour y activer dojo pour chacun&#160;:
+            tous les sous-formulaires pour y activer dojo pour chacun :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -100,19 +98,19 @@ class My_Form_Custom extends Zend_Form
         identique à l'utilisation de tous autres éléments de formulaires ou décorateurs.
     </para>
 
-    <xi:include href="Zend_Dojo-Form-Decorators.xml">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Dojo-Form-Decorators.xml">
         <xi:fallback>
-            <xi:include href="../../en/module_specs/Zend_Dojo-Form-Decorators.xml" />
+            <xi:include href="../../en/module_specs/Zend_Dojo-Form-Decorators.xml"/>
         </xi:fallback>
     </xi:include>
-    <xi:include href="Zend_Dojo-Form-Elements.xml">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Dojo-Form-Elements.xml">
         <xi:fallback>
-            <xi:include href="../../en/module_specs/Zend_Dojo-Form-Elements.xml" />
+            <xi:include href="../../en/module_specs/Zend_Dojo-Form-Elements.xml"/>
         </xi:fallback>
     </xi:include>
-    <xi:include href="Zend_Dojo-Form-Examples.xml">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Dojo-Form-Examples.xml">
         <xi:fallback>
-            <xi:include href="../../en/module_specs/Zend_Dojo-Form-Examples.xml" />
+            <xi:include href="../../en/module_specs/Zend_Dojo-Form-Examples.xml"/>
         </xi:fallback>
     </xi:include>
-</sect1>
+</section>

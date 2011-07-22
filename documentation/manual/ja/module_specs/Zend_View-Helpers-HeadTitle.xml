@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 22090 -->
-<sect3 id="zend.view.helpers.initial.headtitle">
-    <title>HeadTitle ヘルパー</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headtitle"><info><title>HeadTitle ヘルパー</title></info>
+    
 
     <para>
         <acronym>HTML</acronym> の <emphasis>&lt;title&gt;</emphasis> 要素を使用して、
@@ -35,8 +33,8 @@
         pass a different attach order as the second parameter.
     </para>
 
-    <example id="zend.view.helpers.initial.headtitle.basicusage">
-        <title>HeadTitle ヘルパーの基本的な使用法</title>
+    <example xml:id="zend.view.helpers.initial.headtitle.basicusage"><info><title>HeadTitle ヘルパーの基本的な使用法</title></info>
+        
 
         <para>
             title タグは、いつでも好きなときに指定できます。
@@ -66,7 +64,4 @@ $this->headTitle()->setSeparator(' / ');
 <?php echo $this->headTitle() ?>
 ]]></programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22741 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.view.placeholders.standard">
-    <title>Standard Platzhalter</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.view.placeholders.standard"><info><title>Standard Platzhalter</title></info>
+    
 
     <para>
         In der <link linkend="learning.view.placeholders.basics">vorherigen Sektion</link>, haben
@@ -29,8 +27,8 @@
         ausgeliefert, und verschiedenen mehr.
     </para>
 
-    <sect2 id="learning.view.placeholders.standard.doctype">
-        <title>Setzen vom DocType</title>
+    <section xml:id="learning.view.placeholders.standard.doctype"><info><title>Setzen vom DocType</title></info>
+        
 
         <para>
             Die <emphasis>DocType</emphasis> Deklaration ist problematisch zu merken, und oft ist es
@@ -149,10 +147,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             das der Typ richtig gesetzt ist bevor das Layout dargestellt wird, und bietet einen
             einzelnen Ort an dem der DocType geändert werden kann.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.view.placeholders.standard.head-title">
-        <title>Den Titel der Seite spezifizieren</title>
+    <section xml:id="learning.view.placeholders.standard.head-title"><info><title>Den Titel der Seite spezifizieren</title></info>
+        
 
         <para>
             Oft will eine Site den Namen der Site oder der Firma als Teil des Seitentitels einfügen,
@@ -233,10 +231,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 <!-- Wenn prepend() verwendet wurde: -->
 <title>Eine Seite :: Meine Site</title>
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.view.placeholders.standard.head-link">
-        <title>Stylesheets mit HeadLink spezifizieren</title>
+    <section xml:id="learning.view.placeholders.standard.head-link"><info><title>Stylesheets mit HeadLink spezifizieren</title></info>
+        
 
         <para>
             Gute <acronym>CSS</acronym> Entwickler erstellen oft ein generisches Stylesheet für
@@ -320,10 +318,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 <link rel="stylesheet" type="text/css" href="/styles/site.css" />
 <link rel="stylesheet" type="text/css" href="/styles/user-list.css" />
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.view.placeholders.standard.head-script">
-        <title>Sammeln von Skripten durch Verwendung von HeadScript</title>
+    <section xml:id="learning.view.placeholders.standard.head-script"><info><title>Sammeln von Skripten durch Verwendung von HeadScript</title></info>
+        
 
         <para>
             Eine andere gemeinsame Taktik um lange Ladezeiten bei Seiten zu verhindern besteht darin
@@ -430,8 +428,8 @@ site = {
 </script>
 ]]></programlisting>
 
-        <note>
-            <title>InlineScript Variante</title>
+        <note><info><title>InlineScript Variante</title></info>
+            
 
             <para>
                 Viele Browser blockieren oft die Anzeige von Seiten bis alle Skripte und Stylesheets
@@ -443,8 +441,7 @@ site = {
             <para>
                 Ein Weg darum zu kommen besteht darin die <emphasis>&lt;script&gt;</emphasis> Tags
                 einfach nach dem schließenden <emphasis>&lt;body&gt;</emphasis> Tag des Dokuments
-                auszugeben. (Das ist eine Praxis die speziell vom <ulink
-                    url="http://developer.yahoo.com/yslow/">Y! Slow Projekt</ulink> empfohlen wird)
+                auszugeben. (Das ist eine Praxis die speziell vom <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://developer.yahoo.com/yslow/">Y! Slow Projekt</link> empfohlen wird)
             </para>
 
             <para>
@@ -469,5 +466,5 @@ site = {
                 </listitem>
             </itemizedlist>
         </note>
-    </sect2>
-</sect1>
+    </section>
+</section>

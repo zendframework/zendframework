@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 22397 -->
-<sect1 id="zend.gdata.gbase">
-    <title>Google Base の使用法</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.gbase"><info><title>Google Base の使用法</title></info>
+    
     <para>
         Google Base データ <acronym>API</acronym> は、開発者が以下のことを行えるように設計されています。
         <itemizedlist>
@@ -28,11 +26,11 @@
     </para>
     <para>
         Google Base <acronym>API</acronym> についての詳細は
-        <ulink url="http://code.google.com/apis/base/">http://code.google.com/apis/base</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/base/">http://code.google.com/apis/base</link>
         を参照ください。
     </para>
-    <sect2 id="zend.gdata.gbase.connect">
-        <title>Base サービスへの接続</title>
+    <section xml:id="zend.gdata.gbase.connect"><info><title>Base サービスへの接続</title></info>
+        
         <para>
             Google Base <acronym>API</acronym> は、他の GData <acronym>API</acronym> と同様に Atom Publishing Protocol (APP)
             を使用しています。これは、ウェブベースのリソースを扱うための
@@ -45,8 +43,8 @@
             まずは <acronym>HTTP</acronym> クライアントを作成し、それから <classname>Zend_Gdata_Gbase</classname>
             サービスのインスタンスをそのクライアントにバインドします。
         </para>
-        <sect3 id="zend.gdata.gbase.connect.authentication">
-            <title>認証</title>
+        <section xml:id="zend.gdata.gbase.connect.authentication"><info><title>認証</title></info>
+            
             <para>
                 Google Base <acronym>API</acronym> は、公開 (public) フィードと非公開 (private)
                 フィードの両方にアクセスできます。
@@ -78,15 +76,15 @@
                 <classname>Zend_Gdata</classname> ライブラリは、これら三種類の認証方式にすべて対応しています。
                 本章のこれ以降では、読者が認証方式についてよく知っていること、
                 そして認証済み接続の作成方法を知っていることを前提として説明を進めます。
-                詳細な情報は、<xref linkend="zend.gdata.introduction.authentication" />
+                詳細な情報は、<xref linkend="zend.gdata.introduction.authentication"/>
                 あるいは
-                <ulink url="http://code.google.com/apis/gdata/auth.html">Google Data <acronym>API</acronym> Developer's Guide
-                の Authentication Overview</ulink>
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/gdata/auth.html">Google Data <acronym>API</acronym> Developer's Guide
+                の Authentication Overview</link>
                 を参照ください。
             </para>
-        </sect3>
-        <sect3 id="zend.gdata.gbase.connect.service">
-            <title>サービスのインスタンスの作成</title>
+        </section>
+        <section xml:id="zend.gdata.gbase.connect.service"><info><title>サービスのインスタンスの作成</title></info>
+            
             <para>
                 Google Base に対する作業を行うために
                 <classname>Zend_Gdata_Gbase</classname> サービスクラスが用意されています。
@@ -215,18 +213,18 @@ $service = new Zend_Gdata_Gbase(getAuthSubHttpClient());
 $service = new Zend_Gdata_Gbase();
 ]]></programlisting>
 
-        </sect3>
-    </sect2>
-    <sect2 id="zend.gdata.gbase.retrieve">
-        <title>アイテムの取得</title>
+        </section>
+    </section>
+    <section xml:id="zend.gdata.gbase.retrieve"><info><title>アイテムの取得</title></info>
+        
         <para>
             customer items フィードや snippets フィードに問い合わせて、
             アイテムを取得できます。
             これは、まずクエリを送信して
             返ってきたフィードを順に取得するという二段階の手順で行います。
         </para>
-        <sect3 id="zend.gdata.gbase.retrieve.query">
-            <title>構造化クエリの送信</title>
+        <section xml:id="zend.gdata.gbase.retrieve.query"><info><title>構造化クエリの送信</title></info>
+            
             <para>
                 構造化クエリを送信することで、あなた自身の customer items
                 フィードや公開 snippets フィードの内容を問い合わせることができます。
@@ -239,8 +237,8 @@ $service = new Zend_Gdata_Gbase();
                 クラスのおかげで、この作業が簡単にできるようになります。
                 パラメータを指定すると、これらのクラスがクエリ URL を作成してくれるのです。
             </para>
-            <sect4 id="zend.gdata.gbase.retrieve.query.customeritems">
-                <title>Customer Items フィードに対する問い合わせ</title>
+            <section xml:id="zend.gdata.gbase.retrieve.query.customeritems"><info><title>Customer Items フィードに対する問い合わせ</title></info>
+                
                 <para>
                     customer items フィードに対するクエリを実行するには
                     <methodname>newItemQuery()</methodname> メソッドおよび <methodname>getGbaseItemFeed()</methodname>
@@ -257,12 +255,12 @@ $feed = $service->getGbaseItemFeed($query);
 ]]></programlisting>
                 <para>
                     使用できるパラメータの一覧は、Customer Items フィードのドキュメントにある
-                    <ulink url="http://code.google.com/apis/base/items-feed.html#QueParameters">
-                    クエリパラメータのセクション</ulink> を参照ください。
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/base/items-feed.html#QueParameters">
+                    クエリパラメータのセクション</link> を参照ください。
                 </para>
-            </sect4>
-            <sect4 id="zend.gdata.gbase.retrieve.query.snippets">
-                <title>Snippets フィードに対する問い合わせ</title>
+            </section>
+            <section xml:id="zend.gdata.gbase.retrieve.query.snippets"><info><title>Snippets フィードに対する問い合わせ</title></info>
+                
                 <para>
                     公開 snippets フィードに対するクエリを実行するには
                     <methodname>newSnippetQuery()</methodname> メソッドおよび
@@ -279,13 +277,13 @@ $feed = $service->getGbaseSnippetFeed($query);
 ]]></programlisting>
                 <para>
                     使用できるパラメータの一覧は、Snippets フィードのドキュメントにある
-                    <ulink url="http://code.google.com/apis/base/snippets-feed.html#Parameters">
-                    クエリパラメータのセクション</ulink> を参照ください。
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/base/snippets-feed.html#Parameters">
+                    クエリパラメータのセクション</link> を参照ください。
                 </para>
-            </sect4>
-        </sect3>
-        <sect3 id="zend.gdata.gbase.retrieve.iterate">
-            <title>アイテムに対する順次処理</title>
+            </section>
+        </section>
+        <section xml:id="zend.gdata.gbase.retrieve.iterate"><info><title>アイテムに対する順次処理</title></info>
+            
             <para>
                 Google Base のアイテムには、<emphasis>&lt;g:main_ingredient&gt;</emphasis>
                 や <emphasis>&lt;g:weight&gt;</emphasis> といったアイテム固有の属性が含まれています。
@@ -315,10 +313,10 @@ foreach ($feed->entries as $entry) {
   }
 }
 ]]></programlisting>
-        </sect3>
-    </sect2>
-    <sect2 id="zend.gdata.gbase.crud">
-        <title>Customer Items の追加、更新、削除</title>
+        </section>
+    </section>
+    <section xml:id="zend.gdata.gbase.crud"><info><title>Customer Items の追加、更新、削除</title></info>
+        
         <para>
             カスタマー/オーナーは、自分自身の Customer Items
             フィードに対する追加、更新あるいは削除を行うことができます。
@@ -330,8 +328,8 @@ foreach ($feed->entries as $entry) {
             に設定します。期待通りの結果が得られることを確認したら、このフラグを
             <constant>FALSE</constant> にして実際の操作を行います。
         </para>
-        <sect3 id="zend.gdata.gbase.crud.insert">
-            <title>アイテムの追加</title>
+        <section xml:id="zend.gdata.gbase.crud.insert"><info><title>アイテムの追加</title></info>
+            
             <para>
                 アイテムを追加するには、Base サービスの
                 <methodname>insertGbaseItem()</methodname> メソッドを使用します。
@@ -369,9 +367,9 @@ $newEntry->addGbaseAttribute("payment_accepted", "Google Checkout", "text");
 $dryRun = true;
 $createdEntry = $service->insertGbaseItem($newEntry, $dryRun);
 ]]></programlisting>
-        </sect3>
-        <sect3 id="zend.gdata.gbase.crud.modify">
-            <title>アイテムの変更</title>
+        </section>
+        <section xml:id="zend.gdata.gbase.crud.modify"><info><title>アイテムの変更</title></info>
+            
             <para>
                 アイテムの各属性要素の値を変更できます。
             </para>
@@ -425,9 +423,9 @@ $entry->save($dryRun);
                 <methodname>updateGbaseItem($entry, $dryRun)</methodname>
                 メソッドをコールしてその内容を保存する必要があります。
             </para>
-        </sect3>
-        <sect3 id="zend.gdata.gbase.crud.delete">
-            <title>アイテムの削除</title>
+        </section>
+        <section xml:id="zend.gdata.gbase.crud.delete"><info><title>アイテムの削除</title></info>
+            
             <para>
                 アイテムを削除するには、<methodname>deleteGbaseItem()</methodname>
                 メソッドをコールします。
@@ -444,6 +442,6 @@ $service->deleteGbaseItem($entry, $dryRun);
 $dryRun = false;
 $entry->delete($dryRun);
 ]]></programlisting>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

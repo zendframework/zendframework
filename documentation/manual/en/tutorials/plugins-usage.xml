@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.plugins.usage">
-    <title>Using Plugins</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.plugins.usage"><info><title>Using Plugins</title></info>
+    
 
     <para>
         Components that make use of plugins typically use
@@ -17,8 +16,8 @@
         Some examples will make all of this more clear.
     </para>
 
-    <example id="learning.plugins.usage.basic">
-        <title>Basic Plugin Example: Adding a single prefix path</title>
+    <example xml:id="learning.plugins.usage.basic"><info><title>Basic Plugin Example: Adding a single prefix path</title></info>
+        
 
         <para>
             In this example, we will assume some validators have been written and placed in the
@@ -72,8 +71,8 @@ $element->addValidator('NotEmpty')
         </para>
     </example>
 
-    <note>
-        <title>What happens if a plugin is not found?</title>
+    <note><info><title>What happens if a plugin is not found?</title></info>
+        
 
         <para>
             What happens if a plugin is requested, but the PluginLoader is unable to find a class
@@ -93,8 +92,8 @@ $element->addValidator('NotEmpty')
         </para>
     </note>
 
-    <example id="learning.plugins.usage.override">
-        <title>Intermediate Plugin Usage: Overriding existing plugins</title>
+    <example xml:id="learning.plugins.usage.override"><info><title>Intermediate Plugin Usage: Overriding existing plugins</title></info>
+        
 
         <para>
             One strength of the PluginLoader is that its use of a LIFO stack allows you to override
@@ -148,4 +147,4 @@ $view->addHelperPath('foo/view/helpers', 'Foo_View_Helper');
             <classname>Foo_View_Helper_Button</classname> class!
         </para>
     </example>
-</sect1>
+</section>

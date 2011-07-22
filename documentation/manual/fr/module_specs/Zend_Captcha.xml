@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15681 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.captcha.introduction">
-    <title>Introduction</title>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.captcha.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
-        <ulink url="http://en.wikipedia.org/wiki/Captcha">CAPTCHA</ulink> est l'acronyme anglais de
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Captcha">CAPTCHA</link> est l'acronyme anglais de
         "Completely Automated Public Turing test to tell Computers and Humans Apart" [N.D.T. : test
         de Turing automatisé permettant de différencier un utilisateur humain d'un ordinateur], il
         est utilisé comme contre-réponse pour s'assurer que l'émetteur de l'information est un
@@ -21,4 +21,4 @@
         backends qui peuvent être utilisés de manière autonome ou en conjonction avec
         <classname>Zend_Form</classname>.
     </para>
-</sect1>
+</section>

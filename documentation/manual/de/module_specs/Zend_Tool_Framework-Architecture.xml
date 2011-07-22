@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20807 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.tool.framework.architecture">
-    <title>Architektur</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.architecture"><info><title>Architektur</title></info>
+    
 
-    <sect2 id="zend.tool.framework.architecture.registry">
-        <title>Registry</title>
+    <section xml:id="zend.tool.framework.architecture.registry"><info><title>Registry</title></info>
+        
 
         <para>
             Weil Provider und Manifeste von überall im <property>include_path</property> kommen
@@ -66,10 +64,10 @@ interface Zend_Tool_Framework_Registry_EnabledInterface
     );
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.tool.framework.architecture.providers">
-        <title>Provider</title>
+    <section xml:id="zend.tool.framework.architecture.providers"><info><title>Provider</title></info>
+        
 
         <para>
             <classname>Zend_Tool_Framework_Provider</classname> repräsentiert den funktionalen oder
@@ -108,10 +106,10 @@ abstract class Zend_Tool_Framework_Provider_Abstract
     );
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.tool.framework.architecture.loaders">
-        <title>Loader</title>
+    <section xml:id="zend.tool.framework.architecture.loaders"><info><title>Loader</title></info>
+        
 
         <para>
             Der Zweck eines Loaders ist es Provider und Manifest Datei zu finden die Klassen
@@ -175,10 +173,10 @@ class Zend_Tool_Framework_Loader_IncludePathLoader
             die <varname>$_filterAcceptFilePattern</varname> entsprechen und
             <varname>$_filterDenyDirectoryPattern</varname> <emphasis>nicht</emphasis> entsprechen.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.tool.framework.architecture.manifests">
-        <title>Manifests</title>
+    <section xml:id="zend.tool.framework.architecture.manifests"><info><title>Manifests</title></info>
+        
 
         <para>
             Kurz gesagt, sollte ein Manifest spezielle oder eigene Metadaten enthalten, die für
@@ -341,10 +339,10 @@ class Zend_Tool_Framework_Manifest_Repository
             implementieren das Metadaten Objekt), dann wird es an den Benutzer als "gefundenes"
             Metadaten Objekt zurück gegeben.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.tool.framework.architecture.clients">
-        <title>Clienten</title>
+    <section xml:id="zend.tool.framework.architecture.clients"><info><title>Clienten</title></info>
+        
 
         <para>
             Clienten sind das Interface welches einen Benutzer oder ein externes Tool in das
@@ -392,9 +390,8 @@ abstract class Zend_Tool_Framework_Client_Abstract
             Wie man sieht gibt es 1 Methode benötigte Methode um die Notwendigkeiten eines
             Cliente zu erfüllen (zwei andere sind empfohlen), die Initialisierung, Vorbehandlung
             (pre handling) und Nachbehandlung (post handling). Für eine tiefere Studie darüber wie
-            das Kommandozeilen Interface arbeitet, schauen Sie bitte im <ulink
-                url="http://framework.zend.com/svn/framework/standard/trunk/library/Zend/Tool/Framework/Client/Console.php">Source
-                Code</ulink>.
+            das Kommandozeilen Interface arbeitet, schauen Sie bitte im <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/svn/framework/standard/trunk/library/Zend/Tool/Framework/Client/Console.php">Source
+                Code</link>.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

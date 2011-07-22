@@ -1,14 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.response">
-    <title>The Response Object</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.response"><info><title>The Response Object</title></info>
+    
 
-    <sect2 id="zend.controller.response.usage">
-        <title>Usage</title>
+    <section xml:id="zend.controller.response.usage"><info><title>Usage</title></info>
+        
 
         <para>
-            The response object is the logical counterpart to the <link
-                linkend="zend.controller.request">request object</link>. Its
+            The response object is the logical counterpart to the <link linkend="zend.controller.request">request object</link>. Its
             purpose is to collate content and/or headers so that they may be
             returned en masse. Additionally, the front controller will pass any
             caught exceptions to the response object, allowing the developer to
@@ -71,8 +69,7 @@ $this->getResponse()
 
         <note>
             <para>
-                If using the action controller <link
-                    linkend="zend.controller.action.viewintegration">view
+                If using the action controller <link linkend="zend.controller.action.viewintegration">view
                     integration</link>, you do not need to set the rendered view
                 script content in the response object, as
                 <methodname>Zend_Controller_Action::render()</methodname> does this by default.
@@ -132,10 +129,10 @@ $response->sendResponse();
 $front->throwExceptions(true);
 $front->dispatch();
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.response.headers">
-        <title>Manipulating Headers</title>
+    <section xml:id="zend.controller.response.headers"><info><title>Manipulating Headers</title></info>
+        
 
         <para>
             As stated previously, one aspect of the response object's duties is
@@ -236,10 +233,10 @@ $front->dispatch();
             <methodname>setHttpResponseCode()</methodname> and
             <methodname>getHttpResponseCode()</methodname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.response.namedsegments">
-        <title>Named Segments</title>
+    <section xml:id="zend.controller.response.namedsegments"><info><title>Named Segments</title></info>
+        
 
         <para>
             The response object has support for "named segments". This allows
@@ -379,10 +376,10 @@ array(
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.response.exceptions">
-        <title>Testing for Exceptions in the Response Object</title>
+    <section xml:id="zend.controller.response.exceptions"><info><title>Testing for Exceptions in the Response Object</title></info>
+        
 
         <para>
             As mentioned earlier, by default, exceptions caught during dispatch
@@ -474,10 +471,10 @@ array(
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.response.subclassing">
-        <title>Subclassing the Response Object</title>
+    <section xml:id="zend.controller.response.subclassing"><info><title>Subclassing the Response Object</title></info>
+        
 
         <para>
             The purpose of the response object is to collect headers and content
@@ -500,8 +497,5 @@ array(
             requests), adding functionality to return a final view based on content stored in named
             segments, etc.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

@@ -54,7 +54,7 @@ class PrepareElements extends FormElements
     public function render($content)
     {
         $form = $this->getElement();
-        if ((!$form instanceof Form\Form) 
+        if ((!$form instanceof Form\Form)
             && (!$form instanceof Form\DisplayGroup)
         ) {
             return $content;
@@ -67,8 +67,8 @@ class PrepareElements extends FormElements
 
     protected function _recursivelyPrepareForm(Form\Form $form)
     {
-        $belongsTo      = ($form instanceof Form\Form) 
-                        ? $form->getElementsBelongTo() 
+        $belongsTo      = ($form instanceof Form\Form)
+                        ? $form->getElementsBelongTo()
                         : null;
         $elementContent = '';
         $separator      = $this->getSeparator();
@@ -80,17 +80,21 @@ class PrepareElements extends FormElements
                  ->setTranslator($translator);
             if ($item instanceof Form\Element) {
                 $item->setBelongsTo($belongsTo);
-            } elseif (!empty($belongsTo) && ($item instanceof Form\Form)) {
-                if ($item->isArray()) {
-                    $name = $this->mergeBelongsTo($belongsTo, $item->getElementsBelongTo());
-                    $item->setElementsBelongTo($name, true);
-                } else {
-                    $item->setElementsBelongTo($belongsTo, true);
+            } elseif ($item instanceof Form\Form) {
+                if (!empty($belongsTo)) {
+                    if ($item->isArray()) {
+                        $name = $this->mergeBelongsTo($belongsTo, $item->getElementsBelongTo());
+                        $item->setElementsBelongTo($name, true);
+                    } else {
+                        $item->setElementsBelongTo($belongsTo, true);
+                    }
                 }
                 $this->_recursivelyPrepareForm($item);
-            } elseif (!empty($belongsTo) && ($item instanceof Form\DisplayGroup)) {
-                foreach ($item as $element) {
-                    $element->setBelongsTo($belongsTo);
+            } elseif ($item instanceof Form\DisplayGroup) {
+                if (!empty($belongsTo)) {
+                    foreach ($item as $element) {
+                        $element->setBelongsTo($belongsTo);
+                    }
                 }
             }
         }

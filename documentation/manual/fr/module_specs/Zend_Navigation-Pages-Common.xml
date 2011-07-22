@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20827 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.navigation.pages.common">
-    <title>Caractéristiques communes aux pages</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.common"><info><title>Caractéristiques communes aux pages</title></info>
+    
 
     <para>
         Toutes les classes pour des pages doivent étendre <classname>Zend_Navigation_Page</classname>,
@@ -23,8 +21,8 @@
         <link linkend="zend.navigation.pages.custom">la documentation appropriée</link>.
     </para>
 
-    <table id="zend.navigation.pages.common.options">
-        <title>Options communes aux pages</title>
+    <table xml:id="zend.navigation.pages.common.options"><info><title>Options communes aux pages</title></info>
+        
         <tgroup cols="4">
             <thead>
                 <row>
@@ -85,7 +83,7 @@
                         Attribue les relations de la page.
                         Chaque élément dans le tableau est une paire clé-valeur où
                         la clé désigne le type de relation et la valeur un pointeur vers
-                        la page. Par exemple <code>'alternate' => 'format/plain.html'</code>.
+                        la page. Par exemple <code>'alternate' =&gt; 'format/plain.html'</code>.
                         Pour une fléxibilité maximale, il n'y a pas de restrictions quant aux
                         valeurs, elles peuvent être autre chose qu'une chaine. Concernant
                         <code>rel</code> et <code>rev</code>, voyez la section de documentation
@@ -145,7 +143,7 @@
                     <entry>
                         Si oui ou non la page doit être considérée comme active. Si à
                         <constant>FALSE</constant> (ou non fourni), les pages <acronym>MVC</acronym> vont aller
-                        vérifier l'objet requête suite à l'appel à <code>$page->isActive()</code>.
+                        vérifier l'objet requête suite à l'appel à <code>$page-&gt;isActive()</code>.
                     </entry>
                 </row>
                 <row>
@@ -172,25 +170,25 @@
         </tgroup>
     </table>
 
-    <note>
-        <title>Propriétés personnalisées</title>
+    <note><info><title>Propriétés personnalisées</title></info>
+        
         <para>
             Toutes les pages supportent la gestion de propriétés personnalisées, ceci via les méthodes
             magiques <methodname>__set($name, $value)</methodname>, <methodname>__get($name)</methodname>,
             <methodname>__isset($name)</methodname> et <methodname>__unset($name)</methodname>.
             Ces propriétés peuvent prendre n'importe quelle valeur et seront incluses dans le tableau
-            retourné par <code>$page->toArray()</code>, ce qui signifie que les pages peuvent être
+            retourné par <code>$page-&gt;toArray()</code>, ce qui signifie que les pages peuvent être
             dé/sérialisées même si elles comportent des propriétés non natives à leur classe.
         </para>
         <para>
             Que les pages soient natives ou personnalisées par vos soins, les propriétés peuvent
-            être gérées au moyen des méthodes <code>$page->set($name, $value)</code> et
-            <code>$page->get($name)</code>, ou encore via des méthodes magiques.
+            être gérées au moyen des méthodes <code>$page-&gt;set($name, $value)</code> et
+            <code>$page-&gt;get($name)</code>, ou encore via des méthodes magiques.
         </para>
     </note>
 
-    <example id="zend.navigation.pages.common.example.customprops">
-        <title>Propriétés de pages personnalisées</title>
+    <example xml:id="zend.navigation.pages.common.example.customprops"><info><title>Propriétés de pages personnalisées</title></info>
+        
 
         <para>
             Cet exemple montre comment les propriétés personnalisées des pages peuvent être utilisées.
@@ -208,4 +206,4 @@ if ($page->meaning != 42) {
 }
 ]]></programlisting>
     </example>
-</sect2>
+</section>

@@ -1,5 +1,8 @@
-<sect1 id="zend.mail.adding-recipients">
-    <title>Inserimento dei destinatari</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.adding-recipients"><info><title>Inserimento dei destinatari</title></info>
+    
     <para>
         E' possibile aggiungere i destinatari in tre modi:
         <itemizedlist>
@@ -14,13 +17,10 @@
             </listitem>
         </itemizedlist>
     </para>
-    <note>
-        <title>Parametri aggiuntivi</title>
+    <note><info><title>Parametri aggiuntivi</title></info>
+        
         <para>
             I metodi <code>addTo()</code> e <code>addCc()</code> accettano un secondo parametro opzionale utile per indicare il nome del destinatario in formato leggibile.
         </para>
     </note>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

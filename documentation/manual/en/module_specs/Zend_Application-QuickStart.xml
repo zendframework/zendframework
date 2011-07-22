@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.application.quick-start">
-    <title>Zend_Application Quick Start</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.quick-start"><info><title>Zend_Application Quick Start</title></info>
+    
 
     <para>
         There are two paths to getting started with
@@ -17,8 +16,8 @@
         <link linkend="zend.application.quick-start.manual">skip ahead</link>.
     </para>
 
-    <sect2 id="zend.application.quick-start.zend-tool">
-        <title>Using Zend_Tool</title>
+    <section xml:id="zend.application.quick-start.zend-tool"><info><title>Using Zend_Tool</title></info>
+        
 
         <para>
             The quickest way to start using <classname>Zend_Application</classname> is to use
@@ -148,14 +147,13 @@ $application->bootstrap()
 ]]></programlisting>
 
         <para>
-            To continue the quick start, please <link
-            linkend="zend.application.quick-start.resources">skip to the
+            To continue the quick start, please <link linkend="zend.application.quick-start.resources">skip to the
             Resources section</link>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.application.quick-start.manual">
-        <title>Adding Zend_Application to your application</title>
+    <section xml:id="zend.application.quick-start.manual"><info><title>Adding Zend_Application to your application</title></info>
+        
 
         <para>
             The basics of <classname>Zend_Application</classname> are fairly simple:
@@ -281,16 +279,15 @@ RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
 ]]></programlisting>
 
-        <note>
-            <title>Learn about mod_rewrite</title>
+        <note><info><title>Learn about mod_rewrite</title></info>
+            
 
             <para>
                 The above rewrite rules allow access to any file under your
                 virtual host's document root. If there are files you do not want
                 exposed in this way, you may want to be more restrictive in your
-                rules. Go to the Apache website to <ulink
-                    url="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">learn
-                more about mod_rewrite</ulink>.
+                rules. Go to the Apache website to <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">learn
+                more about mod_rewrite</link>.
             </para>
         </note>
 
@@ -298,10 +295,10 @@ RewriteRule ^.*$ index.php [NC,L]
             At this point, you're all set to start taking advantage of
             <classname>Zend_Application</classname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.application.quick-start.resources">
-        <title>Adding and creating resources</title>
+    <section xml:id="zend.application.quick-start.resources"><info><title>Adding and creating resources</title></info>
+        
 
         <para>
             If you followed the directions above, then your bootstrap class
@@ -410,10 +407,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             application, and will ensure your view is initialized according to
             your application needs.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.application.quick-start.next-steps">
-        <title>Next steps with Zend_Application</title>
+    <section xml:id="zend.application.quick-start.next-steps"><info><title>Next steps with Zend_Application</title></info>
+        
 
         <para>
             The above should get you started with <classname>Zend_Application</classname>
@@ -421,5 +418,5 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             creating resource methods, or, for maximum re-usability, resource
             plugin classes. Continue reading to learn more!
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

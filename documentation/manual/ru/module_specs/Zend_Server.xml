@@ -1,5 +1,8 @@
-<sect1 id="zend.server.introduction">
-    <title>Введение</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.server.introduction"><info><title>Введение</title></info>
+    
     <para>
         Семейство классов <code>Zend_Server</code> предоставляет набор
         функциональных возможностей для различных серверных классов, в которые
@@ -33,7 +36,4 @@
         and <code>loadFunctions()</code> methods.
 -->
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

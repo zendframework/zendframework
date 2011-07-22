@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20799 -->
-<sect1 id="zend.view.scripts">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.scripts"><info><title>ビュースクリプト</title></info>
 
-    <title>ビュースクリプト</title>
+    
 
     <para>
         コントローラが変数を代入して <methodname>render()</methodname> をコールすると、
@@ -17,7 +15,7 @@
         コントローラからビューに代入された変数は、
         ビューインスタンスのプロパティとして参照できます。例えば、
         コントローラで変数 'something' を代入したとすると、
-        ビュースクリプト内ではそれを $this->something で取得できます
+        ビュースクリプト内ではそれを $this-&gt;something で取得できます
         (これにより、どの値がコントローラから代入されたもので、
         どの値がスクリプト内部で作成されたものなのかを追いかけられるようになります)。
     </para>
@@ -52,9 +50,9 @@
 <?php endif;?>
 ]]></programlisting>
 
-    <sect2 id="zend.view.scripts.escaping">
+    <section xml:id="zend.view.scripts.escaping"><info><title>出力のエスケープ</title></info>
 
-        <title>出力のエスケープ</title>
+        
 
         <para>
             ビュースクリプトで行うべき仕事のうち最も重要なもののひとつは、
@@ -109,10 +107,10 @@ echo $view->render(...);
             それ以外のパラメータはオプションとなります。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.scripts.templates">
-        <title>別のテンプレートシステムの使用</title>
+    <section xml:id="zend.view.scripts.templates"><info><title>別のテンプレートシステムの使用</title></info>
+        
 
         <para>
             <acronym>PHP</acronym> 自身も強力なテンプレートシステムではありますが、
@@ -123,8 +121,8 @@ echo $view->render(...);
             <classname>Zend_View_Interface</classname> 実装することによるものです。
         </para>
 
-        <sect3 id="zend.view.scripts.templates.scripts">
-            <title>ビュースクリプトを使用したテンプレートシステム</title>
+        <section xml:id="zend.view.scripts.templates.scripts"><info><title>ビュースクリプトを使用したテンプレートシステム</title></info>
+            
 
             <para>
                 ビュースクリプトを使用して、PHPLIB 形式のテンプレートのような
@@ -180,10 +178,10 @@ if ($this->books) {
 <p>表示する本がありません。</p>
 ]]></programlisting>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.view.scripts.templates.interface">
-            <title>Zend_View_Interface を使用したテンプレート</title>
+        <section xml:id="zend.view.scripts.templates.interface"><info><title>Zend_View_Interface を使用したテンプレート</title></info>
+            
 
             <para>
                 <classname>Zend_View</classname> 互換のテンプレートエンジンを使用するほうが簡単だという人もいるでしょう。
@@ -460,9 +458,6 @@ class FooController extends Zend_Controller_Action
     }
 }
 ]]></programlisting>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

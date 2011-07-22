@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20766 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.db.profiler" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Zend_Db_Profiler</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.profiler"><info><title>Zend_Db_Profiler</title></info>
+    
 
-    <sect2 id="zend.db.profiler.introduction">
-        <title>Einführung</title>
+    <section xml:id="zend.db.profiler.introduction"><info><title>Einführung</title></info>
+        
 
         <para>
             <classname>Zend_Db_Profiler</classname> kann aktiviert werden, um das Erstellen von
@@ -129,10 +127,10 @@ $config = new Zend_Config($configData);
 $params['profiler'] = $config;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.profiler.using">
-        <title>Den Profiler verwenden</title>
+    <section xml:id="zend.db.profiler.using"><info><title>Den Profiler verwenden</title></info>
+        
 
         <para>
             Der Profiler kann jederzeit über die Adapter Methode
@@ -264,10 +262,10 @@ echo 'Queries per second: ' . $queryCount / $totalTime . "\n";
 echo 'Longest query length: ' . $longestTime . "\n";
 echo "Longest query: \n" . $longestQuery . "\n";
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.profiler.advanced">
-        <title>Fortgeschrittene Profiler Verwendung</title>
+    <section xml:id="zend.db.profiler.advanced"><info><title>Fortgeschrittene Profiler Verwendung</title></info>
+        
 
         <para>
             Zusätzlich zum Untersuchen von Anfragen erlaubt der Profiler dem Entwickler auch zu
@@ -275,8 +273,8 @@ echo "Longest query: \n" . $longestQuery . "\n";
             mit einer <classname>Zend_Db_Profiler</classname> Instanz:
         </para>
 
-        <sect3 id="zend.db.profiler.advanced.filtertime">
-            <title>Filtern anhand der Laufzeit der Abfragen</title>
+        <section xml:id="zend.db.profiler.advanced.filtertime"><info><title>Filtern anhand der Laufzeit der Abfragen</title></info>
+            
 
             <para>
                 <methodname>setFilterElapsedSecs()</methodname> ermöglicht dem Entwickler, eine
@@ -292,10 +290,10 @@ $profiler->setFilterElapsedSecs(5);
 // Zeichne alle Abfragen unabhängig von deren Laufzeit auf:
 $profiler->setFilterElapsedSecs(null);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.profiler.advanced.filtertype">
-            <title>Filtern anhand des Abfragetyp</title>
+        <section xml:id="zend.db.profiler.advanced.filtertype"><info><title>Filtern anhand des Abfragetyp</title></info>
+            
 
             <para>
                 <methodname>setFilterQueryType()</methodname> ermöglicht dem Entwickler anzugeben,
@@ -381,10 +379,10 @@ $profiler->setFilterQueryType(Zend_Db_Profiler::DELETE);
 // Remove all filters
 $profiler->setFilterQueryType(null);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.profiler.advanced.getbytype">
-            <title>Hole Profil nach Abfragetyp zurück</title>
+        <section xml:id="zend.db.profiler.advanced.getbytype"><info><title>Hole Profil nach Abfragetyp zurück</title></info>
+            
 
             <para>
                 Die Verwendung von <methodname>setFilterQueryType()</methodname> kann die Anzahl
@@ -409,11 +407,11 @@ $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::SELECT |
 // Hole DELETE Abfragen zurück
 $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::DELETE);
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.db.profiler.profilers">
-        <title>Specialized Profilers</title>
+    <section xml:id="zend.db.profiler.profilers"><info><title>Specialized Profilers</title></info>
+        
 
         <para>
             Ein spezialisierter Profiler ist ein Objekt das von
@@ -421,6 +419,6 @@ $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::DELETE);
             behandeln die Profilinginformationen auf speziellen Wegen.
         </para>
 
-        <xi:include href="Zend_Db_Profiler-Firebug.xml" />
-    </sect2>
-</sect1>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Db_Profiler-Firebug.xml"/>
+    </section>
+</section>

@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.tool.project.create-a-project">
-    <title>Create A Project</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.project.create-a-project"><info><title>Create A Project</title></info>
+    
 
     <note>
         <para>
@@ -43,8 +44,8 @@
         can be used to modify the behavior of the action and provider.
     </para>
 
-    <table id="zend.tool.project.project-provider-table">
-        <title>Project Provider Options</title>
+    <table xml:id="zend.tool.project.project-provider-table"><info><title>Project Provider Options</title></info>
+        
 
         <tgroup cols="4">
             <thead>
@@ -66,4 +67,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect1>
+</section>

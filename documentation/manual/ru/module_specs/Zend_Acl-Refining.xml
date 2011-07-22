@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.acl.refining">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.refining"><info><title>Настройка управления доступом</title></info>
 
-    <title>Настройка управления доступом</title>
+    
 
-    <sect2 id="zend.acl.refining.precise">
+    <section xml:id="zend.acl.refining.precise"><info><title>Точное управление доступом</title></info>
 
-        <title>Точное управление доступом</title>
+        
 
         <para>
             Базовый <acronym>ACL</acronym>, как было описано в
@@ -129,11 +128,11 @@ echo $acl->isAllowed('administrator', 'announcement', 'archive') ?
 // запрещен
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.refining.removing">
+    <section xml:id="zend.acl.refining.removing"><info><title>Удаление правил доступа</title></info>
 
-        <title>Удаление правил доступа</title>
+        
 
         <para>
             Для того, чтобы удалить одно или несколько правил из <acronym>ACL</acronym>,
@@ -189,9 +188,6 @@ echo $acl->isAllowed('marketing', 'latest', 'anything') ?
 // разрешен
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21826 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.oauth.introduction.security-architecture">
-    <title>Architektur der Sicherheit</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.oauth.introduction.security-architecture"><info><title>Architektur der Sicherheit</title></info>
+    
 
     <para>
         OAuth wurde speziell designt um über eine unsichere <acronym>HTTP</acronym> Verbindung zu
@@ -92,4 +92,4 @@
         <acronym>HTTP</acronym> nur an solchen Orten eingesetzt wird so es nicht anders möglich oder
         nicht erschwinglich ist.
     </para>
-</sect2>
+</section>

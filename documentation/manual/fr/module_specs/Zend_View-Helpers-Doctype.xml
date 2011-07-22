@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.doctype">
-    <title>L'aide de vue Doctype</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.doctype"><info><title>L'aide de vue Doctype</title></info>
+    
 
     <para>
         Les documents HTML et <acronym>XHTML</acronym> valides doivent inclure une déclaration
@@ -58,12 +56,11 @@
     </para>
 
     <para>
-        L'aide <code>Doctype</code> est une implémentation concrète de l'<link
-        linkend="zend.view.helpers.initial.placeholder">aide Conteneur</link>.
+        L'aide <code>Doctype</code> est une implémentation concrète de l'<link linkend="zend.view.helpers.initial.placeholder">aide Conteneur</link>.
     </para>
 
-    <example id="zend.view.helpers.initial.doctype.basicusage">
-        <title>Utilisation basique de l'aide Doctype</title>
+    <example xml:id="zend.view.helpers.initial.doctype.basicusage"><info><title>Utilisation basique de l'aide Doctype</title></info>
+        
 
         <para>
             Vous pouvez spécifier le doctype à n'importe quel moment. Cependant, les aides de
@@ -84,8 +81,8 @@ $doctypeHelper->doctype('XHTML1_STRICT');
 ]]></programlisting>
     </example>
 
-    <example id="zend.view.helpers.initial.doctype.retrieving">
-        <title>Récupérer le Doctype</title>
+    <example xml:id="zend.view.helpers.initial.doctype.retrieving"><info><title>Récupérer le Doctype</title></info>
+        
 
         <para>
             Si vous avez besoin du doctype, vous pouvez le récupérer par l'appel de
@@ -98,7 +95,7 @@ $doctype = $view->doctype()->getDoctype();
 
         <para>
             Typiquement, vous pouvez simplement vouloir savoir si le doctype est <acronym>XHTML</acronym> ou
-            non&#160;; pour ceci, la méthode <methodname>isXhtml()</methodname> vous suffira&#160;:
+            non ; pour ceci, la méthode <methodname>isXhtml()</methodname> vous suffira :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -109,7 +106,7 @@ if ($view->doctype()->isXhtml()) {
 
         <para>
             Vous pouvez aussi vérifier si le doctype représente un document
-            <acronym>HTML5</acronym>&#160;:
+            <acronym>HTML5</acronym> :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -119,4 +116,4 @@ if ($view->doctype()->isHtml5()) {
 ]]></programlisting>
 
     </example>
-</sect3>
+</section>

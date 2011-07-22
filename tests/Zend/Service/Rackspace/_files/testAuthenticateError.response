@@ -1,0 +1,8 @@
+HTTP/1.1 401 Unauthorized
+Date: Wed, 11 May 2011 08:42:20 GMT
+Server: Apache/2.2.3 (Mosso Engineering)
+Content-length: 24
+Connection: close
+Content-type: application/octet-stream
+
+Bad username or password

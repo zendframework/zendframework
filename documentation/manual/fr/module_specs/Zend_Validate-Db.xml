@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21241 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.Db">
-    <title>Db_RecordExists et Db_NoRecordExists</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.Db"><info><title>Db_RecordExists et Db_NoRecordExists</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Db_RecordExists</classname> et
@@ -10,55 +8,55 @@
         existe (ou pas) dans une table de base de données.
     </para>
 
-    <sect3 id="zend.validate.set.db.options">
-        <title>Options supportées par Zend_Validate_Db_*</title>
+    <section xml:id="zend.validate.set.db.options"><info><title>Options supportées par Zend_Validate_Db_*</title></info>
+        
 
         <para>
             Les options suivantes sont supportées par
             <classname>Zend_Validate_Db_NoRecordExists</classname> et
-            <classname>Zend_Validate_Db_RecordExists</classname>&#160;:
+            <classname>Zend_Validate_Db_RecordExists</classname> :
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis><property>adapter</property></emphasis>&#160;: l'adaptateur de base
+                    <emphasis><property>adapter</property></emphasis> : l'adaptateur de base
                     de données qui sera utilisé pour la recherche.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis><property>exclude</property></emphasis>&#160;: jeu d'enregistrements
+                    <emphasis><property>exclude</property></emphasis> : jeu d'enregistrements
                     qui seront exclus de la recherche.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis><property>field</property></emphasis>&#160;: le champs dans la table
+                    <emphasis><property>field</property></emphasis> : le champs dans la table
                     de la base de données dans lequel sera effectué la recherche.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis><property>schema</property></emphasis>&#160;: le schéma utilisé
+                    <emphasis><property>schema</property></emphasis> : le schéma utilisé
                     pour la recherche.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis><property>table</property></emphasis>&#160;: la table qui sera
+                    <emphasis><property>table</property></emphasis> : la table qui sera
                     utilisée pour la recherche.
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.db.basic-usage">
-        <title>Utilisation de base</title>
+    <section xml:id="zend.validate.db.basic-usage"><info><title>Utilisation de base</title></info>
+        
 
         <para>
             Voici un exemple basique:
@@ -100,10 +98,10 @@ if ($validator->isValid($username)) {
             Le code ci-dessus vérifie l'absence d'un nom d'utilisateur <varname>$username</varname>
             vis à vis d'un champ d'une table de base de données.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.db.excluding-records">
-        <title>Exclure des enregistrement</title>
+    <section xml:id="zend.validate.db.excluding-records"><info><title>Exclure des enregistrement</title></info>
+        
 
         <para>
             <classname>Zend_Validate_Db_RecordExists</classname> et
@@ -174,10 +172,10 @@ if ($validator->isValid($username)) {
             L'exemple ci-dessus vérifie la table <code>posts_categories</code> pour s'assurer
             qu'un enregistrement avec <code>post_id</code> corresponde à <varname>$category_id</varname>
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.db.database-adapters">
-        <title>Adaptateurs de base de données</title>
+    <section xml:id="zend.validate.db.database-adapters"><info><title>Adaptateurs de base de données</title></info>
+        
 
         <para>
             Un adaptateur spécifique peut être passé au validateur. Dans le cas contraire,
@@ -187,10 +185,10 @@ if ($validator->isValid($username)) {
         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Db_RecordExists('users', 'id', null, $dbAdapter);
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.db.database-schemas">
-        <title>Nom des bases de données</title>
+    <section xml:id="zend.validate.db.database-schemas"><info><title>Nom des bases de données</title></info>
+        
 
         <para>
             Vous pouvez spécifier un nom de base de données (schéma) pour l'adaptateur
@@ -202,5 +200,5 @@ $validator = new Zend_Validate_Db_RecordExists('users', 'id', null, $dbAdapter);
 $validator = new Zend_Validate_Db_RecordExists(array('table' => 'users',
                                                      'schema' => 'my'), 'id');
 ]]></programlisting>
-    </sect3>
-</sect2>
+    </section>
+</section>

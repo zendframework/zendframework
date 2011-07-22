@@ -1,5 +1,6 @@
-<sect3 id="zend.view.helpers.initial.json">
-    <title>פלאגין עזר ל JSON</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.json"><info><title>פלאגין עזר ל JSON</title></info>
+    
 
     <para>
         כשיוצרים קובץ תצוגה שמחזיר JSON, חשוב לדעת להחזיר את הכותר המתאים שיציג את ה JSON כפי שצריך.
@@ -13,8 +14,8 @@
 
     <programlisting role="text"><![CDATA[
 Content-Type: application/json
-]]>
-</programlisting>
+
+]]></programlisting>
 
     <para>
         מרבית ספריות ה AJAX מחפשות אחר הכותר הזה כדי לדעת כיצד לטפל בתוכן שהתקבל.
@@ -26,9 +27,6 @@ Content-Type: application/json
 
     <programlisting role="php"><![CDATA[
 <?= $this->json($this->data) ?>
-]]>
-    </programlisting>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+
+    ]]></programlisting>
+</section>

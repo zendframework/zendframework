@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.acl.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_Acl</classname> provides a lightweight and flexible access control list
@@ -42,8 +41,8 @@
         how roles are granted access to resources.
     </para>
 
-    <sect2 id="zend.acl.introduction.resources">
-        <title>Resources</title>
+    <section xml:id="zend.acl.introduction.resources"><info><title>Resources</title></info>
+        
 
         <para>
             Creating a resource in <classname>Zend_Acl</classname> is very simple.
@@ -75,10 +74,10 @@
             "read", "update", "delete"), so the developer can assign rules that affect all
             privileges or specific privileges on one or more resources.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.roles">
-        <title>Roles</title>
+    <section xml:id="zend.acl.introduction.roles"><info><title>Roles</title></info>
+        
 
         <para>
             As with resources, creating a role is also very simple. All roles must implement
@@ -102,8 +101,8 @@
             ambiguity condition and how <classname>Zend_Acl</classname> solves it.
         </para>
 
-        <example id="zend.acl.introduction.roles.example.multiple_inheritance">
-            <title>Multiple Inheritance among Roles</title>
+        <example xml:id="zend.acl.introduction.roles.example.multiple_inheritance"><info><title>Multiple Inheritance among Roles</title></info>
+            
 
             <para>
                 The following code defines three base roles - "guest",
@@ -166,10 +165,10 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
                 listed is the first one searched for rules applicable to an authorization query.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.creating">
-        <title>Creating the Access Control List</title>
+    <section xml:id="zend.acl.introduction.creating"><info><title>Creating the Access Control List</title></info>
+        
 
         <para>
             An Access Control List (<acronym>ACL</acronym>) can represent any set of physical or
@@ -190,10 +189,10 @@ $acl = new Zend_Acl();
                 access to every privilege upon every resource by every role.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.role_registry">
-        <title>Registering Roles</title>
+    <section xml:id="zend.acl.introduction.role_registry"><info><title>Registering Roles</title></info>
+        
 
         <para>
             <acronym>CMS</acronym>'s will nearly always require a hierarchy of permissions to
@@ -209,8 +208,8 @@ $acl = new Zend_Acl();
             expressed as follows:
         </para>
 
-        <table id="zend.acl.introduction.role_registry.table.example_cms_access_controls">
-            <title>Access Controls for an Example CMS</title>
+        <table xml:id="zend.acl.introduction.role_registry.table.example_cms_access_controls"><info><title>Access Controls for an Example CMS</title></info>
+            
             <tgroup cols="3">
                 <thead>
                     <row>
@@ -276,10 +275,10 @@ $acl->addRole(new Zend_Acl_Role('editor'), 'staff');
 // Administrator does not inherit access controls
 $acl->addRole(new Zend_Acl_Role('administrator'));
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.defining">
-        <title>Defining Access Controls</title>
+    <section xml:id="zend.acl.introduction.defining"><info><title>Defining Access Controls</title></info>
+        
 
         <para>
             Now that the <acronym>ACL</acronym> contains the relevant roles, rules can be
@@ -336,10 +335,10 @@ $acl->allow('administrator');
             The <constant>NULL</constant> values in the above <methodname>allow()</methodname> calls
             are used to indicate that the allow rules apply to all resources.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.querying">
-        <title>Querying an ACL</title>
+    <section xml:id="zend.acl.introduction.querying"><info><title>Querying an ACL</title></info>
+        
 
         <para>
             We now have a flexible <acronym>ACL</acronym> that can be used to determine whether
@@ -381,8 +380,5 @@ echo $acl->isAllowed('administrator', null, 'update') ?
      "allowed" : "denied";
 // allowed because administrator is allowed all privileges
 ]]></programlisting>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

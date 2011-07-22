@@ -1,5 +1,6 @@
-<sect1 id="zend.captcha.operation">
-    <title>Captcha 操作</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.captcha.operation"><info><title>Captcha 操作</title></info>
+    
 
     <para>
         所有具体的 CAPTCHA 对象实现
@@ -26,8 +27,8 @@ interface Zend_Captcha_Adapter extends Zend_Validate_Interface
 
     public function getErrors();
 }
-]]>
-    </programlisting>
+
+    ]]></programlisting>
 
     <para>
         增变器和访问器用于指定和获取 captcha 的标识符。
@@ -57,9 +58,6 @@ echo $captcha->render();
 if ($captcha->isValid($_POST['foo'], $_POST)) {
     // Validated!
 }
-]]>
-        </programlisting>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+
+        ]]></programlisting>
+</section>

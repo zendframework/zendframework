@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21358 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.dojo.introduction">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.introduction"><info><title>Einführung</title></info>
+    
 
     <para>
         Zend Framework wird mit dem
-        <ulink url="http://dojotoolkit.org">Dojo Toolkit</ulink> ausgeliefert um Out-Of-The-Box
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org">Dojo Toolkit</link> ausgeliefert um Out-Of-The-Box
         reiche Entwicklung von Internet Anwendungen zu unterstützen. Die Integrationspunkte mit Dojo
         enthalten:
     </para>
@@ -32,4 +32,4 @@
         unterstützt beide, den offiziellen <acronym>AOL</acronym> <acronym>CDN</acronym> sowie den
         Google <acronym>CDN</acronym>).
     </para>
-</sect1>
+</section>

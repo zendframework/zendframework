@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.autoloading.resources">
-    <title>Resource Autoloading</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.resources"><info><title>Resource Autoloading</title></info>
+    
 
     <para>
         Often, when developing an application, it's either difficult to package classes in the 1:1
@@ -88,8 +87,8 @@ $form      = new Foo_Form_Guestbook();
 $guestbook = new Foo_Model_Guestbook();
 ]]></programlisting>
 
-    <note>
-        <title>Module Resource Autoloading</title>
+    <note><info><title>Module Resource Autoloading</title></info>
+        
 
         <para>
             Zend Framework's <acronym>MVC</acronym> layer encourages the use of "modules", which
@@ -100,9 +99,8 @@ $guestbook = new Foo_Model_Guestbook();
             quite useful in this paradigm -- so useful that they are enabled by default when you
             create a bootstrap class for your module that extends
             <classname>Zend_Application_Module_Bootstrap</classname>. For more information, read
-            the <link
-                linkend="zend.loader.autoloader-resource.module">Zend_Loader_Autoloader_Module
+            the <link linkend="zend.loader.autoloader-resource.module">Zend_Loader_Autoloader_Module
                 documentation</link>.
         </para>
     </note>
-</sect1>
+</section>

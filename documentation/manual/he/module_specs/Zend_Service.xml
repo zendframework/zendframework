@@ -1,5 +1,8 @@
-<sect1 id="zend.service.introduction">
-    <title>הקדמה</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.introduction"><info><title>הקדמה</title></info>
+    
     <para>
         <code>Zend_Service</code> היא מחלקה לא מחושית אשר משמשת בתור יסוד לישום מחלקות שרת אשר נעזרות ב SOAP או REST לדוגמא.
     </para>
@@ -63,7 +66,4 @@
         שירותים נוספים יתווספו בעתיד.
     </para>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

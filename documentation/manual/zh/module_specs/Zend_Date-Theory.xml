@@ -1,6 +1,9 @@
-<sect1 id="zend.date.definition.theory">
+<?xml version="1.0" encoding="utf-8"?>
 
-    <title> 操作理论 </title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.definition.theory"><info><title> 操作理论 </title></info>
+
+    
 
     <para>
         为什么在 Zend Framework 中只有一个 <code>Zend_Date</code> 类来处理日期和时间？
@@ -10,12 +13,12 @@
         很多语言把处理时间和日历日期分成两个类，然而，Zend Framework 为简单而努力。在很多情况下，迫使开发者为时间和日期在不同的方法中管理不同的对象变成一种负担。 因为 <code>Zend_Date</code> 方法支持不明确的日期，它可能不包括所有部分（era 、年、月、日、小时、分钟、秒、时区），所以开发者可以享受灵活性和轻松地使用同一类和同一方法来进行处理（例如：加、减、比较、合并日期等）。当渴望在短期内熟悉这些交互操作，把处理这些日期的片段分成多个类会把事情弄的复杂。一个单个的类为相似的操作减少了代码重复，也不需要复杂的继承等级结构。
     </para>
 
-    <sect2 id="zend.date.theory.internals">
+    <section xml:id="zend.date.theory.internals"><info><title> 内部（Internals）</title></info>
 
-        <title> 内部（Internals）</title>
+        
 
         <para>
-            <itemizedlist mark='opencircle'>
+            <itemizedlist mark="opencircle">
                 <listitem>
                     <para>
                         UNIX 时间戳（Timestamp）
@@ -43,7 +46,6 @@
             </itemizedlist>
         </para>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--vim:se ts=4 sw=4 et:-->
+</section>

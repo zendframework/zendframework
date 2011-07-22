@@ -1,15 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 17409 -->
-<sect1 id="zend.service.akismet">
-    <title>Zend_Service_Akismet</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.akismet"><info><title>Zend_Service_Akismet</title></info>
+    
 
-    <sect2 id="zend.service.akismet.introduction">
-        <title>導入</title>
+    <section xml:id="zend.service.akismet.introduction"><info><title>導入</title></info>
+        
 
         <para>
             <classname>Zend_Service_Akismet</classname> は、
-            <ulink url="http://akismet.com/development/api/">Akismet <acronym>API</acronym></ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://akismet.com/development/api/">Akismet <acronym>API</acronym></link>
             のクライアント機能を提供します。Akismet サービスは、
             入力データがスパムかどうかを判定するために用いられます。
             また、あるデータを「スパムである」とか「無実である (ハム)」
@@ -20,7 +18,7 @@
 
         <para>
             Akismet を使用するには API キーが必要です。
-            キーを取得するには <ulink url="http://wordpress.com/">WordPress.com</ulink>
+            キーを取得するには <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wordpress.com/">WordPress.com</link>
             でアカウントを作成します。blog を作成する必要はありません。
             単にアカウントを作成するだけで API キーが使用できます。
         </para>
@@ -34,10 +32,10 @@
             ただ、いつでも <methodname>setBlogUrl()</methodname> で変更することができますし、
             その他のメソッドコールの際に 'blog' キーを指定して上書きすることもできます。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.akismet.verifykey">
-        <title>API キーの検証</title>
+    <section xml:id="zend.service.akismet.verifykey"><info><title>API キーの検証</title></info>
+        
 
         <para>
             <methodname>Zend_Service_Akismet::verifyKey($key)</methodname>
@@ -69,10 +67,10 @@ if ($akismet->verifyKey($apiKey) {
             <methodname>verifyKey()</methodname> は、Akismet の
             <code>verify-key</code> REST メソッドを実装したものです。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.akismet.isspam">
-        <title>スパムのチェック</title>
+    <section xml:id="zend.service.akismet.isspam"><info><title>スパムのチェック</title></info>
+        
 
         <para>
             <methodname>Zend_Service_Akismet::isSpam($data)</methodname>
@@ -175,8 +173,8 @@ if ($akismet->verifyKey($apiKey) {
             API キーが無効な場合は例外をスローします。
         </para>
 
-        <example id="zend.service.akismet.isspam.example-1">
-            <title>isSpam() の使用法</title>
+        <example xml:id="zend.service.akismet.isspam.example-1"><info><title>isSpam() の使用法</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $data = array(
@@ -201,10 +199,10 @@ if ($akismet->isSpam($data)) {
             <methodname>isSpam()</methodname> は、Akismet API のメソッド
             <code>comment-check</code> を実装したものです。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.akismet.submitspam">
-        <title>既知のスパムの送信</title>
+    <section xml:id="zend.service.akismet.submitspam"><info><title>既知のスパムの送信</title></info>
+        
 
         <para>
             時には、スパムがフィルタを通過してしまうこともあります。
@@ -220,8 +218,8 @@ if ($akismet->isSpam($data)) {
             API キーが無効な場合は例外が発生します。
         </para>
 
-        <example id="zend.service.akismet.submitspam.example-1">
-            <title>submitSpam() の使用法</title>
+        <example xml:id="zend.service.akismet.submitspam.example-1"><info><title>submitSpam() の使用法</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $data = array(
@@ -241,10 +239,10 @@ $akismet->submitSpam($data));
             <methodname>submitSpam()</methodname> は、Akismet API のメソッド
             <code>submit-spam</code> を実装したものです。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.akismet.submitham">
-        <title>無実のデータ (ハム) の送信</title>
+    <section xml:id="zend.service.akismet.submitham"><info><title>無実のデータ (ハム) の送信</title></info>
+        
 
         <para>
             時には、Akismet が間違ってスパムと判定してしまうこともあります。
@@ -262,8 +260,8 @@ $akismet->submitSpam($data));
             API キーが無効な場合は例外が発生します。
         </para>
 
-        <example id="zend.service.akismet.submitham.example-1">
-            <title>submitHam() の使用法</title>
+        <example xml:id="zend.service.akismet.submitham.example-1"><info><title>submitHam() の使用法</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $data = array(
@@ -283,10 +281,10 @@ $akismet->submitHam($data));
             <methodname>submitHam()</methodname> は、Akismet API のメソッド
             <code>submit-ham</code> を実装したものです。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.akismet.accessors">
-        <title>Zend 固有のアクセス用メソッド</title>
+    <section xml:id="zend.service.akismet.accessors"><info><title>Zend 固有のアクセス用メソッド</title></info>
+        
 
         <para>
             Akismet API では四つのメソッドしか定義されていませんが、
@@ -346,9 +344,5 @@ $akismet->submitHam($data));
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
-
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

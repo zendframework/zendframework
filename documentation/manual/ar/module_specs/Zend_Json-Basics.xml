@@ -1,5 +1,6 @@
-<sect1 id="zend.json.basics">
-    <title>إستخدامات بسيطة</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.basics"><info><title>إستخدامات بسيطة</title></info>
+    
     <para>
         إستخدام <code>Zend_Json</code> يتطلب إستخدام إثنان من الـ public static methods المتوفرة :
         <code>()Zend_Json::encode</code> و <code>()Zend_Json::decode</code>.
@@ -11,7 +12,4 @@ $phpNative = Zend_Json::decode($encodedValue);
 // Encode it to return to the client:
 $json = Zend_Json::encode($phpNative);
 ?>]]></programlisting>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

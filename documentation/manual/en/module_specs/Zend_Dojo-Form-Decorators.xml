@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.dojo.form.decorators">
-    <title>Dijit-Specific Form Decorators</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.form.decorators"><info><title>Dijit-Specific Form Decorators</title></info>
+    
 
     <para>
         Most form elements can use the DijitElement decorator, which will grab
@@ -19,8 +18,8 @@
         information occurs.
     </para>
 
-    <sect3 id="zend.dojo.form.decorators.dijitElement">
-        <title>DijitElement Decorator</title>
+    <section xml:id="zend.dojo.form.decorators.dijitElement"><info><title>DijitElement Decorator</title></info>
+        
 
         <para>
             Just like <link linkend="zend.form.standardDecorators.viewHelper">the
@@ -45,8 +44,8 @@
             in your decorator chain, with no additional options.
         </para>
 
-        <example id="zend.dojo.form.decorators.dijitElement.usage">
-            <title>DijitElement Decorator Usage</title>
+        <example xml:id="zend.dojo.form.decorators.dijitElement.usage"><info><title>DijitElement Decorator Usage</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $element->setDecorators(array(
@@ -57,14 +56,13 @@ $element->setDecorators(array(
 ));
 ]]></programlisting>
         </example>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.form.decorators.dijitForm">
-        <title>DijitForm Decorator</title>
+    <section xml:id="zend.dojo.form.decorators.dijitForm"><info><title>DijitForm Decorator</title></info>
+        
 
         <para>
-            The DijitForm decorator is very similar to the <link
-                linkend="zend.form.standardDecorators.form">Form
+            The DijitForm decorator is very similar to the <link linkend="zend.form.standardDecorators.form">Form
                 decorator</link>; in fact, it can be used basically
             interchangeably with it, as it utilizes the same view helper name
             ('form').
@@ -77,16 +75,15 @@ $element->setDecorators(array(
             dijit creation can work. The decorator ensures this, by passing the
             form name as the identifier.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.form.decorators.dijitContainer">
-        <title>DijitContainer-based Decorators</title>
+    <section xml:id="zend.dojo.form.decorators.dijitContainer"><info><title>DijitContainer-based Decorators</title></info>
+        
 
         <para>
             The <classname>DijitContainer</classname> decorator is actually an abstract
             class from which a variety of other decorators derive. It offers
-            the same functionality of <link
-                linkend="zend.dojo.form.decorators.dijitElement">DijitElement</link>,
+            the same functionality of <link linkend="zend.dojo.form.decorators.dijitElement">DijitElement</link>,
             with the addition of title support. Many layout dijits require or
             can utilize a title; DijitContainer will utilize the element's
             legend property, if available, and can also utilize either the
@@ -110,8 +107,8 @@ $element->setDecorators(array(
             <listitem><para>TabContainer</para></listitem>
         </itemizedlist>
 
-        <example id="zend.dojo.form.decorators.dijitContainer.usage">
-            <title>DijitContainer Decorator Usage</title>
+        <example xml:id="zend.dojo.form.decorators.dijitContainer.usage"><info><title>DijitContainer Decorator Usage</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Use a TabContainer for your form:
@@ -136,5 +133,5 @@ $subForm->setDecorators(array(
 ));
 ]]></programlisting>
         </example>
-    </sect3>
-</sect2>
+    </section>
+</section>

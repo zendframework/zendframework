@@ -1,5 +1,8 @@
-<sect1 id="zend.mail.character-sets">
-    <title>Character Sets</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.character-sets"><info><title>Character Sets</title></info>
+    
     <para>
         <code>Zend_Mail</code> controleert niet of de berichtdelen de juiste karakterset hebben. Wanneer
         <code>Zend_Mail</code> word geïnstantieerd mag er een charset voor het bericht zelf worden opgegeven.
@@ -12,7 +15,4 @@
         Character sets zijn alleen toepasbaar op berichtdelen in tekstformaat.
       </para>
     </note>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

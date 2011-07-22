@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 17592 -->
-<sect3 id="zend.controller.router.routes.hostname">
-    <title>Zend_Controller_Router_Route_Hostname</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.router.routes.hostname"><info><title>Zend_Controller_Router_Route_Hostname</title></info>
+    
 
     <para>
         <classname>Zend_Controller_Router_Route_Hostname</classname>
@@ -47,13 +45,10 @@ $router->addRoute('user', $hostnameRoute->chain($plainPathRoute);
         hostname ルートを単独で使うこともできますが、決してしてはいけません。
         その理由は、hostname ルートはそれ単体だと任意のパスにマッチすることになるからです。
         hostname ルートの後には path ルートをつなげなければなりません。
-        例に示したように、<command>$hostnameRoute->chain($pathRoute);</command>
+        例に示したように、<command>$hostnameRoute-&gt;chain($pathRoute);</command>
         のようにコールすることになります。こうすると、
         <varname>$hostnameRoute</varname> には何も変更は加えられませんが、新たなルート
         (<classname>Zend_Controller_Router_Route_Chain</classname>) が返されます。
         そして、これをルータに渡します。
     </para>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

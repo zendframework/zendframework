@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.modules">
-    <title>Zend_Application_Resource_Modules</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.modules"><info><title>Zend_Application_Resource_Modules</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Modules</classname> is used to initialize
@@ -52,12 +51,11 @@ $options = array(
 );
 ]]></programlisting>
 
-    <note>
-        <title>Front Controller Resource Dependency</title>
+    <note><info><title>Front Controller Resource Dependency</title></info>
+        
 
         <para>
-            The Modules resource has a dependency on the <link
-                linkend="zend.application.available-resources.frontcontroller">Front
+            The Modules resource has a dependency on the <link linkend="zend.application.available-resources.frontcontroller">Front
             Controller resource</link>. You can, of course, provide your own
             replacement for that resource via a custom Front Controller resource
             class or a class initializer method -- so long as the resource
@@ -66,8 +64,8 @@ $options = array(
         </para>
     </note>
 
-    <example id="zend.application.available-resources.modules.configExample">
-        <title>Configuring Modules</title>
+    <example xml:id="zend.application.available-resources.modules.configExample"><info><title>Configuring Modules</title></info>
+        
 
         <para>
             You can specify module-specific configuration using the module name
@@ -112,8 +110,8 @@ news.resources.db.params.dbname = "news"
 ]]></programlisting>
     </example>
 
-    <example id="zend.application.available-resources.modules.retrieveBootstrapExample">
-        <title>Retrieving a specific module bootstrap</title>
+    <example xml:id="zend.application.available-resources.modules.retrieveBootstrapExample"><info><title>Retrieving a specific module bootstrap</title></info>
+        
 
         <para>
             On occasion, you may need to retrieve the bootstrap object for a
@@ -129,4 +127,4 @@ $moduleBootstraps = $resource->getExecutedBootstraps();
 $newsBootstrap = $moduleBootstraps['news'];
 ]]></programlisting>
     </example>
-</sect2>
+</section>

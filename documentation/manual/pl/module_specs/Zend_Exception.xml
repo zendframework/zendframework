@@ -1,14 +1,15 @@
-<sect1 id="zend.exception.using">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.using"><info><title>Użycie wyjątków</title></info>
 
-    <title>Użycie wyjątków</title>
+    
 
     <para>
         Każdy wyjątek wyrzucany przez klasy Zend Framework powinien
         wyrzucać wyjątek, który rozszerza podstawową klasę Zend_Exception.
     </para>
 
-    <example id="zend.exception.using.example">
-        <title>Przykład łapania wyjątku</title>
+    <example xml:id="zend.exception.using.example"><info><title>Przykład łapania wyjątku</title></info>
+        
         <programlisting role="php"><![CDATA[
 try {
     Zend_Loader::loadClass('nonexistantclass');
@@ -17,8 +18,8 @@ try {
     echo "Message: " . $e->getMessage() . "\n";
     // inny kod do obsługi błędu.
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
 
     <para>
@@ -28,4 +29,4 @@ try {
         klasy wyjątków pochodzą z klasy Zend_Exception.
     </para>
 
-</sect1>
+</section>

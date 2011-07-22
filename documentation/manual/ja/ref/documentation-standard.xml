@@ -1,14 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20876 -->
-<appendix id="doc-standard">
-    <title>Zend Framework ドキュメント標準</title>
+<?xml version="1.0" encoding="utf-8"?>
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="doc-standard"><info><title>Zend Framework ドキュメント標準</title></info>
+    
 
-    <sect1 id="doc-standard.overview">
-        <title>概要</title>
+    <section xml:id="doc-standard.overview"><info><title>概要</title></info>
+        
 
-        <sect2 id="doc-standard.overview.scope">
-            <title>スコープ</title>
+        <section xml:id="doc-standard.overview.scope"><info><title>スコープ</title></info>
+            
 
             <para>
                 <!-- TODO : to be translated -->
@@ -25,21 +23,21 @@
 
             <para>
                 You may adopt and/or modify these standards in accordance with the terms of our
-                <ulink url="http://framework.zend.com/license">license</ulink>.
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/license">license</link>.
             </para>
 
             <para>
                 Topics covered in Zend Framework's documentation standards include documentation
                 file formatting and recommendations for documentation quality.
             </para>
-        </sect2>
-    </sect1>
+        </section>
+    </section>
 
-    <sect1 id="doc-standard.file-formatting">
-        <title>ドキュメントファイル形式</title>
+    <section xml:id="doc-standard.file-formatting"><info><title>ドキュメントファイル形式</title></info>
+        
 
-        <sect2 id="doc-standard.file-formatting.xml-tags">
-            <title>XML タグ</title>
+        <section xml:id="doc-standard.file-formatting.xml-tags"><info><title>XML タグ</title></info>
+            
 
             <para>
                 Each manual file must include the following <acronym>XML</acronym> declarations at
@@ -62,20 +60,20 @@
 <!-- EN-Revision: 14978 -->
 <!-- Reviewed: no -->
 ]]></programlisting>
-        </sect2>
+        </section>
 
-        <sect2 id="doc-standard.file-formatting.max-line-length">
-            <title>行の最大長</title>
+        <section xml:id="doc-standard.file-formatting.max-line-length"><info><title>行の最大長</title></info>
+            
 
             <para>
                 The maximum line length, including tags, attributes, and indentation, is not to
                 exceed 100 characters. There is only one exception to this rule: attribute and value
                 pairs are allowed to exceed the 100 chars as they are not allowed to be separated.
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="doc-standard.file-formatting.indentation">
-            <title>インデント</title>
+        <section xml:id="doc-standard.file-formatting.indentation"><info><title>インデント</title></info>
+            
 
             <para>Indentation should consist of 4 spaces. Tabs are not allowed.</para>
 
@@ -116,10 +114,10 @@
     <classname>Zend_Magic</classname> does not exist. <classname>Zend_Acl</classname> does.
 </para>
 ]]></programlisting>
-        </sect2>
+        </section>
 
-        <sect2 id="doc-standard.file-formatting.line-termination">
-            <title>行の終端</title>
+        <section xml:id="doc-standard.file-formatting.line-termination"><info><title>行の終端</title></info>
+            
 
             <para>
                 Line termination follows the Unix text file convention. Lines must end with a
@@ -132,10 +130,10 @@
                 Apple OS's (0x0D) or the carriage return - linefeed combination
                 (<acronym>CRLF</acronym>) as is standard for the Windows OS (0x0D, 0x0A).
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="doc-standard.file-formatting.empty-tags">
-            <title>空のタグ</title>
+        <section xml:id="doc-standard.file-formatting.empty-tags"><info><title>空のタグ</title></info>
+            
 
             <para>
                 空のタグは認められません。タグは全てテキストまたは子供タグを含まなければいけません。
@@ -150,13 +148,13 @@
 <para>
 </para>
 ]]></programlisting>
-        </sect2>
+        </section>
 
-        <sect2 id="doc-standard.file-formatting.whitespace">
-            <title>ドキュメント内での空白の利用</title>
+        <section xml:id="doc-standard.file-formatting.whitespace"><info><title>ドキュメント内での空白の利用</title></info>
+            
 
-            <sect3 id="doc-standard.file-formatting.whitespace.trailing">
-                <title>タグ内での空白</title>
+            <section xml:id="doc-standard.file-formatting.whitespace.trailing"><info><title>タグ内での空白</title></info>
+                
 
                 <para>
                     <!-- TODO : to be translated -->
@@ -208,10 +206,10 @@ This is the class <classname>Zend_Class </classname>
 <!-- OK -->
 This is the class <classname>Zend_Class</classname>
 ]]></programlisting>
-            </sect3>
+            </section>
 
-            <sect3 id="doc-standard.file-formatting.whitespace.multiple-line-breaks">
-                <title>複数行の切断</title>
+            <section xml:id="doc-standard.file-formatting.whitespace.multiple-line-breaks"><info><title>複数行の切断</title></info>
+                
 
                 <para>
                     複数行内での、またはタグの間での切断は認められません。
@@ -240,10 +238,10 @@ This is the class <classname>Zend_Class</classname>
     Another paragraph.
 </para>
 ]]></programlisting>
-            </sect3>
+            </section>
 
-            <sect3 id="doc-standard.file-formatting.whitespace.tag-separation">
-                <title>タグの間の分離</title>
+            <section xml:id="doc-standard.file-formatting.whitespace.tag-separation"><info><title>タグの間の分離</title></info>
+                
 
                 <para>
                     読みやすくするために、同じレベルのタグは空行で分離しなければいけません。
@@ -302,11 +300,11 @@ This is the class <classname>Zend_Class</classname>
     </sect2>
 </sect1>
 ]]></programlisting>
-            </sect3>
-        </sect2>
+            </section>
+        </section>
 
-        <sect2 id="doc-standard.file-formatting.program-listing">
-            <title>プログラム・リスティング</title>
+        <section xml:id="doc-standard.file-formatting.program-listing"><info><title>プログラム・リスティング</title></info>
+            
 
             <para>
                 The opening <emphasis>&lt;programlisting&gt;</emphasis> tag must indicate the
@@ -317,7 +315,7 @@ This is the class <classname>Zend_Class</classname>
             <programlisting language="xml"><![CDATA[
 <para>Sibling paragraph.</para>
 
-<programlisting language="php">]]>&lt;<![CDATA[![CDATA[
+<programlisting language="php"><![CDATA[
 ]]></programlisting>
 
             <para>
@@ -332,16 +330,16 @@ This is the class <classname>Zend_Class</classname>
 
             <programlisting language="xml"><![CDATA[
 <!-- NOT ALLOWED -->
-<programlisting language="php">]]>&lt;<![CDATA[![CDATA[
+<programlisting language="php"><![CDATA[
 
 $render = "xxx";
 
-]]]]>&gt;<![CDATA[</programlisting>
+]]]]><![CDATA[></programlisting>
 
 <!-- OK -->
-<programlisting language="php">]]>&lt;<![CDATA[![CDATA[
+<programlisting language="php"><![CDATA[
 $render = "xxx";
-]]]]>&gt;<![CDATA[</programlisting>
+]]]]><![CDATA[></programlisting>
 ]]></programlisting>
 
             <para>
@@ -351,20 +349,20 @@ $render = "xxx";
 
             <programlisting language="xml"><![CDATA[
 <!-- NOT ALLOWED -->
-    <programlisting language="php">]]>&lt;<![CDATA[![CDATA[
+    <programlisting language="php"><![CDATA[
 $render = "xxx";
-]]]]>&gt;<![CDATA[
+]]]]><![CDATA[>
     </programlisting>
 
 <!-- NOT ALLOWED -->
-    <programlisting language="php">]]>&lt;<![CDATA[![CDATA[
+    <programlisting language="php"><![CDATA[
 $render = "xxx";
-    ]]]]>&gt;<![CDATA[</programlisting>
+    ]]]]><![CDATA[></programlisting>
 
 <!-- OK -->
-    <programlisting language="php">]]>&lt;<![CDATA[![CDATA[
+    <programlisting language="php"><![CDATA[
 $render = "xxx";
-]]]]>&gt;<![CDATA[</programlisting>
+]]]]><![CDATA[></programlisting>
 ]]></programlisting>
 
             <para>
@@ -375,13 +373,13 @@ $render = "xxx";
 
             <programlisting language="xml"><![CDATA[
 <!-- PHP -->
-<programlisting language="php">]]>&lt;<![CDATA[![CDATA[
+<programlisting language="php"><![CDATA[
 
 <!-- Javascript -->
-<programlisting language="javascript">]]>&lt;<![CDATA[![CDATA[
+<programlisting language="javascript"><![CDATA[
 
 <!-- XML -->
-<programlisting language="xml">]]>&lt;<![CDATA[![CDATA[
+<programlisting language="xml"><![CDATA[
 ]]></programlisting>
 
             <para>
@@ -393,20 +391,19 @@ $render = "xxx";
 
             <programlisting language="xml"><![CDATA[
 <!-- NOT ALLOWED -->
-<programlisting language="php"]]>&lt;<![CDATA[![CDATA[<?php
+<programlisting language="php"<![CDATA[<?php
     // ...
-?>]]]]>&gt;<![CDATA[</programlisting>
+?>]]]]><![CDATA[></programlisting>
 
-<programlisting language="php"]]>&lt;<![CDATA[![CDATA[
+<programlisting language="php"<![CDATA[
 <?php
     // ...
 ?>
-]]]]>&gt;<![CDATA[</programlisting>
+]]]]><![CDATA[></programlisting>
 ]]></programlisting>
 
             <para>
-                Line lengths within program listings should follow the <link
-                    linkend="coding-standard.php-file-formatting.max-line-length">coding standards
+                Line lengths within program listings should follow the <link linkend="coding-standard.php-file-formatting.max-line-length">coding standards
                 recommendations</link>.
             </para>
 
@@ -418,21 +415,21 @@ $render = "xxx";
                 autoloader. Use them only when they are essential to the example.
             </para>
 
-            <note>
-                <title>ショートタグを決して使わないで下さい</title>
+            <note><info><title>ショートタグを決して使わないで下さい</title></info>
+                
 
                 <para>
                     Short tags (e.g., "&lt;?", "&lt;?=") should never be used within
                     <emphasis>programlisting</emphasis> or the narrative of a document.
                 </para>
             </note>
-        </sect2>
+        </section>
 
-        <sect2 id="doc-standard.file-formatting.inline-tags">
-            <title>特殊なインラインタグの注意</title>
+        <section xml:id="doc-standard.file-formatting.inline-tags"><info><title>特殊なインラインタグの注意</title></info>
+            
 
-            <sect3 id="doc-standard.file-formatting.inline-tags.classname">
-                <title>classname</title>
+            <section xml:id="doc-standard.file-formatting.inline-tags.classname"><info><title>classname</title></info>
+                
 
                 <para>
                     The tag <emphasis>&lt;classname&gt;</emphasis> must be used each time a class
@@ -446,10 +443,10 @@ $render = "xxx";
     The class <classname>Zend_Class</classname>.
 </para>
 ]]></programlisting>
-            </sect3>
+            </section>
 
-            <sect3 id="doc-standard.file-formatting.inline-tags.varname">
-                <title>varname</title>
+            <section xml:id="doc-standard.file-formatting.inline-tags.varname"><info><title>varname</title></info>
+                
 
                 <para>
                     Variables must be wrapped in the <emphasis>&lt;varname&gt;</emphasis> tag.
@@ -463,10 +460,10 @@ $render = "xxx";
     <varname>Zend_Class::$var</varname>.
 </para>
 ]]></programlisting>
-            </sect3>
+            </section>
 
-            <sect3 id="doc-standard.file-formatting.inline-tags.methodname">
-                <title>methodname</title>
+            <section xml:id="doc-standard.file-formatting.inline-tags.methodname"><info><title>methodname</title></info>
+                
 
                 <para>
                     Methods must be wrapped in the <emphasis>&lt;methodname&gt;</emphasis> tag.
@@ -482,10 +479,10 @@ $render = "xxx";
     <methodname>foo($bar, $baz)</methodname>
 </para>
 ]]></programlisting>
-            </sect3>
+            </section>
 
-            <sect3 id="doc-standard.file-formatting.inline-tags.constant">
-                <title>constant</title>
+            <section xml:id="doc-standard.file-formatting.inline-tags.constant"><info><title>constant</title></info>
+                
 
                 <para>
                     Use the <emphasis>&lt;constant&gt;</emphasis> tag when denoting constants.
@@ -500,10 +497,10 @@ $render = "xxx";
     <constant>Zend_Class::FOO</constant>.
 </para>
 ]]></programlisting>
-            </sect3>
+            </section>
 
-            <sect3 id="doc-standard.file-formatting.inline-tags.filename">
-                <title>filename</title>
+            <section xml:id="doc-standard.file-formatting.inline-tags.filename"><info><title>filename</title></info>
+                
 
                 <para>
                     Filenames and paths must be wrapped in the
@@ -516,10 +513,10 @@ $render = "xxx";
     The filename <filename>application/Bootstrap.php</filename>.
 </para>
 ]]></programlisting>
-            </sect3>
+            </section>
 
-            <sect3 id="doc-standard.file-formatting.inline-tags.command">
-                <title>command</title>
+            <section xml:id="doc-standard.file-formatting.inline-tags.command"><info><title>command</title></info>
+                
 
                 <para>
                     Commands, shell scripts, and program calls must be wrapped in the
@@ -532,23 +529,23 @@ $render = "xxx";
     Execute <command>zf.sh create project</command>.
 </para>
 ]]></programlisting>
-            </sect3>
+            </section>
 
-            <sect3 id="doc-standard.file-formatting.inline-tags.code">
-                <title>code</title>
+            <section xml:id="doc-standard.file-formatting.inline-tags.code"><info><title>code</title></info>
+                
 
                 <para>
                     Usage of the <emphasis>&lt;code&gt;</emphasis> tag is discouraged, in favor of
                     the other inline tasks discussed previously.
                 </para>
-            </sect3>
-        </sect2>
+            </section>
+        </section>
 
-        <sect2 id="doc-standard.file-formatting.block-tags">
-            <title>特殊なブロックタグの注意</title>
+        <section xml:id="doc-standard.file-formatting.block-tags"><info><title>特殊なブロックタグの注意</title></info>
+            
 
-            <sect3 id="doc-standard.file-formatting.block-tags.title">
-                <title>title</title>
+            <section xml:id="doc-standard.file-formatting.block-tags.title"><info><title>title</title></info>
+                
 
                 <para>
                     <emphasis>&lt;title&gt;</emphasis> タグで他のタグを保持してはいけません。
@@ -561,15 +558,15 @@ $render = "xxx";
 <!-- OK -->
 <title>Using Zend_Class</title>
 ]]></programlisting>
-            </sect3>
-        </sect2>
-    </sect1>
+            </section>
+        </section>
+    </section>
 
-    <sect1 id="doc-standard.recommendations">
-        <title>推奨事項</title>
+    <section xml:id="doc-standard.recommendations"><info><title>推奨事項</title></info>
+        
 
-        <sect2 id="doc-standard.recommendations.editors">
-            <title>自動でフォーマットしないエディタを使ってください</title>
+        <section xml:id="doc-standard.recommendations.editors"><info><title>自動でフォーマットしないエディタを使ってください</title></info>
+            
 
             <para>
                 ドキュメンテーションを編集するために、
@@ -587,10 +584,10 @@ $render = "xxx";
                 the lines that have changed using normal <command>diff</command> tools.
                 Autoformatting makes this process more difficult.
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="doc-standard.recommendations.images">
-            <title>イメージを使ってください</title>
+        <section xml:id="doc-standard.recommendations.images"><info><title>イメージを使ってください</title></info>
+            
 
             <para>
                 Good images and diagrams can improve readability and comprehension. Use them
@@ -598,10 +595,10 @@ $render = "xxx";
                 <filename>documentation/manual/en/figures/</filename> directory, and be named after
                 the section identifier in which they occur.
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="doc-standard.recommendations.examples">
-            <title>ケースの例を使ってください</title>
+        <section xml:id="doc-standard.recommendations.examples"><info><title>ケースの例を使ってください</title></info>
+            
 
             <para>
                 Look for good use cases submitted by the community, especially those posted in
@@ -613,10 +610,10 @@ $render = "xxx";
                 When writing your examples for inclusion in the manual, follow
                 all coding standards and documentation standards.
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="doc-standard.recommendations.phpdoc">
-            <title>phpdocの内容を繰り返すことを避けてください</title>
+        <section xml:id="doc-standard.recommendations.phpdoc"><info><title>phpdocの内容を繰り返すことを避けてください</title></info>
+            
 
             <para>
                 The manual is intended to be a reference guide for end-user usage. Replicating
@@ -625,10 +622,10 @@ $render = "xxx";
                 at this time, we would like the documentation teams to focus on translating the
                 English manual, not the phpdoc comments.
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="doc-standard.recommendations.links">
-            <title>リンクを使ってください</title>
+        <section xml:id="doc-standard.recommendations.links"><info><title>リンクを使ってください</title></info>
+            
 
             <para>
                 ドキュメントを繰り返す代わりに、
@@ -664,6 +661,6 @@ $render = "xxx";
     The <ulink url="http://framework.zend.com/">Zend Framework site</ulink>.
 </para>
 ]]></programlisting>
-        </sect2>
-    </sect1>
+        </section>
+    </section>
 </appendix>

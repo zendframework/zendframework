@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.form.decorators.composite">
-    <title>Creating and Rendering Composite Elements</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.form.decorators.composite"><info><title>Creating and Rendering Composite Elements</title></info>
+    
 
     <para>
         In <link linkend="learning.form.decorators.individual">the last section</link>, we had an
@@ -27,8 +26,8 @@
         How might you write a decorator to render it?
     </para>
 
-    <sect2 id="learning.form.decorators.composite.element">
-        <title>The Element</title>
+    <section xml:id="learning.form.decorators.composite.element"><info><title>The Element</title></info>
+        
 
         <para>
             The questions about how the element would work include:
@@ -188,10 +187,10 @@ class My_Form_Element_Date extends Zend_Form_Element_Xhtml
             have discrete accessors for each date segment, which we can now use in a decorator to
             create a composite element.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.form.decorators.composite.decorator">
-        <title>The Decorator</title>
+    <section xml:id="learning.form.decorators.composite.decorator"><info><title>The Decorator</title></info>
+        
 
         <para>
             Revisiting the example from the last section, let's assume that we want users to input
@@ -355,10 +354,10 @@ $d->setValue(array('year' => '2009', 'month' => '04', 'day' => '20'));
         value="2009" size="4" maxlength="4">
 </dd>
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.form.decorators.composite.conclusion">
-        <title>Conclusion</title>
+    <section xml:id="learning.form.decorators.composite.conclusion"><info><title>Conclusion</title></info>
+        
 
         <para>
             We now have an element that can render multiple related form input fields, and then
@@ -370,7 +369,7 @@ $d->setValue(array('year' => '2009', 'month' => '04', 'day' => '20'));
 
         <para>
             Additionally, we can use different decorators with the element. If we wanted to use a
-            <ulink url="http://dojotoolkit.org/">Dojo</ulink> <classname>DateTextBox</classname>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org/">Dojo</link> <classname>DateTextBox</classname>
             dijit decorator -- which accepts and returns string values -- we can, with no
             modifications to the element itself.
         </para>
@@ -379,5 +378,5 @@ $d->setValue(array('year' => '2009', 'month' => '04', 'day' => '20'));
             In the end, you get a uniform element <acronym>API</acronym> you can use to describe an
             element representing a composite value.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

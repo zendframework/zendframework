@@ -1,27 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17987 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.form.i18n">
-    <title>Internationaliser un formulaire Zend_Form</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.i18n"><info><title>Internationaliser un formulaire Zend_Form</title></info>
+    
 
     <para>
         De plus en plus de développeurs ont besoin de fournir des applications multilingues.
         <classname>Zend_Form</classname> propose des moyens simples dans ce but, et gère cette
-        responsabilité en tandem avec <link linkend="zend.translate">Zend_Translate</link> et <link
-        linkend="zend.validate">Zend_Validate</link>.
+        responsabilité en tandem avec <link linkend="zend.translate">Zend_Translate</link> et <link linkend="zend.validate">Zend_Validate</link>.
     </para>
 
     <para>
         Par défaut, aucune internationalisation (i18n) n'est effectuée. Pour l'activer dans
         <classname>Zend_Form</classname>, vous devrez instancier un objet
         <classname>Zend_Translate</classname> avec un adaptateur et l'attacher à
-        <classname>Zend_Form</classname> et/ou <classname>Zend_Validate</classname>. Voyez la <link
-        linkend="zend.translate">documentation de Zend_Translate</link> pour plus d'informations sur
+        <classname>Zend_Form</classname> et/ou <classname>Zend_Validate</classname>. Voyez la <link linkend="zend.translate">documentation de Zend_Translate</link> pour plus d'informations sur
         la création de son objet et de ses adaptateurs.
     </para>
 
-    <note>
-        <title>L'i18n peut être désactivée par objet</title>
+    <note><info><title>L'i18n peut être désactivée par objet</title></info>
+        
 
         <para>
             Vous pouvez désactiver la traduction pour tout formulaire, élément, groupe
@@ -32,24 +28,24 @@
         </para>
     </note>
 
-    <sect2 id="zend.form.i18n.initialization">
-        <title>Initialiser l'i18n dans les formulaires</title>
+    <section xml:id="zend.form.i18n.initialization"><info><title>Initialiser l'i18n dans les formulaires</title></info>
+        
 
         <para>
             Pour activer les traductions dans vos formulaires, vous avez besoin soit d'un
             objet <classname>Zend_Translate</classname> complet, ou alors d'un objet
             <classname>Zend_Translate_Adapter</classname> , comme ceci est détaillé dans la
             documentation de <classname>Zend_Translate</classname>. Une fois un objet d'i18n en
-            votre possession, plusieurs choix s'offrent à vous&#160;:
+            votre possession, plusieurs choix s'offrent à vous :
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>Le plus simple</emphasis>&#160;: ajoutez l'objet d'i18n dans le
+                    <emphasis>Le plus simple</emphasis> : ajoutez l'objet d'i18n dans le
                     registre. Tout composant utilisant l'i18n dans Zend Framework a la capacité de
                     découvrir de lui-même un objet de traduction si celui-ci est enregistré dans le
-                    registre à la clé "Zend_Translate"&#160;:
+                    registre à la clé "Zend_Translate" :
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -69,7 +65,7 @@ Zend_Registry::set('Zend_Translate', $translate);
                 <para>
                     Si tout ce qui vous importe est la traduction des messages d'erreurs, vous
                     pouvez ajouter l'objet de traduction à
-                    <classname>Zend_Validate_Abstract</classname>&#160;:
+                    <classname>Zend_Validate_Abstract</classname> :
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -84,7 +80,7 @@ Zend_Validate_Abstract::setDefaultTranslator($translate);
                     Autre manière de procéder; attacher un objet de traduction à
                     <classname>Zend_Form</classname> de manière générale. Ceci aura pour effet,
                     entres-autres, de gérer la traduction des messages d'erreur de la
-                    validation&#160;:
+                    validation :
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -99,7 +95,7 @@ Zend_Form::setDefaultTranslator($translate);
                 <para>
                     Enfin, il est possible d'attacher un objet de traduction à une instance du
                     formulaire, ou à un ou plusieurs de ses éléments, grâce à
-                    <methodname>setTranslator()</methodname>&#160;:
+                    <methodname>setTranslator()</methodname> :
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -115,25 +111,24 @@ $element->setTranslator($translate);
 ]]></programlisting>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.i18n.standard">
-        <title>Cibles gérées par l'I18n</title>
+    <section xml:id="zend.form.i18n.standard"><info><title>Cibles gérées par l'I18n</title></info>
+        
 
         <para>
             Maintenant que vous avez attaché un objet de traduction, que pouvez vous faire
-            avec&#160;?
+            avec ?
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>Messages d'erreur des validateurs</emphasis>&#160;: les messages
+                    <emphasis>Messages d'erreur des validateurs</emphasis> : les messages
                     d'erreurs des validateurs peuvent être traduits. Pour cela, utilisez les
                     identifiants des messages des validateurs (constantes de vos validateurs
                     <classname>Zend_Validate</classname>. Pour plus d'informations sur ces clés,
-                    voyez la documentation de <link
-                    linkend="zend.validate">Zend_Validate</link>.
+                    voyez la documentation de <link linkend="zend.validate">Zend_Validate</link>.
                 </para>
 
                 <para>
@@ -147,14 +142,14 @@ $element->setTranslator($translate);
 
             <listitem>
                 <para>
-                    <emphasis>Labels</emphasis>&#160;: les labels des éléments seront traduits si
+                    <emphasis>Labels</emphasis> : les labels des éléments seront traduits si
                     un objet de traduction et une chaîne de traduction existent.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>Légende des Fieldset</emphasis>&#160;: les groupes d'éléments et les
+                    <emphasis>Légende des Fieldset</emphasis> : les groupes d'éléments et les
                     sous-formulaires sont rendus dans des "fieldsets" par défaut. Le décorateur
                     FieldSet essaye de traduire la légende via l'objet de traduction.
                 </para>
@@ -163,7 +158,7 @@ $element->setTranslator($translate);
             <listitem>
                 <para>
                     <emphasis>Description des formulaires et éléments de
-                    formulaire</emphasis>&#160;: tous les types relatifs au formulaire (éléments,
+                    formulaire</emphasis> : tous les types relatifs au formulaire (éléments,
                     formulaires, groupes d'éléments ou sous-formulaires) permettent de spécifier
                     une description optionnelle. Le décorateur Description essaye de traduire la
                     description.
@@ -172,7 +167,7 @@ $element->setTranslator($translate);
 
             <listitem>
                 <para>
-                    <emphasis>Valeurs de Multi-option</emphasis>&#160;: les éléments héritant de
+                    <emphasis>Valeurs de Multi-option</emphasis> : les éléments héritant de
                     <classname>Zend_Form_Element_Multi</classname>(MultiCheckbox, Multiselect, et
                     Radio) peuvent aussi traduire les valeurs (et non les clés) de leurs
                     options.
@@ -181,10 +176,10 @@ $element->setTranslator($translate);
 
             <listitem>
                 <para>
-                    <emphasis>Labels de Submit et Button</emphasis>&#160;: les boutons (éléments
+                    <emphasis>Labels de Submit et Button</emphasis> : les boutons (éléments
                     Submit, Button et Reset) vont traduire le label affiché à l'utilisateur.
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

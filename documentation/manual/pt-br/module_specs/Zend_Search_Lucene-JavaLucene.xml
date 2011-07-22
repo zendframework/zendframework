@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20854 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.search.lucene.java-lucene">
-    <title>Interoperando com Java Lucene</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.java-lucene"><info><title>Interoperando com Java Lucene</title></info>
+    
 
-    <sect2 id="zend.search.lucene.index-creation.file-formats">
-        <title>Formatos de Arquivo</title>
+    <section xml:id="zend.search.lucene.index-creation.file-formats"><info><title>Formatos de Arquivo</title></info>
+        
 
         <para>
             Os formatos de arquivos de índice do <classname>Zend_Search_Lucene</classname> são
@@ -14,7 +12,7 @@
 
         <para>
             Uma descrição detalhada deste formato está disponível aqui:
-            <ulink url="http://lucene.apache.org/java/2_3_0/fileformats.html"/>
+            <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://lucene.apache.org/java/2_3_0/fileformats.html">http://lucene.apache.org/java/2_3_0/fileformats.html</uri>
             <footnote>
                 <para>
                     A versão do formato de arquivo de índice Lucene suportado atualmente é a 2.3 (a
@@ -22,10 +20,10 @@
                 </para>
             </footnote>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.index-directory">
-        <title>Diretório Índice</title>
+    <section xml:id="zend.search.lucene.index-creation.index-directory"><info><title>Diretório Índice</title></info>
+        
 
         <para>
             Após a criação do índice, o diretório índice conterá alguns arquivos:
@@ -52,10 +50,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.java-lucene.source-code">
-        <title>Código Fonte Java</title>
+    <section xml:id="zend.search.lucene.java-lucene.source-code"><info><title>Código Fonte Java</title></info>
+        
 
         <para>
             O programa Java abaixo oferece um exemplo de como indexar um arquivo usando Java Lucene:
@@ -90,8 +88,5 @@ doc.add(Field.Text("contents", reader));
 
 indexWriter.addDocument(doc);
 ]]></programlisting>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

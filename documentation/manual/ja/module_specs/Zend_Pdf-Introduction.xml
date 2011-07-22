@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20854 -->
-<sect1 id="zend.pdf.introduction">
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.introduction"><info><title>導入</title></info>
     <!-- @todo review and revise upon completion of refactoring -->
-    <title>導入</title>
+    
     <para>
     <classname>Zend_Pdf</classname> コンポーネントは、<acronym>PDF</acronym> (Portable Document Format)
     操作エンジンです。既存のドキュメントの読み込みや新しいドキュメントの作成、
@@ -67,7 +67,4 @@
         </listitem>
     </itemizedlist>
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

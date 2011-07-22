@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.barcode.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.barcode.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_Barcode</classname> provides a generic way to generate barcodes. The
@@ -9,4 +10,4 @@
         objects and renderers. Objects allow you to create barcodes independently of the
         renderer. Renderer allow you to draw barcodes based on the support required.
     </para>
-</sect1>
+</section>

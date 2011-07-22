@@ -1,19 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20876 -->
-<sect1 id="migration.18">
-    <title>Zend Framework 1.8</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.18"><info><title>Zend Framework 1.8</title></info>
+    
 
     <para>
         以前のバージョンから Zend Framework 1.8 またはそれ以降に更新する際は、
         下記の移行上の注意点に注意すべきです。
     </para>
 
-    <sect2 id="migration.18.zend.controller">
-        <title>Zend_Controller</title>
+    <section xml:id="migration.18.zend.controller"><info><title>Zend_Controller</title></info>
+        
 
-        <sect3 id="migration.18.zend.controller.router">
-            <title>標準のルートの変更</title>
+        <section xml:id="migration.18.zend.controller.router"><info><title>標準のルートの変更</title></info>
+            
 
             <para>
                 新しい標準ルートでは翻訳セグメントが使用できるようになったため、
@@ -23,14 +21,14 @@
                 '<emphasis>@</emphasis>' をつけてエスケープする必要があります。
                 また、'<emphasis>:</emphasis>' も同様です。
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="migration.18.zend.locale">
-        <title>Zend_Locale</title>
+    <section xml:id="migration.18.zend.locale"><info><title>Zend_Locale</title></info>
+        
 
-        <sect3 id="migration.18.zend.locale.defaultcaching">
-            <title>デフォルトのキャッシュ処理</title>
+        <section xml:id="migration.18.zend.locale.defaultcaching"><info><title>デフォルトのキャッシュ処理</title></info>
+            
 
             <para>
                 Zend Framework 1.8 以降、デフォルトのキャッシュ処理が追加されました。
@@ -48,16 +46,13 @@
                 <methodname>disableCache()</methodname> メソッドを使用します。
             </para>
 
-            <example id="migration.18.zend.locale.defaultcaching.example">
-                <title>デフォルトのキャッシュ処理の無効化</title>
+            <example xml:id="migration.18.zend.locale.defaultcaching.example"><info><title>デフォルトのキャッシュ処理の無効化</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 Zend_Locale::disableCache(true);
 ]]></programlisting>
             </example>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

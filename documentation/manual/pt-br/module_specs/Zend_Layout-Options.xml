@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.layout.options">
-    <title>Opções de Configuração Zend_Layout</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.options"><info><title>Opções de Configuração Zend_Layout</title></info>
+    
 
     <para>
         <classname>Zend_Layout</classname> tem uma variedade de opções de configuração. Essas
@@ -45,8 +43,7 @@
                 <emphasis>mvcSuccessfulActionOnly</emphasis>: quando usar o
                 <acronym>MVC</acronym>, se uma ação lança uma exceção e esse marco
                 é <constant>TRUE</constant>, o layout não será renderizado (isso é para
-                prevenir dupla renderização do layout quando o <link
-                linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler plugin</link>
+                prevenir dupla renderização do layout quando o <link linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler plugin</link>
                 estiver em uso). Por padrão, o marco é <constant>TRUE</constant>. Os acessores são
                 <methodname>setMvcSuccessfulActionOnly()</methodname> e
                 <methodname>getMvcSuccessfulActionOnly()</methodname>.
@@ -98,8 +95,8 @@
         </listitem>
     </itemizedlist>
 
-    <note>
-        <title>helperClass e pluginClass devem ser passados para startMvc()</title>
+    <note><info><title>helperClass e pluginClass devem ser passados para startMvc()</title></info>
+        
 
         <para>
             Para que as configurações <code>helperClass</code> e <code>pluginClass</code>
@@ -109,8 +106,8 @@
         </para>
     </note>
 
-    <sect2 id="zend.layout.options.examples">
-        <title>Exemplos</title>
+    <section xml:id="zend.layout.options.examples"><info><title>Exemplos</title></info>
+        
 
         <para>
             Os seguintes exemplos assumem a seguinte matriz <varname>$options</varname>
@@ -135,8 +132,8 @@ contentKey = "CONTENT"
 $config = new Zend_Config_Ini('/path/to/layout.ini', 'layout');
 ]]></programlisting>
 
-        <example id="zend.layout.options.examples.constructor">
-            <title>Passando opções para o construtor ou startMvc()</title>
+        <example xml:id="zend.layout.options.examples.constructor"><info><title>Passando opções para o construtor ou startMvc()</title></info>
+            
 
             <para>
                 Tanto o construtor quanto o método estático <methodname>startMvc()</methodname>
@@ -173,8 +170,8 @@ $layout = Zend_Layout::startMvc($config);
             </para>
         </example>
 
-        <example id="zend.layout.options.examples.setoptionsconfig">
-            <title>Usando setOption() e setConfig()</title>
+        <example xml:id="zend.layout.options.examples.setoptionsconfig"><info><title>Usando setOption() e setConfig()</title></info>
+            
 
             <para>
                 Algumas vezes você precisa configurar o objeto <classname>Zend_Layout</classname>
@@ -199,8 +196,8 @@ $layout->setConfig($options);
             </para>
         </example>
 
-        <example id="zend.layout.options.examples.accessors">
-            <title>Usando Acessores</title>
+        <example xml:id="zend.layout.options.examples.accessors"><info><title>Usando Acessores</title></info>
+            
 
             <para>
                 Finalmente, você pode também configurar sua instância
@@ -215,8 +212,5 @@ $layout->setLayout('foo')
        ->setContentKey('CONTENT');
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21815 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.read">
-    <title>Lire des émail</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.read"><info><title>Lire des émail</title></info>
+    
 
     <para>
         <classname>Zend_Mail</classname> peut lire des émail provenant de différents stockages
@@ -12,8 +10,8 @@
         suivante.
     </para>
 
-    <table id="zend.mail.read.table-1">
-        <title>Vue d'ensemble des fonctionnalités de lecture d'émail</title>
+    <table xml:id="zend.mail.read.table-1"><info><title>Vue d'ensemble des fonctionnalités de lecture d'émail</title></info>
+        
 
         <tgroup cols="5">
             <thead>
@@ -86,8 +84,8 @@
         </tgroup>
     </table>
 
-    <sect2 id="zend.mail.read-example">
-        <title>Exemple simple avec Pop3</title>
+    <section xml:id="zend.mail.read-example"><info><title>Exemple simple avec Pop3</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'localhost',
@@ -99,10 +97,10 @@ foreach ($mail as $message) {
     echo "Mail from '{$message->from}': {$message->subject}\n";
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mail.read-open-local">
-        <title>Ouvrir un stockage local</title>
+    <section xml:id="zend.mail.read-open-local"><info><title>Ouvrir un stockage local</title></info>
+        
 
         <para>
             Mbox et Maildir sont les deux formats supportés pour le stockage local des émail,
@@ -130,10 +128,10 @@ $mail =
             Ces deux constructeurs lèvent une exception
             <classname>Zend_Mail_Exception</classname> si le stockage ne peut pas être lu.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mail.read-open-remote">
-        <title>Ouvrir un stockage distant</title>
+    <section xml:id="zend.mail.read-open-remote"><info><title>Ouvrir un stockage distant</title></info>
+        
 
         <para>
             Pour les stockages distants les deux protocoles les plus populaires sont supportés
@@ -189,10 +187,10 @@ $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'exemple.com'
             <classname>Zend_Mail_Protocol_Exception</classname>(étendant
             <classname>Zend_Mail_Exception</classname>), en fonction du type de l'erreur.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mail.read-fetching">
-        <title>Extraire des messages et autres méthodes simples</title>
+    <section xml:id="zend.mail.read-fetching"><info><title>Extraire des messages et autres méthodes simples</title></info>
+        
 
         <para>
             Dès que vous avez ouvert l'accès, les messages peuvent être extraits. Vous devez
@@ -252,10 +250,10 @@ $mail->removeMessage($numeroDeMessage);
 // type tableau
 unset($mail[$messageNum]);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mail.read-message">
-        <title>Travailler avec les messages</title>
+    <section xml:id="zend.mail.read-message"><info><title>Travailler avec les messages</title></info>
+        
 
         <para>
             Après avoir extrait les messages avec <methodname>getMessage()</methodname> vous voulez
@@ -263,8 +261,7 @@ unset($mail[$messageNum]);
             en-têtes peuvent être accédés via les propriétés ou la méthode <methodname>getHeader()</methodname>
             si vous voulez plus de contrôle ou avoir accès à des en-têtes peu communs. Les noms des
             en-têtes gérés en interne avec une casse minuscule, ainsi la casse du nom de l'en-tête
-            importe peu. En outre les en-têtes avec un tiret-bas peuvent être écrit avec la <ulink
-            url="http://en.wikipedia.org/wiki/CamelCase">notation Camel</ulink>. Si aucun en-tête
+            importe peu. En outre les en-têtes avec un tiret-bas peuvent être écrit avec la <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/CamelCase">notation Camel</link>. Si aucun en-tête
             n'est trouvé pour les deux notations, une exception est levée. Pour éviter ceci, la
             méthode <methodname>headerExists()</methodname> peut être utilisée pour vérifier l'existence d'un
             en-tête.
@@ -397,10 +394,10 @@ if (!$foundPart) {
     echo "Partie \"plain text\" : \n" . $foundPart;
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mail.read-flags">
-        <title>Vérifier les drapeaux ("flags")</title>
+    <section xml:id="zend.mail.read-flags"><info><title>Vérifier les drapeaux ("flags")</title></info>
+        
 
         <para>
             Maildir et IMAP supporte l'enregistrement de drapeaux. La classe
@@ -467,10 +464,10 @@ if (!$message->hasFlag('$SpamTeste')) {
     echo 'ce message est sûr';
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mail.read-folders">
-        <title>Utiliser les dossiers</title>
+    <section xml:id="zend.mail.read-folders"><info><title>Utiliser les dossiers</title></info>
+        
 
         <para>
             Tous les stockages, excepté Pop3, supportent les dossiers, également appelés
@@ -536,8 +533,8 @@ $mail = new Zend_Mail_Storage_Imap(array('host'     => 'example.com',
             (délimiteurs y compris), le nom local est le nom dans le dossier parent.
         </para>
 
-        <table id="zend.mail.read-folders.table-1">
-            <title>Noms de dossiers</title>
+        <table xml:id="zend.mail.read-folders.table-1"><info><title>Noms de dossiers</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -615,13 +612,13 @@ echo 'Le précédent dossier était '
    . "Le nouveau dossier est $folder\n";
 $mail->selectFolder($folder);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mail.read-advanced">
-        <title>Utilisation avancée</title>
+    <section xml:id="zend.mail.read-advanced"><info><title>Utilisation avancée</title></info>
+        
 
-        <sect3 id="zend.mail.read-advanced.noop">
-            <title>Utiliser NOOP</title>
+        <section xml:id="zend.mail.read-advanced.noop"><info><title>Utiliser NOOP</title></info>
+            
 
             <para>
                 Si vous employez un stockage distant et avez une longue tâche vous pourriez
@@ -640,10 +637,10 @@ foreach ($mail as $message) {
     $mail->noop(); // maintient la connexion
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.mail.read-advanced.extending">
-            <title>Mettre en cache des instances</title>
+        <section xml:id="zend.mail.read-advanced.extending"><info><title>Mettre en cache des instances</title></info>
+            
 
             <para>
                 <classname>Zend_Mail_Storage_Mbox</classname>,
@@ -682,10 +679,10 @@ if (!$cache->isCached($cache_id) ||
 
 $cache->set($cache_id, $mail);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3>
-            <title>Étendre les classes de protocoles</title>
+        <section><info><title>Étendre les classes de protocoles</title></info>
+            
 
             <para>
                 Les stockages distants utilisent deux classes :
@@ -782,10 +779,10 @@ $mail = new Example_Mail_Pop3_Knock(
                 assurer que c'est fait ou la prochaine méthode échouera si le serveur ne la permet
                 pas dans l'état actuel.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.mail.read-advanced.quota">
-            <title>Utilisation des Quotas (avant 1.5)</title>
+        <section xml:id="zend.mail.read-advanced.quota"><info><title>Utilisation des Quotas (avant 1.5)</title></info>
+            
 
             <para>
                 <classname>Zend_Mail_Storage_Writable_Maildir</classname> supporte les quotas
@@ -878,6 +875,6 @@ class Exemple_Mail_Storage_Maildir extends Zend_Mail_Storage_Writable_Maildir {
     }
 }
 ]]></programlisting>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

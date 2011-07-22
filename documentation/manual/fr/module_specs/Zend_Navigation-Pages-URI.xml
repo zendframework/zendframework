@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20827 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.navigation.pages.uri">
-    <title>Zend_Navigation_Page_Uri</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.uri"><info><title>Zend_Navigation_Page_Uri</title></info>
+    
 
     <para>
         Les pages de type <classname>Zend_Navigation_Page_Uri</classname> peuvent être utilisées
         pour pointer vers des sites externes, ou des pages internes personnalisées. Les pages
         <acronym>URI</acronym> sont simples, en plus des options classiques des pages, les pages
         <acronym>URI</acronym> utilisent une seule option : <code>uri</code>. L'
-        <code>uri</code> sera retourné à l'appel de <code>$page->getHref()</code> et retournera
+        <code>uri</code> sera retourné à l'appel de <code>$page-&gt;getHref()</code> et retournera
         une <type>chaine</type> ou <constant>NULL</constant>.
     </para>
 
@@ -17,14 +17,14 @@
         <para>
             <classname>Zend_Navigation_Page_Uri</classname> ne pourra pas calculer
             elle même si elle est active ou pas suite à un appel à
-            <code>$page->isActive()</code>. L'appel retournera la valeur que vous aurez
-            spécifier vous-mêmes grâce à <code>$page->setActive()</code> ou via l'option
+            <code>$page-&gt;isActive()</code>. L'appel retournera la valeur que vous aurez
+            spécifier vous-mêmes grâce à <code>$page-&gt;setActive()</code> ou via l'option
             de constructeur <code>active</code>.
         </para>
     </note>
 
-    <table id="zend.navigation.pages.uri.options">
-        <title>URI page options</title>
+    <table xml:id="zend.navigation.pages.uri.options"><info><title>URI page options</title></info>
+        
         <tgroup cols="4">
             <thead>
                 <row>
@@ -48,4 +48,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect2>
+</section>

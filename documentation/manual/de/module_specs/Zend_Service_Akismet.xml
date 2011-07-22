@@ -1,15 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20818 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.service.akismet">
-    <title>Zend_Service_Akismet</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.akismet"><info><title>Zend_Service_Akismet</title></info>
+    
 
-    <sect2 id="zend.service.akismet.introduction">
-        <title>Einführung</title>
+    <section xml:id="zend.service.akismet.introduction"><info><title>Einführung</title></info>
+        
 
         <para>
             <classname>Zend_Service_Akismet</classname> bietet einen Client für die
-            <ulink url="http://akismet.com/development/api/">Akismet <acronym>API</acronym></ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://akismet.com/development/api/">Akismet <acronym>API</acronym></link>.
             Der Akismet Service wird verwendet um herauszufinden ob hereinkommende Daten
             potentieller Spam sind. Er bietet auch Methoden für das Übertragen von Daten als
             bekannter Spam oder als falsch Positiv (ham). Original war es dazu gedacht um für
@@ -20,7 +18,7 @@
         <para>
             Akismet benötigt einen <acronym>API</acronym> Schlüssel um verwendet zu werden. Man kann
             einen bekommen indem man sich für einen
-            <ulink url="http://wordpress.com/">WordPress.com</ulink> Zugang einschreibt. Man muß
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wordpress.com/">WordPress.com</link> Zugang einschreibt. Man muß
             keinen Blog aktivieren. Nur das Erstellen des Accounts reicht um den
             <acronym>API</acronym> Schlüssel zu erhalten.
         </para>
@@ -34,10 +32,10 @@
             verwendet wird, oder überschrieben durch die Spezifizierung eines 'blog' Schlüssels in
             den verschiedenen Methodenaufrufen.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.akismet.verifykey">
-        <title>Prüfen eines API Schlüssels</title>
+    <section xml:id="zend.service.akismet.verifykey"><info><title>Prüfen eines API Schlüssels</title></info>
+        
 
         <para>
             <methodname>Zend_Service_Akismet::verifyKey($key)</methodname> wird verwendet um zu
@@ -68,10 +66,10 @@ if ($akismet->verifyKey($apiKey) {
             <methodname>verifyKey()</methodname> implementiert Akismet's <code>verify-key</code>
             REST Methode.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.akismet.isspam">
-        <title>Auf Spam prüfen</title>
+    <section xml:id="zend.service.akismet.isspam"><info><title>Auf Spam prüfen</title></info>
+        
 
         <para>
             <methodname>Zend_Service_Akismet::isSpam($data)</methodname> wird verwendet um zu prüfen
@@ -172,8 +170,8 @@ if ($akismet->verifyKey($apiKey) {
             <acronym>API</acronym> Schlüssel nicht gültig ist.
         </para>
 
-        <example id="zend.service.akismet.isspam.example-1">
-            <title>Verwendung von isSpam()</title>
+        <example xml:id="zend.service.akismet.isspam.example-1"><info><title>Verwendung von isSpam()</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $data = array(
@@ -198,10 +196,10 @@ if ($akismet->isSpam($data)) {
             <methodname>isSpam()</methodname> implementiert die <code>comment-check</code> Methode
             der Akismet <acronym>API</acronym>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.akismet.submitspam">
-        <title>Bekannten Spam übertragen</title>
+    <section xml:id="zend.service.akismet.submitspam"><info><title>Bekannten Spam übertragen</title></info>
+        
 
         <para>
             Spam Daten kommen gelegentlich durch den Filter. Wenn in der Begutachtung der
@@ -216,8 +214,8 @@ if ($akismet->isSpam($data)) {
             Schlüssel ungültig ist.
         </para>
 
-        <example id="zend.service.akismet.submitspam.example-1">
-            <title>Verwendung von submitSpam()</title>
+        <example xml:id="zend.service.akismet.submitspam.example-1"><info><title>Verwendung von submitSpam()</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $data = array(
@@ -237,10 +235,10 @@ $akismet->submitSpam($data));
             <methodname>submitSpam()</methodname> implementiert die <code>submit-spam</code> Methode
             der Akismet <acronym>API</acronym>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.akismet.submitham">
-        <title>Falsche Positive (Ham) übermitteln</title>
+    <section xml:id="zend.service.akismet.submitham"><info><title>Falsche Positive (Ham) übermitteln</title></info>
+        
 
         <para>
             Daten werden genegentlich fehlerhafterweise von Akismet als Spam erkannt. Für diesen
@@ -258,8 +256,8 @@ $akismet->submitSpam($data));
             <acronym>API</acronym> Schlüssel ungültig ist.
         </para>
 
-        <example id="zend.service.akismet.submitham.example-1">
-            <title>Verwenden von submitHam()</title>
+        <example xml:id="zend.service.akismet.submitham.example-1"><info><title>Verwenden von submitHam()</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $data = array(
@@ -279,10 +277,10 @@ $akismet->submitHam($data));
             <methodname>submitHam()</methodname> implementiert die <code>submit-ham</code> Methode
             der Akismet <acronym>API</acronym>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.akismet.accessors">
-        <title>Zend-spezifische Methoden</title>
+    <section xml:id="zend.service.akismet.accessors"><info><title>Zend-spezifische Methoden</title></info>
+        
 
         <para>
             Wärend die Akismet <acronym>API</acronym> nur vier Methoden spezifiziert, hat
@@ -343,5 +341,5 @@ $akismet->submitHam($data));
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

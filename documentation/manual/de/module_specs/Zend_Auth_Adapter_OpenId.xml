@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20763 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.auth.adapter.openid">
-    <title>Open ID Authentifikation</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.openid"><info><title>Open ID Authentifikation</title></info>
+    
 
-    <sect2 id="zend.auth.adapter.openid.introduction">
-        <title>Einführung</title>
+    <section xml:id="zend.auth.adapter.openid.introduction"><info><title>Einführung</title></info>
+        
 
         <para>
             Der <classname>Zend_Auth_Adapter_OpenId</classname> Adapter kann verwendet werden um
@@ -21,7 +19,7 @@
             entsprechenden Informationen über den Benutzer und spezielle Tags verweist welche
             beschreiben welcher Server verwendet werden soll und welche Identität dort zu
             übermitteln ist. Mehr über OpenID kann auf der
-            <ulink url="http://www.openid.net/">offiziellen OpenID Site</ulink> nachgelesen werden.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.openid.net/">offiziellen OpenID Site</link> nachgelesen werden.
         </para>
 
         <para>
@@ -33,16 +31,16 @@
         <note>
             <para>
                 <classname>Zend_OpenId</classname> hat Vorteile davon wenn die
-                <ulink url="http://php.net/gmp">GMP Erweiterung</ulink> vorhanden ist. Es sollte
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/gmp">GMP Erweiterung</link> vorhanden ist. Es sollte
                 Angedacht werden die <acronym>GMP</acronym> Erweiterung für eine bessere
                 Performance einzuschalten wenn <classname>Zend_Auth_Adapter_OpenId</classname>
                 verwendet wird.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.openid.specifics">
-        <title>Spezielles</title>
+    <section xml:id="zend.auth.adapter.openid.specifics"><info><title>Spezielles</title></info>
+        
 
         <para>
             Wie in diesem Fall für alle <classname>Zend_Auth</classname> Adapter, implementiert die
@@ -133,5 +131,5 @@ if ((isset($_POST['openid_action']) &&
             OpenID Server zu erhalten. Alle diese Möglichkeiten werden detailierter im Kapitel
             <classname>Zend_OpenId_Consumer</classname> beschrieben.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

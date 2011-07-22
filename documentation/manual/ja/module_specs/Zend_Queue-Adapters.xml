@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21819 -->
-<sect1 id="zend.queue.adapters">
-    <title>アダプタ</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.adapters"><info><title>アダプタ</title></info>
+    
 
     <para>
         <classname>Zend_Queue</classname>は、
@@ -14,7 +12,7 @@
     <itemizedlist>
         <listitem>
             <para>
-                <ulink url="http://activemq.apache.org/">Apache ActiveMQ</ulink>.
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://activemq.apache.org/">Apache ActiveMQ</link>.
             </para>
         </listitem>
 
@@ -27,13 +25,13 @@
         <listitem>
             <para>
                 <classname>Memcache</classname>による
-                <ulink url="http://memcachedb.org/memcacheq/">MemcacheQ</ulink>待ち行列
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://memcachedb.org/memcacheq/">MemcacheQ</link>待ち行列
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <ulink url="http://www.zend.co.jp/product/zendplatform.html">Zend Platform</ulink>
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.co.jp/product/zendplatform.html">Zend Platform</link>
                 のジョブキュー。
             </para>
         </listitem>
@@ -45,24 +43,24 @@
         </listitem>
     </itemizedlist>
 
-    <note id="zend.queue.adapters.limitations">
-        <title>限定事項</title>
+    <note xml:id="zend.queue.adapters.limitations"><info><title>限定事項</title></info>
+        
 
         <para>
             メッセージ・トランザクション処理は、サポートされません。
         </para>
     </note>
 
-    <sect2 id="zend.queue.adapters.configuration">
-        <title>固有のアダプタ - 設定の構成</title>
+    <section xml:id="zend.queue.adapters.configuration"><info><title>固有のアダプタ - 設定の構成</title></info>
+        
 
         <para>
             デフォルトの設定が示される場合は、パラメータは任意です。
             デフォルトの設定が指定されない場合は、パラメータが必要です。
         </para>
 
-        <sect3 id="zend.queue.adapters.configuration.activemq">
-            <title>Apache ActiveMQ - Zend_Queue_Adapter_Activemq</title>
+        <section xml:id="zend.queue.adapters.configuration.activemq"><info><title>Apache ActiveMQ - Zend_Queue_Adapter_Activemq</title></info>
+            
 
             <para>
                 ここでリストされたオプションは、既知の必須条件です。
@@ -144,10 +142,10 @@
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.queue.adapters.configuration.Db">
-            <title>Db - Zend_Queue_Adapter_Db</title>
+        <section xml:id="zend.queue.adapters.configuration.Db"><info><title>Db - Zend_Queue_Adapter_Db</title></info>
+            
 
             <para>
                 ドライバオプションは、多少の必須のオプションのためにチェックされます。
@@ -242,10 +240,10 @@ $queue = new Zend_Queue('Db', $options);
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.queue.adapters.configuration.memcacheq">
-            <title>MemcacheQ - Zend_Queue_Adapter_Memcacheq</title>
+        <section xml:id="zend.queue.adapters.configuration.memcacheq"><info><title>MemcacheQ - Zend_Queue_Adapter_Memcacheq</title></info>
+            
 
             <itemizedlist>
                 <listitem>
@@ -280,10 +278,10 @@ $queue = new Zend_Queue('Db', $options);
                     <para>ポートのデフォルトの設定は 22201 です。</para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.queue.adapters.configuration.platformjq">
-            <title>Zend Platform ジョブキュー - Zend_Queue_Adapter_PlatformJobQueue</title>
+        <section xml:id="zend.queue.adapters.configuration.platformjq"><info><title>Zend Platform ジョブキュー - Zend_Queue_Adapter_PlatformJobQueue</title></info>
+            
 
             <itemizedlist>
                 <listitem>
@@ -306,10 +304,10 @@ $queue = new Zend_Queue('Db', $options);
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.queue.adapters.configuration.array">
-            <title>配列 - Zend_Queue_Adapter_Array</title>
+        <section xml:id="zend.queue.adapters.configuration.array"><info><title>配列 - Zend_Queue_Adapter_Array</title></info>
+            
 
             <itemizedlist>
                 <listitem>
@@ -322,16 +320,16 @@ $queue = new Zend_Queue('Db', $options);
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.queue.adapters.notes">
-        <title>アダプタ固有の注意</title>
+    <section xml:id="zend.queue.adapters.notes"><info><title>アダプタ固有の注意</title></info>
+        
 
         <para>下記のアダプタには注意があります:</para>
 
-        <sect3 id="zend.queue.adapters.notes.activemq">
-            <title>Apache ActiveMQ</title>
+        <section xml:id="zend.queue.adapters.notes.activemq"><info><title>Apache ActiveMQ</title></info>
+            
 
             <para>
                 <classname>Zend_Queue_Adapter_Activemq</classname>のための可視性期間は利用できません。
@@ -404,29 +402,27 @@ $queue = new Zend_Queue('Db', $options);
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.queue.adapters.notes.zend_db">
-            <title>Zend_Db</title>
+        <section xml:id="zend.queue.adapters.notes.zend_db"><info><title>Zend_Db</title></info>
+            
 
             <para>
                 データベース<emphasis>CREATE TABLE ( ... )</emphasis> <acronym>SQL</acronym>
                 文が<filename>Zend/Queue/Adapter/Db/mysql.sql</filename>にあります。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.queue.adapters.notes.memcacheQ">
-            <title>MemcacheQ</title>
+        <section xml:id="zend.queue.adapters.notes.memcacheQ"><info><title>MemcacheQ</title></info>
+            
 
             <para>
-                Memcacheは<ulink
-                    url="http://www.danga.com/memcached/">http://www.danga.com/memcached/</ulink>
+                Memcacheは<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.danga.com/memcached/">http://www.danga.com/memcached/</link>
                 からダウンロードできます。
             </para>
 
             <para>
-                MemcacheQは<ulink
-                    url="http://memcachedb.org/memcacheq/">http://memcachedb.org/memcacheq/</ulink>
+                MemcacheQは<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://memcachedb.org/memcacheq/">http://memcachedb.org/memcacheq/</link>
                 からダウンロードできます。
             </para>
 
@@ -448,16 +444,16 @@ $queue = new Zend_Queue('Db', $options);
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.queue.adapters.notes.platformjq">
-            <title>Zend Platform ジョブキュー</title>
+        <section xml:id="zend.queue.adapters.notes.platformjq"><info><title>Zend Platform ジョブキュー</title></info>
+            
 
             <para>
                 ジョブキューは、企業ソリューション商品 Zend Platform のフィーチャーです。
                 それは伝統的なメッセージキューではなく、その代わりに渡したいパラメータと一緒に、
                 実行するスクリプトを待ち行列に入れることができます。
-                <ulink url="http://www.zend.co.jp/product/zendplatform.html">zend.co.jpウェブサイト</ulink>
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.co.jp/product/zendplatform.html">zend.co.jpウェブサイト</link>
                 でジョブ・キューについてもっと知ることができます。
             </para>
 
@@ -651,15 +647,15 @@ $queue = new Zend_Queue('Db', $options);
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.queue.adapters.notes.array">
-            <title>配列 (内部)</title>
+        <section xml:id="zend.queue.adapters.notes.array"><info><title>配列 (内部)</title></info>
+            
 
             <para>
                 配列待ち行列はローカルメモリ上の<acronym>PHP</acronym> <methodname>array()</methodname>です。
                 <classname>Zend_Queue_Adapter_Array</classname>はユニットテスト用に適しています。
             </para>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

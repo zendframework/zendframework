@@ -1,20 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 18427 -->
-<sect2 id="zend.application.available-resources.router">
-    <title>Zend_Application_Resource_Router</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.router"><info><title>Zend_Application_Resource_Router</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Router</classname>は、
         フロント・コントローラで登録されるようにルータを構成するために利用できます。
-        構成オプションは、<link
-            linkend="zend.controller.router.routes.standard">
+        構成オプションは、<link linkend="zend.controller.router.routes.standard">
             <classname>Zend_Controller_Router_Route</classname>
             オプション</link>毎にあります。
     </para>
 
-    <example id="zend.application.available-resources.router.configExample">
-        <title>ルータ・リソース構成の例</title>
+    <example xml:id="zend.application.available-resources.router.configExample"><info><title>ルータ・リソース構成の例</title></info>
+        
 
         <para>
             下記は、ルータ・リソースを設定する方法を示す、
@@ -36,4 +33,4 @@ resources.router.chainNameSeparator = "_"
             をご覧ください。
         </para>
     </example>
-</sect2>
+</section>

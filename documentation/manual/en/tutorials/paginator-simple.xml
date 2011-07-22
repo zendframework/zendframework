@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.paginator.simple">
-    <title>Simple Examples</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.paginator.simple"><info><title>Simple Examples</title></info>
+    
 
     <para>
         In this first example we won't do anything spectacular, but hopefully it will
@@ -121,4 +120,4 @@ foreach ($paginator as $item) {
         is being executed efficiently, see the <classname>Zend_Paginator</classname> chapter in the
         reference manual on the DbSelect and DbTableSelect adapters.
     </para>
-</sect1>
+</section>

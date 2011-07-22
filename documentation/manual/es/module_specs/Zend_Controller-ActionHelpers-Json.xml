@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 20765 -->
-    <!-- Reviewed: no -->
-<sect3 id="zend.controller.actionhelpers.json">
-    <title>JSON</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.json"><info><title>JSON</title></info>
+    
 
     <para>
         Las respuestas
@@ -97,8 +95,8 @@ class FooController extends Zend_Controller_Action
 }
 ]]></programlisting>
 
-    <note>
-        <title>Conservando los Esquemas(Layouts)</title>
+    <note><info><title>Conservando los Esquemas(Layouts)</title></info>
+        
 
         <para>
             Si se tiene un esquema separado para respuestas de
@@ -136,8 +134,8 @@ $this->_helper->json($data, array('keepLayouts' => true);
 ]]></programlisting>
     </note>
 
-    <note>
-        <title>Habilitando la Codificación usando Zend_Json_Expr</title>
+    <note><info><title>Habilitando la Codificación usando Zend_Json_Expr</title></info>
+        
 
         <para>
             <methodname>Zend_Json::encode()</methodname>
@@ -180,7 +178,4 @@ $this->_helper->json($data, array(
 ));
 ]]></programlisting>
     </note>
-</sect3>
-    <!--
-vim:se ts=4 sw=4 et:
--->
+</section>

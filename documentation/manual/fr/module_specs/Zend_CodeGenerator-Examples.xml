@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.codegenerator.examples">
-    <title>Exemples Zend_CodeGenerator</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.codegenerator.examples"><info><title>Exemples Zend_CodeGenerator</title></info>
+    
 
-    <example id="zend.codegenerator.examples.class">
-        <title>Génération de classes PHP</title>
+    <example xml:id="zend.codegenerator.examples.class"><info><title>Génération de classes PHP</title></info>
+        
 
         <para>
             L'exemple suivant génère le code d'une classe avec son bloc de commentaires PHPDoc.
@@ -32,7 +30,7 @@ $foo->setName('Foo')
 echo $foo->generate();
 ]]></programlisting>
 
-        <para>Le résultat est&#160;:</para>
+        <para>Le résultat est :</para>
 
         <programlisting language="php"><![CDATA[
 /**
@@ -51,8 +49,8 @@ class Foo
 ]]></programlisting>
     </example>
 
-    <example id="zend.codegenerator.examples.class-properties">
-        <title>Générer des classes PHP avec des attributs de classe</title>
+    <example xml:id="zend.codegenerator.examples.class-properties"><info><title>Générer des classes PHP avec des attributs de classe</title></info>
+        
 
         <para>
             Suivant l'exemple précédant, nous ajoutons maintenant des attributs à la
@@ -97,7 +95,7 @@ $foo->setName('Foo')
 echo $foo->generate();
 ]]></programlisting>
 
-        <para>Le résultat sera&#160;:</para>
+        <para>Le résultat sera :</para>
 
         <programlisting language="php"><![CDATA[
 /**
@@ -122,8 +120,8 @@ class Foo
 ]]></programlisting>
     </example>
 
-    <example id="zend.codegenerator.examples.class-methods">
-        <title>Générer des classes PHP avec des méthodes</title>
+    <example xml:id="zend.codegenerator.examples.class-methods"><info><title>Générer des classes PHP avec des méthodes</title></info>
+        
 
         <para>
             <classname>Zend_CodeGenerator_Php_Class</classname> vous permet d'attacher des
@@ -205,7 +203,7 @@ $foo->setName('Foo')
 echo $foo->generate();
 ]]></programlisting>
 
-        <para>Le résultat sera&#160;:</para>
+        <para>Le résultat sera :</para>
 
         <programlisting language="php"><![CDATA[
 /**
@@ -251,8 +249,8 @@ class Foo
 ]]></programlisting>
     </example>
 
-    <example id="zend.codegenerator.examples.file">
-        <title>Générer des fichiers PHP</title>
+    <example xml:id="zend.codegenerator.examples.file"><info><title>Générer des fichiers PHP</title></info>
+        
 
         <para>
             <classname>Zend_CodeGenerator_Php_File</classname> sert à générer le contenu de
@@ -293,7 +291,7 @@ $code = $file->generate();
 file_put_contents('Foo.php', $code);
 ]]></programlisting>
 
-        <para>Le résultat sera&#160;:</para>
+        <para>Le résultat sera :</para>
 
         <programlisting language="php"><![CDATA[
 <?php
@@ -348,8 +346,8 @@ define('APPLICATION_ENV', 'testing');
 ]]></programlisting>
     </example>
 
-    <example id="zend.codegenerator.examples.reflection-file">
-        <title>Ajouter du code à un fichier PHP existant en utilisant la réflexion</title>
+    <example xml:id="zend.codegenerator.examples.reflection-file"><info><title>Ajouter du code à un fichier PHP existant en utilisant la réflexion</title></info>
+        
 
         <para>
             Vous pouvez ajouter du code <acronym>PHP</acronym> à n'importe quel fichier
@@ -366,14 +364,14 @@ file_put_contents($path, $generator->generate());
 ]]></programlisting>
     </example>
 
-    <example id="zend.codegenerator.examples.reflection-class">
-        <title>Ajouter du code à une classe PHP existante en utilisant la réflexion</title>
+    <example xml:id="zend.codegenerator.examples.reflection-class"><info><title>Ajouter du code à une classe PHP existante en utilisant la réflexion</title></info>
+        
 
         <para>
             Vous pouvez aussi ajouter du code à une classe existante.
             Utilisez <methodname>fromReflection()</methodname> pour transformer la classe en objet
             Reflection. Ajoutez ensuite des méthodes, des attributs, puis régénérez le code de la
-            classe modifiée&#160;:
+            classe modifiée :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -402,4 +400,4 @@ $generator->setMethod(array(
 $code = $generator->generate();
 ]]></programlisting>
     </example>
-</sect1>
+</section>

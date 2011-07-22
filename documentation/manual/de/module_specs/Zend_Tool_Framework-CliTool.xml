@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.tool.framework.clitool">
-    <title>Verwenden des CLI Tools</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.clitool"><info><title>Verwenden des CLI Tools</title></info>
+    
 
     <para>
         Das <acronym>CLI</acronym>, oder Kommandozeilen Tool (Intern als Consolen Tool bekannt),
@@ -13,16 +11,15 @@
         Windows, mit <filename>cmd.exe</filename>, Console2 und auch dem Cygwin Projekt.
     </para>
 
-    <sect2 id="zend.tool.framework.clitool.setup-general">
-        <title>Vorbereiten des CLI Tools</title>
+    <section xml:id="zend.tool.framework.clitool.setup-general"><info><title>Vorbereiten des CLI Tools</title></info>
+        
 
         <para>
             Um werkmäßige Anfragen über den Kommandozeilen Client zu erstellen, muß man zuerst den
             Client einrichten, damit das System das "zf" Kommando behandeln kann. Der
             Kommandozeilen Client für alle Wünsche und Zwecke, ust die <filename>.sh</filename>
             oder <filename>.bat</filename> Datei die mit der Distribution von Zend Framework
-            ausgeliefert wurde. Im Trunk kann sie hier gefunden werden: <ulink
-                url="http://framework.zend.com/svn/framework/standard/trunk/bin/">http://framework.zend.com/svn/framework/standard/trunk/bin/</ulink>.
+            ausgeliefert wurde. Im Trunk kann sie hier gefunden werden: <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/svn/framework/standard/trunk/bin/">http://framework.zend.com/svn/framework/standard/trunk/bin/</link>.
         </para>
 
         <para>
@@ -68,10 +65,10 @@
                 <filename>./path/to/zf.php</filename> funktioniert.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.tool.framework.clitool.setup-starnix">
-        <title>Das CLI Tool in Unix-artigen Systemen vorbereiten</title>
+    <section xml:id="zend.tool.framework.clitool.setup-starnix"><info><title>Das CLI Tool in Unix-artigen Systemen vorbereiten</title></info>
+        
 
         <para>
             Das übliche Setup in einer *nix Umgebung, besteht darin <filename>zf.sh</filename> und
@@ -114,8 +111,7 @@
         </para>
 
         <para>
-            <inlinegraphic scale="100" align="center" valign="middle"
-                fileref="figures/zend.tool.framework.cliversionunix.png" format="PNG" />
+            <inlinemediaobject><imageobject><imagedata scale="100" align="center" valign="middle" fileref="figures/zend.tool.framework.cliversionunix.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
         <para>
@@ -155,10 +151,10 @@ ln -s /home/username/lib/ZendFramework/bin/zf.sh /home/username/bin/zf
             Das erstellt einen Link den man global von der Kommandozeile aus aufrufen können
             sollte.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.tool.framework.clitool.setup-windows">
-        <title>Das CLI Tool in Windows vorbereiten</title>
+    <section xml:id="zend.tool.framework.clitool.setup-windows"><info><title>Das CLI Tool in Windows vorbereiten</title></info>
+        
 
         <para>
             Das üblichste Setup in einer Windows Win32 Umgebung besteht darin,
@@ -201,8 +197,7 @@ C:\WAMP\PHP\bin
         </para>
 
         <para>
-            <inlinegraphic scale="100" align="center" valign="middle"
-                fileref="figures/zend.tool.framework.cliversionwin32.png" format="PNG" />
+            <inlinemediaobject><imageobject><imagedata scale="100" align="center" valign="middle" fileref="figures/zend.tool.framework.cliversionwin32.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
         <para>
@@ -225,10 +220,10 @@ C:\WAMP\PHP\bin
             <filename>C:\Path\To\ZendFramework\library</filename> im
             <property>include_path</property> ist.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.tool.framework.clitool.setup-othernotes">
-        <title>Andere Überlegungen für ein Setup</title>
+    <section xml:id="zend.tool.framework.clitool.setup-othernotes"><info><title>Andere Überlegungen für ein Setup</title></info>
+        
 
         <para>
             Wenn man aus bestimmten Gründen die Zend Framework Bibliothek nicht im
@@ -249,10 +244,10 @@ C:\WAMP\PHP\bin
             <emphasis>ersetzen</emphasis>, wenn das speziell für das <command>zf</command>
             Kommandozeilen Tool Sinn macht.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.tool.framework.clitool.continuing">
-        <title>Wohin als nächstes?</title>
+    <section xml:id="zend.tool.framework.clitool.continuing"><info><title>Wohin als nächstes?</title></info>
+        
 
         <para>
             An diesem Punkt sollte man dafür gerüstet sein einige "interessantere" Kommandos
@@ -261,8 +256,7 @@ C:\WAMP\PHP\bin
         </para>
 
         <para>
-            <inlinegraphic scale="100" align="center" valign="middle"
-                fileref="figures/zend.tool.framework.clihelp.png" format="PNG" />
+            <inlinemediaobject><imageobject><imagedata scale="100" align="center" valign="middle" fileref="figures/zend.tool.framework.clihelp.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
         <para>
@@ -270,5 +264,5 @@ C:\WAMP\PHP\bin
             weiter um zu verstehen wie das <command>zf</command> Skript für die Projekterstellung
             verwendet werden kann.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

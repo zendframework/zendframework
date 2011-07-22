@@ -117,9 +117,8 @@ abstract class AbstractBootstrap
      */
     public function setOptions(array $options)
     {
-        $this->_options = $this->mergeOptions($this->_options, $options);
-
-        $options = array_change_key_case($options, CASE_LOWER);
+        $options           = array_change_key_case($options, CASE_LOWER);
+        $this->_options    = $this->mergeOptions($this->_options, $options);
         $this->_optionKeys = array_merge($this->_optionKeys, array_keys($options));
 
         $methods = get_class_methods($this);
@@ -154,8 +153,9 @@ abstract class AbstractBootstrap
             if (in_array($method, $methods)) {
                 $this->$method($value);
             } elseif ('resources' == $key) {
+                $broker = $this->getBroker();
                 foreach ($value as $resource => $resourceOptions) {
-                    $this->getBroker()->registerSpec($resource, $resourceOptions);
+                    $broker->registerSpec($resource, $resourceOptions);
                 }
             }
         }
@@ -550,12 +550,17 @@ abstract class AbstractBootstrap
         }
 
         $broker = $this->getBroker();
+
+        if ($broker->isRun($resourceName)) {
+           return;
+        }
+
         if ($broker->hasPlugin($resource)) {
             $this->_started[$resourceName] = true;
-            $plugin = $broker->load($resource);
+            $plugin = $broker->load($resourceName);
             $return = $plugin->init();
             unset($this->_started[$resourceName]);
-            $this->_markRun($resourceName);
+            $broker->markRun($resourceName);
 
             if (null !== $return) {
                 $this->getContainer()->{$resourceName} = $return;

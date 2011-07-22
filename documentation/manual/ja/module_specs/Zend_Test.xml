@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
-<sect1 id="zend.test.introduction">
-    <title>導入</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.introduction"><info><title>導入</title></info>
+    
 
     <para>
         <classname>Zend_Test</classname> は、Zend Framework
@@ -10,7 +10,4 @@
         現在用意しているのは、Zend Framework
         <acronym>MVC</acronym> アプリケーションのテストを支援する機能です。
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

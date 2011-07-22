@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21829 -->
-<sect1 id="zend.log.overview">
-    <title>概要</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.overview"><info><title>概要</title></info>
+    
 
     <para>
       <classname>Zend_Log</classname> は、ログ出力用の汎用コンポーネントです。
@@ -44,8 +42,8 @@
       </itemizedlist>
     </para>
 
-    <sect2 id="zend.log.overview.creating-a-logger">
-      <title>ログの作成</title>
+    <section xml:id="zend.log.overview.creating-a-logger"><info><title>ログの作成</title></info>
+      
       <para>
         ログの記録を開始するには、ライターのインスタンスを作成し、
         それをログのインスタンスに渡します。
@@ -76,10 +74,10 @@ $logger = new Zend_Log($writer);
       <para>
         これで、ログが使用できるようになりました。
       </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.log.overview.logging-messages">
-      <title>メッセージの記録</title>
+    <section xml:id="zend.log.overview.logging-messages"><info><title>メッセージの記録</title></info>
+      
 
       <para>
         メッセージをログに記録するには、ログのインスタンスの <methodname>log()</methodname>
@@ -109,10 +107,10 @@ $logger->info('Informational message');
 $logger->log('Emergency message', Zend_Log::EMERG);
 $logger->emerg('Emergency message');
 ]]></programlisting>
-  </sect2>
+  </section>
 
-  <sect2 id="zend.log.overview.destroying-a-logger">
-    <title>ログの破棄</title>
+  <section xml:id="zend.log.overview.destroying-a-logger"><info><title>ログの破棄</title></info>
+    
     <para>
       ログオブジェクトが不要になったら、ログオブジェクトを指す変数に
       <constant>NULL</constant> を代入してそれを破棄しましょう。これは、
@@ -128,10 +126,10 @@ $logger = null;
       このように明示的にログを破棄することは必須ではありません。
       <acronym>PHP</acronym> の終了時に、この処理が自動的に行われます。
     </para>
-  </sect2>
+  </section>
 
-  <sect2 id="zend.log.overview.builtin-priorities">
-    <title>組み込みの優先度の使用</title>
+  <section xml:id="zend.log.overview.builtin-priorities"><info><title>組み込みの優先度の使用</title></info>
+    
     <para>
       <classname>Zend_Log</classname> クラスでは以下の優先度を定義しています。
     </para>
@@ -155,9 +153,9 @@ DEBUG   = 7;  // デバッグ (Debug): デバッグメッセージ
     <para>
       これらの優先度は適当に指定しているわけではありません。
       もとは BSD の <code>syslog</code> プロトコルに由来するもので、
-      <ulink url="http://tools.ietf.org/html/rfc3164">RFC-3164</ulink>
+      <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://tools.ietf.org/html/rfc3164">RFC-3164</link>
       で示されています。それぞれの名前と優先度番号は、<acronym>PHP</acronym> におけるもうひとつのログ記録システムである
-      <ulink url="http://pear.php.net/package/log">PEAR Log</ulink>
+      <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://pear.php.net/package/log">PEAR Log</link>
       とも互換性があります。おそらく、これと <classname>Zend_Log</classname>
       は相互運用できるでしょう。
     </para>
@@ -169,10 +167,10 @@ DEBUG   = 7;  // デバッグ (Debug): デバッグメッセージ
       <constant>DEBUG</constant> より低い優先度を定義することもできます。
       メッセージをログに記録する際には、この優先度の階層に注意し、適切なものを選択するようにしましょう。
     </para>
-  </sect2>
+  </section>
 
-  <sect2 id="zend.log.overview.user-defined-priorities">
-    <title>ユーザ定義の優先度の追加</title>
+  <section xml:id="zend.log.overview.user-defined-priorities"><info><title>ユーザ定義の優先度の追加</title></info>
+    
 
     <para>
       ユーザ定義の優先度を実行時に追加するには、ログの
@@ -196,10 +194,10 @@ $logger->foo('Foo Message');
     <para>
       新しい優先度は、既存のものを上書きすることはできません。
     </para>
-  </sect2>
+  </section>
 
-  <sect2 id="zend.log.overview.understanding-fields">
-    <title>ログのイベントについて理解する</title>
+  <section xml:id="zend.log.overview.understanding-fields"><info><title>ログのイベントについて理解する</title></info>
+    
 
     <para>
       <methodname>log()</methodname> メソッドやその仲間をコールした際に、
@@ -239,11 +237,11 @@ $logger->setEventItem('pid', getmypid());
       ライターはそれをどう扱っていいのかわからないからです。
       さらに詳しく学ぶには、フォーマッタの節を参照ください。
     </para>
-  </sect2>
+  </section>
 
     <!-- TODO : to be translated -->
-    <sect2 id="zend.log.overview.as-errorHandler">
-        <title>Log PHP Errors</title>
+    <section xml:id="zend.log.overview.as-errorHandler"><info><title>Log PHP Errors</title></info>
+        
 
         <para>
             <classname>Zend_Log</classname> can also be used to log <acronym>PHP</acronym> errors.  Calling
@@ -251,10 +249,10 @@ $logger->setEventItem('pid', getmypid());
             error handler, and will pass the error along as well.
         </para>
 
-        <table id="zend.log.overview.as-errorHandler.properties.table-1">
-            <title>Zend_Log events from PHP errors have the additional fields matching
+        <table xml:id="zend.log.overview.as-errorHandler.properties.table-1"><info><title>Zend_Log events from PHP errors have the additional fields matching
             <methodname>handler  ( int $errno  , string $errstr  [, string $errfile  [, int $errline  [, array $errcontext  ]]] )</methodname>
-            from <ulink url="http://us3.php.net/manual/en/function.set-error-handler.php">set_error_handler</ulink></title>
+            from <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://us3.php.net/manual/en/function.set-error-handler.php">set_error_handler</link></title></info>
+            
 
             <tgroup cols="3">
                 <thead>
@@ -302,5 +300,5 @@ $logger->setEventItem('pid', getmypid());
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
-</sect1>
+    </section>
+</section>

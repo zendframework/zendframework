@@ -1,5 +1,8 @@
-<sect1 id="zend.mail.adding-recipients">
-    <title>增加收件人</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.adding-recipients"><info><title>增加收件人</title></info>
+    
     <para>
          有三种方法可以增加收件人：
         <itemizedlist>
@@ -14,13 +17,10 @@
         </listitem>
         </itemizedlist>
     </para>
-    <note>
-        <title>附加的参数</title>
+    <note><info><title>附加的参数</title></info>
+        
         <para>
             <code>addTo()</code>和<code>addCc()</code>接受可选的第二个参数用于为邮件头的收件人指定具有可读性的名字。
         </para>
     </note>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

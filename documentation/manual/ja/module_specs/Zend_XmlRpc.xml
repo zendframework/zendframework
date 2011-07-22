@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 17062 -->
-<sect1 id="zend.xmlrpc.introduction">
-    <title>導入</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.xmlrpc.introduction"><info><title>導入</title></info>
+    
     <para>
-        <ulink url="http://www.xmlrpc.com/">ホームページ</ulink> によると、
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.xmlrpc.com/">ホームページ</link> によると、
         <acronym>XML-RPC</acronym> とは、"<acronym>XML</acronym> エンコードしたデータを
         <acronym>HTTP</acronym> でやり取りすることによる、
         リモートプロシージャの呼び出しです。
@@ -16,7 +16,4 @@
       Zend Framework は、リモートの XML-RPC サービスを使用することと
       新しい XML-RPC サーバを作成することの両方をサポートしています。
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22745 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.pdf.info">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.info"><info><title>Dokument Informationen und Metadaten</title></info>
     <!-- @todo review and revise upon completion of refactoring -->
-    <title>Dokument Informationen und Metadaten</title>
+    
 
     <para>
         Ein <acronym>PDF</acronym> Dokument kann generelle Informationen wie den Titel, Author, und
@@ -186,8 +184,7 @@ $pdf->save($pdfPath);
     <para>
         Seit <acronym>PDF</acronym> v 1.6 können Metadaten in einem speziellen
         <acronym>XML</acronym> Dokument gespeichert werden das dem <acronym>PDF</acronym> angehängt
-        wird (XMP - <ulink
-            url="http://www.adobe.com/products/xmp/">Extensible Metadata Platform</ulink>).
+        wird (XMP - <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.adobe.com/products/xmp/">Extensible Metadata Platform</link>).
     </para>
 
     <para>
@@ -222,4 +219,4 @@ $pdf->save($pdfPath);
         Metadaten Dokument (wenn vorhanden) gespeichert. Die anwendung des Benutzer ist dafür
         verantwortlich das beide Synchron gehalten werden.
     </para>
-</sect1>
+</section>

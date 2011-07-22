@@ -1,5 +1,6 @@
-<sect3 id="zend.view.helpers.initial.headscript">
-    <title>HeadScript 助手</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headscript"><info><title>HeadScript 助手</title></info>
+    
 
     <para>
         HTML <code>&lt;script&gt;</code> 元素用来提供内嵌的客户端脚本元素或链接到远程包含客户端脚本代码的资源。你可以用<code>HeadScript</code> 助手来管理它们。
@@ -48,19 +49,19 @@
         The <code>HeadScript</code> 助手是 <link linkend="zend.view.helpers.initial.placeholder"> 占位符助手 </link> 的一个具体实现。
     </para>
 
-    <note>
-        <title>在HTML Body中使用 InlineScript </title>
+    <note><info><title>在HTML Body中使用 InlineScript </title></info>
+        
 
         <para>
             当包含脚本内嵌在 HTML <code>body</code>里时，应当使用<code>HeadScript</code> 的兄弟助手，<link linkend="zend.view.helpers.initial.inlinescript">InlineScript</link>。为了加速页面的加载，提高用户访问速度，特别是当使用第三方分析脚本（比如Google Analytics等流量统计系统的javascript文件 --Haohappy注），把脚本放在文档的最后是一个好的习惯。
         </para>
     </note>
 
-    <note>
-        <title> 任意的属性缺省关闭 （Disabled）</title>
+    <note><info><title> 任意的属性缺省关闭 （Disabled）</title></info>
+        
 
         <para>
-            缺省地，<code>HeadScript</code> 将只解析（render）由 W3C 赋予的 <code>&lt;script&gt;</code> 属性，包括 'type'、 'charset'、 'defer'、 'language' 和 'src' 。 然而，一些 javascript 框架，如 <ulink url="http://www.dojotoolkit.org/">Dojo</ulink>，利用定制的属性来修改行为。为了允许这样的属性，可以通过 <code>setAllowArbitraryAttributes()</code> 方法来打开（enable）它们：
+            缺省地，<code>HeadScript</code> 将只解析（render）由 W3C 赋予的 <code>&lt;script&gt;</code> 属性，包括 'type'、 'charset'、 'defer'、 'language' 和 'src' 。 然而，一些 javascript 框架，如 <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.dojotoolkit.org/">Dojo</link>，利用定制的属性来修改行为。为了允许这样的属性，可以通过 <code>setAllowArbitraryAttributes()</code> 方法来打开（enable）它们：
         </para>
 
         <programlisting role="php"><![CDATA[<?php
@@ -68,8 +69,8 @@ $this->headScript()->setAllowArbitraryAttributes(true);
 ?>]]></programlisting>
     </note>
 
-    <example id="zend.view.helpers.initial.headscript.basicusage">
-        <title>HeadScript 助手基本用法 </title>
+    <example xml:id="zend.view.helpers.initial.headscript.basicusage"><info><title>HeadScript 助手基本用法 </title></info>
+        
 
         <para>
             在任何时候可以指定一个新的脚本。如上所述，可以链接到外部资源文件或脚本自己。
@@ -109,8 +110,8 @@ $this->headScript()->prependScript('/js/prototype.js');
 ]]></programlisting>
     </example>
 
-    <example id="zend.view.helpers.initial.headscript.capture">
-        <title>Capturing Scripts Using the HeadScript Helper</title>
+    <example xml:id="zend.view.helpers.initial.headscript.capture"><info><title>Capturing Scripts Using the HeadScript Helper</title></info>
+        
 
         <para>
             有时候，需要“编程式”地生成客户端脚本。你可以使用字符串串联、heredoc或类似的技术（字符串串联即$string1.$string2这种形式，heredoc即使用&lt;&lt;&lt;操作符－－Haohappy注），通常通过创建脚本和在PHP标签里做手脚会更容易些。<code>HeadScript</code> 可以实现这个功能，把一段JavaScript代码抓取到堆栈中暂存（道理同缓冲输出－－Haohappy注）：
@@ -141,7 +142,4 @@ $('foo_form').action = action;
             </para></listitem>
         </itemizedlist>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

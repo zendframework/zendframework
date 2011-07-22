@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.form.decorators">
-    <title>Creating Custom Form Markup Using Zend_Form_Decorator</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.decorators"><info><title>Creating Custom Form Markup Using Zend_Form_Decorator</title></info>
+    
 
     <para>
         Rendering a form object is completely optional -- you do not need to use
@@ -37,8 +36,8 @@
         can build complex markup representing the entire item.
     </para>
 
-    <sect2 id="zend.form.decorators.operation">
-        <title>Operation</title>
+    <section xml:id="zend.form.decorators.operation"><info><title>Operation</title></info>
+        
 
         <para>
             To configure a decorator, pass an array of options or a
@@ -132,20 +131,20 @@
             or append the string; an optional separator will be used in the
             latter two situations.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.decorators.standard">
-        <title>Standard Decorators</title>
+    <section xml:id="zend.form.decorators.standard"><info><title>Standard Decorators</title></info>
+        
 
         <para>
             <classname>Zend_Form</classname> ships with many standard decorators; see
             <link linkend="zend.form.standardDecorators">the chapter on Standard
             Decorators</link> for details.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.decorators.custom">
-        <title>Custom Decorators</title>
+    <section xml:id="zend.form.decorators.custom"><info><title>Custom Decorators</title></info>
+        
 
         <para>
             If you find your rendering needs are complex or need heavy
@@ -349,10 +348,10 @@ class My_Decorator_Errors
             decorators, you can modify decoration without needing to modify your
             elements' decorators.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.decorators.individual">
-        <title>Rendering Individual Decorators</title>
+    <section xml:id="zend.form.decorators.individual"><info><title>Rendering Individual Decorators</title></info>
+        
 
         <para>
             Since decorators can target distinct metadata of the element or form
@@ -388,8 +387,5 @@ echo $form->renderHtmlTag('wrap this content');
             ViewScript decorator; each element can use its attached decorators
             to generate content, but with fine-grained control.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

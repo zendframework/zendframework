@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.validate.writing_validators">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.writing_validators"><info><title>Написание валидаторов</title></info>
 
-    <title>Написание валидаторов</title>
+    
 
     <para>
         <classname>Zend_Validate</classname> предоставляет набор наиболее
@@ -58,9 +57,9 @@
         продолжен.
     </para>
 
-    <example id="zend.validate.writing_validators.example.simple">
+    <example xml:id="zend.validate.writing_validators.example.simple"><info><title>Создание простого класса валидации</title></info>
 
-        <title>Создание простого класса валидации</title>
+        
 
         <para>
             Следующий пример демонстрирует создание простейшего валидатора.
@@ -103,9 +102,9 @@ class MyValid_Float extends Zend_Validate_Abstract
 
     </example>
 
-    <example id="zend.validate.writing_validators.example.conditions.dependent">
+    <example xml:id="zend.validate.writing_validators.example.conditions.dependent"><info><title>Написание классов валидации с подчиненными условиями</title></info>
 
-        <title>Написание классов валидации с подчиненными условиями</title>
+        
 
         <para>
             Следующий пример демонстрирует более сложный набор правил валидации,
@@ -200,9 +199,9 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
 
     </example>
 
-    <example id="zend.validate.writing_validators.example.conditions.independent">
+    <example xml:id="zend.validate.writing_validators.example.conditions.independent"><info><title>Валидация с независимыми условиями и возвратом нескольких причин непрохождения валидации</title></info>
 
-        <title>Валидация с независимыми условиями и возвратом нескольких причин непрохождения валидации</title>
+        
 
         <para>
             Рассмотрим написание класса валидации для обеспечения стойкости
@@ -289,7 +288,4 @@ class MyValid_PasswordStrength extends Zend_Validate_Abstract
 
     </example>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.multiuser.authorization">
-    <title>Erstellung eines Authorisations Systems in Zend Framework</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.multiuser.authorization"><info><title>Erstellung eines Authorisations Systems in Zend Framework</title></info>
+    
 
-    <sect2 id="learning.multiuser.authorization.intro">
-        <title>Einführung in Authorisation</title>
+    <section xml:id="learning.multiuser.authorization.intro"><info><title>Einführung in Authorisation</title></info>
+        
 
         <para>
             Nachdem ein Benutzer als authentisch identifiziert wurde, kann eine Anwendung mit Ihrem
@@ -42,10 +40,10 @@
             der Erstellung eines Baums von Rollen, Ressourcen und Privilegien um
             Authorisationsanfragen zu managen und abzufragen.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.multiuser.authorization.basic-usage">
-        <title>Grundsätzliche Verwendung von Zend_Acl</title>
+    <section xml:id="learning.multiuser.authorization.basic-usage"><info><title>Grundsätzliche Verwendung von Zend_Acl</title></info>
+        
 
 <!-- explain the interaction with a User object, how -->
 
@@ -248,5 +246,5 @@ $acl->allow('publisher', 'blogPost', 'publish');
             Beispiel haben wir geprüft das die Eigenschaft <property>ownerUserId</property> des
             Blogposts mit der übergebenen Id des Benutzers übereinstimmt.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

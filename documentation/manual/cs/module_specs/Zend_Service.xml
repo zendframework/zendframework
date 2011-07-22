@@ -1,5 +1,8 @@
-<sect1 id="zend.service.introduction">
-    <title>Úvod</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.introduction"><info><title>Úvod</title></info>
+    
     <para>
         <code>Zend_Service</code> je abstraktní třída, která poskytuje základ
         pro implementaci webových služeb jako je SOAP nebo REST.
@@ -68,7 +71,4 @@
         Další služby budou přístupné v budoucnosti.
     </para>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

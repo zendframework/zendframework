@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22040 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.float">
-    <title>Float</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.float"><info><title>Float</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Float</classname> erlaubt es zu prüfen ob ein angegebener Wert eine
         Gleitkommazahl enthält. Diese Prüfung kann auch lokalisierte Eingaben prüfen.
     </para>
 
-    <sect3 id="zend.validate.set.float.options">
-        <title>Unterstützte Optionen für Zend_Validate_Float</title>
+    <section xml:id="zend.validate.set.float.options"><info><title>Unterstützte Optionen für Zend_Validate_Float</title></info>
+        
 
         <para>
             Die folgenden Optionen werden für <classname>Zend_Validate_Float</classname>
@@ -25,10 +23,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.float.basic">
-        <title>Einfache Float Prüfung</title>
+    <section xml:id="zend.validate.set.float.basic"><info><title>Einfache Float Prüfung</title></info>
+        
 
         <para>
             Der einfachste Weg eine Gleitkommazahl zu prüfen ist die Verwendung der
@@ -47,10 +45,10 @@ $validator->isValid('1,234.5'); // Gibt true zurück
         <para>
             Im obigen Beispiel wird in der Umgebung das Gebietsschema "en" erwartet.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.float.localized">
-        <title>Lokalisierte Prüfung von Gleitkommazahlen</title>
+    <section xml:id="zend.validate.set.float.localized"><info><title>Lokalisierte Prüfung von Gleitkommazahlen</title></info>
+        
 
         <para>
             Oft ist es nützlich in der Lage zu sein lokalisierte Werte zu prüfen. Gleitkommazahlen
@@ -84,8 +82,5 @@ $validator->isValid("1.234"); // Gibt true zurück
             <methodname>setLocale()</methodname> verwendet wird, und empfangen indem man
             <methodname>getLocale()</methodname> verwendet.
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

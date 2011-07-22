@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21587 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.db.table.relationships">
-    <title>Zend_Db_Table Relationships</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.relationships"><info><title>Zend_Db_Table Relationships</title></info>
+    
 
-    <sect2 id="zend.db.table.relationships.introduction">
-        <title>Einführung</title>
+    <section xml:id="zend.db.table.relationships.introduction"><info><title>Einführung</title></info>
+        
 
         <para>
             In einer relationalen Datenbank haben Tabellen Relationen zueinander. Eine Entität in
@@ -18,15 +16,14 @@
             Die <classname>Zend_Db_Table_Row</classname> Klasse besitzt Methoden für die Abfrage von
             verknüpften Zeilen in anderen Tabellen.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.relationships.defining">
-        <title>Verknüpfungen definieren</title>
+    <section xml:id="zend.db.table.relationships.defining"><info><title>Verknüpfungen definieren</title></info>
+        
 
         <para>
             Die Klassen für jede eigene Tabelle müssen durch das Erweitern der abstrakten Klasse
-            <classname>Zend_Db_Table_Abstract</classname>, wie in <link
-                linkend="zend.db.table.defining">diesem Kapitel</link> beschrieben, definiert
+            <classname>Zend_Db_Table_Abstract</classname>, wie in <link linkend="zend.db.table.defining">diesem Kapitel</link> beschrieben, definiert
             werden. Siehe auch in <link linkend="zend.db.adapter.example-database">diesem
                 Kapitel</link> für die Beschreibung einer Beispieldatenbank für welche der folgende
             Beispielcode designed wurde.
@@ -145,7 +142,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>columns</emphasis> => Ein String oder ein Array von
+                    <emphasis>columns</emphasis> =&gt; Ein String oder ein Array von
                     Strings welche die Namen der entfernten Schlüsselspalte der abhängigen Tabelle
                     benennen.
                 </para>
@@ -158,7 +155,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <listitem>
                 <para>
-                    <emphasis>refTableClass</emphasis> => Der Klassenname der
+                    <emphasis>refTableClass</emphasis> =&gt; Der Klassenname der
                     Elterntabelle. Es sollte der Klassenname und nicht der physikalische Name der
                     <acronym>SQL</acronym> Tabelle verwendet werden.
                 </para>
@@ -176,7 +173,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <listitem>
                 <para>
-                    <emphasis>refColumns</emphasis> => Ein String oder ein Array von
+                    <emphasis>refColumns</emphasis> =&gt; Ein String oder ein Array von
                     Strings die den Spaltennamen des primären Schlüssels in der Elterntabelle
                     benennen.
                 </para>
@@ -199,7 +196,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <listitem>
                 <para>
-                    <emphasis>onDelete</emphasis> => Eine Regel für eine Aktion die
+                    <emphasis>onDelete</emphasis> =&gt; Eine Regel für eine Aktion die
                     ausgeführt wird wenn eine Zeile in der Elterntabelle gelöscht wird. Siehe auch
                     <link linkend="zend.db.table.relationships.cascading">dieses Kapitel</link> für
                     weitere Informationen.
@@ -208,7 +205,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <listitem>
                 <para>
-                    <emphasis>onUpdate</emphasis> => Eine Regel für eine Aktion die
+                    <emphasis>onUpdate</emphasis> =&gt; Eine Regel für eine Aktion die
                     ausgeführt wird wenn Werte in der primären Schlüsselspalte der Elterntabelle
                     aktualisiert werden. Siehe auch
                     <link linkend="zend.db.table.relationships.cascading">dieses Kapitel</link> für
@@ -216,10 +213,10 @@ class BugsProducts extends Zend_Db_Table_Abstract
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.relationships.fetching.dependent">
-        <title>Eine abhängige Zeile holen</title>
+    <section xml:id="zend.db.table.relationships.fetching.dependent"><info><title>Eine abhängige Zeile holen</title></info>
+        
 
         <para>
             Wenn man ein Zeilen Objekt als Ergebnis einer Abfrage auf einer Elterntabelle hat,
@@ -244,8 +241,8 @@ $row->findDependentRowset($table, [$rule]);
             Verwendung eines Objekts dieser Tabellenklasse spezifizieren.
         </para>
 
-        <example id="zend.db.table.relationships.fetching.dependent.example">
-            <title>Eine abhängige Zeile holen</title>
+        <example xml:id="zend.db.table.relationships.fetching.dependent.example"><info><title>Eine abhängige Zeile holen</title></info>
+            
 
             <para>
                 Dieses Beispiel zeigt wie man ein Zeilenobjekt von der Tabelle
@@ -276,8 +273,8 @@ $bugsReportedByUser = $user1234->findDependentRowset('Bugs');
             <command>'Reporter'</command>.
         </para>
 
-        <example id="zend.db.table.relationships.fetching.dependent.example-by">
-            <title>Eine anhängige Zeile durch eine spezifische Regel erhalten</title>
+        <example xml:id="zend.db.table.relationships.fetching.dependent.example-by"><info><title>Eine anhängige Zeile durch eine spezifische Regel erhalten</title></info>
+            
 
             <para>
                 Das Beispiel zeigt wie ein Zeilenobjekt von der <command>Accounts</command> Tabelle
@@ -301,10 +298,10 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs', 'Engineer');
             das Select Objekt der Elternzeilen verwendet wird.
         </para>
 
-        <example id="zend.db.table.relationships.fetching.dependent.example-by-select">
-            <title>
+        <example xml:id="zend.db.table.relationships.fetching.dependent.example-by-select"><info><title>
                 Ein anhängiges Zeilenset erhalten indem Zend_Db_Table_Select verwendet wird
-            </title>
+            </title></info>
+            
 
             <para>
                 Dieses Beispiel zeigt wir ein Zeilenobjekt von der Tabelle
@@ -338,13 +335,13 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
         <itemizedlist>
             <listitem>
                 <para>
-                    <command>$row->find&lt;TabellenKlasse&gt;()</command>
+                    <command>$row-&gt;find&lt;TabellenKlasse&gt;()</command>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <command>$row->find&lt;TabellenKlasse&gt;By&lt;Regel&gt;()</command>
+                    <command>$row-&gt;find&lt;TabellenKlasse&gt;By&lt;Regel&gt;()</command>
                 </para>
             </listitem>
         </itemizedlist>
@@ -367,8 +364,8 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
             </para>
         </note>
 
-        <example id="zend.db.table.relationships.fetching.dependent.example-magic">
-            <title>Holen von abhängigen Zeilen durch Verwendung der magischen Methode</title>
+        <example xml:id="zend.db.table.relationships.fetching.dependent.example-magic"><info><title>Holen von abhängigen Zeilen durch Verwendung der magischen Methode</title></info>
+            
 
             <para>
                 Dieses Beispiel zeigt wie abhängige Zeilen gefunden werden, entsprechend des
@@ -388,10 +385,10 @@ $bugsReportedBy = $user1234->findBugs();
 $bugsAssignedTo = $user1234->findBugsByEngineer();
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.relationships.fetching.parent">
-        <title>Eine Elternzeile holen</title>
+    <section xml:id="zend.db.table.relationships.fetching.parent"><info><title>Eine Elternzeile holen</title></info>
+        
 
         <para>
             Wenn man ein Zeilenobjekt als Ergebnis einer Abfrage auf eine abhängige Tabelle hat,
@@ -415,8 +412,8 @@ $row->findParentRow($table, [$rule]);
             eines Objektes dieser Tabellenklasse spezifizieren.
         </para>
 
-        <example id="zend.db.table.relationships.fetching.parent.example">
-            <title>Eine Elternzeile holen</title>
+        <example xml:id="zend.db.table.relationships.fetching.parent.example"><info><title>Eine Elternzeile holen</title></info>
+            
 
             <para>
                 Dieses Beispiel zeigt wie ein Zeilen Objekt von der Tabelle <command>Bugs</command>
@@ -448,8 +445,8 @@ $reporter = $bug1->findParentRow('Accounts');
             <command>'Reporter'</command>.
         </para>
 
-        <example id="zend.db.table.relationships.fetching.parent.example-by">
-            <title>Eine Elternzeile durch eine spezifizierte Regel holen</title>
+        <example xml:id="zend.db.table.relationships.fetching.parent.example-by"><info><title>Eine Elternzeile durch eine spezifizierte Regel holen</title></info>
+            
 
             <para>
                 Dieses Beispiel zeigt wie ein Zeilenobjekt von der Tabelle <command>Bugs</command>
@@ -479,14 +476,14 @@ $engineer = $bug1->findParentRow('Accounts', 'Engineer');
         <itemizedlist>
             <listitem>
                 <para>
-                    <command>$row->findParent&lt;TabellenKlasse&gt;([Zend_Db_Table_Select
+                    <command>$row-&gt;findParent&lt;TabellenKlasse&gt;([Zend_Db_Table_Select
                         $select])</command>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <command>$row->findParent&lt;TabellenKlasse&gt;By&lt;Regel&gt;(
+                    <command>$row-&gt;findParent&lt;TabellenKlasse&gt;By&lt;Regel&gt;(
                         [Zend_Db_Table_Select $select])</command>
                 </para>
             </listitem>
@@ -507,8 +504,8 @@ $engineer = $bug1->findParentRow('Accounts', 'Engineer');
             </para>
         </note>
 
-        <example id="zend.db.table.relationships.fetching.parent.example-magic">
-            <title>Die Elternzeile durch verwenden der magischen Methode holen</title>
+        <example xml:id="zend.db.table.relationships.fetching.parent.example-magic"><info><title>Die Elternzeile durch verwenden der magischen Methode holen</title></info>
+            
 
             <para>
                 Dieses Beispiel zeigt wie Elternzeilen gefunden werden, ähnlich dem vorherigen
@@ -528,10 +525,10 @@ $reporter = $bug1->findParentAccounts();
 $engineer = $bug1->findParentAccountsByEngineer();
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.relationships.fetching.many-to-many">
-        <title>Ein Zeilenset über eine Viele-zu-Viele Verknüpfung holen</title>
+    <section xml:id="zend.db.table.relationships.fetching.many-to-many"><info><title>Ein Zeilenset über eine Viele-zu-Viele Verknüpfung holen</title></info>
+        
 
         <para>
             Wenn man ein Zeilenobjekt als Ergebnis einer Abfrage auf eine Tabelle in einer
@@ -572,8 +569,8 @@ $row->findManyToManyRowset($table,
             Verwendung eines Objektes dieser Tabellenklasse spezifiziert werden.
         </para>
 
-        <example id="zend.db.table.relationships.fetching.many-to-many.example">
-            <title>Ein Zeilenset mit einer Viele-Zu-Viele Methode holen</title>
+        <example xml:id="zend.db.table.relationships.fetching.many-to-many.example"><info><title>Ein Zeilenset mit einer Viele-Zu-Viele Methode holen</title></info>
+            
 
             <para>
                 Dieses Beispiel zeigt wie man ein Zeilenobjekt von der Originaltabelle
@@ -625,10 +622,10 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
             <command>'Product'</command>.
         </para>
 
-        <example id="zend.db.table.relationships.fetching.many-to-many.example-by">
-            <title>
+        <example xml:id="zend.db.table.relationships.fetching.many-to-many.example-by"><info><title>
                 Ein Zeilenset mit einer Viele-Zu-Viele Methode durch eine spezielle Regel holen
-            </title>
+            </title></info>
+            
 
             <para>
                 Dieses Beispiel zeigt wie man ein Zeilenobjekt von der Originaltabelle
@@ -660,21 +657,21 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
         <itemizedlist>
             <listitem>
                 <para>
-                    <command>$row->find&lt;TabellenKlasse&gt;Via&lt;VerknüpfungsTabellenKlasse&gt;
+                    <command>$row-&gt;find&lt;TabellenKlasse&gt;Via&lt;VerknüpfungsTabellenKlasse&gt;
                         ([Zend_Db_Table_Select $select])</command>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <command>$row->find&lt;TabellenKlasse&gt;Via&lt;VerknüpfungsTabellenKlasse&gt;By&lt;Regel1&gt;
+                    <command>$row-&gt;find&lt;TabellenKlasse&gt;Via&lt;VerknüpfungsTabellenKlasse&gt;By&lt;Regel1&gt;
                         ([Zend_Db_Table_Select $select])</command>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <command>$row->find&lt;TabellenKlasse&gt;Via&lt;VerknüpfungsTabellenKlasse&gt;By&lt;Regel1&gt;And&lt;Regel2&gt;
+                    <command>$row-&gt;find&lt;TabellenKlasse&gt;Via&lt;VerknüpfungsTabellenKlasse&gt;By&lt;Regel1&gt;And&lt;Regel2&gt;
                         ([Zend_Db_Table_Select $select])</command>
                 </para>
             </listitem>
@@ -697,8 +694,8 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
             </para>
         </note>
 
-        <example id="zend.db.table.relationships.fetching.many-to-many.example-magic">
-            <title>Zeilensets durch Verwendung der magischen Viele-Zu-Viele Methode holen</title>
+        <example xml:id="zend.db.table.relationships.fetching.many-to-many.example-magic"><info><title>Zeilensets durch Verwendung der magischen Viele-Zu-Viele Methode holen</title></info>
+            
 
             <para>
                 Dieses Beispiel zeigt wie Zeilen in der Zieltabelle einer Viele-Zu-Viele
@@ -718,13 +715,13 @@ $products = $bug1234->findProductsViaBugsProducts();
 $products = $bug1234->findProductsViaBugsProductsByBug();
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.relationships.cascading">
-        <title>Schreiboperationen kaskadieren</title>
+    <section xml:id="zend.db.table.relationships.cascading"><info><title>Schreiboperationen kaskadieren</title></info>
+        
 
-        <note>
-            <title>Deklarieren von DRI in der Datenbank:</title>
+        <note><info><title>Deklarieren von DRI in der Datenbank:</title></info>
+            
 
             <para>
                 Die Deklaration von kaskadierenden Operationen in
@@ -762,8 +759,8 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
             <constant>DELETE</constant> an einer Zeile in einer Elterntabelle ausgeführt wird.
         </para>
 
-        <example id="zend.db.table.relationships.cascading.example-delete">
-            <title>Beispiel für ein kaskadierendes Löschen</title>
+        <example xml:id="zend.db.table.relationships.cascading.example-delete"><info><title>Beispiel für ein kaskadierendes Löschen</title></info>
+            
 
             <para>
                 Dieses Beispiel zeigt das Löschen einer Zeile in der <command>Products</command>
@@ -808,8 +805,8 @@ $product1234->delete();
             zuerst gelöscht oder aktualisiert.
         </para>
 
-        <example id="zend.db.table.relationships.cascading.example-declaration">
-            <title>Beispieldeklaration einer kaskadierenden Operation</title>
+        <example xml:id="zend.db.table.relationships.cascading.example-declaration"><info><title>Beispieldeklaration einer kaskadierenden Operation</title></info>
+            
 
             <para>
                 Im unten angeführten Beispiel, werden die Zeilen in der <command>Bugs</command>
@@ -845,8 +842,8 @@ class BugsProducts extends Zend_Db_Table_Abstract
 ]]></programlisting>
         </example>
 
-        <sect3 id="zend.db.table.relationships.cascading.notes">
-            <title>Notizen betreffend kaskadierenden Operationen</title>
+        <section xml:id="zend.db.table.relationships.cascading.notes"><info><title>Notizen betreffend kaskadierenden Operationen</title></info>
+            
 
             <para>
                 <emphasis>Kaskadierende Operationen die durch <classname>Zend_Db_Table</classname>
@@ -918,6 +915,6 @@ class BugsProducts extends Zend_Db_Table_Abstract
                 muß eine Zeile in eine Elterntabelle in einer Operation hinzufügen, und Zeilen zu
                 einer abhängigen Tabelle in einer unabhängigen Operation hinzufügen.
             </para>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

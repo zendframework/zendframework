@@ -70,12 +70,12 @@ class PhpFile extends AbstractPhp
      * @var string
      */
     protected $_namespace = null;
-    
+
     /**
      * @var array
      */
     protected $_uses = array();
-    
+
     /**
      * @var array
      */
@@ -88,9 +88,9 @@ class PhpFile extends AbstractPhp
 
     /**
      * registerFileCodeGnereator()
-     * 
+     *
      * A file code generator registry
-     * 
+     *
      * @param PhpFile $fileCodeGenerator
      * @param string $fileName
      */
@@ -184,17 +184,16 @@ class PhpFile extends AbstractPhp
             $body = implode("\n", $bodyReturn);
             unset($bodyLines, $bodyReturn, $classStartLine, $classEndLine);
         }
-        
+
         $namespace = $reflectionFile->getNamespace();
         if ($namespace != '') {
             $file->setNamespace($reflectionFile->getNamespace());
         }
-        
+
         $uses = $reflectionFile->getUses();
         if ($uses) {
             $file->setUses($uses);
         }
-        
 
         if (($reflectionFile->getDocComment() != '')) {
             $docblock = $reflectionFile->getDocblock();
@@ -257,7 +256,7 @@ class PhpFile extends AbstractPhp
      * @param array $requiredFiles
      * @return \Zend\CodeGenerator\Php\PhpFile
      */
-    public function setRequiredFiles($requiredFiles)
+    public function setRequiredFiles(array $requiredFiles)
     {
         $this->_requiredFiles = $requiredFiles;
         return $this;
@@ -279,7 +278,7 @@ class PhpFile extends AbstractPhp
      * @param array $classes
      * @return \Zend\CodeGenerator\Php\PhpFile
      */
-    public function setClasses(Array $classes)
+    public function setClasses(array $classes)
     {
         foreach ($classes as $class) {
             $this->setClass($class);
@@ -289,14 +288,14 @@ class PhpFile extends AbstractPhp
 
     /**
      * getNamespace()
-     * 
+     *
      * @return string
      */
     public function getNamespace()
     {
         return $this->_namespace;
     }
-    
+
     /**
      * setNamespace()
      * 
@@ -308,14 +307,14 @@ class PhpFile extends AbstractPhp
         $this->_namespace = $namespace;
         return $this;
     }
-    
+
     /**
      * getUses()
      * 
      * Returns an array with the first element the use statement, second is the as part.
-     * If $withResolvedAs is set to true, there will be a third element that is the 
+     * If $withResolvedAs is set to true, there will be a third element that is the
      * "resolved" as statement, as the second part is not required in use statements
-     * 
+     *
      * @param $withResolvedAs
      * @return array
      */
@@ -337,24 +336,24 @@ class PhpFile extends AbstractPhp
         }
         return $uses;
     }
-    
+
     /**
      * setUses()
-     * 
+     *
      * @param $uses
      * @return Zend\CodeGenerator\Php\PhpFile
      */
-    public function setUses(Array $uses)
+    public function setUses(array $uses)
     {
         foreach ($uses as $use) {
             $this->setUse($use[0], $use[1]);
         }
         return $this;
     }
-    
+
     /**
      * setUse()
-     * 
+     *
      * @param $use
      * @param $as
      * @return Zend\CodeGenerator\Php\PhpFile
@@ -364,7 +363,7 @@ class PhpFile extends AbstractPhp
         $this->_uses[] = array($use, $as);
         return $this;
     }
-    
+
     /**
      * getClass()
      *
@@ -492,12 +491,12 @@ class PhpFile extends AbstractPhp
         $output = '';
 
         // start with the body (if there), or open tag
-        if (preg_match('#(?:\s*)<\?php#', $this->getBody()) == false) {
+        $body = $this->getBody();
+        if (preg_match('#(?:\s*)<\?php#', $body) == false) {
             $output = '<?php' . self::LINE_FEED;
         }
-        
+
         // if there are markers, put the body into the output
-        $body = $this->getBody();
         if (preg_match('#/\* Zend_CodeGenerator_Php_File-(.*?)Marker:#', $body)) {
             $output .= $body;
             $body    = '';
@@ -519,6 +518,7 @@ class PhpFile extends AbstractPhp
 
         // namespace, if any
         if ($namespace = $this->getNamespace()) {
+            $output .= "/** @namespace */" . self::LINE_FEED;
             $output .= sprintf('namespace %s;%s', $namespace, str_repeat(self::LINE_FEED, 2));
         }
 

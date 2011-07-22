@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22741 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.form.forms">
-    <title>Erstellen von Form durch Verwendung von Zend_Form</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.forms"><info><title>Erstellen von Form durch Verwendung von Zend_Form</title></info>
+    
 
     <para>
         Die <classname>Zend_Form</classname> Klasse wird verwendet um Form Element, Anzeigegruppen
@@ -78,8 +76,8 @@ $form = new Zend_Form($config);
         darzustellen.
     </para>
 
-    <sect2 id="zend.form.forms.plugins">
-        <title>Plugin Loader</title>
+    <section xml:id="zend.form.forms.plugins"><info><title>Plugin Loader</title></info>
+        
 
         <para>
             <classname>Zend_Form</classname> verwendet
@@ -150,8 +148,7 @@ $form = new Zend_Form($config);
                     <methodname>addPrefixPath()</methodname>, nur das ein Klassenpräfix und ein Pfad
                     spezifiziert werden muß. Wenn <varname>$type</varname> spezifiziert wurde, muß
                     er einer der Plugin Loader Typen sein die in
-                    <classname>Zend_Form_Element</classname> spezifiziert sind; siehe das <link
-                        linkend="zend.form.elements.loaders">Kapitel Element Plugins</link> für
+                    <classname>Zend_Form_Element</classname> spezifiziert sind; siehe das <link linkend="zend.form.elements.loaders">Kapitel Element Plugins</link> für
                         weitere Informationen über gültige <varname>$type</varname> Werte. Wenn kein
                     <varname>$type</varname> spezifiziert wurde, nimmt diese Methode an das ein
                     genereller Präfix für alle Typen spezifiziert wurde.
@@ -175,10 +172,10 @@ $form = new Zend_Form($config);
             der Dokumentation über Elemente als Beispiel dafür, wie eigene Elemente als Ersatz für
             Standardklassen verwendet werden können.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.forms.elements">
-        <title>Elemente</title>
+    <section xml:id="zend.form.forms.elements"><info><title>Elemente</title></info>
+        
 
         <para>
             <classname>Zend_Form</classname> bietet verschiedene Zugriffsmethoden für das Hinzufügen
@@ -214,8 +211,8 @@ $form->addElement('text', 'foo');
 $form->addElement('text', 'foo', array('label' => 'Foo:'));
 ]]></programlisting>
 
-        <note>
-            <title>addElement() implementiert das Fluent Interface</title>
+        <note><info><title>addElement() implementiert das Fluent Interface</title></info>
+            
 
             <para>
                 <methodname>addElement()</methodname> implementiert das Fluent Interface; das heißt
@@ -266,8 +263,8 @@ $foo = $form->foo;
 $username = $form->createElement('text', 'username');
 ]]></programlisting>
 
-        <sect3 id="zend.form.forms.elements.values">
-            <title>Werte bekanntgeben und empfangen</title>
+        <section xml:id="zend.form.forms.elements.values"><info><title>Werte bekanntgeben und empfangen</title></info>
+            
 
             <para>
                 Nach der Prüfung einer Form, will man typischerweise die Werte empfangen damit
@@ -306,10 +303,10 @@ $form->populate($data);
             <programlisting language="php"><![CDATA[
 $form->reset();
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.form.forms.elements.global">
-            <title>Globale Operationen</title>
+        <section xml:id="zend.form.forms.elements.global"><info><title>Globale Operationen</title></info>
+            
 
             <para>
                 Fallweise wird man wollen das bestimmte Operationen alle Elemente beeinflussen.
@@ -318,8 +315,8 @@ $form->reset();
                 Elemente. Als Beispiel:
             </para>
 
-            <example id="zend.form.forms.elements.global.allpaths">
-                <title>Setzen von Präfix Pfaden für alle Elemente</title>
+            <example xml:id="zend.form.forms.elements.global.allpaths"><info><title>Setzen von Präfix Pfaden für alle Elemente</title></info>
+                
 
                 <para>
                     Präfix Pfade können für alle Elemente durch den Typ oder der Verwendung eines
@@ -349,8 +346,8 @@ $form->addElementPrefixPath('My_Foo_Decorator',
 ]]></programlisting>
             </example>
 
-            <example id="zend.form.forms.elements.global.decorators">
-                <title>Dekoratore für alle Elemente setzen</title>
+            <example xml:id="zend.form.forms.elements.global.decorators"><info><title>Dekoratore für alle Elemente setzen</title></info>
+                
 
                 <para>
                     Man kann Dekoratore für alle Elemente setzen.
@@ -368,8 +365,8 @@ $form->setElementDecorators(array(
 ]]></programlisting>
             </example>
 
-            <example id="zend.form.forms.elements.global.decoratorsFilter">
-                <title>Setzen von Dekoratoren für einige Elemente</title>
+            <example xml:id="zend.form.forms.elements.global.decoratorsFilter"><info><title>Setzen von Dekoratoren für einige Elemente</title></info>
+                
 
                 <para>
                     Man kann Dekoratore auch für ein Subset von Elementen setzen, entweder durch
@@ -423,8 +420,8 @@ $form->setElementDecorators(
 ]]></programlisting>
             </example>
 
-            <note>
-                <title>Einige Dekoratore sind für einige Elemente ungeeignet</title>
+            <note><info><title>Einige Dekoratore sind für einige Elemente ungeeignet</title></info>
+                
 
                 <para>
                     Wärend <methodname>setElementDecorators()</methodname> wie eine gute Lösung
@@ -448,8 +445,8 @@ $form->setElementDecorators(
                 </para>
             </note>
 
-            <example id="zend.form.forms.elements.global.filters">
-                <title>Filter für alle Elemente setzen</title>
+            <example xml:id="zend.form.forms.elements.global.filters"><info><title>Filter für alle Elemente setzen</title></info>
+                
 
                 <para>
                     In einigen Fällen will man den selben Filter auf alle Elemente anwenden; ein
@@ -460,10 +457,10 @@ $form->setElementDecorators(
 $form->setElementFilters(array('StringTrim'));
 ]]></programlisting>
             </example>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.form.forms.elements.methods">
-            <title>Methoden für die Interaktion mit Elementen</title>
+        <section xml:id="zend.form.forms.elements.methods"><info><title>Methoden für die Interaktion mit Elementen</title></info>
+            
 
             <para>
                 Die folgenden Methoden können verwendet werden um mit Elementen zu interagieren:
@@ -524,11 +521,11 @@ $form->setElementFilters(array('StringTrim'));
                     <para><methodname>addElementPrefixPaths(array $spec)</methodname></para>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.form.forms.displaygroups">
-        <title>Anzeigegruppen</title>
+    <section xml:id="zend.form.forms.displaygroups"><info><title>Anzeigegruppen</title></info>
+        
 
         <para>
             Anzeigegruppen sind ein Weg um virtuell Gruppierungen von Elementen für Anzeigezwecke
@@ -572,8 +569,8 @@ $login = $form->getDisplayGroup('login');
 $login = $form->login;
 ]]></programlisting>
 
-        <note>
-            <title>Standarddekoratore müssen nicht geladen werden</title>
+        <note><info><title>Standarddekoratore müssen nicht geladen werden</title></info>
+            
 
             <para>
                 Standardmäßig werden die Standarddekoratore wärend der Initialisierung des Objektes
@@ -595,8 +592,8 @@ $form->addDisplayGroup(
             </para>
         </note>
 
-        <sect3 id="zend.form.forms.displaygroups.global">
-            <title>Globale Operationen</title>
+        <section xml:id="zend.form.forms.displaygroups.global"><info><title>Globale Operationen</title></info>
+            
 
             <para>
                 Wie bei den Elementen gibt es einige Operationen welche alle Anzeigegruppen
@@ -604,8 +601,8 @@ $form->addDisplayGroup(
                 Pfades in denen nach Dekoratoren nachgesehen werden soll.
             </para>
 
-            <example id="zend.form.forms.displaygroups.global.paths">
-                <title>Setzen des Dekorator Präfix Pfades für alle Anzeigegruppen</title>
+            <example xml:id="zend.form.forms.displaygroups.global.paths"><info><title>Setzen des Dekorator Präfix Pfades für alle Anzeigegruppen</title></info>
+                
 
                 <para>
                     Standardmäßig erben Anzeigegruppen die Dekorator Pfade welche die Form
@@ -618,8 +615,8 @@ $form->addDisplayGroupPrefixPath('My_Foo_Decorator', 'My/Foo/Decorator');
 ]]></programlisting>
             </example>
 
-            <example id="zend.form.forms.displaygroups.global.decorators">
-                <title>Setzen von Dekoratoren für alle Anzeigegruppen</title>
+            <example xml:id="zend.form.forms.displaygroups.global.decorators"><info><title>Setzen von Dekoratoren für alle Anzeigegruppen</title></info>
+                
 
                 <para>
                     Es können Dekoratore für alle Anzeigegruppen gesetzt werden.
@@ -637,10 +634,10 @@ $form->setDisplayGroupDecorators(array(
 ));
 ]]></programlisting>
             </example>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.form.forms.displaygroups.customClasses">
-            <title>Eigene Anzeigegruppen Klassen verwenden</title>
+        <section xml:id="zend.form.forms.displaygroups.customClasses"><info><title>Eigene Anzeigegruppen Klassen verwenden</title></info>
+            
 
             <para>
                 Standardmäßig verwendet <classname>Zend_Form</classname> die
@@ -682,10 +679,10 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
                 spezifiziert werden, und wird früh geladen um sicherzustellen das alle
                 Anzeigegruppen diese Klasse verwenden.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.form.forms.displaygroups.interactionmethods">
-            <title>Methoden für die Interaktion mit Anzeigegruppen</title>
+        <section xml:id="zend.form.forms.displaygroups.interactionmethods"><info><title>Methoden für die Interaktion mit Anzeigegruppen</title></info>
+            
 
             <para>
                 Die folgenden Methoden können verwendet werden um mit Anzeigegruppen zu
@@ -731,10 +728,10 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
                     <para><methodname>getDefaultDisplayGroupClass($class)</methodname></para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.form.forms.displaygroups.methods">
-            <title>Methoden von Zend_Form_DisplayGroup</title>
+        <section xml:id="zend.form.forms.displaygroups.methods"><info><title>Methoden von Zend_Form_DisplayGroup</title></info>
+            
 
             <para>
                 <classname>Zend_Form_DisplayGroup</classname> hat die folgenden Methoden, gruppiert
@@ -935,11 +932,11 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
                     </itemizedlist>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.form.forms.subforms">
-        <title>Subformen</title>
+    <section xml:id="zend.form.forms.subforms"><info><title>Subformen</title></info>
+        
 
         <para>
             Subformen haben unterschiedliche Zwecke:
@@ -1003,8 +1000,8 @@ $subForm = $form->subform;
             nicht.
         </para>
 
-        <sect3 id="zend.form.forms.subforms.global">
-            <title>Globale Operationen</title>
+        <section xml:id="zend.form.forms.subforms.global"><info><title>Globale Operationen</title></info>
+            
 
             <para>
                 Wie Elemente und Anzeigegruppen. gibt es einige Operationen für die es notwendig
@@ -1023,10 +1020,10 @@ $form->setSubFormDecorators(array(
     'Fieldset'
 ));
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.form.forms.subforms.methods">
-            <title>Methoden für die Interaktion mit Subfomen</title>
+        <section xml:id="zend.form.forms.subforms.methods"><info><title>Methoden für die Interaktion mit Subfomen</title></info>
+            
 
             <para>
                 Die folgenden Meothden können verwendet werden um mit Subformen zu interagieren:
@@ -1058,11 +1055,11 @@ $form->setSubFormDecorators(array(
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.form.forms.metadata">
-        <title>Metadaten und Attribute</title>
+    <section xml:id="zend.form.forms.metadata"><info><title>Metadaten und Attribute</title></info>
+        
 
         <para>
             Wärend die Nützlichkeit von Formen primär von den Elementen die Sie enthalten her
@@ -1154,10 +1151,10 @@ $form->removeAttrib('onSubmit');
 // Löschen aller Attribute:
 $form->clearAttribs();
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.forms.decorators">
-        <title>Dekoratore</title>
+    <section xml:id="zend.form.forms.decorators"><info><title>Dekoratore</title></info>
+        
 
         <para>
             Das Erstellen des Markups für eine Form ist oft ein zeitintensiver Arbeitsschritt,
@@ -1205,8 +1202,8 @@ $form->setDecorators(array(
             <acronym>HTML</acronym> Attribute des <emphasis>&lt;form&gt;</emphasis> Tags verwendet.
         </para>
 
-        <note>
-            <title>Standarddekoratore müssen nicht geladen werden</title>
+        <note><info><title>Standarddekoratore müssen nicht geladen werden</title></info>
+            
 
             <para>
                 Standardmäßig werden die Standarddekoratore wärend der Initialisierung des Objektes
@@ -1224,8 +1221,8 @@ $form = new Zend_Form(array('disableLoadDefaultDecorators' => true));
             </para>
         </note>
 
-        <note>
-            <title>Verwenden mehrerer Dekoratore des gleichen Typs</title>
+        <note><info><title>Verwenden mehrerer Dekoratore des gleichen Typs</title></info>
+            
 
             <para>
                 Intern verwendet <classname>Zend_Form</classname> eine Dekorator Klasse als
@@ -1323,10 +1320,10 @@ echo $form->renderFieldset("<p>Das ist der Fieldset Inhalt</p>");
         <para>
             Wenn der Dekorator nicht existiert, wird eine Exception geworfen.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.forms.validation">
-        <title>Prüfung</title>
+    <section xml:id="zend.form.forms.validation"><info><title>Prüfung</title></info>
+        
 
         <para>
             Ein primärer Verwendungszweck für Forms ist die Überprüfung von übermittelten Daten.
@@ -1428,8 +1425,8 @@ $messages = $form->getMessages('username');
             </para>
         </note>
 
-        <sect3 id="zend.form.forms.validation.errors">
-            <title>Selbst definierte Fehlermeldungen</title>
+        <section xml:id="zend.form.forms.validation.errors"><info><title>Selbst definierte Fehlermeldungen</title></info>
+            
 
             <para>
                 Von Zeit zu Zeit ist es gewünscht ein oder mehrere spezielle Fehlermeldungen zu
@@ -1511,10 +1508,10 @@ $messages = $form->getMessages('username');
             <para>
                 Alle auf diesem Weg gesetzten Fehler können übersetzt werden.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.form.forms.validation.values">
-            <title>Nur einen gültigen Wert empfangen</title>
+        <section xml:id="zend.form.forms.validation.values"><info><title>Nur einen gültigen Wert empfangen</title></info>
+            
 
             <para>
                 Es gibt Szenarien in denen man dem Benutzer erlauben will in verschiedenen Schritten
@@ -1532,11 +1529,11 @@ $messages = $form->getMessages('username');
             <programlisting language="php"><![CDATA[
 $validValues = $form->getValidValues($_POST);
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.form.forms.methods">
-        <title>Methoden</title>
+    <section xml:id="zend.form.forms.methods"><info><title>Methoden</title></info>
+        
 
         <para>
             Nachfolgend ist eine komplette Liste der in <classname>Zend_Form</classname> vorhandenen
@@ -1851,10 +1848,10 @@ $validValues = $form->getValidValues($_POST);
                 </itemizedlist>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.forms.config">
-        <title>Konfiguration</title>
+    <section xml:id="zend.form.forms.config"><info><title>Konfiguration</title></info>
+        
 
         <para>
             <classname>Zend_Form</classname> ist über <methodname>setOptions()</methodname> und
@@ -1965,10 +1962,10 @@ decorators.form.decorator = "Form"
             Das obige könnte einfach abstrahiert werden zu einer <acronym>XML</acronym> oder
             <acronym>PHP</acronym> Array-basierenden Konfigurations Datei.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.forms.custom">
-        <title>Eigene Forms</title>
+    <section xml:id="zend.form.forms.custom"><info><title>Eigene Forms</title></info>
+        
 
         <para>
             Eine Alternative zur Verwendung von Konfigurations-basierenden Forms ist es
@@ -2083,5 +2080,5 @@ class My_Form_Login extends Zend_Form
     }
 }
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

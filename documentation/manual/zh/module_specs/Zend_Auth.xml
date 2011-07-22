@@ -1,6 +1,7 @@
-﻿<sect1 id="zend.auth.introduction">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.introduction"><info><title>简介</title></info>
 
-    <title>简介</title>
+    
 
     <para>
         Zend_Auth 为认证（authentication）和一些通用用例情景的具体认证适配器提供了一个API。
@@ -16,9 +17,9 @@
         </para>
     </note>
 
-    <sect2 id="zend.auth.introduction.adapters">
+    <section xml:id="zend.auth.introduction.adapters"><info><title>适配器</title></info>
 
-        <title>适配器</title>
+        
 
         <para>
             Zend_Auth适配器被用来依靠特定的认证服务（例如LDAP、RDBMS或基于文件的存储）来认证。不同的适配器可能有不同的选项和行为，但有些基本的事情在认证适配器中是通用的。例如，接受认证证书（包括声称身份）、依靠认证服务执行查询、返回结果在Zend_Auth适配器中是通用的。
@@ -55,17 +56,17 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
         // ...
     }
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
            如上面所示，<code>authenticate()</code>必需返回一个<code>Zend_Auth_Result</code>的实例（或从<code>Zend_Auth_Result</code>派生的一个类的实例）。如果因为某些原因认证查询不能执行，<code>authenticate()</code>应该抛出一个由<code>Zend_Auth_Adapter_Exception</code>产生的异常。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.introduction.results">
+    <section xml:id="zend.auth.introduction.results"><info><title>结果</title></info>
 
-        <title>结果</title>
+        
 
         <para>
             为了表示一个认证尝试的结果，Zend_Auth适配器返回一个带有<code>authenticate()</code>的<code>Zend_Auth_Result</code>的实例。适配器基于结构组成<code>Zend_Auth_Result</code>对象，下面四个方法提供了一组基本的用户面临的通用Zend_Auth适配器结果的操作：
@@ -102,8 +103,8 @@ Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND
 Zend_Auth_Result::FAILURE_IDENTITY_AMBIGUOUS
 Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID
 Zend_Auth_Result::FAILURE_UNCATEGORIZED
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </para>
 
@@ -131,16 +132,16 @@ switch ($result->getCode()) {
         /** do stuff for other failure **/
         break;
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.introduction.persistence">
+    <section xml:id="zend.auth.introduction.persistence"><info><title>身份的持久（Persistence）</title></info>
 
-        <title>身份的持久（Persistence）</title>
+        
 
         <para>
             实质上，认证一个包含认证证书的请求很有用，但是维护已认证的身份并在每次请求时不需要出示认证证书也同样很重要。
@@ -150,9 +151,9 @@ switch ($result->getCode()) {
             HTTP是一个无连接的协议，然而，象cookie和session这样的技术已经被开发出来使在服务器端的web应用维护多请求状态变得容易。
         </para>
 
-        <sect3 id="zend.auth.introduction.persistence.default">
+        <section xml:id="zend.auth.introduction.persistence.default"><info><title>在PHP Session 中的缺省持久（Persistence）</title></info>
 
-            <title>在PHP Session 中的缺省持久（Persistence）</title>
+            
 
             <para>
                  缺省地，<code>Zend_Auth</code>从使用PHP session成功的认证尝试中提供身份的持久存储。基于一个成功的认证尝试，<code>Zend_Auth::authenticate()</code>通过把认证结果放入持久存储中来保存身份。除非另有配置，<code>Zend_Auth</code> 使用名称为<code>Zend_Auth_Storage_Session</code> 的存储类，这个类使用<link linkend="zend.session">Zend_Session</link>。通过实现<code>Zend_Auth_Storage_Interface</code>给<code>Zend_Auth::setStorage()</code>提供一个对象，一个定制的类可以被替代使用。
@@ -164,9 +165,9 @@ switch ($result->getCode()) {
                 </para>
             </note>
 
-            <example id="zend.auth.introduction.persistence.default.example">
+            <example xml:id="zend.auth.introduction.persistence.default.example"><info><title>修改 Session 名字空间</title></info>
 
-                <title>修改 Session 名字空间</title>
+                
 
                 <para>
                     <code>Zend_Auth_Storage_Session</code>使用<code>'Zend_Auth'</code>的seesion名字空间。通过给<code>Zend_Auth_Storage_Session</code>的构造器传递不同的值，这个名字空间可以被替换，并且这个值被从内部传递给<code>Zend_Session_Namespace</code>的构造器。这应该发生在认证尝试之前，因为<code>Zend_Auth::authenticate()</code>执行身份的自动存储。
@@ -185,26 +186,26 @@ $auth->setStorage(new Zend_Auth_Storage_Session('someNamespace'));
 // Authenticate, saving the result, and persisting the identity on
 // success
 $result = $auth->authenticate($authAdapter);
-]]>
-                    </programlisting>
+
+                    ]]></programlisting>
 
                 </para>
 
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.auth.introduction.persistence.custom">
+        <section xml:id="zend.auth.introduction.persistence.custom"><info><title>实现订制存储</title></info>
 
-            <title>实现订制存储</title>
+            
 
             <para>
                有时候开发者需要使用不同的身份持久行为，而不是<code>Zend_Auth_Storage_Session</code>提供的。对于这样的案例开发者可以简单地实现<code>Zend_Auth_Storage_Interface</code>并给<code>Zend_Auth::setStorage()</code>提供一个类的实例。
             </para>
 
-            <example id="zend.auth.introduction.persistence.custom.example">
+            <example xml:id="zend.auth.introduction.persistence.custom.example"><info><title>使用定制存储类</title></info>
 
-                <title>使用定制存储类</title>
+                
 
                 <para>
                    为了使用不同于<code>Zend_Auth_Storage_Session</code>的身份之久存储类，开发者可实现<code>Zend_Auth_Storage_Interface</code>：
@@ -272,8 +273,8 @@ class MyStorage implements Zend_Auth_Storage_Interface
          */
     }
 }
-]]>
-                    </programlisting>
+
+                    ]]></programlisting>
 
                 </para>
 
@@ -290,20 +291,20 @@ Zend_Auth::getInstance()->setStorage(new MyStorage());
 // Authenticate, saving the result, and persisting the identity on
 // success
 $result = Zend_Auth::getInstance()->authenticate($authAdapter);
-]]>
-                    </programlisting>
+
+                    ]]></programlisting>
 
                 </para>
 
             </example>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.introduction.using">
+    <section xml:id="zend.auth.introduction.using"><info><title>使用Zend_Auth</title></info>
 
-        <title>使用Zend_Auth</title>
+        
 
         <para>
             这里提供了两种方法使用Zend_Auth适配器：
@@ -345,8 +346,8 @@ if (!$result->isValid()) {
     // $result->getIdentity() === $auth->getIdentity()
     // $result->getIdentity() === $username
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </para>
 
         <para>
@@ -357,16 +358,16 @@ if ($auth->hasIdentity()) {
     // Identity exists; get it
     $identity = $auth->getIdentity();
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </para>
 
         <para>
             从持久存储空间出去一个身份，可简单地使用<code>clearIdentity()</code>方法。这将被典型地用作“logout”操作。
             <programlisting role="php"><![CDATA[
 Zend_Auth::getInstance()->clearIdentity();
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </para>
 
         <para>
@@ -387,13 +388,10 @@ if (!$result->isValid()) {
     // Authentication succeeded
     // $result->getIdentity() === $username
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </para>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

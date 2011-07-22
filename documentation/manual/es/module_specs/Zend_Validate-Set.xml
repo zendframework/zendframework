@@ -1,21 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20229 -->
-    <!-- Reviewed: no -->
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set"><info><title>Clases de Validación Estándar</title></info>
 
-<sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
-
-    <title>Clases de Validación Estándar</title>
+    
 
     <para>Zend Framework viene con un conjunto estándar de clases de validación
         listas para usar.</para>
 
-    <sect2 id="zend.validate.set.alnum">
-        <title>Alnum</title>
+    <section xml:id="zend.validate.set.alnum"><info><title>Alnum</title></info>
+        
         <para> Devuelve <constant>TRUE</constant> si y sólo si
                 <varname>$valor</varname> contiene caracteres alfanuméricos
             únicamente. Este validador incluye una opción para considerar
             también al espacio en blanco como caracter válido. </para>
-    </sect2>
+    </section>
 
     <note>
         <para>Los caracteres alfabéticos significan caracteres que componen
@@ -25,18 +22,18 @@
             Zend_Locale.</para>
     </note>
 
-    <sect2 id="zend.validate.set.alpha">
-        <title>Alpha</title>
+    <section xml:id="zend.validate.set.alpha"><info><title>Alpha</title></info>
+        
         <para> Devuelve <constant>TRUE</constant> si y sólo si
                 <varname>$valor</varname> sólo contiene caracteres alfabéticos.
             Este validador incluye una opción para considerar también al espacio
             en blanco como caracter válido. </para>
-    </sect2>
+    </section>
 
-    <xi:include href="Zend_Validate-Barcode.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-Barcode.xml"/>
 
-    <sect2 id="zend.validate.set.between">
-        <title>Between</title>
+    <section xml:id="zend.validate.set.between"><info><title>Between</title></info>
+        
         <para> Devuelve <constant>TRUE</constant> si y sólo si
                 <varname>$valor</varname> está entre los valores límites mínimo
             y máximo. La comparación es inclusiva por defecto (
@@ -44,13 +41,13 @@
             aunque esto puede ser anulado a fin de hacer una comparación
             estricta, donde <varname>$valor</varname> debe ser estrictamente
             mayor al mínimo y estrictamente menor al máximo. </para>
-    </sect2>
+    </section>
 
-    <xi:include href="Zend_Validate-Callback.xml"/>
-    <xi:include href="Zend_Validate-CreditCard.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-Callback.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-CreditCard.xml"/>
 
-    <sect2 id="zend.validate.set.ccnum">
-        <title>Ccnum</title>
+    <section xml:id="zend.validate.set.ccnum"><info><title>Ccnum</title></info>
+        
         <para> Devuelve <constant>TRUE</constant> si y sólo si
                 <varname>$valor</varname> sigue el algoritmo Luhn (mod-10
             checksum) para tarjetas de crédito. </para>
@@ -61,10 +58,10 @@
                 validator. For security reasons you should use CreditCard
                 instead of Ccnum. </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.validate.set.date">
-        <title>Date</title>
+    <section xml:id="zend.validate.set.date"><info><title>Date</title></info>
+        
         <para> Devuelve <constant>TRUE</constant> si y sólo si
                 <varname>$valor</varname> es una fecha válida en el formato
                 <methodname>YYYY-MM-DD</methodname> (AAAA-MM-DD). Si se usa la
@@ -72,51 +69,48 @@
             validada de acuerdo a lo establecido para ese locale. Además, si se
             establece la opción <methodname>format</methodname> ese formato se
             utiliza para la validación. Para más detalles acerca de los
-            parámetros opcionales ver en: <link
-                linkend="zend.date.others.comparison.table"
-                >Zend_Date::isDate()</link> . </para>
-    </sect2>
+            parámetros opcionales ver en: <link linkend="zend.date.others.comparison.table">Zend_Date::isDate()</link> . </para>
+    </section>
 
-    <xi:include href="Zend_Validate-Db.xml">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-Db.xml">
         <xi:fallback href="../../en/module_specs/Zend_Validate-Db.xml"/>
     </xi:include>
-    <sect2 id="zend.validate.set.digits">
-        <title>Digits</title>
+    <section xml:id="zend.validate.set.digits"><info><title>Digits</title></info>
+        
         <para> Devuelve <constant>TRUE</constant> si y sólo si
                 <varname>$valor</varname> contiene solamente dígitos. </para>
-    </sect2>
+    </section>
 
-    <xi:include href="Zend_Validate-EmailAddress.xml">
-        <xi:fallback href="../../en/module_specs/Zend_Validate-EmailAddress.xml"
-        />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-EmailAddress.xml">
+        <xi:fallback href="../../en/module_specs/Zend_Validate-EmailAddress.xml"/>
     </xi:include>
-    <sect2 id="zend.validate.set.float">
-        <title>Float</title>
+    <section xml:id="zend.validate.set.float"><info><title>Float</title></info>
+        
         <para> Devuelve <constant>TRUE</constant> si y sólo si
                 <varname>$value</varname> es un valor de punto flotante. Desde
             Zend Framework 1.8 toma en cuenta la localizacion actual del
             navegador, las variables o el uso. Puede usar get/setLocale para
             cambiar la configuracion regional o crear una instancia para este
             validador </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.validate.set.greater_than">
-        <title>GreaterThan</title>
+    <section xml:id="zend.validate.set.greater_than"><info><title>GreaterThan</title></info>
+        
         <para> Devuelve <constant>TRUE</constant> si y sólo si
                 <varname>$valor</varname> es mayor al límite mínimo. </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.validate.set.hex">
-        <title>Hex</title>
+    <section xml:id="zend.validate.set.hex"><info><title>Hex</title></info>
+        
         <para> Devuelve <constant>TRUE</constant> si y sólo si
                 <varname>$valor</varname> contiene caracteres hexadecimales (0-9
             y A-F). </para>
-    </sect2>
+    </section>
 
-    <xi:include href="Zend_Validate-Hostname.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-Hostname.xml"/>
 
-    <sect2 id="zend.validate.set.iban">
-        <title>Iban</title>
+    <section xml:id="zend.validate.set.iban"><info><title>Iban</title></info>
+        
         <para> Returns <constant>TRUE</constant> if and only if
                 <varname>$value</varname> contains a valid IBAN (International
             Bank Account Number). IBAN numbers are validated against the country
@@ -156,57 +150,57 @@ if ($validator->isValid($iban)) {
             country you should give the locale. And when you accept all IBAN
             numbers regardless of any country omit the locale for
             simplicity.</para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.validate.set.in_array">
-        <title>InArray</title>
+    <section xml:id="zend.validate.set.in_array"><info><title>InArray</title></info>
+        
         <para> Devuelve <constant>TRUE</constant> si y sólo si
                 <varname>$valor</varname> se encuentra en un array, y si la
             opción es estricta entonces también verificará el tipo de dato de
                 <varname>$valor</varname> . </para>
-    </sect2>
+    </section>
 
-    <xi:include href="Zend_Validate-Identical.xml"/>
-    <xi:include href="Zend_Validate-InArray.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-Identical.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-InArray.xml"/>
 
-    <sect2 id="zend.validate.set.int">
-        <title>Int</title>
+    <section xml:id="zend.validate.set.int"><info><title>Int</title></info>
+        
         <para> Returns <constant>TRUE</constant> if and only if
                 <varname>$value</varname> is a valid integer. Since Zend
             Framework 1.8 this validator takes into account the actual locale
             from browser, environment or application wide set locale. You can of
             course use the get/setLocale accessors to change the used locale or
             give it while creating a instance of this validator. </para>
-    </sect2>
+    </section>
 
-    <xi:include href="Zend_Validate-Ip.xml"/>
-     <xi:include href="Zend_Validate-Isbn.xml" />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-Ip.xml"/>
+     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-Isbn.xml"/>
 
-    <sect2 id="zend.validate.set.less_than">
-        <title>LessThan</title>
+    <section xml:id="zend.validate.set.less_than"><info><title>LessThan</title></info>
+        
         <para> Devuelve <constant>TRUE</constant> si y sólo si
                 <varname>$valor</varname> es menor al límite máximo. </para>
-    </sect2>
+    </section>
 
-    <xi:include href="Zend_Validate-NotEmpty.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-NotEmpty.xml"/>
 
-    <xi:include href="Zend_Validate-PostCode.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-PostCode.xml"/>
 
-    <sect2 id="zend.validate.set.regex">
-        <title>Regex</title>
+    <section xml:id="zend.validate.set.regex"><info><title>Regex</title></info>
+        
         <para> Devuelve <constant>TRUE</constant> si y sólo si
                 <varname>$valor</varname> coincide con el patrón de una
             expresión regular. </para>
-    </sect2>
+    </section>
 
-    <xi:include href="Zend_Validate-Sitemap.xml">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-Sitemap.xml">
         <xi:fallback>
             <xi:include href="../../en/module_specs/Zend_Validate-Sitemap.xml"/>
         </xi:fallback>
     </xi:include>
 
-    <sect2 id="zend.validate.set.string_length">
-        <title>StringLength</title>
+    <section xml:id="zend.validate.set.string_length"><info><title>StringLength</title></info>
+        
         <para> Devuelve <constant>TRUE</constant> si y sólo si la longitud del
             string <varname>$valor</varname> es por lo menos un mínimo y no
             mayor a un máximo (cuando la opción max no es
@@ -217,11 +211,9 @@ if ($validator->isValid($iban)) {
             excepción si la longitud máxima se fija a un valor inferior que la
             longitud mínima establecida. Desde la versión 1.0.2, esta clase
             soporta UTF-8 y a otras codificaciones, basado en el valor actual
-            de: <ulink
-                url="http://www.php.net/manual/en/ref.iconv.php#iconv.configuration"
-                > iconv.internal_encoding </ulink> . If you need a different
+            de: <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/ref.iconv.php#iconv.configuration"> iconv.internal_encoding </link> . If you need a different
             encoding you can set it with the accessor methods getEncoding and
             setEncoding. </para>
-    </sect2>
+    </section>
 
-</sect1>
+</section>

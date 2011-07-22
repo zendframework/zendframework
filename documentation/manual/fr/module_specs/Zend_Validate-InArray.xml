@@ -1,34 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21243 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.in_array">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.in_array"><info><title>InArray</title></info>
 
-    <title>InArray</title>
+    
 
     <para>
         <classname>Zend_Validate_InArray</classname> vous permet de valider qu'une entrée est bien présente
         dans un tableau. Ceci fonctionne aussi avec des tableaux multidimensionnels.
     </para>
 
-    <sect3 id="zend.validate.set.in_array.options">
-        <title>Options supportées par Zend_Validate_InArray</title>
+    <section xml:id="zend.validate.set.in_array.options"><info><title>Options supportées par Zend_Validate_InArray</title></info>
+        
 
         <para>
             Les options suivantes sont supportées par
-            <classname>Zend_Validate_InArray</classname>&#160;:
+            <classname>Zend_Validate_InArray</classname> :
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis><property>haystack</property></emphasis>&#160;: spécifie le tableau
+                    <emphasis><property>haystack</property></emphasis> : spécifie le tableau
                     pour la validation.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis><property>recursive</property></emphasis>&#160;: définit si la
+                    <emphasis><property>recursive</property></emphasis> : définit si la
                     validation doit être recursive. Cette option vaut <constant>FALSE</constant>
                     par défaut.
                 </para>
@@ -36,16 +34,16 @@
 
             <listitem>
                 <para>
-                    <emphasis><property>strict</property></emphasis>&#160;: définit si la validation
+                    <emphasis><property>strict</property></emphasis> : définit si la validation
                     doit être strict (même type). Cette option vaut <constant>FALSE</constant> par
                     défaut.
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.in_array.basic">
-        <title>Validation tableau simple</title>
+    <section xml:id="zend.validate.set.in_array.basic"><info><title>Validation tableau simple</title></info>
+        
 
         <para>
             Passez simplement un tableau dans lequel rechercher une valeur:
@@ -87,10 +85,10 @@ if ($validator->isValid('value')) {
     // valeur non trouvée
 }
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.in_array.strict">
-        <title>Validation tableau stricte</title>
+    <section xml:id="zend.validate.set.in_array.strict"><info><title>Validation tableau stricte</title></info>
+        
 
         <para>
             Il est possible d'effectuer une validation stricte des données dans le tableau. Par défaut, il n'y aura aucune
@@ -99,7 +97,7 @@ if ($validator->isValid('value')) {
         </para>
 
         <para>
-            Pour spécifier une validation stricte à l'instanciation de l'objet, agissez comme suit&#160;:
+            Pour spécifier une validation stricte à l'instanciation de l'objet, agissez comme suit :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -134,10 +132,10 @@ if ($validator->isValid('value')) {
                 <constant>FALSE</constant>.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.in_array.recursive">
-        <title>Validation de tableaux récursifs</title>
+    <section xml:id="zend.validate.set.in_array.recursive"><info><title>Validation de tableaux récursifs</title></info>
+        
 
         <para>
             En plus de la validation type <acronym>PHP</acronym> <methodname>in_array()</methodname>, ce validateur peut
@@ -192,16 +190,16 @@ if ($validator->isValid('value')) {
 }
 ]]></programlisting>
 
-         <note>
-            <title>Réglage par défaut pour la récursivité</title>
+         <note><info><title>Réglage par défaut pour la récursivité</title></info>
+            
 
              <para>
                 Par défaut, la récursivité n'est pas activée.
              </para>
          </note>
 
-        <note>
-            <title>Options pour la "haystack"</title>
+        <note><info><title>Options pour la "haystack"</title></info>
+            
 
             <para>
                 Lorsque vous utilisez les clés <property>haystack</property>,
@@ -209,5 +207,5 @@ if ($validator->isValid('value')) {
                 de votre pile, vous devez alors envelopper la clé <property>haystack</property>.
             </para>
         </note>
-    </sect3>
-</sect2>
+    </section>
+</section>

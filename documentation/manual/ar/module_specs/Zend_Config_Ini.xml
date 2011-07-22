@@ -1,5 +1,6 @@
-<sect1 id="zend.config.adapters.ini">
-    <title>Zend_Config_Ini</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.ini"><info><title>Zend_Config_Ini</title></info>
+    
     <para>
         يوفر <code>Zend_Config_Ini</code> للمبرمج امكانية حفظ البيانات الخاصة بإعدادات البرنامج ,
         و ذلك بصيغة الـ INI المألوفة , ثم تمكنه من قرائه هذه البيانات داخل برنامجه بيسر من خلال
@@ -12,11 +13,11 @@
         و يمكن لأى قسم من أقسام البيانات أن يرث من قسم بيانات أخر عن طريق إلحاق أسم القسم بنقطة مزدوجة (<code>:</code>)
         ثم إلحاقها بأسم القسم الذى سيتم الوراثة منه.
     </para>
-    <note>
-        <title>parse_ini_file</title>
+    <note><info><title>parse_ini_file</title></info>
+        
         <para>
             تستخدم <code>Zend_Config_Ini</code> دالة PHP تسمى
-            <ulink url="http://php.net/parse_ini_file"><code>()parse_ini_file</code></ulink> ,
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/parse_ini_file"><code>()parse_ini_file</code></link> ,
             يرجى أن تقوم بمراجعة دليل المبرمج الخاص بلغة PHP لتتعرف على سلوك هذه الدالة, و الذى ينطبق على
             <code>Zend_Config_Ini</code> , مثل كيف يتم التعامل مع القيم الخاصة
             <code>true</code> و <code>false</code> و
@@ -24,8 +25,8 @@
             <code>null</code> .
         </para>
     </note>
-    <example>
-        <title>إستخدام Zend_Config_Ini</title>
+    <example><info><title>إستخدام Zend_Config_Ini</title></info>
+        
         <para>
             هذا المثال يوضح إستخدام بسيط لـ <code>Zend_Config_Ini</code> لتحميل بيانات الأعدادات
             من ملف INI , فى هذا المثال يوجد بيانات الأعدادات الخاصة بكل من مرحلة الأنتاج "production"
@@ -61,7 +62,4 @@ $config = new Zend_Config_Ini('/path/to/config.ini', 'staging');
 echo $config->database->host; // prints "dev.example.com"
 echo $config->database->name; // prints "dbname"]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

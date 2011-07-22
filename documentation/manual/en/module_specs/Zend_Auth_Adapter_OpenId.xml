@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.auth.adapter.openid">
-    <title>Open ID Authentication</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.openid"><info><title>Open ID Authentication</title></info>
+    
 
-    <sect2 id="zend.auth.adapter.openid.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.auth.adapter.openid.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             The <classname>Zend_Auth_Adapter_OpenId</classname> adapter can be used to authenticate
@@ -20,7 +19,7 @@
             with information about a user, along with special tags that
             describes which server to use and which identity to submit there.
             You can read more about OpenID at the
-            <ulink url="http://www.openid.net/">OpenID official site</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.openid.net/">OpenID official site</link>.
         </para>
 
         <para>
@@ -31,16 +30,15 @@
 
         <note>
             <para>
-                <classname>Zend_OpenId</classname> takes advantage of the <ulink
-                    url="http://php.net/gmp">GMP extension</ulink>, where available. Consider
+                <classname>Zend_OpenId</classname> takes advantage of the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/gmp">GMP extension</link>, where available. Consider
                 enabling the <acronym>GMP</acronym> extension for better performance when using
                 <classname>Zend_Auth_Adapter_OpenId</classname>.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.openid.specifics">
-        <title>Specifics</title>
+    <section xml:id="zend.auth.adapter.openid.specifics"><info><title>Specifics</title></info>
+        
 
         <para>
             As is the case for all <classname>Zend_Auth</classname> adapters, the
@@ -131,8 +129,5 @@ if ((isset($_POST['openid_action']) &&
             in more detail in the <classname>Zend_OpenId_Consumer</classname>
             chapter.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

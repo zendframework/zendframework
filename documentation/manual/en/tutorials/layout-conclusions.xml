@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.layout.conclusions">
-    <title>Zend_Layout: Conclusions</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.layout.conclusions"><info><title>Zend_Layout: Conclusions</title></info>
+    
 
     <para>
         <classname>Zend_Layout</classname> is a very simple wrapper around
@@ -17,4 +18,4 @@
         concept of a "Composite View" -- and are the subject of the next chapter in the tutorial,
         which covers view "placeholders."
     </para>
-</sect1>
+</section>

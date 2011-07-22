@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.form.decorators.composite">
-    <title>Erstellung und Darstellung von kombinierten Elementen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.form.decorators.composite"><info><title>Erstellung und Darstellung von kombinierten Elementen</title></info>
+    
 
     <para>
         Im <link linkend="learning.form.decorators.individual">letzten Abschnitt</link>, hatten wir
@@ -28,8 +26,8 @@
         darstellen? Wie kann man einen Decoratpr schreiben um es darzustellen?
     </para>
 
-    <sect2 id="learning.form.decorators.composite.element">
-        <title>Das Element</title>
+    <section xml:id="learning.form.decorators.composite.element"><info><title>Das Element</title></info>
+        
 
         <para>
             Die Fragen darüber wie das Element arbeiten würde beinhalten:
@@ -182,10 +180,10 @@ class My_Form_Element_Date extends Zend_Form_Element_Xhtml
             Datenabschnitt, welche wir jetzt in einem Decorator verwenden können um ein kombiniertes
             Element zu erstellen.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.form.decorators.composite.decorator">
-        <title>Der Decorator</title>
+    <section xml:id="learning.form.decorators.composite.decorator"><info><title>Der Decorator</title></info>
+        
 
         <para>
             Bei der erneuten Betrachtung des Beispiels im letzten Abschnitt, nehmen wir wir an dass
@@ -353,10 +351,10 @@ $d->setValue(array('year' => '2009', 'month' => '04', 'day' => '20'));
         value="2009" size="4" maxlength="4">
 </dd>
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.form.decorators.composite.conclusion">
-        <title>Zusammenfassung</title>
+    <section xml:id="learning.form.decorators.composite.conclusion"><info><title>Zusammenfassung</title></info>
+        
 
         <para>
             Wir haben jetzt ein Element das mehrere zusammengehörende Formular Eingabefelder
@@ -368,7 +366,7 @@ $d->setValue(array('year' => '2009', 'month' => '04', 'day' => '20'));
 
         <para>
             Zusätzlich können wir verschiedene Decoratore mit dem Element verwenden. Wenn wir einen
-            <ulink url="http://dojotoolkit.org/">Dojo</ulink> <classname>DateTextBox</classname>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org/">Dojo</link> <classname>DateTextBox</classname>
             Dijit Decorator verwenden wollen -- welche Stringwerte akzeptiert und zurückgibt --
             können wir das ohne Änderung des Elements selbst durchführen.
         </para>
@@ -378,5 +376,5 @@ $d->setValue(array('year' => '2009', 'month' => '04', 'day' => '20'));
             verwenden kann um ein Element zu beschreiben welches einen kombinierten Wert
             repräsentiert.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

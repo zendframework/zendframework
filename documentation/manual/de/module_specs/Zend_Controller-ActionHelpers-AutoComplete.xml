@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22210 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.actionhelpers.autocomplete">
-    <title>AutoComplete</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.autocomplete"><info><title>AutoComplete</title></info>
+    
 
     <para>
         Viele <acronym>AJAX</acronym> Javascript Bibliotheken bieten Funktionalitäten an für eine
@@ -121,15 +119,14 @@ class FooController extends Zend_Controller_Action
         <acronym>AJAX</acronym> Bibliotheken.
     </para>
 
-    <sect4 id="zend.controller.actionhelpers.autocomplete.dojo">
-        <title>AutoCompletion mit Dojo</title>
+    <section xml:id="zend.controller.actionhelpers.autocomplete.dojo"><info><title>AutoCompletion mit Dojo</title></info>
+        
 
         <para>
             Dojo hat per se keinen AutoCompletion Wizard, hat aber zwei Wizards die AutoCompletion
             ausführen können: ComboBox und FilteringSelect. In beiden Fällen benötigen Sie einen
             Datenspeicher der QueryReadStore implementiert; für mehr Informationen über dieses
-            Thema siehe die <ulink
-                url="http://dojotoolkit.org/reference-guide/dojo/data.html">dojo.data</ulink>
+            Thema siehe die <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org/reference-guide/dojo/data.html">dojo.data</link>
             Dokumentation.
         </para>
 
@@ -144,8 +141,8 @@ class FooController extends Zend_Controller_Action
 $this->_helper->autoCompleteDojo($data);
 ]]></programlisting>
 
-        <example id="zend.controller.actionhelpers.autocomplete.dojo.example1">
-            <title>AutoCompletion mit Dojo und der Verwendung von Zend MVC</title>
+        <example xml:id="zend.controller.actionhelpers.autocomplete.dojo.example1"><info><title>AutoCompletion mit Dojo und der Verwendung von Zend MVC</title></info>
+            
 
             <para>
                 AutoCompletion mit Dojo, über Zend <acronym>MVC</acronym>, benötigt verschiedene
@@ -335,14 +332,13 @@ dojo.require("custom.TestNameReadStore");
                 Wir haben jetzt alle Teil um mit Dojo AutoCompletion zu arbeiten.
             </para>
         </example>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelpers.autocomplete.scriptaculous">
-        <title>AutoCompletion mit Scriptaculous</title>
+    <section xml:id="zend.controller.actionhelpers.autocomplete.scriptaculous"><info><title>AutoCompletion mit Scriptaculous</title></info>
+        
 
         <para>
-            <ulink
-                url="http://wiki.script.aculo.us/scriptaculous/show/Ajax.Autocompleter">Scriptaculous</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wiki.script.aculo.us/scriptaculous/show/Ajax.Autocompleter">Scriptaculous</link>
             erwartet eine <acronym>HTML</acronym> Antwort in einem speziellen Format.
         </para>
 
@@ -351,5 +347,5 @@ dojo.require("custom.TestNameReadStore");
             Es muß einfach ein Array von Daten angegeben werden, und der Helfer wird eine
             <acronym>HTML</acronym> Antwort erstellen die mit Ajax.Autocompleter kompatibel ist.
         </para>
-    </sect4>
-</sect3>
+    </section>
+</section>

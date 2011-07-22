@@ -577,7 +577,7 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-3922
+     * @group ZF-3922
      */
     public function testRouteShouldMatchEvenWithTrailingSlash()
     {
@@ -688,7 +688,7 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('/articles/777', $url);
     }
-    
+
 
     /**
      * Test that it is possible to generate a URL with a numerical key
@@ -700,7 +700,7 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
     public function testCanGenerateNumericKeyUri()
     {
         $this->_router->addRoute(
-            'application', 
+            'application',
             new Route\Route(
                 ':controller/:action/*',
                 array('controller' => 'index', 'action' => 'index')

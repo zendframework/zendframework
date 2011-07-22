@@ -1,5 +1,6 @@
-<sect1 id="zend.filter.input">
-    <title>Zend_Filter_Input</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.input"><info><title>Zend_Filter_Input</title></info>
+    
 
     <para>
         Zend_Filter_Input 提供了一个声明接口来联合多重过滤器和校验器，使用
@@ -72,9 +73,9 @@
         下面一节描述使用这个类的步骤。
     </para>
 
-    <sect2 id="zend.filter.input.declaring">
+    <section xml:id="zend.filter.input.declaring"><info><title> 声明过滤器和校验器规则 </title></info>
 
-        <title> 声明过滤器和校验器规则 </title>
+        
 
         <para>
             在创建 Zend_Filter_Input 实例之前，声明过滤器规则数组和校验器规则数组。
@@ -95,8 +96,8 @@ $filters = array(
 
 $validators = array(
     'account' => 'Alpha'
-);]]>
-        </programlisting>
+);
+        ]]></programlisting>
 
         <para>
             在上述 <code>$filters</code> 数组中的每个键是应用过滤器到特定数据字段的规则的名称。
@@ -114,8 +115,8 @@ $validators = array(
                     <programlisting role="php"><![CDATA[<?php
 $validators = array(
     'month'   => 'Digits',
-);]]>
-                    </programlisting>
+);
+                    ]]></programlisting>
                 </para>
             </listitem>
             <listitem>
@@ -126,8 +127,8 @@ $digits = new Zend_Validate_Digits();
 
 $validators = array(
     'month'   => $digits
-);]]>
-                    </programlisting>
+);
+                    ]]></programlisting>
                 </para>
             </listitem>
             <listitem>
@@ -144,8 +145,8 @@ $validators = array(
         new Zend_Validate_Int(), // object instance
         array('Between', 1, 12)  // string with constructor arguments
     )
-);]]>
-                    </programlisting>
+);
+                    ]]></programlisting>
                 </para>
             </listitem>
         </itemizedlist>
@@ -167,14 +168,14 @@ $validators = array(
 $filters = array(
     '*'     => 'StringTrim',
     'month' => 'Digits'
-);]]>
-        </programlisting>
+);
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.input.running">
+    <section xml:id="zend.filter.input.running"><info><title> 生成过滤器和校验器的处理器 </title></info>
 
-        <title> 生成过滤器和校验器的处理器 </title>
+        
 
         <para>
             在声明过滤器或校验器数组后，把它们用作 Zend_Filter_Input 的构造器的参数。
@@ -182,8 +183,8 @@ $filters = array(
         </para>
 
         <programlisting role="php"><![CDATA[<?php
-$input = new Zend_Filter_Input($filters, $validators);]]>
-        </programlisting>
+$input = new Zend_Filter_Input($filters, $validators);
+        ]]></programlisting>
 
         <para>
             你可以指定输入数据为第三个构造器参数。数据结构是个关联数组。
@@ -194,8 +195,8 @@ $input = new Zend_Filter_Input($filters, $validators);]]>
         <programlisting role="php"><![CDATA[<?php
 $data = $_GET;
 
-$input = new Zend_Filter_Input($filters, $validators, $data);]]>
-        </programlisting>
+$input = new Zend_Filter_Input($filters, $validators, $data);
+        ]]></programlisting>
 
         <para>
             另外，使用 <code>setData()</code> 方法，用和上述相同的格式传递一个键/值对的关联数组。
@@ -203,8 +204,8 @@ $input = new Zend_Filter_Input($filters, $validators, $data);]]>
 
         <programlisting role="php"><![CDATA[<?php
 $input = new Zend_Filter_Input($filters, $validators);
-$input->setData($newData);]]>
-        </programlisting>
+$input->setData($newData);
+        ]]></programlisting>
 
         <para>
             <code>setData()</code> 方法在一个已存在的 Zend_Filter_Input 对象中
@@ -212,20 +213,20 @@ $input->setData($newData);]]>
             运行相同的规则。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.input.results">
+    <section xml:id="zend.filter.input.results"><info><title> 获取校验过的字段和其它报告 </title></info>
 
-        <title> 获取校验过的字段和其它报告 </title>
+        
 
         <para>
             在声明过滤器和校验器与创建输入处理器之后，你可以获取丢失的、未知的和无效字段的报告。
             你也可以在应用过滤器之后获得字段的值。
         </para>
 
-        <sect3 id="zend.filter.input.results.isvalid">
+        <section xml:id="zend.filter.input.results.isvalid"><info><title> 输入值有效的查询 </title></info>
 
-            <title> 输入值有效的查询 </title>
+            
 
             <para>
                 如果所有输入数据通过校验，<code>isValid()</code> 方法返回 <code>true</code>。
@@ -235,8 +236,8 @@ $input->setData($newData);]]>
             <programlisting role="php"><![CDATA[<?php
 if ($input->isValid()) {
   echo "OK\n";
-}]]>
-            </programlisting>
+}
+            ]]></programlisting>
 
             <para>
                 该方法接受一个可选的字符串参数，即一个独立字段。如果指定的字段
@@ -246,14 +247,14 @@ if ($input->isValid()) {
             <programlisting role="php"><![CDATA[<?php
 if ($input->isValid('month')) {
   echo "Field 'month' is OK\n";
-}]]>
-            </programlisting>
+}
+            ]]></programlisting>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.filter.input.results.reports">
+        <section xml:id="zend.filter.input.results.reports"><info><title> 获得无效、丢失或未知的字段 </title></info>
 
-            <title> 获得无效、丢失或未知的字段 </title>
+            
 
             <itemizedlist>
                 <listitem>
@@ -264,7 +265,7 @@ if ($input->isValid('month')) {
                 <listitem>
                     <para>
                         <emphasis role="strong">Missing</emphasis> 是那些不存在于输入数据，但用
-                        metacommand <code>'presence'=>'required'</code>（参见在 metacommands 中 <link linkend="zend.filter.input.metacommands.presence"> 后面的章节 </link>）声明过的字段。
+                        metacommand <code>'presence'=&gt;'required'</code>（参见在 metacommands 中 <link linkend="zend.filter.input.metacommands.presence"> 后面的章节 </link>）声明过的字段。
                     </para>
                 </listitem>
                 <listitem>
@@ -291,8 +292,8 @@ if ($input->hasMissing()) {
 
 if ($input->hasUnknown()) {
   $unknownFields = $input->getUnknown();
-}]]>
-            </programlisting>
+}
+            ]]></programlisting>
 
             <para>
                 <code>getMessages()</code> 方法的结果是一个关联数组，映射规则名到一个和该规则相关的错误消息的数组。
@@ -307,7 +308,7 @@ if ($input->hasUnknown()) {
             <para>
                 The <code>getErrors()</code> 方法返回一个关联数组，映射规则名到错误识别器的数组。
                 错误识别器是规定字符串，用来识别校验错误的原因，消息可以定制。
-                参见 <xref linkend="zend.validate.introduction.using" /> 有更多信息。
+                参见 <xref linkend="zend.validate.introduction.using"/> 有更多信息。
             </para>
 
             <para>
@@ -325,19 +326,19 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
 // alternative method:
 
 $input = new Zend_Filter_Input($filters, $validators, $data);
-$input->setOptions($options);]]>
-            </programlisting>
+$input->setOptions($options);
+            ]]></programlisting>
 
             <para>
                 <code>getUnknown()</code> 方法的结果是一个关联数组，映射字段名到字段值。
                 在这个例子中，字段名（而不是规则名）用作数组键，因为不涉及规则的字段被当作未知字段。
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.filter.input.results.escaping">
+        <section xml:id="zend.filter.input.results.escaping"><info><title> 获得有效字段 </title></info>
 
-            <title> 获得有效字段 </title>
+            
 
             <para>
                 所有不是无效的、丢失的、未知的字段都是有效的（好像废话一样 Jason Qi）。
@@ -347,8 +348,8 @@ $input->setOptions($options);]]>
             <programlisting role="php"><![CDATA[<?php
 $m = $input->month;                 // escaped output from magic accessor
 $m = $input->getEscaped('month');   // escaped output
-$m = $input->getUnescaped('month'); // not escaped]]>
-            </programlisting>
+$m = $input->getUnescaped('month'); // not escaped
+            ]]></programlisting>
 
             <para>
                 缺省地，当读取一个值时，用 Zend_Filter_HtmlEntities 来过滤。
@@ -369,8 +370,8 @@ $m = $input->getUnescaped('month'); // not escaped]]>
 
             <programlisting role="php"><![CDATA[<?php
 $options = array('escapeFilter' => 'StringTrim');
-$input = new Zend_Filter_Input($filters, $validators, $data, $options);]]>
-            </programlisting>
+$input = new Zend_Filter_Input($filters, $validators, $data, $options);
+            ]]></programlisting>
 
             <para>
                 另外，你也可以使用 <code>setDefaultEscapeFilter()</code> 方法：
@@ -378,8 +379,8 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);]]>
 
             <programlisting role="php"><![CDATA[<?php
 $input = new Zend_Filter_Input($filters, $validators, $data);
-$input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());]]>
-            </programlisting>
+$input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
+            ]]></programlisting>
 
             <para>
                 对于任何一种用法，你可以指定转义过滤器作为过滤器类的字符串基础名
@@ -398,22 +399,22 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());]]>
                 并在你的子类里实现新方法来用不同的方法获取数值。
             </para>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.input.metacommands">
+    <section xml:id="zend.filter.input.metacommands"><info><title> 使用 Metacommands 来控制过滤器或校验器规则 </title></info>
 
-        <title> 使用 Metacommands 来控制过滤器或校验器规则 </title>
+        
 
         <para>
             除了声明从字段到过滤器或校验器的映射，你可以在数组声明中指定一些 "metacommands" ，开控制一些 Zend_Filter_Input 的可选的行为。
             Metacommands 在给定的过滤器或校验器数组值里以字符串索引条目的形式出现。
         </para>
 
-        <sect3 id="zend.filter.input.metacommands.fields">
+        <section xml:id="zend.filter.input.metacommands.fields"><info><title>The <code>FIELDS</code> metacommand</title></info>
 
-            <title>The <code>FIELDS</code> metacommand</title>
+            
 
             <para>
                 如果过滤器或校验器的规则名和需要应用规则的字段名不同，可以用 'fields' metacommand 来指定字段名。
@@ -429,8 +430,8 @@ $filters = array(
         'Digits',        // filter name at integer index [0]
         'fields' => 'mo' // field name at string index ['fields']
     )
-);]]>
-            </programlisting>
+);
+            ]]></programlisting>
 
             <para>
                 在上例中，过滤器规则使用 'digits' 过滤器给名为 'mo' 的输入字段。
@@ -456,18 +457,18 @@ $validators = array(
     )
 );
 // Invokes hypothetical class Zend_Validate_StringEquals, passing an array argument
-// containing the values of the two input data fields named 'password1' and 'password2'.]]>
-            </programlisting>
+// containing the values of the two input data fields named 'password1' and 'password2'.
+            ]]></programlisting>
 
             <para>
                 如果这个规则校验失败，规则键（<code>'password'</code>）用于 <code>getInvalid()</code> 的返回值，不是命名在 'fields' metacommand 中的其它字段。
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.filter.input.metacommands.presence">
+        <section xml:id="zend.filter.input.metacommands.presence"><info><title>The <code>PRESENCE</code> metacommand</title></info>
 
-            <title>The <code>PRESENCE</code> metacommand</title>
+            
 
             <para>
                 在校验器数组里的每个条目可能有一个叫做 'presence' 的 metacommand。
@@ -485,18 +486,18 @@ $validators = array(
         'digits',
         'presence' => 'required'
     )
-);]]>
-            </programlisting>
+);
+            ]]></programlisting>
 
             <para>
                 这个 metacommand 的缺省值是 'optional'。
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.filter.input.metacommands.default">
+        <section xml:id="zend.filter.input.metacommands.default"><info><title>The <code>DEFAULT_VALUE</code> metacommand</title></info>
 
-            <title>The <code>DEFAULT_VALUE</code> metacommand</title>
+            
 
             <para>
                 如果字段没有出现在输入数据里，并且你为了规则为 'default' metacommand 指定一个值，
@@ -525,8 +526,8 @@ $validators = array(
 $data = array();
 
 $input = new Zend_Filter_Input(null, $validators, $data);
-echo $input->month; // echoes 1]]>
-            </programlisting>
+echo $input->month; // echoes 1
+            ]]></programlisting>
 
             <para>
                 如果你的规则使用 <code>FIELDS</code> metacommand 来定义多重字段的数组，
@@ -539,11 +540,11 @@ echo $input->month; // echoes 1]]>
                 这个 metacommand 没有缺省值。
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.filter.input.metacommands.allow-empty">
+        <section xml:id="zend.filter.input.metacommands.allow-empty"><info><title>The <code>ALLOW_EMPTY</code> metacommand</title></info>
 
-            <title>The <code>ALLOW_EMPTY</code> metacommand</title>
+            
 
             <para>
                 缺省地，如果一个字段存在于输入数据，那么校验器就应用其上，即使字段值是空的（<code>''</code>）。
@@ -565,8 +566,8 @@ $validators = array(
         'Alnum',
         'allowEmpty' => true
     )
-);]]>
-            </programlisting>
+);
+            ]]></programlisting>
 
             <para>
                 这个 metacommand 的缺省值是 <code>false</code>。
@@ -588,14 +589,14 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
 // alternative method:
 
 $input = new Zend_Filter_Input($filters, $validators, $data);
-$input->setOptions($options);]]>
-            </programlisting>
+$input->setOptions($options);
+            ]]></programlisting>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.filter.input.metacommands.break-chain">
+        <section xml:id="zend.filter.input.metacommands.break-chain"><info><title>The <code>BREAK_CHAIN</code> metacommand</title></info>
 
-            <title>The <code>BREAK_CHAIN</code> metacommand</title>
+            
 
             <para>
                 缺省地，如果一个规则有多于一个校验器，所有校验器应用于输入，并且返回的消息包含所有由输入导致的错误消息。
@@ -620,8 +621,8 @@ $validators = array(
         'breakChainOnFailure' => true
     )
 );
-$input = new Zend_Filter_Input(null, $validators);]]>
-            </programlisting>
+$input = new Zend_Filter_Input(null, $validators);
+            ]]></programlisting>
 
             <para>
                 这个 metacommand 的缺省值是 <code>false</code>。
@@ -645,14 +646,14 @@ $chain->addValidator(new Zend_Validate_GreaterThan(0), true);
 $validators = array(
     'month' => $chain
 );
-$input = new Zend_Filter_Input(null, $validators);]]>
-            </programlisting>
+$input = new Zend_Filter_Input(null, $validators);
+            ]]></programlisting>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.filter.input.metacommands.messages">
+        <section xml:id="zend.filter.input.metacommands.messages"><info><title>The <code>MESSAGES</code> metacommand</title></info>
 
-            <title>The <code>MESSAGES</code> metacommand</title>
+            
 
             <para>
                 你可以使用 metacommand 'messages' 为在规则中的每个校验器指定错误消息。
@@ -674,8 +675,8 @@ $validators = array(
         'digits',
         'messages' => 'A month must consist only of digits'
     )
-);]]>
-            </programlisting>
+);
+            ]]></programlisting>
 
             <para>
                 如果你想给多重校验器设置错误消息，对 'messages' metacommand 的值应当使用一个数组。
@@ -697,8 +698,8 @@ $validators = array(
             1 => 'A month value must be between 1 and 12'
         )
     )
-);]]>
-            </programlisting>
+);
+            ]]></programlisting>
 
             <para>
                 如果你的校验器其中一个有多重错误消息，它们由消息键来识别。
@@ -720,18 +721,18 @@ $validators = array(
             )
         )
     )
-);]]>
-            </programlisting>
+);
+            ]]></programlisting>
 
             <para>
                 你应当参考每个校验器类的文档来获知它是否有多重错误消息、这些消息的键和可用于消息模板的令牌。
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.filter.input.metacommands.global">
+        <section xml:id="zend.filter.input.metacommands.global"><info><title> 对所有的规则使用选项来设置 metacommands </title></info>
 
-            <title> 对所有的规则使用选项来设置 metacommands </title>
+            
 
             <para>
                 'allowEmpty'、 'breakChainOnFailure' 和 'presence' metacommands
@@ -752,20 +753,20 @@ $validators = array(
     )
 );
 
-$input = new Zend_Filter_Input($filters, $validators, $data, $options);]]>
-            </programlisting>
+$input = new Zend_Filter_Input($filters, $validators, $data, $options);
+            ]]></programlisting>
 
             <para>
                 'fields'、'messages' 和 'default' metacommands 不能用这个技术来设置。
             </para>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.input.namespaces">
+    <section xml:id="zend.filter.input.namespaces"><info><title> 添加过滤器类命名空间 </title></info>
 
-        <title> 添加过滤器类命名空间 </title>
+        
 
         <para>
             缺省地，当声明一个过滤器或校验器为一个字符串，Zend_Filter_Input 就搜索在 Zend_Filter 或 Zend_Validate 命名空间下的相应的类。
@@ -779,8 +780,8 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);]]>
 
         <programlisting role="php"><![CDATA[<?php
 $options = array('inputNamespace' => 'My_Namespace');
-$input = new Zend_Filter_Input($filters, $validators, $data, $options);]]>
-        </programlisting>
+$input = new Zend_Filter_Input($filters, $validators, $data, $options);
+        ]]></programlisting>
 
         <para>
             另外，你可以使用 addNamespace() 方法：
@@ -793,8 +794,8 @@ $input->addNamespace('Other_Namespace');
 // 1. My_Namespace
 // 2. Other_Namespace
 // 3. Zend_Filter
-// 4. Zend_Validate]]>
-        </programlisting>
+// 4. Zend_Validate
+        ]]></programlisting>
 
         <para>
             你不能删除 Zend_Filter 和 Zend_Validate 的命名空间，只可以添加命名空间，系统首先搜索用户定义的命名空间，然后搜索 Zend 命名空间。
@@ -809,9 +810,6 @@ $input->addNamespace('Other_Namespace');
            </para>
        </note>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

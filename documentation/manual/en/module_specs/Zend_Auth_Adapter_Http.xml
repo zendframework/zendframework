@@ -1,17 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.auth.adapter.http">
-    <title>HTTP Authentication Adapter</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.http"><info><title>HTTP Authentication Adapter</title></info>
+    
 
-    <sect2 id="zend.auth.adapter.http.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.auth.adapter.http.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_Auth_Adapter_Http</classname> provides a mostly-compliant
-            implementation of <ulink url="http://tools.ietf.org/html/rfc2617">RFC-2617</ulink>,
-            <ulink url="http://en.wikipedia.org/wiki/Basic_authentication_scheme">Basic</ulink>
-            and <ulink
-                url="http://en.wikipedia.org/wiki/Digest_access_authentication">Digest</ulink>
+            implementation of <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://tools.ietf.org/html/rfc2617">RFC-2617</link>,
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Basic_authentication_scheme">Basic</link>
+            and <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Digest_access_authentication">Digest</link>
             <acronym>HTTP</acronym> Authentication. Digest authentication is a method of
             <acronym>HTTP</acronym> authentication that improves upon Basic authentication by
             providing a way to authenticate without having to transmit the password in clear text
@@ -75,10 +73,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.design_overview">
-        <title>Design Overview</title>
+    <section xml:id="zend.auth.adapter.design_overview"><info><title>Design Overview</title></info>
+        
 
         <para>
             This adapter consists of two sub-components, the <acronym>HTTP</acronym> authentication
@@ -89,10 +87,10 @@
             are then compared to the values submitted by the client to determine whether
             authentication is successful.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.configuration_options">
-        <title>Configuration Options</title>
+    <section xml:id="zend.auth.adapter.configuration_options"><info><title>Configuration Options</title></info>
+        
 
         <para>
             The <classname>Zend_Auth_Adapter_Http</classname> class requires a configuration array
@@ -100,8 +98,8 @@
             are required:
         </para>
 
-        <table id="zend.auth.adapter.configuration_options.table">
-            <title>Configuration Options</title>
+        <table xml:id="zend.auth.adapter.configuration_options.table"><info><title>Configuration Options</title></info>
+            
 
             <tgroup cols="3">
                 <thead>
@@ -187,10 +185,10 @@
                 implemented.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.http.resolvers">
-        <title>Resolvers</title>
+    <section xml:id="zend.auth.adapter.http.resolvers"><info><title>Resolvers</title></info>
+        
 
         <para>
             The resolver's job is to take a username and realm, and return some kind of credential
@@ -207,8 +205,8 @@
             simply by implementing the resolver interface.
         </para>
 
-        <sect3 id="zend.auth.adapter.http.resolvers.file">
-            <title>File Resolver</title>
+        <section xml:id="zend.auth.adapter.http.resolvers.file"><info><title>File Resolver</title></info>
+            
 
             <para>
                 The file resolver is a very simple class. It has a single property specifying a
@@ -253,11 +251,11 @@ $resolver->setFile($path);
             <para>
                 If the given path is empty or not readable, an exception is thrown.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.auth.adapter.http.basic_usage">
-        <title>Basic Usage</title>
+    <section xml:id="zend.auth.adapter.http.basic_usage"><info><title>Basic Usage</title></info>
+        
 
         <para>
             First, set up an array with the required configuration values:
@@ -321,8 +319,5 @@ if (!$result->isValid()) {
     // Bad userame/password, or canceled password prompt
 }
 ]]></programlisting>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

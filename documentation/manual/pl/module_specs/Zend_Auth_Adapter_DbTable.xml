@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.auth.adapter.dbtable">
-    <title>Uwierzytelnianie w oparciu o tabelę bazy danych</title>
-    <sect2 id="zend.auth.adapter.dbtable.introduction">
-        <title>Wprowadzenie</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.dbtable"><info><title>Uwierzytelnianie w oparciu o tabelę bazy danych</title></info>
+    
+    <section xml:id="zend.auth.adapter.dbtable.introduction"><info><title>Wprowadzenie</title></info>
+        
         <para>
             <classname>Zend_Auth_Adapter_DbTable</classname> zapewnia możliwość
             przeprowadzenia uwierzytelniania w oparciu o dane przechowywane w
@@ -64,8 +63,8 @@
             </listitem>
         </itemizedlist>
 
-        <example id="zend.auth.adapter.dbtable.introduction.example.basic_usage">
-            <title>Podstawowe użycie</title>
+        <example xml:id="zend.auth.adapter.dbtable.introduction.example.basic_usage"><info><title>Podstawowe użycie</title></info>
+            
             <para>
                 Jak wyjaśniono we wprowadzeniu, konstruktor klasy
                 <classname>Zend_Auth_Adapter_DbTable</classname> wymaga przekazania mu
@@ -185,9 +184,9 @@ Array
             </para>
 
         </example>
-    </sect2>
-    <sect2 id="zend.auth.adapter.dbtable.advanced.storing_result_row">
-        <title>Zaawansowane użycie: Stałe przechowywanie obiektu DbTable Result</title>
+    </section>
+    <section xml:id="zend.auth.adapter.dbtable.advanced.storing_result_row"><info><title>Zaawansowane użycie: Stałe przechowywanie obiektu DbTable Result</title></info>
+        
         <para>
             Domyślnie <classname>Zend_Auth_Adapter_DbTable</classname> po udanym
             uwierzytelnieniu zwraca do obiektu uwierzytelniającego spowrotem
@@ -228,9 +227,9 @@ if ($result->isValid()) {
 
 }
 ]]></programlisting>
-    </sect2>
-    <sect2 id="zend.auth.adapter.dbtable.advanced.advanced_usage">
-        <title>Przykład zaawansowanego użycia</title>
+    </section>
+    <section xml:id="zend.auth.adapter.dbtable.advanced.advanced_usage"><info><title>Przykład zaawansowanego użycia</title></info>
+        
         <para>
             O ile głównym przeznaczeniem komponentu <classname>Zend_Auth</classname> 
             (i odpowiednio <classname>Zend_Auth_Adapter_DbTable</classname>) jest
@@ -362,5 +361,5 @@ $select->where('active = "TRUE"');
 // uwierytelniamy, z warunkiem users.active = TRUE
 $adapter->authenticate();
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

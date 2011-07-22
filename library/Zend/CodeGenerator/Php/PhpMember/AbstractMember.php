@@ -80,7 +80,7 @@ abstract class AbstractMember extends Php\AbstractPhp
      * setDocblock() Set the docblock
      *
      * @param \Zend\CodeGenerator\PhpDocblock|array|string $docblock
-     * @return \Zend\CodeGenerator\Php\PhpFile
+     * @return \Zend\CodeGenerator\Php\PhpMember\AbstractMember
      */
     public function setDocblock($docblock)
     {

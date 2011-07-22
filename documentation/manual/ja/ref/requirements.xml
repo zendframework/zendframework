@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20876 -->
-<appendix id="requirements" xmlns:xi="http://www.w3.org/2001/XInclude">
+<?xml version="1.0" encoding="utf-8"?>
 
-    <title>Zend Framework のシステム要件</title>
 
-    <sect1 id="requirements.introduction">
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="requirements"><info><title>Zend Framework のシステム要件</title></info>
 
-        <title>導入</title>
+    
+
+    <section xml:id="requirements.introduction"><info><title>導入</title></info>
+
+        
 
         <para>
             Zend Framework を使用するには、<acronym>PHP</acronym> 5 のインタプリタおよび
@@ -24,9 +24,9 @@
             をしたりするためですが、これがアプリケーションの機能に直接影響することはありません。
         </para>
 
-        <sect2 id="requirements.version">
+        <section xml:id="requirements.version"><info><title>PHP のバージョン</title></info>
 
-            <title>PHP のバージョン</title>
+            
 
             <para>
                 Zend では最新版の <acronym>PHP</acronym> を使うことを推奨します。
@@ -39,11 +39,11 @@
                 これらを実行するには PHPUnit 3.3.0 以降が必要です。
             </para>
 
-        </sect2>
+        </section>
 
-        <sect2 id="requirements.extensions">
+        <section xml:id="requirements.extensions"><info><title>PHP の拡張モジュール</title></info>
 
-            <title>PHP の拡張モジュール</title>
+            
 
             <para>
                 以下の表は、<acronym>PHP</acronym> に含まれる拡張モジュールと
@@ -64,12 +64,12 @@
                 使用できない場合は、同等の機能をコンポーネント自身で提供します。
             </para>
 
-            <xi:include href="../../en/ref/requirements-php-extensions-table.xml" />
-        </sect2>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="../../en/ref/requirements-php-extensions-table.xml"/>
+        </section>
 
-        <sect2 id="requirements.zendcomponents">
+        <section xml:id="requirements.zendcomponents"><info><title>Zend Framework のコンポーネント</title></info>
 
-            <title>Zend Framework のコンポーネント</title>
+            
 
             <para>
                 以下の表は、Zend Framework の各コンポーネントについて、
@@ -90,12 +90,12 @@
                 使用できない場合は、同等の機能をコンポーネント自身で提供します。
             </para>
 
-            <xi:include href="../../en/ref/requirements-zendcomponents-table.xml" />
-        </sect2>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="../../en/ref/requirements-zendcomponents-table.xml"/>
+        </section>
 
-        <sect2 id="requirements.dependencies">
+        <section xml:id="requirements.dependencies"><info><title>Zend Framework の依存性</title></info>
 
-            <title>Zend Framework の依存性</title>
+            
 
             <para>
                 以下の表は、Zend Framework の各コンポーネントについて、
@@ -122,12 +122,9 @@
                 </para>
             </note>
 
-            <xi:include href="../../en/ref/requirements-dependencies-table.xml" />
-        </sect2>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="../../en/ref/requirements-dependencies-table.xml"/>
+        </section>
 
-    </sect1>
+    </section>
 
 </appendix>
-<!--
-vim:se ts=4 sw=4 et:
--->

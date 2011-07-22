@@ -1,5 +1,6 @@
-<sect3 id="zend.view.helpers.initial.doctype">
-    <title>תוסף עזרה ה Doctype</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.doctype"><info><title>תוסף עזרה ה Doctype</title></info>
+    
 
     <para>
         קוד HTML ו XHTML תקני צריכים להכיל הגדרה של <code>DOCTYPE</code>.
@@ -31,8 +32,8 @@
         תוסף העזרה <code>Doctype</code> הוא יישום בסיסי של <link linkend="zend.view.helpers.initial.placeholder">Placeholder</link>.
     </para>
 
-    <example id="zend.view.helpers.initial.doctype.basicusage">
-        <title>שימוש בסיסי</title>
+    <example xml:id="zend.view.helpers.initial.doctype.basicusage"><info><title>שימוש בסיסי</title></info>
+        
 
         <para>
            ניתן להגדיר את אלמנט זה בכל שלב, אך רצוי לעשות זאת בתחילת המערכת, בקובץ ה bootstrap
@@ -41,8 +42,8 @@
         <programlisting role="php"><![CDATA[
 $doctypeHelper = new Zend_View_Helper_Doctype();
 $doctypeHelper->doctype('XHTML1_STRICT');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             ולאחר מכן להציג אותו בראש העמוד שלך:
@@ -50,13 +51,13 @@ $doctypeHelper->doctype('XHTML1_STRICT');
 
         <programlisting role="php"><![CDATA[
 <?php echo $this->doctype() ?>
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
     </example>
 
-    <example id="zend.view.helpers.initial.doctype.retrieving">
-        <title>קבלת הערך</title>
+    <example xml:id="zend.view.helpers.initial.doctype.retrieving"><info><title>קבלת הערך</title></info>
+        
 
         <para>
             אם אתה צריך לדעת מהו הערך שהוגדר תוכל לעשות זאת על ידי קריאה למתודה <code>getDoctype()</code> על האובייקט, שמוחזר על ידי שימוש בתוסף.
@@ -64,8 +65,8 @@ $doctypeHelper->doctype('XHTML1_STRICT');
 
         <programlisting role="php"><![CDATA[
 $doctype = $view->doctype()->getDoctype();
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             בדרך כלל תרצה לדעת אם הערך הוא תקין מבחינת XHTML או לא; בישביל זה שימוש ב <code>isXhtml()</code> יספיק:
@@ -75,10 +76,7 @@ $doctype = $view->doctype()->getDoctype();
 if ($view->doctype()->isXhtml()) {
     // do something differently
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

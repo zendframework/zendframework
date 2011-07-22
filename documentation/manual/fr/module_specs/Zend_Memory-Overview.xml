@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.memory.overview">
-    <title>Présentation</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.memory.overview"><info><title>Présentation</title></info>
+    
 
-    <sect2 id="zend.memory.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.memory.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             Le composant <classname>Zend_Memory</classname> est destiné à gérer des données
@@ -30,8 +28,8 @@
             Zend_Cache</link> comme fournisseurs de stockage.
         </para>
 
-        <example id="zend.memory.introduction.example-1">
-            <title>Utiliser le composant Zend_Memory</title>
+        <example xml:id="zend.memory.introduction.example-1"><info><title>Utiliser le composant Zend_Memory</title></info>
+            
 
             <para>
                 <methodname>Zend_Memory::factory()</methodname> instancie l'objet de management
@@ -63,10 +61,10 @@ $loadedFiles[$index2]->value = $newValue;
 $loadedFiles[$index3]->value[$charIndex] = '_';
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.memory.theory-of-operation">
-        <title>Aspect théorique</title>
+    <section xml:id="zend.memory.theory-of-operation"><info><title>Aspect théorique</title></info>
+        
 
         <para>
             <classname>Zend_Memory</classname> travaille avec les concepts suivants :
@@ -89,18 +87,18 @@ $loadedFiles[$index3]->value[$charIndex] = '_';
                 </itemizedlist>
             </para>
 
-        <sect3 id="zend.memory.theory-of-operation.manager">
-            <title>Manager de mémoire</title>
+        <section xml:id="zend.memory.theory-of-operation.manager"><info><title>Manager de mémoire</title></info>
+            
 
             <para>
                 Le manager de mémoire produit des objets de mémoire (verrouillé ou mobile) sur
                 demande de l'utilisateur et les retourne encapsulé dans un objet conteneur de
                 mémoire.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.memory.theory-of-operation.container">
-            <title>Conteneur de mémoire</title>
+        <section xml:id="zend.memory.theory-of-operation.container"><info><title>Conteneur de mémoire</title></info>
+            
 
             <para>
                 Le conteneur de mémoire a un attribut <code>value</code> virtuel ou réel de
@@ -131,19 +129,19 @@ $memObject->value = substr($memObject->value, $start, $length);
                     d'accéder directement à la valeur de la propriété.
                 </para>
             </note>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.memory.theory-of-operation.locked">
-            <title>Objet de mémoire verrouillé</title>
+        <section xml:id="zend.memory.theory-of-operation.locked"><info><title>Objet de mémoire verrouillé</title></info>
+            
 
             <para>
                 Les objets de mémoire verrouillés sont toujours stockés dans la mémoire. Les
                 données stockées dans la mémoire verrouillée ne sont jamais mis en cache.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.memory.theory-of-operation.movable">
-            <title>Objet de mémoire mobile</title>
+        <section xml:id="zend.memory.theory-of-operation.movable"><info><title>Objet de mémoire mobile</title></info>
+            
 
             <para>
                 Les objets de mémoire mobiles sont mis en cache et chargés de manière
@@ -153,10 +151,9 @@ $memObject->value = substr($memObject->value, $start, $length);
 
             <para>
                 Le manager de mémoire ne met pas en cache des objets ayant une taille plus
-                petite que le minimum spécifié dans un soucis de performances. Voir <xref
-                linkend="zend.memory.memory-manager.settings.min-size" /> pour plus de
+                petite que le minimum spécifié dans un soucis de performances. Voir <xref linkend="zend.memory.memory-manager.settings.min-size"/> pour plus de
                 détails.
             </para>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

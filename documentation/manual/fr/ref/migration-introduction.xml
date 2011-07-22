@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
-<!-- Reviewed: no -->
-<sect1 id="migration.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         Quand vous travaillez depuis longtemps avec Zend Framework, vous pouvez souhaiter
@@ -29,4 +29,4 @@
         avoir un effet sur votre code et des exemples sur les changements nécessaires que vous
         aurez à faire lors de la mise à jour.
     </para>
-</sect1>
+</section>

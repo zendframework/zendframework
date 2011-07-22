@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20872 -->
-<sect1 id="zend.paginator.configuration">
-    <title>設定</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.paginator.configuration"><info><title>設定</title></info>
+    
 
     <para>
         <classname>Zend_Paginator</classname> には設定用のメソッドがいくつか用意されています。
     </para>
 
-    <table id="zend.paginator.configuration.table">
-        <title>Zend_Paginator の設定用メソッド</title>
+    <table xml:id="zend.paginator.configuration.table"><info><title>Zend_Paginator の設定用メソッド</title></info>
+        
 
         <tgroup cols="2">
             <thead>
@@ -51,7 +51,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

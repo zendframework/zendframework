@@ -63,7 +63,7 @@ class Repository implements RegistryEnabled, \IteratorAggregate, \Countable
     protected $_providerSignatures = array();
 
     /**
-     * @var array Array of Zend_Tool_Framework_Provider_Inteface
+     * @var array Array of Zend\Tool\Framework\Provider\Inteface
      */
     protected $_providers = array();
 
@@ -161,7 +161,11 @@ class Repository implements RegistryEnabled, \IteratorAggregate, \Countable
     {
 
         // process all providers in the unprocessedProviders array
-        foreach ($this->_unprocessedProviders as $providerName => $provider) {
+        //foreach ($this->_unprocessedProviders as $providerName => $provider) {
+        reset($this->_unprocessedProviders);
+        while ($this->_unprocessedProviders) {
+            $providerName = key($this->_unprocessedProviders);
+            $provider = array_shift($this->_unprocessedProviders);
 
             // create a signature for the provided provider
             $providerSignature = new Signature($provider);
@@ -179,8 +183,9 @@ class Repository implements RegistryEnabled, \IteratorAggregate, \Countable
             $this->_providerSignatures[$providerName] = $providerSignature;
             $this->_providers[$providerName]          = $providerSignature->getProvider();
 
-            // remove from unprocessed array
-            unset($this->_unprocessedProviders[$providerName]);
+            if ($provider instanceof Zend_Tool_Framework_Provider_Initializable) {
+                $provider->initialize();
+            }
         }
 
     }
@@ -256,6 +261,10 @@ class Repository implements RegistryEnabled, \IteratorAggregate, \Countable
     protected function _parseName(Provider $provider)
     {
         $className = get_class($provider);
+        $providerName = $className;
+        if (strpos($providerName, '_') !== false) {
+            $providerName = substr($providerName, strrpos($providerName, '_')+1);
+        }
         $providerName = substr($className, strrpos($className, '\\')+1);
         if (substr($providerName, -8) == 'Provider') {
             $providerName = substr($providerName, 0, strlen($providerName)-8);

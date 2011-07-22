@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21586 -->
-<sect1 id="zend.exception.previous">
-    <title>Previous Exceptions (前の例外)</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.previous"><info><title>Previous Exceptions (前の例外)</title></info>
+    
 
     <para>
         Zend Framework 1.10 から、 <classname>Zend_Exception</classname> は <acronym>PHP</acronym> 5.3 がサポートする
@@ -16,8 +14,8 @@
         Previous exceptions は例外のコンストラクタへの第 3 引数として示されます。
     </para>
 
-    <example id="zend.exception.previous.example">
-        <title>Previous exceptions (前の例外)</title>
+    <example xml:id="zend.exception.previous.example"><info><title>Previous exceptions (前の例外)</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 try {
@@ -39,7 +37,4 @@ try {
 }
 ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

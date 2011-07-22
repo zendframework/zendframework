@@ -1,10 +1,11 @@
-<sect1 id="zend.http.response">
-    <title>Zend_Http_Response</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.response"><info><title>Zend_Http_Response</title></info>
+    
 
-    <sect2 id="zend.http.response.introduction">
-        <title>简介</title>
+    <section xml:id="zend.http.response.introduction"><info><title>简介</title></info>
+        
         <para>
-            对于由<xref linkend="zend.http.client" />返回的应答(Response)信息，<code>Zend_Http_Response</code>
+            对于由<xref linkend="zend.http.client"/>返回的应答(Response)信息，<code>Zend_Http_Response</code>
             可以提供简单的访问方式。 它提供一组友好的方法来获得从请求返回的应答信息:
             <itemizedlist>
                 <listitem>
@@ -39,8 +40,8 @@
                 </listitem>
             </itemizedlist>
         </para>
-        <example>
-            <title>处理HTTP应答</title>
+        <example><info><title>处理HTTP应答</title></info>
+            
             <programlisting role="php"><![CDATA[<?php
 require_once 'Zend/Http/Client.php';
 try {
@@ -62,8 +63,5 @@ try {
 }
 ?>]]></programlisting>
         </example>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

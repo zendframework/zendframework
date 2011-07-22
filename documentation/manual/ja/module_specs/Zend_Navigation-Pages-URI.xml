@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20827 -->
-<sect2 id="zend.navigation.pages.uri">
-    <title>Zend_Navigation_Page_Uri</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.uri"><info><title>Zend_Navigation_Page_Uri</title></info>
+    
 
     <para>
         <classname>Zend_Navigation_Page_Uri</classname>タイプの画面は、
@@ -11,23 +11,23 @@
         <acronym>URI</acronym>画面は単純です;
         画面の共通オプションに加えて、<acronym>URI</acronym>画面にはたった一つのオプション、
         <code>uri</code>があります。
-        <code>$page->getHref()</code>を呼び出すときに<code>uri</code>が戻されます。
+        <code>$page-&gt;getHref()</code>を呼び出すときに<code>uri</code>が戻されます。
         それは<type>String</type>かまたは<constant>NULL</constant>です。
     </para>
 
     <note>
         <para>
             <classname>Zend_Navigation_Page_Uri</classname>は
-            <code>$page->isActive()</code>を呼び出したときに活動状態かどうか決定しようとはしません。
+            <code>$page-&gt;isActive()</code>を呼び出したときに活動状態かどうか決定しようとはしません。
             ただ単に現在設定されているものを返すだけで、
             <acronym>URI</acronym>画面を活動状態にするには、
-            手動で<code>$page->setActive()</code>を呼び出すか、
+            手動で<code>$page-&gt;setActive()</code>を呼び出すか、
             または生成時に、画面オプションに<code>active</code>を指定しなければいけません。
         </para>
     </note>
 
-    <table id="zend.navigation.pages.uri.options">
-        <title>URI画面のオプション</title>
+    <table xml:id="zend.navigation.pages.uri.options"><info><title>URI画面のオプション</title></info>
+        
 
         <tgroup cols="4">
             <thead>
@@ -52,4 +52,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect2>
+</section>

@@ -1,15 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20818 -->
-<sect1 id="zend.service.amazon.ec2.keypairs">
-    <title>Zend_Service_Amazon_Ec2: Keypairs</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.keypairs"><info><title>Zend_Service_Amazon_Ec2: Keypairs</title></info>
+    
 
     <para>
         Keypairsはインスタンスにアクセスするために使われます。
     </para>
 
-    <example id="zend.service.amazon.ec2.keypairs.create">
-        <title>Amazon Keypairの新規作成</title>
+    <example xml:id="zend.service.amazon.ec2.keypairs.create"><info><title>Amazon Keypairの新規作成</title></info>
+        
 
         <para>
             <code>create</code>は、
@@ -27,8 +25,8 @@ $return = $ec2_kp->create('my-new-key');
 ]]></programlisting>
     </example>
 
-    <example id="zend.service.amazon.ec2.keypairs.delete">
-        <title>Amazon Keypairの削除</title>
+    <example xml:id="zend.service.amazon.ec2.keypairs.delete"><info><title>Amazon Keypairの削除</title></info>
+        
 
         <para>
             <code>delete</code>はキー・ペアを削除します。
@@ -47,8 +45,8 @@ $return = $ec2_kp->delete('my-new-key');
 ]]></programlisting>
     </example>
 
-    <example id="zend.service.amazon.ec2.describe">
-        <title>Amazon Keypairの記述</title>
+    <example xml:id="zend.service.amazon.ec2.describe"><info><title>Amazon Keypairの記述</title></info>
+        
 
         <para>
             <code>describe</code>は、利用できるキー・ペアに関する情報を返します。
@@ -65,4 +63,4 @@ $ec2_kp = new Zend_Service_Amazon_Ec2_Keypair('aws_key','aws_secret_key');
 $return = $ec2_kp->describe('my-new-key');
 ]]></programlisting>
     </example>
-</sect1>
+</section>

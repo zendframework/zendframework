@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.lucene.intro">
-    <title>Zend_Search_Lucene Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.intro"><info><title>Zend_Search_Lucene Introduction</title></info>
+    
 
     <para>
         The <classname>Zend_Search_Lucene</classname> component is intended to provide a
@@ -14,8 +15,7 @@
 
     <para>
         <classname>Zend_Search_Lucene</classname> is a pure <acronym>PHP</acronym> port of the
-        popular open source full-text search engine known as Apache Lucene. See <ulink
-            url="http://lucene.apache.org">http://lucene.apache.org/</ulink> for the details.
+        popular open source full-text search engine known as Apache Lucene. See <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://lucene.apache.org">http://lucene.apache.org/</link> for the details.
     </para>
 
     <para>
@@ -45,8 +45,8 @@
         own analyzer if you need to change this behavior.
     </para>
 
-    <note>
-        <title>Using analyzers during indexing and searching</title>
+    <note><info><title>Using analyzers during indexing and searching</title></info>
+        
 
         <para>
             Important note! Search queries are also tokenized using the "current analyzer", so the
@@ -99,4 +99,4 @@
         indexed for one document and skipped from indexing for another. The same applies for
         storing, tokenizing, or treating field value as a binary string.
     </para>
-</sect1>
+</section>

@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.pdf.info">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.info"><info><title>Document Info and Metadata</title></info>
     <!-- @todo review and revise upon completion of refactoring -->
-    <title>Document Info and Metadata</title>
+    
 
     <para>
         A <acronym>PDF</acronym> document may include general information such as the document's
@@ -198,8 +197,7 @@ $pdf->save($pdfPath);
 
     <para>
         Since <acronym>PDF</acronym> v 1.6 metadata can be stored in the special
-        <acronym>XML</acronym> document attached to the <acronym>PDF</acronym> (XMP - <ulink
-            url="http://www.adobe.com/products/xmp/">Extensible Metadata Platform</ulink>).
+        <acronym>XML</acronym> document attached to the <acronym>PDF</acronym> (XMP - <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.adobe.com/products/xmp/">Extensible Metadata Platform</link>).
     </para>
 
     <para>
@@ -233,7 +231,4 @@ $pdf->save($pdfPath);
         Common document properties are duplicated in the Info structure and Metadata document (if
         presented). It's user application responsibility now to keep them synchronized.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

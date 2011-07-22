@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.cache.introduction">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.introduction"><info><title>Einführung</title></info>
+    
 
     <para>
         <classname>Zend_Cache</classname> bietet einen generellen Weg für das Cachen von Daten.
@@ -24,8 +22,8 @@
         <emphasis>File</emphasis>, <emphasis>Function</emphasis> und <emphasis>Class</emphasis>.
     </para>
 
-    <example id="zend.cache.introduction.example-1">
-        <title>Ein Frontend mit Zend_Cache::factory() erzeugen</title>
+    <example xml:id="zend.cache.introduction.example-1"><info><title>Ein Frontend mit Zend_Cache::factory() erzeugen</title></info>
+        
 
         <para>
             <methodname>Zend_Cache::factory()</methodname> instanziiert korrekte Objekte und fügt
@@ -51,8 +49,8 @@ $cache = Zend_Cache::factory('Core',
 ]]></programlisting>
     </example>
 
-    <note>
-        <title>Frontends und Backends bestehend aus mehrfachen Wörtern</title>
+    <note><info><title>Frontends und Backends bestehend aus mehrfachen Wörtern</title></info>
+        
 
         <para>
             Bei einige Frontends und Backends werden mehrere Wörter verwendet wie z.B.
@@ -62,8 +60,8 @@ $cache = Zend_Cache::factory('Core',
         </para>
     </note>
 
-    <example id="zend.cache.introduction.example-2">
-        <title>Das Ergebnis einer Datenbankabfrage cachen</title>
+    <example xml:id="zend.cache.introduction.example-2"><info><title>Das Ergebnis einer Datenbankabfrage cachen</title></info>
+        
 
         <para>
             Jetzt, da wir ein Frontend haben, kann jeder Typ von Daten gecached werden
@@ -98,8 +96,8 @@ print_r($result);
 ]]></programlisting>
     </example>
 
-    <example id="zend.cache.introduction.example-3">
-        <title>Cache Ausgabe mit dem Zend_Cache Frontend</title>
+    <example xml:id="zend.cache.introduction.example-3"><info><title>Cache Ausgabe mit dem Zend_Cache Frontend</title></info>
+        
 
         <para>
             Abschnitte, in denen die Ausgabe gecached werden soll, werden 'markiert', durch
@@ -164,4 +162,4 @@ echo 'Das wird nie gecached ('.time().').';
             werden.
         </para>
     </note>
-</sect1>
+</section>

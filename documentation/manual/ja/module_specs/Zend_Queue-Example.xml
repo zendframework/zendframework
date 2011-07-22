@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 17660 -->
-<sect1 id="zend.queue.example">
-    <title>使用例</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.example"><info><title>使用例</title></info>
+    
 
     <para>
         下記の<classname>Zend_Queue</classname>の例で
@@ -47,4 +45,4 @@ $queue->send('My Test Message');
 // 作成した待ち行列と、そのすべてのメッセージを削除
 $queue->deleteQueue('queue2');
 ]]></programlisting>
-</sect1>
+</section>

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 17592 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.router.routes.hostname">
-    <title>Zend_Controller_Router_Route_Hostname</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.router.routes.hostname"><info><title>Zend_Controller_Router_Route_Hostname</title></info>
+    
 
     <para>
         <classname>Zend_Controller_Router_Route_Hostname</classname> est la route par nom
@@ -14,7 +12,7 @@
         Utilisons l'exemple d'une route standard et regardons ce que cela donnerais en
         utilisant le nom d'hôte. Au lieu d'appeler l'utilisateur par le chemin, nous voulons être
         capable d'appeler <code>http://toto.users.example.com</code> pour voir les informations
-        concernant l'utilisateur "toto"&#160;
+        concernant l'utilisateur "toto" 
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -37,8 +35,8 @@ $router->addRoute('user', $hostnameRoute->chain($plainPathRoute);
         qui correspondra à un nom d'hôte. Les définitions de route consistent en des parties
         statiques et des parties dynamiques séparées par le caractère point ("<code>.</code>"). Les
         parties dynamiques, appelées variables, sont marquées en précédant le nom de variable par
-        le caractère deux-points ("<code>:</code>")&#160;: <code>:username</code>. Les parties
-        statiques sont de simples textes&#160;: <code>user</code>.
+        le caractère deux-points ("<code>:</code>") : <code>:username</code>. Les parties
+        statiques sont de simples textes : <code>user</code>.
     </para>
 
     <para>
@@ -51,4 +49,4 @@ $router->addRoute('user', $hostnameRoute->chain($plainPathRoute);
         (<classname>Zend_Controller_Router_Route_Chain</classname>) est retournée, qui peut ainsi
         être fournie au routeur.
     </para>
-</sect3>
+</section>

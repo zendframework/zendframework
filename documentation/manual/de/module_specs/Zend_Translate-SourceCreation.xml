@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22767 -->
-<!-- Reviewed: 22767 -->
-<sect1 id="zend.translate.sourcecreation">
-    <title>Erstellen von Quelldateien</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.sourcecreation"><info><title>Erstellen von Quelldateien</title></info>
+    
 
     <para>
         Anbei ist eine Beschreibung der unterschiedlichen Quellformate, welche mit
@@ -18,8 +16,8 @@
         </para>
     </note>
 
-    <sect2 id="zend.translate.sourcecreation.array">
-        <title>Erstellung von Array-Quelldateien</title>
+    <section xml:id="zend.translate.sourcecreation.array"><info><title>Erstellung von Array-Quelldateien</title></info>
+        
 
         <para>
             Array-Quelldateien sind reine Arrays. Sie müssen aber manuell definiert werden, da
@@ -80,17 +78,17 @@ $translate = new Zend_Translate(
                 jegliche Ausgabe innerhalb dieser Dateien wird ignoriert und unterdrückt.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.translate.sourcecreation.gettext">
-        <title>Erstellung von Gettext Quellen</title>
+    <section xml:id="zend.translate.sourcecreation.gettext"><info><title>Erstellung von Gettext Quellen</title></info>
+        
 
         <para>
             Gettext-Quellen werden von der GNU Gettext-Bibliothek erstellt. Es gibt einige
             kostenlose Tools, welche den Code parsen können und hierbei die gewünschten Gettext
             Quellen erstellen. Diese haben die Endung <emphasis>*.mo</emphasis> und
             sind binäre Dateien. Ein Open Source Tool für die Erstellung der Quellen ist
-            <ulink url="http://sourceforge.net/projects/poedit/">poEdit</ulink>. Dieses Tool
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://sourceforge.net/projects/poedit/">poEdit</link>. Dieses Tool
             unterstützt auch beim Übersetzungsprozess selbst.
         </para>
 
@@ -157,10 +155,10 @@ $translate = new Zend_Translate(
 );
 print_r($translate->getAdapterInfo());
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.translate.sourcecreation.tmx">
-        <title>Erstellung von TMX Quellen</title>
+    <section xml:id="zend.translate.sourcecreation.tmx"><info><title>Erstellung von TMX Quellen</title></info>
+        
 
         <para>
             TMX-Quellen sind der neue Industriestandard. Sie haben den Vorteil, dass sie
@@ -170,8 +168,8 @@ print_r($translate->getAdapterInfo());
             Erstellung von TMX Quellen nicht frei erhältlich.
         </para>
 
-        <example id="zend.translate.sourcecreation.tmx.example">
-            <title>Beispiel einer TMX Datei</title>
+        <example xml:id="zend.translate.sourcecreation.tmx.example"><info><title>Beispiel einer TMX Datei</title></info>
+            
 
             <programlisting language="xml"><![CDATA[
 <?xml version="1.0" ?>
@@ -219,8 +217,8 @@ $translate = new Zend_Translate(
             Option fügt alle Sprachen hinzu.
         </para>
 
-        <note>
-            <title>Option useId</title>
+        <note><info><title>Option useId</title></info>
+            
 
             <para>
                 Wenn man die Option <emphasis>useId</emphasis> auf <constant>FALSE</constant> setzt,
@@ -241,18 +239,18 @@ $translate = new Zend_Translate(
                 Eintrag sein muss, welcher gesetzt wird, wie im obigen Beispiel zu sehen ist.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.translate.sourcecreation.csv">
-        <title>Erstellung von CSV-Quellen</title>
+    <section xml:id="zend.translate.sourcecreation.csv"><info><title>Erstellung von CSV-Quellen</title></info>
+        
 
         <para>
             CSV-Quellen sind sehr klein und von Menschen lesbar. Wenn ein Kunde selbst übersetzen
             will, ist die Verwendung des CSV-Adapters wahrscheinlich die beste Wahl.
         </para>
 
-        <example id="zend.translate.sourcecreation.csv.example">
-            <title>Beispiel CSV Datei</title>
+        <example xml:id="zend.translate.sourcecreation.csv.example"><info><title>Beispiel CSV Datei</title></info>
+            
 
             <programlisting language="txt"><![CDATA[
 ﻿#Example csv file
@@ -302,8 +300,8 @@ $translate->addTranslation(
             <property>enclosure</property> verwendet wird.
         </para>
 
-        <example id="zend.translate.sourcecreation.csv.example2">
-            <title>Zweites Beispiel für CSV-Dateien</title>
+        <example xml:id="zend.translate.sourcecreation.csv.example2"><info><title>Zweites Beispiel für CSV-Dateien</title></info>
+            
 
             <programlisting language="txt"><![CDATA[
 ﻿# Example CSV file
@@ -338,10 +336,10 @@ $translate->addTranslation(
                 Hochkommas kann zu fehlenden Zeichen in der Übersetzung führen.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.translate.sourcecreation.ini">
-        <title>Erstellung von INI-Quelldateien</title>
+    <section xml:id="zend.translate.sourcecreation.ini"><info><title>Erstellung von INI-Quelldateien</title></info>
+        
 
         <para>
             <acronym>INI</acronym>-Quelldateien sind menschenlesbar, aber normalerweise nicht sehr
@@ -349,8 +347,8 @@ $translate->addTranslation(
             von Ihrem Kunden zu bearbeitet sind, verwenden Sie den <acronym>INI</acronym>-Adapter.
         </para>
 
-        <example id="zend.translate.sourcecreation.ini.example">
-            <title>Beispiel einer INI-Datei</title>
+        <example xml:id="zend.translate.sourcecreation.ini.example"><info><title>Beispiel einer INI-Datei</title></info>
+            
 
             <programlisting language="txt"><![CDATA[
 [Test]
@@ -391,5 +389,5 @@ $translate->addTranslation(
             Schlüssel verwendet werden und haben im Wert eine spezielle Bedeutung. Diese sollten
             nicht verwendet werden, da sie zu unerwartetem Verhalten führen.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

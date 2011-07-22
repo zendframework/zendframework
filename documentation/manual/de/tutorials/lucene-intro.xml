@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19807 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.lucene.intro">
-    <title>Einführung in Zend_Search_Lucene</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.intro"><info><title>Einführung in Zend_Search_Lucene</title></info>
+    
 
     <para>
         Die Komponente <classname>Zend_Search_Lucene</classname> ist dazu gedacht eine sofort
@@ -16,7 +16,7 @@
     <para>
         <classname>Zend_Search_Lucene</classname> ist eine reine <acronym>PHP</acronym> Portierung
         der populären Open Source Volltext Such Maschine auch bekannt als Apache Lucene. Siehe
-        <ulink url="http://lucene.apache.org">http://lucene.apache.org/</ulink> für Details.
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://lucene.apache.org">http://lucene.apache.org/</link> für Details.
     </para>
 
     <para>
@@ -47,8 +47,8 @@
         ein eigener Analysator erstellt werden.
     </para>
 
-    <note>
-        <title>Verwendung von Analysatoren wärend der Indizierung und Suche</title>
+    <note><info><title>Verwendung von Analysatoren wärend der Indizierung und Suche</title></info>
+        
 
         <para>
             Wichtiger Hinweis! Suchabfragen werden auch durch Verwendung des "aktuellen Analysators"
@@ -106,4 +106,4 @@
         wird die Indizierung übersprungen. Das gleiche trifft auch für das Speicher, die Umwandlung
         in Token oder der Behandlung von Feldwerten als binärer String zu.
     </para>
-</sect1>
+</section>

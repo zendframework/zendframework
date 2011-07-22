@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.navigation.pages.custom">
-    <title>Creating custom page types</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.custom"><info><title>Creating custom page types</title></info>
+    
 
     <para>
         When extending <classname>Zend_Navigation_Page</classname>, there is
@@ -16,12 +15,12 @@
         method named <methodname>setInternalId()</methodname>, and pass the option to this
         method if it exists. If the method does not exist, the option will be
         set as a custom property of the page, and be accessible via
-        <command>$internalId = $page->internal_id;</command> or
-        <command>$internalId = $page->get('internal_id');</command>.
+        <command>$internalId = $page-&gt;internal_id;</command> or
+        <command>$internalId = $page-&gt;get('internal_id');</command>.
     </para>
 
-    <example id="zend.navigation.custom.example.simple">
-        <title>The most simple custom page</title>
+    <example xml:id="zend.navigation.custom.example.simple"><info><title>The most simple custom page</title></info>
+        
 
         <para>
             The only thing a custom page class needs to implement is the
@@ -39,8 +38,8 @@ class My_Simple_Page extends Zend_Navigation_Page
 ]]></programlisting>
     </example>
 
-    <example id="zend.navigation.custom.example.properties">
-        <title>A custom page with properties</title>
+    <example xml:id="zend.navigation.custom.example.properties"><info><title>A custom page with properties</title></info>
+        
 
         <para>
             When adding properties to an extended page, there is no need
@@ -96,4 +95,4 @@ $page = Zend_Navigation_Page::factory(array(
 ));
 ]]></programlisting>
     </example>
-</sect2>
+</section>

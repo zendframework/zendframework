@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22748 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.memory.memory-objects">
-    <title>Memory Objekte</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.memory.memory-objects"><info><title>Memory Objekte</title></info>
+    
 
-    <sect2 id="zend.memory.memory-objects.movable">
-        <title>Verschiebbar</title>
+    <section xml:id="zend.memory.memory-objects.movable"><info><title>Verschiebbar</title></info>
+        
 
         <para>
             Um verschiebbare Memory Objekte zu Erstellen kann die
@@ -21,10 +19,10 @@ $memObject = $memoryManager->create($data);
             entfernt werden können und wieder geladen werden wenn der Code der
             Anwendung auf das Objekt wieder zugreift.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.memory.memory-objects.locked">
-        <title>Gesperrt</title>
+    <section xml:id="zend.memory.memory-objects.locked"><info><title>Gesperrt</title></info>
+        
 
         <para>
             Gesperrte Memory Objekte können erstellt werden mit Hilfe der
@@ -64,10 +62,10 @@ $memObject = $memoryManager->createLocked($data);
             Zeichenketten Variablen. Der Overhead ist ein einzelnes De-Referenzieren um
             die Eigenschaft der Klasse zu erhalten.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.memory.memory-objects.value">
-        <title>Memory Container 'value' Eigenschaft</title>
+    <section xml:id="zend.memory.memory-objects.value"><info><title>Memory Container 'value' Eigenschaft</title></info>
+        
 
         <para>
             Die '<property>value</property>' Eigenschaft des Memory Containers (gesperrt oder
@@ -90,23 +88,22 @@ $memObject->value = substr($memObject->value, $start, $length);
 
         <para>
             Ein alternaviter Weg um auf die Daten des Memory Objektes zuzugreifen
-            ist die Verwendung der <link
-                linkend="zend.memory.memory-objects.api.getRef"><methodname>getRef()</methodname></link>
+            ist die Verwendung der <link linkend="zend.memory.memory-objects.api.getRef"><methodname>getRef()</methodname></link>
             Methode. Diese Methode <emphasis>muß</emphasis> verwendet werden für
             <acronym>PHP</acronym> Versionen vor 5.2. Sie könnte auch in einigen Fällen verwendet
             werden, wenn Gründe der Geschwindigkeit dafür sprechen.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.memory.memory-objects.api">
-        <title>Memory Container Interface</title>
+    <section xml:id="zend.memory.memory-objects.api"><info><title>Memory Container Interface</title></info>
+        
 
         <para>
             Der Memory Container stellt die folgenden Methoden zur Verfügung:
         </para>
 
-        <sect3 id="zend.memory.memory-objects.api.getRef">
-            <title>getRef() Methode</title>
+        <section xml:id="zend.memory.memory-objects.api.getRef"><info><title>getRef() Methode</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 public function &getRef();
@@ -150,10 +147,10 @@ for ($count = 0; $count < strlen($value); $count++) {
     ...
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.memory.memory-objects.api.touch">
-            <title>touch() Methode</title>
+        <section xml:id="zend.memory.memory-objects.api.touch"><info><title>touch() Methode</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 public function touch();
@@ -181,10 +178,10 @@ for ($count = 0; $count < strlen($value); $count++) {
 
 $memObject->touch();
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.memory.memory-objects.api.lock">
-            <title>lock() Methode</title>
+        <section xml:id="zend.memory.memory-objects.api.lock"><info><title>lock() Methode</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 public function lock();
@@ -225,10 +222,10 @@ $memObject1->touch();
 $memObject1->unlock();
 $memObject2->unlock();
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.memory.memory-objects.api.unlock">
-            <title>unlock() Methode</title>
+        <section xml:id="zend.memory.memory-objects.api.unlock"><info><title>unlock() Methode</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 public function unlock();
@@ -238,10 +235,10 @@ public function unlock();
                 Die <methodname>unlock()</methodname> Methode entsperrt Objekte wenn es nicht mehr
                 notwendig ist diese zu sperren. Siehe das obige Beispiel.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.memory.memory-objects.api.isLocked">
-            <title>isLocked() Methode</title>
+        <section xml:id="zend.memory.memory-objects.api.isLocked"><info><title>isLocked() Methode</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 public function isLocked();
@@ -256,6 +253,6 @@ public function isLocked();
                 kann entweder <constant>TRUE</constant> oder <constant>FALSE</constant>
                 zurückgegeben werden.
             </para>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

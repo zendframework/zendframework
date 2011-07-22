@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20763 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.modules">
-    <title>Zend_Application_Resource_Modules</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.modules"><info><title>Zend_Application_Resource_Modules</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Modules</classname> wird verwendet im eigene
@@ -54,8 +52,8 @@ $options = array(
 );
 ]]></programlisting>
 
-    <note>
-        <title>Abhängigkeiten der Front Controller Ressource</title>
+    <note><info><title>Abhängigkeiten der Front Controller Ressource</title></info>
+        
 
         <para>
             Die Module Ressource hat eine Abhängigkeit zur
@@ -68,8 +66,8 @@ $options = array(
         </para>
     </note>
 
-    <example id="zend.application.available-resources.modules.configExample">
-        <title>Module konfigurieren</title>
+    <example xml:id="zend.application.available-resources.modules.configExample"><info><title>Module konfigurieren</title></info>
+        
 
         <para>
             Man kann eine modul-spezifische Konfiguration spezifizieren indem der Modulname als
@@ -114,8 +112,8 @@ news.resources.db.params.dbname = "news"
 ]]></programlisting>
     </example>
 
-    <example id="zend.application.available-resources.modules.retrieveBootstrapExample">
-        <title>Eine spezielle Modul Bootstrap erhalten</title>
+    <example xml:id="zend.application.available-resources.modules.retrieveBootstrapExample"><info><title>Eine spezielle Modul Bootstrap erhalten</title></info>
+        
 
         <para>
             Manchmal will man ein Bootstrap Objekt für ein spezifisches Modul erhalten --
@@ -131,4 +129,4 @@ $moduleBootstraps = $resource->getExecutedBootstraps();
 $newsBootstrap = $moduleBootstraps['news'];
 ]]></programlisting>
     </example>
-</sect2>
+</section>

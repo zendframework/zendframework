@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.view.helpers" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Assistentes de Visualização</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers"><info><title>Assistentes de Visualização</title></info>
+    
 
     <para>
         Em seus scripts de visualização, frequentemente é necessário a execução de certas tarefas
@@ -22,8 +20,8 @@
         <methodname>fooBar()</methodname>.
     </para>
 
-    <note>
-        <title>Watch the Case</title>
+    <note><info><title>Watch the Case</title></info>
+        
 
         <para>
             Helper names are always camelCased, i.e., they never begin with an
@@ -32,8 +30,8 @@
         </para>
     </note>
 
-    <note>
-        <title>Default Helper Path</title>
+    <note><info><title>Default Helper Path</title></info>
+        
 
         <para>
             The default helper path always points to the Zend Framework view
@@ -45,15 +43,15 @@
 
     <para>
         Para usar um assistente em seu script de visualização, chame-o usando
-        <command>$this->helperName()</command>. Em segundo plano, <classname>Zend_View</classname>
+        <command>$this-&gt;helperName()</command>. Em segundo plano, <classname>Zend_View</classname>
         irá carregar a classe <classname>Zend_View_Helper_HelperName</classname>, instanciá-la e
         chamar seu método <methodname>helperName()</methodname>. O objeto criado é persistente
         dentro do escopo da instância <classname>Zend_View</classname>, e será reutilizado por todas
-        as chamadas futuras a <command>$this->helperName()</command>.
+        as chamadas futuras a <command>$this-&gt;helperName()</command>.
     </para>
 
-    <sect2 id="zend.view.helpers.initial">
-        <title>Assistentes Padrão</title>
+    <section xml:id="zend.view.helpers.initial"><info><title>Assistentes Padrão</title></info>
+        
 
         <para>
             <classname>Zend_View</classname> vem com um conjunto padrão de assistentes, a maioria
@@ -387,27 +385,27 @@ echo $this->formCheckbox('foo',
 </form>
 ]]></programlisting>
 
-        <xi:include href="Zend_View-Helpers-Action.xml" />
-        <xi:include href="Zend_View-Helpers-BaseUrl.xml" />
-        <xi:include href="Zend_View-Helpers-Currency.xml" />
-        <xi:include href="Zend_View-Helpers-Cycle.xml" />
-        <xi:include href="Zend_View-Helpers-Partial.xml" />
-        <xi:include href="Zend_View-Helpers-Placeholder.xml" />
-        <xi:include href="Zend_View-Helpers-Doctype.xml" />
-        <xi:include href="Zend_View-Helpers-HeadLink.xml" />
-        <xi:include href="Zend_View-Helpers-HeadMeta.xml" />
-        <xi:include href="Zend_View-Helpers-HeadScript.xml" />
-        <xi:include href="Zend_View-Helpers-HeadStyle.xml" />
-        <xi:include href="Zend_View-Helpers-HeadTitle.xml" />
-        <xi:include href="Zend_View-Helpers-HtmlObject.xml" />
-        <xi:include href="Zend_View-Helpers-InlineScript.xml" />
-        <xi:include href="Zend_View-Helpers-Json.xml" />
-        <xi:include href="Zend_View-Helpers-Navigation.xml" />
-        <xi:include href="Zend_View-Helpers-Translate.xml" />
-    </sect2>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Action.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-BaseUrl.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Currency.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Cycle.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Partial.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Placeholder.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Doctype.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadLink.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadMeta.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadScript.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadStyle.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadTitle.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HtmlObject.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-InlineScript.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Json.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Navigation.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Translate.xml"/>
+    </section>
 
-    <sect2 id="zend.view.helpers.paths">
-        <title>Localizando os Assistentes</title>
+    <section xml:id="zend.view.helpers.paths"><info><title>Localizando os Assistentes</title></info>
+        
 
         <para>
             Assim como os scripts de visualização, seu controlador pode especificar uma lista de
@@ -451,10 +449,10 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
 // "Zend/View/Helper/HelperName.php" using class name
 // "Zend_View_Helper_HelperName".
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.helpers.custom">
-        <title>Escrevendo Assistentes Personalizados</title>
+    <section xml:id="zend.view.helpers.custom"><info><title>Escrevendo Assistentes Personalizados</title></info>
+        
 
         <para>
             Escrever assistentes personalizados é fácil; basta seguir estas regras:
@@ -492,7 +490,7 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
                 <para>
                     A classe deve ter um método público que coincida com o nome do assistente; este
                     é o método que será chamado quando o seu template chamar
-                    "$this->specialPurpose()". Em nosso exemplo "specialPurpose", o método requerido
+                    "$this-&gt;specialPurpose()". Em nosso exemplo "specialPurpose", o método requerido
                     deverá ser declarado como "public function specialPurpose()".
                 </para>
             </listitem>
@@ -596,10 +594,10 @@ class My_View_Helper_ScriptPath
             If you are extending <classname>Zend_View_Helper_Abstract</classname>, you do
             not need to define this method, as it is defined for you.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.helpers.registering-concrete">
-        <title>Registering Concrete Helpers</title>
+    <section xml:id="zend.view.helpers.registering-concrete"><info><title>Registering Concrete Helpers</title></info>
+        
 
         <para>
             Sometimes it is convenient to instantiate a view helper, and then register it with the
@@ -620,8 +618,8 @@ $view->registerHelper($helper, 'foo');
             this and inject itself into the helper on registration.
         </para>
 
-        <note>
-            <title>Helper name should match a method</title>
+        <note><info><title>Helper name should match a method</title></info>
+            
 
             <para>
                 The second argument to <methodname>registerHelper()</methodname> is the name of the
@@ -630,8 +628,5 @@ $view->registerHelper($helper, 'foo');
                 helper, raising a fatal <acronym>PHP</acronym> error.
             </para>
         </note>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

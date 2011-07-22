@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21741 -->
-<sect1 id="zend.amf.server">
-    <title>Zend_Amf_Server</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.amf.server"><info><title>Zend_Amf_Server</title></info>
+    
 
     <para>
         <classname>Zend_Amf_Server</classname> は <acronym>RPC</acronym> スタイルのサーバで、
@@ -11,8 +9,8 @@
         サーバを作成するための習得しやすいインターフェイスを提供します。
     </para>
 
-    <example id="zend.amf.server.basic">
-        <title>基本的な AMF サーバ</title>
+    <example xml:id="zend.amf.server.basic"><info><title>基本的な AMF サーバ</title></info>
+        
 
         <para>
             さまざまな public メソッドを持つクラス <classname>Foo</classname>
@@ -86,8 +84,8 @@ $server->addDirectory(dirname(__FILE__) .'/../package/');
         </para>
     </example>
 
-    <note>
-        <title>アタッチされるすべてのメソッドや関数には docblock が必要</title>
+    <note><info><title>アタッチされるすべてのメソッドや関数には docblock が必要</title></info>
+        
 
         <para>
             Zend Framework の他のサーバコンポーネント群と同様、クラスのメソッドには
@@ -132,8 +130,8 @@ class World
         </para>
     </note>
 
-    <sect2 id="zend.amf.server.flex">
-        <title>サーバへの Flex からの接続</title>
+    <section xml:id="zend.amf.server.flex"><info><title>サーバへの Flex からの接続</title></info>
+        
 
         <para>
             <classname>Zend_Amf_Server</classname> に Flex プロジェクトから接続するのはきわめて簡単です。
@@ -268,14 +266,13 @@ myservice.world.hello("Wade");
 ]]></programlisting>
 
         <para>
-            Flex RemoteObject の実行についてのより詳細な情報は <ulink
-                url="http://livedocs.adobe.com/flex/3/html/help.html?content=data_access_4.html">
-            Adobe Flex 3 のヘルプサイト</ulink> をごらんください。
+            Flex RemoteObject の実行についてのより詳細な情報は <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://livedocs.adobe.com/flex/3/html/help.html?content=data_access_4.html">
+            Adobe Flex 3 のヘルプサイト</link> をごらんください。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.amf.server.errors">
-        <title>エラー処理</title>
+    <section xml:id="zend.amf.server.errors"><info><title>エラー処理</title></info>
+        
 
         <para>
             デフォルトでは、アタッチしたクラスや関数からスローされた例外はすべて捕捉され、
@@ -307,8 +304,8 @@ $server->setProduction(false);
 $server->setProduction(true);
 ]]></programlisting>
 
-        <note>
-            <title>production モードの無効化は慎重に!</title>
+        <note><info><title>production モードの無効化は慎重に!</title></info>
+            
 
             <para>
                 production モードを無効にするのは、開発時のみにすることを推奨します。
@@ -327,10 +324,10 @@ $server->setProduction(true);
             運用時には <emphasis>display_errors</emphasis> を無効にし、
             この問題を回避することを推奨します。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.amf.server.response">
-        <title>AMF レスポンス</title>
+    <section xml:id="zend.amf.server.response"><info><title>AMF レスポンス</title></info>
+        
 
         <para>
             レスポンスオブジェクトを操作したくなることもあるかもしれません。
@@ -338,8 +335,8 @@ $server->setProduction(true);
             <methodname>handle()</methodname> メソッドはレスポンスオブジェクトを返すので、これが利用できます。
         </para>
 
-        <example id="zend.amf.server.response.messageHeaderExample">
-            <title>AMF レスポンスへのメッセージヘッダの追加</title>
+        <example xml:id="zend.amf.server.response.messageHeaderExample"><info><title>AMF レスポンスへのメッセージヘッダの追加</title></info>
+            
 
             <para>
                 この例では、'foo' という MessageHeader に値
@@ -352,10 +349,10 @@ $response->addAmfHeader(new Zend_Amf_Value_MessageHeader('foo', true, 'bar'))
 echo $response;
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.amf.server.typedobjects">
-        <title>型付きオブジェクト</title>
+    <section xml:id="zend.amf.server.typedobjects"><info><title>型付きオブジェクト</title></info>
+        
 
         <para>
             <acronym>SOAP</acronym> と同様、
@@ -423,7 +420,7 @@ class Contact
         </para>
 
         <para>
-            Flex プロジェクトの src フォルダを右クリックし、新規作成 ->
+            Flex プロジェクトの src フォルダを右クリックし、新規作成 -&gt;
             ActionScript ファイルを選択します。ファイルに ContactVO
             という名前をつけて終了を押すと、新しいファイルがあらわれます。
             次のコードをコピーして、クラスを作成しましょう。
@@ -471,10 +468,10 @@ private function getContactHandler(event:ResultEvent):void {
             myContact にバインドされているすべての内容は、返された
             ContactVO データで更新されます。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.amf.server.resources">
-        <title>リソース</title>
+    <section xml:id="zend.amf.server.resources"><info><title>リソース</title></info>
+        
 
         <para>
             <classname>Zend_Amf</classname> には、サービスクラスが返すリソース型を
@@ -540,10 +537,10 @@ class Zend_Amf_Parse_Resource_MysqlResult
             を返そうとすると、例外が発生します。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.amf.server.flash">
-        <title>サーバへの Flash からの接続</title>
+    <section xml:id="zend.amf.server.flash"><info><title>サーバへの Flash からの接続</title></info>
+        
 
         <para>
             <classname>Zend_Amf_Server</classname> に Flash プロジェクトから接続する方法は、
@@ -652,7 +649,7 @@ connection.connect(gateway);
         <para>
             onComplete 関数は、コンストラクタの処理が終わった直後に実行されます。
             ここで、データをサーバに送信します。
-            <classname>Zend_Amf_Server</classname> World->hello 関数をコールするコードを 1 行追加しています。
+            <classname>Zend_Amf_Server</classname> World-&gt;hello 関数をコールするコードを 1 行追加しています。
         </para>
 
         <programlisting language="as"><![CDATA[
@@ -693,10 +690,10 @@ private function onFault(fault:Object):void {
             そして最後に返された結果を <methodname>trace()</methodname> で出力しました。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.amf.server.auth">
-        <title>認証</title>
+    <section xml:id="zend.amf.server.auth"><info><title>認証</title></info>
+        
 
         <para>
             <classname>Zend_Amf_Server</classname> では、認証と認可のフックを指定して
@@ -783,9 +780,6 @@ if($this->_acl->isAllowed($role, $class, $function)) {
 }
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.json.introduction">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.introduction"><info><title>Einführung</title></info>
+    
 
     <para>
         <classname>Zend_Json</classname> stellt komfortable Methoden für das Serialisieren von
         nativem <acronym>PHP</acronym> nach <acronym>JSON</acronym> und das Dekodieren von
         <acronym>JSON</acronym> in natives <acronym>PHP</acronym> bereit. Für weitere Informationen
-        zu <acronym>JSON</acronym> <ulink url="http://www.json.org/">besuche die Website des
-            <acronym>JSON</acronym> Projekts</ulink>.
+        zu <acronym>JSON</acronym> <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.json.org/">besuche die Website des
+            <acronym>JSON</acronym> Projekts</link>.
     </para>
 
     <para>
@@ -31,4 +31,4 @@
         eine nette nützliche Funktion was wiederum in einfacheren Anwendungs-spezifischer
         Datenverarbeitungs Techniken resultiert.
     </para>
-</sect1>
+</section>

@@ -137,7 +137,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-4463
+     * @group ZF-4463
      */
     public function testDoesNotFailOnObjectInput()
     {

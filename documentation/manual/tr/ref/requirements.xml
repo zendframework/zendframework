@@ -1,14 +1,17 @@
-<appendix id="requirements">
+<?xml version="1.0" encoding="utf-8"?>
 
-    <title>Sistem Gereksinimleri</title>
+
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="requirements"><info><title>Sistem Gereksinimleri</title></info>
+
+    
 
     <para>
         Bu kısım Zend Framework'ün gereksinimlerini belgeliyor.
     </para>
 
-    <sect1 id="requirements.version">
+    <section xml:id="requirements.version"><info><title>Gerekli PHP versiyonu</title></info>
 
-        <title>Gerekli PHP versiyonu</title>
+        
 
         <para>
         Zend Framework PHP 5.1.4 veya yenisini gerektiriyor. Bazı SPL arayüzleri <code>Countable</code>
@@ -26,11 +29,11 @@
         PHP'nin yeni versiyonunda  önemli güvenlik ve performans geliştirmeleri  var.
         </para>
 
-    </sect1>
+    </section>
 
-    <sect1 id="requirements.extensions">
+    <section xml:id="requirements.extensions"><info><title>PHP Eklentileri</title></info>
 
-        <title>PHP Eklentileri</title>
+        
 
         <para>
             Aşağıdaki tablo PHP'de tipik olarak bulunan eklentileri listelemektedir ,
@@ -41,12 +44,12 @@
         ihtiyaç duyulmayacaktır.
         </para>
 
-        <table frame='all' id="requirements.extensions.table-1">
-            <title>Zend Framework'de kullanılan PHP eklentileri</title>
-            <tgroup cols='3'>
-                <colspec colwidth='1in'/>
-                <colspec colwidth='1in'/>
-                <colspec colwidth='3in'/>
+        <table frame="all" xml:id="requirements.extensions.table-1"><info><title>Zend Framework'de kullanılan PHP eklentileri</title></info>
+            
+            <tgroup cols="3">
+                <colspec colwidth="1in"/>
+                <colspec colwidth="1in"/>
+                <colspec colwidth="3in"/>
                 <thead>
                     <row>
                         <entry>Eklenti</entry>
@@ -73,17 +76,17 @@
                     <row>
                         <entry>bz2</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>calendar</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>com_dotnet</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>ctype</entry>
@@ -98,59 +101,59 @@
                     <row>
                         <entry>date</entry>
                         <entry>?</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>dba</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>dbase</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>dom</entry>
                         <entry>Bağımlı</entry>
                         <entry>
-                <ulink url="http://framework.zend.com/manual/tr/zend.feed.html"><code>Zend_Feed</code></ulink>,
-                <ulink url="http://framework.zend.com/manual/tr/zend.gdata.html"><code>Zend_Gdata</code></ulink>,
-                <ulink url="http://framework.zend.com/manual/tr/zend.log.formatters.html"><code>Zend_Log_Formatter_Xml</code></ulink>,
-                <ulink url="http://framework.zend.com/manual/tr/zend.rest.server.html"><code>Zend_Rest_Server</code></ulink>,
-                <ulink url="http://framework.zend.com/manual/tr/zend.search.lucene.html"><code>Zend_Search_Lucene</code></ulink>,
-                <ulink url="http://framework.zend.com/manual/tr/zend.service.amazon.html"><code>Zend_Service_Amazon</code></ulink>,
-                <ulink url="http://framework.zend.com/manual/tr/zend.service.delicious.html"><code>Zend_Service_Delicious</code></ulink>,
-                <ulink url="http://framework.zend.com/manual/tr/zend.service.flickr.html"><code>Zend_Service_Flickr</code></ulink>,
-                <ulink url="http://framework.zend.com/manual/tr/zend.service.simpy.html"><code>Zend_Service_Simpy</code></ulink>,
-                <ulink url="http://framework.zend.com/manual/tr/zend.service.yahoo.html"><code>Zend_Service_Yahoo</code></ulink>,
-                <ulink url="http://framework.zend.com/manual/tr/zend.xmlrpc.html"><code>Zend_XmlRpc</code></ulink>
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/tr/zend.feed.html"><code>Zend_Feed</code></link>,
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/tr/zend.gdata.html"><code>Zend_Gdata</code></link>,
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/tr/zend.log.formatters.html"><code>Zend_Log_Formatter_Xml</code></link>,
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/tr/zend.rest.server.html"><code>Zend_Rest_Server</code></link>,
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/tr/zend.search.lucene.html"><code>Zend_Search_Lucene</code></link>,
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/tr/zend.service.amazon.html"><code>Zend_Service_Amazon</code></link>,
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/tr/zend.service.delicious.html"><code>Zend_Service_Delicious</code></link>,
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/tr/zend.service.flickr.html"><code>Zend_Service_Flickr</code></link>,
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/tr/zend.service.simpy.html"><code>Zend_Service_Simpy</code></link>,
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/tr/zend.service.yahoo.html"><code>Zend_Service_Yahoo</code></link>,
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/tr/zend.xmlrpc.html"><code>Zend_XmlRpc</code></link>
             </entry>
                     </row>
                     <row>
                         <entry>exif</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>fbsql</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>fdf</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>filter</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>ftp</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>gd</entry>
@@ -160,17 +163,17 @@
                     <row>
                         <entry>gettext</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>gmp</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>hash</entry>
                         <entry>?</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>ibm_db2</entry>
@@ -185,17 +188,17 @@
                     <row>
                         <entry>imap</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>informix</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>interbase</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>json</entry>
@@ -205,7 +208,7 @@
                     <row>
                         <entry>ldap</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>libxml</entry>
@@ -220,7 +223,7 @@
                     <row>
                         <entry>mcrypt</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>memcache</entry>
@@ -230,7 +233,7 @@
                     <row>
                         <entry>mhash</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>mime_magic</entry>
@@ -240,22 +243,22 @@
                     <row>
                         <entry>ming</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>msql</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>mssql</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>mysql</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>mysqli</entry>
@@ -265,7 +268,7 @@
                     <row>
                         <entry>ncurses</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>oci8</entry>
@@ -275,17 +278,17 @@
                     <row>
                         <entry>odbc</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>openssl</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>pcntl</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>pcre</entry>
@@ -300,12 +303,12 @@
                     <row>
                         <entry>pdo_dblib</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>pdo_firebird</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>pdo_mssql</entry>
@@ -335,7 +338,7 @@
                     <row>
                         <entry>pgsql</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>posix</entry>
@@ -345,32 +348,32 @@
                     <row>
                         <entry>pspell</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>readline</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>recode</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>Reflection</entry>
                         <entry>Bağımlı</entry>
                         <entry>
-                <ulink url="http://framework.zend.com/manual/tr/zend.controller.html"><code>Zend_Controller</code></ulink>,
-                <ulink url="http://framework.zend.com/manual/tr/zend.filter.html"><code>Zend_Filter</code></ulink>,
-                <ulink url="http://framework.zend.com/manual/tr/zend.filter.input.html"><code>Zend_Filter_Input</code></ulink>,
-                <ulink url="http://framework.zend.com/manual/tr/zend.json.html"><code>Zend_Json</code></ulink>,
-                <ulink url="http://framework.zend.com/manual/tr/zend.log.html"><code>Zend_Log</code></ulink>,
-                <ulink url="http://framework.zend.com/manual/tr/zend.rest.server.html"><code>Zend_Rest_Server</code></ulink>,
-                <ulink url="http://framework.zend.com/manual/tr/zend.server.reflection.html"><code>Zend_Server_Reflection</code></ulink>,
-                <ulink url="http://framework.zend.com/manual/tr/zend.validate.html"><code>Zend_Validate</code></ulink>,
-                <ulink url="http://framework.zend.com/manual/tr/zend.view.html"><code>Zend_View</code></ulink>,
-                <ulink url="http://framework.zend.com/manual/tr/zend.xmlrpc.server.html"><code>Zend_XmlRpc_Server</code></ulink>
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/tr/zend.controller.html"><code>Zend_Controller</code></link>,
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/tr/zend.filter.html"><code>Zend_Filter</code></link>,
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/tr/zend.filter.input.html"><code>Zend_Filter_Input</code></link>,
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/tr/zend.json.html"><code>Zend_Json</code></link>,
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/tr/zend.log.html"><code>Zend_Log</code></link>,
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/tr/zend.rest.server.html"><code>Zend_Rest_Server</code></link>,
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/tr/zend.server.reflection.html"><code>Zend_Server_Reflection</code></link>,
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/tr/zend.validate.html"><code>Zend_Validate</code></link>,
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/tr/zend.view.html"><code>Zend_View</code></link>,
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/tr/zend.xmlrpc.server.html"><code>Zend_XmlRpc_Server</code></link>
             </entry>
                     </row>
                     <row>
@@ -381,7 +384,7 @@
                     <row>
                         <entry>shmop</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>SimpleXML</entry>
@@ -396,7 +399,7 @@
                     <row>
                         <entry>sockets</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>SPL</entry>
@@ -411,37 +414,37 @@
                     <row>
                         <entry>sybase</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>sysvmsg</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>sysvsem</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>sysvshm</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>tidy</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>tokenizer</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>wddx</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>xml</entry>
@@ -451,27 +454,27 @@
                     <row>
                         <entry>XMLReader</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>xmlrpc</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>XMLWriter</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>xsl</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>zip</entry>
                         <entry>--</entry>
-                        <entry></entry>
+                        <entry/>
                     </row>
                     <row>
                         <entry>zlib</entry>
@@ -482,9 +485,6 @@
             </tgroup>
         </table>
 
-    </sect1>
+    </section>
 
 </appendix>
-<!--
-vim:se ts=4 sw=4 et:
--->

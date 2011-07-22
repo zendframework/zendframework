@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 21823 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.config.adapters.ini">
-    <title>Zend_Config_Ini</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.ini"><info><title>Zend_Config_Ini</title></info>
+    
 
     <para>
         <classname>Zend_Config_Ini</classname> permet aux développeurs de stocker des données de
@@ -17,28 +15,27 @@
         doivent être héritées.
     </para>
 
-    <note>
-        <title>Analyse d'un fichier INI</title>
+    <note><info><title>Analyse d'un fichier INI</title></info>
+        
         <para>
             <classname>Zend_Config_Ini</classname> utilise la fonction
-            <ulink
-                url="http://fr.php.net/parse_ini_file"><methodname>parse_ini_file()</methodname></ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://fr.php.net/parse_ini_file"><methodname>parse_ini_file()</methodname></link>
             de <acronym>PHP</acronym>. Veuillez prendre connaissance de la documentation pour
             appréhender ses comportements spécifiques, qui se propagent à
             <classname>Zend_Config_Ini</classname>, tel que la façon dont les valeurs
-            spéciales&#160;: <constant>TRUE</constant>, <constant>FALSE</constant>,
+            spéciales : <constant>TRUE</constant>, <constant>FALSE</constant>,
             "yes", "no" et <constant>NULL</constant> sont manipulées.
         </para>
     </note>
 
-    <note>
-        <title>Séparateur de clé</title>
+    <note><info><title>Séparateur de clé</title></info>
+        
         <para>
             Par défaut, le séparateur de clé est le caractère point (<emphasis>.</emphasis>),
             cependant cela peut être changé en changeant la clé <property>nestSeparator</property>
             de <varname>$options</varname>
             en construisant l'objet
-            <classname>Zend_Config_Ini</classname>. Par exemple&#160;:
+            <classname>Zend_Config_Ini</classname>. Par exemple :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -49,8 +46,8 @@ $options = new Zend_Config_Ini('/chemin/vers/config.ini',
 ]]></programlisting>
     </note>
 
-    <example id="zend.config.adapters.ini.example.using">
-        <title>Utiliser Zend_Config_Ini</title>
+    <example xml:id="zend.config.adapters.ini.example.using"><info><title>Utiliser Zend_Config_Ini</title></info>
+        
 
         <para>
             Cet exemple illustre une utilisation de base de <classname>Zend_Config_Ini</classname>
@@ -63,7 +60,7 @@ $options = new Zend_Config_Ini('/chemin/vers/config.ini',
             écrite réciproquement, avec la section de production héritant de la section de test,
             bien que ceci ne doit pas être le cas pour des situations plus complexes. Supposons,
             que les données suivantes de configuration sont contenues dans
-            <filename>/chemin/vers/config.ini</filename>&#160;:
+            <filename>/chemin/vers/config.ini</filename> :
         </para>
 
         <programlisting language="ini"><![CDATA[
@@ -87,7 +84,7 @@ database.params.password = devsecret
         <para>
             Ensuite, supposons que le développeur ait besoin des données de configuration de
             test issues du fichier <acronym>INI</acronym>. Il est facile de charger ces données
-            en indiquant le fichier <acronym>INI</acronym> et la section de test&#160;:
+            en indiquant le fichier <acronym>INI</acronym> et la section de test :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -99,8 +96,8 @@ echo $config->database->params->dbname; // affiche "dbname"
     </example>
 
     <note>
-        <table id="zend.config.adapters.ini.table">
-            <title>Paramètres du constructeur de Zend_Config_Ini</title>
+        <table xml:id="zend.config.adapters.ini.table"><info><title>Paramètres du constructeur de Zend_Config_Ini</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -128,11 +125,11 @@ echo $config->database->params->dbname; // affiche "dbname"
                             <varname>$options</varname> (par défault <constant>FALSE</constant>)
                         </entry>
                         <entry>
-                            Tableau d'options. Les clés suivantes sont supportées&#160;:
+                            Tableau d'options. Les clés suivantes sont supportées :
                             <itemizedlist>
                                 <listitem>
                                     <para>
-                                        <emphasis><property>allowModifications</property></emphasis>&#160;:
+                                        <emphasis><property>allowModifications</property></emphasis> :
                                         Mettre à <constant>TRUE</constant> pour permettre la
                                         modification en mémoire des données de configuration
                                         chargées. Par défaut à <constant>FALSE</constant>.
@@ -140,7 +137,7 @@ echo $config->database->params->dbname; // affiche "dbname"
                                 </listitem>
                                 <listitem>
                                     <para>
-                                        <emphasis><property>nestSeparator</property></emphasis>&#160;:
+                                        <emphasis><property>nestSeparator</property></emphasis> :
                                         Caractère à utiliser en tant que séparateur d'imbrication.
                                         Par défaut ".".
                                     </para>
@@ -152,4 +149,4 @@ echo $config->database->params->dbname; // affiche "dbname"
             </tgroup>
         </table>
     </note>
-</sect1>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22090 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.headtitle">
-    <title>L'aide de vue HeadTitle</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headtitle"><info><title>L'aide de vue HeadTitle</title></info>
+    
 
     <para>
         L'élément HTML <code>&lt;title&gt;</code> est utilisé pour fournir un titre à un
@@ -11,8 +9,7 @@
     </para>
 
     <para>
-        L'aide <code>HeadTitle</code> est une implémentation concrète de l'aide <link
-        linkend="zend.view.helpers.initial.placeholder">Placeholder</link>. Elle surcharge la
+        L'aide <code>HeadTitle</code> est une implémentation concrète de l'aide <link linkend="zend.view.helpers.initial.placeholder">Placeholder</link>. Elle surcharge la
         méthode <methodname>toString()</methodname> pour forcer la génération d'un élément
         <code>&lt;title&gt;</code>, et ajoute une méthode <methodname>headTitle()</methodname> pour des réglages
         faciles et rapides et pour l'aggrégation des éléments du titre. La signature de la méthode
@@ -30,8 +27,8 @@
         pass a different attach order as the second parameter.
     </para>
 
-    <example id="zend.view.helpers.initial.headtitle.basicusage">
-        <title>Utilisation basique de l'aide HeadTitle</title>
+    <example xml:id="zend.view.helpers.initial.headtitle.basicusage"><info><title>Utilisation basique de l'aide HeadTitle</title></info>
+        
 
         <para>
             Vous pouvez spécifier la balise de titre à n'importe quel moment. Un usage typique
@@ -64,4 +61,4 @@ $this->headTitle()->setSeparator(' / ');
 <?php echo $this->headTitle() ?>
 ]]></programlisting>
     </example>
-</sect3>
+</section>

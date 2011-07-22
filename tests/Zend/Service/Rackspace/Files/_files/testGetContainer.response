@@ -1,0 +1,8 @@
+HTTP/1.1 204 No Content
+Date: Wed, 11 May 2011 10:03:17 GMT
+X-container-meta-foo: bar
+X-container-meta-foo2: bar2
+X-container-bytes-used: 9756
+X-container-object-count: 2
+Connection: close
+Content-length: 0

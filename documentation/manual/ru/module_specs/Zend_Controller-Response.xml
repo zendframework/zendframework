@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.response">
-    <title>Объект ответа</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.response"><info><title>Объект ответа</title></info>
+    
 
-    <sect2 id="zend.controller.response.usage">
-        <title>Использование</title>
+    <section xml:id="zend.controller.response.usage"><info><title>Использование</title></info>
+        
 
         <para>
             Объект ответа представляет собой логическое продолжение к
@@ -75,8 +74,7 @@ $this->getResponse()
         <note>
             <para>
                 Если используется
-                <link
-                linkend="zend.controller.action.viewintegration">интеграция
+                <link linkend="zend.controller.action.viewintegration">интеграция
                 вида</link>, то вам не нужно сохранять результат рендеринга
                 скрипта вида в объект ответа, поскольку
                 <code>Zend_Controller_Action::render()</code> делает это по
@@ -140,10 +138,10 @@ $response->sendResponse();
 $front->throwExceptions(true);
 $front->dispatch();
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.response.headers">
-        <title>Управление заголовками</title>
+    <section xml:id="zend.controller.response.headers"><info><title>Управление заголовками</title></info>
+        
 
         <para>
             Как было замечено ранее, одной из обязанностей объекта ответа
@@ -185,7 +183,7 @@ $front->dispatch();
             <listitem>
                 <para>
                     <code>setRedirect($url, $code = 302)</code> устанавливает
-                    HTTP-заголовок &quot;Location&quot; для перенаправления.
+                    HTTP-заголовок "Location" для перенаправления.
                     Если был передан код статуса HTTP, то он будет
                     использоваться при перенаправлении.
                 </para>
@@ -240,7 +238,7 @@ $front->dispatch();
                 <para>
                     <code>clearAllHeaders()</code> удаляет как обычные
                     заголовки из пар ключ/значение, так и
-                    &quot;необработанные&quot; (raw).
+                    "необработанные" (raw).
                 </para>
             </listitem>
         </itemizedlist>
@@ -251,10 +249,10 @@ $front->dispatch();
             <code>setHttpResponseCode()</code> и
             <code>getHttpResponseCode()</code>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.response.namedsegments">
-        <title>Именованные сегменты</title>
+    <section xml:id="zend.controller.response.namedsegments"><info><title>Именованные сегменты</title></info>
+        
 
         <para>
             Объект ответа поддерживает именованные сегменты. Это позволяет
@@ -395,10 +393,10 @@ array(
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.response.exceptions">
-        <title>Проверка на исключения в объекте ответа</title>
+    <section xml:id="zend.controller.response.exceptions"><info><title>Проверка на исключения в объекте ответа</title></info>
+        
 
         <para>
             Как было отмечено ранее, по умолчанию исключения, пойманные во время
@@ -489,10 +487,10 @@ array(
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.response.subclassing">
-        <title>Создание подклассов объекта ответа</title>
+    <section xml:id="zend.controller.response.subclassing"><info><title>Создание подклассов объекта ответа</title></info>
+        
 
         <para>
             Назначением объекта ответа является сбор заголовков и содержимого из
@@ -517,8 +515,5 @@ array(
             вида, основанного на содержимом, сохраненном в именованном сегменте,
             и т.д.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

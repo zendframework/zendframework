@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19782 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.autoloading.usage">
-    <title>Podstawowe użycie autoloadera</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.usage"><info><title>Podstawowe użycie autoloadera</title></info>
+    
 
     <para>
         Po krótkim opisie samej idei autoloadera jak i konwencji oraz celi związanych z
@@ -51,8 +49,8 @@ $loader->registerNamespace(array('Foo_', 'Bar_'));
 $loader->setFallbackAutoloader(true);
 ]]></programlisting>
 
-    <warning>
-        <title>Nie należy używać autoloadera awaryjnego</title>
+    <warning><info><title>Nie należy używać autoloadera awaryjnego</title></info>
+        
 
         <para>
             Użycie <classname>Zend_Loader_Autoloader</classname> jako autoloadera awaryjnego może
@@ -94,8 +92,8 @@ $loader->setFallbackAutoloader(true);
         </para>
     </warning>
 
-    <note>
-        <title>Prefiksy przestrzeni nazw a przestrzenie nazw PHP</title>
+    <note><info><title>Prefiksy przestrzeni nazw a przestrzenie nazw PHP</title></info>
+        
 
         <para>
             W momencie powstawania tego dokumentu istnieje stabilna wersja
@@ -162,4 +160,4 @@ $loader->pushAutoloader('my_autoloader', 'My_');
 // się klasami z prefiksem 'Foo_' na początek listy autoloaderów
 $loader->unshiftAutoloader(array('Foo_Loader', 'autoload'), 'Foo_');
 ]]></programlisting>
-</sect1>
+</section>

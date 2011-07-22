@@ -1,8 +1,9 @@
-<sect3 id="zend.controller.actionhelpers.flashmessenger">
-    <title>FlashMessenger</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.flashmessenger"><info><title>FlashMessenger</title></info>
+    
 
-    <sect4 id="zend.controller.actionhelper.flashmessenger.introduction">
-        <title>הקדמה</title>
+    <section xml:id="zend.controller.actionhelper.flashmessenger.introduction"><info><title>הקדמה</title></info>
+        
         <para>
             תוסף העזרה <code>FlashMessenger</code> מאפשר לך להעביר הודעות שהמשתמש צריך יהיה לראות בעמוד הבא.
             כדי לבצע את הפעולה הזאת <code>FlashMessenger</code> משתמש ב <code>Zend_Session_Namespace</code> כדי לשמור הודעות להמשך או לעמוד הבא.
@@ -11,10 +12,10 @@
             למידע נוסף <link linkend="zend.session.advanced_usage.starting_a_session">Zend_Session</link>.
         </para>
 
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelper.flashmessenger.basicusage">
-        <title>דוגמא לשימוש בסיסי</title>
+    <section xml:id="zend.controller.actionhelper.flashmessenger.basicusage"><info><title>דוגמא לשימוש בסיסי</title></info>
+        
         <para>
             הדוגמא למטה מציגה את השימוש בתוסף עזרה זה בצורה הכי בסיסית שלו.
             כשהפעולה <code>/some/my</code> נקראת, היא מוסיפה את ההודעה "Record Saved!" לאחר מכן הפעולה <code>/some/my-next-request</code> תחזיר את זה ותציג אותו לאחר מכן גם תמחק אותו.
@@ -53,7 +54,7 @@ class SomeController extends Zend_Controller_Action
         $this->render();
     }
 }
-]]>
-        </programlisting>
-    </sect4>
-</sect3>
+
+        ]]></programlisting>
+    </section>
+</section>

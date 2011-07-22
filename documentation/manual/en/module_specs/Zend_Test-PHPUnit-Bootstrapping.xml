@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.test.phpunit.bootstrapping">
-    <title>Bootstrapping your TestCase</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.bootstrapping"><info><title>Bootstrapping your TestCase</title></info>
+    
 
     <para>
         As noted in the <link linkend="zend.test.phpunit.loginexample">Login
@@ -60,8 +59,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 
     <para>
         Third, you can provide a <acronym>PHP</acronym> callback to execute in order to bootstrap
-        your application. This method is seen in the <link
-            linkend="zend.test.phpunit.loginexample">Login example</link>. If
+        your application. This method is seen in the <link linkend="zend.test.phpunit.loginexample">Login example</link>. If
         the callback is a function or static method, this could be set at the
         class level:
     </para>
@@ -146,7 +144,4 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         Once the application is bootstrapped, you can then start creating
         your tests.
     </para>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,15 +1,16 @@
-<sect1 id="zend.date.constants">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.constants"><info><title> 一般日期函数的常量 </title></info>
 
-    <title> 一般日期函数的常量 </title>
+    
 
     <para>
         不论什么时候 <code>Zend_Date</code> 方法需要参数 <code>$parts</code>，下面常数中其中之一可担当此任，
         用来选择日期的特定部分或指示日期使用的或期望使用的格式（例如 RFC 822）。
     </para>
 
-    <sect2 id="zend.date.constants.using">
+    <section xml:id="zend.date.constants.using"><info><title> 使用常数 </title></info>
 
-        <title> 使用常数 </title>
+        
 
         <para>
             例如，常数 <code>Zend_Date::HOUR</code> 可以像下列所示来使用。当和星期几、日期、小时、分钟、秒和任何其它因位于世界不同的地方而不同地表示的日期部分一起使用时，
@@ -17,8 +18,8 @@
             不管使用了哪些单元，输出必需表达为 GMT/UTC 或本地化。下面的输出例子反映了 Europe/GMT+1 hour (e.g. Germany, Austria, France) 的本地化。
         </para>
 
-        <table id="zend.date.constants.using.table">
-            <title> Zend_Date::HOUR 的操作 </title>
+        <table xml:id="zend.date.constants.using.table"><info><title> Zend_Date::HOUR 的操作 </title></info>
+            
             <tgroup cols="4">
                 <thead>
                     <row>
@@ -57,7 +58,7 @@
                         <entry>compare(12, Zend_Date::HOUR)</entry>
                         <entry>Compare hour, returns 0, 1 or -1</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
-                        <entry>1 (if object > argument)</entry>
+                        <entry>1 (if object &gt; argument)</entry>
                     </row>
                     <row>
                         <entry>copy(Zend_Date::HOUR)</entry>
@@ -87,18 +88,18 @@
             </tgroup>
         </table>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.date.constants.list">
+    <section xml:id="zend.date.constants.list"><info><title> 所有常数列表 </title></info>
 
-        <title> 所有常数列表 </title>
+        
 
         <para>
             在 <code>Zend_Date</code> 中每个日期/时间的部分都有独一无二的常数。所有 <code>Zend_Date</code> 支持的常数如下：
         </para>
 
-        <table id="zend.date.constants.list.table-1">
-            <title>Day Constants</title>
+        <table xml:id="zend.date.constants.list.table-1"><info><title>Day Constants</title></info>
+            
             <tgroup cols="4">
                 <thead>
                     <row>
@@ -176,8 +177,8 @@
             </tgroup>
         </table>
 
-        <table id="zend.date.constants.list.table-2">
-            <title> 星期常数 </title>
+        <table xml:id="zend.date.constants.list.table-2"><info><title> 星期常数 </title></info>
+            
             <tgroup cols="4">
                 <thead>
                     <row>
@@ -199,8 +200,8 @@
             </tgroup>
         </table>
 
-        <table id="zend.date.constants.list.table-3">
-            <title> 月常数 </title>
+        <table xml:id="zend.date.constants.list.table-3"><info><title> 月常数 </title></info>
+            
             <tgroup cols="4">
                 <thead>
                     <row>
@@ -255,8 +256,8 @@
             </tgroup>
         </table>
 
-        <table id="zend.date.constants.list.table-4">
-            <title> 年常数 </title>
+        <table xml:id="zend.date.constants.list.table-4"><info><title> 年常数 </title></info>
+            
             <tgroup cols="4">
                 <thead>
                     <row>
@@ -304,8 +305,8 @@
             </tgroup>
         </table>
 
-        <table id="zend.date.constants.list.table-5">
-            <title> 时间常数 </title>
+        <table xml:id="zend.date.constants.list.table-5"><info><title> 时间常数 </title></info>
+            
             <tgroup cols="4">
                 <thead>
                     <row>
@@ -393,8 +394,8 @@
             </tgroup>
         </table>
 
-        <table id="zend.date.constants.list.table-6">
-            <title> 时区常数 </title>
+        <table xml:id="zend.date.constants.list.table-6"><info><title> 时区常数 </title></info>
+            
             <tgroup cols="4">
                 <thead>
                     <row>
@@ -450,8 +451,8 @@
             </tgroup>
         </table>
 
-        <table id="zend.date.constants.list.table-7">
-            <title> 日期格式常数（格式包括时区）</title>
+        <table xml:id="zend.date.constants.list.table-7"><info><title> 日期格式常数（格式包括时区）</title></info>
+            
             <tgroup cols="4">
                 <thead>
                     <row>
@@ -479,7 +480,7 @@
                     <row>
                         <entry>Zend_Date::TIMESTAMP</entry>
                         <entry>
-                            <ulink url="http://en.wikipedia.org/wiki/Unix_Time">Unix time</ulink> (seconds since 1.1.1970, mixed)</entry>
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Unix_Time">Unix time</link> (seconds since 1.1.1970, mixed)</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis role="strong">1234533207</emphasis>
                         </entry>
@@ -549,8 +550,8 @@
             当 <code>$part</code> 用作一个输入格式，该常量提灵活地接受许多相似的日期格式。启发式自动从输入字符串里解析并“修改”日期里的简单的错误（如果有的话），如当需要时，交换年月日的位置。
         </para>
 
-        <table id="zend.date.constants.list.table-8">
-            <title> 日期和时间格式 (format varies by locale)</title>
+        <table xml:id="zend.date.constants.list.table-8"><info><title> 日期和时间格式 (format varies by locale)</title></info>
+            
             <tgroup cols="4">
                 <thead>
                     <row>
@@ -648,11 +649,11 @@
             </tgroup>
         </table>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.date.constants.selfdefinedformats">
+    <section xml:id="zend.date.constants.selfdefinedformats"><info><title> 自定义 ISO 输出格式 </title></info>
 
-        <title> 自定义 ISO 输出格式 </title>
+        
 
         <para>
             如果你需要的日期格式没有在上述的格式中出现，那么使用从下面 ISO 格式指定器产生的自定义格式。
@@ -661,22 +662,22 @@
 
         <para>
             如果你喜欢的话，可接受的格式指定器可以从 ISO 格式修改为 PHP 的日期格式，然而，PHP 日期格式指定不支持所有的按 ISO 标准定义的格式。
-            使用 <code>Zend_Date::setOptions(array('format_type' => 'php'))</code> 方法来把 Zend_Date 方法从支持 ISO 格式制定器切换到 PHP date()类型制定器（参见下面 <xref linkend="zend.date.constants.phpformats" />）。
+            使用 <code>Zend_Date::setOptions(array('format_type' =&gt; 'php'))</code> 方法来把 Zend_Date 方法从支持 ISO 格式制定器切换到 PHP date()类型制定器（参见下面 <xref linkend="zend.date.constants.phpformats"/>）。
         </para>
 
-        <example id="zend.date.constants.selfdefinedformats.example-1">
-            <title> 自定义 ISO 格式用法示例 </title>
+        <example xml:id="zend.date.constants.selfdefinedformats.example-1"><info><title> 自定义 ISO 格式用法示例 </title></info>
+            
             <programlisting role="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 $date = new Zend_Date(1234567890, false, $locale);
 print $date->toString("'Era:GGGG='GGGG, ' Date:yy.MMMM.dd'yy.MMMM.dd");
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </example>
 
-        <table id="zend.date.constants.selfdefinedformats.table">
-            <title> <emphasis role="strong">ISO 8601 日期输出 </emphasis> 常量
-            </title>
+        <table xml:id="zend.date.constants.selfdefinedformats.table"><info><title> <emphasis role="strong">ISO 8601 日期输出 </emphasis> 常量
+            </title></info>
+            
             <tgroup cols="4">
                 <thead>
                     <row>
@@ -1082,22 +1083,22 @@ print $date->toString("'Era:GGGG='GGGG, ' Date:yy.MMMM.dd'yy.MMMM.dd");
                 所以如果没有按你的格式获得分钟数，检查是否使用了正确的指定器。
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.date.constants.phpformats">
+    <section xml:id="zend.date.constants.phpformats"><info><title> 使用 PHP 的 date() 格式指定器的自定义输出格式 </title></info>
 
-        <title> 使用 PHP 的 date() 格式指定器的自定义输出格式 </title>
+        
 
         <para>
-            如果你更喜欢使用 PHP 的日期格式指定器，可以使用 <code>Zend_Date::setOptions(array('format' => 'php'))</code> 方法
-            把 Zend_Date 方法从支持 ISO 格式制定器切换到 PHP date()类型制定器。然后所有参数必需用 <ulink url="http://php.net/date">PHP's <code>date()</code> 格式指定器 </ulink> 给出。
+            如果你更喜欢使用 PHP 的日期格式指定器，可以使用 <code>Zend_Date::setOptions(array('format' =&gt; 'php'))</code> 方法
+            把 Zend_Date 方法从支持 ISO 格式制定器切换到 PHP date()类型制定器。然后所有参数必需用 <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/date">PHP's <code>date()</code> 格式指定器 </link> 给出。
             PHP 日期格式缺乏一些 ISO 格式支持的格式，反之亦然。如果不喜欢，可以使用标准的 ISO 格式。
             而且，如果你有一些历史遗留的使用 PHP 日期格式的代码，可以用 <link linkend="zend.locale.date.normalize">Zend_Locale_Format::convertPhpToIsoFormat()</link> 手工转换为 ISO 格式，或使用 <code>setOptions()</code>。
             下面的例子示例了从下表生成的自定义格式的常量的用法。
         </para>
 
-        <example id="zend.date.constants.phpformats.example-1">
-            <title> 用 PHP 指定器自定义格式的用例 </title>
+        <example xml:id="zend.date.constants.phpformats.example-1"><info><title> 用 PHP 指定器自定义格式的用例 </title></info>
+            
             <programlisting role="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 Zend_Date::setOptions(array('format_type' => 'php'));
@@ -1107,8 +1108,8 @@ $date = new Zend_Date(1234567890, false, $locale);
 print $date->toString('F j, Y, g:i a');
 
 print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </example>
 
         <para>
@@ -1117,9 +1118,9 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
             并且 Zend_Date 方法承认这些 “奇特的” PHP 格式指定器，即使是处于缺省的 "ISO" 格式模式中。
         </para>
 
-        <table id="zend.date.constants.phpformats.table">
-            <title> <emphasis role="strong">PHP 日期输出 </emphasis> 常量
-            </title>
+        <table xml:id="zend.date.constants.phpformats.table"><info><title> <emphasis role="strong">PHP 日期输出 </emphasis> 常量
+            </title></info>
+            
             <tgroup cols="5">
                 <thead>
                     <row>
@@ -1423,6 +1424,6 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
             </tgroup>
         </table>
 
-    </sect2>
+    </section>
 
-</sect1>
+</section>

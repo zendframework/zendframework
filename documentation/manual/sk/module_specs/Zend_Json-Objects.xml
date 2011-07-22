@@ -1,5 +1,6 @@
-<sect1 id="zend.json.objects">
-    <title>JSON objekty</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.objects"><info><title>JSON objekty</title></info>
+    
     <para>
         Keď sa serializuje PHP objekt na JSON objekt všetky verejné vlastnosti
         sú zahrnuté vo výslednom objekte.
@@ -34,7 +35,4 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
         na vývojára. Ak je potrebné vytvoriť špecifický objekt, stále je to možné
         urobiť priamo v kóde a použiť hodnoty získane z <code>Zend_Json</code>
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

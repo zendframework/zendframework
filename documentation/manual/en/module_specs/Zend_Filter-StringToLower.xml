@@ -1,14 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.stringtolower">
-    <title>StringToLower</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.stringtolower"><info><title>StringToLower</title></info>
+    
 
     <para>
         This filter converts any input to be lowercased.
     </para>
 
-    <sect3 id="zend.filter.set.stringtolower.options">
-        <title>Supported options for Zend_Filter_StringToLower</title>
+    <section xml:id="zend.filter.set.stringtolower.options"><info><title>Supported options for Zend_Filter_StringToLower</title></info>
+        
 
         <para>
             The following options are supported for
@@ -23,10 +22,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.stringtolower.basic">
-        <title>Basic usage</title>
+    <section xml:id="zend.filter.set.stringtolower.basic"><info><title>Basic usage</title></info>
+        
 
         <para>
             This is a basic example:
@@ -38,14 +37,14 @@ $filter = new Zend_Filter_StringToLower();
 print $filter->filter('SAMPLE');
 // returns "sample"
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.stringtolower.encoding">
-        <title>Different encoded strings</title>
+    <section xml:id="zend.filter.set.stringtolower.encoding"><info><title>Different encoded strings</title></info>
+        
 
         <para>
             Per default it will only handle characters from the actual locale of your
-            server. Characters from other charsets would be ignored. Still, it&apos;s
+            server. Characters from other charsets would be ignored. Still, it's
             possible to also lowercase them when the mbstring extension is available
             in your environment. Simply set the wished encoding when initiating the
             <classname>StringToLower</classname> filter. Or use the
@@ -63,8 +62,8 @@ $filter = new Zend_Filter_StringToLower(array('encoding' => 'UTF-8'));
 $filter->setEncoding('ISO-8859-1');
 ]]></programlisting>
 
-        <note>
-            <title>Setting wrong encodings</title>
+        <note><info><title>Setting wrong encodings</title></info>
+            
 
             <para>
                 Be aware that you will get an exception when you want to set an encoding
@@ -76,5 +75,5 @@ $filter->setEncoding('ISO-8859-1');
                 mbstring extension you will get an exception.
             </para>
         </note>
-    </sect3>
-</sect2>
+    </section>
+</section>

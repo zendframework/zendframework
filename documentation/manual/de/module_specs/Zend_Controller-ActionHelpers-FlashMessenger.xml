@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.actionhelpers.flashmessenger">
-    <title>FlashMessenger</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.flashmessenger"><info><title>FlashMessenger</title></info>
+    
 
-    <sect4 id="zend.controller.actionhelper.flashmessenger.introduction">
-        <title>Einführung</title>
+    <section xml:id="zend.controller.actionhelper.flashmessenger.introduction"><info><title>Einführung</title></info>
+        
 
         <para>
             Der <emphasis>FlashMessenger</emphasis> Helfer erlaubt es Nachrichten zu übergeben die
@@ -16,14 +14,13 @@
             man plant <classname>Zend_Session</classname> oder
             <classname>Zend_Session_Namespace</classname> zu verwenden, diese mit
             <methodname>Zend_Session::start()</methodname> in der Bootstrap Datei zu
-            initialisieren. (Siehe die <link
-                linkend="zend.session.advanced_usage.starting_a_session">Zend_Session</link>
+            initialisieren. (Siehe die <link linkend="zend.session.advanced_usage.starting_a_session">Zend_Session</link>
             Dokumentation für weitere Details über die Verwendung)
         </para>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelper.flashmessenger.basicusage">
-        <title>Beispiel einer standardmäßigen Verwendung</title>
+    <section xml:id="zend.controller.actionhelper.flashmessenger.basicusage"><info><title>Beispiel einer standardmäßigen Verwendung</title></info>
+        
 
         <para>
             Das Anwendungsbeispiel von unten zeigt die Verwendung einer Flash Nachricht und Ihre
@@ -66,5 +63,5 @@ class SomeController extends Zend_Controller_Action
     }
 }
 ]]></programlisting>
-    </sect4>
-</sect3>
+    </section>
+</section>

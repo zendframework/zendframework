@@ -1,12 +1,13 @@
-<sect3 id="zend.view.helpers.initial.headstyle">
-    <title>HeadStyle 助手 </title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headstyle"><info><title>HeadStyle 助手 </title></info>
+    
 
     <para>
         在 HTML <code>&lt;head&gt;</code> 元素中 HTML <code>&lt;style&gt;</code> 元素用来包含 CSS stylesheets inline 。
     </para>
 
-    <note>
-        <title> 使用 HeadLink 来链接 CSS 文件 </title>
+    <note><info><title> 使用 HeadLink 来链接 CSS 文件 </title></info>
+        
 
         <para>
             <link linkend="zend.view.helpers.initial.headlink">HeadLink</link> 为包含外部 stylesheets 应该用来生成 <code>&lt;link&gt;</code> 元素。如果想定义自己的 stylesheets inline， 使用 <code>HeadScript</code> 。
@@ -48,8 +49,8 @@
         <code>HeadStyle</code> 助手是 <link linkend="zend.view.helpers.initial.placeholder"> 占位符助手 </link> 的一个具体实现。
     </para>
 
-    <example id="zend.view.helpers.initial.headstyle.basicusage">
-        <title>HeadStyle 助手的基本用法 </title>
+    <example xml:id="zend.view.helpers.initial.headstyle.basicusage"><info><title>HeadStyle 助手的基本用法 </title></info>
+        
 
         <para>
             在任何时候都可以指定一个新的样式标签：
@@ -88,8 +89,8 @@ $this->headStyle()->prependStyle($firstStyles);
 ]]></programlisting>
     </example>
 
-    <example id="zend.view.helpers.initial.headstyle.capture">
-        <title> 用 HeadStyle 助手抓取样式声明 </title>
+    <example xml:id="zend.view.helpers.initial.headstyle.capture"><info><title> 用 HeadStyle 助手抓取样式声明 </title></info>
+        
 
         <para>
             有时候需要用程序生成 CSS 样式声明。当你可以使用字符串串联，heredoc等等， 通常通过创建脚本和在PHP标签里做手脚会更容易些。<code>HeadStyle</code> 可以做这个，把它抓取到堆栈：
@@ -117,7 +118,4 @@ body {
             </para></listitem>
         </itemizedlist>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

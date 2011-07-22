@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21241 -->
-<sect2 id="zend.validate.Db">
-    <title>Db_RecordExists および Db_NoRecordExists</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.Db"><info><title>Db_RecordExists および Db_NoRecordExists</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Db_RecordExists</classname> および
@@ -12,8 +10,8 @@
     </para>
 
     <!-- TODO : to be translated -->
-    <sect3 id="zend.validate.set.db.options">
-        <title>Supported options for Zend_Validate_Db_*</title>
+    <section xml:id="zend.validate.set.db.options"><info><title>Supported options for Zend_Validate_Db_*</title></info>
+        
 
         <para>
             The following options are supported for
@@ -57,10 +55,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.db.basic-usage">
-        <title>基本的な使用法</title>
+    <section xml:id="zend.validate.db.basic-usage"><info><title>基本的な使用法</title></info>
+        
 
         <para>
             このバリデータの基本的な使用例です。
@@ -114,10 +112,10 @@ if ($validator->isValid($username)) {
             指定したカラムの値が <varname>$username</varname> に一致するレコードが見つかれば、
             エラーメッセージが表示されます。
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.db.excluding-records">
-        <title>レコードの除外</title>
+    <section xml:id="zend.validate.db.excluding-records"><info><title>レコードの除外</title></info>
+        
 
         <para>
             <classname>Zend_Validate_Db_RecordExists</classname> および
@@ -197,10 +195,10 @@ if ($validator->isValid($username)) {
             <code>post_id</code> の値が
             <varname>$category_id</varname> に一致するレコードがあることを調べます。
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.db.database-adapters">
-        <title>データベースアダプタ</title>
+    <section xml:id="zend.validate.db.database-adapters"><info><title>データベースアダプタ</title></info>
+        
 
         <para>
             アダプタを指定することもできます。
@@ -218,10 +216,10 @@ $validator = new Zend_Validate_Db_RecordExists(
     )
 );
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.db.database-schemas">
-        <title>データベーススキーマ</title>
+    <section xml:id="zend.validate.db.database-schemas"><info><title>データベーススキーマ</title></info>
+        
 
         <para>
             データベース内のスキーマを
@@ -239,5 +237,5 @@ $validator = new Zend_Validate_Db_RecordExists(
     )
 );
 ]]></programlisting>
-    </sect3>
-</sect2>
+    </section>
+</section>

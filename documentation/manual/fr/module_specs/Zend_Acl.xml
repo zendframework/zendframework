@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20763 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.acl.introduction">
-    <title>Introduction</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_Acl</classname> fournit une implémentation légère et flexible de
@@ -12,7 +10,7 @@
     </para>
 
     <para>
-        Dans le cadre de cette documentation&#160;:
+        Dans le cadre de cette documentation :
     </para>
 
     <itemizedlist>
@@ -41,8 +39,8 @@
         non) à des objets protégés (ressources).
     </para>
 
-    <sect2 id="zend.acl.introduction.resources">
-        <title>A propos des ressources</title>
+    <section xml:id="zend.acl.introduction.resources"><info><title>A propos des ressources</title></info>
+        
 
         <para>
             Avec <classname>Zend_Acl</classname>, créer une ressource est très simple.
@@ -78,10 +76,10 @@
             peut assigner des règles qui affectent tous les privilèges ou seuls certains privilèges
             d'une ressource.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.roles">
-        <title>A propos des rôles</title>
+    <section xml:id="zend.acl.introduction.roles"><info><title>A propos des rôles</title></info>
+        
 
         <para>
             Comme pour les ressources, créer un rôle est très simple. Tout rôle doit implémenter
@@ -106,8 +104,8 @@
             l'ambiguïté et la manière dont <classname>Zend_Acl</classname> la résout.
         </para>
 
-        <example id="zend.acl.introduction.roles.example.multiple_inheritance">
-            <title>Héritages multiples entre rôles</title>
+        <example xml:id="zend.acl.introduction.roles.example.multiple_inheritance"><info><title>Héritages multiples entre rôles</title></info>
+            
 
             <para>
                 Le code ci-dessous définit trois rôles de base - "guest", "member", et "admin" -
@@ -116,7 +114,7 @@
                 apparaissent dans le tableau <varname>$parents</varname> est important. Lorsque cela
                 est nécessaire <classname>Zend_Acl</classname> recherche les règles d'accès définies
                 non seulement pour le rôle demandé (ici "someUser"), mais aussi pour les autres
-                rôles desquels le rôle recherché hérite (ici "guest", "member", et "admin")&#160;:
+                rôles desquels le rôle recherché hérite (ici "guest", "member", et "admin") :
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -170,10 +168,10 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'autorisé' : 'refusé';
                 recherchée.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.creating">
-        <title>Créer la Liste de Contrôle d'Accès</title>
+    <section xml:id="zend.acl.introduction.creating"><info><title>Créer la Liste de Contrôle d'Accès</title></info>
+        
 
         <para>
             Une <acronym>ACL</acronym> peut représenter n'importe quel ensemble d'objets physiques
@@ -181,7 +179,7 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'autorisé' : 'refusé';
             un système basique d'<acronym>ACL</acronym> pour une Gestion de Contenus
             (<acronym>CMS</acronym>) qui comporte plusieurs niveaux de groupes au sein d'une grande
             variété de zones. Pour créer un nouvel objet <acronym>ACL</acronym>, nous créons une
-            nouvelle instance d'<acronym>ACL</acronym> sans paramètres&#160;:
+            nouvelle instance d'<acronym>ACL</acronym> sans paramètres :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -195,10 +193,10 @@ $acl = new Zend_Acl();
                 ressource pour chaque rôle.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.role_registry">
-        <title>Registre des rôles</title>
+    <section xml:id="zend.acl.introduction.role_registry"><info><title>Registre des rôles</title></info>
+        
 
         <para>
             Les systèmes de gestion de contenu (ou <acronym>CMS</acronym>) vont pratiquement
@@ -212,11 +210,11 @@ $acl = new Zend_Acl();
             utilisateurs, configuration et backup ou export. Cet ensemble de permissions peut être
             représenté dans un registre de rôles, permettant à chaque groupe d'hériter des
             privilèges des groupes "parents". Les permissions peuvent être rendues de la manière
-            suivante&#160;:
+            suivante :
         </para>
 
-        <table id="zend.acl.introduction.role_registry.table.example_cms_access_controls">
-            <title>Contrôles d'Accès pour un exemple de CMS</title>
+        <table xml:id="zend.acl.introduction.role_registry.table.example_cms_access_controls"><info><title>Contrôles d'Accès pour un exemple de CMS</title></info>
+            
 
             <tgroup cols="3">
                 <thead>
@@ -254,7 +252,7 @@ $acl = new Zend_Acl();
         <para>
             Pour cet exemple, <classname>Zend_Acl_Role</classname> est utilisé, mais
             n'importe quel objet qui implémente <classname>Zend_Acl_Role_Interface</classname> est
-            acceptable. Ces groupes peuvent être ajoutés au registre des rôles comme suit&#160;:
+            acceptable. Ces groupes peuvent être ajoutés au registre des rôles comme suit :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -278,10 +276,10 @@ $acl->addRole(new Zend_Acl_Role('editeur'), 'staff');
 // Administrateur n'hérite pas d'accès
 $acl->addRole(new Zend_Acl_Role('administrateur'));
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.defining">
-        <title>Définir les Contrôles d'Accès</title>
+    <section xml:id="zend.acl.introduction.defining"><info><title>Définir les Contrôles d'Accès</title></info>
+        
 
         <para>
             Maintenant que l'<acronym>ACL</acronym> contient les rôles nécessaires, on peut établir
@@ -302,7 +300,7 @@ $acl->addRole(new Zend_Acl_Role('administrateur'));
 
         <para>
             En conséquence, on peut définir un nombre assez complexe de règles avec un nombre
-            minimal de code. Pour définir les permissions comme définies ci-dessus&#160;:
+            minimal de code. Pour définir les permissions comme définies ci-dessus :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -339,16 +337,16 @@ $acl->allow('administrateur');
             ci-dessus sont utilisées pour indiquer que les règles s'appliquent à toutes les
             ressources.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.querying">
-        <title>Interroger les ACL</title>
+    <section xml:id="zend.acl.introduction.querying"><info><title>Interroger les ACL</title></info>
+        
 
         <para>
             Nous avons maintenant une <acronym>ACL</acronym> flexible, qui peut être utilisée pour
             déterminer si l'objet appelant a les permissions pour réaliser les fonctions au sein de
             l'application web. Interroger cette liste est assez simple en utilisant la méthode
-            <methodname>isAllowed()</methodname>&#160;:
+            <methodname>isAllowed()</methodname> :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -384,5 +382,5 @@ echo $acl->isAllowed('administrateur', null, 'modifier') ?
      "autorisé" : "refusé";
 // autorisé car administrateur est autorisé pour tout
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

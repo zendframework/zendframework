@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21826 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.gdata.clientlogin">
-    <title>Authentification avec ClientLogin</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.clientlogin"><info><title>Authentification avec ClientLogin</title></info>
+    
 
     <para>
         Le mécanisme dit "ClientLogin" vous permet d'écrire des applications <acronym>PHP</acronym> qui
@@ -11,8 +9,8 @@
     </para>
 
     <para>
-        Voyez <ulink url="http://code.google.com/apis/accounts/AuthForInstalledApps.html">
-        http://code.google.com/apis/accounts/AuthForInstalledApps.html </ulink> pour plus
+        Voyez <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/accounts/AuthForInstalledApps.html">
+        http://code.google.com/apis/accounts/AuthForInstalledApps.html </link> pour plus
         d'informations sur l'authentification ClientLogin de Google Data.
     </para>
 
@@ -32,8 +30,8 @@
         correspondent à ceux de l'utilisateur de l'application.
     </para>
 
-    <sect2 id="zend.gdata.clientlogin.login">
-        <title>Création d'un client HTTP "ClientLogin" authentifié</title>
+    <section xml:id="zend.gdata.clientlogin.login"><info><title>Création d'un client HTTP "ClientLogin" authentifié</title></info>
+        
 
         <para>
             La création d'un client <acronym>HTTP</acronym> "ClientLogin" authentifié est un processus servi par
@@ -95,10 +93,10 @@ try {
 
 $cal = new Zend_Gdata_Calendar($client);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.clientlogin.terminating">
-        <title>Fermer un client HTTP authentifié par ClientLogin</title>
+    <section xml:id="zend.gdata.clientlogin.terminating"><info><title>Fermer un client HTTP authentifié par ClientLogin</title></info>
+        
 
         <para>
             Il n'y a pas de méthode pour supprimer l'authentification effectuée via un
@@ -106,5 +104,5 @@ $cal = new Zend_Gdata_Calendar($client);
             identifiants dans le ClientLogin étant un identifiant et un mot de passe de compte
             Google, ils ne peuvent être invalidés et sont utilisables de manière continue.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

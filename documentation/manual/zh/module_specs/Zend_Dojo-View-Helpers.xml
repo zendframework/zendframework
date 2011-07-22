@@ -1,5 +1,6 @@
-<sect2 id="zend.dojo.view.dijit">
-    <title>Dijit-Specific 视图助手 </title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.view.dijit"><info><title>Dijit-Specific 视图助手 </title></info>
+    
 
     <para>
         引用一下 Dojo 手册：“Dijit 是基于 dojo 之上的一个小部件系统”，Dijit 有
@@ -109,22 +110,21 @@
         为了使用这些视图助手，你需要用视图对象来注册路径给 dojo 视图助手。
     </para>
 
-    <example id="zend.dojo.view.dijit.prefixpath">
-        <title> 注册 Dojo 视图助手前缀路径 </title>
+    <example xml:id="zend.dojo.view.dijit.prefixpath"><info><title> 注册 Dojo 视图助手前缀路径 </title></info>
+        
 
         <programlisting role="php"><![CDATA[
 $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
 ]]></programlisting>
     </example>
 
-    <sect3 id="zend.dojo.view.dijit.layout">
-        <title>Dijit 布局元素 </title>
+    <section xml:id="zend.dojo.view.dijit.layout"><info><title>Dijit 布局元素 </title></info>
+        
 
         <para>
             dijit.layout 元素家族用来生成定制的、可预计的布局。任何关于用法的问题
-            <ulink
-                url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/layout">
-            请阅读 Dojo 手册</ulink>。
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/layout">
+            请阅读 Dojo 手册</link>。
         </para>
 
         <para>
@@ -302,8 +302,8 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
             </listitem>
         </itemizedlist>
 
-        <example id="zend.dojo.view.dijit.layout.borderexample">
-            <title>BorderContainer 布局 dijit 范例</title>
+        <example xml:id="zend.dojo.view.dijit.layout.borderexample"><info><title>BorderContainer 布局 dijit 范例</title></info>
+            
 
             <para>
                 BorderContainers, 特别是当和抓取内容耦合时，对复杂的布局效果特别有用。
@@ -343,17 +343,16 @@ echo $view->contentPane(
 echo $view->borderContainer()->captureEnd('masterLayout');
 ]]></programlisting>
         </example>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.view.dijit.form">
-        <title>Dijit 表单元素 </title>
+    <section xml:id="zend.dojo.view.dijit.form"><info><title>Dijit 表单元素 </title></info>
+        
 
         <para>
             Dojo 的表单校验和输入 dijit 在 dijit.form 树中。
             更多关于这些元素的一般用法和可接受的参数，请
-            <ulink
-                url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/form-validation-specialized-input">访问
-                dijit.form 文档</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/form-validation-specialized-input">访问
+                dijit.form 文档</link>.
         </para>
 
         <para>
@@ -522,14 +521,13 @@ echo $view->currencyTextBox(
 );
 ]]></programlisting>
 
-                <note>
-                    <title>Issues with Builds</title>
+                <note><info><title>Issues with Builds</title></info>
+                    
 
                     <para>
-                        目前有这些 <ulink
-                            url="http://trac.dojotoolkit.org/ticket/7183">
+                        目前有这些 <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://trac.dojotoolkit.org/ticket/7183">
                         和 build 层一起使用的 CurrencyTextBox 的已知问题
-                        </ulink>.
+                        </link>.
                         一个解决办法是确保文档的 Content-Type http-equiv meta tag 把字符集设置为 utf-8，
                         可通过调用下列方法来完成：
                     </para>
@@ -933,8 +931,5 @@ echo $view->validationTextBox(
 ]]></programlisting>
             </listitem>
         </itemizedlist>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

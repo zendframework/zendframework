@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21040 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.currency.introduction">
-    <title>Einführung in Zend_Currency</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.introduction"><info><title>Einführung in Zend_Currency</title></info>
+    
 
     <para>
         <classname>Zend_Currency</classname> ist Teil der starken Unterstützung für I18n im Zend
@@ -10,14 +10,14 @@
         Wechselkurs Services und Berechnung.
     </para>
 
-    <sect2 id="zend.currency.introduction.list">
-        <title>Warum sollte man Zend_Currency verwenden?</title>
+    <section xml:id="zend.currency.introduction.list"><info><title>Warum sollte man Zend_Currency verwenden?</title></info>
+        
 
         <para>
             <classname>Zend_Currency</classname> bietet die folgenden Vorteile:
         </para>
 
-        <itemizedlist mark='opencircle'>
+        <itemizedlist mark="opencircle">
             <listitem>
                 <para>
                     <emphasis>Komplette Unterstützung für Gebietsschemata</emphasis>
@@ -67,5 +67,5 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

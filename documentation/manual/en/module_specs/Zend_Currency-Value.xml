@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.currency.value">
-    <title>How much is my currency?</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.value"><info><title>How much is my currency?</title></info>
+    
 
     <para>
         When you are working with currencies then you normally want to display an amount of
@@ -10,8 +9,8 @@
         probably the exchange rate.
     </para>
 
-    <sect2 id="zend.currency.value.money">
-        <title>Working with currency values</title>
+    <section xml:id="zend.currency.value.money"><info><title>Working with currency values</title></info>
+        
 
         <para>
             The currency value, a.k.a. the money, you want to use can easily be set by using the
@@ -50,10 +49,10 @@ print $currency->setValue(2000); // Could return '$ 2.000'
             With the <methodname>getValue()</methodname> method you will get the actual set
             value.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.currency.value.precision">
-        <title>Using precision on currencies</title>
+    <section xml:id="zend.currency.value.precision"><info><title>Using precision on currencies</title></info>
+        
 
         <para>
             When working with currencies they you probably also have to handle precision.
@@ -106,5 +105,5 @@ $currency = new Zend_Currency(
 
 print $currency; // Could return '$ 1.000'
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20774 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.localizedtonormalized">
-    <title>LocalizedToNormalized</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.localizedtonormalized"><info><title>LocalizedToNormalized</title></info>
+    
 
     <para>
         Dieser Filter ändert jede angegebene lokalisierte Eingabe in seine normalisierte
@@ -76,8 +74,8 @@
         </para>
     </note>
 
-    <sect3 id="zend.filter.set.localizedtonormalized.numbers">
-        <title>Normalisierung von Zahlen</title>
+    <section xml:id="zend.filter.set.localizedtonormalized.numbers"><info><title>Normalisierung von Zahlen</title></info>
+        
 
         <para>
             Jede angegebene Zahl wie Integer, Float oder Realzahlen können normalisiert werden.
@@ -136,10 +134,10 @@ $filter->filter('123.456');
 $filter->filter('123.456,78901');
 // Gibt den Wert '123456.79' zurück
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.localizedtonormalized.dates">
-        <title>Normalisierung für Datum und Zeit</title>
+    <section xml:id="zend.filter.set.localizedtonormalized.dates"><info><title>Normalisierung für Datum und Zeit</title></info>
+        
 
         <para>
             Eingaben für Datum und Zeitwerte können auch normalisiert werden. Alle angegebenen
@@ -174,5 +172,5 @@ $filter = new Zend_Filter_LocalizedToNormalized(
 $filter->filter('11:22:33');
 // Gibt array('hour' => '33', 'minute' => '22', 'second' => '11') zurück
 ]]></programlisting>
-    </sect3>
-</sect2>
+    </section>
+</section>

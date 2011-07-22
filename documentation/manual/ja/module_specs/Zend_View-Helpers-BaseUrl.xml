@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 16589 -->
-<sect3 id="zend.view.helpers.initial.baseurl">
-    <title>BaseUrl ヘルパー</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.baseurl"><info><title>BaseUrl ヘルパー</title></info>
+    
 
     <para>
         フレームワークによって生成された大部分の<acronym>URL</acronym>が自動的に基底
@@ -42,7 +40,7 @@
             （例えば、「<filename>index.php</filename>」）を剥ぎ取ります。
             しかし、何かの場面では、問題を引き起こす場合があります。
             問題が起きたら、固有のBaseUrlを設定するために、
-            <methodname>$this->getHelper('BaseUrl')->setBaseUrl()</methodname>を使います。
+            <methodname>$this-&gt;getHelper('BaseUrl')-&gt;setBaseUrl()</methodname>を使います。
         </para>
     </note>
-</sect3>
+</section>

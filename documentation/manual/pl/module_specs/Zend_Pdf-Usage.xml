@@ -1,5 +1,6 @@
-<sect1 id="zend.pdf.usage">
-    <title>Przykład użycia modułu Zend_Pdf</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.usage"><info><title>Przykład użycia modułu Zend_Pdf</title></info>
+    
     <para>
     Ta sekcja pokazuje przykład użycia modułu Zend_Pdf
     </para>
@@ -12,8 +13,8 @@
     tym przykładem .
     </para>
 
-    <example id="zend.pdf.usage.example-1">
-        <title>Przykład użycia modułu Zend_Pdf</title>
+    <example xml:id="zend.pdf.usage.example-1"><info><title>Przykład użycia modułu Zend_Pdf</title></info>
+        
         <programlisting role="php"><![CDATA[
 /**
  * @package Zend_Pdf
@@ -163,8 +164,8 @@ if (isset($argv[2])) {
 } else {
     $pdf->save($argv[1], true /* uaktualniamy */);
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
 
-</sect1>
+</section>

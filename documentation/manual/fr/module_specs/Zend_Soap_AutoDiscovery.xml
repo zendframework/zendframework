@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.soap.autodiscovery">
-    <title>Auto découverte</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.soap.autodiscovery"><info><title>Auto découverte</title></info>
+    
 
-    <sect2 id="zend.soap.autodiscovery.introduction">
-        <title>Introduction à l'auto découverte</title>
+    <section xml:id="zend.soap.autodiscovery.introduction"><info><title>Introduction à l'auto découverte</title></info>
+        
 
         <para>
             Les fonctionnalités <acronym>SOAP</acronym> de Zend Framework sont proposées afin de simplifier
@@ -39,14 +37,12 @@
 
         <para>
             Il est indispensable de connaître les fonctionnalités qu'offre un serveur <acronym>SOAP</acronym>,
-            afin de pouvoir communiquer avec lui. <ulink
-            url="http://www.w3.org/TR/wsdl">WSDL</ulink> est alors utilisé pour décrire en détail
+            afin de pouvoir communiquer avec lui. <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/wsdl">WSDL</link> est alors utilisé pour décrire en détail
             l'API des services disponibles sur un serveur <acronym>SOAP</acronym>.
         </para>
 
         <para>
-            Le langage WSDL est assez complexe (voyez <ulink
-            url="http://www.w3.org/TR/wsdl">http://www.w3.org/TR/wsdl</ulink> pour les détails ). Il
+            Le langage WSDL est assez complexe (voyez <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/wsdl">http://www.w3.org/TR/wsdl</link> pour les détails ). Il
             est donc difficile d'écrire une définition WSDL correcte, à la main.
         </para>
 
@@ -81,14 +77,12 @@
         </para>
 
         <para>
-            Zend_Soap_AutoDiscovery supporte aussi la correspondance des types <acronym>PHP</acronym> vers <ulink
-            url="http://www.w3.org/TR/xmlschema-2/">les types XSD</ulink>.
+            Zend_Soap_AutoDiscovery supporte aussi la correspondance des types <acronym>PHP</acronym> vers <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/xmlschema-2/">les types XSD</link>.
         </para>
 
         <para>
             Voici un exemple d'utilisation de l'auto découverte. La fonction
-            <methodname>handle()</methodname> génère le fichier WSDL et l'envoie au navigateur : <programlisting
-            role="php"><![CDATA[
+            <methodname>handle()</methodname> génère le fichier WSDL et l'envoie au navigateur : <programlisting role="php"><![CDATA[
 class My_SoapServer_Class {
 ...
 }
@@ -105,8 +99,8 @@ $autodiscover->handle();
             fournit.
         </para>
 
-        <note id="zend.soap.autodiscovery.introduction.noserver">
-            <title>Zend_Soap_Autodiscover n'est pas un serveur SOAP</title>
+        <note xml:id="zend.soap.autodiscovery.introduction.noserver"><info><title>Zend_Soap_Autodiscover n'est pas un serveur SOAP</title></info>
+            
 
             <para>
                 Il est très important de noter, que la classe
@@ -137,10 +131,10 @@ if(isset($_GET['wsdl'])) {
 }
 ]]></programlisting></para>
             </note>
-        </sect2>
+        </section>
 
-        <sect2 id="zend.soap.autodiscovery.class">
-            <title>Auto découverte de classe</title>
+        <section xml:id="zend.soap.autodiscovery.class"><info><title>Auto découverte de classe</title></info>
+            
 
         <para>
             Si une classe est utilisée dans un serveur SOAP, alors celle-ci devrait aussi être
@@ -179,8 +173,7 @@ $autodiscover->handle();
 
                 <listitem>
                     <para>
-                        Les méthodes de la classe sont jointes dans un <ulink
-                        url="http://www.w3.org/TR/wsdl#_porttypes">Port Type</ulink>.
+                        Les méthodes de la classe sont jointes dans un <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/wsdl#_porttypes">Port Type</link>.
                     </para>
 
                     <para>
@@ -210,8 +203,8 @@ $autodiscover->handle();
                 </itemizedlist>
             </para>
 
-        <note>
-            <title>Important !</title>
+        <note><info><title>Important !</title></info>
+            
 
             <para>
                 L'auto génération du fichier WSDL (avec auto découverte de la classe) utilise
@@ -227,10 +220,10 @@ $autodiscover->handle();
                 classes en tant que services <acronym>SOAP</acronym> auto générés.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.soap.autodiscovery.functions">
-        <title>Auto découverte des fonctions</title>
+    <section xml:id="zend.soap.autodiscovery.functions"><info><title>Auto découverte des fonctions</title></info>
+        
 
         <para>
             Si des fonctions doivent être utilisées (partagées) via un serveur SOAP, alors
@@ -271,8 +264,7 @@ $autodiscover->handle();
 
                 <listitem>
                     <para>
-                        Les fonctions sont encapsulées dans un <ulink
-                        url="http://www.w3.org/TR/wsdl#_porttypes">Port Type</ulink>.
+                        Les fonctions sont encapsulées dans un <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/wsdl#_porttypes">Port Type</link>.
                     </para>
 
                     <para>
@@ -299,8 +291,8 @@ $autodiscover->handle();
                 </itemizedlist>
             </para>
 
-        <note>
-            <title>Important!</title>
+        <note><info><title>Important!</title></info>
+            
 
             <para>
                 L'auto génération du fichier WSDL (avec auto découverte des fonctions) utilise
@@ -316,10 +308,10 @@ $autodiscover->handle();
                 fonctions en tant que services <acronym>SOAP</acronym> auto générés.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.soap.autodiscovery.datatypes">
-        <title>Types de donnée auto découverts</title>
+    <section xml:id="zend.soap.autodiscovery.datatypes"><info><title>Types de donnée auto découverts</title></info>
+        
 
         <para>
             Les types de données d'entrée/sortie sont convertis en types spéciaux pour le
@@ -351,7 +343,7 @@ $autodiscover->handle();
                     <listitem>
                     <para>
                         Classe <acronym>PHP</acronym> &lt;-&gt; basé sur la stratégie des types complexes (Voir :
-                        <xref linkend="zend.soap.wsdl.types.add_complex" />) <footnote>
+                        <xref linkend="zend.soap.wsdl.types.add_complex"/>) <footnote>
                             <para>
                                 <classname>Zend_Soap_AutoDiscover</classname> sera créé avec
                                 la classe
@@ -363,8 +355,7 @@ $autodiscover->handle();
                                 chaîne correspondant au nom de la classe. Pour une compatibilité
                                 ascendante, avec <varname>$extractComplexType</varname> les variables
                                 booléennes sont analysées comme avec Zend_Soap_Wsdl. Regardez le
-                                manuel <link
-                                linkend="zend.soap.wsdl.types.add_complex">Zend_Soap_Wsdl sur
+                                manuel <link linkend="zend.soap.wsdl.types.add_complex">Zend_Soap_Wsdl sur
                                 l'ajout des types complexes</link> pour plus d'informations.
                             </para>
                             </footnote>.
@@ -394,10 +385,10 @@ $autodiscover->handle();
         "http://schemas.xmlsoap.org/soap/encoding/", <code>tns:</code> est "l'espace de nom
             cible" du service.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.soap.autodiscovery.wsdlstyles">
-        <title>Styles de liaisons WSDL</title>
+    <section xml:id="zend.soap.autodiscovery.wsdlstyles"><info><title>Styles de liaisons WSDL</title></info>
+        
 
         <para>
             WSDL offre différents mécanismes et styles de transport. Ceci affecte les balises
@@ -423,5 +414,5 @@ $autodiscover->addFunction('myfunc1');
 $autodiscover->handle();
 ]]></programlisting>
             </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,10 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20792 -->
-<sect1 id="zend.ldap.server">
-    <title>LDAPサーバから情報を取得</title>
-    <sect2 id="zend.ldap.server.rootdse">
-        <title>ルートDSE</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.server"><info><title>LDAPサーバから情報を取得</title></info>
+    
+    <section xml:id="zend.ldap.server.rootdse"><info><title>ルートDSE</title></info>
+        
 
         <para>
             
@@ -15,27 +13,25 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <ulink url="http://www.zytrax.com/books/ldap/ch3/#operational">OpenLDAP</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zytrax.com/books/ldap/ch3/#operational">OpenLDAP</link>
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <ulink
-                        url="http://msdn.microsoft.com/en-us/library/ms684291(VS.85).aspx">Microsoft
-                        ActiveDirectory</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://msdn.microsoft.com/en-us/library/ms684291(VS.85).aspx">Microsoft
+                        ActiveDirectory</link>
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <ulink
-                        url="http://www.novell.com/documentation/edir88/edir88/index.html?page=/documentation/edir88/edir88/data/ah59jqq.html">Novell
-                        eDirectory</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.novell.com/documentation/edir88/edir88/index.html?page=/documentation/edir88/edir88/data/ah59jqq.html">Novell
+                        eDirectory</link>
                 </para>
             </listitem>
         </itemizedlist>
 
-        <example id="zend.ldap.server.rootdse.getting">
-            <title>ルートDSEを手に入れる</title>
+        <example xml:id="zend.ldap.server.rootdse.getting"><info><title>ルートDSEを手に入れる</title></info>
+            
             <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
@@ -43,13 +39,13 @@ $rootdse = $ldap->getRootDse();
 $serverType = $rootdse->getServerType();
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.ldap.server.schema">
-        <title>参照するスキーマ</title>
+    <section xml:id="zend.ldap.server.schema"><info><title>参照するスキーマ</title></info>
+        
 
-        <example id="zend.ldap.server.schema.getting">
-            <title>サーバ・スキーマを手に入れる</title>
+        <example xml:id="zend.ldap.server.schema.getting"><info><title>サーバ・スキーマを手に入れる</title></info>
+            
             <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
@@ -58,15 +54,15 @@ $classes = $schema->getObjectClasses();
 ]]></programlisting>
         </example>
 
-        <sect3 id="zend.ldap.server.schema.openldap">
-            <title>OpenLDAP</title>
+        <section xml:id="zend.ldap.server.schema.openldap"><info><title>OpenLDAP</title></info>
+            
             <para/>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.ldap.server.schema.activedirectory">
-            <title>ActiveDirectory</title>
-            <note>
-                <title>ActiveDirectoryサーバで参照するスキーマ</title>
+        <section xml:id="zend.ldap.server.schema.activedirectory"><info><title>ActiveDirectory</title></info>
+            
+            <note><info><title>ActiveDirectoryサーバで参照するスキーマ</title></info>
+                
                 <para>
                     包括的探索ルーチンによって返される項目の数に関する
                     Microsoft ActiveDirectoryサーバに対する制限のために、
@@ -74,6 +70,6 @@ $classes = $schema->getObjectClasses();
                     Microsoft ActiveDirectoryサーバでは、参照するスキーマは現在利用でき<emphasis>ません</emphasis>。
                 </para>
             </note>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

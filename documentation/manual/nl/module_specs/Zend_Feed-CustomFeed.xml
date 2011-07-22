@@ -1,5 +1,6 @@
-<sect1 id="zend.feed.custom-feed">
-    <title>Aangepaste Feed en Entry klassen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.custom-feed"><info><title>Aangepaste Feed en Entry klassen</title></info>
+    
 
     <para>
         Naast dit alles is het ook mogelijk om de <code>Zend_Feed</code> klassen uit te breiden wanneer je een eigen formaat of extra's wil aanbieden, zoals automatisch afhandelen van elementen in een aangepaste namespace.
@@ -11,8 +12,8 @@
         afhandelt, zodanig dat de eindgebruiker zich helemaal niet met namespaces hoeft bezig te houden.
     </para>
 
-    <example>
-        <title>De Atom Entry Class uitbreiden met aangepaste Namespaces</title>
+    <example><info><title>De Atom Entry Class uitbreiden met aangepaste Namespaces</title></info>
+        
         <programlisting role="php"><![CDATA[
 <?php
 
@@ -58,7 +59,7 @@ class MyEntry extends Zend_Feed_Entry_Atom
 
 }
 
-?>]]>   </programlisting>
+?>   ]]></programlisting>
         <para>
             Om deze klasse nu te gebruiken moet je ze gewoon direct instantiëren en de <code>myUpdated</code>
             eigenschap zetten:
@@ -69,10 +70,7 @@ class MyEntry extends Zend_Feed_Entry_Atom
 $entry = new MyEntry();
 $entry->myUpdated = '2005-04-19T15:30';
 
-?>]]>       </programlisting>
+?>       ]]></programlisting>
     </example>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

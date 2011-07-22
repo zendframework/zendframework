@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.loader.autoloader-resource">
-    <title>Resource Autoloaders</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.autoloader-resource"><info><title>Resource Autoloaders</title></info>
+    
 
     <para>
         Resource autoloaders are intended to manage namespaced library code that
@@ -12,15 +11,14 @@
     </para>
 
     <para>
-        Resource autoloaders register with the <link
-            linkend="zend.loader.autoloader">autoloader</link> on instantiation,
+        Resource autoloaders register with the <link linkend="zend.loader.autoloader">autoloader</link> on instantiation,
         with the namespace to which they are associated. This allows you to
         easily namespace code in specific directories, and still reap the
         benefits of autoloading.
     </para>
 
-    <sect2 id="zend.loader.autoloader-resource.usage">
-        <title>Resource autoloader usage</title>
+    <section xml:id="zend.loader.autoloader-resource.usage"><info><title>Resource autoloader usage</title></info>
+        
 
         <para>
             Let's consider the following directory structure:
@@ -58,8 +56,8 @@ $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
 ));
 ]]></programlisting>
 
-        <note>
-            <title>Base namespace</title>
+        <note><info><title>Base namespace</title></info>
+            
 
             <para>
                 In <classname>Zend_Loader_Autoloader</classname>, you are expected to
@@ -136,10 +134,10 @@ $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
     ),
 ));
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.autoloader-resource.module">
-        <title>The Module Resource Autoloader</title>
+    <section xml:id="zend.loader.autoloader-resource.module"><info><title>The Module Resource Autoloader</title></info>
+        
 
         <para>
             Zend Framework ships with a concrete implementation of
@@ -175,19 +173,19 @@ views/
             created by default for each discrete module, allowing you to
             autoload module resources.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.autoloader-resource.factory">
-        <title>Using Resource Autoloaders as Object Factories</title>
-        <para></para>
+    <section xml:id="zend.loader.autoloader-resource.factory"><info><title>Using Resource Autoloaders as Object Factories</title></info>
+        
+        <para/>
         <!-- @todo -->
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.autoloader-resource.reference">
-        <title>Resource Autoloader Reference</title>
-        <para></para>
+    <section xml:id="zend.loader.autoloader-resource.reference"><info><title>Resource Autoloader Reference</title></info>
+        
+        <para/>
         <!-- @todo -->
-    </sect2>
+    </section>
 
     <!-- @todo
             Write section on using load() functionality
@@ -195,4 +193,4 @@ views/
                 Show how to use overloading to retrieve class instances
             Write reference section
     -->
-</sect1>
+</section>

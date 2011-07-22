@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.introduction"><info><title>Introduction</title></info>
+    
 
-    <sect2 id="zend.mail.introduction.getting-started">
-        <title>Pour commencer</title>
+    <section xml:id="zend.mail.introduction.getting-started"><info><title>Pour commencer</title></info>
+        
 
         <para>
             <classname>Zend_Mail</classname> fournit des fonctionnalités génériques pour
@@ -15,8 +13,8 @@
             <classname>Zend_Mail_Transport_Smtp</classname>.
         </para>
 
-        <example id="zend.mail.introduction.example-1">
-            <title>Émail simple avec <classname>Zend_Mail</classname></title>
+        <example xml:id="zend.mail.introduction.example-1"><info><title>Émail simple avec <classname>Zend_Mail</classname></title></info>
+            
 
             <para>
                 Un émail simple est composé d'un destinataire, d'un sujet, d'un message et
@@ -35,8 +33,8 @@ $mail->send();
 ]]></programlisting>
         </example>
 
-        <note>
-            <title>Définitions minimales</title>
+        <note><info><title>Définitions minimales</title></info>
+            
 
             <para>
                 Pour envoyer un émail avec <classname>Zend_Mail</classname>, vous devez
@@ -74,30 +72,28 @@ $mail->setBodyText('Ceci est le texte du message.')
     ->setSubject('Sujet de test')
     ->send();
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mail.introduction.sendmail">
-        <title>Configurer le transport sendmail par défaut</title>
+    <section xml:id="zend.mail.introduction.sendmail"><info><title>Configurer le transport sendmail par défaut</title></info>
+        
 
         <para>
             Le transporteur par défaut pour une instance <classname>Zend_Mail</classname> est
             <classname>Zend_Mail_Transport_Sendmail</classname>. C'est essentiellement un paquet
-            pour la fonction <acronym>PHP</acronym> <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink>. Si
-            vous souhaitez fournir des paramètres additionnels à la fonction <ulink
-            url="http://php.net/mail"><methodname>mail()</methodname></ulink>, créez simplement une nouvelle
+            pour la fonction <acronym>PHP</acronym> <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mail"><methodname>mail()</methodname></link>. Si
+            vous souhaitez fournir des paramètres additionnels à la fonction <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mail"><methodname>mail()</methodname></link>, créez simplement une nouvelle
             instance du transporteur et fournissez vos paramètres au constructeur. La nouvelle
             instance du transporteur peut ainsi devenir le transporteur par défaut
             <classname>Zend_Mail</classname>, ou il peut être fourni à la méthode
             <methodname>send()</methodname> de <classname>Zend_Mail</classname>.
         </para>
 
-        <example id="zend.mail.introduction.sendmail.example-1">
-            <title>Fournir des paramètres additionnels au transporteur
-            <classname>Zend_Mail_Transport_Sendmail</classname></title>
+        <example xml:id="zend.mail.introduction.sendmail.example-1"><info><title>Fournir des paramètres additionnels au transporteur
+            <classname>Zend_Mail_Transport_Sendmail</classname></title></info>
+            
 
             <para>
-                Cet exemple montre comment changer le Return-Path de la fonction <ulink
-                url="http://php.net/mail"><methodname>mail()</methodname></ulink>.
+                Cet exemple montre comment changer le Return-Path de la fonction <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mail"><methodname>mail()</methodname></link>.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -113,18 +109,18 @@ $mail->send();
 ]]></programlisting>
         </example>
 
-        <note>
-            <title>Restrictions en mode Safe</title>
+        <note><info><title>Restrictions en mode Safe</title></info>
+            
 
             <para>
                 Les paramètres additionnels optionnels peuvent entraînés un échec de la
-                fonction <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink> si <acronym>PHP</acronym>
+                fonction <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mail"><methodname>mail()</methodname></link> si <acronym>PHP</acronym>
                 fonctionne en mode safe.
             </para>
         </note>
 
-        <warning>
-            <title>Transport Sendmail et Windows</title>
+        <warning><info><title>Transport Sendmail et Windows</title></info>
+            
 
             <para>
                 Comme le spécifie le manuel PHP, la fonction <methodname>mail()</methodname> a des
@@ -132,13 +128,13 @@ $mail->send();
                 le transport Sendmail sous Windows ne fonctionnera pas conjointement avec
                 <methodname>addBcc()</methodname>. La fonction <methodname>mail()</methodname>
                 enverra vers le destinataire BCC de manière à ce que tous les destinataires
-                puissent voir qu'il est destinataire&#160;!
+                puissent voir qu'il est destinataire !
             </para>
 
             <para>
                 Ainsi si vous voulez utiliser BCC sur un serveur Windows, utilisez le transport
-                SMTP pour l'envoi&#160;!
+                SMTP pour l'envoi !
             </para>
         </warning>
-    </sect2>
-</sect1>
+    </section>
+</section>

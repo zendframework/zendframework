@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.soap.server">
-    <title>Zend_Soap_Server</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.soap.server"><info><title>Zend_Soap_Server</title></info>
+    
 
     <para>
         Die <classname>Zend_Soap_Server</classname> Klasse ist dazu gedacht den Web Service Teil der
@@ -21,10 +19,8 @@
     </para>
 
     <para>
-        Ein WSDL Dokument kann automatisch erzeugt werden mit der Funktionalität die von der <link
-            linkend="zend.soap.autodiscovery.introduction">Zend_Soap_AutoDiscovery Komponente</link>
-        angeboten wird sollte händisch erzeugt werden durch Verwendung der <link
-            linkend="zend.soap.wsdl"><classname>Zend_Soap_Wsdl</classname> Klasse</link> oder
+        Ein WSDL Dokument kann automatisch erzeugt werden mit der Funktionalität die von der <link linkend="zend.soap.autodiscovery.introduction">Zend_Soap_AutoDiscovery Komponente</link>
+        angeboten wird sollte händisch erzeugt werden durch Verwendung der <link linkend="zend.soap.wsdl"><classname>Zend_Soap_Wsdl</classname> Klasse</link> oder
         irgendeinem anderen <acronym>XML</acronym> Erstellungstool.
     </para>
 
@@ -33,16 +29,16 @@
         indem der Options-Mechanismus verwendet wird.
     </para>
 
-    <sect2 id="zend.soap.server.constructor">
-        <title>Der Zend_Soap_Server Konstruktor</title>
+    <section xml:id="zend.soap.server.constructor"><info><title>Der Zend_Soap_Server Konstruktor</title></info>
+        
 
         <para>
             Der Contructor von <classname>Zend_Soap_Server</classname> sollte für WSDL und
             nicht-WSDL Modi unterschiedlich verwendet werden.
         </para>
 
-        <sect3 id="zend.soap.server.constructor.wsdl_mode">
-            <title>Der Zend_Soap_Server Konstruktor für den WSDL Modus</title>
+        <section xml:id="zend.soap.server.constructor.wsdl_mode"><info><title>Der Zend_Soap_Server Konstruktor für den WSDL Modus</title></info>
+            
 
             <para>
                 Der <classname>Zend_Soap_Server</classname> Konstruktor nimmt zwei optionale
@@ -125,10 +121,10 @@
                     </listitem>
                 </orderedlist>
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.soap.server.wsdl_mode">
-            <title>Der Zend_Soap_Server Konstruktor für den nicht-WSDL Modus</title>
+        <section xml:id="zend.soap.server.wsdl_mode"><info><title>Der Zend_Soap_Server Konstruktor für den nicht-WSDL Modus</title></info>
+            
 
             <para>
                 Der erste Parameter des Konstruktors <emphasis>muß</emphasis> auf
@@ -196,11 +192,11 @@
                     </listitem>
                 </itemizedlist>
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.soap.server.api_define_methods">
-        <title>Methoden um eine Web Service API zu definieren</title>
+    <section xml:id="zend.soap.server.api_define_methods"><info><title>Methoden um eine Web Service API zu definieren</title></info>
+        
 
         <para>
             Es gibt zwei Wege um eine Web Service <acronym>API</acronym> zu definieren wenn man
@@ -249,8 +245,8 @@ $server->setObject(new MyClass());
 $server->handle();
 ]]></programlisting>
 
-        <note>
-            <title>Wichtig!</title>
+        <note><info><title>Wichtig!</title></info>
+            
 
             <para>
                 Jede Methode sollte komplett beschrieben sein indem Docblocks für Methoden
@@ -294,13 +290,13 @@ $server->addFunction('function2');
 ...
 $server->handle();
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.soap.server.request_response">
-        <title>Anfragen und Antwort Objekte behandeln</title>
+    <section xml:id="zend.soap.server.request_response"><info><title>Anfragen und Antwort Objekte behandeln</title></info>
+        
 
-        <note>
-            <title>Fortgeschritten</title>
+        <note><info><title>Fortgeschritten</title></info>
+            
 
             <para>
                 Dieser Abschnitt beschreibt das fortgeschrittene bearbeiten von
@@ -314,8 +310,8 @@ $server->handle();
             durchzuführen.
         </para>
 
-        <sect3 id="zend.soap.server.request_response.request">
-            <title>Anfrage Bearbeitung</title>
+        <section xml:id="zend.soap.server.request_response.request"><info><title>Anfrage Bearbeitung</title></info>
+            
 
             <para>
                 Die <methodname>Zend_Soap_Server::handle()</methodname> Methode nimmt Anfragen vom
@@ -388,10 +384,10 @@ $server = new Zend_Soap_Server(...);
 $server->handle();
 $request = $server->getLastRequest();
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.soap.server.request_response.response">
-            <title>Antworten vor-bearbeiten</title>
+        <section xml:id="zend.soap.server.request_response.response"><info><title>Antworten vor-bearbeiten</title></info>
+            
 
             <para>
                 Die <methodname>Zend_Soap_Server::handle()</methodname> Methode wirft die erzeugte
@@ -435,6 +431,6 @@ $server->handle();
 $response = $server->getLastResponse();
 ...
 ]]></programlisting>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

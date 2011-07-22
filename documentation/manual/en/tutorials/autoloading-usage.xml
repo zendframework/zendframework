@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.autoloading.usage">
-    <title>Basic Autoloader Usage</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.usage"><info><title>Basic Autoloader Usage</title></info>
+    
 
     <para>
         Now that we have an understanding of what autoloading is and the goals and design of Zend
@@ -49,8 +48,8 @@ $loader->registerNamespace(array('Foo_', 'Bar_'));
 $loader->setFallbackAutoloader(true);
 ]]></programlisting>
 
-    <warning>
-        <title>Do not use as a fallback autoloader</title>
+    <warning><info><title>Do not use as a fallback autoloader</title></info>
+        
 
         <para>
             While it's tempting to use <classname>Zend_Loader_Autoloader</classname> as a fallback
@@ -91,8 +90,8 @@ $loader->setFallbackAutoloader(true);
         </para>
     </warning>
 
-    <note>
-        <title>Namespace Prefixes vs PHP Namespaces</title>
+    <note><info><title>Namespace Prefixes vs PHP Namespaces</title></info>
+        
 
         <para>
             At the time this is written, <acronym>PHP</acronym> 5.3 has been released. With that
@@ -156,4 +155,4 @@ $loader->pushAutoloader('my_autoloader', 'My_');
 // to manage classes with the prefix 'Foo_':
 $loader->unshiftAutoloader(array('Foo_Loader', 'autoload'), 'Foo_');
 ]]></programlisting>
-</sect1>
+</section>

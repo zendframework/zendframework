@@ -23,7 +23,9 @@
  * @namespace
  */
 namespace Zend\Tool\Framework\System\Provider;
-use Zend\Tool\Framework;
+use Zend\Tool\Framework,
+    Zend\Tool\Framework\Provider\AbstractProvider,
+    Zend\Tool\Framework\Exception\RuntimeException;
 
 /**
  * Configuration Provider
@@ -40,7 +42,7 @@ use Zend\Tool\Framework;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Config extends Framework\Provider\AbstractProvider
+class Config extends AbstractProvider
 {
     /**
      * @var array
@@ -59,27 +61,27 @@ class Config extends Framework\Provider\AbstractProvider
      */
     public function create()
     {
-        /* @var $userConfig Zend_Tool_Framework_Client_Config */
+        /* @var $userConfig Zend\Tool\Framework\Client\Config */
         $userConfig = $this->_registry->getConfig();
 
         $resp = $this->_registry->getResponse();
         if ($userConfig->exists()) {
-            throw new Framework\Exception(
+            throw new RuntimeException(
                 "A configuration already exists, cannot create a new one.");
         }
 
         $homeDirectory = $this->_detectHomeDirectory();
 
-        $writer = new end\Config\Writer\Ini();
+        $writer = new Zend\Config\Writer\Ini();
         $writer->setRenderWithoutSections();
         $filename = $homeDirectory."/.zf.ini";
 
         $config = array(
             'php' => array(
-                'includepath' => get_include_path(),
+                'include_path' => get_include_path(),
             ),
         );
-        $writer->write($filename, new end\Config\Config($config));
+        $writer->write($filename, new Zend\Config\Config($config));
 
         $resp = $this->_registry->getResponse();
         $resp->appendContent("Successfully written Zend Tool config.");
@@ -185,10 +187,9 @@ class Config extends Framework\Provider\AbstractProvider
      */
     public function enableProvider($className)
     {
-        end\Loader::loadClass($className);
         $reflClass = new \ReflectionClass($className);
-        if (!in_array("Zend_Tool_Framework_Provider_Interface", $reflClass->getInterfaceNames())) {
-            throw new Framework\Exception("Given class is not a provider");
+        if (!in_array("Zend\Tool\Framework\Provider", $reflClass->getInterfaceNames())) {
+            throw new RuntimeException("Given class is not a provider");
         }
         $this->_doEnable($className);
     }
@@ -220,12 +221,12 @@ class Config extends Framework\Provider\AbstractProvider
                     array("color" => "green", "aligncenter" => true)
                 );
             } else {
-                throw new Framework\Exception(
+                throw new RuntimeException(
                     "Could not write user configuration to persistence."
                 );
             }
         } else {
-            throw new Framework\Exception(
+            throw new RuntimeException(
                 "Provider/Manifest '".$className."' is already enabled."
             );
         }
@@ -236,10 +237,9 @@ class Config extends Framework\Provider\AbstractProvider
      */
     public function enableManifest($className)
     {
-        end\Loader::loadClass($className);
         $reflClass = new \ReflectionClass($className);
-        if (!in_array("Zend_Tool_Framework_Manifest_Interface", $reflClass->getInterfaceNames())) {
-            throw new Framework\Exception("Given class is not a manifest.");
+        if (!in_array("Zend\\Tool\\Framework\\Manifest", $reflClass->getInterfaceNames())) {
+            throw new RuntimeException("Given class is not a manifest.");
         }
         $this->_doEnable($className);
     }
@@ -276,12 +276,12 @@ class Config extends Framework\Provider\AbstractProvider
                     array("color" => "green", "aligncenter" => true)
                 );
             } else {
-                throw new Framework\Exception(
+                throw new RuntimeException(
                     "Could not write user configuration to persistence."
                 );
             }
         } else {
-            throw new Framework\Exception(
+            throw new RuntimeException(
                 "Provider/Manifest '".$className."' is not enabled."
             );
         }
@@ -292,7 +292,7 @@ class Config extends Framework\Provider\AbstractProvider
      */
     protected function _loadUserConfigIfExists()
     {
-        /* @var $userConfig Zend_Tool_Framework_Client_Config */
+        /* @var $userConfig Zend\Tool\Framework\Client\Config */
         $userConfig = $this->_registry->getConfig();
 
         $resp = $this->_registry->getResponse();

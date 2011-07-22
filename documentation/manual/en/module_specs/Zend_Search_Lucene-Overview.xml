@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.search.lucene.overview">
-    <title>Overview</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.overview"><info><title>Overview</title></info>
+    
 
-    <sect2 id="zend.search.lucene.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.search.lucene.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> is a general purpose text search engine
@@ -32,12 +31,11 @@
 
             <classname>Zend_Search_Lucene</classname> was derived from the Apache Lucene project.
             The currently (starting from ZF 1.6) supported Lucene index format versions are 1.4 -
-            2.3. For more information on Lucene, visit <ulink
-                url="http://lucene.apache.org/java/docs/"/>.
+            2.3. For more information on Lucene, visit <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://lucene.apache.org/java/docs/">http://lucene.apache.org/java/docs/</uri>.
         </para>
 
-        <note>
-            <title/>
+        <note><info><title/></info>
+            
 
             <para>
                 Previous <classname>Zend_Search_Lucene</classname> implementations support the
@@ -52,10 +50,10 @@
                 Framework 1.0.x.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.documents-and-fields">
-        <title>Document and Field Objects</title>
+    <section xml:id="zend.search.lucene.index-creation.documents-and-fields"><info><title>Document and Field Objects</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> operates with documents as atomic objects for
@@ -166,14 +164,13 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $contents));
         <para>
             Java Lucene uses the 'contents' field as a default field to search.
             <classname>Zend_Search_Lucene</classname> searches through all fields by default, but
-            the behavior is configurable. See the <link
-                linkend="zend.search.lucene.query-language.fields">"Default search field"</link>
+            the behavior is configurable. See the <link linkend="zend.search.lucene.query-language.fields">"Default search field"</link>
             chapter for details.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.understanding-field-types">
-        <title>Understanding Field Types</title>
+    <section xml:id="zend.search.lucene.index-creation.understanding-field-types"><info><title>Understanding Field Types</title></info>
+        
 
         <itemizedlist>
             <listitem>
@@ -221,8 +218,8 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $contents));
                     identifier.
                </para>
 
-                <table id="zend.search.lucene.index-creation.understanding-field-types.table">
-                    <title>Zend_Search_Lucene_Field Types</title>
+                <table xml:id="zend.search.lucene.index-creation.understanding-field-types.table"><info><title>Zend_Search_Lucene_Field Types</title></info>
+                    
 
                     <tgroup cols="5">
                         <thead>
@@ -280,10 +277,10 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $contents));
                 </table>
            </listitem>
        </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.html-documents">
-        <title>HTML documents</title>
+    <section xml:id="zend.search.lucene.index-creation.html-documents"><info><title>HTML documents</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> offers a <acronym>HTML</acronym> parsing
@@ -383,10 +380,10 @@ $headerLinksArray = $doc->getHeaderLinks();
             <methodname>Zend_Search_Lucene_Document_Html::getExcludeNoFollowLinks()</methodname>
             method returns current state of "Exclude nofollow links" flag.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.docx-documents">
-        <title>Word 2007 documents</title>
+    <section xml:id="zend.search.lucene.index-creation.docx-documents"><info><title>Word 2007 documents</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> offers a Word 2007 parsing feature. Documents
@@ -483,10 +480,10 @@ $doc->addField(Zend_Search_Lucene_Field::Text(
 $index->addDocument($doc);
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.pptx-documents">
-        <title>Powerpoint 2007 documents</title>
+    <section xml:id="zend.search.lucene.index-creation.pptx-documents"><info><title>Powerpoint 2007 documents</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> offers a Powerpoint 2007 parsing feature.
@@ -580,10 +577,10 @@ $doc->addField(Zend_Search_Lucene_Field::Text(
     'Document annotation text'));
 $index->addDocument($doc);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.xlsx-documents">
-        <title>Excel 2007 documents</title>
+    <section xml:id="zend.search.lucene.index-creation.xlsx-documents"><info><title>Excel 2007 documents</title></info>
+        
         <para>
             <classname>Zend_Search_Lucene</classname> offers a Excel 2007 parsing feature. Documents
             can be created directly from a Excel 2007 file:
@@ -676,5 +673,5 @@ $doc->addField(Zend_Search_Lucene_Field::Text(
     'Document annotation text'));
 $index->addDocument($doc);
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

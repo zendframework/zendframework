@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 18274 -->
-<sect1 id="zend.feed.importing">
-    <title>フィードの読み込み</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.importing"><info><title>フィードの読み込み</title></info>
+    
 
     <para>
         <classname>Zend_Feed</classname> を使用すると、フィードの取得が非常に簡単に行えます。
@@ -37,8 +35,8 @@ $feedFromPHP = Zend_Feed::importString($feedString);
         <classname>Zend_Feed_Exception</classname> がスローされます。
     </para>
 
-    <sect2 id="zend.feed.importing.custom">
-        <title>独自のフィード</title>
+    <section xml:id="zend.feed.importing.custom"><info><title>独自のフィード</title></info>
+        
 
         <para>
             <classname>Zend_Feed</classname> を使用すると、独自のフィードを簡単に作成できます。
@@ -49,8 +47,8 @@ $feedFromPHP = Zend_Feed::importString($feedString);
             を実装した独自のデータソースによって配列がその場で算出されます。
         </para>
 
-        <sect3 id="zend.feed.importing.custom.importarray">
-            <title>独自の配列の読み込み</title>
+        <section xml:id="zend.feed.importing.custom.importarray"><info><title>独自の配列の読み込み</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // フィードを配列から読み込みます
@@ -256,35 +254,34 @@ array(
             <itemizedlist>
                 <listitem>
                     <para>
-                        <acronym>RSS</acronym> 2.0 の仕様: <ulink url="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</ulink>
+                        <acronym>RSS</acronym> 2.0 の仕様: <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</link>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        Atom の仕様: <ulink url="http://tools.ietf.org/html/rfc4287">RFC 4287</ulink>
+                        Atom の仕様: <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://tools.ietf.org/html/rfc4287">RFC 4287</link>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <acronym>WFW</acronym> の仕様: <ulink url="http://wellformedweb.org/news/wfw_namespace_elements">Well
-                            Formed Web</ulink>
+                        <acronym>WFW</acronym> の仕様: <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wellformedweb.org/news/wfw_namespace_elements">Well
+                            Formed Web</link>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        iTunes の仕様: <ulink
-                            url="http://www.apple.com/itunes/store/podcaststechspecs.html">iTunes
-                            Technical Specifications</ulink>
+                        iTunes の仕様: <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.apple.com/itunes/store/podcaststechspecs.html">iTunes
+                            Technical Specifications</link>
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.feed.importing.custom.importbuilder">
-            <title>独自のデータソースの読み込み</title>
+        <section xml:id="zend.feed.importing.custom.importbuilder"><info><title>独自のデータソースの読み込み</title></info>
+            
 
             <para>
                 <classname>Zend_Feed_Builder_Interface</classname> を実装した任意のデータソースから、
@@ -328,11 +325,11 @@ $rssFeedFromArray =
     Zend_Feed::importBuilder(new Zend_Feed_Builder($array), 'rss');
 ]]></programlisting>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.feed.importing.custom.dump">
+        <section xml:id="zend.feed.importing.custom.dump"><info><title>フィードの内容の出力</title></info>
 
-            <title>フィードの内容の出力</title>
+            
 
             <para>
                 <classname>Zend_Feed_Abstract</classname> インスタンスの内容を出力するには、
@@ -348,9 +345,6 @@ print $feed->saveXML();
 // http ヘッダを送信し、フィードを出力します
 $feed->send();
 ]]></programlisting>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

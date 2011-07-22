@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.rackspace">
+    <info><title>Zend\Service\Rackspace</title></info>
+
+    <section xml:id="zend.service.rackspace.introduction">
+        <info><title>Introduction</title></info>
+
+        <para>
+            The <classname>Zend\Service\Rackspace</classname> is a class that
+            provides a simple <acronym>API</acronym> to manage the Rackspace services
+            Cloud Files and Cloud Servers.
+        </para>
+        
+        <note><info><title>Load balancers service</title></info>
+            
+
+            <para>
+                The load balancers service of Rackspace is not implemented yet.
+                We are planning to release it in the next future.
+            </para>
+        </note>
+    </section>
+
+    <section xml:id="zend.service.rackspace.registering">
+        <info><title>Registering with Rackspace</title></info>
+
+        <para>
+            Before you can get started with <classname>Zend\Service\Rackspace</classname>, you must
+            first register for an account. Please see the
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.rackspace.com/cloud/">Cloud services</link>
+            page on the Rackspace website for more information.
+        </para>
+
+        <para>
+            After registering, you can get the Username and the API Key from the Rackspace management
+            console under the menu "Your Account" &gt; "API Access".
+            These informations are required to use the <classname>Zend\Service\Rackspace</classname>
+            classes.
+        </para>
+    </section>
+
+    <section xml:id="zend.service.rackspace.feature.files">
+        <info><title>Cloud Files</title></info>
+
+        <para>
+            The Cloud Files is a service to store any files in a cloud environment.
+            A user can store an unlimited quantity of files and each file can be as
+            large as 5 gigabytes. The files can be private or public. The private files
+            can be accessed using the API of Rackspace. The public files are accessed using
+            a <acronym>CDN</acronym> (Content Delivery Network).
+            Rackspace exposes a <acronym>REST</acronym> API to manage the Cloud Files.
+        </para>
+
+        <para>
+            <classname>Zend\Service\Rackspace\Files</classname> provides the following functionality:
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        Upload files programmatically for tight integration with your application
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        Enable Cloud Files CDN integration on any container for public distribution
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        Create Containers programmatically
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        Retrieve lists of containers and files
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+    </section>
+
+    <section xml:id="zend.service.rackspace.feature.servers">
+        <info><title>Cloud Servers</title></info>
+
+        <para>
+            Rackspace Cloud Servers is a compute service that provides server capacity in the cloud.
+            Cloud Servers come in different flavors of memory, disk space, and CPU.
+        </para>
+
+        <para>
+            <classname>Zend\Service\Rackspace\Servers</classname> provides the following functionality:
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        Create/delete new servers
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        List and get information on each server
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        Manage the public/private IP addresses of a server
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        Resize the server capacity
+                    </para>
+                </listitem>
+                
+                <listitem>
+                    <para>
+                        Reboot a server
+                    </para>
+                </listitem>
+                
+                <listitem>
+                    <para>
+                        Create new images for a server
+                    </para>
+                </listitem>
+                
+                <listitem>
+                    <para>
+                        Manage the backup of a server
+                    </para>
+                </listitem>
+                
+                <listitem>
+                    <para>
+                        Create a group of server to share the IP addresses for High Availability architecture
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+    </section>
+
+    <section xml:id="zend.service.rackspace.methods">
+        <info><title>Available Methods</title></info>
+ 
+        <para>
+            Eeach service class (Files, Servers) of Rackspace extends the <classname>Zend\Service\Rackspace</classname> abstract class.
+            This class contains a set of public methods shared with all the service.
+            This public methods are reported as follow:
+        </para>    
+        
+        <variablelist>
+            <varlistentry xml:id="zend.service.rackspace.files.methods.authenticate">
+                <term>
+                    <methodsynopsis>
+                        <methodname>authenticate</methodname>
+                        <methodparam>
+                            <funcparams/>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Authenticate the Rackspace API using the user and the key specified in the concrete class
+                        that extend <classname>Zend\Service\Rackspace</classname>.
+                        Return <emphasis>true</emphasis> in case of success and <emphasis>false</emphasis> in case of error.
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry xml:id="zend.service.rackspace.files.methods.get-auth-url">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getAuthUrl</methodname>
+                        <methodparam>
+                            <funcparams/>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Get the authentication URL of Rackspace.
+                        Returns a string.
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry xml:id="zend.service.rackspace.files.methods.get-cdn-url">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getCdnUrl</methodname>
+                        <methodparam>
+                            <funcparams/>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Get the URL for the CDN.
+                        Returns a string.
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry xml:id="zend.service.rackspace.files.methods.get-error-code">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getErrorCode</methodname>
+                        <methodparam>
+                            <funcparams/>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Get the last HTTP error code.
+                        Returns a string.
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry xml:id="zend.service.rackspace.files.methods.get-error-msg">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getErrorMsg</methodname>
+                        <methodparam>
+                            <funcparams/>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Get the last error message.
+                        Returns a string.
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry xml:id="zend.service.rackspace.files.methods.get-http-client">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getHttpClient</methodname>
+                        <methodparam>
+                            <funcparams/>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Get the HTTP client used to call the API of the Rackspace.
+                        Returns a <classname>Zend\Http\Client</classname> instance.
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry xml:id="zend.service.rackspace.files.methods.get-key">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getKey</methodname>
+                        <methodparam>
+                            <funcparams/>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Get the authentication key.
+                        Returns a string.
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry xml:id="zend.service.rackspace.files.methods.get-management-url">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getManagementUrl</methodname>
+                        <methodparam>
+                            <funcparams/>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Get the URL for the management services.
+                        Returns a string.
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry xml:id="zend.service.rackspace.files.methods.get-storage-url">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getStorageUrl</methodname>
+                        <methodparam>
+                            <funcparams/>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Get the URL for the storage (files) service.
+                        Returns a string.
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry xml:id="zend.service.rackspace.files.methods.get-token">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getToken</methodname>
+                        <methodparam>
+                            <funcparams/>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Get the token returned after a successful authentication.
+                        Returns a string.
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry xml:id="zend.service.rackspace.files.methods.get-user">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getUser</methodname>
+                        <methodparam>
+                            <funcparams/>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Get the user authenticated with the Rackspace service.
+                        Returns a string.
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry xml:id="zend.service.rackspace.files.methods.is-successful">
+                <term>
+                    <methodsynopsis>
+                        <methodname>isSuccessful</methodname>
+                        <methodparam>
+                            <funcparams/>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Return <emphasis>true</emphasis> if the last service call was successful, false otherwise.
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry xml:id="zend.service.rackspace.files.methods.set-auth-url">
+                <term>
+                    <methodsynopsis>
+                        <methodname>setAuthUrl</methodname>
+                        <methodparam>
+                            <funcparams>string $url</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Set the authentication URL to be used.
+                    </para>
+                    <para>
+                        <emphasis>$url</emphasis> is the URL for the authentication
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry xml:id="zend.service.rackspace.files.methods.set-key">
+                <term>
+                    <methodsynopsis>
+                        <methodname>setKey</methodname>
+                        <methodparam>
+                            <funcparams>string $key</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Set the key for the API authentication.
+                    </para>
+                    <para>
+                        <emphasis>$key</emphasis> is the key string for the authentication
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry xml:id="zend.service.rackspace.files.methods.set-user">
+                <term>
+                    <methodsynopsis>
+                        <methodname>setUser</methodname>
+                        <methodparam>
+                            <funcparams>string $user</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+                
+                <listitem>
+                    <para>
+                        Set the user for the API authentication.
+                    </para>
+                    <para>
+                        <emphasis>$user</emphasis> is the user string for the authentication
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>    
+</section>

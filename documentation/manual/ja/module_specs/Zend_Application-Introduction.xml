@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 15814 -->
-<sect1 id="zend.application.introduction">
-    <title>導入</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.introduction"><info><title>導入</title></info>
+    
 
     <para>
         <classname>Zend_Application</classname>は再利用可能なリソースや、共通の、かつ
@@ -10,4 +10,4 @@
         アプリケーションのためのブートストラップの便宜を提供します。
         さらに<acronym>PHP</acronym>環境の設定や既定値の自動的な読み込みを始めるように面倒を見ます。
     </para>
-</sect1>
+</section>

@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.currency.number">
-    <title>How does the currency look like?</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.number"><info><title>How does the currency look like?</title></info>
+    
 
     <para>
         How the value of a currency will be rendered depends mainly on the used locale. There
@@ -16,8 +15,8 @@
         the following example:
     </para>
 
-    <example id="zend.currency.number.example-1">
-        <title>Using a custom script</title>
+    <example xml:id="zend.currency.number.example-1"><info><title>Using a custom script</title></info>
+        
 
         <para>
             Let's expect that we are again using our "Dollar" currency. But now we want to
@@ -113,4 +112,4 @@ print $currency; // Could return '$ 1000'
     <para>
         In the above snippet we deleted the separator and also the precision.
     </para>
-</sect1>
+</section>

@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.iban">
-    <title>Iban</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.iban"><info><title>Iban</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Iban</classname> validates if a given value could be a
@@ -9,8 +8,8 @@
         "International Bank Account Number".
     </para>
 
-    <sect3 id="zend.validate.set.iban.options">
-        <title>Supported options for Zend_Validate_Iban</title>
+    <section xml:id="zend.validate.set.iban.options"><info><title>Supported options for Zend_Validate_Iban</title></info>
+        
 
         <para>
             The following options are supported for <classname>Zend_Validate_Iban</classname>:
@@ -24,10 +23,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.iban.basic">
-        <title>IBAN validation</title>
+    <section xml:id="zend.validate.set.iban.basic"><info><title>IBAN validation</title></info>
+        
 
         <para>
             <acronym>IBAN</acronym> numbers are always related to a country. This means that
@@ -36,8 +35,8 @@
             this we already know how to use <classname>Zend_Validate_Iban</classname>.
         </para>
 
-        <sect4 id="zend.validate.set.iban.basic.application">
-            <title>Application wide locale</title>
+        <section xml:id="zend.validate.set.iban.basic.application"><info><title>Application wide locale</title></info>
+            
 
             <para>
                 We could use the application wide locale. This means that when no option is given at
@@ -59,8 +58,8 @@ if ($validator->isValid('AT611904300234573201')) {
 }
 ]]></programlisting>
 
-            <note>
-                <title>Application wide locale</title>
+            <note><info><title>Application wide locale</title></info>
+                
 
                 <para>
                     Of course this works only when an application wide locale was set within the
@@ -70,10 +69,10 @@ if ($validator->isValid('AT611904300234573201')) {
                     the validation.
                 </para>
             </note>
-        </sect4>
+        </section>
 
-        <sect4 id="zend.validate.set.iban.basic.false">
-            <title>Ungreedy IBAN validation</title>
+        <section xml:id="zend.validate.set.iban.basic.false"><info><title>Ungreedy IBAN validation</title></info>
+            
 
             <para>
                 Sometime it is usefull, just to validate if the given value <emphasis>is</emphasis>
@@ -97,10 +96,10 @@ if ($validator->isValid('AT611904300234573201')) {
                 So <emphasis>any</emphasis> <acronym>IBAN</acronym> number will be valid. Note that
                 this should not be done when you accept only accounts from a single country.
             </para>
-        </sect4>
+        </section>
 
-        <sect4 id="zend.validate.set.iban.basic.aware">
-            <title>Region aware IBAN validation</title>
+        <section xml:id="zend.validate.set.iban.basic.aware"><info><title>Region aware IBAN validation</title></info>
+            
 
             <para>
                 To validate against a defined country, you just need to give the wished locale.
@@ -118,17 +117,14 @@ if ($validator->isValid('AT611904300234573201')) {
 }
 ]]></programlisting>
 
-            <note>
-                <title>Use full qualified locales</title>
+            <note><info><title>Use full qualified locales</title></info>
+                
 
                 <para>
                     You must give a full qualified locale, otherwise the country could not be
                     detected correct because languages are spoken in multiple countries.
                 </para>
             </note>
-        </sect4>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

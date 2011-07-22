@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.multiuser.intro">
-    <title>Erstellung von Multi-User Anwendungen mit Zend Framework</title>
+<?xml version="1.0" encoding="utf-8"?>
 
-    <sect2 id="learning.multiuser.intro.zf">
-        <title>Zend Framework</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.multiuser.intro"><info><title>Erstellung von Multi-User Anwendungen mit Zend Framework</title></info>
+    
+
+    <section xml:id="learning.multiuser.intro.zf"><info><title>Zend Framework</title></info>
+        
 
         <para>
             Als das Originale "Web" erstellt wurde, wurde es dazu designt eine
@@ -41,8 +41,8 @@
             <listitem><para>Wie kontrolliert man wozu ein Benutzer Zugriff hat?</para></listitem>
         </itemizedlist>
 
-        <note>
-            <title>Konsument vs. Benutzer</title>
+        <note><info><title>Konsument vs. Benutzer</title></info>
+            
 
             <para>
                 Es ist zu beachten das wir den Ausdruck "Benutzer" statt Person verwenden. Web
@@ -63,5 +63,5 @@
             <classname>Zend_Acl</classname>; eine sofort verwendbare Lösung anbieten sowie
             Erweiterungspunkte welche auf eine bessere anpassbare Lösung abzielen.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

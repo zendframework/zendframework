@@ -1,5 +1,6 @@
-<sect2 id="zend.test.phpunit.testing">
-    <title>בדיקת המערכות שלך</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.testing"><info><title>בדיקת המערכות שלך</title></info>
+    
 
     <para>
         ברגע שכבר הגדרת את קובץ ה bootstrap שלך, תוכל להתחיל בשלב הבדיקות.
@@ -21,8 +22,8 @@ class IndexControllerTest extends Zend_Test_PHPUnit_Controller_TestCase
         // ...
     }
 }
-]]>
-    </programlisting>
+
+    ]]></programlisting>
 
     <para>
         למרות, שיהיו רגעים שתצטרכו לספק מידע נוסף  כמו ערכים גלובאלים של GET, POST, COOKIE וכדומה. תוכלו להציג את המידע הזה בעזרת האפשרויות הבאות:
@@ -67,13 +68,10 @@ class FooControllerTest extends Zend_Test_PHPUnit_Controller_TestCase
         // ...
     }
 }
-]]>
-    </programlisting>
+
+    ]]></programlisting>
 
     <para>
         עכשיו שהבקשה התבצעה, הגיע הזמן להסיק מסקנות לגביהם.
     </para>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

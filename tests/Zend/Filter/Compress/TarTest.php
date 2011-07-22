@@ -21,7 +21,8 @@
 
 namespace ZendTest\Filter\Compress;
 
-use Zend\Filter\Compress\Tar as TarCompression;
+use Zend\Filter\Compress\Tar as TarCompression,
+    Zend\Loader\StandardAutoloader;
 
 /**
  * @category   Zend
@@ -36,9 +37,9 @@ class TarTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         if (!class_exists('Archive_Tar')) {
-            try {
-                \Zend\Loader::loadClass('Archive_Tar');
-            } catch (\Zend\Loader\Exception $e) {
+            $autoloader = new StandardAutoloader();
+            $autoloader->setFallbackAutoloader(true);
+            if (!$autoloader->autoload('Archive_Tar')) {
                 $this->markTestSkipped('This filter needs PEARs Archive_Tar');
             }
         }

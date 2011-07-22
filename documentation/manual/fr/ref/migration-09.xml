@@ -1,16 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
-<!-- Reviewed: no -->
-<sect1 id="migration.09">
-    <title>Zend Framework 0.9</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.09"><info><title>Zend Framework 0.9</title></info>
+    
 
     <para>
         Lors de la migration d'un version précédente vers Zend Framework 0.9 ou plus récent
         vous devriez prendre note de ce qui suit.
     </para>
 
-    <sect2 id="migration.09.zend.controller">
-        <title>Zend_Controller</title>
+    <section xml:id="migration.09.zend.controller"><info><title>Zend_Controller</title></info>
+        
 
         <para>
             0.9.3 introduit les
@@ -18,7 +18,7 @@
             changement, les méthodes suivantes ont été effacées puisqu'elles sont maintenant
             encapsulées dans
             <link linkend="zend.controller.actionhelpers.redirector">l'aide d'action
-            redirector</link>&#160;:
+            redirector</link> :
         </para>
 
         <itemizedlist>
@@ -51,8 +51,5 @@
             redirector</link>pour plus d'informations sur le réglage des options de redirection
             (de même que pour les méthodes alternatives de redirection).
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

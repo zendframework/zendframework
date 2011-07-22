@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20854 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.pdf.create">
-    <title>Erstellen und Laden von PDF Dokumenten</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.create"><info><title>Erstellen und Laden von PDF Dokumenten</title></info>
+    
 
     <para>
         Die <classname>Zend_Pdf</classname> Klasse bildet das <acronym>PDF</acronym> Dokument ab
@@ -22,8 +20,8 @@
         werfen eine Ausnahme, wenn ein Fehler auftritt.
     </para>
 
-    <example id="zend.pdf.create.example-1">
-        <title>Erstellen und Laden von PDF Dokumenten</title>
+    <example xml:id="zend.pdf.create.example-1"><info><title>Erstellen und Laden von PDF Dokumenten</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 ...
@@ -61,8 +59,8 @@ $pdf3 = Zend_Pdf::parse($pdfString);
         Aufruf angefordert werden.
     </para>
 
-    <example id="zend.pdf.create.example-2">
-        <title>Rückgabe einer vorgegebenen Revision eines PDF Dokuments</title>
+    <example xml:id="zend.pdf.create.example-2"><info><title>Rückgabe einer vorgegebenen Revision eines PDF Dokuments</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 ...
@@ -79,4 +77,4 @@ $pdf3->rollback($revisions - 1);
 ...
 ]]></programlisting>
     </example>
-</sect1>
+</section>

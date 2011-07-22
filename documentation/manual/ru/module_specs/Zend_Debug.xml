@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.debug.dumping">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.debug.dumping"><info><title>Дамп переменных</title></info>
 
-    <title>Дамп переменных</title>
+    
 
     <para>
         Статический метод <code>Zend_Debug::dump()</code> выводит или возвращает
@@ -12,8 +11,8 @@
         специальных инструментов или отладочной среды.
     </para>
 
-    <example id="zend.debug.dumping.example">
-        <title>Пример использования метода dump()</title>
+    <example xml:id="zend.debug.dumping.example"><info><title>Пример использования метода dump()</title></info>
+        
         <programlisting language="php"><![CDATA[
 Zend_Debug::dump($var, $label=null, $echo=true);
 ]]></programlisting>
@@ -44,15 +43,15 @@ Zend_Debug::dump($var, $label=null, $echo=true);
         Может быть небесполезным знать, что метод
         <code>Zend_Debug::dump()</code> является оберткой ко встроенной функции
         PHP
-        <ulink url="http://php.net/var_dump"><code>var_dump()</code></ulink>.
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/var_dump"><code>var_dump()</code></link>.
         Если поток вывода определен как веб-представление, то вывод
         <code>var_dump()</code> будет экранирован с помощью функции
-        <ulink url="http://php.net/htmlspecialchars"><code>htmlspecialchars()</code></ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/htmlspecialchars"><code>htmlspecialchars()</code></link>
         и окружен (X)HTML тегами <code>&lt;pre&gt;</code>.
     </para>
 
-    <tip>
-        <title>Отладка с применением Zend_Log</title>
+    <tip><info><title>Отладка с применением Zend_Log</title></info>
+        
         <para>
             <code>Zend_Debug::dump()</code> хорошо применять для отладки
             во время разработки приложения. Вы можете быстро
@@ -68,7 +67,4 @@ Zend_Debug::dump($var, $label=null, $echo=true);
         </para>
     </tip>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

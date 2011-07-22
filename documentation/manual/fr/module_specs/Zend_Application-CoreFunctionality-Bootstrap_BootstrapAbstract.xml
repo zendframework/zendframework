@@ -1,20 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20763 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.application.core-functionality.bootstrap-bootstrapabstract">
-    <title>Zend_Application_Bootstrap_BootstrapAbstract</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.core-functionality.bootstrap-bootstrapabstract"><info><title>Zend_Application_Bootstrap_BootstrapAbstract</title></info>
+    
 
     <para>
         <classname>Zend_Application_Bootstrap_BootstrapAbstract</classname> est une classe
         abstraite qui propose les fonctionnalités de base d'un bootstrap classique. Elle
-        implémente à la fois <link
-            linkend="zend.application.core-functionality.bootstrap-bootstrapper"><classname>Zend_Application_Bootstrap_Bootstrapper</classname></link>
-        et <link
-            linkend="zend.application.core-functionality.bootstrap-resourcebootstrapper"><classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname></link>.
+        implémente à la fois <link linkend="zend.application.core-functionality.bootstrap-bootstrapper"><classname>Zend_Application_Bootstrap_Bootstrapper</classname></link>
+        et <link linkend="zend.application.core-functionality.bootstrap-resourcebootstrapper"><classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname></link>.
     </para>
 
-    <table id="zend.application.core-functionality.bootstrap-bootstrapabstract.api.table">
-        <title>Méthodes de Zend_Application_Bootstrap_BootstrapAbstract</title>
+    <table xml:id="zend.application.core-functionality.bootstrap-bootstrapabstract.api.table"><info><title>Méthodes de Zend_Application_Bootstrap_BootstrapAbstract</title></info>
+        
         <tgroup cols="4">
             <thead>
                 <row>
@@ -30,7 +28,7 @@
                     <entry><type>Void</type></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <varname>$application</varname>&#160;: <emphasis>requis</emphasis>.
+                            <varname>$application</varname> : <emphasis>requis</emphasis>.
                             Accepte un objet <classname>Zend_Application</classname> ou
                             <classname>Zend_Application_Bootstrap_Bootstrapper</classname>
                         </para></listitem>
@@ -46,7 +44,7 @@
                     <entry><classname>Zend_Application_Bootstrap_Bootstrapper</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <varname>$options</varname>&#160;: <emphasis>requis</emphasis>.
+                            <varname>$options</varname> : <emphasis>requis</emphasis>.
                             Tableau d'options à configurer.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -60,7 +58,7 @@
                     <para>
                         Deux options supplémentaires spéciales peuvent aussi être utilisée.
                         <property>pluginPaths</property> spécifie des préfixes de chemin vers
-                        les plugins&#160;; on attend ici un tableau de paires préfixes, chemins.
+                        les plugins ; on attend ici un tableau de paires préfixes, chemins.
                         <property>resources</property> permet de spécifier un plugin
                         à utiliser.
                     </para>
@@ -82,7 +80,7 @@
                     <entry><type>Boolean</type></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <varname>$key</varname>&#160;: <emphasis>requis</emphasis>.
+                            <varname>$key</varname> : <emphasis>requis</emphasis>.
                             Option dont on veut tester la présence.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -100,7 +98,7 @@
                     </itemizedlist></entry>
                     <entry><para>
                         Récupère la valeur de l'option associée à la clé passée comme
-                        paramètre&#160; retourne <constant>NULL</constant> si aucune
+                        paramètre  retourne <constant>NULL</constant> si aucune
                         option n'est enregistrée avec cette clé.
                     </para></entry>
                 </row>
@@ -115,7 +113,7 @@
                     </entry>
                     <entry><itemizedlist>
                             <listitem><para>
-                                <varname>$application</varname>&#160;: <emphasis>requis</emphasis>.
+                                <varname>$application</varname> : <emphasis>requis</emphasis>.
                             </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
@@ -261,12 +259,12 @@
                     <entry><type>Mixed</type></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <varname>$method</varname>&#160;: <emphasis>requis</emphasis>.
+                            <varname>$method</varname> : <emphasis>requis</emphasis>.
                             Nom de la méthode appelée
                         </para></listitem>
 
                         <listitem><para>
-                            <varname>$args</varname>&#160;: <emphasis>requis</emphasis>.
+                            <varname>$args</varname> : <emphasis>requis</emphasis>.
                             Tableau d'arguments d'invocation pour la méthode.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -280,4 +278,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect2>
+</section>

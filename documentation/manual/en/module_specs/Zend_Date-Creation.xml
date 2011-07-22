@@ -1,15 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.date.creation">
-    <title>Creation of Dates</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.creation"><info><title>Creation of Dates</title></info>
+    
 
     <para>
         <classname>Zend_Date</classname> provides several different ways to create a new instance of
         itself. As there are different needs the most convenient ways will be shown in this chapter.
     </para>
 
-    <sect2 id="zend.date.creation.actual">
-        <title>Create the Actual Date</title>
+    <section xml:id="zend.date.creation.actual"><info><title>Create the Actual Date</title></info>
+        
 
         <para>
             The simplest way of creating a date object is to create the actual date. You can either
@@ -19,8 +18,8 @@
             include the actual date and time for the actual set timezone.
         </para>
 
-        <example id="zend.date.creation.actual.example-1">
-            <title>Date Creation by Instance</title>
+        <example xml:id="zend.date.creation.actual.example-1"><info><title>Date Creation by Instance</title></info>
+            
 
             <para>
                 Date creation by creating a new instance means that you do not need to give an
@@ -34,8 +33,8 @@ $date = new Zend_Date();
 ]]></programlisting>
         </example>
 
-        <example id="zend.date.creation.actual.example-2">
-            <title>Static Date Creation</title>
+        <example xml:id="zend.date.creation.actual.example-2"><info><title>Static Date Creation</title></info>
+            
 
             <para>
                 Sometimes it is easier to use a static method for date creation. Therefor you can
@@ -49,10 +48,10 @@ $date = new Zend_Date();
 $date = Zend_Date::now();
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.date.creation.database">
-        <title>Create a Date from Database</title>
+    <section xml:id="zend.date.creation.database"><info><title>Create a Date from Database</title></info>
+        
 
         <para>
             Databases are often used to store date values. But the problem is, that every database
@@ -73,8 +72,8 @@ $date = Zend_Date::now();
             So we have one quick and one convenient way of creating dates from database values.
         </para>
 
-        <example id="zend.date.creation.database.example-1">
-            <title>Quick Creation of Dates from Database Date Values</title>
+        <example xml:id="zend.date.creation.database.example-1"><info><title>Quick Creation of Dates from Database Date Values</title></info>
+            
 
             <para>
                 All databases are known to handle queries as fast as possible. They are built to act
@@ -90,8 +89,8 @@ $date = new Zend_Date($unixtimestamp, Zend_Date::TIMESTAMP);
 ]]></programlisting>
         </example>
 
-        <example id="zend.date.creation.database.example-2">
-            <title>Convenient Creation of Dates from Database Date Values</title>
+        <example xml:id="zend.date.creation.database.example-2"><info><title>Convenient Creation of Dates from Database Date Values</title></info>
+            
 
             <para>
                 The standard output of all databases is quite different even if it looks the same on
@@ -112,17 +111,17 @@ $date = new Zend_Date($unixtimestamp, Zend_Date::TIMESTAMP);
 $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.date.creation.array">
-        <title>Create Dates from an Array</title>
+    <section xml:id="zend.date.creation.array"><info><title>Create Dates from an Array</title></info>
+        
 
         <para>
             Dates can also be created by the usage of an array. This is a simple and easy way. The
             used array keys are:
         </para>
 
-        <itemizedlist mark='opencircle'>
+        <itemizedlist mark="opencircle">
             <listitem><para><emphasis>day</emphasis>: day of the date as number</para></listitem>
 
             <listitem>
@@ -135,8 +134,8 @@ $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
             <listitem><para><emphasis>second</emphasis>: second of the date</para></listitem>
         </itemizedlist>
 
-        <example id="zend.date.creation.array.example">
-            <title>Date Creation by Array</title>
+        <example xml:id="zend.date.creation.array.example"><info><title>Date Creation by Array</title></info>
+            
 
             <para>
                 Normally you will give a complete date array for creation of a new date instance.
@@ -159,8 +158,5 @@ $datearray = array('year' => 2006, 'month' => 4, 'day' => 18);
 $date = new Zend_Date($datearray);
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

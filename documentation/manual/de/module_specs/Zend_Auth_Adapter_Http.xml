@@ -1,17 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20763 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.auth.adapter.http">
-    <title>HTTP Authentication Adapter</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.http"><info><title>HTTP Authentication Adapter</title></info>
+    
 
-    <sect2 id="zend.auth.adapter.http.introduction">
-        <title>Einführung</title>
+    <section xml:id="zend.auth.adapter.http.introduction"><info><title>Einführung</title></info>
+        
 
         <para>
             <classname>Zend_Auth_Adapter_Http</classname> bietet die am meisten entsprechende
-            Implementation von <ulink url="http://tools.ietf.org/html/rfc2617">RFC-2617</ulink>,
-            <ulink url="http://en.wikipedia.org/wiki/Basic_authentication_scheme">Basis</ulink> und
-            <ulink url="http://en.wikipedia.org/wiki/Digest_access_authentication">Digest</ulink>
+            Implementation von <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://tools.ietf.org/html/rfc2617">RFC-2617</link>,
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Basic_authentication_scheme">Basis</link> und
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Digest_access_authentication">Digest</link>
             <acronym>HTTP</acronym> Authentifizierung. Digest Authentifizierung ist eine Methode der
             <acronym>HTTP</acronym> Authentifikation welche die Basis Authentifizierung erweitert
             indem ein Weg angeboten wird um sich zu Authentifizieren ohne dass das Passwort im
@@ -76,10 +74,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.design_overview">
-        <title>Design Übersicht</title>
+    <section xml:id="zend.auth.adapter.design_overview"><info><title>Design Übersicht</title></info>
+        
 
         <para>
             Dieser Adapter besteht aus zwei Sub-Komponenten, die <acronym>HTTP</acronym>
@@ -91,10 +89,10 @@
             "aufgelösten" Zeugnisse werden dann mit den Werten verglichen die vom Klienten
             übermittelt wurden um zu eruieren ob die Authentifizierung erfolgreich war.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.configuration_options">
-        <title>Konfigurations Optionen</title>
+    <section xml:id="zend.auth.adapter.configuration_options"><info><title>Konfigurations Optionen</title></info>
+        
 
         <para>
             Die <classname>Zend_Auth_Adapter_Http</classname> Klasse benötigt ein Konfigurations
@@ -102,8 +100,8 @@
             Optionen vorhanden, und einige davon werden benötigt:
         </para>
 
-        <table id="zend.auth.adapter.configuration_options.table">
-            <title>Konfigurations Optionen</title>
+        <table xml:id="zend.auth.adapter.configuration_options.table"><info><title>Konfigurations Optionen</title></info>
+            
 
             <tgroup cols="3">
                 <thead>
@@ -191,10 +189,10 @@
                 Support implementiert werden.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.http.resolvers">
-        <title>Auflöser</title>
+    <section xml:id="zend.auth.adapter.http.resolvers"><info><title>Auflöser</title></info>
+        
 
         <para>
             Der Job des Auflösers ist es einen Benutzernamen und einen Bereich, und gibt eine Art
@@ -210,8 +208,8 @@
             kann einfach erstellt werden indem das Resolver Interface implementiert wird.
         </para>
 
-        <sect3 id="zend.auth.adapter.http.resolvers.file">
-            <title>Datei Auflöser</title>
+        <section xml:id="zend.auth.adapter.http.resolvers.file"><info><title>Datei Auflöser</title></info>
+            
 
             <para>
                 Der Datei Auflöser ist eine sehr einfache Klasse. Sie hat eine einzelne Eigenschaft
@@ -257,11 +255,11 @@ $resolver->setFile($path);
             <para>
                 Wenn der angegebene Pfad leer oder nicht lesbar ist, wird eine Ausnahme geworfen.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.auth.adapter.http.basic_usage">
-        <title>Grundsätzliche Verwendung</title>
+    <section xml:id="zend.auth.adapter.http.basic_usage"><info><title>Grundsätzliche Verwendung</title></info>
+        
 
         <para>
             Zuerst muß ein Array mit den benötigen Konfigurationswerten gesetzt werden:
@@ -327,5 +325,5 @@ if (!$result->isValid()) {
     // Schlechter Benutzername/Passwort, oder abgebrochener Passwort Prompt
 }
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

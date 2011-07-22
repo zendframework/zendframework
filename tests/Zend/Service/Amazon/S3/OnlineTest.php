@@ -102,7 +102,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         // make sure that we use different bucket,
         // as sometimes delete operation fails to propagate in one zone before you
         // attempt to recreate it in another
-        $this->_bucket = $this->_bucket . 'eu'; 
+        $this->_bucket = $this->_bucket . 'eu';
         $this->_amazon->createBucket($this->_bucket, 'EU');
         $this->assertTrue($this->_amazon->isBucketAvailable($this->_bucket));
         $list = $this->_amazon->getBuckets();
@@ -123,7 +123,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Get object using streaming and temp files
-     * 
+     *
      */
     public function testGetObjectStream()
     {
@@ -133,36 +133,36 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($response instanceof Response\Stream, 'The test did not return stream response');
         $this->assertTrue(is_resource($response->getStream()), 'Request does not contain stream!');
-        
+
         $stream_name = $response->getStreamName();
-     
+
         $stream_read = stream_get_contents($response->getStream());
         $file_read = file_get_contents($stream_name);
-        
+
         $this->assertEquals("testdata", $stream_read, 'Downloaded stream does not seem to match!');
         $this->assertEquals("testdata", $file_read, 'Downloaded file does not seem to match!');
     }
-    
+
     /**
      * Get object using streaming and specific files
-     * 
+     *
      */
     public function testGetObjectStreamNamed()
     {
         $this->_amazon->createBucket($this->_bucket);
         $this->_amazon->putObject($this->_bucket."/zftest", "testdata");
         $outfile = tempnam(sys_get_temp_dir(), "output");
-  
+
         $response = $this->_amazon->getObjectStream($this->_bucket."/zftest", $outfile);
 
         $this->assertTrue($response instanceof Response\Stream, 'The test did not return stream response');
         $this->assertTrue(is_resource($response->getStream()), 'Request does not contain stream!');
-        
+
         $this->assertEquals($outfile, $response->getStreamName());
-             
+
         $stream_read = stream_get_contents($response->getStream());
         $file_read = file_get_contents($outfile);
-        
+
         $this->assertEquals("testdata", $stream_read, 'Downloaded stream does not seem to match!');
         $this->assertEquals("testdata", $file_read, 'Downloaded file does not seem to match!');
     }
@@ -267,7 +267,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         $fdata = $this->_amazon->getObject($object);
         $this->assertEquals($data, $fdata);
     }
-    
+
     public function testPutFile()
     {
         $filedir = __DIR__."/_files/";
@@ -289,9 +289,9 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         $this->_fileTest($filedir."testdata.html", $this->_bucket."/zftestfile3", null, 'text/html', true);
         $this->_fileTest($filedir."testdata.html", $this->_bucket."/zftestfile3.html", 'text/plain', 'text/plain', true);
     }
-    
+
     /**
-     * Since exception post-condition is tested as well, 
+     * Since exception post-condition is tested as well,
      * two tests are created for a given exception
      * @see testPutNoFile
      */
@@ -300,14 +300,14 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         $filedir = __DIR__."/_files/";
 
         $this->setExpectedException(
-            'Zend\Service\Amazon\Sqs\Exception\RuntimeException', 
+            'Zend\Service\Amazon\Sqs\Exception\RuntimeException',
             'Cannot read file ' . $filedir."nosuchfile");
 
         $this->_amazon->putFile($filedir."nosuchfile", $this->_bucket."/zftestfile");
     }
 
     /**
-     * Since exception post-condition is tested as well, 
+     * Since exception post-condition is tested as well,
      * two tests are created for a given exception
      * @see testPutNoFileException
      */
@@ -525,7 +525,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *  @see ZF-7773
+     *  @group ZF-7773
      */
     public function testGetObjectsByBucketParams()
     {

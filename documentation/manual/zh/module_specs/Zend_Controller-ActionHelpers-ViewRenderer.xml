@@ -1,8 +1,9 @@
-<sect3 id="zend.controller.actionhelpers.viewrenderer">
-    <title>ViewRenderer</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.viewrenderer"><info><title>ViewRenderer</title></info>
+    
 
-    <sect4 id="zend.controller.actionhelper.viewrenderer.introduction">
-        <title>介绍</title>
+    <section xml:id="zend.controller.actionhelper.viewrenderer.introduction"><info><title>介绍</title></info>
+        
 
         <para>
            视图解析(<code>ViewRenderer</code>)助手为实现下列目标设计：
@@ -54,7 +55,7 @@
 
         <note>
             <para>
-        <code>ViewRenderer</code>助手默认启用。你可以通过前端控制器的<code>noViewRenderer</code>方法、设定参数(<code>$front->setParam('noViewRenderer', true)</code>)或者从助手经纪人栈(helper broker stack)中移除助手(<code>Zend_Controller_Action_HelperBroker::removeHelper('viewRenderer')</code>)等方式禁用该助手。
+        <code>ViewRenderer</code>助手默认启用。你可以通过前端控制器的<code>noViewRenderer</code>方法、设定参数(<code>$front-&gt;setParam('noViewRenderer', true)</code>)或者从助手经纪人栈(helper broker stack)中移除助手(<code>Zend_Controller_Action_HelperBroker::removeHelper('viewRenderer')</code>)等方式禁用该助手。
             </para>
 
             <para>
@@ -72,8 +73,8 @@ $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer();
 $viewRenderer->setView($view)
              ->setViewSuffix('php');
 Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
-]]>
-                    </programlisting>
+
+                    ]]></programlisting>
                 </listitem>
 
                 <listitem>
@@ -85,15 +86,15 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
 $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 $viewRenderer->setView($view)
              ->setViewSuffix('php');
-]]>
-                    </programlisting>
+
+                    ]]></programlisting>
                 </listitem>
             </itemizedlist>
         </note>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelper.viewrenderer.api">
-        <title>API</title>
+    <section xml:id="zend.controller.actionhelper.viewrenderer.api"><info><title>API</title></info>
+        
 
         <para>
             大多数使用中，只需要简单的创建 <code>ViewRenderer</code>对象，然后传入到动作助手经纪人。创建实例并注册的最简单方式是使用助手经纪人的<code>getStaticHelper()</code>方法：
@@ -101,8 +102,8 @@ $viewRenderer->setView($view)
 
         <programlisting role="php"><![CDATA[
 Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             动作控制器第一次实例化时，会触发<code>ViewRenderer</code>创建一个视图对象。动作控制器每次实例化都会调用<code>ViewRenderer</code>的<code>init()</code>方法，设定动作控制器的视图属性，并以相对于当前模块的路径为参数调用<code>addScriptPath()</code>方法；调用时带有以当前模块命名的类前缀参数，该参数对为该模块定义的所有助手和过滤器类都有效。(this will be called with a class prefix named after the current module, effectively namespacing all helper and filter classes you define for the module. )
@@ -137,8 +138,8 @@ class Foo_BarController extends Zend_Controller_Action
 
 // in one of your view scripts:
 $this->foo(); // call Foo_View_Helper_Foo::foo()
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             <code>ViewRenderer</code>也定义了大量的访问器用来设定和获取视图选项。
@@ -205,8 +206,8 @@ $this->_helper->viewRenderer('foo');
 // render form.phtml to the 'html' response segment, without using a
 // controller view script subdirectory:
 $this->_helper->viewRenderer('form', 'html', true);
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
                 <note><para>
                         <code>setRender()</code> 和 <code>direct()</code>并不会实际解析视图脚本，而是提示<code>postDispatch()</code>和<code>postDispatch()</code>解析视图。
@@ -223,8 +224,8 @@ $view    = new Zend_View(array('encoding' => 'UTF-8'));
 $options = array('noController' => true, 'neverRender' => true);
 $viewRenderer =
     new Zend_Controller_Action_Helper_ViewRenderer($view, $options);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             还有几个额外的方法用来定制路径规则，供确定视图基路径来增加视图对象，确定视图脚本路径查找并解析视图脚本时使用。这些方法每个都带有下面一个或更多的占位符(placehodlers)。
@@ -306,8 +307,8 @@ $viewRenderer =
             </para></listitem>
         </itemizedlist>
 
-        <note>
-            <title>缺省查找约定（Conventions）</title>
+        <note><info><title>缺省查找约定（Conventions）</title></info>
+            
 
             <para>
                 <code>视图解析器</code>做了一些路径标准化使视图脚本查找更容易。缺省规则如下：
@@ -411,13 +412,13 @@ $viewRenderer =
                 </para>
             </listitem>
         </itemizedlist>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelper.viewrenderer.basicusage">
-        <title>基础用法示例</title>
+    <section xml:id="zend.controller.actionhelper.viewrenderer.basicusage"><info><title>基础用法示例</title></info>
+        
 
-        <example id="zend.controller.actionhelper.viewrenderer.basicusage.example-1">
-            <title>基本用法</title>
+        <example xml:id="zend.controller.actionhelper.viewrenderer.basicusage.example-1"><info><title>基本用法</title></info>
+            
 
             <para>
                 大多数基础使用中，只需在bootstrap中使用助手经纪人简单的初始化和注册<code>ViewRenderer</code> 助手，然后在动作方法中设置变量。
@@ -457,12 +458,12 @@ class Foo_BarController extends Zend_Controller_Action
         $this->_redirect('/index');
     }
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </example>
 
-        <note>
-            <title>命名规则：控制器和动作名中的单词定界符</title>
+        <note><info><title>命名规则：控制器和动作名中的单词定界符</title></info>
+            
             <para>
                 如果控制器或者动作名称由几个单词组成，分发器要求在URL中使用特定的路径和单词定界符分隔。<code>ViewRenderer</code>创建路径时将控制器名称中的任何路径定界符替换成实际的路径定界符('/')，任何单词定界符替换成短线('-')。对动作<code>/foo.bar/baz.bat</code>的调用将分发到<code>FooBarController.php</code>中的<code>FooBarController::bazBatAction()</code>，然后解析<code>foo-bar/baz-bat.phtml</code>；对动作<code>/bar_baz/baz-bat</code>的调用将分发到<code>Bar/BazController.php</code>中的<code>Bar_BazController::bazBatAction()</code>，并解析<code>bar/baz/baz-bat.phtml</code>。
             </para>
@@ -472,8 +473,8 @@ class Foo_BarController extends Zend_Controller_Action
             </para>
         </note>
 
-        <example id="zend.controller.actionhelper.viewrenderer.basicusage.example-2">
-            <title>禁用自动解析</title>
+        <example xml:id="zend.controller.actionhelper.viewrenderer.basicusage.example-2"><info><title>禁用自动解析</title></info>
+            
 
             <para>
                 对于某些动作和控制器，可能希望关闭自动解析——例如，如果想发送其他类型的输出（XML,JSON等），或者更简单的不想发送任何东西。有两个选项：关闭所有的自动解析(<code>setNeverRender()</code>)，或者仅仅关闭当前动作的自动解析(<code>setNoRender()</code>)。
@@ -499,8 +500,8 @@ class Bar_BatController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender();
     }
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </example>
 
         <note>
@@ -509,8 +510,8 @@ class Bar_BatController extends Zend_Controller_Action
             </para>
         </note>
 
-        <example id="zend.controller.actionhelper.viewrenderer.basicusage.example-3">
-            <title>选择另外的视图脚本</title>
+        <example xml:id="zend.controller.actionhelper.viewrenderer.basicusage.example-3"><info><title>选择另外的视图脚本</title></info>
+            
 
             <para>
                 有些情况下需要解析另一个脚本而非以动作命名的脚本。例如，如果你有一个控制器包含增加和编辑两个动作，它们可能都显示相同的'form'视图，尽管拥有不同的值集合(value set)。只需要使用<code>setScriptAction()</code>或者<code>setRender()</code>简单的改变脚本的名称，或者以成员方法的形式调用助手，它将调用<code>setRender()</code>。
@@ -545,12 +546,12 @@ class Foo_BarController extends Zend_Controller_Action
     }
 
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </example>
 
-        <example id="zend.controller.actionhelper.viewrenderer.basicusage.example-4">
-            <title>修改注册的视图Modifying the registered view</title>
+        <example xml:id="zend.controller.actionhelper.viewrenderer.basicusage.example-4"><info><title>修改注册的视图Modifying the registered view</title></info>
+            
 
             <para>
                 如果需要修改视图对象怎么办——例如改变助手路径或者编码？可以在控制器中修改视图对象设定，或者从<code>ViewRenderer</code>中抓取视图对象；两种方式引用的是同一个对象。
@@ -573,19 +574,19 @@ class Foo_BarController extends Zend_Controller_Action
         $view->setEscape('htmlspecialchars');
     }
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </example>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelper.viewrenderer.advancedusage">
-        <title>高级用法示例</title>
+    <section xml:id="zend.controller.actionhelper.viewrenderer.advancedusage"><info><title>高级用法示例</title></info>
+        
 
-        <example id="zend.controller.actionhelper.viewrenderer.advancedusage.example-1">
-            <title>修改路径规则</title>
+        <example xml:id="zend.controller.actionhelper.viewrenderer.advancedusage.example-1"><info><title>修改路径规则</title></info>
+            
 
             <para>
-                有些情况下，默认的路径规则可能并不适合站点的需要。比如，希望拥有一个单独的模板树供设计人员访问（例如，如果你使用<ulink url="http://smarty.php.net/">Smarty</ulink>，这是很典型的情形）。这种情况下，你可能想硬编码视图的基路径规则，为动作视图脚本路径自身创建一套规则。
+                有些情况下，默认的路径规则可能并不适合站点的需要。比如，希望拥有一个单独的模板树供设计人员访问（例如，如果你使用<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://smarty.php.net/">Smarty</link>，这是很典型的情形）。这种情况下，你可能想硬编码视图的基路径规则，为动作视图脚本路径自身创建一套规则。
             </para>
 
             <para>
@@ -606,12 +607,12 @@ $viewRenderer->setViewBasePathSpec('/opt/vendor/templates')
              ->setViewScriptPathNoControllerSpec(':action.:suffix')
              ->setViewSuffix('tpl');
 Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </example>
 
-        <example id="zend.controller.actionhelper.viewrenderer.advancedusage.example-2">
-            <title>一个动作中解析多个视图脚本</title>
+        <example xml:id="zend.controller.actionhelper.viewrenderer.advancedusage.example-2"><info><title>一个动作中解析多个视图脚本</title></info>
+            
 
             <para>
                 有时可能需要在一个动作中解析多个视图脚本。这个非常简单，多次调用<code>render()</code>就行了：
@@ -637,11 +638,8 @@ class SearchController extends Zend_Controller_Action
         // do nothing; ViewRenderer autorenders the view script
     }
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </example>
-    </sect4>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

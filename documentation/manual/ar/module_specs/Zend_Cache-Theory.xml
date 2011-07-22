@@ -1,5 +1,6 @@
-<sect1 id="zend.cache.theory">
-    <title>مفهوم الـ caching </title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.theory"><info><title>مفهوم الـ caching </title></info>
+    
     <para>
         هناك ثلاث مفاهيم رئيسية فى Zend_Cache. الأول هو المعرف المميز و هو عيارة عن string
 و الذى يستخدم لتعريف البيانات المسجلة فى الـ cache.
@@ -25,8 +26,8 @@
 و عندما يحدث cache hit تقم الـ backend تلقائياً بجلب البيانات من الـ cache .
 
     </para></note>
-    <sect2 id="zend.cache.factory">
-        <title>الـ factory method فى <code>Zend_Cache</code></title>
+    <section xml:id="zend.cache.factory"><info><title>الـ factory method فى <code>Zend_Cache</code></title></info>
+        
         <para>
             طريقة جيدة لإنشاء frontend instance قابل لإستخدام من <code>Zend_Cache</code> نستعرضها فى
 المثال التالى :
@@ -61,10 +62,10 @@ $cache = Zend_Cache::factory($frontendName, $backendName, $frontendOptions, $bac
             دائما إستخدم <code>()Zend_Cache::factory</code> لتنشئ frontend instance .
 إنشاء  الـ frontend instance و الـ backends instance بنفسك مباشرة لن يعمل كما تتوقع.
         </para></note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.cache.tags">
-        <title>إستخدام الـ tags</title>
+    <section xml:id="zend.cache.tags"><info><title>إستخدام الـ tags</title></info>
+        
         <para>
             الـ tags طرق لتقسيم البيانات فى الـ cache الى اقسام معرفة, عندما تقم بحفظ cache بإستخدام
 <code>()save</code> يمكنك ان تقم بتمرير array تحتوى على الـ tags التى تتوافق مع هذا الـ
@@ -76,9 +77,9 @@ record (او البيانت المخزنة فى الـ cache ) .
 $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
 
 ?>]]></programlisting>
-    </sect2>
-    <sect2 id="zend.cache.clean">
-        <title>تنظيف الـ cache</title>
+    </section>
+    <section xml:id="zend.cache.clean"><info><title>تنظيف الـ cache</title></info>
+        
         <para>
             لحذف او تحديد معرف cache على انه غير قابل للإستخدام, يمكنك استخدام <code>()remove</code>
  كما فى المثال التالى :
@@ -100,7 +101,7 @@ $cache->clean(Zend_Cache::CLEANING_MODE_ALL);
 // clean only outdated
 $cache->clean(Zend_Cache::CLEANING_MODE_OLD);
 
-?>]]>   </programlisting>
+?>   ]]></programlisting>
         <para>
             إن اردت حذف الـ cache records التى تنتمى الى tags محددة, مثلا 'tagA' و 'tagC'
 يمكنك استخدام :
@@ -109,7 +110,7 @@ $cache->clean(Zend_Cache::CLEANING_MODE_OLD);
 
 $cache->clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG, array('tagA', 'tagC'));
 
-?>]]>   </programlisting>
+?>   ]]></programlisting>
         <para>
             الـ cleaning modes المتوفرة هى :
 <code>CLEANING_MODE_ALL</code> تقوم بحذف كل الـ cache records الموجودة
@@ -122,8 +123,5 @@ $cache->clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG, array('tagA', 'tagC'));
 التى لا تنتمى الى مجموعة الـ tags الممررة.
 
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

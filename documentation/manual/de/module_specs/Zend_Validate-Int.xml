@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21556 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.int">
-    <title>Int</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.int"><info><title>Int</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Int</classname> prüft ob ein angegebener Wert ein Integer
         (Ganzzahl) ist. Auch lokalisierte Integerwerte werden erkannt und können geprüft werden.
     </para>
 
-    <sect3 id="zend.validate.set.int.options">
-        <title>Unterstützte Optionen für Zend_Validate_Int</title>
+    <section xml:id="zend.validate.set.int.options"><info><title>Unterstützte Optionen für Zend_Validate_Int</title></info>
+        
 
         <para>
             Die folgenden Optionen werden für <classname>Zend_Validate_Int</classname> unterstützt:
@@ -24,10 +22,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.int.basic">
-        <title>Einfache Integer Prüfung</title>
+    <section xml:id="zend.validate.set.int.basic"><info><title>Einfache Integer Prüfung</title></info>
+        
 
         <para>
             Der einfachste Weg um einen Integerwert zu prüfen ist die Verwendung der
@@ -47,10 +45,10 @@ $validator->isValid('1,234'); // Gibt true zurück
             Um obigen Beispiel haben wir angenommen das unsere Umgebung auf "en" als Gebietsschema
             gesetzt ist. Wie man im dritten Beispiel sieht wird auch die Gruppierung erkannt.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.int.localized">
-        <title>Lokalisierte Integer Prüfung</title>
+    <section xml:id="zend.validate.set.int.localized"><info><title>Lokalisierte Integer Prüfung</title></info>
+        
 
         <para>
             Oft ist es nützlich dazu in der Lage zu sein lokalisierte Werte zu prüfen. Integerwerte
@@ -85,8 +83,5 @@ $validator->isValid("1.234"); // Gibt true zurück
             <methodname>setLocale()</methodname> verwendet wird, und empfangen indem man
             <methodname>getLocale()</methodname> verwendet.
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

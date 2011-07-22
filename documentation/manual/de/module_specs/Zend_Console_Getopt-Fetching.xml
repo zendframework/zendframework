@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.console.getopt.fetching">
-    <title>Holen von Optionen und Argumenten</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.fetching"><info><title>Holen von Optionen und Argumenten</title></info>
+    
 
     <para>
         Nach dem Erstellen der Optionen welche das <classname>Zend_Console_Getopt</classname>
@@ -22,8 +20,8 @@
         Konfigurationsoptionen bevor das Analysieren durchgeführt wird.
     </para>
 
-    <sect2 id="zend.console.getopt.fetching.exceptions">
-        <title>Handhaben von Getopt Ausnahmen</title>
+    <section xml:id="zend.console.getopt.fetching.exceptions"><info><title>Handhaben von Getopt Ausnahmen</title></info>
+        
 
         <para>
             Wenn ein Benutzer irgendeine ungültige Option auf der Kommandozeile
@@ -39,8 +37,8 @@
             Verwendung aller definierten Optionen zurückgibt.
         </para>
 
-        <example id="zend.console.getopt.fetching.exceptions.example">
-            <title>Getopt Ausnahmen auffangen</title>
+        <example xml:id="zend.console.getopt.fetching.exceptions.example"><info><title>Getopt Ausnahmen auffangen</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 try {
@@ -78,10 +76,10 @@ try {
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.console.getopt.fetching.byname">
-        <title>Optionen durch Ihren Namen finden</title>
+    <section xml:id="zend.console.getopt.fetching.byname"><info><title>Optionen durch Ihren Namen finden</title></info>
+        
 
         <para>
             Die <methodname>getOption()</methodname> Methode kann verwendet werden um den
@@ -92,8 +90,8 @@ try {
             Andernfalls gibt die Methode <constant>NULL</constant> zurück.
         </para>
 
-        <example id="zend.console.getopt.fetching.byname.example.setoption">
-            <title>Verwenden von getOption()</title>
+        <example xml:id="zend.console.getopt.fetching.byname.example.setoption"><info><title>Verwenden von getOption()</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
@@ -109,8 +107,8 @@ $p_parameter = $opts->getOption('p');
             ist auch implementiert.
         </para>
 
-        <example id="zend.console.getopt.fetching.byname.example.magic">
-            <title>Verwenden der magischen __get() und __isset() Methoden</title>
+        <example xml:id="zend.console.getopt.fetching.byname.example.magic"><info><title>Verwenden der magischen __get() und __isset() Methoden</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
@@ -125,10 +123,10 @@ $p_parameter = $opts->p; // Null wenn nicht gesetzt
             Wenn die Optionen mit Aliasen definiert wurden, kann jeder der Aliase für
             eine Option in den obigen Methoden verwendet werden.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.console.getopt.fetching.reporting">
-        <title>Optionen berichten</title>
+    <section xml:id="zend.console.getopt.fetching.reporting"><info><title>Optionen berichten</title></info>
+        
 
         <para>
             Es gibt einige Methoden um das komplette Set an Optionen
@@ -177,10 +175,10 @@ $p_parameter = $opts->p; // Null wenn nicht gesetzt
             <command>verbose</command> als kanonischer Name der Option verwendet. Der Name des
             Optionsflags enthält nicht die vorangestellten Bindestriche.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.console.getopt.fetching.remainingargs">
-        <title>Nicht-Options Argumente erhalten</title>
+    <section xml:id="zend.console.getopt.fetching.remainingargs"><info><title>Nicht-Options Argumente erhalten</title></info>
+        
 
         <para>
             Nachdem die Argumente der Option und deren Parameter von der Kommandozeile analysiert
@@ -190,8 +188,8 @@ $p_parameter = $opts->p; // Null wenn nicht gesetzt
             waren.
         </para>
 
-        <example id="zend.console.getopt.fetching.remainingargs.example">
-            <title>Verwenden von getRemainingArgs()</title>
+        <example xml:id="zend.console.getopt.fetching.remainingargs.example"><info><title>Verwenden von getRemainingArgs()</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
@@ -208,5 +206,5 @@ $args = $opts->getRemainingArgs(); // Rückgabe array('filename')
             Nicht-Options-Argument vorhanden ist welches mit einem Bindestrich anfängt. Zum
             Beispiel: "<command>rm -- -filename-with-dash</command>".
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

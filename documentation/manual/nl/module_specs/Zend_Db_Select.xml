@@ -1,10 +1,11 @@
-<sect1 id="zend.db.select">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.select"><info><title>Zend_Db_Select</title></info>
 
-    <title>Zend_Db_Select</title>
+    
 
-    <sect2 id="zend.db.select.introduction">
+    <section xml:id="zend.db.select.introduction"><info><title>Inleiding</title></info>
 
-        <title>Inleiding</title>
+        
 
         <para>
             Zend_Db_Select is een werktuig dat je helpt SQL SELECT verklaringen
@@ -104,11 +105,11 @@ $result = $db->fetchAll($select, $params);
 
 ?>]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.select.fromcols">
+    <section xml:id="zend.db.select.fromcols"><info><title>Kolommen FROM een tabel</title></info>
 
-        <title>Kolommen FROM een tabel</title>
+        
 
         <para>
             Om kolommen van een bepaalde tabel de selecteren gebruik je de
@@ -135,11 +136,11 @@ $select->from('foo', 'foo.col AS col1');
 $select->from('bar', 'bar.col AS col2');
 
 ?>]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.select.joincols">
+    <section xml:id="zend.db.select.joincols"><info><title>Kolommen van geJOINde tabellen</title></info>
 
-        <title>Kolommen van geJOINde tabellen</title>
+        
 
         <para>
             Om kolommen van gejoinde tabellen te selecteren kan je de
@@ -170,11 +171,11 @@ $select->join('bar', 'foo.id = bar.id', '*');
             concepten in een database-onafhankelijke manier ondersteunen.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.select.where">
+    <section xml:id="zend.db.select.where"><info><title>WHERE voorwaarden</title></info>
 
-        <title>WHERE voorwaarden</title>
+        
 
         <para>
             Om WHERE voorwaarden toe te voegen gebruik je de where() methode.
@@ -216,11 +217,11 @@ $select->orWhere('id IN(?)', array(1, 2, 3);
 
 ?>]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.select.group">
+    <section xml:id="zend.db.select.group"><info><title>GROUP BY clausule</title></info>
 
-        <title>GROUP BY clausule</title>
+        
 
         <para>
             Om rijen te groeperen gebruik je de group() methode zoveel maal
@@ -249,11 +250,11 @@ $select->group(array('bar', 'baz'));
 
 ?>]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.select.having">
+    <section xml:id="zend.db.select.having"><info><title>HAVING voorwaarden</title></info>
 
-        <title>HAVING voorwaarden</title>
+        
 
         <para>
             Om HAVING voorwaarden aan de selectieregels toe te voegen gebruik
@@ -281,11 +282,11 @@ $select->group('bar, baz');
 $select->having('count_id > ?', 1);
 
 ?>]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.select.order">
+    <section xml:id="zend.db.select.order"><info><title>ORDER BY clausule</title></info>
 
-        <title>ORDER BY clausule</title>
+        
 
         <para>
             Om kolommen te ordenen gebruik je de order() methode zoveel maal als
@@ -313,11 +314,11 @@ $select->order(array('noble_title DESC', 'first_name'));
 
 ?>]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.select.limit">
+    <section xml:id="zend.db.select.limit"><info><title>LIMIT per Count en Offset</title></info>
 
-        <title>LIMIT per Count en Offset</title>
+        
 
         <para>
             Zend_Db_Select ondersteunt een database onafhankelijke LIMIT clausule.
@@ -390,11 +391,11 @@ $select->limit(10, 20);
 
 ?>]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.select.paging">
+    <section xml:id="zend.db.select.paging"><info><title>LIMIT per Pagina en Count</title></info>
 
-        <title>LIMIT per Pagina en Count</title>
+        
 
         <para>
             Zend_Db_Select biedt eveneens pagina-gebaseerde limits. Indien
@@ -422,9 +423,6 @@ $select->limitPage(3, 10);
 //
 
 ?>]]></programlisting>
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

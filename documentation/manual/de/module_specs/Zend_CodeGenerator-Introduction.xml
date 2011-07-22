@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15998 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.codegenerator.introduction">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.codegenerator.introduction"><info><title>Einführung</title></info>
+    
 
     <para>
         <classname>Zend_CodeGenerator</classname> bietet die Möglichkeit jeglichen Code zu erstellen
@@ -13,8 +11,8 @@
         VHosts, usw.
     </para>
 
-    <sect2 id="zend.codegenerator.introduction.theory">
-        <title>Theorie der Anwendung</title>
+    <section xml:id="zend.codegenerator.introduction.theory"><info><title>Theorie der Anwendung</title></info>
+        
 
         <para>
             Der typischste Fall ist die Instanzierung einer Code Erzeugungs Klasse und entweder der
@@ -132,5 +130,5 @@ class World
 
 }
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

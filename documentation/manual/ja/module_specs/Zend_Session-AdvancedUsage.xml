@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21829 -->
-<sect1 id="zend.session.advanced_usage">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.advanced_usage"><info><title>高度な使用法</title></info>
 
-    <title>高度な使用法</title>
+    
 
     <para>
         基本的な使用法の例で Zend Framework のセッションを完全に使用できますが、
@@ -11,18 +9,18 @@
         <classname>Zend_Session</classname> コンポーネントのより行動な使用法を説明します。
     </para>
 
-    <sect2 id="zend.session.advanced_usage.starting_a_session">
+    <section xml:id="zend.session.advanced_usage.starting_a_session"><info><title>セッションの開始</title></info>
 
-        <title>セッションの開始</title>
+        
 
         <para>
             すべてのリクエストで <classname>Zend_Session</classname> の機能を使用してセッション管理したい場合は、
             起動ファイルでセッションを開始します。
         </para>
 
-        <example id="zend.session.advanced_usage.starting_a_session.example">
+        <example xml:id="zend.session.advanced_usage.starting_a_session.example"><info><title>グローバルセッションの開始</title></info>
 
-            <title>グローバルセッションの開始</title>
+            
 
             <programlisting language="php"><![CDATA[
 Zend_Session::start();
@@ -47,8 +45,8 @@ Zend_Session::start();
             <listitem>
                 <para>
                     間違い: <acronym>PHP</acronym> の
-                    <ulink url="http://www.php.net/manual/ja/ref.session.php#ini.session.auto-start"><code>session.auto_start</code>
-                    </ulink> を有効にしてはいけません。
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/ja/ref.session.php#ini.session.auto-start"><code>session.auto_start</code>
+                    </link> を有効にしてはいけません。
                     もし mod_php (やそれと同等のもの) を使用しており、
                     <code>php.ini</code> でこの設定が有効になっている、かつそれを無効にすることができない
                     という場合は、<code>.htaccess</code> ファイル (通常は <acronym>HTML</acronym> のドキュメントルートにあります)
@@ -64,7 +62,7 @@ php_value session.auto_start 0
             <listitem>
                 <para>
                     間違い: <acronym>PHP</acronym> の
-                    <ulink url="http://www.php.net/session_start"><methodname>session_start()</methodname></ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/session_start"><methodname>session_start()</methodname></link>
                     関数を直接使用してはいけません。
                     <methodname>session_start()</methodname> を直接使用した後で <classname>Zend_Session_Namespace</classname> を使用した場合は、
                     <methodname>Zend_Session::start()</methodname> が例外 ("session has already been started")
@@ -126,20 +124,20 @@ php_value session.auto_start 0
                     これはもっともシンプルな使用法で、たいていの場合にうまく動作します。
                     しかし、デフォルトであるクッキーベースのセッション (強く推奨します)
                     を使用している場合には、<acronym>PHP</acronym> がクライアントに何らかの出力
-                    (<ulink url="http://www.php.net/headers_sent">HTTP ヘッダ</ulink> など)
+                    (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/headers_sent">HTTP ヘッダ</link> など)
                     をする <emphasis>前に</emphasis>、確実に
                     最初の <code>new Zend_Session_Namespace()</code> をコールしなければなりません。
-                    詳細は <xref linkend="zend.session.global_session_management.headers_sent" />
+                    詳細は <xref linkend="zend.session.global_session_management.headers_sent"/>
                     を参照ください。
                 </para>
             </listitem>
         </orderedlist>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.advanced_usage.locking">
+    <section xml:id="zend.session.advanced_usage.locking"><info><title>セッション名前空間のロック</title></info>
 
-        <title>セッション名前空間のロック</title>
+        
 
         <para>
             セッション名前空間をロックし、
@@ -156,13 +154,13 @@ php_value session.auto_start 0
             名前空間に直接格納されたオブジェクトの削除や置換ができなくなります。同様に、
             <classname>Zend_Session_Namespace</classname> のインスタンスをロックしたとしても、
             同じデータをさすシンボルテーブルの使用をとめることはできません
-            (<ulink url="http://www.php.net/references"><acronym>PHP</acronym>
-            のリファレンスについての説明</ulink>も参照ください)。
+            (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/references"><acronym>PHP</acronym>
+            のリファレンスについての説明</link>も参照ください)。
         </para>
 
-        <example id="zend.session.advanced_usage.locking.example.basic">
+        <example xml:id="zend.session.advanced_usage.locking.example.basic"><info><title>セッション名前空間のロック</title></info>
 
-            <title>セッション名前空間のロック</title>
+            
 
             <programlisting language="php"><![CDATA[
 $userProfileNamespace = new Zend_Session_Namespace('userProfileNamespace');
@@ -178,11 +176,11 @@ if ($userProfileNamespace->isLocked()) {
 
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.advanced_usage.expiration">
+    <section xml:id="zend.session.advanced_usage.expiration"><info><title>名前空間の有効期限</title></info>
 
-        <title>名前空間の有効期限</title>
+        
 
         <para>
             名前空間およびその中の個々のキーについて、その寿命を制限できます。
@@ -193,9 +191,9 @@ if ($userProfileNamespace->isLocked()) {
             一連のリクエストの回数を表します。
         </para>
 
-        <example id="zend.session.advanced_usage.expiration.example">
+        <example xml:id="zend.session.advanced_usage.expiration.example"><info><title>有効期限切れの例</title></info>
 
-            <title>有効期限切れの例</title>
+            
 
             <programlisting language="php"><![CDATA[
 $s = new Zend_Session_Namespace('expireAll');
@@ -225,11 +223,11 @@ $s->setExpirationSeconds(60);
             名前空間上の内容を削除し、あらためて適切なキーで再設定します。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.advanced_usage.controllers">
+    <section xml:id="zend.session.advanced_usage.controllers"><info><title>コントローラでのセッションのカプセル化</title></info>
 
-        <title>コントローラでのセッションのカプセル化</title>
+        
 
         <para>
             名前空間を使用すると、コントローラによるセッションへのアクセスの際に
@@ -238,9 +236,9 @@ $s->setExpirationSeconds(60);
             そのセッション状態データを他のコントローラとは別に管理することになるでしょう。
         </para>
 
-        <example id="zend.session.advanced_usage.controllers.example">
+        <example xml:id="zend.session.advanced_usage.controllers.example"><info><title>コントローラでの名前空間つきセッションによる有効期限の管理</title></info>
 
-            <title>コントローラでの名前空間つきセッションによる有効期限の管理</title>
+            
 
             <para>
                 次のコードは、質問を表示するコントローラの一部です。
@@ -277,11 +275,11 @@ else {
 ]]></programlisting>
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.advanced_usage.single_instance">
+    <section xml:id="zend.session.advanced_usage.single_instance"><info><title>名前空間内あたりのインスタンス数をひとつに絞り込む</title></info>
 
-        <title>名前空間内あたりのインスタンス数をひとつに絞り込む</title>
+        
 
         <para>
             <link linkend="zend.session.advanced_usage.locking">セッションのロック</link>
@@ -296,9 +294,9 @@ else {
             を渡します。それ以降は、同一名前空間でインスタンスを作成しようとすると例外がスローされます。
         </para>
 
-        <example id="zend.session.advanced_usage.single_instance.example">
+        <example xml:id="zend.session.advanced_usage.single_instance.example"><info><title>セッション名前空間へのアクセスを単一のインスタンスに制限する</title></info>
 
-            <title>セッション名前空間へのアクセスを単一のインスタンスに制限する</title>
+            
 
             <programlisting language="php"><![CDATA[
 // 名前空間のインスタンスを作成します
@@ -335,27 +333,26 @@ try {
             <code>$authSpaceAccessor2</code> あるいは <code>$authSpaceAccessor3</code>)
             のどれかを使うことになるわけです。
             たとえば、名前空間への参照を静的変数に格納したり、
-            <ulink url="http://www.martinfowler.com/eaaCatalog/registry.html">レジストリ</ulink>
-            (<xref linkend="zend.registry" /> を参照ください) に格納したり、
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.martinfowler.com/eaaCatalog/registry.html">レジストリ</link>
+            (<xref linkend="zend.registry"/> を参照ください) に格納したり、
             あるいは名前空間へのアクセスを必要とするその他のメソッドで使用したりします。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.advanced_usage.arrays">
+    <section xml:id="zend.session.advanced_usage.arrays"><info><title>配列の使用</title></info>
 
-        <title>配列の使用</title>
+        
 
         <para>
             <acronym>PHP</acronym> のマジックメソッドの実装上の理由で、バージョン 5.2.1 より前の <acronym>PHP</acronym>
             では名前空間内の配列の修正ができません。
-            もし <acronym>PHP</acronym> 5.2.1 以降を使っている場合は、<link
-            linkend="zend.session.advanced_usage.objects">このセクションは読み飛ばしてください</link>。
+            もし <acronym>PHP</acronym> 5.2.1 以降を使っている場合は、<link linkend="zend.session.advanced_usage.objects">このセクションは読み飛ばしてください</link>。
         </para>
 
-        <example id="zend.session.advanced_usage.arrays.example.modifying">
+        <example xml:id="zend.session.advanced_usage.arrays.example.modifying"><info><title>セッション名前空間内での配列データの修正</title></info>
 
-            <title>セッション名前空間内での配列データの修正</title>
+            
 
             <para>
                 問題の再現手順は、このようになります。
@@ -372,9 +369,9 @@ echo $sessionNamespace->array['testKey'];
 
         </example>
 
-        <example id="zend.session.advanced_usage.arrays.example.building_prior">
+        <example xml:id="zend.session.advanced_usage.arrays.example.building_prior"><info><title>セッションに保存する前に配列を作成する</title></info>
 
-            <title>セッションに保存する前に配列を作成する</title>
+            
 
             <para>
                 可能なら、先に配列のすべての値を設定してからセッションに格納するようにすればこの問題を回避できます。
@@ -393,9 +390,9 @@ $sessionNamespace->array = array('a', 'b', 'c');
             以下の回避策のうちのいずれかを使用します。
         </para>
 
-        <example id="zend.session.advanced_usage.arrays.example.workaround.reassign">
+        <example xml:id="zend.session.advanced_usage.arrays.example.workaround.reassign"><info><title>回避策: 修正した配列を再度代入する</title></info>
 
-            <title>回避策: 修正した配列を再度代入する</title>
+            
 
             <para>
                 以下のコードでは、保存されている配列のコピーを作成してそれを修正し、
@@ -422,9 +419,9 @@ echo $sessionNamespace->array['fruit']; // prints "peach"
 
         </example>
 
-        <example id="zend.session.advanced_usage.arrays.example.workaround.reference">
+        <example xml:id="zend.session.advanced_usage.arrays.example.workaround.reference"><info><title>回避策: 参照を含む配列を格納する</title></info>
 
-            <title>回避策: 参照を含む配列を格納する</title>
+            
 
             <para>
                 あるいは、実際の配列への参照を含む配列を格納しておき、
@@ -441,15 +438,15 @@ echo $myNamespace->someArray['foo']; // "bar" と表示されます
 
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.advanced_usage.objects">
+    <section xml:id="zend.session.advanced_usage.objects"><info><title>セッションでのオブジェクトの使用</title></info>
 
-        <title>セッションでのオブジェクトの使用</title>
+        
 
         <para>
             オブジェクトを <acronym>PHP</acronym> セッション内で持続的に使用したい場合は、
-            <ulink url="http://www.php.net/manual/ja/language.oop.serialization.php">シリアライズ</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/ja/language.oop.serialization.php">シリアライズ</link>
             を使用します。したがって、<acronym>PHP</acronym> セッションから永続オブジェクトを取得したら、
             そのシリアライズを解除しなければなりません。
             ということは、永続オブジェクトをセッションから読み出す前に、
@@ -458,11 +455,11 @@ echo $myNamespace->someArray['foo']; // "bar" と表示されます
             のオブジェクトとして復元されます。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.advanced_usage.testing">
+    <section xml:id="zend.session.advanced_usage.testing"><info><title>ユニットテストでのセッションの使用</title></info>
 
-        <title>ユニットテストでのセッションの使用</title>
+        
 
         <para>
             Zend Framework 自体のテストには PHPUnit を使用しています。
@@ -493,9 +490,9 @@ echo $myNamespace->someArray['foo']; // "bar" と表示されます
             <methodname>exec()</methodname> を使用する前にセッションを閉じています。
         </para>
 
-        <example id="zend.session.advanced_usage.testing.example">
+        <example xml:id="zend.session.advanced_usage.testing.example"><info><title>PHPUnit で Zend_Session を使用したコードをテストする例</title></info>
 
-            <title>PHPUnit で Zend_Session を使用したコードをテストする例</title>
+            
 
             <programlisting language="php"><![CDATA[
 // testing setExpirationSeconds()
@@ -546,6 +543,6 @@ $this->assertTrue($result === ';p === plum',
 
         </example>
 
-    </sect2>
+    </section>
 
-</sect1>
+</section>

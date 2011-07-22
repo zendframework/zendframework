@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20799 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.view.scripts">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.scripts"><info><title>Skrypty widoków</title></info>
 
-    <title>Skrypty widoków</title>
+    
 
     <para>
         Kiedy już kontroler przypisze zmienne i wywoła metodę render(),
@@ -15,7 +13,7 @@
     <para>
         Zmienne przypisane do widoku przez kontroler odnoszą się do właściwości
         tej instancji. Na przykład, jeśli kontroler przypisał zmienną 'cos', w
-        skrypcie widoku możesz odwołać się do niej za pomocą $this->cos.
+        skrypcie widoku możesz odwołać się do niej za pomocą $this-&gt;cos.
         (To pozwala Ci na śledzenie zmiennych które zostały przypisane do skryptu
         i tych które są zmiennymi wewnętrznymi skryptu).
     </para>
@@ -49,12 +47,12 @@ if ($this->books): ?>
     <p>Nie ma żadnych książek do wyświetlenia.</p>
 
 <?php endif;
-]]>
-    </programlisting>
 
-    <sect2 id="zend.view.scripts.escaping">
+    ]]></programlisting>
 
-        <title>Filtrowanie danych wyjściowych</title>
+    <section xml:id="zend.view.scripts.escaping"><info><title>Filtrowanie danych wyjściowych</title></info>
+
+        
 
         <para>
             Jedną z najważniejszych rzeczy do zrobienia w skrypcie widoku
@@ -76,8 +74,8 @@ echo $this->variable;
 
 // dobry zwyczaj wyświetlania zmiennej:
 echo $this->escape($this->variable);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Domyślnie metoda escape() używa funkcji PHP htmlspecialchars() do
@@ -103,8 +101,8 @@ $view->setEscape(array($obj, 'methodName'));
 
 // a teraz wygeneruj skrypt widoku
 echo $view->render(...);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Metoda lub funkcja filtrująca powinna przyjmować wartość do
@@ -112,11 +110,11 @@ echo $view->render(...);
             powinny być opcjonalne.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.scripts.templates">
+    <section xml:id="zend.view.scripts.templates"><info><title>Użycie alternatywnych systemów szablonów</title></info>
 
-        <title>Użycie alternatywnych systemów szablonów</title>
+        
 
         <para>
             Chociaż PHP jest sam w sobie potężnym systemem szablonów, wielu
@@ -127,8 +125,8 @@ echo $view->render(...);
             Zend_View_Interface.
         </para>
 
-        <sect3 id="zend.view.scripts.templates.scripts">
-            <title>Systemy szablonów używające skryptów widoku</title>
+        <section xml:id="zend.view.scripts.templates.scripts"><info><title>Systemy szablonów używające skryptów widoku</title></info>
+            
 
             <para>
                 Skrypt widoku może być użyty w celu utworzenia instancji
@@ -158,8 +156,8 @@ if ($this->books) {
     $tpl->setFile("nobooks", "nobooks.tpl")
     $tpl->pparse("output", "nobooks");
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
             <para>
                 I mogłoby to być powiązane z takim plikiem szablonu:
@@ -183,13 +181,13 @@ if ($this->books) {
 
 <!-- nobooks.tpl -->
 <p>Nie ma żadnych książek do wyświetlenia.</p>
-]]>
-            </programlisting>
 
-        </sect3>
+            ]]></programlisting>
 
-        <sect3 id="zend.view.scripts.templates.interface">
-            <title>Systemy szablonów używające interfejsu Zend_View_Interface</title>
+        </section>
+
+        <section xml:id="zend.view.scripts.templates.interface"><info><title>Systemy szablonów używające interfejsu Zend_View_Interface</title></info>
+            
 
             <para>
                 Niektórzy mogą zrobić to łatwiej zapewniając w prosty sposób system
@@ -248,8 +246,8 @@ public function clearVars();
  * Renderowanie szablonu o nazwie $name
  */
 public function render($name);
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
             <para>
                 Używając tego interfejsu, relatywnie proste staje się podpięcie
@@ -441,8 +439,8 @@ class Zend_View_Smarty implements Zend_View_Interface
         return $this->_smarty->fetch($name);
     }
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
             <para>
                 W tym przykładzie powinieneś utworzyć instancję klasy
@@ -457,10 +455,10 @@ $view->setScriptPath('/path/to/templates');
 $view->book = 'Zend PHP 5 Certification Study Guide';
 $view->author = 'Davey Shafik and Ben Ramsey'
 $rendered = $view->render('bookinfo.tpl');
-]]>
-            </programlisting>
 
-        </sect3>
-    </sect2>
+            ]]></programlisting>
 
-</sect1>
+        </section>
+    </section>
+
+</section>

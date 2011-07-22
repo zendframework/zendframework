@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20876 -->
-<!-- Reviewed: no -->
-<appendix id="doc-standard">
-    <title>Recommandation sur la documentation de Zend Framework</title>
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="doc-standard"><info><title>Recommandation sur la documentation de Zend Framework</title></info>
+    
 
-    <sect1 id="doc-standard.overview">
-        <title>Présentation</title>
+    <section xml:id="doc-standard.overview"><info><title>Présentation</title></info>
+        
 
-        <sect2 id="doc-standard.overview.scope">
-            <title>Cadre</title>
+        <section xml:id="doc-standard.overview.scope"><info><title>Cadre</title></info>
+            
 
             <para>
                 Ce document fournit les lignes directrices pour la création de documentation pour
@@ -22,25 +20,25 @@
 
             <para>
                 Vous pouvez adopter et/ou modifier ces recommandations tant que vous respectez
-                les termes de notre <ulink url="http://framework.zend.com/license">license</ulink>.
+                les termes de notre <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/license">license</link>.
             </para>
 
             <para>
                 Les sujets couverts dans ce document incluent le format des fichiers ainsi que des
                 recommandations sur le maintien de la qualité de la documentation.
             </para>
-        </sect2>
-    </sect1>
+        </section>
+    </section>
 
-    <sect1 id="doc-standard.file-formatting">
-        <title>Format des fichiers de documentation</title>
+    <section xml:id="doc-standard.file-formatting"><info><title>Format des fichiers de documentation</title></info>
+        
 
-        <sect2 id="doc-standard.file-formatting.xml-tags">
-            <title>Balises XML</title>
+        <section xml:id="doc-standard.file-formatting.xml-tags"><info><title>Balises XML</title></info>
+            
 
             <para>
                 Chaque fichier du manuel doit inclure la déclaration <acronym>XML</acronym>
-                suivante à la première ligne du fichier&#160;:
+                suivante à la première ligne du fichier :
             </para>
 
             <programlisting language="xml"><![CDATA[
@@ -59,21 +57,21 @@
 <!-- EN-Revision: 14978 -->
 <!-- Reviewed: no -->
 ]]></programlisting>
-        </sect2>
+        </section>
 
-        <sect2 id="doc-standard.file-formatting.max-line-length">
-            <title>Longueur maximum d'une ligne</title>
+        <section xml:id="doc-standard.file-formatting.max-line-length"><info><title>Longueur maximum d'une ligne</title></info>
+            
 
             <para>
                 La longueur maximum d'une ligne, incluant les balises, les attributs,
                 l'indentation ne doit pas excéder 100 caractères. Il existe une seule exception à
-                cette règle, un couple attribut&#160;/&#160;valeur peut excéder 100 caractères
+                cette règle, un couple attribut / valeur peut excéder 100 caractères
                 puisqu'il n'est pas autorisé de les séparer.
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="doc-standard.file-formatting.indentation">
-            <title>Indentation</title>
+        <section xml:id="doc-standard.file-formatting.indentation"><info><title>Indentation</title></info>
+            
 
             <para>
                 L'indentation est faite de 4 espaces. Les tabulations ne sont pas autorisées.
@@ -101,7 +99,7 @@
 ]]></programlisting>
 
             <para>
-                Plusieurs éléments bloc sur une même ligne ne sont pas autorisés&#160;; plusieurs
+                Plusieurs éléments bloc sur une même ligne ne sont pas autorisés ; plusieurs
                 éléments en-ligne le sont en revanche.
             </para>
 
@@ -114,10 +112,10 @@
     <classname>Zend_Magic</classname> n'existe pas. <classname>Zend_Acl</classname> existe.
 </para>
 ]]></programlisting>
-        </sect2>
+        </section>
 
-        <sect2 id="doc-standard.file-formatting.line-termination">
-            <title>Fin de ligne</title>
+        <section xml:id="doc-standard.file-formatting.line-termination"><info><title>Fin de ligne</title></info>
+            
 
             <para>
                 Les fins de ligne suivent les conventions de fichier Unix. Les lignes doivent
@@ -131,10 +129,10 @@
                 ligne (<acronym>CRLF</acronym>) qui est le standard sur les systèmes Windows
                 (0X0D, 0x0A).
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="doc-standard.file-formatting.empty-tags">
-            <title>Éléments vides</title>
+        <section xml:id="doc-standard.file-formatting.empty-tags"><info><title>Éléments vides</title></info>
+            
 
             <para>
                 Les éléments vides ne sont pas autorisés, tous les éléments doivent
@@ -149,13 +147,13 @@
 <para>
 </para>
 ]]></programlisting>
-        </sect2>
+        </section>
 
-        <sect2 id="doc-standard.file-formatting.whitespace">
-            <title>Utilisation des espaces dans les documents</title>
+        <section xml:id="doc-standard.file-formatting.whitespace"><info><title>Utilisation des espaces dans les documents</title></info>
+            
 
-            <sect3 id="doc-standard.file-formatting.whitespace.trailing">
-                <title>Espace entre les balises</title>
+            <section xml:id="doc-standard.file-formatting.whitespace.trailing"><info><title>Espace entre les balises</title></info>
+                
 
                 <para>
                     Les balises ouvrantes des éléments bloc ne devrait pas être suivi
@@ -205,10 +203,10 @@ C'est la classe <classname>Zend_Class </classname>
 <!-- AUTORISÉ -->
 C'est la classe  <classname>Zend_Class</classname>
 ]]></programlisting>
-            </sect3>
+            </section>
 
-            <sect3 id="doc-standard.file-formatting.whitespace.multiple-line-breaks">
-                <title>Sauts de ligne multiples</title>
+            <section xml:id="doc-standard.file-formatting.whitespace.multiple-line-breaks"><info><title>Sauts de ligne multiples</title></info>
+                
 
                 <para>
                     Les sauts de ligne multiples ne sont pas autorisés ni dans les balises,
@@ -236,10 +234,10 @@ C'est la classe  <classname>Zend_Class</classname>
     Un autre paragraphe.
 </para>
 ]]></programlisting>
-            </sect3>
+            </section>
 
-            <sect3 id="doc-standard.file-formatting.whitespace.tag-separation">
-                <title>Séparation entre les balises</title>
+            <section xml:id="doc-standard.file-formatting.whitespace.tag-separation"><info><title>Séparation entre les balises</title></info>
+                
 
                 <para>
                     Les éléments qui sont au même niveau doivent être séparés par une ligne vide
@@ -266,7 +264,7 @@ C'est la classe  <classname>Zend_Class</classname>
 
                 <para>
                     Le premier élément enfant devrait être ouvert directement après son parent,
-                    sans ligne vide entre eux&#160;; le dernier élément enfant quant à lui, devrait être
+                    sans ligne vide entre eux ; le dernier élément enfant quant à lui, devrait être
                     fermé juste avant la balise fermante de son parent.
                 </para>
 
@@ -296,11 +294,11 @@ C'est la classe  <classname>Zend_Class</classname>
     </sect2>
 </sect1>
 ]]></programlisting>
-            </sect3>
-        </sect2>
+            </section>
+        </section>
 
-        <sect2 id="doc-standard.file-formatting.program-listing">
-            <title>Exemple de code</title>
+        <section xml:id="doc-standard.file-formatting.program-listing"><info><title>Exemple de code</title></info>
+            
 
             <para>
                 La balise ouvrante de l'élement <emphasis>&lt;programlisting&gt;</emphasis> doit
@@ -310,7 +308,7 @@ C'est la classe  <classname>Zend_Class</classname>
 
             <programlisting language="xml"><![CDATA[
 <para>Paragraphe frère.</para>
-<programlisting language="php">]]>&lt;<![CDATA[![CDATA[
+<programlisting language="php"><![CDATA[
 ]]></programlisting>
 
             <para>
@@ -325,13 +323,13 @@ C'est la classe  <classname>Zend_Class</classname>
 
             <programlisting language="xml"><![CDATA[
 <!-- NON AUTORISÉ -->
-<programlisting language="php">]]>&lt;<![CDATA[![CDATA[
+<programlisting language="php"><![CDATA[
 $render = "xxx";
-]]]]>&gt;<![CDATA[</programlisting>
+]]]]><![CDATA[></programlisting>
 <!-- AUTORISÉ -->
-<programlisting language="php">]]>&lt;<![CDATA[![CDATA[
+<programlisting language="php"><![CDATA[
 $render = "xxx";
-]]]]>&gt;<![CDATA[</programlisting>
+]]]]><![CDATA[></programlisting>
 ]]></programlisting>
 
             <para>
@@ -341,18 +339,18 @@ $render = "xxx";
 
             <programlisting language="xml"><![CDATA[
 <!-- NON AUTORISÉ -->
-    <programlisting language="php">]]>&lt;<![CDATA[![CDATA[
+    <programlisting language="php"><![CDATA[
 $render = "xxx";
-]]]]>&gt;<![CDATA[
+]]]]><![CDATA[>
     </programlisting>
 <!-- NON AUTORISÉ -->
-    <programlisting language="php">]]>&lt;<![CDATA[![CDATA[
+    <programlisting language="php"><![CDATA[
 $render = "xxx";
-    ]]]]>&gt;<![CDATA[</programlisting>
+    ]]]]><![CDATA[></programlisting>
 <!-- AUTORISÉ -->
-    <programlisting language="php">]]>&lt;<![CDATA[![CDATA[
+    <programlisting language="php"><![CDATA[
 $render = "xxx";
-]]]]>&gt;<![CDATA[</programlisting>
+]]]]><![CDATA[></programlisting>
 ]]></programlisting>
 
             <para>
@@ -363,11 +361,11 @@ $render = "xxx";
 
             <programlisting language="xml"><![CDATA[
 <!-- PHP -->
-<programlisting language="php">]]>&lt;<![CDATA[![CDATA[
+<programlisting language="php"><![CDATA[
 <!-- Javascript -->
-<programlisting language="javascript">]]>&lt;<![CDATA[![CDATA[
+<programlisting language="javascript"><![CDATA[
 <!-- XML -->
-<programlisting language="xml">]]>&lt;<![CDATA[![CDATA[
+<programlisting language="xml"><![CDATA[
 ]]></programlisting>
 
             <para>
@@ -380,14 +378,14 @@ $render = "xxx";
 
             <programlisting language="xml"><![CDATA[
 <!-- NON AUTORISÉ -->
-<programlisting language="php"]]>&lt;<![CDATA[![CDATA[<?php
+<programlisting language="php"<![CDATA[<?php
     // ...
-?>]]]]>&gt;<![CDATA[</programlisting>
-<programlisting language="php"]]>&lt;<![CDATA[![CDATA[
+?>]]]]><![CDATA[></programlisting>
+<programlisting language="php"<![CDATA[
 <?php
     // ...
 ?>
-]]]]>&gt;<![CDATA[</programlisting>
+]]]]><![CDATA[></programlisting>
 ]]></programlisting>
 
             <para>
@@ -405,8 +403,8 @@ $render = "xxx";
                 la compréhension d'un exemple.
             </para>
 
-            <note>
-                <title>N'utilisez jamais les short tags</title>
+            <note><info><title>N'utilisez jamais les short tags</title></info>
+                
 
                 <para>
                     Les short tags (e.g., "&lt;?", "&lt;?=")  ne devrait jamais être utilisés dans
@@ -414,17 +412,17 @@ $render = "xxx";
                     documentation.
                 </para>
             </note>
-        </sect2>
+        </section>
 
-        <sect2 id="doc-standard.file-formatting.inline-tags">
-            <title>Notes spécifiques sur les éléments en-ligne</title>
+        <section xml:id="doc-standard.file-formatting.inline-tags"><info><title>Notes spécifiques sur les éléments en-ligne</title></info>
+            
 
-            <sect3 id="doc-standard.file-formatting.inline-tags.classname">
-                <title>classname</title>
+            <section xml:id="doc-standard.file-formatting.inline-tags.classname"><info><title>classname</title></info>
+                
 
                 <para>
                     L'élément <emphasis>&lt;classname&gt;</emphasis> doit être utilisé chaque fois
-                    que le nom d'une classe est mentionné&#160;; il ne doivent cependant pas être
+                    que le nom d'une classe est mentionné ; il ne doivent cependant pas être
                     utilisé lorsque celle-ci est associé au nom d'une méthode, d'un membre, ou
                     d'une constante, rien d'autre n'est autorisé dans cet élément.
                 </para>
@@ -434,10 +432,10 @@ $render = "xxx";
     La classe <classname>Zend_Class</classname>.
 </para>
 ]]></programlisting>
-            </sect3>
+            </section>
 
-            <sect3 id="doc-standard.file-formatting.inline-tags.varname">
-                <title>varname</title>
+            <section xml:id="doc-standard.file-formatting.inline-tags.varname"><info><title>varname</title></info>
+                
 
                 <para>
                     Les variables doivent être entourées par les balises <emphasis>&lt;varname&gt;
@@ -453,10 +451,10 @@ $render = "xxx";
     <varname>Zend_Class::$var</varname>.
 </para>
 ]]></programlisting>
-            </sect3>
+            </section>
 
-            <sect3 id="doc-standard.file-formatting.inline-tags.methodname">
-                <title>methodname</title>
+            <section xml:id="doc-standard.file-formatting.inline-tags.methodname"><info><title>methodname</title></info>
+                
 
                 <para>
                     Les méthodes doivent être entourées par les balises
@@ -473,10 +471,10 @@ $render = "xxx";
     <methodname>foo($bar, $baz)</methodname>
 </para>
 ]]></programlisting>
-            </sect3>
+            </section>
 
-            <sect3 id="doc-standard.file-formatting.inline-tags.constant">
-                <title>constant</title>
+            <section xml:id="doc-standard.file-formatting.inline-tags.constant"><info><title>constant</title></info>
+                
 
                 <para>
                     Utilisez l'élément <emphasis>&lt;constant&gt;</emphasis> pour indiquer
@@ -491,10 +489,10 @@ $render = "xxx";
     <constant>Zend_Class::FOO</constant>.
 </para>
 ]]></programlisting>
-            </sect3>
+            </section>
 
-            <sect3 id="doc-standard.file-formatting.inline-tags.filename">
-                <title>filename</title>
+            <section xml:id="doc-standard.file-formatting.inline-tags.filename"><info><title>filename</title></info>
+                
 
                 <para>
                     Les noms de fichier et chemins doivent être entourés par les balises
@@ -507,10 +505,10 @@ $render = "xxx";
     Le nom de fichier <filename>application/Bootstrap.php</filename>.
 </para>
 ]]></programlisting>
-            </sect3>
+            </section>
 
-            <sect3 id="doc-standard.file-formatting.inline-tags.command">
-                <title>command</title>
+            <section xml:id="doc-standard.file-formatting.inline-tags.command"><info><title>command</title></info>
+                
 
                 <para>
                     Les commandes, les scripts shell, ainsi que l'appel de programme doivent être
@@ -523,23 +521,23 @@ $render = "xxx";
     Executez <command>zf.sh create project</command> pour créer un projet.
 </para>
 ]]></programlisting>
-            </sect3>
+            </section>
 
-            <sect3 id="doc-standard.file-formatting.inline-tags.code">
-                <title>code</title>
+            <section xml:id="doc-standard.file-formatting.inline-tags.code"><info><title>code</title></info>
+                
 
                 <para>
                     L'utilisation de l'élément <emphasis>&lt;code&gt;</emphasis> est déconseillée,
                     en faveur des autres éléments discutés précédement.
                 </para>
-            </sect3>
-        </sect2>
+            </section>
+        </section>
 
-        <sect2 id="doc-standard.file-formatting.block-tags">
-            <title>Notes spécifiques sur les éléments bloc</title>
+        <section xml:id="doc-standard.file-formatting.block-tags"><info><title>Notes spécifiques sur les éléments bloc</title></info>
+            
 
-            <sect3 id="doc-standard.file-formatting.block-tags.title">
-                <title>title</title>
+            <section xml:id="doc-standard.file-formatting.block-tags.title"><info><title>title</title></info>
+                
 
                 <para>
                     L'élément <emphasis>&lt;title&gt;</emphasis> ne peut pas contenir d'éléments enfants.
@@ -551,15 +549,15 @@ $render = "xxx";
 <!-- AUTORISÉ -->
 <title>Utilisation de Zend_Class</title>
 ]]></programlisting>
-            </sect3>
-        </sect2>
-    </sect1>
+            </section>
+        </section>
+    </section>
 
-    <sect1 id="doc-standard.recommendations">
-        <title>Recommendations</title>
+    <section xml:id="doc-standard.recommendations"><info><title>Recommendations</title></info>
+        
 
-        <sect2 id="doc-standard.recommendations.editors">
-            <title>Utilisez un éditeur sans formatage automatique</title>
+        <section xml:id="doc-standard.recommendations.editors"><info><title>Utilisez un éditeur sans formatage automatique</title></info>
+            
 
             <para>
                 Pour éditer la documentation, vous ne devriez pas utiliser un éditeur
@@ -575,10 +573,10 @@ $render = "xxx";
                 à déterminer les changements en utilisant la commande <command>diff</command>.
                 Le formatage automatique rend cette opération plus difficile.
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="doc-standard.recommendations.images">
-            <title>Utilisez des images</title>
+        <section xml:id="doc-standard.recommendations.images"><info><title>Utilisez des images</title></info>
+            
 
             <para>
                 Les images et les diagrammes peuvent améliorer la lisibilité et la compréhension.
@@ -586,10 +584,10 @@ $render = "xxx";
                 dans le répertoire <filename>documentation/manual/en/figures/</filename>, et
                 nommées juste après l'identifiant de la section qui les concerne.
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="doc-standard.recommendations.examples">
-            <title>Utilisez des cas d'utilisations</title>
+        <section xml:id="doc-standard.recommendations.examples"><info><title>Utilisez des cas d'utilisations</title></info>
+            
 
             <para>
                 Cherchez de bons cas d'utilisation soumis par la communauté, particulièrement
@@ -601,10 +599,10 @@ $render = "xxx";
                 Lorsque vous écrivez des exemples à inclure dans le manuel, suivez les conventions
                 de codages ainsi que les recommandations pour la documentation.
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="doc-standard.recommendations.phpdoc">
-            <title>Évitez de répéter le contenu des phpdoc</title>
+        <section xml:id="doc-standard.recommendations.phpdoc"><info><title>Évitez de répéter le contenu des phpdoc</title></info>
+            
 
             <para>
                 Ce manuel a pour objectif d'être une référence pour l'utilisateur final.
@@ -614,10 +612,10 @@ $render = "xxx";
                 se concentre sur la traduction du manuel anglais, et non pas les commentaires
                 phpdoc.
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="doc-standard.recommendations.links">
-            <title>Utilisez des liens</title>
+        <section xml:id="doc-standard.recommendations.links"><info><title>Utilisez des liens</title></info>
+            
 
             <para>
                 Créez des liens vers les autres sections ou des ressources externes plutôt que
@@ -644,7 +642,7 @@ $render = "xxx";
 
             <para>
                 Pour créer un lien vers une ressource externe utilisez l'élément
-                <emphasis>&lt;ulink&gt;</emphasis>&#160;:
+                <emphasis>&lt;ulink&gt;</emphasis> :
             </para>
 
             <programlisting language="xml"><![CDATA[
@@ -652,6 +650,6 @@ $render = "xxx";
     Le site du <ulink url="http://framework.zend.com/">Zend Framework</ulink>.
 </para>
 ]]></programlisting>
-        </sect2>
-    </sect1>
+        </section>
+    </section>
 </appendix>

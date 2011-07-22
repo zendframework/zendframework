@@ -1,14 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.stringtoupper">
-    <title>StringToUpper</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.stringtoupper"><info><title>StringToUpper</title></info>
+    
 
     <para>
         This filter converts any input to be uppercased.
     </para>
 
-    <sect3 id="zend.filter.set.stringtoupper.options">
-        <title>Supported options for Zend_Filter_StringToUpper</title>
+    <section xml:id="zend.filter.set.stringtoupper.options"><info><title>Supported options for Zend_Filter_StringToUpper</title></info>
+        
 
         <para>
             The following options are supported for
@@ -23,10 +22,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.stringtoupper.basic">
-        <title>Basic usage</title>
+    <section xml:id="zend.filter.set.stringtoupper.basic"><info><title>Basic usage</title></info>
+        
 
         <para>
             This is a basic example for using the <classname>StringToUpper</classname> filter:
@@ -39,10 +38,10 @@ print $filter->filter('Sample');
 // returns "SAMPLE"
 ]]></programlisting>
 
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.stringtoupper.encoding">
-        <title>Different encoded strings</title>
+    <section xml:id="zend.filter.set.stringtoupper.encoding"><info><title>Different encoded strings</title></info>
+        
 
         <para>
             Like the <classname>StringToLower</classname> filter, this filter handles
@@ -56,5 +55,5 @@ $filter = new Zend_Filter_StringToUpper(array('encoding' => 'UTF-8'));
 // or do this afterwards
 $filter->setEncoding('ISO-8859-1');
 ]]></programlisting>
-    </sect3>
-</sect2>
+    </section>
+</section>

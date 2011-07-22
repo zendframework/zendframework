@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20765 -->
-<sect3 id="zend.controller.actionhelpers.viewrenderer">
-    <title>ViewRenderer</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.viewrenderer"><info><title>ViewRenderer</title></info>
+    
 
-    <sect4 id="zend.controller.actionhelper.viewrenderer.introduction">
-        <title>導入</title>
+    <section xml:id="zend.controller.actionhelper.viewrenderer.introduction"><info><title>導入</title></info>
+        
 
         <para>
             <emphasis>ViewRenderer</emphasis> ヘルパーは、
@@ -73,7 +71,7 @@
                 <emphasis>ViewRenderer</emphasis> はデフォルトで有効になっています。
                 これを無効にするには、フロントコントローラのパラメータ
                 <emphasis>noViewRenderer</emphasis> を指定する
-                (<command>$front->setParam('noViewRenderer', true);</command>) か、
+                (<command>$front-&gt;setParam('noViewRenderer', true);</command>) か、
                 あるいはヘルパーブローカからヘルパーを削除
                 (<methodname>Zend_Controller_Action_HelperBroker::removeHelper('viewRenderer')</methodname>)
                 します。
@@ -115,10 +113,10 @@ $viewRenderer->setView($view)
                 </listitem>
             </itemizedlist>
         </note>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelper.viewrenderer.api">
-        <title>API</title>
+    <section xml:id="zend.controller.actionhelper.viewrenderer.api"><info><title>API</title></info>
+        
 
         <para>
             もっとも基本的な使用法は、単に <emphasis>ViewRenderer</emphasis>
@@ -433,8 +431,8 @@ $viewRenderer =
             </para></listitem>
         </itemizedlist>
 
-        <note>
-            <title>デフォルトの検索方式</title>
+        <note><info><title>デフォルトの検索方式</title></info>
+            
 
             <para>
                 <emphasis>ViewRenderer</emphasis> は、
@@ -610,13 +608,13 @@ $viewRenderer =
                 </para>
             </listitem>
         </itemizedlist>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelper.viewrenderer.basicusage">
-        <title>基本的な使用例</title>
+    <section xml:id="zend.controller.actionhelper.viewrenderer.basicusage"><info><title>基本的な使用例</title></info>
+        
 
-        <example id="zend.controller.actionhelper.viewrenderer.basicusage.example-1">
-            <title>基本的な使用法</title>
+        <example xml:id="zend.controller.actionhelper.viewrenderer.basicusage.example-1"><info><title>基本的な使用法</title></info>
+            
 
             <para>
                 最も基本的な使用法は、起動ファイル内で <emphasis>ViewRenderer</emphasis>
@@ -661,8 +659,8 @@ class Foo_BarController extends Zend_Controller_Action
 ]]></programlisting>
         </example>
 
-        <note>
-            <title>命名規約: コントローラ名やアクション名の単語の区切り</title>
+        <note><info><title>命名規約: コントローラ名やアクション名の単語の区切り</title></info>
+            
             <para>
                 コントローラやアクションの名前が複数の単語からなるものである場合、
                 ディスパッチャには、特定のパスや区切り文字を使用して単語を区切った
@@ -690,8 +688,8 @@ class Foo_BarController extends Zend_Controller_Action
             </para>
         </note>
 
-        <example id="zend.controller.actionhelper.viewrenderer.basicusage.example-2">
-            <title>自動レンダリングの無効化</title>
+        <example xml:id="zend.controller.actionhelper.viewrenderer.basicusage.example-2"><info><title>自動レンダリングの無効化</title></info>
+            
 
             <para>
                 アクションやコントローラによっては、自動レンダリングを無効にしたいこともあるでしょう。
@@ -735,8 +733,8 @@ class Bar_BatController extends Zend_Controller_Action
             </para>
         </note>
 
-        <example id="zend.controller.actionhelper.viewrenderer.basicusage.example-3">
-            <title>別のビュースクリプトの選択</title>
+        <example xml:id="zend.controller.actionhelper.viewrenderer.basicusage.example-3"><info><title>別のビュースクリプトの選択</title></info>
+            
 
             <para>
                 アクション名から自動的に決まるスクリプトではなく、
@@ -782,8 +780,8 @@ class Foo_BarController extends Zend_Controller_Action
 ]]></programlisting>
         </example>
 
-        <example id="zend.controller.actionhelper.viewrenderer.basicusage.example-4">
-            <title>登録されているビューの変更</title>
+        <example xml:id="zend.controller.actionhelper.viewrenderer.basicusage.example-4"><info><title>登録されているビューの変更</title></info>
+            
 
             <para>
                 ビューオブジェクトの設定を変更したくなったとしましょう。
@@ -812,20 +810,20 @@ class Foo_BarController extends Zend_Controller_Action
 }
 ]]></programlisting>
         </example>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelper.viewrenderer.advancedusage">
-        <title>高度な使用例</title>
+    <section xml:id="zend.controller.actionhelper.viewrenderer.advancedusage"><info><title>高度な使用例</title></info>
+        
 
-        <example id="zend.controller.actionhelper.viewrenderer.advancedusage.example-1">
-            <title>パスの指定方法の変更</title>
+        <example xml:id="zend.controller.actionhelper.viewrenderer.advancedusage.example-1"><info><title>パスの指定方法の変更</title></info>
+            
 
             <para>
                 場合によっては、デフォルトのパス指定があなたのサイトに
                 うまく当てはまらないこともあるでしょう。
                 たとえば、すべてのテンプレートを単一のディレクトリ配下にまとめ、
                 デザイナにはそのディレクトリに対するアクセス権だけを与えたいといった場合です
-                (<ulink url="http://smarty.php.net/">Smarty</ulink>
+                (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://smarty.php.net/">Smarty</link>
                 を使用する場合などにありがちです)。
                 そんな場合は、ビューの基底パスをハードコーディングし、
                 それをアクションのビュースクリプトのパスとして使用することになります。
@@ -858,8 +856,8 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
 ]]></programlisting>
         </example>
 
-        <example id="zend.controller.actionhelper.viewrenderer.advancedusage.example-2">
-            <title>単一のアクションから複数のビュースクリプトをレンダリングする例</title>
+        <example xml:id="zend.controller.actionhelper.viewrenderer.advancedusage.example-2"><info><title>単一のアクションから複数のビュースクリプトをレンダリングする例</title></info>
+            
 
             <para>
                 時には、複数のビュースクリプトをひとつのアクションで処理したいこともあるでしょう。
@@ -889,8 +887,5 @@ class SearchController extends Zend_Controller_Action
 }
 ]]></programlisting>
         </example>
-    </sect4>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

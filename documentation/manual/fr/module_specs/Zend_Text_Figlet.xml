@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20807 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.text.figlet">
-    <title>Zend_Text_Figlet</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.text.figlet"><info><title>Zend_Text_Figlet</title></info>
+    
 
     <para>
         <classname>Zend_Text_Figlet</classname> est un composant qui permet aux développeurs
@@ -10,11 +8,11 @@
         représenté en "ASCII-art". FIGlet utilise une format de police spécial , nommée FLT (FigLet
         Font). Par défaut, une police standard est fourni avec
         <classname>Zend_Text_Figlet</classname>, mais vous pouvez ajouter des polices additionnels à
-        <ulink url="http://www.figlet.org/fontdb.cgi">http://www.figlet.org</ulink>.
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.figlet.org/fontdb.cgi">http://www.figlet.org</link>.
     </para>
 
-    <note>
-        <title>Polices compressée</title>
+    <note><info><title>Polices compressée</title></info>
+        
 
         <para>
             <classname>Zend_Text_Figlet</classname> supporte les polices compressées en gzip.
@@ -25,8 +23,8 @@
         </para>
     </note>
 
-    <note>
-        <title>Encodage</title>
+    <note><info><title>Encodage</title></info>
+        
 
         <para>
             <classname>Zend_Text_Figlet</classname> considère que vos chaînes sont encodées en
@@ -94,8 +92,7 @@
                     suivant : SM_EQUAL, SM_LOWLINE, SM_HIERARCHY, SM_PAIR, SM_BIGX, SM_HARDBLANK,
                     SM_KERN et SM_SMUSH. Une valeur de 0 ne désactive pas entièrement la fusion,
                     mais force la valeur SM_KERN, tandis que la valeur de -1 la désactive. Une
-                    explication des différents modes de fusion peut être trouvé <ulink
-                    url="http://www.jave.de/figlet/figfont.txt">ici</ulink>. Par défaut le réglage
+                    explication des différents modes de fusion peut être trouvé <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.jave.de/figlet/figfont.txt">ici</link>. Par défaut le réglage
                     de la police est utilisé. L'option du mode de fusion est normalement seulement
                     utilisé par les concepteurs de police testant les différents mode de disposition
                     d'une nouvelle police.
@@ -104,8 +101,8 @@
             </itemizedlist>
         </para>
 
-    <example id="zend.text.figlet.example.using">
-        <title>Utilisation Zend_Text_Figlet</title>
+    <example xml:id="zend.text.figlet.example.using"><info><title>Utilisation Zend_Text_Figlet</title></info>
+        
 
         <para>
             Cet exemple illustre une utilisation basique de
@@ -131,4 +128,4 @@ echo $figlet->render('Zend');
  `-----`'  `-----`   `-` -`'  -----`
 ]]></programlisting>
     </example>
-</sect1>
+</section>

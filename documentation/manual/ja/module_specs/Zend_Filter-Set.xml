@@ -1,68 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 22254 -->
-<sect1 id="zend.filter.set" xmlns:xi="http://www.w3.org/2001/XInclude">
+<?xml version="1.0" encoding="utf-8"?>
 
-    <title>標準のフィルタクラス群</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set"><info><title>標準のフィルタクラス群</title></info>
+
+    
 
     <para>
         Zend Framework には、すぐに使える標準のフィルタ群が同梱されています。
     </para>
 
-    <xi:include href="Zend_Filter-Alnum.xml">
-        <xi:fallback ><xi:include href="../../en/module_specs/Zend_Filter-Alnum.xml" /></xi:fallback>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-Alnum.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Filter-Alnum.xml"/></xi:fallback>
     </xi:include>
-    <xi:include href="Zend_Filter-Alpha.xml">
-        <xi:fallback ><xi:include href="../../en/module_specs/Zend_Filter-Alpha.xml" /></xi:fallback>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-Alpha.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Filter-Alpha.xml"/></xi:fallback>
     </xi:include>
-    <xi:include href="Zend_Filter-BaseName.xml">
-        <xi:fallback ><xi:include href="../../en/module_specs/Zend_Filter-BaseName.xml" /></xi:fallback>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-BaseName.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Filter-BaseName.xml"/></xi:fallback>
     </xi:include>
-    <xi:include href="Zend_Filter-Boolean.xml">
-        <xi:fallback ><xi:include href="../../en/module_specs/Zend_Filter-Boolean.xml" /></xi:fallback>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-Boolean.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Filter-Boolean.xml"/></xi:fallback>
     </xi:include>
-    <xi:include href="Zend_Filter-Callback.xml" />
-    <xi:include href="Zend_Filter-Compress.xml">
-        <xi:fallback ><xi:include href="../../en/module_specs/Zend_Filter-Compress.xml" /></xi:fallback>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-Callback.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-Compress.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Filter-Compress.xml"/></xi:fallback>
     </xi:include>
-    <xi:include href="Zend_Filter-Decryption.xml" />
-    <xi:include href="Zend_Filter-Digits.xml">
-        <xi:fallback ><xi:include href="../../en/module_specs/Zend_Filter-Digits.xml" /></xi:fallback>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-Decryption.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-Digits.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Filter-Digits.xml"/></xi:fallback>
     </xi:include>
-    <xi:include href="Zend_Filter-Dir.xml">
-        <xi:fallback ><xi:include href="../../en/module_specs/Zend_Filter-Dir.xml" /></xi:fallback>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-Dir.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Filter-Dir.xml"/></xi:fallback>
     </xi:include>
-    <xi:include href="Zend_Filter-Encryption.xml" />
-    <xi:include href="Zend_Filter-HtmlEntities.xml">
-        <xi:fallback ><xi:include href="../../en/module_specs/Zend_Filter-HtmlEntities.xml" /></xi:fallback>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-Encryption.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-HtmlEntities.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Filter-HtmlEntities.xml"/></xi:fallback>
     </xi:include>
-    <xi:include href="Zend_Filter-Int.xml">
-        <xi:fallback ><xi:include href="../../en/module_specs/Zend_Filter-Int.xml" /></xi:fallback>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-Int.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Filter-Int.xml"/></xi:fallback>
     </xi:include>
-    <xi:include href="Zend_Filter-LocalizedToNormalized.xml" />
-    <xi:include href="Zend_Filter-NormalizedToLocalized.xml" />
-    <xi:include href="Zend_Filter-Null.xml" />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-LocalizedToNormalized.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-NormalizedToLocalized.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-Null.xml"/>
 
-    <xi:include href="Zend_Filter-PregReplace.xml">
-        <xi:fallback><xi:include href="../../en/module_specs/Zend_Filter-PregReplace.xml" /></xi:fallback>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-PregReplace.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Filter-PregReplace.xml"/></xi:fallback>
     </xi:include>
-    <xi:include href="Zend_Filter-RealPath.xml" />
-    <xi:include href="Zend_Filter-StringToLower.xml" />
-    <xi:include href="Zend_Filter-StringToUpper.xml" />
-    <xi:include href="Zend_Filter-StringTrim.xml">
-        <xi:fallback><xi:include href="../../en/module_specs/Zend_Filter-StringTrim.xml" /></xi:fallback>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-RealPath.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-StringToLower.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-StringToUpper.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-StringTrim.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Filter-StringTrim.xml"/></xi:fallback>
     </xi:include>
 
-    <sect2 id="zend.filter.set.stripnewlines">
-        <title>StripNewlines</title>
+    <section xml:id="zend.filter.set.stripnewlines"><info><title>StripNewlines</title></info>
+        
 
         <para>
             文字列 <varname>$value</varname> から一切の改行制御文字を取り除いたものを返します。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.set.striptags">
-        <title>StripTags</title>
+    <section xml:id="zend.filter.set.striptags"><info><title>StripTags</title></info>
+        
 
         <para>
             入力文字列からすべての <acronym>HTML</acronym> タグおよび <acronym>PHP</acronym> タグを取り除いた結果を返します。
@@ -70,9 +70,6 @@
             どのタグを許可するかだけではなく、すべてのタグにおいてどの属性を許可するか、
             特定のタグだけで許可する属性は何かなども指定できます。
         </para>
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

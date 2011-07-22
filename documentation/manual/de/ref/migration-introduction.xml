@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
-<!-- Reviewed: no -->
-<sect1 id="migration.introduction">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.introduction"><info><title>Einführung</title></info>
+    
 
     <para>
         Wenn man mit dem Zend Framework für eine längere Zeit arbeitet, dann kann es sein dass man
@@ -27,4 +27,4 @@
         haben, und Beispiele über notwendige Änderungen die man durchführen muss wenn man
         hochrüstet.
     </para>
-</sect1>
+</section>

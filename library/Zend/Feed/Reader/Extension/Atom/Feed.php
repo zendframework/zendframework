@@ -22,19 +22,14 @@
 * @namespace
 */
 namespace Zend\Feed\Reader\Extension\Atom;
-use Zend\Feed\Reader;
-use Zend\Date;
-use Zend\Feed\Reader\Collection;
-use Zend\Feed\Reader\Extension;
-use Zend\URI;
+
+use Zend\Date,
+    Zend\Feed\Reader,
+    Zend\Feed\Reader\Collection,
+    Zend\Feed\Reader\Extension,
+    Zend\Uri;
 
 /**
-* @uses \Zend\Date\Date
-* @uses \Zend\Feed\Reader\Reader
-* @uses \Zend\Feed\Reader\Collection\Author
-* @uses \Zend\Feed\Reader\Collection\Category
-* @uses \Zend\Feed\Reader\Extension\FeedAbstract
-* @uses \Zend\Uri\Uri
 * @category Zend
 * @package Reader\Reader
 * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -508,10 +503,10 @@ class Feed extends Extension\AbstractFeed
      */
     protected function _absolutiseUri($link)
     {
-        if (!\Zend\Uri\Url::validate($link)) {
+        if (!Uri\UriFactory::factory($link)->isValid()) {
             if (!is_null($this->getBaseUrl())) {
                 $link = $this->getBaseUrl() . $link;
-                if (!\Zend\Uri\Url::validate($link)) {
+                if (!Uri\UriFactory::factory($link)->isValid()) {
                     $link = null;
                 }
             }

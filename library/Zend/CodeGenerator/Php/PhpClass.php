@@ -48,7 +48,7 @@ class PhpClass extends AbstractPhp
      * @var string
      */
     protected $_namespaceName = null;
-    
+
     /**
      * @var \Zend\CodeGenerator\Php\PhpDocblock
      */
@@ -102,14 +102,14 @@ class PhpClass extends AbstractPhp
         }
 
         $class->setAbstract($reflectionClass->isAbstract());
-        
+
         // set the namespace
         if ($reflectionClass->inNamespace()) {
             $class->setNamespaceName($reflectionClass->getNamespaceName());
         }
 
         $class->setName($reflectionClass->getName());
-        
+
         if ($parentClass = $reflectionClass->getParentClass()) {
             $class->setExtendedClass($parentClass->getName());
             $interfaces = array_diff($reflectionClass->getInterfaces(), $parentClass->getInterfaces());
@@ -145,7 +145,7 @@ class PhpClass extends AbstractPhp
 
     /**
      * setPhpFile()
-     * 
+     *
      * @param Zend\CodeGenerator\Php\PhpFile $phpFile
      */
     public function setPhpFile(PhpFile $phpFile)
@@ -153,10 +153,10 @@ class PhpClass extends AbstractPhp
         $this->_phpFile = $phpFile;
         return $this;
     }
-    
+
     /**
      * getPhpFile()
-     * 
+     *
      * @return Zend\CodeGenerator\Php\PhpFile
      */
     public function getPhpFile()
@@ -296,7 +296,7 @@ class PhpClass extends AbstractPhp
      * @param array $implementedInterfaces
      * @return \Zend\CodeGenerator\Php\PhpClass
      */
-    public function setImplementedInterfaces(Array $implementedInterfaces)
+    public function setImplementedInterfaces(array $implementedInterfaces)
     {
         $this->_implementedInterfaces = $implementedInterfaces;
         return $this;
@@ -318,7 +318,7 @@ class PhpClass extends AbstractPhp
      * @param array $properties
      * @return \Zend\CodeGenerator\Php\PhpClass
      */
-    public function setProperties(Array $properties)
+    public function setProperties(array $properties)
     {
         foreach ($properties as $property) {
             $this->setProperty($property);
@@ -337,12 +337,10 @@ class PhpClass extends AbstractPhp
     {
         if (is_array($property)) {
             $property = new PhpProperty($property);
-            $propertyName = $property->getName();
-        } elseif ($property instanceof PhpProperty) {
-            $propertyName = $property->getName();
-        } else {
+        } elseif (!$property instanceof PhpProperty) {
             throw new Exception\InvalidArgumentException('setProperty() expects either an array of property options or an instance of Zend_CodeGenerator_Php_Property');
         }
+        $propertyName = $property->getName();
 
         if (isset($this->_properties[$propertyName])) {
             throw new Exception\InvalidArgumentException('A property by name ' . $propertyName . ' already exists in this class.');
@@ -395,7 +393,7 @@ class PhpClass extends AbstractPhp
      * @param array $methods
      * @return \Zend\CodeGenerator\Php\PhpClass
      */
-    public function setMethods(Array $methods)
+    public function setMethods(array $methods)
     {
         foreach ($methods as $method) {
             $this->setMethod($method);
@@ -413,12 +411,10 @@ class PhpClass extends AbstractPhp
     {
         if (is_array($method)) {
             $method = new PhpMethod($method);
-            $methodName = $method->getName();
-        } elseif ($method instanceof PhpMethod) {
-            $methodName = $method->getName();
-        } else {
+        } elseif (!$method instanceof PhpMethod) {
             throw new Exception\InvalidArgumentException('setMethod() expects either an array of method options or an instance of Zend\CodeGenerator\Php\Method');
         }
+        $methodName = $method->getName();
 
         if (isset($this->_methods[$methodName])) {
             throw new Exception\InvalidArgumentException('A method by name ' . $methodName . ' already exists in this class.');

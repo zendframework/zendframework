@@ -40,11 +40,6 @@ class LicenseTag extends \Zend\CodeGenerator\Php\PhpDocblockTag
     protected $_url = null;
 
     /**
-     * @var string
-     */
-    protected $_description = null;
-
-    /**
      * fromReflection()
      *
      * @param \Zend\Reflection\ReflectionDocblockTag $reflectionTagReturn
@@ -52,7 +47,7 @@ class LicenseTag extends \Zend\CodeGenerator\Php\PhpDocblockTag
      */
     public static function fromReflection(\Zend\Reflection\ReflectionDocblockTag $reflectionTagLicense)
     {
-        $returnTag = new \self();
+        $returnTag = new self();
 
         $returnTag->setName('license');
         $returnTag->setUrl($reflectionTagLicense->getUrl());

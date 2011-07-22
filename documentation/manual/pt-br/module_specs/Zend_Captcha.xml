@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15681 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.captcha.introduction">
-    <title>Introdução</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.captcha.introduction"><info><title>Introdução</title></info>
+    
 
     <para>
-        <ulink url="http://en.wikipedia.org/wiki/Captcha">CAPTCHA</ulink> é um acrônimo da
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Captcha">CAPTCHA</link> é um acrônimo da
         expressão "Completely Automated Public Turing test to tell Computers and Humans Apart"; é
         utilizado como um desafio-resposta para garantir que uma informação apresentada em
         particular veio de um ser humano e não de um processo automatizado. Normalmente, um captcha
@@ -19,7 +19,4 @@
         <classname>Zend_Captcha</classname> visa fornecer uma variedade de backends que podem
         ser utilizados de forma autônoma ou em conjunto com <classname>Zend_Form</classname>.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

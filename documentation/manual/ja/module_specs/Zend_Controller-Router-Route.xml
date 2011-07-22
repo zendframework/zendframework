@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21661 -->
-<sect3 id="zend.controller.router.routes.standard">
-    <title>Zend_Controller_Router_Route</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.router.routes.standard"><info><title>Zend_Controller_Router_Route</title></info>
+    
 
     <para>
         <classname>Zend_Controller_Router_Route</classname> はフレームワークの標準のルートです。
@@ -40,8 +38,8 @@ $router->addRoute('user', $route);
         (例. <command>:username</command>) 表します。
     </para>
 
-    <note>
-        <title>文字の使用法</title>
+    <note><info><title>文字の使用法</title></info>
+        
 
         <para>
             現在の実装では、(スラッシュ以外の)
@@ -90,7 +88,7 @@ public function userinfoAction()
         ルート定義には、特殊文字 (ワイルドカード)
         を含めることができます。これは '*' 記号で表します。
         これを使用して、Module ルートと同様にパラメータを扱う
-        (変数名 => 値 のペアを <acronym>URI</acronym> で定義する) ことができます。
+        (変数名 =&gt; 値 のペアを <acronym>URI</acronym> で定義する) ことができます。
         次のルートは、Module ルートの挙動をまねたものです。
     </para>
 
@@ -102,8 +100,8 @@ $route = new Zend_Controller_Router_Route(
 $router->addRoute('default', $route);
 ]]></programlisting>
 
-    <sect4 id="zend.controller.router.routes.standard.variable-defaults">
-        <title>変数のデフォルト</title>
+    <section xml:id="zend.controller.router.routes.standard.variable-defaults"><info><title>変数のデフォルト</title></info>
+        
 
         <para>
             ルートで使用するすべての変数についてデフォルト値を指定できます。
@@ -155,10 +153,10 @@ $router->addRoute('archive', $route);
             <methodname>showAction()</methodname> を実行します。
         </para>
 
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.router.routes.standard.variable-requirements">
-        <title>変数の制約</title>
+    <section xml:id="zend.controller.router.routes.standard.variable-requirements"><info><title>変数の制約</title></info>
+        
 
         <para>
             <classname>Zend_Controller_Router_Route</classname> のコンストラクタの
@@ -186,10 +184,10 @@ $router->addRoute('archive', $route);
             <filename>http://example.com/archive/test</filename> はマッチしません。
             この場合はチェイン内の次のルートに処理を移します。
         </para>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.router.routes.standard.translated-segments">
-        <title>翻訳済みセグメント</title>
+    <section xml:id="zend.controller.router.routes.standard.translated-segments"><info><title>翻訳済みセグメント</title></info>
+        
 
         <para>
             標準のルートは、翻訳済みセグメントをサポートします。この機能を使用するには、
@@ -264,8 +262,8 @@ $router->addRoute('archive', $route);
             メッセージ ID に戻されます。
         </para>
 
-        <note>
-            <title>メッセージ ID と分割された言語ファイル</title>
+        <note><info><title>メッセージ ID と分割された言語ファイル</title></info>
+            
 
             <para>
                 ルートの中で使いたいメッセージ ID が、
@@ -379,8 +377,5 @@ $route->assemble(array('mode' => 'month', 'value' => '5'));
 // URL をドイツ語でアセンブルします: archiv/monat/5
 $route->assemble(array('mode' => 'month', 'value' => '5', '@locale' => 'de'));
 ]]></programlisting>
-    </sect4>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

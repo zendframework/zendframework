@@ -24,14 +24,13 @@
  * @namespace
  */
 namespace Zend\GData;
+
 use Zend\Http\Client\Adapter;
 
 /**
  * Extends the default HTTP adapter to handle streams instead of discrete body
  * strings.
  *
- * @uses       \Zend\Http\Client\Adapter\Exception
- * @uses       \Zend\Http\Client\Adapter\Socket
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata
@@ -52,7 +51,7 @@ class HttpAdapterStreamingSocket extends Adapter\Socket
      * Send request to the remote server with streaming support.
      *
      * @param string        $method
-     * @param \Zend\Uri\Http $uri
+     * @param \Zend\Uri\Uri $uri
      * @param string        $http_ver
      * @param array         $headers
      * @param string        $body

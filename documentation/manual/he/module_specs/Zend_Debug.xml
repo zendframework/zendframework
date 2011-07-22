@@ -1,19 +1,20 @@
-<sect1 id="zend.debug.dumping">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.debug.dumping"><info><title>הצגת משתנים</title></info>
 
-    <title>הצגת משתנים</title>
+    
 
     <para>
         המתודה הסטטית <code>Zend_Debug::dump()</code> מדפיסה או מחזירה מידע אודות משתנה כלשהו.
         דרך זו היא פשוטה שימושית ונפוצה, מאחר והיא לא דורשת שום קריאה מוקדמת למחלקות כלשהן, כלים מסויימים או סביבות עבודה כלשהן.
     </para>
 
-    <example id="zend.debug.dumping.example">
-        <title>דוגמא לשימוש</title>
+    <example xml:id="zend.debug.dumping.example"><info><title>דוגמא לשימוש</title></info>
+        
         <programlisting role="php"><![CDATA[
 
 Zend_Debug::dump($var, $label=null, $echo=true);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
 
     <para>
@@ -33,13 +34,13 @@ Zend_Debug::dump($var, $label=null, $echo=true);
     </para>
 
     <para>
-        יהיה שימושי להבין שבאופן פנימי, <code>Zend_Debug::dump()</code> עוטפת את התוכן שהיא מציגה ב <ulink url="http://php.net/var_dump"><code>var_dump()</code></ulink>.
-        אם המתודה מבחינה שהתוכן שאמור להיות מוצג הוא תוכן HTML, התוכן שיודפס ב  <code>var_dump()</code> קודם כל עובר דרך <ulink url="http://php.net/htmlspecialchars"><code>htmlspecialchars()</code></ulink>
+        יהיה שימושי להבין שבאופן פנימי, <code>Zend_Debug::dump()</code> עוטפת את התוכן שהיא מציגה ב <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/var_dump"><code>var_dump()</code></link>.
+        אם המתודה מבחינה שהתוכן שאמור להיות מוצג הוא תוכן HTML, התוכן שיודפס ב  <code>var_dump()</code> קודם כל עובר דרך <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/htmlspecialchars"><code>htmlspecialchars()</code></link>
         ולאחר מכן מוצג כשהוא עטוף ב <code>&lt;pre&gt;</code>.
     </para>
 
-    <tip>
-        <title>ניפוי שגיאות בעזרת Zend_Log</title>
+    <tip><info><title>ניפוי שגיאות בעזרת Zend_Log</title></info>
+        
         <para>
             שימוש ב <code>Zend_Debug::dump()</code> היא הדרך הטובה ביותר להצגת נתונים אודות משתנים בתהליך הפיתוח.
             ניתן להוסיף קוד שיציג את התוכן של משתנה ולאחר מכן להסיר את אותו הקוד מהר מאוד.
@@ -50,7 +51,4 @@ Zend_Debug::dump($var, $label=null, $echo=true);
         </para>
     </tip>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

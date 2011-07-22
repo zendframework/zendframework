@@ -1,5 +1,6 @@
-<sect1 id="zend.pdf.create">
-    <title>Tworzenie oraz ładowanie dokumentów PDF.</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.create"><info><title>Tworzenie oraz ładowanie dokumentów PDF.</title></info>
+    
     <para>
     Klasa <code>Zend_Pdf</code> reprezentuje dokument PDF i zapewnia funkcjonalność
     na poziomie dokumentu.
@@ -16,8 +17,8 @@
     wyjątek, jeśli wystąpi błąd.
     </para>
 
-    <example id="zend.pdf.create.example-1">
-        <title>Tworzenie nowego lub ładowanie istniejącego dokumentu PDF.</title>
+    <example xml:id="zend.pdf.create.example-1"><info><title>Tworzenie nowego lub ładowanie istniejącego dokumentu PDF.</title></info>
+        
         <programlisting role="php"><![CDATA[
 ...
 // Utwórz nowy dokument PDF.
@@ -29,8 +30,8 @@ $pdf2 = Zend_Pdf::load($fileName);
 // Załaduj dokument PDF z łańcucha znaków.
 $pdf3 = Zend_Pdf::parse($pdfString);
 ...
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
 
     <para>
@@ -51,8 +52,8 @@ $pdf3 = Zend_Pdf::parse($pdfString);
         </footnote>
     </para>
 
-    <example id="zend.pdf.create.example-2">
-        <title>Ładowanie określonej wersji dokumentu PDF.</title>
+    <example xml:id="zend.pdf.create.example-2"><info><title>Ładowanie określonej wersji dokumentu PDF.</title></info>
+        
         <programlisting role="php"><![CDATA[
 ...
 // Załaduj poprzednią wersję dokumentu PDF.
@@ -66,9 +67,9 @@ $pdf3 = Zend_Pdf::load($fileName);
 $revisions = $pdf3->revisions();
 $pdf3->rollback($revisions - 1);
 ...
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
 
 
-</sect1>
+</section>

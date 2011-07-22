@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19777 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.plugins.conclusion">
-    <title>Fazit</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.plugins.conclusion"><info><title>Fazit</title></info>
+    
 
     <para>
         Das Verstehen des Konzepts von Präfix Pfaden und dem Übersteuern von existierenden Plugins
@@ -47,8 +47,8 @@
         Erweiterungspunkt im Zend Framework entsprechend umsetzen.
     </para>
 
-    <note>
-        <title>Nachteile</title>
+    <note><info><title>Nachteile</title></info>
+        
 
         <para>
             Wir haben erwähnt das <classname>Zend_Controller_Front</classname> ein Plugin System
@@ -60,4 +60,4 @@
             geschrieben wurden weiterhin funktionieren.
         </para>
     </note>
-</sect1>
+</section>

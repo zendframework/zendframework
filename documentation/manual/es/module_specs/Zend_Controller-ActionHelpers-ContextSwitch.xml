@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 17597 -->
-    <!-- Reviewed: no -->
-<sect3 id="zend.controller.actionhelpers.contextswitch">
-    <title>ContextSwitch con AjaxContext</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.contextswitch"><info><title>ContextSwitch con AjaxContext</title></info>
+    
 
     <para>
         El ayudante de acción
@@ -177,8 +175,8 @@ class NewsController extends Zend_Controller_Action
         inicialización y posterior procesamiento.
     </para>
 
-    <sect4 id="zend.controller.actionhelpers.contextswitch.contexts">
-        <title>Contextos Disponibles por Defecto</title>
+    <section xml:id="zend.controller.actionhelpers.contextswitch.contexts"><info><title>Contextos Disponibles por Defecto</title></info>
+        
 
         <para>
             Por defecto, dos contextos están a disposición del ayudante
@@ -244,10 +242,10 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
                 </para>
             </listitem>
         </itemizedlist>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelpers.contextswitch.custom">
-        <title>Creando Contextos Personalizados</title>
+    <section xml:id="zend.controller.actionhelpers.contextswitch.custom"><info><title>Creando Contextos Personalizados</title></info>
+        
 
         <para>
             A veces, los contextos por defecto no son suficientes. Por
@@ -439,10 +437,10 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
                 </para>
             </listitem>
         </itemizedlist>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelpers.contextswitch.actions">
-        <title>Estableciendo los Contextos por Acción</title>
+    <section xml:id="zend.controller.actionhelpers.contextswitch.actions"><info><title>Estableciendo los Contextos por Acción</title></info>
+        
 
         <para>
             Hay dos mecanismos para establecer contextos disponibles. Puede
@@ -645,11 +643,11 @@ class FooController extends Zend_Controller_Action
                 </para>
             </listitem>
         </itemizedlist>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelpers.contextswitch.initcontext">
-        <title>Inicializando Conmutación de Contextos (Context
-            Switching)</title>
+    <section xml:id="zend.controller.actionhelpers.contextswitch.initcontext"><info><title>Inicializando Conmutación de Contextos (Context
+            Switching)</title></info>
+        
 
         <para>
             Para inicializar la conmutación de contexto, necesita llamar a
@@ -682,10 +680,10 @@ class NewsController extends Zend_Controller_Action
         <programlisting language="php"><![CDATA[
 $contextSwitch->initContext('xml');
 ]]></programlisting>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelpers.contextswitch.misc">
-        <title>Funcionalidad Adicional</title>
+    <section xml:id="zend.controller.actionhelpers.contextswitch.misc"><info><title>Funcionalidad Adicional</title></info>
+        
 
         <para>
             Se pueden utilizar una variedad de métodos para alterar el
@@ -976,10 +974,10 @@ $contextSwitch->initContext();
                 </para>
             </listitem>
         </itemizedlist>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelpers.contextswitch.ajaxcontext">
-        <title>Funcionalidad de AjaxContext</title>
+    <section xml:id="zend.controller.actionhelpers.contextswitch.ajaxcontext"><info><title>Funcionalidad de AjaxContext</title></info>
+        
 
         <para>
             El ayudante
@@ -1038,9 +1036,9 @@ $contextSwitch->initContext();
             adicionales.
         </para>
 
-        <example id="zend.controller.actionhelpers.contextswitch.ajaxcontext.example">
-            <title>Permitiendo a las Acciones Responder a Requerimientos
-                Ajax</title>
+        <example xml:id="zend.controller.actionhelpers.contextswitch.ajaxcontext.example"><info><title>Permitiendo a las Acciones Responder a Requerimientos
+                Ajax</title></info>
+            
 
             <para>
                 En el siguiente ejemplo, estamos permitiendo requerimientos a
@@ -1122,5 +1120,5 @@ class CommentController extends Zend_Controller_Action
                 entonces estas acciones
                 devolverán la respuesta en el formato apropiado.</para>
         </example>
-    </sect4>
-</sect3>
+    </section>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21123 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.filter.filter_chains">
-    <title>Filter Ketten</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.filter_chains"><info><title>Filter Ketten</title></info>
+    
 
     <para>
         Oft müssen mehrere Filter auf Werte in einer speziellen Reihenfolge angewendet werden. Zum
@@ -34,8 +32,8 @@ $username = $filterChain->filter($_POST['username']);
         Filterkette verwendet werden.
     </para>
 
-    <sect2 id="zend.filter.filter_chains.order">
-        <title>Ändern der Reihenfolge der Filterkette</title>
+    <section xml:id="zend.filter.filter_chains.order"><info><title>Ändern der Reihenfolge der Filterkette</title></info>
+        
 
         <para>
             Seit 1.10 unterstützt die <classname>Zend_Filter</classname> Kette auch das Ändern der
@@ -56,5 +54,5 @@ $filterChain->prependFilter(new Zend_Filter_Alpha());
 // Nach dem Benutzernamen filtern
 $username = $filterChain->filter($_POST['username']);
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

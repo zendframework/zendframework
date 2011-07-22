@@ -1,5 +1,6 @@
-<sect3 id="zend.view.helpers.initial.partial">
-    <title>区域助手（Partial Helper） </title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.partial"><info><title>区域助手（Partial Helper） </title></info>
+    
 
     <para>
         <code>Partial</code> 视图助手被用来在它自己的变量范围内解析特定的模板。主要用法是（解析）可重用的模板片段，你不需要操心变量名的冲突。另外，它们让你从特定的模块指定 partial 视图脚本。
@@ -9,8 +10,8 @@
         <code>Partial</code> 的兄弟 <code>PartialLoop</code> 视图助手允许传递可迭代数据并为每个条目解析一部分。
     </para>
 
-    <example id="zend.view.helpers.initial.partial.usage">
-        <title> Partials 的基本用法 </title>
+    <example xml:id="zend.view.helpers.initial.partial.usage"><info><title> Partials 的基本用法 </title></info>
+        
 
         <para>
             partials 的基本用法是在它自己的视图范围内解析一个模板的片段。
@@ -46,8 +47,8 @@
 ]]></programlisting>
 
     </example>
-        <note>
-            <title> 什么是模型（model）? </title>
+        <note><info><title> 什么是模型（model）? </title></info>
+            
 
             <para>
                 和 <code>Partial</code> 视图助手一起使用的模型（即partial()的第二个参数，Haohappy注）可以是下列其中之一：
@@ -88,8 +89,8 @@ $view->partialLoop()->setObjectKey('model');
         </note>
 
 
-    <example id="zend.view.helpers.initial.partial.partialloop">
-        <title> 使用 PartialLoop 来解析可迭代的（Iterable）的模型 </title>
+    <example xml:id="zend.view.helpers.initial.partial.partialloop"><info><title> 使用 PartialLoop 来解析可迭代的（Iterable）的模型 </title></info>
+        
 
         <para>
             可能你常常会需要在一个循环里使用 partials 来输出相同的内容片段多次，这时你就可以把大块的重复的内容或复杂的显示逻辑放到一个地方。然而这对性能有影响，因为partial助手需要在每个迭代里调用一次。
@@ -151,8 +152,8 @@ $model = array(
 ]]></programlisting>
     </example>
 
-    <example id="zend.view.helpers.initial.partial.modules">
-        <title> 在其它模块中解析 Partials </title>
+    <example xml:id="zend.view.helpers.initial.partial.modules"><info><title> 在其它模块中解析 Partials </title></info>
+        
 
         <para>
             有时候 partial 存在于不同的模块(Module)。如果你知道模块的名称，你可以把它当作第二个参数传递给 <code>partial()</code> 或者 <code>partialLoop()</code>，把 <code>$model</code> 作为第三个参数。
@@ -170,7 +171,4 @@ $model = array(
             这样，你可以重用原来是特别供给其它模块使用的 partials 。所以，在共享的视图脚本路径里放置可重用的 partials 很可能是个好习惯。
         </para>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

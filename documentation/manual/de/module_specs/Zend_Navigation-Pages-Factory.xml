@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.navigation.pages.factory">
-    <title>Erstellen von Seiten durch Verwendung der Page Factory</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.factory"><info><title>Erstellen von Seiten durch Verwendung der Page Factory</title></info>
+    
 
     <para>
         Alle Seiten (also auch eigene Klassen), können durch Verwendung der Page Factory
@@ -22,8 +20,8 @@
         ist wird eine MVC/URI Seite erstellt.
     </para>
 
-    <example id="zend.navigation.pages.factory.example.mvc">
-        <title>Erstellen einer MVC Seite durch Verwenden der Page Factory</title>
+    <example xml:id="zend.navigation.pages.factory.example.mvc"><info><title>Erstellen einer MVC Seite durch Verwenden der Page Factory</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $page = Zend_Navigation_Page::factory(array(
@@ -53,8 +51,8 @@ $page = Zend_Navigation_Page::factory(array(
 ]]></programlisting>
     </example>
 
-    <example id="zend.navigation.pages.factory.example.uri">
-        <title>Erstellen einer URI Seite durch Verwendung der Page Factory</title>
+    <example xml:id="zend.navigation.pages.factory.example.uri"><info><title>Erstellen einer URI Seite durch Verwendung der Page Factory</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $page = Zend_Navigation_Page::factory(array(
@@ -80,8 +78,8 @@ $page = Zend_Navigation_Page::factory(array(
 ]]></programlisting>
     </example>
 
-    <example id="zend.navigation.pages.factory.example.custom">
-        <title>Erstellung eines eigenen Seiten Typs durch Verwendung der Page Factory</title>
+    <example xml:id="zend.navigation.pages.factory.example.custom"><info><title>Erstellung eines eigenen Seiten Typs durch Verwendung der Page Factory</title></info>
+        
 
         <para>
             Um einen eigenen Seitentyp zu erstellen mit Hilfe der Verwendung der Factory, muß die
@@ -107,4 +105,4 @@ $page = Zend_Navigation_Page::factory(array(
 ));
 ]]></programlisting>
     </example>
-</sect2>
+</section>

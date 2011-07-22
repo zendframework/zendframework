@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21821 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.ldap.api.reference.zend-ldap-node-rootdse">
-    <title>Zend_Ldap_Node_RootDse</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse"><info><title>Zend_Ldap_Node_RootDse</title></info>
+    
 
     <para>
         Die folgenden Methoden sind in allen Hersteller-Spezifischen Unterklassen vorhanden.
@@ -22,8 +22,8 @@
         <code>BadMethodCallException</code> aus den bekannten Gründen.
     </para>
 
-    <table id="zend.ldap.api.reference.zend-ldap-node-rootdse.table">
-        <title>Zend_Ldap_Node_RootDse API</title>
+    <table xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.table"><info><title>Zend_Ldap_Node_RootDse API</title></info>
+        
 
         <tgroup cols="2">
             <thead>
@@ -287,8 +287,8 @@
         </tgroup>
     </table>
 
-    <sect4 id="zend.ldap.api.reference.zend-ldap-node-rootdse.openldap">
-        <title>OpenLDAP</title>
+    <section xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.openldap"><info><title>OpenLDAP</title></info>
+        
 
         <para>
             Zusätzlich können die üblichen Methoden von oben auch auf Instanzen von
@@ -297,14 +297,14 @@
 
         <note>
             <para>
-                Sehen Sie unter <ulink url="http://www.zytrax.com/books/ldap/ch3/#operational">LDAP
-                    Operational Attributes and Objects</ulink> für Informationen über Attribute von
+                Sehen Sie unter <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zytrax.com/books/ldap/ch3/#operational">LDAP
+                    Operational Attributes and Objects</link> für Informationen über Attribute von
                 OpenLDAP RootDSE.
             </para>
         </note>
 
-        <table id="zend.ldap.api.reference.zend-ldap-node-rootdse.openldap.table">
-            <title>Zend_Ldap_Node_RootDse_OpenLdap API</title>
+        <table xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.openldap.table"><info><title>Zend_Ldap_Node_RootDse_OpenLdap API</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -352,10 +352,10 @@
                 </tbody>
             </tgroup>
         </table>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.ldap.api.reference.zend-ldap-node-rootdse.activedirectory">
-        <title>ActiveDirectory</title>
+    <section xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.activedirectory"><info><title>ActiveDirectory</title></info>
+        
 
         <para>
             Zusätzlich können die üblichen Methoden von oben auch auf Instanzen von
@@ -364,15 +364,14 @@
 
         <note>
             <para>
-                Sehen Sie unter <ulink
-                    url="http://msdn.microsoft.com/en-us/library/ms684291(VS.85).aspx">
-                    RootDSE</ulink> für Informationen über Attribute von Microsoft ActiveDirectory
+                Sehen Sie unter <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://msdn.microsoft.com/en-us/library/ms684291(VS.85).aspx">
+                    RootDSE</link> für Informationen über Attribute von Microsoft ActiveDirectory
                 RootDSE.
             </para>
         </note>
 
-        <table id="zend.ldap.api.reference.zend-ldap-node-rootdse.activedirectory.table">
-            <title>Zend_Ldap_Node_RootDse_ActiveDirectory API</title>
+        <table xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.activedirectory.table"><info><title>Zend_Ldap_Node_RootDse_ActiveDirectory API</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -485,10 +484,10 @@
                 </tbody>
             </tgroup>
         </table>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.ldap.api.reference.zend-ldap-node-rootdse.edirectory">
-        <title>eDirectory</title>
+    <section xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.edirectory"><info><title>eDirectory</title></info>
+        
 
         <para>
             Zusätzlich können die üblichen Methoden von oben auch auf Instanzen von
@@ -497,15 +496,14 @@
 
         <note>
             <para>
-                Sehen Sie auf <ulink
-                    url="http://www.novell.com/documentation/edir88/edir88/index.html?page=/documentation/edir88/edir88/data/ah59jqq.html">Getting
-                    Information about the <acronym>LDAP</acronym> Server</ulink> für
+                Sehen Sie auf <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.novell.com/documentation/edir88/edir88/index.html?page=/documentation/edir88/edir88/data/ah59jqq.html">Getting
+                    Information about the <acronym>LDAP</acronym> Server</link> für
                 Informationen über Attribute von Novell eDirectory RootDSE.
             </para>
         </note>
 
-        <table id="zend.ldap.api.reference.zend-ldap-node-rootdse.edirectory.table">
-            <title>Zend_Ldap_Node_RootDse_eDirectory API</title>
+        <table xml:id="zend.ldap.api.reference.zend-ldap-node-rootdse.edirectory.table"><info><title>Zend_Ldap_Node_RootDse_eDirectory API</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -583,5 +581,5 @@
                 </tbody>
             </tgroup>
         </table>
-    </sect4>
-</sect3>
+    </section>
+</section>

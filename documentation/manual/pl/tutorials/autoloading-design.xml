@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.autoloading.design">
-    <title>Cele i budowa</title>
+<?xml version="1.0" encoding="utf-8"?>
 
-    <sect2 id="learning.autoloading.design.naming">
-        <title>Konwencja nazewnictwa klas</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.design"><info><title>Cele i budowa</title></info>
+    
+
+    <section xml:id="learning.autoloading.design.naming"><info><title>Konwencja nazewnictwa klas</title></info>
+        
 
         <para>
             Aby zrozumieć autoloader w Zend Framework, należy najpierw zrozumieć połączenie
@@ -14,7 +14,7 @@
 
         <para>
             Budując Zend Framework zapożyczono ideę organizacji klas z biblioteki
-            <ulink url="http://pear.php.net/">PEAR</ulink>. Według niej relacja klas do plików
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://pear.php.net/">PEAR</link>. Według niej relacja klas do plików
             wynosi 1:1. W skrócie: aby odnaleźć ścieżkę do odpowiedniego pliku
             znak podkreślenia ("_") w nazwach klas jest zastępowany znakiem oddzielenia katalogu
             a następnie dodawane jest rozszerzenie "<filename>.php</filename>". Przykładowo,
@@ -28,7 +28,7 @@
 
         <para>
             Dodatkowo, podobnie jak <acronym>PEAR</acronym> oraz
-            <ulink url="http://php.net/userlandnaming.tips">projekt PHP</ulink> praktykowane i
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/userlandnaming.tips">projekt PHP</link> praktykowane i
             zalecane jest użycie w kodzie prefiksów charakterystycznych dla projektu lub producenta.
             To oznacza, że wszystkie klasy powinny dzielić jeden wspólny prefiks. Przykładowo,
             wszystkie klasy w Zend Framework mają prefiks "Zend_". Taka konwencja chroni
@@ -41,10 +41,10 @@
             Zend Framework podąża za tymi wskazówkami wewnętrznie ale nasze standardy zachęcają 
             do ich stosowania także w kodzie aplikacji, innych bibliotek itp.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.autoloading.design.autoloader">
-        <title>Konwencja nazewnictwa i budowa autoloadera</title>
+    <section xml:id="learning.autoloading.design.autoloader"><info><title>Konwencja nazewnictwa i budowa autoloadera</title></info>
+        
 
         <para>
             Obsługa autoloadera w Zend Framework udostępniona głównie poprzez
@@ -108,5 +108,5 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

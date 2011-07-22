@@ -1,15 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.float">
-    <title>Float</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.float"><info><title>Float</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Float</classname> allows you to validate if a given value contains
         a floating-point value. This validator validates also localized input.
     </para>
 
-    <sect3 id="zend.validate.set.float.options">
-        <title>Supported options for Zend_Validate_Float</title>
+    <section xml:id="zend.validate.set.float.options"><info><title>Supported options for Zend_Validate_Float</title></info>
+        
 
         <para>
             The following options are supported for <classname>Zend_Validate_Float</classname>:
@@ -23,10 +22,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.float.basic">
-        <title>Simple float validation</title>
+    <section xml:id="zend.validate.set.float.basic"><info><title>Simple float validation</title></info>
+        
 
         <para>
             The simplest way to validate a float is by using the system settings. When no option
@@ -44,10 +43,10 @@ $validator->isValid('1,234.5'); // returns true
         <para>
             In the above example we expected that our environment is set to "en" as locale.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.float.localized">
-        <title>Localized float validation</title>
+    <section xml:id="zend.validate.set.float.localized"><info><title>Localized float validation</title></info>
+        
 
         <para>
             Often it's useful to be able to validate also localized values. Float values are often
@@ -78,8 +77,5 @@ $validator->isValid("1.234"); // returns true
             The locale can also be set afterwards by using <methodname>setLocale()</methodname> and
             retrieved by using <methodname>getLocale()</methodname>.
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

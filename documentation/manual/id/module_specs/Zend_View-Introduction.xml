@@ -1,5 +1,6 @@
-<sect1 id="zend.view.introduction">
-    <title>Pendahuluan</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.introduction"><info><title>Pendahuluan</title></info>
+    
 
     <para>
         Zend_View adalah class yang dapat Anda gunakan untuk bekerja dengan
@@ -27,8 +28,8 @@
         generates the view output.
     </para>
 
-    <sect2 id="zend.view.introduction.controller">
-        <title>Controller Script</title>
+    <section xml:id="zend.view.introduction.controller"><info><title>Controller Script</title></info>
+        
 
         <para>
             As a simple example, let us say your controller has a list
@@ -59,14 +60,14 @@ $view = new Zend_View();
 $view->books = $data;
 
 // and render a view script called "booklist.php"
-echo $view->render('booklist.php');]]>
-        </programlisting>
+echo $view->render('booklist.php');
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.introduction.view">
+    <section xml:id="zend.view.introduction.view"><info><title>View Script</title></info>
 
-        <title>View Script</title>
+        
 
         <para>
             Now we need the associated view script, "booklist.php".
@@ -101,18 +102,18 @@ echo $view->render('booklist.php');]]>
 
     <p>There are no books to display.</p>
 
-<?php endif;]]>
-        </programlisting>
+<?php endif;
+        ]]></programlisting>
 
         <para>
             Note how we use the "escape()" method to apply output
             escaping to variables.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.introduction.options">
-        <title>Options</title>
+    <section xml:id="zend.view.introduction.options"><info><title>Options</title></info>
+        
 
         <para>
             <code>Zend_View</code> has several options that may be set to
@@ -131,8 +132,8 @@ echo $view->render('booklist.php');]]>
 base/path/
     helpers/
     filters/
-    scripts/]]>
-                </programlisting>
+    scripts/
+                ]]></programlisting>
 
                 <para>
                     This may be set via <code>setBasePath()</code>,
@@ -171,10 +172,10 @@ base/path/
                 <code>strictVars</code> option to the constructor.
             </para></listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.introduction.accessors">
-        <title>Utility Accessors</title>
+    <section xml:id="zend.view.introduction.accessors"><info><title>Utility Accessors</title></info>
+        
 
         <para>
             Typically, you'll only ever need to call on <code>assign()</code>,
@@ -241,8 +242,5 @@ base/path/
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

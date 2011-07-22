@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15814 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.application.introduction">
-    <title>Introdução</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.introduction"><info><title>Introdução</title></info>
+    
 
     <para>
         <classname>Zend_Application</classname> fornece um mecanismo de inicialização de aplicações
@@ -10,4 +10,4 @@
         dependência. Ele também cuida da configuração do ambiente <acronym>PHP</acronym> e introduz
         por padrão o auto-carregamento.
     </para>
-</sect1>
+</section>

@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 17166 -->
-<sect2 id="zend.dojo.form.examples">
-    <title>Dojo Formサンプル</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.form.examples"><info><title>Dojo Formサンプル</title></info>
+    
 
-    <example id="zend.dojo.form.examples.dojoform">
-        <title>Zend_Dojo_Formの利用</title>
+    <example xml:id="zend.dojo.form.examples.dojoform"><info><title>Zend_Dojo_Formの利用</title></info>
+        
 
         <para>
             直接使うにせよ、それを拡張するにせよ、
@@ -353,8 +351,8 @@ class My_Form_Test extends Zend_Dojo_Form
 ]]></programlisting>
     </example>
 
-    <example id="zend.dojo.form.examples.decorating">
-        <title>既存のフォームをDojoを使って変更する</title>
+    <example xml:id="zend.dojo.form.examples.decorating"><info><title>既存のフォームをDojoを使って変更する</title></info>
+        
 
         <para>
             <methodname>Zend_Dojo::enableForm()</methodname>という静的メソッドを利用して、
@@ -409,7 +407,4 @@ class My_Custom_Form extends Zend_Form
             そのクラスはすでにDojoが有効の<classname>Zend_Form</classname>の選択リストの代わりです。
         </para>
     </example>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

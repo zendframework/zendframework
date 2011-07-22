@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.service.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.introduction">
+    <info><title>Introduction</title></info>
 
     <para>
         <classname>Zend_Service</classname> is an abstract class which serves as a
@@ -65,6 +64,12 @@
 
         <listitem>
             <para>
+                <link linkend="zend.service.rackspace">Rackspace</link>
+            </para>
+        </listitem>
+        
+        <listitem>
+            <para>
                 <link linkend="zend.service.recaptcha">ReCaptcha</link>
             </para>
         </listitem>
@@ -115,7 +120,4 @@
     <para>
         Additional services are coming in the future.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

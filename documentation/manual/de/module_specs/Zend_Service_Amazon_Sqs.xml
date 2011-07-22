@@ -1,15 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20843 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.service.amazon.sqs">
-    <title>Zend_Service_Amazon_Sqs</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.sqs"><info><title>Zend_Service_Amazon_Sqs</title></info>
+    
 
-    <sect2 id="zend.service.amazon.sqs.introduction">
-        <title>Einführung</title>
+    <section xml:id="zend.service.amazon.sqs.introduction"><info><title>Einführung</title></info>
+        
 
         <para>
-            <ulink url="http://aws.amazon.com/sqs/">Amazon Simple Queue Service (Amazon
-                SQS)</ulink> bietet eine einfache, hoch skalierbare, gehostete Queue für das
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://aws.amazon.com/sqs/">Amazon Simple Queue Service (Amazon
+                SQS)</link> bietet eine einfache, hoch skalierbare, gehostete Queue für das
             Speichern von Nachrichten die zwischen Computern verschickt werden. Durch die
             Verwendung von Amazon SQS können Entwickler Daten einfach zwischen entfernten
             Komponenten Ihrer Anwendung verschieben, welche unterschiedliche Arbeiten durchführen,
@@ -27,15 +25,14 @@
             laufen und müssen nicht im gleichen Netzwerk sein, mit der gleichen Technologie
             entwickelt worden sein, oder zur gleichen Zeit laufen.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.amazon.sqs.registering">
-        <title>Bei Amazon SQS registrieren</title>
+    <section xml:id="zend.service.amazon.sqs.registering"><info><title>Bei Amazon SQS registrieren</title></info>
+        
 
         <para>
             Bevor man mit <classname>Zend_Service_Amazon_Sqs</classname> beginnt muß man einen
-            Account registrieren. Sehen Sie bitte in die <ulink
-                url="http://aws.amazon.com/sqs/faqs/">SQS FAQ</ulink> Seite auf der Amazon Website
+            Account registrieren. Sehen Sie bitte in die <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://aws.amazon.com/sqs/faqs/">SQS FAQ</link> Seite auf der Amazon Website
             für weitere Informationen.
         </para>
 
@@ -43,23 +40,22 @@
             Nach der Registrierung, bekommt man einen Anwendungsschlüssel und einen geheimen
             Schlüssel. Man benötigt beide um auf den SQS Service zugreifen zu können.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.amazon.sqs.apiDocumentation">
-        <title>API Dokumentation</title>
+    <section xml:id="zend.service.amazon.sqs.apiDocumentation"><info><title>API Dokumentation</title></info>
+        
 
         <para>
             Die <classname>Zend_Service_Amazon_Sqs</classname> Klasse bietet den
             <acronym>PHP</acronym> Wrapper zum Amazon SQS REST Interface. Bitte konsultieren Sie die
-            <ulink
-                url="http://developer.amazonwebservices.com/connect/kbcategory.jspa?categoryID=31">Amazon
-                SQS Dokumentation</ulink> für eine detailierte Beschreibung des Services. Man muß
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://developer.amazonwebservices.com/connect/kbcategory.jspa?categoryID=31">Amazon
+                SQS Dokumentation</link> für eine detailierte Beschreibung des Services. Man muß
             mit dem grundsätzlichen Konzept vertraut sein um dieses Service verwenden zu können.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.amazon.sqs.features">
-        <title>Features</title>
+    <section xml:id="zend.service.amazon.sqs.features"><info><title>Features</title></info>
+        
 
         <para>
             <classname>Zend_Service_Amazon_Sqs</classname> bietet die folgende Funktionalität:
@@ -97,10 +93,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.amazon.sqs.storing-your-first">
-        <title>Beginnen</title>
+    <section xml:id="zend.service.amazon.sqs.storing-your-first"><info><title>Beginnen</title></info>
+        
 
         <para>
             Sobald man sich bei Amazon SQS registriert hat ist man bereit seine eigene Queue zu
@@ -113,8 +109,8 @@
             empfangen von Nachrichten.
         </para>
 
-        <example id="zend.service.amazon.sqs.storing-your-first.example">
-            <title>Beispiel der Verwendung von Zend_Service_Amazon_Sqs</title>
+        <example xml:id="zend.service.amazon.sqs.storing-your-first.example"><info><title>Beispiel der Verwendung von Zend_Service_Amazon_Sqs</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $sqs = new Zend_Service_Amazon_Sqs($my_aws_key, $my_aws_secret_key);
@@ -141,10 +137,10 @@ foreach ($sqs->receive($queue_url) as $message) {
 Zend_Service_Amazon_Sqs::setKeys($my_aws_key, $my_aws_secret_key);
 $sqs = new Zend_Service_Amazon_Sqs();
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.amazon.sqs.queues">
-        <title>Operationen der Queue</title>
+    <section xml:id="zend.service.amazon.sqs.queues"><info><title>Operationen der Queue</title></info>
+        
 
         <para>
             Alle SQS Nachrichten werden in Queues gespeichert. Eine Queue muß erstellt werden bevor
@@ -171,10 +167,10 @@ $sqs = new Zend_Service_Amazon_Sqs();
                     <methodname>delete()</methodname> entfernt alle Nachrichten in der Queue.
                 </para>
 
-                <example id="zend.service.amazon.sqs.queues.removalExample">
-                    <title>
+                <example xml:id="zend.service.amazon.sqs.queues.removalExample"><info><title>
                         Beispiel für das Entfernen von Queues aus Zend_Service_Amazon_Sqs
-                    </title>
+                    </title></info>
+                    
 
                     <programlisting language="php"><![CDATA[
 $sqs = new Zend_Service_Amazon_Sqs($my_aws_key, $my_aws_secret_key);
@@ -190,8 +186,8 @@ $sqs->delete($queue_url);
                     der Queue zurück.
                 </para>
 
-                <example id="zend.service.amazon.sqs.queues.countExample">
-                    <title>Beispiel für das Zählen von Queues in Zend_Service_Amazon_Sqs</title>
+                <example xml:id="zend.service.amazon.sqs.queues.countExample"><info><title>Beispiel für das Zählen von Queues in Zend_Service_Amazon_Sqs</title></info>
+                    
 
                     <programlisting language="php"><![CDATA[
 $sqs = new Zend_Service_Amazon_Sqs($my_aws_key, $my_aws_secret_key);
@@ -208,8 +204,8 @@ $count = $sqs->count($queue_url); // Gibt '1' zurück
                     zurück die dem Benutzer gehören.
                 </para>
 
-                <example id="zend.service.amazon.sqs.queues.listExample">
-                    <title>Beispiel für das Auflisten von Queues in Zend_Service_Amazon_Sqs</title>
+                <example xml:id="zend.service.amazon.sqs.queues.listExample"><info><title>Beispiel für das Auflisten von Queues in Zend_Service_Amazon_Sqs</title></info>
+                    
 
                     <programlisting language="php"><![CDATA[
 $sqs = new Zend_Service_Amazon_Sqs($my_aws_key, $my_aws_secret_key);
@@ -221,16 +217,16 @@ foreach($list as $queue) {
                 </example>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.amazon.sqs.messages">
-        <title>Operationen für Nachrichten</title>
+    <section xml:id="zend.service.amazon.sqs.messages"><info><title>Operationen für Nachrichten</title></info>
+        
 
         <para>
             Nachdem eine Queue erstellt wurde, können Nachrichten einfach in die Queue gesendet
             und zu einem späteren Zeitpunkt von Ihr empfangen werden. Nachrichten können eine Länge
             von bis zu 8kB haben. Wenn längere Nachrichten benötigt werden sollte in das Kapitel
-            <ulink url="http://framework.zend.com/manual/en/zend.service.amazon.s3.html">S3</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.service.amazon.s3.html">S3</link>
             gesehen werden. Es gibt keine Begrenzung in der Anzahl der Nachrichten die eine Queue
             enthalten kann.
        </para>
@@ -243,10 +239,10 @@ foreach($list as $queue) {
                     <code>$queue_url</code> der SQS Queue.
                 </para>
 
-                <example id="zend.service.amazon.sqs.messages.sendExample">
-                    <title>
+                <example xml:id="zend.service.amazon.sqs.messages.sendExample"><info><title>
                         Beispiel für das Senden von Nachrichten an Zend_Service_Amazon_Sqs
-                    </title>
+                    </title></info>
+                    
 
                     <programlisting language="php"><![CDATA[
 $sqs = new Zend_Service_Amazon_Sqs($my_aws_key, $my_aws_secret_key);
@@ -262,10 +258,10 @@ $sqs->send($queue_url, 'Das ist eine Test Nachricht');
                     Queue.
                 </para>
 
-                <example id="zend.service.amazon.sqs.messages.receiveExample">
-                    <title>
+                <example xml:id="zend.service.amazon.sqs.messages.receiveExample"><info><title>
                         Beispiel für das Empfangen von Nachrichten von Zend_Service_Amazon_Sqs
-                    </title>
+                    </title></info>
+                    
 
                     <programlisting language="php"><![CDATA[
 $sqs = new Zend_Service_Amazon_Sqs($my_aws_key, $my_aws_secret_key);
@@ -286,10 +282,10 @@ foreach ($sqs->receive($queue_url) as $message) {
                     werden kann.
                 </para>
 
-                <example id="zend.service.amazon.sqs.messages.deleteExample">
-                    <title>
+                <example xml:id="zend.service.amazon.sqs.messages.deleteExample"><info><title>
                         Beispiel für das Löschen von Nachrichten aus Zend_Service_Amazon_Sqs
-                    </title>
+                    </title></info>
+                    
 
                     <programlisting language="php"><![CDATA[
 $sqs = new Zend_Service_Amazon_Sqs($my_aws_key, $my_aws_secret_key);
@@ -309,5 +305,5 @@ foreach ($sqs->receive($queue_url) as $message) {
                 </example>
             </listitem>
        </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

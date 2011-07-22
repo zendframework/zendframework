@@ -1,6 +1,9 @@
-<sect1 id="introduction.overview">
+<?xml version="1.0" encoding="utf-8"?>
 
-    <title>Panoramica</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="introduction.overview"><info><title>Panoramica</title></info>
+
+    
 
     <para>
         Il Framework Zend è un framework open source di alta qualità destinato allo sviluppo di applicazioni web e servizi web in PHP.
@@ -11,7 +14,4 @@
         Fornisce soluzioni utili per costruire siti web moderni, robusti e sicuri.
     </para>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

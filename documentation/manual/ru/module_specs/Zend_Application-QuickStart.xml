@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.application.quick-start">
-    <title>Zend_Application - Быстрый старт</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.quick-start"><info><title>Zend_Application - Быстрый старт</title></info>
+    
 
     <para>
         Есть два пути для начала работы с
@@ -20,8 +19,8 @@
         к следующему разделу</link>.
     </para>
 
-    <sect2 id="zend.application.quick-start.zend-tool">
-        <title>Использование вместе с Zend_Tool</title>
+    <section xml:id="zend.application.quick-start.zend-tool"><info><title>Использование вместе с Zend_Tool</title></info>
+        
 
         <para>
             Наиболее быстрый способ начать использование
@@ -157,14 +156,13 @@ $application->bootstrap()
 
         <para>
             Для того, чтобы продолжить "быстрый старт",
-            <link
-            linkend="zend.application.quick-start.resources">перейдите к
+            <link linkend="zend.application.quick-start.resources">перейдите к
             разделу про ресурсы</link>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.application.quick-start.manual">
-        <title>Добавление Zend_Application в приложение</title>
+    <section xml:id="zend.application.quick-start.manual"><info><title>Добавление Zend_Application в приложение</title></info>
+        
 
         <para>
             Основные положения работы с <classname>Zend_Application</classname>
@@ -293,8 +291,8 @@ RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
 ]]></programlisting>
 
-        <note>
-            <title>Узнайте больше о mod_rewrite</title>
+        <note><info><title>Узнайте больше о mod_rewrite</title></info>
+            
 
             <para>
                 Приведенные выше правила перезаписи позволяют получить
@@ -303,8 +301,7 @@ RewriteRule ^.*$ index.php [NC,L]
                 в ней есть файлы, которые нужно скрыть от посторонних глаз,
                 то вы наверное захотите установить более строгие правила.
                 Перейдите на сайт Apache, чтобы
-                <ulink
-                    url="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">узнать больше о mod_rewrite</ulink>.
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">узнать больше о mod_rewrite</link>.
             </para>
         </note>
 
@@ -312,10 +309,10 @@ RewriteRule ^.*$ index.php [NC,L]
             Теперь вы готовы начать использование
             <classname>Zend_Application</classname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.application.quick-start.resources">
-        <title>Добавление и создание ресурсов</title>
+    <section xml:id="zend.application.quick-start.resources"><info><title>Добавление и создание ресурсов</title></info>
+        
 
         <para>
             Если вы следовали инструкциям, приведенным выше, то ваш
@@ -428,10 +425,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             приложения и он будет обеспечивать инициализацию вашего вида в
             соответствии с нуждами вашего приложения.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.application.quick-start.next-steps">
-        <title>Следующие шаги с Zend_Application</title>
+    <section xml:id="zend.application.quick-start.next-steps"><info><title>Следующие шаги с Zend_Application</title></info>
+        
 
         <para>
             Все написанное выше должно научить вас основам использования
@@ -441,5 +438,5 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             плагинов ресурсов.
             Читайте дальше, чтобы узнать больше!
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

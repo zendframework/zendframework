@@ -1,22 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.service.slideshare">
-    <title>Zend_Service_SlideShare</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.slideshare"><info><title>Zend_Service_SlideShare</title></info>
+    
 
     <para>
         The <classname>Zend_Service_SlideShare</classname> component is used to interact with the
-        <ulink url="http://www.slideshare.net/">slideshare.net</ulink> web services for hosting
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.slideshare.net/">slideshare.net</link> web services for hosting
         slide shows online. With this component, you can embed slide shows which are hosted on this
         web site within a web site and even upload new slide shows to your account.
     </para>
 
-    <sect2 id="zend.service.slideshare.basicusage">
-        <title>Getting Started with Zend_Service_SlideShare</title>
+    <section xml:id="zend.service.slideshare.basicusage"><info><title>Getting Started with Zend_Service_SlideShare</title></info>
+        
 
         <para>
             In order to use the <classname>Zend_Service_SlideShare</classname> component you must
             first create an account on the slideshare.net servers (more information can be found
-            <ulink url="http://www.slideshare.net/developers/">here</ulink>) in order to receive an
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.slideshare.net/developers/">here</link>) in order to receive an
             <acronym>API</acronym> key, username, password and shared secret value -- all of which
             are needed in order to use the <classname>Zend_Service_SlideShare</classname> component.
         </para>
@@ -35,10 +34,10 @@ $ss = new Zend_Service_SlideShare('APIKEY',
                                   'USERNAME',
                                   'PASSWORD');
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.slideshare.slideshowobj">
-        <title>The SlideShow object</title>
+    <section xml:id="zend.service.slideshare.slideshowobj"><info><title>The SlideShow object</title></info>
+        
 
         <para>
             All slide shows in the <classname>Zend_Service_SlideShare</classname> component are
@@ -197,10 +196,10 @@ class Zend_Service_SlideShare_SlideShow {
             When using the <classname>Zend_Service_SlideShare</classname> component, this data class
             will be used frequently to browse or add new slide shows to or from the web service.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.slideshare.getslideshow">
-        <title>Retrieving a single slide show</title>
+    <section xml:id="zend.service.slideshare.getslideshow"><info><title>Retrieving a single slide show</title></info>
+        
 
         <para>
             The simplest usage of the <classname>Zend_Service_SlideShare</classname> component is
@@ -222,10 +221,10 @@ $slideshow = $ss->getSlideShow(123456);
 print "Slide Show Title: {$slideshow->getTitle()}<br/>\n";
 print "Number of views: {$slideshow->getNumViews()}<br/>\n";
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.slideshare.getslideshowlist">
-        <title>Retrieving Groups of Slide Shows</title>
+    <section xml:id="zend.service.slideshare.getslideshowlist"><info><title>Retrieving Groups of Slide Shows</title></info>
+        
 
         <para>
             If you do not know the specific ID of a slide show you are interested in retrieving,
@@ -295,10 +294,10 @@ foreach($ss_user as $slideshow) {
    print "Slide Show Title: {$slideshow->getTitle}<br/>\n";
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.slideshare.caching">
-        <title>Zend_Service_SlideShare Caching policies</title>
+    <section xml:id="zend.service.slideshare.caching"><info><title>Zend_Service_SlideShare Caching policies</title></info>
+        
 
         <para>
             By default, <classname>Zend_Service_SlideShare</classname> will cache any request
@@ -328,10 +327,10 @@ $ss->setCacheObject($cache);
 
 $ss_user = $ss->getSlideShowsByUser('username', $starting_offset, $limit);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.slideshare.httpclient">
-        <title>Changing the behavior of the HTTP Client</title>
+    <section xml:id="zend.service.slideshare.httpclient"><info><title>Changing the behavior of the HTTP Client</title></info>
+        
 
         <para>
             If for whatever reason you would like to change the behavior of the
@@ -353,5 +352,5 @@ $ss = new Zend_Service_SlideShare('APIKEY',
 $ss->setHttpClient($client);
 $ss_user = $ss->getSlideShowsByUser('username', $starting_offset, $limit);
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

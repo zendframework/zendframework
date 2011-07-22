@@ -1,5 +1,6 @@
-<sect1 id="zend.form.decorators">
-    <title> 使用 Zend_Form_Decorator 生成定制的表单标识（Markup）</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.decorators"><info><title> 使用 Zend_Form_Decorator 生成定制的表单标识（Markup）</title></info>
+    
 
     <para>
         解析一个表单对象完全是可选的 －－ 你根本不需要使用 <code>Zend_Form</code> 的 render() 方法。然而，如果你用了，装饰器就用来解析各种各样的表单对象。
@@ -17,8 +18,8 @@
         在每个装饰器的 <code>render()</code> 方法被调用之前，当前条目用 <code>setElement()</code> 设置到装饰器，让装饰器知道条目要被解析。这让你生成只解析条目的特定部分的装饰器 －－ 例如标签（label）、值（value）、错误消息等。通过把若干个解析特定元素部分的装饰器放到一起，你可以构建复杂的表示整个条目的标识（markup）。
     </para>
 
-    <sect2 id="zend.form.decorators.operation">
-        <title> 操作 </title>
+    <section xml:id="zend.form.decorators.operation"><info><title> 操作 </title></info>
+        
 
         <para>
             要配置装饰器，传递选项数组或 <code>Zend_Config</code> 对象给它的构造器、 传递 <code>setOptions()</code> 的数组参数或 <code>Zend_Config</code> 对象给 <code>setConfig()</code> 。
@@ -71,18 +72,18 @@
         <para>
             每个装饰器的 <code>render()</code> 方法接受字符串 <code>$content</code> 。当调用第一个装饰器，这个字符串一般是空的，在随后的调用中，它就被放上内容。基于装饰器的类型和传递进的选项，装饰器将替换、预先准备或追加这个字符串，一个可选的分隔符将用于后两者。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.decorators.standard">
-        <title> 标准装饰器 </title>
+    <section xml:id="zend.form.decorators.standard"><info><title> 标准装饰器 </title></info>
+        
 
         <para>
             <code>Zend_Form</code> 带有许多标准装饰器，参见 <link linkend="zend.form.standardDecorators"> 标准装饰器一章 </link> 有更多细节。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.decorators.custom">
-        <title> 定制装饰器 </title>
+    <section xml:id="zend.form.decorators.custom"><info><title> 定制装饰器 </title></info>
+        
 
         <para>
             如果你觉得你的解析很复杂或需要大量定制，可以考虑构造一个定制的装饰器。
@@ -255,8 +256,5 @@ class My_Decorator_Errors
         <para>
             在这个特定的例子中，因为装饰器的最后一节，'Errors'，匹配 <code>Zend_Form_Decorator_Errors</code>，它将 <emphasis> 代替 </emphasis> 那个装饰器被解析 －－  你不需要修改任何装饰器来修改输出。通过在已存在的标准装饰器之后命名你的装饰器，你可以不需要修改元素的装饰器来修改装饰。
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

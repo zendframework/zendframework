@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
-<!-- Reviewed: no -->
-<sect1 id="migration.10">
-    <title>Zend Framework 1.0</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.10"><info><title>Zend Framework 1.0</title></info>
+    
 
     <para>
         Lors de la migration d'un version précédente vers Zend Framework 0.8 ou plus récent
         vous devriez prendre note de ce qui suit.
     </para>
 
-    <sect2 id="migration.10.zend.controller">
-        <title>Zend_Controller</title>
+    <section xml:id="migration.10.zend.controller"><info><title>Zend_Controller</title></info>
+        
 
         <para>
             Les principaux changements introduits dans la version 1.0.0RC1 sont l'ajout et
@@ -26,7 +24,7 @@
             Le plugin <code>ErrorHandler</code> est exécuté pendant
             <methodname>postDispatch()</methodname> vérifiant la présence d'exceptions, et redirigeant vers le
             contrôleur de gestion d'erreur spécifié. Vous pouvez le désactiver en réglant le
-            paramètre <code>noErrorHandler</code> du contrôleur frontal&#160;:
+            paramètre <code>noErrorHandler</code> du contrôleur frontal :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -45,7 +43,7 @@ $front->setParam('noErrorHandler', true);
         <para>
             Il existe plusieurs possibilités pour mettre à jour votre code. Dans un premier
             temps, vous pouvez globalement désactiver <code>ViewRenderer</code> dans votre fichier
-            d'amorçage du contrôleur frontal avant toute distribution&#160;:
+            d'amorçage du contrôleur frontal avant toute distribution :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -63,7 +61,7 @@ $front->setParam('noViewRenderer', true);
             y a plusieurs choses à vérifier dans votre code de contrôleur. Premièrement, regardez
             vos méthodes d'actions (les méthodes se terminant par "Action"), et déterminez ce que
             chacune d'elle réalise. Si rien de ce qui suit n'est réalisé, vous devrez réaliser des
-            changements&#160;:
+            changements :
         </para>
 
         <itemizedlist>
@@ -83,7 +81,7 @@ $front->setParam('noViewRenderer', true);
 
         <para>
             Le changement le plus simple est la désactivation de l'auto-rendu pour cette
-            méthode&#160;:
+            méthode :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -93,7 +91,7 @@ $this->_helper->viewRenderer->setNoRender();
         <para>
             Si vous trouvez qu'aucune de vos méthodes d'actions n'effectue de rendu, ne font
             suivre, ou redirige, vous pouvez préférer mettre la ligne suivante dans la méthode
-            <methodname>preDispatch()</methodname> ou <methodname>init()</methodname>&#160;:
+            <methodname>preDispatch()</methodname> ou <methodname>init()</methodname> :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -109,7 +107,7 @@ public function preDispatch()
             Si vous appelez <methodname>render()</methodname>, et que vous utilisez la
             <link linkend="zend.controller.modular">structure de dossier modulaire
             conventionnelle</link>, vous voudrez modifier votre code pour utiliser
-            l'auto-rendu&#160;:
+            l'auto-rendu :
         </para>
 
         <itemizedlist>
@@ -130,7 +128,7 @@ public function preDispatch()
                     Si vous appelez <methodname>render()</methodname> avec des arguments, et que vous ne
                     réalisez pas ensuite d'exécution de code ou effectuez le rendu de scripts de
                     vues multiples, vous pouvez changer ces appels par
-                    <code>$this->_helper->viewRenderer()</code>.
+                    <code>$this-&gt;_helper-&gt;viewRenderer()</code>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -153,7 +151,7 @@ public function preDispatch()
 
         <itemizedlist>
             <listitem>
-                <para>Avant la distribution d'une instance de contrôleur frontal&#160;:</para>
+                <para>Avant la distribution d'une instance de contrôleur frontal :</para>
                 <programlisting language="php"><![CDATA[
 // En considérant que $view a déjà été définie
 $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer($view);
@@ -161,7 +159,7 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
 ]]></programlisting>
             </listitem>
             <listitem>
-                <para>A tout moment durant le processus d'amorçage&#160;:</para>
+                <para>A tout moment durant le processus d'amorçage :</para>
                 <programlisting language="php"><![CDATA[
 $viewRenderer =
     Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
@@ -184,10 +182,10 @@ $viewRenderer->setView($view);
             <code>ErrorHandler</code> et <code>ViewRenderer</code> puisqu'il s'agit maintenant de
             fonctionnalités natives.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="migration.10.zend.currency">
-        <title>Zend_Currency</title>
+    <section xml:id="migration.10.zend.currency"><info><title>Zend_Currency</title></info>
+        
 
         <para>
             Créer un objet <classname>Zend_Currency</classname> est devenu plus simple. Vous
@@ -203,18 +201,18 @@ $currency = new Zend_Currency($currency, $locale);
         <para>
             La méthode <methodname>setFormat()</methodname> prend maintenant en paramètre un tableau
             d'options. Ces options sont permanentes et écrasent les précédentes déjà présentes. La
-            nouvelle option "precision" a été intégrée&#160;:
+            nouvelle option "precision" a été intégrée :
             <itemizedlist mark="opencircle">
                 <listitem>
                     <para>
-                        <emphasis>position</emphasis>&#160;: Remplacement de l'ancien
+                        <emphasis>position</emphasis> : Remplacement de l'ancien
                         paramètre "rules"
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis>script</emphasis>&#160;: Remplacement de l'ancien
+                        <emphasis>script</emphasis> : Remplacement de l'ancien
                         paramètre "script"
                     </para>
 
@@ -222,7 +220,7 @@ $currency = new Zend_Currency($currency, $locale);
 
                 <listitem>
                     <para>
-                        <emphasis>format</emphasis>&#160;: Remplacement de l'ancien
+                        <emphasis>format</emphasis> : Remplacement de l'ancien
                         paramètre "locale" qui n'affecte plus de nouvelle monnaie, mais seulement un
                         format de nombre.
                     </para>
@@ -231,32 +229,32 @@ $currency = new Zend_Currency($currency, $locale);
 
                 <listitem>
                     <para>
-                        <emphasis>display</emphasis>&#160;: Remplacement de l'ancien
+                        <emphasis>display</emphasis> : Remplacement de l'ancien
                         paramètre "rules"
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis>precision</emphasis>&#160;: Nouveau paramètre
+                        <emphasis>precision</emphasis> : Nouveau paramètre
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis>name</emphasis>&#160;: Remplacement de l'ancien
+                        <emphasis>name</emphasis> : Remplacement de l'ancien
                         paramètre "rules". Affecte le nom complet de la monnaie.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis>currency</emphasis>&#160;: Nouveau paramètre
+                        <emphasis>currency</emphasis> : Nouveau paramètre
                     </para>
                 </listitem>
 
                 <listitem>
-                    <para><emphasis>symbol</emphasis>&#160;: Nouveau paramètre</para>
+                    <para><emphasis>symbol</emphasis> : Nouveau paramètre</para>
                 </listitem>
             </itemizedlist>
         </para>
@@ -281,5 +279,5 @@ $currency->toCurrency($value, array $options);
             ne sont plus statiques. Elles retournent les valeurs affectées dans l'objet, si on ne
             leur passe pas de paramètre.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

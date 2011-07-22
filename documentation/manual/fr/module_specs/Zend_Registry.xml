@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20819 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.registry.using">
-    <title>Utiliser le registre</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.registry.using"><info><title>Utiliser le registre</title></info>
+    
 
     <para>
         Un registre est un conteneur pour stocker des objets et des valeurs dans l'espace
@@ -18,16 +16,16 @@
         tableau.
     </para>
 
-    <sect2 id="zend.registry.using.storing">
-        <title>Mettre des valeurs dans le registre</title>
+    <section xml:id="zend.registry.using.storing"><info><title>Mettre des valeurs dans le registre</title></info>
+        
 
         <para>
             Pour enregistrer une valeur dans le registre, il faut utiliser la méthode statique
             <methodname>set()</methodname>.
         </para>
 
-        <example id="zend.registry.using.storing.example">
-            <title>Exemple avec la méthode <methodname>set()</methodname></title>
+        <example xml:id="zend.registry.using.storing.example"><info><title>Exemple avec la méthode <methodname>set()</methodname></title></info>
+            
 
             <programlisting language="php"><![CDATA[
 Zend_Registry::set('index', $value);
@@ -44,18 +42,18 @@ Zend_Registry::set('index', $value);
             L'index peut être un scalaire (<constant>NULL</constant>, chaîne, ou nombre), comme un
             tableau ordinaire.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.registry.using.retrieving">
-        <title>Lire des valeurs du registre</title>
+    <section xml:id="zend.registry.using.retrieving"><info><title>Lire des valeurs du registre</title></info>
+        
 
         <para>
             Pour récupérer une entrée dans le registre,il faut utiliser la méthode statique
             <methodname>get()</methodname>.
         </para>
 
-        <example id="zend.registry.using.retrieving.example">
-            <title>Exemple avec la méthode <methodname>get()</methodname></title>
+        <example xml:id="zend.registry.using.retrieving.example"><info><title>Exemple avec la méthode <methodname>get()</methodname></title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $value = Zend_Registry::get('index');
@@ -67,8 +65,8 @@ $value = Zend_Registry::get('index');
             objet registre est itératif, rendant les valeurs stockées facilement accessibles.
         </para>
 
-        <example id="zend.registry.using.retrieving.example-iterating">
-            <title>Exemple d'itération du registre</title>
+        <example xml:id="zend.registry.using.retrieving.example-iterating"><info><title>Exemple d'itération du registre</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $registry = Zend_Registry::getInstance();
@@ -79,10 +77,10 @@ foreach ($registry as $index => $value) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.registry.using.constructing">
-        <title>Construire un objet registre</title>
+    <section xml:id="zend.registry.using.constructing"><info><title>Construire un objet registre</title></info>
+        
 
         <para>
             En plus de pouvoir accéder au registre grâce aux méthodes statiques, vous pous
@@ -101,8 +99,8 @@ foreach ($registry as $index => $value) {
             tableau associatif.
         </para>
 
-        <example id="zend.registry.using.constructing.example">
-            <title>Exemple de construction d'un registre</title>
+        <example xml:id="zend.registry.using.constructing.example"><info><title>Exemple de construction d'un registre</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $registry = new Zend_Registry(array('index' => $value));
@@ -115,8 +113,8 @@ $registry = new Zend_Registry(array('index' => $value));
             méthode <methodname>setInstance()</methodname>.
         </para>
 
-        <example id="zend.registry.using.constructing.example-setinstance">
-            <title>Exemple d'initialisation d'un registre statique</title>
+        <example xml:id="zend.registry.using.constructing.example-setinstance"><info><title>Exemple d'initialisation d'un registre statique</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $registry = new Zend_Registry(array('index' => $value));
@@ -130,18 +128,18 @@ Zend_Registry::setInstance($registry);
             <classname>Zend_Exception</classname> si un registre statique a déjà été initialisé lors
             de son premier accès.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.registry.using.array-access">
-        <title>Accéder au registre comme à un tableau</title>
+    <section xml:id="zend.registry.using.array-access"><info><title>Accéder au registre comme à un tableau</title></info>
+        
 
         <para>
             Si vous avez plusieurs valeurs à récupérer ou à enregistrer, vous pouvez trouver
             intéressant d'avoir accès au registre avec une notation de type tableau.
         </para>
 
-        <example id="zend.registry.using.array-access.example">
-            <title>Exemple d'accès de type tableau</title>
+        <example xml:id="zend.registry.using.array-access.example"><info><title>Exemple d'accès de type tableau</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $registry = Zend_Registry::getInstance();
@@ -151,10 +149,10 @@ $registry['index'] = $value;
 var_dump( $registry['index'] );
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.registry.using.array-object">
-        <title>Accéder au registre comme à un objet</title>
+    <section xml:id="zend.registry.using.array-object"><info><title>Accéder au registre comme à un objet</title></info>
+        
 
         <para>
             Vous pouvez trouver aussi intéressant d'accéder au registre d'une manière orientée
@@ -165,9 +163,9 @@ var_dump( $registry['index'] );
             versions de <acronym>PHP</acronym> ont des bugs quand il utilise le registre avec cette option.
         </para>
 
-        <warning>
-            <title>Problèmes connus avec l'option
-            <constant>ArrayObject::ARRAY_AS_PROPS</constant></title>
+        <warning><info><title>Problèmes connus avec l'option
+            <constant>ArrayObject::ARRAY_AS_PROPS</constant></title></info>
+            
 
             <para>
                 Certaines versions de <acronym>PHP</acronym> sont réputées buggués lors de l'utilisation de
@@ -175,8 +173,8 @@ var_dump( $registry['index'] );
             </para>
         </warning>
 
-        <example id="zend.registry.using.array-object.example">
-            <title>Exemple d'accès de type objet</title>
+        <example xml:id="zend.registry.using.array-object.example"><info><title>Exemple d'accès de type objet</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Dans votre fichier de lancement de l'application
@@ -193,18 +191,18 @@ $registry->index = $value;
 var_dump($registry->index);
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.registry.using.isset">
-        <title>Vérifier si un index existe</title>
+    <section xml:id="zend.registry.using.isset"><info><title>Vérifier si un index existe</title></info>
+        
 
         <para>
             Pour savoir si un index particulier du registre a une valeur, il faut utiliser la
             méthode statique <methodname>isRegistered()</methodname>.
         </para>
 
-        <example id="zend.registry.using.isset.example-isregistered">
-            <title>Exemple avec la méthode i<methodname>sRegistered()</methodname></title>
+        <example xml:id="zend.registry.using.isset.example-isregistered"><info><title>Exemple avec la méthode i<methodname>sRegistered()</methodname></title></info>
+            
 
             <programlisting language="php"><![CDATA[
 if (Zend_Registry::isRegistered($index)) {
@@ -219,8 +217,8 @@ if (Zend_Registry::isRegistered($index)) {
             ordinaire.
         </para>
 
-        <example id="zend.registry.using.isset.example-isset">
-            <title>Exemple avec la méthode <methodname>isset()</methodname></title>
+        <example xml:id="zend.registry.using.isset.example-isset"><info><title>Exemple avec la méthode <methodname>isset()</methodname></title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $registry = Zend_Registry::getInstance();
@@ -236,10 +234,10 @@ if (isset($registry->index)) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.registry.using.subclassing">
-        <title>Étendre le registre</title>
+    <section xml:id="zend.registry.using.subclassing"><info><title>Étendre le registre</title></info>
+        
 
         <para>
             Le registre statique est une instance de la classe
@@ -254,8 +252,8 @@ if (isset($registry->index)) {
             <para>La classe doit étendre <classname>Zend_Registry</classname>.</para>
         </note>
 
-        <example id="zend.registry.using.subclassing.example">
-            <title>Exemple d'affectation d'un nom de classe au registre</title>
+        <example xml:id="zend.registry.using.subclassing.example"><info><title>Exemple d'affectation d'un nom de classe au registre</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 Zend_Registry::setClassName('Mon_Registre');
@@ -270,18 +268,18 @@ Zend_Registry::set('index', $value);
             recommandé de spécifier le nom de classe pour votre registre statique dans le fichier de
             lancement de votre application.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.registry.using.unsetting">
-        <title>Décharger le registre statique</title>
+    <section xml:id="zend.registry.using.unsetting"><info><title>Décharger le registre statique</title></info>
+        
 
         <para>
             Bien que ce ne soit pas normalement nécessaire, vous pouvez décharger l'instance
             de votre registre. Utilisez la méthode statique <methodname>_unsetInstance()</methodname>.
         </para>
 
-        <note>
-            <title>Risque de perte de données</title>
+        <note><info><title>Risque de perte de données</title></info>
+            
 
             <para>
                 Quand vous utilisez le code <methodname>_unsetInstance()</methodname>, toutes les données
@@ -298,8 +296,8 @@ Zend_Registry::set('index', $value);
             applications.
         </para>
 
-        <example id="zend.registry.using.unsetting.example">
-            <title>Exemple avec la méthode <methodname>_unsetInstance()</methodname></title>
+        <example xml:id="zend.registry.using.unsetting.example"><info><title>Exemple avec la méthode <methodname>_unsetInstance()</methodname></title></info>
+            
 
             <programlisting language="php"><![CDATA[
 Zend_Registry::set('index', $value);
@@ -312,5 +310,5 @@ Zend_Registry::setClassName('Mon_Registre');
 Zend_Registry::set('index', $value);
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

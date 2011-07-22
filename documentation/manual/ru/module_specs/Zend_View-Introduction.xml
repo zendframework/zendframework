@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.view.introduction">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.introduction"><info><title>Введение</title></info>
 
-    <title>Введение</title>
+    
 
     <para>
         <classname>Zend_View</classname> является классом для работы с частью вид (view)
@@ -30,9 +29,9 @@
         вида, который генерирует выходные данные вида.
     </para>
 
-    <sect2 id="zend.view.introduction.controller">
+    <section xml:id="zend.view.introduction.controller"><info><title>Скрипт контроллера</title></info>
 
-        <title>Скрипт контроллера</title>
+        
 
         <para>
             В качестве простого примера предположим, что ваш контроллер имеет
@@ -66,11 +65,11 @@ $view->books = $data;
 echo $view->render('booklist.php');
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.introduction.view">
+    <section xml:id="zend.view.introduction.view"><info><title>Скрипт вида</title></info>
 
-        <title>Скрипт вида</title>
+        
 
         <para>
             Теперь нам нужен сопутствующий скрипт вида "booklist.php".
@@ -114,10 +113,10 @@ echo $view->render('booklist.php');
             для экранирования переменных.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.introduction.options">
-        <title>Опции</title>
+    <section xml:id="zend.view.introduction.options"><info><title>Опции</title></info>
+        
 
         <para>
             <classname>Zend_View</classname> имеет несколько опций, которые могут
@@ -179,17 +178,16 @@ base/path/
                 передачи опции <code>strictVars</code> конструктору.
             </para></listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.introduction.shortTags">
-        <title>Короткие теги в скриптах вида</title>
+    <section xml:id="zend.view.introduction.shortTags"><info><title>Короткие теги в скриптах вида</title></info>
+        
 
         <para>
             В нашей документации и примерах мы применяем короткие теги PHP:
             <code>&lt;?</code> and <code>&lt;?=</code>. Кроме того, мы обычно
-            используем <ulink
-                url="http://us.php.net/manual/en/control-structures.alternative-syntax.php">альтернативный
-                синтаксис для управляющих структур</ulink>. Их удобно
+            используем <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://us.php.net/manual/en/control-structures.alternative-syntax.php">альтернативный
+                синтаксис для управляющих структур</link>. Их удобно
             использовать при написании скриптов вида, они делают конструкции
             более лаконичными и позволяют размещать операторы без лишних
             переходов на другую строку.
@@ -255,8 +253,8 @@ $view->setUseStreamWrapper(true);
             </listitem>
         </itemizedlist>
 
-        <note>
-            <title>Обертка потока для скриптов вида снижает производительность</title>
+        <note><info><title>Обертка потока для скриптов вида снижает производительность</title></info>
+            
 
             <para>
                 Использование обертки потока <emphasis>снижает</emphasis>
@@ -268,10 +266,10 @@ $view->setUseStreamWrapper(true);
                 содержимого страниц.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.introduction.accessors">
-        <title>Вспомогательные аксессоры</title>
+    <section xml:id="zend.view.introduction.accessors"><info><title>Вспомогательные аксессоры</title></info>
+        
 
         <para>
             Скорее всего, вам никогда не понадобится вызывать
@@ -343,8 +341,5 @@ $view->setUseStreamWrapper(true);
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

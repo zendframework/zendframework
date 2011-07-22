@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.boundary">
-    <title>Контроль за разделителями MIME</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.boundary"><info><title>Контроль за разделителями MIME</title></info>
+    
     <para>
         В multipart-сообщениях разделитель <acronym>MIME</acronym> для
         отделения частей сообщения друг от друга обычно генерируется случайным
@@ -10,15 +9,12 @@
         <methodname>setMimeBoundary()</methodname>, как показано в следующем
         примере:
     </para>
-    <example id="zend.mail.boundary.example-1">
-        <title>Изменение разделителей MIME</title>
+    <example xml:id="zend.mail.boundary.example-1"><info><title>Изменение разделителей MIME</title></info>
+        
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 $mail->setMimeBoundary('=_' . md5(microtime(1) . $someId++));
 // формирование сообщения...
 ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

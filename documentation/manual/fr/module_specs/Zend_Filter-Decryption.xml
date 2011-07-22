@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21740 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.decrypt">
-    <title>Decrypt</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.decrypt"><info><title>Decrypt</title></info>
+    
     <para>
         Ce filtre va décrypter toute chaine grâce aux paramètres utilisés. Des adaptateurs sont utilisés.
         Actuellement des aptateurs existent pour les extensions <code>Mcrypt</code> et <code>OpenSSL</code>
@@ -15,8 +13,8 @@
         les méthodes utilisées pour le décryptage.
     </para>
 
-    <sect3 id="zend.filter.set.decrypt.mcrypt">
-        <title>Décryptage avec Mcrypt</title>
+    <section xml:id="zend.filter.set.decrypt.mcrypt"><info><title>Décryptage avec Mcrypt</title></info>
+        
         <para>
             Pour décrypter une données cryptées avec <code>Mcrypt</code>, vous avez besoin des paramètres
             utilisés pour encrypter, ainsi que du vecteur.
@@ -55,10 +53,10 @@ print $decrypted;
                 Si mcrypt détecte des problèmes avec ces paramètres, une exception sera levée.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.decrypt.openssl">
-        <title>Decryptage avec OpenSSL</title>
+    <section xml:id="zend.filter.set.decrypt.openssl"><info><title>Decryptage avec OpenSSL</title></info>
+        
         <para>
             Le décryptage avec <code>OpenSSL</code> est aussi simple que l'encryptage. Mais vous aurez besoin de toutes
             les données concernant la personne ayant crypté la donnée de référence.
@@ -154,8 +152,5 @@ $filter->setPassphrase('mypassphrase');
 $decrypted = $filter->filter('texte_encodé_illisible');
 print $decrypted;
 ]]></programlisting>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

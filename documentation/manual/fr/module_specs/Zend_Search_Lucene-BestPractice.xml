@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.search.lucene.best-practice">
-    <title>Bonnes pratiques</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.best-practice"><info><title>Bonnes pratiques</title></info>
+    
 
-    <sect2 id="zend.search.lucene.best-practice.field-names">
-        <title>Nommage des champs</title>
+    <section xml:id="zend.search.lucene.best-practice.field-names"><info><title>Nommage des champs</title></info>
+        
 
         <para>
             Il n'y a pas de limitation pour les noms de champs dans
@@ -21,8 +19,7 @@
         <para>
             Les propriétés <code>id</code> et <code>score</code> de
             <classname>Zend_Search_Lucene_Search_QueryHit</classname> font toujours référence à
-            l'identifiant interne du document Lucene et au <link
-            linkend="zend.search.lucene.searching.results-scoring">score</link> de hit. Si le
+            l'identifiant interne du document Lucene et au <link linkend="zend.search.lucene.searching.results-scoring">score</link> de hit. Si le
             document indexé possède les mêmes champs stockés, vous devrez utiliser la méthode
             <methodname>getDocument()</methodname> pour y accéder :<programlisting language="php"><![CDATA[
 $hits = $index->find($query);
@@ -50,10 +47,10 @@ foreach ($hits as $hit) {
     $title = $hit->getDocument()->title;
 }
 ]]></programlisting></para>
-        </sect2>
+        </section>
 
-        <sect2 id="zend.search.lucene.best-practice.indexing-performance">
-            <title>Performance de l'indexation</title>
+        <section xml:id="zend.search.lucene.best-practice.indexing-performance"><info><title>Performance de l'indexation</title></info>
+            
 
         <para>
             La performance de l'indexation est un compromis entre les ressources utilisées, le
@@ -277,10 +274,10 @@ $index->optimize();
             puis de jouer avec <emphasis>MaxMergeDocs</emphasis> pour obtenir les meilleures
             performances d'indexation de masse (batch indexing).
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.best-practice.shutting-down">
-        <title>Indexation à l'arrêt du programme</title>
+    <section xml:id="zend.search.lucene.best-practice.shutting-down"><info><title>Indexation à l'arrêt du programme</title></info>
+        
 
         <para>
             L'instance de <classname>Zend_Search_Lucene</classname> effectue quelques tâches à
@@ -319,8 +316,7 @@ $index->optimize();
         <para>Il y a deux moyens qui peuvent permettre d'éviter ce problème.</para>
 
         <para>
-            Le premier est de forcer l'index à sortir de la portée (du scope) :<programlisting
-            role="php"><![CDATA[
+            Le premier est de forcer l'index à sortir de la portée (du scope) :<programlisting role="php"><![CDATA[
 $index = Zend_Search_Lucene::open($indexPath);
 
 ...
@@ -334,14 +330,13 @@ unset($index);
 $index = Zend_Search_Lucene::open($indexPath);
 
 $index->commit();
-]]></programlisting> Cette possibilité est également décrite dans la section "<link
-            linkend="zend.search.lucene.advanced.static">Avancé - Utiliser les propriétés statiques
+]]></programlisting> Cette possibilité est également décrite dans la section "<link linkend="zend.search.lucene.advanced.static">Avancé - Utiliser les propriétés statiques
             de l'index</link>".
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.best-practice.unique-id">
-        <title>Récupération de documents par leur id unique</title>
+    <section xml:id="zend.search.lucene.best-practice.unique-id"><info><title>Récupération de documents par leur id unique</title></info>
+        
 
         <para>
             C'est une pratique commune de stocker un identifiant unique de document dans
@@ -356,8 +351,7 @@ $index->commit();
         </para>
 
         <para>
-            C'est plus efficace que d'utiliser la méthode <methodname>find()</methodname> :<programlisting
-            role="php"><![CDATA[
+            C'est plus efficace que d'utiliser la méthode <methodname>find()</methodname> :<programlisting role="php"><![CDATA[
 // Récupération de documents avec la méthode find()
 // en utilisant une querystring
 $query = $idFieldName . ':' . $docId;
@@ -392,10 +386,10 @@ foreach ($docIds as $id) {
     ...
 }
 ]]></programlisting></para>
-        </sect2>
+        </section>
 
-        <sect2 id="zend.search.lucene.best-practice.memory-usage">
-            <title>Utilisation de la mémoire</title>
+        <section xml:id="zend.search.lucene.best-practice.memory-usage"><info><title>Utilisation de la mémoire</title></info>
+            
 
         <para>
             <classname>Zend_Search_Lucene</classname> est un module relativement gourmand en
@@ -447,10 +441,10 @@ foreach ($docIds as $id) {
             L'optimisation d'index (complète ou partielle) utilise un processus de type flux
             ("streaming") et ne requiert pas une grosse quantité de mémoire.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.best-practice.encoding">
-        <title>Encodage</title>
+    <section xml:id="zend.search.lucene.best-practice.encoding"><info><title>Encodage</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> travaille avec des chaînes en UTF-8 en
@@ -535,10 +529,10 @@ $hits = $index->find($queryStr);
             sur les <link linkend="zend.search.lucene.charset">Jeu de caractères</link> pour plus de
             détails.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.best-practice.maintenance">
-        <title>Maintenance de l'index</title>
+    <section xml:id="zend.search.lucene.best-practice.maintenance"><info><title>Maintenance de l'index</title></info>
+        
 
         <para>
             Il devrait être clair que <classname>Zend_Search_Lucene</classname> comme toute
@@ -573,5 +567,5 @@ $hits = $index->find($queryStr);
             opérations de "roll-forward" si nécessaire. Cette pratique réduit considérablement le
             temps de restauration.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

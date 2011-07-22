@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 19807 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.lucene.indexing">
-    <title>Indexation</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.indexing"><info><title>Indexation</title></info>
+    
 
     <para>
         L'indexation s'effectue en ajoutant un nouveau document à un index existant ou à un
-        nouvel index&#160;:
+        nouvel index :
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -18,8 +16,8 @@ $index->addDocument($doc);
         manuellement.
     </para>
 
-    <example id="learning.lucene.indexing.doc-creation">
-        <title>Construction manuel de document</title>
+    <example xml:id="learning.lucene.indexing.doc-creation"><info><title>Construction manuel de document</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $doc = new Zend_Search_Lucene_Document();
@@ -32,11 +30,11 @@ $doc->addField(Zend_Search_Lucene_Field::binary('avatar', $avatarData));
 
     <para>
         La seconde méthode est de le charger depuis un fichier <acronym>HTML</acronym> ou
-        Microsoft Office 2007&#160;:
+        Microsoft Office 2007 :
     </para>
 
-    <example id="learning.lucene.indexing.doc-loading">
-        <title>Chargement de document</title>
+    <example xml:id="learning.lucene.indexing.doc-loading"><info><title>Chargement de document</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Html::loadHTML($htmlString);
@@ -51,8 +49,8 @@ $doc = Zend_Search_Lucene_Document_Xlsx::loadXlsxFile($path);
         étendu manuellement avec des champs définis par l'utilisateur.
     </para>
 
-    <sect2 id="learning.lucene.indexing.policy">
-        <title>Politique d'indexation</title>
+    <section xml:id="learning.lucene.indexing.policy"><info><title>Politique d'indexation</title></info>
+        
 
         <para>
             Vous devrez définir votre politique d'indexation au sein de la conception de
@@ -85,8 +83,8 @@ $doc = Zend_Search_Lucene_Document_Xlsx::loadXlsxFile($path);
             Les optimisations complètes d'index doivent être appliquées après l'indexation.
         </para>
 
-        <example id="learning.lucene.indexing.optimization">
-            <title>Optimisation d'index</title>
+        <example xml:id="learning.lucene.indexing.optimization"><info><title>Optimisation d'index</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $index->optimize();
@@ -100,5 +98,5 @@ $index->optimize();
             charge d'ouverture de l'index et permet d'utiliser le tampon de document de
             l'index.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

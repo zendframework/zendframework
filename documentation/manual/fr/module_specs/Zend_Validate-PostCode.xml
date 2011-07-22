@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.post_code">
-    <title>PostCode</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.post_code"><info><title>PostCode</title></info>
+    
 
     <para>
         <classname>Zend_Validate_PostCode</classname> vous permet de déterminer si une valeur
@@ -18,11 +16,11 @@
 
     <para>
         Utiliser la locale est la méthode la plus commode puisque Zend Framework connait les
-        formats des codes postaux assoicés à chaque locale&#160; cependant, vous devez utiliser
+        formats des codes postaux assoicés à chaque locale  cependant, vous devez utiliser
         une locale complète (c'est-à-dire contenant aussi le spécificateur de région) dans ce cas.
         Par exemple, la locale "fr" est une bien une locale mais ne peut pas être utilisée avec
         <classname>Zend_Validate_PostCode</classname> puisqu'elle ne contient pas la
-        région&#160;; "fr_FR" sera, cependant, une locale valide puisqu'elle spécifie une région
+        région ; "fr_FR" sera, cependant, une locale valide puisqu'elle spécifie une région
         ("FR", pour France).
     </para>
     <programlisting language="php"><![CDATA[
@@ -65,8 +63,8 @@ $validator = new Zend_Validate_PostCode('fr_FR');
 $validator->setFormat('FR-\d{5}');
 ]]></programlisting>
 
-    <note>
-        <title>Conventions pour les formats personnalisés</title>
+    <note><info><title>Conventions pour les formats personnalisés</title></info>
+        
 
         <para>
             Lors de l'utilisation de formats personnalisés, vous devez omettre les balises de début
@@ -81,8 +79,8 @@ $validator->setFormat('FR-\d{5}');
         </para>
     </note>
 
-    <sect3 id="zend.validate.set.post_code.constructor">
-        <title>Options du constructeur</title>
+    <section xml:id="zend.validate.set.post_code.constructor"><info><title>Options du constructeur</title></info>
+        
 
         <para>
             Le plus basiquement possible, vous fournissez soit un objet
@@ -98,7 +96,7 @@ $validator = new Zend_Validate_PostCode($locale);
         <para>
             De plus, vous pouve zfournir un tableau ou un objet <classname>Zend_Config</classname>
             au constructeur. Quand vous faîtes ceci, vous devez inclure soit la clé "locale" ou
-            "format"&#160;;celles-ci seront utilisées pour paramétrer les valeurs appropriées dans
+            "format" ;celles-ci seront utilisées pour paramétrer les valeurs appropriées dans
             l'objet validateur.
         </para>
 
@@ -108,30 +106,30 @@ $validator = new Zend_Validate_PostCode(array(
     'format' => 'FR-\d+'
 ));
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.post_code.options">
-        <title>Options supportées par Zend_Validate_PostCode</title>
+    <section xml:id="zend.validate.set.post_code.options"><info><title>Options supportées par Zend_Validate_PostCode</title></info>
+        
 
         <para>
             Les options suivantes sont supportées par
-            <classname>Zend_Validate_PostCode</classname>&#160;:
+            <classname>Zend_Validate_PostCode</classname> :
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis><property>format</property></emphasis>&#160;: spécifie le format
+                    <emphasis><property>format</property></emphasis> : spécifie le format
                     de code postal qui sera utilisé pour la validation.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis><property>locale</property></emphasis>&#160;: spécifie la locale
+                    <emphasis><property>locale</property></emphasis> : spécifie la locale
                     à partir de laquelle le code postal sera récupéré.
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
-</sect2>
+    </section>
+</section>

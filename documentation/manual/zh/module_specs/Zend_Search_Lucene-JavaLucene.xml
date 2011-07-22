@@ -1,21 +1,22 @@
-<sect1 id="zend.search.lucene.java-lucene">
-    <title>与 Java Lucene 的互操作性</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.java-lucene"><info><title>与 Java Lucene 的互操作性</title></info>
+    
 
-    <sect2 id="zend.search.lucene.index-creation.file-formats">
-        <title>文件格式</title>
+    <section xml:id="zend.search.lucene.index-creation.file-formats"><info><title>文件格式</title></info>
+        
         <para>
           Zend_Search_Lucene 的索引文件格式和 1.4 或更高版本的 Java Lucene 二进制兼容。
         </para>
 
         <para>
           关于文件格式的更详细的描述在这里：
-          <ulink url="http://lucene.apache.org/java/docs/fileformats.html"/>。
+          <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://lucene.apache.org/java/docs/fileformats.html">http://lucene.apache.org/java/docs/fileformats.html</uri>。
           <footnote><para> 当前支持的 Lucene 索引文件格式版本是 v2.3（从ZF 1.6 版开始）。</para></footnote>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.index-directory">
-        <title>索引目录</title>
+    <section xml:id="zend.search.lucene.index-creation.index-directory"><info><title>索引目录</title></info>
+        
 
         <para>
             在创建了索引之后，索引目录中将包含下列文件：
@@ -38,10 +39,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.java-lucene.source-code">
-        <title>Java 源代码</title>
+    <section xml:id="zend.search.lucene.java-lucene.source-code"><info><title>Java 源代码</title></info>
+        
         <para>
             下面的 Java 程序提供了一个如何使用 Java Lucene 索引文件的例子：
         </para>
@@ -74,11 +75,7 @@ Reader reader = new BufferedReader(new InputStreamReader(is));
 doc.add(Field.Text("contents", reader));
 
 indexWriter.addDocument(doc);
-]]>
-</programlisting>
-    </sect2>
-</sect1>
 
-<!--
-vim:se ts=4 sw=4 et:
--->
+]]></programlisting>
+    </section>
+</section>

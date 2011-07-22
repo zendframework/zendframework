@@ -24,7 +24,7 @@
  */
 namespace Zend\Tool\Framework\Client;
 
-use Zend\Tool\Framework\Exception;
+use Zend\Tool\Framework\Client\Exception;
 
 /**
  * @uses       \Zend\Config\Config
@@ -195,7 +195,7 @@ class Config
     public function getConfigInstance()
     {
         if(!$this->exists()) {
-            throw new Exception("Client has no persistent configuration.");
+            throw new Exception\RuntimeException("Client has no persistent configuration.");
         }
 
         return $this->_config;

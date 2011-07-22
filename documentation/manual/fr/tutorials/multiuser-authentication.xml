@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.multiuser.authentication">
-    <title>Authentification d'utilisateurs dans Zend Framework</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.multiuser.authentication"><info><title>Authentification d'utilisateurs dans Zend Framework</title></info>
+    
 
-    <sect2 id="learning.multiuser.authentication.intro">
-        <title>Introduction à l'authentification</title>
+    <section xml:id="learning.multiuser.authentication.intro"><info><title>Introduction à l'authentification</title></info>
+        
 
         <para>
             Une fois que l'application a récupéré les informations d'un utilisateur, elle doit
@@ -21,10 +19,10 @@
             sous forme de chaine de caractères.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="learning.multiuser.authentication.basic-usage">
-        <title>Utilisation de base de Zend_Auth</title>
+    <section xml:id="learning.multiuser.authentication.basic-usage"><info><title>Utilisation de base de Zend_Auth</title></info>
+        
 
         <para>
             Dans l'exemple suivant, nous utiliserons <classname>Zend_Auth</classname> afin d'effectuer
@@ -60,9 +58,8 @@ CREATE TABLE users (
         <para>
             C'est une table qui inclue des champs nom, password et aussi grain de sel. Le grain de
             sel est utilisé pour améliorer la sécurité contre les attaques par force brute qui
-            cibleraient l'alogithme de hashage du mot de passe. <ulink
-                url="http://en.wikipedia.org/wiki/Salting_%28cryptography%29">Plus
-                d'informations</ulink> sur le grain de sel.
+            cibleraient l'alogithme de hashage du mot de passe. <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Salting_%28cryptography%29">Plus
+                d'informations</link> sur le grain de sel.
         </para>
 
         <para>
@@ -168,6 +165,5 @@ echo $this->form;
             <classname>Zend_Auth</classname> se trouvent décrits dans
             <link linkend="zend.auth">le guide de réference</link>.
         </para>
-    </sect2>
-</sect1>
-
+    </section>
+</section>

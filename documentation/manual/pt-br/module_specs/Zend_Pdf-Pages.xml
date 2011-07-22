@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20872 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.pdf.pages">
-    <title>Trabalhando com Páginas</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.pages"><info><title>Trabalhando com Páginas</title></info>
+    
 
-    <sect2 id="zend.pdf.pages.creation">
-        <title>Criação de Página</title>
+    <section xml:id="zend.pdf.pages.creation"><info><title>Criação de Página</title></info>
+        
 
         <para>
             As páginas em um documento <acronym>PDF</acronym> são representadas como instâncias de
@@ -57,8 +55,8 @@
             <acronym>PHP</acronym>:
         </para>
 
-        <example id="zend.pdf.pages.example-1">
-            <title>Gerenciamento de páginas de documentos PDF</title>
+        <example xml:id="zend.pdf.pages.example-1"><info><title>Gerenciamento de páginas de documentos PDF</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 ...
@@ -76,18 +74,18 @@ unset($pdf->pages[$id]);
 ...
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.pdf.pages.cloning">
-        <title>Clonagem de Página</title>
+    <section xml:id="zend.pdf.pages.cloning"><info><title>Clonagem de Página</title></info>
+        
 
         <para>
             Páginas <acronym>PDF</acronym> podem ser clonadas através da criação de um novo objeto
             <classname>Zend_Pdf_Page</classname> com uma página já existente como parâmetro:
         </para>
 
-        <example id="zend.pdf.pages.example-2">
-            <title>Clonando páginas existentes</title>
+        <example xml:id="zend.pdf.pages.example-2"><info><title>Clonando páginas existentes</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 ...
@@ -122,8 +120,5 @@ unset($pdf->pages[$templatePageIndex]);
                 página template. Um documento modificado pode ser salvo como um novo documento.
             </para>
         </caution>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

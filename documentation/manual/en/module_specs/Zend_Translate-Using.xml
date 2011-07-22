@@ -1,14 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.translate.using">
-    <title>Using Translation Adapters</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.using"><info><title>Using Translation Adapters</title></info>
+    
 
     <para>
         The next step is to use the adapter within your code.
     </para>
 
-    <example id="zend.translate.using.example1">
-        <title>Example of single-language PHP code</title>
+    <example xml:id="zend.translate.using.example1"><info><title>Example of single-language PHP code</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 print "Example\n";
@@ -33,8 +32,8 @@ print "Here is line two\n";
         translation in mind, than changing your code afterwards.
     </para>
 
-    <example id="zend.translate.using.example2">
-        <title>Example of multi-lingual PHP code</title>
+    <example xml:id="zend.translate.using.example2"><info><title>Example of multi-lingual PHP code</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate(
@@ -164,8 +163,8 @@ print $translate->_(2) . "\n";
         strings.
     </para>
 
-    <sect2 id="zend.translate.using.structure">
-        <title>Translation Source Structures</title>
+    <section xml:id="zend.translate.using.structure"><info><title>Translation Source Structures</title></info>
+        
 
         <para>
             Your next step is to create the translation sources for the
@@ -319,8 +318,5 @@ print $translate->_(2) . "\n";
             So now, that we know which structure we want to have,
             we should create our translation source files.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

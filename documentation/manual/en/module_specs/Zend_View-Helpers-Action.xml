@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.action">
-    <title>Action View Helper</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.action"><info><title>Action View Helper</title></info>
+    
 
     <para>
         The <classname>Action</classname> view helper enables view scripts to dispatch a
@@ -23,8 +22,8 @@
         module is specified, the default module is assumed.
     </para>
 
-    <example id="zend.view.helpers.initial.action.usage">
-        <title>Basic Usage of Action View Helper</title>
+    <example xml:id="zend.view.helpers.initial.action.usage"><info><title>Basic Usage of Action View Helper</title></info>
+        
 
         <para>
             As an example, you may have a <classname>CommentController</classname> with a
@@ -43,7 +42,4 @@
 </div>
 ]]></programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

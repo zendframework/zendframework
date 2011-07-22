@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.action">
-    <title>Action Controllers</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.action"><info><title>Action Controllers</title></info>
+    
 
-    <sect2 id="zend.controller.action.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.controller.action.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_Controller_Action</classname> is an abstract class you may use
@@ -57,13 +56,12 @@ class FooController extends Zend_Controller_Action
             action controller functionality
         </para>
 
-        <note>
-            <title>Default Behaviour</title>
+        <note><info><title>Default Behaviour</title></info>
+            
 
             <para>
                 By default, the <link linkend="zend.controller.front">front
-                    controller</link> enables the <link
-                    linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>
+                    controller</link> enables the <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>
                 action helper. This helper takes care of injecting the view
                 object into the controller, as well as automatically rendering
                 views. You may disable it within your action controller via one
@@ -125,10 +123,10 @@ class FooController extends Zend_Controller_Action
                 selectively within individual controllers or actions.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.action.initialization">
-        <title>Object Initialization</title>
+    <section xml:id="zend.controller.action.initialization"><info><title>Object Initialization</title></info>
+        
 
         <para>
             While you can always override the action controller's constructor, we
@@ -161,10 +159,10 @@ class FooController extends Zend_Controller_Action
     }
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.action.prepostdispatch">
-        <title>Pre- and Post-Dispatch Hooks</title>
+    <section xml:id="zend.controller.action.prepostdispatch"><info><title>Pre- and Post-Dispatch Hooks</title></info>
+        
 
         <para>
             <classname>Zend_Controller_Action</classname> specifies two methods that may
@@ -177,8 +175,8 @@ class FooController extends Zend_Controller_Action
             (<methodname>postDispatch()</methodname>).
         </para>
 
-        <note>
-            <title>Usage of init() vs. preDispatch()</title>
+        <note><info><title>Usage of init() vs. preDispatch()</title></info>
+            
 
             <para>
                 In the <link linkend="zend.controller.action.initialization">previous
@@ -209,10 +207,10 @@ class FooController extends Zend_Controller_Action
                 intentions of the two methods.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.action.accessors">
-        <title>Accessors</title>
+    <section xml:id="zend.controller.action.accessors"><info><title>Accessors</title></info>
+        
 
         <para>
             A number of objects and variables are registered with the object,
@@ -291,13 +289,13 @@ if ($this->_hasParam('id') {
                 </note>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.action.viewintegration">
-        <title>View Integration</title>
+    <section xml:id="zend.controller.action.viewintegration"><info><title>View Integration</title></info>
+        
 
-        <note id="zend.controller.action.viewintegration.viewrenderer">
-            <title>Default View Integration is Via the ViewRenderer</title>
+        <note xml:id="zend.controller.action.viewintegration.viewrenderer"><info><title>Default View Integration is Via the ViewRenderer</title></info>
+            
 
             <para>
                 The content in this section is only valid when you have explicitly disabled the
@@ -315,8 +313,8 @@ if ($this->_hasParam('id') {
             the directory hierarchy to determine the script path.
         </para>
 
-        <sect3 id="zend.controller.action.viewintegration.initview">
-            <title>View Initialization</title>
+        <section xml:id="zend.controller.action.viewintegration.initview"><info><title>View Initialization</title></info>
+            
 
             <para>
                 <methodname>initView()</methodname> initializes the view object.
@@ -355,10 +353,10 @@ applicationOrModule/
                 will be used as the base path, with directories named after the
                 individual controllers providing a hierarchy of view scripts.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.action.viewintegration.render">
-            <title>Rendering Views</title>
+        <section xml:id="zend.controller.action.viewintegration.render"><info><title>Rendering Views</title></info>
+            
 
             <para>
                 <methodname>render()</methodname> has the following signature:
@@ -380,8 +378,7 @@ string render(string $action = null,
                 override using the <filename>/[controller]/</filename> subdirectory, pass
                 a <constant>TRUE</constant> value for <varname>$noController</varname>. Finally,
                 templates are rendered into the response object; if you wish to render to
-                a specific <link
-                    linkend="zend.controller.response.namedsegments">named
+                a specific <link linkend="zend.controller.response.namedsegments">named
                     segment</link> in the response object, pass a value to
                 <varname>$name</varname>.
             </para>
@@ -435,11 +432,11 @@ class MyController extends Zend_Controller_Action
     }
 }
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.controller.action.utilmethods">
-        <title>Utility Methods</title>
+    <section xml:id="zend.controller.action.utilmethods"><info><title>Utility Methods</title></info>
+        
 
         <para>
             Besides the accessors and view integration methods,
@@ -517,10 +514,10 @@ class MyController extends Zend_Controller_Action
                 </itemizedlist>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.action.subclassing">
-        <title>Subclassing the Action Controller</title>
+    <section xml:id="zend.controller.action.subclassing"><info><title>Subclassing the Action Controller</title></info>
+        
 
         <para>
             By design, <classname>Zend_Controller_Action</classname> must be subclassed
@@ -536,8 +533,8 @@ class MyController extends Zend_Controller_Action
             <classname>Zend_Controller_Action</classname> could solve such redundancy.
         </para>
 
-        <example id="zend.controller.action.subclassing.example-call">
-            <title>Handling Non-Existent Actions</title>
+        <example xml:id="zend.controller.action.subclassing.example-call"><info><title>Handling Non-Existent Actions</title></info>
+            
 
             <para>
                 If a request to a controller is made that includes an undefined
@@ -648,8 +645,5 @@ abstract class My_Base_Controller extends Zend_Controller_Action
             flexibility of this particular component and how you can shape it to
             your application's or site's needs.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="performance.view">
-    <title>View Rendering</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.view"><info><title>View Rendering</title></info>
+    
 
     <para>
         When using Zend Framework's <acronym>MVC</acronym> layer, chances are you will be using
@@ -15,8 +14,8 @@
         cost.
     </para>
 
-    <sect2 id="performance.view.pluginloader">
-        <title>How can I speed up resolution of view helpers?</title>
+    <section xml:id="performance.view.pluginloader"><info><title>How can I speed up resolution of view helpers?</title></info>
+        
 
         <para>
             Most <classname>Zend_View</classname> "methods" are actually provided via
@@ -30,8 +29,7 @@
         </para>
 
         <para>
-            Internally, <classname>Zend_View</classname> uses the <link
-                linkend="zend.loader.pluginloader">PluginLoader</link> to look
+            Internally, <classname>Zend_View</classname> uses the <link linkend="zend.loader.pluginloader">PluginLoader</link> to look
             up helper classes. This means that for each helper you call,
             <classname>Zend_View</classname> needs to pass the helper name to the
             PluginLoader, which then needs to determine the class name, load the
@@ -45,23 +43,21 @@
             The question, then, is: how can you speed up helper resolution?
         </para>
 
-        <sect3 id="performance.view.pluginloader.cache">
-            <title>Use the PluginLoader include file cache</title>
+        <section xml:id="performance.view.pluginloader.cache"><info><title>Use the PluginLoader include file cache</title></info>
+            
 
             <para>
-                The simplest, cheapest solution is the same as for <link
-                    linkend="performance.classloading.pluginloader">general
-                    PluginLoader performance</link>: <link
-                    linkend="zend.loader.pluginloader.performance.example">use
+                The simplest, cheapest solution is the same as for <link linkend="performance.classloading.pluginloader">general
+                    PluginLoader performance</link>: <link linkend="zend.loader.pluginloader.performance.example">use
                     the PluginLoader include file cache</link>. Anecdotal
                 evidence has shown this technique to provide a 25-30%
                 performance gain on systems without an opcode cache, and a
                 40-65% gain on systems with an opcode cache.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="performance.view.pluginloader.extend">
-            <title>Extend Zend_View to provide often used helper methods</title>
+        <section xml:id="performance.view.pluginloader.extend"><info><title>Extend Zend_View to provide often used helper methods</title></info>
+            
 
             <para>
                 Another solution for those seeking to tune performance even
@@ -123,11 +119,11 @@ class My_View extends Zend_View
                 PluginLoader entirely, and either benefiting from autoloading or
                 bypassing it altogether.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="performance.view.partial">
-        <title>How can I speed up view partials?</title>
+    <section xml:id="performance.view.partial"><info><title>How can I speed up view partials?</title></info>
+        
 
         <para>
             Those who use partials heavily and who profile their applications
@@ -136,8 +132,8 @@ class My_View extends Zend_View
             object. Is it possible to speed this up?
         </para>
 
-        <sect3 id="performance.view.partial.render">
-            <title>Use partial() only when really necessary</title>
+        <section xml:id="performance.view.partial.render"><info><title>Use partial() only when really necessary</title></info>
+            
 
             <para>
                 The <methodname>partial()</methodname> view helper accepts three arguments:
@@ -186,11 +182,11 @@ class My_View extends Zend_View
                 <classname>Zend_View</classname>'s built-in <methodname>render()</methodname>
                 method to render the view script.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="performance.view.action">
-        <title>How can I speed up calls to the action() view helper?</title>
+    <section xml:id="performance.view.action"><info><title>How can I speed up calls to the action() view helper?</title></info>
+        
 
         <para>
             Version 1.5.0 introduced the <methodname>action()</methodname> view helper,
@@ -207,13 +203,12 @@ class My_View extends Zend_View
             How can you speed it up?
         </para>
 
-        <sect3 id="performance.view.action.actionstack">
-            <title>Use the ActionStack when possible</title>
+        <section xml:id="performance.view.action.actionstack"><info><title>Use the ActionStack when possible</title></info>
+            
 
             <para>
                 Introduced at the same time as the <methodname>action()</methodname> view
-                helper, the <link
-                    linkend="zend.controller.actionhelpers.actionstack">ActionStack</link>
+                helper, the <link linkend="zend.controller.actionhelpers.actionstack">ActionStack</link>
                 consists of an action helper and a front controller plugin.
                 Together, they allow you to push additional actions to invoke
                 during the dispatch cycle onto a stack. If you are calling
@@ -277,10 +272,10 @@ class LoginPlugin extends Zend_Controller_Plugin_Abstract
                 front controller plugins for handling <acronym>ACL</acronym>'s to particular
                 actions.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="performance.view.action.model">
-            <title>Favor helpers that query the model over action()</title>
+        <section xml:id="performance.view.action.model"><info><title>Favor helpers that query the model over action()</title></info>
+            
 
             <para>
                 In most cases, using <methodname>action()</methodname> is simply overkill.
@@ -364,9 +359,6 @@ class My_View_Helper_BugList extends Zend_View_Helper_Abstract
                 <methodname>action()</methodname> view helper, and also presents a more
                 semantically understandable <acronym>API</acronym>.
             </para>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

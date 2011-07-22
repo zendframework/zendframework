@@ -1,18 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.service.amazon.ec2.images">
-    <title>Zend_Service_Amazon_Ec2: Amazon Machine Images (AMI)</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.images"><info><title>Zend_Service_Amazon_Ec2: Amazon Machine Images (AMI)</title></info>
+    
 
     <para>
         Amazon Machine Images (AMIs) are preconfigured with an ever-growing list
         of operating systems.
     </para>
 
-    <sect2 id="zend.service.amazon.ec2.images.info">
-        <title>AMI Information Utilities</title>
+    <section xml:id="zend.service.amazon.ec2.images.info"><info><title>AMI Information Utilities</title></info>
+        
 
-        <example id="zend.service.amazon.ec2.images.register">
-            <title>Register an AMI with EC2</title>
+        <example xml:id="zend.service.amazon.ec2.images.register"><info><title>Register an AMI with EC2</title></info>
+            
 
             <para>
                 <code>register</code> Each <acronym>AMI</acronym> is associated with an unique ID
@@ -32,8 +31,8 @@ $ip = $ec2_img->register('imageLocation');
 ]]></programlisting>
         </example>
 
-        <example id="zend.service.amazon.ec2.images.deregister">
-            <title>Deregister an AMI with EC2</title>
+        <example xml:id="zend.service.amazon.ec2.images.deregister"><info><title>Deregister an AMI with EC2</title></info>
+            
 
             <para>
                 <code>deregister</code>, Deregisters an <acronym>AMI</acronym>. Once deregistered,
@@ -51,8 +50,8 @@ $ip = $ec2_img->deregister('imageId');
 ]]></programlisting>
         </example>
 
-        <example id="zend.service.amazon.ec2.images.describe">
-            <title>Describe an AMI</title>
+        <example xml:id="zend.service.amazon.ec2.images.describe"><info><title>Describe an AMI</title></info>
+            
 
             <para>
                 <code>describe</code> Returns information about <acronym>AMI</acronym>s, AKIs, and
@@ -65,8 +64,8 @@ $ip = $ec2_img->deregister('imageId');
             </para>
 
             <para>
-                <table id="zend.service.amazon.ec2.images.describe-table">
-                    <title>Launch permissions fall into three categories</title>
+                <table xml:id="zend.service.amazon.ec2.images.describe-table"><info><title>Launch permissions fall into three categories</title></info>
+                    
 
                     <tgroup cols="2">
                         <thead>
@@ -157,19 +156,19 @@ $ec2_img = new Zend_Service_Amazon_Ec2_Image('aws_key','aws_secret_key');
 $ip = $ec2_img->describe();
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.amazon.ec2.images.attribute">
-        <title>AMI Attribute Utilities</title>
+    <section xml:id="zend.service.amazon.ec2.images.attribute"><info><title>AMI Attribute Utilities</title></info>
+        
 
-        <example id="zend.service.amazon.ec2.images.attribute.modify">
-            <title>Modify Image Attributes</title>
+        <example xml:id="zend.service.amazon.ec2.images.attribute.modify"><info><title>Modify Image Attributes</title></info>
+            
 
             <para>Modifies an attribute of an <acronym>AMI</acronym></para>
 
             <para>
-                <table id="zend.service.amazon.ec2.images.attribute.modify-table">
-                    <title>Valid Attributes</title>
+                <table xml:id="zend.service.amazon.ec2.images.attribute.modify-table"><info><title>Valid Attributes</title></info>
+                    
 
                     <tgroup cols="2">
                         <thead>
@@ -241,8 +240,8 @@ $return = $ec2_img->modifyAttribute('imageId',
 ]]></programlisting>
         </example>
 
-        <example id="zend.service.amazon.ec2.images.attribute.reset">
-            <title>Reset an AMI Attribute</title>
+        <example xml:id="zend.service.amazon.ec2.images.attribute.reset"><info><title>Reset an AMI Attribute</title></info>
+            
 
             <para>
                 <code>resetAttribute</code> will reset the attribute of an <acronym>AMI</acronym> to
@@ -255,8 +254,8 @@ $return = $ec2_img->resetAttribute('imageId', 'launchPermission');
 ]]></programlisting>
         </example>
 
-        <example id="zend.service.amazon.ec2.images.attribute.describe">
-            <title>Describe AMI Attribute</title>
+        <example xml:id="zend.service.amazon.ec2.images.attribute.describe"><info><title>Describe AMI Attribute</title></info>
+            
 
             <para>
                 <code>describeAttribute</code> returns information about an attribute of an
@@ -274,5 +273,5 @@ $ec2_img = new Zend_Service_Amazon_Ec2_Image('aws_key','aws_secret_key');
 $return = $ec2_img->describeAttribute('imageId', 'launchPermission');
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

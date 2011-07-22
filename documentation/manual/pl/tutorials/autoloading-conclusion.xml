@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19778 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.autoloading.conclusion">
-    <title>Podsumowanie</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.conclusion"><info><title>Podsumowanie</title></info>
+    
 
     <para>
         Zend Framework zachęca do stosowanie automatycznego ładowania plików a nawet korzysta z
@@ -17,4 +17,4 @@
         <link linkend="zend.loader.autoloader">Zend_Loader_Autoloader</link> oraz
         <link linkend="zend.loader.autoloader-resource">Zend_Loader_Autoloader_Resource</link>.
     </para>
-</sect1>
+</section>

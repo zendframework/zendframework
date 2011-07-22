@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.barcode">
-    <title>Barcode</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.barcode"><info><title>Barcode</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Barcode</classname> allows you to check if a given value can be
@@ -350,8 +349,8 @@
         </listitem>
     </itemizedlist>
 
-    <sect3 id="zend.validate.set.barcode.options">
-        <title>Supported options for Zend_Validate_Barcode</title>
+    <section xml:id="zend.validate.set.barcode.options"><info><title>Supported options for Zend_Validate_Barcode</title></info>
+        
 
         <para>
             The following options are supported for <classname>Zend_Validate_Barcode</classname>:
@@ -381,10 +380,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.barcode.basic">
-        <title>Basic usage</title>
+    <section xml:id="zend.validate.set.barcode.basic"><info><title>Basic usage</title></info>
+        
 
         <para>
             To validate if a given string is a barcode you just need to know its type. See the
@@ -399,10 +398,10 @@ if ($valid->isValid($input)) {
     // input is invalid
 }
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.barcode.checksum">
-        <title>Optional checksum</title>
+    <section xml:id="zend.validate.set.barcode.checksum"><info><title>Optional checksum</title></info>
+        
 
         <para>
             Some barcodes can be provided with an optional checksum. These barcodes would be valid
@@ -424,8 +423,8 @@ if ($valid->isValid($input)) {
 }
 ]]></programlisting>
 
-        <note>
-            <title>Reduced security by disabling checksum validation</title>
+        <note><info><title>Reduced security by disabling checksum validation</title></info>
+            
 
             <para>
                  By switching off checksum validation you will also reduce the security of the used
@@ -434,10 +433,10 @@ if ($valid->isValid($input)) {
                  which would not be valid could then be returned as valid even if they are not.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.barcode.custom">
-        <title>Writing custom adapters</title>
+    <section xml:id="zend.validate.set.barcode.custom"><info><title>Writing custom adapters</title></info>
+        
 
         <para>
             You may write custom barcode validators for usage with
@@ -538,8 +537,5 @@ if ($valid->isValid($input)) {
     // input is invalid
 }
 ]]></programlisting>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

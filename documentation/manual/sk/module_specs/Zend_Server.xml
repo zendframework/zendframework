@@ -1,5 +1,8 @@
-<sect1 id="zend.server.introduction">
-    <title>Úvod</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.server.introduction"><info><title>Úvod</title></info>
+    
     <para>
         Skupina tried <code>Zend_Server</code> poskytuje funkcionalitu pre viaceré
         triedy, vrátane <code>Zend_XmlRpc_Server</code>, <code>Zend_Rest_Server</code>,
@@ -15,7 +18,4 @@
         použitie v metódach rozhrania <code>Zend_Server_Interface</code> (
         <code>getFunctions()</code> a <code>loadFunctions()</code>).
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

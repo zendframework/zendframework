@@ -1,19 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.log.writers" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Writers</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers"><info><title>Writers</title></info>
+    
 
     <para>
         A Writer is an object that inherits from <classname>Zend_Log_Writer_Abstract</classname>.
         A Writer's responsibility is to record log data to a storage backend.
     </para>
 
-    <sect2 id="zend.log.writers.stream">
-        <title>Writing to Streams</title>
+    <section xml:id="zend.log.writers.stream"><info><title>Writing to Streams</title></info>
+        
 
         <para>
             <classname>Zend_Log_Writer_Stream</classname> sends log
-            data to a <ulink url="http://www.php.net/stream">PHP stream</ulink>.
+            data to a <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/stream">PHP stream</link>.
         </para>
 
         <para>
@@ -31,8 +30,8 @@ $logger->info('Informational message');
 
         <para>
             To write data to a file, use one of the
-            <ulink url="http://www.php.net/manual/en/wrappers.php#wrappers.file">Filesystem
-            URLs</ulink>:
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/wrappers.php#wrappers.file">Filesystem
+            URLs</link>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -69,10 +68,10 @@ $logger->info('Informational message');
             You cannot specify the mode for existing stream resources. Doing so
             causes a <classname>Zend_Log_Exception</classname> to be thrown.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.log.writers.database">
-        <title>Writing to Databases</title>
+    <section xml:id="zend.log.writers.database"><info><title>Writing to Databases</title></info>
+        
 
         <para>
             <classname>Zend_Log_Writer_Db</classname> writes log information to a database table
@@ -102,15 +101,15 @@ $logger->info('Informational message');
             'log_table_name' table. The database column named 'lvl'
             receives the priority number and the column named 'msg' receives the log message.
         </para>
-    </sect2>
+    </section>
 
-    <xi:include href="Zend_Log-Writers-Firebug.xml" />
-    <xi:include href="Zend_Log-Writers-Mail.xml" />
-    <xi:include href="Zend_Log-Writers-Syslog.xml" />
-    <xi:include href="Zend_Log-Writers-ZendMonitor.xml" />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Log-Writers-Firebug.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Log-Writers-Mail.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Log-Writers-Syslog.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Log-Writers-ZendMonitor.xml"/>
 
-    <sect2 id="zend.log.writers.null">
-        <title>Stubbing Out the Writer</title>
+    <section xml:id="zend.log.writers.null"><info><title>Stubbing Out the Writer</title></info>
+        
 
         <para>
             The <classname>Zend_Log_Writer_Null</classname> is a stub that does not write log data
@@ -124,10 +123,10 @@ $logger = new Zend_Log($writer);
 // goes nowhere
 $logger->info('Informational message');
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.log.writers.mock">
-        <title>Testing with the Mock</title>
+    <section xml:id="zend.log.writers.mock"><info><title>Testing with the Mock</title></info>
+        
 
         <para>
             The <classname>Zend_Log_Writer_Mock</classname> is a very simple writer that records
@@ -153,12 +152,12 @@ var_dump($mock->events[0]);
 
         <para>
             To clear the events logged by the mock, simply set
-            <command>$mock->events = array()</command>.
+            <command>$mock-&gt;events = array()</command>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.log.writers.compositing">
-        <title>Compositing Writers</title>
+    <section xml:id="zend.log.writers.compositing"><info><title>Compositing Writers</title></info>
+        
 
         <para>
             There is no composite Writer object. However, a Log instance can write
@@ -177,5 +176,5 @@ $logger->addWriter($writer2);
 // goes to both writers
 $logger->info('Informational message');
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

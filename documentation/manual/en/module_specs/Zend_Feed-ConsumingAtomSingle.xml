@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.feed.consuming-atom-single-entry">
-    <title>Consuming a Single Atom Entry</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom-single-entry"><info><title>Consuming a Single Atom Entry</title></info>
+    
 
     <para>
         Single Atom <command>&lt;entry&gt;</command> elements are also valid by themselves. Usually
@@ -16,8 +15,8 @@
         object, but it will automatically create an "anonymous" feed to contain the entry.
     </para>
 
-    <example id="zend.feed.consuming-atom-single-entry.example.atom">
-        <title>Reading a Single-Entry Atom Feed</title>
+    <example xml:id="zend.feed.consuming-atom-single-entry.example.atom"><info><title>Reading a Single-Entry Atom Feed</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
@@ -32,15 +31,12 @@ $entry = $feed->current();
         an <command>&lt;entry&gt;</command>-only document:
     </para>
 
-    <example id="zend.feed.consuming-atom-single-entry.example.entryatom">
-        <title>Using the Entry Object Directly for a Single-Entry Atom Feed</title>
+    <example xml:id="zend.feed.consuming-atom-single-entry.example.entryatom"><info><title>Using the Entry Object Directly for a Single-Entry Atom Feed</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $entry = new Zend_Feed_Entry_Atom('http://atom.example.com/feed/1');
 echo $entry->title();
 ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.json.basics">
-    <title>Uso Básico</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.basics"><info><title>Uso Básico</title></info>
+    
 
     <para>
         O uso do <classname>Zend_Json</classname> envolve usar os dois métodos
@@ -18,8 +16,8 @@ $phpNative = Zend_Json::decode($encodedValue);
 $json = Zend_Json::encode($phpNative);
 ]]></programlisting>
 
-    <sect2 id="zend.json.basics.prettyprint">
-        <title>Impressão Formatada do JSON</title>
+    <section xml:id="zend.json.basics.prettyprint"><info><title>Impressão Formatada do JSON</title></info>
+        
 
         <para>
             Pode ser difícil as vezes explorar os dados <acronym>JSON</acronym> gerados por
@@ -42,8 +40,5 @@ if($debug) {
             matriz de opções. A opção <code>indent</code> lhe permite definir a string de recuo -
             por padrão é um único caractere de tabulação.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

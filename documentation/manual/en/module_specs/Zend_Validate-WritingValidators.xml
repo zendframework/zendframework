@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.validate.writing_validators">
-    <title>Writing Validators</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.writing_validators"><info><title>Writing Validators</title></info>
+    
 
     <para>
         <classname>Zend_Validate</classname> supplies a set of commonly needed validators, but
@@ -15,8 +14,7 @@
         be implemented by user classes in order to create custom validation objects. An object that
         implements <classname>Zend_Validate_Interface</classname> interface may be added to a
         validator chain with <methodname>Zend_Validate::addValidator()</methodname>. Such objects
-        may also be used with <link
-            linkend="zend.filter.input"><classname>Zend_Filter_Input</classname></link>.
+        may also be used with <link linkend="zend.filter.input"><classname>Zend_Filter_Input</classname></link>.
     </para>
 
     <para>
@@ -49,8 +47,8 @@
         determined.
     </para>
 
-    <example id="zend.validate.writing_validators.example.simple">
-        <title>Creating a Simple Validation Class</title>
+    <example xml:id="zend.validate.writing_validators.example.simple"><info><title>Creating a Simple Validation Class</title></info>
+        
 
         <para>
             The following example demonstrates how a very simple custom validator might be written.
@@ -92,8 +90,8 @@ class MyValid_Float extends Zend_Validate_Abstract
         </para>
     </example>
 
-    <example id="zend.validate.writing_validators.example.conditions.dependent">
-        <title>Writing a Validation Class having Dependent Conditions</title>
+    <example xml:id="zend.validate.writing_validators.example.conditions.dependent"><info><title>Writing a Validation Class having Dependent Conditions</title></info>
+        
 
         <para>
             The following example demonstrates a more complex set of validation rules, where it is
@@ -185,8 +183,8 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
         </para>
     </example>
 
-    <example id="zend.validate.writing_validators.example.conditions.independent">
-        <title>Validation with Independent Conditions, Multiple Reasons for Failure</title>
+    <example xml:id="zend.validate.writing_validators.example.conditions.independent"><info><title>Validation with Independent Conditions, Multiple Reasons for Failure</title></info>
+        
 
         <para>
             Consider writing a validation class for password strength enforcement - when a user is
@@ -260,7 +258,4 @@ class MyValid_PasswordStrength extends Zend_Validate_Abstract
             messages to be returned by a subsequent call to <methodname>getMessages()</methodname>.
         </para>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,10 +1,11 @@
-<sect1 id="zend.db.table">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table"><info><title>Zend_Db_Table</title></info>
 
-    <title>Zend_Db_Table</title>
+    
 
-    <sect2 id="zend.db.table.introduction">
+    <section xml:id="zend.db.table.introduction"><info><title>Класс таблицы - введение</title></info>
 
-        <title>Класс таблицы - введение</title>
+        
 
         <para>
             Класс Zend_Db_Table является объектно-ориентированным интерфейсом к
@@ -15,25 +16,25 @@
 
         <para>
             Решением Zend_Db_Table является реализация паттерна
-            <ulink url="http://www.martinfowler.com/eaaCatalog/tableDataGateway.html">Table Data Gateway</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.martinfowler.com/eaaCatalog/tableDataGateway.html">Table Data Gateway</link>.
             Это решение также включает в себя класс, реализующий паттерн
-            <ulink url="http://www.martinfowler.com/eaaCatalog/rowDataGateway.html">Row Data Gateway</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.martinfowler.com/eaaCatalog/rowDataGateway.html">Row Data Gateway</link>.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.defining">
+    <section xml:id="zend.db.table.defining"><info><title>Определение класса таблицы</title></info>
 
-        <title>Определение класса таблицы</title>
+        
 
         <para>
             Для каждой таблицы в БД, к которой нужен доступ, определяется класс,
             наследующий от Zend_Db_Table_Abstract.
         </para>
 
-        <sect3 id="zend.db.table.defining.table-schema">
+        <section xml:id="zend.db.table.defining.table-schema"><info><title>Определение имени и схемы таблицы</title></info>
 
-            <title>Определение имени и схемы таблицы</title>
+            
 
             <para>
                 Указывайте таблицу, для которой определен этот класс, используя
@@ -42,17 +43,17 @@
                 представлена в БД.
             </para>
 
-            <example id="zend.db.table.defining.table-schema.example1">
+            <example xml:id="zend.db.table.defining.table-schema.example1"><info><title>Объявление класса таблицы с явным определением имени таблицы</title></info>
 
-                <title>Объявление класса таблицы с явным определением имени таблицы</title>
+                
 
                 <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_name = 'bugs';
 }
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
             </example>
 
@@ -62,17 +63,17 @@ class Bugs extends Zend_Db_Table_Abstract
                 должно иметь то же написание, что и имя таблицы в БД.
             </para>
 
-            <example id="zend.db.table.defining.table-schema.example">
+            <example xml:id="zend.db.table.defining.table-schema.example"><info><title>Объявление класса таблицы с неявным определением имени таблицы</title></info>
 
-                <title>Объявление класса таблицы с неявным определением имени таблицы</title>
+                
 
                 <programlisting language="php"><![CDATA[
 class bugs extends Zend_Db_Table_Abstract
 {
     // имя таблицы соответствует имени класса
 }
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
             </example>
 
@@ -87,9 +88,9 @@ class bugs extends Zend_Db_Table_Abstract
                 "пространство таблиц", они используются аналогичным образом.
             </para>
 
-            <example id="zend.db.table.defining.table-schema.example3">
+            <example xml:id="zend.db.table.defining.table-schema.example3"><info><title>Объявление класса таблицы со схемой</title></info>
 
-                <title>Объявление класса таблицы со схемой</title>
+                
 
                 <programlisting language="php"><![CDATA[
 // Первый способ:
@@ -112,8 +113,8 @@ class Bugs extends Zend_Db_Table_Abstract
     protected $_name   = 'bug_db.bugs';
     protected $_schema = 'ignored';
 }
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
             </example>
 
@@ -126,9 +127,9 @@ class Bugs extends Zend_Db_Table_Abstract
                 переданное через опцию <code>schema</code>.
             </para>
 
-            <example id="zend.db.table.defining.table-schema.example.constructor">
+            <example xml:id="zend.db.table.defining.table-schema.example.constructor"><info><title>Объявление имен таблицы и схемы во время инстанцирования</title></info>
 
-                <title>Объявление имен таблицы и схемы во время инстанцирования</title>
+                
 
                 <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
@@ -148,8 +149,8 @@ $tableBugs = new Bugs(array('name' => 'bug_db.bugs');
 
 $tableBugs = new Bugs(array('name' => 'bug_db.bugs',
                             'schema' => 'ignored');
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
             </example>
 
@@ -158,11 +159,11 @@ $tableBugs = new Bugs(array('name' => 'bug_db.bugs',
                 схема, к которой подключен ваш экземпляр адаптера БД.
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.defining.primary-key">
+        <section xml:id="zend.db.table.defining.primary-key"><info><title>Определение первичного ключа таблицы</title></info>
 
-            <title>Определение первичного ключа таблицы</title>
+            
 
             <para>
                 Каждая таблица должна иметь первичный ключ. Вы можете объявить
@@ -172,9 +173,9 @@ $tableBugs = new Bugs(array('name' => 'bug_db.bugs',
                 составным.
             </para>
 
-            <example id="zend.db.table.defining.primary-key.example">
+            <example xml:id="zend.db.table.defining.primary-key.example"><info><title>Пример определения первичного ключа</title></info>
 
-                <title>Пример определения первичного ключа</title>
+                
 
                 <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
@@ -182,8 +183,8 @@ class Bugs extends Zend_Db_Table_Abstract
     protected $_name = 'bugs';
     protected $_primary = 'bug_id';
 }
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
             </example>
 
@@ -207,11 +208,11 @@ class Bugs extends Zend_Db_Table_Abstract
 
             </note>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.defining.setup">
+        <section xml:id="zend.db.table.defining.setup"><info><title>Переопределение методов установки таблицы</title></info>
 
-            <title>Переопределение методов установки таблицы</title>
+            
 
             <para>
                 Когда создается экземпляр класса таблицы, конструктор вызывает
@@ -221,12 +222,12 @@ class Bugs extends Zend_Db_Table_Abstract
                 вызываться родительский метод.
             </para>
 
-            <example id="zend.db.table.defining.setup.example">
+            <example xml:id="zend.db.table.defining.setup.example"><info><title>Пример переопределения метода _setupTableName()</title></info>
 
-                <title>Пример переопределения метода _setupTableName()</title>
+                
 
-                <programlisting language="php">
-<![CDATA[
+                <programlisting language="php"><![CDATA[
+
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected function _setupTableName()
@@ -235,8 +236,8 @@ class Bugs extends Zend_Db_Table_Abstract
         parent::_setupTableName();
     }
 }
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
             </example>
 
@@ -285,11 +286,11 @@ class Bugs extends Zend_Db_Table_Abstract
                 </listitem>
             </itemizedlist>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.initialization">
+        <section xml:id="zend.db.table.initialization"><info><title>Инициализация таблицы</title></info>
 
-            <title>Инициализация таблицы</title>
+            
 
             <para>
                 Если при создании объекта таблицы требуется выполнять код,
@@ -300,12 +301,12 @@ class Bugs extends Zend_Db_Table_Abstract
                 <code>__construct</code>, если только не требуется изменять
                 метаданные программным путем.
 
-                <example id="zend.db.table.defining.init.usage.example">
+                <example xml:id="zend.db.table.defining.init.usage.example"><info><title>Пример использования метода init()</title></info>
 
-                    <title>Пример использования метода init()</title>
+                    
 
-                    <programlisting language="php">
-<![CDATA[
+                    <programlisting language="php"><![CDATA[
+
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_observer;
@@ -315,20 +316,20 @@ class Bugs extends Zend_Db_Table_Abstract
         $this->_observer = new MyObserverClass();
     }
 }
-]]>
-                    </programlisting>
+
+                    ]]></programlisting>
 
                 </example>
 
             </para>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.constructing">
+    <section xml:id="zend.db.table.constructing"><info><title>Создание экземпляра класса таблицы</title></info>
 
-        <title>Создание экземпляра класса таблицы</title>
+        
 
         <para>
             До того, как начать использование класса таблицы, создайте его
@@ -339,9 +340,9 @@ class Bugs extends Zend_Db_Table_Abstract
             классу таблицы, и эти три способа описаны ниже:
         </para>
 
-        <sect3 id="zend.db.table.constructing.adapter">
+        <section xml:id="zend.db.table.constructing.adapter"><info><title>Установка адаптера БД</title></info>
 
-            <title>Установка адаптера БД</title>
+            
 
             <para>
                 Первым способом предоставления адаптера БД классу таблицы
@@ -349,25 +350,25 @@ class Bugs extends Zend_Db_Table_Abstract
                 массиве опций под ключом <code>'db'</code>.
             </para>
 
-            <example id="zend.db.table.constructing.adapter.example">
+            <example xml:id="zend.db.table.constructing.adapter.example"><info><title>Пример создания экземпляра таблицы с использованием объекта адаптера</title></info>
 
-                <title>Пример создания экземпляра таблицы с использованием объекта адаптера</title>
+                
 
-                <programlisting language="php">
-<![CDATA[
+                <programlisting language="php"><![CDATA[
+
 $db = Zend_Db::factory('PDO_MYSQL', $options);
 
 $table = new Bugs(array('db' => $db));
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.constructing.default-adapter">
+        <section xml:id="zend.db.table.constructing.default-adapter"><info><title>Установка используемого по умолчанию адаптера БД</title></info>
 
-            <title>Установка используемого по умолчанию адаптера БД</title>
+            
 
             <para>
                 Вторым способом предоставления адаптера БД классу таблицы
@@ -378,20 +379,20 @@ $table = new Bugs(array('db' => $db));
                 аргументом является объект типа Zend_Db_Adapter_Abstract.
             </para>
 
-            <example id="zend.db.table.constructing.default-adapter.example">
+            <example xml:id="zend.db.table.constructing.default-adapter.example"><info><title>Пример создания экземпляра таблицы с адаптером, используемым по умолчанию</title></info>
 
-                <title>Пример создания экземпляра таблицы с адаптером, используемым по умолчанию</title>
+                
 
-                <programlisting language="php">
-<![CDATA[
+                <programlisting language="php"><![CDATA[
+
 $db = Zend_Db::factory('PDO_MYSQL', $options);
 Zend_Db_Table_Abstract::setDefaultAdapter($db);
 
 // Далее...
 
 $table = new Bugs();
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
             </example>
 
@@ -405,12 +406,12 @@ $table = new Bugs();
                 экземпляром адаптера.
             </para>
 
-        </sect3>
+        </section>
 
 
-        <sect3 id="zend.db.table.constructing.registry">
+        <section xml:id="zend.db.table.constructing.registry"><info><title>Хранение адаптера БД в реестре</title></info>
 
-            <title>Хранение адаптера БД в реестре</title>
+            
 
             <para>
                 Третий способ передачи адаптера БД классу таблицы -
@@ -420,20 +421,20 @@ $table = new Bugs();
                 типа Zend_Db_Adapter_Abstract.
             </para>
 
-            <example id="zend.db.table.constructing.registry.example">
+            <example xml:id="zend.db.table.constructing.registry.example"><info><title>Пример создания экземпляра таблицы с использованием ключа реестра</title></info>
 
-                <title>Пример создания экземпляра таблицы с использованием ключа реестра</title>
+                
 
-                <programlisting language="php">
-<![CDATA[
+                <programlisting language="php"><![CDATA[
+
 $db = Zend_Db::factory('PDO_MYSQL', $options);
 Zend_Registry::set('my_db', $db);
 
 // Далее...
 
 $table = new Bugs(array('db' => 'my_db'));
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
             </example>
 
@@ -449,13 +450,13 @@ $table = new Bugs(array('db' => 'my_db'));
                 адаптеров.
             </para>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.insert">
+    <section xml:id="zend.db.table.insert"><info><title>Добавление строк в таблицу</title></info>
 
-        <title>Добавление строк в таблицу</title>
+        
 
         <para>
             Вы можете использовать объект таблицы для добавления строк в таблицу
@@ -465,9 +466,9 @@ $table = new Bugs(array('db' => 'my_db'));
             значения.
         </para>
 
-        <example id="zend.db.table.insert.example">
+        <example xml:id="zend.db.table.insert.example"><info><title>Пример добавления строк в таблицу</title></info>
 
-            <title>Пример добавления строк в таблицу</title>
+            
 
             <programlisting language="php"><![CDATA[
 $table = new Bugs();
@@ -479,8 +480,8 @@ $data = array(
 );
 
 $table->insert($data);
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </example>
 
@@ -492,9 +493,9 @@ $table->insert($data);
             объекты типа Zend_Db_Expr.
         </para>
 
-        <example id="zend.db.table.insert.example-expr">
+        <example xml:id="zend.db.table.insert.example-expr"><info><title>Пример добавления выражений в таблицу</title></info>
 
-            <title>Пример добавления выражений в таблицу</title>
+            
 
             <programlisting language="php"><![CDATA[
 $table = new Bugs();
@@ -504,8 +505,8 @@ $data = array(
     'bug_description' => 'Something wrong',
     'bug_status'      => 'NEW'
 );
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </example>
 
@@ -517,9 +518,9 @@ $data = array(
             первичных ключей.
         </para>
 
-        <sect3 id="zend.db.table.insert.key-auto">
+        <section xml:id="zend.db.table.insert.key-auto"><info><title>Использование таблицы с автоинкрементным ключом</title></info>
 
-            <title>Использование таблицы с автоинкрементным ключом</title>
+            
 
             <para>
                 Автоинкрементный первичный ключ генерирует уникальное
@@ -534,9 +535,9 @@ $data = array(
                 столбец.
             </para>
 
-            <example id="zend.db.table.insert.key-auto.example">
+            <example xml:id="zend.db.table.insert.key-auto.example"><info><title>Пример объявления таблицы с автоинкрементным первичным ключом</title></info>
 
-                <title>Пример объявления таблицы с автоинкрементным первичным ключом</title>
+                
 
                 <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
@@ -547,8 +548,8 @@ class Bugs extends Zend_Db_Table_Abstract
     // устанавливать его не обязательно
     protected $_sequence = true;
 }
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
             </example>
 
@@ -569,11 +570,11 @@ class Bugs extends Zend_Db_Table_Abstract
                 <constant>TRUE</constant>.
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.insert.key-sequence">
+        <section xml:id="zend.db.table.insert.key-sequence"><info><title>Использование таблицы с последовательностью</title></info>
 
-            <title>Использование таблицы с последовательностью</title>
+            
 
             <para>
                 Последовательность (sequence) является объектом базы данных,
@@ -591,9 +592,9 @@ class Bugs extends Zend_Db_Table_Abstract
                 <code>INSERT</code>.
             </para>
 
-            <example id="zend.db.table.insert.key-sequence.example">
+            <example xml:id="zend.db.table.insert.key-sequence.example"><info><title>Пример объявления таблицы с последовательностью</title></info>
 
-                <title>Пример объявления таблицы с последовательностью</title>
+                
 
                 <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
@@ -602,8 +603,8 @@ class Bugs extends Zend_Db_Table_Abstract
 
     protected $_sequence = 'bug_sequence';
 }
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
             </example>
 
@@ -622,11 +623,11 @@ class Bugs extends Zend_Db_Table_Abstract
                 следующего значения ключа.
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.insert.key-natural">
+        <section xml:id="zend.db.table.insert.key-natural"><info><title>Использование таблицы с естественным ключом</title></info>
 
-            <title>Использование таблицы с естественным ключом</title>
+            
 
             <para>
                 Некоторые таблицы имеют естественные ключи. Это означает, что
@@ -644,9 +645,9 @@ class Bugs extends Zend_Db_Table_Abstract
                 исключение Zend_Db_Table_Exception.
             </para>
 
-            <example id="zend.db.table.insert.key-natural.example">
+            <example xml:id="zend.db.table.insert.key-natural.example"><info><title>Пример объявления таблицы с естественным ключом</title></info>
 
-                <title>Пример объявления таблицы с естественным ключом</title>
+                
 
                 <programlisting language="php"><![CDATA[
 class BugStatus extends Zend_Db_Table_Abstract
@@ -655,8 +656,8 @@ class BugStatus extends Zend_Db_Table_Abstract
 
     protected $_sequence = false;
 }
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
             </example>
 
@@ -672,13 +673,13 @@ class BugStatus extends Zend_Db_Table_Abstract
 
             </note>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.update">
+    <section xml:id="zend.db.table.update"><info><title>Обновление строк в таблице</title></info>
 
-        <title>Обновление строк в таблице</title>
+        
 
         <para>
             Вы можете обновлять строки в таблице БД, используя метод
@@ -690,9 +691,9 @@ class BugStatus extends Zend_Db_Table_Abstract
             <code>UPDATE</code>.
         </para>
 
-        <example id="zend.db.table.update.example">
+        <example xml:id="zend.db.table.update.example"><info><title>Пример обновления строк в таблице</title></info>
 
-            <title>Пример обновления строк в таблице</title>
+            
 
             <programlisting language="php"><![CDATA[
 $table = new Bugs();
@@ -705,8 +706,8 @@ $data = array(
 $where = $table->getAdapter()->quoteInto('bug_id = ?', 1234);
 
 $table->update($data, $where);
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </example>
 
@@ -731,11 +732,11 @@ $table->update($data, $where);
 
         </note>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.delete">
+    <section xml:id="zend.db.table.delete"><info><title>Удаление строк из таблицы</title></info>
 
-        <title>Удаление строк из таблицы</title>
+        
 
         <para>
             Вы можете удалять строки из таблицы базы данных, используя метод
@@ -744,9 +745,9 @@ $table->update($data, $where);
             <code>WHERE</code> в качестве условия, по которому удаляются строки.
         </para>
 
-        <example id="zend.db.table.delete.example">
+        <example xml:id="zend.db.table.delete.example"><info><title>Пример удаления строк из таблицы</title></info>
 
-            <title>Пример удаления строк из таблицы</title>
+            
 
             <programlisting language="php"><![CDATA[
 $table = new Bugs();
@@ -754,8 +755,8 @@ $table = new Bugs();
 $where = $table->getAdapter()->quoteInto('bug_id = ?', 1235);
 
 $table->delete($where);
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </example>
 
@@ -779,11 +780,11 @@ $table->delete($where);
 
         </note>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.find">
+    <section xml:id="zend.db.table.find"><info><title>Извлечение строк по первичному ключу</title></info>
 
-        <title>Извлечение строк по первичному ключу</title>
+        
 
         <para>
             Вы можете запрашивать из таблицы БД строки, соответствующие
@@ -793,9 +794,9 @@ $table->delete($where);
             первичным ключом таблицы.
         </para>
 
-        <example id="zend.db.table.find.example">
+        <example xml:id="zend.db.table.find.example"><info><title>Пример извлечения строк по значениям первичного ключа</title></info>
 
-            <title>Пример извлечения строк по значениям первичного ключа</title>
+            
 
             <programlisting language="php"><![CDATA[
 $table = new Bugs();
@@ -807,8 +808,8 @@ $rows = $table->find(1234);
 // Запрос нескольких строк
 // Также возвращает набор строк (Rowset)
 $rows = $table->find(array(1234, 5678));
-]]>
-</programlisting>
+
+]]></programlisting>
 
         </example>
 
@@ -847,9 +848,9 @@ $rows = $table->find(array(1234, 5678));
             первичного ключа, вторые элементы - второго составного ключа и т.д.
         </para>
 
-        <example id="zend.db.table.find.example-compound">
+        <example xml:id="zend.db.table.find.example-compound"><info><title>Пример извлечения строк по значениям составного первичного ключа</title></info>
 
-            <title>Пример извлечения строк по значениям составного первичного ключа</title>
+            
 
             <para>
                 Вызов метода <code>find()</code> ниже для поиска нескольких
@@ -874,20 +875,20 @@ $rows = $table->find(1234, 'ABC');
 // Запрашивает несколько строк через составной первичный ключ
 // Также возвращает набор строк (Rowset)
 $rows = $table->find(array(1234, 5678), array('ABC', 'DEF'));
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.fetch-all">
+    <section xml:id="zend.db.table.fetch-all"><info><title>Извлечение наборов строк</title></info>
 
-        <title>Извлечение наборов строк</title>
+        
 
-        <sect3 id="zend.db.table.fetch-all.select">
+        <section xml:id="zend.db.table.fetch-all.select"><info><title>API для произведения выборки</title></info>
 
-            <title>API для произведения выборки</title>
+            
 
             <para>
 
@@ -910,8 +911,8 @@ $rows = $table->find(array(1234, 5678), array('ABC', 'DEF'));
 
                     <para>
 
-                        <programlisting language="php">
-<![CDATA[
+                        <programlisting language="php"><![CDATA[
+
 // Извлечение набора строк
 $rows = $table->fetchAll('bug_status = "NEW"', 'bug_id ASC', 10, 0);
 $rows = $table->fetchAll($table->select()->where('bug_status = ?', 'NEW')
@@ -922,8 +923,8 @@ $rows = $table->fetchAll($table->select()->where('bug_status = ?', 'NEW')
 $row = $table->fetchRow('bug_status = "NEW"', 'bug_id ASC');
 $row = $table->fetchRow($table->select()->where('bug_status = ?', 'NEW')
                                         ->order('bug_id ASC'));
-]]>
-                        </programlisting>
+
+                        ]]></programlisting>
 
                     </para>
 
@@ -987,20 +988,20 @@ $row = $table->fetchRow($table->select()->where('bug_status = ?', 'NEW')
 
             <para>
 
-                <example id="zend.db.table.qry.rows.set.simple.usage.example">
+                <example xml:id="zend.db.table.qry.rows.set.simple.usage.example"><info><title>Простое использование</title></info>
 
-                    <title>Простое использование</title>
+                    
 
-                    <programlisting language="php">
-<![CDATA[
+                    <programlisting language="php"><![CDATA[
+
 $table = new Bugs();
 
 $select = $table->select();
 $select->where('bug_status = ?', 'NEW');
 
 $rows = $table->fetchAll($select);
-]]>
-                    </programlisting>
+
+                    ]]></programlisting>
 
                 </example>
 
@@ -1013,28 +1014,28 @@ $rows = $table->fetchAll($select);
 
             <para>
 
-                <example id="zend.db.table.qry.rows.set.fluent.interface.example">
+                <example xml:id="zend.db.table.qry.rows.set.fluent.interface.example"><info><title>Пример использования fluent interface</title></info>
 
-                    <title>Пример использования fluent interface</title>
+                    
 
-                    <programlisting language="php">
-<![CDATA[
+                    <programlisting language="php"><![CDATA[
+
 $table = new Bugs();
 
 $rows =
     $table->fetchAll($table->select()->where('bug_status = ?', 'NEW'));
-]]>
-                    </programlisting>
+
+                    ]]></programlisting>
 
                 </example>
 
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.fetch-all.usage">
+        <section xml:id="zend.db.table.fetch-all.usage"><info><title>Извлечение набора строк</title></info>
 
-            <title>Извлечение набора строк</title>
+            
 
             <para>
                 Вы можете извлекать наборы строк, используя любое другое
@@ -1043,19 +1044,19 @@ $rows =
                 объект типа <code>Zend_Db_Table_Rowset_Abstract</code>.
             </para>
 
-            <example id="zend.db.table.qry.rows.set.finding.row.example">
+            <example xml:id="zend.db.table.qry.rows.set.finding.row.example"><info><title>Пример поиска строк по выражению</title></info>
 
-                <title>Пример поиска строк по выражению</title>
+                
 
-                <programlisting language="php">
-<![CDATA[
+                <programlisting language="php"><![CDATA[
+
 $table = new Bugs();
 
 $select = $table->select()->where('bug_status = ?', 'NEW');
 
 $rows = $table->fetchAll($select);
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
             </example>
 
@@ -1068,12 +1069,12 @@ $rows = $table->fetchAll($select);
                 <code>LIMIT</code>.
             </para>
 
-            <example id="zend.db.table.fetch-all.example2">
+            <example xml:id="zend.db.table.fetch-all.example2"><info><title>Пример поиска строк по выражению</title></info>
 
-                <title>Пример поиска строк по выражению</title>
+                
 
-                <programlisting language="php">
-<![CDATA[
+                <programlisting language="php"><![CDATA[
+
 $table = new Bugs();
 
 $order  = 'bug_id';
@@ -1087,8 +1088,8 @@ $select = $table->select()->where(array('bug_status = ?' => 'NEW'))
                           ->limit($count, $offset);
 
 $rows = $table->fetchAll($select);
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
             </example>
 
@@ -1100,11 +1101,11 @@ $rows = $table->fetchAll($select);
                 соответствующие предложению WHERE строки из таблицы.
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.advanced.usage">
+        <section xml:id="zend.db.table.advanced.usage"><info><title>Расширенное использование</title></info>
 
-            <title>Расширенное использование</title>
+            
 
             <para>
                 Для более точных и оптимизированных запросов может
@@ -1115,9 +1116,9 @@ $rows = $table->fetchAll($select);
 
             <para>
 
-                <example id="zend.db.table.qry.rows.set.retrieving.a.example">
+                <example xml:id="zend.db.table.qry.rows.set.retrieving.a.example"><info><title>Извлечение определенных столбцов</title></info>
 
-                    <title>Извлечение определенных столбцов</title>
+                    
 
                     <programlisting language="php"><![CDATA[
 $table = new Bugs();
@@ -1127,8 +1128,8 @@ $select->from($table, array('bug_id', 'bug_description'))
        ->where('bug_status = ?', 'NEW');
 
 $rows = $table->fetchAll($select);
-]]>
-                    </programlisting>
+
+                    ]]></programlisting>
 
                 </example>
 
@@ -1160,9 +1161,9 @@ $rows = $table->fetchAll($select);
 
             <para>
 
-                <example id="zend.db.table.qry.rows.set.retrieving.b.example">
+                <example xml:id="zend.db.table.qry.rows.set.retrieving.b.example"><info><title>Извлечение выражений как столбцов</title></info>
 
-                    <title>Извлечение выражений как столбцов</title>
+                    
 
                     <programlisting language="php"><![CDATA[
 $table = new Bugs();
@@ -1174,8 +1175,8 @@ $select->from($table,
        ->group('reported_by');
 
 $rows = $table->fetchAll($select);
-]]>
-                    </programlisting>
+
+                    ]]></programlisting>
 
                 </example>
 
@@ -1187,9 +1188,9 @@ $rows = $table->fetchAll($select);
 
             <para>
 
-                <example id="zend.db.table.qry.rows.set.refine.example">
+                <example xml:id="zend.db.table.qry.rows.set.refine.example"><info><title>Использование таблицы поиска для фильтрации результатов, возвращаемых fetchAll()</title></info>
 
-                    <title>Использование таблицы поиска для фильтрации результатов, возвращаемых fetchAll()</title>
+                    
 
                     <programlisting language="php"><![CDATA[
 $table = new Bugs();
@@ -1200,8 +1201,8 @@ $select->where('bug_status = ?', 'NEW')
        ->where('accounts.account_name = ?', 'Bob');
 
 $rows = $table->fetchAll($select);
-]]>
-                    </programlisting>
+
+                    ]]></programlisting>
 
                 </example>
 
@@ -1223,9 +1224,9 @@ $rows = $table->fetchAll($select);
                 исключения.
             </para>
 
-            <example id="zend.db.table.qry.rows.set.integrity.example">
+            <example xml:id="zend.db.table.qry.rows.set.integrity.example"><info><title>Отключение проверки целостности в Zend_Db_Table_Select для получения объединенных строк</title></info>
 
-                <title>Отключение проверки целостности в Zend_Db_Table_Select для получения объединенных строк</title>
+                
 
                 <programlisting><![CDATA[
 $table = new Bugs();
@@ -1238,27 +1239,27 @@ $select->where('bug_status = ?', 'NEW')
        ->where('accounts.account_name = ?', 'Bob');
 
 $rows = $table->fetchAll($select);
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
             </example>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.fetch-row">
+    <section xml:id="zend.db.table.fetch-row"><info><title>Извлечение одной строки</title></info>
 
-        <title>Извлечение одной строки</title>
+        
 
         <para>
             Вы можете запрашивать одну строку, используя условия, аналогичные
             тем, что используются в методе <code>fetchAll()</code>.
         </para>
 
-        <example id="zend.db.table.fetch-row.example1">
+        <example xml:id="zend.db.table.fetch-row.example1"><info><title>Пример поиска одной строки по выражению</title></info>
 
-            <title>Пример поиска одной строки по выражению</title>
+            
 
             <programlisting language="php"><![CDATA[
 $table = new Bugs();
@@ -1267,8 +1268,8 @@ $select  = $table->select()->where('bug_status = ?', 'NEW')
                            ->order('bug_id');
 
 $row = $table->fetchRow($select);
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </example>
 
@@ -1279,11 +1280,11 @@ $row = $table->fetchRow($select);
             <constant>NULL</constant>.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.info">
+    <section xml:id="zend.db.table.info"><info><title>Получение метаданных таблицы</title></info>
 
-        <title>Получение метаданных таблицы</title>
+        
 
         <para>
             Класс Zend_Db_Table_Abstract предоставляет некоторую информацию о
@@ -1291,19 +1292,19 @@ $row = $table->fetchRow($select);
             данными о таблице, ее столбцах, первичном ключе и другие метаданные.
         </para>
 
-        <example id="zend.db.table.info.example">
+        <example xml:id="zend.db.table.info.example"><info><title>Пример получения имени таблицы</title></info>
 
-            <title>Пример получения имени таблицы</title>
+            
 
-            <programlisting language="php">
-<![CDATA[
+            <programlisting language="php"><![CDATA[
+
 $table = new Bugs();
 
 $info = $table->info();
 
 echo "The table name is " . $info['name'] . "\n";
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </example>
 
@@ -1315,24 +1316,24 @@ echo "The table name is " . $info['name'] . "\n";
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>name</emphasis> => имя таблицы
+                    <emphasis>name</emphasis> =&gt; имя таблицы
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>cols</emphasis> =>
+                    <emphasis>cols</emphasis> =&gt;
                     массив имен столбцов в таблице
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>primary</emphasis> =>
+                    <emphasis>primary</emphasis> =&gt;
                     массив имен столбцов в первичном ключе
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>metadata</emphasis> =>
+                    <emphasis>metadata</emphasis> =&gt;
                     ассоциативный массив, включающий в себя имена столбцов и
                     соответствующие им данные о столбцах. Это информация,
                     возвращаемая методом <code>describeTable()</code>.
@@ -1340,7 +1341,7 @@ echo "The table name is " . $info['name'] . "\n";
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>rowClass</emphasis> => имя
+                    <emphasis>rowClass</emphasis> =&gt; имя
                     определенного класса, используемого для объектов строк,
                     возвращаемых методами данного экземпляра таблицы. По
                     умолчанию это Zend_Db_Table_Row.
@@ -1348,7 +1349,7 @@ echo "The table name is " . $info['name'] . "\n";
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>rowsetClass</emphasis> =>
+                    <emphasis>rowsetClass</emphasis> =&gt;
                     имя определенного класса, используемого для объектов
                     наборов строк, возвращаемых методами данного экземпляра
                     таблицы. По умолчанию это Zend_Db_Table_Rowset.
@@ -1356,33 +1357,33 @@ echo "The table name is " . $info['name'] . "\n";
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>referenceMap</emphasis> =>
+                    <emphasis>referenceMap</emphasis> =&gt;
                     ассоциативный массив с данными о ссылках на другие таблицы.
-                    См. <xref linkend="zend.db.table.relationships.defining" />.
+                    См. <xref linkend="zend.db.table.relationships.defining"/>.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>dependentTables</emphasis> =>
+                    <emphasis>dependentTables</emphasis> =&gt;
                     массив имен классов таблиц, на которые ссылается данная
                     таблица. См.
-                    <xref linkend="zend.db.table.relationships.defining" />.
+                    <xref linkend="zend.db.table.relationships.defining"/>.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>schema</emphasis> =>
+                    <emphasis>schema</emphasis> =&gt;
                     имя схемы (базы данных, пространства таблиц) для данной
                     таблицы.
                 </para>
             </listitem>
         </itemizedlist>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.metadata.caching">
+    <section xml:id="zend.db.table.metadata.caching"><info><title>Кэширование метаданных таблицы</title></info>
 
-        <title>Кэширование метаданных таблицы</title>
+        
 
         <para>
             По умолчанию <code>Zend_Db_Table_Abstract</code> производит запрос к
@@ -1431,9 +1432,9 @@ echo "The table name is " . $info['name'] . "\n";
             возможность изменять его для конкретного объекта таблицы.
         </para>
 
-        <example id="zend.db.table.metadata.caching-default">
+        <example xml:id="zend.db.table.metadata.caching-default"><info><title>Кэширование метаданных по умолчанию для всех объектов таблиц</title></info>
 
-            <title>Кэширование метаданных по умолчанию для всех объектов таблиц</title>
+            
 
             <para>
                 Следующий код показывает, как установить объект кэша,
@@ -1471,14 +1472,14 @@ class Bugs extends Zend_Db_Table_Abstract
 // Каждый экземпляр таблицы Bugs теперь использует
 // кэширование метаданных по умолчанию
 $bugs = new Bugs();
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </example>
 
-        <example id="zend.db.table.metadata.caching-instance">
+        <example xml:id="zend.db.table.metadata.caching-instance"><info><title>Кэширование метаданных для одного объекта таблицы</title></info>
 
-            <title>Кэширование метаданных для одного объекта таблицы</title>
+            
 
             <para>
                 Следующий код показывает, как устанавливается кэширование
@@ -1509,14 +1510,14 @@ class Bugs extends Zend_Db_Table_Abstract
 
 // Экземпляр конфигурируется при инстанцировании
 $bugs = new Bugs(array('metadataCache' => $cache));
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </example>
 
-        <note>
+        <note><info><title>Автоматическая сериализация через фронтэнд кэша</title></info>
 
-            <title>Автоматическая сериализация через фронтэнд кэша</title>
+            
 
             <para>
                 Поскольку информация, возвращаемая методом адаптера
@@ -1535,15 +1536,15 @@ $bugs = new Bugs(array('metadataCache' => $cache));
             <link linkend="zend.cache">Zend_Cache</link>.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.extending">
+    <section xml:id="zend.db.table.extending"><info><title>Расширение класса таблицы</title></info>
 
-        <title>Расширение класса таблицы</title>
+        
 
-        <sect3 id="zend.db.table.extending.row-rowset">
+        <section xml:id="zend.db.table.extending.row-rowset"><info><title>Использование собственных классов строки и набора строк</title></info>
 
-            <title>Использование собственных классов строки и набора строк</title>
+            
 
             <para>
                 По умолчанию методы класса таблицы возвращают наборы строк в
@@ -1562,9 +1563,9 @@ $bugs = new Bugs(array('metadataCache' => $cache));
                 соответственно. Задавайте имена классов в виде обычных строк.
             </para>
 
-            <example id="zend.db.table.extending.row-rowset.example">
+            <example xml:id="zend.db.table.extending.row-rowset.example"><info><title>Пример указания классов строки и набора строк</title></info>
 
-                <title>Пример указания классов строки и набора строк</title>
+                
 
                 <programlisting language="php"><![CDATA[
 class My_Row extends Zend_Db_Table_Row_Abstract
@@ -1589,8 +1590,8 @@ $where = $table->getAdapter()->quoteInto('bug_status = ?', 'NEW')
 // Возвращает объект типа My_Rowset,
 // содержащий массив объектов типа My_Row
 $rows = $table->fetchAll($where);
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
             </example>
 
@@ -1602,9 +1603,9 @@ $rows = $table->fetchAll($where);
                 строк, созданных ранее.
             </para>
 
-            <example id="zend.db.table.extending.row-rowset.example2">
+            <example xml:id="zend.db.table.extending.row-rowset.example2"><info><title>Пример смены используемых для строк и наборов строк классов</title></info>
 
-                <title>Пример смены используемых для строк и наборов строк классов</title>
+                
 
                 <programlisting language="php"><![CDATA[
 $table = new Bugs();
@@ -1623,22 +1624,22 @@ $table->setRowsetClass('My_Rowset');
 $rowsCustom = $table->fetchAll($where);
 
 // Объект $rowsStandard по прежнему существует и не изменился.
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
             </example>
 
             <para>
                 Более подробную информацию о классах строки и набора строк
-                ищите в <xref linkend="zend.db.table.row" /> и
-                <xref linkend="zend.db.table.rowset" />.
+                ищите в <xref linkend="zend.db.table.row"/> и
+                <xref linkend="zend.db.table.rowset"/>.
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.extending.insert-update">
+        <section xml:id="zend.db.table.extending.insert-update"><info><title>Определение собственной логики для добавления, обновления и удаления строк</title></info>
 
-            <title>Определение собственной логики для добавления, обновления и удаления строк</title>
+            
 
             <para>
                 Вы можете переопределить методы <code>insert()</code> и
@@ -1649,9 +1650,9 @@ $rowsCustom = $table->fetchAll($where);
                 действий.
             </para>
 
-            <example id="zend.db.table.extending.insert-update.example">
+            <example xml:id="zend.db.table.extending.insert-update.example"><info><title>Собственная логика для управления отметками времени</title></info>
 
-                <title>Собственная логика для управления отметками времени</title>
+                
 
                 <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
@@ -1676,8 +1677,8 @@ class Bugs extends Zend_Db_Table_Abstract
         return parent::update($data, $where);
     }
 }
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
             </example>
 
@@ -1685,11 +1686,11 @@ class Bugs extends Zend_Db_Table_Abstract
                 Вы можете также переопределить метод <code>delete()</code>.
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.extending.finders">
+        <section xml:id="zend.db.table.extending.finders"><info><title>Определение собственных методов для поиска</title></info>
 
-            <title>Определение собственных методов для поиска</title>
+            
 
             <para>
                 Вы можете реализовать собственные методы запросов в своем классе
@@ -1702,9 +1703,9 @@ class Bugs extends Zend_Db_Table_Abstract
                 таблицы для выполнения часто используемых запросов к таблице.
             </para>
 
-            <example id="zend.db.table.extending.finders.example">
+            <example xml:id="zend.db.table.extending.finders.example"><info><title>Метод для поиска ошибок с определенным статусом</title></info>
 
-                <title>Метод для поиска ошибок с определенным статусом</title>
+                
 
                 <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
@@ -1717,16 +1718,16 @@ class Bugs extends Zend_Db_Table_Abstract
         return $this->fetchAll($where, 'bug_id');
     }
 }
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.extending.inflection">
+        <section xml:id="zend.db.table.extending.inflection"><info><title>Определение инфлекции в Zend_Db_Table</title></info>
 
-            <title>Определение инфлекции в Zend_Db_Table</title>
+            
 
             <para>
                 Некоторые разработчики предпочитают, чтобы имя класса таблицы
@@ -1778,9 +1779,9 @@ class Bugs extends Zend_Db_Table_Abstract
                 класса.
             </para>
 
-            <example id="zend.db.table.extending.inflection.example">
+            <example xml:id="zend.db.table.extending.inflection.example"><info><title>Пример абстрактного класса таблицы, реализующего инфлекцию</title></info>
 
-                <title>Пример абстрактного класса таблицы, реализующего инфлекцию</title>
+                
 
                 <programlisting language="php"><![CDATA[
 abstract class MyAbstractTable extends Zend_Db_Table_Abstract
@@ -1797,8 +1798,8 @@ abstract class MyAbstractTable extends Zend_Db_Table_Abstract
 class BugsProducts extends MyAbstractTable
 {
 }
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
             </example>
 
@@ -1808,11 +1809,8 @@ class BugsProducts extends MyAbstractTable
                 предоставляет для этих целей готовых функций.
             </para>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

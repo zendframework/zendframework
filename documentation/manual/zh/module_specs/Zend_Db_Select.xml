@@ -1,10 +1,11 @@
-﻿<sect1 id="zend.db.select">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.select"><info><title>Zend_Db_Select</title></info>
 
-    <title>Zend_Db_Select</title>
+    
 
-    <sect2 id="zend.db.select.简介">
+    <section xml:id="zend.db.select.简介"><info><title>简介 </title></info>
 
-        <title>简介 </title>
+        
 
         <para>
             使用Zend_Db_Select方法是一种不受数据库约束构建select的sql语句的工具
@@ -99,11 +100,11 @@ $result = $db->fetchAll($select, $params);
 
 ?>]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.select.fromcols">
+    <section xml:id="zend.db.select.fromcols"><info><title>同一表中查询多列数据</title></info>
 
-        <title>同一表中查询多列数据</title>
+        
 
         <para>
             当需要从某一个指定的表查询某几列时，可以使用from()方法，将需要
@@ -129,11 +130,11 @@ $select->from('foo', 'foo.col AS col1');
 $select->from('bar', 'bar.col AS col2');
 
 ?>]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.select.表联合查询">
+    <section xml:id="zend.db.select.表联合查询"><info><title>多表联合查询</title></info>
 
-        <title>多表联合查询</title>
+        
 
         <para>
             当需要进行表联合查询时，可以使用join()方法。首先，设定进行表
@@ -162,11 +163,11 @@ $select->join('bar', 'foo.id = bar.id', '*');
             ，右结合，等等外部连接方式。未来版本，将会更多的支持更多的连接方式。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.select.where">
+    <section xml:id="zend.db.select.where"><info><title>WHERE条件</title></info>
 
-        <title>WHERE条件</title>
+        
 
         <para>
             当需要要增加where条件时，可以使用where（）方法。你可以传送一个
@@ -206,11 +207,11 @@ $select->orWhere('id IN(?)', array(1, 2, 3);
 
 ?>]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.select.group">
+    <section xml:id="zend.db.select.group"><info><title>GROUP BY分句</title></info>
 
-        <title>GROUP BY分句</title>
+        
 
         <para>
             根据需要，可以多次使用group()方法给查询到的数据进行分组
@@ -238,11 +239,11 @@ $select->group(array('bar', 'baz'));
 
 ?>]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.select.having">
+    <section xml:id="zend.db.select.having"><info><title>HAVING 条件</title></info>
 
-        <title>HAVING 条件</title>
+        
 
         <para>
            当需要在查询结果中加入having条件时，可以使用having()方法。
@@ -269,11 +270,11 @@ $select->group('bar, baz');
 $select->having('count_id > ?', 1);
 
 ?>]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.select.order">
+    <section xml:id="zend.db.select.order"><info><title>ORDER BY 分句</title></info>
 
-        <title>ORDER BY 分句</title>
+        
 
         <para>
             根据需要，可以多次使用order()方法给查询到的数据进行排序
@@ -300,11 +301,11 @@ $select->order(array('noble_title DESC', 'first_name'));
 
 ?>]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.select.limit">
+    <section xml:id="zend.db.select.limit"><info><title>通过总数和偏移量进行LIMIT限制</title></info>
 
-        <title>通过总数和偏移量进行LIMIT限制</title>
+        
 
         <para>
             Zend_db_select可以支持数据库层的limit语句限制。对于一些数据库，例如mysql
@@ -373,11 +374,11 @@ $select->limit(10, 20);
 
 ?>]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.select.分页">
+    <section xml:id="zend.db.select.分页"><info><title>通过页数和总数进行LIMIT限制</title></info>
 
-        <title>通过页数和总数进行LIMIT限制</title>
+        
 
         <para>
             Zend_db_select同样也提供了翻页的limit功能。假如你想要从结果中找到
@@ -404,9 +405,6 @@ $select->limitPage(3, 10);
 //
 
 ?>]]></programlisting>
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

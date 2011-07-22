@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.ldap.api.reference.zend-ldap-attribute">
-    <title>Zend_Ldap_Attribute</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap-attribute"><info><title>Zend_Ldap_Attribute</title></info>
+    
 
     <para>
         <classname>Zend_Ldap_Attribute</classname> ist eine Helfer Klasse die nur Statische Methoden
@@ -93,8 +93,8 @@
         </varlistentry>
     </variablelist>
 
-    <table id="zend.ldap.api.reference.zend-ldap-attribute.table">
-        <title>Zend_Ldap_Attribute API</title>
+    <table xml:id="zend.ldap.api.reference.zend-ldap-attribute.table"><info><title>Zend_Ldap_Attribute API</title></info>
+        
 
         <tgroup cols="2">
             <thead>
@@ -316,4 +316,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect3>
+</section>

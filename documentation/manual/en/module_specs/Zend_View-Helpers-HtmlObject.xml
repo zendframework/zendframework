@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.object">
-    <title>HTML Object Helpers</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.object"><info><title>HTML Object Helpers</title></info>
+    
 
     <para>
-        The <acronym>HTML</acronym> <emphasis><![CDATA[
-<object>]]></emphasis> element is used for embedding
+        The <acronym>HTML</acronym> <emphasis>
+&lt;object&gt;</emphasis> element is used for embedding
         media like Flash or QuickTime in web pages. The object view helpers take
         care of embedding media with minimum effort.
     </para>
@@ -49,8 +48,8 @@
         documentation will only contain examples of two of these helpers.
     </para>
 
-    <example id="zend.view.helpers.initial.object.flash">
-        <title>Flash helper</title>
+    <example xml:id="zend.view.helpers.initial.object.flash"><info><title>Flash helper</title></info>
+        
 
         <para>
             Embedding Flash in your page using the helper is pretty straight-forward.
@@ -76,13 +75,13 @@
 
     <para>
         Additionally you can specify attributes, parameters and content that can
-        be rendered along with the <emphasis><![CDATA[
-<object>]]></emphasis>. This will
+        be rendered along with the <emphasis>
+&lt;object&gt;</emphasis>. This will
         be demonstrated using the <methodname>htmlObject()</methodname> helper.
     </para>
 
-    <example id="zend.view.helpers.initial.object.object">
-        <title>Customizing the object by passing additional arguments</title>
+    <example xml:id="zend.view.helpers.initial.object.object"><info><title>Customizing the object by passing additional arguments</title></info>
+        
 
         <para>
             The first argument in the object helpers is always required. It is
@@ -93,8 +92,8 @@
             It only accepts an array with key-value pairs. <property>classid</property>
             and <property>codebase</property> are examples of such attributes. The fourth
             argument also only takes a key-value array and uses them to create
-            <emphasis><![CDATA[
-<param>]]></emphasis> elements. You will see an example
+            <emphasis>
+&lt;param&gt;</emphasis> elements. You will see an example
             of this shortly. Lastly, there is the option of providing additional
             content to the object. Now for an example which utilizes all arguments.
         </para>
@@ -126,7 +125,4 @@ This would output:
 */
 ]]></programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

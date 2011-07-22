@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 18822 -->
-<sect1 id="zend.view.abstract">
-    <title>Zend_View_Abstract</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.abstract"><info><title>Zend_View_Abstract</title></info>
+    
 
     <para>
         <classname>Zend_View_Abstract</classname> は
@@ -63,7 +61,4 @@ protected function _run()
         なものだけです。これで、ビュースクリプトができることを効率的に制限できるようになり、
         重要な場所をビュースクリプトから保護できるようになりました。
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

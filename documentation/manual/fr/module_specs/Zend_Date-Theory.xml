@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 18429 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.date.definition.theory">
-    <title>Aspect théorique</title>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.definition.theory"><info><title>Aspect théorique</title></info>
+    
 
     <para>
         Pourquoi n'existe-il que l'unique classe <classname>Zend_Date</classname> pour gérer
-        les dates et les heures dans Zend Framework&#160;?
+        les dates et les heures dans Zend Framework ?
     </para>
 
     <para>
@@ -25,12 +25,12 @@
         complexe.
     </para>
 
-    <sect2 id="zend.date.theory.internals">
-        <title>Fonctionnement interne</title>
+    <section xml:id="zend.date.theory.internals"><info><title>Fonctionnement interne</title></info>
+        
 
         <itemizedlist mark="opencircle">
             <listitem>
-                <para>Référence temporelle <acronym>UNIX</acronym> (timestamp)&#160;:</para>
+                <para>Référence temporelle <acronym>UNIX</acronym> (timestamp) :</para>
 
                 <para>
                     Toutes les dates et heures, même celles ambiguës (par exemple sans
@@ -51,7 +51,7 @@
 
             <listitem>
                 <para>
-                    Parties de date en tant que décalages de référence temporelle&#160;:
+                    Parties de date en tant que décalages de référence temporelle :
                 </para>
 
                 <para>
@@ -62,7 +62,7 @@
             </listitem>
 
             <listitem>
-                <para>Fonctions <acronym>PHP</acronym>&#160;:</para>
+                <para>Fonctions <acronym>PHP</acronym> :</para>
 
                 <para>
                     Quand cela est possible, <classname>Zend_Date</classname> utilise actuellement
@@ -70,5 +70,5 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

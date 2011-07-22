@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.session.basic_usage">
-    <title>Grundsätzliche Verwendung</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.basic_usage"><info><title>Grundsätzliche Verwendung</title></info>
+    
 
     <para>
         <classname>Zend_Session_Namespace</classname> Instanzen stellen die primäre
@@ -38,8 +36,8 @@ $myNamespace = new Zend_Session_Namespace('myNamespace');
         <classname>Zend_Session_Namespace</classname> korrespondieren.
     </para>
 
-    <sect2 id="zend.session.basic_usage.basic_examples">
-        <title>Übungs Beispiele</title>
+    <section xml:id="zend.session.basic_usage.basic_examples"><info><title>Übungs Beispiele</title></info>
+        
 
         <para>
             Wenn kein Namensraum bei der Instanziierung von
@@ -52,8 +50,8 @@ $myNamespace = new Zend_Session_Namespace('myNamespace');
             Zugriffe eines Benutzers gezählt werden kann.
         </para>
 
-        <example id="zend.session.basic_usage.basic_examples.example.counting_page_views">
-            <title>Seitenzugriffe zählen</title>
+        <example xml:id="zend.session.basic_usage.basic_examples.example.counting_page_views"><info><title>Seitenzugriffe zählen</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $defaultNamespace = new Zend_Session_Namespace('Default');
@@ -88,8 +86,8 @@ echo "Seitenzugriffe in dieser Session: ",
             beginnen.
         </para>
 
-        <example id="zend.session.basic_usage.basic_examples.example.namespaces.new">
-            <title>Neuer Weg: Namensräume verhindern Kollisionen</title>
+        <example xml:id="zend.session.basic_usage.basic_examples.example.namespaces.new"><info><title>Neuer Weg: Namensräume verhindern Kollisionen</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // In der Zend_Auth Komponente
@@ -109,28 +107,27 @@ $webServiceNamespace->user = "meinwebbenutzername";
             Namensraumes aufrecht erhält.
         </para>
 
-        <example id="zend.session.basic_usage.basic_examples.example.namespaces.old">
-            <title>Alter Weg: PHP Session Zugriff</title>
+        <example xml:id="zend.session.basic_usage.basic_examples.example.namespaces.old"><info><title>Alter Weg: PHP Session Zugriff</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $_SESSION['Zend_Auth']['user'] = "meinbenutzername";
 $_SESSION['Some_Web_Service']['user'] = "meinwebbenutzername";
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.basic_usage.iteration">
-        <title>Session Namensräume wiederholen</title>
+    <section xml:id="zend.session.basic_usage.iteration"><info><title>Session Namensräume wiederholen</title></info>
+        
 
         <para>
-            <classname>Zend_Session_Namespace</classname> stellt das komplette <ulink
-                url="http://www.php.net/~helly/php/ext/spl/interfaceIteratorAggregate.html">IteratorAggregate
-                Interface</ulink> zur Verfügung, was die Unterstützung der <code>foreach</code>
+            <classname>Zend_Session_Namespace</classname> stellt das komplette <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/~helly/php/ext/spl/interfaceIteratorAggregate.html">IteratorAggregate
+                Interface</link> zur Verfügung, was die Unterstützung der <code>foreach</code>
             Anweisung beinhält:
         </para>
 
-        <example id="zend.session.basic_usage.iteration.example">
-            <title>Session wiederholen</title>
+        <example xml:id="zend.session.basic_usage.iteration.example"><info><title>Session wiederholen</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $aNamespace =
@@ -141,23 +138,22 @@ foreach ($aNamespace as $index => $value) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.basic_usage.accessors">
-        <title>Zugriffsfunktionen für Session Namensräume</title>
+    <section xml:id="zend.session.basic_usage.accessors"><info><title>Zugriffsfunktionen für Session Namensräume</title></info>
+        
 
         <para>
-            <classname>Zend_Session_Namespace</classname> implementiert die <ulink
-                url="http://www.php.net/manual/de/language.oop5.overloading.php">magischen
-                Methoden</ulink> <methodname>__get()</methodname>, <methodname>__set()</methodname>,
+            <classname>Zend_Session_Namespace</classname> implementiert die <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/de/language.oop5.overloading.php">magischen
+                Methoden</link> <methodname>__get()</methodname>, <methodname>__set()</methodname>,
             <methodname>__isset()</methodname>, und <methodname>__unset()</methodname> welche nicht
             direkt angesprochen werden sollte, ausser von innerhalb einer Subklasse. Stattdessen
             verwenden die normalen Opteratoren automatisch diese Methoden, wie im folgenden
             Beispiel:
         </para>
 
-        <example id="zend.session.basic_usage.accessors.example">
-            <title>Zugriff auf Session Daten</title>
+        <example xml:id="zend.session.basic_usage.accessors.example"><info><title>Zugriff auf Session Daten</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $namespace = new Zend_Session_Namespace(); // Standard Namensraum
@@ -173,5 +169,5 @@ if (!isset($namespace->bar)) {
 unset($namespace->foo);
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

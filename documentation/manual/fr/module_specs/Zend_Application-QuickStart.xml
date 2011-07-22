@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20763 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.application.quick-start">
-    <title>Zend_Application démarrage rapide</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.quick-start"><info><title>Zend_Application démarrage rapide</title></info>
+    
 
     <para>
         Il existe deux manières d'aborder
@@ -18,8 +16,8 @@
         <link linkend="zend.application.quick-start.manual">passer à la suite</link>.
     </para>
 
-    <sect2 id="zend.application.quick-start.zend-tool">
-        <title>Utiliser Zend_Tool</title>
+    <section xml:id="zend.application.quick-start.zend-tool"><info><title>Utiliser Zend_Tool</title></info>
+        
 
         <para>
             La manière la plus rapide d'utiliser <classname>Zend_Application</classname> est
@@ -29,7 +27,7 @@
 
         <para>
             Pour créer un projet, éxecutez la commande <command>zf</command> (sur les
-            systèmes *nix)&#160;:
+            systèmes *nix) :
         </para>
 
         <programlisting language="sh"><![CDATA[
@@ -91,7 +89,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         <para>
             Notez aussi la présence d'un fichier de configuration
             <filename>newproject/application/configs/application.ini</filename>, il
-            contient&#160;:
+            contient :
         </para>
 
         <programlisting language="dosini"><![CDATA[
@@ -150,17 +148,16 @@ $application->bootstrap()
 ]]></programlisting>
 
         <para>
-            Pour continuer le guide de démarrage rapide,<link
-            linkend="zend.application.quick-start.resources">voyez la section sur les
+            Pour continuer le guide de démarrage rapide,<link linkend="zend.application.quick-start.resources">voyez la section sur les
             Ressources</link>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.application.quick-start.manual">
-        <title>Ajouter Zend_Application à votre existant</title>
+    <section xml:id="zend.application.quick-start.manual"><info><title>Ajouter Zend_Application à votre existant</title></info>
+        
 
         <para>
-            Les bases de <classname>Zend_Application</classname> sont très simples&#160;:
+            Les bases de <classname>Zend_Application</classname> sont très simples :
         </para>
 
         <itemizedlist>
@@ -182,7 +179,7 @@ $application->bootstrap()
 
         <para>
             D'abord, créez la classe <classname>Bootstrap</classname> class. Dans le fichier
-            <filename>application/Bootstrap.php</filename>, voici le contenu&#160;:
+            <filename>application/Bootstrap.php</filename>, voici le contenu :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -196,7 +193,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             <acronym>INI</acronym>, bien sûr une syntaxe <acronym>XML</acronym> ou
             <acronym>PHP</acronym> est utilisable aussi. Créez donc le fichier
             <filename>application/configs/application.ini</filename>, et ajoutez lui ce
-            contenu&#160;:
+            contenu :
         </para>
 
         <programlisting language="dosini"><![CDATA[
@@ -222,7 +219,7 @@ phpSettings.display_errors = 1
         <para>
             Maintenant, modifions le script de démarrage
             <filename>public/index.php</filename>. Si le fichier n'existe pas, créez le, et
-            placez ce contenu dedans&#160;:
+            placez ce contenu dedans :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -261,7 +258,7 @@ $application->bootstrap()
             "APPLICATION_ENV". Nous recommandons la spécification d'un tel paramètre dans la
             configuration générale du serveur web. Pour Apache, vous pouvez utiliser
             <filename>.htaccess</filename> si votre serveur le permet. Nous recommandons un
-            fichier <filename>public/.htaccess</filename> avec le contenu suivant&#160;:
+            fichier <filename>public/.htaccess</filename> avec le contenu suivant :
         </para>
 
         <programlisting language="conf"><![CDATA[
@@ -275,15 +272,14 @@ RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
 ]]></programlisting>
 
-        <note>
-            <title>Apprenez mod_rewrite</title>
+        <note><info><title>Apprenez mod_rewrite</title></info>
+            
 
             <para>
                 Les règles de réécriture ci-dessus autorisent l'accès à tout fichier existant
                 dans l'hôte virtuel. S'il existe des fichiers que vous ne voulez pas exposer,
-                utilisez des règles plus restrictives. Le site web d'Apache <ulink
-                    url="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">vous permettra
-                    d'en apprendre plus au sujet de mod_rewrite</ulink>.
+                utilisez des règles plus restrictives. Le site web d'Apache <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">vous permettra
+                    d'en apprendre plus au sujet de mod_rewrite</link>.
             </para>
         </note>
 
@@ -291,10 +287,10 @@ RewriteRule ^.*$ index.php [NC,L]
             Voila, à partir de maintenant nous sommes prêts à tirer partie de la puissance de
             <classname>Zend_Application</classname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.application.quick-start.resources">
-        <title>Ajouter et créer des ressources</title>
+    <section xml:id="zend.application.quick-start.resources"><info><title>Ajouter et créer des ressources</title></info>
+        
 
         <para>
             Si vous avez suivi les instructions jusqu'à maintenant, alors votre classe de
@@ -400,16 +396,16 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         <para>
             Cette méthode va être lancée automatiquement lors du bootstrap et configurera une vue.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.application.quick-start.next-steps">
-        <title>Aller plus loin avec Zend_Application</title>
+    <section xml:id="zend.application.quick-start.next-steps"><info><title>Aller plus loin avec Zend_Application</title></info>
+        
 
         <para>
             Nous vennons de voir comment configurer de manière basique
             <classname>Zend_Application</classname> ainsi que les principes du bootstrap. Pour un
             maximum de réutilisation de code, vous devriez songer à utiliser des plugins de
-            ressources. Continuez à lire la suite&#160;!
+            ressources. Continuez à lire la suite !
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

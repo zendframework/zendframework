@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.gdata.gbase">
-    <title>Using Google Base</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.gbase"><info><title>Using Google Base</title></info>
+    
 
     <para>
         The Google Base data <acronym>API</acronym> is designed to enable developers to do two
@@ -31,12 +30,12 @@
     </para>
 
     <para>
-        See <ulink url="http://code.google.com/apis/base/">http://code.google.com/apis/base</ulink>
+        See <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/base/">http://code.google.com/apis/base</link>
         for more information about the Google Base <acronym>API</acronym>.
     </para>
 
-    <sect2 id="zend.gdata.gbase.connect">
-        <title>Connect To The Base Service</title>
+    <section xml:id="zend.gdata.gbase.connect"><info><title>Connect To The Base Service</title></info>
+        
 
         <para>
             The Google Base <acronym>API</acronym>, like all GData <acronym>API</acronym>s, is based
@@ -53,8 +52,8 @@
             client.
         </para>
 
-        <sect3 id="zend.gdata.gbase.connect.authentication">
-            <title>Authentication</title>
+        <section xml:id="zend.gdata.gbase.connect.authentication"><info><title>Authentication</title></info>
+            
 
             <para>
                 The Google Base <acronym>API</acronym> allows access to both public and private base
@@ -88,15 +87,14 @@
                 The <classname>Zend_Gdata</classname> library provides support for all three
                 authentication schemes. The rest of this chapter will assume that you are familiar
                 the authentication schemes available and how to create an appropriate authenticated
-                connection. For more information, please see the <link
-                    linkend="zend.gdata.introduction.authentication">authentication section</link>
-                or the <ulink url="http://code.google.com/apis/gdata/auth.html">Authentication
-                    Overview in the Google Data <acronym>API</acronym> Developer's Guide</ulink>.
+                connection. For more information, please see the <link linkend="zend.gdata.introduction.authentication">authentication section</link>
+                or the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/gdata/auth.html">Authentication
+                    Overview in the Google Data <acronym>API</acronym> Developer's Guide</link>.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.gbase.connect.service">
-            <title>Create A Service Instance</title>
+        <section xml:id="zend.gdata.gbase.connect.service"><info><title>Create A Service Instance</title></info>
+            
 
             <para>
                 In order to interact with Google Base, this library provides the
@@ -235,19 +233,19 @@ $service = new Zend_Gdata_Gbase(getAuthSubHttpClient());
 // Create an instance of the Base service using an unauthenticated HTTP client
 $service = new Zend_Gdata_Gbase();
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.gdata.gbase.retrieve">
-        <title>Retrieve Items</title>
+    <section xml:id="zend.gdata.gbase.retrieve"><info><title>Retrieve Items</title></info>
+        
 
         <para>
             You can query customer items feed or snippets feed to retrieve items. It involves two
             steps, sending a query and iterating through the returned feed.
         </para>
 
-        <sect3 id="zend.gdata.gbase.retrieve.query">
-            <title>Send a Structured Query</title>
+        <section xml:id="zend.gdata.gbase.retrieve.query"><info><title>Send a Structured Query</title></info>
+            
 
             <para>
                 You can send a structured query to retrieve items from your own customer items feed
@@ -263,8 +261,8 @@ $service = new Zend_Gdata_Gbase();
                 parameters.
             </para>
 
-            <sect4 id="zend.gdata.gbase.retrieve.query.customeritems">
-                <title>Query Customer Items Feed</title>
+            <section xml:id="zend.gdata.gbase.retrieve.query.customeritems"><info><title>Query Customer Items Feed</title></info>
+                
 
                 <para>
                     To execute a query against the customer items feed, invoke
@@ -283,14 +281,13 @@ $feed = $service->getGbaseItemFeed($query);
 ]]></programlisting>
 
                 <para>
-                    A full list of these parameters is available at the <ulink
-                        url="http://code.google.com/apis/base/items-feed.html#QueParameters">Query
-                        parameters section</ulink> of the Customer Items Feed documentation.
+                    A full list of these parameters is available at the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/base/items-feed.html#QueParameters">Query
+                        parameters section</link> of the Customer Items Feed documentation.
                 </para>
-            </sect4>
+            </section>
 
-            <sect4 id="zend.gdata.gbase.retrieve.query.snippets">
-                <title>Query Snippets Feed</title>
+            <section xml:id="zend.gdata.gbase.retrieve.query.snippets"><info><title>Query Snippets Feed</title></info>
+                
 
                 <para>
                     To execute a query against the public snippets feed, invoke
@@ -309,15 +306,14 @@ $feed = $service->getGbaseSnippetFeed($query);
 ]]></programlisting>
 
                 <para>
-                    A full list of these parameters is available at the <ulink
-                        url="http://code.google.com/apis/base/snippets-feed.html#Parameters">Query
-                        parameters section</ulink> of the Snippets Feed documentation.
+                    A full list of these parameters is available at the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/base/snippets-feed.html#Parameters">Query
+                        parameters section</link> of the Snippets Feed documentation.
                 </para>
-            </sect4>
-        </sect3>
+            </section>
+        </section>
 
-        <sect3 id="zend.gdata.gbase.retrieve.iterate">
-            <title>Iterate through the Items</title>
+        <section xml:id="zend.gdata.gbase.retrieve.iterate"><info><title>Iterate through the Items</title></info>
+            
 
             <para>
                 Google Base items can contain item-specific attributes such as
@@ -354,11 +350,11 @@ foreach ($feed->entries as $entry) {
   }
 }
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.gdata.gbase.crud">
-        <title>Insert, Update, and Delete Customer Items</title>
+    <section xml:id="zend.gdata.gbase.crud"><info><title>Insert, Update, and Delete Customer Items</title></info>
+        
 
         <para>
             A customer/owner can access his own Customer Items feed to insert, update, or delete
@@ -371,8 +367,8 @@ foreach ($feed->entries as $entry) {
             want to submit the data, set it to <constant>FALSE</constant> to execute the operation.
         </para>
 
-        <sect3 id="zend.gdata.gbase.crud.insert">
-            <title>Insert an Item</title>
+        <section xml:id="zend.gdata.gbase.crud.insert"><info><title>Insert an Item</title></info>
+            
 
             <para>
                 Items can be added by using the <methodname>insertGbaseItem()</methodname> method
@@ -412,10 +408,10 @@ $newEntry->addGbaseAttribute("payment_accepted", "Google Checkout", "text");
 $dryRun = true;
 $createdEntry = $service->insertGbaseItem($newEntry, $dryRun);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.gbase.crud.modify">
-            <title>Modify an Item</title>
+        <section xml:id="zend.gdata.gbase.crud.modify"><info><title>Modify an Item</title></info>
+            
 
             <para>
                 You can update each attribute element of an item as you iterate through them:
@@ -471,10 +467,10 @@ $entry->save($dryRun);
                 <methodname>updateGbaseItem($entry, $dryRun)</methodname> method on the
                 <classname>Zend_Gdata_Gbase</classname> object to save the changes.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.gbase.crud.delete">
-            <title>Delete an Item</title>
+        <section xml:id="zend.gdata.gbase.crud.delete"><info><title>Delete an Item</title></info>
+            
 
             <para>
                 You can remove an item by calling <methodname>deleteGbaseItem()</methodname> method:
@@ -494,6 +490,6 @@ $service->deleteGbaseItem($entry, $dryRun);
 $dryRun = false;
 $entry->delete($dryRun);
 ]]></programlisting>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

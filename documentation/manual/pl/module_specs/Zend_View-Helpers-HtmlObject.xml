@@ -1,8 +1,9 @@
-<sect3 id="zend.view.helpers.initial.object">
-    <title>Helpery HTML Object</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.object"><info><title>Helpery HTML Object</title></info>
+    
 
     <para>
-        Element HTML <code><![CDATA[<object>]]></code> używany jest do
+        Element HTML <code>&lt;object&gt;</code> używany jest do
         wstawiania do kodu strony takich elementów interaktywnych jak Flash czy
         QuickTime. Helpery te pozwalają na łatwe wstawianie tych obiektów.
     </para>
@@ -43,9 +44,9 @@
         pokażemy przykłady tylko dwóch z nich.
     </para>
 
-    <example id="zend.view.helpers.initial.object.flash">
+    <example xml:id="zend.view.helpers.initial.object.flash"><info><title>Helper Flash</title></info>
 
-        <title>Helper Flash</title>
+        
 
         <para>
             Dołączanie plików Flash do twojej strony jest bardzo łatwe. Jedynym
@@ -54,8 +55,8 @@
 
         <programlisting role="php"><![CDATA[
 <?php echo $this->htmlFlash('/path/to/flash.swf'); ?>
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Wyświetli to następujący kod HTML:
@@ -67,19 +68,19 @@
         classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
         codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab">
 </object>
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
     </example>
 
     <para>
         Dodatkowo możesz określić atrybuty, parametry i zawartość jaka ma być
-        zrenderowana wraz z obiektem <code><![CDATA[<object>]]></code>. Zostanie
+        zrenderowana wraz z obiektem <code>&lt;object&gt;</code>. Zostanie
         do zademonstrowane za pomocą helpera <code>htmlObject</code>.
     </para>
 
-    <example id="zend.view.helpers.initial.object.object">
-        <title>Konfigurowanie obiektu poprzez przekazanie dodatkowych argumentów</title>
+    <example xml:id="zend.view.helpers.initial.object.object"><info><title>Konfigurowanie obiektu poprzez przekazanie dodatkowych argumentów</title></info>
+        
 
         <para>
             Pierwszy argument w helperze jest zawsze wymagany. Określa on adres
@@ -90,7 +91,7 @@
             elementu. Akceptuje on tablicę par klucz-wartość. Przykładem
             mogą być atrybuty <code>classid</code> oraz <code>codebase</code>.
             Czwarty argument przyjmuje także tylko tablice elementów w postaci
-            klucz-wartość i używa ich do elementów <code><![CDATA[<param>]]></code>.
+            klucz-wartość i używa ich do elementów <code>&lt;param&gt;</code>.
             Ostatni argument umożliwia przekazanie dodatkowej zawartości do obiektu.
             Zobacz przykład używający wszystkich argumentów.
         </para>
@@ -120,7 +121,7 @@ Spowoduje to wyświetlenie:
     some content
 </object>
 */
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
-</sect3>
+</section>

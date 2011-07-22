@@ -56,7 +56,7 @@ github or other public site, or setup/use your own repository.
   Option 2: Personal Repository
   -----------------------------
 
-  We assume you will use gitosis (http://short.e/m6t2pn) or gitolite
+  We assume you will use gitosis (http://progit.org/book/ch4-7.html) or gitolite
   (http://progit.org/book/ch4-8.html) to host your own repository.  If
   you go this route, we will assume you have the knowledge to do so, or
   know where to obtain it. We will not assist you in setting up such a

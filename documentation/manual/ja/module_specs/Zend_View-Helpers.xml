@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21825 -->
-<sect1 id="zend.view.helpers" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>ビューヘルパー</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers"><info><title>ビューヘルパー</title></info>
+    
 
     <para>
         ビュースクリプトの中で、複雑な関数を繰り返し実行しなければならないこともあるでしょう
@@ -21,8 +19,8 @@
         のメソッド <methodname>fooBar()</methodname> が含まれていなければなりません。
     </para>
 
-    <note>
-        <title>大文字小文字の扱い</title>
+    <note><info><title>大文字小文字の扱い</title></info>
+        
         <para>
             ヘルパー名は常に camelCase 形式となります。
             つまり、最初は常に小文字となります。
@@ -31,8 +29,8 @@
         </para>
     </note>
 
-    <note>
-        <title>デフォルトのヘルパーのパス</title>
+    <note><info><title>デフォルトのヘルパーのパス</title></info>
+        
 
         <para>
             デフォルトのヘルパーのパスは常に Zend Framework
@@ -45,15 +43,15 @@
 
     <para>
         ビュースクリプト内でヘルパーを使用するには、
-        <command>$this->helperName()</command> をコールします。これをコールすると、裏側では
+        <command>$this-&gt;helperName()</command> をコールします。これをコールすると、裏側では
         <classname>Zend_View</classname> が <classname>Zend_View_Helper_HelperName</classname> クラスを読み込み、
         そのクラスのインスタンスを作成して <methodname>helperName()</methodname> メソッドをコールします。
         オブジェクトのインスタンスは <classname>Zend_View</classname> インスタンスの中に残り続け、
-        後で <command>$this->helperName()</command> がコールされたときには再利用されます。
+        後で <command>$this-&gt;helperName()</command> がコールされたときには再利用されます。
     </para>
 
-    <sect2 id="zend.view.helpers.initial">
-        <title>付属のヘルパー</title>
+    <section xml:id="zend.view.helpers.initial"><info><title>付属のヘルパー</title></info>
+        
 
         <para>
             <classname>Zend_View</classname> には、はじめからいくつかのヘルパークラスが付属しています。
@@ -353,31 +351,31 @@ echo $this->formCheckbox('foo',
 </form>
 ]]></programlisting>
 
-        <xi:include href="Zend_View-Helpers-Action.xml" />
-        <xi:include href="Zend_View-Helpers-BaseUrl.xml" />
-        <xi:include href="Zend_View-Helpers-Currency.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Currency.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Action.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-BaseUrl.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Currency.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Currency.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-Cycle.xml" />
-        <xi:include href="Zend_View-Helpers-Partial.xml" />
-        <xi:include href="Zend_View-Helpers-Placeholder.xml" />
-        <xi:include href="Zend_View-Helpers-Doctype.xml" />
-        <xi:include href="Zend_View-Helpers-HeadLink.xml" />
-        <xi:include href="Zend_View-Helpers-HeadMeta.xml" />
-        <xi:include href="Zend_View-Helpers-HeadScript.xml" />
-        <xi:include href="Zend_View-Helpers-HeadStyle.xml" />
-        <xi:include href="Zend_View-Helpers-HeadTitle.xml" />
-        <xi:include href="Zend_View-Helpers-HtmlObject.xml" />
-        <xi:include href="Zend_View-Helpers-InlineScript.xml" />
-        <xi:include href="Zend_View-Helpers-Json.xml" />
-        <xi:include href="Zend_View-Helpers-Navigation.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Navigation.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Cycle.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Partial.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Placeholder.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Doctype.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadLink.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadMeta.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadScript.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadStyle.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadTitle.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HtmlObject.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-InlineScript.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Json.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Navigation.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Navigation.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-Translate.xml" />
-    </sect2>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Translate.xml"/>
+    </section>
 
-    <sect2 id="zend.view.helpers.paths">
-        <title>ヘルパーのパス</title>
+    <section xml:id="zend.view.helpers.paths"><info><title>ヘルパーのパス</title></info>
+        
 
         <para>
             ビュースクリプトと同様、
@@ -422,10 +420,10 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
 // "Zend_View_Helper_HelperName" という名前のクラスを探します。
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.helpers.custom">
-        <title>独自のヘルパーを書く</title>
+    <section xml:id="zend.view.helpers.custom"><info><title>独自のヘルパーを書く</title></info>
+        
 
         <para>
             独自のヘルパーを書くのは簡単です。以下の規則に従ってください。
@@ -459,7 +457,7 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
 
             <listitem><para>
                 クラスは、ヘルパーと同じ名前の public メソッドを持っている必要があります。
-                テンプレートが "$this->specialPurpose()" をコールした際に、
+                テンプレートが "$this-&gt;specialPurpose()" をコールした際に、
                 このメソッドがコールされます。"specialPurpose" ヘルパーの例では、
                 "public function specialPurpose()" というメソッドが必要です。
             </para></listitem>
@@ -559,10 +557,10 @@ class My_View_Helper_ScriptPath
             <classname>Zend_View_Helper_Abstract</classname> を継承する場合は、
             このメソッドはすでに定義済みであるため定義する必要はありません。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.helpers.registering-concrete">
-        <title>Registering Concrete Helpers</title>
+    <section xml:id="zend.view.helpers.registering-concrete"><info><title>Registering Concrete Helpers</title></info>
+        
 
         <para>
             Sometimes it is convenient to instantiate a view helper, and then register it with the
@@ -583,8 +581,8 @@ $view->registerHelper($helper, 'foo');
             this and inject itself into the helper on registration.
         </para>
 
-        <note>
-            <title>Helper name should match a method</title>
+        <note><info><title>Helper name should match a method</title></info>
+            
 
             <para>
                 The second argument to <methodname>registerHelper()</methodname> is the name of the
@@ -593,8 +591,5 @@ $view->registerHelper($helper, 'foo');
                 helper, raising a fatal <acronym>PHP</acronym> error.
             </para>
         </note>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

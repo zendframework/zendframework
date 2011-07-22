@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20854 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.pdf.usage">
-    <title>Anwendungsbeispiel für die Zend_Pdf Komponente</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.usage"><info><title>Anwendungsbeispiel für die Zend_Pdf Komponente</title></info>
+    
 
     <para>
         Dieser Abschnitt stellt ein Beispiel für die Anwendung der Komponente bereit.
@@ -18,8 +16,8 @@
         Testzwecken verwendet werden kann.
     </para>
 
-    <example id="zend.pdf.usage.example-1">
-        <title>Anwendungsbeispiel für die Zend_Pdf Komponente</title>
+    <example xml:id="zend.pdf.usage.example-1"><info><title>Anwendungsbeispiel für die Zend_Pdf Komponente</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 /**
@@ -269,4 +267,4 @@ if (isset($argv[2])) {
 }
 ]]></programlisting>
     </example>
-</sect1>
+</section>

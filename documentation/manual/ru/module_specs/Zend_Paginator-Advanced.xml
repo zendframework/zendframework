@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.paginator.advanced">
-    <title>Расширенное использование</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.paginator.advanced"><info><title>Расширенное использование</title></info>
+    
 
-    <sect2 id="zend.paginator.advanced.adapters">
-        <title>Создание собственных адаптеров к источникам данных</title>
+    <section xml:id="zend.paginator.advanced.adapters"><info><title>Создание собственных адаптеров к источникам данных</title></info>
+        
 
         <para>
             Вы можете столкнуться с таким типом источника данных, для которого
@@ -36,7 +35,7 @@
 
         <para>
             Если вы когда-либо использовали SPL-интерфейс
-            <ulink url="http://www.php.net/~helly/php/ext/spl/interfaceCountable.html"><classname>Countable</classname></ulink>,
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/~helly/php/ext/spl/interfaceCountable.html"><classname>Countable</classname></link>,
             то вам должно быть известно о назначении метода
             <methodname>count()</methodname>. В
             <classname>Zend_Paginator</classname> он возвращает общее количество
@@ -64,10 +63,10 @@ return array_slice($this->_array, $offset, $itemCountPerPage);
             <classname>Zend_Paginator_Adapter_Interface</classname>), чтобы
             получить представление о том, как можно реализовать свой адаптер.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.paginator.advanced.scrolling-styles">
-        <title>Создание своих стилей прокрутки</title>
+    <section xml:id="zend.paginator.advanced.scrolling-styles"><info><title>Создание своих стилей прокрутки</title></info>
+        
 
         <para>
             При создании своего стиля прокрутки реализуйте интерфейс
@@ -115,10 +114,10 @@ $prefix = 'My_Paginator_ScrollingStyle';
 $path   = 'My/Paginator/ScrollingStyle/';
 Zend_Paginator::addScrollingStylePrefixPath($prefix, $path);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.paginator.advanced.caching">
-        <title>Возможности кэширования</title>
+    <section xml:id="zend.paginator.advanced.caching"><info><title>Возможности кэширования</title></info>
+        
 
         <para>
             Можно указать <classname>Zend_Paginator</classname>-у, чтобы он
@@ -225,10 +224,10 @@ $otherItems = $paginator->getItemsPerPage(4);
 var_dump($paginator->getPageItemCache());
 ]]></programlisting>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.paginator.advanced.aggregator">
-        <title>Интерфейс Zend_Paginator_AdapterAggregate</title>
+    <section xml:id="zend.paginator.advanced.aggregator"><info><title>Интерфейс Zend_Paginator_AdapterAggregate</title></info>
+        
 
         <para>
             В зависимости от разрабатываемого приложения может возникнуть
@@ -269,9 +268,6 @@ interface Zend_Paginator_AdapterAggregate
             экземпляр <classname>Zend_Paginator_AdapterAggregate</classname>
             и обрабатывают его должным образом.
         </para>
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

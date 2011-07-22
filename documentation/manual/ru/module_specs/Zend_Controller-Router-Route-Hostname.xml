@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.router.routes.hostname">
-    <title>Zend_Controller_Router_Route_Hostname</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.router.routes.hostname"><info><title>Zend_Controller_Router_Route_Hostname</title></info>
+    
 
     <para>
         <classname>Zend_Controller_Router_Route_Hostname</classname> является
@@ -49,13 +48,10 @@ $router->addRoute('user', $hostnameRoute->chain($plainPathRoute);
         пути. Поэтому нужно объединять маршруты по имени хоста
         с маршрутами по пути. Это можно делать так, как
         показано в примере выше - путем вызова
-        <varname>$hostnameRoute->chain($pathRoute);</varname>.
+        <varname>$hostnameRoute-&gt;chain($pathRoute);</varname>.
         При этом <varname>$hostnameRoute</varname> не изменяется, но будет
         возвращен новый маршрут
         (<classname>Zend_Controller_Router_Route_Chain</classname>), который
         может быть передан маршрутизатору.
     </para>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

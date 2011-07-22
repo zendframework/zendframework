@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20799 -->
-<sect1 id="zend.translate.introduction">
+<?xml version="1.0" encoding="utf-8"?>
 
-    <title>導入</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.introduction"><info><title>導入</title></info>
+
+    
 
     <para>
         <classname>Zend_Translate</classname> は、Zend Framework
@@ -108,9 +108,9 @@
         </listitem>
     </itemizedlist>
 
-    <sect2 id="zend.translate.introduction.adapters">
+    <section xml:id="zend.translate.introduction.adapters"><info><title>多言語対応をはじめよう</title></info>
 
-        <title>多言語対応をはじめよう</title>
+        
 
         <para>
             それでは、多言語対応の作業を始めてみましょう。
@@ -122,7 +122,7 @@
             必要なのは、以下のたった 4 つの手順だけです。
         </para>
 
-        <orderedlist numeration='arabic'>
+        <orderedlist numeration="arabic">
             <listitem>
                 <para>
                     使用するアダプタを決める
@@ -154,9 +154,6 @@
             あなたも多言語対応のウェブアプリケーションを作れるようになるでしょう。
         </para>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

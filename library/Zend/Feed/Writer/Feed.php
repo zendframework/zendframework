@@ -22,27 +22,19 @@
 * @namespace
 */
 namespace Zend\Feed\Writer;
-use Zend\Feed\Writer\Renderer;
-use Zend\Date;
+
+use Countable,
+    Iterator,
+    Zend\Date,
+    Zend\Feed\Writer\Renderer;
 
 /**
-* @uses Countable
-* @uses Iterator
-* @uses \Zend\Date\Date
-* @uses \Zend\Feed\Exception
-* @uses \Zend\Feed\Writer\Writer
-* @uses \Zend\Feed\Writer\Deleted
-* @uses \Zend\Feed\Writer\Entry
-* @uses \Zend\Feed\Writer\Feed\FeedAbstract
-* @uses \Zend\Feed\Writer\Renderer\Feed\Atom\Atom
-* @uses \Zend\Feed\Writer\Renderer\Feed\RSS
-* @uses \Zend\Uri\Url
 * @category Zend
 * @package Zend_Feed_Writer
 * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
 * @license http://framework.zend.com/license/new-bsd New BSD License
 */
-class Feed extends AbstractFeed implements \Iterator, \Countable
+class Feed extends AbstractFeed implements Iterator, Countable
 {
 
     /**
@@ -246,7 +238,7 @@ class Feed extends AbstractFeed implements \Iterator, \Countable
             throw new Exception('Invalid feed type specified: ' . $type . '.'
             . ' Should be one of "rss" or "atom".');
         }
-        $renderClass = 'Renderer\\Feed\\' . $type;
+        $renderClass = 'Zend\\Feed\\Writer\\Renderer\\Feed\\' . $type;
         $renderer = new $renderClass($this);
         if ($ignoreExceptions) {
             $renderer->ignoreExceptions();

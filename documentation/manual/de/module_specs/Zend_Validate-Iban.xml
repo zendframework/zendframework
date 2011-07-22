@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21566 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.iban">
-    <title>Iban</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.iban"><info><title>Iban</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Iban</classname> prüft ob ein angegebener Wert eine
@@ -10,8 +8,8 @@
         "International Bank Account Number".
     </para>
 
-    <sect3 id="zend.validate.set.iban.options">
-        <title>Unterstützte Optionen für Zend_Validate_Iban</title>
+    <section xml:id="zend.validate.set.iban.options"><info><title>Unterstützte Optionen für Zend_Validate_Iban</title></info>
+        
 
         <para>
             Die folgenden Optionen werden für <classname>Zend_Validate_Iban</classname> unterstützt:
@@ -26,10 +24,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.iban.basic">
-        <title>IBAN Prüfung</title>
+    <section xml:id="zend.validate.set.iban.basic"><info><title>IBAN Prüfung</title></info>
+        
 
         <para>
             <acronym>IBAN</acronym> Nummern sind immer in Bezug zu einem Land. Dies bedeutet dass
@@ -39,8 +37,8 @@
             <classname>Zend_Validate_Iban</classname> verwenden können.
         </para>
 
-        <sect4 id="zend.validate.set.iban.basic.application">
-            <title>Anwendungsweites Gebietsschema</title>
+        <section xml:id="zend.validate.set.iban.basic.application"><info><title>Anwendungsweites Gebietsschema</title></info>
+            
 
             <para>
                 Wir können das Anwendungsweite Gebietsschema verwenden. Dass bedeutet, wenn keine
@@ -63,8 +61,8 @@ if ($validator->isValid('AT611904300234573201')) {
 }
 ]]></programlisting>
 
-            <note>
-                <title>Anwendungsweites Gebietsschema</title>
+            <note><info><title>Anwendungsweites Gebietsschema</title></info>
+                
 
                 <para>
                     Natürlich funktioniert dies nur wenn das Anwendungsweite Gebietsschema in der
@@ -75,10 +73,10 @@ if ($validator->isValid('AT611904300234573201')) {
                     der Prüfung führen kann.
                 </para>
             </note>
-        </sect4>
+        </section>
 
-        <sect4 id="zend.validate.set.iban.basic.false">
-            <title>Unscharfe IBAN Prüfung</title>
+        <section xml:id="zend.validate.set.iban.basic.false"><info><title>Unscharfe IBAN Prüfung</title></info>
+            
 
             <para>
                 Manchmal ist es nützlich, nur zu prüfen ob der angegebene Wert eine
@@ -103,10 +101,10 @@ if ($validator->isValid('AT611904300234573201')) {
                 ist zu beachten dass man dies nicht tun sollte wenn man nur Konten von einem
                 einzelnen Land akzeptiert.
             </para>
-        </sect4>
+        </section>
 
-        <sect4 id="zend.validate.set.iban.basic.aware">
-            <title>Gebietsschema verwendende IBAN Prüfung</title>
+        <section xml:id="zend.validate.set.iban.basic.aware"><info><title>Gebietsschema verwendende IBAN Prüfung</title></info>
+            
 
             <para>
                 Um gegen ein definiertes Land zu prüfen muss man nur das gewünschte Gebietsschema
@@ -124,8 +122,8 @@ if ($validator->isValid('AT611904300234573201')) {
 }
 ]]></programlisting>
 
-            <note>
-                <title>Vollständig qualifizierte Gebietsschemas verwenden</title>
+            <note><info><title>Vollständig qualifizierte Gebietsschemas verwenden</title></info>
+                
 
                 <para>
                     Man muss ein vollständig qualifiziertes Gebietsschema verwenden. Andernfalls
@@ -133,9 +131,6 @@ if ($validator->isValid('AT611904300234573201')) {
                     Ländern gesprochen werden.
                 </para>
             </note>
-        </sect4>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

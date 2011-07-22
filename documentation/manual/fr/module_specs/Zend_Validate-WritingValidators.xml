@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20799 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.validate.writing_validators">
-    <title>Écrire des validateurs</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.writing_validators"><info><title>Écrire des validateurs</title></info>
+    
 
     <para>
         <classname>Zend_Validate</classname> fournit un ensemble de validateurs habituellement
@@ -18,8 +16,7 @@
         mesure. Un objet qui implémente l'interface <classname>Zend_Validate_Interface</classname>
         peut être ajouté à une chaîne de validateur avec
         <methodname>Zend_Validate::addValidator()</methodname>. De tels objets peuvent également être
-        employés avec <link
-        linkend="zend.filter.input"><classname>Zend_Filter_Input</classname></link>.
+        employés avec <link linkend="zend.filter.input"><classname>Zend_Filter_Input</classname></link>.
     </para>
 
     <para>
@@ -53,8 +50,8 @@
         succès ou l'échec de validation soit déterminé.
     </para>
 
-    <example id="zend.validate.writing_validators.example.simple">
-        <title>Création d'une simple classe de validation</title>
+    <example xml:id="zend.validate.writing_validators.example.simple"><info><title>Création d'une simple classe de validation</title></info>
+        
 
         <para>
             L'exemple suivant démontre comment un validateur personnalisé très simple pourrait
@@ -90,8 +87,8 @@ class MonValidateur_Float extends Zend_Validate_Abstract
         </para>
     </example>
 
-    <example id="zend.validate.writing_validators.example.conditions.dependent">
-        <title>Écriture d'une classe de validation ayant des conditions de dépendances</title>
+    <example xml:id="zend.validate.writing_validators.example.conditions.dependent"><info><title>Écriture d'une classe de validation ayant des conditions de dépendances</title></info>
+        
 
         <para>
             L'exemple suivant démontre un ensemble plus complexe de règles de validation, où
@@ -183,9 +180,9 @@ class MonValidateur_NumericBetween extends Zend_Validate_Abstract
         </para>
     </example>
 
-    <example id="zend.validate.writing_validators.example.conditions.independent">
-        <title>Validation avec des conditions indépendantes, avec raisons multiples
-        d'échec</title>
+    <example xml:id="zend.validate.writing_validators.example.conditions.independent"><info><title>Validation avec des conditions indépendantes, avec raisons multiples
+        d'échec</title></info>
+        
 
         <para>
             Considérons l'écriture d'une classe de validation pour le contrôle de résistance
@@ -212,8 +209,7 @@ class MonValidateur_NumericBetween extends Zend_Validate_Abstract
             </para>
 
         <para>
-            La classe suivante implémente ces critères de validation : <programlisting
-            role="php"><![CDATA[
+            La classe suivante implémente ces critères de validation : <programlisting role="php"><![CDATA[
 class MonValidateur_PasswordStrength extends Zend_Validate_Abstract
 {
     const LENGTH = 'length';
@@ -270,4 +266,4 @@ class MonValidateur_PasswordStrength extends Zend_Validate_Abstract
             <methodname>getMessages()</methodname>.
         </para>
     </example>
-</sect1>
+</section>

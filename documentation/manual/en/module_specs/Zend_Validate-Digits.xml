@@ -1,22 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.digits">
-    <title>Digits</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.digits"><info><title>Digits</title></info>
+    
 
     <para>
-        <classname>Zend_Validate_Digit</classname> validates if a given value contains only digits.
+        <classname>Zend_Validate_Digits</classname> validates if a given value contains only digits.
     </para>
 
-    <sect3 id="zend.validate.set.digits.options">
-        <title>Supported options for Zend_Validate_Digits</title>
+    <section xml:id="zend.validate.set.digits.options"><info><title>Supported options for Zend_Validate_Digits</title></info>
+        
 
         <para>
             There are no additional options for <classname>Zend_Validate_Digits</classname>:
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.digits.basic">
-        <title>Validating digits</title>
+    <section xml:id="zend.validate.set.digits.basic"><info><title>Validating digits</title></info>
+        
 
         <para>
             To validate if a given value contains only digits and no other characters, simply call
@@ -31,8 +30,8 @@ $validator->isValid(1234);         // returns true
 $validator->isValid('1a234');      // returns false
 ]]></programlisting>
 
-        <note>
-            <title>Validating numbers</title>
+        <note><info><title>Validating numbers</title></info>
+            
 
             <para>
                 When you want to validate numbers or numeric values, be aware that this validator
@@ -42,5 +41,5 @@ $validator->isValid('1a234');      // returns false
                 <classname>Zend_Validate_Float</classname>.
             </para>
         </note>
-    </sect3>
-</sect2>
+    </section>
+</section>

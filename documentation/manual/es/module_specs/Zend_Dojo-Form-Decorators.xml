@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20176 -->
-    <!-- Reviewed: no -->
-<sect2 id="zend.dojo.form.decorators">
-    <title>Decoradores de Forms Específicos de Dijit</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.form.decorators"><info><title>Decoradores de Forms Específicos de Dijit</title></info>
+    
 
     <para>La mayoría de los elementos de formularios pueden usar el decorador
         DijitElement, que tomará los parámetros dijit de los elementos, y
@@ -18,11 +16,10 @@
         de cualquiera de las otras propiedades para evitar la duplicación de
         información. </para>
 
-    <sect3 id="zend.dojo.form.decorators.dijitElement">
-        <title>Decorador DijitElement</title>
+    <section xml:id="zend.dojo.form.decorators.dijitElement"><info><title>Decorador DijitElement</title></info>
+        
 
-        <para> Al igual que <link
-                linkend="zend.form.standardDecorators.viewHelper"> el decorador
+        <para> Al igual que <link linkend="zend.form.standardDecorators.viewHelper"> el decorador
                 ViewHelper</link> , DijitElement espera una propiedad del
             <property>helper</property> en el elemento que luego usará
             como el ayudante de vista cuando lo renderice. Los parámetros Dijit
@@ -42,8 +39,8 @@
             primero de su cadena de decoradores, sin opciones
             adicionales.</para>
 
-        <example id="zend.dojo.form.decorators.dijitElement.usage">
-            <title>Uso del Decorador DijitElement</title>
+        <example xml:id="zend.dojo.form.decorators.dijitElement.usage"><info><title>Uso del Decorador DijitElement</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $element->setDecorators(array(
@@ -54,13 +51,12 @@ $element->setDecorators(array(
 ));
 ]]></programlisting>
         </example>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.form.decorators.dijitForm">
-        <title>Decorador DijitForm</title>
+    <section xml:id="zend.dojo.form.decorators.dijitForm"><info><title>Decorador DijitForm</title></info>
+        
 
-        <para> El decorador DijitForm es muy similar al <link
-                linkend="zend.form.standardDecorators.form">Form
+        <para> El decorador DijitForm es muy similar al <link linkend="zend.form.standardDecorators.form">Form
                 decorator</link> ; de hecho, básicamente puede ser utilizado de
             manera intercambiable con él, ya que utiliza el mismo nombre de
             ayudante de vista ('form'). </para>
@@ -71,16 +67,14 @@ $element->setDecorators(array(
             la creación programática del dijit pueda trabajar. El decorador
             garantiza esto, pasando el nombre del form como el identificador.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.form.decorators.dijitContainer">
-        <title>Decoradores basados en DijitContainer</title>
+    <section xml:id="zend.dojo.form.decorators.dijitContainer"><info><title>Decoradores basados en DijitContainer</title></info>
+        
 
         <para> El decorador <classname>DijitContainer</classname> es en
             realidad una clase abstracta desde la cual derivan una variedad de
-            otros decoradores. Ofrece la misma funcionalidad de <link
-                linkend="zend.dojo.form.decorators.dijitElement"
-                >DijitElement</link> , con el añadido del soporte para títulos.
+            otros decoradores. Ofrece la misma funcionalidad de <link linkend="zend.dojo.form.decorators.dijitElement">DijitElement</link> , con el añadido del soporte para títulos.
             Muchos esquemas de dijits requieren o pueden utilizar un título;
             <classname>DijitContainer</classname> utilizará la propiedad del elemento leyenda (legend)
             si está disponible, y también pueden utilizar tanto 'legend' o
@@ -115,8 +109,8 @@ $element->setDecorators(array(
             </listitem>
         </itemizedlist>
 
-        <example id="zend.dojo.form.decorators.dijitContainer.usage">
-            <title>Uso del Decorador DijitContainer</title>
+        <example xml:id="zend.dojo.form.decorators.dijitContainer.usage"><info><title>Uso del Decorador DijitContainer</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Use un TabContainer para su form:
@@ -141,5 +135,5 @@ $subForm->setDecorators(array(
 ));
 ]]></programlisting>
         </example>
-    </sect3>
-</sect2>
+    </section>
+</section>

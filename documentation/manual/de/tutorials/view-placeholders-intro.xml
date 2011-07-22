@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19766 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.view.placeholders.intro">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.view.placeholders.intro"><info><title>Einführung</title></info>
+    
 
     <para>
         Im <link linkend="learning.layout">vorherigen Kapitel</link> haben wir primär das Two Step
@@ -34,11 +34,10 @@
     </itemizedlist>
 
     <para>
-        Diese Fragen werden im <ulink
-            url="http://java.sun.com/blueprints/corej2eepatterns/Patterns/CompositeView.html">Composite
-        View</ulink> Design Pattern behandelt. Ein Weg zu diesem Pattern ist es "hints" oder Inhalt
+        Diese Fragen werden im <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://java.sun.com/blueprints/corej2eepatterns/Patterns/CompositeView.html">Composite
+        View</link> Design Pattern behandelt. Ein Weg zu diesem Pattern ist es "hints" oder Inhalt
         für das Siteweite Layout anzubieten. Im Zend Framwork wird das durch spezialisierte View
         Helfer ermöglicht welche "placeholders" (Platzhalter) heißen. Platzhalter erlauben es einem
         Inhalte zu erstellen, und diese erstellten Inghalte anschließend an anderer Stelle darzustellen.
     </para>
-</sect1>
+</section>

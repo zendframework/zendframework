@@ -1,5 +1,6 @@
-<sect1 id="zend.config.adapters.ini">
-    <title>Zend_Config_Ini</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.ini"><info><title>Zend_Config_Ini</title></info>
+    
     <para>
         <code>Zend_Config_Ini</code> pozwala programistom przechowywać dane
         konfiguracyjne w znanym formacie INI a następnie odczytywać je w aplikacji
@@ -12,18 +13,18 @@
         za nazwą sekcji znaku dwukropka (<code>:</code>)  oraz nazwy sekcji,
         z której dane mają być dziedziczone.
     </para>
-    <note>
-        <title>parse_ini_file</title>
+    <note><info><title>parse_ini_file</title></info>
+        
         <para>
-            <code>Zend_Config_Ini</code> wykorzystuje funkcję PHP <ulink url="http://php.net/parse_ini_file"><code>parse_ini_file()</code></ulink>.
+            <code>Zend_Config_Ini</code> wykorzystuje funkcję PHP <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/parse_ini_file"><code>parse_ini_file()</code></link>.
             Proszę przejrzyj dokumentację tej funkcji aby znać jej specyficzne zachowania,
             które dziedziczy <code>Zend_Config_Ini</code>, takie jak to w jaki sposób
             są obsługiwane specjalne wartości takie jak <code>true</code>, <code>false</code>,
             <code>yes</code>, <code>no</code>, oraz <code>null</code>.
         </para>
     </note>
-    <note>
-        <title>Separator kluczy</title>
+    <note><info><title>Separator kluczy</title></info>
+        
         <para>
             Domyślnie separatorem kluczy jest znak kropki (<code>.</code>). Może
             on być jednak zmieniony przez zmianę klucza
@@ -34,12 +35,12 @@ $options['nestSeparator'] = ':';
 $config = new Zend_Config_Ini('/path/to/config.ini',
                               'staging',
                               $options);
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </para>
     </note>
-    <example id="zend.config.adapters.ini.example.using">
-        <title>Użycie Zend_Config_Ini</title>
+    <example xml:id="zend.config.adapters.ini.example.using"><info><title>Użycie Zend_Config_Ini</title></info>
+        
         <para>
             Ten przykład pokazuje podstawowe użycie klasy <code>Zend_Config_Ini</code>
             do ładowania danych konfiguracyjnych z pliku INI. W tym przykładzie
@@ -69,8 +70,8 @@ database.params.dbname   = dbname
 database.params.host     = dev.example.com
 database.params.username = devuser
 database.params.password = devsecret
-]]>
-        </programlisting>
+
+        ]]></programlisting>
         <para>
             Następnie załóżmy, że programista aplikacji potrzebuje danych
             konfiguracyjnych aplikacji rozbudowywanej z pliku INI. Prostą 
@@ -82,12 +83,12 @@ $config = new Zend_Config_Ini('/path/to/config.ini', 'staging');
 
 echo $config->database->params->host; // wyświetla "dev.example.com"
 echo $config->database->params->dbname; // wyświetla "dbname"
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
     <note>
-    <table id="zend.config.adapters.ini.table">
-        <title>Parametry konstruktora Zend_Config_Ini</title>
+    <table xml:id="zend.config.adapters.ini.table"><info><title>Parametry konstruktora Zend_Config_Ini</title></info>
+        
         <tgroup cols="2">
             <thead>
                   <row>
@@ -135,4 +136,4 @@ echo $config->database->params->dbname; // wyświetla "dbname"
         </tgroup>
     </table>
     </note>
-</sect1>
+</section>

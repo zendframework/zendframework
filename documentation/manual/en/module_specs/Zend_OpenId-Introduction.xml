@@ -1,15 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.openid.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.openid.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_OpenId</classname> is a Zend Framework component that provides a
         simple <acronym>API</acronym> for building OpenID-enabled sites and identity providers.
     </para>
 
-    <sect2 id="zend.openid.introduction.what">
-        <title>What is OpenID?</title>
+    <section xml:id="zend.openid.introduction.what"><info><title>What is OpenID?</title></info>
+        
 
         <para>
             OpenID is a set of protocols for user-centric digital identities.
@@ -27,13 +28,13 @@
         </para>
 
         <para>
-            For more information about OpenID visit the <ulink url="http://www.openid.net/">OpenID
-                official site</ulink>.
+            For more information about OpenID visit the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.openid.net/">OpenID
+                official site</link>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.openid.introduction.how">
-        <title>How Does it Work?</title>
+    <section xml:id="zend.openid.introduction.how"><info><title>How Does it Work?</title></info>
+        
 
         <para>
             The purpose of the <classname>Zend_OpenId</classname> component is to
@@ -42,8 +43,7 @@
         </para>
 
         <para>
-            <inlinegraphic align="center" fileref="figures/zend.openid.protocol.jpg" format="JPEG"
-                scale="100" valign="middle" width="559" />
+            <inlinemediaobject><imageobject><imagedata align="center" fileref="figures/zend.openid.protocol.jpg" format="JPEG" scale="100" valign="middle" width="559"/></imageobject></inlinemediaobject>
         </para>
 
         <orderedlist>
@@ -120,10 +120,10 @@
                 </para>
             </listitem>
         </orderedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.openid.introduction.structure">
-        <title>Zend_OpenId Structure</title>
+    <section xml:id="zend.openid.introduction.structure"><info><title>Zend_OpenId Structure</title></info>
+        
 
         <para>
             <classname>Zend_OpenId</classname> consists of two sub-packages. The first one
@@ -142,16 +142,15 @@
 
         <note>
             <para>
-                <classname>Zend_OpenId</classname> takes advantage of the <ulink
-                    url="http://php.net/gmp">GMP extension</ulink>, where available. Consider
+                <classname>Zend_OpenId</classname> takes advantage of the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/gmp">GMP extension</link>, where available. Consider
                 enabling the GMP extension for enhanced performance when using
                 <classname>Zend_OpenId</classname>.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.openid.introduction.standards">
-        <title>Supported OpenID Standards</title>
+    <section xml:id="zend.openid.introduction.standards"><info><title>Supported OpenID Standards</title></info>
+        
 
         <para>
             The <classname>Zend_OpenId</classname> component supports the following
@@ -183,8 +182,5 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

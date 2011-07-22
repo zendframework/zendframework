@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19777 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.plugins.conclusion">
-    <title>Conclusion</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.plugins.conclusion"><info><title>Conclusion</title></info>
+    
 
     <para>
         Comprendre le concept des plugins et des chemins de préfixes aide à la compréhension du
@@ -46,8 +46,8 @@
         étendre de manière soutenue le Zend Framework.
     </para>
 
-    <note>
-        <title>Remarque</title>
+    <note><info><title>Remarque</title></info>
+        
 
         <para>
             Notons que <classname>Zend_Controller_Front</classname> propose un système de plugin
@@ -59,4 +59,4 @@
             avec les plugins déja existants.
         </para>
     </note>
-</sect1>
+</section>

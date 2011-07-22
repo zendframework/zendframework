@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.oauth.introduction.security-architecture">
-    <title>Security Architecture</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.oauth.introduction.security-architecture"><info><title>Security Architecture</title></info>
+    
 
     <para>
         OAuth was designed specifically to operate over an insecure <acronym>HTTP</acronym>
@@ -78,4 +79,4 @@
         feasible <acronym>HTTPS</acronym> is to be preferred leaving unsecured
         <acronym>HTTP</acronym> in place only where it is not possible or affordable to do so.
     </para>
-</sect2>
+</section>

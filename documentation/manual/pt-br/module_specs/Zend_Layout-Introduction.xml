@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.layout.introduction">
-    <title>Introdução</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.introduction"><info><title>Introdução</title></info>
+    
 
     <para>
         <classname>Zend_Layout</classname> implementa um clássico padrão de projeto
@@ -45,8 +45,7 @@
 
         <listitem>
             <para>
-                Seguir as mesmas regras de resolução de script (inflection) que <link
-                linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>,
+                Seguir as mesmas regras de resolução de script (inflection) que <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>,
                 mas permitir também o uso de regras diferentes.
             </para>
         </listitem>
@@ -55,7 +54,4 @@
             <para>Permitir o uso sem os componentes <acronym>MVC</acronym> do Zend Framework.</para>
         </listitem>
     </itemizedlist>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

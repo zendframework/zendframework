@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20807 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.tag.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tag.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_Tag</classname> est une suite de composants permettant de manipuler
@@ -25,8 +23,8 @@
         en fonction du poids de chaque entité.
     </para>
 
-    <example id="zend.tag.example.using">
-        <title>Utiliser Zend_Tag</title>
+    <example xml:id="zend.tag.example.using"><info><title>Utiliser Zend_Tag</title></info>
+        
 
         <para>
             Cet exemple montre comment créer une liste de tags en pondérant chacun d'eux.
@@ -55,4 +53,4 @@ foreach ($list as $item) {
             absolues 10, 1 et 2.
         </para>
     </example>
-</sect1>
+</section>

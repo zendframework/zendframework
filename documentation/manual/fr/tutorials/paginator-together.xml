@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21821 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.paginator.together">
-    <title>Assembler le tout</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.paginator.together"><info><title>Assembler le tout</title></info>
+    
 
     <para>
         Nous avons vu comment créer un objet Paginator, comment le rendre sur la page et aussi comment
@@ -74,4 +72,4 @@ foreach ($this->paginator as $item) {
         sur les possibilités de Zend_Paginator.
     </para>
 
-</sect1>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21740 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.decrypt">
-    <title>Decrypt</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.decrypt"><info><title>Decrypt</title></info>
+    
 
     <para>
         Dieser Filter verschlüsselt beliebige Strings mit den angegebenen Einstellungen. Hierfür
@@ -17,8 +15,8 @@
         Entschlüsselung.
     </para>
 
-    <sect3 id="zend.filter.set.decrypt.mcrypt">
-        <title>Entschlüsselung mit Mcrypt</title>
+    <section xml:id="zend.filter.set.decrypt.mcrypt"><info><title>Entschlüsselung mit Mcrypt</title></info>
+        
 
         <para>
             Für die Entschlüsselung von Inhalten die vorher mit <classname>Mcrypt</classname>
@@ -63,10 +61,10 @@ print $decrypted;
                 Wenn Mcrypt ein Problem mit den Einstellungen erkennt wird eine Ausnahme geworfen.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.decrypt.openssl">
-        <title>Entschlüsselung mit OpenSSL</title>
+    <section xml:id="zend.filter.set.decrypt.openssl"><info><title>Entschlüsselung mit OpenSSL</title></info>
+        
 
         <para>
             Entschlüsselung mit <classname>OpenSSL</classname> ist so einfach die Verschlüsseln.
@@ -169,5 +167,5 @@ $filter->setPassphrase('mypassphrase');
 $decrypted = $filter->filter('encoded_text_normally_unreadable');
 print $decrypted;
 ]]></programlisting>
-    </sect3>
-</sect2>
+    </section>
+</section>

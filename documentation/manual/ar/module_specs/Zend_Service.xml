@@ -1,5 +1,8 @@
-<sect1 id="zend.service.introduction">
-    <title>مقدمة</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.introduction"><info><title>مقدمة</title></info>
+    
     <para>
         <code>Zend_Service</code> عبارة عن abstract class و الذى بدوره يصبح
         اساس لكل تطبيقات الـ web services (مثل XML-RPC ).
@@ -18,8 +21,4 @@
         <link linkend="zend.service.yahoo">Yahoo!</link>.
         و ربما سيتم اضافة المزيد فى المستقبل.
     </para>
-</sect1>
-
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

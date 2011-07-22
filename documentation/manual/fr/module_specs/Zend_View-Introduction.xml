@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.view.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_View</classname> est une classe qui permet de travailler avec la
@@ -25,8 +23,8 @@
         fait va donner le contrôle au script de vue, qui va générer l'affichage.
     </para>
 
-    <sect2 id="zend.view.introduction.controller">
-        <title>Script du Contrôleur</title>
+    <section xml:id="zend.view.introduction.controller"><info><title>Script du Contrôleur</title></info>
+        
 
         <para>
             Comme exemple simple, imaginons que votre contrôleur aie une liste de données sur
@@ -60,10 +58,10 @@ $view->books = $data;
 // et appel du script de rendu d'affichage appelé "booklist.php"
 echo $view->render('booklist.php');
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.introduction.view">
-        <title>Script de vue</title>
+    <section xml:id="zend.view.introduction.view"><info><title>Script de vue</title></info>
+        
 
         <para>
             Maintenant, nous avons besoin d'associer le script de vue
@@ -107,10 +105,10 @@ echo $view->render('booklist.php');
             Notez l'utilisation de la méthode <code>escape</code> pour échapper les variables
             à afficher.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.introduction.options">
-        <title>Options</title>
+    <section xml:id="zend.view.introduction.options"><info><title>Options</title></info>
+        
 
         <para>
             <classname>Zend_View</classname> possède plusieurs options qui peuvent être
@@ -175,16 +173,15 @@ chemin/vers/
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.introduction.shortTags">
-        <title>Balises courtes dans les scripts de vue</title>
+    <section xml:id="zend.view.introduction.shortTags"><info><title>Balises courtes dans les scripts de vue</title></info>
+        
 
         <para>
             Dans nos exemples et notre documentation, nous utilisons les balises longues <acronym>PHP</acronym> :
-            <emphasis>&lt;?php</emphasis>. De plus, nous utilisons parfois <ulink
-            url="http://us.php.net/manual/en/control-structures.alternative-syntax.php">la syntaxe
-            alternative des structures de contrôle</ulink>. Ce sont des éléments pratiques à
+            <emphasis>&lt;?php</emphasis>. De plus, nous utilisons parfois <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://us.php.net/manual/en/control-structures.alternative-syntax.php">la syntaxe
+            alternative des structures de contrôle</link>. Ce sont des éléments pratiques à
             utiliser lors de la rédaction de vos scripts de vue, car elles rendent les constructions
             plus laconiques, maintiennent les instructions sur des lignes uniques et éliminent la chasse aux
             accolades à l'intérieur de l'HTML.
@@ -195,7 +192,7 @@ chemin/vers/
             courtes (<emphasis>&lt;?</emphasis> et <emphasis>&lt;?=</emphasis>), car elles rendent
             les scripts de vues moins verbeux. Cependant, la valeur par défaut du fichier
             <filename>php.ini</filename> pour le réglage <constant>short_open_tag</constant> est
-            désactivé par défaut en production ou en hébergement mutualisé&#160;; rendant ainsi
+            désactivé par défaut en production ou en hébergement mutualisé ; rendant ainsi
             vos scripts peu portables. De plus, si vous modélisez du <acronym>XML</acronym> dans
             vos scripts, la présence des balises courtes entrainera l'échec de la validation.
             Enfin, si vous utilisez les balises courtes et que <constant>short_open_tag</constant>
@@ -255,8 +252,8 @@ $view->setUseStreamWrapper(true);
             </listitem>
         </itemizedlist>
 
-        <warning>
-            <title>Les enveloppes de flux de vue dégradent les performances</title>
+        <warning><info><title>Les enveloppes de flux de vue dégradent les performances</title></info>
+            
 
             <para>
                 L'utilisation d'enveloppe de flux <emphasis>dégradera</emphasis> les
@@ -267,10 +264,10 @@ $view->setUseStreamWrapper(true);
                 contenu de vos pages.
             </para>
         </warning>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.introduction.accessors">
-        <title>Accesseurs utiles</title>
+    <section xml:id="zend.view.introduction.accessors"><info><title>Accesseurs utiles</title></info>
+        
 
         <para>
             Typiquement, vous ne devriez seulement avoir besoin d'appeler les méthodes
@@ -336,5 +333,5 @@ $view->setUseStreamWrapper(true);
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

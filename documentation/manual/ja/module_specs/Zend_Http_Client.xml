@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21815 -->
-<sect1 id="zend.http.client">
-    <title>導入</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.client"><info><title>導入</title></info>
+    
 
     <para>
         <classname>Zend_Http_Client</classname> は、Hyper-Text Transfer Protocol (<acronym>HTTP</acronym>)
@@ -11,11 +9,11 @@
         <acronym>HTTP</acronym> 認証やファイルのアップロードといった高度な機能もサポートしています。
         リクエストに成功すると (失敗しても) <classname>Zend_Http_Response</classname>
         オブジェクトを返します。これを使用すると、レスポンスのヘッダや本文にアクセスできます
-        (<xref linkend="zend.http.response" /> を参照ください)。
+        (<xref linkend="zend.http.response"/> を参照ください)。
     </para>
 
-    <sect2 id="zend.http.client.usage">
-        <title>Zend_Http_Client の使用法</title>
+    <section xml:id="zend.http.client.usage"><info><title>Zend_Http_Client の使用法</title></info>
+        
 
         <para>
             クラスのコンストラクタには、オプションの引数として URL を指定できます
@@ -24,8 +22,8 @@
             どちらも省略することが可能で、その場合は後から
             setUri() メソッドや setConfig() メソッドで指定します。
 
-            <example id="zend.http.client.introduction.example-1">
-                <title>Zend_Http_Client のインスタンスの作成</title>
+            <example xml:id="zend.http.client.introduction.example-1"><info><title>Zend_Http_Client のインスタンスの作成</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $client = new Zend_Http_Client('http://example.org', array(
@@ -51,16 +49,15 @@ $client->setConfig($config);
                     つまり、URL 中にあるパイプ記号 ('|') やキャレット記号 ('^')
                     などの特殊文字はデフォルトでは許可されないということです。
                     これを変更するには、Zend_Uri のオプション 'allow_unwise' を
-                    '<constant>TRUE</constant>' に設定します。詳細は <xref
-                        linkend="zend.uri.validation.allowunwise" />
+                    '<constant>TRUE</constant>' に設定します。詳細は <xref linkend="zend.uri.validation.allowunwise"/>
                     を参照ください。
                 </para>
             </note>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.client.configuration">
-        <title>設定パラメータ</title>
+    <section xml:id="zend.http.client.configuration"><info><title>設定パラメータ</title></info>
+        
 
         <para>
             コンストラクタおよび setConfig() メソッドでは、
@@ -68,8 +65,8 @@ $client->setConfig($config);
             これらのパラメータは、設定してもしなくてもかまいません。
             すべてのパラメータにはデフォルト値があります。
 
-            <table id="zend.http.client.configuration.table">
-                <title>Zend_Http_Client の設定パラメータ</title>
+            <table xml:id="zend.http.client.configuration.table"><info><title>Zend_Http_Client の設定パラメータ</title></info>
+                
 
                 <tgroup cols="4">
                     <thead>
@@ -103,8 +100,7 @@ $client->setConfig($config);
                         <row>
                             <entry>strictredirects</entry>
                             <entry>
-                                リダイレクトの際に RFC に厳密に従うかどうか (<xref
-                                    linkend="zend.http.client.redirections" /> を参照ください)
+                                リダイレクトの際に RFC に厳密に従うかどうか (<xref linkend="zend.http.client.redirections"/> を参照ください)
                             </entry>
                             <entry>boolean</entry>
                             <entry><constant>FALSE</constant></entry>
@@ -134,8 +130,7 @@ $client->setConfig($config);
                         <row>
                             <entry>adapter</entry>
                             <entry>
-                                使用する接続アダプタクラス (<xref
-                                    linkend="zend.http.client.adapters" /> を参照ください)
+                                使用する接続アダプタクラス (<xref linkend="zend.http.client.adapters"/> を参照ください)
                             </entry>
                             <entry>mixed</entry>
                             <entry>'Zend_Http_Client_Adapter_Socket'</entry>
@@ -176,17 +171,17 @@ $client->setConfig($config);
                 </tgroup>
             </table>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.client.basic-requests">
-        <title>基本的な HTTP リクエストの処理</title>
+    <section xml:id="zend.http.client.basic-requests"><info><title>基本的な HTTP リクエストの処理</title></info>
+        
 
         <para>
             シンプルな <acronym>HTTP</acronym> リクエストを実行するのは非常に簡単で、単に
             request() メソッドを実行するだけです。たったの三行ですんでしまいます。
 
-            <example id="zend.http.client.basic-requests.example-1">
-                <title>シンプルな GET リクエストの処理</title>
+            <example xml:id="zend.http.client.basic-requests.example-1"><info><title>シンプルな GET リクエストの処理</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $client = new Zend_Http_Client('http://example.org');
@@ -201,7 +196,7 @@ $response = $client->request();
 
             <footnote>
               <para>
-                RFC 2616 - <ulink url="http://www.w3.org/Protocols/rfc2616/rfc2616.html" /> を参照ください。
+                RFC 2616 - <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/Protocols/rfc2616/rfc2616.html">http://www.w3.org/Protocols/rfc2616/rfc2616.html</uri> を参照ください。
               </para>
             </footnote>
 
@@ -214,8 +209,8 @@ $response = $client->request();
             setMethod() もコールされていない場合は、デフォルトのリクエストメソッドとして
             GET を使用します (上の例を参照ください)。
 
-            <example id="zend.http.client.basic-requests.example-2">
-                <title>GET 以外のリクエストメソッドの使用</title>
+            <example xml:id="zend.http.client.basic-requests.example-2"><info><title>GET 以外のリクエストメソッドの使用</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 // POST リクエストを実行します
@@ -227,10 +222,10 @@ $response = $client->request();
 ]]></programlisting>
             </example>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.client.parameters">
-        <title>GET や POST へのパラメータの追加</title>
+    <section xml:id="zend.http.client.parameters"><info><title>GET や POST へのパラメータの追加</title></info>
+        
 
         <para>
             GET パラメータを <acronym>HTTP</acronym> リクエストに追加するのは簡単です。
@@ -238,11 +233,11 @@ $response = $client->request();
             このメソッドは、GET パラメータの名前を最初の引数、そして
             GET パラメータの値を二番目の引数として受け取ります。
             さらに便利に使用するため、setParameterGet()
-            メソッドでは name => value 形式の連想配列で GET 変数を指定することもできます。
+            メソッドでは name =&gt; value 形式の連想配列で GET 変数を指定することもできます。
             これは、複数の GET パラメータを指定する必要がある場合に便利です。
 
-            <example id="zend.http.client.parameters.example-1">
-                <title>GET パラメータの設定</title>
+            <example xml:id="zend.http.client.parameters.example-1"><info><title>GET パラメータの設定</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 // setParameterGet メソッドで GET パラメータを指定します
@@ -269,8 +264,8 @@ $client->setParameterGet(array(
             使用するのは setParameterPost() メソッドで、このメソッドの使用法は
             setParameterGet() メソッドと同じです。
 
-            <example id="zend.http.client.parameters.example-2">
-                <title>POST パラメータの設定</title>
+            <example xml:id="zend.http.client.parameters.example-2"><info><title>POST パラメータの設定</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 // POST パラメータを設定します
@@ -291,27 +286,23 @@ $client->setParameterPost(array(
             これは無意味です。POST 以外のリクエストでは、
             POST パラメータを指定しても無視されます。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.client.accessing_last">
-        <title>直近のリクエストやレスポンスへのアクセス</title>
+    <section xml:id="zend.http.client.accessing_last"><info><title>直近のリクエストやレスポンスへのアクセス</title></info>
+        
 
         <para>
             <classname>Zend_Http_Client</classname> では、そのクライアントオブジェクトが
             直近に送信したリクエストおよび
             直近に受信したレスポンスにアクセスするためのメソッドを提供しています。
-            <classname>Zend_Http_Client->getLastRequest()</classname>
+            <classname>Zend_Http_Client-&gt;getLastRequest()</classname>
             は何もパラメータを受け取らず、クライアントが直近に送信した
             <acronym>HTTP</acronym> リクエストを文字列で返します。同様に
-            <classname>Zend_Http_Client->getLastResponse()</classname> は、
+            <classname>Zend_Http_Client-&gt;getLastResponse()</classname> は、
             クライアントが直近に受信した <acronym>HTTP</acronym> レスポンスを
             <link linkend="zend.http.response">Zend_Http_Response</link>
             オブジェクトで返します。
         </para>
-    </sect2>
+    </section>
 
-</sect1>
-
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.log.writers.syslog">
-    <title>Writing to the System Log</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers.syslog"><info><title>Writing to the System Log</title></info>
+    
 
     <para>
         <classname>Zend_Log_Writer_Syslog</classname> writes log entries to the
@@ -44,8 +43,8 @@ $writer->setApplicationName('BarBaz');
     <para>
         You may specify the log facility either in the constructor or via an
         accessor. It should be one of the <methodname>openlog()</methodname>
-        constants defined on the <ulink url="http://php.net/openlog">openlog()
-            manual page</ulink>.
+        constants defined on the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/openlog">openlog()
+            manual page</link>.
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -62,4 +61,4 @@ $writer->setFacility(LOG_USER);
         mapped to the appropriate <methodname>syslog()</methodname> priority
         constants.
     </para>
-</sect2>
+</section>

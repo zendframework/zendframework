@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.view.controllers">
-    <title>Controller Scripts</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.controllers"><info><title>Controller Scripts</title></info>
+    
 
     <para>
         The controller is where you instantiate and configure <classname>Zend_View</classname>.
@@ -9,8 +8,8 @@
         render output using a particular script.
     </para>
 
-    <sect2 id="zend.view.controllers.assign">
-        <title>Assigning Variables</title>
+    <section xml:id="zend.view.controllers.assign"><info><title>Assigning Variables</title></info>
+        
 
         <para>
             Your controller script should assign necessary variables to the view
@@ -71,10 +70,10 @@ $view->assign('a', "Hay");
 $view->assign('b', "Bee");
 $view->assign('c', "Sea");
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.controllers.render">
-        <title>Rendering a View Script</title>
+    <section xml:id="zend.view.controllers.render"><info><title>Rendering a View Script</title></info>
+        
 
         <para>
             Once you have assigned all needed variables, the controller
@@ -91,16 +90,16 @@ $view->b = "Bee";
 $view->c = "Sea";
 echo $view->render('someView.php');
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.controllers.script-paths">
-        <title>View Script Paths</title>
+    <section xml:id="zend.view.controllers.script-paths"><info><title>View Script Paths</title></info>
+        
 
         <para>
             By default, <classname>Zend_View</classname> expects your view scripts to be relative to
             your calling script. For example, if your controller script is at
             "/path/to/app/controllers" and it calls
-            $view->render('someView.php'), <classname>Zend_View</classname> will look for
+            $view-&gt;render('someView.php'), <classname>Zend_View</classname> will look for
             "/path/to/app/controllers/someView.php".
         </para>
 
@@ -116,7 +115,7 @@ $view->setScriptPath('/path/to/app/views');
 ]]></programlisting>
 
         <para>
-            Now when you call $view->render('someView.php'), it will look
+            Now when you call $view-&gt;render('someView.php'), it will look
             for "/path/to/app/views/someView.php".
         </para>
 
@@ -140,8 +139,8 @@ $view->addScriptPath('/path/to/custom/');
 // directory for "booklist.php".
 ]]></programlisting>
 
-        <note>
-            <title>Never use user input to set script paths</title>
+        <note><info><title>Never use user input to set script paths</title></info>
+            
 
             <para>
                 <classname>Zend_View</classname> uses script paths to lookup and render
@@ -168,8 +167,5 @@ $view->render('passwd');
                 application.
             </para>
         </note>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

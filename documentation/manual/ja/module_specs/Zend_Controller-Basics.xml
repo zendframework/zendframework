@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20765 -->
-<sect1 id="zend.controller.basics">
-    <title>Zend_Controller の基本</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.basics"><info><title>Zend_Controller の基本</title></info>
+    
 
     <para>
         <classname>Zend_Controller</classname> は軽量で部品化されており、拡張しやすいように設計されています。
@@ -16,8 +16,7 @@
     </para>
 
     <para>
-        <inlinegraphic width="483" scale="100" align="center" valign="middle"
-            fileref="figures/zend.controller.basics.png" format="PNG" />
+        <inlinemediaobject><imageobject><imagedata width="483" scale="100" align="center" valign="middle" fileref="figures/zend.controller.basics.png" format="PNG"/></imageobject></inlinemediaobject>
     </para>
 
     <para>
@@ -84,8 +83,7 @@
                 <para>
                     <classname>Zend_Controller_Router_Rewrite</classname>
                     は、任意のパスにマッチさせることもできます。
-                    詳細は <link
-                        linkend="zend.controller.router">
+                    詳細は <link linkend="zend.controller.router">
                     ルータのドキュメント</link>
                     を参照ください。
                 </para>
@@ -126,8 +124,8 @@
                     となります。
                 </para>
 
-                <note>
-                    <title>大文字小文字の命名規約</title>
+                <note><info><title>大文字小文字の命名規約</title></info>
+                    
 
                     <para>
                         人はみな、リンクをタイプする際に大文字小文字の区別をあまり気にしないものです。
@@ -195,8 +193,4 @@
         それ以外の場合は、処理がそこで終了します。それ以外の場合は、
         処理が終了します。
     </para>
-</sect1>
-
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

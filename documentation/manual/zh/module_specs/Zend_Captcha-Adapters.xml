@@ -1,12 +1,15 @@
-<sect1 id="zend.captcha.adapters">
-    <title>Captcha 适配器</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.captcha.adapters"><info><title>Captcha 适配器</title></info>
+    
 
     <para>
         Zend Framework 缺省地带有下列适配器。
     </para>
 
-    <sect2 id="zend.captcha.adapters.word">
-        <title>Zend_Captcha_Word</title>
+    <section xml:id="zend.captcha.adapters.word"><info><title>Zend_Captcha_Word</title></info>
+        
 
         <para>
             Zend_Captcha_Word 是个摘要适配器，它是 Dumb、Figlet 和 Image 适配器的基础。
@@ -67,40 +70,38 @@
         <note><para>
             记住，Word 是个摘要类并且可能不能直接初始化。
         </para></note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.captcha.adapters.dumb">
-        <title>Zend_Captcha_Dumb</title>
+    <section xml:id="zend.captcha.adapters.dumb"><info><title>Zend_Captcha_Dumb</title></info>
+        
 
         <para>
             Dumb 适配器通常是自解释的。它提供了随机字符串需要用反序输入来校验。
             这样，它不是一个好的 CAPTCHA 方案，只用于测试或者最后的方案。
             它继承 <code>Zend_Captcha_Word</code>。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.captcha.adapters.figlet">
-        <title>Zend_Captcha_Figlet</title>
+    <section xml:id="zend.captcha.adapters.figlet"><info><title>Zend_Captcha_Figlet</title></info>
+        
 
         <para>
-            Figlet 适配器利用 <link
-                linkend="zend.text.figlet">Zend_Text_Figlet</link> 来展示一个
+            Figlet 适配器利用 <link linkend="zend.text.figlet">Zend_Text_Figlet</link> 来展示一个
             Figlet 给用户。Figlet captchas 只限于字符。
         </para>
 
         <para>
-            传递给构造器的选项也可以传递给适配器使用的 <link
-                linkend="zend.text.figlet">Zend_Text_Figlet</link> 对象。
+            传递给构造器的选项也可以传递给适配器使用的 <link linkend="zend.text.figlet">Zend_Text_Figlet</link> 对象。
             请参考关于配置选项的细节的文档。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.captcha.adapters.image">
-        <title>Zend_Captcha_Image</title>
+    <section xml:id="zend.captcha.adapters.image"><info><title>Zend_Captcha_Image</title></info>
+        
 
         <para>
             Image 适配器使用生成的字符并解析为图像，并把它变换成难以自动解密。
-            它需要 <ulink url="http://php.net/gd">GD extension</ulink>，使用
+            它需要 <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/gd">GD extension</link>，使用
             TrueType 或 Freetype 支持的编译。目前，Image 适配器只能产生 PNG 图像。
         </para>
 
@@ -163,14 +164,13 @@
             所有上述选项都可作为选项传递给构造器，只要去掉 'set' 方法前缀并
             把首字母变成小写：如 "suffix"、 "height"、"imgUrl"  等。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.captcha.adapters.recaptcha">
-        <title>Zend_Captcha_ReCaptcha</title>
+    <section xml:id="zend.captcha.adapters.recaptcha"><info><title>Zend_Captcha_ReCaptcha</title></info>
+        
 
         <para>
-            ReCaptcha 适配器利用 <link
-                linkend="zend.service.recaptcha">Zend_Service_ReCaptcha</link>
+            ReCaptcha 适配器利用 <link linkend="zend.service.recaptcha">Zend_Service_ReCaptcha</link>
             来生成校验 captchas。它有下列方法：
         </para>
 
@@ -190,8 +190,5 @@
                 <code>getService()</code> 让你指定并和 ReCaptcha 服务对象交互使用。
             </para></listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

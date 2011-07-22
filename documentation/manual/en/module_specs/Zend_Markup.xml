@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.markup.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.markup.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         The <classname>Zend_Markup</classname> component provides an extensible
@@ -18,4 +19,4 @@
         the renderer to use, <acronym>HTML</acronym> by default. Thirdly an array with options
         to use for the renderer can be specified.
     </para>
-</sect1>
+</section>

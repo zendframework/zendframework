@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20810 -->
-<sect1 id="zend.soap.client">
-    <title>Zend_Soap_Client</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.soap.client"><info><title>Zend_Soap_Client</title></info>
+    
 
     <para>
         <classname>Zend_Soap_Client</classname>により<acronym>PHP</acronym>プログラマーにとって<acronym>SOAP</acronym>クライアントの開発が簡単になります。
@@ -24,8 +22,8 @@
         このモードで明示的に<classname>Zend_Soap_Client</classname>クラス上に設定されなければなりません。
     </para>
 
-    <sect2 id="zend.soap.client.constructor">
-        <title>Zend_Soap_Clientコンストラクタ</title>
+    <section xml:id="zend.soap.client.constructor"><info><title>Zend_Soap_Clientコンストラクタ</title></info>
+        
         <para>
             <classname>Zend_Soap_Client</classname>コンストラクタには引数が２つあります:
             <itemizedlist>
@@ -46,8 +44,8 @@
             後から設定されるかもしれません。
         </para>
 
-        <note>
-            <title>重要</title>
+        <note><info><title>重要</title></info>
+            
             <para>
                 もし非WSDLモードで<classname>Zend_Soap_Client</classname>コンポーネントを使う場合、
                 'location' および 'uri' オプションを設定し<emphasis>なければなりません</emphasis>。
@@ -146,10 +144,10 @@ $client = new Zend_Soap_Client("some.wsdl",
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.soap.client.calls">
-        <title>SOAPリクエストの実行</title>
+    <section xml:id="zend.soap.client.calls"><info><title>SOAPリクエストの実行</title></info>
+        
 
         <para>
             <classname>Zend_Soap_Client</classname>オブジェクトを作成したら、<acronym>SOAP</acronym>リクエストを実行する準備ができます。
@@ -210,5 +208,5 @@ $result1 = $client->method1(10);
 $result2 = $client->method2(22, 'some string');
 ]]></programlisting>
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

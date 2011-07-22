@@ -1,12 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.application.core-functionality.resource-resourceabstract">
-    <title>Zend_Application_Resource_ResourceAbstract</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.core-functionality.resource-resourceabstract"><info><title>Zend_Application_Resource_ResourceAbstract</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_ResourceAbstract</classname> is an abstract
-        class implementing <link
-            linkend="zend.application.core-functionality.resource-resource">Zend_Application_Resource_Resource</link>,
+        class implementing <link linkend="zend.application.core-functionality.resource-resource">Zend_Application_Resource_Resource</link>,
         and is a good starting point for creating your own custom plugin
         resources.
     </para>
@@ -17,8 +15,8 @@
         class.
     </para>
 
-    <table id="zend.application.core-functionality.resource-resourceabstract.api">
-        <title>Zend_Application_Resource_ResourceAbstract Methods</title>
+    <table xml:id="zend.application.core-functionality.resource-resourceabstract.api"><info><title>Zend_Application_Resource_ResourceAbstract Methods</title></info>
+        
 
         <tgroup cols="4">
             <thead>
@@ -112,8 +110,8 @@
         </tgroup>
     </table>
 
-    <sect3 id="zend.application.core-functionality.resource-resourceabstract.names">
-        <title>Resource Names</title>
+    <section xml:id="zend.application.core-functionality.resource-resourceabstract.names"><info><title>Resource Names</title></info>
+        
 
         <para>
             When registering plugin resources, one issue that arises is how you
@@ -220,5 +218,5 @@ $view = $bootstrap->getResource('My_View');
             resources, add your own, mix multiple resources to achieve complex
             initialization, and more.
         </para>
-    </sect3>
-</sect2>
+    </section>
+</section>

@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.oauth.introduction" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Introduction to OAuth</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.oauth.introduction"><info><title>Introduction to OAuth</title></info>
+    
 
     <para>
         OAuth allows you to approve access by any application to your private data stored a website
@@ -40,7 +41,7 @@
         <classname>Zend_Oauth_Consumer</classname> class.
     </para>
 
-    <xi:include href="Zend_Oauth-ProtocolWorkflow.xml" />
-    <xi:include href="Zend_Oauth-SecurityArchitecture.xml" />
-    <xi:include href="Zend_Oauth-GettingStarted.xml" />
-</sect1>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Oauth-ProtocolWorkflow.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Oauth-SecurityArchitecture.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Oauth-GettingStarted.xml"/>
+</section>

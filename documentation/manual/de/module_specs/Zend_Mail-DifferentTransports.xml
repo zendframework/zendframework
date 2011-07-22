@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20819 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.different-transports">
-    <title>Verwendung von unterschiedlichen Versandwegen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.different-transports"><info><title>Verwendung von unterschiedlichen Versandwegen</title></info>
+    
 
     <para>
         Falls du verschiedene E-Mails über verschiedene Verbindungen versenden möchtest, kannst du
@@ -12,8 +10,8 @@
         Anfrage von <methodname>send()</methodname> überschreiben.
     </para>
 
-    <example id="zend.mail.different-transports.example-1">
-        <title>Verwendung von unterschiedlichen Transportwegen</title>
+    <example xml:id="zend.mail.different-transports.example-1"><info><title>Verwendung von unterschiedlichen Transportwegen</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
@@ -26,12 +24,12 @@ $mail->send();  // wieder Standardmethode verwenden
 ]]></programlisting>
     </example>
 
-    <note>
-        <title>Zusätzliche Versandwege</title>
+    <note><info><title>Zusätzliche Versandwege</title></info>
+        
 
         <para>
             Weitere Versandwege können geschrieben werden, indem
              <classname>Zend_Mail_Transport_Interface</classname> implementiert wird.
         </para>
     </note>
-</sect1>
+</section>

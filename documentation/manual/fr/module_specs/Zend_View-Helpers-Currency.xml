@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21826 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.currency">
-    <title>Aide Currency</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.currency"><info><title>Aide Currency</title></info>
+    
 
     <para>
         Afficher des informations de monnaie localisées est très courant; l'aide de vue de
@@ -57,8 +55,8 @@
         </para>
     </note>
 
-    <example id="zend.view.helpers.initial.currency.registered">
-        <title>Instance en registre</title>
+    <example xml:id="zend.view.helpers.initial.currency.registered"><info><title>Instance en registre</title></info>
+        
 
         <para>
             Pour utiliser une instance en registre, créez une instance de
@@ -83,8 +81,8 @@ echo $this->currency(1234.56);
         dans votre vue et la configurer après cela.
     </para>
 
-    <example id="zend.view.helpers.initial.currency.afterwards">
-        <title>Instance dans la vue</title>
+    <example xml:id="zend.view.helpers.initial.currency.afterwards"><info><title>Instance dans la vue</title></info>
+        
 
         <para>
             Pour utiliser l'interface fluide, créez une instance de <classname>Zend_Currency</classname>,
@@ -104,8 +102,8 @@ $this->currency()->setCurrency($currency)->currency(1234.56);
         l'utiliser de manière directe, via instanciation manuelle.
     </para>
 
-    <example id="zend.view.helpers.initial.currency.directly.example-1">
-        <title>Utilisation directe via instanciation</title>
+    <example xml:id="zend.view.helpers.initial.currency.directly.example-1"><info><title>Utilisation directe via instanciation</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 // Notre monnaie d'exemple
@@ -124,8 +122,8 @@ echo $helper->currency(1234.56); // Ceci affiche '€ 1.234,56'
         interne de l'aide.
     </para>
 
-    <example id="zend.view.helpers.initial.currency.directly.example-2">
-        <title>Utilisation directe</title>
+    <example xml:id="zend.view.helpers.initial.currency.directly.example-2"><info><title>Utilisation directe</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 // Notre monnaie d'exemple
@@ -143,7 +141,4 @@ echo $helper->currency(1234.56, array('precision' => 1));
         Concernant les options disponibles, voyez la méthode
         <methodname>toCurrency()</methodname> de  <classname>Zend_Currency</classname>.
     </para>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

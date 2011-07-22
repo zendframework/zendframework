@@ -1,0 +1,4 @@
+[production]
+foo = "bar"
+
+[testing : production]

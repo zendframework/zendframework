@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20827 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.navigation.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_Navigation</classname> est un composant gérant arbres et menus
@@ -11,15 +11,15 @@
         concernant la navigation.
     </para>
 
-    <sect2 id="zend.navigation.introduction.concepts">
-        <title>Pages et Conteneurs</title>
+    <section xml:id="zend.navigation.introduction.concepts"><info><title>Pages et Conteneurs</title></info>
+        
 
         <para>
             Deux concepts existent dans <classname>Zend_Navigation</classname>:
         </para>
 
-        <sect3 id="zend.navigation.introduction.pages">
-            <title>Pages</title>
+        <section xml:id="zend.navigation.introduction.pages"><info><title>Pages</title></info>
+            
             <para>
                 Une page (<classname>Zend_Navigation_Page</classname>) dans
                 <classname>Zend_Navigation</classname> – dans sa forme la plus
@@ -33,16 +33,16 @@
                 Pour plus d'informations sur les pages, lisez
                 <link linkend="zend.navigation.pages">leur section</link>.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.navigation.introduction.containers">
-            <title>Conteneurs</title>
+        <section xml:id="zend.navigation.introduction.containers"><info><title>Conteneurs</title></info>
+            
             <para>
                 Un conteneur de navigation
                 (<classname>Zend_Navigation_Container</classname>) est une classe
                 contenant des pages. Elle possède des méthodes pour ajouter, supprimer,
                 récupérer et itrérer au travers de pages. Elle implémente les interfaces
-                de la <ulink url="http://php.net/spl">SPL</ulink>
+                de la <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/spl">SPL</link>
                 <classname>RecursiveIterator</classname> et
                 <classname>Countable</classname>, et peuvent ainsi être parcourues avec
                 les itérateurs de la SPL tels que
@@ -61,11 +61,11 @@
                     qu'une page peut posséder des sous-pages.
                 </para>
             </note>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.navigation.introduction.separation">
-        <title>Séparation des données (modèle) et du rendu (vue)</title>
+    <section xml:id="zend.navigation.introduction.separation"><info><title>Séparation des données (modèle) et du rendu (vue)</title></info>
+        
 
         <para>
             Les classes dans <classname>Zend_Navigation</classname> ne s'occupent
@@ -80,5 +80,5 @@
             Pour plus d'informations sur le rendu des éléments, lisez
             <link linkend="zend.view.helpers.initial.navigation">leur section</link>.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

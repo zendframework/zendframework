@@ -1,25 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22066 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Classes de validation standard</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set"><info><title>Classes de validation standard</title></info>
+    
 
     <para>
         Zend Framework est fourni avec un jeu de classes de validation standard, qui sont
         directement utilisables par votre application.
     </para>
 
-    <xi:include href="Zend_Validate-Alnum.xml" />
-    <xi:include href="Zend_Validate-Alpha.xml" />
-    <xi:include href="Zend_Validate-Barcode.xml">
-        <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Barcode.xml" /></xi:fallback>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-Alnum.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-Alpha.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-Barcode.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Barcode.xml"/></xi:fallback>
     </xi:include>
-    <xi:include href="Zend_Validate-Between.xml" />
-    <xi:include href="Zend_Validate-Callback.xml" />
-    <xi:include href="Zend_Validate-CreditCard.xml" />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-Between.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-Callback.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-CreditCard.xml"/>
 
-    <sect2 id="zend.validate.set.ccnum">
-        <title>Ccnum</title>
+    <section xml:id="zend.validate.set.ccnum"><info><title>Ccnum</title></info>
+        
 
         <note>
             <para>
@@ -28,26 +28,26 @@
                 utiliser CreditCard au lieu de Ccnum.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <xi:include href="Zend_Validate-Date.xml" />
-    <xi:include href="Zend_Validate-Db.xml" />
-    <xi:include href="Zend_Validate-Digits.xml" />
-    <xi:include href="Zend_Validate-EmailAddress.xml" />
-    <xi:include href="Zend_Validate-Float.xml" />
-    <xi:include href="Zend_Validate-GreaterThan.xml" />
-    <xi:include href="Zend_Validate-Hex.xml" />
-    <xi:include href="Zend_Validate-Hostname.xml" />
-    <xi:include href="Zend_Validate-Iban.xml" />
-    <xi:include href="Zend_Validate-Identical.xml" />
-    <xi:include href="Zend_Validate-InArray.xml" />
-    <xi:include href="Zend_Validate-Int.xml" />
-    <xi:include href="Zend_Validate-Ip.xml" />
-    <xi:include href="Zend_Validate-Isbn.xml" />
-    <xi:include href="Zend_Validate-LessThan.xml" />
-    <xi:include href="Zend_Validate-NotEmpty.xml" />
-    <xi:include href="Zend_Validate-PostCode.xml" />
-    <xi:include href="Zend_Validate-Regex.xml" />
-    <xi:include href="Zend_Validate-Sitemap.xml" />
-    <xi:include href="Zend_Validate-StringLength.xml" />
-</sect1>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-Date.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-Db.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-Digits.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-EmailAddress.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-Float.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-GreaterThan.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-Hex.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-Hostname.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-Iban.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-Identical.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-InArray.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-Int.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-Ip.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-Isbn.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-LessThan.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-NotEmpty.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-PostCode.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-Regex.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-Sitemap.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Validate-StringLength.xml"/>
+</section>

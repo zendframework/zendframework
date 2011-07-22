@@ -1,7 +1,8 @@
-<sect1 id="zend.auth.adapter.dbtable">
-    <title>数据库表认证</title>
-    <sect2 id="zend.auth.adapter.dbtable.introduction">
-        <title>简介</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.dbtable"><info><title>数据库表认证</title></info>
+    
+    <section xml:id="zend.auth.adapter.dbtable.introduction"><info><title>简介</title></info>
+        
         <para>
             <code>Zend_Auth_Adapter_DbTable</code>提供依靠存储在数据库表中的证书来认证的能力。因为<code>Zend_Auth_Adapter_DbTable</code>需要<code>Zend_Db_Adapter_Abstract</code>的实例来传递给它的构造器，所以每个实例要和特定的数据库连接绑定。其它配置选项可以通过构造器和实例方法设置，每个选项有一个配置。
         </para>
@@ -30,8 +31,8 @@
                 </listitem>
             </itemizedlist>
         </para>
-        <example id="zend.auth.adapter.dbtable.introduction.example.basic_usage">
-            <title>基本用法</title>
+        <example xml:id="zend.auth.adapter.dbtable.introduction.example.basic_usage"><info><title>基本用法</title></info>
+            
             <para>
                 正如在简介中所解释的，<code>Zend_Auth_Adapter_DbTable</code>构造器需要一个<code>Zend_Db_Adapter_Abstract</code>的实例，这个实例用做数据库连结，并且认证适配器实例绑定到这个数据库连接。首先，应该创建数据库连接。
             </para>
@@ -59,8 +60,8 @@ $sqlInsert = "INSERT INTO users (username, password, real_name) "
 
 // 插入数据
 $dbAdapter->query($sqlInsert);
-]]>
-            </programlisting>
+
+            ]]></programlisting>
             <para>
                 随着数据库连接和表数据已经可用，<code>Zend_Auth_Adapter_DbTable</code>可以被创建。配置选项的值可以传递给构造器或者延后在实例化以后用做setter方法的参数:
             </para>
@@ -81,8 +82,8 @@ $authAdapter
     ->setIdentityColumn('username')
     ->setCredentialColumn('password')
 ;
-]]>
-            </programlisting>
+
+            ]]></programlisting>
             <para>
                 在这点上，认证适配器实例已经可以接受认证查询。为了合成一个认证查询，在调用<code>authenticate()</code>方法之前，输入的证书的值要传递给适配器：
             </para>
@@ -95,8 +96,8 @@ $authAdapter
 
 // 执行认证查询，并保存结果
 $result = $authAdapter->authenticate();
-]]>
-            </programlisting>
+
+            ]]></programlisting>
             <para>
                 除了基于认证结果对象的 <code>getIdentity()</code> 方法的可用性之外，<code>Zend_Auth_Adapter_DbTable</code>也支持从认证成功的表中读取一行数据：
             </para>
@@ -118,15 +119,15 @@ Array
     [real_name] => My Real Name
 )
 */
-]]>
-            </programlisting>
+
+            ]]></programlisting>
             <para>
                 因为表行里包含证书值，通过防止无意识地访问来安全化这个值很重要。
             </para>
         </example>
-    </sect2>
-    <sect2 id="zend.auth.adapter.dbtable.advanced.storing_result_row">
-        <title>高级使用：持久一个 DbTable 结果对象</title>
+    </section>
+    <section xml:id="zend.auth.adapter.dbtable.advanced.storing_result_row"><info><title>高级使用：持久一个 DbTable 结果对象</title></info>
+        
         <para>
             缺省地，基于成功的认证<code>Zend_Auth_Adapter_DbTable</code> 返回提供给auth对象的身份。对于其他用例情景，如开发者想给<code>Zend_Auth</code> 的持久存储机制存储一个包括其他有用信息的身份对象，已经通过使用<code>getResultRowObject()</code> 方法返回一个<code>stdClass</code>对象解决了。下面的代码片段举例说明它的用法：
         </para>
@@ -157,11 +158,11 @@ if ($result->isValid()) {
     /* ... */
 
 }
-]]>
-        </programlisting>
-    </sect2>
-    <sect2 id="zend.auth.adapter.dbtable.advanced.advanced_usage">
-        <title>高级用法范例</title>
+
+        ]]></programlisting>
+    </section>
+    <section xml:id="zend.auth.adapter.dbtable.advanced.advanced_usage"><info><title>高级用法范例</title></info>
+        
         <para>
             虽然 Zend_Auth （和它的继承者 Zend_Auth_Adapter_DbTable ）主要用来 <emphasis role="strong">认证</emphasis> 而不是 <emphasis role="strong">授权</emphasis> ，但是基于它们用在哪个域名下，还是有一些实例和问题。根据如何解释你的问题，有时候通过在认证适配器里检查授权问题也许能解决问题。
         </para>
@@ -186,8 +187,8 @@ $adapter = new Zend_Auth_Adapter_DbTable(
     'password',
     'MD5(?) AND active = "TRUE"'
 );
-]]>
-        </programlisting>
+
+        ]]></programlisting>
         <para>
             另外一个场景是免疫机制的实现。免疫是指大幅提高程序安全的技术术语。
             它的想法是基于连接随机字符串到每个密码来使从字典里预先计算好的哈希值来完成强力攻击数据库成为可能。
@@ -201,8 +202,8 @@ $sqlAlter = "ALTER TABLE [users] "
           . "AFTER [password]";
 
 $dbAdapter->query($sqlAlter);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
         <para>
             这里是在注册时给每个用户生成免疫字符串的简单的方法：
         </para>
@@ -211,8 +212,8 @@ for ($i = 0; $i < 50; $i++)
 {
     $dynamicSalt .= chr(rand(33, 126));
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
         <para>
             构造适配器：
         </para>
@@ -226,8 +227,8 @@ $adapter = new Zend_Auth_Adapter_DbTable(
     . Zend_Registry::get('staticSalt')
     . "', ?, password_salt))"
 );
-]]>
-        </programlisting>
+
+        ]]></programlisting>
         <note>
             <para>
                 你可以通过使用静态免疫值硬编码到程序里来更好地改善安全问题。
@@ -235,5 +236,5 @@ $adapter = new Zend_Auth_Adapter_DbTable(
                 依然完整，攻击者仍得不到你的数据。
             </para>
         </note>
-    </sect2>
-</sect1>
+    </section>
+</section>

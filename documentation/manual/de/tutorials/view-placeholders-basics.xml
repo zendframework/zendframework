@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20109 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.view.placeholders.basics">
-    <title>Grundsätzliche Verwendung von Platzhaltern</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.view.placeholders.basics"><info><title>Grundsätzliche Verwendung von Platzhaltern</title></info>
+    
 
     <para>
         Zend Framework definiert einen generischen <methodname>placeholder()</methodname> View
@@ -260,8 +258,7 @@ $this->placeholder('sidebar')
 
     <para>
         Es gibt eine große Anzahl an Dinge die man tun kann wenn Platzhalter und Layout Skripte
-        kombiniert werden; man sollte mit Ihnen experimentieren und das <link
-            linkend="zend.view.helpers.initial.placeholder">betreffende Kapitel im Handbuch</link>
+        kombiniert werden; man sollte mit Ihnen experimentieren und das <link linkend="zend.view.helpers.initial.placeholder">betreffende Kapitel im Handbuch</link>
         für weitere Informationen lesen.
     </para>
-</sect1>
+</section>

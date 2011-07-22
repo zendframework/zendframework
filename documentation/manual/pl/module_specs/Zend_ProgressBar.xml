@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20827 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.progressbar.introduction" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Zend_ProgressBar</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.progressbar.introduction"><info><title>Zend_ProgressBar</title></info>
+    
 
-    <sect2 id="zend.progressbar.whatisit">
-        <title>Wprowadzenie</title>
+    <section xml:id="zend.progressbar.whatisit"><info><title>Wprowadzenie</title></info>
+        
 
         <para>
             <classname>Zend_ProgressBar</classname> to komponent służący do tworzenia i
@@ -16,10 +14,10 @@
             jest wywoływany z obliczonymi danymi takimi jak procent postępu
             oraz czas, jaki został do końca wykonywanej akcji.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.progressbar.basic">
-        <title>Podstawowe użycie Zend_Progressbar</title>
+    <section xml:id="zend.progressbar.basic"><info><title>Podstawowe użycie Zend_Progressbar</title></info>
+        
 
         <para>
             <classname>Zend_ProgressBar</classname> jest komponentem łatwym w użyciu. Należy,
@@ -56,10 +54,10 @@ $progressBar->finish();
             ma konkretnych danych do wysłania adapterowi ale niezbędna jest aktualizacja
             paska postępu. 
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.progressbar.persistent">
-        <title>Postęp utrwalony (persistent progress)</title>
+    <section xml:id="zend.progressbar.persistent"><info><title>Postęp utrwalony (persistent progress)</title></info>
+        
 
         <para>
             Jeśli zajdzie potrzeba utrzymania paska postępu przez wiele żądań, można w tym celu
@@ -72,28 +70,25 @@ $progressBar->finish();
             (wymagany przy obliczaniu czasu pozostałego do końca) będą pobrane podczas następnego
             żądania i uruchomienia skryptu.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.progressbar.adapters">
-        <title>Standardowe adaptery</title>
+    <section xml:id="zend.progressbar.adapters"><info><title>Standardowe adaptery</title></info>
+        
 
         <para>
             Standardowo <classname>Zend_ProgressBar</classname> ma do dyspozycji następujące
             adaptery:
             <itemizedlist mark="opencircle">
                 <listitem>
-                    <para><xref linkend="zend.progressbar.adapter.console" /></para>
+                    <para><xref linkend="zend.progressbar.adapter.console"/></para>
                 </listitem>
-                <listitem><para><xref linkend="zend.progressbar.adapter.jspush" /></para></listitem>
-                <listitem><para><xref linkend="zend.progressbar.adapter.jspull" /></para></listitem>
+                <listitem><para><xref linkend="zend.progressbar.adapter.jspush"/></para></listitem>
+                <listitem><para><xref linkend="zend.progressbar.adapter.jspull"/></para></listitem>
             </itemizedlist>
         </para>
 
-        <xi:include href="Zend_ProgressBar_Adapter_Console.xml" />
-        <xi:include href="Zend_ProgressBar_Adapter_JsPush.xml" />
-        <xi:include href="Zend_ProgressBar_Adapter_JsPull.xml" />
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_ProgressBar_Adapter_Console.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_ProgressBar_Adapter_JsPush.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_ProgressBar_Adapter_JsPull.xml"/>
+    </section>
+</section>

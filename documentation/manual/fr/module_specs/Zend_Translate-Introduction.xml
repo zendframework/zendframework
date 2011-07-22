@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20799 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.translate.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_Translate</classname> est la solution de Zend Framework pour des
@@ -105,8 +105,8 @@
         </listitem>
     </itemizedlist>
 
-    <sect2 id="zend.translate.introduction.adapters">
-        <title>Démarrer avec le multi-linguisme</title>
+    <section xml:id="zend.translate.introduction.adapters"><info><title>Démarrer avec le multi-linguisme</title></info>
+        
 
         <para>
             Ce que nous voulons faire c'est traduire les chaînes de caractère générées afin
@@ -141,5 +141,5 @@
             Les sections suivantes vous guident par chacune des quatre étapes. Lisez les pages
             suivantes pour créer votre propre application Web multilingue.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

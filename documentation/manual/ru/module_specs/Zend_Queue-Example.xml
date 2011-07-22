@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.queue.example">
-    <title>Примеры использования</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.example"><info><title>Примеры использования</title></info>
+    
 
     <para>
         The below example of <classname>Zend_Queue</classname> shows a variety of
@@ -50,4 +49,4 @@ $queue->send('My Test Message');
 // Удаление созданной очереди и всех сообщений в ней
 $queue->deleteQueue('queue2');
 ]]></programlisting>
-</sect1>
+</section>

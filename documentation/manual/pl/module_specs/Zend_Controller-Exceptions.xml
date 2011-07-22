@@ -1,8 +1,9 @@
-<sect1 id="zend.controller.exceptions">
-    <title>Wyjątki MVC</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.exceptions"><info><title>Wyjątki MVC</title></info>
+    
 
-    <sect2 id="zend.controller.exceptions.introduction">
-        <title>Wprowadzenie</title>
+    <section xml:id="zend.controller.exceptions.introduction"><info><title>Wprowadzenie</title></info>
+        
 
         <para>
             Komponenty MVC w Zend Framework używają kontrolera frontowego, co
@@ -21,10 +22,10 @@
             kolei, obiekt odpowiedzi domyślnie nie wyświetla wiadomości o
             wyjątkach.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.exceptions.handling">
-        <title>W jaki sposób możesz obsługiwać wyjątki?</title>
+    <section xml:id="zend.controller.exceptions.handling"><info><title>W jaki sposób możesz obsługiwać wyjątki?</title></info>
+        
 
         <para>
             Obecnie w komponentach MVC wbudowanych jest kilka mechanizmów
@@ -34,8 +35,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    Domyślnie rejestrowana i aktywna jest <link
-                        linkend="zend.controller.plugins.standard.errorhandler">wtyczka
+                    Domyślnie rejestrowana i aktywna jest <link linkend="zend.controller.plugins.standard.errorhandler">wtyczka
                     obsługi błędów</link>. Ta wtyczka została stworzona aby
                     obsługiwać:
                 </para>
@@ -77,8 +77,8 @@ try {
 } catch (Exception $e) {
     // sam obsłuż wyjątki
 }
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
                 <para>
                     Ta metoda jest najprawdopodobniej najłatwiejszym sposobem
@@ -127,8 +127,8 @@ if ($response->isException()) {
     $response->sendHeaders();
     $response->outputBody();
 }
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
                 <para>
                     Główną zaletą, dzięki której ta metoda umożliwia więcej niż
@@ -138,10 +138,10 @@ if ($response->isException()) {
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.exceptions.internal">
-        <title>Wyjątki MVC które możesz napotkać</title>
+    <section xml:id="zend.controller.exceptions.internal"><info><title>Wyjątki MVC które możesz napotkać</title></info>
+        
 
         <para>
             Różne komponenty MVC -- obiekt żądania, router, obiekt uruchamiający,
@@ -175,8 +175,8 @@ $front->setParam('useDefaultControllerAlways', true);
 
 // lub
 $dispatcher->setParam('useDefaultControllerAlways', true);
-]]>
-                        </programlisting>
+
+                        ]]></programlisting>
 
                         <para>
                             Gdy ta flaga jest ustawiona, obiekt uruchamiający,
@@ -194,8 +194,7 @@ $dispatcher->setParam('useDefaultControllerAlways', true);
                             Wyjątek wyrzucany przez metodę <code>dispatch()</code>
                             jest wyjątkiem <code>Zend_Controller_Dispatcher_Exception</code>
                             zawierającym tekst 'Invalid controller specified'.
-                            Użyj jednej z metod opisanych w <link
-                            linkend="zend.controller.exceptions.handling">poprzedniej
+                            Użyj jednej z metod opisanych w <link linkend="zend.controller.exceptions.handling">poprzedniej
                             sekcji</link> aby złapać wyjątek, a następnie
                             przekierować do strony błędu lub do strony głownej.
                         </para>
@@ -234,8 +233,8 @@ class My_Controller_Action extends Zend_Controller_Action
         throw new Exception('Invalid method');
     }
 }
-]]>
-                        </programlisting>
+
+                        ]]></programlisting>
                         <para>
                             Powyższa metoda przechwytuje wszystkie wywołane
                             niezdefiniowane akcje i przekierowuje żądanie do
@@ -273,8 +272,8 @@ class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
         return $action;
     }
 }
-]]>
-                        </programlisting>
+
+                        ]]></programlisting>
 
                         <para>
                             Powyższy kod sprawdza czy zażądana akcja istnieje w
@@ -345,8 +344,8 @@ class My_Controller_PreDispatchPlugin extends Zend_Controller_Plugin_Abstract
         }
     }
 }
-]]>
-                        </programlisting>
+
+                        ]]></programlisting>
 
                         <para>
                             W tym przykładzie sprawdzamy czy zażądana akcja
@@ -358,5 +357,5 @@ class My_Controller_PreDispatchPlugin extends Zend_Controller_Plugin_Abstract
                 </itemizedlist>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

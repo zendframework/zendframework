@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.console.getopt.rules">
-    <title>Definieren von Getopt Regeln</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.rules"><info><title>Definieren von Getopt Regeln</title></info>
+    
 
     <para>
         Der Constructor für die <classname>Zend_Console_Getopt</classname> Klasse nimmt ein bis drei
@@ -20,26 +18,24 @@
 
     <para>
         Das dritte Argument des Constructors kann Konfigurationsoptionen enthalten um das Verhalten
-        von <classname>Zend_Console_Getopt</classname> anzupassen. Siehe <link
-            linkend="zend.console.getopt.configuration.config">Konfiguration hinzufügen</link> für
+        von <classname>Zend_Console_Getopt</classname> anzupassen. Siehe <link linkend="zend.console.getopt.configuration.config">Konfiguration hinzufügen</link> für
         eine Referenz der möglichen Optionen.
     </para>
 
-    <sect2 id="zend.console.getopt.rules.short">
-        <title>Optionen mit der kurzen Syntax definieren</title>
+    <section xml:id="zend.console.getopt.rules.short"><info><title>Optionen mit der kurzen Syntax definieren</title></info>
+        
 
         <para>
             <classname>Zend_Console_Getopt</classname> unterstützt eine kompakte Syntax wie Sie
-            durch <acronym>GNU</acronym> Getopt verwendet wird (siehe <ulink
-                url="http://www.gnu.org/software/libc/manual/html_node/Getopt.html">http://www.gnu.org/software/libc/manual/html_node/Getopt.html</ulink>).
+            durch <acronym>GNU</acronym> Getopt verwendet wird (siehe <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.gnu.org/software/libc/manual/html_node/Getopt.html">http://www.gnu.org/software/libc/manual/html_node/Getopt.html</link>).
             Diese Syntax unterstützt nur Einzel-Zeichen Flags. In einer einzelnen Zeichenkette, wird
             jeder Buchstabe angegeben der einem Flag entspricht das durch die Anwendung unterstützt
             wird. Der Buchstabe, gefolgt von einem Doppelpunkt Zeichen (<emphasis>:</emphasis>)
             zeigt ein Flag das einen Parameter benötigt.
         </para>
 
-        <example id="zend.console.getopt.rules.short.example">
-            <title>Verwendung der kurzen Syntax</title>
+        <example xml:id="zend.console.getopt.rules.short.example"><info><title>Verwendung der kurzen Syntax</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
@@ -58,10 +54,10 @@ $opts = new Zend_Console_Getopt('abp:');
             Aliase, Parametertypen und Hilfszeichenketten werden in der
             kurzen Syntax nicht unterstützt.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.console.getopt.rules.long">
-        <title>Optionen mit der langen Syntax definieren</title>
+    <section xml:id="zend.console.getopt.rules.long"><info><title>Optionen mit der langen Syntax definieren</title></info>
+        
 
         <para>
             Eine andere Syntax mit mehr Möglichkeiten ist auch vorhanden. Diese
@@ -114,8 +110,8 @@ $opts = new Zend_Console_Getopt('abp:');
             verwendet werden kann.
         </para>
 
-        <example id="zend.console.getopt.rules.long.example">
-            <title>Verwendung der langen Syntax</title>
+        <example xml:id="zend.console.getopt.rules.long.example"><info><title>Verwendung der langen Syntax</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt(
@@ -138,5 +134,5 @@ $opts = new Zend_Console_Getopt(
             Aliase füreinander, und diese Option kann einen Optionalen
             Zeichenketten Parameter annehmen.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

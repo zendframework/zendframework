@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22743 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.serializer.adapter">
-    <title>Zend_Serializer_Adapter</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.serializer.adapter"><info><title>Zend_Serializer_Adapter</title></info>
+    
 
     <para>
         <classname>Zend_Serializer</classname> Adapter erzeugen eine Brücke für unterschiedliche
@@ -22,8 +22,8 @@
         Anbei ist eine Liste der vorhandenen Adapter.
     </para>
 
-    <sect2 id="zend.serializer.adapter.phpserialize">
-        <title>Zend_Serializer_Adapter_PhpSerialize</title>
+    <section xml:id="zend.serializer.adapter.phpserialize"><info><title>Zend_Serializer_Adapter_PhpSerialize</title></info>
+        
 
         <para>
             Dieser Adapter verwendet die eingebauten <acronym>PHP</acronym> Funktionen
@@ -33,13 +33,13 @@
         <para>
             Es gibt keine konfigurierbaren Optionen für diesen Adapter.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.serializer.adapter.igbinary">
-        <title>Zend_Serializer_Adapter_Igbinary</title>
+    <section xml:id="zend.serializer.adapter.igbinary"><info><title>Zend_Serializer_Adapter_Igbinary</title></info>
+        
 
         <para>
-            <ulink url="http://opensource.dynamoid.com">Igbinary</ulink> ist eine Open Source
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://opensource.dynamoid.com">Igbinary</link> ist eine Open Source
             Software welche von Sulake Dynamoid Oy herausgegeben wird. Statt Zeit und Platz auf
             eine textuelle Repräsentation zu verschwenden, speichert igbinary Datenstrukturen von
             <acronym>PHP</acronym> in einer kompakten binären Form. Die Einsparungen sind
@@ -55,28 +55,26 @@
         <para>
             Dieser Adapter nimnt keine Optionen zur Konfiguration an.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.serializer.adapter.wddx">
-        <title>Zend_Serializer_Adapter_Wddx</title>
+    <section xml:id="zend.serializer.adapter.wddx"><info><title>Zend_Serializer_Adapter_Wddx</title></info>
+        
 
         <para>
-            <ulink url="http://wikipedia.org/wiki/WDDX">WDDX</ulink> (Web Distributed Data eXchange)
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wikipedia.org/wiki/WDDX">WDDX</link> (Web Distributed Data eXchange)
             ist eine Programmier-Sprache-, Plattform- und ein transport-neutraler datentauschender
             Mechanismus für die Übergabe von Daten zwischen unterschiedlichen Umgebungen und
             unterschiedlichen Computern.
         </para>
 
         <para>
-            Der Adapter verwendet einfach die <ulink
-                url="http://php.net/manual/book.wddx.php">wddx_*()</ulink> <acronym>PHP</acronym>
+            Der Adapter verwendet einfach die <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/manual/book.wddx.php">wddx_*()</link> <acronym>PHP</acronym>
             Funktionen. Lesen Sie bitte im <acronym>PHP</acronym> Handbuch um herauszufinden ob man
             Sie in der eigenen <acronym>PHP</acronym> Installation aktivieren kann.
         </para>
 
         <para>
-            Zusätzlich wird die <acronym>PHP</acronym> Erweiterung <ulink
-                url="http://php.net/manual/book.simplexml.php">SimpleXML</ulink> verwendet um zu
+            Zusätzlich wird die <acronym>PHP</acronym> Erweiterung <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/manual/book.simplexml.php">SimpleXML</link> verwendet um zu
             prüfen ob ein von  <methodname>wddx_unserialize()</methodname> zurückgegebener
             <constant>NULL</constant> Wert auf einem serialisierten <constant>NULL</constant> Wert
             basiert, oder auf ungültigen Daten.
@@ -86,8 +84,8 @@
             Vorhandene Optionen sind:
         </para>
 
-        <table id="zend.serializer.adapter.wddx.table.options">
-            <title>Optionen für Zend_Serializer_Adapter_Wddx</title>
+        <table xml:id="zend.serializer.adapter.wddx.table.options"><info><title>Optionen für Zend_Serializer_Adapter_Wddx</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -103,21 +101,20 @@
                     <row>
                         <entry><emphasis>comment</emphasis></entry>
                         <entry><type>string</type></entry>
-                        <entry></entry>
+                        <entry/>
                         <entry>Ein optionales Kommentar welches im Paket Header vorkommt.</entry>
                     </row>
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.serializer.adapter.json">
-        <title>Zend_Serializer_Adapter_Json</title>
+    <section xml:id="zend.serializer.adapter.json"><info><title>Zend_Serializer_Adapter_Json</title></info>
+        
 
         <para>
             Der <acronym>JSON</acronym> Adapter bietet eine Brücke zur Komponente
-            <classname>Zend_Json</classname> und zu ext/json. Lesen Sie bitte die <link
-                linkend= "zend.json.introduction">Zend_Json Dokumentation</link> für weitere
+            <classname>Zend_Json</classname> und zu ext/json. Lesen Sie bitte die <link linkend="zend.json.introduction">Zend_Json Dokumentation</link> für weitere
             Informationen.
         </para>
 
@@ -125,8 +122,8 @@
             Vorhandene Optionen sind:
         </para>
 
-        <table id="zend.serializer.adapter.json.table.options">
-            <title>Optionen für Zend_Serializer_Adapter_Json</title>
+        <table xml:id="zend.serializer.adapter.json.table.options"><info><title>Optionen für Zend_Serializer_Adapter_Json</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -145,7 +142,7 @@
                         <entry>false</entry>
 
                         <entry>
-                            Siehe <link linkend= "zend.json.advanced.objects1">diesen
+                            Siehe <link linkend="zend.json.advanced.objects1">diesen
                                 Abschnitt</link>
                         </entry>
                     </row>
@@ -156,7 +153,7 @@
                         <entry>Zend_Json::TYPE_ARRAY</entry>
 
                         <entry>
-                            Siehe <link linkend= "zend.json.advanced.objects1">diesen
+                            Siehe <link linkend="zend.json.advanced.objects1">diesen
                                 Abschnitt</link>
                         </entry>
                     </row>
@@ -167,37 +164,35 @@
                         <entry>false</entry>
 
                         <entry>
-                            Siehe <link linkend= "zend.json.advanced.expr">diesen
+                            Siehe <link linkend="zend.json.advanced.expr">diesen
                                 Abschnitt</link>
                         </entry>
                     </row>
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.serializer.adapter.amf03">
-        <title>Zend_Serializer_Adapter_Amf 0 und 3</title>
+    <section xml:id="zend.serializer.adapter.amf03"><info><title>Zend_Serializer_Adapter_Amf 0 und 3</title></info>
+        
 
         <para>
             Die <acronym>AMF</acronym> Adapter <classname>Zend_Serializer_Adapter_Amf0</classname>
             und <classname>Zend_Serializer_Adapter_Amf3</classname> bieten eine Brücke zum
-            Serialisierer der Komponente <classname>Zend_Amf</classname>. Lesen Sie bitte die <link
-                linkend= "zend.amf.introduction">Zend_Amf Dokumentation</link> für weitere
+            Serialisierer der Komponente <classname>Zend_Amf</classname>. Lesen Sie bitte die <link linkend="zend.amf.introduction">Zend_Amf Dokumentation</link> für weitere
             Informationen.
         </para>
 
         <para>
             Es gibt keine Optionen für diese Adapter.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.serializer.adapter.pythonpickle">
-        <title>Zend_Serializer_Adapter_PythonPickle</title>
+    <section xml:id="zend.serializer.adapter.pythonpickle"><info><title>Zend_Serializer_Adapter_PythonPickle</title></info>
+        
 
         <para>
-            Dieser Adapter konvertiert <acronym>PHP</acronym> Typen in eine <ulink
-                url="http://docs.python.org/library/pickle.html">Python Pickle</ulink> String
+            Dieser Adapter konvertiert <acronym>PHP</acronym> Typen in eine <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://docs.python.org/library/pickle.html">Python Pickle</link> String
             Repräsentation. Mit Ihm können die serialisierten Daten mit Python gelesen werden und
             Pickled Daten von Python mit <acronym>PHP</acronym> gelesen werden.
         </para>
@@ -206,8 +201,8 @@
             Vorhandene Optionen sind:
         </para>
 
-        <table id="zend.serializer.adapter.pythonpickle.table.options">
-            <title>Optionen für Zend_Serializer_Adapter_PythonPickle</title>
+        <table xml:id="zend.serializer.adapter.pythonpickle.table.options"><info><title>Optionen für Zend_Serializer_Adapter_PythonPickle</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -238,8 +233,8 @@
             Der Wechsel von Datentypen (PHP zu Python) findet wie folgt statt:
         </para>
 
-        <table id="zend.serializer.adapter.pythonpickle.table.php2python">
-            <title>Wechseln des Datentyps (PHP zu Python)</title>
+        <table xml:id="zend.serializer.adapter.pythonpickle.table.php2python"><info><title>Wechseln des Datentyps (PHP zu Python)</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -297,8 +292,8 @@
             Der Wechsel von Datentypen (Python zu <acronym>PHP</acronym>) findet wie folgt statt:
         </para>
 
-        <table id="zend.serializer.adapter.pythonpickle.table.python2php">
-            <title>Wechseln des Datentyps (PHP zu Python)</title>
+        <table xml:id="zend.serializer.adapter.pythonpickle.table.python2php"><info><title>Wechseln des Datentyps (PHP zu Python)</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -375,36 +370,33 @@
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.serializer.adapter.phpcode">
-        <title>Zend_Serializer_Adapter_PhpCode</title>
+    <section xml:id="zend.serializer.adapter.phpcode"><info><title>Zend_Serializer_Adapter_PhpCode</title></info>
+        
 
         <para>
             Dieser Adapter erzeugt eine Repräsentation an <acronym>PHP</acronym> Code der geparst
-            werden kann indem <ulink
-                url="http://php.net/manual/function.var-export.php">var_export()</ulink>
-            verwendet wird. Bei der Wiederherstellung werden die Daten ausgeführt indem <ulink
-                url="http://php.net/manual/function.eval.php">eval</ulink> verwendet wird.
+            werden kann indem <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/manual/function.var-export.php">var_export()</link>
+            verwendet wird. Bei der Wiederherstellung werden die Daten ausgeführt indem <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/manual/function.eval.php">eval</link> verwendet wird.
         </para>
 
         <para>
             Es gibt keine Optionen für die Konfiguration dieses Adapters.
         </para>
 
-        <warning>
-            <title>Objekte deserialisieren</title>
+        <warning><info><title>Objekte deserialisieren</title></info>
+            
 
             <para>
-                Objekte werden serialisiert indem die magische Methode <ulink
-                    url="http://php.net/manual/language.oop5.magic.php#language.oop5.magic.set-state">__set_state</ulink>
+                Objekte werden serialisiert indem die magische Methode <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/manual/language.oop5.magic.php#language.oop5.magic.set-state">__set_state</link>
                 verwendet wird. Wenn die Klasse diese Methode nicht implementiert wird wärend der
                 Ausführung ein fataler Fehler auftreten.
             </para>
         </warning>
 
-        <warning>
-            <title>Verwendet eval()</title>
+        <warning><info><title>Verwendet eval()</title></info>
+            
 
             <para>
                 Der Adapter <classname>PhpCode</classname> verwendet <methodname>eval()</methodname>
@@ -414,5 +406,5 @@
                 man die Lesbarkeit der serialisierten Daten durch Menschen benötigt.
             </para>
         </warning>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22747 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.infocard.basics">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.infocard.basics"><info><title>Einführung</title></info>
+    
 
     <para>
         Die <classname>Zend_InfoCard</classname> Komponente implementiert die Unterstützung
@@ -14,12 +12,11 @@
 
     <para>
         Detailierte Informationen über Informationskarten und Ihre Wichtigkeit für Internet
-        Identitätsmetasysteme können im <ulink
-            url="http://www.identityblog.com/">IdentityBlog</ulink> gefunden werden.
+        Identitätsmetasysteme können im <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.identityblog.com/">IdentityBlog</link> gefunden werden.
     </para>
 
-    <sect2 id="zend.infocard.basics.theory">
-        <title>Grundsätzliche Theorie der Verwendung</title>
+    <section xml:id="zend.infocard.basics.theory"><info><title>Grundsätzliche Theorie der Verwendung</title></info>
+        
 
         <para>
             <classname>Zend_InfoCard</classname> kann auf einem von zwei Wegen verwendet werden:
@@ -73,10 +70,10 @@
             Die Dokumentation des WebServers sollte konsultiert werden für Details zum Einrichten
             einer <acronym>SSL</acronym> Verschlüsselung.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.infocard.basics.auth">
-        <title>Verwendung als Teil von Zend_Auth</title>
+    <section xml:id="zend.infocard.basics.auth"><info><title>Verwendung als Teil von Zend_Auth</title></info>
+        
 
         <para>
             Um diese Komponente als Teil des <classname>Zend_Auth</classname>
@@ -162,10 +159,10 @@ if (isset($_POST['xmlToken'])) {
             Informationskarte zu prüfen und den Benutzer, durch Betrachten der Identität die von der
             <methodname>getIdentity()</methodname> Methode geboten wird, zu authentifizieren.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.infocard.basics.standalone">
-        <title>Die Zend_InfoCard Komponente alleine verwenden</title>
+    <section xml:id="zend.infocard.basics.standalone"><info><title>Die Zend_InfoCard Komponente alleine verwenden</title></info>
+        
 
         <para>
             Es ist auch möglich die <classname>Zend_InfoCard</classname> Komponente als
@@ -222,10 +219,10 @@ if (isset($_POST['xmlToken'])) {
             <methodname>process()</methodname> Methode verwendet werden um die Informationskarte zu
             bearbeiten und die Ergebnisse zurückzugeben.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.infocard.basics.claims">
-        <title>Mit einem Forderungs Objekt arbeiten</title>
+    <section xml:id="zend.infocard.basics.claims"><info><title>Mit einem Forderungs Objekt arbeiten</title></info>
+        
 
         <para>
             Egal ob die <classname>Zend_InfoCard</classname> Komponente als alleinstehende
@@ -263,10 +260,10 @@ if (isset($_POST['xmlToken'])) {
             <classname>Zend_InfoCard_Claims</classname> Objekt angeboten wird und die
             <acronym>URI</acronym> des Ausstellers der Forderung der Informationskarte zurückgibt.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.infocard.basics.attaching">
-        <title>Informationskarten an bestehende Konten anhängen</title>
+    <section xml:id="zend.infocard.basics.attaching"><info><title>Informationskarten an bestehende Konten anhängen</title></info>
+        
 
         <para>
             Es ist möglich Unterstützung für Informationskarten zu einem bestehenden
@@ -331,10 +328,10 @@ public function submitinfocardAction()
     }
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.infocard.basics.adapters">
-        <title>Erstellung von Zend_InfoCard Adapter</title>
+    <section xml:id="zend.infocard.basics.adapters"><info><title>Erstellung von Zend_InfoCard Adapter</title></info>
+        
 
         <para>
             Die <classname>Zend_InfoCard</classname> Komponente wurde entwickelt um den Wachstum im
@@ -395,5 +392,5 @@ $infoCard->setAdapter($adapter);
 
 $claims = $infoCard->process($_POST['xmlToken']);
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

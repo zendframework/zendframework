@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21826 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.gdata.authsub">
-    <title>Authentification par procédé AuthSub</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.authsub"><info><title>Authentification par procédé AuthSub</title></info>
+    
 
     <para>
         Le mécanisme d'authentification AuthSub permet d'écrire des applications dans
@@ -11,8 +9,7 @@
     </para>
 
     <para>
-        Voyez <ulink
-        url="http://code.google.com/apis/accounts/AuthForWebApps.html">http://code.google.com/apis/accounts/AuthForWebApps.html</ulink>
+        Voyez <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/accounts/AuthForWebApps.html">http://code.google.com/apis/accounts/AuthForWebApps.html</link>
         pour plus d'informations sur l'authentification AuthSub de Google Data.
     </para>
 
@@ -31,8 +28,8 @@
         l'application, et non par l'application elle-même.
     </para>
 
-    <note>
-        <title>Jetons sécurisés et certificats</title>
+    <note><info><title>Jetons sécurisés et certificats</title></info>
+        
 
         <para>
             <classname>Zend_Gdata</classname> ne supporte pas actuellement l'utilisation de
@@ -41,8 +38,8 @@
         </para>
     </note>
 
-    <sect2 id="zend.gdata.authsub.login">
-        <title>Création d'un client HTTP authentifié avec AuthSub</title>
+    <section xml:id="zend.gdata.authsub.login"><info><title>Création d'un client HTTP authentifié avec AuthSub</title></info>
+        
 
         <para>
             Votre application <acronym>PHP</acronym> devrait fournir un lien <acronym>URL</acronym> vers le service
@@ -104,10 +101,10 @@ $client = Zend_Gdata_AuthSub::getHttpClient($_SESSION['cal_token']);
 // Création d'un objet Gdata utilisant le client HTTP authentifié :
 $cal = new Zend_Gdata_Calendar($client);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.authsub.logout">
-        <title>Destruction de l'authentification AuthSub</title>
+    <section xml:id="zend.gdata.authsub.logout"><info><title>Destruction de l'authentification AuthSub</title></info>
+        
 
         <para>
             Pour détruire la validité d'un jeton d'authentification, utilisez la méthode
@@ -130,8 +127,8 @@ if (isset($_GET['logout'])) {
 }
 ]]></programlisting>
 
-        <note>
-            <title>Notes de sécurité</title>
+        <note><info><title>Notes de sécurité</title></info>
+            
 
             <para>
                 Le traitement effectué pour la variable <varname>$php_self</varname> dans l'exemple
@@ -147,5 +144,5 @@ if (isset($_GET['logout'])) {
                 partie du bon sens et des bonnes pratiques.
             </para>
         </note>
-    </sect2>
-</sect1>
+    </section>
+</section>

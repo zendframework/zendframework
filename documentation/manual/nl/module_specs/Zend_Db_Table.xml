@@ -1,10 +1,11 @@
-<sect1 id="zend.db.table">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table"><info><title>Zend_Db_Table</title></info>
 
-    <title>Zend_Db_Table</title>
+    
 
-    <sect2 id="zend.db.table.introduction">
+    <section xml:id="zend.db.table.introduction"><info><title>Inleiding</title></info>
 
-        <title>Inleiding</title>
+        
 
         <para>
             Zend_Db_Table is een tabellenmodule voor het Zend Framework. Het
@@ -13,11 +14,11 @@
             opvragen van rijen uit de tabel.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.getting-started">
+    <section xml:id="zend.db.table.getting-started"><info><title>Om te beginnen</title></info>
 
-        <title>Om te beginnen</title>
+        
 
         <para>
             Het eerste wat gedaan moet worden is een standaard database
@@ -41,8 +42,8 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
 // zet de standaard adapter voor alle Zend_Db_Table objecten
 require_once 'Zend/Db/Table.php';
 Zend_Db_Table::setDefaultAdapter($db);
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
         <para>
             Laten we ons nu voorstellen dat je een tabel genaamd
@@ -57,14 +58,14 @@ Zend_Db_Table::setDefaultAdapter($db);
         <programlisting role="php"><![CDATA[<?php
 class RoundTable extends Zend_Db_Table {}
 $table = new RoundTable();
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.name-and-key">
+    <section xml:id="zend.db.table.name-and-key"><info><title>Tabelnaam en Primaire Key</title></info>
 
-        <title>Tabelnaam en Primaire Key</title>
+        
 
         <para>
             Per definitie verwacht Zend_Db_Table dat de tabelnaam in de
@@ -84,8 +85,8 @@ class ClassName extends Zend_Db_Table
     // maar we willen ergens anders naartoe mappen
     protected $_name = 'another_table_name';
 }
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
         <para>
             Per definitie verwacht Zend_Db_Table dat jouw tabel een primaire
@@ -102,8 +103,8 @@ class ClassName extends Zend_Db_Table
     // maar we willen iets anders gebruiken
     protected $_primary = 'another_column_name';
 }
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
         <para>
             Op een andere manier mag je hetzelfde doen in de _setup()
@@ -122,14 +123,14 @@ class ClassName extends Zend_Db_Table
         parent::_setup();
     }
 }
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.insert">
+    <section xml:id="zend.db.table.insert"><info><title>Rijen invoegen</title></info>
 
-        <title>Rijen invoegen</title>
+        
 
         <para>
             Om een nieuwe rij in jouw tabel in te voegen roep je gewoon
@@ -158,14 +159,14 @@ $data = array(
 )
 
 $id = $table->insert($data);
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.udpate">
+    <section xml:id="zend.db.table.udpate"><info><title>Rijen updaten</title></info>
 
-        <title>Rijen updaten</title>
+        
 
         <para>
             Om eender welk aantal rijen in je tabel te updaten roep je
@@ -200,14 +201,14 @@ $set = array(
 $where = $db->quoteInto('first_name = ?', 'Robin');
 
 $rows_affected = $table->update($set, $where);
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.delete">
+    <section xml:id="zend.db.table.delete"><info><title>Rijen verwijderen</title></info>
 
-        <title>Rijen verwijderen</title>
+        
 
         <para>
             Om eender welk aantal rijen te verwijderen uit een tabel
@@ -236,14 +237,14 @@ $db = $table->getAdapter();
 $where = $db->quoteInto('first_name = ?', 'Patsy');
 
 $rows_affected = $table->delete($where);
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.findbykey">
+    <section xml:id="zend.db.table.findbykey"><info><title>Rijen vinden per primaire key</title></info>
 
-        <title>Rijen vinden per primaire key</title>
+        
 
         <para>
             Het is eenvoudig om rijen uit een tabel te verkrijgen door
@@ -263,14 +264,14 @@ $row = $table->find(1);
 
 // SELECT * FROM round_table WHERE id IN("1", "2", 3")
 $rowset = $table->find(array(1, 2, 3));
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.fetchonerow">
+    <section xml:id="zend.db.table.fetchonerow"><info><title>Eén enkele rij ophalen</title></info>
 
-        <title>Eén enkele rij ophalen</title>
+        
 
         <para>
             Hoewel je gemakkellijk een rij kan vinden via zijn primaire key met
@@ -306,14 +307,14 @@ $where = $db->quoteInto('noble_title = ?', 'Sir')
 $order = 'favorite_color';
 
 $row = $table->fetchRow($where, $order);
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.fetchmultiple">
+    <section xml:id="zend.db.table.fetchmultiple"><info><title>Meerdere rijen ophalen</title></info>
 
-        <title>Meerdere rijen ophalen</title>
+        
 
         <para>
             Indien je meerdere rijen in een enkele keer moet ophalen kan
@@ -347,14 +348,14 @@ $count = 10;
 $offset = 20;
 
 $rowset = $table->fetchRow($where, $order, $count, $offset);
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.domain-logic">
+    <section xml:id="zend.db.table.domain-logic"><info><title>Domein Logica Invoegen</title></info>
 
-        <title>Domein Logica Invoegen</title>
+        
 
         <para>
             Als een tabelmodule leent Zend_Db_Table er zichzelf goed toe om
@@ -385,8 +386,8 @@ class RoundTable extends Zend_Db_Table
         return parent::update($data);
     }
 }
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
         <para>
             Op een gelijkaardige wijze kan je je eigen find() methoden
@@ -405,12 +406,9 @@ class RoundTable extends Zend_Db_Table
         return $this->fetchAll($where, $order);
     }
 }
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

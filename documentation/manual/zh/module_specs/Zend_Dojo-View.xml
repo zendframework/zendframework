@@ -1,5 +1,6 @@
-<sect1 id="zend.dojo.view" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Dojo 视图助手</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.view"><info><title>Dojo 视图助手</title></info>
+    
 
     <para>
         Zend Framework 提供下列 Dojo-specific 视图助手：
@@ -12,8 +13,8 @@
         </para></listitem>
     </itemizedlist>
 
-    <example id="zend.dojo.view.setup">
-        <title>使用 Dojo 视图助手</title>
+    <example xml:id="zend.dojo.view.setup"><info><title>使用 Dojo 视图助手</title></info>
+        
 
         <para>
             为了使用 Dojo 视图助手，你需要告诉视图对象到哪里去找它们，调用
@@ -22,8 +23,8 @@
 
         <programlisting role="php"><![CDATA[
 $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             另外，你也可以使用 <code>Zend_Dojo</code> 的
@@ -32,13 +33,10 @@ $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
 
         <programlisting role="php"><![CDATA[
 Zend_Dojo::enableView($view);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
 
-    <xi:include href="Zend_Dojo-View-Dojo.xml" />
-    <xi:include href="Zend_Dojo-View-Helpers.xml" />
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Dojo-View-Dojo.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Dojo-View-Helpers.xml"/>
+</section>

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.actionhelpers.json">
-    <title>JSON</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.json"><info><title>JSON</title></info>
+    
 
     <para>
         Les réponses <acronym>JSON</acronym> sont les réponses de choix dans une
@@ -13,7 +11,7 @@
 
     <para>
         L'aide d'action <acronym>JSON</acronym> effectue plusieurs
-        traitements&#160;:
+        traitements :
     </para>
 
     <itemizedlist>
@@ -56,7 +54,7 @@ $this->_helper->json($data, array('enableJsonExprFinder' => true));
     <para>
         Son utilisation est toute simple, appelez le depuis le gestionnaire d'aides
         (Broker), ou appelez une de ses méthodes <methodname>encodeJson()</methodname> ou
-        <methodname>sendJson()</methodname>&#160;:
+        <methodname>sendJson()</methodname> :
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -77,15 +75,15 @@ class FooController extends Zend_Controller_Action
 }
 ]]></programlisting>
 
-    <note>
-        <title>Conserver les Layouts</title>
+    <note><info><title>Conserver les Layouts</title></info>
+        
 
         <para>
             Si vous avez besoin des layouts séparés pour les réponses
             <acronym>JSON</acronym>, pour par exemple générer vos réponses
             <acronym>JSON</acronym> dans un contexte particulier, chaque méthode de l'aide
             <acronym>JSON</acronym> accepte un second paramètre booléen. A
-            <constant>TRUE</constant>, les layouts resteront activées&#160;:
+            <constant>TRUE</constant>, les layouts resteront activées :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -95,7 +93,7 @@ $this->_helper->json($data, true);
         <para>
             Optionnellement, vous pouvez fournir un tableau en tant que second paramètre.
             Ce tableau peut conftenir une variété d'options, incluant l'option
-            <emphasis>keepLayouts</emphasis>&#160;:
+            <emphasis>keepLayouts</emphasis> :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -103,15 +101,15 @@ $this->_helper->json($data, array('keepLayouts' => true);
 ]]></programlisting>
     </note>
 
-    <note>
-        <title>Activer l'encodage en utilisant Zend_Json_Expr</title>
+    <note><info><title>Activer l'encodage en utilisant Zend_Json_Expr</title></info>
+        
 
         <para>
             <methodname>Zend_Json::encode()</methodname> permet l'encodage des
             expressions <acronym>JSON</acronym> natives en utilisant des objets
             <classname>Zend_Json_Expr</classname>. Cette option est désactivée par défaut. Pour
             l'activer, fournissez la valeur booléenne <constant>TRUE</constant> à l'option
-            <emphasis>enableJsonExprFinder</emphasis>&#160;:
+            <emphasis>enableJsonExprFinder</emphasis> :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -132,4 +130,4 @@ $this->_helper->json($data, array(
 ));
 ]]></programlisting>
     </note>
-</sect3>
+</section>

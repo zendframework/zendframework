@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21818 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.barcode">
-    <title>Barcode</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.barcode"><info><title>Barcode</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Barcode</classname> erlaubt es zu prüfen ob ein gegebener Wert als
@@ -358,8 +356,8 @@
         </listitem>
     </itemizedlist>
 
-    <sect3 id="zend.validate.set.barcode.options">
-        <title>Unterstützte Optionen für Zend_Validate_Barcode</title>
+    <section xml:id="zend.validate.set.barcode.options"><info><title>Unterstützte Optionen für Zend_Validate_Barcode</title></info>
+        
 
         <para>
             Die folgenden Optionen werden für <classname>Zend_Validate_Barcode</classname>
@@ -392,10 +390,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.barcode.basic">
-        <title>Grundsätzliche Verwendung</title>
+    <section xml:id="zend.validate.set.barcode.basic"><info><title>Grundsätzliche Verwendung</title></info>
+        
 
         <para>
             Um zu prüfen ob ein angegebener String ein Barcode ist muss man nur dessen Typ wissen.
@@ -410,10 +408,10 @@ if ($valid->isValid($input)) {
     // Die Eingabe ist ungültig
 }
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.barcode.checksum">
-        <title>Optionale Checksumme</title>
+    <section xml:id="zend.validate.set.barcode.checksum"><info><title>Optionale Checksumme</title></info>
+        
 
         <para>
             Einige Barcodes können mit einer optionalen Checksumme angegeben werden. Diese Barcodes
@@ -435,8 +433,8 @@ if ($valid->isValid($input)) {
 }
 ]]></programlisting>
 
-        <note>
-            <title>Reduzierte Sicherheit durch ausgeschaltete Prüfung der Checksumme</title>
+        <note><info><title>Reduzierte Sicherheit durch ausgeschaltete Prüfung der Checksumme</title></info>
+            
 
             <para>
                  Indem die Prüfung der Checksumme ausgeschaltet wird, verringert man auch die
@@ -446,10 +444,10 @@ if ($valid->isValid($input)) {
                  könnten dann als gültig zurückgegeben werden, selbst wenn Sie es nicht sind.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.barcode.custom">
-        <title>Schreiben eigener Adapter</title>
+    <section xml:id="zend.validate.set.barcode.custom"><info><title>Schreiben eigener Adapter</title></info>
+        
 
         <para>
             Man kann eigene Barcode Prüfungen für die Verwendung mit
@@ -551,5 +549,5 @@ if ($valid->isValid($input)) {
     // Die Eingabe ist ungültig
 }
 ]]></programlisting>
-    </sect3>
-</sect2>
+    </section>
+</section>

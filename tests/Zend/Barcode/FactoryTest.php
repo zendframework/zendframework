@@ -320,7 +320,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testBarcodeRendererFactoryWithUnexistantRenderer()
     {
-        $this->setExpectedException('\Zend\Loader\Exception\PluginLoaderException');
+        $this->setExpectedException('\Zend\Barcode\Exception\InvalidArgumentException');
         $renderer = Barcode\Barcode::makeRenderer('zend', array());
     }
 

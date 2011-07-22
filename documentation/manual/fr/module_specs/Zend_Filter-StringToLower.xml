@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17891 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.stringtolower">
-    <title>StringToLower</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.stringtolower"><info><title>StringToLower</title></info>
+    
 
     <para>
         Ce filtre convertit toute entrée vers des caractères minuscules.
@@ -34,8 +32,8 @@ $filter = new Zend_Filter_StringToLower(array('encoding' => 'UTF-8'));
 $filter->setEncoding('ISO-8859-1');
 ]]></programlisting>
 
-    <note>
-        <title>Préciser des mauvais encodages</title>
+    <note><info><title>Préciser des mauvais encodages</title></info>
+        
 
         <para>
             Attention une exception sera levée si vous précisez un encodage alors que l'extension
@@ -47,4 +45,4 @@ $filter->setEncoding('ISO-8859-1');
             par mbstring.
         </para>
     </note>
-</sect2>
+</section>

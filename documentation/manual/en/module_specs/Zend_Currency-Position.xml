@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.currency.position">
-    <title>Where is the currency?</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.position"><info><title>Where is the currency?</title></info>
+    
 
     <para>
         The position where the currency sign or name will be displayed depends on the locale.
@@ -9,8 +8,8 @@
         <property>display</property> option and provide one of the following constants:
     </para>
 
-    <table id="zend.currency.position.table-1">
-        <title>Available positions for the currency</title>
+    <table xml:id="zend.currency.position.table-1"><info><title>Available positions for the currency</title></info>
+        
 
         <tgroup cols="2" align="left">
             <thead>
@@ -45,8 +44,8 @@
         </tgroup>
     </table>
 
-    <example id="zend.currency.position.example-1">
-        <title>Setting the currency position</title>
+    <example xml:id="zend.currency.position.example-1"><info><title>Setting the currency position</title></info>
+        
 
         <para>
             Let's assume that your client has again set "en_US" as locale. Using no option the
@@ -84,4 +83,4 @@ print $currency; // Could return '100 $';
             regardless of the used locale or currency.
         </para>
     </example>
-</sect1>
+</section>

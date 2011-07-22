@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20807 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.test.phpunit.db.adapter">
-    <title>Utiliser l'adaptateur de tests</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.db.adapter"><info><title>Utiliser l'adaptateur de tests</title></info>
+    
 
     <para>
         Il peut être nécessaire quelques fois de vouloir tester l'application, mais sans base de données
@@ -44,7 +42,7 @@ $rs = $adapter->query('SELECT ...'); // Retourne Statement 1
 
     <para>
         Bien sûr, INSERT, UPDATE et DELETE peuvent être empilés aussi, mais vous ne pourrez alors tester
-        que <methodname>$stmt->rowCount()</methodname> car ces types de requêtes ne retournent pas de
+        que <methodname>$stmt-&gt;rowCount()</methodname> car ces types de requêtes ne retournent pas de
         résultats.
     </para>
 
@@ -88,4 +86,4 @@ echo $qp->getQuerY(); // SELECT * FROM bugs
         <methodname>setQuoteIdentifierSymbol()</methodname> vous pouvez spécifier quel symbole
         utilisé pour l'échappement, par défaut aucun n'est utilisé.
     </para>
-</sect2>
+</section>

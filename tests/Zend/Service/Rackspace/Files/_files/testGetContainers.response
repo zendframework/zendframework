@@ -1,0 +1,10 @@
+HTTP/1.1 200 OK
+Content-type: application/json; charset=utf8
+Date: Wed, 11 May 2011 09:02:43 GMT
+X-account-container-count: 3
+Connection: close
+X-account-object-count: 6
+X-account-bytes-used: 27809
+Content-length: 129
+
+[{"name":".CDN_ACCESS_LOGS","count":1,"bytes":214},{"name":"foo","count":2,"bytes":9756},{"name":"test","count":3,"bytes":17839}]

@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22210 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.dojo.build-layers">
-    <title>Support für den Build Layer von Zend_Dojo</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.build-layers"><info><title>Support für den Build Layer von Zend_Dojo</title></info>
+    
 
-    <sect2 id="zend.dojo.build-layers.introduction">
-        <title>Einführung</title>
+    <section xml:id="zend.dojo.build-layers.introduction"><info><title>Einführung</title></info>
+        
 
         <para>
             Dojo Build Layer bieten einen reinen Pfad von der Entwicklung zur Produktion wenn Dojo
@@ -76,10 +74,10 @@ $view->dojo()->registerModulePath('custom', '../custom/')
             die eigene Layer Datei erstellen. Das ist der Sinn von
             <classname>Zend_Dojo_BuildLayer</classname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.dojo.build-layers.usage">
-        <title>Erstellen eigener Modul Layer mit Zend_Dojo_BuildLayer</title>
+    <section xml:id="zend.dojo.build-layers.usage"><info><title>Erstellen eigener Modul Layer mit Zend_Dojo_BuildLayer</title></info>
+        
 
         <para>
             Am einfachsten kann man einfach <classname>Zend_Dojo_BuildLayer</classname>
@@ -157,8 +155,8 @@ class App_Plugin_DojoLayer extends Zend_Controller_Plugin_Abstract
 }
 ]]></programlisting>
 
-        <note>
-            <title>Den Layer nicht in jeder Seite erstellen</title>
+        <note><info><title>Den Layer nicht in jeder Seite erstellen</title></info>
+            
 
             <para>
                 Es ist verführerisch das Layer Skript auf jeder einzelnen Seite zu erstellen.
@@ -169,16 +167,16 @@ class App_Plugin_DojoLayer extends Zend_Controller_Plugin_Abstract
             </para>
         </note>
 
-        <sect3 id="zend.dojo.build-layers.usage.options">
-            <title>Optionen für BuildLayer</title>
+        <section xml:id="zend.dojo.build-layers.usage.options"><info><title>Optionen für BuildLayer</title></info>
+            
 
             <para>
                 Die obige Funktionalität wird in den meisten Situationen ausreichen. Für jene die
                 weitere Anpassungen benötigen, können eine Vielzahl von Optionen verwendet werden.
             </para>
 
-            <sect4 id="zend.dojo.build-layers.usage.options.view">
-                <title>Setzen des View Objekts</title>
+            <section xml:id="zend.dojo.build-layers.usage.options.view"><info><title>Setzen des View Objekts</title></info>
+                
 
                 <para>
                     Wärend das View Objekt wärend der Instanzierung übergeben werden kann, kann es
@@ -189,10 +187,10 @@ class App_Plugin_DojoLayer extends Zend_Controller_Plugin_Abstract
                 <programlisting language="php"><![CDATA[
 $build->setView($view);
 ]]></programlisting>
-            </sect4>
+            </section>
 
-            <sect4 id="zend.dojo.build-layers.usage.options.layername">
-                <title>Setzen des Namen eines Layers</title>
+            <section xml:id="zend.dojo.build-layers.usage.options.layername"><info><title>Setzen des Namen eines Layers</title></info>
+                
 
                 <para>
                     Wärend der Name des Layers wärend Instanzierung übergeben werden kann, kann er
@@ -203,10 +201,10 @@ $build->setView($view);
                 <programlisting language="php"><![CDATA[
 $build->setLayerName("custom.main");
 ]]></programlisting>
-            </sect4>
+            </section>
 
-            <sect4 id="zend.dojo.build-layers.usage.options.onload">
-                <title>Einfügen von onLoad Events im erstellten Layer</title>
+            <section xml:id="zend.dojo.build-layers.usage.options.onload"><info><title>Einfügen von onLoad Events im erstellten Layer</title></info>
+                
 
                 <para>
                     <command>dojo.addOnLoad</command> ist eine nützliche Utility für die
@@ -241,10 +239,10 @@ $build = new Zend_Dojo_BuildLayer(array(
                 <programlisting language="php"><![CDATA[
 $build->setConsumeOnLoad(true);
 ]]></programlisting>
-            </sect4>
+            </section>
 
-            <sect4 id="zend.dojo.build-layers.usage.options.javascript">
-                <title>Geholtes Javascript in den erstellten Layer einfügen</title>
+            <section xml:id="zend.dojo.build-layers.usage.options.javascript"><info><title>Geholtes Javascript in den erstellten Layer einfügen</title></info>
+                
 
                 <para>
                     Der <methodname>dojo()</methodname> View Helfer enthält Methoden für das
@@ -277,12 +275,12 @@ $build = new Zend_Dojo_BuildLayer(array(
                 <programlisting language="php"><![CDATA[
 $build->setConsumeJavascript(true);
 ]]></programlisting>
-            </sect4>
-        </sect3>
-    </sect2>
+            </section>
+        </section>
+    </section>
 
-    <sect2 id="zend.dojo.build-layers.profiles">
-        <title>Erstellung von Build Profilen mit Zend_Dojo_BuildLayer</title>
+    <section xml:id="zend.dojo.build-layers.profiles"><info><title>Erstellung von Build Profilen mit Zend_Dojo_BuildLayer</title></info>
+        
 
         <para>
             Einer der Hauptvorteile eines Dojo build Layers ist die Möglichkeit der Erstellung eines
@@ -348,8 +346,8 @@ class App_Plugin_DojoLayer extends Zend_Controller_Plugin_Abstract
             Wie bei den Modul Layern beschrieben sollte man die Datei nur einmal erstellen.
         </para>
 
-        <sect3 id="zend.dojo.build-layers.profiles.options">
-            <title>Optionen für ein Build Profil</title>
+        <section xml:id="zend.dojo.build-layers.profiles.options"><info><title>Optionen für ein Build Profil</title></info>
+            
 
             <para>
                 Die obige Funktionalität wird in den meisten Situationen ausreichend sein. Der
@@ -362,10 +360,9 @@ class App_Plugin_DojoLayer extends Zend_Controller_Plugin_Abstract
                 durchgeführt werden soll, ob die <acronym>CSS</acronym> Dateien im Layer optimiert
                 werden sollen, oder nicht, ob Test in den Build kopiert werden sollen, oder nicht,
                 usw. Für eine Aufstellung vorhandener Optionen, sollte man die
-                <ulink url="http://docs.dojocampus.org/build/index">Dojo Build Dokumentation</ulink>
-                und die <ulink
-                    url="http://dojotoolkit.org/reference-guide/dojo/index.html#package-system">begleitende
-                    Dokumentation</ulink> lesen.
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://docs.dojocampus.org/build/index">Dojo Build Dokumentation</link>
+                und die <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org/reference-guide/dojo/index.html#package-system">begleitende
+                    Dokumentation</link> lesen.
             </para>
 
             <para>
@@ -419,6 +416,6 @@ $build->setProfileOptions(array(
     'optimize' => 'shrinksafe',
 ));
 ]]></programlisting>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

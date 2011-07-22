@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21358 -->
-<sect1 id="zend.dojo.view" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Dojo ビューヘルパー</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.view"><info><title>Dojo ビューヘルパー</title></info>
+    
 
     <para>
         Zend Framework は、次のような Dojo 専用ビューヘルパーを用意しています。
@@ -18,8 +16,8 @@
         </listitem>
     </itemizedlist>
 
-    <example id="zend.dojo.view.setup">
-        <title>Dojo ビューヘルパーの使用法</title>
+    <example xml:id="zend.dojo.view.setup"><info><title>Dojo ビューヘルパーの使用法</title></info>
+        
 
         <para>
             Dojo ビューヘルパーを使用するには、
@@ -41,11 +39,8 @@ Zend_Dojo::enableView($view);
 ]]></programlisting>
     </example>
 
-    <xi:include href="Zend_Dojo-View-Dojo.xml" />
-    <xi:include href="Zend_Dojo-View-Helpers.xml">
-        <xi:fallback><xi:include href="../../en/module_specs/Zend_Dojo-View-Helpers.xml" /></xi:fallback>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Dojo-View-Dojo.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Dojo-View-Helpers.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Dojo-View-Helpers.xml"/></xi:fallback>
     </xi:include>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

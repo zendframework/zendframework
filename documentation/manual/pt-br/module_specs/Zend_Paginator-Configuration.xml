@@ -1,16 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20872 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.paginator.configuration">
-    <title>Configuração</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.paginator.configuration"><info><title>Configuração</title></info>
+    
 
     <para>
         <classname>Zend_Paginator</classname> tem vários métodos de configuração que
         podem ser chamados:
     </para>
 
-    <table id="zend.paginator.configuration.table">
-        <title>Métodos de configuração do Zend_Paginator</title>
+    <table xml:id="zend.paginator.configuration.table"><info><title>Métodos de configuração do Zend_Paginator</title></info>
+        
 
         <tgroup cols="2">
             <thead>
@@ -55,7 +55,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

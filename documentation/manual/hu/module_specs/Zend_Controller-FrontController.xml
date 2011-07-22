@@ -1,21 +1,22 @@
-<sect1 id="zend.controller.front">
-    <title>Az elülső vezérlő</title>
-    <sect2 id="zend.controller.front.overview">
-        <title>Áttekintés</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.front"><info><title>Az elülső vezérlő</title></info>
+    
+    <section xml:id="zend.controller.front.overview"><info><title>Áttekintés</title></info>
+        
         <para>
             A
             <code>Zend_Controller_Front</code>
             egy
-            <ulink url="http://hu.wikipedia.org/wiki/Modell-nézet-vezérlő">Modell-Nézet-Vezérlő</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://hu.wikipedia.org/wiki/Modell-nézet-vezérlő">Modell-Nézet-Vezérlő</link>
             (MNV) alkalmazásokban használatos
-            <ulink url="http://www.martinfowler.com/eaaCatalog/frontController.html">Elülső Vezérlő</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.martinfowler.com/eaaCatalog/frontController.html">Elülső Vezérlő</link>
             mintát valósít meg. Feladata, hogy előkészítse a kéréskörnyezetet, irányítsa a bejövő kérést, és kézbesítsen minden felfedezett műveletnek; összegyűjt minden választ és visszatér velük, amikor a folyamat befejeződik.
         </para>
         <para>
             A
             <code>Zend_Controller_Front</code>
             megvalósítja az
-            <ulink url="http://en.wikipedia.org/wiki/Singleton_pattern">Egyke</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Singleton_pattern">Egyke</link>
             mintát is, ami annyit tesz, hogy mindig csak egy példány lehet belőle elérhető. Ez lehetővé teszi, hogy egy a kézbesítési folyamat más objektumai által igénybevehető nyílvántartásként is működjön.
         </para>
         <para>
@@ -30,8 +31,8 @@
             <link linkend="zend.controller.action">műveletvezérlőket</link>
             tartalmazó könyvtár elérési útjára van szüksége. Különféle más tagfüggvények is meghívhatók az elülső vezérlő és segéd osztályai környezetének további testreszabásához.
         </para>
-        <note>
-            <title>Alapértelmezett viselkedés</title>
+        <note><info><title>Alapértelmezett viselkedés</title></info>
+            
             <para>
                 Alapból az elülső vezérlő betölti az
                 <link linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler</link>
@@ -48,8 +49,8 @@
             </para>
             <programlisting role="php"><![CDATA[<?php
 //Az ErrorHandler bővítmény kikapcsolása:
-$front->setParam('noErrorHandler', true);]]>
-            </programlisting>
+$front->setParam('noErrorHandler', true);
+            ]]></programlisting>
             <para>
                 A
                 <code>ViewRenderer</code>
@@ -59,10 +60,10 @@ $front->setParam('noErrorHandler', true);]]>
             </para>
             <programlisting role="php"><![CDATA[<?php
 //A ViewRenderer segéd kikapcsolása:
-$front->setParam('noViewRenderer', true);]]>
-            </programlisting>
+$front->setParam('noViewRenderer', true);
+            ]]></programlisting>
         </note>
-    </sect2>
+    </section>
 
 
 
@@ -79,8 +80,8 @@ $front->setParam('noViewRenderer', true);]]>
 
 
 
-    <sect2 id="zend.controller.front.methods.primary">
-        <title>Primary Methods</title>
+    <section xml:id="zend.controller.front.methods.primary"><info><title>Primary Methods</title></info>
+        
 
         <para>
             The front controller has several accessors for setting up its
@@ -88,8 +89,8 @@ $front->setParam('noViewRenderer', true);]]>
             front controller's functionality:
         </para>
 
-        <sect3 id="zend.controller.front.methods.primary.getinstance">
-            <title>getInstance()</title>
+        <section xml:id="zend.controller.front.methods.primary.getinstance"><info><title>getInstance()</title></info>
+            
 
             <para>
                 <code>getInstance()</code> is used to retrieve a front
@@ -99,18 +100,16 @@ $front->setParam('noViewRenderer', true);]]>
             </para>
 
             <programlisting role="php"><![CDATA[<?php
-$front = Zend_Controller_Front::getInstance();]]>
-            </programlisting>
-        </sect3>
+$front = Zend_Controller_Front::getInstance();
+            ]]></programlisting>
+        </section>
 
-        <sect3 id="zend.controller.front.methods.primary.setcontrollerdirectory">
-            <title>setControllerDirectory() and addControllerDirectory</title>
+        <section xml:id="zend.controller.front.methods.primary.setcontrollerdirectory"><info><title>setControllerDirectory() and addControllerDirectory</title></info>
+            
 
             <para>
-                <code>setControllerDirectory()</code> is used to tell <link
-                    linkend="zend.controller.dispatcher">the dispatcher</link>
-                where to look for <link
-                    linkend="zend.controller.action">action controller</link>
+                <code>setControllerDirectory()</code> is used to tell <link linkend="zend.controller.dispatcher">the dispatcher</link>
+                where to look for <link linkend="zend.controller.action">action controller</link>
                 class files.  It accepts either a single path or an associative
                 array of module/path pairs.
             </para>
@@ -131,8 +130,8 @@ $front->setControllerDirectory(array(
 ));
 
 // Add a 'foo' module directory:
-$front->addControllerDirectory('../modules/foo/controllers', 'foo');]]>
-            </programlisting>
+$front->addControllerDirectory('../modules/foo/controllers', 'foo');
+            ]]></programlisting>
 
             <note>
                 <para>
@@ -148,18 +147,17 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');]]>
                 using <code>getControllerDirectory()</code>; this will return an
                 array of module/directory pairs.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.front.methods.primary.dispatch">
-            <title>dispatch()</title>
+        <section xml:id="zend.controller.front.methods.primary.dispatch"><info><title>dispatch()</title></info>
+            
 
             <para>
                 <code>dispatch(Zend_Controller_Request_Abstract $request = null,
                     Zend_Controller_Response_Abstract $response = null)</code>
                 does the heavy work of the front controller. It may optionally
                 take a <link linkend="zend.controller.request">request
-                    object</link> and/or a <link
-                    linkend="zend.controller.response">response object</link>,
+                    object</link> and/or a <link linkend="zend.controller.response">response object</link>,
                 allowing the developer to pass in custom objects for each.
             </para>
 
@@ -172,9 +170,7 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');]]>
             </para>
 
             <para>
-                Similarly, <code>dispatch()</code> checks for registered <link
-                    linkend="zend.controller.router">router</link> and <link
-                    linkend="zend.controller.dispatcher">dispatcher</link>
+                Similarly, <code>dispatch()</code> checks for registered <link linkend="zend.controller.router">router</link> and <link linkend="zend.controller.dispatcher">dispatcher</link>
                 objects, instantiating the default versions of each if none is
                 found.
             </para>
@@ -198,21 +194,18 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');]]>
                 dispatch. When all is done, the front controller returns a
                 response.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.front.methods.primary.run">
-            <title>run()</title>
+        <section xml:id="zend.controller.front.methods.primary.run"><info><title>run()</title></info>
+            
 
             <para>
                 <code>Zend_Controller_Front::run($path)</code> is a static
                 method taking simply a path to a directory containing
                 controllers. It fetches a front controller instance (via
-                <link
-                    linkend="zend.controller.front.methods.primary.getinstance">getInstance()</link>,
-                registers the path provided via <link
-                    linkend="zend.controller.front.methods.primary.setcontrollerdirectory">setControllerDirectory()</link>,
-                and finally <link
-                    linkend="zend.controller.front.methods.primary.dispatch">dispatches</link>.
+                <link linkend="zend.controller.front.methods.primary.getinstance">getInstance()</link>,
+                registers the path provided via <link linkend="zend.controller.front.methods.primary.setcontrollerdirectory">setControllerDirectory()</link>,
+                and finally <link linkend="zend.controller.front.methods.primary.dispatch">dispatches</link>.
             </para>
 
             <para>
@@ -224,13 +217,13 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');]]>
             <programlisting role="php"><![CDATA[<?php
 // Instantiate front controller, set controller directory, and dispatch in one
 // easy step:
-Zend_Controller_Front::run('../application/controllers');]]>
-            </programlisting>
-        </sect3>
-    </sect2>
+Zend_Controller_Front::run('../application/controllers');
+            ]]></programlisting>
+        </section>
+    </section>
 
-    <sect2 id="zend.controller.front.methods.environment">
-        <title>Environmental Accessor Methods</title>
+    <section xml:id="zend.controller.front.methods.environment"><info><title>Environmental Accessor Methods</title></info>
+        
 
         <para>
             In addition to the methods listed above, there are a number of
@@ -254,8 +247,7 @@ Zend_Controller_Front::run('../application/controllers');]]>
                     <code>(set|get)DefaultControllerName()</code> let you
                     specify a different name to use for the default controller
                     ('index' is used otherwise) and retrieve the current value.
-                    They proxy to <link
-                        linkend="zend.controller.dispatcher">the
+                    They proxy to <link linkend="zend.controller.dispatcher">the
                         dispatcher</link>.
                 </para>
             </listitem>
@@ -272,8 +264,7 @@ Zend_Controller_Front::run('../application/controllers');]]>
 
             <listitem>
                 <para>
-                    <code>(set|get)Request()</code> let you specify <link
-                        linkend="zend.controller.request">the request</link>
+                    <code>(set|get)Request()</code> let you specify <link linkend="zend.controller.request">the request</link>
                     class or object to use during the dispatch process and to
                     retrieve the current object. When setting the request
                     object, you may pass in a request class name, in which case
@@ -283,8 +274,7 @@ Zend_Controller_Front::run('../application/controllers');]]>
 
             <listitem>
                 <para>
-                    <code>(set|get)Router()</code> let you specify <link
-                        linkend="zend.controller.router">the router</link>
+                    <code>(set|get)Router()</code> let you specify <link linkend="zend.controller.router">the router</link>
                     class or object to use during the dispatch process and to
                     retrieve the current object. When setting the router
                     object, you may pass in a router class name, in which case
@@ -300,8 +290,7 @@ Zend_Controller_Front::run('../application/controllers');]]>
 
             <listitem>
                 <para>
-                    <code>(set|get)BaseUrl()</code> let you specify <link
-                        linkend="zend.controller.request.http.baseurl">the base
+                    <code>(set|get)BaseUrl()</code> let you specify <link linkend="zend.controller.request.http.baseurl">the base
                         URL</link> to strip when routing requests and to
                     retrieve the current value. The value is provided to the
                     request object just prior to routing.
@@ -310,8 +299,7 @@ Zend_Controller_Front::run('../application/controllers');]]>
 
             <listitem>
                 <para>
-                    <code>(set|get)Dispatcher()</code> let you specify <link
-                        linkend="zend.controller.dispatcher">the
+                    <code>(set|get)Dispatcher()</code> let you specify <link linkend="zend.controller.dispatcher">the
                         dispatcher</link> class or object to use during the
                     dispatch process and retrieve the current object. When
                     setting the dispatcher object, you may pass in a dispatcher
@@ -328,8 +316,7 @@ Zend_Controller_Front::run('../application/controllers');]]>
 
             <listitem>
                 <para>
-                    <code>(set|get)Response()</code> let you specify <link
-                        linkend="zend.controller.response">the response</link>
+                    <code>(set|get)Response()</code> let you specify <link linkend="zend.controller.response">the response</link>
                     class or object to use during the dispatch process and to
                     retrieve the current object. When setting the response
                     object, you may pass in a response class name, in which case
@@ -340,8 +327,7 @@ Zend_Controller_Front::run('../application/controllers');]]>
             <listitem>
                 <para>
                     <code>registerPlugin(Zend_Controller_Plugin_Abstract $plugin, $stackIndex = null)</code>
-                    allows you to register a <link
-                        linkend="zend.controller.plugins">plugin objects</link>.
+                    allows you to register a <link linkend="zend.controller.plugins">plugin objects</link>.
                     By setting the optional <code>$stackIndex</code>, you can
                     control the order in which plugins will execute.
                 </para>
@@ -350,8 +336,7 @@ Zend_Controller_Front::run('../application/controllers');]]>
             <listitem>
                 <para>
                     <code>unregisterPlugin($plugin)</code> let you
-                    unregister <link
-                        linkend="zend.controller.plugins">plugin objects</link>.
+                    unregister <link linkend="zend.controller.plugins">plugin objects</link>.
                     <code>$plugin</code> may be either a plugin object or a
                     string denoting the class of plugin to unregister.
                 </para>
@@ -361,15 +346,13 @@ Zend_Controller_Front::run('../application/controllers');]]>
                 <para>
                     <code>throwExceptions($flag)</code> is used to turn on/off
                     the ability to throw exceptions during the dispatch process.
-                    By default, exceptions are caught and placed in the <link
-                        linkend="zend.controller.response">response
+                    By default, exceptions are caught and placed in the <link linkend="zend.controller.response">response
                         object</link>; turning on <code>throwExceptions()</code>
                     will override this behaviour.
                 </para>
 
                 <para>
-                    For more information, read <xref
-                        linkend="zend.controller.exceptions" />.
+                    For more information, read <xref linkend="zend.controller.exceptions"/>.
                 </para>
             </listitem>
 
@@ -393,10 +376,10 @@ Zend_Controller_Front::run('../application/controllers');]]>
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.front.methods.params">
-        <title>Front Controller Parameters</title>
+    <section xml:id="zend.controller.front.methods.params"><info><title>Front Controller Parameters</title></info>
+        
 
         <para>
             In the introduction, we indicated that the front controller also
@@ -466,15 +449,14 @@ Zend_Controller_Front::run('../application/controllers');]]>
                 </para>
 
                 <para>
-                    See <xref linkend="zend.controller.exceptions.internal" />
+                    See <xref linkend="zend.controller.exceptions.internal"/>
                     for more detailed information on using this setting.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>disableOutputBuffering</code> is used to hint to <link
-                        linkend="zend.controller.dispatcher">the
+                    <code>disableOutputBuffering</code> is used to hint to <link linkend="zend.controller.dispatcher">the
                         dispatcher</link> that it should not use output
                     buffering to capture output generated by action controllers.
                     By default, the dispatcher captures any output and appends
@@ -484,25 +466,23 @@ Zend_Controller_Front::run('../application/controllers');]]>
 
             <listitem>
                 <para>
-                    <code>noViewRenderer</code> is used to disable the <link
-                        linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>.
+                    <code>noViewRenderer</code> is used to disable the <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>.
                     Set this parameter to true to disable it.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>noErrorHandler</code> is used to disable the <link
-                        linkend="zend.controller.plugins.standard.errorhandler">Error
+                    <code>noErrorHandler</code> is used to disable the <link linkend="zend.controller.plugins.standard.errorhandler">Error
                         Handler plugin</link>. Set this parameter to true to
                     disable it.
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.front.subclassing">
-        <title>Subclassing the Front Controller</title>
+    <section xml:id="zend.controller.front.subclassing"><info><title>Subclassing the Front Controller</title></info>
+        
 
         <para>
             To subclass the Front Controller, at the very minimum you will need
@@ -521,8 +501,8 @@ class My_Controller_Front extends Zend_Controller_Front
         return self::$_instance;
     }
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Overriding the <code>getInstance()</code> method ensures that
@@ -541,8 +521,5 @@ class My_Controller_Front extends Zend_Controller_Front
             controller directories are stored, or what default router or
             dispatcher are used.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

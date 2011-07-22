@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.application.examples">
-    <title>Examples</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.examples"><info><title>Examples</title></info>
+    
 
     <para>
         The Bootstrap class itself will typically be fairly minimal; often,
@@ -31,8 +30,8 @@ resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
 [development : production]
 ]]></programlisting>
 
-    <note>
-        <title>Autoloader namespaces</title>
+    <note><info><title>Autoloader namespaces</title></info>
+        
 
         <para>
             Because these examples use custom code, we need to register the namespace prefixes for
@@ -250,4 +249,4 @@ echo $service->handle();
 $application = new Zend_Application(...);
 $application->getBootstrap()->bootstrapDb();
 ]]></programlisting>
-</sect1>
+</section>

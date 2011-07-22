@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21123 -->
-<sect1 id="zend.filter.filter_chains">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.filter_chains"><info><title>フィルタチェイン</title></info>
 
-    <title>フィルタチェイン</title>
+    
 
     <para>
         ひとつの値に対して、複数のフィルタを指定した順に適用しなければならないことがよくあります。
@@ -35,8 +33,8 @@ $username = $filterChain->filter($_POST['username']);
     </para>
 
     <!-- TODO : to be translated -->
-    <sect2 id="zend.filter.filter_chains.order">
-        <title>Changing filter chain order</title>
+    <section xml:id="zend.filter.filter_chains.order"><info><title>Changing filter chain order</title></info>
+        
 
         <para>
             Since 1.10, the <classname>Zend_Filter</classname> chain also
@@ -58,8 +56,5 @@ $filterChain->prependFilter(new Zend_Filter_Alpha());
 // Filter the username
 $username = $filterChain->filter($_POST['username']);
 ]]></programlisting>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

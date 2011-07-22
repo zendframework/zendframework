@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.plugins.conclusion">
-    <title>Conclusion</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.plugins.conclusion"><info><title>Conclusion</title></info>
+    
 
     <para>
         Understanding the concept of prefix paths and overriding existing plugins will help you with
@@ -46,8 +47,8 @@
         important extension point in Zend Framework.
     </para>
 
-    <note>
-        <title>Caveat</title>
+    <note><info><title>Caveat</title></info>
+        
 
         <para>
             We'll note here that <classname>Zend_Controller_Front</classname> has a plugin system -
@@ -58,4 +59,4 @@
             plugins written by developers continue to work with it.
         </para>
     </note>
-</sect1>
+</section>

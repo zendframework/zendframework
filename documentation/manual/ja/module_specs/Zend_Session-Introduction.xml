@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20807 -->
-<sect1 id="zend.session.introduction">
+<?xml version="1.0" encoding="utf-8"?>
 
-    <title>導入</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.introduction"><info><title>導入</title></info>
+
+    
 
     <para>
         Zend Framework Auth team は皆さんのフィードバックや協力をお待ちしています。
         メーリングリストは
-        <ulink url="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</link>
         です。
     </para>
 
@@ -24,13 +24,13 @@
         サーバ側のソースコードの脆弱性のために
         クライアントからのリクエストへの応答として使用できるようになった場合のみです。
         このコンポーネントのドキュメントにおいて「セッションデータ」という用語は、
-        <ulink url="http://www.php.net/manual/ja/reserved.variables.php#reserved.variables.session"><varname>$_SESSION</varname></ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/ja/reserved.variables.php#reserved.variables.session"><varname>$_SESSION</varname></link>
         に保存されたり <classname>Zend_Session</classname> で管理されたり、
         独立して <classname>Zend_Session_Namespace</classname> のアクセス用オブジェクトで管理されたりする
         サーバ側のデータをさすものとします。
         <emphasis>セッション名前空間</emphasis>
         により、セッションデータに対して昔ながらの
-        <ulink url="http://en.wikipedia.org/wiki/Namespace_%28computer_science%29">名前空間</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Namespace_%28computer_science%29">名前空間</link>
         を使用したアクセスが可能となります。
         これは、文字列をキーとした連想配列形式で実装されています。
         (通常の <acronym>PHP</acronym> の配列と同じです)。
@@ -50,7 +50,7 @@
         名前空間に認証済みユーザの情報を保存します。
         <classname>Zend_Session_Core</classname> が内部で使用しているのは通常の <acronym>PHP</acronym>
         ext/session 関数なので、おなじみのオプションや設定が適用されます
-        (<ulink url="http://www.php.net/session">http://www.php.net/session</ulink>
+        (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/session">http://www.php.net/session</link>
         を参照ください)。これは、オブジェクト指向で扱えたりデフォルトをサポートしていたりという点で
         Zend Framework とうまく組み合わせることができます。
         したがって、クッキーに記録したり URL に埋め込まれたりする
@@ -59,8 +59,8 @@
 
     <para>
         デフォルトの
-        <ulink url="http://www.php.net/manual/ja/function.session-set-save-handler.php">セッション保存ハンドラ
-        </ulink> は、クラスタ構成のサーバではセッションデータの関連性を保持できないことがあります。
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/ja/function.session-set-save-handler.php">セッション保存ハンドラ
+        </link> は、クラスタ構成のサーバではセッションデータの関連性を保持できないことがあります。
         セッションデータは、リクエストに応答したサーバ上に保存されるからです。
         セッションデータがある場所とは別のサーバでリクエストが処理された場合は、
         そのサーバからセッションデータにアクセスすることができません
@@ -68,9 +68,9 @@
         このような場合に対応できるような保存ハンドラを将来提供する予定です。
         使用できるようになった時点でここで説明します。
         保存ハンドラの案を出したり実際に作成したりした場合は、メーリングリスト
-        <ulink url="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</link>
         にお知らせください。
         <classname>Zend_Db</classname> 互換の保存ハンドラは、このメーリングリストに投稿されます。
     </para>
 
-</sect1>
+</section>

@@ -1,13 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20763 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.application.core-functionality.resource-resourceabstract">
-    <title>Zend_Application_Resource_ResourceAbstract</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.core-functionality.resource-resourceabstract"><info><title>Zend_Application_Resource_ResourceAbstract</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_ResourceAbstract</classname> ist eine abstrakte Klasse
-        die <link
-            linkend="zend.application.core-functionality.resource-resource">Zend_Application_Resource_Resource</link>
+        die <link linkend="zend.application.core-functionality.resource-resource">Zend_Application_Resource_Resource</link>
         implementiert, und ist ein guter Startpunkt für die Erstellung eigener Plugin Ressourcen.
     </para>
 
@@ -16,8 +13,8 @@
         nicht; das wird der Definition in einer konkreten Erweiterung dieser Klasse vorbehalten.
     </para>
 
-    <table id="zend.application.core-functionality.resource-resourceabstract.api">
-        <title>Zend_Application_Resource_ResourceAbstract Methods</title>
+    <table xml:id="zend.application.core-functionality.resource-resourceabstract.api"><info><title>Zend_Application_Resource_ResourceAbstract Methods</title></info>
+        
 
         <tgroup cols="4">
             <thead>
@@ -112,8 +109,8 @@
         </tgroup>
     </table>
 
-    <sect3 id="zend.application.core-functionality.resource-resourceabstract.names">
-        <title>Ressourcen Namen</title>
+    <section xml:id="zend.application.core-functionality.resource-resourceabstract.names"><info><title>Ressourcen Namen</title></info>
+        
 
         <para>
             Wenn man Ressourcen Plugins registriert, besteht ein Problem das hierdurch entsteht
@@ -220,5 +217,5 @@ $view = $bootstrap->getResource('My_View');
             überschreiben, eigene hinzufügen, verschiedene Ressourcen mischen um komplexe
             Initialisierungen durchzuführen, und mehr.
         </para>
-    </sect3>
-</sect2>
+    </section>
+</section>

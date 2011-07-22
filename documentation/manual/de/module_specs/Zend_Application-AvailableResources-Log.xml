@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19689 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.log">
-    <title>Zend_Application_Resource_Log</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.log"><info><title>Zend_Application_Resource_Log</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Log</classname> instanziert eine Instanz von
@@ -12,8 +10,8 @@
         später durch den Bootstrap empfangen werden um Events zu loggen.
     </para>
 
-    <example id="zend.application.available-resources.log.configExample">
-        <title>Beispiel Konfiguration einer Log Ressource</title>
+    <example xml:id="zend.application.available-resources.log.configExample"><info><title>Beispiel Konfiguration einer Log Ressource</title></info>
+        
 
         <para>
             Anbei ist ein Beispiel eines <acronym>INI</acronym> Abschnitts der zeigt wir die Log
@@ -29,8 +27,7 @@ resources.log.stream.filterParams.priority = 4
 ]]></programlisting>
 
         <para>
-            Für weitere Informationen über vorhandene Optionen, siehe in die <link
-                linkend="zend.log.factory">Dokumentation von Zend_Log::factory()</link>.
+            Für weitere Informationen über vorhandene Optionen, siehe in die <link linkend="zend.log.factory">Dokumentation von Zend_Log::factory()</link>.
         </para>
     </example>
-</sect2>
+</section>

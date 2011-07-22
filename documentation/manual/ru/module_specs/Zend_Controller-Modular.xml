@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.modular">
-    <title>Использование модульной структуры директорий</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.modular"><info><title>Использование модульной структуры директорий</title></info>
+    
 
-    <sect2 id="zend.controller.modular.introduction">
-        <title>Введение</title>
+    <section xml:id="zend.controller.modular.introduction"><info><title>Введение</title></info>
+        
         <para>
             Определенная соглашением модульная структура директорий позволяет
             разделять различные приложения MVC в автономные единицы и повторно
@@ -59,8 +58,8 @@ application/
             использоваться для примеров в данном разделе.
         </para>
 
-        <note>
-            <title>Нет пространств имен в модуле, используемом по умолчанию</title>
+        <note><info><title>Нет пространств имен в модуле, используемом по умолчанию</title></info>
+            
             <para>
                 Обратите внимание, что в модуле, используемом по умолчанию,
                 контролеры не нуждаются в префиксе пространства имен. В примере
@@ -76,10 +75,10 @@ application/
             Итак, как можно реализовать такую организацию на уровне директорий,
             используя компоненты MVC в Zend Framework?
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.modular.directories">
-        <title>Определение директорий контроллеров в модулях</title>
+    <section xml:id="zend.controller.modular.directories"><info><title>Определение директорий контроллеров в модулях</title></info>
+        
 
         <para>
             Первым шагом в использовании модулей является изменение способа
@@ -175,10 +174,10 @@ $front->addModuleDirectory('/path/to/application/modules');
             поддиректория для контроллеров путем передачи пустого значения
             методу <code>setModuleControllerDirectoryName()</code>.
         </para></note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.modular.router">
-        <title>Маршрутизация применительно к модулям</title>
+    <section xml:id="zend.controller.modular.router"><info><title>Маршрутизация применительно к модулям</title></info>
+        
 
         <para>
             Маршрут, используемый по умолчанию в
@@ -204,10 +203,10 @@ $front->addModuleDirectory('/path/to/application/modules');
             массиве директорий контроллеров, переданного фронт-контроллеру и
             диспетчеру.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.modular.defaultcontroller">
-        <title>Модуль или глобальный контроллер по умолчанию</title>
+    <section xml:id="zend.controller.modular.defaultcontroller"><info><title>Модуль или глобальный контроллер по умолчанию</title></info>
+        
 
         <para>
             В маршрутизаторе, используемом по умолчанию, если контроллер не был
@@ -228,8 +227,5 @@ $front->addModuleDirectory('/path/to/application/modules');
         <programlisting language="php"><![CDATA[
 $front->setParam('useDefaultControllerAlways', true);
 ]]></programlisting>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

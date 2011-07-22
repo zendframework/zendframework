@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19998 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.paginator.intro">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.paginator.intro"><info><title>Einführung</title></info>
+    
 
     <para>
         Angenommen wir wollen eine Blogging Anwendung erstellen die das Heim unserer gewaltigen
@@ -35,4 +35,4 @@
         gegeben. Um anzufangen und einen Blick auf einige Code Abschnitte zu haben, sehen wir uns
         einige einfache Beispiele an.
     </para>
-</sect1>
+</section>

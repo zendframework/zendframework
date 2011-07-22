@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 22129 -->
-<sect2 id="zend.validate.set.date">
-    <title>Date</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.date"><info><title>Date</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Date</classname> permet de valider qu'une donnée est bien une date.
         Le validateur gère la localisation.
     </para>
 
-    <sect3 id="zend.validate.set.date.options">
-        <title>Options supportées par Zend_Validate_Date</title>
+    <section xml:id="zend.validate.set.date.options"><info><title>Options supportées par Zend_Validate_Date</title></info>
+        
 
         <para>
             Les options suivantes sont supportées par <classname>Zend_Validate_Date</classname>:
@@ -31,10 +29,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.date.basic">
-        <title>Validation de dates par défaut</title>
+    <section xml:id="zend.validate.set.date.basic"><info><title>Validation de dates par défaut</title></info>
+        
 
         <para>
             La manière la plus simple de valider une date est d'utiliser le format par défaut du
@@ -52,10 +50,10 @@ $validator->isValid('10.10.2000'); // retourne false
         <para>
             Le format par défaut de <classname>Zend_Validate_Date</classname> est 'yyyy-MM-dd'.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.date.localized">
-        <title>Validation de dates localisées</title>
+    <section xml:id="zend.validate.set.date.localized"><info><title>Validation de dates localisées</title></info>
+        
 
         <para>
             <classname>Zend_Validate_Date</classname> peut aussi valider les dates dans un format localisé
@@ -74,10 +72,10 @@ $validator->isValid('10.May.2010'); // retourne false
             L'option <property>locale</property> affecte le format par défaut de la date. Dans l'exemple ci-dessus
             il s'agit de 'dd.MM.yyyy' qui est le format pour une locale 'de'.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.date.formats">
-        <title>Formats de dates personnalisés</title>
+    <section xml:id="zend.validate.set.date.formats"><info><title>Formats de dates personnalisés</title></info>
+        
 
         <para>
             <classname>Zend_Validate_Date</classname> supporte des formats de date personnalisés.
@@ -102,8 +100,5 @@ $validator = new Zend_Validate_Date(array('format' => 'yyyy MMMM', 'locale' => '
 $validator->isValid('2010 Dezember'); // retourne true
 $validator->isValid('2010 June');     // retourne false
 ]]></programlisting>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

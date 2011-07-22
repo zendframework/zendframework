@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20765 -->
-<sect1 id="zend.console.getopt.introduction">
-    <title>導入</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.introduction"><info><title>導入</title></info>
+    
     <para>
         <classname>Zend_Console_Getopt</classname> クラスは、
         コマンドラインアプリケーションでのオプションや引数の処理を助けるものです。
@@ -103,8 +103,8 @@
         「ユーザが指定したフラグのアプリケーションへの通知」
         などがあります。
     </para>
-    <note>
-        <title>Getopt はアプリケーションフレームワークではありません</title>
+    <note><info><title>Getopt はアプリケーションフレームワークではありません</title></info>
+        
         <para>
             <classname>Zend_Console_Getopt</classname> はdoes
             フラグやパラメータの意味を解釈するわけ <emphasis>ではなく</emphasis>、
@@ -120,4 +120,4 @@
     <para>
         これ以降の節で、<classname>Zend_Console_Getopt</classname> の使用法を説明します。
     </para>
-</sect1>
+</section>

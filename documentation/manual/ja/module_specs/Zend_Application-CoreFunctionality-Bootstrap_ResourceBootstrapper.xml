@@ -1,19 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20763 -->
-<sect2 id="zend.application.core-functionality.bootstrap-resourcebootstrapper">
-    <title>Zend_Application_Bootstrap_ResourceBootstrapper</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.core-functionality.bootstrap-resourcebootstrapper"><info><title>Zend_Application_Bootstrap_ResourceBootstrapper</title></info>
+    
 
     <para>
         <classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname>は、
         ブートストラップ・クラスが外部リソースをロードしようとするとき、
         使用するインタフェースです。
         すなわち、一つ以上のリソースがクラスで直接定められず、むしろプラグインによって定められます。
-        それは<link
-            linkend="zend.application.core-functionality.bootstrap-bootstrapper">Zend_Application_Bootstrap_Bootstrapper</link>
+        それは<link linkend="zend.application.core-functionality.bootstrap-bootstrapper">Zend_Application_Bootstrap_Bootstrapper</link>
             とともに使われなければなりません、
-        そして、<link
-            linkend="zend.application.core-functionality.bootstrap-bootstrapabstract">Zend_Application_Bootstrap_BootstrapAbstract</link>
+        そして、<link linkend="zend.application.core-functionality.bootstrap-bootstrapabstract">Zend_Application_Bootstrap_BootstrapAbstract</link>
         がこの機能を実装します。
     </para>
 
@@ -21,8 +19,8 @@
         以下のメソッドで、インターフェースの定義が用意されています。
     </para>
 
-    <table id="zend.application.core-functionality.bootstrap-resourcebootstrapper.methods-table">
-        <title>Zend_Application_Bootstrap_ResourceBootstrapperインタフェース</title>
+    <table xml:id="zend.application.core-functionality.bootstrap-resourcebootstrapper.methods-table"><info><title>Zend_Application_Bootstrap_ResourceBootstrapperインタフェース</title></info>
+        
         <tgroup cols="4">
             <thead>
                 <row>
@@ -142,4 +140,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect2>
+</section>

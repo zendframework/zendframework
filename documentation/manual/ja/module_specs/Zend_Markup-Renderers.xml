@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20827 -->
-<sect1 id="zend.markup.renderers">
-    <title>Zend_Markup レンダラー</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.markup.renderers"><info><title>Zend_Markup レンダラー</title></info>
+    
  
     <para>
         <classname>Zend_Markup</classname> には現在ひとつのレンダラー、
         <acronym>HTML</acronym> レンダラーが同梱されています。
     </para>
  
-    <sect2 id="zend.markup.renderers.add">
-        <title>自作のタグの追加</title>
+    <section xml:id="zend.markup.renderers.add"><info><title>自作のタグの追加</title></info>
+        
  
         <para>
             自作のタグを追加することによって、<classname>Zend_Markup</classname> レンダラーに
@@ -57,8 +55,8 @@ echo $bbcode->render('my [foo]tag[/foo]');
             closing tag.
         </para>
 
-        <sect3 id="zend.markup.renderers.add.callback">
-            <title>Add a callback tag</title>
+        <section xml:id="zend.markup.renderers.add.callback"><info><title>Add a callback tag</title></info>
+            
 
             <para>
                 By adding a callback tag, you can do a lot more then just a
@@ -112,14 +110,14 @@ $bbcode->addTag(
 // now, this will output: 'my !up!TAG!up!'
 echo $bbcode->render('my [upper]tag[/upper]');
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.markup.renderers.list">
-        <title>タグ一覧</title>
+    <section xml:id="zend.markup.renderers.list"><info><title>タグ一覧</title></info>
+        
 
-        <table id="zend.markup.renderers.list.tags">
-            <title>タグ一覧</title>
+        <table xml:id="zend.markup.renderers.list.tags"><info><title>タグ一覧</title></info>
+            
 
             <tgroup cols="2" align="left" colsep="1" rowsep="1">
                 <thead>
@@ -134,76 +132,76 @@ echo $bbcode->render('my [upper]tag[/upper]');
                     <row>
                         <entry>[b]foo[/b]</entry>
 
-                        <entry><![CDATA[<strong>foo</strong>]]></entry>
+                        <entry>&lt;strong&gt;foo&lt;/strong&gt;</entry>
                     </row>
 
                     <row>
                         <entry>[i]foo[/i]</entry>
 
-                        <entry><![CDATA[<em>foo</em>]]></entry>
+                        <entry>&lt;em&gt;foo&lt;/em&gt;</entry>
                     </row>
 
                     <row>
                         <entry>[cite]foo[/cite]</entry>
 
-                        <entry><![CDATA[<cite>foo</cite>]]></entry>
+                        <entry>&lt;cite&gt;foo&lt;/cite&gt;</entry>
                     </row>
 
                     <row>
                         <entry>[del]foo[/del]</entry>
 
-                        <entry><![CDATA[<del>foo</del>]]></entry>
+                        <entry>&lt;del&gt;foo&lt;/del&gt;</entry>
                     </row>
 
                     <row>
                         <entry>[ins]foo[/ins]</entry>
 
-                        <entry><![CDATA[<ins>foo</ins>]]></entry>
+                        <entry>&lt;ins&gt;foo&lt;/ins&gt;</entry>
                     </row>
 
                     <row>
                         <entry>[sup]foo[/sup]</entry>
 
-                        <entry><![CDATA[<sup>foo</sup>]]></entry>
+                        <entry>&lt;sup&gt;foo&lt;/sup&gt;</entry>
                     </row>
 
                     <row>
                         <entry>[sub]foo[/sub]</entry>
 
-                        <entry><![CDATA[<sub>foo</sub>]]></entry>
+                        <entry>&lt;sub&gt;foo&lt;/sub&gt;</entry>
                     </row>
 
                     <row>
                         <entry>[span]foo[/span]</entry>
 
-                        <entry><![CDATA[<span>foo</span>]]></entry>
+                        <entry>&lt;span&gt;foo&lt;/span&gt;</entry>
                     </row>
 
                     <row>
                         <entry>[acronym title="PHP Hypertext Preprocessor]PHP[/acronym]</entry>
 
-                        <entry><![CDATA[<acronym title="PHP Hypertext Preprocessor">PHP</acronym>]]></entry>
+                        <entry>&lt;acronym title="PHP Hypertext Preprocessor"&gt;PHP&lt;/acronym&gt;</entry>
                     </row>
 
                     <row>
                         <entry>[url=http://framework.zend.com/]Zend Framework[/url]</entry>
 
-                        <entry><![CDATA[<a href="http://framework.zend.com/">Zend Framework</a>]]></entry>
+                        <entry>&lt;a href="http://framework.zend.com/"&gt;Zend Framework&lt;/a&gt;</entry>
                     </row>
 
                     <row>
                         <entry>[h1]foobar[/h1]</entry>
 
-                        <entry><![CDATA[<h1>foobar</h1>]]></entry>
+                        <entry>&lt;h1&gt;foobar&lt;/h1&gt;</entry>
                     </row>
 
                     <row>
                         <entry>[img]http://framework.zend.com/images/logo.gif[/img]</entry>
 
-                        <entry><![CDATA[<img src="http://framework.zend.com/images/logo.gif" />]]></entry>
+                        <entry>&lt;img src="http://framework.zend.com/images/logo.gif" /&gt;</entry>
                     </row>
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
-</sect1>
+    </section>
+</section>

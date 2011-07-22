@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.quickstart.conclusion">
-    <title>Congratulations!</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.conclusion"><info><title>Congratulations!</title></info>
+    
 
     <para>
         You have now built a very simple application using some of the most commonly used Zend
@@ -12,4 +13,4 @@
         the components you've used in this QuickStart as well as other components. We hope you find
         Zend Framework useful and - more importantly - fun!
     </para>
-</sect1>
+</section>

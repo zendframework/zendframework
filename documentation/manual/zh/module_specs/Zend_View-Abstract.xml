@@ -1,5 +1,6 @@
-<sect1 id="zend.view.abstract">
-    <title>Zend_View_Abstract</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.abstract"><info><title>Zend_View_Abstract</title></info>
+    
 
     <para>
         <code>Zend_View_Abstract</code> 是个基础类，<code>Zend_View</code> 就是继承它的并声明 <code>_run()</code> 方法的具体实现 （由 <code>render()</code> 调用 ）。
@@ -31,7 +32,4 @@ protected function _run()
     <para>
         幸好，PHP 5 对这个可见性声明有个方案：私有成员（private member）不能由继承该类的对象访问。所以我们就这样设计：因为 <code>Zend_View</code> <emphasis> 继承 </emphasis> <code>Zend_View_Abstract</code>，视图脚本就这样限制到只有 <code>Zend_View_Abstract</code> 的 protected 或 public 成员和方法。这样有效地限制了它可以执行的动作，保证了关键的安全区域不被视图脚本修改。
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 18274 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.feed.importing">
-    <title>Importer des flux</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.importing"><info><title>Importer des flux</title></info>
+    
 
     <para>
         <classname>Zend_Feed</classname> permet aux développeurs d'obtenir très facilement
         des flux. Si vous connaissez l'URI d'un flux, utilisez simplement la méthode
-        <methodname>Zend_Feed::import()</methodname>&#160;:
+        <methodname>Zend_Feed::import()</methodname> :
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -16,7 +14,7 @@ $flux = Zend_Feed::import('http://flux.example.com/nomDuFlux');
 
     <para>
         Vous pouvez aussi utiliser <classname>Zend_Feed</classname> pour aller chercher le
-        contenu d'un flux à partir d'un fichier ou d'une chaîne <acronym>PHP</acronym>&#160;:
+        contenu d'un flux à partir d'un fichier ou d'une chaîne <acronym>PHP</acronym> :
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -38,8 +36,8 @@ $fluxAPartirDePHP = Zend_Feed::importString($chaineFlux);
         illisible ou malformé.
     </para>
 
-    <sect2 id="zend.feed.importing.custom">
-        <title>Flux personnalisés</title>
+    <section xml:id="zend.feed.importing.custom"><info><title>Flux personnalisés</title></info>
+        
 
         <para>
             <classname>Zend_Feed</classname> permet aux développeurs de créer du flux
@@ -51,8 +49,8 @@ $fluxAPartirDePHP = Zend_Feed::importString($chaineFlux);
             <classname>Zend_Feed_Builder_Interface</classname>.
         </para>
 
-        <sect3 id="zend.feed.importing.custom.importarray">
-            <title>Importer un tableau personnalisé</title>
+        <section xml:id="zend.feed.importing.custom.importarray"><info><title>Importer un tableau personnalisé</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // on importe un flux atom à partir d'un tableau
@@ -66,7 +64,7 @@ $atomFeedFromArray = Zend_Feed::importArray($array, 'atom');
 $rssFeedFromArray = Zend_Feed::importArray($array, 'rss');
 ]]></programlisting>
 
-            <para>Le format du tableau doit être conforme à cette structure&#160;:</para>
+            <para>Le format du tableau doit être conforme à cette structure :</para>
 
             <programlisting language="php"><![CDATA[
 array(
@@ -259,44 +257,44 @@ array(
                 Références :
                 <itemizedlist>
                     <listitem>
-                        <para>Spécification <acronym>RSS</acronym> 2.0&#160;:
-                        <ulink url="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</ulink>
+                        <para>Spécification <acronym>RSS</acronym> 2.0 :
+                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</link>
                     </para>
 
                 </listitem>
 
                 <listitem>
                     <para>
-                        Spécification Atom&#160;:
-                        <ulink url="http://tools.ietf.org/html/rfc4287">RFC 4287</ulink>
+                        Spécification Atom :
+                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://tools.ietf.org/html/rfc4287">RFC 4287</link>
                     </para>
 
                 </listitem>
 
                 <listitem>
                     <para>
-                        Spécification WFW&#160;:
-                        <ulink url="http://wellformedweb.org/news/wfw_namespace_elements">Well
-                        Formed Web</ulink>
+                        Spécification WFW :
+                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wellformedweb.org/news/wfw_namespace_elements">Well
+                        Formed Web</link>
                     </para>
 
                 </listitem>
 
                 <listitem>
                     <para>
-                        Spécification iTunes&#160;:
-                        <ulink url="http://www.apple.com/itunes/store/podcaststechspecs.html">
-                        iTunes Technical Specifications</ulink>
+                        Spécification iTunes :
+                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.apple.com/itunes/store/podcaststechspecs.html">
+                        iTunes Technical Specifications</link>
                     </para>
 
                 </listitem>
 
             </itemizedlist></para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.feed.importing.custom.importbuilder">
-            <title>Importer une source de données personnalisée</title>
+        <section xml:id="zend.feed.importing.custom.importbuilder"><info><title>Importer une source de données personnalisée</title></info>
+            
 
             <para>
                 Vous pouvez créer une instance Zeed_Feed à partir de n'importe quelle source
@@ -324,7 +322,7 @@ array(
 
             <para>
                 Voici un exemple d'utilisation de
-                <methodname>Zend_Feed::importBuilder()</methodname>&#160;:
+                <methodname>Zend_Feed::importBuilder()</methodname> :
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -342,10 +340,10 @@ $rssFeedFromArray =
     Zend_Feed::importBuilder(new Zend_Feed_Builder($array), 'rss');
 ]]></programlisting>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.feed.importing.custom.dump">
-            <title>Décharger le contenu d'un flux</title>
+        <section xml:id="zend.feed.importing.custom.dump"><info><title>Décharger le contenu d'un flux</title></info>
+            
 
             <para>
                 Pour décharger le contenu d'une instance
@@ -362,6 +360,6 @@ print $feed->saveXML();
 // envoie les en-têtes et décharge le flux
 $feed->send();
 ]]></programlisting>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

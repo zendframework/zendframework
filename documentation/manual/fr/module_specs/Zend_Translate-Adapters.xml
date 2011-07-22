@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.translate.adapter">
-    <title>Adaptateurs pour Zend_Translate</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.adapter"><info><title>Adaptateurs pour Zend_Translate</title></info>
+    
 
     <para>
         <classname>Zend_Translate</classname> peut manipuler différents adaptateurs pour la
@@ -11,8 +9,8 @@
         fichiers sources.
     </para>
 
-    <table id="zend.translate.adapter.table">
-        <title>Liste des adaptateurs pour Zend_Translate</title>
+    <table xml:id="zend.translate.adapter.table"><info><title>Liste des adaptateurs pour Zend_Translate</title></info>
+        
 
         <tgroup cols="3">
             <thead>
@@ -97,8 +95,8 @@
         </tgroup>
     </table>
 
-    <sect2 id="zend.translate.adapter.decision">
-        <title>Comment décider quel adaptateur de traduction utiliser ?</title>
+    <section xml:id="zend.translate.adapter.decision"><info><title>Comment décider quel adaptateur de traduction utiliser ?</title></info>
+        
 
         <para>
             Vous devrez décider quel adaptateur vous voulez utiliser avec
@@ -127,8 +125,8 @@
             </para>
         </note>
 
-        <sect3 id="zend.translate.adapter.array">
-            <title>Zend_Translate_Adapter_Array</title>
+        <section xml:id="zend.translate.adapter.array"><info><title>Zend_Translate_Adapter_Array</title></info>
+            
 
             <para>
                 L'adaptateur de type tableau est l'adaptateur qui est le plus simple à
@@ -143,10 +141,10 @@
                 quelques langues, et si vous (ou votre équipe de programmeur) créez les traductions
                 vous-même.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.csv">
-            <title>Zend_Translate_Adapter_Csv</title>
+        <section xml:id="zend.translate.adapter.csv"><info><title>Zend_Translate_Adapter_Csv</title></info>
+            
 
             <para>
                 L'adaptateur Csv est l'adaptateur qui est le plus simple à utiliser pour les
@@ -168,17 +166,16 @@
                     l'adaptateur Csv ne gère pas la locale à cause d'une restrictions <acronym>PHP</acronym>.
                 </para>
             </note>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.gettext">
-            <title>Zend_Translate_Adapter_Gettext</title>
+        <section xml:id="zend.translate.adapter.gettext"><info><title>Zend_Translate_Adapter_Gettext</title></info>
+            
 
             <para>
                 L'adaptateur Gettext est l'adaptateur qui est utilisé le plus souvent. Gettext
                 est un format de source de traduction qui a été présenté par GNU, et est maintenant
                 employé dans le monde entier. Il n'est pas lisible pour l'homme, mais il y a
-                plusieurs outils gratuiciels (par exemple, <ulink
-                url="http://sourceforge.net/projects/poedit/">POEdit</ulink>), qui sont très utiles.
+                plusieurs outils gratuiciels (par exemple, <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://sourceforge.net/projects/poedit/">POEdit</link>), qui sont très utiles.
                 L'adaptateur <classname>Zend_Translate_Gettext</classname> n'est pas implémenté en
                 utilisant l'extension gettext de <acronym>PHP</acronym>. Vous pouvez utiliser l'adaptateur Gettext même
                 si vous n'avez pas installer l'extension gettext de <acronym>PHP</acronym>. En outre l'adaptateur est
@@ -191,10 +188,10 @@
                 gettext sont stockées dans un format compréhensible par une machine, qui n'est pas
                 lisible sans outils.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.ini">
-            <title>Zend_Translate_Adapter_Ini</title>
+        <section xml:id="zend.translate.adapter.ini"><info><title>Zend_Translate_Adapter_Ini</title></info>
+            
 
             <para>
                 L'adaptateur Ini est un adaptateur qui peut être directement utiliser par les
@@ -208,8 +205,8 @@
                 générique.
             </para>
 
-            <warning>
-                <title>Regression in PHP 5.3</title>
+            <warning><info><title>Regression in PHP 5.3</title></info>
+                
 
                 <para>
                     Prior to <acronym>PHP</acronym> 5.3, <function>parse_ini_file()</function> and
@@ -221,10 +218,10 @@
                     case, we recommend utilizing a different adapter.
                 </para>
             </warning>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.tbx">
-            <title>Zend_Translate_Adapter_Tbx</title>
+        <section xml:id="zend.translate.adapter.tbx"><info><title>Zend_Translate_Adapter_Tbx</title></info>
+            
 
             <para>
                 L'adaptateur Tbx est un adaptateur qui sera utilisé par les clients qui
@@ -242,10 +239,10 @@
                 pré-traduits existent déjà. Les fichiers sont lisibles par l'homme et sont
                 indépendants de système.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.tmx">
-            <title>Zend_Translate_Adapter_Tmx</title>
+        <section xml:id="zend.translate.adapter.tmx"><info><title>Zend_Translate_Adapter_Tmx</title></info>
+            
 
             <para>
                 L'adaptateur Tmx est l'adaptateur qui sera employé par la plupart des clients
@@ -260,10 +257,10 @@
                 La plupart des moyennes à grandes entreprises utilisent cet adaptateur. Les
                 fichiers sont lisibles par l'homme et sont indépendants du système.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.qt">
-            <title>Zend_Translate_Adapter_Qt</title>
+        <section xml:id="zend.translate.adapter.qt"><info><title>Zend_Translate_Adapter_Qt</title></info>
+            
 
             <para>
                 L'adaptateur Qt est destiné à tous les clients qui ont des fichiers TS faits
@@ -276,10 +273,10 @@
                 Plusieurs grands acteurs ont construit leur logiciel sur le framework QT. Les
                 fichiers sont lisibles par l'homme et indépendants du système.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.xliff">
-            <title>Zend_Translate_Adapter_Xliff</title>
+        <section xml:id="zend.translate.adapter.xliff"><info><title>Zend_Translate_Adapter_Xliff</title></info>
+            
 
             <para>
                 L'adaptateur Xliff est l'adaptateur qui sera employé par la plupart des
@@ -293,10 +290,10 @@
                 La plupart des moyennes entreprises utilisent cet adaptateur. Les fichiers
                 sont lisibles par l'homme et sont indépendants du système.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.translate.adapter.xmltm">
-            <title>Zend_Translate_Adapter_XmlTm</title>
+        <section xml:id="zend.translate.adapter.xmltm"><info><title>Zend_Translate_Adapter_XmlTm</title></info>
+            
 
             <para>
                 L'adaptateur XmlTm est l'adaptateur qui sera utilisé par les clients qui font
@@ -311,11 +308,11 @@
                 existent déjà. Les fichiers sont lisibles par l'homme et sont indépendants du
                 système.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.translate.adapter.selfwritten">
-        <title>Intégrer ses propres adaptateurs</title>
+    <section xml:id="zend.translate.adapter.selfwritten"><info><title>Intégrer ses propres adaptateurs</title></info>
+        
 
         <para>
             <classname>Zend_Translate</classname> vous permet d'intégrer et d'utiliser vos
@@ -353,10 +350,10 @@ try {
     // Echec de l'application
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.translate.adapter.caching">
-        <title>Améliorer les performances de tous les adaptateurs</title>
+    <section xml:id="zend.translate.adapter.caching"><info><title>Améliorer les performances de tous les adaptateurs</title></info>
+        
 
         <para>
             <classname>Zend_Translate</classname> vous permet d'utiliser en interne
@@ -398,5 +395,5 @@ $translate = new Zend_Translate(
                 ajouté une nouvelle source avec la méthode <methodname>addTranslation()</methodname>.
             </para>
         </note>
-    </sect2>
-</sect1>
+    </section>
+</section>

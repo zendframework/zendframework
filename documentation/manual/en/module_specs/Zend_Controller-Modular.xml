@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.modular">
-    <title>Using a Conventional Modular Directory Structure</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.modular"><info><title>Using a Conventional Modular Directory Structure</title></info>
+    
 
-    <sect2 id="zend.controller.modular.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.controller.modular.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             The Conventional Modular directory structure allows you to separate
@@ -62,8 +61,8 @@ application/
             this chapter.
         </para>
 
-        <note>
-            <title>No Namespacing in the Default Module</title>
+        <note><info><title>No Namespacing in the Default Module</title></info>
+            
 
             <para>
                 Note that in the default module, controllers do not need a
@@ -80,10 +79,10 @@ application/
             So, how do you implement such a directory layout using the Zend
             Framework <acronym>MVC</acronym> components?
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.modular.directories">
-        <title>Specifying Module Controller Directories</title>
+    <section xml:id="zend.controller.modular.directories"><info><title>Specifying Module Controller Directories</title></info>
+        
 
         <para>
             The first step to making use of modules is to modify how you specify
@@ -178,10 +177,10 @@ $front->addModuleDirectory('/path/to/application/modules');
                 <methodname>setModuleControllerDirectoryName()</methodname>.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.modular.router">
-        <title>Routing to Modules</title>
+    <section xml:id="zend.controller.modular.router"><info><title>Routing to Modules</title></info>
+        
 
         <para>
             The default route in <classname>Zend_Controller_Router_Rewrite</classname> is
@@ -201,10 +200,10 @@ $front->addModuleDirectory('/path/to/application/modules');
             controller directory array passed to the front controller and
             dispatcher.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.modular.defaultcontroller">
-        <title>Module or Global Default Controller</title>
+    <section xml:id="zend.controller.modular.defaultcontroller"><info><title>Module or Global Default Controller</title></info>
+        
 
         <para>
             In the default router, if a controller was not specified in the <acronym>URL</acronym>,
@@ -223,8 +222,5 @@ $front->addModuleDirectory('/path/to/application/modules');
         <programlisting language="php"><![CDATA[
 $front->setParam('useDefaultControllerAlways', true);
 ]]></programlisting>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

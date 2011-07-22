@@ -1,5 +1,8 @@
-<sect1 id="zend.mail.adding-recipients">
-    <title>הוספת נמענים</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.adding-recipients"><info><title>הוספת נמענים</title></info>
+    
     <para>
         ניתן להוסיף נמענים בעזרת שלושה אפשרויות:
         <itemizedlist>
@@ -18,13 +21,10 @@
         <code>getRecipients()</code> מחזיר רשימה של כל הנמענים. <code>clearRecipients()</code>
         מנקה את הרשימה.
     </para>
-    <note>
-        <title>פרמטרים נוספים</title>
+    <note><info><title>פרמטרים נוספים</title></info>
+        
         <para>
             <code>addTo()</code> ו <code>addCc()</code> מקבלים פרמטר נוסף אופציונלי אשר משמש בתור שם אשר ניתן לקריאה אנושית של הנמען אשר תוצג בכותר שנשלח.
         </para>
     </note>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

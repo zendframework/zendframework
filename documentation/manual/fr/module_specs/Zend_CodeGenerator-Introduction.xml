@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15998 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.codegenerator.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.codegenerator.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_CodeGenerator</classname> est un outils permettant de générer du code
@@ -11,8 +9,8 @@
         langage de référence pour générer du Javascript, des hôtes virtuels Apache ..., par exemple.
     </para>
 
-    <sect2 id="zend.codegenerator.introduction.theory">
-        <title>Théorie</title>
+    <section xml:id="zend.codegenerator.introduction.theory"><info><title>Théorie</title></info>
+        
 
         <para>
             Dans la plupart des cas, vous créerez une instance du générateur de code, et vous
@@ -55,7 +53,7 @@ echo $file;
 file_put_contents('World.php', $file->generate());
 ]]></programlisting>
 
-        <para>Les 2 exemples ci-dessus vont rendre le même résultat&#160;:</para>
+        <para>Les 2 exemples ci-dessus vont rendre le même résultat :</para>
 
         <programlisting language="php"><![CDATA[
 <?php
@@ -75,14 +73,13 @@ class World
             Il est aussi possible de mettre à jour un code existant, par exemple, ajouter une
             méthode à une classe. Dans ce cas, vous devez inspecter le code existant en utilisant la
             réflexion, puis ajouter une nouvelle méthode. <classname>Zend_CodeGenerator</classname>
-            rend ceci très simple en utilisant <link
-            linkend="zend.reflection">Zend_Reflection</link>.
+            rend ceci très simple en utilisant <link linkend="zend.reflection">Zend_Reflection</link>.
         </para>
 
         <para>
             Par exemple, imaginons que nous avons sauvegardé le code de l'exemple ci-dessus
             dans un fichier "<filename>World.php</filename>" que nous avons alors inclus.
-            Nous pourrions dès lors agir comme suit&#160;:
+            Nous pourrions dès lors agir comme suit :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -105,7 +102,7 @@ echo $file;
 file_put_contents('World.php', $file->generate());
 ]]></programlisting>
 
-        <para>La nouvelle classe ressemblera à ça&#160;:</para>
+        <para>La nouvelle classe ressemblera à ça :</para>
 
         <programlisting language="php"><![CDATA[
 <?php
@@ -125,5 +122,5 @@ class World
 
 }
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

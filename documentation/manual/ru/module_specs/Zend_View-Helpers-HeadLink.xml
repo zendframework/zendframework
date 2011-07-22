@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.headlink">
-    <title>Помощник HeadLink</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headlink"><info><title>Помощник HeadLink</title></info>
+    
 
     <para>
         HTML-элемент <code>&lt;link&gt;</code> все чаще используется для
@@ -71,8 +70,8 @@
             Placeholder</link>.
     </para>
 
-    <example id="zend.view.helpers.initial.headlink.basicusage">
-        <title>Использование помощника HeadLink</title>
+    <example xml:id="zend.view.helpers.initial.headlink.basicusage"><info><title>Использование помощника HeadLink</title></info>
+        
 
         <para>
             Вы можете указывать <code>headLink</code> в любой момент времени.
@@ -98,7 +97,4 @@ $this->headLink()->appendStylesheet('/styles/basic.css')
 <?php echo $this->headLink() ?>
 ]]></programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

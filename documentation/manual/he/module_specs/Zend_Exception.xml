@@ -1,13 +1,14 @@
-<sect1 id="zend.exception.using">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.using"><info><title>שימוש בחריגים</title></info>
 
-    <title>שימוש בחריגים</title>
+    
 
     <para>
         <code>Zend_Exception</code> היא פשוט מחלקת הבסיס לשימוש בחריגים שנזרקים במערכת ה Zend Framework
     </para>
 
-    <example id="zend.exception.using.example">
-        <title>תפיסת חריג שנזרק</title>
+    <example xml:id="zend.exception.using.example"><info><title>תפיסת חריג שנזרק</title></info>
+        
         <para>
             הקוד הבא מציג כיצד נתן לתפוס חריג שנזרק במערכת ה Zend Framework
         </para>
@@ -21,8 +22,8 @@ try {
     echo "Message: " . $e->getMessage() . "\n";
     // Other code to recover from the error
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
     <para>
         <code>Zend_Exception</code> יכולה להיות המחלקה שתשמש בתור המחלקה שתתפוס את כל החריגים שנזרקים במערכת ה Zend Framework.
@@ -33,7 +34,4 @@ try {
         הדוקומנטציה של כל רכיב ב Zend Framework מכיל מידע אודות החריגים שנזרקים מכל מתודה במחלקה, ההשלכות של כל חריג שנזרק נסיבות זריקת החריג, והמחלקה של כל החריגים שיכולים להזרק.
     </para>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

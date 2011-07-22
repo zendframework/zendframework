@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20766 -->
-<!-- Reviewed: 20766 -->
-<sect1 id="zend.date.overview">
-    <title>Zend_Date API Übersicht</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.overview"><info><title>Zend_Date API Übersicht</title></info>
+    
 
     <para>
         Obwohl die <acronym>API</acronym> von <classname>Zend_Date</classname> simpel und einheitlich
@@ -10,32 +8,31 @@
         Operationen und Operanden flexibel und mächtig.
     </para>
 
-    <sect2 id="zend.date.options">
-        <title>Zend_Date Optionen</title>
+    <section xml:id="zend.date.options"><info><title>Zend_Date Optionen</title></info>
+        
 
-        <sect3 id="zend.date.options.formattype">
-            <title>Auswahl der Art des Datumsformats</title>
+        <section xml:id="zend.date.options.formattype"><info><title>Auswahl der Art des Datumsformats</title></info>
+            
 
             <para>
                 Viele Methoden benutzen Zeichenketten für Datumsformate so ähnlich wie
                 <methodname>date()</methodname> von <acronym>PHP</acronym>. Wenn man mit den Zeichen
                 der Datumsformaten von <acronym>PHP</acronym> mehr Erfahrung hat als mit den
                 <acronym>ISO</acronym>-Zeichen für Formate, dann kann man
-                <methodname>Zend_Date::setOptions(array('format_type' => 'php'))</methodname>
+                <methodname>Zend_Date::setOptions(array('format_type' =&gt; 'php'))</methodname>
                 benutzen. Danach können die Zeichen von <acronym>PHP</acronym> für Datumsformate für alle
                 Funktionen verwendet werden, die einen <varname>$format</varname>-Parameter
                 akzeptieren. Durch Benutzen von
-                <methodname>Zend_Date::setOptions(array('format_type' => 'iso'))</methodname> kann
+                <methodname>Zend_Date::setOptions(array('format_type' =&gt; 'iso'))</methodname> kann
                 man wieder auf den Standardmodus zurückwechseln, der nur <acronym>ISO</acronym>-Zeichen
                 für Datumsformate unterstützt. Für eine Liste von unterstützten Zeichencodes
-                kann hier nachgelesen werden: <link
-                    linkend="zend.date.constants.phpformats">selbst definierte AUSGABE-Formate bei
+                kann hier nachgelesen werden: <link linkend="zend.date.constants.phpformats">selbst definierte AUSGABE-Formate bei
                     Verwendung der date()-Formatzeichen von PHP</link>
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.date.options.fixdst">
-            <title>Sommer-/Winterzeit und Datumsberechnungen</title>
+        <section xml:id="zend.date.options.fixdst"><info><title>Sommer-/Winterzeit und Datumsberechnungen</title></info>
+            
 
             <para>
                 Wenn Daten manipuliert werden, überschreiten sie manchmal die <acronym>DST</acronym>-Grenze
@@ -61,7 +58,7 @@
                 <constant>TRUE</constant> ist. Das führt dazu, dass die <acronym>DST</acronym> keinen
                 Einfluss mehr bei Datumsberechnungen hat (<methodname>addMonth()</methodname>,
                 <methodname>subMonth()</methodname>).
-                <methodname>Zend_Date::setOptions(array('fix_dst' => false))</methodname> kann
+                <methodname>Zend_Date::setOptions(array('fix_dst' =&gt; false))</methodname> kann
                 benutzt werden, um Hinzufügen oder Entfernen der <acronym>DST</acronym>-Anpassung zu
                 gestatten, wenn Datumsberechnungen durchgeführt werden.
             </para>
@@ -76,10 +73,10 @@
                 ist, wird die vorher definierte Option 'fix_dst' wieder für die Datumsberechnungen
                 verwendet.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.date.options.extendmonth">
-            <title>Monatsberechnungen</title>
+        <section xml:id="zend.date.options.extendmonth"><info><title>Monatsberechnungen</title></info>
+            
 
             <para>
                 Wenn Monate zu einem existierenden Datum hinzugefügt oder davon entfernt werden, kann der
@@ -100,16 +97,16 @@
                 durch, dass Daten auf das Monatsende hin abgeschnitten werden (wenn notwendig), ohne
                 dass in den nächsten Monat umgebrochen wird, wenn das Originaldatum einen Monatstag
                 bestimmt, der die Anzahl der Tage des Ergebnismonats überschreitet.
-                <methodname>Zend_Date::setOptions(array('extend_month' => true))</methodname> kann
+                <methodname>Zend_Date::setOptions(array('extend_month' =&gt; true))</methodname> kann
                 benutzt werden, um Monatsberechnungen wie in populären Tabellenkalkulationen
                 durchzuführen.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.date.options.cache">
-            <title>
+        <section xml:id="zend.date.options.cache"><info><title>
                 Lokalisierung und Normalisierung von Daten mit Zend_Cache schneller machen
-            </title>
+            </title></info>
+            
 
             <para>
                 Man kann <classname>Zend_Date</classname> schneller machen, indem ein
@@ -120,36 +117,35 @@
                 Konstanten akzeptieren. Um einen
                 <classname>Zend_Cache</classname>-Adapter für <classname>Zend_Date</classname> zu
                 verwenden, muss nur
-                <methodname>Zend_Date::setOptions(array('cache' => $adapter))</methodname>
+                <methodname>Zend_Date::setOptions(array('cache' =&gt; $adapter))</methodname>
                 aufgerufen werden.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.date.options.timesync">
-            <title>Syncronisierte Zeiten mit Zend_TimeSync erhalten</title>
+        <section xml:id="zend.date.options.timesync"><info><title>Syncronisierte Zeiten mit Zend_TimeSync erhalten</title></info>
+            
 
             <para>
                 Normalerweise unterscheiden sich die Uhren von Servern und Computern voneinander.
                 <classname>Zend_Date</classname> ist dazu fähig, solche Probleme mit Hilfe von
                 <classname>Zend_TimeSync</classname> zu handhaben. Mit
-                <methodname>Zend_Date::setOptions(array('timesync' => $timeserver))</methodname>
+                <methodname>Zend_Date::setOptions(array('timesync' =&gt; $timeserver))</methodname>
                 kann ein Zeitserver gesetzt werden, welcher den Unterschied zwischen dem eigenen
                 aktuellen Zeitstempel und dem wirklichen aktuellen Zeitstempel für alle Instanzen von
                 <classname>Zend_Date</classname> setzt. Die Verwendung dieser Option ändert nicht
                 den Zeitstempel von bestehenden Instanzen. Am besten ist es also, dies innerhalb der
                 Bootstrap-Datei zu setzen.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.date.values">
-        <title>Arbeiten mit Datumswerten</title>
+    <section xml:id="zend.date.values"><info><title>Arbeiten mit Datumswerten</title></info>
+        
 
         <para>
             Sobald die Eingabe durch die Erstellung eines <classname>Zend_Date</classname>-Objekts
             normalisiert wurde, hat es eine zugeordnete Zeitzone aber die interne Darstellung
-            verwendet <ulink
-                url="http://en.wikipedia.org/wiki/Unix_Time">UNIX-Zeitstempel</ulink>. Damit ein
+            verwendet <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Unix_Time">UNIX-Zeitstempel</link>. Damit ein
             Datum in einer lokalisierten Art und Weise durchsucht werden kann, muss zuerst eine
             Zeitzone bekannt sein. Die Standardzeitzone ist immer <acronym>GMT</acronym> oder
             <acronym>UTC</acronym>. Um die Zeitzone des Objekts zu inspizieren, kann
@@ -172,13 +168,11 @@
             Die meisten Methoden erwarten eine Konstante für die Auswahl des gewünschten Teils
             <varname>$part</varname> des Datums, wie z.B. <constant>Zend_Date::HOUR</constant>.
             Diese Konstanten sind für alle unten angeführten Funktionen gültig. Eine Liste aller
-            vorhandenen Konstanten wird hier beschrieben: <link
-                linkend="zend.date.constants.list">Liste aller Konstanten</link>. Wenn
+            vorhandenen Konstanten wird hier beschrieben: <link linkend="zend.date.constants.list">Liste aller Konstanten</link>. Wenn
             <varname>$part</varname> nicht spezifiziert wird, wird
             <constant>Zend_Date::TIMESTAMP</constant> angenommen. Alternativ kann ein
             benutzerdefiniertes Format für <varname>$part</varname> verwendet werden, mit Hilfe der
-            gleichen Mechanismen und Formatdefinitionen wie bei <link
-                linkend="zend.locale.date.normalize"><methodname>Zend_Locale_Format::getDate()</methodname></link>.
+            gleichen Mechanismen und Formatdefinitionen wie bei <link linkend="zend.locale.date.normalize"><methodname>Zend_Locale_Format::getDate()</methodname></link>.
             Wenn ein Datumsobjekt durch Verwendung eines offensichtlich falschen Datums
             erstellt wird (z.B. wenn die Nummer des Monats größer als 12 ist), wird <classname>Zend_Date</classname>
             eine Ausnahme werfen, solange kein spezielles Datumsformat ausgewählt wurde, das heißt,
@@ -186,8 +180,8 @@
             <constant>Zend_Date::DATES</constant> (ein "fehlertolerantes" Format).
         </para>
 
-        <example id="zend.date.values.example-1">
-            <title>Benutzerdefinierte Eingabeformate für Daten</title>
+        <example xml:id="zend.date.values.example-1"><info><title>Benutzerdefinierte Eingabeformate für Daten</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $date1 = new Zend_Date('Feb 31, 2007', null, 'en_US');
@@ -207,8 +201,7 @@ echo $date3, "\n"; // Ausgabe "Mar 3, 2007 12:00:00 AM"
             macht <varname>$locale</varname> den <varname>$date</varname>-Operand durch
             Ersetzen der Monatsnamen und Wochentagsnamen für die Zeichenkette
             <varname>$date</varname> eindeutig und sogar Datumszeichenketten können gemäß den
-            Konventionen dieses Gebietsschemas analysiert werden (siehe <link
-                linkend="zend.locale.date.normalize">Zend_Locale_Format::getDate()</link>).
+            Konventionen dieses Gebietsschemas analysiert werden (siehe <link linkend="zend.locale.date.normalize">Zend_Locale_Format::getDate()</link>).
             Die automatische Normalisierung von lokalisierten <varname>$date</varname>-Angaben einer
             Zeichenkette werden nur dann durchgeführt wenn für <varname>$part</varname> eine der
             Konstanten <constant>Zend_Date::DATE</constant>* oder <constant>Zend_Date::TIME</constant>*
@@ -242,10 +235,10 @@ Zend_Registry::set('Zend_Locale', $locale);
 // Irgendwo in der eigenen Anwendung
 $date = new Zend_Date('31.Feb.2007');
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="id.date.basic">
-        <title>Grundsätzliche Zend_Date Operationen für die meisten Teile von Daten</title>
+    <section xml:id="id.date.basic"><info><title>Grundsätzliche Zend_Date Operationen für die meisten Teile von Daten</title></info>
+        
 
         <para>
             Die Methoden <methodname>add()</methodname>, <methodname>sub()</methodname>,
@@ -264,8 +257,8 @@ $date = new Zend_Date('31.Feb.2007');
             <methodname>get()</methodname>.
         </para>
 
-        <example id="zend.date.basic.example-1">
-            <title>Arbeiten an Teilen von Daten</title>
+        <example xml:id="zend.date.basic.example-1"><info><title>Arbeiten an Teilen von Daten</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $date = new Zend_Date(); // $date's Zeitstempel === time()
@@ -279,8 +272,7 @@ print $date;
         <para>
             Es existieren Komfortmethoden für jede Kombination von Grundoperationen und viele normale
             Datumsabschnitte wie in der unten stehenden Tabelle gezeigt. Diese Komfortmethoden erlauben uns
-            faulen Programmierern zu vermeiden, dass die <link
-                linkend="zend.date.constants.list">Konstanten für Datumsabschnitte</link>
+            faulen Programmierern zu vermeiden, dass die <link linkend="zend.date.constants.list">Konstanten für Datumsabschnitte</link>
             ausgeschrieben werden müssen. Bequemerweise sind sie benannt durch Kombination eines
             Prefixes (Name der Basisoperation) und einem Suffix (Art des Datumsabschnittes), wie
             <methodname>addYear()</methodname>. In der unten stehenden Liste existieren alle
@@ -298,11 +290,11 @@ print $date;
             Operanden, wenn <varname>$date</varname> eine Zeichenkette oder ein Integer ist
         </para>
 
-        <sect3 id="id.date.basic.parts">
-            <title>Liste der Datumsabschnitte</title>
+        <section xml:id="id.date.basic.parts"><info><title>Liste der Datumsabschnitte</title></info>
+            
 
-            <table id="id.date.basic.parts.table">
-                <title>Datumsabschnitte</title>
+            <table xml:id="id.date.basic.parts.table"><info><title>Datumsabschnitte</title></info>
+                
 
                 <tgroup cols="2">
                     <thead>
@@ -315,8 +307,7 @@ print $date;
                     <tbody>
                         <row>
                             <entry>
-                                <ulink
-                                    url="http://en.wikipedia.org/wiki/Unix_Time">Zeitstempel</ulink>
+                                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Unix_Time">Zeitstempel</link>
                             </entry>
 
                             <entry>
@@ -327,8 +318,7 @@ print $date;
 
                         <row>
                             <entry>
-                                <ulink
-                                    url="http://en.wikipedia.org/wiki/Gregorian_calendar">Jahr</ulink>
+                                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Gregorian_calendar">Jahr</link>
                             </entry>
 
                             <entry>Gregorianisches Kalenderjahr (z.B. 2006)</entry>
@@ -336,8 +326,7 @@ print $date;
 
                         <row>
                             <entry>
-                                <ulink
-                                    url="http://en.wikipedia.org/wiki/Month#Julian_and_Gregorian_calendars">Monat</ulink>
+                                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Month#Julian_and_Gregorian_calendars">Monat</link>
                             </entry>
 
                             <entry>
@@ -348,8 +337,8 @@ print $date;
 
                         <row>
                             <entry>
-                                <ulink url="http://en.wikipedia.org/wiki/24-hour_clock">24 Stunden
-                                    Uhr</ulink>
+                                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/24-hour_clock">24 Stunden
+                                    Uhr</link>
                             </entry>
 
                             <entry>
@@ -360,7 +349,7 @@ print $date;
 
                         <row>
                             <entry>
-                                <ulink url="http://en.wikipedia.org/wiki/Minute">Minute</ulink>
+                                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Minute">Minute</link>
                             </entry>
 
                             <entry>
@@ -371,7 +360,7 @@ print $date;
 
                         <row>
                             <entry>
-                                <ulink url="http://en.wikipedia.org/wiki/Second">Sekunde</ulink>
+                                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Second">Sekunde</link>
                             </entry>
 
                             <entry>
@@ -382,7 +371,7 @@ print $date;
 
                         <row>
                             <entry>
-                                <ulink url="http://en.wikipedia.org/wiki/Millisecond">Millisekunde</ulink>
+                                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Millisecond">Millisekunde</link>
                             </entry>
 
                             <entry>
@@ -395,15 +384,14 @@ print $date;
                                 sehen kann. Um die Genauigkeit zu ändern, kann
                                 <methodname>setFractionalPrecision($precision)</methodname>
                                 verwendet werden. Trotzdem ist die Genauigkeit praktisch auf
-                                Millisekunden begrenzt, da <classname>Zend_Date</classname> <ulink
-                                    url="http://php.net/microtime">microtime()</ulink> dafür
+                                Millisekunden begrenzt, da <classname>Zend_Date</classname> <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/microtime">microtime()</link> dafür
                                 benutzt.
                             </entry>
                         </row>
 
                         <row>
                             <entry>
-                                <ulink url="http://en.wikipedia.org/wiki/Day">Tag</ulink>
+                                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Day">Tag</link>
                             </entry>
 
                             <entry>
@@ -423,7 +411,7 @@ print $date;
 
                         <row>
                             <entry>
-                                <ulink url="http://en.wikipedia.org/wiki/Week">Woche</ulink>
+                                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Week">Woche</link>
                             </entry>
 
                             <entry>
@@ -485,7 +473,7 @@ print $date;
 
                         <row>
                             <entry>
-                                <ulink url="http://www.faqs.org/rfcs/rfc822.html">Arpa</ulink>
+                                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.faqs.org/rfcs/rfc822.html">Arpa</link>
                             </entry>
 
                             <entry>
@@ -496,8 +484,8 @@ print $date;
                                 <acronym>PHP</acronym> 5.2.2, zeigte die Verwendung der
                                 <constant>DATE_RFC822</constant> Konstante mit
                                 <acronym>PHP</acronym> date-Funktionen hier und da
-                                <ulink url="http://bugs.php.net/bug.php?id=40308">fehlerhafte
-                                    Ergebnisse</ulink>. Die Ergebnisse von
+                                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://bugs.php.net/bug.php?id=40308">fehlerhafte
+                                    Ergebnisse</link>. Die Ergebnisse von
                                 <classname>Zend_Date</classname> sind korrekt. Beispiel:
                                 Mon, 31 Dec 06 23:59:59 <acronym>GMT</acronym>
                             </entry>
@@ -505,7 +493,7 @@ print $date;
 
                         <row>
                             <entry>
-                                <ulink url="http://en.wikipedia.org/wiki/ISO_8601">Iso</ulink>
+                                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/ISO_8601">Iso</link>
                             </entry>
 
                             <entry>
@@ -516,20 +504,19 @@ print $date;
                     </tbody>
                 </tgroup>
             </table>
-        </sect3>
+        </section>
 
-        <sect3 id="id.date.basic.operations">
-            <title>Liste der Datums-Operationen</title>
+        <section xml:id="id.date.basic.operations"><info><title>Liste der Datums-Operationen</title></info>
+            
 
             <para>
                 Die unten aufgeführten Basisoperationen können statt den Komfortoperationen für
-                spezielle Datumsabschnitte verwendet werden, wenn die <link
-                    linkend="zend.date.constants.list">entsprechenden Konstanten</link> für
+                spezielle Datumsabschnitte verwendet werden, wenn die <link linkend="zend.date.constants.list">entsprechenden Konstanten</link> für
                 den Parameter <varname>$part</varname> verwendet werden.
             </para>
 
-            <table id="id.date.basic.operations.table">
-                <title>Basisoperationen</title>
+            <table xml:id="id.date.basic.operations.table"><info><title>Basisoperationen</title></info>
+                
 
                 <tgroup cols="2">
                     <thead>
@@ -559,8 +546,8 @@ print $date;
                                     große Werte zurückgegeben werden.
                                 </para>
 
-                                <note>
-                                    <title>Verhalten von get()</title>
+                                <note><info><title>Verhalten von get()</title></info>
+                                    
 
                                     <para>
                                         Anders als <methodname>get()</methodname> geben die anderen
@@ -666,11 +653,11 @@ print $date;
                     </tbody>
                 </tgroup>
             </table>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.date.others.comparison">
-        <title>Vergleichen von Daten</title>
+    <section xml:id="zend.date.others.comparison"><info><title>Vergleichen von Daten</title></info>
+        
 
         <para>
             Die folgenden Basisoperationen haben keine vergleichbaren vereinfachten Methoden für
@@ -678,8 +665,8 @@ print $date;
                 Overview</link>.
         </para>
 
-        <table id="zend.date.others.comparison.table">
-            <title>Methoden zum Vergleichen von Daten</title>
+        <table xml:id="zend.date.others.comparison.table"><info><title>Methoden zum Vergleichen von Daten</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -835,18 +822,18 @@ print $date;
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.date.others.gettingparts">
-        <title>Daten und Teile von Daten abfragen</title>
+    <section xml:id="zend.date.others.gettingparts"><info><title>Daten und Teile von Daten abfragen</title></info>
+        
 
         <para>
             Mehrere Methoden erlauben es, Werte abzurufen, die sich auf eine
             <classname>Zend_Date</classname>-Instanz beziehen.
         </para>
 
-        <table id="zend.date.others.gettingparts.table">
-            <title>Ausgabemethoden von Daten</title>
+        <table xml:id="zend.date.others.gettingparts.table"><info><title>Ausgabemethoden von Daten</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -891,8 +878,7 @@ print $date;
                             <para>
                                 Gibt eine Array-Representation des ausgewählten Datums anhand der
                                 Konventionen des Gebietsschemas zurück. Das zurückgegebene Array ist
-                                identisch zur <acronym>PHP</acronym>-Funktion <ulink
-                                    url="http://php.net/getdate">getdate()</ulink> und
+                                identisch zur <acronym>PHP</acronym>-Funktion <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/getdate">getdate()</link> und
                                 beinhaltet:
                             </para>
 
@@ -1001,12 +987,11 @@ print $date;
                                 Wert ist, wie <constant>Zend_Date::MONTH_NAME_SHORT</constant>.
                             </para>
 
-                            <note>
-                                <title>Grenzen von toValue()</title>
+                            <note><info><title>Grenzen von toValue()</title></info>
+                                
 
                                 <para>
-                                    Diese Methode ruft <link
-                                        linkend="id.date.basic.operations"><methodname>get()</methodname></link>
+                                    Diese Methode ruft <link linkend="id.date.basic.operations"><methodname>get()</methodname></link>
                                     auf und castet das Ergebnis in einen <acronym>PHP</acronym>
                                     Integer-Wert, welcher unerwartete Ergebnisse liefern wird, wenn
                                     <methodname>get()</methodname> eine numerische Zeichenkette
@@ -1059,18 +1044,18 @@ print $date;
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.date.others.fractions">
-        <title>Arbeiten mit Sekundenbruchteilen</title>
+    <section xml:id="zend.date.others.fractions"><info><title>Arbeiten mit Sekundenbruchteilen</title></info>
+        
 
         <para>
             Viele Methoden unterstützen es, Werte relativ zu einer <classname>Zend_Date</classname>
             Instanz zu erhalten.
         </para>
 
-        <table id="zend.date.others.fractions.table">
-            <title>Methoden zur Datumsausgabe</title>
+        <table xml:id="zend.date.others.fractions.table"><info><title>Methoden zur Datumsausgabe</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -1103,18 +1088,18 @@ print $date;
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.date.other.sun">
-        <title>Sonnenaufgang / Sonnenuntergang</title>
+    <section xml:id="zend.date.other.sun"><info><title>Sonnenaufgang / Sonnenuntergang</title></info>
+        
 
         <para>
             Drei Methoden geben Zugriff auf geographisch lokalisierte Informationen über die Sonne,
             was die Zeit für Sonnenaufgang und Sonnenuntergang beinhaltet.
         </para>
 
-        <table id="zend.date.other.sun.table">
-            <title>Gewöhnliche Methoden</title>
+        <table xml:id="zend.date.other.sun.table"><info><title>Gewöhnliche Methoden</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -1157,5 +1142,5 @@ print $date;
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
-</sect1>
+    </section>
+</section>

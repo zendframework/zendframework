@@ -1,22 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.inlinescript">
-    <title>InlineScript Helfer</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.inlinescript"><info><title>InlineScript Helfer</title></info>
+    
 
     <para>
         Das <acronym>HTML</acronym> <emphasis>&lt;script&gt;</emphasis> Element wird verwendet um
         entweder Clientseitige Skriptelemente Inline zu ermöglichen oder um eine entfernte Ressource
         zu verlinken die Clientseitigen Skriptcode enthält. Der <classname>InlineScript</classname>
-        Helfer erlaubt es beides zu managen. Er ist von <link
-            linkend="zend.view.helpers.initial.headscript">HeadScript</link> abgeleitet und jede
+        Helfer erlaubt es beides zu managen. Er ist von <link linkend="zend.view.helpers.initial.headscript">HeadScript</link> abgeleitet und jede
         Methode dieses Helfers ist vorhanden; trotzdem, sollte die
         <methodname>inlineScript()</methodname> Methode statt <methodname>headScript()</methodname>
         verwendet werden.
     </para>
 
-    <note>
-        <title>InlineScript für HTML Body Skripte verwenden</title>
+    <note><info><title>InlineScript für HTML Body Skripte verwenden</title></info>
+        
 
         <para>
             <classname>InlineScript</classname>, sollte verwendet werden wenn man Skripte im
@@ -27,11 +26,7 @@
 
         <para>
             Einige JS Bibliotheken müssen im <acronym>HTML</acronym> <emphasis>head</emphasis>; für
-            diese Skripte sollte <link
-                linkend="zend.view.helpers.initial.headscript">HeadScript</link> verwendet werden.
+            diese Skripte sollte <link linkend="zend.view.helpers.initial.headscript">HeadScript</link> verwendet werden.
         </para>
     </note>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

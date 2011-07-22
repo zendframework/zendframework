@@ -1,10 +1,11 @@
-<sect1 id="zend.acl.refining">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.refining"><info><title>Kontrol Akses Yang Lebih Detail</title></info>
 
-    <title>Kontrol Akses Yang Lebih Detail</title>
+    
 
-    <sect2 id="zend.acl.refining.precise">
+    <section xml:id="zend.acl.refining.precise"><info><title>Kontrol Akses Yang Presisi</title></info>
 
-        <title>Kontrol Akses Yang Presisi</title>
+        
 
         <para>
         Dasar-dasar ACL yang dijelaskan dalam <link linkend="zend.acl.introduction">sub bab sebelumnya</link>
@@ -35,8 +36,8 @@
         <programlisting role="php"><![CDATA[
 // Group baru bernama marketing yang mewarisi perizinan staff
 $acl->addRole(new Zend_Acl_Role('marketing'), 'staff');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
         Berikutnya, kita memerlukan tiga buah resource yaitu "newsletter", "latest news", dan "announcement news":
@@ -56,8 +57,8 @@ $acl->add(new Zend_Acl_Resource('latest'), 'news');
 
 // announcement news yang merupakan anak dari news
 $acl->add(new Zend_Acl_Resource('announcement'), 'news');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
         Selanjutnya tinggal mendifinisikan aturan-aturan spesifik sesuai kebutuhan di atas ke dalam ACL:
@@ -77,8 +78,8 @@ $acl->deny('staff', 'latest', 'revise');
 // Semua (termasuk administrator) tidak boleh
 // mengarsip berita pengumuman
 $acl->deny(null, 'announcement', 'archive');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
         Dari aturan baru yang sudah kita buat, kita bisa melakukan query seperti berikut:
@@ -116,14 +117,14 @@ echo $acl->isAllowed('editor', 'announcement', 'archive') ?
 echo $acl->isAllowed('administrator', 'announcement', 'archive') ?
      "allowed" : "denied";
 // denied
-]]>
-        </programlisting>
 
-    </sect2>
+        ]]></programlisting>
 
-    <sect2 id="zend.acl.refining.removing">
+    </section>
 
-        <title>Menghapus Aturan dari Kontrol Akses</title>
+    <section xml:id="zend.acl.refining.removing"><info><title>Menghapus Aturan dari Kontrol Akses</title></info>
+
+        
 
         <para>
         Untuk menghapus satu atau lebih aturan dari ACL, anda cukup menggunakan method <code>removeAllow()</code>
@@ -154,8 +155,8 @@ echo $acl->isAllowed('marketing', 'newsletter', 'publish') ?
 echo $acl->isAllowed('marketing', 'newsletter', 'archive') ?
      "allowed" : "denied";
 // denied
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
         Hak akses dapat dimodifikasi secara spesifik untuk aksi tertentu (publish, archive)
@@ -180,12 +181,9 @@ echo $acl->isAllowed('marketing', 'latest', 'archive') ?
 echo $acl->isAllowed('marketing', 'latest', 'anything') ?
      "allowed" : "denied";
 // allowed
-]]>
-        </programlisting>
 
-    </sect2>
+        ]]></programlisting>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+
+</section>

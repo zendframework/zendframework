@@ -1,13 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19782 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.autoloading.intro">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.intro"><info><title>Einführung</title></info>
+    
 
     <para>
         Autoloading ist ein Mechanismus welcher die Notwendigkeit den Aufrufs von "require" im
-        eigenen <acronym>PHP</acronym> Code eliminiert. Laut <ulink
-            url="http://php.net/autoload">dem PHP Manual für Autoload</ulink> wird ein Autoloader,
+        eigenen <acronym>PHP</acronym> Code eliminiert. Laut <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/autoload">dem PHP Manual für Autoload</link> wird ein Autoloader,
         sobald er definiert wurde, "automatisch aufgerufen im Fall das versucht wird auf eine Klasse
         oder ein Interface zuzugreifen welche bis zu diesem Zeitpunkt noch nicht definiert wurde.
     </para>
@@ -32,4 +31,4 @@
         Autoloading für beide zu unterstützen, sowohl Bibliothekscode als auch Anwendungscode.
         Das Tutorial zeigt diese Tools und auch wie man Sie effektiv verwendet.
     </para>
-</sect1>
+</section>

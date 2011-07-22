@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19997 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.plugins.intro">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.plugins.intro"><info><title>Einführung</title></info>
+    
 
     <para>
         Zend Framework verwendet sehr stark Plugin Architekturen. Plugins erlauben eine einfache
@@ -56,4 +56,4 @@
     <para>
         Jetzt sehen wir uns die Verwendung von Plugins an.
     </para>
-</sect1>
+</section>

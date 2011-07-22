@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20764 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.barcode.renderers">
-    <title>Renderizadores do Zend_Barcode</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.barcode.renderers"><info><title>Renderizadores do Zend_Barcode</title></info>
+    
 
     <para>
         Os renderizadores tem algumas opções em comum. Essas opções podem ser definidas em
@@ -35,8 +33,8 @@
         </listitem>
     </itemizedlist>
 
-    <example id="zend.barcode.renderers.configuration">
-        <title>Diferentes maneiras de parametrizar um objeto renderizador</title>
+    <example xml:id="zend.barcode.renderers.configuration"><info><title>Diferentes maneiras de parametrizar um objeto renderizador</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $options = array('topOffset' => 10);
@@ -59,20 +57,20 @@ $renderer->setTopOffset(10);
 ]]></programlisting>
     </example>
 
-    <sect2 id="zend.barcode.renderers.common.options">
-        <title>Opções Comuns</title>
+    <section xml:id="zend.barcode.renderers.common.options"><info><title>Opções Comuns</title></info>
+        
 
         <para>
             Na lista seguinte, os valores não têm unidades; usaremos o termo "unidade". Por exemplo,
             o valor padrão da "barra fina" é "1 unidade". As unidades reais dependem do suporte de
             renderização. Os setters individuais são obtidos mudando a letra inicial da opção para
-            maiúscula e colocando o prefixo "set" (por exemplo "barHeight" => "setBarHeight").
+            maiúscula e colocando o prefixo "set" (por exemplo "barHeight" =&gt; "setBarHeight").
             Todas as opções têm um getter correspondente com prefixo "get" (por exemplo
             "getBarHeight"). As opções disponíveis são:
         </para>
 
-        <table id="zend.barcode.renderers.common.options.table">
-            <title>Opções Comuns</title>
+        <table xml:id="zend.barcode.renderers.common.options.table"><info><title>Opções Comuns</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -179,10 +177,10 @@ $renderer->setTopOffset(10);
             classe de renderização sem o namespace (por exemplo,
             <classname>Zend_Barcode_Renderer_Image</classname> retorna "image").
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.barcode.renderers.image">
-        <title>Zend_Barcode_Renderer_Image</title>
+    <section xml:id="zend.barcode.renderers.image"><info><title>Zend_Barcode_Renderer_Image</title></info>
+        
 
         <para>
             O renderizador Image irá desenhar a lista de instruções do objeto código de barras em
@@ -192,8 +190,8 @@ $renderer->setTopOffset(10);
 
         <para>As opções disponíveis são:</para>
 
-        <table id="zend.barcode.renderers.image.table">
-            <title>Opções do Zend_Barcode_Renderer_Image</title>
+        <table xml:id="zend.barcode.renderers.image.table"><info><title>Opções do Zend_Barcode_Renderer_Image</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -240,10 +238,10 @@ $renderer->setTopOffset(10);
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.barcode.renderers.pdf">
-        <title>Zend_Barcode_Renderer_Pdf</title>
+    <section xml:id="zend.barcode.renderers.pdf"><info><title>Zend_Barcode_Renderer_Pdf</title></info>
+        
 
         <para>
             O renderizador de <acronym>PDF</acronym> irá desenhar a lista de instruções do objeto
@@ -254,5 +252,5 @@ $renderer->setTopOffset(10);
         <para>
             Não existem opções específicas para este renderizador.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

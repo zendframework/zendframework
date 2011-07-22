@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.object">
-    <title>HTML Objekt Helfer</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.object"><info><title>HTML Objekt Helfer</title></info>
+    
 
     <para>
-        Das <acronym>HTML</acronym> <emphasis><![CDATA[<object>]]></emphasis> Element wird für das
+        Das <acronym>HTML</acronym> <emphasis>&lt;object&gt;</emphasis> Element wird für das
         Einbetten von Medien wie Flash oder Quicktime in Webseiten verwendet. Der Object View Helfer
         übernimmt die Einbettung von Medien mit einem minimalen Aufwand.
     </para>
@@ -49,8 +47,8 @@
         Dokumentation nur Beispiele für zwei dieser Helfer.
     </para>
 
-    <example id="zend.view.helpers.initial.object.flash">
-        <title>Flash Helfer</title>
+    <example xml:id="zend.view.helpers.initial.object.flash"><info><title>Flash Helfer</title></info>
+        
 
         <para>
             Die Einbettung von Flash in die eigene Seite mit Hilfe des Helfers ist recht direkt. Das
@@ -76,12 +74,12 @@
 
     <para>
         Zusätzlich können Attribute, Parameter und Inhalte definiert werden die mit dem
-        <emphasis><![CDATA[<object>]]></emphasis> dargestellt werden. Das wird durch Verwendung des
+        <emphasis>&lt;object&gt;</emphasis> dargestellt werden. Das wird durch Verwendung des
         <methodname>htmlObject()</methodname> Helfers demonstriert.
     </para>
 
-    <example id="zend.view.helpers.initial.object.object">
-        <title>Anpassen des Objekts durch die Übergabe von zusätzlichen Argumenten</title>
+    <example xml:id="zend.view.helpers.initial.object.object"><info><title>Anpassen des Objekts durch die Übergabe von zusätzlichen Argumenten</title></info>
+        
 
         <para>
             Das erste Argument des Objekt Helfers wird immer benötigt. Es ist die
@@ -92,7 +90,7 @@
             mit Schlüssel-Wert Paaren. Die <property>classid</property> und
             <property>codebase</property> sind Beispiel für solche Attribute. Das vierte Argument
             nimmt auch Schlüssel-Wert Paare und verwendet diese für die Erstellung von
-            <emphasis><![CDATA[<param>]]></emphasis> Elementen. Sie sehen in Kürze ein Beispiel
+            <emphasis>&lt;param&gt;</emphasis> Elementen. Sie sehen in Kürze ein Beispiel
             hierfür. Letztendlich, gibt es eine Option für das zur Verfügungstellen von zusätzlichen
             Inhalten beim Objekt. Jetzt folgt ein Beispiel welches alle Argumente verwendet.
         </para>
@@ -124,4 +122,4 @@ Das würde folgendes ausgeben:
 */
 ]]></programlisting>
     </example>
-</sect3>
+</section>

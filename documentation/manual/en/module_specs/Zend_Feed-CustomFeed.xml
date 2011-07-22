@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.feed.custom-feed">
-    <title>Custom Feed and Entry Classes</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.custom-feed"><info><title>Custom Feed and Entry Classes</title></info>
+    
 
     <para>
         Finally, you can extend the <classname>Zend_Feed</classname> classes if you'd like to
@@ -16,8 +15,8 @@
         worry about namespaces at all.
     </para>
 
-    <example id="zend.feed.custom-feed.example.extending">
-        <title>Extending the Atom Entry Class with Custom Namespaces</title>
+    <example xml:id="zend.feed.custom-feed.example.extending"><info><title>Extending the Atom Entry Class with Custom Namespaces</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 /**
@@ -90,7 +89,4 @@ $entry->myUpdated();
 $entry->myUpdated;
 ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

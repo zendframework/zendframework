@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21818 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.adding-recipients">
-    <title>Ajouter des destinataires</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.adding-recipients"><info><title>Ajouter des destinataires</title></info>
+    
 
     <para>
         Des destinataires peuvent être ajouter de trois façons :
@@ -36,8 +36,8 @@
         <methodname>clearRecipients()</methodname> efface la liste.
     </para>
 
-    <note>
-        <title>Paramètres additionnels</title>
+    <note><info><title>Paramètres additionnels</title></info>
+        
 
         <para>
             <methodname>addTo()</methodname> et <methodname>addCc()</methodname> acceptent un
@@ -47,8 +47,8 @@
         </para>
     </note>
 
-    <note>
-        <title>Utilisation optionnelle</title>
+    <note><info><title>Utilisation optionnelle</title></info>
+        
 
         <para>
             Ces trois méthodes peuvent aussi accepter un tableau d'adresses émails plutôt que
@@ -57,4 +57,4 @@
             est un nom de destinataire humainement lisible.
         </para>
     </note>
-</sect1>
+</section>

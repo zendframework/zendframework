@@ -1,8 +1,9 @@
-<sect1 id="zend.search.lucene.java-lucene">
-    <title>Взаимодействие с Java Lucene<!--Interoperating with Java Lucene--></title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.java-lucene"><info><title>Взаимодействие с Java Lucene<!--Interoperating with Java Lucene--></title></info>
+    
 
-    <sect2 id="zend.search.lucene.index-creation.file-formats">
-        <title>Форматы файлов<!--File Formats--></title>
+    <section xml:id="zend.search.lucene.index-creation.file-formats"><info><title>Форматы файлов<!--File Formats--></title></info>
+        
         <para>
         Форматы файлов индекса Zend_Search_Lucene являются совместимыми с Lucene
         версии 1.4 и выше.
@@ -17,12 +18,12 @@
 <!--
           A detailed description of this format is available here:
 -->
-          <ulink url="http://lucene.apache.org/java/docs/fileformats.html"/>.
+          <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://lucene.apache.org/java/docs/fileformats.html">http://lucene.apache.org/java/docs/fileformats.html</uri>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.index-directory">
-        <title>Директория для индекса<!--Index Directory--></title>
+    <section xml:id="zend.search.lucene.index-creation.index-directory"><info><title>Директория для индекса<!--Index Directory--></title></info>
+        
 
         <para>
         После создания индекса директория для индекса будет содержать несколько файлов:
@@ -61,10 +62,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.java-lucene.source-code">
-        <title>Исходный код Java<!--Java Source Code--></title>
+    <section xml:id="zend.search.lucene.java-lucene.source-code"><info><title>Исходный код Java<!--Java Source Code--></title></info>
+        
         <para>
             Приведенный ниже листинг программы на Java представляет собой пример
             того, как индексировать файл, используя Java Lucene:
@@ -101,12 +102,8 @@ FileInputStream is = new FileInputStream(f);
 Reader reader = new BufferedReader(new InputStreamReader(is));
 doc.add(Field.Text("contents", reader));
 
-indexWriter.addDocument(doc);]]>
-        </programlisting>
-    </sect2>
+indexWriter.addDocument(doc);
+        ]]></programlisting>
+    </section>
 
-</sect1>
-
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

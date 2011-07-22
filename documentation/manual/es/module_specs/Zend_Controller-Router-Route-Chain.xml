@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 20765 -->
-    <!-- Reviewed: no -->
-<sect3 id="zend.controller.router.routes.chain">
-    <title>Zend_Controller_Router_Route_Chain</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.router.routes.chain"><info><title>Zend_Controller_Router_Route_Chain</title></info>
+    
 
     <para>
         <classname>Zend_Controller_Router_Route_Chain</classname>
@@ -15,8 +13,8 @@
         de un archivo de configuración.
     </para>
 
-    <note>
-        <title>Prioridad de Parámetros</title>
+    <note><info><title>Prioridad de Parámetros</title></info>
+        
         <para>Cuando se encadenan en conjunto varias rutas, los parámetros de
             la ruta exterior tienen
             mayor prioridad que los parámetros de la
@@ -79,8 +77,8 @@ $chainedRoute = $firstRoute->chain($secondRoute, '-');
 echo $chainedRoute->assemble();
 ]]></programlisting>
 
-    <sect4 id="zend.controller.router.routes.chain.config">
-        <title>Encadenar Rutas via Zend_Config</title>
+    <section xml:id="zend.controller.router.routes.chain.config"><info><title>Encadenar Rutas via Zend_Config</title></info>
+        
 
         <para>
             Para encadenar juntas a las rutas en un archivo de configuración,
@@ -254,5 +252,5 @@ echo $this->_router->assemble(array(), 'chainName_separator_subRouteName');
 // The proof: it echoes /foo/bar
 ]]></programlisting>
 
-    </sect4>
-</sect3>
+    </section>
+</section>

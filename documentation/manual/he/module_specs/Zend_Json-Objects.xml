@@ -1,5 +1,6 @@
-<sect1 id="zend.json.objects">
-    <title>אובייקטי JSON</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.objects"><info><title>אובייקטי JSON</title></info>
+    
     <para>
         כשמקודדים אובייקטים של PHP ב JSON, כל הערכים המוגדרים ל public לאותו אובייקט יקודדו באובייקט ה JSON.
     </para>
@@ -19,8 +20,8 @@
     <programlisting role="php"><![CDATA[
 // Decode JSON objects as PHP objects
 $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
-]]>
-    </programlisting>
+
+    ]]></programlisting>
     <para>
         אובייקטים אשר יפוענחו יוחזרו כאובייקטים של <code>StdClass</code> עם ערכים המשוייכים ל
         key/value באובייקט של JSON.
@@ -28,7 +29,4 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
     <para>
         ההמלצה של Zend Framework היא שכל מתכנת יחליט בעצמו כיצד לפענח אובייקטים של JSON.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

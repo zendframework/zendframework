@@ -79,14 +79,15 @@ class SubForm extends \Zend\Form\SubForm
     /**
      * Get view
      *
-     * @return \Zend\View\ViewEngine
+     * @return \Zend\View\Renderer
      */
     public function getView()
     {
         $view = parent::getView();
         if (!$this->_dojoViewPathRegistered) {
-            if (false === $view->getPluginLoader('helper')->getPaths('Zend\Dojo\View\Helper')) {
-                $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend\Dojo\View\Helper');
+            if(false === $view->broker()->isLoaded('dojo')) {
+                $loader = new \Zend\Dojo\View\HelperLoader();
+                $view->broker()->setClassLoader($loader);
             }
             $this->_dojoViewPathRegistered = true;
         }

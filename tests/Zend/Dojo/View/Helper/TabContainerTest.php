@@ -24,7 +24,7 @@ namespace ZendTest\Dojo\View\Helper;
 use Zend\Dojo\View\Helper\TabContainer as TabContainerHelper,
     Zend\Dojo\View\Helper\Dojo as DojoHelper,
     Zend\Registry,
-    Zend\View\View;
+    Zend\View;
 
 /**
  * Test class for Zend_Dojo_View_Helper_TabContainer.
@@ -57,7 +57,7 @@ class TabContainerTest extends \PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        $view = new View();
+        $view = new View\PhpRenderer();
         \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
@@ -68,7 +68,7 @@ class TabContainerTest extends \PHPUnit_Framework_TestCase
         foreach (array('top', 'bottom', 'center', 'left', 'right') as $pane) {
             $id      = $pane . 'Pane';
             $content = 'This is the content of pane ' . $pane;
-            $html   .= $this->view->contentPane($id, $content, array('region' => $pane));
+            $html   .= $this->view->broker('contentPane')->direct($id, $content, array('region' => $pane));
         }
         return $this->helper->direct('container', $html, array('design' => 'headline'));
     }
@@ -84,6 +84,6 @@ class TabContainerTest extends \PHPUnit_Framework_TestCase
         DojoHelper::setUseProgrammatic();
         $html = $this->getContainer();
         $this->assertNotRegexp('/<div[^>]*(dojoType="dijit.layout.TabContainer")/', $html);
-        $this->assertNotNull($this->view->dojo()->getDijit('container'));
+        $this->assertNotNull($this->view->broker('dojo')->getDijit('container'));
     }
 }

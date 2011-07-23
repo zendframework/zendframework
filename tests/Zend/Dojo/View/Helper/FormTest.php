@@ -24,7 +24,7 @@ namespace ZendTest\Dojo\View\Helper;
 use Zend\Dojo\View\Helper\Form as FormHelper,
     Zend\Dojo\View\Helper\Dojo as DojoHelper,
     Zend\Registry,
-    Zend\View\View;
+    Zend\View;
 
 /**
  * Test class for Zend_Dojo_View_Helper_Form.
@@ -57,7 +57,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        $view = new View();
+        $view = new View\PhpRenderer();
         \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
@@ -78,13 +78,13 @@ class FormTest extends \PHPUnit_Framework_TestCase
         DojoHelper::setUseProgrammatic();
         $html = $this->getForm();
         $this->assertNotRegexp('/<form[^>]*(dojoType="dijit.form.Form")/', $html);
-        $this->assertNotNull($this->view->dojo()->getDijit('myForm'));
+        $this->assertNotNull($this->view->broker('dojo')->getDijit('myForm'));
     }
 
     public function testOnlyIdShouldBeNecessary()
     {
         DojoHelper::setUseDeclarative();
-        $html = $this->view->form('foo');
+        $html = $this->view->broker('form')->direct('foo');
         $this->assertRegexp('/<form[^>]*(dojoType="dijit.form.Form")/', $html, $html);
         $this->assertRegexp('/<form[^>]*(id="foo")/', $html, $html);
     }

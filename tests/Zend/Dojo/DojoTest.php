@@ -108,6 +108,7 @@ class DojoTest extends \PHPUnit_Framework_TestCase
         \Zend\Dojo\Dojo::enableView($view);
         $helperLoader = $view->broker()->getClassLoader();
         $plugins = $helperLoader->getRegisteredPlugins();
+
         $this->assertInternalType('array', $plugins);
     }
 }

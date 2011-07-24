@@ -360,7 +360,7 @@ class Data implements \ArrayAccess,\IteratorAggregate,\Countable
         if (!is_string($json)) {
             throw new Exception\InvalidArgumentException('fromJson() expects JSON input');
         }
-        $data = Json::decode($json);
+        $data = Json::decode($json, Json::TYPE_ARRAY);
         return $this->fromArray($data);
     }
 

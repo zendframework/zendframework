@@ -25,7 +25,7 @@ use Zend\Dojo\Form\Element\ComboBox as ComboBoxElement,
     Zend\Dojo\View\Helper\Dojo as DojoHelper,
     Zend\Form\SubForm,
     Zend\Registry,
-    Zend\View\View;
+    Zend\View;
 
 /**
  * Test class for Zend_Dojo_Form_Element_ComboBox.
@@ -58,7 +58,7 @@ class ComboBoxTest extends \PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        $view = new View();
+        $view = new View\PhpRenderer();
         \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }

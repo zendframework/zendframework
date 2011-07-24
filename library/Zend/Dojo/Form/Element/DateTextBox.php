@@ -23,7 +23,8 @@
  * @namespace
  */
 namespace Zend\Dojo\Form\Element;
-use Zend\Form;
+use Zend\Form,
+    Zend\Form\Element\Exception;;
 
 /**
  * DateTextBox dijit
@@ -168,7 +169,7 @@ class DateTextBox extends ValidationTextBox
     {
         $formatLength = strtolower($formatLength);
         if (!in_array($formatLength, $this->_allowedFormatTypes)) {
-            throw new Form\ElementException(sprintf('Invalid formatLength "%s" specified', $formatLength));
+            throw new Exception\InvalidArgumentException(sprintf('Invalid formatLength "%s" specified', $formatLength));
         }
 
         $this->setConstraint('formatLength', $formatLength);
@@ -196,7 +197,7 @@ class DateTextBox extends ValidationTextBox
     {
         $selector = strtolower($selector);
         if (!in_array($selector, $this->_allowedSelectorTypes)) {
-            throw new Form\ElementException(sprintf('Invalid Selector "%s" specified', $selector));
+            throw new Exception\InvalidArgumentException(sprintf('Invalid Selector "%s" specified', $selector));
         }
 
         $this->setConstraint('selector', $selector);

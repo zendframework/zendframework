@@ -24,7 +24,7 @@ namespace ZendTest\Dojo\Form\Element;
 use Zend\Dojo\Form\Element\TextBox as TextBoxElement,
     Zend\Dojo\View\Helper\Dojo as DojoHelper,
     Zend\Registry,
-    Zend\View\View;
+    Zend\View;
 
 /**
  * Test class for Zend_Dojo_Form_Element_TextBox.
@@ -57,7 +57,7 @@ class TextBoxTest extends \PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        $view = new View();
+        $view = new View\PhpRenderer();
         \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }

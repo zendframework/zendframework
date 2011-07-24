@@ -26,7 +26,7 @@ use Zend\Dojo\Form\Element\TextBox as TextBoxElement,
     Zend\Dojo\View\Helper\Dojo as DojoHelper,
     Zend\Form\Decorator\Description as DescriptionDecorator,
     Zend\Registry,
-    Zend\View\View;
+    Zend\View;
 
 /**
  * Test class for Zend_Dojo_Form_Element_Dijit.
@@ -59,7 +59,7 @@ class DijitTest extends \PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        $view = new View();
+        $view = new View\PhpRenderer();
         \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
@@ -119,10 +119,11 @@ class DijitTest extends \PHPUnit_Framework_TestCase
 
     public function testElementShouldDojoEnableViewObject()
     {
-        $this->element->setView(new View);
+        $this->element->setView(new View\PhpRenderer());
         $view = $this->element->getView();
-        $loader = $view->getPluginLoader('helper');
-        $paths = $loader->getPaths('Zend\Dojo\View\Helper');
-        $this->assertTrue(is_array($paths));
+        $helperLoader = $view->broker()->getClassLoader();
+        $plugins = $helperLoader->getRegisteredPlugins();
+
+        $this->assertInternalType('array', $plugins);
     }
 }

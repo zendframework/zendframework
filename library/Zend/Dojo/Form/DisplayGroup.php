@@ -65,7 +65,8 @@ class DisplayGroup extends \Zend\Form\DisplayGroup
         if (null !== $view) {
             if(false === $view->broker()->isLoaded('dojo')) {
                 $loader = new \Zend\Dojo\View\HelperLoader();
-                $view->broker()->setClassLoader($loader);
+                $view->broker()->getClassLoader()
+                                ->registerPlugins($loader->getIterator());
             }
         }
         return parent::setView($view);

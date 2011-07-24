@@ -249,10 +249,15 @@ abstract class Adapter
             } else {
                 $separator = DIRECTORY_SEPARATOR;
             }
+
             if (is_array($options['ignore'])) {
                 $ignore = '/';
                 foreach($options['ignore'] as $key => $match) {
                     if (strpos($key, 'regex') !== false) {
+                        if (($match[0] === '/') && (substr($match, -1, 1) === '/')) {
+                            $match = substr($match, 1, -1);
+                        }
+
                         $ignore .= $match . '|';
                     } else {
                         $ignore .= $separator . $match . '|';
@@ -262,11 +267,7 @@ abstract class Adapter
             } else {
                 $ignore = '/' . $separator . $options['ignore'] . '/u';
             }
-var_dump($ignore);
-            // array('regex_1' => '.svn', 'regex_2' => '.csv')
-            // (.svn|.csv)
-            // array('.svn', '.csv')
-            // (\.svn|\.csv)
+
             foreach (new \RecursiveIteratorIterator(
                      new \RecursiveRegexIterator(
                      new \RecursiveDirectoryIterator($options['content'], \RecursiveDirectoryIterator::KEY_AS_PATHNAME),
@@ -274,23 +275,20 @@ var_dump($ignore);
                      \RecursiveIteratorIterator::SELF_FIRST) as $directory => $info) {
                 $file = $info->getFilename();
                 if (is_array($options['ignore'])) {
-                    foreach ($options['ignore'] as $key => $ignore) {
+                    foreach ($options['ignore'] as $key => $hop) {
                         if (strpos($key, 'regex') !== false) {
-                            if (preg_match($ignore, $directory)) {
-                              // ignore files matching the given regex from option 'ignore' and all files below
-var_dump('1:' . $ignore);
+                            if (preg_match($hop, $directory)) {
+                                // ignore files matching the given regex from option 'ignore' and all files below
                                 continue 2;
                             }
-                        } else if (strpos($directory, DIRECTORY_SEPARATOR . $ignore) !== false) {
-                          // ignore files matching first characters from option 'ignore' and all files below
-var_dump('2:' . $ignore);
+                        } else if (strpos($directory, DIRECTORY_SEPARATOR . $hop) !== false) {
+                            // ignore files matching first characters from option 'ignore' and all files below
                             continue 2;
                         }
                     }
                 } else {
                     if (strpos($directory, DIRECTORY_SEPARATOR . $options['ignore']) !== false) {
-                      // ignore files matching first characters from option 'ignore' and all files below
-var_dump('3:' .DIRECTORY_SEPARATOR . $options['ignore']);
+                        // ignore files matching first characters from option 'ignore' and all files below
                         continue;
                     }
                 }

@@ -974,7 +974,7 @@ class Client
                 }
 
                 // If we got a well formed absolute URI
-                $url = Uri\UriFactory($location, 'http');
+                $url = Uri\UriFactory::factory($location, 'http');
                 
                 if ($url->isValid()) {
                     $this->setHeaders('host', null);

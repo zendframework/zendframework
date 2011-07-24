@@ -24,7 +24,7 @@
 namespace Zend\Dojo\Form\Decorator;
 
 use Zend\Form\Decorator\ViewHelper as ViewHelperDecorator,
-    Zend\Form\Decorator\Exception as DecoratorException;
+    Zend\Form\Decorator\Exception\RunTimeException as DecoratorException;
 
 /**
  * Zend_Dojo_Form_Decorator_DijitElement

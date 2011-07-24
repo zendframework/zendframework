@@ -230,7 +230,6 @@ class HorizontalSliderTest extends \PHPUnit_Framework_TestCase
      */
     public function testShouldCreateAppropriateIdsForElementsInSubForms()
     {
-        $this->markTestSkipped();
         $form = new DojoForm;
         $form->setDecorators(array(
             'FormElements',

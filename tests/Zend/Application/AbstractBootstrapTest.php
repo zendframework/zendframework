@@ -648,7 +648,7 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
      */
     public function testMultipleApplicationResourcesInitialization()
     {
-        define('APPLICATION_PATH', __DIR__);
+        define('APPLICATION_PATH_ZF2_30', __DIR__);
         $application = new Application\Application('testing', __DIR__.'/TestAsset/Zf2-30.ini');        
         $application->bootstrap();      
         $loadedResource = $application->getBootstrap()->getBroker()->load('zf30');  
@@ -674,7 +674,7 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
      */
     public function testContinueResourceExecutingByModulesResource()
     {
-        define('APPLICATION_PATH', __DIR__);
+        define('APPLICATION_PATH_ZF2_38', __DIR__);
         $application = new Application\Application('testing', __DIR__ . '/TestAsset/Zf2-38.ini');        
         $application->bootstrap();      
         $broker = $application->getBootstrap()->getBroker();

@@ -22,7 +22,9 @@
 /**
  * @namespace
  */
-namespace Zend\Controller\Router;
+namespace Zend\Controller\Router\Exception;
+
+use Zend\Controller\Router\Exception;
 
 /**
  * @package    Zend_Controller
@@ -30,7 +32,5 @@ namespace Zend\Controller\Router;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RuntimeException
-    extends \RuntimeException
-    implements Exception
+class RuntimeException extends \RuntimeException implements Exception
 {}

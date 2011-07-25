@@ -24,8 +24,13 @@
  * @namespace
  */
 namespace Zend\Controller\Router;
-use Zend\Controller\Request;
-use Zend\Loader\PluginBroker;
+
+use ArrayAccess,
+    Config,
+    Traversable,
+    Zend\Controller\Request,
+    Zend\Controller\Router\Exception,
+    Zend\Loader\PluginBroker;
 
 /**
  * Simple route stack implementation.
@@ -91,9 +96,15 @@ class SimpleRouteStack implements RouteStack
      */
     public function setOptions($options)
     {
-        if (!is_array($options) && !$options instanceof \Traversable) {
-            throw new InvalidArgumentException(sprintf(
-                'Expected an array or Traversable; received "%s"',
+        if ($options instanceof Config) {
+            $options = $options->toArray();
+        } elseif ($options instanceof Traversable) {
+            $options = iterator_to_array($options);
+        }
+
+        if (!is_array($options)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Expected an array or Traversable object; received "%s"',
                 (is_object($options) ? get_class($options) : gettype($options))
             ));
         }
@@ -148,7 +159,7 @@ class SimpleRouteStack implements RouteStack
         if (is_array($routes)) {
             $routes = new ArrayIterator($routes);
         } elseif (!$routes instanceof Traversable) {
-            throw new InvalidArgumentException('Routes provided are invalid; must be traversable');
+            throw new Exception\InvalidArgumentException('Routes provided are invalid; must be traversable');
         }
         
         $routeStack = $this;
@@ -203,17 +214,17 @@ class SimpleRouteStack implements RouteStack
      */
     protected function routeFromArray($specs)
     {
-        if (!is_array($options) && !$options instanceof \ArrayAccess) {
-            throw new InvalidArgumentException(sprintf(
+        if (!is_array($options) && !$options instanceof ArrayAccess) {
+            throw new Exception\InvalidArgumentException(sprintf(
                 'Expected an array or ArrayAccess; received "%s"',
                 (is_object($options) ? get_class($options) : gettype($options))
             ));
         }
     
         if (!isset($specs['type'])) {
-            throw new InvalidArgumentException('Missing "type" option');
+            throw new Exception\InvalidArgumentException('Missing "type" option');
         } elseif (!isset($specs['options'])) {
-            throw new InvalidArgumentException('Missing "name" option');
+            throw new Exception\InvalidArgumentException('Missing "name" option');
         }
         
         $route = $this->pluginBroker->load($specs['type'], $specs['options']);
@@ -250,9 +261,9 @@ class SimpleRouteStack implements RouteStack
     public function assemble(array $params = null, array $options = null)
     {
         if (!isset($options['name'])) {
-            throw new InvalidArgumentException('Missing "name" option');
+            throw new Exception\InvalidArgumentException('Missing "name" option');
         } elseif (null === ($route = $this->route->get($options['name']))) {
-            throw new RuntimeException(sprintf('Route with name "%s" not found', $options['name']));
+            throw new Exception\RuntimeException(sprintf('Route with name "%s" not found', $options['name']));
         }
         
         unset($options['name']);

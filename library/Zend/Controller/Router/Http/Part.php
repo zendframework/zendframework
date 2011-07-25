@@ -24,12 +24,11 @@
  * @namespace
  */
 namespace Zend\Controller\Router\Http;
-use Zend\Controller\Router\Route,
-    Zend\Controller\Router\RouteMatch,
-    Zend\Controller\Router\PriorityList,
-    Zend\Controller\Router\Http\TreeRouteStack,
+
+use Traversable,
+    Zend\Config\Config,
     Zend\Controller\Request\AbstractRequest,
-    Zend\Controller\Request\Http as HttpRequest;
+    Zend\Controller\Router\Exception;
 
 /**
  * Route part.
@@ -74,15 +73,21 @@ class Part extends TreeRouteStack
     {
         parent::__construct($options);
         
-        if (!is_array($options) && !$options instanceof \ArrayAccess) {
-            throw new InvalidArgumentException(sprintf(
+        if ($options instanceof Config) {
+            $options = $options->toArray();
+        } elseif ($options instanceof Traversable) {
+            $options = iterator_to_array($options);
+        }
+
+        if (!is_array($options)) {
+            throw new Exception\InvalidArgumentException(sprintf(
                 'Expected an array or Traversable; received "%s"',
                 (is_object($options) ? get_class($options) : gettype($options))
             ));
         }
         
         if (!isset($options['route']) || !$options['route'] instanceof Route) {
-            throw new InvalidArgumentException('Route not defined or not an instance of Route');
+            throw new Exception\InvalidArgumentException('Route not defined or not an instance of Route');
         }
 
         $this->route        = $options['route'];

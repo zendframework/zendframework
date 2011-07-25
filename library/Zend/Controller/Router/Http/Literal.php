@@ -24,9 +24,13 @@
  * @namespace
  */
 namespace Zend\Controller\Router\Http;
-use Zend\Controller\Router\RouteMatch,
+
+use Traversable,
+    Zend\Config\Config,
     Zend\Controller\Request\AbstractRequest,
-    Zend\Controller\Request\Http as HttpRequest;
+    Zend\Controller\Router\Exception,
+    Zend\Controller\Router\RouteMatch,
+    ;
 
 /**
  * Literal route.
@@ -62,20 +66,22 @@ class Literal implements Route
      */
     public function __construct($options = null)
     {
-        if ($options instanceof \Zend\Config) {
+        if ($options instanceof Config) {
             $options = $options->toArray();
+        } elseif ($options instanceof Traversable) {
+            $options = iterator_to_array($options);
         }
 
         if (!is_array($options)) {
-            throw new InvalidArgumentException('Options must either be an array or an instance of \Zend\Config');
+            throw new Exception\InvalidArgumentException('Options must either be an array or a Traversable object');
         }
 
         if (!isset($options['route']) || !is_string($options['route'])) {
-            throw new InvalidArgumentException('Route not defined nor not a string');
+            throw new Exception\InvalidArgumentException('Route not defined nor not a string');
         }
         
         if (!isset($options['defaults']) || !is_array($options['defaults'])) {
-            throw new InvalidArgumentException('Defaults not defined nor not an array');
+            throw new Exception\InvalidArgumentException('Defaults not defined nor not an array');
         }
         
         $this->route    = $options['route'];

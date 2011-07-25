@@ -60,13 +60,13 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
         $routes = $this->_router->getRoutes();
 
         $this->assertEquals(1, count($routes));
-        $this->assertType('Zend\Controller\Router\Route\Route', $routes['archive']);
+        $this->assertInstanceOf('Zend\Controller\Router\Route\Route', $routes['archive']);
 
         $this->_router->addRoute('register', new Route\Route('register/:action', array('controller' => 'profile', 'action' => 'register')));
         $routes = $this->_router->getRoutes();
 
         $this->assertEquals(2, count($routes));
-        $this->assertType('Zend\Controller\Router\Route\Route', $routes['register']);
+        $this->assertInstanceOf('Zend\Controller\Router\Route\Route', $routes['register']);
     }
 
     public function testAddRoutes()
@@ -80,8 +80,8 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
         $values = $this->_router->getRoutes();
 
         $this->assertEquals(2, count($values));
-        $this->assertType('Zend\Controller\Router\Route\Route', $values['archive']);
-        $this->assertType('Zend\Controller\Router\Route\Route', $values['register']);
+        $this->assertInstanceOf('Zend\Controller\Router\Route\Route', $values['archive']);
+        $this->assertInstanceOf('Zend\Controller\Router\Route\Route', $values['register']);
     }
 
     public function testHasRoute()
@@ -99,7 +99,7 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
 
         $route = $this->_router->getRoute('archive');
 
-        $this->assertType('Zend\Controller\Router\Route\Route', $route);
+        $this->assertInstanceOf('Zend\Controller\Router\Route\Route', $route);
         $this->assertSame($route, $archive);
     }
 
@@ -117,7 +117,7 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
         try {
             $route = $this->_router->removeRoute('archive');
         } catch (Router\Exception $e) {
-            $this->assertType('Zend\Controller\Router\Exception', $e);
+            $this->assertInstanceOf('Zend\Controller\Router\Exception', $e);
             return true;
         }
 
@@ -129,7 +129,7 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
         try {
             $route = $this->_router->getRoute('bogus');
         } catch (Router\Exception $e) {
-            $this->assertType('Zend\Controller\Router\Exception', $e);
+            $this->assertInstanceOf('Zend\Controller\Router\Exception', $e);
             return true;
         }
 
@@ -142,7 +142,7 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
 
         $token = $this->_router->route($request);
 
-        $this->assertType('Zend\Controller\Request\Http', $token);
+        $this->assertInstanceOf('Zend\Controller\Request\Http', $token);
     }
 
     public function testRouteWithIncorrectRequest()
@@ -153,7 +153,7 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
             $token = $this->_router->route($request);
             $this->fail('Should throw an Exception');
         } catch (\Exception $e) {
-            $this->assertType('Zend\Controller\Router\Exception', $e);
+            $this->assertInstanceOf('Zend\Controller\Router\Exception', $e);
         }
     }
 
@@ -164,7 +164,7 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
         $token = $this->_router->route($request);
 
         $routes = $this->_router->getRoutes();
-        $this->assertType('Zend\Controller\Router\Route\Module', $routes['application']);
+        $this->assertInstanceOf('Zend\Controller\Router\Route\Module', $routes['application']);
     }
 
     public function testDefaultRouteWithEmptyAction()
@@ -274,14 +274,14 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
             $route = $this->_router->getCurrentRoute();
             $this->fail();
         } catch (\Exception $e) {
-            $this->assertType('Zend\Controller\Router\Exception', $e);
+            $this->assertInstanceOf('Zend\Controller\Router\Exception', $e);
         }
 
         try {
             $route = $this->_router->getCurrentRouteName();
             $this->fail();
         } catch (\Exception $e) {
-            $this->assertType('Zend\Controller\Router\Exception', $e);
+            $this->assertInstanceOf('Zend\Controller\Router\Exception', $e);
         }
 
         $token = $this->_router->route($request);
@@ -294,7 +294,7 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->assertEquals('application', $name);
-        $this->assertType('Zend\Controller\Router\Route\Module', $route);
+        $this->assertInstanceOf('Zend\Controller\Router\Route\Module', $route);
     }
 
     public function testAddConfig()
@@ -304,13 +304,13 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
 
         $this->_router->addConfig($config, 'routes');
 
-        $this->assertType('Zend\Controller\Router\Route\StaticRoute', $this->_router->getRoute('news'));
-        $this->assertType('Zend\Controller\Router\Route\Route', $this->_router->getRoute('archive'));
+        $this->assertInstanceOf('Zend\Controller\Router\Route\StaticRoute', $this->_router->getRoute('news'));
+        $this->assertInstanceOf('Zend\Controller\Router\Route\Route', $this->_router->getRoute('archive'));
 
         try {
             $this->_router->addConfig($config, 'database');
         } catch (\Exception $e) {
-            $this->assertType('Zend\Controller\Router\Exception', $e);
+            $this->assertInstanceOf('Zend\Controller\Router\Exception', $e);
             return true;
         }
     }
@@ -322,8 +322,8 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
 
         $this->_router->addConfig($config->routes);
 
-        $this->assertType('Zend\Controller\Router\Route\StaticRoute', $this->_router->getRoute('news'));
-        $this->assertType('Zend\Controller\Router\Route\Route', $this->_router->getRoute('archive'));
+        $this->assertInstanceOf('Zend\Controller\Router\Route\StaticRoute', $this->_router->getRoute('news'));
+        $this->assertInstanceOf('Zend\Controller\Router\Route\Route', $this->_router->getRoute('archive'));
     }
 
     public function testAddConfigWithRootNode()
@@ -333,8 +333,8 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
 
         $this->_router->addConfig($config);
 
-        $this->assertType('Zend\Controller\Router\Route\StaticRoute', $this->_router->getRoute('news'));
-        $this->assertType('Zend\Controller\Router\Route\Route', $this->_router->getRoute('archive'));
+        $this->assertInstanceOf('Zend\Controller\Router\Route\StaticRoute', $this->_router->getRoute('news'));
+        $this->assertInstanceOf('Zend\Controller\Router\Route\Route', $this->_router->getRoute('archive'));
     }
 
     public function testRemoveDefaultRoutes()
@@ -450,8 +450,8 @@ class RewriteTest extends \PHPUnit_Framework_TestCase
         $this->_router->addRoute('req', new Mockup2());
         $routeRequest = $this->_router->getRoute('req')->getRequest();
 
-        $this->assertType('Zend\Controller\Request\AbstractRequest', $request);
-        $this->assertType('Zend\Controller\Request\AbstractRequest', $routeRequest);
+        $this->assertInstanceOf('Zend\Controller\Request\AbstractRequest', $request);
+        $this->assertInstanceOf('Zend\Controller\Request\AbstractRequest', $routeRequest);
         $this->assertSame($request, $routeRequest);
     }
 

@@ -111,7 +111,7 @@ abstract class AbstractClient implements RegistryEnabled
         
         // setup the debug log
         if (!$this->_debugLogger instanceof Log\Logger) {
-            $this->_debugLogger = new Log\Logger(new Log\Writer\Null());
+            $this->_debugLogger = new Log\Logger(new \Zend\Log\Writer\Null());
         }
 
         // let the loader load, then the repositories process whats been loaded

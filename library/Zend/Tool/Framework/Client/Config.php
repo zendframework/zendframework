@@ -238,7 +238,7 @@ class Config
                 $writer = new \Zend\Config\Writer\ArrayWriter();
                 break;
             default:
-                throw new Exception('Unknown config file type '
+                throw new Exception\RuntimeException('Unknown config file type '
                     . $suffix . ' at location ' . $this->getConfigFilepath()
                     );
         }

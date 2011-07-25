@@ -158,7 +158,7 @@ abstract class AbstractProvider
             array_pop($parentDirectoriesArray);
         }
 
-        return $profile;
+        return false;
     }
 
     /**
@@ -215,7 +215,7 @@ abstract class AbstractProvider
             return false;
         }
 
-        $engine = new Context\Content\Engine($storage);
+        $engine = new Content\Engine($storage);
         return $engine->getContent($context, $methodName, $parameters);
     }
 

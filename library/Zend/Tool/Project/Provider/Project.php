@@ -58,7 +58,7 @@ class Project
             if (!file_exists($path)) {
                 $created = mkdir($path);
                 if (!$created) {
-                    throw new Client\Exception('Could not create requested project directory \'' . $path . '\'');
+                    throw new Exception\RuntimeException('Could not create requested project directory \'' . $path . '\'');
                 }
             }
             $path = str_replace('\\', '/', realpath($path));
@@ -67,7 +67,7 @@ class Project
         $profile = $this->_loadProfile(self::NO_PROFILE_RETURN_FALSE, $path);
 
         if ($profile !== false) {
-            throw new Client\Exception('A project already exists here');
+            throw new Exception\RuntimeException('A project already exists here');
         }
 
         $profileData = null;

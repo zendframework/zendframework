@@ -53,5 +53,4 @@ class TestPHPUnitConfigFile extends \Zend\Tool\Project\Context\Filesystem\File
     {
         return 'TestPHPUnitConfigFile';
     }
-
 }

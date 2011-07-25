@@ -82,7 +82,7 @@ class ViewScriptFile extends \Zend\Tool\Project\Context\Filesystem\File
             $this->_scriptName = $scriptName;
             $this->_filesystemName = $scriptName . '.phtml';
         } else {
-            throw Zend\Tool\Project\Exception('Either a forActionName or scriptName is required.');
+            throw \Zend\Tool\Project\Exception\InvalidArgumentException('Either a forActionName or scriptName is required.');
         }
 
         parent::init();

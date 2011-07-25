@@ -58,7 +58,10 @@ class Project
             if (!file_exists($path)) {
                 $created = mkdir($path);
                 if (!$created) {
-                    throw new Exception\RuntimeException('Could not create requested project directory \'' . $path . '\'');
+                    throw new Exception\RuntimeException(sprintf(
+                        'Could not create requested project directory "%s"',
+                        $path
+                    ));
                 }
             }
             $path = str_replace('\\', '/', realpath($path));

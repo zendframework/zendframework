@@ -23,7 +23,7 @@
  */
 namespace Zend\Tool\Framework\Client\Interactive;
 
-use Zend\Tool\Framework\Client\Exception\InvalidArgumentException;
+use Zend\Tool\Framework\Client\Exception;
 
 /**
  * @uses       \Zend\Tool\Framework\Client\Exception
@@ -55,7 +55,7 @@ class InputHandler
         if (is_string($inputRequest)) {
             $inputRequest = new InputRequest($inputRequest);
         } elseif (!$inputRequest instanceof InputRequest) {
-            throw new InvalidArgumentException('promptInteractive() requires either a string or an instance of Zend\\Tool\Framework\\Client\\Interactive\\InputRequest.');
+            throw new Exception\InvalidArgumentException('promptInteractive() requires either a string or an instance of Zend\Tool\Framework\Client\Interactive\InputRequest.');
         }
 
         $this->_inputRequest = $inputRequest;
@@ -69,7 +69,7 @@ class InputHandler
         if (is_string($inputResponse)) {
             $inputResponse = new InputResponse($inputResponse);
         } elseif (!$inputResponse instanceof InputResponse) {
-            throw new InvalidArgumentException('The registered $_interactiveCallback for the client must either return a string or an instance of Zend\\Tool\\Framework\\Client\\Interactive\\InputResponse.');
+            throw new Exception\InvalidArgumentException('The registered $_interactiveCallback for the client must either return a string or an instance of Zend\Tool\Framework\Client\Interactive\InputResponse.');
         }
 
         return $inputResponse;

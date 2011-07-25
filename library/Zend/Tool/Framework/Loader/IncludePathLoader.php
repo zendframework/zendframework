@@ -24,6 +24,10 @@
  */
 namespace Zend\Tool\Framework\Loader;
 
+use RecursiveDirectoryIterator,
+    RecursiveFilterIterator,
+    RecursiveIteratorIterator;
+
 /**
  * @uses       RecursiveDirectoryIterator
  * @uses       RecursiveIteratorIterator
@@ -75,17 +79,17 @@ class IncludePathLoader extends AbstractLoader
             }
 
             // create recursive directory iterator
-            $rdi = new \RecursiveDirectoryIterator($path);
+            $rdi = new RecursiveDirectoryIterator($path);
 
             // pass in the RecursiveDirectoryIterator & the patterns
-            $filter = new \RecursiveFilterIterator(
+            $filter = new RecursiveFilterIterator(
                 $rdi,
                 $filterDenyDirectoryPattern,
                 $filterAcceptFilePattern
                 );
 
             // build the rii with the filter
-            $iterator = new \RecursiveIteratorIterator($filter);
+            $iterator = new RecursiveIteratorIterator($filter);
 
             // iterate over the accepted items
             foreach ($iterator as $item) {

@@ -23,7 +23,9 @@
  * @namespace
  */
 namespace Zend\Tool\Project\Context\System;
-use Zend\Tool\Framework\Registry,
+
+use DirectoryIterator,
+    Zend\Tool\Framework\Registry,
     Zend\Tool\Project\Context\Filesystem\Directory,
     Zend\Tool\Project\Context\System,
     Zend\Tool\Project\Context\System\NotOverwritable;
@@ -34,11 +36,6 @@ use Zend\Tool\Framework\Registry,
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       DirectoryIterator
- * @uses       \Zend\Tool\Framework\Registry
- * @uses       \Zend\Tool\Project\Context\Filesystem\Directory
- * @uses       \Zend\Tool\Project\Context\System
- * @uses       \Zend\Tool\Project\Context\System\NotOverwritable
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -71,7 +68,7 @@ class ProjectProvidersDirectory
 
             $providerRepository = $registry->getProviderRepository();
             
-            foreach (new \DirectoryIterator($this->getPath()) as $item) {
+            foreach (new DirectoryIterator($this->getPath()) as $item) {
                 if ($item->isFile() && (($suffixStart = strpos($item->getFilename(), 'Provider.php')) !== false)) {
                     $className = substr($item->getFilename(), 0, $suffixStart+8);
                     // $loadableFiles[$className] = $item->getPathname();

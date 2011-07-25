@@ -24,16 +24,11 @@
  */
 namespace Zend\Tool\Framework\Client;
 
-use Zend\Tool\Framework\Client\Exception;
+use Zend\Config as Configuration,
+    Zend\Config\Writer as ConfigWriter,
+    Zend\Tool\Framework\Client\Exception;
 
 /**
- * @uses       \Zend\Config\Config
- * @uses       \Zend\Config\Ini
- * @uses       \Zend\Config\Writer\ArrayWriter
- * @uses       \Zend\Config\Writer\Ini
- * @uses       \Zend\Config\Writer\Xml
- * @uses       \Zend\Config\Xml
- * @uses       \Zend\Tool\Framework\Client\Exception
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -45,7 +40,7 @@ class Config
     protected $_configFilepath = null;
 
     /**
-     * @var \Zend\Config\Config
+     * @var Configuration\Config
      */
     protected $_config = null;
 
@@ -74,12 +69,15 @@ class Config
 
     /**
      * @param  string $configFilepath
-     * @return \Zend\Tool\Framework\Client\Config
+     * @return Config
      */
     public function setConfigFilepath($configFilepath)
     {
         if (!file_exists($configFilepath)) {
-            throw new Exception\InvalidArgumentException('Provided path to config ' . $configFilepath . ' does not exist');
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Provided path to config "%s" does not exist',
+                $configFilepath
+            ));
         }
 
         $this->_configFilepath = $configFilepath;
@@ -99,18 +97,20 @@ class Config
 
         switch ($suffix) {
             case '.ini':
-                $this->_config = new \Zend\Config\Ini($configFilepath, null, array('allowModifications' => true));
+                $this->_config = new Configuration\Ini($configFilepath, null, array('allowModifications' => true));
                 break;
             case '.xml':
-                $this->_config = new \Zend\Config\Xml($configFilepath, null, array('allowModifications' => true));
+                $this->_config = new Configuration\Xml($configFilepath, null, array('allowModifications' => true));
                 break;
             case '.php':
-                $this->_config = new \Zend\Config\Config(include $configFilepath, true);
+                $this->_config = new Configuration\Config(include $configFilepath, true);
                 break;
             default:
-                throw new Exception\InvalidArgumentException('Unknown config file type '
-                    . $suffix . ' at location ' . $configFilepath
-                    );
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'Unknown config file type "%s" at location "%s"',
+                    $suffix,
+                    $configFilepath
+                ));
         }
     }
 
@@ -190,7 +190,7 @@ class Config
 
     /**
      * @throws \Zend\Tool\Framework\Client\Exception
-     * @return \Zend\Config\Config
+     * @return Configuration\Config
      */
     public function getConfigInstance()
     {
@@ -221,26 +221,28 @@ class Config
     /**
      * Get the config writer that corresponds to the current config file type.
      *
-     * @return \Zend\Config\Writer\AbstractFileWriter
+     * @return ConfigWriter\AbstractFileWriter
      */
     protected function getConfigWriter()
     {
         $suffix = substr($this->getConfigFilepath(), -4);
         switch($suffix) {
             case '.ini':
-                $writer = new \Zend\Config\Writer\Ini();
+                $writer = new ConfigWriter\Ini();
                 $writer->setRenderWithoutSections();
                 break;
             case '.xml':
-                $writer = new \Zend\Config\Writer\Xml();
+                $writer = new ConfigWriter\Xml();
                 break;
             case '.php':
-                $writer = new \Zend\Config\Writer\ArrayWriter();
+                $writer = new ConfigWriter\ArrayWriter();
                 break;
             default:
-                throw new Exception\RuntimeException('Unknown config file type '
-                    . $suffix . ' at location ' . $this->getConfigFilepath()
-                    );
+                throw new Exception\RuntimeException(sprintf(
+                    'Unknown config file type "%s" at location "%s"',
+                    $suffix,
+                    $this->getConfigFilepath()
+                ));
         }
         return $writer;
     }

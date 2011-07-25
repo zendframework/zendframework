@@ -24,19 +24,16 @@
  */
 namespace Zend\Tool\Framework\System\Provider;
 
-use Zend\Tool\Framework,
-    Zend\Tool\Framework\Provider\AbstractProvider,
-    Zend\Tool\Framework\Exception\RuntimeException;
+use ReflectionClass,
+    Zend\Config\Config as Configuration,
+    Zend\Config\Writer\Ini as IniConfigWriter,
+    Zend\Tool\Framework,
+    Zend\Tool\Framework\Exception,
+    Zend\Tool\Framework\Provider\AbstractProvider;
 
 /**
  * Configuration Provider
  *
- * @uses       ReflectionClass
- * @uses       \Zend\Config\Config
- * @uses       \Zend\Config\Writer\Ini
- * @uses       \Zend\Loader
- * @uses       \Zend\Tool\Framework\Exception
- * @uses       \Zend\Tool\Framework\Provider\AbstractProvider
  * @category   Zend
  * @package    Zend_Tool
  * @package    Framework
@@ -67,22 +64,22 @@ class Config extends AbstractProvider
 
         $resp = $this->_registry->getResponse();
         if ($userConfig->exists()) {
-            throw new RuntimeException(
-                "A configuration already exists, cannot create a new one.");
+            throw new Exception\RuntimeException(
+                'A configuration already exists; cannot create a new one');
         }
 
         $homeDirectory = $this->_detectHomeDirectory();
 
-        $writer = new \Zend\Config\Writer\Ini();
+        $writer = new IniConfigWriter();
         $writer->setRenderWithoutSections();
-        $filename = $homeDirectory."/.zf.ini";
+        $filename = $homeDirectory . '/.zf.ini';
 
         $config = array(
             'php' => array(
                 'include_path' => get_include_path(),
             ),
         );
-        $writer->write($filename, new \Zend\Config\Config($config));
+        $writer->write($filename, new Configuration($config));
 
         $resp = $this->_registry->getResponse();
         $resp->appendContent("Successfully written Zend Tool config.");
@@ -101,7 +98,7 @@ class Config extends AbstractProvider
                 return $homeDirectory;
             }
         }
-        throw new RuntimeException("Cannot detect user home directory, set ZF_HOME enviroment variable.");
+        throw new Exception\RuntimeException('Cannot detect user home directory, set ZF_HOME enviroment variable');
     }
 
     /**
@@ -188,9 +185,9 @@ class Config extends AbstractProvider
      */
     public function enableProvider($className)
     {
-        $reflClass = new \ReflectionClass($className);
-        if (!in_array("Zend\\Tool\\Framework\\Provider", $reflClass->getInterfaceNames())) {
-            throw new RuntimeException("Given class is not a provider");
+        $reflClass = new ReflectionClass($className);
+        if (!in_array('Zend\Tool\Framework\Provider', $reflClass->getInterfaceNames())) {
+            throw new Exception\RuntimeException('Given class is not a provider');
         }
         $this->_doEnable($className);
     }
@@ -218,18 +215,19 @@ class Config extends AbstractProvider
 
             if ($userConfig->save()) {
                 $this->_registry->getResponse()->appendContent(
-                    "Provider/Manifest '".$className."' was enabled for usage with Zend Tool.",
+                    'Provider/Manifest "' . $className . '" was enabled for usage with Zend Tool.',
                     array("color" => "green", "aligncenter" => true)
                 );
             } else {
-                throw new RuntimeException(
-                    "Could not write user configuration to persistence."
+                throw new Exception\RuntimeException(
+                    "Could not write user configuration to persistence"
                 );
             }
         } else {
-            throw new RuntimeException(
-                "Provider/Manifest '".$className."' is already enabled."
-            );
+            throw new Exception\RuntimeException(sprintf(
+                'Provider/Manifest "%s" is already enabled',
+                $className
+            ));
         }
     }
 
@@ -238,9 +236,9 @@ class Config extends AbstractProvider
      */
     public function enableManifest($className)
     {
-        $reflClass = new \ReflectionClass($className);
-        if (!in_array("Zend\\Tool\\Framework\\Manifest", $reflClass->getInterfaceNames())) {
-            throw new RuntimeException("Given class is not a manifest.");
+        $reflClass = new ReflectionClass($className);
+        if (!in_array('Zend\Tool\Framework\Manifest', $reflClass->getInterfaceNames())) {
+            throw new Exception\RuntimeException('Given class is not a manifest');
         }
         $this->_doEnable($className);
     }
@@ -277,14 +275,15 @@ class Config extends AbstractProvider
                     array("color" => "green", "aligncenter" => true)
                 );
             } else {
-                throw new RuntimeException(
+                throw new Exception\RuntimeException(
                     "Could not write user configuration to persistence."
                 );
             }
         } else {
-            throw new RuntimeException(
-                "Provider/Manifest '".$className."' is not enabled."
-            );
+            throw new Exception\RuntimeException(sprintf(
+                'Provider/Manifest "%s" is not enabled',
+                $className
+            ));
         }
     }
 

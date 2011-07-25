@@ -17,7 +17,6 @@
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: TestApplicationBootstrapFile.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
 
 /**
@@ -25,22 +24,19 @@
  */
 namespace Zend\Tool\Project\Context\Zf;
 
-use Zend\CodeGenerator\Php\PhpFile;
+use Zend\CodeGenerator\Php\PhpFile,
+    Zend\Tool\Project\Context\Filesystem\File as FileContext;
 
 /**
- * This class is the front most class for utilizing Zend\Tool\Project
- *
- * A profile is a hierarchical set of resources that keep track of
- * items within a specific project.
+ * Generates and manages PHPUnit test bootstrap files
  *
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class TestPHPUnitBootstrapFile extends \Zend\Tool\Project\Context\Filesystem\File
+class TestPHPUnitBootstrapFile extends FileContext
 {
-
     /**
      * @var string
      */
@@ -79,8 +75,11 @@ set_include_path(implode(PATH_SEPARATOR, array(
     get_include_path(),
 )));
 
-require_once 'Zend/Loader/Autoloader.php';
-Zend_Loader_Autoloader::getInstance();
+require_once 'Zend/Loader/StandardAutoloader.php';
+\$loader = new Zend\Loader\StandardAutoloader(array(
+    'fallback_autoloader' => true,
+))
+\$loader->register();
 
 EOS
             ));

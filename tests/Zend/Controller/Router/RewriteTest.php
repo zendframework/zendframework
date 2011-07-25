@@ -23,10 +23,13 @@
  * @namespace
  */
 namespace ZendTest\Controller\Router;
-use Zend\Controller;
-use Zend\Controller\Router\Route;
-use Zend\Controller\Router;
-use Zend\Config;
+
+use PHPUnit_Framework_TestCase as TestCase,
+    Zend\Config,
+    Zend\Controller,
+    Zend\Controller\Router,
+    Zend\Controller\Router\Route,
+    Zend\Uri;
 
 /**
  * @category   Zend
@@ -37,7 +40,7 @@ use Zend\Config;
  * @group      Zend_Controller
  * @group      Zend_Controller_Router
  */
-class RewriteTest extends \PHPUnit_Framework_TestCase
+class RewriteTest extends TestCase
 {
     protected $_router;
 
@@ -738,8 +741,7 @@ class Request extends \Zend\Controller\Request\Http
             $uri = 'http://localhost/foo/bar/baz/2';
         }
 
-        //$uri = \Zend\Uri\Url::fromString($uri);
-        $url = new \Zend\Uri\Url($uri);
+        $url = Uri\UriFactory::factory($uri);
         $this->_host = $url->getHost();
         $this->_port = $url->getPort();
 

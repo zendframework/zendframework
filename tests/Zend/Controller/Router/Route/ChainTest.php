@@ -23,10 +23,13 @@
  * @namespace
  */
 namespace ZendTest\Controller\Router\Route;
-use Zend\Controller\Router\Route;
-use Zend\Controller\Router;
-use Zend\Controller;
-use Zend\Config;
+
+use PHPUnit_Framework_TestCase as TestCase,
+    Zend\Config,
+    Zend\Controller,
+    Zend\Controller\Router,
+    Zend\Controller\Router\Route,
+    Zend\Uri;
 
 /**
  * @category   Zend
@@ -37,7 +40,7 @@ use Zend\Config;
  * @group      Zend_Controller
  * @group      Zend_Controller_Router
  */
-class ChainTest extends \PHPUnit_Framework_TestCase
+class ChainTest extends TestCase
 {
 
 
@@ -642,7 +645,7 @@ class Request extends \Zend\Controller\Request\Http
             $uri = 'http://localhost/foo/bar/baz/2';
         }
 
-        $uri = new \Zend\Uri\Url($uri);
+        $uri = Uri\UriFactory::factory($uri);
         $this->_host = $uri->getHost();
         $this->_port = $uri->getPort();
 

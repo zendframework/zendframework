@@ -29,8 +29,7 @@ use Traversable,
     Zend\Config\Config,
     Zend\Controller\Request\AbstractRequest,
     Zend\Controller\Router\Exception,
-    Zend\Controller\Router\RouteMatch,
-    ;
+    Zend\Controller\Router\RouteMatch;
 
 /**
  * Literal route.
@@ -99,11 +98,11 @@ class Literal implements Route
     {
         if ($pathOffset !== null) {
             if (strpos($request->getRequestUri(), $this->route) === $pathOffset) {
-                return new RouteMatch($this->defaults);
+                return new RouteMatch($this->defaults, $this);
             }
         } else {
             if ($request->getRequestUri() === $this->route) {
-                return new RouteMatch($this->defaults);
+                return new RouteMatch($this->defaults, $this);
             }
         }
 

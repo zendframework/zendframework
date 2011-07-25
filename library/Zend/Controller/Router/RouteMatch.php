@@ -41,16 +41,24 @@ class RouteMatch
      * @var array
      */
     protected $params = array();
+
+    /**
+     * Route that provided the match (if any)
+     * @var Route|null
+     */
+    protected $route;
     
     /**
      * Create a RouteMatch with given parameters.
      * 
      * @param  array $params
+     * @param  null|Route $route
      * @return void
      */
-    public function __construct(array $params)
+    public function __construct(array $params, Route $route = null)
     {
         $this->params = $params;
+        $this->route  = $route;
     }
        
     /**
@@ -97,8 +105,18 @@ class RouteMatch
      * @param  RouteMatch $match
      * @return void
      */
-    public function merge(RouteMatch $match)
+    public function merge(self $match)
     {
         $this->params = array_merge($this->params, $match->getParams());
+    }
+
+    /**
+     * Get the route that matched and provided these parameters
+     * 
+     * @return null|Route
+     */
+    public function getRoute()
+    {
+        return $this->route;
     }
 }

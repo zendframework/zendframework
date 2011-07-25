@@ -25,7 +25,7 @@ use Zend\Dojo\BuildLayer,
     Zend\Dojo\View\Helper\Dojo\Container as DojoContainer,
     Zend\Json\Json,
     Zend\Registry,
-    Zend\View\View;
+    Zend\View;
 
 /**
  * @category   Zend
@@ -49,7 +49,7 @@ class BuildLayerTest extends \PHPUnit_Framework_TestCase
         if (isset($registry['Zend\Dojo\View\Helper\Dojo'])) {
             unset($registry['Zend\Dojo\View\Helper\Dojo']);
         }
-        $this->view = new View();
+        $this->view = new View\PhpRenderer();
         \Zend\Dojo\Dojo::enableView($this->view);
     }
 
@@ -140,7 +140,7 @@ class BuildLayerTest extends \PHPUnit_Framework_TestCase
 
     public function testGeneratingLayerScriptShouldReturnValidLayerMarkup()
     {
-        $this->view->dojo()->requireModule('dijit.form.Form')
+        $this->view->broker('dojo')->requireModule('dijit.form.Form')
                            ->requireModule('dijit.form.TextBox')
                            ->requireModule('dijit.form.Button');
         $build = new BuildLayer(array(
@@ -158,7 +158,7 @@ class BuildLayerTest extends \PHPUnit_Framework_TestCase
 
     public function testGeneratingLayerScriptWithOnLoadsEnabledShouldReturnValidLayerMarkup()
     {
-        $this->view->dojo()->requireModule('dijit.form.Form')
+        $this->view->broker('dojo')->requireModule('dijit.form.Form')
                            ->requireModule('dijit.form.TextBox')
                            ->requireModule('dijit.form.Button')
                            ->addOnLoad('custom.callback');
@@ -178,7 +178,7 @@ class BuildLayerTest extends \PHPUnit_Framework_TestCase
 
     public function testGeneratingLayerScriptWithOnLoadsDisabledShouldNotRenderOnLoadEvents()
     {
-        $this->view->dojo()->requireModule('dijit.form.Form')
+        $this->view->broker('dojo')->requireModule('dijit.form.Form')
                            ->requireModule('dijit.form.TextBox')
                            ->requireModule('dijit.form.Button')
                            ->addOnLoad('custom.callback');
@@ -197,7 +197,7 @@ class BuildLayerTest extends \PHPUnit_Framework_TestCase
 
     public function testGeneratingLayerScriptWithJavascriptsEnabledShouldReturnValidLayerMarkup()
     {
-        $this->view->dojo()->requireModule('dijit.form.Form')
+        $this->view->broker('dojo')->requireModule('dijit.form.Form')
                            ->requireModule('dijit.form.TextBox')
                            ->requireModule('dijit.form.Button')
                            ->addJavascript('custom.callback();');
@@ -217,7 +217,7 @@ class BuildLayerTest extends \PHPUnit_Framework_TestCase
 
     public function testGeneratingLayerScriptWithJavascriptsDisabledShouldNotRenderJavascripts()
     {
-        $this->view->dojo()->requireModule('dijit.form.Form')
+        $this->view->broker('dojo')->requireModule('dijit.form.Form')
                            ->requireModule('dijit.form.TextBox')
                            ->requireModule('dijit.form.Button')
                            ->addJavascript('custom.callback();');
@@ -288,7 +288,7 @@ class BuildLayerTest extends \PHPUnit_Framework_TestCase
 
     public function testProfilePrefixesShouldIncludePrefixesOfAllRequiredModules()
     {
-        $this->view->dojo()->requireModule('dijit.layout.TabContainer')
+        $this->view->broker('dojo')->requireModule('dijit.layout.TabContainer')
                            ->requireModule('dojox.layout.ContentPane');
         $build = new BuildLayer(array('view' => $this->view));
 
@@ -320,7 +320,7 @@ class BuildLayerTest extends \PHPUnit_Framework_TestCase
 
     public function testGeneratedDojoBuildProfileWithLayerDependencies()
     {
-        $this->view->dojo()->requireModule('dijit.layout.BorderContainer')
+        $this->view->broker('dojo')->requireModule('dijit.layout.BorderContainer')
                            ->requireModule('dojox.layout.ContentPane');
         $build = new BuildLayer(array(
             'view' => $this->view,
@@ -364,7 +364,7 @@ class BuildLayerTest extends \PHPUnit_Framework_TestCase
     {
         $profile = preg_replace('/^dependencies = (.*?);$/s', '$1', $profile);
         $profile = preg_replace('/(\b)([^"\':,]+):/', '$1"$2":', $profile);
-        $data    = Json::decode($profile);
+        $data    = Json::decode($profile, JSON::TYPE_ARRAY);
         ksort($data);
         return $data;
     }

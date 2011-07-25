@@ -493,10 +493,10 @@ abstract class AbstractBootstrap
             foreach ($this->getClassResourceNames() as $resource) {
                 $this->_executeResource($resource);
             }
-
-            foreach ($this->getBroker()->getRegisteredPlugins() as $resource) {
-                $this->_executeResource($resource);
-            }
+            if(!$this instanceof Module\Bootstrap)
+                foreach ($this->getBroker()->getRegisteredPlugins() as $resource) {
+                    $this->_executeResource($resource);
+                }
         } elseif (is_string($resource)) {
             $this->_executeResource($resource);
         } elseif (is_array($resource)) {
@@ -557,10 +557,10 @@ abstract class AbstractBootstrap
 
         if ($broker->hasPlugin($resource)) {
             $this->_started[$resourceName] = true;
+            $broker->markRun($resourceName);
             $plugin = $broker->load($resourceName);
             $return = $plugin->init();
             unset($this->_started[$resourceName]);
-            $broker->markRun($resourceName);
 
             if (null !== $return) {
                 $this->getContainer()->{$resourceName} = $return;

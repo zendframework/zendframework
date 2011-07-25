@@ -668,6 +668,20 @@ class AbstractBootstrapTest extends \PHPUnit_Framework_TestCase
         $broker2 = $application->getBootstrap()->getBroker();
         $this->assertFalse(($broker1 !== $broker2), 'Application broker initialized second time');
     }
+    
+    /**
+     * @group ZF2-38
+     */
+    public function testContinueResourceExecutingByModulesResource()
+    {
+        define('APPLICATION_PATH', __DIR__);
+        $application = new Application\Application('testing', __DIR__ . '/TestAsset/Zf2-38.ini');        
+        $application->bootstrap();      
+        $broker = $application->getBootstrap()->getBroker();
+        $modulesInitTitme = $broker->load('zf38modules')->getInitTime();
+        $zf38InitTitme = $broker->load('zf38')->getInitTime();
+        $this->assertFalse(($modulesInitTitme > $zf38InitTitme), 'Modules execute resources before end of their bootstraps');
+    }
 }
 
 class Layout extends AbstractResource

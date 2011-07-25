@@ -35,6 +35,8 @@ class ResourceLoader extends BaseResourceLoader
     public function __construct($options = null)
     {
         $this->plugins['zf30'] = 'ZendTest\Application\TestAsset\Resource\Zf30';
+        $this->plugins['zf38'] = 'ZendTest\Application\TestAsset\Resource\Zf38';
+        $this->plugins['zf38modules'] = 'ZendTest\Application\TestAsset\Resource\Zf38Modules';
         $this->options = $options;
     }
 }

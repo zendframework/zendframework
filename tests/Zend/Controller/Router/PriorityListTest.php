@@ -24,8 +24,9 @@
  * @namespace
  */
 namespace ZendTest\Controller\Router;
-use Zend\Controller\Router\PriorityList;
-use ZendTest\Controller\Router\TestAsset\DummyRoute;
+
+use Zend\Controller\Router\PriorityList,
+    PHPUnit_Framework_TestCase as TestCase;
 
 /**
  * @category   Zend
@@ -36,7 +37,7 @@ use ZendTest\Controller\Router\TestAsset\DummyRoute;
  * @group      Zend_Controller
  * @group      Zend_Controller_Router
  */
-class PriorityListTest extends \PHPUnit_Framework_TestCase
+class PriorityListTest extends TestCase
 {
     /**
      * @var PriorityList
@@ -50,7 +51,7 @@ class PriorityListTest extends \PHPUnit_Framework_TestCase
 
     public function testInsert()
     {
-        $this->list->insert('foo', new DummyRoute(), 0);
+        $this->list->insert('foo', new TestAsset\DummyRoute(), 0);
 
         $this->assertEquals(1, count($this->list));
 
@@ -61,8 +62,8 @@ class PriorityListTest extends \PHPUnit_Framework_TestCase
 
     public function testRemove()
     {
-        $this->list->insert('foo', new DummyRoute(), 0);
-        $this->list->insert('bar', new DummyRoute(), 0);
+        $this->list->insert('foo', new TestAsset\DummyRoute(), 0);
+        $this->list->insert('bar', new TestAsset\DummyRoute(), 0);
 
         $this->assertEquals(2, count($this->list));
 
@@ -73,7 +74,7 @@ class PriorityListTest extends \PHPUnit_Framework_TestCase
     
     public function testGet()
     {
-        $route = new DummyRoute();
+        $route = new TestAsset\DummyRoute();
         
         $this->list->insert('foo', $route, 0);
         
@@ -83,9 +84,9 @@ class PriorityListTest extends \PHPUnit_Framework_TestCase
 
     public function testLIFOOnly()
     {
-        $this->list->insert('foo', new DummyRoute(), 0);
-        $this->list->insert('bar', new DummyRoute(), 0);
-        $this->list->insert('baz', new DummyRoute(), 0);
+        $this->list->insert('foo', new TestAsset\DummyRoute(), 0);
+        $this->list->insert('bar', new TestAsset\DummyRoute(), 0);
+        $this->list->insert('baz', new TestAsset\DummyRoute(), 0);
 
         $order = array();
 
@@ -98,9 +99,9 @@ class PriorityListTest extends \PHPUnit_Framework_TestCase
 
     public function testPriorityOnly()
     {
-        $this->list->insert('foo', new DummyRoute(), 1);
-        $this->list->insert('bar', new DummyRoute(), 0);
-        $this->list->insert('baz', new DummyRoute(), 2);
+        $this->list->insert('foo', new TestAsset\DummyRoute(), 1);
+        $this->list->insert('bar', new TestAsset\DummyRoute(), 0);
+        $this->list->insert('baz', new TestAsset\DummyRoute(), 2);
 
         $order = array();
 
@@ -113,9 +114,9 @@ class PriorityListTest extends \PHPUnit_Framework_TestCase
 
     public function testLIFOWithPriority()
     {
-        $this->list->insert('foo', new DummyRoute(), 0);
-        $this->list->insert('bar', new DummyRoute(), 0);
-        $this->list->insert('baz', new DummyRoute(), 1);
+        $this->list->insert('foo', new TestAsset\DummyRoute(), 0);
+        $this->list->insert('bar', new TestAsset\DummyRoute(), 0);
+        $this->list->insert('baz', new TestAsset\DummyRoute(), 1);
 
         $order = array();
 

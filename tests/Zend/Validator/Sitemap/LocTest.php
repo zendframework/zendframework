@@ -100,7 +100,7 @@ class LocTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertFalse($this->_validator->isValid($url), $url);
         $messages = $this->_validator->getMessages();
-        $this->assertContains('is no valid', current($messages));
+        $this->assertContains('is not a valid', current($messages));
     }
 
     /**

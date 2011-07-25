@@ -77,13 +77,13 @@ return array(
 
     // Zend_Validate_EmailAddress
     "Invalid type given. String expected" => "Tipo di dato non valido. Era attesto un dato di tipo string",
-    "'%value%' is no valid email address in the basic format local-part@hostname" => "'%value%' non è un indirizzo email valido nel formato base local-part@hostname",
-    "'%hostname%' is no valid hostname for email address '%value%'" => "'%hostname%' non è un hostname valido nell'indirizzo email '%value%'",
+    "'%value%' is not a valid email address in the basic format local-part@hostname" => "'%value%' non è un indirizzo email valido nel formato base local-part@hostname",
+    "'%hostname%' is not a valid hostname for email address '%value%'" => "'%hostname%' non è un hostname valido nell'indirizzo email '%value%'",
     "'%hostname%' does not appear to have a valid MX record for the email address '%value%'" => "'%hostname%' non sembra avere un record MX DNS valido nell'indirizzo email %value%'",
     "'%hostname%' is not in a routable network segment. The email address '%value%' should not be resolved from public network." => "'%hostname%' non è in un segmento di rete routabile. L'indirizzo email '%value%' non può essere risolto nella rete pubblica.",
     "'%localPart%' can not be matched against dot-atom format" => "'%localPart%' non può essere validato nel formato dot-atom",
     "'%localPart%' can not be matched against quoted-string format" => "'%localPart%' non può essere validato nel formato quoted-string",
-    "'%localPart%' is no valid local part for email address '%value%'" => "'%localPart%' non è una local part valida nell'indirizzo email '%value%'",
+    "'%localPart%' is not a valid local part for email address '%value%'" => "'%localPart%' non è una local part valida nell'indirizzo email '%value%'",
     "'%value%' exceeds the allowed length" => "'%value%' supera la lunghezza consentita",
 
     // Zend_Validate_File_Count
@@ -224,7 +224,7 @@ return array(
 
     // Zend_Validate_Isbn
     "Invalid type given. String or integer expected" => "Tipo di dato non valido. Era atteso un dato di tipo string o integer",
-    "'%value%' is no valid ISBN number" => "'%value%' non è un numero ISBN valido",
+    "'%value%' is not a valid ISBN number" => "'%value%' non è un numero ISBN valido",
 
     // Zend_Validate_LessThan
     "'%value%' is not less than '%max%'" => "'%value%' non è minore di '%max%'",
@@ -243,19 +243,19 @@ return array(
     "There was an internal error while using the pattern '%pattern%'" => "Si è verificato un errore interno usando il pattern '%pattern%'",
 
     // Zend_Validate_Sitemap_Changefreq
-    "'%value%' is no valid sitemap changefreq" => "'%value%' non è una sitemap changefreq valida",
+    "'%value%' is not a valid sitemap changefreq" => "'%value%' non è una sitemap changefreq valida",
     "Invalid type given. String expected" => "Tipo di dato non valido. Era attesto un dato di tipo string",
 
     // Zend_Validate_Sitemap_Lastmod
-    "'%value%' is no valid sitemap lastmod" => "'%value%' non è un sitemap lastmod valido",
+    "'%value%' is not a valid sitemap lastmod" => "'%value%' non è un sitemap lastmod valido",
     "Invalid type given. String expected" => "Tipo di dato non valido. Era attesto un dato di tipo string",
 
     // Zend_Validate_Sitemap_Loc
-    "'%value%' is no valid sitemap location" => "'%value%' non è una sitemap location valida",
+    "'%value%' is not a valid sitemap location" => "'%value%' non è una sitemap location valida",
     "Invalid type given. String expected" => "Tipo di dato non valido. Era attesto un dato di tipo string",
 
     // Zend_Validate_Sitemap_Priority
-    "'%value%' is no valid sitemap priority" => "'%value%' non è una sitemap priority valida",
+    "'%value%' is not a valid sitemap priority" => "'%value%' non è una sitemap priority valida",
     "Invalid type given. Numeric string, integer or float expected" => "Tipo di dato non valido. Era atteso un dato di tipo stringa numerica, float o integer",
 
     // Zend_Validate_StringLength

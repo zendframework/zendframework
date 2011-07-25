@@ -53,7 +53,7 @@ class Loc extends \Zend\Validator\AbstractValidator
      * @var array
      */
     protected $_messageTemplates = array(
-        self::NOT_VALID => "'%value%' is no valid sitemap location",
+        self::NOT_VALID => "'%value%' is not a valid sitemap location",
         self::INVALID   => "Invalid type given. String expected",
     );
 

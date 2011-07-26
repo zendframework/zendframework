@@ -2,7 +2,7 @@
 
 namespace Zend\Http;
 
-class ResponseHeaders extends Headers implements HttpResponseHeaders
+class ResponseHeaders extends Headers
 {
     const PATTERN_STATUS_LINE = "/^(HTTP\/(?<version>\d+(\.\d+)?) (?P<status>\d{3})( (?P<message>.*?)))$/";
 
@@ -147,21 +147,6 @@ class ResponseHeaders extends Headers implements HttpResponseHeaders
             $header->send();
         }
         $this->isSent = true;
-    }
-
-    /**
-     * Are headers sent?
-     *
-     * Returns true for either of the following situations:
-     *
-     * - send() has been called, and the isSent flag set to true
-     * - headers_sent() returns true
-     * 
-     * @return bool
-     */
-    public function sent()
-    {
-        return ($this->isSent || headers_sent());
     }
 
     /**

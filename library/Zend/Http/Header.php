@@ -4,7 +4,7 @@ namespace Zend\Http;
 
 use ArrayObject;
 
-class Header implements HttpHeader
+class Header
 {
     /** @var string */
     protected $type;

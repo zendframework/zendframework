@@ -2,29 +2,84 @@
 
 namespace Zend\Stdlib;
 
-use ArrayAccess,
-    Countable,
-    Serializable,
-    Traversable;
+use ArrayObject;
 
-/* 
- * Basically, an ArrayObject. You could simply define something like:
- *     class QueryParams extends ArrayObject implements Parameters {}
- * and have 90% of the functionality
- */
-interface Parameters extends ArrayAccess, Countable, Serializable, Traversable
+class Parameters extends ArrayObject implements ParametersDescription
 {
-    public function __construct(array $values = null);
+    /**
+     * Constructor
+     *
+     * Enforces that we have an array, and enforces parameter access to array
+     * elements.
+     * 
+     * @param  array $values 
+     * @return void
+     */
+    public function __construct(array $values = null)
+    {
+        if (null === $values) {
+            $values = array();
+        }
+        parent::__construct($values, ArrayObject::ARRAY_AS_PROPS);
+    }
 
-    /* Allow deserialization from standard array */
-    public function fromArray(array $values);
+    /**
+     * Populate from native PHP array
+     * 
+     * @param  array $values 
+     * @return void
+     */
+    public function fromArray(array $values)
+    {
+        $this->exchangeArray($values);
+    }
 
-    /* Allow deserialization from raw body; e.g., for PUT requests */
-    public function fromString($string);
+    /**
+     * Populate from query string
+     * 
+     * @param  string $string 
+     * @return void
+     */
+    public function fromString($string)
+    {
+        $array = array();
+        parse_str($string, $array);
+        $this->fromArray($array);
+    }
 
-    /* Allow serialization back to standard array */
-    public function toArray();
+    /**
+     * Serialize to native PHP array
+     * 
+     * @return array
+     */
+    public function toArray()
+    {
+        return $this->getArrayCopy();
+    }
 
-    /* Allow serialization to query format; e.g., for PUT or POST requests */
-    public function toString();
+    /**
+     * Serialize to query string
+     * 
+     * @return string
+     */
+    public function toString()
+    {
+        return http_build_query($this);
+    }
+
+    /**
+     * Retrieve by key
+     *
+     * Returns null if the key does not exist.
+     * 
+     * @param  string $name 
+     * @return mixed
+     */
+    public function offsetGet($name)
+    {
+        if (isset($this[$name])) {
+            return parent::offsetGet($name);
+        }
+        return null;
+    }
 }

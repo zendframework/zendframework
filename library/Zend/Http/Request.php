@@ -2,10 +2,13 @@
 
 namespace Zend\Http;
 
-use Zend\Stdlib\Request as BaseRequest,
-    Zend\Stdlib\Parameters as HttpParameters;
+use Zend\Stdlib\ParametersDescription;
 
-class Request extends BaseRequest implements HttpRequest
+use Zend\Stdlib\RequestDescription,
+    Zend\Stdlib\Message,
+    Zend\Stdlib\ParametersDescription;
+
+class Request extends Message implements RequestDescription
 {
     protected $queryParams;
     protected $postParams;
@@ -17,19 +20,19 @@ class Request extends BaseRequest implements HttpRequest
     protected $rawBody;
 
     /* mutators for various superglobals */
-    public function setQuery(HttpParameters $query)
+    public function setQuery(ParametersDescription $query)
     {
         $this->queryParams = $query;
         return $this;
     }
 
-    public function setPost(HttpParameters $post)
+    public function setPost(ParametersDescription $post)
     {
         $this->postParams = $post;
         return $this;
     }
 
-    public function setCookies(HttpParameters $cookies)
+    public function setCookies(ParametersDescription $cookies)
     {
         $this->cookieParams = $cookies;
         return $this;
@@ -42,25 +45,25 @@ class Request extends BaseRequest implements HttpRequest
      * @param  HttpParameters $files 
      * @return Request
      */
-    public function setFiles(HttpParameters $files)
+    public function setFiles(ParametersDescription $files)
     {
         $this->fileParams = $files;
         return $this;
     }
 
-    public function setServer(HttpParameters $server)
+    public function setServer(ParametersDescription $server)
     {
         $this->serverParams = $server;
         return $this;
     }
 
-    public function setEnv(HttpParameters $env)
+    public function setEnv(ParametersDescription $env)
     {
         $this->envParams = $env;
         return $this;
     }
 
-    public function setHeaders(HttpRequestHeaders $headers)
+    public function setHeaders(RequestHeaders $headers)
     {
         $this->headers = $headers;
         return $this;
@@ -75,10 +78,6 @@ class Request extends BaseRequest implements HttpRequest
     /* accessors for various superglobals */
     public function query($name = null, $default = null)
     {
-        if (null === $this->queryParams) {
-            $this->setQuery(new Parameters($_GET));
-        }
-
         if (null !== $name) {
             return $this->queryParams[$name] ?: $default;
         }
@@ -88,10 +87,6 @@ class Request extends BaseRequest implements HttpRequest
 
     public function post($name = null, $default = null)
     {
-        if (null === $this->postParams) {
-            $this->setPost(new Parameters($_POST));
-        }
-
         if (null !== $name) {
             return $this->postParams[$name] ?: $default;
         }
@@ -101,10 +96,6 @@ class Request extends BaseRequest implements HttpRequest
 
     public function cookie($name = null, $default = null)
     {
-        if (null === $this->cookieParams) {
-            $this->setCookies(new Parameters($_COOKIE));
-        }
-
         if (null !== $name) {
             return $this->cookieParams[$name] ?: $default;
         }
@@ -114,10 +105,6 @@ class Request extends BaseRequest implements HttpRequest
 
     public function file($name = null)
     {
-        if (null === $this->fileParams) {
-            $this->setFiles(new Parameters($_FILES));
-        }
-
         if (null !== $name) {
             return $this->fileParams[$name];
         }
@@ -127,10 +114,6 @@ class Request extends BaseRequest implements HttpRequest
 
     public function server($name = null, $default = null)
     {
-        if (null === $this->serverParams) {
-            $this->setServer(new Parameters($_SERVER));
-        }
-
         if (null !== $name) {
             return $this->serverParams[strtoupper($name)] ?: $default;
         }
@@ -140,10 +123,6 @@ class Request extends BaseRequest implements HttpRequest
 
     public function env($name = null, $default = null)
     {
-        if (null === $this->envParams) {
-            $this->setEnv(new Parameters($_ENV));
-        }
-
         if (null !== $name) {
             return $this->envParams[$name] ?: $default;
         }
@@ -350,10 +329,6 @@ class Request extends BaseRequest implements HttpRequest
     /* creational capabilities */
     // returns full URI string: scheme, host, port, base URL, path info, and query string
     public function getUri()
-    {
-    }
-
-    public static function create($uri, $method = 'get' /** .. more args */)
     {
     }
 

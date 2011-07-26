@@ -9,4 +9,7 @@ interface MessageDescription
 
     public function setContent($content);
     public function getContent();
+    
+    public function __toString();
+    public function fromString($string);
 }

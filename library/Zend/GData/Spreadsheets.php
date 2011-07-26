@@ -29,22 +29,22 @@ namespace Zend\GData;
  *
  * @link http://code.google.com/apis/gdata/spreadsheets.html
  *
- * @uses        \Zend\GData\GData
- * @uses        \Zend\GData\Spreadsheets\CellEntry
- * @uses        \Zend\GData\Spreadsheets\CellFeed
- * @uses        \Zend\GData\Spreadsheets\CellQuery
- * @uses        \Zend\GData\Spreadsheets\DocumentQuery
- * @uses        \Zend\GData\Spreadsheets\ListEntry
- * @uses        \Zend\GData\Spreadsheets\ListFeed
- * @uses        \Zend\GData\Spreadsheets\ListQuery
- * @uses        \Zend\GData\Spreadsheets\SpreadsheetEntry
- * @uses        \Zend\GData\Spreadsheets\SpreadsheetFeed
- * @uses        \Zend\GData\Spreadsheets\WorksheetEntry
- * @category    Zend
- * @package     Zend_Gdata
- * @subpackage  Spreadsheets
- * @copyright   Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
- * @license     http://framework.zend.com/license/new-bsd     New BSD License
+ * @uses       \Zend\GData\GData
+ * @uses       \Zend\GData\Spreadsheets\CellEntry
+ * @uses       \Zend\GData\Spreadsheets\CellFeed
+ * @uses       \Zend\GData\Spreadsheets\CellQuery
+ * @uses       \Zend\GData\Spreadsheets\DocumentQuery
+ * @uses       \Zend\GData\Spreadsheets\ListEntry
+ * @uses       \Zend\GData\Spreadsheets\ListFeed
+ * @uses       \Zend\GData\Spreadsheets\ListQuery
+ * @uses       \Zend\GData\Spreadsheets\SpreadsheetEntry
+ * @uses       \Zend\GData\Spreadsheets\SpreadsheetFeed
+ * @uses       \Zend\GData\Spreadsheets\WorksheetEntry
+ * @category   Zend
+ * @package    Zend_Gdata
+ * @subpackage Spreadsheets
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Spreadsheets extends GData
 {

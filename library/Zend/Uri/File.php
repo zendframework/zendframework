@@ -14,7 +14,7 @@
  *
  * @category  Zend
  * @package   Zend_Uri
- * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -27,10 +27,10 @@ namespace Zend\Uri;
  * File URI handler
  *
  * The 'file:...' scheme is loosly defined in RFC-1738
- * 
+ *
  * @category  Zend
  * @package   Zend_Uri
- * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class File extends Uri
@@ -39,10 +39,10 @@ class File extends Uri
 
     /**
      * Check if the URI is a valid File URI
-     * 
-     * This applies additional specific validation rules beyond the ones 
+     *
+     * This applies additional specific validation rules beyond the ones
      * required by the generic URI syntax.
-     * 
+     *
      * @return boolean
      * @see    Uri::isValid()
      */
@@ -54,10 +54,10 @@ class File extends Uri
 
         return parent::isValid();
     }
-    
+
     /**
      * User Info part is not used in file URIs
-     * 
+     *
      * @see    Uri::setUserInfo()
      * @throws Exception\InvalidUriPartException
      */
@@ -65,10 +65,10 @@ class File extends Uri
     {
         return $this;
     }
-    
+
     /**
      * Fragment part is not used in file URIs
-     * 
+     *
      * @see    Uri::setFragment()
      * @throws Exception\InvalidUriPartException
      */
@@ -76,10 +76,10 @@ class File extends Uri
     {
         return $this;
     }
-    
+
     /**
      * Convert a UNIX file path to a valid file:// URL
-     * 
+     *
      * @param  string $path
      * @return File
      */
@@ -93,10 +93,10 @@ class File extends Uri
         $url->setPath($path);
         return $url;
     }
-    
+
     /**
      * Convert a Windows file path to a valid file:// URL
-     * 
+     *
      * @param  string $path
      * @return File
      */
@@ -106,7 +106,7 @@ class File extends Uri
 
         // Convert directory separators
         $path = str_replace(array('/', '\\'), array('%2F', '/'), $path);
-        
+
         // Is this an absolute path?
         if (preg_match('|^([a-zA-Z]:)?/|', $path)) {
             $url->setHost('');

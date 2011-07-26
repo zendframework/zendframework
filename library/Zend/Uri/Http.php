@@ -14,7 +14,7 @@
  *
  * @category  Zend
  * @package   Zend_Uri
- * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -28,7 +28,7 @@ namespace Zend\Uri;
  *
  * @category  Zend
  * @package   Zend_Uri
- * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Http extends Uri
@@ -37,7 +37,7 @@ class Http extends Uri
      * @see Uri::$validSchemes
      */
     protected static $validSchemes = array('http', 'https');
-    
+
     /**
      * @see Uri::$defaultPorts
      */
@@ -45,7 +45,7 @@ class Http extends Uri
         'http'  => 80,
         'https' => 443,
     );
-    
+
     /**
      * @see Uri::$validHostTypes
      */
@@ -62,13 +62,13 @@ class Http extends Uri
      * @var null|string
      */
     protected $password;
-    
+
     /**
      * Check if the URI is a valid HTTP URI
-     * 
-     * This applys additional HTTP specific validation rules beyond the ones 
+     *
+     * This applys additional HTTP specific validation rules beyond the ones
      * required by the generic URI syntax
-     * 
+     *
      * @return boolean
      * @see    Uri::isValid()
      */
@@ -79,7 +79,7 @@ class Http extends Uri
 
     /**
      * Get the username part (before the ':') of the userInfo URI part
-     * 
+     *
      * @return null|string
      */
     public function getUser()
@@ -91,10 +91,10 @@ class Http extends Uri
         $this->parseUserInfo();
         return $this->user;
     }
-    
+
     /**
      * Get the password part (after the ':') of the userInfo URI part
-     * 
+     *
      * @return string
      */
     public function getPassword()
@@ -109,7 +109,7 @@ class Http extends Uri
 
     /**
      * Set the username part (before the ':') of the userInfo URI part
-     * 
+     *
      * @param  string $user
      * @return Http
      */
@@ -118,10 +118,10 @@ class Http extends Uri
         $this->user = $user;
         return $this;
     }
-    
+
     /**
      * Set the password part (after the ':') of the userInfo URI part
-     * 
+     *
      * @param  string $password
      * @return Http
      */
@@ -130,13 +130,13 @@ class Http extends Uri
         $this->password = $password;
         return $this;
     }
-    
+
     /**
      * Validate the host part of an HTTP URI
-     * 
+     *
      * This overrides the common URI validation method with a DNS or IPv4 only
      * default. Users may still enforce allowing other host types.
-     * 
+     *
      * @param  string  $host
      * @param  integer $allowed
      * @return boolean
@@ -149,9 +149,9 @@ class Http extends Uri
     /**
      * Parse the user info into username and password segments
      *
-     * Parses the user information into username and password segments, and 
+     * Parses the user information into username and password segments, and
      * then sets the appropriate values.
-     * 
+     *
      * @return void
      */
     protected function parseUserInfo()

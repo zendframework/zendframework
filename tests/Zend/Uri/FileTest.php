@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Uri
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -31,7 +31,7 @@ use Zend\Uri\File as FileUri,
  * @category   Zend
  * @package    Zend_Uri
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Uri
  * @group      Zend_Uri_Http
@@ -42,10 +42,10 @@ class FileTest extends TestCase
     /**
      * Data Providers
      */
-    
+
     /**
      * Valid schemes
-     * 
+     *
      * @return array
      */
     public static function validSchemeProvider()
@@ -56,10 +56,10 @@ class FileTest extends TestCase
             array('File'),
         );
     }
-    
+
     /**
      * Invalid schemes
-     * 
+     *
      * @return array
      */
     public static function invalidSchemeProvider()
@@ -117,7 +117,7 @@ class FileTest extends TestCase
 
     /**
      * Test that specific schemes are valid for this class
-     * 
+     *
      * @param string $scheme
      * @dataProvider validSchemeProvider
      */
@@ -127,10 +127,10 @@ class FileTest extends TestCase
         $uri->setScheme($scheme);
         $this->assertEquals($scheme, $uri->getScheme());
     }
-    
+
     /**
      * Test that specific schemes are invalid for this class
-     * 
+     *
      * @param string $scheme
      * @dataProvider invalidSchemeProvider
      */
@@ -144,7 +144,7 @@ class FileTest extends TestCase
     /**
      * Test that validateScheme returns false for schemes not valid for use
      * with the File class
-     * 
+     *
      * @param string $scheme
      * @dataProvider invalidSchemeProvider
      */

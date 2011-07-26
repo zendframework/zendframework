@@ -14,7 +14,7 @@
  *
  * @category  Zend
  * @package   Zend_Uri
- * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,10 +30,10 @@ use Zend\Validator\Validator,
  * "Mailto" URI handler
  *
  * The 'mailto:...' scheme is loosly defined in RFC-1738
- * 
+ *
  * @category  Zend
  * @package   Zend_Uri
- * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Mailto extends Uri
@@ -45,13 +45,13 @@ class Mailto extends Uri
      * @var Validator
      */
     protected $emailValidator;
-    
+
     /**
      * Check if the URI is a valid Mailto URI
-     * 
-     * This applys additional specific validation rules beyond the ones 
+     *
+     * This applys additional specific validation rules beyond the ones
      * required by the generic URI syntax
-     * 
+     *
      * @return boolean
      * @see    Uri::isValid()
      */
@@ -72,12 +72,12 @@ class Mailto extends Uri
         $validator = $this->getValidator();
         return $validator->isValid($this->path);
     }
-    
+
     /**
      * Set the email address
-     * 
+     *
      * This is infact equivalent to setPath() - but provides a more clear interface
-     * 
+     *
      * @param  string $email
      * @return Mailto
      */
@@ -85,12 +85,12 @@ class Mailto extends Uri
     {
         return $this->setPath($email);
     }
-    
+
     /**
      * Get the email address
-     * 
+     *
      * This is infact equivalent to getPath() - but provides a more clear interface
-     * 
+     *
      * @return string
      */
     public function getEmail()
@@ -100,8 +100,8 @@ class Mailto extends Uri
 
     /**
      * Set validator to use when validating email address
-     * 
-     * @param  Validator $validator 
+     *
+     * @param  Validator $validator
      * @return Mailto
      */
     public function setValidator(Validator $validator)
@@ -115,7 +115,7 @@ class Mailto extends Uri
      *
      * If none is currently set, an EmailValidator instance with default options
      * will be used.
-     * 
+     *
      * @return Validator
      */
     public function getValidator()

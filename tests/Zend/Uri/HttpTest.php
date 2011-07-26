@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Uri
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -31,7 +31,7 @@ use Zend\Uri\Http as HttpUri,
  * @category   Zend
  * @package    Zend_Uri
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Uri
  * @group      Zend_Uri_Http
@@ -42,10 +42,10 @@ class HttpTest extends TestCase
     /**
      * Data Providers
      */
-    
+
     /**
      * Valid HTTP schemes
-     * 
+     *
      * @return array
      */
     static public function validSchemeProvider()
@@ -57,10 +57,10 @@ class HttpTest extends TestCase
             array('Https'),
         );
     }
-    
+
     /**
      * Invalid HTTP schemes
-     * 
+     *
      * @return array
      */
     static public function invalidSchemeProvider()
@@ -72,7 +72,7 @@ class HttpTest extends TestCase
             array('http:')
         );
     }
-    
+
     static public function portNormalizationTestsProvider()
     {
         return array(
@@ -90,7 +90,7 @@ class HttpTest extends TestCase
 
     /**
      * Test that specific schemes are valid for this class
-     * 
+     *
      * @param string $scheme
      * @dataProvider validSchemeProvider
      */
@@ -100,10 +100,10 @@ class HttpTest extends TestCase
         $uri->setScheme($scheme);
         $this->assertEquals($scheme, $uri->getScheme());
     }
-    
+
     /**
      * Test that specific schemes are invalid for this class
-     * 
+     *
      * @param string $scheme
      * @dataProvider invalidSchemeProvider
      */
@@ -117,7 +117,7 @@ class HttpTest extends TestCase
     /**
      * Test that validateScheme returns false for schemes not valid for use
      * with the HTTP class
-     * 
+     *
      * @param string $scheme
      * @dataProvider invalidSchemeProvider
      */
@@ -125,10 +125,10 @@ class HttpTest extends TestCase
     {
         $this->assertFalse(HttpUri::validateScheme($scheme));
     }
-    
+
     /**
-     * Test that normalizing an HTTP URL removes the port depending on scheme 
-     * 
+     * Test that normalizing an HTTP URL removes the port depending on scheme
+     *
      * @param string $orig
      * @param string $expected
      * @dataProvider portNormalizationTestsProvider

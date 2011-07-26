@@ -14,7 +14,7 @@
  *
  * @category  Zend
  * @package   Zend_Config
- * @copyright Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -27,7 +27,7 @@ use Zend\Json\Json as JsonUtil;
  *
  * @category  Zend
  * @package   Zend_Config
- * @copyright Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Json extends Config
@@ -229,8 +229,8 @@ class Json extends Config
 
     /**
      * Flatten JSON object structure to associative array
-     * 
-     * @param  object|array $config 
+     *
+     * @param  object|array $config
      * @return array
      */
     protected function flattenObjects($config)

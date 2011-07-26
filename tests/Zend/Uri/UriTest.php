@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * Zend Framework
@@ -16,7 +16,7 @@
  * @category   Zend
  * @package    Zend_Uri
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id $
  */
@@ -32,7 +32,7 @@ use Zend\Uri\Uri;
  * @category   Zend
  * @package    Zend_Uri
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Uri
  */
@@ -40,8 +40,8 @@ class UriTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * General composing / parsing tests
-     */ 
-    
+     */
+
     /**
      * Test that parsing and composing a valid URI returns the same URI
      *
@@ -56,9 +56,9 @@ class UriTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test composing a new URI by setting the different URI parts programatically.
-     * 
+     *
      * Also tests casting a URI object to string.
-     * 
+     *
      * @param string $exp
      * @param array  $parts
      * @dataProvider uriWithPartsProvider
@@ -70,13 +70,13 @@ class UriTest extends \PHPUnit_Framework_TestCase
             $setMethod = 'set' . ucfirst($k);
             $uri->$setMethod($v);
         }
-        
+
         $this->assertEquals($exp, (string) $uri);
     }
-        
+
     /**
      * Test the parseScheme static method to extract the scheme part
-     * 
+     *
      * @param string $uriString
      * @param array  $parts
      * @dataProvider uriWithPartsProvider
@@ -84,16 +84,16 @@ class UriTest extends \PHPUnit_Framework_TestCase
     public function testParseScheme($uriString, $parts)
     {
         $scheme = Uri::parseScheme($uriString);
-        if (! isset($parts['scheme'])) { 
+        if (! isset($parts['scheme'])) {
             $parts['scheme'] = null;
         }
-        
+
         $this->assertEquals($parts['scheme'], $scheme);
     }
-    
+
     /**
      * Test that parseScheme throws an exception in case of invalid input
-     
+
      * @param  mixed $input
      * @dataProvider notStringInputProvider
      */
@@ -102,20 +102,20 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Uri\Exception\InvalidArgumentException')
         $scheme = Uri::parseScheme($input);
     }
-    
+
     /**
      * Test that __toString() (magic) returns an empty string if URI is invalid
-     * 
+     *
      * @dataProvider invalidUriObjectProvider
      */
     public function testMagicToStringEmptyIfInvalid(Uri $uri)
     {
         $this->assertEquals('', (string) $uri);
     }
-    
+
     /**
      * Test that toString() (not magic) throws an exception if URI is invalid
-     * 
+     *
      * @dataProvider invalidUriObjectProvider
      */
     public function testToStringThrowsExceptionIfInvalid(Uri $uri)
@@ -123,10 +123,10 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Uri\Exception\InvalidUriException')
         echo $uri->toString();
     }
-    
+
     /**
      * Test that we can parse a malformed URI
-     * 
+     *
      * @link http://framework.zend.com/issues/browse/ZF-11286
      */
     public function testCanParseMalformedUrlZF11286()
@@ -134,17 +134,17 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $urlString = 'http://example.org/SitePages/file has spaces.html?foo=bar';
         $uri = new Uri($urlString);
         $fixedUri = new Uri($uri->toString());
-        
+
         $this->assertEquals('/SitePages/file%20has%20spaces.html', $fixedUri->getPath());
     }
-    
+
     /**
      * Accessor Tests
      */
-    
+
     /**
      * Test that we can get the scheme out of a parsed URI
-     * 
+     *
      * @param string $uriString
      * @param array  $parts
      * @dataProvider uriWithPartsProvider
@@ -158,10 +158,10 @@ class UriTest extends \PHPUnit_Framework_TestCase
             $this->assertNull($uri->getScheme());
         }
     }
-    
+
     /**
      * Test that we get the correct userInfo
-     * 
+     *
      * @param string $uriString
      * @param array  $parts
      * @dataProvider uriWithPartsProvider
@@ -175,10 +175,10 @@ class UriTest extends \PHPUnit_Framework_TestCase
             $this->assertNull($uri->getUserInfo());
         }
     }
-    
+
     /**
      * Test that we can get the host out of a parsed URI
-     * 
+     *
      * @param string $uriString
      * @param array  $parts
      * @dataProvider uriWithPartsProvider
@@ -195,7 +195,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test that we can get the port out of a parsed Uri
-     * 
+     *
      * @param string $uriString
      * @param array  $parts
      * @dataProvider uriWithPartsProvider
@@ -212,7 +212,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test that we can get the path out of a parsed Uri
-     * 
+     *
      * @param string $uriString
      * @param array  $parts
      * @dataProvider uriWithPartsProvider
@@ -226,10 +226,10 @@ class UriTest extends \PHPUnit_Framework_TestCase
             $this->assertNull($uri->getPath());
         }
     }
-    
+
     /**
      * Test that we can get the query out of a parsed Uri
-     * 
+     *
      * @param string $uriString
      * @param array  $parts
      * @dataProvider uriWithPartsProvider
@@ -251,19 +251,19 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         $url = new Uri('http://example.com/foo/?test=a&var[]=1&var[]=2&some[thing]=3');
         $this->assertEquals('test=a&var[]=1&var[]=2&some[thing]=3', $url->getQuery());
-        
+
         $exp = array(
             'test' => 'a',
             'var'  => array(1, 2),
             'some' => array('thing' => 3)
         );
-        
+
         $this->assertEquals($exp, $url->getQueryAsArray());
     }
-    
+
     /**
      * Test that we can get the fragment out of a parsed URI
-     * 
+     *
      * @param string $uriString
      * @param array  $parts
      * @dataProvider uriWithPartsProvider
@@ -281,23 +281,23 @@ class UriTest extends \PHPUnit_Framework_TestCase
     /**
      * Mutator Tests
      */
-    
+
     /**
      * Test we can set the scheme to NULL
-     * 
+     *
      */
     public function testSetSchemeNull()
     {
         $uri = new Uri('http://example.com');
         $this->assertEquals('http', $uri->getScheme());
-        
+
         $uri->setScheme(null);
         $this->assertNull($uri->getScheme());
     }
-    
+
     /**
      * Test we can set different valid schemes
-     *  
+     *
      * @param string $scheme
      * @dataProvider validSchemeProvider
      */
@@ -306,11 +306,11 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $uri = new Uri;
         $uri->setScheme($scheme);
         $this->assertEquals($scheme, $uri->getScheme());
-    } 
-    
+    }
+
     /**
      * Test that setting an invalid scheme causes an exception
-     * 
+     *
      * @param string $scheme
      * @dataProvider invalidSchemeProvider
      */
@@ -320,10 +320,10 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Uri\Exception\InvalidUriPartException')
         $uri->setScheme($scheme);
     }
-    
+
     /**
      * Test that we can set a valid hostname
-     * 
+     *
      * @param string $host
      * @dataProvider validHostProvider
      */
@@ -333,10 +333,10 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $uri->setHost($host);
         $this->assertEquals($host, $uri->getHost());
     }
-    
+
     /**
      * Test that when setting an invalid host an exception is thrown
-     * 
+     *
      * @param string $host
      * @dataProvider invalidHostProvider
      */
@@ -346,10 +346,10 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Uri\Exception\InvalidUriPartException')
         $uri->setHost($host);
     }
-    
+
     /**
      * Test that we can set the host part to 'null'
-     * 
+     *
      */
     public function testSetNullHost()
     {
@@ -357,10 +357,10 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $uri->setHost(null);
         $this->assertNull($uri->getHost());
     }
-    
+
     /**
      * Test that we can use an array to set the query parameters
-     * 
+     *
      * @param array  $data
      * @param string $expqs
      * @dataProvider queryParamsArrayProvider
@@ -369,17 +369,17 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         $uri = new Uri();
         $uri->setQuery($data);
-        
+
         $this->assertEquals('?' . $expqs, $uri->toString());
     }
-    
+
     /**
      * Validation and encoding tests
      */
-    
+
     /**
      * Test that valid URIs pass validation
-     * 
+     *
      * @param string $uriString
      * @dataProvider validUriStringProvider
      */
@@ -392,17 +392,17 @@ class UriTest extends \PHPUnit_Framework_TestCase
     /**
      * Test that invalid URIs pass validation
      *
-     * @param \Zend\Uri\Uri $uri 
+     * @param \Zend\Uri\Uri $uri
      * @dataProvider invalidUriObjectProvider
      */
     public function testInvalidUriIsInvalid(Uri $uri)
     {
         $this->assertFalse($uri->isValid());
     }
-    
+
     /**
      * Check that valid schemes are valid according to validateScheme()
-     * 
+     *
      * @param string $scheme
      * @dataProvider validSchemeProvider
      */
@@ -410,10 +410,10 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue(Uri::validateScheme($scheme));
     }
-    
+
     /**
      * Check that invalid schemes are invalid according to validateScheme()
-     * 
+     *
      * @param string $scheme
      * @dataProvider invalidSchemeProvider
      */
@@ -421,10 +421,10 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertFalse(Uri::validateScheme($scheme));
     }
-    
+
     /**
      * Check that valid hosts are valid according to validateHost()
-     * 
+     *
      * @param string $host
      * @dataProvider validHostProvider
      */
@@ -432,10 +432,10 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue(Uri::validateHost($host));
     }
-    
+
     /**
      * Check that invalid hosts are invalid according to validateHost()
-     * 
+     *
      * @param string $host
      * @dataProvider invalidHostProvider
      */
@@ -443,10 +443,10 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertFalse(Uri::validateHost($host));
     }
-    
+
     /**
      * Check that valid paths are valid according to validatePath()
-     * 
+     *
      * @param string $path
      * @dataProvider validPathProvider
      */
@@ -454,10 +454,10 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue(Uri::validatePath($path));
     }
-    
+
     /**
      * Check that invalid paths are invalid according to validatePath()
-     * 
+     *
      * @param string $path
      * @dataProvider invalidPathProvider
      */
@@ -465,10 +465,10 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertFalse(Uri::validatePath($path));
     }
-    
+
     /**
      * Test that valid path parts are unchanged by the 'encode' function
-     * 
+     *
      * @param string $path
      * @dataProvider validPathProvider
      */
@@ -476,10 +476,10 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals($path, Uri::encodePath($path));
     }
-    
+
     /**
      * Test that invalid path parts are properly encoded by the 'encode' function
-     * 
+     *
      * @param string $path
      * @param string $exp
      * @dataProvider invalidPathProvider
@@ -488,10 +488,10 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals($exp, Uri::encodePath($path));
     }
-    
+
     /**
      * Test that valid query or fragment parts are validated properly
-     * 
+     *
      * @param $input
      * @dataProvider validQueryFragmentProvider
      */
@@ -499,10 +499,10 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue(Uri::validateQueryFragment($input));
     }
-    
+
     /**
      * Test that invalid query or fragment parts are validated properly
-     * 
+     *
      * @param $input
      * @dataProvider invalidQueryFragmentProvider
      */
@@ -510,7 +510,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertFalse(Uri::validateQueryFragment($input));
     }
-    
+
     /**
      * Test that valid query or fragment parts properly encoded
      *
@@ -523,9 +523,9 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $actual = Uri::encodeQueryFragment($input);
         $this->assertEquals($exp, $actual);
     }
-    
+
     /**
-     * Test that valid query or fragment parts are not modified when paseed 
+     * Test that valid query or fragment parts are not modified when paseed
      * through encodeQueryFragment()
      *
      * @param $input
@@ -537,10 +537,10 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $actual = Uri::encodeQueryFragment($input);
         $this->assertEquals($input, $actual);
     }
-    
+
     /**
      * Test that valid userInfo input is validated by validateUserInfo
-     * 
+     *
      * @param string $userInfo
      * @dataProvider validUserInfoProvider
      */
@@ -548,22 +548,22 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue(Uri::validateUserInfo($userInfo));
     }
-    
+
     /**
      * Test that invalid userInfo input is not accepted by validateUserInfo
-     * 
+     *
      * @param string $userInfo
-     * @param string $exp 
+     * @param string $exp
      * @dataProvider invalidUserInfoProvider
      */
     public function testValidateUserInfoInvalid($userInfo, $exp)
     {
         $this->assertFalse(Uri::validateUserInfo($userInfo));
     }
-    
+
     /**
      * Test that valid userInfo is returned unchanged by encodeUserInfo
-     * 
+     *
      * @param $userInfo
      * @dataProvider validUserInfoProvider
      */
@@ -571,22 +571,22 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals($userInfo, Uri::encodeUserInfo($userInfo));
     }
-    
+
     /**
      * Test that invalid userInfo input properly encoded by encodeUserInfo
-     * 
+     *
      * @param string $userInfo
-     * @param string $exp 
+     * @param string $exp
      * @dataProvider invalidUserInfoProvider
      */
     public function testEncodeUserInfoInvalid($userInfo, $exp)
     {
         $this->assertEquals($exp, Uri::encodeUserInfo($userInfo));
     }
-    
+
     /**
      * Test that validatePort works for valid ports
-     * 
+     *
      * @param mixed $port
      * @dataProvider validPortProvider
      */
@@ -594,10 +594,10 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue(Uri::validatePort($port));
     }
-    
+
     /**
      * Test that validatePort works for invalid ports
-     * 
+     *
      * @param mixed $port
      * @dataProvider invalidPortProvider
      */
@@ -605,7 +605,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertFalse(Uri::validatePort($port));
     }
-    
+
     /**
      * @group ZF-1480
      */
@@ -636,15 +636,15 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('a=1&c=3', $url->getQuery());
     }
     */
-    
+
     /**
      * Resolving, Normalization and Reference creation tests
      */
-    
+
     /**
-     * Test that resolving relative URIs works using the examples specified in 
+     * Test that resolving relative URIs works using the examples specified in
      * the RFC
-     * 
+     *
      * @param string $relative
      * @param string $expected
      * @dataProvider resolvedAbsoluteUriProvider
@@ -653,25 +653,25 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         $uri = new Uri($relative);
         $uri->resolve($baseUrl);
-        
+
         $this->assertEquals($expected, $uri->toString());
     }
-    
+
     /**
      * Test the removal of extra dot segments from paths
-     * 
+     *
      * @param        $orig
      * @param        $expected
      * @dataProvider pathWithDotSegmentProvider
      */
     public function testRemovePathDotSegments($orig, $expected)
     {
-        $this->assertEquals($expected, Uri::removePathDotSegments($orig)); 
+        $this->assertEquals($expected, Uri::removePathDotSegments($orig));
     }
-    
+
     /**
      * Test normalizing URLs
-     * 
+     *
      * @param string $orig
      * @param string $expected
      * @dataProvider normalizedUrlsProvider
@@ -681,10 +681,10 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $url = new Uri($orig);
         $this->assertEquals($expected, $url->normalize()->toString());
     }
-    
+
     /**
      * Test the merge() static method for merging new URIs
-     * 
+     *
      * @param string $base
      * @param string $relative
      * @param string $expected
@@ -695,35 +695,35 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $actual = Uri::merge($base, $relative)->toString();
         $this->assertEquals($expected, $actual);
     }
-    
+
     /**
      * Make sure that the ::merge() method does not modify any input objects
-     * 
-     * This performs two checks: 
+     *
+     * This performs two checks:
      *  1. That the result object is *not* the same object as any of the input ones
      *  2. That the method doesn't modify the input objects
-     *  
+     *
      */
     public function testMergeTwoObjectsNotModifying()
     {
         $base = new Uri('http://example.com/bar');
         $ref  = new Uri('baz?qwe=1');
-        
+
         $baseSig = serialize($base);
         $refSig  = serialize($ref);
-        
+
         $actual = Uri::merge($base, $ref);
-        
+
         $this->assertNotSame($base, $actual);
         $this->assertNotSame($ref, $actual);
-        
+
         $this->assertEquals($baseSig, serialize($base));
         $this->assertEquals($refSig, serialize($ref));
     }
-    
+
     /**
      * Test that makeRelative() works as expected
-     * 
+     *
      * @dataProvider commonBaseUriProvider
      */
     public function testMakeRelative($base, $url, $expected)
@@ -732,27 +732,27 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $url->makeRelative($base);
         $this->assertEquals($expected, $url->toString());
     }
-    
+
     /**
      * Other tests
      */
-    
+
     /**
      * Test that the copy constructor works
-     * 
+     *
      * @dataProvider validUriStringProvider
      */
     public function testConstructorCopyExistingObject($uriString)
     {
         $uri = new Uri($uriString);
         $uri2 = new Uri($uri);
-        
+
         $this->assertEquals($uri, $uri2);
     }
-    
+
     /**
      * Test that the constructor throws an exception on invalid input
-     * 
+     *
      * @param mixed $input
      * @dataProvider invalidConstructorInputProvider
      */
@@ -761,10 +761,10 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Uri\Exception\InvalidArgumentException');
         $uri = new Uri($input);
     }
-    
+
     /**
      * Test the fluent interface
-     * 
+     *
      * @param string $method
      * @param string $params
      * @dataProvider fluentInterfaceMethodProvider
@@ -775,11 +775,11 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $ret = call_user_func_array(array($uri, $method), $params);
         $this->assertSame($uri, $ret);
     }
-    
+
     /**
      * Data Providers
      */
-    
+
     static public function validUserInfoProvider()
     {
         return array(
@@ -793,7 +793,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('a_.!~*\'(-)n0123Di%25%26:pass;:&=+$,word')
         );
     }
-    
+
     static public function invalidUserInfoProvider()
     {
         return array(
@@ -802,10 +802,10 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('shahar.e@zend.com', 'shahar.e%40zend.com')
         );
     }
-    
+
     /**
-     * Data provider for valid URIs, not necessarily complete 
-     * 
+     * Data provider for valid URIs, not necessarily complete
+     *
      * @return array
      */
     static public function validUriStringProvider()
@@ -822,10 +822,10 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('http://a_.!~*\'(-)n0123Di%25%26:pass;:&=+$,word@www.zend.com')
         );
     }
-    
+
     /**
-     * Valid schemes 
-     * 
+     * Valid schemes
+     *
      * @return array
      */
     static public function validSchemeProvider()
@@ -841,13 +841,13 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('k-'),
          );
     }
-    
+
     /**
      * Invalid schemes
-     * 
+     *
      * @return array
      */
-    static public function invalidSchemeProvider() 
+    static public function invalidSchemeProvider()
     {
         return array(
             array('ht tp'),
@@ -857,13 +857,13 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('h%acp'),
         );
     }
-    
+
     /**
      * Valid query or fragment parts
-     * 
-     * Each valid query or fragment part should require no encoding and if 
-     * passed throuh an encoding method shoudl return unchanged. 
-     * 
+     *
+     * Each valid query or fragment part should require no encoding and if
+     * passed throuh an encoding method shoudl return unchanged.
+     *
      * @return array
      */
     static public function validQueryFragmentProvider()
@@ -872,16 +872,16 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('a=1&b=2&c=3&d=4'),
             array('with?questionmark/andslash'),
             array('id=123&url=http://example.com/?bar=foo+baz'),
-            array('with%20%0Aline%20break'), 
+            array('with%20%0Aline%20break'),
         );
     }
-    
+
     /**
-     * Invalid query or fragment parts. 
-     * 
+     * Invalid query or fragment parts.
+     *
      * Additionally, this method supplies a valid, URL-encoded representation
-     * of each invalid part, which can be used to test encoding. 
-     * 
+     * of each invalid part, which can be used to test encoding.
+     *
      * @return array
      */
     static public function invalidQueryFragmentProvider()
@@ -894,17 +894,17 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array("with%percent", "with%25percent"),
         );
     }
-    
+
     /**
      * Data provider for invalid URI objects
-     * 
+     *
      * @return array
      */
     static public function invalidUriObjectProvider()
     {
         // Empty URI is not valid
         $obj1 = new Uri;
-        
+
         // Path cannot begin with '//' if there is no authority part
         $obj2 = new Uri;
         $obj2->setPath('//path');
@@ -912,11 +912,11 @@ class UriTest extends \PHPUnit_Framework_TestCase
         // A port-only URI with no host
         $obj3 = new Uri;
         $obj3->setPort(123);
-        
+
         // A userinfo-only URI with no host
-        $obj4 = new Uri; 
+        $obj4 = new Uri;
         $obj4->setUserInfo('shahar:password');
-        
+
         return array(
             array($obj1),
             array($obj2),
@@ -924,25 +924,25 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array($obj4)
         );
     }
-    
-    
+
+
     /**
      * Data provider for valid URIs with their different parts
-     * 
+     *
      * @return array
      */
     static public function uriWithPartsProvider()
     {
         return array(
             array('ht-tp://server/path?query', array(
-                'scheme'   => 'ht-tp', 
+                'scheme'   => 'ht-tp',
                 'host'     => 'server',
                 'path'     => '/path',
                 'query'    => 'query',
             )),
             array('file:///foo/bar', array(
                 'scheme'   => 'file',
-                'host'     => '', 
+                'host'     => '',
                 'path'     => '/foo/bar',
             )),
             array('http://dude:lebowski@example.com/#fr/ag?me.nt', array(
@@ -968,10 +968,10 @@ class UriTest extends \PHPUnit_Framework_TestCase
             ))
         );
     }
-    
+
     /**
      * Provider for valid ports
-     * 
+     *
      * @return array
      */
     static public function validPortProvider()
@@ -984,7 +984,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('443')
         );
     }
-    
+
     /**
      * Provider for invalid ports
      *
@@ -1003,7 +1003,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('/')
         );
     }
-    
+
     static public function validHostProvider()
     {
         return array(
@@ -1012,7 +1012,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('127.0.0.1'),
             array('0.0.0.0'),
             array('255.255.255.255'),
-            
+
             // IPv6 addresses
             // Examples from http://en.wikipedia.org/wiki/IPv6_address
             array('[2001:0db8:85a3:0000:0000:8a2e:0370:7334]'),
@@ -1021,7 +1021,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('[0:0:0:0:0:0:0:1]'),
             array('[::1]'),
             array('[2001:0db8:85a3:08d3:1319:8a2e:0370:7348]'),
-            
+
             // Internet and local DNS names
             array('www.example.com'),
             array('zend.com'),
@@ -1033,7 +1033,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('a.b.c.d'),
             array('a1.b2.c3.d4'),
             array('some-domain-with-dashes'),
-        
+
             // Registered name (other than DNS names)
             array('some~unre_served.ch4r5'),
             array('pct.%D7%A9%D7%97%D7%A8%20%D7%94%D7%92%D7%93%D7%95%D7%9C.co.il'),
@@ -1041,7 +1041,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('%2F%3A')
         );
     }
-    
+
     static public function invalidHostProvider()
     {
         return array(
@@ -1050,7 +1050,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('[12:34'),
         );
     }
-    
+
     static public function validPathProvider()
     {
         return array(
@@ -1067,22 +1067,22 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('C:/Program%20Files/Zend'),
         );
     }
-    
+
     static public function invalidPathProvider()
     {
         return array(
             array('?', '%3F'),
             array('/#', '/%23'),
-            
+
             // See http://framework.zend.com/issues/browse/ZF-11286
-            array('Giri%C5%9F Sayfas%C4%B1.aspx', 'Giri%C5%9F%20Sayfas%C4%B1.aspx') 
+            array('Giri%C5%9F Sayfas%C4%B1.aspx', 'Giri%C5%9F%20Sayfas%C4%B1.aspx')
         );
     }
-    
+
     /**
      * Return all methods that are expected to return the same object they
      * are called on, to test that the fluent interface is not broken
-     * 
+     *
      * @return array
      */
     static public function fluentInterfaceMethodProvider()
@@ -1100,13 +1100,13 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('normalize',    array())
         );
     }
-    
+
     /**
-     * Test cases for absolute URI resolving 
-     * 
-     * These examples are taken from RFC-3986 section about relative URI 
-     * resolving (@link http://tools.ietf.org/html/rfc3986#section-5.4). 
-     * 
+     * Test cases for absolute URI resolving
+     *
+     * These examples are taken from RFC-3986 section about relative URI
+     * resolving (@link http://tools.ietf.org/html/rfc3986#section-5.4).
+     *
      * @return array
      */
     static public function resolvedAbsoluteUriProvider()
@@ -1155,11 +1155,11 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('http://a/b/c/d;p?q', 'http:g',        'http:g'),
         );
     }
-    
+
     /**
      * Data provider for arrays of query string parameters, with the expected
      * query string
-     * 
+     *
      * @return array
      */
     static public function queryParamsArrayProvider()
@@ -1179,10 +1179,10 @@ class UriTest extends \PHPUnit_Framework_TestCase
             ), 'array%5B0%5D=foo&array%5B1%5D=bar&array%5B2%5D=baz&otherstuff%5B%5D=1234')
         );
     }
-    
+
     /**
      * Provider for testing removal of extra dot segments in paths
-     * 
+     *
      * @return array
      */
     static public function pathWithDotSegmentProvider()
@@ -1192,7 +1192,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('mid/content=5/../6', 'mid/6')
         );
     }
-    
+
     static public function normalizedUrlsProvider()
     {
         return array(
@@ -1203,26 +1203,26 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('/foo/bar?url=http%3A%2F%2Fwww.example.com%2Fbaz', '/foo/bar?url=http://www.example.com/baz'),
             array('File:///SitePages/fi%6ce%20has%20spaces', 'file:///SitePages/file%20has%20spaces'),
             array('/foo/bar/../baz?do=action#showFragment', '/foo/baz?do=action#showFragment'),
-            
+
             // This should be left unchanged, at least for the generic Uri class
             array('http://example.com:80/file?query=bar', 'http://example.com:80/file?query=bar'),
         );
     }
-    
+
     static public function commonBaseUriProvider()
     {
         return array(
-     	    array('http://example.com/dir/subdir/', 'http://example.com/dir/subdir/more/file1.txt', 'more/file1.txt'),
-     	    array('http://example.com/dir/subdir/', 'http://example.com/dir/otherdir/file2.txt',    '../otherdir/file2.txt'),
-     	    array('http://example.com/dir/subdir/', 'http://otherhost.com/dir/subdir/file3.txt',    'http://otherhost.com/dir/subdir/file3.txt'),
+             array('http://example.com/dir/subdir/', 'http://example.com/dir/subdir/more/file1.txt', 'more/file1.txt'),
+             array('http://example.com/dir/subdir/', 'http://example.com/dir/otherdir/file2.txt',    '../otherdir/file2.txt'),
+             array('http://example.com/dir/subdir/', 'http://otherhost.com/dir/subdir/file3.txt',    'http://otherhost.com/dir/subdir/file3.txt'),
         );
     }
-    
-    
+
+
     /**
      * Provider for testing the constructor's behavior on invalid input
-     * 
-	 * @return array
+     *
+     * @return array
      */
     static public function invalidConstructorInputProvider()
     {
@@ -1234,13 +1234,13 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array(12)
         );
     }
-    
+
     /**
      * Provider for testing the behaviors of functions that expect only strings
-     * 
-     * Most of these methods are expected to throw an exception for the 
+     *
+     * Most of these methods are expected to throw an exception for the
      * provided values
-     * 
+     *
      * @return array
      */
     static public function notStringInputProvider()

@@ -364,7 +364,7 @@ class DataTest extends \PHPUnit_Framework_TestCase
     {
         $this->testAddItemsShouldAcceptTraversableObject();
         $json = $this->dojoData->toJson();
-        $this->assertSame($this->dojoData->toArray(), Json::decode($json));
+        $this->assertSame($this->dojoData->toArray(), Json::decode($json, Json::TYPE_ARRAY));
     }
 
     public function testShouldSerializeToStringAsJson()

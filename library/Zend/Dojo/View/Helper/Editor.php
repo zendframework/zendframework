@@ -120,7 +120,7 @@ class Editor extends Dijit
         // Embed a textarea in a <noscript> tag to allow for graceful 
         // degradation
         $html .= '<noscript>'
-               . $this->view->formTextarea($hiddenId, $value, $attribs)
+               . $this->view->broker('formTextarea')->direct($hiddenId, $value, $attribs)
                . '</noscript>';
 
         return $html;

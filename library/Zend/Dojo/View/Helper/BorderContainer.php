@@ -70,7 +70,7 @@ class BorderContainer extends DijitContainer
 
         // this will ensure that the border container is viewable:
         if (!$this->_styleIsRegistered) {
-            $this->view->headStyle()->appendStyle('html, body { height: 100%; width: 100%; margin: 0; padding: 0; }');
+            $this->view->broker('headStyle')->appendStyle('html, body { height: 100%; width: 100%; margin: 0; padding: 0; }');
             $this->_styleIsRegistered = true;
         }
 

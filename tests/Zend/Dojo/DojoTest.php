@@ -23,7 +23,7 @@ namespace ZendTest\Dojo;
 
 use Zend\Form\Form,
     Zend\Form\SubForm,
-    Zend\View\View;
+    Zend\View;
 
 /**
  * Test class for Zend_Dojo
@@ -51,7 +51,7 @@ class DojoTest extends \PHPUnit_Framework_TestCase
                 ->addElement('text', 'bat');
         $form->addDisplayGroup(array('foo', 'bar'), 'foobar')
              ->addSubForm($subForm, 'sub')
-             ->setView(new View);
+             ->setView(new View\PhpRenderer);
         return $form;
     }
 
@@ -62,27 +62,27 @@ class DojoTest extends \PHPUnit_Framework_TestCase
 
         $decPluginLoader = $form->getPluginLoader('decorator');
         $paths = $decPluginLoader->getPaths('Zend\Dojo\Form\Decorator');
-        $this->assertTrue(is_array($paths));
+        $this->assertInstanceOf('Zend\Stdlib\SplStack', $paths);
 
         $elPluginLoader = $form->getPluginLoader('element');
         $paths = $elPluginLoader->getPaths('Zend\Dojo\Form\Element');
-        $this->assertTrue(is_array($paths));
+        $this->assertInstanceOf('Zend\Stdlib\SplStack', $paths);
 
         $decPluginLoader = $form->baz->getPluginLoader('decorator');
         $paths = $decPluginLoader->getPaths('Zend\Dojo\Form\Decorator');
-        $this->assertTrue(is_array($paths));
+        $this->assertInstanceOf('Zend\Stdlib\SplStack', $paths);
 
         $decPluginLoader = $form->foobar->getPluginLoader();
         $paths = $decPluginLoader->getPaths('Zend\Dojo\Form\Decorator');
-        $this->assertTrue(is_array($paths));
+        $this->assertInstanceOf('Zend\Stdlib\SplStack', $paths);
 
         $decPluginLoader = $form->sub->getPluginLoader('decorator');
         $paths = $decPluginLoader->getPaths('Zend\Dojo\Form\Decorator');
-        $this->assertTrue(is_array($paths));
+        $this->assertInstanceOf('Zend\Stdlib\SplStack', $paths);
 
         $elPluginLoader = $form->sub->getPluginLoader('element');
         $paths = $elPluginLoader->getPaths('Zend\Dojo\Form\Element');
-        $this->assertTrue(is_array($paths));
+        $this->assertInstanceOf('Zend\Stdlib\SplStack', $paths);
     }
 
     public function testEnableFormShouldSetAppropriateDefaultDisplayGroup()
@@ -97,17 +97,15 @@ class DojoTest extends \PHPUnit_Framework_TestCase
         $form = $this->getForm();
         \Zend\Dojo\Dojo::enableForm($form);
         $view = $form->getView();
-        $helperLoader = $view->getPluginLoader('helper');
-        $paths = $helperLoader->getPaths('Zend\Dojo\View\Helper');
-        $this->assertTrue(is_array($paths));
+        
+        $this->assertInstanceOf('Zend\Dojo\View\Helper\Dojo', $view->broker('dojo'));
     }
 
-    public function testEnableViewShouldSetAppropriateViewHelperPaths()
+    public function testEnableViewShouldRegisterDojoViewHelpers()
     {
-        $view = new View;
+        $view = new View\PhpRenderer;
         \Zend\Dojo\Dojo::enableView($view);
-        $helperLoader = $view->getPluginLoader('helper');
-        $paths = $helperLoader->getPaths('Zend\Dojo\View\Helper');
-        $this->assertTrue(is_array($paths));
+        
+        $this->assertInstanceOf('Zend\Dojo\View\Helper\Dojo', $view->broker('dojo'));
     }
 }

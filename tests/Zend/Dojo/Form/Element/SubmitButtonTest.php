@@ -25,7 +25,7 @@ use Zend\Dojo\Form\Element\SubmitButton as SubmitButtonElement,
     Zend\Dojo\View\Helper\Dojo as DojoHelper,
     Zend\Registry,
     Zend\Translator\Translator,
-    Zend\View\View;
+    Zend\View;
 
 /**
  * Test class for Zend_Dojo_Form_Element_SubmitButton.
@@ -58,7 +58,7 @@ class SubmitButtonTest extends \PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        $view = new View();
+        $view = new View\PhpRenderer();
         \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }

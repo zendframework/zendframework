@@ -24,7 +24,7 @@ namespace ZendTest\Dojo\Form\Element;
 use Zend\Dojo\Form\Element\NumberTextBox as NumberTextBoxElement,
     Zend\Dojo\View\Helper\Dojo as DojoHelper,
     Zend\Registry,
-    Zend\View\View;
+    Zend\View;
 
 /**
  * Test class for Zend_Dojo_Form_Element_NumberTextBox.
@@ -57,7 +57,7 @@ class NumberTextBoxTest extends \PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        $view = new View();
+        $view = new View\PhpRenderer();
         \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
@@ -108,7 +108,7 @@ class NumberTextBoxTest extends \PHPUnit_Framework_TestCase
 
     public function testTypeMutatorShouldThrowExceptionWithInvalidType()
     {
-        $this->setExpectedException('Zend\Form\ElementException');
+        $this->setExpectedException('Zend\Form\Element\Exception\InvalidArgumentException');
         $this->element->setType('foobar');
     }
 

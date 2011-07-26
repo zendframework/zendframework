@@ -136,6 +136,10 @@ class Upload extends \Zend\Validator\AbstractValidator
             $this->_files = $files;
         }
 
+        if ($this->_files === NULL) {
+            $this->_files = array();
+        }
+
         foreach($this->_files as $file => $content) {
             if (!isset($content['error'])) {
                 unset($this->_files[$file]);

@@ -808,7 +808,13 @@ class InputFilter
                              * validator, but it goes wrong if one of them is not AND is required!!!
                              * that is why we restore the default value at the end of this loop
                              */
-                            $this->defaults[self::NOT_EMPTY_MESSAGE] = $value;
+                            if (is_array($value)) {
+                                $temp = $value; // keep the original value
+                                $this->defaults[self::NOT_EMPTY_MESSAGE] = array_pop($temp);
+                                unset($temp);
+                            } else {
+                                $this->defaults[self::NOT_EMPTY_MESSAGE] = $value;
+                            }
                         }
                     }
 

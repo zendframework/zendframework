@@ -102,15 +102,20 @@ class Json extends Config
             }
         }
 
-        set_error_handler(array($this, '_loadFileErrorHandler')); // Warnings and errors are suppressed
         if ($json[0] != '{') {
-            $json = file_get_contents($json);
-        }
-        restore_error_handler();
-
-        // Check if there was a error while loading file
-        if ($this->_loadFileErrorStr !== null) {
-            throw new Exception\RuntimeException($this->_loadFileErrorStr);
+            // read json file
+            $this->_setErrorHandler();
+            $content = file_get_contents($json, true);
+            $errorMessages = $this->_restoreErrorHandler();
+            if ($content === false) {
+                $e = null;
+                foreach ($errorMessages as $errMsg) {
+                    $e = new Exception\RuntimeException($errMsg, 0, $e);
+                }
+                $e = new Exception\RuntimeException("Can't read file '{$json}'", 0, $e);
+                throw $e;
+            }
+            $json = $content;
         }
 
         // Replace constants
@@ -229,8 +234,8 @@ class Json extends Config
 
     /**
      * Flatten JSON object structure to associative array
-     * 
-     * @param  object|array $config 
+     *
+     * @param  object|array $config
      * @return array
      */
     protected function flattenObjects($config)

@@ -148,28 +148,6 @@ class Ini extends Config
 
         $this->_loadedSection = $section;
     }
-    
-    /**
-     * Load the INI file from disk using parse_ini_file(). Use a private error
-     * handler to convert any loading errors into a Zend_Config_Exception
-     * 
-     * @param string $filename
-     * @throws \Zend\Config\Exception
-     * @return array
-     */
-    protected function _parseIniFile($filename)
-    {
-        set_error_handler(array($this, '_loadFileErrorHandler'));
-        $iniArray = parse_ini_file($filename, true); // Warnings and errors are suppressed
-        restore_error_handler();
-        
-        // Check if there was a error while loading file
-        if ($this->_loadFileErrorStr !== null) {
-            throw new Exception\RuntimeException($this->_loadFileErrorStr);
-        }
-        
-        return $iniArray;
-    }
 
     /**
      * Load the ini file and preprocess the section separator (':' in the
@@ -185,7 +163,18 @@ class Ini extends Config
      */
     protected function _loadIniFile($filename)
     {
-        $loaded = $this->_parseIniFile($filename);
+        $this->_setErrorHandler();
+        $loaded = parse_ini_file($filename, true);
+        $errorMessages = $this->_restoreErrorHandler();
+        if ($loaded === false) {
+            $e = null;
+            foreach ($errorMessages as $errMsg) {
+                $e = new Exception\RuntimeException($errMsg, 0, $e);
+            }
+            $e = new Exception\RuntimeException("Can't parse ini file '{$filename}'", 0, $e);
+            throw $e;
+        }
+
         $iniArray = array();
         foreach ($loaded as $key => $data)
         {

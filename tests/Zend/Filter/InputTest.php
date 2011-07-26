@@ -1772,6 +1772,33 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array('rule1'), array_keys($missing));
         $this->assertEquals(array("Still missing"), $missing['rule1']);
     }
+
+    /**
+     * @group ZF-11142, ZF-8446, ZF-9289
+     */
+    public function testTwoValidatorsInChainShowCorrectError()
+    {
+        $validators = array(
+            'field1'  => array(
+                    'NotEmpty', 'Float',
+                    'presence'  => 'required',
+                    'messages'  => array(
+                        'Field1 is empty',
+                        array(Validator\Float::NOT_FLOAT => "Field1 must be a number.")
+                    )
+                ),
+            'field2'    => array(
+                    'presence' => 'required'
+                )
+        );
+
+        $data = array('field1' => 0.0, 'field2' => '');
+        $input = new InputFilter(null, $validators, $data);
+        $this->assertFalse($input->isValid());
+        $messages = $input->getMessages();
+        $this->assertSame($messages['field2']["isEmpty"], "You must give a non-empty value for field 'field2'");
+        $this->assertSame('Field1 is empty', $messages['field1'][Validator\NotEmpty::IS_EMPTY], 'custom message not shown');
+    }
 }
 
 } // end namespace declaration

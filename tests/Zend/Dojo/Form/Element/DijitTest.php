@@ -121,9 +121,7 @@ class DijitTest extends \PHPUnit_Framework_TestCase
     {
         $this->element->setView(new View\PhpRenderer());
         $view = $this->element->getView();
-        $helperLoader = $view->broker()->getClassLoader();
-        $plugins = $helperLoader->getRegisteredPlugins();
-
-        $this->assertInternalType('array', $plugins);
+        
+        $this->assertInstanceOf('Zend\Dojo\View\Helper\Dojo', $view->broker('dojo'));
     }
 }

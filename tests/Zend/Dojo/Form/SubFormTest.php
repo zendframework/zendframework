@@ -85,12 +85,10 @@ class SubFormTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($this->form->getDecorator('ContentPane'));
     }
 
-    public function testShouldRegisterDojoViewHelperPath()
+    public function testShouldRegisterDojoViewHelper()
     {
-        $view   = $this->form->getView();
-        $helperLoader = $view->broker()->getClassLoader();
-        $plugins = $helperLoader->getRegisteredPlugins();
-
-        $this->assertInternalType('array', $plugins);
+        $view = $this->form->getView();
+        
+        $this->assertInstanceOf('Zend\Dojo\View\Helper\Dojo', $view->broker('dojo'));
     }
 }

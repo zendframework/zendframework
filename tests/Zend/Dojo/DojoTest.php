@@ -97,18 +97,15 @@ class DojoTest extends \PHPUnit_Framework_TestCase
         $form = $this->getForm();
         \Zend\Dojo\Dojo::enableForm($form);
         $view = $form->getView();
-        $helperLoader = $view->broker()->getClassLoader();
-        $plugins = $helperLoader->getRegisteredPlugins();
-        $this->assertInternalType('array', $plugins);
+        
+        $this->assertInstanceOf('Zend\Dojo\View\Helper\Dojo', $view->broker('dojo'));
     }
 
     public function testEnableViewShouldRegisterDojoViewHelpers()
     {
         $view = new View\PhpRenderer;
         \Zend\Dojo\Dojo::enableView($view);
-        $helperLoader = $view->broker()->getClassLoader();
-        $plugins = $helperLoader->getRegisteredPlugins();
-
-        $this->assertInternalType('array', $plugins);
+        
+        $this->assertInstanceOf('Zend\Dojo\View\Helper\Dojo', $view->broker('dojo'));
     }
 }

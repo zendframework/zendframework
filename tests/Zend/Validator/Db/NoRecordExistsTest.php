@@ -58,7 +58,7 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->_adapterHasResult = new TestAsset\MockHasResult();
-        $this->_adapterNoResult = new TestAsset\MockNoResult();
+        $this->_adapterNoResult  = new TestAsset\MockNoResult();
     }
 
     /**
@@ -215,12 +215,12 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
         $validator = new RecordExistsValidator('users', 'field1', null, $this->_adapterHasResult);
         $validator->isValid('foo');
         $wherePart = $validator->getSelect()->getPart('where');
-        $this->assertEquals($wherePart[0], '("field1" = ?)');
+        $this->assertEquals('("field1" = ?)', $wherePart[0]);
 
         $this->_adapterHasResult->setSupportsParametersValues(array('named' => true, 'positional' => true));
         $validator = new RecordExistsValidator('users', 'field1', null, $this->_adapterHasResult);
         $validator->isValid('foo');
         $wherePart = $validator->getSelect()->getPart('where');
-        $this->assertEquals($wherePart[0], '("field1" = :value)');
+        $this->assertEquals('("field1" = :value)', $wherePart[0]);
     }
 }

@@ -301,14 +301,24 @@ abstract class AbstractDb extends AbstractValidator
     {
         if (null === $this->_select) {
             $db = $this->getAdapter();
+
             /**
              * Build select object
              */
             $select = new DBSelect($db);
-            $select->from($this->_table, array($this->_field), $this->_schema)
-                   ->where(
-                       $db->quoteIdentifier($this->_field, true).' = :value'
-                   );
+            $select->from($this->_table, array($this->_field), $this->_schema);
+
+            // Support both named and positional parameters
+            if ($db->supportsParameters('named')) {
+                $select->where(
+                    $db->quoteIdentifier($this->_field, true) . ' = :value'
+                );
+            } else {
+                $select->where(
+                    $db->quoteIdentifier($this->_field, true) . ' = ?'
+                );
+            }
+
             if ($this->_exclude !== null) {
                 if (is_array($this->_exclude)) {
                     $select->where(

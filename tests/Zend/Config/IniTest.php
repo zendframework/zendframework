@@ -74,9 +74,9 @@ class IniTest extends \PHPUnit_Framework_TestCase
     {
         $config = new Ini($this->_iniFileConfig, 'debug');
 
-        $this->assertType('string', $config->debug);
+        $this->assertInternalType('string', $config->debug);
         $this->assertEquals('1', $config->debug);
-        $this->assertType('string', $config->values->changed);
+        $this->assertInternalType('string', $config->values->changed);
         $this->assertEquals('1', $config->values->changed);
     }
 
@@ -84,11 +84,11 @@ class IniTest extends \PHPUnit_Framework_TestCase
     {
         $config = new Ini($this->_iniFileConfig, 'debug');
 
-        $this->assertType('string', $config->special->no);
+        $this->assertInternalType('string', $config->special->no);
         $this->assertEquals('', $config->special->no);
-        $this->assertType('string', $config->special->null);
+        $this->assertInternalType('string', $config->special->null);
         $this->assertEquals('', $config->special->null);
-        $this->assertType('string', $config->special->false);
+        $this->assertInternalType('string', $config->special->false);
         $this->assertEquals('', $config->special->false);
     }
 

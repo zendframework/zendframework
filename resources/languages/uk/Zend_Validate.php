@@ -76,13 +76,13 @@ return array(
 
     // Zend_Validate_EmailAddress
     "Invalid type given, value should be a string" => "Неприпустимий тип даних, значення повинно рядком",
-    "'%value%' is no valid email address in the basic format local-part@hostname" => "'%value%' неприпустима адреса електронної пошти для формату ім'я@домен",
-    "'%hostname%' is no valid hostname for email address '%value%'" => "'%hostname%' неприпустиме ім'я хоста для адреси '%value%'",
+    "'%value%' is not a valid email address in the basic format local-part@hostname" => "'%value%' неприпустима адреса електронної пошти для формату ім'я@домен",
+    "'%hostname%' is not a valid hostname for email address '%value%'" => "'%hostname%' неприпустиме ім'я хоста для адреси '%value%'",
     "'%hostname%' does not appear to have a valid MX record for the email address '%value%'" => "'%hostname%' не має коректного MX-запису про адресу '%value%'",
     "'%hostname%' is not in a routable network segment. The email address '%value%' should not be resolved from public network." => "'%hostname%' не є маршрутизованим сегментом мережі. Адреса електронної пошти '%value%' не може бути отримана з публічної мережі.",
     "'%localPart%' can not be matched against dot-atom format" => "'%localPart% не відповідає формату dot-atom",
     "'%localPart%' can not be matched against quoted-string format" => "'%localPart%' не відповідає формату quoted-string",
-    "'%localPart%' is no valid local part for email address '%value%'" => "'%localPart%' неприпустиме ім'я для адреси '%value%'",
+    "'%localPart%' is not a valid local part for email address '%value%'" => "'%localPart%' неприпустиме ім'я для адреси '%value%'",
     "'%value%' exceeds the allowed length" => "'%value%' перевищує дозволену довжину",
 
     // Zend_Validate_File_Count
@@ -222,7 +222,7 @@ return array(
     "'%value%' does not appear to be a valid IP address" => "'%value%' - некоректна IP-адреса",
 
     // Zend_Validate_Isbn
-    "'%value%' is no valid ISBN number" => "'%value%' - некоректний номер ISBN",
+    "'%value%' is not a valid ISBN number" => "'%value%' - некоректний номер ISBN",
 
     // Zend_Validate_LessThan
     "'%value%' is not less than '%max%'" => "'%value%' не менше ніж '%max%'",
@@ -240,16 +240,16 @@ return array(
     "'%value%' does not match against pattern '%pattern%'" => "'%value%' не відповідає шаблону '%pattern%'",
 
     // Zend_Validate_Sitemap_Changefreq
-    "'%value%' is no valid sitemap changefreq" => "'%value%' неприпустиме значення для sitemap changefreq",
+    "'%value%' is not a valid sitemap changefreq" => "'%value%' неприпустиме значення для sitemap changefreq",
 
     // Zend_Validate_Sitemap_Lastmod
-    "'%value%' is no valid sitemap lastmod" => "'%value%' неприпустиме значення для sitemap lastmod",
+    "'%value%' is not a valid sitemap lastmod" => "'%value%' неприпустиме значення для sitemap lastmod",
 
     // Zend_Validate_Sitemap_Loc
-    "'%value%' is no valid sitemap location" => "'%value%' неприпустиме значення для sitemap location",
+    "'%value%' is not a valid sitemap location" => "'%value%' неприпустиме значення для sitemap location",
 
     // Zend_Validate_Sitemap_Priority
-    "'%value%' is no valid sitemap priority" => "'%value%' неприпустиме значення для sitemap priority",
+    "'%value%' is not a valid sitemap priority" => "'%value%' неприпустиме значення для sitemap priority",
 
     // Zend_Validate_StringLength
     "Invalid type given, value should be a string" => "Неприпустимий тип даних, значення повинно бути рядком",

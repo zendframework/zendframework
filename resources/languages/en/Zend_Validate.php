@@ -20,7 +20,7 @@
  */
 
 /**
- * EN-Revision: 06.Jan.2011
+ * EN-Revision: 25.Jul.2011
  */
 return array(
     // Zend_Validate_Alnum
@@ -76,13 +76,13 @@ return array(
 
     // Zend_Validate_EmailAddress
     "Invalid type given. String expected" => "Invalid type given. String expected",
-    "'%value%' is no valid email address in the basic format local-part@hostname" => "'%value%' is no valid email address in the basic format local-part@hostname",
-    "'%hostname%' is no valid hostname for email address '%value%'" => "'%hostname%' is no valid hostname for email address '%value%'",
+    "'%value%' is not a valid email address in the basic format local-part@hostname" => "'%value%' is not a valid email address in the basic format local-part@hostname",
+    "'%hostname%' is not a valid hostname for email address '%value%'" => "'%hostname%' is not a valid hostname for email address '%value%'",
     "'%hostname%' does not appear to have a valid MX record for the email address '%value%'" => "'%hostname%' does not appear to have a valid MX record for the email address '%value%'",
     "'%hostname%' is not in a routable network segment. The email address '%value%' should not be resolved from public network" => "'%hostname%' is not in a routable network segment. The email address '%value%' should not be resolved from public network",
     "'%localPart%' can not be matched against dot-atom format" => "'%localPart%' can not be matched against dot-atom format",
     "'%localPart%' can not be matched against quoted-string format" => "'%localPart%' can not be matched against quoted-string format",
-    "'%localPart%' is no valid local part for email address '%value%'" => "'%localPart%' is no valid local part for email address '%value%'",
+    "'%localPart%' is not a valid local part for email address '%value%'" => "'%localPart%' is not a valid local part for email address '%value%'",
     "'%value%' exceeds the allowed length" => "'%value%' exceeds the allowed length",
 
     // Zend_Validate_File_Count
@@ -224,7 +224,7 @@ return array(
 
     // Zend_Validate_Isbn
     "Invalid type given. String or integer expected" => "Invalid type given. String or integer expected",
-    "'%value%' is no valid ISBN number" => "'%value%' is no valid ISBN number",
+    "'%value%' is not a valid ISBN number" => "'%value%' is not a valid ISBN number",
 
     // Zend_Validate_LessThan
     "'%value%' is not less than '%max%'" => "'%value%' is not less than '%max%'",
@@ -243,19 +243,19 @@ return array(
     "There was an internal error while using the pattern '%pattern%'" => "There was an internal error while using the pattern '%pattern%'",
 
     // Zend_Validate_Sitemap_Changefreq
-    "'%value%' is no valid sitemap changefreq" => "'%value%' is no valid sitemap changefreq",
+    "'%value%' is not a valid sitemap changefreq" => "'%value%' is not a valid sitemap changefreq",
     "Invalid type given. String expected" => "Invalid type given. String expected",
 
     // Zend_Validate_Sitemap_Lastmod
-    "'%value%' is no valid sitemap lastmod" => "'%value%' is no valid sitemap lastmod",
+    "'%value%' is not a valid sitemap lastmod" => "'%value%' is not a valid sitemap lastmod",
     "Invalid type given. String expected" => "Invalid type given. String expected",
 
     // Zend_Validate_Sitemap_Loc
-    "'%value%' is no valid sitemap location" => "'%value%' is no valid sitemap location",
+    "'%value%' is not a valid sitemap location" => "'%value%' is not a valid sitemap location",
     "Invalid type given. String expected" => "Invalid type given. String expected",
 
     // Zend_Validate_Sitemap_Priority
-    "'%value%' is no valid sitemap priority" => "'%value%' is no valid sitemap priority",
+    "'%value%' is not a valid sitemap priority" => "'%value%' is not a valid sitemap priority",
     "Invalid type given. Numeric string, integer or float expected" => "Invalid type given. Numeric string, integer or float expected",
 
     // Zend_Validate_StringLength

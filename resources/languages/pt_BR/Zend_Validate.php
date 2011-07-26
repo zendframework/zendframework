@@ -76,13 +76,13 @@ return array(
 
     // Zend_Validate_EmailAddress
     "Invalid type given, value should be a string" => "O tipo especificado é inválido, o valor deve ser uma string",
-    "'%value%' is no valid email address in the basic format local-part@hostname" => "'%value%' não é um endereço de e-mail válido no formato local-part@hostname",
-    "'%hostname%' is no valid hostname for email address '%value%'" => "'%hostname%' não é um nome de host válido para o endereço de e-mail '%value%'",
+    "'%value%' is not a valid email address in the basic format local-part@hostname" => "'%value%' não é um endereço de e-mail válido no formato local-part@hostname",
+    "'%hostname%' is not a valid hostname for email address '%value%'" => "'%hostname%' não é um nome de host válido para o endereço de e-mail '%value%'",
     "'%hostname%' does not appear to have a valid MX record for the email address '%value%'" => "'%hostname%' não parece ter um registro MX válido para o endereço de e-mail '%value%'",
     "'%hostname%' is not in a routable network segment. The email address '%value%' should not be resolved from public network." => "'%hostname%' não é um segmento de rede roteável. O endereço de e-mail '%value%' não deve ser resolvido a partir de um rede pública.",
     "'%localPart%' can not be matched against dot-atom format" => "'%localPart%' não corresponde com o formato dot-atom",
     "'%localPart%' can not be matched against quoted-string format" => "'%localPart%' não corresponde com o formato quoted-string",
-    "'%localPart%' is no valid local part for email address '%value%'" => "'%localPart%' não é uma parte local válida para o endereço de e-mail '%value%'",
+    "'%localPart%' is not a valid local part for email address '%value%'" => "'%localPart%' não é uma parte local válida para o endereço de e-mail '%value%'",
     "'%value%' exceeds the allowed length" => "'%value%' excede o comprimento permitido",
 
     // Zend_Validate_File_Count
@@ -223,7 +223,7 @@ return array(
 
     // Zend_Validate_Isbn
     "Invalid type given, value should be string or integer" => "O tipo especificado é inválido, o valor deve ser string ou inteiro",
-    "'%value%' is no valid ISBN number" => "'%value%' não é um número ISBN válido",
+    "'%value%' is not a valid ISBN number" => "'%value%' não é um número ISBN válido",
 
     // Zend_Validate_LessThan
     "'%value%' is not less than '%max%'" => "'%value%' não é menor que '%max%'",
@@ -242,19 +242,19 @@ return array(
     "There was an internal error while using the pattern '%pattern%'" => "Houve um erro interno durante o uso do padrão '%pattern%'",
 
     // Zend_Validate_Sitemap_Changefreq
-    "'%value%' is no valid sitemap changefreq" => "'%value%' não é um changefreq de sitemap válido",
+    "'%value%' is not a valid sitemap changefreq" => "'%value%' não é um changefreq de sitemap válido",
     "Invalid type given, the value should be a string" => "O tipo especificado é inválido, o valor deve ser uma string",
 
     // Zend_Validate_Sitemap_Lastmod
-    "'%value%' is no valid sitemap lastmod" => "'%value%' não é um lastmod de sitemap válido",
+    "'%value%' is not a valid sitemap lastmod" => "'%value%' não é um lastmod de sitemap válido",
     "Invalid type given, the value should be a string" => "O tipo especificado é inválido, o valor deve ser uma string",
 
     // Zend_Validate_Sitemap_Loc
-    "'%value%' is no valid sitemap location" => "'%value%' não é uma localização de sitemap válida",
+    "'%value%' is not a valid sitemap location" => "'%value%' não é uma localização de sitemap válida",
     "Invalid type given, the value should be a string" => "O tipo especificado é inválido, o valor deve ser uma string",
 
     // Zend_Validate_Sitemap_Priority
-    "'%value%' is no valid sitemap priority" => "'%value%' não é uma prioridade de sitemap válida",
+    "'%value%' is not a valid sitemap priority" => "'%value%' não é uma prioridade de sitemap válida",
     "Invalid type given, the value should be a integer, a float or a numeric string" => "O tipo especificado é inválido, o valor deve ser um inteiro, um float ou uma string numérica",
 
     // Zend_Validate_StringLength

@@ -24,6 +24,8 @@
  */
 namespace Zend\Locale;
 
+use Zend\Locale\Data\Cldr;
+
 /**
  * @uses       \Zend\Locale\Locale
  * @uses       \Zend\Locale\Data\Cldr

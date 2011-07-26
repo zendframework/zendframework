@@ -234,11 +234,13 @@ abstract class AbstractLocale
         throw new UnsupportedMethod('This implementation does not support the selected locale information');
     }
 
-    public static function toInteger();
-    public static function toFloat();
-    public static function toDecimal();
-    public static function toScientific();
-    public static function toCurrency();
-    public static function toArray();
-    public static function toDateString();
+/**
+ *   public static function toInteger();
+ *   public static function toFloat();
+ *   public static function toDecimal();
+ *   public static function toScientific();
+ *   public static function toCurrency();
+ *   public static function toArray();
+ *   public static function toDateString();
+ */
 }

@@ -76,13 +76,13 @@ return array(
 
     // Zend_Validate_EmailAddress
     "Invalid type given. String expected" => "不正な形式です。文字列が期待されています",
-    "'%value%' is no valid email address in the basic format local-part@hostname" => "'%value%' はメールアドレスの基本的な形式 local-part@hostname ではありません",
-    "'%hostname%' is no valid hostname for email address '%value%'" => "メールアドレス '%value%' 内の '%hostname%' は有効なホスト名ではありません",
+    "'%value%' is not a valid email address in the basic format local-part@hostname" => "'%value%' はメールアドレスの基本的な形式 local-part@hostname ではありません",
+    "'%hostname%' is not a valid hostname for email address '%value%'" => "メールアドレス '%value%' 内の '%hostname%' は有効なホスト名ではありません",
     "'%hostname%' does not appear to have a valid MX record for the email address '%value%'" => "メールアドレス '%value%' 内の '%hostname%' は有効な MX レコードではないようです",
     "'%hostname%' is not in a routable network segment. The email address '%value%' should not be resolved from public network" => "'%hostname%' はネットワークセグメントにありません。メールアドレス '%value%' はパブリックなネットワークから名前解決できませんでした",
     "'%localPart%' can not be matched against dot-atom format" => "'%localPart%' はドットアトム形式ではありません",
     "'%localPart%' can not be matched against quoted-string format" => "'%localPart%' は引用文字列形式ではありません",
-    "'%localPart%' is no valid local part for email address '%value%'" => "メールアドレス '%value%' 内の '%localPart%' は有効なローカルパートではありません",
+    "'%localPart%' is not a valid local part for email address '%value%'" => "メールアドレス '%value%' 内の '%localPart%' は有効なローカルパートではありません",
     "'%value%' exceeds the allowed length" => "'%value%' は許された長さを超えています",
 
     // Zend_Validate_File_Count
@@ -223,7 +223,7 @@ return array(
 
     // Zend_Validate_Isbn
      "Invalid type given. String or integer expected" => "不正な形式です。文字列または整数が期待されています",
-    "'%value%' is no valid ISBN number" => " '%value%' は ISBN 番号ではありません",
+    "'%value%' is not a valid ISBN number" => " '%value%' は ISBN 番号ではありません",
 
     // Zend_Validate_LessThan
     "'%value%' is not less than '%max%'" => " '%value%' は '%max%' 未満ではありません",
@@ -242,19 +242,19 @@ return array(
     "There was an internal error while using the pattern '%pattern%'" => "正規表現パターン '%pattern%' を使用中に内部エラーが発生しました。",
 
     // Zend_Validate_Sitemap_Changefreq
-    "'%value%' is no valid sitemap changefreq" => " '%value%' は正しいサイトマップの更新頻度ではありません",
+    "'%value%' is not a valid sitemap changefreq" => " '%value%' は正しいサイトマップの更新頻度ではありません",
     "Invalid type given. String expected" => "不正な形式です。文字列が期待されています",
 
     // Zend_Validate_Sitemap_Lastmod
-    "'%value%' is no valid sitemap lastmod" => " '%value%' は正しいサイトマップの最終更新日ではありません",
+    "'%value%' is not a valid sitemap lastmod" => " '%value%' は正しいサイトマップの最終更新日ではありません",
     "Invalid type given. String expected" => "不正な形式です。文字列が期待されています",
 
     // Zend_Validate_Sitemap_Loc
-    "'%value%' is no valid sitemap location" => " '%value%' は正しいサイトマップの位置ではありません",
+    "'%value%' is not a valid sitemap location" => " '%value%' は正しいサイトマップの位置ではありません",
     "Invalid type given. String expected" => "不正な形式です。文字列が期待されています",
 
     // Zend_Validate_Sitemap_Priority
-    "'%value%' is no valid sitemap priority" => " '%value%' は正しいサイトマップの優先度ではありません",
+    "'%value%' is not a valid sitemap priority" => " '%value%' は正しいサイトマップの優先度ではありません",
     "Invalid type given. Numeric string, integer or float expected" => "不正な形式です。数字、整数もしくは小数が期待されています",
 
     // Zend_Validate_StringLength

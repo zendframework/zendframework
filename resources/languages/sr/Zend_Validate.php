@@ -77,13 +77,13 @@ return array(
 
     // Zend_Validate_EmailAddress
     "Invalid type given, value should be a string" => "Nevalidan tip, vrednost treba da bude tekst",
-    "'%value%' is no valid email address in the basic format local-part@hostname" => "'%value%' nije validna adresa elektronske pošte u formatu adresa@imehosta",
-    "'%hostname%' is no valid hostname for email address '%value%'" => "'%hostname%' nije validno ime hosta za adresu elektronske pošte '%value%'",
+    "'%value%' is not a valid email address in the basic format local-part@hostname" => "'%value%' nije validna adresa elektronske pošte u formatu adresa@imehosta",
+    "'%hostname%' is not a valid hostname for email address '%value%'" => "'%hostname%' nije validno ime hosta za adresu elektronske pošte '%value%'",
     "'%hostname%' does not appear to have a valid MX record for the email address '%value%'" => "'%hostname%' nema validan MX zapis za adresu elektronske pošte '%value%'",
     "'%hostname%' is not in a routable network segment. The email address '%value%' should not be resolved from public network." => "'%hostname%' nije rutabilan mrežni segment. Adresa elektronske pošte '%value%' ne treba da bude razrešena sa javne mreže",
     "'%localPart%' can not be matched against dot-atom format" => "'%localPart%' se ne poklapa sa dot-atom formatom",
     "'%localPart%' can not be matched against quoted-string format" => "'%localPart%' se ne poklapa sa quoted-string formatom",
-    "'%localPart%' is no valid local part for email address '%value%'" => "'%localPart%' nije validan deo adrese elektronske pošte '%value%'",
+    "'%localPart%' is not a valid local part for email address '%value%'" => "'%localPart%' nije validan deo adrese elektronske pošte '%value%'",
     "'%value%' exceeds the allowed length" => "'%value%' prelazi dozvoljenu dužinu",
 
     // Zend_Validate_File_Count
@@ -224,7 +224,7 @@ return array(
 
     // Zend_Validate_Isbn
     "Invalid type given, value should be string or integer" => "Nevalidan tip, vrednost treba da bude tekst ili ceo broj",
-    "'%value%' is no valid ISBN number" => "'%value%' nije validan ISBN broj",
+    "'%value%' is not a valid ISBN number" => "'%value%' nije validan ISBN broj",
 
     // Zend_Validate_LessThan
     "'%value%' is not less than '%max%'" => "'%value%' je manje od '%max%'",
@@ -243,19 +243,19 @@ return array(
     "There was an internal error while using the pattern '%pattern%'" => "Dogodila se greška pri korišćenju formata '%pattern%'",
 
     // Zend_Validate_Sitemap_Changefreq
-    "'%value%' is no valid sitemap changefreq" => "'%value%' nije validna frekvencija promene mape sajta",
+    "'%value%' is not a valid sitemap changefreq" => "'%value%' nije validna frekvencija promene mape sajta",
     "Invalid type given, the value should be a string" => "Nevalidan tip, vrednost treba da bude tekst",
 
     // Zend_Validate_Sitemap_Lastmod
-    "'%value%' is no valid sitemap lastmod" => "'%value%' nije validan datum izmene mape sajta",
+    "'%value%' is not a valid sitemap lastmod" => "'%value%' nije validan datum izmene mape sajta",
     "Invalid type given, the value should be a string" => "Nevalidan tip, vrednost treba da bude tekst",
 
     // Zend_Validate_Sitemap_Loc
-    "'%value%' is no valid sitemap location" => "'%value%' nije validna lokacija mape sajta",
+    "'%value%' is not a valid sitemap location" => "'%value%' nije validna lokacija mape sajta",
     "Invalid type given, the value should be a string" => "Nevalidan tip, vrednost treba da bude tekst",
 
     // Zend_Validate_Sitemap_Priority
-    "'%value%' is no valid sitemap priority" => "'%value%' nije validan prioritet mape sajta",
+    "'%value%' is not a valid sitemap priority" => "'%value%' nije validan prioritet mape sajta",
     "Invalid type given, the value should be a integer, a float or a numeric string" => "Nevalidan tip, vrednost treba da bude broj ili numerički niz",
 
     // Zend_Validate_StringLength

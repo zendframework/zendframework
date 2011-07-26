@@ -137,7 +137,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('quoted-string', current($messages));
 
         $this->assertContains('Some User', next($messages));
-        $this->assertContains('no valid local part', current($messages));
+        $this->assertContains('not a valid local part', current($messages));
     }
 
     /**
@@ -165,7 +165,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->_validator->isValid('username@ example . com'));
         $messages = $this->_validator->getMessages();
         $this->assertThat(count($messages), $this->greaterThanOrEqual(1));
-        $this->assertContains('no valid hostname', current($messages));
+        $this->assertContains('not a valid hostname', current($messages));
     }
 
     /**
@@ -200,7 +200,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->_validator->isValid('User Name <username@example.com>'));
         $messages = $this->_validator->getMessages();
         $this->assertThat(count($messages), $this->greaterThanOrEqual(3));
-        $this->assertContains('no valid hostname', current($messages));
+        $this->assertContains('not a valid hostname', current($messages));
         $this->assertContains('cannot match TLD', next($messages));
         $this->assertContains('does not appear to be a valid local network name', next($messages));
     }
@@ -501,18 +501,6 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         $this->_validator->setMessage('TestMessage', Validator\EmailAddress::INVALID);
         $messages = $this->_validator->getMessageTemplates();
         $this->assertEquals('TestMessage', $messages[Validator\EmailAddress::INVALID]);
-    }
-
-    /**
-     * Testing validateMxSupported
-     */
-    public function testValidateMxSupported()
-    {
-        if (function_exists('getmxrr')) {
-            $this->assertTrue($this->_validator->validateMxSupported());
-        } else {
-            $this->assertFalse($this->_validator->validateMxSupported());
-        }
     }
 
     /**

@@ -519,14 +519,14 @@ class RewriteTest extends TestCase
 
 
 	/**
-	 * ZF2-41
+	 * @group ZF2-41
 	 * @depends testRouteWithHostnameChain
 	 */
 	public function testHostnameChainWithEmptyStaticRoute()
 	{
-		$host = new Route\Hostname('www.zend.com', array('module' => 'www-bla'));
+		$host  = new Route\Hostname('www.zend.com', array('module' => 'www-bla'));
 		$empty = new Route\StaticRoute('', array('controller' => 'foo', 'action' => 'main'));
-		$bar = new Route\StaticRoute('bar', array('controller' => 'foo', 'action' => 'bar'));
+		$bar   = new Route\StaticRoute('bar', array('controller' => 'foo', 'action' => 'bar'));
 
 		$emptyChain = new Route\Chain();
 		$emptyChain ->addChain($host)->addChain($empty);
@@ -539,7 +539,7 @@ class RewriteTest extends TestCase
 		$this->_router->addRoute('host-bar', 	$barChain);
 
 		$request = new Request('http://www.zend.com/bar');
-		$token = $this->_router->route($request);
+		$token   = $this->_router->route($request);
 
 		$this->assertEquals('www-bla', $token->getModuleName());
 		$this->assertEquals('foo', $token->getControllerName());
@@ -556,15 +556,15 @@ class RewriteTest extends TestCase
 	}
 
 	 /**
-	 * ZF2-41
-	 * @depends testHostnameChainWithEmptyStaticRoute
-	 */
+	  * @group ZF2-41
+	  * @depends testHostnameChainWithEmptyStaticRoute
+	  */
 	public function testHostnameChainWithEmptyStaticRouteAndCatchall()
 	{
-		$host = new Route\Hostname('www.zend.com', array('module' => 'www-bla'));
+		$host     = new Route\Hostname('www.zend.com', array('module' => 'www-bla'));
 		$catchall = new Route\Route('*', array('controller' => 'error', 'action' => 'pagenotfound'));
-		$empty = new Route\StaticRoute('', array('controller' => 'foo', 'action' => 'main'));
-		$bar = new Route\StaticRoute('bar', array('controller' => 'foo', 'action' => 'bar'));
+		$empty    = new Route\StaticRoute('', array('controller' => 'foo', 'action' => 'main'));
+		$bar      = new Route\StaticRoute('bar', array('controller' => 'foo', 'action' => 'bar'));
 
 		$catchallChain = new Route\Chain();
 		$catchallChain->addChain($host)->addChain($catchall);
@@ -581,7 +581,7 @@ class RewriteTest extends TestCase
 		$this->_router->addRoute('host-bar', 	$barChain);
 
 		$request = new Request('http://www.zend.com/somenonexistentaddress');
-		$token = $this->_router->route($request);
+		$token   = $this->_router->route($request);
 
 		$this->assertEquals('www-bla', $token->getModuleName());
 		$this->assertEquals('error', $token->getControllerName());

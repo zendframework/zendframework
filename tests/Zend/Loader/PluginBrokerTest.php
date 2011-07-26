@@ -205,6 +205,19 @@ class PluginBrokerTest extends \PHPUnit_Framework_TestCase
         $this->broker->register('sample', new TestAsset\SamplePlugin());
         $this->assertTrue($this->broker->isLoaded('sample'));
     }
+    
+    public function testRegisterPluginsOnLoadDisabled()
+    {
+        $this->broker->setRegisterPluginsOnLoad(false);
+        
+        $loader = $this->broker->getClassLoader();
+        $loader->registerPlugin('sample', 'ZendTest\Loader\TestAsset\SamplePlugin');
+        
+        $plugin1 = $this->broker->load('sample');
+        $plugin2 = $this->broker->load('sample');
+        
+        $this->assertNotSame($plugin1, $plugin2);
+    }
 
     /**
      * Unsure if this is functionality we want to support; requires some form

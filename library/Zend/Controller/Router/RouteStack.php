@@ -23,41 +23,39 @@
  * @namespace
  */
 namespace Zend\Controller\Router;
-use Zend\Controller\Request\AbstractRequest;
 
 /**
- * Route interface.
- * 
  * @package    Zend_Controller
  * @subpackage Router
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Route
+interface RouteStack extends Route
 {
     /**
-     * Create a new route with given options.
+     * Add a route to the stack.
      * 
-     * @param  mixed $options
-     * @return void
+     * @param  string  $name
+     * @param  mixed   $route
+     * @param  integer $priority
+     * @return RouteStack
      */
-    public function __construct($options = null);
+    public function addRoute($name, $route, $priority = null);
+
+    /**
+     * Add multiple routes to the stack.
+     * 
+     * @param  mixed $routes
+     * @return RouteStack
+     */
+    public function addRoutes($routes);
     
     /**
-     * Match a given request.
+     * Remove a route from the stack.
      * 
-     * @param  AbstractRequest $request
-     * @return RouteMatch
+     * @param  string $name
+     * @return RouteStack
      */
-    public function match(AbstractRequest $request);
-    
-    /**
-     * Assemble the route.
-     * 
-     * @param  array $params
-     * @param  array $options
-     * @return mixed
-     */
-    public function assemble(array $params = array(), array $options = array());
+    public function removeRoute($name);
 }
 

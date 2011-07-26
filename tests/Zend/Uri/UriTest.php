@@ -99,7 +99,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      */
     public function testParseSchemeInvalidInput($input)
     {
-        $this->setExpectedException('Zend\Uri\Exception\InvalidArgumentException')
+        $this->setExpectedException('Zend\Uri\Exception\InvalidArgumentException');
         $scheme = Uri::parseScheme($input);
     }
 
@@ -120,8 +120,8 @@ class UriTest extends \PHPUnit_Framework_TestCase
      */
     public function testToStringThrowsExceptionIfInvalid(Uri $uri)
     {
-        $this->setExpectedException('Zend\Uri\Exception\InvalidUriException')
-        echo $uri->toString();
+        $this->setExpectedException('Zend\Uri\Exception\InvalidUriException');
+        $string = $uri->toString();
     }
 
     /**
@@ -317,7 +317,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
     public function testSetInvalidScheme($scheme)
     {
         $uri = new Uri;
-        $this->setExpectedException('Zend\Uri\Exception\InvalidUriPartException')
+        $this->setExpectedException('Zend\Uri\Exception\InvalidUriPartException');
         $uri->setScheme($scheme);
     }
 
@@ -343,7 +343,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
     public function testSetInvalidHost($host)
     {
         $uri = new Uri;
-        $this->setExpectedException('Zend\Uri\Exception\InvalidUriPartException')
+        $this->setExpectedException('Zend\Uri\Exception\InvalidUriPartException');
         $uri->setHost($host);
     }
 

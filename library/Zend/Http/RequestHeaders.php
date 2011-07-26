@@ -2,7 +2,7 @@
 
 namespace Zend\Http;
 
-class RequestHeaders extends Headers implements HttpRequestHeaders
+class RequestHeaders extends Headers
 {
     const PATTERN_REQUEST_LINE = "/^%token (?<uri>[^ ]+) HTTP\/(?<version>\d+(\.\d+)?)$/";
 

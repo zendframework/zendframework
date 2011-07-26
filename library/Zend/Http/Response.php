@@ -2,9 +2,10 @@
 
 namespace Zend\Http;
 
-use Zend\Stdlib\Response as BaseResponse;
+use Zend\Stdlib\Message,
+    Zend\Stdlib\ResponseDescription;
 
-class Response extends BaseResponse implements HttpResponse
+class Response extends Message implements ResponseDescription
 {
     protected $headers;
 
@@ -20,7 +21,7 @@ class Response extends BaseResponse implements HttpResponse
     {
         $this->setContent($content);
 
-        if ($headers instanceof HttpResponseHeaders) {
+        if ($headers instanceof ResponseHeaders) {
             $this->setHeaders($headers);
         } elseif (is_array($headers)) {
             $httpHeaders = $this->getHeaders();
@@ -65,40 +66,6 @@ class Response extends BaseResponse implements HttpResponse
         return $this;
     }
 
-    /**
-     * Send headers only
-     * 
-     * @return void
-     */
-    public function sendHeaders()
-    {
-        $this->getHeaders()->send();
-    }
-
-    /**
-     * Send content only
-     *
-     * Has side effect of sending output
-     * 
-     * @return void
-     */
-    public function sendContent()
-    {
-        echo $this->getContent();
-    }
-
-    /**
-     * Send headers and content
-     * 
-     * @return void
-     */
-    public function send()
-    {
-        $this->sendHeaders();
-        $this->sendContent();
-    }
-
-    /* mutators and accessors */
 
     /**
      * Get response headers
@@ -119,7 +86,7 @@ class Response extends BaseResponse implements HttpResponse
      * @param  HttpResponseHeaders $headers 
      * @return Response
      */
-    public function setHeaders(HttpResponseHeaders $headers)
+    public function setHeaders(ResponseHeaders $headers)
     {
         $this->headers = $headers;
         return $this;

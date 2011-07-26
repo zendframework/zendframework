@@ -2,14 +2,17 @@
 
 namespace Zend\Http;
 
-use SplQueue;
+use Iterator,
+    ArrayAccess,
+    Countable,
+    SplQueue;
 
 /**
  * Basic HTTP headers collection functionality
  *
  * Handles aggregation of headers and HTTP protocol version.
  */
-abstract class Headers extends SplQueue implements HttpHeaders
+abstract class Headers extends SplQueue implements Iterator, ArrayAccess, Countable
 {
     /**@+
      * Constants containing patterns for parsing HTTP headers from a string
@@ -72,7 +75,7 @@ abstract class Headers extends SplQueue implements HttpHeaders
      */
     public function addHeader($header, $content = null, $replace = false)
     {
-        if (!$header instanceof HttpHeader) {
+        if (!$header instanceof Header) {
             if (is_array($header)) {
                 $header = new Header($header);
             } else {
@@ -131,7 +134,7 @@ abstract class Headers extends SplQueue implements HttpHeaders
      */
     public function push($value)
     {
-        if (!$value instanceof HttpHeader) {
+        if (!$value instanceof Header) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Headers may only aggregate Zend\Http\HttpHeader objects; received %s',
                 (is_object($value) ? get_class($value) : gettype($value))
@@ -156,7 +159,7 @@ abstract class Headers extends SplQueue implements HttpHeaders
      */
     public function unshift($value)
     {
-        if (!$value instanceof HttpHeader) {
+        if (!$value instanceof Header) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Headers may only aggregate Zend\Http\HttpHeader objects; received %s',
                 (is_object($value) ? get_class($value) : gettype($value))

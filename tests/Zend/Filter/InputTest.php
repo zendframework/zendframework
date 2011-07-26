@@ -1774,7 +1774,9 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-11142, ZF-8446, ZF-9289
+     * @group ZF-11142
+     * @group ZF-8446
+     * @group ZF-9289
      */
     public function testTwoValidatorsInChainShowCorrectError()
     {

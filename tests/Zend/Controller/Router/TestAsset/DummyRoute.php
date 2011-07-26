@@ -14,50 +14,63 @@
  *
  * @category   Zend
  * @package    Zend_Controller
- * @subpackage Router
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
 /**
  * @namespace
  */
-namespace Zend\Controller\Router;
+namespace ZendTest\Controller\Router\TestAsset;
+use Zend\Controller\Router\Route;
 use Zend\Controller\Request\AbstractRequest;
 
 /**
- * Route interface.
- * 
+ * Dummy route
+ *
+ * @category   Zend
  * @package    Zend_Controller
- * @subpackage Router
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Route
+class DummyRoute implements Route
 {
     /**
-     * Create a new route with given options.
-     * 
+     * __construct(): defined by Route interface.
+     *
+     * @see    Route::__construct()
      * @param  mixed $options
      * @return void
      */
-    public function __construct($options = null);
+    public function __construct($options = null)
+    { 
+    }
     
     /**
-     * Match a given request.
-     * 
+     * match(): defined by Route interface.
+     *
+     * @see    Route::match()
      * @param  AbstractRequest $request
-     * @return RouteMatch
+     * @return boolean
      */
-    public function match(AbstractRequest $request);
-    
+    public function match(AbstractRequest $request)
+    {
+        return true;
+    }
+
     /**
-     * Assemble the route.
-     * 
+     * assemble(): defined by Route interface.
+     *
+     * @see    Route::assemble()
      * @param  array $params
      * @param  array $options
      * @return mixed
      */
-    public function assemble(array $params = array(), array $options = array());
+    public function assemble(array $params = null, array $options = null)
+    {
+        return '';
+    }
 }
-

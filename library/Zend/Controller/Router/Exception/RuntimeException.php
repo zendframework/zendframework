@@ -22,42 +22,15 @@
 /**
  * @namespace
  */
-namespace Zend\Controller\Router;
-use Zend\Controller\Request\AbstractRequest;
+namespace Zend\Controller\Router\Exception;
+
+use Zend\Controller\Router\Exception;
 
 /**
- * Route interface.
- * 
  * @package    Zend_Controller
  * @subpackage Router
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Route
-{
-    /**
-     * Create a new route with given options.
-     * 
-     * @param  mixed $options
-     * @return void
-     */
-    public function __construct($options = null);
-    
-    /**
-     * Match a given request.
-     * 
-     * @param  AbstractRequest $request
-     * @return RouteMatch
-     */
-    public function match(AbstractRequest $request);
-    
-    /**
-     * Assemble the route.
-     * 
-     * @param  array $params
-     * @param  array $options
-     * @return mixed
-     */
-    public function assemble(array $params = array(), array $options = array());
-}
-
+class RuntimeException extends \RuntimeException implements Exception
+{}

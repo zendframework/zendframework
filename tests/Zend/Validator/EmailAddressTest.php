@@ -151,7 +151,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
 
         $messages = $this->_validator->getMessages();
 
-        $this->assertType('array', $messages);
+        $this->assertInternalType('array', $messages);
         $this->assertEquals(0, count($messages));
     }
 

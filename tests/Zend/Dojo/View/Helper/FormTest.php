@@ -94,4 +94,10 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $html = $this->helper->direct('foo', array('id' => 'bar'));
         $this->assertRegexp('/<form[^>]*(id="bar")/', $html);
     }
+    
+    public function testShouldNotRenderClosingTagIfContentIsFalse()
+    {
+        $html = $this->helper->direct('foo');
+        $this->assertNotRegexp('/<\/form>/', $html);
+    }
 }

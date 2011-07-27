@@ -216,6 +216,10 @@ abstract class Adapter
             $options = array('content' => $options);
         }
 
+        if (!isset($options['content']) || empty($options['content'])) {
+            throw new Exception\InvalidArgumentException('Missing content for translation');
+        }
+
         $originate = null;
         if (!empty($options['locale'])) {
             $originate = (string) $options['locale'];

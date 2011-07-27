@@ -80,7 +80,7 @@ class File extends Xhtml
     /**
      * Load default decorators
      *
-     * @return void
+     * @return \Zend\Form\Element\File
      */
     public function loadDefaultDecorators()
     {

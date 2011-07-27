@@ -258,7 +258,7 @@ class Captcha extends Xhtml
     /**
      * Load default decorators
      *
-     * @return void
+     * @return \Zend\Form\Element\Captcha
      */
     public function loadDefaultDecorators()
     {

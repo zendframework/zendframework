@@ -34,7 +34,7 @@
 
         <para>
             There are many <link xmlns:xlink="http://www.w3.org/1999/xlink"
-                xlink:href="http://en.wikipedia.org/wiki/Numeral">number systems</link>
+                xlink:href="http://en.wikipedia.org/wiki/Numeral_system">number systems</link>
             different from the common <link xmlns:xlink="http://www.w3.org/1999/xlink"
                 xlink:href="http://en.wikipedia.org/wiki/Decimal">decimal
                 system</link> (e.g. "3.14").
@@ -276,7 +276,7 @@ print $number;
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale();
-if (Zend_Locale_Format::isNumber('13.445,36', array('locale' => 'de_AT')) {
+if (Zend_Locale_Format::isNumber('13.445,36', array('locale' => 'de_AT'))) {
     print "Number";
 } else {
     print "not a Number";

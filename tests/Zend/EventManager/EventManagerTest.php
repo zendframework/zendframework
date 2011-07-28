@@ -214,7 +214,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('zero', $responses->last());
     }
 
-    public function testCanAttachandlerAggregate()
+    public function testCanAttachHandlerAggregate()
     {
         $aggregate = new TestAsset\MockAggregate();
         $this->events->attachAggregate($aggregate);

@@ -30,7 +30,7 @@ use Zend\Stdlib\CallbackHandler,
 /**
  * Event manager: notification system
  *
- * Use the EventManager when you want to create a per-instance notification 
+ * Use the EventManager when you want to create a per-instance notification
  * system for your objects.
  *
  * @category   Zend
@@ -66,10 +66,10 @@ class EventManager implements EventCollection
     /**
      * Constructor
      *
-     * Allows optionally specifying an identifier to use to pull signals from a 
+     * Allows optionally specifying an identifier to use to pull signals from a
      * StaticEventManager.
-     * 
-     * @param  null|string|int $identifier 
+     *
+     * @param  null|string|int $identifier
      * @return void
      */
     public function __construct($identifier = null)
@@ -79,8 +79,8 @@ class EventManager implements EventCollection
 
     /**
      * Set the event class to utilize
-     * 
-     * @param  string $class 
+     *
+     * @param  string $class
      * @return EventManager
      */
     public function setEventClass($class)
@@ -91,8 +91,8 @@ class EventManager implements EventCollection
 
     /**
      * Set static connections container
-     * 
-     * @param  null|StaticEventCollection $connections 
+     *
+     * @param  null|StaticEventCollection $connections
      * @return void
      */
     public function setStaticConnections(StaticEventCollection $connections = null)
@@ -107,7 +107,7 @@ class EventManager implements EventCollection
 
     /**
      * Get static connections container
-     * 
+     *
      * @return false|StaticEventCollection
      */
     public function getStaticConnections()
@@ -120,9 +120,9 @@ class EventManager implements EventCollection
 
     /**
      * Trigger all handlers for a given event
-     * 
-     * @param  string $event 
-     * @param  string|object $context Object calling emit, or symbol describing context (such as static method name) 
+     *
+     * @param  string $event
+     * @param  string|object $context Object calling emit, or symbol describing context (such as static method name)
      * @param  array|ArrayAccess $argv Array of arguments; typically, should be associative
      * @return ResponseCollection All handler return values
      */
@@ -134,16 +134,16 @@ class EventManager implements EventCollection
     }
 
     /**
-     * Trigger handlers until return value of one causes a callback to 
+     * Trigger handlers until return value of one causes a callback to
      * evaluate to true
      *
-     * Triggers handlers until the provided callback evaluates the return 
+     * Triggers handlers until the provided callback evaluates the return
      * value of one as true, or until all handlers have been executed.
-     * 
-     * @param  string $event 
-     * @param  string|object $context Object calling emit, or symbol describing context (such as static method name) 
+     *
+     * @param  string $event
+     * @param  string|object $context Object calling emit, or symbol describing context (such as static method name)
      * @param  array|ArrayAccess $argv Array of arguments; typically, should be associative
-     * @param  Callable $callback 
+     * @param  Callable $callback
      * @throws InvalidCallbackException if invalid callback provided
      */
     public function triggerUntil($event, $context, $argv, $callback)
@@ -181,18 +181,18 @@ class EventManager implements EventCollection
     /**
      * Attach a handler to an event
      *
-     * The first argument is the event, and the next argument describes a 
-     * callback that will respond to that event. A CallbackHandler instance 
+     * The first argument is the event, and the next argument describes a
+     * callback that will respond to that event. A CallbackHandler instance
      * describing the event handler combination will be returned.
      *
-     * The last argument indicates a priority at which the event should be 
+     * The last argument indicates a priority at which the event should be
      * executed. By default, this value is 1; however, you may set it for any
      * integer value. Higher values have higher priority (i.e., execute first).
-     * 
+     *
      * @param  string $event
      * @param  callback $callback PHP callback
-     * @param  int $priority If provided, the priority at which to register the callback 
-     * @return HandlerAggregate|CallbackHandler (to allow later unsubscribe)
+     * @param  int $priority If provided, the priority at which to register the callback
+     * @return HandlerAggregate (to allow later unsubscribe)
      */
     public function attach($event, $callback, $priority = 1)
     {
@@ -208,42 +208,21 @@ class EventManager implements EventCollection
      * Attach a handler aggregate
      *
      * Handler aggregates accept an EventCollection instance, and call attach()
-     * one or more times, typically to attach to multiple events using local 
+     * one or more times, typically to attach to multiple events using local
      * methods.
-     * 
-     * @param  HandlerAggregate|string $aggregate 
-     * @return HandlerAggregate
+     *
+     * @param  HandlerAggregate $aggregate
+     * @return mixed return value of {@link HandlerAggregate::attach()}
      */
-    public function attachAggregate($aggregate)
+    public function attachAggregate(HandlerAggregate $aggregate)
     {
-        if (is_string($aggregate)) {
-            // Class name?
-            if (!class_exists($aggregate)) {
-                // Class doesn't exist; probably didn't provide a context
-                throw new Exception\InvalidArgumentException(sprintf(
-                    'No context provided for event "%s"',
-                    $aggregate
-                ));
-            }
-            // Create instance
-            $aggregate = new $aggregate();
-        }
-        if (!$aggregate instanceof HandlerAggregate) {
-            // Not an HandlerAggregate? We don't know how to handle it.
-            throw new Exception\InvalidArgumentException(
-                'Invalid class or object provided as event aggregate; must implement HandlerAggregate'
-            );
-        }
-
-        // Have the event aggregate wire itself, and return it.
-        $aggregate->attach($this);
-        return $aggregate;
+        return $aggregate->attach($this);
     }
 
     /**
      * Unsubscribe a handler from an event
-     * 
-     * @param  CallbackHandler $handler 
+     *
+     * @param  CallbackHandler $handler
      * @return bool Returns true if event and handle found, and unsubscribed; returns false if either event or handle not found
      */
     public function detach(CallbackHandler $handler)
@@ -263,37 +242,22 @@ class EventManager implements EventCollection
     }
 
     /**
-     * Detach a callback aggregate
+     * Detach a handler aggregate
      *
-     * Loops through all handlers of all events to identify handlers that are
-     * represented by the aggregate; for all matches, the handlers will be 
-     * removed.
-     * 
-     * @param  HandlerAggregate $aggregate 
-     * @return bool
+     * Handler aggregates accept an EventCollection instance, and call detach()
+     * of all previously attached handlers.
+     *
+     * @param  HandlerAggregate $aggregate
+     * @return mixed return value of {@link HandlerAggregate::detach()}
      */
     public function detachAggregate(HandlerAggregate $aggregate)
     {
-        foreach ($this->events as $event => $handlers) {
-            foreach ($handlers as $key => $handler) {
-                $callback = $handler->getCallback();
-                if (is_object($callback)) {
-                    if ($callback === $aggregate) {
-                        $this->detach($handler);
-                    }
-                } elseif (is_array($callback)) {
-                    if ($callback[0] === $aggregate) {
-                        $this->detach($handler);
-                    }
-                }
-            }
-        }
-        return true;
+        return $aggregate->detach($this);
     }
 
     /**
      * Retrieve all registered events
-     * 
+     *
      * @return array
      */
     public function getEvents()
@@ -303,8 +267,8 @@ class EventManager implements EventCollection
 
     /**
      * Retrieve all handlers for a given event
-     * 
-     * @param  string $event 
+     *
+     * @param  string $event
      * @return PriorityQueue
      */
     public function getHandlers($event)
@@ -317,8 +281,8 @@ class EventManager implements EventCollection
 
     /**
      * Clear all handlers for a given event
-     * 
-     * @param  string $event 
+     *
+     * @param  string $event
      * @return void
      */
     public function clearHandlers($event)
@@ -332,10 +296,10 @@ class EventManager implements EventCollection
      * Prepare arguments
      *
      * Use this method if you want to be able to modify arguments from within a
-     * handler. It returns an ArrayObject of the arguments, which may then be 
+     * handler. It returns an ArrayObject of the arguments, which may then be
      * passed to trigger() or triggerUntil().
-     * 
-     * @param  array $args 
+     *
+     * @param  array $args
      * @return ArrayObject
      */
     public function prepareArgs(array $args)
@@ -345,10 +309,10 @@ class EventManager implements EventCollection
 
     /**
      * Emit handlers matching the current identifier found in the static handler
-     * 
-     * @param  callback $callback 
-     * @param  Event $event 
-     * @param  ResponseCollection $responses 
+     *
+     * @param  callback $callback
+     * @param  Event $event
+     * @param  ResponseCollection $responses
      * @return ResponseCollection
      */
     protected function triggerStaticHandlers($callback, Event $event, ResponseCollection $responses)

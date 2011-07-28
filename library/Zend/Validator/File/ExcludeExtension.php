@@ -59,6 +59,10 @@ class ExcludeExtension extends Extension
      */
     public function isValid($value, $file = null)
     {
+        if ($file === null) {
+            $file = array('name' => basename($value));
+        }
+
         // Is file readable ?
         if (!\Zend\Loader::isReadable($value)) {
             return $this->_throw($file, self::NOT_FOUND);

@@ -229,4 +229,13 @@ class EditorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->element->getDijitParam('updateInterval'), $this->element->getUpdateInterval());
         $this->assertEquals(300, $this->element->getUpdateInterval());
     }
+
+    public function testCanAddMultipleSeparatorsToEditor()
+    {
+        $this->element->setPlugins(array('undo', '|', 'bold', '|', 'italic'));
+        
+        $plugins = $this->element->getPlugins();
+        $this->assertEquals(5, count($plugins));
+    }
+    
 }

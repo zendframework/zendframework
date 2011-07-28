@@ -251,7 +251,7 @@ class Editor extends Dijit
     {
         $plugin = (string) $plugin;
         $plugins = $this->getPlugins();
-        if (in_array($plugin, $plugins)) {
+        if (in_array($plugin, $plugins) && $plugin !== '|') {
             return $this;
         }
 

@@ -108,6 +108,17 @@ class Code39 extends AbstractObject
     }
 
     /**
+     * Set text to encode
+     * @param string $value
+     * @return Zend_Barcode_Object
+     */
+    public function setText($value)
+    {
+        $this->_text = $value;
+        return $this;
+    }
+
+    /**
      * Retrieve text to display
      * @return string
      */

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.sourcecreation"><info><title>Erstellen von Quelldateien</title></info>
-    
+
 
     <para>
         Anbei ist eine Beschreibung der unterschiedlichen Quellformate, welche mit
@@ -17,7 +17,7 @@
     </note>
 
     <section xml:id="zend.translate.sourcecreation.array"><info><title>Erstellung von Array-Quelldateien</title></info>
-        
+
 
         <para>
             Array-Quelldateien sind reine Arrays. Sie müssen aber manuell definiert werden, da
@@ -81,7 +81,7 @@ $translate = new Zend_Translate(
     </section>
 
     <section xml:id="zend.translate.sourcecreation.gettext"><info><title>Erstellung von Gettext Quellen</title></info>
-        
+
 
         <para>
             Gettext-Quellen werden von der GNU Gettext-Bibliothek erstellt. Es gibt einige
@@ -158,7 +158,7 @@ print_r($translate->getAdapterInfo());
     </section>
 
     <section xml:id="zend.translate.sourcecreation.tmx"><info><title>Erstellung von TMX Quellen</title></info>
-        
+
 
         <para>
             TMX-Quellen sind der neue Industriestandard. Sie haben den Vorteil, dass sie
@@ -169,7 +169,7 @@ print_r($translate->getAdapterInfo());
         </para>
 
         <example xml:id="zend.translate.sourcecreation.tmx.example"><info><title>Beispiel einer TMX Datei</title></info>
-            
+
 
             <programlisting language="xml"><![CDATA[
 <?xml version="1.0" ?>
@@ -206,19 +206,19 @@ $translate = new Zend_Translate(
         <para>
             TMX-Dateien können mehrere Sprachen in derselben Datei enthalten. Alle anderen in der
             Quelle enthaltenen Sprachen werden automatisch hinzugefügt und müssen nicht durch einen
-            extra Aufruf von <methodname>addLanguage()</methodname> ergänzt werden.
+            extra Aufruf von <methodname>addTranslation()</methodname> ergänzt werden.
         </para>
 
         <para>
             Wenn man nur spezielle Sprachen aus der Quelle übersetzen will, kann die Option
             <property>defined_language</property> auf <constant>TRUE</constant> gesetzt werden. Mit
             dieser Option können gewünschte Sprachen explizit mit
-            <methodname>addLanguage()</methodname> hinzugefügt werden. Der Standardwert für diese
+            <methodname>addTranslation()</methodname> hinzugefügt werden. Der Standardwert für diese
             Option fügt alle Sprachen hinzu.
         </para>
 
         <note><info><title>Option useId</title></info>
-            
+
 
             <para>
                 Wenn man die Option <emphasis>useId</emphasis> auf <constant>FALSE</constant> setzt,
@@ -242,7 +242,7 @@ $translate = new Zend_Translate(
     </section>
 
     <section xml:id="zend.translate.sourcecreation.csv"><info><title>Erstellung von CSV-Quellen</title></info>
-        
+
 
         <para>
             CSV-Quellen sind sehr klein und von Menschen lesbar. Wenn ein Kunde selbst übersetzen
@@ -250,7 +250,7 @@ $translate = new Zend_Translate(
         </para>
 
         <example xml:id="zend.translate.sourcecreation.csv.example"><info><title>Beispiel CSV Datei</title></info>
-            
+
 
             <programlisting language="txt"><![CDATA[
 ﻿#Example csv file
@@ -301,7 +301,7 @@ $translate->addTranslation(
         </para>
 
         <example xml:id="zend.translate.sourcecreation.csv.example2"><info><title>Zweites Beispiel für CSV-Dateien</title></info>
-            
+
 
             <programlisting language="txt"><![CDATA[
 ﻿# Example CSV file
@@ -339,7 +339,7 @@ $translate->addTranslation(
     </section>
 
     <section xml:id="zend.translate.sourcecreation.ini"><info><title>Erstellung von INI-Quelldateien</title></info>
-        
+
 
         <para>
             <acronym>INI</acronym>-Quelldateien sind menschenlesbar, aber normalerweise nicht sehr
@@ -348,7 +348,7 @@ $translate->addTranslation(
         </para>
 
         <example xml:id="zend.translate.sourcecreation.ini.example"><info><title>Beispiel einer INI-Datei</title></info>
-            
+
 
             <programlisting language="txt"><![CDATA[
 [Test]

@@ -239,7 +239,11 @@ abstract class Adapter
 
         $options  = $options + $this->_options;
         if (is_string($options['content']) and is_dir($options['content'])) {
-            $options['content'] = realpath($options['content']);
+            $test = realpath($options['content']);
+            if ($test !== false) {
+                $options['content'] = $test;
+            }
+
             $prev = '';
             if (DIRECTORY_SEPARATOR == '\\') {
                 $separator = '\\\\';

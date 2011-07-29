@@ -75,10 +75,10 @@ class IniTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Message 1 (en)', $adapter->_('Message_1'));
         $this->assertEquals('Message_6', $adapter->translate('Message_6'));
         $this->assertEquals('Küchen Möbel (en)', $adapter->translate('Cooking_furniture'));
-        if (0 > version_compare(PHP_VERSION, '5.3.0')) {
+        if (version_compare(PHP_VERSION, '5.3.0', '<>')) {
             $this->assertEquals('Cooking furniture (en)', $adapter->translate('Küchen_Möbel'), var_export($adapter->getMessages('en'), 1));
         } else {
-            $this->markTestSkipped('PHP 5.3 cannot utilize non-ASCII characters for INI option keys');
+            $this->markTestSkipped('PHP 5.3.0 cannot utilize non-ASCII characters for INI option keys. This PHP bug has been fixed with PHP 5.3.1');
         }
     }
 

@@ -1,5 +1,8 @@
-<sect1 id="zend.rest.introduction">
-    <title>Wprowadzenie</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.rest.introduction"><info><title>Wprowadzenie</title></info>
+    
 
     <para>
         Webserwisy REST używają formatów XML specyficznych dla każdego z
@@ -20,8 +23,4 @@
         webserwisów nie opartym na klasie Zend_Rest_Server, dostęp wciąż będzie
         łatwy.
     </para>
-</sect1>
-
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

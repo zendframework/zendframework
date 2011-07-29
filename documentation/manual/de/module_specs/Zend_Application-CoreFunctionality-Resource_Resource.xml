@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20763 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.application.core-functionality.resource-resource">
-    <title>Zend_Application_Resource_Resource</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.core-functionality.resource-resource"><info><title>Zend_Application_Resource_Resource</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Resource</classname> ist ein Interface für Plugin
@@ -12,8 +12,8 @@
         erlauben, und ein Strategy Pattern für die Initialisierung der Ressource implementieren.
     </para>
 
-    <table id="zend.application.core-functionality.resource-resource.api">
-        <title>Zend_Application_Resource_Resource Interface</title>
+    <table xml:id="zend.application.core-functionality.resource-resource.api"><info><title>Zend_Application_Resource_Resource Interface</title></info>
+        
 
         <tgroup cols="4">
             <thead>
@@ -121,4 +121,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect2>
+</section>

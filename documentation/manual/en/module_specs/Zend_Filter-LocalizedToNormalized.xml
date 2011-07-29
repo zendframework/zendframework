@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.localizedtonormalized">
-    <title>LocalizedToNormalized and NormalizedToLocalized</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.localizedtonormalized"><info><title>LocalizedToNormalized and NormalizedToLocalized</title></info>
+    
 
     <para>
         These two filters can change given localized input to it's normalized representation and
@@ -9,11 +8,11 @@
         for you.
     </para>
 
-    <sect3 id="zend.filter.set.localizedtonormalized.options">
-        <title>
+    <section xml:id="zend.filter.set.localizedtonormalized.options"><info><title>
             Supported options for Zend_Filter_LocalizedToNormalized and
             Zend_Filter_NormalizedToLocalized
-        </title>
+        </title></info>
+        
 
         <para>
             The following options are supported for
@@ -43,10 +42,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.localizedtonormalized.workflow">
-        <title>Workflow</title>
+    <section xml:id="zend.filter.set.localizedtonormalized.workflow"><info><title>Workflow</title></info>
+        
 
         <para>
             Normalization allows your user to enter informations in his own language notation, and
@@ -113,10 +112,10 @@
                 by the locale your environment is set to.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.localizedtonormalized.numbersnormal">
-        <title>Normalization for numbers</title>
+    <section xml:id="zend.filter.set.localizedtonormalized.numbersnormal"><info><title>Normalization for numbers</title></info>
+        
 
         <para>
             Any given number like integer, float or real value, can be normalized. Note, that
@@ -163,10 +162,10 @@ $filter->filter('123.456');
 $filter->filter('123.456,78901');
 // returns the value '123456.79'
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.localizedtonormalized.dates">
-        <title>Normalization for date and time</title>
+    <section xml:id="zend.filter.set.localizedtonormalized.dates"><info><title>Normalization for date and time</title></info>
+        
 
         <para>
             Input for date and time values can also be normalized. All given date and time values
@@ -199,10 +198,10 @@ $filter = new Zend_Filter_LocalizedToNormalized(
 $filter->filter('11:22:33');
 // returns array('hour' => '33', 'minute' => '22', 'second' => '11')
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.localizedtonormalized.numberslocal">
-        <title>Localization for numbers</title>
+    <section xml:id="zend.filter.set.localizedtonormalized.numberslocal"><info><title>Localization for numbers</title></info>
+        
 
         <para>
             Any given number like integer, float or real value, can be localized. Note, that
@@ -250,10 +249,10 @@ $filter->filter(123456);
 $filter->filter(123456.78901);
 // returns the value '123.456,79'
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.normalizedtolocalized.dates">
-        <title>Localization for date and time</title>
+    <section xml:id="zend.filter.set.normalizedtolocalized.dates"><info><title>Localization for date and time</title></info>
+        
 
         <para>
             Normalized for date and time values can also be localized. All given date and time
@@ -286,8 +285,5 @@ $filter = new Zend_Filter_LocalizedToNormalized(
 $filter->filter(array('hour' => '33', 'minute' => '22', 'second' => '11'));
 // returns '11:22:33'
 ]]></programlisting>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

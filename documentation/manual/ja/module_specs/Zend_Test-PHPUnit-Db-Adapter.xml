@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20807 -->
-<sect2 id="zend.test.phpunit.db.adapter">
-    <title>データベース・テスト・アダプタの使用</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.db.adapter"><info><title>データベース・テスト・アダプタの使用</title></info>
+    
 
     <para>
         アプリケーションの一部を本当のデータベースでテストしたくなくても、
@@ -50,7 +48,7 @@ $rs = $adapter->query('SELECT ...'); // Returns Statement 1
     <para>
         結果スタックにINSERT、UPDATE及びDELETE命令を入れることもできます。
         しかしながらそれらは、
-        <methodname>$stmt->rowCount()</methodname> の結果を指定できる命令だけを返します。
+        <methodname>$stmt-&gt;rowCount()</methodname> の結果を指定できる命令だけを返します。
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -96,4 +94,4 @@ echo $qp->getQuerY(); // SELECT * FROM bugs
         さらに、 <methodname>setQuoteIdentifierSymbol()</methodname> を使用して、
         引用符で囲むために使用するべき記号を指定できます。既定では何も使用されません。
     </para>
-</sect2>
+</section>

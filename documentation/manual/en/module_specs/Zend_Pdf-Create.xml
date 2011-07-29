@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.pdf.create">
-    <title>Creating and Loading PDF Documents</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.create"><info><title>Creating and Loading PDF Documents</title></info>
+    
 
     <para>
         The <classname>Zend_Pdf</classname> class represents <acronym>PDF</acronym> documents and
@@ -21,8 +20,8 @@
         occurs.
     </para>
 
-    <example id="zend.pdf.create.example-1">
-        <title>Create new or load existing PDF document</title>
+    <example xml:id="zend.pdf.create.example-1"><info><title>Create new or load existing PDF document</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 ...
@@ -59,8 +58,8 @@ $pdf3 = Zend_Pdf::parse($pdfString);
         call.
     </para>
 
-    <example id="zend.pdf.create.example-2">
-        <title>Requesting Specific Revisions of a PDF Document</title>
+    <example xml:id="zend.pdf.create.example-2"><info><title>Requesting Specific Revisions of a PDF Document</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 ...
@@ -77,7 +76,4 @@ $pdf3->rollback($revisions - 1);
 ...
 ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 15814 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.application.introduction">
-    <title>Introducción</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.introduction"><info><title>Introducción</title></info>
+    
 
     <para>
         <classname>Zend_Application</classname>
@@ -15,4 +15,4 @@
         <acronym>PHP</acronym>
         e introduce la autocarga (autoloading) por defecto.
     </para>
-</sect1>
+</section>

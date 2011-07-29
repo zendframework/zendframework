@@ -1,17 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20794 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.cycle">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.cycle"><info><title>Aide Cycle</title></info>
 
-    <title>Aide Cycle</title>
+    
 
     <para>
       L'aide <code>Cycle</code> est utilisée pour alterner des valeurs.
     </para>
 
-    <example id="zend.view.helpers.initial.cycle.basicusage">
+    <example xml:id="zend.view.helpers.initial.cycle.basicusage"><info><title>Aide Cycle : utilisation de base</title></info>
 
-        <title>Aide Cycle : utilisation de base</title>
+        
 
         <para>
             Pour ajouter des éléments dans le cycle, spécifiez le simplement dans le
@@ -48,13 +46,13 @@ $this->cycle()->prev();
 
     </example>
 
-    <example id="zend.view.helpers.initial.cycle.advanceusage">
+    <example xml:id="zend.view.helpers.initial.cycle.advanceusage"><info><title>Travailler avec 2 cycles ou plus</title></info>
 
-        <title>Travailler avec 2 cycles ou plus</title>
+        
 
        <para>
            Pour utiliser 2 cycles, il faut renseigner leurs noms. Ca se passe au niveau du second
-           paramètre de la méthode cycle. <code>$this->cycle(array("#F0F0F0","#FFFFFF"),'cycle2')</code>.
+           paramètre de la méthode cycle. <code>$this-&gt;cycle(array("#F0F0F0","#FFFFFF"),'cycle2')</code>.
            setName($name) peut aussi être utilisée.
         </para>
 
@@ -71,7 +69,4 @@ $this->cycle()->prev();
 <?php endforeach;?>
 ]]></programlisting>
 
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

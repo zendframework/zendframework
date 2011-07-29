@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 22432 -->
-<sect1 id="zend.layout.quickstart">
-    <title>Zend_Layout クイックスタート</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.quickstart"><info><title>Zend_Layout クイックスタート</title></info>
+    
 
     <para>
         <classname>Zend_Layout</classname> の使用法は大きくふたつに分けられます。
         Zend Framework の <acronym>MVC</acronym> を使用する方法とそれ以外の方法です。
     </para>
 
-    <sect2 id="zend.layout.quickstart.layouts">
-        <title>レイアウトスクリプト</title>
+    <section xml:id="zend.layout.quickstart.layouts"><info><title>レイアウトスクリプト</title></info>
+        
 
         <para>
             どちらにしても、まずはレイアウトスクリプトを作成しなければなりません。
@@ -58,8 +56,7 @@
             を用いてレンダリングをしているので、
             登録されているビューヘルパーはすべて使用できます。
             またビューに登録されている変数も使用できます。
-            特に便利なのは、さまざまな <link
-            linkend="zend.view.helpers.initial.placeholder">プレースホルダヘルパー</link>
+            特に便利なのは、さまざまな <link linkend="zend.view.helpers.initial.placeholder">プレースホルダヘルパー</link>
             を使用できることでしょう。
             これらを用いると、たとえば &lt;head&gt;
             セクションやナビゲーション部などのコンテンツを取得できます。
@@ -87,19 +84,17 @@
 </body>
 </html>
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.layout.quickstart.mvc">
-        <title>Zend_Layout を Zend Framework の MVC で使用する方法</title>
+    <section xml:id="zend.layout.quickstart.mvc"><info><title>Zend_Layout を Zend Framework の MVC で使用する方法</title></info>
+        
 
         <para>
             <classname>Zend_Controller</classname> には拡張用の機能が豊富に用意されています。
             これは <link linkend="zend.controller.plugins">フロントコントローラ
-            プラグイン</link> や <link
-            linkend="zend.controller.actionhelpers">アクションコントローラ
+            プラグイン</link> や <link linkend="zend.controller.actionhelpers">アクションコントローラ
             ヘルパー</link> によって実現されているものです。
-            <classname>Zend_View</classname> にも <link
-            linkend="zend.view.helpers">ヘルパー</link> は存在します。
+            <classname>Zend_View</classname> にも <link linkend="zend.view.helpers">ヘルパー</link> は存在します。
             <classname>Zend_Layout</classname> を <acronym>MVC</acronym> コンポーネントとともに使用すると、
             これらのさまざまな拡張ポイントの恩恵を受けることになります。
         </para>
@@ -129,7 +124,7 @@ Zend_Layout::startMvc();
             <methodname>startMvc()</methodname> には、オプションの配列あるいは
             <classname>Zend_Config</classname> オブジェクトを渡すことができます。
             これによってインスタンスをカスタマイズします。
-            オプションの詳細については <xref linkend="zend.layout.options" />
+            オプションの詳細については <xref linkend="zend.layout.options"/>
             を参照ください。
         </para>
 
@@ -214,16 +209,15 @@ $layout = Zend_Layout::getMvcInstance();
 
         <para>
             この機能は、ActionStack <link linkend="zend.controller.actionhelpers.actionstack">
-            アクションヘルパー</link> や <link
-            linkend="zend.controller.plugins.standard.actionstack">プラグイン</link>
+            アクションヘルパー</link> や <link linkend="zend.controller.plugins.standard.actionstack">プラグイン</link>
             と組み合わせて使うと非常に便利です。
             アクションのスタックを作成してそれをループさせ、
             ウィジェット形式のページを作成するというわけです。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.layout.quickstart.standalone">
-        <title>Zend_Layout を単体のコンポーネントとして使用する方法</title>
+    <section xml:id="zend.layout.quickstart.standalone"><info><title>Zend_Layout を単体のコンポーネントとして使用する方法</title></info>
+        
 
         <para>
             単体のコンポーネントとして使用した場合は、<classname>Zend_Layout</classname>
@@ -265,10 +259,10 @@ $layout->setLayout('foo');
 // 最終的なレイアウトをレンダリングします
 echo $layout->render();
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.layout.quickstart.example">
-        <title>サンプルレイアウト</title>
+    <section xml:id="zend.layout.quickstart.example"><info><title>サンプルレイアウト</title></info>
+        
 
         <para>
             一枚の絵のほうがが千の言葉よりも雄弁なこともあります。
@@ -277,8 +271,7 @@ echo $layout->render();
         </para>
 
          <para>
-            <inlinegraphic align="center" valign="middle"
-                fileref="figures/zend.layout.quickstart.example.png" format="PNG" />
+            <inlinemediaobject><imageobject><imagedata align="center" valign="middle" fileref="figures/zend.layout.quickstart.example.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
         <para>
@@ -288,8 +281,5 @@ echo $layout->render();
             同じことが、サイドバーやヘッダにもいえます。
             しかし、そのコンテンツを作り出すもとの仕組みは同じです。
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

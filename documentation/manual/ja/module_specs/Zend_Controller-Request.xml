@@ -1,10 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21826 -->
-<sect1 id="zend.controller.request">
-    <title>リクエストオブジェクト</title>
-    <sect2 id="zend.controller.request.introduction">
-        <title>導入</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.request"><info><title>リクエストオブジェクト</title></info>
+    
+    <section xml:id="zend.controller.request.introduction"><info><title>導入</title></info>
+        
         <para>
             リクエストオブジェクトとは <classname>Zend_Controller_Front</classname> とルータ、
             ディスパッチャそしてコントローラクラスの間でやり取りされる単純なバリューオブジェクトです。
@@ -66,13 +64,13 @@
             と組み合わせて使用すると、
             <acronym>MVC</acronym> アプリケーションの精密で正確な単体テストが可能となります。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.request.http">
-        <title>HTTP リクエスト</title>
+    <section xml:id="zend.controller.request.http"><info><title>HTTP リクエスト</title></info>
+        
 
-        <sect3 id="zend.controller.request.http.dataacess">
-            <title>リクエストデータへのアクセス</title>
+        <section xml:id="zend.controller.request.http.dataacess"><info><title>リクエストデータへのアクセス</title></info>
+            
 
             <para>
                 <classname>Zend_Controller_Request_Http</classname> は、関連する値へのアクセスをカプセル化します。
@@ -86,8 +84,8 @@
                 パラメータを設定あるいは取得します。
             </para>
 
-            <note>
-                <title>スーバーグローバルデータ</title>
+            <note><info><title>スーバーグローバルデータ</title></info>
+                
                 <para>
                     <classname>Zend_Controller_Request_Http</classname> のパブリックプロパティを使用して
                     スーパーグローバルデータにアクセスする際に注意すべき点は、
@@ -108,8 +106,8 @@
                 を使用します。
             </para>
 
-            <note>
-                <title>GET および POST データ</title>
+            <note><info><title>GET および POST データ</title></info>
+                
                 <para>
                     リクエストオブジェクトのデータを扱う際には注意しましょう。
                     これらのデータは、一切フィルタリングを行っていません。
@@ -118,8 +116,8 @@
                 </para>
             </note>
 
-            <note>
-                <title>生の POST データの取得</title>
+            <note><info><title>生の POST データの取得</title></info>
+                
 
                 <para>
                     1.5.0 以降では、生の投稿データを
@@ -142,8 +140,8 @@
                 リクエストオブジェクトに設定する際にこの機能を使用します。
             </para>
 
-            <note>
-                <title>getParam() でのユーザパラメータ以外の取得</title>
+            <note><info><title>getParam() でのユーザパラメータ以外の取得</title></info>
+                
 
                 <para>
                     <methodname>getParam()</methodname> は、実際にはユーザパラメータ以外のところからも情報を取得しています。
@@ -169,8 +167,8 @@
                 </para>
             </note>
 
-            <note>
-                <title>Apache のおかしな挙動</title>
+            <note><info><title>Apache のおかしな挙動</title></info>
+                
                 <para>
                     Apache の 404 ハンドラを使用して
                     リクエストをフロントコントローラに渡したり、
@@ -198,10 +196,10 @@ $front->setRequest($request);
                     これは、単純にもとのクラスと差し替えて使用できます。
                 </para>
             </note>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.request.http.baseurl">
-            <title>ベース URL およびサブディレクトリ</title>
+        <section xml:id="zend.controller.request.http.baseurl"><info><title>ベース URL およびサブディレクトリ</title></info>
+            
 
             <para>
                 <classname>Zend_Controller_Request_Http</classname> は、
@@ -221,8 +219,8 @@ $front->setRequest($request);
                 <filename>http://example.com/user/martel</filename> の両方にマッチするようになります。
             </para>
 
-            <note>
-                <title>URL の検出は大文字小文字を区別します</title>
+            <note><info><title>URL の検出は大文字小文字を区別します</title></info>
+                
                 <para>
                     自動的なベース <acronym>URL</acronym> の検出処理は大文字小文字を区別します。そのため、
                     <acronym>URL</acronym> とファイルシステムのサブディレクトリ名が確実に一致する必要があります
@@ -254,10 +252,10 @@ $controller->setControllerDirectory('./application/controllers')
 $response   = $controller->dispatch();
 ]]></programlisting>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.request.http.method">
-            <title>リクエストメソッドの判定</title>
+        <section xml:id="zend.controller.request.http.method"><info><title>リクエストメソッドの判定</title></info>
+            
 
             <para>
                 <methodname>getMethod()</methodname> では、
@@ -280,10 +278,10 @@ $response   = $controller->dispatch();
                 これらの主な使用法は、RESTfult な
                 <acronym>MVC</acronym> アーキテクチャを作成することです。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.request.http.ajax">
-            <title>AJAX リクエストの検出</title>
+        <section xml:id="zend.controller.request.http.ajax"><info><title>AJAX リクエストの検出</title></info>
+            
 
             <para>
                 <classname>Zend_Controller_Request_Http</classname> には、
@@ -313,11 +311,11 @@ $response   = $controller->dispatch();
                 自分でこのヘッダを追加することで
                 <methodname>isXmlHttpRequest()</methodname> メソッドの動作を期待通りにできます。
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.controller.request.subclassing">
-        <title>リクエストオブジェクトのサブクラスの作成</title>
+    <section xml:id="zend.controller.request.subclassing"><info><title>リクエストオブジェクトのサブクラスの作成</title></info>
+        
 
         <para>
             すべてのリクエストオブジェクトクラスは、抽象クラス
@@ -425,8 +423,5 @@ abstract class Zend_Controller_Request_Abstract
             例としては、たとえば <link linkend="zend.controller.request.http"><acronym>HTTP</acronym>
             環境用</link> のクラスや <acronym>CLI</acronym> 環境用、<acronym>PHP</acronym>-GTK 環境用のクラスがあります。
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

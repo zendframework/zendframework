@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21741 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.amf.server">
-    <title>Zend_Amf_Server</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.amf.server"><info><title>Zend_Amf_Server</title></info>
+    
 
     <para>
         <classname>Zend_Amf_Server</classname> bietet einen <acronym>RPC</acronym>-artigen Server
@@ -12,8 +10,8 @@
         Interface für die Erstellung von Servern.
     </para>
 
-    <example id="zend.amf.server.basic">
-        <title>AMF Server Grundlagen</title>
+    <example xml:id="zend.amf.server.basic"><info><title>AMF Server Grundlagen</title></info>
+        
 
         <para>
             Angenommen wir haben eine Klasse <classname>Foo</classname> mit einer Anzahl von
@@ -89,8 +87,8 @@ $server->addDirectory(dirname(__FILE__) .'/../package/');
         </para>
     </example>
 
-    <note>
-        <title>Alle angehängten Methoden und Funktionen benötigen einen Docblock</title>
+    <note><info><title>Alle angehängten Methoden und Funktionen benötigen einen Docblock</title></info>
+        
 
         <para>
             Wie alle anderen Serverkomponenten im Zend Framework müssen die Klassenmethoden
@@ -135,8 +133,8 @@ class World
         </para>
     </note>
 
-    <sect2 id="zend.amf.server.flex">
-        <title>Zum Server von Flex aus verbinden</title>
+    <section xml:id="zend.amf.server.flex"><info><title>Zum Server von Flex aus verbinden</title></info>
+        
 
         <para>
             Zum eigenen <classname>Zend_Amf_Server</classname> von einem Flex Projekt aus zu
@@ -272,14 +270,13 @@ myservice.world.hello("Wade");
 ]]></programlisting>
 
         <para>
-            Für weitere Informationen über den Aufruf von Flex RemoteObject, <ulink
-                url="http://livedocs.adobe.com/flex/3/html/help.html?content=data_access_4.html">besuchen
-            Sie die Adobe Flex 3 Hilfeseite</ulink>.
+            Für weitere Informationen über den Aufruf von Flex RemoteObject, <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://livedocs.adobe.com/flex/3/html/help.html?content=data_access_4.html">besuchen
+            Sie die Adobe Flex 3 Hilfeseite</link>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.amf.server.errors">
-        <title>Fehlerbehandlung</title>
+    <section xml:id="zend.amf.server.errors"><info><title>Fehlerbehandlung</title></info>
+        
 
         <para>
             Standardmäßig werden alle Exceptions die in den angehängten Klassen oder Funktionen
@@ -312,8 +309,8 @@ $server->setProduction(false);
 $server->setProduction(true);
 ]]></programlisting>
 
-        <note>
-            <title>Der Produktionsmode sollte sparsam deaktiviert werden!</title>
+        <note><info><title>Der Produktionsmode sollte sparsam deaktiviert werden!</title></info>
+            
 
             <para>
                 Wir empfehlen den Produktionsmode nur wärend der Entwicklung auszuschalten.
@@ -333,10 +330,10 @@ $server->setProduction(true);
             die <property>display_errors</property> Direktive in der Produktion auszuschalten um
             solche Probleme zu verhindern.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.amf.server.response">
-        <title>AMF Antworten</title>
+    <section xml:id="zend.amf.server.response"><info><title>AMF Antworten</title></info>
+        
 
         <para>
             Fallweise ist es gewünscht das Antwortobjekt leicht zu manipulieren, typischerweise um
@@ -344,8 +341,8 @@ $server->setProduction(true);
             Methode des Servers gibt das Antwortobjekt zurück, was es erlaubt das zu tun.
         </para>
 
-        <example id="zend.amf.server.response.messageHeaderExample">
-            <title>Nachrichtenheader der AMF Antwort hinzufügen</title>
+        <example xml:id="zend.amf.server.response.messageHeaderExample"><info><title>Nachrichtenheader der AMF Antwort hinzufügen</title></info>
+            
 
             <para>
                 In diesem Beispiel fügen wir einen 'foo' Nachrichtenheader mit dem Wert 'bar' zu der
@@ -359,10 +356,10 @@ echo $response;
 ]]></programlisting>
 
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.amf.server.typedobjects">
-        <title>Typ Objekte</title>
+    <section xml:id="zend.amf.server.typedobjects"><info><title>Typ Objekte</title></info>
+        
 
         <para>
             Ähnlich wie <acronym>SOAP</acronym>, erlaubt es <acronym>AMF</acronym> Objekte zwischen
@@ -432,7 +429,7 @@ class Contact
         </para>
 
         <para>
-            Einen Rechtsklick auf das src Verzeichnis des Flex Projekts und New -> ActionScript File
+            Einen Rechtsklick auf das src Verzeichnis des Flex Projekts und New -&gt; ActionScript File
             auswählen. Name der Datei ContactVO und finish drücken um die neue Datei zu sehen.
             Den folgenden Code in die Datei kopieren um die Erstellung der Klasse fertigzustellen.
         </para>
@@ -480,10 +477,10 @@ private function getContactHandler(event:ResultEvent):void {
             Alles das bei myContact gebunden ist, wird mit den von ContactVO zurückgegebenen
             Daten aktualisiert.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.amf.server.resources">
-        <title>Ressourcen</title>
+    <section xml:id="zend.amf.server.resources"><info><title>Ressourcen</title></info>
+        
 
         <para>
             <classname>Zend_Amf</classname> bietet Tools für das Mappen von Ressource Typen die
@@ -549,10 +546,10 @@ class Zend_Amf_Parse_Resource_MysqlResult
             Der Versuch einen unbekannten Ressource Typ zurückzugeben (z.B. einen für den kein
             Handler Plugin existiert) führt zu einer Exception.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.amf.server.flash">
-        <title>Von Flash aus auf den Server verbinden</title>
+    <section xml:id="zend.amf.server.flash"><info><title>Von Flash aus auf den Server verbinden</title></info>
+        
 
         <para>
             Auf den <classname>Zend_Amf_Server</classname> vom Flash Projekt aus zu verbinden ist
@@ -660,7 +657,7 @@ connection.connect(gateway);
         <para>
             In der onComplete Funktion, welche ausgeführt wird sobald das Konstrukt fertiggestellt
             wurde, senden wir die Daten zum Server. Wird benötigen eine weitere zusätzliche Zeile
-            die den Aufruf der <classname>Zend_Amf_Server</classname> World->hello Funktion
+            die den Aufruf der <classname>Zend_Amf_Server</classname> World-&gt;hello Funktion
             durchführt.
         </para>
 
@@ -705,10 +702,10 @@ private function onFault(fault:Object):void {
             Server empfängt, und schlußendlich die Anzeige der zurückgegebenen Daten über
             <methodname>trace()</methodname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.amf.server.auth">
-        <title>Authentication</title>
+    <section xml:id="zend.amf.server.auth"><info><title>Authentication</title></info>
+        
 
         <para>
             <classname>Zend_Amf_Server</classname> erlaubt es Authentifizierung und Authorisierungs-
@@ -796,5 +793,5 @@ if($this->_acl->isAllowed($role, $class, $function)) {
     throw new Zend_Amf_Server_Exception("Access not allowed");
 }
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

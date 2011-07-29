@@ -1,15 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="migration.06">
-    <title>Zend Framework 0.6</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.06"><info><title>Zend Framework 0.6</title></info>
+    
 
     <para>
         When upgrading from a previous release to Zend Framework 0.6 or higher you
         should note the following migration notes.
     </para>
 
-    <sect2 id="migration.06.zend.controller">
-        <title>Zend_Controller</title>
+    <section xml:id="migration.06.zend.controller"><info><title>Zend_Controller</title></info>
+        
 
         <para>
             The most basic usage of the <acronym>MVC</acronym> components has not changed; you can
@@ -254,8 +253,5 @@ public function __call($method, $args)
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

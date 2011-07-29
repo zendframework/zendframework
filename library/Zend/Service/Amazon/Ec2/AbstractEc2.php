@@ -199,7 +199,7 @@ abstract class AbstractEc2 extends Amazon\AbstractAmazon
         $parameters['AWSAccessKeyId']   = $this->_getAccessKey();
         $parameters['SignatureVersion'] = $this->_ec2SignatureVersion;
         $parameters['Timestamp']        = gmdate('Y-m-d\TH:i:s\Z');
-        $parameters['Version']          = $this->_ec2ApiVersion;
+        $parameters['Version']          = $this->_ec2ApiVersion;   
         $parameters['SignatureMethod']  = $this->_ec2SignatureMethod;
         $parameters['Signature']        = $this->signParameters($parameters);
 
@@ -266,7 +266,8 @@ abstract class AbstractEc2 extends Amazon\AbstractAmazon
             $node    = $list->item(0);
             $code    = $xpath->evaluate('string(Code/text())', $node);
             $message = $xpath->evaluate('string(Message/text())', $node);
-            throw new Exception\RuntimeException($message, 0, $code);
+            //throw new Exception\RuntimeException($message, 0, $code);
+            throw new Exception\RuntimeException($code.' '.$message);
         }
 
     }

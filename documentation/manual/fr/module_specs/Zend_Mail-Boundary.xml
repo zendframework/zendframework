@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20819 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.boundary">
-    <title>Contrôler les limites MIME</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.boundary"><info><title>Contrôler les limites MIME</title></info>
+    
 
     <para>
         Dans un message en plusieurs parties, une limite <acronym>MIME</acronym> est normalement générée
@@ -11,8 +9,8 @@
         <methodname>setMimeBoundary()</methodname>, comme le montre l'exemple suivant :
     </para>
 
-    <example id="zend.mail.boundary.example-1">
-        <title>Changer la limite MIME</title>
+    <example xml:id="zend.mail.boundary.example-1"><info><title>Changer la limite MIME</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
@@ -20,4 +18,4 @@ $mail->setMimeBoundary('=_' . md5(microtime(1) . $someId++));
 // construction du message...
 ]]></programlisting>
     </example>
-</sect1>
+</section>

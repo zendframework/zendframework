@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20106 -->
-<!-- Reviewed: yes -->
-<sect1 id="learning.quickstart.intro">
-    <title>Zend Framework &amp; wprowadzenie do MVC</title>
+<?xml version="1.0" encoding="utf-8"?>
 
-    <sect2 id="learning.quickstart.intro.zf">
-        <title>Zend Framework</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.intro"><info><title>Zend Framework &amp; wprowadzenie do MVC</title></info>
+    
+
+    <section xml:id="learning.quickstart.intro.zf"><info><title>Zend Framework</title></info>
+        
 
         <para>
             Zend Framework to otwarty, zorientowany obiektowo framework aplikacji webowych
@@ -17,7 +17,7 @@
             (Model-View-Controller - <acronym>MVC</acronym>),
             która może zostać użyta do skonstruowania podstawowej struktury aplikacji.
             Pełna lista komponentów Zend Framework razem z krótkim opisem znajduje się w dziale
-            <ulink url="http://framework.zend.com/about/components">omówienie komponentów</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/about/components">omówienie komponentów</link>.
             Wprowadzenie "QuickStart" stanowi wstęp do poznania najczęściej używanych komponentów
             Zend Framework, takich jak:
             <classname>Zend_Controller</classname>,
@@ -37,22 +37,20 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <ulink
-                    url="http://framework.zend.com/demos/ZendFrameworkQuickstart.zip">zip</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/demos/ZendFrameworkQuickstart.zip">zip</link>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <ulink
-                url="http://framework.zend.com/demos/ZendFrameworkQuickstart.tar.gz">tar.gz</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/demos/ZendFrameworkQuickstart.tar.gz">tar.gz</link>
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.quickstart.intro.mvc">
-        <title>Model-View-Controller</title>
+    <section xml:id="learning.quickstart.intro.mvc"><info><title>Model-View-Controller</title></info>
+        
 
         <para>
             Tak więc, czym dokładnie jest ten będący na ustach wszystkich wzorzec
@@ -73,16 +71,15 @@
             strukturze, zwłaszcza przy projektach wieloosobowych.
         </para>
 
-        <note>
-            <title>Więcej informacji</title>
+        <note><info><title>Więcej informacji</title></info>
+            
 
             <para>
                 Omawiany wzorzec można podzielić na następujące części:
             </para>
 
             <para>
-                <inlinegraphic width="321" scale="100" align="center" valign="middle"
-                    fileref="figures/learning.quickstart.intro.mvc.png" format="PNG" />
+                <inlinemediaobject><imageobject><imagedata width="321" scale="100" align="center" valign="middle" fileref="figures/learning.quickstart.intro.mvc.png" format="PNG"/></imageobject></inlinemediaobject>
             </para>
 
             <itemizedlist>
@@ -111,18 +108,18 @@
                         zostanie zaprezentowany (na podstawie interakcji z użytkownikiem).
                         Odpowiadają także za przekazanie danych do widoków lub przekazanie
                         kontroli do innego kontrolera. Większość ekspertów MVC zaleca
-                    <ulink url="http://weblog.jamisbuck.org/2006/10/18/skinny-controller-fat-model">
-                        tworzenie możliwie jak najmniejszych kontrolerów</ulink>.
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://weblog.jamisbuck.org/2006/10/18/skinny-controller-fat-model">
+                        tworzenie możliwie jak najmniejszych kontrolerów</link>.
                     </para>
                 </listitem>
             </itemizedlist>
 
             <para>
                 Oczywiście, aby zgłębić temat wzorca <acronym>MVC</acronym>
-                <ulink url="http://ootips.org/mvc-pattern.html">należałoby go rozwinąć</ulink>
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ootips.org/mvc-pattern.html">należałoby go rozwinąć</link>
                 ale dla zrozumienia opisywanej aplikacji - księgi gości - powyższy, minimalny
                 opis powinien wystarczyć.
             </para>
         </note>
-    </sect2>
-</sect1>
+    </section>
+</section>

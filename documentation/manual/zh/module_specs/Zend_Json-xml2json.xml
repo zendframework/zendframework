@@ -1,7 +1,8 @@
-<sect1 id="zend.json.xml2json">
-    <title> XML 到 JSON 转换 </title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.xml2json"><info><title> XML 到 JSON 转换 </title></info>
+    
     <para>
-        提供了方便的方法来转换数据格式从 XML 到 JSON。这个功能从一篇 <ulink url="http://www.ibm.com/developerworks/xml/library/x-xml2jsonphp/"> IBM developerWorks 文章 </ulink> 的到启发。
+        提供了方便的方法来转换数据格式从 XML 到 JSON。这个功能从一篇 <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.ibm.com/developerworks/xml/library/x-xml2jsonphp/"> IBM developerWorks 文章 </link> 的到启发。
     </para>
 
     <para>
@@ -9,8 +10,8 @@
     </para>
     <programlisting role="php"><![CDATA[
         // fromXml function simply takes a String containing XML contents as input.
-        $jsonContents = Zend_Json::fromXml($xmlStringContents, true);?>]]>
-    </programlisting>
+        $jsonContents = Zend_Json::fromXml($xmlStringContents, true);?>
+    ]]></programlisting>
 
     <para>
         <code>Zend_Json::fromXml()</code> 函数执行 XML 格式的字符串输入和返回等同的 JSON 格式字符串的输出的转换，如果有任何 XML 输入格式错误或者转换逻辑错误，它将抛出一个异常。转换逻辑也使用递归技术来遍历 XML 树，它支持 25 级递归，如果递归超过这个深度，它将抛出一个 <code>Zend_Json_Exception</code> 。在 Zend Framework 的测试目录里有若干不同复杂度的 XML 文件，可用来测试 xml2json 功能。
@@ -44,8 +45,8 @@
         <author><first>Jack</first><last>Herrington</last></author>
         <publisher>O'Reilly</publisher>
     </book>
-</books> ?>]]>
-    </programlisting>
+</books> ?>
+    ]]></programlisting>
 
     <para>
         从 <code>Zend_Json::fromXml()</code> 函数返回的 JSON 输出字符串:
@@ -81,14 +82,11 @@
          "publisher" : "O'Reilly"
       }
    ]}
-}  ?>]]>
-    </programlisting>
+}  ?>
+    ]]></programlisting>
 
     <para>
-        关于 xml2json 特性的更多信息和以从它自己原始的提案中找到：<ulink url="http://tinyurl.com/2tfa8z">Zend_xml2json 提案 </ulink>。
+        关于 xml2json 特性的更多信息和以从它自己原始的提案中找到：<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://tinyurl.com/2tfa8z">Zend_xml2json 提案 </link>。
     </para>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

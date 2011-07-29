@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22762 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.navigation.pages.custom">
-    <title>Erstellung eigener Seiten Typen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.custom"><info><title>Erstellung eigener Seiten Typen</title></info>
+    
 
     <para>
         Wenn <classname>Zend_Navigation_Page</classname> erweiter wird, besteht normalerweise keine
@@ -16,12 +14,12 @@
         wird zuerst nach einer Methode geschaut die <methodname>setInternalId()</methodname> heißt
         und die Option wird an diese Methode übergeben wenn Sie existiert. Wenn die Methode nicht
         existiert, wird die Option als eigene Eigenschaft der Seite gesetzt, und ist über
-        <command>$internalId = $page->internal_id;</command> oder
-        <command>$internalId = $page->get('internal_id');</command> erreichbar.
+        <command>$internalId = $page-&gt;internal_id;</command> oder
+        <command>$internalId = $page-&gt;get('internal_id');</command> erreichbar.
     </para>
 
-    <example id="zend.navigation.custom.example.simple">
-        <title>Die einfachste eigene Seite</title>
+    <example xml:id="zend.navigation.custom.example.simple"><info><title>Die einfachste eigene Seite</title></info>
+        
 
         <para>
             Das einzige Ding das eine eigene Seite implementieren muß ist die
@@ -39,8 +37,8 @@ class My_Simple_Page extends Zend_Navigation_Page
 ]]></programlisting>
     </example>
 
-    <example id="zend.navigation.custom.example.properties">
-        <title>Eine eigene Seite mit Eigenschaften</title>
+    <example xml:id="zend.navigation.custom.example.properties"><info><title>Eine eigene Seite mit Eigenschaften</title></info>
+        
 
         <para>
             Wenn Eigenschaften an eine erweiterte Seite angefügt werden, gibt es keine
@@ -96,4 +94,4 @@ $page = Zend_Navigation_Page::factory(array(
 ));
 ]]></programlisting>
     </example>
-</sect2>
+</section>

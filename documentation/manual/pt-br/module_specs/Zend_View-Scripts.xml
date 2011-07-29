@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20799 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.view.scripts">
-    <title>Scripts de Visualização</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.scripts"><info><title>Scripts de Visualização</title></info>
+    
 
     <para>
         Uma vez que seu controlador tenha atribuido as variáveis e chamado o método
@@ -15,7 +13,7 @@
     <para>
         Variáveis atribuídas à visualização pelo controlador são referidas como propriedades de
         instância. Por exemplo, se o controlador atribuir a variável 'algumacoisa', você deve
-        referir-se a ela como $this->algumacoisa em seu script de visualização. (Isto permite um
+        referir-se a ela como $this-&gt;algumacoisa em seu script de visualização. (Isto permite um
         rastreamento dos valores que foram atribuidos ao script, e que são internos ao mesmo).
     </para>
 
@@ -50,8 +48,8 @@
 <?php endif;?>
 ]]></programlisting>
 
-    <sect2 id="zend.view.scripts.escaping">
-        <title>Escapando a Saída</title>
+    <section xml:id="zend.view.scripts.escaping"><info><title>Escapando a Saída</title></info>
+        
 
         <para>
             Uma das tarefas mais importantes a ser executada por scripts de visualização é assegurar
@@ -104,10 +102,10 @@ echo $view->render(...);
             A função ou método de callback deverá tomar o valor a ser escapado como seu primeiro
             parâmetro, e os demais parâmetros deverão ser opcionais.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.scripts.templates">
-        <title>Usando Sistemas de Template Alternativos</title>
+    <section xml:id="zend.view.scripts.templates"><info><title>Usando Sistemas de Template Alternativos</title></info>
+        
 
         <para>
             Embora o <acronym>PHP</acronym> em si seja um poderoso sistema de template, muitos
@@ -118,8 +116,8 @@ echo $view->render(...);
             <classname>Zend_View_Interface</classname>.
         </para>
 
-        <sect3 id="zend.view.scripts.templates.scripts">
-            <title>Template Systems Using View Scripts</title>
+        <section xml:id="zend.view.scripts.templates.scripts"><info><title>Template Systems Using View Scripts</title></info>
+            
 
             <para>
                 A view script may be used to instantiate and manipulate a
@@ -174,10 +172,10 @@ if ($this->books) {
 <!-- nobooks.tpl -->
 <p>Não existem livros a serem exibidos.</p>
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.view.scripts.templates.interface">
-            <title>Template Systems Using Zend_View_Interface</title>
+        <section xml:id="zend.view.scripts.templates.interface"><info><title>Template Systems Using Zend_View_Interface</title></info>
+            
 
             <para>
                 Some may find it easier to simply provide a
@@ -458,9 +456,6 @@ class FooController extends Zend_Controller_Action
                      ->setViewSuffix('tpl');
     }
 ]]></programlisting>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

@@ -1,8 +1,11 @@
-<sect1 id="zend.dojo.introduction">
-    <title>简介</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.introduction"><info><title>简介</title></info>
+    
 
     <para>
-        从1.6.0版开始，Zend Framework包含<ulink url="http://dojotoolkit.org">Dojo Toolkit</ulink>
+        从1.6.0版开始，Zend Framework包含<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org">Dojo Toolkit</link>
         来支持  out-of-the-box 的富 internet 程序开发。和 Dojo 集成的包括：
     </para>
 
@@ -21,7 +24,4 @@
         然后包含到你的项目里。另外，你可以使用提供Dojo的Content Delivery Networks 中的一个
         （ZF 支持官方的 AOL CDN 和 Google CDN）。
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

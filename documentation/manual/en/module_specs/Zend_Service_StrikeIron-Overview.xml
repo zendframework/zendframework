@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.service.strikeiron">
-    <title>Zend_Service_StrikeIron</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.strikeiron"><info><title>Zend_Service_StrikeIron</title></info>
+    
 
     <para>
         <classname>Zend_Service_StrikeIron</classname> provides a <acronym>PHP</acronym> 5 client to
@@ -32,11 +31,11 @@
         </itemizedlist>
     </para>
 
-    <sect2 id="zend.service.strikeiron.overview">
-        <title>Overview</title>
+    <section xml:id="zend.service.strikeiron.overview"><info><title>Overview</title></info>
+        
 
         <para>
-            <ulink url="http://www.strikeiron.com">StrikeIron</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.strikeiron.com">StrikeIron</link>
             offers hundreds of commercial data services ("Data as a Service")
             such as Online Sales Tax, Currency Rates, Stock Quotes, Geocodes, Global
             Address Verification, Yellow/White Pages, MapQuest Driving Directions,
@@ -49,12 +48,12 @@
             StrikeIron also manages customer billing for all services in a single
             account, making it perfect for solution providers. Get
             started with free web services at
-            <ulink url="http://www.strikeiron.com/sdp">http://www.strikeiron.com/sdp</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.strikeiron.com/sdp">http://www.strikeiron.com/sdp</link>.
         </para>
 
         <para>
             StrikeIron's services may be used through the
-            <ulink url="http://us.php.net/soap">PHP 5 <acronym>SOAP</acronym> extension</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://us.php.net/soap">PHP 5 <acronym>SOAP</acronym> extension</link>
             alone. However, using StrikeIron this way does not give an ideal
             <acronym>PHP</acronym>-like interface. The
             <classname>Zend_Service_StrikeIron</classname> component provides a lightweight layer on
@@ -102,14 +101,14 @@
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.strikeiron.registering">
-        <title>Registering with StrikeIron</title>
+    <section xml:id="zend.service.strikeiron.registering"><info><title>Registering with StrikeIron</title></info>
+        
 
         <para>
             Before you can get started with <classname>Zend_Service_StrikeIron</classname>, you must
-            first <ulink url="http://strikeiron.com/Register.aspx">register</ulink> for a
+            first <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://strikeiron.com/Register.aspx">register</link> for a
             StrikeIron developer account.
         </para>
 
@@ -120,8 +119,7 @@
         </para>
 
         <para>
-            You will also need to <ulink
-                url="http://www.strikeiron.com/ProductDetail.aspx?p=257">sign up</ulink>
+            You will also need to <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.strikeiron.com/ProductDetail.aspx?p=257">sign up</link>
             for StrikeIron's Super Data Pack Web Service.
         </para>
 
@@ -129,15 +127,15 @@
             Both registration steps are free and can be done relatively quickly through
             the StrikeIron website.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.strikeiron.getting-started">
-        <title>Getting Started</title>
+    <section xml:id="zend.service.strikeiron.getting-started"><info><title>Getting Started</title></info>
+        
 
         <para>
-            Once you have <ulink url="http://strikeiron.com/Register.aspx">registered</ulink>
+            Once you have <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://strikeiron.com/Register.aspx">registered</link>
             for a StrikeIron account and signed up for the
-            <ulink url="http://www.strikeiron.com/ProductDetail.aspx?p=257">Super Data Pack</ulink>,
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.strikeiron.com/ProductDetail.aspx?p=257">Super Data Pack</link>,
             you're ready to start using <classname>Zend_Service_StrikeIron</classname>.
         </para>
 
@@ -150,24 +148,21 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <link
-                        linkend="zend.service.strikeiron.bundled-services.zip-code-information">ZIP
+                    <link linkend="zend.service.strikeiron.bundled-services.zip-code-information">ZIP
                         Code Information</link>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <link
-                        linkend="zend.service.strikeiron.bundled-services.us-address-verification">US
+                    <link linkend="zend.service.strikeiron.bundled-services.us-address-verification">US
                         Address Verification</link>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <link
-                        linkend="zend.service.strikeiron.bundled-services.sales-use-tax-basic">Sales
+                    <link linkend="zend.service.strikeiron.bundled-services.sales-use-tax-basic">Sales
                         &amp; Use Tax Basic</link>
                 </para>
             </listitem>
@@ -203,10 +198,10 @@ $taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
             <link linkend="zend.service.strikeiron.advanced-uses.services-by-wsdl">Using Services by
                 WSDL</link>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.strikeiron.making-first-query">
-        <title>Making Your First Query</title>
+    <section xml:id="zend.service.strikeiron.making-first-query"><info><title>Making Your First Query</title></info>
+        
 
         <para>
             Once you have used the <methodname>getService()</methodname> method to get a client
@@ -230,8 +225,7 @@ echo $rateInfo->GST;
 
         <para>
             In the example above, the <methodname>getService()</methodname> method is used
-            to return a client to the <link
-                linkend="zend.service.strikeiron.bundled-services.sales-use-tax-basic">Sales &amp;
+            to return a client to the <link linkend="zend.service.strikeiron.bundled-services.sales-use-tax-basic">Sales &amp;
                 Use Tax Basic</link> service. The client object is stored in
             <varname>$taxBasic</varname>.
         </para>
@@ -253,23 +247,22 @@ echo $rateInfo->GST;
             <link linkend="zend.service.strikeiron.bundled-services">Bundled Services</link>
             for detailed information on three StrikeIron services.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.strikeiron.examining-results">
-        <title>Examining Results</title>
+    <section xml:id="zend.service.strikeiron.examining-results"><info><title>Examining Results</title></info>
+        
 
         <para>
             When learning or debugging the StrikeIron services, it's often useful to dump the
             result returned from a method call. The result will always be an object that is an
             instance of <classname>Zend_Service_StrikeIron_Decorator</classname>. This is a
-            small <ulink url="http://en.wikipedia.org/wiki/Decorator_pattern">decorator</ulink>
+            small <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Decorator_pattern">decorator</link>
             object that wraps the results from the method call.
         </para>
 
         <para>
             The simplest way to examine a result from the service is to use the built-in
-            <acronym>PHP</acronym> functions like <ulink
-                url="http://www.php.net/print_r">print_r()</ulink>:
+            <acronym>PHP</acronym> functions like <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/print_r">print_r()</link>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -306,9 +299,9 @@ Zend_Service_StrikeIron_Decorator Object
 
         <para>
             This means that <varname>$rateInfo</varname> has public properties like
-            <property>abbreviation</property>, <property>province</property>>, and
+            <property>abbreviation</property>, <property>province</property>&gt;, and
             <constant>GST</constant>. These are accessed like
-            <command>$rateInfo->province</command>.
+            <command>$rateInfo-&gt;province</command>.
         </para>
 
         <tip>
@@ -327,10 +320,10 @@ Zend_Service_StrikeIron_Decorator Object
             respective methods <methodname>getDecoratedObject()</methodname> and
             <methodname>getDecoratedObjectName()</methodname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.strikeiron.handling-errors">
-        <title>Handling Errors</title>
+    <section xml:id="zend.service.strikeiron.handling-errors"><info><title>Handling Errors</title></info>
+        
 
         <para>
             The previous examples are naive, i.e. no error handling was shown.
@@ -387,10 +380,10 @@ try {
         </note>
 
         <para><!-- included for whitespace --></para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.strikeiron.checking-subscription">
-        <title>Checking Your Subscription</title>
+    <section xml:id="zend.service.strikeiron.checking-subscription"><info><title>Checking Your Subscription</title></info>
+        
 
         <para>
             StrikeIron provides many different services. Some of these are
@@ -434,5 +427,5 @@ echo $subscription->remainingHits;
             to override its cache and query the subscription information again, use
             <methodname>getSubscriptionInfo(true)</methodname>.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

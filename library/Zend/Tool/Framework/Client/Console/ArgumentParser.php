@@ -23,6 +23,7 @@
  * @namespace
  */
 namespace Zend\Tool\Framework\Client\Console;
+
 use Zend\Tool\Framework\Client,
     Zend\Tool\Framework\Registry,
     Zend\Tool\Framework\RegistryEnabled,
@@ -45,6 +46,13 @@ class ArgumentParser implements RegistryEnabled
      * @var \Zend\Tool\Framework\Registry
      */
     protected $_registry = null;
+
+    /**
+     * Holds the manifest repository taken from the registry.
+     *
+     * @var Zend_Tool_Framework_Manifest_Repository
+     */
+    protected $_manifestRepository = null;
 
     /**
      * @var \Zend\Tool\Framework\Client\Request
@@ -112,7 +120,7 @@ class ArgumentParser implements RegistryEnabled
     {
 
         if ($this->_request == null || $this->_response == null) {
-            throw new Client\Exception\RuntimeException('The client registry must have both a request and response registered.');
+            throw new Exception\RuntimeException('The client registry must have both a request and response registered.');
         }
 
         // setup the help options
@@ -297,7 +305,10 @@ class ArgumentParser implements RegistryEnabled
         
         // if no action, handle error
         if (!$actionMetadata) {
-            throw new Client\Exception\RuntimeException('Action \'' . $consoleActionName . '\' is not a valid action.');
+            throw new Exception\RuntimeException(sprintf(
+                'Action "%s" is not a valid action.',
+                $consoleActionName
+            ));
         }
 
         // prepare action request name
@@ -348,9 +359,10 @@ class ArgumentParser implements RegistryEnabled
         }
             
         if (!$providerMetadata) {
-            throw new Client\Exception\RuntimeException(
-                'Provider \'' . $consoleProviderFull . '\' is not a valid provider.'
-                );
+            throw new Exception\RuntimeException(sprintf(
+                'Provider "%s" is not a valid provider.',
+                $consoleProviderFull
+            ));
         }
 
         $this->_helpKnownProvider = true;
@@ -379,9 +391,10 @@ class ArgumentParser implements RegistryEnabled
         }
         
         if (!$providerSpecialtyMetadata) {
-            throw new Client\Exception\RuntimeException(
-                'Provider \'' . $consoleSpecialtyName . '\' is not a valid specialty.'
-                );
+            throw new Exception\RuntimeException(sprintf(
+                'Provider "%s" is not a valid specialty.',
+                $consoleSpecialtyName
+            ));
         }
 
         $this->_helpKnownSpecialty = true;

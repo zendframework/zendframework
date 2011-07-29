@@ -1,5 +1,6 @@
-<sect1 id="zend.loader.pluginloader">
-    <title>Caricamento di plugin</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.pluginloader"><info><title>Caricamento di plugin</title></info>
+    
 
     <para>
         Diversi componenti del Framework Zend sono estendibili e permettono il caricamento dinamico di funzionalità specificando un prefisso di classe ed un percorso ai file contenenti le classi che non necessariamente rientra nei percorsi specificati in <code>include_path</code> o segue le convenzioni tradizionali sui nomi di classe.
@@ -13,8 +14,8 @@
         La ricerca di tipo LIFO ed i prefissi di classe consentono di aggiungere namespace ai propri plugin e sovrascrivere plugin da percorsi registrati precedentemente.
     </para>
 
-    <sect2 id="zend.loader.pluginloader.usage">
-        <title>Esempio di utilizzo base</title>
+    <section xml:id="zend.loader.pluginloader.usage"><info><title>Esempio di utilizzo base</title></info>
+        
 
         <para>
             Innanzi tutto, si assuma la seguente struttura di cartelle e file contenenti classi e che le cartelle application e library siano incluse in <code>include_path</code>:
@@ -71,8 +72,8 @@ $formSubmitClass = $loader->load('FormSubmit'); // 'Bar_View_Helper_FormSubmit'
             Una volta che la classe è caricata, è possibile crearne una nuova istanza.
         </para>
 
-        <note>
-            <title>Registrazione di più percorsi per un prefisso</title>
+        <note><info><title>Registrazione di più percorsi per un prefisso</title></info>
+            
 
             <para>
                 In alcuni casi, è necessario utilizzare lo stesso prefisso per percorsi differenti.
@@ -82,8 +83,8 @@ $formSubmitClass = $loader->load('FormSubmit'); // 'Bar_View_Helper_FormSubmit'
             </para>
         </note>
 
-        <note>
-            <title>E' possibile definire i percorsi in fase di creazione di un'istanza</title>
+        <note><info><title>E' possibile definire i percorsi in fase di creazione di un'istanza</title></info>
+            
 
             <para>
                 Opzionalmente è possibile fornire un array di coppie prefisso / percorso
@@ -112,10 +113,10 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
         <para>
             Altri componenti che istanziano <code>PluginLoader</code> utilizzando lo stesso nome di registro avranno accesso a tutti i plugin e percorsi già caricati.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.pluginloader.paths">
-        <title>Manipolazione dei percorsi dei plugin</title>
+    <section xml:id="zend.loader.pluginloader.paths"><info><title>Manipolazione dei percorsi dei plugin</title></info>
+        
 
         <para>
             L'esempio nella sezione precedente mostra come aggiungere percorsi al plugin loader.
@@ -136,10 +137,10 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
                     Se viene indicato <code>$path</code> ed il valore esiste per il dato prefisso, allora verrà rimosso solo quel percorso.
             </para></listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.pluginloader.checks">
-        <title>Verifica di plugin ed estrazione dei nomi delle classi</title>
+    <section xml:id="zend.loader.pluginloader.checks"><info><title>Verifica di plugin ed estrazione dei nomi delle classi</title></info>
+        
 
         <para>
             Qualche volta è necessario determinare semplicemente se la classe di un plugin è stata caricata prima di eseguire un'azione.
@@ -157,8 +158,5 @@ if ($loader->isLoaded('Adapter')) {
     $adapter = call_user_func(array($class, 'getInstance'));
 }
 ?>]]></programlisting>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

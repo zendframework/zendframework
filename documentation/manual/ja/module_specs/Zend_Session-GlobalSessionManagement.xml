@@ -1,25 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21305 -->
-<sect1 id="zend.session.global_session_management">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.global_session_management"><info><title>グローバルセッションの管理</title></info>
 
-    <title>グローバルセッションの管理</title>
+    
 
     <para>
         セッションのデフォルトの挙動を変更するには、<classname>Zend_Session</classname>
         の静的メソッドを使用します。グローバルセッションの管理や操作には、すべて
         <classname>Zend_Session</classname> を使用します。たとえば
-        <ulink url="http://www.php.net/session#session.configuration">
-        ext/session のオプション</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/session#session.configuration">
+        ext/session のオプション</link>
         を設定するには、<methodname>Zend_Session::setOptions()</methodname> を使用します。
         また、安全な <code>save_path</code> を使わなかったり ext/session
         で一意なクッキー名を使用しなかったりすると、
         <methodname>Zend_Session::setOptions()</methodname> はセキュリティの問題を引き起こします。
     </para>
 
-    <sect2 id="zend.session.global_session_management.configuration_options">
+    <section xml:id="zend.session.global_session_management.configuration_options"><info><title>設定オプション</title></info>
 
-        <title>設定オプション</title>
+        
 
         <para>
             セッション名前空間が要求されると、事前に
@@ -38,13 +36,13 @@
             何もオプションを設定しなければ、<classname>Zend_Session</classname> はまずデフォルトオプションを使用し、
             それがなければ php.ini の設定を使用します。
             これらのオプションの扱いについてのよい案があれば、ぜひ
-            <ulink url="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</link>
             で教えてください。
         </para>
 
-        <example id="zend.session.global_session_management.setoptions.example">
+        <example xml:id="zend.session.global_session_management.setoptions.example"><info><title>Zend_Config による Zend_Session の設定</title></info>
 
-            <title>Zend_Config による Zend_Session の設定</title>
+            
 
             <para>
                 このコンポーネントを
@@ -111,7 +109,7 @@ Zend_Session::setOptions($config->toArray());
             上の例であげたほとんどのオプションについては、
             PHP のドキュメントで説明されているので、ここでの説明は不要でしょう。
             しかし、いくつか重要なものについては説明しておきます。
-            <itemizedlist mark='opencircle'>
+            <itemizedlist mark="opencircle">
                 <listitem>
                     <para>
                         boolean <code>strict</code> -
@@ -136,13 +134,13 @@ Zend_Session::setOptions($config->toArray());
                         <classname>Zend_Session</classname> の開始時 (<methodname>start()</methodname> がコールされた場合)
                         に例外をスローします。
                     </para>
-                    <note>
-                        <title>セキュリティリスク</title>
+                    <note><info><title>セキュリティリスク</title></info>
+                        
                         <para>
                             そのパスが他のアプリケーションから読み取り可能になっていると、
                             セッションハイジャックの可能性が生じます。また、
                             他のアプリケーションから書き込み可能になっていると、
-                            <ulink url="http://en.wikipedia.org/wiki/Session_poisoning">セッションポイズニング</ulink>
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Session_poisoning">セッションポイズニング</link>
                             の可能性が生じます。このパスを他のユーザや他の PHP
                             アプリケーションと共有すると、さまざまなセキュリティ問題が発生します。
                             たとえばセッションの内容を盗まれたり、セッションをのっとられたり、
@@ -179,8 +177,8 @@ Zend_Session::setOptions($config->toArray());
                         アプリケーション間で <emphasis>一意</emphasis>
                         な値を開発者側で指定する必要があります。
                     </para>
-                    <note>
-                        <title>セキュリティリスク</title>
+                    <note><info><title>セキュリティリスク</title></info>
+                        
                         <para>
                             <code>php.ini</code> での <code>session.name</code> の設定が同じ
                             (たとえばデフォルトの "PHPSESSID") で、同一ドメインに複数の
@@ -195,8 +193,8 @@ Zend_Session::setOptions($config->toArray());
                         boolean <code>use_only_cookies</code> -
                         以下で説明するセキュリティリスクを回避するため、
                         このオプションはデフォルトのままにしておいてください。
-                        <note>
-                            <title>セキュリティリスク</title>
+                        <note><info><title>セキュリティリスク</title></info>
+                            
                             <para>
                                 もしこの設定を無効にすると、攻撃者は簡単に犠牲者のセッション
                                 ID を盗めるようになります。攻撃者のウェブサイトへから、たとえば
@@ -213,11 +211,11 @@ Zend_Session::setOptions($config->toArray());
             </itemizedlist>
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.global_session_management.headers_sent">
+    <section xml:id="zend.session.global_session_management.headers_sent"><info><title>Error: Headers Already Sent</title></info>
 
-        <title>Error: Headers Already Sent</title>
+        
 
         <para>
             "Cannot modify header information - headers already sent"
@@ -235,7 +233,7 @@ Zend_Session::setOptions($config->toArray());
             <listitem>
                 <para>
                     常に
-                    <ulink url="http://php.net/outcontrol">出力バッファリング</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/outcontrol">出力バッファリング</link>
                     を使用するようにすると、この問題を避けられます。またパフォーマンスも向上するでしょう。
                     たとえば <code>php.ini</code> で "<code>output_buffering = 65535</code>"
                     とすると、64K のバッファで出力バッファリングを行います。
@@ -277,11 +275,11 @@ Zend_Session::setOptions($config->toArray());
             </listitem>
         </itemizedlist>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.global_session_management.session_identifiers">
+    <section xml:id="zend.session.global_session_management.session_identifiers"><info><title>セッション識別子</title></info>
 
-        <title>セッション識別子</title>
+        
 
         <para>
             導入: Zend Framework でセッションを用いる際の最も推奨される方法は、
@@ -347,15 +345,15 @@ Zend_Session::setOptions($config->toArray());
             を使うようにしましょう。
         </para>
 
-        <sect3 id="zend.session.global_session_management.session_identifiers.hijacking_and_fixation">
+        <section xml:id="zend.session.global_session_management.session_identifiers.hijacking_and_fixation"><info><title>セッションハイジャックおよびセッション固定化</title></info>
 
-            <title>セッションハイジャックおよびセッション固定化</title>
+            
 
             <para>
-                <ulink url="http://en.wikipedia.org/wiki/Cross_site_scripting">
-                クロスサイトスクリプト (XSS) 脆弱性</ulink>
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Cross_site_scripting">
+                クロスサイトスクリプト (XSS) 脆弱性</link>
                 を避けることは、セッションハイジャックを防ぐ助けになります。
-                <ulink url="http://secunia.com/">Secunia の統計</ulink>
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://secunia.com/">Secunia の統計</link>
                 によると、XSS 問題は頻繁に発生します。これは、
                 ウェブアプリケーションの開発言語が何であっても同じです。
                 XSS 問題が決して起こらないことを期待するよりも、
@@ -408,7 +406,7 @@ Zend_Session::setOptions($config->toArray());
                 そのリクエストはおそらく攻撃者からのものだと考えられます。
                 しかし、次のような条件のもとでは、ウェブサイトへのアクセスが
                 犠牲者からのものなのか攻撃者からのものなのかを区別する方法はありません。
-                <itemizedlist mark='opencircle'>
+                <itemizedlist mark="opencircle">
                     <listitem>
                         <para>
                             攻撃者が、まずあなたのウェブサイトにアクセスし、
@@ -435,9 +433,9 @@ Zend_Session::setOptions($config->toArray());
                 ただし、上で説明した最初のふたつのステップを実行していない場合に限ります。
             </para>
 
-            <example id="zend.session.global_session_management.session_identifiers.hijacking_and_fixation.example">
+            <example xml:id="zend.session.global_session_management.session_identifiers.hijacking_and_fixation.example"><info><title>セッション固定化</title></info>
 
-                <title>セッション固定化</title>
+                
 
                 <programlisting language="php"><![CDATA[
 $defaultNamespace = new Zend_Session_Namespace();
@@ -450,13 +448,13 @@ if (!isset($defaultNamespace->initialized)) {
 
             </example>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.global_session_management.rememberme">
+    <section xml:id="zend.session.global_session_management.rememberme"><info><title>rememberMe(integer $seconds)</title></info>
 
-        <title>rememberMe(integer $seconds)</title>
+        
 
         <para>
             通常は、セッションが終わるのはユーザエージェントが終了したとき、
@@ -473,11 +471,11 @@ if (!isset($defaultNamespace->initialized)) {
             にこの関数を使用します。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.global_session_management.forgetme">
+    <section xml:id="zend.session.global_session_management.forgetme"><info><title>forgetMe()</title></info>
 
-        <title>forgetMe()</title>
+        
 
         <para>
             この関数は <methodname>rememberMe()</methodname> を補完するものです。
@@ -485,11 +483,11 @@ if (!isset($defaultNamespace->initialized)) {
             ユーザエージェントのセッションが終了したときに有効期限が切れるようにしたものを書き込みます。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.global_session_management.sessionexists">
+    <section xml:id="zend.session.global_session_management.sessionexists"><info><title>sessionExists()</title></info>
 
-        <title>sessionExists()</title>
+        
 
         <para>
             このメソッドを使用して、現在のユーザエージェント/リクエスト
@@ -499,11 +497,11 @@ if (!isset($defaultNamespace->initialized)) {
             のメソッドとは独立しています。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.global_session_management.destroy">
+    <section xml:id="zend.session.global_session_management.destroy"><info><title>destroy(bool $remove_cookie = true, bool $readonly = true)</title></info>
 
-        <title>destroy(bool $remove_cookie = true, bool $readonly = true)</title>
+        
 
         <para>
             <methodname>Zend_Session::destroy()</methodname> は、
@@ -524,7 +522,7 @@ if (!isset($defaultNamespace->initialized)) {
             "Cannot modify header information - headers already sent"
             というエラーが出た場合は、最初の引数として <constant>TRUE</constant>
             (セッションクッキーを削除) を使用しないようにするか、あるいは
-            <xref linkend="zend.session.global_session_management.headers_sent" /> を参照ください。
+            <xref linkend="zend.session.global_session_management.headers_sent"/> を参照ください。
             つまり、<methodname>Zend_Session::destroy(true)</methodname> をコールするなら
             PHP が HTTP ヘッダを送信する前にするか、
             あるいは出力バッファリングを有効にしなければなりません。
@@ -532,8 +530,8 @@ if (!isset($defaultNamespace->initialized)) {
             これにより、<methodname>destroy()</methodname> のコール前に出力が送信されてしまうことを防ぎます。
         </para>
 
-        <note>
-            <title>例外/エラー</title>
+        <note><info><title>例外/エラー</title></info>
+            
             <para>
                 デフォルトでは <code>$readonly</code> が有効になっています。
                 そのため、セッションデータへの書き込みを含む操作を行うと、
@@ -541,11 +539,11 @@ if (!isset($defaultNamespace->initialized)) {
             </para>
         </note>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.global_session_management.stop">
+    <section xml:id="zend.session.global_session_management.stop"><info><title>stop()</title></info>
 
-        <title>stop()</title>
+        
 
         <para>
             このメソッドは、単に <classname>Zend_Session</classname> のフラグを切り替え、
@@ -560,11 +558,11 @@ if (!isset($defaultNamespace->initialized)) {
             例外をスローします。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.global_session_management.writeclose">
+    <section xml:id="zend.session.global_session_management.writeclose"><info><title>writeClose($readonly = true)</title></info>
 
-        <title>writeClose($readonly = true)</title>
+        
 
         <para>
             セッションを終了して内容を書き込んだ後に、
@@ -575,8 +573,8 @@ if (!isset($defaultNamespace->initialized)) {
             のメソッドから書き込みを試みると、例外をスローします)。
         </para>
 
-        <note>
-            <title>例外/エラー</title>
+        <note><info><title>例外/エラー</title></info>
+            
             <para>
                 デフォルトでは <code>$readonly</code> が有効になっています。
                 そのため、セッションデータへの書き込みを含む操作を行うと、
@@ -589,11 +587,11 @@ if (!isset($defaultNamespace->initialized)) {
             </para>
         </note>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.global_session_management.expiresessioncookie">
+    <section xml:id="zend.session.global_session_management.expiresessioncookie"><info><title><code>expireSessionCookie()</code></title></info>
 
-        <title><code>expireSessionCookie()</code></title>
+        
 
         <para>
             このメソッドは、有効期限切れのセッション ID クッキーを送信し、
@@ -601,33 +599,33 @@ if (!isset($defaultNamespace->initialized)) {
             このテクニックを用いて、クライアント側でのログアウト機能を実現することもあります。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.global_session_management.savehandler">
+    <section xml:id="zend.session.global_session_management.savehandler"><info><title>setSaveHandler(Zend_Session_SaveHandler_Interface $interface)</title></info>
 
-        <title>setSaveHandler(Zend_Session_SaveHandler_Interface $interface)</title>
+        
 
         <para>
             ほとんどの開発者にとっては、デフォルトの保存ハンドラで十分でしょう。
             このメソッドは、
-            <ulink url="http://php.net/session_set_save_handler"><methodname>session_set_save_handler()</methodname></ulink>
-            <ulink url="http://php.net/session_set_save_handler">session_set_save_handler()</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/session_set_save_handler"><methodname>session_set_save_handler()</methodname></link>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/session_set_save_handler">session_set_save_handler()</link>
             のオブジェクト指向ラッパーです。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.global_session_management.namespaceisset">
+    <section xml:id="zend.session.global_session_management.namespaceisset"><info><title>namespaceIsset($namespace)</title></info>
 
-        <title>namespaceIsset($namespace)</title>
+        
 
         <para>
             このメソッドを使用して、セッション名前空間が存在するかどうかを調べます。
             あるいは、特定の名前空間に特定のインデックスが存在するかどうかを調べます。
         </para>
 
-        <note>
-            <title>例外/エラー</title>
+        <note><info><title>例外/エラー</title></info>
+            
             <para>
                 <classname>Zend_Session</classname> が読み取り可能に設定されていない場合
                 (<classname>Zend_Session</classname> が開始される前など)
@@ -635,11 +633,11 @@ if (!isset($defaultNamespace->initialized)) {
             </para>
         </note>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.global_session_management.namespaceunset">
+    <section xml:id="zend.session.global_session_management.namespaceunset"><info><title>namespaceUnset($namespace)</title></info>
 
-        <title>namespaceUnset($namespace)</title>
+        
 
         <para>
             <methodname>Zend_Session::namespaceUnset($namespace)</methodname> を使用すると、
@@ -652,12 +650,12 @@ if (!isset($defaultNamespace->initialized)) {
             によって名前空間のエントリの内容が "深いレベルまで"
             実際に削除されることはありません。
             さらに詳細な情報は、PHP マニュアルでの
-            <ulink url="http://php.net/references">参照に関する説明</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/references">参照に関する説明</link>
             を参照ください。
         </para>
 
-        <note>
-            <title>例外/エラー</title>
+        <note><info><title>例外/エラー</title></info>
+            
             <para>
                 名前空間が読み取り可能に設定されていない場合
                 (<methodname>destroy()</methodname> の後など)
@@ -665,24 +663,24 @@ if (!isset($defaultNamespace->initialized)) {
             </para>
         </note>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.global_session_management.namespaceget">
+    <section xml:id="zend.session.global_session_management.namespaceget"><info><title>namespaceGet($namespace)</title></info>
 
-        <title>namespaceGet($namespace)</title>
+        
 
         <para>
             非推奨: <classname>Zend_Session_Namespace</classname> の <methodname>getIterator()</methodname>
             を使用しましょう。このメソッドは、<code>$namespace</code>
             の内容を配列で返します。このメソッドを外部から使用し続けたいという
             論理的な理由がある場合は、メーリングリスト
-            <ulink url="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</link>
             にフィードバックをお願いします。
             ……っていうか、どんなネタでもいいのでメーリングリストに参加してください (^o^)
         </para>
 
-        <note>
-            <title>例外/エラー</title>
+        <note><info><title>例外/エラー</title></info>
+            
             <para>
                 <classname>Zend_Session</classname> が読み取り可能に設定されていない場合
                 (<classname>Zend_Session</classname> が開始される前など)
@@ -690,18 +688,18 @@ if (!isset($defaultNamespace->initialized)) {
             </para>
         </note>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.global_session_management.getiterator">
+    <section xml:id="zend.session.global_session_management.getiterator"><info><title>getIterator()</title></info>
 
-        <title>getIterator()</title>
+        
 
         <para>
             <methodname>getIterator()</methodname> を使用して、全名前空間の名前を含む配列を取得します。
         </para>
 
-        <note>
-            <title>例外/エラー</title>
+        <note><info><title>例外/エラー</title></info>
+            
             <para>
                 <classname>Zend_Session</classname> が読み取り可能に設定されていない場合
                 (<classname>Zend_Session</classname> が開始される前など)
@@ -709,6 +707,6 @@ if (!isset($defaultNamespace->initialized)) {
             </para>
         </note>
 
-    </sect2>
+    </section>
 
-</sect1>
+</section>

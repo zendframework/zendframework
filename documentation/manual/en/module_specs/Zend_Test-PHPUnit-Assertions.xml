@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.test.phpunit.assertions">
-    <title>Assertions</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.assertions"><info><title>Assertions</title></info>
+    
 
     <para>
         Assertions are at the heart of Unit Testing; you use them to verify
@@ -10,8 +11,8 @@
         assertions to make testing your <acronym>MVC</acronym> apps and controllers simpler.
     </para>
 
-    <sect3 id="zend.test.phpunit.assertions.query">
-        <title>CSS Selector Assertions</title>
+    <section xml:id="zend.test.phpunit.assertions.query"><info><title>CSS Selector Assertions</title></info>
+        
 
         <para>
             <acronym>CSS</acronym> selectors are an easy way to verify that certain artifacts are
@@ -23,13 +24,11 @@
         </para>
 
         <para>
-            This functionality is provided via <link
-                linkend="zend.dom.query">Zend_Dom_Query</link>, and integrated
+            This functionality is provided via <link linkend="zend.dom.query">Zend_Dom_Query</link>, and integrated
             into a set of 'Query' assertions. Each of these assertions takes
             as their first argument a <acronym>CSS</acronym> selector, with optionally additional
             arguments and/or an error message, based on the assertion type. You
-            can find the rules for writing the <acronym>CSS</acronym> selectors in the <link
-                linkend="zend.dom.query.operation">Zend_Dom_Query theory of
+            can find the rules for writing the <acronym>CSS</acronym> selectors in the <link linkend="zend.dom.query.operation">Zend_Dom_Query theory of
                 operation chapter</link>. Query assertions include:
         </para>
 
@@ -106,15 +105,14 @@
             max counts do not have these variants, for what should be obvious
             reasons.)
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.test.phpunit.assertions.xpath">
-        <title>XPath Assertions</title>
+    <section xml:id="zend.test.phpunit.assertions.xpath"><info><title>XPath Assertions</title></info>
+        
 
         <para>
             Some developers are more familiar with XPath than with <acronym>CSS</acronym>
-            selectors, and thus XPath variants of all the <link
-                linkend="zend.test.phpunit.assertions.query">Query
+            selectors, and thus XPath variants of all the <link linkend="zend.test.phpunit.assertions.query">Query
                 assertions</link> are also provided. These are:
         </para>
 
@@ -182,10 +180,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.test.phpunit.assertions.redirect">
-        <title>Redirect Assertions</title>
+    <section xml:id="zend.test.phpunit.assertions.redirect"><info><title>Redirect Assertions</title></info>
+        
 
         <para>
             Often an action will redirect. Instead of following the redirect,
@@ -242,10 +240,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.test.phpunit.assertions.header">
-        <title>Response Header Assertions</title>
+    <section xml:id="zend.test.phpunit.assertions.header"><info><title>Response Header Assertions</title></info>
+        
 
         <para>
             In addition to checking for redirect headers, you will often need
@@ -291,10 +289,10 @@
             Additionally, each of the above assertions have a 'Not' variant for
             negative assertions.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.test.phpunit.assertions.request">
-        <title>Request Assertions</title>
+    <section xml:id="zend.test.phpunit.assertions.request"><info><title>Request Assertions</title></info>
+        
 
         <para>
             It's often useful to assert against the last run action,
@@ -337,8 +335,5 @@
         <para>
             Each also has a 'Not' variant for negative assertions.
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

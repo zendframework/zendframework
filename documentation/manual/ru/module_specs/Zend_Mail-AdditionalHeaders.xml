@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.additional-headers">
-    <title>Дополнительные заголовки</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.additional-headers"><info><title>Дополнительные заголовки</title></info>
+    
     <para>
         Любые заголовки сообщений электронной почты могут быть установлены с
         помощью метода <methodname>addHeader()</methodname>. Он требует передачи
@@ -9,8 +8,8 @@
         Третий необязательный параметр определяет, должен ли заголовок
         иметь одно или несколько значений:
     </para>
-    <example id="zend.mail.additional-headers.example-1">
-        <title>Добавление заголовков сообщений</title>
+    <example xml:id="zend.mail.additional-headers.example-1"><info><title>Добавление заголовков сообщений</title></info>
+        
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 $mail->addHeader('X-MailGenerator', 'MyCoolApplication');
@@ -25,7 +24,4 @@ $mail->addHeader('X-greetingsTo', 'Dad', true);
         требуется дополнительное экранирование различных частей (e-mail и имя).
     </para>
     
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

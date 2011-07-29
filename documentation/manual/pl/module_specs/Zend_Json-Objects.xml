@@ -1,5 +1,6 @@
-<sect1 id="zend.json.objects">
-    <title>Obiekty JSON</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.objects"><info><title>Obiekty JSON</title></info>
+    
     <para>
         Kiedy kodujemy obiekt PHP jako JSON, wszystkie publiczne właściwości
         tego obiektu zostaną zakodowane w obiekcie JSON.
@@ -27,8 +28,8 @@
     <programlisting role="php"><![CDATA[
 // Odkoduj obiekty JSON jako obiekty PHP
 $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
-]]>
-    </programlisting>
+
+    ]]></programlisting>
     <para>
         Wszystkie dekodowane obiekty są zwracane jako obiekty klasy
         <code>StdClass</code> z właściwościami odpowiadającymi parom
@@ -40,7 +41,4 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
         typu, może być on utworzony w kodzie aplikacji, a następnie wypełniony
         wartościami odkodowanymi za pomocą <code>Zend_Json</code>.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

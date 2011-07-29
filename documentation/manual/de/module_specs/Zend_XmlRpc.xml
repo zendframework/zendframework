@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17062 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.xmlrpc.introduction">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.xmlrpc.introduction"><info><title>Einführung</title></info>
+    
     <para>
-        Auf der <ulink url="http://www.xmlrpc.com/">home page</ulink> wird
+        Auf der <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.xmlrpc.com/">home page</link> wird
         <acronym>XML-RPC</acronym> beschrieben als "entfernter Prozeduraufruf ("remote procedure
         call"), der <acronym>HTTP</acronym> für die Übertragung und <acronym>XML</acronym> für die
         Kodierung verwendet. <acronym>XML-RPC</acronym> wurde so einfach wie möglich entwickelt,
@@ -17,7 +17,4 @@
         <acronym>XML-RPC</acronym> Diensten als auch für die Erstellung neuer
         <acronym>XML-RPC</acronym> Server bereit.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

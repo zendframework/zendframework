@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.actionhelpers.redirector">
-    <title>Redirector</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.redirector"><info><title>Redirector</title></info>
+    
 
-    <sect4 id="zend.controller.actionhelper.redirector.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.controller.actionhelper.redirector.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             The <emphasis>Redirector</emphasis> helper allows you to use a redirector
@@ -128,13 +127,13 @@
             Finally, you can determine the current redirect <acronym>URL</acronym> at any time
             using <methodname>getRedirectUrl()</methodname>.
         </para>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelper.redirector.basicusage">
-        <title>Basic Usage Examples</title>
+    <section xml:id="zend.controller.actionhelper.redirector.basicusage"><info><title>Basic Usage Examples</title></info>
+        
 
-        <example id="zend.controller.actionhelper.redirector.basicusage.example-1">
-            <title>Setting Options</title>
+        <example xml:id="zend.controller.actionhelper.redirector.basicusage.example-1"><info><title>Setting Options</title></info>
+            
 
             <para>
                 This example overrides several options, including setting the
@@ -179,8 +178,8 @@ class SomeController extends Zend_Controller_Action
 ]]></programlisting>
         </example>
 
-        <example id="zend.controller.actionhelper.redirector.basicusage.example-2">
-            <title>Using Defaults</title>
+        <example xml:id="zend.controller.actionhelper.redirector.basicusage.example-2"><info><title>Using Defaults</title></info>
+            
 
             <para>
                 This example assumes that the defaults are used, which means
@@ -216,8 +215,8 @@ class AlternativeController extends Zend_Controller_Action
 ]]></programlisting>
         </example>
 
-        <example id="zend.controller.actionhelper.redirector.basicusage.example-3">
-            <title>Using goto()'s _forward() API</title>
+        <example xml:id="zend.controller.actionhelper.redirector.basicusage.example-3"><info><title>Using goto()'s _forward() API</title></info>
+            
 
             <para>
                 <methodname>gotoSimple()</methodname>'s <acronym>API</acronym> mimics that of
@@ -261,12 +260,11 @@ class ForwardController extends Zend_Controller_Action
 ]]></programlisting>
         </example>
 
-        <example id="zend.controller.actionhelper.redirector.basicusage.example-4">
-            <title>Using Route Assembly with gotoRoute()</title>
+        <example xml:id="zend.controller.actionhelper.redirector.basicusage.example-4"><info><title>Using Route Assembly with gotoRoute()</title></info>
+            
 
             <para>
-                The following example uses the <link
-                    linkend="zend.controller.router">router's</link>
+                The following example uses the <link linkend="zend.controller.router">router's</link>
                 <methodname>assemble()</methodname> method to create a <acronym>URL</acronym>
                 based on an associative array of parameters passed. It assumes the following
                 route has been registered:
@@ -320,8 +318,5 @@ class BlogAdminController extends Zend_Controller_Action
 }
 ]]></programlisting>
         </example>
-    </sect4>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

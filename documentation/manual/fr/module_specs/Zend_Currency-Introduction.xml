@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 21040 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.currency.introduction">
-    <title>Introduction à Zend_Currency</title>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.introduction"><info><title>Introduction à Zend_Currency</title></info>
+    
 
     <para>
         <classname>Zend_Currency</classname> est une partie du coeur de l'i18n
@@ -11,11 +11,11 @@
         services d'échange et les calculs.
     </para>
 
-    <sect2 id="zend.currency.introduction.list">
-        <title>Pourquoi devriez-vous utiliser Zend_Currency&#160;?</title>
+    <section xml:id="zend.currency.introduction.list"><info><title>Pourquoi devriez-vous utiliser Zend_Currency ?</title></info>
+        
 
         <para>
-            <classname>Zend_Currency</classname> voues offre les bénéfices suivants&#160;:
+            <classname>Zend_Currency</classname> voues offre les bénéfices suivants :
         </para>
 
         <itemizedlist mark="opencircle">
@@ -65,5 +65,5 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

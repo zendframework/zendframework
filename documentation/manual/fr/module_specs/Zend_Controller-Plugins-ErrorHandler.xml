@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.plugins.standard.errorhandler">
-    <title>Zend_Controller_Plugin_ErrorHandler</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.plugins.standard.errorhandler"><info><title>Zend_Controller_Plugin_ErrorHandler</title></info>
+    
 
     <para>
         <classname>Zend_Controller_Plugin_ErrorHandler</classname> est un plugin intégré par défaut
@@ -12,7 +10,7 @@
         <link linkend="zend.controller.exceptions">Exceptions MVC</link>.
     </para>
 
-    <para>Les principaux objectifs de ce plugin sont&#160;:</para>
+    <para>Les principaux objectifs de ce plugin sont :</para>
 
     <itemizedlist>
          <listitem>
@@ -39,7 +37,7 @@
     <para>
         Par défaut, <classname>Zend_Controller_Plugin_ErrorHandler</classname> redirige vers
         <methodname>ErrorController::errorAction()</methodname> dans le module par défaut. Vous
-        pouvez passer d'autres valeurs via les accesseurs du plugin&#160;:
+        pouvez passer d'autres valeurs via les accesseurs du plugin :
     </para>
 
     <itemizedlist>
@@ -87,8 +85,8 @@
         de réponse.
     </para>
 
-    <sect4 id="zend.controller.plugins.standard.errorhandler.fourohfour">
-        <title>Utilisation de ErrorHandler pour gérer les erreurs 404</title>
+    <section xml:id="zend.controller.plugins.standard.errorhandler.fourohfour"><info><title>Utilisation de ErrorHandler pour gérer les erreurs 404</title></info>
+        
 
         <para>
             Comme <emphasis>ErrorHandler</emphasis> capture les exceptions relatives à un problème
@@ -113,7 +111,7 @@ class ErrorController extends Zend_Controller_Action
 
         <para>
             Une fois que vous possédez l'objet contenant l'exception, inspectez son type avec
-            <command>$errors->type;</command>. Des constantes sont à votre disposition&#160;:
+            <command>$errors-&gt;type;</command>. Des constantes sont à votre disposition :
         </para>
 
         <itemizedlist>
@@ -143,7 +141,7 @@ class ErrorController extends Zend_Controller_Action
             </listitem>
         </itemizedlist>
 
-        <para>Les trois premiers types pourraient mener à une erreur 404&#160;:</para>
+        <para>Les trois premiers types pourraient mener à une erreur 404 :</para>
 
         <programlisting language="php"><![CDATA[
 class ErrorController extends Zend_Controller_Action
@@ -173,7 +171,7 @@ class ErrorController extends Zend_Controller_Action
         <para>
             Enfin, il est possible de récupérer l'exception ayant menée au contrôleur
             d'erreur. Ceci afin de l'analyser. L'attribut <property>exception</property> de
-            l'objet <emphasis>error_handler</emphasis> le permet&#160;:
+            l'objet <emphasis>error_handler</emphasis> le permet :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -210,10 +208,10 @@ public function errorAction()
         }
 }
 ]]></programlisting>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.plugins.standard.errorhandler.buffer">
-        <title>Gestion des rendus précédants de la réponse</title>
+    <section xml:id="zend.controller.plugins.standard.errorhandler.buffer"><info><title>Gestion des rendus précédants de la réponse</title></info>
+        
 
         <para>
             Si vous décomposez vos processus en plusieurs actions ou plusieurs appels à
@@ -225,19 +223,19 @@ public function errorAction()
         <para>
             Si vous désirez rendre votre contrôleur d'erreur dans ce contenu, alors il n'y a
             rien à faire de spécial. En revanche, il peut aussi être judicieux de vider totalement
-            la réponse afin de rendre le contrôleur d'erreurs. Procédez alors comme suit&#160;:
+            la réponse afin de rendre le contrôleur d'erreurs. Procédez alors comme suit :
         </para>
 
         <programlisting language="php"><![CDATA[
 $this->getResponse()->clearBody();
 ]]></programlisting>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.plugins.standard.errorhandler.examples">
-        <title>Exemples d'utilisation</title>
+    <section xml:id="zend.controller.plugins.standard.errorhandler.examples"><info><title>Exemples d'utilisation</title></info>
+        
 
-        <example id="zend.controller.plugins.standard.errorhandler.examples.example-1">
-            <title>Utilisation standard et désactivation</title>
+        <example xml:id="zend.controller.plugins.standard.errorhandler.examples.example-1"><info><title>Utilisation standard et désactivation</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
@@ -245,8 +243,8 @@ $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler());
 ]]></programlisting>
         </example>
 
-        <example id="zend.controller.plugins.standard.errorhandler.examples.example-2">
-            <title>Paramétrage du plugin</title>
+        <example xml:id="zend.controller.plugins.standard.errorhandler.examples.example-2"><info><title>Paramétrage du plugin</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
@@ -258,8 +256,8 @@ $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler(array(
 ]]></programlisting>
         </example>
 
-        <example id="zend.controller.plugins.standard.errorhandler.examples.example-3">
-            <title>Utilisation des accesseurs</title>
+        <example xml:id="zend.controller.plugins.standard.errorhandler.examples.example-3"><info><title>Utilisation des accesseurs</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $plugin = new Zend_Controller_Plugin_ErrorHandler();
@@ -271,14 +269,14 @@ $front = Zend_Controller_Front::getInstance();
 $front->registerPlugin($plugin);
 ]]></programlisting>
         </example>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.plugins.standard.errorhandler.controllerexamples">
-        <title>Exemple de contrôleur d'erreurs</title>
+    <section xml:id="zend.controller.plugins.standard.errorhandler.controllerexamples"><info><title>Exemple de contrôleur d'erreurs</title></info>
+        
 
         <para>
             Pour utiliser le plugin de gestion d'erreurs, un contrôleur d'erreurs est
-            requis. En voici un exemple&#160;:
+            requis. En voici un exemple :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -316,5 +314,5 @@ EOH;
     }
 }
 ]]></programlisting>
-    </sect4>
-</sect3>
+    </section>
+</section>

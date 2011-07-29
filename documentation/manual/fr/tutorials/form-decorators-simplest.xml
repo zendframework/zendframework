@@ -1,19 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19999 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.form.decorators.simplest">
-    <title>Les bases des décorateurs</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.form.decorators.simplest"><info><title>Les bases des décorateurs</title></info>
+    
 
-    <sect2 id="learning.form.decorators.simplest.decorator-overview">
-        <title>Aperçu du pattern décorateur</title>
+    <section xml:id="learning.form.decorators.simplest.decorator-overview"><info><title>Aperçu du pattern décorateur</title></info>
+        
 
         <para>
-            Pour commencer, nous allons voir un peu de théorie sur <ulink
-                url="http://en.wikipedia.org/wiki/Decorator_pattern">le pattern décorateur
-                </ulink>. Une technique consiste à définir une interface commune que les
-            objets originaux et les décorateurs implémentent&#160;; les décorateurs ayant comme
+            Pour commencer, nous allons voir un peu de théorie sur <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Decorator_pattern">le pattern décorateur
+                </link>. Une technique consiste à définir une interface commune que les
+            objets originaux et les décorateurs implémentent ; les décorateurs ayant comme
             dépendance les objets originaux, ils vont alors pouvoir redéfinir ou proxier
-            les appels à leurs méthodes. Voyons un peu de code afin de mieux comprendre&#160;:
+            les appels à leurs méthodes. Voyons un peu de code afin de mieux comprendre :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -81,7 +78,7 @@ class LockedWindow implements Window
             fenêtre a maintenant changé. Le point fort ici est que nous n'avons pas besoin
             d'implémenter une fonctionnalité de verrou ("lock") dans l'objet de base
             (StandardWindow) -- le décorateur s'occupe de cela. En plus, vous pouvez utiliser
-            votre fenêtre décorée à la place de la fenêtre standard&#160;: elles implémentent
+            votre fenêtre décorée à la place de la fenêtre standard : elles implémentent
             la même interface.
         </para>
 
@@ -94,8 +91,7 @@ class LockedWindow implements Window
         </para>
 
         <para>
-            Dans cet exemple particulier, nous allons utiliser le <ulink
-                url="http://en.wikipedia.org/wiki/Duck_typing">duck typing</ulink> plutôt qu'une
+            Dans cet exemple particulier, nous allons utiliser le <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Duck_typing">duck typing</link> plutôt qu'une
             interface explicite. Ceci permet à notre implémentation d'être un peu plus fléxible
             tout en gardant l'utilisation de la décoration intacte.
         </para>
@@ -153,10 +149,10 @@ class TextPerson
             decorateurs à qui il passe lui-même pour effectuer le rendu visuel. Les décorateurs
             peuvent ainsi accéder à l'élément et en créer une représentation.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.form.decorators.simplest.first-decorator">
-        <title>Créer votre premier décorateur</title>
+    <section xml:id="learning.form.decorators.simplest.first-decorator"><info><title>Créer votre premier décorateur</title></info>
+        
 
         <para>
             Les décorateurs de <classname>Zend_Form</classname> implémentent tous,
@@ -172,7 +168,7 @@ class TextPerson
             Imaginons une situation dans laquelle nous souhaitons simplement rendre un élément
             comme un tag html text avec un libellé (label). Juste la base, nous verrons plus tard
             la gestion des erreurs et les éventuels autres tags html. Un tel décorateur pourrait
-            ressembler à ça&#160;:
+            ressembler à ça :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -196,7 +192,7 @@ class My_Decorator_SimpleInput extends Zend_Form_Decorator_Abstract
 ]]></programlisting>
 
         <para>
-            Créons un élément qui utilise ce décorateur&#160;:
+            Créons un élément qui utilise ce décorateur :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -210,7 +206,7 @@ $element   = new Zend_Form_Element('foo', array(
 ]]></programlisting>
 
         <para>
-            Le visuel de cet élément donne&#160;:
+            Le visuel de cet élément donne :
         </para>
 
         <programlisting language="html"><![CDATA[
@@ -221,7 +217,7 @@ $element   = new Zend_Form_Element('foo', array(
         <para>
             Nous pourrions aussi ranger cette classe dans un dossier de librairie, il
             faut alors informer l'élément du chemin vers ce dossier, et ensuite faire
-            référence au décorateur comme "SimpleInput"&#160;:
+            référence au décorateur comme "SimpleInput" :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -245,5 +241,5 @@ $element = new Zend_Form_Element('foo', array(
             Dans le chapitre suivant, nous allons voir comment combiner les décorateurs
             afin de créer un affichage par morceaux (composite).
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -90,7 +90,7 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
 
     public function testToString()
     {
-        $adapter = new Adapter\ArrayAdapter(array('msg1' => 'Message 1 (en)', 'msg2' => 'Message 2 (en)', 'msg3' => 'Message 3 (en)'));
+        $adapter = new Adapter\ArrayAdapter(array('msg1' => 'Message 1 (en)', 'msg2' => 'Message 2 (en)', 'msg3' => 'Message 3 (en)'), 'de');
         $this->assertEquals('ArrayAdapter', $adapter->toString());
     }
 

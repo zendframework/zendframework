@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20819 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.multiple-emails">
-    <title>Versand von mehreren E-Mails über eine SMTP Verbindung</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.multiple-emails"><info><title>Versand von mehreren E-Mails über eine SMTP Verbindung</title></info>
+    
 
     <para>
         Standardmäßig erstellt ein einzelner SMTP Transport eine einzelne Verbindung und verwendet
@@ -21,8 +19,8 @@
         und <methodname>clearDefaultReplyTo</methodname> durchgeführt werden.
     </para>
 
-    <example id="zend.mail.multiple-emails.example-1">
-        <title>Versand von mehreren E-Mails über eine SMTP Verbindung</title>
+    <example xml:id="zend.mail.multiple-emails.example-1"><info><title>Versand von mehreren E-Mails über eine SMTP Verbindung</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 // Transport erstellen
@@ -59,8 +57,8 @@ Zend_Mail::clearDefaultReplyTo();
         Protokoll Objekt des Transportes, manipuliert werden.
     </para>
 
-    <example id="zend.mail.multiple-emails.example-2">
-        <title>Die Transportverbindung manuell kontrollieren</title>
+    <example xml:id="zend.mail.multiple-emails.example-2"><info><title>Die Transportverbindung manuell kontrollieren</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 // Transport erstellen
@@ -91,4 +89,4 @@ $protocol->quit();
 $protocol->disconnect();
 ]]></programlisting>
     </example>
-</sect1>
+</section>

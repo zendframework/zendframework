@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21586 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.feed.modifying-feed">
-    <title>Verändern der Feed- und Eintragsstruktur</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.modifying-feed"><info><title>Verändern der Feed- und Eintragsstruktur</title></info>
+    
 
     <para>
         Die natürliche Syntax von <classname>Zend_Feed</classname> wurde für das Erstellen und
@@ -11,8 +9,8 @@
         Datei zu speichern oder an einen Server zu senden.
     </para>
 
-    <example id="zend.feed.modifying-feed.example.modifying">
-        <title>Verändern eines bestehenden Feed Eintrags</title>
+    <example xml:id="zend.feed.modifying-feed.example.modifying"><info><title>Verändern eines bestehenden Feed Eintrags</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
@@ -48,8 +46,8 @@ echo $entry->saveXML();
         du nicht explizit einen anderen Namensraum festgelegt hast.
     </para>
 
-    <example id="zend.feed.modifying-feed.example.creating">
-        <title>Erstellen eines Atom Eintrags mit Elementen eines eigenen Namensraumes</title>
+    <example xml:id="zend.feed.modifying-feed.example.creating"><info><title>Erstellen eines Atom Eintrags mit Elementen eines eigenen Namensraumes</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $entry = new Zend_Feed_Entry_Atom();
@@ -68,4 +66,4 @@ $entry->{'myns:container_elt'}->part2 = 'Zweiter verschachtelter Teil';
 echo $entry->saveXML();
 ]]></programlisting>
     </example>
-</sect1>
+</section>

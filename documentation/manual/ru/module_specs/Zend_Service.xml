@@ -1,5 +1,8 @@
-<sect1 id="zend.service.introduction">
-    <title>Введение</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.introduction"><info><title>Введение</title></info>
+    
     <para>
         <code>Zend_Service</code> является абстрактным классом, который используется
         в качестве основы для реализации веб-сервисов, таких, как SOAP или REST.
@@ -38,7 +41,4 @@
         are coming in the future.
 -->
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

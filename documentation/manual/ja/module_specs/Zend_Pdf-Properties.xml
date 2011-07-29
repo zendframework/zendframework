@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20872 -->
-<sect1 id="zend.pdf.info">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.info"><info><title>ドキュメントの情報およびメタデータ</title></info>
     <!-- @todo review and revise upon completion of refactoring -->
-    <title>ドキュメントの情報およびメタデータ</title>
+    
     <para>
         <acronym>PDF</acronym> ドキュメントには、そのドキュメントに関する情報
         (たとえばタイトルや作者、作成日、更新日など)
@@ -177,7 +175,7 @@ $pdf->save($pdfPath);
 
     <para>
         <acronym>PDF</acronym> v 1.6 以降では、メタデータを特別な <acronym>XML</acronym> 形式
-        (XMP - <ulink url="http://www.adobe.com/products/xmp/">Extensible Metadata Platform</ulink>)
+        (XMP - <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.adobe.com/products/xmp/">Extensible Metadata Platform</link>)
         で表して <acronym>PDF</acronym> に添付できます。
     </para>
 
@@ -213,7 +211,4 @@ $pdf->save($pdfPath);
         (存在する場合) の両方に重複して存在することになります。
         これらをきちんと同期させるのは、アプリケーション側の責任となります。
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

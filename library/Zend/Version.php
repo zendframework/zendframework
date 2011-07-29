@@ -36,14 +36,14 @@ final class Version
     /**
      * Zend Framework version identification - see compareVersion()
      */
-    const VERSION = '2.0.0dev2';
+    const VERSION = '2.0.0dev3';
 
     /**
      * The latest stable version Zend Framework available
      *
      * @var string
      */
-    protected static $lastestVersion;
+    protected static $latestVersion;
 
     /**
      * Compare the specified Zend Framework version string $version
@@ -70,16 +70,16 @@ final class Version
      */
     public static function getLatest()
     {
-        if (null === self::$lastestVersion) {
-            self::$lastestVersion = 'not available';
+        if (null === self::$latestVersion) {
+            self::$latestVersion = 'not available';
 
             $handle = fopen('http://framework.zend.com/api/zf-version', 'r');
             if (false !== $handle) {
-                self::$lastestVersion = stream_get_contents($handle);
+                self::$latestVersion = stream_get_contents($handle);
                 fclose($handle);
             }
         }
 
-        return self::$lastestVersion;
+        return self::$latestVersion;
     }
 }

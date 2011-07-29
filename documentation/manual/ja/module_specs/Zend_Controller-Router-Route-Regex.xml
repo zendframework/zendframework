@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 17592 -->
-<sect3 id="zend.controller.router.routes.regex">
-    <title>Zend_Controller_Router_Route_Regex</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.router.routes.regex"><info><title>Zend_Controller_Router_Route_Regex</title></info>
+    
 
     <para>
         デフォルトのルートや静的なルートに加えて、正規表現によるルートも使用可能です。
@@ -246,7 +244,4 @@ $router->addRoute('blogArchive', $route);
         regex ルートは標準のルートよりはるかに柔軟性があるということが、
         ここからもわかります。
     </para>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

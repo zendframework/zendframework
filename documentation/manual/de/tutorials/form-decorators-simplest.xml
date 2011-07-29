@@ -1,16 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19999 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.form.decorators.simplest">
-    <title>Decorator Grundlagen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.form.decorators.simplest"><info><title>Decorator Grundlagen</title></info>
+    
 
-    <sect2 id="learning.form.decorators.simplest.decorator-overview">
-        <title>Übersicht über das Decorator Pattern</title>
+    <section xml:id="learning.form.decorators.simplest.decorator-overview"><info><title>Übersicht über das Decorator Pattern</title></info>
+        
 
         <para>
-            Am Beginn behandeln wir einige Hintergründe des <ulink
-                url="http://en.wikipedia.org/wiki/Decorator_pattern">Decorator Design
-                Patterns</ulink>. Eine verbreitetere Technik ist die Definition eines gemeinsamen
+            Am Beginn behandeln wir einige Hintergründe des <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Decorator_pattern">Decorator Design
+                Patterns</link>. Eine verbreitetere Technik ist die Definition eines gemeinsamen
             Interfaces welche sowohl das originale Objekt als auch alle von Ihm abhängigen
             implementieren; der Decorator akzeptiert dann das originale Objekt als abhängiges, und
             wird entweder darauf verweisen oder seine Methoden überschreiben. Schreiben wir etwas
@@ -94,8 +91,7 @@ class LockedWindow implements Window
         </para>
 
         <para>
-            In diesem speziellen Beispiel, werden wir ein sogenanntes <ulink
-                url="http://en.wikipedia.org/wiki/Duck_typing">Duck Typing</ulink> verwenden statt
+            In diesem speziellen Beispiel, werden wir ein sogenanntes <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Duck_typing">Duck Typing</link> verwenden statt
             einem expliziten Interface. Das erlaubt unserer Implementation etwas flexibler zu sein,
             wärend es dem Decorator Pattern trotzdem noch erlaubt so exakt zu arbeiten als wäre es
             ein Personen Objekt.
@@ -156,10 +152,10 @@ class TextPerson
             Eigenschaften um eine Repräsentation des Elements -- oder einem Subset von sich -- zu
             erstellen.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.form.decorators.simplest.first-decorator">
-        <title>Den ersten Decorator erstellen</title>
+    <section xml:id="learning.form.decorators.simplest.first-decorator"><info><title>Den ersten Decorator erstellen</title></info>
+        
 
         <para>
             <classname>Zend_Form</classname> Decorators implementieren alle ein gemeinsames
@@ -247,5 +243,5 @@ $element = new Zend_Form_Element('foo', array(
             Im nächsten Abschnitt schauen wir uns an wie Decorators kombiniert werden können um
             kombinierte Ausgaben zu erstellen.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

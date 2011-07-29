@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 21826 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.request">
-    <title>L'objet Requête</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.request"><info><title>L'objet Requête</title></info>
+    
 
-    <sect2 id="zend.controller.request.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.controller.request.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             L'objet requête est un objet simple de valeur qui est passé entre
@@ -67,13 +65,13 @@
             élaboré et précis d'application <acronym>MVC</acronym> deviennent possible.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.request.http">
-        <title>Les requêtes HTTP</title>
+    <section xml:id="zend.controller.request.http"><info><title>Les requêtes HTTP</title></info>
+        
 
-        <sect3 id="zend.controller.request.http.dataacess">
-            <title>Accéder aux données de la requête</title>
+        <section xml:id="zend.controller.request.http.dataacess"><info><title>Accéder aux données de la requête</title></info>
+            
 
             <para>
                 <classname>Zend_Controller_Request_Http</classname> encapsule l'accès aux
@@ -87,16 +85,16 @@
                 régler ou pour récupérer des paramètres d'utilisateur.
             </para>
 
-            <note>
-                <title>Données superglobales</title>
+            <note><info><title>Données superglobales</title></info>
+                
                 <para>
                     En accédant à des données superglobales par
                     <classname>Zend_Controller_Request_Http</classname> en tant que propriétés
                     publiques de membre, il est nécessaire de maintenir dans l'esprit que le nom de
                     propriété (clé du tableau des superglobales) est assorti à une superglobale
-                    dans un ordre spécifique de priorité&#160;: 1.&#160;<constant>GET</constant>,
-                    2.&#160;<constant>POST</constant>, 3.&#160;<constant>COOKIE</constant>,
-                    4.&#160;<constant>SERVER</constant>, 5.&#160;<constant>ENV</constant>.
+                    dans un ordre spécifique de priorité : 1. <constant>GET</constant>,
+                    2. <constant>POST</constant>, 3. <constant>COOKIE</constant>,
+                    4. <constant>SERVER</constant>, 5. <constant>ENV</constant>.
                 </para>
             </note>
 
@@ -109,8 +107,8 @@
                 <methodname>getHeader()</methodname> pour récupérer les en-têtes de la requête.
             </para>
 
-            <note>
-                <title>Données GET et POST</title>
+            <note><info><title>Données GET et POST</title></info>
+                
                 <para>
                     Soyez prudent en accédant à des données de l'objet de requête car il
                     n'est pas du tout filtré. Le routeur et le distributeur valident et filtrent
@@ -119,8 +117,8 @@
                 </para>
             </note>
 
-            <note>
-                <title>Récupérer les données POST brutes</title>
+            <note><info><title>Récupérer les données POST brutes</title></info>
+                
                 <para>
                     A partir de la version 1.5.0, vous pouvez aussi les données POST brutes
                     avec la méthode <methodname>getRawBody()</methodname>. La méthode retourne
@@ -141,12 +139,12 @@
                 requête.
             </para>
 
-            <note>
-                <title>getParam() retrouve plus que les paramètres d'utilisateur</title>
+            <note><info><title>getParam() retrouve plus que les paramètres d'utilisateur</title></info>
+                
                 <para>
                     Afin d'effectuer une partie de son travail, <methodname>getParam()</methodname>
                     recherche réellement dans plusieurs sources. Dans l'ordre de priorité, ceux-ci
-                    incluent&#160;: l'ensemble de paramètres d'utilisateur réglés par
+                    incluent : l'ensemble de paramètres d'utilisateur réglés par
                     l'intermédiaire de <methodname>setParam()</methodname>, les paramètres <constant>GET</constant>, et
                     finalement les paramètres <constant>POST</constant>. Faites attention à ceci lorsque
                     vous récupérez des données par l'intermédiaire de cette méthode.
@@ -161,14 +159,14 @@
                     sources de paramètres à utiliser. <methodname>setParamSources()</methodname> vous permet de
                     spécifier un tableau vide ou un tableau contenant une ou plusieurs des valeurs
                     "_GET" ou "_POST" indiquant quelle source de paramètres est autorisée (par
-                    défaut les deux sont autorisées)&#160;; si vous souhaitez restreindre l'accès
+                    défaut les deux sont autorisées) ; si vous souhaitez restreindre l'accès
                     seulement à "_GET", spécifiez
                     <methodname>setParamSources(array('_GET'))</methodname>.
                 </para>
             </note>
 
-            <note>
-                <title>Caprices d'Apache</title>
+            <note><info><title>Caprices d'Apache</title></info>
+                
                 <para>
                     Si vous utilisez le gestionnaire 404 d'Apache pour passer les requêtes
                     entrantes au contrôleur frontal, ou si vous utilisez le drapeau PT avec les
@@ -176,7 +174,7 @@
                     dont vous avez besoin, pas <varname>$_SERVER['REQUEST_URI']</varname>. Si vous
                     employez une telle installation et obtenez un routage invalide, vous devriez
                     employer la classe <classname>Zend_Controller_Request_Apache404</classname> au
-                    lieu de la classe <acronym>HTTP</acronym> par défaut pour votre objet de requête&#160;:
+                    lieu de la classe <acronym>HTTP</acronym> par défaut pour votre objet de requête :
                 </para>
                 <programlisting language="php"><![CDATA[
 $request = new Zend_Controller_Request_Apache404();
@@ -190,10 +188,10 @@ $front->setRequest($request);
                 </para>
             </note>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.request.http.baseurl">
-            <title>Base de l'URL et sous-dossiers</title>
+        <section xml:id="zend.controller.request.http.baseurl"><info><title>Base de l'URL et sous-dossiers</title></info>
+            
 
             <para>
                 <classname>Zend_Controller_Request_Http</classname> permet à
@@ -213,8 +211,8 @@ $front->setRequest($request);
                 <code>http://example.com/user/martel</code>.
             </para>
 
-            <note>
-                <title>La détection d'URL est sensible à la casse</title>
+            <note><info><title>La détection d'URL est sensible à la casse</title></info>
+                
                 <para>
                     La détection automatique d'URL de base est sensible à la casse, ainsi
                     assurez vous que votre <acronym>URL</acronym> correspond à un nom de sous-répertoire dans le
@@ -231,7 +229,7 @@ $front->setRequest($request);
                 <classname>Zend_Controller_Front</classname>. La méthode la plus facile est de la
                 régler dans <classname>Zend_Controller_Front</classname>, qui le transmets dans
                 l'objet de requête. Exemple d'utilisation pour régler une base d'URL
-                personnalisée&#160;:
+                personnalisée :
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -246,15 +244,15 @@ $controller->setControllerDirectory('./application/controllers')
            ->setBaseUrl('/projects/myapp'); // affecte la base d'url
 $response   = $controller->dispatch();
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.request.http.method">
-            <title>Déterminer le type de la requête</title>
+        <section xml:id="zend.controller.request.http.method"><info><title>Déterminer le type de la requête</title></info>
+            
 
             <para>
                 <methodname>getMethod()</methodname> vous permet de déterminer le type de requête <acronym>HTTP</acronym>
                 utiliser pour appeler la ressource courante. De plus, différentes méthodes existent
-                pour récupérer sous la forme de booléen le type de requête réalisée&#160;:
+                pour récupérer sous la forme de booléen le type de requête réalisée :
             </para>
 
             <itemizedlist>
@@ -283,23 +281,23 @@ $response   = $controller->dispatch();
                 type REST.
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.request.http.ajax">
-            <title>Détecter les requêtes AJAX</title>
+        <section xml:id="zend.controller.request.http.ajax"><info><title>Détecter les requêtes AJAX</title></info>
+            
 
             <para>
                 <classname>Zend_Controller_Request_Http</classname> possède une méthode
-                rudimentaire pour détecter les requêtes <acronym>AJAX</acronym>&#160;:
+                rudimentaire pour détecter les requêtes <acronym>AJAX</acronym> :
                 <methodname>isXmlHttpRequest()</methodname>.
                 Cette méthode parcourt les en-têtes de la requête <acronym>HTTP</acronym> à la recherche de
-                <emphasis>X-Requested-With</emphasis> ayant la valeur "XMLHttpRequest"&#160;; si celui-ci
+                <emphasis>X-Requested-With</emphasis> ayant la valeur "XMLHttpRequest" ; si celui-ci
                 est trouvé, la méthode retourne <constant>TRUE</constant>.
             </para>
 
             <para>
                 Actuellement, on sait que cet en-tête est fourni par défaut par les
-                bibliothèques JS suivantes&#160;:
+                bibliothèques JS suivantes :
             </para>
 
             <itemizedlist>
@@ -323,16 +321,16 @@ $response   = $controller->dispatch();
                 simplement afin d'être sûr que la méthode <methodname>isXmlHttpRequest()</methodname>
                 fonctionne dans votre cas.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.controller.request.subclassing">
-        <title>Sous-classer l'objet Requête</title>
+    <section xml:id="zend.controller.request.subclassing"><info><title>Sous-classer l'objet Requête</title></info>
+        
 
         <para>
             La classe de requête de base utilisée pour tous les objets de requête est la
             classe abstraite <classname>Zend_Controller_Request_Abstract</classname>. Au minimum,
-            elle définit les méthodes suivantes&#160;:
+            elle définit les méthodes suivantes :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -434,5 +432,5 @@ abstract class Zend_Controller_Request_Abstract
             <link linkend="zend.controller.request.http">l'environnement <acronym>HTTP</acronym></link>, un
             environnement <acronym>CLI</acronym>, ou un environnement <acronym>PHP</acronym>-GTK.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

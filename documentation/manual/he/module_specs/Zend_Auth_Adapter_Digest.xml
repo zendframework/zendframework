@@ -1,15 +1,16 @@
-<sect1 id="zend.auth.adapter.digest">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.digest"><info><title>אימות מתקדם</title></info>
 
-    <title>אימות מתקדם</title>
+    
 
-    <sect2 id="zend.auth.adapter.digest.introduction">
+    <section xml:id="zend.auth.adapter.digest.introduction"><info><title>הקדמה</title></info>
 
-        <title>הקדמה</title>
+        
 
         <para>
-            <ulink url="http://en.wikipedia.org/wiki/Digest_access_authentication">אימות מתקדם</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Digest_access_authentication">אימות מתקדם</link>
             הינה שיטת אימות בעזרת פרוטוקול HTTP אשר משפרת את
-            <ulink url="http://en.wikipedia.org/wiki/Basic_authentication_scheme">אימות בסיסי</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Basic_authentication_scheme">אימות בסיסי</link>
             על ידי מתן אפשרות לאמת נתונים של משתמש דרך שרתים ללא צורך בהעברת הסיסמא בתור טקסט רגיל.
         </para>
 
@@ -37,14 +38,14 @@
 
         <programlisting><![CDATA[
 someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
-]]>
-</programlisting>
 
-    </sect2>
+]]></programlisting>
 
-    <sect2 id="zend.auth.adapter.digest.specifics">
+    </section>
 
-        <title>מאפיינים</title>
+    <section xml:id="zend.auth.adapter.digest.specifics"><info><title>מאפיינים</title></info>
+
+        
 
         <para>
            רכיב <code>Zend_Auth_Adapter_Digest</code>, אשר משמש בתור מתאם אימות מתקדם, דורש כמה פרמטרים:
@@ -75,11 +76,11 @@ someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
             פרמטרים אלו צריכים להיות מוגדרים לפני הקריאה אל <code>authenticate()</code>.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.digest.identity">
+    <section xml:id="zend.auth.adapter.digest.identity"><info><title>זהות</title></info>
 
-        <title>זהות</title>
+        
 
         <para>
             המתאם המתקדם מחזיר אובייקט של <code>Zend_Auth_Result</code>, אשר נוצרה עם הזהות בתור מערך אשר מכיל מפתחות של <code>realm</code> ו <code>username</code>.
@@ -105,12 +106,9 @@ Array
     [username] => someUser
 )
 */
-]]>
-        </programlisting>
 
-    </sect2>
+        ]]></programlisting>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+
+</section>

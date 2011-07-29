@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20854 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.pdf.introduction">
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.introduction"><info><title>Introduction</title></info>
     <!-- @todo review and revise upon completion of refactoring -->
 
-    <title>Introduction</title>
+    
 
     <para>
         <classname>Zend_Pdf</classname> est un composant entièrement écrit en PHP5 permettant
@@ -69,4 +69,4 @@
             </listitem>
             </itemizedlist>
         </para>
-</sect1>
+</section>

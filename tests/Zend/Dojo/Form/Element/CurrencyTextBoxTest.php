@@ -25,7 +25,7 @@ use Zend\Dojo\Form\Element\CurrencyTextBox as CurrencyTextBoxElement,
     Zend\Dojo\Form\Element\NumberTextBox as NumberTextBoxElement,
     Zend\Dojo\View\Helper\Dojo as DojoHelper,
     Zend\Registry,
-    Zend\View\View;
+    Zend\View;
 
 /**
  * Test class for Zend_Dojo_Form_Element_CurrencyTextBox.
@@ -58,7 +58,7 @@ class CurrencyTextBoxTest extends \PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        $view = new View();
+        $view = new View\PhpRenderer();
         \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
@@ -118,7 +118,7 @@ class CurrencyTextBoxTest extends \PHPUnit_Framework_TestCase
 
     public function testSymbolMutatorShouldRaiseExceptionWhenFewerThan3CharsProvided()
     {
-        $this->setExpectedException('Zend\Form\ElementException');
+        $this->setExpectedException('Zend\Form\Element\Exception\InvalidArgumentException');
         $this->element->setSymbol('$');
     }
 

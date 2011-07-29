@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.config.introduction">
-    <title>Введение</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.introduction"><info><title>Введение</title></info>
+    
     <para>
         <classname>Zend_Config</classname> создан для того, чтобы сделать более
         простым доступ к конфигурационным данным и их использование внутри приложения.
@@ -14,8 +13,8 @@
         <link linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link>
         и <link linkend="zend.config.adapters.xml"><classname>Zend_Config_Xml</classname></link>.
     </para>
-    <example id="zend.config.introduction.example.using">
-        <title>Использование Zend_Config</title>
+    <example xml:id="zend.config.introduction.example.using"><info><title>Использование Zend_Config</title></info>
+        
         <para>
             Обычно предполагается, что используется один из классов адаптеров, например,
             <link linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link>
@@ -72,8 +71,8 @@ $db = Zend_Db::factory($config->database);
     <programlisting language="php"><![CDATA[
 $host = $config->database->get('host', 'localhost');
 ]]></programlisting>
-    <example id="zend.config.introduction.example.file.php">
-        <title>Использование Zend_Config с конфигурационным файлом PHP</title>
+    <example xml:id="zend.config.introduction.example.file.php"><info><title>Использование Zend_Config с конфигурационным файлом PHP</title></info>
+        
         <para>
             Часто требуется использовать конфигурационный файл,
             основанный на "чистом" <acronym>PHP</acronym>. Следующий код
@@ -101,7 +100,4 @@ $config = new Zend_Config(require 'config.php');
 echo $config->webhost;
 ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

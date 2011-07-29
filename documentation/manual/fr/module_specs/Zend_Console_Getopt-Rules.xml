@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.console.getopt.rules">
-    <title>Déclarer les règles Getopt</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.rules"><info><title>Déclarer les règles Getopt</title></info>
+    
 
     <para>
         Le constructeur de la classe <classname>Zend_Console_Getopt</classname> prend un à trois
@@ -25,22 +23,21 @@
         configuration</link> pour la référence des options disponibles.
     </para>
 
-    <sect2 id="zend.console.getopt.rules.short">
-        <title>Déclarer des options avec la syntaxe courte</title>
+    <section xml:id="zend.console.getopt.rules.short"><info><title>Déclarer des options avec la syntaxe courte</title></info>
+        
 
         <para>
             <classname>Zend_Console_Getopt</classname> supporte une syntaxe compacte semblable à
             cela employée par <acronym>GNU</acronym> Getopt (voir
-            <ulink
-                url="http://www.gnu.org/software/libc/manual/html_node/Getopt.html">http://www.gnu.org/software/libc/manual/html_node/Getopt.html</ulink>).
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.gnu.org/software/libc/manual/html_node/Getopt.html">http://www.gnu.org/software/libc/manual/html_node/Getopt.html</link>).
             Cette syntaxe supporte seulement des drapeaux courts (1 seul caractère). Dans une
             chaîne de caractère unique, vous entrez chacune des lettres qui correspondent aux
             drapeaux supportés par votre application. Une lettre suivie d'un caractère deux points
             ("<emphasis>:</emphasis>") indique un drapeau qui exige un paramètre.
         </para>
 
-        <example id="zend.console.getopt.rules.short.example">
-            <title>Utiliser la syntaxe courte</title>
+        <example xml:id="zend.console.getopt.rules.short.example"><info><title>Utiliser la syntaxe courte</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
@@ -59,10 +56,10 @@ $opts = new Zend_Console_Getopt('abp:');
             types des paramètres, et les messages d'aide ne sont pas supportés dans la syntaxe
             courte.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.console.getopt.rules.long">
-        <title>Déclarer des options avec la syntaxe longue</title>
+    <section xml:id="zend.console.getopt.rules.long"><info><title>Déclarer des options avec la syntaxe longue</title></info>
+        
 
         <para>
             Une syntaxe différente avec plus de possibilités est également disponible. Cette
@@ -108,8 +105,8 @@ $opts = new Zend_Console_Getopt('abp:');
             décrire à l'utilisateur comment employer votre programme.
         </para>
 
-        <example id="zend.console.getopt.rules.long.example">
-            <title>Utiliser la syntaxe longue</title>
+        <example xml:id="zend.console.getopt.rules.long.example"><info><title>Utiliser la syntaxe longue</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt(
@@ -130,5 +127,5 @@ $opts = new Zend_Console_Getopt(
             "<command>--pear</command>" et "<command>-p</command>" sont des alias l'un pour l'autre
             et l'option prend un paramètre optionnel de type chaîne de caractère.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

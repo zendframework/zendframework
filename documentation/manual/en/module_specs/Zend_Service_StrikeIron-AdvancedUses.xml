@@ -1,15 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.service.strikeiron.advanced-uses">
-    <title>Zend_Service_StrikeIron: Advanced Uses</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.strikeiron.advanced-uses"><info><title>Zend_Service_StrikeIron: Advanced Uses</title></info>
+    
 
     <para>
         This section describes the more advanced uses of
         <classname>Zend_Service_StrikeIron</classname>.
     </para>
 
-    <sect2 id="zend.service.strikeiron.advanced-uses.services-by-wsdl">
-        <title>Using Services by WSDL</title>
+    <section xml:id="zend.service.strikeiron.advanced-uses.services-by-wsdl"><info><title>Using Services by WSDL</title></info>
+        
 
         <para>
             Some StrikeIron services may have a <acronym>PHP</acronym> wrapper class available,
@@ -43,22 +42,19 @@ echo $result->listingName;
         <para>
             Using StrikeIron services from the WSDL will require at least some understanding
             of the WSDL files. StrikeIron has many resources on its site to help with this. Also,
-            <ulink url="http://janschneider.de">Jan Schneider</ulink> from the <ulink
-                url="http://horde.org">Horde project</ulink> has written a <ulink
-                url="http://janschneider.de/news/25/268">small <acronym>PHP</acronym>
-                routine</ulink> that will format a WSDL file into more readable
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://janschneider.de">Jan Schneider</link> from the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://horde.org">Horde project</link> has written a <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://janschneider.de/news/25/268">small <acronym>PHP</acronym>
+                routine</link> that will format a WSDL file into more readable
             <acronym>HTML</acronym>.
         </para>
 
         <para>
-            Please note that only the services described in the <link
-                linkend="zend.service.strikeiron.bundled-services">Bundled Services</link>
+            Please note that only the services described in the <link linkend="zend.service.strikeiron.bundled-services">Bundled Services</link>
             section are officially supported.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.strikeiron.viewing-soap-transactions">
-        <title>Viewing SOAP Transactions</title>
+    <section xml:id="zend.service.strikeiron.viewing-soap-transactions"><info><title>Viewing SOAP Transactions</title></info>
+        
 
         <para>
             All communication with StrikeIron is done using the <acronym>SOAP</acronym> extension.
@@ -74,8 +70,7 @@ echo $result->listingName;
         </para>
 
         <para>
-            <acronym>PHP</acronym>' <ulink
-                url="http://www.php.net/manual/en/function.soap-soapclient-construct.php">SOAPClient</ulink>
+            <acronym>PHP</acronym>' <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/function.soap-soapclient-construct.php">SOAPClient</link>
             has a <property>trace</property> option that causes it to remember the
             <acronym>XML</acronym> exchanged during the last transaction.
             <classname>Zend_Service_StrikeIron</classname> does not enable the
@@ -87,10 +82,8 @@ echo $result->listingName;
         <para>
             To view a SOAP transaction, call the <methodname>getSoapClient()</methodname> method
             to get the <classname>SOAPClient</classname> instance and then call the appropriate
-            methods like <ulink
-                url="http://www.php.net/manual/en/function.soap-soapclient-getlastrequest.php"><methodname>__getLastRequest()</methodname></ulink>
-            and <ulink
-                url="http://www.php.net/manual/en/function.soap-soapclient-getlastresponse.php"><methodname>__getLastRequest()</methodname></ulink>:
+            methods like <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/function.soap-soapclient-getlastrequest.php"><methodname>__getLastRequest()</methodname></link>
+            and <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/function.soap-soapclient-getlastresponse.php"><methodname>__getLastRequest()</methodname></link>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -110,5 +103,5 @@ $soapClient = $taxBasic->getSoapClient();
 echo $soapClient->__getLastRequest();
 echo $soapClient->__getLastResponse();
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

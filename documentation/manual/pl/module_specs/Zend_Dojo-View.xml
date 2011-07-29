@@ -1,5 +1,6 @@
-<sect1 id="zend.dojo.view" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Helpery widoków Dojo</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.view"><info><title>Helpery widoków Dojo</title></info>
+    
 
     <para>
         Zend Framework zapewnia dla potrzeb Dojo następujące helpery widoków:
@@ -14,8 +15,8 @@
         </para></listitem>
     </itemizedlist>
 
-    <example id="zend.dojo.view.setup">
-        <title>Użycie helperów widoków Dojo</title>
+    <example xml:id="zend.dojo.view.setup"><info><title>Użycie helperów widoków Dojo</title></info>
+        
 
         <para>
             Aby użyć helperów widoków Dojo będziesz musiał poinformować
@@ -25,8 +26,8 @@
 
         <programlisting role="php"><![CDATA[
 $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Alternatywnie, możesz użyć metody <code>enableView()</code> klasy
@@ -35,18 +36,15 @@ $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
 
         <programlisting role="php"><![CDATA[
 Zend_Dojo::enableView($view);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
 
-    <xi:include href="Zend_Dojo-View-Dojo.xml">
-        <xi:fallback><xi:include href="../../en/module_specs/Zend_Dojo-View-Dojo.xml" /></xi:fallback>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Dojo-View-Dojo.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Dojo-View-Dojo.xml"/></xi:fallback>
     </xi:include>
-    <xi:include href="Zend_Dojo-View-Helpers.xml">
-        <xi:fallback><xi:include href="../../en/module_specs/Zend_Dojo-View-Helpers.xml" /></xi:fallback>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Dojo-View-Helpers.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Dojo-View-Helpers.xml"/></xi:fallback>
     </xi:include>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

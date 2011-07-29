@@ -1,5 +1,6 @@
-<sect1 id="zend.mail.read">
-    <title>Lettura di messaggi e-mail</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.read"><info><title>Lettura di messaggi e-mail</title></info>
+    
 
     <para>
         <code>Zend_Mail</code> può leggere messaggi e-mail da diversi sistemi di salvataggio locali o remoti.
@@ -7,8 +8,8 @@
         Per una panoramica delle funzionalità dei sistemi di raccolta consultare la tabella seguente.
     </para>
 
-    <table id="zend.mail.read.table-1">
-        <title>Panoramica delle caratteristiche dei sistemi di lettura di e-mail</title>
+    <table xml:id="zend.mail.read.table-1"><info><title>Panoramica delle caratteristiche dei sistemi di lettura di e-mail</title></info>
+        
         <tgroup cols="5">
             <thead>
                 <row>
@@ -66,8 +67,8 @@
         </tgroup>
     </table>
 
-    <sect2 id="zend.mail.read-example">
-        <title>Semplice esempio usando Pop3</title>
+    <section xml:id="zend.mail.read-example"><info><title>Semplice esempio usando Pop3</title></info>
+        
 
         <programlisting role="php"><![CDATA[<?php
 $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'localhost',
@@ -77,12 +78,12 @@ $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'localhost',
 echo $mail->countMessages() . " messaggi trovati\n";
 foreach ($mail as $message) {
     echo "E-mail da '{$message->from}': {$message->subject}\n";
-}]]>
-        </programlisting>
+}
+        ]]></programlisting>
 
-    </sect2>
-    <sect2 id="zend.mail.read-open-local">
-        <title>Apertura di un sistema di salvataggio locale</title>
+    </section>
+    <section xml:id="zend.mail.read-open-local"><info><title>Apertura di un sistema di salvataggio locale</title></info>
+        
 
         <para>
             Mbox e Maildir sono due formati supportati per lo salvataggio locale delle e-mail, entrambi nel loro formato più semplice.
@@ -92,21 +93,21 @@ foreach ($mail as $message) {
         </para>
 
         <programlisting role="php"><![CDATA[<?php
-$mail = new Zend_Mail_Storage_Mbox(array('filename' => '/home/test/mail/inbox'));]]>
-        </programlisting>
+$mail = new Zend_Mail_Storage_Mbox(array('filename' => '/home/test/mail/inbox'));
+        ]]></programlisting>
 
         <para>Maildir è molto simile ma necessita il nome di una cartella:</para>
 
         <programlisting role="php"><![CDATA[<?php
-$mail = new Zend_Mail_Storage_Maildir(array('dirname' => '/home/test/mail/'));]]>
-        </programlisting>
+$mail = new Zend_Mail_Storage_Maildir(array('dirname' => '/home/test/mail/'));
+        ]]></programlisting>
 
         <para>Entrambi i costruttori generano un'eccezione <code>Zend_Mail_Exception</code> se l'archivio non può essere letto.</para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mail.read-open-remote">
-        <title>Apertura di un sistema di salvataggio remoto</title>
+    <section xml:id="zend.mail.read-open-remote"><info><title>Apertura di un sistema di salvataggio remoto</title></info>
+        
 
         <para>
             Per quanto riguarda i sistemi di salvataggio remoto i due protocolli più popolari sono entrambi supportati: Pop3 e Imap.
@@ -129,8 +130,8 @@ $mail = new Zend_Mail_Storage_Imap(array('host'     => 'example.com'
 $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'example.com',
                                          'port'     => 1120
                                          'user'     => 'test',
-                                         'password' => 'test'));]]>
-        </programlisting>
+                                         'password' => 'test'));
+        ]]></programlisting>
 
         <para>
             Per entrambi i protocolli sono supportate le connessioni SSL e TSL.
@@ -151,17 +152,17 @@ $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'example.com'
 $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'example.com'
                                          'user'     => 'test',
                                          'password' => 'test',
-                                         'ssl'      => 'TLS'));]]>
-        </programlisting>
+                                         'ssl'      => 'TLS'));
+        ]]></programlisting>
 
         <para>
             Entrambi i costruttori possono restituire un'eccezione <code>Zend_Mail_Exception</code> o <code>Zend_Mail_Protocol_Exception</code>, a seconda del tipo di errore.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mail.read-fetching">
-        <title>Lettura dei messaggi e semplici metodi</title>
+    <section xml:id="zend.mail.read-fetching"><info><title>Lettura dei messaggi e semplici metodi</title></info>
+        
 
         <para>
             Una volta aperta la connessione, è possibile estrarre i messaggi.
@@ -170,8 +171,8 @@ $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'example.com'
         </para>
 
         <programlisting role="php"><![CDATA[<?php
-$message = $mail->getMessage($messageNum);]]>
-        </programlisting>
+$message = $mail->getMessage($messageNum);
+        ]]></programlisting>
 
         <para>
             L'accesso sotto forma di array è supportato, ma non consente di specificare alcun parametro aggiuntivo al metodo <code>getMessage()</code>.
@@ -179,16 +180,16 @@ $message = $mail->getMessage($messageNum);]]>
         </para>
 
         <programlisting role="php"><![CDATA[<?php
-$message = $mail[$messageNum];]]>
-        </programlisting>
+$message = $mail[$messageNum];
+        ]]></programlisting>
 
         <para>L'interfaccia Iterator è implementata e consente di scorrere tutti i messaggi:</para>
 
         <programlisting role="php"><![CDATA[<?php
 foreach ($mail as $messageNum => $message) {
     // fai qualcosa ...
-}]]>
-        </programlisting>
+}
+        ]]></programlisting>
 
         <para>
             Per contare i messaggi salvati è possibile usare sia il metodo <code>countMessages()</code> sia l'accesso del tipo array:
@@ -199,8 +200,8 @@ foreach ($mail as $messageNum => $message) {
 $maxMessage = $mail->countMessages();
 
 // accesso array
-$maxMessage = count($mail);]]>
-        </programlisting>
+$maxMessage = count($mail);
+        ]]></programlisting>
 
         <para>Per rimuovere un'e-mail si utilizzi il metodo <code>removeMessage()</code> o, nuovamente, l'accesso del tipo array:</para>
 
@@ -209,13 +210,13 @@ $maxMessage = count($mail);]]>
 $mail->removeMessage($messageNum);
 
 // accesso array
-unset($mail[$messageNum]);]]>
-        </programlisting>
+unset($mail[$messageNum]);
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mail.read-message">
-        <title>Interazione con i messaggi</title>
+    <section xml:id="zend.mail.read-message"><info><title>Interazione con i messaggi</title></info>
+        
 
         <para>
             Dopo aver estratto i messaggi <code>getMessage()</code> potrebbe essere necessario estrarre le intestazioni, il contenuto o singole parti di un messaggio multipart.
@@ -231,8 +232,8 @@ $message = $mail->getMessage(1);
 echo $message->subject . "\n";
 
 // recupera l'intestazione content-type
-$type = $message->contentType;]]>
-        </programlisting>
+$type = $message->contentType;
+        ]]></programlisting>
 
         <para>
             In caso di più intestazioni con lo stesso nome, esempio l'intestazione <code>Received</code>, è possibile recuperare il valore come array invece che stringa con il metodo <code>getHeader()</code>.
@@ -258,8 +259,8 @@ foreach ($received as $line) {
 $received = $message->getHeader('received');
 if (is_string($received)) {
     // trovata una sola intestazione received nel messaggio
-}]]>
-        </programlisting>
+}
+        ]]></programlisting>
 
         <para>
             Il metodo <code>getHeaders()</code> restituisce tutte le intestazioni come array.
@@ -276,8 +277,8 @@ foreach ($message->getHeaders() as $name => $value) {
     foreach ($value as $entry) {
         echo "$name: $entry\n";
     }
-}]]>
-        </programlisting>
+}
+        ]]></programlisting>
 
         <para>
             Se il messaggio non è di tipo multipart la sua lettura è immediata con il metodo <code>getContent()</code>.
@@ -288,8 +289,8 @@ foreach ($message->getHeaders() as $name => $value) {
 // stampa il contenuto del messaggio
 echo '<pre>';
 echo $message->getContent();
-echo '</pre>';]]>
-        </programlisting>
+echo '</pre>';
+        ]]></programlisting>
 
         <para>
             La verifica di un messaggio multipart avviene con il metodo <code>isMultipart()</code>.
@@ -304,8 +305,8 @@ while ($part->isMultipart()) {
 }
 echo 'Il tipo di questa parte è ' . strtok($part->contentType, ';') . "\n";
 echo "Contenuto:\n";
-echo $part->getContent();]]>
-        </programlisting>
+echo $part->getContent();
+        ]]></programlisting>
 
         <para>
             <code>Zend_Mail_Part</code> implementa <code>RecursiveIterator</code> che semplifica l'iterazione di tutte le parti. Inoltre, per agevolare l'ouput, implementa il metodo magico <code>__toString()</code> che restituisce il contenuto.
@@ -328,12 +329,12 @@ if (!$foundPart) {
     echo 'Nessuna parte solo testo trovata';
 } else {
     echo "Parte solo testo: \n" . $foundPart;
-}]]>
-        </programlisting>
+}
+        ]]></programlisting>
 
-    </sect2>
-    <sect2 id="zend.mail.read-flags">
-        <title>Controllo dei contrassegni</title>
+    </section>
+    <section xml:id="zend.mail.read-flags"><info><title>Controllo dei contrassegni</title></info>
+        
 
         <para>
             Maildir e IMAP supportano il salvataggio dei contrassegni.
@@ -377,8 +378,8 @@ foreach ($flags as $flag) {
         default:
             echo $flag . '(contrassegno sconosciuto) ';
     }
-}]]>
-        </programlisting>
+}
+        ]]></programlisting>
 
         <para>
             Poiché IMAP permette all'utente o al client di definire contrassegni personalizzati, potrebbero esistere contrassegni senza una costante corrispondente in <code>Zend_Mail_Storage</code>.
@@ -394,12 +395,12 @@ if (!$message->hasFlag('$SpamTested')) {
     echo 'Questo messaggio è spam';
 } else {
     echo 'Questo messaggio è sicuro';
-}]]>
-        </programlisting>
+}
+        ]]></programlisting>
 
-    </sect2>
-    <sect2 id="zend.mail.read-folders">
-        <title>Utilizzo delle cartelle</title>
+    </section>
+    <section xml:id="zend.mail.read-folders"><info><title>Utilizzo delle cartelle</title></info>
+        
 
         <para>
             Tutti i sistemi di salvataggio, eccetto Pop3, supportano le cartelle anche chiamate mailbox.
@@ -434,8 +435,8 @@ $mail = new Zend_Mail_Storage_Folder_Maildir(array('dirname' => '/home/test/mail
 // imap è lo stesso con o senza cartelle
 $mail = new Zend_Mail_Storage_Imap(array('host'     => 'example.com'
                                          'user'     => 'test',
-                                         'password' => 'test'));]]>
-        </programlisting>
+                                         'password' => 'test'));
+        ]]></programlisting>
 
         <para>
             Con il metodo getFolders($root = null) si ottiene la gerarchia delle cartelle a partire dalla cartella root o da quella specificata.
@@ -444,8 +445,8 @@ $mail = new Zend_Mail_Storage_Imap(array('host'     => 'example.com'
             Il nome globale è il nome assoluto a partire dalla cartella principale (inclusi i delimitatori), il nome locale è invece il nome specifico assunto nella cartella di livello superiore.
         </para>
 
-        <table id="zend.mail.read-folders.table-1">
-            <title>Nomi delle cartelle e-mail</title>
+        <table xml:id="zend.mail.read-folders.table-1"><info><title>Nomi delle cartelle e-mail</title></info>
+            
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -490,8 +491,8 @@ foreach ($folders as $localName => $folder) {
     echo ' value="' . htmlspecialchars($folder) . '">'
         . htmlspecialchars($localName) . '</option>';
 }
-echo '</select>';]]>
-        </programlisting>
+echo '</select>';
+        ]]></programlisting>
 
         <para>
             Il metodo <code>getSelectedFolder()</code> restituisce la cartella corrente selezionata.
@@ -507,15 +508,15 @@ echo '</select>';]]>
 //  ...
 $folder = $mail->getFolders()->Archive->2005;
 echo "L'ultima cartella era " . $mail->getSelectedFolder() . " la nuova cartella è $folder\n";
-$mail->selectFolder($folder);]]>
-        </programlisting>
+$mail->selectFolder($folder);
+        ]]></programlisting>
 
-    </sect2>
-    <sect2 id="zend.mail.read-advanced">
-        <title>Utilizzo avanzato</title>
+    </section>
+    <section xml:id="zend.mail.read-advanced"><info><title>Utilizzo avanzato</title></info>
+        
 
-        <sect3 id="zend.mail.read-advanced.noop">
-            <title>Utilizzo di NOOP</title>
+        <section xml:id="zend.mail.read-advanced.noop"><info><title>Utilizzo di NOOP</title></info>
+            
 
             <para>
                 Se si utilizza un sistema di salvataggio remoto e si devono eseguire alcune attività di lunga durata, è necessario mantenere attiva la connessione via noop:
@@ -531,12 +532,12 @@ foreach ($mail as $message) {
     // esegui qualche altra elaborazione ...
 
     $mail->noop(); // keep alive
-}]]>
-            </programlisting>
+}
+            ]]></programlisting>
 
-        </sect3>
-        <sect3 id="zend.mail.read-advanced.caching">
-            <title>Salvataggio in cache delle istanze</title>
+        </section>
+        <section xml:id="zend.mail.read-advanced.caching"><info><title>Salvataggio in cache delle istanze</title></info>
+            
 
             <para>
                 <code>Zend_Mail_Storage_Mbox</code>, <code>Zend_Mail_Storage_Folder_Mbox</code>, <code>Zend_Mail_Storage_Maildir</code> e <code>Zend_Mail_Storage_Folder_Maildir</code> implementano i metodi magici <code>__sleep()</code> e <code>__wakeup()</code>, dunque sono serializzabili. Questo evita di eseguire la lettura dei file o delle cartelle più di una volta.
@@ -560,12 +561,12 @@ if (!$cache->isCached($cache_id) || filemtime($signal_file) > $cache->getMTime($
 
 // fai qualcosa ...
 
-$cache->set($cache_id, $mail);]]>
-            </programlisting>
+$cache->set($cache_id, $mail);
+            ]]></programlisting>
 
-        </sect3>
-        <sect3 id="zend.mail.read-advanced.extending">
-            <title>Estensione delle classi dei protocolli</title>
+        </section>
+        <section xml:id="zend.mail.read-advanced.extending"><info><title>Estensione delle classi dei protocolli</title></info>
+            
 
             <para>
                 I sistemi di salvataggio remoti utilizzano due classi: <code>Zend_Mail_Storage_&lt;Name&gt;</code> e <code>Zend_Mail_Protocol_&lt;Name&gt;</code>.
@@ -645,18 +646,14 @@ class Example_Mail_Pop3_Knock extends Zend_Mail_Storage_Pop3
 $mail = new Example_Mail_Pop3_Knock(array('host'        => 'localhost',
                                           'user'        => 'test',
                                           'password'    => 'test',
-                                          'knock_ports' => array(1101, 1105, 1111)));]]>
-            </programlisting>
+                                          'knock_ports' => array(1101, 1105, 1111)));
+            ]]></programlisting>
 
             <para>
                 Come è possibile notare si suppone sempre di essere connessi, autenticati e, se supportato, una cartella è selezionata nel costruttore della classe principale.
                 Quindi, se si assegna una classe protocollo personalizzata è necessario assicurarsi che tutto questo sia avvenuto correttamente o il metodo seguente non andrà a buon fine se il server non lo permette nello status corrente.
             </para>
 
-        </sect3>
-    </sect2>
-</sect1>
-
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

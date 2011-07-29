@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20819 -->
-    <sect1 id="zend.mail.smtp-secure">
-        <title>セキュアな SMTP トランスポート</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-secure"><info><title>セキュアな SMTP トランスポート</title></info>
+        
 
     <para>
         <classname>Zend_Mail</classname> は、TLS や <acronym>SSL</acronym> を使用したセキュアな
@@ -13,8 +11,8 @@
         TLS の場合は 25、<acronym>SSL</acronym> の場合は 465 となります。
     </para>
 
-    <example id="zend.mail.smtp-secure.example-1">
-        <title>Zend_Mail_Transport_Smtp によるセキュアな接続の有効化</title>
+    <example xml:id="zend.mail.smtp-secure.example-1"><info><title>Zend_Mail_Transport_Smtp によるセキュアな接続の有効化</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $config = array('ssl' => 'tls',
@@ -30,7 +28,4 @@ $mail->setSubject('TestSubject');
 $mail->send($transport);
 ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

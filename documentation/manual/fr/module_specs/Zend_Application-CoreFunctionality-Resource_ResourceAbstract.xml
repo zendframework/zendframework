@@ -1,13 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20763 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.application.core-functionality.resource-resourceabstract">
-    <title>Zend_Application_Resource_ResourceAbstract</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.core-functionality.resource-resourceabstract"><info><title>Zend_Application_Resource_ResourceAbstract</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_ResourceAbstract</classname> est une classe abstaite
-        implementant <link
-            linkend="zend.application.core-functionality.resource-resource">Zend_Application_Resource_Resource</link>,
+        implementant <link linkend="zend.application.core-functionality.resource-resource">Zend_Application_Resource_Resource</link>,
         c'est un bon point de départ pour créer vos propres plugins de ressources.
     </para>
 
@@ -16,8 +13,8 @@
         elle doit donc être implémentée par les extensions concrêtes de cette classe.
     </para>
 
-    <table id="zend.application.core-functionality.resource-resourceabstract.api">
-        <title>Méthodes de Zend_Application_Resource_ResourceAbstract</title>
+    <table xml:id="zend.application.core-functionality.resource-resourceabstract.api"><info><title>Méthodes de Zend_Application_Resource_ResourceAbstract</title></info>
+        
         <tgroup cols="4">
             <thead>
                 <row>
@@ -51,7 +48,7 @@
                     <entry><classname>Zend_Application_Resource_ResourceAbstract</classname></entry>
                     <entry><itemizedlist>
                             <listitem><para>
-                                <varname>$bootstrap</varname>&#160;: <emphasis>requis</emphasis>.
+                                <varname>$bootstrap</varname> : <emphasis>requis</emphasis>.
                                 Bootstrap parent initialisant cette resource.
                             </para></listitem>
                     </itemizedlist></entry>
@@ -74,7 +71,7 @@
                     <entry><classname>Zend_Application_Resource_ResourceAbstract</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <varname>$options</varname>&#160;: <emphasis>required</emphasis>.
+                            <varname>$options</varname> : <emphasis>required</emphasis>.
                             Options de la ressource.
                         </para></listitem>
                     </itemizedlist></entry>
@@ -91,8 +88,8 @@
         </tgroup>
     </table>
 
-    <sect3 id="zend.application.core-functionality.resource-resourceabstract.names">
-        <title>Noms des resources</title>
+    <section xml:id="zend.application.core-functionality.resource-resourceabstract.names"><info><title>Noms des resources</title></info>
+        
 
         <para>
             Lorque vous enregistrez des plugins de ressources, il existe alors 3 manières d'y faire
@@ -106,7 +103,7 @@
             après le préfixe de classe. Par exemple, la classe
             "<classname>Zend_Application_Resource_View</classname>" peut être référencée simplement
             via "View" car le préfixe "<classname>Zend_Application_Resource</classname>"
-            est déja enregistré. Vous pouvez aussi utiliser le nom long de classe complet&#160;:
+            est déja enregistré. Vous pouvez aussi utiliser le nom long de classe complet :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -136,7 +133,7 @@ $view = $bootstrap->getResource('view');
 
         <para>
             Ensuite, si aucun chemin précis n'est enregistré, il reste possible de passer ses
-            plugins de ressources via leur nom de classe complet&#160;:
+            plugins de ressources via leur nom de classe complet :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -152,7 +149,7 @@ $app = new Zend_Application(APPLICATION_ENV, array(
 ]]></programlisting>
 
         <para>
-            La récupération de ces objets se fait alors de manière plus clarifiée&#160;:
+            La récupération de ces objets se fait alors de manière plus clarifiée :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -165,7 +162,7 @@ $view = $bootstrap->getResource('My_Resource_View');
             court à n'importe quelle classe. Ajoutez une variable publique
             <varname>$_explicitType</varname> dans la classe du plugin, sa valeur sera alors
             utilisée comme nom court pour référencer le plugin dans le bootstrap. Définissons
-            par exemple notre propre vue&#160;:
+            par exemple notre propre vue :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -194,5 +191,5 @@ $view = $bootstrap->getResource('My_View');
             Grâce à ses différentes manières de faire, vous pouvez redéfinir des plugins existants,
             en ajouter ou encore les mixer pour accomplir des tâches d'initialisation complexes.
         </para>
-    </sect3>
-</sect2>
+    </section>
+</section>

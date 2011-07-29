@@ -1,21 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.xmlrpc.server">
-    <title>Zend_XmlRpc_Server</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.xmlrpc.server"><info><title>Zend_XmlRpc_Server</title></info>
+    
 
-    <sect2 id="zend.xmlrpc.server.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.xmlrpc.server.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_XmlRpc_Server</classname> is intended as a fully-featured
-            <acronym>XML-RPC</acronym> server, following <ulink url="http://www.xmlrpc.com/spec">the
-                specifications outlined at www.xmlrpc.com</ulink>. Additionally, it implements the
+            <acronym>XML-RPC</acronym> server, following <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.xmlrpc.com/spec">the
+                specifications outlined at www.xmlrpc.com</link>. Additionally, it implements the
             <command>system.multicall()</command> method, allowing boxcarring of requests.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.xmlrpc.server.usage">
-        <title>Basic Usage</title>
+    <section xml:id="zend.xmlrpc.server.usage"><info><title>Basic Usage</title></info>
+        
 
         <para>
             An example of the most basic use case:
@@ -26,10 +25,10 @@ $server = new Zend_XmlRpc_Server();
 $server->setClass('My_Service_Class');
 echo $server->handle();
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.xmlrpc.server.structure">
-        <title>Server Structure</title>
+    <section xml:id="zend.xmlrpc.server.structure"><info><title>Server Structure</title></info>
+        
 
         <para>
             <classname>Zend_XmlRpc_Server</classname> is composed of a variety of components,
@@ -60,13 +59,13 @@ echo $server->handle();
             <acronym>XML-RPC</acronym> <acronym>XML</acronym> responses, allowing them to be
             directly echoed.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.xmlrpc.server.anatomy">
-        <title>Anatomy of a webservice</title>
+    <section xml:id="zend.xmlrpc.server.anatomy"><info><title>Anatomy of a webservice</title></info>
+        
 
-        <sect3 id="zend.xmlrpc.server.anatomy.general">
-            <title>General considerations</title>
+        <section xml:id="zend.xmlrpc.server.anatomy.general"><info><title>General considerations</title></info>
+            
 
             <para>
                 For maximum performance it is recommended to use a simple
@@ -88,10 +87,10 @@ echo $server->handle();
                 integration of upcoming remoting technologies.
                 http://myservice.ws/<emphasis>1.0/XMLRPC/</emphasis>.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.xmlrpc.server.anatomy.expose">
-            <title>What to expose?</title>
+        <section xml:id="zend.xmlrpc.server.anatomy.expose"><info><title>What to expose?</title></info>
+            
 
             <para>
                 Most of the time it is not sensible to expose business objects
@@ -102,18 +101,17 @@ echo $server->handle();
                 the best webservice calls are those not happening. Therefore
                 service calls need to be more coarse-grained than usual business
                 logic is. Often an additional layer in front of your business
-                objects makes sense. This layer is sometimes referred to as <ulink
-                    url="http://martinfowler.com/eaaCatalog/remoteFacade.html">Remote
-                    Facade</ulink>.
+                objects makes sense. This layer is sometimes referred to as <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://martinfowler.com/eaaCatalog/remoteFacade.html">Remote
+                    Facade</link>.
                 Such a service layer adds a coarse grained interface on top of
                 your business logic and groups verbose operations into smaller
                 ones.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.xmlrpc.server.conventions">
-        <title>Conventions</title>
+    <section xml:id="zend.xmlrpc.server.conventions"><info><title>Conventions</title></info>
+        
 
         <para>
             <classname>Zend_XmlRpc_Server</classname> allows the developer to attach functions and
@@ -200,10 +198,10 @@ function myFunc($val1, $val2, $val3)
                 service method should only have a single signature.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.xmlrpc.server.namespaces">
-        <title>Utilizing Namespaces</title>
+    <section xml:id="zend.xmlrpc.server.namespaces"><info><title>Utilizing Namespaces</title></info>
+        
 
         <para>
             <acronym>XML-RPC</acronym> has a concept of namespacing; basically, it allows grouping
@@ -238,10 +236,10 @@ $server->setClass('My_Service_Class', 'myservice');
 // Function 'somefunc' will be accessible as funcs.somefunc
 $server->addFunction('somefunc', 'funcs');
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.xmlrpc.server.request">
-        <title>Custom Request Objects</title>
+    <section xml:id="zend.xmlrpc.server.request"><info><title>Custom Request Objects</title></info>
+        
 
         <para>
             Most of the time, you'll simply use the default request type included with
@@ -256,10 +254,10 @@ $server->addFunction('somefunc', 'funcs');
             <acronym>XML-RPC</acronym> server can retrieve that information in order to dispatch the
             request.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.xmlrpc.server.response">
-        <title>Custom Responses</title>
+    <section xml:id="zend.xmlrpc.server.response"><info><title>Custom Responses</title></info>
+        
 
         <para>
             Similar to request objects, <classname>Zend_XmlRpc_Server</classname> can return custom
@@ -274,10 +272,10 @@ $server->addFunction('somefunc', 'funcs');
             <methodname>Zend_XmlRpc_Server::setResponseClass()</methodname> prior to calling
             <methodname>handle()</methodname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.xmlrpc.server.fault">
-        <title>Handling Exceptions via Faults</title>
+    <section xml:id="zend.xmlrpc.server.fault"><info><title>Handling Exceptions via Faults</title></info>
+        
 
         <para>
             <classname>Zend_XmlRpc_Server</classname> catches Exceptions generated by a dispatched
@@ -312,10 +310,10 @@ Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
             Any exception not specifically whitelisted will generate a fault
             response with a code of '404' and a message of 'Unknown error'.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.xmlrpc.server.caching">
-        <title>Caching Server Definitions Between Requests</title>
+    <section xml:id="zend.xmlrpc.server.caching"><info><title>Caching Server Definitions Between Requests</title></info>
+        
 
         <para>
             Attaching many classes to an <acronym>XML-RPC</acronym> server instance can utilize a
@@ -366,10 +364,10 @@ echo $server->handle();
             instance, and then attempts to create a new cache file with the
             server definition.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.xmlrpc.server.use">
-        <title>Usage Examples</title>
+    <section xml:id="zend.xmlrpc.server.use"><info><title>Usage Examples</title></info>
+        
 
         <para>
             Below are several usage examples, showing the full spectrum of
@@ -377,8 +375,8 @@ echo $server->handle();
             on the previous example provided.
         </para>
 
-        <example id="zend.xmlrpc.server.use.attach-function">
-            <title>Basic Usage</title>
+        <example xml:id="zend.xmlrpc.server.use.attach-function"><info><title>Basic Usage</title></info>
+            
 
             <para>
                 The example below attaches a function as a dispatchable <acronym>XML-RPC</acronym>
@@ -403,8 +401,8 @@ echo $server->handle();
 ]]></programlisting>
         </example>
 
-        <example id="zend.xmlrpc.server.use.attach-class">
-            <title>Attaching a class</title>
+        <example xml:id="zend.xmlrpc.server.use.attach-class"><info><title>Attaching a class</title></info>
+            
 
             <para>
                 The example below illustrates attaching a class' public methods
@@ -420,8 +418,8 @@ echo $server->handle();
 ]]></programlisting>
         </example>
 
-        <example id="zend.xmlrpc.server.use.attach-class-with-arguments">
-            <title>Attaching a class with arguments</title>
+        <example xml:id="zend.xmlrpc.server.use.attach-class-with-arguments"><info><title>Attaching a class with arguments</title></info>
+            
 
             <para>
                 The following example illustrates how to attach a class' public
@@ -462,8 +460,8 @@ $server->setClass('Services_PricingService',
             </para>
         </example>
 
-        <example id="zend.xmlrpc.server.use.attach-class-with-arguments-constructor">
-            <title>Passing arguments only to constructor</title>
+        <example xml:id="zend.xmlrpc.server.use.attach-class-with-arguments-constructor"><info><title>Passing arguments only to constructor</title></info>
+            
 
             <para>
                 <classname>Zend_XmlRpc_Server</classname> allows to restrict argument passing to
@@ -511,8 +509,8 @@ $server->setClass('Services_PricingService2',
 ]]></programlisting>
         </example>
 
-        <example id="zend.xmlrpc.server.use.attach-instance">
-            <title>Attaching a class instance</title>
+        <example xml:id="zend.xmlrpc.server.use.attach-instance"><info><title>Attaching a class instance</title></info>
+            
 
             <para>
                 <methodname>setClass()</methodname> allows to register a previously instantiated
@@ -522,8 +520,8 @@ $server->setClass('Services_PricingService2',
             </para>
         </example>
 
-        <example id="zend.xmlrpc.server.use.attach-several-classes-namespaces">
-            <title>Attaching several classes using namespaces</title>
+        <example xml:id="zend.xmlrpc.server.use.attach-several-classes-namespaces"><info><title>Attaching several classes using namespaces</title></info>
+            
 
             <para>
                 The example below illustrates attaching several classes, each
@@ -543,8 +541,8 @@ echo $server->handle();
 ]]></programlisting>
         </example>
 
-        <example id="zend.xmlrpc.server.use.exceptions-faults">
-            <title>Specifying exceptions to use as valid fault responses</title>
+        <example xml:id="zend.xmlrpc.server.use.exceptions-faults"><info><title>Specifying exceptions to use as valid fault responses</title></info>
+            
 
             <para>
                 The example below allows any <classname>Services_Exception</classname>-derived
@@ -568,8 +566,8 @@ echo $server->handle();
 ]]></programlisting>
         </example>
 
-        <example id="zend.xmlrpc.server.use.custom-request-object">
-            <title>Utilizing custom request and response objects</title>
+        <example xml:id="zend.xmlrpc.server.use.custom-request-object"><info><title>Utilizing custom request and response objects</title></info>
+            
 
             <para>
                 Some use cases require to utilize a custom request object.
@@ -608,8 +606,8 @@ echo $server->handle($request);
 ]]></programlisting>
         </example>
 
-        <example id="zend.xmlrpc.server.use.custom-response-object">
-            <title>Specifying a custom response class</title>
+        <example xml:id="zend.xmlrpc.server.use.custom-response-object"><info><title>Specifying a custom response class</title></info>
+            
 
             <para>
                 The example below illustrates specifying a custom response class
@@ -641,13 +639,13 @@ $server->setResponseClass('Services_Response');
 echo $server->handle($request);
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.xmlrpc.server.performance">
-        <title>Performance optimization</title>
+    <section xml:id="zend.xmlrpc.server.performance"><info><title>Performance optimization</title></info>
+        
 
-        <example id="zend.xmlrpc.server.performance.caching">
-            <title>Cache server definitions between requests</title>
+        <example xml:id="zend.xmlrpc.server.performance.caching"><info><title>Cache server definitions between requests</title></info>
+            
 
             <para>
                 The example below illustrates caching server definitions between requests.
@@ -688,8 +686,8 @@ echo $server->handle($request);
             </para>
         </note>
 
-        <example id="zend.xmlrpc.server.performance.xmlgen">
-            <title>Optimizing XML generation</title>
+        <example xml:id="zend.xmlrpc.server.performance.xmlgen"><info><title>Optimizing XML generation</title></info>
+            
 
             <para>
                 <classname>Zend_XmlRpc_Server</classname> uses
@@ -718,8 +716,8 @@ $server = new Zend_XmlRpc_Server();
 ]]></programlisting>
         </example>
 
-        <note>
-            <title>Benchmark your application</title>
+        <note><info><title>Benchmark your application</title></info>
+            
 
             <para>
                 Performance is determined by a lot of parameters and
@@ -731,8 +729,8 @@ $server = new Zend_XmlRpc_Server();
             </para>
         </note>
 
-        <note>
-            <title>Benchmark your client</title>
+        <note><info><title>Benchmark your client</title></info>
+            
 
             <para>
                 This optimization makes sense for the client side too. Just
@@ -740,8 +738,5 @@ $server = new Zend_XmlRpc_Server();
                 doing any work with <classname>Zend_XmlRpc_Client</classname>.
             </para>
         </note>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

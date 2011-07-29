@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21740 -->
-<sect1 id="zend.paginator.advanced">
-    <title>高度な使用法</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.paginator.advanced"><info><title>高度な使用法</title></info>
+    
 
-    <sect2 id="zend.paginator.advanced.adapters">
-        <title>独自のデータソースアダプタ</title>
+    <section xml:id="zend.paginator.advanced.adapters"><info><title>独自のデータソースアダプタ</title></info>
+        
 
         <para>
             同梱のアダプタでは対応していないようなデータ形式を処理したくなることもあるでしょう。
@@ -36,7 +34,7 @@
 
         <para>
             これまでに SPL の
-            <ulink url="http://www.php.net/~helly/php/ext/spl/interfaceCountable.html"><code>Countable</code></ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/~helly/php/ext/spl/interfaceCountable.html"><code>Countable</code></link>
             インターフェイスを使ったことがある方なら
             <methodname>count()</methodname> はおなじみでしょう。
             <classname>Zend_Paginator</classname> と組み合わせて使う場合、
@@ -64,10 +62,10 @@ return array_slice($this->_array, $offset, $itemCountPerPage);
             を実装しています) を見れば、
             自分のアダプタでこれをどのように実装すればいいのか参考になるでしょう。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.paginator.advanced.scrolling-styles">
-        <title>独自のスクロール形式</title>
+    <section xml:id="zend.paginator.advanced.scrolling-styles"><info><title>独自のスクロール形式</title></info>
+        
 
         <para>
             独自のスクロール形式を作成するには
@@ -120,10 +118,10 @@ $path   = 'My/Paginator/ScrollingStyle/';
 Zend_Paginator::addScrollingStylePrefixPath($prefix, $path);
 ]]></programlisting>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.paginator.advanced.caching">
-        <title>キャッシュ機能</title>
+    <section xml:id="zend.paginator.advanced.caching"><info><title>キャッシュ機能</title></info>
+        
 
         <para>
             <classname>Zend_Paginator</classname> は、渡されたデータをキャッシュする機能があります。
@@ -221,10 +219,10 @@ $otherItems = $paginator->getItemsPerPage(4);
 var_dump($paginator->getPageItemCache());
 ]]></programlisting>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.paginator.advanced.aggregator">
-        <title>Zend_Paginator_AdapterAggregate インターフェイス</title>
+    <section xml:id="zend.paginator.advanced.aggregator"><info><title>Zend_Paginator_AdapterAggregate インターフェイス</title></info>
+        
 
         <para>
             作成するアプリケーションによっては、「内部のデータ構造は既存のアダプタと同じだけれども
@@ -258,8 +256,5 @@ interface Zend_Paginator_AdapterAggregate
             <code>Zend_Paginator::factory</code> および Zend_Paginator
             コンストラクタの両方で使用可能で、適切に処理されます。
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

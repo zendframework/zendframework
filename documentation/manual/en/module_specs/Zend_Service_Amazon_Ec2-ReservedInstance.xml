@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.service.amazon.ec2.reserved.instance">
-    <title>Zend_Service_Amazon_Ec2: Reserved Instances</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.reserved.instance"><info><title>Zend_Service_Amazon_Ec2: Reserved Instances</title></info>
+    
 
     <para>
         With Amazon <acronym>EC2</acronym> Reserved Instances, you can make a low one-time payment
@@ -15,8 +14,8 @@
         1 year or 3 years) and are only available for Linux or UNIX instances.
     </para>
 
-    <sect2 id="zend.service.amazon.ec2.reserved.instance.howitworks">
-        <title>How Reserved Instances are Applied</title>
+    <section xml:id="zend.service.amazon.ec2.reserved.instance.howitworks"><info><title>How Reserved Instances are Applied</title></info>
+        
 
         <para>
             Reserved Instances are applied to instances that meet the type/location
@@ -63,13 +62,13 @@
             Availability Zone and does not apply the m1.xlarge Reserved Instances because there are
             no running m1.xlarge instances.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.amazon.ec2.reserved.instance.operations">
-        <title>Reserved Instances Usage</title>
+    <section xml:id="zend.service.amazon.ec2.reserved.instance.operations"><info><title>Reserved Instances Usage</title></info>
+        
 
-        <example id="zend.service.amazon.ec2.reserved.instance.operations.describe">
-            <title>Describes Reserved Instances that you purchased</title>
+        <example xml:id="zend.service.amazon.ec2.reserved.instance.operations.describe"><info><title>Describes Reserved Instances that you purchased</title></info>
+            
 
             <para>
                 <methodname>describeInstances()</methodname> will return information about a
@@ -89,8 +88,8 @@ $return = $ec2_instance->describeInstances('instanceId');
 ]]></programlisting>
         </example>
 
-        <example id="zend.service.amazon.ec2.reserved.instance.offerings.describe">
-            <title>Describe current Reserved Instance Offerings available</title>
+        <example xml:id="zend.service.amazon.ec2.reserved.instance.offerings.describe"><info><title>Describe current Reserved Instance Offerings available</title></info>
+            
 
             <para>
                 <methodname>describeOfferings()</methodname> Describes Reserved Instance offerings
@@ -113,8 +112,8 @@ $return = $ec2_instance->describeOfferings();
 ]]></programlisting>
         </example>
 
-        <example id="zend.service.amazon.ec2.reserved.instance.offerings.purchase">
-            <title>Turn off CloudWatch Monitoring on an Instance(s)</title>
+        <example xml:id="zend.service.amazon.ec2.reserved.instance.offerings.purchase"><info><title>Turn off CloudWatch Monitoring on an Instance(s)</title></info>
+            
 
             <para>
                 <methodname>purchaseOffering()</methodname> Purchases a Reserved Instance for use
@@ -134,5 +133,5 @@ $ec2_instance = new Zend_Service_Amazon_Ec2_Instance_Reserved('aws_key',
 $return = $ec2_instance->purchaseOffering('offeringId', 'instanceCount');
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -40,7 +40,7 @@ interface Validator
      *
      * @param  mixed $value
      * @return boolean
-     * @throws Zend_Valid_Exception If validation of $value is impossible
+     * @throws Exception If validation of $value is impossible
      */
     public function isValid($value);
 

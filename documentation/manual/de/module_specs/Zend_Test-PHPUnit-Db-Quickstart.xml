@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22084 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.test.phpunit.db.quickstart">
-    <title>Quickstart</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.db.quickstart"><info><title>Quickstart</title></info>
+    
 
-    <sect3 id="zend.test.phpunit.db.quickstart.testcase">
-        <title>Einen Datenbank TestCase erstellen</title>
+    <section xml:id="zend.test.phpunit.db.quickstart.testcase"><info><title>Einen Datenbank TestCase erstellen</title></info>
+        
 
         <para>
             Wir schreiben jetzt einige Datenbank Tests für das Bug Datenbank Beispiel in der
@@ -107,10 +105,10 @@ class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.test.phpunit.db.quickstart.dataset">
-        <title>Einen Seed Datensatz spezifizieren</title>
+    <section xml:id="zend.test.phpunit.db.quickstart.dataset"><info><title>Einen Seed Datensatz spezifizieren</title></info>
+        
 
         <para>
             Im vorhergehenden Setup für den Datenbank Testcase haben wir eine Seed Datei für das
@@ -156,10 +154,10 @@ CREATE TABLE IF NOT EXISTS `zfbugs` (
 PRIMARY KEY  (`bug_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 ;
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.test.phpunit.db.quickstart.initial-tests">
-        <title>Einige initiale Datenbank Tests</title>
+    <section xml:id="zend.test.phpunit.db.quickstart.initial-tests"><info><title>Einige initiale Datenbank Tests</title></info>
+        
 
         <para>
             Jetzt, da wie die zwei benötigten Abstrakten Methoden von
@@ -203,7 +201,7 @@ class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
 ]]></programlisting>
 
         <para>
-            Jetzt sieht ab <methodname>$bugsTable->insert($data);</methodname> alles wie gewohnt
+            Jetzt sieht ab <methodname>$bugsTable-&gt;insert($data);</methodname> alles wie gewohnt
             aus. Die Zeilen danach enthalten den Assertion Methodennamen. Wir wollen prüfen ob, nach
             dem Einfügen des neuen Fehlers, die Datenbank richtig mit den angegebenen Daten
             aktualisiert wurde. Hierfür erstellen wir eine Instanz von
@@ -316,7 +314,7 @@ class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
             Instanz von <methodname>Zend_Test_PHPUnit_Db_DataSet_DbRowset($rowset)</methodname>
             erstellt, welche eine interne Daten-Repräsentation des Datensatzes erstellt. Das kann
             wiederum gegenüber anderen Daten-Tabellen verglichen werden indem die Annahme
-            <methodname>$this->assertTablesEqual()</methodname> verwendet wird.
+            <methodname>$this-&gt;assertTablesEqual()</methodname> verwendet wird.
         </para>
-    </sect3>
-</sect2>
+    </section>
+</section>

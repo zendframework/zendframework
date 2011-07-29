@@ -23,16 +23,19 @@
  * @namespace
  */
 namespace Zend\Tool\Project\Context\Content\Engine;
-use Zend\Tool\Project\Context;
+
+use Zend\CodeGenerator\AbstractCodeGenerator,
+    Zend\CodeGenerator\Php as PhpCodeGenerator,
+    Zend\Tool\Framework\Client\Storage,
+    Zend\Tool\Project\Context,
+    Zend\Tool\Project\Exception;
 
 /**
- * This class is the front most class for utilizing Zend_Tool_Project
+ * This class is the front most class for utilizing Zend\Tool\Project
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       \Zend\CodeGenerator\Php\PhpFile
- * @uses       \Zend\Tool\Project\Exception
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -41,7 +44,7 @@ use Zend\Tool\Project\Context;
 class CodeGenerator
 {
     /**
-     * @var \Zend\Tool\Framework\Client\Storage
+     * @var Storage
      */
     protected $_storage = null;
 
@@ -53,10 +56,10 @@ class CodeGenerator
     /**
      * __construct()
      *
-     * @param \Zend\Tool\Framework\Client\Storage $storage
+     * @param Storage $storage
      * @param string $contentPrefix
      */
-    public function __construct(\Zend\Tool\Framework\Client\Storage $storage, $contentPrefix)
+    public function __construct(Storage $storage, $contentPrefix)
     {
         $this->_storage       = $storage;
         $this->_contentPrefix = $contentPrefix;
@@ -89,13 +92,13 @@ class CodeGenerator
         if (method_exists($context, 'getCodeGenerator')) {
             $codeGenerator = $context->getCodeGenerator();
         } else {
-            $codeGenerator = new \Zend\CodeGenerator\Php\PhpFile();
+            $codeGenerator = new PhpCodeGenerator\PhpFile();
         }
 
         $codeGenerator = include $streamUri;
 
-        if (!$codeGenerator instanceof \Zend\CodeGenerator\AbstractCodeGenerator) {
-            throw new \Zend\Tool\Project\Exception('Custom file at ' . $streamUri . ' did not return the $codeGenerator object.');
+        if (!$codeGenerator instanceof AbstractCodeGenerator) {
+            throw new Exception\RuntimeException('Custom file at ' . $streamUri . ' did not return the $codeGenerator object.');
         }
 
         return $codeGenerator->generate();

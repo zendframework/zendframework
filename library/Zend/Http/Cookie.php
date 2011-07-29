@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -24,6 +23,7 @@
  * @namespace
  */
 namespace Zend\Http;
+
 use Zend\Uri;
 
 /**
@@ -38,9 +38,6 @@ use Zend\Uri;
  *
  * See http://wp.netscape.com/newsref/std/cookie_spec.html for some specs.
  *
- * @uses       \Zend\Date\Date
- * @uses       \Zend\Http\Exception
- * @uses       \Zend\Uri\Url
  * @category   Zend
  * @package    Zend_Http
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -220,7 +217,7 @@ class Cookie
     /**
      * Checks whether the cookie should be sent or not in a specific scenario
      *
-     * @param string|\Zend\Uri\Url $uri URI to check against (secure, domain, path)
+     * @param string|Uri\Uri $uri URI to check against (secure, domain, path)
      * @param boolean $matchSessionCookies Whether to send session cookies
      * @param int $now Override the current time when checking for expiry time
      * @return boolean
@@ -228,18 +225,29 @@ class Cookie
     public function match($uri, $matchSessionCookies = true, $now = null)
     {
         if (is_string ($uri)) {
-            $uri = new Uri\Url($uri);
+            $uri = Uri\UriFactory::factory($uri, 'http');
+        }
+
+        if (!$uri instanceof Uri\Uri) {
+            throw new Exception\InvalidArgumentException('Invalid URI provided; does not implement Zend\Uri\Uri');
         }
 
         // Make sure we have a valid Zend_Uri_Http object
-        if (! ($uri->isValid() && ($uri->getScheme() == 'http' || $uri->getScheme() =='https'))) {
+        $scheme = $uri->getScheme();
+        if (! ($uri->isValid() && ($scheme == 'http' || $scheme =='https'))) {
             throw new Exception\InvalidArgumentException('Passed URI is not a valid HTTP or HTTPS URI');
         }
 
         // Check that the cookie is secure (if required) and not expired
-        if ($this->secure && $uri->getScheme() != 'https') return false;
-        if ($this->isExpired($now)) return false;
-        if ($this->isSessionCookie() && ! $matchSessionCookies) return false;
+        if ($this->secure && $scheme != 'https') {
+            return false;
+        }
+        if ($this->isExpired($now)) {
+            return false;
+        }
+        if ($this->isSessionCookie() && ! $matchSessionCookies) {
+            return false;
+        }
 
         // Check if the domain matches
         if (! self::matchCookieDomain($this->getDomain(), $uri->getHost())) {
@@ -274,16 +282,16 @@ class Cookie
      * (for example the value of the Set-Cookie HTTP header)
      *
      * @param string $cookieStr
-     * @param \Zend\Uri\Url|string $refUri Reference URI for default values (domain, path)
+     * @param Uri\Uri|string $refUri Reference URI for default values (domain, path)
      * @param boolean $encodeValue Weither or not the cookie's value should be
      *                             passed through urlencode/urldecode
-     * @return \Zend\Http\Cookie A new \Zend\Http\Cookie object or false on failure.
+     * @return Cookie A new Cookie object or false on failure.
      */
     public static function fromString($cookieStr, $refUri = null, $encodeValue = true)
     {
         // Set default values
         if (is_string($refUri)) {
-            $refUri = new Uri\Url($refUri);
+            $refUri = Uri\UriFactory::factory($refUri, 'http');
         }
 
         $name    = '';
@@ -305,10 +313,10 @@ class Cookie
         }
 
         // Set default domain and path
-        if ($refUri instanceof Uri\Url) {
+        if ($refUri instanceof Uri\Uri) {
             $domain = $refUri->getHost();
-            $path = $refUri->getPath();
-            $path = substr($path, 0, strrpos($path, '/'));
+            $path   = $refUri->getPath();
+            $path   = substr($path, 0, strrpos($path, '/'));
         }
 
         // Set other cookie parameters

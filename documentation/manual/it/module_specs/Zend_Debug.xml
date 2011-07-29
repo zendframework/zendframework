@@ -1,19 +1,20 @@
-<sect1 id="zend.debug.dumping">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.debug.dumping"><info><title>Stampa delle variabili</title></info>
 
-    <title>Stampa delle variabili</title>
+    
 
     <para>
         Il metodo statico <code>Zend_Debug::dump()</code> stampa o restituisce le informazioni su una espressione.
         Questa semplice tecnica di debug è comune poiché facile da usare in modo appropriato e non richiede alcuna inizializzazione, strumenti speciali o un ambiente di debug.
     </para>
 
-    <example id="zend.debug.dumping.example">
-        <title>Esempio del metodo dump()</title>
+    <example xml:id="zend.debug.dumping.example"><info><title>Esempio del metodo dump()</title></info>
+        
         <programlisting role="php"><![CDATA[
 
 Zend_Debug::dump($var, $label=null, $echo=true);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
 
     <para>
@@ -33,14 +34,14 @@ Zend_Debug::dump($var, $label=null, $echo=true);
 
     <para>
         Può essere utile sapere che, internamente, il metodo <code>Zend_Debug::dump()</code> racchiude la funzione PHP
-        <ulink url="http://php.net/var_dump"><code>var_dump()</code></ulink>.
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/var_dump"><code>var_dump()</code></link>.
         Se il flusso dell'output è riconosciuto come destinato ad una presentazione web, l'output di <code>var_dump()</code> è codificato utilizzando
-        <ulink url="http://php.net/htmlspecialchars"><code>htmlspecialchars()</code></ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/htmlspecialchars"><code>htmlspecialchars()</code></link>
         ed incluso all'interno dei tag (X)HTML <code>&lt;pre&gt;</code>.
     </para>
 
-    <tip>
-        <title>Debug con Zend_Log</title>
+    <tip><info><title>Debug con Zend_Log</title></info>
+        
         <para>
             L'utilizzo di <code>Zend_Debug::dump()</code> è conveniente per il debug specifico durante lo sviluppo del software.
             E' possibile inserire o rimuovere rapidamente il codice necessario per stampare una variabile.
@@ -51,7 +52,4 @@ Zend_Debug::dump($var, $label=null, $echo=true);
         </para>
     </tip>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

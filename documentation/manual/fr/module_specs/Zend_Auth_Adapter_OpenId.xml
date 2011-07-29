@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20763 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.auth.adapter.openid">
-    <title>Authentification OpenID</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.openid"><info><title>Authentification OpenID</title></info>
+    
 
-    <sect2 id="zend.auth.adapter.openid.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.auth.adapter.openid.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_Auth_Adapter_OpenId</classname> permet l'authentification à travers un
@@ -20,7 +18,7 @@
             L'identité OpenID est juste une <acronym>URI</acronym> qui pointe vers une page avec des
             informations décrivant le serveur à utiliser et des informations sur l'utilisateur.
             Pour plus d'informations, consultez
-            <ulink url="http://www.openid.net/">le site officiel OpenID</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.openid.net/">le site officiel OpenID</link>.
         </para>
 
         <para>
@@ -31,15 +29,15 @@
         <note>
             <para>
                 <classname>Zend_OpenId</classname> utilise
-                <ulink url="http://www.php.net/manual/fr/ref.gmp.php">l'extension GMP</ulink>, si
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/fr/ref.gmp.php">l'extension GMP</link>, si
                 disponible. L'utilisation de l'extension <acronym>GMP</acronym> est recommandée pour
                 améliorer les performances de <classname>Zend_Auth_Adapter_OpenId</classname>.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.openid.specifics">
-        <title>Spécifications</title>
+    <section xml:id="zend.auth.adapter.openid.specifics"><info><title>Spécifications</title></info>
+        
 
         <para>
             Comme toute autre classe adaptateur de <classname>Zend_Auth</classname>,
@@ -56,7 +54,7 @@
             serveur externe à l'application, et nécessitera donc deux requêtes
             <acronym>HTTP</acronym>. Ainsi
             <methodname>Zend_Auth_Adapter_OpenId::authenticate()</methodname> devra être appelée
-            deux fois&#160;: d'abord pour rediriger l'utilisateur vers le serveur OpenID (rien ne
+            deux fois : d'abord pour rediriger l'utilisateur vers le serveur OpenID (rien ne
             sera donc retourné par la méthode), qui lui-même redirigera l'utilisateur vers
             l'application, où un deuxième appel de méthode
             <methodname>Zend_Auth_Adapter_OpenId::authenticate()</methodname> vérifiera la signature
@@ -128,5 +126,5 @@ if ((isset($_POST['openid_action']) &&
             provenance du serveur OpenID. Toutes ces possibilités sont écrites et détaillées dans
             le chapitre concernant <classname>Zend_OpenId_Consumer</classname>.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

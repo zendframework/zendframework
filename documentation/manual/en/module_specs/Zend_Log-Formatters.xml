@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.log.formatters">
-    <title>Formatters</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.formatters"><info><title>Formatters</title></info>
+    
 
     <para>
         A Formatter is an object that is responsible for taking an <property>event</property> array
@@ -15,8 +14,8 @@
         set a Formatter.
     </para>
 
-    <sect2 id="zend.log.formatters.simple">
-        <title>Simple Formatting</title>
+    <section xml:id="zend.log.formatters.simple"><info><title>Simple Formatting</title></info>
+        
 
         <para>
             <classname>Zend_Log_Formatter_Simple</classname> is the default formatter. It is
@@ -55,10 +54,10 @@ $logger->info('there');
             You can retrieve the default keys by using the DEFAULT_FORMAT constant from
             <classname>Zend_Log_Formatter_Simple</classname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.log.formatters.xml">
-        <title>Formatting to XML</title>
+    <section xml:id="zend.log.formatters.xml"><info><title>Formatting to XML</title></info>
+        
 
         <para>
             <classname>Zend_Log_Formatter_Xml</classname> formats log data into
@@ -125,5 +124,5 @@ $logger->info('informational message');
   <level>INFO</level>
 </log>
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -233,9 +233,9 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
             'specialChars' => '<>$+ &?=[]^%',
             'array' => array('firstItem', 'secondItem', '3rdItem')
         );
-        
+
         $headers = array("X-Foo" => "bar");
-        
+
         $this->client->setParameterPost($params);
         $this->client->setParameterGet($params);
         $this->client->setHeaders($headers);
@@ -738,7 +738,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         if (!ini_get('file_uploads')) {
             $this->markTestSkipped('File uploads disabled.');
         }
-        
+
         $this->client->setUri($this->baseuri. 'testUploads.php');
 
         $rawdata = file_get_contents(__FILE__);
@@ -758,7 +758,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         if (!ini_get('file_uploads')) {
             $this->markTestSkipped('File uploads disabled.');
         }
-        
+
         $this->client->setUri($this->baseuri. 'testUploads.php');
         $this->client->setFileUpload(__FILE__, 'uploadfile', null, 'text/x-foo-bar');
         $res = $this->client->request('POST');
@@ -774,7 +774,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         if (!ini_get('file_uploads')) {
             $this->markTestSkipped('File uploads disabled.');
         }
-        
+
         $detect = null;
         if (function_exists('finfo_file')) {
             $f = @finfo_open(FILEINFO_MIME);
@@ -806,7 +806,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         if (!ini_get('file_uploads')) {
             $this->markTestSkipped('File uploads disabled.');
         }
-        
+
         $this->client->setUri($this->baseuri. 'testUploads.php');
 
         $rawdata = file_get_contents(__FILE__);
@@ -838,7 +838,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         if (!ini_get('file_uploads')) {
             $this->markTestSkipped('File uploads disabled.');
         }
-        
+
         $rawData = 'Some test raw data here...';
 
         $this->client->setUri($this->baseuri . 'testUploads.php');
@@ -860,7 +860,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
      * Test that lines that might be evaluated as boolean false do not break
      * the reading prematurely.
      *
-     * @see http://framework.zend.com/issues/browse/ZF-4238
+     * @group ZF-4238
      */
     public function testZF4238FalseLinesInResponse()
     {
@@ -870,113 +870,113 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         $expected = $this->_getTestFileContents('ZF4238-zerolineresponse.txt');
         $this->assertEquals($expected, $got);
     }
-    
+
     public function testStreamResponse()
     {
         if(!($this->client->getAdapter() instanceof Adapter\Stream)) {
               $this->markTestSkipped('Current adapter does not support streaming');
-              return;   
+              return;
         }
         $this->client->setUri($this->baseuri . 'staticFile.jpg');
         $this->client->setStream();
 
         $response = $this->client->request();
-        
+
         $this->assertTrue($response instanceof Response\Stream, 'Request did not return stream response!');
         $this->assertTrue(is_resource($response->getStream()), 'Request does not contain stream!');
-        
+
         $stream_name = $response->getStreamName();
-     
+
         $stream_read = stream_get_contents($response->getStream());
         $file_read = file_get_contents($stream_name);
-        
+
         $expected = $this->_getTestFileContents('staticFile.jpg');
 
         $this->assertEquals($expected, $stream_read, 'Downloaded stream does not seem to match!');
         $this->assertEquals($expected, $file_read, 'Downloaded file does not seem to match!');
     }
-    
+
     public function testStreamResponseBody()
     {
         if(!($this->client->getAdapter() instanceof Adapter\Stream)) {
               $this->markTestSkipped('Current adapter does not support streaming');
-              return;   
+              return;
         }
         $this->client->setUri($this->baseuri . 'staticFile.jpg');
         $this->client->setStream();
 
         $response = $this->client->request();
-        
+
         $this->assertTrue($response instanceof Response\Stream, 'Request did not return stream response!');
         $this->assertTrue(is_resource($response->getStream()), 'Request does not contain stream!');
-        
+
         $body = $response->getBody();
-        
+
         $expected = $this->_getTestFileContents('staticFile.jpg');
         $this->assertEquals($expected, $body, 'Downloaded stream does not seem to match!');
     }
-    
+
     public function testStreamResponseNamed()
     {
         if(!($this->client->getAdapter() instanceof Adapter\Stream)) {
               $this->markTestSkipped('Current adapter does not support streaming');
-              return;   
+              return;
         }
         $this->client->setUri($this->baseuri . 'staticFile.jpg');
         $outfile = tempnam(sys_get_temp_dir(), "outstream");
         $this->client->setStream($outfile);
 
         $response = $this->client->request();
-        
+
         $this->assertTrue($response instanceof Response\Stream, 'Request did not return stream response!');
         $this->assertTrue(is_resource($response->getStream()), 'Request does not contain stream!');
-        
+
         $this->assertEquals($outfile, $response->getStreamName());
-     
+
         $stream_read = stream_get_contents($response->getStream());
         $file_read = file_get_contents($outfile);
-        
+
         $expected = $this->_getTestFileContents('staticFile.jpg');
 
         $this->assertEquals($expected, $stream_read, 'Downloaded stream does not seem to match!');
         $this->assertEquals($expected, $file_read, 'Downloaded file does not seem to match!');
     }
-       
+
     public function testStreamRequest()
     {
         if(!($this->client->getAdapter() instanceof Adapter\Stream)) {
               $this->markTestSkipped('Current adapter does not support streaming');
-              return;   
+              return;
         }
-        $data = fopen(dirname(realpath(__FILE__)) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'staticFile.jpg', "r"); 
+        $data = fopen(dirname(realpath(__FILE__)) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'staticFile.jpg', "r");
         $res = $this->client->setRawData($data, 'image/jpeg')->request('PUT');
         $expected = $this->_getTestFileContents('staticFile.jpg');
         $this->assertEquals($expected, $res->getBody(), 'Response body does not contain the expected data');
     }
-    
+
     /**
      * Test that we can deal with double Content-Length headers
-     * 
+     *
      * @link http://framework.zend.com/issues/browse/ZF-9404
      */
     public function testZF9404DoubleContentLengthHeader()
     {
         $this->client->setUri($this->baseuri . 'ZF9404-doubleContentLength.php');
         $expect = filesize(dirname(realpath(__FILE__)) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'ZF9404-doubleContentLength.php');
-        
+
         $response = $this->client->request();
         if (! $response->isSuccessful()) {
             throw new AdapterException\RuntimeException("Error requesting test URL");
         }
-        
+
         $clen = $response->getHeader('content-length');
         if (! (is_array($clen))) {
             $this->markTestSkipped("Didn't get multiple Content-length headers");
         }
-        
+
         $this->assertEquals($expect, strlen($response->getBody()));
     }
-    
+
     /**
      * Internal helpder function to get the contents of test files
      *

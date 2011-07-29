@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 20765 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.controller.quickstart">
-    <title>Inicio rápido a Zend_Controller</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.quickstart"><info><title>Inicio rápido a Zend_Controller</title></info>
+    
 
-    <sect2 id="zend.controller.quickstart.introduction">
-        <title>Introducción</title>
+    <section xml:id="zend.controller.quickstart.introduction"><info><title>Introducción</title></info>
+        
         <para>
             <classname>Zend_Controller</classname>
             es el corazón del sistema de
@@ -15,17 +13,17 @@
             .
             <acronym>MVC</acronym>
             son las siglas de
-            <ulink url="http://en.wikipedia.org/wiki/Model-view-controller">
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Model-view-controller">
                 Modelo-Vista-Controlador
-            </ulink>
+            </link>
             y es un patrón de diseño con el objetivo de separar la
             lógica de la aplicación de la
             lógica de visualización.
             <classname>Zend_Controller_Front</classname>
             implementa el patrón
-            <ulink url="http://www.martinfowler.com/eaaCatalog/frontController.html">
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.martinfowler.com/eaaCatalog/frontController.html">
                 Front Controller (Controlador Frontal)
-            </ulink>
+            </link>
             en el cual todas las transacciones
             <acronym>HTTP</acronym>
             (requests) son
@@ -48,10 +46,10 @@
             de las acciones para aumentar
             o manipular la funcionalidad del sistema.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.quickstart.go">
-        <title>Quick Start</title>
+    <section xml:id="zend.controller.quickstart.go"><info><title>Quick Start</title></info>
+        
 
         <para>
             Si necesita información más detallada, mire las secciones
@@ -60,8 +58,8 @@
             aplicación rápidamente, siga leyendo.
        </para>
 
-        <sect3 id="zend.controller.quickstart.go.directory">
-            <title>Cree su estructura de archivos</title>
+        <section xml:id="zend.controller.quickstart.go.directory"><info><title>Cree su estructura de archivos</title></info>
+            
 
             <para>
                 El primer paso es crear su estructura de archivos. La
@@ -85,10 +83,10 @@ html/
     index.php
 ]]></programlisting>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.quickstart.go.docroot">
-            <title>Establezca el document root</title>
+        <section xml:id="zend.controller.quickstart.go.docroot"><info><title>Establezca el document root</title></info>
+            
 
             <para>
                 Apunte su document root en su servidor web hacia el
@@ -96,10 +94,10 @@ html/
                 <filename>html/</filename>
                 de la estructura de archivos de arriba.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.quickstart.go.rewrite">
-            <title>Cree sus reglas de reescritura</title>
+        <section xml:id="zend.controller.quickstart.go.rewrite"><info><title>Cree sus reglas de reescritura</title></info>
+            
 
             <para>
                 Edite el archivo
@@ -116,8 +114,8 @@ RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
 ]]></programlisting>
 
-            <note>
-                <title>Learn about mod_rewrite</title>
+            <note><info><title>Learn about mod_rewrite</title></info>
+                
 
                 <para>
                     The above rewrite rules allow access to any file under your
@@ -126,8 +124,8 @@ RewriteRule ^.*$ index.php [NC,L]
                     want exposed in this way, you may
                     want to be more
                     restrictive in your rules. Go to the Apache website to
-                    <ulink url="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">learn
-                        more about mod_rewrite</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">learn
+                        more about mod_rewrite</link>
                     .
                 </para>
             </note>
@@ -185,10 +183,10 @@ RewriteRule ^.*$ index.php [NC,L]
                     .
                 </para>
             </note>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.quickstart.go.bootstrap">
-            <title>Crear el archivo bootstrap</title>
+        <section xml:id="zend.controller.quickstart.go.bootstrap"><info><title>Crear el archivo bootstrap</title></info>
+            
 
             <para>
                 El archivo bootstrap es la página a la que todas las peticiones
@@ -209,10 +207,10 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 redigirá las
                 peticiones a los action controllers.
            </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.quickstart.go.controller">
-            <title>Crear el action controller por defecto</title>
+        <section xml:id="zend.controller.quickstart.go.controller"><info><title>Crear el action controller por defecto</title></info>
+            
 
             <para>
                 Antes de tratar los action controllers, debe primero
@@ -333,10 +331,10 @@ class IndexController extends Zend_Controller_Action
                 <filename>application/views/scripts/index/index.phtml</filename>
                 .
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.quickstart.go.view">
-            <title>Cree su view script</title>
+        <section xml:id="zend.controller.quickstart.go.view"><info><title>Cree su view script</title></info>
+            
 
             <para>
                 Como hemos mencionado
@@ -365,10 +363,10 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 </body>
 </html>
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.quickstart.go.errorhandler">
-            <title>Cree su controlador de errores</title>
+        <section xml:id="zend.controller.quickstart.go.errorhandler"><info><title>Cree su controlador de errores</title></info>
+            
 
             <para>
                 Por defecto, está registrado
@@ -418,10 +416,10 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 </body>
 </html>
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.quickstart.go.finish">
-            <title>¡Vea el sitio!</title>
+        <section xml:id="zend.controller.quickstart.go.finish"><info><title>¡Vea el sitio!</title></info>
+            
 
             <para>
                 Con su primer controlador y vista, ya puede arrancar su navegador y acceder a su
@@ -456,9 +454,6 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                 Ya está listo para empezar a crear más métodos de controladores y acciones.
                 ¡Felicidades!
            </para>
-        </sect3>
-    </sect2>
-</sect1>
-    <!--
-    vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

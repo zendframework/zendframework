@@ -1,8 +1,9 @@
-<sect1 id="zend.server.reflection">
-    <title>Zend_Server_Reflection</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.server.reflection"><info><title>Zend_Server_Reflection</title></info>
+    
 
-    <sect2 id="zend.server.reflection.introduction">
-        <title>הקדמה</title>
+    <section xml:id="zend.server.reflection.introduction"><info><title>הקדמה</title></info>
+        
 
         <para>
             <code>Zend_Server_Reflection</code> מספק מנגנון שליטה ובקרה סטנדרטי לבחינה עצמית של מחלקות ופונצקיות לשימוש במחלקות שרת.
@@ -12,9 +13,9 @@
         <para>
             בדרך כלל, ברכיב זה ישתמשו רק מתכנתים אשר משתמשים במחלקות השרת במערכת.
         </para>
-    </sect2>
-    <sect2 id="zend.server.reflection.usage">
-        <title>שימוש</title>
+    </section>
+    <section xml:id="zend.server.reflection.usage"><info><title>שימוש</title></info>
+        
 
         <para>
            דוגמא לשימוש:
@@ -47,8 +48,8 @@ foreach ($prototypes as $prototype) {
 // Namespaces may be set at instantiation time (second argument), or using
 // setNamespace()
 $reflection->getNamespace();
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             <code>reflectFunction()</code> מחזיר אובייקט מסוג
@@ -58,8 +59,5 @@ $reflection->getNamespace();
 
             יש לקרוא את הדוקומנטציה כדי לדעת אילו מתודות יש לכל אחד.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

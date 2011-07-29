@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 17134 -->
-<sect3 id="zend.view.helpers.initial.headlink">
-    <title>HeadLink ヘルパー</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headlink"><info><title>HeadLink ヘルパー</title></info>
+    
 
     <para>
         HTML の <code>&lt;link&gt;</code> 要素は複数使用することができ、
@@ -69,8 +67,8 @@
         ヘルパー</link> の具象実装です。
     </para>
 
-    <example id="zend.view.helpers.initial.headlink.basicusage">
-        <title>HeadLink ヘルパーの基本的な使用法</title>
+    <example xml:id="zend.view.helpers.initial.headlink.basicusage"><info><title>HeadLink ヘルパーの基本的な使用法</title></info>
+        
 
         <para>
             <code>headLink</code> は、いつでも指定することができます。
@@ -95,7 +93,4 @@ $this->headLink()->appendStylesheet('/styles/basic.css')
 <?php echo $this->headLink() ?>
 ]]></programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

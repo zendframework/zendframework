@@ -1,20 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20763 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.application.core-functionality.bootstrap-bootstrapabstract">
-    <title>Zend_Application_Bootstrap_BootstrapAbstract</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.core-functionality.bootstrap-bootstrapabstract"><info><title>Zend_Application_Bootstrap_BootstrapAbstract</title></info>
+    
 
     <para>
         <classname>Zend_Application_Bootstrap_BootstrapAbstract</classname> ist eine abstrakte
         Klasse welche die Basisfunktionalität des normalen Bootstrappings bietet. Sie implementiert
-        sowohl <link
-            linkend="zend.application.core-functionality.bootstrap-bootstrapper"><classname>Zend_Application_Bootstrap_Bootstrapper</classname></link>
-        als auch <link
-            linkend="zend.application.core-functionality.bootstrap-resourcebootstrapper"><classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname></link>.
+        sowohl <link linkend="zend.application.core-functionality.bootstrap-bootstrapper"><classname>Zend_Application_Bootstrap_Bootstrapper</classname></link>
+        als auch <link linkend="zend.application.core-functionality.bootstrap-resourcebootstrapper"><classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname></link>.
     </para>
 
-    <table id="zend.application.core-functionality.bootstrap-bootstrapabstract.api.table">
-        <title>Zend_Application_Bootstrap_BootstrapAbstract Methoden</title>
+    <table xml:id="zend.application.core-functionality.bootstrap-bootstrapabstract.api.table"><info><title>Zend_Application_Bootstrap_BootstrapAbstract Methoden</title></info>
+        
 
         <tgroup cols="4">
             <thead>
@@ -223,8 +221,7 @@
                     <entry>
                         <para>
                             Empfängt den Container der die Ressourcen speichert. Wenn aktuell kein
-                            Container registriert ist, wird eine Instanz von <link
-                                linkend="zend.registry">Zend_Registry</link> registriert bevor diese
+                            Container registriert ist, wird eine Instanz von <link linkend="zend.registry">Zend_Registry</link> registriert bevor diese
                             retourniert wird.
                         </para>
                     </entry>
@@ -387,4 +384,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect2>
+</section>

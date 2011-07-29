@@ -1,6 +1,7 @@
-<sect1 id="zend.debug.dumping">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.debug.dumping"><info><title>Wyświetlanie informacji o zmiennych</title></info>
 
-    <title>Wyświetlanie informacji o zmiennych</title>
+    
 
     <para>
         Statyczna metoda <code>Zend_Debug::dump()</code> wyświetla lub zwraca
@@ -9,12 +10,12 @@
         specjalnych narzędzi czy środowiska testowego.
     </para>
 
-    <example id="zend.debug.dumping.example">
-        <title>Przykład użycia metody dump()</title>
+    <example xml:id="zend.debug.dumping.example"><info><title>Przykład użycia metody dump()</title></info>
+        
         <programlisting role="php"><![CDATA[
 Zend_Debug::dump($var, $label=null, $echo=true);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
 
     <para>
@@ -39,16 +40,16 @@ Zend_Debug::dump($var, $label=null, $echo=true);
     <para>
         Użyteczna może być informacja o tym, że metoda
         <code>Zend_Debug::dump()</code> używa funkcji PHP
-        <ulink url="http://php.net/var_dump"><code>var_dump()</code></ulink>.
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/var_dump"><code>var_dump()</code></link>.
         Jeśli dane wyjsciowe mają być wyświetlone w przeglądarce, to w wyniku
         zwróconym przez wywołanie metody <code>var_dump()</code> znaki
         specjalne cytowane są za pomocą funkcji
-        <ulink url="http://php.net/htmlspecialchars"><code>htmlspecialchars()</code></ulink>,
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/htmlspecialchars"><code>htmlspecialchars()</code></link>,
         a cały wynik zostaje objęty znacznikami (X)HTML <code>&lt;pre&gt;</code>.
     </para>
 
-    <tip>
-        <title>Usuwanie błędów za pomocą Zend_Log</title>
+    <tip><info><title>Usuwanie błędów za pomocą Zend_Log</title></info>
+        
         <para>
             Użycie metody <code>Zend_Debug::dump()</code> jest najlepsze do
             doraźnego usuwania błędów podczas tworzenia oprogramowania.
@@ -66,4 +67,4 @@ Zend_Debug::dump($var, $label=null, $echo=true);
         </para>
     </tip>
 
-</sect1>
+</section>

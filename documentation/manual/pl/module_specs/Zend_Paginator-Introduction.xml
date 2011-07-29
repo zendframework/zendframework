@@ -1,5 +1,8 @@
-<sect1 id="zend.paginator.introduction">
-    <title>Wprowadzenie</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.paginator.introduction"><info><title>Wprowadzenie</title></info>
+    
 
     <para>
         <code>Zend_Paginator</code> jest elastycznym komponentem do paginacji
@@ -37,7 +40,4 @@
             </listitem>
         </itemizedlist>
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

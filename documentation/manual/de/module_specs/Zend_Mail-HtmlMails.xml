@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22745 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.html-mails">
-    <title>HTML E-Mail</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.html-mails"><info><title>HTML E-Mail</title></info>
+    
 
     <para>
         Um einen E-Mail im <acronym>HTML</acronym> Format zu versenden, muss der Hauptteil der
@@ -13,8 +11,8 @@
         multipart/alternative <acronym>MIME</acronym> E-Mail erstellt:
     </para>
 
-    <example id="zend.mail.html-mails.example-1">
-        <title>Versand von HTML E-Mail</title>
+    <example xml:id="zend.mail.html-mails.example-1"><info><title>Versand von HTML E-Mail</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
@@ -26,4 +24,4 @@ $mail->setSubject('TestBetreff');
 $mail->send();
 ]]></programlisting>
     </example>
-</sect1>
+</section>

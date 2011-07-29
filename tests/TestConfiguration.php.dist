@@ -551,6 +551,9 @@ define('TESTS_ZEND_QUEUE_PLATFORMJQ_PASS', false);
 define('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ENABLED', false);
 define('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID', 'Enter AWSAccessKeyId here');
 define('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY', 'Enter AWSSecretKey here');
+define('TESTS_ZEND_SERVICE_AMAZON_EC2_IMAGE_ID', 'zftestamazonimageid');
+define('TESTS_ZEND_SERVICE_AMAZON_EC2_ZONE', 'us-east-1');
+define('TESTS_ZEND_SERVICE_AMAZON_EC2_SECURITY_GROUP', 'default');
 define('TESTS_ZEND_SERVICE_AMAZON_S3_BUCKET', 'zftestamazons3bucket');
 define('TESTS_ZEND_SERVICE_AMAZON_SQS_QUEUE', 'zftestamazonsqsqueuename');
 
@@ -574,15 +577,45 @@ define('TESTS_ZEND_SERVICE_FLICKR_ONLINE_ENABLED', false);
 define('TESTS_ZEND_SERVICE_FLICKR_ONLINE_APIKEY', 'Enter API key here');
 
 /**
+ * Zend_service_GoGrid offline tests
+ */
+
+define ('TESTS_ZEND_SERVICE_GOGRID_ONLINE_KEY','Enter GoGrid key here');
+define ('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SECRET','Enter GoGrid secret here');
+
+/**
  * Zend_Service_LiveDocx configuration
  *
- * Define username and password in order to run unit tests for LiveDocX web
- * services.
+ * Define username and password in order to run unit tests for LiveDocx web services.
  *
  * phpunit/phpunit will typically work.
  */
 define('TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME', false);
 define('TESTS_ZEND_SERVICE_LIVEDOCX_PASSWORD', false);
+
+/**
+ * Zend_Service_LiveDocx premium configuration
+ *
+ * Define username, password, WSDL in order to run unit tests for premium LiveDocx web services.
+ */
+define('TESTS_ZEND_SERVICE_LIVEDOCX_PREMIUM_USERNAME', false);
+define('TESTS_ZEND_SERVICE_LIVEDOCX_PREMIUM_PASSWORD', false);
+define('TESTS_ZEND_SERVICE_LIVEDOCX_PREMIUM_WSDL',     false);
+
+/**
+ * Zend_Service_Rackspace tests
+ */
+define ('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_ENABLED', false);
+define ('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_USER', 'insertUserName');
+define ('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_KEY', 'insertKey');
+define ('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_REGION', 'USA');
+define ('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_NAME', 'insertServerName');
+define ('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_IMAGEID', '49');
+define ('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_NEW_IMAGEID', '49');
+define ('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_FLAVORID', '1');
+define ('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_IMAGE_NAME', 'ZFunitTestImage');
+define ('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_SHARED_IP_GROUP_NAME', 'ZFgroupIP');
+define ('TESTS_ZEND_SERVICE_RACKSPACE_TIMEOUT', 60);
 
 /**
  * Zend_Service_ReCaptcha tests

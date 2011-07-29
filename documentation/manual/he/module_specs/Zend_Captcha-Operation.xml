@@ -1,5 +1,6 @@
-<sect1 id="zend.captcha.operation">
-    <title>פעולת אנטי-ספאם</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.captcha.operation"><info><title>פעולת אנטי-ספאם</title></info>
+    
 
     <para>
         כל האובייקטים המוחשיים של CAPTCHA מיישמים את <code>Zend_Captcha_Adapter</code>, שנראה ככה:
@@ -25,8 +26,8 @@ interface Zend_Captcha_Adapter extends Zend_Validate_Interface
 
     public function getErrors();
 }
-]]>
-    </programlisting>
+
+    ]]></programlisting>
 
     <para>
         מתודות ה <code>setName()</code> ו <code>getName()</code> נועדו להגדיר ולהחזיר את המזהה היחודי של ה captcha.
@@ -58,9 +59,6 @@ echo $captcha->render($view);
 if ($captcha->isValid($_POST['foo'], $_POST)) {
     // Validated!
 }
-]]>
-        </programlisting>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+
+        ]]></programlisting>
+</section>

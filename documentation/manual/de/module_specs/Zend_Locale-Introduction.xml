@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22755 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.locale.introduction">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.locale.introduction"><info><title>Einführung</title></info>
+    
 
     <para>
         <classname>Zend_Locale</classname> ist die Antwort des Frameworks auf die Frage "Wie kann
@@ -14,9 +12,8 @@
     </para>
 
     <para>
-        Was wir benötigen ist <ulink
-            url="http://en.wikipedia.org/wiki/Internationalization_and_localization">Lokalisierung
-            und die vergleichbare Internationalisierung</ulink>. Beide werden oft abgekürzt zu
+        Was wir benötigen ist <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Internationalization_and_localization">Lokalisierung
+            und die vergleichbare Internationalisierung</link>. Beide werden oft abgekürzt zu
         <emphasis>L10n</emphasis> und <emphasis>I18n</emphasis>. Internationalisierung bezeichnet
         mehr die Benutzung von Systemen für die spezielle Benutzung durch eindeutige Gruppen wie zum
         Beispiel Sprachübersetzung, Unterstützung von lokalen Konventionen für Plurale, Daten,
@@ -28,11 +25,11 @@
         <classname>Zend_Currency</classname> und <classname>Zend_TimeSync</classname>.
     </para>
 
-    <tip>
-        <title>Zend_Locale und setLocale()</title>
+    <tip><info><title>Zend_Locale und setLocale()</title></info>
+        
 
         <para>
-            Die <ulink url="http://php.net/setlocale">Dokumentation von PHP</ulink> sagt das
+            Die <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/setlocale">Dokumentation von PHP</link> sagt das
             <methodname>setlocale()</methodname> nicht Threadsicher ist weil es pro Prozess
             behandelt wird und nicht pro Thread. Das bedeutet das man in multithreaded Umgebungen
             das Problem bekommen kann, das sich das Gebietsschema (Locale) ändert wärend das Skript
@@ -47,8 +44,8 @@
         </para>
     </tip>
 
-    <sect2 id="zend.locale.whatislocalization">
-        <title>Was ist Lokalisierung</title>
+    <section xml:id="zend.locale.whatislocalization"><info><title>Was ist Lokalisierung</title></info>
+        
 
         <para>
             Lokalisierung bedeutet das eine Anwendung (oder Homepage) von verschiedenen Benutzer
@@ -57,7 +54,7 @@
             beinhaltet
         </para>
 
-        <itemizedlist mark='opencircle'>
+        <itemizedlist mark="opencircle">
             <listitem>
                 <para>
                     <classname>Zend_Locale</classname> - Unterstützung für Gebietsschemata welche
@@ -101,15 +98,14 @@
             <listitem>
                 <para>
                     <classname>Zend_Locale_Data</classname> - Empfangen von lokalisierten Standard
-                    Übersetzungen für Länder, Sprachen und <ulink
-                        url="http://unicode.org/cldr/">mehr aus der <acronym>CLDR</acronym></ulink>.
+                    Übersetzungen für Länder, Sprachen und <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://unicode.org/cldr/">mehr aus der <acronym>CLDR</acronym></link>.
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.whatis">
-        <title>Was ist ein Gebietsschema?</title>
+    <section xml:id="zend.locale.whatis"><info><title>Was ist ein Gebietsschema?</title></info>
+        
 
         <para>
             Jeder Computer benutzt Gebietsschemata, selbst wenn Sie es nicht wissen. Anwendungen
@@ -126,10 +122,10 @@
             Formatierungen, Normalisierungen und Konvertierungen werden anhand dieser Informationen
             durchgeführt.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.representation">
-        <title>Wodurch werden Gebietsschemata repräsentiert?</title>
+    <section xml:id="zend.locale.representation"><info><title>Wodurch werden Gebietsschemata repräsentiert?</title></info>
+        
 
         <para>
             Eine Gebietsschema Zeichenkette besteht aus Informationen über die Sprache des Benutzers
@@ -157,14 +153,13 @@
             <constant>USA</constant> erwarten, beschrieben durch das Gebietsschema "en_US". Ein
             Benutzer von Deutschland würde die Sprache Deutsch und die Region
             Deutschland erwarten, beschrieben durch das Gebietsschema "de_DE". Hier
-            findest Du eine <ulink
-                url="http://unicode.org/cldr/data/diff/supplemental/languages_and_territories.html">Liste
-                von vordefinierten Sprachen und Kombinationen von Regionen</ulink> wenn ein
+            findest Du eine <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://unicode.org/cldr/data/diff/supplemental/languages_and_territories.html">Liste
+                von vordefinierten Sprachen und Kombinationen von Regionen</link> wenn ein
             bestimmtes Gebietsschema im Zend Framework ausgewählt werden muß.
         </para>
 
-        <example id="zend.locale.representation.example-1">
-            <title>Auswählen eines speziellen Gebietsschemas</title>
+        <example xml:id="zend.locale.representation.example-1"><info><title>Auswählen eines speziellen Gebietsschemas</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_DE'); // deutsche Sprache _ Deutschland
@@ -189,8 +184,7 @@ $locale = new Zend_Locale('de_DE'); // deutsche Sprache _ Deutschland
         <para>
             Achtung vor historischen Änderungen oder dem Versuch die verschiedenen Änderungen der
             Zeitzonen die im Laufe der langen Zeit in den vielen Regionen gemacht wurden, da Zend
-            Framework Komponenten darüber nichts wissen. Zum Beispiel kann <ulink
-                url="http://www.statoids.com/tus.html">hier eine historische Liste</ulink> mit
+            Framework Komponenten darüber nichts wissen. Zum Beispiel kann <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.statoids.com/tus.html">hier eine historische Liste</link> mit
             dutzenden Änderungen von Regierungen angesehen werden und ob eine Region
             <acronym>DST</acronym> (Sommer-/Winterzeit) unterstützt und sogar in welche Zeitzone
             eine bestimmte geographische Region gehört. Das bedeutet, wenn Datumsberechnungen
@@ -200,10 +194,10 @@ $locale = new Zend_Locale('de_DE'); // deutsche Sprache _ Deutschland
             Regeln für Sommer-/Winterzeit und Zeitzonen Zuordnung anhand von geographischen Regionen
             verwendet werden.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.selection">
-        <title>Auswahl des richtigen Gebietsschemas</title>
+    <section xml:id="zend.locale.selection"><info><title>Auswahl des richtigen Gebietsschemas</title></info>
+        
 
         <para>
             In den meisten Situationen wird <command>new Zend_Locale()</command> automatisch das
@@ -214,8 +208,8 @@ $locale = new Zend_Locale('de_DE'); // deutsche Sprache _ Deutschland
             genommen.
         </para>
 
-        <example id="zend.locale.selection.example-1">
-            <title>Automatische Auswahl des Gebietsschemas</title>
+        <example xml:id="zend.locale.selection.example-1"><info><title>Automatische Auswahl des Gebietsschemas</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $locale  = new Zend_Locale();
@@ -272,10 +266,10 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
                 </listitem>
             </orderedlist>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.selection.automatic">
-        <title>Verwenden automatischer Gebietsschemata</title>
+    <section xml:id="zend.locale.selection.automatic"><info><title>Verwenden automatischer Gebietsschemata</title></info>
+        
 
         <para>
             <classname>Zend_Locale</classname> bietet drei zusätzliche Gebietsschemata. Diese
@@ -343,8 +337,8 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
             </orderedlist>
         </para>
 
-        <example id="zend.locale.selection.automatic.example-1">
-            <title>Verwenden automatischer Gebietsschemata</title>
+        <example xml:id="zend.locale.selection.automatic.example-1"><info><title>Verwenden automatischer Gebietsschemata</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // ohne automatische Erkennung
@@ -355,10 +349,10 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
 $date = new Zend_Date('auto');
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.defaultlocale">
-        <title>Verwenden eines Standard Gebietsschemas</title>
+    <section xml:id="zend.locale.defaultlocale"><info><title>Verwenden eines Standard Gebietsschemas</title></info>
+        
 
         <para>
             In einigen Umgebungen ist es nicht möglich automatisch ein Gebietsschema zu erkennen.
@@ -374,8 +368,8 @@ $date = new Zend_Date('auto');
             eines neuen Gebietsschemas per Hand, oder der Definition eines Standardgebietsschemas.
         </para>
 
-        <example id="zend.locale.defaultlocale.example-1">
-            <title>Handhabung von Ausnahmen für Gebietsschemas</title>
+        <example xml:id="zend.locale.defaultlocale.example-1"><info><title>Handhabung von Ausnahmen für Gebietsschemas</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // In der Bootstrap Datei
@@ -405,8 +399,8 @@ $date = new Zend_Date($locale);
             <classname>Zend_Locale</classname> verwendet. Siehe das folgende Beispiel für Details:
         </para>
 
-        <example id="zend.locale.defaultlocale.example-2">
-            <title>Setzen eines Standardgebietsschemas</title>
+        <example xml:id="zend.locale.defaultlocale.example-2"><info><title>Setzen eines Standardgebietsschemas</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // In der Bootstrap Datei
@@ -422,10 +416,10 @@ $date = new Zend_Date();
             <emphasis>de</emphasis> verwendet. Andernfalls wird das erkannte Gebietsschema
             verwendet.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.interoperate">
-        <title>ZF lokalisierbare Klassen</title>
+    <section xml:id="zend.locale.interoperate"><info><title>ZF lokalisierbare Klassen</title></info>
+        
 
         <para>
             Im Zend Framework sind lokalisierbare Klassen von <classname>Zend_Locale</classname>
@@ -436,8 +430,8 @@ $date = new Zend_Date();
             welche durch den Webbrowser des Benutzers zur Verfügung gestellt werden.
         </para>
 
-        <example id="zend.locale.interoperate.example-1">
-            <title>Daten verwenden das aktuelle Gebietsschema des Web Benutzers</title>
+        <example xml:id="zend.locale.interoperate.example-1"><info><title>Daten verwenden das aktuelle Gebietsschema des Web Benutzers</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $date = new Zend_Date('2006',Zend_Date::YEAR);
@@ -451,8 +445,8 @@ $date = new Zend_Date('2006',Zend_Date::YEAR);
             Konstruktor das Gebietsschema angegeben werden.
         </para>
 
-        <example id="zend.locale.interoperate.example-2">
-            <title>Übergehen der Auswahl des standardmäßigen Gebietsschemas</title>
+        <example xml:id="zend.locale.interoperate.example-2"><info><title>Übergehen der Auswahl des standardmäßigen Gebietsschemas</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $usLocale = new Zend_Locale('en_US');
@@ -469,10 +463,10 @@ $temp = new Zend_Measure_Temperature('100,10',
             die Eruierung des Standardmäßigen Gebietsschemas zu verringern.
         </para>
 
-        <example id="zend.locale.interoperate.example-3">
-            <title>
+        <example xml:id="zend.locale.interoperate.example-3"><info><title>
                 Optimierung der Geschwindigkeit durch Benutzung eines Standard Gebietsschemas
-            </title>
+            </title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale();
@@ -482,10 +476,10 @@ $temp = new Zend_Measure_Temperature('100,10',
                                      $locale);
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.frameworkwidelocale">
-        <title>Anwendungsweites Gebietsschema</title>
+    <section xml:id="zend.locale.frameworkwidelocale"><info><title>Anwendungsweites Gebietsschema</title></info>
+        
 
         <para>
             Zend Framework erlaubt die Verwendung eines Anwendungsweiten Gebietsschemas. Man kann
@@ -497,8 +491,8 @@ $temp = new Zend_Measure_Temperature('100,10',
             richtige Verwendung:
         </para>
 
-        <example id="zend.locale.frameworkwidelocale.example">
-            <title>Verwendung eines anwendungsweiten Gebietsschemas</title>
+        <example xml:id="zend.locale.frameworkwidelocale.example"><info><title>Verwendung eines anwendungsweiten Gebietsschemas</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // In der Bootstrap Datei
@@ -511,10 +505,10 @@ $date = new Zend_Date();
 echo $date->getDate();
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.formatoptions">
-        <title>Zend_Locale_Format::setOptions(array $options)</title>
+    <section xml:id="zend.locale.formatoptions"><info><title>Zend_Locale_Format::setOptions(array $options)</title></info>
+        
 
         <para>
             Die Option 'precision' wird benutzt um einen Wert zu verkürzen oder mit extra Ziffern zu
@@ -525,8 +519,7 @@ echo $date->getDate();
             <acronym>PHP</acronym>'s date() Definitionen. Die Option 'fix_date' erlaubt oder
             verhindert eine Automatik welche versucht falsche Daten zu korrigieren. Die Option
             'number_format' definiert ein Standard Format für Nummern bei Verwendung der Funktion
-            <methodname>toNumber()</methodname>. (siehe <link
-                linkend= "zend.locale.number.localize">diesen Abschnitt</link>
+            <methodname>toNumber()</methodname>. (siehe <link linkend="zend.locale.number.localize">diesen Abschnitt</link>
             ).
         </para>
 
@@ -535,11 +528,11 @@ echo $date->getDate();
             definieren. Aber Achtung bei der Verwendung von getDate(), checkDateFormat() und
             getTime() nach der Verwendung von setOptions() mit einem 'date_format'. Um diese vier
             Methoden mit einem Standard Datumsformat für ein Gebietsschema zu benutzen, muß
-            array('date_format' => null, 'locale' => $locale) in deren Optionen angegeben werden.
+            array('date_format' =&gt; null, 'locale' =&gt; $locale) in deren Optionen angegeben werden.
         </para>
 
-        <example id="zend.locale.formatoptions.example-1">
-            <title>Daten die das richtige Gebietsschema des Web Benutzers verwenden</title>
+        <example xml:id="zend.locale.formatoptions.example-1"><info><title>Daten die das richtige Gebietsschema des Web Benutzers verwenden</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 Zend_Locale_Format::setOptions(array('locale' => 'en_US',
@@ -558,8 +551,8 @@ Zend_Locale_Format::setOptions(array('locale' => 'en_US',
             Gebietsschema des Servers oder Browsers.
         </para>
 
-        <example id="zend.locale.formatoptions.example-2">
-            <title>Verwendung von STANDARD Definitionen für setOptions()</title>
+        <example xml:id="zend.locale.formatoptions.example-2"><info><title>Verwendung von STANDARD Definitionen für setOptions()</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 Zend_Locale_Format::setOptions(array('locale' => 'en_US',
@@ -574,10 +567,10 @@ Zend_Locale_Format::setOptions(array('locale' => Zend_Locale_Format::STANDARD,
                                      'date_format' => 'dd.MMMM.YYYY'));
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.cache">
-        <title>Zend_Locale und dessen Subklassen schneller machen</title>
+    <section xml:id="zend.locale.cache"><info><title>Zend_Locale und dessen Subklassen schneller machen</title></info>
+        
 
         <para>
             <classname>Zend_Locale</classname> und dessen Subklassen können durch die Verwendung von
@@ -585,7 +578,7 @@ Zend_Locale_Format::setOptions(array('locale' => Zend_Locale_Format::STANDARD,
             Methode <methodname>Zend_Locale::setCache($cache)</methodname> verwenden wenn man
             <classname>Zend_Locale</classname> benutzt. <classname>Zend_Locale_Format</classname>
             kann schneller gemacht werden indem die Option <property>cache</property> innerhalb von
-            <classname>Zend_Locale_Format::setOptions(array('cache' => $adapter));</classname>
+            <classname>Zend_Locale_Format::setOptions(array('cache' =&gt; $adapter));</classname>
             aufgerufen wird. Wenn beide Klassen verwendet werden sollte nur für
             <classname>Zend_Locale</classname> ein Cache gesetzt werden, da der zuletzt gesetzte
             Cache den vorher gesetzten Cache überschreibt. Der Bequemlichkeit halber gibt es auch
@@ -602,5 +595,5 @@ Zend_Locale_Format::setOptions(array('locale' => Zend_Locale_Format::STANDARD,
             nicht nur den aktuell gesetzten Cache aus, ohne Ihn zu löschen, sondern verhindert auch
             das ein Cache automatisch erstellt wird, wenn kein Cache gesetzt ist.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

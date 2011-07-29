@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22768 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.service.strikeiron">
-    <title>Zend_Service_StrikeIron</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.strikeiron"><info><title>Zend_Service_StrikeIron</title></info>
+    
 
     <para>
         <classname>Zend_Service_StrikeIron</classname> bietet einen <acronym>PHP</acronym> 5
@@ -35,11 +33,11 @@
         </itemizedlist>
     </para>
 
-    <sect2 id="zend.service.strikeiron.overview">
-        <title>Übersicht</title>
+    <section xml:id="zend.service.strikeiron.overview"><info><title>Übersicht</title></info>
+        
 
         <para>
-            <ulink url="http://www.strikeiron.com">StrikeIron</ulink> bietet hunderte von
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.strikeiron.com">StrikeIron</link> bietet hunderte von
             kommerziellen Daten Services ("Daten als Service") wie z.B. Online Steuer, Wärungsraten,
             Aktienwerte, Geocodes, Globale Adresen Prüfung, Yallow/White Pages, MapQuest
             Fahranleitungen, Dun &amp; Bradstreet Business Credit Prüfungen, und viele, viele mehr.
@@ -50,13 +48,12 @@
             <acronym>API</acronym>, welche die Integration und Handhabung mehrerer Services sehr
             einfach macht. StrikeIron managt auch die Kundenverrechnung für alle Services in einem
             einzelnen Account, was es für Lösungsanbieter perfekt macht. Man kann mit freien
-            WebServices unter <ulink
-                url="http://www.strikeiron.com/sdp">http://www.strikeiron.com/sdp</ulink> starten.
+            WebServices unter <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.strikeiron.com/sdp">http://www.strikeiron.com/sdp</link> starten.
         </para>
 
         <para>
             Die Services von StrikeIron können schon alleine durch die
-            <ulink url="http://us.php.net/soap">PHP 5 <acronym>SOAP</acronym> Erweiterung</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://us.php.net/soap">PHP 5 <acronym>SOAP</acronym> Erweiterung</link>
             verwendet werden. Trotzdem bietet die Verwendung von StrikeIron auf diesem Weg kein
             ideales <acronym>PHP</acronym>-artiges Interface. Die
             <classname>Zend_Service_StrikeIron</classname> Componente bietet einen leichtgewichtigen
@@ -106,15 +103,14 @@
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.strikeiron.registering">
-        <title>Registrieren mit StrikeIron</title>
+    <section xml:id="zend.service.strikeiron.registering"><info><title>Registrieren mit StrikeIron</title></info>
+        
 
         <para>
             Bevor man mit <classname>Zend_Service_StrikeIron</classname> beginnen kann, muß man sich
-            zuerst für einen StrikeIron Entwickler Zugang <ulink
-                url="http://strikeiron.com/Register.aspx">registrieren</ulink>.
+            zuerst für einen StrikeIron Entwickler Zugang <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://strikeiron.com/Register.aspx">registrieren</link>.
         </para>
 
         <para>
@@ -125,22 +121,21 @@
 
         <para>
             Man muß sich auch für StrikeIron's Super Data Pack Web Service
-            <ulink url="http://www.strikeiron.com/ProductDetail.aspx?p=257">anmelden</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.strikeiron.com/ProductDetail.aspx?p=257">anmelden</link>.
         </para>
 
         <para>
             Beide Schritte der Registrierung sind frei und können relativ schnell mit der WebSeite
             von StrikeIron durchgeführt werden.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.strikeiron.getting-started">
-        <title>Beginnen</title>
+    <section xml:id="zend.service.strikeiron.getting-started"><info><title>Beginnen</title></info>
+        
 
         <para>
             Sobald man sich für einen StrikeIron Account
-            <ulink url="http://strikeiron.com/Register.aspx">registriert</ulink> und für das <ulink
-                url="http://www.strikeiron.com/ProductDetail.aspx?p=257">Super Data Pack</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://strikeiron.com/Register.aspx">registriert</link> und für das <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.strikeiron.com/ProductDetail.aspx?p=257">Super Data Pack</link>
             angemeldet hat, ist man für die Benutzung von
             <classname>Zend_Service_StrikeIron</classname> bereit.
         </para>
@@ -154,24 +149,21 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <link
-                        linkend="zend.service.strikeiron.bundled-services.zip-code-information">ZIP
+                    <link linkend="zend.service.strikeiron.bundled-services.zip-code-information">ZIP
                         Code Informationen</link>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <link
-                        linkend="zend.service.strikeiron.bundled-services.us-address-verification">US
+                    <link linkend="zend.service.strikeiron.bundled-services.us-address-verification">US
                         Addressen Prüfung</link>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <link
-                        linkend="zend.service.strikeiron.bundled-services.sales-use-tax-basic">Verkaufs-
+                    <link linkend="zend.service.strikeiron.bundled-services.sales-use-tax-basic">Verkaufs-
                         &amp; Steuergrundlagen</link>
                 </para>
             </listitem>
@@ -196,8 +188,7 @@ $taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
             StrikeIron Service zurück das durch den Namen seiner <acronym>PHP</acronym> Wrapper
             Klasse definiert wurde. In diesem Fall, referiert der Name 'SalesUseTaxBasic'
             zu der Wrapper Klasse <classname>Zend_Service_StrikeIron_SalesUseTaxBasic</classname>.
-            Wrapper sind für drei Services inkludiert und in <link
-                linkend="zend.service.strikeiron.bundled-services">Bundled Services</link>
+            Wrapper sind für drei Services inkludiert und in <link linkend="zend.service.strikeiron.bundled-services">Bundled Services</link>
             beschrieben.
         </para>
 
@@ -207,10 +198,10 @@ $taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
             wird in <link linkend="zend.service.strikeiron.advanced-uses.services-by-wsdl">Services
                 durch WSDL verwenden</link> erklärt.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.strikeiron.making-first-query">
-        <title>Die erste Abfrage durchführen</title>
+    <section xml:id="zend.service.strikeiron.making-first-query"><info><title>Die erste Abfrage durchführen</title></info>
+        
 
         <para>
             Sobald die <methodname>getService()</methodname> Methode verwendet wurde um einen
@@ -235,8 +226,7 @@ echo $rateInfo->GST;
 
         <para>
             Im obigen Beispiel wird die <methodname>getService()</methodname> Methode verwendet um
-            einen Client zum <link
-                linkend="zend.service.strikeiron.bundled-services.sales-use-tax-basic">Verkaufs-
+            einen Client zum <link linkend="zend.service.strikeiron.bundled-services.sales-use-tax-basic">Verkaufs-
                 &amp; Steuergrundlagen</link> Service zu erhalten. Das Client Objekt wird in
             <varname>$taxBasic</varname> gespeichert.
         </para>
@@ -258,24 +248,22 @@ echo $rateInfo->GST;
             <link linkend="zend.service.strikeiron.bundled-services">mitgelieferte Services</link>
             für detailierte Informationen zu drei der Services von StrikeIron.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.strikeiron.examining-results">
-        <title>Ergebnisse betrachten</title>
+    <section xml:id="zend.service.strikeiron.examining-results"><info><title>Ergebnisse betrachten</title></info>
+        
 
         <para>
             Wenn man Services von StrikeIron lernt oder versucht fehler zu beheben, ist es oft
             nützlich das Ergebnis das von einem Methodenaufruf zurückgegeben wird auszugeben. Das
             Ergebnis wird immer ien Objekt sein das eine Instanz von
-            <classname>Zend_Service_StrikeIron_Decorator</classname> ist. Das ist ein kleines <ulink
-                url="http://en.wikipedia.org/wiki/Decorator_pattern">Dekorator</ulink> Objekt das
+            <classname>Zend_Service_StrikeIron_Decorator</classname> ist. Das ist ein kleines <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Decorator_pattern">Dekorator</link> Objekt das
             die Ergebnisse des Methoden Aufrufs ummantelt.
         </para>
 
         <para>
             Der einfachste Weg ein Ergebnis vom Service zu betrachten ist die Verwendung der
-            eingebauten <acronym>PHP</acronym> Methode <ulink
-                url="http://www.php.net/print_r">print_r()</ulink>:
+            eingebauten <acronym>PHP</acronym> Methode <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/print_r">print_r()</link>:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -313,7 +301,7 @@ Zend_Service_StrikeIron_Decorator Object
             Das bedeutet das <varname>$rateInfo</varname> öffentliche Eigenschaften wie
             <property>abbreviation</property>, <property>province</property>, und
             <constant>GST</constant> hat. Dieser werden z.B. mit
-            <command>$rateInfo->province</command> aufgerufen.
+            <command>$rateInfo-&gt;province</command> aufgerufen.
         </para>
 
         <tip>
@@ -332,10 +320,10 @@ Zend_Service_StrikeIron_Decorator Object
             können die Methoden <methodname>getDecoratedObject()</methodname> und
             <methodname>getDecoratedObjectName()</methodname> verwendet werden.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.strikeiron.handling-errors">
-        <title>Fehler handhaben</title>
+    <section xml:id="zend.service.strikeiron.handling-errors"><info><title>Fehler handhaben</title></info>
+        
 
         <para>
             Die vorigen Beispiel sind naiv, was bedeutet das keine Handhabung von Fehlern gezeigt
@@ -390,10 +378,10 @@ try {
         </note>
 
         <para><!-- inkludiert für Leerzeichen --></para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.strikeiron.checking-subscription">
-        <title>Den eigenen Account prüfen</title>
+    <section xml:id="zend.service.strikeiron.checking-subscription"><info><title>Den eigenen Account prüfen</title></info>
+        
 
         <para>
             StrikeIron bietet viele verschiedene Services. Einige von Ihnen sind kostenlos, eine
@@ -439,5 +427,5 @@ echo $subscription->remainingHits;
             auszuschalten und die Account Informationen nochmals abzufragen, kann
             <methodname>getSubscriptionInfo(true)</methodname> verwendet werden.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

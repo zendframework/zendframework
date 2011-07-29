@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22756 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.log.overview">
-    <title>Übersicht</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.overview"><info><title>Übersicht</title></info>
+    
 
     <para>
         <classname>Zend_Log</classname> ist eine Komponente für Mehrzweckprotokollierung. Es
@@ -47,8 +45,8 @@
         </itemizedlist>
     </para>
 
-    <sect2 id="zend.log.overview.creating-a-logger">
-        <title>Erstellen eines Logs</title>
+    <section xml:id="zend.log.overview.creating-a-logger"><info><title>Erstellen eines Logs</title></info>
+        
 
         <para>
             Um das protokollieren zu starten, muß ein Writer instanziert werden und einer Log
@@ -81,10 +79,10 @@ $logger = new Zend_Log($writer);
         <para>
             Das Log ist nun fertig zur Verwendung.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.log.overview.logging-messages">
-        <title>Nachrichten protokollieren</title>
+    <section xml:id="zend.log.overview.logging-messages"><info><title>Nachrichten protokollieren</title></info>
+        
 
         <para>
             Um eine Nachricht zu protokollieren, muß die <methodname>log()</methodname> Methode
@@ -115,10 +113,10 @@ $logger->info('Informative Nachricht');
 $logger->log('Notfall Nachricht', Zend_Log::EMERG);
 $logger->emerg('Notfall Nachricht');
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.log.overview.destroying-a-logger">
-        <title>Ein Log entfernen</title>
+    <section xml:id="zend.log.overview.destroying-a-logger"><info><title>Ein Log entfernen</title></info>
+        
 
         <para>
             Wenn ein Log Objekt nicht länger benötigt wird, kann die Variable die das Log enthält
@@ -135,10 +133,10 @@ $logger = null;
             Das explizite entfernen des Logs auf diesem Weg ist optional und wird automatisch
             durchgeführt wenn <acronym>PHP</acronym> herunterfährt.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.log.overview.builtin-priorities">
-        <title>Verwenden von eingebauten Prioritäten</title>
+    <section xml:id="zend.log.overview.builtin-priorities"><info><title>Verwenden von eingebauten Prioritäten</title></info>
+        
 
         <para>
             Die <classname>Zend_Log</classname> Klasse definiert die folgenden Prioritäten:
@@ -162,10 +160,9 @@ DEBUG   = 7;  // Debug: Debug Nachrichten
 
         <para>
             Die Prioritäten sind nicht beliebig. Die kommen vom BSD syslog Protokoll,
-            welches in <ulink url="http://tools.ietf.org/html/rfc3164">RFC-3164</ulink> beschrieben
+            welches in <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://tools.ietf.org/html/rfc3164">RFC-3164</link> beschrieben
             wird. Die Namen und korrespondierenden Prioritätennummern sind auch mit einem anderen
-            <acronym>PHP</acronym> Logging Systeme kompatibel, <ulink
-                url="http://pear.php.net/package/log">PEAR Log</ulink>, welches möglicherweise mit
+            <acronym>PHP</acronym> Logging Systeme kompatibel, <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://pear.php.net/package/log">PEAR Log</link>, welches möglicherweise mit
             Interoperabilität zwischen Ihm und <classname>Zend_Log</classname> wirbt.
         </para>
 
@@ -177,10 +174,10 @@ DEBUG   = 7;  // Debug: Debug Nachrichten
             die Lognachricht ausgewählt wird, sollte auf die Hirarchie der Prioritäten geachtet
             werden und selbige sorgfältig ausgewählt werden.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.log.overview.user-defined-priorities">
-        <title>Hinzufügen von selbstdefinierten Prioritäten</title>
+    <section xml:id="zend.log.overview.user-defined-priorities"><info><title>Hinzufügen von selbstdefinierten Prioritäten</title></info>
+        
 
         <para>
             Selbstdefinierte Prioritäten können wärend der Laufzeit hinzugefügt werden durch
@@ -204,10 +201,10 @@ $logger->foo('Foo Nachricht');
         <para>
             Neue Prioritäten können bereits bestehende nicht überschreiben.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.log.overview.understanding-fields">
-        <title>Log Events verstehen</title>
+    <section xml:id="zend.log.overview.understanding-fields"><info><title>Log Events verstehen</title></info>
+        
 
         <para>
             Wenn die <methodname>log()</methodname> Methode oder eine Ihrer Abkürzungen aufgerufen
@@ -250,10 +247,10 @@ $logger->setEventItem('pid', getmypid());
             die Writer nicht wissen was zu tun ist solange das Formatter Objekt nicht über das neue
             Element informiert wurde. Siehe in die Sektion über Formatter um mehr darüber zu lernen.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.log.overview.as-errorHandler">
-        <title>PHP Fehler loggen</title>
+    <section xml:id="zend.log.overview.as-errorHandler"><info><title>PHP Fehler loggen</title></info>
+        
 
         <para>
             <classname>Zend_Log</classname> kann auch verwendet werden um <acronym>PHP</acronym>
@@ -262,12 +259,11 @@ $logger->setEventItem('pid', getmypid());
             Fehler genauso weiter.
         </para>
 
-        <table id="zend.log.overview.as-errorHandler.properties.table-1">
-            <title>Zend_Log Events für PHP Fehler haben ein zusätzliches Feld welches
+        <table xml:id="zend.log.overview.as-errorHandler.properties.table-1"><info><title>Zend_Log Events für PHP Fehler haben ein zusätzliches Feld welches
             <methodname>handler (int $errno ,string $errstr [,string $errfile [,int $errline [,array
-                $errcontext]]])</methodname> von <ulink
-                url="http://us3.php.net/manual/en/function.set-error-handler.php">set_error_handler</ulink>
-            entspricht</title>
+                $errcontext]]])</methodname> von <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://us3.php.net/manual/en/function.set-error-handler.php">set_error_handler</link>
+            entspricht</title></info>
+            
 
             <tgroup cols="3">
                 <thead>
@@ -325,5 +321,5 @@ $logger->setEventItem('pid', getmypid());
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
-</sect1>
+    </section>
+</section>

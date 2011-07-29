@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20774 -->
-<sect1 id="zend.feed.introduction">
-    <title>導入</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.introduction"><info><title>導入</title></info>
+    
 
     <para>
         <classname>Zend_Feed</classname> は、<acronym>RSS</acronym> や Atom のフィードを扱う機能を提供します。
@@ -26,8 +24,8 @@
         データベースへの保存などの簡単な使用例を示します。
     </para>
 
-    <note>
-        <title>注意</title>
+    <note><info><title>注意</title></info>
+        
 
         <para>
             <acronym>RSS</acronym> フィードによって、使用できるチャネルやアイテムのプロパティが違います。
@@ -36,8 +34,8 @@
         </para>
     </note>
 
-    <example id="zend.feed.introduction.example.rss">
-        <title>Zend_Feed による RSS フィードデータの使用</title>
+    <example xml:id="zend.feed.introduction.example.rss"><info><title>Zend_Feed による RSS フィードデータの使用</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 // 最新の Slashdot ヘッドラインを取得します
@@ -68,7 +66,4 @@ foreach ($slashdotRss as $item) {
 }
 ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

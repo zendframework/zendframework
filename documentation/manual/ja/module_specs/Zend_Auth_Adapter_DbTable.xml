@@ -1,10 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21829 -->
-<sect1 id="zend.auth.adapter.dbtable">
-    <title>データベースのテーブルでの認証</title>
-    <sect2 id="zend.auth.adapter.dbtable.introduction">
-        <title>導入</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.dbtable"><info><title>データベースのテーブルでの認証</title></info>
+    
+    <section xml:id="zend.auth.adapter.dbtable.introduction"><info><title>導入</title></info>
+        
         <para>
             <classname>Zend_Auth_Adapter_DbTable</classname> は、
             データベースのテーブルに保存された証明情報に基づいた認証の機能を提供します。
@@ -59,8 +57,8 @@
             </listitem>
         </itemizedlist>
 
-        <example id="zend.auth.adapter.dbtable.introduction.example.basic_usage">
-            <title>基本的な使用法</title>
+        <example xml:id="zend.auth.adapter.dbtable.introduction.example.basic_usage"><info><title>基本的な使用法</title></info>
+            
             <para>
                 導入部で説明したとおり、<classname>Zend_Auth_Adapter_DbTable</classname>
                 のコンストラクタには <classname>Zend_Db_Adapter_Abstract</classname>
@@ -166,9 +164,9 @@ Array
                 予期せぬアクセスからその内容を守ることが重要となります。
             </para>
         </example>
-    </sect2>
-    <sect2 id="zend.auth.adapter.dbtable.advanced.storing_result_row">
-        <title>応用例: 持続的な DbTable 結果オブジェクト</title>
+    </section>
+    <section xml:id="zend.auth.adapter.dbtable.advanced.storing_result_row"><info><title>応用例: 持続的な DbTable 結果オブジェクト</title></info>
+        
         <para>
             デフォルトでは <classname>Zend_Auth_Adapter_DbTable</classname> は、
             認証に成功した際に認証情報を返します。場合によっては、
@@ -203,9 +201,9 @@ if ($result->isValid()) {
     /* ... */
 
 }]]></programlisting>
-    </sect2>
-    <sect2 id="zend.auth.adapter.dbtable.advanced.advanced_usage">
-        <title>高度な使用例</title>
+    </section>
+    <section xml:id="zend.auth.adapter.dbtable.advanced.advanced_usage"><info><title>高度な使用例</title></info>
+        
         <para>
             <classname>Zend_Auth</classname> (そして <classname>Zend_Auth_Adapter_DbTable</classname>) の主な目的は
             <emphasis>認証 (authentication)</emphasis> であって
@@ -311,5 +309,5 @@ $select->where('active = "TRUE"');
 $adapter->authenticate();
 
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

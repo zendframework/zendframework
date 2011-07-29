@@ -22,17 +22,13 @@
 * @namespace
 */
 namespace Zend\Feed\Writer\Renderer\Entry;
-use Zend\Feed\Writer\Renderer;
-use Zend\Feed\Writer;
-use Zend\Date;
-use Zend\URI;
+
+use Zend\Date,
+    Zend\Feed\Writer,
+    Zend\Feed\Writer\Renderer,
+    Zend\Uri;
 
 /**
-* @uses \Zend\Date\Date
-* @uses \Zend\Feed\Exception
-* @uses \Zend\Feed\Writer\Renderer\RendererAbstract
-* @uses \Zend\Feed\Writer\Renderer\RendererInterface
-* @uses \Zend\Uri\Uri
 * @category Zend
 * @package Zend_Feed_Writer
 * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -297,7 +293,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
         }
         $text = $dom->createTextNode($this->getDataContainer()->getId());
         $id->appendChild($text);
-        if (!Uri\Url::validate($this->getDataContainer()->getId())) {
+        if (!Uri\UriFactory::factory($this->getDataContainer()->getId())->isValid()) {
             $id->setAttribute('isPermaLink', 'false');
         }
     }

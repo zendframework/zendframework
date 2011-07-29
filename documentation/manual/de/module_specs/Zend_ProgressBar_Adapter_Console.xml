@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20827 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.progressbar.adapter.console">
-    <title>Zend_ProgressBar_Adapter_Console</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.progressbar.adapter.console"><info><title>Zend_ProgressBar_Adapter_Console</title></info>
+    
 
     <para>
         <classname>Zend_ProgressBar_Adapter_Console</classname> ist ein Textbasierter Adater für
@@ -12,8 +12,8 @@
         definieren.
     </para>
 
-    <note>
-        <title>Automatische Breitenerkennung der Konsole</title>
+    <note><info><title>Automatische Breitenerkennung der Konsole</title></info>
+        
 
         <para>
             <code>shell_exec</code> wird benötigt damit dieses Feature auf *nix basierenden Systemen
@@ -117,4 +117,4 @@
             </para>
         </listitem>
     </itemizedlist>
-</sect3>
+</section>

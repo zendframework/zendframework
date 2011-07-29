@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22146 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.hostname">
-    <title>Hostname</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.hostname"><info><title>Hostname</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Hostname</classname> erlaubt die Prüfung von Hostnamen mit einem
@@ -12,8 +10,8 @@
         <acronym>DNS</acronym> Hostnamen geprüft.
     </para>
 
-    <sect3 id="zend.validate.set.hostname.options">
-        <title>Unterstützte Optionen für Zend_Validate_Hostname</title>
+    <section xml:id="zend.validate.set.hostname.options"><info><title>Unterstützte Optionen für Zend_Validate_Hostname</title></info>
+        
 
         <para>
             Die folgenden Optionen werden für <classname>Zend_Validate_Hostname</classname>
@@ -24,8 +22,7 @@
             <listitem>
                 <para>
                     <emphasis><property>allow</property></emphasis>: Definiert die Art des
-                    Hostnamens welche verwendet werden darf. Siehe <link
-                        linkend="zend.validate.set.hostname.types">Hostname Typen</link> für
+                    Hostnamens welche verwendet werden darf. Siehe <link linkend="zend.validate.set.hostname.types">Hostname Typen</link> für
                     Details.
                 </para>
             </listitem>
@@ -54,10 +51,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.hostname.basic">
-        <title>Normale Verwendung</title>
+    <section xml:id="zend.validate.set.hostname.basic"><info><title>Normale Verwendung</title></info>
+        
 
         <para>
             <emphasis>Normale Verwendung</emphasis>
@@ -80,10 +77,10 @@ if ($validator->isValid($hostname)) {
             <methodname>getMessages()</methodname> mit einer nützlichen Fehlermeldung
             auswerfen.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.hostname.types">
-        <title>Verschiedene Typen von Hostnamen prüfen</title>
+    <section xml:id="zend.validate.set.hostname.types"><info><title>Verschiedene Typen von Hostnamen prüfen</title></info>
+        
 
         <para>
             Es kann gewünscht sein auch IP Adressen, lokale Hostnamen, oder eine Kombination aller
@@ -126,10 +123,10 @@ if ($validator->isValid($hostname)) {
 $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
                                         Zend_Validate_Hostname::ALLOW_IP);
 ]]></programlisting>
-    </sect3>
+    </section>
 
-     <sect3 id="zend.validate.set.hostname.idn">
-         <title>Internationale Domain Namen prüfen</title>
+     <section xml:id="zend.validate.set.hostname.idn"><info><title>Internationale Domain Namen prüfen</title></info>
+         
 
         <para>
             Einige Länder Code Top Level Domains (ccTLDs), wie 'de' (Deutschland), unterstützen
@@ -139,8 +136,8 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
             Zeichen die im Prüfprozess verwendet werden.
         </para>
 
-        <note>
-            <title>IDN Domains</title>
+        <note><info><title>IDN Domains</title></info>
+            
 
             <para>
                 Bis jetzt unterstützen mehr als 50 ccTLDs <acronym>IDN</acronym> Domains.
@@ -182,18 +179,18 @@ $validator =
             Zeichen definiert, wird eine normale Hostnamen Prüfung durchgeführt.
         </para>
 
-        <note>
-            <title>IDN Prüfung</title>
+        <note><info><title>IDN Prüfung</title></info>
+            
 
             <para>
                 Es sollte beachtet werden das <acronym>IDN</acronym>s nur geprüft werden wenn es
                 erlaubt ist <acronym>DNS</acronym> Hostnamen zu prüfen.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.hostname.tld">
-        <title>Top Level Domains prüfen</title>
+    <section xml:id="zend.validate.set.hostname.tld"><info><title>Top Level Domains prüfen</title></info>
+        
 
         <para>
             Normalerweise wird ein Hostname gegen eine Liste von bekannten
@@ -222,13 +219,13 @@ $validator =
             <acronym>TLD</acronym> Prüfung ein- oder auszuschalten.
         </para>
 
-        <note>
-            <title>TLD Prüfung</title>
+        <note><info><title>TLD Prüfung</title></info>
+            
 
             <para>
                 Es sollte beachtet werden das <acronym>TLD</acronym>s nur geprüft werden wenn es
                 erlaubt ist <acronym>DNS</acronym> Hostnamen zu prüfen.
             </para>
         </note>
-    </sect3>
-</sect2>
+    </section>
+</section>

@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
-<!-- Reviewed: yes -->
-<sect1 id="introduction.installation">
+<?xml version="1.0" encoding="utf-8"?>
 
-    <title>Instalacja</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="introduction.installation"><info><title>Instalacja</title></info>
+
+    
 
     <para>
         Aby zapoznać się z pełną listą wymagań Zend Framework należy przejść do 
@@ -19,7 +19,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <ulink url="http://framework.zend.com/download">Ściągnij najnowszą stabilną wersję.</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/download">Ściągnij najnowszą stabilną wersję.</link>
                     Ta wersja, dostępna w formatach <code>.zip</code> oraz
                     <code>.tar.gz</code>, jest dobrym wyborem dla początkujących
                     z Zend Framework.
@@ -27,8 +27,8 @@
             </listitem>
             <listitem>
                 <para>
-                    <ulink url="http://framework.zend.com/download/snapshot">Ściągnij najnowszą wersję
-                    nocną</ulink>. Dla tych odważnych, nocne wersje reprezentują
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/download/snapshot">Ściągnij najnowszą wersję
+                    nocną</link>. Dla tych odważnych, nocne wersje reprezentują
                     ostatnie postępy w rozwoju Zend Framework. Wersje te można
                     ściagnąć tylko z angielską dokumentacją lub wraz z
                     dokumentacją we wszystkich dostępnych językach. Jeśli nie
@@ -38,7 +38,7 @@
             </listitem>
             <listitem>
                 <para>
-                    Użycie klienta <ulink url="http://subversion.tigris.org">Subversion</ulink>
+                    Użycie klienta <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://subversion.tigris.org">Subversion</link>
                     (SVN). Zend Framework jest oprogramowaniem o otwartym kodzie
                     źródłówym i repozytorium Subversion używane to jego tworzenia
                     jest publicznie dostępne. Rozważ użycie SVN do pobrania
@@ -48,27 +48,27 @@
                     wydawane są jego wersje.
                 </para>
                 <para>
-                    <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.export.html">Eksportowanie</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.export.html">Eksportowanie</link>
                     jest przydatne gdy chcesz pobrać określoną wersję bez katalogów <code>.svn</code>,
                     tworzonych w kopii roboczej.
                 </para>
                 <para>
-                    <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.checkout.html">Pobranie
-                    kopii roboczej</ulink> jest dobrym rozwiązaniem gdy chcesz brać
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.checkout.html">Pobranie
+                    kopii roboczej</link> jest dobrym rozwiązaniem gdy chcesz brać
                     udział w rozwijaniu Zend Framework i wtedy, gdy chcesz mieć
                     możliwość aktualizowania swojej kopii roboczej za pomocą
-                    komendy <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.update.html"><code>svn
-                    update</code></ulink>.
+                    komendy <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.update.html"><code>svn
+                    update</code></link>.
                 </para>
                 <para>
-                    <ulink url="http://svnbook.red-bean.com/nightly/en/svn.advanced.externals.html">Definicja
-                    zewnętrznych plików</ulink> jest bardzo wygodna dla programistów,
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://svnbook.red-bean.com/nightly/en/svn.advanced.externals.html">Definicja
+                    zewnętrznych plików</link> jest bardzo wygodna dla programistów,
                     którzy używają SVN do zarządzania kopiami roboczymi swojej
                     aplikacji.
                 </para>
                 <para>
                     Adres URL katalogu trunk repozytorium SVN dla Zend Framework to
-                    <ulink url="http://framework.zend.com/svn/framework/standard/trunk">http://framework.zend.com/svn/framework/standard/trunk</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/svn/framework/standard/trunk">http://framework.zend.com/svn/framework/standard/trunk</link>
                 </para>
             </listitem>
         </itemizedlist>
@@ -77,14 +77,14 @@
     <para>
         Kiedy już pobierzesz kopię Zend Framework, twoja aplikacja będzie musiała być w
         stanie uzyskać dostęp do klas frameworka. Jest kilka sposobów
-        <ulink url="http://www.php.net/manual/en/configuration.changes.php">
-        osiągnięcia tego</ulink> ale obojętnie od wybranego sposobu wartość dyrektywy PHP
-        <ulink url="http://www.php.net/manual/en/ini.core.php#ini.include-path"><code>include_path</code></ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/configuration.changes.php">
+        osiągnięcia tego</link> ale obojętnie od wybranego sposobu wartość dyrektywy PHP
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/ini.core.php#ini.include-path"><code>include_path</code></link>
         musi zawierać ścieżkę do biblioteki Zend Framework.
     </para>
 
     <para>
-        Zend zapewnia <ulink url="http://framework.zend.com/docs/quickstart">poradnik Szybki Start</ulink>
+        Zend zapewnia <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/docs/quickstart">poradnik Szybki Start</link>
         który pozwoli ci na możliwie szybkie zapoznanie się z frameworkiem. Jest to
         znakomity sposób rozpoczęcia nauki frameworka, wraz z
         realnymi przykładami zastosowania, które możesz wykorzystać.
@@ -97,4 +97,4 @@
         po komponencie.
     </para>
 
-</sect1>
+</section>

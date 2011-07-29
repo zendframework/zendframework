@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21821 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.between">
-    <title>Between</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.between"><info><title>Between</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Between</classname> erlaubt es zu prüfen ob ein angegebener Wert
         zwischen zwei anderen Werten ist.
     </para>
 
-    <note>
-        <title>Zend_Validate_Between unterstützt nur die Prüfung von Nummern</title>
+    <note><info><title>Zend_Validate_Between unterstützt nur die Prüfung von Nummern</title></info>
+        
 
         <para>
             Es ist zu beachten das <classname>Zend_Validate_Between</classname> nur die Prüfung von
@@ -19,8 +17,8 @@
         </para>
     </note>
 
-    <sect3 id="zend.validate.set.between.options">
-        <title>Unterstützte Optionen für Zend_Validate_Between</title>
+    <section xml:id="zend.validate.set.between.options"><info><title>Unterstützte Optionen für Zend_Validate_Between</title></info>
+        
 
         <para>
             Die folgenden Optionen werden für <classname>Zend_Validate_Between</classname>
@@ -50,10 +48,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.between.basic">
-        <title>Standardverhalten für Zend_Validate_Between</title>
+    <section xml:id="zend.validate.set.between.basic"><info><title>Standardverhalten für Zend_Validate_Between</title></info>
+        
 
         <para>
             Standardmäßig prüft diese Prüfung ob ein Wert zwischen <property>min</property> und
@@ -73,10 +71,10 @@ $result = $valid->isValid($value);
             jeder Wert zwischen '0' und '10' erlaubt ist. Und Werte wie '-1' und '11' geben
             <constant>FALSE</constant> zurück.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.between.inclusively">
-        <title>Prüfung exklusive den Grenzwerten</title>
+    <section xml:id="zend.validate.set.between.inclusively"><info><title>Prüfung exklusive den Grenzwerten</title></info>
+        
 
         <para>
             Manchmal ist es nützlich einen Wert zu prüfen wobei die Grenzwerte exkludiert werden.
@@ -101,5 +99,5 @@ $result = $valid->isValid($value);
             Grenzwerte ausgeschlossen. Jetzt sind die Werte '0' und '10' nicht mehr erlaubt und
             geben <constant>FALSE</constant> zurück.
         </para>
-    </sect3>
-</sect2>
+    </section>
+</section>

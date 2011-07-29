@@ -1,5 +1,8 @@
-<sect1 id="zend.config.theory_of_operation">
-    <title>Werkingstheorie</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.theory_of_operation"><info><title>Werkingstheorie</title></info>
+    
     <para>
         Configuratiedata wordt toegankelijk gemaakt voor de <code>Zend_Config</code> constructor
         via een associatieve array, welke multidimensioneel kan zijn, om het organizeren van de
@@ -18,19 +21,19 @@
     <para>
         <code>Zend_Config</code> implementeert de <code>Countable</code> en <code>Iterator</code>
         interfaces om eenvoudige toegang tot de configuratiedata te vergemakkelijken. Je kan dus
-        de <ulink url="http://php.net/count"><code>count()</code></ulink> functie en PHP
-        constructies zoals <ulink url="http://php.net/foreach"><code>foreach</code></ulink>
+        de <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/count"><code>count()</code></link> functie en PHP
+        constructies zoals <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/foreach"><code>foreach</code></link>
         gebruiken op <code>Zend_Config</code> objecten.
     </para>
 
     <para>
         Standaard is de configuratiedata die beschikbaar wordt gemaakt via <code>Zend_Config</code>
         alleen lezen, en het toewijzen van een waarde
-        (bv: <code><![CDATA[$config->database->host = 'example.com']]></code>) resulteert in het
+        (bv: <code>$config-&gt;database-&gt;host = 'example.com'</code>) resulteert in het
         opwerpen van een uitzondering. Deze standaardeigenschap kan worden gewijzigd via de
         constructor om het wijzigen van waarden toe te staan. Ook, wanneer wijzigingen zijn toegstaan,
         ondersteunt <code>Zend_Config</code> het verwijderen van waardes
-        (i.e. <code><![CDATA[unset($config->database->host);]]></code>).
+        (i.e. <code>unset($config-&gt;database-&gt;host);</code>).
     </para>
     <note>
       <para>
@@ -65,11 +68,8 @@
         Als je twee <code>Zend_Config</code> objecten hebt, kan je ze samenvoegen tot een enkel object
         door gebruik te maken van de <code>merge()</code> functie. Als voorbeeld, een gegeven
         <code>$config</code> en <code>$localConfig</code>, je kan de data van <code>$localConfig</code>
-        samenvoegen met <code>$config</code> door gebruikt te maken van <code>$config->merge($localConfig);</code>.
+        samenvoegen met <code>$config</code> door gebruikt te maken van <code>$config-&gt;merge($localConfig);</code>.
         De elementen uit <code>$localConfig</code> zullen de elementen uit <code>$config</code> overschrijven,
         als ze dezelfde naam hebben.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

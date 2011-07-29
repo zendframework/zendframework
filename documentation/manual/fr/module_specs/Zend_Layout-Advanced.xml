@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21815 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.layout.advanced">
-    <title>Zend_Layout, utilisation avancée</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.advanced"><info><title>Zend_Layout, utilisation avancée</title></info>
+    
 
     <para>
         <classname>Zend_Layout</classname> permet d'être utilisé de manière plus
@@ -42,15 +40,14 @@
         <listitem>
             <para>
                 <emphasis>Résolveur de chemin de script personnalisé</emphasis>.
-                <classname>Zend_Layout</classname> vous permet d'utiliser votre <link
-                linkend="zend.filter.inflector">inflecteur</link> pour la résolution des scripts de
+                <classname>Zend_Layout</classname> vous permet d'utiliser votre <link linkend="zend.filter.inflector">inflecteur</link> pour la résolution des scripts de
                 layout ou de modifier l'inflecteur par défaut.
             </para>
         </listitem>
     </itemizedlist>
 
-    <sect2 id="zend.layout.advanced.view">
-        <title>Objets de vue personnalisés</title>
+    <section xml:id="zend.layout.advanced.view"><info><title>Objets de vue personnalisés</title></info>
+        
 
         <para>
             <classname>Zend_Layout</classname> accepte des objets de vue implémentant
@@ -65,15 +62,14 @@ $view = new My_Custom_View();
 $layout->setView($view);
 ]]></programlisting>
 
-        <note>
-            <title>Attention à vos implémentations de Zend_View</title>
+        <note><info><title>Attention à vos implémentations de Zend_View</title></info>
+            
 
             <para>
                 Même si <classname>Zend_Layout</classname> vous permet d'utiliser votre propre
                 objet de vue (implémentant <classname>Zend_View_Interface</classname>), vous pouvez
                 rencontrer des problèmes si votre vue n'a pas accès à certaines aides de vue, en
-                particulier les aides "layout" et <link
-                linkend="zend.view.helpers.initial.placeholder">"placeholder"</link>.
+                particulier les aides "layout" et <link linkend="zend.view.helpers.initial.placeholder">"placeholder"</link>.
                 <classname>Zend_Layout</classname> effectue des affectations de variables sur la vue
                 via ces aides.
             </para>
@@ -90,8 +86,7 @@ $layout->setView($view);
 
             <para>
                 De même, si votre implémentation de la vue permet l'extension via des plugins,
-                vous pouvez à tout moment accéder aux variables du layout grâce à l'aide <link
-                linkend="zend.view.helpers.initial.placeholder">placeholder</link> en utilisant la
+                vous pouvez à tout moment accéder aux variables du layout grâce à l'aide <link linkend="zend.view.helpers.initial.placeholder">placeholder</link> en utilisant la
                 clé "Zend_Layout" :
             </para>
 
@@ -101,10 +96,10 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')
                              ->getArrayCopy();
 ]]></programlisting>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.layout.advanced.plugin">
-        <title>Plugin de contrôleur frontal personnalisé</title>
+    <section xml:id="zend.layout.advanced.plugin"><info><title>Plugin de contrôleur frontal personnalisé</title></info>
+        
 
         <para>
             Lorsqu'utilisé avec les composants <acronym>MVC</acronym>, <classname>Zend_Layout</classname>
@@ -124,10 +119,10 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')
             La classe par défaut du plugin est
             <classname>Zend_Layout_Controller_Plugin_Layout</classname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.layout.advanced.helper">
-        <title>Aide d'action personnalisée</title>
+    <section xml:id="zend.layout.advanced.helper"><info><title>Aide d'action personnalisée</title></info>
+        
 
         <para>
             Si les composants <acronym>MVC</acronym> sont utilisés, alors <classname>Zend_Layout</classname>
@@ -143,10 +138,10 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')
             classe dans l'option <code>helperClass</code> de la méthode
             <methodname>startMvc()</methodname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.layout.advanced.inflector">
-        <title>Résolution de chemin de script personnalisé (inflecteur)</title>
+    <section xml:id="zend.layout.advanced.inflector"><info><title>Résolution de chemin de script personnalisé (inflecteur)</title></info>
+        
 
         <para>
             <classname>Zend_Layout</classname> utilise
@@ -174,8 +169,8 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')
             <methodname>Zend_Layout::setInflector()</methodname>.
         </para>
 
-        <example id="zend.layout.advanced.inflector.accessors">
-            <title>Utilisation des accesseurs pour modifier l'inflecteur</title>
+        <example xml:id="zend.layout.advanced.inflector.accessors"><info><title>Utilisation des accesseurs pour modifier l'inflecteur</title></info>
+            
 
             <para>
                 L'inflecteur par défaut de <classname>Zend_Layout</classname> utilise des
@@ -192,8 +187,8 @@ $layout->setViewSuffix('php');
 ]]></programlisting>
         </example>
 
-        <example id="zend.layout.advanced.inflector.directmodification">
-            <title>Modification directe de l'inflecteur de Zend_Layout</title>
+        <example xml:id="zend.layout.advanced.inflector.directmodification"><info><title>Modification directe de l'inflecteur de Zend_Layout</title></info>
+            
 
             <para>
                 Les inflecteurs fonctionnent avec un cible et plusieurs règles. La cible par
@@ -216,8 +211,8 @@ $layout->getInflector()->setTarget('layouts/:script.:suffix')
 ]]></programlisting>
         </example>
 
-        <example id="zend.layout.advanced.inflector.custom">
-            <title>Inflecteur personnalisé</title>
+        <example xml:id="zend.layout.advanced.inflector.custom"><info><title>Inflecteur personnalisé</title></info>
+            
 
             <para>
                 Dans la plupart des cas, modifier l'inflecteur sera suffisant. Vous pouvez
@@ -235,8 +230,8 @@ $layout->setInflector($inflector);
 ]]></programlisting>
         </example>
 
-        <note>
-            <title>L'inflecteur peut être désactivé</title>
+        <note><info><title>L'inflecteur peut être désactivé</title></info>
+            
 
             <para>
                 L'inflecteur peut être désactivé si vous spécifiez, par exemple, un chemin
@@ -245,5 +240,5 @@ $layout->setInflector($inflector);
                 aideront.
             </para>
         </note>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19731 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.barcode.introduction">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.barcode.introduction"><info><title>Einführung</title></info>
+    
 
     <para>
         <classname>Zend_Barcode</classname> bietet einen generischen Weg um Barcode zu erzeugen. Die
@@ -11,4 +11,4 @@
         erstellen. Renderer erlauben es Barcodes basieren auf der benötigten Unterstützung zu
         zeichnen.
     </para>
-</sect1>
+</section>

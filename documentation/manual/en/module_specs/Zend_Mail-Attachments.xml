@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.attachments">
-    <title>Attachments</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.attachments"><info><title>Attachments</title></info>
+    
 
     <para>
         Files can be attached to an e-mail using the <methodname>createAttachment()</methodname>
@@ -12,8 +11,8 @@
         <methodname>createAttachment()</methodname>:
     </para>
 
-    <example id="zend.mail.attachments.example-1">
-        <title>E-Mail Messages with Attachments</title>
+    <example xml:id="zend.mail.attachments.example-1"><info><title>E-Mail Messages with Attachments</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
@@ -63,7 +62,4 @@ $mail->addAttachment($at);
 
 $mail->send();
 ]]></programlisting>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

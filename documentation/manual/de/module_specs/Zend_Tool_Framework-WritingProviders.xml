@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21888 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.tool.framework.writing-providers">
-    <title>Erstellen von Providern für die Verwendung mit Zend_Tool_Framework</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.framework.writing-providers"><info><title>Erstellen von Providern für die Verwendung mit Zend_Tool_Framework</title></info>
+    
 
     <para>
         Generell ist ein Provider für sich selbst nichts mehr als die Shell für einen Entwickler
@@ -11,8 +9,8 @@
         <acronym>MVC</acronym> Anwendung ist.
     </para>
 
-    <sect2 id="zend.tool.framework.writing-providers.loading">
-        <title>Wie Zend_Tool eigene Provider findet</title>
+    <section xml:id="zend.tool.framework.writing-providers.loading"><info><title>Wie Zend_Tool eigene Provider findet</title></info>
+        
 
         <para>
             Standardmäßig verwendet <classname>Zend_Tool</classname> den IncludePathLoader um alle
@@ -66,8 +64,8 @@
             </para>
         </note>
 
-        <example id="zend.tool.framework.writing-providers.loading.example">
-            <title>Eigene Provider mit einem Manifest bekanntmachen</title>
+        <example xml:id="zend.tool.framework.writing-providers.loading.example"><info><title>Eigene Provider mit einem Manifest bekanntmachen</title></info>
+            
 
             <para>
                 Man kann eigene Provider bei <classname>Zend_Tool</classname> bekannt machen indem
@@ -92,10 +90,10 @@ class My_Component_Manifest
 }
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.tool.framework.writing-providers.basic">
-        <title>Grundsätzliche Anweisungen für die Erstellung von Providern</title>
+    <section xml:id="zend.tool.framework.writing-providers.basic"><info><title>Grundsätzliche Anweisungen für die Erstellung von Providern</title></info>
+        
 
         <para>
             Wenn, als Beispiel, ein Entwickler die Fähigkeit hinzufügen will, die Version einer
@@ -129,10 +127,10 @@ class My_Component_HelloProvider
 % zf say hello
 Hello from my provider!
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.tool.framework.writing-providers.response">
-        <title>Das Antwort Objekt</title>
+    <section xml:id="zend.tool.framework.writing-providers.response"><info><title>Das Antwort Objekt</title></info>
+        
 
         <para>
             Wie in der Archikektur Sektion diskutiert erlaubt <classname>Zend_Tool</classname>
@@ -161,13 +159,13 @@ class My_Component_HelloProvider
             erweitern um Zugriff auf die Registry zu erhalten, welche die Instanz von
             <classname>Zend_Tool_Framework_Client_Response</classname> hält.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.tool.framework.writing-providers.advanced">
-        <title>Fortgeschrittene Informationen für die Entwicklung</title>
+    <section xml:id="zend.tool.framework.writing-providers.advanced"><info><title>Fortgeschrittene Informationen für die Entwicklung</title></info>
+        
 
-        <sect3 id="zend.tool.framework.writing-providers.advanced.variables">
-            <title>Variablen an einen Provider übergeben</title>
+        <section xml:id="zend.tool.framework.writing-providers.advanced.variables"><info><title>Variablen an einen Provider übergeben</title></info>
+            
 
             <para>
                 Das obige "Hello World" Beispiel ist perfekt für einfache Kommandos, aber was ist
@@ -203,10 +201,10 @@ class My_Component_HelloProvider
                 <command>zf say hello</command> weiterhin funktioniert, und der Standardname "Ralph"
                 ist.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.tool.framework.writing-providers.advanced.prompt">
-            <title>Den Benutzer nach einer Eingabe fragen</title>
+        <section xml:id="zend.tool.framework.writing-providers.advanced.prompt"><info><title>Den Benutzer nach einer Eingabe fragen</title></info>
+            
 
             <para>
                 Es gibt Fälle in denen der Workflow des Providers es notwendig macht, den Benutzer
@@ -235,10 +233,10 @@ class My_Component_HelloProvider
                 die Interaktive Anfrage zu behandeln. Im Fall des standardmäßigen Konsolen Clients
                 wird man trotzdem danach gefragt den Namen einzugeben.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.tool.framework.writing-providers.advanced.pretendable">
-            <title>Voranstellen um eine Provider Aktion auszuführen</title>
+        <section xml:id="zend.tool.framework.writing-providers.advanced.pretendable"><info><title>Voranstellen um eine Provider Aktion auszuführen</title></info>
+            
 
             <para>
                 Ein anderes interessantes Feature das man implementieren kann ist
@@ -283,10 +281,10 @@ class My_Component_HelloProvider
 % zf --pretend say hello Ralph
 I würde zu Ralph hallo sagen.
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.tool.framework.writing-providers.advanced.verbosedebug">
-            <title>Verbose und Debug Modi</title>
+        <section xml:id="zend.tool.framework.writing-providers.advanced.verbosedebug"><info><title>Verbose und Debug Modi</title></info>
+            
 
             <para>
                 Man kann Provider Aktionen auch im "verbose" oder "debug" Modus ausführen. Die
@@ -310,10 +308,10 @@ class My_Component_HelloProvider
     }
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.tool.framework.writing-providers.advanced.configstorage">
-            <title>Zugriff auf Benutzer Konfiguration und Speicher</title>
+        <section xml:id="zend.tool.framework.writing-providers.advanced.configstorage"><info><title>Zugriff auf Benutzer Konfiguration und Speicher</title></info>
+            
 
             <para>
                 Wenn man die Umgebungsvariable <property>ZF_CONFIG_FILE</property> oder
@@ -392,7 +390,7 @@ class Zend_Tool_Framework_Client_Storage
                     Schlüssel bei der Anfrage erstellt werden.
                 </para>
             </important>
-        </sect3>
+        </section>
 
-    </sect2>
-</sect1>
+    </section>
+</section>

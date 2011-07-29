@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22756 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.log.writers" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Rédacteurs (Writers)</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers"><info><title>Rédacteurs (Writers)</title></info>
+    
 
     <para>
         Un rédacteur est un objet qui hérite de
@@ -10,12 +8,12 @@
         d'enregistrer des données de log dans un stockage particulier.
     </para>
 
-    <sect2 id="zend.log.writers.stream">
-        <title>Écrire vers un flux (stream)</title>
+    <section xml:id="zend.log.writers.stream"><info><title>Écrire vers un flux (stream)</title></info>
+        
 
         <para>
             <classname>Zend_Log_Writer_Stream</classname> envoie des données de log à un
-            <ulink url="http://www.php.net/stream">flux de <acronym>PHP</acronym></ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/stream">flux de <acronym>PHP</acronym></link>.
         </para>
 
         <para>
@@ -30,8 +28,7 @@ $logger->info("Message d'information");
 ]]></programlisting></para>
 
         <para>
-            Pour écrire des données dans un fichier, employer un des <ulink
-            url="http://www.php.net/manual/fr/wrappers.php#wrappers.file">Filesystem URLs</ulink>:
+            Pour écrire des données dans un fichier, employer un des <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/fr/wrappers.php#wrappers.file">Filesystem URLs</link>:
             <programlisting language="php"><![CDATA[
 $redacteur = new Zend_Log_Writer_Stream('/chemin/vers/fichierdelog');
 $logger = new Zend_Log($redacteur);
@@ -58,10 +55,10 @@ $logger->info("Message d'information");
 ]]></programlisting> Vous ne pouvez pas indiquer le mode pour des ressources existantes de flux.
             Le faire entraînera une <classname>Zend_Log_Exception</classname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.log.writers.database">
-        <title>Écrire dans des bases de données</title>
+    <section xml:id="zend.log.writers.database"><info><title>Écrire dans des bases de données</title></info>
+        
 
         <para>
             <classname>Zend_Log_Writer_Db</classname> écrit les informations de log dans une
@@ -89,19 +86,19 @@ $logger->info("Message d'information");
             <code>niveau</code> reçoit le niveau de priorité et la colonne appelée <code>msg</code>
             reçoit le message de log.
         </para>
-    </sect2>
+    </section>
 
-    <xi:include href="Zend_Log-Writers-Firebug.xml" />
-    <xi:include href="Zend_Log-Writers-Mail.xml" />
-    <xi:include href="Zend_Log-Writers-Syslog.xml" />
-    <xi:include href="Zend_Log-Writers-ZendMonitor.xml">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Log-Writers-Firebug.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Log-Writers-Mail.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Log-Writers-Syslog.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Log-Writers-ZendMonitor.xml">
         <xi:fallback>
-            <xi:include href="../../en/module_specs/Zend_Log-Writers-ZendMonitor.xml" />
+            <xi:include href="../../en/module_specs/Zend_Log-Writers-ZendMonitor.xml"/>
         </xi:fallback>
     </xi:include>
 
-    <sect2 id="zend.log.writers.null">
-        <title>Déraciner les rédacteurs</title>
+    <section xml:id="zend.log.writers.null"><info><title>Déraciner les rédacteurs</title></info>
+        
 
         <para>
             Le <classname>Zend_Log_Writer_Null</classname> est une souche qui écrit des
@@ -113,10 +110,10 @@ $logger = new Zend_Log($redacteur);
 // va nulle part
 $logger->info("Message d'information");
 ]]></programlisting></para>
-        </sect2>
+        </section>
 
-        <sect2 id="zend.log.writers.mock">
-            <title>Tester avec un simulacre</title>
+        <section xml:id="zend.log.writers.mock"><info><title>Tester avec un simulacre</title></info>
+            
 
         <para>
             Le <classname>Zend_Log_Writer_Mock</classname> est un rédacteur très simple qui
@@ -142,10 +139,10 @@ var_dump($mock->events[0]);
             Pour effacer les événements notés dans le simulacre, il faut simplement réaliser
             <code>$simulacre-&gt;events = array()</code>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.log.writers.compositing">
-        <title>Additionner les rédacteurs</title>
+    <section xml:id="zend.log.writers.compositing"><info><title>Additionner les rédacteurs</title></info>
+        
 
         <para>
             Il n'y a aucun objet composite de rédacteurs. Cependant, une instance
@@ -163,5 +160,5 @@ $logger->addWriter($redacteur2);
 // va dans les 2 rédacteurs
 $logger->info("Message d'information");
 ]]></programlisting></para>
-        </sect2>
-    </sect1>
+        </section>
+    </section>

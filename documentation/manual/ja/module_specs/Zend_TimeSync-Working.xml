@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20807 -->
-<sect1 id="zend.timesync.working">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.timesync.working"><info><title>Zend_TimeSync の動作</title></info>
 
-    <title>Zend_TimeSync の動作</title>
+    
 
     <para>
         <classname>Zend_TimeSync</classname> は、指定した任意の
@@ -17,14 +15,14 @@
             この章のすべてのサンプルでは、一般に公開されているタイムサーバのひとつを使用します。
             私たちは <emphasis>0.europe.pool.ntp.org</emphasis>
             を使用しますが、あなたの環境にあわせて最も近いタイムサーバを使うことをお勧めします。
-            詳細は <ulink url="http://www.pool.ntp.org">http://www.pool.ntp.org</ulink>
+            詳細は <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.pool.ntp.org">http://www.pool.ntp.org</link>
             を参照ください。
         </para>
     </note>
 
-    <sect2 id="zend.timesync.working.generic">
+    <section xml:id="zend.timesync.working.generic"><info><title>一般的なタイムサーバへのリクエスト</title></info>
 
-        <title>一般的なタイムサーバへのリクエスト</title>
+        
 
         <para>
             タイムサーバから時刻を取得するのはきわめて簡単です。
@@ -53,11 +51,11 @@ print $server->getDate()->getIso();
             を参照ください。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.timesync.working.multiple">
+    <section xml:id="zend.timesync.working.multiple"><info><title>複数のタイムサーバ</title></info>
 
-        <title>複数のタイムサーバ</title>
+        
 
         <para>
             すべてのタイムサーバが常に使用可能で時刻を返してくれるとは限りません。
@@ -111,11 +109,11 @@ print $server->getDate()->getIso();
             その方法については本章の後半で説明します。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.timesync.working.protocol">
+    <section xml:id="zend.timesync.working.protocol"><info><title>タイムサーバのプロトコル</title></info>
 
-        <title>タイムサーバのプロトコル</title>
+        
 
         <para>
             タイムサーバにはさまざまな形式があります。
@@ -145,11 +143,11 @@ print $server->getDate()->getIso();
             特定のプロトコルだけでなく、個々のサーバに対して別のプロトコルも指定できるようになっています。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.timesync.working.ports">
+    <section xml:id="zend.timesync.working.ports"><info><title>タイムサーバのポートの指定</title></info>
 
-        <title>タイムサーバのポートの指定</title>
+        
 
         <para>
             ウェブにおけるさまざまな他のプロトコルと同様、<emphasis>NTP</emphasis> や
@@ -173,11 +171,11 @@ $server->addServer('sntp:\\internal.myserver.com:399', 'additional');
 print $server->getDate()->getIso();
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.timesync.working.options">
+    <section xml:id="zend.timesync.working.options"><info><title>タイムサーバ用のオプション</title></info>
 
-        <title>タイムサーバ用のオプション</title>
+        
 
         <para>
             実際のところ <classname>Zend_TimeSync</classname> で使用するオプションはひとつだけで、
@@ -219,11 +217,11 @@ print "Timeout = " . Zend_TimeSync::getOptions('timeout');
             つまり、すべての <classname>Zend_TimeSync</classname> のインスタンスで同じ設定が共用されます。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.timesync.working.different">
+    <section xml:id="zend.timesync.working.different"><info><title>別のタイムサーバの使用法</title></info>
 
-        <title>別のタイムサーバの使用法</title>
+        
 
         <para>
             時間を取得したい場合、デフォルトでは最初に指定したサーバにリクエストを送信します。
@@ -246,11 +244,11 @@ $actual = $server->getServer();
 $server = $server->setServer('additional');
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.timesync.working.informations">
+    <section xml:id="zend.timesync.working.informations"><info><title>タイムサーバからの情報</title></info>
 
-        <title>タイムサーバからの情報</title>
+        
 
         <para>
             タイムサーバは、時刻以外にも付加情報を提供します。
@@ -269,11 +267,11 @@ print_r ($server->getInfo());
             使用しているプロトコルやサーバによってさまざまに異なります。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.timesync.working.exceptions">
+    <section xml:id="zend.timesync.working.exceptions"><info><title>例外処理</title></info>
 
-        <title>例外処理</title>
+        
 
         <para>
             すべてのタイムサーバで発生した例外は、ひとつの配列にまとめて返されます。
@@ -302,5 +300,5 @@ try {
     }
 }
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

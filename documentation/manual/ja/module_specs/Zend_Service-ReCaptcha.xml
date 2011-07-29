@@ -1,15 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21819 -->
-<sect1 id="zend.service.recaptcha">
-    <title>Zend_Service_ReCaptcha</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.recaptcha"><info><title>Zend_Service_ReCaptcha</title></info>
+    
 
-    <sect2 id="zend.service.recaptcha.introduction">
-        <title>導入</title>
+    <section xml:id="zend.service.recaptcha.introduction"><info><title>導入</title></info>
+        
 
         <para>
-            <classname>Zend_Service_ReCaptcha</classname> は <ulink
-                url="http://recaptcha.net/">reCAPTCHA Web Service</ulink>
+            <classname>Zend_Service_ReCaptcha</classname> は <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://recaptcha.net/">reCAPTCHA Web Service</link>
             用のクライアントです。reCAPTCHA のサイトによると、
             "reCAPTCHA is a free CAPTCHA service that
             helps to digitize books
@@ -24,16 +21,15 @@
         </para>
 
         <para>
-            reCAPTCHA サービスを使用するには、<ulink
-                url="http://recaptcha.net/whyrecaptcha.html">アカウントのサインアップ
-                </ulink>
+            reCAPTCHA サービスを使用するには、<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://recaptcha.net/whyrecaptcha.html">アカウントのサインアップ
+                </link>
             が必要です。また公開鍵と秘密鍵を作成するには、
             サービスを使用するドメインを登録しなければなりません。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.recaptcha.simplestuse">
-        <title>単純な使用法</title>
+    <section xml:id="zend.service.recaptcha.simplestuse"><info><title>単純な使用法</title></info>
+        
 
         <para>
             <classname>Zend_Service_ReCaptcha</classname> オブジェクトのインスタンスを作成し、
@@ -41,8 +37,8 @@
         </para>
 
 
-        <example id="zend.service.recaptcha.example-1">
-            <title>reCAPTCHA サービスのインスタンスの作成</title>
+        <example xml:id="zend.service.recaptcha.example-1"><info><title>reCAPTCHA サービスのインスタンスの作成</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $recaptcha = new Zend_Service_ReCaptcha($pubKey, $privKey);
@@ -54,8 +50,8 @@ $recaptcha = new Zend_Service_ReCaptcha($pubKey, $privKey);
             <methodname>getHTML()</methodname> メソッドをコールするだけです。
         </para>
 
-        <example id="zend.service.recaptcha.example-2">
-            <title>reCAPTCHA の表示</title>
+        <example xml:id="zend.service.recaptcha.example-2"><info><title>reCAPTCHA の表示</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 echo $recaptcha->getHTML();
@@ -70,8 +66,8 @@ echo $recaptcha->getHTML();
             メソッドに渡します。
         </para>
 
-        <example id="zend.service.recaptcha.example-3">
-            <title>フォームフィールドの検証</title>
+        <example xml:id="zend.service.recaptcha.example-3"><info><title>フォームフィールドの検証</title></info>
+            
             <programlisting language="php"><![CDATA[
 $result = $recaptcha->verify(
     $_POST['recaptcha_challenge_field'],
@@ -86,8 +82,8 @@ $result = $recaptcha->verify(
             このオブジェクトは <methodname>isValid()</methodname> メソッドを提供しています。
         </para>
 
-        <example id="zend.service.recaptcha.example-4">
-            <title>reCAPTCHA の検証</title>
+        <example xml:id="zend.service.recaptcha.example-4"><info><title>reCAPTCHA の検証</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 if (!$result->isValid()) {
@@ -97,19 +93,17 @@ if (!$result->isValid()) {
         </example>
 
         <para>
-            <link
-                linkend="zend.captcha.adapters.recaptcha">reCAPTCHA</link>
+            <link linkend="zend.captcha.adapters.recaptcha">reCAPTCHA</link>
             <classname>Zend_Captcha</classname> アダプタを使うか、そのアダプタを
-            <link
-                linkend="zend.form.standardElements.captcha">CAPTCHA
+            <link linkend="zend.form.standardElements.captcha">CAPTCHA
                 フォーム要素</link>
             のバックエンドとして使うことがもっと簡単です。
             どちらの場合でも、reCAPTCHA のレンダリングや検証は自動化されます。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.recaptcha.mailhide">
-        <title>メールアドレスの隠蔽</title>
+    <section xml:id="zend.service.recaptcha.mailhide"><info><title>メールアドレスの隠蔽</title></info>
+        
 
         <para>
             <classname>Zend_Service_ReCaptcha_MailHide</classname> を使うと、
@@ -121,12 +115,12 @@ if (!$result->isValid()) {
         <para>
             このコンポーネントを使うには、
             mailhide <acronym>API</acronym> 用の公開キーと秘密キーを生成するための
-            <ulink url="http://recaptcha.net/whyrecaptcha.html">アカウント</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://recaptcha.net/whyrecaptcha.html">アカウント</link>
             が必要です。
         </para>
 
-        <example id="zend.service.recaptcha.mailhide.example-1">
-            <title>mail hide コンポーネントの使用法</title>
+        <example xml:id="zend.service.recaptcha.mailhide.example-1"><info><title>mail hide コンポーネントの使用法</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // 隠したいメールアドレス
@@ -154,8 +148,8 @@ print($mailHide);
             4 番目の引数も存在し、ここでコンポーネントのオプションを設定できます。
             使用できるオプションは次の表のとおりです。
 
-            <table id="zend.service.recaptcha.mailhide.options.table">
-                <title>Zend_Service_ReCaptcha_MailHide のオプション</title>
+            <table xml:id="zend.service.recaptcha.mailhide.options.table"><info><title>Zend_Service_ReCaptcha_MailHide のオプション</title></info>
+                
 
                 <tgroup cols="4">
                     <thead>
@@ -207,8 +201,8 @@ print($mailHide);
             のインスタンスを渡します。
         </para>
 
-        <example id="zend.service.recaptcha.mailhide.example-2">
-            <title>多数の隠しメールアドレスの作成</title>
+        <example xml:id="zend.service.recaptcha.mailhide.example-2"><info><title>多数の隠しメールアドレスの作成</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // mailhide コンポーネントのインスタンスを作成し、公開キーと秘密キー
@@ -234,8 +228,5 @@ foreach ($mailAddresses as $mail) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

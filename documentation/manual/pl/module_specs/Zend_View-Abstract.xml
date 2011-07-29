@@ -1,5 +1,6 @@
-<sect1 id="zend.view.abstract">
-    <title>Zend_View_Abstract</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.abstract"><info><title>Zend_View_Abstract</title></info>
+    
 
     <para>
         Klasa <code>Zend_View_Abstract</code> jest klasą bazową w oparciu o
@@ -35,8 +36,8 @@ protected function _run()
 {
     include func_get_arg(0);
 }
-]]>
-    </programlisting>
+
+    ]]></programlisting>
 
     <para>
         Skrypty widoków mają dostęp do obecnego obiektu (<code>$this</code>),
@@ -61,4 +62,4 @@ protected function _run()
         można przeprowadzić i pozwalając nam na zabezpiecznie krytycznych
         obszarów przed nadużyciami w skryptach widoków.
     </para>
-</sect1>
+</section>

@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20799 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.tool.project.introduction">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.project.introduction"><info><title>Einführung</title></info>
+    
 
     <para>
         <classname>Zend_Tool_Project</classname> baut auf die Möglichkeiten von
@@ -38,4 +38,4 @@
         <emphasis>welche</emphasis> Ressourcen Teil eines Projektes sind, sonder auch
         <emphasis>wie</emphasis> diese in Relation zu einander stehen.
     </para>
-</sect1>
+</section>

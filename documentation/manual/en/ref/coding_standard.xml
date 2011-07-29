@@ -1,13 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<appendix id="coding-standard">
-    <title>Zend Framework Coding Standard for PHP</title>
+<?xml version="1.0" encoding="utf-8"?>
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="coding-standard"><info><title>Zend Framework Coding Standard for PHP</title></info>
+    
 
-    <sect1 id="coding-standard.overview">
-        <title>Overview</title>
+    <section xml:id="coding-standard.overview"><info><title>Overview</title></info>
+        
 
-        <sect2 id="coding-standard.overview.scope">
-            <title>Scope</title>
+        <section xml:id="coding-standard.overview.scope"><info><title>Scope</title></info>
+            
 
             <para>
                 This document provides guidelines for code formatting and documentation to
@@ -23,8 +22,7 @@
                     important than what that standard actually suggests at the most detailed level
                     of design. The guidelines in Zend Framework's coding standards capture
                     practices that have worked well on the Zend Framework project. You may modify
-                    these standards or use them as is in accordance with the terms of our <ulink
-                        url="http://framework.zend.com/license">license</ulink>.
+                    these standards or use them as is in accordance with the terms of our <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/license">license</link>.
                 </para>
             </note>
 
@@ -49,10 +47,10 @@
                     <para>Inline Documentation</para>
                 </listitem>
             </itemizedlist>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.overview.goals">
-            <title>Goals</title>
+        <section xml:id="coding-standard.overview.goals"><info><title>Goals</title></info>
+            
 
             <para>
                 Coding standards are important in any development project, but they are particularly
@@ -60,17 +58,17 @@
                 help ensure that the code is high quality, has fewer bugs, and can be easily
                 maintained.
             </para>
-        </sect2>
-    </sect1>
+        </section>
+    </section>
 
-    <sect1 id="coding-standard.php-file-formatting">
-        <title>PHP File Formatting</title>
+    <section xml:id="coding-standard.php-file-formatting"><info><title>PHP File Formatting</title></info>
+        
 
-        <sect2 id="coding-standard.php-file-formatting.general">
-            <title>General</title>
+        <section xml:id="coding-standard.php-file-formatting.general"><info><title>General</title></info>
+            
 
             <para>
-                For files that contain only <acronym>PHP</acronym> code, the closing tag ("?>") is
+                For files that contain only <acronym>PHP</acronym> code, the closing tag ("?&gt;") is
                 never permitted. It is not required by <acronym>PHP</acronym>, and omitting it´
                 prevents the accidental injection of trailing white space into the response.
             </para>
@@ -83,16 +81,16 @@
                     from them. Use of this feature is only permitted for some installation scripts.
                 </para>
             </note>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.php-file-formatting.indentation">
-            <title>Indentation</title>
+        <section xml:id="coding-standard.php-file-formatting.indentation"><info><title>Indentation</title></info>
+            
 
             <para>Indentation should consist of 4 spaces. Tabs are not allowed.</para>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.php-file-formatting.max-line-length">
-            <title>Maximum Line Length</title>
+        <section xml:id="coding-standard.php-file-formatting.max-line-length"><info><title>Maximum Line Length</title></info>
+            
 
             <para>
                 The target line length is 80 characters. That is to say, Zend Framework developers
@@ -100,10 +98,10 @@
                 practical. However, longer lines are acceptable in some circumstances. The maximum
                 length of any line of <acronym>PHP</acronym> code is 120 characters.
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.php-file-formatting.line-termination">
-            <title>Line Termination</title>
+        <section xml:id="coding-standard.php-file-formatting.line-termination"><info><title>Line Termination</title></info>
+            
 
             <para>
                 Line termination follows the Unix text file convention. Lines must end with a
@@ -116,14 +114,14 @@
                 the carriage return - linefeed combination (<acronym>CRLF</acronym>) as is standard
                 for the Windows OS (0x0D, 0x0A).
             </para>
-        </sect2>
-    </sect1>
+        </section>
+    </section>
 
-    <sect1 id="coding-standard.naming-conventions">
-        <title>Naming Conventions</title>
+    <section xml:id="coding-standard.naming-conventions"><info><title>Naming Conventions</title></info>
+        
 
-        <sect2 id="coding-standard.naming-conventions.classes">
-            <title>Classes</title>
+        <section xml:id="coding-standard.naming-conventions.classes"><info><title>Classes</title></info>
+            
 
             <para>
                 Zend Framework standardizes on a class naming convention whereby the names of the
@@ -167,14 +165,13 @@
                     never start with "Zend_" or "ZendX_".
                 </para>
             </note>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.naming-conventions.abstracts">
-            <title>Abstract Classes</title>
+        <section xml:id="coding-standard.naming-conventions.abstracts"><info><title>Abstract Classes</title></info>
+            
 
             <para>
-                In general, abstract classes follow the same conventions as <link
-                    linkend="coding-standard.naming-conventions.classes">classes</link>,
+                In general, abstract classes follow the same conventions as <link linkend="coding-standard.naming-conventions.classes">classes</link>,
                 with one additional rule: abstract class names must end in the term, "Abstract",
                 and that term must not be preceded by an underscore. As an example,
                 <classname>Zend_Controller_Plugin_Abstract</classname> is considered an
@@ -233,14 +230,13 @@ abstract class RequestAbstract
                     keyword issues; simultaneously, it better describes the abstract class.
                 </para>
             </note>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.naming-conventions.interfaces">
-            <title>Interfaces</title>
+        <section xml:id="coding-standard.naming-conventions.interfaces"><info><title>Interfaces</title></info>
+            
 
             <para>
-                In general, interfaces follow the same conventions as <link
-                    linkend="coding-standard.naming-conventions.classes">classes</link>,
+                In general, interfaces follow the same conventions as <link linkend="coding-standard.naming-conventions.classes">classes</link>,
                 with one additional rule: interface names may optionally end in the term,
                 "Interface", but that term must not be preceded by an underscore. As an example,
                 <classname>Zend_Controller_Plugin_Interface</classname> is considered an
@@ -259,15 +255,14 @@ abstract class RequestAbstract
                 <para>
                     This naming convention is new with version 1.9.0 of Zend Framework. Classes
                     that pre-date that version may not follow this rule, but will be renamed in
-                    the future in order to comply. See <link
-                        linkend="coding-standard.naming-conventions.abstracts">the previous
+                    the future in order to comply. See <link linkend="coding-standard.naming-conventions.abstracts">the previous
                         section</link> for more information on the rationale for this change.
                 </para>
             </note>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.naming-conventions.filenames">
-            <title>Filenames</title>
+        <section xml:id="coding-standard.naming-conventions.filenames"><info><title>Filenames</title></info>
+            
 
             <para>
                 For all other files, only alphanumeric characters, underscores, and the dash
@@ -291,10 +286,10 @@ Zend/View/Helper/FormRadio.php
             <para>
                 File names must map to class names as described above.
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.naming-conventions.functions-and-methods">
-            <title>Functions and Methods</title>
+        <section xml:id="coding-standard.naming-conventions.functions-and-methods"><info><title>Functions and Methods</title></info>
+            
 
             <para>
                 Function names may only contain alphanumeric characters. Underscores are not
@@ -343,10 +338,10 @@ widgetFactory()
                 Functions in the global scope (a.k.a "floating functions") are permitted but
                 discouraged in most cases. Consider wrapping these functions in a static class.
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.naming-conventions.variables">
-            <title>Variables</title>
+        <section xml:id="coding-standard.naming-conventions.variables"><info><title>Variables</title></info>
+            
 
             <para>
                 Variable names may only contain alphanumeric characters. Underscores are not
@@ -373,10 +368,10 @@ widgetFactory()
                 discouraged for all but the smallest loop contexts. If a loop contains more than
                 20 lines of code, the index variables should have more descriptive names.
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.naming-conventions.constants">
-            <title>Constants</title>
+        <section xml:id="coding-standard.naming-conventions.constants"><info><title>Constants</title></info>
+            
 
             <para>
                 Constants may contain both alphanumeric characters and underscores. Numbers are
@@ -398,14 +393,14 @@ widgetFactory()
                 constants in the global scope with the "define" function is permitted but strongly
                 discouraged.
             </para>
-        </sect2>
-    </sect1>
+        </section>
+    </section>
 
-    <sect1 id="coding-standard.coding-style">
-        <title>Coding Style</title>
+    <section xml:id="coding-standard.coding-style"><info><title>Coding Style</title></info>
+        
 
-        <sect2 id="coding-standard.coding-style.php-code-demarcation">
-            <title>PHP Code Demarcation</title>
+        <section xml:id="coding-standard.coding-style.php-code-demarcation"><info><title>PHP Code Demarcation</title></info>
+            
 
             <para>
                 <acronym>PHP</acronym> code must always be delimited by the full-form, standard
@@ -420,16 +415,15 @@ widgetFactory()
 
             <para>
                 Short tags are never allowed. For files containing only <acronym>PHP</acronym>
-                code, the closing tag must always be omitted (See <link
-                    linkend="coding-standard.php-file-formatting.general">General standards</link>).
+                code, the closing tag must always be omitted (See <link linkend="coding-standard.php-file-formatting.general">General standards</link>).
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.coding-style.strings">
-            <title>Strings</title>
+        <section xml:id="coding-standard.coding-style.strings"><info><title>Strings</title></info>
+            
 
-            <sect3 id="coding-standard.coding-style.strings.literals">
-                <title>String Literals</title>
+            <section xml:id="coding-standard.coding-style.strings.literals"><info><title>String Literals</title></info>
+                
 
                 <para>
                     When a string is literal (contains no variable substitutions), the apostrophe or
@@ -439,10 +433,10 @@ widgetFactory()
                 <programlisting language="php"><![CDATA[
 $a = 'Example String';
 ]]></programlisting>
-            </sect3>
+            </section>
 
-            <sect3 id="coding-standard.coding-style.strings.literals-containing-apostrophes">
-                <title>String Literals Containing Apostrophes</title>
+            <section xml:id="coding-standard.coding-style.strings.literals-containing-apostrophes"><info><title>String Literals Containing Apostrophes</title></info>
+                
 
                 <para>
                     When a literal string itself contains apostrophes, it is permitted to demarcate
@@ -458,10 +452,10 @@ $sql = "SELECT `id`, `name` from `people` "
                 <para>
                     This syntax is preferred over escaping apostrophes as it is much easier to read.
                 </para>
-            </sect3>
+            </section>
 
-            <sect3 id="coding-standard.coding-style.strings.variable-substitution">
-                <title>Variable Substitution</title>
+            <section xml:id="coding-standard.coding-style.strings.variable-substitution"><info><title>Variable Substitution</title></info>
+                
 
                 <para>
                     Variable substitution is permitted using either of these forms:
@@ -480,10 +474,10 @@ $greeting = "Hello {$name}, welcome back!";
                 <programlisting language="php"><![CDATA[
 $greeting = "Hello ${name}, welcome back!";
 ]]></programlisting>
-            </sect3>
+            </section>
 
-            <sect3 id="coding-standard.coding-style.strings.string-concatenation">
-                <title>String Concatenation</title>
+            <section xml:id="coding-standard.coding-style.strings.string-concatenation"><info><title>String Concatenation</title></info>
+                
 
                 <para>
                     Strings must be concatenated using the "." operator. A space must always
@@ -506,14 +500,14 @@ $sql = "SELECT `id`, `name` FROM `people` "
      . "WHERE `name` = 'Susan' "
      . "ORDER BY `name` ASC ";
 ]]></programlisting>
-            </sect3>
-        </sect2>
+            </section>
+        </section>
 
-        <sect2 id="coding-standard.coding-style.arrays">
-            <title>Arrays</title>
+        <section xml:id="coding-standard.coding-style.arrays"><info><title>Arrays</title></info>
+            
 
-            <sect3 id="coding-standard.coding-style.arrays.numerically-indexed">
-                <title>Numerically Indexed Arrays</title>
+            <section xml:id="coding-standard.coding-style.arrays.numerically-indexed"><info><title>Numerically Indexed Arrays</title></info>
+                
 
                 <para>Negative numbers are not permitted as indices.</para>
 
@@ -565,10 +559,10 @@ $sampleArray = array(
                     successive lines, and helps to ensure no parse errors occur due to a missing
                     comma.
                 </para>
-            </sect3>
+            </section>
 
-            <sect3 id="coding-standard.coding-style.arrays.associative">
-                <title>Associative Arrays</title>
+            <section xml:id="coding-standard.coding-style.arrays.associative"><info><title>Associative Arrays</title></info>
+                
 
                 <para>
                     When declaring associative arrays with the <type>Array</type> construct,
@@ -588,7 +582,7 @@ $sampleArray = array('firstKey'  => 'firstValue',
                     the array declaration, and all successive lines should have the same
                     indentation; the closing paren should be on a line by itself at the same
                     indentation level as the line containing the array declaration. For
-                    readability, the various "=>" assignment operators should be padded such that
+                    readability, the various "=&gt;" assignment operators should be padded such that
                     they align.
                 </para>
 
@@ -605,14 +599,14 @@ $sampleArray = array(
                     successive lines, and helps to ensure no parse errors occur due to a missing
                     comma.
                 </para>
-            </sect3>
-        </sect2>
+            </section>
+        </section>
 
-        <sect2 id="coding-standard.coding-style.classes">
-            <title>Classes</title>
+        <section xml:id="coding-standard.coding-style.classes"><info><title>Classes</title></info>
+            
 
-            <sect3 id="coding-standard.coding-style.classes.declaration">
-                <title>Class Declaration</title>
+            <section xml:id="coding-standard.coding-style.classes.declaration"><info><title>Class Declaration</title></info>
+                
 
                 <para>
                     Classes must be named according to Zend Framework's naming conventions.
@@ -668,8 +662,7 @@ class SampleClass extends FooAbstract implements BarInterface
 ]]></programlisting>
 
                 <para>
-                    If as a result of such declarations, the line length exceeds the <link
-                        linkend="coding-standard.php-file-formatting.max-line-length">maximum line
+                    If as a result of such declarations, the line length exceeds the <link linkend="coding-standard.php-file-formatting.max-line-length">maximum line
                         length</link>, break the line before the "extends" and/or "implements"
                     keywords, and pad those lines by one indentation level.
                 </para>
@@ -695,10 +688,10 @@ class SampleClass
 {
 }
 ]]></programlisting>
-            </sect3>
+            </section>
 
-            <sect3 id="coding-standard.coding-style.classes.member-variables">
-                <title>Class Member Variables</title>
+            <section xml:id="coding-standard.coding-style.classes.member-variables"><info><title>Class Member Variables</title></info>
+                
 
                 <para>
                     Member variables must be named according to Zend Framework's variable naming
@@ -717,14 +710,14 @@ class SampleClass
                     access to member variables directly by declaring them as public is permitted but
                     discouraged in favor of accessor methods (set &amp; get).
                 </para>
-            </sect3>
-        </sect2>
+            </section>
+        </section>
 
-        <sect2 id="coding-standard.coding-style.functions-and-methods">
-            <title>Functions and Methods</title>
+        <section xml:id="coding-standard.coding-style.functions-and-methods"><info><title>Functions and Methods</title></info>
+            
 
-            <sect3 id="coding-standard.coding-style.functions-and-methods.declaration">
-                <title>Function and Method Declaration</title>
+            <section xml:id="coding-standard.coding-style.functions-and-methods.declaration"><info><title>Function and Method Declaration</title></info>
+                
 
                 <para>
                     Functions must be named according to Zend Framework's function naming
@@ -769,8 +762,7 @@ class Foo
 ]]></programlisting>
 
                 <para>
-                    In cases where the argument list exceeds the <link
-                        linkend="coding-standard.php-file-formatting.max-line-length">maximum line
+                    In cases where the argument list exceeds the <link linkend="coding-standard.php-file-formatting.max-line-length">maximum line
                         length</link>, you may introduce line breaks. Additional arguments to the
                     function or method must be indented one additional level beyond the function
                     or method declaration. A line break should then occur before the closing
@@ -852,10 +844,10 @@ class Foo
     }
 }
 ]]></programlisting>
-            </sect3>
+            </section>
 
-            <sect3 id="coding-standard.coding-style.functions-and-methods.usage">
-                <title>Function and Method Usage</title>
+            <section xml:id="coding-standard.coding-style.functions-and-methods.usage"><info><title>Function and Method Usage</title></info>
+                
 
                 <para>
                     Function arguments should be separated by a single trailing space after the
@@ -891,14 +883,14 @@ threeArguments(array(
     56.44, $d, 500
 ), 2, 3);
 ]]></programlisting>
-            </sect3>
-        </sect2>
+            </section>
+        </section>
 
-        <sect2 id="coding-standard.coding-style.control-statements">
-            <title>Control Statements</title>
+        <section xml:id="coding-standard.coding-style.control-statements"><info><title>Control Statements</title></info>
+            
 
-            <sect3 id="coding-standard.coding-style.control-statements.if-else-elseif">
-                <title>If/Else/Elseif</title>
+            <section xml:id="coding-standard.coding-style.control-statements.if-else-elseif"><info><title>If/Else/Elseif</title></info>
+                
 
                 <para>
                     Control statements based on the <emphasis>if</emphasis> and
@@ -926,8 +918,7 @@ if ($a != 2) {
 ]]></programlisting>
 
                 <para>
-                    If the conditional statement causes the line length to exceed the <link
-                        linkend="coding-standard.php-file-formatting.max-line-length">maximum line
+                    If the conditional statement causes the line length to exceed the <link linkend="coding-standard.php-file-formatting.max-line-length">maximum line
                         length</link> and has several clauses, you may break the conditional into
                     multiple lines. In such a case, break the line prior to a logic operator, and
                     pad the line such that it aligns under the first character of the conditional
@@ -990,10 +981,10 @@ if (($a == $b)
                     circumstances. This coding standard makes no differentiation- all "if",
                     "elseif" or "else" statements must use braces.
                 </para>
-            </sect3>
+            </section>
 
-            <sect3 id="coding-standards.coding-style.control-statements.switch">
-                <title>Switch</title>
+            <section xml:id="coding-standards.coding-style.control-statements.switch"><info><title>Switch</title></info>
+                
 
                 <para>
                     Control statements written with the "switch" statement must have a single space
@@ -1036,20 +1027,19 @@ switch ($numPeople) {
                         that the break was intentionally omitted.
                     </para>
                 </note>
-            </sect3>
-        </sect2>
+            </section>
+        </section>
 
-        <sect2 id="coding-standards.inline-documentation">
-            <title>Inline Documentation</title>
+        <section xml:id="coding-standards.inline-documentation"><info><title>Inline Documentation</title></info>
+            
 
-            <sect3 id="coding-standards.inline-documentation.documentation-format">
-                <title>Documentation Format</title>
+            <section xml:id="coding-standards.inline-documentation.documentation-format"><info><title>Documentation Format</title></info>
+                
 
                 <para>
                     All documentation blocks ("docblocks") must be compatible with the phpDocumentor
                     format. Describing the phpDocumentor format is beyond the scope of this
-                    document. For more information, visit: <ulink
-                        url="http://phpdoc.org/">http://phpdoc.org/</ulink>
+                    document. For more information, visit: <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://phpdoc.org/">http://phpdoc.org/</link>
                 </para>
 
                 <para>
@@ -1057,10 +1047,10 @@ switch ($numPeople) {
                     a "class-level" docblock immediately above each class. Examples of such
                     docblocks can be found below.
                 </para>
-            </sect3>
+            </section>
 
-            <sect3 id="coding-standards.inline-documentation.files">
-                <title>Files</title>
+            <section xml:id="coding-standards.inline-documentation.files"><info><title>Files</title></info>
+                
 
                 <para>
                     Every file that contains <acronym>PHP</acronym> code must have a docblock at
@@ -1102,10 +1092,10 @@ switch ($numPeople) {
                     "<classname>Zend_Magic_Wand</classname>", or uses that classname as part of its
                     prefix.
                 </para>
-            </sect3>
+            </section>
 
-            <sect3 id="coding-standards.inline-documentation.classes">
-                <title>Classes</title>
+            <section xml:id="coding-standards.inline-documentation.classes"><info><title>Classes</title></info>
+                
 
                 <para>
                     Every class must have a docblock that contains these phpDocumentor tags at a
@@ -1147,10 +1137,10 @@ switch ($numPeople) {
                     "<classname>Zend_Magic_Wand</classname>", or uses that classname as part of its
                     prefix.
                 </para>
-            </sect3>
+            </section>
 
-            <sect3 id="coding-standards.inline-documentation.functions">
-                <title>Functions</title>
+            <section xml:id="coding-standards.inline-documentation.functions"><info><title>Functions</title></info>
+                
 
                 <para>
                     Every function, including object methods, must have a docblock that contains at
@@ -1177,10 +1167,7 @@ switch ($numPeople) {
                 <programlisting language="php"><![CDATA[
 @throws exceptionclass [description]
 ]]></programlisting>
-            </sect3>
-        </sect2>
-    </sect1>
+            </section>
+        </section>
+    </section>
 </appendix>
-<!--
-vim:se ts=4 sw=4 et:
--->

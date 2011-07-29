@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16589 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.baseurl">
-    <title>Aide BaseUrl</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.baseurl"><info><title>Aide BaseUrl</title></info>
+    
 
     <para>
         La plupart des <acronym>URL</acronym>s générées par le framework possèdent l'
@@ -39,8 +37,8 @@
             Pour plus de simplicité, le fichier <acronym>PHP</acronym> (par exemple
             "<filename>index.php</filename>") est enelevé de l'<acronym>URL</acronym> de base
             gérée par <classname>Zend_Controller</classname>. Cependant, si ceci vous gène, utilisez
-            <methodname>$this->getHelper('BaseUrl')->setBaseUrl()</methodname> pour affecter votre
+            <methodname>$this-&gt;getHelper('BaseUrl')-&gt;setBaseUrl()</methodname> pour affecter votre
             propre BaseUrl.
         </para>
     </note>
-</sect3>
+</section>

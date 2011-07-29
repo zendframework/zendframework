@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.loader.plugin-broker">
-    <title>The PluginBroker</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.plugin-broker"><info><title>The PluginBroker</title></info>
+    
 
-    <sect2 id="zend.loader.plugin-broker.intro">
-        <title>Overview</title>
+    <section xml:id="zend.loader.plugin-broker.intro"><info><title>Overview</title></info>
+        
 
         <para>
             Many components within Zend Framework offer extensibility via adapters, helpers,
@@ -38,9 +37,7 @@
         </para>
 
         <para>
-            The <classname>PluginBroker</classname> is designed to work in conjunction with a <link
-                linkend="zend.loader.short-name-locater">ShortNameLocater</link> -- usually a <link
-                linkend="zend.loader.plugin-class-loader">PluginClassLoader</link>, but sometimes a
+            The <classname>PluginBroker</classname> is designed to work in conjunction with a <link linkend="zend.loader.short-name-locater">ShortNameLocater</link> -- usually a <link linkend="zend.loader.plugin-class-loader">PluginClassLoader</link>, but sometimes a
             <link linkend="zend.loader.prefix-path-loader">PrefixPathLoader</link>. The
             <interfacename>ShortNameLocater</interfacename> provides the ability to resolve a plugin
             name to a class; the <classname>PluginBroker</classname> then instantiates, stores, and
@@ -55,10 +52,10 @@
             or override the <methodname>validatePlugin()</methodname> method in order to validate an
             instantiated plugin against your criteria.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.plugin-broker.quick-start">
-        <title>Quick Start</title>
+    <section xml:id="zend.loader.plugin-broker.quick-start"><info><title>Quick Start</title></info>
+        
 
         <para>
             Typically, a component will define an extension to the
@@ -82,13 +79,13 @@ echo $urlHelper->simple('sign', 'guestbook');
         <programlisting language="php"><![CDATA[
 $broker->register('url', $urlHelper);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.plugin-broker.options">
-        <title>Configuration Options</title>
+    <section xml:id="zend.loader.plugin-broker.options"><info><title>Configuration Options</title></info>
+        
 
-        <variablelist>
-            <title>PluginBroker Options</title>
+        <variablelist><info><title>PluginBroker Options</title></info>
+            
 
             <varlistentry>
                 <term>class_loader</term>
@@ -145,12 +142,12 @@ $broker->register('url', $urlHelper);
                 </listitem>
             </varlistentry>
         </variablelist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.plugin-broker.methods">
-        <title>Available Methods</title>
+    <section xml:id="zend.loader.plugin-broker.methods"><info><title>Available Methods</title></info>
+        
 
-        <refentry id="zend.loader.plugin-broker.methods.load">
+        <refentry xml:id="zend.loader.plugin-broker.methods.load">
             <refnamediv>
                 <refname>load</refname>
                 <refpurpose>Resolve a plugin name to an object instance</refpurpose>
@@ -165,8 +162,8 @@ $broker->register('url', $urlHelper);
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>load()</title>
+            <refsection><info><title>load()</title></info>
+                
 
                 <para>
                     This method attempts to resolve a plugin name to an object instance. In order to
@@ -186,10 +183,10 @@ $broker->register('url', $urlHelper);
                     If the class loader cannot locate a corresponding class, or if the plugin
                     instance does not validate, an exception will be thrown.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.plugin-broker.methods.register">
+        <refentry xml:id="zend.loader.plugin-broker.methods.register">
             <refnamediv>
                 <refname>register</refname>
                 <refpurpose>Register a plugin instance by name</refpurpose>
@@ -204,18 +201,18 @@ $broker->register('url', $urlHelper);
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>register()</title>
+            <refsection><info><title>register()</title></info>
+                
 
                 <para>
                     Registers a <varname>$plugin</varname> instance by a given
                     <varname>$name</varname>. If the <varname>$plugin</varname> does not pass
                     validation, an exception will be raised.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.plugin-broker.methods.unregister">
+        <refentry xml:id="zend.loader.plugin-broker.methods.unregister">
             <refnamediv>
                 <refname>unregister</refname>
                 <refpurpose>Unregister a plugin instance</refpurpose>
@@ -230,8 +227,8 @@ $broker->register('url', $urlHelper);
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>unregister()</title>
+            <refsection><info><title>unregister()</title></info>
+                
 
                 <para>
                     If the plugin instance referenced by <varname>$name</varname> has been
@@ -239,10 +236,10 @@ $broker->register('url', $urlHelper);
                     does not prevent you from loading the plugin again; however, a new instance will
                     be returned in such a case.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.plugin-broker.methods.get-plugins">
+        <refentry xml:id="zend.loader.plugin-broker.methods.get-plugins">
             <refnamediv>
                 <refname>getPlugins</refname>
                 <refpurpose>Retrieve all loaded plugins</refpurpose>
@@ -252,21 +249,21 @@ $broker->register('url', $urlHelper);
                 <methodsynopsis>
                     <methodname>getPlugins</methodname>
                     <methodparam>
-                        <funcparams></funcparams>
+                        <funcparams/>
                     </methodparam>
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>getPlugins()</title>
+            <refsection><info><title>getPlugins()</title></info>
+                
 
                 <para>
                     Retrieves a set of name/plugin pairs, indicating all currently loaded plugins.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.plugin-broker.methods.is-loaded">
+        <refentry xml:id="zend.loader.plugin-broker.methods.is-loaded">
             <refnamediv>
                 <refname>isLoaded</refname>
                 <refpurpose>Determine if a given plugin has been loaded</refpurpose>
@@ -281,18 +278,18 @@ $broker->register('url', $urlHelper);
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>isLoaded()</title>
+            <refsection><info><title>isLoaded()</title></info>
+                
 
                 <para>
                     Returns <constant>true</constant> if the plugin referenced by
                     <varname>$name</varname> has been loaded by the broker previously,
                     <constant>false</constant> otherwise.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.plugin-broker.methods.set-class-loader">
+        <refentry xml:id="zend.loader.plugin-broker.methods.set-class-loader">
             <refnamediv>
                 <refname>setClassLoader</refname>
                 <refpurpose>Specify the plugin class loader to use when resolving plugins to class
@@ -308,18 +305,18 @@ $broker->register('url', $urlHelper);
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>setClassLoader()</title>
+            <refsection><info><title>setClassLoader()</title></info>
+                
 
                 <para>
                     Use this method to set a plugin class loader to use when resolving plugin names
                     to class names. As noted in the signature, the object must adhere to the
                     <interfacename>ShortNameLocater</interfacename> interface.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.plugin-broker.methods.get-class-loader">
+        <refentry xml:id="zend.loader.plugin-broker.methods.get-class-loader">
             <refnamediv>
                 <refname>getClassLoader</refname>
                 <refpurpose>Retrieve the plugin class resolver</refpurpose>
@@ -331,17 +328,17 @@ $broker->register('url', $urlHelper);
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>getClassLoader()</title>
+            <refsection><info><title>getClassLoader()</title></info>
+                
 
                 <para>
                     Retrieves the plugin class resolver; the object will always be an implemenation
                     of <interfacename>ShortNameLocater</interfacename>.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.plugin-broker.methods.set-validator">
+        <refentry xml:id="zend.loader.plugin-broker.methods.set-validator">
             <refnamediv>
                 <refname>setValidator</refname>
                 <refpurpose>Specify a validation callback to verify plugin instances</refpurpose>
@@ -356,8 +353,8 @@ $broker->register('url', $urlHelper);
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>setValidator()</title>
+            <refsection><info><title>setValidator()</title></info>
+                
 
                 <para>
                     In order to "lock down" the plugin broker to plugins that satisfy specific
@@ -382,10 +379,10 @@ $broker->setValidator(function($plugin) {
                     Passing a null value will clear the validator; otherwise, the method expects any
                     valid PHP callback, including closures.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.plugin-broker.methods.get-validator">
+        <refentry xml:id="zend.loader.plugin-broker.methods.get-validator">
             <refnamediv>
                 <refname>getValidator</refname>
                 <refpurpose>Return the validator callback</refpurpose>
@@ -397,22 +394,22 @@ $broker->setValidator(function($plugin) {
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>getValidator()</title>
+            <refsection><info><title>getValidator()</title></info>
+                
 
                 <para>
                     The mirror of <methodname>setValidator()</methodname>, this method will return
                     the plugin validation callback, if any.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.plugin-broker.examples">
-        <title>Examples</title>
+    <section xml:id="zend.loader.plugin-broker.examples"><info><title>Examples</title></info>
+        
 
-        <example id="zend.loader.plugin-broker.examples.validator-callback">
-            <title>Plugin validation callback</title>
+        <example xml:id="zend.loader.plugin-broker.examples.validator-callback"><info><title>Plugin validation callback</title></info>
+            
 
             <para>
                 It's often overkill to extend the <classname>PluginBroker</classname>, particularly
@@ -447,8 +444,8 @@ $broker->setClassLoader(new HelperLoader)
             </para>
         </example>
 
-        <example id="zend.loader.plugin-broker.examples.custom-broker">
-            <title>Creating a custom broker</title>
+        <example xml:id="zend.loader.plugin-broker.examples.custom-broker"><info><title>Creating a custom broker</title></info>
+            
 
             <para>
                 In the previous example, we illustrated configuring a plugin broker instance that
@@ -502,5 +499,5 @@ class HelperBroker extends PluginBroker
                 etc. 
             </para>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

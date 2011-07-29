@@ -60,6 +60,11 @@ class PhpParameter extends \Zend\CodeGenerator\Php\AbstractPhp
     protected $_passedByReference = false;
 
     /**
+     * @var array
+     */
+    protected static $_simple = array('int', 'bool', 'string', 'float', 'resource', 'mixed', 'object');
+
+    /**
      * fromReflection()
      *
      * @param \Zend\Reflection\ReflectionParameter $reflectionParameter
@@ -221,7 +226,7 @@ class PhpParameter extends \Zend\CodeGenerator\Php\AbstractPhp
     {
         $output = '';
 
-        if ($this->_type) {
+        if ($this->_type && !in_array($this->_type, self::$_simple)) {
             $output .= $this->_type . ' ';
         }
 
@@ -234,7 +239,7 @@ class PhpParameter extends \Zend\CodeGenerator\Php\AbstractPhp
         if ($this->_defaultValue !== null) {
             $output .= ' = ';
             if (is_string($this->_defaultValue)) {
-                $output .= '\'' . $this->_defaultValue . '\'';
+                $output .= PhpValue::escape($this->_defaultValue);
             } else if($this->_defaultValue instanceof \Zend\CodeGenerator\Php\PhpParameterDefaultValue) {
                 $output .= (string)$this->_defaultValue;
             } else {

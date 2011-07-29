@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
-<!-- Reviewed: no -->
-<sect1 id="performance.view">
-    <title>Darstellen der View</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.view"><info><title>Darstellen der View</title></info>
+    
 
     <para>
         Wenn man den <acronym>MVC</acronym> Layer vom Zend Framework verwendet, sind die Chancen
@@ -16,8 +14,8 @@
         Schlüsselfunktionalitäten bieten machen das auch, mit einem Verlust von Geschwindigkeit.
     </para>
 
-    <sect2 id="performance.view.pluginloader">
-        <title>Wie kann ich die Auflösung von View Helfern schneller machen?</title>
+    <section xml:id="performance.view.pluginloader"><info><title>Wie kann ich die Auflösung von View Helfern schneller machen?</title></info>
+        
 
         <para>
             Die meisten <classname>Zend_View</classname> "Methoden" werden in Wirklichkeit durch
@@ -31,8 +29,7 @@
         </para>
 
         <para>
-            Intern verwendet <classname>Zend_View</classname> den <link
-            linkend="zend.loader.pluginloader">PluginLoader</link> um nach Helferklassen zu sehen.
+            Intern verwendet <classname>Zend_View</classname> den <link linkend="zend.loader.pluginloader">PluginLoader</link> um nach Helferklassen zu sehen.
             Das bedeutet das für jeden Helfer den man aufruft, <classname>Zend_View</classname> den
             Helfernamen zum PluginLoader übergeben muß, welcher dann den Klassennamen erkennen muß
             damit er instanziiert werden kann. Nachfolgende Aufrufe des Helfers sind viel schneller,
@@ -44,22 +41,20 @@
             Die Frage ist also: Wie kann man die Auflösung der Helfer schneller machen?
         </para>
 
-        <sect3 id="performance.view.pluginloader.cache">
-            <title>Verwenden des PluginLoader Include-File Caches</title>
+        <section xml:id="performance.view.pluginloader.cache"><info><title>Verwenden des PluginLoader Include-File Caches</title></info>
+            
 
             <para>
-                Die einfachste, billigste Lösung ist die gleiche für die <link
-                linkend="performance.classloading.pluginloader">generelle PluginLoader
-                Geschwindigkeit</link>: <link
-                linkend="zend.loader.pluginloader.performance.example">Verwenden des PluginLoader
+                Die einfachste, billigste Lösung ist die gleiche für die <link linkend="performance.classloading.pluginloader">generelle PluginLoader
+                Geschwindigkeit</link>: <link linkend="zend.loader.pluginloader.performance.example">Verwenden des PluginLoader
                 Include-File Caches</link>. Einzelberichte und aussagen haben gezeigt das diese
                 Technik eine Geschwindigkeitssteigerung von 25-30% auf Systemen ohne Opcode Cache
                 bringt, und eine 40-64% Steigerung auf Systemen mit Opcode Cache.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="performance.view.pluginloader.extend">
-            <title>Erweitern von Zend_View um oft verwendet Helfermethoden anzubieten</title>
+        <section xml:id="performance.view.pluginloader.extend"><info><title>Erweitern von Zend_View um oft verwendet Helfermethoden anzubieten</title></info>
+            
 
             <para>
                 Eine andere Lösung für jene welche die Geschwindigkeit sogar noch mehr steigern
@@ -120,11 +115,11 @@ class My_View extends Zend_View
                 indem es den Aufruf vom PluginLoader komplett vermeidet, und entweder vom
                 Autoloader profitiert, oder durch dessen Überbrückung.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="performance.view.partial">
-        <title>Wie kann ich partielle View schneller machen?</title>
+    <section xml:id="performance.view.partial"><info><title>Wie kann ich partielle View schneller machen?</title></info>
+        
 
         <para>
             Jene die Partielle sehr oft verwenden und die Ihre Anwendungen profilieren werden oft
@@ -133,8 +128,8 @@ class My_View extends Zend_View
             das schneller zu machen?
         </para>
 
-        <sect3 id="performance.view.partial.render">
-            <title>Verwende partial() nur wenn es wirklich notwendig ist</title>
+        <section xml:id="performance.view.partial.render"><info><title>Verwende partial() nur wenn es wirklich notwendig ist</title></info>
+            
 
             <para>
                 Der <methodname>partial()</methodname> View Helfer akzeptiert drei Argumente:
@@ -182,11 +177,11 @@ class My_View extends Zend_View
                 <classname>Zend_View</classname>'s eingebaute <methodname>render()</methodname>
                 Methode verwendet um das Viewskript darzustellen.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="performance.view.action">
-        <title>Wie kann ich Aufrufe zu action() vom View Helfers schneller machen?</title>
+    <section xml:id="performance.view.action"><info><title>Wie kann ich Aufrufe zu action() vom View Helfers schneller machen?</title></info>
+        
 
         <para>
             Version 1.5.0 führte die <methodname>action()</methodname> des View Helfers ein, welche
@@ -203,8 +198,8 @@ class My_View extends Zend_View
             Wie kann man das schneller machen?
         </para>
 
-        <sect3 id="performance.view.action.actionstack">
-            <title>Verwende den ActionStack wenn möglich</title>
+        <section xml:id="performance.view.action.actionstack"><info><title>Verwende den ActionStack wenn möglich</title></info>
+            
 
             <para>
                 Zur selben Zeit die der <methodname>action()</methodname> View Helfer eingeführt,
@@ -271,10 +266,10 @@ class LoginPlugin extends Zend_Controller_Plugin_Abstract
                 spezieller Wichtigkeit ist wenn man Frontcontroller Plugins für die Behandlung von
                 <acronym>ACL</acronym>'s in speziellen Aktionen verwendet.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="performance.view.action.model">
-            <title>Helfer bevorzugen die das Modell vor action() abfragen</title>
+        <section xml:id="performance.view.action.model"><info><title>Helfer bevorzugen die das Modell vor action() abfragen</title></info>
+            
 
             <para>
                 In den meisten Fällen ist die Verwendung von <methodname>action()</methodname>
@@ -353,6 +348,6 @@ class My_View_Helper_BugList extends Zend_View_Helper_Abstract
                 <methodname>action()</methodname> View Helfer, und präsentiert eine bessere und
                 semantisch verständlichere <acronym>API</acronym>.
             </para>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

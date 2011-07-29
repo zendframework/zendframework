@@ -1,13 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20763 -->
-<sect2 id="zend.application.core-functionality.resource-resourceabstract">
-    <title>Zend_Application_Resource_ResourceAbstract</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.core-functionality.resource-resourceabstract"><info><title>Zend_Application_Resource_ResourceAbstract</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_ResourceAbstract</classname>は
-        <link
-            linkend="zend.application.core-functionality.resource-resource">Zend_Application_Resource_Resource</link>を
+        <link linkend="zend.application.core-functionality.resource-resource">Zend_Application_Resource_Resource</link>を
         実装する抽象クラスで、
         独自のカスタム・プラグイン・リソースを作成し始めるために適しています。
     </para>
@@ -17,8 +14,8 @@
         クラスを具体的に拡張する定義のために残されます。
     </para>
 
-    <table id="zend.application.core-functionality.resource-resourceabstract.api">
-        <title>Zend_Application_Resource_ResourceAbstractメソッド</title>
+    <table xml:id="zend.application.core-functionality.resource-resourceabstract.api"><info><title>Zend_Application_Resource_ResourceAbstractメソッド</title></info>
+        
         <tgroup cols="4">
             <thead>
                 <row>
@@ -95,8 +92,8 @@
         </tgroup>
     </table>
 
-    <sect3 id="zend.application.core-functionality.resource-resourceabstract.names">
-        <title>リソース名</title>
+    <section xml:id="zend.application.core-functionality.resource-resourceabstract.names"><info><title>リソース名</title></info>
+        
 
         <para>
             プラグイン・リソースを登録するときに起きる問題の一つは、
@@ -202,5 +199,5 @@ $view = $bootstrap->getResource('My_View');
             そして、複雑な初期化を成し遂げるために、
             独自のものを追加したり、複数のリソースを混ぜたりすることなどができます。
         </para>
-    </sect3>
-</sect2>
+    </section>
+</section>

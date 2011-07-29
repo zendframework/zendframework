@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.paginator.intro">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.paginator.intro"><info><title>Introduction</title></info>
+    
 
     <para>
         Let's say you're creating a blogging application that will be home to your vast
@@ -33,4 +34,4 @@
         To get started and to have a look at some code snippets, let's have a look at some
         simple examples.
     </para>
-</sect1>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19803 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.layout.usage">
-    <title>Utiliser Zend_Layout</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.layout.usage"><info><title>Utiliser Zend_Layout</title></info>
+    
 
     <para>
         L'utilisation classique de <classname>Zend_Layout</classname> est simple. En supposant
@@ -10,8 +8,8 @@
         passer des options de configuration et créer un script de layout.
     </para>
 
-    <sect2 id="learning.layout.usage.configuration">
-        <title>Layout Configuration</title>
+    <section xml:id="learning.layout.usage.configuration"><info><title>Layout Configuration</title></info>
+        
 
         <para>
             L'endroit recommandé pour stocker les layouts est
@@ -44,10 +42,10 @@ resources.layout.layout = "layout"
             nom du script à utiliser (l'extension est supposée "<filename>.phtml</filename>"
             par défaut).
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.layout.usage.layout-script">
-        <title>Créer un script de layout</title>
+    <section xml:id="learning.layout.usage.layout-script"><info><title>Créer un script de layout</title></info>
+        
 
         <para>
             Il convient maintenant de créer un script de layout. D'abord, vérifiez l'existance du
@@ -83,10 +81,10 @@ resources.layout.layout = "layout"
             Maintenant, nous avons un script de layout fonctionnel et notre application sait où le
             trouver.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.layout.usage.access">
-        <title>Accéder à l'objet Layout</title>
+    <section xml:id="learning.layout.usage.access"><info><title>Accéder à l'objet Layout</title></info>
+        
 
         <para>
             Il est probable que vous ayez besoin d'accéder à l'objet instance layout. Cela est
@@ -160,17 +158,16 @@ $layout = $bootstrap->getResource('Layout');
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.layout.usage.other-operations">
-        <title>Autres opérations</title>
+    <section xml:id="learning.layout.usage.other-operations"><info><title>Autres opérations</title></info>
+        
 
         <para>
             Dans la plupart des cas, le script de configuration de layout ci-dessus (avec quelques
             modifications) répondra à vos besoins. Cependant, dans certains cas il peut être
             intéressant d'utiliser d'autres fonctionnalités. Dans les exemples qui suivent,
-            vous allez utiliser une des<link
-                linkend="learning.layout.usage.access">méthodes listées ci-dessus</link> pour
+            vous allez utiliser une des<link linkend="learning.layout.usage.access">méthodes listées ci-dessus</link> pour
             récupérer l'objet layout.
         </para>
 
@@ -238,5 +235,5 @@ $layout->setLayout('alternate');
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

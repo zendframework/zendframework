@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 17166 -->
-    <!-- Reviewed: no -->
-<sect2 id="zend.dojo.form.examples">
-    <title>Ejemplos de Dojo Form</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.form.examples"><info><title>Ejemplos de Dojo Form</title></info>
+    
 
-    <example id="zend.dojo.form.examples.dojoform">
-        <title>Usando Zend_Dojo_Form</title>
+    <example xml:id="zend.dojo.form.examples.dojoform"><info><title>Usando Zend_Dojo_Form</title></info>
+        
 
         <para>
             La forma más fácil de utilizar Dojo con
@@ -360,8 +358,8 @@ class My_Form_Test extends Zend_Dojo_Form
 ]]></programlisting>
     </example>
 
-    <example id="zend.dojo.form.examples.decorating">
-        <title>Modificando un form existente para utilizarlo con Dojo</title>
+    <example xml:id="zend.dojo.form.examples.decorating"><info><title>Modificando un form existente para utilizarlo con Dojo</title></info>
+        
 
         <para>
             Los forms existentes pueden ser modificados para ser utilizados
@@ -423,4 +421,4 @@ class My_Custom_Form extends Zend_Form
             Dojo....
         </para>
     </example>
-</sect2>
+</section>

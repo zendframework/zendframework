@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22210 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.dojo.view.dojo">
-    <title>dojo() View Helfer</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.view.dojo"><info><title>dojo() View Helfer</title></info>
+    
 
     <para>
         Der <methodname>dojo()</methodname> View Helfer ist dazu gedacht das konfigurieren der Dojo
@@ -36,8 +34,8 @@
         und kann direkt im eigenen Layout Skript ausgegeben werden.
     </para>
 
-    <example id="zend.dojo.view.dojo.usage">
-        <title>Beispiel für die Verwendung des dojo() View Helfers</title>
+    <example xml:id="zend.dojo.view.dojo.usage"><info><title>Beispiel für die Verwendung des dojo() View Helfers</title></info>
+        
 
         <para>
             Für dieses Beispiel nehmen wir an das der Entwickler Dojo von einem lokalen Pfad aus
@@ -120,8 +118,8 @@ $this->dojo()->enable()
         </para>
     </example>
 
-    <note>
-        <title>Standardmäßig wird die UTF-8 Kodierung verwendet</title>
+    <note><info><title>Standardmäßig wird die UTF-8 Kodierung verwendet</title></info>
+        
 
         <para>
             Standardmäßig verwendet Zend Framework <acronym>UTF-8</acronym> als seine
@@ -143,8 +141,8 @@ $this->dojo()->enable()
         </para>
     </note>
 
-    <sect3 id="zend.dojo.view.dojo.declarative">
-        <title>Programtechnische und Deklarative Verwendung von Dojo</title>
+    <section xml:id="zend.dojo.view.dojo.declarative"><info><title>Programtechnische und Deklarative Verwendung von Dojo</title></info>
+        
 
         <para>
             Dojo erlaubt sowohl die <emphasis>deklarative</emphasis> als auch die
@@ -183,10 +181,10 @@ $this->dojo()->enable()
             es eine Anzahl von statischen Methoden vorhanden die dieses Verhalten global setzen.
         </para>
 
-        <example id="zend.dojo.view.dojo.declarative.usage">
-            <title>
+        <example xml:id="zend.dojo.view.dojo.declarative.usage"><info><title>
                 Spezifizieren der deklarativen und programmtechnischen Verwendung von Dojo
-            </title>
+            </title></info>
+            
 
             <para>
                 Um die deklarative Verwendung zu spezifizieren muß einfach die statische
@@ -217,10 +215,10 @@ Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
 Zend_Dojo_View_Helper_Dojo::setUseProgrammatic(-1);
 ]]></programlisting>
         </example>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.view.dojo.themes">
-        <title>Themen</title>
+    <section xml:id="zend.dojo.view.dojo.themes"><info><title>Themen</title></info>
+        
 
         <para>
             Dojo erlaubt die Erstellung von Themen für seine Dijits (Widgets). Man kann eines
@@ -247,10 +245,10 @@ $view->dojo()->addStylesheetModule('dijit.themes.tundra');
         <programlisting language="html"><![CDATA[
 <body class="tundra">
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.view.dojo.layers">
-        <title>Layer verwenden (eigene Builds)</title>
+    <section xml:id="zend.dojo.view.dojo.layers"><info><title>Layer verwenden (eigene Builds)</title></info>
+        
 
         <para>
             Wenn ein <command>dojo.require</command> Statement verwendet wird, wird Dojo
@@ -308,14 +306,13 @@ $view->dojo()->addLayer('/js/foo/foo.js');
 
         <para>
             Für weitere Informationen über die Erstellung von eigenen Build, schauen Sie bitte
-            <ulink
-                url="http://dojotoolkit.org/reference-guide/dojo/index.html#package-system">in
-                die Dojo Builddokumentation</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org/reference-guide/dojo/index.html#package-system">in
+                die Dojo Builddokumentation</link>.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.view.dojo.methods">
-        <title>Vorhandene Methoden</title>
+    <section xml:id="zend.dojo.view.dojo.methods"><info><title>Vorhandene Methoden</title></info>
+        
 
         <para>
             Der <methodname>dojo()</methodname> Viewhelfer gibt immer eine Instanz des Dojo
@@ -598,5 +595,5 @@ $view->dojo()->addLayer('/js/foo/foo.js');
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
-</sect2>
+    </section>
+</section>

@@ -1,38 +1,36 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21987 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.alnum">
-    <title>Alnum</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.alnum"><info><title>Alnum</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Alnum</classname> permet de valider des données contenant des
         caractères alphabétiques et des chiffres. Il n'y a pas de limite de taille.
     </para>
 
-    <sect3 id="zend.validate.set.alnum.options">
-        <title>Options supportées par Zend_Validate_Alnum</title>
+    <section xml:id="zend.validate.set.alnum.options"><info><title>Options supportées par Zend_Validate_Alnum</title></info>
+        
 
         <para>
             Les options suivantes sont supportées par
-            <classname>Zend_Validate_Alnum</classname>&#160;:
+            <classname>Zend_Validate_Alnum</classname> :
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis><property>allowWhiteSpace</property></emphasis>&#160;: Si le
+                    <emphasis><property>allowWhiteSpace</property></emphasis> : Si le
                     caractère d'espace doit être accepté ou non. Par défaut
                     <constant>FALSE</constant>.
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.alnum.basic">
-        <title>Utilisation de base</title>
+    <section xml:id="zend.validate.set.alnum.basic"><info><title>Utilisation de base</title></info>
+        
 
         <para>
-            Voici un exemple&#160;:
+            Voici un exemple :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -43,10 +41,10 @@ if ($validator->isValid('Abcd12')) {
     // false
 }
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.alnum.whitespace">
-        <title>Utiliser les espaces</title>
+    <section xml:id="zend.validate.set.alnum.whitespace"><info><title>Utiliser les espaces</title></info>
+        
 
         <para>
             Par défaut les caractères espaces ne sont pas acceptés car il ne font pas partie de
@@ -69,10 +67,10 @@ if ($validator->isValid('Abcd and 12')) {
     // false
 }
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.alnum.languages">
-        <title>Utiliser des langues différentes</title>
+    <section xml:id="zend.validate.set.alnum.languages"><info><title>Utiliser des langues différentes</title></info>
+        
 
         <para>
             En utilisant <classname>Zend_Validate_Alnum</classname>, la langue que l'utilisateur
@@ -97,5 +95,5 @@ if ($validator->isValid('Abcd and 12')) {
             Dans le cas où vous utilisez ces langues, seule l'alphabet anglais sera utilisé pour la
             validation.
         </para>
-    </sect3>
-</sect2>
+    </section>
+</section>

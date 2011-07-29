@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.view.scripts">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.scripts"><info><title>Скрипты видов</title></info>
 
-    <title>Скрипты видов</title>
+    
 
     <para>
         После того, как ваш контроллер определил переменные и вызвал
@@ -17,7 +16,7 @@
         Переменные, устанавливаемые в контроллере для скрипта вида, являются
         свойствами экземпляра <classname>Zend_View</classname>. Например, если контроллер
         установил переменную 'something', то в скрипте вида вы можете ссылаться
-        на нее следующим образом: <varname>$this->something</varname>. Это дает
+        на нее следующим образом: <varname>$this-&gt;something</varname>. Это дает
         возможность отслеживать, какие переменные были установлены
         извне для скрипта, и какие были установлены в самом скрипте.
     </para>
@@ -52,9 +51,9 @@
 <?php endif;?>
 ]]></programlisting>
 
-    <sect2 id="zend.view.scripts.escaping">
+    <section xml:id="zend.view.scripts.escaping"><info><title>Экранирование вывода</title></info>
 
-        <title>Экранирование вывода</title>
+        
 
         <para>
             Одной из наиважнейших задач, которую должен решать скрипт вида,
@@ -113,11 +112,11 @@ echo $view->render(...);
             все остальные параметры должны быть необязательными.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.scripts.templates">
+    <section xml:id="zend.view.scripts.templates"><info><title>Использование других шаблонизаторов</title></info>
 
-        <title>Использование других шаблонизаторов</title>
+        
 
         <para>
             Хотя PHP сам по себе представляет собой мощный шаблонизатор,
@@ -128,8 +127,8 @@ echo $view->render(...);
             интерфейса <classname>Zend_View_Interface</classname>.
         </para>
 
-        <sect3 id="zend.view.scripts.templates.scripts">
-            <title>Шаблонизаторы c использованием скриптов видов</title>
+        <section xml:id="zend.view.scripts.templates.scripts"><info><title>Шаблонизаторы c использованием скриптов видов</title></info>
+            
 
             <para>
                 Скрипт вида может использоваться для инстанцирования и
@@ -184,10 +183,10 @@ if ($this->books) {
 <p>Нет книг для отображения.</p>
 ]]></programlisting>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.view.scripts.templates.interface">
-            <title>Шаблонизаторы с использованием Zend_View_Interface</title>
+        <section xml:id="zend.view.scripts.templates.interface"><info><title>Шаблонизаторы с использованием Zend_View_Interface</title></info>
+            
 
             <para>
                 Некоторые считают более удобным использовать совместимый с
@@ -478,11 +477,8 @@ class FooController extends Zend_Controller_Action
 }
 ]]></programlisting>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

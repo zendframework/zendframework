@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19807 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.lucene.queries">
-    <title>Unterstützte Abfragen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.queries"><info><title>Unterstützte Abfragen</title></info>
+    
 
     <para>
         <classname>Zend_Search_Lucene</classname> und Java Lucene unterstützen eine mächtige
@@ -12,8 +10,7 @@
     </para>
 
     <para>
-        Eine detailierte Beschreibung der Abfragesprache kann in der <link
-            linkend="zend.search.lucene.query-language">Dokumentation der Komponente
+        Eine detailierte Beschreibung der Abfragesprache kann in der <link linkend="zend.search.lucene.query-language">Dokumentation der Komponente
             Zend_Search_Lucene</link> gefunden werden.
     </para>
 
@@ -21,8 +18,8 @@
         Nachfolgend sind einige Beispiel von üblichen Abfragetypen und Strategien.
     </para>
 
-    <example id="learning.lucene.queries.keyword">
-        <title>Abfragen nach einem einfachen Wort</title>
+    <example xml:id="learning.lucene.queries.keyword"><info><title>Abfragen nach einem einfachen Wort</title></info>
+        
 
         <programlisting language="text"><![CDATA[
 hello
@@ -33,8 +30,8 @@ hello
         </para>
     </example>
 
-    <note>
-        <title>Standardmäßige Suchfelder</title>
+    <note><info><title>Standardmäßige Suchfelder</title></info>
+        
 
         <para>
             Wichtige Notiz! Java Lucene sucht standardmäßig nur nach den "contents" Feldern, aber
@@ -45,8 +42,8 @@ hello
         </para>
     </note>
 
-    <example id="learning.lucene.queries.multiple-words">
-        <title>Abfrage nach mehreren Worten</title>
+    <example xml:id="learning.lucene.queries.multiple-words"><info><title>Abfrage nach mehreren Worten</title></info>
+        
 
         <programlisting language="text"><![CDATA[
 hello dolly
@@ -58,8 +55,8 @@ hello dolly
         </para>
     </example>
 
-    <example id="learning.lucene.queries.required-words">
-        <title>Worte in einer Abfrage erzwingen</title>
+    <example xml:id="learning.lucene.queries.required-words"><info><title>Worte in einer Abfrage erzwingen</title></info>
+        
 
         <programlisting language="text"><![CDATA[
 +hello dolly
@@ -70,8 +67,8 @@ hello dolly
         </para>
     </example>
 
-    <example id="learning.lucene.queries.prohibited-words">
-        <title>Wörter in abgefragten Dokumenten verhindern</title>
+    <example xml:id="learning.lucene.queries.prohibited-words"><info><title>Wörter in abgefragten Dokumenten verhindern</title></info>
+        
 
         <programlisting language="text"><![CDATA[
 +hello -dolly
@@ -84,8 +81,8 @@ hello dolly
         </para>
     </example>
 
-    <example id="learning.lucene.queries.phrases">
-        <title>Abfrage nach Phrasen</title>
+    <example xml:id="learning.lucene.queries.phrases"><info><title>Abfrage nach Phrasen</title></info>
+        
 
         <programlisting language="text"><![CDATA[
 "hello dolly"
@@ -97,8 +94,8 @@ hello dolly
         </para>
     </example>
 
-    <example id="learning.lucene.queries.fields">
-        <title>Abfrage nach spezifischen Feldern</title>
+    <example xml:id="learning.lucene.queries.fields"><info><title>Abfrage nach spezifischen Feldern</title></info>
+        
 
         <programlisting language="text"><![CDATA[
 title:"The Right Way" AND text:go
@@ -110,8 +107,8 @@ title:"The Right Way" AND text:go
         </para>
     </example>
 
-    <example id="learning.lucene.queries.fields-and-document">
-        <title>Abfrage nach speziellen Feldern sowie im kompletten Dokument</title>
+    <example xml:id="learning.lucene.queries.fields-and-document"><info><title>Abfrage nach speziellen Feldern sowie im kompletten Dokument</title></info>
+        
 
         <programlisting language="text"><![CDATA[
 title:"The Right Way" AND  go
@@ -123,8 +120,8 @@ title:"The Right Way" AND  go
         </para>
     </example>
 
-    <example id="learning.lucene.queries.fields-and-document-alt">
-        <title>Abfrage nach speziellen Feldern sowie im kompletten Dokument (alternativ)</title>
+    <example xml:id="learning.lucene.queries.fields-and-document-alt"><info><title>Abfrage nach speziellen Feldern sowie im kompletten Dokument (alternativ)</title></info>
+        
 
         <programlisting language="text"><![CDATA[
 title:Do it right
@@ -137,8 +134,8 @@ title:Do it right
         </para>
     </example>
 
-    <example id="learning.lucene.queries.wildcard-question">
-        <title>Abfrage mit der Wildcard "?"</title>
+    <example xml:id="learning.lucene.queries.wildcard-question"><info><title>Abfrage mit der Wildcard "?"</title></info>
+        
 
         <programlisting language="text"><![CDATA[
 te?t
@@ -150,8 +147,8 @@ te?t
         </para>
     </example>
 
-    <example id="learning.lucene.queries.wildcard-asterisk">
-        <title>Abfrage mit dem Wildcard "*"</title>
+    <example xml:id="learning.lucene.queries.wildcard-asterisk"><info><title>Abfrage mit dem Wildcard "*"</title></info>
+        
 
         <programlisting language="text"><![CDATA[
 test*
@@ -163,8 +160,8 @@ test*
         </para>
     </example>
 
-    <example id="learning.lucene.queries.range-inclusive">
-        <title>Abfrage nach einem inklusiven Bereich von Ausdrücken</title>
+    <example xml:id="learning.lucene.queries.range-inclusive"><info><title>Abfrage nach einem inklusiven Bereich von Ausdrücken</title></info>
+        
 
         <programlisting language="text"><![CDATA[
 mod_date:[20020101 TO 20030101]
@@ -175,8 +172,8 @@ mod_date:[20020101 TO 20030101]
         </para>
     </example>
 
-    <example id="learning.lucene.queries.range-exclusive">
-        <title>Abfrage nach einem exklusiven Bereich von Ausdrücken</title>
+    <example xml:id="learning.lucene.queries.range-exclusive"><info><title>Abfrage nach einem exklusiven Bereich von Ausdrücken</title></info>
+        
 
         <programlisting language="text"><![CDATA[
 title:{Aida to Carmen}
@@ -187,8 +184,8 @@ title:{Aida to Carmen}
         </para>
     </example>
 
-    <example id="learning.lucene.queries.fuzzy">
-        <title>Undeutliche Suchen</title>
+    <example xml:id="learning.lucene.queries.fuzzy"><info><title>Undeutliche Suchen</title></info>
+        
 
         <programlisting language="text"><![CDATA[
 roam~
@@ -199,8 +196,8 @@ roam~
         </para>
     </example>
 
-    <example id="learning.lucene.queries.boolean">
-        <title>Boolsche Suchen</title>
+    <example xml:id="learning.lucene.queries.boolean"><info><title>Boolsche Suchen</title></info>
+        
 
         <programlisting language="text"><![CDATA[
 (framework OR library) AND php
@@ -217,8 +214,8 @@ roam~
         Weiters können Parsen von Abfrage und Abfrage Erstellung kombiniert werden:
     </para>
 
-    <example id="learning.lucene.queries.combining">
-        <title>Kombinieren von geparsted und erstellten Abfragen</title>
+    <example xml:id="learning.lucene.queries.combining"><info><title>Kombinieren von geparsted und erstellten Abfragen</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
@@ -228,4 +225,4 @@ $query->addSubquery($userQuery, true  /* required */);
 $query->addSubquery($constructedQuery, true  /* required */);
 ]]></programlisting>
     </example>
-</sect1>
+</section>

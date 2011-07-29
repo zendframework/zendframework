@@ -1,13 +1,14 @@
-<sect1 id="zend.uri.chapter">
-  <title>Zend_Uri</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.uri.chapter"><info><title>Zend_Uri</title></info>
+  
 
-  <sect2 id="zend.uri.overview">
-    <title>Privire de ansamblu</title>
+  <section xml:id="zend.uri.overview"><info><title>Privire de ansamblu</title></info>
+    
 
     <para>
       <code>Zend_Uri</code> este o componentă care ajută la manipularea şi
-      validarea <ulink url="http://www.w3.org/Addressing/">Identificatorilor uniformi de
-      resurse</ulink> (URI-uri). <code>Zend_Uri</code> există în primul rând pentru a servi
+      validarea <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/Addressing/">Identificatorilor uniformi de
+      resurse</link> (URI-uri). <code>Zend_Uri</code> există în primul rând pentru a servi
       alte componente cum ar fi <code>Zend_Http_Client</code>, dar este
       utilă şi ca o componentă de sine stătătoare.
     </para>
@@ -22,18 +23,18 @@
       O excepţie de la această regulă este HTTPS, care e de asemenea gestionată de
       <code>Zend_Uri_Http</code>.
     </para>
-  </sect2>
+  </section>
 
-  <sect2 id="zend.uri.creation">
-    <title>Crearea unui nou identificator de resursă (URI)</title>
+  <section xml:id="zend.uri.creation"><info><title>Crearea unui nou identificator de resursă (URI)</title></info>
+    
 
     <para>
       <code>Zend_Uri</code> va construi un nou URI de la zero doar dacă pasaţi o schemă
       metodei <code>Zend_Uri::factory()</code>.
     </para>
 
-    <example>
-      <title>Crearea unui nou URI cu <code>Zend_Uri::factory()</code></title>
+    <example><info><title>Crearea unui nou URI cu <code>Zend_Uri::factory()</code></title></info>
+      
 
       <programlisting role="php"><![CDATA[
 <?php
@@ -43,8 +44,8 @@ require_once 'Zend/Uri.php';
 // Pentru a crea un nou URI de la zero, pasaţi doar schema.
 $uri = Zend_Uri::factory('http');
 
-// $uri instanceof Zend_Uri_Http?>]]>
-        </programlisting>
+// $uri instanceof Zend_Uri_Http?>
+        ]]></programlisting>
     </example>
 
     <para>
@@ -60,18 +61,18 @@ $uri = Zend_Uri::factory('http');
       <code>Zend_Uri::factory()</code> va întoarce o subclasă a ei care este
       specializată în schema care trebuie creată.
     </para>
-  </sect2>
+  </section>
 
-  <sect2 id="zend.uri.manipulation">
-    <title>Manipularea unui identificator de resursă (URI) existent</title>
+  <section xml:id="zend.uri.manipulation"><info><title>Manipularea unui identificator de resursă (URI) existent</title></info>
+    
 
     <para>
       Pentru a manipula un identificator de resursă existent, pasaţi întregul identificator (URI) metodei
       <code>Zend_Uri::factory()</code>.
     </para>
 
-    <example>
-      <title>Manipularea unui identificator de resursă (UR) existent cu <code>Zend_Uri::factory()</code></title>
+    <example><info><title>Manipularea unui identificator de resursă (UR) existent cu <code>Zend_Uri::factory()</code></title></info>
+      
 
     <programlisting role="php"><![CDATA[<?php
 require_once 'Zend/Uri.php';
@@ -79,8 +80,8 @@ require_once 'Zend/Uri.php';
 // Pentru a manipula un URI existent, pasaţi-l ca parametru.
 $uri = Zend_Uri::factory('http://www.zend.com');
 
-// $uri instanceof Zend_Uri_Http?>]]>
-</programlisting>
+// $uri instanceof Zend_Uri_Http?>
+]]></programlisting>
     </example>
 
     <para>
@@ -89,18 +90,18 @@ $uri = Zend_Uri::factory('http://www.zend.com');
       <code>Zend_Uri::factory()</code> va întoarce o subclasă a sa care este
       specializată în schema care urmează a fi manipulată.
     </para>
-  </sect2>
+  </section>
 
-  <sect2 id="zend.uri.validation">
-    <title>Validarea unui URI</title>
+  <section xml:id="zend.uri.validation"><info><title>Validarea unui URI</title></info>
+    
 
     <para>
       Funcţia <code>Zend_Uri::check()</code> poate fi utilizată doar dacă validarea
       unui URI existent este necesară într-un moment anume.
     </para>
 
-    <example id="zend.uri.validation.example-1">
-      <title>Validarea unui URI cu <code>Zend_Uri::check()</code></title>
+    <example xml:id="zend.uri.validation.example-1"><info><title>Validarea unui URI cu <code>Zend_Uri::check()</code></title></info>
+      
 
     <programlisting role="php"><![CDATA[<?php
 require_once 'Zend/Uri.php';
@@ -108,8 +109,8 @@ require_once 'Zend/Uri.php';
 // Validează dacă un URI dat este bine format
 $valid = Zend_Uri::check('http://uri.de.validat');
 
-// $valid este TRUE pentru un URI valid sau FALSE în caz contrar.?>]]>
-        </programlisting>
+// $valid este TRUE pentru un URI valid sau FALSE în caz contrar.?>
+        ]]></programlisting>
     </example>
 
     <para>
@@ -117,10 +118,10 @@ $valid = Zend_Uri::check('http://uri.de.validat');
       lucru care se poate dovedi mai convenabil decât folosirea metodei <code>Zend_Uri::factory()</code>
       şi prinderea excepţiei.
     </para>
-  </sect2>
+  </section>
 
-  <sect2 id="zend.uri.instance-methods">
-    <title>Metode obişnuite de creat instanţe</title>
+  <section xml:id="zend.uri.instance-methods"><info><title>Metode obişnuite de creat instanţe</title></info>
+    
 
     <para>
       Fiecare instanţă a unei subclase <code>Zend_Uri</code> (ex:
@@ -128,24 +129,24 @@ $valid = Zend_Uri::check('http://uri.de.validat');
       a fi utile în lucrul cu orice tip de URI.
     </para>
 
-    <sect3 id="zend.uri.instance-methods.getscheme">
-      <title>Obţinerea schemei identificatorului (URI)</title>
+    <section xml:id="zend.uri.instance-methods.getscheme"><info><title>Obţinerea schemei identificatorului (URI)</title></info>
+      
 
       <para>
         Schema unui URI este partea acelui URI care precedă caracterul două puncte.  De exemplu,
         schema identificatorului <code>http://www.zend.com</code> este <code>http</code>.
       </para>
 
-      <example id="zend.uri.instance-methods.getscheme.example-1">
-        <title>Obţinerea schemei dintr-un obiect <code>Zend_Uri_*</code></title>
+      <example xml:id="zend.uri.instance-methods.getscheme.example-1"><info><title>Obţinerea schemei dintr-un obiect <code>Zend_Uri_*</code></title></info>
+        
 
         <programlisting role="php"><![CDATA[<?php
 require_once 'Zend/Uri.php';
 
 $uri = Zend_Uri::factory('http://www.zend.com');
 
-$scheme = $uri->getScheme();  // "http"]]>
-        </programlisting>
+$scheme = $uri->getScheme();  // "http"
+        ]]></programlisting>
     </example>
 
       <para>
@@ -153,31 +154,31 @@ $scheme = $uri->getScheme();  // "http"]]>
         obiectului URI.
       </para>
 
-    </sect3>
+    </section>
 
-    <sect3 id="zend.uri.instance-methods.geturi">
-      <title>Obţinerea întregului identificator (URI)</title>
+    <section xml:id="zend.uri.instance-methods.geturi"><info><title>Obţinerea întregului identificator (URI)</title></info>
+      
 
-      <example id="zend.uri.instance-methods.geturi.example-1">
-        <title>Obţinerea întregului identificator dintr-un obiect <code>Zend_Uri_*</code></title>
+      <example xml:id="zend.uri.instance-methods.geturi.example-1"><info><title>Obţinerea întregului identificator dintr-un obiect <code>Zend_Uri_*</code></title></info>
+        
 
         <programlisting role="php"><![CDATA[<?php
 require_once 'Zend/Uri.php';
 
 $uri = Zend_Uri::factory('http://www.zend.com');
 
-echo $uri->getUri();  // "http://www.zend.com"]]>
-        </programlisting>
+echo $uri->getUri();  // "http://www.zend.com"
+        ]]></programlisting>
       </example>
 
       <para>
         Metoda <code>getUri()</code> întoarce textul reprezentând întregul
         URI.
       </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.uri.instance-methods.valid">
-      <title>Validarea unui identificator (URI)</title>
+    <section xml:id="zend.uri.instance-methods.valid"><info><title>Validarea unui identificator (URI)</title></info>
+      
 
       <para>
         <code>Zend_Uri::factory()</code> va valida întotdeauna orice URI pasat ei
@@ -188,26 +189,23 @@ echo $uri->getUri();  // "http://www.zend.com"]]>
         manipulării părţilor sale componente.
       </para>
 
-      <example id="zend.uri.instance-methods.valid.example-1">
-        <title>Validarea unui obiect <code>Zend_Uri_*</code></title>
+      <example xml:id="zend.uri.instance-methods.valid.example-1"><info><title>Validarea unui obiect <code>Zend_Uri_*</code></title></info>
+        
 
         <programlisting role="php"><![CDATA[<?php
 require_once 'Zend/Uri.php';
 
 $uri = Zend_Uri::factory('http://www.zend.com');
 
-$isValid = $uri->valid();  // TRUE]]>
-        </programlisting>
+$isValid = $uri->valid();  // TRUE
+        ]]></programlisting>
       </example>
 
       <para>
         Metoda <code>valid()</code> oferă o cale de a verifica dacă un obiect URI
         este încă valid.
       </para>
-    </sect3>
+    </section>
 
-  </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+  </section>
+</section>

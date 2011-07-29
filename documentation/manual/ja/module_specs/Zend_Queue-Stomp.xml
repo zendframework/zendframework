@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 17240 -->
-<sect1 id="zend.queue.stomp">
-    <title>Stomp</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.stomp"><info><title>Stomp</title></info>
+    
     <para>
         <classname>Zend_Queue_Stomp</classname>は、
-        <ulink url="http://stomp.codehaus.org/">Stomp</ulink>互換の一部のサーバと通信するために、
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://stomp.codehaus.org/">Stomp</link>互換の一部のサーバと通信するために、
         基本的なクライアントを提供します。
         一部のサーバ（例えばApache ActiveMQとRabbitMQ）では、
         <acronym>HTTP</acronym>や<acronym>XMPP</acronym>のような
@@ -13,18 +13,18 @@
     </para>
 
     <para>
-        Stompプロトコルは、どんな<ulink url="http://java.sun.com/products/jms/">Javaメッセージサービス(JMS)</ulink>
+        Stompプロトコルは、どんな<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://java.sun.com/products/jms/">Javaメッセージサービス(JMS)</link>
         でもサポートするStompConnectを提供します。
         Stompは、
-        <ulink url="http://activemq.apache.org/">Apache ActiveMQ</ulink>や
-        <ulink url="http://www.rabbitmq.com/">RabbitMQ</ulink>、
-        <ulink url="http://stompserver.rubyforge.org/">stompserver</ulink>、そして
-        <ulink url="http://www.germane-software.com/software/Java/Gozirra/">Gozirra</ulink>で
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://activemq.apache.org/">Apache ActiveMQ</link>や
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.rabbitmq.com/">RabbitMQ</link>、
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://stompserver.rubyforge.org/">stompserver</link>、そして
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.germane-software.com/software/Java/Gozirra/">Gozirra</link>で
         サポートされます。
     </para>
 
-    <sect2 id="zend.queue.adapters-configuration.stomp">
-        <title>Stomp - サポートするクラス</title>
+    <section xml:id="zend.queue.adapters-configuration.stomp"><info><title>Stomp - サポートするクラス</title></info>
+        
 
         <itemizedlist>
             <listitem>
@@ -47,5 +47,5 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

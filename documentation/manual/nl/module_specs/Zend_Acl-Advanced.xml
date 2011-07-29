@@ -1,10 +1,11 @@
-<sect1 id="zend.acl.advanced">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.advanced"><info><title>Gevorderd gebruik</title></info>
 
-    <title>Gevorderd gebruik</title>
+    
 
-    <sect2 id="zend.acl.advanced.storing">
+    <section xml:id="zend.acl.advanced.storing"><info><title>Het opslaan van ACL data voor langere duur</title></info>
 
-        <title>Het opslaan van ACL data voor langere duur</title>
+        
 
         <para>
             Zend_Acl is zo ontworpen dat het geen aparte achterliggende technologie zoals een database
@@ -19,15 +20,15 @@
             Het opslaan van de ACL Data is daarom overgelaten als een taak voor de ontwikkelaar, want de
             verwachting is dat de gebruikersprocessen veel variëren voor de verschillende situaties.
             Omdat Zend_Acl te ordenen is, kan een ACL object geordend worden met de PHP functie
-            <ulink url="http://php.net/serialize"><code>serialize()</code></ulink> en het resultaat kan worden
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/serialize"><code>serialize()</code></link> en het resultaat kan worden
             opgeslagen waar de ontwikkelaar dat wenst, zoals een bestand, database of een caching mechanisme.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.advanced.assertions">
+    <section xml:id="zend.acl.advanced.assertions"><info><title>Schrijven van conditionele ACL regels met een vereising</title></info>
 
-        <title>Schrijven van conditionele ACL regels met een vereising</title>
+        
 
         <para>
             Soms is een regel voor het toestaan of weigeren van een Rol om een Bron te gebruiken niet absoluut, maar
@@ -58,8 +59,8 @@ class schoonIPvereising implements Zend_Acl_Assert_Interface
     {
         // ...
     }
-}]]>
-        </programlisting>
+}
+        ]]></programlisting>
 
         <para>
             Als een vereising klasse beschikbaar is, moet de ontwikkelaar een instantie hiervan aanleveren
@@ -71,8 +72,8 @@ class schoonIPvereising implements Zend_Acl_Assert_Interface
 require_once 'Zend/Acl.php';
 
 $acl = new Zend_Acl();
-$acl->allow(null, null, null, new schoonIPvereising());]]>
-        </programlisting>
+$acl->allow(null, null, null, new schoonIPvereising());
+        ]]></programlisting>
 
         <para>
             De bovenstaande code maakt een conditionele toestaan regel die gebruik toestaat van alle privileges
@@ -91,9 +92,6 @@ $acl->allow(null, null, null, new schoonIPvereising());]]>
             voor de vereisingklasse om te bepalen of zijn condities nodig zijn.
         </para>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

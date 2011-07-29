@@ -1,6 +1,7 @@
-<sect1 id="zend.view.helpers">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers"><info><title>View Helpers</title></info>
 
-    <title>View Helpers</title>
+    
 
     <para>
         In je view scripts is het dikwijls nodig een aantal complexe
@@ -12,19 +13,19 @@
 
     <para>
         Om een helper in jouw script te gebruiken moet je het oproepen
-        door $this->helperName() te gebruiken. Achter de scène zal
+        door $this-&gt;helperName() te gebruiken. Achter de scène zal
         Zend_View de Zend_View_Helper klasse laden, een instantie van het
         objekt maken en zijn helperName() methode oproepen. De
         instantie van het objekt is Behind the scenes, Zend_View will load the
         Zend_View_Helper_HelperName class, create an object instance of
         it, and call its helperName() method.  The object instance is
         blijvend in de Zend_View instantie, en is hergebruikt voor alle
-        verdere oproepen aan $this->helperName().
+        verdere oproepen aan $this-&gt;helperName().
     </para>
 
-    <sect2 id="zend.view.helpers.initial">
+    <section xml:id="zend.view.helpers.initial"><info><title>Initiële Helpers</title></info>
 
-        <title>Initiële Helpers</title>
+        
 
         <para>
             Zend_View komt met een set van initiële helper klassen die
@@ -125,8 +126,8 @@
     <p><label>Zou je je graag inschrijven ?
         <?php echo $this->formCheckbox('opt_in', 'ja', null, array('ja', 'nee')) ?>
     </label></p>
-</form>]]>
-        </programlisting>
+</form>
+        ]]></programlisting>
 
         <para>
             Het resultaat van het view script zal op het volgende lijken:
@@ -148,14 +149,14 @@
         <input type="hidden" name="opt_in" value="nee" />
         <input type="checkbox" name="opt_in" value="ja" checked="checked" />
     </label></p>
-</form>]]>
-        </programlisting>
+</form>
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.helpers.paths">
+    <section xml:id="zend.view.helpers.paths"><info><title>Helper Paden</title></info>
 
-        <title>Helper Paden</title>
+        
 
         <para>
             Zoals met view scripts kan de controller een stapel van paden
@@ -168,8 +169,8 @@
         <programlisting role="php"><![CDATA[<?php
 $view = new Zend_View();
 $view->setHelperPath('/pad/naar/meer/helpers');
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
         <para>
             In feite kan je paden "opstapelen" door de addHelperPath()
@@ -189,14 +190,14 @@ $view->addHelperPath('/ander/pad/naar/helpers');
 // "/other/path/to/helpers/HelperName.php", dan naar
 // "/path/to/some/helpers/HelperName", en uiteindelijk naar
 // "Zend/View/Helpers/HelperName.php".
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.helpers.custom">
+    <section xml:id="zend.view.helpers.custom"><info><title>Je eigen Helpers schrijven</title></info>
 
-        <title>Je eigen Helpers schrijven</title>
+        
 
         <para>
             Je eigen helpers schrijven is gemakkelijk. Volg gewoon deze regels:
@@ -214,7 +215,7 @@ $view->addHelperPath('/ander/pad/naar/helpers');
             <listitem><para>
                 De klasse moet een publieke methode hebben die overeenkomt
                 met de helpernaam; dit is de methode die zal worden
-                opgeroepen wanneer je template "$this->speciaalDoel()"
+                opgeroepen wanneer je template "$this-&gt;speciaalDoel()"
                 oproept. In ons "speciaalDoel" helpervoorbeeld zou de
                 verplichte methodeverklaring "public function speciaalDoel()"
                 zijn.
@@ -254,8 +255,8 @@ class Zend_View_Helper_SpeciaalDoel {
         return htmlspecialchars($output);
     }
 }
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
         <para>
             Je kan de SpeciaalDoel helper zoveel keer oproepen als je
@@ -269,20 +270,17 @@ class Zend_View_Helper_SpeciaalDoel {
 echo $this->speciaalDoel();
 echo $this->speciaalDoel();
 echo $this->speciaalDoel();
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
         <para>
             De output zou hierop moeten lijken:
         </para>
         <programlisting role="php"><![CDATA[Ik heb 'The Jerk' 1 keer gezien.
 Ik heb 'The Jerk' 2 keer gezien.
-Ik heb 'The Jerk' 3 keer gezien.]]>
-        </programlisting>
+Ik heb 'The Jerk' 3 keer gezien.
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

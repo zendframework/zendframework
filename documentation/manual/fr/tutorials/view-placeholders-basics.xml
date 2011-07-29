@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20109 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.view.placeholders.basics">
-    <title>Utilisation de base des Placeholders</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.view.placeholders.basics"><info><title>Utilisation de base des Placeholders</title></info>
+    
 
     <para>
         Zend Framework définit une aide de vue générique <methodname>placeholder()</methodname> que
@@ -13,7 +11,7 @@
 
     <para>
         Tous les placeholders agissent de la même manière. Ce sont des conteneurs, et donc vous
-        pouvez les manipuler comme des collections. Vous pouvez ainsi&#160;:
+        pouvez les manipuler comme des collections. Vous pouvez ainsi :
     </para>
 
     <itemizedlist>
@@ -73,7 +71,7 @@
 
     <para>
         Par exemple, créons une barre de menu qui contient des "blocs" de contenu. Supposons que la
-        structure de chaque bloc ressemble à ceci&#160;:
+        structure de chaque bloc ressemble à ceci :
     </para>
 
     <programlisting language="html"><![CDATA[
@@ -98,7 +96,7 @@
     <para>
         Le contenu variera en fonction du contrôleur et de l'action, mais la structure est
         identique, elle. Configurons en premier lieu la barre de menu dans une méthode du
-        bootstrap&#160;:
+        bootstrap :
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -134,7 +132,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     <para>
         Maintenant supposons que pour toutes les actions du contrôleur "user" nous voulons un
-        bloc en haut qui contienne des informations. Nous pouvons faire cela de deux manières&#160;:
+        bloc en haut qui contienne des informations. Nous pouvons faire cela de deux manières :
         (a) nous pourrions ajouter le contenu au placeholder directement dans la méthode
         <methodname>preDispatch()</methodname> du contrôleur, ou (b) nous pourrions rendre un
         script de vue depuis la méthode <methodname>preDispatch()</methodname>. Nous utiliserons le
@@ -144,7 +142,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     <para>
         Nous appelerons le script de vue "<filename>user/_sidebar.phtml</filename>", et nous le
-        remplirons comme ceci&#160;:
+        remplirons comme ceci :
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -168,7 +166,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     <para>
         Pour utiliser le script de vue, nous écrirons ceci dans la méthode
-        <methodname>preDispatch()</methodname>&#160;:
+        <methodname>preDispatch()</methodname> :
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -196,7 +194,7 @@ class UserController extends Zend_Controller_Action
 
     <para>
         Maintenant imaginons que l'action "view" dans ce même contrôleur ait besoin de présenter des
-        informations. Dans "<filename>user/view.phtml</filename>" il pourrait y avoir ceci&#160;:
+        informations. Dans "<filename>user/view.phtml</filename>" il pourrait y avoir ceci :
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -210,7 +208,7 @@ $this->placeholder('sidebar')
     </para>
 
     <para>
-        Enfin, modifions le script de layout pour rendre le placeholder&#160;:
+        Enfin, modifions le script de layout pour rendre le placeholder :
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -229,11 +227,11 @@ $this->placeholder('sidebar')
 
     <para>
         Pour les contrôleurs et les actions que ne remplissent pas le placeholder "sidebar", aucun
-        contenu ne sera rendu&#160;; cependant afficher le placeholder rendra le contenu "fixe"
+        contenu ne sera rendu ; cependant afficher le placeholder rendra le contenu "fixe"
         suivant les règles définies dans le bootstrap ainsi que le contenu agrégé dans
         l'application. Dans le cas de l'action "<filename>/user/view</filename>", en supposant que
         le nom de l'utilisateur est "matthew", nous pouvons récupérer le contenu de la barre de menu
-        comme ceci (formaté pour la lisibilité de l'exemple)&#160;:
+        comme ceci (formaté pour la lisibilité de l'exemple) :
     </para>
 
     <programlisting language="html"><![CDATA[
@@ -256,4 +254,4 @@ $this->placeholder('sidebar')
         les et lisez les <link linkend="zend.view.helpers.initial.placeholder">sections relatives
         du manuel</link> pour plus d'informations.
     </para>
-</sect1>
+</section>

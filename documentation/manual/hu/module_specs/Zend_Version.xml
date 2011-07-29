@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17255 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.version.reading">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.version.reading"><info><title>A verzió lekérdezése</title></info>
 
-    <title>A verzió lekérdezése</title>
+    
 
     <para>
         A <classname>Zend_Version</classname> egy osztályállandót nyújt a
@@ -15,22 +13,19 @@
     <para>
         <methodname>Zend_Version::compareVersion($version)</methodname> statikus
         tagfüggvény a <acronym>PHP</acronym>
-        <ulink url="http://php.net/version_compare">
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/version_compare">
             <methodname>version_compare()</methodname>
-        </ulink> függvényén alapszik. Vissztérési értéke −1, ha a megadott
+        </link> függvényén alapszik. Vissztérési értéke −1, ha a megadott
         verzió régebbi, mint a telepített Zend Framework verziója, 0, ha
         megegyeznek, és +1, ha újabb.
     </para>
 
-    <example id="zend.version.reading.example">
-        <title>Példa a compareVersion() tagfüggvény használatára</title>
+    <example xml:id="zend.version.reading.example"><info><title>Példa a compareVersion() tagfüggvény használatára</title></info>
+        
         <programlisting language="php"><![CDATA[
 // -1-gyel, 0-val vagy +1-gyel tér vissza
 $cmp = Zend_Version::compareVersion('2.0.0');
 ]]></programlisting>
     </example>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

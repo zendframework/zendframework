@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: 21829 -->
-<sect1 id="zend.date.additional">
-    <title>Funktionierende Beispiele</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.additional"><info><title>Funktionierende Beispiele</title></info>
+    
 
     <para>
         In diesem Kapitel werden verschiedene zusätzliche Funkionen beschrieben welche auch durch
@@ -11,8 +9,8 @@
         <acronym>API</acronym> für die richtige Benutzung zu zeigen.
     </para>
 
-    <sect2 id="zend.date.additional.checking">
-        <title>Prüfen von Daten</title>
+    <section xml:id="zend.date.additional.checking"><info><title>Prüfen von Daten</title></info>
+        
 
         <para>
             Normalerweise werden die meisten Daten als Zeichenketten übergeben. Aber das Problem
@@ -60,8 +58,8 @@
             das dieses Datum unmöglich ist.
         </para>
 
-        <example id="zend.date.additional.checking.example-1">
-            <title>Prüfen von Daten</title>
+        <example xml:id="zend.date.additional.checking.example-1"><info><title>Prüfen von Daten</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Prüfen des Datums
@@ -89,10 +87,10 @@ if (Zend_Date::isDate($date,'dd MMMM yyyy', 'en')) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.date.additional.sunrise-sunset">
-        <title>Sonnenaufgang und Sonnenuntergang</title>
+    <section xml:id="zend.date.additional.sunrise-sunset"><info><title>Sonnenaufgang und Sonnenuntergang</title></info>
+        
 
         <para>
             <classname>Zend_Date</classname> beinhaltet auch Funktionen um Informationen zur
@@ -116,8 +114,8 @@ if (Zend_Date::isDate($date,'dd MMMM yyyy', 'en')) {
             gibt die Namen aller verfügbaren vordefinierten Städte der Helferklasse zurück.
         </para>
 
-        <example id="zend.date.additional.sunrise-sunset.example-1">
-            <title>Alle verfügbaren Städte ausgeben</title>
+        <example xml:id="zend.date.additional.sunrise-sunset.example-1"><info><title>Alle verfügbaren Städte ausgeben</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Ausgabe der kompletten Liste aller verfügbaren Städte
@@ -139,8 +137,8 @@ print_r (Zend_Date_Cities::getCityList());
             nicht gesetzt wird, wird der '<property>effective</property>' Horizont benutzt.
         </para>
 
-        <table id="zend.date.additional.sunrise-sunset.table">
-            <title>Arten von unterstützten Horizonten für Sonnenauf- und -untergang</title>
+        <table xml:id="zend.date.additional.sunrise-sunset.table"><info><title>Arten von unterstützten Horizonten für Sonnenauf- und -untergang</title></info>
+            
 
             <tgroup cols="3">
                 <thead>
@@ -190,8 +188,8 @@ print_r (Zend_Date_Cities::getCityList());
             '<property>horizon</property>'.
         </para>
 
-        <example id="zend.date.additional.sunrise-sunset.example-2">
-            <title>Die Ortsangabe für eine Stadt auslesen</title>
+        <example xml:id="zend.date.additional.sunrise-sunset.example-2"><info><title>Die Ortsangabe für eine Stadt auslesen</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Die Ortsangabe für eine bestimmte Stadt auslesen
@@ -218,8 +216,8 @@ $mylocation = array('latitude' => 41.5, 'longitude' => 13.2446);
             zurückgegeben.
         </para>
 
-        <example id="zend.date.additional.sunrise-sunset.example-3">
-            <title>Berechnung von Sonneninformationen</title>
+        <example xml:id="zend.date.additional.sunrise-sunset.example-3"><info><title>Berechnung von Sonneninformationen</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Die Ortsangabe einer bestimmten Stadt auslesen
@@ -240,10 +238,10 @@ foreach ($info as $sun) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.date.additional.timezones">
-        <title>Zeitzonen</title>
+    <section xml:id="zend.date.additional.timezones"><info><title>Zeitzonen</title></info>
+        
 
         <para>
             Zeitzonen sind genauso wichtig wie die Datumsangaben selbst. Es gibt einige Zeitzonen
@@ -278,8 +276,8 @@ foreach ($info as $sun) {
             aufgerufen wird. Das wird auch automatisch gemacht, wenn das Datumsobjekt erstellt wird.
         </para>
 
-        <example id="zend.date.additional.timezones.example-1">
-            <title>Arbeiten mit Zeitzonen</title>
+        <example xml:id="zend.date.additional.timezones.example-1"><info><title>Arbeiten mit Zeitzonen</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Setzen einer Standardzeitzone... das muß in der Bootstrap Datei
@@ -325,8 +323,8 @@ print $date->getIso();
             Zeitzonen zu haben.
         </para>
 
-        <example id="zend.date.additional.timezones.example-2">
-            <title>Mehrere Zeitzonen</title>
+        <example xml:id="zend.date.additional.timezones.example-2"><info><title>Mehrere Zeitzonen</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Setzen einer Standardzeitzone... das muß in der Bootstrap Datei oder
@@ -358,5 +356,5 @@ $lastdate->setTimezone();
 print $lastdate->getIso();
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

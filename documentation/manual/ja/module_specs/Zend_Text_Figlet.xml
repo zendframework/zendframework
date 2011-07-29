@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20807 -->
-<sect1 id="zend.text.figlet">
-    <title>Zend_Text_Figlet</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.text.figlet"><info><title>Zend_Text_Figlet</title></info>
+    
 
     <para>
         <classname>Zend_Text_Figlet</classname> は、いわゆる
@@ -11,12 +9,12 @@
         FIGlet では、FLT (FigLet Font) と呼ばれる特殊なフォント形式を使用します。
         デフォルトで <classname>Zend_Text_Figlet</classname>
         に同梱されているフォントは標準フォント 1 つだけですが、
-        <ulink url="http://www.figlet.org/fontdb.cgi">http://www.figlet.org</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.figlet.org/fontdb.cgi">http://www.figlet.org</link>
         からその他のフォントをダウンロードできます。
     </para>
 
-    <note>
-        <title>圧縮されたフォント</title>
+    <note><info><title>圧縮されたフォント</title></info>
+        
 
         <para>
             <classname>Zend_Text_Figlet</classname> は gzip で圧縮されたフォントに対応しています。
@@ -28,8 +26,8 @@
         </para>
     </note>
 
-    <note>
-        <title>エンコーディング</title>
+    <note><info><title>エンコーディング</title></info>
+        
 
         <para>
             <classname>Zend_Text_Figlet</classname> は、デフォルトでは文字列が UTF-8
@@ -105,7 +103,7 @@
                     「すべてを無効にする」ではなく「SM_KERN を適用する」
                     という意味になります。無効にするには -1 を指定します。
                     それぞれのモードがどんなものなのかについての説明が
-                    <ulink url="http://www.jave.de/figlet/figfont.txt">ここ</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.jave.de/figlet/figfont.txt">ここ</link>
                     にあります。
                     デフォルトでは、フォントファイルの設定を使用します。
                     通常、このオプションを使用するのは、
@@ -116,8 +114,8 @@
         </itemizedlist>
     </para>
 
-    <example id="zend.text.figlet.example.using">
-        <title>Zend_Text_Figlet の使用法</title>
+    <example xml:id="zend.text.figlet.example.using"><info><title>Zend_Text_Figlet の使用法</title></info>
+        
 
         <para>
             この例は、<classname>Zend_Text_Figlet</classname>
@@ -144,7 +142,4 @@ echo $figlet->render('Zend');
  `-----`'  `-----`   `-` -`'  -----`
 ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

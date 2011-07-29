@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 21818 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.feed.consuming-rss">
-    <title>Consommer un flux RSS</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-rss"><info><title>Consommer un flux RSS</title></info>
+    
 
     <para>
         Lire un flux <acronym>RSS</acronym> se résume à instancier un objet <classname>Zend_Feed_Rss</classname>
-        en passant l'URL du flux&#160;:
+        en passant l'URL du flux :
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -20,7 +18,7 @@ $canal = new Zend_Feed_Rss('http://rss.exemple.com/nomDuCanal');
 
     <para>
         Une fois que vous disposez d'un objet "flux <acronym>RSS</acronym>", vous pouvez accéder aux propriétés
-        <acronym>RSS</acronym> standard du canal, et ce directement à partir de l'objet&#160;:
+        <acronym>RSS</acronym> standard du canal, et ce directement à partir de l'objet :
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -28,7 +26,7 @@ echo $canal->title();
 ]]></programlisting>
 
     <para>
-        Notez la syntaxe utilisée&#160;: un appel de fonction.
+        Notez la syntaxe utilisée : un appel de fonction.
         <classname>Zend_Feed</classname> utilise une convention selon laquelle les propriétés sont
         traitées comme des objets <acronym>XML</acronym> si elles sont demandées au moyen de la syntaxe
         <code>$obj-&gt;propriété</code> et comme des chaînes si elles sont demandées au moyen de la
@@ -38,7 +36,7 @@ echo $canal->title();
 
     <para>
         Si les propriétés du canal possèdent des attributs, ils sont accessibles à l'aide de
-        l'indexage <acronym>PHP</acronym>&#160;:
+        l'indexage <acronym>PHP</acronym> :
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -55,7 +53,7 @@ echo $canal->category['domain'];
         La plupart du temps vous voudrez itérer sur le flux et réaliser quelque chose avec
         ses entrées. <classname>Zend_Feed_Abstract</classname> implémente l'interface
         <code>iterator</code> de <acronym>PHP</acronym>, ce qui résume au code suivant l'affichage des titres de tous
-        les articles du canal&#160;:
+        les articles du canal :
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -69,49 +67,49 @@ foreach ($canal as $element) {
         canal <acronym>RSS</acronym> et à ses éléments pris séparément (les entrées).
     </para>
 
-    <para>Les éléments requis pour les canaux sont&#160;:</para>
+    <para>Les éléments requis pour les canaux sont :</para>
 
     <para>
         <itemizedlist>
             <listitem>
-                <para><code>title</code> (titre)&#160;: le nom du canal</para>
+                <para><code>title</code> (titre) : le nom du canal</para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>link</code> (lien)&#160;: l'URL du site Web correspondant au canal
+                    <code>link</code> (lien) : l'URL du site Web correspondant au canal
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>description</code>&#160;: une ou plusieurs phrases décrivant le canal
+                    <code>description</code> : une ou plusieurs phrases décrivant le canal
                 </para>
             </listitem>
         </itemizedlist>
     </para>
 
-    <para>Les éléments optionnels pour les canaux sont&#160;:</para>
+    <para>Les éléments optionnels pour les canaux sont :</para>
 
     <para>
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>pubDate</code> (date de publication)&#160;: la date de publication de
+                    <code>pubDate</code> (date de publication) : la date de publication de
                     l'ensemble, au format <acronym>RFC</acronym> 822
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>language</code> (langue)&#160;: la langue dans laquelle est écrit le
+                    <code>language</code> (langue) : la langue dans laquelle est écrit le
                     canal
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>category</code> (catégorie)&#160;: un ou plusieurs noms de catégorie
+                    <code>category</code> (catégorie) : un ou plusieurs noms de catégorie
                     (spécifiés au moyen de plusieurs balises) auquel appartient le canal
                 </para>
             </listitem>
@@ -124,43 +122,43 @@ foreach ($canal as $element) {
         présents.
     </para>
 
-    <para>Les éléments communs sont&#160;:</para>
+    <para>Les éléments communs sont :</para>
 
     <para>
         <itemizedlist>
             <listitem>
-                <para><code>title</code> (titre)&#160;: le titre de l'élément</para>
+                <para><code>title</code> (titre) : le titre de l'élément</para>
             </listitem>
 
             <listitem>
-                <para><code>link</code> (lien)&#160;: l'URL de l'élément</para>
+                <para><code>link</code> (lien) : l'URL de l'élément</para>
             </listitem>
 
             <listitem>
-                <para><code>description</code>&#160;: un résumé de l'élément</para>
+                <para><code>description</code> : un résumé de l'élément</para>
             </listitem>
 
             <listitem>
-                <para><code>author</code> (auteur)&#160;: l'adresse e-mail de l'auteur</para>
+                <para><code>author</code> (auteur) : l'adresse e-mail de l'auteur</para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>category</code> (catégorie)&#160;: une ou plusieurs catégories auquel
+                    <code>category</code> (catégorie) : une ou plusieurs catégories auquel
                     appartient l'élément
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>comments</code> (commentaires)&#160;: l'URL des commentaires relatifs à
+                    <code>comments</code> (commentaires) : l'URL des commentaires relatifs à
                     cet élément
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>pubDate</code> (date de publication)&#160;: la date à laquelle l'élément
+                    <code>pubDate</code> (date de publication) : la date à laquelle l'élément
                     a été publié, au format <acronym>RFC</acronym> 822
                 </para>
             </listitem>
@@ -169,7 +167,7 @@ foreach ($canal as $element) {
 
     <para>
         Dans votre code vous pouvez toujours tester si un élément est non-vide au moyen du
-        test suivant&#160;:
+        test suivant :
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -186,7 +184,7 @@ if ($element->nomPropriete()) {
 
     <para>
         Pour plus d'informations, la spécification <acronym>RSS</acronym> 2.0 officielle est disponible à
-        l'adresse&#160;: <ulink url="http://blogs.law.harvard.edu/tech/rss">
-        http://blogs.law.harvard.edu/tech/rss</ulink>
+        l'adresse : <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://blogs.law.harvard.edu/tech/rss">
+        http://blogs.law.harvard.edu/tech/rss</link>
     </para>
-</sect1>
+</section>

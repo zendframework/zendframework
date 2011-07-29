@@ -1,23 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22743 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.layout.quickstart">
-    <title>Zend_Layout Schnellstart</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.quickstart"><info><title>Zend_Layout Schnellstart</title></info>
+    
 
     <para>
         Es gibt zwei primäre Verwendungen für <classname>Zend_Layout</classname>: Mit dem Zend
         Framework <acronym>MVC</acronym>, und ohne.
     </para>
 
-    <sect2 id="zend.layout.quickstart.layouts">
-        <title>Layout Skripte</title>
+    <section xml:id="zend.layout.quickstart.layouts"><info><title>Layout Skripte</title></info>
+        
 
         <para>
             In beiden Fällen, müssen trotzdem Layout Skripte erstellt werden. Layout Sktipte
             verwenden einfach <classname>Zend_View</classname> (oder welche View Implementation auch
             immer verwendet wird). Layout Variablen werden mit einem
-            <classname>Zend_Layout</classname> <link
-                linkend="zend.view.helpers.initial.placeholder">Platzhalter</link> registriert,
+            <classname>Zend_Layout</classname> <link linkend="zend.view.helpers.initial.placeholder">Platzhalter</link> registriert,
             und es kann auf Sie über den Platzhalter Helfer zugegriffen werden oder dadurch das Sie
             als Objekt Eigenschaften vom Layout Objekt über den Layout Helfer geholt werden.
         </para>
@@ -83,17 +80,16 @@
 </body>
 </html>
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.layout.quickstart.mvc">
-        <title>Zend_Layout mit dem Zend Framework MVC verwenden</title>
+    <section xml:id="zend.layout.quickstart.mvc"><info><title>Zend_Layout mit dem Zend Framework MVC verwenden</title></info>
+        
 
         <para>
             <classname>Zend_Controller</classname> bietet ein reiches Set von Funktionalitäten für
             Erweiterung mit seinen <link linkend="zend.controller.plugins">Front Controller
                 Plugins</link> und <link linkend="zend.controller.actionhelpers">Action Controller
-                Helfern</link>. <classname>Zend_View</classname> hat auch <link
-                linkend="zend.view.helpers">Helfer</link>. <classname>Zend_Layout</classname> nimmt
+                Helfern</link>. <classname>Zend_View</classname> hat auch <link linkend="zend.view.helpers">Helfer</link>. <classname>Zend_Layout</classname> nimmt
             Vorteile wahr von diesen verschiedenen Erweiterungspunkten wenn es mit den
             <acronym>MVC</acronym> Komponenten verwendet wird.
         </para>
@@ -205,10 +201,10 @@ $layout = Zend_Layout::getMvcInstance();
             wird, welche verwendet werden können um einen Stack von Aktionen zu definieren der
             durchgelaufen wird, und welcher angepasste Seiten erstellt.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.layout.quickstart.standalone">
-        <title>Zend_Layout als eienständige Komponente verwenden</title>
+    <section xml:id="zend.layout.quickstart.standalone"><info><title>Zend_Layout als eienständige Komponente verwenden</title></info>
+        
 
         <para>
             Als eigenständige Komponente bietet <classname>Zend_Layout</classname> nicht annähernd
@@ -246,10 +242,10 @@ $layout->setLayout('foo');
 // Letztendlich das Layout darstellen
 echo $layout->render();
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.layout.quickstart.example">
-        <title>Beispiel Layout</title>
+    <section xml:id="zend.layout.quickstart.example"><info><title>Beispiel Layout</title></info>
+        
 
         <para>
             Machmal ist ein Bild mehr Wert als tausend Wörter. Das folgende ist ein Beispiel Layout
@@ -257,8 +253,7 @@ echo $layout->render();
         </para>
 
          <para>
-            <inlinegraphic align="center" valign="middle"
-                fileref="figures/zend.layout.quickstart.example.png" format="PNG" />
+            <inlinemediaobject><imageobject><imagedata align="center" valign="middle" fileref="figures/zend.layout.quickstart.example.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
         <para>
@@ -268,5 +263,5 @@ echo $layout->render();
             wird, aber immer noch ganz oben gezeigt wird; das selbe könnte für die Sidebar oder den
             Header gelten. Der aktuelle Mechanismum des Holens von Inhalt bleibt trotzdem der selbe.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

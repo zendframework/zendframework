@@ -1,14 +1,15 @@
-<sect1 id="zend.exception.using">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.using"><info><title>Koriscenje izuzetaka</title></info>
 
-    <title>Koriscenje izuzetaka</title>
+    
 
     <para>
         All exceptions thrown by Zend Framework classes should throw
         an exception that derives from the base class Zend_Exception.
     </para>
 
-    <example id="zend.exception.using.example">
-        <title>Example of catching an exception</title>
+    <example xml:id="zend.exception.using.example"><info><title>Example of catching an exception</title></info>
+        
         <programlisting role="php"><![CDATA[<?php
 
 try {
@@ -29,7 +30,4 @@ try {
         and which exception classes derive from Zend_Exception.
     </para>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

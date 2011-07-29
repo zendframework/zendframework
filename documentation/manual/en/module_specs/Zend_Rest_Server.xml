@@ -1,21 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.rest.server">
-    <title>Zend_Rest_Server</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.rest.server"><info><title>Zend_Rest_Server</title></info>
+    
 
-    <sect2 id="zend.rest.server.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.rest.server.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_Rest_Server</classname> is intended as a fully-featured REST server.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.rest.server.usage">
-        <title>REST Server Usage</title>
+    <section xml:id="zend.rest.server.usage"><info><title>REST Server Usage</title></info>
+        
 
-        <example id="zend.rest.server.usage.example-1">
-            <title>Basic Zend_Rest_Server Usage - Classes</title>
+        <example xml:id="zend.rest.server.usage.example-1"><info><title>Basic Zend_Rest_Server Usage - Classes</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $server = new Zend_Rest_Server();
@@ -24,8 +23,8 @@ $server->handle();
 ]]></programlisting>
         </example>
 
-        <example id="zend.rest.server.usage.example-2">
-            <title>Basic Zend_Rest_Server Usage - Functions</title>
+        <example xml:id="zend.rest.server.usage.example-2"><info><title>Basic Zend_Rest_Server Usage - Functions</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 /**
@@ -45,10 +44,10 @@ $server->addFunction('sayHello');
 $server->handle();
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.rest.server.args">
-        <title>Calling a Zend_Rest_Server Service</title>
+    <section xml:id="zend.rest.server.args"><info><title>Calling a Zend_Rest_Server Service</title></info>
+        
 
         <para>
             To call a <classname>Zend_Rest_Server</classname> service, you must supply a
@@ -59,8 +58,8 @@ $server->handle();
             argument (i.e. "arg1").
         </para>
 
-        <note>
-            <title>Numeric index</title>
+        <note><info><title>Numeric index</title></info>
+            
 
             <para>
                 Numeric arguments use a 1-based index.
@@ -82,18 +81,18 @@ $server->handle();
         <para>
             <code>?method=sayHello&amp;arg1=Davey&amp;arg2=Day</code>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.rest.server.customstatus">
-        <title>Sending A Custom Status</title>
+    <section xml:id="zend.rest.server.customstatus"><info><title>Sending A Custom Status</title></info>
+        
 
         <para>
             When returning values, to return a custom status, you may return an
             array with a <code>status</code> key.
         </para>
 
-        <example id="zend.rest.server.customstatus.example-1">
-            <title>Returning Custom Status</title>
+        <example xml:id="zend.rest.server.customstatus.example-1"><info><title>Returning Custom Status</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 /**
@@ -113,10 +112,10 @@ $server->addFunction('sayHello');
 $server->handle();
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.rest.server.customxml">
-        <title>Returning Custom XML Responses</title>
+    <section xml:id="zend.rest.server.customxml"><info><title>Returning Custom XML Responses</title></info>
+        
 
         <para>
             If you wish to return custom <acronym>XML</acronym>, simply return a
@@ -124,8 +123,8 @@ $server->handle();
             <code>SimpleXMLElement</code> object.
         </para>
 
-        <example id="zend.rest.server.customxml.example-1">
-            <title>Return Custom XML</title>
+        <example xml:id="zend.rest.server.customxml.example-1"><info><title>Return Custom XML</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 /**
@@ -158,8 +157,5 @@ $server->handle();
             The response from the service will be returned without modification
             to the client.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

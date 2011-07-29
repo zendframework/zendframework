@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20854 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.pdf.save">
-    <title>Salvar Mudanças em Documentos PDF</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.save"><info><title>Salvar Mudanças em Documentos PDF</title></info>
+    
 
     <para>
         Existem dois métodos que salvam as mudanças feitas em documentos <acronym>PDF</acronym>: os
@@ -23,8 +21,8 @@
         então apenas o novo segmento do arquivo <acronym>PDF</acronym> será retornado.
     </para>
 
-    <example id="zend.pdf.save.example-1">
-        <title>Salvando Documentos PDF</title>
+    <example xml:id="zend.pdf.save.example-1"><info><title>Salvando Documentos PDF</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 ...
@@ -42,7 +40,4 @@ $pdfString = $pdf->render();
 ...
 ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

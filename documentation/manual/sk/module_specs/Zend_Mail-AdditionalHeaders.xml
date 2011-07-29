@@ -1,12 +1,13 @@
-<sect1 id="zend.mail.additional-headers">
-    <title>Iné e-mail hlavičky</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.additional-headers"><info><title>Iné e-mail hlavičky</title></info>
+    
     <para>
         Iné e-mail hlavičky je možné pridať pomocou metódy <code>addHeader()</code>. Prvý parameter obsahuje
         meno hlavičky a druhý jej hodnotu. Tretí parameter je nepovinný a určuje či daná hlavička môže mať
         jednu, alebo viac hodnôt:
     </para>
-    <example>
-        <title>Pridavanie iných e-mail hlavičiek</title>
+    <example><info><title>Pridavanie iných e-mail hlavičiek</title></info>
+        
         <programlisting role="php"><![CDATA[
 <?php
 require_once 'Zend/Mail.php';
@@ -14,9 +15,6 @@ $mail = new Zend_Mail();
 $mail->addHeader('X-MailGenerator', 'MyCoolApplication');
 $mail->addHeader('X-greetingsTo', 'Mom', true); // multiple values
 $mail->addHeader('X-greetingsTo', 'Dad', true);
-?>]]>   </programlisting>
+?>   ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

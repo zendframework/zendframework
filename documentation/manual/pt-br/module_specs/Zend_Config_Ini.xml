@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21823 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.config.adapters.ini">
-    <title>Zend_Config_Ini</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.ini"><info><title>Zend_Config_Ini</title></info>
+    
 
     <para>
         <classname>Zend_Config_Ini</classname> permite aos desenvolvedores armazenar os dados de
@@ -16,12 +14,11 @@
         o nome da seção a partir do qual os dados devem ser herdados.
     </para>
 
-    <note>
-        <title>Analisando o Arquivo INI</title>
+    <note><info><title>Analisando o Arquivo INI</title></info>
+        
 
         <para>
-            <classname>Zend_Config_Ini</classname> utiliza a função <ulink
-            url="http://php.net/parse_ini_file"><methodname>parse_ini_file()</methodname></ulink>
+            <classname>Zend_Config_Ini</classname> utiliza a função <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/parse_ini_file"><methodname>parse_ini_file()</methodname></link>
             do <acronym>PHP</acronym>. Por favor reveja esta documentação para estar ciente de seus
             comportamentos característicos, que conduzem o <classname>Zend_Config_Ini</classname>,
             tais como os valores especiais "<constant>TRUE</constant>",
@@ -30,8 +27,8 @@
         </para>
     </note>
 
-    <note>
-        <title>Separador de Chave</title>
+    <note><info><title>Separador de Chave</title></info>
+        
 
         <para>
             Por padrão, o caractere separador de chave é o caractere de período
@@ -48,8 +45,8 @@ $config = new Zend_Config_Ini('/path/to/config.ini',
 ]]></programlisting>
     </note>
 
-    <example id="zend.config.adapters.ini.example.using">
-        <title>Usando o Zend_Config_Ini</title>
+    <example xml:id="zend.config.adapters.ini.example.using"><info><title>Usando o Zend_Config_Ini</title></info>
+        
 
         <para>
             Este exemplo ilustra uma utilização básica de <classname>Zend_Config_Ini</classname>
@@ -96,8 +93,8 @@ echo $config->database->params->dbname; // imprime "dbname"
     </example>
 
     <note>
-        <table id="zend.config.adapters.ini.table">
-            <title>Parâmetros do Construtor Zend_Config_Ini</title>
+        <table xml:id="zend.config.adapters.ini.table"><info><title>Parâmetros do Construtor Zend_Config_Ini</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -155,7 +152,4 @@ echo $config->database->params->dbname; // imprime "dbname"
             </tgroup>
         </table>
     </note>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

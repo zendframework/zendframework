@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20102 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.currency.description">
-    <title>Was macht eine Währung aus?</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.description"><info><title>Was macht eine Währung aus?</title></info>
+    
 
     <para>
         Eine Währung besteht aus verschiedenen Informationen. Einem Namen, einer Abkürzung und einem
@@ -16,8 +14,8 @@
         verwendet werden:
     </para>
 
-    <table id="zend.currency.description.table-1">
-        <title>Dargestellte Informationen für eine Währung</title>
+    <table xml:id="zend.currency.description.table-1"><info><title>Dargestellte Informationen für eine Währung</title></info>
+        
 
         <tgroup cols="2" align="left">
             <thead>
@@ -62,8 +60,8 @@
         </tgroup>
     </table>
 
-    <example id="zend.currency.description.example-1">
-        <title>Auswahl der Währungsbeschreibung</title>
+    <example xml:id="zend.currency.description.example-1"><info><title>Auswahl der Währungsbeschreibung</title></info>
+        
 
         <para>
             Angenommen unser Client setzt wieder "en_US" als Gebietsschema. Wenn keine Option
@@ -103,8 +101,8 @@ print $currency; // Könnte 'USD 100' zurückgeben
         </para>
     </example>
 
-    <note>
-        <title>Nicht alle Währungen haben Symbole</title>
+    <note><info><title>Nicht alle Währungen haben Symbole</title></info>
+        
 
         <para>
             Man sollte beachten das nicht alle Währungen standardmäßige Währungssymbole haben. Das
@@ -119,8 +117,8 @@ print $currency; // Könnte 'USD 100' zurückgeben
         das folgende Beispiel.
     </para>
 
-    <example id="zend.currency.description.example-2">
-        <title>Verändern der Beschreibung einer Währung</title>
+    <example xml:id="zend.currency.description.example-2"><info><title>Verändern der Beschreibung einer Währung</title></info>
+        
 
         <para>
             Angenommen unser Client hat wieder mal "en_US" als Gebietsschema gesetzt. Aber jetzt
@@ -156,8 +154,8 @@ print $currency; // Könnte '$$$ 100' zurückgeben
 ]]></programlisting>
     </example>
 
-    <note>
-        <title>Einstellungen für die automatische Anzeige</title>
+    <note><info><title>Einstellungen für die automatische Anzeige</title></info>
+        
 
         <para>
             Wenn man einen Namen, eine Abkürzung oder ein Symbol selbst setzt, dann werden diese
@@ -172,4 +170,4 @@ print $currency; // Könnte '$$$ 100' zurückgeben
             '<constant>USE_SYMBOL</constant>' setzen.
         </para>
     </note>
-</sect1>
+</section>

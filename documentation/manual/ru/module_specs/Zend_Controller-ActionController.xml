@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.action">
-    <title>Контроллеры действий</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.action"><info><title>Контроллеры действий</title></info>
+    
 
-    <sect2 id="zend.controller.action.introduction">
-        <title>Введение</title>
+    <section xml:id="zend.controller.action.introduction"><info><title>Введение</title></info>
+        
         <para>
             <classname>Zend_Controller_Action</classname> - абстрактный класс,
             который можно использовать для реализации контроллеров действий
@@ -58,14 +57,12 @@ class FooController extends Zend_Controller_Action
             функционала контроллера действий.
         </para>
 
-        <note>
-            <title>Поведение по умолчанию</title>
+        <note><info><title>Поведение по умолчанию</title></info>
+            
 
             <para>
-                По умолчанию <link
-                linkend="zend.controller.front">фронт-контроллер</link>
-                активирует помощника действий <link
-                linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>.
+                По умолчанию <link linkend="zend.controller.front">фронт-контроллер</link>
+                активирует помощника действий <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>.
                 Этот помощник обеспечивает добавление объекта вида в контроллер
                 и автоматический рендеринг видов. Вы можете отключить его в
                 своем контроллере действия, используя один из следующих методов:
@@ -126,10 +123,10 @@ class FooController extends Zend_Controller_Action
                 только избирательно в отдельных контроллерах или действиях.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.action.initialization">
-        <title>Инициализация объекта</title>
+    <section xml:id="zend.controller.action.initialization"><info><title>Инициализация объекта</title></info>
+        
 
         <para>
             Несмотря на то, что вы всегда можете переопределить конструктор
@@ -164,10 +161,10 @@ class FooController extends Zend_Controller_Action
     }
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.action.prepostdispatch">
-        <title>Перехватчики Pre- и Post-Dispatch</title>
+    <section xml:id="zend.controller.action.prepostdispatch"><info><title>Перехватчики Pre- и Post-Dispatch</title></info>
+        
 
         <para>
             <classname>Zend_Controller_Action</classname> определяет два метода, которые
@@ -180,10 +177,10 @@ class FooController extends Zend_Controller_Action
             размещение сгенерированного содержимого в шаблоне боковой части
             сайта (метод <code>postDispatch()</code>).
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.action.accessors">
-        <title>Аксессоры</title>
+    <section xml:id="zend.controller.action.accessors"><info><title>Аксессоры</title></info>
+        
 
         <para>
             С объектом контроллера регистрируется несколько объектов
@@ -263,13 +260,13 @@ if ($this->_hasParam('id') {
                 </note>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.action.viewintegration">
-        <title>Интеграция вида</title>
+    <section xml:id="zend.controller.action.viewintegration"><info><title>Интеграция вида</title></info>
+        
 
-        <note id="zend.controller.action.viewintegration.viewrenderer">
-            <title>По умолчанию интеграция вида производится через ViewRenderer</title>
+        <note xml:id="zend.controller.action.viewintegration.viewrenderer"><info><title>По умолчанию интеграция вида производится через ViewRenderer</title></info>
+            
 
             <para>
                 Изложенное в этом разделе действительно только в том случае,
@@ -289,8 +286,8 @@ if ($this->_hasParam('id') {
             к скрипту.
         </para>
 
-        <sect3 id="zend.controller.action.viewintegration.initview">
-            <title>Инициализация вида</title>
+        <section xml:id="zend.controller.action.viewintegration.initview"><info><title>Инициализация вида</title></info>
+            
 
             <para>
                 <code>initView()</code> инициализирует объект вида.
@@ -331,10 +328,10 @@ applicationOrModule/
                 с директориями, именованными в соответствии с отдельными
                 контроллерами, что дает иерархию скриптов вида.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.action.viewintegration.render">
-            <title>Рендеринг видов</title>
+        <section xml:id="zend.controller.action.viewintegration.render"><info><title>Рендеринг видов</title></info>
+            
 
             <para>
                 <code>render()</code> имеет следующую сигнатуру:
@@ -410,11 +407,11 @@ class MyController extends Zend_Controller_Action
     }
 }
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.controller.action.utilmethods">
-        <title>Сервисные методы</title>
+    <section xml:id="zend.controller.action.utilmethods"><info><title>Сервисные методы</title></info>
+        
 
         <para>
             Кроме аксессоров и методов интеграции видов,
@@ -494,10 +491,10 @@ class MyController extends Zend_Controller_Action
                 </itemizedlist>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.action.subclassing">
-        <title>Создание подклассов контроллера действий</title>
+    <section xml:id="zend.controller.action.subclassing"><info><title>Создание подклассов контроллера действий</title></info>
+        
 
         <para>
             Задумано, что в порядке создания контроллеров действий должны
@@ -515,8 +512,8 @@ class MyController extends Zend_Controller_Action
             избыточности.
         </para>
 
-        <example id="zend.controller.action.subclassing.example-call">
-            <title>Обрабаботка обращений к несуществующим действиям</title>
+        <example xml:id="zend.controller.action.subclassing.example-call"><info><title>Обрабаботка обращений к несуществующим действиям</title></info>
+            
 
             <para>
                 Если сделан запрос к контроллеру, который содержит в себе
@@ -626,8 +623,5 @@ abstract class My_Base_Controller extends Zend_Controller_Action
             гибка эта компонента, и как можно заточить ее под нужды своего
             приложения или сайта.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

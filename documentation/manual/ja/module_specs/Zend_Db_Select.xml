@@ -1,13 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20766 -->
-<sect1 id="zend.db.select">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.select"><info><title>Zend_Db_Select</title></info>
 
-    <title>Zend_Db_Select</title>
+    
 
-    <sect2 id="zend.db.select.introduction">
+    <section xml:id="zend.db.select.introduction"><info><title>導入</title></info>
 
-        <title>導入</title>
+        
 
         <para>
             <classname>Zend_Db_Select</classname> オブジェクトは、<acronym>SQL</acronym> の <acronym>SELECT</acronym> 文を表すものです。
@@ -60,11 +58,11 @@
             SELECT クエリを動的に組み立てていく必要があるような場合です。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.select.creating">
+    <section xml:id="zend.db.select.creating"><info><title>Select オブジェクトの作成</title></info>
 
-        <title>Select オブジェクトの作成</title>
+        
 
         <para>
             <classname>Zend_Db_Select</classname> オブジェクトのインスタンスを作成するには、
@@ -72,9 +70,9 @@
             <methodname>select()</methodname> メソッドを使用します。
         </para>
 
-        <example id="zend.db.select.creating.example-db">
+        <example xml:id="zend.db.select.creating.example-db"><info><title>データベースアダプタの select() メソッドの例</title></info>
 
-            <title>データベースアダプタの select() メソッドの例</title>
+            
 
             <programlisting language="php"><![CDATA[
 $db = Zend_Db::factory( ...options... );
@@ -87,9 +85,9 @@ $select = $db->select();
             コンストラクタの引数でデータベースアダプタを指定することです。
         </para>
 
-        <example id="zend.db.select.creating.example-new">
+        <example xml:id="zend.db.select.creating.example-new"><info><title>新しい Select オブジェクトの作成の例</title></info>
 
-            <title>新しい Select オブジェクトの作成の例</title>
+            
 
             <programlisting language="php"><![CDATA[
 $db = Zend_Db::factory( ...options... );
@@ -97,11 +95,11 @@ $select = new Zend_Db_Select($db);
 ]]></programlisting>
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.select.building">
+    <section xml:id="zend.db.select.building"><info><title>Select クエリの作成</title></info>
 
-        <title>Select クエリの作成</title>
+        
 
         <para>
             クエリを作成する際に、クエリの句を個別に追加していくことができます。
@@ -109,9 +107,9 @@ $select = new Zend_Db_Select($db);
             個々の句を追加していくメソッドが用意されています。
         </para>
 
-        <example id="zend.db.select.building.example">
+        <example xml:id="zend.db.select.building.example"><info><title>メソッドを使用して句を追加する例</title></info>
 
-            <title>メソッドを使用して句を追加する例</title>
+            
 
             <programlisting language="php"><![CDATA[
 // Zend_Db_Select オブジェクトを作成します
@@ -135,9 +133,9 @@ $select->order( ...ソート条件を指定します... );
             つまり、その結果を使用してすぐに別のメソッドをコールできるのです。
         </para>
 
-        <example id="zend.db.select.building.example-fluent">
+        <example xml:id="zend.db.select.building.example-fluent"><info><title>流れるようなインターフェイスの使用例</title></info>
 
-            <title>流れるようなインターフェイスの使用例</title>
+            
 
             <programlisting language="php"><![CDATA[
 $select = $db->select()
@@ -155,9 +153,9 @@ $select = $db->select()
             クエリに句を追加する前にアプリケーションで何らかの処理が必要な場合などです。
         </para>
 
-        <sect3 id="zend.db.select.building.from">
+        <section xml:id="zend.db.select.building.from"><info><title>FROM 句の追加</title></info>
 
-            <title>FROM 句の追加</title>
+            
 
             <para>
                 このクエリのテーブルを指定するために <methodname>from()</methodname>
@@ -166,9 +164,9 @@ $select = $db->select()
                 特殊文字を使用することもできます。
             </para>
 
-            <example id="zend.db.select.building.from.example">
+            <example xml:id="zend.db.select.building.from.example"><info><title>from() メソッドの例</title></info>
 
-                <title>from() メソッドの例</title>
+                
 
                 <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
@@ -190,9 +188,9 @@ $select = $db->select()
                 <classname>Zend_Db_Select</classname> はそのテーブル名に基づいた一意な相関名を作成します。
             </para>
 
-            <example id="zend.db.select.building.from.example-cname">
+            <example xml:id="zend.db.select.building.from.example-cname"><info><title>テーブルの相関名を指定する例</title></info>
 
-                <title>テーブルの相関名を指定する例</title>
+                
 
                 <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
@@ -215,9 +213,9 @@ $select = $db->select()
                 テーブル名と同時に指定したもののほうが優先されます。
             </para>
 
-            <example id="zend.db.select.building.from.example-schema">
+            <example xml:id="zend.db.select.building.from.example-schema"><info><title>スキーマ名の指定の例</title></info>
 
-                <title>スキーマ名の指定の例</title>
+                
 
                 <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
@@ -235,11 +233,11 @@ $select = $db->select()
 
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.select.building.columns">
+        <section xml:id="zend.db.select.building.columns"><info><title>カラムの追加</title></info>
 
-            <title>カラムの追加</title>
+            
 
             <para>
                 <methodname>from()</methodname> メソッドの二番目の引数で、
@@ -273,9 +271,9 @@ $select = $db->select()
                 現在の <methodname>from()</methodname> メソッドで指定したテーブルの名前を使用します。
             </para>
 
-            <example id="zend.db.select.building.columns.example">
+            <example xml:id="zend.db.select.building.columns.example"><info><title>カラムを指定する例</title></info>
 
-                <title>カラムを指定する例</title>
+                
 
                 <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
@@ -305,11 +303,11 @@ $select = $db->select()
 
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.select.building.columns-expr">
+        <section xml:id="zend.db.select.building.columns-expr"><info><title>式によるカラムの追加</title></info>
 
-            <title>式によるカラムの追加</title>
+            
 
             <para>
                 <acronym>SQL</acronym> クエリでは、単にテーブルのカラムを使用するだけでなく
@@ -339,9 +337,9 @@ $select = $db->select()
 
             </note>
 
-            <example id="zend.db.select.building.columns-expr.example">
+            <example xml:id="zend.db.select.building.columns-expr.example"><info><title>式を含むカラムの指定の例</title></info>
 
-                <title>式を含むカラムの指定の例</title>
+                
 
                 <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
@@ -406,9 +404,9 @@ $select = $db->select()
                 識別子の名前の中に登場するクォート文字自体もエスケープします。
             </para>
 
-            <example id="zend.db.select.building.columns-quoteid.example">
+            <example xml:id="zend.db.select.building.columns-quoteid.example"><info><title>式の中のカラムをクォートする例</title></info>
 
-                <title>式の中のカラムをクォートする例</title>
+                
 
                 <programlisting language="php"><![CDATA[
 // このクエリを作成する際に、式の中にある特別なカラム名 "from" をクォートします
@@ -424,11 +422,11 @@ $select = $db->select()
 
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.select.building.columns-atomic">
+        <section xml:id="zend.db.select.building.columns-atomic"><info><title>既存の FROM あるいは JOIN テーブルへのカラムの追加</title></info>
 
-            <title>既存の FROM あるいは JOIN テーブルへのカラムの追加</title>
+            
 
             <para>
                 既存の FROM や JOIN のテーブルに対して、それらのメソッドをコールした後で
@@ -442,9 +440,9 @@ $select = $db->select()
                 指定する場合は、既存の相関名を使用しなければなりません。
             </para>
 
-            <example id="zend.db.select.building.columns-atomic.example">
+            <example xml:id="zend.db.select.building.columns-atomic.example"><info><title>columns() メソッドでカラムを追加する例</title></info>
 
-                <title>columns() メソッドでカラムを追加する例</title>
+                
 
                 <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
@@ -467,11 +465,11 @@ $select = $db->select()
 
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.select.building.join">
+        <section xml:id="zend.db.select.building.join"><info><title>JOIN による、クエリへの別のテーブルの追加</title></info>
 
-            <title>JOIN による、クエリへの別のテーブルの追加</title>
+            
 
             <para>
                 有用なクエリの多くは、<acronym>JOIN</acronym>
@@ -482,9 +480,9 @@ $select = $db->select()
                 メソッドと似ていますが、ほとんどの場合に結合条件を指定するという点が異なります。
             </para>
 
-            <example id="zend.db.select.building.join.example">
+            <example xml:id="zend.db.select.building.join.example"><info><title>join() メソッドの例</title></info>
 
-                <title>join() メソッドの例</title>
+                
 
                 <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
@@ -535,9 +533,9 @@ $select = $db->select()
                 一方、連結するテーブルについてはカラムを取得しないこともありえます。
             </para>
 
-            <example id="zend.db.select.building.join.example-no-columns">
+            <example xml:id="zend.db.select.building.join.example-no-columns"><info><title>カラムを指定しない例</title></info>
 
-                <title>カラムを指定しない例</title>
+                
 
                 <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
@@ -696,9 +694,9 @@ $select = $db->select()
                 <classname>Zend_Db_Select</classname> オブジェクトが結合条件を作成してくれます。
             </para>
 
-            <example id="zend.db.select.building.joinusing.example">
+            <example xml:id="zend.db.select.building.joinusing.example"><info><title>joinUsing() メソッドの例</title></info>
 
-                <title>joinUsing() メソッドの例</title>
+                
 
                 <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
@@ -747,11 +745,11 @@ $select = $db->select()
                 </listitem>
             </itemizedlist>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.select.building.where">
+        <section xml:id="zend.db.select.building.where"><info><title>WHERE 句の追加</title></info>
 
-            <title>WHERE 句の追加</title>
+            
 
             <para>
                 結果セットの行を制限するための条件を指定するには
@@ -760,9 +758,9 @@ $select = $db->select()
                 <acronym>SQL</acronym> で <acronym>WHERE</acronym> 句として使用します。
             </para>
 
-            <example id="zend.db.select.building.where.example">
+            <example xml:id="zend.db.select.building.where.example"><info><title>where() メソッドの例</title></info>
 
-                <title>where() メソッドの例</title>
+                
 
                 <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
@@ -796,9 +794,9 @@ $select = $db->select()
                 クエスチョンマーク ("<code>?</code>") をその値で置き換えます。
             </para>
 
-            <example id="zend.db.select.building.where.example-param">
+            <example xml:id="zend.db.select.building.where.example-param"><info><title>where() メソッドでのパラメータの例</title></info>
 
-                <title>where() メソッドでのパラメータの例</title>
+                
 
                 <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
@@ -821,9 +819,9 @@ $select = $db->select()
                 第２引数として配列を渡せます。
             </para>
 
-            <example id="zend.db.select.building.where.example-array">
+            <example xml:id="zend.db.select.building.where.example-array"><info><title>where() メソッドでの配列パラメータ例</title></info>
 
-                <title>where() メソッドでの配列パラメータ例</title>
+                
 
                 <programlisting language="php"><![CDATA[
 // クエリをビルド
@@ -847,9 +845,9 @@ $select = $db->select()
                 指定した条件を <acronym>AND</acronym> でひとつにまとめたものとなります。
             </para>
 
-            <example id="zend.db.select.building.where.example-and">
+            <example xml:id="zend.db.select.building.where.example-and"><info><title>複数の where() メソッドの例</title></info>
 
-                <title>複数の where() メソッドの例</title>
+                
 
                 <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
@@ -879,9 +877,9 @@ $select = $db->select()
                 がつくことになります。
             </para>
 
-            <example id="zend.db.select.building.where.example-or">
+            <example xml:id="zend.db.select.building.where.example-or"><info><title>orWhere() メソッドの例</title></info>
 
-                <title>orWhere() メソッドの例</title>
+                
 
                 <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
@@ -909,9 +907,9 @@ $select = $db->select()
                 論理演算子が予期せぬ結果を引き起こすことを防ぎます。
             </para>
 
-            <example id="zend.db.select.building.where.example-parens">
+            <example xml:id="zend.db.select.building.where.example-parens"><info><title>論理式を括弧で囲む例</title></info>
 
-                <title>論理式を括弧で囲む例</title>
+                
 
                 <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
@@ -942,11 +940,11 @@ $select = $db->select()
                 より高くなります。
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.select.building.group">
+        <section xml:id="zend.db.select.building.group"><info><title>GROUP BY 句の追加</title></info>
 
-            <title>GROUP BY 句の追加</title>
+            
 
             <para>
                 <acronym>SQL</acronym> で <command>GROUP BY</command> 句を使用すると、
@@ -962,9 +960,9 @@ $select = $db->select()
                 句で使用するカラムあるいは複数カラムの配列となります。
             </para>
 
-            <example id="zend.db.select.building.group.example">
+            <example xml:id="zend.db.select.building.group.example"><info><title>group() メソッドの例</title></info>
 
-                <title>group() メソッドの例</title>
+                
 
                 <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
@@ -992,11 +990,11 @@ $select = $db->select()
                 <classname>Zend_Db_Expr</classname> 型のオブジェクトを指定したりした場合は別です。
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.select.building.having">
+        <section xml:id="zend.db.select.building.having"><info><title>HAVING 句の追加</title></info>
 
-            <title>HAVING 句の追加</title>
+            
 
             <para>
                 <acronym>SQL</acronym> で <constant>HAVING</constant> 句を使用すると、
@@ -1019,9 +1017,9 @@ $select = $db->select()
                 <code>OR</code> で連結されます。
             </para>
 
-            <example id="zend.db.select.building.having.example">
+            <example xml:id="zend.db.select.building.having.example"><info><title>having() メソッドの例</title></info>
 
-                <title>having() メソッドの例</title>
+                
 
                 <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
@@ -1055,11 +1053,11 @@ $select = $db->select()
 
             </note>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.select.building.order">
+        <section xml:id="zend.db.select.building.order"><info><title>ORDER BY 句の追加</title></info>
 
-            <title>ORDER BY 句の追加</title>
+            
 
             <para>
                 <acronym>SQL</acronym> の <code>ORDER BY</code> 句では、
@@ -1087,9 +1085,9 @@ $select = $db->select()
                 <classname>Zend_Db_Expr</classname> 型のオブジェクトを指定したりした場合は別です。
             </para>
 
-            <example id="zend.db.select.building.order.example">
+            <example xml:id="zend.db.select.building.order.example"><info><title>order() メソッドの例</title></info>
 
-                <title>order() メソッドの例</title>
+                
 
                 <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
@@ -1112,11 +1110,11 @@ $select = $db->select()
 
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.select.building.limit">
+        <section xml:id="zend.db.select.building.limit"><info><title>LIMIT 句の追加</title></info>
 
-            <title>LIMIT 句の追加</title>
+            
 
             <para>
                 <acronym>RDBMS</acronym> によっては、<acronym>SQL</acronym> を拡張して、いわゆる
@@ -1134,9 +1132,9 @@ $select = $db->select()
                 そして<emphasis>二番目</emphasis>の引数は読み飛ばす行数となります。
             </para>
 
-            <example id="zend.db.select.building.limit.example">
+            <example xml:id="zend.db.select.building.limit.example"><info><title>limit() メソッドの例</title></info>
 
-                <title>limit() メソッドの例</title>
+                
 
                 <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
@@ -1177,9 +1175,9 @@ $select = $db->select()
                 どちらの引数も必須で、デフォルト値はありません。
             </para>
 
-            <example id="zend.db.select.building.limit.example2">
+            <example xml:id="zend.db.select.building.limit.example2"><info><title>limitPage() メソッドの例</title></info>
 
-                <title>limitPage() メソッドの例</title>
+                
 
                 <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
@@ -1195,20 +1193,20 @@ $select = $db->select()
 
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.select.building.distinct">
+        <section xml:id="zend.db.select.building.distinct"><info><title>クエリ修飾子 DISTINCT の追加</title></info>
 
-            <title>クエリ修飾子 DISTINCT の追加</title>
+            
 
             <para>
                 <methodname>distinct()</methodname> メソッドを使用すると、<acronym>SQL</acronym> クエリに
                 <constant>DISTINCT</constant> キーワードを追加できます。
             </para>
 
-            <example id="zend.db.select.building.distinct.example">
+            <example xml:id="zend.db.select.building.distinct.example"><info><title>distinct() メソッドの例</title></info>
 
-                <title>distinct() メソッドの例</title>
+                
 
                 <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
@@ -1222,20 +1220,20 @@ $select = $db->select()
 
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.select.building.for-update">
+        <section xml:id="zend.db.select.building.for-update"><info><title>クエリ修飾子 FOR UPDATE の追加</title></info>
 
-            <title>クエリ修飾子 FOR UPDATE の追加</title>
+            
 
             <para>
                 <methodname>forUpdate()</methodname> メソッドを使用すると、<acronym>SQL</acronym> クエリに
                 <code>FOR UPDATE</code> 修飾子を追加できます。
             </para>
 
-            <example id="zend.db.select.building.for-update.example">
+            <example xml:id="zend.db.select.building.for-update.example"><info><title>forUpdate() メソッドの例</title></info>
 
-                <title>forUpdate() メソッドの例</title>
+                
 
                 <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
@@ -1249,10 +1247,10 @@ $select = $db->select()
 
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.select.building.union">
-            <title>UNION クエリの構築</title>
+        <section xml:id="zend.db.select.building.union"><info><title>UNION クエリの構築</title></info>
+            
 
             <para>
                 <methodname>union()</methodname>メソッドに<classname>Zend_Db_Select</classname>の配列、
@@ -1263,8 +1261,8 @@ $select = $db->select()
                 または<constant>Zend_Db_Select::SQL_UNION_ALL</constant>定数を渡せます。
             </para>
 
-            <example id="zend.db.select.building.union.example">
-                <title>union() メソッド例</title>
+            <example xml:id="zend.db.select.building.union.example"><info><title>union() メソッド例</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $sql1 = $db->select();
@@ -1275,21 +1273,21 @@ $select = $db->select()
     ->order("id");
 ]]></programlisting>
             </example>
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.select.execute">
+    <section xml:id="zend.db.select.execute"><info><title>Select クエリの実行</title></info>
 
-        <title>Select クエリの実行</title>
+        
 
         <para>
             この節では、<classname>Zend_Db_Select</classname> オブジェクトが表すクエリを実行する方法を説明します。
         </para>
 
-        <sect3 id="zend.db.select.execute.query-adapter">
+        <section xml:id="zend.db.select.execute.query-adapter"><info><title>Db アダプタからの Select クエリの実行</title></info>
 
-            <title>Db アダプタからの Select クエリの実行</title>
+            
 
             <para>
                 <classname>Zend_Db_Select</classname> オブジェクトが表すクエリを実行するには、それを
@@ -1304,9 +1302,9 @@ $select = $db->select()
                 型のオブジェクトを返します。
             </para>
 
-            <example id="zend.db.select.execute.query-adapter.example">
+            <example xml:id="zend.db.select.execute.query-adapter.example"><info><title>Db アダプタの query() メソッドの使用例</title></info>
 
-                <title>Db アダプタの query() メソッドの使用例</title>
+                
 
                 <programlisting language="php"><![CDATA[
 $select = $db->select()
@@ -1318,11 +1316,11 @@ $result = $stmt->fetchAll();
 
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.select.execute.query-select">
+        <section xml:id="zend.db.select.execute.query-select"><info><title>オブジェクトからの Select クエリの実行</title></info>
 
-            <title>オブジェクトからの Select クエリの実行</title>
+            
 
             <para>
                 アダプタオブジェクトの <methodname>query()</methodname>
@@ -1334,9 +1332,9 @@ $result = $stmt->fetchAll();
                 型のオブジェクトを返します。
             </para>
 
-            <example id="zend.db.select.execute.query-select.example">
+            <example xml:id="zend.db.select.execute.query-select.example"><info><title>Select オブジェクトの query メソッドの使用例</title></info>
 
-                <title>Select オブジェクトの query メソッドの使用例</title>
+                
 
                 <programlisting language="php"><![CDATA[
 $select = $db->select()
@@ -1348,11 +1346,11 @@ $result = $stmt->fetchAll();
 
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.select.execute.tostring">
+        <section xml:id="zend.db.select.execute.tostring"><info><title>Select オブジェクトから SQL 文字列への変換</title></info>
 
-            <title>Select オブジェクトから SQL 文字列への変換</title>
+            
 
             <para>
                 <classname>Zend_Db_Select</classname> オブジェクトに対応する
@@ -1360,9 +1358,9 @@ $result = $stmt->fetchAll();
                 <methodname>__toString()</methodname> メソッドを使用します。
             </para>
 
-            <example id="zend.db.select.execute.tostring.example">
+            <example xml:id="zend.db.select.execute.tostring.example"><info><title>__toString() メソッドの例</title></info>
 
-                <title>__toString() メソッドの例</title>
+                
 
                 <programlisting language="php"><![CDATA[
 $select = $db->select()
@@ -1377,13 +1375,13 @@ echo "$sql\n";
 
             </example>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.select.other">
+    <section xml:id="zend.db.select.other"><info><title>その他のメソッド</title></info>
 
-        <title>その他のメソッド</title>
+        
 
         <para>
             この節では、これまでにあげてこなかった <classname>Zend_Db_Select</classname>
@@ -1391,9 +1389,9 @@ echo "$sql\n";
             <methodname>reset()</methodname> について説明します。
         </para>
 
-        <sect3 id="zend.db.select.other.get-part">
+        <section xml:id="zend.db.select.other.get-part"><info><title>Select オブジェクトの一部の取得</title></info>
 
-            <title>Select オブジェクトの一部の取得</title>
+            
 
             <para>
                 <methodname>getPart()</methodname> メソッドは、<acronym>SQL</acronym> クエリの一部を返します。
@@ -1423,9 +1421,9 @@ echo "$sql\n";
                 これらの定数、あるいはリテラル文字列のいずれかで指定できます。
             </para>
 
-            <table id="zend.db.select.other.get-part.table">
+            <table xml:id="zend.db.select.other.get-part.table"><info><title>getPart() および reset() で使用する定数</title></info>
 
-                <title>getPart() および reset() で使用する定数</title>
+                
 
                 <tgroup cols="2">
                     <thead>
@@ -1489,9 +1487,9 @@ echo "$sql\n";
                 </tgroup>
             </table>
 
-            <example id="zend.db.select.other.get-part.example">
+            <example xml:id="zend.db.select.other.get-part.example"><info><title>getPart() メソッドの例</title></info>
 
-                <title>getPart() メソッドの例</title>
+                
 
                 <programlisting language="php"><![CDATA[
 $select = $db->select()
@@ -1511,11 +1509,11 @@ print_r( $orderData );
 
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.select.other.reset">
+        <section xml:id="zend.db.select.other.reset"><info><title>Select オブジェクトの一部のリセット</title></info>
 
-            <title>Select オブジェクトの一部のリセット</title>
+            
 
             <para>
                 <methodname>reset()</methodname> メソッドを使用すると、
@@ -1537,9 +1535,9 @@ print_r( $orderData );
                 つまり、最初にインスタンスを作成したときと同じ状態ということです。
             </para>
 
-            <example id="zend.db.select.other.reset.example">
+            <example xml:id="zend.db.select.other.reset.example"><info><title>reset() メソッドの例</title></info>
 
-                <title>reset() メソッドの例</title>
+                
 
                 <programlisting language="php"><![CDATA[
 // できあがるクエリは、このようになります
@@ -1568,11 +1566,8 @@ $select->reset();
 
             </example>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

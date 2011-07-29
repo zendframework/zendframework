@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.validate.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         The <classname>Zend_Validate</classname> component provides a set of commonly needed
@@ -10,8 +9,8 @@
         user-defined order.
     </para>
 
-    <sect2 id="zend.validate.introduction.definition">
-        <title>What is a validator?</title>
+    <section xml:id="zend.validate.introduction.definition"><info><title>What is a validator?</title></info>
+        
 
         <para>
             A validator examines its input with respect to some requirements
@@ -29,10 +28,10 @@
             meet one or both of the requirements, it would be useful to know
             which of the requirements the username fails to meet.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.validate.introduction.using">
-        <title>Basic usage of validators</title>
+    <section xml:id="zend.validate.introduction.using"><info><title>Basic usage of validators</title></info>
+        
 
         <para>
             Having defined validation in this way provides the foundation for
@@ -84,10 +83,10 @@ if ($validator->isValid($email)) {
     }
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.validate.introduction.messages">
-        <title>Customizing messages</title>
+    <section xml:id="zend.validate.introduction.messages"><info><title>Customizing messages</title></info>
+        
 
         <para>
             Validate classes provide a <methodname>setMessage()</methodname> method with
@@ -171,10 +170,10 @@ if (!validator->isValid('word')) {
         . "\n";
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.validate.introduction.static">
-        <title>Using the static is() method</title>
+    <section xml:id="zend.validate.introduction.static"><info><title>Using the static is() method</title></info>
+        
 
         <para>
             If it's inconvenient to load a given validation class and create an
@@ -228,8 +227,8 @@ if (Zend_Validate::is($value, 'Between', array('min' => 1, 'max' => 12))) {
             <link linkend="zend.filter.input">Zend_Filter_Input</link>.
         </para>
 
-        <sect3 id="zend.validate.introduction.static.namespaces">
-            <title>Namespaces</title>
+        <section xml:id="zend.validate.introduction.static.namespaces"><info><title>Namespaces</title></info>
+            
 
             <para>
                 When working with self defined validators you can give a fourth parameter
@@ -301,11 +300,11 @@ if (Zend_Validate::is($value,
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.validate.introduction.translation">
-        <title>Translating messages</title>
+    <section xml:id="zend.validate.introduction.translation"><info><title>Translating messages</title></info>
+        
 
         <para>
             Validate classes provide a <methodname>setTranslator()</methodname> method with
@@ -376,8 +375,5 @@ if (!$validator->isTranslatorDisabled()) {
             <methodname>setMessage()</methodname>. But doing so, you should keep in mind, that the
             translator works also on messages you set your own.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

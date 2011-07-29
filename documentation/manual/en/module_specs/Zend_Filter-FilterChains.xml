@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.filter.filter_chains">
-    <title>Filter Chains</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.filter_chains"><info><title>Filter Chains</title></info>
+    
 
     <para>
         Often multiple filters should be applied to some value in a particular order. For example, a
@@ -32,8 +31,8 @@ $username = $filterChain->filter($_POST['username']);
         filter chain.
     </para>
 
-    <sect2 id="zend.filter.filter_chains.order">
-        <title>Changing filter chain order</title>
+    <section xml:id="zend.filter.filter_chains.order"><info><title>Changing filter chain order</title></info>
+        
 
         <para>
             Since 1.10, the <classname>Zend_Filter</classname> chain also
@@ -55,8 +54,5 @@ $filterChain->prependFilter(new Zend_Filter_Alpha());
 // Filter the username
 $username = $filterChain->filter($_POST['username']);
 ]]></programlisting>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

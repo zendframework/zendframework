@@ -1,5 +1,6 @@
-<sect1 id="zend.feed.findFeeds">
-    <title>Получение лент из веб-страниц</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.findFeeds"><info><title>Получение лент из веб-страниц</title></info>
+    
     <para>
        Веб-страницы часто содержат теги <code>&lt;link&gt;</code>, которые ссылаются на
        ленты с соответсвующим данной странице содержимым. <code>Zend_Feed</code>
@@ -8,8 +9,8 @@
     </para>
     <programlisting language="php"><![CDATA[
 $feedArray = Zend_Feed::findFeeds('http://www.example.com/news.html');
-]]>
-    </programlisting>
+
+    ]]></programlisting>
     <para>
         Здесь метод <code>findFeeds()</code> возвращает массив объектов лент
         <code>Zend_Feed_Abstract</code>, на которые ссылались теги
@@ -19,7 +20,4 @@ $feedArray = Zend_Feed::findFeeds('http://www.example.com/news.html');
         <code>Zend_Feed</code> будет генерировать исключение <code>Zend_Feed_Exception</code>
         в случае ошибки, такой, как возврат HTTP-кода 404 или плохо сформированная лента.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

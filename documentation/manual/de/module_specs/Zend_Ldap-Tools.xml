@@ -1,19 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.ldap.tools">
-    <title>Tools</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.tools"><info><title>Tools</title></info>
+    
 
-    <sect2 id="zend.ldap.tools.dn">
-        <title>Erstellung und Modifizierung von DN Strings</title>
+    <section xml:id="zend.ldap.tools.dn"><info><title>Erstellung und Modifizierung von DN Strings</title></info>
+        
         <para/>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.ldap.tools.filter">
-        <title>Verwendung der Filter API um Suchfilter zu erstellen</title>
+    <section xml:id="zend.ldap.tools.filter"><info><title>Verwendung der Filter API um Suchfilter zu erstellen</title></info>
+        
 
-        <example>
-            <title>Einfache LDAP Filter erstellen</title>
+        <example><info><title>Einfache LDAP Filter erstellen</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $f1  = Zend_Ldap_Filter::equals('name', 'value');         // (name=value)
@@ -29,8 +27,8 @@ $f10 = Zend_Ldap_Filter::any('name');                     // (name=*)
 ]]></programlisting>
         </example>
 
-        <example>
-            <title>Komplexere LDAP Filter erstellen</title>
+        <example><info><title>Komplexere LDAP Filter erstellen</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $f1 = Zend_Ldap_Filter::ends('name', 'value')->negate(); // (!(name=*value))
@@ -46,10 +44,10 @@ $f5 = Zend_Ldap_Filter::andFilter($f2, $f3, $f4);
 $f6 = Zend_Ldap_Filter::orFilter($f2, $f3, $f4);
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.ldap.tools.attribute">
-        <title>LDAP Einträge modifizieren und die Attribut API verwenden</title>
+    <section xml:id="zend.ldap.tools.attribute"><info><title>LDAP Einträge modifizieren und die Attribut API verwenden</title></info>
+        
         <para/>
-    </sect2>
-</sect1>
+    </section>
+</section>

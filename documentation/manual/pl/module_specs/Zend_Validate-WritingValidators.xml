@@ -1,6 +1,7 @@
-<sect1 id="zend.validate.writing_validators">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.writing_validators"><info><title>Pisanie weryfikatorów</title></info>
 
-    <title>Pisanie weryfikatorów</title>
+    
 
     <para>
         Zend_Validate zapewnia zestaw najczęściej potrzebnych weryfikatorów, ale
@@ -47,9 +48,9 @@
         determined.
     </para>
 
-    <example id="zend.validate.writing_validators.example.simple">
+    <example xml:id="zend.validate.writing_validators.example.simple"><info><title>Creating a Simple Validation Class</title></info>
 
-        <title>Creating a Simple Validation Class</title>
+        
 
         <para>
             The following example demonstrates how a very simple custom validator might be written. In this case the
@@ -76,8 +77,8 @@ class MyValid_Float extends Zend_Validate_Abstract
         return true;
     }
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
             The class defines a template for its single validation failure message, which includes the built-in magic
             parameter, <code>%value%</code>. The call to <code>_setValue()</code> prepares the object to insert the
@@ -89,9 +90,9 @@ class MyValid_Float extends Zend_Validate_Abstract
 
     </example>
 
-    <example id="zend.validate.writing_validators.example.conditions.dependent">
+    <example xml:id="zend.validate.writing_validators.example.conditions.dependent"><info><title>Writing a Validation Class having Dependent Conditions</title></info>
 
-        <title>Writing a Validation Class having Dependent Conditions</title>
+        
 
         <para>
             The following example demonstrates a more complex set of validation rules, where it is required that the
@@ -157,8 +158,8 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
         return true;
     }
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
             The public properties <code>$minimum</code> and <code>$maximum</code> have been established to provide
             the minimum and maximum boundaries, respectively, for a value to successfully validate. The class also
@@ -177,9 +178,9 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
 
     </example>
 
-    <example id="zend.validate.writing_validators.example.conditions.independent">
+    <example xml:id="zend.validate.writing_validators.example.conditions.independent"><info><title>Validation with Independent Conditions, Multiple Reasons for Failure</title></info>
 
-        <title>Validation with Independent Conditions, Multiple Reasons for Failure</title>
+        
 
         <para>
             Consider writing a validation class for password strength enforcement - when a user is required to choose
@@ -249,8 +250,8 @@ class MyValid_PasswordStrength extends Zend_Validate_Abstract
         return $isValid;
     }
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
             Note that the four criteria tests in <code>isValid()</code> do not immediately return <code>false</code>.
             This allows the validation class to provide <emphasis role="bold">all</emphasis> of the reasons that the
@@ -261,4 +262,4 @@ class MyValid_PasswordStrength extends Zend_Validate_Abstract
 
     </example>
 
-</sect1>
+</section>

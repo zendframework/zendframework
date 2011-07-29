@@ -73,7 +73,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     {
         $values = $this->route->match('mod');
 
-        $this->assertType('array', $values);
+        $this->assertInternalType('array', $values);
         $this->assertTrue(isset($values['module']));
         $this->assertEquals('mod', $values['module']);
     }
@@ -81,7 +81,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     public function testModuleAndControllerMatch()
     {
         $values = $this->route->match('mod/con');
-        $this->assertType('array', $values);
+        $this->assertInternalType('array', $values);
         $this->assertTrue(isset($values['module']));
         $this->assertEquals('mod', $values['module']);
         $this->assertTrue(isset($values['controller']));
@@ -91,7 +91,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     public function testModuleControllerAndActionMatch()
     {
         $values = $this->route->match('mod/con/act');
-        $this->assertType('array', $values);
+        $this->assertInternalType('array', $values);
         $this->assertTrue(isset($values['module']));
         $this->assertEquals('mod', $values['module']);
         $this->assertTrue(isset($values['controller']));
@@ -103,7 +103,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     public function testModuleControllerActionAndParamsMatch()
     {
         $values = $this->route->match('mod/con/act/var/val/foo');
-        $this->assertType('array', $values);
+        $this->assertInternalType('array', $values);
         $this->assertTrue(isset($values['module']));
         $this->assertEquals('mod', $values['module']);
         $this->assertTrue(isset($values['controller']));
@@ -119,7 +119,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     public function testControllerOnlyMatch()
     {
         $values = $this->route->match('con');
-        $this->assertType('array', $values);
+        $this->assertInternalType('array', $values);
         $this->assertTrue(isset($values['controller']));
         $this->assertEquals('con', $values['controller']);
     }
@@ -127,7 +127,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     public function testControllerOnlyAndActionMatch()
     {
         $values = $this->route->match('con/act');
-        $this->assertType('array', $values);
+        $this->assertInternalType('array', $values);
         $this->assertTrue(isset($values['controller']));
         $this->assertEquals('con', $values['controller']);
         $this->assertTrue(isset($values['action']));
@@ -137,7 +137,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     public function testControllerOnlyActionAndParamsMatch()
     {
         $values = $this->route->match('con/act/var/val/foo');
-        $this->assertType('array', $values);
+        $this->assertInternalType('array', $values);
         $this->assertTrue(isset($values['controller']));
         $this->assertEquals('con', $values['controller']);
         $this->assertTrue(isset($values['action']));
@@ -158,7 +158,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
 
         $values = $this->route->match('mod/ctrl');
 
-        $this->assertType('array', $values);
+        $this->assertInternalType('array', $values);
         $this->assertSame('mod', $values['m']);
         $this->assertSame('ctrl', $values['c']);
         $this->assertSame('index', $values['a']);
@@ -172,7 +172,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
 
         $values = $this->route->match('mod/ctrl');
 
-        $this->assertType('array', $values);
+        $this->assertInternalType('array', $values);
         $this->assertSame('mod', $values['m'], var_export(array_keys($values), 1));
         $this->assertSame('ctrl', $values['c'], var_export(array_keys($values), 1));
         $this->assertSame('index', $values['a'], var_export(array_keys($values), 1));
@@ -403,7 +403,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
         $config = new Config\Config($routeConf);
         $route = Route\Module::getInstance($config);
 
-        $this->assertType('Zend\Controller\Router\Route\Module', $route);
+        $this->assertInstanceOf('Zend\Controller\Router\Route\Module', $route);
     }
 
     public function testEncode()
@@ -444,7 +444,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
 
         $values = $this->route->match('mod/ctrl');
 
-        $this->assertType('array', $values);
+        $this->assertInternalType('array', $values);
         $this->assertSame('mod', $values['m'], var_export(array_keys($values), 1));
         $this->assertSame('ctrl', $values['c'], var_export(array_keys($values), 1));
         $this->assertSame('index', $values['a'], var_export(array_keys($values), 1));

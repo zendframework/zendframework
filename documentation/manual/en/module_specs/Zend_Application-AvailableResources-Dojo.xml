@@ -1,15 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.dojo">
-    <title>Zend_Application_Resource_Dojo</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.dojo"><info><title>Zend_Application_Resource_Dojo</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Dojo</classname> can be used
         to configure the <classname>Zend_Dojo</classname> viewhelpers.
     </para>
 
-    <example id="zend.application.available-resources.dojo.configExample">
-        <title>Sample Dojo resource configuration</title>
+    <example xml:id="zend.application.available-resources.dojo.configExample"><info><title>Sample Dojo resource configuration</title></info>
+        
 
         <para>
             Below is a sample <acronym>INI</acronym> file showing how
@@ -27,4 +26,4 @@ resources.dojo.enable = true ; Always load the Dojo javascript files
             chapter for full descriptions and available options.
         </para>
     </example>
-</sect2>
+</section>

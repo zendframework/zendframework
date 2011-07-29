@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.navigation.pages" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Страницы</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages"><info><title>Страницы</title></info>
+    
 
     <para>
         <classname>Zend_Navigation</classname> поставляется с двумя типами
@@ -31,29 +32,29 @@
         или производить другие действия со сгенерированными ссылками.
     </para>
 
-    <xi:include href="Zend_Navigation-Pages-Common.xml">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Navigation-Pages-Common.xml">
         <xi:fallback>
-            <xi:include href="../../en/module_specs/Zend_Navigation-Pages-Common.xml" />
+            <xi:include href="../../en/module_specs/Zend_Navigation-Pages-Common.xml"/>
         </xi:fallback>
     </xi:include>
-    <xi:include href="Zend_Navigation-Pages-MVC.xml">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Navigation-Pages-MVC.xml">
         <xi:fallback>
-            <xi:include href="../../en/module_specs/Zend_Navigation-Pages-MVC.xml" />
+            <xi:include href="../../en/module_specs/Zend_Navigation-Pages-MVC.xml"/>
         </xi:fallback>
     </xi:include>
-    <xi:include href="Zend_Navigation-Pages-URI.xml">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Navigation-Pages-URI.xml">
         <xi:fallback>
-            <xi:include href="../../en/module_specs/Zend_Navigation-Pages-URI.xml" />
+            <xi:include href="../../en/module_specs/Zend_Navigation-Pages-URI.xml"/>
         </xi:fallback>
     </xi:include>
-    <xi:include href="Zend_Navigation-Pages-Custom.xml">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Navigation-Pages-Custom.xml">
         <xi:fallback>
-            <xi:include href="../../en/module_specs/Zend_Navigation-Pages-Custom.xml" />
+            <xi:include href="../../en/module_specs/Zend_Navigation-Pages-Custom.xml"/>
         </xi:fallback>
     </xi:include>
-    <xi:include href="Zend_Navigation-Pages-Factory.xml">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Navigation-Pages-Factory.xml">
         <xi:fallback>
-            <xi:include href="../../en/module_specs/Zend_Navigation-Pages-Factory.xml" />
+            <xi:include href="../../en/module_specs/Zend_Navigation-Pages-Factory.xml"/>
         </xi:fallback>
     </xi:include>
-</sect1>
+</section>

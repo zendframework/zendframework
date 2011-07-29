@@ -1,7 +1,8 @@
-<sect1 id="zend.service.amazon">
-    <title>Zend_Service_Amazon</title>
-    <sect2 id="zend.service.amazon.introduction">
-        <title>Inleiding</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon"><info><title>Zend_Service_Amazon</title></info>
+    
+    <section xml:id="zend.service.amazon.introduction"><info><title>Inleiding</title></info>
+        
         <para>
             <code>Zend_Service_Amazon</code> is een eenvoudige API om Amazon webservices te gebruiken.
             <code>Zend_Service_Amazon</code> heeft twee APIs: een meer traditionele die Amazons eigen API volgt,
@@ -41,7 +42,7 @@
         <para>
             Om <code>Zend_Service_Amazon</code> te gebruiken dien je een Amazon developer API key moeten hebben. Om die
             te verkrijgen, en voor meer informatie, kan je terecht op de
-            <ulink url="http://www.amazon.com/gp/aws/landing.html">Amazon Web Services</ulink> website.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.amazon.com/gp/aws/landing.html">Amazon Web Services</link> website.
         </para>
         <note>
           <para>
@@ -49,8 +50,8 @@
             te beveiligen en privé te houden.
           </para>
         </note>
-        <example>
-            <title>Amazon doorzoeken met de traditionele API</title>
+        <example><info><title>Amazon doorzoeken met de traditionele API</title></info>
+            
             <para>
                 In dit voorbeeld zoeken we naar PHP boeken op Amazon en doorlopen we de resultaten door ze uit te printen.
             </para>
@@ -61,10 +62,10 @@ $response = $amazon->itemSearch(array('SearchIndex' => 'Books', 'Keywords' => 'p
 foreach ($response as $r) {
     echo $r->Title .'<br />';
 }
-?>]]>       </programlisting>
+?>       ]]></programlisting>
         </example>
-        <example>
-            <title>Amazon doorzoeken met de Query API</title>
+        <example><info><title>Amazon doorzoeken met de Query API</title></info>
+            
             <para>
                 Hier zoeken we ook naar PHP boeken op Amazon, maar we gebruiken de Query API, die lijkt
                 op het Fluent Interface ontwerp patroon.
@@ -77,23 +78,23 @@ $results = $query->search();
 foreach ($results as $result) {
     echo $result->Title .'<br />';
 }
-?>]]>       </programlisting>
+?>       ]]></programlisting>
         </example>
-    </sect2>
-    <sect2 id="zend.service.amazon.countrycodes">
-        <title>Landcodes</title>
+    </section>
+    <section xml:id="zend.service.amazon.countrycodes"><info><title>Landcodes</title></info>
+        
         <para>
             Standaard maakt <code>Zend_Service_Amazon</code> een verbinding met de Amazon web service in de Verenigde Staten ("<code>US</code>").
             Om verbinding te maken met een ander land geef je eenvoudigweg de landcode van dit land op als de tweede parameter van de
             constructor:
         </para>
-        <example>
-            <title>Een Amazon Web Service land kiezen</title>
+        <example><info><title>Een Amazon Web Service land kiezen</title></info>
+            
             <programlisting><![CDATA[<?php
 // Verbind met Amazon in Frankrijk
 require_once 'Zend/Service/Amazon.php';
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'FR');
-?>]]>       </programlisting>
+?>       ]]></programlisting>
         </example>
         <note>
           <para>
@@ -101,41 +102,40 @@ $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'FR');
             <code>UK</code>, en <code>US</code>.
           </para>
         </note>
-    </sect2>
-    <sect2 id="zend.service.amazon.itemlookup">
-        <title>Een specifiek item opzoeken met ASIN code</title>
+    </section>
+    <section xml:id="zend.service.amazon.itemlookup"><info><title>Een specifiek item opzoeken met ASIN code</title></info>
+        
         <para>
             De <code>itemLookup()</code> methode biedt de mogelijkheid om een specifiek Amazon item op te halen als
             de ASIN bekend is.
         </para>
-        <example>
-            <title>Een specifiek Amazon item ophalen per ASIN</title>
+        <example><info><title>Een specifiek Amazon item ophalen per ASIN</title></info>
+            
             <programlisting><![CDATA[<?php
 require_once 'Zend/Service/Amazon.php';
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY');
 $item = $amazon->itemLookup('B0000A432X');
-?>]]>       </programlisting>
+?>       ]]></programlisting>
         </example>
         <para>
             De <code>itemLookup()</code> methode aanvaardt ook een optionele tweede parameter om zoekopties af te handelen.
             Voor alle details, inclusief een lijst van beschikbare opties, zie de
-            <ulink
-                url="http://www.amazon.com/gp/aws/sdk/main.html/103-9285448-4703844?s=AWSEcommerceService&amp;v=2005-10-05&amp;p=ApiReference/ItemLookupOperation">relevante Amazon documentatie</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.amazon.com/gp/aws/sdk/main.html/103-9285448-4703844?s=AWSEcommerceService&amp;v=2005-10-05&amp;p=ApiReference/ItemLookupOperation">relevante Amazon documentatie</link>.
         <note>
             <para>
                 Om informatie over de beelden te verkrijgen voor je zoekresultaten, moet je de optie <code>ResponseGroup</code> tot <code>Medium</code> of <code>Large</code> zetten.
             </para>
         </note>
         </para>
-    </sect2>
-    <sect2 id="zend.service.amazon.itemsearch">
-        <title>Amazon Item zoekopdrachten uitvoeren</title>
+    </section>
+    <section xml:id="zend.service.amazon.itemsearch"><info><title>Amazon Item zoekopdrachten uitvoeren</title></info>
+        
         <para>
             Het zoeken naar items gebaseerd op een van de verschillende voorhande criteria wordt eenvoudig
             gemaakt door de <code>itemSearch()</code> methode, zoals in het volgende voorbeeld:
         </para>
-        <example>
-            <title>Uitvoeren van Amazon Item Zoekopdrachten</title>
+        <example><info><title>Uitvoeren van Amazon Item Zoekopdrachten</title></info>
+            
             <programlisting><![CDATA[<?php
 require_once 'Zend/Service/Amazon.php';
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY');
@@ -143,13 +143,12 @@ $response = $amazon->itemSearch(array('SearchIndex' => 'Books', 'Keywords' => 'p
 foreach($response as $r) {
     echo $r->Title .'<br />';
 }
-?>]]>       </programlisting>
+?>       ]]></programlisting>
         </example>
         <para>
             De <code>itemSearch()</code> methode aanvaardt een enkele array array parameter om zoekopties af te handelen.
             Voor alle details, inclusief een lijst van beschikbare opties, zie de
-            <ulink
-                url="http://www.amazon.com/gp/aws/sdk/main.html/103-9285448-4703844?s=AWSEcommerceService&amp;v=2005-10-05&amp;p=ApiReference/ItemSearchOperation">relevante Amazon documentatie</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.amazon.com/gp/aws/sdk/main.html/103-9285448-4703844?s=AWSEcommerceService&amp;v=2005-10-05&amp;p=ApiReference/ItemSearchOperation">relevante Amazon documentatie</link>
         </para>
         <tip>
           <para>
@@ -157,24 +156,24 @@ foreach($response as $r) {
             is een gemakkelijk te gebruiken "wrapper" van deze methode.
           </para>
         </tip>
-    </sect2>
-<sect2 id="zend.service.amazon.query">
-    <title>De Alternatieve Query API gebruiken</title>
-    <sect3 id="zend.service.amazon.query.introduction">
-        <title>Inleiding</title>
+    </section>
+<section xml:id="zend.service.amazon.query"><info><title>De Alternatieve Query API gebruiken</title></info>
+    
+    <section xml:id="zend.service.amazon.query.introduction"><info><title>Inleiding</title></info>
+        
         <para>
             <code>Zend_Service_Amazon_Query</code> bied een alternatieve API om de Amazon Web Service te gebruiken.
             De alternatieve API gebruikt het Fluent Interface ontwerppatroon. Dus, alle oproepen kunnen gemaakt worden
             door aaneengeregen methode-oproepen te maken.
-            (bv: <code>$obj->method()->method2($arg)</code>)
+            (bv: <code>$obj-&gt;method()-&gt;method2($arg)</code>)
         </para>
         <para>
             De <code>Zend_Service_Amazon_Query</code> API gebruikt overloading om gemakkelijk een item zoekopdracht op te zetten
             en laat je dan toe te zoeken op de gespecifieerde criteria. Elk van de opties is als een methode-oproep
             aangeboden, en elk argument van een methode komt overeen met de benoemde waarde van de optie:
         </para>
-        <example>
-            <title>Doorzoek Amazon met gebruik van de Alternatieve Query API</title>
+        <example><info><title>Doorzoek Amazon met gebruik van de Alternatieve Query API</title></info>
+            
             <para>
                 In dit voorbeeld wordt de alternatieve query API gebruikt als een Fluent Interface om opties en hun
                 respectievelijke waarden te specificeren:
@@ -187,20 +186,19 @@ $results = $query->search();
 foreach ($results as $result) {
     echo $result->Title .'<br />';
 }
-?>]]>       </programlisting>
+?>       ]]></programlisting>
             <para>
                 Dit zet de optie <code>Category</code> tot "Books" en <code>Keywords</code> tot "PHP".
             </para>
             <para>
                 Voor meer informatie over de beschikbare opties verwijzen we je graag door naar de
-                <ulink
-                    url="http://www.amazon.com/gp/aws/sdk/main.html/102-9041115-9057709?s=AWSEcommerceService&amp;v=2005-10-05&amp;p=ApiReference/ItemSearchOperation">relevante Amazon documentatie</ulink>.
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.amazon.com/gp/aws/sdk/main.html/102-9041115-9057709?s=AWSEcommerceService&amp;v=2005-10-05&amp;p=ApiReference/ItemSearchOperation">relevante Amazon documentatie</link>.
             </para>
         </example>
-    </sect3>
-</sect2>
-<sect2 id="zend.service.amazon.classes">
-    <title>Zend_Service_Amazon Klassen</title>
+    </section>
+</section>
+<section xml:id="zend.service.amazon.classes"><info><title>Zend_Service_Amazon Klassen</title></info>
+    
     <para>
         De volgende klassen worden allemaal teruggegeven door
         <link linkend="zend.service.amazon.itemlookup"><code>Zend_Service_Amazon::itemLookup()</code></link>
@@ -219,31 +217,31 @@ foreach ($results as $result) {
             <listitem><para><link linkend="zend.service.amazon.classes.listmania"><code>Zend_Service_Amazon_ListMania</code></link></para></listitem>
         </itemizedlist>
     </para>
-    <sect3 id="zend.service.amazon.classes.item">
-        <title>Zend_Service_Amazon_Item</title>
+    <section xml:id="zend.service.amazon.classes.item"><info><title>Zend_Service_Amazon_Item</title></info>
+        
         <para>
             <code>Zend_Service_Amazon_Item</code> is de typeklasse die gebruikt wordt om een Amazon item voor te stellen dat
             werd teruggestuurd door de web service. Het omvat alle item eigenschappen, inclusief de titel, beschrijving, recensies enz...
         </para>
-        <sect4 id="zend.service.amazon.classes.item.asxml">
-            <title>Zend_Service_Amazon_Item::asXML()</title>
+        <section xml:id="zend.service.amazon.classes.item.asxml"><info><title>Zend_Service_Amazon_Item::asXML()</title></info>
+            
             <para>
                 <methodsynopsis>
                     <type>string</type>
                     <methodname>asXML</methodname>
-                    <void />
+                    <void/>
                 </methodsynopsis>
             </para>
             <para>Geeft de oorspronkelijke XML van het item terug</para>
-        </sect4>
-        <sect4 id="zend.service.amazon.classes.item.properties">
-            <title>Eigenschappen</title>
+        </section>
+        <section xml:id="zend.service.amazon.classes.item.properties"><info><title>Eigenschappen</title></info>
+            
             <para>
                 <code>Zend_Service_Amazon_Item</code> heeft een aantal eigenschappen die onmiddellijk verwant zijn aan hun
                 Amazon API tegenhangers.
             </para>
-            <table>
-                <title>Zend_Service_Amazon_Item Eigenschappen</title>
+            <table><info><title>Zend_Service_Amazon_Item Eigenschappen</title></info>
+                
                 <tgroup cols="3">
                     <thead>
                         <row>
@@ -292,8 +290,7 @@ foreach ($results as $result) {
                             <entry>Offers</entry>
                             <entry>
                                 <code>
-                                    <link
-                                        linkend="zend.service.amazon.classes.offerset">Zend_Service_Amazon_OfferSet</link>
+                                    <link linkend="zend.service.amazon.classes.offerset">Zend_Service_Amazon_OfferSet</link>
                                 </code>
                             </entry>
                             <entry>Samenvatting van en aanbiedingen voor het item</entry>
@@ -304,8 +301,7 @@ foreach ($results as $result) {
                             <entry>
                                 Klantrecensies voorgesteld als een array van
                                 <code>
-                                    <link
-                                        linkend="zend.service.amazon.classes.customerreview">Zend_Service_Amazon_CustomerReview</link>
+                                    <link linkend="zend.service.amazon.classes.customerreview">Zend_Service_Amazon_CustomerReview</link>
                                 </code>
                                 objecten
                             </entry>
@@ -316,8 +312,7 @@ foreach ($results as $result) {
                             <entry>
                                 Uitgeversrecensies voorgesteld als een array van
                                 <code>
-                                    <link
-                                        linkend="zend.service.amazon.classes.editorialreview">Zend_Service_Amazon_EditorialReview</link>
+                                    <link linkend="zend.service.amazon.classes.editorialreview">Zend_Service_Amazon_EditorialReview</link>
                                 </code>
                                 objecten
                             </entry>
@@ -328,8 +323,7 @@ foreach ($results as $result) {
                             <entry>
                                 Gelijksoortige producten voorgesteld als een array van
                                 <code>
-                                    <link
-                                        linkend="zend.service.amazon.classes.similarproduct">Zend_Service_Amazon_SimilarProduct</link>
+                                    <link linkend="zend.service.amazon.classes.similarproduct">Zend_Service_Amazon_SimilarProduct</link>
                                 </code>
                                 objecten
                             </entry>
@@ -340,8 +334,7 @@ foreach ($results as $result) {
                             <entry>
                                 Accessoires voor het item voorgesteld als een array van
                                 <code>
-                                    <link
-                                        linkend="zend.service.amazon.classes.accessories">Zend_Service_Amazon_Accessories</link>
+                                    <link linkend="zend.service.amazon.classes.accessories">Zend_Service_Amazon_Accessories</link>
                                 </code>
                                 objecten
                             </entry>
@@ -357,8 +350,7 @@ foreach ($results as $result) {
                             <entry>
                                 ListMania lijsten verwant met het item als een array van
                                 <code>
-                                    <link
-                                        linkend="zend.service.amazon.classes.listmania">Zend_Service_Amazon_ListmainList</link>
+                                    <link linkend="zend.service.amazon.classes.listmania">Zend_Service_Amazon_ListmainList</link>
                                 </code>
                                 objecten
                             </entry>
@@ -374,15 +366,15 @@ foreach ($results as $result) {
             <para>
                 <link linkend="zend.service.amazon.classes">Terug naar de klasselijst</link>
             </para>
-        </sect4>
-    </sect3>
-    <sect3 id="zend.service.amazon.classes.image">
-        <title>Zend_Service_Amazon_Image</title>
+        </section>
+    </section>
+    <section xml:id="zend.service.amazon.classes.image"><info><title>Zend_Service_Amazon_Image</title></info>
+        
         <para><code>Zend_Service_Amazon_Image</code> vetegenwoordigt een (remote) beeld voor een product.</para>
-        <sect4 id="zend.service.amazon.classes.image.properties">
-            <title>Eigenschappen</title>
-            <table>
-                <title>Zend_Service_Amazon_Image Eigenschappen</title>
+        <section xml:id="zend.service.amazon.classes.image.properties"><info><title>Eigenschappen</title></info>
+            
+            <table><info><title>Zend_Service_Amazon_Image Eigenschappen</title></info>
+                
                 <tgroup cols="3">
                     <thead>
                         <row>
@@ -413,10 +405,10 @@ foreach ($results as $result) {
             <para>
                 <link linkend="zend.service.amazon.classes">Terug naar de klasselijst</link>
             </para>
-        </sect4>
-    </sect3>
-    <sect3 id="zend.service.amazon.classes.resultset">
-        <title>Zend_Service_Amazon_ResultSet</title>
+        </section>
+    </section>
+    <section xml:id="zend.service.amazon.classes.resultset"><info><title>Zend_Service_Amazon_ResultSet</title></info>
+        
         <para>
             <code>Zend_Service_Amazon_ResultSet</code> objecten worden teruggestuurd door
             <link linkend="zend.service.amazon.itemsearch">Zend_Service_Amazon::itemSearch()</link>
@@ -428,21 +420,21 @@ foreach ($results as $result) {
                 gebruiken) evenals onmiddellijke toegang tot een specifiek resultaat door <code>seek()</code> te gebruiken.
             </para>
         </note>
-        <sect4 id="zend.service.amazon.classes.resultset.totalresults">
-            <title>Zend_Service_Amazon_ResultSet::totalResults()</title>
+        <section xml:id="zend.service.amazon.classes.resultset.totalresults"><info><title>Zend_Service_Amazon_ResultSet::totalResults()</title></info>
+            
             <methodsynopsis>
                 <type>int</type>
                 <methodname>totalResults</methodname>
-                <void />
+                <void/>
             </methodsynopsis>
             <para>Geeft het totaal aantal resultaten verkregen door de zoekopdracht</para>
             <para>
                 <link linkend="zend.service.amazon.classes">Terug naar de klasselijst</link>
             </para>
-        </sect4>
-    </sect3>
-    <sect3 id="zend.service.amazon.classes.offerset">
-        <title>Zend_Service_Amazon_OfferSet</title>
+        </section>
+    </section>
+    <section xml:id="zend.service.amazon.classes.offerset"><info><title>Zend_Service_Amazon_OfferSet</title></info>
+        
         <para>
             Elk resultaat teruggegeven door
             <link linkend="zend.service.amazon.itemsearch">Zend_Service_Amazon::itemSearch()</link>
@@ -452,10 +444,10 @@ foreach ($results as $result) {
             <code>Zend_Service_Amazon_OfferSet</code>
             object via welke prijsinformatie voor het item kan worden opgevraagd.
         </para>
-        <sect4 id="zend.service.amazon.classes.offerset.parameters">
-            <title>Eigenschappen</title>
-            <table>
-                <title>Zend_Service_Amazon_OfferSet Eigenschappen</title>
+        <section xml:id="zend.service.amazon.classes.offerset.parameters"><info><title>Eigenschappen</title></info>
+            
+            <table><info><title>Zend_Service_Amazon_OfferSet Eigenschappen</title></info>
+                
                 <tgroup cols="3">
                     <thead>
                         <row>
@@ -468,7 +460,7 @@ foreach ($results as $result) {
                         <row>
                             <entry>LowestNewPrice</entry>
                             <entry>int</entry>
-                            <entry>Laagste prijs voor het item in &quot;Nieuw&quot; conditie</entry>
+                            <entry>Laagste prijs voor het item in "Nieuw" conditie</entry>
                         </row>
                         <row>
                             <entry>LowestNewPriceCurrency</entry>
@@ -480,7 +472,7 @@ foreach ($results as $result) {
                         <row>
                             <entry>LowestOldPrice</entry>
                             <entry>int</entry>
-                            <entry>Laagste prijs voor het item in &quot;Gebruikt&quot; conditie</entry>
+                            <entry>Laagste prijs voor het item in "Gebruikt" conditie</entry>
                         </row>
                         <row>
                             <entry>LowestOldPriceCurrency</entry>
@@ -492,22 +484,22 @@ foreach ($results as $result) {
                         <row>
                             <entry>TotalNew</entry>
                             <entry>int</entry>
-                            <entry>Totaal aantal beschikbare items in &quot;nieuw&quot; conditie</entry>
+                            <entry>Totaal aantal beschikbare items in "nieuw" conditie</entry>
                         </row>
                         <row>
                             <entry>TotalUsed</entry>
                             <entry>int</entry>
-                            <entry>Totaal aantal beschikbare items in &quot;gebruikt&quot; conditie</entry>
+                            <entry>Totaal aantal beschikbare items in "gebruikt" conditie</entry>
                         </row>
                         <row>
                             <entry>TotalCollectible</entry>
                             <entry>int</entry>
-                            <entry>Totaal aantal beschikbare items in &quot;verzamelaars&quot; conditie</entry>
+                            <entry>Totaal aantal beschikbare items in "verzamelaars" conditie</entry>
                         </row>
                         <row>
                             <entry>TotalRefurbished</entry>
                             <entry>int</entry>
-                            <entry>Totaal aantal beschikbare items in &quot;gerenoveerd&quot; conditie</entry>
+                            <entry>Totaal aantal beschikbare items in "gerenoveerd" conditie</entry>
                         </row>
                         <row>
                             <entry>Offers</entry>
@@ -522,19 +514,19 @@ foreach ($results as $result) {
             <para>
                 <link linkend="zend.service.amazon.classes">Terug naar de klasselijst</link>
             </para>
-        </sect4>
-    </sect3>
-    <sect3 id="zend.service.amazon.classes.offer">
-        <title>Zend_Service_Amazon_Offer</title>
+        </section>
+    </section>
+    <section xml:id="zend.service.amazon.classes.offer"><info><title>Zend_Service_Amazon_Offer</title></info>
+        
         <para>
             Elke aanbieding voor een item is een
             <code>Zend_Service_Amazon_Offer</code>
             object.
         </para>
-        <sect4 id="zend.service.amazon.classes.offer.properties">
-            <title>Zend_Service_Amazon_Offer Eigenschappen</title>
-            <table>
-                <title>Eigenschappen</title>
+        <section xml:id="zend.service.amazon.classes.offer.properties"><info><title>Zend_Service_Amazon_Offer Eigenschappen</title></info>
+            
+            <table><info><title>Eigenschappen</title></info>
+                
                 <tgroup cols="3">
                     <thead>
                         <row>
@@ -590,10 +582,10 @@ foreach ($results as $result) {
             <para>
                 <link linkend="zend.service.amazon.classes">Terug naar de klasselijst</link>
             </para>
-        </sect4>
-    </sect3>
-    <sect3 id="zend.service.amazon.classes.similarproduct">
-        <title>Zend_Service_Amazon_SimilarProduct</title>
+        </section>
+    </section>
+    <section xml:id="zend.service.amazon.classes.similarproduct"><info><title>Zend_Service_Amazon_SimilarProduct</title></info>
+        
         <para>
             Wanneer je naar items zoekt geeft Amazon ook een lijst van gelijksoortige producten terug die de
             zoekende persoon zouden kunnen interesseren. Elk van deze items is een
@@ -603,10 +595,10 @@ foreach ($results as $result) {
             Elk object bevat de informatie die je toelaat opeenvolgende verzoeken te maken om de volledige informatie
             van het item te verkrijgen.
         </para>
-        <sect4 id="zend.service.amazon.classes.similarproduct.properties">
-            <title>Eigenschappen</title>
-            <table>
-                <title>Zend_Service_Amazon_SimilarProduct Eigenschappen</title>
+        <section xml:id="zend.service.amazon.classes.similarproduct.properties"><info><title>Eigenschappen</title></info>
+            
+            <table><info><title>Zend_Service_Amazon_SimilarProduct Eigenschappen</title></info>
+                
                 <tgroup cols="3">
                     <thead>
                         <row>
@@ -632,18 +624,18 @@ foreach ($results as $result) {
             <para>
                 <link linkend="zend.service.amazon.classes">Terug naar de klasselijst</link>
             </para>
-        </sect4>
-    </sect3>
-    <sect3 id="zend.service.amazon.classes.accessories">
-        <title>Zend_Service_Amazon_Accessories</title>
+        </section>
+    </section>
+    <section xml:id="zend.service.amazon.classes.accessories"><info><title>Zend_Service_Amazon_Accessories</title></info>
+        
         <para>
             Accessoires voor het teruggegeven item worden vertegenwoordigd door
             <code>Zend_Service_Amazon_Accessories</code> objecten
         </para>
-        <sect4 id="zend.service.amazon.classes.accessories.properties">
-            <title>Eigenschappen</title>
-            <table>
-                <title>Zend_Service_Amazon_Accessories Eigenschappen</title>
+        <section xml:id="zend.service.amazon.classes.accessories.properties"><info><title>Eigenschappen</title></info>
+            
+            <table><info><title>Zend_Service_Amazon_Accessories Eigenschappen</title></info>
+                
                 <tgroup cols="3">
                     <thead>
                         <row>
@@ -669,17 +661,17 @@ foreach ($results as $result) {
             <para>
                 <link linkend="zend.service.amazon.classes">Terug naar de klasselijst</link>
             </para>
-        </sect4>
-    </sect3>
-    <sect3 id="zend.service.amazon.classes.customerreview">
-        <title>Zend_Service_Amazon_CustomerReview</title>
+        </section>
+    </section>
+    <section xml:id="zend.service.amazon.classes.customerreview"><info><title>Zend_Service_Amazon_CustomerReview</title></info>
+        
         <para>
             Elke klantrecensie wordt teruggegeven als een <code>Zend_Service_Amazon_CustomerReview</code> object.
         </para>
-        <sect4 id="zend.service.amazon.classes.customerreview.properties">
-            <title>Eigenschappen</title>
-            <table>
-                <title>Zend_Service_Amazon_CustomerReview Eigenschappen</title>
+        <section xml:id="zend.service.amazon.classes.customerreview.properties"><info><title>Eigenschappen</title></info>
+            
+            <table><info><title>Zend_Service_Amazon_CustomerReview Eigenschappen</title></info>
+                
                 <tgroup cols="3">
                     <thead>
                         <row>
@@ -730,17 +722,17 @@ foreach ($results as $result) {
             <para>
                 <link linkend="zend.service.amazon.classes">Terug naar de klasselijst</link>
             </para>
-        </sect4>
-    </sect3>
-    <sect3 id="zend.service.amazon.classes.editorialreview">
-        <title>Zend_Service_Amazon_EditorialReview</title>
+        </section>
+    </section>
+    <section xml:id="zend.service.amazon.classes.editorialreview"><info><title>Zend_Service_Amazon_EditorialReview</title></info>
+        
         <para>
             Elke uitgeversrecensie van een item is een <code>Zend_Service_Amazon_EditorialReview</code> object
         </para>
-        <sect4 id="zend.service.amazon.classes.editorialreview.properties">
-            <title>Eigenschappen</title>
-            <table>
-                <title>Zend_Service_Amazon_EditorialReview Eigenschappen</title>
+        <section xml:id="zend.service.amazon.classes.editorialreview.properties"><info><title>Eigenschappen</title></info>
+            
+            <table><info><title>Zend_Service_Amazon_EditorialReview Eigenschappen</title></info>
+                
                 <tgroup cols="3">
                     <thead>
                         <row>
@@ -766,17 +758,17 @@ foreach ($results as $result) {
             <para>
                 <link linkend="zend.service.amazon.classes">Terug naar de klasselijst</link>
             </para>
-        </sect4>
-    </sect3>
-    <sect3 id="zend.service.amazon.classes.listmania">
-        <title>Zend_Service_Amazon_Listmania</title>
+        </section>
+    </section>
+    <section xml:id="zend.service.amazon.classes.listmania"><info><title>Zend_Service_Amazon_Listmania</title></info>
+        
         <para>
             Elke ListMania resultaatlijst is een <code>Zend_Service_Amazon_Listmania</code> object.
         </para>
-        <sect4 id="zend.service.amazon.classes.listmania.properties">
-            <title>Eigenschappen</title>
-            <table>
-                <title>Zend_Service_Amazon_Listmania Eigenschappen</title>
+        <section xml:id="zend.service.amazon.classes.listmania.properties"><info><title>Eigenschappen</title></info>
+            
+            <table><info><title>Zend_Service_Amazon_Listmania Eigenschappen</title></info>
+                
                 <tgroup cols="3">
                     <thead>
                         <row>
@@ -802,7 +794,7 @@ foreach ($results as $result) {
             <para>
                 <link linkend="zend.service.amazon.classes">Terug naar de klasselijst</link>
             </para>
-        </sect4>
-    </sect3>
-</sect2>
-</sect1>
+        </section>
+    </section>
+</section>
+</section>

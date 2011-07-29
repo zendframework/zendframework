@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <config>
     <a extends="c">
-        <someKey>value_A</someKey>
+        <someKey>InvalidValue &undefined;</someKey>
     </a>
     <b extends="a">
         <someKey>value_B</someKey>

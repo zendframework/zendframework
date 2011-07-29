@@ -1,8 +1,11 @@
-<sect1 id="zend.dojo.introduction">
-    <title>הקדמה</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.introduction"><info><title>הקדמה</title></info>
+    
 
     <para>
-        Zend Framework מגיע עם <ulink url="http://dojotoolkit.org">Dojo Toolkit</ulink> לתמיכה בפיתוח אפליקציות אינטרנט מתקדמות.
+        Zend Framework מגיע עם <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org">Dojo Toolkit</link> לתמיכה בפיתוח אפליקציות אינטרנט מתקדמות.
          נקודות אינטגרציה בשימוש ב Dojo כוללות:
     </para>
 
@@ -18,7 +21,4 @@
         התיקיה בה נמצא Dojo היא  <code>externals/dojo/</code> בתיקיה הראשית של Zend Framework.
         זוהי הפצת מקור, אשר מכילה את כל ה JS של Dojo, קבצי בדיקות , וקבצים המשמשים בתור כלים לבנייה.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

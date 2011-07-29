@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15814 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.application.introduction">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.introduction"><info><title>Einführung</title></info>
+    
 
     <para>
         <classname>Zend_Application</classname> bietet eine Möglichkeit des Bootstrappings für
@@ -10,4 +10,4 @@
         Klassen und der Prüfung deren Abhängigkeit. Es nimmt auch auf die Einstellungen im
         <acronym>PHP</acronym> Environment acht und führt standardmäßig Autoloading durch.
     </para>
-</sect1>
+</section>

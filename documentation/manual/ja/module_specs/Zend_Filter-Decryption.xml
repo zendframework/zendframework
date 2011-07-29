@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21740 -->
-<sect2 id="zend.filter.set.decrypt">
-    <title>Decrypt</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.decrypt"><info><title>Decrypt</title></info>
+    
     <para>
         このフィルタは、指定した文字列を指定した設定で復号します。
         復号の際に、アダプタを使用します。実際には、 <acronym>PHP</acronym> の
@@ -16,8 +14,8 @@
         ここでは追加のメソッドや復号時に固有のことなどについてのみ説明します。
     </para>
 
-    <sect3 id="zend.filter.set.decrypt.mcrypt">
-        <title>Mcrypt の復号</title>
+    <section xml:id="zend.filter.set.decrypt.mcrypt"><info><title>Mcrypt の復号</title></info>
+        
         <para>
             <classname>Mcrypt</classname> で暗号化したコンテンツを復号するには、
             暗号化を行った際に指定したオプションが必要です。
@@ -58,10 +56,10 @@ print $decrypted;
                 設定内容に問題があることを mcrypt が検知すると、例外がスローされます。
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.decrypt.openssl">
-        <title>OpenSSL の復号</title>
+    <section xml:id="zend.filter.set.decrypt.openssl"><info><title>OpenSSL の復号</title></info>
+        
         <para>
             <classname>OpenSSL</classname> での復号は、暗号化と同様にシンプルです。
             しかし、コンテンツを暗号化した人からすべてのデータを受け取る必要があります。
@@ -163,8 +161,5 @@ $filter->setPassphrase('mypassphrase');
 $decrypted = $filter->filter('encoded_text_normally_unreadable');
 print $decrypted;
 ]]></programlisting>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.tag.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tag.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_Tag</classname> is a component suite which provides a facility
@@ -29,8 +28,8 @@
         item in it.
     </para>
 
-    <example id="zend.tag.example.using">
-        <title>Using Zend_Tag</title>
+    <example xml:id="zend.tag.example.using"><info><title>Using Zend_Tag</title></info>
+        
 
         <para>
             This example illustrates how to create a list of tags and spread
@@ -60,4 +59,4 @@ foreach ($list as $item) {
             the absolute values 10, 1 and 2.
         </para>
     </example>
-</sect1>
+</section>

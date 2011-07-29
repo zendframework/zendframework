@@ -1,15 +1,16 @@
-<sect1 id="zend.controller.front">
-    <title>前端控制器</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.front"><info><title>前端控制器</title></info>
+    
 
-    <sect2 id="zend.controller.front.overview">
-        <title>概述</title>
+    <section xml:id="zend.controller.front.overview"><info><title>概述</title></info>
+        
 
         <para>
-            <code>Zend_Controller_Front</code>实现了<ulink url="http://en.wikipedia.org/wiki/Model-view-controller">模型-视图-控制器 (MVC)</ulink>应用程序的<ulink url="http://www.martinfowler.com/eaaCatalog/frontController.html">前端控制器模式</ulink>。目的在于初始化请求环境，并路由到来的请求，接着分发任何发现的动作；收集所有的响应，在整个过程完成时就其返回。
+            <code>Zend_Controller_Front</code>实现了<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Model-view-controller">模型-视图-控制器 (MVC)</link>应用程序的<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.martinfowler.com/eaaCatalog/frontController.html">前端控制器模式</link>。目的在于初始化请求环境，并路由到来的请求，接着分发任何发现的动作；收集所有的响应，在整个过程完成时就其返回。
         </para>
 
         <para>
-            <code>Zend_Controller_Front</code>也实现了<ulink url="http://en.wikipedia.org/wiki/Singleton_pattern">单件（Singleton）模式</ulink>，意味着任何时候，都只可能有一个有效实例。这使得它可以作为注册表，供分发过程中的其他对象引用。
+            <code>Zend_Controller_Front</code>也实现了<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Singleton_pattern">单件（Singleton）模式</link>，意味着任何时候，都只可能有一个有效实例。这使得它可以作为注册表，供分发过程中的其他对象引用。
         </para>
 
         <para>
@@ -20,8 +21,8 @@
             前端控制器最至少需要一个或多个包含<link linkend="zend.controller.action">动作控制器</link>的目录的路径来完成工作。还有大量的方法可供调用，进一步裁剪前端控制器以及它的助手类环境。
         </para>
 
-        <note>
-            <title>默认的行为</title>
+        <note><info><title>默认的行为</title></info>
+            
             <para>
                 默认地，前端控制器加载<link linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler</link>插件，以及<link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>动作助手，分别为了简化控制器中的错误处理和视图渲染。
             </para>
@@ -33,8 +34,8 @@
             <programlisting role="php"><![CDATA[
 // Disable the ErrorHandler plugin:
 $front->setParam('noErrorHandler', true);
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
             <para>
                 如需禁用<code>ViewRenderer</code>，调用<code>dispatch()</code>前执行下面代码：
@@ -43,20 +44,20 @@ $front->setParam('noErrorHandler', true);
             <programlisting role="php"><![CDATA[
 // Disable the ViewRenderer helper:
 $front->setParam('noViewRenderer', true);
-]]>
-            </programlisting>
-        </note>
-    </sect2>
 
-    <sect2 id="zend.controller.front.methods.primary">
-        <title>主要方法</title>
+            ]]></programlisting>
+        </note>
+    </section>
+
+    <section xml:id="zend.controller.front.methods.primary"><info><title>主要方法</title></info>
+        
 
         <para>
             前端控制器有很多建立其环境的访问器。但是，有三个是开启前端控制器功能的主要方法：
         </para>
 
-        <sect3 id="zend.controller.front.methods.primary.getinstance">
-            <title>getInstance()</title>
+        <section xml:id="zend.controller.front.methods.primary.getinstance"><info><title>getInstance()</title></info>
+            
 
             <para>
                 <code>getInstance()</code>方法用来获取前端控制器实例。因为前端控制器实现了单件模式，这可能是唯一创建前端控制器对象的方法。
@@ -64,12 +65,12 @@ $front->setParam('noViewRenderer', true);
 
             <programlisting role="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
-]]>
-            </programlisting>
-        </sect3>
 
-        <sect3 id="zend.controller.front.methods.primary.setcontrollerdirectory">
-            <title>setControllerDirectory() 和 addControllerDirectory()</title>
+            ]]></programlisting>
+        </section>
+
+        <section xml:id="zend.controller.front.methods.primary.setcontrollerdirectory"><info><title>setControllerDirectory() 和 addControllerDirectory()</title></info>
+            
 
             <para>
                 <code>setControllerDirectory()</code>通知<link linkend="zend.controller.dispatcher">分发器</link>到哪查找动作控制器<link linkend="zend.controller.action">action controller</link>类文件。参数接受单一路径和模块/路径对关联数组。
@@ -92,8 +93,8 @@ $front->setControllerDirectory(array(
 
 // Add a 'foo' module directory:
 $front->addControllerDirectory('../modules/foo/controllers', 'foo');
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
             <note>
                 <para>
@@ -104,15 +105,14 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
             <para>
                 可以通过<code>getControllerDirectory()</code>获取控制器目录的当前设置；它将返回一个模块/目录对关联数组。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.front.methods.primary.addmoduledirectory">
-            <title>addModuleDirectory() and getModuleDirectory()</title>
+        <section xml:id="zend.controller.front.methods.primary.addmoduledirectory"><info><title>addModuleDirectory() and getModuleDirectory()</title></info>
+            
 
             <para>
                 前端控制器的一个功能是你可以
-                <link
-                    linkend="zend.controller.modular">定义一个模块目录结构
+                <link linkend="zend.controller.modular">定义一个模块目录结构
                 </link>
                 来创建独立的组件，被叫做“模块”。
             </para>
@@ -131,10 +131,10 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
                 然后，如果你想确定特定模块或当前模块路径，调用 <code>getModuleDirectory()</code>，
                 可选地传递模块名来获得模块目录。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.front.methods.primary.dispatch">
-            <title>dispatch()</title>
+        <section xml:id="zend.controller.front.methods.primary.dispatch"><info><title>dispatch()</title></info>
+            
 
             <para>
                 <code>dispatch(Zend_Controller_Request_Abstract $request = null, Zend_Controller_Response_Abstract $response = null)</code>完成前端控制器最繁重的工作。该方法带有可选的参数<link linkend="zend.controller.request">请求对象</link>和/或<link linkend="zend.controller.response">响应对象</link>，允许开发人员为每一个传入定制的对象。
@@ -161,10 +161,10 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
             <para>
                         路由只发生一次，当调用<code>dispatch()</code>时利用请求对象中的值。分发发生在一个循环中;请求可能指示	分发多个动作，或者控制器或插件可能重置请求对象，强制分发附加的动作。所有都完成后，前端控制器返回响应对象。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.front.methods.primary.run">
-            <title>run()</title>
+        <section xml:id="zend.controller.front.methods.primary.run"><info><title>run()</title></info>
+            
 
             <para>
                 <code>Zend_Controller_Front::run($path)</code>是静态方法，只带一个参数，就是指向包含控制器的目录的路径。它首先通过<link linkend="zend.controller.front.methods.primary.getinstance">getInstance()</link>获取前端控制器实例，然后通过<link linkend="zend.controller.front.methods.primary.setcontrollerdirectory">setControllerDirectory()</link>注册传入的路径，最后<link linkend="zend.controller.front.methods.primary.dispatch">分发</link>。
@@ -178,13 +178,13 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
 // Instantiate front controller, set controller directory, and dispatch in one
 // easy step:
 Zend_Controller_Front::run('../application/controllers');
-]]>
-            </programlisting>
-        </sect3>
-    </sect2>
 
-    <sect2 id="zend.controller.front.methods.environment">
-        <title>环境访问器方法</title>
+            ]]></programlisting>
+        </section>
+    </section>
+
+    <section xml:id="zend.controller.front.methods.environment"><info><title>环境访问器方法</title></info>
+        
 
         <para>
                   除了上面所列的方法以外，还有很多访问器方法可以影响前端控制器环境 —— 因而也影响前端控制器代理（delegate）的类的环境。
@@ -265,7 +265,7 @@ Zend_Controller_Front::run('../application/controllers');
                 </para>
 
                 <para>
-                              想知道更多信息的话，请阅读<xref linkend="zend.controller.exceptions" />。
+                              想知道更多信息的话，请阅读<xref linkend="zend.controller.exceptions"/>。
                 </para>
             </listitem>
 
@@ -279,10 +279,10 @@ Zend_Controller_Front::run('../application/controllers');
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.front.methods.params">
-        <title>前端控制器参数</title>
+    <section xml:id="zend.controller.front.methods.params"><info><title>前端控制器参数</title></info>
+        
 
         <para>
                   介绍里曾提到前端控制器可以用作各种控制器组件的注册表。它通过一个"param"家族的方法来做到这些。这些方法允许通过前端控制器注册任意类型的数据 —— 对象和变量，可以在分发链中的任何时候获取。这些变量被传递到路由器，分发器，以及动作控制器。这些方法包括：
@@ -331,7 +331,7 @@ Zend_Controller_Front::run('../application/controllers');
                 </para>
 
                 <para>
-                    阅读<xref linkend="zend.controller.exceptions.internal" />获得使用该设定的更详尽信息。
+                    阅读<xref linkend="zend.controller.exceptions.internal"/>获得使用该设定的更详尽信息。
                 </para>
             </listitem>
 
@@ -353,10 +353,10 @@ Zend_Controller_Front::run('../application/controllers');
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.front.subclassing">
-        <title>继承前端控制器</title>
+    <section xml:id="zend.controller.front.subclassing"><info><title>继承前端控制器</title></info>
+        
 
         <para>
                   要继承前端控制器，至少需要覆盖<code>getInstance()</code>方法：
@@ -374,8 +374,8 @@ class My_Controller_Front extends Zend_Controller_Front
         return self::$_instance;
     }
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
                   覆盖<code>getInstance()</code>保证后面调用<code>Zend_Controller_Front::getInstance()</code>会返回子类的实例，而不是<code>Zend_Controller_Front</code>实例 —— 这对于一些可替换的路由器和视图助手非常有用。
@@ -384,8 +384,5 @@ class My_Controller_Front extends Zend_Controller_Front
         <para>
                   通常不需要继承前端控制器，除非你需要增加新的功能（比如，一个插件自动加载器，或者一个方法来指定动作助手路径）。你想要改动的地方可能包括修改控制器目录的存储方式，使用的默认路由器以及分发器。
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

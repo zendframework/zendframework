@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22757 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.search.lucene.best-practice">
-    <title>Die besten Anwendungen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.best-practice"><info><title>Die besten Anwendungen</title></info>
+    
 
-    <sect2 id="zend.search.lucene.best-practice.field-names">
-        <title>Feldnamen</title>
+    <section xml:id="zend.search.lucene.best-practice.field-names"><info><title>Feldnamen</title></info>
+        
 
         <para>
             Es gibt keine Begrenzungen für Feldnamen in <classname>Zend_Search_Lucene</classname>.
@@ -20,8 +18,7 @@
         <para>
             Die <classname>Zend_Search_Lucene_Search_QueryHit</classname> <property>id</property>
             und <property>score</property> Eigenschaften referieren immer zur internen Lucene
-            Dokumenten Id und Treffer- <link
-                linkend="zend.search.lucene.searching.results-scoring">Anzahl</link>. Wenn ein
+            Dokumenten Id und Treffer- <link linkend="zend.search.lucene.searching.results-scoring">Anzahl</link>. Wenn ein
             indiziertes Dokument die gleichen Felder gespeichert hat, muß die
             <methodname>getDocument()</methodname> Methode verwendet werden um auf Sie zuzugreifen:
         </para>
@@ -52,10 +49,10 @@ foreach ($hits as $hit) {
     $title = $hit->getDocument()->title;
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.best-practice.indexing-performance">
-        <title>Geschwindigkeit von Indezes</title>
+    <section xml:id="zend.search.lucene.best-practice.indexing-performance"><info><title>Geschwindigkeit von Indezes</title></info>
+        
 
         <para>
             Die Geschwindigkeit von Indezes ist ein Kompromiss zwischen verwendeten Ressourcen, der
@@ -289,10 +286,10 @@ $index->optimize();
             <emphasis>MaxMergeDocs</emphasis> herumgespielt werden um die beste Geschwindigkeit für
             die Indizieren per Batch zu erhalten.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.best-practice.shutting-down">
-        <title>Index wärend des Herunterfahrens</title>
+    <section xml:id="zend.search.lucene.best-practice.shutting-down"><info><title>Index wärend des Herunterfahrens</title></info>
+        
 
         <para>
             Die <classname>Zend_Search_Lucene</classname> Instanz führt einiges an Arbeit während
@@ -361,14 +358,13 @@ $index->commit();
 ]]></programlisting>
 
         <para>
-            Diese Möglichkeit wird auch im Kapitel "<link
-                linkend="zend.search.lucene.advanced.static">Fortgeschrittene Verwendung von Indezes
+            Diese Möglichkeit wird auch im Kapitel "<link linkend="zend.search.lucene.advanced.static">Fortgeschrittene Verwendung von Indezes
                 als statische Eigenschaften</link>" beschrieben.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.best-practice.unique-id">
-        <title>Dokumente anhand der eindeutigen Id erhalten</title>
+    <section xml:id="zend.search.lucene.best-practice.unique-id"><info><title>Dokumente anhand der eindeutigen Id erhalten</title></info>
+        
 
         <para>
             Eine übliche Praxis ist es eindeutige Dokument Id's im Index zu speichern. Beispiele
@@ -418,10 +414,10 @@ foreach ($docIds as $id) {
     ...
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.best-practice.memory-usage">
-        <title>Speicherverwendung</title>
+    <section xml:id="zend.search.lucene.best-practice.memory-usage"><info><title>Speicherverwendung</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> ist ein relativ speicherintensives Modul.
@@ -477,10 +473,10 @@ foreach ($docIds as $id) {
             Index Optimierung (komplett oder teilweise) verwendet stream-artiges Bearbeiten von
             Daten und benötigt nicht viel Speicher.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.best-practice.encoding">
-        <title>Verschlüsselung</title>
+    <section xml:id="zend.search.lucene.best-practice.encoding"><info><title>Verschlüsselung</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> arbeitet intern mit UTF-8 Strings. Das
@@ -582,10 +578,10 @@ $hits = $index->find($queryStr);
             das Kapitel <link linkend="zend.search.lucene.charset">Zeichensatz</link> der
             Dokumentation für Details.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.best-practice.maintenance">
-        <title>Index Wartung</title>
+    <section xml:id="zend.search.lucene.best-practice.maintenance"><info><title>Index Wartung</title></info>
+        
 
         <para>
             Es sollte klar sein das <classname>Zend_Search_Lucene</classname>, genauso wie jede
@@ -619,5 +615,5 @@ $hits = $index->find($queryStr);
             es notwendig ist. Diese Praxis reduziert die Wiederherstellungszeit des Index
             dramatisch.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

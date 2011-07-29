@@ -1,5 +1,6 @@
-<sect1 id="zend.view.controllers">
-    <title>Controller Scripts</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.controllers"><info><title>Controller Scripts</title></info>
+    
 
     <para>
         De controller is waar je Zend_View instantieert en configureert.
@@ -7,9 +8,9 @@
         output weer te geven door middel van een bepaald script.
     </para>
 
-    <sect2 id="zend.view.controllers.assign">
+    <section xml:id="zend.view.controllers.assign"><info><title>Variabelen toewijzen</title></info>
 
-        <title>Variabelen toewijzen</title>
+        
 
         <para>
             Je controller script zou de nodige variabelen aan het view moeten
@@ -23,8 +24,8 @@ $view = new Zend_View();
 $view->a = "Hooi";
 $view->b = "Bij";
 $view->c = "Zee";
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
         <para>
             Dit kan wel vervelend zijn als je reeds alle waarden die
@@ -56,8 +57,8 @@ $obj->a = "Hooi";
 $obj->b = "Bij";
 $obj->c = "Zee";
 $view->assign((array) $obj);
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
         <para>
             Anderzijds kan je de toewijzingsmethode gebruiken om
@@ -70,14 +71,14 @@ $view = new Zend_View();
 $view->assign('a', "Hooi");
 $view->assign('b', "Bij");
 $view->assign('c', "Zee");
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.controllers.render">
+    <section xml:id="zend.view.controllers.render"><info><title>Een View Script weergeven</title></info>
 
-        <title>Een View Script weergeven</title>
+        
 
         <para>
             Eenmaal je al de nodige variabelen hebt toegewezen zou de controller
@@ -93,20 +94,20 @@ $view->a = "Hooi";
 $view->b = "Bij";
 $view->c = "Zee";
 echo $view->render('eenView.php');
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.controllers.script-paths">
+    <section xml:id="zend.view.controllers.script-paths"><info><title>View Script Paden</title></info>
 
-        <title>View Script Paden</title>
+        
 
         <para>
             Standaard verwacht Zend_View dat je view scripts relatief zijn
             tenoverstaan van het aanroepende script. Bijvoorbeeld, als je controller
             script zich in "/map/naar/toepassing/controllers" bevindt en het roept
-            $view->render('eenView.php') op, zal Zend_View naar
+            $view-&gt;render('eenView.php') op, zal Zend_View naar
             "/map/naar/toepassing/controllers/eenView.php" zoeken.
         </para>
 
@@ -119,11 +120,11 @@ echo $view->render('eenView.php');
         <programlisting role="php"><![CDATA[<?php
 $view = new Zend_View();
 $view->setScriptPath('/map/naar/toepassing/views');
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
         <para>
-            Als je nu $view->render('eenView.php') oproept zal het naar
+            Als je nu $view-&gt;render('eenView.php') oproept zal het naar
             "/pad/naar/toepassing/views/eenView.php' kijken.
         </para>
 
@@ -146,12 +147,9 @@ $view->addScriptPath('/pad/naar/persoonlijk/');
 // eerst kijken naar "pad/naar/persoonlijk/boeklijst.php", dan naar
 // "/pad/naar/toepassing/views/boeklijst.php", en uiteindelijk in
 // de huidige map naar "boeklijst.php".
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.test.phpunit.testing">
-    <title>Testing your Controllers and MVC Applications</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.testing"><info><title>Testing your Controllers and MVC Applications</title></info>
+    
 
     <para>
         Once you have your bootstrap in place, you can begin testing. Testing
@@ -78,8 +77,8 @@ class FooControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         Now that the request is made, it's time to start making assertions against it.
     </para>
 
-    <sect3 id="zend.test.phpunit.testing.redirector">
-        <title>Controller Tests and the Redirector Action Helper</title>
+    <section xml:id="zend.test.phpunit.testing.redirector"><info><title>Controller Tests and the Redirector Action Helper</title></info>
+        
 
         <important>
             <para>
@@ -125,8 +124,5 @@ class MyController extends Zend_Controller_Action
                 currently.
             </para>
         </important>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

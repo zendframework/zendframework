@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20810 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.session.savehandler.dbtable">
-    <title>Zend_Session_SaveHandler_DbTable</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.savehandler.dbtable"><info><title>Zend_Session_SaveHandler_DbTable</title></info>
+    
 
     <para>
         Das Basis Setup für <classname>Zend_Session_SaveHandler_DbTable</classname> muß zumindest
@@ -10,12 +8,12 @@
         Objekt beschrieben werden: primary, ist der Primary-Key und standardmäßig nur die
         SessionID welche standardmäßig ein String der Länge 32 ist; modified, ist der
         Unix-Timestamp des Datums der letzten Änderung; lifetime, ist die Lebenszeit der Session
-        (<command>modified + lifetime > time();</command>); und data, sind die serialisierten
+        (<command>modified + lifetime &gt; time();</command>); und data, sind die serialisierten
         Daten die in der Session gespeichert werden.
     </para>
 
-    <example id="zend.session.savehandler.dbtable.basic">
-        <title>Basis Setup</title>
+    <example xml:id="zend.session.savehandler.dbtable.basic"><info><title>Basis Setup</title></info>
+        
 
         <programlisting language="SQL"><![CDATA[
 CREATE TABLE `session` (
@@ -63,8 +61,8 @@ Zend_Session::start();
         <classname>Zend_Session_SaveHandler_DbTable</classname> verwenden.
     </para>
 
-    <example id="zend.session.savehandler.dbtable.multi-column-key">
-        <title>Mehr-Spalten Primary-Keys verwenden</title>
+    <example xml:id="zend.session.savehandler.dbtable.multi-column-key"><info><title>Mehr-Spalten Primary-Keys verwenden</title></info>
+        
 
         <programlisting language="SQL"><![CDATA[
 CREATE TABLE `session` (
@@ -110,4 +108,4 @@ Zend_Session::start();
 // Zend_Session wie normal verwenden
 ]]></programlisting>
     </example>
-</sect1>
+</section>

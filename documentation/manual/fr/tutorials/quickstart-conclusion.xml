@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19996 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.quickstart.conclusion">
-    <title>Félicitations&#160;!</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.conclusion"><info><title>Félicitations !</title></info>
+    
 
     <para>
         Vous venez de construire une application très simple en utilisant la plupart des composants
@@ -12,6 +12,6 @@
         Le <link linkend="reference">Guide de référence</link> possède de nombreuses d'informations
         sur les composants que vous avez utilisé dans le guide de démarrage (QuickStart) et ainsi
         que sur les autres composants. Nous espérons que vous trouverez le Zend Framework utile
-        et plus important encore - fun&#160;!
+        et plus important encore - fun !
     </para>
-</sect1>
+</section>

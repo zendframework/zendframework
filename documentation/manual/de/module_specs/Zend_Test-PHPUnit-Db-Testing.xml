@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20807 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.test.phpunit.db.testing">
-    <title>Verwendung, API und Erweiterungspunkte</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.db.testing"><info><title>Verwendung, API und Erweiterungspunkte</title></info>
+    
 
     <para>
         Die Quickstart hat bereits eine gute Einführung darin gegeben wie Datenbank Tests durch
@@ -11,8 +9,8 @@
         <classname>Zend_Test_PHPUnit_Db</classname> Komponente kommt und wie diese intern arbeitet.
     </para>
 
-    <note>
-        <title>Einige Hinweise über das Testen von Datenbanken</title>
+    <note><info><title>Einige Hinweise über das Testen von Datenbanken</title></info>
+        
 
         <para>
             So wie der Controller TestCase eine Anwendung auf dem Level der Integration testet,
@@ -32,8 +30,8 @@
         </para>
     </note>
 
-    <sect3 id="zend.test.phpunit.db.testing.testcase">
-        <title>Die Klasse Zend_Test_PHPUnit_DatabaseTestCase</title>
+    <section xml:id="zend.test.phpunit.db.testing.testcase"><info><title>Die Klasse Zend_Test_PHPUnit_DatabaseTestCase</title></info>
+        
 
         <para>
             Die Klasse <classname>Zend_Test_PHPUnit_DatabaseTestCase</classname> ist von
@@ -110,13 +108,12 @@
 
         <para>
             Die nächste Tabelle listet nur die neuen Methoden verglichen mit
-            <classname>PHPUnit_Extensions_Database_TestCase</classname> auf, dessen <ulink
-                url="http://www.phpunit.de/manual/current/en/database.html">API in der
-                Dokumentation von PHPUnit dokumentiert ist</ulink>.
+            <classname>PHPUnit_Extensions_Database_TestCase</classname> auf, dessen <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.phpunit.de/manual/current/en/database.html">API in der
+                Dokumentation von PHPUnit dokumentiert ist</link>.
         </para>
 
-        <table id="zend.test.phpunit.db.testing.testcase.api-methods">
-            <title>Die API Methoden von Zend_Test_PHPUnit_DatabaseTestCase</title>
+        <table xml:id="zend.test.phpunit.db.testing.testcase.api-methods"><info><title>Die API Methoden von Zend_Test_PHPUnit_DatabaseTestCase</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -197,10 +194,10 @@
                 </tbody>
             </tgroup>
         </table>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.test.phpunit.db.testing.controllerintegration">
-        <title>Integration von Datenbank Tests mit dem ControllerTestCase</title>
+    <section xml:id="zend.test.phpunit.db.testing.controllerintegration"><info><title>Integration von Datenbank Tests mit dem ControllerTestCase</title></info>
+        
 
         <para>
             Weil <acronym>PHP</acronym> die mehrfache Vererbung nicht unterstützt ist es nicht
@@ -212,8 +209,8 @@
             TestCases verwendet werden können.
         </para>
 
-        <example id="zend.test.phpunit.db.testing.controllerintegration.example">
-            <title>Beispiele für die Integration der Datenbank</title>
+        <example xml:id="zend.test.phpunit.db.testing.controllerintegration.example"><info><title>Beispiele für die Integration der Datenbank</title></info>
+            
 
             <para>
                 Dieses Beispiel erweitert den User Controller Test aus der
@@ -254,5 +251,5 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
                 genauso wie DatabaseTestCase intern arbeitet.
             </para>
         </example>
-    </sect3>
-</sect2>
+    </section>
+</section>

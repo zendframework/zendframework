@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20763 -->
-<sect1 id="zend.auth.introduction">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.introduction"><info><title>導入</title></info>
 
-    <title>導入</title>
+    
 
     <para>
         <classname>Zend_Auth</classname> は、認証のための <acronym>API</acronym> を提供します。
@@ -34,9 +32,9 @@
         </para>
     </note>
 
-    <sect2 id="zend.auth.introduction.adapters">
+    <section xml:id="zend.auth.introduction.adapters"><info><title>アダプタ</title></info>
 
-        <title>アダプタ</title>
+        
 
         <para>
             <classname>Zend_Auth</classname> アダプタの使用目的は、
@@ -106,11 +104,11 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
             から派生した例外をスローしなければなりません。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.introduction.results">
+    <section xml:id="zend.auth.introduction.results"><info><title>結果</title></info>
 
-        <title>結果</title>
+        
 
         <para>
             <classname>Zend_Auth</classname> アダプタは、<methodname>authenticate()</methodname> の結果として
@@ -197,11 +195,11 @@ switch ($result->getCode()) {
 }
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.introduction.persistence">
+    <section xml:id="zend.auth.introduction.persistence"><info><title>ID の永続性</title></info>
 
-        <title>ID の永続性</title>
+        
 
         <para>
             認証情報 (パスワードなど) を含む認証を要求するのは便利なものですが、
@@ -216,9 +214,9 @@ switch ($result->getCode()) {
             複数リクエスト間でステート (状態) を保持し続けられるようになりました。
         </para>
 
-        <sect3 id="zend.auth.introduction.persistence.default">
+        <section xml:id="zend.auth.introduction.persistence.default"><info><title>PHP セッションにおけるデフォルトの持続性</title></info>
 
-            <title>PHP セッションにおけるデフォルトの持続性</title>
+            
 
             <para>
                  デフォルトでは、<classname>Zend_Auth</classname> は、
@@ -241,9 +239,9 @@ switch ($result->getCode()) {
                 </para>
             </note>
 
-            <example id="zend.auth.introduction.persistence.default.example">
+            <example xml:id="zend.auth.introduction.persistence.default.example"><info><title>セッション名前空間の変更</title></info>
 
-                <title>セッション名前空間の変更</title>
+                
 
                 <para>
                     <classname>Zend_Auth_Storage_Session</classname> は、セッション名前空間として
@@ -272,11 +270,11 @@ $result = $auth->authenticate($authAdapter);
 
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.auth.introduction.persistence.custom">
+        <section xml:id="zend.auth.introduction.persistence.custom"><info><title>独自のストレージの実装</title></info>
 
-            <title>独自のストレージの実装</title>
+            
 
             <para>
                 <classname>Zend_Auth_Storage_Session</classname> とは異なる形式で、
@@ -285,9 +283,9 @@ $result = $auth->authenticate($authAdapter);
                 <methodname>Zend_Auth::setStorage()</methodname> で設定します。
             </para>
 
-            <example id="zend.auth.introduction.persistence.custom.example">
+            <example xml:id="zend.auth.introduction.persistence.custom.example"><info><title>独自のストレージクラスの使用法</title></info>
 
-                <title>独自のストレージクラスの使用法</title>
+                
 
                 <para>
                     ID を持続させるストレージクラスを
@@ -374,13 +372,13 @@ $result = Zend_Auth::getInstance()->authenticate($authAdapter);
 
             </example>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.introduction.using">
+    <section xml:id="zend.auth.introduction.using"><info><title>使用法</title></info>
 
-        <title>使用法</title>
+        
 
         <para>
             <classname>Zend_Auth</classname> の使用法には、次の二通りがあります。
@@ -477,9 +475,6 @@ if (!$result->isValid()) {
 }
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,14 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 18621 -->
-<sect2 id="zend.application.available-resources.navigation">
-    <title>Zend_Application_Resource_Navigation</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.navigation"><info><title>Zend_Application_Resource_Navigation</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Navigation</classname>は、
         <classname>Zend_Navigation</classname>インスタンスを構成するために使用できます。
-        構成オプションは、<link
-            linkend="zend.navigation.pages.common.options"><classname>Zend_Navigation</classname>
+        構成オプションは、<link linkend="zend.navigation.pages.common.options"><classname>Zend_Navigation</classname>
             オプション</link>毎にあります。
     </para>
 
@@ -19,8 +16,8 @@
         そこから、後でそれを取得するかもしれません。
     </para>
 
-    <example id="zend.application.available-resources.navigation.configExample">
-        <title>ナビゲーション・リソース構成の例</title>
+    <example xml:id="zend.application.available-resources.navigation.configExample"><info><title>ナビゲーション・リソース構成の例</title></info>
+        
 
         <para>
             下記は、ナビゲーション・リソースを設定する方法を示す、
@@ -37,4 +34,4 @@ resources.navigation.pages.page1.pages.page2.label = "Label of the second page"
 resources.navigation.pages.page1.pages.page2.uri = "/url/to/page/2"
 ]]></programlisting>
     </example>
-</sect2>
+</section>

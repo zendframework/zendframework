@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20763 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.modules">
-    <title>Zend_Application_Resource_Modules</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.modules"><info><title>Zend_Application_Resource_Modules</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Modules</classname> est utilisé pour initialiser
@@ -23,7 +21,7 @@
         configuration, vous devez créer un tableau vide.
         Since the Modules resource does not take any arguments by default, in order to enable it
         via configuration, you need to create it as an empty array. En configuration de type
-        <acronym>INI</acronym> cela ressemblerait à ceci&#160;:
+        <acronym>INI</acronym> cela ressemblerait à ceci :
     </para>
 
     <programlisting language="ini"><![CDATA[
@@ -31,7 +29,7 @@ resources.modules[] =
 ]]></programlisting>
 
     <para>
-        En configuration de type <acronym>XML</acronym> cela ressemblerait à ceci&#160;:
+        En configuration de type <acronym>XML</acronym> cela ressemblerait à ceci :
     </para>
 
     <programlisting language="xml"><![CDATA[
@@ -45,7 +43,7 @@ resources.modules[] =
 
     <para>
         En utilisant un tableau <acronym>PHP</acronym>, il suffit de le créer comme un tableau
-        vide&#160;:
+        vide :
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -56,12 +54,11 @@ $options = array(
 );
 ]]></programlisting>
 
-    <note>
-        <title>Dépendance envers le contrôleur frontal</title>
+    <note><info><title>Dépendance envers le contrôleur frontal</title></info>
+        
 
         <para>
-            La ressource Modules possède une dépendance envers <link
-                linkend="zend.application.available-resources.frontcontroller">la ressource Front
+            La ressource Modules possède une dépendance envers <link linkend="zend.application.available-resources.frontcontroller">la ressource Front
             Controller</link>. Vous pouvez bien sûr proposer votre propre implémentation de la
             ressource du contrôleur frontal, si tant est que sa classe se termine par
             "Frontcontroller", ou, si vous choisissez d'utiliser une méthode d'initialisation,
@@ -69,8 +66,8 @@ $options = array(
         </para>
     </note>
 
-    <example id="zend.application.available-resources.modules.configExample">
-        <title>Configurer les modules</title>
+    <example xml:id="zend.application.available-resources.modules.configExample"><info><title>Configurer les modules</title></info>
+        
         <para>
             Vous pouvez spécifier la configuration en utilisant le nom du module comme préfixe
             de section dans le fichier de configuration.
@@ -114,8 +111,8 @@ news.resources.db.params.dbname = "news"
 ]]></programlisting>
     </example>
 
-    <example id="zend.application.available-resources.modules.retrieveBootstrapExample">
-        <title>Récupérer un bootstrap de module</title>
+    <example xml:id="zend.application.available-resources.modules.retrieveBootstrapExample"><info><title>Récupérer un bootstrap de module</title></info>
+        
 
         <para>
             Il peut être utile de pouvoir récupérer l'objet bootstrap de votre module, pour en
@@ -130,4 +127,4 @@ $moduleBootstraps = $resource->getExecutedBootstraps();
 $newsBootstrap = $moduleBootstraps['news'];
 ]]></programlisting>
     </example>
-</sect2>
+</section>

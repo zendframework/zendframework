@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20827 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.navigation.pages.common">
-    <title>Übliche Seiten Features</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.common"><info><title>Übliche Seiten Features</title></info>
+    
 
     <para>
         Alle Seiten Klassen müssen <classname>Zend_Navigation_Page</classname> erweitern, und
@@ -24,8 +22,8 @@
         <link linkend="zend.navigation.pages.custom">Erstellung eigener Seiten Typen</link>.
     </para>
 
-    <table id="zend.navigation.pages.common.options">
-        <title>Übliche Seiten Optionen</title>
+    <table xml:id="zend.navigation.pages.common.options"><info><title>Übliche Seiten Optionen</title></info>
+        
 
         <tgroup cols="4">
             <thead>
@@ -99,7 +97,7 @@
                         Array ist ein Schlüssel-Wert Paar, wobei der Schlüssel den Relation/Link
                         Typ bestimmt, und der Wert ist ein Pointer zu der verlinkten Seite. Ein
                         Beispiel eines Schlüssel-Wert Paares ist
-                        <code>'alternate' => 'format/plain.html'</code>. Um die volle Flexibilität
+                        <code>'alternate' =&gt; 'format/plain.html'</code>. Um die volle Flexibilität
                         zu erlauben, gibt es keine Einschränkungen an den Relationswerten. Der Wert
                         muß kein String sein. Lesen Sie über <code>rel</code> und <code>rev</code>
                         im <link linkend="zend.view.helpers.initial.navigation.links">Kapitel der
@@ -155,8 +153,7 @@
 
                     <entry>
                         <acronym>ACL</acronym> Ressource die mit der Seite verknüpft werden soll.
-                        Lesen Sie mehr im <link
-                            linkend="zend.view.helpers.initial.navigation.acl">Kapitel
+                        Lesen Sie mehr im <link linkend="zend.view.helpers.initial.navigation.acl">Kapitel
                             <acronym>ACL</acronym> Integration in View Helfern</link>.
                     </entry>
                 </row>
@@ -168,8 +165,7 @@
 
                     <entry>
                         <acronym>ACL</acronym> Privileg das mit der Seite assoziiert werden soll.
-                        Lesen Sie mehr im <link
-                            linkend="zend.view.helpers.initial.navigation.acl">Kapitel über
+                        Lesen Sie mehr im <link linkend="zend.view.helpers.initial.navigation.acl">Kapitel über
                             <acronym>ACL</acronym> Integration in View Helfern</link>.
                     </entry>
                 </row>
@@ -183,7 +179,7 @@
                         Ob die Seite für die aktuelle Anfrage als aktiv betrachtet werden soll.
                         Wenn active <constant>FALSE</constant> ist oder nicht angegeben wird, werden
                         <acronym>MVC</acronym> Seiten Ihr Eigenschaften gegen das Anfrage Objekt
-                        prüfen wenn <code>$page->isActive()</code> aufgerufen wird.
+                        prüfen wenn <code>$page-&gt;isActive()</code> aufgerufen wird.
                     </entry>
                 </row>
 
@@ -220,29 +216,29 @@
         </tgroup>
     </table>
 
-    <note>
-        <title>Eigene Eigenschaften</title>
+    <note><info><title>Eigene Eigenschaften</title></info>
+        
 
         <para>
             Alle Seiten unterstützen das Setzen und Empfangen von eigenen Eigenschaften durch
             Verwendung der magischen Methoden <methodname>__set($name, $value)</methodname>,
             <methodname>__get($name)</methodname>, <methodname>__isset($name)</methodname> und
             <methodname>__unset($name)</methodname>. Eigene Eigenschaften können jeden Wert haben,
-            und sind im Array enthalten das von <code>$page->toArray()</code> zurückgegeben wird,
+            und sind im Array enthalten das von <code>$page-&gt;toArray()</code> zurückgegeben wird,
             was bedeutet das Seiten erfolgreich serialisiert/de-serialisiert werden können, selbst
             wenn die Seiten Eigenschaften enthalten die nicht nativ in der Seitenklasse sind.
         </para>
 
         <para>
             Sowohl native als auch eigene Eigenschaften können gesetzt werden indem
-            <code>$page->set($name, $value)</code> verwendet und empfangen indem
-            <code>$page->get($name)</code> verwendet wird, oder durch die Verwendung der
+            <code>$page-&gt;set($name, $value)</code> verwendet und empfangen indem
+            <code>$page-&gt;get($name)</code> verwendet wird, oder durch die Verwendung der
             magischen Methoden.
         </para>
     </note>
 
-    <example id="zend.navigation.pages.common.example.customprops">
-        <title>Eigene Seiten Eigenschaften</title>
+    <example xml:id="zend.navigation.pages.common.example.customprops"><info><title>Eigene Seiten Eigenschaften</title></info>
+        
 
         <para>
             Dieses Beispiel zeigt wie eigene Eigenschaften verwendet werden können.
@@ -260,4 +256,4 @@ if ($page->meaning != 42) {
 }
 ]]></programlisting>
     </example>
-</sect2>
+</section>

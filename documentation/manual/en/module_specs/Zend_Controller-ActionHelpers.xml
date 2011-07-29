@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.actionhelpers" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Action Helpers</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers"><info><title>Action Helpers</title></info>
+    
 
-    <sect2 id="zend.controller.actionhelper.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.controller.actionhelper.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             Action Helpers allow developers to inject runtime and/or on-demand
@@ -17,20 +16,18 @@
         <para>
             There are a number of ways to use Action Helpers. Action Helpers
             employ the use of a brokerage system, similar to the types of
-            brokerage you see in <link
-                linkend="zend.view.helpers">Zend_View_Helper</link>, and that
-            of <link
-                linkend="zend.controller.plugins">Zend_Controller_Plugin</link>.
+            brokerage you see in <link linkend="zend.view.helpers">Zend_View_Helper</link>, and that
+            of <link linkend="zend.controller.plugins">Zend_Controller_Plugin</link>.
             Action Helpers (like <classname>Zend_View_Helper</classname>) may be
             loaded and called on demand, or they may be instantiated at
             request time (bootstrap) or action controller creation time
             (<methodname>init()</methodname>). To understand this more fully, please see the usage
             section below.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.actionhelper.initialization">
-        <title>Helper Initialization</title>
+    <section xml:id="zend.controller.actionhelper.initialization"><info><title>Helper Initialization</title></info>
+        
 
         <para>
             A helper can be initialized in several different ways, based on
@@ -94,10 +91,10 @@ $this->_helper->FlashMessenger('We did something in the last request');
             to pass a helper to the helper broker for use by any action.
             Instantiation is as per any other <acronym>PHP</acronym> class.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.actionhelper.broker">
-        <title>The Helper Broker</title>
+    <section xml:id="zend.controller.actionhelper.broker"><info><title>The Helper Broker</title></info>
+        
 
         <para>
             <classname>Zend_Controller_Action_HelperBroker</classname> handles the details
@@ -157,8 +154,7 @@ Zend_Controller_Action_HelperBroker::addPath('./Plugins/Helpers',
         </para>
 
         <para>
-            Internally, the helper broker uses <link
-                linkend="zend.loader.pluginloader">a PluginLoader
+            Internally, the helper broker uses <link linkend="zend.loader.pluginloader">a PluginLoader
                 instance</link> to maintain paths. You can retrieve the
             PluginLoader using the static method <methodname>getPluginLoader()</methodname>,
             or, alternately, inject a custom PluginLoader instance using
@@ -223,10 +219,10 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
     Zend_Controller_Action_HelperBroker::removeHelper('redirector')
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.actionhelper.stockhelpers">
-        <title>Built-in Action Helpers</title>
+    <section xml:id="zend.controller.actionhelper.stockhelpers"><info><title>Built-in Action Helpers</title></info>
+        
 
         <para>
             Zend Framework includes several action helpers by default:
@@ -242,17 +238,17 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
             rendering views.
         </para>
 
-        <xi:include href="Zend_Controller-ActionHelpers-ActionStack.xml" />
-        <xi:include href="Zend_Controller-ActionHelpers-AutoComplete.xml" />
-        <xi:include href="Zend_Controller-ActionHelpers-ContextSwitch.xml" />
-        <xi:include href="Zend_Controller-ActionHelpers-FlashMessenger.xml" />
-        <xi:include href="Zend_Controller-ActionHelpers-Json.xml" />
-        <xi:include href="Zend_Controller-ActionHelpers-Redirector.xml" />
-        <xi:include href="Zend_Controller-ActionHelpers-ViewRenderer.xml" />
-    </sect2>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-ActionStack.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-AutoComplete.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-ContextSwitch.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-FlashMessenger.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-Json.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-Redirector.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-ViewRenderer.xml"/>
+    </section>
 
-    <sect2 id="zend.controller.actionhelper.writingyourown">
-        <title>Writing Your Own Helpers</title>
+    <section xml:id="zend.controller.actionhelper.writingyourown"><info><title>Writing Your Own Helpers</title></info>
+        
 
         <para>
             Action helpers extend
@@ -324,8 +320,7 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
             You may optionally include a <methodname>direct()</methodname> method in your
             helper class. If defined, it allows you to treat the helper as a
             method of the helper broker, in order to allow easy, one-off usage
-            of the helper. As an example, the <link
-                linkend="zend.controller.actionhelpers.redirector">redirector</link>
+            of the helper. As an example, the <link linkend="zend.controller.actionhelpers.redirector">redirector</link>
             defines <methodname>direct()</methodname> as an alias of
             <methodname>goto()</methodname>, allowing use of the helper like this:
         </para>
@@ -346,8 +341,5 @@ $this->_helper->redirector('item', 'view', 'blog', array('id' => 42));
             Once you have created your own helper class, you may provide access
             to it as described in the sections above.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

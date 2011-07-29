@@ -1,22 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22741 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.rest.server">
-    <title>Zend_Rest_Server</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.rest.server"><info><title>Zend_Rest_Server</title></info>
+    
 
-    <sect2 id="zend.rest.server.introduction">
-        <title>Einführung</title>
+    <section xml:id="zend.rest.server.introduction"><info><title>Einführung</title></info>
+        
 
         <para>
             <classname>Zend_Rest_Server</classname> ist ein komplett-feature REST Server.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.rest.server.usage">
-        <title>Verwenden des REST Servers</title>
+    <section xml:id="zend.rest.server.usage"><info><title>Verwenden des REST Servers</title></info>
+        
 
-        <example id="zend.rest.server.usage.example-1">
-            <title>Grundsätzliche Verwendung von Zend_Rest_Server: Klassen</title>
+        <example xml:id="zend.rest.server.usage.example-1"><info><title>Grundsätzliche Verwendung von Zend_Rest_Server: Klassen</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $server = new Zend_Rest_Server();
@@ -25,8 +23,8 @@ $server->handle();
 ]]></programlisting>
         </example>
 
-        <example id="zend.rest.server.usage.example-2">
-            <title>Grundsätzliche Verwendung von Zend_Rest_Server: Funktionen</title>
+        <example xml:id="zend.rest.server.usage.example-2"><info><title>Grundsätzliche Verwendung von Zend_Rest_Server: Funktionen</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 /**
@@ -46,10 +44,10 @@ $server->addFunction('sayHello');
 $server->handle();
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.rest.server.args">
-        <title>Aufruf eines Zend_Rest_Server Services</title>
+    <section xml:id="zend.rest.server.args"><info><title>Aufruf eines Zend_Rest_Server Services</title></info>
+        
 
         <para>
             Um ein <classname>Zend_Rest_Server</classname> Service aufzurufen, muß ein
@@ -60,8 +58,8 @@ $server->handle();
             nummerischen Position des Arguments (z.B. "arg1").
         </para>
 
-        <note>
-            <title>Nummerischer Index</title>
+        <note><info><title>Nummerischer Index</title></info>
+            
 
             <para>
                 Nummerische Argumente verwenden einen 1-basierenden Index.
@@ -83,18 +81,18 @@ $server->handle();
         <para>
             <code>?method=sayHello&amp;arg1=Davey&amp;arg2=Day</code>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.rest.server.customstatus">
-        <title>Senden eines eigenen Status</title>
+    <section xml:id="zend.rest.server.customstatus"><info><title>Senden eines eigenen Status</title></info>
+        
 
         <para>
             Wenn Werte zurückgegeben werden, kann man, um einen eigenen Status zurückzugeben, ein
             Array mit einem <code>status</code> Schlüssel zurückgeben.
         </para>
 
-        <example id="zend.rest.server.customstatus.example-1">
-            <title>Einen eigenen Status zurückgeben</title>
+        <example xml:id="zend.rest.server.customstatus.example-1"><info><title>Einen eigenen Status zurückgeben</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 /**
@@ -114,10 +112,10 @@ $server->addFunction('sayHello');
 $server->handle();
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.rest.server.customxml">
-        <title>Eigene XML Antworten zurückgeben</title>
+    <section xml:id="zend.rest.server.customxml"><info><title>Eigene XML Antworten zurückgeben</title></info>
+        
 
         <para>
             Wenn man eigenes <acronym>XML</acronym> zurückgeben will, kann einfach ein
@@ -125,8 +123,8 @@ $server->handle();
             Objekt zurückgegeben werden.
         </para>
 
-        <example id="zend.rest.server.customxml.example-1">
-            <title>Eigenes XML zurückgeben</title>
+        <example xml:id="zend.rest.server.customxml.example-1"><info><title>Eigenes XML zurückgeben</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 /**
@@ -158,5 +156,5 @@ $server->handle();
         <para>
             Die Antwort des Services wird ohne Modifizierungen zum Client zurückgegeben.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22140 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.cachemanager">
-    <title>Zend_Application_Resource_Cachemanager</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.cachemanager"><info><title>Zend_Application_Resource_Cachemanager</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Cachemanager</classname> peut être utilisé
@@ -17,8 +15,8 @@
         la demande.
     </para>
 
-    <example id="zend.application.available-resources.cachemanager.configExample">
-        <title>Exemple de configuration d'une ressource de gestionnaire de cache</title>
+    <example xml:id="zend.application.available-resources.cachemanager.configExample"><info><title>Exemple de configuration d'une ressource de gestionnaire de cache</title></info>
+        
 
         <para>
             Ci-dessous vous trouverez un extrait de fichier <acronym>INI</acronym> montrant
@@ -44,7 +42,7 @@ resources.cachemanager.database.frontendBackendAutoload = false
             Ensuite récupérer ce cache à partir du gestionnaire est aussi simple que d'accéder
             à une instance de gestionnaire (<classname>Zend_Cache_Manager</classname>) récupéré
             à partir de <classname>Zend_Application_Resource_Cachemanager</classname> et d'appeler
-            <methodname>$cacheManager->getCache('database')</methodname>. L'exemple ci-dessous
+            <methodname>$cacheManager-&gt;getCache('database')</methodname>. L'exemple ci-dessous
             est extrait d'un contrôleur dans lequel la classe de bootstrap est accessible via un
             paramètre du contrôleur frontal (qui est automatiquement assigné lors de l'amorçage).
             Comme vous pouvez le voir, la ressource de gestionnaire de cache implémente la méthode
@@ -67,4 +65,4 @@ $dbCache = $manager->getCache('database');
             l'exemple ci-dessus.
         </para>
     </example>
-</sect2>
+</section>

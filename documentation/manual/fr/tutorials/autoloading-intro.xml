@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19782 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.autoloading.intro">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.intro"><info><title>Introduction</title></info>
+    
 
     <para>
         L'auto-chargement est un mécanisme qui élimine les inclusions de dépendances manuelles
-        au sein du code <acronym>PHP</acronym>. Le <ulink url="http://php.net/autoload">manuel sur
-        l'autoload en PHP</ulink>précise qu'une fois qu'un autoloader a été défini, "il est
+        au sein du code <acronym>PHP</acronym>. Le <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/autoload">manuel sur
+        l'autoload en PHP</link>précise qu'une fois qu'un autoloader a été défini, "il est
         appelé automatiquement dans le cas où l'on tente d'utiliser une classe ou une interface
         qui n'a pas encore été définie"
     </para>
@@ -31,4 +31,4 @@
         charger le code des librairies comme celui de l'application. Ce tutoriel couvre ces outils
         et la manière de les utiliser efficacement.
     </para>
-</sect1>
+</section>

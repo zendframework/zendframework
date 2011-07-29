@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.config.writer.introduction">
-    <title>Zend_Config_Writer</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.writer.introduction"><info><title>Zend_Config_Writer</title></info>
+    
 
     <para>
         <classname>Zend_Config_Writer</classname> vous donne la possibilité d'écrire des
@@ -16,7 +14,7 @@
         de configuration est créé. Vous pouvez aussi fournir <varname>$filename</varname> et
         <varname>$config</varname> directement à la méthode <methodname>write()</methodname>.
         Actuellement les
-        rédacteurs suivants sont embarqués avec <classname>Zend_Config_Writer</classname>&#160;:
+        rédacteurs suivants sont embarqués avec <classname>Zend_Config_Writer</classname> :
     </para>
 
     <itemizedlist>
@@ -34,7 +32,7 @@
      <para>
         Le rédacteur <acronym>INI</acronym> possède deux modes de rendu en fonction des sections.
         Par défaut la configuration de premier niveau est toujours écrite dans des noms de section.
-        En appelant <command>$writer->setRenderWithoutSections();</command>, toutes les options
+        En appelant <command>$writer-&gt;setRenderWithoutSections();</command>, toutes les options
         sont écrites dans l'espace de noms global du fichier <acronym>INI</acronym> et aucune
         section n'est appliquée.
     </para>
@@ -57,13 +55,13 @@
         <classname>Zend_Config</classname> racine.
     </para>
 
-    <example id="zend.config.writer.example.using">
-        <title>Utilisation de Zend_Config_Writer</title>
+    <example xml:id="zend.config.writer.example.using"><info><title>Utilisation de Zend_Config_Writer</title></info>
+        
 
         <para>
             Cet exemple illustre une utilisation basique
             <classname>Zend_Config_Writer_Xml</classname> pour créer un nouveau fichier de
-            configuration&#160;:
+            configuration :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -104,12 +102,12 @@ $writer->write('config.xml', $config);
         </para>
     </example>
 
-    <example id="zend.config.writer.modifying">
-        <title>Modifier une configuration existante</title>
+    <example xml:id="zend.config.writer.modifying"><info><title>Modifier une configuration existante</title></info>
+        
 
         <para>
             Cet exemple montre comment modifier un fichier de configuration
-            existant&#160;:
+            existant :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -130,8 +128,8 @@ $writer->write();
 ]]></programlisting>
     </example>
 
-    <note>
-        <title>Chargement d'un fichier de configuration</title>
+    <note><info><title>Chargement d'un fichier de configuration</title></info>
+        
         <para>
             Lors du chargement d'un fichier de configuration existant afin de le modifier, il
             est très important de charger toutes les sections et d'éviter les sections étendues,
@@ -147,4 +145,4 @@ $writer->write();
         en dehors de la classe si vous souhaitez accéder à une représentation textuelle de vos
         données de configuration.
     </para>
-</sect1>
+</section>

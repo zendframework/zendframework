@@ -64,6 +64,6 @@ class Button extends Dijit
         }
         $attribs = $this->_prepareDijit($attribs, $params, 'element');
 
-        return $this->view->formButton($id, $value, $attribs);
+        return $this->view->broker('formButton')->direct($id, $value, $attribs);
     }
 }

@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20792 -->
-<sect1 id="zend.json.introduction">
-    <title>導入</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.introduction"><info><title>導入</title></info>
+    
     <para>
         <classname>Zend_Json</classname> は、<acronym>PHP</acronym> のネイティブデータを <acronym>JSON</acronym>
         形式にシリアライズしたり、<acronym>JSON</acronym> のデータを <acronym>PHP</acronym>
         のネイティブデータに戻したりする便利なメソッドを提供します。
-        <acronym>JSON</acronym> についてのより詳細な情報は、<ulink url="http://www.json.org/">
-        <acronym>JSON</acronym> プロジェクトのサイト</ulink> を参照ください。
+        <acronym>JSON</acronym> についてのより詳細な情報は、<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.json.org/">
+        <acronym>JSON</acronym> プロジェクトのサイト</link> を参照ください。
     </para>
     <para>
         <acronym>JSON</acronym> (JavaScript Object Notation : JavaScript によるオブジェクト記法)
@@ -30,7 +30,4 @@
         アプリケーション固有のデータ処理が簡単に実装できるようになるでしょう。
     </para>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

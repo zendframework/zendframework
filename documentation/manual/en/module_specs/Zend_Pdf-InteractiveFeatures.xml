@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.pdf.interactive-features">
-    <title>Interactive Features</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.interactive-features"><info><title>Interactive Features</title></info>
+    
 
-    <sect2 id="zend.pdf.pages.interactive-features.destinations">
-        <title>Destinations</title>
+    <section xml:id="zend.pdf.pages.interactive-features.destinations"><info><title>Destinations</title></info>
+        
 
         <para>
             A destination defines a particular view of a document, consisting of the following
@@ -26,25 +25,23 @@
         </itemizedlist>
 
         <para>
-            Destinations may be associated with outline items (<link
-            linkend="zend.pdf.pages.interactive-features.outlines">Document
-            Outline (bookmarks)</link>), annotations (<link
-            linkend="zend.pdf.pages.interactive-features.annotations">Annotations</link>), or
+            Destinations may be associated with outline items (<link linkend="zend.pdf.pages.interactive-features.outlines">Document
+            Outline (bookmarks)</link>), annotations (<link linkend="zend.pdf.pages.interactive-features.annotations">Annotations</link>), or
             actions (<link linkend="zend.pdf.pages.interactive-features.actions">Actions</link>).
             In each case, the destination specifies the view of the document to be presented
             when the outline item or annotation is opened or the action is performed. In addition,
             the optional document open action can be specified.
         </para>
 
-        <sect3 id="zend.pdf.pages.interactive-features.destinations.types">
-            <title>Supported Destination Types</title>
+        <section xml:id="zend.pdf.pages.interactive-features.destinations.types"><info><title>Supported Destination Types</title></info>
+            
 
             <para>
                 The following types are supported by <classname>Zend_Pdf</classname> component.
             </para>
 
-            <sect4 id="zend.pdf.pages.interactive-features.destinations.types.zoom">
-                <title>Zend_Pdf_Destination_Zoom</title>
+            <section xml:id="zend.pdf.pages.interactive-features.destinations.types.zoom"><info><title>Zend_Pdf_Destination_Zoom</title></info>
+                
 
                 <para>
                     Display the specified page, with the coordinates (left, top) positioned at
@@ -126,10 +123,10 @@
                         <para><methodname>setZoomFactor(float $zoom)</methodname>;</para>
                     </listitem>
                 </itemizedlist>
-            </sect4>
+            </section>
 
-            <sect4 id="zend.pdf.pages.interactive-features.destinations.types.fit">
-                <title>Zend_Pdf_Destination_Fit</title>
+            <section xml:id="zend.pdf.pages.interactive-features.destinations.types.fit"><info><title>Zend_Pdf_Destination_Fit</title></info>
+                
 
                 <para>
                     Display the specified page, with the coordinates (left, top) positioned at
@@ -152,10 +149,10 @@
                     Where <varname>$page</varname> is a destination page
                     (a <classname>Zend_Pdf_Page</classname> object or a page number).
                 </para>
-            </sect4>
+            </section>
 
-            <sect4 id="zend.pdf.pages.interactive-features.destinations.types.fit-horizontally">
-                <title>Zend_Pdf_Destination_FitHorizontally</title>
+            <section xml:id="zend.pdf.pages.interactive-features.destinations.types.fit-horizontally"><info><title>Zend_Pdf_Destination_FitHorizontally</title></info>
+                
 
                 <para>
                     Display the specified page, with the vertical coordinate top positioned at
@@ -203,10 +200,10 @@
                         <para><methodname>setTopEdge(float $top)</methodname>;</para>
                     </listitem>
                 </itemizedlist>
-            </sect4>
+            </section>
 
-            <sect4 id="zend.pdf.pages.interactive-features.destinations.types.fit-vertically">
-                <title>Zend_Pdf_Destination_FitVertically</title>
+            <section xml:id="zend.pdf.pages.interactive-features.destinations.types.fit-vertically"><info><title>Zend_Pdf_Destination_FitVertically</title></info>
+                
 
                 <para>
                     Display the specified page, with the horizontal coordinate left positioned
@@ -254,10 +251,10 @@
                         <para><methodname>setLeftEdge(float $left)</methodname>;</para>
                     </listitem>
                 </itemizedlist>
-            </sect4>
+            </section>
 
-            <sect4 id="zend.pdf.pages.interactive-features.destinations.types.fit-rectangle">
-                <title>Zend_Pdf_Destination_FitRectangle</title>
+            <section xml:id="zend.pdf.pages.interactive-features.destinations.types.fit-rectangle"><info><title>Zend_Pdf_Destination_FitRectangle</title></info>
+                
 
                 <para>
                     Display the specified page, with its contents magnified just enough to fit
@@ -350,10 +347,10 @@
                         <para><methodname>setTopEdge(float $top)</methodname>;</para>
                     </listitem>
                 </itemizedlist>
-            </sect4>
+            </section>
 
-            <sect4 id="zend.pdf.pages.interactive-features.destinations.types.fit-bounding-box">
-                <title>Zend_Pdf_Destination_FitBoundingBox</title>
+            <section xml:id="zend.pdf.pages.interactive-features.destinations.types.fit-bounding-box"><info><title>Zend_Pdf_Destination_FitBoundingBox</title></info>
+                
 
                 <para>
                     Display the specified page, with its contents magnified just enough to fit
@@ -373,11 +370,10 @@
                     Where <varname>$page</varname> is a destination page
                     (a <classname>Zend_Pdf_Page</classname> object or a page number).
                 </para>
-            </sect4>
+            </section>
 
-            <sect4
-                id="zend.pdf.pages.interactive-features.destinations.types.fit-bounding-box-horizontally">
-                <title>Zend_Pdf_Destination_FitBoundingBoxHorizontally</title>
+            <section xml:id="zend.pdf.pages.interactive-features.destinations.types.fit-bounding-box-horizontally"><info><title>Zend_Pdf_Destination_FitBoundingBoxHorizontally</title></info>
+                
 
                 <para>
                     Display the specified page, with the vertical coordinate top positioned at
@@ -425,11 +421,10 @@
                         <para><methodname>setTopEdge(float $top)</methodname>;</para>
                     </listitem>
                 </itemizedlist>
-            </sect4>
+            </section>
 
-            <sect4
-                id="zend.pdf.pages.interactive-features.destinations.types.fit-bounding-box-vertically">
-                <title>Zend_Pdf_Destination_FitBoundingBoxVertically</title>
+            <section xml:id="zend.pdf.pages.interactive-features.destinations.types.fit-bounding-box-vertically"><info><title>Zend_Pdf_Destination_FitBoundingBoxVertically</title></info>
+                
 
                 <para>
                     Display the specified page, with the horizontal coordinate left positioned at
@@ -477,10 +472,10 @@
                         <para><methodname>setLeftEdge(float $left)</methodname>;</para>
                     </listitem>
                 </itemizedlist>
-            </sect4>
+            </section>
 
-            <sect4 id="zend.pdf.pages.interactive-features.destinations.types.named">
-                <title>Zend_Pdf_Destination_Named</title>
+            <section xml:id="zend.pdf.pages.interactive-features.destinations.types.named"><info><title>Zend_Pdf_Destination_Named</title></info>
+                
 
                 <para>
                     All destinations listed above are "Explicit Destinations".
@@ -512,11 +507,11 @@
                 <para>
                     <type>String</type><methodname>getName()</methodname>;
                 </para>
-            </sect4>
-        </sect3>
+            </section>
+        </section>
 
-        <sect3 id="zend.pdf.pages.interactive-features.destinations.processing">
-            <title>Document level destination processing</title>
+        <section xml:id="zend.pdf.pages.interactive-features.destinations.processing"><info><title>Document level destination processing</title></info>
+            
 
             <para>
                 <classname>Zend_Pdf</classname> class provides a set of destinations processing
@@ -576,8 +571,8 @@
                 </para>
             </note>
 
-            <example id="zend.pdf.interactive-features.destinations.example-1">
-                <title>Destinations usage example</title>
+            <example xml:id="zend.pdf.interactive-features.destinations.example-1"><info><title>Destinations usage example</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $pdf = new Zend_Pdf();
@@ -611,11 +606,11 @@ $pdf->resolveDestination(Zend_Pdf_Destination_Named::create('Page2'));
 $pdf->resolveDestination(Zend_Pdf_Destination_Named::create('Page3'));
 ]]></programlisting>
             </example>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.pdf.pages.interactive-features.actions">
-        <title>Actions</title>
+    <section xml:id="zend.pdf.pages.interactive-features.actions"><info><title>Actions</title></info>
+        
 
         <para>
             Instead of simply jumping to a destination in the document, an annotation or
@@ -624,8 +619,8 @@ $pdf->resolveDestination(Zend_Pdf_Destination_Named::create('Page3'));
             appearance state.
         </para>
 
-        <sect3 id="zend.pdf.pages.interactive-features.actions.types">
-            <title>Supported action types</title>
+        <section xml:id="zend.pdf.pages.interactive-features.actions.types"><info><title>Supported action types</title></info>
+            
 
             <para>
                 The following action types are recognized while loading <acronym>PDF</acronym>
@@ -813,10 +808,10 @@ $pdf->resolveDestination(Zend_Pdf_Destination_Named::create('Page3'));
             <para>
                 It also supports the following methods:
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.pdf.pages.interactive-features.actions.chaining">
-            <title>Actions chaining</title>
+        <section xml:id="zend.pdf.pages.interactive-features.actions.chaining"><info><title>Actions chaining</title></info>
+            
 
             <para>
                 Actions objects can be chained using <varname>Zend_Pdf_Action::$next</varname>
@@ -869,10 +864,10 @@ foreach ($iterator as $chainedAction) {
 // Prints 'Actions in a tree: 4'
 printf("Actions in a tree: %d\n", $actionsCount++);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.pdf.pages.interactive-features.actions.open-action">
-            <title>Document Open Action</title>
+        <section xml:id="zend.pdf.pages.interactive-features.actions.open-action"><info><title>Document Open Action</title></info>
+            
 
             <para>
                 Special open action may be specify a destination to be displayed or an action
@@ -890,11 +885,11 @@ printf("Actions in a tree: %d\n", $actionsCount++);
                 method sets document open action or clean it if <varname>$openAction</varname>
                 is <constant>NULL</constant>.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.pdf.pages.interactive-features.outlines">
-        <title>Document Outline (bookmarks)</title>
+    <section xml:id="zend.pdf.pages.interactive-features.outlines"><info><title>Document Outline (bookmarks)</title></info>
+        
 
         <para>
             A PDF document may optionally display a document outline on the screen, allowing
@@ -1104,10 +1099,10 @@ $pdf->save($path, true);
                 referenced by outlines.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.pdf.pages.interactive-features.annotations">
-        <title>Annotations</title>
+    <section xml:id="zend.pdf.pages.interactive-features.annotations"><info><title>Annotations</title></info>
+        
 
         <para>
             An annotation associates an object such as a note, sound, or movie with a location
@@ -1237,8 +1232,5 @@ $pdf->save($path, true);
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

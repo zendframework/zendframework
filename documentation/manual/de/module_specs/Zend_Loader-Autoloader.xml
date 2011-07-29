@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21818 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.loader.autoloader">
-    <title>Der Autoloader</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.autoloader"><info><title>Der Autoloader</title></info>
+    
 
     <para>
         <classname>Zend_Loader_Autoloader</classname> ist eine vollständige Autoloader Lösung für
@@ -40,8 +38,8 @@
         Code zu registrieren wo es notwendig ist.
     </para>
 
-    <sect2 id="zend.loader.autoloader.usage">
-        <title>Verwenden des Autoloaders</title>
+    <section xml:id="zend.loader.autoloader.usage"><info><title>Verwenden des Autoloaders</title></info>
+        
 
         <para>
             Das erste Mal wenn eine Instanz des Autoloaders empfangen wird, registriert dieser sich
@@ -65,8 +63,8 @@ $autoloader = Zend_Loader_Autoloader::getInstance();
 $autoloader->registerNamespace('My_');
 ]]></programlisting>
 
-        <note>
-            <title>Namespace Präfixe</title>
+        <note><info><title>Namespace Präfixe</title></info>
+            
 
             <para>
                 Man sollte beachten dass das vorhergehende Beispiel "My_" verwendet und nicht "My".
@@ -131,15 +129,14 @@ $autoloader->suppressNotFoundWarnings(true);
 $autoloader->setFallbackAutoloader(true);
 ]]></programlisting>
 
-        <note>
-            <title>Klassen von PHP Namespaces laden</title>
+        <note><info><title>Klassen von PHP Namespaces laden</title></info>
+            
 
             <para>
                 Beginnend mit Version 1.10.0 erlaubt Zend Framework das Laden von Klassen aus
                 <acronym>PHP</acronym> Namespaces. Diese Unterstützung folgt den gleichen
-                Richtlinien und Implementationen wie Sie in der <ulink
-                    url="http://groups.google.com/group/php-standards/web/psr-0-final-proposal">PHP
-                Framework Interop Group PSR-0</ulink> Referenz Implementation gefunden werden
+                Richtlinien und Implementationen wie Sie in der <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://groups.google.com/group/php-standards/web/psr-0-final-proposal">PHP
+                Framework Interop Group PSR-0</link> Referenz Implementation gefunden werden
                 können.
             </para>
 
@@ -199,10 +196,10 @@ $autoloader->setFallbackAutoloader(true);
                 </listitem>
             </itemizedlist>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.autoloader.zf-version">
-        <title>Auswahl einer Zend Framework Version</title>
+    <section xml:id="zend.loader.autoloader.zf-version"><info><title>Auswahl einer Zend Framework Version</title></info>
+        
 
         <para>
             Typischerweise, verwendet man die Version des Zend Frameworks die mit dem Autoloader,
@@ -355,8 +352,8 @@ autoloaderZfVersion = "latest"
             <classname>Zend_Application</classname> den Autoloader entsprechend zu konfigurieren.
         </para>
 
-        <warning>
-            <title>Implikationen für die Geschwindigkeit</title>
+        <warning><info><title>Implikationen für die Geschwindigkeit</title></info>
+            
 
             <para>
                 Für die beste Performance, sollte man dieses Feature entweder nicht verwenden, oder
@@ -366,10 +363,10 @@ autoloaderZfVersion = "latest"
                 entsprechen -- manchmal eine teure Operation die für jede Anfrage durchgeführt wird.
             </para>
         </warning>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.autoloader.interface">
-        <title>Das Autoloader Interface</title>
+    <section xml:id="zend.loader.autoloader.interface"><info><title>Das Autoloader Interface</title></info>
+        
 
         <para>
             Neben der Möglichkeit eigene Callbacks als Autoloader zu spezifizieren, definiert
@@ -397,18 +394,18 @@ $foo = new Foo_Autoloader();
 
 $autoloader->pushAutoloader($foo, 'Foo_');
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.autoloader.reference">
-        <title>Autoloader Referenz</title>
+    <section xml:id="zend.loader.autoloader.reference"><info><title>Autoloader Referenz</title></info>
+        
 
         <para>
             Anbei kann ein Wegweiser für die Methoden gefunden werden die in
             <classname>Zend_Loader_Autoloader</classname> vorhanden sind.
         </para>
 
-        <table id="zend.loader.autoloader.reference.api">
-            <title>Zend_Loader_Autoloader Methoden</title>
+        <table xml:id="zend.loader.autoloader.reference.api"><info><title>Zend_Loader_Autoloader Methoden</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -831,5 +828,5 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
-</sect1>
+    </section>
+</section>

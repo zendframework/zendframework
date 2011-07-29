@@ -23,6 +23,7 @@
  * @namespace
  */
 namespace ZendTest\Server\Reflection;
+
 use Zend\Server\Reflection;
 
 /**
@@ -60,7 +61,7 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $class = new \ReflectionClass('\Zend\Server\Reflection\Reflection');
+        $class = new \ReflectionClass('\Zend\Server\Reflection');
         $method = $class->getMethod('reflectClass');
         $parameters = $method->getParameters();
         $this->_parametersRaw = $parameters;
@@ -99,7 +100,7 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue($this->_r instanceof Reflection\Prototype);
     }
-    
+
     public function testConstructionThrowsExceptionOnInvalidParam()
     {
         $this->setExpectedException('Zend\Server\Reflection\Exception\InvalidArgumentException', 'One or more params are invalid');
@@ -111,7 +112,7 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Server\Reflection\Exception\InvalidArgumentException', 'Invalid parameters');
         $r1 = new Reflection\Prototype($this->_r->getReturnValue(), 'string');
     }
-    
+
     /**
      * getReturnType() test
      *

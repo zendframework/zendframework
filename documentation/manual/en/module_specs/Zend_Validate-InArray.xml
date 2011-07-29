@@ -1,15 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.in_array">
-    <title>InArray</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.in_array"><info><title>InArray</title></info>
+    
 
     <para>
         <classname>Zend_Validate_InArray</classname> allows you to validate if a given value is
         contained within an array. It is also able to validate multidimensional arrays.
     </para>
 
-    <sect3 id="zend.validate.set.in_array.options">
-        <title>Supported options for Zend_Validate_InArray</title>
+    <section xml:id="zend.validate.set.in_array.options"><info><title>Supported options for Zend_Validate_InArray</title></info>
+        
 
         <para>
             The following options are supported for <classname>Zend_Validate_InArray</classname>:
@@ -37,10 +36,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.in_array.basic">
-        <title>Simple array validation</title>
+    <section xml:id="zend.validate.set.in_array.basic"><info><title>Simple array validation</title></info>
+        
 
         <para>
             The simplest way, is just to give the array which should be searched against at
@@ -85,10 +84,10 @@ if ($validator->isValid('value')) {
     // no value found
 }
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.in_array.strict">
-        <title>Strict array validation</title>
+    <section xml:id="zend.validate.set.in_array.strict"><info><title>Strict array validation</title></info>
+        
 
         <para>
             As mentioned before you can also do a strict validation within the array. Per default
@@ -135,10 +134,10 @@ if ($validator->isValid('value')) {
                 <constant>FALSE</constant>.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.in_array.recursive">
-        <title>Recursive array validation</title>
+    <section xml:id="zend.validate.set.in_array.recursive"><info><title>Recursive array validation</title></info>
+        
 
         <para>
             In addition to <acronym>PHP</acronym>'s <methodname>in_array()</methodname> method
@@ -193,16 +192,16 @@ if ($validator->isValid('value')) {
 }
 ]]></programlisting>
 
-        <note>
-            <title>Default setting for recursion</title>
+        <note><info><title>Default setting for recursion</title></info>
+            
 
             <para>
                 Per default the recursive validation is turned off.
             </para>
         </note>
 
-        <note>
-            <title>Option keys within the haystack</title>
+        <note><info><title>Option keys within the haystack</title></info>
+            
 
             <para>
                 When you are using the keys '<property>haystack</property>',
@@ -210,8 +209,5 @@ if ($validator->isValid('value')) {
                 haystack, then you must wrap the <property>haystack</property> key.
             </para>
         </note>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

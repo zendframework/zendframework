@@ -1,13 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 20763 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.acl.refining">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.refining"><info><title>Perfeccionamiento de los controles de acceso</title></info>
 
-    <title>Perfeccionamiento de los controles de acceso</title>
+    
 
-    <sect2 id="zend.acl.refining.precise">
+    <section xml:id="zend.acl.refining.precise"><info><title>Definir mejor los controles de acceso</title></info>
 
-        <title>Definir mejor los controles de acceso</title>
+        
 
         <para>
             El
@@ -143,11 +141,11 @@ $acl->addResource(new Zend_Acl_Resource('announcement'), 'news');
 
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.refining.removing">
+    <section xml:id="zend.acl.refining.removing"><info><title>Eliminar los controles de acceso</title></info>
 
-        <title>Eliminar los controles de acceso</title>
+        
 
         <para>
             Para eliminar una o más reglas
@@ -219,6 +217,6 @@ echo $acl->isAllowed('marketing', 'latest', 'anything') ?
 // permitido
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-</sect1>
+</section>

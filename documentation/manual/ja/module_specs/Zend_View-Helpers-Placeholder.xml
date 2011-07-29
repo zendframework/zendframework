@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 19433 -->
-<sect3 id="zend.view.helpers.initial.placeholder">
-    <title>Placeholder ヘルパー</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.placeholder"><info><title>Placeholder ヘルパー</title></info>
+    
 
     <para>
         <classname>Placeholder</classname> ビューヘルパーは、
@@ -13,8 +11,8 @@
         などです。
     </para>
 
-    <example id="zend.view.helpers.initial.placeholder.usage">
-        <title>プレースホルダの基本的な使用法</title>
+    <example xml:id="zend.view.helpers.initial.placeholder.usage"><info><title>プレースホルダの基本的な使用法</title></info>
+        
 
         <para>
             プレースホルダの基本的な使用法は、ビューのデータを永続化させることです。
@@ -33,8 +31,8 @@
 ]]></programlisting>
     </example>
 
-    <example id="zend.view.helpers.initial.placeholder.aggregation">
-        <title>プレースホルダによるコンテンツの集約</title>
+    <example xml:id="zend.view.helpers.initial.placeholder.aggregation"><info><title>プレースホルダによるコンテンツの集約</title></info>
+        
 
         <para>
             プレースホルダによるコンテンツの集約も、時には便利です。
@@ -122,8 +120,8 @@ echo $foo['bar'];
 ]]></programlisting>
     </example>
 
-    <example id="zend.view.helpers.initial.placeholder.capture">
-        <title>プレースホルダによるコンテンツのキャプチャ</title>
+    <example xml:id="zend.view.helpers.initial.placeholder.capture"><info><title>プレースホルダによるコンテンツのキャプチャ</title></info>
+        
 
         <para>
             時には、プレースホルダの中身を
@@ -203,8 +201,8 @@ foreach ($this->data as $datum): ?>
 ]]></programlisting>
     </example>
 
-    <sect4 id="zend.view.helpers.initial.placeholder.implementations">
-        <title>プレースホルダの具象実装</title>
+    <section xml:id="zend.view.helpers.initial.placeholder.implementations"><info><title>プレースホルダの具象実装</title></info>
+        
 
         <para>
             Zend Framework には、"具体的な"
@@ -248,8 +246,5 @@ foreach ($this->data as $datum): ?>
                     <link linkend="zend.view.helpers.initial.inlinescript">InlineScript</link>
             </para></listitem>
         </itemizedlist>
-    </sect4>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

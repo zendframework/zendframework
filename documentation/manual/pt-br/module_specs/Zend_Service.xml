@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20855 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.service.introduction">
-    <title>Introdução</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.introduction"><info><title>Introdução</title></info>
+    
 
     <para>
         <classname>Zend_Service</classname> é uma classe abstrata que serve como base para
@@ -11,8 +11,7 @@
 
     <para>
         Se você precisar de suporte básico para serviços REST baseados em <acronym>XML</acronym>,
-        você pode olhar em <link
-            linkend="zend.rest.client"><classname>Zend_Rest_Client</classname></link>.
+        você pode olhar em <link linkend="zend.rest.client"><classname>Zend_Rest_Client</classname></link>.
     </para>
 
     <para>
@@ -117,7 +116,4 @@
     <para>
         Mais serviços serão adicionados no futuro.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

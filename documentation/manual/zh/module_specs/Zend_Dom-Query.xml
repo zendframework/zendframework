@@ -1,5 +1,6 @@
-<sect1 id="zend.dom.query">
-    <title>Zend_Dom_Query</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dom.query"><info><title>Zend_Dom_Query</title></info>
+    
 
     <para>
         <code>Zend_Dom_Query</code> 为利用 XPath 或 CSS 选择器来查询 XML 和
@@ -10,14 +11,14 @@
     <para>
         当用 XML 结构查询文档时，对于 web 开发者来说，CSS 选择器符号简单而熟悉。
         对开发过 Cascading Style Sheets  或用过提供使用 CSS 选择器
-        （<ulink url="http://prototypejs.org/api/utility/dollar-dollar">Prototype's
-            $$()</ulink> 和
-        <ulink url="http://api.dojotoolkit.org/jsdoc/dojo/HEAD/dojo.query">Dojo's
-            dojo.query</ulink> 都是组件的灵魂）选择节点的功能的 Javascript 工具箱的开发者来说，符号应当很熟悉。
+        （<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://prototypejs.org/api/utility/dollar-dollar">Prototype's
+            $$()</link> 和
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://api.dojotoolkit.org/jsdoc/dojo/HEAD/dojo.query">Dojo's
+            dojo.query</link> 都是组件的灵魂）选择节点的功能的 Javascript 工具箱的开发者来说，符号应当很熟悉。
     </para>
 
-    <sect2 id="zend.dom.query.operation">
-        <title> 操作理论 </title>
+    <section xml:id="zend.dom.query.operation"><info><title> 操作理论 </title></info>
+        
 
         <para>
             要使用 <code>Zend_Dom_Query</code>，你需要初始化一个
@@ -76,7 +77,7 @@
 
                 <listitem><para>
                     <emphasis>direct descendents</emphasis>:
-                    利用在选择器之间的 '&gt;'表示直接的子孙。'div > span'将只选择 'div'直接的子孙 'span' 元素。
+                    利用在选择器之间的 '&gt;'表示直接的子孙。'div &gt; span'将只选择 'div'直接的子孙 'span' 元素。
                     它可用于任何上述的选择器。
                 </para></listitem>
 
@@ -106,8 +107,8 @@
         </tr>
     </table>
 </div>
-]]>
-</programlisting>
+
+]]></programlisting>
           </listitem>
         </itemizedlist>
 
@@ -128,25 +129,25 @@ $count = count($results); // get number of matches: 4
 foreach ($results as $result) {
     // $result is a DOMElement
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             <code>Zend_Dom_Query</code> 也允许利用 <code>queryXpath()</code> method 直接 XPath 查询；
             你可以传递任何有效的 XPath 查询给这个方法，它将返回一个
             <code>Zend_Dom_Query_Result</code> 对象。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.dom.query.methods">
-        <title> 可用方法 </title>
+    <section xml:id="zend.dom.query.methods"><info><title> 可用方法 </title></info>
+        
 
         <para>
             <code>Zend_Dom_Query</code> 类家族有下列方法可用。
         </para>
 
-        <sect3 id="zend.dom.query.methods.zenddomquery">
-            <title>Zend_Dom_Query</title>
+        <section xml:id="zend.dom.query.methods.zenddomquery"><info><title>Zend_Dom_Query</title></info>
+            
 
             <para>
                 下列方法对 <code>Zend_Dom_Query</code> 可用:
@@ -188,10 +189,10 @@ foreach ($results as $result) {
                     <code>queryXpath($xPathQuery)</code>: 使用 XPath 符号查询文档。
                 </para></listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.dom.query.methods.zenddomqueryresult">
-            <title>Zend_Dom_Query_Result</title>
+        <section xml:id="zend.dom.query.methods.zenddomqueryresult"><info><title>Zend_Dom_Query_Result</title></info>
+            
 
             <para>
                 如前所述，<code>Zend_Dom_Query_Result</code>
@@ -214,9 +215,6 @@ foreach ($results as $result) {
                     <code>getDocument()</code>: 获取选择使用的文档。
                 </para></listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

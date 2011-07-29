@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20794 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.partial">
-    <title>Partielle Helfer</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.partial"><info><title>Partielle Helfer</title></info>
+    
 
     <para>
         Der <classname>Partial</classname> (Partielle) View Helfer wird verwendet um ein spezielles
@@ -18,8 +16,8 @@
         durchlaufen werden können, und einen Abschnitt für jedes Teil auszugeben.
     </para>
 
-    <note>
-        <title>PartialLoop Zähler</title>
+    <note><info><title>PartialLoop Zähler</title></info>
+        
 
         <para>
             Der <classname>PartialLoop</classname> View Helfer fügt der View eine Variable hinzu die
@@ -29,8 +27,8 @@
         </para>
     </note>
 
-    <example id="zend.view.helpers.initial.partial.usage">
-        <title>Grundsätzliche Verwendung von Partials</title>
+    <example xml:id="zend.view.helpers.initial.partial.usage"><info><title>Grundsätzliche Verwendung von Partials</title></info>
+        
 
         <para>
             Die grundsätzliche Verwendung von Partials ist die Ausgabe von Templatefragmenten im
@@ -67,8 +65,8 @@
 ]]></programlisting>
     </example>
 
-    <note>
-        <title>Was ist ein Modell?</title>
+    <note><info><title>Was ist ein Modell?</title></info>
+        
 
         <para>
             Ein Modell das mit dem <classname>Partial</classname> View Helfer verwendet wird kann
@@ -127,8 +125,8 @@ $view->partialLoop()->setObjectKey('model');
         </para>
     </note>
 
-    <example id="zend.view.helpers.initial.partial.partialloop">
-        <title>Verwendung von PartialLoop um iterierbare Modelle darzustellen</title>
+    <example xml:id="zend.view.helpers.initial.partial.partialloop"><info><title>Verwendung von PartialLoop um iterierbare Modelle darzustellen</title></info>
+        
 
         <para>
             Typischerweise, wird man Partials in einer Schleife verwenden um das selbe
@@ -198,8 +196,8 @@ $model = array(
 ]]></programlisting>
     </example>
 
-    <example id="zend.view.helpers.initial.partial.modules">
-        <title>Partials in anderen Modulen darstellen</title>
+    <example xml:id="zend.view.helpers.initial.partial.modules"><info><title>Partials in anderen Modulen darstellen</title></info>
+        
 
         <para>
             Zeitweise existiert ein Parial in einem anderen Modul. Wenn der Name des Moduls bekannt
@@ -223,4 +221,4 @@ $model = array(
             geteilt View Skripte zu geben.
         </para>
     </example>
-</sect3>
+</section>

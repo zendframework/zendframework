@@ -1,14 +1,15 @@
-<sect1 id="zend.feed.importing">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.importing"><info><title> 导入Feeds </title></info>
 
-    <title> 导入Feeds </title>
+    
 
     <para>
         <code>Zend_Feed</code> 能让开发者轻松获得 Feeds 。如果你知道 Feeds 的URI，用<code>Zend_Feed::import()</code>方法就可以非常容易的获得它:
     </para>
 
     <programlisting role="php"><![CDATA[<?php
-$feed = Zend_Feed::import('http://feeds.example.com/feedName');]]>
-    </programlisting>
+$feed = Zend_Feed::import('http://feeds.example.com/feedName');
+    ]]></programlisting>
 
     <para>
         你也能用<code>Zend_Feed</code>从一个文件或者一个PHP字符串变量来获得一个feed的内容:
@@ -19,24 +20,24 @@ $feed = Zend_Feed::import('http://feeds.example.com/feedName');]]>
 $feedFromFile = Zend_Feed::importFile('feed.xml');
 
 // importing a feed from a PHP string variable
-$feedFromPHP = Zend_Feed::importString($feedString);]]>
-    </programlisting>
+$feedFromPHP = Zend_Feed::importString($feedString);
+    ]]></programlisting>
 
     <para>
         在上面的例子中，根据feed类型的不同，一个从<code>Zend_Feed_Abstract</code>继承而来的类对象被返回。如果导入方法获得的是一个RSS feed，那么一个<code>Zend_Feed_Rss</code>对象将被返回(Seateng译注:以Factory模式实现)。另一方面，如果一个Atom feed被导入，那么将返回一个<code>Zend_Feed_Atom</code>对象。如果feed不可读或者不符合规范，导致导入失败那么Zend_Feed将抛出一个<code>Zend_Feed_Exception</code>异常。
     </para>
 
-    <sect2 id="zend.feed.importing.custom">
+    <section xml:id="zend.feed.importing.custom"><info><title> 定制 feeds </title></info>
 
-        <title> 定制 feeds </title>
+        
 
         <para>
             <code>Zend_Feed</code> 能让开发者轻松创建定制 feeds，只需要创建一个数组用 Zend_Feed 导入它。这个数组可以用 <code>Zend_Feed::importArray()</code> 或 <code>Zend_Feed::importBuilder()</code> 导入。最后数组用定制的实现了 <code>Zend_Feed_Builder_Interface</code> 数据源来处理。
         </para>
 
-        <sect3 id="zend.feed.importing.custom.importarray">
+        <section xml:id="zend.feed.importing.custom.importarray"><info><title> 导入定制的数组 </title></info>
 
-            <title> 导入定制的数组 </title>
+            
 
             <programlisting role="php"><![CDATA[<?php
 // 从数组导入 feed
@@ -46,8 +47,8 @@ $atomFeedFromArray = Zend_Feed::importArray($array);
 $atomFeedFromArray = Zend_Feed::importArray($array, 'atom');
 
 // 从数组导入 rss feed
-$rssFeedFromArray = Zend_Feed::importArray($array, 'rss');]]>
-            </programlisting>
+$rssFeedFromArray = Zend_Feed::importArray($array, 'rss');
+            ]]></programlisting>
 
             <para>
                 数组格式必须和这个结构一致：
@@ -149,43 +150,43 @@ array(
                                    //data for the second entry and so on
                                    )
                              )
-       );]]>
-            </programlisting>
+       );
+            ]]></programlisting>
 
             <para>
                 References:
                 <itemizedlist>
                     <listitem>
                         <para>
-                            RSS 2.0 规范： <ulink url="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</ulink>
+                            RSS 2.0 规范： <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</link>
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            Atom 规范：<ulink url="http://tools.ietf.org/html/rfc4287">RFC 4287</ulink>
+                            Atom 规范：<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://tools.ietf.org/html/rfc4287">RFC 4287</link>
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            WFW 规范：<ulink url="http://wellformedweb.org/news/wfw_namespace_elements">Well
-                            Formed Web</ulink>
+                            WFW 规范：<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wellformedweb.org/news/wfw_namespace_elements">Well
+                            Formed Web</link>
                         </para>
                     </listitem>
                     <listitem>
                         <para>
                             iTunes 规范：
-                            <ulink url="http://www.apple.com/itunes/store/podcaststechspecs.html">iTunes Technical
-                            Specifications</ulink>
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.apple.com/itunes/store/podcaststechspecs.html">iTunes Technical
+                            Specifications</link>
                         </para>
                     </listitem>
                 </itemizedlist>
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.feed.importing.custom.importbuilder">
+        <section xml:id="zend.feed.importing.custom.importbuilder"><info><title> 导入定制的数据源 </title></info>
 
-            <title> 导入定制的数据源 </title>
+            
 
             <para>
                 你可以从任何实现 <code>Zend_Feed_Builder_Interface</code> 的数据源创建 Zeed_Feed 实例，只需要实现 <code>getHeader()</code> 和 <code>getEntries()</code> 方法来和 <code>Zend_Feed::importBuilder()</code> 一起使用你的对象。作为一个简单的参考实现，你可以使用 <code>Zend_Feed_Builder</code> 它在构造器里带有一个数组，执行一些校验，然后可以在 <code>importBuilder()</code> 方法中使用。<code>getHeader()</code> 方法必须返回 <code>Zend_Feed_Builder_Header</code> 的实例， <code>getEntries()</code> 必须返回 <code>Zend_Feed_Builder_Entry</code> 实例的数组。
@@ -209,14 +210,14 @@ $atomFeedFromArray = Zend_Feed::importBuilder(new Zend_Feed_Builder($array));
 $atomFeedFromArray = Zend_Feed::importArray(new Zend_Feed_Builder($array), 'atom');
 
 // 从定制的 builder 数组导入 rss feed
-$rssFeedFromArray = Zend_Feed::importArray(new Zend_Feed_Builder($array), 'rss');]]>
-            </programlisting>
+$rssFeedFromArray = Zend_Feed::importArray(new Zend_Feed_Builder($array), 'rss');
+            ]]></programlisting>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.feed.importing.custom.dump">
+        <section xml:id="zend.feed.importing.custom.dump"><info><title> Dumping feed 内容 </title></info>
 
-            <title> Dumping feed 内容 </title>
+            
 
             <para>
                 为了 dump <code>Zend_Feed_Abstract</code> 实例的内容，使用 <code>send()</code> 或 <code>saveXml()</code> 方法。
@@ -229,14 +230,11 @@ assert($feed instanceof Zend_Feed_Abstract);
 print $feed->saveXML();
 
 // 发送 http 头和 dump the feed
-$feed->send();]]>
-            </programlisting>
+$feed->send();
+            ]]></programlisting>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

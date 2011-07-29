@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.router.routes.hostname">
-    <title>Zend_Controller_Router_Route_Hostname</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.router.routes.hostname"><info><title>Zend_Controller_Router_Route_Hostname</title></info>
+    
 
     <para>
         <classname>Zend_Controller_Router_Route_Hostname</classname> is the hostname route of
@@ -44,12 +43,9 @@ $router->addRoute('user', $hostnameRoute->chain($plainPathRoute);
         Hostname routes can, but never should be used as is. The reason behind
         that is, that a hostname route alone would match any path. So what you
         have to do is to chain a path route to the hostname route. This is done
-        like in the example by calling <command>$hostnameRoute->chain($pathRoute);</command>.
+        like in the example by calling <command>$hostnameRoute-&gt;chain($pathRoute);</command>.
         By doing this, <varname>$hostnameRoute</varname> isn't modified, but a new
         route (<classname>Zend_Controller_Router_Route_Chain</classname>) is returned,
         which can then be given to the router.
     </para>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19766 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.form.decorators.conclusion">
-    <title>Conclusion</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.form.decorators.conclusion"><info><title>Conclusion</title></info>
+    
 
     <para>
         Les décorateur de formulaire sont un système qui peut prendre du temps à maitriser.
@@ -10,4 +10,4 @@
         dans ce chapitre vous aident à comprendre leur fonctionnement et vous montrent des
         manières de faire pour les utiliser efficacement dans vos formulaires.
     </para>
-</sect1>
+</section>

@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.queue.introduction">
-    <title>Введение</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.introduction"><info><title>Введение</title></info>
+    
 
     <para>
         <classname>Zend_Queue</classname> представляет собой фабрику 
@@ -48,10 +47,9 @@
 	чтобы абстрагировать поток сообщений от кода и предоставить метрики, 
 	трансформации и мониторинг очередей сообщений.
 	
-        <ulink
-            url="http://www.amazon.com/Enterprise-Integration-Patterns-Designing-Addison-Wesley/dp/0321200683">Enterprise
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.amazon.com/Enterprise-Integration-Patterns-Designing-Addison-Wesley/dp/0321200683">Enterprise
             Integration Patterns: Designing, Building, and Deploying Messaging Solutions
-            (Addison-Wesley Signature Series)</ulink> (ISBN-10 0321127420; ISBN-13 978-0321127426) 
+            (Addison-Wesley Signature Series)</link> (ISBN-10 0321127420; ISBN-13 978-0321127426) 
 	- хорошая книга об использовании очередей сообщений.
     </para>
-</sect1>
+</section>

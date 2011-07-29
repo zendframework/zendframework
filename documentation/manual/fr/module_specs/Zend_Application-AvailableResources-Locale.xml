@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20077 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.locale">
-    <title>Zend_Application_Resource_Locale</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.locale"><info><title>Zend_Application_Resource_Locale</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Locale</classname> peut être utilisé pour paramétrer
@@ -15,8 +13,8 @@
         être utilisé suivant les besoins de votre application.
     </para>
 
-    <sect3 id="zend.application.available-resources.locale.auto">
-        <title>Autodétection de la locale à utiliser</title>
+    <section xml:id="zend.application.available-resources.locale.auto"><info><title>Autodétection de la locale à utiliser</title></info>
+        
 
         <para>
             Sans spécifier d'options pour
@@ -33,7 +31,7 @@
         </para>
 
         <para>
-            Mais il y a deux problèmes avec cette approche&#160;:
+            Mais il y a deux problèmes avec cette approche :
         </para>
 
         <itemizedlist>
@@ -52,7 +50,7 @@
 
         <para>
             Dans ces deux cas <classname>Zend_Locale</classname> reviendra vers d'autres
-            mécanismes pour détecter la locale&#160;:
+            mécanismes pour détecter la locale :
         </para>
 
         <itemizedlist>
@@ -88,14 +86,13 @@
         </itemizedlist>
 
         <para>
-            Pour de plus amples informations concernant la détection des locales, lisez <link
-                linkend="zend.locale.selection.automatic">le chapitre sur la déctection automatique
+            Pour de plus amples informations concernant la détection des locales, lisez <link linkend="zend.locale.selection.automatic">le chapitre sur la déctection automatique
                 avec Zend_Locale</link>.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.application.available-resources.locale.fallback">
-        <title>Autodétection de la locale avec ajout de votre propre valeur par défaut</title>
+    <section xml:id="zend.application.available-resources.locale.fallback"><info><title>Autodétection de la locale avec ajout de votre propre valeur par défaut</title></info>
+        
 
         <para>
             L'autodétection ci-dessus peut entraîner des problèmes quand la locale ne peut pas être
@@ -105,8 +102,8 @@
             détectée.
         </para>
 
-        <example id="zend.application.available-resources.locale.configExampleDetectAndFallback">
-            <title>Autodétecter la locale et paramétrer une valeur par défaut</title>
+        <example xml:id="zend.application.available-resources.locale.configExampleDetectAndFallback"><info><title>Autodétecter la locale et paramétrer une valeur par défaut</title></info>
+            
 
             <para>
                 L'extrait suivant montre comment spécifier sa propre locale utilisée si le client
@@ -119,10 +116,10 @@
 resources.locale.default = "fr_FR"
 ]]></programlisting>
         </example>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.application.available-resources.locale.forcing">
-        <title>Forcer l'utilisation d'une locale</title>
+    <section xml:id="zend.application.available-resources.locale.forcing"><info><title>Forcer l'utilisation d'une locale</title></info>
+        
 
         <para>
             Parfois il peut être pratique de définir la locale qui devra être utilisée. Ceci peut
@@ -134,8 +131,8 @@ resources.locale.default = "fr_FR"
             désactivée.
         </para>
 
-        <example id="zend.application.available-resources.locale.configExampleFallbackOnly">
-            <title>Définition de la locale à utiliser</title>
+        <example xml:id="zend.application.available-resources.locale.configExampleFallbackOnly"><info><title>Définition de la locale à utiliser</title></info>
+            
 
             <para>
                 L'extrait suivant montre comment spécifier la locale à utiliser pour toute votre
@@ -148,5 +145,5 @@ resources.locale.default = "fr_FR"
 resources.locale.force = true
 ]]></programlisting>
         </example>
-    </sect3>
-</sect2>
+    </section>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 17592 -->
-    <!-- Reviewed: no -->
-<sect3 id="zend.controller.router.routes.static">
-    <title>Zend_Controller_Router_Route_Static</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.router.routes.static"><info><title>Zend_Controller_Router_Route_Static</title></info>
+    
 
     <para>Los ejemplos sobre todo usan rutas dinámicas -- rutas que contienen
         patrones contra los
@@ -31,9 +29,9 @@ $router->addRoute('login', $route);
         .
     </para>
 
-    <note id="zend.controller.router.routes.static.warning">
-        <title>Advertencia: Las Rutas Estáticas Deben Contener Defaults
-            Sanos</title>
+    <note xml:id="zend.controller.router.routes.static.warning"><info><title>Advertencia: Las Rutas Estáticas Deben Contener Defaults
+            Sanos</title></info>
+        
 
         <para>
             Dado que una ruta estática no pasa ninguna parte de la
@@ -79,4 +77,4 @@ $front->setParam('useDefaultControllerAlways', true);
             valores correctos o sanos por defecto.
        </para>
     </note>
-</sect3>
+</section>

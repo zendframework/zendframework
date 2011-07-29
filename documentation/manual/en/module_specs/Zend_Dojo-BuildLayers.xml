@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.dojo.build-layers">
-    <title>Zend_Dojo build layer support</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.build-layers"><info><title>Zend_Dojo build layer support</title></info>
+    
 
-    <sect2 id="zend.dojo.build-layers.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.dojo.build-layers.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             Dojo build layers provide a clean path from development to
@@ -77,10 +76,10 @@ $view->dojo()->registerModulePath('custom', '../custom/')
             file. This is the purpose of
             <classname>Zend_Dojo_BuildLayer</classname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.dojo.build-layers.usage">
-        <title>Generating Custom Module Layers with Zend_Dojo_BuildLayer</title>
+    <section xml:id="zend.dojo.build-layers.usage"><info><title>Generating Custom Module Layers with Zend_Dojo_BuildLayer</title></info>
+        
 
         <para>
             At its simplest, you simply instantiate
@@ -158,8 +157,8 @@ class App_Plugin_DojoLayer extends Zend_Controller_Plugin_Abstract
 }
 ]]></programlisting>
 
-        <note>
-            <title>Do not generate the layer on every page</title>
+        <note><info><title>Do not generate the layer on every page</title></info>
+            
 
             <para>
                 It's tempting to generate the layer script on each and every
@@ -170,8 +169,8 @@ class App_Plugin_DojoLayer extends Zend_Controller_Plugin_Abstract
             </para>
         </note>
 
-        <sect3 id="zend.dojo.build-layers.usage.options">
-            <title>BuildLayer options</title>
+        <section xml:id="zend.dojo.build-layers.usage.options"><info><title>BuildLayer options</title></info>
+            
 
             <para>
                 The above functionality will suffice for most situations. For
@@ -179,8 +178,8 @@ class App_Plugin_DojoLayer extends Zend_Controller_Plugin_Abstract
                 invoked.
             </para>
 
-            <sect4 id="zend.dojo.build-layers.usage.options.view">
-                <title>Setting the view object</title>
+            <section xml:id="zend.dojo.build-layers.usage.options.view"><info><title>Setting the view object</title></info>
+                
 
                 <para>
                     While the view object may be passed during instantiation,
@@ -191,10 +190,10 @@ class App_Plugin_DojoLayer extends Zend_Controller_Plugin_Abstract
                 <programlisting language="php"><![CDATA[
 $build->setView($view);
 ]]></programlisting>
-            </sect4>
+            </section>
 
-            <sect4 id="zend.dojo.build-layers.usage.options.layername">
-                <title>Setting the layer name</title>
+            <section xml:id="zend.dojo.build-layers.usage.options.layername"><info><title>Setting the layer name</title></info>
+                
 
                 <para>
                     While the layer name may be passed during instantiation,
@@ -205,10 +204,10 @@ $build->setView($view);
                 <programlisting language="php"><![CDATA[
 $build->setLayerName("custom.main");
 ]]></programlisting>
-            </sect4>
+            </section>
 
-            <sect4 id="zend.dojo.build-layers.usage.options.onload">
-                <title>Including onLoad events in the generated layer</title>
+            <section xml:id="zend.dojo.build-layers.usage.options.onload"><info><title>Including onLoad events in the generated layer</title></info>
+                
 
                 <para>
                     <command>dojo.addOnLoad</command> is a useful utility for
@@ -244,10 +243,10 @@ $build = new Zend_Dojo_BuildLayer(array(
                 <programlisting language="php"><![CDATA[
 $build->setConsumeOnLoad(true);
 ]]></programlisting>
-            </sect4>
+            </section>
 
-            <sect4 id="zend.dojo.build-layers.usage.options.javascript">
-                <title>Including captured JavaScript in the generated layer</title>
+            <section xml:id="zend.dojo.build-layers.usage.options.javascript"><info><title>Including captured JavaScript in the generated layer</title></info>
+                
 
                 <para>
                     The <methodname>dojo()</methodname> view helper includes methods for
@@ -282,12 +281,12 @@ $build = new Zend_Dojo_BuildLayer(array(
                 <programlisting language="php"><![CDATA[
 $build->setConsumeJavascript(true);
 ]]></programlisting>
-            </sect4>
-        </sect3>
-    </sect2>
+            </section>
+        </section>
+    </section>
 
-    <sect2 id="zend.dojo.build-layers.profiles">
-        <title>Generating Build Profiles with Zend_Dojo_BuildLayer</title>
+    <section xml:id="zend.dojo.build-layers.profiles"><info><title>Generating Build Profiles with Zend_Dojo_BuildLayer</title></info>
+        
 
         <para>
             One of the chief benefits of a Dojo module layer is that it
@@ -354,8 +353,8 @@ class App_Plugin_DojoLayer extends Zend_Controller_Plugin_Abstract
             As noted, with module layers, you should only create the file once.
         </para>
 
-        <sect3 id="zend.dojo.build-layers.profiles.options">
-            <title>Build Profile options</title>
+        <section xml:id="zend.dojo.build-layers.profiles.options"><info><title>Build Profile options</title></info>
+            
 
             <para>
                 The above functionality will suffice for most situations. The
@@ -368,10 +367,9 @@ class App_Plugin_DojoLayer extends Zend_Controller_Plugin_Abstract
                 optimizations should be performed, whether or not to optimize
                 <acronym>CSS</acronym> files in the layer, whether or not to copy tests into the
                 build, etc. For a listing of available options, you should read
-                the <ulink url="http://docs.dojocampus.org/build/index">Dojo
-                    Build documentation</ulink> and <ulink
-                    url="http://dojotoolkit.org/reference-guide/dojo/index.html#package-system">accompanying
-                documentation</ulink>.
+                the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://docs.dojocampus.org/build/index">Dojo
+                    Build documentation</link> and <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org/reference-guide/dojo/index.html#package-system">accompanying
+                documentation</link>.
             </para>
 
             <para>
@@ -425,6 +423,6 @@ $build->setProfileOptions(array(
     'optimize' => 'shrinksafe',
 ));
 ]]></programlisting>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.version.reading">
-    <title>Getting the Zend Framework Version</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.version.reading"><info><title>Getting the Zend Framework Version</title></info>
+    
 
     <para>
         <classname>Zend_Version</classname> provides a class constant
@@ -12,16 +11,15 @@
 
     <para>
         The static method <methodname>Zend_Version::compareVersion($version)</methodname>
-        is based on the <acronym>PHP</acronym> function <ulink
-            url="http://php.net/version_compare"><methodname>version_compare()</methodname></ulink>.
+        is based on the <acronym>PHP</acronym> function <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/version_compare"><methodname>version_compare()</methodname></link>.
         This method returns -1 if the specified version
         is older than the installed Zend Framework version, 0 if they are the same
         and +1 if the specified version is newer than the
         version of the Zend Framework installation.
     </para>
 
-    <example id="zend.version.reading.example">
-        <title>Example of the compareVersion() Method</title>
+    <example xml:id="zend.version.reading.example"><info><title>Example of the compareVersion() Method</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 // returns -1, 0 or 1
@@ -32,18 +30,15 @@ $cmp = Zend_Version::compareVersion('2.0.0');
     <para>
         The static method <methodname>Zend_Version::getLatest()</methodname> provides the version
         number of the last stable release available for download on the site
-        <ulink url="http://framework.zend.com/download/latest">Zend Framework</ulink>.
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/download/latest">Zend Framework</link>.
     </para>
 
-    <example id="zend.version.latest.example">
-        <title>Example of the getLatest() Method</title>
+    <example xml:id="zend.version.latest.example"><info><title>Example of the getLatest() Method</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 // returns 1.11.0 (or a later version)
 echo Zend_Version::getLatest();
 ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

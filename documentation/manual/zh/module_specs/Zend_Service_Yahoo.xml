@@ -1,27 +1,28 @@
-<sect1 id="zend.service.yahoo">
-    <title>Zend_Service_Yahoo</title>
-    <sect2 id="zend.service.yahoo.introduction">
-        <title>简介</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.yahoo"><info><title>Zend_Service_Yahoo</title></info>
+    
+    <section xml:id="zend.service.yahoo.introduction"><info><title>简介</title></info>
+        
         <para>
             <code>Zend_Service_Yahoo</code> 是一个实现多个Yahoo! REST 接口的API.
             <code>Zend_Service_Yahoo</code> 允许你使用Yahoo! 网页搜索, Yahoo! 新闻,
             Yahoo! 本地(Local), Yahoo! 图片. 为了使用 Yahoo! REST API,
             你必须拥有一个 Yahoo! Application ID. 要获得它, 请访问
-            <ulink url="http://api.search.yahoo.com/webservices/register_application">Application ID Request Form</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://api.search.yahoo.com/webservices/register_application">Application ID Request Form</link>.
         </para>
-    </sect2>
-    <sect2 id="zend.service.yahoo.websearch">
-        <title>用Yahoo!来搜索网页</title>
+    </section>
+    <section xml:id="zend.service.yahoo.websearch"><info><title>用Yahoo!来搜索网页</title></info>
+        
         <para>
             <code>Zend_Service_Yahoo</code> 允许你用
             <code>webSearch()</code> 方法来进行Yahoo! 网页搜索, 它接受一个查询字符串作为参数 ，
             用一个可选的数组传递搜索选项. 更多的细节和搜索选项的信息, 请访问
-            <ulink url="http://developer.yahoo.net/search/web/V1/webSearch.html">Yahoo! Web Search
-            Documentation</ulink>.  <code>webSearch()</code> 方法返回一个
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://developer.yahoo.net/search/web/V1/webSearch.html">Yahoo! Web Search
+            Documentation</link>.  <code>webSearch()</code> 方法返回一个
             <code>Zend_Service_Yahoo_WebResultSet</code> 对象.
         </para>
-        <example>
-            <title>用Yahoo!来搜索网页</title>
+        <example><info><title>用Yahoo!来搜索网页</title></info>
+            
             <programlisting><![CDATA[<?php
 require_once 'Zend/Service/Yahoo.php';
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
@@ -29,21 +30,21 @@ $results = $yahoo->webSearch('PHP');
 foreach ($results as $result) {
     echo $result->Title .'<br />';
 }
-?>]]>       </programlisting>
+?>       ]]></programlisting>
         </example>
-    </sect2>
-    <sect2 id="zend.service.yahoo.imagesearch">
-        <title> 用Yahoo!来查找图片</title>
+    </section>
+    <section xml:id="zend.service.yahoo.imagesearch"><info><title> 用Yahoo!来查找图片</title></info>
+        
         <para>
             你可以使用<code>Zend_Service_Yahoo</code>的 <code>imageSearch()</code>
             方法来在Yahoo上搜索图片。  。 它接受一个查询字符串作为参数 ，用一个可选的数组传递搜索选项, 就像
             <link linkend="zend.service.yahoo.websearch"><code>webSearch()</code> method</link>.
             更多的细节和搜索选项的信息, 请访问
-            <ulink url="http://developer.yahoo.net/search/image/V1/imageSearch.html">Yahoo! Image Search
-            Documentation</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://developer.yahoo.net/search/image/V1/imageSearch.html">Yahoo! Image Search
+            Documentation</link>.
         </para>
-        <example>
-            <title>用Yahoo!来查找图片</title>
+        <example><info><title>用Yahoo!来查找图片</title></info>
+            
             <programlisting><![CDATA[<?php
 require_once 'Zend/Service/Yahoo.php';
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
@@ -51,19 +52,19 @@ $results = $yahoo->imageSearch('PHP');
 foreach ($results as $result) {
     echo $result->Title .'<br />';
 }
-?>]]>       </programlisting>
+?>       ]]></programlisting>
         </example>
-    </sect2>
-    <sect2 id="zend.service.yahoo.localsearch">
-        <title>Finding Local Businesses and Services with Yahoo!</title>
+    </section>
+    <section xml:id="zend.service.yahoo.localsearch"><info><title>Finding Local Businesses and Services with Yahoo!</title></info>
+        
         <para>
             You can search for local businesses and services with Yahoo! by using the <code>localSearch()</code> method.
             For full details, please see the
-            <ulink url="http://developer.yahoo.net/search/local/V1/localSearch.html">Yahoo! Local Search
-            Documentation</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://developer.yahoo.net/search/local/V1/localSearch.html">Yahoo! Local Search
+            Documentation</link>.
         </para>
-        <example>
-            <title>用Yahoo!查找本地商务和服务信息</title>
+        <example><info><title>用Yahoo!查找本地商务和服务信息</title></info>
+            
             <programlisting><![CDATA[<?php
 require_once 'Zend/Service/Yahoo.php';
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
@@ -71,19 +72,19 @@ $results = $yahoo->localSearch('Apple Computers', array('zip' => '95014'));
 foreach ($results as $result) {
     echo $result->Title .'<br />';
 }
-?>]]>       </programlisting>
+?>       ]]></programlisting>
         </example>
-    </sect2>
-    <sect2 id="zend.service.yahoo.newssearch">
-        <title>搜索Yahoo! 新闻</title>
+    </section>
+    <section xml:id="zend.service.yahoo.newssearch"><info><title>搜索Yahoo! 新闻</title></info>
+        
         <para>
             搜索Yahoo! 新闻非常简单; 使用  <code>newsSearch()</code> 方法,
             如下面的例子. 更多的细节和搜索选项的信息, 请访问
-            <ulink url="http://developer.yahoo.net/search/news/V1/newsSearch.html">Yahoo! News Search
-            Documentation</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://developer.yahoo.net/search/news/V1/newsSearch.html">Yahoo! News Search
+            Documentation</link>.
         </para>
-        <example>
-            <title>搜索Yahoo! 新闻</title>
+        <example><info><title>搜索Yahoo! 新闻</title></info>
+            
             <programlisting><![CDATA[<?php
 require_once 'Zend/Service/Yahoo.php';
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
@@ -91,11 +92,11 @@ $results = $yahoo->newsSearch('PHP');
 foreach ($results as $result) {
     echo $result->Title .'<br />';
 }
-?>]]>       </programlisting>
+?>       ]]></programlisting>
         </example>
-    </sect2>
-<sect2 id="zend.service.yahoo.classes">
-    <title>Zend_Service_Yahoo 类</title>
+    </section>
+<section xml:id="zend.service.yahoo.classes"><info><title>Zend_Service_Yahoo 类</title></info>
+    
     <para>
         不同的Yahoo! 搜索类型会返回下面的这些类. 每个搜索类型返回指定类型的结果集, 我们可以很方便的对它们进行遍历,
         每个结果被包含在一种类型的结果集对象中. 所有这些对象都实现了
@@ -114,8 +115,8 @@ foreach ($results as $result) {
             <listitem><para><link linkend="zend.service.yahoo.classes.image"><code>Zend_Service_Yahoo_Image</code></link></para></listitem>
         </itemizedlist>
     </para>
-    <sect3 id="zend.service.yahoo.classes.resultset">
-        <title>Zend_Service_Yahoo_ResultSet</title>
+    <section xml:id="zend.service.yahoo.classes.resultset"><info><title>Zend_Service_Yahoo_ResultSet</title></info>
+        
         <para>
             每类搜索特定的结果集都由这个基类扩展而成
         </para>
@@ -123,23 +124,23 @@ foreach ($results as $result) {
             每类搜索特定的结果集都会返回这个搜索特定的
             <link linkend="zend.service.yahoo.classes.result">Zend_Service_Yahoo_Result</link> 对象.
         </para>
-        <sect4 id="zend.service.yahoo.classes.resultset.totalResults">
-            <title>Zend_Service_Yahoo_ResultSet::totalResults()</title>
+        <section xml:id="zend.service.yahoo.classes.resultset.totalResults"><info><title>Zend_Service_Yahoo_ResultSet::totalResults()</title></info>
+            
             <para>
                 <methodsynopsis>
                     <type>int</type>
                     <methodname>totalResults</methodname>
-                    <void />
+                    <void/>
                 </methodsynopsis>
             </para>
             <para>
                 返回搜索结果的数量
             </para>
-        </sect4>
-        <sect4 id="zend.service.yahoo.classes.resultset.properties">
-            <title>Properties</title>
-            <table>
-                <title>Zend_Service_Yahoo_ResultSet</title>
+        </section>
+        <section xml:id="zend.service.yahoo.classes.resultset.properties"><info><title>Properties</title></info>
+            
+            <table><info><title>Zend_Service_Yahoo_ResultSet</title></info>
+                
                 <tgroup cols="3">
                     <thead>
                         <row>
@@ -172,10 +173,10 @@ foreach ($results as $result) {
             <para>
                 <link linkend="zend.service.yahoo.classes">Back to Class List</link>
             </para>
-        </sect4>
-    </sect3>
-    <sect3 id="zend.service.yahoo.classes.webresultset">
-        <title>Zend_Service_Yahoo_WebResultSet</title>
+        </section>
+    </section>
+    <section xml:id="zend.service.yahoo.classes.webresultset"><info><title>Zend_Service_Yahoo_WebResultSet</title></info>
+        
         <para>
             <code>Zend_Service_Yahoo_WebResultSet</code> 代表 Yahoo! 网页搜索的结果集.
         </para>
@@ -187,9 +188,9 @@ foreach ($results as $result) {
         <para>
             <link linkend="zend.service.yahoo.classes">Back to Class List</link>
         </para>
-    </sect3>
-    <sect3 id="zend.service.yahoo.classes.imageresultset">
-        <title>Zend_Service_Yahoo_ImageResultSet</title>
+    </section>
+    <section xml:id="zend.service.yahoo.classes.imageresultset"><info><title>Zend_Service_Yahoo_ImageResultSet</title></info>
+        
         <para>
             <code>Zend_Service_Yahoo_ImageResultSet</code> 代表一个 Yahoo! 图片搜索结果集
         </para>
@@ -201,14 +202,14 @@ foreach ($results as $result) {
         <para>
             <link linkend="zend.service.yahoo.classes">Back to Class List</link>
         </para>
-    </sect3>
-    <sect3 id="zend.service.yahoo.classes.localresultset">
-        <title>Zend_Service_Yahoo_LocalResultSet</title>
+    </section>
+    <section xml:id="zend.service.yahoo.classes.localresultset"><info><title>Zend_Service_Yahoo_LocalResultSet</title></info>
+        
         <para>
             <code>Zend_Service_Yahoo_LocalResultSet</code> 代表一个Yahoo!本地搜索的结果集
         </para>
-        <table>
-            <title>Zend_Service_Yahoo_LocalResultSet 属性</title>
+        <table><info><title>Zend_Service_Yahoo_LocalResultSet 属性</title></info>
+            
             <tgroup cols="3">
                 <thead>
                     <row>
@@ -234,9 +235,9 @@ foreach ($results as $result) {
         <para>
             <link linkend="zend.service.yahoo.classes">Back to Class List</link>
         </para>
-    </sect3>
-    <sect3 id="zend.service.yahoo.classes.newsresultset">
-        <title>Zend_Service_Yahoo_NewsResultSet</title>
+    </section>
+    <section xml:id="zend.service.yahoo.classes.newsresultset"><info><title>Zend_Service_Yahoo_NewsResultSet</title></info>
+        
         <para>
             <code>Zend_Service_Yahoo_NewsResultSet</code> 代表一个Yahoo!新闻搜索结果的集合
         </para>
@@ -248,16 +249,16 @@ foreach ($results as $result) {
         <para>
             <link linkend="zend.service.yahoo.classes">Back to Class List</link>
         </para>
-    </sect3>
-    <sect3 id="zend.service.yahoo.classes.result">
-        <title>Zend_Service_Yahoo_Result</title>
+    </section>
+    <section xml:id="zend.service.yahoo.classes.result"><info><title>Zend_Service_Yahoo_Result</title></info>
+        
         <para>
             每类搜索特定的结果都由这个基类扩展而成
         </para>
-        <sect4 id="zend.service.yahoo.classes.result.properties">
-            <title>Properties</title>
-            <table>
-                <title>Zend_Service_Yahoo_Result Properties</title>
+        <section xml:id="zend.service.yahoo.classes.result.properties"><info><title>Properties</title></info>
+            
+            <table><info><title>Zend_Service_Yahoo_Result Properties</title></info>
+                
                 <tgroup cols="3">
                     <thead>
                         <row>
@@ -288,17 +289,17 @@ foreach ($results as $result) {
             <para>
                 <link linkend="zend.service.yahoo.classes">Back to Class List</link>
             </para>
-        </sect4>
-     </sect3>
-     <sect3 id="zend.service.yahoo.classes.webresult">
-        <title>Zend_Service_Yahoo_WebResult</title>
+        </section>
+     </section>
+     <section xml:id="zend.service.yahoo.classes.webresult"><info><title>Zend_Service_Yahoo_WebResult</title></info>
+        
         <para>
            每一个网页搜索结果作为一个 <code>Zend_Service_Yahoo_WebResult</code> 对相返回.
         </para>
-        <sect4 id="zend.service.yahoo.classes.webresult.properties">
-            <title>属性</title>
-            <table>
-                <title>Zend_Service_Yahoo_WebResult 属性</title>
+        <section xml:id="zend.service.yahoo.classes.webresult.properties"><info><title>属性</title></info>
+            
+            <table><info><title>Zend_Service_Yahoo_WebResult 属性</title></info>
+                
                 <tgroup cols="3">
                     <thead>
                         <row>
@@ -339,17 +340,17 @@ foreach ($results as $result) {
             <para>
                 <link linkend="zend.service.yahoo.classes">Back to Class List</link>
             </para>
-        </sect4>
-     </sect3>
-     <sect3 id="zend.service.yahoo.classes.imageresult">
-        <title>Zend_Service_Yahoo_ImageResult</title>
+        </section>
+     </section>
+     <section xml:id="zend.service.yahoo.classes.imageresult"><info><title>Zend_Service_Yahoo_ImageResult</title></info>
+        
         <para>
             每一个图片搜索结果作为一个 <code>Zend_Service_Yahoo_ImageResult</code> 对相返回.
         </para>
-        <sect4 id="zend.service.yahoo.classes.imageresult.properties">
-            <title>属性</title>
-            <table>
-                <title>Zend_Service_Yahoo_ImageResult 属性</title>
+        <section xml:id="zend.service.yahoo.classes.imageresult.properties"><info><title>属性</title></info>
+            
+            <table><info><title>Zend_Service_Yahoo_ImageResult 属性</title></info>
+                
                 <tgroup cols="3">
                     <thead>
                         <row>
@@ -400,17 +401,17 @@ foreach ($results as $result) {
             <para>
                 <link linkend="zend.service.yahoo.classes">Back to Class List</link>
             </para>
-        </sect4>
-     </sect3>
-     <sect3 id="zend.service.yahoo.classes.localresult">
-        <title>Zend_Service_Yahoo_LocalResult</title>
+        </section>
+     </section>
+     <section xml:id="zend.service.yahoo.classes.localresult"><info><title>Zend_Service_Yahoo_LocalResult</title></info>
+        
         <para>
             每一个本地搜索结果以 <code>Zend_Service_Yahoo_LocalResult</code> 对相返回.
         </para>
-        <sect4 id="zend.service.yahoo.classes.localresult.properties">
-            <title>属性</title>
-            <table>
-                <title>Zend_Service_Yahoo_LocalResult 属性</title>
+        <section xml:id="zend.service.yahoo.classes.localresult.properties"><info><title>属性</title></info>
+            
+            <table><info><title>Zend_Service_Yahoo_LocalResult 属性</title></info>
+                
                 <tgroup cols="3">
                     <thead>
                         <row>
@@ -471,17 +472,17 @@ foreach ($results as $result) {
             <para>
                 <link linkend="zend.service.yahoo.classes">Back to Class List</link>
             </para>
-        </sect4>
-     </sect3>
-     <sect3 id="zend.service.yahoo.classes.newsresult">
-        <title>Zend_Service_Yahoo_NewsResult</title>
+        </section>
+     </section>
+     <section xml:id="zend.service.yahoo.classes.newsresult"><info><title>Zend_Service_Yahoo_NewsResult</title></info>
+        
         <para>
             每一个新闻搜索结果作为一个 <code>Zend_Service_Yahoo_NewsResult</code> 对相返回.
         </para>
-        <sect4 id="zend.service.yahoo.classes.newsresult.properties">
-            <title>属性</title>
-            <table>
-                <title>Zend_Service_Yahoo_NewsResult 属性</title>
+        <section xml:id="zend.service.yahoo.classes.newsresult.properties"><info><title>属性</title></info>
+            
+            <table><info><title>Zend_Service_Yahoo_NewsResult 属性</title></info>
+                
                 <tgroup cols="3">
                     <thead>
                         <row>
@@ -532,18 +533,18 @@ foreach ($results as $result) {
             <para>
                 <link linkend="zend.service.yahoo.classes">Back to Class List</link>
             </para>
-        </sect4>
-     </sect3>
-     <sect3 id="zend.service.yahoo.classes.image">
-        <title>Zend_Service_Yahoo_Image</title>
+        </section>
+     </section>
+     <section xml:id="zend.service.yahoo.classes.image"><info><title>Zend_Service_Yahoo_Image</title></info>
+        
         <para>
             所有的Yahoo!图片和新闻搜索返回的图片都作为
             <code>Zend_Service_Yahoo_Image</code> 对相返回
         </para>
-        <sect4 id="zend.service.yahoo.classes.image.properties">
-            <title>Properties</title>
-            <table>
-                <title>Zend_Service_Yahoo_Image Properties</title>
+        <section xml:id="zend.service.yahoo.classes.image.properties"><info><title>Properties</title></info>
+            
+            <table><info><title>Zend_Service_Yahoo_Image Properties</title></info>
+                
                 <tgroup cols="3">
                     <thead>
                         <row>
@@ -574,10 +575,7 @@ foreach ($results as $result) {
             <para>
                 <link linkend="zend.service.yahoo.classes">Back to Class List</link>
             </para>
-        </sect4>
-    </sect3>
-</sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>
+</section>

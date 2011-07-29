@@ -1,21 +1,24 @@
-<sect1 id="zend.currency.introduction">
+<?xml version="1.0" encoding="utf-8"?>
 
-    <title>הקדמה ל Zend_Currency</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.introduction"><info><title>הקדמה ל Zend_Currency</title></info>
+
+    
 
     <para>
         <code>Zend_Currency</code> היא חלק מהתמיכה החזקה ל i18n במערכת ה Zend Framework. היא מטפלת בכל הנושאים הקשורים למטבעות, תצוגת מטבעות ותצוגת מבנה לכל מטבע.
         כמו כן היא מספקת מתודות נוספות אשר מספקות מידע אודות מטבעות, כמו איזה מטבע משומש בכל איזור.
     </para>
 
-    <sect2 id="zend.currency.introduction.list">
+    <section xml:id="zend.currency.introduction.list"><info><title>למה להשתמש ב <code>Zend_Currency</code>?</title></info>
 
-        <title>למה להשתמש ב <code>Zend_Currency</code>?</title>
+        
 
         <para>
             <code>Zend_Currency</code> מספקת את הדברים הבאים לשימוש חופשי:
         </para>
 
-        <itemizedlist mark='opencircle'>
+        <itemizedlist mark="opencircle">
             <listitem>
                 <para>
                     <emphasis role="strong">תמיכה מקומית מלאה</emphasis>
@@ -50,6 +53,6 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-</sect1>
+</section>

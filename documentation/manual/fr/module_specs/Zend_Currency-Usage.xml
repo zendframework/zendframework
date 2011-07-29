@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21749 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.currency.usage">
-    <title>Utiliser Zend_Currency</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.usage"><info><title>Utiliser Zend_Currency</title></info>
+    
 
-    <sect2 id="zend.currency.usage.generic">
-        <title>Utilisation de base</title>
+    <section xml:id="zend.currency.usage.generic"><info><title>Utilisation de base</title></info>
+        
 
         <para>
             La manière la plus simple consiste à se reposer sur la locale de l'utilisateur. Lorsque vous créez
@@ -13,8 +11,8 @@
             utilisée.
         </para>
 
-        <example id="zend.currency.usage.generic.example-1">
-            <title>Créer une monnaie avec les paramètres du client</title>
+        <example xml:id="zend.currency.usage.generic.example-1"><info><title>Créer une monnaie avec les paramètres du client</title></info>
+            
 
             <para>
                 Imaginons un client dont la locale est "en_US" dans son navigateur. Dans ce cas,
@@ -35,8 +33,8 @@ $currency = new Zend_Currency();
             </para>
         </example>
 
-        <note>
-            <title>La détection automatique par locale ne fonctionne pas toujours</title>
+        <note><info><title>La détection automatique par locale ne fonctionne pas toujours</title></info>
+            
 
             <para>
                 La détection automatique par locale ne fonctionne pas toujours car
@@ -51,10 +49,10 @@ $currency = new Zend_Currency();
                 attendus ou des exceptions.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.currency.usage.locale">
-        <title>Créer une monnaie basée sur une locale</title>
+    <section xml:id="zend.currency.usage.locale"><info><title>Créer une monnaie basée sur une locale</title></info>
+        
 
         <para>
             Pour éviter ce genre de problème, précisez manuellement la locale à utiliser.
@@ -89,10 +87,10 @@ Zend_Registry::set('Zend_Locale', $locale);
 // quelque part dans l'application
 $currency = new Zend_Currency();
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.currency.usage.territory">
-        <title>Création de monnaie basée sur un pays</title>
+    <section xml:id="zend.currency.usage.territory"><info><title>Création de monnaie basée sur un pays</title></info>
+        
 
         <para>
             <classname>Zend_Currency</classname> est aussi capable de travailler à partir d'un pays
@@ -106,8 +104,8 @@ $currency = new Zend_Currency('US');
 // var_dump($currency);
 ]]></programlisting>
 
-        <note>
-            <title>Mettre en majuscule les pays</title>
+        <note><info><title>Mettre en majuscule les pays</title></info>
+            
 
             <para>
                 Quand vous savez que vous utilisez un pays, vous devez le mettre en majuscule.
@@ -121,5 +119,5 @@ $currency = new Zend_Currency('US');
                 pays.
             </para>
         </note>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21217 -->
-<sect1 id="zend.filter.inflector">
-    <title>Zend_Filter_Inflector</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.inflector"><info><title>Zend_Filter_Inflector</title></info>
+    
 
     <para>
         <classname>Zend_Filter_Inflector</classname>
@@ -24,8 +22,8 @@
         <methodname>filter()</methodname> をコールします。
     </para>
 
-    <example id="zend.filter.inflector.camel_case_example">
-        <title>MixedCase あるいは camelCase のテキストを別形式に変換する</title>
+    <example xml:id="zend.filter.inflector.camel_case_example"><info><title>MixedCase あるいは camelCase のテキストを別形式に変換する</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $inflector = new Zend_Filter_Inflector('pages/:page.:suffix');
@@ -44,8 +42,8 @@ $filtered = $inflector->filter(array('page' => $string));
 ]]></programlisting>
     </example>
 
-    <sect2 id="zend.filter.inflector.operation">
-        <title>操作</title>
+    <section xml:id="zend.filter.inflector.operation"><info><title>操作</title></info>
+        
 
         <para>
             インフレクタには、ひとつの <emphasis>ターゲット</emphasis>
@@ -76,10 +74,10 @@ $filtered = $inflector->filter(array('page' => $string));
             とするのではなく単に 'Alpha' あるいは 'StringToLower'
             だけで指定するということです。
         </para>
-    </sect2>
+    </section>
 
-     <sect2 id="zend.filter.inflector.paths">
-        <title>その他のフィルタ向けのパスの設定</title>
+     <section xml:id="zend.filter.inflector.paths"><info><title>その他のフィルタ向けのパスの設定</title></info>
+        
 
         <para>
             <classname>Zend_Filter_Inflector</classname> は、
@@ -118,14 +116,13 @@ $loader->addPrefixPath('My_Filter', 'My/Filter/');
 ]]></programlisting>
 
         <para>
-            フィルタのパスを変更するための詳細なオプションは、<link
-                linkend="zend.loader.pluginloader">PluginLoader
+            フィルタのパスを変更するための詳細なオプションは、<link linkend="zend.loader.pluginloader">PluginLoader
                 のドキュメント</link> を参照ください。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.inflector.targets">
-        <title>インフレクタのターゲットの設定</title>
+    <section xml:id="zend.filter.inflector.targets"><info><title>インフレクタのターゲットの設定</title></info>
+        
 
         <para>
             インフレクタのターゲットは、変数用のプレースホルダを含む文字列となります。
@@ -203,10 +200,10 @@ class Foo
     }
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.inflector.rules">
-        <title>インフレクションのルール</title>
+    <section xml:id="zend.filter.inflector.rules"><info><title>インフレクションのルール</title></info>
+        
 
         <para>
             先ほど説明したように、静的なルールとフィルタを使用したルールのふたつがあります。
@@ -227,8 +224,8 @@ class Foo
             </para>
         </note>
 
-        <sect3 id="zend.filter.inflector.rules.static">
-            <title>静的なルール</title>
+        <section xml:id="zend.filter.inflector.rules.static"><info><title>静的なルール</title></info>
+            
 
             <para>
                 静的なルールは、単なる文字列の置換を行います。
@@ -285,10 +282,10 @@ class Foo
     }
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.filter.inflector.rules.filters">
-            <title>Filter Inflector ルール</title>
+        <section xml:id="zend.filter.inflector.rules.filters"><info><title>Filter Inflector ルール</title></info>
+            
 
             <para>
                 <classname>Zend_Filter</classname> のフィルタ群も、インフレクタのルールとして使用できます。
@@ -342,10 +339,10 @@ $inflector->setFilterRule('script', array(
     new Zend_Filter_StringToLower()
 ));
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.filter.inflector.rules.multiple">
-            <title>多くのルールを一度に設定する</title>
+        <section xml:id="zend.filter.inflector.rules.multiple"><info><title>多くのルールを一度に設定する</title></info>
+            
 
             <para>
                 一般に、各変数に対して個別にインフレクタルールを設定するよりも、
@@ -373,8 +370,8 @@ $inflector->setFilterRule('script', array(
                 </para></listitem>
             </itemizedlist>
 
-            <example id="zend.filter.inflector.rules.multiple.example">
-                <title>複数のルールの一括設定</title>
+            <example xml:id="zend.filter.inflector.rules.multiple.example"><info><title>複数のルールの一括設定</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 // Could also use setRules() with this notation:
@@ -388,11 +385,11 @@ $inflector->addRules(array(
 ));
 ]]></programlisting>
             </example>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.filter.inflector.utility">
-        <title>ユーティリティメソッド</title>
+    <section xml:id="zend.filter.inflector.utility"><info><title>ユーティリティメソッド</title></info>
+        
 
         <para>
             <classname>Zend_Filter_Inflector</classname> のユーティリティメソッド群には、
@@ -438,10 +435,10 @@ $inflector->addRules(array(
                     現在登録されているルールをすべてクリアします。
             </para></listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.inflector.config">
-        <title>Zend_Filter_Inflector での Zend_Config の使用法</title>
+    <section xml:id="zend.filter.inflector.config"><info><title>Zend_Filter_Inflector での Zend_Config の使用法</title></info>
+        
 
         <para>
             <classname>Zend_Config</classname> を使用してルールを設定したり、
@@ -480,8 +477,8 @@ $inflector->addRules(array(
             </para></listitem>
         </itemizedlist>
 
-        <example id="zend.filter.inflector.config.example">
-            <title>Zend_Filter_Inflector での Zend_Config の使用法</title>
+        <example xml:id="zend.filter.inflector.config.example"><info><title>Zend_Filter_Inflector での Zend_Config の使用法</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // コンストラクタで
@@ -493,8 +490,5 @@ $inflector = new Zend_Filter_Inflector();
 $inflector->setOptions($config);
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

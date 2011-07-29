@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19766 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.layout.conclusions">
-    <title>Zend_Layout: Fazit</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.layout.conclusions"><info><title>Zend_Layout: Fazit</title></info>
+    
 
     <para>
         <classname>Zend_Layout</classname> ist ein sehr einfacher Wrapper um
@@ -18,4 +18,4 @@
         dem Konzept einer "Composite View" behandelt -- und sind Teil des nächsten Kapitels in
         diesem Tutorial, welches View "Platzhalter" behandelt.
     </para>
-</sect1>
+</section>

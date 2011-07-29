@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="performance.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         The purpose of this appendix is to provide some concrete strategies for
@@ -9,7 +10,4 @@
         is presented in a "Question and Answer" format, and broken into areas of
         concern.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.infocard.basics">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.infocard.basics"><info><title>Introduction</title></info>
+    
 
     <para>
         The <classname>Zend_InfoCard</classname> component implements relying-party
@@ -12,12 +11,11 @@
 
     <para>
         Detailed information about information cards and their importance to the
-        internet identity metasystem can be found on the <ulink
-            url="http://www.identityblog.com/">IdentityBlog</ulink>.
+        internet identity metasystem can be found on the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.identityblog.com/">IdentityBlog</link>.
     </para>
 
-    <sect2 id="zend.infocard.basics.theory">
-        <title>Basic Theory of Usage</title>
+    <section xml:id="zend.infocard.basics.theory"><info><title>Basic Theory of Usage</title></info>
+        
 
         <para>
             Usage of <classname>Zend_InfoCard</classname> can be done one of two ways:
@@ -69,10 +67,10 @@
             <acronym>SSL</acronym>-encrypted <acronym>URL</acronym>s. Please consult your web
             server's documentation on how to set up <acronym>SSL</acronym> encryption.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.infocard.basics.auth">
-        <title>Using as part of Zend_Auth</title>
+    <section xml:id="zend.infocard.basics.auth"><info><title>Using as part of Zend_Auth</title></info>
+        
 
         <para>
             In order to use the component as part of the <classname>Zend_Auth</classname>
@@ -154,10 +152,10 @@ if (isset($_POST['xmlToken'])) {
             information card token and authenticate the user by examining the
             identity provided by the <methodname>getIdentity()</methodname> method.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.infocard.basics.standalone">
-        <title>Using the Zend_InfoCard component standalone</title>
+    <section xml:id="zend.infocard.basics.standalone"><info><title>Using the Zend_InfoCard component standalone</title></info>
+        
 
         <para>
             It is also possible to use the <classname>Zend_InfoCard</classname> component as a
@@ -213,10 +211,10 @@ if (isset($_POST['xmlToken'])) {
             configured, we can use the <methodname>process()</methodname> method to process
             the information card and return the results.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.infocard.basics.claims">
-        <title>Working with a Claims object</title>
+    <section xml:id="zend.infocard.basics.claims"><info><title>Working with a Claims object</title></info>
+        
 
         <para>
             Regardless of whether the <classname>Zend_InfoCard</classname> component is used as
@@ -254,10 +252,10 @@ if (isset($_POST['xmlToken'])) {
             provided within the <classname>Zend_InfoCard_Claims</classname> object which
             returns the <acronym>URI</acronym> of the issuer of the information card claims.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.infocard.basics.attaching">
-        <title>Attaching Information Cards to existing accounts</title>
+    <section xml:id="zend.infocard.basics.attaching"><info><title>Attaching Information Cards to existing accounts</title></info>
+        
 
         <para>
             It is possible to add support for information cards to an existing
@@ -321,10 +319,10 @@ public function submitinfocardAction()
     }
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.infocard.basics.adapters">
-        <title>Creating Zend_InfoCard Adapters</title>
+    <section xml:id="zend.infocard.basics.adapters"><info><title>Creating Zend_InfoCard Adapters</title></info>
+        
 
         <para>
             The <classname>Zend_InfoCard</classname> component was designed to allow for
@@ -385,8 +383,5 @@ $infoCard->setAdapter($adapter);
 
 $claims = $infoCard->process($_POST['xmlToken']);
 ]]></programlisting>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

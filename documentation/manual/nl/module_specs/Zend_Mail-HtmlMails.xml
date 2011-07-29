@@ -1,13 +1,14 @@
-<sect1 id="zend.mail.html-mails">
-    <title>HTML E-Mail</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.html-mails"><info><title>HTML E-Mail</title></info>
+    
     <para>
         Om e-mail in HTML formaat te sturen moet je de inhoud geven via de methode <code>setBodyHTML()</code> in
         plaats van <code>setBodyText()</code>. Het MIME inhoudstype zal automatisch naar <code>text/html</code>
         worden gezet. Indien je zowel HTML als tekst inhoud gebruikt zal er automatisch een
         multipart/alternative MIME message worden gegenereerd:
     </para>
-    <example>
-        <title>HTML E-Mail zenden</title>
+    <example><info><title>HTML E-Mail zenden</title></info>
+        
         <programlisting role="php"><![CDATA[
 <?php
 require_once 'Zend/Mail.php';
@@ -18,9 +19,6 @@ $mail->setFrom('somebody@example.com', 'Een afzender');
 $mail->addTo('somebody_else@example.com', 'Een geadresseerde');
 $mail->setSubject('TestOnderwerp');
 $mail->send();
-?>]]>   </programlisting>
+?>   ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

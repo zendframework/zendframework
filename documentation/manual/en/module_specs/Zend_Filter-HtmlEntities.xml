@@ -1,15 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.htmlentities">
-    <title>HtmlEntities</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.htmlentities"><info><title>HtmlEntities</title></info>
+    
 
     <para>
         Returns the string <varname>$value</varname>, converting characters to their corresponding
         <acronym>HTML</acronym> entity equivalents where they exist.
     </para>
 
-    <sect3 id="zend.filter.set.htmlentities.options">
-        <title>Supported options for Zend_Filter_HtmlEntities</title>
+    <section xml:id="zend.filter.set.htmlentities.options"><info><title>Supported options for Zend_Filter_HtmlEntities</title></info>
+        
 
         <para>
             The following options are supported for <classname>Zend_Filter_HtmlEntities</classname>:
@@ -64,10 +63,10 @@
                 </note>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.htmlentities.basic">
-        <title>Basic usage</title>
+    <section xml:id="zend.filter.set.htmlentities.basic"><info><title>Basic usage</title></info>
+        
 
         <para>
             See the following example for the default behaviour of this filter.
@@ -78,10 +77,10 @@ $filter = new Zend_Filter_HtmlEntities();
 
 print $filter->filter('<');
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.htmlentities.quotestyle">
-        <title>Quote Style</title>
+    <section xml:id="zend.filter.set.htmlentities.quotestyle"><info><title>Quote Style</title></info>
+        
 
         <para>
             <classname>Zend_Filter_HtmlEntities</classname> allows changing the quote style used.
@@ -98,7 +97,7 @@ print $filter->filter($input);
 
         <para>
             The above example returns
-            <emphasis>A &#039;single&#039; and &quot;double&quot;</emphasis>. Notice that 'single'
+            <emphasis>A 'single' and "double"</emphasis>. Notice that 'single'
             as well as "double" quotes are filtered.
         </para>
 
@@ -110,7 +109,7 @@ print $filter->filter($input);
 ]]></programlisting>
 
         <para>
-            The above example returns <emphasis>A 'single' and &quot;double&quot;</emphasis>.
+            The above example returns <emphasis>A 'single' and "double"</emphasis>.
             Notice that "double" quotes are filtered while 'single' quotes are not altered.
         </para>
 
@@ -125,10 +124,10 @@ print $filter->filter($input);
             The above example returns <emphasis>A 'single' and "double"</emphasis>. Notice that
             neither "double" or 'single' quotes are altered.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.htmlentities.">
-        <title>Helper Methods</title>
+    <section xml:id="zend.filter.set.htmlentities."><info><title>Helper Methods</title></info>
+        
 
         <para>
             To change or retrieve the <property>quotestyle</property> after instantiation, the two
@@ -176,8 +175,5 @@ $filter = new Zend_Filter_HtmlEntities();
 $filter->setQuoteStyle(ENT_QUOTES);
 print $filter->getQuoteStyle(ENT_QUOTES);
 ]]></programlisting>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20854 -->
-<sect1 id="zend.search.lucene.index-creation">
-    <title>インデックスの構築</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.index-creation"><info><title>インデックスの構築</title></info>
+    
 
-    <sect2 id="zend.search.lucene.index-creation.creating">
-        <title>新しいインデックスの作成</title>
+    <section xml:id="zend.search.lucene.index-creation.creating"><info><title>新しいインデックスの作成</title></info>
+        
 
         <para>
             インデックスの作成機能および更新機能は、
@@ -39,10 +37,10 @@ $index->addDocument($doc);
             新しく追加されたドキュメントは、
             すぐにインデックスから取得できるようになります。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.updating">
-        <title>インデックスの更新</title>
+    <section xml:id="zend.search.lucene.index-creation.updating"><info><title>インデックスの更新</title></info>
+        
 
         <para>
             既存のインデックスを更新する際にも同じ手順を使用します。ただひとつの違いは、
@@ -63,10 +61,10 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
 // ドキュメントをインデックスに追加します。
 $index->addDocument($doc);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.document-updating">
-        <title>ドキュメントの更新</title>
+    <section xml:id="zend.search.lucene.index-creation.document-updating"><info><title>ドキュメントの更新</title></info>
+        
 
         <para>
             Lucene インデックスファイルは、ドキュメントの更新をサポートしていません。
@@ -86,10 +84,10 @@ foreach ($hits as $hit) {
     $index->delete($hit->id);
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.counting">
-        <title>インデックスの大きさの取得</title>
+    <section xml:id="zend.search.lucene.index-creation.counting"><info><title>インデックスの大きさの取得</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> のインデックスの大きさを知るには、二通りの方法があります。
@@ -130,10 +128,10 @@ for ($count = 0; $count < $index->maxDoc(); $count++) {
             ドキュメントの ID を前のほうに詰め込みます。
             つまり、内部でのドキュメント ID は変わる可能性があります。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.optimization">
-        <title>インデックスの最適化</title>
+    <section xml:id="zend.search.lucene.index-creation.optimization"><info><title>インデックスの最適化</title></info>
+        
 
         <para>
             Lucene のインデックスは、セグメントから構成されます。
@@ -143,7 +141,7 @@ for ($count = 0; $count < $index->maxDoc(); $count++) {
             Lucene インデックスセグメントのファイルは、その性質上更新することはできません。
             セグメントを更新するには、セグメント全体を再構成する必要があります
             (Lucene インデックスファイルのフォーマットについての詳細は、
-            <ulink url="http://lucene.apache.org/java/2_3_0/fileformats.html">http://lucene.apache.org/java/2_3_0/fileformats.html</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://lucene.apache.org/java/2_3_0/fileformats.html">http://lucene.apache.org/java/2_3_0/fileformats.html</link>
             を参照ください)
             <footnote><para>現在サポートしている Lucene インデックスファイルフォーマットのバージョンは v2.3 (Zend Framework 1.6 以降) です</para></footnote>。
             このことより、新しいドキュメントをインデックスに追加する際には、
@@ -179,23 +177,23 @@ $index->optimize();
             さらにそれがもう少し大きな別のセグメントに統合され、... といった具合です。
         </para>
 
-        <sect3 id="zend.search.lucene.index-creation.optimization.maxbuffereddocs">
-            <title>自動最適化オプション MaxBufferedDocs</title>
+        <section xml:id="zend.search.lucene.index-creation.optimization.maxbuffereddocs"><info><title>自動最適化オプション MaxBufferedDocs</title></info>
+            
             <para>
                 <emphasis>MaxBufferedDocs</emphasis> は、メモリ内に溜め込まれたドキュメントを
                 新しいセグメントに書き出す際の最小ドキュメント数です。
             </para>
             <para>
-                <emphasis>MaxBufferedDocs</emphasis> の値の取得や設定は、<code>$index->getMaxBufferedDocs()</code>
-                あるいは <code>$index->setMaxBufferedDocs($maxBufferedDocs)</code> のコールによって行います。
+                <emphasis>MaxBufferedDocs</emphasis> の値の取得や設定は、<code>$index-&gt;getMaxBufferedDocs()</code>
+                あるいは <code>$index-&gt;setMaxBufferedDocs($maxBufferedDocs)</code> のコールによって行います。
             </para>
             <para>
                 デフォルト値は 10 です。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.search.lucene.index-creation.optimization.maxmergedocs">
-            <title>自動最適化オプション MaxMergeDocs</title>
+        <section xml:id="zend.search.lucene.index-creation.optimization.maxmergedocs"><info><title>自動最適化オプション MaxMergeDocs</title></info>
+            
             <para>
                 <emphasis>MaxMergeDocs</emphasis> は、addDocument()
                 によってまとめられる最大のドキュメント数です。小さな値
@@ -204,16 +202,16 @@ $index->optimize();
                 大きな値は、バッチ処理の際に有効です。これにより、検索をより高速に行えるようになります。
             </para>
             <para>
-                <emphasis>MaxMergeDocs</emphasis> の値の取得や設定は、<code>$index->getMaxMergeDocs()</code>
-                あるいは <code>$index->setMaxMergeDocs($maxMergeDocs)</code> のコールによって行います。
+                <emphasis>MaxMergeDocs</emphasis> の値の取得や設定は、<code>$index-&gt;getMaxMergeDocs()</code>
+                あるいは <code>$index-&gt;setMaxMergeDocs($maxMergeDocs)</code> のコールによって行います。
             </para>
             <para>
                 デフォルト値は PHP_INT_MAX です。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.search.lucene.index-creation.optimization.mergefactor">
-            <title>自動最適化オプション MergeFactor</title>
+        <section xml:id="zend.search.lucene.index-creation.optimization.mergefactor"><info><title>自動最適化オプション MergeFactor</title></info>
+            
             <para>
                 <emphasis>MergeFactor</emphasis> は、addDocument() でセグメントをまとめる頻度を指定します。
                 小さな値を指定すると、インデックス作成の際に使用する <acronym>RAM</acronym> の量を抑えられます。
@@ -233,14 +231,14 @@ $index->optimize();
                 というエラーの原因となります。制限は、システムに依存します。
             </para>
             <para>
-                <emphasis>MergeFactor</emphasis> の値の取得や設定は、<code>$index->getMergeFactor()</code>
-                あるいは <code>$index->setMergeFactor($mergeFactor)</code> のコールによって行います。
+                <emphasis>MergeFactor</emphasis> の値の取得や設定は、<code>$index-&gt;getMergeFactor()</code>
+                あるいは <code>$index-&gt;setMergeFactor($mergeFactor)</code> のコールによって行います。
             </para>
             <para>
                 デフォルト値は 10 です。
             </para>
             <para>
-                Lucene Java および Luke (Lucene Index Toolbox - <ulink url="http://www.getopt.org/luke/">http://www.getopt.org/luke/</ulink>)
+                Lucene Java および Luke (Lucene Index Toolbox - <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.getopt.org/luke/">http://www.getopt.org/luke/</link>)
                 を使用してインデックスを最適化することもできます。
                 Luke の最新リリース (v0.8) は Lucene v2.3 をベースにしており、
                 現在の <classname>Zend_Search_Lucene</classname> コンポーネントの実装 (Zend Framework 1.6) と互換性があります。
@@ -248,18 +246,18 @@ $index->optimize();
                 それと互換性のある別のバージョンの Java Lucene ツールを使う必要があります。
                 <itemizedlist>
                     <listitem>
-                        <para>Zend Framework 1.5 - Java Lucene 2.1 (Luke tool v0.7.1 - <ulink url="http://www.getopt.org/luke/luke-0.7.1/"/>)</para>
+                        <para>Zend Framework 1.5 - Java Lucene 2.1 (Luke tool v0.7.1 - <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.getopt.org/luke/luke-0.7.1/">http://www.getopt.org/luke/luke-0.7.1/</uri>)</para>
                     </listitem>
                     <listitem>
-                        <para>Zend Framework 1.0 - Java Lucene 1.4 - 2.1 (Luke tool v0.6 - <ulink url="http://www.getopt.org/luke/luke-0.6/"/>)</para>
+                        <para>Zend Framework 1.0 - Java Lucene 1.4 - 2.1 (Luke tool v0.6 - <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.getopt.org/luke/luke-0.6/">http://www.getopt.org/luke/luke-0.6/</uri>)</para>
                     </listitem>
                 </itemizedlist>
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.permissions">
-        <title>パーミッション</title>
+    <section xml:id="zend.search.lucene.index-creation.permissions"><info><title>パーミッション</title></info>
+        
 
         <para>
             インデックスファイルは、デフォルトでは全員が読み書き可能となっています。
@@ -279,13 +277,13 @@ $currentPermissions =
 // 現在のユーザとグループに対してのみ読み書きアクセス権限を付与します
 Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions(0660);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.limitations">
-        <title>制限事項</title>
+    <section xml:id="zend.search.lucene.index-creation.limitations"><info><title>制限事項</title></info>
+        
 
-        <sect3 id="zend.search.lucene.index-creation.limitations.index-size">
-            <title>インデックスの大きさ</title>
+        <section xml:id="zend.search.lucene.index-creation.limitations.index-size"><info><title>インデックスの大きさ</title></info>
+            
             <para>
                 インデックスの大きさは、
                 32 ビットプラットフォームでは最大 2GB までとなります。
@@ -295,10 +293,10 @@ Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions(0660)
                 64 ビットプラットフォームを使用すれば、
                 もっと大きなインデックスを扱えます。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.search.lucene.index-creation.limitations.filesystems">
-            <title>サポートするファイルシステム</title>
+        <section xml:id="zend.search.lucene.index-creation.limitations.filesystems"><info><title>サポートするファイルシステム</title></info>
+            
             <para>
                 <classname>Zend_Search_Lucene</classname> は、
                 検索処理やインデックス更新、インデックスの最適化を処理する際に
@@ -306,7 +304,7 @@ Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions(0660)
             </para>
 
             <para>
-                PHP の <ulink url="http://www.php.net/manual/ja/function.flock.php">マニュアル</ulink>
+                PHP の <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/ja/function.flock.php">マニュアル</link>
                 によると、
                 "<methodname>flock()</methodname> は NFS 及び他の多くのネットワークファイルシステムでは動作しません"
                 とのことです。
@@ -315,10 +313,6 @@ Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions(0660)
             <para>
                 ネットワークファイルシステムは、<classname>Zend_Search_Lucene</classname> では使用しないでください。
             </para>
-        </sect3>
-    </sect2>
-</sect1>
-
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

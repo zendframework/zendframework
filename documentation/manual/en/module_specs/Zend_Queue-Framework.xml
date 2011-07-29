@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.queue.framework">
-    <title>Framework</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.framework"><info><title>Framework</title></info>
+    
 
     <para>
         The <classname>Zend_Queue</classname> is a proxy that hides the details
@@ -65,8 +64,8 @@ foreach ($messages as $i => $message) {
         <classname>Zend_Queue_Exception</classname>.
     </para>
 
-    <sect2 id="zend.queue.framework.basics">
-        <title>Introduction</title>
+    <section xml:id="zend.queue.framework.basics"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_Queue</classname> is a proxy class that represents
@@ -85,10 +84,10 @@ foreach ($messages as $i => $message) {
             <methodname>deleteQueue()</methodname> methods are used to manage
             queues.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.queue.framework.support">
-        <title>Commonality among adapters</title>
+    <section xml:id="zend.queue.framework.support"><info><title>Commonality among adapters</title></info>
+        
 
         <para>
             The queue services supported by <classname>Zend_Queue</classname> do
@@ -174,5 +173,5 @@ foreach ($messages as $i => $message) {
             <methodname>deleteQueue()</methodname> methods are used to manage
             queues.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

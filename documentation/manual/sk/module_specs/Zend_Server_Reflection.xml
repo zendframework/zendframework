@@ -1,8 +1,9 @@
-<sect1 id="zend.server.reflection">
-    <title>Zend_Server_Reflection</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.server.reflection"><info><title>Zend_Server_Reflection</title></info>
+    
 
-    <sect2 id="zend.server.reflection.introduction">
-        <title>Úvod</title>
+    <section xml:id="zend.server.reflection.introduction"><info><title>Úvod</title></info>
+        
 
         <para>
             Zend_Server_Reflection poskytuje štandardný mechanizmus pre zisťovanie
@@ -16,9 +17,9 @@
             Typicky využije túto funkčnosť iba programátor serverových tried pre
             framework.
         </para>
-    </sect2>
-    <sect2 id="zend.server.reflection.usage">
-        <title>Použitie</title>
+    </section>
+    <section xml:id="zend.server.reflection.usage"><info><title>Použitie</title></info>
+        
 
         <para>
             Základné použitie je jednoduché:
@@ -59,8 +60,5 @@ $reflection->getNamespace();
             <code>reflectClass</code> vráti objekt <code>Zend_Server_Reflection_Class</code>.
             Pre viac informácií o dostupných metódach si pozrite API dokumentáciu.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

@@ -1,13 +1,14 @@
-<sect1 id="zend.exception.using">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.using"><info><title>Utilizzo delle eccezioni</title></info>
 
-    <title>Utilizzo delle eccezioni</title>
+    
 
     <para>
         Tutte le eccezioni lanciate dalle classi del Framework Zend dovrebbero estendere la classe base Zend_Exception.
     </para>
 
-    <example id="zend.exception.using.example">
-        <title>Gestione di un'eccezione</title>
+    <example xml:id="zend.exception.using.example"><info><title>Gestione di un'eccezione</title></info>
+        
         <para>
             Il codice seguente dimostra come gestire un'eccezione lanciata all'interno di una classe del Framework Zend:
         </para>
@@ -21,8 +22,8 @@ try {
     echo "Messaggio: " . $e->getMessage() . "\n";
     // Altro codice necessario per gestire l'errore
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
 
     <para>
@@ -39,7 +40,4 @@ try {
         le eccezioni che possono essere lanciate.
     </para>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

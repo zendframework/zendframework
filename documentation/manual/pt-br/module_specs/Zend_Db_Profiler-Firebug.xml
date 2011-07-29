@@ -1,14 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20766 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.db.profiler.profilers.firebug">
-    <title>Analisando o Desempenho com Firebug</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.profiler.profilers.firebug"><info><title>Analisando o Desempenho com Firebug</title></info>
+    
 
     <para>
         <classname>Zend_Db_Profiler_Firebug</classname> envia informações de análise de
         desempenho para o
-        <ulink url="http://www.getfirebug.com/">Firebug</ulink> <ulink
-            url="http://getfirebug.com/logging.html">Console</ulink>.
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.getfirebug.com/">Firebug</link> <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://getfirebug.com/logging.html">Console</link>.
     </para>
 
     <para>
@@ -32,21 +29,19 @@
 
         <listitem>
             <para>
-                Firebug Firefox Extension que você pode baixar de <ulink
-                    url="https://addons.mozilla.org/en-US/firefox/addon/1843">https://addons.mozilla.org/en-US/firefox/addon/1843</ulink>.
+                Firebug Firefox Extension que você pode baixar de <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://addons.mozilla.org/en-US/firefox/addon/1843">https://addons.mozilla.org/en-US/firefox/addon/1843</link>.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                FirePHP Firefox Extension que você pode baixar de <ulink
-                    url="https://addons.mozilla.org/en-US/firefox/addon/6149">https://addons.mozilla.org/en-US/firefox/addon/6149</ulink>.
+                FirePHP Firefox Extension que você pode baixar de <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://addons.mozilla.org/en-US/firefox/addon/6149">https://addons.mozilla.org/en-US/firefox/addon/6149</link>.
             </para>
         </listitem>
     </itemizedlist>
 
-    <example id="zend.db.profiler.profilers.firebug.example.with_front_controller">
-        <title>Análise de Desempenho de Banco de Dados com Zend_Controller_Front</title>
+    <example xml:id="zend.db.profiler.profilers.firebug.example.with_front_controller"><info><title>Análise de Desempenho de Banco de Dados com Zend_Controller_Front</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 // Em seu arquivo de inicialização
@@ -64,8 +59,8 @@ $db->setProfiler($profiler)
 ]]></programlisting>
     </example>
 
-    <example id="zend.db.profiler.profilers.firebug.example.without_front_controller">
-        <title>DB Profiling without Zend_Controller_Front</title>
+    <example xml:id="zend.db.profiler.profilers.firebug.example.without_front_controller"><info><title>DB Profiling without Zend_Controller_Front</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $profiler = new Zend_Db_Profiler_Firebug('All DB Queries');
@@ -90,7 +85,4 @@ $channel->flush();
 $response->sendHeaders();
 ]]></programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

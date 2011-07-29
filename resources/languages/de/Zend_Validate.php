@@ -20,7 +20,7 @@
  */
 
 /**
- * EN-Revision: 06.Jan.2011
+ * EN-Revision: 25.Jul.2011
  */
 return array(
     // Zend_Validate_Alnum
@@ -76,13 +76,13 @@ return array(
 
     // Zend_Validate_EmailAddress
     "Invalid type given. String expected" => "Ungültiger Typ angegeben. String erwartet",
-    "'%value%' is no valid email address in the basic format local-part@hostname" => "'%value%' ist keine gültige Emailadresse im Basisformat local-part@hostname",
-    "'%hostname%' is no valid hostname for email address '%value%'" => "'%hostname%' ist kein gültiger Hostname für die Emailadresse '%value%'",
+    "'%value%' is not a valid email address in the basic format local-part@hostname" => "'%value%' ist keine gültige Emailadresse im Basisformat local-part@hostname",
+    "'%hostname%' is not a valid hostname for email address '%value%'" => "'%hostname%' ist kein gültiger Hostname für die Emailadresse '%value%'",
     "'%hostname%' does not appear to have a valid MX record for the email address '%value%'" => "'%hostname%' scheint keinen gültigen MX Eintrag für die Emailadresse '%value%' zu haben",
     "'%hostname%' is not in a routable network segment. The email address '%value%' should not be resolved from public network" => "'%hostname%' ist in keinem routebaren Netzwerksegment. Die Emailadresse '%value%' sollte nicht vom öffentlichen Netz aus aufgelöst werden",
     "'%localPart%' can not be matched against dot-atom format" => "'%localPart%' passt nicht auf das dot-atom Format",
     "'%localPart%' can not be matched against quoted-string format" => "'%localPart%' passt nicht auf das quoted-string Format",
-    "'%localPart%' is no valid local part for email address '%value%'" => "'%localPart%' ist kein gültiger lokaler Teil für die Emailadresse '%value%'",
+    "'%localPart%' is not a valid local part for email address '%value%'" => "'%localPart%' ist kein gültiger lokaler Teil für die Emailadresse '%value%'",
     "'%value%' exceeds the allowed length" => "'%value%' ist länger als erlaubt",
 
     // Zend_Validate_File_Count
@@ -224,7 +224,7 @@ return array(
 
     // Zend_Validate_Isbn
     "Invalid type given. String or integer expected" => "Ungültiger Typ angegeben. String oder Integer erwartet",
-    "'%value%' is no valid ISBN number" => "'%value%' ist keine gültige ISBN Nummer",
+    "'%value%' is not a valid ISBN number" => "'%value%' ist keine gültige ISBN Nummer",
 
     // Zend_Validate_LessThan
     "'%value%' is not less than '%max%'" => "'%value%' ist nicht weniger als '%max%'",
@@ -243,19 +243,19 @@ return array(
     "There was an internal error while using the pattern '%pattern%'" => "Es gab einen internen Fehler bei der Verwendung des Patterns '%pattern%'",
 
     // Zend_Validate_Sitemap_Changefreq
-    "'%value%' is no valid sitemap changefreq" => "'%value%' ist keine gültige Changefreq für Sitemap",
+    "'%value%' is not a valid sitemap changefreq" => "'%value%' ist keine gültige Changefreq für Sitemap",
     "Invalid type given. String expected" => "Ungültiger Typ angegeben. String erwartet",
 
     // Zend_Validate_Sitemap_Lastmod
-    "'%value%' is no valid sitemap lastmod" => "'%value%' ist keine gültige Lastmod für Sitemap",
+    "'%value%' is not a valid sitemap lastmod" => "'%value%' ist keine gültige Lastmod für Sitemap",
     "Invalid type given. String expected" => "Ungültiger Typ angegeben. String erwartet",
 
     // Zend_Validate_Sitemap_Loc
-    "'%value%' is no valid sitemap location" => "'%value%' ist keine gültige Location für Sitemap",
+    "'%value%' is not a valid sitemap location" => "'%value%' ist keine gültige Location für Sitemap",
     "Invalid type given. String expected" => "Ungültiger Typ angegeben. String erwartet",
 
     // Zend_Validate_Sitemap_Priority
-    "'%value%' is no valid sitemap priority" => "'%value%' ist keine gültige Priority für Sitemap",
+    "'%value%' is not a valid sitemap priority" => "'%value%' ist keine gültige Priority für Sitemap",
     "Invalid type given. Numeric string, integer or float expected" => "Ungültiger Typ angegeben. Nummerischer String, Integer oder Float erwartet",
 
     // Zend_Validate_StringLength

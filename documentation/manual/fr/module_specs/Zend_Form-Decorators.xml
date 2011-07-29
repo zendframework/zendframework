@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.form.decorators">
-    <title>Créer un visuel personnalisé en utilisant Zend_Form_Decorator</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.decorators"><info><title>Créer un visuel personnalisé en utilisant Zend_Form_Decorator</title></info>
+    
 
     <para>
         Rendre visuellement un objet de formulaire est complètement optionnel -- il n'est pas
@@ -38,8 +36,8 @@
         forme complexe représentant l'objet (élément) dans son intégralité.
     </para>
 
-    <sect2 id="zend.form.decorators.operation">
-        <title>Configuration</title>
+    <section xml:id="zend.form.decorators.operation"><info><title>Configuration</title></info>
+        
 
         <para>
             Pour configurer un décorateur, passez un tableau d'options ou un objet
@@ -53,7 +51,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>placement</code>&#160;: le placement peut être 'append' ou 'prepend'
+                    <code>placement</code> : le placement peut être 'append' ou 'prepend'
                     (insensible à la casse), et indique sur le contenu passé à <methodname>render()</methodname>
                     doit être ajouté après ou avant, respectivement. Dans le cas où le décorateur
                     remplace le contenu, cette directive de placement est ignorée. La directive par
@@ -63,7 +61,7 @@
 
             <listitem>
                 <para>
-                    <code>separator</code>&#160;: le séparateur est utilisé entre le contenu passé
+                    <code>separator</code> : le séparateur est utilisé entre le contenu passé
                     à <methodname>render()</methodname> et le nouveau contenu généré par le décorateur, ou
                     encore entre les éléments rendus (par exemple FormElements utilise le séparateur
                     entre chaque objet rendu). Dans le cas où le décorateur remplace son contenu,
@@ -74,28 +72,28 @@
 
         <para>
             L'interface des décorateurs spécifie les méthodes pour agir sur les options. Les
-            voici&#160;:
+            voici :
         </para>
 
         <itemizedlist>
             <listitem>
-                <para><methodname>setOption($key, $value)</methodname>&#160;: affecte une option.</para>
+                <para><methodname>setOption($key, $value)</methodname> : affecte une option.</para>
             </listitem>
 
             <listitem>
-                <para><methodname>getOption($key)</methodname>&#160;: récupère une option.</para>
+                <para><methodname>getOption($key)</methodname> : récupère une option.</para>
             </listitem>
 
             <listitem>
-                <para><methodname>getOptions()</methodname>&#160;: récupère toutes les options.</para>
+                <para><methodname>getOptions()</methodname> : récupère toutes les options.</para>
             </listitem>
 
             <listitem>
-                <para><methodname>removeOption($key)</methodname>&#160;: supprime une option.</para>
+                <para><methodname>removeOption($key)</methodname> : supprime une option.</para>
             </listitem>
 
             <listitem>
-                <para><methodname>clearOptions()</methodname>&#160;: supprime toutes les options.</para>
+                <para><methodname>clearOptions()</methodname> : supprime toutes les options.</para>
             </listitem>
         </itemizedlist>
 
@@ -116,20 +114,20 @@
             précédée ou suivie du nouveau contenu décoré. Dans ces deux derniers cas, un séparateur
             optionnel peut être utilisé.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.decorators.standard">
-        <title>Décorateurs standards</title>
+    <section xml:id="zend.form.decorators.standard"><info><title>Décorateurs standards</title></info>
+        
 
         <para>
             <classname>Zend_Form</classname> est fourni avec quelques décorateurs de base,
             voyez <link linkend="zend.form.standardDecorators">le chapitre sur les décorateurs
             standards</link> pour plus de détails.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.decorators.custom">
-        <title>Décorateurs personnalisés</title>
+    <section xml:id="zend.form.decorators.custom"><info><title>Décorateurs personnalisés</title></info>
+        
 
         <para>
             Si vos rendus HTML sont complexes, ou si vous avez besoin de beaucoup de
@@ -139,7 +137,7 @@
         <para>
             Les décorateurs ont juste besoin d'implémenter l'interface
             <classname>Zend_Form_Decorator_Interface</classname>. Celle-ci spécifie les méthodes
-            suivantes&#160;:
+            suivantes :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -170,7 +168,7 @@ interface Zend_Form_Decorator_Interface
             important de décorateurs, et que vous vouliez afficher les principale caractéristiques
             d'un élément grâce à un seul décorateur (label, élément, messages d'erreur et
             description), le tout dans une <code>div</code>. Voici comment vous pourriez
-            procéder&#160;:
+            procéder :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -260,7 +258,7 @@ class My_Decorator_Composite extends Zend_Form_Decorator_Abstract
 ]]></programlisting>
 
         <para>
-            Vous pouvez maintenant placer ce décorateur dans les chemins des décorateurs&#160;:
+            Vous pouvez maintenant placer ce décorateur dans les chemins des décorateurs :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -278,7 +276,7 @@ $form->addElementPrefixPath('My_Decorator',
         <para>
             Dès à présent, vous pouvez indiquer que vous voulez utiliser le décorateur
             'Composite', (c'est son nom de classe sans le préfixe) et l'attacher à un
-            élément&#160;:
+            élément :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -296,7 +294,7 @@ $element->setDecorators(array('Composite'));
         <para>
             Par exemple, si vous souhaitez simplement informer l'utilisateur d'une erreur,
             mais sans lui montrer les messages d'erreurs, vous pouvez créer votre propre décorateur
-            'Errors'&#160;:
+            'Errors' :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -328,10 +326,10 @@ class My_Decorator_Errors
             nommant vos fins de classes de décorateurs comme celles des décorateurs standards, vous
             pouvez changer la décoration sans agir sur les éléments en question.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.decorators.individual">
-        <title>Rendre des décorateurs individuellement</title>
+    <section xml:id="zend.form.decorators.individual"><info><title>Rendre des décorateurs individuellement</title></info>
+        
 
         <para>
             Comme les décorateurs agissent souvent sur une propriété d'un élément, et en
@@ -345,7 +343,7 @@ class My_Decorator_Errors
             Pour effectuer ceci, appelez simplement <code>render[nom-du-décorateur]()</code>,
             où "[nom-du-décorateur]" est le nom court de votre décorateur (sans son préfixe de
             classe). Il est aussi possible de lui passer optionnellement du contenu, par
-            exemple&#160;:
+            exemple :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -363,11 +361,8 @@ echo $form->renderHtmlTag('wrap this content');
 
         <para>
             Ceci peut être particulièrement utile lors du rendu d'un formulaire avec le
-            décorateur ViewScript&#160;; là où chaque élément utilise ses décorateurs pour rendre du
+            décorateur ViewScript ; là où chaque élément utilise ses décorateurs pour rendre du
             contenu, mais de manière très fine.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

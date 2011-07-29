@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20799 -->
-<!-- Reviewed: 20799 -->
-<sect1 id="zend.translate.introduction">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.introduction"><info><title>Einführung</title></info>
+    
 
     <para>
         <classname>Zend_Translate</classname> ist die Lösung des Frameworks für mehrsprachige
@@ -108,8 +108,8 @@
         </listitem>
     </itemizedlist>
 
-    <sect2 id="zend.translate.introduction.adapters">
-        <title>Beginnen wir mit der Mehrsprachigkeit</title>
+    <section xml:id="zend.translate.introduction.adapters"><info><title>Beginnen wir mit der Mehrsprachigkeit</title></info>
+        
 
         <para>
             Beginnen wir mit dem mehrsprachigen Betrieb. Was wir also prinzipiell
@@ -120,7 +120,7 @@
             sehr einfach in ihrem Aufbau. Es sind hierbei nur vier Schritte zu befolgen:
         </para>
 
-        <orderedlist numeration='arabic'>
+        <orderedlist numeration="arabic">
             <listitem><para>Den Adapter auswählen, der benutzt werden soll;</para></listitem>
 
             <listitem>
@@ -139,5 +139,5 @@
             Sie sollten sorgfältig studiert werden, um eigene mehrsprachige
             Web Anwendungen erstellen zu können.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

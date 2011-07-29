@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22755 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.log.formatters">
-    <title>Formatter</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.formatters"><info><title>Formatter</title></info>
+    
 
     <para>
         Ein Formatter ist ein Objekt das dafür zuständig ist ein <property>event</property> Array
@@ -17,8 +15,8 @@
         versucht wird einen Formatter zu setzen.
     </para>
 
-    <sect2 id="zend.log.formatters.simple">
-        <title>Eingache Formatierung</title>
+    <section xml:id="zend.log.formatters.simple"><info><title>Eingache Formatierung</title></info>
+        
 
         <para>
             <classname>Zend_Log_Formatter_Simple</classname> ist der Standard Formatter. Er ist
@@ -57,10 +55,10 @@ $logger->info('dort');
             Verwendung der DEFAULT_FORMAT Konstante von
             <classname>Zend_Log_Formatter_Simple</classname> empfangen werden.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.log.formatters.xml">
-        <title>In XML formatieren</title>
+    <section xml:id="zend.log.formatters.xml"><info><title>In XML formatieren</title></info>
+        
 
         <para>
             <classname>Zend_Log_Formatter_Xml</classname> formatiert Log Daten in einen
@@ -127,5 +125,5 @@ $logger->info('Informative Nachricht');
   <level>INFO</level>
 </log>
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

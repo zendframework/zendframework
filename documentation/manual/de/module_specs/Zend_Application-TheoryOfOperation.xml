@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20763 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.application.theory-of-operation">
-    <title>Theorie der Funktionsweise</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.theory-of-operation"><info><title>Theorie der Funktionsweise</title></info>
+    
 
     <para>
         Um eine <acronym>MVC</acronym> Anwendung zu konfigurieren und bereit zur Auslieferung
@@ -116,8 +114,8 @@
         einer Konfigurationsdatei sein.
     </para>
 
-    <sect2 id="zend.application.theory-of-operation.bootstrap">
-        <title>Bootstrapping</title>
+    <section xml:id="zend.application.theory-of-operation.bootstrap"><info><title>Bootstrapping</title></info>
+        
 
         <para>
             <classname>Zend_Application</classname>'s zweites Feld der Arbeit ist die Ausführung des
@@ -158,8 +156,8 @@ interface Zend_Application_Bootstrap_Bootstrapper
             man vertraut sein sollte.
         </para>
 
-        <sect3 id="zend.application.theory-of-operation.bootstrap.resource-methods">
-            <title>Methoden für Ressourcen</title>
+        <section xml:id="zend.application.theory-of-operation.bootstrap.resource-methods"><info><title>Methoden für Ressourcen</title></info>
+            
 
             <para>
                 Die Implementation von
@@ -231,10 +229,10 @@ $bootstrap->bootstrap(array('foo', 'bar'));
             <programlisting language="php"><![CDATA[
 $bootstrap->bootstrap();
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.application.theory-of-operation.bootstrap.resource-plugins">
-            <title>Bootstraps die Ressourcen Plugins benutzen</title>
+        <section xml:id="zend.application.theory-of-operation.bootstrap.resource-plugins"><info><title>Bootstraps die Ressourcen Plugins benutzen</title></info>
+            
 
             <para>
                 Um Bootstraps wiederverwendbarer zu machen wurde die Fähigkeit zur Verfügung
@@ -357,10 +355,10 @@ $bootstrap->bootstrap(array('FrontController', 'Foo'));
 // Alle Ressource Methoden und Plugins ausführen:
 $bootstrap->bootstrap();
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.application.theory-of-operation.bootstrap.registry">
-            <title>Ressource Registry</title>
+        <section xml:id="zend.application.theory-of-operation.bootstrap.registry"><info><title>Ressource Registry</title></info>
+            
 
             <para>
                 Viele, wenn nicht sogar alle, der eigenen Ressource Methoden oder Plugins
@@ -448,10 +446,10 @@ class FooController extends Zend_Controller_Action
     }
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.application.theory-of-operation.bootstrap.dependency-tracking">
-            <title>Erkennen von Abhängigkeiten</title>
+        <section xml:id="zend.application.theory-of-operation.bootstrap.dependency-tracking"><info><title>Erkennen von Abhängigkeiten</title></info>
+            
 
             <para>
                 Zusätzlich zur Ausführung von Ressource Methoden und Plugins, ist es notwendig
@@ -505,11 +503,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     }
 }
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.application.theory-of-operation.resources">
-        <title>Ressource Plugins</title>
+    <section xml:id="zend.application.theory-of-operation.resources"><info><title>Ressource Plugins</title></info>
+        
 
         <para>
             <link linkend="zend.application.theory-of-operation.bootstrap.resource-plugins">Wie
@@ -603,5 +601,5 @@ class My_Resource_View extends Zend_Application_Resource_ResourceAbstract
             es die gelieferten "View" Ressource Plugin zu überschreiben, und sicherzustellen das
             man stattdessen die eigene verwendet.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.soap.client">
-    <title>Zend_Soap_Client</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.soap.client"><info><title>Zend_Soap_Client</title></info>
+    
 
     <para>
         Die <classname>Zend_Soap_Client</classname> Klasse vereinfacht die Entwicklung von
@@ -26,8 +24,8 @@
         <classname>Zend_Soap_Client</classname> Klasse gesetzt werden.
     </para>
 
-    <sect2 id="zend.soap.client.constructor">
-        <title>Der Zend_Soap_Client Konstruktor</title>
+    <section xml:id="zend.soap.client.constructor"><info><title>Der Zend_Soap_Client Konstruktor</title></info>
+        
 
         <para>
             Der <classname>Zend_Soap_Client</classname> Konstruktor nimmt zwei Parameter:
@@ -52,8 +50,8 @@
             <methodname>setOptions($options)</methodname> Methoden verwendet werden.
         </para>
 
-        <note>
-            <title>Wichtig!</title>
+        <note><info><title>Wichtig!</title></info>
+            
 
             <para>
                 Wenn die <classname>Zend_Soap_Client</classname> Komponente im nicht-WSDL Modus
@@ -181,10 +179,10 @@ $client = new Zend_Soap_Client("some.wsdl",
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.soap.client.calls">
-        <title>SOAP Anfragen durchführen</title>
+    <section xml:id="zend.soap.client.calls"><info><title>SOAP Anfragen durchführen</title></info>
+        
 
         <para>
             Nachdem ein <classname>Zend_Soap_Client</classname> Objekt erstellt wurde sind wir
@@ -249,5 +247,5 @@ $result1 = $client->method1(10);
 // $result2 ist ein Float
 $result2 = $client->method2(22, 'irgendein String');
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

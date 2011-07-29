@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.filter.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         Le composant <classname>Zend_Filter</classname> fournit un ensemble de filtres de
@@ -10,14 +8,14 @@
         filtres peuvent être appliqués à une donnée dans un ordre défini.
     </para>
 
-    <sect2 id="zend.filter.introduction.definition">
-        <title>Qu'est-ce qu'un filtre&#160;?</title>
+    <section xml:id="zend.filter.introduction.definition"><info><title>Qu'est-ce qu'un filtre ?</title></info>
+        
 
         <para>
             Généralement parlant, un filtre est utilisé pour supprimer les parties non
             désirées de ce qui lui est soumis tout en laissant passer la partie désirée. Dans ce cas
             de figure, un filtre est une opération qui restitue une partie de la donnée soumise. Ce
-            type de filtrage est utile pour les applications Web&#160;: suppression des données
+            type de filtrage est utile pour les applications Web : suppression des données
             soumises non conformes, élimination des espaces inutiles, etc.
         </para>
 
@@ -32,17 +30,17 @@
             d'assurer cette opération, les entités HTML qui sont présentes dans les données saisies
             doivent être soit supprimées soit échappées. Naturellement, l'approche adéquate dépend
             du contexte. Un filtre de suppression des entités HTML opère dans le contexte défini
-            plus haut&#160;: une opération produisant un sous-ensemble à partir d'une donnée
+            plus haut : une opération produisant un sous-ensemble à partir d'une donnée
             soumise. Cependant, un filtre échappant les entités HTML transforme la valeur entrée
             (par exemple, "<code>&amp;</code>" sera transformé en "<code>&amp;amp;</code>".
             Permettre de telles choses est important pour les développeurs Web et "filtrer" dans le
             contexte d'utilisation de <classname>Zend_Filter</classname> consiste à réaliser des
             transformations sur les données soumises.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.introduction.using">
-        <title>Utilisation basique des filtres</title>
+    <section xml:id="zend.filter.introduction.using"><info><title>Utilisation basique des filtres</title></info>
+        
 
         <para>
             Avoir cette définition d'un filtre établie fournit la base pour
@@ -56,13 +54,13 @@
             (<code>"</code>) : <programlisting language="php"><![CDATA[
 $htmlEntities = new Zend_Filter_HtmlEntities();
 
-echo $htmlEntities->filter('&'); // &amp;
-echo $htmlEntities->filter('"'); // &quot;
+echo $htmlEntities->filter('&'); // &
+echo $htmlEntities->filter('"'); // "
 ]]></programlisting></para>
-        </sect2>
+        </section>
 
-        <sect2 id="zend.filter.introduction.static">
-            <title>Utilisation de la méthode statique staticFilter()</title>
+        <section xml:id="zend.filter.introduction.static"><info><title>Utilisation de la méthode statique staticFilter()</title></info>
+            
 
         <para>
             S'il est peu pratique de charger une classe de filtre donnée et créer une instance
@@ -79,8 +77,7 @@ echo Zend_Filter::get('&', 'HtmlEntities');
 
         <para>
             Vous pouvez aussi fournir un tableau de paramètres destinés au constructeur de la
-            classe, s'ils sont nécessaires pour votre classe de filtre. <programlisting
-            role="php"><![CDATA[
+            classe, s'ils sont nécessaires pour votre classe de filtre. <programlisting role="php"><![CDATA[
 echo Zend_Filter::filterStatic('"',
                                'HtmlEntities',
                                array('quotestyle' => ENT_QUOTES));
@@ -96,8 +93,7 @@ echo Zend_Filter::filterStatic('"',
         <para>
             De plus, la classe <classname>Zend_Filter_Input</classname> vous permet
             d'instancier et d'exécuter des filtres multiples et des classes de validateurs sur
-            demande pour traiter l'ensemble de données saisies. Voir <xref
-            linkend="zend.filter.input" />.
+            demande pour traiter l'ensemble de données saisies. Voir <xref linkend="zend.filter.input"/>.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

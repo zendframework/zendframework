@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20818 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.service.amazon.ec2.zones">
-    <title>Zend_Service_Amazon_Ec2: Regionen und Availability Zones</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.zones"><info><title>Zend_Service_Amazon_Ec2: Regionen und Availability Zones</title></info>
+    
 
     <para>
         Amazon EC2 bietet die Möglichkeit Instanzen in verschiedene Regionen und Avaiability
@@ -14,8 +12,8 @@
         Anwendung vor einem Fehler in einer einzelnen Availability Zone schützen.
     </para>
 
-    <sect2 id="zend.service.amazon.ec2.zones.regions">
-        <title>Amazon EC2 Regionen</title>
+    <section xml:id="zend.service.amazon.ec2.zones.regions"><info><title>Amazon EC2 Regionen</title></info>
+        
 
         <para>
              Amazon EC2 bietet viele Regionen so das man Amazon EC2 Instanzen in verschiedenen
@@ -30,8 +28,8 @@
              Stabilität, und es macht die Lokalität jeder EC2 Ressource eindeutig.
         </para>
 
-        <example id="zend.service.amazon.ec2.zones.regions.example">
-            <title>Ansehen der vorhendenen Regionen</title>
+        <example xml:id="zend.service.amazon.ec2.zones.regions.example"><info><title>Ansehen der vorhendenen Regionen</title></info>
+            
 
             <para>
                 <code>describe</code> wird verwendet um herauszufinden zu welcher Region der
@@ -52,10 +50,10 @@ foreach($regions as $region) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.amazon.ec2.zones.availability">
-        <title>Amazon EC2 Availability Zonen</title>
+    <section xml:id="zend.service.amazon.ec2.zones.availability"><info><title>Amazon EC2 Availability Zonen</title></info>
+        
 
         <para>
             Wenn man eine Instanz startet, kann man optional eine Availability Zone spezifizieren.
@@ -69,8 +67,8 @@ foreach($regions as $region) {
             müssen.
         </para>
 
-        <example id="zend.service.amazon.ec2.zones.availability.example">
-            <title>Vorhendene Zonen sehen</title>
+        <example xml:id="zend.service.amazon.ec2.zones.availability.example"><info><title>Vorhendene Zonen sehen</title></info>
+            
 
             <para>
                 <code>describe</code> wird verwendet um herauszufinden wie der Status jeder
@@ -92,5 +90,5 @@ foreach($zones as $zone) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

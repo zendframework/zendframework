@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.loader.plugin-spec-broker">
-    <title>The PluginSpecBroker</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.plugin-spec-broker">
+    <info><title>The PluginSpecBroker</title></info>
 
-    <sect2 id="zend.loader.plugin-spec-broker.intro">
-        <title>Overview</title>
+    <section xml:id="zend.loader.plugin-spec-broker.intro">
+        <info><title>Overview</title></info>
 
         <para>
             This class is an extension of <link linkend="zend.loader.plugin-broker">the
@@ -12,10 +11,10 @@
             of plugin <emphasis>names</emphasis> with related options, for the purposes of allowing
             lazy-loading of plugins and/or specifying default options.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.plugin-spec-broker.quick-start">
-        <title>Quick Start</title>
+    <section xml:id="zend.loader.plugin-spec-broker.quick-start">
+        <info><title>Quick Start</title></info>
 
         <para>
             Typically, a component will define an extension to the
@@ -44,10 +43,10 @@ $broker    = new ResourceBroker(array(
 $router = $broker->load('router');
 // routes will be configured per specification
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.plugin-spec-broker.options">
-        <title>Configuration Options</title>
+    <section xml:id="zend.loader.plugin-spec-broker.options">
+        <info><title>Configuration Options</title></info>
 
         <para>
             All <link linkend="zend.loader.plugin-broker.options">PluginBroker options</link> are
@@ -68,10 +67,10 @@ $router = $broker->load('router');
                     </para>
                 </listitem>
             </varlistentry>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.plugin-spec-broker.methods">
-        <title>Available Methods</title>
+    <section xml:id="zend.loader.plugin-spec-broker.methods">
+        <info><title>Available Methods</title></info>
 
         <para>
             All <link linkend="zend.loader.plugin-broker.methods">PluginBroker methods</link> are
@@ -79,7 +78,7 @@ $router = $broker->load('router');
             implementation.
         </para>
 
-        <refentry id="zend.loader.plugin-spec-broker.methods.load">
+        <refentry xml:id="zend.loader.plugin-spec-broker.methods.load">
             <refnamediv>
                 <refname>load</refname>
                 <refpurpose>Resolve a plugin name to an object instance</refpurpose>
@@ -108,7 +107,7 @@ $router = $broker->load('router');
             </refsect1>
         </refentry>
 
-        <refentry id="zend.loader.plugin-spec-broker.methods.register-spec">
+        <refentry xml:id="zend.loader.plugin-spec-broker.methods.register-spec">
             <refnamediv>
                 <refname>registerSpec</refname>
                 <refpurpose>Register a plugin specification by name</refpurpose>
@@ -134,7 +133,7 @@ $router = $broker->load('router');
             </refsect1>
         </refentry>
 
-        <refentry id="zend.loader.plugin-spec-broker.methods.register-specs">
+        <refentry xml:id="zend.loader.plugin-spec-broker.methods.register-specs">
             <refnamediv>
                 <refname>registerSpecs</refname>
                 <refpurpose>Register many plugin specifications at once</refpurpose>
@@ -161,7 +160,7 @@ $router = $broker->load('router');
             </refsect1>
         </refentry>
 
-        <refentry id="zend.loader.plugin-spec-broker.methods.unregister-spec">
+        <refentry xml:id="zend.loader.plugin-spec-broker.methods.unregister-spec">
             <refnamediv>
                 <refname>unregisterSpec</refname>
                 <refpurpose>Unregister a plugin specification</refpurpose>
@@ -186,7 +185,7 @@ $router = $broker->load('router');
             </refsect1>
         </refentry>
 
-        <refentry id="zend.loader.plugin-spec-broker.methods.get-registered-plugins">
+        <refentry xml:id="zend.loader.plugin-spec-broker.methods.get-registered-plugins">
             <refnamediv>
                 <refname>getRegisteredPlugins</refname>
                 <refpurpose>Retrieve all registered plugins and specifications</refpurpose>
@@ -211,7 +210,7 @@ $router = $broker->load('router');
             </refsect1>
         </refentry>
 
-        <refentry id="zend.loader.plugin-spec-broker.methods.has-plugin">
+        <refentry xml:id="zend.loader.plugin-spec-broker.methods.has-plugin">
             <refnamediv>
                 <refname>hasPlugin</refname>
                 <refpurpose>Determine if a plugin has been loaded or registered</refpurpose>
@@ -236,5 +235,5 @@ $router = $broker->load('router');
                 </para>
             </refsect1>
         </refentry>
-    </sect2>
-</sect1>
+    </section>
+</section>

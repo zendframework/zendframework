@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20774 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.encrypt">
-    <title>Encrypt</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.encrypt"><info><title>Encrypt</title></info>
+    
     <para>
         Ce filtre va crypter toute chaine avec les paramètres spécifiés. Des adaptateurs sont utilisés.
         Actuellement, il existe des adaptateurs pour les extensions PHP <code>Mcrypt</code> et
@@ -38,8 +36,8 @@ $filter->setAdapter('openssl');
         </para>
     </note>
 
-    <sect3 id="zend.filter.set.encrypt.mcrypt">
-        <title>Cryptage avec Mcrypt</title>
+    <section xml:id="zend.filter.set.encrypt.mcrypt"><info><title>Cryptage avec Mcrypt</title></info>
+        
         <para>
             Cet adaptateur nécessite la présence de l'extension PHP <code>Mcrypt</code>. Voici ses options:
         </para>
@@ -55,7 +53,7 @@ $filter->setAdapter('openssl');
             <listitem>
                 <para>
                     <emphasis>algorithm</emphasis>: L'algorithme à utiliser pour le cryptage. Voyez
-                    <ulink url="http://php.net/mcrypt">PHP's mcrypt ciphers</ulink>. Si non précisé,
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mcrypt">PHP's mcrypt ciphers</link>. Si non précisé,
                     <code>blowfish</code> sera utilisé par défaut.
                 </para>
             </listitem>
@@ -70,7 +68,7 @@ $filter->setAdapter('openssl');
             <listitem>
                 <para>
                     <emphasis>mode</emphasis>: Le mode de cryptage à utiliser. Un des
-                    <ulink url="http://php.net/mcrypt">modes mcrypt</ulink> doit être utilisé.
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mcrypt">modes mcrypt</link> doit être utilisé.
                     Par défaut, <code>cbc</code> est utilisé.
                 </para>
             </listitem>
@@ -143,10 +141,10 @@ print $encrypted;
 
 // Pour le décryptage, voyez le code du filtre Decrypt
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.encrypt.openssl">
-        <title>Cryptage avec OpenSSL</title>
+    <section xml:id="zend.filter.set.encrypt.openssl"><info><title>Cryptage avec OpenSSL</title></info>
+        
         <para>
             Lorsque vous avez installé l'extension PHP <code>OpenSSL</code>, vous pouvez utiliser l'adaptateur
             du même nom, dont voici les options d'instanciation:
@@ -249,9 +247,5 @@ print $encrypted;
 
 // Le décryptage est expliqué dans le filtre Decrypt
 ]]></programlisting>
-    </sect3>
-</sect2>
-
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

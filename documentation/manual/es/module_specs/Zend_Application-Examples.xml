@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 17734 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.application.examples">
-    <title>Ejemplos</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.examples"><info><title>Ejemplos</title></info>
+    
 
     <para>La propia clase Bootstrap suelen ser bastante mínima; a menudo, será
         simplemente un talón
@@ -243,4 +241,4 @@ echo $service->handle();
 $application = new Zend_Application(...);
 $application->getBootstrap()->bootstrapDb();
 ]]></programlisting>
-</sect1>
+</section>

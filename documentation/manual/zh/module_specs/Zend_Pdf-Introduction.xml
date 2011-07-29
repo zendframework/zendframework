@@ -1,6 +1,9 @@
-<sect1 id="zend.pdf.introduction">
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.introduction"><info><title> 简介 </title></info>
     <!-- @todo review and revise upon completion of refactoring -->
-    <title> 简介 </title>
+    
     <para>
     Zend_Pdf module 是个完全用 PHP 5 编写的 PDF (Portable Document Format) 处理引擎。它可加载存在的文档，生成新的、修改和保存修改后的文档。这样，它可帮助任何 PHP 程序通过修改存在的模板或生成新的文档来动态地准备 PDF 格式的文档。
 
@@ -58,7 +61,4 @@
         </listitem>
     </itemizedlist>
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

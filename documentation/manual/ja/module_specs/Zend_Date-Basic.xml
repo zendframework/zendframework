@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20766 -->
-<sect1 id="zend.date.basic">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.basic"><info><title>基本メソッド</title></info>
 
-    <title>基本メソッド</title>
+    
 
     <para>
         この章では、<classname>Zend_Date</classname> の基本的な使用法を、
@@ -24,22 +22,22 @@
         そして、ここからの経過秒数をタイムスタンプとして表します。
     </para>
 
-    <sect2 id="zend.date.basic.creation">
+    <section xml:id="zend.date.basic.creation"><info><title>現在の日付</title></info>
 
-        <title>現在の日付</title>
+        
 
         <para>
             引数を指定せずにインスタンスを作成すると、
             デフォルトのロケールでの現在時刻を表すオブジェクトを返します。
             <acronym>PHP</acronym> の <methodname>time()</methodname> 関数で、このオブジェクトが使用する
-            <ulink url="http://en.wikipedia.org/wiki/Unix_Time">UNIX タイムスタンプ</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Unix_Time">UNIX タイムスタンプ</link>
             を取得します。<acronym>PHP</acronym> の環境で、
             <link linkend="zend.date.setdefaulttimezone">デフォルトのタイムゾーン</link>
             が正しく設定されていることを確認しておきましょう。
         </para>
 
-        <example id="zend.date.basic.creation.example-1">
-            <title>現在の日付の作成</title>
+        <example xml:id="zend.date.basic.creation.example-1"><info><title>現在の日付の作成</title></info>
+            
             <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
@@ -48,11 +46,11 @@ print $date;
 ]]></programlisting>
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.date.basic.functions">
+    <section xml:id="zend.date.basic.functions"><info><title>Zend_Date の使用例</title></info>
 
-        <title>Zend_Date の使用例</title>
+        
 
         <para>
             <classname>Zend_Date</classname> の基本的なメソッドを見ていきましょう。
@@ -60,9 +58,9 @@ print $date;
             以下の各メソッドについて、簡単な例を示しています。
         </para>
 
-        <sect3 id="zend.date.simple.functions.get">
+        <section xml:id="zend.date.simple.functions.get"><info><title>日付の出力</title></info>
 
-            <title>日付の出力</title>
+            
 
             <para>
                 <classname>Zend_Date</classname> オブジェクトの日付を
@@ -71,8 +69,8 @@ print $date;
                 さまざまなオプションが使用可能です。これらのオプションについてはあとで説明します。
             </para>
 
-            <example id="zend.date.simple.functions.get.example-1">
-                <title>get() - 日付の出力</title>
+            <example xml:id="zend.date.simple.functions.get.example-1"><info><title>get() - 日付の出力</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
@@ -81,11 +79,11 @@ print $date->get();
 ]]></programlisting>
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.date.simple.functions.set">
+        <section xml:id="zend.date.simple.functions.set"><info><title>日付の設定</title></info>
 
-            <title>日付の設定</title>
+            
 
             <para>
                 <methodname>set()</methodname> メソッドは、オブジェクトに格納されている日付を変更し、
@@ -94,8 +92,8 @@ print $date->get();
                 これらのオプションについてはあとで説明します。
             </para>
 
-            <example id="zend.date.simple.functions.set.example-1">
-                <title>set() - 日付の設定</title>
+            <example xml:id="zend.date.simple.functions.set.example-1"><info><title>set() - 日付の設定</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
@@ -105,11 +103,11 @@ print $date->get(Zend_Date::W3C);
 ]]></programlisting>
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.date.simple.functions.add">
+        <section xml:id="zend.date.simple.functions.add"><info><title>日付の加減算</title></info>
 
-            <title>日付の加減算</title>
+            
 
             <para>
                 二つの日付を <methodname>add()</methodname> で加算するという場合、
@@ -120,8 +118,8 @@ print $date->get(Zend_Date::W3C);
                 これについてはあとで説明します。
             </para>
 
-            <example id="zend.date.simple.functions.add.example-1">
-                <title>add() - 日付の加算</title>
+            <example xml:id="zend.date.simple.functions.add.example-1"><info><title>add() - 日付の加算</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
@@ -135,11 +133,11 @@ echo "toString() で取得した日付 = ", $date, "\n";
 ]]></programlisting>
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.date.simple.functions.compare">
+        <section xml:id="zend.date.simple.functions.compare"><info><title>日付の比較</title></info>
 
-            <title>日付の比較</title>
+            
 
             <para>
                 <classname>Zend_Date</classname> の基本メソッド群はすべて、
@@ -150,8 +148,8 @@ echo "toString() で取得した日付 = ", $date, "\n";
                 <methodname>compare()</methodname> を使用します。以下に例を示します。
             </para>
 
-            <example id="zend.date.simple.functions.compare.example-1">
-                <title>compare() - 日付の比較</title>
+            <example xml:id="zend.date.simple.functions.compare.example-1"><info><title>compare() - 日付の比較</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
@@ -169,8 +167,8 @@ if ($date->compare(10, Zend_Date::MINUTE) == -1) {
                 を使用します。これは boolean 値を返します。
             </para>
 
-            <example id="zend.date.simple.functions.compare.example-2">
-                <title>equals() - 日付あるいはその一部の同一性</title>
+            <example xml:id="zend.date.simple.functions.compare.example-2"><info><title>equals() - 日付あるいはその一部の同一性</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
@@ -183,11 +181,8 @@ if ($date->equals(10, Zend_Date::HOUR)) {
 ]]></programlisting>
             </example>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

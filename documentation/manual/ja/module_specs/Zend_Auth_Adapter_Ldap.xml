@@ -1,23 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20763 -->
-<sect1 id="zend.auth.adapter.ldap">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.ldap"><info><title>LDAP 認証</title></info>
 
-    <title>LDAP 認証</title>
+    
 
-    <sect2 id="zend.auth.adapter.ldap.introduction">
+    <section xml:id="zend.auth.adapter.ldap.introduction"><info><title>導入</title></info>
 
-        <title>導入</title>
+        
 
         <para>
             <classname>Zend_Auth_Adapter_Ldap</classname> は、<acronym>LDAP</acronym>
             サービスによるウェブアプリケーションの認証をサポートします。
             ユーザ名やドメイン名の正規化や複数ドメインの認証、
             フェイルオーバー機能などがあります。
-            <ulink url="http://www.microsoft.com/windowsserver2003/technologies/directory/activedirectory/">Microsoft
-            Active Directory</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.microsoft.com/windowsserver2003/technologies/directory/activedirectory/">Microsoft
+            Active Directory</link>
             と
-            <ulink url="http://www.openldap.org/">OpenLDAP</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.openldap.org/">OpenLDAP</link>
             で動作確認をしていますが、それ以外の <acronym>LDAP</acronym>
             サービスプロバイダでも動作するはずです。
         </para>
@@ -29,11 +27,11 @@
             そして Active Directory 用および OpenLDAP 用の設定例です。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.ldap.usage">
+    <section xml:id="zend.auth.adapter.ldap.usage"><info><title>使用法</title></info>
 
-        <title>使用法</title>
+        
 
         <para>
             <classname>Zend_Auth_Adapter_Ldap</classname> による認証をアプリケーションに手っ取り早く組み込むには、
@@ -140,11 +138,11 @@ ldap.server2.baseDn = "CN=Users,DC=w,DC=net"
             (以下の <emphasis>ユーザ名の正規化</emphasis> のセクションを参照ください)。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.ldap.api">
+    <section xml:id="zend.auth.adapter.ldap.api"><info><title>API</title></info>
 
-        <title>API</title>
+        
 
         <para>
             <classname>Zend_Auth_Adapter_Ldap</classname> のコンストラクタは、3 つのパラメータを受け取ります。
@@ -161,7 +159,7 @@ ldap.server2.baseDn = "CN=Users,DC=w,DC=net"
 
         <para>
             以下に、サンプルのオプションパラメータを
-            <ulink url="http://php.net/print_r"><methodname>print_r()</methodname></ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/print_r"><methodname>print_r()</methodname></link>
             で出力した例を示します。これは、ふたつの <acronym>LDAP</acronym> サーバ
             <filename>s0.foo.net</filename> と
             <filename>dc1.w.net</filename> の設定を含むものです
@@ -204,8 +202,8 @@ Array
             省略できるということです。
         </para>
 
-        <note>
-            <title>Distinguished Name とは?</title>
+        <note><info><title>Distinguished Name とは?</title></info>
+            
             <para>
                 DN ("distinguished name") とは、
                 <acronym>LDAP</acronym> ディレクトリ内のオブジェクトへのパスを表す文字列のことです。
@@ -235,8 +233,8 @@ Array
             フェイルオーバー機能も提供できます。
         </para>
 
-        <note>
-            <title>認証メソッドの中では実際に何が行われているのか?</title>
+        <note><info><title>認証メソッドの中では実際に何が行われているのか?</title></info>
+            
             <para>
                 <methodname>authenticate()</methodname> メソッドがコールされると、
                 アダプタは各サーバ設定を順に処理し、内部で管理する
@@ -270,11 +268,11 @@ Array
             <methodname>setPassword()</methodname> メソッドで指定することもできます。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.ldap.server-options">
+    <section xml:id="zend.auth.adapter.ldap.server-options"><info><title>サーバのオプション</title></info>
 
-        <title>サーバのオプション</title>
+        
 
         <para>
             <emphasis><classname>Zend_Auth_Adapter_Ldap</classname> のコンテキストにおける</emphasis>
@@ -282,8 +280,8 @@ Array
             <methodname>Zend_Ldap::setOptions()</methodname> に渡されます。
         </para>
 
-        <table id="zend.auth.adapter.ldap.server-options.table">
-            <title>サーバのオプション</title>
+        <table xml:id="zend.auth.adapter.ldap.server-options.table"><info><title>サーバのオプション</title></info>
+            
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -462,7 +460,7 @@ Array
                         <entry>
                             アカウントを検索する際に使用する <acronym>LDAP</acronym> 検索フィルタ。
                             この文字列は
-                            <ulink url="http://php.net/printf"><methodname>printf()</methodname></ulink>
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/printf"><methodname>printf()</methodname></link>
                             形式のものとなり、ユーザ名を表す '<emphasis>%s</emphasis>'
                             をひとつ含む必要があります。デフォルト値は
                             '<emphasis>(&amp;(objectClass=user)(sAMAccountName=%s))</emphasis>' です。
@@ -503,11 +501,11 @@ Array
             </para>
         </note>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.ldap.debugging">
+    <section xml:id="zend.auth.adapter.ldap.debugging"><info><title>デバッグメッセージの収集</title></info>
 
-        <title>デバッグメッセージの収集</title>
+        
 
         <para>
             <classname>Zend_Auth_Adapter_Ldap</classname> は、<methodname>authenticate()</methodname>
@@ -517,8 +515,8 @@ Array
             が返す配列は次のような形式になります。
         </para>
 
-        <table id="zend.auth.adapter.ldap.debugging.table">
-            <title>デバッグメッセージ</title>
+        <table xml:id="zend.auth.adapter.ldap.debugging.table"><info><title>デバッグメッセージ</title></info>
+            
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -559,22 +557,22 @@ Array
             (最後のメッセージには、常にインデックス 1 の内容も含まれています)。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.ldap.options-common-server-specific">
+    <section xml:id="zend.auth.adapter.ldap.options-common-server-specific"><info><title>サーバ固有の共通オプション</title></info>
 
-        <title>サーバ固有の共通オプション</title>
+        
 
-        <sect3 id="zend.auth.adapter.ldap.options-common-server-specific.active-directory">
+        <section xml:id="zend.auth.adapter.ldap.options-common-server-specific.active-directory"><info><title>Active Directory 用のオプション</title></info>
 
-            <title>Active Directory 用のオプション</title>
+            
 
             <para>
                 <acronym>ADS</acronym> 用のオプションとして注目すべきものは次のとおりです。
             </para>
 
-            <table id="zend.auth.adapter.ldap.options-common-server-specific.active-directory.table">
-                <title>Active Directory 用のオプション</title>
+            <table xml:id="zend.auth.adapter.ldap.options-common-server-specific.active-directory.table"><info><title>Active Directory 用のオプション</title></info>
+                
                 <tgroup cols="2">
                     <thead>
                         <row>
@@ -659,19 +657,19 @@ Array
                 </para>
             </note>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.auth.adapter.ldap.options-common-server-specific.openldap">
+        <section xml:id="zend.auth.adapter.ldap.options-common-server-specific.openldap"><info><title>OpenLDAP 用のオプション</title></info>
 
-            <title>OpenLDAP 用のオプション</title>
+            
 
             <para>
                 OpenLDAP、あるいは posixAccount 形式のスキーマを用いる一般的な
                 <acronym>LDAP</acronym> サーバ用のオプションとして注目すべきものは次のとおりです。
             </para>
 
-            <table id="zend.auth.adapter.ldap.options-common-server-specific.openldap.table">
-                <title>OpenLDAP 用のオプション</title>
+            <table xml:id="zend.auth.adapter.ldap.options-common-server-specific.openldap.table"><info><title>OpenLDAP 用のオプション</title></info>
+                
                 <tgroup cols="2">
                     <thead>
                         <row>
@@ -764,9 +762,6 @@ Array
                     </tbody>
                 </tgroup>
             </table>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

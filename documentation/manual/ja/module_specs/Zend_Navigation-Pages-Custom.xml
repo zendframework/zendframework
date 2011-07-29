@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20827 -->
-<sect2 id="zend.navigation.pages.custom">
-    <title>カスタム・ページ・タイプの作成</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.custom"><info><title>カスタム・ページ・タイプの作成</title></info>
+    
 
     <para>
         <classname>Zend_Navigation_Page</classname>を拡張するとき、
@@ -18,12 +16,12 @@
         メソッドは<methodname>setInternalId()</methodname>というメソッドを最初に探して、
         それが存在するならばこのメソッドにオプションを渡します。
         メソッドが存在しなければ、オプションはページのカスタム・プロパティとしてセットされて、
-        <code>$internalId = $page->internal_id;</code>または
-        <code>$internalId = $page->get('internal_id');</code>を通じてアクセスできます。
+        <code>$internalId = $page-&gt;internal_id;</code>または
+        <code>$internalId = $page-&gt;get('internal_id');</code>を通じてアクセスできます。
     </para>
 
-    <example id="zend.navigation.custom.example.simple">
-        <title>もっとも単純なカスタム・ページ</title>
+    <example xml:id="zend.navigation.custom.example.simple"><info><title>もっとも単純なカスタム・ページ</title></info>
+        
 
         <para>
             カスタム・ページ・クラスで実装する必要がある唯一のものは、
@@ -41,8 +39,8 @@ class My_Simple_Page extends Zend_Navigation_Page
 ]]></programlisting>
     </example>
 
-    <example id="zend.navigation.custom.example.properties">
-        <title>プロパティ付のカスタム・ページ</title>
+    <example xml:id="zend.navigation.custom.example.properties"><info><title>プロパティ付のカスタム・ページ</title></info>
+        
 
         <para>
             拡張したページにプロパティを追加するとき、
@@ -98,4 +96,4 @@ $page = Zend_Navigation_Page::factory(array(
 ));
 ]]></programlisting>
     </example>
-</sect2>
+</section>

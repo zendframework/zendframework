@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.search.lucene.charset">
-    <title>Character Set</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.charset"><info><title>Character Set</title></info>
+    
 
-    <sect2 id="zend.search.lucene.charset.description">
-        <title>UTF-8 and single-byte character set support</title>
+    <section xml:id="zend.search.lucene.charset.description"><info><title>UTF-8 and single-byte character set support</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> works with the UTF-8 charset internally. Index
@@ -36,10 +35,10 @@
             <classname>Zend_Search_Lucene</classname> <acronym>API</acronym>. Data will be
             automatically converted into UTF-8 encoding.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.charset.default_analyzer">
-        <title>Default text analyzer</title>
+    <section xml:id="zend.search.lucene.charset.default_analyzer"><info><title>Default text analyzer</title></info>
+        
 
         <para>
             However, the default text analyzer (which is also used within query parser) uses
@@ -58,17 +57,17 @@
             </footnote>
         </para>
 
-        <note>
-            <title/>
+        <note><info><title/></info>
+            
             <para>
                 Default analyzer doesn't treats numbers as parts of terms. Use corresponding 'Num'
                 analyzer if you don't want words to be broken by numbers.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.charset.utf_analyzer">
-        <title>UTF-8 compatible text analyzers</title>
+    <section xml:id="zend.search.lucene.charset.utf_analyzer"><info><title>UTF-8 compatible text analyzers</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> also contains a set of UTF-8 compatible
@@ -87,8 +86,8 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
     new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8());
 ]]></programlisting>
 
-        <warning>
-            <title/>
+        <warning><info><title/></info>
+            
             <para>
                 UTF-8 compatible analyzers were improved in Zend Framework 1.5. Early versions of
                 analyzers assumed all non-ascii characters are letters. New analyzers implementation
@@ -122,8 +121,7 @@ if (@preg_match('/\pL/u', 'a') == 1) {
 ]]></programlisting>
 
         <para>
-            Case insensitive versions of UTF-8 compatible analyzers also need <ulink
-                url="http://www.php.net/manual/en/ref.mbstring.php">mbstring</ulink> extension to
+            Case insensitive versions of UTF-8 compatible analyzers also need <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/ref.mbstring.php">mbstring</link> extension to
             be enabled.
         </para>
 
@@ -170,5 +168,5 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 
 $hits = $index->find(strtolower($query));
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20792 -->
-<sect1 id="zend.layout.introduction">
-    <title>導入</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.introduction"><info><title>導入</title></info>
+    
 
     <para>
         <classname>Zend_Layout</classname> は、
@@ -49,7 +49,4 @@
                 Zend Framework の <acronym>MVC</acronym> コンポーネント以外からも使用できるようにする。
         </para></listitem>
     </itemizedlist>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

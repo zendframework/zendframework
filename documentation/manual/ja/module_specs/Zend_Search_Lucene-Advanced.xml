@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20854 -->
-<sect1 id="zend.search.lucene.advanced">
-    <title>応用</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.advanced"><info><title>応用</title></info>
+    
 
-    <sect2 id="zend.search.lucene.advanced.format_migration">
-        <title>1.6 以降でサポートするインデックスフォーマット変換</title>
+    <section xml:id="zend.search.lucene.advanced.format_migration"><info><title>1.6 以降でサポートするインデックスフォーマット変換</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> コンポーネントは、Java Lucene 1.4-1.9、2.1 そして 2.3
@@ -13,7 +11,7 @@
         </para>
 
         <para>
-            現在のインデックスフォーマットを知るには <code>$index->getFormatVersion()</code>
+            現在のインデックスフォーマットを知るには <code>$index-&gt;getFormatVersion()</code>
             を使用します。これは、次のいずれかの値を返します。
             <itemizedlist>
                 <listitem>
@@ -42,7 +40,7 @@
             インデックスの変更は、インデックスが更新されたときに <emphasis>のみ</emphasis>
             行います。インデックスの更新が行われるのは、
             新しいドキュメントがインデックスに追加された場合や
-            <code>$index->optimize()</code> による最適化を手動で開始した場合です。
+            <code>$index-&gt;optimize()</code> による最適化を手動で開始した場合です。
         </para>
 
         <para>
@@ -54,7 +52,7 @@
 
         <para>
             変換作業を管理するために、対象となるインデックスフォーマットを
-            <code>$index->setFormatVersion()</code> で指定できます。ここでは定数
+            <code>$index-&gt;setFormatVersion()</code> で指定できます。ここでは定数
             <constant>Zend_Search_Lucene::FORMAT_2_1</constant> あるいは <constant>Zend_Search_Lucene::FORMAT_2_3</constant>
             をパラメータとして使用します。
             <itemizedlist>
@@ -78,8 +76,8 @@
             下位バージョンへの変換はサポートしていません。
         </para>
 
-        <note>
-            <title>重要!</title>
+        <note><info><title>重要!</title></info>
+            
             <para>
                 一度インデックスを上位バージョンに変換してしまうと、
                 元に戻すことはできません。
@@ -88,10 +86,10 @@
             </para>
         </note>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.advanced.static">
-        <title>静的プロパティとしてのインデックスの使用</title>
+    <section xml:id="zend.search.lucene.advanced.static"><info><title>静的プロパティとしてのインデックスの使用</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> オブジェクトは、
@@ -184,5 +182,5 @@ Searcher::commit();
 ...
 ]]></programlisting>
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.pdf.info">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.info"><info><title>Informação do Documento e Metadados</title></info>
     <!-- @todo review and revise upon completion of refactoring -->
-    <title>Informação do Documento e Metadados</title>
+    
 
     <para>
         Um documento <acronym>PDF</acronym> deve incluir informações gerais como o título do
@@ -197,8 +195,7 @@ $pdf->save($pdfPath);
 
     <para>
         Desde a versão 1.6 do <acronym>PDF</acronym>, os metadados podem ser armazenados em um
-        documento <acronym>XML</acronym> especial anexado ao <acronym>PDF</acronym> (XMP - <ulink
-            url="http://www.adobe.com/products/xmp/">Extensible Metadata Platform</ulink>).
+        documento <acronym>XML</acronym> especial anexado ao <acronym>PDF</acronym> (XMP - <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.adobe.com/products/xmp/">Extensible Metadata Platform</link>).
     </para>
 
     <para>
@@ -232,7 +229,4 @@ $pdf->save($pdfPath);
         Propriedades comuns são duplicadas na estrutura Info e nos Metadados do documento (se
         presente). Agora é responsabilidade da aplicação do usuário mantê-los sincronizados.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

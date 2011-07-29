@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21824 -->
-<sect3 id="zend.controller.actionhelpers.contextswitch">
-    <title>ContextSwitch および AjaxContext</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.contextswitch"><info><title>ContextSwitch および AjaxContext</title></info>
+    
 
     <para>
         <emphasis>ContextSwitch</emphasis> アクションヘルパーは、
@@ -140,8 +138,8 @@ class NewsController extends Zend_Controller_Action
         任意のコールバックで初期化や後処理を行ったりができるということです。
     </para>
 
-    <sect4 id="zend.controller.actionhelpers.contextswitch.contexts">
-        <title>デフォルトで使用できるコンテキスト</title>
+    <section xml:id="zend.controller.actionhelpers.contextswitch.contexts"><info><title>デフォルトで使用できるコンテキスト</title></info>
+        
 
         <para>
             <emphasis>ContextSwitch</emphasis> ヘルパーで
@@ -180,10 +178,10 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
                 </para>
             </listitem>
         </itemizedlist>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelpers.contextswitch.custom">
-        <title>独自のコンテキストの作成</title>
+    <section xml:id="zend.controller.actionhelpers.contextswitch.custom"><info><title>独自のコンテキストの作成</title></info>
+        
 
         <para>
             デフォルトのコンテキストだけでは対応しきれないこともあるでしょう。
@@ -290,10 +288,10 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
                 <methodname>clearContexts()</methodname>: すべてのコンテキストを削除する。
             </para></listitem>
         </itemizedlist>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelpers.contextswitch.actions">
-        <title>アクションごとのコンテキストの設定</title>
+    <section xml:id="zend.controller.actionhelpers.contextswitch.actions"><info><title>アクションごとのコンテキストの設定</title></info>
+        
 
         <para>
             使用するコンテキストの設定には 2 通りの方法があります。
@@ -448,10 +446,10 @@ class FooController extends Zend_Controller_Action
                     あるいはすべてのアクションのすべてのコンテキストを削除する。
             </para></listitem>
         </itemizedlist>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelpers.contextswitch.initcontext">
-        <title>コンテキストスイッチの初期化</title>
+    <section xml:id="zend.controller.actionhelpers.contextswitch.initcontext"><info><title>コンテキストスイッチの初期化</title></info>
+        
 
         <para>
             コンテキストスイッチを初期化するには、アクションコントローラで
@@ -479,10 +477,10 @@ class NewsController extends Zend_Controller_Action
         <programlisting language="php"><![CDATA[
 $contextSwitch->initContext('xml');
 ]]></programlisting>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelpers.contextswitch.misc">
-        <title>追加機能</title>
+    <section xml:id="zend.controller.actionhelpers.contextswitch.misc"><info><title>追加機能</title></info>
+        
 
         <para>
             さまざまなメソッドを使用することで、
@@ -694,10 +692,10 @@ $contextSwitch->initContext();
                 </para>
             </listitem>
         </itemizedlist>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelpers.contextswitch.ajaxcontext">
-        <title>AjaxContext の機能</title>
+    <section xml:id="zend.controller.actionhelpers.contextswitch.ajaxcontext"><info><title>AjaxContext の機能</title></info>
+        
 
         <para>
             <emphasis>AjaxContext</emphasis> ヘルパーは
@@ -729,8 +727,8 @@ $contextSwitch->initContext();
             追加のヘッダは返しません。
         </para>
 
-        <example id="zend.controller.actionhelpers.contextswitch.ajaxcontext.example">
-            <title>Ajax リクエストに対してアクションに応答させる</title>
+        <example xml:id="zend.controller.actionhelpers.contextswitch.ajaxcontext.example"><info><title>Ajax リクエストに対してアクションに応答させる</title></info>
+            
 
             <para>
                 この例では、アクション 'view'、'form' および 'process'
@@ -791,8 +789,5 @@ class CommentController extends Zend_Controller_Action
                 このアクションは適切な形式でレスポンスを返します。
             </para>
         </example>
-    </sect4>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

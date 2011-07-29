@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.layout.options">
-    <title>Zend_Layout options de configuration</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.options"><info><title>Zend_Layout options de configuration</title></info>
+    
 
     <para>
         <classname>Zend_Layout</classname> possède quelques options. Vous pouvez les spécifier
@@ -44,8 +42,7 @@
             <para>
                 <emphasis>mvcSuccessfulActionOnly</emphasis> : si une action envoie une
                 exception et que cette option vaut <constant>TRUE</constant>, alors le layout ne sera pas
-                rendu. (Ceci évite un double rendu alors que le plugin <link
-                linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler</link> est
+                rendu. (Ceci évite un double rendu alors que le plugin <link linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler</link> est
                 activé). Par défaut cette option est à <constant>TRUE</constant>. Ses accesseurs :
                 <methodname>setMvcSuccessfulActionOnly()</methodname> et
                 <methodname>getMvcSuccessfulActionOnly()</methodname>.
@@ -56,8 +53,7 @@
             <para>
                 <emphasis>view</emphasis> : l'objet de vue (<classname>Zend_View</classname>)
                 utilisée par le layout pour rendre son script. Utilisé avec <acronym>MVC</acronym>,
-                <classname>Zend_Layout</classname> cherchera à récupérer la vue via l'aide <link
-                linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>, si aucun
+                <classname>Zend_Layout</classname> cherchera à récupérer la vue via l'aide <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>, si aucun
                 objet de vue ne lui est passé explicitement. Les accesseurs sont
                 <methodname>setView()</methodname> et <methodname>getView()</methodname>.
             </para>
@@ -86,16 +82,15 @@
         <listitem>
             <para>
                 <emphasis>inflector</emphasis> : l'inflecteur utilisé pour la résolution des
-                noms de layout vers les scripts de layout. Voyez <link
-                linkend="zend.layout.advanced.inflector">la documentation spécifique pour plus de
+                noms de layout vers les scripts de layout. Voyez <link linkend="zend.layout.advanced.inflector">la documentation spécifique pour plus de
                 détails</link>. Les accesseurs sont <methodname>setInflector()</methodname> et
                 <methodname>getInflector()</methodname>.
             </para>
         </listitem>
     </itemizedlist>
 
-    <note>
-        <title>Vous devez passer les helperClass et pluginClass à startMvc()</title>
+    <note><info><title>Vous devez passer les helperClass et pluginClass à startMvc()</title></info>
+        
 
         <para>
             Pour que les paramètres <code>helperClass</code> et <code>pluginClass</code>
@@ -104,8 +99,8 @@
         </para>
     </note>
 
-    <sect2 id="zend.layout.options.examples">
-        <title>Exemples</title>
+    <section xml:id="zend.layout.options.examples"><info><title>Exemples</title></info>
+        
 
         <para>
             Les exemples sont basés sur les paramètres <varname>$options</varname> et
@@ -131,8 +126,8 @@ contentKey = "CONTENT"
 $config = new Zend_Config_Ini('/chemin/vers/layout.ini', 'layout');
 ]]></programlisting>
 
-        <example id="zend.layout.options.examples.constructor">
-            <title>Passer des options au constructeur ou à startMvc()</title>
+        <example xml:id="zend.layout.options.examples.constructor"><info><title>Passer des options au constructeur ou à startMvc()</title></info>
+            
 
             <para>
                 Le constructeur et la méthode statique <methodname>startMvc()</methodname> acceptent soit
@@ -167,8 +162,8 @@ $layout = Zend_Layout::startMvc($config);
             </para>
         </example>
 
-        <example id="zend.layout.options.examples.setoptionsconfig">
-            <title>Utilisation de setOptions() et setConfig()</title>
+        <example xml:id="zend.layout.options.examples.setoptionsconfig"><info><title>Utilisation de setOptions() et setConfig()</title></info>
+            
 
             <para>
                 Pour configurer <classname>Zend_Layout</classname> après l'avoir instanciée,
@@ -191,8 +186,8 @@ $layout->setConfig($options);
             </para>
         </example>
 
-        <example id="zend.layout.options.examples.accessors">
-            <title>Utilisation des accesseurs</title>
+        <example xml:id="zend.layout.options.examples.accessors"><info><title>Utilisation des accesseurs</title></info>
+            
 
             <para>
                 Enfin, vous pouvez aussi configurer votre objet de
@@ -206,5 +201,5 @@ $layout->setLayout('foo')
        ->setContentKey('CONTENT');
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20807 -->
-<sect2 id="zend.test.phpunit.testing">
-    <title>コントローラおよび MVC アプリケーションのテスト</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.testing"><info><title>コントローラおよび MVC アプリケーションのテスト</title></info>
+    
 
     <para>
         起動用の設定を済ませたら、テストの開始です。
@@ -79,8 +77,8 @@ class FooControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         リクエストが準備できたので、次はアサーションを作成してみましょう。
     </para>
 
-    <sect3 id="zend.test.phpunit.testing.redirector">
-        <title>コントローラのテストと Redirector アクションヘルパー</title>
+    <section xml:id="zend.test.phpunit.testing.redirector"><info><title>コントローラのテストと Redirector アクションヘルパー</title></info>
+        
 
         <important>
             <para>
@@ -126,8 +124,5 @@ class MyController extends Zend_Controller_Action
                 現状の Zend Test では、これらをうまく処理することはできません。
             </para>
         </important>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

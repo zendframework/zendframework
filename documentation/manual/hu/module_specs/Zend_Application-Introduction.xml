@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17289 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.application.introduction">
-    <title>Bevezetés</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.introduction"><info><title>Bevezetés</title></info>
+    
 
     <para>
         A <classname>Zend_Application</classname> egy rendszertöltőt nyújt
@@ -12,4 +12,4 @@
         bekapcsolja az automatikus betöltést is.
     </para>
 
-</sect1>
+</section>

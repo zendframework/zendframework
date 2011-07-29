@@ -1,20 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20176 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.multidb">
-    <title>Zend_Application_Resource_Multidb</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.multidb"><info><title>Zend_Application_Resource_Multidb</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Multidb</classname> est utilisé pour initialiser de
         multiples connexions vers des bases de données. Vous pouvez utiliser les mêmes options
-        qu'avec le <link
-            linkend="zend.application.available-resources.db">plugin de ressource Db</link>.
+        qu'avec le <link linkend="zend.application.available-resources.db">plugin de ressource Db</link>.
         Cependant, pour spécifier une connexion par défaut, vous pouvez aussi utiliser la directive
         'default'.
     </para>
 
-    <example id="zend.application.available-resources.multidb.configexample">
-        <title>Paramétrer de multiples connexions vers des bases de données</title>
+    <example xml:id="zend.application.available-resources.multidb.configexample"><info><title>Paramétrer de multiples connexions vers des bases de données</title></info>
+        
 
         <para>
             Ci-dessous vous avez un exemple de configuration <acronym>INI</acronym> montrant
@@ -38,8 +35,8 @@ resources.multidb.db2.default = true
 ]]></programlisting>
     </example>
 
-    <example id="zend.application.available-resources.multidb.retrieveSpecificDb">
-        <title>Récupérer un adaptateur de bases de données spécifique</title>
+    <example xml:id="zend.application.available-resources.multidb.retrieveSpecificDb"><info><title>Récupérer un adaptateur de bases de données spécifique</title></info>
+        
 
         <para>
             Lorsque vous utilisez ce plugin de ressource, vous aurez sans doute besoin de
@@ -59,8 +56,8 @@ $defaultDb = $resource->getDb();
 ]]></programlisting>
     </example>
 
-    <example id="zend.application.available-resources.multidb.retrieveDefaultDb">
-        <title>Récupérer l'adaptateur de base de données par défaut</title>
+    <example xml:id="zend.application.available-resources.multidb.retrieveDefaultDb"><info><title>Récupérer l'adaptateur de base de données par défaut</title></info>
+        
 
         <para>
             De plus, vous pouvez récupérer l'adaptateur par défaut en utilisant la méthode
@@ -72,7 +69,7 @@ $defaultDb = $resource->getDb();
 
         <para>
             Ci-dessous vous avez un exemple qui suppose que le plugin de ressource Multidb
-            a été configuré avec l'exemple <acronym>INI</acronym> ci-dessus&#160;:
+            a été configuré avec l'exemple <acronym>INI</acronym> ci-dessus :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -84,4 +81,4 @@ $db1 = $resource->getDefaultDb();
 $null = $resource->getDefaultDb(false); // null
 ]]></programlisting>
     </example>
-</sect2>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20827 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.navigation.pages.custom">
-    <title>Créer des pages de type personnalisé</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.custom"><info><title>Créer des pages de type personnalisé</title></info>
+    
 
     <para>
         Etendre <classname>Zend_Navigation_Page</classname> ne nécessite pas forcément de réécrire
@@ -14,12 +12,12 @@
         leurs options. Si l'option <code>internal_id</code> est présente, alors la méthode
         <methodname>setInternalId()</methodname> sera évaluée si présente, et l'option en question lui sera
         passée. Si une telle méthode n'existe pas, l'option sera alors vue comme une propriété de la page
-        et sera accessible sous <code>$internalId = $page->internal_id;</code> ou
-        <code>$internalId = $page->get('internal_id');</code>.
+        et sera accessible sous <code>$internalId = $page-&gt;internal_id;</code> ou
+        <code>$internalId = $page-&gt;get('internal_id');</code>.
     </para>
 
-    <example id="zend.navigation.custom.example.simple">
-        <title>La page personnalisée la plus simple possible</title>
+    <example xml:id="zend.navigation.custom.example.simple"><info><title>La page personnalisée la plus simple possible</title></info>
+        
 
         <para>
             La seule chose à définir dans une page personnalisée est la méthode
@@ -37,8 +35,8 @@ class My_Simple_Page extends Zend_Navigation_Page
 ]]></programlisting>
     </example>
 
-    <example id="zend.navigation.custom.example.properties">
-        <title>Une page personnalisée avec des propriétés</title>
+    <example xml:id="zend.navigation.custom.example.properties"><info><title>Une page personnalisée avec des propriétés</title></info>
+        
 
         <para>
             Ajouter des propriétés à vos pages étendues ne nécessite pas de réécrire
@@ -93,4 +91,4 @@ $page = Zend_Navigation_Page::factory(array(
 ));
 ]]></programlisting>
     </example>
-</sect2>
+</section>

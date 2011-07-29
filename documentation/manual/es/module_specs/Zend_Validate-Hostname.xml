@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
-    <!-- Reviewed: no -->
-<sect2 id="zend.validate.set.hostname">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.hostname"><info><title>Hostname (Nombre de Host)</title></info>
 
-    <title>Hostname (Nombre de Host)</title>
+    
 
     <para>
         <classname>Zend_Validate_Hostname</classname> le permite validar un
@@ -145,4 +143,4 @@ $validator =
     <para>Tenga en cuenta que una validación de TLDs solo se realizará si tiene
         habilidada la validación para nombres de host DNS.</para>
 
-</sect2>
+</section>

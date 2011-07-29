@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.view.placeholders.standard">
-    <title>Standard Placeholders</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.view.placeholders.standard"><info><title>Standard Placeholders</title></info>
+    
 
     <para>
         In the <link linkend="learning.view.placeholders.basics">previous section</link>, we learned
@@ -27,8 +26,8 @@
         several more.
     </para>
 
-    <sect2 id="learning.view.placeholders.standard.doctype">
-        <title>Setting the DocType</title>
+    <section xml:id="learning.view.placeholders.standard.doctype"><info><title>Setting the DocType</title></info>
+        
 
         <para>
             <emphasis>DocType</emphasis> declarations are troublesome to memorize, and often
@@ -145,10 +144,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             ensure that the type is set well before the layout is rendered, and provide a single
             location to change the DocType.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.view.placeholders.standard.head-title">
-        <title>Specifying the Page Title</title>
+    <section xml:id="learning.view.placeholders.standard.head-title"><info><title>Specifying the Page Title</title></info>
+        
 
         <para>
             Often, a site will include the site or business name as part of the page title, and
@@ -226,10 +225,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 <!-- If prepend() was used: -->
 <title>Some Page :: My Site</title>
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.view.placeholders.standard.head-link">
-        <title>Specifying Stylesheets with HeadLink</title>
+    <section xml:id="learning.view.placeholders.standard.head-link"><info><title>Specifying Stylesheets with HeadLink</title></info>
+        
 
         <para>
             Good <acronym>CSS</acronym> developers will often create a general stylesheet for
@@ -311,10 +310,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 <link rel="stylesheet" type="text/css" href="/styles/site.css" />
 <link rel="stylesheet" type="text/css" href="/styles/user-list.css" />
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.view.placeholders.standard.head-script">
-        <title>Aggregating Scripts Using HeadScript</title>
+    <section xml:id="learning.view.placeholders.standard.head-script"><info><title>Aggregating Scripts Using HeadScript</title></info>
+        
 
         <para>
             Another common tactic to prevent long page load times is to only load JavaScript when
@@ -419,8 +418,8 @@ site = {
 </script>
 ]]></programlisting>
 
-        <note>
-            <title>InlineScript Variant</title>
+        <note><info><title>InlineScript Variant</title></info>
+            
 
             <para>
                 Many browsers will often block display of a page until all scripts and stylesheets
@@ -432,8 +431,7 @@ site = {
             <para>
                 One way around this is to emit your <emphasis>&lt;script&gt;</emphasis> tags just
                 prior to closing the <emphasis>&lt;body&gt;</emphasis> of your document. (This is a
-                practice specifically recommend by the <ulink
-                    url="http://developer.yahoo.com/yslow/">Y! Slow project</ulink>.)
+                practice specifically recommend by the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://developer.yahoo.com/yslow/">Y! Slow project</link>.)
             </para>
 
             <para>
@@ -458,5 +456,5 @@ site = {
                 </listitem>
             </itemizedlist>
         </note>
-    </sect2>
-</sect1>
+    </section>
+</section>

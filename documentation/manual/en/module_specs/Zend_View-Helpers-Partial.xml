@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.partial">
-    <title>Partial Helper</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.partial"><info><title>Partial Helper</title></info>
+    
 
     <para>
         The <classname>Partial</classname> view helper is used to render a specified
@@ -17,8 +16,8 @@
         item.
     </para>
 
-    <note>
-        <title>PartialLoop Counter</title>
+    <note><info><title>PartialLoop Counter</title></info>
+        
 
         <para>
             The <classname>PartialLoop</classname> view helper assigns a variable to the view named
@@ -28,8 +27,8 @@
         </para>
     </note>
 
-    <example id="zend.view.helpers.initial.partial.usage">
-        <title>Basic Usage of Partials</title>
+    <example xml:id="zend.view.helpers.initial.partial.usage"><info><title>Basic Usage of Partials</title></info>
+        
 
         <para>
             Basic usage of partials is to render a template fragment in its own
@@ -66,8 +65,8 @@
 ]]></programlisting>
     </example>
 
-    <note>
-        <title>What is a model?</title>
+    <note><info><title>What is a model?</title></info>
+        
 
         <para>
             A model used with the <classname>Partial</classname> view helper can be
@@ -128,8 +127,8 @@ $view->partialLoop()->setObjectKey('model');
         </para>
     </note>
 
-    <example id="zend.view.helpers.initial.partial.partialloop">
-        <title>Using PartialLoop to Render Iterable Models</title>
+    <example xml:id="zend.view.helpers.initial.partial.partialloop"><info><title>Using PartialLoop to Render Iterable Models</title></info>
+        
 
         <para>
             Typically, you'll want to use partials in a loop, to render the same
@@ -199,8 +198,8 @@ $model = array(
 ]]></programlisting>
     </example>
 
-    <example id="zend.view.helpers.initial.partial.modules">
-        <title>Rendering Partials in Other Modules</title>
+    <example xml:id="zend.view.helpers.initial.partial.modules"><info><title>Rendering Partials in Other Modules</title></info>
+        
 
         <para>
             Sometime a partial will exist in a different module. If you know the
@@ -224,7 +223,4 @@ $model = array(
             partials in shared view script paths.
         </para>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

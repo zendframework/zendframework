@@ -1,5 +1,6 @@
-<sect1 id="zend.view.abstract">
-    <title>Zend_View_Abstract</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.abstract"><info><title>Zend_View_Abstract</title></info>
+    
 
     <para>
         <code>Zend_View_Abstract</code> הינו מחלקת הבסיס עליה <code>Zend_View</code> מבוססת; <code>Zend_View</code> בעצמה בסך הכל מרחיבה אותה ומגדירה את המתודה
@@ -25,8 +26,8 @@ protected function _run()
 {
     include func_get_arg(0);
 }
-]]>
-    </programlisting>
+
+    ]]></programlisting>
 
     <para>
         לכן, סקריפטים של התצוגה יכולים לגשת לאובייקט הנוכחי (<code>$this</code>), וכל המתודות או המשתמשים של אותו אובייקט.
@@ -39,7 +40,4 @@ protected function _run()
         מאחר ו <code>Zend_View</code> מרחיב את <code>Zend_View_Abstract</code>, סקריפטי תצוגה מוגבלים רק למתודות וערכים ציבוריים ומוגנים של <code>Zend_View_Abstract</code> --
         ולמעשה מגבילים את האפשרויות והפעולות שניתן לבצע, ומאפשר לנו לאבטח איזורים קריטיים במערכת מפני שימוש לא נכון או לא תקני שלהם בסקריפטי תצוגה.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

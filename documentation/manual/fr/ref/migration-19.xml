@@ -1,19 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect1 id="migration.19">
-    <title>Zend Framework 1.9</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.19"><info><title>Zend Framework 1.9</title></info>
+    
 
     <para>
         Lors de la migration d'une version précédente à Zend Framework 1.9.0 vers une version 1.9,
         vous devriez prendre note de ce qui suit.
     </para>
 
-    <sect2 id="migration.19.zend.file.transfer">
-        <title>Zend_File_Transfer</title>
+    <section xml:id="migration.19.zend.file.transfer"><info><title>Zend_File_Transfer</title></info>
+        
 
-        <sect3 id="migration.110.zend.file.transfer.mimetype">
-            <title>MimeType validation</title>
+        <section xml:id="migration.110.zend.file.transfer.mimetype"><info><title>MimeType validation</title></info>
+            
 
             <para>
                 For security reasons we had to turn off the default fallback mechanism of the
@@ -30,8 +28,8 @@
                 <methodname>enableHeaderCheck()</methodname> method.
             </para>
 
-            <note>
-                <title>Security hint</title>
+            <note><info><title>Security hint</title></info>
+                
 
                 <para>
                     You should note that relying on the <acronym>HTTP</acronym> fields, which are
@@ -40,8 +38,8 @@
                 </para>
             </note>
 
-            <example id="migration.110.zend.file.transfer.example">
-                <title>Allow the usage of the HTTP fields</title>
+            <example xml:id="migration.110.zend.file.transfer.example"><info><title>Allow the usage of the HTTP fields</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 // at initiation
@@ -51,11 +49,11 @@ $valid = new Zend_File_Transfer_Adapter_Http(array('headerCheck' => true);
 $valid->enableHeaderCheck();
 ]]></programlisting>
             </example>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="migration.19.zend.filter">
-        <title>Zend_Filter</title>
+    <section xml:id="migration.19.zend.filter"><info><title>Zend_Filter</title></info>
+        
 
         <para>
             Avant la version 1.9, <classname>Zend_Filter</classname> permettait l'utilisation
@@ -64,13 +62,13 @@ $valid->enableHeaderCheck();
             descriptive. L'ancienne méthode <methodname>get()</methodname> est marquée comme
             dépréciée.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="migration.19.zend.http.client">
-        <title>Zend_Http_Client</title>
+    <section xml:id="migration.19.zend.http.client"><info><title>Zend_Http_Client</title></info>
+        
 
-        <sect3 id="migration.19.zend.http.client.fileuploadsarray">
-            <title>Changement dans le stockage interne des fichiers d'upload</title>
+        <section xml:id="migration.19.zend.http.client.fileuploadsarray"><info><title>Changement dans le stockage interne des fichiers d'upload</title></info>
+            
 
             <para>
                 Dans la version 1.9 de Zend Framework, il y a eu un changement dans la manière dont
@@ -82,11 +80,11 @@ $valid->enableHeaderCheck();
                 Ce changement a été mis en place de manière à permettre l'envoi de plusieurs fichiers
                 avec le même nom dans le formulaire, en tant que tableau de fichiers. Plus d'informations à
                 ce sujet peuvent être trouvées dans ce
-                <ulink url="http://framework.zend.com/issues/browse/ZF-5744">rapport de bug</ulink>.
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/issues/browse/ZF-5744">rapport de bug</link>.
             </para>
 
-            <example id="migration.19.zend.http.client.fileuploadsarray.example">
-                <title>Stockage interne des informations sur les fichiers uploadés</title>
+            <example xml:id="migration.19.zend.http.client.fileuploadsarray.example"><info><title>Stockage interne des informations sur les fichiers uploadés</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 // Uploade 2 fichiers avec le même nom d'élément de formulaire, en tant que tableau
@@ -121,10 +119,10 @@ $client->setFileUpload('file2.txt', 'userfile[]', 'some other data', 'applicatio
                 Comme vous le voyez, ce changement permet l'utilisation du même élément de formulaire avec plusieurs
                 fichiers. Cependant ceci introduit un changement subtile dans l'API interne, il est donc signalé ici.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="migration.19.zend.http.client.getparamsrecursize">
-            <title>Deprecation of Zend_Http_Client::_getParametersRecursive()</title>
+        <section xml:id="migration.19.zend.http.client.getparamsrecursize"><info><title>Deprecation of Zend_Http_Client::_getParametersRecursive()</title></info>
+            
 
             <para>
                 Starting from version 1.9, the protected method <methodname>_getParametersRecursive()</methodname>
@@ -142,25 +140,25 @@ $client->setFileUpload('file2.txt', 'userfile[]', 'some other data', 'applicatio
                 Again, since this <classname>_getParametersRecursive</classname> is a protected method,
                 this change will only affect users who subclass <classname>Zend_Http_Client</classname>.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="migration.19.zend.locale">
-        <title>Zend_Locale</title>
+    <section xml:id="migration.19.zend.locale"><info><title>Zend_Locale</title></info>
+        
 
-        <sect3 id="migration.19.zend.locale.deprecated">
-            <title>Méthodes dépréciées</title>
+        <section xml:id="migration.19.zend.locale.deprecated"><info><title>Méthodes dépréciées</title></info>
+            
 
             <para>
                 Quelques méthodes de traductions spéciales ont été dépréciées car elles dupliquaient
                 un comportement existant. Notez cependant que les anciens appels vont toujours
                 fonctionner, mais une notice utilisateur, qui décrira le nouvel appel, sera émise.
                 Ces méthodes seront effacées en 2.0. Ci-dessous la liste des anciens et nouveaux
-                appels&#160;:
+                appels :
             </para>
 
-            <table id="migration.19.zend.locale.deprecated.table-1">
-                <title>Liste des types de mesures</title>
+            <table xml:id="migration.19.zend.locale.deprecated.table-1"><info><title>Liste des types de mesures</title></info>
+                
 
                 <tgroup cols="2">
                     <thead>
@@ -205,11 +203,11 @@ $client->setFileUpload('file2.txt', 'userfile[]', 'some other data', 'applicatio
                     </tbody>
                 </tgroup>
             </table>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="migration.19.zend.view.helper.navigation">
-        <title>Zend_View_Helper_Navigation</title>
+    <section xml:id="migration.19.zend.view.helper.navigation"><info><title>Zend_View_Helper_Navigation</title></info>
+        
 
         <para>
             Prior to the 1.9 release, the menu helper
@@ -295,10 +293,10 @@ echo $this->navigation()->menu()->renderMenu($container, array(
     </li>
 </ul>
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="migration.19.security">
-        <title>Security fixes as with 1.9.7</title>
+    <section xml:id="migration.19.security"><info><title>Security fixes as with 1.9.7</title></info>
+        
 
         <para>
             Additionally, users of the 1.9 series may be affected by other changes starting in
@@ -306,15 +304,14 @@ echo $this->navigation()->menu()->renderMenu($container, array(
             compatibility implications.
         </para>
 
-        <sect3 id="migration.19.security.zend.dojo.editor">
-            <title>Zend_Dojo_View_Helper_Editor</title>
+        <section xml:id="migration.19.security.zend.dojo.editor"><info><title>Zend_Dojo_View_Helper_Editor</title></info>
+            
 
             <para>
                 A slight change was made in the 1.9 series to modify the default usage of the Editor
                 dijit to use <acronym>div</acronym> tags instead of a <acronym>textarea</acronym>
-                tag; the latter usage has <ulink
-                    url="http://api.dojotoolkit.org/jsdoc/HEAD/dijit._editor.RichText">security
-                implications</ulink>, and usage of <acronym>div</acronym> tags is recommended by the
+                tag; the latter usage has <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://api.dojotoolkit.org/jsdoc/HEAD/dijit._editor.RichText">security
+                implications</link>, and usage of <acronym>div</acronym> tags is recommended by the
                 Dojo project.
             </para>
 
@@ -332,10 +329,10 @@ echo $this->navigation()->menu()->renderMenu($container, array(
                 The takeaway is that if you were using the <varname>degrade</varname> flag, it will
                 simply be ignored at this time.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="migration.19.security.zend.filter.html-entities">
-            <title>Zend_Filter_HtmlEntities</title>
+        <section xml:id="migration.19.security.zend.filter.html-entities"><info><title>Zend_Filter_HtmlEntities</title></info>
+            
 
             <para>
                 In order to default to a more secure character encoding,
@@ -354,10 +351,10 @@ echo $this->navigation()->menu()->renderMenu($container, array(
                 explicit accessors. If you were extending the filter in the past, please check your
                 code and unit tests to ensure everything still continues to work.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="migration.19.security.zend.filter.strip-tags">
-            <title>Zend_Filter_StripTags</title>
+        <section xml:id="migration.19.security.zend.filter.strip-tags"><info><title>Zend_Filter_StripTags</title></info>
+            
 
             <para>
                 <classname>Zend_Filter_StripTags</classname> contains a flag,
@@ -370,6 +367,6 @@ echo $this->navigation()->menu()->renderMenu($container, array(
                 comments, including those containing other HTML tags or nested commments, will be
                 stripped from the final output of the filter.
             </para>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

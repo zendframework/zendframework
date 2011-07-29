@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.lucene.pagination">
-    <title>Search result pagination</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.pagination"><info><title>Search result pagination</title></info>
+    
 
     <para>
         As <link linkend="learning.lucene.searching.identifiers">mentioned above</link>, search
@@ -15,8 +14,8 @@
         retrive documents from the index during the next script execution.
     </para>
 
-    <example id="learning.lucene.pagination.example">
-        <title>Search result pagination example</title>
+    <example xml:id="learning.lucene.pagination.example"><info><title>Search result pagination example</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $cacheId = md5($query);
@@ -45,4 +44,4 @@ for ($resultId = $startId; $resultId < $endId; $resultId++) {
 }
 ]]></programlisting>
     </example>
-</sect1>
+</section>

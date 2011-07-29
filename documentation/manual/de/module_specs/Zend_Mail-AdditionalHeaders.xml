@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20819 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.additional-headers">
-    <title>Zusätzliche Kopfzeilen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.additional-headers"><info><title>Zusätzliche Kopfzeilen</title></info>
+    
 
     <para>
         <classname>Zend_Mail</classname> bietet verschiedene Methode um zusätzliche Mail Header zu
@@ -36,12 +34,11 @@
         </itemizedlist>
     </para>
 
-    <note>
-        <title>Return-Path</title>
+    <note><info><title>Return-Path</title></info>
+        
 
         <para>
-            Wenn man den Return-Path in eigenen Mail setzen will, sollte man unter <link
-                linkend="zend.mail.introduction.sendmail">Konfiguration des Sendmail
+            Wenn man den Return-Path in eigenen Mail setzen will, sollte man unter <link linkend="zend.mail.introduction.sendmail">Konfiguration des Sendmail
                 Transports</link> nachsehen. Unglücklicherweise führt die
             <methodname>setReturnPath($email)</methodname> Methode dies nicht aus.
         </para>
@@ -54,8 +51,8 @@
         zeigt an ob der Header nur einen oder mehrere Werte enthalten soll:
     </para>
 
-    <example id="zend.mail.additional-headers.example-1">
-        <title>Eine E-Mail Kopfzeile hinzufügen</title>
+    <example xml:id="zend.mail.additional-headers.example-1"><info><title>Eine E-Mail Kopfzeile hinzufügen</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
@@ -64,4 +61,4 @@ $mail->addHeader('X-greetingsTo', 'Mom', true); // mehrer Werte
 $mail->addHeader('X-greetingsTo', 'Dad', true);
 ]]></programlisting>
     </example>
-</sect1>
+</section>

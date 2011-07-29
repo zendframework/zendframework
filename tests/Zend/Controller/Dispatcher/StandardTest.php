@@ -458,7 +458,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-3034
+     * @group ZF-3034
      */
     public function testIsValidModuleShouldNormalizeModuleName()
     {

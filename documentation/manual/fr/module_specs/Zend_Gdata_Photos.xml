@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21815 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.gdata.photos">
-    <title>Utilisation des albums Web Picasa</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.photos"><info><title>Utilisation des albums Web Picasa</title></info>
+    
 
     <para>
         Les albums Web Picasa représentent un service Google permettant de maintenir à jour
@@ -18,13 +16,12 @@
     </para>
 
     <para>
-        Pour plus d'informations sur l'API, voyez <ulink
-        url="http://code.google.com/apis/picasaweb/overview.html">l'API Picasa Web
-        Albums</ulink>.
+        Pour plus d'informations sur l'API, voyez <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/picasaweb/overview.html">l'API Picasa Web
+        Albums</link>.
     </para>
 
-    <note>
-        <title>Authentification</title>
+    <note><info><title>Authentification</title></info>
+        
 
         <para>
             L'API propose les deux modes d'authentification, AuthSub (recommandé) et
@@ -33,8 +30,8 @@
         </para>
     </note>
 
-    <sect2 id="zend.gdata.photos.connecting">
-        <title>Se connecter au service</title>
+    <section xml:id="zend.gdata.photos.connecting"><info><title>Se connecter au service</title></info>
+        
 
         <para>
             L'API Picasa, comme tous les autres services Web Google Gdata, est basée sur le
@@ -48,8 +45,8 @@
             celui-ci.
         </para>
 
-        <sect3 id="zend.gdata.photos.connecting.authentication">
-            <title>Authentification</title>
+        <section xml:id="zend.gdata.photos.connecting.authentication"><info><title>Authentification</title></info>
+            
 
             <para>
                 L'API propose un accès à la fois aux données publiques, et aux données
@@ -81,15 +78,14 @@
                 La librairie <classname>Zend_Gdata</classname> permet ces 2 types
                 d'authentification. Le reste de ce chapitre supposera que vous soyez habitué à
                 l'authentification avec les service Web Google GData. Si ce n'est pas le cas, nous
-                vous conseillons de consulter <link
-                linkend="zend.gdata.introduction.authentication">la section authentification</link>
-                de ce manuel, ou encore <ulink url="http://code.google.com/apis/gdata/auth.html">le
-                guide d'authentification Google GData webservices <acronym>API</acronym></ulink>.
+                vous conseillons de consulter <link linkend="zend.gdata.introduction.authentication">la section authentification</link>
+                de ce manuel, ou encore <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/gdata/auth.html">le
+                guide d'authentification Google GData webservices <acronym>API</acronym></link>.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.photos.connecting.service">
-            <title>Créer une instance du service</title>
+        <section xml:id="zend.gdata.photos.connecting.service"><info><title>Créer une instance du service</title></info>
+            
 
             <para>
                 Pour interagir avec les serveurs, la classe
@@ -227,11 +223,11 @@ $service = new Zend_Gdata_Photos(getAuthSubHttpClient());
 // Création d'une instance du service en mode non authentifié
 $service = new Zend_Gdata_Photos();
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.gdata.photos.queries">
-        <title>Comprendre et construire des requêtes</title>
+    <section xml:id="zend.gdata.photos.queries"><info><title>Comprendre et construire des requêtes</title></info>
+        
 
         <para>
             Pour créer des requêtes vers le service Web, vous devrez utiliser une de ces
@@ -362,18 +358,18 @@ $query->setUser("sample.user");
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.photos.retrieval">
-        <title>Récupérer des flux et des éléments</title>
+    <section xml:id="zend.gdata.photos.retrieval"><info><title>Récupérer des flux et des éléments</title></info>
+        
 
         <para>
             Le service propose des méthodes de récupération de flux, ou d'éléments simples,
             concernant les utilisateurs, albums, ou photos.
         </para>
 
-        <sect3 id="zend.gdata.photos.user_retrieval">
-            <title>Récupérer un utilisateur</title>
+        <section xml:id="zend.gdata.photos.user_retrieval"><info><title>Récupérer un utilisateur</title></info>
+            
 
             <para>
                 Le service propose de récupérer un utilisateur, et toutes les infos de son
@@ -436,10 +432,10 @@ try {
     echo "Error: " . $e->getMessage();
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.photos.album_retrieval">
-            <title>Récupérer un album</title>
+        <section xml:id="zend.gdata.photos.album_retrieval"><info><title>Récupérer un album</title></info>
+            
 
             <para>Le service donne accès aux flux d'albums et à leurs contenus.</para>
 
@@ -488,10 +484,10 @@ try {
     echo "Error: " . $e->getMessage();
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.photos.photo_retrieval">
-            <title>Récupérer une Photo</title>
+        <section xml:id="zend.gdata.photos.photo_retrieval"><info><title>Récupérer une Photo</title></info>
+            
 
             <para>
                 Le service permet la récupération de flux de photos, et des commentaires et/ou
@@ -539,10 +535,10 @@ try {
     echo "Error: " . $e->getMessage();
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.photos.comment_retrieval">
-            <title>Récupérer des commentaires</title>
+        <section xml:id="zend.gdata.photos.comment_retrieval"><info><title>Récupérer des commentaires</title></info>
+            
 
             <para>
                 Vous pouvez récupérer des commentaires depuis des éléments divers de flux. En
@@ -578,10 +574,10 @@ try {
     echo "Error: " . $e->getMessage();
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.photos.tag_retrieval">
-            <title>Récupérer des mots-clés</title>
+        <section xml:id="zend.gdata.photos.tag_retrieval"><info><title>Récupérer des mots-clés</title></info>
+            
 
             <para>
                 Vous pouvez récupérer des mots-clés depuis des éléments divers de flux. En
@@ -617,19 +613,19 @@ try {
     echo "Error: " . $e->getMessage();
 }
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.gdata.photos.creation">
-        <title>Créer des ressources</title>
+    <section xml:id="zend.gdata.photos.creation"><info><title>Créer des ressources</title></info>
+        
 
         <para>
             Des opérations de création sont possible, qu'il s'agisse d'albums, photos,
             commentaires, ou mots-clés.
         </para>
 
-        <sect3 id="zend.gdata.photos.album_creation">
-            <title>Créer un album</title>
+        <section xml:id="zend.gdata.photos.album_creation"><info><title>Créer un album</title></info>
+            
 
             <para>Il est possible de créer un album, pour les clients authentifiés :</para>
 
@@ -643,10 +639,10 @@ $entry->setTitle($service->newTitle("test album"));
 
 $service->insertAlbumEntry($entry);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.photos.photo_creation">
-            <title>Créer une photo</title>
+        <section xml:id="zend.gdata.photos.photo_creation"><info><title>Créer une photo</title></info>
+            
 
             <para>
                 Créer une photo est possible pour les clients authentifiés, procédez comme
@@ -675,10 +671,10 @@ $albumEntry = $service->getAlbumEntry($albumQuery);
 
 $service->insertPhotoEntry($entry, $albumEntry);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.photos.comment_creation">
-            <title>Créer un commentaire pour une photo</title>
+        <section xml:id="zend.gdata.photos.comment_creation"><info><title>Créer un commentaire pour une photo</title></info>
+            
 
             <para>
                 Il est possible de créer un commentaire pour une photo, voici un exemple
@@ -704,10 +700,10 @@ $photoEntry = $service->getPhotoEntry($photoQuery);
 
 $service->insertCommentEntry($entry, $photoEntry);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.photos.tag_creation">
-            <title>Créer un mot-clé pour une photo</title>
+        <section xml:id="zend.gdata.photos.tag_creation"><info><title>Créer un mot-clé pour une photo</title></info>
+            
 
             <para>Il est possible de créer un mot-clé pour une photo, voici un exemple :</para>
 
@@ -729,16 +725,16 @@ $photoEntry = $service->getPhotoEntry($photoQuery);
 
 $service->insertTagEntry($entry, $photoEntry);
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.gdata.photos.deletion">
-        <title>Supprimer des éléments</title>
+    <section xml:id="zend.gdata.photos.deletion"><info><title>Supprimer des éléments</title></info>
+        
 
         <para>Il est possible de supprimer albums, photos, commentaires, et mots-clés.</para>
 
-        <sect3 id="zend.gdata.photos.album_deletion">
-            <title>Supprimer un album</title>
+        <section xml:id="zend.gdata.photos.album_deletion"><info><title>Supprimer un album</title></info>
+            
 
             <para>Supprimer un album est possible si le client est authentifié :</para>
 
@@ -756,10 +752,10 @@ $entry = $service->getAlbumEntry($albumQuery);
 
 $service->deleteAlbumEntry($entry, true);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.photos.photo_deletion">
-            <title>Supprimer une photo</title>
+        <section xml:id="zend.gdata.photos.photo_deletion"><info><title>Supprimer une photo</title></info>
+            
 
             <para>Supprimer une photo est possible si le client est authentifié :</para>
 
@@ -778,10 +774,10 @@ $entry = $service->getPhotoEntry($photoQuery);
 
 $service->deletePhotoEntry($entry, true);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.photos.comment_deletion">
-            <title>Supprimer un commentaire</title>
+        <section xml:id="zend.gdata.photos.comment_deletion"><info><title>Supprimer un commentaire</title></info>
+            
 
             <para>Supprimer un commentaire est possible si le client est authentifié :</para>
 
@@ -802,10 +798,10 @@ $entry = $service->getCommentEntry($path);
 
 $service->deleteCommentEntry($entry, true);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.photos.tag_deletion">
-            <title>Supprimer un mot-clé</title>
+        <section xml:id="zend.gdata.photos.tag_deletion"><info><title>Supprimer un mot-clé</title></info>
+            
 
             <para>Supprimer un mot-clé est possible, si le client est authentifié :</para>
 
@@ -833,10 +829,10 @@ foreach ($photoFeed as $entry) {
 
 $service->deleteTagEntry($tagEntry, true);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.photos.optimistic_concurrenty">
-            <title>Gestion des accès concurrents</title>
+        <section xml:id="zend.gdata.photos.optimistic_concurrenty"><info><title>Gestion des accès concurrents</title></info>
+            
 
             <para>
                 Les flux GData, dont ceux de Picasa Web Albums, implémentent un système
@@ -867,6 +863,6 @@ try {
     }
 }
 ]]></programlisting>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

@@ -1,23 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.db.statement">
-    <title>Zend_Db_Statement</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.statement"><info><title>Zend_Db_Statement</title></info>
+    
 
     <para>
         In addition to convenient methods such as <methodname>fetchAll()</methodname> and
-        <methodname>insert()</methodname> documented in <link
-            linkend="zend.db.adapter">Zend_Db_Adapter</link>, you can use a statement object to gain
+        <methodname>insert()</methodname> documented in <link linkend="zend.db.adapter">Zend_Db_Adapter</link>, you can use a statement object to gain
         more options for running queries and fetching result sets. This section describes how to get
         an instance of a statement object, and how to use its methods.
     </para>
 
     <para>
         <classname>Zend_Db_Statement</classname> is based on the PDOStatement object in the
-        <ulink url="http://www.php.net/pdo">PHP Data Objects</ulink> extension.
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/pdo">PHP Data Objects</link> extension.
     </para>
 
-    <sect2 id="zend.db.statement.creating">
-        <title>Creating a Statement</title>
+    <section xml:id="zend.db.statement.creating"><info><title>Creating a Statement</title></info>
+        
 
         <para>
             Typically, a statement object is returned by the
@@ -28,8 +26,8 @@
             to parameter placeholders in the <acronym>SQL</acronym> string.
         </para>
 
-        <example id="zend.db.statement.creating.example1">
-            <title>Creating a SQL statement object with query()</title>
+        <example xml:id="zend.db.statement.creating.example1"><info><title>Creating a SQL statement object with query()</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $stmt = $db->query(
@@ -55,8 +53,8 @@ $stmt = $db->query(
             The statement is prepared, but not executed.
         </para>
 
-        <example id="zend.db.statement.creating.example2">
-            <title>Using a SQL statement constructor</title>
+        <example xml:id="zend.db.statement.creating.example2"><info><title>Using a SQL statement constructor</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?';
@@ -64,10 +62,10 @@ $sql = 'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?';
 $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.statement.executing">
-        <title>Executing a Statement</title>
+    <section xml:id="zend.db.statement.executing"><info><title>Executing a Statement</title></info>
+        
 
         <para>
             You need to execute a statement object if you create it using its
@@ -83,8 +81,8 @@ $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
             the bind values in a plain array.
         </para>
 
-        <example id="zend.db.statement.executing.example1">
-            <title>Executing a statement with positional parameters</title>
+        <example xml:id="zend.db.statement.executing.example1"><info><title>Executing a statement with positional parameters</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?';
@@ -102,8 +100,8 @@ $stmt->execute(array('goofy', 'FIXED'));
             The keys of this array should match the parameter names.
         </para>
 
-        <example id="zend.db.statement.executing.example2">
-            <title>Executing a statement with named parameters</title>
+        <example xml:id="zend.db.statement.executing.example2"><info><title>Executing a statement with named parameters</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE ' .
@@ -121,10 +119,10 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
             the <classname>Zend_Db_Statement</classname> classes for non-PDO extensions may support
             only one type of parameter or the other.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.statement.fetching">
-        <title>Fetching Results from a SELECT Statement</title>
+    <section xml:id="zend.db.statement.fetching"><info><title>Fetching Results from a SELECT Statement</title></info>
+        
 
         <para>
             You can call methods on the statement object to retrieve rows from
@@ -137,8 +135,8 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
             rows of results from them.
         </para>
 
-        <sect3 id="zend.db.statement.fetching.fetch">
-            <title>Fetching a Single Row from a Result Set</title>
+        <section xml:id="zend.db.statement.fetching.fetch"><info><title>Fetching a Single Row from a Result Set</title></info>
+            
 
             <para>
                 To retrieve one row from the result set, use the
@@ -186,8 +184,8 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                 the result set have been fetched.
             </para>
 
-            <example id="zend.db.statement.fetching.fetch.example">
-                <title>Using fetch() in a loop</title>
+            <example xml:id="zend.db.statement.fetching.fetch.example"><info><title>Using fetch() in a loop</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT * FROM bugs');
@@ -199,13 +197,12 @@ while ($row = $stmt->fetch()) {
             </example>
 
             <para>
-                See also <ulink
-                   url="http://www.php.net/PDOStatement-fetch">PDOStatement::fetch()</ulink>.
+                See also <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/PDOStatement-fetch">PDOStatement::fetch()</link>.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.statement.fetching.fetchall">
-            <title>Fetching a Complete Result Set</title>
+        <section xml:id="zend.db.statement.fetching.fetchall"><info><title>Fetching a Complete Result Set</title></info>
+            
 
             <para>
                 To retrieve all the rows of the result set in one step, use the
@@ -217,8 +214,8 @@ while ($row = $stmt->fetch()) {
                 when the fetch style is <constant>Zend_Db::FETCH_COLUMN</constant>.
             </para>
 
-            <example id="zend.db.statement.fetching.fetchall.example">
-                <title>Using fetchAll()</title>
+            <example xml:id="zend.db.statement.fetching.fetchall.example"><info><title>Using fetchAll()</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT * FROM bugs');
@@ -230,13 +227,12 @@ echo $rows[0]['bug_description'];
             </example>
 
             <para>
-                See also <ulink
-                    url="http://www.php.net/PDOStatement-fetchAll">PDOStatement::fetchAll()</ulink>.
+                See also <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/PDOStatement-fetchAll">PDOStatement::fetchAll()</link>.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.statement.fetching.fetch-mode">
-            <title>Changing the Fetch Mode</title>
+        <section xml:id="zend.db.statement.fetching.fetch-mode"><info><title>Changing the Fetch Mode</title></info>
+            
 
             <para>
                 By default, the statement object returns rows of the result set
@@ -254,8 +250,8 @@ echo $rows[0]['bug_description'];
                 fetch mode that you specify.
             </para>
 
-            <example id="zend.db.statement.fetching.fetch-mode.example">
-                <title>Setting the fetch mode</title>
+            <example xml:id="zend.db.statement.fetching.fetch-mode.example"><info><title>Setting the fetch mode</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT * FROM bugs');
@@ -269,13 +265,12 @@ echo $rows[0][0];
             </example>
 
             <para>
-                See also <ulink
-                    url="http://www.php.net/PDOStatement-setFetchMode">PDOStatement::setFetchMode()</ulink>.
+                See also <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/PDOStatement-setFetchMode">PDOStatement::setFetchMode()</link>.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.statement.fetching.fetchcolumn">
-            <title>Fetching a Single Column from a Result Set</title>
+        <section xml:id="zend.db.statement.fetching.fetchcolumn"><info><title>Fetching a Single Column from a Result Set</title></info>
+            
 
             <para>
                 To return a single column from the next row of the result set,
@@ -295,8 +290,8 @@ echo $rows[0][0];
                 result set.
             </para>
 
-            <example id="zend.db.statement.fetching.fetchcolumn.example">
-                <title>Using fetchColumn()</title>
+            <example xml:id="zend.db.statement.fetching.fetchcolumn.example"><info><title>Using fetchColumn()</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT bug_id, bug_description, bug_status FROM bugs');
@@ -306,13 +301,12 @@ $bug_status = $stmt->fetchColumn(2);
             </example>
 
             <para>
-                See also <ulink
-                    url="http://www.php.net/PDOStatement-fetchColumn">PDOStatement::fetchColumn()</ulink>.
+                See also <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/PDOStatement-fetchColumn">PDOStatement::fetchColumn()</link>.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.statement.fetching.fetchobject">
-            <title>Fetching a Row as an Object</title>
+        <section xml:id="zend.db.statement.fetching.fetchobject"><info><title>Fetching a Row as an Object</title></info>
+            
 
             <para>
                 To retrieve a row from the result set structured as an object,
@@ -323,8 +317,8 @@ $bug_status = $stmt->fetchColumn(2);
                 will be passed to the constructor of that class.
             </para>
 
-            <example id="zend.db.statement.fetching.fetchobject.example">
-                <title>Using fetchObject()</title>
+            <example xml:id="zend.db.statement.fetching.fetchobject.example"><info><title>Using fetchObject()</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT bug_id, bug_description, bug_status FROM bugs');
@@ -336,11 +330,10 @@ echo $obj->bug_description;
             </example>
 
             <para>
-                See also <ulink
-                    url="http://www.php.net/PDOStatement-fetchObject">PDOStatement::fetchObject()</ulink>.
+                See also <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/PDOStatement-fetchObject">PDOStatement::fetchObject()</link>.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
     <!--
       @todo: binding parameters is not working yet.
@@ -390,4 +383,4 @@ echo $obj->bug_description;
 
     </sect2>
     -->
-</sect1>
+</section>

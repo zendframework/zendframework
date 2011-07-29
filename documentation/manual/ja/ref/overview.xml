@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21740 -->
-<chapter id="introduction.overview">
+<?xml version="1.0" encoding="utf-8"?>
 
-    <title>概要</title>
+
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="introduction.overview"><info><title>概要</title></info>
+
+    
 
     <para>
         Zend Framework はオープンソースのフレームワークで、
@@ -35,8 +35,8 @@
     </para>
 
     <para>
-        Zend Framework プロジェクトの主なスポンサーは <ulink url="http://www.zend.com">
-        Zend Technologies</ulink> ですが、
+        Zend Framework プロジェクトの主なスポンサーは <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.com">
+        Zend Technologies</link> ですが、
         それ以外にも多くの企業がコンポーネントを提供したり機能を追加したりしています。
         Google や Microsoft そして StrikeIron といった企業は、
         Zend と提携してウェブサービスへのインターフェイスやその他の技術を提供しています。
@@ -46,12 +46,9 @@
     <para>
         Zend Framework がこれらの仕組みを提供できるのもすべて、
         活発な Zend Framework コミュニティのおかげです。コミュニティのメンバーは、
-        <ulink url="http://framework.zend.com/archives">メーリングリスト</ulink>や
-        <ulink url="http://www.zftalk.com">
-        IRC チャネル</ulink>、そしてその他の掲示板などで活動しています。
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/archives">メーリングリスト</link>や
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zftalk.com">
+        IRC チャネル</link>、そしてその他の掲示板などで活動しています。
         Zend Framework に対して何か質問がある方は、これらのいずれかに参加してみるといいでしょう。
     </para>
 </chapter>
-<!--
-vim:se ts=4 sw=4 et:
--->

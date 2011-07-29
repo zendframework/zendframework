@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.auth.introduction">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.introduction"><info><title>Wprowadzenie</title></info>
 
-    <title>Wprowadzenie</title>
+    
 
     <para>
         <classname>Zend_Auth</classname> zapewnia <acronym>API</acronym> do 
@@ -34,9 +33,9 @@
         </para>
     </note>
 
-    <sect2 id="zend.auth.introduction.adapters">
+    <section xml:id="zend.auth.introduction.adapters"><info><title>Adaptery</title></info>
 
-        <title>Adaptery</title>
+        
 
         <para>
             Adapter <classname>Zend_Auth</classname> jest używany do uwierzytelniania 
@@ -106,11 +105,11 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
             rozszerzający <classname>Zend_Auth_Adapter_Exception</classname>.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.introduction.results">
+    <section xml:id="zend.auth.introduction.results"><info><title>Resultat</title></info>
 
-        <title>Resultat</title>
+        
 
         <para>
             Adaptery <classname>Zend_Auth</classname> zwracają instancję 
@@ -212,11 +211,11 @@ switch ($result->getCode()) {
 }
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.introduction.persistence">
+    <section xml:id="zend.auth.introduction.persistence"><info><title>Trwałość uwierzytelnionej tożsamości</title></info>
 
-        <title>Trwałość uwierzytelnionej tożsamości</title>
+        
 
         <para>
             Uwierzytelnianie żądania, które zawiera dane uwierzytelniające jest
@@ -232,9 +231,9 @@ switch ($result->getCode()) {
             aplikacjach serwerowych.
         </para>
 
-        <sect3 id="zend.auth.introduction.persistence.default">
+        <section xml:id="zend.auth.introduction.persistence.default"><info><title>Domyślne przechowywanie w sesji PHP</title></info>
 
-            <title>Domyślne przechowywanie w sesji PHP</title>
+            
 
             <para>
                  Domyślnie <classname>Zend_Auth</classname> zapewnia trwały pojemnik do
@@ -262,9 +261,9 @@ switch ($result->getCode()) {
                 </para>
             </note>
 
-            <example id="zend.auth.introduction.persistence.default.example">
+            <example xml:id="zend.auth.introduction.persistence.default.example"><info><title>Modyfikowanie przestrzeni nazw sesji</title></info>
 
-                <title>Modyfikowanie przestrzeni nazw sesji</title>
+                
 
                 <para>
                     <classname>Zend_Auth_Storage_Session</classname> używa przestrzeni
@@ -296,11 +295,11 @@ $result = $auth->authenticate($authAdapter);
 
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.auth.introduction.persistence.custom">
+        <section xml:id="zend.auth.introduction.persistence.custom"><info><title>Implementacja własnego pojemnika</title></info>
 
-            <title>Implementacja własnego pojemnika</title>
+            
 
             <para>
                 Czasem programiści mogą potrzebować użyć innego sposobu
@@ -311,9 +310,9 @@ $result = $auth->authenticate($authAdapter);
                 klasy do metody <methodname>Zend_Auth::setStorage()</methodname>.
             </para>
 
-            <example id="zend.auth.introduction.persistence.custom.example">
+            <example xml:id="zend.auth.introduction.persistence.custom.example"><info><title>Użycie własnej klasy do przechowywania tożsamości</title></info>
 
-                <title>Użycie własnej klasy do przechowywania tożsamości</title>
+                
 
                 <para>
                     W celu użycia klasy trwale przechowującej tożsamość innej
@@ -407,13 +406,13 @@ $result = Zend_Auth::getInstance()->authenticate($authAdapter);
 
             </example>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.introduction.using">
+    <section xml:id="zend.auth.introduction.using"><info><title>Użycie</title></info>
 
-        <title>Użycie</title>
+        
 
         <para>
             Są dwa możliwe sposoby użycia adapterów <classname>Zend_Auth</classname>:
@@ -513,6 +512,6 @@ if (!$result->isValid()) {
 }
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-</sect1>
+</section>

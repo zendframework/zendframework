@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.exceptions">
-    <title>Исключения</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.exceptions"><info><title>Исключения</title></info>
+    
 
-    <sect2 id="zend.controller.exceptions.introduction">
-        <title>Введение</title>
+    <section xml:id="zend.controller.exceptions.introduction"><info><title>Введение</title></info>
+        
 
         <para>
             Компоненты MVC в Zend Framework используют фронт-контроллер, это
@@ -22,10 +21,10 @@
             исключения и регистрирует их в объектах ответа; в свою очередь,
             объект ответа по умолчанию не отображает сообщения исключений.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.exceptions.handling">
-        <title>Обработка исключений</title>
+    <section xml:id="zend.controller.exceptions.handling"><info><title>Обработка исключений</title></info>
+        
 
         <para>
             В компоненты MVC уже встроено несколько механизмов, дающих
@@ -35,8 +34,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    По умолчанию <link
-                    linkend="zend.controller.plugins.standard.errorhandler">плагин
+                    По умолчанию <link linkend="zend.controller.plugins.standard.errorhandler">плагин
                     ErrorHandler</link> зарегистрирован и включен. Этот плагин
                     предназначен для обработки:
                 </para>
@@ -150,10 +148,10 @@ if ($response->isException()) {
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.exceptions.internal">
-        <title>Исключения в MVC, с которыми вы можете встретиться</title>
+    <section xml:id="zend.controller.exceptions.internal"><info><title>Исключения в MVC, с которыми вы можете встретиться</title></info>
+        
 
         <para>
             Различные компоненты MVC - объекты запросов, маршрутизаторов,
@@ -215,8 +213,7 @@ $dispatcher->setParam('useDefaultControllerAlways', true);
                             содержащим текст 'Invalid controller specified'
                             (указан недействительный контроллер).
                             Используйте один из методов, описанных в
-                            <link
-                            linkend="zend.controller.exceptions.handling">предыдущем разделе</link>,
+                            <link linkend="zend.controller.exceptions.handling">предыдущем разделе</link>,
                             для отлова исключений и перенаправления на общую
                             страницу ошибки или главную страницу.
                         </para>
@@ -388,8 +385,5 @@ class My_Controller_PreDispatchPlugin extends Zend_Controller_Plugin_Abstract
                 </itemizedlist>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20763 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.acl.advanced">
-    <title>Utilisation avancée</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.advanced"><info><title>Utilisation avancée</title></info>
+    
 
-    <sect2 id="zend.acl.advanced.storing">
-        <title>Rendre les données ACL persistantes</title>
+    <section xml:id="zend.acl.advanced.storing"><info><title>Rendre les données ACL persistantes</title></info>
+        
 
         <para>
             <classname>Zend_Acl</classname> a été conçu pour ne pas nécessiter de technologie
@@ -22,14 +20,14 @@
             développeur, dans la mesure où les cas d'utilisation peuvent grandement varier d'un cas
             à l'autre. Puisque <classname>Zend_Acl</classname> est sérialisable, les objets
             <acronym>ACL</acronym> peuvent être sérialisés avec la fonction
-            <ulink url="http://fr.php.net/serialize"><methodname>serialize()</methodname></ulink> de
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://fr.php.net/serialize"><methodname>serialize()</methodname></link> de
             <acronym>PHP</acronym>, et le résultat peut être stocké n'importe où le développeur le
-            désire&#160;: fichier, base de donnée, cache.
+            désire : fichier, base de donnée, cache.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.advanced.assertions">
-        <title>Écrire des règles ACL conditionnelles avec des assertions</title>
+    <section xml:id="zend.acl.advanced.assertions"><info><title>Écrire des règles ACL conditionnelles avec des assertions</title></info>
+        
 
         <para>
             Parfois, une règle pour autoriser ou interdire l'accès d'un rôle à une ressource
@@ -44,7 +42,7 @@
         <para>
             <classname>Zend_Acl</classname> fourni le support pour les règles conditionnelles
             via <classname>Zend_Acl_Assert_Interface</classname>. Pour mettre en oeuvre cette
-            interface, il suffit d'implémenter la méthode <methodname>assert()</methodname>&#160;:
+            interface, il suffit d'implémenter la méthode <methodname>assert()</methodname> :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -97,5 +95,5 @@ $acl->allow(null, null, null, new CleanIPAssertion());
             fournir un contexte à la classe d'assertion pour déterminer ses conditions lorsque cela
             est nécessaire.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,15 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.identical">
-    <title>Identical</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.identical"><info><title>Identical</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Identical</classname> allows you to validate if a given value is
         identical with an set haystack.
     </para>
 
-    <sect3 id="zend.validate.set.identical.options">
-        <title>Supported options for Zend_Validate_Identical</title>
+    <section xml:id="zend.validate.set.identical.options"><info><title>Supported options for Zend_Validate_Identical</title></info>
+        
 
         <para>
             The following options are supported for <classname>Zend_Validate_Identical</classname>:
@@ -30,10 +29,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.identical.basic">
-        <title>Basic usage</title>
+    <section xml:id="zend.validate.set.identical.basic"><info><title>Basic usage</title></info>
+        
 
         <para>
             To validate if two values are identical you need to set the origin value as haystack.
@@ -57,10 +56,10 @@ if ($valid->isValid($value) {
             <methodname>setToken()</methodname> and <methodname>getToken()</methodname> to get
             the actual set token.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.identical.types">
-        <title>Identical objects</title>
+    <section xml:id="zend.validate.set.identical.types"><info><title>Identical objects</title></info>
+        
 
         <para>
             Of course <classname>Zend_Validate_Identical</classname> can not only validate strings,
@@ -77,8 +76,8 @@ if ($valid->isValid($input)) {
 }
 ]]></programlisting>
 
-        <note>
-            <title>Type comparison</title>
+        <note><info><title>Type comparison</title></info>
+            
 
             <para>
                 You should be aware that also the type of a variable is used for validation.
@@ -87,10 +86,10 @@ if ($valid->isValid($input)) {
                 must set the <property>strict</property> option.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.identical.formelements">
-        <title>Form elements</title>
+    <section xml:id="zend.validate.set.identical.formelements"><info><title>Form elements</title></info>
+        
 
         <para>
             <classname>Zend_Validate_Identical</classname> supports also the comparison of form
@@ -113,10 +112,10 @@ $form->addElement('password', 'elementTwo', array(
             element. In the case your user does not enter two identical values, you will get an
             validation error.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.identical.strict">
-        <title>Strict validation</title>
+    <section xml:id="zend.validate.set.identical.strict"><info><title>Strict validation</title></info>
+        
 
         <para>
             As mentioned before <classname>Zend_Validate_Identical</classname> validates tokens
@@ -144,10 +143,10 @@ if ($valid->isValid($input)) {
             For convinience you can also use <methodname>setStrict()</methodname> and
             <methodname>getStrict()</methodname>.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.identical.configuration">
-        <title>Configuration</title>
+    <section xml:id="zend.validate.set.identical.configuration"><info><title>Configuration</title></info>
+        
 
         <para>
             As all other validators also <classname>Zend_Validate_Identical</classname> supports
@@ -189,8 +188,5 @@ if ($valid->isValid($input)) {
     // input is invalid
 }
 ]]></programlisting>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

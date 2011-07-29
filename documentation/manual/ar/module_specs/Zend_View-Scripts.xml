@@ -1,6 +1,7 @@
-<sect1 id="zend.view.scripts">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.scripts"><info><title>جزء الـ View</title></info>
 
-    <title>جزء الـ View</title>
+    
 
     <para>
         بمجرد إنتهاء الـ controller خاصتك من عملية نَسب المتغيرات إلى نسخة Zend_View
@@ -12,7 +13,7 @@
     <para>
         المتغيرات التى تم نسبها إلى الـ view من قبل الـ controller يتم الإشارة إليها على انها instance properties
         (أى properties تنتمى للنسخة فقط) , على سبيل المثال : إن قام الـ controller بنسب متغير بأسم
-        'something' , يمكنك الأشار إليه داخل كود الـ view كـ this->something$ ,
+        'something' , يمكنك الأشار إليه داخل كود الـ view كـ this-&gt;something$ ,
         (هذا يسمح لك بمعرفة أى المتغيرات تم نسبها إلى النسخة و أى المتغيرات داخلية فى كود الـ view نفسه).
     </para>
 
@@ -42,12 +43,12 @@
 
     <p>There are no books to display.</p>
 
-<?php endif; ?>]]>
-    </programlisting>
+<?php endif; ?>
+    ]]></programlisting>
 
-    <sect2 id="zend.view.scripts.escaping">
+    <section xml:id="zend.view.scripts.escaping"><info><title>تجاهل "escaping" المخرجات</title></info>
 
-        <title>تجاهل "escaping" المخرجات</title>
+        
 
         <para>
             واحدة من أهم المهام التى يجب تنفيذها فى كود الـ view هى أن تتأكد من أن المخرجات قد تم
@@ -67,8 +68,8 @@ echo $this->variable;
 
 // good view-script practice:
 echo $this->escape($this->variable);
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
         <para>
             الأعدادات الأساسية للـ method المسمى ()escape هى أن يعتمد على دالة لغة PHP المسمى
@@ -94,19 +95,19 @@ $view->setEscape(array($obj, 'methodName'));
 
 // and then render your view
 echo $view->render(...);
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
         <para>
             الدالة أو الـ method الذى سيتم عمل callback له يجب أن يستلم القيمة التى سيقوم بتجاهلها
             فى البراميتر الأول , و كل البراميترات الأخرى يجب أن تكون أختيارية.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.scripts.templates">
+    <section xml:id="zend.view.scripts.templates"><info><title>أنظمة القوالب</title></info>
 
-        <title>أنظمة القوالب</title>
+        
 
         <para>
             أيضاً لغة PHP نفسها عبارة عن نظام قوالب قوى, لكن بعض المطورين يرى
@@ -137,8 +138,8 @@ if ($this->books) {
     $tpl->setFile("nobooks", "nobooks.tpl")
     $tpl->pparse("output", "nobooks");
 }
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
         <para>
             و هذه هى الملفات الأخرى ذات الصلة المفروض وجودها :
@@ -162,12 +163,9 @@ if ($this->books) {
 
 <!-- nobooks.tpl -->
 <p>There are no books to display.</p>
-]]>
-        </programlisting>
 
-    </sect2>
+        ]]></programlisting>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+
+</section>

@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.db.profiler" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Zend_Db_Profiler</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.profiler"><info><title>Zend_Db_Profiler</title></info>
+    
 
-    <sect2 id="zend.db.profiler.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.db.profiler.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_Db_Profiler</classname> can be enabled to allow profiling of
@@ -125,10 +124,10 @@ $config = new Zend_Config($configData);
 $params['profiler'] = $config;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.profiler.using">
-        <title>Using the Profiler</title>
+    <section xml:id="zend.db.profiler.using"><info><title>Using the Profiler</title></info>
+        
 
         <para>
             At any point, grab the profiler using the adapter's
@@ -260,10 +259,10 @@ echo 'Queries per second: ' . $queryCount / $totalTime . "\n";
 echo 'Longest query length: ' . $longestTime . "\n";
 echo "Longest query: \n" . $longestQuery . "\n";
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.profiler.advanced">
-        <title>Advanced Profiler Usage</title>
+    <section xml:id="zend.db.profiler.advanced"><info><title>Advanced Profiler Usage</title></info>
+        
 
         <para>
             In addition to query inspection, the profiler also allows the
@@ -271,8 +270,8 @@ echo "Longest query: \n" . $longestQuery . "\n";
             methods operate on a <classname>Zend_Db_Profiler</classname> instance:
         </para>
 
-        <sect3 id="zend.db.profiler.advanced.filtertime">
-            <title>Filter by query elapsed time</title>
+        <section xml:id="zend.db.profiler.advanced.filtertime"><info><title>Filter by query elapsed time</title></info>
+            
 
             <para>
                 <methodname>setFilterElapsedSecs()</methodname> allows the developer to set
@@ -287,10 +286,10 @@ $profiler->setFilterElapsedSecs(5);
 // Profile all queries regardless of length:
 $profiler->setFilterElapsedSecs(null);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.profiler.advanced.filtertype">
-            <title>Filter by query type</title>
+        <section xml:id="zend.db.profiler.advanced.filtertype"><info><title>Filter by query type</title></info>
+            
 
             <para>
                 <methodname>setFilterQueryType()</methodname> allows the developer to set
@@ -376,10 +375,10 @@ $profiler->setFilterQueryType(Zend_Db_Profiler::DELETE);
 // Remove all filters
 $profiler->setFilterQueryType(null);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.profiler.advanced.getbytype">
-            <title>Retrieve profiles by query type</title>
+        <section xml:id="zend.db.profiler.advanced.getbytype"><info><title>Retrieve profiles by query type</title></info>
+            
 
             <para>
                 Using <methodname>setFilterQueryType()</methodname> can cut down on the
@@ -404,11 +403,11 @@ $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::SELECT |
 // Retrieve DELETE query profiles
 $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::DELETE);
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.db.profiler.profilers">
-        <title>Specialized Profilers</title>
+    <section xml:id="zend.db.profiler.profilers"><info><title>Specialized Profilers</title></info>
+        
 
         <para>
             A Specialized Profiler is an object that inherits from
@@ -416,9 +415,6 @@ $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::DELETE);
             profiling information in specific ways.
         </para>
 
-        <xi:include href="Zend_Db_Profiler-Firebug.xml" />
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Db_Profiler-Firebug.xml"/>
+    </section>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 22210 -->
-<sect3 id="zend.progressbar.adapter.jspush">
-    <title>Zend_ProgressBar_Adapter_JsPush</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.progressbar.adapter.jspush"><info><title>Zend_ProgressBar_Adapter_JsPush</title></info>
+    
     <para>
         <classname>Zend_ProgressBar_Adapter_JsPush</classname> は、
         ブラウザ内のプログレスバーを Javascript の Push で更新するアダプタです。
@@ -75,8 +73,8 @@
             </para>
         </listitem>
     </itemizedlist>
-    <example id="zend.progressbar-adapter.jspush.example">
-        <title>クライアント側の基本例</title>
+    <example xml:id="zend.progressbar-adapter.jspush.example"><info><title>クライアント側の基本例</title></info>
+        
         <para>
             この例では、JsPush アダプタ用の <acronym>HTML</acronym> および <acronym>CSS</acronym>、JavaScript
             の基本的な設定方法を示します。
@@ -134,21 +132,21 @@ function Zend_ProgressBar_Update(data)
         </para>
         <itemizedlist>
             <listitem>
-                <para>Dojo: <ulink url="http://dojotoolkit.org/reference-guide/dijit/ProgressBar.html" /></para>
+                <para>Dojo: <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org/reference-guide/dijit/ProgressBar.html">http://dojotoolkit.org/reference-guide/dijit/ProgressBar.html</uri></para>
             </listitem>
             <listitem>
-                <para>jQuery: <ulink url="http://t.wits.sg/2008/06/20/jquery-progress-bar-11/" /></para>
+                <para>jQuery: <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://t.wits.sg/2008/06/20/jquery-progress-bar-11/">http://t.wits.sg/2008/06/20/jquery-progress-bar-11/</uri></para>
             </listitem>
             <listitem>
-                <para>MooTools: <ulink url="http://davidwalsh.name/dw-content/progress-bar.php" /></para>
+                <para>MooTools: <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://davidwalsh.name/dw-content/progress-bar.php">http://davidwalsh.name/dw-content/progress-bar.php</uri></para>
             </listitem>
             <listitem>
-                <para>Prototype: <ulink url="http://livepipe.net/control/progressbar" /></para>
+                <para>Prototype: <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://livepipe.net/control/progressbar">http://livepipe.net/control/progressbar</uri></para>
             </listitem>
         </itemizedlist>
     </example>
-    <note>
-        <title>更新間隔</title>
+    <note><info><title>更新間隔</title></info>
+        
         <para>
             あまり頻繁に更新しすぎないようにしましょう。
             毎回の更新は、少なくとも 1kb の大きさとなるからです。
@@ -156,7 +154,4 @@ function Zend_ProgressBar_Update(data)
             Internet Explorer の場合はこれは 256 バイトとなります。
         </para>
     </note>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

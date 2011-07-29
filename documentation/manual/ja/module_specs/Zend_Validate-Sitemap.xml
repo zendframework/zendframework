@@ -1,17 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21263 -->
-<sect2 id="zend.validate.sitemap">
-    <title>サイトマップ・バリデータ</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.sitemap"><info><title>サイトマップ・バリデータ</title></info>
+    
 
     <para>
         以下のバリデータは、
-        <ulink url="http://www.sitemaps.org/protocol.php">サイトマップ <acronym>XML</acronym> プロトコル</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.sitemaps.org/protocol.php">サイトマップ <acronym>XML</acronym> プロトコル</link>
         に従います。
     </para>
 
-    <sect3 id="zend.validate.sitemap.changefreq">
-        <title>Sitemap_Changefreq</title>
+    <section xml:id="zend.validate.sitemap.changefreq"><info><title>Sitemap_Changefreq</title></info>
+        
 
         <para>
             文字列がサイトマップ <acronym>XML</acronym> 文書で 'changefreq' 要素として
@@ -23,10 +21,10 @@
             値が文字列で、上記で指定される頻度のうちの1つと等しい場合に限り、
             <constant>TRUE</constant>を返します。
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.sitemap.lastmod">
-        <title>Sitemap_Lastmod</title>
+    <section xml:id="zend.validate.sitemap.lastmod"><info><title>Sitemap_Lastmod</title></info>
+        
 
         <para>
             文字列がサイトマップ <acronym>XML</acronym> 文書で 'lastmod' 要素として
@@ -40,8 +38,8 @@
             <constant>TRUE</constant>を返します。
         </para>
 
-        <example id="zend.validate.sitemap.lastmod.example">
-            <title>サイトマップ Lastmod バリデータ</title>
+        <example xml:id="zend.validate.sitemap.lastmod.example"><info><title>サイトマップ Lastmod バリデータ</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Sitemap_Lastmod();
@@ -58,10 +56,10 @@ $validator->isValid('2008-05-32'); // false
 $validator->isValid('yesterday'); // false
 ]]></programlisting>
         </example>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.sitemap.loc">
-        <title>Sitemap_Loc</title>
+    <section xml:id="zend.validate.sitemap.loc"><info><title>Sitemap_Loc</title></info>
+        
 
         <para>
             文字列がサイトマップ <acronym>XML</acronym> 文書で 'loc' 要素として
@@ -69,10 +67,10 @@ $validator->isValid('yesterday'); // false
             これは内部的に<methodname>Zend_Form::check()</methodname>を使います。
             詳しくは<link linkend="zend.uri.validation">URI の検証</link>を読んでください。
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.sitemap.priority">
-        <title>Sitemap_Priority</title>
+    <section xml:id="zend.validate.sitemap.priority"><info><title>Sitemap_Priority</title></info>
+        
 
         <para>
             文字列がサイトマップ <acronym>XML</acronym> 文書で 'priority' 要素として
@@ -81,8 +79,8 @@ $validator->isValid('yesterday'); // false
             このバリデータは、数値と文字列値の両方を受け入れます。
         </para>
 
-        <example id="zend.validate.sitemap.priority.example">
-            <title>サイトマップ 優先度 バリデータ</title>
+        <example xml:id="zend.validate.sitemap.priority.example"><info><title>サイトマップ 優先度 バリデータ</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Sitemap_Priority();
@@ -99,13 +97,13 @@ $validator->isValid(0xFF); // false
 $validator->isValid('foo'); // false
 ]]></programlisting>
         </example>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.sitemap.options">
-        <title>Zend_Validate_Sitemap_* でサポートされるオプション</title>
+    <section xml:id="zend.validate.set.sitemap.options"><info><title>Zend_Validate_Sitemap_* でサポートされるオプション</title></info>
+        
 
         <para>
             サイトマップ・バリデータのいずれもサポートするオプションはありません。
         </para>
-    </sect3>
-</sect2>
+    </section>
+</section>

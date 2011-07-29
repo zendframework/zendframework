@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<appendix id="requirements" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Zend Framework Requirements</title>
+<?xml version="1.0" encoding="utf-8"?>
 
-    <sect1 id="requirements.introduction">
-        <title>Introduction</title>
+
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="requirements"><info><title>Zend Framework Requirements</title></info>
+    
+
+    <section xml:id="requirements.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             Zend Framework requires a <acronym>PHP</acronym> 5 interpreter with a web server
@@ -21,8 +22,8 @@
             directly affect the functionality of the application.
         </para>
 
-        <sect2 id="requirements.version">
-            <title>PHP Version</title>
+        <section xml:id="requirements.version"><info><title>PHP Version</title></info>
+            
 
             <para>
                 Zend recommends the most current release of <acronym>PHP</acronym> for critical
@@ -34,10 +35,10 @@
                 Zend Framework has an extensive collection of unit tests, which you can run using
                 PHPUnit 3.3.0 or later.
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="requirements.extensions">
-            <title>PHP Extensions</title>
+        <section xml:id="requirements.extensions"><info><title>PHP Extensions</title></info>
+            
 
             <para>
                 You will find a table listing all extensions typically found in
@@ -57,11 +58,11 @@
                 component itself if the extensions are unavailable.
             </para>
 
-            <xi:include href="requirements-php-extensions-table.xml" />
-        </sect2>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="requirements-php-extensions-table.xml"/>
+        </section>
 
-        <sect2 id="requirements.zendcomponents">
-            <title>Zend Framework Components</title>
+        <section xml:id="requirements.zendcomponents"><info><title>Zend Framework Components</title></info>
+            
 
             <para>
                 Below is a table that lists all available Zend Framework Components
@@ -81,11 +82,11 @@
                 component itself if the extensions are unavailable.
             </para>
 
-            <xi:include href="requirements-zendcomponents-table.xml" />
-        </sect2>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="requirements-zendcomponents-table.xml"/>
+        </section>
 
-        <sect2 id="requirements.dependencies">
-            <title>Zend Framework Dependencies</title>
+        <section xml:id="requirements.dependencies"><info><title>Zend Framework Dependencies</title></info>
+            
 
             <para>
                 Below you can find a table listing Zend Framework Components
@@ -114,10 +115,7 @@
                 </para>
             </note>
 
-            <xi:include href="requirements-dependencies-table.xml" />
-        </sect2>
-    </sect1>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="requirements-dependencies-table.xml"/>
+        </section>
+    </section>
 </appendix>
-<!--
-vim:se ts=4 sw=4 et:
--->

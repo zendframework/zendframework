@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.modular">
-    <title>Utilisation de conventions de dossiers modulaires</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.modular"><info><title>Utilisation de conventions de dossiers modulaires</title></info>
+    
 
-    <sect2 id="zend.controller.modular.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.controller.modular.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             Les conventions de dossiers vous permettent de séparer les différentes
             applications <acronym>MVC</acronym> dans des unités isolées et les réutiliser dans le contrôleur frontal.
-            Voici une illustration&#160;:
+            Voici une illustration :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -52,15 +50,15 @@ application/
 
         <para>
             Ci dessus, le nom du module est utilisé comme préfixe pour les contrôleurs qu'il
-            possède. Il y a donc trois contrôleurs&#160;: "Blog_IndexController",
+            possède. Il y a donc trois contrôleurs : "Blog_IndexController",
             "News_IndexController", et "News_ListController". Deux contrôleurs dans le module par
             défaut sont aussi définis, "IndexController" et "FooController". Ceux-ci ne possèdent
             pas le nom du module dans leur nom. Cet exemple d'arborescence conseillée sera utilisé
             dans ce chapitre.
         </para>
 
-        <note>
-            <title>Pas de namespace pour le module par défaut</title>
+        <note><info><title>Pas de namespace pour le module par défaut</title></info>
+            
             <para>
                 Notez que dans le module par défaut, les contrôleurs n'ont pas besoin d'être
                 préfixés par le nom du module ("Default_"). Ils sont simplement distribués tels
@@ -68,11 +66,11 @@ application/
             </para>
         </note>
 
-        <para>Alors, comment utiliser une structure telle que celle-ci&#160;?</para>
-    </sect2>
+        <para>Alors, comment utiliser une structure telle que celle-ci ?</para>
+    </section>
 
-    <sect2 id="zend.controller.modular.directories">
-        <title>Spécification des dossiers de modules</title>
+    <section xml:id="zend.controller.modular.directories"><info><title>Spécification des dossiers de modules</title></info>
+        
 
         <para>
             La première chose à faire est d'indiquer au contrôleur frontal où se trouvent les
@@ -87,7 +85,7 @@ application/
             clé/valeur représentent le nom du module, et le chemin des contrôleurs. La clé
             <code>default</code> est utilisée pour indiquer les contrôleurs globaux (dont le nom ne
             comporte pas le module). Chaque option doit comporter une indication vers un chemin, et
-            la clé <code>default</code> doit être présente&#160;:
+            la clé <code>default</code> doit être présente :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -111,7 +109,7 @@ $front->addControllerDirectory('/path/to/application/news/controllers',
 
         <para>
             Enfin, si vous avez un dossier spécial regroupant tous vos modules, indiquez le
-            grâce à <methodname>addModuleDirectory()</methodname>&#160;:
+            grâce à <methodname>addModuleDirectory()</methodname> :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -137,7 +135,7 @@ $front->addModuleDirectory('/path/to/application/modules');
 
         <para>
             Si le dossier "controllers" ne vous convient pas, changez son nom à l'aide de
-            <methodname>setModuleControllerDirectoryName()</methodname>&#160;:
+            <methodname>setModuleControllerDirectoryName()</methodname> :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -163,15 +161,15 @@ $front->addModuleDirectory('/path/to/application/modules');
                 <methodname>setModuleControllerDirectoryName()</methodname>.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.modular.router">
-        <title>Routage des modules</title>
+    <section xml:id="zend.controller.modular.router"><info><title>Routage des modules</title></info>
+        
 
         <para>
             La route par défaut, <classname>Zend_Controller_Router_Rewrite</classname> est un
             objet de type <classname>Zend_Controller_Router_Route_Module</classname>. Cette route
-            traite les schémas de routage suivants&#160;:
+            traite les schémas de routage suivants :
         </para>
 
         <itemizedlist>
@@ -188,10 +186,10 @@ $front->addModuleDirectory('/path/to/application/modules');
             précédant. Un module ne sera trouvé que si sa clé existe dans le tableau d'options
             passé au contrôleur frontal ou au distributeur.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.modular.defaultcontroller">
-        <title>Module ou contrôleur Default global</title>
+    <section xml:id="zend.controller.modular.defaultcontroller"><info><title>Module ou contrôleur Default global</title></info>
+        
 
         <para>
             Dans le routeur par défaut, si aucun contrôleur n'est indiqué dans l'URL, un
@@ -205,11 +203,11 @@ $front->addModuleDirectory('/path/to/application/modules');
         <para>
             Si vous voulez renvoyer directement vers le contrôleur par défaut du module
             "default", passez le paramètre <code>useDefaultControllerAlways</code> à
-            <constant>TRUE</constant> dans le contrôleur frontal&#160;:
+            <constant>TRUE</constant> dans le contrôleur frontal :
         </para>
 
         <programlisting language="php"><![CDATA[
 $front->setParam('useDefaultControllerAlways', true);
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

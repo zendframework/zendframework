@@ -1,19 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22757 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.openid.provider">
-    <title>Zend_OpenId_Provider</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.openid.provider"><info><title>Zend_OpenId_Provider</title></info>
+    
 
     <para>
         <classname>Zend_OpenId_Provider</classname> kann verwendet werden um OpenID Server zu
         implementieren. Dieses Kapitel bietet Beispiele die Demonstrieren wie ein sehr einfacher
         Server erstellt werden kann. Für die Implementierung eines produktiven OpenId Servers (wie
-        zum Beispiel <ulink url="http://www.myopenid.com">www.myopenid.com</ulink>) kann es aber
+        zum Beispiel <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.myopenid.com">www.myopenid.com</link>) kann es aber
         notwendig sein mit komplexeren Problemen umzugehen.
     </para>
 
-    <sect2 id="zend.openid.provider.start">
-        <title>Schellstart</title>
+    <section xml:id="zend.openid.provider.start"><info><title>Schellstart</title></info>
+        
 
         <para>
             Das folgende Beispiel beinhaltet Code für das Erstellen eines Benutzerzugang indem
@@ -28,8 +26,8 @@
             erstellt. Man benötigt solch einen Code nicht wenn echte Identitäten verwendet werden.
         </para>
 
-        <example id="zend.openid.provider.example-1">
-            <title>Die Identität</title>
+        <example xml:id="zend.openid.provider.example-1"><info><title>Die Identität</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 <?php
@@ -69,8 +67,8 @@ if (!$server->hasUser(TEST_ID)) {
             konforme Anfrage sendet.
         </para>
 
-        <example id="zend.openid.provider.example-2">
-            <title>Einfacher Identitäts Provider</title>
+        <example xml:id="zend.openid.provider.example-2"><info><title>Einfacher Identitäts Provider</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $server = new Zend_OpenId_Provider("example-8-login.php",
@@ -123,8 +121,8 @@ if (is_string($ret)) {
             </para>
         </note>
 
-        <example id="zend.openid.provider.example-3">
-            <title>Einfacher Login Schirm</title>
+        <example xml:id="zend.openid.provider.example-3"><info><title>Einfacher Login Schirm</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 <?php
@@ -163,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' &&
 </td>
 </tr>
 <tr>
-<td>&nbsp;</td>
+<td> </td>
 <td>
 <input type="submit"
        name="openid_action"
@@ -189,8 +187,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' &&
             automatisch gehandhabt ohne einer Interaktion des Benutzers.
         </para>
 
-        <example id="zend.openid.provider.example-4">
-            <title>Einfacher Vertrauens Schirm</title>
+        <example xml:id="zend.openid.provider.example-4"><info><title>Einfacher Vertrauens Schirm</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 <?php
@@ -245,10 +243,10 @@ ihre Identitäts URL ist.
             Eingabe von angefragten Feldern zu erlauben oder ein spezielles Benutzerprofil
             auszuwählen.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.openid.provider.all">
-        <title>Kombinierte Skripte</title>
+    <section xml:id="zend.openid.provider.all"><info><title>Kombinierte Skripte</title></info>
+        
 
         <para>
             Es ist möglich alle Provider Funktionalitäten in einem Skript zusammen zu kombinieren.
@@ -266,8 +264,8 @@ ihre Identitäts URL ist.
             </para>
         </note>
 
-        <example id="zend.openid.provider.example-5">
-            <title>Alles zusammen</title>
+        <example xml:id="zend.openid.provider.example-5"><info><title>Alles zusammen</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $server = new Zend_OpenId_Provider();
@@ -305,10 +303,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
             <methodname>unset()</methodname> ist notwendig um die nächste Anfrage zum Haupthandler
             zu routen.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.openid.provider.sreg">
-        <title>Einfache Registrierungs Erweiterung (SREG)</title>
+    <section xml:id="zend.openid.provider.sreg"><info><title>Einfache Registrierungs Erweiterung (SREG)</title></info>
+        
 
         <para>
             Wieder ist der Code vor dem &lt;html&gt; Tag nur ein Trick um die Funktionalität zu
@@ -318,8 +316,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
             eintragen. Die Implementierung dieses GUI würde den Rahmen dieses Handbuches sprengen.
         </para>
 
-        <example id="zend.openid.provider.example-6">
-            <title>Identität mit Profil</title>
+        <example xml:id="zend.openid.provider.example-6"><info><title>Identität mit Profil</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 <?php
@@ -374,8 +372,8 @@ if (!$server->hasUser(TEST_ID)) {
             Argument der <methodname>Zend_OpenId_Provider::handle()</methodname> Methode.
         </para>
 
-        <example id="zend.openid.provider.example-7">
-            <title>Provider mit SREG</title>
+        <example xml:id="zend.openid.provider.example-7"><info><title>Provider mit SREG</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $server = new Zend_OpenId_Provider();
@@ -405,10 +403,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
 }
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.openid.provider.else">
-        <title>Sonst noch was?</title>
+    <section xml:id="zend.openid.provider.else"><info><title>Sonst noch was?</title></info>
+        
 
         <para>
             Das Erstellen von OpenID Providern ist eine viel seltenere Aufgabe als die Erstellung
@@ -454,5 +452,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
             <classname>Zend_OpenId_Extension</classname>s oder durch standardmäßige
             Objektorientierte Erweiterungen.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

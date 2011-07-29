@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.smtp-authentication">
-    <title>SMTP-аутентификация</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-authentication"><info><title>SMTP-аутентификация</title></info>
+    
 
     <para>
         <classname>Zend_Mail</classname> поддерживает использование
@@ -13,8 +12,8 @@
         конфигурационном массиве.
     </para>
 
-    <example id="zend.mail.smtp-authentication.example-1">
-        <title>Включение аутентификации в Zend_Mail_Transport_Smtp</title>
+    <example xml:id="zend.mail.smtp-authentication.example-1"><info><title>Включение аутентификации в Zend_Mail_Transport_Smtp</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $config = array('auth' => 'login',
@@ -32,17 +31,14 @@ $mail->send($transport);
 ]]></programlisting>
     </example>
 
-    <note>
-        <title>Типы аутентификации</title>
+    <note><info><title>Типы аутентификации</title></info>
+        
 
         <para>
             Тип аутентификации является регистронезависимым, но не должен
             включать пунктуацию. Например, для того, чтобы использовать
-            CRAM-MD5, передавайте 'auth' => 'crammd5' конструктору
+            CRAM-MD5, передавайте 'auth' =&gt; 'crammd5' конструктору
             <classname>Zend_Mail_Transport_Smtp</classname>.
         </para>
     </note>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

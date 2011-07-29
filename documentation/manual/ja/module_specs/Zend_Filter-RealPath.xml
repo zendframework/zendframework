@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21129 -->
-<sect2 id="zend.filter.set.realpath">
-    <title>RealPath</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.realpath"><info><title>RealPath</title></info>
+    
 
     <para>
         このフィルタは与えられたリンクとパス名を解決して、正規化された絶対パス名を返します。
@@ -45,4 +43,4 @@ $filtered = $filter->filter($path);
 // '/www/non/existing/path' を返します。
 ]]></programlisting>
 
-</sect2>
+</section>

@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.mime.part">
-    <title>Zend_Mime_Part</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.part"><info><title>Zend_Mime_Part</title></info>
+    
 
-    <sect2 id="zend.mime.part.introduction">
-    <title>Введение</title>
+    <section xml:id="zend.mime.part.introduction"><info><title>Введение</title></info>
+    
 
     <para>
         Класс <classname>Zend_Mime_Part</classname> представляет отдельную
@@ -16,10 +15,10 @@
         <link linkend="zend.mime.message"><classname>Zend_Mime_Message</classname></link>
         для получения сообщения multipart.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mime.part.instantiation">
-    <title>Инстанцирование</title>
+    <section xml:id="zend.mime.part.instantiation"><info><title>Инстанцирование</title></info>
+    
 
     <para>
         Экземпляр класса <classname>Zend_Mime_Part</classname> создается с
@@ -41,10 +40,10 @@ public $boundary;
 public $location;
 public $language;
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mime.part.methods">
-        <title>Методы для рендеринга строк из объекта части сообщения</title>
+    <section xml:id="zend.mime.part.methods"><info><title>Методы для рендеринга строк из объекта части сообщения</title></info>
+        
 
         <para>
             <methodname>getContent()</methodname> возвращает содержимое части
@@ -119,8 +118,5 @@ public $language;
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

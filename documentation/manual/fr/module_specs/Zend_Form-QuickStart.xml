@@ -1,18 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.form.quickstart">
-    <title>Zend_Form démarrage rapide</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.quickstart"><info><title>Zend_Form démarrage rapide</title></info>
+    
 
     <para>
         Ce guide rapide couvre les bases de la création, de la validation, et du rendu des
         formulaires <classname>Zend_Form</classname>.
     </para>
 
-    <sect2 id="zend.form.quickstart.create">
-        <title>Créer un objet de formulaire</title>
+    <section xml:id="zend.form.quickstart.create"><info><title>Créer un objet de formulaire</title></info>
+        
 
-        <para>Instanciez simplement un objet <classname>Zend_Form</classname>&#160;:</para>
+        <para>Instanciez simplement un objet <classname>Zend_Form</classname> :</para>
 
         <programlisting language="php"><![CDATA[
 $form = new Zend_Form;
@@ -26,7 +24,7 @@ $form = new Zend_Form;
 
         <para>
             Vous pouvez spécifier (c'est une bonne idée) l'action et la méthode d'envoi du
-            formulaire grâce à <methodname>setAction()</methodname> et <methodname>setMethod()</methodname>&#160;:
+            formulaire grâce à <methodname>setAction()</methodname> et <methodname>setMethod()</methodname> :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -43,21 +41,21 @@ $form->setAction('/resource/process')
         <para>
             Il est possible d'assigner les attributs HTML supplémentaires à la balise
             <code>&lt;form&gt;</code> via la méthode <methodname>setAttrib()</methodname> ou encore
-            <methodname>setAttribs()</methodname>. Par exemple, indiquons un attribut "id" au formulaire&#160;:
+            <methodname>setAttribs()</methodname>. Par exemple, indiquons un attribut "id" au formulaire :
         </para>
 
         <programlisting language="php"><![CDATA[
 $form->setAttrib('id', 'login');
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.elements">
-        <title>Ajouter des éléments au formulaire</title>
+    <section xml:id="zend.form.quickstart.elements"><info><title>Ajouter des éléments au formulaire</title></info>
+        
 
         <para>
             Un formulaire ne sert à rien sans éléments. Le composant
             <classname>Zend_Form</classname> est fourni avec un ensemble d'éléments qui rendent du
-            code <acronym>XHTML</acronym> via les aides de <classname>Zend_View</classname>. Voici ces aides&#160;:
+            code <acronym>XHTML</acronym> via les aides de <classname>Zend_View</classname>. Voici ces aides :
         </para>
 
         <itemizedlist>
@@ -112,7 +110,7 @@ $form->setAttrib('id', 'login');
             <classname>Zend_Form</classname>, qui va alors créer le bon objet pour vous.
         </para>
 
-        <para>Quelques exemples&#160;:</para>
+        <para>Quelques exemples :</para>
 
         <programlisting language="php"><![CDATA[
 // Ajout d'un objet élément :
@@ -133,7 +131,7 @@ $form->addElement('text', 'username');
         <para>
             Voyons comment passer un validateur à un élément dont nous créons l'objet. On peut
             passer soit l'objet <classname>Zend_Validate_*</classname>, soit une chaîne le
-            décrivant&#160;:
+            décrivant :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -149,7 +147,7 @@ $username->addValidator('alnum');
         <para>
             En utilisant la technique de passage par le nom, vous pouvez ajouter un tableau
             d'options à passer au constructeur de l'objet validateur. Ceci se fait en troisième
-            paramètre&#160;:
+            paramètre :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -165,7 +163,7 @@ $username->addValidator('regex', false, array('/^[a-z]/i'));
         <para>
             Vous pouvez avoir besoin de spécifier qu'un élément est requis. Ceci peut être
             fait en utilisant un accesseur ou en passant une option à la création de l'élément.
-            Voici un exemple&#160;:
+            Voici un exemple :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -188,7 +186,7 @@ $username->addFilter('StringtoLower');
 ]]></programlisting>
 
         <para>
-            Finalement, la configuration complète de l'élément pourra ressembler à cela&#160;:
+            Finalement, la configuration complète de l'élément pourra ressembler à cela :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -210,7 +208,7 @@ $username->addValidators(array('alnum',
             répéter ces opérations sur tous les éléments du formulaire. Reprenons le cas (b) d'au
             dessus : lorsque l'on crée un élément, <methodname>Zend_Form::addElement()</methodname>
             agit comme une fabrique et on peut lui passer des options de configuration. Par exemple,
-            des validateurs ou des filtres. Essayons ceci&#160;:
+            des validateurs ou des filtres. Essayons ceci :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -231,10 +229,10 @@ $form->addElement('text', 'username', array(
                 option. Votre nouvelle classe configurera directement vos objets.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.render">
-        <title>Rendre (visuellement) un formulaire</title>
+    <section xml:id="zend.form.quickstart.render"><info><title>Rendre (visuellement) un formulaire</title></info>
+        
 
         <para>
             Rendre un formulaire est très simple. La plupart des éléments nécessitent les
@@ -257,7 +255,7 @@ echo $form;
             l'aide d'action <code>ViewRenderer</code>, ce qui signifie que vous n'aurez pas besoin
             de spécifier un objet de vue manuellement si vous utilisez le système <acronym>MVC</acronym> de Zend
             Framework. Pour rendre un formulaire dans une vue <acronym>MVC</acronym>, un simple <code>echo</code>
-            suffit&#160;:
+            suffit :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -270,7 +268,7 @@ echo $form;
             avant ou après. Ils peuvent aussi introspecter l'élément qui leur est passé. Ainsi, vous
             pouvez chaîner plusieurs décorateurs pour utiliser des effets visuels. Par défaut,
             <classname>Zend_Form_Element</classname> combine quatre décorateurs pour
-            s'afficher&#160;:
+            s'afficher :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -288,7 +286,7 @@ $element->addDecorators(array(
         </para>
 
         <para>
-            Les décorateurs par défaut (rappelés ci-dessus), produisent le rendu suivant&#160;:
+            Les décorateurs par défaut (rappelés ci-dessus), produisent le rendu suivant :
         </para>
 
         <programlisting language="html"><![CDATA[
@@ -306,7 +304,7 @@ $element->addDecorators(array(
 
         <para>
             Vous pouvez changer les décorateurs utilisés par un élément si vous voulez avoir
-            un visuel différent&#160;; voyez la section sur les décorateurs pour plus
+            un visuel différent ; voyez la section sur les décorateurs pour plus
             d'informations.
         </para>
 
@@ -319,22 +317,22 @@ $element->addDecorators(array(
         <para>
             Les éléments sont bouclés dans l'ordre dans lequel ils sont ajoutés, ou, si votre
             élément possède un attribut "order", celui-ci sera alors utilisé pour gérer sa place
-            dans la pile des éléments&#160;:
+            dans la pile des éléments :
         </para>
 
         <programlisting language="php"><![CDATA[
 $element->setOrder(10);
 ]]></programlisting>
 
-        <para>Ou encore, à la création de l'élément via <methodname>addElement()</methodname>&#160;:</para>
+        <para>Ou encore, à la création de l'élément via <methodname>addElement()</methodname> :</para>
 
         <programlisting language="php"><![CDATA[
 $form->addElement('text', 'username', array('order' => 10));
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.validate">
-        <title>Vérifier qu'un formulaire est valide</title>
+    <section xml:id="zend.form.quickstart.validate"><info><title>Vérifier qu'un formulaire est valide</title></info>
+        
 
         <para>
             Après l'envoi du formulaire, il faut vérifier les valeurs que contiennent ses
@@ -346,7 +344,7 @@ $form->addElement('text', 'username', array('order' => 10));
         <para>
             D'où proviennent les données ? Vous pouvez utiliser <varname>$_POST</varname> ou
             <varname>$_GET</varname>, ou n'importe quelle source de données (service Web par
-            exemple)&#160;:
+            exemple) :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -361,7 +359,7 @@ if ($form->isValid($_POST)) {
             Avec des requêtes <acronym>AJAX</acronym>, il arrive que l'on ait besoin de ne valider qu'un élément,
             ou un groupe d'élément. <methodname>isValidPartial()</methodname> validera un formulaire partiel.
             Contrairement à <methodname>isValid()</methodname>, si une valeur est absente, les autres
-            validateurs ne seront pas interrogés&#160;:
+            validateurs ne seront pas interrogés :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -380,14 +378,14 @@ if ($form->isValidPartial($_POST)) {
 
         <para>
             En supposant que les validateurs aient passé, vous pouvez dès lors récupérer les
-            valeurs filtrées depuis les éléments&#160;:
+            valeurs filtrées depuis les éléments :
         </para>
 
         <programlisting language="php"><![CDATA[
 $values = $form->getValues();
 ]]></programlisting>
 
-        <para>Si vous désirez les valeurs non filtrées, utilisez&#160;:</para>
+        <para>Si vous désirez les valeurs non filtrées, utilisez :</para>
 
         <programlisting language="php"><![CDATA[
 $unfiltered = $form->getUnfilteredValues();
@@ -395,20 +393,20 @@ $unfiltered = $form->getUnfilteredValues();
 
         <para>
             Si d'un autre côté, vous ne souhaitez que les valeurs filtrées valides d'un formulaire
-            partiellement valide, vous pouvez appeler&#160;:
+            partiellement valide, vous pouvez appeler :
         </para>
 
         <programlisting language="php"><![CDATA[
 $values = $form->getValidValues($_POST);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.errorstatus">
-        <title>Les statuts d'erreur</title>
+    <section xml:id="zend.form.quickstart.errorstatus"><info><title>Les statuts d'erreur</title></info>
+        
 
         <para>
             Votre formulaire a échoué à l'envoi ? Dans la plupart des cas, vous voudrez rendre
-            à nouveau le formulaire, mais avec les messages d'erreur affichés&#160;:
+            à nouveau le formulaire, mais avec les messages d'erreur affichés :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -429,13 +427,13 @@ if (!$form->isValid($_POST)) {
             d'erreurs (code=&gt;message). Tout élément ne comportant pas d'erreur ne sera pas inclus
             dans le tableau.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.puttingtogether">
-        <title>Assembler le tout ensemble</title>
+    <section xml:id="zend.form.quickstart.puttingtogether"><info><title>Assembler le tout ensemble</title></info>
+        
 
         <para>
-            Créons un formulaire de d'authentification. Il aura besoin d'élément représentant&#160;:
+            Créons un formulaire de d'authentification. Il aura besoin d'élément représentant :
         </para>
 
         <itemizedlist>
@@ -461,7 +459,7 @@ if (!$form->isValid($_POST)) {
 
         <para>
             Nous allons utiliser la puissance de <classname>Zend_Form</classname> pour
-            configurer le formulaire et effectuer le rendu&#160;:
+            configurer le formulaire et effectuer le rendu :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -489,7 +487,7 @@ $form->addElement($username)
      ->addElement('submit', 'login', array('label' => 'Login'));
 ]]></programlisting>
 
-        <para>Il nous faut à présent un contrôleur pour gérer tout cela&#160;:</para>
+        <para>Il nous faut à présent un contrôleur pour gérer tout cela :</para>
 
         <programlisting language="php"><![CDATA[
 class UserController extends Zend_Controller_Action
@@ -525,7 +523,7 @@ class UserController extends Zend_Controller_Action
 }
 ]]></programlisting>
 
-        <para>Le script de vue pour afficher le formulaire&#160;:</para>
+        <para>Le script de vue pour afficher le formulaire :</para>
 
         <programlisting language="php"><![CDATA[
 <h2>Identifiez vous:</h2>
@@ -537,10 +535,10 @@ class UserController extends Zend_Controller_Action
             fois le formulaire validé. Par exemple, utiliser <classname>Zend_Auth</classname> pour
             déclencher un processus d'identification.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.config">
-        <title>Utiliser un objet <classname>Zend_Config</classname></title>
+    <section xml:id="zend.form.quickstart.config"><info><title>Utiliser un objet <classname>Zend_Config</classname></title></info>
+        
 
         <para>
             Toutes les classes du composant <classname>Zend_Form</classname> sont
@@ -551,7 +549,7 @@ class UserController extends Zend_Controller_Action
             instructions devront être imbriquées afin de refléter la configuration. Ensuite nous
             utiliserons un espace de nom "user" correspondant au contrôleur, puis un "login"
             concernant le formulaire (ceci permet de ranger les données correctement dans le fichier
-            <acronym>INI</acronym>)&#160;:
+            <acronym>INI</acronym>) :
         </para>
 
         <programlisting language="ini"><![CDATA[
@@ -581,7 +579,7 @@ user.login.elements.password.options.required = true
 user.login.elements.submit.type = "submit"
 ]]></programlisting>
 
-        <para>Le constructeur du formulaire ressemblera alors à ceci&#160;:</para>
+        <para>Le constructeur du formulaire ressemblera alors à ceci :</para>
 
         <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini($configFile, 'development');
@@ -589,15 +587,15 @@ $form   = new Zend_Form($config->user->login);
 ]]></programlisting>
 
         <para>et tout le formulaire sera défini.</para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.conclusion">
-        <title>Conclusion</title>
+    <section xml:id="zend.form.quickstart.conclusion"><info><title>Conclusion</title></info>
+        
 
         <para>
             Vous êtes maintenant capable de libérer la puissance de
             <classname>Zend_Form</classname>. Continuez de lire les chapitres suivants pour utiliser
-            ce composant en profondeur&#160;!
+            ce composant en profondeur !
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

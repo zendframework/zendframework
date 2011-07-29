@@ -1,23 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="migration.10">
-    <title>Zend Framework 1.0</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.10"><info><title>Zend Framework 1.0</title></info>
+    
 
     <para>
         When upgrading from a previous release to Zend Framework 1.0 or higher you
         should note the following migration notes.
     </para>
 
-    <sect2 id="migration.10.zend.controller">
-        <title>Zend_Controller</title>
+    <section xml:id="migration.10.zend.controller"><info><title>Zend_Controller</title></info>
+        
 
         <para>
             The principal changes introduced in 1.0.0RC1 are the introduction of
             and default enabling of the
-            <link
-                linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler</link>
-            plugin and the <link
-                linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>
+            <link linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler</link>
+            plugin and the <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>
             action helper. Please read the documentation to each thoroughly to
             see how they work and what effect they may have on your
             applications.
@@ -70,9 +67,9 @@ $front->setParam('noViewRenderer', true);
         </para>
 
         <itemizedlist>
-            <listitem><para>Calls to <command>$this->render();</command></para></listitem>
-            <listitem><para>Calls to <command>$this->_forward();</command></para></listitem>
-            <listitem><para>Calls to <command>$this->_redirect();</command></para></listitem>
+            <listitem><para>Calls to <command>$this-&gt;render();</command></para></listitem>
+            <listitem><para>Calls to <command>$this-&gt;_forward();</command></para></listitem>
+            <listitem><para>Calls to <command>$this-&gt;_redirect();</command></para></listitem>
 
             <listitem>
                 <para>Calls to the <classname>Redirector</classname> action helper</para>
@@ -104,8 +101,7 @@ public function preDispatch()
 ]]></programlisting>
 
         <para>
-            If you are calling <methodname>render()</methodname>, and you're using <link
-                linkend="zend.controller.modular">the Conventional Modular
+            If you are calling <methodname>render()</methodname>, and you're using <link linkend="zend.controller.modular">the Conventional Modular
                 directory structure</link>, you'll want to change your code to
             make use of autorendering:
         </para>
@@ -130,7 +126,7 @@ public function preDispatch()
                     If you're calling <methodname>render()</methodname> with arguments, and
                     not doing any processing afterwards or rendering multiple
                     view scripts, you can change these calls to read
-                    <command>$this->_helper->viewRenderer();</command>.
+                    <command>$this-&gt;_helper-&gt;viewRenderer();</command>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -139,8 +135,7 @@ public function preDispatch()
             If you're not using the conventional modular directory structure,
             there are a variety of methods for setting the view base path and
             script path specifications so that you can make use of the
-            <classname>ViewRenderer</classname>. Please read the <link
-                linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer
+            <classname>ViewRenderer</classname>. Please read the <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer
                 documentation</link> for information on these methods.
         </para>
 
@@ -192,10 +187,10 @@ $viewRenderer->setView($view);
             <classname>ErrorHandler</classname> and <classname>ViewRenderer</classname> as they are
             now core functionality.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="migration.10.zend.currency">
-        <title>Zend_Currency</title>
+    <section xml:id="migration.10.zend.currency"><info><title>Zend_Currency</title></info>
+        
 
         <para>
             Creating an object of <classname>Zend_Currency</classname> has become simpler.
@@ -214,7 +209,7 @@ $currency = new Zend_Currency($currency, $locale);
             'precision' has been added. The following options have been refactored:
         </para>
 
-        <itemizedlist mark='opencircle'>
+        <itemizedlist mark="opencircle">
             <listitem>
                 <para>
                     <emphasis>position</emphasis>:
@@ -296,8 +291,5 @@ $currency->toCurrency($value, array $options);
             from within the object. They return the set values of the object if no
             parameter has been set.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

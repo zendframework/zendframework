@@ -1,5 +1,8 @@
-<sect1 id="zend.test.introduction">
-    <title>Wprowadzenie</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.introduction"><info><title>Wprowadzenie</title></info>
+    
 
     <para>
         Komponent <code>Zend_Test</code> zapewnia narzędzia ułatwiające
@@ -7,7 +10,4 @@
         W tej chwili dostępne są klasy do przeprowadzania testów aplikacji
         używających wzorca MVC Zend Framework.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

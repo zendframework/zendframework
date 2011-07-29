@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20819 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.sending">
-    <title>Envoyer des émail en utilisant SMTP</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.sending"><info><title>Envoyer des émail en utilisant SMTP</title></info>
+    
 
     <para>
         Pour envoyer des émail via SMTP, <classname>Zend_Mail_Transport_Smtp</classname> a
@@ -11,8 +9,8 @@
         utilisé :
     </para>
 
-    <example id="zend.mail.sending.example-1">
-        <title>Envoyer un émail via SMTP</title>
+    <example xml:id="zend.mail.sending.example-1"><info><title>Envoyer un émail via SMTP</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $tr = new Zend_Mail_Transport_Smtp('mail.example.com');
@@ -27,7 +25,7 @@ Zend_Mail::setDefaultTransport($tr);
         exemple dans un fichier <filename>config.inc</filename>) pour configurer le comportement de
         la classe <classname>Zend_Mail</classname> pour le reste du script. Cela garde les
         informations de configuration en dehors de la logique applicative - si les émail doivent
-        être envoyés via SMTP ou via <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink>,
+        être envoyés via SMTP ou via <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mail"><methodname>mail()</methodname></link>,
         quel serveur est utilisé, etc.
     </para>
-</sect1>
+</section>

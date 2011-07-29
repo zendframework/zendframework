@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.router.routes.chain">
-    <title>Zend_Controller_Router_Route_Chain</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.router.routes.chain"><info><title>Zend_Controller_Router_Route_Chain</title></info>
+    
 
     <para>
         <classname>Zend_Controller_Router_Route_Chain</classname> ist eine Route die es erlaubt
@@ -11,8 +9,8 @@
         program-technisch oder mit einer Konfigurationsdatei durchgeführt werden.
     </para>
 
-    <note>
-        <title>Priorität der Parameter</title>
+    <note><info><title>Priorität der Parameter</title></info>
+        
 
         <para>
             Wenn Routen wie die Hostnameroute und die Pfadroute zusammengekettet werden, haben die
@@ -65,8 +63,8 @@ $chainedRoute = $firstRoute->chain($secondRoute, '-');
 echo $chainedRoute->assemble();
 ]]></programlisting>
 
-    <sect4 id="zend.controller.router.routes.chain.config">
-        <title>Verkettete Routen über Zend_Config</title>
+    <section xml:id="zend.controller.router.routes.chain.config"><info><title>Verkettete Routen über Zend_Config</title></info>
+        
 
         <para>
             Um Routen in einer Config Datei miteinander zu verketten gibt es zusätzliche Parameter
@@ -213,5 +211,5 @@ echo $this->_router->assemble(array(), 'chainName_separator_subRouteName');
 
 // Die Prüfung: Ausgegeben wird /foo/bar
 ]]></programlisting>
-    </sect4>
-</sect3>
+    </section>
+</section>

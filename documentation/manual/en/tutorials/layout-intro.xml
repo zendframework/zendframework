@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.layout.intro">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.layout.intro"><info><title>Introduction</title></info>
+    
 
     <para>
         When building a website using Zend Framework <acronym>MVC</acronym> layers, your view
@@ -41,7 +40,7 @@
     </para>
 
     <para>
-        The <ulink url="http://martinfowler.com/eaaCatalog/twoStepView.html">Two Step View</ulink>
+        The <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://martinfowler.com/eaaCatalog/twoStepView.html">Two Step View</link>
         design pattern answers many of the issues presented. In this pattern, the "application" view
         is created first, and then injected into the "page" view, which is then presented to the
         client. The page view can be thought of as your site-wide template or layout, and would have
@@ -52,4 +51,4 @@
         Within Zend Framework, <classname>Zend_Layout</classname> implements the Two Step View
         pattern.
     </para>
-</sect1>
+</section>

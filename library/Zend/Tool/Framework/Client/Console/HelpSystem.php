@@ -353,7 +353,7 @@ class HelpSystem
         Metadata\Tool $actionMetadata,
         Metadata\Tool $specialtyMetadata,
         Metadata\Tool $parameterLongMetadata)//,
-        //Zend_Tool_Framework_Metadata_Tool $parameterShortMetadata)
+        //Zend\Tool\Framework\Metadata\Tool $parameterShortMetadata)
     {
         $this->_response->appendContent(
             '    zf ' . $actionMetadata->getValue() . ' ' . $providerMetadata->getValue(),

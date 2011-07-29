@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 17172 -->
-<sect1 id="zend.navigation.migration">
-    <title>前バージョンからの移行</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.migration"><info><title>前バージョンからの移行</title></info>
+    
 
     <para>
         この章は、主に<classname>Zend_Navigation</classname>
@@ -11,8 +9,8 @@
         前バージョンからの移行を手伝う役目を果たさなければなりません。
     </para>
 
-    <sect2 id="zend.view.navigation.zf7341">
-        <title>バージョン 1.9以前からの移行</title>
+    <section xml:id="zend.view.navigation.zf7341"><info><title>バージョン 1.9以前からの移行</title></info>
+        
 
         <para>
             1.9のリリース以前は、
@@ -101,5 +99,5 @@ $container = new Zend_Navigation(array(
     </li>
 </ul>
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

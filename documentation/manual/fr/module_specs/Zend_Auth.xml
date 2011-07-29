@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20763 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.auth.introduction">
-    <title>Introduction</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_Auth</classname> fournit une <acronym>API</acronym> pour l'authentification
@@ -15,7 +13,7 @@
         <emphasis>le processus d'autorisation</emphasis>. L'authentification est définie de
         manière lâche (souple) afin de déterminer si une entité donnée est bien celle qu'elle
         prétend être (c.-à-d. identification), sur la base d'identifiants fournis. L'autorisation,
-        l'action de décider si une entité donnée peut accéder à d'autres entités et&#160;/&#160;ou
+        l'action de décider si une entité donnée peut accéder à d'autres entités et / ou
         exécuter des opérations sur celles-ci ne fait pas partie des prérogatives de
         <classname>Zend_Auth</classname>. Pour plus d'informations sur les autorisations et le
         contrôle d'accès via Zend Framework, voyez
@@ -33,8 +31,8 @@
         </para>
     </note>
 
-    <sect2 id="zend.auth.introduction.adapters">
-        <title>Adaptateurs</title>
+    <section xml:id="zend.auth.introduction.adapters"><info><title>Adaptateurs</title></info>
+        
 
         <para>
             Un adaptateur <classname>Zend_Auth</classname> est utilisé pour authentifier via
@@ -61,7 +59,7 @@
         <para>
             L'exemple suivant est un adaptateur d'authentification qui requiert un
             identifiant et un mot de passe. D'autres détails, tel que la manière d'interroger le
-            service d'authentification, ont été omis par souci de clarté&#160;:
+            service d'authentification, ont été omis par souci de clarté :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -100,10 +98,10 @@ class MonAdaptateurAuth implements Zend_Auth_Adapter_Interface
             <methodname>authenticate()</methodname> retournera une exception dérivée de
             <classname>Zend_Auth_Adapter_Exception</classname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.introduction.results">
-        <title>Résultats</title>
+    <section xml:id="zend.auth.introduction.results"><info><title>Résultats</title></info>
+        
 
         <para>
             Les adaptateurs <classname>Zend_Auth</classname> retournent une instance de
@@ -111,19 +109,19 @@ class MonAdaptateurAuth implements Zend_Auth_Adapter_Interface
             manière à présenter les résultats d'une tentative d'authentification. Les adaptateurs
             alimentent l'objet <classname>Zend_Auth_Result</classname> lors de sa construction, de
             manière à ce que les quatre méthodes suivantes fournissent de base un lot d'opérations
-            communes aux résultats des adaptateurs <classname>Zend_Auth</classname>&#160;:
+            communes aux résultats des adaptateurs <classname>Zend_Auth</classname> :
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>isValid()</methodname>&#160;: retourne <constant>TRUE</constant> si
+                    <methodname>isValid()</methodname> : retourne <constant>TRUE</constant> si
                     et seulement si le résultat représente une tentative réussie d'authentification.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <methodname>getCode()</methodname>&#160;: retourne une constante
+                    <methodname>getCode()</methodname> : retourne une constante
                     <classname>Zend_Auth_Result</classname> qui détermine le type de retour
                     accepté ou refusé (N.D.T. : voir tableau ci dessous). Cela peut être utilisé
                     pour les développeurs voulant distinguer en amont les différents types de
@@ -136,13 +134,13 @@ class MonAdaptateurAuth implements Zend_Auth_Adapter_Interface
             </listitem>
             <listitem>
                 <para>
-                    <methodname>getIdentity()</methodname>&#160;: retourne l'identité de la
+                    <methodname>getIdentity()</methodname> : retourne l'identité de la
                     tentative d'authentification.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <methodname>getMessages()</methodname>&#160;: retourne un tableau de messages
+                    <methodname>getMessages()</methodname> : retourne un tableau de messages
                     relatifs à une tentative infructueuse d'authentification.
                 </para>
             </listitem>
@@ -153,7 +151,7 @@ class MonAdaptateurAuth implements Zend_Auth_Adapter_Interface
             opérations spécifiques. Certaines opérations développées peuvent bloquer le compte
             après plusieurs refus du mot de passe, bannir une adresse IP après plusieurs essais sur
             des comptes inexistants ou fournir un message spécifique à l'utilisateur final. Les
-            codes suivants sont disponibles&#160;:
+            codes suivants sont disponibles :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -166,7 +164,7 @@ Zend_Auth_Result::FAILURE_UNCATEGORIZED
 ]]></programlisting>
 
         <para>
-            L'exemple suivant illustre comment utiliser le retour&#160;:
+            L'exemple suivant illustre comment utiliser le retour :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -192,10 +190,10 @@ switch ($resultat->getCode()) {
         break;
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.introduction.persistence">
-        <title>Persistance d'identité</title>
+    <section xml:id="zend.auth.introduction.persistence"><info><title>Persistance d'identité</title></info>
+        
 
         <para>
             Authentifier une requête qui contient des paramètres d'authentification est utile
@@ -210,8 +208,8 @@ switch ($resultat->getCode()) {
             contexte lors de multiples requêtes dans les applications Web.
         </para>
 
-        <sect3 id="zend.auth.introduction.persistence.default">
-            <title>Persistance par défaut dans une session PHP</title>
+        <section xml:id="zend.auth.introduction.persistence.default"><info><title>Persistance par défaut dans une session PHP</title></info>
+            
 
             <para>
                 Par défaut, <classname>Zend_Auth</classname> fournit un stockage persistant de
@@ -236,8 +234,8 @@ switch ($resultat->getCode()) {
                 </para>
             </note>
 
-            <example id="zend.auth.introduction.persistence.default.example">
-                <title>Changer l'espace de nommage de la session</title>
+            <example xml:id="zend.auth.introduction.persistence.default.example"><info><title>Changer l'espace de nommage de la session</title></info>
+                
 
                 <para>
                     <classname>Zend_Auth_Storage_Session</classname> utilise un espace de
@@ -267,10 +265,10 @@ $auth->setStorage(new Zend_Auth_Storage_Session('unEspaceDeNommage'));
 $resultat = $auth->authenticate($authAdaptateur);
 ]]></programlisting>
             </example>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.auth.introduction.persistence.custom">
-            <title>Installer un stockage personnalisé</title>
+        <section xml:id="zend.auth.introduction.persistence.custom"><info><title>Installer un stockage personnalisé</title></info>
+            
 
             <para>
                 Parfois les développeurs ont besoin d'utiliser un comportement de persistance
@@ -281,13 +279,13 @@ $resultat = $auth->authenticate($authAdaptateur);
                 <methodname>Zend_Auth::setStorage()</methodname>.
             </para>
 
-            <example id="zend.auth.introduction.persistence.custom.example">
-                <title>Utiliser une classe de stockage personnalisée</title>
+            <example xml:id="zend.auth.introduction.persistence.custom.example"><info><title>Utiliser une classe de stockage personnalisée</title></info>
+                
 
                 <para>
                     Pour utiliser une classe de stockage d'identité persistante autre que
                     <classname>Zend_Auth_Storage_Session</classname>, le développeur commence par
-                    implémenter <classname>Zend_Auth_Storage_Interface</classname>&#160;:
+                    implémenter <classname>Zend_Auth_Storage_Interface</classname> :
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -357,7 +355,7 @@ class MonStockage implements Zend_Auth_Storage_Interface
 
                 <para>
                     Ensuite la classe personnalisée est invoquée, avant la requête
-                    d'authentification, avec <methodname>Zend_Auth::setStorage()</methodname>&#160;:
+                    d'authentification, avec <methodname>Zend_Auth::setStorage()</methodname> :
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -374,21 +372,21 @@ Zend_Auth::getInstance()->setStorage(new MonStockage());
 $result = Zend_Auth::getInstance()->authenticate($authAdaptateur);
 ]]></programlisting>
             </example>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.auth.introduction.using">
-        <title>Utilisation de Zend_Auth</title>
+    <section xml:id="zend.auth.introduction.using"><info><title>Utilisation de Zend_Auth</title></info>
+        
 
         <para>
             Deux manières d'utiliser les adaptateurs <classname>Zend_Auth</classname> sont
-            proposées&#160;:
+            proposées :
         </para>
 
         <orderedlist>
             <listitem>
                 <para>
-                    indirectement, via <methodname>Zend_Auth::authenticate()</methodname>&#160;;
+                    indirectement, via <methodname>Zend_Auth::authenticate()</methodname> ;
                 </para>
             </listitem>
             <listitem>
@@ -402,7 +400,7 @@ $result = Zend_Auth::getInstance()->authenticate($authAdaptateur);
         <para>
             L'exemple suivant illustre la manière d'utiliser un adaptateur
             <classname>Zend_Auth</classname> de manière indirecte via l'utilisation de la classe
-            <classname>Zend_Auth</classname>&#160;:
+            <classname>Zend_Auth</classname> :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -430,7 +428,7 @@ if (!$resultat->isValid()) {
 
         <para>
             Une fois la tentative d'authentification réalisée, tel que montré ci-dessus, il
-            est très simple de vérifier si une identité correctement authentifiée existe&#160;:
+            est très simple de vérifier si une identité correctement authentifiée existe :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -444,7 +442,7 @@ if ($auth->hasIdentity()) {
         <para>
             Pour retirer une identité du stockage persistant, utilisez simplement la méthode
             <methodname>clearIdentity()</methodname>. A utiliser typiquement pour implémenter une
-            opération de déconnexion d'une application&#160;:
+            opération de déconnexion d'une application :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -459,7 +457,7 @@ Zend_Auth::getInstance()->clearIdentity();
             adaptateur et d'appeler ensuite sa méthode <methodname>authenticate()</methodname>. Les
             détails spécifiques à un adaptateur sont décrits dans la documentation de chacun
             d'entre-eux. L'exemple suivant utilise directement
-            <classname>MonAdaptateurAuth</classname>&#160;:
+            <classname>MonAdaptateurAuth</classname> :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -479,5 +477,5 @@ if (!$resultat->isValid()) {
     // $resultat->getIdentity() === $identifiant
 }
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

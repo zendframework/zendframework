@@ -1,12 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20763 -->
-<sect1 id="zend.auth.adapter.openid">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.openid"><info><title>Open ID 認証</title></info>
 
-    <title>Open ID 認証</title>
+    
 
-    <sect2 id="zend.auth.adapter.openid.introduction">
-        <title>導入</title>
+    <section xml:id="zend.auth.adapter.openid.introduction"><info><title>導入</title></info>
+        
 
         <para>
             <classname>Zend_Auth_Adapter_OpenId</classname>
@@ -22,7 +20,7 @@
             指し示す先のウェブページにはそのユーザに関する情報や特別なタグが含まれます。
             タグに記述されているのは、どのサーバに対してどの情報を送信するのかという情報です。
             OpenID についての詳細は
-            <ulink url="http://www.openid.net/">OpenID の公式サイト</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.openid.net/">OpenID の公式サイト</link>
             を参照ください。
         </para>
 
@@ -34,16 +32,16 @@
 
         <note>
             <para>
-                <classname>Zend_OpenId</classname> は、<ulink url="http://php.net/gmp">GMP
-                拡張モジュール</ulink> が使用可能な場合はそれを使用します。
+                <classname>Zend_OpenId</classname> は、<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/gmp">GMP
+                拡張モジュール</link> が使用可能な場合はそれを使用します。
                 <classname>Zend_Auth_Adapter_OpenId</classname> を使う場合は、
                 <acronym>GMP</acronym> 拡張モジュールを有効にしておくとよりよいパフォーマンスが得られるでしょう。
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.openid.specifics">
-        <title>仕様</title>
+    <section xml:id="zend.auth.adapter.openid.specifics"><info><title>仕様</title></info>
+        
 
         <para>
             他の <classname>Zend_Auth</classname> アダプタ同様、<classname>Zend_Auth_Adapter_OpenId</classname>
@@ -136,8 +134,5 @@ if ((isset($_POST['openid_action']) &&
             <classname>Zend_OpenId_Consumer</classname> のマニュアルを参照ください。
         </para>
 
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

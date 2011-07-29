@@ -1,14 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.json.xml2json">
-    <title>XML to JSON conversion</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.xml2json"><info><title>XML to JSON conversion</title></info>
+    
 
     <para>
         <classname>Zend_Json</classname> fournit une méthode de convenance pour transformer
-        des données au format <acronym>XML</acronym> en un format <acronym>JSON</acronym>. Ce dispositif est inspiré <ulink
-        url="http://www.ibm.com/developerworks/xml/library/x-xml2jsonphp/">d'un article de
-        developerWorks d'IBM</ulink>.
+        des données au format <acronym>XML</acronym> en un format <acronym>JSON</acronym>. Ce dispositif est inspiré <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.ibm.com/developerworks/xml/library/x-xml2jsonphp/">d'un article de
+        developerWorks d'IBM</link>.
     </para>
 
     <para>
@@ -114,8 +111,7 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
 
     <para>
         Plus de détails au sujet de ce dispositif xml2json peuvent être trouvés dans la
-        proposition originale elle-même. Jetez un oeil à la <ulink
-        url="http://framework.zend.com/wiki/display/ZFPROP/Zend_xml2json+-+Senthil+Nathan">proposition
-        Zend_xml2json</ulink>.
+        proposition originale elle-même. Jetez un oeil à la <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/wiki/display/ZFPROP/Zend_xml2json+-+Senthil+Nathan">proposition
+        Zend_xml2json</link>.
     </para>
-</sect1>
+</section>

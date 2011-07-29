@@ -1,10 +1,11 @@
-<sect1 id="zend.db.table.relationships">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.relationships"><info><title>Связи между таблицами Zend_Db_Table</title></info>
 
-    <title>Связи между таблицами Zend_Db_Table</title>
+    
 
-    <sect2 id="zend.db.table.relationships.introduction">
+    <section xml:id="zend.db.table.relationships.introduction"><info><title>Введение</title></info>
 
-        <title>Введение</title>
+        
 
         <para>
             В реляционной БД таблицы имеют связи друг с другом. Запись в таблице
@@ -18,18 +19,17 @@
             строк в другой таблице.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.relationships.defining">
+    <section xml:id="zend.db.table.relationships.defining"><info><title>Определение связей</title></info>
 
-        <title>Определение связей</title>
+        
 
         <para>
             Определите классы для каждой из ваших таблиц, расширяя абстрактный
-            класс Zend_Db_Table_Abstract, как описано в <xref
-            linkend="zend.db.table.defining" />. Также смотрите описание БД, для
+            класс Zend_Db_Table_Abstract, как описано в <xref linkend="zend.db.table.defining"/>. Также смотрите описание БД, для
             которой написан приведнный ниже код в
-            <xref linkend="zend.db.adapter.example-database" />
+            <xref linkend="zend.db.adapter.example-database"/>
         </para>
 
         <para>
@@ -92,8 +92,8 @@ class BugsProducts extends Zend_Db_Table_Abstract
     );
 
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Если вы используете Zend_Db_Table для эмулирования каскадных
@@ -108,7 +108,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
                 Пропустите объявление массива <varname>$_dependentTables</varname>,
                 если используете ограничения ссылочной на сервере СУРБД для
                 реализации каскадных операций. См.
-                <xref linkend="zend.db.table.relationships.cascading" /> для
+                <xref linkend="zend.db.table.relationships.cascading"/> для
                 получения более подробной информации.
             </para>
         </note>
@@ -146,7 +146,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>columns</emphasis> =>
+                    <emphasis>columns</emphasis> =&gt;
                     Строка или массив строк с имен(ем/ами)
                     столбцов внешних ключей в зависимой таблице.
                 </para>
@@ -157,7 +157,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>refTableClass</emphasis> =>
+                    <emphasis>refTableClass</emphasis> =&gt;
                     Имя класса родительской таблицы. Используйте имя класса, а
                     не таблицы в БД.
                 </para>
@@ -175,7 +175,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>refColumns</emphasis> =>
+                    <emphasis>refColumns</emphasis> =&gt;
                     Строка или массив строк, в котором перечислены имена
                     столбцов первичного ключа в родительской таблице.
                 </para>
@@ -195,30 +195,30 @@ class BugsProducts extends Zend_Db_Table_Abstract
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>onDelete</emphasis> =>
+                    <emphasis>onDelete</emphasis> =&gt;
                     Правило для действия, выполняемого, когда в родительской
                     таблице удаляется строка. См.
-                    <xref linkend="zend.db.table.relationships.cascading" />
+                    <xref linkend="zend.db.table.relationships.cascading"/>
                     для получения более подробной информации.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>onUpdate</emphasis> =>
+                    <emphasis>onUpdate</emphasis> =&gt;
                     Правило для действия, выполняемого, когда изменяются
                     значения в столбцах первичного ключа родительской таблицы.
                     См.
-                    <xref linkend="zend.db.table.relationships.cascading" /> для
+                    <xref linkend="zend.db.table.relationships.cascading"/> для
                     получения более подробной информации.
                 </para>
             </listitem>
         </itemizedlist>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.relationships.fetching.dependent">
+    <section xml:id="zend.db.table.relationships.fetching.dependent"><info><title>Извлечение зависимых строк</title></info>
 
-        <title>Извлечение зависимых строк</title>
+        
 
         <para>
             Если вы имеете объект Row (строка) в результате запроса к
@@ -227,11 +227,11 @@ class BugsProducts extends Zend_Db_Table_Abstract
             Используйте следующий метод:
         </para>
 
-        <programlisting language="php">
-<![CDATA[
+        <programlisting language="php"><![CDATA[
+
 $row->findDependentRowset($table, [$rule]);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Этот метод возвращает объект Zend_Db_Table_Rowset_Abstract,
@@ -245,9 +245,9 @@ $row->findDependentRowset($table, [$rule]);
             таблицу, используя объект класса этой таблицы.
         </para>
 
-        <example id="zend.db.table.relationships.fetching.dependent.example">
+        <example xml:id="zend.db.table.relationships.fetching.dependent.example"><info><title>Извлечение зависимых строк</title></info>
 
-            <title>Извлечение зависимых строк</title>
+            
 
             <para>
                 Этот пример демонстрирует получение объекта строки из таблицы
@@ -255,15 +255,15 @@ $row->findDependentRowset($table, [$rule]);
                 <code>Bugs</code>, о которых сообщил данный пользователь.
             </para>
 
-            <programlisting language="php">
-<![CDATA[
+            <programlisting language="php"><![CDATA[
+
 $accountsTable = new Accounts();
 $accountsRowset = $accountsTable->find(1234);
 $user1234 = $accountsRowset->current();
 
 $bugsReportedByUser = $user1234->findDependentRowset('Bugs');
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </example>
 
@@ -282,9 +282,9 @@ $bugsReportedByUser = $user1234->findDependentRowset('Bugs');
             первое правило, соответствующее родительской таблице. Это будет правило <code>'Reporter'</code>.
         </para>
 
-        <example id="zend.db.table.relationships.fetching.dependent.example-by">
+        <example xml:id="zend.db.table.relationships.fetching.dependent.example-by"><info><title>Извлечение зависимых строк по определенному правилу</title></info>
 
-            <title>Извлечение зависимых строк по определенному правилу</title>
+            
 
             <para>
                 Этот пример демонстрирует получение строки из таблицы
@@ -300,16 +300,16 @@ $accountsRowset = $accountsTable->find(1234);
 $user1234 = $accountsRowset->current();
 
 $bugsAssignedToUser = $user1234->findDependentRowset('Bugs', 'Engineer');
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </example>
 
         <para>
 
-            <example id="zend.db.table.relationships.fetching.dependent.example-by-select">
+            <example xml:id="zend.db.table.relationships.fetching.dependent.example-by-select"><info><title>Извлечение зависимых строк с использованием Zend_Db_Table_Select</title></info>
 
-                <title>Извлечение зависимых строк с использованием Zend_Db_Table_Select</title>
+                
 
                 <para>
                     Этот пример демонстрирует получение объекта строки из
@@ -329,8 +329,8 @@ $select = $accountsTable->select()->order('name ASC')
 $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
                                                      'Engineer',
                                                      $select);
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
             </example>
 
@@ -345,12 +345,12 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
         <itemizedlist>
             <listitem>
                 <para>
-                    <varname>$row->find&lt;TableClass&gt;()</varname>
+                    <varname>$row-&gt;find&lt;TableClass&gt;()</varname>
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <varname>$row->find&lt;TableClass&gt;By&lt;Rule&gt;()</varname>
+                    <varname>$row-&gt;find&lt;TableClass&gt;By&lt;Rule&gt;()</varname>
                 </para>
             </listitem>
         </itemizedlist>
@@ -376,10 +376,10 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
 
         </note>
 
-        <example id="zend.db.table.relationships.fetching.dependent.example-magic">
+        <example xml:id="zend.db.table.relationships.fetching.dependent.example-magic"><info><title>Извлечение зависимых строк с использованием магического
+            метода</title></info>
 
-            <title>Извлечение зависимых строк с использованием магического
-            метода</title>
+            
 
             <para>
                 Этот пример демонстрирует поиск зависимых строк, эквивалентный
@@ -398,16 +398,16 @@ $bugsReportedBy = $user1234->findBugs();
 
 // Задается правило связи
 $bugsAssignedTo = $user1234->findBugsByEngineer();
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.relationships.fetching.parent">
+    <section xml:id="zend.db.table.relationships.fetching.parent"><info><title>Извлечение родительской строки</title></info>
 
-        <title>Извлечение родительской строки</title>
+        
 
         <para>
             Если вы имеете объект Row в результате запроса к зависимой таблице,
@@ -418,8 +418,8 @@ $bugsAssignedTo = $user1234->findBugsByEngineer();
 
         <programlisting language="php"><![CDATA[
 $row->findParentRow($table, [$rule]);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Зависимая строка всегда должна ссылаться только на одну строку в
@@ -433,9 +433,9 @@ $row->findParentRow($table, [$rule]);
             таблицу, используя объект класса этой таблицы.
         </para>
 
-        <example id="zend.db.table.relationships.fetching.parent.example">
+        <example xml:id="zend.db.table.relationships.fetching.parent.example"><info><title>Извлечение родительской строки</title></info>
 
-            <title>Извлечение родительской строки</title>
+            
 
             <para>
                 Этот пример демонстрирует получение объекта Row из таблицы
@@ -450,8 +450,8 @@ $bugsRowset = $bugsTable->fetchAll(array('bug_status = ?' => 'NEW'));
 $bug1 = $bugsRowset->current();
 
 $reporter = $bug1->findParentRow('Accounts');
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </example>
 
@@ -471,9 +471,9 @@ $reporter = $bug1->findParentRow('Accounts');
             правило <code>'Reporter'</code>.
         </para>
 
-        <example id="zend.db.table.relationships.fetching.parent.example-by">
+        <example xml:id="zend.db.table.relationships.fetching.parent.example-by"><info><title>Извлечение родительской строки по определенному правилу</title></info>
 
-            <title>Извлечение родительской строки по определенному правилу</title>
+            
 
             <para>
                 Этот пример демонстрирует получение объекта Row из таблицы
@@ -489,8 +489,8 @@ $bugsRowset = $bugsTable->fetchAll(array('bug_status = ?', 'NEW'));
 $bug1 = $bugsRowset->current();
 
 $engineer = $bug1->findParentRow('Accounts', 'Engineer');
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </example>
 
@@ -506,13 +506,13 @@ $engineer = $bug1->findParentRow('Accounts', 'Engineer');
         <itemizedlist>
             <listitem>
                 <para>
-                    <varname>$row->findParent&lt;TableClass&gt;([Zend_Db_Table_Select $select])</varname>
+                    <varname>$row-&gt;findParent&lt;TableClass&gt;([Zend_Db_Table_Select $select])</varname>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <varname>$row->findParent&lt;TableClass&gt;By&lt;Rule&gt;([Zend_Db_Table_Select
+                    <varname>$row-&gt;findParent&lt;TableClass&gt;By&lt;Rule&gt;([Zend_Db_Table_Select
                     $select])</varname>
                 </para>
             </listitem>
@@ -535,9 +535,9 @@ $engineer = $bug1->findParentRow('Accounts', 'Engineer');
 
         </note>
 
-        <example id="zend.db.table.relationships.fetching.parent.example-magic">
+        <example xml:id="zend.db.table.relationships.fetching.parent.example-magic"><info><title>Извлечение родительской строки с использованием магического метода</title></info>
 
-            <title>Извлечение родительской строки с использованием магического метода</title>
+            
 
             <para>
                 Этот пример демонстрирует поиск родительской строки,
@@ -556,16 +556,16 @@ $reporter = $bug1->findParentAccounts();
 
 // Задается правило связи
 $engineer = $bug1->findParentAccountsByEngineer();
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.relationships.fetching.many-to-many">
+    <section xml:id="zend.db.table.relationships.fetching.many-to-many"><info><title>Извлечение строк через связи "многие-ко-многим"</title></info>
 
-        <title>Извлечение строк через связи "многие-ко-многим"</title>
+        
 
         <para>
             Если вы имеете объект Row в результате выполнения запроса к одной из
@@ -575,8 +575,8 @@ $engineer = $bug1->findParentAccountsByEngineer();
             таблицу пересечений. Используйте метод:
         </para>
 
-        <programlisting language="php">
-<![CDATA[
+        <programlisting language="php"><![CDATA[
+
 $row->findManyToManyRowset($table,
                            $intersectionTable,
                            [$rule1,
@@ -584,8 +584,8 @@ $row->findManyToManyRowset($table,
                                    [Zend_Db_Table_Select $select]
                                ]
                            ]);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Этот метод возвращает объект Zend_Db_Table_Rowset_Abstract,
@@ -608,9 +608,9 @@ $row->findManyToManyRowset($table,
             используя объект класса этой таблицы.
         </para>
 
-        <example id="zend.db.table.relationships.fetching.many-to-many.example">
+        <example xml:id="zend.db.table.relationships.fetching.many-to-many.example"><info><title>Извлечение строк через метод для связей "многие-ко-многим"</title></info>
 
-            <title>Извлечение строк через метод для связей "многие-ко-многим"</title>
+            
 
             <para>
                 Этот пример демонстрирует получение объекта Row из исходной
@@ -626,8 +626,8 @@ $bug1234 = $bugsRowset->current();
 
 $productsRowset = $bug1234->findManyToManyRowset('Products',
                                                  'BugsProducts');
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </example>
 
@@ -666,9 +666,9 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
             <code>'Product'</code>.
         </para>
 
-        <example id="zend.db.table.relationships.fetching.many-to-many.example-by">
+        <example xml:id="zend.db.table.relationships.fetching.many-to-many.example-by"><info><title>Извлечение строк через метод для связей "многие-ко-многим" по определенному правилу</title></info>
 
-            <title>Извлечение строк через метод для связей "многие-ко-многим" по определенному правилу</title>
+            
 
             <para>
                 Этот пример демонстрирует получение объекта Row из исходной
@@ -677,8 +677,8 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
                 которым относится данная ошибка.
             </para>
 
-            <programlisting language="php">
-<![CDATA[
+            <programlisting language="php"><![CDATA[
+
 $bugsTable = new Bugs();
 $bugsRowset = $bugsTable->find(1234);
 $bug1234 = $bugsRowset->current();
@@ -686,8 +686,8 @@ $bug1234 = $bugsRowset->current();
 $productsRowset = $bug1234->findManyToManyRowset('Products',
                                                  'BugsProducts',
                                                  'Bug');
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </example>
 
@@ -702,21 +702,21 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
         <itemizedlist>
             <listitem>
                 <para>
-                    <varname>$row->find&lt;TableClass&gt;Via&lt;IntersectionTableClass&gt;
+                    <varname>$row-&gt;find&lt;TableClass&gt;Via&lt;IntersectionTableClass&gt;
                     ([Zend_Db_Table_Select $select])</varname>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <varname>$row->find&lt;TableClass&gt;Via&lt;IntersectionTableClass&gt;By&lt;Rule1&gt;
+                    <varname>$row-&gt;find&lt;TableClass&gt;Via&lt;IntersectionTableClass&gt;By&lt;Rule1&gt;
                     ([Zend_Db_Table_Select $select])</varname>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <varname>$row->find&lt;TableClass&gt;Via&lt;IntersectionTableClass&gt;By&lt;Rule1&gt;And&lt;Rule2&gt;
+                    <varname>$row-&gt;find&lt;TableClass&gt;Via&lt;IntersectionTableClass&gt;By&lt;Rule1&gt;And&lt;Rule2&gt;
                     ([Zend_Db_Table_Select $select])</varname>
                 </para>
             </listitem>
@@ -740,9 +740,9 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
             </para>
         </note>
 
-        <example id="zend.db.table.relationships.fetching.many-to-many.example-magic">
+        <example xml:id="zend.db.table.relationships.fetching.many-to-many.example-magic"><info><title>Извлечение строк с использованием магического метода для связей "многие-ко-многим"</title></info>
 
-            <title>Извлечение строк с использованием магического метода для связей "многие-ко-многим"</title>
+            
 
             <para>
                 Этот пример демонстрирует поиск в целевой таблице в связи
@@ -750,8 +750,8 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
                 относится данная ошибка.
             </para>
 
-            <programlisting language="php">
-<![CDATA[
+            <programlisting language="php"><![CDATA[
+
 $bugsTable = new Bugs();
 $bugsRowset = $bugsTable->find(1234);
 $bug1234 = $bugsRowset->current();
@@ -761,19 +761,19 @@ $products = $bug1234->findProductsViaBugsProducts();
 
 // Задается правило связи
 $products = $bug1234->findProductsViaBugsProductsByBug();
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.relationships.cascading">
+    <section xml:id="zend.db.table.relationships.cascading"><info><title>Каскадные операции записи</title></info>
 
-        <title>Каскадные операции записи</title>
+        
 
-        <note>
-            <title>Объявление DRI в БД</title>
+        <note><info><title>Объявление DRI в БД</title></info>
+            
             <para>
                 Объявление каскадных операций в Zend_Db_Table предназначено
                 <emphasis>только</emphasis> для тех СУРБД, которые
@@ -806,16 +806,16 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
             <code>DELETE</code> к строкам в родительской таблице.
         </para>
 
-        <example id="zend.db.table.relationships.cascading.example-delete">
-            <title>Пример каскадного удаления</title>
+        <example xml:id="zend.db.table.relationships.cascading.example-delete"><info><title>Пример каскадного удаления</title></info>
+            
             <para>
                 Этот пример демонстрирует удаление строки в таблице
                 <code>Products</code>, которая была сконфигурирована для
                 автоматического удаления зависимых строк в таблице
                 <code>Bugs</code>.
             </para>
-            <programlisting language="php">
-<![CDATA[
+            <programlisting language="php"><![CDATA[
+
 $productsTable  = new Products();
 $productsRowset = $productsTable->find(1234);
 $product1234    = $productsRowset->current();
@@ -823,8 +823,8 @@ $product1234    = $productsRowset->current();
 $product1234->delete();
 // Автоматически выполняется каскадное
 // удаление зависимых строк в таблице Bugs
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </example>
 
         <para>
@@ -855,8 +855,8 @@ $product1234->delete();
             ссылающиеся на эту строку родительской таблицы.
         </para>
 
-        <example id="zend.db.table.relationships.cascading.example-declaration">
-            <title>Пример объявления каскадных операций</title>
+        <example xml:id="zend.db.table.relationships.cascading.example-declaration"><info><title>Пример объявления каскадных операций</title></info>
+            
             <para>
                 В примере ниже строки в таблице <code>Bugs</code> автоматически
                 удаляются, если строка в таблице <code>Products</code>, на
@@ -887,13 +887,13 @@ class BugsProducts extends Zend_Db_Table_Abstract
         ...
     );
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </example>
 
-        <sect3 id="zend.db.table.relationships.cascading.notes">
+        <section xml:id="zend.db.table.relationships.cascading.notes"><info><title>Примечания относительно каскадных операций</title></info>
 
-            <title>Примечания относительно каскадных операций</title>
+            
 
             <para>
                 <emphasis>Каскадные операции, вызываемые
@@ -966,11 +966,8 @@ class BugsProducts extends Zend_Db_Table_Abstract
                 добавить строки в зависимой таблице в другой операции.
             </para>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

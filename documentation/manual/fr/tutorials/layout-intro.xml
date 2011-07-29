@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19803 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.layout.intro">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.layout.intro"><info><title>Introduction</title></info>
+    
 
     <para>
         Dans une application utilisant les couches Zend Framework <acronym>MVC</acronym>,
@@ -41,7 +39,7 @@
 
     <para>
         Le pattern
-        <ulink url="http://martinfowler.com/eaaCatalog/twoStepView.html">Two-Step View</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://martinfowler.com/eaaCatalog/twoStepView.html">Two-Step View</link>
         solutionne beaucoup des problèmes indiqués. Avec, la vue "application" est crée en premier,
         puis injectée dans une vue "page" ainsi présentée à l'utilisateur client. la vue de page
         peut être imaginée comme un template global ou layout qui décrirait des éléments communs
@@ -51,4 +49,4 @@
     <para>
         Dans Zend Framework, <classname>Zend_Layout</classname> implémente le pattern Two-Step View.
     </para>
-</sect1>
+</section>

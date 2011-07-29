@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17660 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.queue.example">
-    <title>Beispiel der Verwendung</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.example"><info><title>Beispiel der Verwendung</title></info>
+    
 
     <para>
         Das beiliegende Beispiel von <classname>Zend_Queue</classname> zeigt eine Vielzahl von
@@ -49,4 +47,4 @@ $queue->send('Meine Test Nachricht');
 // Eine Queue die wir erstellt haben löschen inklusive aller Ihrer Nachrichten
 $queue->deleteQueue('queue2');
 ]]></programlisting>
-</sect1>
+</section>

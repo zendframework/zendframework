@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21819 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.quickstart.create-model">
-    <title>Ein Modell und eine Datenbank Tabelle erstellen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.create-model"><info><title>Ein Modell und eine Datenbank Tabelle erstellen</title></info>
+    
 
     <para>
         Bevor wir anfangen nehmen wie etwas an: Wo werden diese Klassen leben, und wie werden wir
@@ -383,9 +381,8 @@ Daten geladen.
     </para>
 
     <para>
-        Wir verwenden ein <ulink
-            url="http://martinfowler.com/eaaCatalog/tableDataGateway.html">Table Data
-            Gateway</ulink> um uns mit unserer Datenquelle zu verbinden;
+        Wir verwenden ein <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://martinfowler.com/eaaCatalog/tableDataGateway.html">Table Data
+            Gateway</link> um uns mit unserer Datenquelle zu verbinden;
         <classname>Zend_Db_Table</classname> bietet diese Funktionalität. Um anzufangen erstellen
         wir eine <classname>Zend_Db_Table</classname>-basierende Tabellenklasse. Wie wir es für
         Layouts und den Datenbank Adapter getan haben, können wir das <command>zf</command> Tool
@@ -434,8 +431,7 @@ class Application_Model_DbTable_Guestbook extends Zend_Db_Table_Abstract
     </para>
 
     <para>
-        Jetzt erstellen wir einen <ulink
-            url="http://martinfowler.com/eaaCatalog/dataMapper.html">Daten Mapper</ulink>. Ein
+        Jetzt erstellen wir einen <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://martinfowler.com/eaaCatalog/dataMapper.html">Daten Mapper</link>. Ein
         <emphasis>Daten Mapper</emphasis> bildet ein Domain Objekt in der Datenbank ab. In unserem
         Fall bildet es unser Modell <classname>Application_Model_Guestbook</classname> auf unsere
         Datenquelle, <classname>Application_Model_DbTable_Guestbook</classname>, ab. Eine typische
@@ -734,8 +730,8 @@ Guestbook Einträge: <br />
 </dl>
 ]]></programlisting>
 
-    <note>
-        <title>Checkpoint</title>
+    <note><info><title>Checkpoint</title></info>
+        
 
         <para>
             Jetzt gehen wir auf "http://localhost/guestbook". Man sollte das folgende im Browser
@@ -743,13 +739,12 @@ Guestbook Einträge: <br />
         </para>
 
         <para>
-            <inlinegraphic width="525" scale="100" align="center" valign="middle"
-                fileref="figures/learning.quickstart.create-model.png" format="PNG" />
+            <inlinemediaobject><imageobject><imagedata width="525" scale="100" align="center" valign="middle" fileref="figures/learning.quickstart.create-model.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
     </note>
 
-    <note>
-        <title>Das Datenlade Skript verwenden</title>
+    <note><info><title>Das Datenlade Skript verwenden</title></info>
+        
 
         <para>
             Das Datenlade Skript welches in diesem Kapitel beschrieben wird
@@ -776,4 +771,4 @@ Usage: load.sqlite.php [ options ]
             ausgewählt hat wenn man in Betrieb geht.
         </para>
     </note>
-</sect1>
+</section>

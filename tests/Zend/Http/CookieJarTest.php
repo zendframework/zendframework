@@ -23,8 +23,10 @@
  * @namespace
  */
 namespace ZendTest\Http;
-use Zend\Http;
-use Zend\Http\Response;
+
+use Zend\Http,
+    Zend\Http\Response,
+    Zend\Uri;
 
 /**
  * Zend_Http_CookieJar unit tests
@@ -244,7 +246,7 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
         }
 
         try {
-            $jar->getCookie(new \Zend\Uri\Url('mailto:nobody@dev.null.com'), 'foo');
+            $jar->getCookie(Uri\UriFactory::factory('mailto:nobody@dev.null.com'), 'foo');
             $this->fail('Expected getCookie to throw exception, invalid URI object passed');
         } catch (\Zend\Http\Exception $e) {
             // We are ok!
@@ -384,11 +386,11 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(8, count($jar->getAllCookies()), 'Cookie count is expected to be 8');
 
         $cookies = $jar->getMatchingCookies('http://www.foo.com/path/file.txt', true, Http\CookieJar::COOKIE_STRING_ARRAY);
-        $this->assertType('array', $cookies, '$cookies is expected to be an array, but it is not');
-        $this->assertType('string', $cookies[0], '$cookies[0] is expected to be a string');
+        $this->assertInternalType('array', $cookies, '$cookies is expected to be an array, but it is not');
+        $this->assertInternalType('string', $cookies[0], '$cookies[0] is expected to be a string');
 
         $cookies = $jar->getMatchingCookies('http://www.foo.com/path/file.txt', true, Http\CookieJar::COOKIE_STRING_CONCAT);
-        $this->assertType('string', $cookies, '$cookies is expected to be a string');
+        $this->assertInternalType('string', $cookies, '$cookies is expected to be a string');
     }
 
     /**
@@ -457,7 +459,7 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
         foreach ($cookies as $cookie) $jar->addCookie($cookie);
         $cookies = $jar->getMatchingCookies('http://www.example.com/a/b/file.txt');
 
-        $this->assertType('array', $cookies);
+        $this->assertInternalType('array', $cookies);
         $this->assertEquals(2, count($cookies));
     }
 
@@ -470,7 +472,7 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
         );
         foreach ($cookies as $cookie) $jar->addCookie($cookie);
         foreach ($jar as $cookie) {
-            $this->assertType('Zend\Http\Cookie', $cookie);
+            $this->assertInstanceOf('Zend\Http\Cookie', $cookie);
         }
         $this->assertEquals(2, count($jar));
         $this->assertFalse($jar->isEmpty());

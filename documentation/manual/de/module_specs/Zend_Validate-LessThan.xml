@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21263 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.lessthan">
-    <title>LessThan</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.lessthan"><info><title>LessThan</title></info>
+    
 
     <para>
         <classname>Zend_Validate_LessThan</classname> erlaubt es zu prüfen ob ein angegebener Wert
@@ -10,8 +8,8 @@
         <classname>Zend_Validate_GreaterThan</classname>.
     </para>
 
-    <note>
-        <title>Zend_Validate_LessThan unterstützt nur die Prüfung von Nummern</title>
+    <note><info><title>Zend_Validate_LessThan unterstützt nur die Prüfung von Nummern</title></info>
+        
 
         <para>
             Es sollte beachtet werden das <classname>Zend_Validate_LessThan</classname> nur die
@@ -20,8 +18,8 @@
         </para>
     </note>
 
-    <sect3 id="zend.validate.set.lessthan.options">
-        <title>Unterstützte Optionen für Zend_Validate_LessThan</title>
+    <section xml:id="zend.validate.set.lessthan.options"><info><title>Unterstützte Optionen für Zend_Validate_LessThan</title></info>
+        
 
         <para>
             Die folgenden Optionen werden für <classname>Zend_Validate_LessThan</classname>
@@ -35,10 +33,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.lessthan.basic">
-        <title>Normale Verwendung</title>
+    <section xml:id="zend.validate.set.lessthan.basic"><info><title>Normale Verwendung</title></info>
+        
 
         <para>
             Um zu prüfen ob ein angegebener Wert kleiner als eine definierte Grenz ist kann einfach
@@ -56,5 +54,5 @@ $return = $valid->isValid($value);
             Das obige Beispiel gibt für alle Werte <constant>TRUE</constant> zurück die 10 sind oder
             kleiner als 10.
         </para>
-    </sect3>
-</sect2>
+    </section>
+</section>

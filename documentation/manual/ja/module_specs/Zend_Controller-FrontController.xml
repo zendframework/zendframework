@@ -1,33 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
-<sect1 id="zend.controller.front">
-    <title>フロントコントローラ</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.front"><info><title>フロントコントローラ</title></info>
+    
 
-    <sect2 id="zend.controller.front.overview">
-        <title>概要</title>
+    <section xml:id="zend.controller.front.overview"><info><title>概要</title></info>
+        
 
         <para>
             <classname>Zend_Controller_Front</classname> は
-            <ulink url="http://en.wikipedia.org/wiki/Model-view-controller">Model-View-Controller
-            (MVC)</ulink> アプリケーションで用いられる
-            <ulink url="http://www.martinfowler.com/eaaCatalog/frontController.html">
-            フロントコントローラパターン</ulink> を実装したものです。
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Model-view-controller">Model-View-Controller
+            (MVC)</link> アプリケーションで用いられる
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.martinfowler.com/eaaCatalog/frontController.html">
+            フロントコントローラパターン</link> を実装したものです。
             その役割は、リクエスト環境を初期化してリクエストの配送先を決定し、
             見つかった配送先に処理を引き渡すことです。また、
             レスポンスの内容を取得してそれをコール元に返します。
         </para>
 
         <para>
-            <classname>Zend_Controller_Front</classname> は <ulink
-            url="http://en.wikipedia.org/wiki/Singleton_pattern">シングルトンパターン</ulink>
+            <classname>Zend_Controller_Front</classname> は <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Singleton_pattern">シングルトンパターン</link>
             も実装しています。つまり、どんな場合でもひとつのインスタンスしか存在しないことになります。
             これを利用すると、コントローラをレジストリとして扱えるようになります。
         </para>
 
         <para>
-            <classname>Zend_Controller_Front</classname> は <link
-                linkend="zend.controller.plugins">プラグインブローカ</link>
+            <classname>Zend_Controller_Front</classname> は <link linkend="zend.controller.plugins">プラグインブローカ</link>
             を持っています。これにより、さまざまなイベントをプラグインで処理できるようになります。
             開発者は、ディスパッチ処理をカスタマイズして機能を追加する際に
             フロントコントローラ自体を継承したクラスを作成する必要がなくなります。
@@ -41,8 +37,8 @@
             さまざまな手法が用意されています。
         </para>
 
-        <note>
-            <title>デフォルトの挙動</title>
+        <note><info><title>デフォルトの挙動</title></info>
+            
             <para>
                 デフォルトでは、フロントコントローラは
                 <link linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler</link>
@@ -72,18 +68,18 @@ $front->setParam('noErrorHandler', true);
 $front->setParam('noViewRenderer', true);
 ]]></programlisting>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.front.methods.primary">
-        <title>主要なメソッド</title>
+    <section xml:id="zend.controller.front.methods.primary"><info><title>主要なメソッド</title></info>
+        
 
         <para>
             フロントコントローラには、その環境設定用のメソッドがいくつか用意されています。
             そのうち、フロントコントローラの機能の鍵となる主要なメソッドは、以下の3つです。
         </para>
 
-        <sect3 id="zend.controller.front.methods.primary.getinstance">
-            <title>getInstance()</title>
+        <section xml:id="zend.controller.front.methods.primary.getinstance"><info><title>getInstance()</title></info>
+            
 
             <para>
                 <methodname>getInstance()</methodname> は、フロントコントローラのインスタンスを取得します。
@@ -94,16 +90,14 @@ $front->setParam('noViewRenderer', true);
             <programlisting language="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.front.methods.primary.setcontrollerdirectory">
-            <title>setControllerDirectory() および addControllerDirectory</title>
+        <section xml:id="zend.controller.front.methods.primary.setcontrollerdirectory"><info><title>setControllerDirectory() および addControllerDirectory</title></info>
+            
 
             <para>
-                <methodname>setControllerDirectory()</methodname> は、<link
-                    linkend="zend.controller.dispatcher">ディスパッチャ</link>
-                が <link
-                    linkend="zend.controller.action">アクションコントローラ</link>
+                <methodname>setControllerDirectory()</methodname> は、<link linkend="zend.controller.dispatcher">ディスパッチャ</link>
+                が <link linkend="zend.controller.action">アクションコントローラ</link>
                 クラスファイルをどこから探せばよいのかを指定するメソッドです。
                 単一のパスを指定することもできますし、複数のパスを連想配列で指定することもできます。
             </para>
@@ -141,14 +135,13 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
                 <methodname>getControllerDirectory()</methodname> を使用します。
                 これは、モジュールとディレクトリの組を配列で返します。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.front.methods.primary.addmoduledirectory">
-            <title>addModuleDirectory() および getModuleDirectory()</title>
+        <section xml:id="zend.controller.front.methods.primary.addmoduledirectory"><info><title>addModuleDirectory() および getModuleDirectory()</title></info>
+            
 
             <para>
-                フロントコントローラのひとつの側面として、<link
-                    linkend="zend.controller.modular">モジュラーディレクトリ構造を定義
+                フロントコントローラのひとつの側面として、<link linkend="zend.controller.modular">モジュラーディレクトリ構造を定義
                 </link> して単体のコンポーネントを作成するということがあります。
                 これは "モジュール" と呼ばれます。
             </para>
@@ -171,10 +164,10 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
                 <methodname>getModuleDirectory()</methodname> をコールします。
                 モジュール名を渡すと、指定したモジュールのディレクトリを取得することができます。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.front.methods.primary.dispatch">
-            <title>dispatch()</title>
+        <section xml:id="zend.controller.front.methods.primary.dispatch"><info><title>dispatch()</title></info>
+            
 
             <para>
                 <methodname>dispatch(Zend_Controller_Request_Abstract $request = null,
@@ -193,9 +186,7 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
             </para>
 
             <para>
-                同様に、<methodname>dispatch()</methodname> は <link
-                    linkend="zend.controller.router">ルータ</link> や <link
-                    linkend="zend.controller.dispatcher">ディスパッチャ</link>
+                同様に、<methodname>dispatch()</methodname> は <link linkend="zend.controller.router">ルータ</link> や <link linkend="zend.controller.dispatcher">ディスパッチャ</link>
                 オブジェクトについても登録済みのものがあるかどうかを確認します。
                 もしあればそれを使用し、なければデフォルトのオブジェクトを作成して使用します。
             </para>
@@ -219,10 +210,10 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
                 別のアクションへディスパッチさせた場合などです。
                 すべてが終了したら、フロントコントローラはレスポンスを返します。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.front.methods.primary.run">
-            <title>run()</title>
+        <section xml:id="zend.controller.front.methods.primary.run"><info><title>run()</title></info>
+            
 
             <para>
                 <methodname>Zend_Controller_Front::run($path)</methodname>
@@ -246,11 +237,11 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
 // ディスパッチするまでをいちどでお手軽に行います
 Zend_Controller_Front::run('../application/controllers');
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.controller.front.methods.environment">
-        <title>環境へのアクセス用メソッド群</title>
+    <section xml:id="zend.controller.front.methods.environment"><info><title>環境へのアクセス用メソッド群</title></info>
+        
 
         <para>
             これまでに説明したメソッド以外にもさまざまなアクセス用メソッドが用意されており、
@@ -406,10 +397,10 @@ Zend_Controller_Front::run('../application/controllers');
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.front.methods.params">
-        <title>フロントコントローラのパラメータ</title>
+    <section xml:id="zend.controller.front.methods.params"><info><title>フロントコントローラのパラメータ</title></info>
+        
 
         <para>
             最初のほうで、フロントコントローラはレジストリとしても使用できると説明しました。
@@ -500,25 +491,23 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <emphasis>noViewRenderer</emphasis> を使用して、<link
-                        linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>
+                    <emphasis>noViewRenderer</emphasis> を使用して、<link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>
                     を無効にします。このパラメータを <constant>TRUE</constant> に設定すると、無効となります。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>noErrorHandler</emphasis> を使用して、<link
-                        linkend="zend.controller.plugins.standard.errorhandler">
+                    <emphasis>noErrorHandler</emphasis> を使用して、<link linkend="zend.controller.plugins.standard.errorhandler">
                     エラーハンドラプラグイン</link> を無効にします。
                     このパラメータを <constant>TRUE</constant> に設定すると、無効となります。
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.front.subclassing">
-        <title>フロントコントローラの継承</title>
+    <section xml:id="zend.controller.front.subclassing"><info><title>フロントコントローラの継承</title></info>
+        
 
         <para>
             フロントコントローラを継承する際には、
@@ -555,8 +544,5 @@ class My_Controller_Front extends Zend_Controller_Front
             コントローラディレクトリの保存方法や
             デフォルトルータ/デフォルトディスパッチャを使用するかどうかなどがあるでしょう。
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

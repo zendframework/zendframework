@@ -23,18 +23,12 @@
  */
 namespace Zend\Soap;
 
-use Zend\Uri\Url;
+use DOMDocument,
+    Zend\Uri\Uri;
 
 /**
  * \Zend\Soap\Wsdl
  *
- * @uses       DOMDocument
- * @uses       \Zend\Server\Exception
- * @uses       \Zend\Soap\WsdlException
- * @uses       \Zend\Soap\Wsdl\Strategy\AbstractStrategy
- * @uses       \Zend\Soap\Wsdl\Strategy\AnyType
- * @uses       \Zend\Soap\Wsdl\Strategy\DefaultComplexType
- * @uses       \Zend\Soap\Wsdl\Strategy\StrategyInterface
  * @category   Zend
  * @package    Zend_Soap
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -79,13 +73,13 @@ class Wsdl
      * Constructor
      *
      * @param string  $name Name of the Web Service being Described
-     * @param string|\Zend\URL  $uri URI where the WSDL will be available
+     * @param string|Uri $uri URI where the WSDL will be available
      * @param boolean|string|\Zend\Soap\Wsdl\Strategy $strategy
      */
     public function __construct($name, $uri, $strategy = true)
     {
-        if ($uri instanceof URL) {
-            $uri = $uri->generate();
+        if ($uri instanceof Uri) {
+            $uri = $uri->toString();
         }
         $this->_uri = $uri;
 
@@ -101,7 +95,7 @@ class Wsdl
                     xmlns:xsd='http://www.w3.org/2001/XMLSchema'
                     xmlns:soap-enc='http://schemas.xmlsoap.org/soap/encoding/'
                     xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'></definitions>";
-        $this->_dom = new \DOMDocument();
+        $this->_dom = new DOMDocument();
         if (!$this->_dom->loadXML($wsdl)) {
             throw new Exception\RuntimeException('Unable to create DomDocument');
         } else {
@@ -114,13 +108,13 @@ class Wsdl
     /**
      * Set a new uri for this WSDL
      *
-     * @param  string|\Zend\URL $uri
+     * @param  string|Uri $uri
      * @return \Zend\Server\Wsdl
      */
     public function setUri($uri)
     {
-        if ($uri instanceof URL) {
-            $uri = $uri->generate();
+        if ($uri instanceof Uri) {
+            $uri = $uri->toString();
         }
         $oldUri = $this->_uri;
         $this->_uri = $uri;
@@ -129,7 +123,7 @@ class Wsdl
             // @todo: This is the worst hack ever, but its needed due to design and non BC issues of WSDL generation
             $xml = $this->_dom->saveXML();
             $xml = str_replace($oldUri, $uri, $xml);
-            $this->_dom = new \DOMDocument();
+            $this->_dom = new DOMDocument();
             $this->_dom->loadXML($xml);
         }
 
@@ -361,8 +355,8 @@ class Wsdl
      */
     public function addSoapOperation($binding, $soap_action)
     {
-        if ($soap_action instanceof URL) {
-            $soap_action = $soap_action->generate();
+        if ($soap_action instanceof Uri) {
+            $soap_action = $soap_action->toString();
         }
         $soap_operation = $this->_dom->createElement('soap:operation');
         $soap_operation->setAttribute('soapAction', $soap_action);
@@ -383,8 +377,8 @@ class Wsdl
      */
     public function addService($name, $port_name, $binding, $location)
     {
-        if ($location instanceof URL) {
-            $location = $location->generate();
+        if ($location instanceof Uri) {
+            $location = $location->toString();
         }
         $service = $this->_dom->createElement('service');
         $service->setAttribute('name', $name);

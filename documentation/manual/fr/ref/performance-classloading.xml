@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
-<!-- Reviewed: no -->
-<sect1 id="performance.classloading">
-    <title>Chargement des classes</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.classloading"><info><title>Chargement des classes</title></info>
+    
 
     <para>
         Tous ceux qui ont déjà réalisé le profilage d'une application Zend Framework
@@ -14,20 +12,20 @@
         solutions concrètes pour solutionner ces problèmes.
     </para>
 
-    <sect2 id="performance.classloading.includepath">
-        <title>Comment optimiser mon include_path&#160;?</title>
+    <section xml:id="performance.classloading.includepath"><info><title>Comment optimiser mon include_path ?</title></info>
+        
 
         <para>
             Une optimisation triviale pour accélérer la vitesse de chargement des classes est
             de faire attention à votre <code>include_path</code>. En particulier, vous devriez faire
-            quatre choses&#160;: utilisez des chemins absolus (ou des chemins relatifs à des chemins
+            quatre choses : utilisez des chemins absolus (ou des chemins relatifs à des chemins
             absolus), réduire le nombre des chemins à inclure, définir le dossier de Zend Framework
             le plus tôt possible dans l'<code>include_path</code> et inclure le dossier courant en
             dernier dans votre <code>include_path</code>.
         </para>
 
-        <sect3 id="performance.classloading.includepath.abspath">
-            <title>Utiliser des chemins absolus</title>
+        <section xml:id="performance.classloading.includepath.abspath"><info><title>Utiliser des chemins absolus</title></info>
+            
 
             <para>
                 Tandis que ceci peut sembler une micro-optimisation, le fait est que si vous
@@ -41,7 +39,7 @@
                 le mettre en dur dans votre <filename>php.ini</filename>,
                 <filename>httpd.conf</filename>, ou <filename>.htaccess</filename>. Deuxièmement,
                 vous pouvez utiliser la fonction <code>realpath()</code> de PHP au moment du
-                paramétrage de votre <code>include_path</code>&#160;:
+                paramétrage de votre <code>include_path</code> :
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -54,7 +52,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
 
             <para>
                 Vous <emphasis>pouvez</emphasis> utiliser des chemins relatifs - du moment
-                qu'ils sont relatifs à un chemin absolu&#160;:
+                qu'ils sont relatifs à un chemin absolu :
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -70,10 +68,10 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                 Néanmoins, c'est typiquement une tâche insignifiante de fournir simplement le
                 chemin à <code>realpath()</code>.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="performance.classloading.includepath.reduce">
-            <title>Réduire le nombre de dossier défini dans l'include_path</title>
+        <section xml:id="performance.classloading.includepath.reduce"><info><title>Réduire le nombre de dossier défini dans l'include_path</title></info>
+            
 
             <para>
                 Les chemins d'inclusion sont scannés dans l'ordre dans lequel ils apparaissent
@@ -83,25 +81,25 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                 évidente est de diminuer tout simplement le nombre de chemins dans votre
                 <code>include_path</code> à seulement de ce que vous avez réellement besoin.
                 Regardez chaque chemin que vous avez défini dans votre include_path pour déterminer
-                si vous avez réellement besoin d'une fonctionnalité dans votre application&#160;; si
+                si vous avez réellement besoin d'une fonctionnalité dans votre application ; si
                 ce n'est pas le cas, enlevez le.
             </para>
 
             <para>
                 Une autre optimisation consiste en la combinaison de chemins. Par exemple,
-                Zend Framework suit la convention de nommage PEAR&#160;; ainsi , si vous utilisez
+                Zend Framework suit la convention de nommage PEAR ; ainsi , si vous utilisez
                 des librairies PEAR (ou d'autres framework ou librairies de composants qui
                 respectent la convention de nommage PEAR), essayez de mettre toutes ces librairies
                 dans le même chemin de l'<code>include_path</code>. Ceci peut souvent être réalisé
                 par quelque chose d'assez simple comme de créer des liens symboliques vers une ou
                 plusieurs bibliothèques dans un dossier commun.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="performance.classloading.includepath.early">
-            <title>
+        <section xml:id="performance.classloading.includepath.early"><info><title>
                 Définir le dossier de Zend Framework le plus tôt possible dans l'include_path
-            </title>
+            </title></info>
+            
 
             <para>
                 Pour continuer avec les suggestions précédentes, une autre optimisation
@@ -110,10 +108,10 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                 liste. Ceci permet de s'assurer les fichiers de Zend Framework à inclure le sont dès
                 le premier scan.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="performance.classloading.includepath.currentdir">
-            <title>Définir le dossier courant le plus tard possible ou pas du tout</title>
+        <section xml:id="performance.classloading.includepath.currentdir"><info><title>Définir le dossier courant le plus tard possible ou pas du tout</title></info>
+            
 
             <para>
                 La plupart des exemples d'<code>include_path</code> montre l'utilisation du
@@ -126,8 +124,8 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                 la liste.
             </para>
 
-            <example id="performance.classloading.includepath.example">
-                <title>Exemple : optimisation de l'include_path</title>
+            <example xml:id="performance.classloading.includepath.example"><info><title>Exemple : optimisation de l'include_path</title></info>
+                
 
                 <para>
                     Essayons de mettre ensemble toutes ces suggestions. Considérons que nous
@@ -141,7 +139,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                     Premièrement, nous allons créer un dossier pour les librairies dans notre
                     projet. Dans ce même dossier, nous allons créer un lien symbolique vers notre
                     dossier Zend Framework "<filename>library/Zend</filename>", ainsi que les
-                    dossiers nécessaires dans notre installation PEAR&#160;:
+                    dossiers nécessaires dans notre installation PEAR :
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -168,9 +166,9 @@ library
                 <para>
                     Nous emprunterons des idées à chacune des suggestions ci-dessus : nous
                     utiliserons les chemins absolus, déterminé en utilisant le
-                    <code>realpath()</code>&#160;; nous positionnerons Zend Framework au plus tôt
+                    <code>realpath()</code> ; nous positionnerons Zend Framework au plus tôt
                     dans l'<code>include_path</code> ; nous avons déjà vérifié les chemins
-                    d'inclusions nécessaires&#160;; et nous mettrons le dossier courant comme
+                    d'inclusions nécessaires ; et nous mettrons le dossier courant comme
                     dernier chemin. En fait, nous faisons tout bien ici - nous allons donc terminer
                     avec seulement deux chemins.
                 </para>
@@ -183,11 +181,11 @@ $paths = array(
 set_include_path(implode(PATH_SEPARATOR, $paths));
 ]]></programlisting>
             </example>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="performance.classloading.striprequires">
-        <title>Comment éliminer les déclarations require_once non nécessaires ?</title>
+    <section xml:id="performance.classloading.striprequires"><info><title>Comment éliminer les déclarations require_once non nécessaires ?</title></info>
+        
 
         <para>
             Le chargement tardif ("lazy loading") est une technique d'optimisation conçue pour
@@ -207,14 +205,14 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
             maximiser les performances de l'autoloader.
         </para>
 
-        <sect3 id="performance.classloading.striprequires.sed">
-            <title>Effacer les appels de require_once avec find et sed</title>
+        <section xml:id="performance.classloading.striprequires.sed"><info><title>Effacer les appels de require_once avec find et sed</title></info>
+            
 
             <para>
                 Une manière simple d'effacer les appels require_once est d'utiliser les
                 utilitaires Unix "find" en conjonction avec "sed" pour passe en commentaires tous
                 les appels. Essayez d'exécuter les commandes suivantes (où "%" indique le prompteur
-                shell)&#160;:
+                shell) :
             </para>
 
             <programlisting language="shell"><![CDATA[
@@ -240,24 +238,24 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
                 les performances de votre application en production. Il est à noter, cependant, que
                 si vous utilisez cette technique, vous <emphasis>devez</emphasis> utiliser
                 l'autoloading ; vous pouvez l'activer dans votre fichier
-                <filename>public/index.php</filename> en ajoutant le code suivant&#160;:
+                <filename>public/index.php</filename> en ajoutant le code suivant :
             </para>
 
             <programlisting language="php"><![CDATA[
 require_once 'Zend/Loader/Autoloader.php';
 Zend_Loader_Autoloader::getInstance();
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="performance.classloading.pluginloader">
-        <title>Comment accélérer le chargement des plugins&#160;?</title>
+    <section xml:id="performance.classloading.pluginloader"><info><title>Comment accélérer le chargement des plugins ?</title></info>
+        
 
         <para>
             Certains composants utilisent les plugins, ce qui vous permet de créer vos propres
             classes afin de les utiliser avec le composant, de même que de surcharger les plugins
             standard existants embarqués dans Zend Framework. Ceci fournit une importante
-            flexibilité au framework, mais a un prix&#160;: le chargement des plugins est une tâche
+            flexibilité au framework, mais a un prix : le chargement des plugins est une tâche
             assez coûteuse.
         </para>
 
@@ -275,59 +273,59 @@ Zend_Loader_Autoloader::getInstance();
         <para>
             Multipliez ceci par le nombre de composants qui utilisent le PluginLoader, et vous
             aurez une idée de l'importance de ce problème. Au moment de l'écriture de ce document,
-            les composants suivants utilisent le PluginLoader&#160;:
+            les composants suivants utilisent le PluginLoader :
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Action_HelperBroker</classname>&#160;: aides
+                    <classname>Zend_Controller_Action_HelperBroker</classname> : aides
                     d'action
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <classname>Zend_Dojo</classname>&#160;: aides de vues, éléments de formulaires
+                    <classname>Zend_Dojo</classname> : aides de vues, éléments de formulaires
                     et décorateurs
                 </para>
             </listitem>
 
             <listitem>
-                <para><classname>Zend_File_Transfer</classname>&#160;: adaptateurs</para>
+                <para><classname>Zend_File_Transfer</classname> : adaptateurs</para>
             </listitem>
 
             <listitem>
                 <para>
-                    <classname>Zend_Filter_Inflector</classname>&#160;: filtres (utilisé par l'aide
+                    <classname>Zend_Filter_Inflector</classname> : filtres (utilisé par l'aide
                     d'action <code>ViewRenderer</code> et <classname>Zend_Layout</classname>)
                 </para>
             </listitem>
 
             <listitem>
-                <para><classname>Zend_Filter_Input</classname>&#160;: filtres et validateurs</para>
+                <para><classname>Zend_Filter_Input</classname> : filtres et validateurs</para>
             </listitem>
 
             <listitem>
                 <para>
-                    <classname>Zend_Form</classname>&#160;: éléments, validateurs, filtres,
+                    <classname>Zend_Form</classname> : éléments, validateurs, filtres,
                     décorateurs, captcha et adaptateur pour les transferts de fichiers
                 </para>
             </listitem>
 
             <listitem>
-                <para><classname>Zend_Paginator</classname>&#160;: adaptateurs</para>
+                <para><classname>Zend_Paginator</classname> : adaptateurs</para>
             </listitem>
 
             <listitem>
-                <para><classname>Zend_View</classname>&#160;: aides de vues, filtres</para>
+                <para><classname>Zend_View</classname> : aides de vues, filtres</para>
             </listitem>
         </itemizedlist>
 
-        <para>Comment réduire le nombre des appels réalisés&#160;?</para>
+        <para>Comment réduire le nombre des appels réalisés ?</para>
 
-        <sect3 id="performance.classloading.pluginloader.includefilecache">
-            <title>Utiliser le fichier de cache des inclusions du PluginLoader</title>
+        <section xml:id="performance.classloading.pluginloader.includefilecache"><info><title>Utiliser le fichier de cache des inclusions du PluginLoader</title></info>
+            
 
             <para>
                 Zend Framework 1.7.0 ajoute un fichier de cache des inclusions au
@@ -338,10 +336,9 @@ Zend_Loader_Autoloader::getInstance();
             </para>
 
             <para>
-                La documentation du PluginLoader <link
-                linkend="zend.loader.pluginloader.performance.example">inclue un exemple complet de
+                La documentation du PluginLoader <link linkend="zend.loader.pluginloader.performance.example">inclue un exemple complet de
                 son utilisation</link>.
             </para>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

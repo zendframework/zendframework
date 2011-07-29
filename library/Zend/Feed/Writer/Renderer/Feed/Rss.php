@@ -22,21 +22,15 @@
 * @namespace
 */
 namespace Zend\Feed\Writer\Renderer\Feed;
-use Zend\Feed\Writer\Renderer;
-use Zend\Feed\Writer;
-use Zend\Uri;
-use Zend\Date;
+
+use DOMDocument,
+    DOMElement,
+    Zend\Date,
+    Zend\Feed\Writer,
+    Zend\Feed\Writer\Renderer,
+    Zend\Uri;
 
 /**
-* @uses \DOMDocument
-* @uses \Zend\Date\Date
-* @uses \Zend\Feed\Exception
-* @uses \Zend\Feed\Writer\Feed\Feed
-* @uses \Zend\Feed\Writer\Renderer\Entry\RSS
-* @uses \Zend\Feed\Writer\Renderer\RendererAbstract
-* @uses \Zend\Feed\Writer\Renderer\RendererInterface
-* @uses \Zend\Uri\Uri
-* @uses \Zend\Version
 * @category Zend
 * @package Zend_Feed_Writer
 * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -65,7 +59,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
         if (!$this->_container->getEncoding()) {
             $this->_container->setEncoding('UTF-8');
         }
-        $this->_dom = new \DOMDocument('1.0', $this->_container->getEncoding());
+        $this->_dom = new DOMDocument('1.0', $this->_container->getEncoding());
         $this->_dom->formatOutput = true;
         $this->_dom->substituteEntities = false;
         $rss = $this->_dom->createElement('rss');
@@ -121,11 +115,11 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
     /**
      * Set feed language
      * 
-     * @param \DOMDocument $dom 
-     * @param \DOMElement $root 
+     * @param DOMDocument $dom 
+     * @param DOMElement $root 
      * @return void
      */
-    protected function _setLanguage(\DOMDocument $dom, \DOMElement $root)
+    protected function _setLanguage(DOMDocument $dom, DOMElement $root)
     {
         $lang = $this->getDataContainer()->getLanguage();
         if (!$lang) {
@@ -139,11 +133,11 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
     /**
      * Set feed title
      * 
-     * @param \DOMDocument $dom 
-     * @param \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setTitle(\DOMDocument $dom, \DOMElement $root)
+    protected function _setTitle(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getTitle()) {
             $message = 'RSS 2.0 feed elements MUST contain exactly one'
@@ -166,11 +160,11 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
     /**
      * Set feed description
      * 
-     * @param \DOMDocument $dom 
-     * @param \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setDescription(\DOMDocument $dom, \DOMElement $root)
+    protected function _setDescription(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getDescription()) {
             $message = 'RSS 2.0 feed elements MUST contain exactly one'
@@ -192,11 +186,11 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
     /**
      * Set date feed was last modified
      * 
-     * @param \DOMDocument $dom 
-     * @param \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setDateModified(\DOMDocument $dom, \DOMElement $root)
+    protected function _setDateModified(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getDateModified()) {
             return;
@@ -213,11 +207,11 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
     /**
      * Set feed generator string
      * 
-     * @param \DOMDocument $dom 
-     * @param \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setGenerator(\DOMDocument $dom, \DOMElement $root)
+    protected function _setGenerator(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getGenerator()) {
             $this->getDataContainer()->setGenerator('Zend_Feed_Writer',
@@ -241,11 +235,11 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
     /**
      * Set link to feed
      * 
-     * @param \DOMDocument $dom 
-     * @param \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setLink(\DOMDocument $dom, \DOMElement $root)
+    protected function _setLink(DOMDocument $dom, DOMElement $root)
     {
         $value = $this->getDataContainer()->getLink();
         if(!$value) {
@@ -263,7 +257,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
         $root->appendChild($link);
         $text = $dom->createTextNode($value);
         $link->appendChild($text);
-        if (!Uri\Url::validate($value)) {
+        if (!Uri\UriFactory::factory($value)->isValid()) {
             $link->setAttribute('isPermaLink', 'false');
         }
     }
@@ -271,11 +265,11 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
     /**
      * Set feed authors
      * 
-     * @param \DOMDocument $dom 
-     * @param \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setAuthors(\DOMDocument $dom, \DOMElement $root)
+    protected function _setAuthors(DOMDocument $dom, DOMElement $root)
     {
         $authors = $this->getDataContainer()->getAuthors();
         if (!$authors || empty($authors)) {
@@ -296,11 +290,11 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
     /**
      * Set feed copyright
      * 
-     * @param \DOMDocument $dom 
-     * @param \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setCopyright(\DOMDocument $dom, \DOMElement $root)
+    protected function _setCopyright(DOMDocument $dom, DOMElement $root)
     {
         $copyright = $this->getDataContainer()->getCopyright();
         if (!$copyright) {
@@ -315,18 +309,20 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
     /**
      * Set feed channel image
      * 
-     * @param \DOMDocument $dom 
-     * @param \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setImage(\DOMDocument $dom, \DOMElement $root)
+    protected function _setImage(DOMDocument $dom, DOMElement $root)
     {
         $image = $this->getDataContainer()->getImage();
         if (!$image) {
             return;
         }
+
         if (!isset($image['title']) || empty($image['title'])
-        || !is_string($image['title'])) {
+            || !is_string($image['title'])
+        ) {
             $message = 'RSS 2.0 feed images must include a title';
             $exception = new Writer\Exception($message);
             if (!$this->_ignoreExceptions) {
@@ -336,8 +332,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
                 return;
             }
         }
+
         if (empty($image['link']) || !is_string($image['link'])
-        || !Uri\Url::validate($image['link'])) {
+            || !Uri\UriFactory::factory($image['link'])->isValid()
+        ) {
             $message = 'Invalid parameter: parameter \'link\''
             . ' must be a non-empty string and valid URI/IRI';
             $exception = new Writer\Exception($message);
@@ -348,24 +346,30 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
                 return;
             }
         }
-        $img = $dom->createElement('image');
+
+        $img   = $dom->createElement('image');
         $root->appendChild($img);
-        $url = $dom->createElement('url');
-        $text = $dom->createTextNode($image['uri']);
+
+        $url   = $dom->createElement('url');
+        $text  = $dom->createTextNode($image['uri']);
         $url->appendChild($text);
+
         $title = $dom->createElement('title');
-        $text = $dom->createTextNode($image['title']);
+        $text  = $dom->createTextNode($image['title']);
         $title->appendChild($text);
-        $link = $dom->createElement('link');
-        $text = $dom->createTextNode($image['link']);
+
+        $link  = $dom->createElement('link');
+        $text  = $dom->createTextNode($image['link']);
         $link->appendChild($text);
+
         $img->appendChild($url);
         $img->appendChild($title);
         $img->appendChild($link);
+
         if (isset($image['height'])) {
             if (!ctype_digit((string) $image['height']) || $image['height'] > 400) {
                 $message = 'Invalid parameter: parameter \'height\''
-                . ' must be an integer not exceeding 400';
+                         . ' must be an integer not exceeding 400';
                 $exception = new Writer\Exception($message);
                 if (!$this->_ignoreExceptions) {
                     throw $exception;
@@ -375,14 +379,14 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
                 }
             }
             $height = $dom->createElement('height');
-            $text = $dom->createTextNode($image['height']);
+            $text   = $dom->createTextNode($image['height']);
             $height->appendChild($text);
             $img->appendChild($height);
         }
         if (isset($image['width'])) {
             if (!ctype_digit((string) $image['width']) || $image['width'] > 144) {
                 $message = 'Invalid parameter: parameter \'width\''
-                . ' must be an integer not exceeding 144';
+                         . ' must be an integer not exceeding 144';
                 $exception = new Writer\Exception($message);
                 if (!$this->_ignoreExceptions) {
                     throw $exception;
@@ -392,14 +396,14 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
                 }
             }
             $width = $dom->createElement('width');
-            $text = $dom->createTextNode($image['width']);
+            $text  = $dom->createTextNode($image['width']);
             $width->appendChild($text);
             $img->appendChild($width);
         }
         if (isset($image['description'])) {
             if (empty($image['description']) || !is_string($image['description'])) {
                 $message = 'Invalid parameter: parameter \'description\''
-                . ' must be a non-empty string';
+                         . ' must be a non-empty string';
                 $exception = new Writer\Exception($message);
                 if (!$this->_ignoreExceptions) {
                     throw $exception;
@@ -418,11 +422,11 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
     /**
      * Set date feed was created
      * 
-     * @param \DOMDocument $dom 
-     * @param \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setDateCreated(\DOMDocument $dom, \DOMElement $root)
+    protected function _setDateCreated(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getDateCreated()) {
             return;
@@ -437,11 +441,11 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
     /**
      * Set date feed last build date
      * 
-     * @param \DOMDocument $dom 
-     * @param \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setLastBuildDate(\DOMDocument $dom, \DOMElement $root)
+    protected function _setLastBuildDate(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getLastBuildDate()) {
             return;
@@ -458,11 +462,11 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
     /**
      * Set base URL to feed links
      * 
-     * @param \DOMDocument $dom 
-     * @param \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setBaseUrl(\DOMDocument $dom, \DOMElement $root)
+    protected function _setBaseUrl(DOMDocument $dom, DOMElement $root)
     {
         $baseUrl = $this->getDataContainer()->getBaseUrl();
         if (!$baseUrl) {
@@ -474,11 +478,11 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\Renderer
     /**
      * Set feed categories
      * 
-     * @param \DOMDocument $dom 
-     * @param \DOMElement $root 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
      * @return void
      */
-    protected function _setCategories(\DOMDocument $dom, \DOMElement $root)
+    protected function _setCategories(DOMDocument $dom, DOMElement $root)
     {
         $categories = $this->getDataContainer()->getCategories();
         if (!$categories) {

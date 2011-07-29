@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 17880 -->
-<sect2 id="zend.log.writers.syslog">
-    <title>システムログへの書き込み</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers.syslog"><info><title>システムログへの書き込み</title></info>
+    
 
     <para>
         <classname>Zend_Log_Writer_Syslog</classname>は、
@@ -43,7 +41,7 @@ $writer->setApplicationName('BarBaz');
 
     <para>
         コンストラクタ、またはアクセッサでログ機能を指定するかもしれません。
-        それは、<ulink url="http://php.net/openlog">openlog() マニュアル</ulink>で定義される
+        それは、<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/openlog">openlog() マニュアル</link>で定義される
         <methodname>openlog()</methodname>定数のうちの１つでなければなりません。
     </para>
 
@@ -61,4 +59,4 @@ $writer->setFacility(LOG_USER);
         内部的には、それらは適切な<methodname>syslog()</methodname>
         優先度定数にマップされます。
     </para>
-</sect2>
+</section>

@@ -1,20 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21994 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.boolean">
-    <title>Boolean</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.boolean"><info><title>Boolean</title></info>
+    
 
     <para>
         Ce filtre transforme toute donnée en valeur <constant>BOOLEENNE</constant>. Ce peut être
         utile en travaillant avec des bases de données ou des formulaires.
     </para>
 
-    <sect3 id="zend.filter.set.boolean.default">
-        <title>Comportement par défaut de Zend_Filter_Boolean</title>
+    <section xml:id="zend.filter.set.boolean.default"><info><title>Comportement par défaut de Zend_Filter_Boolean</title></info>
+        
 
         <para>
             Par défaut, ce filtre caste (transtype) sa valeur vers un
-            <constant>BOOLEEN</constant>&#160;; en d'autres termes, il fonctionne comme un appel
+            <constant>BOOLEEN</constant> ; en d'autres termes, il fonctionne comme un appel
             PHP <command>(boolean) $value</command>.
         </para>
 
@@ -31,10 +29,10 @@ $result = $filter->filter($value);
             <constant>BOOLEEN</constant> comme le cast PHP vers le
             <constant>BOOLEEN</constant>.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.boolean.types">
-        <title>Changer le comportement de Zend_Filter_Boolean</title>
+    <section xml:id="zend.filter.set.boolean.types"><info><title>Changer le comportement de Zend_Filter_Boolean</title></info>
+        
 
         <para>
             Quelques fois, le cast vers tel que <command>(boolean)</command> peut ne pas suffire.
@@ -43,75 +41,75 @@ $result = $filter->filter($value);
         </para>
 
         <para>
-            Les types suivants sont acceptés&#160;:
+            Les types suivants sont acceptés :
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>booléen</emphasis>&#160;: retourne la valeur booléenne telle quelle.
+                    <emphasis>booléen</emphasis> : retourne la valeur booléenne telle quelle.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>entier</emphasis>&#160;: convertit l'entier <emphasis>0</emphasis>
+                    <emphasis>entier</emphasis> : convertit l'entier <emphasis>0</emphasis>
                     en <constant>FALSE</constant>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>flottant</emphasis>&#160;: convertit le flottant
+                    <emphasis>flottant</emphasis> : convertit le flottant
                     <emphasis>0.0</emphasis> en <constant>FALSE</constant>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>chaine</emphasis>&#160;: convertit la chaîne vide
+                    <emphasis>chaine</emphasis> : convertit la chaîne vide
                     <emphasis>''</emphasis> en <constant>FALSE</constant>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>zero</emphasis>&#160;: convertit la chaîne contenant zéro
+                    <emphasis>zero</emphasis> : convertit la chaîne contenant zéro
                     (<emphasis>'0'</emphasis>) en <constant>FALSE</constant>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>empty_array</emphasis>&#160;: convertit le tableau vide
+                    <emphasis>empty_array</emphasis> : convertit le tableau vide
                     <emphasis>array()</emphasis> en <constant>FALSE</constant>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>null</emphasis>&#160;: convertit une valeur <constant>NULL</constant>
+                    <emphasis>null</emphasis> : convertit une valeur <constant>NULL</constant>
                     en <constant>FALSE</constant>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>php</emphasis>&#160;: convertit une valeur, comme
+                    <emphasis>php</emphasis> : convertit une valeur, comme
                     <acronym>PHP</acronym> le ferait, en <constant>BOOLEEN</constant>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>false_string</emphasis>&#160;: convertit une chaine contenant le mot
+                    <emphasis>false_string</emphasis> : convertit une chaine contenant le mot
                     "false" en booléen <constant>FALSE</constant>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>yes</emphasis>&#160;: convertit une chaîne localisée contenant le mot
+                    <emphasis>yes</emphasis> : convertit une chaîne localisée contenant le mot
                     "no" en <constant>FALSE</constant>.
                 </para>
             </listitem>
@@ -129,8 +127,8 @@ $result = $filter->filter($value);
         </para>
 
         <para>
-            Pour préciser les options ci-dessus, plusieurs manières sont données&#160;: utilisez des
-            chaînes, des constantes, ajoutez les, utilisez des tableaux... Voyez l'exemple&#160;:
+            Pour préciser les options ci-dessus, plusieurs manières sont données : utilisez des
+            chaînes, des constantes, ajoutez les, utilisez des tableaux... Voyez l'exemple :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -164,10 +162,10 @@ $filter = new Zend_Filter_Boolean(array(
             préciser les options. Pour préciser ces options après la création de votre objet,
             utilisez la méthode <methodname>setType()</methodname>.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.boolean.localized">
-        <title>Booléens localisés</title>
+    <section xml:id="zend.filter.set.boolean.localized"><info><title>Booléens localisés</title></info>
+        
 
         <para>
             Comme déja précisé, <classname>Zend_Filter_Boolean</classname> reconnait les chaînes
@@ -196,10 +194,10 @@ $filter->setLocale('en');
 // retourne true
 $filter->filter('yes');
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.boolean.casting">
-        <title>Désactiver le cast (transtypage)</title>
+    <section xml:id="zend.filter.set.boolean.casting"><info><title>Désactiver le cast (transtypage)</title></info>
+        
 
         <para>
             Il peut arriver de ne vouloir que reconnaitre <constant>TRUE</constant> ou
@@ -216,8 +214,8 @@ $filter->filter('yes');
             <property>casting</property> vaut <constant>FALSE</constant>.
         </para>
 
-        <table id="zend.filter.set.boolean.casting.table">
-            <title>Utilisation sans transtypage</title>
+        <table xml:id="zend.filter.set.boolean.casting.table"><info><title>Utilisation sans transtypage</title></info>
+            
             <tgroup cols="3">
                 <thead>
                     <row>
@@ -259,7 +257,7 @@ $filter->filter('yes');
 
                         <entry>""</entry>
 
-                        <entry />
+                        <entry/>
                     </row>
 
                     <row>
@@ -275,7 +273,7 @@ $filter->filter('yes');
 
                         <entry><methodname>array()</methodname></entry>
 
-                        <entry />
+                        <entry/>
                     </row>
 
                     <row>
@@ -283,7 +281,7 @@ $filter->filter('yes');
 
                         <entry><constant>NULL</constant></entry>
 
-                        <entry />
+                        <entry/>
                     </row>
 
                     <row>
@@ -307,7 +305,7 @@ $filter->filter('yes');
 
         <para>
             L'exemple qui suit illustre l'utilisation de l'option
-            <property>casting</property>&#160;:
+            <property>casting</property> :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -325,5 +323,5 @@ echo $filter->filter(1);
 // retourne la valeur
 echo $filter->filter(2);
 ]]></programlisting>
-    </sect3>
-</sect2>
+    </section>
+</section>

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 21586 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.feed.modifying-feed">
-    <title>Modifier la structure du flux ou des entrées</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.modifying-feed"><info><title>Modifier la structure du flux ou des entrées</title></info>
+    
 
     <para>
         La syntaxe intuitive de <classname>Zend_Feed</classname> peut aussi bien servir à
@@ -11,8 +9,8 @@
         ensuite ce code dans un fichier ou le renvoyer au serveur.
     </para>
 
-    <example id="zend.feed.modifying-feed.example.modifying">
-        <title>Modifier l'entrée existante d'un flux</title>
+    <example xml:id="zend.feed.modifying-feed.example.modifying"><info><title>Modifier l'entrée existante d'un flux</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $flux = new Zend_Feed_Atom('http://atom.exemple.com/flux/1');
@@ -34,7 +32,7 @@ echo $entree->saveXML();
             Notez que le code ci-dessus fonctionnera même si l'entrée existante ne possédait
             pas de balise <code>author</code>. Vous pouvez utiliser autant de fois que vous le
             souhaitez l'opérateur d'accès <code>-&gt;</code> dans une instruction
-            d'affectation&#160;; si nécessaire, les niveaux intermédiaires seront créés pour vous
+            d'affectation ; si nécessaire, les niveaux intermédiaires seront créés pour vous
             automatiquement.
         </para>
 
@@ -50,11 +48,11 @@ echo $entree->saveXML();
         autre espace de noms.
     </para>
 
-    <example id="zend.feed.modifying-feed.example.creating">
-        <title>
+    <example xml:id="zend.feed.modifying-feed.example.creating"><info><title>
             Créer une entrée Atom dont les éléments appartiennent à un espace de noms
             personnalisé
-        </title>
+        </title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $entree = new Zend_Feed_Entry_Atom();
@@ -76,4 +74,4 @@ $entree->{'monen:conteneur_elt'}
 echo $entree->saveXML();
 ]]></programlisting>
     </example>
-</sect1>
+</section>

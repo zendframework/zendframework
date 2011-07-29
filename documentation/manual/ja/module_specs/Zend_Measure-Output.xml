@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20827 -->
-<sect1 id="zend.measure.output">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.output"><info><title>計測値の出力</title></info>
 
-    <title>計測値の出力</title>
+    
 
     <para>
         計測値は、さまざまな方法で出力できます。
@@ -29,14 +27,14 @@
         </link>
     </para>
 
-    <sect2 id="zend.measure.output.auto">
+    <section xml:id="zend.measure.output.auto"><info><title>自動的な出力</title></info>
 
-        <title>自動的な出力</title>
+        
 
         <para>
             <classname>Zend_Measure</classname> は、文字列の自動的な出力をサポートしています。
-            <example id="zend.measure.output.auto.example-1">
-                <title>自動的な出力</title>
+            <example xml:id="zend.measure.output.auto.example-1"><info><title>自動的な出力</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
 $mystring = "1.234.567,89";
@@ -49,29 +47,29 @@ echo $unit;
             </example>
         </para>
 
-        <note>
-            <title>計測値の出力</title>
+        <note><info><title>計測値の出力</title></info>
+            
             <para>
                 出力を行うには、単に
-                <ulink url="http://php.net/echo"><code>echo</code>
-                </ulink>
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/echo"><code>echo</code>
+                </link>
                 あるいは
-                <ulink url="http://php.net/print"><code>print</code>
-                </ulink>
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/print"><code>print</code>
+                </link>
                 を使用するだけです。
             </para>
         </note>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.measure.output.value">
+    <section xml:id="zend.measure.output.value"><info><title>値の出力</title></info>
 
-        <title>値の出力</title>
+        
 
         <para>
             計測値の値だけを出力するには <methodname>getValue()</methodname> を使用します。
-            <example id="zend.measure.output.value.example-1">
-                <title>値の出力</title>
+            <example xml:id="zend.measure.output.value.example-1"><info><title>値の出力</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
 $mystring = "1.234.567,89";
@@ -90,16 +88,16 @@ echo $unit->getValue();
             これは、出力結果の精度を設定するものです。標準の精度は
             '<code>2</code>' です。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.measure.output.unit">
+    <section xml:id="zend.measure.output.unit"><info><title>単位つきの出力</title></info>
 
-        <title>単位つきの出力</title>
+        
 
         <para>
             関数 <methodname>getType()</methodname> は、現在の単位を返します。
-            <example id="zend.measure.output.unit.example-1">
-                <title>単位の出力</title>
+            <example xml:id="zend.measure.output.unit.example-1"><info><title>単位の出力</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
 $mystring = "1.234.567,89";
@@ -112,11 +110,11 @@ echo $unit->getType();
             </example>
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.measure.output.localized">
+    <section xml:id="zend.measure.output.localized"><info><title>ローカライズされた文字列での出力</title></info>
 
-        <title>ローカライズされた文字列での出力</title>
+        
 
         <para>
             文字列を出力する際は、通常はユーザの国にあわせた書式にしたくなることでしょう。
@@ -124,9 +122,6 @@ echo $unit->getType();
             この機能は、将来のリリースでサポートされる予定です。
         </para>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

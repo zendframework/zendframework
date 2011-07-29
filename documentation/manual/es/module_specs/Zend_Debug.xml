@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 20766 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.debug.dumping">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.debug.dumping"><info><title>Mostrar información de variables(Dumping Variables)</title></info>
 
-    <title>Mostrar información de variables(Dumping Variables)</title>
+    
 
     <para>
         El método estático
@@ -15,8 +13,8 @@
         especiales, o la depuración del entorno.
     </para>
 
-    <example id="zend.debug.dumping.example">
-        <title>Ejemplo del método dump()</title>
+    <example xml:id="zend.debug.dumping.example"><info><title>Ejemplo del método dump()</title></info>
+        
         <programlisting language="php"><![CDATA[
 Zend_Debug::dump($var, $label=null, $echo=true);
 ]]></programlisting>
@@ -61,24 +59,24 @@ Zend_Debug::dump($var, $label=null, $echo=true);
         <methodname>Zend_Debug::dump()</methodname>
         envuelve la función de
         <acronym>PHP</acronym>
-        <ulink url="http://php.net/var_dump">
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/var_dump">
             <methodname>var_dump()</methodname>
-        </ulink>
+        </link>
         .
         Si el flujo de salida es detectado como una presentación de la web, la
         salida de
         <methodname>var_dump()</methodname>
         es escapada usando
-        <ulink url="http://php.net/htmlspecialchars">
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/htmlspecialchars">
             <methodname>htmlspecialchars()</methodname>
-        </ulink>
+        </link>
         y envuelta con el tag (X)HTML
         <command>&lt;pre&gt;</command>
         .
     </para>
 
-    <tip>
-        <title>Depurando con Zend_Log</title>
+    <tip><info><title>Depurando con Zend_Log</title></info>
+        
         <para>
             Usar
             <methodname>Zend_Debug::dump()</methodname>
@@ -103,7 +101,4 @@ Zend_Debug::dump($var, $label=null, $echo=true);
         </para>
     </tip>
 
-</sect1>
-    <!--
-    vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 20765 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.config.adapters.xml">
-    <title>Zend_Config_Xml</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.xml"><info><title>Zend_Config_Xml</title></info>
+    
     <para>
         <classname>Zend_Config_Xml</classname>
         permite a los desarrolladores almacenar
@@ -35,8 +33,8 @@
         este atributo se corresponde con la sección de la cual los datos son
         heredados por la sección extendida..
     </para>
-    <note>
-        <title>Tipo devuelto</title>
+    <note><info><title>Tipo devuelto</title></info>
+        
         <para>
             Los datos de configuración que se leen en
             <classname>Zend_Config_Xml</classname>
@@ -45,8 +43,8 @@
             desarrolladores para que se ajuste a sus necesidades particulares.
         </para>
     </note>
-    <example id="zend.config.adapters.xml.example.using">
-        <title>Usando Zend_Config_Xml</title>
+    <example xml:id="zend.config.adapters.xml.example.using"><info><title>Usando Zend_Config_Xml</title></info>
+        
         <para>
             Este ejemplo ilustra un uso básico de
             <classname>Zend_Config_Xml</classname>
@@ -109,8 +107,8 @@ echo $config->database->params->host;   // muestra "dev.example.com"
 echo $config->database->params->dbname; // muestra "dbname"
 ]]></programlisting>
     </example>
-    <example id="zend.config.adapters.xml.example.attributes">
-        <title>Usando atributos de etiqueta en Zend_Config_Xml</title>
+    <example xml:id="zend.config.adapters.xml.example.attributes"><info><title>Usando atributos de etiqueta en Zend_Config_Xml</title></info>
+        
         <para>
             Zend_Config_Xml también soporta dos formas adicionales de definir
             nodos en la
@@ -177,8 +175,8 @@ echo $config->database->params->dbname; // muestra "dbname"
 </configdata>
 ]]></programlisting>
     </example>
-    <note>
-        <title>XML strings</title>
+    <note><info><title>XML strings</title></info>
+        
         <para>
             <classname>Zend_Config_Xml</classname>
             is able to load an
@@ -217,8 +215,8 @@ $config = new Zend_Config_Xml($string, 'staging');
 ]]></programlisting>
     </note>
 
-    <note>
-        <title>Zend_Config XML namespace</title>
+    <note><info><title>Zend_Config XML namespace</title></info>
+        
         <para>
             <classname>Zend_Config</classname>
             comes with it's own
@@ -272,8 +270,4 @@ $config = new Zend_Config_Xml($string, 'staging');
 echo $config->includePath; // Prints "/var/www/something/library"
 ]]></programlisting>
     </note>
-</sect1>
-
-    <!--
-vim:se ts=4 sw=4 et:
--->
+</section>

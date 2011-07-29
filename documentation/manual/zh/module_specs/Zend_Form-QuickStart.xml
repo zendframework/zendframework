@@ -1,12 +1,13 @@
-<sect1 id="zend.form.quickstart">
-    <title>Zend_Form 快速起步 </title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.quickstart"><info><title>Zend_Form 快速起步 </title></info>
+    
 
     <para>
         本快速起步指南覆盖使用 <code>Zend_Form</code> 创建、校验和解析表单的基础。
     </para>
 
-    <sect2 id="zend.form.quickstart.create">
-        <title> 创建表单对象 </title>
+    <section xml:id="zend.form.quickstart.create"><info><title> 创建表单对象 </title></info>
+        
 
         <para>
             创建表单对象非常简单：只要实现 <code>Zend_Form</code>：
@@ -40,10 +41,10 @@ $form->setAction('/resource/process')
         <programlisting role="php"><![CDATA[<?php
 $form->setAttrib('id', 'login');
 ?>]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.elements">
-        <title> 添加表单元素 </title>
+    <section xml:id="zend.form.quickstart.elements"><info><title> 添加表单元素 </title></info>
+        
 
         <para>
             没有元素，表单就什么都不是。<code>Zend_Form</code> 带有一些缺省的通过 <code>Zend_View</code> 助手解析 XHTML 的元素：
@@ -200,10 +201,10 @@ $form->addElement('text', 'username', array(
         <note><para>
             如果你发现在许多地方用同样的选项来设置元素，可以考虑创建自己的 <code>Zend_Form_Element</code> 的子类并使用它，这样长远来说会减少很多打字的任务。
         </para></note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.render">
-        <title> 解析（Render）表单 </title>
+    <section xml:id="zend.form.quickstart.render"><info><title> 解析（Render）表单 </title></info>
+        
 
         <para>
             解析表单很简单，大部分元素使用  <code>Zend_View</code> 助手来解析，这样需要视图对象来解析。除了这以外，还有两个方法：使用表单的 render() 方法或简单地 echo 它。
@@ -284,10 +285,10 @@ $element->setOrder(10);
         <programlisting role="php"><![CDATA[<?php
 $form->addElement('text', 'username', array('order' => 10));
 ?>]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.validate">
-        <title> 检查表单是否有效 </title>
+    <section xml:id="zend.form.quickstart.validate"><info><title> 检查表单是否有效 </title></info>
+        
 
         <para>
             表单提交之后，需要检查它是否能通过校验。每个元素根据提供的数据来检查，如果匹配元素名的键没有出现，并该条目被标记为必需，就用 null 值来校验。
@@ -336,10 +337,10 @@ $values = $form->getValues();
         <programlisting role="php"><![CDATA[<?php
 $unfiltered = $form->getUnfilteredValues();
 ?>]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.errorstatus">
-        <title> 获得错误状态 </title>
+    <section xml:id="zend.form.quickstart.errorstatus"><info><title> 获得错误状态 </title></info>
+        
 
         <para>
             如果表单校验失败，在大多数情况下，可以再次解析表单，如果使用了缺省的装饰器，错误信息就会显示出来：
@@ -358,10 +359,10 @@ if (!$form->isValid($_POST)) {
         <para>
             如果想插入错误消息，有两个方法： <code>getErrors()</code> 返回一个元素名/代码对的联合数组（这里的代码是指一个错误代码数组）。<code>getMessages()</code> 返回一个元素名/消息对的联合数组（这里的消息是指错误代码/错误消息对的联合数组）。如果给定的元素没有任何错误，数组就不包含它。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.puttingtogether">
-        <title> 放到一起 </title>
+    <section xml:id="zend.form.quickstart.puttingtogether"><info><title> 放到一起 </title></info>
+        
 
         <para>
             来创建一个简单的登录表单，我们需要这些元素：
@@ -458,10 +459,10 @@ class UserController extends Zend_Controller_Action
         <para>
             注意在控制器代码中，还有很多需要做：例如在提交后，需要用 <code>Zend_Auth</code> 来认证。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.config">
-        <title> 使用 Zend_Config 对象 </title>
+    <section xml:id="zend.form.quickstart.config"><info><title> 使用 Zend_Config 对象 </title></info>
+        
 
         <para>
             所有 <code>Zend_Form</code> 类可以用 <code>Zend_Config</code> 来配置，可以传递 <code>Zend_Config</code> 对象给构造器或者通过 <code>setConfig()</code> 来传递。来看一下如何用 INI 文件来创建上述表单，首先，遵循建议，把配置放到反映发行位置的节里面，并集中到 'development' 节，接着，为给定控制器（'user'）设置一个节，为表单（'login'）设置一个键：
@@ -506,16 +507,13 @@ $form   = new Zend_Form($config->user->login);
         <para>
             整个表单就定义好了。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.conclusion">
-        <title> 结论 </title>
+    <section xml:id="zend.form.quickstart.conclusion"><info><title> 结论 </title></info>
+        
 
         <para>
             希望通过这个小教程，你能接触和理解 <code>Zend_Form</code> 的强大和灵活性，然后接着读更深的资料！
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

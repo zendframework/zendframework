@@ -85,9 +85,6 @@ class Ec2
                 break;
         }
 
-        if (!class_exists($class)) {
-            \Zend\Loader::loadClass($class);
-        }
         return new $class($key, $secret_key);
     }
 }

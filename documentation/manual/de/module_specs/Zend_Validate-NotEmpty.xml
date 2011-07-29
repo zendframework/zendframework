@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22659 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.notempty">
-    <title>NotEmpty</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.notempty"><info><title>NotEmpty</title></info>
+    
 
     <para>
         Dieser Prüfer erlaubt es zu prüfen ob ein angegebener Wert nicht leer ist. Das ist oft
@@ -10,8 +8,8 @@
         sicherstellen will das den benötigten Elementen Werte zugeordnet wurden.
     </para>
 
-    <sect3 id="zend.validate.set.notempty.options">
-        <title>Unterstützte Optionen für Zend_Validate_NotEmpty</title>
+    <section xml:id="zend.validate.set.notempty.options"><info><title>Unterstützte Optionen für Zend_Validate_NotEmpty</title></info>
+        
 
         <para>
             Die folgenden Optionen werden für <classname>Zend_Validate_NotEmpty</classname>
@@ -22,16 +20,15 @@
             <listitem>
                 <para>
                     <emphasis><property>type</property></emphasis>: Setzt den Typ der Prüfung
-                    welcher durchgeführt wird. Für Details sollte in <link
-                        linkend="zend.validate.set.notempty.types">diesem Abschnitt</link>
+                    welcher durchgeführt wird. Für Details sollte in <link linkend="zend.validate.set.notempty.types">diesem Abschnitt</link>
                     nachgesehen werden.
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.notempty.default">
-        <title>Standardverhalten für Zend_Validate_NotEmpty</title>
+    <section xml:id="zend.validate.set.notempty.default"><info><title>Standardverhalten für Zend_Validate_NotEmpty</title></info>
+        
 
         <para>
             Standardmäßig arbeitet diese Prüfung anders als man es laut <acronym>PHP</acronym>'s
@@ -47,8 +44,8 @@ $result = $valid->isValid($value);
 // gibt false zurück
 ]]></programlisting>
 
-        <note>
-            <title>Unterschiedliches Standardverhalten zu PHP</title>
+        <note><info><title>Unterschiedliches Standardverhalten zu PHP</title></info>
+            
 
             <para>
                 Ohne Angabe einer Konfiguration ist das Verhalten von
@@ -56,10 +53,10 @@ $result = $valid->isValid($value);
                 <acronym>PHP</acronym>.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.notempty.types">
-        <title>Ändern des Verhaltens für Zend_Validate_NotEmpty</title>
+    <section xml:id="zend.validate.set.notempty.types"><info><title>Ändern des Verhaltens für Zend_Validate_NotEmpty</title></info>
+        
 
         <para>
             Einige Projekte haben andere Ansichten davon was als "leerer" Wert angesehen wird: ein
@@ -213,8 +210,5 @@ $validator = new Zend_Validate_NotEmpty(array(
             gewünschten Typen zu setzen. Um Typen nach der Instanzierung zu setzen kann die
             Methode <methodname>setType()</methodname> verwendet werden.
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

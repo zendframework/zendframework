@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.actionhelpers.flashmessenger">
-    <title>FlashMessenger</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.flashmessenger"><info><title>FlashMessenger</title></info>
+    
 
-    <sect4 id="zend.controller.actionhelper.flashmessenger.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.controller.actionhelper.flashmessenger.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             L'aide <emphasis>FlashMessenger</emphasis> vous permet de fournir les messages dont
@@ -20,15 +18,15 @@
             <link linkend="zend.session.advanced_usage.starting_a_session">Zend_Session</link>pour
             plus de détails sur son utilisation.)
         </para>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelper.flashmessenger.basicusage">
-        <title>Exemple d'utilisation basique</title>
+    <section xml:id="zend.controller.actionhelper.flashmessenger.basicusage"><info><title>Exemple d'utilisation basique</title></info>
+        
 
         <para>
             L'exemple ci-dessous vous montre l'utilisation du flash messenger dans sa forme
             la plus basique. Quand l'action <filename>/some/my</filename> est appelée, il ajoute
-            le message "Sauvegarde réalisée&#160;!". Une requête suivante vers l'action
+            le message "Sauvegarde réalisée !". Une requête suivante vers l'action
             <filename>/some/my-next-request</filename> le retrouvera (ainsi que le détruira).
         </para>
 
@@ -65,5 +63,5 @@ class SomeController extends Zend_Controller_Action
     }
 }
 ]]></programlisting>
-    </sect4>
-</sect3>
+    </section>
+</section>

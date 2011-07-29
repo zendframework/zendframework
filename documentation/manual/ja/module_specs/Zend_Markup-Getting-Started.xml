@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21818 -->
-<sect1 id="zend.markup.getting-started">
-    <title>さあ始めましょう</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.markup.getting-started"><info><title>さあ始めましょう</title></info>
+    
  
     <para>
         これは <classname>Zend_Markup</classname> BBCode パーサーと <acronym>HTML</acronym>
@@ -10,8 +8,8 @@
         他のパーサーやレンダラーに適用できる原則です。
     </para>
  
-    <example id="zend.markup.getting-started.basic-usage">
-        <title>基本的な Zend_Markup 使用法</title>
+    <example xml:id="zend.markup.getting-started.basic-usage"><info><title>基本的な Zend_Markup 使用法</title></info>
+        
  
         <para>
             まず初めに <methodname>Zend_Markup::factory()</methodname> メソッドを用いて、
@@ -35,8 +33,8 @@ echo $bbcode->render('[b]bold text[/b] and [i]cursive text[/i]');
 ]]></programlisting>
     </example>
  
-    <example id="zend.markup.getting-started.complicated-example">
-        <title>Zend_Markup のより複雑な例</title>
+    <example xml:id="zend.markup.getting-started.complicated-example"><info><title>Zend_Markup のより複雑な例</title></info>
+        
  
         <para>
             今回、上記と同様なことを正確に行いますが、より複雑な BBCode の例です。
@@ -63,8 +61,8 @@ echo $bbcode->render($input);
 ]]></programlisting>
     </example>
  
-    <example id="zend.markup.getting-started.incorrect-input">
-        <title>不正確な入力でのプロセス</title>
+    <example xml:id="zend.markup.getting-started.incorrect-input"><info><title>不正確な入力でのプロセス</title></info>
+        
  
         <para>
             BBCode のようなマークアップの簡潔な解析とレンダリングの側面から、
@@ -83,4 +81,4 @@ echo $bbcode->render('some [i]wrong [b]sample [/i] text');
 // some <em>wrong <strong>sample </strong></em><strong> text</strong>
 ]]></programlisting>
     </example>
-</sect1>
+</section>

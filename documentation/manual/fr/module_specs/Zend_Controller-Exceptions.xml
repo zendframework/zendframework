@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 21684 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.exceptions">
-    <title>Exceptions avec MVC</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.exceptions"><info><title>Exceptions avec MVC</title></info>
+    
 
-    <sect2 id="zend.controller.exceptions.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.controller.exceptions.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             Les composants <acronym>MVC</acronym> de Zend Framework utilisent un contrôleur frontal, ce qui veut
@@ -22,10 +20,10 @@
             enregistre dans l'objet de réponse ; et bien entendu, par défaut, cet objet de réponse
             n'affiche pas ces exceptions.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.exceptions.handling">
-        <title>Gestion des exceptions</title>
+    <section xml:id="zend.controller.exceptions.handling"><info><title>Gestion des exceptions</title></info>
+        
 
         <para>
             Plusieurs mécanismes vont vous permettre de traiter les exceptions dans le modèle
@@ -37,7 +35,7 @@
                 <para>
                     Par défaut, le plugin
                     <link linkend="zend.controller.plugins.standard.errorhandler">error
-                    handler</link>est présent, et activé. Ce plugin a été conçu pour gérer&#160;:
+                    handler</link>est présent, et activé. Ce plugin a été conçu pour gérer :
                 </para>
                 <itemizedlist>
                     <listitem>
@@ -64,7 +62,7 @@
                     En passant la valeur <constant>TRUE</constant> à cette méthode, vous indiquez au
                     contrôleur frontal que vous souhaitez qu'il vous retourne les exceptions qu'il
                     rencontre. Ainsi, il ne les ajoutera pas à la réponse, et il ne fera pas
-                    intervenir le plugin "<code>Error handler</code>". Exemple&#160;:
+                    intervenir le plugin "<code>Error handler</code>". Exemple :
                 </para>
                 <programlisting language="php"><![CDATA[
 $front->throwExceptions(true);
@@ -103,7 +101,7 @@ try {
                     l'affichage de la réponse automatiquement. Au lieu de cela, l'objet de réponse
                     sera retourné. Vous pouvez alors tester celui-ci pour voir s'il contient des
                     exceptions, ceci grâce à <methodname>isException()</methodname> et
-                    <methodname>getException()</methodname>. Voyez&#160;:
+                    <methodname>getException()</methodname>. Voyez :
                 </para>
                 <programlisting language="php"><![CDATA[
 $front->returnResponse(true);
@@ -124,10 +122,10 @@ if ($response->isException()) {
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.exceptions.internal">
-        <title>Différents types d'exceptions que vous pouvez rencontrer</title>
+    <section xml:id="zend.controller.exceptions.internal"><info><title>Différents types d'exceptions que vous pouvez rencontrer</title></info>
+        
 
         <para>
             Les composants <acronym>MVC</acronym> sont nombreux, - requête, routeur, distributeur, contrôleur,
@@ -143,7 +141,7 @@ if ($response->isException()) {
                 <para>
                     <methodname>Zend_Controller_Dispatcher::dispatch()</methodname> va envoyer
                     une exception, par défaut, si un contrôleur invalide est demandé. Vous pouvez
-                    jouer sur ce paramètre&#160;:
+                    jouer sur ce paramètre :
                 </para>
                 <itemizedlist>
                     <listitem>
@@ -153,7 +151,7 @@ if ($response->isException()) {
                         </para>
                         <para>
                             Dans votre contrôleur frontal, ou distributeur, ajoutez la
-                            directive suivante&#160;:
+                            directive suivante :
                         </para>
                         <programlisting language="php"><![CDATA[
 $front->setParam('useDefaultControllerAlways', true);
@@ -189,13 +187,13 @@ $dispatcher->setParam('useDefaultControllerAlways', true);
                     <methodname>Zend_Controller_Action::__call()</methodname> enverra une
                     <classname>Zend_Controller_Action_Exception</classname> s'il n'est pas possible
                     de distribuer l'action demandée. Il est facile de changer ce
-                    comportement&#160;:
+                    comportement :
                 </para>
                 <itemizedlist>
                     <listitem>
                         <para>
                             Dérivez la classe <classname>Zend_Controller_Action</classname>
-                            en redéfinissant sa méthode <methodname>__call()</methodname>, voyez plutôt&#160;:
+                            en redéfinissant sa méthode <methodname>__call()</methodname>, voyez plutôt :
                         </para>
                         <programlisting language="php"><![CDATA[
 class My_Controller_Action extends Zend_Controller_Action
@@ -221,7 +219,7 @@ class My_Controller_Action extends Zend_Controller_Action
                         <para>
                             Dérivez <classname>Zend_Controller_Dispatcher</classname> et
                             redéfinissez <methodname>getAction()</methodname> pour vérifier si l'action existe
-                            bien&#160;:
+                            bien :
                         </para>
                         <programlisting language="php"><![CDATA[
 class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
@@ -315,5 +313,5 @@ class My_Controller_PreDispatchPlugin
                 </itemizedlist>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.frontcontroller">
-    <title>Zend_Application_Resource_Frontcontroller</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.frontcontroller"><info><title>Zend_Application_Resource_Frontcontroller</title></info>
+    
 
     <para>
         Probably the most common resource you will load with
@@ -105,8 +104,8 @@
         controller parameter by passing it to <methodname>setParam()</methodname>.
     </para>
 
-    <example id="zend.application.available-resources.frontcontroller.configExample">
-        <title>Sample Front Controller resource configuration</title>
+    <example xml:id="zend.application.available-resources.frontcontroller.configExample"><info><title>Sample Front Controller resource configuration</title></info>
+        
 
         <para>
             Below is a sample <acronym>INI</acronym> snippet showing how to configure the front
@@ -135,8 +134,8 @@ resources.frontController.actionHelperPaths.HELPER_Prefix = "My/Helper/Path"
 ]]></programlisting>
     </example>
 
-    <example id="zend.application.available-resources.frontcontroller.propertyExample">
-        <title>Retrieving the Front Controller in your bootstrap</title>
+    <example xml:id="zend.application.available-resources.frontcontroller.propertyExample"><info><title>Retrieving the Front Controller in your bootstrap</title></info>
+        
 
         <para>
             Once your Front Controller resource has been initialized, you can
@@ -149,4 +148,4 @@ $bootstrap->bootstrap('frontController');
 $front = $bootstrap->frontController;
 ]]></programlisting>
     </example>
-</sect2>
+</section>

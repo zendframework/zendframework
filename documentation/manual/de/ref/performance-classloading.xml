@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
-<!-- Reviewed: no -->
-<sect1 id="performance.classloading">
-    <title>Laden von Klassen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.classloading"><info><title>Laden von Klassen</title></info>
+    
 
     <para>
         Jeder der jemals Profiling von Zend Framework Anwendungen durchführen muß, wird sofort
@@ -14,8 +12,8 @@
         konkrete Lösungen für diese Probleme zu geben.
     </para>
 
-    <sect2 id="performance.classloading.includepath">
-        <title>Wie kann ich meinen include_path optimieren?</title>
+    <section xml:id="performance.classloading.includepath"><info><title>Wie kann ich meinen include_path optimieren?</title></info>
+        
 
         <para>
             Eine triviale Optimierung die man machen kann um die Geschwindigkeit für das Laden der
@@ -26,8 +24,8 @@
             include_path nur den aktuellen Verzechnispfad inkludieren.
         </para>
 
-        <sect3 id="performance.classloading.includepath.abspath">
-            <title>Absolute Pfade verwenden</title>
+        <section xml:id="performance.classloading.includepath.abspath"><info><title>Absolute Pfade verwenden</title></info>
+            
 
             <para>
                 Auch wenn das wie eine Mikro-Optimierung aussieht, ist es Fakt das wenn man es
@@ -70,10 +68,10 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                 Wie auch immer, selbst auf diese Art, ist es typischerweise eine triviale Aufgabe
                 um den Pfad einfach an <methodname>realpath()</methodname> zu übergeben.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="performance.classloading.includepath.reduce">
-            <title>Die Anzahl der Include Pfade die man definiert reduzieren</title>
+        <section xml:id="performance.classloading.includepath.reduce"><info><title>Die Anzahl der Include Pfade die man definiert reduzieren</title></info>
+            
 
             <para>
                 Include Pfade werden in der Reihenfolge in der Sie im include_path vorkommen
@@ -95,10 +93,10 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                 oft durchgeführt werden indem etwas einfaches wie ein SymLink auf eine oder mehrere
                 Bibliotheken in ein generelles Verzeichnis gelegt wird.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="performance.classloading.includepath.early">
-            <title>Definiere den include_path zum Zend Framework so früh wie möglich</title>
+        <section xml:id="performance.classloading.includepath.early"><info><title>Definiere den include_path zum Zend Framework so früh wie möglich</title></info>
+            
 
             <para>
                 Als Fortführung des vorherigen Vorschlags, ist eine weitere offensichtliche
@@ -107,10 +105,10 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                 stellt sicher das die Dateien die vom Zend Framework included werden schon beim
                 Ersten Scan gefunden werden.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="performance.classloading.includepath.currentdir">
-            <title>Definiere das aktuelle Verzeichnis als letztes oder gar nicht</title>
+        <section xml:id="performance.classloading.includepath.currentdir"><info><title>Definiere das aktuelle Verzeichnis als letztes oder gar nicht</title></info>
+            
 
             <para>
                 Die meisten Beispiele von include_path zeigen die Verwendung des aktuellen
@@ -123,8 +121,8 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                 letztes Element in der Liste verschoben werden.
             </para>
 
-            <example id="performance.classloading.includepath.example">
-                <title>Beispiel: Optimierter include_path</title>
+            <example xml:id="performance.classloading.includepath.example"><info><title>Beispiel: Optimierter include_path</title></info>
+                
 
                 <para>
                     Fügen wir also alle diese Vorschläge zusammen. Unsere Annahme wird sein, das
@@ -179,11 +177,11 @@ $paths = array(
 set_include_path(implode(PATH_SEPARATOR, $paths));
 ]]></programlisting>
             </example>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="performance.classloading.striprequires">
-        <title>Wie kann man unnötige require_once Anweisungen entfernen?</title>
+    <section xml:id="performance.classloading.striprequires"><info><title>Wie kann man unnötige require_once Anweisungen entfernen?</title></info>
+        
 
         <para>
             Lazy Loading ist eine Optimierungstechnik die entwickelt wurde um die teure Operation
@@ -203,8 +201,8 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
             Autoloader zu maximieren?
         </para>
 
-        <sect3 id="performance.classloading.striprequires.sed">
-            <title>Aufrufe von require_once mit find und sed entfernen</title>
+        <section xml:id="performance.classloading.striprequires.sed"><info><title>Aufrufe von require_once mit find und sed entfernen</title></info>
+            
 
             <para>
                 Ein einfacher Weg um <methodname>require_once()</methodname> Aufrufe zu entfernen
@@ -242,11 +240,11 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
 require_once 'Zend/Loader/Autoloader.php';
 Zend_Loader_Autoloader::getInstance();
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="performance.classloading.pluginloader">
-        <title>Wie kann ich das Laden der Plugins beschleunigen?</title>
+    <section xml:id="performance.classloading.pluginloader"><info><title>Wie kann ich das Laden der Plugins beschleunigen?</title></info>
+        
 
         <para>
             Viele Komponenten haben Plugins, welche es erlauben eigene Klassen zu Erstellen und in
@@ -311,9 +309,8 @@ Zend_Loader_Autoloader::getInstance();
             Wie kann man die Anzahl der so gemachten Aufrufe reduzieren?
         </para>
 
-        <sect3
-            id="performance.classloading.pluginloader.includefilecache">
-            <title>Verwenden des PluginLoaders Include-File Caches</title>
+        <section xml:id="performance.classloading.pluginloader.includefilecache"><info><title>Verwenden des PluginLoaders Include-File Caches</title></info>
+            
 
             <para>
                 Zend Framework 1.7.0 fügt einen Include-File Cache zum PluginLoader hinzu. Diese
@@ -328,6 +325,6 @@ Zend_Loader_Autoloader::getInstance();
                 <link linkend="zend.loader.pluginloader.performance.example"> enthält ein kompettes
                 Beispiel seiner Verwendung</link>.
             </para>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

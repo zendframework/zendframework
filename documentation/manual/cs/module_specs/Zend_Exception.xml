@@ -1,14 +1,15 @@
-<sect1 id="zend.exception.using">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.using"><info><title>Práce s výjimkami</title></info>
 
-    <title>Práce s výjimkami</title>
+    
 
     <para>
         Všechny výjimky vyhozené v Zend Frameworku by měly být odvozeny od
         hlavní třídy Zend_Exception.
     </para>
 
-    <example id="zend.exception.using.example">
-        <title>Příklad zachycení výjimky</title>
+    <example xml:id="zend.exception.using.example"><info><title>Příklad zachycení výjimky</title></info>
+        
         <programlisting role="php"><![CDATA[<?php
 try {
     Zend_Loader::loadClass('neexistujicitrida');
@@ -27,7 +28,4 @@ try {
         a které výjimky jsou zděděny z hlavní výjimky - Zend_Exception.
     </para>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -25,11 +25,10 @@ namespace Zend\OAuth\Signature;
 
 use Zend\OAuth\Signature as OAuthSignature,
     Zend\OAuth\Http\Utility as HTTPUtility,
-    Zend\OAuth\Exception as OAuthException;
+    Zend\OAuth\Exception as OAuthException,
+    Zend\Uri;
 
 /**
- * @uses       Zend\OAuth\Http\Utility
- * @uses       Zend\Uri\Url
  * @category   Zend
  * @package    Zend_OAuth
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -99,7 +98,8 @@ abstract class AbstractSignature implements OAuthSignature
      */
     public function normaliseBaseSignatureUrl($url)
     {
-        $uri = new \Zend\Uri\Url($url);
+        $uri = Uri\UriFactory::factory($url);
+        $uri->normalize();
         if ($uri->getScheme() == 'http' && $uri->getPort() == '80') {
             $uri->setPort('');
         } elseif ($uri->getScheme() == 'https' && $uri->getPort() == '443') {
@@ -109,8 +109,7 @@ abstract class AbstractSignature implements OAuthSignature
         }
         $uri->setQuery('');
         $uri->setFragment('');
-        $uri->setHost(strtolower($uri->getHost()));
-        return $uri->generate();
+        return $uri->toString();
     }
 
     /**

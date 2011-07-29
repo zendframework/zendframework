@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20827 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.markup.parsers">
-    <title>Zend_Markup Parser</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.markup.parsers"><info><title>Zend_Markup Parser</title></info>
+    
 
     <para>
         <classname>Zend_Markup</classname> wird aktuell mit zwei Parsern ausgeliefert, einen BBCode
         Parser und einen Textile Parser.
     </para>
 
-    <sect2 id="zend.markup.parsers.theory">
-        <title>Theorie des Parsens</title>
+    <section xml:id="zend.markup.parsers.theory"><info><title>Theorie des Parsens</title></info>
+        
 
         <para>
             Die Parser von <classname>Zend_Markup</classname> sind Klasse die Text mit Markup in
@@ -61,10 +59,10 @@
             auch zu beachten das dies nur eine vereinfachte Darstelliung des Baumes selbst ist. Der
             aktuelle Baum enthält viel mehr Information, wie die Attribute der Tags und deren Namen.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.markup.parsers.bbcode">
-        <title>Der BBCode Parser</title>
+    <section xml:id="zend.markup.parsers.bbcode"><info><title>Der BBCode Parser</title></info>
+        
 
         <para>
             Der BBCode Parser ist ein <classname>Zend_Markup</classname> Parser der BBCode in einen
@@ -89,10 +87,10 @@
         <para>
             Standardmäßig werden alle Tags durch Verwendung des Formats '[/tagname]' geschlossen.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.markup.parsers.textile">
-        <title>Der Textile Parser</title>
+    <section xml:id="zend.markup.parsers.textile"><info><title>Der Textile Parser</title></info>
+        
 
         <para>
             Der Textile Parser ist ein <classname>Zend_Markup</classname> Parser der Textile in
@@ -100,8 +98,8 @@
             Liste von Beispiel Tags:
         </para>
 
-        <table id="zend.markup.parsers.textile.tags">
-            <title>Liste der grundsätzlichen Textile Tags</title>
+        <table xml:id="zend.markup.parsers.textile.tags"><info><title>Liste der grundsätzlichen Textile Tags</title></info>
+            
 
             <tgroup cols="2" align="left" colsep="1" rowsep="1">
                 <thead>
@@ -114,49 +112,49 @@
                 <tbody>
                     <row>
                         <entry>*foo*</entry>
-                        <entry><![CDATA[<strong>foo</strong>]]></entry>
+                        <entry>&lt;strong&gt;foo&lt;/strong&gt;</entry>
                     </row>
 
                     <row>
                         <entry>_foo_</entry>
-                        <entry><![CDATA[<em>foo</em>]]></entry>
+                        <entry>&lt;em&gt;foo&lt;/em&gt;</entry>
                     </row>
 
                     <row>
                         <entry>??foo??</entry>
-                        <entry><![CDATA[<cite>foo</cite>]]></entry>
+                        <entry>&lt;cite&gt;foo&lt;/cite&gt;</entry>
                     </row>
 
                     <row>
                         <entry>-foo-</entry>
-                        <entry><![CDATA[<del>foo</del>]]></entry>
+                        <entry>&lt;del&gt;foo&lt;/del&gt;</entry>
                     </row>
 
                     <row>
                         <entry>+foo+</entry>
-                        <entry><![CDATA[<ins>foo</ins>]]></entry>
+                        <entry>&lt;ins&gt;foo&lt;/ins&gt;</entry>
                     </row>
 
                     <row>
                         <entry>^foo^</entry>
-                        <entry><![CDATA[<sup>foo</sup>]]></entry>
+                        <entry>&lt;sup&gt;foo&lt;/sup&gt;</entry>
                     </row>
 
                     <row>
                         <entry>~foo~</entry>
-                        <entry><![CDATA[<sub>foo</sub>]]></entry>
+                        <entry>&lt;sub&gt;foo&lt;/sub&gt;</entry>
                     </row>
 
                     <row>
                         <entry>%foo%</entry>
-                        <entry><![CDATA[<span>foo</span>]]></entry>
+                        <entry>&lt;span&gt;foo&lt;/span&gt;</entry>
                     </row>
 
                     <row>
                         <entry>PHP(PHP Hypertext Preprocessor)</entry>
 
                         <entry>
-                            <![CDATA[<acronym title="PHP Hypertext Preprocessor">PHP</acronym>]]>
+                            &lt;acronym title="PHP Hypertext Preprocessor"&gt;PHP&lt;/acronym&gt;
                         </entry>
                     </row>
 
@@ -164,25 +162,25 @@
                         <entry>"Zend Framework":http://framework.zend.com/</entry>
 
                         <entry>
-                            <![CDATA[<a href="http://framework.zend.com/">Zend Framework</a>]]>
+                            &lt;a href="http://framework.zend.com/"&gt;Zend Framework&lt;/a&gt;
                         </entry>
                     </row>
 
                     <row>
                         <entry>h1. foobar</entry>
-                        <entry><![CDATA[<h1>foobar</h1>]]></entry>
+                        <entry>&lt;h1&gt;foobar&lt;/h1&gt;</entry>
                     </row>
 
                     <row>
                         <entry>h6. foobar</entry>
-                        <entry><![CDATA[<h6>foobar</h6>]]></entry>
+                        <entry>&lt;h6&gt;foobar&lt;/h6&gt;</entry>
                     </row>
 
                     <row>
                         <entry>!http://framework.zend.com/images/logo.gif!</entry>
 
                         <entry>
-                            <![CDATA[<img src="http://framework.zend.com/images/logo.gif" />]]>
+                            &lt;img src="http://framework.zend.com/images/logo.gif" /&gt;
                         </entry>
                     </row>
                 </tbody>
@@ -194,8 +192,8 @@
             Leerzeilen, und wenn es mehr Tags gibt, wird ein neuer Paragraph hinzugefügt.
         </para>
 
-        <sect3 id="zend.markup.parsers.textile.lists">
-            <title>Listen</title>
+        <section xml:id="zend.markup.parsers.textile.lists"><info><title>Listen</title></info>
+            
 
             <para>
                 Der Textile Parser unterstützt auch zwei Typen von Listen. Den nummerischen Typ
@@ -217,6 +215,6 @@
                 verwendet werden. Tags die auf einer neuen Zeile beginnen müssen (wie 'h1' usw.)
                 können nicht innerhalb von Listen verwendet werden.
             </para>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

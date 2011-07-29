@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22183 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.creditcard">
-    <title>CreditCard</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.creditcard"><info><title>CreditCard</title></info>
+    
 
     <para>
         <classname>Zend_Validate_CreditCard</classname> erlaubt es zu prüfen ob ein angegebener
@@ -50,8 +48,8 @@
         </listitem>
     </itemizedlist>
 
-    <note>
-        <title>Ungültige Institute</title>
+    <note><info><title>Ungültige Institute</title></info>
+        
 
         <para>
             Die Institute <emphasis>Bankcard</emphasis> und <emphasis>Diners Club
@@ -64,8 +62,8 @@
         </para>
     </note>
 
-    <sect3 id="zend.validate.set.creditcard.options">
-        <title>Unterstützte Optionen für Zend_Validate_CreditCard</title>
+    <section xml:id="zend.validate.set.creditcard.options"><info><title>Unterstützte Optionen für Zend_Validate_CreditCard</title></info>
+        
 
         <para>
             Die folgenden Optionen werden für <classname>Zend_Validate_CreditCard</classname>
@@ -87,10 +85,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.creditcard.basic">
-        <title>Grundsätzliche Verwendung</title>
+    <section xml:id="zend.validate.set.creditcard.basic"><info><title>Grundsätzliche Verwendung</title></info>
+        
 
         <para>
             Es gibt verschiedene Kreditkarten Institute wie mit
@@ -111,10 +109,10 @@ if ($valid->isValid($input)) {
             Das oben stehende Beispiel würde alle bekannten Kreditkarten Institute als gültig
             erkennen.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.creditcard.institute">
-        <title>Definierte Kreditkarte akzeptieren</title>
+    <section xml:id="zend.validate.set.creditcard.institute"><info><title>Definierte Kreditkarte akzeptieren</title></info>
+        
 
         <para>
             Manchmal ist es notwendig nur definierte Kreditkarten Institute zu akzeptieren statt
@@ -162,8 +160,8 @@ $valid = new Zend_Validate_CreditCard(array(
 ));
 ]]></programlisting>
 
-        <table id="zend.validate.set.creditcard.institute.table">
-            <title>Konstanten für Kreditkarten Institute</title>
+        <table xml:id="zend.validate.set.creditcard.institute.table"><info><title>Konstanten für Kreditkarten Institute</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -256,8 +254,8 @@ $valid->setType(array(
 ));
 ]]></programlisting>
 
-        <note>
-            <title>Standard Institute</title>
+        <note><info><title>Standard Institute</title></info>
+            
 
             <para>
                 Wenn bei der Initiierung kein Institut angegeben wird, dann wird
@@ -269,10 +267,10 @@ $valid->setType(array(
                 weil bereits alle Institute hinzugefügt wurden.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.creditcard.servicecheck">
-        <title>Prüfung durch Verwendung einer fremden API</title>
+    <section xml:id="zend.validate.set.creditcard.servicecheck"><info><title>Prüfung durch Verwendung einer fremden API</title></info>
+        
 
         <para>
             Wie vorher erwähnt prüft <classname>Zend_Validate_CreditCard</classname> nur die
@@ -322,5 +320,5 @@ $valid->setService(array($service, 'checkOnline'));
             Wie man sieht wird die Callback Methode mit der Kreditkarten Nummer als erster Parameter
             aufgerufen, und die akzeptierten Typen als zweiter Parameter.
         </para>
-    </sect3>
-</sect2>
+    </section>
+</section>

@@ -1,8 +1,9 @@
-<sect1 id="zend.search.lucene.index-creation">
-    <title>Индексация<!--Building Indexes--></title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.index-creation"><info><title>Индексация<!--Building Indexes--></title></info>
+    
 
-    <sect2 id="zend.search.lucene.index-creation.creating">
-        <title>Создание нового индекса<!--Creating a New Index--></title>
+    <section xml:id="zend.search.lucene.index-creation.creating"><info><title>Создание нового индекса<!--Creating a New Index--></title></info>
+        
 
         <para>
             Возможности по созданию и обновлению индекса
@@ -47,10 +48,10 @@ $index->addDocument($doc);
             Newly added documents could be immediately retrieved from an index.
 -->
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.updating">
-        <title>Обновление индекса<!--Updating Index--></title>
+    <section xml:id="zend.search.lucene.index-creation.updating"><info><title>Обновление индекса<!--Updating Index--></title></info>
+        
 
         <para>
             Та же самая процедура используется при обновлении существующего
@@ -74,11 +75,11 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $docContent));
 
 // Добавление документа в индекс.
 $index->addDocument($doc);
-?>]]>   </programlisting>
-    </sect2>
+?>   ]]></programlisting>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.document-updating">
-        <title>Обновление документов<!--Updating Documents--></title>
+    <section xml:id="zend.search.lucene.index-creation.document-updating"><info><title>Обновление документов<!--Updating Documents--></title></info>
+        
 
         <para>
             Формат файлов индекса Lucene не поддерживает обновление документов.
@@ -105,10 +106,10 @@ foreach ($hits as $hit) {
     $index->delete($hit->id);
 }
 ?>]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.counting">
-        <title>Получение размера индекса<!--Retrieving Index size--></title>
+    <section xml:id="zend.search.lucene.index-creation.counting"><info><title>Получение размера индекса<!--Retrieving Index size--></title></info>
+        
 
         <para>
             В Zend_Search_Lucene есть два способа получения размера индекса.
@@ -167,10 +168,10 @@ for ($count = 0; $count < $index->maxDoc(); $count++) {
             Index optimization removes deleted documents and squeezes documents' IDs. So internal document id may be changed.
 -->
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.optimization">
-        <title>Оптимизация индекса<!--Index optimization--></title>
+    <section xml:id="zend.search.lucene.index-creation.optimization"><info><title>Оптимизация индекса<!--Index optimization--></title></info>
+        
 
         <para>
             Индекс Lucene состоит из сегментов. Каждый сегмент является
@@ -184,7 +185,7 @@ for ($count = 0; $count < $index->maxDoc(); $count++) {
             Файлы сегментов индекса Lucene по своей природе не могут обновляться.
             Обновление сегмента требует его полной реорганизации.
             За подробностями см. форматы файлов индекса
-            (<ulink url="http://lucene.apache.org/java/docs/fileformats.html">http://lucene.apache.org/java/docs/fileformats.html</ulink>).
+            (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://lucene.apache.org/java/docs/fileformats.html">http://lucene.apache.org/java/docs/fileformats.html</link>).
             Новые документы добавляются в индекс путем создания новых сегментов.
 <!--
             Lucene index segment files can't be updated by their nature.
@@ -249,8 +250,8 @@ $index->optimize();
 -->
         </para>
 
-        <sect3 id="zend.search.lucene.index-creation.optimization.maxbuffereddocs">
-            <title>Опция автоматической оптимизации <emphasis>MaxBufferedDocs</emphasis><!--<emphasis>MaxBufferedDocs</emphasis> auto-optimization option--></title>
+        <section xml:id="zend.search.lucene.index-creation.optimization.maxbuffereddocs"><info><title>Опция автоматической оптимизации <emphasis>MaxBufferedDocs</emphasis><!--<emphasis>MaxBufferedDocs</emphasis> auto-optimization option--></title></info>
+            
             <para>
                 <emphasis>MaxBufferedDocs</emphasis> является наименьшим
                 количеством документов, необходимым для того, чтобы
@@ -263,8 +264,8 @@ $index->optimize();
             </para>
             <para>
                 <emphasis>MaxBufferedDocs</emphasis> может быть получен или
-                установлен через методы <varname>$index->getMaxBufferedDocs()</varname>
-                и <varname>$index->setMaxBufferedDocs($maxBufferedDocs)</varname>
+                установлен через методы <varname>$index-&gt;getMaxBufferedDocs()</varname>
+                и <varname>$index-&gt;setMaxBufferedDocs($maxBufferedDocs)</varname>
                 соответственно.
 <!--
                 <emphasis>MaxBufferedDocs</emphasis> can be retrieved or set by
@@ -278,10 +279,10 @@ $index->optimize();
                 Default value is 10.
 -->
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.search.lucene.index-creation.optimization.maxmergedocs">
-            <title>Опция автоматической оптимизации <emphasis>MaxMergeDocs</emphasis><!--<emphasis>MaxMergeDocs</emphasis> auto-optimization option--></title>
+        <section xml:id="zend.search.lucene.index-creation.optimization.maxmergedocs"><info><title>Опция автоматической оптимизации <emphasis>MaxMergeDocs</emphasis><!--<emphasis>MaxMergeDocs</emphasis> auto-optimization option--></title></info>
+            
             <para>
                 <emphasis>MaxMergeDocs</emphasis> является наибольшим количеством
                 документов при достижении которого они всегда объединяются
@@ -303,8 +304,8 @@ $index->optimize();
             </para>
             <para>
                 <emphasis>MaxMergeDocs</emphasis> может быть получен или
-                установлен через методы <varname>$index->getMaxMergeDocs()</varname>
-                и <varname>$index->setMaxMergeDocs($maxMergeDocs)</varname>
+                установлен через методы <varname>$index-&gt;getMaxMergeDocs()</varname>
+                и <varname>$index-&gt;setMaxMergeDocs($maxMergeDocs)</varname>
                 соответственно.
 <!--
                 <emphasis>MaxMergeDocs</emphasis> can be retrieved or set by
@@ -318,10 +319,10 @@ $index->optimize();
                 Default value is PHP_INT_MAX.
 -->
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.search.lucene.index-creation.optimization.mergefactor">
-            <title>Опция автоматической оптимизации <emphasis>MergeFactor</emphasis><!--<emphasis>MergeFactor</emphasis> auto-optimization option--></title>
+        <section xml:id="zend.search.lucene.index-creation.optimization.mergefactor"><info><title>Опция автоматической оптимизации <emphasis>MergeFactor</emphasis><!--<emphasis>MergeFactor</emphasis> auto-optimization option--></title></info>
+            
             <para>
                 <emphasis>MergeFactor</emphasis> определяет, как часто
                 сегменты индекса объединяются с помощью addDocument().
@@ -367,8 +368,8 @@ $index->optimize();
             </para>
             <para>
                 <emphasis>MergeFactor</emphasis> может быть получен или
-                установлен через методы <varname>$index->getMergeFactor()</varname>
-                и <varname>$index->setMergeFactor($mergeFactor)</varname>
+                установлен через методы <varname>$index-&gt;getMergeFactor()</varname>
+                и <varname>$index-&gt;setMergeFactor($mergeFactor)</varname>
                 соответственно.
 <!--
                 <emphasis>MergeFactor</emphasis> can be retrieved or set by
@@ -384,18 +385,18 @@ $index->optimize();
             </para>
             <para>
                 Lucene Java и Luke (Lucene Index Toolbox -
-                <ulink url="http://www.getopt.org/luke/">http://www.getopt.org/luke/</ulink>)
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.getopt.org/luke/">http://www.getopt.org/luke/</link>)
                 также могут использоваться для оптимизации индекса.
 <!--
                 Lucene Java and Luke (Lucene Index Toolbox - <ulink url="http://www.getopt.org/luke/">http://www.getopt.org/luke/</ulink>)
                 can also be used to optimize index.
 -->
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.limitations">
-        <title>Ограничения<!--Limitationas--></title>
+    <section xml:id="zend.search.lucene.index-creation.limitations"><info><title>Ограничения<!--Limitationas--></title></info>
+        
 
         <para>
             Ограничения зависят от платформы.
@@ -410,10 +411,6 @@ $index->optimize();
             Maximum index size is 2GB for 32-bit platforms.
 -->
         </para>
-    </sect2>
+    </section>
 
-</sect1>
-
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

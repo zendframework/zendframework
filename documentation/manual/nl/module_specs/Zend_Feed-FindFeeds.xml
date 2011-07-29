@@ -1,5 +1,6 @@
-<sect1 id="zend.feed.findFeeds">
-    <title>Feeds verkregen van Web Paginas</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.findFeeds"><info><title>Feeds verkregen van Web Paginas</title></info>
+    
     <para>
         Web paginas bevatten dikwijls <code>alt;link&gt;</code> afbakeningen die naar feeds met
         relevante informatie met betrekking tot de pagina wijzen. <code>Zend_Feed</code> laat je toe om
@@ -19,7 +20,4 @@ $feedArray = Zend_Feed::findFeeds('http://www.example.com/news.html');
         instantie zijn. <code>Zend_Feed</code> zal een <code>Zend_Feed_Exception</code> opwerpen bij
         mislukking, zoals een HTTP 404 antwoord of een misvormde feed.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

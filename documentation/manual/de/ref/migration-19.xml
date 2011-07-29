@@ -1,19 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect1 id="migration.19">
-    <title>Zend Framework 1.9</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.19"><info><title>Zend Framework 1.9</title></info>
+    
 
     <para>
         Wenn man von einem Zend Framework Release vor 1.9.0 zu einem beliebigen 1.9 Release
         hochrüstet sollte man die folgenden Migrations Hinweise beachten.
     </para>
 
-    <sect2 id="migration.19.zend.file.transfer">
-        <title>Zend_File_Transfer</title>
+    <section xml:id="migration.19.zend.file.transfer"><info><title>Zend_File_Transfer</title></info>
+        
 
-        <sect3 id="migration.19.zend.file.transfer.mimetype">
-            <title>MimeType Prüfung</title>
+        <section xml:id="migration.19.zend.file.transfer.mimetype"><info><title>MimeType Prüfung</title></info>
+            
 
             <para>
                 Aus Sicherheitsgründen haben wir den standardmäßigen Fallback Mechanismus der
@@ -31,8 +29,8 @@
                 verwendet wird.
             </para>
 
-            <note>
-                <title>Sicherheits Hinweis</title>
+            <note><info><title>Sicherheits Hinweis</title></info>
+                
 
                 <para>
                     Man sollte beachten, das wenn man sich auf die <acronym>HTTP</acronym> Felder
@@ -42,8 +40,8 @@
                 </para>
             </note>
 
-            <example id="migration.19.zend.file.transfer.example">
-                <title>Die Verwendung der HTTP Felder erlauben</title>
+            <example xml:id="migration.19.zend.file.transfer.example"><info><title>Die Verwendung der HTTP Felder erlauben</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 // Bei der Initiierung
@@ -53,11 +51,11 @@ $valid = new Zend_File_Transfer_Adapter_Http(array('headerCheck' => true);
 $valid->enableHeaderCheck();
 ]]></programlisting>
             </example>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="migration.19.zend.filter">
-        <title>Zend_Filter</title>
+    <section xml:id="migration.19.zend.filter"><info><title>Zend_Filter</title></info>
+        
 
         <para>
             Vor dem Release 1.9 erlaubte <classname>Zend_Filter</classname> die Verwendung der
@@ -66,15 +64,15 @@ $valid->enableHeaderCheck();
             was Sie macht. Die alte <methodname>get()</methodname> Methode wurde als deprecated
             markiert.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="migration.19.zend.http.client">
-        <title>Zend_Http_Client</title>
+    <section xml:id="migration.19.zend.http.client"><info><title>Zend_Http_Client</title></info>
+        
 
-        <sect3 id="migration.19.zend.http.client.fileuploadsarray">
-            <title>
+        <section xml:id="migration.19.zend.http.client.fileuploadsarray"><info><title>
                 Änderungen in der internen Speicherung der Information von hochgeladenen Dateien
-            </title>
+            </title></info>
+            
 
             <para>
                 In Version 1.9 vom Zend Framework gibt es eine Ändernug wie
@@ -86,13 +84,12 @@ $valid->enableHeaderCheck();
             <para>
                 Diese Änderung wurde durchgeführt um es zu erlauben mehrere Dateien mit dem
                 gleichen Formularnamen, als Array von Dateien, hochzuladen. Weitere Informationen
-                über dieses Problem können in <ulink
-                    url="http://framework.zend.com/issues/browse/ZF-5744">diesem
-                    Fehlerreport</ulink> gefunden werden.
+                über dieses Problem können in <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/issues/browse/ZF-5744">diesem
+                    Fehlerreport</link> gefunden werden.
             </para>
 
-            <example id="migration.19.zend.http.client.fileuploadsarray.example">
-                <title>Interne Speicherung der Informationen von hochgeladenen Dateien</title>
+            <example xml:id="migration.19.zend.http.client.fileuploadsarray.example"><info><title>Interne Speicherung der Informationen von hochgeladenen Dateien</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 // Zwei Dateien mit dem gleichen Namen des Formularelements als Array hochladen
@@ -137,12 +134,12 @@ $client->setFileUpload('file2.txt',
                 Formularelement mit mehr als einer Datei - trotzdem führt dies zu einer subtilen
                 Änderung der Rückwärtskompatibilität und sollte erwähnt werden.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="migration.19.zend.http.client.getparamsrecursize">
-            <title>
+        <section xml:id="migration.19.zend.http.client.getparamsrecursize"><info><title>
                 Zend_Http_Client::_getParametersRecursive() sollte nicht mehr eingesetzt werden
-            </title>
+            </title></info>
+            
 
             <para>
                 Beginnend mit Version 1.9, wird die geschützte Methode
@@ -163,14 +160,14 @@ $client->setFileUpload('file2.txt',
                 Methode ist, sind nur Benutzer betroffen die <classname>Zend_Http_Client</classname>
                 erweitert haben.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="migration.19.zend.locale">
-        <title>Zend_Locale</title>
+    <section xml:id="migration.19.zend.locale"><info><title>Zend_Locale</title></info>
+        
 
-        <sect3 id="migration.19.zend.locale.deprecated">
-            <title>Abgelaufene Methoden</title>
+        <section xml:id="migration.19.zend.locale.deprecated"><info><title>Abgelaufene Methoden</title></info>
+            
 
             <para>
                 Einige spezialisiertere Übersetzungsmethoden stehen nicht mehr zur Verfügung weil
@@ -180,8 +177,8 @@ $client->setFileUpload('file2.txt',
                 die alten und neuen Methodenaufrufe.
             </para>
 
-            <table id="migration.19.zend.locale.deprecated.table-1">
-                <title>List der Methodenaufrufe</title>
+            <table xml:id="migration.19.zend.locale.deprecated.table-1"><info><title>List der Methodenaufrufe</title></info>
+                
 
                 <tgroup cols="2">
                     <thead>
@@ -275,11 +272,11 @@ $client->setFileUpload('file2.txt',
                     </tbody>
                 </tgroup>
             </table>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="migration.19.zend.view.helper.navigation">
-        <title>Zend_View_Helper_Navigation</title>
+    <section xml:id="migration.19.zend.view.helper.navigation"><info><title>Zend_View_Helper_Navigation</title></info>
+        
 
         <para>
             Vor dem Release 1.9 hat der Menü Helfer
@@ -365,10 +362,10 @@ $container = new Zend_Navigation(array(
     </li>
 </ul>
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="migration.19.security">
-        <title>Sicherheitsfixes ab 1.9.7</title>
+    <section xml:id="migration.19.security"><info><title>Sicherheitsfixes ab 1.9.7</title></info>
+        
 
         <para>
             Zusätzlich können Benutzer der Serie 1.9 von anderen Änderungen beginnend in Version
@@ -376,15 +373,14 @@ $container = new Zend_Navigation(array(
             Probleme mit Rückwärtskompatibilität haben können.
         </para>
 
-        <sect3 id="migration.19.security.zend.dojo.editor">
-            <title>Zend_Dojo_View_Helper_Editor</title>
+        <section xml:id="migration.19.security.zend.dojo.editor"><info><title>Zend_Dojo_View_Helper_Editor</title></info>
+            
 
             <para>
                 Eine kleine Änderung wurde in der Serie 1.9 gemacht um die Standardverwendung des
                 dijit Editors zu modifizieren um <acronym>div</acronym> Tags statt einem
-                <acronym>textarea</acronym> Tag zu verwenden; die letztere Verwendung bringt <ulink
-                    url="http://api.dojotoolkit.org/jsdoc/HEAD/dijit._editor.RichText">Sicherheits
-                    Probleme</ulink> mit sich, und die Verwendung von <acronym>div</acronym> Tags
+                <acronym>textarea</acronym> Tag zu verwenden; die letztere Verwendung bringt <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://api.dojotoolkit.org/jsdoc/HEAD/dijit._editor.RichText">Sicherheits
+                    Probleme</link> mit sich, und die Verwendung von <acronym>div</acronym> Tags
                 wird vom Dojo Projekt empfohlen.
             </para>
 
@@ -402,10 +398,10 @@ $container = new Zend_Navigation(array(
                 Die Folgerung ist, das wenn man das <varname>degrade</varname> Flag verwendet,
                 dieses ab diesem Zeitpunkt einfach ignoriert wird.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="migration.19.security.zend.filter.html-entities">
-            <title>Zend_Filter_HtmlEntities</title>
+        <section xml:id="migration.19.security.zend.filter.html-entities"><info><title>Zend_Filter_HtmlEntities</title></info>
+            
 
             <para>
                 Um zu einem höheren Sicherheitsstandard für die Zeichenkodierung zu kommen, ist der
@@ -425,10 +421,10 @@ $container = new Zend_Navigation(array(
                 erweitert hat, sollte man seinen Code und seine Unittests prüfen um sicherzustellen
                 das weiterhin alles funktioniert.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="migration.19.security.zend.filter.strip-tags">
-            <title>Zend_Filter_StripTags</title>
+        <section xml:id="migration.19.security.zend.filter.strip-tags"><info><title>Zend_Filter_StripTags</title></info>
+            
 
             <para>
                 <classname>Zend_Filter_StripTags</classname> enthielt in voehergehenden Versionen
@@ -443,6 +439,6 @@ $container = new Zend_Navigation(array(
                 <acronym>HTML</acronym> Tags oder untergeordnete Kommentare enthalten, werden von
                 der endgültigen Aufgabe des Filters entfernt.
             </para>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

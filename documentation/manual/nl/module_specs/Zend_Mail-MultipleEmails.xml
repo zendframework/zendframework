@@ -1,13 +1,14 @@
-<sect1 id="zend.mail.multiple-emails">
-    <title>Meerdere e-mails sturen via een SMTP verbinding</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.multiple-emails"><info><title>Meerdere e-mails sturen via een SMTP verbinding</title></info>
+    
     <para>
         Standaard wordt een SMTP verbinding gemaakt voor elke e-mail die wordt gestuurd. Indien je meerdere
         e-mails via eenzelfde SMTP verbinding wil sturen moet je zelf <code>connect()</code> afhandelen. Als de
         transportwijze reeds vastgesteld is voor <code>send()</code> word opgeroepen zal dat transport
         worden gebruikt en de verbinding zal niet afgesloten worden:
     </para>
-    <example>
-        <title>Meerdere e-mails sturen via een SMTP verbinding</title>
+    <example><info><title>Meerdere e-mails sturen via een SMTP verbinding</title></info>
+        
         <programlisting role="php"><![CDATA[
 <?php
 require_once 'Zend/Mail.php';
@@ -20,9 +21,6 @@ for ($i = 0; $i < 5; $i++) {
     $mail->send();
 }
 $tr->disconnect();
-?>]]>   </programlisting>
+?>   ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

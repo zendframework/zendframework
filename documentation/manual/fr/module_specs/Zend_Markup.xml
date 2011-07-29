@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.markup.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.markup.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         Le composant <classname>Zend_Markup</classname> offre des possibilités
@@ -18,4 +18,4 @@
         second est le moteur de rendu à utiliser, Html par défaut. Le troisième est un tableau
         d'options concernant le moteur de rendu.
     </para>
-</sect1>
+</section>

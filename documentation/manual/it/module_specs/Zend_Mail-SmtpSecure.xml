@@ -1,5 +1,6 @@
-<sect1 id="zend.mail.smtp-secure">
-    <title>Messa in sicurezza del trasporto SMTP</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-secure"><info><title>Messa in sicurezza del trasporto SMTP</title></info>
+    
 
     <para>
         <code>Zend_Mail</code> supporta anche l'uso di TLS e SSL per incrementare la sicurezza di una connessione SMTP.
@@ -7,8 +8,8 @@
         Opzionalmente è possibile fornire una porta, in alternativa verranno usati i valori predefiniti 25 per TSL e 465 per SSL.
     </para>
 
-    <example id="zend.mail.smtp-secure.example-1">
-        <title>Abilitazione di una connessione sicura in Zend_Mail_Transport_Smtp</title>
+    <example xml:id="zend.mail.smtp-secure.example-1"><info><title>Abilitazione di una connessione sicura in Zend_Mail_Transport_Smtp</title></info>
+        
         <programlisting role="php"><![CDATA[<?php
 require_once 'Zend/Mail.php';
 require_once 'Zend/Mail/Transport/Smtp.php';
@@ -23,10 +24,7 @@ $mail->setBodyText('Questo è il testo.');
 $mail->setFrom('qualcuno@example.com', 'Un mittente');
 $mail->addTo('qualcunaltro@example.com', 'Un destinatario');
 $mail->setSubject('Oggetto testuale');
-$mail->send($transport);]]>
-        </programlisting>
+$mail->send($transport);
+        ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

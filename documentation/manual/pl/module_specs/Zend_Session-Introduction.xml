@@ -1,10 +1,13 @@
-<sect1 id="zend.session.introduction">
+<?xml version="1.0" encoding="utf-8"?>
 
-    <title>Wprowadzenie</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.introduction"><info><title>Wprowadzenie</title></info>
+
+    
 
     <para>
         Zespół Zend Framework Auth bardzo docenia twój wkład w naszą listę email:
-        <ulink url="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</link>
     </para>
 
     <para>
@@ -21,13 +24,13 @@
         klienta. Dla celów tego komponentu oraz dokumentacji, określenie "dane
         sesji" odnoszą się do danych przechowywanych po stronie serwera w
         tablicy
-        <ulink url="http://www.php.net/manual/en/reserved.variables.php#reserved.variables.session"><code>$_SESSION</code></ulink>,
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/reserved.variables.php#reserved.variables.session"><code>$_SESSION</code></link>,
         zarządzanych przez <code>Zend_Session</code>,
         oraz indywidualnie manipulowanych przez obiekty dostępowe
         <code>Zend_Session_Namespace</code>.
         <emphasis role="bold">Przestrzenie nazw sesji</emphasis> zapewniają
         dostęp do danych sesji używając klasycznych
-        <ulink url="http://en.wikipedia.org/wiki/Namespace_%28computer_science%29">przestrzeni nazw</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Namespace_%28computer_science%29">przestrzeni nazw</link>
         implementowanych logicznie jako nazwane grupy asocjacyjnych tablic, o
         kluczach będących łańcuchami znaków. (analogicznie jak tablice PHP).
     </para>
@@ -49,7 +52,7 @@
         Z tego względu, że <code>Zend_Session</code> używa normalnych
         wewnętrznych funkcji modułu sesji, oraz umożliwia użycie wszystkich
         znanych opcji konfiguracyjnych i ustawień (zobacz
-        <ulink url="http://www.php.net/session">http://www.php.net/session</ulink>),
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/session">http://www.php.net/session</link>),
         a dodatkowo umożliwia dostęp za pomocą zorientowanego obiektowo
         interfejsu, to użycie tego modułu jest przykładem dobrej praktyki
         programowania, a także gładko integruje się z Zend Framework.
@@ -60,8 +63,8 @@
 
     <para>
         Domyślna
-        <ulink url="http://www.php.net/manual/en/function.session-set-save-handler.php">obsługa
-        zapisu sesji</ulink> nie rozwiązuje problemu zarządzania tym powiązaniem
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/function.session-set-save-handler.php">obsługa
+        zapisu sesji</link> nie rozwiązuje problemu zarządzania tym powiązaniem
         dla klastrów serwerów, ponieważ dane sesji przechowywane są w systemie
         plików serwera, który odpowiada na żądanie. Jeśli żądanie może byc
         przetworzone przez inny serwer niż ten, na którym zapisane są dane
@@ -70,8 +73,8 @@
         odpowiednie możliwości obsługi zapisu będą zapewnione, gdy będzie to
         możliwe. Namawiamy członków społeczności aby wysyłali propozycje
         możliwości obsługi zapisu na listę
-        <ulink url="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</ulink>.
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</link>.
         Obsługa zapisu kompatybilna z Zend_Db została opisana na liście.
     </para>
 
-</sect1>
+</section>

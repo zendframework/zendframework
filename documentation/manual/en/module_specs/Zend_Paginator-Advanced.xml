@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.paginator.advanced">
-    <title>Advanced usage</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.paginator.advanced"><info><title>Advanced usage</title></info>
+    
 
-    <sect2 id="zend.paginator.advanced.adapters">
-        <title>Custom data source adapters</title>
+    <section xml:id="zend.paginator.advanced.adapters"><info><title>Custom data source adapters</title></info>
+        
 
         <para>
             At some point you may run across a data type that is not covered by
@@ -36,8 +35,7 @@
         </para>
 
         <para>
-            If you've ever used the SPL interface <ulink
-                url="http://www.php.net/~helly/php/ext/spl/interfaceCountable.html">Countable</ulink>,
+            If you've ever used the SPL interface <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/~helly/php/ext/spl/interfaceCountable.html">Countable</link>,
             you're familiar with <methodname>count()</methodname>. As used with
             <classname>Zend_Paginator</classname>, this is the total number of items
             in the data collection.
@@ -62,10 +60,10 @@ return array_slice($this->_array, $offset, $itemCountPerPage);
             <classname>Zend_Paginator_Adapter_Interface</classname>) for ideas of how you
             might go about implementing your own.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.paginator.advanced.scrolling-styles">
-        <title>Custom scrolling styles</title>
+    <section xml:id="zend.paginator.advanced.scrolling-styles"><info><title>Custom scrolling styles</title></info>
+        
 
         <para>
             Creating your own scrolling style requires that you implement
@@ -111,10 +109,10 @@ $prefix = 'My_Paginator_ScrollingStyle';
 $path   = 'My/Paginator/ScrollingStyle/';
 Zend_Paginator::addScrollingStylePrefixPath($prefix, $path);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.paginator.advanced.caching">
-        <title>Caching features</title>
+    <section xml:id="zend.paginator.advanced.caching"><info><title>Caching features</title></info>
+        
 
         <para>
             <classname>Zend_Paginator</classname> can be told to cache the data it has already
@@ -203,10 +201,10 @@ $otherItems = $paginator->getItemsPerPage(4);
 // see the cached items as a two-dimension array:
 var_dump($paginator->getPageItemCache());
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.paginator.advanced.aggregator">
-        <title>Zend_Paginator_AdapterAggregate Interface</title>
+    <section xml:id="zend.paginator.advanced.aggregator"><info><title>Zend_Paginator_AdapterAggregate Interface</title></info>
+        
 
         <para>
             Depending on your application you might want to paginate objects, whose internal
@@ -237,8 +235,5 @@ interface Zend_Paginator_AdapterAggregate
             then recognized by both <methodname>Zend_Paginator::factory()</methodname> and the
             constructor of <classname>Zend_Paginator</classname> and handled accordingly.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

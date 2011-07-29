@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.date.additional">
-    <title>Working Examples</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.additional"><info><title>Working Examples</title></info>
+    
 
     <para>
         Within this chapter, we will describe several additional functions which are also available
@@ -10,8 +9,8 @@
         using of them.
     </para>
 
-    <sect2 id="zend.date.additional.checking">
-        <title>Checking Dates</title>
+    <section xml:id="zend.date.additional.checking"><info><title>Checking Dates</title></info>
+        
 
         <para>
             Probably most dates you will get as input are strings. But the problem with strings is
@@ -30,8 +29,7 @@
             and needs minimum one parameter. So what we need to verify a date is, of course, the
             date itself as string. The second parameter can be the format which the date is
             expected to have. If no format is given the standard date format from your locale is
-            used. For details about how formats should look like see the chapter about <link
-                linkend="zend.date.constants.selfdefinedformats">self defined formats</link>.
+            used. For details about how formats should look like see the chapter about <link linkend="zend.date.constants.selfdefinedformats">self defined formats</link>.
         </para>
 
         <para>
@@ -52,8 +50,8 @@
             '<command>31.February.2000</command>' because it knows that this date is impossible.
         </para>
 
-        <example id="zend.date.additional.checking.example-1">
-            <title>Checking Dates</title>
+        <example xml:id="zend.date.additional.checking.example-1"><info><title>Checking Dates</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Checking dates
@@ -81,10 +79,10 @@ if (Zend_Date::isDate($date,'dd MMMM yyyy', 'en')) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.date.additional.sunrise-sunset">
-        <title>Sunrise and Sunset</title>
+    <section xml:id="zend.date.additional.sunrise-sunset"><info><title>Sunrise and Sunset</title></info>
+        
 
         <para>
             <classname>Zend_Date</classname> has also functions integrated for getting informations
@@ -107,8 +105,8 @@ if (Zend_Date::isDate($date,'dd MMMM yyyy', 'en')) {
             names of all available predefined cities for the helper class.
         </para>
 
-        <example id="zend.date.additional.sunrise-sunset.example-1">
-            <title>Getting all Available Cities</title>
+        <example xml:id="zend.date.additional.sunrise-sunset.example-1"><info><title>Getting all Available Cities</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Output the complete list of available cities
@@ -129,8 +127,8 @@ print_r (Zend_Date_Cities::getCityList());
             all functions. If it is not set, the '<property>effective</property>' horizon is used.
         </para>
 
-        <table id="zend.date.additional.sunrise-sunset.table">
-            <title>Types of Supported Horizons for Sunset and Sunrise</title>
+        <table xml:id="zend.date.additional.sunrise-sunset.table"><info><title>Types of Supported Horizons for Sunset and Sunrise</title></info>
+            
 
             <tgroup cols="3">
                 <thead>
@@ -179,8 +177,8 @@ print_r (Zend_Date_Cities::getCityList());
             and optional the '<property>horizon</property>'.
         </para>
 
-        <example id="zend.date.additional.sunrise-sunset.example-2">
-            <title>Getting the Location for a City</title>
+        <example xml:id="zend.date.additional.sunrise-sunset.example-2"><info><title>Getting the Location for a City</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Get the location for a defined city
@@ -205,8 +203,8 @@ $mylocation = array('latitude' => 41.5, 'longitude' => 13.2446);
             <classname>Zend_Date</classname> object will be returned with the calculated time.
         </para>
 
-        <example id="zend.date.additional.sunrise-sunset.example-3">
-            <title>Calculating Sun Information</title>
+        <example xml:id="zend.date.additional.sunrise-sunset.example-3"><info><title>Calculating Sun Information</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Get the location for a defined city
@@ -226,10 +224,10 @@ foreach ($info as $sun) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.date.additional.timezones">
-        <title>Time Zones</title>
+    <section xml:id="zend.date.additional.timezones"><info><title>Time Zones</title></info>
+        
 
         <para>
             Time zones are as important as dates themselves. There are several time zones depending
@@ -260,8 +258,8 @@ foreach ($info as $sun) {
             automatically when the date object is created.
         </para>
 
-        <example id="zend.date.additional.timezones.example-1">
-            <title>Working with Time Zones</title>
+        <example xml:id="zend.date.additional.timezones.example-1"><info><title>Working with Time Zones</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Set a default timezone... this has to be done within the bootstrap
@@ -304,8 +302,8 @@ print $date->getIso();
             effect. It is possible to have several dates with different timezones.
         </para>
 
-        <example id="zend.date.additional.timezones.example-2">
-            <title>Multiple Time Zones</title>
+        <example xml:id="zend.date.additional.timezones.example-2"><info><title>Multiple Time Zones</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Set a default timezone... this has to be done within the bootstrap
@@ -337,8 +335,5 @@ $lastdate->setTimezone();
 print $lastdate->getIso();
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

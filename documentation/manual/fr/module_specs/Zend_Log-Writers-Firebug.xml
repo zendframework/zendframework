@@ -1,17 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.log.writers.firebug">
-    <title>Écrire vers Firebug</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers.firebug"><info><title>Écrire vers Firebug</title></info>
+    
 
     <para>
         <classname>Zend_Log_Writer_Firebug</classname> envoie des données d'historisation vers
-        la <ulink url="http://www.getfirebug.com/">console Firebug</ulink>.
+        la <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.getfirebug.com/">console Firebug</link>.
     </para>
 
     <para>
-        <inlinegraphic fileref="figures/zend.wildfire.firebug.console.png" format="PNG"
-        scale="100" width="310" />
+        <inlinemediaobject><imageobject><imagedata fileref="figures/zend.wildfire.firebug.console.png" format="PNG" scale="100" width="310"/></imageobject></inlinemediaobject>
     </para>
 
     <para>
@@ -34,22 +31,20 @@
         <listitem>
             <para>
                 L'extension Firefox nommée Firebug qui peut être téléchargée à cette adresse
-                <ulink
-                url="https://addons.mozilla.org/en-US/firefox/addon/1843">https://addons.mozilla.org/en-US/firefox/addon/1843</ulink>.
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://addons.mozilla.org/en-US/firefox/addon/1843">https://addons.mozilla.org/en-US/firefox/addon/1843</link>.
             </para>
         </listitem>
 
         <listitem>
             <para>
                 L'extension Firefox nommée FirePHP ui peut être téléchargée à cette adresse
-                <ulink
-                url="https://addons.mozilla.org/en-US/firefox/addon/6149">https://addons.mozilla.org/en-US/firefox/addon/6149</ulink>.
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://addons.mozilla.org/en-US/firefox/addon/6149">https://addons.mozilla.org/en-US/firefox/addon/6149</link>.
             </para>
         </listitem>
     </itemizedlist>
 
-    <example id="zend.log.writers.firebug.example.with_front_controller">
-        <title>Journaliser avec Zend_Controller_Front</title>
+    <example xml:id="zend.log.writers.firebug.example.with_front_controller"><info><title>Journaliser avec Zend_Controller_Front</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 // Placez ceci dans votre fichier d'amorçage
@@ -62,8 +57,8 @@ $logger->log('Ceci est un message de log !', Zend_Log::INFO);
 ]]></programlisting>
     </example>
 
-    <example id="zend.log.writers.firebug.example.without_front_controller">
-        <title>Journaliser sans Zend_Controller_Front</title>
+    <example xml:id="zend.log.writers.firebug.example.without_front_controller"><info><title>Journaliser sans Zend_Controller_Front</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $writer = new Zend_Log_Writer_Firebug();
@@ -87,8 +82,8 @@ $response->sendHeaders();
 ]]></programlisting>
     </example>
 
-    <sect3 id="zend.log.writers.firebug.priority-styles">
-        <title>Paramétrer les styles pour les priorités</title>
+    <section xml:id="zend.log.writers.firebug.priority-styles"><info><title>Paramétrer les styles pour les priorités</title></info>
+        
 
         <para>
             Les priorités incorporées et celles définies par l'utilisateur peuvent être
@@ -111,9 +106,8 @@ $writer->setDefaultPriorityStyle('TRACE');
 ]]></programlisting>
 
         <para>
-            Les styles supportés sont les suivants : <table
-                    id="zend.log.writers.firebug.priority-styles.table">
-                    <title>Styles d'historisation de Firebug</title>
+            Les styles supportés sont les suivants : <table xml:id="zend.log.writers.firebug.priority-styles.table"><info><title>Styles d'historisation de Firebug</title></info>
+                    
 
                     <tgroup cols="2">
                         <thead>
@@ -168,10 +162,10 @@ $writer->setDefaultPriorityStyle('TRACE');
                     </tgroup>
                 </table>
             </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.log.writers.firebug.preparing-data">
-        <title>Préparer les données pour l'historisation</title>
+    <section xml:id="zend.log.writers.firebug.preparing-data"><info><title>Préparer les données pour l'historisation</title></info>
+        
 
         <para>
             Toute variable <acronym>PHP</acronym> peut être journalisée avec les priorités incorporées, un
@@ -183,10 +177,10 @@ $writer->setDefaultPriorityStyle('TRACE');
             Les styles <constant>LOG</constant>, <constant>INFO</constant>, <constant>WARN</constant>,
             <constant>ERROR</constant> et <constant>TRACE</constant> ne requièrent pas de formatage spécial.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.log.writers.firebug.preparing-data.exception">
-        <title>Historisation des exceptions</title>
+    <section xml:id="zend.log.writers.firebug.preparing-data.exception"><info><title>Historisation des exceptions</title></info>
+        
 
         <para>
             Pour journaliser une <classname>Zend_Exception</classname>, fournissez simplement
@@ -198,10 +192,10 @@ $writer->setDefaultPriorityStyle('TRACE');
 $exception = new Zend_Exception('Test d\'exception');
 $logger->err($exception);
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.log.writers.firebug.preparing-data.table">
-        <title>Historisation sous forme de tableau</title>
+    <section xml:id="zend.log.writers.firebug.preparing-data.table"><info><title>Historisation sous forme de tableau</title></info>
+        
 
         <para>
             Vous pouvez aussi journaliser des données en les formatant comme un tableau. Les
@@ -222,5 +216,5 @@ $table = array('Ligne de résumé pour la table',
               );
 $logger->table($table);
 ]]></programlisting>
-    </sect3>
-</sect2>
+    </section>
+</section>

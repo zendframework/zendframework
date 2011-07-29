@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.headstyle">
-    <title>Assistente HeadStyle</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headstyle"><info><title>Assistente HeadStyle</title></info>
+    
 
     <para>
         O elemento <acronym>HTML</acronym> <emphasis>&lt;style&gt;</emphasis> é usado para incluir
@@ -10,8 +8,8 @@
         <emphasis>&lt;head&gt;</emphasis>.
     </para>
 
-    <note>
-        <title>Use o HeadLink para "linkar" arquivos CSS</title>
+    <note><info><title>Use o HeadLink para "linkar" arquivos CSS</title></info>
+        
 
         <para>
             O <link linkend="zend.view.helpers.initial.headlink">HeadLink</link> deve ser usado para
@@ -59,8 +57,8 @@
         todos admissíveis.
     </para>
 
-    <note>
-        <title>Setting Conditional Comments</title>
+    <note><info><title>Setting Conditional Comments</title></info>
+        
 
         <para>
             <classname>HeadStyle</classname> allows you to wrap the style tag in conditional
@@ -69,8 +67,8 @@
             in the method calls.
         </para>
 
-        <example id="zend.view.helpers.initial.headstyle.conditional">
-            <title>Headstyle With Conditional Comments</title>
+        <example xml:id="zend.view.helpers.initial.headstyle.conditional"><info><title>Headstyle With Conditional Comments</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // adding scripts
@@ -103,12 +101,11 @@ $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7'));
     </para>
 
     <para>
-        O assistente <classname>HeadStyle</classname> é uma implementação concreta do <link
-            linkend="zend.view.helpers.initial.placeholder">assistente Placeholder</link>.
+        O assistente <classname>HeadStyle</classname> é uma implementação concreta do <link linkend="zend.view.helpers.initial.placeholder">assistente Placeholder</link>.
     </para>
 
-    <note>
-        <title>UTF-8 encoding used by default</title>
+    <note><info><title>UTF-8 encoding used by default</title></info>
+        
 
         <para>
             By default, Zend Framework uses <acronym>UTF-8</acronym> as its default encoding, and,
@@ -129,8 +126,8 @@ $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7'));
         </para>
     </note>
 
-    <example id="zend.view.helpers.initial.headstyle.basicusage">
-        <title>Uso Básico do Assistente HeadStyle</title>
+    <example xml:id="zend.view.helpers.initial.headstyle.basicusage"><info><title>Uso Básico do Assistente HeadStyle</title></info>
+        
 
         <para>
             Você pode especificar uma nova tag de estilo a qualquer momento:
@@ -170,8 +167,8 @@ $this->headStyle()->prependStyle($firstStyles);
 ]]></programlisting>
     </example>
 
-    <example id="zend.view.helpers.initial.headstyle.capture">
-        <title>Capturing Style Declarations Using the HeadStyle Helper</title>
+    <example xml:id="zend.view.helpers.initial.headstyle.capture"><info><title>Capturing Style Declarations Using the HeadStyle Helper</title></info>
+        
 
         <para>
             Sometimes you need to generate <acronym>CSS</acronym> style declarations
@@ -212,7 +209,4 @@ body {
             </listitem>
         </itemizedlist>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

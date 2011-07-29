@@ -1,5 +1,8 @@
-<sect1 id="zend.mail.adding-recipients">
-    <title>Dodawanie odbiorców</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.adding-recipients"><info><title>Dodawanie odbiorców</title></info>
+    
     <para>
         Odbiorcy mogą być dodawani na trzy sposoby:
         <itemizedlist>
@@ -14,14 +17,11 @@
         </listitem>
         </itemizedlist>
     </para>
-    <note>
-        <title>Dodatkowy parametr</title>
+    <note><info><title>Dodatkowy parametr</title></info>
+        
         <para>
             Metody <code>addTo()</code> oraz <code>addCc()</code> akceptują drugi opcjonalny
             parametr, który jest używany jako nazwa odbiorcy.
         </para>
     </note>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

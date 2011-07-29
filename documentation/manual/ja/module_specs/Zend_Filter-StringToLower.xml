@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 17891 -->
-<sect2 id="zend.filter.set.stringtolower">
-    <title>StringToLower</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.stringtolower"><info><title>StringToLower</title></info>
+    
 
     <para>
         Tこのフィルタは、入力を全て小文字に変換します。
@@ -37,8 +35,8 @@ $filter = new Zend_Filter_StringToLower(array('encoding' => 'UTF-8'));
 $filter->setEncoding('ISO-8859-1');
 ]]></programlisting>
 
-    <note>
-        <title>間違ったエンコーディングの設定</title>
+    <note><info><title>間違ったエンコーディングの設定</title></info>
+        
 
         <para>
             あるエンコーディングを設定したくて、mbstring拡張が環境で利用できないとき、
@@ -50,4 +48,4 @@ $filter->setEncoding('ISO-8859-1');
             例外を得ます。
         </para>
     </note>
-</sect2>
+</section>

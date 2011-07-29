@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22761 -->
-<!-- Reviewed: 22761 -->
-<sect1 id="zend.tag.cloud">
-    <title>Zend_Tag_Cloud</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tag.cloud"><info><title>Zend_Tag_Cloud</title></info>
+    
 
     <para>
         <classname>Zend_Tag_Cloud</classname> ist der Darstellungs-Teil von
@@ -88,8 +86,8 @@
         </listitem>
     </itemizedlist>
 
-    <example id="zend.tag.cloud.example.using">
-        <title>Verwenden von Zend_Tag_Cloud</title>
+    <example xml:id="zend.tag.cloud.example.using"><info><title>Verwenden von Zend_Tag_Cloud</title></info>
+        
 
         <para>
             Dieses Beispiel zeigt ein grundsätzliches Beispiel davon, wie eine Tag Wolke erstellt,
@@ -119,8 +117,8 @@ echo $cloud;
         </para>
     </example>
 
-    <sect2 id="zend.tag.cloud.decorators">
-        <title>Dekoratore</title>
+    <section xml:id="zend.tag.cloud.decorators"><info><title>Dekoratore</title></info>
+        
 
         <para>
             <classname>Zend_Tag_Cloud</classname> benötigt zwei Typen von Dekoratoren die fähig
@@ -132,8 +130,8 @@ echo $cloud;
             Schriftgrößen, abhängig vom Gewicht der Werte Ihrer zugeordneten Tags, versehen.
         </para>
 
-        <sect3 id="zend.tag.cloud.decorators.htmltag">
-            <title>Der HTML Tag Dekorator</title>
+        <section xml:id="zend.tag.cloud.decorators.htmltag"><info><title>Der HTML Tag Dekorator</title></info>
+            
 
             <para>
                 Der <acronym>HTML</acronym> Tag Dekorator stellt standardmäßig jedes Tag in einem
@@ -141,8 +139,8 @@ echo $cloud;
                 kann nicht geändert werden; die umgebenden Elemente können hingegen geändert werden.
             </para>
 
-            <note>
-                <title>URL Parameter</title>
+            <note><info><title>URL Parameter</title></info>
+                
 
                 <para>
                     Da der <acronym>HTML</acronym> Tag Dekorator immer den Titel des Tags mit einem
@@ -163,7 +161,7 @@ echo $cloud;
                     <para>
                         <property>fontSizeUnit</property>: definiert die Einheit die für alle
                         Schriftgrößen verwendet wird. Die möglichen Werte sind:
-                        em, ex, px, in, cm, mm, pt, pc und &#37;.
+                        em, ex, px, in, cm, mm, pt, pc und %.
                     </para>
                 </listitem>
 
@@ -198,10 +196,10 @@ echo $cloud;
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.tag.cloud.decorators.htmlcloud">
-            <title>HTML Cloud Dekorator</title>
+        <section xml:id="zend.tag.cloud.decorators.htmlcloud"><info><title>HTML Cloud Dekorator</title></info>
+            
 
             <para>
                 Der <acronym>HTML</acronym> Cloud Dekorator umgibt die <acronym>HTML</acronym> Tags
@@ -228,6 +226,6 @@ echo $cloud;
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

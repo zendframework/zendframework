@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.headlink">
-    <title>HeadLink Helper</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headlink"><info><title>HeadLink Helper</title></info>
+    
 
     <para>
         The <acronym>HTML</acronym> <emphasis>&lt;link&gt;</emphasis> element is increasingly used
@@ -96,8 +95,8 @@
             helper</link>.
     </para>
 
-    <example id="zend.view.helpers.initial.headlink.basicusage">
-        <title>HeadLink Helper Basic Usage</title>
+    <example xml:id="zend.view.helpers.initial.headlink.basicusage"><info><title>HeadLink Helper Basic Usage</title></info>
+        
 
         <para>
             You may specify a <emphasis>headLink</emphasis> at any time. Typically, you
@@ -122,7 +121,4 @@ $this->headLink()->appendStylesheet('/styles/basic.css')
 <?php echo $this->headLink() ?>
 ]]></programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

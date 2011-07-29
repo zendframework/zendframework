@@ -1,12 +1,15 @@
-<sect1 id="zend.paginator.configuration">
-    <title>הגדרות</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.paginator.configuration"><info><title>הגדרות</title></info>
+    
 
     <para>
         <code>Zend_Paginator</code> מכיל כמה מתודות אשר ניתן לקרוא להן כדי להגדיר את השימוש במחלקה:
     </para>
 
-    <table id="zend.paginator.configuration.table">
-        <title>מתודות הגדרות ל <code>Zend_Paginator</code></title>
+    <table xml:id="zend.paginator.configuration.table"><info><title>מתודות הגדרות ל <code>Zend_Paginator</code></title></info>
+        
 
         <tgroup cols="2">
             <thead>
@@ -43,7 +46,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

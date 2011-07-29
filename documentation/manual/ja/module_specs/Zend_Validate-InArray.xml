@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21243 -->
-<sect2 id="zend.validate.set.in_array">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.in_array"><info><title>InArray</title></info>
 
-    <title>InArray</title>
+    
 
     <para>
         任意の値が配列の中で含まれるかどうか、
@@ -12,8 +10,8 @@
     </para>
 
     <!-- TODO : to be translated -->
-    <sect3 id="zend.validate.set.in_array.options">
-        <title>Supported options for Zend_Validate_InArray</title>
+    <section xml:id="zend.validate.set.in_array.options"><info><title>Supported options for Zend_Validate_InArray</title></info>
+        
 
         <para>
             The following options are supported for <classname>Zend_Validate_InArray</classname>:
@@ -41,10 +39,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.in_array.basic">
-        <title>単純な配列の検証</title>
+    <section xml:id="zend.validate.set.in_array.basic"><info><title>単純な配列の検証</title></info>
+        
 
         <para>
             最も単純な方法は、初期化の際に検索される配列を与えることがまさにそうです。
@@ -88,10 +86,10 @@ if ($validator->isValid('value')) {
     // 値が見つかりません
 }
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.in_array.strict">
-        <title>厳密な配列の検証</title>
+    <section xml:id="zend.validate.set.in_array.strict"><info><title>厳密な配列の検証</title></info>
+        
 
         <para>
             上述のように、配列の中で厳密な検証をすることもできます。
@@ -138,10 +136,10 @@ if ($validator->isValid('value')) {
                 デフォルトでは<constant>FALSE</constant>であることに注意してください。
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.in_array.recursive">
-        <title>再帰的な配列の検証</title>
+    <section xml:id="zend.validate.set.in_array.recursive"><info><title>再帰的な配列の検証</title></info>
+        
 
         <para>
             <acronym>PHP</acronym>の<methodname>in_array()</methodname>メソッド
@@ -196,16 +194,16 @@ if ($validator->isValid('value')) {
 }
 ]]></programlisting>
 
-        <note>
-            <title>再帰的な検証のデフォルト設定</title>
+        <note><info><title>再帰的な検証のデフォルト設定</title></info>
+            
 
             <para>
                 デフォルトでは再帰的な検証は無効となります。
             </para>
         </note>
 
-        <note>
-            <title>配列内でのオプションキー</title>
+        <note><info><title>配列内でのオプションキー</title></info>
+            
 
             <para>
                 '<property>haystack</property>' や
@@ -214,9 +212,6 @@ if ($validator->isValid('value')) {
                 キーをラップしなければなりません。
             </para>
         </note>
-    </sect3>
+    </section>
 
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

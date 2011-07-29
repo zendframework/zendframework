@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20807 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.test.phpunit.assertions">
-    <title>Assertions</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.assertions"><info><title>Assertions</title></info>
+    
 
     <para>
         Les assertions sont le coeur des tests unitaires; vous les utilisez pour vérifier que
@@ -11,8 +11,8 @@
         d'assertions pour simplifier le test de vos applications et contrôleurs <acronym>MVC</acronym>.
     </para>
 
-    <sect3 id="zend.test.phpunit.assertions.query">
-        <title>Les assertions par sélecteurs CSS</title>
+    <section xml:id="zend.test.phpunit.assertions.query"><info><title>Les assertions par sélecteurs CSS</title></info>
+        
 
         <para>
             Les sélecteurs <acronym>CSS</acronym> sont une manière simple de vérifier que certaines constructions
@@ -24,8 +24,7 @@
         </para>
 
         <para>
-            Cette fonctionnalité est fournie via <link
-            linkend="zend.dom.query">Zend_Dom_Query</link>, et intégré à un jeu d'assertions de type
+            Cette fonctionnalité est fournie via <link linkend="zend.dom.query">Zend_Dom_Query</link>, et intégré à un jeu d'assertions de type
             "<code>Query*</code>". Chacune de ces assertions prend un sélecteur <acronym>CSS</acronym> en tant que
             premier argument, avec optionnellement des arguments additionnels et/ou un message
             d'erreur, basé sur le type d'assertion. Vous pouvez trouver les règles d'écriture des
@@ -102,15 +101,14 @@
             et <methodname>assertNotQueryCount()</methodname>. (Notez que les versions <code>CountMin</code> et
             <code>CountMax</code> n'ont pas de variantes pour des raisons évidentes).
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.test.phpunit.assertions.xpath">
-        <title>Les assertions XPath</title>
+    <section xml:id="zend.test.phpunit.assertions.xpath"><info><title>Les assertions XPath</title></info>
+        
 
         <para>
             Certains développeurs sont plus familiers avec XPath qu'avec des sélecteurs <acronym>CSS</acronym>,
-            ainsi les variantes XPath des toutes les <link
-            linkend="zend.test.phpunit.assertions.query">assertions Query</link> sont aussi
+            ainsi les variantes XPath des toutes les <link linkend="zend.test.phpunit.assertions.query">assertions Query</link> sont aussi
             fournies. Il s'agit de :
         </para>
 
@@ -167,10 +165,10 @@
                 <para><methodname>assertNotXpathCountMax($path, $count, $message = '')</methodname></para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.test.phpunit.assertions.redirect">
-        <title>Les assertions de redirections</title>
+    <section xml:id="zend.test.phpunit.assertions.redirect"><info><title>Les assertions de redirections</title></info>
+        
 
         <para>
             Souvent une action va redirigé le visiteur. Plutôt que de suivre cette
@@ -226,10 +224,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.test.phpunit.assertions.header">
-        <title>Les assertions d'en-têtes de réponses</title>
+    <section xml:id="zend.test.phpunit.assertions.header"><info><title>Les assertions d'en-têtes de réponses</title></info>
+        
 
         <para>
             En plus de vérifier les en-têtes de redirection, vous avez souvent besoin de
@@ -275,10 +273,10 @@
             De plus, toutes les méthodes ci-dessus possèdent une variante "<code>Not</code>"
             qui correspond à l'assertion négative.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.test.phpunit.assertions.request">
-        <title>Les assertions de requêtes</title>
+    <section xml:id="zend.test.phpunit.assertions.request"><info><title>Les assertions de requêtes</title></info>
+        
 
         <para>
             Il est souvent pratique de vérifier l'action, le contrôleur et le module
@@ -320,5 +318,5 @@
             De plus, toutes les méthodes ci-dessus possèdent une variante "<code>Not</code>"
             qui correspond à l'assertion négative.
         </para>
-    </sect3>
-</sect2>
+    </section>
+</section>

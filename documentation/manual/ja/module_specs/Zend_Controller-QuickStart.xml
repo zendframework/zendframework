@@ -1,21 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20765 -->
-<sect1 id="zend.controller.quickstart">
-    <title>Zend_Controller クイックスタート</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.quickstart"><info><title>Zend_Controller クイックスタート</title></info>
+    
 
-    <sect2 id="zend.controller.quickstart.introduction">
-        <title>導入</title>
+    <section xml:id="zend.controller.quickstart.introduction"><info><title>導入</title></info>
+        
 
         <para>
             <classname>Zend_Controller</classname> は、Zend Framework の <acronym>MVC</acronym>
-            システムの中心となるものです。<acronym>MVC</acronym> は <ulink
-                url="http://en.wikipedia.org/wiki/Model-view-controller">モデル-ビュー-コントローラ</ulink>
+            システムの中心となるものです。<acronym>MVC</acronym> は <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Model-view-controller">モデル-ビュー-コントローラ</link>
             の頭文字をとったもので、アプリケーションのロジックと表示ロジックを分離させる設計手法です。
             <classname>Zend_Controller_Front</classname> は
-            <ulink
-                url="http://www.martinfowler.com/eaaCatalog/frontController.html">
-                フロントコントローラ</ulink> パターンを実装しており、
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.martinfowler.com/eaaCatalog/frontController.html">
+                フロントコントローラ</link> パターンを実装しており、
             すべてのリクエストをいったんフロントコントローラで受け取った上でその
             <acronym>URL</acronym> にもとづいたアクションコントローラに配送します。
         </para>
@@ -28,18 +24,18 @@
             インターフェイスや機能を新たに書くことができます。
             アクションヘルパーを使用すると、システムの機能を強化したり変更したりできるようになります。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.quickstart.go">
-        <title>クイックスタート</title>
+    <section xml:id="zend.controller.quickstart.go"><info><title>クイックスタート</title></info>
+        
 
         <para>
             より詳しい情報が知りたい場合は、次のセクションを参照ください。
             とりあえず動かしてみたいという方は、ここを読むといいでしょう。
         </para>
 
-        <sect3 id="zend.controller.quickstart.go.directory">
-            <title>ファイルシステムレイアウトの作成</title>
+        <section xml:id="zend.controller.quickstart.go.directory"><info><title>ファイルシステムレイアウトの作成</title></info>
+            
 
             <para>
                 まずはディレクトリ構成を決めましょう。
@@ -62,19 +58,19 @@ html/
     index.php
 ]]></programlisting>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.quickstart.go.docroot">
-            <title>ドキュメントルートの設定</title>
+        <section xml:id="zend.controller.quickstart.go.docroot"><info><title>ドキュメントルートの設定</title></info>
+            
 
             <para>
                 ウェブサーバのドキュメントルートを、先ほどのレイアウト中の
                 <filename>html/</filename> ディレクトリに設定します。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.quickstart.go.rewrite">
-            <title>rewrite ルールの作成</title>
+        <section xml:id="zend.controller.quickstart.go.rewrite"><info><title>rewrite ルールの作成</title></info>
+            
 
             <para>
                 上のレイアウトの <filename>html/.htaccess</filename>
@@ -90,8 +86,8 @@ RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
 ]]></programlisting>
 
-            <note>
-                <title>mod_rewrite について</title>
+            <note><info><title>mod_rewrite について</title></info>
+                
 
                 <para>
                     上のリライトルールは、バーチャルホストのドキュメントルート配下にある
@@ -99,9 +95,8 @@ RewriteRule ^.*$ index.php [NC,L]
                     この方式で公開してしまってはまずいファイルがある場合は、
                     このルールにさらに制約を追加しなければなりません。
                     Apache のウェブサイトにいけば、
-                    <ulink
-                        url="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">
-                        mod_rewrite について</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">
+                        mod_rewrite について</link>
                     もっと詳しく知ることができます。
                 </para>
             </note>
@@ -153,10 +148,10 @@ RewriteRule ^.*$ index.php [NC,L]
                     ルータのドキュメント</link> を参照ください。
                 </para>
             </note>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.quickstart.go.bootstrap">
-            <title>起動ファイルの作成</title>
+        <section xml:id="zend.controller.quickstart.go.bootstrap"><info><title>起動ファイルの作成</title></info>
+            
 
             <para>
                 起動ファイルとはすべてのリクエストの転送先となるファイルのことで、
@@ -172,10 +167,10 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 これは、フロントコントローラのインスタンスとディスパッチを行います。
                 この結果、アクションコントローラへリクエストが転送されます。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.quickstart.go.controller">
-            <title>デフォルトのアクションコントローラの作成</title>
+        <section xml:id="zend.controller.quickstart.go.controller"><info><title>デフォルトのアクションコントローラの作成</title></info>
+            
 
             <para>
                 アクションコントローラについて説明する前に、まず
@@ -251,10 +246,10 @@ class IndexController extends Zend_Controller_Action
                 <filename>application/views/scripts/index/index.phtml</filename>
                 となります。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.quickstart.go.view">
-            <title>ビュースクリプトの作成</title>
+        <section xml:id="zend.controller.quickstart.go.view"><info><title>ビュースクリプトの作成</title></info>
+            
 
             <para>
                 <link linkend="zend.controller.quickstart.go.controller">
@@ -279,10 +274,10 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 </body>
 </html>
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.quickstart.go.errorhandler">
-            <title>エラーコントローラの作成</title>
+        <section xml:id="zend.controller.quickstart.go.errorhandler"><info><title>エラーコントローラの作成</title></info>
+            
 
             <para>
                 デフォルトで、
@@ -326,10 +321,10 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 </body>
 </html>
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.quickstart.go.finish">
-            <title>実際に見てみましょう!</title>
+        <section xml:id="zend.controller.quickstart.go.finish"><info><title>実際に見てみましょう!</title></info>
+            
 
             <para>
                 ここまでくれば、実際にブラウザでサイトを表示してみることができます。
@@ -355,9 +350,6 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                 これで、実際にコントローラやアクションを作成する準備ができました。
                 おめでとうございます!
             </para>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

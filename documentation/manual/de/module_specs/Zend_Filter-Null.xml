@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20774 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.null">
-    <title>Null</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.null"><info><title>Null</title></info>
+    
 
     <para>
         Dieser Filter ändert die angegebene Eingabe so dass Sie <constant>NULL</constant> ist wenn
@@ -11,8 +9,8 @@
         anderen Typ haben will.
     </para>
 
-    <sect3 id="zend.filter.set.null.default">
-        <title>Standardverhalten für Zend_Filter_Null</title>
+    <section xml:id="zend.filter.set.null.default"><info><title>Standardverhalten für Zend_Filter_Null</title></info>
+        
 
         <para>
             Standardmäßig arbeitet dieser Filter wie <acronym>PHP</acronym>'s
@@ -37,10 +35,10 @@ $result = $filter->filter($value);
         <para>
             Jeder andere Wert ist zurückgegeben wie er ist, ohne irgendwelche Änderungen.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.null.types">
-        <title>Ändern des Verhaltens von Zend_Filter_Null</title>
+    <section xml:id="zend.filter.set.null.types"><info><title>Ändern des Verhaltens von Zend_Filter_Null</title></info>
+        
 
         <para>
             Manchmal ist es nicht genug basieren auf <methodname>empty()</methodname> zu filtern.
@@ -131,5 +129,5 @@ $filter = new Zend_Filter_Null(array(
             gewünschten Typen zu setzen. Um Typen im nachhinein zu setzen kann
             <methodname>setType()</methodname> verwendet werden.
         </para>
-    </sect3>
-</sect2>
+    </section>
+</section>

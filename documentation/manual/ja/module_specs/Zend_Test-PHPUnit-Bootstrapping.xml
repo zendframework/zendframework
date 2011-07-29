@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20807 -->
-<sect2 id="zend.test.phpunit.bootstrapping">
-    <title>テストケースの起動</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.bootstrapping"><info><title>テストケースの起動</title></info>
+    
 
     <para>
         <link linkend="zend.test.phpunit.loginexample">Login
@@ -65,8 +63,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
     <para>
         ３番目の方法として、アプリケーションを起動するための
         <acronym>PHP</acronym> コールバックを指定できます。
-        この方法は <link
-            linkend="zend.test.phpunit.loginexample">Login サンプル</link>
+        この方法は <link linkend="zend.test.phpunit.loginexample">Login サンプル</link>
         で使用しています。使用するコールバックが関数や static
         メソッドである場合は、クラスレベルで設定できます。
     </para>
@@ -147,7 +144,4 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         アプリケーションが起動したら、
         いよいよテストを作り始めることができます。
     </para>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

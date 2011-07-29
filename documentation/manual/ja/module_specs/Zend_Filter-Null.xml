@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20774 -->
-<sect2 id="zend.filter.set.null">
-    <title>Null</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.null"><info><title>Null</title></info>
+    
 
     <para>
         もし指定の基準を満たす場合、
@@ -11,8 +9,8 @@
         そして、ブールや他のあらゆるタイプの代わりに <constant>NULL</constant>値を持つことを望みます。
     </para>
 
-    <sect3 id="zend.filter.set.null.default">
-        <title>Zend_Filter_Null の既定の振る舞い</title>
+    <section xml:id="zend.filter.set.null.default"><info><title>Zend_Filter_Null の既定の振る舞い</title></info>
+        
 
         <para>
             デフォルトではこのフィルタは<acronym>PHP</acronym>の
@@ -38,10 +36,10 @@ $result = $filter->filter($value);
         <para>
             他の値ではいずれも変更無しにそのまま返されます。
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.null.types">
-        <title>Zend_Filter_Null の振る舞いの変更</title>
+    <section xml:id="zend.filter.set.null.types"><info><title>Zend_Filter_Null の振る舞いの変更</title></info>
+        
 
         <para>
             しばしば、<methodname>empty()</methodname>に基づくフィルタでは十分ではありません。
@@ -134,8 +132,5 @@ $filter = new Zend_Filter_Null(array(
             <classname>Zend_Config</classname> のインスタンスを与えることもできます。
             タイプをセットするには、後で <methodname>setType()</methodname> を使います。
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

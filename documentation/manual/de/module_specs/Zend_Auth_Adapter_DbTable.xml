@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.auth.adapter.dbtable">
-    <title>Datenbanktabellen Authentifizierung</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.dbtable"><info><title>Datenbanktabellen Authentifizierung</title></info>
+    
 
-    <sect2 id="zend.auth.adapter.dbtable.introduction">
-        <title>Einführung</title>
+    <section xml:id="zend.auth.adapter.dbtable.introduction"><info><title>Einführung</title></info>
+        
 
         <para>
             <classname>Zend_Auth_Adapter_DbTable</classname> bietet die Möglichkeit sich gegenüber
@@ -65,8 +63,8 @@
             </listitem>
         </itemizedlist>
 
-        <example id="zend.auth.adapter.dbtable.introduction.example.basic_usage">
-            <title>Grundsätzliche Verwendung</title>
+        <example xml:id="zend.auth.adapter.dbtable.introduction.example.basic_usage"><info><title>Grundsätzliche Verwendung</title></info>
+            
 
             <para>
                 Wie bereits in der Einführung beschrieben benötigt der
@@ -180,10 +178,10 @@ Array
                 gegenüber unberechtigten Versuchen abzusichern.
             </para>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.dbtable.advanced.storing_result_row">
-        <title>Fortgeschrittene Verwendung: Ein DbTable Ergebnis Objekt dauerhaft machen</title>
+    <section xml:id="zend.auth.adapter.dbtable.advanced.storing_result_row"><info><title>Fortgeschrittene Verwendung: Ein DbTable Ergebnis Objekt dauerhaft machen</title></info>
+        
 
         <para>
             Standardmäßig gibt <classname>Zend_Auth_Adapter_DbTable</classname> die unterstützte
@@ -225,10 +223,10 @@ if ($result->isValid()) {
 
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.dbtable.advanced.advanced_usage">
-        <title>Fortgeschrittene Verwendung durch Beispiele</title>
+    <section xml:id="zend.auth.adapter.dbtable.advanced.advanced_usage"><info><title>Fortgeschrittene Verwendung durch Beispiele</title></info>
+        
 
         <para>
             Wärend der primäre Zweck von <classname>Zend_Auth</classname> (und konsequenter Weise
@@ -358,5 +356,5 @@ $select->where('active = "TRUE"');
 // Authentifizieren, das stellt sicher das users.active = TRUE
 $adapter->authenticate();
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.feed.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_Feed</classname> provides functionality for consuming <acronym>RSS</acronym>
@@ -27,8 +26,8 @@
         database, etc.
     </para>
 
-    <note>
-        <title>Be aware</title>
+    <note><info><title>Be aware</title></info>
+        
 
         <para>
             Many <acronym>RSS</acronym> feeds have different channel and item properties available.
@@ -37,8 +36,8 @@
         </para>
     </note>
 
-    <example id="zend.feed.introduction.example.rss">
-        <title>Putting Zend_Feed to Work on RSS Feed Data</title>
+    <example xml:id="zend.feed.introduction.example.rss"><info><title>Putting Zend_Feed to Work on RSS Feed Data</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 // Fetch the latest Slashdot headlines
@@ -69,7 +68,4 @@ foreach ($slashdotRss as $item) {
 }
 ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

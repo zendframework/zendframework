@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.config.adapters.xml">
-    <title>Zend_Config_Xml</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.adapters.xml"><info><title>Zend_Config_Xml</title></info>
+    
 
     <para>
         <classname>Zend_Config_Xml</classname> permet aux développeurs de stocker des données de
@@ -19,8 +17,8 @@
         héritées.
     </para>
 
-    <note>
-        <title>Type retourné</title>
+    <note><info><title>Type retourné</title></info>
+        
         <para>
             Les données de configuration lues grâce à <classname>Zend_Config_Xml</classname> sont
             toujours des chaînes de caractères. La conversion des données à
@@ -29,8 +27,8 @@
         </para>
     </note>
 
-    <example id="zend.config.adapters.xml.example.using">
-        <title>Utiliser Zend_Config_Xml</title>
+    <example xml:id="zend.config.adapters.xml.example.using"><info><title>Utiliser Zend_Config_Xml</title></info>
+        
 
         <para>
             Cet exemple illustre une utilisation de base de <classname>Zend_Config_Xml</classname>
@@ -43,7 +41,7 @@
             écrite réciproquement, avec la section de production héritant de la section de test,
             bien que ceci ne doit pas être le cas pour des situations plus complexes. Supposons,
             que les données suivantes de configuration sont contenues dans
-            <filename>/chemin/vers/config.xml</filename>&#160;:
+            <filename>/chemin/vers/config.xml</filename> :
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -76,7 +74,7 @@
         <para>
             Ensuite, supposons que le développeur a besoin des données de configuration de
             test issues du fichier <acronym>XML</acronym>. Il est facile de charger ces données
-            en indiquant le fichier <acronym>XML</acronym> et la section de test&#160;:
+            en indiquant le fichier <acronym>XML</acronym> et la section de test :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -87,8 +85,8 @@ echo $config->database->params->dbname; // affiche "dbname"
 ]]></programlisting>
     </example>
 
-    <example id="zend.config.adapters.xml.example.attributes">
-        <title>Utilisation des attributs de balise avec Zend_Config_Xml</title>
+    <example xml:id="zend.config.adapters.xml.example.attributes"><info><title>Utilisation des attributs de balise avec Zend_Config_Xml</title></info>
+        
 
         <para>
             <classname>Zend_Config_Xml</classname> supporte aussi 2 autres manières de définir des
@@ -96,7 +94,7 @@ echo $config->database->params->dbname; // affiche "dbname"
             attributs <emphasis>extends</emphasis> et <emphasis>value</emphasis> sont des mots
             réservés (ce dernier par la seconde manière d'utiliser les attributs), ils ne doivent
             pas être utilisés. La première manière d'utiliser les attributs est de les ajouter
-            au noeud parent, ils seront ainsi interprétés en tant qu'enfant de ce noeud&#160;:
+            au noeud parent, ils seront ainsi interprétés en tant qu'enfant de ce noeud :
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -124,7 +122,7 @@ echo $config->database->params->dbname; // affiche "dbname"
             La seconde manière ne permet pas vraiment de raccourcir la configuration, mais la
             rend plus facile à maintenir puisque vous n'avez pas à écrire les noms de balises deux
             fois. Vous créez simplement une balise vide ayant sa valeur dans
-            <emphasis>value</emphasis>&#160;:
+            <emphasis>value</emphasis> :
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -155,13 +153,13 @@ echo $config->database->params->dbname; // affiche "dbname"
 ]]></programlisting>
     </example>
 
-    <note>
-        <title>Chaînes de caractères XML</title>
+    <note><info><title>Chaînes de caractères XML</title></info>
+        
         <para>
             <classname>Zend_Config_Xml</classname> est capable de charger une chaîne de caractères
             <acronym>XML</acronym> directement, par exemple si elle est issue d'une base de données.
             La chaîne est fournie en tant que premier paramètre du constructeur et doit commencer
-            par les caractères <emphasis>'&lt;?xml'</emphasis>&#160;:
+            par les caractères <emphasis>'&lt;?xml'</emphasis> :
         </para>
         <programlisting language="xml"><![CDATA[
 $string = <<<EOT
@@ -189,8 +187,8 @@ $config = new Zend_Config_Xml($string, 'staging');
 ]]></programlisting>
     </note>
 
-    <note>
-        <title>Espace de noms XML de Zend_Config</title>
+    <note><info><title>Espace de noms XML de Zend_Config</title></info>
+        
 
         <para>
             <classname>Zend_Config</classname> possède son propre espace de noms
@@ -240,4 +238,4 @@ echo $config->includePath; // Affiche "/var/www/something/library"
 ]]></programlisting>
     </note>
 
-</sect1>
+</section>

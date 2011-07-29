@@ -1,12 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20766 -->
-<sect1 id="zend.db.statement">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.statement"><info><title>Zend_Db_Statement</title></info>
 
-    <title>Zend_Db_Statement</title>
+    
 
     <para>
-        <xref linkend="zend.db.adapter" /> で説明した
+        <xref linkend="zend.db.adapter"/> で説明した
         <methodname>fetchAll()</methodname> や <methodname>insert()</methodname>
         のような便利なメソッド以外にも、
         ステートメントオブジェクトを使用することで、
@@ -16,13 +14,13 @@
 
     <para>
         <classname>Zend_Db_Statement</classname> は、
-        <ulink url="http://www.php.net/pdo">PHP Data Objects</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/pdo">PHP Data Objects</link>
         拡張モジュールの PDOStatement オブジェクトをもとにしたものです。
     </para>
 
-    <sect2 id="zend.db.statement.creating">
+    <section xml:id="zend.db.statement.creating"><info><title>ステートメントの作成</title></info>
 
-        <title>ステートメントの作成</title>
+        
 
         <para>
             通常は、ステートメントオブジェクトはデータベースアダプタクラスの
@@ -33,8 +31,8 @@
             バインド変数の配列を指定します。
         </para>
 
-        <example id="zend.db.statement.creating.example1">
-            <title>query() による SQL ステートメントオブジェクトの作成</title>
+        <example xml:id="zend.db.statement.creating.example1"><info><title>query() による SQL ステートメントオブジェクトの作成</title></info>
+            
             <programlisting language="php"><![CDATA[
 $stmt = $db->query(
             'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?',
@@ -60,8 +58,8 @@ $stmt = $db->query(
             このステートメントは、準備されただけでまだ実行されていない状態となります。
         </para>
 
-        <example id="zend.db.statement.creating.example2">
-            <title>SQL ステートメントのコンストラクタの使用</title>
+        <example xml:id="zend.db.statement.creating.example2"><info><title>SQL ステートメントのコンストラクタの使用</title></info>
+            
             <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?';
 
@@ -69,11 +67,11 @@ $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
 ]]></programlisting>
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.statement.executing">
+    <section xml:id="zend.db.statement.executing"><info><title>ステートメントの実行</title></info>
 
-        <title>ステートメントの実行</title>
+        
 
         <para>
             ステートメントをコンストラクタから作成した場合や、
@@ -90,8 +88,8 @@ $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
             バインドする値は通常の配列で渡します。
         </para>
 
-        <example id="zend.db.statement.executing.example1">
-            <title>位置指定パラメータによるステートメントの実行</title>
+        <example xml:id="zend.db.statement.executing.example1"><info><title>位置指定パラメータによるステートメントの実行</title></info>
+            
             <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?';
 
@@ -108,8 +106,8 @@ $stmt->execute(array('goofy', 'FIXED'));
             配列のキーが、パラメータの名前に対応します。
         </para>
 
-        <example id="zend.db.statement.executing.example2">
-            <title>名前つきパラメータによるステートメントの実行</title>
+        <example xml:id="zend.db.statement.executing.example2"><info><title>名前つきパラメータによるステートメントの実行</title></info>
+            
             <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE ' .
        'reported_by = :reporter AND bug_status = :status';
@@ -127,11 +125,11 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
             それらの中にはいずれか一種類の形式のパラメータしかサポートしないものもあるかもしれません。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.statement.fetching">
+    <section xml:id="zend.db.statement.fetching"><info><title>SELECT 文からの結果の取得</title></info>
 
-        <title>SELECT 文からの結果の取得</title>
+        
 
         <para>
             ステートメントオブジェクトのメソッドをコールすることで、
@@ -143,9 +141,9 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
             その結果から行を取得するメソッドをコールすることはできません。
         </para>
 
-        <sect3 id="zend.db.statement.fetching.fetch">
+        <section xml:id="zend.db.statement.fetching.fetch"><info><title>結果セットからの単一の行の取得</title></info>
 
-            <title>結果セットからの単一の行の取得</title>
+            
 
             <para>
                 結果セットから単一の行を取得するには、ステートメントオブジェクトの
@@ -160,7 +158,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                         <emphasis>取得形式</emphasis>
                         を指定します。これは、返り値の構造を決めるものです。
                         ここで指定できる値と対応する返り値については
-                        <xref linkend="zend.db.adapter.select.fetch-mode" />
+                        <xref linkend="zend.db.adapter.select.fetch-mode"/>
                         を参照ください。
                     </para>
                 </listitem>
@@ -191,8 +189,8 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                 <methodname>fetch()</methodname> は <constant>FALSE</constant> を返します。
             </para>
 
-            <example id="zend.db.statement.fetching.fetch.example">
-                <title>ループ内での fetch() の使用</title>
+            <example xml:id="zend.db.statement.fetching.fetch.example"><info><title>ループ内での fetch() の使用</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT * FROM bugs');
 
@@ -203,15 +201,15 @@ while ($row = $stmt->fetch()) {
             </example>
 
             <para>
-                <ulink url="http://www.php.net/PDOStatement-fetch">PDOStatement::fetch()</ulink>
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/PDOStatement-fetch">PDOStatement::fetch()</link>
                 のマニュアルも参照ください。
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.statement.fetching.fetchall">
+        <section xml:id="zend.db.statement.fetching.fetchall"><info><title>結果セット全体の取得</title></info>
 
-            <title>結果セット全体の取得</title>
+            
 
             <para>
                 結果セットのすべての行を一度に取得するには、
@@ -224,8 +222,8 @@ while ($row = $stmt->fetch()) {
                 Zend_Db::FETCH_COLUMN である場合に使用します。
             </para>
 
-            <example id="zend.db.statement.fetching.fetchall.example">
-                <title>fetchAll() の使用法</title>
+            <example xml:id="zend.db.statement.fetching.fetchall.example"><info><title>fetchAll() の使用法</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT * FROM bugs');
 
@@ -236,15 +234,15 @@ echo $rows[0]['bug_description'];
             </example>
 
             <para>
-                <ulink url="http://www.php.net/PDOStatement-fetchAll">PDOStatement::fetchAll()</ulink>
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/PDOStatement-fetchAll">PDOStatement::fetchAll()</link>
                 のマニュアルも参照ください。
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.statement.fetching.fetch-mode">
+        <section xml:id="zend.db.statement.fetching.fetch-mode"><info><title>取得形式の変更</title></info>
 
-            <title>取得形式の変更</title>
+            
 
             <para>
                 デフォルトでは、ステートメントオブジェクトが結果セットの行を返す形式は連想配列で、
@@ -254,13 +252,13 @@ echo $rows[0]['bug_description'];
                 メソッドで、取得形式を指定します。指定できる値は、<classname>Zend_Db</classname> クラスの定数
                 FETCH_ASSOC、FETCH_NUM、FETCH_BOTH、FETCH_COLUMN そして FETCH_OBJ です。
                 これらについての詳細は
-                <xref linkend="zend.db.adapter.select.fetch-mode" /> を参照ください。
+                <xref linkend="zend.db.adapter.select.fetch-mode"/> を参照ください。
                 これを指定すると、それ以降の <methodname>fetch()</methodname> メソッドや
                 <methodname>fetchAll()</methodname> メソッドでその形式を使用するようになります。
             </para>
 
-            <example id="zend.db.statement.fetching.fetch-mode.example">
-                <title>取得形式の設定</title>
+            <example xml:id="zend.db.statement.fetching.fetch-mode.example"><info><title>取得形式の設定</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT * FROM bugs');
 
@@ -273,15 +271,15 @@ echo $rows[0][0];
             </example>
 
             <para>
-                <ulink url="http://www.php.net/PDOStatement-setFetchMode">PDOStatement::setFetchMode()</ulink>
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/PDOStatement-setFetchMode">PDOStatement::setFetchMode()</link>
                 のマニュアルも参照ください。
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.statement.fetching.fetchcolumn">
+        <section xml:id="zend.db.statement.fetching.fetchcolumn"><info><title>結果セットからの単一のカラムの取得</title></info>
 
-            <title>結果セットからの単一のカラムの取得</title>
+            
 
             <para>
                 結果セットの次の行から単一のカラムの値を取得するには
@@ -301,8 +299,8 @@ echo $rows[0][0];
                 これは、結果セットのすべての行の、最初のカラムの値をまとめたものです。
             </para>
 
-            <example id="zend.db.statement.fetching.fetchcolumn.example">
-                <title>fetchColumn() の使用法</title>
+            <example xml:id="zend.db.statement.fetching.fetchcolumn.example"><info><title>fetchColumn() の使用法</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT bug_id, bug_description, bug_status FROM bugs');
 
@@ -311,15 +309,15 @@ $bug_status = $stmt->fetchColumn(2);
             </example>
 
             <para>
-                <ulink url="http://www.php.net/PDOStatement-fetchColumn">PDOStatement::fetchColumn()</ulink>
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/PDOStatement-fetchColumn">PDOStatement::fetchColumn()</link>
                 のマニュアルも参照ください。
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.statement.fetching.fetchobject">
+        <section xml:id="zend.db.statement.fetching.fetchobject"><info><title>オブジェクト形式での行の取得</title></info>
 
-            <title>オブジェクト形式での行の取得</title>
+            
 
             <para>
                 結果セットの行をオブジェクトとして取得するには
@@ -329,8 +327,8 @@ $bug_status = $stmt->fetchColumn(2);
                 これは、最初の引数で指定したクラスのコンストラクタに渡す引数となります。
             </para>
 
-            <example id="zend.db.statement.fetching.fetchobject.example">
-                <title>fetchObject() の使用法</title>
+            <example xml:id="zend.db.statement.fetching.fetchobject.example"><info><title>fetchObject() の使用法</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT bug_id, bug_description, bug_status FROM bugs');
 
@@ -341,13 +339,13 @@ echo $obj->bug_description;
             </example>
 
             <para>
-                <ulink url="http://www.php.net/PDOStatement-fetchObject">PDOStatement::fetchObject()</ulink>
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/PDOStatement-fetchObject">PDOStatement::fetchObject()</link>
                 のマニュアルも参照ください。
             </para>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
     <!--
       @todo: binding parameters is not working yet.
@@ -394,4 +392,4 @@ echo $obj->bug_description;
     </sect2>
     -->
 
-</sect1>
+</section>

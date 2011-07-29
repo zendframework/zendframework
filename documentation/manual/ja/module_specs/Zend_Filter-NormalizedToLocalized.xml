@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20774 -->
-<sect2 id="zend.filter.set.normalizedtolocalized">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.normalizedtolocalized"><info><title>NormalizedToLocalized</title></info>
 
-    <title>NormalizedToLocalized</title>
+    
 
     <para>
         このフィルタはフィルタ<classname>Zend_Filter_LocalizedToNormalized</classname>の逆で、
@@ -63,9 +61,9 @@
         その他の入力はいずれも変更無しにそのまま返されます。
     </para>
 
-    <sect3 id="zend.filter.set.normalizedtolocalized.numbers">
+    <section xml:id="zend.filter.set.normalizedtolocalized.numbers"><info><title>数値のローカライズ</title></info>
 
-        <title>数値のローカライズ</title>
+        
 
         <para>
             整数、フロートまたは実数のようなあらゆる数がローカライズされます。
@@ -139,11 +137,11 @@ $filter->filter(123456.78901);
 //値 '123.456,79' を返します。
 ]]></programlisting>
 
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.normalizedtolocalized.dates">
+    <section xml:id="zend.filter.set.normalizedtolocalized.dates"><info><title>日時のローカライズ</title></info>
 
-        <title>日時のローカライズ</title>
+        
 
         <para>
             日付や時刻の値を正規化したものもまた、ローカライズできます。
@@ -179,10 +177,6 @@ $filter = new Zend_Filter_LocalizedToNormalized(
 $filter->filter(array('hour' => '33', 'minute' => '22', 'second' => '11'));
 // '11:22:33' を返します。
 ]]></programlisting>
-    </sect3>
+    </section>
 
-</sect2>
-
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

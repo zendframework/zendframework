@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21825 -->
-<sect3 id="zend.view.helpers.initial.object">
-    <title>HTML オブジェクトヘルパー</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.object"><info><title>HTML オブジェクトヘルパー</title></info>
+    
 
     <para>
-        <acronym>HTML</acronym> の <emphasis><![CDATA[<object>]]></emphasis> 要素は、
+        <acronym>HTML</acronym> の <emphasis>&lt;object&gt;</emphasis> 要素は、
         Flash や QuickTime といったメディアをウェブページに埋め込むために使用するものです。
         オブジェクトビューヘルパーは、
         最低限の労力でメディアを埋め込めるよう手助けします。
@@ -47,9 +45,9 @@
         そのため、このドキュメントでは、そのうちの 2 つのヘルパーの例だけを紹介します。
     </para>
 
-    <example id="zend.view.helpers.initial.object.flash">
+    <example xml:id="zend.view.helpers.initial.object.flash"><info><title>Flash ヘルパー</title></info>
 
-        <title>Flash ヘルパー</title>
+        
 
         <para>
             このヘルパーを使うと、Flash をページの中に簡単に埋め込めるようになります。
@@ -75,13 +73,13 @@
     </example>
 
     <para>
-        さらに、属性やパラメータ、コンテンツなど <emphasis><![CDATA[<object>]]></emphasis>
+        さらに、属性やパラメータ、コンテンツなど <emphasis>&lt;object&gt;</emphasis>
         とともにレンダリングする内容も指定できます。その方法は
         <methodname>htmlObject()</methodname> ヘルパーで紹介します。
     </para>
 
-    <example id="zend.view.helpers.initial.object.object">
-        <title>追加属性を渡すことによるオブジェクトのカスタマイズ</title>
+    <example xml:id="zend.view.helpers.initial.object.object"><info><title>追加属性を渡すことによるオブジェクトのカスタマイズ</title></info>
+        
 
         <para>
             オブジェクトヘルパーの最初の引数は常に必須です。
@@ -93,7 +91,7 @@
             属性の例としては、たとえば <property>classid</property>
             や <property>codebase</property> などがあります。
             4 番目の引数も同様に キー/値 のペア形式の配列のみを受け取り、
-            それを使用して <emphasis><![CDATA[<param>]]></emphasis>
+            それを使用して <emphasis>&lt;param&gt;</emphasis>
             要素を作成します。例を参照ください。
             最後に、オプションでそのオブジェクトの追加コンテンツを指定できます。
             これらすべての引数を使用した例をごらんください。
@@ -126,7 +124,4 @@ echo $this->htmlObject(
 */
 ]]></programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

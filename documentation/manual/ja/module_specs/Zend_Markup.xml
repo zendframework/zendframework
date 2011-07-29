@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21825 -->
-<sect1 id="zend.markup.introduction">
-    <title>導入</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.markup.introduction"><info><title>導入</title></info>
+    
  
     <para>
         <classname>Zend_Markup</classname> コンポーネントは BBcode や Textile の
@@ -18,4 +18,4 @@
         (例: BbCode )。第２引数(オプション)は使用するレンダラーで、
         デフォルトは <acronym>HTML</acronym> です。3つ目の引数はレンダラーで使用可能なオプションの配列です。
     </para>
-</sect1>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 17502 -->
-<sect1 id="zend.feed.findFeeds">
-    <title>ウェブページからのフィードの取得</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.findFeeds"><info><title>ウェブページからのフィードの取得</title></info>
+    
 
     <para>
         ウェブページの中には、そのページの内容に関連するフィードを参照する
@@ -26,7 +24,4 @@ $feedArray = Zend_Feed::findFeeds('http://www.example.com/news.html');
         <classname>Zend_Feed</classname> は <classname>Zend_Feed_Exception</classname>
         をスローします。
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

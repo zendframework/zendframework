@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20792 -->
-<sect1 id="zend.loader.pluginloader">
-    <title>プラグインのロード</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.pluginloader"><info><title>プラグインのロード</title></info>
+    
 
     <para>
         Zend Framework の多くのコンポーネントはプラグイン方式を採用しており、
@@ -24,8 +22,8 @@
         そして、事前に登録されているプラグインを上書きできるようになります。
     </para>
 
-    <sect2 id="zend.loader.pluginloader.usage">
-        <title>基本的な使用例</title>
+    <section xml:id="zend.loader.pluginloader.usage"><info><title>基本的な使用例</title></info>
+        
 
         <para>
             次のようなディレクトリ構造とクラスファイル群の構成を考えてみましょう。
@@ -97,8 +95,8 @@ $formSubmitClass = $loader->load('FormSubmit'); // 'Bar_View_Helper_FormSubmit'
             </para>
         </note>
 
-        <note>
-            <title>インスタンス作成時のパスの定義</title>
+        <note><info><title>インスタンス作成時のパスの定義</title></info>
+            
 
             <para>
                 プレフィックスとパス
@@ -133,10 +131,10 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
             <code>PluginLoader</code> がインスタンス化したその他のコンポーネントで
             このレジストリ名を使用すると、すでに読み込まれているパスやプラグインを使用できます。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.pluginloader.paths">
-        <title>プラグインのパスの操作</title>
+    <section xml:id="zend.loader.pluginloader.paths"><info><title>プラグインのパスの操作</title></info>
+        
 
         <para>
             先ほどのセクションの例では、プラグインローダーでパスを追加する方法を示しました。
@@ -169,10 +167,10 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
                     そのパスが存在すればそのパスだけを削除します。
             </para></listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.pluginloader.checks">
-        <title>プラグインの確認とクラス名の取得</title>
+    <section xml:id="zend.loader.pluginloader.checks"><info><title>プラグインの確認とクラス名の取得</title></info>
+        
 
         <para>
             時には、プラグインクラスがロードされているかどうかを調べてから何かを行いたいこともあるでしょう。
@@ -192,10 +190,10 @@ if ($loader->isLoaded('Adapter')) {
     $adapter = call_user_func(array($class, 'getInstance'));
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.pluginloader.performance">
-        <title>プラグインのパフォーマンスの向上</title>
+    <section xml:id="zend.loader.pluginloader.performance"><info><title>プラグインのパフォーマンスの向上</title></info>
+        
 
         <para>
             プラグインの読み込みは、非常に重い操作となりえます。
@@ -218,8 +216,8 @@ if ($loader->isLoaded('Adapter')) {
             この方式を使用すると、実運用サーバ上でのパフォーマンスが劇的に向上します。
         </para>
 
-        <example id="zend.loader.pluginloader.performance.example">
-            <title>PluginLoader クラスのファイルインクルードキャッシュの使用法</title>
+        <example xml:id="zend.loader.pluginloader.performance.example"><info><title>PluginLoader クラスのファイルインクルードキャッシュの使用法</title></info>
+            
 
             <para>
                 クラスファイルのインクルードキャッシュを使用するには、
@@ -260,8 +258,5 @@ if ($config->enablePluginLoaderCache) {
                 これを使えば、コードを直接変更しなくても設定ファイルだけの変更だけですませることができます。
             </para>
         </example>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

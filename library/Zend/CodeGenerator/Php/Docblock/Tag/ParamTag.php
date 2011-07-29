@@ -45,11 +45,6 @@ class ParamTag extends \Zend\CodeGenerator\Php\PhpDocblockTag
     protected $_paramName = null;
 
     /**
-     * @var string
-     */
-    protected $_description = null;
-
-    /**
      * fromReflection()
      *
      * @param \Zend\Reflection\ReflectionDocblockTag $reflectionTagParam
@@ -57,7 +52,7 @@ class ParamTag extends \Zend\CodeGenerator\Php\PhpDocblockTag
      */
     public static function fromReflection(\Zend\Reflection\ReflectionDocblockTag $reflectionTagParam)
     {
-        $paramTag = new \self();
+        $paramTag = new self();
 
         $paramTag->setName('param');
         $paramTag->setDatatype($reflectionTagParam->getType()); // @todo rename

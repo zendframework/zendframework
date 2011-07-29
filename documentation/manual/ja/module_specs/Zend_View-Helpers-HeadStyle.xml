@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21825 -->
-<sect3 id="zend.view.helpers.initial.headstyle">
-    <title>HeadStyle ヘルパー</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headstyle"><info><title>HeadStyle ヘルパー</title></info>
+    
 
     <para>
         <acronym>HTML</acronym> の <emphasis>&lt;style&gt;</emphasis> 要素を使用して、
@@ -10,8 +8,8 @@
         要素に埋め込みます。
     </para>
 
-    <note>
-        <title>HeadLink を使用した <acronym>CSS</acronym> ファイルへのリンク</title>
+    <note><info><title>HeadLink を使用した <acronym>CSS</acronym> ファイルへのリンク</title></info>
+        
 
         <para>
             外部スタイルシートの読み込み用の
@@ -59,8 +57,8 @@
         lang、title、media そして dir のすべてが使用可能です。
     </para>
 
-    <note>
-        <title>条件コメントの設定</title>
+    <note><info><title>条件コメントの設定</title></info>
+        
 
         <para>
             <classname>HeadStyle</classname> では、script タグを条件コメントで囲むことができます。
@@ -69,8 +67,8 @@
             <varname>$attributes</varname> パラメータで渡します。
         </para>
 
-        <example id="zend.view.helpers.initial.headstyle.conditional">
-            <title>Headstyle で条件コメントを使う例</title>
+        <example xml:id="zend.view.helpers.initial.headstyle.conditional"><info><title>Headstyle で条件コメントを使う例</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // スクリプトを追加します
@@ -109,8 +107,8 @@ $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7'));
         ヘルパー</link> の具象実装です。
     </para>
 
-    <note>
-        <title>UTF-8 encoding used by default</title>
+    <note><info><title>UTF-8 encoding used by default</title></info>
+        
 
         <para>
             By default, Zend Framework uses <acronym>UTF-8</acronym> as its default encoding, and,
@@ -131,8 +129,8 @@ $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7'));
         </para>
     </note>
 
-    <example id="zend.view.helpers.initial.headstyle.basicusage">
-        <title>HeadStyle ヘルパーの基本的な使用法</title>
+    <example xml:id="zend.view.helpers.initial.headstyle.basicusage"><info><title>HeadStyle ヘルパーの基本的な使用法</title></info>
+        
 
         <para>
             新しい style タグを、好きなときに指定できます。
@@ -173,8 +171,8 @@ $this->headStyle()->prependStyle($firstStyles);
 ]]></programlisting>
     </example>
 
-    <example id="zend.view.helpers.initial.headstyle.capture">
-        <title>HeadStyle ヘルパーによるスタイル宣言のキャプチャ</title>
+    <example xml:id="zend.view.helpers.initial.headstyle.capture"><info><title>HeadStyle ヘルパーによるスタイル宣言のキャプチャ</title></info>
+        
 
         <para>
             時には <acronym>CSS</acronym> のスタイル宣言をプログラムで生成しなければならないこともあるでしょう。
@@ -213,7 +211,4 @@ body {
             </listitem>
         </itemizedlist>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

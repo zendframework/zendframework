@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19433 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.placeholder">
-    <title>L'aide de vue Placeholder</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.placeholder"><info><title>L'aide de vue Placeholder</title></info>
+    
 
     <note>
         <para>
@@ -19,8 +17,8 @@
         séparateurs de contenu).
     </para>
 
-    <example id="zend.view.helpers.initial.placeholder.usage">
-        <title>Utilisation basique des Placeholders</title>
+    <example xml:id="zend.view.helpers.initial.placeholder.usage"><info><title>Utilisation basique des Placeholders</title></info>
+        
 
         <para>
             L'utilisation basique des placeholders est la persistance des données de vue.
@@ -39,8 +37,8 @@
 ]]></programlisting>
     </example>
 
-    <example id="zend.view.helpers.initial.placeholder.aggregation">
-        <title>Utilisation des Placeholders pour agréger du contenu</title>
+    <example xml:id="zend.view.helpers.initial.placeholder.aggregation"><info><title>Utilisation des Placeholders pour agréger du contenu</title></info>
+        
 
         <para>
             L'agrégation du contenu via les placeholders peut être aussi utile parfois. Par
@@ -131,8 +129,8 @@ echo $foo['bar'];
 ]]></programlisting>
     </example>
 
-    <example id="zend.view.helpers.initial.placeholder.capture">
-        <title>Utilisation des Placeholders pour capturer le contenu</title>
+    <example xml:id="zend.view.helpers.initial.placeholder.capture"><info><title>Utilisation des Placeholders pour capturer le contenu</title></info>
+        
 
         <para>
             Occasionnellement vous pouvez avoir du contenu pour un placeholder dans un script
@@ -209,8 +207,8 @@ foreach ($this->data as $datum): ?>
 ]]></programlisting>
     </example>
 
-    <sect4 id="zend.view.helpers.initial.placeholder.implementations">
-        <title>Implémentation concrète des Placeholder</title>
+    <section xml:id="zend.view.helpers.initial.placeholder.implementations"><info><title>Implémentation concrète des Placeholder</title></info>
+        
 
         <para>
             Zend Framework embarque certaines implémentations concrètes de placeholders.
@@ -239,31 +237,27 @@ foreach ($this->data as $datum): ?>
 
             <listitem>
                 <para>
-                    <link
-                    linkend="zend.view.helpers.initial.headscript">HeadScript</link>
+                    <link linkend="zend.view.helpers.initial.headscript">HeadScript</link>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <link
-                    linkend="zend.view.helpers.initial.headstyle">HeadStyle</link>
+                    <link linkend="zend.view.helpers.initial.headstyle">HeadStyle</link>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <link
-                    linkend="zend.view.helpers.initial.headtitle">HeadTitle</link>
+                    <link linkend="zend.view.helpers.initial.headtitle">HeadTitle</link>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <link
-                    linkend="zend.view.helpers.initial.inlinescript">InlineScript</link>
+                    <link linkend="zend.view.helpers.initial.inlinescript">InlineScript</link>
                 </para>
             </listitem>
         </itemizedlist>
-    </sect4>
-</sect3>
+    </section>
+</section>

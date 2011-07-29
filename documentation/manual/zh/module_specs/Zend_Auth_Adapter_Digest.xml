@@ -1,13 +1,14 @@
-﻿<sect1 id="zend.auth.adapter.digest">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.digest"><info><title>摘要式认证</title></info>
 
-    <title>摘要式认证</title>
+    
 
-    <sect2 id="zend.auth.adapter.digest.introduction">
+    <section xml:id="zend.auth.adapter.digest.introduction"><info><title>简介</title></info>
 
-        <title>简介</title>
+        
 
         <para>
-            <ulink url="http://en.wikipedia.org/wiki/Digest_access_authentication">摘要式认证</ulink>是一个HTTP认证的方法，它通过不需要通过网络传递明文密码的方法对<ulink url="http://en.wikipedia.org/wiki/Basic_authentication_scheme">基本认证</ulink>加以改进。
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Digest_access_authentication">摘要式认证</link>是一个HTTP认证的方法，它通过不需要通过网络传递明文密码的方法对<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Basic_authentication_scheme">基本认证</link>加以改进。
         </para>
 
         <para>
@@ -34,14 +35,14 @@
 
         <programlisting><![CDATA[
 someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
-]]>
-</programlisting>
 
-    </sect2>
+]]></programlisting>
 
-    <sect2 id="zend.auth.adapter.digest.specifics">
+    </section>
 
-        <title>规范（Specifics）</title>
+    <section xml:id="zend.auth.adapter.digest.specifics"><info><title>规范（Specifics）</title></info>
+
+        
 
         <para>
             摘要式认证适配器<code>Zend_Auth_Adapter_Digest</code>需要若干输入参数：
@@ -70,11 +71,11 @@ someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
             在调用<code>authenticate()</code>之前必需要设定这些参数。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.digest.identity">
+    <section xml:id="zend.auth.adapter.digest.identity"><info><title>身份（Identity）</title></info>
 
-        <title>身份（Identity）</title>
+        
 
         <para>
             摘要式认证返回一个<code>Zend_Auth_Result</code> 对象，它由包含<code>realm</code>和<code>username</code>健值的数组的身份形成。在<code>authenticate()</code>被调用之前，分别设置和这些健值关联的数组值为相符的值。
@@ -100,12 +101,9 @@ Array
     [username] => someUser
 )
 */
-]]>
-        </programlisting>
 
-    </sect2>
+        ]]></programlisting>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+
+</section>

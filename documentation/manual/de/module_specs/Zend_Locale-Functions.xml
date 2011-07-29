@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22755 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.locale.functions">
-    <title>Zend_Locale verwenden</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.locale.functions"><info><title>Zend_Locale verwenden</title></info>
+    
 
     <para>
         <classname>Zend_Locale</classname> liefert auch lokalisierte Informationen über
@@ -10,18 +8,18 @@
         andere gebietsschema, Tage der Woche, Monatsnamen, usw.
     </para>
 
-    <sect2 id="zend.locale.copying">
-        <title>Kopieren, Klonen und Serialisieren von Gebietsschema Objekten</title>
+    <section xml:id="zend.locale.copying"><info><title>Kopieren, Klonen und Serialisieren von Gebietsschema Objekten</title></info>
+        
 
         <para>
-            Verwende <ulink url="http://php.net/language.oop5.cloning">Klonen von Objekten</ulink>
+            Verwende <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/language.oop5.cloning">Klonen von Objekten</link>
             um Gebietsschema Objekte exakt und effizient zu duplizieren. Die meisten lokalisierbaren
             Methoden akzeptieren auch eine Zeichenkette welche das Gebietsschema repräsentiert.
-            Dieser entspricht dem Ergebnis von <command>$locale->toString()</command>.
+            Dieser entspricht dem Ergebnis von <command>$locale-&gt;toString()</command>.
         </para>
 
-        <example id="zend.locale.copying.example-1">
-            <title>Klonen</title>
+        <example xml:id="zend.locale.copying.example-1"><info><title>Klonen</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('ar');
@@ -43,10 +41,10 @@ print "copied: ", $copiedLocale->toString();
 print "copied: ", $copiedLocale;
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.equals">
-        <title>Gleichheit</title>
+    <section xml:id="zend.locale.equals"><info><title>Gleichheit</title></info>
+        
 
         <para>
             <classname>Zend_Locale</classname> bietet auch eine erwartete Funktion zum Vergleichen
@@ -54,8 +52,8 @@ print "copied: ", $copiedLocale;
             Funktion für eine Gleichheitsprüfung anbieten.
         </para>
 
-        <example id="zend.locale.equals.example-1">
-            <title>Prüfung auf gleiche Gebietsschemata</title>
+        <example xml:id="zend.locale.equals.example-1"><info><title>Prüfung auf gleiche Gebietsschemata</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale();
@@ -67,10 +65,10 @@ if ($locale->equals($mylocale)) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.getdefault">
-        <title>Standard Gebietsschemata</title>
+    <section xml:id="zend.locale.getdefault"><info><title>Standard Gebietsschemata</title></info>
+        
 
         <para>
             Die Methode <methodname>getDefault()</methodname> gibt ein Array mit relevanten
@@ -78,8 +76,7 @@ if ($locale->equals($mylocale)) {
             vorhanden), Informationen vom Betriebsystem des Host Servers und Zend Framework
             Einstellungen benutzt werden. Wie beim Konstruktor von
             <classname>Zend_Locale</classname> wählt der erste Parameter die bevorzugte Umgebung von
-            der die Informationen zuerst geholt werden sollen <link
-                linkend="zend.locale.selection">(<constant>BROWSER</constant>,
+            der die Informationen zuerst geholt werden sollen <link linkend="zend.locale.selection">(<constant>BROWSER</constant>,
                 <constant>ENVIRONMENT</constant>, oder <constant>FRAMEWORK)</constant></link>. Der
             zweite Parameter wechselt zwischen der Rückgabe aller gefundenen Gebietsschemata
             oder nur dem ersten oder besten Gebietsschema. Lokalisierbare Komponenten benutzen
@@ -87,8 +84,8 @@ if ($locale->equals($mylocale)) {
             Qualität mit angegeben.
         </para>
 
-        <example id="zend.locale.getdefault.example-1">
-            <title>Das Standard Gebietsschema erhalten</title>
+        <example xml:id="zend.locale.getdefault.example-1"><info><title>Das Standard Gebietsschema erhalten</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale();
@@ -104,8 +101,7 @@ print_r($found2);
         </example>
 
         <para>
-            Um nur die Standard Gebietsschema für <link
-                linkend="zend.locale.selection"><constant>BROWSER</constant>,
+            Um nur die Standard Gebietsschema für <link linkend="zend.locale.selection"><constant>BROWSER</constant>,
                 <constant>ENVIRONMENT</constant>, oder <constant>FRAMEWORK</constant></link> zu
             erhalten, können die folgenden Methoden benutzt werden:
 
@@ -115,20 +111,19 @@ print_r($found2);
                 <listitem><para><methodname>getLocale()</methodname></para></listitem>
             </itemizedlist>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.setlocale">
-        <title>Ein neues Gebietsschema setzen</title>
+    <section xml:id="zend.locale.setlocale"><info><title>Ein neues Gebietsschema setzen</title></info>
+        
 
         <para>
             Ein neues Gebietsschema kann mit der Funktion <methodname>setLocale()</methodname>
             gesetzt werden. Diese Funktion nimmt eine Gebietsschema Zeichenkette als Parameter an.
-            Wenn kein Gebietsschema angegeben wurde, wird ein <link
-                linkend="zend.locale.selection">automatisch gewähltes</link> Gebietsschema benutzt.
+            Wenn kein Gebietsschema angegeben wurde, wird ein <link linkend="zend.locale.selection">automatisch gewähltes</link> Gebietsschema benutzt.
         </para>
 
-        <example id="zend.locale.setlocale.example-1">
-            <title>setLocale</title>
+        <example xml:id="zend.locale.setlocale.example-1"><info><title>setLocale</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale();
@@ -141,10 +136,10 @@ $locale->setLocale('aa_DJ');
 print $locale->toString();
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.getlocale">
-        <title>Auslesen von Sprache und Region</title>
+    <section xml:id="zend.locale.getlocale"><info><title>Auslesen von Sprache und Region</title></info>
+        
 
         <para>
             <methodname>getLanguage()</methodname> gibt eine Zeichenkette zurück welche den
@@ -153,8 +148,8 @@ print $locale->toString();
             Zwei-Zeichen Code der Region des Gebietsschemas enthält.
         </para>
 
-        <example id="zend.locale.getlocale.example-1">
-            <title>getLanguage and getRegion</title>
+        <example xml:id="zend.locale.getlocale.example-1"><info><title>getLanguage and getRegion</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale();
@@ -166,10 +161,10 @@ print $locale->getLanguage();
 print $locale->getRegion();
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.getlocaletoterritory">
-        <title>Ein Gebietsschema durch die Angabe eines Territoriums erhalten</title>
+    <section xml:id="zend.locale.getlocaletoterritory"><info><title>Ein Gebietsschema durch die Angabe eines Territoriums erhalten</title></info>
+        
 
         <para>
             Wenn man nur ein Territorium oder ein Land hat, dann ist es auch möglich aus diesen
@@ -180,8 +175,8 @@ print $locale->getRegion();
             wenn kein Gebietsschema gefunden werden konnte.
         </para>
 
-        <example id="zend.locale.getlocaletoterritory.example-1">
-            <title>getLocaleToTerritory</title>
+        <example xml:id="zend.locale.getlocaletoterritory.example-1"><info><title>getLocaleToTerritory</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $locale = Zend_Locale::getLocaleToTerritory('US');
@@ -189,8 +184,8 @@ $locale = Zend_Locale::getLocaleToTerritory('US');
 ]]></programlisting>
         </example>
 
-        <note>
-            <title>Großgeschriebene Territorien</title>
+        <note><info><title>Großgeschriebene Territorien</title></info>
+            
 
             <para>
                 Wenn man weiß dass man ein Territorium verwendet dann sollte es großgeschrieben
@@ -207,10 +202,10 @@ $locale = Zend_Locale::getLocaleToTerritory('US');
                 ein Gebietsschema erstellt, oder die Eingabe groß schreiben.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.getdata">
-        <title>Lokalisierte Zeichenketten beschaffen</title>
+    <section xml:id="zend.locale.getdata"><info><title>Lokalisierte Zeichenketten beschaffen</title></info>
+        
 
         <para>
             <methodname>getTranslationList()</methodname> gibt Zugriff auf viele Arten von
@@ -225,8 +220,8 @@ $locale = Zend_Locale::getLocaleToTerritory('US');
             erhalten will, muss ein Array statt mehrerer Werte übergeben werden.
         </para>
 
-        <example id="zend.locale.getdata.example-1">
-            <title>getTranslationList</title>
+        <example xml:id="zend.locale.getdata.example-1"><info><title>getTranslationList</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $list = Zend_Locale::getTranslationList('language', 'de_AT');
@@ -250,10 +245,10 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
             Informationen hierüber.
         </para>
 
-        <table id="zend.locale.getdata.table-1">
-            <title>
+        <table xml:id="zend.locale.getdata.table-1"><info><title>
                 Details für getTranslationList($type = null, $locale = null, $value = null)
-            </title>
+            </title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -379,8 +374,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             angegeben wird, dann wird eine Liste aller Monate des 'gregorian'
                             (gregorianischen) Kalenders zurückgegeben. Es kann jeder bekannte
                             Kalender als Wert angegeben werden um eine Liste der Monate dieses
-                            Kalenders zu erhalten. Der Einfachheit halber sollte <link
-                                linkend="zend.date.introduction">Zend_Date</link> verwendet werden
+                            Kalenders zu erhalten. Der Einfachheit halber sollte <link linkend="zend.date.introduction">Zend_Date</link> verwendet werden
                         </entry>
                     </row>
 
@@ -428,8 +422,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             Formate erhalten indem ein Array als Wert angegeben wird. Der erste
                             Eintrag des Arrays muß der Kalender sein, der zweite der verwendete
                             Kontext und der dritte die Länge die zurückgegeben werden soll. Der
-                            Einfachheit halber sollte <link
-                                linkend="zend.date.introduction">Zend_Date</link> verwendet werden
+                            Einfachheit halber sollte <link linkend="zend.date.introduction">Zend_Date</link> verwendet werden
                         </entry>
                     </row>
 
@@ -539,8 +532,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             angegeben wird, dann werden die Datums-Zeitformate des gregorianischen
                             Kalenders zurückgegeben. Die Datums-Zeitformate für andere Kalender kann
                             man erhalten indem der gewünschte Kalender als String übergeben wird.
-                            Der Einfachheit halber sollte <link
-                                linkend="zend.date.introduction">Zend_Date</link> verwendet werden
+                            Der Einfachheit halber sollte <link linkend="zend.date.introduction">Zend_Date</link> verwendet werden
                         </entry>
                     </row>
 
@@ -630,8 +622,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>
                             Gibt eine Liste von bekannten lokalisierten Symbolen für Währungen
                             zurück. Die Währung wird als Schlüssel und das Symbol als Wert
-                            zurückgegeben. Der Einfachheit halber sollte <link
-                                linkend="zend.currency.introduction">Zend_Currency</link>
+                            zurückgegeben. Der Einfachheit halber sollte <link linkend="zend.currency.introduction">Zend_Currency</link>
                             verwendet werden
                         </entry>
                     </row>
@@ -653,8 +644,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>
                             Gibt eine Liste von Brüchen für Währungswerte zurück. Die Währung wird
                             als Schlüssel und der Bruch als Integer Wert zurückgegeben. Der
-                            Einfachheit halber sollte <link
-                                linkend="zend.currency.introduction">Zend_Currency</link> verwendet
+                            Einfachheit halber sollte <link linkend="zend.currency.introduction">Zend_Currency</link> verwendet
                             werden
                         </entry>
                     </row>
@@ -665,8 +655,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>
                             Gibt eine Liste zurück wie welche Währung gerundet werden muß. Die
                             Währung wird als Schlüssel und der Rundungswert als Ganzzahl
-                            zurückgegeben. Der Einfachheit halber sollte <link
-                                linkend="zend.currency.introduction">Zend_Currency</link>
+                            zurückgegeben. Der Einfachheit halber sollte <link linkend="zend.currency.introduction">Zend_Currency</link>
                             verwendet werden
                         </entry>
                     </row>
@@ -693,8 +682,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             Arrayschlüssel und der <acronym>ISO3166</acronym> Wert ('Region') als
                             Arraywert zurückgegeben. Wenn eine Währung in mehreren Regionen
                             verwendet wird dann werden diese Regionen durch ein Leerzeichen
-                            getrennt. Der Einfachheit halber sollte <link
-                                linkend="zend.currency.introduction">Zend_Currency</link>
+                            getrennt. Der Einfachheit halber sollte <link linkend="zend.currency.introduction">Zend_Currency</link>
                             verwendet werden
                         </entry>
                     </row>
@@ -984,8 +972,8 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
             Siehe die folgende Tabelle für detailierte Informationen:
         </para>
 
-        <table id="zend.locale.getdata.table-2">
-            <title>Details für getTranslation($value = null, $type = null, $locale = null)</title>
+        <table xml:id="zend.locale.getdata.table-2"><info><title>Details für getTranslation($value = null, $type = null, $locale = null)</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -1093,8 +1081,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                                 'context', 'format', 'month number')</command>. Wenn nur ein
                             Ganzzahlwert angegeben wird, sind die Standardwerte der 'gregorian'
                             (Gregorianische) Kalender, der Kontext 'format' und das Format 'wide'.
-                            Der Einfachheit halber sollte <link
-                                linkend="zend.date.introduction">Zend_Date</link> verwendet werden
+                            Der Einfachheit halber sollte <link linkend="zend.date.introduction">Zend_Date</link> verwendet werden
                         </entry>
                     </row>
 
@@ -1134,8 +1121,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                                 'day abbreviation')</methodname>.
                             Wenn nur ein String angegeben wird, sind die Standardwerte der
                             'gregorian' (Gregorianische) Kalender, der Kontext 'format' und das
-                            Format 'wide'. Der Einfachheit halber sollte <link
-                                linkend="zend.date.introduction">Zend_Date</link> verwendet werden
+                            Format 'wide'. Der Einfachheit halber sollte <link linkend="zend.date.introduction">Zend_Date</link> verwendet werden
                         </entry>
                     </row>
 
@@ -1164,8 +1150,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             Wenn man die Daten für andere Kalender empfangen will, muß ein String
                             mit dem erwarteten Kalender angegeben werden. Wenn der Wert nicht
                             angegeben wird, dann wird der 'gregorian' (Gregorianische) Kalender
-                            verwendet. Der Einfachheit halber sollte <link
-                                linkend="zend.date.introduction">Zend_Date</link> verwendet werden
+                            verwendet. Der Einfachheit halber sollte <link linkend="zend.date.introduction">Zend_Date</link> verwendet werden
                         </entry>
                     </row>
 
@@ -1177,8 +1162,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             Wenn man die Daten für andere Kalender empfangen will, muß ein String
                             mit dem erwarteten Kalender angegeben werden. Wenn der Wert nicht
                             angegeben wird, dann wird der 'gregorian' (Gregorianische) Kalender
-                            verwendet. Der Einfachheit halber sollte <link
-                                linkend="zend.date.introduction">Zend_Date</link> verwendet werden
+                            verwendet. Der Einfachheit halber sollte <link linkend="zend.date.introduction">Zend_Date</link> verwendet werden
                         </entry>
                     </row>
 
@@ -1261,8 +1245,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             welches anzeigt wie Datum und Zeit im selben String des angegebenen
                             Kalenders angezeigt werden sollten. Wenn kein Wert angegeben wird, dann
                             wird der 'gregorian' (Gregorianische) Kalender verwendet. Der
-                            Einfachheit halber sollte <link
-                                linkend="zend.date.introduction">Zend_Date</link> verwendet werden
+                            Einfachheit halber sollte <link linkend="zend.date.introduction">Zend_Date</link> verwendet werden
                         </entry>
                     </row>
 
@@ -1324,8 +1307,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
 
                         <entry>
                             Gibt das Format für Dezimalzahlen in einem angegebenen Gebietsschema
-                            zurück. Der Einfachheit halber sollte <link
-                                linkend="zend.locale.parsing">Zend_Locale_Format</link> verwendet
+                            zurück. Der Einfachheit halber sollte <link linkend="zend.locale.parsing">Zend_Locale_Format</link> verwendet
                             werden
                         </entry>
                     </row>
@@ -1387,8 +1369,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>
                             Gibt das für eine Währung verwendete Symbol in einem Gebietsschema
                             zurück. Nicht für alle Währungen existiert ein Symbol. Der Einfachheit
-                            halber sollte <link
-                                linkend="zend.currency.introduction">Zend_Currency</link> verwendet
+                            halber sollte <link linkend="zend.currency.introduction">Zend_Currency</link> verwendet
                             werden
                         </entry>
                     </row>
@@ -1411,8 +1392,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>
                             Gibt den Bruch der für eine angegebene Währung zu verwenden ist, zurück.
                             Die Währung muß als <acronym>ISO</acronym> Wert angegeben werden. Der
-                            Einfachheit halber sollte <link
-                                linkend="zend.currency.introduction">Zend_Currency</link>
+                            Einfachheit halber sollte <link linkend="zend.currency.introduction">Zend_Currency</link>
                             verwendet werden
                         </entry>
                     </row>
@@ -1424,8 +1404,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             Gibt zurück wie eine angegebene Währung gerundet werden muß. Die Währung
                             muß als <acronym>ISO</acronym> Wert angegeben werden. Wenn die Währung
                             nicht angegeben wird das wird die 'DEFAULT' (Standard) Rundung
-                            zurückgegeben. Der Einfachheit halber sollte <link
-                                linkend="zend.currency.introduction">Zend_Currency</link> verwendet
+                            zurückgegeben. Der Einfachheit halber sollte <link linkend="zend.currency.introduction">Zend_Currency</link> verwendet
                             werden
                         </entry>
                     </row>
@@ -1436,8 +1415,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>
                             Gibt die Währung für eine angegebene Region zurück. Der Regionscode muß
                             als <acronym>ISO3166</acronym> String angegeben werden zum Beispiel 'AT'
-                            für Österreich. Der Einfachheit halber sollte <link
-                                linkend="zend.currency.introduction">Zend_Currency</link>
+                            für Österreich. Der Einfachheit halber sollte <link linkend="zend.currency.introduction">Zend_Currency</link>
                             verwendet werden
                         </entry>
                     </row>
@@ -1450,8 +1428,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             Währung muß als <acronym>ISO4217</acronym> Code angegeben werden, zum
                             Beispiel 'EUR' für Euro. Wenn eine Währung in mehreren Regionen
                             verwendet wird, werden diese Regionen mit einem Leerzeichen getrennt.
-                            Der Einfachheit halber sollte <link
-                                linkend="zend.currency.introduction">Zend_Currency</link>
+                            Der Einfachheit halber sollte <link linkend="zend.currency.introduction">Zend_Currency</link>
                             verwendet werden
                         </entry>
                     </row>
@@ -1714,8 +1691,8 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
             </para>
         </note>
 
-        <table id="zend.locale.getdata.table-3">
-            <title>Unterschiede zwischen Zend Framework 1.0 und 1.5</title>
+        <table xml:id="zend.locale.getdata.table-3"><info><title>Unterschiede zwischen Zend Framework 1.0 und 1.5</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -1809,8 +1786,8 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
             erhalten kann.
         </para>
 
-        <example id="zend.locale.getdata.example-3">
-            <title>getTranslationList</title>
+        <example xml:id="zend.locale.getdata.example-3"><info><title>getTranslationList</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('en_US');
@@ -1824,8 +1801,8 @@ print_r(Zend_Locale::getTranslationList('country', 'fr'));
             werden kann, wenn der zwei-Zeichen ISO Länder-Code unbekannt ist.
         </para>
 
-        <example id="zend.locale.getdata.example-4">
-            <title>Konvertierung des Ländernamens von einer Sprache in eine andere Sprache</title>
+        <example xml:id="zend.locale.getdata.example-4"><info><title>Konvertierung des Ländernamens von einer Sprache in eine andere Sprache</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('en_US');
@@ -1850,8 +1827,8 @@ echo $locale->getTranslation($frenchCode, 'language', 'es');
             Ausnahmen ignoriert um einen frühen Abbruch zu verhindern.
         </para>
 
-        <example id="zend.locale.getdata.example-6">
-            <title>Alle Sprachen geschrieben in Ihrer Muttersprache</title>
+        <example xml:id="zend.locale.getdata.example-6"><info><title>Alle Sprachen geschrieben in Ihrer Muttersprache</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $list = Zend_Locale::getTranslationList('language', 'auto');
@@ -1868,10 +1845,10 @@ foreach($list as $language => $content) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.getquestion">
-        <title>Übersetzungen für "Ja" und "Nein" erhalten</title>
+    <section xml:id="zend.locale.getquestion"><info><title>Übersetzungen für "Ja" und "Nein" erhalten</title></info>
+        
 
         <para>
             Oft müssen Programme eine "Ja" oder "Nein" Rückmeldung eines Benutzers erkennen.
@@ -1908,8 +1885,8 @@ foreach($list as $language => $content) {
             können:
         </para>
 
-        <example id="zend.locale.getquestion.example-1">
-            <title>getQuestion()</title>
+        <example xml:id="zend.locale.getquestion.example-1"><info><title>getQuestion()</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale();
@@ -1929,10 +1906,10 @@ Array
 )
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.getlocalelist">
-        <title>Eine Liste aller bekannten Gebietsschemata erhalten</title>
+    <section xml:id="zend.locale.getlocalelist"><info><title>Eine Liste aller bekannten Gebietsschemata erhalten</title></info>
+        
 
         <para>
             Manchmal will man eine Liste aller bekannten Gebietsschemata erhalten. Das kann für die
@@ -1941,8 +1918,8 @@ Array
             Methode verwender werden, welche eine Liste aller bekannten Gebietsschemata zurückgibt.
         </para>
 
-        <example id="zend.locale.getlocalelist.example-1">
-            <title>getLocaleList()</title>
+        <example xml:id="zend.locale.getlocalelist.example-1"><info><title>getLocaleList()</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $localelist = Zend_Locale::getLocaleList();
@@ -1955,10 +1932,10 @@ $localelist = Zend_Locale::getLocaleList();
                 zurück gegeben werden. Der Wert ist immer ein Boolsches <constant>TRUE</constant>.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.detection">
-        <title>Erkennen von Gebietsschemata</title>
+    <section xml:id="zend.locale.detection"><info><title>Erkennen von Gebietsschemata</title></info>
+        
 
         <para>
             Wenn man erkennen will ob eine vorhandene Eingabe. unabhängig von Ihrer Quelle, ein
@@ -1966,8 +1943,8 @@ $localelist = Zend_Locale::getLocaleList();
             verwenden. Der erste Parameter dieser Methode ist der String den man prüfen will.
         </para>
 
-        <example id="zend.locale.detection.example-1">
-            <title>Einfache Erkennung des Gebietsschemas</title>
+        <example xml:id="zend.locale.detection.example-1"><info><title>Einfache Erkennung des Gebietsschemas</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $input = 'to_RU';
@@ -2005,8 +1982,8 @@ if (Zend_Locale::isLocale($input)) {
             <constant>TRUE</constant> gesetzt wird.
         </para>
 
-        <example id="zend.locale.detection.example-2">
-            <title>Strikte Erkennung des Gebietsschemas</title>
+        <example xml:id="zend.locale.detection.example-2"><info><title>Strikte Erkennung des Gebietsschemas</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $input = 'to_RU';
@@ -2025,8 +2002,8 @@ if (Zend_Locale::isLocale($input, true)) {
             ähnliches wie das folgende Beispiel:
         </para>
 
-        <example id="zend.locale.detection.example-3">
-            <title>Implementierung von Gebietsschema bezogenem Verhalten</title>
+        <example xml:id="zend.locale.detection.example-3"><info><title>Implementierung von Gebietsschema bezogenem Verhalten</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 if ($locale === null) {
@@ -2113,12 +2090,12 @@ if ($locale instanceof Zend_Locale) {
             Aufruf vereinfacht werden kann:
         </para>
 
-        <example id="zend.locale.detection.example-4">
-            <title>Gebietsschema bezogenes Verhalten mit Zend Framework 1.8</title>
+        <example xml:id="zend.locale.detection.example-4"><info><title>Gebietsschema bezogenes Verhalten mit Zend Framework 1.8</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $locale = Zend_Locale::findLocale($inputstring);
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

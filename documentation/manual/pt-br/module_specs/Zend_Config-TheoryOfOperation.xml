@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16674 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.config.theory_of_operation">
-    <title>Teoria de Operação</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.theory_of_operation"><info><title>Teoria de Operação</title></info>
+    
 
     <para>
         Dados de configuração são disponibilizados para o construtor
@@ -27,20 +27,20 @@
         <classname>Zend_Config</classname> implementa as interfaces <emphasis>Countable</emphasis>
         e <emphasis>Iterator</emphasis>, a fim de facilitar o acesso simplificado aos dados de
         configuração. Assim, pode-se usar a função
-        <ulink url="http://php.net/count"><methodname>count()</methodname></ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/count"><methodname>count()</methodname></link>
         e construtores do <acronym>PHP</acronym> como
-        <ulink url="http://php.net/foreach"><emphasis>foreach</emphasis></ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/foreach"><emphasis>foreach</emphasis></link>
         com os objetos <classname>Zend_Config</classname>.
     </para>
 
     <para>
         Por padrão, os dados de configuração disponibilizados através de
         <classname>Zend_Config</classname> são somente leitura, e uma atribuição (por exemplo,
-        <command>$config->database->host = 'example.com';</command>) resulta em uma exceção. Esse
+        <command>$config-&gt;database-&gt;host = 'example.com';</command>) resulta em uma exceção. Esse
         comportamento padrão pode ser anulado através do construtor, no entanto, permitindo apenas
         a modificação dos valores dos dados. Além disso, quando as modificações são permitidas,
         <classname>Zend_Config</classname> suporta a desativação dos valores (ou seja,
-        <methodname>unset($config->database->host)</methodname>). O método
+        <methodname>unset($config-&gt;database-&gt;host)</methodname>). O método
         <methodname>readOnly()</methodname> pode ser usado para determinar se as modificações para
         um determinado objeto <classname>Zend_Config</classname> são permitidas e o método
         <methodname>setReadOnly()</methodname> pode ser usado para interromper quaisquer alterações
@@ -86,7 +86,7 @@
         único objeto usando a função <methodname>merge()</methodname>. Por exemplo, dados
         <varname>$config</varname> e <varname>$localConfig</varname>, você poderá unificar os
         dados de <varname>$localConfig</varname> para <varname>$config</varname> usando
-        <command>$config->merge($localConfig);</command>. Os itens em
+        <command>$config-&gt;merge($localConfig);</command>. Os itens em
         <varname>$localConfig</varname> serão substituídos por quaisquer itens
         com mesmo nome em <varname>$config</varname>.
     </para>
@@ -99,7 +99,4 @@
             usado para impedir quaisquer alterações posteriores, após a fusão estiver completa.
         </para>
     </note>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22236 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.test.phpunit.examples">
-    <title>Exemples</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.examples"><info><title>Exemples</title></info>
+    
 
     <para>
         Savoir comment configurer votre infrastructure de tests et comment faire des
@@ -10,8 +8,8 @@
         regarder quelques scénarios réels de test pour voir comment vous pouvez les étendre.
     </para>
 
-    <example id="zend.test.phpunit.examples.userController">
-        <title>Test d'un contrôleur "UserController"</title>
+    <example xml:id="zend.test.phpunit.examples.userController"><info><title>Test d'un contrôleur "UserController"</title></info>
+        
 
         <para>
             Considérons une tâche habituelle d'un site Web : l'authentification et
@@ -314,16 +312,12 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
             Cette application <emphasis>peut</emphasis> utiliser une base de données. Si oui,
             vous aurez besoin probablement d'un certain échafaudage pour s'assurer que la base de
             données est dans une configuration initiale et testable au début de chaque essai.
-            PHPUnit fournit déjà une fonctionnalité pour faire ceci ; <ulink
-            url="http://www.phpunit.de/manual/3.4/en/database.html">lisez ceci dans la
-            documentation PHPUnit</ulink>. Nous recommandons d'utiliser une base de données séparée
+            PHPUnit fournit déjà une fonctionnalité pour faire ceci ; <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.phpunit.de/manual/3.4/en/database.html">lisez ceci dans la
+            documentation PHPUnit</link>. Nous recommandons d'utiliser une base de données séparée
             pour les tests et pour la production, et recommandons en particulier d'employer un
             fichier SQLite ou une base de données en mémoire, d'autant que les deux options
             s'exécutent très bien, sans nécessité d'un serveur séparé, et peuvent utiliser la
             plupart de la syntaxe <acronym>SQL</acronym>
         </para>
     </example>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

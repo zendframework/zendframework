@@ -63,11 +63,9 @@ class Tar extends AbstractCompressionAlgorithm
     public function __construct($options = null)
     {
         if (!class_exists('Archive_Tar')) {
-            try {
-                \Zend\Loader::loadClass('Archive_Tar');
-            } catch (\Exception $e) {
-                throw new Exception\ExtensionNotLoadedException('This filter needs PEARs Archive_Tar', 0, $e);
-            }
+            throw new Exception\ExtensionNotLoadedException(
+                'This filter needs PEARs Archive_Tar.'.
+                'Ensure loading Archive_Tar (registering autoload or require_once)');
         }
 
         parent::__construct($options);

@@ -1,5 +1,6 @@
-<sect1 id="zend.feed.consuming-atom-single-entry">
-    <title>Získanie jednej položky z Atom</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom-single-entry"><info><title>Získanie jednej položky z Atom</title></info>
+    
 
     <para>
         Jednotlivé položky Atom (<code>&lt;entry&gt;</code>) sú validné aj samé o sebe.
@@ -10,12 +11,12 @@
 
     <para>
         Ak získate jednu položku, stále budete mať <code>Zend_Feed_Atom</code> objekt, ale
-        automaticky bude vytvorený &quot;anonymný&quot; zdroj, ktorý bude obsahovať
+        automaticky bude vytvorený "anonymný" zdroj, ktorý bude obsahovať
         túto položku.
     </para>
 
-    <example id="zend.feed.consuming-atom-single-entry.example.atom">
-        <title>Získanie jednej položky z Atom</title>
+    <example xml:id="zend.feed.consuming-atom-single-entry.example.atom"><info><title>Získanie jednej položky z Atom</title></info>
+        
         <programlisting role="php"><![CDATA[<?php
 
 $feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
@@ -23,7 +24,7 @@ echo 'The feed has: ' . $feed->count() . ' entry.';
 
 $entry = $feed->current();
 
-?>]]>   </programlisting>
+?>   ]]></programlisting>
     </example>
 
     <para>
@@ -31,15 +32,12 @@ $entry = $feed->current();
         že sa pristupuje k jednopoložkovému dokumentu:
     </para>
 
-    <example id="zend.feed.consuming-atom-single-entry.example.entryatom">
-        <title>Použitie objektu položky pre získanie položky z Atom zdroja</title>
+    <example xml:id="zend.feed.consuming-atom-single-entry.example.entryatom"><info><title>Použitie objektu položky pre získanie položky z Atom zdroja</title></info>
+        
         <programlisting role="php"><![CDATA[<?phpi
 $entry = new Zend_Feed_Entry_Atom('http://atom.example.com/feed/1');
 echo $entry->title();
 
-?>]]>   </programlisting>
+?>   ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

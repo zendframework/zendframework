@@ -1,16 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21741 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.tool.project.providers">
-    <title>Project Provider für Zend_Tool</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.project.providers"><info><title>Project Provider für Zend_Tool</title></info>
+    
 
     <para>
         Anbei ist eine Tabelle aller Provider die mit <classname>Zend_Tool_Project</classname>
         ausgeliefert werden.
     </para>
 
-    <table id="zend.tool.project.project-provider">
-        <title>Optionen des Project Providers</title>
+    <table xml:id="zend.tool.project.project-provider"><info><title>Optionen des Project Providers</title></info>
+        
 
         <tgroup cols="4">
             <thead>
@@ -80,4 +80,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect1>
+</section>

@@ -23,25 +23,26 @@
  * @namespace
  */
 namespace Zend\Tool\Project\Context\System;
-use Zend\Tool\Project\Context\System;
+
+use DirectoryIterator,
+    Zend\Tool\Framework\Registry,
+    Zend\Tool\Project\Context\Filesystem\Directory,
+    Zend\Tool\Project\Context\System,
+    Zend\Tool\Project\Context\System\NotOverwritable;
 
 /**
- * This class is the front most class for utilizing Zend_Tool_Project
+ * This class is the front most class for utilizing Zend\Tool\Project
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       DirectoryIterator
- * @uses       \Zend\Tool\Project\Context\Filesystem\Directory
- * @uses       \Zend\Tool\Project\Context\System
- * @uses       \Zend\Tool\Project\Context\System\NotOverwritable
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ProjectProvidersDirectory
-    extends \Zend\Tool\Project\Context\Filesystem\Directory
+    extends Directory
     implements System,
                NotOverwritable
 {
@@ -61,31 +62,20 @@ class ProjectProvidersDirectory
         return 'ProjectProvidersDirectory';
     }
 
-    /**
-     * init()
-     *
-     * @return \Zend\Tool\Project\Context\System\ProjectProvidersDirectory
-     */
-    public function init()
+    public function loadProviders(Registry $registry)
     {
-        parent::init();
-
         if (file_exists($this->getPath())) {
 
-            foreach (new \DirectoryIterator($this->getPath()) as $item) {
-                if ($item->isFile()) {
-                    $loadableFiles[] = $item->getPathname();
+            $providerRepository = $registry->getProviderRepository();
+            
+            foreach (new DirectoryIterator($this->getPath()) as $item) {
+                if ($item->isFile() && (($suffixStart = strpos($item->getFilename(), 'Provider.php')) !== false)) {
+                    $className = substr($item->getFilename(), 0, $suffixStart+8);
+                    // $loadableFiles[$className] = $item->getPathname();
+                    include_once $item->getPathname();
+                    $providerRepository->addProvider(new $className());
                 }
             }
-
-            if ($loadableFiles) {
-
-                // @todo process and add the files to the system for usage.
-
-            }
         }
-
-        return $this;
     }
-
 }

@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.paginator.control">
-    <title>Pagination Control and ScrollingStyles</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.paginator.control"><info><title>Pagination Control and ScrollingStyles</title></info>
+    
 
     <para>
         Rendering the items for a page on the screen has been a good start. In the code
@@ -36,19 +35,19 @@
 <!-- Previous page link -->
 <?php if (isset($this->previous)): ?>
   <a href="<?php echo $this->url(array('page' => $this->previous)); ?>">
-    &lt; Previous
+    < Previous
   </a> |
 <?php else: ?>
-  <span class="disabled">&lt; Previous</span> |
+  <span class="disabled">< Previous</span> |
 <?php endif; ?>
 
 <!-- Next page link -->
 <?php if (isset($this->next)): ?>
   <a href="<?php echo $this->url(array('page' => $this->next)); ?>">
-    Next &gt;
+    Next >
   </a> |
 <?php else: ?>
-  <span class="disabled">Next &gt;</span> |
+  <span class="disabled">Next ></span> |
 <?php endif; ?>
 
 <!-- Last page link -->
@@ -107,4 +106,4 @@ Zend_View_Helper_PaginationControl::setDefaultViewPartial('controls.phtml');
     <para>
         For a list of all available ScrollingStyles, see the reference manual.
     </para>
-</sect1>
+</section>

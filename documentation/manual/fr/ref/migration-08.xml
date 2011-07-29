@@ -1,20 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
-<!-- Reviewed: no -->
-<sect1 id="migration.08">
-    <title>Zend Framework 0.8</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.08"><info><title>Zend Framework 0.8</title></info>
+    
 
     <para>
         Lors de la migration d'un version précédente vers Zend Framework 0.8 ou plus récent
         vous devriez prendre note de ce qui suit.
     </para>
 
-    <sect2 id="migration.08.zend.controller">
-        <title>Zend_Controller</title>
+    <section xml:id="migration.08.zend.controller"><info><title>Zend_Controller</title></info>
+        
 
         <para>
             Pour les versions précédentes, l'utilisation basique des composants <acronym>MVC</acronym> reste la
-            même&#160;:
+            même :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -24,7 +22,7 @@ Zend_Controller_Front::run('/chemin/vers/controleurs');
         <para>
             Cependant, la structure des dossiers a subi une réorganisation, certains
             composants ont été effacés, et d'autres ont été soit renommés soit ajoutés. Les
-            changements incluent&#160;:
+            changements incluent :
         </para>
 
         <itemizedlist>
@@ -67,7 +65,7 @@ Zend_Controller_Front::run('/chemin/vers/controleurs');
                 <para>
                     Les arguments de
                     <methodname>Zend_Controller_Action::_forward()</methodname> ont changés. La
-                    signature est maintenant&#160;:
+                    signature est maintenant :
                 </para>
                 <programlisting language="php"><![CDATA[
 final protected function _forward($action,
@@ -86,5 +84,5 @@ final protected function _forward($action,
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

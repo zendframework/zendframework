@@ -153,7 +153,7 @@ class Xml implements FileParser
     protected function _serializeRecurser($resources, \SimpleXmlElement $xmlNode)
     {
         // @todo find a better way to handle concurrency.. if no clone, _position in node gets messed up
-        //if ($resources instanceof Zend_Tool_Project_Profile_Resource) {
+        //if ($resources instanceof Zend\Tool\Project\Profile\Resource) {
         //    $resources = clone $resources;
         //}
 

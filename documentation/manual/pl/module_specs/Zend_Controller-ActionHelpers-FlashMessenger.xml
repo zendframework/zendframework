@@ -1,8 +1,9 @@
-<sect3 id="zend.controller.actionhelpers.flashmessenger">
-    <title>FlashMessenger</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.flashmessenger"><info><title>FlashMessenger</title></info>
+    
 
-    <sect4 id="zend.controller.actionhelper.flashmessenger.introduction">
-        <title>Wprowadzenie</title>
+    <section xml:id="zend.controller.actionhelper.flashmessenger.introduction"><info><title>Wprowadzenie</title></info>
+        
         <para>
             Klasa pomocnicza <code>FlashMessenger</code> pozwala na przekazywanie
             komunikatów, które użytkownik może zobaczyć przy następnym żądaniu.
@@ -17,10 +18,10 @@
             aby uzyskać więcej szczegółów odnośnie jej użycia.)
         </para>
 
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelper.flashmessenger.basicusage">
-        <title>Przykład prostego użycia</title>
+    <section xml:id="zend.controller.actionhelper.flashmessenger.basicusage"><info><title>Przykład prostego użycia</title></info>
+        
         <para>
             Poniższy przykład  pokazuje użycie klasy pomocniczej FlashMessenger
             w najprostszy możliwy sposób. Gdy wywołana jest akcja
@@ -61,7 +62,7 @@ class SomeController extends Zend_Controller_Action
         $this->render();
     }
 }
-]]>
-        </programlisting>
-    </sect4>
-</sect3>
+
+        ]]></programlisting>
+    </section>
+</section>

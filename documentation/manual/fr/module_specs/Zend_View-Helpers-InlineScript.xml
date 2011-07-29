@@ -1,21 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.inlinescript">
-    <title>L'aide de vue InlineScript</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.inlinescript"><info><title>L'aide de vue InlineScript</title></info>
+    
 
     <para>
         L'élément HTML <code>&lt;script&gt;</code> est utilisé pour fournir des éléments de
         script côté client ou pour lier des ressources distantes contenant des scripts s'exécutant
         côté client. L'aide de vue <code>InlineScript</code> vous permet de gérer ces deux cas. Elle
-        est dérivée de l'aide <link
-        linkend="zend.view.helpers.initial.headscript">HeadScript</link>, et chaque méthode de cette
+        est dérivée de l'aide <link linkend="zend.view.helpers.initial.headscript">HeadScript</link>, et chaque méthode de cette
         aide est donc disponible ; cependant, vous devez utiliser la méthode
         <methodname>inlineScript()</methodname> au lieu de <methodname>headScript()</methodname>.
     </para>
 
-    <note>
-        <title>Utiliser InlineScript pour des scripts dans le corps ("body") HTML</title>
+    <note><info><title>Utiliser InlineScript pour des scripts dans le corps ("body") HTML</title></info>
+        
 
         <para>
             <code>InlineScript</code>, peut être utilisé quand vous souhaitez inclure des
@@ -27,9 +26,8 @@
 
         <para>
             Certaines librairies JS doivent être incluses dans la partie <code>head</code> du
-            HTML ; utilisez l'aide vue <link
-            linkend="zend.view.helpers.initial.headscript">HeadScript</link> pour ces
+            HTML ; utilisez l'aide vue <link linkend="zend.view.helpers.initial.headscript">HeadScript</link> pour ces
             scripts.
         </para>
     </note>
-</sect3>
+</section>

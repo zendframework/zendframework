@@ -1,8 +1,9 @@
-<sect1 id="zend.search.lucene.overview">
-    <title>Overzicht</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.overview"><info><title>Overzicht</title></info>
+    
 
-    <sect2 id="zend.search.lucene.introduction">
-        <title>Inleiding</title>
+    <section xml:id="zend.search.lucene.introduction"><info><title>Inleiding</title></info>
+        
         <para>
             Zend Search_Lucene is een algemene tekst search engine die volledig in PHP 5 is geschreven.
             Omdat het zijn indexbestanden op het bestandssysteem schrijft en geen database server nodig
@@ -31,12 +32,12 @@
 
             Zend_Search_Lucene werd afgeleid van het Apache Lucene project. Voor meer informatie over Lucene kan
             je terecht op:
-            <ulink url="http://lucene.apache.org/java/docs/"/>.
+            <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://lucene.apache.org/java/docs/">http://lucene.apache.org/java/docs/</uri>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.documents-and-fields">
-        <title>Document en Veld Objecten</title>
+    <section xml:id="zend.search.lucene.index-creation.documents-and-fields"><info><title>Document en Veld Objecten</title></info>
+        
             <para>
                 Zend_Search_Lucene beschouwt documenten als eenheden voor de indexering. Een document wordt dan
                 opgedeeld in benoemde velden en velden hebben inhoud waarop kan gezocht worden.
@@ -92,10 +93,10 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
             <para>
             Je kan velden je eigen naam geven. Een "contents" veld naam wordt standaard tijdens het zoeken gebruikt. Het is een goed idee om de belangrijke informatie uit documenten in een veld met deze naam te plaatsen.
             </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.understanding-field-types">
-        <title>Veld Types Begrijpen</title>
+    <section xml:id="zend.search.lucene.index-creation.understanding-field-types"><info><title>Veld Types Begrijpen</title></info>
+        
         <itemizedlist>
             <listitem>
                 <para>
@@ -124,8 +125,8 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
                     UnStored velden zijn praktisch wanneer ze worden gebruikt met een Zend_Search_Lucene index in combinatie met een relationele database. Je kan grote data velden met UnStored velden indexeren om te doorzoeken, en om ze yut de relationele database te halen met aparte velden als identifier.
                </para>
 
-                <table>
-                    <title>Zend_Search_Lucene_Field Types</title>
+                <table><info><title>Zend_Search_Lucene_Field Types</title></info>
+                    
                     <tgroup cols="4">
                         <thead>
                             <row>
@@ -177,9 +178,5 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
                 </table>
            </listitem>
        </itemizedlist>
-    </sect2>
-</sect1>
-
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

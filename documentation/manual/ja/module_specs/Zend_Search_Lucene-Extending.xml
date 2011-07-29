@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20854 -->
-<sect1 id="zend.search.lucene.extending">
-    <title>拡張性</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.extending"><info><title>拡張性</title></info>
+    
 
-    <sect2 id="zend.search.lucene.extending.analysis">
-        <title>テキスト解析</title>
+    <section xml:id="zend.search.lucene.extending.analysis"><info><title>テキスト解析</title></info>
+        
         <para>
             <classname>Zend_Search_Lucene_Analysis_Analyzer</classname> クラスは、
             ドキュメントのテキストフィールドをトークン化 (単語に分解)
@@ -59,8 +57,8 @@ $index->addDocument($doc);
             独自のテキスト解析器の例を示します。
             これは、数字つきの単語をひとつの言葉として扱います。
 
-            <example id="zend.search.lucene.extending.analysis.example-1">
-                <title>独自のテキスト解析器</title>
+            <example xml:id="zend.search.lucene.extending.analysis.example-1"><info><title>独自のテキスト解析器</title></info>
+                
                 <programlisting language="php"><![CDATA[
 /**
  * これは独自のテキスト解析器で、数字つきの単語をひとつの言葉として
@@ -135,10 +133,10 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 ]]></programlisting>
             </example>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.extending.filters">
-        <title>トークンのフィルタリング</title>
+    <section xml:id="zend.search.lucene.extending.filters"><info><title>トークンのフィルタリング</title></info>
+        
         <para>
             <classname>Zend_Search_Lucene_Analysis_Analyzer_Common</classname>
             解析器には、トークンをフィルタリングする仕組みもあります。
@@ -234,10 +232,10 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
             これは単語長の制限を表し、デフォルト値は 2 です。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.extending.scoring">
-        <title>重み付けのアルゴリズム</title>
+    <section xml:id="zend.search.lucene.extending.scoring"><info><title>重み付けのアルゴリズム</title></info>
+        
         <para>
             クエリ <literal>q</literal> の、ドキュメント <literal>d</literal>
             に対するスコアは以下のように定義されます。
@@ -338,10 +336,10 @@ class MySimilarity extends Zend_Search_Lucene_Search_Similarity {
 $mySimilarity = new MySimilarity();
 Zend_Search_Lucene_Search_Similarity::setDefault($mySimilarity);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.extending.storage">
-        <title>保存先</title>
+    <section xml:id="zend.search.lucene.extending.storage"><info><title>保存先</title></info>
+        
         <para>
         抽象クラス Zend_Search_Lucene_Storage_Directory では、ディレクトリ機能を提供しています。
         </para>
@@ -500,9 +498,5 @@ class MyFile extends Zend_Search_Lucene_Storage_File {
 }
 ]]></programlisting>
 
-    </sect2>
-</sect1>
-
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

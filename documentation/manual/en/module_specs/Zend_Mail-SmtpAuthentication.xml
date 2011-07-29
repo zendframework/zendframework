@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.smtp-authentication">
-    <title>SMTP Authentication</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-authentication"><info><title>SMTP Authentication</title></info>
+    
 
     <para>
         <classname>Zend_Mail</classname> supports the use of SMTP authentication, which
@@ -11,8 +10,8 @@
         expect a 'username' and 'password' value in the configuration array.
     </para>
 
-    <example id="zend.mail.smtp-authentication.example-1">
-        <title>Enabling authentication within Zend_Mail_Transport_Smtp</title>
+    <example xml:id="zend.mail.smtp-authentication.example-1"><info><title>Enabling authentication within Zend_Mail_Transport_Smtp</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $config = array('auth' => 'login',
@@ -30,16 +29,13 @@ $mail->send($transport);
 ]]></programlisting>
     </example>
 
-    <note>
-        <title>Authentication types</title>
+    <note><info><title>Authentication types</title></info>
+        
 
         <para>
             The authentication type is case-insensitive but has no punctuation.
-            E.g. to use CRAM-MD5 you would pass 'auth' => 'crammd5' in the
+            E.g. to use CRAM-MD5 you would pass 'auth' =&gt; 'crammd5' in the
             <classname>Zend_Mail_Transport_Smtp</classname> constructor.
         </para>
     </note>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

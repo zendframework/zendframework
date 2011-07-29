@@ -24,23 +24,24 @@
  */
 namespace Zend\Tool\Project\Context\Zf;
 
+use Zend\Filter\FilterChain,
+    Zend\Filter\StringToLower as StringToLowerFilter,
+    Zend\Filter\Word\CamelCaseToDash as CamelCaseToDashFilter,
+    Zend\Tool\Project\Context\Filesystem\File as FileContext,
+    Zend\Tool\Project\Exception;
+
 /**
- * This class is the front most class for utilizing Zend_Tool_Project
+ * This class is the front most class for utilizing Zend\Tool\Project
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       \Zend\Filter\FilterChain
- * @uses       \Zend\Filter\StringToLower
- * @uses       \Zend\Filter\Word\CamelCaseToDash
- * @uses       \Zend\Tool\Project\Context\Filesystem\File
- * @uses       \Zend\Tool\Project\Exception
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ViewScriptFile extends \Zend\Tool\Project\Context\Filesystem\File
+class ViewScriptFile extends FileContext
 {
 
     /**
@@ -71,7 +72,7 @@ class ViewScriptFile extends \Zend\Tool\Project\Context\Filesystem\File
     /**
      * init()
      *
-     * @return \Zend\Tool\Project\Context\Zf\ViewScriptFile
+     * @return ViewScriptFile
      */
     public function init()
     {
@@ -82,7 +83,7 @@ class ViewScriptFile extends \Zend\Tool\Project\Context\Filesystem\File
             $this->_scriptName = $scriptName;
             $this->_filesystemName = $scriptName . '.phtml';
         } else {
-            throw Zend_Tool_Project_Exception('Either a forActionName or scriptName is required.');
+            throw Exception\InvalidArgumentException('Either a forActionName or scriptName is required.');
         }
 
         parent::init();
@@ -207,9 +208,9 @@ EOS;
 
     protected function _convertActionNameToFilesystemName($actionName)
     {
-        $filter = new \Zend\Filter\FilterChain();
-        $filter->attach(new \Zend\Filter\Word\CamelCaseToDash())
-               ->attach(new \Zend\Filter\StringToLower());
+        $filter = new FilterChain();
+        $filter->attach(new CamelCaseToDashFilter())
+               ->attach(new StringToLowerFilter());
         return $filter->filter($actionName);
     }
 

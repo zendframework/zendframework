@@ -1,14 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.service.amazon.ec2.keypairs">
-    <title>Zend_Service_Amazon_Ec2: Keypairs</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.keypairs"><info><title>Zend_Service_Amazon_Ec2: Keypairs</title></info>
+    
 
     <para>
         Keypairs are used to access instances.
     </para>
 
-    <example id="zend.service.amazon.ec2.keypairs.create">
-        <title>Creating a new Amazon Keypair</title>
+    <example xml:id="zend.service.amazon.ec2.keypairs.create"><info><title>Creating a new Amazon Keypair</title></info>
+        
 
         <para>
             <code>create</code>, creates a new 2048 bit RSA key pair and
@@ -27,8 +26,8 @@ $return = $ec2_kp->create('my-new-key');
 ]]></programlisting>
     </example>
 
-    <example id="zend.service.amazon.ec2.keypairs.delete">
-        <title>Deleting an Amazon Keypair</title>
+    <example xml:id="zend.service.amazon.ec2.keypairs.delete"><info><title>Deleting an Amazon Keypair</title></info>
+        
 
         <para>
             <code>delete</code>, will delete the key pair. This will only
@@ -47,8 +46,8 @@ $return = $ec2_kp->delete('my-new-key');
 ]]></programlisting>
     </example>
 
-    <example id="zend.service.amazon.ec2.describe">
-        <title>Describe an Amazon Keypair</title>
+    <example xml:id="zend.service.amazon.ec2.describe"><info><title>Describe an Amazon Keypair</title></info>
+        
 
         <para>
             <code>describe</code> returns information about key pairs available to you.
@@ -65,4 +64,4 @@ $ec2_kp = new Zend_Service_Amazon_Ec2_Keypair('aws_key','aws_secret_key');
 $return = $ec2_kp->describe('my-new-key');
 ]]></programlisting>
     </example>
-</sect1>
+</section>

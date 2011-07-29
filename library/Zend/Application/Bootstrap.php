@@ -62,9 +62,9 @@ class Bootstrap extends AbstractBootstrap
      */
     public function __construct($application)
     {
-        parent::__construct($application);
+        $this->setApplication($application);
+        $options = $application->getOptions();
 
-        $options = array();
         if ($application->hasOption('resourceloader')) {
             $options['resourceloader'] = $application->getOption('resourceloader');
         }
@@ -94,7 +94,7 @@ class Bootstrap extends AbstractBootstrap
      * the front controller, and dispatches the front controller.
      *
      * @return mixed
-     * @throws \Zend\Application\BootstrapException
+     * @throws \Zend\Application\Exception\RuntimeException
      */
     public function run()
     {

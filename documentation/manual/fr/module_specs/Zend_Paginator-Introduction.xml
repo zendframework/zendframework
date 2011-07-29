@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20843 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.paginator.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.paginator.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_Paginator</classname> est un composant flexible pour paginer des
@@ -40,4 +40,4 @@
             </listitem>
             </itemizedlist>
         </para>
-</sect1>
+</section>

@@ -1,12 +1,13 @@
-<sect1 id="zend.mail.html-mails">
-    <title>HTML e-mail</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.html-mails"><info><title>HTML e-mail</title></info>
+    
     <para>
         Na poslanie e-mailu v HTML formáte je potrebné vytvoriť telo e-mailu pomocou metódy <code>setBodyHTML()</code>
         na miesto metódy <code>setBodyText()</code>. Obsah bude automaticky označený ako <code>text/html</code>.
         Ak sa vytvorí HTML a aj textová verzia e-mailu výsledný e-mail bude typu multipart/alternative:
     </para>
-    <example>
-        <title>Vytvorenie a poslanie HTML e-mailu</title>
+    <example><info><title>Vytvorenie a poslanie HTML e-mailu</title></info>
+        
         <programlisting role="php"><![CDATA[
 <?php
 require_once 'Zend/Mail.php';
@@ -17,9 +18,6 @@ $mail->setFrom('somebody@example.com', 'Odosielateľ');
 $mail->addTo('somebody_else@example.com', 'Príjemca');
 $mail->setSubject('Predmet');
 $mail->send();
-?>]]>   </programlisting>
+?>   ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.filter.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         The <classname>Zend_Filter</classname> component provides a set of commonly needed data
@@ -10,8 +9,8 @@
         order.
     </para>
 
-    <sect2 id="zend.filter.introduction.definition">
-        <title>What is a filter?</title>
+    <section xml:id="zend.filter.introduction.definition"><info><title>What is a filter?</title></info>
+        
 
         <para>
             In the physical world, a filter is typically used for removing
@@ -42,10 +41,10 @@
             <classname>Zend_Filter</classname>, means to perform some transformations upon input
             data.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.introduction.using">
-        <title>Basic usage of filters</title>
+    <section xml:id="zend.filter.introduction.using"><info><title>Basic usage of filters</title></info>
+        
 
         <para>
             Having this filter definition established provides the foundation
@@ -57,19 +56,19 @@
         <para>
             Following is a basic example of using a filter upon two input data,
             the ampersand (<emphasis>&amp;</emphasis>) and double quote
-            (<emphasis>&quot;</emphasis>) characters:
+            (<emphasis>"</emphasis>) characters:
         </para>
 
         <programlisting language="php"><![CDATA[
 $htmlEntities = new Zend_Filter_HtmlEntities();
 
-echo $htmlEntities->filter('&'); // &amp;
-echo $htmlEntities->filter('"'); // &quot;
+echo $htmlEntities->filter('&'); // &
+echo $htmlEntities->filter('"'); // "
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.introduction.static">
-        <title>Using the static staticFilter() method</title>
+    <section xml:id="zend.filter.introduction.static"><info><title>Using the static staticFilter() method</title></info>
+        
 
         <para>
             If it is inconvenient to load a given filter class and create an
@@ -113,8 +112,8 @@ echo Zend_Filter::filterStatic('"',
             sets of input data. See <link linkend="zend.filter.input">Zend_Filter_Input</link>.
         </para>
 
-        <sect3 id="zend.filter.introduction.static.namespaces">
-            <title>Namespaces</title>
+        <section xml:id="zend.filter.introduction.static.namespaces"><info><title>Namespaces</title></info>
+            
 
             <para>
                 When working with self defined filters you can give a fourth parameter
@@ -181,11 +180,11 @@ echo Zend_Filter::filterStatic('"', 'OtherFilter', array($parameters));
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.filter.introduction.caveats">
-        <title>Double filtering</title>
+    <section xml:id="zend.filter.introduction.caveats"><info><title>Double filtering</title></info>
+        
 
         <para>
             When using two filters after each other you have to keep in mind that it is often not
@@ -217,8 +216,5 @@ $filtered = $filter2->filter($filtered)
             As you can see it is not always possible to get the original output by using a filter
             which seems to be the opposite. It depends on the filter and also on the given input.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

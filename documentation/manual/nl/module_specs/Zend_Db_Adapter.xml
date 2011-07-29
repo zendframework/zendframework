@@ -1,10 +1,11 @@
-<sect1 id="zend.db.adapter">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.adapter"><info><title>Zend_Db_Adapter</title></info>
 
-    <title>Zend_Db_Adapter</title>
+    
 
-    <sect2 id="zend.db.adapter.introduction">
+    <section xml:id="zend.db.adapter.introduction"><info><title>Inleiding</title></info>
 
-        <title>Inleiding</title>
+        
 
         <para>
             <code>Zend_Db_Adapter</code> is de database API abstractielaag voor het Zend
@@ -50,11 +51,11 @@ $db = Zend_Db::factory('PDO_SQLITE', $params);
         <para>
             In elk geval zal je exact dezelfde API kunnen gebruiken om de database te ondervragen.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.quoting">
+    <section xml:id="zend.db.adapter.quoting"><info><title>Quoting tegen SQL Injectie</title></info>
 
-        <title>Quoting tegen SQL Injectie</title>
+        
 
         <para>
             Je moet altijd waarden quoten die gebruikt moeten worden in een
@@ -106,11 +107,11 @@ $where = $db->quoteInto('id IN(?)', array(1, 2, 3));
 // $where is nu 'id IN("1", "2", "3")' (een komma-gescheiden string)
 
 ?>]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.queries">
+    <section xml:id="zend.db.adapter.queries"><info><title>Directe Queries</title></info>
 
-        <title>Directe Queries</title>
+        
 
         <para>
             Eenmaal je een <code>Zend_Db_Adapter</code> instantie hebt, kan je queries
@@ -176,11 +177,11 @@ $stmt->execute();
 $rows = $stmt->fetchAll();
 
 ?>]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.transactions">
+    <section xml:id="zend.db.adapter.transactions"><info><title>Transacties</title></info>
 
-        <title>Transacties</title>
+        
 
         <para>
             Standaard is PDO (en dus ook <code>Zend_Db_Adapter</code>) in "auto-commit" mode.
@@ -209,11 +210,11 @@ try {
 }
 
 ?>]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.insert">
+    <section xml:id="zend.db.adapter.insert"><info><title>Rijen Invoegen</title></info>
 
-        <title>Rijen Invoegen</title>
+        
 
         <para>
             Voor jouw gemak kan je de <code>insert()</code> methode gebruiken om
@@ -254,11 +255,11 @@ $rows_affected = $db->insert($table, $data);
 $last_insert_id = $db->lastInsertId();
 
 ?>]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.update">
+    <section xml:id="zend.db.adapter.update"><info><title>Rijen updaten</title></info>
 
-        <title>Rijen updaten</title>
+        
 
         <para>
             Voor jouw gemak kan je de <code>update()</code> methode gebruiken om een
@@ -297,11 +298,11 @@ $where = $db->quoteInto('first_name = ?', 'Robin');
 $rows_affected = $db->update($table, $set, $where);
 
 ?>]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.delete">
+    <section xml:id="zend.db.adapter.delete"><info><title>Rijen Verwijderen</title></info>
 
-        <title>Rijen Verwijderen</title>
+        
 
         <para>
             Voor jouw gemak kan je de <code>delete()</code> methode gebruiken om
@@ -329,11 +330,11 @@ $where = $db->quoteInto('first_name = ?', 'Patsy');
 $rows_affected = $db->delete($table, $where);
 
 ?>]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.adapter.fetch">
+    <section xml:id="zend.db.adapter.fetch"><info><title>Rijen Halen</title></info>
 
-        <title>Rijen Halen</title>
+        
 
         <para>
             Alhoewel je de database direct kan ondervragen met de <code>query</code>
@@ -398,9 +399,6 @@ $result = $db->fetchRow(
 );
 
 ?>]]></programlisting>
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

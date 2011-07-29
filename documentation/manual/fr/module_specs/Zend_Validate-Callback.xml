@@ -1,41 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21740 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.callback">
-    <title>Callback (fonction de rappel)</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.callback"><info><title>Callback (fonction de rappel)</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Callback</classname> permet de fournir une fonction de rappel
         utilisée pour valider la valeur.
     </para>
 
-    <sect3 id="zend.validate.set.callback.options">
-        <title>Options supportées par Zend_Validate_Callback</title>
+    <section xml:id="zend.validate.set.callback.options"><info><title>Options supportées par Zend_Validate_Callback</title></info>
+        
 
         <para>
             Les options suivantes sont supportées par
-            <classname>Zend_Validate_Callback</classname>&#160;:
+            <classname>Zend_Validate_Callback</classname> :
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis><property>callback</property></emphasis>&#160;: spécifie la fonction
+                    <emphasis><property>callback</property></emphasis> : spécifie la fonction
                     de rappel qui sera utilisée pour la validation.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis><property>options</property></emphasis>&#160;: spécifie les options
+                    <emphasis><property>options</property></emphasis> : spécifie les options
                     additionnelles qui seront fournies à la fonction de rappel.
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.callback.basic">
-        <title>Utilisation classique</title>
+    <section xml:id="zend.validate.set.callback.basic"><info><title>Utilisation classique</title></info>
+        
 
         <para>
             Le plus simple est de posséder une fonction classique, qui sera utilisée
@@ -63,14 +61,14 @@ if ($valid->isValid($input)) {
     // input est invalide
 }
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.callback.closure">
-        <title>Utilisation avec les fonctions anonymes (closures)</title>
+    <section xml:id="zend.validate.set.callback.closure"><info><title>Utilisation avec les fonctions anonymes (closures)</title></info>
+        
 
         <para>
-            PHP 5.3 introduit les <ulink url="http://php.net/functions.anonymous">fonctions
-            anonymes</ulink> ou fonctions de <emphasis>fermeture</emphasis>. PHP traite les
+            PHP 5.3 introduit les <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/functions.anonymous">fonctions
+            anonymes</link> ou fonctions de <emphasis>fermeture</emphasis>. PHP traite les
             fonctions anonymes comme des fonctions de rappel valides, et il est donc
             possible d'utiliser celles-ci avec <classname>Zend_Validate_Callback</classname>.
             Exemple:
@@ -88,10 +86,10 @@ if ($valid->isValid($input)) {
     // input est invalide
 }
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.callback.class">
-        <title>Utilisation avec les méthodes de rappel</title>
+    <section xml:id="zend.validate.set.callback.class"><info><title>Utilisation avec les méthodes de rappel</title></info>
+        
 
         <para>
             Bien sûr, il est aussi possible d'utiliser des méthodes de rappel:
@@ -168,10 +166,10 @@ if ($valid->isValid($input)) {
     // input est invalide
 }
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.callback.options2">
-        <title>Ajouter des options</title>
+    <section xml:id="zend.validate.set.callback.options2"><info><title>Ajouter des options</title></info>
+        
 
         <para>
             <classname>Zend_Validate_Callback</classname> permet d'utiliser des options, celles-ci
@@ -253,8 +251,5 @@ if ($valid->isValid($input, $additional)) {
             <methodname>isValid()</methodname>; les autres options suivront. Le nombre et le type d'options qui
             peuvent être utilisées est illimité.
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

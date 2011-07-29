@@ -1,30 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.queue.stomp">
-    <title>Stomp</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.stomp"><info><title>Stomp</title></info>
+    
 
     <para>
         <classname>Zend_Queue_Stomp</classname> provides a basic client to
-        communicate with <ulink url="http://stomp.codehaus.org/">Stomp</ulink>
+        communicate with <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://stomp.codehaus.org/">Stomp</link>
         compatible servers. Some servers, such as Apache ActiveMQ and RabbitMQ, will
         allow you to communicate by other methods, such as <acronym>HTTP</acronym>,
         and <acronym>XMPP</acronym>.
     </para>
 
     <para>
-        The Stomp protocol provides <ulink
-            url="http://stomp.codehaus.org/StompConnect">StompConnect</ulink>
-        which supports any <ulink url="http://java.sun.com/products/jms/"> Java
-            Message Service (JMS)</ulink> provider.
+        The Stomp protocol provides <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://stomp.codehaus.org/StompConnect">StompConnect</link>
+        which supports any <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://java.sun.com/products/jms/"> Java
+            Message Service (JMS)</link> provider.
         Stomp is supported by
-        <ulink url="http://activemq.apache.org/">Apache ActiveMQ</ulink>,
-        <ulink url="http://www.rabbitmq.com/">RabbitMQ</ulink>,
-        <ulink url="http://stompserver.rubyforge.org/">stompserver</ulink>, and
-        <ulink url="http://www.germane-software.com/software/Java/Gozirra/">Gozirra</ulink>.
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://activemq.apache.org/">Apache ActiveMQ</link>,
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.rabbitmq.com/">RabbitMQ</link>,
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://stompserver.rubyforge.org/">stompserver</link>, and
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.germane-software.com/software/Java/Gozirra/">Gozirra</link>.
     </para>
 
-    <sect2 id="zend.queue.adapters-configuration.stomp">
-        <title>Stomp - Supporting classes</title>
+    <section xml:id="zend.queue.adapters-configuration.stomp"><info><title>Stomp - Supporting classes</title></info>
+        
 
         <itemizedlist>
             <listitem>
@@ -45,5 +45,5 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19661 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.exception.using">
-    <title>Usando as Exceções</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.using"><info><title>Usando as Exceções</title></info>
+    
 
     <para>
         <classname>Zend_Exception</classname> é simplesmente a classe base para
         todas as exceções lançadas dentro do Zend Framework.
     </para>
 
-    <example id="zend.exception.using.example">
-        <title>Tratando uma Exceção</title>
+    <example xml:id="zend.exception.using.example"><info><title>Tratando uma Exceção</title></info>
+        
 
         <para>
             O código a seguir demonstra como tratar uma exceção lançada em uma
@@ -42,7 +40,4 @@ try {
         específicas sobre os métodos para lançar exceções, as circunstâncias que fazem com
         que uma exceção seja lançada, e os diversos tipos de exceção que podem ser lançadas.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

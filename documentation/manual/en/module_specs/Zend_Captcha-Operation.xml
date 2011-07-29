@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.captcha.operation">
-    <title>Captcha Operation</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.captcha.operation"><info><title>Captcha Operation</title></info>
+    
 
     <para>
         All <acronym>CAPTCHA</acronym> adapter implement
@@ -70,7 +69,4 @@ if ($captcha->isValid($_POST['foo'], $_POST)) {
     // Validated!
 }
 ]]></programlisting>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

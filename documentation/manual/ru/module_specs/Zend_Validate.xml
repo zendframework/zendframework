@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.validate.introduction">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.introduction"><info><title>Введение</title></info>
 
-    <title>Введение</title>
+    
 
     <para>
         Компонента <classname>Zend_Validate</classname> предоставляет набор наиболее часто
@@ -12,9 +11,9 @@
         заданном пользователем.
     </para>
 
-    <sect2 id="zend.validate.introduction.definition">
+    <section xml:id="zend.validate.introduction.definition"><info><title>Что такое валидатор?</title></info>
     
-        <title>Что такое валидатор?</title>
+        
     
         <para>
             Валидатор проверяет входные данные на предмет соответствия
@@ -35,11 +34,11 @@
             соответствует имя пользователя.
         </para>
     
-    </sect2>
+    </section>
 
-    <sect2 id="zend.validate.introduction.using">
+    <section xml:id="zend.validate.introduction.using"><info><title>Базовое использование валидаторов</title></info>
 
-        <title>Базовое использование валидаторов</title>
+        
 
         <para>
             Такое определение валидации дает основу для
@@ -94,11 +93,11 @@ if ($validator->isValid($email)) {
     
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.validate.introduction.messages">
+    <section xml:id="zend.validate.introduction.messages"><info><title>Установка собственных сообщений от ошибках</title></info>
 
-        <title>Установка собственных сообщений от ошибках</title>
+        
 
         <para>
             Классы валидации предоставляют метод <code>setMessage()</code>,
@@ -195,11 +194,11 @@ if (!validator->isValid('слово')) {
 ]]></programlisting>
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.validate.introduction.static">
+    <section xml:id="zend.validate.introduction.static"><info><title>Использование статического метода is()</title></info>
 
-        <title>Использование статического метода is()</title>
+        
 
         <para>
             Если неудобно каждый раз загружать требуемый класс валидации и
@@ -252,15 +251,15 @@ if (Zend_Validate::is($value, 'Between', array(1, 12))) {
             Кроме того, класс <classname>Zend_Filter_Input</classname>
             позволяет инстанцировать и запускать более одного класса фильтра и
             валидации для обработки набора входных данных. Читайте
-            <xref linkend="zend.filter.input" />.
+            <xref linkend="zend.filter.input"/>.
         </para>
 
-    </sect2>
+    </section>
 
 
-    <sect2 id="zend.validate.introduction.translation">
+    <section xml:id="zend.validate.introduction.translation"><info><title>Перевод сообщений</title></info>
 
-        <title>Перевод сообщений</title>
+        
 
         <para>
             Классы валидации предоставляют метод <code>setTranslator()</code>,
@@ -330,8 +329,5 @@ if (!$validator->isTranslatorDisabled()) {
             вы установили самостоятельно.
         </para>
 
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

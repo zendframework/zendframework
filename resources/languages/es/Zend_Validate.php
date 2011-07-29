@@ -77,13 +77,13 @@ return array(
 
     // Zend_Validate_EmailAddress
     "Invalid type given, value should be a string" => "El tipo especificado no es válido, el valor debe ser una cadena de texto",
-    "'%value%' is no valid email address in the basic format local-part@hostname" => "'%value%' no es una dirección de correo electrónico válido en el formato local-part@hostname",
-    "'%hostname%' is no valid hostname for email address '%value%'" => "'%hostname%' no es un nombre de host válido para la dirección de correo electrónico '%value%'",
+    "'%value%' is not a valid email address in the basic format local-part@hostname" => "'%value%' no es una dirección de correo electrónico válido en el formato local-part@hostname",
+    "'%hostname%' is not a valid hostname for email address '%value%'" => "'%hostname%' no es un nombre de host válido para la dirección de correo electrónico '%value%'",
     "'%hostname%' does not appear to have a valid MX record for the email address '%value%'" => "'%hostname%' no parece tener un registro MX válido para la dirección de correo electrónico '%value%'",
     "'%hostname%' is not in a routable network segment. The email address '%value%' should not be resolved from public network." => "'%hostname%' no esta en un segmento de red ruteable. La dirección de correo electrónico '%value%' no se debe poder resolver desde una red pública.",
     "'%localPart%' can not be matched against dot-atom format" => "'%localPart%' no es igual al formato dot-atom",
     "'%localPart%' can not be matched against quoted-string format" => "'%localPart%' no es igual al formato quoted-string",
-    "'%localPart%' is no valid local part for email address '%value%'" => "'%localPart%' no es una parte local válida para la dirección de correo electrónico '%value%'",
+    "'%localPart%' is not a valid local part for email address '%value%'" => "'%localPart%' no es una parte local válida para la dirección de correo electrónico '%value%'",
     "'%value%' exceeds the allowed length" => "'%value%' excede la longitud permitida",
 
     // Zend_Validate_File_Count

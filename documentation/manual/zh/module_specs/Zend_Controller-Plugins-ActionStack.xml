@@ -1,5 +1,8 @@
-<sect3 id="zend.controller.plugins.standard.actionstack">
-    <title>动作堆栈</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.plugins.standard.actionstack"><info><title>动作堆栈</title></info>
+    
 
     <para>
         <code>动作堆栈</code>插件可以管理一个请求堆栈，其操作象<code>postDispatch</code>插件。如果一个转发（例如，对另一个动作的调用）在当前请求对象中已经检测到，它不做任何事情。然而，如果没有检测到，它就检查堆栈并把最上面的一个取出，然后转发给由那个请求指定的动作。堆栈按照LIFO（后进先出）顺序处理。
@@ -30,7 +33,4 @@
     <para>
         一个附加的方法，<code>forward()</code>，准备一个请求对象，并在前端控制器设置当前请求状态给提供的请求对象的状态，使它不可派遣（强制另一个派遣循环迭代）。
     </para>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.log.writers.mail">
-    <title>In Emails schreiben</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers.mail"><info><title>In Emails schreiben</title></info>
+    
 
     <para>
         <classname>Zend_Log_Writer_Mail</classname> schreibt Logeinträge in eine Email Nachricht
@@ -61,8 +59,8 @@ $log->error('Kann nicht zur datenbank verbinden');
         wird das Email in Summe sieben Logeinträge enthalten.
     </para>
 
-    <sect3 id="zend.log.writers.mail.layoutusage">
-        <title>Zend_Layout Verwendung</title>
+    <section xml:id="zend.log.writers.mail.layoutusage"><info><title>Zend_Layout Verwendung</title></info>
+        
 
         <para>
             Eine <classname>Zend_Layout</classname> Instanz kann verwendet werden um den
@@ -116,10 +114,10 @@ $log->error('unable to connect to database');
 // getriggert um ein Email mit allen Logeinträgen zu senden die
 // auf oder über dem Filterlevel von Zend_Log liegen
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.log.writers.mail.dynamicsubjectline">
-        <title>Zusammenfassung der Fehlerlevel in der Subjektzeile</title>
+    <section xml:id="zend.log.writers.mail.dynamicsubjectline"><info><title>Zusammenfassung der Fehlerlevel in der Subjektzeile</title></info>
+        
 
         <para>
             Die <methodname>setSubjectPrependText()</methodname> Methode kann statt
@@ -131,10 +129,10 @@ $log->error('unable to connect to database');
             Wenn kein Subjekttext mit <classname>Zend_Log_Writer_Mail</classname> vorangestellt
             wird, wird die <classname>Zend_Mail</classname> Subjektzeile verwendet, wenn vorhanden.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.log.writers.mail.caveats">
-        <title>Vorbehalte</title>
+    <section xml:id="zend.log.writers.mail.caveats"><info><title>Vorbehalte</title></info>
+        
 
         <para>
             Das Senden von Logeinträgen über Emails kann gefährlich sein. Wenn Fehlerzustände
@@ -156,5 +154,5 @@ $log->error('unable to connect to database');
             verhindern, dann kann die Email-basierende Benachtichtigung von Fehlern ein
             nützliches Tool sein.
         </para>
-    </sect3>
-</sect2>
+    </section>
+</section>

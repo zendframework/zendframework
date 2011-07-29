@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.tool.project.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.project.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_Tool_Project</classname> builds on and extends the capabilities of
@@ -35,4 +36,4 @@
         resources are part of a project at any given time, but also <emphasis>where</emphasis> they
         are in relation to one another.
     </para>
-</sect1>
+</section>

@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.migration">
-    <title>Переход с предыдущих версий</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.migration"><info><title>Переход с предыдущих версий</title></info>
+    
 
     <para>
         API компонент системы MVC претерпевал изменения со временем. Если вы
@@ -10,11 +9,11 @@
         архитектуру.
     </para>
 
-    <sect2 id="zend.controller.migration.fromoneseventooneeight">
-        <title>Переход с 1.7.x на 1.8.0 и более поздние версии</title>
+    <section xml:id="zend.controller.migration.fromoneseventooneeight"><info><title>Переход с 1.7.x на 1.8.0 и более поздние версии</title></info>
+        
 
-        <sect3 id="zend.controller.migration.fromoneseventooneeight.router">
-            <title>Изменения в стандартном маршруте</title>
+        <section xml:id="zend.controller.migration.fromoneseventooneeight.router"><info><title>Изменения в стандартном маршруте</title></info>
+            
 
             <para>
                 Поскольку в новый стандартный маршрут были добавлены
@@ -25,14 +24,14 @@
                 символа <code>@</code>. То же самое правило теперь применяется
                 и к символу <code>:</code>.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.controller.migration.fromonesixtooneseven">
-        <title>Переход с 1.6.x на 1.7.0 и более поздние версии</title>
+    <section xml:id="zend.controller.migration.fromonesixtooneseven"><info><title>Переход с 1.6.x на 1.7.0 и более поздние версии</title></info>
+        
 
-        <sect3 id="zend.controller.migration.fromonesixtooneseven.dispatcher">
-            <title>Изменения в интерфейсе диспетчера</title>
+        <section xml:id="zend.controller.migration.fromonesixtooneseven.dispatcher"><info><title>Изменения в интерфейсе диспетчера</title></info>
+            
 
             <para>
                 Пользователи обратили наше внимание на тот факт, что
@@ -53,14 +52,14 @@
                     <classname>Zend_Controller_Action</classname>.
                 </para></listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.controller.migration.fromoneohtoonesix">
-        <title>Переход с 1.5.x на 1.6.0 и более поздние версии</title>
+    <section xml:id="zend.controller.migration.fromoneohtoonesix"><info><title>Переход с 1.5.x на 1.6.0 и более поздние версии</title></info>
+        
 
-        <sect3 id="zend.controller.migration.fromoneohtoonesix.dispatcher">
-            <title>Изменения в интерфейсе диспетчера</title>
+        <section xml:id="zend.controller.migration.fromoneohtoonesix.dispatcher"><info><title>Изменения в интерфейсе диспетчера</title></info>
+            
 
             <para>
                 Пользователи обратили наше внимание на тот факт, что
@@ -88,11 +87,11 @@
                     используемого по умолчанию действия.
                 </para></listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.controller.migration.fromoneohtoonefive">
-        <title>Переход с 1.0.x на 1.5.0 и более поздние версии</title>
+    <section xml:id="zend.controller.migration.fromoneohtoonefive"><info><title>Переход с 1.0.x на 1.5.0 и более поздние версии</title></info>
+        
 
         <para>
             Хотя основной набор функциональных возможностей остался тем же, и
@@ -219,10 +218,10 @@ $front->setParam('useCaseSensitiveActions', true);
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.migration.fromzeroninethree">
-        <title>Переход с 0.9.3 на 1.0.0RC1 и более поздние версии</title>
+    <section xml:id="zend.controller.migration.fromzeroninethree"><info><title>Переход с 0.9.3 на 1.0.0RC1 и более поздние версии</title></info>
+        
 
         <para>
             Основные изменения, появившиеся в 1.0.0RC1 - это добавление
@@ -411,14 +410,13 @@ $viewRenderer->setView($view);
             <code>ErrorHandler</code> и <code>ViewRenderer</code>, так как
             сейчас это лежащий в основе фреймворка функционал.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.migration.fromzeroninetwo">
-        <title>Переход с 0.9.2 на 0.9.3 и более поздние версии</title>
+    <section xml:id="zend.controller.migration.fromzeroninetwo"><info><title>Переход с 0.9.2 на 0.9.3 и более поздние версии</title></info>
+        
 
         <para>
-            В версии 0.9.3 были добавлены <link
-            linkend="zend.controller.actionhelpers">помощники действий</link>
+            В версии 0.9.3 были добавлены <link linkend="zend.controller.actionhelpers">помощники действий</link>
             (action helpers).
             Это изменение включает в себя удаление перечисленных ниже методов
             из-за того, что сейчас они инкапсулированы в
@@ -449,17 +447,15 @@ $viewRenderer->setView($view);
 
         <para>
             Более подробную информацию о том, как извлекать и работать с
-            объектами действий, читайте в <link
-            linkend="zend.controller.actionhelpers">документации по помощникам
+            объектами действий, читайте в <link linkend="zend.controller.actionhelpers">документации по помощникам
             действий</link>. Об установке опций перенаправления и альтернативных
-            методах перенаправления читайте в <link
-            linkend="zend.controller.actionhelpers.redirector">документации по
+            методах перенаправления читайте в <link linkend="zend.controller.actionhelpers.redirector">документации по
             помощнику перенаправлений</link>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.migration.fromzerosix">
-        <title>Переход с 0.6.0 на 0.8.0 и более поздние версии</title>
+    <section xml:id="zend.controller.migration.fromzerosix"><info><title>Переход с 0.6.0 на 0.8.0 и более поздние версии</title></info>
+        
 
         <para>
             Базовое использование компонент MVC не изменилось:
@@ -498,8 +494,7 @@ Zend_Controller_Front::run('/path/to/controllers');
                     Добавлен новый класс маршрута для использования с Rewrite
                     Router - <classname>Zend_Controller_Router_Route_Module</classname>.
                     Он включает в себя маршрут по умолчанию, используемый
-                    MVC, и поддерживает <link
-                        linkend="zend.controller.modular">модули
+                    MVC, и поддерживает <link linkend="zend.controller.modular">модули
                         контроллеров</link>.
                 </para>
             </listitem>
@@ -544,10 +539,10 @@ final protected function _forward($action,
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.migration.fromzerotwo">
-        <title>Переход с 0.2.0 и более ранних версий на 0.6.0</title>
+    <section xml:id="zend.controller.migration.fromzerotwo"><info><title>Переход с 0.2.0 и более ранних версий на 0.6.0</title></info>
+        
 
         <para>
             Базовое использование компонент системы MVC не изменилось,
@@ -640,14 +635,14 @@ echo $response;
             <listitem><para>
                 <code>Zend_Controller_Dispatcher_Interface::dispatch()</code>
                 теперь принимает и возвращает объект запроса
-                <xref linkend="zend.controller.request" />
+                <xref linkend="zend.controller.request"/>
                 вместо метки <classname>Zend_Controller_Dispatcher_Token</classname>.
             </para></listitem>
 
             <listitem><para>
                 <code>Zend_Controller_Router_Interface::route()</code>
                 теперь принимает и возвращает объект ответа
-                <xref linkend="zend.controller.request" />
+                <xref linkend="zend.controller.request"/>
                 вместо метки <classname>Zend_Controller_Dispatcher_Token</classname>
             </para></listitem>
 
@@ -780,12 +775,9 @@ public function __call($method, $args)
                 <classname>Zend_Controller_Plugin_Interface</classname> был заменен на
                 <classname>Zend_Controller_Plugin_Abstract</classname>. Все методы теперь
                 принимают и возвращают объект ответа
-                <xref linkend="zend.controller.request" /> вместо метки
+                <xref linkend="zend.controller.request"/> вместо метки
                 диспетчеризации.
             </para></listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

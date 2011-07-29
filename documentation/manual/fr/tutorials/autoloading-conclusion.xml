@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19778 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.autoloading.conclusion">
-    <title>Conclusion</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.conclusion"><info><title>Conclusion</title></info>
+    
 
     <para>
         Zend Framework encourage l'utilisation de l'auto-chargement, et l'initialise même par
@@ -13,8 +13,6 @@
     </para>
 
     <para>
-        Pour plus d'informations sur son utilisation, lisez les sections du manuel sur <link
-            linkend="zend.loader.autoloader">Zend_Loader_Autoloader</link> et <link
-            linkend="zend.loader.autoloader-resource">Zend_Loader_Autoloader_Resource</link>.
+        Pour plus d'informations sur son utilisation, lisez les sections du manuel sur <link linkend="zend.loader.autoloader">Zend_Loader_Autoloader</link> et <link linkend="zend.loader.autoloader-resource">Zend_Loader_Autoloader_Resource</link>.
     </para>
-</sect1>
+</section>

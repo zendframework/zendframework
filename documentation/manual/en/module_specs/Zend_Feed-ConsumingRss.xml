@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.feed.consuming-rss">
-    <title>Consuming an RSS Feed</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-rss"><info><title>Consuming an RSS Feed</title></info>
+    
 
     <para>
         Reading an <acronym>RSS</acronym> feed is as simple as instantiating a
@@ -29,8 +28,8 @@ echo $channel->title();
     <para>
         Note the function syntax. <classname>Zend_Feed</classname> uses a convention of treating
         properties as <acronym>XML</acronym> object if they are requested with variable "getter"
-        syntax (<command>$obj->property</command>) and as strings if they are access with method
-        syntax (<command>$obj->property()</command>). This enables access to the full text of any
+        syntax (<command>$obj-&gt;property</command>) and as strings if they are access with method
+        syntax (<command>$obj-&gt;property()</command>). This enables access to the full text of any
         individual node while still allowing full access to all children.
     </para>
 
@@ -173,16 +172,12 @@ if ($item->propname()) {
 ]]></programlisting>
 
     <para>
-        If you use <command>$item->propname</command> instead, you will always get an empty object
+        If you use <command>$item-&gt;propname</command> instead, you will always get an empty object
         which will evaluate to <constant>TRUE</constant>, so your check will fail.
     </para>
 
     <para>
         For further information, the official <acronym>RSS</acronym> 2.0 specification is available
-        at: <ulink
-            url="http://blogs.law.harvard.edu/tech/rss">http://blogs.law.harvard.edu/tech/rss</ulink>
+        at: <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://blogs.law.harvard.edu/tech/rss">http://blogs.law.harvard.edu/tech/rss</link>
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

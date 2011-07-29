@@ -1,19 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18427 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.router">
-    <title>Zend_Application_Resource_Router</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.router"><info><title>Zend_Application_Resource_Router</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Router</classname> est utilisé pour
         configurer le routeur enregistré grâce aux options du contrôleur
-        frontal. Les options sont identiques à celles de <link
-        linkend="zend.controller.router.routes.standard">
+        frontal. Les options sont identiques à celles de <link linkend="zend.controller.router.routes.standard">
             <classname>Zend_Controller_Router_Route</classname></link>.
     </para>
 
-    <example id="zend.application.available-resources.router.configExample">
-        <title>Exemple de configuration du routeur</title>
+    <example xml:id="zend.application.available-resources.router.configExample"><info><title>Exemple de configuration du routeur</title></info>
+        
 
         <para>
             Voici l'exemple d'un fichier <acronym>INI</acronym> qui configure
@@ -34,4 +31,4 @@ resources.router.chainNameSeparator = "_"
             <link linkend="zend.controller.router.routes.chain.config">sa section</link>.
         </para>
     </example>
-</sect2>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21826 -->
-<sect1 id="zend.gdata.clientlogin">
-    <title>ClientLogin による認証</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.clientlogin"><info><title>ClientLogin による認証</title></info>
+    
 
     <para>
         ClientLogin を使用すると、<acronym>PHP</acronym> アプリケーションで
@@ -12,7 +10,7 @@
 
     <para>
         Google Data ClientLogin 認証についての詳細は、
-        <ulink url="http://code.google.com/apis/accounts/AuthForInstalledApps.html"> http://code.google.com/apis/accounts/AuthForInstalledApps.html </ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/accounts/AuthForInstalledApps.html"> http://code.google.com/apis/accounts/AuthForInstalledApps.html </link>
         を参照ください。
     </para>
 
@@ -31,8 +29,8 @@
         しかし、それは <acronym>PHP</acronym> アプリケーションを使用するユーザ自身のものである必要はありません。
     </para>
 
-    <sect2 id="zend.gdata.clientlogin.login">
-        <title>ClientLogin 認証済みの Http クライアントの作成</title>
+    <section xml:id="zend.gdata.clientlogin.login"><info><title>ClientLogin 認証済みの Http クライアントの作成</title></info>
+        
 
         <para>
             ClientLogin を使用した認証済みの <acronym>HTTP</acronym> クライアントを作成するには、
@@ -100,10 +98,10 @@ try {
 $cal = new Zend_Gdata_Calendar($client);
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.clientlogin.terminating">
-        <title>Http クライアントの ClientLogin 認証の解除</title>
+    <section xml:id="zend.gdata.clientlogin.terminating"><info><title>Http クライアントの ClientLogin 認証の解除</title></info>
+        
 
         <para>
             ClientLogin 認証を解除する方法はありません。というのは、これは
@@ -112,6 +110,6 @@ $cal = new Zend_Gdata_Calendar($client);
             これらは将来も繰り返し使用できます。
         </para>
 
-    </sect2>
+    </section>
 
-</sect1>
+</section>

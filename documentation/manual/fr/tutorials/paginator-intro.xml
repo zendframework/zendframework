@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19998 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.paginator.intro">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.paginator.intro"><info><title>Introduction</title></info>
+    
 
     <para>
         Imaginons que vous vouliez créer un blog, rempli de billets traitant d'un sujet.
@@ -32,4 +32,4 @@
         <classname>Zend_Paginator</classname>.
         Pour démarrer, voyons quelques extraits de codes au travers d'exemples.
     </para>
-</sect1>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.loader.pluginloader">
-    <title>Chargeur de Plugins</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.pluginloader"><info><title>Chargeur de Plugins</title></info>
+    
 
     <para>
         Zend Framework vous propose l'utilisation de composants "pluggables", que vous créez
@@ -20,8 +18,8 @@
         enregistrés plus tôt.
     </para>
 
-    <sect2 id="zend.loader.pluginloader.usage">
-        <title>Utilisation basique</title>
+    <section xml:id="zend.loader.pluginloader.usage"><info><title>Utilisation basique</title></info>
+        
 
         <para>
             Même si nous parlons de "plugins", ce n'est pas réservé aux plugins de contrôleur
@@ -87,8 +85,8 @@ $formSubmitClass = $loader->load('FormSubmit');
 
         <para>Une fois chargée, la classe devient instanciable.</para>
 
-        <note>
-            <title>Plusieurs dossiers peuvent être assignés à un même préfixe</title>
+        <note><info><title>Plusieurs dossiers peuvent être assignés à un même préfixe</title></info>
+            
 
             <para>
                 Vous pouvez "namespacer" vos composants en enregistrant plusieurs chemins pour
@@ -98,8 +96,8 @@ $formSubmitClass = $loader->load('FormSubmit');
             </para>
         </note>
 
-        <note>
-            <title>Paramétrage des chemins dans le constructeur</title>
+        <note><info><title>Paramétrage des chemins dans le constructeur</title></info>
+            
 
             <para>
                 En constructeur, passez un tableau de paires prefix / path ou prefix / paths
@@ -130,10 +128,10 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
             nom de registre, alors tous les chemins et plugins déjà chargés seront
             disponibles.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.pluginloader.paths">
-        <title>Manipulation des chemins des Plugins</title>
+    <section xml:id="zend.loader.pluginloader.paths"><info><title>Manipulation des chemins des Plugins</title></info>
+        
 
         <para>
             Pour afficher ou supprimer des chemins déjà enregistrés, utilisez l'une des
@@ -165,10 +163,10 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.pluginloader.checks">
-        <title>Test des Plugins et récupération des noms de classe</title>
+    <section xml:id="zend.loader.pluginloader.checks"><info><title>Test des Plugins et récupération des noms de classe</title></info>
+        
 
         <para>
             Lorsque vous voulez savoir si une classe de plugin a été chargée,
@@ -188,10 +186,10 @@ if ($loader->isLoaded('Adapter')) {
     $adapter = call_user_func(array($class, 'getInstance'));
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.pluginloader.performance">
-        <title>Obtenir de meilleures performances avec les Plugins</title>
+    <section xml:id="zend.loader.pluginloader.performance"><info><title>Obtenir de meilleures performances avec les Plugins</title></info>
+        
 
         <para>
             Le chargement des plugins peut être une opération consommatrice en ressources. En
@@ -211,9 +209,9 @@ if ($loader->isLoaded('Adapter')) {
             considérablement accroître les performances de vos serveurs de production.
         </para>
 
-        <example id="zend.loader.pluginloader.performance.example">
-            <title>Utilisation du fichier de cache des inclusions de classe de
-            PluginLoader</title>
+        <example xml:id="zend.loader.pluginloader.performance.example"><info><title>Utilisation du fichier de cache des inclusions de classe de
+            PluginLoader</title></info>
+            
 
             <para>
                 Pour utiliser le fichier de cache des inclusions de classe, collez simplement
@@ -255,5 +253,5 @@ if ($config->enablePluginLoaderCache) {
                 de configuration plutôt que dans votre code.
             </para>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

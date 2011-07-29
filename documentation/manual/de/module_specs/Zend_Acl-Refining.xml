@@ -1,15 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20763 -->
-<!-- Reviewed: 20763 -->
-<sect1 id="zend.acl.refining">
-    <title>Verfeinern der Zugriffskontrolle</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.refining"><info><title>Verfeinern der Zugriffskontrolle</title></info>
+    
 
-    <sect2 id="zend.acl.refining.precise">
-        <title>Präzise Zugangsbeschränkung</title>
+    <section xml:id="zend.acl.refining.precise"><info><title>Präzise Zugangsbeschränkung</title></info>
+        
 
         <para>
-            Die grundlegende <acronym>ACL</acronym>, wie sie im <link
-                linkend="zend.acl.introduction">vorherigen Kapitel</link> definiert ist, zeigt wie
+            Die grundlegende <acronym>ACL</acronym>, wie sie im <link linkend="zend.acl.introduction">vorherigen Kapitel</link> definiert ist, zeigt wie
             verschiedene Rechte für die gesamte <acronym>ACL</acronym> (alle Ressourcen) vergeben
             werden können. In der Praxis tendieren Zugangsbeschränkungen jedoch eher dahin,
             Ausnahmen und verschiedene Stufen von Komplexität zu haben.
@@ -126,10 +123,10 @@ echo $acl->isAllowed('administrator', 'announcement', 'archive') ?
      "allowed" : "denied";
 // verweigert
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.refining.removing">
-        <title>Zugangsbeschränkungen entfernen</title>
+    <section xml:id="zend.acl.refining.removing"><info><title>Zugangsbeschränkungen entfernen</title></info>
+        
 
         <para>
             Um eine oder mehrere Zugangsregel von der <acronym>ACL</acronym> zu entfernen,
@@ -186,5 +183,5 @@ echo $acl->isAllowed('marketing', 'latest', 'anything') ?
      "allowed" : "denied";
 // erlaubt
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

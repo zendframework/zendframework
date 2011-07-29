@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.pdf.info">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.info"><info><title>Información del Documento y Metadatos</title></info>
     <!-- @todo review and revise upon completion of refactoring -->
-    <title>Información del Documento y Metadatos</title>
+    
     <para> Un documento <acronym>PDF</acronym> puede incluir información general
         como el título del documento, autor, la creación y modificación de
         fechas. </para>
@@ -167,9 +165,8 @@ $pdf->save($pdfPath);
 
     <para> Desde <acronym>PDF</acronym> v 1.6 los metadatos se pueden almacenar
         en el documento <acronym>XML</acronym> especial adjunto al
-            <acronym>PDF</acronym> (XMP - <ulink
-            url="http://www.adobe.com/products/xmp/">Extensible Metadata
-            Platform</ulink> ). </para>
+            <acronym>PDF</acronym> (XMP - <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.adobe.com/products/xmp/">Extensible Metadata
+            Platform</link> ). </para>
 
     <para> Este documento <acronym>XML</acronym> se pueden recuperar y adjuntar
         al <acronym>PDF</acronym> con los métodos
@@ -199,4 +196,4 @@ $pdf->save($pdfPath);
     <para>Las propiedades comunes del documento se duplican en la estructura de
         Info y el documento Metadata (si se presentan). Ahora es responsabilidad
         del usuario la aplicación para mantenerlos sincronizados.</para>
-</sect1>
+</section>

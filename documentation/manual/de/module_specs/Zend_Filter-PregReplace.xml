@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19419 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.pregreplace">
-    <title>PregReplace</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.pregreplace"><info><title>PregReplace</title></info>
+    
 
     <para>
         <classname>Zend_Filter_PregReplace</classname> führt eine Suche durch indem es Reguläre
@@ -48,8 +46,7 @@ $filter->filter($input);
 ]]></programlisting>
 
     <para>
-        Für eine komplexere Verwendung sollte man einen Blick in <acronym>PHP</acronym>'s <ulink
-            url="http://www.php.net/manual/en/reference.pcre.pattern.modifiers.php">Kapitel für
-            PCRE Pattern</ulink> werfen.
+        Für eine komplexere Verwendung sollte man einen Blick in <acronym>PHP</acronym>'s <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/reference.pcre.pattern.modifiers.php">Kapitel für
+            PCRE Pattern</link> werfen.
     </para>
-</sect2>
+</section>

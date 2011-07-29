@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21740 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.serializer.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.serializer.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_Serializer</classname> utilise une interface basée sur des adaptateurs
         afin de générer des représentations stockables de types php et inversement.
     </para>
 
-    <example id="zend.serializer.introduction.example.dynamic">
-        <title>Utiliser <classname>Zend_Serializer</classname></title>
+    <example xml:id="zend.serializer.introduction.example.dynamic"><info><title>Utiliser <classname>Zend_Serializer</classname></title></info>
+        
 
         <para>
             Pour instancier un sérialiseur, vous devriez utiliser la méthode de fabrique
@@ -71,8 +69,8 @@ try {
         <methodname>serialize</methodname> ou <methodname>unserialize</methodname>.
     </para>
 
-    <example id="zend.serializer.introduction.example.static.php">
-        <title>Utiliser l'interface statique de Zend_Serializer</title>
+    <example xml:id="zend.serializer.introduction.example.static.php"><info><title>Utiliser l'interface statique de Zend_Serializer</title></info>
+        
 
         <para>
             Vous pouvez enregistrer une adaptateur spécifique comme adaptateur par défaut à utiliser
@@ -95,4 +93,4 @@ try {
 }
 ]]></programlisting>
     </example>
-</sect1>
+</section>

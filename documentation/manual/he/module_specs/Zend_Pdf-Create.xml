@@ -1,5 +1,6 @@
-<sect1 id="zend.pdf.create">
-    <title>יצירת וטעינת קבצי PDF</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.create"><info><title>יצירת וטעינת קבצי PDF</title></info>
+    
     <para>
         מחלקת ה <code>Zend_Pdf</code> מייצגת את מסמכי ה PDF ומספקת פעולת אשר קשורות למסמכים.
     </para>
@@ -14,8 +15,8 @@
         שניהם מחזירות אובייקט <code>Zend_Pdf</code> כתוצאה או זורקות שגיאת חריג במידה וישנה שגיאה.
     </para>
 
-    <example id="zend.pdf.create.example-1">
-        <title>יצירת קובץ PDF חדש או טעינה של אחד קיים</title>
+    <example xml:id="zend.pdf.create.example-1"><info><title>יצירת קובץ PDF חדש או טעינה של אחד קיים</title></info>
+        
         <programlisting role="php"><![CDATA[
 ...
 // Create a new PDF document
@@ -27,8 +28,8 @@ $pdf2 = Zend_Pdf::load($fileName);
 // Load a PDF document from a string
 $pdf3 = Zend_Pdf::parse($pdfString);
 ...
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
 
     <para>
@@ -45,8 +46,8 @@ $pdf3 = Zend_Pdf::parse($pdfString);
     call.
     </para>
 
-    <example id="zend.pdf.create.example-2">
-        <title>קבלת גרסא מסויימת של קובץ PDF</title>
+    <example xml:id="zend.pdf.create.example-2"><info><title>קבלת גרסא מסויימת של קובץ PDF</title></info>
+        
         <programlisting role="php"><![CDATA[
 ...
 // Load the previous revision of the PDF document
@@ -60,12 +61,9 @@ $pdf3 = Zend_Pdf::load($fileName);
 $revisions = $pdf3->revisions();
 $pdf3->rollback($revisions - 1);
 ...
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
 
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.progressbar.introduction" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Zend_ProgressBar</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.progressbar.introduction"><info><title>Zend_ProgressBar</title></info>
+    
 
-    <sect2 id="zend.progressbar.whatisit">
-        <title>Introduction</title>
+    <section xml:id="zend.progressbar.whatisit"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_ProgressBar</classname> is a component to create and update
@@ -14,10 +13,10 @@
             a status message, and then calls the adapter with some precalculated
             values like percentage and estimated time left.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.progressbar.basic">
-        <title>Basic Usage of Zend_Progressbar</title>
+    <section xml:id="zend.progressbar.basic"><info><title>Basic Usage of Zend_Progressbar</title></info>
+        
 
         <para>
             <classname>Zend_ProgressBar</classname> is quite easy in its usage. You
@@ -52,10 +51,10 @@ $progressBar->finish();
             recalculates ETA and notifies the adapter. This is useful when there
             is no data update but you want the progressbar to be updated.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.progressbar.persistent">
-        <title>Persistent progress</title>
+    <section xml:id="zend.progressbar.persistent"><info><title>Persistent progress</title></info>
+        
 
         <para>
             If you want the progressbar to be persistent over multiple requests,
@@ -66,10 +65,10 @@ $progressBar->finish();
             value, the status text and the start time for ETA calculation will
             be fetched in the next request run again.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.progressbar.adapters">
-        <title>Standard adapters</title>
+    <section xml:id="zend.progressbar.adapters"><info><title>Standard adapters</title></info>
+        
 
         <para>
             <classname>Zend_ProgressBar</classname> comes with the following three adapters:
@@ -77,32 +76,26 @@ $progressBar->finish();
             <itemizedlist mark="opencircle">
                 <listitem>
                     <para>
-                        <link
-                            linkend="zend.progressbar.adapter.console">Zend_Progressbar_Adapter_Console</link>
+                        <link linkend="zend.progressbar.adapter.console">Zend_Progressbar_Adapter_Console</link>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <link
-                            linkend="zend.progressbar.adapter.jspush">Zend_Progressbar_Adapter_JsPush</link>
+                        <link linkend="zend.progressbar.adapter.jspush">Zend_Progressbar_Adapter_JsPush</link>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <link
-                            linkend="zend.progressbar.adapter.jspull">Zend_ProgressBar_Adapter_JsPull</link>
+                        <link linkend="zend.progressbar.adapter.jspull">Zend_ProgressBar_Adapter_JsPull</link>
                     </para>
                 </listitem>
             </itemizedlist>
         </para>
 
-        <xi:include href="Zend_ProgressBar_Adapter_Console.xml" />
-        <xi:include href="Zend_ProgressBar_Adapter_JsPush.xml" />
-        <xi:include href="Zend_ProgressBar_Adapter_JsPull.xml" />
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_ProgressBar_Adapter_Console.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_ProgressBar_Adapter_JsPush.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_ProgressBar_Adapter_JsPull.xml"/>
+    </section>
+</section>

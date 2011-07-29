@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.search.lucene.searching">
-    <title>Searching an Index</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.searching"><info><title>Searching an Index</title></info>
+    
 
-    <sect2 id="zend.search.lucene.searching.query_building">
-        <title>Building Queries</title>
+    <section xml:id="zend.search.lucene.searching.query_building"><info><title>Building Queries</title></info>
+        
 
         <para>
             There are two ways to search the index. The first method uses
@@ -94,8 +93,8 @@ $index->find($query);
             It's therefore more suitable for computer generated or untokenized fields.
         </para>
 
-        <sect3 id="zend.search.lucene.searching.query_building.parsing">
-            <title>Query Parsing</title>
+        <section xml:id="zend.search.lucene.searching.query_building.parsing"><info><title>Query Parsing</title></info>
+            
 
             <para>
                 <methodname>Zend_Search_Lucene_Search_QueryParser::parse()</methodname> method may
@@ -158,17 +157,17 @@ $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
                 returns the current default query string encoding (the empty string means "current
                 locale").
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.search.lucene.searching.results">
-        <title>Search Results</title>
+    <section xml:id="zend.search.lucene.searching.results"><info><title>Search Results</title></info>
+        
 
         <para>
             The search result is an array of
             <classname>Zend_Search_Lucene_Search_QueryHit</classname> objects. Each of these has two
-            properties: <code>$hit->id</code> is a document number within the index and
-            <code>$hit->score</code> is a score of the hit in a search result. The results are
+            properties: <code>$hit-&gt;id</code> is a document number within the index and
+            <code>$hit-&gt;score</code> is a score of the hit in a search result. The results are
             ordered by score (descending from highest score).
         </para>
 
@@ -234,10 +233,10 @@ foreach ($hits as $hit) {
             Note that the document identity ('path' in our example) is also stored
             in the index and must be retrieved from it.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.searching.results-limiting">
-        <title>Limiting the Result Set</title>
+    <section xml:id="zend.search.lucene.searching.results-limiting"><info><title>Limiting the Result Set</title></info>
+        
 
         <para>
             The most computationally expensive part of searching is score calculation. It may take
@@ -269,10 +268,10 @@ Zend_Search_Lucene::setResultSetLimit($newLimit);
                 </para>
             </footnote>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.searching.results-scoring">
-        <title>Results Scoring</title>
+    <section xml:id="zend.search.lucene.searching.results-scoring"><info><title>Results Scoring</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> uses the same scoring algorithms as Java
@@ -301,14 +300,13 @@ foreach ($hits as $hit) {
 
         <para>
             The <classname>Zend_Search_Lucene_Search_Similarity</classname> class is used to
-            calculate the score for each hit. See <link
-                linkend="zend.search.lucene.extending.scoring">Extensibility. Scoring
+            calculate the score for each hit. See <link linkend="zend.search.lucene.extending.scoring">Extensibility. Scoring
                 Algorithms</link> section for details.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.searching.sorting">
-        <title>Search Result Sorting</title>
+    <section xml:id="zend.search.lucene.searching.sorting"><info><title>Search Result Sorting</title></info>
+        
 
         <para>
             By default, the search results are ordered by score. The programmer can change this
@@ -317,7 +315,7 @@ foreach ($hits as $hit) {
         </para>
 
         <para>
-            <code>$index->find()</code> call may take several optional parameters:
+            <code>$index-&gt;find()</code> call may take several optional parameters:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -364,10 +362,10 @@ $index->find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);
             Please use caution when using a non-default search order; the query needs to retrieve
             documents completely from an index, which may dramatically reduce search performance.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.searching.highlighting">
-        <title>Search Results Highlighting</title>
+    <section xml:id="zend.search.lucene.searching.highlighting"><info><title>Search Results Highlighting</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> provides two options for search results
@@ -442,7 +440,7 @@ $doc->highlightExtended('word1 word2 word3...', array($this, 'myViewHelper'));
 
         <para>
             The result of highlighting operation is retrieved by
-            <code>Zend_Search_Lucene_Document_Html->getHTML()</code> method.
+            <code>Zend_Search_Lucene_Document_Html-&gt;getHTML()</code> method.
         </para>
 
         <note>
@@ -470,7 +468,7 @@ $doc->highlightExtended('word1 word2 word3...', array($this, 'myViewHelper'));
 
         <para>
             The second option is to use
-            <code>Zend_Search_Lucene_Search_Query->highlightMatches(string $inputHTML[,
+            <code>Zend_Search_Lucene_Search_Query-&gt;highlightMatches(string $inputHTML[,
                 $defaultEncoding = 'UTF-8'[,
                 Zend_Search_Lucene_Search_Highlighter_Interface $highlighter]])</code> method:
         </para>
@@ -520,7 +518,7 @@ interface Zend_Search_Lucene_Search_Highlighter_Interface
         <para>
             Where <classname>Zend_Search_Lucene_Document_Html</classname> object is an object
             constructed from the source <acronym>HTML</acronym> provided to the
-            <classname>Zend_Search_Lucene_Search_Query->highlightMatches()</classname> method.
+            <classname>Zend_Search_Lucene_Search_Query-&gt;highlightMatches()</classname> method.
         </para>
 
         <para>
@@ -540,10 +538,10 @@ interface Zend_Search_Lucene_Search_Highlighter_Interface
         </para>
 
         <para>
-            <code>Zend_Search_Lucene_Search_Query->htmlFragmentHighlightMatches()</code> has similar
+            <code>Zend_Search_Lucene_Search_Query-&gt;htmlFragmentHighlightMatches()</code> has similar
             behavior. The only difference is that it takes as an input and returns
-            <acronym>HTML</acronym> fragment without &lt;>HTML>, &lt;HEAD>, &lt;BODY> tags.
+            <acronym>HTML</acronym> fragment without &lt;&gt;HTML&gt;, &lt;HEAD&gt;, &lt;BODY&gt; tags.
             Nevertheless, fragment is automatically transformed to valid <acronym>XHTML</acronym>.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

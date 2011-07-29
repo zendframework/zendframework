@@ -1,8 +1,9 @@
-<sect1 id="zend.search.lucene.advanced">
-    <title>Pokročilé</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.advanced"><info><title>Pokročilé</title></info>
+    
 
-    <sect2 id="zend.search.lucene.advanced.static">
-        <title>Použitie indexu ako statickej vlastnosti</title>
+    <section xml:id="zend.search.lucene.advanced.static"><info><title>Použitie indexu ako statickej vlastnosti</title></info>
+        
 
         <para>
             <code>Zend_Search_Lucene</code> objekt využíva deštruktor na zapísanie
@@ -16,7 +17,7 @@
 
         <para>
             Ak ešte nie je dosiahnutý limit určený parametrom <code>MaxBufferedDocs</code>
-            potom existujú &quot;neuložené&quot; dokumenty ktoré sa uložia ako nový
+            potom existujú "neuložené" dokumenty ktoré sa uložia ako nový
             segment v deštruktore objektu.
 
             Automatická optimalizácia indexu sa spúšťa podľa potreby a jej spustenie
@@ -26,7 +27,7 @@
 
         <para>
             Statické vlastnosti objektu sú zničené <emphasis>po</emphasis>
-            &quot;poslednom riadku bežiaceho skriptu&quot;
+            "poslednom riadku bežiaceho skriptu"
 
 <programlisting role="php"><![CDATA[<?php
 class Searcher {
@@ -50,13 +51,13 @@ Searcher::initIndex();
 
         <para>
             Jedným z problémov sú výnimky. Výnimky ktoré sú vyvolané deštruktorom
-            statického objektu nemajú kontext, lebo sú vykonané &quot;za koncom
-            skriptu&quot;
+            statického objektu nemajú kontext, lebo sú vykonané "za koncom
+            skriptu"
         </para>
 
         <para>
-            V týchto prípadoch dostanente chybu &quot;Fatal error: Exception thrown
-            without a stack frame in Unknown on line 0&quot; namiesto výnimky.
+            V týchto prípadoch dostanente chybu "Fatal error: Exception thrown
+            without a stack frame in Unknown on line 0" namiesto výnimky.
         </para>
 
         <para>
@@ -96,5 +97,5 @@ Searcher::commit();
 ]]></programlisting>
 
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

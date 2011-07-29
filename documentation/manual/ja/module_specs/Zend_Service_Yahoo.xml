@@ -1,10 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20843 -->
-<sect1 id="zend.service.yahoo">
-    <title>Zend_Service_Yahoo</title>
-    <sect2 id="zend.service.yahoo.introduction">
-        <title>導入</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.yahoo"><info><title>Zend_Service_Yahoo</title></info>
+    
+    <section xml:id="zend.service.yahoo.introduction"><info><title>導入</title></info>
+        
         <para>
             <classname>Zend_Service_Yahoo</classname> は、さまざまな Yahoo! REST <acronym>API</acronym>
             群を使用するための単純な <acronym>API</acronym> です。
@@ -12,24 +10,24 @@
             Yahoo! Web search、Yahoo! News、Yahoo! Local、Yahoo! Images
             を検索できるようになります。 Yahoo! REST <acronym>API</acronym> を使用するには、
             Yahoo! Application ID が必要です。Application ID を取得するには、
-            <ulink url="http://developer.yahoo.com/wsregapp/">Application ID リクエストフォーム</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://developer.yahoo.com/wsregapp/">Application ID リクエストフォーム</link>
             を使用してください。
         </para>
-    </sect2>
-    <sect2 id="zend.service.yahoo.websearch">
-        <title>Yahoo! を使用したウェブの検索</title>
+    </section>
+    <section xml:id="zend.service.yahoo.websearch"><info><title>Yahoo! を使用したウェブの検索</title></info>
+        
         <para>
             <classname>Zend_Service_Yahoo</classname> の <methodname>webSearch()</methodname>
             メソッドを使用すると、Yahoo! でウェブを検索できます。
             最初の引数に検索パラメータ、
             オプションで二番目の引数に検索オプションの配列を指定します。
             指定できるオプションの詳細については
-            <ulink url="http://developer.yahoo.com/search/web/V1/webSearch.html">Yahoo! Web Search
-            ドキュメント</ulink> を参照ください。<methodname>webSearch()</methodname> メソッドは
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://developer.yahoo.com/search/web/V1/webSearch.html">Yahoo! Web Search
+            ドキュメント</link> を参照ください。<methodname>webSearch()</methodname> メソッドは
             <classname>Zend_Service_Yahoo_WebResultSet</classname> オブジェクトを返します。
         </para>
-        <example id="zend.service.yahoo.websearch.example-1">
-            <title>Yahoo! を使用したウェブの検索</title>
+        <example xml:id="zend.service.yahoo.websearch.example-1"><info><title>Yahoo! を使用したウェブの検索</title></info>
+            
             <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->webSearch('PHP');
@@ -38,9 +36,9 @@ foreach ($results as $result) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
-    <sect2 id="zend.service.yahoo.imagesearch">
-        <title>Yahoo! を使用した画像の検索</title>
+    </section>
+    <section xml:id="zend.service.yahoo.imagesearch"><info><title>Yahoo! を使用した画像の検索</title></info>
+        
         <para>
             <classname>Zend_Service_Yahoo</classname> の <methodname>imageSearch()</methodname>
             メソッドを使用すると、画像の検索ができます。
@@ -48,11 +46,11 @@ foreach ($results as $result) {
             と同様、最初の引数に検索パラメータ、
             オプションで二番目の引数に検索オプションの配列を指定します。
             指定できるオプションの詳細については
-            <ulink url="http://developer.yahoo.com/search/image/V1/imageSearch.html">Yahoo! Image Search
-            ドキュメント</ulink> を参照ください。
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://developer.yahoo.com/search/image/V1/imageSearch.html">Yahoo! Image Search
+            ドキュメント</link> を参照ください。
         </para>
-        <example id="zend.service.yahoo.imagesearch.example-1">
-            <title>Yahoo! を使用した画像の検索</title>
+        <example xml:id="zend.service.yahoo.imagesearch.example-1"><info><title>Yahoo! を使用した画像の検索</title></info>
+            
             <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->imageSearch('PHP');
@@ -61,18 +59,18 @@ foreach ($results as $result) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
-    <sect2 id="zend.service.yahoo.videosearch">
-        <title>Yahoo! を使用した動画の検索</title>
+    </section>
+    <section xml:id="zend.service.yahoo.videosearch"><info><title>Yahoo! を使用した動画の検索</title></info>
+        
         <para>
             <classname>Zend_Service_Yahoo</classname> の <methodname>videoSearch()</methodname>
             メソッドを使用すると、Yahoo で動画を検索できます。
             詳細は
-            <ulink url="http://developer.yahoo.com/search/video/V1/videoSearch.html">Yahoo! Video Search
-            ドキュメント</ulink> を参照ください。
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://developer.yahoo.com/search/video/V1/videoSearch.html">Yahoo! Video Search
+            ドキュメント</link> を参照ください。
         </para>
-        <example id="zend.service.yahoo.videosearch.example-1">
-            <title>Yahoo! を使用した動画の検索</title>
+        <example xml:id="zend.service.yahoo.videosearch.example-1"><info><title>Yahoo! を使用した動画の検索</title></info>
+            
             <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->videoSearch('PHP');
@@ -81,18 +79,18 @@ foreach ($results as $result) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
-    <sect2 id="zend.service.yahoo.localsearch">
-        <title>Yahoo! を使用した Local Businesses and Services の検索</title>
+    </section>
+    <section xml:id="zend.service.yahoo.localsearch"><info><title>Yahoo! を使用した Local Businesses and Services の検索</title></info>
+        
         <para>
             <methodname>localSearch()</methodname> メソッドを使用すると、
             Yahoo! で local businesses and services を検索できます。
             詳細は
-            <ulink url="http://developer.yahoo.com/search/local/V1/localSearch.html">Yahoo! Local Search
-            ドキュメント</ulink> を参照ください。
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://developer.yahoo.com/search/local/V1/localSearch.html">Yahoo! Local Search
+            ドキュメント</link> を参照ください。
         </para>
-        <example id="zend.service.yahoo.localsearch.example-1">
-            <title>Yahoo! を使用した Local Businesses and Services の検索</title>
+        <example xml:id="zend.service.yahoo.localsearch.example-1"><info><title>Yahoo! を使用した Local Businesses and Services の検索</title></info>
+            
             <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->localSearch('Apple Computers', array('zip' => '95014'));
@@ -101,17 +99,17 @@ foreach ($results as $result) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
-    <sect2 id="zend.service.yahoo.newssearch">
-        <title>Yahoo! News の検索</title>
+    </section>
+    <section xml:id="zend.service.yahoo.newssearch"><info><title>Yahoo! News の検索</title></info>
+        
         <para>
             Yahoo! News を検索するのは簡単です。単に <methodname>newsSearch()</methodname>
             メソッドを下の例のように使用すればよいのです。詳細は
-            <ulink url="http://developer.yahoo.com/search/news/V1/newsSearch.html">Yahoo! News Search
-            ドキュメント</ulink> を参照ください。
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://developer.yahoo.com/search/news/V1/newsSearch.html">Yahoo! News Search
+            ドキュメント</link> を参照ください。
         </para>
-        <example id="zend.service.yahoo.newssearch.example-1">
-            <title>Yahoo! News の検索</title>
+        <example xml:id="zend.service.yahoo.newssearch.example-1"><info><title>Yahoo! News の検索</title></info>
+            
             <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->newsSearch('PHP');
@@ -120,18 +118,18 @@ foreach ($results as $result) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
-    <sect2 id="zend.service.yahoo.inlinkdatasearch">
-        <title>Yahoo! Site Explorer Inbound Links の検索</title>
+    </section>
+    <section xml:id="zend.service.yahoo.inlinkdatasearch"><info><title>Yahoo! Site Explorer Inbound Links の検索</title></info>
+        
         <para>
             Yahoo! Site Explorer Inbound Links を検索するのは簡単です。
             単に <methodname>inlinkDataSearch()</methodname>
             メソッドを下の例のように使用すればいいのです。詳細は
-            <ulink url="http://developer.yahoo.com/search/siteexplorer/V1/inlinkData.html">Yahoo!
-            Site Explorer Inbound Links ドキュメント</ulink> を参照ください。
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://developer.yahoo.com/search/siteexplorer/V1/inlinkData.html">Yahoo!
+            Site Explorer Inbound Links ドキュメント</link> を参照ください。
         </para>
-        <example id="zend.service.yahoo.inlinkdatasearch.example-1">
-            <title>Yahoo! Site Explorer Inbound Links の検索</title>
+        <example xml:id="zend.service.yahoo.inlinkdatasearch.example-1"><info><title>Yahoo! Site Explorer Inbound Links の検索</title></info>
+            
             <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->inlinkDataSearch('http://framework.zend.com/');
@@ -140,18 +138,18 @@ foreach ($results as $result) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
-    <sect2 id="zend.service.yahoo.pagedatasearch">
-        <title>Yahoo! Site Explorer の PageData の検索</title>
+    </section>
+    <section xml:id="zend.service.yahoo.pagedatasearch"><info><title>Yahoo! Site Explorer の PageData の検索</title></info>
+        
         <para>
             Yahoo! Site Explorer Inbound の PageDate を検索するのは簡単です。
             単に <methodname>pageDataSearch()</methodname>
             メソッドを下の例のように使用すればいいのです。詳細は
-            <ulink url="http://developer.yahoo.com/search/siteexplorer/V1/pageData.html">Yahoo!
-            Site Explorer PageData ドキュメント</ulink> を参照ください。
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://developer.yahoo.com/search/siteexplorer/V1/pageData.html">Yahoo!
+            Site Explorer PageData ドキュメント</link> を参照ください。
         </para>
-        <example id="zend.service.yahoo.pagedatasearch.example-1">
-            <title>Yahoo! Site Explorer の PageData の検索</title>
+        <example xml:id="zend.service.yahoo.pagedatasearch.example-1"><info><title>Yahoo! Site Explorer の PageData の検索</title></info>
+            
             <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->pageDataSearch('http://framework.zend.com/');
@@ -160,9 +158,9 @@ foreach ($results as $result) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
-    <sect2 id="zend.service.yahoo.classes">
-        <title>Zend_Service_Yahoo クラス群</title>
+    </section>
+    <section xml:id="zend.service.yahoo.classes"><info><title>Zend_Service_Yahoo クラス群</title></info>
+        
         <para>
             Yahoo! 検索から返される結果は、以下のクラスのいずれかとなります。
             検索の種類によってそれに対応した結果セットが返され、
@@ -190,8 +188,8 @@ foreach ($results as $result) {
                 <listitem><para><link linkend="zend.service.yahoo.classes.image"><classname>Zend_Service_Yahoo_Image</classname></link></para></listitem>
             </itemizedlist>
         </para>
-        <sect3 id="zend.service.yahoo.classes.resultset">
-            <title>Zend_Service_Yahoo_ResultSet</title>
+        <section xml:id="zend.service.yahoo.classes.resultset"><info><title>Zend_Service_Yahoo_ResultSet</title></info>
+            
             <para>
                 検索の種類に応じた結果セットは、この基底クラスを継承したものです。
             </para>
@@ -200,23 +198,23 @@ foreach ($results as $result) {
                 <link linkend="zend.service.yahoo.classes.result">Zend_Service_Yahoo_Result</link>
                 オブジェクトを返します。
             </para>
-            <sect4 id="zend.service.yahoo.classes.resultset.totalResults">
-                <title>Zend_Service_Yahoo_ResultSet::totalResults()</title>
+            <section xml:id="zend.service.yahoo.classes.resultset.totalResults"><info><title>Zend_Service_Yahoo_ResultSet::totalResults()</title></info>
+                
                 <para>
                     <methodsynopsis>
                         <type>int</type>
                         <methodname>totalResults</methodname>
-                        <void />
+                        <void/>
                     </methodsynopsis>
                 </para>
                 <para>
                     検索結果として返された結果の総数を返します。
                 </para>
-            </sect4>
-            <sect4 id="zend.service.yahoo.classes.resultset.properties">
-                <title>プロパティ</title>
-                <table id="zend.service.yahoo.classes.resultset.properties.table-1">
-                    <title>Zend_Service_Yahoo_ResultSet</title>
+            </section>
+            <section xml:id="zend.service.yahoo.classes.resultset.properties"><info><title>プロパティ</title></info>
+                
+                <table xml:id="zend.service.yahoo.classes.resultset.properties.table-1"><info><title>Zend_Service_Yahoo_ResultSet</title></info>
+                    
                     <tgroup cols="3">
                         <thead>
                             <row>
@@ -249,10 +247,10 @@ foreach ($results as $result) {
                 <para>
                     <link linkend="zend.service.yahoo.classes">クラス一覧に戻る</link>
                 </para>
-            </sect4>
-        </sect3>
-        <sect3 id="zend.service.yahoo.classes.webresultset">
-            <title>Zend_Service_Yahoo_WebResultSet</title>
+            </section>
+        </section>
+        <section xml:id="zend.service.yahoo.classes.webresultset"><info><title>Zend_Service_Yahoo_WebResultSet</title></info>
+            
             <para>
                 <classname>Zend_Service_Yahoo_WebResultSet</classname> は Yahoo! Web Search
                 の結果セットを表します。
@@ -267,9 +265,9 @@ foreach ($results as $result) {
             <para>
                 <link linkend="zend.service.yahoo.classes">クラス一覧に戻る</link>
             </para>
-        </sect3>
-        <sect3 id="zend.service.yahoo.classes.imageresultset">
-            <title>Zend_Service_Yahoo_ImageResultSet</title>
+        </section>
+        <section xml:id="zend.service.yahoo.classes.imageresultset"><info><title>Zend_Service_Yahoo_ImageResultSet</title></info>
+            
             <para>
                 <classname>Zend_Service_Yahoo_ImageResultSet</classname> は、Yahoo! Image Search
                 の結果セットを表します。
@@ -284,9 +282,9 @@ foreach ($results as $result) {
             <para>
                 <link linkend="zend.service.yahoo.classes">クラス一覧に戻る</link>
             </para>
-        </sect3>
-        <sect3 id="zend.service.yahoo.classes.videoresultset">
-            <title>Zend_Service_Yahoo_VideoResultSet</title>
+        </section>
+        <section xml:id="zend.service.yahoo.classes.videoresultset"><info><title>Zend_Service_Yahoo_VideoResultSet</title></info>
+            
             <para>
                 <classname>Zend_Service_Yahoo_VideoResultSet</classname> は、Yahoo! Video Search
                 の結果セットを表します。
@@ -301,15 +299,15 @@ foreach ($results as $result) {
             <para>
                 <link linkend="zend.service.yahoo.classes">クラス一覧に戻る</link>
             </para>
-        </sect3>
-        <sect3 id="zend.service.yahoo.classes.localresultset">
-            <title>Zend_Service_Yahoo_LocalResultSet</title>
+        </section>
+        <section xml:id="zend.service.yahoo.classes.localresultset"><info><title>Zend_Service_Yahoo_LocalResultSet</title></info>
+            
             <para>
                 <classname>Zend_Service_Yahoo_LocalResultSet</classname> は、Yahoo! Local Search
                 の結果セットを表します。
             </para>
-            <table id="zend.service.yahoo.classes.localresultset.table-1">
-                <title>Zend_Service_Yahoo_LocalResultSet のプロパティ</title>
+            <table xml:id="zend.service.yahoo.classes.localresultset.table-1"><info><title>Zend_Service_Yahoo_LocalResultSet のプロパティ</title></info>
+                
                 <tgroup cols="3">
                     <thead>
                         <row>
@@ -337,9 +335,9 @@ foreach ($results as $result) {
             <para>
                 <link linkend="zend.service.yahoo.classes">クラス一覧に戻る</link>
             </para>
-        </sect3>
-        <sect3 id="zend.service.yahoo.classes.newsresultset">
-            <title>Zend_Service_Yahoo_NewsResultSet</title>
+        </section>
+        <section xml:id="zend.service.yahoo.classes.newsresultset"><info><title>Zend_Service_Yahoo_NewsResultSet</title></info>
+            
             <para>
                 <classname>Zend_Service_Yahoo_NewsResultSet</classname> は、Yahoo! News Search
                 の結果セットを表します。
@@ -354,9 +352,9 @@ foreach ($results as $result) {
             <para>
                 <link linkend="zend.service.yahoo.classes">クラス一覧に戻る</link>
             </para>
-        </sect3>
-        <sect3 id="zend.service.yahoo.classes.inlinkdataresultset">
-            <title>Zend_Service_Yahoo_InlinkDataResultSet</title>
+        </section>
+        <section xml:id="zend.service.yahoo.classes.inlinkdataresultset"><info><title>Zend_Service_Yahoo_InlinkDataResultSet</title></info>
+            
             <para>
                 <classname>Zend_Service_Yahoo_InlinkDataResultSet</classname> は、
                 Yahoo! Inbound Link Search の結果セットを表します。
@@ -371,9 +369,9 @@ foreach ($results as $result) {
             <para>
                 <link linkend="zend.service.yahoo.classes">クラス一覧に戻る</link>
             </para>
-        </sect3>
-        <sect3 id="zend.service.yahoo.classes.pagedataresultset">
-            <title>Zend_Service_Yahoo_PageDataResultSet</title>
+        </section>
+        <section xml:id="zend.service.yahoo.classes.pagedataresultset"><info><title>Zend_Service_Yahoo_PageDataResultSet</title></info>
+            
             <para>
                 <classname>Zend_Service_Yahoo_PageDataResultSet</classname> は、
                 Yahoo! PageData Search の結果セットを表します。
@@ -388,16 +386,16 @@ foreach ($results as $result) {
             <para>
                 <link linkend="zend.service.yahoo.classes">クラス一覧に戻る</link>
             </para>
-        </sect3>
-        <sect3 id="zend.service.yahoo.classes.result">
-            <title>Zend_Service_Yahoo_Result</title>
+        </section>
+        <section xml:id="zend.service.yahoo.classes.result"><info><title>Zend_Service_Yahoo_Result</title></info>
+            
             <para>
                 検索の種類に応じた検索結果は、この基底クラスを継承したものです。
             </para>
-            <sect4 id="zend.service.yahoo.classes.result.properties">
-                <title>プロパティ</title>
-                <table id="zend.service.yahoo.classes.result.properties.table-1">
-                    <title>Zend_Service_Yahoo_Result のプロパティ</title>
+            <section xml:id="zend.service.yahoo.classes.result.properties"><info><title>プロパティ</title></info>
+                
+                <table xml:id="zend.service.yahoo.classes.result.properties.table-1"><info><title>Zend_Service_Yahoo_Result のプロパティ</title></info>
+                    
                     <tgroup cols="3">
                         <thead>
                             <row>
@@ -428,18 +426,18 @@ foreach ($results as $result) {
                 <para>
                     <link linkend="zend.service.yahoo.classes">クラス一覧に戻る</link>
                 </para>
-            </sect4>
-         </sect3>
-         <sect3 id="zend.service.yahoo.classes.webresult">
-            <title>Zend_Service_Yahoo_WebResult</title>
+            </section>
+         </section>
+         <section xml:id="zend.service.yahoo.classes.webresult"><info><title>Zend_Service_Yahoo_WebResult</title></info>
+            
             <para>
                 Web Search の結果は <classname>Zend_Service_Yahoo_WebResult</classname>
                 オブジェクトとして返されます。
             </para>
-            <sect4 id="zend.service.yahoo.classes.webresult.properties">
-                <title>プロパティ</title>
-                <table id="zend.service.yahoo.classes.webresult.properties.table-1">
-                    <title>Zend_Service_Yahoo_WebResult のプロパティ</title>
+            <section xml:id="zend.service.yahoo.classes.webresult.properties"><info><title>プロパティ</title></info>
+                
+                <table xml:id="zend.service.yahoo.classes.webresult.properties.table-1"><info><title>Zend_Service_Yahoo_WebResult のプロパティ</title></info>
+                    
                     <tgroup cols="3">
                         <thead>
                             <row>
@@ -480,18 +478,18 @@ foreach ($results as $result) {
                 <para>
                     <link linkend="zend.service.yahoo.classes">クラス一覧に戻る</link>
                 </para>
-            </sect4>
-         </sect3>
-         <sect3 id="zend.service.yahoo.classes.imageresult">
-            <title>Zend_Service_Yahoo_ImageResult</title>
+            </section>
+         </section>
+         <section xml:id="zend.service.yahoo.classes.imageresult"><info><title>Zend_Service_Yahoo_ImageResult</title></info>
+            
             <para>
                 Image Search の結果は <classname>Zend_Service_Yahoo_ImageResult</classname>
                 オブジェクトとして返されます。
             </para>
-            <sect4 id="zend.service.yahoo.classes.imageresult.properties">
-                <title>プロパティ</title>
-                <table id="zend.service.yahoo.classes.imageresult.properties.table-1">
-                    <title>Zend_Service_Yahoo_ImageResult のプロパティ</title>
+            <section xml:id="zend.service.yahoo.classes.imageresult.properties"><info><title>プロパティ</title></info>
+                
+                <table xml:id="zend.service.yahoo.classes.imageresult.properties.table-1"><info><title>Zend_Service_Yahoo_ImageResult のプロパティ</title></info>
+                    
                     <tgroup cols="3">
                         <thead>
                             <row>
@@ -542,18 +540,18 @@ foreach ($results as $result) {
                 <para>
                     <link linkend="zend.service.yahoo.classes">クラス一覧に戻る</link>
                 </para>
-            </sect4>
-         </sect3>
-         <sect3 id="zend.service.yahoo.classes.videoresult">
-            <title>Zend_Service_Yahoo_VideoResult</title>
+            </section>
+         </section>
+         <section xml:id="zend.service.yahoo.classes.videoresult"><info><title>Zend_Service_Yahoo_VideoResult</title></info>
+            
             <para>
                 Video Search の結果は<classname>Zend_Service_Yahoo_VideoResult</classname>
                 オブジェクトとして返されます。
             </para>
-            <sect4 id="zend.service.yahoo.classes.videoresult.properties">
-                <title>プロパティ</title>
-                <table id="zend.service.yahoo.classes.videoresult.properties.table-1">
-                    <title>Zend_Service_Yahoo_VideoResult のプロパティ</title>
+            <section xml:id="zend.service.yahoo.classes.videoresult.properties"><info><title>プロパティ</title></info>
+                
+                <table xml:id="zend.service.yahoo.classes.videoresult.properties.table-1"><info><title>Zend_Service_Yahoo_VideoResult のプロパティ</title></info>
+                    
                     <tgroup cols="3">
                         <thead>
                             <row>
@@ -619,18 +617,18 @@ foreach ($results as $result) {
                 <para>
                     <link linkend="zend.service.yahoo.classes">クラス一覧に戻る</link>
                 </para>
-            </sect4>
-         </sect3>
-         <sect3 id="zend.service.yahoo.classes.localresult">
-            <title>Zend_Service_Yahoo_LocalResult</title>
+            </section>
+         </section>
+         <section xml:id="zend.service.yahoo.classes.localresult"><info><title>Zend_Service_Yahoo_LocalResult</title></info>
+            
             <para>
                 Local Search の結果は <classname>Zend_Service_Yahoo_LocalResult</classname>
                 オブジェクトとして返されます。
             </para>
-            <sect4 id="zend.service.yahoo.classes.localresult.properties">
-                <title>プロパティ</title>
-                <table id="zend.service.yahoo.classes.localresult.properties.table-1">
-                    <title>Zend_Service_Yahoo_LocalResult のプロパティ</title>
+            <section xml:id="zend.service.yahoo.classes.localresult.properties"><info><title>プロパティ</title></info>
+                
+                <table xml:id="zend.service.yahoo.classes.localresult.properties.table-1"><info><title>Zend_Service_Yahoo_LocalResult のプロパティ</title></info>
+                    
                     <tgroup cols="3">
                         <thead>
                             <row>
@@ -691,18 +689,18 @@ foreach ($results as $result) {
                 <para>
                     <link linkend="zend.service.yahoo.classes">クラス一覧に戻る</link>
                 </para>
-            </sect4>
-         </sect3>
-         <sect3 id="zend.service.yahoo.classes.newsresult">
-            <title>Zend_Service_Yahoo_NewsResult</title>
+            </section>
+         </section>
+         <section xml:id="zend.service.yahoo.classes.newsresult"><info><title>Zend_Service_Yahoo_NewsResult</title></info>
+            
             <para>
                 News Search の結果は <classname>Zend_Service_Yahoo_NewsResult</classname>
                 オブジェクトとして返されます。
             </para>
-            <sect4 id="zend.service.yahoo.classes.newsresult.properties">
-                <title>プロパティ</title>
-                <table id="zend.service.yahoo.classes.newsresult.properties.table-1">
-                    <title>Zend_Service_Yahoo_NewsResult のプロパティ</title>
+            <section xml:id="zend.service.yahoo.classes.newsresult.properties"><info><title>プロパティ</title></info>
+                
+                <table xml:id="zend.service.yahoo.classes.newsresult.properties.table-1"><info><title>Zend_Service_Yahoo_NewsResult のプロパティ</title></info>
+                    
                     <tgroup cols="3">
                         <thead>
                             <row>
@@ -753,10 +751,10 @@ foreach ($results as $result) {
                 <para>
                     <link linkend="zend.service.yahoo.classes">クラス一覧に戻る</link>
                 </para>
-            </sect4>
-         </sect3>
-         <sect3 id="zend.service.yahoo.classes.inlinkdataresult">
-            <title>Zend_Service_Yahoo_InlinkDataResult</title>
+            </section>
+         </section>
+         <section xml:id="zend.service.yahoo.classes.inlinkdataresult"><info><title>Zend_Service_Yahoo_InlinkDataResult</title></info>
+            
             <para>
                 Inbound Link Search の結果の各項目は
                 <classname>Zend_Service_Yahoo_InlinkDatabResult</classname> オブジェクトで返されます。
@@ -764,9 +762,9 @@ foreach ($results as $result) {
             <para>
                 <link linkend="zend.service.yahoo.classes">クラス一覧に戻る</link>
             </para>
-         </sect3>
-         <sect3 id="zend.service.yahoo.classes.pagedataresult">
-            <title>Zend_Service_Yahoo_PageDataResult</title>
+         </section>
+         <section xml:id="zend.service.yahoo.classes.pagedataresult"><info><title>Zend_Service_Yahoo_PageDataResult</title></info>
+            
             <para>
                 Page Data Search の結果の各項目は
                 <classname>Zend_Service_Yahoo_PageDatabResult</classname> オブジェクトで返されます。
@@ -774,17 +772,17 @@ foreach ($results as $result) {
             <para>
                 <link linkend="zend.service.yahoo.classes">クラス一覧に戻る</link>
             </para>
-         </sect3>
-         <sect3 id="zend.service.yahoo.classes.image">
-            <title>Zend_Service_Yahoo_Image</title>
+         </section>
+         <section xml:id="zend.service.yahoo.classes.image"><info><title>Zend_Service_Yahoo_Image</title></info>
+            
             <para>
                 Yahoo! Image Search あるいは Yahoo! News Search が返すすべての画像は
                 <classname>Zend_Service_Yahoo_Image</classname> オブジェクトで表されます。
             </para>
-            <sect4 id="zend.service.yahoo.classes.image.properties">
-                <title>プロパティ</title>
-                <table id="zend.service.yahoo.classes.image.properties.table-1">
-                    <title>Zend_Service_Yahoo_Image のプロパティ</title>
+            <section xml:id="zend.service.yahoo.classes.image.properties"><info><title>プロパティ</title></info>
+                
+                <table xml:id="zend.service.yahoo.classes.image.properties.table-1"><info><title>Zend_Service_Yahoo_Image のプロパティ</title></info>
+                    
                     <tgroup cols="3">
                         <thead>
                             <row>
@@ -815,10 +813,7 @@ foreach ($results as $result) {
                 <para>
                     <link linkend="zend.service.yahoo.classes">クラス一覧に戻る</link>
                 </para>
-            </sect4>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+            </section>
+        </section>
+    </section>
+</section>

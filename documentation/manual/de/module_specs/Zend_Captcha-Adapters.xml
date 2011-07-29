@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21815 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.captcha.adapters">
-    <title>CAPTCHA Adapter</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.captcha.adapters"><info><title>CAPTCHA Adapter</title></info>
+    
 
     <para>
         Die folgenden Adapter werden mit dem Zend Framework standardmäßig ausgeliefert.
     </para>
 
-    <sect2 id="zend.captcha.adapters.word">
-        <title>Zend_Captcha_Word</title>
+    <section xml:id="zend.captcha.adapters.word"><info><title>Zend_Captcha_Word</title></info>
+        
 
         <para>
             <classname>Zend_Captcha_Word</classname> ist ein abstrakter Adapter der als Basisklasse
@@ -114,10 +114,10 @@
                 direkt instanziiert werden.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.captcha.adapters.dumb">
-        <title>Zend_Captcha_Dumb</title>
+    <section xml:id="zend.captcha.adapters.dumb"><info><title>Zend_Captcha_Dumb</title></info>
+        
 
         <para>
             Der <classname>Zend_Captcha_Dumb</classname> Adapter ist fast selbsterklärend. Er
@@ -126,10 +126,10 @@
             und sollte nur für Testzwecke verwendet werden. Er erweitert
             <classname>Zend_Captcha_Word</classname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.captcha.adapters.figlet">
-        <title>Zend_Captcha_Figlet</title>
+    <section xml:id="zend.captcha.adapters.figlet"><info><title>Zend_Captcha_Figlet</title></info>
+        
 
         <para>
             Der <classname>Zend_Captcha_Figlet</classname> Adapter verwendet
@@ -140,20 +140,19 @@
         <para>
             Optionen die an den Konstruktor übergeben werden, werden auch an das
             <link linkend="zend.text.figlet"><classname>Zend_Text_Figlet</classname></link> Objekt
-            übergeben. Schaue in die <link
-                linkend="zend.text.figlet"><classname>Zend_Text_Figlet</classname></link>
+            übergeben. Schaue in die <link linkend="zend.text.figlet"><classname>Zend_Text_Figlet</classname></link>
             Dokumentation für Details darüber welche Konfigurationsoptionen vorhanden sind.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.captcha.adapters.image">
-        <title>Zend_Captcha_Image</title>
+    <section xml:id="zend.captcha.adapters.image"><info><title>Zend_Captcha_Image</title></info>
+        
 
         <para>
             Der <classname>Zend_Captcha_Image</classname> Adapter nimmt das erzeugte Wort und
             stellt es als Bild dar, führt diverse Verzerrungs-Permutationen durch und mach es so
             schwierig es automatisch zu entschlüsseln. Er benötigt die
-            <ulink url="http://php.net/gd">GD Erweiterung</ulink> kompiliert mit TrueType oder
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/gd">GD Erweiterung</link> kompiliert mit TrueType oder
             Freetype Unterstützung. Aktuell kann der <classname>Zend_Captcha_Image</classname>
             Adapter nur <acronym>PNG</acronym> Bilder erzeugen.
         </para>
@@ -273,10 +272,10 @@
             Präfix der 'set' Methode entfernt wird und der Anfangsbuchstabe kleingeschrieben wird:
             "suffix", "height", "imgUrl", usw.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.captcha.adapters.recaptcha">
-        <title>Zend_Captcha_ReCaptcha</title>
+    <section xml:id="zend.captcha.adapters.recaptcha"><info><title>Zend_Captcha_ReCaptcha</title></info>
+        
 
         <para>
             Der <classname>Zend_Captcha_ReCaptcha</classname> Adapter verwendet
@@ -314,5 +313,5 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

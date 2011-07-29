@@ -1,19 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.quickstart">
-    <title>Zend_Controller Schnellstart</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.quickstart"><info><title>Zend_Controller Schnellstart</title></info>
+    
 
-    <sect2 id="zend.controller.quickstart.introduction">
-        <title>Einführung</title>
+    <section xml:id="zend.controller.quickstart.introduction"><info><title>Einführung</title></info>
+        
 
         <para>
             <classname>Zend_Controller</classname> ist das Herz des <acronym>MVC</acronym> Systems
-            des Zend Frameworks. <acronym>MVC</acronym> bedeutet <ulink
-                url="http://de.wikipedia.org/wiki/Model_View_Controller">Model-View-Controller</ulink>
+            des Zend Frameworks. <acronym>MVC</acronym> bedeutet <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://de.wikipedia.org/wiki/Model_View_Controller">Model-View-Controller</link>
             und ist ein Entwurfsmuster, das darauf abzielt, Anwendungslogik von Anzeigelogik zu
-            trennen. <classname>Zend_Controller_Front</classname> implementiert ein <ulink
-                url="http://www.martinfowler.com/eaaCatalog/frontController.html">Front-Controller</ulink>-Entwurfsmuster,
+            trennen. <classname>Zend_Controller_Front</classname> implementiert ein <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.martinfowler.com/eaaCatalog/frontController.html">Front-Controller</link>-Entwurfsmuster,
             das vorschreibt, dass alle Anfragen vom Front-Controller abgefangen und abhängig von der
             angeforderten <acronym>URL</acronym> an individuelle Action-Controller weitergeleitet
             werden.
@@ -27,10 +23,10 @@
             Controller Klassenfamilie bilden, oder durch das Schreiben von Plugins und Action
             Helper, um die Funktionalität des Systems zu erweitern oder zu verändern.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.quickstart.go">
-        <title>Schnelleinstieg</title>
+    <section xml:id="zend.controller.quickstart.go"><info><title>Schnelleinstieg</title></info>
+        
 
         <para>
             Wer mehr und tiefergehende Informationen benötigt, sollte die folgenden Abschnitte
@@ -38,8 +34,8 @@
             bekommt.
         </para>
 
-        <sect3 id="zend.controller.quickstart.go.directory">
-            <title>Ordnerstruktur anlegen</title>
+        <section xml:id="zend.controller.quickstart.go.directory"><info><title>Ordnerstruktur anlegen</title></info>
+            
 
             <para>
                 Der erste Schritt ist, die Ordnerstruktur für das Framework anzulegen.
@@ -61,20 +57,20 @@ html/
     .htaccess
     index.php
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.quickstart.go.docroot">
-            <title>Wurzelverzeichnis setzen</title>
+        <section xml:id="zend.controller.quickstart.go.docroot"><info><title>Wurzelverzeichnis setzen</title></info>
+            
 
             <para>
                 Der Webserver ist so zu konfigurieren, dass das Wurzelverzeichnis (Document Root)
                 des Webservers im <filename>html/</filename>-Verzeichnis der obigen Ordnerstruktur
                 liegt.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.quickstart.go.rewrite">
-            <title>Rewrite-Regeln erstellen</title>
+        <section xml:id="zend.controller.quickstart.go.rewrite"><info><title>Rewrite-Regeln erstellen</title></info>
+            
 
             <para>
                 In die Datei <filename>html/.htaccess</filename> aus der Struktur von oben gehört
@@ -90,16 +86,15 @@ RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
 ]]></programlisting>
 
-            <note>
-                <title>Über mod_rewrite lernen</title>
+            <note><info><title>Über mod_rewrite lernen</title></info>
+                
 
                 <para>
                     Die obigen Rewrite Regeln erlauben es auf jede Datei im Document Root des
                     eigenen virtuellen Host's zuzugreifen. Wenn es Dateien gibt die man auf diesem
                     Weg nicht bereitstellen will, muss man in seinen Regeln restriktiver sein. Gehe
-                    zur Apache WebSite und <ulink
-                    url="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">lerne mehr über
-                    mod_rewrite</ulink>.
+                    zur Apache WebSite und <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">lerne mehr über
+                    mod_rewrite</link>.
                 </para>
             </note>
 
@@ -145,14 +140,13 @@ RewriteRule ^.*$ index.php [NC,L]
             <note>
                 <para>
                     Die Rewrite-Regel oben ist für den Apache-Webserver; Beispiele für andere
-                    Webserver finden sich in der <link
-                        linkend="zend.controller.router.introduction">Router-Dokumentation</link>.
+                    Webserver finden sich in der <link linkend="zend.controller.router.introduction">Router-Dokumentation</link>.
                 </para>
             </note>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.quickstart.go.bootstrap">
-            <title>Boostrap-Datei erstellen</title>
+        <section xml:id="zend.controller.quickstart.go.bootstrap"><info><title>Boostrap-Datei erstellen</title></info>
+            
 
             <para>
                 Die Bootstrap-Datei ist die Datei, durch die alle Anfragen geleitet werden
@@ -168,10 +162,10 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 Das instanziert und führt den Front-Controller aus,
                 der Anfragen an den Action-Controller weitergibt.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.quickstart.go.controller">
-            <title>Den Action-Controller für die Startseite erstellen</title>
+        <section xml:id="zend.controller.quickstart.go.controller"><info><title>Den Action-Controller für die Startseite erstellen</title></info>
+            
 
             <para>
                 Bevor wir von Action-Controllern reden, sollte erst verstanden werden, wie Anfragen
@@ -226,8 +220,7 @@ class IndexController extends Zend_Controller_Action
 ]]></programlisting>
 
             <para>
-                Normalerweise ist ein Action-Helper namens <link
-                    linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>
+                Normalerweise ist ein Action-Helper namens <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>
                 eingeschaltet. Das bedeutet, dass sofort, wenn eine leere Aktionsmethode und ein
                 passendes View-Script existieren, Inhalte gerendert werden. Standardmäßig wird die
                 Klasse <classname>Zend_View</classname> als View-Schicht im Zend-Framework
@@ -244,10 +237,10 @@ class IndexController extends Zend_Controller_Action
                 Template, das gerendert wird, den Pfad
                 <filename>application/views/scripts/index/index.phtml</filename>.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.quickstart.go.view">
-            <title>Das View-Script erstellen</title>
+        <section xml:id="zend.controller.quickstart.go.view"><info><title>Das View-Script erstellen</title></info>
+            
 
             <para>
                 Wie <link linkend="zend.controller.quickstart.go.controller">oben
@@ -272,14 +265,13 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 </body>
 </html>
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.quickstart.go.errorhandler">
-            <title>Fehler-Controller erstellen</title>
+        <section xml:id="zend.controller.quickstart.go.errorhandler"><info><title>Fehler-Controller erstellen</title></info>
+            
 
             <para>
-                Standardmäßig ist <link
-                    linkend="zend.controller.plugins.standard.errorhandler">das
+                Standardmäßig ist <link linkend="zend.controller.plugins.standard.errorhandler">das
                 Error-Handler-Plugin</link> registriert. Dieses Plugin erwartet, dass ein Controller
                 existiert, der Fehler behandelt. Ohne weitere Einstellungen erwartet es einen
                 <emphasis>ErrorController</emphasis> im Default-Modul mit einer Methode namens
@@ -320,10 +312,10 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 </body>
 </html>
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.quickstart.go.finish">
-            <title>Die Seite ansehen!</title>
+        <section xml:id="zend.controller.quickstart.go.finish"><info><title>Die Seite ansehen!</title></info>
+            
 
             <para>
                 Jetzt, wo der erste Controller und das erste View-Script geschrieben sind, kann der
@@ -346,6 +338,6 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                 Herzlichen Glückwunsch, Sie sind jetzt bereit, weitere Controller und
                 Aktionsmethoden zu erstellen und Ihrer Seite damit Leben einzuhauchen.
             </para>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

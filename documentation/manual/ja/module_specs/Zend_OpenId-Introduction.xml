@@ -1,16 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20843 -->
-<sect1 id="zend.openid.introduction">
-    <title>導入</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.openid.introduction"><info><title>導入</title></info>
+    
     <para>
         <classname>Zend_OpenId</classname> は、OpenID 対応のサイトや
         ID プロバイダを作成するためのシンプルな <acronym>API</acronym>
         を提供する Zend Framework のコンポーネントです。
     </para>
 
-    <sect2 id="zend.openid.introduction.what">
-        <title>OpenID とは?</title>
+    <section xml:id="zend.openid.introduction.what"><info><title>OpenID とは?</title></info>
+        
         <para>
             OpenID は、ユーザ中心のデジタル識別子用のプロトコル群のことです。
             これらのプロトコルによって、ID プロバイダを使用したオンライン ID
@@ -32,20 +32,20 @@
 
         <para>
             OpenID についての詳細な情報は
-            <ulink url="http://www.openid.net/">OpenID の公式サイト</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.openid.net/">OpenID の公式サイト</link>
             を参照ください。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.openid.introduction.how">
-        <title>動作原理は?</title>
+    <section xml:id="zend.openid.introduction.how"><info><title>動作原理は?</title></info>
+        
         <para>
             <classname>Zend_OpenId</classname> コンポーネントの主要な目的は、
             次の図のような OpenID 認証プロトコルを実装することです。
         </para>
 
         <para>
-            <inlinegraphic align="center" fileref="figures/zend.openid.protocol.jpg" format="JPEG" scale="100" valign="middle" width="559" />
+            <inlinemediaobject><imageobject><imagedata align="center" fileref="figures/zend.openid.protocol.jpg" format="JPEG" scale="100" valign="middle" width="559"/></imageobject></inlinemediaobject>
         </para>
 
         <orderedlist>
@@ -115,10 +115,10 @@
                 </para>
             </listitem>
         </orderedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.openid.introduction.structure">
-        <title>Zend_OpenId の構造</title>
+    <section xml:id="zend.openid.introduction.structure"><info><title>Zend_OpenId の構造</title></info>
+        
         <para>
             <classname>Zend_OpenId</classname> は 2 つのサブパッケージで構成されています。
             まず最初が <classname>Zend_OpenId_Consumer</classname> で、これは
@@ -137,16 +137,16 @@
 
         <note>
             <para>
-                <classname>Zend_OpenId</classname> は、<ulink url="http://php.net/gmp">GMP
-                拡張モジュール</ulink> が使用可能な場合はそれを使用します。
+                <classname>Zend_OpenId</classname> は、<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/gmp">GMP
+                拡張モジュール</link> が使用可能な場合はそれを使用します。
                 <classname>Zend_OpenId</classname> を使う場合は、
                 GMP 拡張モジュールを有効にしておくとよりよいパフォーマンスが得られるでしょう。
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.openid.introduction.standards">
-        <title>サポートする OpenID 標準規格</title>
+    <section xml:id="zend.openid.introduction.standards"><info><title>サポートする OpenID 標準規格</title></info>
+        
         <para>
             <classname>Zend_OpenId</classname> コンポーネントは、
             次の標準規格に対応しています。
@@ -174,8 +174,5 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.navigation.pages.factory">
-    <title>Créer des pages avec la fabrique</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.factory"><info><title>Créer des pages avec la fabrique</title></info>
+    
 
     <para>
         Toute les pages (même les personnalisées) peuvent petre créer via la fabrique
@@ -23,8 +21,8 @@
         créeront des pages de types <acronym>MVC</acronym>/URI.
     </para>
 
-    <example id="zend.navigation.pages.factory.example.mvc">
-        <title>Créer une page MVC avec la fabrique</title>
+    <example xml:id="zend.navigation.pages.factory.example.mvc"><info><title>Créer une page MVC avec la fabrique</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $page = Zend_Navigation_Page::factory(array(
@@ -54,8 +52,8 @@ $page = Zend_Navigation_Page::factory(array(
 ]]></programlisting>
     </example>
 
-    <example id="zend.navigation.pages.factory.example.uri">
-        <title>Créer une page URI avec la fabrique</title>
+    <example xml:id="zend.navigation.pages.factory.example.uri"><info><title>Créer une page URI avec la fabrique</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $page = Zend_Navigation_Page::factory(array(
@@ -81,8 +79,8 @@ $page = Zend_Navigation_Page::factory(array(
 ]]></programlisting>
     </example>
 
-    <example id="zend.navigation.pages.factory.example.custom">
-        <title>Créer une page personnalisée avec la fabrique</title>
+    <example xml:id="zend.navigation.pages.factory.example.custom"><info><title>Créer une page personnalisée avec la fabrique</title></info>
+        
 
      <para>
          Utilisez l'option <code>type</code> afin de nommer la classe à
@@ -107,4 +105,4 @@ $page = Zend_Navigation_Page::factory(array(
 ));
 ]]></programlisting>
     </example>
-</sect2>
+</section>

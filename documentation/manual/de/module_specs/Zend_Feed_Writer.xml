@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22392 -->
-<!-- Reviewed: 22392 -->
-<sect1 id="zend.feed.writer">
-    <title>Zend_Feed_Writer</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.writer"><info><title>Zend_Feed_Writer</title></info>
+    
 
-    <sect2 id="zend.feed.writer.introduction">
-        <title>Einführung</title>
+    <section xml:id="zend.feed.writer.introduction"><info><title>Einführung</title></info>
+        
 
         <para>
             <classname>Zend_Feed_Writer</classname> ist die Bruderkomponente zu
@@ -46,10 +44,10 @@
             <classname>Zend_Feed</classname>s Builder-Architektur und nicht kompatibel mit diesen
             Klassen.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.feed.writer.architecture">
-        <title>Architektur</title>
+    <section xml:id="zend.feed.writer.architecture"><info><title>Architektur</title></info>
+        
 
         <para>
             Die Architektur von <classname>Zend_Feed_Writer</classname> ist sehr einfach. Es hat
@@ -110,10 +108,10 @@
             registriert und automatisch von den Kernklassen verwendet werden. Wir kommen später in
             diesem Kapitel im Detail zu den Erweiterungen.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.feed.writer.getting.started">
-        <title>Beginnen</title>
+    <section xml:id="zend.feed.writer.getting.started"><info><title>Beginnen</title></info>
+        
 
         <para>
             Die Verwendung von <classname>Zend_Feed_Reader</classname> ist so einfach wie das Setzen
@@ -227,10 +225,10 @@ $out = $feed->export('atom');
             sicherzustellen, dass sich Benutzer ohne tiefe Kenntnisse der betreffenden
             Spezifikationen keine Sorgen machen müssen.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.feed.writer.setting.feed.data.points">
-        <title>Die Datenpunkte eines Feeds setzen</title>
+    <section xml:id="zend.feed.writer.setting.feed.data.points"><info><title>Die Datenpunkte eines Feeds setzen</title></info>
+        
 
         <para>
             Bevor ein Feed dargestellt werden kann, müssen zuerst die dafür notwendigen Daten
@@ -279,8 +277,8 @@ $out = $feed->export('atom');
             <classname>Countable</classname> und <classname>Iterator</classname>.
         </para>
 
-        <table>
-            <title>API Methoden auf Feed Level</title>
+        <table><info><title>API Methoden auf Feed Level</title></info>
+            
 
             <tgroup cols="2">
                 <tbody>
@@ -546,10 +544,10 @@ $out = $feed->export('atom');
 
         <!-- remaining feed stuff -->
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.feed.writer.setting.entry.data.points">
-        <title>Setzen der Datenpunkte für Einträge</title>
+    <section xml:id="zend.feed.writer.setting.entry.data.points"><info><title>Setzen der Datenpunkte für Einträge</title></info>
+        
 
         <para>
             Hier ist eine Zusammenfassung der Kern-<acronym>API</acronym> für Einträge und Elemente.
@@ -566,8 +564,8 @@ $out = $feed->export('atom');
             <classname>Zend_Feed_Writer_Entry</classname> enthalten.
         </para>
 
-        <table>
-            <title>API-Methoden auf Eintragsebene</title>
+        <table><info><title>API-Methoden auf Eintragsebene</title></info>
+            
 
             <tgroup cols="2">
                 <tbody>
@@ -760,5 +758,5 @@ $out = $feed->export('atom');
                 Eintrags-Daten-Containern zu erhalten.
             </para>
         </note>
-    </sect2>
-</sect1>
+    </section>
+</section>

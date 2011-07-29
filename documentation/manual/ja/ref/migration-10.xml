@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20876 -->
-<sect1 id="migration.10">
-    <title>Zend Framework 1.0</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.10"><info><title>Zend Framework 1.0</title></info>
+    
 
     <para>
         以前のバージョンから Zend Framework 1.0 またはそれ以降に更新する際は、
         下記の移行上の注意点に注意すべきです。
     </para>
 
-    <sect2 id="migration.10.zend.controller">
-        <title>Zend_Controller</title>
+    <section xml:id="migration.10.zend.controller"><info><title>Zend_Controller</title></info>
+        
 
         <para>
             1.0.0RC1 での最大の変更点は、
@@ -69,9 +67,9 @@ $front->setParam('noViewRenderer', true);
         </para>
 
         <itemizedlist>
-            <listitem><para><command>$this->render();</command> のコール</para></listitem>
-            <listitem><para><command>$this->_forward();</command> のコール</para></listitem>
-            <listitem><para><command>$this->_redirect();</command> のコール</para></listitem>
+            <listitem><para><command>$this-&gt;render();</command> のコール</para></listitem>
+            <listitem><para><command>$this-&gt;_forward();</command> のコール</para></listitem>
+            <listitem><para><command>$this-&gt;_redirect();</command> のコール</para></listitem>
             <listitem><para><classname>Redirector</classname> アクションヘルパーのコール</para></listitem>
         </itemizedlist>
 
@@ -124,7 +122,7 @@ public function preDispatch()
                     引数つきで <methodname>render()</methodname> をコールしていて、
                     その後に何か処理をしたり複数のビュースクリプトを実行したりしていない場合は、
                     その行を
-                    <command>$this->_helper->viewRenderer();</command>
+                    <command>$this-&gt;_helper-&gt;viewRenderer();</command>
                     のように変更します。
                 </para>
             </listitem>
@@ -186,10 +184,10 @@ $viewRenderer->setView($view);]]></programlisting>
             は今やコア機能として組み込まれているので、
             既存のコードについてもできるだけこれに適合するようにすることをお勧めします。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="migration.10.zend.currency">
-        <title>Zend_Currency</title>
+    <section xml:id="migration.10.zend.currency"><info><title>Zend_Currency</title></info>
+        
 
         <para>
             <classname>Zend_Currency</classname> のオブジェクトを、
@@ -211,7 +209,7 @@ $currency = new Zend_Currency($currency, $locale);
             現在使用できるオプションは次のとおりです。
         </para>
 
-        <itemizedlist mark='opencircle'>
+        <itemizedlist mark="opencircle">
             <listitem>
                 <para>
                     <emphasis>position</emphasis>:
@@ -296,8 +294,5 @@ $currency->toCurrency($value, array $options);
             パラメータを設定しなかった場合は、
             これらのメソッドはそのオブジェクトに設定されている値を返します。
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

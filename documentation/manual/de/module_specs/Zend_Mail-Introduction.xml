@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22745 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.introduction">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.introduction"><info><title>Einführung</title></info>
+    
 
-    <sect2 id="zend.mail.introduction.getting-started">
-        <title>Beginnen</title>
+    <section xml:id="zend.mail.introduction.getting-started"><info><title>Beginnen</title></info>
+        
 
         <para>
             <classname>Zend_Mail</classname> stellt verallgemeinerte Funktionalitäten zum Verfassen
@@ -15,8 +13,8 @@
             <classname>Zend_Mail_Transport_Smtp</classname> versendet werden.
         </para>
 
-        <example id="zend.mail.introduction.example-1">
-            <title>Einfache E-Mail mit Zend_Mail</title>
+        <example xml:id="zend.mail.introduction.example-1"><info><title>Einfache E-Mail mit Zend_Mail</title></info>
+            
 
             <para>
                 Eine einfache E-Mail besteht aus einigen Empfängern, einem Betreff, einem Hauptteil
@@ -36,8 +34,8 @@ $mail->send();
 
         </example>
 
-        <note>
-            <title>Minimale Definitionen</title>
+        <note><info><title>Minimale Definitionen</title></info>
+            
 
             <para>
                 Um eine E-Mail mit <classname>Zend_Mail</classname> zu versenden, muß mindestens ein
@@ -75,17 +73,16 @@ $mail->setBodyText('Das ist der Text der Nachricht.')
     ->setSubject('TestBetreff')
     ->send();
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mail.introduction.sendmail">
-        <title>Den standardmäßigen Sendmail Transport konfigurieren</title>
+    <section xml:id="zend.mail.introduction.sendmail"><info><title>Den standardmäßigen Sendmail Transport konfigurieren</title></info>
+        
 
         <para>
             Der standard Transport für eine <classname>Zend_Mail</classname> Instanz ist
             <classname>Zend_Mail_Transport_Sendmail</classname>. Es ist notwendigerweise ein Wrapper
-            für <acronym>PHP</acronym>'s <ulink
-                url="http://php.net/mail"><methodname>mail()</methodname></ulink> Funktion. Wenn
-            der <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink> Funktion
+            für <acronym>PHP</acronym>'s <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mail"><methodname>mail()</methodname></link> Funktion. Wenn
+            der <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mail"><methodname>mail()</methodname></link> Funktion
             zusätzliche Parameter mitgegeben werden sollen muß einfach eine neue Transport Instanz
             erzeugt werden und die Parameter dem Konstruktor übergeben werden. Die neue Transport
             Instanz kann dann als standard <classname>Zend_Mail</classname> Transport handeln oder
@@ -93,14 +90,13 @@ $mail->setBodyText('Das ist der Text der Nachricht.')
             übergeben werden.
         </para>
 
-        <example id="zend.mail.introduction.sendmail.example-1">
-            <title>
+        <example xml:id="zend.mail.introduction.sendmail.example-1"><info><title>
                 Zusätzliche Parameter einem Zend_Mail_Transport_Sendmail Transport übergeben
-            </title>
+            </title></info>
+            
 
             <para>
-                Dieses Beispiel zeigt wie der Rückgabe-Pfad der <ulink
-                    url="http://php.net/mail"><methodname>mail()</methodname></ulink> Funktion
+                Dieses Beispiel zeigt wie der Rückgabe-Pfad der <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mail"><methodname>mail()</methodname></link> Funktion
                 geändert werden kann.
             </para>
 
@@ -117,18 +113,17 @@ $mail->send();
 ]]></programlisting>
         </example>
 
-        <note>
-            <title>Safe Mode Einschränkungen</title>
+        <note><info><title>Safe Mode Einschränkungen</title></info>
+            
 
             <para>
-                Der zusätzliche optionale Parameter verursacht das die <ulink
-                    url="http://php.net/mail"><methodname>mail()</methodname></ulink> Funktion
+                Der zusätzliche optionale Parameter verursacht das die <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mail"><methodname>mail()</methodname></link> Funktion
                 fehlschlägt wenn <acronym>PHP</acronym> im Safe Mode läuft.
             </para>
         </note>
 
-        <warning>
-            <title>Sendmail Transport und Windows</title>
+        <warning><info><title>Sendmail Transport und Windows</title></info>
+            
 
             <para>
                 Das Handbuch von <acronym>PHP</acronym> sagt aus dass die Methode
@@ -144,5 +139,5 @@ $mail->send();
                 SMTP Transport für das Senden verwenden!
             </para>
         </warning>
-    </sect2>
-</sect1>
+    </section>
+</section>

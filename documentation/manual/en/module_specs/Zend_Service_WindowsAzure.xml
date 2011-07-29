@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.service.windowsazure" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Zend_Service_WindowsAzure</title>
+<?xml version="1.0" encoding="utf-8"?>
 
-    <sect2 id="zend.service.windowsazure.introduction">
-        <title>Introduction</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.windowsazure"><info><title>Zend_Service_WindowsAzure</title></info>
+    
+
+    <section xml:id="zend.service.windowsazure.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
           Windows Azure is the name for Microsoft's Software + Services platform, an operating
@@ -13,10 +14,10 @@
           provisioning and geo-distribution of cloud-based services, and a development platform for
           the Azure Services layer.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.windowsazure.sdk">
-        <title>Installing the Windows Azure SDK</title>
+    <section xml:id="zend.service.windowsazure.sdk"><info><title>Installing the Windows Azure SDK</title></info>
+        
 
         <para>
             There are two development scenario's when working with Windows Azure.
@@ -42,34 +43,31 @@
         </itemizedlist>
 
         <para>
-            The first case requires you to install the <ulink
-                url="http://www.microsoft.com/downloads/details.aspx?FamilyID=6967ff37-813e-47c7-b987-889124b43abd&amp;displaylang=en">Windows
-                Azure SDK</ulink> on your development machine. It is currently only available for
+            The first case requires you to install the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.microsoft.com/downloads/details.aspx?FamilyID=6967ff37-813e-47c7-b987-889124b43abd&amp;displaylang=en">Windows
+                Azure SDK</link> on your development machine. It is currently only available for
             Windows environments; progress is being made on a Java-based version of the
             <acronym>SDK</acronym> which can run on any platform.
         </para>
 
         <para>
-            The latter case requires you to have an account at <ulink
-                url="http://www.azure.com">Azure.com</ulink>.
+            The latter case requires you to have an account at <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.azure.com">Azure.com</link>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.windowsazure.apiDocumentation">
-        <title>API Documentation</title>
+    <section xml:id="zend.service.windowsazure.apiDocumentation"><info><title>API Documentation</title></info>
+        
 
         <para>
             The <classname>Zend_Service_WindowsAzure</classname> class provides the
             <acronym>PHP</acronym> wrapper to the Windows Azure <acronym>REST</acronym> interface.
-            Please consult the <ulink
-                url="http://msdn.microsoft.com/en-us/library/dd179355.aspx">REST
-                documentation</ulink> for detailed description of the service. You will need to be
+            Please consult the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://msdn.microsoft.com/en-us/library/dd179355.aspx">REST
+                documentation</link> for detailed description of the service. You will need to be
             familiar with basic concepts in order to use this service.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.windowsazure.features">
-        <title>Features</title>
+    <section xml:id="zend.service.windowsazure.features"><info><title>Features</title></info>
+        
 
         <para>
             <classname>Zend_Service_WindowsAzure</classname> provides the following functionality:
@@ -96,10 +94,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.windowsazure.architecture">
-        <title>Architecture</title>
+    <section xml:id="zend.service.windowsazure.architecture"><info><title>Architecture</title></info>
+        
 
         <para>
             <classname>Zend_Service_WindowsAzure</classname> provides access to Windows Azure's
@@ -113,9 +111,9 @@
             Windows Azure's features, no matter if it is hosted on the Windows Azure platform or on
             an in-premise web server.
         </para>
-    </sect2>
+    </section>
 
-    <xi:include href="Zend_Service_WindowsAzure_Blob.xml" />
-    <xi:include href="Zend_Service_WindowsAzure_Table.xml" />
-    <xi:include href="Zend_Service_WindowsAzure_Queue.xml" />
-</sect1>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Service_WindowsAzure_Blob.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Service_WindowsAzure_Table.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Service_WindowsAzure_Queue.xml"/>
+</section>

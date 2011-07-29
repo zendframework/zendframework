@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20100 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.currency.calculation">
-    <title>Calculs avec les monnaies</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.calculation"><info><title>Calculs avec les monnaies</title></info>
+    
 
     <para>
         Il est possible en travaillant avec des monnaies, d'effectuer des calculs.
@@ -10,7 +8,7 @@
         Les méthodes suivantes sont supportées:
     </para>
 
-    <itemizedlist mark='opencircle'>
+    <itemizedlist mark="opencircle">
         <listitem>
             <para>
                 <emphasis><methodname>add()</methodname></emphasis>: Ajoute la valeur de
@@ -117,4 +115,4 @@ if ($currency->isMore($currency_2)) {
 $currency->div(5);
 print $currency; // Pourrait retourner '$ 200,00'
 ]]></programlisting>
-</sect1>
+</section>

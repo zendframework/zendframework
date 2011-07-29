@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 17133 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.dojo.view" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Ayudantes de Dojo View</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.view"><info><title>Ayudantes de Dojo View</title></info>
+    
 
     <para>Zend Framework provee los siguientes ayudantes específicos de Dojo:</para>
 
@@ -20,8 +18,8 @@
         </listitem>
     </itemizedlist>
 
-    <example id="zend.dojo.view.setup">
-        <title>Usando los Ayudantes de Dojo View</title>
+    <example xml:id="zend.dojo.view.setup"><info><title>Usando los Ayudantes de Dojo View</title></info>
+        
 
         <para>
             Para utilizar los ayudantes de vista de Dojo, necesitará decirle a un objeto vista
@@ -47,6 +45,6 @@ Zend_Dojo::enableView($view);
 ]]></programlisting>
     </example>
 
-    <xi:include href="Zend_Dojo-View-Dojo.xml"/>
-    <xi:include href="Zend_Dojo-View-Helpers.xml"/>
-</sect1>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Dojo-View-Dojo.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Dojo-View-Helpers.xml"/>
+</section>

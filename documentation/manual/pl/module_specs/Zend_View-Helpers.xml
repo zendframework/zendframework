@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.view.helpers" xmlns:xi="http://www.w3.org/2001/XInclude">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers"><info><title>Klasy helperów</title></info>
 
-    <title>Klasy helperów</title>
+    
 
     <para>
         W skryptach widoków często potrzebne jest przeprowadzanie złożonych
@@ -24,8 +22,8 @@
         postaci camelCased: <code>fooBar()</code>.
     </para>
 
-    <note>
-        <title>Zwróć uwagę na wielkość liter</title>
+    <note><info><title>Zwróć uwagę na wielkość liter</title></info>
+        
         <para>
             Nazwy klas helperów są zawsze w postaci camelCased, czyli nigdy
             nie zaczynają się wielką literą. Nazwa klasy jest w postaci
@@ -33,8 +31,8 @@
         </para>
     </note>
 
-    <note>
-        <title>Domyślne ścieżki helperów</title>
+    <note><info><title>Domyślne ścieżki helperów</title></info>
+        
 
         <para>
             Domyślna ścieżka helperów zawsze wskazuje na ścieżkę helperów
@@ -47,16 +45,16 @@
 
     <para>
         Aby użyć helpera w swoim skrypcie widoku, wywołaj go za pomocą
-        <code>$this->nazwaHelpera()</code>. Obiekt <code>Zend_View</code>
+        <code>$this-&gt;nazwaHelpera()</code>. Obiekt <code>Zend_View</code>
         załaduje klasę <code>Zend_View_Helper_NazwaHelpera</code>, utworzy
         obiekt tej klasy i wywoła metodę <code>nazwaHelpera()</code>.
         Instancja obiektu istnieje teraz w instancji <code>Zend_View</code> i
         będzie ona ponownie używana przy następnych wywołaniach
-        <code>$this->nazwaHelpera()</code>.
+        <code>$this-&gt;nazwaHelpera()</code>.
     </para>
 
-    <sect2 id="zend.view.helpers.initial">
-        <title>Wbudowane klasy helperów</title>
+    <section xml:id="zend.view.helpers.initial"><info><title>Wbudowane klasy helperów</title></info>
+        
 
         <para>
             <code>Zend_View</code> posiada wbudowany zbiór klas helperów, z
@@ -183,8 +181,8 @@ echo $this->formCheckbox('foo',
                          null,
                          array('checked' => false),
                          array('bar', 'baz');
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
                 <para>
                     We wszystkich przypadkach zostanie dołączony ukryty element
@@ -350,8 +348,8 @@ echo $this->formCheckbox('foo',
 <?php echo $this->formCheckbox('opt_in', 'yes', null, array('yes', 'no')) ?>
     </label></p>
 </form>
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Rezultat wyglądałby w ten sposób:
@@ -374,54 +372,54 @@ echo $this->formCheckbox('foo',
         <input type="checkbox" name="opt_in" value="yes" checked="checked" />
     </label></p>
 </form>
-]]>
-        </programlisting>
 
-        <xi:include href="Zend_View-Helpers-Action.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Action.xml" /></xi:fallback>
+        ]]></programlisting>
+
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Action.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Action.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-Partial.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Partial.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Partial.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Partial.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-Placeholder.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Placeholder.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Placeholder.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Placeholder.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-Doctype.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Doctype.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Doctype.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Doctype.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-HeadLink.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-HeadLink.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadLink.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-HeadLink.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-HeadMeta.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-HeadMeta.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadMeta.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-HeadMeta.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-HeadScript.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-HeadScript.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadScript.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-HeadScript.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-HeadStyle.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-HeadStyle.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadStyle.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-HeadStyle.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-HeadTitle.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-HeadTitle.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HeadTitle.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-HeadTitle.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-HtmlObject.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-HtmlObject.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-HtmlObject.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-HtmlObject.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-InlineScript.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-InlineScript.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-InlineScript.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-InlineScript.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-Json.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Json.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Json.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Json.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_View-Helpers-Translate.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Translate.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Translate.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Translate.xml"/></xi:fallback>
         </xi:include>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.helpers.paths">
+    <section xml:id="zend.view.helpers.paths"><info><title>Ścieżki klas helperów</title></info>
 
-        <title>Ścieżki klas helperów</title>
+        
 
         <para>
             Tak jak ze skryptami widoków, kontroler może określić stos ścieżek,
@@ -439,8 +437,8 @@ echo $this->formCheckbox('foo',
 $view = new Zend_View();
 // Ustaw ścieżkę na /path/to/more/helpers, z przedrostkiem 'My_View_Helper'
 $view->setHelperPath('/path/to/more/helpers', 'My_View_Helper');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Oczywiście możesz dodawać ścieżki na stos używając metody
@@ -469,14 +467,14 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
 // nazwy klasy "My_View_Helper_HelperName"
 // i ostatecznie w "Zend/View/Helper/HelperName.php" używając
 // nazwy klasy "Zend_View_Helper_HelperName".
-]]>
-        </programlisting>
 
-    </sect2>
+        ]]></programlisting>
 
-    <sect2 id="zend.view.helpers.custom">
+    </section>
 
-        <title>Pisanie własnych klas helperów</title>
+    <section xml:id="zend.view.helpers.custom"><info><title>Pisanie własnych klas helperów</title></info>
+
+        
 
         <para>
             Pisanie własnych klas helperów jest łatwe; po prostu pisz według
@@ -512,7 +510,7 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
             <listitem><para>
                 Klasa musi posiadać publiczną metodę która jest taka jak nazwa
                 helpera; jest to metoda która zostanie wywołana gdy skrypt
-                widoku wywoła "$this->twojHelper()". W przykładzie helpera
+                widoku wywoła "$this-&gt;twojHelper()". W przykładzie helpera
                 "twojHelper", wymaganą deklaracją metody powinno być
                 "public function twojHelper()".
             </para></listitem>
@@ -552,8 +550,8 @@ class My_View_Helper_TwojHelper extends Zend_View_Helper_Abstract
         return htmlspecialchars($output);
     }
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Teraz w skrypcie widoku możesz wywołać helpera
@@ -567,8 +565,8 @@ class My_View_Helper_TwojHelper extends Zend_View_Helper_Abstract
 echo $this->twojHelper();
 echo $this->twojHelper();
 echo $this->twojHelper();
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Dane wyjściowe wyglądałyby w ten sposób:
@@ -577,8 +575,8 @@ echo $this->twojHelper();
 I have seen 'The Jerk' 1 time(s).
 I have seen 'The Jerk' 2 time(s).
 I have seen 'The Jerk' 3 time(s).
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Czasem możesz potrzebować uzyskać dostęp do obiektu
@@ -604,8 +602,8 @@ class My_View_Helper_ScriptPath
         return $this->view->getScriptPath($script);
     }
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Jeśli twoja klasa helpera posiada metodę <code>setView()</code>,
@@ -621,5 +619,5 @@ class My_View_Helper_ScriptPath
             nie musisz definiować tej metody, ponieważ jest ona zdefiniowana
             przez klasę rozszerzaną.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

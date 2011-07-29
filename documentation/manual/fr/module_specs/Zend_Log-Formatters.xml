@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22755 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.log.formatters">
-    <title>Formateurs (mise en forme)</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.formatters"><info><title>Formateurs (mise en forme)</title></info>
+    
 
     <para>
         Un formateur est un objet qui est responsable de prendre un tableau <code>event</code>
@@ -18,8 +16,8 @@
         formateur.
     </para>
 
-    <sect2 id="zend.log.formatters.simple">
-        <title>Formatage simple</title>
+    <section xml:id="zend.log.formatters.simple"><info><title>Formatage simple</title></info>
+        
 
         <para>
             <classname>Zend_Log_Formatter_Simple</classname> est le formateur par défaut. Il
@@ -52,10 +50,10 @@ $logger->info('Monde');
             par défaut en utilisant la constante DEFAULT_FORMAT de
             <classname>Zend_Log_Formatter_Simple</classname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.log.formatters.xml">
-        <title>Formater vers le XML</title>
+    <section xml:id="zend.log.formatters.xml"><info><title>Formater vers le XML</title></info>
+        
 
         <para>
             <classname>Zend_Log_Formatter_Xml</classname> formate des données de log dans des
@@ -107,5 +105,5 @@ $logger->info("Message d'information");
   <niveau>INFO</niveau>
 </log>
 ]]></programlisting></para>
-        </sect2>
-    </sect1>
+        </section>
+    </section>

@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.actionhelpers.flashmessenger">
-    <title>FlashMessenger</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.flashmessenger"><info><title>FlashMessenger</title></info>
+    
 
-    <sect4 id="zend.controller.actionhelper.flashmessenger.introduction">
-        <title>Введение</title>
+    <section xml:id="zend.controller.actionhelper.flashmessenger.introduction"><info><title>Введение</title></info>
+        
         <para>
             Помощник <code>FlashMessenger</code> позволяет передавать сообщения,
             которые нужно отобразить пользователю при следующем запросе.
@@ -18,10 +17,10 @@
             <link linkend="zend.session.advanced_usage.starting_a_session">Zend Session</link>).
         </para>
 
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelper.flashmessenger.basicusage">
-        <title>Базовый пример использования</title>
+    <section xml:id="zend.controller.actionhelper.flashmessenger.basicusage"><info><title>Базовый пример использования</title></info>
+        
         <para>
             Пример использования ниже демонстрирует простейший случай
             использования мессенджера. Когда вызывается действие
@@ -64,5 +63,5 @@ class SomeController extends Zend_Controller_Action
     }
 }
 ]]></programlisting>
-    </sect4>
-</sect3>
+    </section>
+</section>

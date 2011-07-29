@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.search.lucene.query-api">
-    <title>Query Construction API</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.query-api"><info><title>Query Construction API</title></info>
+    
 
     <para>
         In addition to parsing a string query automatically it's also possible to construct them
@@ -17,8 +16,8 @@
 $query = Zend_Search_Lucene_Search_QueryParser::parse($queryString);
 ]]></programlisting>
 
-    <sect2 id="zend.search.lucene.queries.exceptions">
-        <title>Query Parser Exceptions</title>
+    <section xml:id="zend.search.lucene.queries.exceptions"><info><title>Query Parser Exceptions</title></info>
+        
 
         <para>
             The query parser may generate two types of exceptions:
@@ -68,10 +67,10 @@ try {
             <methodname>Zend_Search_Lucene_Search_QueryParser::queryParsingExceptionsSuppressed()</methodname>
             methods are also intended to manage exceptions handling behavior.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.queries.term-query">
-        <title>Term Query</title>
+    <section xml:id="zend.search.lucene.queries.term-query"><info><title>Term Query</title></info>
+        
 
         <para>
             Term queries can be used for searching with a single term.
@@ -108,10 +107,10 @@ $term  = new Zend_Search_Lucene_Index_Term('word1');
 $query = new Zend_Search_Lucene_Search_Query_Term($term);
 $hits  = $index->find($query);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.queries.multiterm-query">
-        <title>Multi-Term Query</title>
+    <section xml:id="zend.search.lucene.queries.multiterm-query"><info><title>Multi-Term Query</title></info>
+        
 
         <para>
             Multi-term queries can be used for searching with a set of terms.
@@ -231,10 +230,10 @@ $hits  = $index->find($query);
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.queries.boolean-query">
-        <title>Boolean Query</title>
+    <section xml:id="zend.search.lucene.queries.boolean-query"><info><title>Boolean Query</title></info>
+        
 
         <para>
             Boolean queries allow to construct query using other queries and boolean operators.
@@ -391,10 +390,10 @@ word1 AND (word2 AND word3 AND NOT word4) OR word5
         <programlisting language="querystring"><![CDATA[
 (+(word1) +(+word2 +word3 -word4)) (word5)
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.queries.wildcard">
-        <title>Wildcard Query</title>
+    <section xml:id="zend.search.lucene.queries.wildcard"><info><title>Wildcard Query</title></info>
+        
 
         <para>
             Wildcard queries can be used to search for documents containing strings matching
@@ -439,10 +438,10 @@ $pattern = new Zend_Search_Lucene_Index_Term('test*');
 $query = new Zend_Search_Lucene_Search_Query_Wildcard($pattern);
 $hits  = $index->find($query);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.queries.fuzzy">
-        <title>Fuzzy Query</title>
+    <section xml:id="zend.search.lucene.queries.fuzzy"><info><title>Fuzzy Query</title></info>
+        
 
         <para>
             Fuzzy queries can be used to search for documents containing strings matching terms
@@ -507,10 +506,10 @@ $term = new Zend_Search_Lucene_Index_Term('test');
 $query = new Zend_Search_Lucene_Search_Query_Fuzzy($term);
 $hits  = $index->find($query);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.queries.phrase-query">
-        <title>Phrase Query</title>
+    <section xml:id="zend.search.lucene.queries.phrase-query"><info><title>Phrase Query</title></info>
+        
 
         <para>
             Phrase Queries can be used to search for a phrase within documents.
@@ -717,10 +716,10 @@ $hits1 = $index->find($query);
 $query->setSlop(2);
 $hits2 = $index->find($query);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.queries.range">
-        <title>Range Query</title>
+    <section xml:id="zend.search.lucene.queries.range"><info><title>Range Query</title></info>
+        
 
         <para>
             <link linkend="zend.search.lucene.query-language.range">Range queries</link> are
@@ -779,8 +778,5 @@ $query = new Zend_Search_Lucene_Search_Query_Range(
              );
 $hits  = $index->find($query);
 ]]></programlisting>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

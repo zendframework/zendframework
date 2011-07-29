@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.service.nirvanix">
-    <title>Zend_Service_Nirvanix</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.nirvanix"><info><title>Zend_Service_Nirvanix</title></info>
+    
 
-    <sect2 id="zend.service.nirvanix.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.service.nirvanix.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             Nirvanix provides an Internet Media File System (IMFS), an
@@ -19,15 +18,15 @@
             securely, without the large fixed costs associated with acquiring and
             maintaining physical storage assets.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.nirvanix.registering">
-        <title>Registering with Nirvanix</title>
+    <section xml:id="zend.service.nirvanix.registering"><info><title>Registering with Nirvanix</title></info>
+        
 
         <para>
             Before you can get started with <classname>Zend_Service_Nirvanix</classname>, you must
             first register for an account. Please see the
-            <ulink url="http://www.nirvanix.com/gettingStarted.aspx">Getting Started</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.nirvanix.com/gettingStarted.aspx">Getting Started</link>
             page on the Nirvanix website for more information.
         </para>
 
@@ -35,10 +34,10 @@
             After registering, you will receive a Username, Password, and Application Key.
             All three are required to use <classname>Zend_Service_Nirvanix</classname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.nirvanix.apiDocumentation">
-        <title>API Documentation</title>
+    <section xml:id="zend.service.nirvanix.apiDocumentation"><info><title>API Documentation</title></info>
+        
 
         <para>
             Access to the Nirvanix IMFS is available through both <acronym>SOAP</acronym> and a
@@ -53,19 +52,19 @@
         </para>
 
         <para>
-            The <ulink url="http://developer.nirvanix.com/sitefiles/1000/API.html">Nirvanix
-            <acronym>API</acronym> Documentation</ulink> provides an overview as well as detailed
+            The <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://developer.nirvanix.com/sitefiles/1000/API.html">Nirvanix
+            <acronym>API</acronym> Documentation</link> provides an overview as well as detailed
             information using the service. Please familiarize yourself with this document and refer
             back to it as you use <classname>Zend_Service_Nirvanix</classname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.nirvanix.features">
-        <title>Features</title>
+    <section xml:id="zend.service.nirvanix.features"><info><title>Features</title></info>
+        
 
         <para>
             Nirvanix's REST service can be used effectively with <acronym>PHP</acronym> using the
-            <ulink url="http://www.php.net/simplexml">SimpleXML</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/simplexml">SimpleXML</link>
             extension and <classname>Zend_Http_Client</classname> alone. However, using it this way
             is somewhat inconvenient due to repetitive operations like passing the
             session token on every request and repeatedly checking the response body for
@@ -106,10 +105,10 @@
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.nirvanix.storing-your-first">
-        <title>Getting Started</title>
+    <section xml:id="zend.service.nirvanix.storing-your-first"><info><title>Getting Started</title></info>
+        
 
         <para>
             Once you have registered with Nirvanix, you're ready to store your first
@@ -143,8 +142,7 @@ $imfs->unlink('/foo.txt');
         </para>
 
         <para>
-            Nirvanix divides its web services into <ulink
-                url="http://developer.nirvanix.com/sitefiles/1000/API.html#_Toc175999879">namespaces</ulink>.
+            Nirvanix divides its web services into <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://developer.nirvanix.com/sitefiles/1000/API.html#_Toc175999879">namespaces</link>.
             Each namespace encapsulates a group of related operations. After getting
             an instance of <classname>Zend_Service_Nirvanix</classname>, call the
             <methodname>getService()</methodname> method to create a proxy for the namespace
@@ -158,10 +156,10 @@ $imfs->unlink('/foo.txt');
             commands. The example above shows using the IMFS convenience methods to create a
             new file, retrieve and display that file, and finally delete the file.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.nirvanix.understanding-proxy">
-        <title>Understanding the Proxy</title>
+    <section xml:id="zend.service.nirvanix.understanding-proxy"><info><title>Understanding the Proxy</title></info>
+        
 
         <para>
             In the previous example, we used the <methodname>getService()</methodname> method to
@@ -191,8 +189,7 @@ $imfs->unlink('/foo.txt');
         </para>
 
         <para>
-            Let's say you want to call the REST <acronym>API</acronym> method <ulink
-                url="http://developer.nirvanix.com/sitefiles/1000/API.html#_Toc175999923">RenameFile</ulink>,
+            Let's say you want to call the REST <acronym>API</acronym> method <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://developer.nirvanix.com/sitefiles/1000/API.html#_Toc175999923">RenameFile</link>,
             which does not have a convenience method in
             <classname>Zend_Service_Nirvanix</classname>:
         </para>
@@ -229,10 +226,10 @@ $result = $imfs->renameFile(array('filePath' => '/path/to/foo.txt',
             <acronym>XML</acronym> returned by Nirvanix, or a
             <classname>Zend_Service_Nirvanix_Exception</classname> if an error occurred.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.nirvanix.examining-results">
-        <title>Examining Results</title>
+    <section xml:id="zend.service.nirvanix.examining-results"><info><title>Examining Results</title></info>
+        
 
         <para>
             The Nirvanix REST <acronym>API</acronym> always returns its results in
@@ -273,9 +270,9 @@ Zend_Service_Nirvanix_Response Object
 
         <para>
             You can access any property or method of the decorated <code>SimpleXMLElement</code>.
-            In the above example, <code>$result->BytesUploaded</code> could be used to see the
+            In the above example, <code>$result-&gt;BytesUploaded</code> could be used to see the
             number of bytes received. Should you want to access the <code>SimpleXMLElement</code>
-            directly, just use <code>$result->getSxml()</code>.
+            directly, just use <code>$result-&gt;getSxml()</code>.
         </para>
 
         <para>
@@ -284,10 +281,10 @@ Zend_Service_Nirvanix_Response Object
             result will throw a <classname>Zend_Service_Nirvanix_Exception</classname>. See the next
             section on handling errors.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.nirvanix.handling-errors">
-        <title>Handling Errors</title>
+    <section xml:id="zend.service.nirvanix.handling-errors"><info><title>Handling Errors</title></info>
+        
 
         <para>
             When using Nirvanix, it's important to anticipate errors that can be returned
@@ -340,18 +337,17 @@ try {
         <para>
             In the example above, <methodname>unlink()</methodname> is a convenience method that
             wraps the <code>DeleteFiles</code> command on the REST <acronym>API</acronym>. The
-            <code>filePath</code> parameter required by the <ulink
-                url="http://developer.nirvanix.com/sitefiles/1000/API.html#_Toc175999918">DeleteFiles</ulink>
+            <code>filePath</code> parameter required by the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://developer.nirvanix.com/sitefiles/1000/API.html#_Toc175999918">DeleteFiles</link>
             command contains a path that does not exist. This will result in a
             <classname>Zend_Service_Nirvanix</classname> exception being thrown with the message
             "Invalid path" and code 70005.
         </para>
 
         <para>
-            The <ulink url="http://developer.nirvanix.com/sitefiles/1000/API.html">Nirvanix
-            <acronym>API</acronym> Documentation</ulink> describes the errors associated with each
+            The <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://developer.nirvanix.com/sitefiles/1000/API.html">Nirvanix
+            <acronym>API</acronym> Documentation</link> describes the errors associated with each
             command. Depending on your needs, you may wrap each command in a <code>try</code> block
             or wrap many commands in the same <code>try</code> block for convenience.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

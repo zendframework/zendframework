@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 15998 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.codegenerator.introduction">
-    <title>Introducción</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.codegenerator.introduction"><info><title>Introducción</title></info>
+    
 
     <para>
         <classname>Zend_CodeGenerator</classname>
@@ -20,8 +18,8 @@
         configuración, apache vhost, etc.
     </para>
 
-    <sect2 id="zend.codegenerator.introduction.theory">
-        <title>Teoría de Operación</title>
+    <section xml:id="zend.codegenerator.introduction.theory"><info><title>Teoría de Operación</title></info>
+        
 
         <para>
             En el caso de uso más típico, simplemente instanciará una clase de
@@ -151,5 +149,5 @@ class World
 
 }
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,16 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 22631 -->
-<sect2 id="zend.application.available-resources.db">
-    <title>Zend_Application_Resource_Db</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.db"><info><title>Zend_Application_Resource_Db</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Db</classname>は、
         それに渡されるオプションに基づいて<classname>Zend_Db</classname>アダプタを初期化します。
         デフォルトで、<classname>Zend_Db_Table</classname>用のデフォルト・アダプタとして、
         アダプタを設定します。
-        複数のデータベースを同時に利用したい場合、 <link
-            linkend="zend.application.available-resources.multidb">Multidb リソース・プラグイン</link>
+        複数のデータベースを同時に利用したい場合、 <link linkend="zend.application.available-resources.multidb">Multidb リソース・プラグイン</link>
         を利用できます。
     </para>
 
@@ -45,8 +42,8 @@
         </listitem>
     </itemizedlist>
 
-    <example id="zend.application.available-resources.db.configExample">
-        <title>DBアダプタ・リソース構成サンプル</title>
+    <example xml:id="zend.application.available-resources.db.configExample"><info><title>DBアダプタ・リソース構成サンプル</title></info>
+        
 
         <para>
             下記は、DBリソースを初期化するために使える<acronym>INI</acronym>構成サンプルです。
@@ -67,8 +64,8 @@ resources.db.defaultMetadataCache = "database"
 ]]></programlisting>
     </example>
 
-    <note>
-        <title>アダプタのインスタンスを取得する</title>
+    <note><info><title>アダプタのインスタンスを取得する</title></info>
+        
 
         <para>
             このリソースでインスタンス化されるアダプタを
@@ -94,4 +91,4 @@ $resource = $bootstrap->getPluginResource('db');
 $db = $resource->getDbAdapter();
 ]]></programlisting>
     </note>
-</sect2>
+</section>

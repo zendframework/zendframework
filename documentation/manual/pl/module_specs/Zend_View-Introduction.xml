@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.view.introduction">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.introduction"><info><title>Wprowadzenie</title></info>
 
-    <title>Wprowadzenie</title>
+    
 
     <para>
         Zend_View jest klasą zapewniającą obsługę części widoku ("view")
@@ -28,9 +26,9 @@
         widoku, skutkiem tego jest wygenerowanie wyjściowego widoku.
     </para>
 
-    <sect2 id="zend.view.introduction.controller">
+    <section xml:id="zend.view.introduction.controller"><info><title>Skrypt kontrolera</title></info>
 
-        <title>Skrypt kontrolera</title>
+        
 
         <para>
             Aby pokazać prosty przykład załóżmy, że kontroler ma dane w postaci
@@ -62,14 +60,14 @@ $view->books = $data;
 
 // wygenerujemy wyjściowy widok o nazwie "booklist.php"
 echo $view->render('booklist.php');
-]]>
-        </programlisting>
 
-    </sect2>
+        ]]></programlisting>
 
-    <sect2 id="zend.view.introduction.view">
+    </section>
 
-        <title>Skrypt widoku</title>
+    <section xml:id="zend.view.introduction.view"><info><title>Skrypt widoku</title></info>
+
+        
 
         <para>
             Teraz potrzebujemy skryptu widoku "booklist.php". Jest
@@ -105,18 +103,18 @@ if ($this->books): ?>
     <p>Nie ma żadnych książek do wyświetlenia.</p>
 
 <?php endif;
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Zauważ, że używamy metody "escape()" aby przefiltrować zmienne
             wyjściowe.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.introduction.options">
-        <title>Opcje</title>
+    <section xml:id="zend.view.introduction.options"><info><title>Opcje</title></info>
+        
 
         <para>
             <code>Zend_View</code> posiada kilka opcji, które mogą być użyte do
@@ -137,8 +135,8 @@ base/path/
     helpers/
     filters/
     scripts/
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
                 <para>
                     Ta opcja może być ustawiona za pomocą metody
@@ -180,17 +178,16 @@ base/path/
                 <code>strictVars</code> do konstruktora.
             </para></listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.introduction.shortTags">
-        <title>Krótkie znaczniki wewnątrz skryptów widoków</title>
+    <section xml:id="zend.view.introduction.shortTags"><info><title>Krótkie znaczniki wewnątrz skryptów widoków</title></info>
+        
 
         <para>
             W naszych przykładach i dokumentacji używamy krótkich znaczników PHP:
             <code>&lt;?</code> oraz <code>&lt;?=</code>.
-            Dodatkowo używamy <ulink
-                url="http://us.php.net/manual/en/control-structures.alternative-syntax.php">alternatywnej
-                składni instrukcji kontrolnych</ulink>. Te wygodne skróty,
+            Dodatkowo używamy <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://us.php.net/manual/en/control-structures.alternative-syntax.php">alternatywnej
+                składni instrukcji kontrolnych</link>. Te wygodne skróty,
             których można użyć w skryptach widoków, pozwalają na zwiększenie
             czytelności kodu
         </para>
@@ -223,8 +220,8 @@ base/path/
 
                 <programlisting role="apache"><![CDATA[
 php_value "short_open_tag" "on"
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
                 <para>
                     To będzie możliwe tylko jeśli posiadasz uprawnienia
@@ -242,8 +239,8 @@ php_value "short_open_tag" "on"
 
         <programlisting role="php"><![CDATA[
 $view->setUseStreamWrapper(true);
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
                 <para>
                     Rejestruje to klasę <code>Zend_View_Stream</code> jako klasę
@@ -254,8 +251,8 @@ $view->setUseStreamWrapper(true);
             </listitem>
         </itemizedlist>
 
-        <note>
-            <title>Alternatywna obsługa strumienia danych zmniejsza wydajność</title>
+        <note><info><title>Alternatywna obsługa strumienia danych zmniejsza wydajność</title></info>
+            
 
             <para>
                 Użycie strumienia danych <emphasis>zmniejszy</emphasis> wydajność
@@ -266,10 +263,10 @@ $view->setUseStreamWrapper(true);
                 całości widoków.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.introduction.accessors">
-        <title>Narzędziowe metody dostępowe</title>
+    <section xml:id="zend.view.introduction.accessors"><info><title>Narzędziowe metody dostępowe</title></info>
+        
 
         <para>
             W większości przypadków będziesz używał tylko metod
@@ -339,5 +336,5 @@ $view->setUseStreamWrapper(true);
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

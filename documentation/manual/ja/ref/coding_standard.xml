@@ -1,13 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21740 -->
-<appendix id="coding-standard">
-    <title>Zend Framework PHP 標準コーディング規約</title>
-    <sect1 id="coding-standard.overview">
-        <title>概要</title>
+<?xml version="1.0" encoding="utf-8"?>
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="coding-standard"><info><title>Zend Framework PHP 標準コーディング規約</title></info>
+    
+    <section xml:id="coding-standard.overview"><info><title>概要</title></info>
+        
 
-        <sect2 id="coding-standard.overview.scope">
-            <title>対象範囲</title>
+        <section xml:id="coding-standard.overview.scope"><info><title>対象範囲</title></info>
+            
 
             <para>
                 このドキュメントは、Zend Framework に貢献してくださる開発者個人 (あるいはチーム)
@@ -23,7 +21,7 @@
                     それを標準規格として確立することが大切だと考えています。
                     Zend Framework コーディング規約の指針は、
                     これまで Zend Framework プロジェクトでうまく回っていた方針をまとめたものです。
-                    この<ulink url="http://framework.zend.com/license">ライセンス</ulink>のもとで、
+                    この<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/license">ライセンス</link>のもとで、
                     そのまま使用するなり多少変更して使用するなりすることができます。
                 </para>
             </note>
@@ -49,10 +47,10 @@
                     <para>インラインドキュメント</para>
                 </listitem>
             </itemizedlist>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.overview.goals">
-            <title>目標</title>
+        <section xml:id="coding-standard.overview.goals"><info><title>目標</title></info>
+            
 
             <para>
                 どのような開発プロジェクトであっても、コーディング規約は重要です。
@@ -60,17 +58,17 @@
                 コードの品質保持・バグの減少・保守の容易性の確保
                 などの助けになります。
             </para>
-        </sect2>
-    </sect1>
+        </section>
+    </section>
 
-    <sect1 id="coding-standard.php-file-formatting">
-        <title>PHP ファイルの書式</title>
+    <section xml:id="coding-standard.php-file-formatting"><info><title>PHP ファイルの書式</title></info>
+        
 
-        <sect2 id="coding-standard.php-file-formatting.general">
-            <title>全般</title>
+        <section xml:id="coding-standard.php-file-formatting.general"><info><title>全般</title></info>
+            
 
             <para>
-                <acronym>PHP</acronym> コードのみからなるファイルでは、終了タグ ("?>")
+                <acronym>PHP</acronym> コードのみからなるファイルでは、終了タグ ("?&gt;")
                 は決して含めてはいけません。これは必須なものではなく、
                 終了タグを省略することで、ファイルの最後にある空白文字が出力に影響することを防ぎます。
             </para>
@@ -84,16 +82,16 @@
                     この機能は、インストールスクリプトなどの特別な場合にのみ使用します。
                 </para>
             </note>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.php-file-formatting.indentation">
-            <title>字下げ</title>
+        <section xml:id="coding-standard.php-file-formatting.indentation"><info><title>字下げ</title></info>
+            
 
             <para>字下げは空白 4 文字で行います。タブ文字を使ってはいけません。</para>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.php-file-formatting.max-line-length">
-            <title>1 行の長さ</title>
+        <section xml:id="coding-standard.php-file-formatting.max-line-length"><info><title>1 行の長さ</title></info>
+            
 
             <para>
                 1 行の長さを 80 文字までにすることを目指しましょう。すなわち、
@@ -101,10 +99,10 @@
                 しかしながら、場合によっては少々長くなってしまってもかまいません。
                 <acronym>PHP</acronym> コードの行の長さは、最大 120 文字までにするようにしましょう。
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.php-file-formatting.line-termination">
-            <title>行末</title>
+        <section xml:id="coding-standard.php-file-formatting.line-termination"><info><title>行末</title></info>
+            
 
             <para>
                 行末の扱いは、標準的な Unix テキストファイルの方式にあわせます。
@@ -117,14 +115,14 @@
                 Windows OS のようなキャリッジリターンとラインフィードの組み合わせ (<acronym>CRLF</acronym>)
                 (0x0D, 0x0A) を使用しないでください。
             </para>
-        </sect2>
-    </sect1>
+        </section>
+    </section>
 
-    <sect1 id="coding-standard.naming-conventions">
-        <title>命名規約</title>
+    <section xml:id="coding-standard.naming-conventions"><info><title>命名規約</title></info>
+        
 
-        <sect2 id="coding-standard.naming-conventions.classes">
-            <title>クラス</title>
+        <section xml:id="coding-standard.naming-conventions.classes"><info><title>クラス</title></info>
+            
 
             <para>
                 Zend Framework では、クラスの名前が保存先ディレクトリに直接対応するような
@@ -166,14 +164,13 @@
                     については、"Zend_" や "ZendX_" で始まる名前は使用できません。
                 </para>
             </note>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.naming-conventions.abstracts">
-            <title>抽象クラス</title>
+        <section xml:id="coding-standard.naming-conventions.abstracts"><info><title>抽象クラス</title></info>
+            
 
             <para>
-                一般に、抽象クラスの規約は通常の <link 
-                    linkend="coding-standard.naming-conventions.classes">クラス</link>
+                一般に、抽象クラスの規約は通常の <link linkend="coding-standard.naming-conventions.classes">クラス</link>
                 と同じものとなります。追加の規則として、抽象クラスの名前は最後が "Abstract"
                 (そしてその前にはアンダースコアはつけない) でなければなりません。
                 たとえば <classname>Zend_Controller_Plugin_Abstract</classname>
@@ -232,14 +229,13 @@ abstract class RequestAbstract
                     keyword issues; simultaneously, it better describes the abstract class.
                 </para>
             </note>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.naming-conventions.interfaces">
-            <title>インターフェイス</title>
+        <section xml:id="coding-standard.naming-conventions.interfaces"><info><title>インターフェイス</title></info>
+            
 
             <para>
-                一般に、インターフェイスの規約は通常の <link 
-                    linkend="coding-standard.naming-conventions.classes">クラス</link>
+                一般に、インターフェイスの規約は通常の <link linkend="coding-standard.naming-conventions.classes">クラス</link>
                 と同じものとなります。追加の規則として、インターフェイスの名前の最後は
                 "Interface" (そしてその前にはアンダースコアはつけない) にすることもできます。
                 たとえば <classname>Zend_Controller_Plugin_Interface</classname>
@@ -259,15 +255,14 @@ abstract class RequestAbstract
                     この命名規約が適用されるのは、Zend Framework 1.9.0 以降です。
                     それより前のバージョンではこの規約に従っていないものもあるかもしれませんが、
                     将来のバージョンでは規約に従うよう名前が変わる予定です。
-                    この変更に関連する詳細については<link
-                        linkend="coding-standard.naming-conventions.abstracts">前節</link>
+                    この変更に関連する詳細については<link linkend="coding-standard.naming-conventions.abstracts">前節</link>
                     をご覧ください。
                 </para>
             </note>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.naming-conventions.filenames">
-            <title>ファイル名</title>
+        <section xml:id="coding-standard.naming-conventions.filenames"><info><title>ファイル名</title></info>
+            
 
             <para>
                 すべてのファイルにおいて、使用可能な文字は英数字・アンダースコア
@@ -292,10 +287,10 @@ Zend/View/Helper/FormRadio.php
             <para>
                 ファイル名は、上で説明したとおりの方式でクラス名と対応していなければなりません。
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.naming-conventions.functions-and-methods">
-            <title>関数およびメソッド</title>
+        <section xml:id="coding-standard.naming-conventions.functions-and-methods"><info><title>関数およびメソッド</title></info>
+            
 
             <para>
                 関数名に含めることができるのは英数字のみです。
@@ -350,10 +345,10 @@ widgetFactory()
                 グローバル関数は、できる限り使用しないようにしましょう。
                 このような関数は、静的クラスにまとめることを推奨します。
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.naming-conventions.variables">
-            <title>変数</title>
+        <section xml:id="coding-standard.naming-conventions.variables"><info><title>変数</title></info>
+            
 
             <para>
                 変数名に含めることができるのは英数字のみです。
@@ -381,10 +376,10 @@ widgetFactory()
                 ループが 20 行以上のコードになるようなら、
                 そのループ変数にはそれなりの名前をつけるべきです。
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.naming-conventions.constants">
-            <title>定数</title>
+        <section xml:id="coding-standard.naming-conventions.constants"><info><title>定数</title></info>
+            
 
             <para>
                 定数名には英数字およびアンダースコアを使用できます。
@@ -406,14 +401,14 @@ widgetFactory()
                 で定義しなければなりません。"define"
                 によるグローバル定数の宣言も可能ですが、お勧めしません。
             </para>
-        </sect2>
-    </sect1>
+        </section>
+    </section>
 
-    <sect1 id="coding-standard.coding-style">
-        <title>コーディングスタイル</title>
+    <section xml:id="coding-standard.coding-style"><info><title>コーディングスタイル</title></info>
+        
 
-        <sect2 id="coding-standard.coding-style.php-code-demarcation">
-            <title>PHP コードの境界</title>
+        <section xml:id="coding-standard.coding-style.php-code-demarcation"><info><title>PHP コードの境界</title></info>
+            
 
             <para>
                 <acronym>PHP</acronym> のコードの区切りには、
@@ -428,17 +423,17 @@ widgetFactory()
 
             <para>
                 短いタグは決して使用してはいけません。
-                <acronym>PHP</acronym> コードのみからなるファイルでは、終了タグ ("?>")
+                <acronym>PHP</acronym> コードのみからなるファイルでは、終了タグ ("?&gt;")
                 は決して含めてはいけません
                 (<link linkend="coding-standard.php-file-formatting.general">全般</link> を参照ください)。
             </para>
-        </sect2>
+        </section>
 
-        <sect2 id="coding-standard.coding-style.strings">
-            <title>文字列</title>
+        <section xml:id="coding-standard.coding-style.strings"><info><title>文字列</title></info>
+            
 
-            <sect3 id="coding-standard.coding-style.strings.literals">
-                <title>文字列リテラル</title>
+            <section xml:id="coding-standard.coding-style.strings.literals"><info><title>文字列リテラル</title></info>
+                
 
                 <para>
                     文字列がリテラルである (変数の展開などが含まれない)
@@ -449,10 +444,10 @@ widgetFactory()
                 <programlisting language="php"><![CDATA[
 $a = '文字列の例';
 ]]></programlisting>
-            </sect3>
+            </section>
 
-            <sect3 id="coding-standard.coding-style.strings.literals-containing-apostrophes">
-                <title>アポストロフィを含む文字列リテラル</title>
+            <section xml:id="coding-standard.coding-style.strings.literals-containing-apostrophes"><info><title>アポストロフィを含む文字列リテラル</title></info>
+                
 
                 <para>
                     リテラル文字列自体にアポストロフィが含まれている場合は、
@@ -468,10 +463,10 @@ $sql = "SELECT `id`, `name` from `people` "
                 <para>
                     アポストロフィをエスケープするよりも、上の構文のほうが読みやすくなるのでお勧めです。
                 </para>
-            </sect3>
+            </section>
 
-            <sect3 id="coding-standard.coding-style.strings.variable-substitution">
-                <title>変数の展開</title>
+            <section xml:id="coding-standard.coding-style.strings.variable-substitution"><info><title>変数の展開</title></info>
+                
 
                 <para>
                     変数の展開を行うには、次のような方法を使用します。
@@ -490,10 +485,10 @@ $greeting = "こんにちは {$name} さん。ようこそ!";
                 <programlisting language="php"><![CDATA[
 $greeting = "こんにちは ${name} さん。ようこそ!";
 ]]></programlisting>
-            </sect3>
+            </section>
 
-            <sect3 id="coding-standard.coding-style.strings.string-concatenation">
-                <title>文字列の連結</title>
+            <section xml:id="coding-standard.coding-style.strings.string-concatenation"><info><title>文字列の連結</title></info>
+                
 
                 <para>
                     文字列の連結には "." 演算子を使用しなければなりません。コードを読みやすくするため、
@@ -516,14 +511,14 @@ $sql = "SELECT `id`, `name` FROM `people` "
      . "WHERE `name` = 'Susan' "
      . "ORDER BY `name` ASC ";
 ]]></programlisting>
-            </sect3>
-        </sect2>
+            </section>
+        </section>
 
-        <sect2 id="coding-standard.coding-style.arrays">
-            <title>配列</title>
+        <section xml:id="coding-standard.coding-style.arrays"><info><title>配列</title></info>
+            
 
-            <sect3 id="coding-standard.coding-style.arrays.numerically-indexed">
-                <title>数値添字の配列</title>
+            <section xml:id="coding-standard.coding-style.arrays.numerically-indexed"><info><title>数値添字の配列</title></info>
+                
 
                 <para>添字として負の数を使用してはいけません。</para>
 
@@ -574,10 +569,10 @@ $sampleArray = array(
                     そうすることで、配列に新たな要素を追加したときにパースエラーが発生する危険性を
                     少なくできます。
                 </para>
-            </sect3>
+            </section>
 
-            <sect3 id="coding-standard.coding-style.arrays.associative">
-                <title>連想配列</title>
+            <section xml:id="coding-standard.coding-style.arrays.associative"><info><title>連想配列</title></info>
+                
 
                 <para>
                     連想配列を <type>Array</type> で宣言する場合には、
@@ -596,7 +591,7 @@ $sampleArray = array('firstKey'  => 'firstValue',
                     その場合は、配列を宣言した位置からさらに一段インデントした位置で要素をそろえ、
                     それ以降のすべての要素を同じインデントで記述するようにします。
                     閉じ括弧はそれ単体でひとつの行に記述し、インデント量は配列の宣言と同じ位置になります。
-                    可読性を高めるため、代入演算子 "=>" の位置はそろえておかなければなりません。
+                    可読性を高めるため、代入演算子 "=&gt;" の位置はそろえておかなければなりません。
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -611,14 +606,14 @@ $sampleArray = array(
                     そうすることで、配列に新たな要素を追加したときにパースエラーが発生する危険性を
                     少なくできます。
                 </para>
-            </sect3>
-        </sect2>
+            </section>
+        </section>
 
-        <sect2 id="coding-standard.coding-style.classes">
-            <title>クラス</title>
+        <section xml:id="coding-standard.coding-style.classes"><info><title>クラス</title></info>
+            
 
-            <sect3 id="coding-standard.coding-style.classes.declaration">
-                <title>クラス宣言</title>
+            <section xml:id="coding-standard.coding-style.classes.declaration"><info><title>クラス宣言</title></info>
+                
 
                 <para>
                     クラス宣言は、以下の Zend Framework 命名規約に従わなければなりません。
@@ -673,8 +668,7 @@ class SampleClass extends FooAbstract implements BarInterface
 ]]></programlisting>
 
                 <para>
-                    このように宣言しようとした結果、もし行の長さが <link
-                        linkend="coding-standard.php-file-formatting.max-line-length">最大文字数
+                    このように宣言しようとした結果、もし行の長さが <link linkend="coding-standard.php-file-formatting.max-line-length">最大文字数
                         </link> を超えてしまう場合は、キーワード "extends" や "implements"
                     の前で改行してインデント量を一段増やします。
                 </para>
@@ -700,10 +694,10 @@ class SampleClass
 {
 }
 ]]></programlisting>
-            </sect3>
+            </section>
 
-            <sect3 id="coding-standard.coding-style.classes.member-variables">
-                <title>クラスのメンバ変数</title>
+            <section xml:id="coding-standard.coding-style.classes.member-variables"><info><title>クラスのメンバ変数</title></info>
+                
 
                 <para>
                     メンバ変数は、以下の Zend Framework 変数命名規約に従わなければなりません。
@@ -721,14 +715,14 @@ class SampleClass
                     メンバ変数を public 宣言して外部からアクセスさせることもできますが、
                     それよりはアクセサメソッド (set &amp; get) を使用する方式のほうを推奨します。
                 </para>
-            </sect3>
-        </sect2>
+            </section>
+        </section>
 
-        <sect2 id="coding-standard.coding-style.functions-and-methods">
-            <title>関数およびメソッド</title>
+        <section xml:id="coding-standard.coding-style.functions-and-methods"><info><title>関数およびメソッド</title></info>
+            
 
-            <sect3 id="coding-standard.coding-style.functions-and-methods.declaration">
-                <title>関数およびメソッドの宣言</title>
+            <section xml:id="coding-standard.coding-style.functions-and-methods.declaration"><info><title>関数およびメソッドの宣言</title></info>
+                
 
                 <para>
                     関数は、以下の Zend Framework 関数命名規約に従わなければなりません。
@@ -772,8 +766,7 @@ class Foo
 ]]></programlisting>
 
                 <para>
-                    引数リストが <link 
-                        linkend="coding-standard.php-file-formatting.max-line-length">行の最大文字数
+                    引数リストが <link linkend="coding-standard.php-file-formatting.max-line-length">行の最大文字数
                         </link> を超える場合は改行できます。
                     関数やメソッドの引数を改行して続ける場合は、
                     その宣言部よりさらに一段インデントしなければなりません。
@@ -854,10 +847,10 @@ class Foo
     }
 }
 ]]></programlisting>
-            </sect3>
+            </section>
 
-            <sect3 id="coding-standard.coding-style.functions-and-methods.usage">
-                <title>関数およびメソッドの使用法</title>
+            <section xml:id="coding-standard.coding-style.functions-and-methods.usage"><info><title>関数およびメソッドの使用法</title></info>
+                
 
                 <para>
                     関数の引数を指定する際は、引数を区切るカンマの後に空白をひとつ入れます。
@@ -894,14 +887,14 @@ threeArguments(array(
     56.44, $d, 500
 ), 2, 3);
 ]]></programlisting>
-            </sect3>
-        </sect2>
+            </section>
+        </section>
 
-        <sect2 id="coding-standard.coding-style.control-statements">
-            <title>制御構造</title>
+        <section xml:id="coding-standard.coding-style.control-statements"><info><title>制御構造</title></info>
+            
 
-            <sect3 id="coding-standard.coding-style.control-statements.if-else-elseif">
-                <title>If/Else/Elseif</title>
+            <section xml:id="coding-standard.coding-style.control-statements.if-else-elseif"><info><title>If/Else/Elseif</title></info>
+                
 
                 <para>
                     <emphasis>if</emphasis> および <emphasis>elseif</emphasis> 系の制御構造では、
@@ -928,8 +921,7 @@ if ($a != 2) {
 ]]></programlisting>
 
                 <para>
-                    条件文が <link
-                        linkend="coding-standard.php-file-formatting.max-line-length">行の最大文字数
+                    条件文が <link linkend="coding-standard.php-file-formatting.max-line-length">行の最大文字数
                         </link> を超え、さらに複数の条件がある場合は、
                     それらを複数行にわけて記述できます。その場合は論理演算子の前で改行し、
                     条件句の最初の文字がそろうように位置を合わせます。
@@ -990,10 +982,10 @@ if (($a == $b)
                     しかし、このコーディング規約では、このような例外を認めません。
                     "if"、"elseif" あるいは "else" 文では、常に波括弧を使用しなければなりません。
                 </para>
-            </sect3>
+            </section>
 
-            <sect3 id="coding-standards.coding-style.control-statements.switch">
-                <title>Switch</title>
+            <section xml:id="coding-standards.coding-style.control-statements.switch"><info><title>Switch</title></info>
+                
 
                 <para>
                     "switch" を使用した制御文では、
@@ -1034,20 +1026,20 @@ switch ($numPeople) {
                         「意図的に break を省略した」というコメントを含めるようにします。
                     </para>
                 </note>
-            </sect3>
-        </sect2>
+            </section>
+        </section>
 
-        <sect2 id="coding-standards.inline-documentation">
-            <title>インラインドキュメント</title>
+        <section xml:id="coding-standards.inline-documentation"><info><title>インラインドキュメント</title></info>
+            
 
-            <sect3 id="coding-standards.inline-documentation.documentation-format">
-                <title>ドキュメントの書式</title>
+            <section xml:id="coding-standards.inline-documentation.documentation-format"><info><title>ドキュメントの書式</title></info>
+                
 
                 <para>
                     ドキュメントブロック ("docblocks") は、phpDocumentor
                     と互換性のある書式でなければなりません。
                     phpDocumentor の書式については、このドキュメントの対象範囲外です。
-                    詳細な情報は <ulink url="http://phpdoc.org/">http://phpdoc.org/</ulink>
+                    詳細な情報は <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://phpdoc.org/">http://phpdoc.org/</link>
                     を参照ください。
                 </para>
 
@@ -1057,10 +1049,10 @@ switch ($numPeople) {
                     そして各クラスの直前に「クラスレベル」の docblock
                     を含めなければなりません。以下に docblock の例を示します。
                 </para>
-            </sect3>
+            </section>
 
-            <sect3 id="coding-standards.inline-documentation.files">
-                <title>ファイル</title>
+            <section xml:id="coding-standards.inline-documentation.files"><info><title>ファイル</title></info>
+                
 
                 <para>
                     <acronym>PHP</acronym> コードを含むすべてのファイルは、最低限これらの
@@ -1102,10 +1094,10 @@ switch ($numPeople) {
                     上の例の場合は、ファイルに含まれるクラス名が "<classname>Zend_Magic_Wand</classname>" であるか、
                     そのクラス名をプレフィックスの一部として使っているのでしょう。
                 </para>
-            </sect3>
+            </section>
 
-            <sect3 id="coding-standards.inline-documentation.classes">
-                <title>クラス</title>
+            <section xml:id="coding-standards.inline-documentation.classes"><info><title>クラス</title></info>
+                
 
                 <para>
                     各クラスには、最低限これらの phpDocumentor タグを含む
@@ -1146,10 +1138,10 @@ switch ($numPeople) {
                     上の例の場合は、ファイルに含まれるクラス名が "<classname>Zend_Magic_Wand</classname>" であるか、
                     そのクラス名をプレフィックスの一部として使っているのでしょう。
                 </para>
-            </sect3>
+            </section>
 
-            <sect3 id="coding-standards.inline-documentation.functions">
-                <title>関数</title>
+            <section xml:id="coding-standards.inline-documentation.functions"><info><title>関数</title></info>
+                
 
                 <para>
                     オブジェクトのメソッドを含めたすべての関数には、
@@ -1176,11 +1168,8 @@ switch ($numPeople) {
                 <programlisting language="php"><![CDATA[
 @throws exceptionclass [description]
 ]]></programlisting>
-            </sect3>
-        </sect2>
-    </sect1>
+            </section>
+        </section>
+    </section>
 
 </appendix>
-<!--
-vim:se ts=4 sw=4 et:
--->

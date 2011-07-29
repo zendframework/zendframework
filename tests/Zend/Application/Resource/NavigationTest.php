@@ -87,7 +87,7 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
         $resource = new NavigationResource($options);
         $resource->setBootstrap($this->bootstrap)->init();
 
-        $view = $this->bootstrap->getPluginResource('view')->getView();
+        $view = $this->bootstrap->getBroker()->getPlugin('view')->getView();
         $number = $view->getHelper('navigation')->getContainer()->count();
 
         $this->assertEquals($number,1);
@@ -137,7 +137,7 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
 
         // Register view for cases where registry should/is not (be) used
         $this->bootstrap->registerPluginResource('view');
-        $this->bootstrap->getPluginResource('view')->getView();
+        $this->bootstrap->getBroker()->getPlugin('view')->getView();
 
         $options1 = array(
             'pages'=> array(new NavigationPage\Mvc(array(

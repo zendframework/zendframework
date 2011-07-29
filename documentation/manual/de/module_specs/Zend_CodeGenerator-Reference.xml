@@ -1,14 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.codegenerator.reference">
-    <title>Zend_CodeGenerator Referenz</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.codegenerator.reference"><info><title>Zend_CodeGenerator Referenz</title></info>
+    
 
-    <sect2 id="zend.codegenerator.reference.abstracts">
-        <title>Abstrakte Klassen und Interfaces</title>
+    <section xml:id="zend.codegenerator.reference.abstracts"><info><title>Abstrakte Klassen und Interfaces</title></info>
+        
 
-        <sect3 id="zend.codegenerator.reference.abstracts.abstract">
-            <title>Zend_CodeGenerator_Abstract</title>
+        <section xml:id="zend.codegenerator.reference.abstracts.abstract"><info><title>Zend_CodeGenerator_Abstract</title></info>
+            
 
             <para>
                 Die Basisklasse von der alle CodeGenerator Klassen abgeleitet sind und die
@@ -55,10 +53,10 @@ abstract class Zend_CodeGenerator_Abstract
                 Standardinhalt für den zu erzeugenden Code zu setzen, oder um gesetzte Inhalte zu
                 ersetzen sobald alle Arbeiten der Erzeugung beendet wurden.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.abstracts.php-abstract">
-            <title>Zend_CodeGenerator_Php_Abstract</title>
+        <section xml:id="zend.codegenerator.reference.abstracts.php-abstract"><info><title>Zend_CodeGenerator_Php_Abstract</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Abstract</classname> erweitert
@@ -78,10 +76,10 @@ abstract class Zend_CodeGenerator_Php_Abstract
     public function getIndentation()
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.abstracts.php-member-abstract">
-            <title>Zend_CodeGenerator_Php_Member_Abstract</title>
+        <section xml:id="zend.codegenerator.reference.abstracts.php-member-abstract"><info><title>Zend_CodeGenerator_Php_Member_Abstract</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Member_Abstract</classname> ist eine Basisklasse
@@ -105,14 +103,14 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract
     public function getName()
 }
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.codegenerator.reference.concrete">
-        <title>Konkrete CodeGenerator Klassen</title>
+    <section xml:id="zend.codegenerator.reference.concrete"><info><title>Konkrete CodeGenerator Klassen</title></info>
+        
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-body">
-            <title>Zend_CodeGenerator_Php_Body</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-body"><info><title>Zend_CodeGenerator_Php_Body</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Body</classname> ist dazu gedacht generellen
@@ -133,10 +131,10 @@ class Zend_CodeGenerator_Php_Body extends Zend_CodeGenerator_Php_Abstract
     public function generate()
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-class">
-            <title>Zend_CodeGenerator_Php_Class</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-class"><info><title>Zend_CodeGenerator_Php_Class</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Class</classname> ist für die Erstellung von
@@ -197,10 +195,10 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
                 Beachte das <methodname>setDocBlock()</methodname> eine Instanz von
                 <classname>Zend_CodeGenerator_Php_DocBlock</classname> erwartet.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-docblock">
-            <title>Zend_CodeGenerator_Php_Docblock</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-docblock"><info><title>Zend_CodeGenerator_Php_Docblock</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Docblock</classname> kann verwendet werden um
@@ -236,10 +234,10 @@ class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
     public function generate()
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-docblock-tag">
-            <title>Zend_CodeGenerator_Php_Docblock_Tag</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-docblock-tag"><info><title>Zend_CodeGenerator_Php_Docblock_Tag</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Docblock_Tag</classname> ist für die Erstellung
@@ -266,10 +264,10 @@ class Zend_CodeGenerator_Php_Docblock_Tag
     public function generate()
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-docblock-tag-param">
-            <title>Zend_CodeGenerator_Php_DocBlock_Tag_Param</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-docblock-tag-param"><info><title>Zend_CodeGenerator_Php_DocBlock_Tag_Param</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_DocBlock_Tag_Param</classname> ist eine spezielle
@@ -298,10 +296,10 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
     public function generate()
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-docblock-tag-return">
-            <title>Zend_CodeGenerator_Php_DocBlock_Tag_Return</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-docblock-tag-return"><info><title>Zend_CodeGenerator_Php_DocBlock_Tag_Return</title></info>
+            
 
             <para>
                 Wie die Variante des Param DocBlock Tags ist
@@ -326,10 +324,10 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
     public function generate()
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-file">
-            <title>Zend_CodeGenerator_Php_File</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-file"><info><title>Zend_CodeGenerator_Php_File</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_File</classname> wird verwendet um den kompletten
@@ -375,10 +373,10 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
     public function generate()
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-member-container">
-            <title>Zend_CodeGenerator_Php_Member_Container</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-member-container"><info><title>Zend_CodeGenerator_Php_Member_Container</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Member_Container</classname> wird intern von
@@ -397,10 +395,10 @@ class Zend_CodeGenerator_Php_Member_Container extends ArrayObject
     public function __construct($type = self::TYPE_PROPERTY)
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-method">
-            <title>Zend_CodeGenerator_Php_Method</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-method"><info><title>Zend_CodeGenerator_Php_Method</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Method</classname> beschreibt eine Klassenmethode,
@@ -441,10 +439,10 @@ class Zend_CodeGenerator_Php_Method
     public function generate()
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-parameter">
-            <title>Zend_CodeGenerator_Php_Parameter</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-parameter"><info><title>Zend_CodeGenerator_Php_Parameter</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Parameter</classname> kann verwendet werden um
@@ -500,10 +498,10 @@ $parameter->setDefaultValue(
                 Intern konvertiert <methodname>setDefaultValue()</methodname> die Werte, welche in
                 <acronym>PHP</acronym> nicht ausgedrückt werden können, in den Werte-Halter.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-property">
-            <title>Zend_CodeGenerator_Php_Property</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-property"><info><title>Zend_CodeGenerator_Php_Property</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Property</classname> beschreibt die Eigenschaft
@@ -531,6 +529,6 @@ class Zend_CodeGenerator_Php_Property
     public function generate()
 }
 ]]></programlisting>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

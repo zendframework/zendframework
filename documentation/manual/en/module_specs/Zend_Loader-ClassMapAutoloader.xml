@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.loader.class-map-autoloader">
-    <title>The ClassMapAutoloader</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.class-map-autoloader"><info><title>The ClassMapAutoloader</title></info>
+    
 
-    <sect2 id="zend.loader.class-map-autoloader.intro">
-        <title>Overview</title>
+    <section xml:id="zend.loader.class-map-autoloader.intro"><info><title>Overview</title></info>
+        
 
         <para>
             The <classname>ClassMapAutoloader</classname> is designed with performance in mind. The
@@ -25,12 +24,12 @@
         <para>
             Zend Framework also provides a tool for generating these class maps; you can find it in
             <filename>bin/classmap_generator.php</filename> of the distribution. Full documentation
-            of this too is provided in <xref linkend="zend.loader.classmap-generator" />.
+            of this too is provided in <xref linkend="zend.loader.classmap-generator"/>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.class-map-autoloader.quick-start">
-        <title>Quick Start</title>
+    <section xml:id="zend.loader.class-map-autoloader.quick-start"><info><title>Quick Start</title></info>
+        
 
         <para>
             The first step is to generate a class map file. You may run this over any directory
@@ -68,17 +67,17 @@ $loader->register();
         <para>
             At this point, you may now use any classes referenced in your class map.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.class-map-autoloader.options">
-        <title>Configuration Options</title>
+    <section xml:id="zend.loader.class-map-autoloader.options"><info><title>Configuration Options</title></info>
+        
 
         <para>
             The <classname>ClassMapAutoloader</classname> defines the following options.
         </para>
 
-        <variablelist>
-            <title>ClassMapAutoloader Options</title>
+        <variablelist><info><title>ClassMapAutoloader Options</title></info>
+            
 
             <varlistentry>
                 <term>$options</term>
@@ -108,12 +107,12 @@ $config = array(
             </varlistentry>
         </variablelist>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.class-map-autoloader.methods">
-        <title>Available Methods</title>
+    <section xml:id="zend.loader.class-map-autoloader.methods"><info><title>Available Methods</title></info>
+        
 
-        <refentry id="zend.loader.class-map-autoloader.methods.constructor">
+        <refentry xml:id="zend.loader.class-map-autoloader.methods.constructor">
             <refnamediv>
                 <refname>__construct</refname>
                 <refpurpose>Initialize and configure the object</refpurpose>
@@ -128,19 +127,18 @@ $config = array(
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>Constructor</title>
+            <refsection><info><title>Constructor</title></info>
+                
 
                 <para>
                     Used during instantiation of the object. Optionally, pass options, which may be
                     either an array or <interfacename>Traversable</interfacename> object; this
-                    argument will be passed to <link
-                        linkend="zend.loader.class-map-autoloader.methods.set-options">setOptions()</link>.
+                    argument will be passed to <link linkend="zend.loader.class-map-autoloader.methods.set-options">setOptions()</link>.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.class-map-autoloader.methods.set-options">
+        <refentry xml:id="zend.loader.class-map-autoloader.methods.set-options">
             <refnamediv>
                 <refname>setOptions</refname>
                 <refpurpose>Configure the autoloader</refpurpose>
@@ -155,19 +153,18 @@ $config = array(
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>setOptions()</title>
+            <refsection><info><title>setOptions()</title></info>
+                
 
                 <para>
                     Configures the state of the autoloader, including registering class maps.
                     Expects an array or <interfacename>Traversable</interfacename> object; the
-                    argument will be passed to <link
-                        linkend="zend.loader.class-map-autoloader.methods.register-autoloadmaps">registerAutoloadMaps()</link>.
+                    argument will be passed to <link linkend="zend.loader.class-map-autoloader.methods.register-autoloadmaps">registerAutoloadMaps()</link>.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.class-map-autoloader.methods.register-autoload-map">
+        <refentry xml:id="zend.loader.class-map-autoloader.methods.register-autoload-map">
             <refnamediv>
                 <refname>registerAutoloadMap</refname>
                 <refpurpose>Register a class map</refpurpose>
@@ -182,8 +179,8 @@ $config = array(
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>registerAutoloadMap()</title>
+            <refsection><info><title>registerAutoloadMap()</title></info>
+                
 
                 <para>
                     Registers a class map with the autoloader. <varname>$map</varname> may be either
@@ -196,10 +193,10 @@ $config = array(
                     previous, meaning it's possible for a later class map to overwrite entries from
                     a previously registered map.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.class-map-autoloader.methods.register-autoload-maps">
+        <refentry xml:id="zend.loader.class-map-autoloader.methods.register-autoload-maps">
             <refnamediv>
                 <refname>registerAutoloadMaps</refname>
                 <refpurpose>Register multiple class maps at once</refpurpose>
@@ -214,19 +211,18 @@ $config = array(
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>registerAutoloadMaps()</title>
+            <refsection><info><title>registerAutoloadMaps()</title></info>
+                
 
                 <para>
                     Register multiple class maps with the autoloader. Expects either an array or
                     <interfacename>Traversable</interfacename> object; it then iterates over the
-                    argument and passes each value to <link
-                        linkend="zend.loader.class-map-autoloader.methods.register-autoload-map">registerAutoloadMap()</link>.
+                    argument and passes each value to <link linkend="zend.loader.class-map-autoloader.methods.register-autoload-map">registerAutoloadMap()</link>.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.standard-autoloader.methods.get-autoload-map">
+        <refentry xml:id="zend.loader.standard-autoloader.methods.get-autoload-map">
             <refnamediv>
                 <refname>getAutoloadMap</refname>
                 <refpurpose>Retrieve the current class map</refpurpose>
@@ -238,17 +234,17 @@ $config = array(
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>getAutoloadMap()</title>
+            <refsection><info><title>getAutoloadMap()</title></info>
+                
 
                 <para>
                     Retrieves the state of the current class map; the return value is simply an
                     array.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.standard-autoloader.methods.autoload">
+        <refentry xml:id="zend.loader.standard-autoloader.methods.autoload">
             <refnamediv>
                 <refname>autoload</refname>
                 <refpurpose>Attempt to load a class.</refpurpose>
@@ -263,18 +259,18 @@ $config = array(
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>autoload()</title>
+            <refsection><info><title>autoload()</title></info>
+                
 
                 <para>
                     Attempts to load the class specified. Returns a boolean
                     <constant>false</constant> on failure, or a string indicating the class loaded
                     on success.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.standard-autoloader.methods.register">
+        <refentry xml:id="zend.loader.standard-autoloader.methods.register">
             <refnamediv>
                 <refname>register</refname>
                 <refpurpose>Register with spl_autoload.</refpurpose>
@@ -286,22 +282,22 @@ $config = array(
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>register()</title>
+            <refsection><info><title>register()</title></info>
+                
 
                 <para>
                     Registers the <methodname>autoload()</methodname> method of the current instance
                     with <function>spl_autoload_register()</function>.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.class-map-autoloader.examples">
-        <title>Examples</title>
+    <section xml:id="zend.loader.class-map-autoloader.examples"><info><title>Examples</title></info>
+        
 
-        <example id="zend.loader.class-map-autoloader.examples.configuration">
-            <title>Using configuration to seed ClassMapAutoloader</title>
+        <example xml:id="zend.loader.class-map-autoloader.examples.configuration"><info><title>Using configuration to seed ClassMapAutoloader</title></info>
+            
 
             <para>
                 Often, you will want to configure your <classname>ClassMapAutoloader</classname>.
@@ -353,5 +349,5 @@ $loader = new Zend\Loader\ClassMapAutoloader();
 $loader->registerAutoloadMaps($config);
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

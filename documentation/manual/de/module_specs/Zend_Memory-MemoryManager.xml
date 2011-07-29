@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22762 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.memory.memory-manager">
-    <title>Memory Manager</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.memory.memory-manager"><info><title>Memory Manager</title></info>
+    
 
-    <sect2 id="zend.memory.memory-manager.creation">
-        <title>Erstellen eines Memory Manager</title>
+    <section xml:id="zend.memory.memory-manager.creation"><info><title>Erstellen eines Memory Manager</title></info>
+        
 
         <para>
             Ein neuer Memory Manager (<classname>Zend_Memory_Manager</classname> object)
@@ -35,8 +33,7 @@ $memoryManager = Zend_Memory::factory('File', $backendOptions);
 ]]></programlisting>
 
         <para>
-            <classname>Zend_Memory</classname> verwendet <link
-                linkend="zend.cache.backends"><classname>Zend_Cache Backends</classname></link>
+            <classname>Zend_Memory</classname> verwendet <link linkend="zend.cache.backends"><classname>Zend_Cache Backends</classname></link>
             als Speicheranbieter.
         </para>
 
@@ -59,10 +56,10 @@ $memoryManager = Zend_Memory::factory('None');
         <para>
             Das 'None' Backend benötigt keine Definition von Optionen.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.memory.memory-manager.objects-management">
-        <title>Memory Objekte verwalten</title>
+    <section xml:id="zend.memory.memory-manager.objects-management"><info><title>Memory Objekte verwalten</title></info>
+        
 
         <para>
             Diese Sektion beschreibt die Erstellung und Vernichtung von Objekten im
@@ -70,8 +67,8 @@ $memoryManager = Zend_Memory::factory('None');
             Managers zu kontrollieren.
         </para>
 
-        <sect3 id="zend.memory.memory-manager.objects-management.movable">
-            <title>Erstellung verschiebbarer Objekte</title>
+        <section xml:id="zend.memory.memory-manager.objects-management.movable"><info><title>Erstellung verschiebbarer Objekte</title></info>
+            
 
             <para>
                 Verschiebbare Objekte (Objekte, welche verschoben werden können)
@@ -88,10 +85,10 @@ $memObject = $memoryManager->create($data);
                 die Objekt Werte zu initialisieren. Wenn das <varname>$data</varname>
                 unterdrückt wird, ist der Wert eine leere Zeichenkette.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.memory.memory-manager.objects-management.locked">
-            <title>Erstellen verschlüsselter Objekte</title>
+        <section xml:id="zend.memory.memory-manager.objects-management.locked"><info><title>Erstellen verschlüsselter Objekte</title></info>
+            
 
             <para>
                 Verschlüsselte Objekte (Objekte, welche niemals getauscht werden) können
@@ -108,10 +105,10 @@ $memObject = $memoryManager->createLocked($data);
                 die Objekt Werte zu initialisieren. Wenn das <varname>$data</varname>
                 Argument unterdrückt wird, ist der Wert eine leere Zeichenkette.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.memory.memory-manager.objects-management.destruction">
-            <title>Objekte vernichten</title>
+        <section xml:id="zend.memory.memory-manager.objects-management.destruction"><info><title>Objekte vernichten</title></info>
+            
 
             <para>
                 Memory Objekte werden automatische vernichtet und vom Speicher
@@ -147,14 +144,14 @@ function foo()
             <para>
                 Das gilt für beide, verschiebbare und verschlüsselte Objekte.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.memory.memory-manager.settings">
-        <title>Memory Manager Einstellungen</title>
+    <section xml:id="zend.memory.memory-manager.settings"><info><title>Memory Manager Einstellungen</title></info>
+        
 
-        <sect3 id="zend.memory.memory-manager.settings.memory-limit">
-            <title>Memory Limit</title>
+        <section xml:id="zend.memory.memory-manager.settings.memory-limit"><info><title>Memory Limit</title></info>
+            
 
             <para>
                 Das Memory Limit ist eine Zahl von Bytes die zur Verwendung durch
@@ -187,10 +184,10 @@ $memoryManager->setMemoryLimit($newLimit);    // Memorylimit in Bytes setzen
                 in php.ini oder 'kein Limit' (-1) wenn 'memory_limit' in der
                 php.ini nicht gesetzt ist.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.memory.memory-manager.settings.min-size">
-            <title>MinSize</title>
+        <section xml:id="zend.memory.memory-manager.settings.min-size"><info><title>MinSize</title></info>
+            
 
             <para>
                 MinSize ist die minimalste Größe von Memory Objekten, welche vom
@@ -213,6 +210,6 @@ $memoryManager->setMinSize($newSize);        // MinSize Limit in Bytes setzen
             <para>
                 Die standardmäßige Wert für die minimale Größe ist 16KB (16384 bytes).
             </para>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

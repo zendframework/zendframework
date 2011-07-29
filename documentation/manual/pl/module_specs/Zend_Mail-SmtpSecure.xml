@@ -1,5 +1,6 @@
-<sect1 id="zend.mail.smtp-secure">
-  <title>Bezpieczne połączenie SMTP</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-secure"><info><title>Bezpieczne połączenie SMTP</title></info>
+  
 
   <para>Klasa <code>Zend_Mail</code> obsługuje także użycie bezpiecznego
   połączenia SMTP za pomocą protokołu TLS lub SSL. Może to być aktywowane przez
@@ -8,9 +9,9 @@
   Doodatkowo podany może być numer portu, w przeciwnym wypadku użyta będzie
   domyślna wartość -- 25 dla TLS oraz 465 dla SSL.</para>
 
-  <example id="zend.mail.smtp-secure.example-1">
-    <title>Aktywowanie bezpiecznego połączenia w klasie
-    Zend_Mail_Transport_Smtp</title>
+  <example xml:id="zend.mail.smtp-secure.example-1"><info><title>Aktywowanie bezpiecznego połączenia w klasie
+    Zend_Mail_Transport_Smtp</title></info>
+    
 
     <programlisting role="php"><![CDATA[
 $config = array('ssl' => 'tls',
@@ -24,7 +25,7 @@ $mail->setFrom('sender@test.com', 'Nadawca');
 $mail->addTo('recipient@test.com', 'Adresat');
 $mail->setSubject('Testowy temat');
 $mail->send($transport);
-]]>
-    </programlisting>
+
+    ]]></programlisting>
   </example>
-</sect1>
+</section>

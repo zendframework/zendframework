@@ -1,38 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 21243 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.identical">
-    <title>Identical</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.identical"><info><title>Identical</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Identical</classname> vous permet de valider si une valeur donnée
         est identique à une valeur préalablement fournie.
     </para>
 
-    <sect3 id="zend.validate.set.identical.options">
-        <title>Options supportées par Zend_Validate_Identical</title>
+    <section xml:id="zend.validate.set.identical.options"><info><title>Options supportées par Zend_Validate_Identical</title></info>
+        
 
         <para>
             Les options suivantes sont supportées par
-            <classname>Zend_Validate_Identical</classname>&#160;:
+            <classname>Zend_Validate_Identical</classname> :
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis><property>token</property></emphasis>&#160;: spécifie la valeur
+                    <emphasis><property>token</property></emphasis> : spécifie la valeur
                     qui servira à la validation de l'entrée.
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.identical.basic">
-        <title>Utilisation de base</title>
+    <section xml:id="zend.validate.set.identical.basic"><info><title>Utilisation de base</title></info>
+        
 
         <para>
             Pour valider si deux valeurs sont identiques, vous devez d'abord fournir la valeur
-            d'origine. L'exemple montre la validation de deux chaînes&#160;:
+            d'origine. L'exemple montre la validation de deux chaînes :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -53,10 +51,10 @@ if ($valid->isValid($value) {
             <methodname>setToken()</methodname> et <methodname>getToken()</methodname> pour
             récupérer la valeur actuellement paramétrée.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.identical.types">
-        <title>Objets identiques</title>
+    <section xml:id="zend.validate.set.identical.types"><info><title>Objets identiques</title></info>
+        
 
         <para>
             Bien sûr <classname>Zend_Validate_Identical</classname> ne se limite pas à la
@@ -74,8 +72,8 @@ if ($valid->isValid($input)) {
 }
 ]]></programlisting>
 
-        <note>
-            <title>Comparaison de type</title>
+        <note><info><title>Comparaison de type</title></info>
+            
 
             <para>
                 Il est important de noter que le type de la variable sert aussi lors de la
@@ -91,10 +89,10 @@ if ($valid->isValid($input)) {
                 contenir des informations additionnelles.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.identical.configuration">
-        <title>Configuration</title>
+    <section xml:id="zend.validate.set.identical.configuration"><info><title>Configuration</title></info>
+        
 
         <para>
             omme tous les autres validateurs <classname>Zend_Validate_Identical</classname>
@@ -127,7 +125,7 @@ if ($valid->isValid($input)) {
         <para>
             Mais, si vous devez valider un tableau qui contient un seul élément et que cet élément
             est nommé <property>token</property> alors vous devez l'envelopper comme dans l'example
-            ci-dessous&#160;:
+            ci-dessous :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -138,5 +136,5 @@ if ($valid->isValid($input)) {
     // l'entrée est incorrecte
 }
 ]]></programlisting>
-    </sect3>
-</sect2>
+    </section>
+</section>

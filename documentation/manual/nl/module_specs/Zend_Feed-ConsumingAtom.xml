@@ -1,5 +1,6 @@
-<sect1 id="zend.feed.consuming-atom">
-<title>Een Atom Feed lezen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom"><info><title>Een Atom Feed lezen</title></info>
+
 
     <para>
         <code>Zend_Feed_Atom</code> is voor een groot deel identiek aan <code>Zend_Feed_Rss</code>. Het
@@ -10,8 +11,8 @@
         eigenschap in twee elementen: <code>summary</code> en <code>content</code>.
     </para>
 
-    <example>
-        <title>Basisgebruik van een Atom Feed</title>
+    <example><info><title>Basisgebruik van een Atom Feed</title></info>
+        
         <para>
             Lees een Atom feed en beeld de <code>title</code> en <code>summary</code> van elke entry af:
         </para>
@@ -25,7 +26,7 @@ foreach ($feed as $entry) {
     echo 'Samenvatting: ' . $entry->summary() . "\n\n";
 }
 
-?>]]>   </programlisting>
+?>   ]]></programlisting>
     </example>
 
     <para>
@@ -53,8 +54,8 @@ foreach ($feed as $entry) {
                 <para><code>subtitle</code> - De beschrijving van de feed, de tegenhanger van de
                 kanaalbeschrijving in RSS
                 </para>
-                <para><code>author->name()</code> - De naam van de auteur van de feed</para>
-                <para><code>author->email()</code> - Het email adres van de auteur van de feed</para>
+                <para><code>author-&gt;name()</code> - De naam van de auteur van de feed</para>
+                <para><code>author-&gt;email()</code> - Het email adres van de auteur van de feed</para>
             </listitem>
         </itemizedlist>
     </para>
@@ -95,9 +96,6 @@ foreach ($feed as $entry) {
 
     <para>
         Voor meer informatie en een overvloed van bronnen over Atom, ga naar
-        <ulink url="http://www.atomenabled.org/">http://www.atomenabled.org/</ulink>.
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.atomenabled.org/">http://www.atomenabled.org/</link>.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

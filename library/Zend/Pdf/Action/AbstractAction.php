@@ -156,79 +156,60 @@ abstract class AbstractAction extends Pdf\InternalStructure\NavigationTarget imp
         switch ($dictionary->S->value) {
             case 'GoTo':
                 return new GoToAction($dictionary, $processedActions);
-                brake;
 
             case 'GoToR':
                 return new GoToR($dictionary, $processedActions);
-                brake;
 
             case 'GoToE':
                 return new GoToE($dictionary, $processedActions);
-                brake;
 
             case 'Launch':
                 return new Launch($dictionary, $processedActions);
-                brake;
 
             case 'Thread':
                 return new Thread($dictionary, $processedActions);
-                brake;
 
             case 'URI':
                 return new Uri($dictionary, $processedActions);
-                brake;
 
             case 'Sound':
                 return new Sound($dictionary, $processedActions);
-                brake;
 
             case 'Movie':
                 return new Movie($dictionary, $processedActions);
-                brake;
 
             case 'Hide':
                 return new Hide($dictionary, $processedActions);
-                brake;
 
             case 'Named':
                 return new Named($dictionary, $processedActions);
-                brake;
 
             case 'SubmitForm':
                 return new SubmitForm($dictionary, $processedActions);
-                brake;
 
             case 'ResetForm':
                 return new ResetForm($dictionary, $processedActions);
-                brake;
 
             case 'ImportData':
                 return new ImportData($dictionary, $processedActions);
-                brake;
 
             case 'JavaScript':
                 return new JavaScript($dictionary, $processedActions);
-                brake;
 
             case 'SetOCGState':
                 return new SetOCGState($dictionary, $processedActions);
-                brake;
 
             case 'Rendition':
                 return new Rendition($dictionary, $processedActions);
-                brake;
 
             case 'Trans':
                 return new Trans($dictionary, $processedActions);
-                brake;
 
             case 'GoTo3DView':
                 return new GoTo3DView($dictionary, $processedActions);
-                brake;
 
             default:
                 return new Unknown($dictionary, $processedActions);
-                brake;
         }
     }
 

@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.plugins" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Plugins</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.plugins"><info><title>Plugins</title></info>
+    
 
-    <sect2 id="zend.controller.plugins.introduction">
-        <title>Einführung</title>
+    <section xml:id="zend.controller.plugins.introduction"><info><title>Einführung</title></info>
+        
 
         <para>
             Die Controller Architektur beinhaltet ein Pluginsystem, das den Aufruf von Anwendercode
@@ -25,16 +23,14 @@
             <listitem>
                 <para>
                     <methodname>routeStartup()</methodname> wird aufgerufen bevor
-                    <classname>Zend_Controller_Front</classname> <link
-                        linkend="zend.controller.router">den Router</link>
+                    <classname>Zend_Controller_Front</classname> <link linkend="zend.controller.router">den Router</link>
                     aufruft, um den Request anhand der registrierten Routen zu überprüfen.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>routeShutdown()</methodname> wird aufgerufen, nachdem <link
-                        linkend="zend.controller.router">der Router</link>
+                    <methodname>routeShutdown()</methodname> wird aufgerufen, nachdem <link linkend="zend.controller.router">der Router</link>
                     das Routing der Anfrage beendet.
                 </para>
             </listitem>
@@ -77,10 +73,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.plugins.writing">
-        <title>Plugins schreiben</title>
+    <section xml:id="zend.controller.plugins.writing"><info><title>Plugins schreiben</title></info>
+        
 
         <para>
             Um eine Plugin Klasse zu schreiben, bindet man einfach die abstrakte Klasse
@@ -108,10 +104,10 @@ class MyPlugin extends Zend_Controller_Plugin_Abstract
             <methodname>getRequest()</methodname> und <methodname>getResponse()</methodname>
             Methoden zur Verfügung.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.plugins.using">
-        <title>Plugins verwenden</title>
+    <section xml:id="zend.controller.plugins.using"><info><title>Plugins verwenden</title></info>
+        
 
         <para>
             Plugin Klassen werden mit
@@ -190,10 +186,10 @@ $front->dispatch();
                 registrierte Eventmethode enthält, wird diese Methode nicht getriggert.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.plugins.manipulating">
-        <title>Empfangen und Manipulieren von Plugins</title>
+    <section xml:id="zend.controller.plugins.manipulating"><info><title>Empfangen und Manipulieren von Plugins</title></info>
+        
 
         <para>
             Fallweise kann es notwendig sein ein Plugin zu entfernen oder empfangen. Die folgenden
@@ -225,17 +221,17 @@ $front->dispatch();
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.plugins.standard">
-        <title>Plugins die in der Standard Distribution enthalten sind</title>
+    <section xml:id="zend.controller.plugins.standard"><info><title>Plugins die in der Standard Distribution enthalten sind</title></info>
+        
 
         <para>
             Zend Framework enthält ein Plugin für die Fehlerbehandlung in der Standard Distribution.
         </para>
 
-        <xi:include href="Zend_Controller-Plugins-ActionStack.xml" />
-        <xi:include href="Zend_Controller-Plugins-ErrorHandler.xml" />
-        <xi:include href="Zend_Controller-Plugins-PutHandler.xml" />
-    </sect2>
-</sect1>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-Plugins-ActionStack.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-Plugins-ErrorHandler.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-Plugins-PutHandler.xml"/>
+    </section>
+</section>

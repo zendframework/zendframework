@@ -23,10 +23,13 @@
  * @namespace
  */
 namespace ZendTest\Controller\Router\Route;
-use Zend\Controller\Router\Route;
-use Zend\Controller\Router;
-use Zend\Controller;
-use Zend\Config;
+
+use PHPUnit_Framework_TestCase as TestCase,
+    Zend\Config,
+    Zend\Controller,
+    Zend\Controller\Router,
+    Zend\Controller\Router\Route,
+    Zend\Uri;
 
 /**
  * @category   Zend
@@ -37,7 +40,7 @@ use Zend\Config;
  * @group      Zend_Controller
  * @group      Zend_Controller_Router
  */
-class ChainTest extends \PHPUnit_Framework_TestCase
+class ChainTest extends TestCase
 {
 
 
@@ -50,7 +53,7 @@ class ChainTest extends \PHPUnit_Framework_TestCase
 
         $chain = $foo->addChain($bar);
 
-        $this->assertType('Zend\Controller\Router\Route\Chain', $chain);
+        $this->assertInstanceOf('Zend\Controller\Router\Route\Chain', $chain);
     }
 
     public function testChainingMatch()
@@ -204,7 +207,7 @@ class ChainTest extends \PHPUnit_Framework_TestCase
 
         $res = $chain->match(new Request('http://localhost/foo.bar'));
 
-        $this->assertType('array', $res);
+        $this->assertInternalType('array', $res);
 
         $res = $chain->match(new Request('http://localhost/foo/bar'));
         $this->assertEquals(false, $res);
@@ -212,7 +215,7 @@ class ChainTest extends \PHPUnit_Framework_TestCase
         $chain->addChain($baz, ':');
 
         $res = $chain->match(new Request('http://localhost/foo.bar:baz'));
-        $this->assertType('array', $res);
+        $this->assertInternalType('array', $res);
     }
 
     public function testI18nChaining()
@@ -240,7 +243,7 @@ class ChainTest extends \PHPUnit_Framework_TestCase
         $request = new Request('http://foobar.zend.com/bar');
         $res = $chain->match($request);
 
-        $this->assertType('array', $res);
+        $this->assertInternalType('array', $res);
         $this->assertRegexp('#[^a-z0-9]?foobar\.zend\.com/bar/foo/bar#i', $chain->assemble(array('account' => 'foobar', 'foo' => 'bar')));
     }
 
@@ -256,7 +259,7 @@ class ChainTest extends \PHPUnit_Framework_TestCase
         $request = new Request('http://www.zend.com/bar');
         $res = $chain->match($request);
 
-        $this->assertType('array', $res);
+        $this->assertInternalType('array', $res);
         $this->assertRegexp('#[^a-z0-9]?www\.zend\.com/bar$#i', $chain->assemble());
     }
 
@@ -272,7 +275,7 @@ class ChainTest extends \PHPUnit_Framework_TestCase
         $request = new Request('http://www.zend.com/bar');
         $res = $chain->match($request);
 
-        $this->assertType('array', $res);
+        $this->assertInternalType('array', $res);
         $this->assertRegexp('#[^a-z0-9]?www\.zend\.com/bar$#i', $chain->assemble());
     }
 
@@ -288,13 +291,13 @@ class ChainTest extends \PHPUnit_Framework_TestCase
         $request = new Request('http://www.zend.com/user/1');
         $res = $profileChain->match($request);
 
-        $this->assertType('array', $res);
+        $this->assertInternalType('array', $res);
         $this->assertEquals('prof', $res['controller']);
 
         $request = new Request('http://www.zend.com/article/1');
         $res = $articleChain->match($request);
 
-        $this->assertType('array', $res);
+        $this->assertInternalType('array', $res);
         $this->assertEquals('art', $res['controller']);
         $this->assertEquals('art', $res['action']);
     }
@@ -562,10 +565,10 @@ class ChainTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('index', $token->getControllerName());
         $this->assertEquals('index',   $token->getActionName());
 
-        $this->assertType('Zend\Controller\Router\Route\Chain', $router->getRoute('user-profile'));
-        $this->assertType('Zend\Controller\Router\Route\Chain', $router->getRoute('www-imprint'));
-        $this->assertType('Zend\Controller\Router\Route\Chain', $router->getRoute('www-index'));
-        $this->assertType('Zend\Controller\Router\Route\Chain', $router->getRoute('www-index'));
+        $this->assertInstanceOf('Zend\Controller\Router\Route\Chain', $router->getRoute('user-profile'));
+        $this->assertInstanceOf('Zend\Controller\Router\Route\Chain', $router->getRoute('www-imprint'));
+        $this->assertInstanceOf('Zend\Controller\Router\Route\Chain', $router->getRoute('www-index'));
+        $this->assertInstanceOf('Zend\Controller\Router\Route\Chain', $router->getRoute('www-index'));
     }
 
     public function testChainingWorksWithWildcardAndNoParameters()
@@ -642,7 +645,7 @@ class Request extends \Zend\Controller\Request\Http
             $uri = 'http://localhost/foo/bar/baz/2';
         }
 
-        $uri = new \Zend\Uri\Url($uri);
+        $uri = Uri\UriFactory::factory($uri);
         $this->_host = $uri->getHost();
         $this->_port = $uri->getPort();
 

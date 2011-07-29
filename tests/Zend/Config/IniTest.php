@@ -74,9 +74,9 @@ class IniTest extends \PHPUnit_Framework_TestCase
     {
         $config = new Ini($this->_iniFileConfig, 'debug');
 
-        $this->assertType('string', $config->debug);
+        $this->assertInternalType('string', $config->debug);
         $this->assertEquals('1', $config->debug);
-        $this->assertType('string', $config->values->changed);
+        $this->assertInternalType('string', $config->values->changed);
         $this->assertEquals('1', $config->values->changed);
     }
 
@@ -84,11 +84,11 @@ class IniTest extends \PHPUnit_Framework_TestCase
     {
         $config = new Ini($this->_iniFileConfig, 'debug');
 
-        $this->assertType('string', $config->special->no);
+        $this->assertInternalType('string', $config->special->no);
         $this->assertEquals('', $config->special->no);
-        $this->assertType('string', $config->special->null);
+        $this->assertInternalType('string', $config->special->null);
         $this->assertEquals('', $config->special->null);
-        $this->assertType('string', $config->special->false);
+        $this->assertInternalType('string', $config->special->false);
         $this->assertEquals('', $config->special->false);
     }
 
@@ -124,13 +124,19 @@ class IniTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testZF426()
+    /**
+     * @group ZF-426
+     */
+    public function testErrorCreateSubKey()
     {
         $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'Cannot create sub-key for');
         $config = new Ini($this->_iniFileConfig, 'zf426');
     }
 
-    public function testZF413_MultiSections()
+    /**
+     * @group ZF-413
+     */
+    public function testMultiSections()
     {
         $config = new Ini($this->_iniFileAllSectionsConfig, array('staging','other_staging'));
 
@@ -139,14 +145,20 @@ class IniTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testZF413_AllSections()
+    /**
+     * @group ZF-413
+     */
+    public function testAllSections()
     {
         $config = new Ini($this->_iniFileAllSectionsConfig, null);
         $this->assertEquals('otherStaging', $config->other_staging->only_in);
         $this->assertEquals('staging', $config->staging->hostname);
     }
 
-    public function testZF414()
+    /**
+     * @group ZF-414
+     */
+    public function testGetSectionNameAndAreAllSectionsLoaded()
     {
         $config = new Ini($this->_iniFileAllSectionsConfig, null);
         $this->assertEquals(null, $config->getSectionName());
@@ -161,7 +173,10 @@ class IniTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(false, $config->areAllSectionsLoaded());
     }
 
-    public function testZF415()
+    /**
+     * @group ZF-415
+     */
+    public function testErrorCircularInheritance()
     {
         $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'circular inheritance');
         $config = new Ini($this->_iniFileCircularConfig, null);
@@ -171,6 +186,25 @@ class IniTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'Filename is not set');
         $config = new Ini('','');
+    }
+
+    public function testErrorFileNotFound()
+    {
+        try {
+            $file = '/tmp/notFoundFile';
+            $config = new Ini($file);
+            $this->fail('Missing expected exception');
+        } catch (\Zend\Config\Exception\RuntimeException $e) {
+            // read exception stack
+            do {
+                $stack[] = $e;
+            } while ( ($e = $e->getPrevious()) );
+
+            // test two thrown exceptions
+            $this->assertEquals(2, count($stack));
+            $this->assertContains($file, $stack[0]->getMessage());
+            $this->assertContains('parse_ini_file', $stack[1]->getMessage());
+        }
     }
 
     public function testErrorMultipleExensions()
@@ -192,7 +226,33 @@ class IniTest extends \PHPUnit_Framework_TestCase
         $config = new Ini($this->_iniFileConfig,array('all', 'notthere'));
     }
 
-    public function testZF2508NoSections()
+    /**
+     * @group ZF-3196
+     * @group ZF2-13
+     */
+    public function testErrorInvalidIniFile()
+    {
+        try {
+            $config = new Ini($this->_iniFileInvalid);
+            $this->fail('Missing expected exception');
+        } catch (\Zend\Config\Exception\RuntimeException $e) {
+            // read exception stack
+            do {
+                $stack[] = $e;
+            } while ( ($e = $e->getPrevious()) );
+
+            // test three thrown exceptions
+            $this->assertEquals(3, count($stack));
+            $this->assertContains($this->_iniFileInvalid, $stack[0]->getMessage());
+            $this->assertContains('syntax error', $stack[1]->getMessage());
+            $this->assertContains('deprecated', $stack[2]->getMessage());
+        }
+    }
+
+    /**
+     * @group ZF-2508
+     */
+    public function testNoSections()
     {
         $config = new Ini($this->_iniFileNoSectionsConfig);
 
@@ -202,7 +262,10 @@ class IniTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('5', $config->one->three->five);
     }
 
-    public function testZF2843NoSectionNoTree()
+    /**
+     * @group ZF-2843
+     */
+    public function testNoSectionNoTree()
     {
         $filename = __DIR__ . '/_files/zf2843.ini';
         $config = new Ini($filename, null, array('nestSeparator' => '.'));
@@ -211,40 +274,28 @@ class IniTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('jkl', $config->ghi);
     }
 
-    public function testZF3196_InvalidIniFile()
-    {
-        try {
-            $config = new Ini($this->_iniFileInvalid);
-            $this->fail('An expected Zend\Config\Exception has not been raised');
-        } catch (\Zend\Config\Exception\RuntimeException $expected) {
-            $this->assertRegexp('/(Error parsing|syntax error, unexpected)/', $expected->getMessage());
-        }
-
-    }
-    
     /**
      * @group ZF-8159
      */
-    public function testZF8159()
+    public function testLoadMultipleSections()
     {
         $config = new Ini(
             __DIR__ . '/_files/zf8159.ini',
             array('first', 'second')
         );
-        
+
         $this->assertTrue(isset(
            $config->user->login->elements->password
         ));
-        
+
         $this->assertEquals(
             'password',
             $config->user->login->elements->password->type
         );
     }
 
-    /*
+    /**
      * @group ZF-5800
-     *
      */
     public function testArraysOfKeysCreatedUsingAttributesAndKeys()
     {
@@ -254,8 +305,8 @@ class IniTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('1', $config->receiver->{0}->html);
         $this->assertNull($config->receiver->mail);
     }
-    
-    /*
+
+    /**
      * @group ZF-6508
      */
     public function testPreservationOfIntegerKeys()
@@ -263,8 +314,7 @@ class IniTest extends \PHPUnit_Framework_TestCase
         $filename = __DIR__ . '/_files/zf6508.ini';
         $config = new Ini($filename, 'all');
         $this->assertEquals(true, isset($config->{1002}));
-        
+
     }
-    
 
 }

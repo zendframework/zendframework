@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.reflection.reference">
-    <title>Zend_Reflection Reference</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.reflection.reference"><info><title>Zend_Reflection Reference</title></info>
+    
 
     <para>
         The various classes in <classname>Zend_Reflection</classname> mimic the
-        <acronym>API</acronym> of <acronym>PHP</acronym>'s <ulink
-            url="http://php.net/reflection">Reflection <acronym>API</acronym></ulink> - with one
+        <acronym>API</acronym> of <acronym>PHP</acronym>'s <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/reflection">Reflection <acronym>API</acronym></link> - with one
         important difference. <acronym>PHP</acronym>'s Reflection <acronym>API</acronym> does not
         provide introspection into docblock annotation tags, nor into parameter variable
         types or return types.
@@ -39,8 +39,8 @@
         the returned reflection object.
     </para>
 
-    <sect2 id="zend.reflection.reference.docblock">
-        <title>Zend_Reflection_Docblock</title>
+    <section xml:id="zend.reflection.reference.docblock"><info><title>Zend_Reflection_Docblock</title></info>
+        
 
         <para>
             <classname>Zend_Reflection_Docblock</classname> is the heart of
@@ -108,10 +108,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.reflection.reference.docblock-tag">
-        <title>Zend_Reflection_Docblock_Tag</title>
+    <section xml:id="zend.reflection.reference.docblock-tag"><info><title>Zend_Reflection_Docblock_Tag</title></info>
+        
 
         <para>
             <classname>Zend_Reflection_Docblock_Tag</classname> provides reflection for
@@ -146,10 +146,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.reflection.reference.docblock-tag-param">
-        <title>Zend_Reflection_Docblock_Tag_Param</title>
+    <section xml:id="zend.reflection.reference.docblock-tag-param"><info><title>Zend_Reflection_Docblock_Tag_Param</title></info>
+        
 
         <para>
             <classname>Zend_Reflection_Docblock_Tag_Param</classname> is a specialized
@@ -173,10 +173,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.reflection.reference.docblock-tag-return">
-        <title>Zend_Reflection_Docblock_Tag_Return</title>
+    <section xml:id="zend.reflection.reference.docblock-tag-return"><info><title>Zend_Reflection_Docblock_Tag_Return</title></info>
+        
 
         <para>
             Like <classname>Zend_Reflection_Docblock_Tag_Param</classname>,
@@ -194,10 +194,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.reflection.reference.file">
-        <title>Zend_Reflection_File</title>
+    <section xml:id="zend.reflection.reference.file"><info><title>Zend_Reflection_File</title></info>
+        
 
         <para>
             <classname>Zend_Reflection_File</classname> provides introspection into
@@ -266,10 +266,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.reflection.reference.class">
-        <title>Zend_Reflection_Class</title>
+    <section xml:id="zend.reflection.reference.class"><info><title>Zend_Reflection_Class</title></info>
+        
 
         <para>
             <classname>Zend_Reflection_Class</classname> extends
@@ -337,10 +337,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.reflection.reference.extension">
-        <title>Zend_Reflection_Extension</title>
+    <section xml:id="zend.reflection.reference.extension"><info><title>Zend_Reflection_Extension</title></info>
+        
 
         <para>
             <classname>Zend_Reflection_Extension</classname> extends
@@ -366,10 +366,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.reflection.reference.function">
-        <title>Zend_Reflection_Function</title>
+    <section xml:id="zend.reflection.reference.function"><info><title>Zend_Reflection_Function</title></info>
+        
 
         <para>
             <classname>Zend_Reflection_Function</classname> adds a method for retrieving
@@ -402,10 +402,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.reflection.reference.method">
-        <title>Zend_Reflection_Method</title>
+    <section xml:id="zend.reflection.reference.method"><info><title>Zend_Reflection_Method</title></info>
+        
 
         <para>
             <classname>Zend_Reflection_Method</classname> mirrors
@@ -422,10 +422,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.reflection.reference.parameter">
-        <title>Zend_Reflection_Parameter</title>
+    <section xml:id="zend.reflection.reference.parameter"><info><title>Zend_Reflection_Parameter</title></info>
+        
 
         <para>
             <classname>Zend_Reflection_Parameter</classname> adds a method for retrieving
@@ -464,10 +464,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.reflection.reference.property">
-        <title>Zend_Reflection_Property</title>
+    <section xml:id="zend.reflection.reference.property"><info><title>Zend_Reflection_Property</title></info>
+        
 
         <para>
             <classname>Zend_Reflection_Property</classname> overrides a single method in
@@ -483,5 +483,5 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

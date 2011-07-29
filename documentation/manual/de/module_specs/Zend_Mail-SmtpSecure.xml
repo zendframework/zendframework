@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20819 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.smtp-secure">
-    <title>SMTP Übertragungen sichern</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-secure"><info><title>SMTP Übertragungen sichern</title></info>
+    
 
     <para>
         <classname>Zend_Mail</classname> unterstützt die Verwendung von TLS oder
@@ -13,8 +11,8 @@
         standardmäßig 25 für TLS oder 465 für <acronym>SSL</acronym>.
     </para>
 
-    <example id="zend.mail.smtp-secure.example-1">
-        <title>Aktivieren einer sicheren Verbindung innerhalb von Zend_Mail_Transport_Smtp</title>
+    <example xml:id="zend.mail.smtp-secure.example-1"><info><title>Aktivieren einer sicheren Verbindung innerhalb von Zend_Mail_Transport_Smtp</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $config = array('ssl' => 'tls',
@@ -30,4 +28,4 @@ $mail->setSubject('TestBetreff');
 $mail->send($transport);
 ]]></programlisting>
     </example>
-</sect1>
+</section>

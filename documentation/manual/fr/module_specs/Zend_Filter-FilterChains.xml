@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21123 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.filter.filter_chains">
-    <title>Chaînes de filtrage</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.filter_chains"><info><title>Chaînes de filtrage</title></info>
+    
 
     <para>
         Souvent, de multiples filtres doivent être appliqués à une valeur dans un ordre
@@ -10,7 +8,7 @@
         être en minuscule et composé uniquement de caractères alphabétiques.
         <classname>Zend_Filter</classname> fournit un moyen simple permettant de chaîner des
         filtres. Le code suivant illustre comment chaîner deux filtres pour l'identifiant
-        soumis&#160;:
+        soumis :
         <programlisting language="php"><![CDATA[
 // Création d'une chaine de filtrage et ajout de filtres à celle-ci
 $filtreChaine = new Zend_Filter();
@@ -31,8 +29,8 @@ $identifiant = $filtreChaine->filter($_POST['identifiant']);
         comme chaîne de filtrage.
     </para>
 
-    <sect2 id="zend.filter.filter_chains.order">
-        <title>Changing filter chain order</title>
+    <section xml:id="zend.filter.filter_chains.order"><info><title>Changing filter chain order</title></info>
+        
 
         <para>
             Since 1.10, the <classname>Zend_Filter</classname> chain also
@@ -54,5 +52,5 @@ $filterChain->prependFilter(new Zend_Filter_Alpha());
 // Filter the username
 $username = $filterChain->filter($_POST['username']);
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

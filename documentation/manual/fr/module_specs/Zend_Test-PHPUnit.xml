@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20807 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.test.phpunit" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Zend_Test_PHPUnit</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit"><info><title>Zend_Test_PHPUnit</title></info>
+    
 
     <para>
         <classname>Zend_Test_PHPUnit</classname> fournit un TestCase pour les applications <acronym>MVC</acronym>
@@ -11,8 +9,8 @@
         suivant.
     </para>
 
-    <example id="zend.test.phpunit.loginexample">
-        <title>Exemple d'un TestCase d'une application de login</title>
+    <example xml:id="zend.test.phpunit.loginexample"><info><title>Exemple d'un TestCase d'une application de login</title></info>
+        
 
         <para>
             L'exemple suivant est un simple test pour un contrôleur
@@ -108,8 +106,8 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         </para>
     </example>
 
-    <xi:include href="Zend_Test-PHPUnit-Bootstrapping.xml" />
-    <xi:include href="Zend_Test-PHPUnit-Testing.xml" />
-    <xi:include href="Zend_Test-PHPUnit-Assertions.xml" />
-    <xi:include href="Zend_Test-PHPUnit-Examples.xml" />
-</sect1>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Test-PHPUnit-Bootstrapping.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Test-PHPUnit-Testing.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Test-PHPUnit-Assertions.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Test-PHPUnit-Examples.xml"/>
+</section>

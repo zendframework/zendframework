@@ -71,41 +71,41 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(!empty($key_pair['private']));
         $this->assertTrue(!empty($key_pair['type_uri']));
     }
-    
+
     public function testGetCertificatePairThrowsExceptionOnMissingKeyId()
     {
         $this->requireMcryptAndOpensslOrSkip();
         $infoCard = new InfoCard\InfoCard();
         $key_id = $infoCard->addCertificatePair($this->sslPrvKey, $this->sslPubKey);
         $infoCard->removeCertificatePair($key_id);
-        
+
         $this->setExpectedException('Zend\InfoCard\Exception\InvalidArgumentException', 'Invalid Certificate Pair ID provided');
         $key_pair = $infoCard->getCertificatePair($key_id);
     }
-    
+
     public function testAddCertificatePairThrowsExceptionOnMissingCertificates()
     {
         $this->requireMcryptAndOpensslOrSkip();
         $infoCard = new InfoCard\InfoCard();
-        
+
         $this->setExpectedException('Zend\InfoCard\Exception\InvalidArgumentException', 'Could not locate the public and private certificate pair files');
         $infoCard->addCertificatePair("I don't exist", "I don't exist");
     }
-    
+
     public function testAddCertificatePairThrowsExceptionOnDuplicateRegistration()
     {
         $this->requireMcryptAndOpensslOrSkip();
         $infoCard = new InfoCard\InfoCard();
         $key_id = $infoCard->addCertificatePair($this->sslPrvKey, $this->sslPubKey, Cipher::ENC_RSA_OAEP_MGF1P, "foo");
-        
+
         $this->setExpectedException('Zend\InfoCard\Exception\InvalidArgumentException', 'Attempted to add previously existing certificate pair');
         $key_id = $infoCard->addCertificatePair($this->sslPrvKey, $this->sslPubKey, Cipher::ENC_RSA_OAEP_MGF1P, "foo");
     }
-    
+
     public function testAddCertificatePairThrowsExceptionOnBadCipher()
     {
         $this->requireMcryptAndOpensslOrSkip();
-        
+
         $this->setExpectedException('Zend\InfoCard\Exception\InvalidArgumentException', 'Invalid Certificate Pair Type specified');
         $infoCard = new InfoCard\InfoCard();
         $infoCard->addCertificatePair($this->sslPrvKey, $this->sslPubKey, "Doesn't Exist", "foo");
@@ -113,10 +113,6 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
 
     public function testStandAloneProcess()
     {
-        if (version_compare(PHP_VERSION, '5.2.0', '<')) {
-            $this->markTestSkipped('DOMDocument::C14N() not available until PHP 5.2.0');
-        }
-
         $this->requireMcryptAndOpensslOrSkip();
         $infoCard = new InfoCard\InfoCard();
 
@@ -129,10 +125,6 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
 
     public function testPlugins()
     {
-        if (version_compare(PHP_VERSION, '5.2.0', '<')) {
-            $this->markTestSkipped('DOMDocument::C14N() not available until PHP 5.2.0');
-        }
-
         $adapter  = new TestAsset\MockAdapter();
 
         $this->requireMcryptAndOpensslOrSkip();
@@ -165,12 +157,8 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
 
     public function testClaims()
     {
-        if (version_compare(PHP_VERSION, '5.2.0', '<')) {
-            $this->markTestSkipped('DOMDocument::C14N() not available until PHP 5.2.0');
-        }
-
         $this->requireMcryptAndOpensslOrSkip();
-        
+
         $infoCard = new InfoCard\InfoCard();
 
         $infoCard->addCertificatePair($this->sslPrvKey, $this->sslPubKey);
@@ -200,25 +188,25 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue(isset($claims->givenname));
     }
-    
+
     public function testClaimsThrowExceptionOnUnset()
     {
-        $this->requireMcryptAndOpensslOrSkip();        
+        $this->requireMcryptAndOpensslOrSkip();
         $infoCard = new InfoCard\InfoCard();
         $infoCard->addCertificatePair($this->sslPrvKey, $this->sslPubKey);
         $claims = $infoCard->process($this->_xmlDocument);
-        
+
         $this->setExpectedException('Zend\InfoCard\Exception\InvalidArgumentException', 'Claim objects are read-only');
         unset($claims->givenname);
     }
-    
+
     public function testClaimsThrowsExceptionOnMutation()
     {
-        $this->requireMcryptAndOpensslOrSkip();        
+        $this->requireMcryptAndOpensslOrSkip();
         $infoCard = new InfoCard\InfoCard();
         $infoCard->addCertificatePair($this->sslPrvKey, $this->sslPubKey);
         $claims = $infoCard->process($this->_xmlDocument);
-        
+
         $this->setExpectedException('Zend\InfoCard\Exception\InvalidArgumentException', 'Claim objects are read-only');
         $claims->givenname = "Test";
     }
@@ -237,22 +225,22 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
         $trans = new \Zend\InfoCard\XML\Security\Transform\TransformChain();
         $this->assertTrue(is_array($trans->getTransformList()));
     }
-    
+
     public function testTransformsThrowsExceptionOnInvalidInput()
     {
         $trans = new \Zend\InfoCard\XML\Security\Transform\TransformChain();
-        
+
         $this->setExpectedException('Zend\InfoCard\XML\Security\Exception\InvalidArgumentException', 'Unknown or Unsupported Transformation Requested');
         $trans->addTransform("foo");
     }
-    
+
     protected function requireMcryptAndOpensslOrSkip()
     {
         if (!extension_loaded('mcrypt') || !extension_loaded('openssl')) {
             $this->markTestSkipped('Extension mcrypt and extension openssl are requred for this test');
         }
     }
-    
+
 }
 
 

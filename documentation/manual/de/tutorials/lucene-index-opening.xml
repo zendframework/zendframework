@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19778 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.lucene.index-opening">
-    <title>Indezes öffnen und erstellen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.index-opening"><info><title>Indezes öffnen und erstellen</title></info>
+    
 
     <para>
         Alle Index Operationen (z.B. Erstellung eines neuen Index, hinzufügen eines Dokuments zum
@@ -10,19 +8,19 @@
         empfangen werden indem eine der folgenden zwei Methoden verwendet wird.
     </para>
 
-    <example id="learning.lucene.index-opening.creation">
-        <title>Lucene Index Erstellung</title>
+    <example xml:id="learning.lucene.index-opening.creation"><info><title>Lucene Index Erstellung</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $index = Zend_Search_Lucene::create($indexPath);
 ]]></programlisting>
     </example>
 
-    <example id="learning.lucene.index-opening.opening">
-        <title>Lucene Index Öffnen</title>
+    <example xml:id="learning.lucene.index-opening.opening"><info><title>Lucene Index Öffnen</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $index = Zend_Search_Lucene::open($indexPath);
 ]]></programlisting>
     </example>
-</sect1>
+</section>

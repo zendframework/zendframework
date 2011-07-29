@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21818 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.feed.consuming-rss">
-    <title>Einen RSS Feed konsumieren</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-rss"><info><title>Einen RSS Feed konsumieren</title></info>
+    
 
     <para>
         Einen <acronym>RSS</acronym> Feed zu lesen, ist so einfach wie das Instanziieren eines
@@ -30,9 +28,9 @@ echo $channel->title();
     <para>
         Beachte die Syntax der Funktion. <classname>Zend_Feed</classname> verwendet die Konvention,
         die Eigenschaften als <acronym>XML</acronym> Objekt zu behandeln, wenn sie durch die
-        "Getter" Syntax für Variablen (<command>$obj->property</command>) angefordert werden, und
+        "Getter" Syntax für Variablen (<command>$obj-&gt;property</command>) angefordert werden, und
         als String zu behandeln, wenn sie durch die Methodensyntax
-        (<command>$obj->property()</command>) angefordert werden. Dies ermöglicht den Zugriff auf
+        (<command>$obj-&gt;property()</command>) angefordert werden. Dies ermöglicht den Zugriff auf
         den kompletten Text jedes individuellen Knotens, während weiterhin der komplette Zugriff
         auf alle Kindelemente erlaubt ist.
     </para>
@@ -180,14 +178,13 @@ if ($item->propname()) {
 ]]></programlisting>
 
     <para>
-        Wenn du stattdessen <command>$item->propname</command> verwendest, wirst du immer ein leeres
+        Wenn du stattdessen <command>$item-&gt;propname</command> verwendest, wirst du immer ein leeres
         Objekt erhalten, das mit <constant>TRUE</constant> evaluiert, so dass deine Prüfung
         fehlschlagen würde.
     </para>
 
     <para>
         Für weitere Informationen ist die offizielle <acronym>RSS</acronym> 2.0 Specification hier
-        verfügbar: <ulink
-            url="http://blogs.law.harvard.edu/tech/rss">http://blogs.law.harvard.edu/tech/rss</ulink>
+        verfügbar: <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://blogs.law.harvard.edu/tech/rss">http://blogs.law.harvard.edu/tech/rss</link>
     </para>
-</sect1>
+</section>

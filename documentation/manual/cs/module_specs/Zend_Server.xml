@@ -1,5 +1,8 @@
-<sect1 id="zend.server.introduction">
-    <title>Úvod</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.server.introduction"><info><title>Úvod</title></info>
+    
     <para>
         Rodina tříd <code>Zend_Server</code> poskytuje funkcionalitu pro různé
         serverové třídy včetně <code>Zend_XmlRpc_Server</code>,
@@ -15,7 +18,4 @@
         a poskytuje data použitelná s metodami <code>getFunctions()</code>
         a<code>loadFunctions()</code> z <code>Zend_Server_Interface</code>
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

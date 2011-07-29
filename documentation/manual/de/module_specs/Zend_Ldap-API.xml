@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20792 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.ldap.api" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>API Übersicht</title>
 
-    <sect2 id="zend.ldap.api.configuration">
-        <title>Konfiguration und Optionen</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api"><info><title>API Übersicht</title></info>
+    
+
+    <section xml:id="zend.ldap.api.configuration"><info><title>Konfiguration und Optionen</title></info>
+        
 
         <para>
             Die <classname>Zend_Ldap</classname> Komponente akzeptiert ein Array von Optionen die
@@ -13,8 +13,8 @@
             <methodname>setOptions()</methodname> Methode. Die erlaubten Optionen sind folgende:
         </para>
 
-        <table id="zend.ldap.api.configuration.table">
-            <title>Zend_Ldap Optionen</title>
+        <table xml:id="zend.ldap.api.configuration.table"><info><title>Zend_Ldap Optionen</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -121,8 +121,7 @@
 
                         <entry>
                             Ein kleiner Integerwert der die Form anzeigt zu der Accountnamen
-                            kanonisiert werden sollen. Siehe auch das Kapitel <link
-                                linkend="zend.ldap.introduction.theory-of-operations.account-name-canonicalization"><emphasis>Kanonisierung
+                            kanonisiert werden sollen. Siehe auch das Kapitel <link linkend="zend.ldap.introduction.theory-of-operations.account-name-canonicalization"><emphasis>Kanonisierung
                                 von Account Namen</emphasis></link> weiter unten.
                         </entry>
                     </row>
@@ -152,9 +151,8 @@
 
                         <entry>
                             Der Suchfilter für <acronym>LDAP</acronym> der für das Suchen von
-                            Accounts verwendet wird. Der String ist ein Ausdruck im Stil von <ulink
-                                url="http://php.net/sprintf">
-                                <methodname>sprintf()</methodname></ulink>
+                            Accounts verwendet wird. Der String ist ein Ausdruck im Stil von <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/sprintf">
+                                <methodname>sprintf()</methodname></link>
                             der ein '<emphasis>%s</emphasis>' enthalten muss um den Benutzernamen
                             zu notieren. Der Standardwert ist
                             '<emphasis>(&amp;(objectClass=user)(sAMAccountName=%s))</emphasis>'
@@ -207,22 +205,22 @@
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.ldap.api.reference">
-        <title>API Referenz</title>
+    <section xml:id="zend.ldap.api.reference"><info><title>API Referenz</title></info>
+        
 
         <note>
             <para>Methodennamen in <emphasis>italic</emphasis> sind statische Methoden.</para>
         </note>
 
-        <xi:include href="Zend_Ldap-API-Ldap.xml" />
-        <xi:include href="Zend_Ldap-API-Ldap-Attribute.xml" />
-        <xi:include href="Zend_Ldap-API-Ldap-Dn.xml" />
-        <xi:include href="Zend_Ldap-API-Ldap-Filter.xml" />
-        <xi:include href="Zend_Ldap-API-Ldap-Node.xml" />
-        <xi:include href="Zend_Ldap-API-Ldap-Node-RootDse.xml" />
-        <xi:include href="Zend_Ldap-API-Ldap-Node-Schema.xml" />
-        <xi:include href="Zend_Ldap-API-Ldap-Ldif-Encoder.xml" />
-    </sect2>
-</sect1>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Ldap-API-Ldap.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Ldap-API-Ldap-Attribute.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Ldap-API-Ldap-Dn.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Ldap-API-Ldap-Filter.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Ldap-API-Ldap-Node.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Ldap-API-Ldap-Node-RootDse.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Ldap-API-Ldap-Node-Schema.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Ldap-API-Ldap-Ldif-Encoder.xml"/>
+    </section>
+</section>

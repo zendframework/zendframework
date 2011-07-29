@@ -411,7 +411,7 @@ class FrameworkRegistry implements Registry
     public function enableRegistryOnObject($object)
     {
         if (!$this->isObjectRegistryEnablable($object)) {
-            throw new Exception\InvalidArgumentException('Object provided is not registry enablable, check first with Zend_Tool_Framework_Registry::isObjectRegistryEnablable()');
+            throw new Exception\InvalidArgumentException('Object provided is not registry enablable, check first with Zend\\Tool\\Framework\\Registry::isObjectRegistryEnablable()');
         }
 
         $object->setRegistry($this);

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20176 -->
-<sect2 id="zend.dojo.form.decorators">
-    <title>Dijit に特有のフォーム・デコレーター</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.form.decorators"><info><title>Dijit に特有のフォーム・デコレーター</title></info>
+    
 
     <para>
         大部分のフォーム要素は Dijit 要素デコレーター
@@ -21,8 +19,8 @@
         それから、情報の重複が起こらないように、これらは他のどの特性からも分離されます。
     </para>
 
-    <sect3 id="zend.dojo.form.decorators.dijitElement">
-        <title>Dijit 要素デコレーター</title>
+    <section xml:id="zend.dojo.form.decorators.dijitElement"><info><title>Dijit 要素デコレーター</title></info>
+        
 
         <para>
             ちょうど <link linkend="zend.form.standardDecorators.viewHelper">View ヘルパ・デコレーター</link>のように、
@@ -47,8 +45,8 @@
             追加オプションなしで、結びつけます。
         </para>
 
-        <example id="zend.dojo.form.decorators.dijitElement.usage">
-            <title>Dijit 要素デコレーターの使用法</title>
+        <example xml:id="zend.dojo.form.decorators.dijitElement.usage"><info><title>Dijit 要素デコレーターの使用法</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $element->setDecorators(array(
@@ -59,10 +57,10 @@ $element->setDecorators(array(
 ));
 ]]></programlisting>
         </example>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.form.decorators.dijitForm">
-        <title>Dijit フォーム・デコレーター</title>
+    <section xml:id="zend.dojo.form.decorators.dijitForm"><info><title>Dijit フォーム・デコレーター</title></info>
+        
 
         <para>
             Dijit フォーム・デコレーターは、
@@ -77,16 +75,15 @@ $element->setDecorators(array(
             <acronym>DOM</acronym> ID が渡される dijit フォーム・ビュー・ヘルパーが必要とすることが主な違いです。
             識別子としてフォーム名を渡すことによって、デコレーターはこれを確実にします。
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.form.decorators.dijitContainer">
-        <title>DijitContainer ベースのデコレーター</title>
+    <section xml:id="zend.dojo.form.decorators.dijitContainer"><info><title>DijitContainer ベースのデコレーター</title></info>
+        
 
         <para>
             <classname>DijitContainer</classname> デコレーターは、実は、
             いろいろな他のデコレーターが由来する抽象クラスです。
-            タイトル・サポートの追加で、それは <link
-                linkend="zend.dojo.form.decorators.dijitElement">Dijit要素</link> の同じ機能を提供します。
+            タイトル・サポートの追加で、それは <link linkend="zend.dojo.form.decorators.dijitElement">Dijit要素</link> の同じ機能を提供します。
             多くのレイアウト dijit はタイトルを要求するか、利用できます;
             利用できるのであれば、 DijitContainer は要素の説明プロパティを利用して、
             渡されるならば、 'legend' もしくは 'title' デコレーター・オプションのどちらかを利用することもできます。
@@ -107,8 +104,8 @@ $element->setDecorators(array(
             <listitem><para>TabContainer</para></listitem>
         </itemizedlist>
 
-        <example id="zend.dojo.form.decorators.dijitContainer.usage">
-            <title>Dijit コンテナ・デコレーター使用法</title>
+        <example xml:id="zend.dojo.form.decorators.dijitContainer.usage"><info><title>Dijit コンテナ・デコレーター使用法</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // フォームで TabContainer を使う:
@@ -133,8 +130,5 @@ $subForm->setDecorators(array(
 ));
 ]]></programlisting>
         </example>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

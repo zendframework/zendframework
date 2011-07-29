@@ -1,5 +1,6 @@
-<sect1 id="zend.pdf.create">
-    <title> 生成和加载 PDF 文档 </title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.create"><info><title> 生成和加载 PDF 文档 </title></info>
+    
     <para>
        <code>Zend_Pdf</code> 类描绘 PDF 文档自己和提供文档一级的功能。
     </para>
@@ -12,8 +13,8 @@
         <code>Zend_Pdf</code> 类也提供两个静态方法来加载 PDF，<code>Zend_Pdf::load()</code> 和 <code>Zend_Pdf::parse()</code>。它们都返回 Zend_Pdf 对象作为结果或如果有错误发生就抛出异常。
     </para>
 
-    <example id="zend.pdf.create.example-1">
-        <title> 生成新的或加载 PDF 文档 </title>
+    <example xml:id="zend.pdf.create.example-1"><info><title> 生成新的或加载 PDF 文档 </title></info>
+        
         <programlisting role="php"><![CDATA[
 ...
 // Create new PDF document.
@@ -25,8 +26,8 @@ $pdf2 = Zend_Pdf::load($fileName);
 // Load PDF document from a string.
 $pdf3 = Zend_Pdf::parse($pdfString);
 ...
-]]>
-      </programlisting>
+
+      ]]></programlisting>
     </example>
 
     <para>
@@ -42,8 +43,8 @@ $pdf3 = Zend_Pdf::parse($pdfString);
     call.
     </para>
 
-    <example id="zend.pdf.create.example-2">
-        <title> 请求 PDF 文档的指定版本 </title>
+    <example xml:id="zend.pdf.create.example-2"><info><title> 请求 PDF 文档的指定版本 </title></info>
+        
         <programlisting role="php"><![CDATA[
 ...
 // Load PDF previouse revision of the document.
@@ -57,12 +58,9 @@ $pdf3 = Zend_Pdf::load($fileName);
 $revisions = $pdf3->revisions();
 $pdf3->rollback($revisions - 1);
 ...
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
 
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

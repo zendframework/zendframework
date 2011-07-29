@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.pdf.pages">
-    <title>Working with Pages</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.pages"><info><title>Working with Pages</title></info>
+    
 
-    <sect2 id="zend.pdf.pages.creation">
-        <title>Page Creation</title>
+    <section xml:id="zend.pdf.pages.creation"><info><title>Page Creation</title></info>
+        
 
         <para>
             The pages in a <acronym>PDF</acronym> document are represented as
@@ -48,8 +47,8 @@
             array:
         </para>
 
-        <example id="zend.pdf.pages.example-1">
-            <title>PDF document pages management</title>
+        <example xml:id="zend.pdf.pages.example-1"><info><title>PDF document pages management</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 ...
@@ -67,18 +66,18 @@ unset($pdf->pages[$id]);
 ...
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.pdf.pages.cloning">
-        <title>Page cloning</title>
+    <section xml:id="zend.pdf.pages.cloning"><info><title>Page cloning</title></info>
+        
 
         <para>
             Existing <acronym>PDF</acronym> page can be duplicated by creating new
             <classname>\Zend\Pdf\Page</classname> object with existing page as a parameter:
         </para>
 
-        <example id="zend.pdf.pages.example-2">
-            <title>Duplicating existing page</title>
+        <example xml:id="zend.pdf.pages.example-2"><info><title>Duplicating existing page</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 ...
@@ -123,8 +122,8 @@ unset($pdf->pages[$templatePageIndex]);
             documents to create new one:
         </para>
 
-        <example id="zend.pdf.pages.example-3">
-            <title>Cloning existing page</title>
+        <example xml:id="zend.pdf.pages.example-3"><info><title>Cloning existing page</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $page1 = clone $pdf1->pages[$templatePageIndex1];
@@ -145,10 +144,10 @@ $pdf->pages[] = $page2;
             will be created for each cloned page): 
         </para>
 
-        <example id="zend.pdf.pages.example-4">
-            <title>
+        <example xml:id="zend.pdf.pages.example-4"><info><title>
                 Cloning existing page using <classname>\Zend\Pdf\Resource\Extractor</classname> class
-            </title>
+            </title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $extractor = new \Zend\Pdf\Resource\Extractor();
@@ -163,8 +162,5 @@ $pdf->pages[] = $page1;
 $pdf->pages[] = $page2;
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

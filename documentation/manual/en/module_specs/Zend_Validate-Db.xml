@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.Db">
-    <title>Db_RecordExists and Db_NoRecordExists</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.Db"><info><title>Db_RecordExists and Db_NoRecordExists</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Db_RecordExists</classname> and
@@ -10,8 +9,8 @@
         value.
     </para>
 
-    <sect3 id="zend.validate.set.db.options">
-        <title>Supported options for Zend_Validate_Db_*</title>
+    <section xml:id="zend.validate.set.db.options"><info><title>Supported options for Zend_Validate_Db_*</title></info>
+        
 
         <para>
             The following options are supported for
@@ -55,10 +54,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.db.basic-usage">
-        <title>Basic usage</title>
+    <section xml:id="zend.validate.db.basic-usage"><info><title>Basic usage</title></info>
+        
 
         <para>
             An example of basic usage of the validators:
@@ -115,10 +114,10 @@ if ($validator->isValid($username)) {
             <varname>$username</varname> in the specified column, then an error
             message is displayed.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.db.excluding-records">
-        <title>Excluding records</title>
+    <section xml:id="zend.validate.db.excluding-records"><info><title>Excluding records</title></info>
+        
 
         <para>
             <classname>Zend_Validate_Db_RecordExists</classname> and
@@ -198,10 +197,10 @@ if ($validator->isValid($username)) {
             to ensure that a record with the 'post_id' has a value
             matching <varname>$category_id</varname>
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.db.database-adapters">
-        <title>Database Adapters</title>
+    <section xml:id="zend.validate.db.database-adapters"><info><title>Database Adapters</title></info>
+        
 
         <para>
             You can also specify an adapter. This will allow you to work with
@@ -218,10 +217,10 @@ $validator = new Zend_Validate_Db_RecordExists(
     )
 );
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.db.database-schemas">
-        <title>Database Schemas</title>
+    <section xml:id="zend.validate.db.database-schemas"><info><title>Database Schemas</title></info>
+        
 
         <para>
             You can specify a schema within your database for adapters such as
@@ -239,5 +238,5 @@ $validator = new Zend_Validate_Db_RecordExists(
     )
 );
 ]]></programlisting>
-    </sect3>
-</sect2>
+    </section>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 15998 -->
-<sect1 id="zend.codegenerator.introduction">
-    <title>導入</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.codegenerator.introduction"><info><title>導入</title></info>
+    
 
     <para>
         <classname>Zend_CodeGenerator</classname>は、
@@ -13,8 +11,8 @@
         JavaScript、設定ファイル、apache vhosts、その他。
     </para>
 
-    <sect2 id="zend.codegenerator.introduction.theory">
-        <title>Theory of Operation</title>
+    <section xml:id="zend.codegenerator.introduction.theory"><info><title>Theory of Operation</title></info>
+        
 
         <para>
             最も代表的な使用例では、単にコード・ジェネレーター・クラスのインスタンスを生成して、
@@ -132,5 +130,5 @@ class World
 
 }
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

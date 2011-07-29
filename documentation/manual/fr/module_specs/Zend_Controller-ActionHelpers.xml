@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.actionhelpers" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Aides d'action (Helper)</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers"><info><title>Aides d'action (Helper)</title></info>
+    
 
-    <sect2 id="zend.controller.actionhelper.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.controller.actionhelper.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             Les aides d'action permettent aux développeurs d'injecter, en cours d'exécution
@@ -27,10 +25,10 @@
             (<methodname>init()</methodname>). Pour mieux comprendre ceci, reportez vous à la section
             d'utilisation ci-dessous.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.actionhelper.initialization">
-        <title>Initialisation des aides</title>
+    <section xml:id="zend.controller.actionhelper.initialization"><info><title>Initialisation des aides</title></info>
+        
 
         <para>
             Une aide peut être initialisée de plusieurs manières différentes, basées sur vos
@@ -40,14 +38,14 @@
         <para>
             Le gestionnaire d'aide est stocké en tant que membre <varname>$_helper</varname> du
             <classname>Zend_Controller_Action</classname> ; utilisez le gestionnaire pour récupérer
-            ou appeler les aides. Les méthodes pour faire ceci incluent&#160;:
+            ou appeler les aides. Les méthodes pour faire ceci incluent :
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
                     L'utilisation explicite de <methodname>getHelper()</methodname>. Passez lui
-                    simplement un nom, et l'objet d'aide est retourné&#160;:
+                    simplement un nom, et l'objet d'aide est retourné :
                 </para>
                 <programlisting language="php"><![CDATA[
 $flashMessenger = $this->_helper->getHelper('FlashMessenger');
@@ -72,7 +70,7 @@ $flashMessenger->addMessage($message);
                     Enfin, la plupart des aides d'action implémente la méthode
                     <methodname>direct()</methodname> qui va appeler une méthode spécifique par défaut dans
                     l'aide. Dans l'exemple de <code>FlashMessenger</code>, ceci appelle
-                    <methodname>addMessage()</methodname>&#160;:
+                    <methodname>addMessage()</methodname> :
                 </para>
                 <programlisting language="php"><![CDATA[
 $message = 'Nous avons fait quelquechose lors de la dernière requête';
@@ -91,10 +89,10 @@ $this->_helper->FlashMessenger($message);
             vous souhaitez fournir une aide au gestionnaire d'aides à utiliser pour une action
             quelconque. L'instanciation se fait comme toute autre classe <acronym>PHP</acronym>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.actionhelper.broker">
-        <title>Le gestionnaire d'aide (Broker)</title>
+    <section xml:id="zend.controller.actionhelper.broker"><info><title>Le gestionnaire d'aide (Broker)</title></info>
+        
 
         <para>
             <classname>Zend_Controller_Action_HelperBroker</classname> gère les détails de
@@ -104,7 +102,7 @@ $this->_helper->FlashMessenger($message);
 
         <para>
             Pour enregistrer une aide dans le gestionnaire, utilisez
-            <code>addHelper</code>&#160;:
+            <code>addHelper</code> :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -113,7 +111,7 @@ Zend_Controller_Action_HelperBroker::addHelper($helper);
 
         <para>
             Bien sûr, instancier et fournir des aides au gestionnaire est coûteux en temps et
-            en ressource donc deux méthodes existent pour automatiser les choses légèrement&#160;:
+            en ressource donc deux méthodes existent pour automatiser les choses légèrement :
             <methodname>addPrefix()</methodname> et <methodname>addPath()</methodname>.
         </para>
 
@@ -161,7 +159,7 @@ Zend_Controller_Action_HelperBroker::addPath('./Plugins/Aides', 'Aide');
         <para>
             Pour déterminer si une aide existe dans le gestionnaire d'aide, utilisez
             <methodname>hasHelper($name)</methodname>, où <varname>$name</varname> est le nom raccourci de l'aide
-            (sans le préfixe)&#160;:
+            (sans le préfixe) :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -206,7 +204,7 @@ $redirector =
         <para>
             Enfin, pour effacer une aide enregistrée du gestionnaire, utilisez
             <methodname>removeHelper($name)</methodname>, où <varname>$name</varname> est le nom raccourci de l'aide
-            (sans le préfixe)&#160;:
+            (sans le préfixe) :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -215,13 +213,13 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
     Zend_Controller_Action_HelperBroker::removeHelper('redirector')
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.actionhelper.stockhelpers">
-        <title>Aides d'action intégrées</title>
+    <section xml:id="zend.controller.actionhelper.stockhelpers"><info><title>Aides d'action intégrées</title></info>
+        
 
         <para>
-            Zend Framework inclue plusieurs aides d'action par défaut&#160;:
+            Zend Framework inclue plusieurs aides d'action par défaut :
             <code>AutoComplete</code> pour des réponses automatiques à des auto-complétions <acronym>AJAX</acronym> ;
             <code>ContextSwitch</code> et <code>AjaxContext</code> pour distribuer des formats de
             réponse alternatifs pour vos actions ; <code>FlashMessenger</code> pour gérer des
@@ -231,23 +229,23 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
             objets de vues dans votre contrôleur et du rendu de ces vues.
         </para>
 
-        <xi:include href="Zend_Controller-ActionHelpers-ActionStack.xml" />
-        <xi:include href="Zend_Controller-ActionHelpers-AutoComplete.xml" />
-        <xi:include href="Zend_Controller-ActionHelpers-ContextSwitch.xml" />
-        <xi:include href="Zend_Controller-ActionHelpers-FlashMessenger.xml" />
-        <xi:include href="Zend_Controller-ActionHelpers-Json.xml" />
-        <xi:include href="Zend_Controller-ActionHelpers-Redirector.xml" />
-        <xi:include href="Zend_Controller-ActionHelpers-ViewRenderer.xml" />
-    </sect2>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-ActionStack.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-AutoComplete.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-ContextSwitch.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-FlashMessenger.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-Json.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-Redirector.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-ViewRenderer.xml"/>
+    </section>
 
-    <sect2 id="zend.controller.actionhelper.writingyourown">
-        <title>Écrire vos propres aides</title>
+    <section xml:id="zend.controller.actionhelper.writingyourown"><info><title>Écrire vos propres aides</title></info>
+        
 
         <para>
             Les aides d'action étendent
             <classname>Zend_Controller_Action_Helper_Abstract</classname>, une classe abstraite qui
             fournit l'interface basique et les fonctionnalités requises par le gestionnaire
-            d'aides. Ceci inclue les méthodes suivantes&#160;:
+            d'aides. Ceci inclue les méthodes suivantes :
         </para>
 
         <itemizedlist>
@@ -261,7 +259,7 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
                 <para>
                     <methodname>init()</methodname>, déclenchée par le gestionnaire d'aides à
                     l'instanciation, peut être utilisée pour déclencher l'initialisation dans
-                    l'aide&#160;; ceci peut être pratique pour remettre dans l'état initial quand de
+                    l'aide ; ceci peut être pratique pour remettre dans l'état initial quand de
                     multiples contrôleurs utilisent la même aide dans des actions
                     enchaînées.
                 </para>
@@ -291,7 +289,7 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
                     portion du nom de la classe qui suit le dernier tiret bas ("_"), ou le nom de
                     la classe entier sinon. Pour exemple, si la classe est nommée
                     <classname>Zend_Controller_Action_Helper_Redirector</classname>, elle retourne
-                    <code>Redirector</code>&#160;; une classe nommée <code>FooMessage</code>
+                    <code>Redirector</code> ; une classe nommée <code>FooMessage</code>
                     retournera <code>FooMessage</code>.
                 </para>
             </listitem>
@@ -303,7 +301,7 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
             gestionnaire, dans le but de faciliter un usage unique de l'aide. Pour exemple, l'aide
             <link linkend="zend.controller.actionhelpers.redirector">Redirector</link>définit
             <methodname>direct()</methodname> comme un alias de <methodname>goto()</methodname>, vous permettant d'utiliser
-            l'aide comme ceci&#160;:
+            l'aide comme ceci :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -322,5 +320,5 @@ $this->_helper->redirector('item', 'view', 'blog', array('id' => 42));
             Une fois que vous avez créé vos propres classes d'aide, vous pouvez en fournir
             l'accès comme décrit dans les sections ci-dessus.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

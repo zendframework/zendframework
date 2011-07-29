@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.ldap.introduction">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.introduction"><info><title>Einführung</title></info>
+    
 
     <para>
         <classname>Zend_Ldap</classname> ist eine Klasse, mit der <acronym>LDAP</acronym>
@@ -10,8 +8,8 @@
         <acronym>LDAP</acronym> Verzeichnis, durchgeführt werden können.
     </para>
 
-    <sect2 id="zend.ldap.introduction.theory-of-operations">
-        <title>Theorie der Verwendung</title>
+    <section xml:id="zend.ldap.introduction.theory-of-operations"><info><title>Theorie der Verwendung</title></info>
+        
 
         <para>
             Diese Komponente besteht aus der Hauptklasse <classname>Zend_Ldap</classname> welche
@@ -95,8 +93,8 @@ echo "$acctname\n";
             in diesem kleinen Code zeigt der aktuell in dieser Klasse vorhanden ist.
         </para>
 
-        <sect3 id="zend.ldap.introduction.theory-of-operations.automatic-username-canonicalization">
-            <title>Automatische Kanonisierung des Benutzernamens beim Binden</title>
+        <section xml:id="zend.ldap.introduction.theory-of-operations.automatic-username-canonicalization"><info><title>Automatische Kanonisierung des Benutzernamens beim Binden</title></info>
+            
 
             <para>
                 Wenn <code>bind()</code> mit einem nicht-DN Benutzernamen aufgerufen wird
@@ -109,8 +107,7 @@ echo "$acctname\n";
             </para>
 
             <para>
-                Dieses Verhalten ist kritisch für <link
-                    linkend="zend.auth.adapter.ldap"><classname>Zend_Auth_Adapter_Ldap</classname></link>,
+                Dieses Verhalten ist kritisch für <link linkend="zend.auth.adapter.ldap"><classname>Zend_Auth_Adapter_Ldap</classname></link>,
                 welches den vom Benutzer angegebenen Benutzernamen direkt an
                 <methodname>bind()</methodname> übergibt.
             </para>
@@ -146,10 +143,10 @@ echo "$acctname\n";
                 dann nochmals mit dem neu erkannten
                 '<command>CN=Alice Baker,OU=Sales,DC=foo,DC=net</command>'.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.ldap.introduction.theory-of-operations.account-name-canonicalization">
-            <title>Kanonisierung des Account Namens</title>
+        <section xml:id="zend.ldap.introduction.theory-of-operations.account-name-canonicalization"><info><title>Kanonisierung des Account Namens</title></info>
+            
 
             <para>
                 Die Optionen <emphasis>accountDomainName</emphasis> und
@@ -160,8 +157,8 @@ echo "$acctname\n";
                 Option spezifiziert ist. Diese Option kann einen der folgenden Werte enthalten:
             </para>
 
-            <table id="zend.ldap.using.theory-of-operation.account-name-canonicalization.table">
-                <title>Optionen für accountCanonicalForm</title>
+            <table xml:id="zend.ldap.using.theory-of-operation.account-name-canonicalization.table"><info><title>Optionen für accountCanonicalForm</title></info>
+                
 
                 <tgroup cols="3">
                     <thead>
@@ -218,10 +215,10 @@ echo "$acctname\n";
                 auf 3 gesetzt ist, wird der resultierende kanonisierte Name
                 <emphasis>EXAMPLE\abaker</emphasis> sein.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.ldap.introduction.theory-of-operations.multi-domain-failover">
-            <title>Multi-Domain Authentifizierung und Failover</title>
+        <section xml:id="zend.ldap.introduction.theory-of-operations.multi-domain-failover"><info><title>Multi-Domain Authentifizierung und Failover</title></info>
+            
 
             <para>
                 Die Komponente <classname>Zend_Ldap</classname> macht von sich aus keinen Versuch
@@ -319,12 +316,11 @@ foreach ($multiOptions as $name => $options) {
             </para>
 
             <para>
-                Der obige Code ist dem Code der in <link
-                    linkend="zend.auth.adapter.ldap"><classname>Zend_Auth_Adapter_Ldap</classname></link>
+                Der obige Code ist dem Code der in <link linkend="zend.auth.adapter.ldap"><classname>Zend_Auth_Adapter_Ldap</classname></link>
                 verwendet wurde sehr ähnlich. Fakt ist, das wir einfach empfehlen den
                 Authentifizierungs Adapter für Multi-Domain und Failover basierte
                 <acronym>LDAP</acronym> Authentifizierung zu verwenden (oder den Code zu kopieren).
             </para>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

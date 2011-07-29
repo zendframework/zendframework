@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.db.table.relationships">
-    <title>Zend_Db_Table Relationships</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table.relationships"><info><title>Zend_Db_Table Relationships</title></info>
+    
 
-    <sect2 id="zend.db.table.relationships.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.db.table.relationships.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             Tables have relationships to each other in a relational database. An entity in one
@@ -16,10 +15,10 @@
             The <classname>Zend_Db_Table_Row</classname> class has methods for querying related rows
             in other tables.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.relationships.defining">
-        <title>Defining Relationships</title>
+    <section xml:id="zend.db.table.relationships.defining"><info><title>Defining Relationships</title></info>
+        
 
         <para>
             Define classes for each of your tables, extending the abstract class
@@ -136,7 +135,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>columns</emphasis> => A string or an array of strings
+                    <emphasis>columns</emphasis> =&gt; A string or an array of strings
                     naming the foreign key column names in the dependent table.
                 </para>
 
@@ -148,7 +147,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <listitem>
                 <para>
-                    <emphasis>refTableClass</emphasis> => The class name of the parent table. Use
+                    <emphasis>refTableClass</emphasis> =&gt; The class name of the parent table. Use
                     the class name, not the physical name of the <acronym>SQL</acronym> table.
                 </para>
 
@@ -164,7 +163,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <listitem>
                 <para>
-                    <emphasis>refColumns</emphasis> => A string or an array of
+                    <emphasis>refColumns</emphasis> =&gt; A string or an array of
                     strings naming the primary key column names in the parent table.
                 </para>
 
@@ -184,7 +183,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <listitem>
                 <para>
-                    <emphasis>onDelete</emphasis> => The rule for an action to
+                    <emphasis>onDelete</emphasis> =&gt; The rule for an action to
                     execute if a row is deleted in the parent table. See
                     <link linkend="zend.db.table.relationships.cascading">this chapter</link> for
                     more information.
@@ -193,17 +192,17 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <listitem>
                 <para>
-                    <emphasis>onUpdate</emphasis> => The rule for an action to
+                    <emphasis>onUpdate</emphasis> =&gt; The rule for an action to
                     execute if values in primary key columns are updated in the parent table. See
                     <link linkend="zend.db.table.relationships.cascading">this chapter</link> for
                     more information.
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.relationships.fetching.dependent">
-        <title>Fetching a Dependent Rowset</title>
+    <section xml:id="zend.db.table.relationships.fetching.dependent"><info><title>Fetching a Dependent Rowset</title></info>
+        
 
         <para>
             If you have a Row object as the result of a query on a parent table, you can fetch rows
@@ -226,8 +225,8 @@ $row->findDependentRowset($table, [$rule]);
             object of that table class.
         </para>
 
-        <example id="zend.db.table.relationships.fetching.dependent.example">
-            <title>Fetching a Dependent Rowset</title>
+        <example xml:id="zend.db.table.relationships.fetching.dependent.example"><info><title>Fetching a Dependent Rowset</title></info>
+            
 
             <para>
                 This example shows getting a Row object from the table <command>Accounts</command>,
@@ -256,8 +255,8 @@ $bugsReportedByUser = $user1234->findDependentRowset('Bugs');
             <command>'Reporter'</command>.
         </para>
 
-        <example id="zend.db.table.relationships.fetching.dependent.example-by">
-            <title>Fetching a Dependent Rowset By a Specific Rule</title>
+        <example xml:id="zend.db.table.relationships.fetching.dependent.example-by"><info><title>Fetching a Dependent Rowset By a Specific Rule</title></info>
+            
 
             <para>
                 This example shows getting a Row object from the table <command>Accounts</command>,
@@ -280,8 +279,8 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs', 'Engineer');
             row's select object.
         </para>
 
-        <example id="zend.db.table.relationships.fetching.dependent.example-by-select">
-            <title>Fetching a Dependent Rowset using a Zend_Db_Table_Select</title>
+        <example xml:id="zend.db.table.relationships.fetching.dependent.example-by-select"><info><title>Fetching a Dependent Rowset using a Zend_Db_Table_Select</title></info>
+            
 
             <para>
                 This example shows getting a Row object from the table
@@ -314,13 +313,13 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
         <itemizedlist>
             <listitem>
                 <para>
-                    <command>$row->find&lt;TableClass&gt;()</command>
+                    <command>$row-&gt;find&lt;TableClass&gt;()</command>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <command>$row->find&lt;TableClass&gt;By&lt;Rule&gt;()</command>
+                    <command>$row-&gt;find&lt;TableClass&gt;By&lt;Rule&gt;()</command>
                 </para>
             </listitem>
         </itemizedlist>
@@ -341,8 +340,8 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
             </para>
         </note>
 
-        <example id="zend.db.table.relationships.fetching.dependent.example-magic">
-            <title>Fetching Dependent Rowsets using the Magic Method</title>
+        <example xml:id="zend.db.table.relationships.fetching.dependent.example-magic"><info><title>Fetching Dependent Rowsets using the Magic Method</title></info>
+            
 
             <para>
                 This example shows finding dependent Rowsets equivalent to those in the previous
@@ -362,10 +361,10 @@ $bugsReportedBy = $user1234->findBugs();
 $bugsAssignedTo = $user1234->findBugsByEngineer();
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.relationships.fetching.parent">
-        <title>Fetching a Parent Row</title>
+    <section xml:id="zend.db.table.relationships.fetching.parent"><info><title>Fetching a Parent Row</title></info>
+        
 
         <para>
             If you have a Row object as the result of a query on a dependent table, you can fetch
@@ -387,8 +386,8 @@ $row->findParentRow($table, [$rule]);
             that table class.
         </para>
 
-        <example id="zend.db.table.relationships.fetching.parent.example">
-            <title>Fetching the Parent Row</title>
+        <example xml:id="zend.db.table.relationships.fetching.parent.example"><info><title>Fetching the Parent Row</title></info>
+            
 
             <para>
                 This example shows getting a Row object from the table <command>Bugs</command> (for
@@ -417,8 +416,8 @@ $reporter = $bug1->findParentRow('Accounts');
             first one that matches the parent table. This is the rule <command>'Reporter'</command>.
         </para>
 
-        <example id="zend.db.table.relationships.fetching.parent.example-by">
-            <title>Fetching a Parent Row By a Specific Rule</title>
+        <example xml:id="zend.db.table.relationships.fetching.parent.example-by"><info><title>Fetching a Parent Row By a Specific Rule</title></info>
+            
 
             <para>
                 This example shows getting a Row object from the table <command>Bugs</command>, and
@@ -446,14 +445,14 @@ $engineer = $bug1->findParentRow('Accounts', 'Engineer');
         <itemizedlist>
             <listitem>
                 <para>
-                    <command>$row->findParent&lt;TableClass&gt;([Zend_Db_Table_Select
+                    <command>$row-&gt;findParent&lt;TableClass&gt;([Zend_Db_Table_Select
                         $select])</command>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <command>$row->findParent&lt;TableClass&gt;By&lt;Rule&gt;([Zend_Db_Table_Select
+                    <command>$row-&gt;findParent&lt;TableClass&gt;By&lt;Rule&gt;([Zend_Db_Table_Select
                        $select])</command>
                 </para>
             </listitem>
@@ -472,8 +471,8 @@ $engineer = $bug1->findParentRow('Accounts', 'Engineer');
             </para>
         </note>
 
-        <example id="zend.db.table.relationships.fetching.parent.example-magic">
-            <title>Fetching the Parent Row using the Magic Method</title>
+        <example xml:id="zend.db.table.relationships.fetching.parent.example-magic"><info><title>Fetching the Parent Row using the Magic Method</title></info>
+            
 
             <para>
                 This example shows finding parent Rows equivalent to those in the previous
@@ -493,10 +492,10 @@ $reporter = $bug1->findParentAccounts();
 $engineer = $bug1->findParentAccountsByEngineer();
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.relationships.fetching.many-to-many">
-        <title>Fetching a Rowset via a Many-to-many Relationship</title>
+    <section xml:id="zend.db.table.relationships.fetching.many-to-many"><info><title>Fetching a Rowset via a Many-to-many Relationship</title></info>
+        
 
         <para>
             If you have a Row object as the result of a query on one table in a many-to-many
@@ -535,8 +534,8 @@ $row->findManyToManyRowset($table,
             table class.
         </para>
 
-        <example id="zend.db.table.relationships.fetching.many-to-many.example">
-            <title>Fetching a Rowset with the Many-to-many Method</title>
+        <example xml:id="zend.db.table.relationships.fetching.many-to-many.example"><info><title>Fetching a Rowset with the Many-to-many Method</title></info>
+            
 
             <para>
                 This example shows getting a Row object from the origin table
@@ -586,8 +585,8 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
             <command>'Product'</command>.
         </para>
 
-        <example id="zend.db.table.relationships.fetching.many-to-many.example-by">
-            <title>Fetching a Rowset with the Many-to-many Method By a Specific Rule</title>
+        <example xml:id="zend.db.table.relationships.fetching.many-to-many.example-by"><info><title>Fetching a Rowset with the Many-to-many Method By a Specific Rule</title></info>
+            
 
             <para>
                 This example shows geting a Row object from the origin table
@@ -617,21 +616,21 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
         <itemizedlist>
             <listitem>
                 <para>
-                    <command>$row->find&lt;TableClass&gt;Via&lt;IntersectionTableClass&gt;
+                    <command>$row-&gt;find&lt;TableClass&gt;Via&lt;IntersectionTableClass&gt;
                         ([Zend_Db_Table_Select $select])</command>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <command>$row->find&lt;TableClass&gt;Via&lt;IntersectionTableClass&gt;By&lt;Rule1&gt;
+                    <command>$row-&gt;find&lt;TableClass&gt;Via&lt;IntersectionTableClass&gt;By&lt;Rule1&gt;
                         ([Zend_Db_Table_Select $select])</command>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <command>$row->find&lt;TableClass&gt;Via&lt;IntersectionTableClass&gt;By&lt;Rule1&gt;And&lt;Rule2&gt;
+                    <command>$row-&gt;find&lt;TableClass&gt;Via&lt;IntersectionTableClass&gt;By&lt;Rule1&gt;And&lt;Rule2&gt;
                         ([Zend_Db_Table_Select $select])</command>
                 </para>
             </listitem>
@@ -653,8 +652,8 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
             </para>
         </note>
 
-        <example id="zend.db.table.relationships.fetching.many-to-many.example-magic">
-            <title>Fetching Rowsets using the Magic Many-to-many Method</title>
+        <example xml:id="zend.db.table.relationships.fetching.many-to-many.example-magic"><info><title>Fetching Rowsets using the Magic Many-to-many Method</title></info>
+            
 
             <para>
                 This example shows finding rows in the destination table of a many-to-many
@@ -673,13 +672,13 @@ $products = $bug1234->findProductsViaBugsProducts();
 $products = $bug1234->findProductsViaBugsProductsByBug();
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.relationships.cascading">
-        <title>Cascading Write Operations</title>
+    <section xml:id="zend.db.table.relationships.cascading"><info><title>Cascading Write Operations</title></info>
+        
 
-        <note>
-            <title>Declare DRI in the database:</title>
+        <note><info><title>Declare DRI in the database:</title></info>
+            
 
             <para>
                 Declaring cascading operations in <classname>Zend_Db_Table</classname> is intended
@@ -714,8 +713,8 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
             parent table.
         </para>
 
-        <example id="zend.db.table.relationships.cascading.example-delete">
-            <title>Example of a Cascading Delete</title>
+        <example xml:id="zend.db.table.relationships.cascading.example-delete"><info><title>Example of a Cascading Delete</title></info>
+            
 
             <para>
                 This example shows deleting a row in the <command>Products</command> table, which is
@@ -757,8 +756,8 @@ $product1234->delete();
             refer to the parent's row are deleted or updated first.
         </para>
 
-        <example id="zend.db.table.relationships.cascading.example-declaration">
-            <title>Example Declaration of Cascading Operations</title>
+        <example xml:id="zend.db.table.relationships.cascading.example-declaration"><info><title>Example Declaration of Cascading Operations</title></info>
+            
 
             <para>
                 In the example below, rows in the <command>Bugs</command> table are automatically
@@ -792,8 +791,8 @@ class BugsProducts extends Zend_Db_Table_Abstract
 ]]></programlisting>
         </example>
 
-        <sect3 id="zend.db.table.relationships.cascading.notes">
-            <title>Notes Regarding Cascading Operations</title>
+        <section xml:id="zend.db.table.relationships.cascading.notes"><info><title>Notes Regarding Cascading Operations</title></info>
+            
 
             <para>
                 <emphasis>Cascading operations invoked by <classname>Zend_Db_Table</classname> are
@@ -858,9 +857,6 @@ class BugsProducts extends Zend_Db_Table_Abstract
                 row to a parent table in one operation, and insert rows to a dependent table in a
                 separate operation.
             </para>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

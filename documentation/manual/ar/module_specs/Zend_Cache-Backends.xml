@@ -1,16 +1,19 @@
-<sect1 id="zend.cache.backends">
-    <title>Zend_Cache backends</title>
+<?xml version="1.0" encoding="utf-8"?>
 
-    <sect2 id="zend.cache.backends.file">
-        <title>Zend_Cache_Backend_File</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.backends"><info><title>Zend_Cache backends</title></info>
+    
+
+    <section xml:id="zend.cache.backends.file"><info><title>Zend_Cache_Backend_File</title></info>
+        
         <para>
             هذا الـ backend يقوم بحفظ الـ cache records فى ملفات (داخل مجلد يتم تحديده).
         </para>
         <para>
            الـ options المتوفرة
         </para>
-        <table>
-            <title>الـ options المتوفرة لـ Zend_Cache_Backend_File</title>
+        <table><info><title>الـ options المتوفرة لـ Zend_Cache_Backend_File</title></info>
+            
             <tgroup cols="4">
                  <thead>
                       <row>
@@ -82,17 +85,17 @@
                   </tbody>
               </tgroup>
           </table>
-    </sect2>
-    <sect2 id="zend.cache.backends.sqlite">
-        <title>Zend_Cache_Backend_Sqlite</title>
+    </section>
+    <section xml:id="zend.cache.backends.sqlite"><info><title>Zend_Cache_Backend_Sqlite</title></info>
+        
         <para>
             هذه الـ backend تقوم بحفظ الـ cache records فى قاعدة بيانات SQLite.
         </para>
         <para>
             الـ options المتوفرة:
         </para>
-        <table>
-            <title>الـ options المتوفرة لـ Zend_Cache_Backend_Sqlite</title>
+        <table><info><title>الـ options المتوفرة لـ Zend_Cache_Backend_Sqlite</title></info>
+            
             <tgroup cols="4">
                  <thead>
                       <row>
@@ -121,22 +124,22 @@
                             (و تجعله أصغر) عند إستدعاء ()clean أو ()delete :
                             و 0 تعنى إيقاف عملية تنظيم الفراغات التلقائية ;
                             1 تعنى تشغيل عملية الإدارة (عند إستدعاء ()delete أو ()clean ) ;
-                            x (integer) > 1  => ستتم عملية تنظيم الفراغات عشوائياً مرة لكل
+                            x (integer) &gt; 1  =&gt; ستتم عملية تنظيم الفراغات عشوائياً مرة لكل
                             x مرة من إستدعاء ()clean أو ()delete .
                           </entry>
                         </row>
                   </tbody>
               </tgroup>
           </table>
-    </sect2>
-    <sect2 id="zend.cache.backends.memcached">
-        <title>Zend_Cache_Backend_Memcached</title>
+    </section>
+    <section xml:id="zend.cache.backends.memcached"><info><title>Zend_Cache_Backend_Memcached</title></info>
+        
         <para>
            هذه الـ backend تقوم بحفظ الـ cache records فى memcached server.
-<ulink url="http://www.danga.com/memcached/">memcached</ulink>
+<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.danga.com/memcached/">memcached</link>
 عبارة عن نظام caching للبيانات فى الذاكرة و يتميز بكفائته العالية.
 لتستخدم هذا الـ backend انت تحتاج memcached daemon و
-<ulink url="http://pecl.php.net/package/memcache">الـ memcache PECL extension</ulink>.
+<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://pecl.php.net/package/memcache">الـ memcache PECL extension</link>.
         </para>
         <para>
             احترس: مع هذا الـ backend الـ tags غير مدعومة الى الأن .
@@ -145,8 +148,8 @@
         <para>
              الـ options المتوفرة :
         </para>
-        <table>
-            <title> الـ options المتوفرة لـ Zend_Cache_Backend_Memcached</title>
+        <table><info><title> الـ options المتوفرة لـ Zend_Cache_Backend_Memcached</title></info>
+            
             <tgroup cols="4">
                  <thead>
                       <row>
@@ -160,12 +163,12 @@
                       <row>
                           <entry><code>servers</code></entry>
                           <entry><code>array</code></entry>
-                          <entry><code>array(array('host' => 'localhost','port' => 11211, 'persistent' => true))</code></entry>
+                          <entry><code>array(array('host' =&gt; 'localhost','port' =&gt; 11211, 'persistent' =&gt; true))</code></entry>
                           <entry>
                               An array of memcached servers ; each memcached server is described by an associative array :
-                              'host' => (string) : اسم الـ memcached server,
-                              'port' => (int) : الـ port الخاص بالـ memcached server,
-                              'persistent' => (bool) : استخدام او عدم استخدام الـ persistant connections مع هذا الـ server.
+                              'host' =&gt; (string) : اسم الـ memcached server,
+                              'port' =&gt; (int) : الـ port الخاص بالـ memcached server,
+                              'persistent' =&gt; (bool) : استخدام او عدم استخدام الـ persistant connections مع هذا الـ server.
                           </entry>
                       </row>
                       <row>
@@ -179,13 +182,13 @@
                   </tbody>
               </tgroup>
           </table>
-    </sect2>
-    <sect2 id="zend.cache.backends.apc">
-        <title>Zend_Cache_Backend_APC</title>
+    </section>
+    <section xml:id="zend.cache.backends.apc"><info><title>Zend_Cache_Backend_APC</title></info>
+        
         <para>
             هذه الـ backend تقوم بحفظ الـ cache records فى ذاكرة مشتركة من خلال الـ extension
 المسمى
-<ulink url="http://pecl.php.net/package/APC">APC</ulink> (Alternative PHP Cache).
+<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://pecl.php.net/package/APC">APC</link> (Alternative PHP Cache).
 (بالطبع ستحتاج هذه الـ extension لتستطيع استخدام هذه الـ backend)
         </para>
         <para>
@@ -195,8 +198,5 @@
         <para>
             لا يوجد options لهذه الـ backend
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

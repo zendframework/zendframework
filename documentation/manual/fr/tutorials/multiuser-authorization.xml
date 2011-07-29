@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.multiuser.authorization">
-    <title>Fabriquer un système de gestion d'autorisations avec Zend Framework</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.multiuser.authorization"><info><title>Fabriquer un système de gestion d'autorisations avec Zend Framework</title></info>
+    
 
-    <sect2 id="learning.multiuser.authorization.intro">
-        <title>Introduction à l'autorisation</title>
+    <section xml:id="learning.multiuser.authorization.intro"><info><title>Introduction à l'autorisation</title></info>
+        
 
         <para>
             Après qu'un utilisateur se soit authentifié, une application peut proposer différentes
@@ -39,10 +37,10 @@
             ces trois entités remarquables, de les associer et de les interroger dans le futur.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="learning.multiuser.authorization.basic-usage">
-        <title>Utilisation de base de Zend_Acl</title>
+    <section xml:id="learning.multiuser.authorization.basic-usage"><info><title>Utilisation de base de Zend_Acl</title></info>
+        
 
 <!-- explain the interaction with a User object, how -->
 
@@ -233,5 +231,5 @@ $acl->allow('publisher', 'blogPost', 'publish');
             pour savoir si l'attribut <property>ownerUserId</property> du billet correspond à
             l'identifiant de l'utilisateur en question.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

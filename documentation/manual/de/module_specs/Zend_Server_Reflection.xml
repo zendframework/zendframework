@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21119 -->
-<!-- Reviewed: 21119 -->
-<sect1 id="zend.server.reflection">
-    <title>Zend_Server_Reflection</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.server.reflection"><info><title>Zend_Server_Reflection</title></info>
+    
 
-    <sect2 id="zend.server.reflection.introduction">
-        <title>Einführung</title>
+    <section xml:id="zend.server.reflection.introduction"><info><title>Einführung</title></info>
+        
 
         <para>
             <classname>Zend_Server_Reflection</classname> stellt einen Standardmechanismus für
@@ -21,10 +19,10 @@
             Normalerweise wird diese Funktionalität nur von Entwicklern von Serverklassen für das
             Framework verwendet.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.server.reflection.usage">
-        <title>Verwendung</title>
+    <section xml:id="zend.server.reflection.usage"><info><title>Verwendung</title></info>
+        
 
         <para>
             Die grundlegende Verwendung ist einfach:
@@ -67,5 +65,5 @@ $reflection->getNamespace();
             <acronym>API</acronym> Documentation beachten, um zu erfahren, welche Methoden für beide
             Klassen verfügbar sind.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

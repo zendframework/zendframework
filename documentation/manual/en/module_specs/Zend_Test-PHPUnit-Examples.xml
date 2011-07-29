@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.test.phpunit.examples">
-    <title>Examples</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.examples"><info><title>Examples</title></info>
+    
 
     <para>
         Knowing how to setup your testing infrastructure and how to make
@@ -9,8 +8,8 @@
         some actual testing scenarios to see how you can leverage them.
     </para>
 
-    <example id="zend.test.phpunit.examples.userController">
-        <title>Testing a UserController</title>
+    <example xml:id="zend.test.phpunit.examples.userController"><info><title>Testing a UserController</title></info>
+        
 
         <para>
             Let's consider a standard task for a website: authenticating and registering users. In
@@ -315,16 +314,12 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
             so, you will probably need some scaffolding to ensure that the
             database is in a pristine, testable configuration at the beginning
             of each test. PHPUnit already provides functionality for doing so;
-            <ulink
-                url="http://www.phpunit.de/manual/3.4/en/database.html">read
-                about it in the PHPUnit documentation</ulink>. We recommend
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.phpunit.de/manual/3.4/en/database.html">read
+                about it in the PHPUnit documentation</link>. We recommend
             using a separate database for testing versus production, and in
             particular recommend using either a SQLite file or in-memory
             database, as both options perform very well, do not require a
             separate server, and can utilize most <acronym>SQL</acronym> syntax.
         </para>
     </example>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

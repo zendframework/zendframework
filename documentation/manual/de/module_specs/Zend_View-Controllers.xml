@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20799 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.view.controllers">
-    <title>Controller Skripte</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.controllers"><info><title>Controller Skripte</title></info>
+    
 
     <para>
         Der Controller ist der Ort, wo du <classname>Zend_View</classname> instanziieren und
@@ -10,8 +8,8 @@
         welches bestimmte Skript für die Ausgabe benutzt werden soll.
     </para>
 
-    <sect2 id="zend.view.controllers.assign">
-        <title>Variablen übergeben</title>
+    <section xml:id="zend.view.controllers.assign"><info><title>Variablen übergeben</title></info>
+        
 
         <para>
             Dein Controller Skript sollte notwendige Variablen an den View übergeben, bevor es die
@@ -70,10 +68,10 @@ $view->assign('a', "Hay");
 $view->assign('b', "Bee");
 $view->assign('c', "Sea");
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.controllers.render">
-        <title>Verarbeitung eines View Skripts</title>
+    <section xml:id="zend.view.controllers.render"><info><title>Verarbeitung eines View Skripts</title></info>
+        
 
         <para>
             Sobald du alle notwendigen Variablen übergeben hast, sollte der Controller dem
@@ -90,15 +88,15 @@ $view->b = "Bee";
 $view->c = "Sea";
 echo $view->render('someView.php');
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.controllers.script-paths">
-        <title>Pfade für View Skripte</title>
+    <section xml:id="zend.view.controllers.script-paths"><info><title>Pfade für View Skripte</title></info>
+        
 
         <para>
             Standardmäßig erwartet <classname>Zend_View</classname>, dass deine View Skripte im
             selben Verzeichnis wie das Conntroller Skript liegen. Wenn dein Controller Skript zum
-            Beispiel im Pfad "/path/to/app/controllers" liegt und es $view->render('someView.php')
+            Beispiel im Pfad "/path/to/app/controllers" liegt und es $view-&gt;render('someView.php')
             aufruft, wird <classname>Zend_View</classname> nach der Datei
             "/path/to/app/controllers/someView.php" schauen.
         </para>
@@ -115,7 +113,7 @@ $view->setScriptPath('/path/to/app/views');
 ]]></programlisting>
 
         <para>
-            Wenn du nun $view->render('someView.php') aufrufst, wird es nach der Datei
+            Wenn du nun $view-&gt;render('someView.php') aufrufst, wird es nach der Datei
             "/path/to/app/views/someView.php" schauen.
         </para>
 
@@ -138,8 +136,8 @@ $view->addScriptPath('/path/to/custom/');
 // im aktuellen Pfad nach der Datei "booklist.php" schauen
 ]]></programlisting>
 
-        <note>
-            <title>Benutze nie Eingaben des Benutzers um den Skriptpfad zu setzen</title>
+        <note><info><title>Benutze nie Eingaben des Benutzers um den Skriptpfad zu setzen</title></info>
+            
 
             <para>
                 <classname>Zend_View</classname> verwendet Skriptpfade um Viewskripte zu eruieren
@@ -165,5 +163,5 @@ $view->render('passwd');
                 kontrolliert werden.
             </para>
         </note>
-    </sect2>
-</sect1>
+    </section>
+</section>

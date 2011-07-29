@@ -400,7 +400,7 @@ class RegexTest extends \PHPUnit_Framework_TestCase
         $config = new \Zend\Config\Config($routeConf);
         $route = Route\Regex::getInstance($config);
 
-        $this->assertType('Zend\Controller\Router\Route\Regex', $route);
+        $this->assertInstanceOf('Zend\Controller\Router\Route\Regex', $route);
 
         $values = $route->match('forum/1');
 

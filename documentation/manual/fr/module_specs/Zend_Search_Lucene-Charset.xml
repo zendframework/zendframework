@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.search.lucene.charset">
-    <title>Jeu de caractères</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.charset"><info><title>Jeu de caractères</title></info>
+    
 
-    <sect2 id="zend.search.lucene.charset.description">
-        <title>Support UTF-8 et caractères sur un octet</title>
+    <section xml:id="zend.search.lucene.charset.description"><info><title>Support UTF-8 et caractères sur un octet</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> utilise l'UTF-8 en interne. Les fichiers
@@ -33,10 +31,10 @@
             <classname>Zend_Search_Lucene</classname>. Les données seront converties automatiquement
             en UTF-8.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.charset.default_analyzer">
-        <title>Analyseur de texte par défaut</title>
+    <section xml:id="zend.search.lucene.charset.default_analyzer"><info><title>Analyseur de texte par défaut</title></info>
+        
 
         <para>
             Cependant, l'analyseur de texte par défaut (aussi utilisé par l'analyseur de
@@ -54,18 +52,18 @@
                 </footnote>
             </para>
 
-        <note>
-            <title></title>
+        <note><info><title/></info>
+            
 
             <para>
                 L'analyseur par défaut isole les chiffres. Utilisez le parseur "Num" si vous
                 voulez que les chiffres soient considérés comme des mots.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.charset.utf_analyzer">
-        <title>Analyseurs de texte compatibles UTF-8</title>
+    <section xml:id="zend.search.lucene.charset.utf_analyzer"><info><title>Analyseurs de texte compatibles UTF-8</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> contient aussi des analyseurs
@@ -84,8 +82,8 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 ]]></programlisting>
             </para>
 
-        <warning>
-            <title></title>
+        <warning><info><title/></info>
+            
 
             <para>
                 Les analyseurs UTF-8 ont été améliorés dans Zend Framework 1.5. Les anciennes
@@ -119,16 +117,14 @@ if (@preg_match('/\pL/u', 'a') == 1) {
 ]]></programlisting></para>
 
         <para>
-            Les analyseurs UTF-8 insensibles à la casse ont aussi besoin de l'extension <ulink
-            url="http://www.php.net/manual/en/ref.mbstring.php">mbstring</ulink> pour être
+            Les analyseurs UTF-8 insensibles à la casse ont aussi besoin de l'extension <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/ref.mbstring.php">mbstring</link> pour être
             activés.
         </para>
 
         <para>
             Si vous voulez les analyseurs UTF-8 insensibles à la casse, mais que vous n'avez
             pas mbstring, normalisez alors vos données avant de les indexer ainsi que vos requêtes
-            avant vos recherches, ceci en les tranformant en casse minuscule : <programlisting
-            role="php"><![CDATA[
+            avant vos recherches, ceci en les tranformant en casse minuscule : <programlisting role="php"><![CDATA[
 // Indexation
 setlocale(LC_CTYPE, 'de_DE.iso-8859-1');
 
@@ -165,5 +161,5 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 
 $hits = $index->find(strtolower($query));
 ]]></programlisting></para>
-        </sect2>
-    </sect1>
+        </section>
+    </section>

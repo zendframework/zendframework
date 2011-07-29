@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.action">
-    <title>Contrôleurs d'action</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.action"><info><title>Contrôleurs d'action</title></info>
+    
 
-    <sect2 id="zend.controller.action.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.controller.action.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_Controller_Action</classname> est une classe abstraite que vous
@@ -24,7 +22,7 @@
             des actions potentiellement valides de votre contrôleur.
         </para>
 
-        <para>Par exemple, considérons une classe définie comme ceci&#160;:</para>
+        <para>Par exemple, considérons une classe définie comme ceci :</para>
 
         <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
@@ -54,15 +52,15 @@ class FooController extends Zend_Controller_Action
             d'ensemble des fonctionnalités du contrôleur d'action.
         </para>
 
-        <note>
-            <title>Comportement par défaut</title>
+        <note><info><title>Comportement par défaut</title></info>
+            
             <para>
                 Par défaut, le <link linkend="zend.controller.front">contrôleur frontal</link>
                 active l'aide d'action
                 <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>.
                 Cette aide s'occupe de l'injection automatique de l'objet de vue dans vos
                 contrôleurs, ainsi que du rendu de cette vue. Vous pouvez la désactiver au sein de
-                vos contrôleurs par l'une ou l'autre des actions suivantes&#160;:
+                vos contrôleurs par l'une ou l'autre des actions suivantes :
             </para>
             <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
@@ -93,7 +91,7 @@ class FooController extends Zend_Controller_Action
             </para>
             <para>
                 Vous pouvez simplement désactiver le rendu pour une vue individuelle grâce au
-                drapeau <emphasis>noRender</emphasis> du <emphasis>ViewRenderer</emphasis>&#160;:
+                drapeau <emphasis>noRender</emphasis> du <emphasis>ViewRenderer</emphasis> :
             </para>
             <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
@@ -116,10 +114,10 @@ class FooController extends Zend_Controller_Action
                 contrôleurs ou actions individuels.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.action.initialization">
-        <title>Initialisation d'objet</title>
+    <section xml:id="zend.controller.action.initialization"><info><title>Initialisation d'objet</title></info>
+        
 
         <para>
             Même si vous pouvez toujours surcharger le constructeur du contrôleur d'action,
@@ -135,7 +133,7 @@ class FooController extends Zend_Controller_Action
             La manière la plus appropriée de personnaliser l'instanciation est d'utiliser la
             méthode <methodname>init()</methodname>, qui est appelée en dernière tâche de
             <methodname>__construct()</methodname>. Par exemple, si vous voulez vous connecter à
-            une base de données à l'instanciation&#160;:
+            une base de données à l'instanciation :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -152,31 +150,31 @@ class FooController extends Zend_Controller_Action
     }
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.action.prepostdispatch">
-        <title>Détournement Pre et Post-Dispatch (Hook)</title>
+    <section xml:id="zend.controller.action.prepostdispatch"><info><title>Détournement Pre et Post-Dispatch (Hook)</title></info>
+        
 
         <para>
             <classname>Zend_Controller_Action</classname> spécifie deux méthodes qui peuvent être
             appelées juste avant et juste après une action, <methodname>preDispatch()</methodname>
             et <methodname>postDispatch()</methodname>. Celles-ci peuvent être pratiques dans
-            plusieurs cas&#160;: vérifier l'authentification et les <acronym>ACL</acronym> avant
+            plusieurs cas : vérifier l'authentification et les <acronym>ACL</acronym> avant
             d'exécuter une action (en appelant <methodname>_forward()</methodname> dans
             <methodname>preDispatch()</methodname>, l'action sera évitée), par
             exemple, ou en plaçant du contenu généré dans une partie du modèle du site
             (<methodname>postDispatch()</methodname>).
         </para>
 
-        <note>
-            <title>Utilisation de init() ou de preDispatch()</title>
+        <note><info><title>Utilisation de init() ou de preDispatch()</title></info>
+            
 
             <para>
                 Dans la <link linkend="zend.controller.action.initialization">section
                     précédente</link>, nous avons introduit la méthode
                 <methodname>init()</methodname>, et dans celle-ci, la méthode
                 <methodname>preDispatch()</methodname>. Quelles sont leurs différences, et quelles
-                actions vont-elles réaliser chacune&#160;?
+                actions vont-elles réaliser chacune ?
             </para>
 
             <para>
@@ -202,10 +200,10 @@ class FooController extends Zend_Controller_Action
                 formalisation des intentions de deux méthodes.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.action.accessors">
-        <title>Accesseurs</title>
+    <section xml:id="zend.controller.action.accessors"><info><title>Accesseurs</title></info>
+        
 
         <para>
             Un certain nombre d'objets et de variables sont enregistrés avec l'objet et chacun
@@ -215,16 +213,16 @@ class FooController extends Zend_Controller_Action
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>Objet Requête</emphasis>&#160;: <methodname>getRequest()</methodname>
+                    <emphasis>Objet Requête</emphasis> : <methodname>getRequest()</methodname>
                     peut être utilisé pour récupérer l'objet de requête utilisé pour appeler
                     l'action.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>Objet Réponse</emphasis>&#160;: <methodname>getResponse()</methodname>
+                    <emphasis>Objet Réponse</emphasis> : <methodname>getResponse()</methodname>
                     peut être utilisé pour récupérer l'objet de réponse assemblant la réponse
-                    finale. Quelques appels typiques peuvent ressembler à ceci&#160;:
+                    finale. Quelques appels typiques peuvent ressembler à ceci :
                 </para>
                 <programlisting language="php"><![CDATA[
 $this->getResponse()->setHeader('Content-Type', 'text/xml');
@@ -233,7 +231,7 @@ $this->getResponse()->appendBody($content);
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>Arguments d'invocation</emphasis>&#160;: le contrôleur frontal peut
+                    <emphasis>Arguments d'invocation</emphasis> : le contrôleur frontal peut
                     transmettre des paramètres au routeur, au distributeur, et au contrôleur
                     d'action. Pour récupérer individuellement ceux-ci utilisez
                     <methodname>getInvokeArg($key)</methodname> ; alternativement, récupérer la
@@ -242,13 +240,13 @@ $this->getResponse()->appendBody($content);
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>Paramètres de requêtes</emphasis>&#160;: l'objet de requête
+                    <emphasis>Paramètres de requêtes</emphasis> : l'objet de requête
                     rassemble les paramètres de requête, comme les paramètres
                     <constant>_GET</constant> ou _<constant>_POST</constant>, ou les
                     paramètres utilisateurs spécifiés dans le chemin d'<acronym>URL</acronym>.
                     Pour récupérer ceux-ci utilisez <methodname>_getParam($key)</methodname> ou
                     <methodname>_getAllParams()</methodname>. Vous pouvez aussi régler ces
-                    paramètres en utilisant <methodname>_setParam()</methodname>&#160;;
+                    paramètres en utilisant <methodname>_setParam()</methodname> ;
                     ceci est pratique quand vous redirigez vers des actions additionnelles.
                 </para>
                 <para>
@@ -260,7 +258,7 @@ $this->getResponse()->appendBody($content);
                         <methodname>_getParam()</methodname> peut prendre un second paramètre
                         optionnel contenant une valeur par défaut à utiliser si le paramètre n'est
                         pas réglé ou qu'il est vide. Utiliser ceci élimine la nécessité d'appeler
-                        <methodname>_hasParam()</methodname> avant de récupérer une valeur&#160;:
+                        <methodname>_hasParam()</methodname> avant de récupérer une valeur :
                     </para>
                     <programlisting language="php"><![CDATA[
 // Utilise une valeur par défaut de 1 si id n'est pas réglé
@@ -276,15 +274,15 @@ if ($this->_hasParam('id') {
                 </note>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.action.viewintegration">
-        <title>Intégration des Vues</title>
+    <section xml:id="zend.controller.action.viewintegration"><info><title>Intégration des Vues</title></info>
+        
 
-        <note id="zend.controller.action.viewintegration.viewrenderer">
-            <title>
+        <note xml:id="zend.controller.action.viewintegration.viewrenderer"><info><title>
                 Par défaut, l'intégration des vues est réalisé via le ViewRenderer
-            </title>
+            </title></info>
+            
             <para>
                 Le contenu de cette section n'est valable que si vous avez explicitement
                 désactivé le
@@ -296,20 +294,20 @@ if ($this->_hasParam('id') {
         <para>
             <classname>Zend_Controller_Action</classname> fournit un mécanisme rudimentaire
             et flexible pour l'intégration des vues. Deux méthodes accomplissent ceci,
-            <methodname>initView()</methodname> et <methodname>render()</methodname>&#160;; la
+            <methodname>initView()</methodname> et <methodname>render()</methodname> ; la
             première méthode charge la propriété publique <varname>$view</varname>, et la dernière
             effectue le rendu d'une vue basé sur l'action courante demandée dans la requête, en
             utilisant la hiérarchie des répertoires pour déterminer le chemin du script.
         </para>
 
-        <sect3 id="zend.controller.action.viewintegration.initview">
-            <title>Initialisation des Vues</title>
+        <section xml:id="zend.controller.action.viewintegration.initview"><info><title>Initialisation des Vues</title></info>
+            
 
             <para>
                 <methodname>initView()</methodname> initialise l'objet Vue.
                 <methodname>render()</methodname> appelle <methodname>initView()</methodname> dans
                 le but de récupérer l'objet de vue, mais il peut être
-                initialisé à tout moment&#160;; par défaut il remplit la propriété
+                initialisé à tout moment ; par défaut il remplit la propriété
                 <varname>$view</varname> avec un objet <classname>Zend_View</classname>, mais toute
                 classe implémentant <classname>Zend_View_Interface</classname> peut être utilisée.
                 Si <varname>$view</varname> est déjà initialisé, il retourne simplement cette
@@ -317,7 +315,7 @@ if ($this->_hasParam('id') {
             </para>
 
             <para>
-                La mise en oeuvre par défaut suppose la structure de répertoire suivante&#160;:
+                La mise en oeuvre par défaut suppose la structure de répertoire suivante :
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -342,12 +340,12 @@ applicationOrModule/
                 ainsi la hiérarchie des scripts de vues.
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.action.viewintegration.render">
-            <title>Effectuer le rendu des Vues</title>
+        <section xml:id="zend.controller.action.viewintegration.render"><info><title>Effectuer le rendu des Vues</title></info>
+            
 
-            <para><methodname>render()</methodname> a la signature suivante&#160;:</para>
+            <para><methodname>render()</methodname> a la signature suivante :</para>
 
             <programlisting language="php"><![CDATA[
 string render(string $action = null,
@@ -364,7 +362,7 @@ string render(string $action = null,
                 <filename>/[controller]/</filename>. Pour surcharger l'utilisation du sous-dossier
                 <filename>/[controller]/</filename>, fournissez la valeur <constant>TRUE</constant>
                 à <varname>$noController</varname>. Enfin, les scripts sont rendus dans l'objet
-                réponse&#160;; si vous souhaitez effectuer le rendu dans un
+                réponse ; si vous souhaitez effectuer le rendu dans un
                 <link linkend="zend.controller.response.namedsegments">segment
                 nommé</link>spécifique de l'objet réponse, fournissez une valeur à
                 <varname>$name</varname>.
@@ -416,24 +414,24 @@ class MonController extends Zend_Controller_Action
     }
 }
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.controller.action.utilmethods">
-        <title>Méthodes utiles</title>
+    <section xml:id="zend.controller.action.utilmethods"><info><title>Méthodes utiles</title></info>
+        
 
         <para>
             En plus de l'accesseur et des méthodes d'intégration de vue,
             <classname>Zend_Controller_Action</classname> possède plusieurs méthodes utiles pour
             exécuter des tâches communes de l'intérieur de vos méthodes d'action (ou de
-            pre-&#160;/&#160;post-dispatch).
+            pre- / post-dispatch).
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
                     <methodname>_forward($action, $controller = null, $module = null, array $params
-                    = null)</methodname>&#160;: exécute une autre action. Si appelé dans
+                    = null)</methodname> : exécute une autre action. Si appelé dans
                     <methodname>preDispatch()</methodname>, la requête courante est évitée en
                     faveur de la nouvelle. Sinon, après que l'action courante ait été exécutée,
                     l'action demandée dans <methodname>_forward()</methodname> sera exécutée à
@@ -442,7 +440,7 @@ class MonController extends Zend_Controller_Action
             </listitem>
             <listitem>
                 <para>
-                    <methodname>_redirect($url, array $options = array())</methodname>&#160;:
+                    <methodname>_redirect($url, array $options = array())</methodname> :
                     redirige vers une autre page. Cette méthode prend un <acronym>URL</acronym>
                     et un jeu d'options optionnel. Par défaut, il exécute une redirection de
                     type <acronym>HTTP</acronym> 302.
@@ -451,7 +449,7 @@ class MonController extends Zend_Controller_Action
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <emphasis></emphasis>&#160;: avec ou sans sortie immédiate. Si
+                            <emphasis/> : avec ou sans sortie immédiate. Si
                             appelée, la méthode fermera proprement toute session ouverte et
                             réalisera la redirection.
                         </para>
@@ -463,7 +461,7 @@ class MonController extends Zend_Controller_Action
                     </listitem>
                     <listitem>
                         <para>
-                            <emphasis>prependBase</emphasis>&#160;: ajoute ou non
+                            <emphasis>prependBase</emphasis> : ajoute ou non
                             l'<acronym>URL</acronym> de base enregistré dans l'objet
                             requête à l'<acronym>URL</acronym> produit.
                         </para>
@@ -475,7 +473,7 @@ class MonController extends Zend_Controller_Action
                     </listitem>
                     <listitem>
                         <para>
-                            <emphasis>code</emphasis>&#160;: fournit le code <acronym>HTTP</acronym>
+                            <emphasis>code</emphasis> : fournit le code <acronym>HTTP</acronym>
                             à utiliser pour la redirection. Par défaut, un <acronym>HTTP</acronym>
                             302 est utilisé ; tout code compris entre 301 et 306 peut être utilisé.
                         </para>
@@ -488,10 +486,10 @@ class MonController extends Zend_Controller_Action
                 </itemizedlist>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.action.subclassing">
-        <title>Sous-classer le contrôleur d'action</title>
+    <section xml:id="zend.controller.action.subclassing"><info><title>Sous-classer le contrôleur d'action</title></info>
+        
 
         <para>
             Par conception, <classname>Zend_Controller_Action</classname> doit être
@@ -507,8 +505,8 @@ class MonController extends Zend_Controller_Action
             peut résoudre une telle redondance.
         </para>
 
-        <example id="zend.controller.action.subclassing.example-call">
-            <title>Comment gérer des actions non-existantes</title>
+        <example xml:id="zend.controller.action.subclassing.example-call"><info><title>Comment gérer des actions non-existantes</title></info>
+            
 
             <para>
                 Si une requête vers un contrôleur est faite en incluant une méthode d'action
@@ -531,7 +529,7 @@ class MonController extends Zend_Controller_Action
             <para>
                 Vous pouvez surcharger cette fonctionnalité si vous souhaitez exécuter
                 d'autres opérations. Par exemple, si vous souhaitez afficher un message d'erreur,
-                vous pouvez écrire quelque chose comme ceci&#160;:
+                vous pouvez écrire quelque chose comme ceci :
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -554,7 +552,7 @@ class MonController extends Zend_Controller_Action
 
             <para>
                 Une autre possibilité est de rediriger vers une page de contrôleur par
-                défaut&#160;:
+                défaut :
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -587,7 +585,7 @@ class MyController extends Zend_Controller_Action
             distribution mentionnées ci-dessus peuvent être surchargées dans le but de
             personnaliser vos contrôleurs. Par exemple, si vous stockez votre objet de vue dans le
             registre, vous pouvez vouloir modifier votre méthode <methodname>initView()</methodname>
-            avec une code comme celui-ci&#160;:
+            avec une code comme celui-ci :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -614,5 +612,5 @@ abstract class Ma_Base_Controller extends Zend_Controller_Action
             flexibilité de ce composant particulier et comment vous pouvez le modifier suivant les
             besoins de votre application.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

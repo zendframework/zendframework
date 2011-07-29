@@ -1,25 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21825 -->
-<sect1 id="zend.mime.part">
-    <title>Zend_Mime_Part</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.part"><info><title>Zend_Mime_Part</title></info>
+    
 
-    <sect2 id="zend.mime.part.introduction">
-        <title>導入</title>
+    <section xml:id="zend.mime.part.introduction"><info><title>導入</title></info>
+        
 
         <para>
             このクラスは、 <acronym>MIME</acronym> メッセージのひとつのパートを表します。
             実際のメッセージの内容に加え、エンコーディングや Content Type、
             そして元のファイル名などの情報も含まれます。
             保存されたデータから文字列を生成するためのメソッドが用意されています。
-            <classname>Zend_Mime_Part</classname> オブジェクトを <link
-            linkend="zend.mime.message"><classname>Zend_Mime_Message</classname></link>
+            <classname>Zend_Mime_Part</classname> オブジェクトを <link linkend="zend.mime.message"><classname>Zend_Mime_Message</classname></link>
             に追加することで、完全なマルチパートメッセージを作成できます。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mime.part.instantiation">
-        <title>インスタンスの作成</title>
+    <section xml:id="zend.mime.part.instantiation"><info><title>インスタンスの作成</title></info>
+        
 
         <para>
             <classname>Zend_Mime_Part</classname> のインスタンスを作成する際には、
@@ -41,10 +38,10 @@ public $boundary;
 public $location;
 public $language;
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mime.part.methods">
-        <title>メッセージパートを文字列にレンダリングするためのメソッド</title>
+    <section xml:id="zend.mime.part.methods"><info><title>メッセージパートを文字列にレンダリングするためのメソッド</title></info>
+        
 
         <para>
             <methodname>getContent()</methodname> は、MimePart
@@ -117,8 +114,5 @@ public $language;
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

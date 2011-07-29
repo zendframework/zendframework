@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21740 -->
-<!-- Reviewed: no -->
-<chapter id="introduction.overview">
-    <title>Übersicht</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="introduction.overview"><info><title>Übersicht</title></info>
+    
 
     <para>
         Zend Framework ist ein Open Source Framework für die Entwicklung von Web Anwendungen
@@ -31,7 +31,7 @@
 
     <para>
         Der prinzipielle Sponsor des Projektes 'Zend Framework' ist
-        <ulink url="http://www.zend.com">Zend Technologies</ulink>, aber viele Firmen haben
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.com">Zend Technologies</link>, aber viele Firmen haben
         Komponenten oder signifikante Features dem Framework beigesteuert. Firmen wie Google,
         Microsoft, und StrikeIron sind eine Partnerschaft mit Zend eingegangen um Interfaces zu
         Web Services anzubieten und andere Technologien welche diese dem Zend Framework Entwicklern
@@ -41,9 +41,7 @@
     <para>
         Zend Framework könnte alle diese Features nicht ausliefern und supporten ohne die Hilfe
         der lebhaften Zend Framework Community. Community Mitglieder, einschließlich Entwicklern,
-        sind selbst erreichbar über <ulink
-            url="http://framework.zend.com/archives">Mailing Listen</ulink>, <ulink
-            url="http://www.zftalk.com">IRC Kanälen</ulink>, und anderen Foren. Welche Frage
+        sind selbst erreichbar über <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/archives">Mailing Listen</link>, <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zftalk.com">IRC Kanälen</link>, und anderen Foren. Welche Frage
         man auch immer über Zend Framework hat, die Community ist immer da um diese zu beantworten.
     </para>
 </chapter>

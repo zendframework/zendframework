@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.view.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_View</classname> is a class for working with the "view" portion of
@@ -27,8 +26,8 @@
         generates the view output.
     </para>
 
-    <sect2 id="zend.view.introduction.controller">
-        <title>Controller Script</title>
+    <section xml:id="zend.view.introduction.controller"><info><title>Controller Script</title></info>
+        
 
         <para>
             As a simple example, let us say your controller has a list
@@ -61,10 +60,10 @@ $view->books = $data;
 // and render a view script called "booklist.php"
 echo $view->render('booklist.php');
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.introduction.view">
-        <title>View Script</title>
+    <section xml:id="zend.view.introduction.view"><info><title>View Script</title></info>
+        
 
         <para>
             Now we need the associated view script, "booklist.php".
@@ -107,10 +106,10 @@ echo $view->render('booklist.php');
             Note how we use the "escape()" method to apply output
             escaping to variables.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.introduction.options">
-        <title>Options</title>
+    <section xml:id="zend.view.introduction.options"><info><title>Options</title></info>
+        
 
         <para>
             <classname>Zend_View</classname> has several options that may be set to
@@ -178,16 +177,15 @@ base/path/
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.introduction.shortTags">
-        <title>Short Tags with View Scripts</title>
+    <section xml:id="zend.view.introduction.shortTags"><info><title>Short Tags with View Scripts</title></info>
+        
 
         <para>
             In our examples, we make use of <acronym>PHP</acronym> long tags:
-            <emphasis>&lt;?php</emphasis>. We also favor the use of <ulink
-                url="http://us.php.net/manual/en/control-structures.alternative-syntax.php">alternate
-                syntax for control structures</ulink>. These are convenient shorthands to use when
+            <emphasis>&lt;?php</emphasis>. We also favor the use of <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://us.php.net/manual/en/control-structures.alternative-syntax.php">alternate
+                syntax for control structures</link>. These are convenient shorthands to use when
             writing view scripts, as they make the constructs more terse, keep statements on single
             lines, and eliminate the need to hunt for brackets within <acronym>HTML</acronym>.
         </para>
@@ -244,8 +242,8 @@ $view->setUseStreamWrapper(true);
             </listitem>
         </itemizedlist>
 
-        <warning>
-            <title>View Stream Wrapper Degrades Performance</title>
+        <warning><info><title>View Stream Wrapper Degrades Performance</title></info>
+            
 
             <para>
                 Usage of the stream wrapper <emphasis>will</emphasis> degrade
@@ -256,10 +254,10 @@ $view->setUseStreamWrapper(true);
                 caching strategy in place.
             </para>
         </warning>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.introduction.accessors">
-        <title>Utility Accessors</title>
+    <section xml:id="zend.view.introduction.accessors"><info><title>Utility Accessors</title></info>
+        
 
         <para>
             Typically, you'll only ever need to call on <methodname>assign()</methodname>,
@@ -326,8 +324,5 @@ $view->setUseStreamWrapper(true);
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

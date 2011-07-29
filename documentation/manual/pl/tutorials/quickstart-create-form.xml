@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21814 -->
-<!-- Reviewed: yes -->
-<sect1 id="learning.quickstart.create-form">
-    <title>Tworzenie formularza</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.create-form"><info><title>Tworzenie formularza</title></info>
+    
 
     <para>
         Aby aplikacja księgi gości była użyteczna należy umieścić w niej formularz
@@ -160,8 +158,8 @@ $this->form->setAction($this->url());
 echo $this->form;
 ]]></programlisting>
 
-    <note>
-        <title>Lepszy wygląd formularzy</title>
+    <note><info><title>Lepszy wygląd formularzy</title></info>
+        
 
         <para>
             Tak powstały formularz nie stanowi wzoru piękna, ale należy pamiętać, iż wygląd
@@ -176,8 +174,8 @@ echo $this->form;
         </para>
     </note>
 
-    <note>
-        <title>Punkt kontrolny</title>
+    <note><info><title>Punkt kontrolny</title></info>
+        
 
         <para>
             Po wejściu pod adres "http://localhost/guestbook/sign" powinien się 
@@ -185,8 +183,7 @@ echo $this->form;
         </para>
 
         <para>
-            <inlinegraphic width="421" scale="100" align="center" valign="middle"
-                fileref="figures/learning.quickstart.create-form.png" format="PNG" />
+            <inlinemediaobject><imageobject><imagedata width="421" scale="100" align="center" valign="middle" fileref="figures/learning.quickstart.create-form.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
     </note>
-</sect1>
+</section>

@@ -25,7 +25,7 @@ namespace Zend\Dojo;
 
 use Zend\Config\Config,
     Zend\Json\Json,
-    Zend\View\ViewEngine;
+    Zend\View\Renderer;
 
 /**
  * Dojo module layer and custom build profile generation support
@@ -91,8 +91,8 @@ class BuildLayer
     protected $_profilePrefixes = array();
 
     /**
-     * Zend_View reference
-     * @var \Zend\View\ViewEngine
+     * Zend\View reference
+     * @var \Zend\View\Renderer
      */
     protected $_view;
 
@@ -138,10 +138,10 @@ class BuildLayer
     /**
      * Set View object
      *
-     * @param  \Zend\View\ViewEngine $view
+     * @param  \Zend\View\Renderer $view
      * @return \Zend\Dojo\BuildLayer
      */
-    public function setView(ViewEngine $view)
+    public function setView(Renderer $view)
     {
         $this->_view = $view;
         return $this;
@@ -183,8 +183,7 @@ class BuildLayer
             if (null === ($view = $this->getView())) {
                 throw new Exception\RuntimeException('View object not registered; cannot retrieve dojo helper');
             }
-            $helper = $view->getHelper('dojo');
-            $this->setDojoHelper($view->dojo());
+            $this->setDojoHelper($view->broker('dojo')->direct());
         }
         return $this->_dojo;
     }

@@ -1,13 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21825 -->
-<sect1 id="zend.mail.introduction">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.introduction"><info><title>導入</title></info>
 
-    <title>導入</title>
+    
 
-    <sect2 id="zend.mail.introduction.getting-started">
+    <section xml:id="zend.mail.introduction.getting-started"><info><title>まずはじめに</title></info>
 
-        <title>まずはじめに</title>
+        
 
         <para>
             <classname>Zend_Mail</classname> は、テキストメールや <acronym>MIME</acronym>
@@ -18,9 +16,9 @@
             を使用してメールを送信できます。
         </para>
 
-        <example id="zend.mail.introduction.example-1">
+        <example xml:id="zend.mail.introduction.example-1"><info><title>Zend_Mail を使用したシンプルなメール送信</title></info>
 
-            <title>Zend_Mail を使用したシンプルなメール送信</title>
+            
 
             <para>
                 受信者、表題、本文および送信者を指定しただけの単純なメールです。
@@ -39,8 +37,8 @@ $mail->send();
 
         </example>
 
-        <note>
-            <title>最低限の定義</title>
+        <note><info><title>最低限の定義</title></info>
+            
 
             <para>
                 <classname>Zend_Mail</classname> でメールを送信するには、
@@ -78,19 +76,17 @@ $mail->setBodyText('This is the text of the mail.')
     ->send();
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mail.introduction.sendmail">
+    <section xml:id="zend.mail.introduction.sendmail"><info><title>デフォルトの sendmail トランスポートの設定</title></info>
 
-        <title>デフォルトの sendmail トランスポートの設定</title>
+        
 
         <para>
             <classname>Zend_Mail</classname> がデフォルトで使用するのは
             <classname>Zend_Mail_Transport_Sendmail</classname> です。これは、単に
-            <acronym>PHP</acronym> の <ulink
-            url="http://php.net/mail"><methodname>mail()</methodname></ulink>
-            関数をラップしただけのものです。 <ulink
-            url="http://php.net/mail"><methodname>mail()</methodname></ulink>
+            <acronym>PHP</acronym> の <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mail"><methodname>mail()</methodname></link>
+            関数をラップしただけのものです。 <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mail"><methodname>mail()</methodname></link>
             関数に追加のパラメータを渡したい場合は、
             新しいインスタンスを作成する際のコンストラクタにパラメータを渡します。
             新しく作成したインスタンスは、<classname>Zend_Mail</classname>
@@ -99,12 +95,12 @@ $mail->setBodyText('This is the text of the mail.')
             メソッドに渡すこともできます。
         </para>
 
-        <example id="zend.mail.introduction.sendmail.example-1">
+        <example xml:id="zend.mail.introduction.sendmail.example-1"><info><title>Zend_Mail_Transport_Sendmail トランスポートへの追加パラメータの渡し方</title></info>
 
-            <title>Zend_Mail_Transport_Sendmail トランスポートへの追加パラメータの渡し方</title>
+            
 
             <para>
-                この例は、<ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink>
+                この例は、<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mail"><methodname>mail()</methodname></link>
                 関数の Return-Path を変更する方法を示すものです。
             </para>
 
@@ -122,17 +118,17 @@ $mail->send();
 
         </example>
 
-        <note>
-            <title>セーフモード時の制限</title>
+        <note><info><title>セーフモード時の制限</title></info>
+            
             <para>
                 <acronym>PHP</acronym> をセーフモードで実行している場合、オプションの追加パラメータを指定すると
-                <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink>
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mail"><methodname>mail()</methodname></link>
                 関数の実行に失敗する可能性があります。
             </para>
         </note>
 
-        <warning>
-            <title>Sendmail トランスポートと Windows</title>
+        <warning><info><title>Sendmail トランスポートと Windows</title></info>
+            
 
             <para>
                 <acronym>PHP</acronym> マニュアルでは、<methodname>mail()</methodname>関数は Windows と *nix ベースのシステムとでは、
@@ -149,9 +145,6 @@ $mail->send();
             </para>
         </warning>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

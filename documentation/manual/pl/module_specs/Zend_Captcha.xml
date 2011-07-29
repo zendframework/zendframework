@@ -1,8 +1,11 @@
-<sect1 id="zend.captcha.introduction">
-    <title>Wprowadzenie</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.captcha.introduction"><info><title>Wprowadzenie</title></info>
+    
 
     <para>
-        <ulink url="http://en.wikipedia.org/wiki/Captcha">CAPTCHA</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Captcha">CAPTCHA</link>
         oznacza "Completely Automated Public Turing test to tell Computers and Humans
         Apart;" elementy captcha są używane w celu upewnienia się, że wysłane
         informacje zostały wpisane przez człowieka, a nie przez jakiś
@@ -18,4 +21,4 @@
         ma na celu zapewnienie wielu backendów które mogą być wykorzystane jako osobne
         komponenty lub w połączeniu z komponentem <classname>Zend_Form</classname>.
     </para>
-</sect1>
+</section>

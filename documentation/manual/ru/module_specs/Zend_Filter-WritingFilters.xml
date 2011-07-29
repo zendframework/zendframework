@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.filter.writing_filters">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.writing_filters"><info><title>Написание фильтров</title></info>
 
-    <title>Написание фильтров</title>
+    
 
     <para>
         <classname>Zend_Filter</classname> предоставляет набор наиболее часто
@@ -46,7 +45,4 @@ $filterChain->addFilter(new MyFilter());
 
     </para>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

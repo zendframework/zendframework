@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21992 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.character-sets">
-    <title>Jeux de caractères</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.character-sets"><info><title>Jeux de caractères</title></info>
+    
 
     <para>
         <classname>Zend_Mail</classname> ne recherche pas le jeu de caractères des parties de
@@ -13,8 +11,8 @@
         caractères différent peut-être définit pour chaque partie.
     </para>
 
-    <note>
-        <title>Seulement au format texte</title>
+    <note><info><title>Seulement au format texte</title></info>
+        
 
         <para>
             Les jeux de caractères ne s'appliquent que pour les parties du message au format
@@ -22,8 +20,8 @@
         </para>
     </note>
 
-    <example id="zend.mail.character-sets.cjk">
-        <title>Usage in CJK languages</title>
+    <example xml:id="zend.mail.character-sets.cjk"><info><title>Usage in CJK languages</title></info>
+        
 
         <para>
             The following example is how to use <classname>Zend_Mail</classname> in Japanese. This is one of
@@ -50,4 +48,4 @@ $mail->setSubject(myConvert('TestSubject'));
 $mail->send();
 ]]></programlisting>
     </example>
-</sect1>
+</section>

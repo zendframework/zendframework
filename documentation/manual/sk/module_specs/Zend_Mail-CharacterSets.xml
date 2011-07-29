@@ -1,5 +1,8 @@
-<sect1 id="zend.mail.character-sets">
-    <title>Znakové sady</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.character-sets"><info><title>Znakové sady</title></info>
+    
     <para>
         Trieda <code>Zend_Mail</code> nekontroluje správne nastavenie znakovej sady v jednotlivých častiach
         e-mailu. Pri vytváraní inštancie <code>Zend_Mail</code> je možné nastaviť inú znakovú sadu ako
@@ -8,13 +11,10 @@
         znakovú sadu.
     </para>
 
-    <note>
-        <title>Iba pre textový obsah</title>
+    <note><info><title>Iba pre textový obsah</title></info>
+        
         <para>
             Nastavenie znakovej sady je platné iba pre časti ktoré sú textové.
         </para>
     </note>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

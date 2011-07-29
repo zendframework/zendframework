@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 17987 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.dojo.introduction">
-    <title>Introducción</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.introduction"><info><title>Introducción</title></info>
+    
 
     <para>
         Zend Framework trae incorporado
-        <ulink url="http://dojotoolkit.org">Dojo Toolkit</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org">Dojo Toolkit</link>
         para brindar apoyo out-of-the-box al desarrollo de aplicaciones "ricas de internet". Los
         puntos de integración con Dojo incluyen:
     </para>
@@ -51,4 +51,4 @@
         (Zend Framework apoya tanto el AOL CDN oficial así como el
         Google CDN).
     </para>
-</sect1>
+</section>

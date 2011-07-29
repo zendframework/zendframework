@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 19807 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.lucene.intro">
-    <title>Introduction à Zend_Search_Lucene</title>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.intro"><info><title>Introduction à Zend_Search_Lucene</title></info>
+    
     <para>
         Le composant <classname>Zend_Search_Lucene</classname> est prévu pour fournir une
         solution de recherche full-text prête à l'emploi. Il ne nécessite aucunes extensions
@@ -14,8 +14,7 @@
     </para>
     <para>
         <classname>Zend_Search_Lucene</classname> est un portage <acronym>PHP</acronym> du
-        moteur de recherche full-text open source populaire connu comme Apache Lucene. Voir <ulink
-            url="http://lucene.apache.org">http://lucene.apache.org/</ulink> pour plus de détails.
+        moteur de recherche full-text open source populaire connu comme Apache Lucene. Voir <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://lucene.apache.org">http://lucene.apache.org/</link> pour plus de détails.
     </para>
     <para>
         L'information doit être indexée pour être disponible à la recherche.
@@ -41,8 +40,8 @@
         Il n'est pas sensible à la case, et saute les nombres. Utilisez d'autres analyseurs ou
         créez votre propre analyseur si vous avez besoin de changer ce comportement.
     </para>
-    <note>
-        <title>Utilisation des analyseurs durant l'indexation et la recherche</title>
+    <note><info><title>Utilisation des analyseurs durant l'indexation et la recherche</title></info>
+        
         <para>
             Note importante !  Les requêtes de recherches sont aussi segmentées en utilisant
             "l'analyseur courant", ainsi le même analyseur doit être défini par défaut durant
@@ -93,4 +92,4 @@
         l'indexation d'un autre. Le même principe s'applique au stockage, à la segmentation,
         ou traitement de valeur de champ comme chaîne binaire.
     </para>
-</sect1>
+</section>

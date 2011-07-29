@@ -1,23 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 20763 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.auth.adapter.digest">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.digest"><info><title>Autenticación "Digest"</title></info>
 
-    <title>Autenticación "Digest"</title>
+    
 
-    <sect2 id="zend.auth.adapter.digest.introduction">
+    <section xml:id="zend.auth.adapter.digest.introduction"><info><title>Introducción</title></info>
 
-        <title>Introducción</title>
+        
 
         <para>
             La
-            <ulink url="http://en.wikipedia.org/wiki/Digest_access_authentication">Autenticación
-                "Digest"</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Digest_access_authentication">Autenticación
+                "Digest"</link>
             es un método de la autenticación
             <acronym>HTTP</acronym>
             que mejora la
-            <ulink url="http://en.wikipedia.org/wiki/Basic_authentication_scheme">Autenticación
-                Básica</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Basic_authentication_scheme">Autenticación
+                Básica</link>
             proporcionando una manera de
             autenticar sin tener que transmitir la contraseña de manera
             clara a
@@ -71,11 +69,11 @@
 someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.digest.specifics">
+    <section xml:id="zend.auth.adapter.digest.specifics"><info><title>Detalles Específicos</title></info>
 
-        <title>Detalles Específicos</title>
+        
 
         <para>
             El adaptador de autenticación "Digest",
@@ -108,11 +106,11 @@ someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
             .
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.digest.identity">
+    <section xml:id="zend.auth.adapter.digest.identity"><info><title>Identidad</title></info>
 
-        <title>Identidad</title>
+        
 
         <para>
             El adaptador de autenticación "Digest" devuelve un objeto
@@ -151,6 +149,6 @@ Array
 */
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-</sect1>
+</section>

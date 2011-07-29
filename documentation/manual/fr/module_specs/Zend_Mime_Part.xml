@@ -1,25 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.mime.part">
-    <title>Zend_Mime_Part</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.part"><info><title>Zend_Mime_Part</title></info>
+    
 
-    <sect2 id="zend.mime.part.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.mime.part.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             Cette classe représente une seule partie d'un message <acronym>MIME</acronym>. Elle contient le
             contenu actuel de la partie du message ainsi que des informations sur son encodage, le
             type de contenu ("content-type") et le nom de fichier original. Elle fournie une méthode
             pour générer une chaîne de caractères à partir des données stockées. Les objets
-            <classname>Zend_Mime_Part</classname> peuvent-être ajoutés à <link
-            linkend="zend.mime.message"><classname>Zend_Mime_Message</classname></link> pour
+            <classname>Zend_Mime_Part</classname> peuvent-être ajoutés à <link linkend="zend.mime.message"><classname>Zend_Mime_Message</classname></link> pour
             assembler un message multipart complet.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mime.part.instantiation">
-        <title>Instanciation</title>
+    <section xml:id="zend.mime.part.instantiation"><info><title>Instanciation</title></info>
+        
 
         <para>
             <classname>Zend_Mime_Part</classname> est instanciée avec une chaîne de caractères
@@ -41,10 +38,10 @@ public $boundary;
 public $location;
 public $language;
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mime.part.methods">
-        <title>Méthodes pour retourner la partie du message en une chaîne de caractères</title>
+    <section xml:id="zend.mime.part.methods"><info><title>Méthodes pour retourner la partie du message en une chaîne de caractères</title></info>
+        
 
         <para>
             <methodname>getContent()</methodname> retourne le contenu encodé de MimePart en une chaîne de
@@ -105,5 +102,5 @@ public $language;
                 </listitem>
                 </itemizedlist>
             </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

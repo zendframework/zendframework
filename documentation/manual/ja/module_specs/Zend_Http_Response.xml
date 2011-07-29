@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20779 -->
-<sect1 id="zend.http.response">
-    <title>Zend_Http_Response</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.response"><info><title>Zend_Http_Response</title></info>
+    
 
-    <sect2 id="zend.http.response.introduction">
-        <title>導入</title>
+    <section xml:id="zend.http.response.introduction"><info><title>導入</title></info>
+        
         <para>
             <classname>Zend_Http_Response</classname> は、<acronym>HTTP</acronym> レスポンスに簡単にアクセスできるようにします。
             また、<acronym>HTTP</acronym> レスポンスメッセージをパースするための静的メソッド群も提供します。
@@ -17,8 +15,8 @@
             fromString() メソッドを使用します。これは、<acronym>HTTP</acronym>
             レスポンスメッセージを含む文字列を受け取って新しい
             Zend_Http_Response オブジェクトを返します。
-            <example id="zend.http.response.introduction.example-1">
-                <title>ファクトリメソッドを使用した Zend_Http_Response オブジェクトの作成</title>
+            <example xml:id="zend.http.response.introduction.example-1"><info><title>ファクトリメソッドを使用した Zend_Http_Response オブジェクトの作成</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $str = '';
 $sock = fsockopen('www.example.com', 80);
@@ -52,7 +50,7 @@ $response = Zend_Http_Response::fromString($str);
             </listitem>
             <listitem>
                 <para>
-                    <varname>$headers</varname>: <acronym>HTTP</acronym> レスポンスヘッダの連想配列 (たとえば 'Host' => 'example.com' など)。
+                    <varname>$headers</varname>: <acronym>HTTP</acronym> レスポンスヘッダの連想配列 (たとえば 'Host' =&gt; 'example.com' など)。
                 </para>
             </listitem>
             <listitem>
@@ -72,9 +70,9 @@ $response = Zend_Http_Response::fromString($str);
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-    <sect2 id="zend.http.response.testers">
-        <title>真偽チェック用のメソッド</title>
+    </section>
+    <section xml:id="zend.http.response.testers"><info><title>真偽チェック用のメソッド</title></info>
+        
         <para>
             <classname>Zend_Http_Response</classname> のインスタンスを取得すると、
             レスポンスの種類を調べるためのメソッドが使用できるようになります。
@@ -100,8 +98,8 @@ $response = Zend_Http_Response::fromString($str);
                     </para>
                 </listitem>
             </itemizedlist>
-            <example id="zend.http.response.testers.example-1">
-                <title>isError() メソッドの使用によるレスポンスの検証</title>
+            <example xml:id="zend.http.response.testers.example-1"><info><title>isError() メソッドの使用によるレスポンスの検証</title></info>
+                
                 <programlisting language="php"><![CDATA[
 if ($response->isError()) {
   echo "データ転送エラー。\n"
@@ -112,9 +110,9 @@ if ($response->isError()) {
 ]]></programlisting>
             </example>
         </para>
-    </sect2>
-    <sect2 id="zend.http.response.acessors">
-        <title>アクセス用メソッド群</title>
+    </section>
+    <section xml:id="zend.http.response.acessors"><info><title>アクセス用メソッド群</title></info>
+        
         <para>
             レスポンスオブジェクトの本来の目的は、レスポンスパラメータに簡単にアクセスすることです。
             <itemizedlist>
@@ -145,7 +143,7 @@ if ($response->isError()) {
                 <listitem>
                     <para>
                         <code>array getHeaders()</code>: <acronym>HTTP</acronym> レスポンスヘッダを、連想配列形式
-                        (たとえば 'Content-type' => 'text/html' など) で取得します。
+                        (たとえば 'Content-type' =&gt; 'text/html' など) で取得します。
                     </para>
                 </listitem>
                 <listitem>
@@ -172,8 +170,8 @@ if ($response->isError()) {
                     </para>
                 </listitem>
             </itemizedlist>
-            <example id="zend.http.response.acessors.example-1">
-                <title>Zend_Http_Response へのアクセス用メソッドの使用</title>
+            <example xml:id="zend.http.response.acessors.example-1"><info><title>Zend_Http_Response へのアクセス用メソッドの使用</title></info>
+                
                 <programlisting language="php"><![CDATA[
 if ($response->getStatus() == 200) {
   echo "リクエストの結果は次のようになりました。<br />";
@@ -184,8 +182,8 @@ if ($response->getStatus() == 200) {
 }
 ]]></programlisting>
             </example>
-            <note>
-                <title>常に返り値をチェックする</title>
+            <note><info><title>常に返り値をチェックする</title></info>
+                
                 <para>
                     レスポンスには同じヘッダを複数含めることができるので、
                     getHeader() メソッドや getHeaders() メソッドの返す結果は
@@ -193,8 +191,8 @@ if ($response->getStatus() == 200) {
                     返された値が文字列なのか配列なのかを常にチェックするようにしましょう。
                 </para>
             </note>
-            <example id="zend.http.response.acessors.example-2">
-                <title>レスポンスヘッダへのアクセス</title>
+            <example xml:id="zend.http.response.acessors.example-2"><info><title>レスポンスヘッダへのアクセス</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $ctype = $response->getHeader('Content-type');
 if (is_array($ctype)) $ctype = $ctype[0];
@@ -208,10 +206,10 @@ echo $body;
 ]]></programlisting>
             </example>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.response.static_parsers">
-        <title>静的 HTTP レスポンスパーサ</title>
+    <section xml:id="zend.http.response.static_parsers"><info><title>静的 HTTP レスポンスパーサ</title></info>
+        
         <para>
             <classname>Zend_Http_Response</classname> クラスには、内部で使用するメソッドもいくつか含まれています。
             これは、<acronym>HTTP</acronym> レスポンスメッセージを処理したりパースしたりするためのものです。
@@ -260,7 +258,7 @@ echo $body;
                         $http11 が <constant>TRUE</constant> の場合 (デフォルト) は <acronym>HTTP</acronym>/1.1 のメッセージを、
                         そうでない場合は <acronym>HTTP</acronym>/1.0 のメッセージを返します。
                         $code を省略した場合は、このメソッドは、すべての既知の <acronym>HTTP</acronym>
-                        レスポンスコードを連想配列 (code => message) で返します。
+                        レスポンスコードを連想配列 (code =&gt; message) で返します。
                     </para>
                 </listitem>
             </itemizedlist>
@@ -289,8 +287,5 @@ echo $body;
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

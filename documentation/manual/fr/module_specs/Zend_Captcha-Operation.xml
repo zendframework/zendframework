@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.captcha.operation">
-    <title>Opération Captcha</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.captcha.operation"><info><title>Opération Captcha</title></info>
+    
 
     <para>
         Tous les adaptateurs <acronym>CAPTCHA</acronym> implémentent
-        <classname>Zend_Captcha_Adapter</classname>, qui ressemble à ceci&#160;:
+        <classname>Zend_Captcha_Adapter</classname>, qui ressemble à ceci :
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -46,7 +44,7 @@ interface Zend_Captcha_Adapter extends Zend_Validate_Interface
         <acronym>CAPTCHA</acronym>.
     </para>
 
-    <para>Un cas d'utilisation typique pourrait ressembler à ceci&#160;:</para>
+    <para>Un cas d'utilisation typique pourrait ressembler à ceci :</para>
 
     <programlisting language="php"><![CDATA[
 // Créer une instance de Zend_View
@@ -68,4 +66,4 @@ if ($captcha->isValid($_POST['foo'], $_POST)) {
     // Validated!
 }
 ]]></programlisting>
-</sect1>
+</section>

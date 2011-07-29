@@ -23,19 +23,15 @@
  * @namespace
  */
 namespace Zend\Service\Amazon\S3;
-use Zend\Service\Amazon,
+
+use Zend\Crypt,
+    Zend\Service\Amazon,
     Zend\Service\Amazon\S3\Exception,
-    Zend\Crypt;
+    Zend\Uri;
 
 /**
  * Amazon S3 PHP connection class
  *
- * @uses       SimpleXMLElement
- * @uses       Zend_Crypt_Hmac
- * @uses       Zend_Service_Amazon_Abstract
- * @uses       Zend\Service\Amazon\S3\Exception
- * @uses       Zend\Service\Amazon\S3\Stream
- * @uses       Zend_Uri
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon_S3
@@ -55,7 +51,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
     /**
      * Endpoint for the service
      *
-     * @var \Zend\Uri\Url
+     * @var Uri\Uri
      */
     protected $_endpoint;
 
@@ -73,13 +69,13 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
     /**
      * Set S3 endpoint to use
      *
-     * @param string|Zend_Uri_Http $endpoint
-     * @return Zend_Service_Amazon_S3
+     * @param string|Uri\Uri $endpoint
+     * @return S3
      */
     public function setEndpoint($endpoint)
     {
-        if (!($endpoint instanceof \Zend\Uri\Url)) {
-            $endpoint = new \Zend\Uri\Url($endpoint);
+        if (!($endpoint instanceof Uri\Uri)) {
+            $endpoint = Uri\UriFactory::factory($endpoint);
         }
         if (!$endpoint->isValid()) {
             throw new Exception\InvalidArgumentException('Invalid endpoint supplied');
@@ -91,7 +87,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
     /**
      * Get current S3 endpoint
      *
-     * @return \Zend\Uri\Url
+     * @return Uri\Uri
      */
     public function getEndpoint()
     {

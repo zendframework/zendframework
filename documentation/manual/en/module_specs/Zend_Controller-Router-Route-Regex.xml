@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.router.routes.regex">
-    <title>Zend_Controller_Router_Route_Regex</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.router.routes.regex"><info><title>Zend_Controller_Router_Route_Regex</title></info>
+    
 
     <para>
         In addition to the default and static route types, a Regular
@@ -247,7 +246,4 @@ $router->addRoute('blogArchive', $route);
         As you can see, this adds a tremendous amount of flexibility over the
         standard route.
     </para>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

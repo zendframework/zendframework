@@ -1,12 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 22511 -->
-<sect1 id="zend.gdata.introduction">
-    <title>導入</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.introduction"><info><title>導入</title></info>
+    
     <para>
         Google Data <acronym>API</acronym> は、Google のオンラインサービスに対するプログラマ向けのインターフェイスです。
         Google data Protocol は
-        <ulink url="http://ietfreport.isoc.org/idref/draft-ietf-atompub-protocol/">Atom Publishing Protocol</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ietfreport.isoc.org/idref/draft-ietf-atompub-protocol/">Atom Publishing Protocol</link>
         に基づいており、クライアントアプリケーションからのデータの問い合わせ、
         データの投稿、更新、削除などを標準の <acronym>HTTP</acronym>
         と Atom syndication formation で行います。
@@ -19,7 +17,7 @@
 
     <para>
         Google Data <acronym>API</acronym> についての詳細な情報は
-        <ulink url="http://code.google.com/apis/gdata/">http://code.google.com/apis/gdata/</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/gdata/">http://code.google.com/apis/gdata/</link>
         を参照ください。
     </para>
 
@@ -77,7 +75,7 @@
             </listitem>
             <listitem>
                 <para>
-                    <ulink url="http://code.google.com/apis/blogger/developers_guide_php.html">Google Blogger</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/blogger/developers_guide_php.html">Google Blogger</link>
                     は、人気のあるインターネットプロバイダです。
                     "ボタンひとつで簡単に" 記事を配信できます。
                 </para>
@@ -97,8 +95,8 @@
         </itemizedlist>
     </para>
 
-    <note>
-        <title>サポートしていないサービス</title>
+    <note><info><title>サポートしていないサービス</title></info>
+        
         <para>
             <classname>Zend_Gdata</classname> には、これら以外の Google のサービス
             (例えば検索、Gmail、翻訳、マップなど)
@@ -107,8 +105,8 @@
         </para>
     </note>
 
-    <sect2 id="zend.gdata.introduction.structure">
-        <title>Zend_Gdata の構造</title>
+    <section xml:id="zend.gdata.introduction.structure"><info><title>Zend_Gdata の構造</title></info>
+        
         <para>
             <classname>Zend_Gata</classname> は、いくつかの型のクラスを組み合わせたものです。
             <itemizedlist>
@@ -157,9 +155,9 @@
                         エントリのプロパティの値（たとえばスプレッドシートのセルの値など）
                         を設定できるだけでなく、このオブジェクトを使用して
                         既存エントリの更新や削除のリクエストを送信することもできます。
-                        たとえば <methodname>$entry->save()</methodname>
+                        たとえば <methodname>$entry-&gt;save()</methodname>
                         をコールすると、変更した内容を元のエントリに書き戻します。また
-                        <methodname>$entry->delete()</methodname> はそのエントリをサーバから削除します。
+                        <methodname>$entry-&gt;delete()</methodname> はそのエントリをサーバから削除します。
                     </para>
                 </listitem>
                 <listitem>
@@ -187,10 +185,10 @@
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.introduction.services">
-        <title>Google サービスの使用法</title>
+    <section xml:id="zend.gdata.introduction.services"><info><title>Google サービスの使用法</title></info>
+        
         <para>
             Google データサービスは、Atom Publishing Protocol (APP)
             および Atom syndication format に基づいたサービスです。
@@ -208,10 +206,10 @@
             このサンプルはコマンドラインで動かすように作られていますが、
             ウェブアプリケーション版にも簡単に書き換えられるでしょう。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.introduction.magicfactory">
-        <title>Zend_Gdata クラスのインスタンスの取得</title>
+    <section xml:id="zend.gdata.introduction.magicfactory"><info><title>Zend_Gdata クラスのインスタンスの取得</title></info>
+        
         <para>
             Zend Framework の命名規約では、すべてのクラスは
             その存在位置のディレクトリ構造に基づいた名前をつける必要があります。
@@ -229,7 +227,7 @@
             その他のクラスのインスタンスをより簡単に作成できるようになります。
             このファクトリメソッドは、マジックメソッド
             <code>__call</code> を用いて実装しています。このメソッドで、
-            <code>$service->newXXX(arg1, arg2, ...)</code> というコールをすべて処理しています。
+            <code>$service-&gt;newXXX(arg1, arg2, ...)</code> というコールをすべて処理しています。
             XXX の値に基づいて、登録されているすべての 'パッケージ' からクラスを探します。
             以下に例を示します。
         </para>
@@ -255,10 +253,10 @@ $entry->cell = $cell;
             適切な 'パッケージ' (ディレクトリ) を登録します。
             ファクトリメソッドは、これを使用してクラスを探します。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.introduction.authentication">
-        <title>Google Data クライアント認証</title>
+    <section xml:id="zend.gdata.introduction.authentication"><info><title>Google Data クライアント認証</title></info>
+        
         <para>
             ほとんどの Google Data サービスは、
             個人データへのアクセスやデータの保存、削除の前に
@@ -275,10 +273,10 @@ $entry->cell = $cell;
             認証を必要としません。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.introduction.dependencies">
-        <title>依存性</title>
+    <section xml:id="zend.gdata.introduction.dependencies"><info><title>依存性</title></info>
+        
         <para>
             <classname>Zend_Gdata</classname> は
             <link linkend="zend.http.client">Zend_Http_Client</link>
@@ -294,10 +292,10 @@ $entry->cell = $cell;
             <classname>Zend_Gdata</classname> クライアントは Google Data サーバへの接続を行います。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.introduction.creation">
-        <title>新しい Gdata クライアントの作成</title>
+    <section xml:id="zend.gdata.introduction.creation"><info><title>新しい Gdata クライアントの作成</title></info>
+        
 
         <para>
             <classname>Zend_Gdata_App</classname> クラス、<classname>Zend_Gdata</classname> クラス、
@@ -345,10 +343,10 @@ $gdata->setMinorProtocolVersion(null);
             認証のセクションも参照ください。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.introduction.parameters">
-        <title>共通のクエリパラメータ</title>
+    <section xml:id="zend.gdata.introduction.parameters"><info><title>共通のクエリパラメータ</title></info>
+        
 
         <para>
             パラメータを指定することで、<classname>Zend_Gdata</classname>
@@ -485,10 +483,10 @@ $gdata->resetParameters();      // すべてのパラメータを消去します
 // ...別のフィードを取得します...
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.introduction.getfeed">
-        <title>フィードの取得</title>
+    <section xml:id="zend.gdata.introduction.getfeed"><info><title>フィードの取得</title></info>
+        
 
         <para>
             <methodname>getFeed()</methodname> を使用して、指定した <acronym>URI</acronym> からフィードを取得します。
@@ -510,10 +508,10 @@ $feed = $gdata->getFeed($query);
             対応するサービスにあわせた適切な <acronym>URI</acronym> からフィードを取得できるようになります。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.introduction.paging">
-        <title>複数ページのフィードの扱い方</title>
+    <section xml:id="zend.gdata.introduction.paging"><info><title>複数ページのフィードの扱い方</title></info>
+        
 
         <para>
             多くのエントリが含まれるフィードを取得した場合、
@@ -558,10 +556,10 @@ $feed = $gdata->retrieveAllEntriesForFeed($gdata->getFeed($query));
             で <acronym>PHP</acronym> の実行時間制限を拡大する必要があるかもしれません。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.introduction.usefeedentry">
-        <title>フィードやエントリ内のデータの操作</title>
+    <section xml:id="zend.gdata.introduction.usefeedentry"><info><title>フィードやエントリ内のデータの操作</title></info>
+        
 
         <para>
             フィードを取得したら、次はそのデータを読み込んだり
@@ -584,10 +582,10 @@ foreach ($feed as $entry) {
     echo 'Content: ' . $entry->getContent()->getText();
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.introduction.updateentry">
-        <title>エントリの更新</title>
+    <section xml:id="zend.gdata.introduction.updateentry"><info><title>エントリの更新</title></info>
+        
 
         <para>
             エントリを取得したら、それを更新してサーバに保存できます。以下に例を示します。
@@ -610,10 +608,10 @@ foreach ($feed as $entry) {
     echo 'New Title: ' . $newEntry->title->text;
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.introduction.post">
-        <title>Google サーバへのエントリの送信</title>
+    <section xml:id="zend.gdata.introduction.post"><info><title>Google サーバへのエントリの送信</title></info>
+        
 
         <para>
             <classname>Zend_Gdata</classname> オブジェクトの関数 <methodname>insertEntry()</methodname>
@@ -659,10 +657,10 @@ echo 'この結果のエントリの <id> は、' . $entryResult->id->text;
             <classname>Zend_Gdata_ClientLogin</classname> クラスを使用して作成します。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.introduction.delete">
-        <title>Google サーバからのデータの削除</title>
+    <section xml:id="zend.gdata.introduction.delete"><info><title>Google サーバからのデータの削除</title></info>
+        
 
         <para>
             方法 1: <classname>Zend_Gdata</classname> オブジェクトの関数 <methodname>delete()</methodname>
@@ -674,7 +672,7 @@ echo 'この結果のエントリの <id> は、' . $entryResult->id->text;
 
         <para>
             方法 2: あるいは、Google サービスから取得したエントリに対して
-            <methodname>$entry->delete()</methodname> をコールすることもできます。
+            <methodname>$entry-&gt;delete()</methodname> をコールすることもできます。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -698,6 +696,6 @@ foreach ($feed as $feedEntry) {
             <classname>Zend_Gdata_ClientLogin</classname> クラスを使用して作成します。
         </para>
 
-    </sect2>
+    </section>
 
-</sect1>
+</section>

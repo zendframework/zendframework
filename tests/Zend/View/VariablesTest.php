@@ -130,6 +130,14 @@ class VariablesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('baz', $this->vars['bar']);
     }
 
+    public function testValuesAssignedViaConstructorAreEscapedByDefault()
+    {
+        $string = '<tag id="foo">\'some string\'</tag>';
+        $vars = new Variables(array('foo'=>$string));
+        $expected = htmlspecialchars($string, ENT_COMPAT, 'UTF-8');
+        $this->assertEquals($expected, $vars['foo']);
+    }
+
     public function testValuesAreEscapedByDefault()
     {
         $string = '<tag id="foo">\'some string\'</tag>';

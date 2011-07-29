@@ -1,5 +1,6 @@
-<sect1 id="zend.pdf.pages">
-    <title>Document pagina's</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.pages"><info><title>Document pagina's</title></info>
+    
     <para>
     De PDF document pagina abstractie word afgehandeld door de <code>Zend_Pdf_Page</code> klasse.
     </para>
@@ -49,8 +50,8 @@
     document en kan gemanipuleerd worden als een array:
     </para>
 
-    <example>
-        <title>PDF pagina management</title>
+    <example><info><title>PDF pagina management</title></info>
+        
         <programlisting role="php"><![CDATA[<?php
 ...
 // De volgorde omkeren
@@ -68,7 +69,4 @@ unset($pdf->pages[$id]);
 ?>]]></programlisting>
     </example>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

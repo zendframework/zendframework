@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 19432 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.validate.validator_chains">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.validator_chains"><info><title>Cadenas de Validadores</title></info>
 
-    <title>Cadenas de Validadores</title>
+    
 
     <para>
         Frecuentemente deben aplicarse múltiples validaciones a algún valor
@@ -93,4 +91,4 @@ $validatorChain->addValidator(
         en una cadena de validación.
     </para>
 
-</sect1>
+</section>

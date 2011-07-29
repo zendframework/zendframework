@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20827 -->
-<sect1 id="zend.progressbar.introduction" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Zend_ProgressBar</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.progressbar.introduction"><info><title>Zend_ProgressBar</title></info>
+    
 
-    <sect2 id="zend.progressbar.whatisit">
-        <title>導入</title>
+    <section xml:id="zend.progressbar.whatisit"><info><title>導入</title></info>
+        
 
         <para>
             <classname>Zend_ProgressBar</classname> は、
@@ -14,10 +12,10 @@
             更新のたびに現在値とオプションのメッセージを受け取り、
             進捗率や残り時間などを計算してアダプタを呼び出します。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.progressbar.basic">
-        <title>Zend_Progressbar の基本的な使用法</title>
+    <section xml:id="zend.progressbar.basic"><info><title>Zend_Progressbar の基本的な使用法</title></info>
+        
 
         <para>
             <classname>Zend_ProgressBar</classname> の使い方はきわめて簡単です。
@@ -54,10 +52,10 @@ $progressBar->finish();
             これは、データが何も更新されていないけれども
             プログレスバーを更新したいという場合に有用です。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.progressbar.persistent">
-        <title>進捗の永続化</title>
+    <section xml:id="zend.progressbar.persistent"><info><title>進捗の永続化</title></info>
+        
 
         <para>
             複数のリクエストにまたがってプログレスバーを持続させたい場合は、
@@ -68,28 +66,25 @@ $progressBar->finish();
             また、現在の値や状況表示用テキスト、
             そして残り時間計算用の開始時刻などは次のリクエストにも引き継がれるようになります。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.progressbar.adapters">
-        <title>標準のアダプタ</title>
+    <section xml:id="zend.progressbar.adapters"><info><title>標準のアダプタ</title></info>
+        
 
         <para>
             <classname>Zend_ProgressBar</classname> には次の 3 つのアダプタが同梱されています。
 
             <itemizedlist mark="opencircle">
                 <listitem>
-                    <para><xref linkend="zend.progressbar.adapter.console" /></para>
+                    <para><xref linkend="zend.progressbar.adapter.console"/></para>
                 </listitem>
 
-                <listitem><para><xref linkend="zend.progressbar.adapter.jspush" /></para></listitem>
-                <listitem><para><xref linkend="zend.progressbar.adapter.jspull" /></para></listitem>
+                <listitem><para><xref linkend="zend.progressbar.adapter.jspush"/></para></listitem>
+                <listitem><para><xref linkend="zend.progressbar.adapter.jspull"/></para></listitem>
             </itemizedlist>
         </para>
-        <xi:include href="Zend_ProgressBar_Adapter_Console.xml" />
-        <xi:include href="Zend_ProgressBar_Adapter_JsPush.xml" />
-        <xi:include href="Zend_ProgressBar_Adapter_JsPull.xml" />
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_ProgressBar_Adapter_Console.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_ProgressBar_Adapter_JsPush.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_ProgressBar_Adapter_JsPull.xml"/>
+    </section>
+</section>

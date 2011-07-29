@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21109 -->
-<sect1 id="zend.cache.theory">
-    <title>キャッシュの仕組み</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.theory"><info><title>キャッシュの仕組み</title></info>
+    
 
     <para>
         <classname>Zend_Cache</classname> には、3 つのポイントがあります。まず最初は一意な ID (文字列) で、
@@ -41,8 +39,8 @@
         </para>
     </note>
 
-    <sect2 id="zend.cache.factory">
-        <title>Zend_Cache ファクトリメソッド</title>
+    <section xml:id="zend.cache.factory"><info><title>Zend_Cache ファクトリメソッド</title></info>
+        
 
         <para>
             使用可能な <classname>Zend_Cache</classname> フロントエンドのインスタンスを作成する方法を、
@@ -83,10 +81,10 @@ $cache = Zend_Cache::factory($frontendName,
                 自前で作成しようとしても、期待通りには動作しないでしょう。
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.cache.tags">
-        <title>レコードのタグ付け</title>
+    <section xml:id="zend.cache.tags"><info><title>レコードのタグ付け</title></info>
+        
 
         <para>
             タグは、キャッシュレコードを分類するための仕組みです。
@@ -106,10 +104,10 @@ $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
                 (<constant>FALSE</constant> 以外を指定することで、このキャッシュレコードの有効期限を特定の値に設定できます)。
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.cache.clean">
-        <title>キャッシュの削除</title>
+    <section xml:id="zend.cache.clean"><info><title>キャッシュの削除</title></info>
+        
 
         <para>
             特定のキャッシュ ID を削除/無効化するには、<methodname>remove()</methodname>
@@ -171,8 +169,5 @@ $cache->clean(
             <constant>CLEANING_MODE_MATCHING_ANY_TAG</constant> です。
             後者は、その名が示すとおり、タグの配列と組み合わせて使用します。
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

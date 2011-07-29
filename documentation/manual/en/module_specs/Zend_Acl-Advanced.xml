@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.acl.advanced">
-    <title>Advanced Usage</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.advanced"><info><title>Advanced Usage</title></info>
+    
 
-    <sect2 id="zend.acl.advanced.storing">
-        <title>Storing ACL Data for Persistence</title>
+    <section xml:id="zend.acl.advanced.storing"><info><title>Storing ACL Data for Persistence</title></info>
+        
 
         <para>
             <classname>Zend_Acl</classname> was designed in such a way that it does not require any
@@ -20,15 +19,15 @@
             Storage of <acronym>ACL</acronym> data is therefore left as a task for the developer,
             since use cases are expected to vary widely for various situations. Because
             <classname>Zend_Acl</classname> is serializable, <acronym>ACL</acronym> objects may be
-            serialized with <acronym>PHP</acronym>'s <ulink url="http://php.net/serialize">
-                <methodname>serialize()</methodname></ulink> function, and the results may be
+            serialized with <acronym>PHP</acronym>'s <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/serialize">
+                <methodname>serialize()</methodname></link> function, and the results may be
             stored anywhere the developer should desire, such as a file, database, or caching
             mechanism.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.advanced.assertions">
-        <title>Writing Conditional ACL Rules with Assertions</title>
+    <section xml:id="zend.acl.advanced.assertions"><info><title>Writing Conditional ACL Rules with Assertions</title></info>
+        
 
         <para>
             Sometimes a rule for allowing or denying a role access to a resource should not be
@@ -92,8 +91,5 @@ $acl->allow(null, null, null, new CleanIPAssertion());
             (i.e., <methodname>isAllowed()</methodname>) applies, in order to provide a context for
             the assertion class to determine its conditions where needed.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

@@ -1,21 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22768 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.service.strikeiron.advanced-uses">
-    <title>Zend_Service_StrikeIron: Erweiterte Verwendung</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.strikeiron.advanced-uses"><info><title>Zend_Service_StrikeIron: Erweiterte Verwendung</title></info>
+    
 
     <para>
         Diese Sektion beschreibt die erweiterte Verwendung von
         <classname>Zend_Service_StrikeIron</classname>.
     </para>
 
-    <sect2 id="zend.service.strikeiron.advanced-uses.services-by-wsdl">
-        <title>Die Services durch WSDL verwenden</title>
+    <section xml:id="zend.service.strikeiron.advanced-uses.services-by-wsdl"><info><title>Die Services durch WSDL verwenden</title></info>
+        
 
         <para>
             Für einige StrikeIron Services können <acronym>PHP</acronym> Wrapper Klassen vorhanden
-            sein, so wie jene die in <link
-                linkend="zend.service.strikeiron.bundled-services">Bundled Services</link>
+            sein, so wie jene die in <link linkend="zend.service.strikeiron.bundled-services">Bundled Services</link>
             beschrieben werden. Trotzdem bietet StrikeIron hunderte von Services und viele von
             diesen können nicht verwendbar sein wenn keine spezielle Wrapper Klasse erstellt wird.
         </para>
@@ -45,10 +42,9 @@ echo $result->listingName;
         <para>
             Um StrikeIron Services durch WSDL zu verwenden wird zumindest ein Verständnis für WSDL
             Dateien benötigt. StrikeIron hat viele Ressourcen auf Ihren Seiten die hierbei helfen.
-            Auch <ulink url="http://janschneider.de">Jan Schneider</ulink> vom
-            <ulink url="http://horde.org">Horde Projekt</ulink> hat eine <ulink
-                url="http://janschneider.de/news/25/268">kleine <acronym>PHP</acronym>
-                Routine</ulink> geschrieben die eine WSDL Datei in lesbares <acronym>HTML</acronym>
+            Auch <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://janschneider.de">Jan Schneider</link> vom
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://horde.org">Horde Projekt</link> hat eine <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://janschneider.de/news/25/268">kleine <acronym>PHP</acronym>
+                Routine</link> geschrieben die eine WSDL Datei in lesbares <acronym>HTML</acronym>
             konvertiert.
         </para>
 
@@ -57,10 +53,10 @@ echo $result->listingName;
             <link linkend="zend.service.strikeiron.bundled-services">Mitgelieferten Services</link>
             Sektion beschrieben werden auch offiziell unterstützt werden.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.strikeiron.viewing-soap-transactions">
-        <title>SOAP Transaktionen betrachten</title>
+    <section xml:id="zend.service.strikeiron.viewing-soap-transactions"><info><title>SOAP Transaktionen betrachten</title></info>
+        
 
         <para>
             Die gesamte Kommunikation mit StrikeIron wird durch Verwenden der
@@ -77,8 +73,7 @@ echo $result->listingName;
         </para>
 
         <para>
-            <acronym>PHP</acronym>'s <ulink
-                url="http://www.php.net/manual/de/function.soap-soapclient-construct.php">SOAPClient</ulink>
+            <acronym>PHP</acronym>'s <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/de/function.soap-soapclient-construct.php">SOAPClient</link>
             hat eine <property>trace</property> Option die dazu führt dass das
             <acronym>XML</acronym>, das wärend der letzten Transaktion getauscht wurde, gemerkt
             wird. <classname>Zend_Service_StrikeIron</classname> aktiviert die
@@ -90,10 +85,8 @@ echo $result->listingName;
         <para>
             Um die SOAP Transaktion zu betrachten muß die <methodname>getSoapClient()</methodname>
             Methode aufgerufen werden um die <classname>SOAPClient</classname> Instanz zu erhalten
-            und anschließend die entsprechenden Methoden wie <ulink
-                url="http://www.php.net/manual/de/function.soap-soapclient-getlastrequest.php"><methodname>__getLastRequest()</methodname></ulink>
-            und <ulink
-                url="http://www.php.net/manual/de/function.soap-soapclient-getlastresponse.php"><methodname>__getLastRequest()</methodname></ulink>:
+            und anschließend die entsprechenden Methoden wie <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/de/function.soap-soapclient-getlastrequest.php"><methodname>__getLastRequest()</methodname></link>
+            und <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/de/function.soap-soapclient-getlastresponse.php"><methodname>__getLastRequest()</methodname></link>:
             aufzurufen:
         </para>
 
@@ -114,5 +107,5 @@ $soapClient = $taxBasic->getSoapClient();
 echo $soapClient->__getLastRequest();
 echo $soapClient->__getLastResponse();
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

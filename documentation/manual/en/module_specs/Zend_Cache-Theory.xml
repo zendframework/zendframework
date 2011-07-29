@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.cache.theory">
-    <title>The Theory of Caching</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.theory"><info><title>The Theory of Caching</title></info>
+    
 
     <para>
         There are three key concepts in <classname>Zend_Cache</classname>. One is the unique
@@ -36,8 +35,8 @@
         </para>
     </note>
 
-    <sect2 id="zend.cache.factory">
-        <title>The Zend_Cache Factory Method</title>
+    <section xml:id="zend.cache.factory"><info><title>The Zend_Cache Factory Method</title></info>
+        
 
         <para>
             A good way to build a usable instance of a <classname>Zend_Cache</classname> Frontend is
@@ -77,10 +76,10 @@ $cache = Zend_Cache::factory($frontendName,
                 Instantiating frontends and backends yourself will not work as expected.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.cache.tags">
-        <title>Tagging Records</title>
+    <section xml:id="zend.cache.tags"><info><title>Tagging Records</title></info>
+        
 
         <para>
             Tags are a way to categorize cache records. When you save a cache with the
@@ -100,10 +99,10 @@ $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
                 it sets a specific lifetime for this particular cache record)
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.cache.clean">
-        <title>Cleaning the Cache</title>
+    <section xml:id="zend.cache.clean"><info><title>Cleaning the Cache</title></info>
+        
 
         <para>
             To remove or invalidate in particular cache id, you can use the
@@ -167,8 +166,5 @@ $cache->clean(
             <constant>CLEANING_MODE_MATCHING_ANY_TAG</constant>. The latter are, as their names
             suggest, combined with an array of tags in cleaning operations.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

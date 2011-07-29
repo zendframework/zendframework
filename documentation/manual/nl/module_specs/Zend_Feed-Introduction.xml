@@ -1,5 +1,6 @@
-<sect1 id="zend.feed.introduction">
-    <title>Inleiding</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.introduction"><info><title>Inleiding</title></info>
+    
     <para>
         <code>Zend_Feed</code> verstrekt functionaliteiten om RSS en Atom feeds uit te lezen. Het verstrekt
         een intuïtieve syntax om elementen van de feeds te consulteren, attributen ervan en attributen van
@@ -22,16 +23,16 @@
         uitprinten van de data, de data op te slaan in een database enz...
     </para>
 
-    <note>
-        <title>Be aware</title>
+    <note><info><title>Be aware</title></info>
+        
       <para>
         Vele RSS feeds bieden verschillende eigenschappen van kanalen en items. De RSS specificatie verstrekt
         vele optionele eigenschappen, wees er dus van gewaar wanneer je code schrijft om met RSS data te werken.
       </para>
     </note>
 
-    <example>
-        <title>Zend_Feed laten werken met RSS Feed Data</title>
+    <example><info><title>Zend_Feed laten werken met RSS Feed Data</title></info>
+        
         <programlisting role="php"><![CDATA[
 <?php
 require_once 'Zend/Feed.php';
@@ -62,9 +63,6 @@ foreach ($slashdotRss as $item) {
         );
 }
 
-?>]]>   </programlisting>
+?>   ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

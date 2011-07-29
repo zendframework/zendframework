@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22743 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.http.client">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.client"><info><title>Einführung</title></info>
+    
 
     <para>
         <classname>Zend_Http_Client</classname> stellt eine einfache Schnittstelle für das
@@ -16,8 +14,8 @@
             Abschnitt</link>).
     </para>
 
-    <sect2 id="zend.http.client.usage">
-        <title>Zend_Http_Client verwenden</title>
+    <section xml:id="zend.http.client.usage"><info><title>Zend_Http_Client verwenden</title></info>
+        
 
         <para>
             Der Klassenkonstruktor akzeptiert optional eine URL als seinen ersten Parameter (kann
@@ -26,8 +24,8 @@
             enthält. Beides kann ausgelassen und später durch Verwendung der setUri() and
             setConfig() Methoden gesetzt werden.
 
-            <example id="zend.http.client.introduction.example-1">
-                <title>Ein Zend_Http_Client Objekt instanzieren</title>
+            <example xml:id="zend.http.client.introduction.example-1"><info><title>Ein Zend_Http_Client Objekt instanzieren</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $client = new Zend_Http_Client('http://example.org', array(
@@ -55,24 +53,23 @@ $client->setConfig($config);
                     spezielle Zeichen wie das Pipe-Symbol ('|') oder das Karet Symbol ('^') in der
                     URL standardmäßig nicht akzeptiert werden. Das kann geändert werden indem die
                     'allow_unwise' Option von <classname>Zend_Uri</classname> auf
-                    '<constant>TRUE</constant>' gesetzt wird. Siehe <link
-                        linkend="zend.uri.validation.allowunwise">diesen Abschnitt</link> für mehr
+                    '<constant>TRUE</constant>' gesetzt wird. Siehe <link linkend="zend.uri.validation.allowunwise">diesen Abschnitt</link> für mehr
                     Informationen.
                 </para>
             </note>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.client.configuration">
-        <title>Konfigurationsparameter</title>
+    <section xml:id="zend.http.client.configuration"><info><title>Konfigurationsparameter</title></info>
+        
 
         <para>
             Der Konstruktor und die setConfig() Methode akzeptieren ein assoziatives Array mit
             Konfigurationsparametern oder ein <classname>Zend_Config</classname> Objekt. Das Setzen
             dieser Parameter ist optional, da alle einen Standardwert haben.
 
-            <table id="zend.http.client.configuration.table">
-                <title>Zend_Http_Client Konfigurationsparameter</title>
+            <table xml:id="zend.http.client.configuration.table"><info><title>Zend_Http_Client Konfigurationsparameter</title></info>
+                
 
                 <tgroup cols="4">
                     <thead>
@@ -207,18 +204,18 @@ $client->setConfig($config);
                 </tgroup>
             </table>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.client.basic-requests">
-        <title>Durchführen von einfachen HTTP Anfragen</title>
+    <section xml:id="zend.http.client.basic-requests"><info><title>Durchführen von einfachen HTTP Anfragen</title></info>
+        
 
         <para>
             Das Durchführen von einfachen <acronym>HTTP</acronym> Anfragen kann sehr leicht durch
             Verwendung der request() Methode gemacht werden und benötigt selten mehr als drei
             Codezeilen:
 
-            <example id="zend.http.client.basic-requests.example-1">
-                <title>Durchführen einer einfache GET Anfrage</title>
+            <example xml:id="zend.http.client.basic-requests.example-1"><info><title>Durchführen einer einfache GET Anfrage</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $client = new Zend_Http_Client('http://example.org');
@@ -234,8 +231,7 @@ $response = $client->request();
 
             <footnote>
                 <para>
-                    Siehe RFC 2616 - <ulink
-                        url="http://www.w3.org/Protocols/rfc2616/rfc2616.html" />.
+                    Siehe RFC 2616 - <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/Protocols/rfc2616/rfc2616.html">http://www.w3.org/Protocols/rfc2616/rfc2616.html</uri>.
                 </para>
             </footnote>.
 
@@ -249,8 +245,8 @@ $response = $client->request();
             <methodname>setMethod()</methodname> vorher nicht aufgerufen worden ist, wird als
             Standardmethode <constant>GET</constant> verwendet (siehe obiges Beispiel).
 
-            <example id="zend.http.client.basic-requests.example-2">
-                <title>Andere Anfragemethoden als GET verwenden</title>
+            <example xml:id="zend.http.client.basic-requests.example-2"><info><title>Andere Anfragemethoden als GET verwenden</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 // Durchführen einer POST Anfrage
@@ -262,10 +258,10 @@ $response = $client->request();
 ]]></programlisting>
             </example>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.client.parameters">
-        <title>Hinzufügen von GET und POST Parametern</title>
+    <section xml:id="zend.http.client.parameters"><info><title>Hinzufügen von GET und POST Parametern</title></info>
+        
 
         <para>
             Das Hinzufügen von <constant>GET</constant> Parametern zu einer <acronym>HTTP</acronym>
@@ -274,11 +270,11 @@ $response = $client->request();
             <constant>GET</constant> Parameter als seinen ersten Parameter und den Wert des
             <constant>GET</constant> Parameter als seinen zweiten Parameter. Zur Erleichterung
             akzeptiert die setParameterGet() Methode auch ein einzelnes assoziatives Array mit
-            <constant>GET</constant> Parameter als Name => Wert Variablen, was beim setzen von
+            <constant>GET</constant> Parameter als Name =&gt; Wert Variablen, was beim setzen von
             mehreren <constant>GET</constant> Parametern komfortabler sein kann.
 
-            <example id="zend.http.client.parameters.example-1">
-                <title>Setzen von GET Parametern</title>
+            <example xml:id="zend.http.client.parameters.example-1"><info><title>Setzen von GET Parametern</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 // Setzen eines GET Parameter mit der setParameterGet Methode
@@ -304,8 +300,8 @@ $client->setParameterGet(array(
             <constant>GET</constant> Parametern and kann mit der setParameterPost() Methode gemacht
             werden, die vom Aufbau der setParameterGet() Methode ähnlich ist..
 
-            <example id="zend.http.client.parameters.example-2">
-                <title>Setzen von POST Parametern</title>
+            <example xml:id="zend.http.client.parameters.example-2"><info><title>Setzen von POST Parametern</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 // Setzen eines POST Parameters
@@ -325,21 +321,20 @@ $client->setParameterPost(array(
             POST Parametern für andere Anfragen als POST kein Fehler ausgeworfen. Solange eine
             Anfrage keine POST Anfrage ist, werden POST Parameter einfach ignoriert.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.client.accessing_last">
-        <title>Zugriff auf die Letzte Anfrage und Antwort</title>
+    <section xml:id="zend.http.client.accessing_last"><info><title>Zugriff auf die Letzte Anfrage und Antwort</title></info>
+        
 
         <para>
             <classname>Zend_Http_Client</classname> bietet Methoden um Zugriff auf die letzte
             gesendete Anfrage und die letzte empfangene Antwort des Client Objekts zu bekommen.
-            <classname>Zend_Http_Client->getLastRequest()</classname> hat keine Parameter und gibt
+            <classname>Zend_Http_Client-&gt;getLastRequest()</classname> hat keine Parameter und gibt
             die letzte <acronym>HTTP</acronym> Anfrage als String zurück die der Client gesendet
             hat. Auf die gleiche Art und Weise gibt
-            <classname>Zend_Http_Client->getLastResponse()</classname> die letzte
-            <acronym>HTTP</acronym> Antwort als <link
-                linkend="zend.http.response">Zend_Http_Response</link> Objekt zurück die der Client
+            <classname>Zend_Http_Client-&gt;getLastResponse()</classname> die letzte
+            <acronym>HTTP</acronym> Antwort als <link linkend="zend.http.response">Zend_Http_Response</link> Objekt zurück die der Client
             empfangen hat.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

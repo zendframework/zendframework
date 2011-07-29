@@ -1,8 +1,9 @@
-<sect1 id="zend.controller.modular">
-    <title>Użycie konwencjonalnej modularnej struktury katalogów</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.modular"><info><title>Użycie konwencjonalnej modularnej struktury katalogów</title></info>
+    
 
-    <sect2 id="zend.controller.modular.introduction">
-        <title>Wprowadzenie</title>
+    <section xml:id="zend.controller.modular.introduction"><info><title>Wprowadzenie</title></info>
+        
         <para>
             Konwencjonalna modularna struktura katalogów pozwala ci na
             oddzielenie różnych aplikacji MVC w osobne jednostki i użycie ich
@@ -45,8 +46,8 @@ application/
                 list/
             helpers/
             filters/
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             W tym modelu, nazwa modułu uwidacznia się jako przedrostek nazw
@@ -58,8 +59,8 @@ application/
             przykładach w tym rozdziale.
         </para>
 
-        <note>
-            <title>Brak przestrzeni nazw w domyślnym module</title>
+        <note><info><title>Brak przestrzeni nazw w domyślnym module</title></info>
+            
             <para>
                 Zauważ, że w domyślnym module nazwa kontrolera nie ma
                 przedrostka defniującego przestrzeń nazw. Dlatego w powyższym
@@ -75,10 +76,10 @@ application/
             Więc jak implementujesz taką strukturę katalogów używając
             komponentów MVC Zend Framework?
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.modular.directories">
-        <title>Określanie ścieżek kontrolera modułów</title>
+    <section xml:id="zend.controller.modular.directories"><info><title>Określanie ścieżek kontrolera modułów</title></info>
+        
 
         <para>
             Pierwszym krokiem użycia modułów jest zmodyfikowanie sposobu
@@ -104,8 +105,8 @@ $front->setControllerDirectory(array(
       'default' => '/path/to/application/controllers',
       'blog'    => '/path/to/application/blog/controllers'
 ));
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Metoda <code>addControllerDirectory()</code> przyjmuje opcjonalny
@@ -116,8 +117,8 @@ $front->setControllerDirectory(array(
 
         <programlisting role="php"><![CDATA[
 $front->addControllerDirectory('/path/to/application/news/controllers', 'news');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Zostawiając najlepsze na koniec, najprostszym sposobem określenia
@@ -140,8 +141,8 @@ $front->addControllerDirectory('/path/to/application/news/controllers', 'news');
  *             controllers/
  */
 $front->addModuleDirectory('/path/to/application/modules');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Powyższy przykład definiuje moduły <code>default</code>,
@@ -168,18 +169,18 @@ $front->addModuleDirectory('/path/to/application/modules');
  */
 $front->setModuleControllerDirectoryName('con');
 $front->addModuleDirectory('/path/to/application/modules');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <note><para>
             Możesz określić aby podkatalog kontrolerów nie był używany w
             modułach, przekazując pustą wartość do metody
             <code>setModuleControllerDirectoryName()</code>.
         </para></note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.modular.router">
-        <title>Dopasowanie tras do modułów</title>
+    <section xml:id="zend.controller.modular.router"><info><title>Dopasowanie tras do modułów</title></info>
+        
 
         <para>
             Domyślna trasa w
@@ -201,10 +202,10 @@ $front->addModuleDirectory('/path/to/application/modules');
             frontowego i obiektu uruchamiającego.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.modular.defaultcontroller">
-        <title>Moduł lub globalny domyślny kontroler</title>
+    <section xml:id="zend.controller.modular.defaultcontroller"><info><title>Moduł lub globalny domyślny kontroler</title></info>
+        
 
         <para>
             W domyślnym routerze jeśli w URL nie został określony kontroler,
@@ -223,7 +224,7 @@ $front->addModuleDirectory('/path/to/application/modules');
 
         <programlisting role="php"><![CDATA[
 $front->setParam('useDefaultControllerAlways', true);
-]]>
-        </programlisting>
-    </sect2>
-</sect1>
+
+        ]]></programlisting>
+    </section>
+</section>

@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.acl.introduction">
-    <title>Введение</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.introduction"><info><title>Введение</title></info>
+    
 
     <para>
         <classname>Zend_Acl</classname> предоставляет легковесную и гибкую реализацию списка прав
@@ -38,8 +37,8 @@
         приложение может контролировать предоставление ролям доступа к ресурсам.
     </para>
 
-    <sect2 id="zend.acl.introduction.resources">
-        <title>Ресурсы</title>
+    <section xml:id="zend.acl.introduction.resources"><info><title>Ресурсы</title></info>
+        
         <para>
             Создать ресурс в <classname>Zend_Acl</classname> очень просто. <classname>Zend_Acl</classname> предоставляет
             интерфейс ресурса <classname>Zend_Acl_Resource_Interface</classname> для
@@ -73,10 +72,10 @@
             разработчик может присваивать правила, которые будут влиять на все
             или определенные права доступа к ресурсу.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.roles">
-        <title>Роли</title>
+    <section xml:id="zend.acl.introduction.roles"><info><title>Роли</title></info>
+        
         <para>
             Как и в случае с ресурсами, создавать роль тоже очень просто.
             Все роли должны реализовывать интерфейс
@@ -102,8 +101,8 @@
             неопределенное условие и показывает, как <classname>Zend_Acl</classname> решает эту
             проблему.
         </para>
-        <example id="zend.acl.introduction.roles.example.multiple_inheritance">
-            <title>Множественное наследование ролей</title>
+        <example xml:id="zend.acl.introduction.roles.example.multiple_inheritance"><info><title>Множественное наследование ролей</title></info>
+            
             <para>
                 Следующий код определяет три базовые роли:
                 "<code>guest</code>", "<code>member</code>" и
@@ -171,10 +170,10 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'разрешен' : 'зап�
                 будет первым в списке поиска правил для запроса авторизации.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.creating">
-        <title>Создание списка контроля доступа (ACL)</title>
+    <section xml:id="zend.acl.introduction.creating"><info><title>Создание списка контроля доступа (ACL)</title></info>
+        
 
         <para>
             Список контроля доступа (<acronym>ACL</acronym>) может представлять собой любое
@@ -197,10 +196,10 @@ $acl = new Zend_Acl();
                 всем привилегиям на все ресурсы.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.role_registry">
-        <title>Регистрация ролей</title>
+    <section xml:id="zend.acl.introduction.role_registry"><info><title>Регистрация ролей</title></info>
+        
 
         <para>
             <acronym>CMS</acronym> почти всегда нуждаются в иерархии
@@ -221,8 +220,8 @@ $acl = new Zend_Acl();
             Права доступа могут быть изображены в следующем виде:
         </para>
 
-        <table id="zend.acl.introduction.role_registry.table.example_cms_access_controls">
-          <title>Контроль за доступом для демонстрационной CMS</title>
+        <table xml:id="zend.acl.introduction.role_registry.table.example_cms_access_controls"><info><title>Контроль за доступом для демонстрационной CMS</title></info>
+          
           <tgroup cols="3">
             <thead>
               <row>
@@ -287,10 +286,10 @@ $acl->addRole(new Zend_Acl_Role('editor'), 'staff');
 $acl->addRole(new Zend_Acl_Role('administrator'));
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.defining">
-        <title>Определение контроля доступа</title>
+    <section xml:id="zend.acl.introduction.defining"><info><title>Определение контроля доступа</title></info>
+        
 
         <para>
             Теперь, когда <acronym>ACL</acronym> содержит все необходимые роли, можно определить
@@ -347,10 +346,10 @@ $acl->allow('administrator');]]></programlisting>
             действительны для всех ресурсов.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.querying">
-        <title>Запросы к ACL</title>
+    <section xml:id="zend.acl.introduction.querying"><info><title>Запросы к ACL</title></info>
+        
 
         <para>
             Теперь у нас есть гибкий <acronym>ACL</acronym>, который может использоваться для
@@ -393,8 +392,5 @@ echo $acl->isAllowed('administrator', null, 'update') ?
 // разрешен потому, что администратор обладает всеми привилегиями
 ]]></programlisting>
 
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

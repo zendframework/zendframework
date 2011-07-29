@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.ldap.api.reference.zend-ldap-ldif-encoder">
-    <title>Zend_Ldif_Encoder</title>
+<?xml version="1.0" encoding="utf-8"?>
 
-    <table id="zend.ldap.api.reference.zend-ldap-ldif-encoder.table">
-        <title>API für Zend_Ldif_Encoder</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap-ldif-encoder"><info><title>Zend_Ldif_Encoder</title></info>
+    
+
+    <table xml:id="zend.ldap.api.reference.zend-ldap-ldif-encoder.table"><info><title>API für Zend_Ldif_Encoder</title></info>
+        
 
         <tgroup cols="2">
             <thead>
@@ -77,4 +77,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect3>
+</section>

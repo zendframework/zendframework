@@ -1,5 +1,8 @@
-<sect1 id="zend.controller.basics">
-    <title>Zend_Controller 基础</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.basics"><info><title>Zend_Controller 基础</title></info>
+    
 
     <para>
         <code>Zend_Controller</code>系统被设计为轻量、模块化、和可扩展的系统。虽然它提供了足够多的功能结构让你的系统建立在<code>Zend_Controller</code>之上并共享通用的约定和相似的代码设计，但它是一个最低要求的设计，给用户最大的灵活性和自由度。
@@ -10,8 +13,7 @@
     </para>
 
     <para>
-        <inlinegraphic width="483" scale="100" align="center" valign="middle"
-            fileref="figures/zend.controller.basics.png" format="PNG" />
+        <inlinemediaobject><imageobject><imagedata width="483" scale="100" align="center" valign="middle" fileref="figures/zend.controller.basics.png" format="PNG"/></imageobject></inlinemediaobject>
     </para>
 
     <para>
@@ -62,8 +64,8 @@
                     缺省的派遣器是<code>Zend_Controller_Dispatcher_Standard</code>。它定义控制器为以Controller结尾的 MixedCasedClasses，并且动作为以Action结尾的camelCasedMethods：<code>FooController::barAction()</code>。在这个例子中，控制器是<code>foo</code>，动作是the action as <code>bar</code>。
                 </para>
 
-                <note>
-                    <title> 大小写命名协议 </title>
+                <note><info><title> 大小写命名协议 </title></info>
+                    
 
                     <para>
                         因为人们经常在大小写上犯错误，所以Zend Framework把路径信息标准化为小写。当然，这会影响你来命名控制器和动作或指向它们的链接。
@@ -99,8 +101,4 @@
     <para>
         <code>Zend_Controller</code>的工作流相当简单。请求被<code>Zend_Controller_Front</code>接收，然后它调用<code>Zend_Controller_Router_Rewrite</code>来决定哪个控制器（和控制器中的动作）被派遣。为了在请求中设置控制器和动作名字<code>Zend_Controller_Router_Rewrite</code>分解URI。<code>Zend_Controller_Front</code>接着进入一个派遣循环。它调用<code>Zend_Controller_Dispatcher_Standard</code>，传递给它请求，派遣在请求（或使用缺省的）中指定的控制器和动作。在控制器完成之后，控制返回到<code>Zend_Controller_Front</code>。如果控制器通过重置请求派遣状态指示其它的控制器应该被派遣，循环将继续并且其它派遣被执行。否则，处理结束。
     </para>
-</sect1>
-
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

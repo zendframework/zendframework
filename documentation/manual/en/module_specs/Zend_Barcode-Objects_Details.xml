@@ -1,33 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.barcode.objects.details">
-    <title>Description of shipped barcodes</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.barcode.objects.details"><info><title>Description of shipped barcodes</title></info>
+    
 
     <para>
         You will find below detailed information about all barcode types shipped by default with
         Zend Framework.
     </para>
 
-    <sect3 id="zend.barcode.objects.details.error">
-        <title>Zend_Barcode_Object_Error</title>
+    <section xml:id="zend.barcode.objects.details.error"><info><title>Zend_Barcode_Object_Error</title></info>
+        
 
         <para>
-            <inlinegraphic width="400" align="center" valign="middle"
-                fileref="figures/zend.barcode.objects.details.error.png" format="PNG"/>
+            <inlinemediaobject><imageobject><imagedata width="400" align="center" valign="middle" fileref="figures/zend.barcode.objects.details.error.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
         <para>
             This barcode is a special case. It is internally used to automatically render
             an exception caught by the <classname>Zend_Barcode</classname> component.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.barcode.objects.details.code25">
-        <title>Zend_Barcode_Object_Code25</title>
+    <section xml:id="zend.barcode.objects.details.code25"><info><title>Zend_Barcode_Object_Code25</title></info>
+        
 
         <para>
-            <inlinegraphic width="152" align="center" valign="middle"
-                fileref="figures/zend.barcode.objects.details.code25.png" format="PNG"/>
+            <inlinemediaobject><imageobject><imagedata width="152" align="center" valign="middle" fileref="figures/zend.barcode.objects.details.code25.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
         <itemizedlist>
@@ -59,14 +58,13 @@
         <para>
             There are no particular options for this barcode.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.barcode.objects.details.code25interleaved">
-        <title>Zend_Barcode_Object_Code25interleaved</title>
+    <section xml:id="zend.barcode.objects.details.code25interleaved"><info><title>Zend_Barcode_Object_Code25interleaved</title></info>
+        
 
         <para>
-            <inlinegraphic width="101" align="center" valign="middle"
-                fileref="figures/zend.barcode.objects.details.int25.png" format="PNG"/>
+            <inlinemediaobject><imageobject><imagedata width="101" align="center" valign="middle" fileref="figures/zend.barcode.objects.details.int25.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
         <para>
@@ -104,8 +102,8 @@
             Available options include:
         </para>
 
-        <table id="zend.barcode.objects.details.code25interleaved.table">
-            <title>Zend_Barcode_Object_Code25interleaved Options</title>
+        <table xml:id="zend.barcode.objects.details.code25interleaved.table"><info><title>Zend_Barcode_Object_Code25interleaved Options</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -135,14 +133,13 @@
                 prepend the missing zero to the barcode text.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.barcode.objects.details.ean2">
-        <title>Zend_Barcode_Object_Ean2</title>
+    <section xml:id="zend.barcode.objects.details.ean2"><info><title>Zend_Barcode_Object_Ean2</title></info>
+        
 
         <para>
-            <inlinegraphic width="41" align="center" valign="middle"
-                fileref="figures/zend.barcode.objects.details.ean2.png" format="PNG"/>
+            <inlinemediaobject><imageobject><imagedata width="41" align="center" valign="middle" fileref="figures/zend.barcode.objects.details.ean2.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
         <para>
@@ -188,14 +185,13 @@
                 prepend the missing zero to the barcode text.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.barcode.objects.details.ean5">
-        <title>Zend_Barcode_Object_Ean5</title>
+    <section xml:id="zend.barcode.objects.details.ean5"><info><title>Zend_Barcode_Object_Ean5</title></info>
+        
 
         <para>
-            <inlinegraphic width="68" align="center" valign="middle"
-                fileref="figures/zend.barcode.objects.details.ean5.png" format="PNG"/>
+            <inlinemediaobject><imageobject><imagedata width="68" align="center" valign="middle" fileref="figures/zend.barcode.objects.details.ean5.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
         <para>
@@ -241,14 +237,13 @@
                 prepend the missing zero to the barcode text.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.barcode.objects.details.ean8">
-        <title>Zend_Barcode_Object_Ean8</title>
+    <section xml:id="zend.barcode.objects.details.ean8"><info><title>Zend_Barcode_Object_Ean8</title></info>
+        
 
         <para>
-            <inlinegraphic width="82" align="center" valign="middle"
-                fileref="figures/zend.barcode.objects.details.ean8.png" format="PNG"/>
+            <inlinemediaobject><imageobject><imagedata width="82" align="center" valign="middle" fileref="figures/zend.barcode.objects.details.ean8.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
         <para>
@@ -294,14 +289,13 @@
                 prepend the missing zero to the barcode text.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.barcode.objects.details.ean13">
-        <title>Zend_Barcode_Object_Ean13</title>
+    <section xml:id="zend.barcode.objects.details.ean13"><info><title>Zend_Barcode_Object_Ean13</title></info>
+        
 
         <para>
-            <inlinegraphic width="113" align="center" valign="middle"
-                fileref="figures/zend.barcode.objects.details.ean13.png" format="PNG"/>
+            <inlinemediaobject><imageobject><imagedata width="113" align="center" valign="middle" fileref="figures/zend.barcode.objects.details.ean13.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
         <itemizedlist>
@@ -345,14 +339,13 @@
                 The option <property>withQuietZones</property> has no effect with this barcode.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.barcode.objects.details.code39">
-        <title>Zend_Barcode_Object_Code39</title>
+    <section xml:id="zend.barcode.objects.details.code39"><info><title>Zend_Barcode_Object_Code39</title></info>
+        
 
         <para>
-            <inlinegraphic width="275" align="center" valign="middle"
-                fileref="figures/zend.barcode.introduction.example-1.png" format="PNG"/>
+            <inlinemediaobject><imageobject><imagedata width="275" align="center" valign="middle" fileref="figures/zend.barcode.introduction.example-1.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
         <itemizedlist>
@@ -392,14 +385,13 @@
         <para>
             There are no particular options for this barcode.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.barcode.objects.details.identcode">
-        <title>Zend_Barcode_Object_Identcode</title>
+    <section xml:id="zend.barcode.objects.details.identcode"><info><title>Zend_Barcode_Object_Identcode</title></info>
+        
 
         <para>
-            <inlinegraphic width="137" align="center" valign="middle"
-                fileref="figures/zend.barcode.objects.details.identcode.png" format="PNG"/>
+            <inlinemediaobject><imageobject><imagedata width="137" align="center" valign="middle" fileref="figures/zend.barcode.objects.details.identcode.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
         <para>
@@ -445,14 +437,13 @@
                 missing zeros to the barcode text.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.barcode.objects.details.itf14">
-        <title>Zend_Barcode_Object_Itf14</title>
+    <section xml:id="zend.barcode.objects.details.itf14"><info><title>Zend_Barcode_Object_Itf14</title></info>
+        
 
         <para>
-            <inlinegraphic width="155" align="center" valign="middle"
-                fileref="figures/zend.barcode.objects.details.itf14.png" format="PNG"/>
+            <inlinemediaobject><imageobject><imagedata width="155" align="center" valign="middle" fileref="figures/zend.barcode.objects.details.itf14.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
         <para>
@@ -498,14 +489,13 @@
                 missing zeros to the barcode text.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.barcode.objects.details.leitcode">
-        <title>Zend_Barcode_Object_Leitcode</title>
+    <section xml:id="zend.barcode.objects.details.leitcode"><info><title>Zend_Barcode_Object_Leitcode</title></info>
+        
 
         <para>
-            <inlinegraphic width="155" align="center" valign="middle"
-                fileref="figures/zend.barcode.objects.details.leitcode.png" format="PNG"/>
+            <inlinemediaobject><imageobject><imagedata width="155" align="center" valign="middle" fileref="figures/zend.barcode.objects.details.leitcode.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
         <para>
@@ -551,14 +541,13 @@
                 prepend missing zeros to the barcode text.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.barcode.objects.details.planet">
-        <title>Zend_Barcode_Object_Planet</title>
+    <section xml:id="zend.barcode.objects.details.planet"><info><title>Zend_Barcode_Object_Planet</title></info>
+        
 
         <para>
-            <inlinegraphic width="286" align="center" valign="middle"
-                fileref="figures/zend.barcode.objects.details.planet.png" format="PNG"/>
+            <inlinemediaobject><imageobject><imagedata width="286" align="center" valign="middle" fileref="figures/zend.barcode.objects.details.planet.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
         <itemizedlist>
@@ -590,14 +579,13 @@
         <para>
             There are no particular options for this barcode.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.barcode.objects.details.postnet">
-        <title>Zend_Barcode_Object_Postnet</title>
+    <section xml:id="zend.barcode.objects.details.postnet"><info><title>Zend_Barcode_Object_Postnet</title></info>
+        
 
         <para>
-            <inlinegraphic width="286" align="center" valign="middle"
-                fileref="figures/zend.barcode.objects.details.postnet.png" format="PNG"/>
+            <inlinemediaobject><imageobject><imagedata width="286" align="center" valign="middle" fileref="figures/zend.barcode.objects.details.postnet.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
         <itemizedlist>
@@ -629,14 +617,13 @@
         <para>
             There are no particular options for this barcode.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.barcode.objects.details.royalmail">
-        <title>Zend_Barcode_Object_Royalmail</title>
+    <section xml:id="zend.barcode.objects.details.royalmail"><info><title>Zend_Barcode_Object_Royalmail</title></info>
+        
 
         <para>
-            <inlinegraphic width="158" align="center" valign="middle"
-                fileref="figures/zend.barcode.objects.details.royalmail.png" format="PNG"/>
+            <inlinemediaobject><imageobject><imagedata width="158" align="center" valign="middle" fileref="figures/zend.barcode.objects.details.royalmail.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
         <itemizedlist>
@@ -669,14 +656,13 @@
         <para>
             There are no particular options for this barcode.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.barcode.objects.details.upca">
-        <title>Zend_Barcode_Object_Upca</title>
+    <section xml:id="zend.barcode.objects.details.upca"><info><title>Zend_Barcode_Object_Upca</title></info>
+        
 
         <para>
-            <inlinegraphic width="115" align="center" valign="middle"
-                fileref="figures/zend.barcode.objects.details.upca.png" format="PNG"/>
+            <inlinemediaobject><imageobject><imagedata width="115" align="center" valign="middle" fileref="figures/zend.barcode.objects.details.upca.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
         <para>
@@ -726,14 +712,13 @@
                 The option <property>withQuietZones</property> has no effect with this barcode.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.barcode.objects.details.upce">
-        <title>Zend_Barcode_Object_Upce</title>
+    <section xml:id="zend.barcode.objects.details.upce"><info><title>Zend_Barcode_Object_Upce</title></info>
+        
 
         <para>
-            <inlinegraphic width="71" align="center" valign="middle"
-                fileref="figures/zend.barcode.objects.details.upce.png" format="PNG"/>
+            <inlinemediaobject><imageobject><imagedata width="71" align="center" valign="middle" fileref="figures/zend.barcode.objects.details.upce.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
         <para>
@@ -792,5 +777,5 @@
                 The option <property>withQuietZones</property> has no effect with this barcode.
             </para>
         </note>
-    </sect3>
-</sect2>
+    </section>
+</section>

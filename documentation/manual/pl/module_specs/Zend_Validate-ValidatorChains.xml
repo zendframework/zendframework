@@ -1,6 +1,7 @@
-<sect1 id="zend.validate.validator_chains">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.validator_chains"><info><title>Łańcuchy weryfikatorów</title></info>
 
-    <title>Łańcuchy weryfikatorów</title>
+    
 
     <para>
         Często do pewnej wartości potrzebujemy zastosować wiele weryfikatorów w
@@ -25,8 +26,8 @@ if ($validatorChain->isValid($username)) {
         echo "$message\n";
     }
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         Weryfikatory są uruchamiane w takiej kolejności, w jakiej zostały dodane
         do <code>Zend_Validate</code>. W powyższym przykładzie, wpierw jest
@@ -55,8 +56,8 @@ if ($validatorChain->isValid($username)) {
         <programlisting role="php"><![CDATA[
 $validatorChain->addValidator(new Zend_Validate_StringLength(6, 12), true)
         ->addValidator(new Zend_Validate_Alnum());
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
     </para>
 
@@ -65,4 +66,4 @@ $validatorChain->addValidator(new Zend_Validate_StringLength(6, 12), true)
         interfejs <code>Zend_Validate_Interface</code>.
     </para>
 
-</sect1>
+</section>

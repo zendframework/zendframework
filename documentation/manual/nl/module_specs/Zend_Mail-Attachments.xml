@@ -1,5 +1,6 @@
-<sect1 id="zend.mail.attachments">
-    <title>Bijlagen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.attachments"><info><title>Bijlagen</title></info>
+    
     <para>
         Je kan bestanden aan e-mail bijvoegen door de <code>addAttachment()</code> methode te gebruiken. Het
         standaard gedrag van <code>Zend_Mail</code> neemt aan dat de bijlage een binair object is
@@ -7,8 +8,8 @@
         bijlage moet worden behandeld. Deze veronderstellingen kunnen overschreven worden door meer parameters aan
         <code>addAttachment()</code> door te geven:
     </para>
-    <example>
-        <title>E-mails met bijlagen</title>
+    <example><info><title>E-mails met bijlagen</title></info>
+        
         <programlisting role="php"><![CDATA[
 <?php
 require_once 'Zend/Mail.php';
@@ -16,7 +17,7 @@ $mail = new Zend_Mail();
 // bericht maken...
 $mail->addAttachment($someBinaryString);
 $mail->addAttachment($myImage, 'image/gif', Zend_Mime::DISPOSITION_INLINE, Zend_Mime::ENCODING_8BIT);
-?>]]>   </programlisting>
+?>   ]]></programlisting>
     </example>
     <para>
         Als je meer controle wil over het MIME deel dat voor deze bijlage word gemaakt kan je de waarde die
@@ -36,7 +37,4 @@ $at->filename    = 'test.gif';
 
 $mail->send();
 ?>]]></programlisting>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20774 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.feed.introduction">
-    <title>Introduction</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         Le composant <classname>Zend_Feed</classname> offre des services permettant de
@@ -28,13 +26,13 @@
 
     <para>
         Dans l'exemple ci-dessous, nous illustrons une utilisation simple de
-        <classname>Zend_Feed</classname>&#160;: on obtient un flux <acronym>RSS</acronym> et on enregistre les
+        <classname>Zend_Feed</classname> : on obtient un flux <acronym>RSS</acronym> et on enregistre les
         portions du flux qui nous intéressent dans un tableau <acronym>PHP</acronym> simple, qui pourra ensuite être
         utilisé pour afficher les données, les stocker dans une base de données etc.
     </para>
 
-    <note>
-        <title>Attention</title>
+    <note><info><title>Attention</title></info>
+        
         <para>
             Beaucoup de flux <acronym>RSS</acronym> ont à leur disposition différentes propriétés, pour les
             canaux comme pour les éléments. La spécification <acronym>RSS</acronym> spécifie beaucoup de propriétés
@@ -43,8 +41,8 @@
         </para>
     </note>
 
-    <example id="zend.feed.introduction.example.rss">
-        <title>Manipuler des données RSS avec Zend_Feed</title>
+    <example xml:id="zend.feed.introduction.example.rss"><info><title>Manipuler des données RSS avec Zend_Feed</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 // on va chercher les dernières news de Slashdot
@@ -77,4 +75,4 @@ foreach ($rssSlashdot as $elem) {
 }
 ]]></programlisting>
     </example>
-</sect1>
+</section>

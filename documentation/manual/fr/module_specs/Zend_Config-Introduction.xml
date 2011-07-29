@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.config.introduction">
-    <title>Introduction</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_Config</classname> est conçu pour simplifier l'accès et l'utilisation des
@@ -15,8 +13,8 @@
         <link linkend="zend.config.adapters.xml"><classname>Zend_Config_Xml</classname></link>.
     </para>
 
-    <example id="zend.config.introduction.example.using">
-        <title>Utilisation native de Zend_Config</title>
+    <example xml:id="zend.config.introduction.example.using"><info><title>Utilisation native de Zend_Config</title></info>
+        
 
         <para>
             Normalement on s'attend à ce que les utilisateurs emploient une des classes
@@ -27,7 +25,7 @@
             mais si les données de configuration sont disponibles dans un tableau
             <acronym>PHP</acronym>, on peut
             simplement passer les données au constructeur de <classname>Zend_Config</classname>
-            afin d'utiliser une interface orientée objet simple&#160;:
+            afin d'utiliser une interface orientée objet simple :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -73,20 +71,20 @@ $db = Zend_Db::factory($config->database);
     <para>
         Avec l'accès de type orienté-objet aux données, <classname>Zend_Config</classname> a aussi
         la méthode <methodname>get()</methodname> qui retournera la valeur par défaut si l'élément
-        n'existe pas. Par exemple&#160;:
+        n'existe pas. Par exemple :
     </para>
 
     <programlisting language="php"><![CDATA[
 $host = $config->database->get('host', 'localhost');
 ]]></programlisting>
 
-    <example id="zend.config.introduction.example.file.php">
-        <title>Utilisez Zend_Config avec un fichier de configuration en PHP</title>
+    <example xml:id="zend.config.introduction.example.file.php"><info><title>Utilisez Zend_Config avec un fichier de configuration en PHP</title></info>
+        
 
         <para>
             Il est souvent souhaitable d'utiliser une fichier de configuration en pur
             <acronym>PHP</acronym>. Le code
-            suivant illustre comment ceci peut être facilement réalisé&#160;:
+            suivant illustre comment ceci peut être facilement réalisé :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -113,4 +111,4 @@ $config = new Zend_Config(require 'config.php');
 echo $config->webhost;
 ]]></programlisting>
     </example>
-</sect1>
+</section>

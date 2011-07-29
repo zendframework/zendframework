@@ -1,13 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.gdata.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         Google Data <acronym>API</acronym>s provide programmatic interface to some of Google's
-        online services. The Google data Protocol is based upon the <ulink
-            url="http://ietfreport.isoc.org/idref/draft-ietf-atompub-protocol/">Atom Publishing
-            Protocol</ulink> and allows client applications to retrieve data matching queries,
+        online services. The Google data Protocol is based upon the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ietfreport.isoc.org/idref/draft-ietf-atompub-protocol/">Atom Publishing
+            Protocol</link> and allows client applications to retrieve data matching queries,
         post data, update data and delete data using standard <acronym>HTTP</acronym> and the
         Atom syndication formation. The <classname>Zend_Gdata</classname> component is a
         <acronym>PHP</acronym> 5 interface for accessing Google Data from <acronym>PHP</acronym>.
@@ -17,7 +15,7 @@
 
     <para>
         See
-        <ulink url="http://code.google.com/apis/gdata/">http://code.google.com/apis/gdata/</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/gdata/">http://code.google.com/apis/gdata/</link>
         for more information about Google Data <acronym>API</acronym>.
     </para>
 
@@ -84,9 +82,8 @@
 
             <listitem>
                 <para>
-                    <ulink
-                        url="http://code.google.com/apis/blogger/developers_guide_php.html">Google
-                        Blogger</ulink> is a popular Internet provider of
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/blogger/developers_guide_php.html">Google
+                        Blogger</link> is a popular Internet provider of
                     "push-button publishing" and syndication.
                 </para>
             </listitem>
@@ -107,8 +104,8 @@
         </itemizedlist>
     </para>
 
-    <note>
-        <title>Unsupported services</title>
+    <note><info><title>Unsupported services</title></info>
+        
 
         <para>
             <classname>Zend_Gdata</classname> does not provide an interface to any other Google
@@ -117,8 +114,8 @@
         </para>
     </note>
 
-    <sect2 id="zend.gdata.introduction.structure">
-        <title>Structure of Zend_Gdata</title>
+    <section xml:id="zend.gdata.introduction.structure"><info><title>Structure of Zend_Gdata</title></info>
+        
 
         <para>
             <classname>Zend_Gata</classname> is composed of several types of classes:
@@ -179,9 +176,9 @@
                         properties of an entry (such as the spreadsheet cell
                         value), you can use an entry object to send update
                         or delete requests to a service. For example,
-                        you can call <command>$entry->save()</command> to save
+                        you can call <command>$entry-&gt;save()</command> to save
                         changes made to an entry back to service from which
-                        the entry initiated, or <command>$entry->delete()</command>
+                        the entry initiated, or <command>$entry-&gt;delete()</command>
                         to delete an entry from the server.
                     </para>
                 </listitem>
@@ -215,10 +212,10 @@
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.introduction.services">
-        <title>Interacting with Google Services</title>
+    <section xml:id="zend.gdata.introduction.services"><info><title>Interacting with Google Services</title></info>
+        
 
         <para>
             Google data services are based upon the Atom Publishing Protocol
@@ -236,10 +233,10 @@
             from the command-line, but the methods contained within are easily
             portable to a web application.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.introduction.magicfactory">
-        <title>Obtaining instances of Zend_Gdata classes</title>
+    <section xml:id="zend.gdata.introduction.magicfactory"><info><title>Obtaining instances of Zend_Gdata classes</title></info>
+        
 
         <para>
             The Zend Framework naming standards require that all classes be
@@ -258,7 +255,7 @@
             <classname>Zend_Gdata_Spreadsheets</classname>) that should make constructing new
             instances of data model, query and other classes much easier. This magic factory is
             implemented by using the magic <methodname>__call()</methodname> method to intercept all
-            attempts to call <command>$service->newXXX(arg1, arg2, ...)</command>. Based off
+            attempts to call <command>$service-&gt;newXXX(arg1, arg2, ...)</command>. Based off
             the value of XXX, a search is performed in all registered 'packages'
             for the desired class. Here's some examples:
         </para>
@@ -284,10 +281,10 @@ $entry->cell = $cell;
             registering the appropriate 'packages' (directories) which are to
             be searched when calling the magic factory method.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.introduction.authentication">
-        <title>Google Data Client Authentication</title>
+    <section xml:id="zend.gdata.introduction.authentication"><info><title>Google Data Client Authentication</title></info>
+        
 
         <para>
             Most Google Data services require client applications to
@@ -303,10 +300,10 @@ $entry->cell = $cell;
             Most other types of queries against Google Data services do not
             require authentication.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.introduction.dependencies">
-        <title>Dependencies</title>
+    <section xml:id="zend.gdata.introduction.dependencies"><info><title>Dependencies</title></info>
+        
 
         <para>
             <classname>Zend_Gdata</classname> makes use of
@@ -322,10 +319,10 @@ $entry->cell = $cell;
             running on a host that has a direct connection to the Internet.
             The <classname>Zend_Gdata</classname> client operates by contacting Google Data servers.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.introduction.creation">
-        <title>Creating a new Gdata client</title>
+    <section xml:id="zend.gdata.introduction.creation"><info><title>Creating a new Gdata client</title></info>
+        
 
         <para>
             Create a new object of class <classname>Zend_Gdata_App</classname>,
@@ -374,10 +371,10 @@ $gdata->setMinorProtocolVersion(null);
             Also see the sections on authentication for methods to
             create an authenticated <classname>Zend_Http_Client</classname> object.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.introduction.parameters">
-        <title>Common Query Parameters</title>
+    <section xml:id="zend.gdata.introduction.parameters"><info><title>Common Query Parameters</title></info>
+        
 
         <para>
             You can specify parameters to customize queries with <classname>Zend_Gdata</classname>.
@@ -514,10 +511,10 @@ $query->maxResults = 10;
 $query->resetParameters();      // clears all parameters
 // ...get a different feed...
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.introduction.getfeed">
-        <title>Fetching a Feed</title>
+    <section xml:id="zend.gdata.introduction.getfeed"><info><title>Fetching a Feed</title></info>
+        
 
         <para>
             Use the <methodname>getFeed()</methodname> function to retrieve
@@ -541,10 +538,10 @@ $feed = $gdata->getFeed($query);
             functions help you to get feeds from the <acronym>URI</acronym> that is
             appropriate for the respective service.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.introduction.paging">
-        <title>Working with Multi-page Feeds</title>
+    <section xml:id="zend.gdata.introduction.paging"><info><title>Working with Multi-page Feeds</title></info>
+        
 
         <para>
             When retrieving a feed that contains a large number of entries,
@@ -586,10 +583,10 @@ $feed = $gdata->retrieveAllEntriesForFeed($gdata->getFeed($query));
             time to complete on large feeds. You may need to increase <acronym>PHP</acronym>'s
             execution time limit by calling <methodname>set_time_limit()</methodname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.introduction.usefeedentry">
-        <title>Working with Data in Feeds and Entries</title>
+    <section xml:id="zend.gdata.introduction.usefeedentry"><info><title>Working with Data in Feeds and Entries</title></info>
+        
 
         <para>
             After retrieving a feed, you can read the data from the feed
@@ -612,10 +609,10 @@ foreach ($feed as $entry) {
     echo 'Content: ' . $entry->getContent()->getText();
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.introduction.updateentry">
-        <title>Updating Entries</title>
+    <section xml:id="zend.gdata.introduction.updateentry"><info><title>Updating Entries</title></info>
+        
 
         <para>
             After retrieving an entry, you can update that entry and save
@@ -639,10 +636,10 @@ foreach ($feed as $entry) {
     echo 'New Title: ' . $newEntry->title->text;
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.introduction.post">
-        <title>Posting Entries to Google Servers</title>
+    <section xml:id="zend.gdata.introduction.post"><info><title>Posting Entries to Google Servers</title></info>
+        
 
         <para>
             The <classname>Zend_Gdata</classname> object has a function
@@ -688,10 +685,10 @@ echo 'The <id> of the resulting entry is: ' . $entryResult->id->text;
             <classname>Zend_Gdata_AuthSub</classname> or
             <classname>Zend_Gdata_ClientLogin</classname> classes.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.introduction.delete">
-        <title>Deleting Entries on Google Servers</title>
+    <section xml:id="zend.gdata.introduction.delete"><info><title>Deleting Entries on Google Servers</title></info>
+        
 
         <para>
             Option 1: The <classname>Zend_Gdata</classname> object has a function
@@ -701,7 +698,7 @@ echo 'The <id> of the resulting entry is: ' . $entryResult->id->text;
         </para>
 
         <para>
-            Option 2: Alternatively, you can call <command>$entry->delete()</command>
+            Option 2: Alternatively, you can call <command>$entry-&gt;delete()</command>
             on an entry retrieved from a Google service.
         </para>
 
@@ -725,5 +722,5 @@ foreach ($feed as $feedEntry) {
             <classname>Zend_Gdata_AuthSub</classname> or
             <classname>Zend_Gdata_ClientLogin</classname> classes.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

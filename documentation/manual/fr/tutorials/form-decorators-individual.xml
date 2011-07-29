@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21997 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.form.decorators.individual">
-    <title>Rendu individuel des décorateurs</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.form.decorators.individual"><info><title>Rendu individuel des décorateurs</title></info>
+    
 
     <para>
         Dans la <link linkend="learning.form.decorators.layering">section précédente</link>, nous
@@ -281,4 +279,4 @@ foreach ($form->getElements() as $element) {
         <classname>Zend_Form</classname>. Dans la section suivante, nous verrons comment monter un
         élément de date grâce à des éléments et des décorateur uniques assemblés main.
     </para>
-</sect1>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.config.writer.introduction">
-    <title>Zend_Config_Writer</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.writer.introduction"><info><title>Zend_Config_Writer</title></info>
+    
 
     <para>
         <classname>Zend_Config_Writer</classname> lhe dá a capacidade de escrever arquivos de
@@ -40,7 +38,7 @@
     <para>
         O escritor <acronym>INI</acronym> possui dois modos de renderização no que diz respeito às
         seções. Por padrão, a configuração de maior nível é sempre escrita em nomes de seção.
-        Chamando <command>$writer->setRenderWithoutSections();</command> todas as opções estarão
+        Chamando <command>$writer-&gt;setRenderWithoutSections();</command> todas as opções estarão
         escritas em um namespace global do arquivo <acronym>INI</acronym> e nenhuma seção será
         aplicada.
     </para>
@@ -62,8 +60,8 @@
         na raiz do objeto <classname>Zend_Config</classname>.
     </para>
 
-    <example id="zend.config.writer.example.using">
-        <title>Usando o Zend_Config_Writer</title>
+    <example xml:id="zend.config.writer.example.using"><info><title>Usando o Zend_Config_Writer</title></info>
+        
 
         <para>
             Este exemplo ilustra a utilização básica de
@@ -109,8 +107,8 @@ $writer->write('config.xml', $config);
         </para>
     </example>
 
-    <example id="zend.config.writer.modifying">
-        <title>Modificando uma Configuração Existente</title>
+    <example xml:id="zend.config.writer.modifying"><info><title>Modificando uma Configuração Existente</title></info>
+        
 
         <para>
             Este exemplo demonstra como editar um arquivo de configuração existente.
@@ -134,8 +132,8 @@ $writer->write();
 ]]></programlisting>
     </example>
 
-    <note>
-        <title>Carregando um Arquivo de Configuração</title>
+    <note><info><title>Carregando um Arquivo de Configuração</title></info>
+        
 
         <para>
             Ao carregar um arquivo de configuração existente para modificações, é muito importante
@@ -151,7 +149,4 @@ $writer->write();
         para construir a string de configuração. Este método também pode ser usado externamente caso
         precise acessar a string de representação dos dados de configuração.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

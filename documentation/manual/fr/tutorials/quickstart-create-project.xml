@@ -1,20 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22312 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.quickstart.create-project">
-    <title>Créer votre projet</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.create-project"><info><title>Créer votre projet</title></info>
+    
 
     <para>
         Afin de créer un projet, vous devez d'abord télécharger et extraire Zend Framework.
     </para>
 
-    <sect2 id="learning.quickstart.create-project.install-zf">
-        <title>Installer Zend Framework</title>
+    <section xml:id="learning.quickstart.create-project.install-zf"><info><title>Installer Zend Framework</title></info>
+        
 
         <para>
             La manière la plus simple d'obtenir Zend Framework avec une pile <acronym>PHP</acronym>
-            complète est d'installer <ulink url="http://www.zend.com/en/products/server-ce/downloads">
-            Zend Server</ulink>. Zend Server possède des installeurs natifs pour Mac OSX, Windows, Fedora Core,
+            complète est d'installer <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.com/en/products/server-ce/downloads">
+            Zend Server</link>. Zend Server possède des installeurs natifs pour Mac OSX, Windows, Fedora Core,
             et Ubuntu, ainsi qu'un installeur universel pour la plupart des distributions Linux.
         </para>
 
@@ -27,8 +25,8 @@
         </para>
 
         <para>
-            Il reste bien sûr possible <ulink url="http://framework.zend.com/download/latest"> de télécharger
-            la dernière version de Zend Framework</ulink> et l'extraire; notez simplement où vous choisissez
+            Il reste bien sûr possible <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/download/latest"> de télécharger
+            la dernière version de Zend Framework</link> et l'extraire; notez simplement où vous choisissez
             de l'extraire.
         </para>
 
@@ -40,13 +38,13 @@
         <para>
             Ca y est! Zend Framework est maintenant installé et prêt à l'emploi.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.quickstart.create-project.create-project">
-        <title>Créer votre projet</title>
+    <section xml:id="learning.quickstart.create-project.create-project"><info><title>Créer votre projet</title></info>
+        
 
-        <note>
-            <title>Outil en ligne de commandes zf</title>
+        <note><info><title>Outil en ligne de commandes zf</title></info>
+            
 
             <para>
                 Dans la dossier <filename>bin/</filename> de votre installation de Zend Framework
@@ -67,7 +65,7 @@
         </note>
 
         <para>
-            Ouvrez un terminal (sous Windows, <command>Démarrer -> Exécuter</command>, puis
+            Ouvrez un terminal (sous Windows, <command>Démarrer -&gt; Exécuter</command>, puis
             <command>cmd</command>). Naviguez vers un dossier dans lequel vous souhaitez démarrer un projet.
             Puis, utilisez le chemin vers le script approprié et lancez:
         </para>
@@ -135,10 +133,10 @@ quickstart
             Maintenant que le projet est crée, les principaux points à comprendre sont le
             bootstrap, la configuration, les contrôleurs d'action et les vues.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.quickstart.create-project.bootstrap">
-        <title>Le Bootstrap</title>
+    <section xml:id="learning.quickstart.create-project.bootstrap"><info><title>Le Bootstrap</title></info>
+        
 
         <para>
             Votre classe <classname>Bootstrap</classname> définit les ressources (composants) à
@@ -158,10 +156,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         <para>
             Comme vous le voyez, rien de plus n'est nécessaire pour commencer.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.quickstart.create-project.configuration">
-        <title>Configuration</title>
+    <section xml:id="learning.quickstart.create-project.configuration"><info><title>Configuration</title></info>
+        
 
         <para>
             Le Zend Framework lui-même n'a pas besoin de configuration, mais l'application oui. La
@@ -205,10 +203,10 @@ phpSettings.display_errors = 1
             d'organiser sa configuration et de s'assurer que les paramètres appropriés sont utilisés
             pour chaque étape du développement de l'application.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.quickstart.create-project.action-controllers">
-        <title>Contrôleurs d'action</title>
+    <section xml:id="learning.quickstart.create-project.action-controllers"><info><title>Contrôleurs d'action</title></info>
+        
 
         <para>
             Les <emphasis>contrôleurs d'action</emphasis> de votre application contiennent la logique 'utile'
@@ -294,10 +292,10 @@ class ErrorController extends Zend_Controller_Action
             et (2) <classname>ErrorController</classname> référence un attribut "view".
             Ceci nous mène vers la section suivante.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.quickstart.create-project.views">
-        <title>Vues</title>
+    <section xml:id="learning.quickstart.create-project.views"><info><title>Vues</title></info>
+        
 
         <para>
             Les vues dans Zend Framework sont écrites en <acronym>PHP</acronym> classique. Les scripts
@@ -409,14 +407,13 @@ class ErrorController extends Zend_Controller_Action
 </body>
 </html>
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.quickstart.create-project.vhost">
-        <title>Creation d'un hôte virtuel</title>
+    <section xml:id="learning.quickstart.create-project.vhost"><info><title>Creation d'un hôte virtuel</title></info>
+        
 
         <para>
-            Pour le quickstart nous supposerons que vous utilisez le <ulink
-                url="http://httpd.apache.org/">serveur web Apacher</ulink>. Zend Framework fonctionne
+            Pour le quickstart nous supposerons que vous utilisez le <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://httpd.apache.org/">serveur web Apacher</link>. Zend Framework fonctionne
                 très bien avec d'autres serveurs -- y compris Microsoft Internet Information
             Server, lighttpd, nginx, et plus -- mais la plupart des développeurs devraient être familiers
             à Apache, et cela permet d'introduire la structure de dossiers de Zend Framework et les
@@ -510,15 +507,15 @@ class ErrorController extends Zend_Controller_Action
         <para>
             Démarrez votre serveur web (ou redémarrez le), et tout devrait être prêt.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.quickstart.create-project.checkpoint">
-        <title>Checkpoint</title>
+    <section xml:id="learning.quickstart.create-project.checkpoint"><info><title>Checkpoint</title></info>
+        
 
         <para>
             Dès lors, vous devriez pouvoir démarrer votre application Zend Framework. Faites pointer votre
             navigateur vers l'hôte configuré dans la section précédente et une page d'accueil devrait
             s'afficher.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

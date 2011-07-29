@@ -1,5 +1,8 @@
-<sect1 id="zend.dom.introduction">
-    <title>Wprowadzenie</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dom.introduction"><info><title>Wprowadzenie</title></info>
+    
 
     <para>
         Komponent <code>Zend_Dom</code> zapewnia narzędzia do pracy z
@@ -8,7 +11,4 @@
         służący do wskazywania elementów dokumentów DOM za pomocą selektorów
         XPath oraz CSS.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

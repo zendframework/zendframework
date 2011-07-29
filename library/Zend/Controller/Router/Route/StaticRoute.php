@@ -79,7 +79,9 @@ class StaticRoute extends AbstractRoute
     public function match($path, $partial = false)
     {
         if ($partial) {
-            if (substr($path, 0, strlen($this->_route)) === $this->_route) {
+            if ((empty($path) && empty($this->_route))
+                || (substr($path, 0, strlen($this->_route)) === $this->_route)
+            ) {
                 $this->setMatchedPath($this->_route);
                 return $this->_defaults;
             }

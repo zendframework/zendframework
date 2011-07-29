@@ -1,10 +1,13 @@
-<sect1 id="zend.json.introduction">
-    <title>Введение</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.introduction"><info><title>Введение</title></info>
+    
     <para>
         <code>Zend_Json</code> предоставляет удобные методы для
         преобразования кода PHP в JSON и декодирования JSON в код PHP.
         Для более подробной информации о JSON можно
-        <ulink url="http://www.json.org/">посетить сайт проекта JSON</ulink>.
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.json.org/">посетить сайт проекта JSON</link>.
 <!--
         <code>Zend_Json</code> provides convenience methods for serializing
         native PHP to JSON and decoding JSON to native PHP. For more information
@@ -25,7 +28,4 @@
         format than XML for exchanging data with JavaScript clients.
 -->
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

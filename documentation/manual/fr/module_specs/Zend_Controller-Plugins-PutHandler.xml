@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.plugins.standard.puthandler">
-    <title>Zend_Controller_Plugin_PutHandler</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.plugins.standard.puthandler"><info><title>Zend_Controller_Plugin_PutHandler</title></info>
+    
 
     <para>
         <classname>Zend_Controller_Plugin_PutHandler</classname> fournit un plugin intégré pour
@@ -11,7 +9,7 @@
         la requête et, s'il s'agit d'une requête <constant>PUT</constant>, va utiliser la
         fonction parse_str pour découper le contenu brut de la requête <constant>PUT</constant>
         en un tableau de paramètres qui est ensuite enregistré dans l'objet de requête. Par
-        exemple&#160;:
+        exemple :
     </para>
 
     <programlisting language="txt"><![CDATA[
@@ -22,7 +20,7 @@ title=Hello&body=World
 
     <para>
         Pour recevoir les paramètres "title" et "body" comme des paramètres de requête habituels,
-        vous devez enregistrer le plugin&#160;:
+        vous devez enregistrer le plugin :
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -32,7 +30,7 @@ $front->registerPlugin(new Zend_Controller_Plugin_PutHandler());
 
     <para>
         Ensuite vous pouvez accéder aux paramètres du corps de la requête <constant>PUT</constant>
-        par leur nom à l'intérieur de votre contrôleur&#160;:
+        par leur nom à l'intérieur de votre contrôleur :
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -44,4 +42,4 @@ public function putAction()
 }
 ...
 ]]></programlisting>
-</sect3>
+</section>

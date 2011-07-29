@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.dojo.form.examples">
-    <title>Dojo Formular Beispiele</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.form.examples"><info><title>Dojo Formular Beispiele</title></info>
+    
 
-    <example id="zend.dojo.form.examples.dojoform">
-        <title>Zend_Dojo_Form verwenden</title>
+    <example xml:id="zend.dojo.form.examples.dojoform"><info><title>Zend_Dojo_Form verwenden</title></info>
+        
 
         <para>
             Der einfachste Weg um Dojo mit <classname>Zend_Form</classname> zu verwenden besteht
@@ -352,8 +350,8 @@ class My_Form_Test extends Zend_Dojo_Form
 ]]></programlisting>
     </example>
 
-    <example id="zend.dojo.form.examples.decorating">
-        <title>Ein existierendes Formular verändern um Dojo zu verwenden</title>
+    <example xml:id="zend.dojo.form.examples.decorating"><info><title>Ein existierendes Formular verändern um Dojo zu verwenden</title></info>
+        
 
         <para>
             Ein bestehendes Formular kann verändert werden damit es auch Dojo verwendet, indem die
@@ -409,4 +407,4 @@ class My_Custom_Form extends Zend_Form
             Ersetzung von <classname>Zend_Form</classname> ist, die bereits Dojo versteht...
         </para>
     </example>
-</sect2>
+</section>

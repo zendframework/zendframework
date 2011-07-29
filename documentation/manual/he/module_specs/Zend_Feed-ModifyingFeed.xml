@@ -1,13 +1,14 @@
-<sect1 id="zend.feed.modifying-feed">
-    <title>עריכה של תבנית הסנדקציה</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.modifying-feed"><info><title>עריכה של תבנית הסנדקציה</title></info>
+    
 
     <para>
         התחביר הטבעי של <code>Zend_Feed</code> ניתן להרחבה כדי לבנות ולערוך סנדצקיות ופריטים באותו אופן שהוא קורא אותם.
         ניתן להמיר את האובייקטים החדשים שנוצרו או הקיימים שנערכו בחזרה לפורמט XML תקין לשמירה אל קובץ או לשליחה לשרת.
     </para>
 
-    <example id="zend.feed.modifying-feed.example.modifying">
-        <title>עריכה של פריט בסנדקציה</title>
+    <example xml:id="zend.feed.modifying-feed.example.modifying"><info><title>עריכה של פריט בסנדקציה</title></info>
+        
         <programlisting role="php"><![CDATA[
 $feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
 $entry = $feed->current();
@@ -16,8 +17,8 @@ $entry->title = 'This is a new title';
 $entry->author->email = 'my_email@example.com';
 
 echo $entry->saveXML();
-]]>
-        </programlisting>
+
+        ]]></programlisting>
         <para>
             הקוד למעלה ידפיס תוכן XML מלא עם הפריט החדש שנוסף, הכולל גם את כל התגים הדרושים של קובץ XML.
         </para>
@@ -32,8 +33,8 @@ echo $entry->saveXML();
         אם הנך עורך אלמנט קיים הוא תמיד ישמור את הסוג שלו. כשהנך מוסיף אלמנט, הוא יוסיף אותו לסוג ברירת המחדל של הסנדקציה אלה אם כן תגדיר את זה אחרת.
     </para>
 
-    <example id="zend.feed.modifying-feed.example.creating">
-        <title>יצירת אלמנטים לסנדקציה עם סוג מותאם אישית</title>
+    <example xml:id="zend.feed.modifying-feed.example.creating"><info><title>יצירת אלמנטים לסנדקציה עם סוג מותאם אישית</title></info>
+        
         <programlisting role="php"><![CDATA[
 $entry = new Zend_Feed_Entry_Atom();
 // id is always assigned by the server in Atom
@@ -49,10 +50,7 @@ $entry->{'myns:container_elt'}->part1 = 'first nested custom part';
 $entry->{'myns:container_elt'}->part2 = 'second nested custom part';
 
 echo $entry->saveXML();
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

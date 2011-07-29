@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20763 -->
-<sect2 id="zend.application.core-functionality.resource-resource">
-    <title>Zend_Application_Resource_Resource</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.core-functionality.resource-resource"><info><title>Zend_Application_Resource_Resource</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Resource</classname>は、
@@ -13,8 +13,8 @@
         期待されます。
     </para>
 
-    <table id="zend.application.core-functionality.resource-resource.api">
-        <title>Zend_Application_Resource_Resourceインターフェース</title>
+    <table xml:id="zend.application.core-functionality.resource-resource.api"><info><title>Zend_Application_Resource_Resourceインターフェース</title></info>
+        
         <tgroup cols="4">
             <thead>
                 <row>
@@ -99,4 +99,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect2>
+</section>

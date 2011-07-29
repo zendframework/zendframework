@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22432 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.json.basics">
-    <title>Grundlegende Verwendung</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.basics"><info><title>Grundlegende Verwendung</title></info>
+    
 
     <para>
         Die Verwendung von <classname>Zend_Json</classname> bedingt den Gebrauch der beiden
@@ -18,8 +16,8 @@ $phpNative = Zend_Json::decode($encodedValue);
 $json = Zend_Json::encode($phpNative);
 ]]></programlisting>
 
-    <sect2 id="zend.json.basics.prettyprint">
-        <title>Schön-drucken von JSON</title>
+    <section xml:id="zend.json.basics.prettyprint"><info><title>Schön-drucken von JSON</title></info>
+        
 
         <para>
             Manchmal ist es schwer <acronym>JSON</acronym> Daten zu durchsuchen welche von
@@ -43,5 +41,5 @@ if($debug) {
             ein Optionen Array. Die Option <property>indent</property> erlaubt es einen String für
             die Einrückung zu definieren - standardmäßig ist das ein einzelnes Tabulator Zeichen.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

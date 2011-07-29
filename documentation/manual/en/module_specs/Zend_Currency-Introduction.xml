@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.currency.introduction">
-    <title>Introduction to Zend_Currency</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.introduction"><info><title>Introduction to Zend_Currency</title></info>
+    
 
     <para>
         <classname>Zend_Currency</classname> is part of the strong support for I18n in Zend
@@ -9,14 +10,14 @@
         exchange services and calculation.
     </para>
 
-    <sect2 id="zend.currency.introduction.list">
-        <title>Why should you use Zend_Currency?</title>
+    <section xml:id="zend.currency.introduction.list"><info><title>Why should you use Zend_Currency?</title></info>
+        
 
         <para>
             <classname>Zend_Currency</classname> offers you the following benefit:
         </para>
 
-        <itemizedlist mark='opencircle'>
+        <itemizedlist mark="opencircle">
             <listitem>
                 <para>
                     <emphasis>Complete Locale support</emphasis>
@@ -64,5 +65,5 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

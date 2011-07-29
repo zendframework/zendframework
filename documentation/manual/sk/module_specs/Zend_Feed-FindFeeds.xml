@@ -1,5 +1,6 @@
-<sect1 id="zend.feed.findFeeds">
-    <title>Retrieving Feeds from Web Pages</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.findFeeds"><info><title>Retrieving Feeds from Web Pages</title></info>
+    
     <para>
         Web stránky často obsahujú <code>&lt;link&gt;</code> značku, ktorá odkazuje
         na zdroje s obsahom ktoré sú relevantné ku konkrétnej stránke. <code>Zend_Feed</code>
@@ -21,7 +22,4 @@ $feedArray = Zend_Feed::findFeeds('http://www.example.com/news.html');
         v prípade chyby, napríklad chyba 404 v prípade HTTP alebo nespracovateľný
         (chybný) zdroj.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20250 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.loader.autoloader-resource">
-    <title>Ressource Autoloader</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.autoloader-resource"><info><title>Ressource Autoloader</title></info>
+    
 
     <para>
         Ressource Autoloader sind dazu gedacht Namespaced Bibliothekscode zu Managen der den
@@ -19,8 +17,8 @@
         Verzeichnissen zu namespacen, und trotzdem die Vorteile des Autoloadings zu nutzen.
     </para>
 
-    <sect2 id="zend.loader.autoloader-resource.usage">
-        <title>Verwendung von Ressource Autoloadern</title>
+    <section xml:id="zend.loader.autoloader-resource.usage"><info><title>Verwendung von Ressource Autoloadern</title></info>
+        
 
         <para>
             Nehmen wir die folgende Verzeichnis Struktur an:
@@ -58,8 +56,8 @@ $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
 ));
 ]]></programlisting>
 
-        <note>
-            <title>Basis Namespace</title>
+        <note><info><title>Basis Namespace</title></info>
+            
 
             <para>
                 In <classname>Zend_Loader_Autoloader</classname> wird erwartet das man den endenden
@@ -133,10 +131,10 @@ $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
     ),
 ));
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.autoloader-resource.module">
-        <title>Der Modul Ressource Autoloader</title>
+    <section xml:id="zend.loader.autoloader-resource.module"><info><title>Der Modul Ressource Autoloader</title></info>
+        
 
         <para>
             Zend Framework wird mit einer konkreten Implementation von
@@ -170,19 +168,19 @@ views/
             standardmäßig eine Instanz von <classname>Zend_Application_Module_Autoloader</classname>
             für jede eigene Modul erstellt, was es erlaubt Modul Ressource automatisch zu laden.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.autoloader-resource.factory">
-        <title>Verwendung von Ressource Autoloadern als Objekt Factories</title>
-        <para></para>
+    <section xml:id="zend.loader.autoloader-resource.factory"><info><title>Verwendung von Ressource Autoloadern als Objekt Factories</title></info>
+        
+        <para/>
         <!-- @todo -->
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.autoloader-resource.reference">
-        <title>Referenz zu den Ressource Autoloadern</title>
-        <para></para>
+    <section xml:id="zend.loader.autoloader-resource.reference"><info><title>Referenz zu den Ressource Autoloadern</title></info>
+        
+        <para/>
         <!-- @todo -->
-    </sect2>
+    </section>
 
     <!-- @todo
             Write section on using load() functionality
@@ -190,4 +188,4 @@ views/
                 Show how to use overloading to retrieve class instances
             Write reference section
     -->
-</sect1>
+</section>

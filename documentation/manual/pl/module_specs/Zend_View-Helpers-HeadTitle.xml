@@ -1,5 +1,6 @@
-<sect3 id="zend.view.helpers.initial.headtitle">
-    <title>Helper HeadTitle</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headtitle"><info><title>Helper HeadTitle</title></info>
+    
 
     <para>
         Element HTML <code>&lt;title&gt;</code> jest używany w celu ustawienia
@@ -20,8 +21,8 @@
         (umieszczenie na początku stosu) lub 'SET' (zastąpienie stosu).
     </para>
 
-    <example id="zend.view.helpers.initial.headtitle.basicusage">
-        <title>Podstawowe użycie helpera HeadTitle</title>
+    <example xml:id="zend.view.helpers.initial.headtitle.basicusage"><info><title>Podstawowe użycie helpera HeadTitle</title></info>
+        
 
         <para>
             Możesz określić tytuł w dowolnym momencie. Najczęściej będzie tak, że
@@ -40,8 +41,8 @@ $this->headTitle('Zend Framework');
 
 // ustawienie odgranicznika dla segmentów
 $this->headTitle()->setSeparator(' / ');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Kiedy jesteś juz gotowy aby wyświetlić tytuł, możesz to zrobić
@@ -53,4 +54,4 @@ $this->headTitle()->setSeparator(' / ');
 <?= $this->headTitle() ?>
 ]]></programlisting>
     </example>
-</sect3>
+</section>

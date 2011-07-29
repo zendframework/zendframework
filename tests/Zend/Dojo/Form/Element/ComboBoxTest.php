@@ -25,7 +25,7 @@ use Zend\Dojo\Form\Element\ComboBox as ComboBoxElement,
     Zend\Dojo\View\Helper\Dojo as DojoHelper,
     Zend\Form\SubForm,
     Zend\Registry,
-    Zend\View\View;
+    Zend\View;
 
 /**
  * Test class for Zend_Dojo_Form_Element_ComboBox.
@@ -58,7 +58,7 @@ class ComboBoxTest extends \PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        $view = new View();
+        $view = new View\PhpRenderer();
         \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
@@ -151,7 +151,7 @@ class ComboBoxTest extends \PHPUnit_Framework_TestCase
         $subform = new SubForm(array('name' => 'bar'));
         $subform->addElement($this->element);
         $html = $this->element->render();
-        $dojo = $this->view->dojo()->__toString();
+        $dojo = $this->view->broker('dojo')->__toString();
         $this->assertContains('"store":"foo"', $dojo, $dojo);
     }
 }

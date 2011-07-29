@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20810 -->
-<sect1 id="zend.soap.autodiscovery">
-    <title>自動検出</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.soap.autodiscovery"><info><title>自動検出</title></info>
+    
 
-    <sect2 id="zend.soap.autodiscovery.introduction">
-        <title>自動検出導入</title>
+    <section xml:id="zend.soap.autodiscovery.introduction"><info><title>自動検出導入</title></info>
+        
         <para>
             Zend Frameworkの中で実装される<acronym>SOAP</acronym>機能は、
             すべてのステップをより単純な<acronym>SOAP</acronym>通信のために必要とされるようにすることを目的とします。
@@ -34,13 +32,13 @@
 
         <para>
             <acronym>SOAP</acronym>サーバーで提供される機能を常に知っていなければなりません。
-            <ulink url="http://www.w3.org/TR/wsdl">WSDL</ulink>は
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/wsdl">WSDL</link>は
             ネットワーク・サービス<acronym>API</acronym>を詳細に記述するために使われます。
         </para>
 
         <para>
             WSDL言語は、十分に複雑です。
-            (詳しくは<ulink url="http://www.w3.org/TR/wsdl">http://www.w3.org/TR/wsdl</ulink>をご覧下さい)
+            (詳しくは<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/wsdl">http://www.w3.org/TR/wsdl</link>をご覧下さい)
             そのため、WSDLの正しい説明を用意することは困難です。
         </para>
 
@@ -74,7 +72,7 @@
 
         <para>
             <classname>Zend_Soap_AutoDiscover</classname>クラスも、
-            <acronym>PHP</acronym>から<ulink url="http://www.w3.org/TR/xmlschema-2/">XSD型</ulink>までデータ型マッピングをサポートします。
+            <acronym>PHP</acronym>から<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/xmlschema-2/">XSD型</link>までデータ型マッピングをサポートします。
         </para>
 
         <para>
@@ -97,8 +95,8 @@ $autodiscover->handle();
             AutoDiscoverクラスが提供する<methodname>dump($filename)</methodname>または<methodname>toXml()</methodname>関数を使えます。
         </para>
 
-        <note id="zend.soap.autodiscovery.introduction.noserver">
-            <title>Zend_Soap_AutodiscoverはSOAPサーバーではありません</title>
+        <note xml:id="zend.soap.autodiscovery.introduction.noserver"><info><title>Zend_Soap_AutodiscoverはSOAPサーバーではありません</title></info>
+            
 
             <para>
                 クラス<classname>Zend_Soap_AutoDiscover</classname>が
@@ -131,10 +129,10 @@ if(isset($_GET['wsdl'])) {
 ]]></programlisting>
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.soap.autodiscovery.class">
-        <title>クラスの自動検出</title>
+    <section xml:id="zend.soap.autodiscovery.class"><info><title>クラスの自動検出</title></info>
+        
 
         <para>
             クラスが<acronym>SOAP</acronym>サーバー機能を提供することに使われるならば、
@@ -168,7 +166,7 @@ $autodiscover->handle();
                 </listitem>
                 <listitem>
                     <para>
-                        クラス・メソッドは、１つの<ulink url="http://www.w3.org/TR/wsdl#_porttypes">ポートタイプ</ulink>に
+                        クラス・メソッドは、１つの<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/wsdl#_porttypes">ポートタイプ</link>に
                         結び付けられます。
                     </para>
                     <para>
@@ -186,8 +184,8 @@ $autodiscover->handle();
             </itemizedlist>
         </para>
 
-        <note>
-            <title>重要!</title>
+        <note><info><title>重要!</title></info>
+            
             <para>
                 WSDL自動検出では、パラメータを決定して型を返すために、
                 開発者により提供される<acronym>PHP</acronym> docblockを利用します。
@@ -199,10 +197,10 @@ $autodiscover->handle();
                 発見するクラスのために必要です。
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.soap.autodiscovery.functions">
-        <title>関数の自動検出</title>
+    <section xml:id="zend.soap.autodiscovery.functions"><info><title>関数の自動検出</title></info>
+        
 
         <para>
             関数のセットが<acronym>SOAP</acronym>サーバー機能を提供することに使われるならば、
@@ -238,7 +236,7 @@ $autodiscover->handle();
                 </listitem>
                 <listitem>
                     <para>
-                        関数は、１つの<ulink url="http://www.w3.org/TR/wsdl#_porttypes">ポートタイプ</ulink>に
+                        関数は、１つの<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/wsdl#_porttypes">ポートタイプ</link>に
                         結び付けられます。
                     </para>
                     <para>
@@ -256,8 +254,8 @@ $autodiscover->handle();
             </itemizedlist>
         </para>
 
-        <note>
-            <title>重要!</title>
+        <note><info><title>重要!</title></info>
+            
             <para>
                 WSDL自動検出では、パラメータを決定して、型を返すために、
                 開発者により提供される<acronym>PHP</acronym> docblockを利用します。
@@ -269,10 +267,10 @@ $autodiscover->handle();
                 発見するクラスのために必要です。
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.soap.autodiscovery.datatypes">
-        <title>データ型の自動検出</title>
+    <section xml:id="zend.soap.autodiscovery.datatypes"><info><title>データ型の自動検出</title></info>
+        
 
         <para>
             入出力データ型は、以下のマッピングを用いて、ネットワーク・サービス型に変換されます:
@@ -298,7 +296,7 @@ $autodiscover->handle();
                 </listitem>
                 <listitem>
                     <para>
-                        <acronym>PHP</acronym>クラス &lt;-&gt; 複雑な型のストラテジーに基づいた (<xref linkend="zend.soap.wsdl.types.add_complex" />参照)
+                        <acronym>PHP</acronym>クラス &lt;-&gt; 複雑な型のストラテジーに基づいた (<xref linkend="zend.soap.wsdl.types.add_complex"/>参照)
                         <footnote>
                             <para>
                                 <classname>Zend_Soap_AutoDiscover</classname>は複雑な型のための検出アルゴリズムとして
@@ -329,10 +327,10 @@ $autodiscover->handle();
             <code>soap-enc:</code> は "http://schemas.xmlsoap.org/soap/encoding/" ネームスペースで、
             <code>tns:</code> はサービスのための "target namespace" です。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.soap.autodiscovery.wsdlstyles">
-        <title>WSDLバインディングスタイル</title>
+    <section xml:id="zend.soap.autodiscovery.wsdlstyles"><info><title>WSDLバインディングスタイル</title></info>
+        
 
         <para>
             WSDLは、異なるトランスポートのメカニズムとスタイルを提供します。
@@ -364,5 +362,5 @@ $autodiscover->addFunction('myfunc1');
 $autodiscover->handle();
 ]]></programlisting>
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

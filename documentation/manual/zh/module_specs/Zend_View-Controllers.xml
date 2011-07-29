@@ -1,13 +1,14 @@
-<sect1 id="zend.view.controllers">
-    <title>控制器脚本</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.controllers"><info><title>控制器脚本</title></info>
+    
 
     <para>
         控制器是你实例化和配置Zend_View的地方。你可以分配变量给view，并让view使用某个特定的模板来输出。
     </para>
 
-    <sect2 id="zend.view.controllers.assign">
+    <section xml:id="zend.view.controllers.assign"><info><title>变量赋值</title></info>
 
-        <title>变量赋值</title>
+        
 
         <para>
             控制器需要向视图传递必要的变量，在它处理view的代码之前。通常你可以一次一个地完成变量赋值的工作。
@@ -18,8 +19,8 @@ $view = new Zend_View();
 $view->a = "Hay";
 $view->b = "Bee";
 $view->c = "Sea";
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
            然而这样比较麻烦，那么你可以将它们放进一个数组或对象中去。assign()方法允许你通过数组或对象进行赋值。下面这个例子和上例（一次一个赋值）的结果是一样的：
@@ -43,8 +44,8 @@ $obj->a = "Hay";
 $obj->b = "Bee";
 $obj->c = "Sea";
 $view->assign((array) $obj);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             另外，你也可使用这样的方法： 第一个参数是变量名，第二个是变量的值。
@@ -55,14 +56,14 @@ $view = new Zend_View();
 $view->assign('a', "Hay");
 $view->assign('b', "Bee");
 $view->assign('c', "Sea");
-]]>
-        </programlisting>
 
-    </sect2>
+        ]]></programlisting>
 
-    <sect2 id="zend.view.controllers.render">
+    </section>
 
-        <title>调用视图脚本并打印输出</title>
+    <section xml:id="zend.view.controllers.render"><info><title>调用视图脚本并打印输出</title></info>
+
+        
 
         <para>
             完成所有变量赋值后，Controller通知Zend_View通过render()调用一段特定的视图代码。注意，这个方法将只返回处理后的视图，而不直接输出，所以你要用print或echo来打印输出。
@@ -74,17 +75,17 @@ $view->a = "Hay";
 $view->b = "Bee";
 $view->c = "Sea";
 echo $view->render('someView.php');
-]]>
-        </programlisting>
 
-    </sect2>
+        ]]></programlisting>
 
-    <sect2 id="zend.view.controllers.script-paths">
+    </section>
 
-        <title>视图脚本的路径</title>
+    <section xml:id="zend.view.controllers.script-paths"><info><title>视图脚本的路径</title></info>
+
+        
 
         <para>
-        默认地， Zend_View希望你的View脚本和Controller脚本在同一目录下。比如说，如果你的Controller文件在 “/path/to/app/controllers”目录下，并调用$view->render('someView.php')，则Zend_View会查找"/path/to/app/controllers/someVire.php"文件。
+        默认地， Zend_View希望你的View脚本和Controller脚本在同一目录下。比如说，如果你的Controller文件在 “/path/to/app/controllers”目录下，并调用$view-&gt;render('someView.php')，则Zend_View会查找"/path/to/app/controllers/someVire.php"文件。
         </para>
 
         <para>
@@ -94,11 +95,11 @@ echo $view->render('someView.php');
         <programlisting role="php"><![CDATA[
 $view = new Zend_View();
 $view->setScriptPath('/path/to/app/views');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
-            现在当你调用$view->render('someView.php')，它会去找"/path/to/app/views/someView.php"。
+            现在当你调用$view-&gt;render('someView.php')，它会去找"/path/to/app/views/someView.php"。
         </para>
 
         <para>
@@ -113,12 +114,9 @@ $view->addScriptPath('/path/to/custom/');
 // 现在如果你调用 $view->render('booklist.php'), Zend_View 将
 // 首先查找 "/path/to/custom/booklist.php", 找不到再找
 // "/path/to/app/views/booklist.php", 如果还找不到，最后查找当前目录下//的"booklist.php".
-]]>
-        </programlisting>
 
-    </sect2>
+        ]]></programlisting>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+
+</section>

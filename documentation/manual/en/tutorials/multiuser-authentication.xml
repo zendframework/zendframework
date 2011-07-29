@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.multiuser.authentication">
-    <title>Authenticating Users in Zend Framework</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.multiuser.authentication"><info><title>Authenticating Users in Zend Framework</title></info>
+    
 
-    <sect2 id="learning.multiuser.authentication.intro">
-        <title>Introduction to Authentication</title>
+    <section xml:id="learning.multiuser.authentication.intro"><info><title>Introduction to Authentication</title></info>
+        
 
         <para>
             Once a web application has been able to distinguish one user from another by
@@ -24,10 +23,10 @@
             information: fingerprint, eye retinal scan, passphrase, or any other obscure personal
             information.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.multiuser.authentication.basic-usage">
-        <title>Basic Usage of Zend_Auth</title>
+    <section xml:id="learning.multiuser.authentication.basic-usage"><info><title>Basic Usage of Zend_Auth</title></info>
+        
 
         <para>
             In the following example, we will be using <classname>Zend_Auth</classname> to
@@ -65,9 +64,8 @@ CREATE TABLE users (
             The above demonstrates a user table that includes a username, password, and also a
             password salt column. This salt column is used as part of a technique called salting
             that would improve the security of your database of information against brute force
-            attacks targeting the algorithm of your password hashing. <ulink
-                url="http://en.wikipedia.org/wiki/Salting_%28cryptography%29">More
-                information</ulink> on salting.
+            attacks targeting the algorithm of your password hashing. <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Salting_%28cryptography%29">More
+                information</link> on salting.
         </para>
 
         <para>
@@ -177,5 +175,5 @@ echo $this->form;
             <classname>Zend_Auth</classname> adapters, have a look in
             <link linkend="zend.auth">the reference guide</link>.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

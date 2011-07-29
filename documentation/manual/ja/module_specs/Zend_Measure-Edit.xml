@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 22159 -->
-<sect1 id="zend.measure.edit">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.edit"><info><title>計測値の操作</title></info>
 
-    <title>計測値の操作</title>
+    
 
     <para>
         入力のパースと正規化、そしてローカライズされた表記での出力により、
@@ -52,9 +50,9 @@
         </listitem>
     </itemizedlist>
 
-    <sect2 id="zend.measure.edit.convert">
+    <section xml:id="zend.measure.edit.convert"><info><title>変換</title></info>
 
-        <title>変換</title>
+        
 
         <para>
             おそらく最も重要な機能は、異なる単位の変換でしょう。
@@ -73,8 +71,8 @@
             '<code>2</code>' です。
         </para>
 
-        <example id="zend.measure.edit.convert.example-1">
-            <title>変換</title>
+        <example xml:id="zend.measure.edit.convert.example-1"><info><title>変換</title></info>
+            
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
 $mystring = "1.234.567,89";
@@ -90,11 +88,11 @@ print "Ton:".$unit->convertTo(Zend_Measure_Weight::TON, 3);
 ]]></programlisting>
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.measure.edit.add">
+    <section xml:id="zend.measure.edit.add"><info><title>加減算</title></info>
 
-        <title>加減算</title>
+        
 
         <para>
             複数の計測値の加算には <methodname>add()</methodname>、そして減算には <methodname>sub()</methodname>
@@ -107,8 +105,8 @@ print "Ton:".$unit->convertTo(Zend_Measure_Weight::TON, 3);
         </para>
 
         <para>
-            <example id="zend.measure.edit.add.example-1">
-                <title>単位の加算</title>
+            <example xml:id="zend.measure.edit.add.example-1"><info><title>単位の加算</title></info>
+                
                 <programlisting language="php"><![CDATA[
 // オブジェクトを定義します
 $unit = new Zend_Measure_Length(200, Zend_Measure_Length::CENTIMETER);
@@ -122,8 +120,8 @@ echo $sum; // "300 cm" と出力します
             </example>
         </para>
 
-        <note>
-            <title>自動的な変換</title>
+        <note><info><title>自動的な変換</title></info>
+            
             <para>
                 あるオブジェクトを別のオブジェクトに足す際には、
                 適切な単位に自動的に変換されます。異なる単位の値を足す前に
@@ -133,8 +131,8 @@ echo $sum; // "300 cm" と出力します
         </note>
 
         <para>
-            <example id="zend.measure.edit.add.example-2">
-                <title>減算</title>
+            <example xml:id="zend.measure.edit.add.example-2"><info><title>減算</title></info>
+                
                 <para>
                     減算も、加算と同じように動作します。
                 </para>
@@ -151,11 +149,11 @@ echo $sum;
             </example>
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.measure.edit.equal">
+    <section xml:id="zend.measure.edit.equal"><info><title>比較</title></info>
 
-        <title>比較</title>
+        
 
         <para>
             計測値を比較することもできますが、自動的な単位変換は行われません。
@@ -164,8 +162,8 @@ echo $sum;
         </para>
 
         <para>
-            <example id="zend.measure.edit.equal.example-1">
-                <title>異なる計測値</title>
+            <example xml:id="zend.measure.edit.equal.example-1"><info><title>異なる計測値</title></info>
+                
                 <programlisting language="php"><![CDATA[
 // 値を定義します
 $unit = new Zend_Measure_Length(100, Zend_Measure_Length::CENTIMETER);
@@ -178,8 +176,8 @@ if ($unit->equals($unit2)) {
 }
 ]]></programlisting>
             </example>
-            <example id="zend.measure.edit.equal.example-2">
-                <title>同一の計測値</title>
+            <example xml:id="zend.measure.edit.equal.example-2"><info><title>同一の計測値</title></info>
+                
                 <programlisting language="php"><![CDATA[
 // 値を定義します
 $unit = new Zend_Measure_Length(100, Zend_Measure_Length::CENTIMETER);
@@ -196,11 +194,11 @@ if ($unit->equals($unit2)) {
             </example>
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.measure.edit.compare">
+    <section xml:id="zend.measure.edit.compare"><info><title>比較</title></info>
 
-        <title>比較</title>
+        
 
         <para>
             ある計測値が別の計測値より小さいか大きいかを調べるには
@@ -211,8 +209,8 @@ if ($unit->equals($unit2)) {
         </para>
 
         <para>
-            <example id="zend.measure.edit.compare.example-1">
-                <title>差</title>
+            <example xml:id="zend.measure.edit.compare.example-1"><info><title>差</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $unit = new Zend_Measure_Length(100, Zend_Measure_Length::CENTIMETER);
 $unit2 = new Zend_Measure_Length(1, Zend_Measure_Length::METER);
@@ -225,11 +223,11 @@ print "Greater:".$unit3->compare($unit2);
             </example>
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.measure.edit.changevalue">
+    <section xml:id="zend.measure.edit.changevalue"><info><title>値の変更</title></info>
 
-        <title>値の変更</title>
+        
 
         <para>
             値を明示的に変更するには <methodname>setValue()</methodname> を使用します。
@@ -237,8 +235,8 @@ print "Greater:".$unit3->compare($unit2);
         </para>
 
         <para>
-            <example id="zend.measure.edit.changevalue.example-1">
-                <title>値の変更</title>
+            <example xml:id="zend.measure.edit.changevalue.example-1"><info><title>値の変更</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 $unit = new Zend_Measure_Length(1,Zend_Measure_Length::METER);
@@ -255,19 +253,19 @@ echo $unit;
             </example>
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.measure.edit.changetype">
+    <section xml:id="zend.measure.edit.changetype"><info><title>型の変更</title></info>
 
-        <title>型の変更</title>
+        
 
         <para>
             値はそのままで型だけを変更するには <methodname>setType()</methodname>
             を使用します。
         </para>
 
-        <example id="zend.measure.edit.changetype.example-1">
-            <title>型の変更</title>
+        <example xml:id="zend.measure.edit.changetype.example-1"><info><title>型の変更</title></info>
+            
             <programlisting language="php"><![CDATA[
 $unit = new Zend_Measure_Length(1,Zend_Measure_Length::METER);
 echo $unit; // "1 m" と出力します
@@ -277,9 +275,6 @@ echo $unit; // "1000 km" と出力します
 ]]></programlisting>
         </example>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

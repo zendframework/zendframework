@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.plugins.usage">
-    <title>Verwenden von Plugins</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.plugins.usage"><info><title>Verwenden von Plugins</title></info>
+    
 
     <para>
         Komponenten die Plugins verwenden, verwenden typischerweise
@@ -20,8 +18,8 @@
         Einige Beispiele werden das alles etwas aufklären.
     </para>
 
-    <example id="learning.plugins.usage.basic">
-        <title>Grundsätzliches Plugin Beispiel: Hinzufügen eines einzelnen Präfix Pfades</title>
+    <example xml:id="learning.plugins.usage.basic"><info><title>Grundsätzliches Plugin Beispiel: Hinzufügen eines einzelnen Präfix Pfades</title></info>
+        
 
         <para>
             In diesem Beispiel nehmen wir an das einige Prüfungen geschrieben und im Verzeichnis
@@ -75,8 +73,8 @@ $element->addValidator('NotEmpty')
         </para>
     </example>
 
-    <note>
-        <title>Was passiert wenn ein Plugin nicht gefunden wird?</title>
+    <note><info><title>Was passiert wenn ein Plugin nicht gefunden wird?</title></info>
+        
 
         <para>
             Was passiert wenn ein Plugin angefragt wird, aber der PluginLoader nicht in der Lage ist
@@ -96,8 +94,8 @@ $element->addValidator('NotEmpty')
         </para>
     </note>
 
-    <example id="learning.plugins.usage.override">
-        <title>Fortgeschrittene Plugin Verwendung: Überladen existierender Plugins</title>
+    <example xml:id="learning.plugins.usage.override"><info><title>Fortgeschrittene Plugin Verwendung: Überladen existierender Plugins</title></info>
+        
 
         <para>
             Eine Stärke des PluginLoaders ist dessen Verwendung eines LIFO Stacks welche es erlaubt
@@ -154,4 +152,4 @@ $view->addHelperPath('foo/view/helpers', 'Foo_View_Helper');
             eigene <classname>Foo_View_Helper_Button</classname> Klasse verwiesen!
         </para>
     </example>
-</sect1>
+</section>

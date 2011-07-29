@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 22755 -->
-<sect1 id="zend.log.formatters">
-  <title>フォーマッタ</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.formatters"><info><title>フォーマッタ</title></info>
+  
 
   <para>
     フォーマッタの役割は、<property>event</property> 配列からイベントの内容を受け取り、
@@ -17,8 +15,8 @@
     例外がスローされます。
   </para>
 
-  <sect2 id="zend.log.formatters.simple">
-    <title>単純なフォーマット</title>
+  <section xml:id="zend.log.formatters.simple"><info><title>単純なフォーマット</title></info>
+    
     <para>
       <classname>Zend_Log_Formatter_Simple</classname> はデフォルトのフォーマッタです。
       これは、何もフォーマッタを指定しなかった場合に自動的に設定されます。
@@ -57,10 +55,10 @@ $logger->info('there');
       デフォルトのキーを取得するには、<classname>Zend_Log_Formatter_Simple</classname>
       の定数 DEFAULT_FORMAT を使用します。
     </para>
-  </sect2>
+  </section>
 
-  <sect2 id="zend.log.formatters.xml">
-    <title>XML へのフォーマット</title>
+  <section xml:id="zend.log.formatters.xml"><info><title>XML へのフォーマット</title></info>
+    
 
     <para>
       <classname>Zend_Log_Formatter_Xml</classname> は、ログのデータを <acronym>XML</acronym> 文字列に変換します。
@@ -125,5 +123,5 @@ $logger->info('通知メッセージ');
   <level>INFO</level>
 </log>
 ]]></programlisting>
-  </sect2>
-</sect1>
+  </section>
+</section>

@@ -89,7 +89,6 @@ class Math
             return '0';
         }
 
-        $digitsBeforeDot = $length - ($decPos + 1);
         if ($precision >= ($length - ($decPos + 1))) {
             return $op1;
         }

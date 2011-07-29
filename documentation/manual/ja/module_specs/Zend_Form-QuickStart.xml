@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21829 -->
-<sect1 id="zend.form.quickstart">
-    <title>Zend_Form クイックスタート</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.quickstart"><info><title>Zend_Form クイックスタート</title></info>
+    
 
     <para>
         このクイックスタートガイドでは、<classname>Zend_Form</classname>
         を用いたフォームの作成や検証、そしてレンダリングについての基本を扱います。
     </para>
 
-    <sect2 id="zend.form.quickstart.create">
-        <title>フォームオブジェクトの作成</title>
+    <section xml:id="zend.form.quickstart.create"><info><title>フォームオブジェクトの作成</title></info>
+        
 
         <para>
             フォームオブジェクトを作成するのは非常に簡単で、
@@ -55,10 +53,10 @@ $form->setAction('/resource/process')
         <programlisting language="php"><![CDATA[
 $form->setAttrib('id', 'login');
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.elements">
-        <title>フォームへの要素の追加</title>
+    <section xml:id="zend.form.quickstart.elements"><info><title>フォームへの要素の追加</title></info>
+        
 
         <para>
             要素がなければフォームには何の意味もありません。
@@ -249,10 +247,10 @@ $form->addElement('text', 'username', array(
             <classname>Zend_Form_Element</classname> のサブクラスを作成してそれを使用するといいでしょう。
             長い目で見れば、そのほうがタイピング量を軽減できます。
         </para></note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.render">
-        <title>フォームのレンダリング</title>
+    <section xml:id="zend.form.quickstart.render"><info><title>フォームのレンダリング</title></info>
+        
 
         <para>
             フォームのレンダリングの方法は簡単です。
@@ -363,10 +361,10 @@ $element->setOrder(10);
         <programlisting language="php"><![CDATA[
 $form->addElement('text', 'username', array('order' => 10));
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.validate">
-        <title>フォームの妥当性の検証</title>
+    <section xml:id="zend.form.quickstart.validate"><info><title>フォームの妥当性の検証</title></info>
+        
 
         <para>
             フォームが送信されたら、
@@ -440,10 +438,10 @@ $unfiltered = $form->getUnfilteredValues();
         <programlisting language="php"><![CDATA[
 $values = $form->getValidValues($_POST);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.errorstatus">
-        <title>エラー情報の取得</title>
+    <section xml:id="zend.form.quickstart.errorstatus"><info><title>エラー情報の取得</title></info>
+        
 
         <para>
             バリデーションに失敗したらどうしたらいいのでしょう?
@@ -471,10 +469,10 @@ if (!$form->isValid($_POST)) {
             エラーが発生していない要素については、
             結果の配列には含められません。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.puttingtogether">
-        <title>まとめ</title>
+    <section xml:id="zend.form.quickstart.puttingtogether"><info><title>まとめ</title></info>
+        
 
         <para>
             では、シンプルなログイン画面を作ってみましょう。
@@ -580,10 +578,10 @@ class UserController extends Zend_Controller_Action
             入力された内容が妥当な形式であったとしても、
             たとえば <classname>Zend_Auth</classname> などを用いた認証処理が必要です。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.config">
-        <title>Zend_Config オブジェクトの使用法</title>
+    <section xml:id="zend.form.quickstart.config"><info><title>Zend_Config オブジェクトの使用法</title></info>
+        
 
         <para>
             <classname>Zend_Form</classname> のすべてのクラスは
@@ -639,18 +637,15 @@ $form   = new Zend_Form($config->user->login);
         <para>
             これでフォームの定義が完了しました。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.conclusion">
-        <title>結論</title>
+    <section xml:id="zend.form.quickstart.conclusion"><info><title>結論</title></info>
+        
 
         <para>
             ここまで読み進めてこられたみなさんは、
             <classname>Zend_Form</classname> のさまざまな機能を駆使するだけの準備ができたことでしょう。
             さらに詳細な情報に進んでいきましょう!
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

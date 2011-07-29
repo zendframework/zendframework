@@ -1,5 +1,6 @@
-<sect3 id="zend.view.helpers.initial.action">
-    <title>Helper Action</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.action"><info><title>Helper Action</title></info>
+    
 
     <para>
         Helper <code>Action</code> pozwala skryptom widoku na uruchomienie
@@ -22,8 +23,8 @@
         jeśli moduł nie zostanie określony, przyjęty zostanie moduł domyślny.
     </para>
 
-    <example id="zend.view.helpers.initial.action.usage">
-        <title>Proste użycia helpera Action</title>
+    <example xml:id="zend.view.helpers.initial.action.usage"><info><title>Proste użycia helpera Action</title></info>
+        
 
         <para>
             Przykładem może być kontroler <code>CommentController</code>
@@ -37,7 +38,7 @@
         <?= $this->action('list', 'comment', null, array('count' => 10)); ?>
     </div>
 </div>
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
-</sect3>
+</section>

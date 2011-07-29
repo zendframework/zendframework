@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.codegenerator.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.codegenerator.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_CodeGenerator</classname> provides facilities to generate
@@ -12,8 +11,8 @@
         JavaScript, configuration files, apache vhosts, etc.
     </para>
 
-    <sect2 id="zend.codegenerator.introduction.theory">
-        <title>Theory of Operation</title>
+    <section xml:id="zend.codegenerator.introduction.theory"><info><title>Theory of Operation</title></info>
+        
 
         <para>
             In the most typical use case, you will simply instantiate a code
@@ -131,5 +130,5 @@ class World
 
 }
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,23 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20854 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.rest.client">
-    <title>Zend_Rest_Client</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.rest.client"><info><title>Zend_Rest_Client</title></info>
+    
 
-    <sect2 id="zend.rest.client.introduction">
-        <title>Einführung</title>
+    <section xml:id="zend.rest.client.introduction"><info><title>Einführung</title></info>
+        
 
         <para>
             Die Verwendung von <classname>Zend_Rest_Client</classname> ist sehr ähnlich der
-            Verwendung von <code>SoapClient</code> Objekten (<ulink
-                url="http://www.php.net/soap">SOAP Web Service Erweiterung</ulink>). Man kann
+            Verwendung von <code>SoapClient</code> Objekten (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/soap">SOAP Web Service Erweiterung</link>). Man kann
             einfach die REST Service Prozeduren als <classname>Zend_Rest_Client</classname> Methoden
             aufrufen. Spezifiziere die komplette Adresse des Services im Constructor von
             <classname>Zend_Rest_Client</classname>.
         </para>
 
-        <example id="zend.rest.client.introduction.example-1">
-            <title>Eine Basis REST Anfrage</title>
+        <example xml:id="zend.rest.client.introduction.example-1"><info><title>Eine Basis REST Anfrage</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 /**
@@ -29,8 +26,8 @@ echo $client->sayHello('Davey', 'Day')->get(); // "Servus Davey, guten Tag"
 ]]></programlisting>
         </example>
 
-        <note>
-            <title>Unterschiede im Aufruf</title>
+        <note><info><title>Unterschiede im Aufruf</title></info>
+            
 
             <para>
                 <classname>Zend_Rest_Client</classname> versucht, dass die entfernten Methoden, so
@@ -46,10 +43,10 @@ $client->sayHello('Davey', 'Tag');
 echo $client->get();
 ]]></programlisting>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.rest.client.return">
-        <title>Antworten</title>
+    <section xml:id="zend.rest.client.return"><info><title>Antworten</title></info>
+        
 
         <para>
             Alle Anfragen die über <classname>Zend_Rest_Client</classname> gemacht wurden,
@@ -63,8 +60,8 @@ echo $client->get();
             inklusive dem Antwort Status (erfolgreich oder fehlerhaft) und den Rückgabetyp.
         </para>
 
-        <example id="zend.rest.client.return.example-1">
-            <title>Antwort Status</title>
+        <example xml:id="zend.rest.client.return.example-1"><info><title>Antwort Status</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $result = $client->sayHello('Davey', 'Tag')->get();
@@ -96,8 +93,8 @@ if ($result->isSuccess()) {
             <acronym>PHP</acronym> Wert Ergebnissen.
         </para>
 
-        <example id="zend.rest.client.return.example-2">
-            <title>Technorati's REST Service verwenden</title>
+        <example xml:id="zend.rest.client.return.example-2"><info><title>Technorati's REST Service verwenden</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $technorati = new Zend_Rest_Client('http://api.technorati.com/bloginfo');
@@ -108,8 +105,8 @@ echo $result->firstname() .' '. $result->lastname();
 ]]></programlisting>
         </example>
 
-        <example id="zend.rest.client.return.example-3">
-            <title>Beispiel Technorati Antwort</title>
+        <example xml:id="zend.rest.client.return.example-3"><info><title>Beispiel Technorati Antwort</title></info>
+            
 
             <programlisting language="xml"><![CDATA[
 <?xml version="1.0" encoding="utf-8"?>
@@ -153,8 +150,8 @@ echo $result->firstname() .' '. $result->lastname();
             zurückgegeben, wenn auf sie durch ihren Namen zugegriffen wird.
         </para>
 
-        <note>
-            <title>Mehrere Elemente</title>
+        <note><info><title>Mehrere Elemente</title></info>
+            
 
             <para>
                 Wenn beim Zugriff, über einen Namen, mehrere Elemente mit demselben Namen gefunden
@@ -162,10 +159,10 @@ echo $result->firstname() .' '. $result->lastname();
                 Methodenschreibweise wird ein Array von <acronym>PHP</acronym> Werten zurückgegeben.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.rest.client.args">
-        <title>Anfrage Argumente</title>
+    <section xml:id="zend.rest.client.args"><info><title>Anfrage Argumente</title></info>
+        
 
         <para>
             Wenn man eine Anfrage an einen Server sendet, welcher nicht auf
@@ -179,8 +176,8 @@ echo $result->firstname() .' '. $result->lastname();
             wird.
         </para>
 
-        <example id="zend.rest.client.args.example-1">
-            <title>Anfrage Argumente setzen</title>
+        <example xml:id="zend.rest.client.args.example-1"><info><title>Anfrage Argumente setzen</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $client = new Zend_Rest_Client('http://example.org/rest');
@@ -201,14 +198,14 @@ $client->arg('value1')->arg2('value2')->get();
         </para>
 
         <para>
-            Es gilt zu bemerken, dass der erste Aufruf von <code>$client->arg('value1');</code> in
+            Es gilt zu bemerken, dass der erste Aufruf von <code>$client-&gt;arg('value1');</code> in
             beidem resultiert: <code>method=arg&amp;arg1=value1</code> und <code>arg=value1</code>.
             Es ist so, dass <classname>Zend_Rest_Server</classname> die Anfrage korrekt versteht,
             ohne dass vordefiniertes Wissen über das Service benötigt wird.
         </para>
 
-        <warning>
-            <title>Striktheit von Zend_Rest_Client</title>
+        <warning><info><title>Striktheit von Zend_Rest_Client</title></info>
+            
 
             <para>
                 Jeder REST Service der strikt in seinen Argumenten ist, die er empfängt, wird wegen
@@ -217,5 +214,5 @@ $client->arg('value1')->arg2('value2')->get();
                 Praxis und sollte keine Probleme verursachen.
             </para>
         </warning>
-    </sect2>
-</sect1>
+    </section>
+</section>

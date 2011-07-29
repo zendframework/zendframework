@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.file.transfer.filters">
-    <title>Filters for Zend_File_Transfer</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.file.transfer.filters"><info><title>Filters for Zend_File_Transfer</title></info>
+    
 
     <para>
         <classname>Zend_File_Transfer</classname> is delivered with several file related filters
@@ -49,8 +48,8 @@
         </listitem>
     </itemizedlist>
 
-    <sect2 id="zend.file.transfer.filters.usage">
-        <title>Using filters with Zend_File_Transfer</title>
+    <section xml:id="zend.file.transfer.filters.usage"><info><title>Using filters with Zend_File_Transfer</title></info>
+        
 
         <para>
             The usage of filters is quite simple. There are several methods for adding and
@@ -127,8 +126,8 @@
             </listitem>
         </itemizedlist>
 
-        <example id="zend.file.transfer.filters.usage.example">
-            <title>Add filters to a file transfer</title>
+        <example xml:id="zend.file.transfer.filters.usage.example"><info><title>Add filters to a file transfer</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
@@ -143,8 +142,8 @@ $upload->addFilter('Rename',
 ]]></programlisting>
         </example>
 
-        <example id="zend.file.transfer.filters.usage.exampletwo">
-            <title>Limit filters to single files</title>
+        <example xml:id="zend.file.transfer.filters.usage.exampletwo"><info><title>Limit filters to single files</title></info>
+            
 
             <para>
                 <methodname>addFilter()</methodname>, <methodname>addFilters()</methodname>, and
@@ -167,8 +166,8 @@ $upload->addFilter('Rename', 'C:\picture\uploads', 'file2');
             can be called multiple times.
         </para>
 
-        <example id="zend.file.transfer.filters.usage.examplemultiple">
-            <title>Add multiple filters</title>
+        <example xml:id="zend.file.transfer.filters.usage.examplemultiple"><info><title>Add multiple filters</title></info>
+            
 
             <para>
                 Often it's simpler just to call <methodname>addFilter()</methodname> multiple times.
@@ -193,10 +192,10 @@ $upload->addFilter('Rename', 'C:\picture\newjpg', 'file1')
                 different options for the same filter.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.file.transfer.filters.decrypt">
-        <title>Decrypt filter</title>
+    <section xml:id="zend.file.transfer.filters.decrypt"><info><title>Decrypt filter</title></info>
+        
 
         <para>
             The <classname>Decrypt</classname> filter allows to decrypt a encrypted file.
@@ -216,8 +215,8 @@ $upload->addFilter('Rename', 'C:\picture\newjpg', 'file1')
             decrypted file will overwrite the original encrypted file.
         </para>
 
-        <example id="zend.file.transfer.filters.decrypt.example1">
-            <title>Using the Decrypt filter with Mcrypt</title>
+        <example xml:id="zend.file.transfer.filters.decrypt.example1"><info><title>Using the Decrypt filter with Mcrypt</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer_Adapter_Http();
@@ -229,8 +228,8 @@ $upload->addFilter('Decrypt',
 ]]></programlisting>
         </example>
 
-        <example id="zend.file.transfer.filters.decrypt.example2">
-            <title>Using the Decrypt filter with OpenSSL</title>
+        <example xml:id="zend.file.transfer.filters.decrypt.example2"><info><title>Using the Decrypt filter with OpenSSL</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer_Adapter_Http();
@@ -243,10 +242,10 @@ $upload->addFilter('Decrypt',
           'envelope' => '/path/to/envelopekey.pem'));
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.file.transfer.filters.encrypt">
-        <title>Encrypt filter</title>
+    <section xml:id="zend.file.transfer.filters.encrypt"><info><title>Encrypt filter</title></info>
+        
 
         <para>
             The <classname>Encrypt</classname> filter allows to encrypt a file.
@@ -266,8 +265,8 @@ $upload->addFilter('Decrypt',
             encrypted file will overwrite the original file.
         </para>
 
-        <example id="zend.file.transfer.filters.encrypt.example1">
-            <title>Using the Encrypt filter with Mcrypt</title>
+        <example xml:id="zend.file.transfer.filters.encrypt.example1"><info><title>Using the Encrypt filter with Mcrypt</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer_Adapter_Http();
@@ -279,8 +278,8 @@ $upload->addFilter('Encrypt',
 ]]></programlisting>
         </example>
 
-        <example id="zend.file.transfer.filters.encrypt.example2">
-            <title>Using the Encrypt filter with OpenSSL</title>
+        <example xml:id="zend.file.transfer.filters.encrypt.example2"><info><title>Using the Encrypt filter with OpenSSL</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer_Adapter_Http();
@@ -292,10 +291,10 @@ $upload->addFilter('Encrypt',
           'public' => '/path/to/publickey.pem'));
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.file.transfer.filters.lowercase">
-        <title>LowerCase filter</title>
+    <section xml:id="zend.file.transfer.filters.lowercase"><info><title>LowerCase filter</title></info>
+        
 
         <para>
             The <classname>LowerCase</classname> filter allows to change the content of a file to
@@ -307,8 +306,8 @@ $upload->addFilter('Encrypt',
             the <methodname>setEncoding()</methodname> method to set it afterwards.
         </para>
 
-        <example id="zend.file.transfer.filters.lowercase.example">
-            <title>Using the LowerCase filter</title>
+        <example xml:id="zend.file.transfer.filters.lowercase.example"><info><title>Using the LowerCase filter</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer_Adapter_Http();
@@ -332,10 +331,10 @@ $upload->addFilter('LowerCase', 'ISO-8859-1');
                 want to limit it to a single file element.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.file.transfer.filters.rename">
-        <title>Rename filter</title>
+    <section xml:id="zend.file.transfer.filters.rename"><info><title>Rename filter</title></info>
+        
 
         <para>
             The <classname>Rename</classname> filter allows to change the destination of the upload,
@@ -372,8 +371,8 @@ $upload->addFilter('LowerCase', 'ISO-8859-1');
             and constructor understand the same notations.
         </para>
 
-        <example id="zend.file.transfer.filters.rename.example">
-            <title>Using the Rename filter</title>
+        <example xml:id="zend.file.transfer.filters.rename.example"><info><title>Using the Rename filter</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer_Adapter_Http();
@@ -392,8 +391,8 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
             Form Element you will not be able to use all described notations.
         </para>
 
-        <table id="zend.file.transfer.filters.rename.notations">
-            <title>Different notations of the rename filter and their meaning</title>
+        <table xml:id="zend.file.transfer.filters.rename.notations"><info><title>Different notations of the rename filter and their meaning</title></info>
+            
 
             <tgroup cols="2" align="left">
                 <thead>
@@ -430,7 +429,7 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
 
                     <row>
                         <entry>
-                            <methodname>addFile(array('C:\uploads\file.ext', 'overwrite' =>
+                            <methodname>addFile(array('C:\uploads\file.ext', 'overwrite' =&gt;
                                 true)</methodname>)
                         </entry>
 
@@ -444,7 +443,7 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
 
                     <row>
                         <entry>
-                            <methodname>addFile(array('source' => 'C:\temp\uploads', 'target' =>
+                            <methodname>addFile(array('source' =&gt; 'C:\temp\uploads', 'target' =&gt;
                                 'C:\uploads')</methodname>)
                         </entry>
 
@@ -457,8 +456,8 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
 
                     <row>
                         <entry>
-                            addFile(array('source' => 'C:\temp\uploads', 'target' => 'C:\uploads',
-                            'overwrite' => true))
+                            addFile(array('source' =&gt; 'C:\temp\uploads', 'target' =&gt; 'C:\uploads',
+                            'overwrite' =&gt; true))
                         </entry>
 
                         <entry>
@@ -471,10 +470,10 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.file.transfer.filters.uppercase">
-        <title>UpperCase filter</title>
+    <section xml:id="zend.file.transfer.filters.uppercase"><info><title>UpperCase filter</title></info>
+        
 
         <para>
             The <classname>UpperCase</classname> filter allows to change the content of a file to
@@ -486,8 +485,8 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
             the <methodname>setEncoding()</methodname> method to set it afterwards.
         </para>
 
-        <example id="zend.file.transfer.filters.uppercase.example">
-            <title>Using the UpperCase filter</title>
+        <example xml:id="zend.file.transfer.filters.uppercase.example"><info><title>Using the UpperCase filter</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer_Adapter_Http();
@@ -511,8 +510,5 @@ $upload->addFilter('UpperCase', 'ISO-8859-1');
                 want to limit it to a single file element.
             </para>
         </note>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 tw=80 et:
--->
+    </section>
+</section>

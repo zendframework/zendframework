@@ -1,5 +1,6 @@
-<sect1 id="zend.feed.consuming-atom-single-entry">
-    <title>Een enkele Atom entry lezen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-atom-single-entry"><info><title>Een enkele Atom entry lezen</title></info>
+    
 
     <para>
         Een Atom <code>&lt;entry&gt;</code> element is ook alleenstaand geldig. Gewoonlijk is de URL van
@@ -12,8 +13,8 @@
         het zal automatisch een "anonieme" feed aanmaken om de entry in te kapselen.
     </para>
 
-    <example>
-        <title>Een alleenstaande entry van een Atom Feed lezen</title>
+    <example><info><title>Een alleenstaande entry van een Atom Feed lezen</title></info>
+        
         <programlisting role="php"><![CDATA[
 <?php
 
@@ -22,7 +23,7 @@ echo 'De feed heeft: ' . $feed->count() . ' entry.';
 
 $entry = $feed->current();
 
-?>]]>   </programlisting>
+?>   ]]></programlisting>
     </example>
 
     <para>
@@ -30,17 +31,14 @@ $entry = $feed->current();
         een document opent dat alleen <code>&lt;entry&gt;</code> elementen bevat:
     </para>
 
-    <example>
-        <title>Het Entry Object Direct gebruiken voor een Single-Entry Atom Feed</title>
+    <example><info><title>Het Entry Object Direct gebruiken voor een Single-Entry Atom Feed</title></info>
+        
         <programlisting role="php"><![CDATA[
 <?php
 
 $entry = new Zend_Feed_Entry_Atom('http://atom.example.com/feed/1');
 echo $entry->title();
 
-?>]]>   </programlisting>
+?>   ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

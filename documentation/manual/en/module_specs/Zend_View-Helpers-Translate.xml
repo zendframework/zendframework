@@ -1,12 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.translate">
-    <title>Translate Helper</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.translate"><info><title>Translate Helper</title></info>
+    
 
     <para>
         Often web sites are available in several languages. To translate the
-        content of a site you should simply use <link
-            linkend="zend.translate.introduction">Zend_Translate</link> and to
+        content of a site you should simply use <link linkend="zend.translate.introduction">Zend_Translate</link> and to
         integrate <classname>Zend_Translate</classname> within your view you should use
         the <emphasis>Translate</emphasis> View Helper.
     </para>
@@ -56,8 +54,8 @@
         </para>
     </note>
 
-    <example id="zend.view.helpers.initial.translate.registered">
-        <title>Registered instance</title>
+    <example xml:id="zend.view.helpers.initial.translate.registered"><info><title>Registered instance</title></info>
+        
 
         <para>
             To use a registered instance just create an instance of
@@ -88,8 +86,8 @@ echo $this->translate('simple');
         create an instance within your view and initiate the helper afterwards.
     </para>
 
-    <example id="zend.view.helpers.initial.translate.afterwards">
-        <title>Within the view</title>
+    <example xml:id="zend.view.helpers.initial.translate.afterwards"><info><title>Within the view</title></info>
+        
 
         <para>
             To use the fluent interface, create an instance of
@@ -117,8 +115,8 @@ $this->translate()->setTranslator($adapter)->translate('simple');
         also use it directly.
     </para>
 
-    <example id="zend.view.helpers.initial.translate.directly">
-        <title>Direct usage</title>
+    <example xml:id="zend.view.helpers.initial.translate.directly"><info><title>Direct usage</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 // our example adapter
@@ -149,8 +147,8 @@ print $translate->translate('simple'); // this returns 'einfach'
         either as a list of parameters, or as an array of parameters. As examples:
     </para>
 
-    <example id="zend.view.helpers.initial.translate.parameter">
-        <title>Single parameter</title>
+    <example xml:id="zend.view.helpers.initial.translate.parameter"><info><title>Single parameter</title></info>
+        
 
         <para>
             To use a single parameter just add it to the method.
@@ -171,8 +169,8 @@ $this->translate("Today is %1\$s", $date);
         </para>
     </note>
 
-    <example id="zend.view.helpers.initial.translate.parameterlist">
-        <title>List of parameters</title>
+    <example xml:id="zend.view.helpers.initial.translate.parameterlist"><info><title>List of parameters</title></info>
+        
 
         <para>
             Or use a list of parameters and add it to the method.
@@ -191,8 +189,8 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s",
 ]]></programlisting>
     </example>
 
-    <example id="zend.view.helpers.initial.translate.parameterarray">
-        <title>Array of parameters</title>
+    <example xml:id="zend.view.helpers.initial.translate.parameterarray"><info><title>Array of parameters</title></info>
+        
 
         <para>
             Or use an array of parameters and add it to the method.
@@ -214,8 +212,8 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
         the last single parameter.
     </para>
 
-    <example id="zend.view.helpers.initial.translate.dynamic">
-        <title>Change locale dynamically</title>
+    <example xml:id="zend.view.helpers.initial.translate.dynamic"><info><title>Change locale dynamically</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 // within your view
@@ -232,8 +230,8 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date, 'it');
         set the locale from within the helper:
     </para>
 
-    <example id="zend.view.helpers.initial.translate.static">
-        <title>Change locale statically</title>
+    <example xml:id="zend.view.helpers.initial.translate.static"><info><title>Change locale statically</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 // within your view
@@ -253,8 +251,8 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
         currently set locale.
     </para>
 
-    <example id="zend.view.helpers.initial.translate.getlocale">
-        <title>Get the currently set locale</title>
+    <example xml:id="zend.view.helpers.initial.translate.getlocale"><info><title>Get the currently set locale</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 // within your view
@@ -270,7 +268,4 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
 $this->translate()->getLocale();
 ]]></programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.date.constants">
-    <title>Constants for General Date Functions</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.date.constants"><info><title>Constants for General Date Functions</title></info>
+    
 
     <para>
         Whenever a <classname>Zend_Date</classname> method has a <varname>$parts</varname>
@@ -10,8 +9,8 @@
         <acronym>RFC</acronym> 822).
     </para>
 
-    <sect2 id="zend.date.constants.using">
-        <title>Using Constants</title>
+    <section xml:id="zend.date.constants.using"><info><title>Using Constants</title></info>
+        
 
         <para>
             For example, the constant <constant>Zend_Date::HOUR</constant> can be used in the ways
@@ -25,8 +24,8 @@
             localization to Europe/GMT+1 hour (e.g. Germany, Austria, France).
         </para>
 
-        <table id="zend.date.constants.using.table">
-            <title>Operations Involving Zend_Date::HOUR</title>
+        <table xml:id="zend.date.constants.using.table"><info><title>Operations Involving Zend_Date::HOUR</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -71,7 +70,7 @@
                         <entry><methodname>compare(12, Zend_Date::HOUR)</methodname></entry>
                         <entry>Compare hour, returns 0, 1 or -1</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
-                        <entry>1 (if object > argument)</entry>
+                        <entry>1 (if object &gt; argument)</entry>
                     </row>
 
                     <row>
@@ -104,18 +103,18 @@
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.date.constants.list">
-        <title>List of All Constants</title>
+    <section xml:id="zend.date.constants.list"><info><title>List of All Constants</title></info>
+        
 
         <para>
             Each part of a date or time has a unique constant in <classname>Zend_Date</classname>.
             All constants supported by <classname>Zend_Date</classname> are listed below.
         </para>
 
-        <table id="zend.date.constants.list.table-1">
-            <title>Day Constants</title>
+        <table xml:id="zend.date.constants.list.table-1"><info><title>Day Constants</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -219,8 +218,8 @@
             </tgroup>
         </table>
 
-        <table id="zend.date.constants.list.table-2">
-            <title>Week Constants</title>
+        <table xml:id="zend.date.constants.list.table-2"><info><title>Week Constants</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -243,8 +242,8 @@
             </tgroup>
         </table>
 
-        <table id="zend.date.constants.list.table-3">
-            <title>Month Constants</title>
+        <table xml:id="zend.date.constants.list.table-3"><info><title>Month Constants</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -310,8 +309,8 @@
             </tgroup>
         </table>
 
-        <table id="zend.date.constants.list.table-4">
-            <title>Year Constants</title>
+        <table xml:id="zend.date.constants.list.table-4"><info><title>Year Constants</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -371,8 +370,8 @@
             </tgroup>
         </table>
 
-        <table id="zend.date.constants.list.table-5">
-            <title>Time Constants</title>
+        <table xml:id="zend.date.constants.list.table-5"><info><title>Time Constants</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -465,8 +464,8 @@
             </tgroup>
         </table>
 
-        <table id="zend.date.constants.list.table-6">
-            <title>Timezone Constants</title>
+        <table xml:id="zend.date.constants.list.table-6"><info><title>Timezone Constants</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -538,8 +537,8 @@
             </tgroup>
         </table>
 
-        <table id="zend.date.constants.list.table-7">
-            <title>Date Format Constants (formats include timezone)</title>
+        <table xml:id="zend.date.constants.list.table-7"><info><title>Date Format Constants (formats include timezone)</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -574,7 +573,7 @@
                         <entry><constant>Zend_Date::TIMESTAMP</constant></entry>
 
                         <entry>
-                            <ulink url="http://en.wikipedia.org/wiki/Unix_Time">Unix time</ulink>
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Unix_Time">Unix time</link>
                             (seconds since 1.1.1970, mixed)
                         </entry>
 
@@ -664,8 +663,8 @@
             years, months, and days, when possible.
         </para>
 
-        <table id="zend.date.constants.list.table-8">
-            <title>Date and Time Formats (format varies by locale)</title>
+        <table xml:id="zend.date.constants.list.table-8"><info><title>Date and Time Formats (format varies by locale)</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -806,10 +805,10 @@
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.date.constants.selfdefinedformats">
-        <title>Self-Defined OUTPUT Formats with ISO</title>
+    <section xml:id="zend.date.constants.selfdefinedformats"><info><title>Self-Defined OUTPUT Formats with ISO</title></info>
+        
 
         <para>
             If you need a date format not shown above, then use a self-defined format composed from
@@ -824,15 +823,15 @@
             <acronym>PHP</acronym>'s date format if you are more comfortable with it. However, not
             all formats defined in the <acronym>ISO</acronym> norm are supported with
             <acronym>PHP</acronym>'s date format specifiers. Use the
-            <methodname>Zend_Date::setOptions(array('format_type' => 'php'))</methodname> method to
+            <methodname>Zend_Date::setOptions(array('format_type' =&gt; 'php'))</methodname> method to
             switch <classname>Zend_Date</classname> methods from supporting <acronym>ISO</acronym>
             format specifiers to <acronym>PHP</acronym> <methodname>date()</methodname> type
             specifiers (see <link linkend="zend.date.constants.phpformats">Self-Defined OUTPUT
                 Formats Using PHP's date() Format Specifiers</link> below).
         </para>
 
-        <example id="zend.date.constants.selfdefinedformats.example-1">
-            <title>Self-Defined ISO Formats</title>
+        <example xml:id="zend.date.constants.selfdefinedformats.example-1"><info><title>Self-Defined ISO Formats</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
@@ -841,8 +840,8 @@ print $date->toString("'Era:GGGG='GGGG, ' Date:yy.MMMM.dd'yy.MMMM.dd");
 ]]></programlisting>
         </example>
 
-        <table id="zend.date.constants.selfdefinedformats.table">
-            <title>Constants for ISO 8601 Date Output</title>
+        <table xml:id="zend.date.constants.selfdefinedformats.table"><info><title>Constants for ISO 8601 Date Output</title></info>
+            
 
             <tgroup cols="4">
                 <thead>
@@ -1278,31 +1277,29 @@ print $date->toString("'Era:GGGG='GGGG, ' Date:yy.MMMM.dd'yy.MMMM.dd");
                 minute in your format check if you have used the right specifier.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.date.constants.phpformats">
-        <title>Self-Defined OUTPUT Formats Using PHP's date() Format Specifiers</title>
+    <section xml:id="zend.date.constants.phpformats"><info><title>Self-Defined OUTPUT Formats Using PHP's date() Format Specifiers</title></info>
+        
 
         <para>
             If you are more comfortable with <acronym>PHP</acronym>'s date format specifier than
             with <acronym>ISO</acronym> format specifiers, then you can use the
-            <methodname>Zend_Date::setOptions(array('format_type' => 'php'))</methodname> method to
+            <methodname>Zend_Date::setOptions(array('format_type' =&gt; 'php'))</methodname> method to
             switch <classname>Zend_Date</classname> methods from supporting <acronym>ISO</acronym>
             format specifiers to <acronym>PHP</acronym> <methodname>date()</methodname> type
-            specifiers. Afterwards, all format parameters must be given with <ulink
-                url="http://php.net/date">PHP's <methodname>date()</methodname> format
-                specifiers</ulink>. The <acronym>PHP</acronym> date format lacks some of the formats
+            specifiers. Afterwards, all format parameters must be given with <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/date">PHP's <methodname>date()</methodname> format
+                specifiers</link>. The <acronym>PHP</acronym> date format lacks some of the formats
             supported by the <acronym>ISO</acronym> Format, and vice-versa. If you are not already
             comfortable with it, then use the standard <acronym>ISO</acronym> format instead. Also,
             if you have legacy code using <acronym>PHP</acronym>'s date format, then either manually
-            convert it to the <acronym>ISO</acronym> format using <link
-                linkend="zend.locale.date.normalize">Zend_Locale_Format::convertPhpToIsoFormat()</link>,
+            convert it to the <acronym>ISO</acronym> format using <link linkend="zend.locale.date.normalize">Zend_Locale_Format::convertPhpToIsoFormat()</link>,
             or use <methodname>setOptions()</methodname>. The following examples illustrate the
             usage of constants from the table below to create self-defined formats.
         </para>
 
-        <example id="zend.date.constants.phpformats.example-1">
-            <title>Self-Defined Formats with PHP Specifier</title>
+        <example xml:id="zend.date.constants.phpformats.example-1"><info><title>Self-Defined Formats with PHP Specifier</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
@@ -1316,8 +1313,8 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
 ]]></programlisting>
         </example>
 
-        <important>
-            <title>PHP Date format and using constants</title>
+        <important><info><title>PHP Date format and using constants</title></info>
+            
 
             <para>
                 It is important to note that <classname>Zend_Date</classname>'s constants are
@@ -1341,8 +1338,8 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
             "<acronym>ISO</acronym>" format mode.
         </para>
 
-        <table id="zend.date.constants.phpformats.table">
-            <title>Constants for PHP Date Output</title>
+        <table xml:id="zend.date.constants.phpformats.table"><info><title>Constants for PHP Date Output</title></info>
+            
 
             <tgroup cols="5">
                 <thead>
@@ -1650,5 +1647,5 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
-</sect1>
+    </section>
+</section>

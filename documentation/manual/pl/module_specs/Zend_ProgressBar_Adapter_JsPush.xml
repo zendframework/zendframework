@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.progressbar.adapter.jspush">
-    <title>Zend_ProgressBar_Adapter_JsPush</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.progressbar.adapter.jspush"><info><title>Zend_ProgressBar_Adapter_JsPush</title></info>
+    
 
     <para>
         <classname>Zend_ProgressBar_Adapter_JsPush</classname> to adapter pozwalający na
@@ -85,8 +83,8 @@
         </listitem>
     </itemizedlist>
 
-    <example id="zend.progressbar-adapter.jspush.example">
-        <title>Podstawowy przykład kodu po stronie klienta</title>
+    <example xml:id="zend.progressbar-adapter.jspush.example"><info><title>Podstawowy przykład kodu po stronie klienta</title></info>
+        
 
         <para>
             Ten przykład ilustruje prosty kod <acronym>HTML</acronym>, <acronym>CSS</acronym>
@@ -150,33 +148,32 @@ function Zend_ProgressBar_Update(data)
         <itemizedlist>
             <listitem>
                 <para>
-                    Dojo: <ulink
-                        url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/user-assistance-and-feedback/progress-bar" />
+                    Dojo: <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/user-assistance-and-feedback/progress-bar">http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/user-assistance-and-feedback/progress-bar</uri>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    jQuery: <ulink url="http://t.wits.sg/2008/06/20/jquery-progress-bar-11/" />
+                    jQuery: <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://t.wits.sg/2008/06/20/jquery-progress-bar-11/">http://t.wits.sg/2008/06/20/jquery-progress-bar-11/</uri>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    MooTools: <ulink url="http://davidwalsh.name/dw-content/progress-bar.php" />
+                    MooTools: <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://davidwalsh.name/dw-content/progress-bar.php">http://davidwalsh.name/dw-content/progress-bar.php</uri>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    Prototype: <ulink url="http://livepipe.net/control/progressbar" />
+                    Prototype: <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://livepipe.net/control/progressbar">http://livepipe.net/control/progressbar</uri>
                 </para>
             </listitem>
         </itemizedlist>
     </example>
 
-    <note>
-        <title>Odstęp czasowy pomiędzy aktualizacjami</title>
+    <note><info><title>Odstęp czasowy pomiędzy aktualizacjami</title></info>
+        
 
         <para>
             Należy upewnić się, że nie jest tworzona zbyt duża ilość aktualizacji. Każda z nich
@@ -185,7 +182,4 @@ function Zend_ProgressBar_Update(data)
             podobne ograniczenie - w jego przypadku jest to 256 Bajtów.
         </para>
     </note>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

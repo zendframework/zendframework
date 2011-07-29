@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.mail">
-    <title>Zend_Application_Resource_Mail</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.mail"><info><title>Zend_Application_Resource_Mail</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Mail</classname> can be used
@@ -16,8 +15,8 @@
         behaviour does no more occur.
     </para>
 
-    <example id="zend.application.available-resources.mail.configExample">
-        <title>Sample Mail Resource Configuration</title>
+    <example xml:id="zend.application.available-resources.mail.configExample"><info><title>Sample Mail Resource Configuration</title></info>
+        
 
         <para>
             Below is a sample <acronym>INI</acronym> snippet showing how to
@@ -39,4 +38,4 @@ resources.mail.defaultReplyTo.name = "Jane Doe"
 ]]></programlisting>
 
     </example>
-</sect2>
+</section>

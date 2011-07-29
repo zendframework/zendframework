@@ -384,11 +384,7 @@ abstract class Adapter
 
         if (isset(self::$_cache) and ($change == true)) {
             $id = 'Zend_Translate_' . $this->toString() . '_Options';
-            if (self::$_cacheTags) {
-                self::$_cache->save($this->_options, $id, array($this->_options['tag']));
-            } else {
-                self::$_cache->save($this->_options, $id);
-            }
+            $this->saveCache($this->_options, $id);
         }
 
         return $this;
@@ -678,11 +674,7 @@ abstract class Adapter
 
         if (($read) and (isset(self::$_cache))) {
             $id = 'Zend_Translate_' . md5(serialize($options['content'])) . '_' . $this->toString();
-            if (self::$_cacheTags) {
-                self::$_cache->save($temp, $id, array($this->_options['tag']));
-            } else {
-                self::$_cache->save($temp, $id);
-            }
+            $this->saveCache($temp, $id);
         }
 
         return $this;
@@ -967,6 +959,38 @@ abstract class Adapter
         } else {
             self::$_cache->clean(Cache\Cache::CLEANING_MODE_ALL);
         }
+    }
+
+    /**
+     * Saves the given cache
+     * Prevents broken cache when write_control is disabled and displays problems by log or error
+     *
+     * @param  mixed  $data
+     * @param  string $id
+     * @return boolean Returns false when the cache has not been written
+     */
+    protected function saveCache($data, $id)
+    {
+        if (self::$_cacheTags) {
+            self::$_cache->save($data, $id, array($this->_options['tag']));
+        } else {
+            self::$_cache->save($data, $id);
+        }
+
+        if (!self::$_cache->test($id)) {
+            if (!$this->_options['disableNotices']) {
+                if ($this->_options['log']) {
+                    $this->_options['log']->log("Writing to cache failed.", $this->_options['logPriority']);
+                } else {
+                    trigger_error("Writing to cache failed.", E_USER_NOTICE);
+                }
+            }
+
+            self::$_cache->remove($id);
+            return false;
+        }
+
+        return true;
     }
 
     /**

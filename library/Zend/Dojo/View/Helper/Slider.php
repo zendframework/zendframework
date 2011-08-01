@@ -80,7 +80,7 @@ abstract class Slider extends Dijit
         }
 
         $content = '';
-        $params['value'] = $value;
+        $attribs['value'] = $value;
 
         if (!array_key_exists('onChange', $attribs)) {
             $attribs['onChange'] = "dojo.byId('" . $id . "').value = arguments[0];";

@@ -179,4 +179,13 @@ class EditorTest extends \PHPUnit_Framework_TestCase
         $html = $this->helper->direct('foo');
         $this->assertRegexp('#<noscript><textarea[^>]*>#', $html, $html);
     }
+    
+    /**
+     * @group ZF-11315
+     */
+    public function testHiddenInputShouldBeRenderedLast()
+    {
+        $html = $this->helper->direct('foo');
+        $this->assertRegexp('#</noscript><input#', $html, $html);
+    }
 }

@@ -2,351 +2,372 @@
 
 namespace Zend\Http;
 
-use Zend\Stdlib\ParametersDescription;
-
 use Zend\Stdlib\RequestDescription,
     Zend\Stdlib\Message,
-    Zend\Stdlib\ParametersDescription;
+    Zend\Stdlib\ParametersDescription,
+    Zend\Stdlib\Parameters;
 
 class Request extends Message implements RequestDescription
 {
-    protected $queryParams;
-    protected $postParams;
-    protected $cookieParams;
-    protected $fileParams;
-    protected $serverParams;
-    protected $envParams;
-    protected $headers;
-    protected $rawBody;
+    const SCHEME_HTTP = 'HTTP';
+    const SCHEME_HTTPS = 'HTTPS';
+    
+    const METHOD_OPTIONS = 'OPTIONS';
+    const METHOD_GET = 'GET';
+    const METHOD_HEAD = 'HEAD';
+    const METHOD_POST = 'POST';
+    const METHOD_PUT = 'PUT';
+    const METHOD_DELETE = 'DELETE';
+    const METHOD_TRACE = 'TRACE';
+    const METHOD_CONNECT = 'CONNECT';
 
-    /* mutators for various superglobals */
+    const VERSION_11 = '1.1';
+    const VERSION_10 = '1.0';
+
+    protected $scheme = self::SCHEME_HTTP;
+
+    /**
+     * @var string
+     */
+    protected $method = self::METHOD_GET;
+
+    /**
+     * @var null
+     */
+    protected $uri = null;
+
+    /**
+     * @var string
+     */
+    protected $version = self::VERSION_11;
+
+    /**
+     * @var \Zend\Stdlib\ParametersDescription
+     */
+    protected $queryParams = null;
+    
+    /**
+     * @var \Zend\Stdlib\ParametersDescription
+     */
+    protected $postParams = null;
+    
+    /**
+     * @var \Zend\Stdlib\ParametersDescription
+     */
+    protected $cookieParams = null;
+    
+    /**
+     * @var \Zend\Stdlib\ParametersDescription
+     */
+    protected $fileParams = null;
+    
+    /**
+     * @var \Zend\Stdlib\ParametersDescription
+     */
+    protected $serverParams = null;
+    
+    /**
+     * @var \Zend\Stdlib\ParametersDescription
+     */
+    protected $envParams = null;
+
+    /**
+     * @var \Zend\Http\Headers
+     */
+    protected $headers = null;
+    
+    /**
+     * @var string
+     */
+    protected $rawBody = null;
+
+    public function setMethod($method)
+    {
+        $this->method = $method;
+        return $this;
+    }
+
+    public function getMethod()
+    {
+        return $this->method;
+    }
+
+    public function setRequestUri($uri)
+    {
+        $this->requestUri = $uri;
+        return $this;
+    }
+
+    public function getRequestUri()
+    {
+        return $this->requestUri;
+    }
+
+    public function setUri(Uri $uri)
+    {
+        $this->uri = $uri;
+        return $this;
+    }
+
+    public function uri()
+    {
+        if ($this->uri === null) {
+            $this->uri = new Uri($this->requestUri);
+        }
+        return $this->uri;
+    }
+
+    public function setVersion($version)
+    {
+        $this->version = $version;
+        return $this;
+    }
+
+    public function getVersion()
+    {
+        return $this->version;
+    }
+
+    /**
+     * @param \Zend\Stdlib\ParametersDescription $query
+     * @return \Zend\Http\Request
+     */
     public function setQuery(ParametersDescription $query)
     {
         $this->queryParams = $query;
         return $this;
     }
 
+    /**
+     * @return \Zend\Stdlib\ParametersDescription
+     */
+    public function query()
+    {
+        if ($this->queryParams === null) {
+            $this->queryParams = new Parameters();
+        }
+        return $this->queryParams;
+    }
+    
+    /**
+     * @param \Zend\Stdlib\ParametersDescription $query
+     * @return \Zend\Http\Request
+     */
     public function setPost(ParametersDescription $post)
     {
         $this->postParams = $post;
         return $this;
     }
 
-    public function setCookies(ParametersDescription $cookies)
+    /**
+     * @return \Zend\Stdlib\ParametersDescription
+     */
+    public function post()
+    {
+        if ($this->postParams === null) {
+            $this->postParams = new Parameters();
+        }
+
+        return $this->postParams;
+    }
+
+    /**
+     * @param \Zend\Stdlib\ParametersDescription $query
+     * @return \Zend\Http\Request
+     */
+    public function setCookie(ParametersDescription $cookies)
     {
         $this->cookieParams = $cookies;
         return $this;
+    }
+    
+    /**
+     * @return \Zend\Stdlib\ParametersDescription
+     */
+    public function cookie()
+    {
+        if ($this->cookieParams === null) {
+            $this->cookieParams = new Parameters();
+        }
+
+        return $this->cookieParams;
     }
 
     /**
      * Set files parameters
      * 
-     * @todo   Maybe separate this into its own component?
-     * @param  HttpParameters $files 
-     * @return Request
+     * @param  Zend\Stdlib\ParametersDescription $files 
+     * @return \Zend\Http\Request
      */
-    public function setFiles(ParametersDescription $files)
+    public function setFile(ParametersDescription $files)
     {
         $this->fileParams = $files;
         return $this;
     }
+    
+    /**
+     * @return \Zend\Stdlib\ParametersDescription
+     */
+    public function file()
+    {
+        if ($this->fileParams === null) {
+            $this->fileParams = new Parameters();
+        }
 
+        return $this->fileParams;
+    }
+
+    /** 
+     * @param \Zend\Stdlib\ParametersDescription
+     * @return \Zend\Http\Request
+     */
     public function setServer(ParametersDescription $server)
     {
         $this->serverParams = $server;
         return $this;
     }
+    
+    /**
+     * @return \Zend\Stdlib\ParametersDescription
+     */
+    public function server()
+    {
+        if ($this->serverParams === null) {
+            $this->serverParams = new Parameters();
+        }
 
+        return $this->serverParams;
+    }
+
+    /**
+     * @param \Zend\Stdlib\ParametersDescription $env
+     * @return \Zend\Http\Request
+     */
     public function setEnv(ParametersDescription $env)
     {
         $this->envParams = $env;
         return $this;
     }
+    
+    /**
+     * @return \Zend\Stdlib\ParametersDescription
+     */
+    public function env()
+    {
+        if ($this->envParams === null) {
+            $this->envParams = new Parameters();
+        }
 
+        return $this->envParams;
+    }
+    
+    /**
+     * 
+     * @param \Zend\Http\RequestHeaders $headers
+     * @return \Zend\Http\Request
+     */
     public function setHeaders(RequestHeaders $headers)
     {
         $this->headers = $headers;
         return $this;
     }
 
+    /**
+     * 
+     * @return \Zend\Http\RequestHeaders
+     */
+    public function headers()
+    {
+        if ($this->headers === null) {
+            $this->headers = new RequestHeaders();
+        }
+
+        return $this->headers;
+    }
+    
+    /**
+     * @param string $string
+     * @return \Zend\Http\Request
+     */
     public function setRawBody($string)
     {
         $this->rawBody = $string;
         return $this;
     }
 
-    /* accessors for various superglobals */
-    public function query($name = null, $default = null)
+    /**
+     * 
+     * @return string
+     */
+    public function getRawBody()
     {
-        if (null !== $name) {
-            return $this->queryParams[$name] ?: $default;
-        }
-
-        return $this->queryParams;
-    }
-
-    public function post($name = null, $default = null)
-    {
-        if (null !== $name) {
-            return $this->postParams[$name] ?: $default;
-        }
-
-        return $this->postParams;
-    }
-
-    public function cookie($name = null, $default = null)
-    {
-        if (null !== $name) {
-            return $this->cookieParams[$name] ?: $default;
-        }
-
-        return $this->cookieParams;
-    }
-
-    public function file($name = null)
-    {
-        if (null !== $name) {
-            return $this->fileParams[$name];
-        }
-
-        return $this->fileParams;
-    }
-
-    public function server($name = null, $default = null)
-    {
-        if (null !== $name) {
-            return $this->serverParams[strtoupper($name)] ?: $default;
-        }
-
-        return $this->serverParams;
-    }
-
-    public function env($name = null, $default = null)
-    {
-        if (null !== $name) {
-            return $this->envParams[$name] ?: $default;
-        }
-
-        return $this->envParams;
-    }
-
-    public function headers($name = null)
-    {
-        if (null === $this->headers) {
-            $this->setHeaders($this->getServerHeaders());
-        }
-
-        if (null !== $name) {
-            return $this->headers->get($name);
-        }
-
-        return $this->headers;
-    }
-
-    protected function getServerHeaders()
-    {
-        $headers = new RequestHeaders();
-        $server  = $this->server();
-        foreach ($server as $key => $value) {
-            switch (strtoupper($key)) {
-                case 'REQUEST_URI':
-                    $headers->setUri($value);
-                    break;
-                case 'REQUEST_METHOD':
-                    $headers->setMethod($value);
-                    break;
-                case 'SERVER_PROTOCOL':
-                    if (preg_match('#^HTTP/(?P<version>.*)$#', $value, $matches)) {
-                        $headers->setProtocolVersion($matches['version']);
-                    }
-                    break;
-                case 'CONTENT_TYPE':
-                case 'CONTENT_LENGTH':
-                    $headers->addHeader($key, $value);
-                    break;
-                default:
-                    // Test if we have a "HTTP_" key, indicating a generic header
-                    if (preg_match('/^http_(?P<type>.*)$/i', $key, $matches)) {
-                        $type = $matches['type'];
-                        $headers->addHeader($type, $value);
-                    }
-                    break;
-            }
-        }
-        return $headers;
-    }
-
-    public function getContent()
-    {
-        if (null === $this->rawBody) {
-            if ($this->isPost() || $this->isPut()) {
-                $this->setRawBody(file_get_contents('php://input'));
-            }
-        }
         return $this->rawBody;
-    }
-
-    /* URI decomposition */
-    public function getRequestUri()
-    {
-        return $this->headers()->getUri();
-    }
-
-    public function getScheme()
-    {
-        $https = $this->server('HTTPS', false);
-        $scheme = empty($https) ? 'http' : 'https';
-        return $scheme;
-    }
-
-    public function getHttpHost()
-    {
-        return $this->server('HTTP_HOST');
-    }
-
-    public function getPort()
-    {
-        return $this->server('SERVER_PORT');
-    }
-
-    public function getPathInfo()
-    {
-        return parse_url($this->getRequestUri(), PHP_URL_PATH);
-    }
-
-
-    /* base path/url/script name info */
-    public function getBasePath()
-    {
-    }
-
-    public function getBaseUrl()
-    {
-    }
-
-    public function getScriptName()
-    {
-    }
-
-
-    /* capabilities */
-    public function getMethod()
-    {
-        return $this->headers()->getMethod();
-    }
-
-    public function setMethod($method)
-    {
-        $this->headers()->setMethod($method);
-        return $this;
-    }
-
-    public function getETags()
-    {
-    }
-
-    public function getPreferredLanguage(array $locales = null)
-    {
-    }
-
-    public function getLanguages()
-    {
-    }
-
-    public function getCharsets()
-    {
-    }
-
-    public function getAcceptableContentTypes()
-    {
-    }
-
-    public function isNoCache()
-    {
-    }
-
-    public function isFlashRequest()
-    {
-        $headers = $this->headers();
-        if (!$headers->has('User-Agent')) {
-            return false;
-        }
-        foreach ($headers->get('User-Agent') as $header) {
-            if (strstr(strtolower($header->getValue()), ' flash')) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public function isSecure()
-    {
-        return (bool) $this->server('https', false);
-    }
-
-    public function isXmlHttpRequest()
-    {
-        $headers = $this->headers();
-        if ($headers->has('X-Requested-With') && 'XMLHttpRequest' == $headers->get('X-Requested-With')->top()->getValue()) {
-            return true;
-        }
-        return false;
-    }
-
-
-    /* potential method tests */
-    public function isDelete()
-    {
-        return ('DELETE' === $this->headers()->getMethod());
-    }
-
-    public function isGet()
-    {
-        return ('GET' === $this->headers()->getMethod());
-    }
-
-    public function isHead()
-    {
-        return ('HEAD' === $this->headers()->getMethod());
     }
 
     public function isOptions()
     {
-        return ('OPTIONS' === $this->headers()->getMethod());
+        return ($this->method === self::METHOD_OPTIONS);
+    }
+
+    public function isGet()
+    {
+        return ($this->method === self::METHOD_GET);
+    }
+
+    public function isHead()
+    {
+        return ($this->method === self::METHOD_HEAD);
     }
 
     public function isPost()
     {
-        return ('POST' === $this->headers()->getMethod());
+        return ($this->method === self::METHOD_POST);
     }
 
     public function isPut()
     {
-        return ('PUT' === $this->headers()->getMethod());
+        return ($this->method === self::METHOD_PUT);
     }
 
-
-    /* creational capabilities */
-    // returns full URI string: scheme, host, port, base URL, path info, and query string
-    public function getUri()
+    public function isDelete()
     {
+        return ($this->method === self::METHOD_DELETE);
     }
 
-    // not sure if this needs to be in interface
-    public function __clone()
+    public function isTrace()
     {
+        return ($this->method === self::METHOD_TRACE);
     }
 
-    /* Create HTTP request */
+    public function isConnect()
+    {
+        return ($this->method === self::METHOD_CONNECT);
+    }
+
+    /**
+     * Override __toString in standard message class
+     *
+     * @return string
+     */
     public function __toString()
     {
-        return $this->headers() . "\r\n" . $this->getContent();
+        return $this->method . ' ' . $this->uri . ' ' . $this->version . "\r\n"
+            . $this->headers() . "\r\n"
+            . $this->getContent();
     }
 
-    /* Create object from "document" */
+    /**
+     * 
+     *
+     * @param $string
+     * @return \Zend\Http\Request
+     */
     public function fromString($string)
     {
         $segments = preg_split("/\r\n\r\n/", $string, 2);
+
+        // first line must be Method/Uri/Version string
+        
 
         // Populate headers
         $this->headers()->fromString($segments[0]);

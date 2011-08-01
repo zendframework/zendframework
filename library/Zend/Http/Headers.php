@@ -17,13 +17,13 @@ abstract class Headers extends SplQueue implements Iterator, ArrayAccess, Counta
     /**@+
      * Constants containing patterns for parsing HTTP headers from a string
      */
-    const PATTERN_HEADER_DELIM       = "/\r\n/";
-    const PATTERN_TOKEN              = "(?P<token>[^()><@,;:\"\\/\[\]?=}{ \t]+)";
-    const PATTERN_FIELD_CONTENT      = "(?P<content>.*)";
+    const PATTERN_HEADER_DELIM       = '\r\n';
+    const PATTERN_TOKEN              = '(?P<token>[^()><@,;:\"\\/\[\]?=}{ \t]+)';
+    const PATTERN_FIELD_CONTENT      = '(?P<content>.*)';
     const PATTERN_FIELD_CONTINUATION = '/^\s+(?P<content>.*)$/';
     /**@-*/
 
-    protected $allowedProtocolVersions = '/^\d+\.\d+$/';
+    protected $allowedProtocolVersions = '^\d+\.\d+$';
 
     /**
      * Set of headers sorted by type
@@ -56,7 +56,7 @@ abstract class Headers extends SplQueue implements Iterator, ArrayAccess, Counta
      */
     public function setProtocolVersion($version)
     {
-        if (!is_scalar($version) || !preg_match($this->allowedProtocolVersions, $version)) {
+        if (!is_scalar($version) || !preg_match('#' . $this->allowedProtocolVersions . '#', $version)) {
             $version = is_scalar($version) ? (string) $version : gettype($version);
             throw new Exception\InvalidArgumentException(sprintf(
                 'Invalid protocol version: "%s"',

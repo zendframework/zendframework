@@ -2,21 +2,27 @@
 
 namespace Zend\Http;
 
-use ArrayObject;
-
 class Header
 {
-    /** @var string */
-    protected $type;
+    /**
+     * @var string
+     */
+    protected $type = null;
 
-    /** @var string */
-    protected $value;
+    /**
+     * @var string
+     */
+    protected $value = null;
 
-    /** @var array */
+    /**
+     * @var array
+     */
     protected $arrayValue = array();
     
-    /** @var bool */
-    protected $replaceFlag;
+    /**
+     * @var bool
+     */
+    protected $replaceFlag = null;
 
     /**
      * Constructor
@@ -28,12 +34,12 @@ class Header
      */
     public function __construct($header, $value = null, $replace = false)
     {
-        if (strpos($header,':')!==false) {
+        if (strpos($header,':') !== false) {
             // construct the header from a raw string
             $this->fromString($header);
         } else {
             if (is_array($header) || $header instanceof ArrayObject) {
-                $type    = $header['type']   ?: false;
+                $type    = $header['type'] ?: false;
                 $value   = $header['value'] ?: '';
                 $replace = (bool) ($header['replace'] ?: false);
                 $header  = $type;
@@ -43,8 +49,6 @@ class Header
         }
         $this->replace($replace);
     }
-
-    /* mutators */
 
     /**
      * Set header type
@@ -81,20 +85,24 @@ class Header
         if (is_array($value)) {
             $value = implode($separator, $value);
         }
+
         $value = (string) $value;
+
         if (empty($value) || preg_match('/^\s+$/', $value)) {
             $value = '';
         }
-        $this->arrayValue= array();
-        if (preg_match('/^accept/i',$this->type)) {
-            $values= explode(',',$value);
+
+        $this->arrayValue = array();
+
+        if (preg_match('/^accept/i', $this->type)) {
+            $values = explode(',', $value);
             if (!empty($values[1])) {
                 foreach ($values as $key) {
-                    $key= trim($key);
-                    $parts= explode(';',$key);
+                    $key = trim($key);
+                    $parts = explode(';', $key);
                     if (!empty($parts[1])) {
-                        $num= count($parts);
-                        for ($i=1;$i<$num;$i++) {
+                        $num = count($parts);
+                        for ($i = 1; $i < $num; $i++) {
                             $this->arrayValue[$parts[0]][]= trim($parts[$i]);
                         }
                     } else {
@@ -103,6 +111,7 @@ class Header
                 }
             } 
         }
+
         $this->value = $value;
         return $this;
     }
@@ -123,11 +132,10 @@ class Header
         if (null === $flag) {
             return $this->replaceFlag;
         }
+
         $this->replaceFlag = (bool) $flag;
         return $this;
     }
-
-    /* accessors */
 
     /**
      * Retrieve header type
@@ -149,35 +157,6 @@ class Header
         return $this->value;
     }
 
-    /* behavior */
-
-    /**
-     * Send header
-     *
-     * Proxies to __toString() to format header appropriately (and trims it), 
-     * and uses value of replace flag as second argument for header().
-     * 
-     * @return void
-     */
-    public function send()
-    {
-        header(trim($this->__toString()), $this->replace());
-    }
-
-    /**
-     * Cast to string
-     *
-     * Returns in form of "TYPE: VALUE\r\n"
-     * 
-     * @return string
-     */
-    public function __toString()
-    {
-        $type  = $this->getType();
-        $value = $this->getValue();
-        return $type . ': ' . $value . "\r\n";
-    }
-
     /**
      * Normalize the header string
      * 
@@ -188,27 +167,10 @@ class Header
     {
         $type = str_replace(array('_', '-'), ' ', $string);
         $type = ucwords($type);
+
         return str_replace(' ', '-', $type);
     }
-    /**
-     * Set the header from a raw string
-     *  
-     * @param string $string 
-     * @return boolean
-     */
-    public function fromString($string)
-    {
-        if (!empty($string)) {
-            $parts = explode(':',$string);
-            if (!empty($parts[1])) {
-                $this->setType(trim($parts[0]));
-                $this->setValue(trim($parts[1]));
-                return true;
-            }
-            throw new Exception\InvalidArgumentException('The header specified is not valid');
-        }
-        return false;
-    }
+
     /**
      * Return true if the header has a specified value
      * 
@@ -223,6 +185,7 @@ class Header
             return ($value==$this->value);     
         }
     }
+
     /**
      * Get the quality factor of the value (q=)
      * 
@@ -235,7 +198,7 @@ class Header
             if (!empty($this->arrayValue)) {
                 if (isset($this->arrayValue[$value])) {
                     foreach ($this->arrayValue[$value] as $val) {
-                        if (preg_match('/q=(\d\.?\d?)/',$val,$matches)) {
+                        if (preg_match('/q=(\d\.?\d?)/', $val, $matches)) {
                             return $matches[1];
                         }
                     }
@@ -245,6 +208,7 @@ class Header
         }
         return false;
     }
+
     /**
      * Get the level of a value (level=)
      * 
@@ -256,7 +220,7 @@ class Header
         if ($this->hasValue($value)) {
             if (isset($this->arrayValue[$value])) {
                 foreach ($this->arrayValue[$value] as $val) {
-                    if (preg_match('/level=(\d+)/',$val,$matches)) {
+                    if (preg_match('/level=(\d+)/', $val, $matches)) {
                         return $matches[1];
                     }
                 }
@@ -264,4 +228,44 @@ class Header
         }    
         return false;
     }
+
+    /**
+     * Set the header from a raw string
+     *
+     * @param string $string
+     * @return boolean
+     */
+    public function fromString($string)
+    {
+        if (!empty($string)) {
+
+            $parts = explode(':', $string);
+
+            if (!empty($parts[1])) {
+                $this->setType(trim($parts[0]));
+                $this->setValue(trim($parts[1]));
+                return true;
+            }
+
+            throw new Exception\InvalidArgumentException('The header specified is not valid');
+        }
+
+        return false;
+    }
+
+    /**
+     * Cast to string
+     *
+     * Returns in form of "TYPE: VALUE\r\n"
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        $type  = $this->getType();
+        $value = $this->getValue();
+
+        return $type . ': ' . $value . "\r\n";
+    }
+
 }

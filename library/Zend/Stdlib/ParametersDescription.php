@@ -27,4 +27,8 @@ interface ParametersDescription extends ArrayAccess, Countable, Serializable, Tr
 
     /* Allow serialization to query format; e.g., for PUT or POST requests */
     public function toString();
+    
+    public function get($name, $default = null);
+    
+    public function set($name, $value);
 }

@@ -82,4 +82,28 @@ class Parameters extends ArrayObject implements ParametersDescription
         }
         return null;
     }
+    
+    /**
+     * @param string $name
+     * @param mixed $default optional default value
+     * @return mixed
+     */
+    public function get($name, $default = null)
+    {
+        if (isset($this[$name])) {
+            return parent::offsetGet($name);
+        }
+        return $default;
+    }
+    
+    /**
+     * @param string $name
+     * @param mixed $value
+     * @return $this
+     */
+    public function set($name, $value)
+    {
+        $this[$name] = $value;
+        return $this;
+    }
 }

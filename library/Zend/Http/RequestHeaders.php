@@ -4,10 +4,20 @@ namespace Zend\Http;
 
 class RequestHeaders extends Headers
 {
-    const PATTERN_REQUEST_LINE = "/^%token (?<uri>[^ ]+) HTTP\/(?<version>\d+(\.\d+)?)$/";
+    /**
+     * @var string Regex of the request line
+     */
+    const PATTERN_REQUEST_LINE = '^%token\s(?<uri>[^ ]+) HTTP\/(?<version>\d+(\.\d+)?)$';
 
+    /**
+     * @var string default method, one of (GET, POST, PUT, DELETE)
+     */
     protected $method = 'GET';
-    protected $uri    = '';
+    
+    /**
+     * @var string
+     */
+    protected $uri = '';
 
     /**
      * Get request method

@@ -94,7 +94,7 @@ class Message implements MessageDescription
             );
         }
         $request .= "\r\n" . $this->getContent();
-
+        return $request;
     }
 
     public function fromString($string)

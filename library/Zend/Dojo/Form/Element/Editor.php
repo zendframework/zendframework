@@ -598,4 +598,102 @@ class Editor extends Dijit
         }
         return $this->getDijitParam('updateInterval');
     }
+    
+    /**
+     * Add a single editor extra plugin.
+     *
+     * @param  string $plugin
+     * @return Zend\Dojo\Form\Element\Editor
+     */
+    public function addExtraPlugin($plugin)
+    {
+        $plugin = (string) $plugin;
+        $extraPlugins = $this->getExtraPlugins();
+        if (in_array($plugin, $extraPlugins)) {
+            return $this;
+        }
+    
+        $extraPlugins[] = (string) $plugin;
+        $this->setDijitParam('extraPlugins', $extraPlugins);
+        return $this;
+    }
+    
+    /**
+     * Add multiple extra plugins.
+     *
+     * @param  array $extraPlugins
+     * @return Zend\Dojo\Form\Element\Editor
+     */
+    public function addExtraPlugins(array $plugins)
+    {
+        foreach ($plugins as $plugin) {
+            $this->addExtraPlugin($plugin);
+        }
+        return $this;
+    }
+    
+    /**
+     * Overwrite many extra plugins at once.
+     *
+     * @param  array $plugins
+     * @return Zend\Dojo\Form\Element\Editor
+     */
+    public function setExtraPlugins(array $plugins)
+    {
+        $this->clearExtraPlugins();
+        $this->addExtraPlugins($plugins);
+        return $this;
+    }
+    
+    /**
+     * Get all extra plugins.
+     *
+     * @return array
+     */
+    public function getExtraPlugins()
+    {
+        if (!$this->hasDijitParam('extraPlugins')) {
+            return array();
+        }
+        return $this->getDijitParam('extraPlugins');
+    }
+    
+    /**
+     * Is a given extra plugin registered?
+     *
+     * @param  string $plugin
+     * @return bool
+     */
+    public function hasExtraPlugin($plugin)
+    {
+        $extraPlugins = $this->getExtraPlugins();
+        return in_array((string) $plugin, $extraPlugins);
+    }
+    
+    /**
+     * Remove a given extra plugin.
+     *
+     * @param  string $plugin
+     * @return Zend\Dojo\Form\Element\Editor
+     */
+    public function removeExtraPlugin($plugin)
+    {
+        $extraPlugins = $this->getExtraPlugins();
+        if (false === ($index = array_search($plugin, $extraPlugins))) {
+            return $this;
+        }
+        unset($extraPlugins[$index]);
+        $this->setDijitParam('extraPlugins', $extraPlugins);
+        return $this;
+    }
+    
+    /**
+     * Clear all extra plugins.
+     *
+     * @return Zend\Dojo\Form\Element\Editor
+     */
+    public function clearExtraPlugins()
+    {
+        return $this->removeDijitParam('extraPlugins');
+    }
 }

@@ -229,4 +229,23 @@ class EditorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->element->getDijitParam('updateInterval'), $this->element->getUpdateInterval());
         $this->assertEquals(300, $this->element->getUpdateInterval());
     }
+    
+    public function testShouldNotHaveExtraPluginsByDefault()
+    {
+        $extraPlugins = $this->element->getExtraPlugins();
+        $this->assertTrue(empty($extraPlugins));
+    }
+
+    public function testExtraPluginAccessorsShouldProxyToDijitParams()
+    {
+        $this->element->setExtraPlugins(array('undo', 'bold', 'italic'));
+        $this->assertTrue($this->element->hasDijitParam('extraPlugins'));
+        $this->assertTrue($this->element->hasExtraPlugin('bold'));
+        $this->assertEquals($this->element->getDijitParam('extraPlugins'), $this->element->getExtraPlugins());
+
+        $this->element->removeExtraPlugin('bold');
+        $this->assertFalse($this->element->hasExtraPlugin('bold'), var_export($this->element->getExtraPlugins(), 1));
+        $extraPlugins = $this->element->getDijitParam('extraPlugins');
+        $this->assertNotContains('bold', $extraPlugins, var_export($extraPlugins, 1));
+    }
 }

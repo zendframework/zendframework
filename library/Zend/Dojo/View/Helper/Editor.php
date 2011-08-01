@@ -62,7 +62,7 @@ class Editor extends Dijit
      * JSON-encoded parameters
      * @var array
      */
-    protected $_jsonParams = array('captureEvents', 'events', 'plugins');
+    protected $_jsonParams = array('captureEvents', 'events', 'plugins', 'extraPlugins');
 
     /**
      * dijit.Editor

@@ -176,7 +176,11 @@ class Editor extends Dijit
 function() {
     var form = zend.findParentForm(dojo.byId('$hiddenId'));
     dojo.connect(form, 'submit', function(e) {
-        dojo.byId('$hiddenId').value = dijit.byId('$editorId').getValue(false);
+        var value = dijit.byId('$editorId').getValue(false);
+        if(dojo.isFF) {
+            value = value.replace(/<br _moz_editor_bogus_node="TRUE" \/>/, '');
+        }
+        dojo.byId('$hiddenId').value = value;
     });
 }
 EOJ;

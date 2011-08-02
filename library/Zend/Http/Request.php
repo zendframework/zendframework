@@ -5,7 +5,8 @@ namespace Zend\Http;
 use Zend\Stdlib\RequestDescription,
     Zend\Stdlib\Message,
     Zend\Stdlib\ParametersDescription,
-    Zend\Stdlib\Parameters;
+    Zend\Stdlib\Parameters,
+    Zend\Uri\Uri;
 
 class Request extends Message implements RequestDescription
 {

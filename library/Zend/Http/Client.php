@@ -228,9 +228,6 @@ class Client
             if(is_resource($body) && !($this->adapter instanceof Client\Adapter\Stream)) {
                 throw new Client\Exception\RuntimeException('Adapter does not support streaming');
             }
-            echo "uri: $uri<br>";
-            echo "port: ".$this->getRequest()->uri()->getPort()."<br>";
-            echo "scheme: ".$this->getRequest()->uri()->getScheme()."<br>";
             
             // Open the connection, send the request and read the response
             $this->adapter->connect($uri, $this->getRequest()->uri()->getPort(),

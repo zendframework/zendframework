@@ -849,7 +849,7 @@ class Container
      */
     public function dijitsToJson()
     {
-        return Json::encode($this->getDijits());
+        return Json::encode($this->getDijits(), false, array('enableJsonExprFinder' => true));
     }
 
     /**

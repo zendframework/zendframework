@@ -94,7 +94,7 @@
             
 
             <para>
-                Beide, <classname>Zend_Translate</classname> und <classname>Zend_Locale</classname>
+                Beide, <classname>Zend_Translator</classname> und <classname>Zend_Locale</classname>
                 implementieren eine Caching Funktionalität welche die Geschwindigkeit großartig
                 verbessern kann. In jedem der Fälle ist dass das Nadelöhr typischerweise das Lesen
                 der Dateien, nicht das effektive Nachschauen; die Verwendung eines Caches eliminiert
@@ -109,7 +109,7 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <link linkend="zend.translate.adapter.caching"><classname>Zend_Translate</classname>
+                        <link linkend="zend.translator.adapter.caching"><classname>Zend_Translator</classname>
                             Adapter Caching</link>
                     </para>
                 </listitem>

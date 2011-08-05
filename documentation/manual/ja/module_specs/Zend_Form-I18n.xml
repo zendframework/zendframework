@@ -6,17 +6,17 @@
         作成したコンテンツを複数の言語や地域に対応させるという作業は、
         日増しに重要になってきています。
         <classname>Zend_Form</classname> はそんな作業も簡単にできるように作られており、
-        <link linkend="zend.translate">Zend_Translate</link> と <link linkend="zend.validate">Zend_Validate</link>
+        <link linkend="zend.translator">Zend_Translator</link> と <link linkend="zend.validate">Zend_Validate</link>
         の機能を使うことで国際化を実現できます。
     </para>
 
     <para>
         デフォルトでは、国際化 (I18n) は行われません。
         i18n 機能を <classname>Zend_Form</classname> で使うには、まず適切なアダプタを指定して
-        <classname>Zend_Translate</classname> のインスタンスを作成し、それを
+        <classname>Zend_Translator</classname> のインスタンスを作成し、それを
         <classname>Zend_Form</classname> や <classname>Zend_Validate</classname>
         にアタッチしなければなりません。翻訳オブジェクトや翻訳ファイルの作成方法についての詳細は
-        <link linkend="zend.translate">Zend_Translate
+        <link linkend="zend.translator">Zend_Translator
         のドキュメント</link> を参照ください。
     </para>
 
@@ -37,9 +37,9 @@
 
         <para>
             フォームの I18n 機能を初期化するには
-            <classname>Zend_Translate</classname> オブジェクトあるいは
-            <classname>Zend_Translate_Adapter</classname> オブジェクトが必要です。詳細は
-            <classname>Zend_Translate</classname> のドキュメントを参照ください。
+            <classname>Zend_Translator</classname> オブジェクトあるいは
+            <classname>Zend_Translator_Adapter</classname> オブジェクトが必要です。詳細は
+            <classname>Zend_Translator</classname> のドキュメントを参照ください。
             翻訳オブジェクトを作成したら、その後の手順にはいくつかの方法があります。
         </para>
 
@@ -48,19 +48,19 @@
                 <para>
                     <emphasis>最も簡単な方法:</emphasis>
                     レジストリに登録します。Zend Framework の I18n
-                    対応コンポーネントはすべて、レジストリの 'Zend_Translate'
+                    対応コンポーネントはすべて、レジストリの 'Zend_Translator'
                     キーに登録されている翻訳オブジェクトを自動取得して翻訳や地域化を行います。
                 </para>
 
                 <programlisting language="php"><![CDATA[
-// 'Zend_Translate' キーを使用します。$translate は Zend_Translate オブジェクトです
-Zend_Registry::set('Zend_Translate', $translate);
+// 'Zend_Translator' キーを使用します。$translate は Zend_Translator オブジェクトです
+Zend_Registry::set('Zend_Translator', $translate);
 ]]></programlisting>
 
                 <para>
                     これは、<classname>Zend_Form</classname> や
                     <classname>Zend_Validate</classname> そして
-                    <classname>Zend_View_Helper_Translate</classname> が使用します。
+                    <classname>Zend_View_Helper_Translator</classname> が使用します。
                 </para>
             </listitem>
 

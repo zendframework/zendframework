@@ -63,7 +63,7 @@ class RouteTest extends \PHPUnit_Framework_TestCase
        $translator->addTranslation(array('foo' => 'de_foo', 'bar' => 'de_bar'), 'de');
        $translator->setLocale('en');
 
-       \Zend\Registry::set('Zend_Translate', $translator);
+       \Zend\Registry::set('Zend_Translator', $translator);
     }
 
     /**
@@ -77,7 +77,7 @@ class RouteTest extends \PHPUnit_Framework_TestCase
         $_SERVER = $this->_server;
 
         // Remove translator and locale
-        \Zend\Registry::set('Zend_Translate', null);
+        \Zend\Registry::set('Zend_Translator', null);
         \Zend\Registry::set('Zend_Locale', null);
         Route\Route::setDefaultTranslator(null);
         Route\Route::setDefaultLocale(null);
@@ -741,7 +741,7 @@ class RouteTest extends \PHPUnit_Framework_TestCase
     {
         $translator = new Translator\Translator('arrayAdapter', array('foo' => 'en_baz'), 'en');
 
-        \Zend\Registry::set('Zend_Translate', $translator);
+        \Zend\Registry::set('Zend_Translator', $translator);
 
         $route = new Route\Route('foo/@foo');
         $url   = $route->assemble();
@@ -751,7 +751,7 @@ class RouteTest extends \PHPUnit_Framework_TestCase
 
     public function testTranslationAssembleTranslatorNotFound()
     {
-        \Zend\Registry::set('Zend_Translate', null);
+        \Zend\Registry::set('Zend_Translator', null);
 
         $route = new Route\Route('foo/@foo');
 

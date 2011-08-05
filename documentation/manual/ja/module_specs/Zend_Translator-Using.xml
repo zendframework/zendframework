@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.using"><info><title>翻訳アダプタの使用法</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translator.using"><info><title>翻訳アダプタの使用法</title></info>
 
     
 
@@ -7,7 +7,7 @@
         次は、アダプタをコード内で使用する方法です。
     </para>
 
-    <example xml:id="zend.translate.using.example1"><info><title>単一言語の PHP コードの例</title></info>
+    <example xml:id="zend.translator.using.example1"><info><title>単一言語の PHP コードの例</title></info>
         
 
         <programlisting language="php"><![CDATA[
@@ -28,15 +28,15 @@ print "Here is line two\n";
     </para>
 
     <para>
-        次のステップは、既存のコードに <classname>Zend Translate</classname> を組み込むことです。
+        次のステップは、既存のコードに <classname>Zend_Translator</classname> を組み込むことです。
         もちろん、あとからコードを変更するよりも
         最初から翻訳を意識したコードを書くほうがずっと簡単です。
     </para>
 
-    <example xml:id="zend.translate.using.example2"><info><title>多言語対応の PHP コードの例</title></info>
+    <example xml:id="zend.translator.using.example2"><info><title>多言語対応の PHP コードの例</title></info>
         
         <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate(
+$translate = new Zend_Translator(
     array(
         'adapter' => 'gettext',
         'content' => '/my/path/source-de.mo',
@@ -63,15 +63,15 @@ print $translate->_("Here is line two") . "\n";
 
     <para>
         では、何が起こっているのか、そしてどうやって
-        <classname>Zend_Translate</classname> をコードに組み込むのかについて
+        <classname>Zend_Translator</classname> をコードに組み込むのかについて
         もうすこし詳しく見ていきましょう。
     </para>
 
     <para>
-        新しい <classname>Zend_Translate</classname> オブジェクトを作成し、もととなるアダプタを定義します。
+        新しい <classname>Zend_Translator</classname> オブジェクトを作成し、もととなるアダプタを定義します。
 
         <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate(
+$translate = new Zend_Translator(
     array(
         'adapter' => 'gettext',
         'content' => '/path/to/translation/source-de.mo',
@@ -141,7 +141,7 @@ print $translate->_(2) . "\n";
     <para>
         また、文字列の一部が翻訳されていない場合にも問題が起こるでしょう。
         翻訳の動作原理について考えてみましょう。
-        まず <classname>Zend_Translate</classname> は、指定した ID あるいは文字列に対応する翻訳が
+        まず <classname>Zend_Translator</classname> は、指定した ID あるいは文字列に対応する翻訳が
         その言語に存在するかどうかを探します。
         翻訳文字列が見つからない場合は、<classname>Zend_Locale</classname>
         で定義されているその次の言語の翻訳を探します。
@@ -150,11 +150,11 @@ print $translate->_(2) . "\n";
         "<emphasis>de</emphasis>" の翻訳も見つからない場合は、
         もとのメッセージをそのまま返します。
         このようにして、たとえ翻訳文字列がなくても何らかの出力を得ることになっています。
-        <classname>Zend_Translate</classname> は、文字列の翻訳の際に
+        <classname>Zend_Translator</classname> は、文字列の翻訳の際に
         エラーや例外を発生させることはありません。
     </para>
 
-    <section xml:id="zend.translate.using.structure"><info><title>翻訳ソースの構造</title></info>
+    <section xml:id="zend.translator.using.structure"><info><title>翻訳ソースの構造</title></info>
 
         
 
@@ -166,7 +166,7 @@ print $translate->_(2) . "\n";
 
         <para>
             どこに翻訳ソースファイルを保存すべきなのかを知っておきましょう。
-            <classname>Zend_Translate</classname> では特に制限はありませんが、
+            <classname>Zend_Translator</classname> では特に制限はありませんが、
             以下のような構造を推奨します。
         </para>
 
@@ -298,7 +298,7 @@ print $translate->_(2) . "\n";
         </itemizedlist>
 
         <para>
-            <classname>Zend_Translate</classname> で最も便利なのは、単一構造か
+            <classname>Zend_Translator</classname> で最も便利なのは、単一構造か
             言語ごとに分けた構造でしょう。
         </para>
 

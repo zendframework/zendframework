@@ -2926,7 +2926,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
     /**
      * Set translator object
      *
-     * @param  Zend_Translate|\Zend\Translator\Adapter|null $translator
+     * @param  Zend_Translator|\Zend\Translator\Adapter|null $translator
      * @return \Zend\Form\Form
      */
     public function setTranslator($translator = null)
@@ -2999,8 +2999,8 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
     public static function getDefaultTranslator()
     {
         if (null === self::$_translatorDefault) {
-            if (Registry::isRegistered('Zend_Translate')) {
-                $translator = Registry::get('Zend_Translate');
+            if (Registry::isRegistered('Zend_Translator')) {
+                $translator = Registry::get('Zend_Translator');
                 if ($translator instanceof Translator\Adapter) {
                     return $translator;
                 } elseif ($translator instanceof Translator\Translator) {

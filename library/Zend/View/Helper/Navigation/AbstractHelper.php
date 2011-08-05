@@ -284,8 +284,8 @@ abstract class AbstractHelper
      * @param  mixed $translator                           [optional] translator.
      *                                                     Expects an object of
      *                                                     type
-     *                                                     {@link Zend_Translate_Adapter}
-     *                                                     or {@link Zend_Translate},
+     *                                                     {@link Zend_Translator_Adapter}
+     *                                                     or {@link Zend_Translator},
      *                                                     or null. Default is
      *                                                     null, which sets no
      *                                                     translator.
@@ -314,8 +314,8 @@ abstract class AbstractHelper
     public function getTranslator()
     {
         if (null === $this->_translator) {
-            if (\Zend\Registry::isRegistered('Zend_Translate')) {
-                $this->setTranslator(\Zend\Registry::get('Zend_Translate'));
+            if (\Zend\Registry::isRegistered('Zend_Translator')) {
+                $this->setTranslator(\Zend\Registry::get('Zend_Translator'));
             }
         }
 

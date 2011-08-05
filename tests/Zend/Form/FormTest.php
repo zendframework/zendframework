@@ -54,9 +54,9 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function clearRegistry()
     {
-        if (Registry::isRegistered('Zend_Translate')) {
+        if (Registry::isRegistered('Zend_Translator')) {
             $registry = Registry::getInstance();
-            unset($registry['Zend_Translate']);
+            unset($registry['Zend_Translator']);
         }
     }
 
@@ -3262,7 +3262,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertNull($this->form->getTranslator());
         $translator = new Translator('ArrayAdapter', array('foo' => 'bar'));
-        Registry::set('Zend_Translate', $translator);
+        Registry::set('Zend_Translator', $translator);
 
         $received = Form::getDefaultTranslator();
         $this->assertSame($translator->getAdapter(), $received);
@@ -4071,7 +4071,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     public function testElementTranslatorNotOverriddenbyGlobalTranslatorDuringValidation()
     {
         $translator = new Translator('ArrayAdapter', array('foo' => 'bar'));
-        Registry::set('Zend_Translate', $translator);
+        Registry::set('Zend_Translator', $translator);
 
         $this->form->addElement('text', 'foo');
         $this->form->isValid(array());
@@ -4086,7 +4086,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     public function testZendValidateDefaultTranslatorOverridesZendTranslateDefaultTranslatorAtElementLevel()
     {
         $translate = new Translator('ArrayAdapter', array('isEmpty' => 'translate'));
-        Registry::set('Zend_Translate', $translate);
+        Registry::set('Zend_Translator', $translate);
 
         $translateValidate = new Translator('ArrayAdapter', array('isEmpty' => 'validate'));
         \Zend\Validator\AbstractValidator::setDefaultTranslator($translateValidate);
@@ -4166,7 +4166,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $formTranslate = new Translator('ArrayAdapter', $formTranslations);
         $elementTranslate = new Translator('ArrayAdapter', $elementTranslations);
         
-        Registry::set('Zend_Translate', $defaultTranslate);
+        Registry::set('Zend_Translator', $defaultTranslate);
         $this->form->setTranslator($formTranslate);        
         $this->form->addElement('text', 'foo', array('required'=>true, 'translator'=>$elementTranslate));
         $this->form->addElement('text', 'bar', array('required'=>true));
@@ -4195,7 +4195,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $defaultTranslate = new Translator('ArrayAdapter', $defaultTranslations);
         $subformTranslate = new Translator('ArrayAdapter', $subformTranslations);
         
-        Registry::set('Zend_Translate', $defaultTranslate);
+        Registry::set('Zend_Translator', $defaultTranslate);
         $this->form->addSubForm(new SubForm(), 'subform');
         $this->form->subform->setTranslator($subformTranslate);
         $this->form->subform->addElement('text', 'foo', array('required'=>true));

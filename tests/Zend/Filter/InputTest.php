@@ -1752,7 +1752,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
             'locale'  => 'en_US',
             'content' => array('missingMessage' => 'Still missing'),
         ));
-        \Zend\Registry::set('Zend_Translate', $translator);
+        \Zend\Registry::set('Zend_Translator', $translator);
 
         $validators = array(
             'rule1'   => array('presence' => 'required',
@@ -1858,109 +1858,6 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $messages = $input->getMessages();
         $this->assertFalse(is_array($messages['field1']['isEmpty']), 'oh oh, we  may have got nested messages');
         $this->assertTrue(isset($messages['field1']['isEmpty']), 'oh no, we not even got the normally expected messages');
-    }
-
-    /**
-     * If setAllowEmpty(true) is called, all fields are optional, but fields with
-     * a NotEmpty validator attached to them, should contain a non empty value.
-     *
-     * @group ZF-9289
-     */
-    function testAllowEmptyTrueRespectsNotEmtpyValidators()
-    {
-        $data = array(
-            'field1' => 'foo',
-            'field2' => ''
-        );
-
-        $validators = array(
-            'field1' => array(
-                new Validator\NotEmpty(),
-                InputFilter::MESSAGES => array(
-                    array(
-                        Validator\NotEmpty::IS_EMPTY => '\'field1\' is required'
-                    )
-                )
-            ),
-
-            'field2' => array(
-                new Validator\NotEmpty()
-            )
-        );
-
-        $options = array(InputFilter::ALLOW_EMPTY => true);
-        $input = new InputFilter( null, $validators, $data, $options );
-        $this->assertFalse($input->isValid(), 'Ouch, the NotEmpty validators are ignored!');
-
-        $validators = array(
-            'field1' => array(
-                'Digits',
-                array('NotEmpty', 'integer'),
-                InputFilter::MESSAGES => array(
-                    1 =>
-                    array(
-                        Validator\NotEmpty::IS_EMPTY => '\'field1\' is required'
-                    )
-                ),
-            ),
-
-        );
-
-        $data = array(
-            'field1' => 0,
-            'field2' => ''
-        );
-        $options = array(InputFilter::ALLOW_EMPTY => true);
-        $input = new InputFilter( null, $validators, $data, $options );
-        $this->assertFalse($input->isValid(), 'Ouch, if the NotEmpty validator is not the first rule, the NotEmpty validators are ignored !');
-
-        // and now with a string 'NotEmpty' instead of an instance:
-
-        $validators = array(
-            'field1' => array(
-                'NotEmpty',
-                InputFilter::MESSAGES => array(
-                    0 =>
-                    array(
-                        Validator\NotEmpty::IS_EMPTY => '\'field1\' is required'
-                    )
-                ),
-            ),
-
-        );
-
-        $data = array(
-            'field1' => '',
-            'field2' => ''
-        );
-
-        $options = array(InputFilter::ALLOW_EMPTY => true);
-        $input = new InputFilter( null, $validators, $data, $options );
-        $this->assertFalse($input->isValid(), 'If the NotEmpty validator is a string, the NotEmpty validator is ignored !');
-
-        // and now with an array
-
-        $validators = array(
-            'field1' => array(
-                array('NotEmpty', 'integer'),
-                InputFilter::MESSAGES => array(
-                    0 =>
-                    array(
-                        Validator\NotEmpty::IS_EMPTY => '\'field1\' is required'
-                    )
-                ),
-            ),
-
-        );
-
-        $data = array(
-            'field1' => 0,
-            'field2' => ''
-        );
-
-        $options = array(InputFilter::ALLOW_EMPTY => true);
-        $input = new InputFilter( null, $validators, $data, $options );
-        $this->assertFalse($input->isValid(), 'If the NotEmpty validator is an array, the NotEmpty validator is ignored !');
     }
 }
 

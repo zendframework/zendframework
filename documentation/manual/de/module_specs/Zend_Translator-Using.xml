@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.using"><info><title>Verwendung der Übersetzungsadapter</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translator.using"><info><title>Verwendung der Übersetzungsadapter</title></info>
     
 
     <para>
         Der nächste Schritt ist die Benutzung des Adapters im eigenen Code.
     </para>
 
-    <example xml:id="zend.translate.using.example1"><info><title>Beispiel eines einsprachigen PHP Codes</title></info>
+    <example xml:id="zend.translator.using.example1"><info><title>Beispiel eines einsprachigen PHP Codes</title></info>
         
 
         <programlisting language="php"><![CDATA[
@@ -26,16 +26,16 @@ print "Hier ist Zeile zwei\n";
     </para>
 
     <para>
-        Der nächste Schritt ist also die Integration von <classname>Zend_Translate</classname> in
+        Der nächste Schritt ist also die Integration von <classname>Zend_Translator</classname> in
         den eigenen Code. Natürlich ist es viel einfacher, wenn bei der Erstellung des Codes bereits
         an die Übersetzung gedacht wurde, anstatt ihn im Nachhinein dafür zu ändern.
     </para>
 
-    <example xml:id="zend.translate.using.example2"><info><title>Beispiel für mehrsprachigen PHP Code</title></info>
+    <example xml:id="zend.translator.using.example2"><info><title>Beispiel für mehrsprachigen PHP Code</title></info>
         
 
         <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate(
+$translate = new Zend_Translator(
     array(
         'adapter' => 'gettext',
         'content' => '/path/to/translation/source-de.mo',
@@ -62,16 +62,16 @@ print $translate->_("Hier ist Zeile zwei") . "\n";
 
     <para>
         Jetzt schauen wir uns genauer an, was getan wurde und wie
-        <classname>Zend_Translate</classname> in den eigenen Code integriert wird.
+        <classname>Zend_Translator</classname> in den eigenen Code integriert wird.
     </para>
 
     <para>
-        Erstelle ein neues <classname>Zend_Translate</classname> Objekt und definiere den
+        Erstelle ein neues <classname>Zend_Translator</classname> Objekt und definiere den
         Basisadapter:
     </para>
 
     <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate(
+$translate = new Zend_Translator(
     array(
         'adapter' => 'gettext',
         'content' => '/path/to/translation/source-de.mo',
@@ -145,18 +145,18 @@ print $translate->_(2) . "\n";
     <para>
         Es werden auch Probleme auftreten, wenn einige Strings nicht übersetzt worden sind. Man muß
         sich immer vor Augen halten, wie Übersetzungen funktionieren. Zuerst prüft
-        <classname>Zend_Translate</classname> ob in der gesetzten Sprache für die angegebene
+        <classname>Zend_Translator</classname> ob in der gesetzten Sprache für die angegebene
         Message ID oder den String eine Übersetzung vorhanden ist. Wenn keine Übersetzung gefunden
         wurde, wird in der nächsten tiefer gelegenen Sprache gesucht wie in
         <classname>Zend_Locale</classname> definiert. "<emphasis>de_AT</emphasis>" wird also zu
         "<emphasis>de</emphasis>". Wenn auch hier keine Übersetzung in der Sprache
         "<emphasis>de</emphasis>" gefunden wurde, wird der Original-String zurück
         gegeben. Das bedeutet also, dass immer eine Ausgabe existiert, selbst wenn für eine Message
-        ID keine Übersetzung in der Quelle vorhanden ist. <classname>Zend_Translate</classname> wird
+        ID keine Übersetzung in der Quelle vorhanden ist. <classname>Zend_Translator</classname> wird
         niemals eine Exception oder einen Fehler ausgeben, wenn ein String übersetzt werden soll.
     </para>
 
-    <section xml:id="zend.translate.using.structure"><info><title>Strukturen für Übersetzungdateien</title></info>
+    <section xml:id="zend.translator.using.structure"><info><title>Strukturen für Übersetzungdateien</title></info>
         
 
         <para>
@@ -168,7 +168,7 @@ print $translate->_(2) . "\n";
 
         <para>
             Zuerst muß entschieden werden, wo die Übersetzungsdateien zu speichern sind. Bei der
-            Verwendung von <classname>Zend_Translate</classname> gibt es keinerlei Einschränkungen.
+            Verwendung von <classname>Zend_Translator</classname> gibt es keinerlei Einschränkungen.
             Die folgenden Strukturen sind vorzuziehen:
         </para>
 
@@ -295,7 +295,7 @@ print $translate->_(2) . "\n";
 
         <para>
             Einzeln strukturierte und sprachlich strukturierte Quelldateien sind
-            für <classname>Zend_Translate</classname> am besten benutzbar.
+            für <classname>Zend_Translator</classname> am besten benutzbar.
         </para>
 
         <para>

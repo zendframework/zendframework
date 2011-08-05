@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Translate
+ * @package    Zend_Translator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -33,21 +33,42 @@ use Zend\Log;
 
 /**
  * @category   Zend
- * @package    Zend_Translate
+ * @package    Zend_Translator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Translate
+ * @group      Zend_Translator
  */
 class TranslatorTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
+        putenv("HTTP_ACCEPT_LANGUAGE=,ja,de-AT-DE;q=1,en_US;q=0.5");
         if (Translator\Translator::hasCache()) {
+            Translator\Translator::clearCache();
             Translator\Translator::removeCache();
         }
 
         if (Adapter\ArrayAdapter::hasCache()) {
+            Adapter\ArrayAdapter::clearCache();
+            Adapter\ArrayAdapter::removeCache();
+        }
+
+        $cache = Cache\Cache::factory('Core', 'File',
+            array('lifetime' => 120, 'automatic_serialization' => true),
+            array('cache_dir' => __DIR__ . '/../_files/'));
+        Translator\Translator::setCache($cache);
+    }
+
+    public function tearDown()
+    {
+        if (Translator\Translator::hasCache()) {
+            Translator\Translator::clearCache();
+            Translator\Translator::removeCache();
+        }
+
+        if (Adapter\ArrayAdapter::hasCache()) {
+            Adapter\ArrayAdapter::clearCache();
             Adapter\ArrayAdapter::removeCache();
         }
     }
@@ -706,10 +727,10 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
         $translate2 = new Translator\Translator(
             Translator\Translator::AN_ARRAY,
             __DIR__ . '/Adapter/_files/testarray/',
-            'auto',
+            'en_US',
             array(
                 'scan' => Translator\Translator::LOCALE_FILENAME,
-                'ignore' => array('.', 'regex_1' => '/de_DE/', 'regex' => '/ja/')
+                'ignore' => array('.', 'regex_1' => '/de_DE/', 'regex' => '/ja/'),
             )
         );
 
@@ -732,6 +753,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
                 'scan'    => Translator\Translator::LOCALE_FILENAME,
                 'ignore'  => array('.', 'ignoreme', 'LC_OTHER'),
                 'route'   => array('ja' => 'en_US'),
+                'routeHttp' => false,
             )
         );
 
@@ -740,6 +762,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
                 'adapter' => Translator\Translator::AN_CSV,
                 'content' => __DIR__ . '/Adapter/_files/translation_en.csv',
                 'locale'  => 'en_US',
+                'routeHttp' => false,
             )
         );
 
@@ -868,6 +891,38 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
 
         rewind($stream);
         $this->assertContains('ALERT (1)', stream_get_contents($stream));
+    }
+
+    /**
+     * @group ZF-10911
+     */
+    public function testRoutingOnHttpHeader()
+    {
+        $translate = new Translator\Translator(
+            array(
+                'adapter'   => Translator\Translator::AN_ARRAY,
+                'content'   => __DIR__ . '/Adapter/_files/testarray/',
+                'locale'    => 'auto',
+                'scan'      => Translator\Translator::LOCALE_FILENAME,
+                'ignore'    => array('.', 'ignoreme', 'LC_OTHER'),
+                'routeHttp' => true,
+            )
+        );
+
+        $translate2 = new Translator\Translator(
+            array(
+                'adapter' => Translator\Translator::AN_CSV,
+                'content' => __DIR__ . '/Adapter/_files/translation_en.csv',
+                'locale'  => 'en_US',
+            )
+        );
+
+        $translate->addTranslation($translate2);
+        $langs = $translate->getList();
+        $this->assertFalse(array_key_exists('de_AT', $langs));
+        $this->assertTrue(array_key_exists('ja', $langs));
+        $this->assertTrue(array_key_exists('en_US', $langs));
+        $this->assertEquals('Message 5 (en)', $translate->translate('Message 5', 'ja'));
     }
 
     /**

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.adapter"><info><title>Zend_Translate のアダプタ</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translator.adapter"><info><title>Zend_Translator のアダプタ</title></info>
     
 
     <para>
-        <classname>Zend_Translate</classname> は、さまざまなアダプタを使用して翻訳を行えます。
+        <classname>Zend_Translator</classname> は、さまざまなアダプタを使用して翻訳を行えます。
         それぞれのアダプタによって利点や欠点があります。
         以下に、翻訳の入力ファイルとしてサポートしているすべてのアダプタについてまとめます。
     </para>
 
-    <table xml:id="zend.translate.adapter.table"><info><title><classname>Zend_Translate</classname> のアダプタ</title></info>
+    <table xml:id="zend.translator.adapter.table"><info><title><classname>Zend_Translator</classname> のアダプタ</title></info>
         
 
         <tgroup cols="3">
@@ -84,11 +84,11 @@
         </tgroup>
     </table>
 
-    <section xml:id="zend.translate.adapter.decision"><info><title>使用するアダプタを決める方法</title></info>
+    <section xml:id="zend.translator.adapter.decision"><info><title>使用するアダプタを決める方法</title></info>
         
 
         <para>
-            <classname>Zend_Translate</classname> でどのアダプタを使用するのかを決める必要があります。
+            <classname>Zend_Translator</classname> でどのアダプタを使用するのかを決める必要があります。
             プロジェクトの制約や顧客からの要望などの外的要因でアダプタが決まることもよくありますが、
             もしあなたに決定権があるのなら、以下のヒントを参考にしてください。
         </para>
@@ -99,7 +99,7 @@
                 使用するエンコーディングを考慮しなければなりません。
                 Zend Framework では UTF-8 をデフォルトのエンコーディングとしていますが、
                 時には他のエンコーディングを使わなければならないこともあるでしょう。
-                <classname>Zend_Translate</classname> は、
+                <classname>Zend_Translator</classname> は、
                 ソースファイル内で定義されているエンコーディングを変更しません。
                 つまり、もし Gettext のソースが ISO-8859-1 で作られている場合は、
                 それをそのままのエンコーディングで返します。
@@ -118,7 +118,7 @@
             </para>
         </note>
 
-        <section xml:id="zend.translate.adapter.array"><info><title>Zend_Translate_Adapter_Array</title></info>
+        <section xml:id="zend.translator.adapter.array"><info><title>Zend_Translator_Adapter_Array</title></info>
             
 
             <para>
@@ -136,7 +136,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.translate.adapter.csv"><info><title>Zend_Translate_Adapter_Csv</title></info>
+        <section xml:id="zend.translator.adapter.csv"><info><title>Zend_Translator_Adapter_Csv</title></info>
             
 
             <para>
@@ -162,7 +162,7 @@
             </note>
         </section>
 
-        <section xml:id="zend.translate.adapter.gettext"><info><title>Zend_Translate_Adapter_Gettext</title></info>
+        <section xml:id="zend.translator.adapter.gettext"><info><title>Zend_Translator_Adapter_Gettext</title></info>
             
 
             <para>
@@ -171,7 +171,7 @@
                 可読形式ではありませんが、便利なフリーウェア
                 (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://sourceforge.net/projects/poedit/">POEdit</link> など)
                 が公開されています。
-                <classname>Zend_Translate</classname> の Gettext アダプタは、<acronym>PHP</acronym> の gettext
+                <classname>Zend_Translator</classname> の Gettext アダプタは、<acronym>PHP</acronym> の gettext
                 拡張モジュールを使わずに実装しています。
                 <acronym>PHP</acronym> の gettext 拡張モジュールをインストールしていなくても
                 Gettext アダプタを使用することが可能です。
@@ -187,7 +187,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.translate.adapter.ini"><info><title>Zend_Translate_Adapter_Ini</title></info>
+        <section xml:id="zend.translator.adapter.ini"><info><title>Zend_Translator_Adapter_Ini</title></info>
             
 
             <para>
@@ -219,7 +219,7 @@
             </warning>
         </section>
 
-        <section xml:id="zend.translate.adapter.tbx"><info><title>Zend_Translate_Adapter_Tbx</title></info>
+        <section xml:id="zend.translator.adapter.tbx"><info><title>Zend_Translator_Adapter_Tbx</title></info>
             
 
             <para>
@@ -239,7 +239,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.translate.adapter.tmx"><info><title>Zend_Translate_Adapter_Tmx</title></info>
+        <section xml:id="zend.translator.adapter.tmx"><info><title>Zend_Translator_Adapter_Tmx</title></info>
             
 
             <para>
@@ -256,7 +256,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.translate.adapter.qt"><info><title>Zend_Translate_Adapter_Qt</title></info>
+        <section xml:id="zend.translator.adapter.qt"><info><title>Zend_Translator_Adapter_Qt</title></info>
             
 
             <para>
@@ -273,7 +273,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.translate.adapter.xliff"><info><title>Zend_Translate_Adapter_Xliff</title></info>
+        <section xml:id="zend.translator.adapter.xliff"><info><title>Zend_Translator_Adapter_Xliff</title></info>
             
 
             <para>
@@ -291,7 +291,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.translate.adapter.xmltm"><info><title>Zend_Translate_Adapter_XmlTm</title></info>
+        <section xml:id="zend.translator.adapter.xmltm"><info><title>Zend_Translator_Adapter_XmlTm</title></info>
             
 
             <para>
@@ -310,33 +310,33 @@
 
     </section>
 
-    <section xml:id="zend.translate.adapter.selfwritten"><info><title>自作のアダプタの組み込み</title></info>
+    <section xml:id="zend.translator.adapter.selfwritten"><info><title>自作のアダプタの組み込み</title></info>
         
 
         <para>
-            <classname>Zend_Translate</classname> に、自作のアダプタクラスを組み込むこともできます。
-            これは、<classname>Zend_Translate</classname> に組み込まれている標準のアダプタクラスと同様に使用できます。
+            <classname>Zend_Translator</classname> に、自作のアダプタクラスを組み込むこともできます。
+            これは、<classname>Zend_Translator</classname> に組み込まれている標準のアダプタクラスと同様に使用できます。
         </para>
 
         <para>
-            <classname>Zend_Translate</classname> で使用するアダプタクラスは、
-            <classname>Zend_Translate_Adapter</classname> のサブクラスでなければなりません。
-            <classname>Zend_Translate_Adapter</classname> は抽象クラスであり、翻訳に必要なものをすべて定義しています。
+            <classname>Zend_Translator</classname> で使用するアダプタクラスは、
+            <classname>Zend_Translator_Adapter</classname> のサブクラスでなければなりません。
+            <classname>Zend_Translator_Adapter</classname> は抽象クラスであり、翻訳に必要なものをすべて定義しています。
             あなたがすべきことは、翻訳データの読み込み方法を定義することだけです。
         </para>
 
         <para>
             名前の先頭に "Zend" をつけることができるのは Zend_Framework
-            内のパッケージだけです。<classname>Zend_Translate</classname> で使うためのアダプタを自作する場合は、
-            その名前はたとえば "Company_Translate_Adapter_MyFormat" のようにする必要があります。
+            内のパッケージだけです。<classname>Zend_Translator</classname> で使うためのアダプタを自作する場合は、
+            その名前はたとえば "Company_Translator_Adapter_MyFormat" のようにする必要があります。
             次のコードは、独自のアダプタクラスを実装する例を示すものです。
         </para>
 
         <programlisting language="php"><![CDATA[
 try {
-    $translate = new Zend_Translate(
+    $translate = new Zend_Translator(
         array(
-            'adapter' => 'Company_Translate_Adapter_MyFormat',
+            'adapter' => 'Company_Translator_Adapter_MyFormat',
             'content' => '/path/to/translate.xx',
             'locale'  => 'en',
             'myoption' => 'myvalue'
@@ -350,11 +350,11 @@ try {
 
     </section>
 
-    <section xml:id="zend.translate.adapter.caching"><info><title>全アダプタの高速化</title></info>
+    <section xml:id="zend.translator.adapter.caching"><info><title>全アダプタの高速化</title></info>
         
 
         <para>
-            <classname>Zend_Translate</classname> では、内部的に <classname>Zend_Cache</classname>
+            <classname>Zend_Translator</classname> では、内部的に <classname>Zend_Cache</classname>
             を使用して翻訳ソースの読み込みを高速化できます。
             これは、多数の翻訳ソースを使用していたり
             <acronym>XML</acronym> ベースの複雑なソース形式を使用していたりする場合に非常に便利です。
@@ -362,7 +362,7 @@ try {
 
         <para>
             キャッシュ機能を使用するには、キャッシュオブジェクトを
-            <methodname>Zend_Translate::setCache()</methodname> メソッドで渡します。
+            <methodname>Zend_Translator::setCache()</methodname> メソッドで渡します。
             このメソッドの唯一のパラメータには
             <classname>Zend_Cache</classname> のインスタンスを指定します。
             また、任意のアダプタを直接使用するには
@@ -378,8 +378,8 @@ $cache = Zend_Cache::factory('Core',
                              'File',
                              $frontendOptions,
                              $backendOptions);
-Zend_Translate::setCache($cache);
-$translate = new Zend_Translate(
+Zend_Translator::setCache($cache);
+$translate = new Zend_Translator(
     array(
         'adapter' => 'gettext',
         'content' => '/path/to/translate.mo',
@@ -388,13 +388,13 @@ $translate = new Zend_Translate(
 );
 
 // to clear the cache somewhere later in your code
-Zend_Translate::clearCache();
+Zend_Translator::clearCache();
 ]]></programlisting>
 
         <note>
             <para>
                 キャッシュの設定は、アダプタや
-                <classname>Zend_Translate</classname> のインスタンスを使用したり初期化したりする
+                <classname>Zend_Translator</classname> のインスタンスを使用したり初期化したりする
                 <emphasis>前</emphasis> に行わなければなりません。
                 さもないと、新たなソースを
                 <methodname>addTranslation()</methodname> メソッドで追加するまで
@@ -405,8 +405,8 @@ Zend_Translate::clearCache();
         <para>
             When the attached cache supports tagging you can set a own tag string by using the
             option <property>tag</property>. This allows you do delete only the cache from this
-            single instance of <classname>Zend_Translate</classname>. When you are not using this
-            option the default tag <classname>Zend_Translate</classname> is used.
+            single instance of <classname>Zend_Translator</classname>. When you are not using this
+            option the default tag <classname>Zend_Translator</classname> is used.
         </para>
 
         <para>
@@ -419,8 +419,8 @@ $cache = Zend_Cache::factory('Core',
                              'File',
                              $frontendOptions,
                              $backendOptions);
-Zend_Translate::setCache($cache);
-$translate = new Zend_Translate(
+Zend_Translator::setCache($cache);
+$translate = new Zend_Translator(
     array(
         'adapter' => 'gettext',
         'content' => '/path/to/translate.mo',
@@ -430,7 +430,7 @@ $translate = new Zend_Translate(
 );
 
 // somewhere later in your code
-Zend_Translate::clearCache('MyTag');
+Zend_Translator::clearCache('MyTag');
 ]]></programlisting>
     </section>
 </section>

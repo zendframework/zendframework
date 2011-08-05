@@ -23,7 +23,7 @@
         <code>L10n</code> i <code>I18n</code> uzupełniają się nawzajem. Zend Framework udostępnia
         ich obsługę poprzez szereg komponentów. M. in.:
         <classname>Zend_Locale</classname>, <classname>Zend_Date</classname>,
-        <classname>Zend_Measure</classname>, <classname>Zend_Translate</classname>,
+        <classname>Zend_Measure</classname>, <classname>Zend_Translator</classname>,
         <classname>Zend_Currency</classname>, and <classname>Zend_TimeSync</classname>.
     </para>
 
@@ -66,7 +66,7 @@
 
             <listitem>
                 <para>
-                    <classname>Zend_Translate</classname> - Tłumaczenie łańcuchów znaków.
+                    <classname>Zend_Translator</classname> - Tłumaczenie łańcuchów znaków.
                 </para>
             </listitem>
 

@@ -21,7 +21,7 @@
         <emphasis>L10n</emphasis> und <emphasis>I18n</emphasis> sind einander sehr ähnlich. Zend
         Framework bietet Unterstützung für diese Konventionen durch eine Kombination von Komponenten
         wie <classname>Zend_Locale</classname>, <classname>Zend_Date</classname>,
-        <classname>Zend_Measure</classname>, <classname>Zend_Translate</classname>,
+        <classname>Zend_Measure</classname>, <classname>Zend_Translator</classname>,
         <classname>Zend_Currency</classname> und <classname>Zend_TimeSync</classname>.
     </para>
 
@@ -65,7 +65,7 @@
 
             <listitem>
                 <para>
-                    <classname>Zend_Translate</classname> - Übersetzung von Zeichenketten.
+                    <classname>Zend_Translator</classname> - Übersetzung von Zeichenketten.
                 </para>
             </listitem>
 

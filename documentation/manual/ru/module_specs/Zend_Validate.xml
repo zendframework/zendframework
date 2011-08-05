@@ -264,7 +264,7 @@ if (Zend_Validate::is($value, 'Between', array(1, 12))) {
         <para>
             Классы валидации предоставляют метод <code>setTranslator()</code>,
             с помощью которого вы можете устанавливать экземпляр класса
-            <classname>Zend_Translate</classname>, который будет переводить
+            <classname>Zend_Translator</classname>, который будет переводить
             сообщения в случае ошибки валидации.
             Метод <code>getTranslator()</code> возвращает установленный
             экземпляр переводчика.
@@ -272,7 +272,7 @@ if (Zend_Validate::is($value, 'Between', array(1, 12))) {
 
         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8, 12);
-$translate = new Zend_Translate(
+$translate = new Zend_Translator(
     'array',
     array(Zend_Validate_StringLength::TOO_SHORT => 'Translated \'%value%\''),
     'en'
@@ -284,7 +284,7 @@ $validator->setTranslator($translate);
         <para>
             С помощью статического метода <code>setDefaultTranslator()</code>
             вы можете установить экземпляр
-            <classname>Zend_Translate</classname>, который будет использоваться
+            <classname>Zend_Translator</classname>, который будет использоваться
             во всех классах валидации, и извлекать его с помощью
             <code>getDefaultTranslator()</code>.
             Это избавляет от установки вручную переводчика для всех классов
@@ -292,7 +292,7 @@ $validator->setTranslator($translate);
         </para>
 
         <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate(
+$translate = new Zend_Translator(
     'array',
     array(Zend_Validate_StringLength::TOO_SHORT => 'Translated \'%value%\''),
     'en'

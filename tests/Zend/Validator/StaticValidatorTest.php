@@ -42,9 +42,9 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
 {
     public function clearRegistry()
     {
-        if (\Zend\Registry::isRegistered('Zend_Translate')) {
+        if (\Zend\Registry::isRegistered('Zend_Translator')) {
             $registry = \Zend\Registry::getInstance();
-            unset($registry['Zend_Translate']);
+            unset($registry['Zend_Translator']);
         }
     }
 
@@ -103,7 +103,7 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
         set_error_handler(array($this, 'errorHandlerIgnore'));
         $translate = new Translator\Translator('ArrayAdapter', array());
         restore_error_handler();
-        \Zend\Registry::set('Zend_Translate', $translate);
+        \Zend\Registry::set('Zend_Translator', $translate);
         $this->assertSame($translate->getAdapter(), $this->validator->getTranslator());
     }
 

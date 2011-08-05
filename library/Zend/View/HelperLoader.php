@@ -81,7 +81,7 @@ class HelperLoader extends PluginClassLoader
         'placeholder'         => 'Zend\View\Helper\Placeholder',
         'rendertoplaceholder' => 'Zend\View\Helper\RenderToPlaceholder',
         'serverurl'           => 'Zend\View\Helper\ServerUrl',
-        'translate'           => 'Zend\View\Helper\Translate',
+        'translator'          => 'Zend\View\Helper\Translator',
         'url'                 => 'Zend\View\Helper\Url',
     );
 }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.introduction"><info><title>Einführung</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translator.introduction"><info><title>Einführung</title></info>
     
 
     <para>
-        <classname>Zend_Translate</classname> ist die Lösung des Frameworks für mehrsprachige
+        <classname>Zend_Translator</classname> ist die Lösung des Frameworks für mehrsprachige
         Anwendungen.
     </para>
 
@@ -54,17 +54,17 @@
     </itemizedlist>
 
     <para>
-        <classname>Zend_Translate</classname> hat keines der oben angesprochene Probleme. Deswegen
-        wird empfohlen <classname>Zend_Translate</classname>  zu verwenden und nicht
+        <classname>Zend_Translator</classname> hat keines der oben angesprochene Probleme. Deswegen
+        wird empfohlen <classname>Zend_Translator</classname>  zu verwenden und nicht
         die <acronym>PHP</acronym>-eigenen Funktionen. Die Vorteile von
-        <classname>Zend_Translate</classname> sind unter anderem:
+        <classname>Zend_Translator</classname> sind unter anderem:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
                 <emphasis>Unterstützt mehrere Quellformate:</emphasis>
-                <classname>Zend_Translate</classname> unterstützt verschiedene Quellformate,
+                <classname>Zend_Translator</classname> unterstützt verschiedene Quellformate,
                 natürlich auch die, welche von <acronym>PHP</acronym> unterstützt werden und andere
                 Formate wie zum Beispiel TMX- und CSV-Quellen.
             </para>
@@ -73,7 +73,7 @@
         <listitem>
             <para>
                 <emphasis>Threadsicheres Gettext:</emphasis>
-                Der Gettext Reader von <classname>Zend_Translate</classname> ist threadsicher. Er
+                Der Gettext Reader von <classname>Zend_Translator</classname> ist threadsicher. Er
                 kann ohne Probleme in Multithreaded-Umgebungen verwendet werden.
             </para>
         </listitem>
@@ -81,7 +81,7 @@
         <listitem>
             <para>
                 <emphasis>Einfache und einheitliche <acronym>API</acronym>:</emphasis>
-                Die <acronym>API</acronym> von <classname>Zend_Translate</classname> ist sehr
+                Die <acronym>API</acronym> von <classname>Zend_Translator</classname> ist sehr
                 einfach und benötigt nur eine handvoll von Funktionen. So ist sie einfach zu lernen
                 und einfach zu warten. Alle Quellformate werden auf die gleiche Art und Weise
                 gehandhabt, so dass zum Beispiel bei einem Wechsel des Quellformats
@@ -94,21 +94,21 @@
             <para>
                 <emphasis>Erkennung der Standardsprache des Benutzers:</emphasis>
                 Die bevorzugte Sprache des Benutzers, der auf die Site zugreift, kann durch
-                <classname>Zend_Translate</classname> erkannt und automatisch verwendet werden.
+                <classname>Zend_Translator</classname> erkannt und automatisch verwendet werden.
             </para>
         </listitem>
 
         <listitem>
             <para>
                 <emphasis>Automatische Erkennung der Quelle:</emphasis>
-                <classname>Zend_Translate</classname> kann mehrere Quelldateien erkennen und
+                <classname>Zend_Translator</classname> kann mehrere Quelldateien erkennen und
                 integrieren und zusätzlich das zu verwendende Gebietsschema erkennen abhängig vom
                 Verzeichnis oder Dateinamen.
             </para>
         </listitem>
     </itemizedlist>
 
-    <section xml:id="zend.translate.introduction.adapters"><info><title>Beginnen wir mit der Mehrsprachigkeit</title></info>
+    <section xml:id="zend.translator.introduction.adapters"><info><title>Beginnen wir mit der Mehrsprachigkeit</title></info>
         
 
         <para>
@@ -125,7 +125,7 @@
 
             <listitem>
                 <para>
-                    Die View erzeugen und <classname>Zend_Translate</classname> in den Code
+                    Die View erzeugen und <classname>Zend_Translator</classname> in den Code
                     integrieren;
                 </para>
             </listitem>

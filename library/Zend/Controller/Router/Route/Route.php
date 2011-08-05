@@ -492,7 +492,7 @@ class Route extends AbstractRoute
             return $translator;
         } else {
             try {
-                $translator = \Zend\Registry::get('Zend_Translate');
+                $translator = \Zend\Registry::get('Zend_Translator');
             } catch (\RuntimeException $e) {
                 $translator = null;
             }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.sourcecreation"><info><title>ソースファイルの作成</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translator.sourcecreation"><info><title>ソースファイルの作成</title></info>
 
     
 
     <para>
-        <classname>Zend_Translate</classname> で使用できる
+        <classname>Zend_Translator</classname> で使用できる
         さまざまなソース形式についての説明を以下で行います。
     </para>
 
@@ -16,7 +16,7 @@
         </para>
     </note>
 
-    <section xml:id="zend.translate.sourcecreation.array"><info><title>Array ソースファイルの作成</title></info>
+    <section xml:id="zend.translator.sourcecreation.array"><info><title>Array ソースファイルの作成</title></info>
 
         
 
@@ -39,7 +39,7 @@ $german = array(
     'message2' => 'Nachricht2',
     'message3' => 'Nachricht3');
 
-$translate = new Zend_Translate(
+$translate = new Zend_Translator(
     array(
         'adapter' => 'array',
         'content' => $english,
@@ -51,7 +51,7 @@ $translate->addTranslation(array('content' => $german, 'locale' => 'de'));
 
         <para>
             リリース 1.5 以降では、配列を外部のファイルに含めることもサポートしています。
-            ファイル名を指定すると、 <classname>Zend_Translate</classname>
+            ファイル名を指定すると、 <classname>Zend_Translator</classname>
             が自動的にそれをインクルードして配列を探します。
             詳細は、次の例を参照ください。
         </para>
@@ -64,7 +64,7 @@ return array(
     'message3' => 'Nachricht3');
 
 // コントローラ
-$translate = new Zend_Translate(
+$translate = new Zend_Translator(
     array(
         'adapter' => 'array',
         'content' => '/path/to/myarray.php',
@@ -83,7 +83,7 @@ $translate = new Zend_Translate(
 
     </section>
 
-    <section xml:id="zend.translate.sourcecreation.gettext"><info><title>Gettext ソースファイルの作成</title></info>
+    <section xml:id="zend.translator.sourcecreation.gettext"><info><title>Gettext ソースファイルの作成</title></info>
 
         
 
@@ -99,7 +99,7 @@ $translate = new Zend_Translate(
 
         <programlisting language="php"><![CDATA[
 // mo ファイルを作成し、翻訳を済ませているものとします
-$translate = new Zend_Translate(
+$translate = new Zend_Translator(
     array(
         'adapter' => 'gettext',
         'content' => '/path/to/english.mo',
@@ -157,7 +157,7 @@ $translate->addTranslation(
 
         <programlisting language="php"><![CDATA[
 // アダプタの情報を取得する方法
-$translate = new Zend_Translate(
+$translate = new Zend_Translator(
     array(
         'adapter' => 'gettext',
         'content' => '/path/to/english.mo',
@@ -169,7 +169,7 @@ print_r($translate->getAdapterInfo());
 
     </section>
 
-    <section xml:id="zend.translate.sourcecreation.tmx"><info><title>TMX ソースファイルの作成</title></info>
+    <section xml:id="zend.translator.sourcecreation.tmx"><info><title>TMX ソースファイルの作成</title></info>
 
         
 
@@ -183,7 +183,7 @@ print_r($translate->getAdapterInfo());
             フリーソフトウェアではありません。
         </para>
 
-        <example xml:id="zend.translate.sourcecreation.tmx.example"><info><title>TMX ファイルの例</title></info>
+        <example xml:id="zend.translator.sourcecreation.tmx.example"><info><title>TMX ファイルの例</title></info>
             
 
             <programlisting language="xml"><![CDATA[
@@ -208,7 +208,7 @@ print_r($translate->getAdapterInfo());
 ]]></programlisting>
 
             <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate(
+$translate = new Zend_Translator(
     array(
         'adapter' => 'tmx',
         'content' => 'path/to/mytranslation.tmx',
@@ -256,7 +256,7 @@ $translate = new Zend_Translate(
         </note>
     </section>
 
-    <section xml:id="zend.translate.sourcecreation.csv"><info><title>CSV ソースファイルの作成</title></info>
+    <section xml:id="zend.translator.sourcecreation.csv"><info><title>CSV ソースファイルの作成</title></info>
 
         
 
@@ -266,7 +266,7 @@ $translate = new Zend_Translate(
             おそらく CSV アダプタを使用することになるでしょう。
         </para>
 
-        <example xml:id="zend.translate.sourcecreation.csv.example"><info><title>CSV ファイルの例</title></info>
+        <example xml:id="zend.translator.sourcecreation.csv.example"><info><title>CSV ファイルの例</title></info>
             
 
             <programlisting language="txt"><![CDATA[
@@ -276,7 +276,7 @@ message2;Nachricht2
 ]]></programlisting>
 
             <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate(
+$translate = new Zend_Translator(
     array(
         'adapter' => 'csv',
         'content' => '/path/to/mytranslation.csv',
@@ -323,7 +323,7 @@ $translate->addTranslation(
             別の文字を使用する場合は '<code>enclosure</code>' オプションを設定します。
         </para>
 
-        <example xml:id="zend.translate.sourcecreation.csv.example2"><info><title>CSV ファイルの例 その 2</title></info>
+        <example xml:id="zend.translator.sourcecreation.csv.example2"><info><title>CSV ファイルの例 その 2</title></info>
             
 
             <programlisting language="txt"><![CDATA[
@@ -334,7 +334,7 @@ message2,"Nachricht,2"
 ]]></programlisting>
 
             <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate(
+$translate = new Zend_Translator(
     array(
         'adapter' => 'csv',
         'content' => '/path/to/mytranslation.csv',
@@ -364,7 +364,7 @@ $translate->addTranslation(
 
     </section>
 
-    <section xml:id="zend.translate.sourcecreation.ini"><info><title>INI ソースファイルの作成</title></info>
+    <section xml:id="zend.translator.sourcecreation.ini"><info><title>INI ソースファイルの作成</title></info>
 
         
 
@@ -375,7 +375,7 @@ $translate->addTranslation(
             <acronym>INI</acronym> アダプタが使えるでしょう。
         </para>
 
-        <example xml:id="zend.translate.sourcecreation.ini.example"><info><title>INI ファイルの例</title></info>
+        <example xml:id="zend.translator.sourcecreation.ini.example"><info><title>INI ファイルの例</title></info>
             
 
             <programlisting language="txt"><![CDATA[
@@ -387,7 +387,7 @@ Message_3="Nachricht :3 (de)"
 ]]></programlisting>
 
             <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate(
+$translate = new Zend_Translator(
     array(
         'adapter' => 'ini',
         'content' => '/path/to/mytranslation.ini',

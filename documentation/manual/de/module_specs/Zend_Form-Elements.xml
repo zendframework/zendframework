@@ -441,7 +441,7 @@ $validator = new Zend_Validate_StringLength(6, 20);
             </para>
 
             <para>
-                Eine bessere Option ist es <classname>Zend_Translate_Adapter</classname> in Formular
+                Eine bessere Option ist es <classname>Zend_Translator_Adapter</classname> in Formular
                 zu verwenden. Fehlercodes werden automatisch dem Adapter durch den Standardmäßigen
                 Fehlerdekorator übergeben; man kann durch die Erstellung von Übersetzungen
                 eigene Fehlermeldungen für die verschiedenen Fehlercodes der Prüfung definieren.
@@ -1290,7 +1290,7 @@ $element->class = 'text;
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <methodname>setTranslator(Zend_Translate_Adapter $translator =
+                            <methodname>setTranslator(Zend_Translator_Adapter $translator =
                                 null)</methodname>
                         </para>
                     </listitem>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.plurals"><info><title>Schreibweisen von Pluralformen für Übersetzungen</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translator.plurals"><info><title>Schreibweisen von Pluralformen für Übersetzungen</title></info>
     
 
     <para>
-        Ab Zend Framework 1.9 ist <classname>Zend_Translate</classname> in der Lage, Unterstützung
+        Ab Zend Framework 1.9 ist <classname>Zend_Translator</classname> in der Lage, Unterstützung
         für Pluralformen anzubieten. Professionelle Übersetzung wird immer die Notwendigkeit haben,
         den Plural zu verwenden, da dieser in allen Sprachen gängig ist.
     </para>
@@ -19,7 +19,7 @@
     </para>
 
     <para>
-        Wenn man Pluralformen mit <classname>Zend_Translate</classname> verwenden will, muß man nicht
+        Wenn man Pluralformen mit <classname>Zend_Translator</classname> verwenden will, muß man nicht
         wissen, wie Pluralformen definiert werden. Nur der Übersetzer muß das wissen, da er die
         Übersetzung durchführt. Die einzige Information, die man haben muß, ist die Sprache.
     </para>
@@ -30,7 +30,7 @@
         mit der gleichen Methode durchzuführen wie normale Übersetzungen.
     </para>
 
-    <section xml:id="zend.translate.plurals.traditional"><info><title>Traditionelle Übersetzung des Plurals</title></info>
+    <section xml:id="zend.translator.plurals.traditional"><info><title>Traditionelle Übersetzung des Plurals</title></info>
         
 
         <para>
@@ -40,7 +40,7 @@
             werden kann.
         </para>
 
-        <example xml:id="zend.translate.plurals.traditional.example1"><info><title>Beispiel einer traditionellen Übersetzung des Plurals</title></info>
+        <example xml:id="zend.translator.plurals.traditional.example1"><info><title>Beispiel einer traditionellen Übersetzung des Plurals</title></info>
             
 
             <para>
@@ -56,7 +56,7 @@
             </para>
 
             <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate(
+$translate = new Zend_Translator(
     array(
         'adapter' => 'gettext',
         'content' => '/path/to/german.mo',
@@ -68,7 +68,7 @@ $translate->plural('Car', 'Cars', $number);
         </example>
     </section>
 
-    <section xml:id="zend.translate.plurals.modern"><info><title>Moderne Übersetzungen des Plurals</title></info>
+    <section xml:id="zend.translator.plurals.modern"><info><title>Moderne Übersetzungen des Plurals</title></info>
         
 
         <para>
@@ -86,7 +86,7 @@ $translate->plural('Car', 'Cars', $number);
             vorliegen.
         </para>
 
-        <example xml:id="zend.translate.plurals.modern.example1"><info><title>Beispiel für moderne Übersetzungen des Plurals</title></info>
+        <example xml:id="zend.translator.plurals.modern.example1"><info><title>Beispiel für moderne Übersetzungen des Plurals</title></info>
             
 
             <para>
@@ -95,7 +95,7 @@ $translate->plural('Car', 'Cars', $number);
             </para>
 
             <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate(
+$translate = new Zend_Translator(
     array(
         'adapter' => 'gettext',
         'content' => '/path/to/german.mo',
@@ -111,7 +111,7 @@ $translate->translate(array('Car', 'Cars', $number));
             Quelle für messageId's zu verwenden.
         </para>
 
-        <example xml:id="zend.translate.plurals.modern.example2"><info><title>
+        <example xml:id="zend.translator.plurals.modern.example2"><info><title>
                 Beispiel einer modernen Übersetzung des Plurals durch Verwendung einer anderen
                 Quellsprache
             </title></info>
@@ -123,7 +123,7 @@ $translate->translate(array('Car', 'Cars', $number));
             </para>
 
             <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate(
+$translate = new Zend_Translator(
     array(
         'adapter' => 'gettext',
         'content' => '/path/to/german.mo',
@@ -140,7 +140,7 @@ $translate->translate(array('Car',
 
         <para>
             Wie man sieht, kann man mehr als ein englisches Plural angeben. Aber dann muß man die
-            Quellsprache angeben, damit <classname>Zend_Translate</classname> in diesem Fall weiß,
+            Quellsprache angeben, damit <classname>Zend_Translator</classname> in diesem Fall weiß,
             welche Pluralregeln anzuwenden sind.
         </para>
 
@@ -150,7 +150,7 @@ $translate->translate(array('Car',
         </para>
     </section>
 
-    <section xml:id="zend.translate.plurals.source"><info><title>Pluralquelldateien</title></info>
+    <section xml:id="zend.translator.plurals.source"><info><title>Pluralquelldateien</title></info>
         
 
         <para>
@@ -158,7 +158,7 @@ $translate->translate(array('Car',
             Liste an:
         </para>
 
-        <table xml:id="zend.translate.plurals.source.supportedadapters"><info><title>Unterstützung für Plural</title></info>
+        <table xml:id="zend.translator.plurals.source.supportedadapters"><info><title>Unterstützung für Plural</title></info>
             
 
             <tgroup cols="4">
@@ -222,7 +222,7 @@ $translate->translate(array('Car',
             Im folgenden sind Beispiele für die Definition von Pluralquelldateien zu finden.
         </para>
 
-        <section xml:id="zend.translate.plurals.source.array"><info><title>Array-Quellen mit Pluraldefinitionen</title></info>
+        <section xml:id="zend.translator.plurals.source.array"><info><title>Array-Quellen mit Pluraldefinitionen</title></info>
             
 
             <para>
@@ -267,7 +267,7 @@ array(
             </para>
         </section>
 
-        <section xml:id="zend.translate.plurals.source.csv"><info><title>CSV-Quellen mit Pluraldefinitionen</title></info>
+        <section xml:id="zend.translator.plurals.source.csv"><info><title>CSV-Quellen mit Pluraldefinitionen</title></info>
             
 
             <para>
@@ -288,7 +288,7 @@ array(
             </para>
         </section>
 
-        <section xml:id="zend.translate.plurals.source.gettext"><info><title>Gettext-Quellen mit Pluraldefinitionen</title></info>
+        <section xml:id="zend.translator.plurals.source.gettext"><info><title>Gettext-Quellen mit Pluraldefinitionen</title></info>
             
 
             <para>
@@ -308,7 +308,7 @@ array(
         </section>
     </section>
 
-    <section xml:id="zend.translate.plurals.customrules"><info><title>Eigene Pluralregeln</title></info>
+    <section xml:id="zend.translator.plurals.customrules"><info><title>Eigene Pluralregeln</title></info>
         
 
         <para>
@@ -324,7 +324,7 @@ array(
         </para>
 
         <para>
-            Das kann durch Verwendung von <methodname>Zend_Translate_Plural::setRule()</methodname>
+            Das kann durch Verwendung von <methodname>Zend_Translator_Plural::setRule()</methodname>
             getan werden. Diese Methode erwartet zwei Parameter, welche angegeben werden müssen. Eine
             Regel, welche einfach ein Callback zu einer selbst definierten Methode ist. Und ein
             Gebietsschema für das diese Regel verwendet wird.
@@ -359,7 +359,7 @@ public function MyRule($number) {
         </para>
 
         <programlisting language="php"><![CDATA[
-Zend_Translate_Plural::setPlural('MyPlural', 'zh');
+Zend_Translator_Plural::setPlural('MyPlural', 'zh');
 ]]></programlisting>
 
         <para>
@@ -375,7 +375,7 @@ Zend_Translate_Plural::setPlural('MyPlural', 'zh');
             
 
             <para>
-                <classname>Zend_Translate</classname> definiert Plurale für die meisten bekannten
+                <classname>Zend_Translator</classname> definiert Plurale für die meisten bekannten
                 Sprachen. Man sollte keine eigenen Plurale definieren, wenn man das nicht
                 benötigt. Die Standardregeln funktionieren meistens.
             </para>

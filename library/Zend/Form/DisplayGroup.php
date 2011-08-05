@@ -904,7 +904,7 @@ class DisplayGroup implements \Iterator,\Countable
     /**
      * Set translator object
      *
-     * @param  Zend_Translate|\Zend\Translator\Adapter\Adapter|null $translator
+     * @param  Zend_Translator|\Zend\Translator\Adapter\Adapter|null $translator
      * @return \Zend\Form\DisplayGroup
      */
     public function setTranslator($translator = null)

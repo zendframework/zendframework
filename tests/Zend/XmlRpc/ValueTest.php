@@ -840,7 +840,7 @@ class ValueTest extends \PHPUnit_Framework_TestCase
             $type = 'arrayValue';
         }
         $type = 'Zend\\XmlRpc\\Value\\' . ucfirst($type);
-        $this->assertType($type, $object);
+        $this->assertInstanceOf($type, $object);
     }
 
     public function wrapXml($xml)

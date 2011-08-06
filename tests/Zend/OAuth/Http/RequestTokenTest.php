@@ -53,7 +53,7 @@ class RequestTokenTest extends \PHPUnit_Framework_TestCase
     public function testConstructorSetsConsumerInstance()
     {
         $request = new Http\RequestToken($this->stubConsumer, null, $this->stubHttpUtility);
-        $this->assertType('ZendTest\\OAuth\\Http\\Consumer32874', $request->getConsumer());
+        $this->assertInstanceOf('ZendTest\\OAuth\\Http\\Consumer32874', $request->getConsumer());
     }
 
     public function testConstructorSetsCustomServiceParameters()

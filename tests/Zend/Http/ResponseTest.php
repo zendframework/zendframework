@@ -261,7 +261,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 
         // Check we get an array if no code is passed
         $codes = Response::responseCodeAsText();
-        $this->assertType('array', $codes);
+        $this->assertInternalType('array', $codes);
         $this->assertEquals('OK', $codes[200]);
     }
 

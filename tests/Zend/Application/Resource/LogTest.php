@@ -143,7 +143,7 @@ class LogTest extends \PHPUnit_Framework_TestCase
         $resource->setBootstrap($this->bootstrap);
         $log = $resource->init();
 
-        $this->assertType('Zend\Log\Logger', $log);
+        $this->assertInstanceOf('Zend\Log\Logger', $log);
 
         $log->log($message, \Zend\Log\Logger::INFO);
         rewind($stream);

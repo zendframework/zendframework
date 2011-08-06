@@ -764,7 +764,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $nav = $this->_getFindByNavigation();
 
         $found = $nav->findOneBy('page2', 'page2');
-        $this->assertType('Zend\Navigation\AbstractPage', $found);
+        $this->assertInstanceOf('Zend\\Navigation\\AbstractPage', $found);
         $this->assertEquals('Page 2', $found->getLabel());
     }
 
@@ -773,7 +773,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $nav = $this->_getFindByNavigation();
 
         $found = $nav->findOneBy('id', 'page_2_and_3');
-        $this->assertType('Zend\Navigation\AbstractPage', $found);
+        $this->assertInstanceOf('Zend\\Navigation\\AbstractPage', $found);
         $this->assertEquals('Page 2', $found->getLabel());
     }
 
@@ -817,7 +817,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $nav = $this->_getFindByNavigation();
 
         $found = $nav->findBy('id', 'page_2_and_3');
-        $this->assertType('Zend\Navigation\AbstractPage', $found);
+        $this->assertInstanceOf('Zend\\Navigation\\AbstractPage', $found);
     }
 
     public function testFindOneByMagicMethodNativeProperty()
@@ -825,7 +825,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $nav = $this->_getFindByNavigation();
 
         $found = $nav->findOneById('page_2_and_3');
-        $this->assertType('Zend\Navigation\AbstractPage', $found);
+        $this->assertInstanceOf('Zend\\Navigation\\AbstractPage', $found);
         $this->assertEquals('Page 2', $found->getLabel());
     }
 
@@ -834,7 +834,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $nav = $this->_getFindByNavigation();
 
         $found = $nav->findOneBypage2('page2');
-        $this->assertType('Zend\Navigation\AbstractPage', $found);
+        $this->assertInstanceOf('Zend\\Navigation\\AbstractPage', $found);
         $this->assertEquals('Page 2', $found->getLabel());
     }
 
@@ -891,7 +891,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $nav = $this->_getFindByNavigation();
 
         $found = $nav->findById('page_2_and_3');
-        $this->assertType('Zend\Navigation\AbstractPage', $found);
+        $this->assertInstanceOf('Zend\\Navigation\\AbstractPage', $found);
         $this->assertEquals('Page 2', $found->getLabel());
     }
 

@@ -155,7 +155,7 @@ class Xml extends AbstractFormatter
             if($key == "message") {
                 $value = htmlspecialchars($value, ENT_COMPAT, $enc);
             }
-            $elt->appendChild(new \DOMElement($key, $value));
+            $elt->appendChild(new \DOMElement($key, (string)$value));
         }
 
         $xml = $dom->saveXML();

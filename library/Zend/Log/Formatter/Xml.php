@@ -152,7 +152,10 @@ class Xml extends AbstractFormatter
         $elt = $dom->appendChild(new \DOMElement($this->_rootElement));
 
         foreach ($dataToInsert as $key => $value) {
-            if(empty($value) || is_scalar($value)) {
+            if (empty($value)
+                || is_scalar($value)
+                || (is_object($value) && method_exists($value,'__toString'))
+            ) {
                 if($key == "message") {
                     $value = htmlspecialchars($value, ENT_COMPAT, $enc);
                 }

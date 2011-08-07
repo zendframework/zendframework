@@ -21,7 +21,8 @@
 
 namespace ZendTest\Log\Formatter;
 
-use \Zend\Log\Formatter\Xml as XmlFormatter;
+use ZendTest\Log\TestAsset\SerializableObject,
+    \Zend\Log\Formatter\Xml as XmlFormatter;
 
 /**
  * @category   Zend
@@ -143,6 +144,27 @@ class XmlTest extends \PHPUnit_Framework_TestCase
             'reference' => new XmlFormatter()
         );
         $expected = '<log><message>tottakai</message><priority>4</priority></log>';
+
+        $formatter = XmlFormatter::factory($options);
+        $output = $formatter->format($event);
+        $this->assertContains($expected, $output);
+    }
+
+    /**
+     * @group ZF-11161
+     */
+    public function testObjectsWithStringSerializationAreIncludedInFormattedString()
+    {
+        $options = array(
+            'rootElement' => 'log'
+        );
+        $event = array(
+            'message' => 'tottakai',
+            'priority' => 4,
+            'context' => array('test'=>'one'),
+            'reference' => new SerializableObject()
+        );
+        $expected = '<log><message>tottakai</message><priority>4</priority><reference>ZendTest\Log\TestAsset\SerializableObject</reference></log>';
 
         $formatter = XmlFormatter::factory($options);
         $output = $formatter->format($event);

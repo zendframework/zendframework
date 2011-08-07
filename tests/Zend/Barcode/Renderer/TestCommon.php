@@ -44,10 +44,18 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
      */
     protected $_renderer = null;
 
+    /**
+     * Stores the original set timezone
+     * @var string
+     */
+    private $_originaltimezone;
+
     abstract protected function _getRendererObject($options = null);
 
     public function setUp()
     {
+        $this->_originaltimezone = date_default_timezone_get();
+
         // Set timezone to avoid "It is not safe to rely on the system's timezone settings."
         // message if timezone is not set within php.ini
         date_default_timezone_set('GMT');
@@ -59,6 +67,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         Barcode\Barcode::setBarcodeFont(null);
+        date_default_timezone_set($this->_originaltimezone);
     }
 
     public function testSetBarcodeObject()

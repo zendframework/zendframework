@@ -48,10 +48,17 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     protected $_request;
 
     /**
+     * Stores the original set timezone
+     * @var string
+     */
+    private $_originaltimezone;
+
+    /**
      * Setup environment
      */
     public function setUp()
     {
+        $this->_originaltimezone = date_default_timezone_get();
         date_default_timezone_set("America/Chicago");
         \Zend\Locale\Locale::setDefault('en');
         Parser\TypeLoader::resetMap();
@@ -64,6 +71,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         unset($this->_request);
+        date_default_timezone_set($this->_originaltimezone);
     }
 
     /**

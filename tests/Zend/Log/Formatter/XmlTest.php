@@ -127,4 +127,25 @@ class XmlTest extends \PHPUnit_Framework_TestCase
         $formatter = XmlFormatter::factory($options);
         $this->assertInstanceOf('Zend\Log\Formatter\Xml', $formatter);
     }
+
+    /**
+     * @group ZF-11161
+     */
+    public function testNonScalarValuesAreExcludedFromFormattedString()
+    {
+        $options = array(
+            'rootElement' => 'log'
+        );
+        $event = array(
+            'message' => 'tottakai',
+            'priority' => 4,
+            'context' => array('test'=>'one'),
+            'reference' => new XmlFormatter()
+        );
+        $expected = '<log><message>tottakai</message><priority>4</priority></log>';
+
+        $formatter = XmlFormatter::factory($options);
+        $output = $formatter->format($event);
+        $this->assertContains($expected, $output);
+    }
 }

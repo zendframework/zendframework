@@ -38,9 +38,8 @@ class Alpha extends AbstractFilter
      * Whether to allow white space characters; off by default
      *
      * @var boolean
-     * @deprecated
      */
-    public $allowWhiteSpace;
+    protected $_allowWhiteSpace;
 
     /**
      * Is PCRE is compiled with UTF-8 and Unicode support
@@ -81,7 +80,7 @@ class Alpha extends AbstractFilter
             }
         }
 
-        $this->allowWhiteSpace = (boolean) $allowWhiteSpace;
+        $this->_allowWhiteSpace = (boolean) $allowWhiteSpace;
         if (null === self::$_unicodeEnabled) {
             self::$_unicodeEnabled = (@preg_match('/\pL/u', 'a')) ? true : false;
         }
@@ -102,7 +101,7 @@ class Alpha extends AbstractFilter
      */
     public function getAllowWhiteSpace()
     {
-        return $this->allowWhiteSpace;
+        return $this->_allowWhiteSpace;
     }
 
     /**
@@ -113,7 +112,7 @@ class Alpha extends AbstractFilter
      */
     public function setAllowWhiteSpace($allowWhiteSpace)
     {
-        $this->allowWhiteSpace = (boolean) $allowWhiteSpace;
+        $this->_allowWhiteSpace = (boolean) $allowWhiteSpace;
         return $this;
     }
 
@@ -127,7 +126,7 @@ class Alpha extends AbstractFilter
      */
     public function filter($value)
     {
-        $whiteSpace = $this->allowWhiteSpace ? '\s' : '';
+        $whiteSpace = $this->_allowWhiteSpace ? '\s' : '';
         if (!self::$_unicodeEnabled) {
             // POSIX named classes are not supported, use alternative a-zA-Z match
             $pattern = '/[^a-zA-Z' . $whiteSpace . ']/';

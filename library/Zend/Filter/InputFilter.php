@@ -761,33 +761,7 @@ class InputFilter
                 $validatorRule[self::PRESENCE] = $this->defaults[self::PRESENCE];
             }
             if (!isset($validatorRule[self::ALLOW_EMPTY])) {
-                $foundNotEmptyValidator = false;
-
-                foreach ($validatorRule as $rule) {
-                    if ($rule === 'NotEmpty') {
-                        $foundNotEmptyValidator = true;
-                        // field may not be empty, we are ready
-                        break 1;
-                    }
-
-                    // we must check if it is an object before using instanceof
-                    if (!is_object($rule)) {
-                        // it cannot be a NotEmpty validator, skip this one
-                        continue;
-                    }
-
-                    if($rule instanceof Validator\NotEmpty) {
-                        $foundNotEmptyValidator = true;
-                        // field may not be empty, we are ready
-                        break 1;
-                    }
-                }
-
-                if (!$foundNotEmptyValidator) {
-                    $validatorRule[self::ALLOW_EMPTY] = $this->defaults[self::ALLOW_EMPTY];
-                } else {
-                    $validatorRule[self::ALLOW_EMPTY] = false;
-                }
+                $validatorRule[self::ALLOW_EMPTY] = $this->defaults[self::ALLOW_EMPTY];
             }
 
             if (!isset($validatorRule[self::MESSAGES])) {

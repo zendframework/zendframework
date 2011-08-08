@@ -9,6 +9,8 @@ use Zend\Stdlib\RequestDescription,
 
 class Request extends Message implements RequestDescription
 {
+    const PATTERN_REQUEST_LINE = '^%token\s(?<uri>[^ ]+) HTTP\/(?<version>\d+(\.\d+)?)$';
+
     const SCHEME_HTTP = 'HTTP';
     const SCHEME_HTTPS = 'HTTPS';
     
@@ -24,6 +26,9 @@ class Request extends Message implements RequestDescription
     const VERSION_11 = '1.1';
     const VERSION_10 = '1.0';
 
+    /**
+     * @var string
+     */
     protected $scheme = self::SCHEME_HTTP;
 
     /**
@@ -32,7 +37,7 @@ class Request extends Message implements RequestDescription
     protected $method = self::METHOD_GET;
 
     /**
-     * @var null
+     * @var string|\Zend\Uri\Uri
      */
     protected $uri = null;
 
@@ -72,7 +77,7 @@ class Request extends Message implements RequestDescription
     protected $envParams = null;
 
     /**
-     * @var \Zend\Http\Headers
+     * @var string|\Zend\Http\Headers
      */
     protected $headers = null;
     
@@ -80,6 +85,39 @@ class Request extends Message implements RequestDescription
      * @var string
      */
     protected $rawBody = null;
+
+    /**
+     *
+     *
+     * @param $string
+     * @return \Zend\Http\Request
+     */
+    public static function fromString($string)
+    {
+        $request = new static();
+
+        $segments = preg_split("/\r\n\r\n/", $string, 2);
+
+        // first line must be Method/Uri/Version string
+        $matches = null;
+        if (!preg_match('#' . self::PATTERN_REQUEST_LINE . '\r\n#', $segments[0], $matches)) {
+            throw new Exception\InvalidArgumentException('A valid request line was not found in the provided string');
+        }
+
+        // @todo stuff the values into the object
+
+        // Populate headers
+        $request->headers = $segments[0];
+
+        // Populate raw body, if content found
+        if (2 === count($segments)) {
+            $request->setRawBody($segments[1]);
+        } else {
+            $request->setRawBody('');
+        }
+
+        return $request;
+    }
 
     public function setMethod($method)
     {
@@ -92,27 +130,30 @@ class Request extends Message implements RequestDescription
         return $this->method;
     }
 
-    public function setRequestUri($uri)
+
+    public function setUri($uri)
     {
-        $this->requestUri = $uri;
+        if (is_string($uri) || $uri instanceof \Zend\Uri\Uri) {
+            $this->uri = $uri;
+        } else {
+            throw new Exception\InvalidArgumentException('URI must be an instance of Zend\Uri\Uri or a string');
+        }
+
         return $this;
     }
 
-    public function getRequestUri()
+    public function getUri()
     {
-        return $this->requestUri;
-    }
-
-    public function setUri(Uri $uri)
-    {
-        $this->uri = $uri;
-        return $this;
+        if ($this->uri instanceof \Zend\Uri\Uri) {
+            return $this->uri->toString();
+        }
+        return $this->uri;
     }
 
     public function uri()
     {
-        if ($this->uri === null) {
-            $this->uri = new Uri($this->requestUri);
+        if ($this->uri === null || is_string($this->uri)) {
+            $this->uri = new Uri($this->uri);
         }
         return $this->uri;
     }
@@ -248,7 +289,7 @@ class Request extends Message implements RequestDescription
         $this->envParams = $env;
         return $this;
     }
-    
+
     /**
      * @return \Zend\Stdlib\ParametersDescription
      */
@@ -260,9 +301,9 @@ class Request extends Message implements RequestDescription
 
         return $this->envParams;
     }
-    
+
     /**
-     * 
+     *
      * @param \Zend\Http\RequestHeaders $headers
      * @return \Zend\Http\Request
      */
@@ -273,18 +314,18 @@ class Request extends Message implements RequestDescription
     }
 
     /**
-     * 
+     *
      * @return \Zend\Http\RequestHeaders
      */
     public function headers()
     {
-        if ($this->headers === null) {
-            $this->headers = new RequestHeaders();
+        if ($this->headers === null || is_string($this->headers)) {
+            $this->headers = (is_string($this->headers)) ? RequestHeaders::fromString($this->headers) : new RequestHeaders();
         }
 
         return $this->headers;
     }
-    
+
     /**
      * @param string $string
      * @return \Zend\Http\Request
@@ -296,7 +337,7 @@ class Request extends Message implements RequestDescription
     }
 
     /**
-     * 
+     *
      * @return string
      */
     public function getRawBody()
@@ -344,41 +385,11 @@ class Request extends Message implements RequestDescription
         return ($this->method === self::METHOD_CONNECT);
     }
 
-    /**
-     * Override __toString in standard message class
-     *
-     * @return string
-     */
-    public function __toString()
+    public function toString()
     {
-        return $this->method . ' ' . $this->uri . ' ' . $this->version . "\r\n"
-            . $this->headers() . "\r\n"
+        return $this->method . ' ' . (string) $this->uri . ' HTTP/' . $this->version . "\r\n"
+            . $this->headers()->toString() . "\r\n"
             . $this->getContent();
     }
 
-    /**
-     * 
-     *
-     * @param $string
-     * @return \Zend\Http\Request
-     */
-    public function fromString($string)
-    {
-        $segments = preg_split("/\r\n\r\n/", $string, 2);
-
-        // first line must be Method/Uri/Version string
-        
-
-        // Populate headers
-        $this->headers()->fromString($segments[0]);
-
-        // Populate raw body, if content found
-        if (2 === count($segments)) {
-            $this->setRawBody($segments[1]);
-        } else {
-            $this->setRawBody('');
-        }
-
-        return $this;
-    }
 }

@@ -72,7 +72,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getMethods
      */
-    public function testMethodCheckWorksForAllMethods($methodName)
+    public function testRequestMethodCheckWorksForAllMethods($methodName)
     {
         $request = new Request;
         $request->setMethod($methodName);
@@ -82,6 +82,26 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+
+    public function testRequestCanBeCastToAString()
+    {
+        $request = new Request();
+        $request->setMethod(Request::METHOD_GET);
+        $request->setUri('/');
+        $request->setContent('foo=bar&bar=baz');
+        $this->assertEquals("GET / HTTP/1.1\r\n\r\nfoo=bar&bar=baz", $request->toString());
+    }
+
+
+
+
+    /**
+     * PHPUNIT DATA PROVIDER
+     *
+     * @param $providerContext
+     * @param null $trueMethod
+     * @return array
+     */
     public function getMethods($providerContext, $trueMethod = null)
     {
         $refClass = new \ReflectionClass('Zend\Http\Request');
@@ -97,6 +117,5 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         }
         return $return;
     }
-
 
 }

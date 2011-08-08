@@ -182,7 +182,7 @@ class Client
     /**
      * The client's cookie jar
      *
-     * @var \Zend\Http\CookieJar
+     * @var \Cookies\Http\CookieJar
      */
     protected $cookiejar = null;
 
@@ -553,16 +553,16 @@ class Client
      * A cookie jar is an object that holds and maintains cookies across HTTP requests
      * and responses.
      *
-     * @param \Zend\Http\CookieJar|boolean $cookiejar Existing cookiejar object, true to create a new one, false to disable
+     * @param \Cookies\Http\CookieJar|boolean $cookiejar Existing cookiejar object, true to create a new one, false to disable
      * @return \Zend\Http\Client
      * @throws \Zend\Http\Client\Exception
      */
     public function setCookieJar($cookiejar = true)
     {
-        if ($cookiejar instanceof CookieJar) {
+        if ($cookiejar instanceof Cookies) {
             $this->cookiejar = $cookiejar;
         } elseif ($cookiejar === true) {
-            $this->cookiejar = new CookieJar();
+            $this->cookiejar = new Cookies();
         } elseif (! $cookiejar) {
             $this->cookiejar = null;
         } else {
@@ -575,7 +575,7 @@ class Client
     /**
      * Return the current cookie jar or null if none.
      *
-     * @return \Zend\Http\CookieJar|null
+     * @return \Cookies\Http\CookieJar|null
      */
     public function getCookieJar()
     {
@@ -1071,7 +1071,7 @@ class Client
         // Load cookies from cookie jar
         if (isset($this->cookiejar)) {
             $cookstr = $this->cookiejar->getMatchingCookies($this->uri,
-                true, CookieJar::COOKIE_STRING_CONCAT);
+                true, Cookies::COOKIE_STRING_CONCAT);
 
             if ($cookstr) {
                 $headers[] = "Cookie: {$cookstr}";

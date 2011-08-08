@@ -6,8 +6,15 @@ use Traversable;
 
 class Message implements MessageDescription
 {
+    /**
+     * @var array
+     */
     protected $metadata = array();
-    protected $content;
+
+    /**
+     * @var string
+     */
+    protected $content = '';
 
     /**
      * Set message metadata 
@@ -83,7 +90,7 @@ class Message implements MessageDescription
         return $this->content;
     }
     
-    public function __toString()
+    public function toString()
     {
         $request = '';
         foreach ($this->getMetadata() as $key => $value) {
@@ -97,8 +104,4 @@ class Message implements MessageDescription
         return $request;
     }
 
-    public function fromString($string)
-    {
-        throw new Exception\DomainException('Unimplemented: ' . __METHOD__);
-    }
 }

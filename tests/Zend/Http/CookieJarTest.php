@@ -47,7 +47,7 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddCookie()
     {
-        $jar = new Http\CookieJar();
+        $jar = new Http\Cookies();
         $this->assertEquals(0, count($jar->getAllCookies()), 'Cookie jar is expected to contain 0 cookies');
 
         $jar->addCookie('foo=bar; domain=example.com');
@@ -65,7 +65,7 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
      */
     public function testExceptAddInvalidCookie()
     {
-        $jar = new Http\CookieJar();
+        $jar = new Http\Cookies();
 
         try {
             $jar->addCookie('garbage');
@@ -75,7 +75,7 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
         }
 
         try {
-            $jar->addCookie(new Http\CookieJar());
+            $jar->addCookie(new Http\Cookies());
             $this->fail('Expected exception was not thrown');
         } catch (Http\Exception $e) {
             // We are ok
@@ -88,7 +88,7 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddCookiesFromResponse()
     {
-        $jar = new Http\CookieJar();
+        $jar = new Http\Cookies();
         $res_str = file_get_contents(dirname(realpath(__FILE__)) .
             DIRECTORY_SEPARATOR . '_files'  . DIRECTORY_SEPARATOR . 'response_with_cookies');
         $response = Response::fromString($res_str);
@@ -98,7 +98,7 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(3, count($jar->getAllCookies()));
 
         $cookie_str = 'foo=bar;BOFH=Feature+was+not+beta+tested;time=1164234700;';
-        $this->assertEquals($cookie_str, $jar->getAllCookies(Http\CookieJar::COOKIE_STRING_CONCAT));
+        $this->assertEquals($cookie_str, $jar->getAllCookies(Http\Cookies::COOKIE_STRING_CONCAT));
     }
 
     /**
@@ -112,7 +112,7 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
             'Zend\Http\Exception\InvalidArgumentException',
             '$response is expected to be a Response object');
 
-        $jar = new Http\CookieJar();
+        $jar = new Http\Cookies();
         $jar->addCookiesFromResponse($resp, 'http://www.example.com');
     }
 
@@ -132,7 +132,7 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAllCookies()
     {
-        $jar = new Http\CookieJar();
+        $jar = new Http\Cookies();
 
         $cookies = array(
             'name=Arthur; domain=camelot.gov.uk',
@@ -157,7 +157,7 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAllCookiesAsConcat()
     {
-        $jar = new Http\CookieJar();
+        $jar = new Http\Cookies();
 
         $cookies = array(
             'name=Arthur; domain=camelot.gov.uk',
@@ -170,7 +170,7 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
         }
 
         $expected = 'name=Arthur;quest=holy+grail;swallow=african;';
-        $real = $jar->getAllCookies(Http\CookieJar::COOKIE_STRING_CONCAT );
+        $real = $jar->getAllCookies(Http\Cookies::COOKIE_STRING_CONCAT );
 
         $this->assertEquals($expected, $real, 'Concatenated string is not as expected');
     }
@@ -182,7 +182,7 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
     public function testGetCookieAsObject()
     {
         $cookie = Http\Cookie::fromString('foo=bar; domain=www.example.com; path=/tests');
-        $jar = new Http\CookieJar();
+        $jar = new Http\Cookies();
         $jar->addCookie($cookie->__toString(), 'http://www.example.com/tests/');
 
         $cobj = $jar->getCookie('http://www.example.com/tests/', 'foo');
@@ -200,13 +200,13 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
     public function testGetCookieAsString()
     {
         $cookie = Http\Cookie::fromString('foo=bar; domain=www.example.com; path=/tests');
-        $jar = new Http\CookieJar();
+        $jar = new Http\Cookies();
         $jar->addCookie($cookie);
 
-        $cstr = $jar->getCookie('http://www.example.com/tests/', 'foo', Http\CookieJar::COOKIE_STRING_ARRAY);
+        $cstr = $jar->getCookie('http://www.example.com/tests/', 'foo', Http\Cookies::COOKIE_STRING_ARRAY);
         $this->assertEquals($cookie->__toString(), $cstr, 'Cookie string is not the expected string');
 
-        $cstr = $jar->getCookie('http://www.example.com/tests/', 'foo', Http\CookieJar::COOKIE_STRING_CONCAT);
+        $cstr = $jar->getCookie('http://www.example.com/tests/', 'foo', Http\Cookies::COOKIE_STRING_CONCAT);
         $this->assertEquals($cookie->__toString(), $cstr, 'Cookie string is not the expected string');
     }
 
@@ -216,16 +216,16 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
     public function testGetCookieReturnFalse()
     {
         $cookie = Http\Cookie::fromString('foo=bar; domain=www.example.com; path=/tests');
-        $jar = new Http\CookieJar();
+        $jar = new Http\Cookies();
         $jar->addCookie($cookie);
 
-        $cstr = $jar->getCookie('http://www.example.com/tests/', 'otherfoo', Http\CookieJar::COOKIE_STRING_ARRAY);
+        $cstr = $jar->getCookie('http://www.example.com/tests/', 'otherfoo', Http\Cookies::COOKIE_STRING_ARRAY);
         $this->assertFalse($cstr, 'getCookie was expected to return false, no such cookie');
 
-        $cstr = $jar->getCookie('http://www.otherexample.com/tests/', 'foo', Http\CookieJar::COOKIE_STRING_CONCAT);
+        $cstr = $jar->getCookie('http://www.otherexample.com/tests/', 'foo', Http\Cookies::COOKIE_STRING_CONCAT);
         $this->assertFalse($cstr, 'getCookie was expected to return false, no such domain');
 
-        $cstr = $jar->getCookie('http://www.example.com/othertests/', 'foo', Http\CookieJar::COOKIE_STRING_CONCAT);
+        $cstr = $jar->getCookie('http://www.example.com/othertests/', 'foo', Http\Cookies::COOKIE_STRING_CONCAT);
         $this->assertFalse($cstr, 'getCookie was expected to return false, no such path');
     }
 
@@ -235,7 +235,7 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
     public function testExceptGetCookieInvalidUri()
     {
         $cookie = Http\Cookie::fromString('foo=bar; domain=www.example.com; path=/tests');
-        $jar = new Http\CookieJar();
+        $jar = new Http\Cookies();
         $jar->addCookie($cookie);
 
         try {
@@ -260,7 +260,7 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
     public function testExceptGetCookieInvalidReturnType()
     {
         $cookie = Http\Cookie::fromString('foo=bar; domain=example.com;');
-        $jar = new Http\CookieJar();
+        $jar = new Http\Cookies();
         $jar->addCookie($cookie);
 
         try {
@@ -278,7 +278,7 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMatchingCookies($url, $expected)
     {
-        $jar = new Http\CookieJar();
+        $jar = new Http\Cookies();
         $cookies = array(
             Http\Cookie::fromString('foo1=bar1; domain=.foo.com; path=/path; expires=' . date(DATE_COOKIE, time() + 3600)),
             Http\Cookie::fromString('foo2=bar2; domain=foo.com; path=/; expires=' . date(DATE_COOKIE, time() + 3600)),
@@ -293,7 +293,7 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
 
         foreach ($cookies as $cookie) $jar->addCookie($cookie);
         $cookies = $jar->getMatchingCookies($url);
-        $this->assertEquals($expected, count($cookies), $jar->getMatchingCookies($url, true, Http\CookieJar::COOKIE_STRING_CONCAT));
+        $this->assertEquals($expected, count($cookies), $jar->getMatchingCookies($url, true, Http\Cookies::COOKIE_STRING_CONCAT));
     }
 
     static public function cookieMatchTestProvider()
@@ -313,7 +313,7 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMatchingCookiesNoSession()
     {
-        $jar = new Http\CookieJar();
+        $jar = new Http\Cookies();
         $cookies = array(
             Http\Cookie::fromString('foo1=bar1; domain=.foo.com; path=/path; expires=' . date(DATE_COOKIE, time() + 3600)),
             Http\Cookie::fromString('foo2=bar2; domain=.foo.com; path=/; expires=' . date(DATE_COOKIE, time() + 3600)),
@@ -341,7 +341,7 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMatchingCookiesWithTime()
     {
-        $jar = new Http\CookieJar();
+        $jar = new Http\Cookies();
         $cookies = array(
             Http\Cookie::fromString('foo1=bar1; domain=.foo.com; path=/path; expires=' . date(DATE_COOKIE, time() + 3600)),
             Http\Cookie::fromString('foo2=bar2; domain=.foo.com; path=/; expires=' . date(DATE_COOKIE, time() + 7200)),
@@ -357,10 +357,10 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(8, count($jar->getAllCookies()), 'Cookie count is expected to be 8');
 
-        $cookies = $jar->getMatchingCookies('http://www.foo.com/path/file.txt', true, Http\CookieJar::COOKIE_OBJECT, time() + 3700);
+        $cookies = $jar->getMatchingCookies('http://www.foo.com/path/file.txt', true, Http\Cookies::COOKIE_OBJECT, time() + 3700);
         $this->assertEquals(2, count($cookies), 'Cookie count is expected to be 2');
 
-        $cookies = $jar->getMatchingCookies('http://www.foo.com/path/file.txt', true, Http\CookieJar::COOKIE_OBJECT, time() - 3700);
+        $cookies = $jar->getMatchingCookies('http://www.foo.com/path/file.txt', true, Http\Cookies::COOKIE_OBJECT, time() - 3700);
         $this->assertEquals(5, count($cookies), 'Cookie count is expected to be 5');
     }
 
@@ -369,7 +369,7 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMatchingCookiesAsStrings()
     {
-        $jar = new Http\CookieJar();
+        $jar = new Http\Cookies();
         $cookies = array(
             Http\Cookie::fromString('foo1=bar1; domain=.foo.com; path=/path; expires=' . date(DATE_COOKIE, time() + 3600)),
             Http\Cookie::fromString('foo2=bar2; domain=.foo.com; path=/; expires=' . date(DATE_COOKIE, time() + 3600)),
@@ -385,11 +385,11 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(8, count($jar->getAllCookies()), 'Cookie count is expected to be 8');
 
-        $cookies = $jar->getMatchingCookies('http://www.foo.com/path/file.txt', true, Http\CookieJar::COOKIE_STRING_ARRAY);
+        $cookies = $jar->getMatchingCookies('http://www.foo.com/path/file.txt', true, Http\Cookies::COOKIE_STRING_ARRAY);
         $this->assertInternalType('array', $cookies, '$cookies is expected to be an array, but it is not');
         $this->assertInternalType('string', $cookies[0], '$cookies[0] is expected to be a string');
 
-        $cookies = $jar->getMatchingCookies('http://www.foo.com/path/file.txt', true, Http\CookieJar::COOKIE_STRING_CONCAT);
+        $cookies = $jar->getMatchingCookies('http://www.foo.com/path/file.txt', true, Http\Cookies::COOKIE_STRING_CONCAT);
         $this->assertInternalType('string', $cookies, '$cookies is expected to be a string');
     }
 
@@ -398,17 +398,17 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
      */
     public function testExceptGetMatchingCookiesInvalidUri()
     {
-        $jar = new Http\CookieJar();
+        $jar = new Http\Cookies();
 
         try {
-            $cookies = $jar->getMatchingCookies('invalid.com', true, Http\CookieJar::COOKIE_STRING_ARRAY);
+            $cookies = $jar->getMatchingCookies('invalid.com', true, Http\Cookies::COOKIE_STRING_ARRAY);
             $this->fail('Expected getMatchingCookies to throw exception, invalid URI string passed');
         } catch (\Zend\Http\Exception $e) {
             // We are ok!
         }
 
         try {
-            $cookies = $jar->getMatchingCookies(new \stdClass(), true, Http\CookieJar::COOKIE_STRING_ARRAY);
+            $cookies = $jar->getMatchingCookies(new \stdClass(), true, Http\Cookies::COOKIE_STRING_ARRAY);
             $this->fail('Expected getCookie to throw exception, invalid URI object passed');
         } catch (\Zend\Http\Exception $e) {
             // We are ok!
@@ -424,9 +424,9 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
             DIRECTORY_SEPARATOR . '_files'  . DIRECTORY_SEPARATOR . 'response_with_single_cookie');
         $response = Response::fromString($res_str);
 
-        $jar = Http\CookieJar::fromResponse($response, 'http://www.example.com');
+        $jar = Http\Cookies::fromResponse($response, 'http://www.example.com');
 
-        $this->assertTrue($jar instanceof Http\CookieJar, '$jar is not an instance of CookieJar as expected');
+        $this->assertTrue($jar instanceof Http\Cookies, '$jar is not an instance of CookieJar as expected');
         $this->assertEquals(1, count($jar->getAllCookies()), 'CookieJar expected to contain 1 cookie');
     }
 
@@ -439,9 +439,9 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
             DIRECTORY_SEPARATOR . '_files'  . DIRECTORY_SEPARATOR . 'response_with_cookies');
         $response = Response::fromString($res_str);
 
-        $jar = Http\CookieJar::fromResponse($response, 'http://www.example.com');
+        $jar = Http\Cookies::fromResponse($response, 'http://www.example.com');
 
-        $this->assertTrue($jar instanceof Http\CookieJar, '$jar is not an instance of CookieJar as expected');
+        $this->assertTrue($jar instanceof Http\Cookies, '$jar is not an instance of CookieJar as expected');
         $this->assertEquals(3, count($jar->getAllCookies()), 'CookieJar expected to contain 3 cookies');
     }
 
@@ -450,7 +450,7 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
      */
     public function testMatchPathWithTrailingSlash()
     {
-        $jar = new Http\CookieJar();
+        $jar = new Http\Cookies();
         $cookies = array(
             Http\Cookie::fromString('foo1=bar1; domain=.example.com; path=/a/b'),
             Http\Cookie::fromString('foo2=bar2; domain=.example.com; path=/a/b/')
@@ -465,7 +465,7 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
 
     public function testIteratorAndCountable()
     {
-        $jar = new Http\CookieJar();
+        $jar = new Http\Cookies();
         $cookies = array(
             Http\Cookie::fromString('foo1=bar1; domain=.example.com; path=/a/b'),
             Http\Cookie::fromString('foo2=bar2; domain=.example.com; path=/a/b/')

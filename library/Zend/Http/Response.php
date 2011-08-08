@@ -7,50 +7,15 @@ use Zend\Stdlib\Message,
 
 class Response extends Message implements ResponseDescription
 {
+
     const PATTERN_STATUS_LINE = "/^(HTTP\/(?<version>\d+(\.\d+)?) (?P<status>\d{3})( (?P<message>.*?)))$/";
 
     protected $allowedStatusCodes = array(
-        100,
-        101,
-        200,
-        201,
-        202,
-        203,
-        204,
-        205,
-        206,
-        300,
-        301,
-        302,
-        303,
-        304,
-        305,
-        306,
-        307,
-        400,
-        401,
-        402,
-        403,
-        404,
-        405,
-        406,
-        407,
-        408,
-        409,
-        410,
-        411,
-        412,
-        413,
-        414,
-        415,
-        416,
-        417,
-        500,
-        501,
-        502,
-        503,
-        504,
-        505,
+        100, 101,
+        200, 201, 202, 203, 204, 205, 206,
+        300, 301, 302, 303, 304, 305, 306, 307,
+        400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417,
+        500, 501, 502, 503, 504, 505,
     );
 
     /**
@@ -270,37 +235,37 @@ class Response extends Message implements ResponseDescription
         return (200 <= $code && 300 > $code);
     }
 
-    /**
-     * Create string representation of response
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->getHeaders() . "\r\n" . $this->getContent();
-    }
-
-    /**
-     * Populate object from string
-     *
-     * @param  string $string
-     * @return Response
-     */
-    public function fromString($string)
-    {
-        $segments = preg_split("/\r\n\r\n/", $string, 2);
-
-        // Populate headers
-        $this->headers()->fromString($segments[0]);
-
-        // Populate content, if any
-        if (2 === count($segments)) {
-            $this->setContent($segments[1]);
-        } else {
-            $this->setContent('');
-        }
-
-        return $this;
-    }
+//    /**
+//     * Create string representation of response
+//     *
+//     * @return string
+//     */
+//    public function __toString()
+//    {
+//        return $this->getHeaders() . "\r\n" . $this->getContent();
+//    }
+//
+//    /**
+//     * Populate object from string
+//     *
+//     * @param  string $string
+//     * @return Response
+//     */
+//    public function fromString($string)
+//    {
+//        $segments = preg_split("/\r\n\r\n/", $string, 2);
+//
+//        // Populate headers
+//        $this->headers()->fromString($segments[0]);
+//
+//        // Populate content, if any
+//        if (2 === count($segments)) {
+//            $this->setContent($segments[1]);
+//        } else {
+//            $this->setContent('');
+//        }
+//
+//        return $this;
+//    }
 
 }

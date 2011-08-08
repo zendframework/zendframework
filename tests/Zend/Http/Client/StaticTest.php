@@ -253,7 +253,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         $jar = $this->_client->getCookieJar();
 
         // Check we got the right cookiejar
-        $this->assertTrue($jar instanceof Http\CookieJar, '$jar is not an instance of Zend_Http_CookieJar as expected');
+        $this->assertTrue($jar instanceof Http\Cookies, '$jar is not an instance of Zend_Http_CookieJar as expected');
         $this->assertEquals(count($jar->getAllCookies()), 2, '$jar does not contain 2 cookies as expected');
     }
 
@@ -263,7 +263,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetReadyCookieJar()
     {
-        $jar = new Http\CookieJar();
+        $jar = new Http\Cookies();
         $jar->addCookie('cookie=value', 'http://www.example.com');
         $jar->addCookie('chocolate=chips; path=/foo', 'http://www.example.com');
 

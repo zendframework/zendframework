@@ -38,7 +38,7 @@ use Zend\Controller\Action\Helper\ViewRenderer;
 class View extends AbstractResource
 {
     /**
-     * @var \Zend\View\ViewEngine
+     * @var \Zend\View\Renderer
      */
     protected $_view;
 

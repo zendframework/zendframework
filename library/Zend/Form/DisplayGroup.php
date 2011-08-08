@@ -111,7 +111,7 @@ class DisplayGroup implements \Iterator,\Countable
     protected $_translatorDisabled = false;
 
     /**
-     * @var \Zend\View\ViewEngine
+     * @var \Zend\View\Renderer
      */
     protected $_view;
 
@@ -842,7 +842,7 @@ class DisplayGroup implements \Iterator,\Countable
     /**
      * Set view
      *
-     * @param  \Zend\View\ViewEngine $view
+     * @param  \Zend\View\Renderer $view
      * @return \Zend\Form\DisplayGroup
      */
     public function setView(View $view = null)
@@ -854,7 +854,7 @@ class DisplayGroup implements \Iterator,\Countable
     /**
      * Retrieve view
      *
-     * @return \Zend\View\ViewEngine
+     * @return \Zend\View\Renderer
      */
     public function getView()
     {

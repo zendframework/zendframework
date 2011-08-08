@@ -217,7 +217,7 @@ class Element implements Validator
     protected $_value;
 
     /**
-     * @var \Zend\View\ViewEngine
+     * @var \Zend\View\Renderer
      */
     protected $_view;
 
@@ -423,10 +423,10 @@ class Element implements Validator
         }
         return $this->_translator;
     }
-    
+
     /**
      * Does this element have its own specific translator?
-     * 
+     *
      * @return bool
      */
     public function hasTranslator()
@@ -1339,7 +1339,7 @@ class Element implements Validator
         // Find the correct translator. Zend\Validator\AbstractValidator::getDefaultTranslator()
         // will get either the static translator attached to Zend\Validator\AbstractValidator
         // or the 'Zend_Translate' from Zend\Registry.
-        if (AbstractValidator::hasDefaultTranslator() 
+        if (AbstractValidator::hasDefaultTranslator()
             && !Form::hasDefaultTranslator())
         {
             $translator = AbstractValidator::getDefaultTranslator();
@@ -1764,7 +1764,7 @@ class Element implements Validator
     /**
      * Set view object
      *
-     * @param  \Zend\View\ViewEngine $view
+     * @param  \Zend\View\Renderer $view
      * @return \Zend\Form\Element
      */
     public function setView(View $view = null)
@@ -1778,7 +1778,7 @@ class Element implements Validator
      *
      * Retrieves from ViewRenderer if none previously set.
      *
-     * @return null|\Zend\View\ViewEngine
+     * @return null|\Zend\View\Renderer
      */
     public function getView()
     {
@@ -1995,7 +1995,7 @@ class Element implements Validator
     /**
      * Render form element
      *
-     * @param  \Zend\View\ViewEngine $view
+     * @param  \Zend\View\Renderer $view
      * @return string
      */
     public function render(View $view = null)

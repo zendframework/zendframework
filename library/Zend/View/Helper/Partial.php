@@ -110,7 +110,7 @@ class Partial extends AbstractHelper
     /**
      * Clone the current View
      *
-     * @return \Zend\View\ViewEngine
+     * @return \Zend\View\Renderer
      */
     public function cloneView()
     {

@@ -1,13 +1,13 @@
 <?php
 
-namespace Zend\Http;
+namespace Zend\Http\Header;
 
 class Header implements HeaderDescription
 {
     /**
      * @var string
      */
-    protected $type = null;
+    protected $name = null;
 
     /**
      * @var string
@@ -16,10 +16,10 @@ class Header implements HeaderDescription
 
     public static function fromString($header)
     {
-        list($type, $values) = explode(': ', $header, 1);
+        list($name, $values) = explode(': ', $header, 1);
         $headers = array();
         foreach (explode(',', $values) as $value) {
-            $headers[] = new static($type, $value);
+            $headers[] = new static($name, $value);
         }
         return $headers;
     }
@@ -31,10 +31,10 @@ class Header implements HeaderDescription
      * @param  string|array $value
      * @return void
      */
-    public function __construct($type = null, $value = null)
+    public function __construct($name = null, $value = null)
     {
-        if ($type) {
-            $this->setType($type);
+        if ($name) {
+            $this->setName($name);
         }
         if ($value) {
             $this->setValue($value);
@@ -43,37 +43,37 @@ class Header implements HeaderDescription
     }
 
     /**
-     * Set header type
+     * Set header name
      * 
      * @param  string $type
      * @return Header
      */
-    public function setType($type)
+    public function setName($name)
     {
-        if (!is_string($type) || empty($type)) {
-            throw new Exception\InvalidArgumentException('Header type must be a string');
+        if (!is_string($name) || empty($name)) {
+            throw new Exception\InvalidArgumentException('Header name must be a string');
         }
 
         // Pre-filter to normalize valid characters
-        $type = $this->normalizeHeaderType((string) $type);
+        $name = $this->normalizeHeaderName((string) $name);
 
         // Validate what we have
-        if (!preg_match('/^[a-z][a-z0-9-]*$/i', $type)) {
-            throw new Exception\InvalidArgumentException('Header type must start with a letter, and consist of only letters, numbers, and dashes');
+        if (!preg_match('/^[a-z][a-z0-9-]*$/i', $name)) {
+            throw new Exception\InvalidArgumentException('Header name must start with a letter, and consist of only letters, numbers, and dashes');
         }
 
-        $this->type = $type;
+        $this->name= $name;
         return $this;
     }
 
     /**
-     * Retrieve header type
+     * Retrieve header name
      *
      * @return string
      */
-    public function getType()
+    public function getName()
     {
-        return $this->type;
+        return $this->name;
     }
 
     /**
@@ -110,7 +110,7 @@ class Header implements HeaderDescription
      * @param  string $string 
      * @return string
      */
-    protected function normalizeHeaderType($string)
+    protected function normalizeHeaderName($string)
     {
         $type = str_replace(array('_', '-'), ' ', $string);
         $type = ucwords($type);
@@ -121,16 +121,16 @@ class Header implements HeaderDescription
     /**
      * Cast to string
      *
-     * Returns in form of "TYPE: VALUE\r\n"
+     * Returns in form of "NAME: VALUE\r\n"
      *
      * @return string
      */
-    public function __toString()
+    public function toString()
     {
-        $type  = $this->getType();
+        $name  = $this->getName();
         $value = $this->getValue();
 
-        return $type . ': ' . $value . "\r\n";
+        return $name. ': ' . $value . "\r\n";
     }
 
 }

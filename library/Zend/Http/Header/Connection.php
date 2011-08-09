@@ -2,29 +2,12 @@
 
 namespace Zend\Http\Header;
 
-class Connection implements HeaderDescription
+class Connection extends Header
 {
-    
-    protected $value = null;
-    
-    public static function fromString($headerLine)
-    {
-        // @todo
-    }
     
     public function getName()
     {
         return 'Connection';
-    }
-    
-    public function getValue()
-    {
-        return $this->value;
-    }
-    
-    public function toString()
-    {
-        
     }
     
 }

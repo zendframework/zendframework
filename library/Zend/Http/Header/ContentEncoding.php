@@ -2,29 +2,12 @@
 
 namespace Zend\Http\Header;
 
-class ContentEncoding implements HeaderDescription
+class ContentEncoding extends Header
 {
-    
-    protected $value = null;
-    
-    public static function fromString($headerLine)
-    {
-        // @todo
-    }
-    
+        
     public function getName()
     {
-        return 'ContentEncoding';
-    }
-    
-    public function getValue()
-    {
-        return $this->value;
-    }
-    
-    public function toString()
-    {
-        
+        return 'Content-Encoding';
     }
     
 }

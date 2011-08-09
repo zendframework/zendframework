@@ -122,20 +122,19 @@ abstract class Headers implements Iterator, Countable
      * @param  string $content
      * @return Headers
      */
-    public function addHeader($header /*, $content = null (not implemented yet) */)
+    public function addHeader($header, $content = null)
     {
         if (!$header instanceof Header\HeaderDescription) {
-            throw new Exception\InvalidArgumentException(
-                'Not Implemented Yet'
-            );
+            $className= self::getHeaderClassForName($header);
+            $header= new $className($header,$content);
         }
 
-        $key = str_replace(array('-', '_'), '', $header->getName());
-
+        $key = str_replace(array('-', '_'), '', strtolower($header->getName()));
+        
         if (!array_key_exists($key, static::$headerClasses)) {
             throw new Exception\InvalidArgumentException('Provided header is not valid in this header container');
         }
-
+        
         $this->headersKeys[] = $key;
         $this->headers[] = $header;
         return $this;
@@ -202,7 +201,7 @@ abstract class Headers implements Iterator, Countable
     public function has($name)
     {
         $name = str_replace(array('-', '_'), '', strtolower($name));
-        return (in_array($name, $this->headersKeysr));
+        return (in_array($name, $this->headersKeys));
     }
 
     public function next()
@@ -268,6 +267,14 @@ abstract class Headers implements Iterator, Countable
         return $content;
     }
 
+    public function toArray()
+    {
+        $headers= array();
+        foreach ($this as $header) {
+            $headers[$header->getName()]= $header->getValue();
+        }
+        return $headers;
+    }
     protected static function getHeaderClassForName($name)
     {
         $headerName = str_replace(array('-', '_'), '', strtolower($name));

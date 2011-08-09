@@ -2,29 +2,12 @@
 
 namespace Zend\Http\Header;
 
-class ContentMD5 implements HeaderDescription
+class ContentMD5 extends Header
 {
-    
-    protected $value = null;
-    
-    public static function fromString($headerLine)
-    {
-        // @todo
-    }
     
     public function getName()
     {
-        return 'ContentMD5';
+        return 'Content-MD5';
     }
-    
-    public function getValue()
-    {
-        return $this->value;
-    }
-    
-    public function toString()
-    {
-        
-    }
-    
+
 }

@@ -2,29 +2,12 @@
 
 namespace Zend\Http\Header;
 
-class AcceptLanguage implements HeaderDescription
+class AcceptLanguage extends Header
 {
-    
-    protected $value = null;
-    
-    public static function fromString($headerLine)
-    {
-        // @todo
-    }
     
     public function getName()
     {
-        return 'AcceptLanguage';
-    }
-    
-    public function getValue()
-    {
-        return $this->value;
-    }
-    
-    public function toString()
-    {
-        
+        return 'Accept-Language';
     }
     
 }

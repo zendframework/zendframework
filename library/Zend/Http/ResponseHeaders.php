@@ -4,7 +4,7 @@ namespace Zend\Http;
 
 class ResponseHeaders extends Headers
 {
-    protected static $headerClasses = array(
+    protected static $headerClasses = array(       
         'acceptranges'       => 'Zend\Http\Header\AcceptRanges',
         'age'                => 'Zend\Http\Header\Age',
         'authenticationinfo' => 'Zend\Http\Header\AuthenticationInfo',

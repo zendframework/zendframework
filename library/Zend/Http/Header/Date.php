@@ -2,29 +2,12 @@
 
 namespace Zend\Http\Header;
 
-class Date implements HeaderDescription
+class Date extends Header
 {
-    
-    protected $value = null;
-    
-    public static function fromString($headerLine)
-    {
-        // @todo
-    }
     
     public function getName()
     {
         return 'Date';
-    }
-    
-    public function getValue()
-    {
-        return $this->value;
-    }
-    
-    public function toString()
-    {
-        
     }
     
 }

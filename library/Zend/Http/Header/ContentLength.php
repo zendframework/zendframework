@@ -2,29 +2,12 @@
 
 namespace Zend\Http\Header;
 
-class ContentLength implements HeaderDescription
+class ContentLength extends Header
 {
-    
-    protected $value = null;
-    
-    public static function fromString($headerLine)
-    {
-        // @todo
-    }
     
     public function getName()
     {
-        return 'ContentLength';
-    }
-    
-    public function getValue()
-    {
-        return $this->value;
-    }
-    
-    public function toString()
-    {
-        
+        return 'Content-Length';
     }
     
 }

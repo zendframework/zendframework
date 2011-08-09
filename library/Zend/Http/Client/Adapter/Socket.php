@@ -210,7 +210,7 @@ class Socket implements HttpAdapter, Stream
 
             $flags = STREAM_CLIENT_CONNECT;
             if ($this->config['persistent']) $flags |= STREAM_CLIENT_PERSISTENT;
-
+            
             $this->socket = @stream_socket_client($host . ':' . $port,
                                                   $errno,
                                                   $errstr,
@@ -325,7 +325,7 @@ class Socket implements HttpAdapter, Stream
          * to have a body - stop reading here
          */
         if ($statusCode == 304 || $statusCode == 204 ||
-            $this->method == \Zend\Http\Client::HEAD) {
+            $this->method == \Zend\Http\Request::METHOD_HEAD) {
 
             // Close the connection if requested to do so by the server
             if (isset($headers['connection']) && $headers['connection'] == 'close') {

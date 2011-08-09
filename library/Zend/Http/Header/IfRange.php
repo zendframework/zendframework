@@ -2,29 +2,12 @@
 
 namespace Zend\Http\Header;
 
-class IfRange implements HeaderDescription
+class IfRange extends Header
 {
-    
-    protected $value = null;
-    
-    public static function fromString($headerLine)
-    {
-        // @todo
-    }
-    
+
     public function getName()
     {
-        return 'IfRange';
+        return 'If-Range';
     }
-    
-    public function getValue()
-    {
-        return $this->value;
-    }
-    
-    public function toString()
-    {
-        
-    }
-    
+  
 }

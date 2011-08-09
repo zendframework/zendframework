@@ -2,29 +2,12 @@
 
 namespace Zend\Http\Header;
 
-class ContentRange implements HeaderDescription
+class ContentRange extends Header
 {
-    
-    protected $value = null;
-    
-    public static function fromString($headerLine)
-    {
-        // @todo
-    }
-    
+
     public function getName()
     {
-        return 'ContentRange';
-    }
-    
-    public function getValue()
-    {
-        return $this->value;
-    }
-    
-    public function toString()
-    {
-        
+        return 'Content-Range';
     }
     
 }

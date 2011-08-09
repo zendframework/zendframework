@@ -5,8 +5,7 @@ namespace Zend\Http;
 use Zend\Stdlib\RequestDescription,
     Zend\Stdlib\Message,
     Zend\Stdlib\ParametersDescription,
-    Zend\Stdlib\Parameters,
-    Zend\Uri\Uri;
+    Zend\Stdlib\Parameters;
 
 class Request extends Message implements RequestDescription
 {
@@ -28,7 +27,7 @@ class Request extends Message implements RequestDescription
     protected $method = self::METHOD_GET;
 
     /**
-     * @var string|\Zend\Uri\Uri
+     * @var string|\Zend\Uri\Http
      */
     protected $uri = null;
 
@@ -147,10 +146,10 @@ class Request extends Message implements RequestDescription
 
     public function setUri($uri)
     {
-        if (is_string($uri) || $uri instanceof \Zend\Uri\Uri) {
+        if (is_string($uri) || $uri instanceof \Zend\Uri\Http) {
             $this->uri = $uri;
         } else {
-            throw new Exception\InvalidArgumentException('URI must be an instance of Zend\Uri\Uri or a string');
+            throw new Exception\InvalidArgumentException('URI must be an instance of Zend\Uri\Http or a string');
         }
 
         return $this;
@@ -158,7 +157,7 @@ class Request extends Message implements RequestDescription
 
     public function getUri()
     {
-        if ($this->uri instanceof \Zend\Uri\Uri) {
+        if ($this->uri instanceof \Zend\Uri\Http) {
             return $this->uri->toString();
         }
         return $this->uri;
@@ -167,7 +166,7 @@ class Request extends Message implements RequestDescription
     public function uri()
     {
         if ($this->uri === null || is_string($this->uri)) {
-            $this->uri = new Uri($this->uri);
+            $this->uri = new HttpUri($this->uri);
         }
         return $this->uri;
     }

@@ -20,6 +20,9 @@ abstract class Headers implements Iterator, Countable
      */
     protected static $headerClasses = array();
 
+    /**
+     * @var array key names for $headers array
+     */
     protected $headersKeys = array();
 
     /**
@@ -140,7 +143,12 @@ abstract class Headers implements Iterator, Countable
 
     public function removeHeader($header)
     {
-        // @todo not implemented yet
+        $index = array_search($this->headers, $header, true);
+        if ($index !== false) {
+            unset($this->headersKeys[$index]);
+            unset($this->headers[$index]);
+        }
+        return $this;
     }
 
     /**
@@ -152,58 +160,8 @@ abstract class Headers implements Iterator, Countable
      */
     public function clearHeaders()
     {
-        $this->headers = array();
+        $this->headers = $this->headersKeys = array();
     }
-
-//    /**
-//     * Push a header onto the queue
-//     *
-//     * @param  Header $value
-//     * @return void
-//     * @throws Exception\InvalidArgumentException when non-Header object provided
-//     */
-//    public function push($value)
-//    {
-//        if (!$value instanceof Header) {
-//            throw new Exception\InvalidArgumentException(sprintf(
-//                'Headers may only aggregate Zend\Http\HttpHeader objects; received %s',
-//                (is_object($value) ? get_class($value) : gettype($value))
-//            ));
-//        }
-//
-//        $type = strtolower($value->getType());
-//        if (!array_key_exists($type, $this->headers)) {
-//            $this->headers[$type] = new SplQueue();
-//        }
-//        $this->headers[$type]->push($value);
-//
-//        return parent::push($value);
-//    }
-//
-//    /**
-//     * Unshift a header onto the queue
-//     *
-//     * @param  Header $value
-//     * @return void
-//     * @throws Exception\InvalidArgumentException when non-Header object provided
-//     */
-//    public function unshift($value)
-//    {
-//        if (!$value instanceof Header) {
-//            throw new Exception\InvalidArgumentException(sprintf(
-//                'Headers may only aggregate Zend\Http\HttpHeader objects; received %s',
-//                (is_object($value) ? get_class($value) : gettype($value))
-//            ));
-//        }
-//
-//        $type = strtolower($value->getType());
-//        if (!array_key_exists($type, $this->headers)) {
-//            $this->headers[$type] = new SplQueue();
-//        }
-//        $this->headers[$type]->unshift($value);
-//
-//        return parent::unshift($value);
-//    }
 
     /**
      * Get all headers of a certain name/type
@@ -244,7 +202,7 @@ abstract class Headers implements Iterator, Countable
     public function has($name)
     {
         $name = str_replace(array('-', '_'), '', strtolower($name));
-        return (in_array($name, $this->headersByKeyName));
+        return (in_array($name, $this->headersKeysr));
     }
 
     public function next()

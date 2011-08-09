@@ -9,12 +9,23 @@ use Zend\Http\Request;
 
 class RequestTest extends \PHPUnit_Framework_TestCase
 {
+
+    public function testRequestFromStringFactoryCreatesValidRequest()
+    {
+        $string = "GET /foo HTTP/1.1\r\n\r\nSome Content";
+        $request = Request::fromString($string);
+
+        $this->assertEquals(Request::METHOD_GET, $request->getMethod());
+        $this->assertEquals('/foo', $request->getUri());
+        $this->assertEquals(Request::VERSION_11, $request->getVersion());
+        $this->assertEquals('Some Content', $request->getRawBody());
+    }
+
     public function testRequestUsesParametersContainerByDefault()
     {
         $request = new Request();
         $this->assertInstanceOf('Zend\Stdlib\Parameters', $request->query());
         $this->assertInstanceOf('Zend\Stdlib\Parameters', $request->post());
-        $this->assertInstanceOf('Zend\Stdlib\Parameters', $request->cookie());
         $this->assertInstanceOf('Zend\Stdlib\Parameters', $request->file());
         $this->assertInstanceOf('Zend\Stdlib\Parameters', $request->server());
         $this->assertInstanceOf('Zend\Stdlib\Parameters', $request->env());
@@ -26,14 +37,12 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $p = new \Zend\Stdlib\Parameters();
         $request->setQuery($p);
         $request->setPost($p);
-        $request->setCookie($p);
         $request->setFile($p);
         $request->setServer($p);
         $request->setEnv($p);
 
         $this->assertSame($p, $request->query());
         $this->assertSame($p, $request->post());
-        $this->assertSame($p, $request->cookie());
         $this->assertSame($p, $request->file());
         $this->assertSame($p, $request->server());
         $this->assertSame($p, $request->env());
@@ -69,6 +78,40 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('POST', $request->getMethod());
     }
 
+    public function testRequestCanSetAndRetrieveUri()
+    {
+        $request = new Request();
+        $request->setUri('/foo');
+        $this->assertEquals('/foo', $request->getUri());
+        $this->assertInstanceOf('Zend\Uri\Uri', $request->uri());
+        $this->assertEquals('/foo', $request->uri()->toString());
+        $this->assertEquals('/foo', $request->getUri());
+    }
+
+    public function testRequestSetUriWillThrowExceptionOnInvalidArgument()
+    {
+        $request = new Request();
+
+        $this->setExpectedException('Zend\Http\Exception\InvalidArgumentException', 'must be an instance of');
+        $request->setUri(new \stdClass());
+    }
+
+    public function testRequestCanSetAndRetrieveVersion()
+    {
+        $request = new Request();
+        $this->assertEquals('1.1', $request->getVersion());
+        $request->setVersion(Request::VERSION_10);
+        $this->assertEquals('1.0', $request->getVersion());
+    }
+
+    public function testRequestSetVersionWillThrowExceptionOnInvalidArgument()
+    {
+        $request = new Request();
+
+        $this->setExpectedException('Zend\Http\Exception\InvalidArgumentException', 'not a valid version');
+        $request->setVersion('1.2');
+    }
+
     /**
      * @dataProvider getMethods
      */
@@ -81,7 +124,6 @@ class RequestTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($testMethodValue, $request->{'is' . $testMethodName}());
         }
     }
-
 
     public function testRequestCanBeCastToAString()
     {

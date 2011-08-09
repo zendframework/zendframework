@@ -5,15 +5,11 @@ namespace Zend\Http;
 use Zend\Stdlib\RequestDescription,
     Zend\Stdlib\Message,
     Zend\Stdlib\ParametersDescription,
-    Zend\Stdlib\Parameters;
+    Zend\Stdlib\Parameters,
+    Zend\Uri\Uri;
 
 class Request extends Message implements RequestDescription
 {
-    const PATTERN_REQUEST_LINE = '^%token\s(?<uri>[^ ]+) HTTP\/(?<version>\d+(\.\d+)?)$';
-
-    const SCHEME_HTTP = 'HTTP';
-    const SCHEME_HTTPS = 'HTTPS';
-    
     const METHOD_OPTIONS = 'OPTIONS';
     const METHOD_GET = 'GET';
     const METHOD_HEAD = 'HEAD';
@@ -25,11 +21,6 @@ class Request extends Message implements RequestDescription
 
     const VERSION_11 = '1.1';
     const VERSION_10 = '1.0';
-
-    /**
-     * @var string
-     */
-    protected $scheme = self::SCHEME_HTTP;
 
     /**
      * @var string
@@ -55,11 +46,6 @@ class Request extends Message implements RequestDescription
      * @var \Zend\Stdlib\ParametersDescription
      */
     protected $postParams = null;
-    
-    /**
-     * @var \Zend\Stdlib\ParametersDescription
-     */
-    protected $cookieParams = null;
     
     /**
      * @var \Zend\Stdlib\ParametersDescription
@@ -96,24 +82,52 @@ class Request extends Message implements RequestDescription
     {
         $request = new static();
 
-        $segments = preg_split("/\r\n\r\n/", $string, 2);
+        $lines = preg_split("/\r\n/", $string);
 
         // first line must be Method/Uri/Version string
         $matches = null;
-        if (!preg_match('#' . self::PATTERN_REQUEST_LINE . '\r\n#', $segments[0], $matches)) {
+        $methods = implode('|', array(
+            self::METHOD_OPTIONS, self::METHOD_GET, self::METHOD_HEAD, self::METHOD_POST,
+            self::METHOD_PUT, self::METHOD_DELETE, self::METHOD_TRACE, self::METHOD_CONNECT
+        ));
+        $regex = '^(?P<method>' . $methods . ')\s(?<uri>[^ ]*)(?:\sHTTP\/(?<version>\d+\.\d+)){0,1}';
+        $firstLine = array_shift($lines);
+        if (!preg_match('#' . $regex . '#', $firstLine, $matches)) {
             throw new Exception\InvalidArgumentException('A valid request line was not found in the provided string');
         }
 
-        // @todo stuff the values into the object
+        $request->setMethod($matches['method']);
+        $request->setUri($matches['uri']);
 
-        // Populate headers
-        $request->headers = $segments[0];
+        if ($matches['version']) {
+            $request->setVersion($matches['version']);
+        }
 
-        // Populate raw body, if content found
-        if (2 === count($segments)) {
-            $request->setRawBody($segments[1]);
-        } else {
-            $request->setRawBody('');
+        if (count($lines) == 0) {
+            return $request;
+        }
+
+        $isHeader = true;
+        $headers = $rawBody = array();
+        while ($lines) {
+            $nextLine = array_shift($lines);
+            if ($nextLine == '') {
+                $isHeader = false;
+                continue;
+            }
+            if ($isHeader) {
+                $headers[] .= $nextLine;
+            } else {
+                $rawBody[] .= $nextLine;
+            }
+        }
+
+        if ($headers) {
+            $request->headers = implode("\r\n", $headers);
+        }
+
+        if ($rawBody) {
+            $request->setRawBody(implode("\r\n", $rawBody));
         }
 
         return $request;
@@ -160,6 +174,9 @@ class Request extends Message implements RequestDescription
 
     public function setVersion($version)
     {
+        if (!in_array($version, array(self::VERSION_10, self::VERSION_11))) {
+            throw new Exception\InvalidArgumentException('Version provided is not a valid version for this HTTP request object');
+        }
         $this->version = $version;
         return $this;
     }
@@ -211,27 +228,13 @@ class Request extends Message implements RequestDescription
 
         return $this->postParams;
     }
-
-    /**
-     * @param \Zend\Stdlib\ParametersDescription $query
-     * @return \Zend\Http\Request
-     */
-    public function setCookie(ParametersDescription $cookies)
-    {
-        $this->cookieParams = $cookies;
-        return $this;
-    }
     
     /**
      * @return \Zend\Stdlib\ParametersDescription
      */
     public function cookie()
     {
-        if ($this->cookieParams === null) {
-            $this->cookieParams = new Parameters();
-        }
-
-        return $this->cookieParams;
+        return $this->headers()->get('Cookie');
     }
 
     /**
@@ -387,9 +390,13 @@ class Request extends Message implements RequestDescription
 
     public function toString()
     {
-        return $this->method . ' ' . (string) $this->uri . ' HTTP/' . $this->version . "\r\n"
-            . $this->headers()->toString() . "\r\n"
-            . $this->getContent();
+        $str = $this->method . ' ' . (string) $this->uri . ' HTTP/' . $this->version . "\r\n";
+        if ($this->headers) {
+            $str .= $this->headers->toString();
+        }
+        $str .= "\r\n";
+        $str .= $this->getContent();
+        return $str;
     }
 
 }

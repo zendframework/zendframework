@@ -45,7 +45,7 @@ class Header implements HeaderDescription
     /**
      * Set header type
      * 
-     * @param  string $type 
+     * @param  string $type
      * @return Header
      */
     public function setType($type)

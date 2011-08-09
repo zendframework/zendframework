@@ -141,6 +141,20 @@ class Ip extends AbstractValidator
      * @param string $value
      */
     protected function _validateIPv4($value) {
+        if (preg_match('/^([01]{8}.){3}[01]{8}$/i', $value)) {
+            // binary format  00000000.00000000.00000000.00000000
+            $value = bindec(substr($value, 0, 8)) . "." . bindec(substr($value, 9, 8)) . "."
+                   . bindec(substr($value, 18, 8)) . "." . bindec(substr($value, 27, 8));
+        } else if (preg_match('/^([0-9]{3}.){3}[0-9]{3}$/i', $value)) {
+            // octet format 777.777.777.777
+            $value = (int) substr($value, 0, 3) . "." . (int) substr($value, 4, 3) . "."
+                   . (int) substr($value, 8, 3) . "." . (int) substr($value, 12, 3);
+        } else if (preg_match('/^([0-9a-f]{2}.){3}[0-9a-f]{2}$/i', $value)) {
+            // hex format ff.ff.ff.ff
+            $value = hexdec(substr($value, 0, 2)) . "." . hexdec(substr($value, 3, 2)) . "."
+                   . hexdec(substr($value, 6, 2)) . "." . hexdec(substr($value, 9, 2));
+        }
+
         $ip2long = ip2long($value);
         if($ip2long === false) {
             return false;

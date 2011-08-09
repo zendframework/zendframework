@@ -28,6 +28,7 @@
  *                              current directory
  * --output|-o [ <string> ]     Where to write autoload file; if not provided, 
  *                              assumes ".classmap.php" in library directory
+ * --append|-a                  Append to autoload file if it exists
  * --overwrite|-w               Whether or not to overwrite existing autoload 
  *                              file
  */
@@ -55,6 +56,7 @@ $rules = array(
     'help|h'        => 'Get usage message',
     'library|l-s'   => 'Library to parse; if none provided, assumes current directory',
     'output|o-s'    => 'Where to write autoload file; if not provided, assumes ".classmap.php" in library directory',
+    'append|a'      => 'Append to autoload file if it exists',
     'overwrite|w'   => 'Whether or not to overwrite existing autoload file',
 );
 
@@ -86,6 +88,7 @@ if (isset($opts->l)) {
 }
 
 $usingStdout = false;
+$appending = $opts->getOption('a');
 $output = $path . DIRECTORY_SEPARATOR . '.classmap.php';
 if (isset($opts->o)) {
     $output = $opts->o;
@@ -98,7 +101,7 @@ if (isset($opts->o)) {
             . $opts->getUsageMessage();
         exit(2);
     } elseif (file_exists($output)) {
-        if (!$opts->getOption('w')) {
+        if (!$opts->getOption('w') && !$appending) {
             echo "Autoload file already exists at '$output'," . PHP_EOL
                 . "but 'overwrite' flag was not specified; aborting." . PHP_EOL 
                 . PHP_EOL
@@ -111,7 +114,11 @@ if (isset($opts->o)) {
 $strip     = $path;
 
 if (!$usingStdout) {
-    echo "Creating class file map for library in '$path'..." . PHP_EOL;
+    if ($appending) {
+        echo "Appending to class file map '$output' for library in '$path'..." . PHP_EOL;
+    } else {
+        echo "Creating class file map for library in '$path'..." . PHP_EOL;
+    }
 }
 
 // Get the ClassFileLocator, and pass it the library path
@@ -119,7 +126,13 @@ $l = new \Zend\File\ClassFileLocator($path);
 
 // Iterate over each element in the path, and create a map of 
 // classname => filename, where the filename is relative to the library path
-$map    = new \stdClass;
+$map = new \stdClass;
+if ($appending) {
+    $existing = include($output);
+    if (is_array($existing)) {
+        $map = (object) $existing;
+    }
+}
 $strip .= DIRECTORY_SEPARATOR;
 iterator_apply($l, function() use ($l, $map, $strip){
     $file      = $l->current();

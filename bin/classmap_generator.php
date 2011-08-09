@@ -127,12 +127,6 @@ $l = new \Zend\File\ClassFileLocator($path);
 // Iterate over each element in the path, and create a map of 
 // classname => filename, where the filename is relative to the library path
 $map = new \stdClass;
-if ($appending) {
-    $existing = include($output);
-    if (is_array($existing)) {
-        $map = (object) $existing;
-    }
-}
 $strip .= DIRECTORY_SEPARATOR;
 iterator_apply($l, function() use ($l, $map, $strip){
     $file      = $l->current();
@@ -147,19 +141,42 @@ iterator_apply($l, function() use ($l, $map, $strip){
     return true;
 });
 
-// Create a file with the class/file map.
-// Stupid syntax highlighters make separating < from PHP declaration necessary
-$content = '<' . "?php\n"
-         . 'return ' . var_export((array) $map, true) . ';';
+if ($appending) {
 
-// Prefix with __DIR__; modify the generated content
-$content = preg_replace('#(=> )#', '$1__DIR__ . DIRECTORY_SEPARATOR . ', $content);
+    $content = var_export((array) $map, true) . ';';
 
-// Fix \' strings from injected DIRECTORY_SEPARATOR usage in iterator_apply op
-$content = str_replace("\\'", "'", $content);
+    // Prefix with __DIR__; modify the generated content
+    $content = preg_replace('#(=> )#', '$1__DIR__ . DIRECTORY_SEPARATOR . ', $content);
 
-// Write the contents to disk
-file_put_contents($output, $content);
+    // Fix \' strings from injected DIRECTORY_SEPARATOR usage in iterator_apply op
+    $content = str_replace("\\'", "'", $content);
+
+    // Convert to an array and remove the first "array ("
+    $content = explode(PHP_EOL, $content);
+    array_shift($content);
+
+    // Load existing class map file and remove the closing "bracket ");" from it
+    $existing = file($output, FILE_IGNORE_NEW_LINES);
+    array_pop($existing); 
+
+    // Merge and write to disk
+    $existing += $content;
+    file_put_contents($output, implode(PHP_EOL, $existing));
+} else {
+    // Create a file with the class/file map.
+    // Stupid syntax highlighters make separating < from PHP declaration necessary
+    $content = '<' . "?php\n"
+             . 'return ' . var_export((array) $map, true) . ';';
+
+    // Prefix with __DIR__; modify the generated content
+    $content = preg_replace('#(=> )#', '$1__DIR__ . DIRECTORY_SEPARATOR . ', $content);
+
+    // Fix \' strings from injected DIRECTORY_SEPARATOR usage in iterator_apply op
+    $content = str_replace("\\'", "'", $content);
+
+    // Write the contents to disk
+    file_put_contents($output, $content);
+}
 
 if (!$usingStdout) {
     echo "Wrote classmap file to '" . realpath($output) . "'" . PHP_EOL;

@@ -43,7 +43,7 @@ use Zend\Uri;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Cookie
+class Cookie extends Header
 {
     /**
      * Cookie name
@@ -53,39 +53,32 @@ class Cookie
     protected $name;
 
     /**
-     * Cookie value
-     *
-     * @var string
-     */
-    protected $value;
-
-    /**
      * Cookie expiry date
      *
      * @var int
      */
-    protected $expires;
+    protected $expires = null;
 
     /**
      * Cookie domain
      *
      * @var string
      */
-    protected $domain;
+    protected $domain = null;
 
     /**
      * Cookie path
      *
      * @var string
      */
-    protected $path;
+    protected $path = '/';
 
     /**
      * Whether the cookie is secure or not
      *
      * @var boolean
      */
-    protected $secure;
+    protected $secure = false;
 
     /**
      * Whether the cookie value has been encoded/decoded
@@ -106,24 +99,39 @@ class Cookie
      * @param string $path
      * @param bool $secure
      */
-    public function __construct($name, $value, $domain, $expires = null, $path = null, $secure = false)
+    public function __construct($name = null, $value = null, $domain = null, $expires = null, $path = null, $secure = false)
+    {
+        $this->type = 'Cookie';
+
+        if ($name) {
+            $this->setName($name);
+        }
+
+        if ($value) {
+            $this->setValue($value); // in parent
+        }
+
+        if ($domain) {
+            $this->setDomain($domain);
+        }
+
+        if ($expires) {
+            $this->setExpires($expires);
+        }
+
+        if ($secure) {
+            $this->setSecure($secure);
+        }
+    }
+
+    public function setName($name)
     {
         if (preg_match("/[=,; \t\r\n\013\014]/", $name)) {
             throw new Exception\InvalidArgumentException("Cookie name cannot contain these characters: =,; \\t\\r\\n\\013\\014 ({$name})");
         }
 
-        if (! $this->name = (string) $name) {
-            throw new Exception\InvalidArgumentException('Cookies must have a name');
-        }
-
-        if (! $this->domain = (string) $domain) {
-            throw new Exception\InvalidArgumentException('Cookies must have a domain');
-        }
-
-        $this->value = (string) $value;
-        $this->expires = ($expires === null ? null : (int) $expires);
-        $this->path = ($path ? $path : '/');
-        $this->secure = $secure;
+        $this->name = $name;
+        return $this;
     }
 
     /**
@@ -136,14 +144,10 @@ class Cookie
         return $this->name;
     }
 
-    /**
-     * Get cookie value
-     *
-     * @return string
-     */
-    public function getValue()
+    public function setDomain($domain)
     {
-        return $this->value;
+        $this->domain = $domain;
+        return $this;
     }
 
     /**
@@ -154,6 +158,12 @@ class Cookie
     public function getDomain()
     {
         return $this->domain;
+    }
+
+    public function setPath($path)
+    {
+        $this->path = $path;
+        return $this;
     }
 
     /**

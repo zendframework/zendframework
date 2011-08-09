@@ -24,8 +24,7 @@
  */
 namespace Zend\Http;
 
-use Countable,
-    IteratorAggregate,
+use Zend\Stdlib\ParametersDescription,
     Zend\Uri;
 
 /**
@@ -52,7 +51,7 @@ use Countable,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class CookieJar implements Countable, IteratorAggregate
+class Cookies implements ParametersDescription
 {
     /**
      * Return cookie(s) as a Zend_Http_Cookie object
@@ -356,7 +355,7 @@ class CookieJar implements Countable, IteratorAggregate
      *
      * @param Response $response HTTP Response object
      * @param Uri\Uri|string $uri The requested URI
-     * @return CookieJar
+     * @return Cookies
      * @todo Add the $uri functionality.
      */
     public static function fromResponse(Response $response, $ref_uri)
@@ -399,11 +398,128 @@ class CookieJar implements Countable, IteratorAggregate
     /**
      * Empties the cookieJar of any cookie
      *
-     * @return \Zend\Http\CookieJar
+     * @return \Cookies\Http\CookieJar
      */
     public function reset()
     {
         $this->cookies = $this->_rawCookies = array();
         return $this;
+    }
+
+    /**
+     * (PHP 5 &gt;= 5.1.0)<br/>
+     * Whether a offset exists
+     * @link http://php.net/manual/en/arrayaccess.offsetexists.php
+     * @param mixed $offset <p>
+     * An offset to check for.
+     * </p>
+     * @return boolean Returns true on success or false on failure.
+     * </p>
+     * <p>
+     * The return value will be casted to boolean if non-boolean was returned.
+     */
+    public function offsetExists($offset)
+    {
+        // TODO: Implement offsetExists() method.
+    }
+
+    /**
+     * (PHP 5 &gt;= 5.1.0)<br/>
+     * Offset to retrieve
+     * @link http://php.net/manual/en/arrayaccess.offsetget.php
+     * @param mixed $offset <p>
+     * The offset to retrieve.
+     * </p>
+     * @return mixed Can return all value types.
+     */
+    public function offsetGet($offset)
+    {
+        // TODO: Implement offsetGet() method.
+    }
+
+    /**
+     * (PHP 5 &gt;= 5.1.0)<br/>
+     * Offset to set
+     * @link http://php.net/manual/en/arrayaccess.offsetset.php
+     * @param mixed $offset <p>
+     * The offset to assign the value to.
+     * </p>
+     * @param mixed $value <p>
+     * The value to set.
+     * </p>
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        // TODO: Implement offsetSet() method.
+    }
+
+    /**
+     * (PHP 5 &gt;= 5.1.0)<br/>
+     * Offset to unset
+     * @link http://php.net/manual/en/arrayaccess.offsetunset.php
+     * @param mixed $offset <p>
+     * The offset to unset.
+     * </p>
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        // TODO: Implement offsetUnset() method.
+    }
+
+    /**
+     * (PHP 5 &gt;= 5.1.0)<br/>
+     * String representation of object
+     * @link http://php.net/manual/en/serializable.serialize.php
+     * @return string the string representation of the object or &null;
+     */
+    public function serialize()
+    {
+        // TODO: Implement serialize() method.
+    }
+
+    /**
+     * (PHP 5 &gt;= 5.1.0)<br/>
+     * Constructs the object
+     * @link http://php.net/manual/en/serializable.unserialize.php
+     * @param string $serialized <p>
+     * The string representation of the object.
+     * </p>
+     * @return mixed the original value unserialized.
+     */
+    public function unserialize($serialized)
+    {
+        // TODO: Implement unserialize() method.
+    }
+
+    public function fromArray(array $values)
+    {
+        // TODO: Implement fromArray() method.
+    }
+
+    public function fromString($string)
+    {
+        // TODO: Implement fromString() method.
+    }
+
+    public function toArray()
+    {
+        // TODO: Implement toArray() method.
+    }
+
+    public function toString()
+    {
+        // TODO: Implement toString() method.
+    }
+
+    public function get($name, $default = null)
+    {
+        // TODO: Implement get() method.
+    }
+
+    public function set($name, $value)
+    {
+        // TODO: Implement set() method.
     }
 }

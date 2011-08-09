@@ -1,6 +1,6 @@
 <?php
 
-namespace Zend\Http;
+namespace Zend\Http\Header;
 
 interface Exception
 {

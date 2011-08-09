@@ -2,29 +2,12 @@
 
 namespace Zend\Http\Header;
 
-class AcceptEncoding implements HeaderDescription
+class AcceptEncoding extends Header
 {
-    
-    protected $value = null;
-    
-    public static function fromString($headerLine)
-    {
-        // @todo
-    }
     
     public function getName()
     {
         return 'Accept-Encoding';
-    }
-    
-    public function getValue()
-    {
-        return $this->value;
-    }
-    
-    public function toString()
-    {
-        
     }
     
 }

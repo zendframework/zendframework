@@ -2,29 +2,12 @@
 
 namespace Zend\Http\Header;
 
-class IfNoneMatch implements HeaderDescription
+class IfNoneMatch extends Header
 {
-    
-    protected $value = null;
-    
-    public static function fromString($headerLine)
-    {
-        // @todo
-    }
     
     public function getName()
     {
-        return 'IfNoneMatch';
+        return 'If-None-Match';
     }
-    
-    public function getValue()
-    {
-        return $this->value;
-    }
-    
-    public function toString()
-    {
-        
-    }
-    
+
 }

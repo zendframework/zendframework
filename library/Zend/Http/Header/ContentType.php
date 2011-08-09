@@ -2,29 +2,12 @@
 
 namespace Zend\Http\Header;
 
-class ContentType implements HeaderDescription
+class ContentType extends Header
 {
-    
-    protected $value = null;
-    
-    public static function fromString($headerLine)
-    {
-        // @todo
-    }
     
     public function getName()
     {
-        return 'ContentType';
-    }
-    
-    public function getValue()
-    {
-        return $this->value;
-    }
-    
-    public function toString()
-    {
-        
+        return 'Content-Type';
     }
     
 }

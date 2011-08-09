@@ -2,29 +2,12 @@
 
 namespace Zend\Http\Header;
 
-class CacheControl implements HeaderDescription
+class CacheControl extends Header
 {
-    
-    protected $value = null;
-    
-    public static function fromString($headerLine)
-    {
-        // @todo
-    }
     
     public function getName()
     {
-        return 'CacheControl';
-    }
-    
-    public function getValue()
-    {
-        return $this->value;
-    }
-    
-    public function toString()
-    {
-        
+        return 'Cache-Control';
     }
 
 }

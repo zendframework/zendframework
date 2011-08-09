@@ -2,29 +2,12 @@
 
 namespace Zend\Http\Header;
 
-class Host implements HeaderDescription
+class Host extends Header
 {
-    
-    protected $value = null;
-    
-    public static function fromString($headerLine)
-    {
-        // @todo
-    }
     
     public function getName()
     {
         return 'Host';
-    }
-    
-    public function getValue()
-    {
-        return $this->value;
-    }
-    
-    public function toString()
-    {
-        
     }
     
 }

@@ -2,29 +2,12 @@
 
 namespace Zend\Http\Header;
 
-class RetryAfter implements HeaderDescription
+class RetryAfter extends Header
 {
-    
-    protected $value = null;
-    
-    public static function fromString($headerLine)
-    {
-        // @todo
-    }
-    
+
     public function getName()
     {
-        return 'RetryAfter';
+        return 'Retry-After';
     }
-    
-    public function getValue()
-    {
-        return $this->value;
-    }
-    
-    public function toString()
-    {
-        
-    }
-    
+
 }

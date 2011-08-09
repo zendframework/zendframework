@@ -2,29 +2,12 @@
 
 namespace Zend\Http\Header;
 
-class KeepAlive implements HeaderDescription
+class KeepAlive extends Header
 {
-    
-    protected $value = null;
-    
-    public static function fromString($headerLine)
-    {
-        // @todo
-    }
     
     public function getName()
     {
-        return 'KeepAlive';
-    }
-    
-    public function getValue()
-    {
-        return $this->value;
-    }
-    
-    public function toString()
-    {
-        
+        return 'Keep-Alive';
     }
     
 }

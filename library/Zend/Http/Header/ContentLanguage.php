@@ -2,29 +2,12 @@
 
 namespace Zend\Http\Header;
 
-class ContentLanguage implements HeaderDescription
+class ContentLanguage extends Header
 {
-    
-    protected $value = null;
-    
-    public static function fromString($headerLine)
-    {
-        // @todo
-    }
     
     public function getName()
     {
-        return 'ContentLanguage';
-    }
-    
-    public function getValue()
-    {
-        return $this->value;
-    }
-    
-    public function toString()
-    {
-        
+        return 'Content-Language';
     }
     
 }

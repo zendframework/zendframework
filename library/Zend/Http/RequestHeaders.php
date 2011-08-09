@@ -46,6 +46,7 @@ class RequestHeaders extends Headers
         'te'                 => 'Zend\Http\Header\TE',
         'useragent'          => 'Zend\Http\Header\UserAgent',
         'cookie'             => 'Zend\Http\Header\Cookie',
+        'host'               => 'Zend\Http\Header\Host' 
     );
 
 }

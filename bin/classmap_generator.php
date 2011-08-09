@@ -159,9 +159,8 @@ if ($appending) {
     $existing = file($output, FILE_IGNORE_NEW_LINES);
     array_pop($existing); 
 
-    // Merge and write to disk
-    $existing += $content;
-    file_put_contents($output, implode(PHP_EOL, $existing));
+    // Merge
+    $content = implode(PHP_EOL, $existing + $content);
 } else {
     // Create a file with the class/file map.
     // Stupid syntax highlighters make separating < from PHP declaration necessary
@@ -173,10 +172,10 @@ if ($appending) {
 
     // Fix \' strings from injected DIRECTORY_SEPARATOR usage in iterator_apply op
     $content = str_replace("\\'", "'", $content);
-
-    // Write the contents to disk
-    file_put_contents($output, $content);
 }
+
+// Write the contents to disk
+file_put_contents($output, $content);
 
 if (!$usingStdout) {
     echo "Wrote classmap file to '" . realpath($output) . "'" . PHP_EOL;

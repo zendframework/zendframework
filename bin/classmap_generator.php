@@ -126,7 +126,7 @@ $l = new \Zend\File\ClassFileLocator($path);
 
 // Iterate over each element in the path, and create a map of 
 // classname => filename, where the filename is relative to the library path
-$map = new \stdClass;
+$map    = new \stdClass;
 $strip .= DIRECTORY_SEPARATOR;
 iterator_apply($l, function() use ($l, $map, $strip){
     $file      = $l->current();

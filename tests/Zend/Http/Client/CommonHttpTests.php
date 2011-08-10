@@ -27,6 +27,7 @@ use Zend\Http\Client as HTTPClient,
     Zend\Http,
     Zend\Http\Client\Adapter,
     Zend\Http\Client\Adapter\Exception as AdapterException,
+    Zend\Http\Request,
     Zend\Http\Response;
 
 
@@ -133,10 +134,12 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
      */
     public function testSimpleRequests()
     {
-        $methods = array('GET', 'POST', 'OPTIONS', 'PUT', 'DELETE');
+        $methods= array(Request::METHOD_GET, Request::METHOD_POST, Request::METHOD_OPTIONS,
+                        Request::METHOD_PUT, Request::METHOD_DELETE);
 
         foreach ($methods as $method) {
-            $res = $this->client->request($method);
+            $this->client()->setMethod($method);
+            $res = $this->client->send($method);
             $this->assertEquals('Success', $res->getBody(), "HTTP {$method} request failed.");
         }
     }

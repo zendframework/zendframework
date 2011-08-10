@@ -24,7 +24,8 @@
 namespace Zend\Http;
 
 use Zend\Config\Config,
-    Zend\Uri\Http;
+    Zend\Uri\Http,
+    Zend\Http\Header\Cookie;
 
 /**
  * Http client
@@ -36,6 +37,12 @@ use Zend\Config\Config,
  */
 class Client
 {
+    /**
+     * Supported HTTP Authentication methods
+     */
+    const AUTH_BASIC  = 'basic';
+    const AUTH_DIGEST = 'digest';  // not implemented yet
+    
     /**
      * HTTP protocol versions
      */
@@ -54,11 +61,23 @@ class Client
     const ENC_URLENCODED = 'application/x-www-form-urlencoded';
     const ENC_FORMDATA   = 'multipart/form-data';
     
+    /**
+     * DIGEST Authentication
+     */
+    const DIGEST_REALM  = 'realm';
+    const DIGEST_QOP    = 'qop';
+    const DIGEST_NONCE  = 'nonce';
+    const DIGEST_OPAQUE = 'opaque';
+    const DIGEST_NC     = 'nc';
+    const DIGEST_CNONCE = 'cnonce';
+    
     protected static $client;
     protected $response;
     protected $request;
     protected $adapter;
-    protected $auth;
+    protected $auth = array();
+    protected $streamName;
+    protected $cookies;
     
     /**
      * Configuration array, set using the constructor or using ::setConfig()
@@ -225,33 +244,135 @@ class Client
     /**
      * Get uri (from the request)
      * 
-     * @return string 
+     * @return Zend\Uri\Http
      */
     public function getUri()
     {
-        return $this->getRequest()->getUri();
+        return $this->getRequest()->uri();
     }
     /**
-     * Set a cookie (to the request)
+     * Set the HTTP method (to the request)
      * 
-     * @param  \Zend\Stdlib\ParametersDescription $cookie
+     * @param string $method
      * @return Client 
      */
-    public function setCookie($cookie) 
+    public function setMethod($method)
     {
-        if (!empty($cookie)) {
-            $this->getRequest()->setCookie($cookie);
-        }
+        $this->getRequest()->setMethod($method);
         return $this;
     }
     /**
-     * Get the cookie (from the request)
+     * Get the HTTP method
      * 
-     * @return type 
+     * @return string 
      */
-    public function getCookie()
+    public function getMethod()
     {
-        return $this->getRequest()->cookie();
+        return $this->getRequest()->getMethod();
+    }
+    /**
+     * Set the POST parameters
+     * 
+     * @param array $post
+     * @return Client 
+     */
+    public function setParameterPost($post)
+    {
+        $this->getRequest()->setPost($post);
+        return $this;
+    }
+    /**
+     * Set the GET parameters
+     * 
+     * @param array $query 
+     * @return Client
+     */
+    public function setParameterGet($query)
+    {
+        $this->getRequest()->setQuery($query);
+        return $this;
+    }
+    /**
+     * Add a cookie to the request. If the client has no Cookie Jar, the cookies
+     * will be added directly to the headers array as "Cookie" headers.
+     *
+     * @param \Zend\Http\Header\Cookie|string $cookie
+     * @param string|null $value If "cookie" is a string, this is the cookie value.
+     * @return Client
+     * @throws Exception
+     */
+    public function setCookie($cookie, $value = null)
+    {
+        if (is_array($cookie)) {
+            foreach ($cookie as $c => $v) {
+                if (is_string($c)) {
+                    $this->setCookie($c, $v);
+                } else {
+                    $this->setCookie($v);
+                }
+            }
+            return $this;
+        }
+
+        if ($value !== null && $this->config['encodecookies']) {
+            $value = urlencode($value);
+        }
+
+        if (isset($this->cookies)) {
+            if ($cookie instanceof Cookie) {
+                $this->cookies->addCookie($cookie);
+            } elseif (is_string($cookie) && $value !== null) {
+                $cookie = Cookie::fromString("{$cookie}={$value}",
+                                                       $this->getUri()->toString(),
+                                                       $this->config['encodecookies']);
+                $this->cookies->addCookie($cookie);
+            }
+        } else {
+            if ($cookie instanceof Cookie) {
+                $name = $cookie->getName();
+                $value = $cookie->getValue();
+                $cookie = $name;
+            }
+            $value = addslashes($value);
+              
+            $this->addHeader('Cookie', $cookie . '=' . $value . ';');
+
+        }
+
+        return $this;
+    }
+    /**
+     * Set the HTTP client's cookies
+     *
+     * A cookies is an object that holds and maintains cookies across HTTP requests
+     * and responses.
+     *
+     * @param  Cookies|boolean $cookies Existing cookies object, true to create a new one, false to disable
+     * @return Client
+     * @throws Exception
+     */
+    public function setCookies($cookies = true)
+    {
+        if ($cookies instanceof CookieJar) {
+            $this->cookies = $cookies;
+        } elseif ($cookies === true) {
+            $this->cookies = new Cookies();
+        } elseif (! $cookies) {
+            $this->cookies = null;
+        } else {
+            throw new Exception\InvalidArgumentException('Invalid parameter type passed as Cookies');
+        }
+
+        return $this;
+    }
+    /**
+     * Return the current cookie jar or null if none.
+     *
+     * @return Cookies|null
+     */
+    public function getCookies()
+    {
+        return $this->cookies;
     }
     /**
      * Set the headers (for the request)
@@ -290,12 +411,135 @@ class Client
     /**
      * Check if exists the header type specified
      * 
-     * @param  string $type
+     * @param  string $name
      * @return boolean 
      */
-    public function hasHeader($type)
+    public function hasHeader($name)
     {
-        return $this->getRequest()->headers()->has($type);
+        return $this->getRequest()->headers()->has($name);
+    }
+    /**
+     * Set streaming for received data
+     *
+     * @param string|boolean $streamfile Stream file, true for temp file, false/null for no streaming
+     * @return \Zend\Http\Client
+     */
+    public function setStream($streamfile = true)
+    {
+        $this->setConfig(array("output_stream" => $streamfile));
+        return $this;
+    }
+
+    /**
+     * Get status of streaming for received data
+     * @return boolean|string
+     */
+    public function getStream()
+    {
+        return $this->config["output_stream"];
+    }
+
+    /**
+     * Create temporary stream
+     *
+     * @return resource
+     */
+    protected function openTempStream()
+    {
+        $this->streamName = $this->config['output_stream'];
+        if(!is_string($this->streamName)) {
+            // If name is not given, create temp name
+            $this->streamName = tempnam(isset($this->config['stream_tmp_dir'])?$this->config['stream_tmp_dir']:sys_get_temp_dir(),
+                 'Zend\Http\Client');
+        }
+
+        if (false === ($fp = @fopen($this->streamName, "w+b"))) {
+                if ($this->adapter instanceof Client\Adapter) {
+                    $this->adapter->close();
+                }
+                throw new Exception\RuntimeException("Could not open temp file {$this->streamName}");
+        }
+
+        return $fp;
+    }
+    /**
+     * Create a HTTP authentication "Authorization:" header according to the
+     * specified user, password and authentication method.
+     *
+     * @param string $user
+     * @param string $password
+     * @param string $type 
+     * @return Client
+     */
+    public function setAuth($user, $password, $type = self::AUTH_BASIC)
+    {
+        if (!defined('self::AUTH_' . strtoupper($type))) {
+            throw new Exception\InvalidArgumentException("Invalid or not supported authentication type: '$type'");
+        }
+        if (empty($user) || empty($password)) {
+            throw new Exception\InvalidArgumentException("The username and the password cannot be empty");
+        }    
+        
+        $this->auth = array (
+            'user'     => $user,
+            'password' => $password,
+            'type'     => $type
+            
+        );
+    
+        return $this;
+    }
+    /**
+     * Calculate the response value according to the HTTP authentication type
+     * 
+     * @see http://www.faqs.org/rfcs/rfc2617.html
+     * @param string $user
+     * @param string $password
+     * @param string $type
+     * @param array $digest 
+     * @return string|boolean
+     */
+    protected function calcAuthDigest($user,$password, $type = self::AUTH_BASIC, $digest=array(), $entityBody=null)
+    {
+        if (!defined('self::AUTH_' . strtoupper($type))) {
+            throw new Exception\InvalidArgumentException("Invalid or not supported authentication type: '$type'");
+        }
+        $response= false;
+        switch(strtolower($type)) {
+            case self::AUTH_BASIC :
+                // In basic authentication, the user name cannot contain ":"
+                if (strpos($user, ':') !== false) {
+                    throw new Exception\InvalidArgumentException("The user name cannot contain ':' in Basic HTTP authentication");
+                }
+                $response= base64_encode($user . ':' . $password);
+                break;
+            case self::AUTH_DIGEST :
+                if (empty($digest)) {
+                    throw new Exception\InvalidArgumentException("The digest cannot be empty");
+                }
+                foreach ($digest as $key => $value) {
+                    if (!defined('self::DIGEST_' . strtoupper($key))) {
+                        throw new Exception\InvalidArgumentException("Invalid or not supported digest authentication parameter: '$key'");
+                    }
+                }
+                $ha1 = md5($user . ':' . $digest['realm'] . ':' . $password);
+                if (empty($digest['qop']) || strtolower($digest['qop'])=='auth') {
+                    $ha2 = md5($this->getMethod() . ':' . $this->getUri()->getPath());
+                } elseif (strtolower($digest['qop'])=='auth-int') {
+                     if (empty($entityBody)) {
+                        throw new Exception\InvalidArgumentException("I cannot use the auth-int digest authentication without the entity body");
+                     }
+                     $ha2 = md5($this->getMethod() . ':' . $this->getUri()->getPath() . ':' . md5($entityBody));
+                }
+                if (empty($digest['qop'])) {
+                    $response= md5 ($ha1 . ':' . $digest['nonce'] . ':' . $ha2);
+                } else {
+                    $response= md5 ($ha1 . ':' . $digest['nonce'] . ':' . $digest['nc']
+                                    . ':' . $digest['cnonce'] . ':' . $digest['qoc'] . ':' . $ha2);
+                }
+                break;
+        }
+        return $response;
     }
     /**
      * Send HTTP request
@@ -320,7 +564,7 @@ class Client
         // Send the first request. If redirected, continue.
         do {
             // uri
-            $uri= $this->getUri();
+            $uri= $this->getUri()->toString();
             // query
             $query= $this->getRequest()->query()->toArray();
             if (!empty($query)) {
@@ -345,13 +589,13 @@ class Client
 
             if($this->config['output_stream']) {
                 if($this->adapter instanceof Client\Adapter\Stream) {
-                    $stream = $this->_openTempStream();
+                    $stream = $this->openTempStream();
                     $this->adapter->setOutputStream($stream);
                 } else {
                     throw new Exception\RuntimeException('Adapter does not support streaming');
                 }
             }
-
+            
             // HTTP connection
             $this->lastRequest = $this->adapter->write($method,
                 $this->getRequest()->uri(), $this->config['httpversion'], $headers, $body);
@@ -366,7 +610,7 @@ class Client
                 // cleanup the adapter
                 $this->adapter->setOutputStream(null);
                 $response = Response\Stream::fromStream($this->lastResponse, $stream);
-                $response->setStreamName($this->_stream_name);
+                $response->setStreamName($this->streamName);
                 if(!is_string($this->config['output_stream'])) {
                     // we used temp name, will need to clean up
                     $response->setCleanup(true);
@@ -376,8 +620,8 @@ class Client
             }
 
             // Load cookies into cookie jar
-            if (isset($this->cookiejar)) {
-                $this->cookiejar->addCookiesFromResponse($response, $uri);
+            if (isset($this->cookies)) {
+                $this->cookies->addCookiesFromResponse($response, $uri);
             }
 
             // If we got redirected, look for the Location header
@@ -413,7 +657,6 @@ class Client
                     // Else, if we got just an absolute path, set it
                     if(strpos($location, '/') === 0) {
                         $this->uri->setPath($location);
-
                         // Else, assume we have a relative path
                     } else {
                         // Get the current path directory, removing any trailing slashes
@@ -452,8 +695,8 @@ class Client
      * @param  string $data Data to send (if null, $filename is read and sent)
      * @param  string $ctype Content type to use (if $data is set and $ctype is
      *                null, will be application/octet-stream)
-     * @return \Zend\Http\Client
-     * @throws \Zend\Http\Client\Exception
+     * @return Client
+     * @throws Exception
      */
     public function setFileUpload($filename, $formname, $data = null, $ctype = null)
     {
@@ -462,7 +705,7 @@ class Client
                 throw new Exception\RuntimeException("Unable to read file '{$filename}' for upload");
             }
             if (! $ctype) {
-                $ctype = $this->_detectFileMimeType($filename);
+                $ctype = $this->detectFileMimeType($filename);
             }
         }
 
@@ -539,23 +782,29 @@ class Client
         }
 
         // Set HTTP authentication if needed
-        if (is_array($this->auth)) {
-            $auth = self::encodeAuthHeader($this->auth['user'], $this->auth['password'], $this->auth['type']);
-            $this->addHeader('Authorization',$auth);
+        if (!empty($this->auth) && isset($this->auth['type'])) {
+            switch ($this->auth['type']) {
+                case self::AUTH_BASIC :
+                    $response = $this->calcAuthDigest($this->auth['user'], $this->auth['password'], $this->auth['type']);
+                    if ($auth!==false) {
+                        $this->addHeader('Authorization','Basic ' . $response);
+                    } 
+                    break;
+                case self::AUTH_DIGEST :
+                    throw new Exception\RuntimeException("The digest authentication is not implemented yet"); 
+            }
         }
 
-        // Load cookies from cookie jar
-        // @todo cookie management
-        /*
-        if (!empty($this->getCookie())) {
-            $cookstr = $this->getCookie()->match($this->getUri(),
+        // Load cookies from client cookies
+        if (isset($this->cookies)) {
+            $cookstr = $this->cookies->match($this->getUri()->toString(),
                 true, Header\Cookie::COOKIE_STRING_CONCAT);
 
             if ($cookstr) {
                 $this->addHeader('Cookie',$cookstr);
             }
         }
-        */
+
         return $this->getRequest()->headers()->toArray();
     }
     
@@ -664,7 +913,7 @@ class Client
      * @param string $file File path
      * @return string MIME type
      */
-    protected function _detectFileMimeType($file)
+    protected function detectFileMimeType($file)
     {
         $type = null;
 
@@ -718,45 +967,6 @@ class Client
 
         return $ret;
     }
-
-    /**
-     * Create a HTTP authentication "Authorization:" header according to the
-     * specified user, password and authentication method.
-     *
-     * @see http://www.faqs.org/rfcs/rfc2617.html
-     * @param string $user
-     * @param string $password
-     * @param string $type
-     * @return string
-     * @throws \Zend\Http\Client\Exception
-     */
-    public static function encodeAuthHeader($user, $password, $type = self::AUTH_BASIC)
-    {
-        $authHeader = null;
-
-        switch ($type) {
-            case self::AUTH_BASIC:
-                // In basic authentication, the user name cannot contain ":"
-                if (strpos($user, ':') !== false) {
-                    throw new Client\Exception\InvalidArgumentException("The user name cannot contain ':' in 'Basic' HTTP authentication");
-                }
-
-                $authHeader = 'Basic ' . base64_encode($user . ':' . $password);
-                break;
-
-            //case self::AUTH_DIGEST:
-                /**
-                 * @todo Implement digest authentication
-                 */
-            // break;
-
-            default:
-                throw new Client\Exception\InvalidArgumentException("Not a supported HTTP authentication type: '$type'");
-        }
-
-        return $authHeader;
-    }
-
     /**
      * Convert an array of parameters into a flat array of (key, value) pairs
      *
@@ -810,12 +1020,12 @@ class Client
     /**
      * HTTP GET METHOD (static)
      *
-     * @param string $url
-     * @param array $query
-     * @param array $headers
-     * @return Response
+     * @param  string $url
+     * @param  array $query
+     * @param  array $headers
+     * @return Response|boolean
      */
-    public static function get($url, $query=null, $headers=null)
+    public static function get($url, $query=array(), $headers=array(), $body=null)
     {
         if (empty($url)) {
             return false;
@@ -825,64 +1035,50 @@ class Client
         $request->setUri($url);
         $request->setMethod(Request::METHOD_GET);
         
-        if (!empty($headers) && is_array($headers)) {
-            $request->headers($headers);
-        }
-        
         if (!empty($query) && is_array($query)) {
             $request->query()->fromArray($query);
         }
         
-        return self::getStaticClient()->send($request);
-    }
-    
-    /**
-     * --------------- CONVENIENT API (ZF1 BACKWARD COMPATIBLE) ----------------
-     */
-    
-    /**
-     * Set the HTTP method (to the request)
-     * 
-     * @param string $method
-     * @return Client 
-     */
-    public function setMethod($method)
-    {
-        $this->getRequest()->setMethod($method);
-        return $this;
-    }
-    /**
-     * Execute an HTTP request
-     * 
-     * @param string $method
-     * @return Response 
-     */
-    public function request($method='GET')
-    {
-        switch ($method) {
-            case 'GET'  : 
-                $method= Request::METHOD_GET;
-                break;
-            case 'POST' : 
-                $method= Request::METHOD_POST;
-                break;
-            case 'OPTIONS' :
-                $method= Request::METHOD_OPTIONS;
-                break;
-            case 'PUT' :
-                $method= Request::METHOD_PUT;
-                break;
-            case 'DELETE' :
-                $method= Request::METHOD_DELETE;
-                break;
-            default :
-                throw new Exception\InvalidArgumentException ('The HTTP method is not valid');
+        if (!empty($headers) && is_array($headers)) {
+            $request->headers($headers);
         }
         
-        $this->setMethod($method);
-        if (!$this->getUri()) {
-            throw new Exception\RunTimeException ('You must specify a valid URI for the HTTP request');
+        if (!empty($body)) {
+            $request->setBody($body);
         }
-        return $this->send();
+        
+        return self::getStaticClient()->send($request);
+    }
+    /**
+     * HTTP POST METHOD (static)
+     *
+     * @param  string $url
+     * @param  array $params
+     * @param  array $headers
+     * @return Response|boolean
+     */
+    public static function post($url, $params=array(), $headers=array(), $body=null)
+    {
+        if (empty($url)) {
+            return false;
+        }
+        
+        $request= new Request();
+        $request->setUri($url);
+        $request->setMethod(Request::METHOD_POST);
+        
+        if (!empty($params) && is_array($params)) {
+            $request->post()->fromArray($params);
+        }
+        
+        if (!empty($headers) && is_array($headers)) {
+            $request->headers($headers);
+        }
+
+        if (!empty($body)) {
+            $request->setBody($body);
+        }
+        
+        return self::getStaticClient()->send($request);
     }
 }

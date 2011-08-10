@@ -842,6 +842,16 @@
             </xi:include>
         </chapter>
 
+        <chapter xml:id="zend.event-manager">
+            <info><title>Zend\EventManager</title></info>
+            
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_EventManager-EventManager.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_EventManager-EventManager.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+        </chapter>
+
         <chapter xml:id="zend.exception"><info><title>Zend_Exception</title></info>
             
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Exception.xml" parse="xml">

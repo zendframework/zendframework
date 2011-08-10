@@ -75,14 +75,17 @@ $path = $libPath;
 if (array_key_exists('PWD', $_SERVER)) {
     $path = $_SERVER['PWD'];
 }
+
+$libraryPath = '';
 if (isset($opts->l)) {
-    $path = $opts->l;
-    if (!is_dir($path)) {
+    $libraryPath = $opts->l;
+    $libraryPath = rtrim($libraryPath, '/\\') . '/';
+    if (!is_dir($libraryPath)) {
         echo "Invalid library directory provided" . PHP_EOL . PHP_EOL;
         echo $opts->getUsageMessage();
         exit(2);
     }
-    $path = realpath($path);
+    $path = realpath($libraryPath);
 }
 
 $usingStdout = false;
@@ -121,10 +124,13 @@ $l = new \Zend\File\ClassFileLocator($path);
 // classname => filename, where the filename is relative to the library path
 $map    = new \stdClass;
 $strip .= DIRECTORY_SEPARATOR;
-iterator_apply($l, function() use ($l, $map, $strip){
+iterator_apply($l, function() use ($l, $map, $strip, $libraryPath){
     $file      = $l->current();
     $namespace = empty($file->namespace) ? '' : $file->namespace . '\\';
     $filename  = str_replace($strip, '', $file->getRealpath());
+
+    // Add in relative path to library
+    $filename = $libraryPath . $filename;
 
     // Replace directory separators with constant
     $filename  = str_replace(array('/', '\\'), "' . DIRECTORY_SEPARATOR . '", $filename);

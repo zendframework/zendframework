@@ -111,7 +111,7 @@ if (isset($opts->o)) {
     }
 }
 
-$strip     = $path;
+$strip = $path;
 
 if (!$usingStdout) {
     echo "Creating class file map for library in '$path'..." . PHP_EOL;

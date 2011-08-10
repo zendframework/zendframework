@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class KeepAlive extends Header
+class KeepAlive extends GenericHeader
 {
     
     public function getName()

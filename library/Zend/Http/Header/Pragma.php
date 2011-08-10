@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class Pragma extends Header
+class Pragma extends GenericHeader
 {
 
     public function getName()

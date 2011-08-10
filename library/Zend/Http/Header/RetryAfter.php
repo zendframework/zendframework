@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class RetryAfter extends Header
+class RetryAfter extends GenericHeader
 {
 
     public function getName()

@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class WWWAuthenticate extends Header
+class WWWAuthenticate extends GenericHeader
 {
 
     public function getName()

@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class Vary extends Header
+class Vary extends GenericHeader
 {
 
     public function getName()

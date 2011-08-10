@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class Server extends Header
+class Server extends GenericHeader
 {
     
     public function getName()

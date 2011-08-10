@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class TransferEncoding extends Header
+class TransferEncoding extends GenericHeader
 {
 
     public function getName()

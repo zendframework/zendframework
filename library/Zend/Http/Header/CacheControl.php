@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class CacheControl extends Header
+class CacheControl extends GenericHeader
 {
     
     public function getName()

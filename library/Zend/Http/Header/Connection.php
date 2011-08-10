@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class Connection extends Header
+class Connection extends GenericHeader
 {
     
     public function getName()

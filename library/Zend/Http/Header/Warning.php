@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class Warning extends Header
+class Warning extends GenericHeader
 {
 
     public function getName()

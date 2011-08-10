@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class Refresh extends Header
+class Refresh extends GenericHeader
 {
 
     public function getName()

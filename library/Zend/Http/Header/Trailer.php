@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class Trailer extends Header
+class Trailer extends GenericHeader
 {
 
     public function getName()

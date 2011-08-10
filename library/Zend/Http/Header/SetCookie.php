@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class SetCookie extends Header
+class SetCookie extends GenericHeader
 {
 
     public function getName()

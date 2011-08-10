@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class ContentLocation extends Header
+class ContentLocation extends GenericHeader
 {
     
     public function getName()

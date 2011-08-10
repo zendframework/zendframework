@@ -50,13 +50,13 @@ abstract class Headers implements Iterator, Countable
         $current = array();
 
         // iterate the header lines, some might be continuations
-        foreach (preg_split('\r\n', $string) as $line) {
+        foreach (preg_split('#\r\n#', $string) as $line) {
 
             // check if a header name is present
             if (preg_match('/^(?P<name>[^()><@,;:\"\\/\[\]?=}{ \t]+):.*$/', $line, $matches)) {
                 if ($current) {
                     // a header name was present, then store the current complete line
-                    $headers->headerKeys[] = str_replace(array('-', '_'), '', strtolower($current['name']));
+                    $headers->headersKeys[] = str_replace(array('-', '_'), '', strtolower($current['name']));
                     $headers->headers[] = $current;
                 }
                 $current = array(
@@ -78,7 +78,7 @@ abstract class Headers implements Iterator, Countable
             }
         }
         if ($current) {
-            $headers->headerKeys[] = str_replace(array('-', '_'), '', strtolower($current['name']));
+            $headers->headersKeys[] = str_replace(array('-', '_'), '', strtolower($current['name']));
             $headers->headers[] = $current;
         }
         return $headers;
@@ -125,8 +125,10 @@ abstract class Headers implements Iterator, Countable
     public function addHeader($header, $content = null)
     {
         if (!$header instanceof Header\HeaderDescription) {
-            $className= self::getHeaderClassForName($header);
-            $header= new $className($header,$content);
+            $headerKey = str_replace(array('-', '_'), '', strtolower($header));
+            $class = (array_key_exists($headerKey, static::$headerClasses))
+                ? static::$headerClasses[$headerKey] : 'Zend\Http\Header\GenericHeader';
+            $header = new $class($header, $content);
         }
 
         $key = str_replace(array('-', '_'), '', strtolower($header->getName()));
@@ -171,7 +173,7 @@ abstract class Headers implements Iterator, Countable
     public function get($name)
     {
         $key = str_replace(array('-', '_'), '', strtolower($name));
-        if (!in_array($name, $this->headersKeys)) {
+        if (!in_array($key, $this->headersKeys)) {
             return false;
         }
 
@@ -184,11 +186,21 @@ abstract class Headers implements Iterator, Countable
         if (in_array('Zend\Http\Header\MultipleHeaderDescription', class_implements($class, true))) {
             $headers = array();
             foreach (array_keys($this->headersKeys, $key) as $index) {
+                if (is_array($this->headers[$index])) {
+                    $this->lazyLoadHeader($index);
+                }
+            }
+            foreach (array_keys($this->headersKeys, $key) as $index) {
                 $headers[] = $this->headers[$index];
             }
             return new \ArrayIterator($headers);
         } else {
-            return $this->headers[array_search($key, $this->headersKeys)];
+            $index = array_search($key, $this->headersKeys);
+            if (is_array($this->headers[$index])) {
+                return $this->lazyLoadHeader($index);
+            } else {
+                return $this->headers[$index];
+            }
         }
     }
 
@@ -231,16 +243,7 @@ abstract class Headers implements Iterator, Countable
     {
         $current = current($this->headers);
         if (is_array($current)) {
-            $headers = static::createHeadersFromString($current['name'], $current['line']);
-            if (is_array($headers)) {
-                $current = array_shift($headers);
-                foreach ($headers as $header) {
-                    $this->headers[] = $header;
-                }
-            } else {
-                $current = $headers;
-            }
-            $this->headers[key($this->headers)] = $current;
+            $current = $this->lazyLoadHeader(key($this->headers));
         }
         return $current;
     }
@@ -271,18 +274,36 @@ abstract class Headers implements Iterator, Countable
     {
         $headers= array();
         foreach ($this as $header) {
-            $headers[$header->getName()]= $header->getValue();
+            $headers[$header->getFieldName()]= $header->getFieldValue();
         }
         return $headers;
     }
+
     protected static function getHeaderClassForName($name)
     {
-        $headerName = str_replace(array('-', '_'), '', strtolower($name));
-        if (array_key_exists($headerName, static::$headerClasses)) {
-            return static::$headerClasses[$headerName];
+
+    }
+
+    protected function lazyLoadHeader($index)
+    {
+        $current = $this->headers[$index];
+
+        $headerKey = $this->headersKeys[$index];
+        $class = (array_key_exists($headerKey, static::$headerClasses))
+            ? static::$headerClasses[$headerKey] : 'Zend\Http\Header\GenericHeader';
+
+        if (in_array('Zend\Http\Header\MultipleHeaderDescription', class_implements($class, true))) {
+            $headers = $class::fromStringMultipleHeaders($current['line']);
+            $this->headers[$index] = $current = array_shift($headers);
+            foreach ($headers as $header) {
+                $this->headersKeys[] = $headerKey;
+                $this->headers[] = $header;
+            }
         } else {
-            return 'Zend\Http\Header\Header';
+            $this->headers[$index] = $current = $class::fromString($current['line']);
         }
+
+        return $current;
     }
 
 }

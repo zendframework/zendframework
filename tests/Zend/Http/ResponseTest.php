@@ -14,6 +14,6 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     {
         $string = 'HTTP/1.0 200 OK';
         $response = Response::fromString($string);
-        var_dump($response);
+        //var_dump($response);
     }
 }

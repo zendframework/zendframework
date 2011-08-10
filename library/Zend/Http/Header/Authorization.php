@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class Authorization extends Header
+class Authorization extends GenericHeader
 {
     
     public function getName()

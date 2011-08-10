@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class ContentMD5 extends Header
+class ContentMD5 extends GenericHeader
 {
     
     public function getName()

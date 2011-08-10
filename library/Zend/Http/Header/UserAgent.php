@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class UserAgent extends Header
+class UserAgent extends GenericHeader
 {
     
     public function getName()

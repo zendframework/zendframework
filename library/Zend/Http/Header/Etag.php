@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class Etag extends Header
+class Etag extends GenericHeader
 {
     
     public function getName()

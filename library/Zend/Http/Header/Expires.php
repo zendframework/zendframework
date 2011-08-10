@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class Expires extends Header
+class Expires extends GenericHeader
 {
     
     public function getName()

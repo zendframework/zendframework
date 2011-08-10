@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class Date extends Header
+class Date extends GenericHeader
 {
     
     public function getName()

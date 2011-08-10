@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class ProxyAuthenticate extends Header
+class ProxyAuthenticate extends GenericHeader
 {
     
     public function getName()

@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class LastModified extends Header
+class LastModified extends GenericHeader
 {
     
     public function getName()

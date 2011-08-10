@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class MaxForwards extends Header
+class MaxForwards extends GenericHeader
 {
     
     public function getName()

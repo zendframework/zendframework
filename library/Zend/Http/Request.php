@@ -166,7 +166,7 @@ class Request extends Message implements RequestDescription
     public function uri()
     {
         if ($this->uri === null || is_string($this->uri)) {
-            $this->uri = new HttpUri($this->uri);
+            $this->uri = new \Zend\Uri\Http($this->uri);
         }
         return $this->uri;
     }

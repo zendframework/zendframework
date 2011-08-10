@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class Upgrade extends Header
+class Upgrade extends GenericHeader
 {
     
     public function getName()

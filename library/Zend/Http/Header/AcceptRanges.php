@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class AcceptRanges extends Header
+class AcceptRanges extends GenericHeader
 {
     
     public function getName()

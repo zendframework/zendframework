@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class AcceptEncoding extends Header
+class AcceptEncoding extends GenericHeader
 {
     
     public function getName()

@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class ContentRange extends Header
+class ContentRange extends GenericHeader
 {
 
     public function getName()

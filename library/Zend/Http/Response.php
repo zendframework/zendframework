@@ -124,34 +124,10 @@ class Response extends Message implements ResponseDescription
         if (2 === count($segments)) {
             $response->setContent($segments[1]);
         } else {
-            $headers = $this->getHeaders();
+            $headers = $response->getHeaders();
         }
-        $headers->setStatusCode($status);
+        $headers->setStatusCode($response);
     }
-
-//    /**
-//     * Constructor
-//     *
-//     * @param  string $content
-//     * @param  int $status
-//     * @param  null|array|HttpResponseHeaders $headers
-//     * @return void
-//     */
-//    public function __construct($content = '', $status = 200, $headers = null)
-//    {
-//        $this->setContent($content);
-//
-//        if ($headers instanceof ResponseHeaders) {
-//            $this->setHeaders($headers);
-//        } elseif (is_array($headers)) {
-//            $httpHeaders = $this->getHeaders();
-//            $httpHeaders->addHeaders($headers);
-//            $headers = $httpHeaders;
-//        } else {
-//            $headers = $this->getHeaders();
-//        }
-//        $headers->setStatusCode($status);
-//    }
 
     /**
      * Render the status line header
@@ -217,9 +193,9 @@ class Response extends Message implements ResponseDescription
     /**
      * Set HTTP status code and (optionally) message
      *
-     * @param  string|float $code
-     * @param  null|string $text
-     * @return Headers
+     * @param  string|int $code
+     * @param  null|string $reasonPhrase
+     * @return Response
      */
     public function setStatusCode($code, $reasonPhrase = null)
     {
@@ -327,62 +303,40 @@ class Response extends Message implements ResponseDescription
         $code = $this->getStatusCode();
         return (200 <= $code && 300 > $code);
     }
-/**
-* A convenience function that returns a text representation of
-* HTTP response codes. Returns 'Unknown' for unknown codes.
-* Returns array of all codes, if $code is not specified.
-*
-* Conforms to HTTP/1.1 as defined in RFC 2616 (except for 'Unknown')
-* See http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10 for reference
-*
-* @param int $code HTTP response code
-* @param boolean $http11 Use HTTP version 1.1
-* @return string
-*/
+
+    /**
+     * A convenience function that returns a text representation of
+     * HTTP response codes. Returns 'Unknown' for unknown codes.
+     * Returns array of all codes, if $code is not specified.
+     *
+     * Conforms to HTTP/1.1 as defined in RFC 2616 (except for 'Unknown')
+     * See http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10 for reference
+     *
+     * @param int $code HTTP response code
+     * @param boolean $http11 Use HTTP version 1.1
+     * @return string
+     */
     public static function responseCodeAsText($code = null, $http11 = true)
     {
         $messages = self::$messages;
         if (! $http11) $messages[302] = 'Moved Temporarily';
 
-//    /**
-//     * Create string representation of response
-//     *
-//     * @return string
-//     */
-//    public function __toString()
-//    {
-//        return $this->getHeaders() . "\r\n" . $this->getContent();
-//    }
-//
-//    /**
-//     * Populate object from string
-//     *
-//     * @param  string $string
-//     * @return Response
-//     */
-//    public function fromString($string)
-//    {
-//        $segments = preg_split("/\r\n\r\n/", $string, 2);
-//
-//        // Populate headers
-//        $this->headers()->fromString($segments[0]);
-//
-//        // Populate content, if any
-//        if (2 === count($segments)) {
-//            $this->setContent($segments[1]);
-//        } else {
-//            $this->setContent('');
-//        }
-//
-//        return $this;
-//    }
+        if ($code === null) {
+            return $messages;
+        } elseif (isset($messages[$code])) {
+            return $messages[$code];
+        } else {
+            return 'Unknown';
+        }
+
+    }
 
     /**
-* Extract the response code from a response string
-*
-* @param string $response_str
-* @return int
-*/
+     * Extract the response code from a response string
+     *
+     * @param string $response_str
+     * @return int
+     */
     public static function extractCode($response_str)
     {
         preg_match("|^HTTP/[\d\.x]+ (\d+)|", $response_str, $m);
@@ -395,11 +349,11 @@ class Response extends Message implements ResponseDescription
     }
 
     /**
-* Extract the HTTP message from a response
-*
-* @param string $response_str
-* @return string
-*/
+     * Extract the HTTP message from a response
+     *
+     * @param string $response_str
+     * @return string
+     */
     public static function extractMessage($response_str)
     {
         preg_match("|^HTTP/[\d\.x]+ \d+ ([^\r\n]+)|", $response_str, $m);
@@ -412,11 +366,11 @@ class Response extends Message implements ResponseDescription
     }
 
     /**
-* Extract the HTTP version from a response
-*
-* @param string $response_str
-* @return string
-*/
+     * Extract the HTTP version from a response
+     *
+     * @param string $response_str
+     * @return string
+     */
     public static function extractVersion($response_str)
     {
         preg_match("|^HTTP/([\d\.x]+) \d+|", $response_str, $m);
@@ -429,11 +383,11 @@ class Response extends Message implements ResponseDescription
     }
 
     /**
-* Extract the headers from a response string
-*
-* @param string $response_str
-* @return array
-*/
+     * Extract the headers from a response string
+     *
+     * @param string $response_str
+     * @return array
+     */
     public static function extractHeaders($response_str)
     {
         $headers = array();
@@ -482,11 +436,11 @@ class Response extends Message implements ResponseDescription
     }
 
     /**
-* Extract the body from a response string
-*
-* @param string $response_str
-* @return string
-*/
+     * Extract the body from a response string
+     *
+     * @param string $response_str
+     * @return string
+     */
     public static function extractBody($response_str)
     {
         $parts = preg_split('|(?:\r?\n){2}|m', $response_str, 2);
@@ -497,11 +451,11 @@ class Response extends Message implements ResponseDescription
     }
 
     /**
-* Decode a "chunked" transfer-encoded body and return the decoded text
-*
-* @param string $body
-* @return string
-*/
+     * Decode a "chunked" transfer-encoded body and return the decoded text
+     *
+     * @param string $body
+     * @return string
+     */
     public static function decodeChunkedBody($body)
     {
         $decBody = '';
@@ -534,13 +488,13 @@ class Response extends Message implements ResponseDescription
     }
 
     /**
-* Decode a gzip encoded message (when Content-encoding = gzip)
-*
-* Currently requires PHP with zlib support
-*
-* @param string $body
-* @return string
-*/
+     * Decode a gzip encoded message (when Content-encoding = gzip)
+     *
+     * Currently requires PHP with zlib support
+     *
+     * @param string $body
+     * @return string
+     */
     public static function decodeGzip($body)
     {
         if (! function_exists('gzinflate')) {
@@ -553,32 +507,32 @@ class Response extends Message implements ResponseDescription
     }
 
     /**
-* Decode a zlib deflated message (when Content-encoding = deflate)
-*
-* Currently requires PHP with zlib support
-*
-* @param string $body
-* @return string
-*/
+     * Decode a zlib deflated message (when Content-encoding = deflate)
+     *
+     * Currently requires PHP with zlib support
+     *
+     * @param string $body
+     * @return string
+     */
     public static function decodeDeflate($body)
     {
-        if (! function_exists('gzuncompress')) {
+        if (!function_exists('gzuncompress')) {
             throw new Exception\RuntimeException(
                 'zlib extension is required in order to decode "deflate" encoding'
             );
         }
 
         /**
-* Some servers (IIS ?) send a broken deflate response, without the
-* RFC-required zlib header.
-*
-* We try to detect the zlib header, and if it does not exsit we
-* teat the body is plain DEFLATE content.
-*
-* This method was adapted from PEAR HTTP_Request2 by (c) Alexey Borzov
-*
-* @link http://framework.zend.com/issues/browse/ZF-6040
-*/
+         * Some servers (IIS ?) send a broken deflate response, without the
+         * RFC-required zlib header.
+         *
+         * We try to detect the zlib header, and if it does not exsit we
+         * teat the body is plain DEFLATE content.
+         *
+         * This method was adapted from PEAR HTTP_Request2 by (c) Alexey Borzov
+         *
+         * @link http://framework.zend.com/issues/browse/ZF-6040
+         */
         $zlibHeader = unpack('n', substr($body, 0, 2));
         if ($zlibHeader[1] % 31 == 0) {
             return gzuncompress($body);
@@ -587,14 +541,4 @@ class Response extends Message implements ResponseDescription
         }
     }
 
-    /**
-     * Create a new Zend\Http\Response object from a string
-     *
-     * @param string $response_str
-     * @return \Zend\Http\Response
-     */
-    public static function fromString($response_str)
-    {
-        return new Response($response_str);
-    }
 }

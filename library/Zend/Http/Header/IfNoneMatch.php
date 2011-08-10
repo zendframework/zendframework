@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class IfNoneMatch extends Header
+class IfNoneMatch extends GenericHeader
 {
     
     public function getName()

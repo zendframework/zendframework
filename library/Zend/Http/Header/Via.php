@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class Via extends Header
+class Via extends GenericHeader
 {
     
     public function getName()

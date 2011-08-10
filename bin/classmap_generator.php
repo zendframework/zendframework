@@ -124,7 +124,7 @@ $strip .= DIRECTORY_SEPARATOR;
 iterator_apply($l, function() use ($l, $map, $strip){
     $file      = $l->current();
     $namespace = empty($file->namespace) ? '' : $file->namespace . '\\';
-    $filename  = str_replace($strip, '', $file->getRealpath());
+    $filename  = str_replace($strip, '', $file->getpath() . '/' . $file->getFilename());
 
     // Replace directory separators with constant
     $filename  = str_replace(array('/', '\\'), "' . DIRECTORY_SEPARATOR . '", $filename);

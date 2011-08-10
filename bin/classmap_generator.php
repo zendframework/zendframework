@@ -130,7 +130,7 @@ iterator_apply($l, function() use ($l, $map, $strip, $libraryPath){
     $filename  = str_replace($strip, '', $file->getRealpath());
 
     // Add in relative path to library
-    $filename = $libraryPath . $filename;
+    $filename  = $libraryPath . $filename;
 
     // Replace directory separators with constant
     $filename  = str_replace(array('/', '\\'), "' . DIRECTORY_SEPARATOR . '", $filename);

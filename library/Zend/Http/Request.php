@@ -81,7 +81,7 @@ class Request extends Message implements RequestDescription
     {
         $request = new static();
 
-        $lines = preg_split("/\r\n/", $string);
+        $lines = preg_split('/\r\n/', $string);
 
         // first line must be Method/Uri/Version string
         $matches = null;
@@ -387,9 +387,14 @@ class Request extends Message implements RequestDescription
         return ($this->method === self::METHOD_CONNECT);
     }
 
+    public function renderRequestLine()
+    {
+        return $this->method . ' ' . (string) $this->uri . ' HTTP/' . $this->version;
+    }
+
     public function toString()
     {
-        $str = $this->method . ' ' . (string) $this->uri . ' HTTP/' . $this->version . "\r\n";
+        $str = $this->renderRequestLine() . "\r\n";
         if ($this->headers) {
             $str .= $this->headers->toString();
         }

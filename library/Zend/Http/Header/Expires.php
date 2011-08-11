@@ -2,12 +2,42 @@
 
 namespace Zend\Http\Header;
 
-class Expires extends GenericHeader
+/**
+ * @throws Exception\InvalidArgumentException
+ * @see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21
+ */
+class Expires implements HeaderDescription
 {
-    
-    public function getName()
+
+    public static function fromString($headerLine)
+    {
+        $header = new static();
+
+        list($name, $value) = preg_split('#: #', $headerLine, 2);
+
+        // check to ensure proper header type for this factory
+        if (strtolower($name) !== 'expires') {
+            throw new Exception\InvalidArgumentException('Invalid header line for Expires string');
+        }
+
+        // @todo implementation details
+
+        return $header;
+    }
+
+    public function getFieldName()
     {
         return 'Expires';
+    }
+
+    public function getFieldValue()
+    {
+        // TODO: Implement getFieldValue() method.
+    }
+
+    public function toString()
+    {
+        return 'Expires: ' . $this->getFieldValue();
     }
     
 }

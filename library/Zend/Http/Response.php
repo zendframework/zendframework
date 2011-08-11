@@ -100,6 +100,8 @@ class Response extends Message implements ResponseDescription
         505 => 'HTTP Version not supported',
     );
 
+    protected $version = 1.1;
+
     protected $statusCode   = 200;
     protected $reasonPhrase = null;
 
@@ -113,20 +115,51 @@ class Response extends Message implements ResponseDescription
      */
     public static function fromString($string)
     {
-        $segments = preg_split("/\r\n\r\n/", $string, 2);
+        $lines = preg_split('/\r\n/', $string);
 
         $response = new static();
-        // "/^(HTTP\/(?<version>\d+(\.\d+)?) (?P<status>\d{3})( (?P<message>.*?)))$/"
-        // Populate headers
-        //$response ->headers()->fromString($segments[0]);
-
-        // Populate content, if any
-        if (2 === count($segments)) {
-            $response->setContent($segments[1]);
-        } else {
-            $headers = $response->getHeaders();
+        $matches = null;
+        if (!preg_match('/^(HTTP\/(?<version>\d+(?:\.\d+)?) (?P<status>\d{3})( (?P<reason>.*?)))$/', $lines[0], $matches)) {
+            throw new Exception\InvalidArgumentException('A valid response status line was not found in the provided string');
         }
-        $headers->setStatusCode($response);
+
+        $response->version = $matches['version'];
+
+        if (!defined(get_called_class() . '::STATUS_CODE_' . $matches['status'])) {
+            throw new Exception\InvalidArgumentException('Unknown status code found in provided string');
+        }
+
+        $response->setStatusCode($matches['status']);
+        $response->setReasonPhrase($matches['reason']);
+
+        if (count($lines) == 0) {
+            return $response;
+        }
+
+        $isHeader = true;
+        $headers = $content = array();
+        while ($lines) {
+            $nextLine = array_shift($lines);
+            if ($nextLine == '') {
+                $isHeader = false;
+                continue;
+            }
+            if ($isHeader) {
+                $headers[] .= $nextLine;
+            } else {
+                $content[] .= $nextLine;
+            }
+        }
+
+        if ($headers) {
+            $response->headers = implode("\r\n", $headers);
+        }
+
+        if ($content) {
+            $response->setContent(implode("\r\n", $content));
+        }
+
+        return $response;
     }
 
     /**
@@ -138,9 +171,9 @@ class Response extends Message implements ResponseDescription
     {
         $status = sprintf(
             'HTTP/%s %d %s',
-            $this->getProtocolVersion(),
+            $this->getVersion(),
             $this->getStatusCode(),
-            $this->getStatusMessage()
+            $this->getReasonPhrase()
         );
         return trim($status);
     }
@@ -170,6 +203,17 @@ class Response extends Message implements ResponseDescription
         return $this->headers;
     }
 
+    public function setVersion($version)
+    {
+        $this->version = $version;
+        return $this;
+    }
+
+    public function getVersion()
+    {
+        return $this->version;
+    }
+
     /**
      * Retrieve HTTP status code
      *
@@ -180,24 +224,32 @@ class Response extends Message implements ResponseDescription
         return $this->statusCode;
     }
 
+    public function setReasonPhrase($reasonPhrase)
+    {
+        $this->reasonPhrase = trim($reasonPhrase);
+        return $this;
+    }
+
     /**
      * Get HTTP status message
      *
      * @return string
      */
-    public function getStatusMessage()
+    public function getReasonPhrase()
     {
-        return $this->statusMessage;
+        if ($this->reasonPhrase == null) {
+            return static::$recommendedReasonPhrases[$this->statusCode];
+        }
+        return $this->reasonPhrase;
     }
 
     /**
      * Set HTTP status code and (optionally) message
      *
      * @param  string|int $code
-     * @param  null|string $reasonPhrase
      * @return Response
      */
-    public function setStatusCode($code, $reasonPhrase = null)
+    public function setStatusCode($code)
     {
         $const = get_called_class() . '::STATUS_CODE_' . $code;
         if (!is_numeric($code) || !defined($const)) {
@@ -208,14 +260,6 @@ class Response extends Message implements ResponseDescription
             ));
         }
         $this->statusCode = $code;
-        if (!is_string($reasonPhrase)) {
-            // Not a string? Set it to an empty string
-            $this->reasonPhrase = '';
-        } else {
-            // Strip any line-ending characters before storing
-            $reasonPhrase = preg_replace("/(\r|\n)/", '', $reasonPhrase);
-            $this->reasonPhrase = $reasonPhrase;
-        }
         return $this;
     }
 

@@ -98,6 +98,7 @@ abstract class Headers implements Iterator, Countable
      * Expects an array (or Traversable object) of type/value pairs.
      *
      * @param  array|Traversable $headers
+     * @return Headers
      */
     public function addHeaders($headers)
     {
@@ -277,11 +278,6 @@ abstract class Headers implements Iterator, Countable
             $headers[$header->getFieldName()]= $header->getFieldValue();
         }
         return $headers;
-    }
-
-    protected static function getHeaderClassForName($name)
-    {
-
     }
 
     protected function lazyLoadHeader($index)

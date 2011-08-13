@@ -12,7 +12,7 @@ use Iterator,
  *
  * Handles aggregation of headers
  */
-abstract class Headers implements Iterator, Countable
+class Headers implements Iterator, Countable
 {
 
     /**
@@ -138,14 +138,6 @@ abstract class Headers implements Iterator, Countable
         return $headers;
     }
 
-    public static function createHeadersFromString($name, $line)
-    {
-        /* @var $headerClass Header\HeaderDescription */
-        $headerClass = static::getHeaderClassForName($name);
-        $headers = $headerClass::fromString($line);
-        return $headers;
-    }
-
     /**
      * Add many headers at once
      *
@@ -164,34 +156,57 @@ abstract class Headers implements Iterator, Countable
         }
 
         foreach ($headers as $name => $value) {
-            $this->addHeader($name, $value);
+            if (is_int($name)) {
+                if (is_string($value)) {
+                    $this->addHeaderLine($value);
+                } elseif (is_array($value) && count($value) == 1) {
+                    $this->addHeaderLine(key($value), current($value));
+                } elseif (is_array($value) && count($value) == 2) {
+                    $this->addHeaderLine($value[0], $value[1]);
+                } elseif ($value instanceof Header\HeaderDescription) {
+                    $this->addHeader($value);
+                }
+            } elseif (is_string($name)) {
+                $this->addHeaderLine($name, $value);
+            }
+
         }
 
+        return $this;
+    }
+
+    public function addHeaderLine($headerFieldNameOrLine, $fieldValue = null)
+    {
+        $matches = null;
+        if (preg_match('/^(?P<name>[^()><@,;:\"\\/\[\]?=}{ \t]+):.*$/', $headerFieldNameOrLine, $matches)) {
+            // is a header
+            $headerName = $matches['name'];
+            $headerKey = str_replace(array('-', '_'), '', strtolower($matches['name']));
+            $line = $headerFieldNameOrLine;
+        } elseif ($fieldValue === null) {
+            throw new Exception\InvalidArgumentException('A field name was provided without a field value');
+        } else {
+            $headerName = $headerFieldNameOrLine;
+            $headerKey = str_replace(array('-', '_'), '', strtolower($headerFieldNameOrLine));
+            $line = $headerFieldNameOrLine . ': ' . $fieldValue;
+        }
+
+        $this->headersKeys[] = $headerKey;
+        $this->headers[] = array('name' => $headerName, 'line' => $line);
         return $this;
     }
 
     /**
      * Add a header onto the queue
      * 
-     * @param  Header $header
+     * @param  Header\HeaderDescription $header
      * @param  string $content
      * @return Headers
      */
-    public function addHeader($header, $content = null)
+    public function addHeader(Header\HeaderDescription $header)
     {
-        if (!$header instanceof Header\HeaderDescription) {
-            $headerKey = str_replace(array('-', '_'), '', strtolower($header));
-            $class = (array_key_exists($headerKey, static::$headerClasses))
-                ? static::$headerClasses[$headerKey] : 'Zend\Http\Header\GenericHeader';
-            $header = new $class($header, $content);
-        }
+        $key = str_replace(array('-', '_'), '', strtolower($header->getFieldName()));
 
-        $key = str_replace(array('-', '_'), '', strtolower($header->getName()));
-        
-        if (!array_key_exists($key, static::$headerClasses)) {
-            throw new Exception\InvalidArgumentException('Provided header is not valid in this header container');
-        }
-        
         $this->headersKeys[] = $key;
         $this->headers[] = $header;
         return $this;
@@ -199,7 +214,7 @@ abstract class Headers implements Iterator, Countable
 
     public function removeHeader($header)
     {
-        $index = array_search($this->headers, $header, true);
+        $index = array_search($header, $this->headers, true);
         if ($index !== false) {
             unset($this->headersKeys[$index]);
             unset($this->headers[$index]);
@@ -232,11 +247,8 @@ abstract class Headers implements Iterator, Countable
             return false;
         }
 
-        if (!isset(static::$headerClasses[$key])) {
-            throw new Exception\InvalidArgumentException('This header collection does not have a header named ' . $name);
-        }
-
-        $class = static::$headerClasses[$key];
+        $class = (array_key_exists($key, static::$headerClasses))
+            ? static::$headerClasses[$key] : 'Zend\Http\Header\GenericHeader';
 
         if (in_array('Zend\Http\Header\MultipleHeaderDescription', class_implements($class, true))) {
             $headers = array();
@@ -251,6 +263,9 @@ abstract class Headers implements Iterator, Countable
             return new \ArrayIterator($headers);
         } else {
             $index = array_search($key, $this->headersKeys);
+            if ($index === false) {
+                return false;
+            }
             if (is_array($this->headers[$index])) {
                 return $this->lazyLoadHeader($index);
             } else {
@@ -319,6 +334,7 @@ abstract class Headers implements Iterator, Countable
     public function toString()
     {
         $content = '';
+        /* @var $header Header\HeaderDescription */
         foreach ($this as $header) {
             $content .= $header->toString();
         }
@@ -328,6 +344,7 @@ abstract class Headers implements Iterator, Countable
     public function toArray()
     {
         $headers= array();
+        /* @var $header Header\HeaderDescription */
         foreach ($this as $header) {
             $headers[$header->getFieldName()]= $header->getFieldValue();
         }

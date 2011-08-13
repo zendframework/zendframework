@@ -55,7 +55,7 @@ class XMLEnc extends AbstractEncryptedData
         if(!($cipherdata instanceof AbstractElement)) {
             throw new XML\Exception\RuntimeException("Unable to find the enc:CipherData block");
         }
-
+        $cipherdata->registerXPathNamespace('enc', 'http://www.w3.org/2001/04/xmlenc#');;
         list(,$ciphervalue) = $cipherdata->xpath("//enc:CipherValue");
 
         if(!($ciphervalue instanceof AbstractElement)) {

@@ -110,6 +110,7 @@ class IsImage extends MimeType
             'image/x-niff',
             'image/x-pict',
             'image/x-pcx',
+            'image/x-png',
             'image/x-portable-anymap',
             'image/x-portable-bitmap',
             'image/x-portable-greymap',

@@ -184,7 +184,7 @@ class Response extends Message implements ResponseDescription
      * @param  \Zend\Http\ResponseHeaders $headers
      * @return \Zend\Http\Response
      */
-    public function setHeaders(ResponseHeaders $headers)
+    public function setHeaders(Headers $headers)
     {
         $this->headers = $headers;
         return $this;
@@ -198,7 +198,7 @@ class Response extends Message implements ResponseDescription
     public function headers()
     {
         if ($this->headers === null || is_string($this->headers)) {
-            $this->headers = (is_string($this->headers)) ? ResponseHeaders::fromString($this->headers) : new ResponseHeaders();
+            $this->headers = (is_string($this->headers)) ? Headers::fromString($this->headers) : new Headers();
         }
         return $this->headers;
     }

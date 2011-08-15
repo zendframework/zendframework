@@ -109,9 +109,22 @@ if (isset($opts->o)) {
 $parser    = new ClassParser(new ReflectionClass($class));
 $generator = new SkeletonGenerator($parser);
 $xml       = $generator->generate();
-$xml       = strtr($xml, array('  ' => '    '));
 
+// Normalize per CS
+$xml = strtr($xml, array(
+    '  '              => '    ',              // 4 space tabs
+    '</info>'         => "</info>\n",         // Extra newline between blocks
+    '</section>'      => "</section>\n",
+    '</term>'         => "</term>\n",
+    '</varlistentry>' => "</varlistentry>\n",
+));
+
+// Strip extra whitespace at end of document
+$xml = str_replace("</section>\n\n</section>\n", "</section>\n</section>", $xml);
+
+// Write file
 if (!$docbookFile) {
+    // Auto-generate filename based on class ID
     $docbookFile = $parser->getId() . '.xml';
 }
 $path = $docbookPath . DIRECTORY_SEPARATOR . $docbookFile;

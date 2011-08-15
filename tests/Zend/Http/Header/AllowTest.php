@@ -9,9 +9,10 @@ class AllowTest extends \PHPUnit_Framework_TestCase
 
     public function testAllowFromStringCreatesValidAllowHeader()
     {
-        $allowHeader = Allow::fromString('Allow: xxx');
+        $allowHeader = Allow::fromString('Allow: GET, POST');
         $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $allowHeader);
         $this->assertInstanceOf('Zend\Http\Header\Allow', $allowHeader);
+        $this->assertEquals(array('GET', 'POST'), $allowHeader->getAllowedMethods());
     }
 
     public function testAllowGetFieldNameReturnsHeaderName()
@@ -22,23 +23,19 @@ class AllowTest extends \PHPUnit_Framework_TestCase
 
     public function testAllowGetFieldValueReturnsProperValue()
     {
-        $this->markTestIncomplete('Allow needs to be completed');
-
         $allowHeader = new Allow();
-        $this->assertEquals('xxx', $allowHeader->getFieldValue());
+        $allowHeader->setAllowedMethods(array('GET', 'POST'));
+        $this->assertEquals('GET, POST', $allowHeader->getFieldValue());
     }
 
     public function testAllowToStringReturnsHeaderFormattedString()
     {
-        $this->markTestIncomplete('Allow needs to be completed');
-
         $allowHeader = new Allow();
+        $allowHeader->setAllowedMethods(array('GET', 'POST'));
 
         // @todo set some values, then test output
-        $this->assertEmpty('Allow: xxx', $allowHeader->toString());
+        $this->assertEquals('Allow: GET, POST', $allowHeader->toString());
     }
 
-    /** Implmentation specific tests here */
-    
 }
 

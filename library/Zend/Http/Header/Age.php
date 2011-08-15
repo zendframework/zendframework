@@ -9,6 +9,8 @@ namespace Zend\Http\Header;
 class Age implements HeaderDescription
 {
 
+    protected $deltaSeconds = null;
+
     public static function fromString($headerLine)
     {
         $header = new static();
@@ -20,7 +22,7 @@ class Age implements HeaderDescription
             throw new Exception\InvalidArgumentException('Invalid header line for Age string');
         }
 
-        // @todo implementation details
+        $header->deltaSeconds = $value;
 
         return $header;
     }
@@ -32,7 +34,18 @@ class Age implements HeaderDescription
 
     public function getFieldValue()
     {
-        // TODO: Implement getFieldValue() method.
+        return $this->getDeltaSeconds();
+    }
+
+    public function setDeltaSeconds($deltaSeconds)
+    {
+        $this->deltaSeconds = $deltaSeconds;
+        return $this;
+    }
+
+    public function getDeltaSeconds()
+    {
+        return $this->deltaSeconds;
     }
 
     public function toString()

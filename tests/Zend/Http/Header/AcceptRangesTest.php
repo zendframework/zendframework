@@ -9,7 +9,7 @@ class AcceptRangesTest extends \PHPUnit_Framework_TestCase
 
     public function testAcceptRangesFromStringCreatesValidAcceptRangesHeader()
     {
-        $acceptRangesHeader = AcceptRanges::fromString('Accept-Ranges: xxx');
+        $acceptRangesHeader = AcceptRanges::fromString('Accept-Ranges: bytes');
         $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $acceptRangesHeader);
         $this->assertInstanceOf('Zend\Http\Header\AcceptRanges', $acceptRangesHeader);
     }
@@ -22,20 +22,18 @@ class AcceptRangesTest extends \PHPUnit_Framework_TestCase
 
     public function testAcceptRangesGetFieldValueReturnsProperValue()
     {
-        $this->markTestIncomplete('AcceptRanges needs to be completed');
-
-        $acceptRangesHeader = new AcceptRanges();
-        $this->assertEquals('xxx', $acceptRangesHeader->getFieldValue());
+        $acceptRangesHeader = AcceptRanges::fromString('Accept-Ranges: bytes');
+        $this->assertEquals('bytes', $acceptRangesHeader->getFieldValue());
+        $this->assertEquals('bytes', $acceptRangesHeader->getRangeUnit());
     }
 
     public function testAcceptRangesToStringReturnsHeaderFormattedString()
     {
-        $this->markTestIncomplete('AcceptRanges needs to be completed');
-
         $acceptRangesHeader = new AcceptRanges();
+        $acceptRangesHeader->setRangeUnit('bytes');
 
         // @todo set some values, then test output
-        $this->assertEmpty('Accept-Ranges: xxx', $acceptRangesHeader->toString());
+        $this->assertEquals('Accept-Ranges: bytes', $acceptRangesHeader->toString());
     }
 
     /** Implmentation specific tests here */

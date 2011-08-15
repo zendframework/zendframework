@@ -9,6 +9,8 @@ namespace Zend\Http\Header;
 class AcceptRanges implements HeaderDescription
 {
 
+    protected $rangeUnit = null;
+
     public static function fromString($headerLine)
     {
         $header = new static();
@@ -20,7 +22,7 @@ class AcceptRanges implements HeaderDescription
             throw new Exception\InvalidArgumentException('Invalid header line for Accept-Ranges string');
         }
 
-        // @todo implementation details
+        $header->rangeUnit = trim($value);
 
         return $header;
     }
@@ -32,7 +34,18 @@ class AcceptRanges implements HeaderDescription
 
     public function getFieldValue()
     {
-        // TODO: Implement getFieldValue() method.
+        return $this->getRangeUnit();
+    }
+
+    public function setRangeUnit($rangeUnit)
+    {
+        $this->rangeUnit = $rangeUnit;
+        return $this;
+    }
+
+    public function getRangeUnit()
+    {
+        return $this->rangeUnit;
     }
 
     public function toString()

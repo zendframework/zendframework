@@ -9,6 +9,8 @@ namespace Zend\Http\Header;
 class Allow implements HeaderDescription
 {
 
+    protected $allowedMethods = array();
+
     public static function fromString($headerLine)
     {
         $header = new static();
@@ -20,7 +22,9 @@ class Allow implements HeaderDescription
             throw new Exception\InvalidArgumentException('Invalid header line for Allow string');
         }
 
-        // @todo implementation details
+        foreach (explode(',', $value) as $method) {
+            $header->allowedMethods[] = trim(strtoupper($method));
+        }
 
         return $header;
     }
@@ -32,7 +36,17 @@ class Allow implements HeaderDescription
 
     public function getFieldValue()
     {
-        // TODO: Implement getFieldValue() method.
+        return implode(', ', $this->allowedMethods);
+    }
+
+    public function getAllowedMethods()
+    {
+        return $this->allowedMethods;
+    }
+
+    public function setAllowedMethods(array $allowedMethods)
+    {
+        $this->allowedMethods = $allowedMethods;
     }
 
     public function toString()

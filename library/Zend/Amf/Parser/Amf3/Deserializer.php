@@ -383,6 +383,7 @@ class Deserializer extends AbstractDeserializer
             }
 
             // Add properties back to the return object.
+            if (!is_array($properties)) $properties = array();
             foreach ($properties as $key => $value) {
                 if($key) {
                     $returnObject->$key = $value;

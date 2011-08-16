@@ -21,7 +21,8 @@ class Expect implements HeaderDescription
         }
 
         // @todo implementation details
-
+        $header->value= $value;
+        
         return $header;
     }
 
@@ -32,7 +33,7 @@ class Expect implements HeaderDescription
 
     public function getFieldValue()
     {
-        // TODO: Implement getFieldValue() method.
+        return $this->value;
     }
 
     public function toString()

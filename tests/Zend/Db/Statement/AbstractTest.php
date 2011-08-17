@@ -47,7 +47,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
             ->from('zfproducts');
         $sql = $select->__toString();
         $stmt = new $statementClass($this->_db, $sql);
-        $this->assertType('Zend\Db\Statement', $stmt);
+        $this->assertInstanceOf('Zend\Db\Statement', $stmt);
         $stmt->closeCursor();
     }
 
@@ -58,7 +58,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         $select = $this->_db->select()
             ->from('zfproducts');
         $stmt = new $statementClass($this->_db, $select);
-        $this->assertType('Zend\Db\Statement', $stmt);
+        $this->assertInstanceOf('Zend\Db\Statement', $stmt);
         $stmt->closeCursor();
     }
 
@@ -67,7 +67,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         $select = $this->_db->select()
             ->from('zfproducts');
         $stmt = $this->_db->prepare($select->__toString());
-        $this->assertType('Zend\Db\Statement', $stmt);
+        $this->assertInstanceOf('Zend\Db\Statement', $stmt);
         $stmt->closeCursor();
     }
 
@@ -76,7 +76,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         $select = $this->_db->select()
             ->from('zfproducts');
         $stmt = $this->_db->query($select);
-        $this->assertType('Zend\Db\Statement', $stmt);
+        $this->assertInstanceOf('Zend\Db\Statement', $stmt);
         $stmt->closeCursor();
     }
 
@@ -85,7 +85,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         $stmt = $this->_db->select()
             ->from('zfproducts')
             ->query();
-        $this->assertType('Zend\Db\Statement', $stmt);
+        $this->assertInstanceOf('Zend\Db\Statement', $stmt);
         $stmt->closeCursor();
     }
 
@@ -96,7 +96,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
             $stmt = $this->_db->query($sql);
             $this->fail('Expected to catch Zend_Db_Statement_Exception');
         } catch (\Zend\Exception $e) {
-            $this->assertType('Zend\Db\Statement\Exception', $e,
+            $this->assertInstanceOf('Zend\Db\Statement\Exception', $e,
                 'Expecting object of type Zend_Db_Statement_Exception, got '.get_class($e));
         }
     }
@@ -109,7 +109,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         $stmt = $this->_db->prepare("DELETE FROM $products WHERE $product_id = 1");
 
         $n = $stmt->rowCount();
-        $this->assertType('integer', $n);
+        $this->assertInternalType('integer', $n);
         $this->assertEquals(0, $n, 'Expecting row count to be 0 before executing query');
 
         $stmt->execute();
@@ -117,7 +117,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         $n = $stmt->rowCount();
         $stmt->closeCursor();
 
-        $this->assertType('integer', $n);
+        $this->assertInternalType('integer', $n);
         $this->assertEquals(1, $n, 'Expected row count to be one after executing query');
     }
 
@@ -136,7 +136,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         $n = $stmt->columnCount();
         $stmt->closeCursor();
 
-        $this->assertType('integer', $n);
+        $this->assertInternalType('integer', $n);
         $this->assertEquals(2, $n);
     }
 
@@ -189,7 +189,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
             }
             $this->fail('Expected to catch Zend_Db_Statement_Exception');
         } catch (\Zend\Exception $e) {
-            $this->assertType('Zend\Db\Statement\Exception', $e,
+            $this->assertInstanceOf('Zend\Db\Statement\Exception', $e,
                 'Expecting object of type Zend_Db_Statement_Exception, got '.get_class($e));
         }
         $code = $stmt->errorCode();
@@ -211,7 +211,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
             }
             $this->fail('Expected to catch Zend_Db_Statement_Exception');
         } catch (\Zend\Exception $e) {
-            $this->assertType('Zend\Db\Statement\Exception', $e,
+            $this->assertInstanceOf('Zend\Db\Statement\Exception', $e,
                 'Expecting object of type Zend_Db_Statement_Exception, got '.get_class($e));
         }
         $code = $stmt->errorCode();
@@ -305,7 +305,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         $result = $stmt->fetchAll();
 
         $this->assertEquals(2, count($result));
-        $this->assertType('stdClass', $result[0]);
+        $this->assertInternalType('object', $result[0]);
 
         // check for FETCH_OBJ entries
         $this->assertEquals(2, $result[0]->product_id);
@@ -323,7 +323,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
             $stmt->setFetchMode(-999);
             $this->fail('Expected to catch Zend_Db_Statement_Exception');
         } catch (\Zend\Exception $e) {
-            $this->assertType('Zend\Db\Statement\Exception', $e,
+            $this->assertInstanceOf('Zend\Db\Statement\Exception', $e,
                 'Expecting object of type Zend_Db_Statement_Exception, got '.get_class($e));
             $this->assertRegExp('#invalid fetch mode#i', $e->getMessage());
         }
@@ -397,7 +397,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         $result = $stmt->fetchAll(Db\DB::FETCH_OBJ);
 
         $this->assertEquals(2, count($result));
-        $this->assertType('stdClass', $result[0]);
+        $this->assertInternalType('object', $result[0]);
         $this->assertEquals(2, $result[0]->product_id);
     }
 
@@ -423,7 +423,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         $result = $stmt->fetchAll(Db\DB::FETCH_COLUMN, 1);
 
         $this->assertEquals(2, count($result));
-        $this->assertType('string', $result[0]);
+        $this->assertInternalType('string', $result[0]);
         $this->assertEquals('Linux', $result[0]);
         $this->assertEquals('OS X', $result[1]);
     }
@@ -438,7 +438,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
             $result = $stmt->fetchAll(-99);
             $this->fail('Expected to catch Zend_Db_Statement_Exception');
         } catch (\Zend\Exception $e) {
-            $this->assertType('Zend\Db\Statement\Exception', $e,
+            $this->assertInstanceOf('Zend\Db\Statement\Exception', $e,
                 'Expecting object of type Zend_Db_Statement_Exception, got '.get_class($e));
         }
         $stmt->closeCursor();
@@ -497,7 +497,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         $result = $stmt->fetchObject();
         $stmt->closeCursor();
 
-        $this->assertType('stdClass', $result,
+        $this->assertInternalType('object', $result,
             'Expecting object of type stdClass, got '.get_class($result));
         $this->assertEquals('Linux', $result->product_name);
     }
@@ -524,7 +524,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         $result = $stmt->fetch(Db\DB::FETCH_NUM);
         $stmt->closeCursor();
 
-        $this->assertType('array', $result);
+        $this->assertInternalType('array', $result);
         $this->assertEquals('Linux', $result[1]);
         $this->assertFalse(isset($result['product_name']));
     }
@@ -538,7 +538,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         $result = $stmt->fetch(Db\DB::FETCH_ASSOC);
         $stmt->closeCursor();
 
-        $this->assertType('array', $result);
+        $this->assertInternalType('array', $result);
         $this->assertEquals('Linux', $result['product_name']);
         $this->assertFalse(isset($result[1]));
     }
@@ -552,7 +552,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         $result = $stmt->fetch(Db\DB::FETCH_BOTH);
         $stmt->closeCursor();
 
-        $this->assertType('array', $result);
+        $this->assertInternalType('array', $result);
         $this->assertEquals('Linux', $result[1]);
         $this->assertEquals('Linux', $result['product_name']);
     }
@@ -566,7 +566,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         $result = $stmt->fetch(Db\DB::FETCH_OBJ);
         $stmt->closeCursor();
 
-        $this->assertType('stdClass', $result,
+        $this->assertInternalType('object', $result,
             'Expecting object of type stdClass, got '.get_class($result));
         $this->assertEquals('Linux', $result->product_name);
     }
@@ -581,7 +581,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
             $result = $stmt->fetch(-99);
             $this->fail('Expected to catch Zend_Db_Statement_Exception');
         } catch (\Zend\Exception $e) {
-            $this->assertType('Zend\Db\Statement\Exception', $e,
+            $this->assertInstanceOf('Zend\Db\Statement\Exception', $e,
                 'Expecting object of type Zend_Db_Statement_Exception, got '.get_class($e));
         }
         $stmt->closeCursor();
@@ -802,7 +802,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         $stmt->execute();
         for ($i = 0; $i < $stmt->columnCount(); ++$i) {
             $meta = $stmt->getColumnMeta($i);
-            $this->assertType('array', $meta);
+            $this->assertInternalType('array', $meta);
             foreach ($this->_getColumnMetaKeys as $key) {
                 if ($key == 'table' && version_compare(PHP_VERSION, '5.2.0', '<')) {
                     continue;
@@ -821,7 +821,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
             $stmt->nextRowset();
             $this->fail('Expected to catch Zend_Db_Statement_Exception');
         } catch (\Zend\Exception $e) {
-            $this->assertType('Zend\Db\Statement\Exception', $e,
+            $this->assertInstanceOf('Zend\Db\Statement\Exception', $e,
                 'Expecting object of type Zend_Db_Statement_Exception, got '.get_class($e));
             $this->assertEquals('nextRowset() is not implemented', $e->getMessage());
         }

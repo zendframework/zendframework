@@ -83,7 +83,7 @@ class PdoIbmTest extends AbstractPdoTest
             $sql = $this->_db->limit("SELECT * FROM $products", 1, -1);
             $this->fail('Expected to catch Zend_Db_Adapter_Exception');
         } catch (\Zend\Exception $e) {
-            $this->assertType('Zend_Db_Adapter_Exception', $e,
+            $this->assertInstanceOf('Zend_Db_Adapter_Exception', $e,
                 'Expecting object of type Zend_Db_Adapter_Exception, got '.get_class($e));
         }
     }

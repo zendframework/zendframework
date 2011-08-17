@@ -42,7 +42,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         $route = new Route\StaticRoute('users/all');
         $values = $route->match('users/all');
 
-        $this->assertType('array', $values);
+        $this->assertInternalType('array', $values);
     }
 
     public function testStaticMatchFailure()
@@ -59,7 +59,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
                     array('controller' => 'ctrl', 'action' => 'act'));
         $values = $route->match('users/all');
 
-        $this->assertType('array', $values);
+        $this->assertInternalType('array', $values);
         $this->assertSame('ctrl', $values['controller']);
         $this->assertSame('act', $values['action']);
     }
@@ -69,7 +69,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         $route = new Route\StaticRoute('żółć');
         $values = $route->match('żółć');
 
-        $this->assertType('array', $values);
+        $this->assertInternalType('array', $values);
     }
 
     public function testRootRoute()
@@ -95,7 +95,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
 
         $values = $route->getDefaults();
 
-        $this->assertType('array', $values);
+        $this->assertInternalType('array', $values);
         $this->assertSame('ctrl', $values['controller']);
         $this->assertSame('act', $values['action']);
     }
@@ -122,7 +122,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         $config = new \Zend\Config\Config($routeConf);
         $route = Route\StaticRoute::getInstance($config);
 
-        $this->assertType('Zend\Controller\Router\Route\StaticRoute', $route);
+        $this->assertInstanceOf('Zend\Controller\Router\Route\StaticRoute', $route);
 
         $values = $route->match('users/all');
 

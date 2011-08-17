@@ -105,7 +105,7 @@ class PluginLoaderTest extends \PHPUnit_Framework_TestCase
                ->addPrefixPath('Zend\Loader', $this->libPath . '/Zend/Loader');
         $paths = $loader->getPaths();
 
-        $this->assertType('array', $paths);
+        $this->assertInternalType('array', $paths);
         $this->assertEquals(1, count($paths['Zend\Loader\\']));
     }
 

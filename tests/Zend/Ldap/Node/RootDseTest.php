@@ -94,38 +94,38 @@ class RootDseTest extends \ZendTest\Ldap\OnlineTestCase
     {
         $root=$this->_getLDAP()->getRootDse();
 
-        $this->assertType('array', $root->getNamingContexts());
-        $this->assertType('string', $root->getSubschemaSubentry());
+        $this->assertInternalType('array', $root->getNamingContexts());
+        $this->assertInternalType('string', $root->getSubschemaSubentry());
 
         switch ($root->getServerType()) {
             case RootDse::SERVER_TYPE_ACTIVEDIRECTORY:
-                $this->assertType('string', $root->getConfigurationNamingContext());
-                $this->assertType('string', $root->getCurrentTime());
-                $this->assertType('string', $root->getDefaultNamingContext());
-                $this->assertType('string', $root->getDnsHostName());
-                $this->assertType('string', $root->getDomainControllerFunctionality());
-                $this->assertType('string', $root->getDomainFunctionality());
-                $this->assertType('string', $root->getDsServiceName());
-                $this->assertType('string', $root->getForestFunctionality());
-                $this->assertType('string', $root->getHighestCommittedUSN());
+                $this->assertInternalType('string', $root->getConfigurationNamingContext());
+                $this->assertInternalType('string', $root->getCurrentTime());
+                $this->assertInternalType('string', $root->getDefaultNamingContext());
+                $this->assertInternalType('string', $root->getDnsHostName());
+                $this->assertInternalType('string', $root->getDomainControllerFunctionality());
+                $this->assertInternalType('string', $root->getDomainFunctionality());
+                $this->assertInternalType('string', $root->getDsServiceName());
+                $this->assertInternalType('string', $root->getForestFunctionality());
+                $this->assertInternalType('string', $root->getHighestCommittedUSN());
                 $this->assertType('boolean', $root->getIsGlobalCatalogReady());
                 $this->assertType('boolean', $root->getIsSynchronized());
-                $this->assertType('string', $root->getLDAPServiceName());
-                $this->assertType('string', $root->getRootDomainNamingContext());
-                $this->assertType('string', $root->getSchemaNamingContext());
-                $this->assertType('string', $root->getServerName());
+                $this->assertInternalType('string', $root->getLDAPServiceName());
+                $this->assertInternalType('string', $root->getRootDomainNamingContext());
+                $this->assertInternalType('string', $root->getSchemaNamingContext());
+                $this->assertInternalType('string', $root->getServerName());
                 break;
             case RootDse::SERVER_TYPE_EDIRECTORY:
-                $this->assertType('string', $root->getVendorName());
-                $this->assertType('string', $root->getVendorVersion());
-                $this->assertType('string', $root->getDsaName());
-                $this->assertType('string', $root->getStatisticsErrors());
-                $this->assertType('string', $root->getStatisticsSecurityErrors());
-                $this->assertType('string', $root->getStatisticsChainings());
-                $this->assertType('string', $root->getStatisticsReferralsReturned());
-                $this->assertType('string', $root->getStatisticsExtendedOps());
-                $this->assertType('string', $root->getStatisticsAbandonOps());
-                $this->assertType('string', $root->getStatisticsWholeSubtreeSearchOps());
+                $this->assertInternalType('string', $root->getVendorName());
+                $this->assertInternalType('string', $root->getVendorVersion());
+                $this->assertInternalType('string', $root->getDsaName());
+                $this->assertInternalType('string', $root->getStatisticsErrors());
+                $this->assertInternalType('string', $root->getStatisticsSecurityErrors());
+                $this->assertInternalType('string', $root->getStatisticsChainings());
+                $this->assertInternalType('string', $root->getStatisticsReferralsReturned());
+                $this->assertInternalType('string', $root->getStatisticsExtendedOps());
+                $this->assertInternalType('string', $root->getStatisticsAbandonOps());
+                $this->assertInternalType('string', $root->getStatisticsWholeSubtreeSearchOps());
                 break;
             case RootDse::SERVER_TYPE_OPENLDAP:
                 $this->_assertNullOrString($root->getConfigContext());
@@ -139,7 +139,7 @@ class RootDseTest extends \ZendTest\Ldap\OnlineTestCase
         if ($value===null) {
             $this->assertNull($value);
         } else {
-            $this->assertType('string', $value);
+            $this->assertInternalType('string', $value);
         }
     }
 

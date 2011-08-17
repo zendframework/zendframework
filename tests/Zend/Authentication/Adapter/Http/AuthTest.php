@@ -147,7 +147,7 @@ class AuthTest extends \PHPUnit_Framework_TestCase
         $digest = $this->_digestChallenge();
 
         // Make sure the result is false
-        $this->assertType('Zend\\Authentication\\Result', $result);
+        $this->assertInstanceOf('Zend\\Authentication\\Result', $result);
         $this->assertFalse($result->isValid());
 
         // Verify the status code and the presence of both challenges
@@ -422,7 +422,7 @@ class AuthTest extends \PHPUnit_Framework_TestCase
         extract($data); // $result, $status, $headers
 
         // Make sure the result is false
-        $this->assertType('Zend\\Authentication\\Result', $result);
+        $this->assertInstanceOf('Zend\\Authentication\\Result', $result);
         $this->assertFalse($result->isValid());
 
         // Verify the status code and the presence of the challenge
@@ -444,7 +444,7 @@ class AuthTest extends \PHPUnit_Framework_TestCase
         extract($data); // $result, $status, $headers
 
         // Make sure the result is true
-        $this->assertType('Zend\\Authentication\\Result', $result);
+        $this->assertInstanceOf('Zend\\Authentication\\Result', $result);
         $this->assertTrue($result->isValid(), var_export($result, 1));
 
         // Verify we got a 200 response
@@ -462,7 +462,7 @@ class AuthTest extends \PHPUnit_Framework_TestCase
         extract($data); // $result, $status, $headers
 
         // Make sure the result is false
-        $this->assertType('Zend\\Authentication\\Result', $result);
+        $this->assertInstanceOf('Zend\\Authentication\\Result', $result);
         $this->assertFalse($result->isValid());
 
         // Make sure it set the right HTTP code

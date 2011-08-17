@@ -769,7 +769,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
      */
     public function testDefaultTypeObject()
     {
-        $this->assertType('stdClass', Json\Decoder::decode('{"var":"value"}'));
+        $this->assertInternalType('object', Json\Decoder::decode('{"var":"value"}'));
     }
 
 }

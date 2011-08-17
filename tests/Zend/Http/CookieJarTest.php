@@ -384,11 +384,11 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(8, count($jar->getAllCookies()), 'Cookie count is expected to be 8');
 
         $cookies = $jar->getMatchingCookies('http://www.foo.com/path/file.txt', true, Http\CookieJar::COOKIE_STRING_ARRAY);
-        $this->assertType('array', $cookies, '$cookies is expected to be an array, but it is not');
-        $this->assertType('string', $cookies[0], '$cookies[0] is expected to be a string');
+        $this->assertInternalType('array', $cookies, '$cookies is expected to be an array, but it is not');
+        $this->assertInternalType('string', $cookies[0], '$cookies[0] is expected to be a string');
 
         $cookies = $jar->getMatchingCookies('http://www.foo.com/path/file.txt', true, Http\CookieJar::COOKIE_STRING_CONCAT);
-        $this->assertType('string', $cookies, '$cookies is expected to be a string');
+        $this->assertInternalType('string', $cookies, '$cookies is expected to be a string');
     }
 
     /**
@@ -457,7 +457,7 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
         foreach ($cookies as $cookie) $jar->addCookie($cookie);
         $cookies = $jar->getMatchingCookies('http://www.example.com/a/b/file.txt');
 
-        $this->assertType('array', $cookies);
+        $this->assertInternalType('array', $cookies);
         $this->assertEquals(2, count($cookies));
     }
 

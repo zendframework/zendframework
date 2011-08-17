@@ -97,7 +97,7 @@ class SQLSRVTest extends AbstractTest
         $this->assertEquals(1, $rowsAffected);
 
         $lastInsertId = $this->_db->lastInsertId();
-        $this->assertType('string', $lastInsertId);
+        $this->assertInternalType('string', $lastInsertId);
         $this->assertEquals('5', (string) $lastInsertId,
             'Expected new id to be 5');
 

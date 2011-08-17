@@ -82,7 +82,7 @@ class PdoIbmTest extends AbstractPdoTest
         $n = $stmt->columnCount();
         $stmt->closeCursor();
 
-        $this->assertType('integer', $n);
+        $this->assertInternalType('integer', $n);
         $this->assertEquals(2, $n);
     }
 

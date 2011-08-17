@@ -335,9 +335,9 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
             );
         $config = new Config($configData);
         $this->assertEquals($config->toArray(), $configData);
-        $this->assertType('stdClass', $config->a);
-        $this->assertType('stdClass', $config->b->c);
-        $this->assertType('stdClass', $config->b->d);
+        $this->assertInternalType('object', $config->a);
+        $this->assertInternalType('object', $config->b->c);
+        $this->assertInternalType('object', $config->b->d);
     }
 
     /**

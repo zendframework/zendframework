@@ -77,7 +77,7 @@ class Zend_Service_Technorati_WeblogTest extends Zend_Service_Technorati_TestCas
         $this->assertEquals(93473, $weblog->getRank());
         // check authors
         $var = $weblog->getAuthors();
-        $this->assertType('array', $var);
+        $this->assertInternalType('array', $var);
         $this->assertEquals(1, sizeof($var));
         // check photo
         $this->assertEquals(false, $weblog->hasPhoto());
@@ -94,7 +94,7 @@ class Zend_Service_Technorati_WeblogTest extends Zend_Service_Technorati_TestCas
         $authors = $weblog->getAuthors();
 
         // check whether $authors is an array with valid length
-        $this->assertType('array', $authors);
+        $this->assertInternalType('array', $authors);
         $this->assertEquals(2, sizeof($authors));
 
         // check first author
@@ -115,7 +115,7 @@ class Zend_Service_Technorati_WeblogTest extends Zend_Service_Technorati_TestCas
         // check name
         $set = 'foo';
         $get = $weblog->setName($set)->getName();
-        $this->assertType('string', $get);
+        $this->assertInternalType('string', $get);
         $this->assertEquals($set, $get);
 
         // check URL
@@ -182,24 +182,24 @@ class Zend_Service_Technorati_WeblogTest extends Zend_Service_Technorati_TestCas
 
         $set = rand();
         $get = $weblog->setInboundBlogs($set)->getInboundBlogs();
-        $this->assertType('integer', $get);
+        $this->assertInternalType('integer', $get);
         $this->assertEquals($set, $get);
 
         $set = (string) rand();
         $get = $weblog->setInboundBlogs($set)->getInboundBlogs();
-        $this->assertType('integer', $get);
+        $this->assertInternalType('integer', $get);
         $this->assertEquals((int) $set, $get);
 
         // check inbound links
 
         $set = rand();
         $get = $weblog->setInboundLinks($set)->getInboundLinks();
-        $this->assertType('integer', $get);
+        $this->assertInternalType('integer', $get);
         $this->assertEquals((int) $set, $get);
 
         $set = (string) rand();
         $get = $weblog->setInboundLinks($set)->getInboundLinks();
-        $this->assertType('integer', $get);
+        $this->assertInternalType('integer', $get);
         $this->assertEquals((int) $set, $get);
 
         // last update
@@ -212,7 +212,7 @@ class Zend_Service_Technorati_WeblogTest extends Zend_Service_Technorati_TestCas
         /* not supported
         $set = time();
         $get = $weblog->setLastUpdate($set)->getLastUpdate();
-        $this->assertType('integer', $get);
+        $this->assertInternalType('integer', $get);
         $this->assertEquals($set, $get); */
 
         $set = '200ty';
@@ -227,12 +227,12 @@ class Zend_Service_Technorati_WeblogTest extends Zend_Service_Technorati_TestCas
 
         $set = rand();
         $get = $weblog->setRank($set)->getRank();
-        $this->assertType('integer', $get);
+        $this->assertInternalType('integer', $get);
         $this->assertEquals((int) $set, $get);
 
         $set = (string) rand();
         $get = $weblog->setRank($set)->getRank();
-        $this->assertType('integer', $get);
+        $this->assertInternalType('integer', $get);
         $this->assertEquals((int) $set, $get);
 
         // check hasPhoto

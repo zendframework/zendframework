@@ -135,13 +135,13 @@ CERT;
     public function testSetPemStringParsesPemForPrivateKey()
     {
         $rsa = new RSA(array('pemString'=>$this->_testPemString));
-        $this->assertType('Zend\\Crypt\\RSA\\PrivateKey', $rsa->getPrivateKey());
+        $this->assertInstanceOf('Zend\\Crypt\\RSA\\PrivateKey', $rsa->getPrivateKey());
     }
 
     public function testSetPemStringParsesPemForPublicKey()
     {
         $rsa = new RSA(array('pemString'=>$this->_testPemString));
-        $this->assertType('Zend\\Crypt\\RSA\\PublicKey', $rsa->getPublicKey());
+        $this->assertInstanceOf('Zend\\Crypt\\RSA\\PublicKey', $rsa->getPublicKey());
     }
 
     public function testSetCertificateStringParsesCertificateForNullPrivateKey()
@@ -153,7 +153,7 @@ CERT;
     public function testSetCertificateStringParsesCertificateForPublicKey()
     {
         $rsa = new RSA(array('certificateString'=>$this->_testCertificateString));
-        $this->assertType('Zend\\Crypt\\RSA\\PublicKey', $rsa->getPublicKey());
+        $this->assertInstanceOf('Zend\\Crypt\\RSA\\PublicKey', $rsa->getPublicKey());
     }
 
     public function testSignGeneratesExpectedBinarySignature()
@@ -264,21 +264,21 @@ CERT;
     {
         $rsa = new RSA;
         $keys = $rsa->generateKeys(array('private_key_bits'=>512));
-        $this->assertType('ArrayObject', $keys);
+        $this->assertInstanceOf('ArrayObject', $keys);
     }
 
     public function testKeyGenerationCreatesPrivateKeyInArrayObject()
     {
         $rsa = new RSA;
         $keys = $rsa->generateKeys(array('private_key_bits'=>512));
-        $this->assertType('Zend\\Crypt\\RSA\\PrivateKey', $keys->privateKey);
+        $this->assertInstanceOf('Zend\\Crypt\\RSA\\PrivateKey', $keys->privateKey);
     }
 
     public function testKeyGenerationCreatesPublicKeyInArrayObject()
     {
         $rsa = new RSA;
         $keys = $rsa->generateKeys(array('privateKeyBits'=>512));
-        $this->assertType('Zend\\Crypt\\RSA\\PublicKey', $keys->publicKey);
+        $this->assertInstanceOf('Zend\\Crypt\\RSA\\PublicKey', $keys->publicKey);
     }
 
     public function testKeyGenerationCreatesPassphrasedPrivateKey()

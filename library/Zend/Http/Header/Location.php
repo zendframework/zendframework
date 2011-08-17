@@ -2,6 +2,8 @@
 
 namespace Zend\Http\Header;
 
+use Zend\Uri\Uri;
+
 /**
  * @throws Exception\InvalidArgumentException
  * @see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30
@@ -20,7 +22,11 @@ class Location implements HeaderDescription
             throw new Exception\InvalidArgumentException('Invalid header line for Location string');
         }
 
+        if (!Uri::validateHost($value)) {
+            throw new Exception\InvalidArgumentException('Invalid URI value for Location');
+        }
         // @todo implementation details
+        $header->value= $value;
 
         return $header;
     }
@@ -32,7 +38,7 @@ class Location implements HeaderDescription
 
     public function getFieldValue()
     {
-        // TODO: Implement getFieldValue() method.
+        return $this->value;
     }
 
     public function toString()

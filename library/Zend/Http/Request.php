@@ -5,10 +5,15 @@ namespace Zend\Http;
 use Zend\Stdlib\RequestDescription,
     Zend\Stdlib\Message,
     Zend\Stdlib\ParametersDescription,
-    Zend\Stdlib\Parameters;
+    Zend\Stdlib\Parameters,
+    Zend\Uri\Http as HttpUri;
 
 class Request extends Message implements RequestDescription
 {
+
+    /**#@+
+     * @const string METHOD constant names
+     */
     const METHOD_OPTIONS = 'OPTIONS';
     const METHOD_GET = 'GET';
     const METHOD_HEAD = 'HEAD';
@@ -17,17 +22,22 @@ class Request extends Message implements RequestDescription
     const METHOD_DELETE = 'DELETE';
     const METHOD_TRACE = 'TRACE';
     const METHOD_CONNECT = 'CONNECT';
+    /**#@-*/
 
+    /**#@+
+     * @const string Version constant numbers
+     */
     const VERSION_11 = '1.1';
     const VERSION_10 = '1.0';
-
+    /**#@-*/
+    
     /**
      * @var string
      */
     protected $method = self::METHOD_GET;
 
     /**
-     * @var string|\Zend\Uri\Http
+     * @var string|HttpUri
      */
     protected $uri = null;
 
@@ -72,9 +82,7 @@ class Request extends Message implements RequestDescription
     protected $rawBody = null;
 
     /**
-     *
-     *
-     * @param $string
+     * @param string $string
      * @return \Zend\Http\Request
      */
     public static function fromString($string)
@@ -132,21 +140,32 @@ class Request extends Message implements RequestDescription
         return $request;
     }
 
+    /**
+     * @param string $method
+     * @return Request
+     */
     public function setMethod($method)
     {
         $this->method = $method;
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getMethod()
     {
         return $this->method;
     }
 
-
+    /**
+     * @throws Exception\InvalidArgumentException
+     * @param string|HttpUri $uri
+     * @return Request
+     */
     public function setUri($uri)
     {
-        if (is_string($uri) || $uri instanceof \Zend\Uri\Http) {
+        if (is_string($uri) || $uri instanceof HttpUri) {
             $this->uri = $uri;
         } else {
             throw new Exception\InvalidArgumentException('URI must be an instance of Zend\Uri\Http or a string');
@@ -155,14 +174,20 @@ class Request extends Message implements RequestDescription
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getUri()
     {
-        if ($this->uri instanceof \Zend\Uri\Http) {
+        if ($this->uri instanceof HttpUri) {
             return $this->uri->toString();
         }
         return $this->uri;
     }
 
+    /**
+     * @return HttpUri
+     */
     public function uri()
     {
         if ($this->uri === null || is_string($this->uri)) {
@@ -171,6 +196,11 @@ class Request extends Message implements RequestDescription
         return $this->uri;
     }
 
+    /**
+     * @throws Exception\InvalidArgumentException
+     * @param string $version (Must be 1.0 or 1.1)
+     * @return Request
+     */
     public function setVersion($version)
     {
         if (!in_array($version, array(self::VERSION_10, self::VERSION_11))) {
@@ -180,14 +210,17 @@ class Request extends Message implements RequestDescription
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getVersion()
     {
         return $this->version;
     }
 
     /**
-     * @param \Zend\Stdlib\ParametersDescription $query
-     * @return \Zend\Http\Request
+     * @param ParametersDescription $query
+     * @return Request
      */
     public function setQuery(ParametersDescription $query)
     {
@@ -196,7 +229,7 @@ class Request extends Message implements RequestDescription
     }
 
     /**
-     * @return \Zend\Stdlib\ParametersDescription
+     * @return ParametersDescription
      */
     public function query()
     {
@@ -206,9 +239,10 @@ class Request extends Message implements RequestDescription
         return $this->queryParams;
     }
     
+
     /**
-     * @param \Zend\Stdlib\ParametersDescription $query
-     * @return \Zend\Http\Request
+     * @param ParametersDescription $post
+     * @return Request
      */
     public function setPost(ParametersDescription $post)
     {
@@ -237,10 +271,8 @@ class Request extends Message implements RequestDescription
     }
 
     /**
-     * Set files parameters
-     * 
-     * @param  Zend\Stdlib\ParametersDescription $files 
-     * @return \Zend\Http\Request
+     * @param ParametersDescription $files
+     * @return Request
      */
     public function setFile(ParametersDescription $files)
     {
@@ -249,7 +281,7 @@ class Request extends Message implements RequestDescription
     }
     
     /**
-     * @return \Zend\Stdlib\ParametersDescription
+     * @return ParametersDescription
      */
     public function file()
     {
@@ -261,8 +293,8 @@ class Request extends Message implements RequestDescription
     }
 
     /** 
-     * @param \Zend\Stdlib\ParametersDescription
-     * @return \Zend\Http\Request
+     * @param ParametersDescription
+     * @return Request
      */
     public function setServer(ParametersDescription $server)
     {
@@ -339,7 +371,6 @@ class Request extends Message implements RequestDescription
     }
 
     /**
-     *
      * @return string
      */
     public function getRawBody()
@@ -347,51 +378,81 @@ class Request extends Message implements RequestDescription
         return $this->rawBody;
     }
 
+    /**
+     * @return bool
+     */
     public function isOptions()
     {
         return ($this->method === self::METHOD_OPTIONS);
     }
 
+    /**
+     * @return bool
+     */
     public function isGet()
     {
         return ($this->method === self::METHOD_GET);
     }
 
+    /**
+     * @return bool
+     */
     public function isHead()
     {
         return ($this->method === self::METHOD_HEAD);
     }
 
+    /**
+     * @return bool
+     */
     public function isPost()
     {
         return ($this->method === self::METHOD_POST);
     }
 
+    /**
+     * @return bool
+     */
     public function isPut()
     {
         return ($this->method === self::METHOD_PUT);
     }
 
+    /**
+     * @return bool
+     */
     public function isDelete()
     {
         return ($this->method === self::METHOD_DELETE);
     }
 
+    /**
+     * @return bool
+     */
     public function isTrace()
     {
         return ($this->method === self::METHOD_TRACE);
     }
 
+    /**
+     * @return bool
+     */
     public function isConnect()
     {
         return ($this->method === self::METHOD_CONNECT);
     }
 
+    /**
+     * @return string
+     */
     public function renderRequestLine()
     {
         return $this->method . ' ' . (string) $this->uri . ' HTTP/' . $this->version;
     }
 
+    /**
+     * @return string
+     */
     public function toString()
     {
         $str = $this->renderRequestLine() . "\r\n";

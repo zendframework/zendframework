@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.headers">
+
+    <info>
+        <title>Zend\Http\Headers And The Various Header Classes</title>
+    </info>
+
+    <section xml:id="zend.http.headers.intro">
+        <info>
+            <title>Overview</title>
+        </info>
+
+    </section>
+
+    <section xml:id="zend.http.headers.quick-start">
+        <info>
+            <title>Quick Start</title>
+        </info>
+
+    </section>
+
+    <section xml:id="zend.http.headers.options">
+        <info>
+            <title>Configuration Options</title>
+        </info>
+
+        <variablelist>
+            <title/>
+        </variablelist>
+    </section>
+
+    <section xml:id="zend.http.headers.methods">
+        <info>
+            <title>Available Methods</title>
+        </info>
+
+        <variablelist>
+            <varlistentry xml:id="zend.http.headers.methods.from-string">
+                <term>
+                    <methodsynopsis>
+                        <methodname>fromString</methodname>
+                        <methodparam>
+                            <funcparams>string $string</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Populates headers from string representation</para>
+                    <para>Parses a string for headers, and aggregates them, in order, in the
+current instance.
+
+On Request/Response variants, this should look for the first line
+matching the appropriate regex, and then forward the remainder of the
+string on to parent::fromString().</para>
+                    <para>Returns Zend\Http\Headers</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.headers.methods.set-plugin-loader">
+                <term>
+                    <methodsynopsis>
+                        <methodname>setPluginLoader</methodname>
+                        <methodparam>
+                            <funcparams>PluginClassLoader $pluginLoader</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns Zend\Http\Headers</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.headers.methods.get-plugin-class-loader">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getPluginClassLoader</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns PluginClassLoader</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.headers.methods.add-headers">
+                <term>
+                    <methodsynopsis>
+                        <methodname>addHeaders</methodname>
+                        <methodparam>
+                            <funcparams>array|Traversable $headers</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Add many headers at once</para>
+                    <para>Expects an array (or Traversable object) of type/value pairs.</para>
+                    <para>Returns Zend\Http\Headers</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.headers.methods.add-header-line">
+                <term>
+                    <methodsynopsis>
+                        <methodname>addHeaderLine</methodname>
+                        <methodparam>
+                            <funcparams>string $headerFieldNameOrLine, string $fieldValue</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns Zend\Http\Headers</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.headers.methods.add-header">
+                <term>
+                    <methodsynopsis>
+                        <methodname>addHeader</methodname>
+                        <methodparam>
+                            <funcparams>Zend\Http\Header\HeaderDescription $header</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Add a header onto the queue</para>
+                    <para></para>
+                    <para>Returns Zend\Http\Headers</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.headers.methods.remove-header">
+                <term>
+                    <methodsynopsis>
+                        <methodname>removeHeader</methodname>
+                        <methodparam>
+                            <funcparams>Header $header</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns Zend\Http\Headers</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.headers.methods.clear-headers">
+                <term>
+                    <methodsynopsis>
+                        <methodname>clearHeaders</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Clear all headers</para>
+                    <para>Removes all headers from queue</para>
+                    <para>Returns void</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.headers.methods.get">
+                <term>
+                    <methodsynopsis>
+                        <methodname>get</methodname>
+                        <methodparam>
+                            <funcparams>string $name</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Get all headers of a certain name/type</para>
+                    <para></para>
+                    <para>Returns false|Zend\Http\Header\HeaderDescription|ArrayIterator</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.headers.methods.has">
+                <term>
+                    <methodsynopsis>
+                        <methodname>has</methodname>
+                        <methodparam>
+                            <funcparams>string $name</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Test for existence of a type of header</para>
+                    <para></para>
+                    <para>Returns bool</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.headers.methods.next">
+                <term>
+                    <methodsynopsis>
+                        <methodname>next</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns void</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.headers.methods.key">
+                <term>
+                    <methodsynopsis>
+                        <methodname>key</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns mixed</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.headers.methods.valid">
+                <term>
+                    <methodsynopsis>
+                        <methodname>valid</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns bool</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.headers.methods.rewind">
+                <term>
+                    <methodsynopsis>
+                        <methodname>rewind</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns void</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.headers.methods.current">
+                <term>
+                    <methodsynopsis>
+                        <methodname>current</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns Zend\Http\Header\HeaderDescription</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.headers.methods.count">
+                <term>
+                    <methodsynopsis>
+                        <methodname>count</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns int</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.headers.methods.to-string">
+                <term>
+                    <methodsynopsis>
+                        <methodname>toString</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Render all headers at once</para>
+                    <para>This method handles the normal iteration of headers; it is up to the
+concrete classes to prepend with the appropriate status/request line.</para>
+                    <para>Returns string</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.headers.methods.to-array">
+                <term>
+                    <methodsynopsis>
+                        <methodname>toArray</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns array</para>
+                </listitem>
+            </varlistentry>
+
+        </variablelist>
+    </section>
+
+    <section xml:id="zend.http.headers.examples">
+        <info>
+            <title>Examples</title>
+        </info>
+
+    </section>
+</section>

@@ -1,0 +1,741 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.request">
+    <info><title>Zend\Http\Request</title></info>
+
+    <section xml:id="zend.http.request.intro">
+        <info>
+            <title>Overview</title>
+        </info>
+
+        <para>
+            The Zend\Http\Request object is responsible for providing a fluent
+            API that allows a developer to interact with all the various parts
+            of an HTTP request.
+        </para>
+
+        <para>
+            A typical HTTP Request looks like this:
+        </para>
+        <pre>
+--------------------------
+| METHOD | URI | VERSION |
+--------------------------
+|        HEADERS         |
+--------------------------
+|         BODY           |
+--------------------------
+        </pre>
+
+
+        <para>
+            In simplified terms, the request consist of a method, uri and the HTTP
+            version number which all make up the Request Line.  Next, is a set of
+            headers, there can be 0 or an unlimited amount of headers. After that,
+            is the request body, which is typically used when a client wishes to
+            send data to the server in the form of an encoded file, or set of
+            POST parameters, for example.  More information on the structure and
+            specification of an HTTP request can be found in the RFC2616 on W3.org
+            site: <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html">
+            here</a>
+        </para>
+
+    </section>
+
+    <section xml:id="zend.http.request.quick-start">
+        <info>
+            <title>Quick Start</title>
+        </info>
+
+        <para>
+            Request objects can either be created from the provided fromString()
+            factory, or if you wish to have a completely empty object to start with
+            by simply instantiating the Zend\Http\Request class.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$request = Zend\Http\Request::fromString(<<<EOS
+POST /foo HTTP/1.1
+HeaderField1: header-field-value
+HeaderField2: header-field-value2
+
+foo=bar&
+EOS);
+
+// OR
+
+$request = new Zend\Http\Request();
+$request->setMethod(Zend\Http\Request::METHOD_POST);
+$request->setUri('/foo');
+$request->headers()->addHeaders(array(
+'HeaderField1' => 'header-field-value'
+'HeaderField2' => 'header-field-value2'
+);
+$request->post()->set('foo', 'bar');
+
+]]></programlisting>
+
+    </section>
+
+    <section xml:id="zend.http.request.options">
+        <info>
+            <title>Configuration Options</title>
+        </info>
+
+        <para>
+            None currently
+        </para>
+
+        <variablelist>
+            <title/>
+        </variablelist>
+    </section>
+
+    <section xml:id="zend.http.request.methods">
+        <info>
+            <title>Available Methods</title>
+        </info>
+
+        <variablelist>
+            <varlistentry xml:id="zend.http.request.methods.from-string">
+                <term>
+                    <methodsynopsis>
+                        <methodname>fromString</methodname>
+                        <methodparam>
+                            <funcparams>string $string</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns Zend\Http\Request</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.set-method">
+                <term>
+                    <methodsynopsis>
+                        <methodname>setMethod</methodname>
+                        <methodparam>
+                            <funcparams>string $method</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns Zend\Http\Request</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.get-method">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getMethod</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns string</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.set-uri">
+                <term>
+                    <methodsynopsis>
+                        <methodname>setUri</methodname>
+                        <methodparam>
+                            <funcparams>string|Zend\Stdlib\RequestDescription\Zend\Stdlib\Message\Zend\Stdlib\ParametersDescription\Zend\Stdlib\Parameters\Zend\Uri\Http $uri</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns Zend\Http\Request</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.get-uri">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getUri</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns string</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.uri">
+                <term>
+                    <methodsynopsis>
+                        <methodname>uri</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns Zend\Stdlib\RequestDescription\Zend\Stdlib\Message\Zend\Stdlib\ParametersDescription\Zend\Stdlib\Parameters\Zend\Uri\Http</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.set-version">
+                <term>
+                    <methodsynopsis>
+                        <methodname>setVersion</methodname>
+                        <methodparam>
+                            <funcparams>string $version</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns Zend\Http\Request</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.get-version">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getVersion</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns string</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.set-query">
+                <term>
+                    <methodsynopsis>
+                        <methodname>setQuery</methodname>
+                        <methodparam>
+                            <funcparams>ParametersDescription $query</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns Zend\Http\Request</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.query">
+                <term>
+                    <methodsynopsis>
+                        <methodname>query</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns ParametersDescription</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.set-post">
+                <term>
+                    <methodsynopsis>
+                        <methodname>setPost</methodname>
+                        <methodparam>
+                            <funcparams>ParametersDescription $post</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns Zend\Http\Request</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.post">
+                <term>
+                    <methodsynopsis>
+                        <methodname>post</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns Zend\Stdlib\ParametersDescription</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.cookie">
+                <term>
+                    <methodsynopsis>
+                        <methodname>cookie</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns Zend\Stdlib\ParametersDescription</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.set-file">
+                <term>
+                    <methodsynopsis>
+                        <methodname>setFile</methodname>
+                        <methodparam>
+                            <funcparams>ParametersDescription $files</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns Zend\Http\Request</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.file">
+                <term>
+                    <methodsynopsis>
+                        <methodname>file</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns ParametersDescription</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.set-server">
+                <term>
+                    <methodsynopsis>
+                        <methodname>setServer</methodname>
+                        <methodparam>
+                            <funcparams>ParametersDescription $server</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns Zend\Http\Request</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.server">
+                <term>
+                    <methodsynopsis>
+                        <methodname>server</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns Zend\Stdlib\ParametersDescription</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.set-env">
+                <term>
+                    <methodsynopsis>
+                        <methodname>setEnv</methodname>
+                        <methodparam>
+                            <funcparams>Zend\Stdlib\ParametersDescription $env</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns Zend\Http\Request</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.env">
+                <term>
+                    <methodsynopsis>
+                        <methodname>env</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns Zend\Stdlib\ParametersDescription</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.set-headers">
+                <term>
+                    <methodsynopsis>
+                        <methodname>setHeaders</methodname>
+                        <methodparam>
+                            <funcparams>Zend\Http\RequestHeaders $headers</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns Zend\Http\Request</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.headers">
+                <term>
+                    <methodsynopsis>
+                        <methodname>headers</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns Zend\Http\RequestHeaders</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.set-raw-body">
+                <term>
+                    <methodsynopsis>
+                        <methodname>setRawBody</methodname>
+                        <methodparam>
+                            <funcparams>string $string</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns Zend\Http\Request</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.get-raw-body">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getRawBody</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns string</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.is-options">
+                <term>
+                    <methodsynopsis>
+                        <methodname>isOptions</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns bool</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.is-get">
+                <term>
+                    <methodsynopsis>
+                        <methodname>isGet</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns bool</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.is-head">
+                <term>
+                    <methodsynopsis>
+                        <methodname>isHead</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns bool</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.is-post">
+                <term>
+                    <methodsynopsis>
+                        <methodname>isPost</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns bool</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.is-put">
+                <term>
+                    <methodsynopsis>
+                        <methodname>isPut</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns bool</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.is-delete">
+                <term>
+                    <methodsynopsis>
+                        <methodname>isDelete</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns bool</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.is-trace">
+                <term>
+                    <methodsynopsis>
+                        <methodname>isTrace</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns bool</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.is-connect">
+                <term>
+                    <methodsynopsis>
+                        <methodname>isConnect</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns bool</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.render-request-line">
+                <term>
+                    <methodsynopsis>
+                        <methodname>renderRequestLine</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns string</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request.methods.to-string">
+                <term>
+                    <methodsynopsis>
+                        <methodname>toString</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para></para>
+                    <para></para>
+                    <para>Returns string</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request._parent_.zend.stdlib.message.methods.set-metadata">
+                <term>
+                    <methodsynopsis>
+                        <methodname>setMetadata</methodname>
+                        <methodparam>
+                            <funcparams>string|int|array|Traversable $spec, mixed $value</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Set message metadata</para>
+                    <para>Non-destructive setting of message metadata; always adds to the metadata, never overwrites
+the entire metadata container.</para>
+                    <para>Returns Zend\Stdlib\Message</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request._parent_.zend.stdlib.message.methods.get-metadata">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getMetadata</methodname>
+                        <methodparam>
+                            <funcparams>null|string|int $key, null|mixed $default</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Retrieve all metadata or a single metadatum as specified by key</para>
+                    <para></para>
+                    <para>Returns mixed</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request._parent_.zend.stdlib.message.methods.set-content">
+                <term>
+                    <methodsynopsis>
+                        <methodname>setContent</methodname>
+                        <methodparam>
+                            <funcparams>mixed $value</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Set message content</para>
+                    <para></para>
+                    <para>Returns Zend\Stdlib\Message</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.request._parent_.zend.stdlib.message.methods.get-content">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getContent</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Get message content</para>
+                    <para></para>
+                    <para>Returns mixed</para>
+                </listitem>
+            </varlistentry>
+
+        </variablelist>
+    </section>
+
+    <section xml:id="zend.http.request.examples">
+        <info>
+            <title>Examples</title>
+        </info>
+
+    </section>
+
+
+</section>

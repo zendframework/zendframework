@@ -83,6 +83,10 @@ class Headers implements Iterator, Countable
         return $headers;
     }
 
+    /**
+     * @param PluginClassLoader $pluginLoader
+     * @return Headers
+     */
     public function setPluginLoader(PluginClassLoader $pluginLoader)
     {
         $this->pluginClassLoader = $pluginLoader;
@@ -191,6 +195,12 @@ class Headers implements Iterator, Countable
         return $this;
     }
 
+    /**
+     * @throws Exception\InvalidArgumentException
+     * @param string $headerFieldNameOrLine
+     * @param string $fieldValue
+     * @return Headers
+     */
     public function addHeaderLine($headerFieldNameOrLine, $fieldValue = null)
     {
         $matches = null;
@@ -216,7 +226,6 @@ class Headers implements Iterator, Countable
      * Add a header onto the queue
      * 
      * @param  Header\HeaderDescription $header
-     * @param  string $content
      * @return Headers
      */
     public function addHeader(Header\HeaderDescription $header)
@@ -228,6 +237,10 @@ class Headers implements Iterator, Countable
         return $this;
     }
 
+    /**
+     * @param Header $header
+     * @return Headers
+     */
     public function removeHeader($header)
     {
         $index = array_search($header, $this->headers, true);
@@ -301,21 +314,33 @@ class Headers implements Iterator, Countable
         return (in_array($name, $this->headersKeys));
     }
 
+    /**
+     * @return void
+     */
     public function next()
     {
         next($this->headers);
     }
 
+    /**
+     * @return mixed
+     */
     public function key()
     {
         return (key($this->headers));
     }
 
+    /**
+     * @return bool
+     */
     public function valid()
     {
         return (current($this->headers) !== false);
     }
 
+    /**
+     * @return void
+     */
     public function rewind()
     {
         reset($this->headers);
@@ -333,6 +358,9 @@ class Headers implements Iterator, Countable
         return $current;
     }
 
+    /**
+     * @return int count of currently known headers
+     */
     public function count()
     {
         return count($this->headers);
@@ -356,6 +384,9 @@ class Headers implements Iterator, Countable
         return $headers;
     }
 
+    /**
+     * @return array
+     */
     public function toArray()
     {
         $headers = array();
@@ -374,6 +405,10 @@ class Headers implements Iterator, Countable
         return $headers;
     }
 
+    /**
+     * @param $index
+     * @return mixed|void
+     */
     protected function lazyLoadHeader($index)
     {
         $current = $this->headers[$index];

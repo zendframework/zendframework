@@ -1102,7 +1102,7 @@
         </chapter>
 
         <chapter xml:id="zend.http"><info><title>Zend_Http</title></info>
-            
+            <!-- OLD DOCUMENTATION
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Http_Client.xml" parse="xml">
                 <xi:fallback>
                     <xi:include href="../en/module_specs/Zend_Http_Client.xml" parse="xml"/>
@@ -1126,6 +1126,12 @@
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Http_Response.xml" parse="xml">
                 <xi:fallback>
                     <xi:include href="../en/module_specs/Zend_Http_Response.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+            -->
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Http.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Http.xml" parse="xml"/>
                 </xi:fallback>
             </xi:include>
         </chapter>

@@ -7,6 +7,11 @@ use Zend\Stdlib\Message,
 
 class Response extends Message implements ResponseDescription
 {
+
+    /**#@+
+     * @const int Status codes
+     */
+    const STATUS_CODE_CUSTOM = 0;
     const STATUS_CODE_100 = 100;
     const STATUS_CODE_101 = 101;
     const STATUS_CODE_200 = 200;
@@ -48,10 +53,24 @@ class Response extends Message implements ResponseDescription
     const STATUS_CODE_503 = 503;
     const STATUS_CODE_504 = 504;
     const STATUS_CODE_505 = 505;
+    /**#@-*/
 
-    const STATUS_CODE_CUSTOM = 0;
+    /**#@+
+     * @const string Version constant numbers
+     */
+    const VERSION_11 = '1.1';
+    const VERSION_10 = '1.0';
+    /**#@-*/
 
-    protected static $recommendedReasonPhrases = array(
+    /**
+     * @var string
+     */
+    protected $version = self::VERISON_11;
+
+    /**
+     * @var array Recommended Reason Phrases
+     */
+    protected $recommendedReasonPhrases = array(
         // INFORMATIONAL CODES
         100 => 'Continue',
         101 => 'Switching Protocols',
@@ -100,12 +119,20 @@ class Response extends Message implements ResponseDescription
         505 => 'HTTP Version not supported',
     );
 
-    protected $version = 1.1;
-
+    /**
+     * @var int Status code
+     */
     protected $statusCode   = 200;
-    protected $reasonPhrase = null;
 
-    protected $headers;
+    /**
+     * @var string
+     */
+    protected $reasonPhrase = 'OK';
+
+    /**
+     * @var Headers
+     */
+    protected $headers = null;
 
     /**
      * Populate object from string
@@ -181,8 +208,8 @@ class Response extends Message implements ResponseDescription
     /**
      * Set response headers
      *
-     * @param  \Zend\Http\ResponseHeaders $headers
-     * @return \Zend\Http\Response
+     * @param  Headers $headers
+     * @return Response
      */
     public function setHeaders(Headers $headers)
     {
@@ -193,7 +220,7 @@ class Response extends Message implements ResponseDescription
     /**
      * Get response headers
      * 
-     * @return \Zend\Http\ResponseHeaders
+     * @return Headers
      */
     public function headers()
     {
@@ -203,12 +230,19 @@ class Response extends Message implements ResponseDescription
         return $this->headers;
     }
 
+    /**
+     * @param string $version
+     * @return Response
+     */
     public function setVersion($version)
     {
         $this->version = $version;
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getVersion()
     {
         return $this->version;
@@ -224,6 +258,10 @@ class Response extends Message implements ResponseDescription
         return $this->statusCode;
     }
 
+    /**
+     * @param string $reasonPhrase
+     * @return Response
+     */
     public function setReasonPhrase($reasonPhrase)
     {
         $this->reasonPhrase = trim($reasonPhrase);
@@ -238,7 +276,7 @@ class Response extends Message implements ResponseDescription
     public function getReasonPhrase()
     {
         if ($this->reasonPhrase == null) {
-            return static::$recommendedReasonPhrases[$this->statusCode];
+            return $this->recommendedReasonPhrases[$this->statusCode];
         }
         return $this->reasonPhrase;
     }
@@ -246,7 +284,7 @@ class Response extends Message implements ResponseDescription
     /**
      * Set HTTP status code and (optionally) message
      *
-     * @param  string|int $code
+     * @param numeric $code
      * @return Response
      */
     public function setStatusCode($code)
@@ -395,7 +433,7 @@ class Response extends Message implements ResponseDescription
      */
     public static function decodeGzip($body)
     {
-        if (! function_exists('gzinflate')) {
+        if (!function_exists('gzinflate')) {
             throw new Exception\RuntimeException(
                 'zlib extension is required in order to decode "gzip" encoding'
             );
@@ -432,6 +470,7 @@ class Response extends Message implements ResponseDescription
          * @link http://framework.zend.com/issues/browse/ZF-6040
          */
         $zlibHeader = unpack('n', substr($body, 0, 2));
+        
         if ($zlibHeader[1] % 31 == 0) {
             return gzuncompress($body);
         } else {

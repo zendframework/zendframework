@@ -89,7 +89,10 @@ class Message implements MessageDescription
     {
         return $this->content;
     }
-    
+
+    /**
+     * @return string
+     */
     public function toString()
     {
         $request = '';

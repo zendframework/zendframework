@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\Http;
+namespace Zend\Http\Header;
 
 use Zend\Uri;
 
@@ -43,7 +43,7 @@ use Zend\Uri;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Cookie extends Header
+class Cookie implements HeaderDescription
 {
     /**
      * Cookie name
@@ -51,6 +51,13 @@ class Cookie extends Header
      * @var string
      */
     protected $name;
+    
+    /**
+     * Cookie value
+     * 
+     * @var string 
+     */
+    protected $value;
 
     /**
      * Cookie expiry date
@@ -124,6 +131,21 @@ class Cookie extends Header
         }
     }
 
+    public function getFieldName()
+    {
+        return 'Cookie';
+    }
+
+    public function getFieldValue()
+    {
+        return $this->__toString();
+    }
+    
+    public function toString()
+    {
+        return 'Cookie: ' . $this->getFieldValue();
+    }
+    
     public function setName($name)
     {
         if (preg_match("/[=,; \t\r\n\013\014]/", $name)) {
@@ -144,6 +166,32 @@ class Cookie extends Header
         return $this->name;
     }
 
+    /**
+     * Set the cookie value
+     * 
+     * @param  string $value
+     * @return Cookie 
+     */
+    public function setValue($value)
+    {
+        $this->value= $value;
+        return $this;
+    }
+    /**
+     * Get the cookie value
+     * 
+     * @return string 
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+    /**
+     * Set the domain
+     * 
+     * @param  string $domain
+     * @return Cookie 
+     */
     public function setDomain($domain)
     {
         $this->domain = $domain;
@@ -187,6 +235,24 @@ class Cookie extends Header
     }
 
     /**
+     * Set the expires time
+     * 
+     * @param string|int $expire
+     * @return Cookie 
+     */
+    public function setExpires($expires)
+    {
+        if (!empty($expires)) {
+            if (is_string($expires)) {
+                $expires= strtotime($expires);
+            } elseif (!is_int($expires)) {
+                throw new Exception\InvalidArgumentException('Invalid expires time specified');
+            }
+            $this->expires= (int) $expires;
+        }
+        return $this;
+    }
+    /**
      * Check whether the cookie should only be sent over secure connections
      *
      * @return boolean
@@ -195,7 +261,17 @@ class Cookie extends Header
     {
         return $this->secure;
     }
-
+    /**
+     * Set secure
+     * 
+     * @param  boolean $secure
+     * @return Cookie 
+     */
+    public function SetSecure($secure)
+    {
+        $this->secure= $secure;
+        return $this;
+    }
     /**
      * Check whether the cookie has expired
      *

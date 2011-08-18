@@ -116,13 +116,18 @@ class Response extends Message implements ResponseDescription
     public static function fromString($string)
     {
         $lines = preg_split('/\r\n/', $string);
+        if (!is_array($lines) || count($lines)==1) {
+            $lines = preg_split ('/\n/',$string);
+        }
+        
+        $firstLine = array_shift($lines);
 
         $response = new static();
         $matches = null;
-        if (!preg_match('/^(HTTP\/(?<version>\d+(?:\.\d+)?) (?P<status>\d{3})( (?P<reason>.*?)))$/', $lines[0], $matches)) {
+        if (!preg_match('/^HTTP\/(?P<version>1\.[01]) (?P<status>\d{3}) (?P<reason>.*)$/', $firstLine, $matches)) {
             throw new Exception\InvalidArgumentException('A valid response status line was not found in the provided string');
         }
-
+        
         $response->version = $matches['version'];
 
         if (!defined(get_called_class() . '::STATUS_CODE_' . $matches['status'])) {
@@ -138,8 +143,10 @@ class Response extends Message implements ResponseDescription
 
         $isHeader = true;
         $headers = $content = array();
+        
         while ($lines) {
             $nextLine = array_shift($lines);
+            
             if ($nextLine == '') {
                 $isHeader = false;
                 continue;
@@ -198,7 +205,7 @@ class Response extends Message implements ResponseDescription
     public function headers()
     {
         if ($this->headers === null || is_string($this->headers)) {
-            $this->headers = (is_string($this->headers)) ? ResponseHeaders::fromString($this->headers) : new ResponseHeaders();
+            $this->headers = (is_string($this->headers)) ? Headers::fromString($this->headers) : new Headers();
         }
         return $this->headers;
     }
@@ -263,6 +270,36 @@ class Response extends Message implements ResponseDescription
         return $this;
     }
 
+    /**
+     * Get the body of the response
+     * 
+     * @return string 
+     */
+    public function getBody()
+    {
+        $body = (string) $this->getContent();
+
+        $transferEncoding= $this->headers()->get('Transfer-Encoding');
+        if (!empty($transferEncoding)) {
+            if (strtolower($transferEncoding->getFieldValue())=='chunked') {
+                $body = self::decodeChunkedBody($body);
+            }
+        }
+
+        $contentEncoding= $this->headers()->get('Content-Encoding');
+        
+        if (!empty($contentEncoding)) {
+            $contentEncoding= $contentEncoding->getFieldValue();
+            if ($contentEncoding=='gzip') {
+                $body = self::decodeGzip($body);
+            } elseif ($contentEncoding=='deflate') {
+                 $body = self::decodeDeflate($body);
+            }
+        }
+
+        return $body;
+    }
+    
     /**
      * Does the status code indicate a client error?
      *
@@ -348,6 +385,20 @@ class Response extends Message implements ResponseDescription
         return (200 <= $code && 300 > $code);
     }
 
+    public function renderResponseLine()
+    {
+        return 'HTTP/' . $this->getVersion() . ' ' . $this->getStatusCode() . ' ' . $this->getReasonPhrase();
+    }
+    
+    public function toString()
+    {
+        $str = $this->renderResponseLine() . "\r\n";
+        $str .= $this->headers()->toString();
+        $str .= "\r\n";
+        $str .= $this->getContent();
+        return $str;
+    }
+    
     /**
      * Decode a "chunked" transfer-encoded body and return the decoded text
      *

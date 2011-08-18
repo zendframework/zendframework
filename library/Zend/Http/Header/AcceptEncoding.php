@@ -21,7 +21,8 @@ class AcceptEncoding implements HeaderDescription
         }
 
         // @todo implementation details
-
+        $acceptEncodingHeader->value= $value;
+        
         return $acceptEncodingHeader;
     }
 
@@ -32,7 +33,7 @@ class AcceptEncoding implements HeaderDescription
 
     public function getFieldValue()
     {
-        // TODO: Implement getFieldValue() method.
+        return $this->value;
     }
 
     public function toString()

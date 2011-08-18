@@ -51,7 +51,7 @@ use Zend\Stdlib\ParametersDescription,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Cookies implements ParametersDescription
+class Cookies //implements ParametersDescription
 {
     /**
      * Return cookie(s) as a Zend\Http\Header\Cookie object
@@ -142,11 +142,10 @@ class Cookies implements ParametersDescription
     public function addCookiesFromResponse($response, $ref_uri)
     {
         if (!$response instanceof Response) {
-            throw new Exception\InvalidArgumentException('$response is expected to be a Response object, ' .
-                gettype($response) . ' was passed');
+            throw new Exception\InvalidArgumentException('$response is expected to be a Response object');
         }
 
-        $cookie_hdrs = $response->getHeader('Set-Cookie');
+        $cookie_hdrs = $response->headers()->get('Set-Cookie');
 
         if (is_array($cookie_hdrs)) {
             foreach ($cookie_hdrs as $cookie) {

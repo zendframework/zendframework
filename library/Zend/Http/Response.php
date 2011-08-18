@@ -122,7 +122,7 @@ class Response extends Message implements ResponseDescription
     /**
      * @var int Status code
      */
-    protected $statusCode   = 200;
+    protected $statusCode = 200;
 
     /**
      * @var string

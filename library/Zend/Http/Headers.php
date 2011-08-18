@@ -238,17 +238,18 @@ class Headers implements Iterator, Countable
     }
 
     /**
-     * @param Header $header
-     * @return Headers
+     * @param Header\HeaderDescription $header
+     * @return bool
      */
-    public function removeHeader($header)
+    public function removeHeader(Header\HeaderDescription $header)
     {
         $index = array_search($header, $this->headers, true);
         if ($index !== false) {
             unset($this->headersKeys[$index]);
             unset($this->headers[$index]);
+            return true;
         }
-        return $this;
+        return false;
     }
 
     /**
@@ -256,11 +257,12 @@ class Headers implements Iterator, Countable
      *
      * Removes all headers from queue
      * 
-     * @return void
+     * @return Headers
      */
     public function clearHeaders()
     {
         $this->headers = $this->headersKeys = array();
+        return $this;
     }
 
     /**

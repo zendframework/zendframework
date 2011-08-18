@@ -40,20 +40,22 @@ use Zend\Config\Config,
  */
 class Client
 {
-    /**
-     * Supported HTTP Authentication methods
+    /**#@+
+     * @const string Supported HTTP Authentication methods
      */
     const AUTH_BASIC  = 'basic';
     const AUTH_DIGEST = 'digest';  // not implemented yet
+    /**#@-*/
     
-    /**
-     * POST data encoding methods
+    /**#@+
+     * @const string POST data encoding methods
      */
     const ENC_URLENCODED = 'application/x-www-form-urlencoded';
     const ENC_FORMDATA   = 'multipart/form-data';
+    /**#@-*/
     
-    /**
-     * DIGEST Authentication
+    /**#@+
+     * @const string DIGEST Authentication
      */
     const DIGEST_REALM  = 'realm';
     const DIGEST_QOP    = 'qop';
@@ -61,12 +63,36 @@ class Client
     const DIGEST_OPAQUE = 'opaque';
     const DIGEST_NC     = 'nc';
     const DIGEST_CNONCE = 'cnonce';
-    
+    /**#@-*/
+
+    /**
+     * @var Response
+     */
     protected $response;
+
+    /**
+     * @var Request
+     */
     protected $request;
+
+    /**
+     * @var Client/Adapter
+     */
     protected $adapter;
+
+    /**
+     * @var array
+     */
     protected $auth = array();
+
+    /**
+     * @var string
+     */
     protected $streamName;
+
+    /**
+     * @var Header
+     */
     protected $cookies;
     protected $encType;
     protected $lastRequest;
@@ -120,9 +146,9 @@ class Client
     /**
      * Set configuration parameters for this HTTP client
      *
-     * @param  \Zend\Config\Config | array $config
-     * @return \Zend\Http\Client
-     * @throws \Zend\Http\Client\Exception
+     * @param  Config|array $config
+     * @return Client
+     * @throws Client\Exception
      */
     public function setConfig($config = array())
     {
@@ -150,7 +176,7 @@ class Client
      * While this method is not called more than one for a client, it is
      * seperated from ->request() to preserve logic and readability
      *
-     * @param  \Zend\Http\Client\Adapter|string $adapter
+     * @param  Client\Adapter|string $adapter
      * @return null
      * @throws \Zend\Http\Client\Exception
      */
@@ -184,7 +210,7 @@ class Client
     /**
      * Get Request
      * 
-     * @return Zend\Http\Request
+     * @return Request
      */
     public function getRequest()
     {
@@ -196,7 +222,7 @@ class Client
     /**
      * Get Response
      * 
-     * @return Zend\Http\Response
+     * @return Response
      */
     public function getResponse()
     {
@@ -352,10 +378,7 @@ class Client
      */
     public function setParameterPost(array $post)
     {
-        if (!is_array($post) && !($post instanceof ParametersDescription)) {
-            throw new Exception\InvalidArgumentException('Invalid parameter post passed. Post must be an array or a ParametersDescription');
-        }
-        $this->getRequest()->setPost($post);
+        $this->getRequest()->post()->fromArray($post);
         return $this;
     }
     /**
@@ -366,7 +389,7 @@ class Client
      */
     public function setParameterGet(array $query)
     {
-        $this->getRequest()->setQuery($query);
+        $this->getRequest()->query()->fromArray($query);
         return $this;
     }
     /**
@@ -461,6 +484,7 @@ class Client
         }
         return $this;
     }
+
     /**
      * Add an header to the request
      * 

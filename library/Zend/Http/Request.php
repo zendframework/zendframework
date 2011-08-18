@@ -222,10 +222,10 @@ class Request extends Message implements RequestDescription
     }
 
     /**
-     * @param array|\Zend\Stdlib\ParametersDescription $query
-     * @return \Zend\Http\Request
+     * @param \Zend\Stdlib\ParametersDescription $query
+     * @return Request
      */
-    public function setQuery( $query)
+    public function setQuery(ParametersDescription $query)
     {
         $this->queryParams = $query;
         return $this;
@@ -238,18 +238,16 @@ class Request extends Message implements RequestDescription
     {
         if ($this->queryParams === null) {
             $this->queryParams = new Parameters();
-        } elseif (is_array($this->queryParams)) {
-            $this->queryParams = new Parameters($this->queryParams);
         }
 
         return $this->queryParams;
     }
-    
+
     /**
-     * @param array|\Zend\Stdlib\ParametersDescription $query
-     * @return \Zend\Http\Request
+     * @param \Zend\Stdlib\ParametersDescription $post
+     * @return Request
      */
-    public function setPost($post)
+    public function setPost(ParametersDescription $post)
     {
         $this->postParams = $post;
         return $this;
@@ -262,8 +260,6 @@ class Request extends Message implements RequestDescription
     {
         if ($this->postParams === null) {
             $this->postParams = new Parameters();
-        } elseif (is_array($this->postParams)) {
-            $this->postParams = new Parameters($this->postParams);
         }
 
         return $this->postParams;
@@ -278,7 +274,7 @@ class Request extends Message implements RequestDescription
     }
 
     /**
-     * @param ParametersDescription $files
+     * @param \Zend\Stdlib\ParametersDescription $files
      * @return Request
      */
     public function setFile(ParametersDescription $files)
@@ -299,8 +295,8 @@ class Request extends Message implements RequestDescription
         return $this->fileParams;
     }
 
-    /** 
-     * @param ParametersDescription
+    /**
+     * @param \Zend\Stdlib\ParametersDescription $server
      * @return Request
      */
     public function setServer(ParametersDescription $server)

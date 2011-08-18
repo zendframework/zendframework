@@ -25,7 +25,10 @@ namespace Zend\Http;
 
 use Zend\Config\Config,
     Zend\Uri\Http,
-    Zend\Http\Header\Cookie;
+    Zend\Http\Header\Cookie,
+    Zend\Http\Client\Cookies,
+    Zend\Stdlib\Parameters,
+    Zend\Stdlib\ParametersDescription;
 
 /**
  * Http client
@@ -44,18 +47,6 @@ class Client
     const AUTH_DIGEST = 'digest';  // not implemented yet
     
     /**
-     * HTTP protocol versions
-     */
-    const HTTP_1 = '1.1';
-    const HTTP_0 = '1.0';
-    
-    /**
-     * Content attributes
-     */
-    const CONTENT_TYPE   = 'Content-Type';
-    const CONTENT_LENGTH = 'Content-Length';
-
-    /**
      * POST data encoding methods
      */
     const ENC_URLENCODED = 'application/x-www-form-urlencoded';
@@ -71,13 +62,16 @@ class Client
     const DIGEST_NC     = 'nc';
     const DIGEST_CNONCE = 'cnonce';
     
-    protected static $client;
     protected $response;
     protected $request;
     protected $adapter;
     protected $auth = array();
     protected $streamName;
     protected $cookies;
+    protected $encType;
+    protected $lastRequest;
+    protected $lastResponse;
+    protected $redirectCounter;
     
     /**
      * Configuration array, set using the constructor or using ::setConfig()
@@ -85,18 +79,29 @@ class Client
      * @var array
      */
     protected $config = array(
-        'maxredirects' => 5,
+        'maxredirects'    => 5,
         'strictredirects' => false,
-        'useragent' => 'Zend\\Http\\Client',
-        'timeout' => 10,
-        'adapter' => 'Zend\\Http\\Client\\Adapter\\Socket',
-        'httpversion' => self::HTTP_1,
-        'keepalive' => false,
-        'strict' => true,
-        'output_stream' => false,
-        'encodecookies' => true,
+        'useragent'       => 'Zend\\Http\\Client',
+        'timeout'         => 10,
+        'adapter'         => 'Zend\\Http\\Client\\Adapter\\Socket',
+        'httpversion'     => Request::VERSION_11,
+        'storeresponse'   => true,
+        'keepalive'       => false,
+        'output_stream'   => false,
+        'encodecookies'   => true,
+        'rfc3986_strict'  => false
     );
    
+    /**
+     * Fileinfo magic database resource
+     *
+     * This variable is populated the first time _detectFileMimeType is called
+     * and is then reused on every call to this method
+     *
+     * @var resource
+     */
+    static protected $_fileInfoDb = null;
+    
     /**
      * Constructor
      *
@@ -113,18 +118,6 @@ class Client
         }
     }
     /**
-     * Get the static HTTP client
-     *
-     * @return Zend\Http\Client
-     */
-    protected static function getStaticClient()
-    {
-        if (!isset(self::$client)) {
-            self::$client = new Client();
-        }
-        return self::$client;
-    }
-    /**
      * Set configuration parameters for this HTTP client
      *
      * @param  \Zend\Config\Config | array $config
@@ -137,7 +130,7 @@ class Client
             $config = $config->toArray();
 
         } elseif (! is_array($config)) {
-            throw new Client\Exception\InvalidArgumentException('Array or Zend\\Config object expected, got ' . gettype($config));
+            throw new Exception\InvalidArgumentException('Config parameter is not valid');
         }
 
         foreach ($config as $k => $v) {
@@ -231,6 +224,34 @@ class Client
         $this->response= $response;
     }
     /**
+     * Get the last request (as a string)
+     * 
+     * @return string 
+     */
+    public function getLastRequest()
+    {
+        return $this->lastRequest;
+    }
+    /**
+     * Get the last response (as a string)
+     * 
+     * @return string 
+     */
+    public function getLastResponse()
+    {
+        return $this->lastResponse;
+    }
+    /**
+     * Get the redirections count
+     * 
+     * @return integer 
+     */
+    public function getRedirectionsCount()
+    {
+        return $this->redirectCounter;
+    }
+    
+    /**
      * Set Uri (to the request)
      * 
      * @param string|Zend\Uri\Http $uri 
@@ -239,6 +260,16 @@ class Client
     {
         if (!empty($uri)) {
             $this->getRequest()->setUri($uri);
+            
+            // Set auth if username and password has been specified in the uri
+            if ($this->getUri()->getUser() && $this->getUri()->getPassword()) {
+                $this->setAuth($this->getUri()->getUser(), $this->getUri()->getPassword());
+            }
+        
+            // We have no ports, set the defaults
+            if (! $this->getUri()->getPort()) {
+                $this->getUri()->setPort(($this->getUri()->getScheme() == 'https' ? 443 : 80));
+            }
         }
     }
     /**
@@ -259,6 +290,12 @@ class Client
     public function setMethod($method)
     {
         $this->getRequest()->setMethod($method);
+        
+        if (($method == Request::METHOD_POST || $method == Request::METHOD_PUT ||
+             $method == Request::METHOD_DELETE) && empty($this->encType)) {
+            $this->setEncType(self::ENC_URLENCODED);
+        }
+        
         return $this;
     }
     /**
@@ -271,13 +308,53 @@ class Client
         return $this->getRequest()->getMethod();
     }
     /**
+     * Set the encoding type and the boundary (if any)
+     * 
+     * @param string $encType 
+     * @param string $boundary
+     */
+    public function setEncType($encType,$boundary=null)
+    {
+        if (!empty($encType)) {
+            if (!empty($boundary)) {
+                $this->encType= $encType . "; boundary={$boundary}";
+            } else {
+                $this->encType= $encType;
+            }
+        }
+        return $this;
+    }
+    /**
+     * Get the encoding type
+     * 
+     * @return type 
+     */
+    public function getEncType()
+    {
+        return $this->encType;
+    }
+    /**
+     * Set raw body (for advanced use cases)
+     * 
+     * @param string $body
+     * @return Client 
+     */
+    public function setRawBody($body)
+    {
+        $this->getRequest()->setRawBody($body);
+        return $this;
+    }
+    /**
      * Set the POST parameters
      * 
      * @param array $post
      * @return Client 
      */
-    public function setParameterPost($post)
+    public function setParameterPost(array $post)
     {
+        if (!is_array($post) && !($post instanceof ParametersDescription)) {
+            throw new Exception\InvalidArgumentException('Invalid parameter post passed. Post must be an array or a ParametersDescription');
+        }
         $this->getRequest()->setPost($post);
         return $this;
     }
@@ -287,7 +364,7 @@ class Client
      * @param array $query 
      * @return Client
      */
-    public function setParameterGet($query)
+    public function setParameterGet(array $query)
     {
         $this->getRequest()->setQuery($query);
         return $this;
@@ -318,26 +395,18 @@ class Client
             $value = urlencode($value);
         }
 
-        if (isset($this->cookies)) {
-            if ($cookie instanceof Cookie) {
-                $this->cookies->addCookie($cookie);
-            } elseif (is_string($cookie) && $value !== null) {
-                $cookie = Cookie::fromString("{$cookie}={$value}",
-                                                       $this->getUri()->toString(),
-                                                       $this->config['encodecookies']);
-                $this->cookies->addCookie($cookie);
-            }
-        } else {
-            if ($cookie instanceof Cookie) {
-                $name = $cookie->getName();
-                $value = $cookie->getValue();
-                $cookie = $name;
-            }
-            $value = addslashes($value);
-              
-            $this->addHeader('Cookie', $cookie . '=' . $value . ';');
-
+        if (empty($this->cookies)) {
+            $this->cookies= new Cookies();
         }
+        
+        if ($cookie instanceof Cookie) {
+            $this->cookies->addCookie($cookie);
+        } elseif (is_string($cookie) && $value !== null) {
+            $cookie = Cookie::fromString("{$cookie}={$value}",
+                                          $this->getUri()->toString(),
+                                          $this->config['encodecookies']);
+            $this->cookies->addCookie($cookie);
+        } 
 
         return $this;
     }
@@ -347,18 +416,14 @@ class Client
      * A cookies is an object that holds and maintains cookies across HTTP requests
      * and responses.
      *
-     * @param  Cookies|boolean $cookies Existing cookies object, true to create a new one, false to disable
+     * @param  Cookies $cookies 
      * @return Client
      * @throws Exception
      */
-    public function setCookies($cookies = true)
+    public function setCookies($cookies=null)
     {
-        if ($cookies instanceof CookieJar) {
+        if (empty($cookies) || $cookies instanceof Cookies) {
             $this->cookies = $cookies;
-        } elseif ($cookies === true) {
-            $this->cookies = new Cookies();
-        } elseif (! $cookies) {
-            $this->cookies = null;
         } else {
             throw new Exception\InvalidArgumentException('Invalid parameter type passed as Cookies');
         }
@@ -366,7 +431,7 @@ class Client
         return $this;
     }
     /**
-     * Return the current cookie jar or null if none.
+     * Return the current cookies
      *
      * @return Cookies|null
      */
@@ -377,13 +442,22 @@ class Client
     /**
      * Set the headers (for the request)
      * 
-     * @param  \Zend\Http\RequestHeaders $headers
+     * @param  $headers
      * @return Client 
      */
     public function setHeaders($headers)
     {
         if (!empty($headers)) {
-            $this->getRequest()->headers($headers);
+            if (is_array($headers)) {
+                $str='';
+                foreach ($headers as $key => $value) {
+                    $str.= "$key: $value\r\n";
+                }
+                $headers= $str;
+            } elseif (!is_string($headers) && !($headers instanceof ParametersDescription)) {
+                throw new Exception\InvalidArgumentException('Invalid parameter headers passed');
+            }
+            $this->getRequest()->setHeaders($headers);
         }
         return $this;
     }
@@ -398,11 +472,14 @@ class Client
     {
         if (!empty($type)) {
             if (is_array($type)) {
+                $this->getRequest()->headers()->addHeaders($type);
+                /*
                 foreach ($type as $key => $value) {
-                    $this->getRequest()->headers()->addHeader($key, $value);
+                    $this->getRequest()->headers()->addHeaderLine($key, $value);
                 }
+                 */
             } else {
-                $this->getRequest()->headers()->addHeader($type, $value);
+                $this->getRequest()->headers()->addHeaderLine($type, $value);
             }
             return true;
         }
@@ -415,8 +492,31 @@ class Client
      * @return boolean 
      */
     public function hasHeader($name)
+    { 
+        $headers= $this->getRequest()->headers();
+        
+        if ($headers instanceof Headers) {
+            return $headers->has($name);
+        }
+        
+        return false;
+    }
+    /**
+     * Get the header value of the request
+     * 
+     * @param  string $name
+     * @return string|boolean
+     */
+    public function getHeader($name)
     {
-        return $this->getRequest()->headers()->has($name);
+        $headers= $this->getRequest()->headers();
+
+        if ($headers instanceof Headers) {
+            if ($headers->get($name)) {
+                return $headers->get($name)->getFieldValue();
+            }    
+        }
+        return false;
     }
     /**
      * Set streaming for received data
@@ -542,6 +642,23 @@ class Client
         return $response;
     }
     /**
+     * Reset all the HTTP parameters (auth,cookies,request, response, etc)
+     * 
+     */
+    public function resetParameters()
+    {   
+        $uri= $this->getUri();
+        
+        $this->auth= null;
+        $this->streamName= null;
+        $this->cookies= null;
+        $this->encType= null;
+        $this->request= null;
+        $this->response= null;
+        
+        $this->setUri($uri);
+    }
+    /**
      * Send HTTP request
      *
      * @param  Request $request
@@ -564,28 +681,50 @@ class Client
         // Send the first request. If redirected, continue.
         do {
             // uri
-            $uri= $this->getUri()->toString();
+            $uri= $this->getUri();
+            
             // query
-            $query= $this->getRequest()->query()->toArray();
+            $query= $this->getRequest()->query();
+
             if (!empty($query)) {
-                $uri.= '?'.http_build_query($query);
+                $queryArray= $query->toArray();
+                if (!empty($queryArray)) {
+                    $newUri= $uri->toString();
+                    $queryString= http_build_query($query);
+        
+                    if ($this->config['rfc3986_strict']) {
+                        $queryString= str_replace('+', '%20', $queryString);
+                    }
+                    
+                    if (strpos($newUri,'?')!==false) {
+                        $newUri.= '&' . $queryString;
+                    } else {
+                        $newUri.= '?' . $queryString;
+                    }    
+                    
+                    $uri= new \Zend\Uri\Http($newUri);
+                }    
             }
+            // If we have no ports, set the defaults
+            if (! $uri->getPort()) {
+                $uri->setPort(($uri->getScheme() == 'https' ? 443 : 80));
+            }
+            
             // method
-            $method= $this->getRequest()->getMethod();
+            $method = $this->getRequest()->getMethod();
             // body
             $body = $this->prepareBody();
             // headers
-            $headers = $this->prepareHeaders($body);
+            $headers = $this->prepareHeaders($body,$uri);
             
             // check that adapter supports streaming before using it
             if(is_resource($body) && !($this->adapter instanceof Client\Adapter\Stream)) {
                 throw new Client\Exception\RuntimeException('Adapter does not support streaming');
             }
-
             
             // Open the connection, send the request and read the response
-            $this->adapter->connect($this->getRequest()->uri()->getHost(), $this->getRequest()->uri()->getPort(),
-                ($this->getRequest()->uri()->getScheme() == 'https' ? true : false));
+            $this->adapter->connect($uri->getHost(), $uri->getPort(),
+                ($uri->getScheme() == 'https' ? true : false));
 
             if($this->config['output_stream']) {
                 if($this->adapter instanceof Client\Adapter\Stream) {
@@ -595,29 +734,40 @@ class Client
                     throw new Exception\RuntimeException('Adapter does not support streaming');
                 }
             }
-            
+
             // HTTP connection
             $this->lastRequest = $this->adapter->write($method,
-                $this->getRequest()->uri(), $this->config['httpversion'], $headers, $body);
+                $uri, $this->config['httpversion'], $headers, $body);
             
-            $this->lastResponse = $this->adapter->read();
-            if (! $this->lastResponse) {
+            $response = $this->adapter->read();
+            if (! $response) {
                 throw new Exception\RuntimeException('Unable to read response, or response is empty');
             }
-
+            
+            if ($this->config['storeresponse']) {
+                $this->lastResponse= $response;
+            } else {
+                $this->lastResponse= null;
+            }
+            
             if($this->config['output_stream']) {
-                rewind($stream);
+                $streamMetaData = stream_get_meta_data($stream);
+                if ($streamMetaData['seekable']) {
+                    rewind($stream);
+                }
                 // cleanup the adapter
                 $this->adapter->setOutputStream(null);
-                $response = Response\Stream::fromStream($this->lastResponse, $stream);
+                $response = Response\Stream::fromStream($response, $stream);
                 $response->setStreamName($this->streamName);
                 if(!is_string($this->config['output_stream'])) {
                     // we used temp name, will need to clean up
                     $response->setCleanup(true);
                 }
             } else {
-                $response = Response::fromString($this->lastResponse);
+                $response = Response::fromString($response);
             }
+
+            $responseHeaders= $response->headers()->toArray();
 
             // Load cookies into cookie jar
             if (isset($this->cookies)) {
@@ -625,44 +775,45 @@ class Client
             }
 
             // If we got redirected, look for the Location header
-            if ($response->isRedirect() && ($location = $response->getHeader('location'))) {
+            if ($response->isRedirect() && (isset($responseHeaders['Location']))) {
 
+                // Avoid problems with buggy servers that add whitespace at the
+                // end of some headers
+                $responseHeaders['Location']= trim($responseHeaders['Location']);
+                
                 // Check whether we send the exact same request again, or drop the parameters
                 // and send a GET request
-                if ($response->getStatus() == 303 ||
-                   ((! $this->config['strictredirects']) && ($response->getStatus() == 302 ||
-                       $response->getStatus() == 301))) {
+                if ($response->getStatusCode() == 303 ||
+                   ((! $this->config['strictredirects']) && ($response->getStatusCode() == 302 ||
+                       $response->getStatusCode() == 301))) {
 
                     $this->resetParameters();
                     $this->setMethod(Request::METHOD_GET);
                 }
 
                 // If we got a well formed absolute URI
-                $url = new Uri\Url($location);
-                
-                if ($url->isValid()) {
-                    $this->setHeaders('host', null);
-                    $this->setUri($location);
-
+                if (($scheme = substr($responseHeaders['Location'], 0, 6)) &&
+                        ($scheme == 'http:/' || $scheme == 'https:')) {
+                    $this->setUri($responseHeaders['Location']);
                 } else {
 
                     // Split into path and query and set the query
-                    if (strpos($location, '?') !== false) {
-                        list($location, $query) = explode('?', $location, 2);
+                    if (strpos($responseHeaders['Location'], '?') !== false) {
+                        list($responseHeaders['Location'], $query) = explode('?', $responseHeaders['Location'], 2);
                     } else {
                         $query = '';
                     }
-                    $this->uri->setQuery($query);
+                    $this->getUri()->setQuery($query);
 
                     // Else, if we got just an absolute path, set it
-                    if(strpos($location, '/') === 0) {
-                        $this->uri->setPath($location);
+                    if(strpos($responseHeaders['Location'], '/') === 0) {
+                        $this->getUri()->setPath($responseHeaders['Location']);
                         // Else, assume we have a relative path
                     } else {
                         // Get the current path directory, removing any trailing slashes
-                        $path = $this->uri->getPath();
+                        $path = $this->getUri()->getPath();
                         $path = rtrim(substr($path, 0, strrpos($path, '/')), "/");
-                        $this->uri->setPath($path . '/' . $location);
+                        $this->getUri()->setPath($path . '/' . $responseHeaders['Location']);
                     }
                 }
                 ++$this->redirectCounter;
@@ -677,7 +828,6 @@ class Client
         $this->response= $response;
         return $response;
     }
-
     /**
      * Set a file to upload (using a POST request)
      *
@@ -739,15 +889,12 @@ class Client
      *
      * @return array
      */
-    protected function prepareHeaders($body)
+    protected function prepareHeaders($body,$uri)
     {
-        if (!empty($body)) {
-            $this->addHeader(self::CONTENT_LENGTH,strlen($body));
-        }
+        $headers=array();
 
         // Set the host header
-        if ($this->config['httpversion']==self::HTTP_1) {
-            $uri = $this->getRequest()->uri();
+        if ($this->config['httpversion']==Request::VERSION_11) {
             $host= $uri->getHost();
             // If the port is not default, add it
             if (! (($uri->getScheme() == 'http' && $uri->getPort() == 80) ||
@@ -755,13 +902,13 @@ class Client
                 $host .= ':' . $uri->getPort();
             }
 
-            $this->addHeader('Host',$host);
+            $headers['Host']= $host;
         }
 
         // Set the connection header
         if (!$this->hasHeader('Connection')) {
             if (! $this->config['keepalive']) {
-                $this->addHeader('Connection','close');
+                $headers['Connection']= 'close';
             }
         }
 
@@ -769,25 +916,25 @@ class Client
         // zlib is available or not.
         if (! isset($this->headers['accept-encoding'])) {
             if (function_exists('gzinflate')) {
-                $this->addHeader('Accept-encoding','gzip, deflate');
+                $headers['Accept-encoding']= 'gzip, deflate';
             } else {
-                $this->addHeader('Accept-encoding','identity');
+                $headers['Accept-encoding']= 'identity';
             }
         }
 
 
         // Set the user agent header
         if (!$this->hasHeader('User-Agent') && isset($this->config['useragent'])) {
-            $this->addHeader('User-Agent',$this->config['useragent']);
+            $headers['User-Agent']= $this->config['useragent'];
         }
 
         // Set HTTP authentication if needed
-        if (!empty($this->auth) && isset($this->auth['type'])) {
+        if (!empty($this->auth)) {
             switch ($this->auth['type']) {
                 case self::AUTH_BASIC :
-                    $response = $this->calcAuthDigest($this->auth['user'], $this->auth['password'], $this->auth['type']);
+                    $auth = $this->calcAuthDigest($this->auth['user'], $this->auth['password'], $this->auth['type']);
                     if ($auth!==false) {
-                        $this->addHeader('Authorization','Basic ' . $response);
+                        $headers['Authorization']= 'Basic ' . $auth;
                     } 
                     break;
                 case self::AUTH_DIGEST :
@@ -797,15 +944,35 @@ class Client
 
         // Load cookies from client cookies
         if (isset($this->cookies)) {
-            $cookstr = $this->cookies->match($this->getUri()->toString(),
-                true, Header\Cookie::COOKIE_STRING_CONCAT);
+            $cookstr = $this->cookies->getMatchingCookies($this->getUri()->toString(),
+                true, Cookies::COOKIE_STRING_CONCAT);
 
             if ($cookstr) {
-                $this->addHeader('Cookie',$cookstr);
+                $headers['Cookie']= $cookstr;
             }
         }
 
-        return $this->getRequest()->headers()->toArray();
+        // Content-type
+        $encType= $this->getEncType();
+        if (!empty($encType)) {
+            $headers['Content-Type']= $encType;
+        }
+        
+        if (!empty($body)) {       
+            if (is_resource($body)) {
+                $fstat = fstat($body);
+                $headers['Content-Length']= $fstat['size'];
+            } else {
+                $headers['Content-Length']= strlen($body);
+            }    
+        }
+        
+        // Merge the headers of the request (if any)
+        $requestHeaders= $this->getRequest()->headers()->toArray();
+        foreach ($requestHeaders as $key => $value) {
+            $headers[$key]= $value;
+        }
+        return $headers;
     }
     
 
@@ -839,30 +1006,34 @@ class Client
         }
 
         $body = '';
-
-        $tot_files = count($this->getRequest()->file()->toArray());
-        // If we have files to upload, force enctype to multipart/form-data
-        if ($tot_files > 0) {
-            $this->setEncType(self::ENC_FORMDATA);
-        }
+        
+        if (!$this->hasHeader('Content-Type')) {
+            $tot_files = count($this->getRequest()->file()->toArray());
+            // If we have files to upload, force encType to multipart/form-data
+            if ($tot_files > 0) {
+                $this->setEncType(self::ENC_FORMDATA);
+            }
+        } else {
+            $this->setEncType($this->getHeader('Content-Type'));
+        }    
 
         // If we have POST parameters or files, encode and add them to the body
         if (count($this->getRequest()->post()->toArray()) > 0 || $tot_files > 0) {
-            switch($this->enctype) {
+            switch($this->getEncType()) {
                 case self::ENC_FORMDATA:
                     // Encode body as multipart/form-data
                     $boundary = '---ZENDHTTPCLIENT-' . md5(microtime());
-                    $this->addHeader(self::CONTENT_TYPE, self::ENC_FORMDATA . "; boundary={$boundary}");
-
+                    $this->setEncType(self::ENC_FORMDATA,$boundary);
+                    
                     // Get POST parameters and encode them
-                    $params = self::_flattenParametersArray($this->getRequest()->post()->toArray());
+                    $params = self::flattenParametersArray($this->getRequest()->post()->toArray());
                     foreach ($params as $pp) {
                         $body .= self::encodeFormData($boundary, $pp[0], $pp[1]);
                     }
 
                     // Encode files
                     foreach ($this->getRequest()->file()->toArray() as $key => $file) {
-                        $fhead = array(self::CONTENT_TYPE => $file['ctype']);
+                        $fhead = array('Content-Type' => $file['ctype']);
                         $body .= self::encodeFormData($boundary, $file['formname'], $file['data'], $file['filename'], $fhead);
                     }
 
@@ -871,8 +1042,7 @@ class Client
 
                 case self::ENC_URLENCODED:
                     // Encode body as application/x-www-form-urlencoded
-                    $this->addHeader(self::CONTENT_TYPE, self::ENC_URLENCODED);
-                    $body = http_build_query($this->paramsPost);
+                    $body = http_build_query($this->getRequest()->post()->toArray());
                     break;
 
                 default:
@@ -880,15 +1050,9 @@ class Client
                         mb_internal_encoding($mbIntEnc);
                     }
 
-                    throw new Exception\RuntimeException("Cannot handle content type '{$this->enctype}' automatically." .
-                        " Please use Zend\Http\Client->setRawData() to send this kind of content.");
+                    throw new Exception\RuntimeException("Cannot handle content type '{$this->encType}' automatically");
                     break;
             }
-        }
-
-        // Set the Content-Length if we have a body or if request is POST/PUT
-        if ($body || $this->getRequest()->isPost() || $this->getRequest()->isPut()) {
-            $this->addHeader(self::CONTENT_LENGTH, strlen($body));
         }
 
         if (isset($mbIntEnc)) {
@@ -981,7 +1145,7 @@ class Client
      * @param string $prefix
      * @return array
      */
-    static protected function _flattenParametersArray($parray, $prefix = null)
+    static protected function flattenParametersArray($parray, $prefix = null)
     {
         if (! is_array($parray)) {
             return $parray;
@@ -1003,7 +1167,7 @@ class Client
             }
 
             if (is_array($value)) {
-                $parameters = array_merge($parameters, self::_flattenParametersArray($value, $key));
+                $parameters = array_merge($parameters, self::flattenParametersArray($value, $key));
 
             } else {
                 $parameters[] = array($key, $value);
@@ -1011,74 +1175,5 @@ class Client
         }
 
         return $parameters;
-    }
-    
-    /**
-     * -------------------- STATIC METHODS -------------------------------
-     */
-    
-    /**
-     * HTTP GET METHOD (static)
-     *
-     * @param  string $url
-     * @param  array $query
-     * @param  array $headers
-     * @return Response|boolean
-     */
-    public static function get($url, $query=array(), $headers=array(), $body=null)
-    {
-        if (empty($url)) {
-            return false;
-        }
-        
-        $request= new Request();
-        $request->setUri($url);
-        $request->setMethod(Request::METHOD_GET);
-        
-        if (!empty($query) && is_array($query)) {
-            $request->query()->fromArray($query);
-        }
-        
-        if (!empty($headers) && is_array($headers)) {
-            $request->headers($headers);
-        }
-        
-        if (!empty($body)) {
-            $request->setBody($body);
-        }
-        
-        return self::getStaticClient()->send($request);
-    }
-    /**
-     * HTTP POST METHOD (static)
-     *
-     * @param  string $url
-     * @param  array $params
-     * @param  array $headers
-     * @return Response|boolean
-     */
-    public static function post($url, $params=array(), $headers=array(), $body=null)
-    {
-        if (empty($url)) {
-            return false;
-        }
-        
-        $request= new Request();
-        $request->setUri($url);
-        $request->setMethod(Request::METHOD_POST);
-        
-        if (!empty($params) && is_array($params)) {
-            $request->post()->fromArray($params);
-        }
-        
-        if (!empty($headers) && is_array($headers)) {
-            $request->headers($headers);
-        }
-
-        if (!empty($body)) {
-            $request->setBody($body);
-        }
-        
-        return self::getStaticClient()->send($request);
     }
 }

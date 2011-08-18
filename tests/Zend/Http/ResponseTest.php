@@ -129,7 +129,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 //
 //        $this->assertEquals(404, $response->getStatus(), 'Response code is expected to be 404, but it\'s not.');
 //        $this->assertTrue($response->isError(), 'Response is an error, but isError() returned false');
-//        $this->assertFalse($response->isSuccessful(), 'Response is an error, but isSuccessful() returned true');
+//        $this->assertFalse($response->isSuccess(), 'Response is an error, but isSuccess() returned true');
 //        $this->assertFalse($response->isRedirect(), 'Response is an error, but isRedirect() returned true');
 //    }
 //
@@ -140,7 +140,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 //
 //        $this->assertEquals(500, $response->getStatus(), 'Response code is expected to be 500, but it\'s not.');
 //        $this->assertTrue($response->isError(), 'Response is an error, but isError() returned false');
-//        $this->assertFalse($response->isSuccessful(), 'Response is an error, but isSuccessful() returned true');
+//        $this->assertFalse($response->isSuccess(), 'Response is an error, but isSuccess() returned true');
 //        $this->assertFalse($response->isRedirect(), 'Response is an error, but isRedirect() returned true');
 //    }
 //
@@ -165,7 +165,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 //        $this->assertEquals(302, $response->getStatus(), 'Response code is expected to be 302, but it\'s not.');
 //        $this->assertTrue($response->isRedirect(), 'Response is a redirection, but isRedirect() returned false');
 //        $this->assertFalse($response->isError(), 'Response is a redirection, but isError() returned true');
-//        $this->assertFalse($response->isSuccessful(), 'Response is a redirection, but isSuccessful() returned true');
+//        $this->assertFalse($response->isSuccess(), 'Response is a redirection, but isSuccess() returned true');
 //    }
 //
 //    public function test200Ok()
@@ -174,7 +174,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 //
 //        $this->assertEquals(200, $response->getStatus(), 'Response code is expected to be 200, but it\'s not.');
 //        $this->assertFalse($response->isError(), 'Response is OK, but isError() returned true');
-//        $this->assertTrue($response->isSuccessful(), 'Response is OK, but isSuccessful() returned false');
+//        $this->assertTrue($response->isSuccess(), 'Response is OK, but isSuccess() returned false');
 //        $this->assertFalse($response->isRedirect(), 'Response is OK, but isRedirect() returned true');
 //    }
 //
@@ -192,7 +192,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 //
 //        // While we're here, make sure it's classified as error...
 //        $this->assertTrue($response->isError(), 'Response is an error, but isError() returned false');
-//        $this->assertFalse($response->isSuccessful(), 'Response is an error, but isSuccessful() returned true');
+//        $this->assertFalse($response->isSuccess(), 'Response is an error, but isSuccess() returned true');
 //        $this->assertFalse($response->isRedirect(), 'Response is an error, but isRedirect() returned true');
 //    }
 //

@@ -26,7 +26,8 @@
 namespace Zend\Http\Client\Adapter;
 use Zend\Http\Client\Adapter as HttpAdapter,
     Zend\Http\Client\Adapter\Exception as AdapterException,
-    Zend\Http\Client;
+    Zend\Http\Client,
+    Zend\Http\Request;
 
 /**
  * An adapter class for Zend\Http\Client based on the curl extension.
@@ -266,15 +267,15 @@ class Curl implements HttpAdapter, Stream
         // ensure correct curl call
         $curlValue = true;
         switch ($method) {
-            case Client::GET:
+            case 'GET' :
                 $curlMethod = CURLOPT_HTTPGET;
                 break;
 
-            case Client::POST:
+            case 'POST' :
                 $curlMethod = CURLOPT_POST;
                 break;
 
-            case Client::PUT:
+            case 'PUT' :
                 // There are two different types of PUT request, either a Raw Data string has been set
                 // or CURLOPT_INFILE and CURLOPT_INFILESIZE are used.
                 if(is_resource($body)) {
@@ -307,22 +308,22 @@ class Curl implements HttpAdapter, Stream
                 }
                 break;
 
-            case Client::DELETE:
+            case 'DELETE' :
                 $curlMethod = CURLOPT_CUSTOMREQUEST;
                 $curlValue = "DELETE";
                 break;
 
-            case Client::OPTIONS:
+            case 'OPTIONS' :
                 $curlMethod = CURLOPT_CUSTOMREQUEST;
                 $curlValue = "OPTIONS";
                 break;
 
-            case Client::TRACE:
+            case 'TRACE' :
                 $curlMethod = CURLOPT_CUSTOMREQUEST;
                 $curlValue = "TRACE";
                 break;
             
-            case Client::HEAD:
+            case 'HEAD' :
                 $curlMethod = CURLOPT_CUSTOMREQUEST;
                 $curlValue = "HEAD";
                 break;
@@ -365,7 +366,7 @@ class Curl implements HttpAdapter, Stream
          * Make sure POSTFIELDS is set after $curlMethod is set:
          * @link http://de2.php.net/manual/en/function.curl-setopt.php#81161
          */
-        if ($method == Client::POST) {
+        if ($method == 'POST') {
             curl_setopt($this->_curl, CURLOPT_POSTFIELDS, $body);
         } elseif ($curlMethod == CURLOPT_PUT) {
             // this covers a PUT by file-handle:
@@ -375,7 +376,7 @@ class Curl implements HttpAdapter, Stream
             curl_setopt($this->_curl, CURLOPT_INFILESIZE, $this->_config['curloptions'][CURLOPT_INFILESIZE]);
             unset($this->_config['curloptions'][CURLOPT_INFILE]);
             unset($this->_config['curloptions'][CURLOPT_INFILESIZE]);
-        } elseif ($method == Client::PUT) {
+        } elseif ($method == 'PUT') {
             // This is a PUT by a setRawData string, not by file-handle
             curl_setopt($this->_curl, CURLOPT_POSTFIELDS, $body);
         }

@@ -15,12 +15,12 @@ class Request extends Message implements RequestDescription
      * @const string METHOD constant names
      */
     const METHOD_OPTIONS = 'OPTIONS';
-    const METHOD_GET = 'GET';
-    const METHOD_HEAD = 'HEAD';
-    const METHOD_POST = 'POST';
-    const METHOD_PUT = 'PUT';
-    const METHOD_DELETE = 'DELETE';
-    const METHOD_TRACE = 'TRACE';
+    const METHOD_GET     = 'GET';
+    const METHOD_HEAD    = 'HEAD';
+    const METHOD_POST    = 'POST';
+    const METHOD_PUT     = 'PUT';
+    const METHOD_DELETE  = 'DELETE';
+    const METHOD_TRACE   = 'TRACE';
     const METHOD_CONNECT = 'CONNECT';
     /**#@-*/
 
@@ -165,12 +165,15 @@ class Request extends Message implements RequestDescription
      */
     public function setUri($uri)
     {
-        if (is_string($uri) || $uri instanceof HttpUri) {
-            $this->uri = $uri;
-        } else {
+        if (is_string($uri)) {
+            if (!\Zend\Uri\Uri::validateHost($uri)) {
+                throw new Exception\InvalidArgumentException('Invalid URI passed as string');
+            }
+        } elseif (!($uri instanceof \Zend\Uri\Http)) {
             throw new Exception\InvalidArgumentException('URI must be an instance of Zend\Uri\Http or a string');
         }
-
+        $this->uri= $uri;
+        
         return $this;
     }
 
@@ -219,32 +222,34 @@ class Request extends Message implements RequestDescription
     }
 
     /**
-     * @param ParametersDescription $query
-     * @return Request
+     * @param array|\Zend\Stdlib\ParametersDescription $query
+     * @return \Zend\Http\Request
      */
-    public function setQuery(ParametersDescription $query)
+    public function setQuery( $query)
     {
         $this->queryParams = $query;
         return $this;
     }
 
     /**
-     * @return ParametersDescription
+     * @return \Zend\Stdlib\ParametersDescription
      */
     public function query()
     {
         if ($this->queryParams === null) {
             $this->queryParams = new Parameters();
+        } elseif (is_array($this->queryParams)) {
+            $this->queryParams = new Parameters($this->queryParams);
         }
+
         return $this->queryParams;
     }
     
-
     /**
-     * @param ParametersDescription $post
-     * @return Request
+     * @param array|\Zend\Stdlib\ParametersDescription $query
+     * @return \Zend\Http\Request
      */
-    public function setPost(ParametersDescription $post)
+    public function setPost($post)
     {
         $this->postParams = $post;
         return $this;
@@ -257,6 +262,8 @@ class Request extends Message implements RequestDescription
     {
         if ($this->postParams === null) {
             $this->postParams = new Parameters();
+        } elseif (is_array($this->postParams)) {
+            $this->postParams = new Parameters($this->postParams);
         }
 
         return $this->postParams;
@@ -341,7 +348,7 @@ class Request extends Message implements RequestDescription
      * @param \Zend\Http\RequestHeaders $headers
      * @return \Zend\Http\Request
      */
-    public function setHeaders(RequestHeaders $headers)
+    public function setHeaders($headers)
     {
         $this->headers = $headers;
         return $this;
@@ -349,12 +356,18 @@ class Request extends Message implements RequestDescription
 
     /**
      *
-     * @return \Zend\Http\RequestHeaders
+     * @return \Zend\Http\Headers
      */
     public function headers()
     {
         if ($this->headers === null || is_string($this->headers)) {
-            $this->headers = (is_string($this->headers)) ? RequestHeaders::fromString($this->headers) : new RequestHeaders();
+            $this->headers = (is_string($this->headers)) ? Headers::fromString($this->headers) : new Headers();
+        } elseif (is_array($this->headers)) {
+            $headers='';
+            foreach ($this->headers as $type => $value) {
+                $headers.= "$type: $value\r\n";
+            }
+            $this->headers = Headers::fromString($headers);
         }
 
         return $this->headers;

@@ -234,6 +234,7 @@ class Socket implements HttpAdapter, Stream
         }
     }
 
+    
     /**
      * Send request to the remote server
      *
@@ -312,13 +313,15 @@ class Socket implements HttpAdapter, Stream
         
         $this->_checkSocketReadTimeout();
 
-        $statusCode = Response::extractCode($response);
+        $responseObj= Response::fromString($response);
+        
+        $statusCode = $responseObj->getStatusCode();
 
         // Handle 100 and 101 responses internally by restarting the read again
         if ($statusCode == 100 || $statusCode == 101) return $this->read();
 
         // Check headers to see what kind of connection / transfer encoding we have
-        $headers = Response::extractHeaders($response);
+        $headers = $responseObj->headers()->toArray();
 
         /**
          * Responses to HEAD requests and 204 or 304 responses are not expected

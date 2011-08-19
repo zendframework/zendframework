@@ -175,11 +175,10 @@ class Client
             throw new Exception\InvalidArgumentException('Config parameter is not valid');
         }
 
+        /** Config Key Normalization */
         foreach ($config as $k => $v) {
-            $k = str_replace(array('-', '_', ' '), '', strtolower($k));
-            if (array_key_exists($k, $this->config)) {
-                $this->config[$k] = $v;
-            }
+            unset($config[$k]); // unset original value
+            $config[str_replace(array('-', '_', ' ', '.'), '', strtolower($k))] = $v; // replace w/ normalized
         }
 
         // Pass configuration options to the adapter if it exists
@@ -572,7 +571,7 @@ class Client
      */
     public function setStream($streamfile = true)
     {
-        $this->setConfig(array("output_stream" => $streamfile));
+        $this->setConfig(array("outputstream" => $streamfile));
         return $this;
     }
 
@@ -592,18 +591,21 @@ class Client
      */
     protected function openTempStream()
     {
-        $this->streamName = $this->config['output_stream'];
+        $this->streamName = $this->config['outputstream'];
+
         if(!is_string($this->streamName)) {
             // If name is not given, create temp name
-            $this->streamName = tempnam(isset($this->config['stream_tmp_dir'])?$this->config['stream_tmp_dir']:sys_get_temp_dir(),
-                 'Zend\Http\Client');
+            $this->streamName = tempnam(
+                isset($this->config['stream_tmp_dir']) ? $this->config['stream_tmp_dir'] : sys_get_temp_dir(),
+                'Zend\Http\Client'
+            );
         }
 
         if (false === ($fp = @fopen($this->streamName, "w+b"))) {
-                if ($this->adapter instanceof Client\Adapter) {
-                    $this->adapter->close();
-                }
-                throw new Exception\RuntimeException("Could not open temp file {$this->streamName}");
+            if ($this->adapter instanceof Client\Adapter) {
+                $this->adapter->close();
+            }
+            throw new Exception\RuntimeException("Could not open temp file {$this->streamName}");
         }
 
         return $fp;
@@ -741,7 +743,7 @@ class Client
                     $newUri = $uri->toString();
                     $queryString = http_build_query($query);
         
-                    if ($this->config['rfc3986_strict']) {
+                    if ($this->config['rfc3986strict']) {
                         $queryString = str_replace('+', '%20', $queryString);
                     }
                     
@@ -777,7 +779,7 @@ class Client
             $this->adapter->connect($uri->getHost(), $uri->getPort(),
                 ($uri->getScheme() == 'https' ? true : false));
 
-            if($this->config['output_stream']) {
+            if($this->config['outputstream']) {
                 if($this->adapter instanceof Client\Adapter\Stream) {
                     $stream = $this->openTempStream();
                     $this->adapter->setOutputStream($stream);
@@ -801,7 +803,7 @@ class Client
                 $this->lastResponse = null;
             }
             
-            if($this->config['output_stream']) {
+            if($this->config['outputstream']) {
                 $streamMetaData = stream_get_meta_data($stream);
                 if ($streamMetaData['seekable']) {
                     rewind($stream);
@@ -810,7 +812,7 @@ class Client
                 $this->adapter->setOutputStream(null);
                 $response = Response\Stream::fromStream($response, $stream);
                 $response->setStreamName($this->streamName);
-                if(!is_string($this->config['output_stream'])) {
+                if(!is_string($this->config['outputstream'])) {
                     // we used temp name, will need to clean up
                     $response->setCleanup(true);
                 }

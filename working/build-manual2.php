@@ -34,6 +34,7 @@ $command = 'xsltproc --xinclude ' . $temp_dir . '/phd/db4-upgrade.xsl '
     . $temp_dir . '/manual2.full.xml | tee -a '
     . $temp_dir . '/manual2-err.txt';
 cli_print('Running: ' . $command, 'green');
+cli_nl();
 system($command);
 cli_nl();
 
@@ -41,6 +42,7 @@ cli_nl();
 $command = $temp_dir . '/phd/pear/phd -g \'phpdotnet\phd\Highlighter_GeSHi\' --xinclude -f zfpackage -d '
     . $temp_dir . '/manual2.full.xml -o ' . $temp_dir . '/manual-html';
 cli_print('Running: ' . $command, 'green');
+cli_nl();
 system($command);
 cli_nl();
 

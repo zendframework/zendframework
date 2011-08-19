@@ -29,7 +29,36 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('HTTP/1.1 404 Foo Bar', $response->renderStatusLine());
     }
     
+    public function testResponseUsesHeadersContainerByDefault()
+    {
+        $response = new Response();
+        $this->assertInstanceOf('Zend\Http\Headers', $response->headers());
+    }
 
+    public function testRequestCanSetHeaders()
+    {
+        $response = new Response();
+        $headers = new \Zend\Http\Headers();
+
+        $ret = $response->setHeaders($headers);
+        $this->assertInstanceOf('Zend\Http\Response', $ret);
+        $this->assertSame($headers, $response->headers());
+    }
+
+    public function testResponseCanSetStatusCode()
+    {
+        $response = new Response;
+        $this->assertEquals(200, $response->getStatusCode());
+        $response->setStatusCode('303');
+        $this->assertEquals(303, $response->getStatusCode());
+    }
+
+    public function testResponseSetStatusCodeThrowsExceptionOnInvalidCode()
+    {
+        $response = new Response;
+        $this->setExpectedException('Zend\Http\Exception\InvalidArgumentException', 'Invalid status code');
+        $response->setStatusCode(606);
+    }
 
 // @todo OLD TESTS BELOW, determine if we can use them
 

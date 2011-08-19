@@ -95,6 +95,95 @@ class Cookie implements HeaderDescription
     protected $encodeValue;
 
     /**
+     * Generate a new Cookie object from a cookie string
+     * (for example the value of the Set-Cookie HTTP header)
+     *
+     * @param string $cookieStr
+     * @param Uri\Uri|string $refUri Reference URI for default values (domain, path)
+     * @param boolean $encodeValue Weither or not the cookie's value should be
+     *                             passed through urlencode/urldecode
+     * @return Cookie A new Cookie object or false on failure.
+     */
+    public static function fromString($cookieStr, $refUri = null, $encodeValue = true)
+    {
+        // Set default values
+        if (is_string($refUri)) {
+            $refUri = Uri\UriFactory::factory($refUri, 'http');
+        }
+
+        $name    = '';
+        $value   = '';
+        $domain  = '';
+        $path    = '';
+        $expires = null;
+        $secure  = false;
+        $parts   = explode(';', $cookieStr);
+
+        // If first part does not include '=', fail
+        if (strpos($parts[0], '=') === false) return false;
+
+        // Get the name and value of the cookie
+        list($name, $value) = explode('=', trim(array_shift($parts)), 2);
+        $name  = trim($name);
+        if ($encodeValue) {
+            $value = urldecode(trim($value));
+        }
+
+        // Set default domain and path
+        if ($refUri instanceof Uri\Uri) {
+            $domain = $refUri->getHost();
+            $path   = $refUri->getPath();
+            $path   = substr($path, 0, strrpos($path, '/'));
+        }
+
+        // Set other cookie parameters
+        foreach ($parts as $part) {
+            $part = trim($part);
+            if (strtolower($part) == 'secure') {
+                $secure = true;
+                continue;
+            }
+
+            $keyValue = explode('=', $part, 2);
+            if (count($keyValue) == 2) {
+                list($k, $v) = $keyValue;
+                switch (strtolower($k))    {
+                    case 'expires':
+                        if(($expires = strtotime($v)) === false) {
+                            /**
+                             * The expiration is past Tue, 19 Jan 2038 03:14:07 UTC
+                             * the maximum for 32-bit signed integer. Zend_Date
+                             * can get around that limit.
+                             */
+                            $expireDate = new \Zend\Date\Date($v);
+                            $expires = $expireDate->getTimestamp();
+                        }
+                        break;
+
+                    case 'path':
+                        $path = $v;
+                        break;
+
+                    case 'domain':
+                        $domain = $v;
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        }
+
+        if ($name !== '') {
+            $ret = new self($name, $value, $domain, $expires, $path, $secure);
+            $ret->encodeValue = ($encodeValue) ? true : false;
+            return $ret;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Cookie object constructor
      *
      * @todo Add validation of each one of the parameters (legal domain, etc.)
@@ -267,9 +356,9 @@ class Cookie implements HeaderDescription
      * @param  boolean $secure
      * @return Cookie 
      */
-    public function SetSecure($secure)
+    public function setSecure($secure)
     {
-        $this->secure= $secure;
+        $this->secure = $secure;
         return $this;
     }
     /**
@@ -361,95 +450,6 @@ class Cookie implements HeaderDescription
             return $this->name . '=' . urlencode($this->value) . ';';
         }
         return $this->name . '=' . $this->value . ';';
-    }
-
-    /**
-     * Generate a new Cookie object from a cookie string
-     * (for example the value of the Set-Cookie HTTP header)
-     *
-     * @param string $cookieStr
-     * @param Uri\Uri|string $refUri Reference URI for default values (domain, path)
-     * @param boolean $encodeValue Weither or not the cookie's value should be
-     *                             passed through urlencode/urldecode
-     * @return Cookie A new Cookie object or false on failure.
-     */
-    public static function fromString($cookieStr, $refUri = null, $encodeValue = true)
-    {
-        // Set default values
-        if (is_string($refUri)) {
-            $refUri = Uri\UriFactory::factory($refUri, 'http');
-        }
-
-        $name    = '';
-        $value   = '';
-        $domain  = '';
-        $path    = '';
-        $expires = null;
-        $secure  = false;
-        $parts   = explode(';', $cookieStr);
-
-        // If first part does not include '=', fail
-        if (strpos($parts[0], '=') === false) return false;
-
-        // Get the name and value of the cookie
-        list($name, $value) = explode('=', trim(array_shift($parts)), 2);
-        $name  = trim($name);
-        if ($encodeValue) {
-            $value = urldecode(trim($value));
-        }
-
-        // Set default domain and path
-        if ($refUri instanceof Uri\Uri) {
-            $domain = $refUri->getHost();
-            $path   = $refUri->getPath();
-            $path   = substr($path, 0, strrpos($path, '/'));
-        }
-
-        // Set other cookie parameters
-        foreach ($parts as $part) {
-            $part = trim($part);
-            if (strtolower($part) == 'secure') {
-                $secure = true;
-                continue;
-            }
-
-            $keyValue = explode('=', $part, 2);
-            if (count($keyValue) == 2) {
-                list($k, $v) = $keyValue;
-                switch (strtolower($k))    {
-                    case 'expires':
-                        if(($expires = strtotime($v)) === false) {
-                            /**
-                             * The expiration is past Tue, 19 Jan 2038 03:14:07 UTC
-                             * the maximum for 32-bit signed integer. Zend_Date
-                             * can get around that limit.
-                             */
-                            $expireDate = new \Zend\Date\Date($v);
-                            $expires = $expireDate->getTimestamp();
-                        }
-                        break;
-
-                    case 'path':
-                        $path = $v;
-                        break;
-
-                    case 'domain':
-                        $domain = $v;
-                        break;
-
-                    default:
-                        break;
-                }
-            }
-        }
-
-        if ($name !== '') {
-            $ret = new self($name, $value, $domain, $expires, $path, $secure);
-            $ret->encodeValue = ($encodeValue) ? true : false;
-            return $ret;
-        } else {
-            return false;
-        }
     }
 
     /**

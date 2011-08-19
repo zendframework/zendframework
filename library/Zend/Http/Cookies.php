@@ -1,23 +1,4 @@
 <?php
-/**
- * Zend Framework
- *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Http
- * @subpackage CookieJar
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
 
 /**
  * @namespace
@@ -25,36 +6,37 @@
 namespace Zend\Http;
 
 use Zend\Stdlib\ParametersDescription,
-    Zend\Uri;
+    Zend\Uri,
+    Zend\Http\Header\Cookie,
+    Zend\Http\Response;
 
 /**
  * A Zend_Http_CookieJar object is designed to contain and maintain HTTP cookies, and should
  * be used along with Zend_Http_Client in order to manage cookies across HTTP requests and
  * responses.
  *
- * The class contains an array of Zend_Http_Cookie objects. Cookies can be added to the jar
- * automatically from a request or manually. Then, the jar can find and return the cookies
- * needed for a specific HTTP request.
+ * The class contains an array of Zend\Http\Header\Cookie objects. Cookies can be added 
+ * automatically from a request or manually. Then, the Cookies class can find and return the
+ * cookies needed for a specific HTTP request.
  *
  * A special parameter can be passed to all methods of this class that return cookies: Cookies
- * can be returned either in their native form (as Zend_Http_Cookie objects) or as strings -
+ * can be returned either in their native form (as Zend\Http\Header\Cookie objects) or as strings -
  * the later is suitable for sending as the value of the "Cookie" header in an HTTP request.
  * You can also choose, when returning more than one cookie, whether to get an array of strings
- * (by passing Zend_Http_CookieJar::COOKIE_STRING_ARRAY) or one unified string for all cookies
- * (by passing Zend_Http_CookieJar::COOKIE_STRING_CONCAT).
+ * (by passing Zend\Http\Client\Cookies::COOKIE_STRING_ARRAY) or one unified string for all cookies
+ * (by passing Zend\Http\Client\Cookies::COOKIE_STRING_CONCAT).
  *
  * @link       http://wp.netscape.com/newsref/std/cookie_spec.html for some specs.
  *
  * @category   Zend
- * @package    Zend_Http
- * @subpackage CookieJar
+ * @package    Zend\Http\Client
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Cookies implements ParametersDescription
+class Cookies extends Headers
 {
     /**
-     * Return cookie(s) as a Zend_Http_Cookie object
+     * Return cookie(s) as a Zend\Http\Header\Cookie object
      *
      */
     const COOKIE_OBJECT = 0;
@@ -91,21 +73,16 @@ class Cookies implements ParametersDescription
     protected $cookies = array();
 
     /**
-     * The Zend_Http_Cookie array
+     * The Zend\Http\Header\Cookie array
      *
      * @var array
      */
     protected $_rawCookies = array();
 
-    /**
-     * Construct a new CookieJar object
-     *
-     */
-    public function __construct()
-    { }
+
 
     /**
-     * Add a cookie to the jar. Cookie should be passed either as a Zend_Http_Cookie object
+     * Add a cookie to the class. Cookie should be passed either as a Zend\Http\Header\Cookie object
      * or as a string - in which case an object is created from the string.
      *
      * @param Cookie|string $cookie
@@ -135,7 +112,6 @@ class Cookies implements ParametersDescription
 
     /**
      * Parse an HTTP response, adding all the cookies set in that response
-     * to the cookie jar.
      *
      * @param Response $response
      * @param Uri\Uri|string $ref_uri Requested URI
@@ -143,11 +119,10 @@ class Cookies implements ParametersDescription
     public function addCookiesFromResponse($response, $ref_uri)
     {
         if (!$response instanceof Response) {
-            throw new Exception\InvalidArgumentException('$response is expected to be a Response object, ' .
-                gettype($response) . ' was passed');
+            throw new Exception\InvalidArgumentException('$response is expected to be a Response object');
         }
 
-        $cookie_hdrs = $response->getHeader('Set-Cookie');
+        $cookie_hdrs = $response->headers()->get('Set-Cookie');
 
         if (is_array($cookie_hdrs)) {
             foreach ($cookie_hdrs as $cookie) {
@@ -161,7 +136,7 @@ class Cookies implements ParametersDescription
     /**
      * Get all cookies in the cookie jar as an array
      *
-     * @param int $ret_as Whether to return cookies as objects of \Zend\Http\Cookie or as strings
+     * @param int $ret_as Whether to return cookies as objects of \Zend\Http\Header\Cookie or as strings
      * @return array|string
      */
     public function getAllCookies($ret_as = self::COOKIE_OBJECT)
@@ -177,7 +152,7 @@ class Cookies implements ParametersDescription
      *
      * @param string|Uri\Uri $uri URI to check against (secure, domain, path)
      * @param boolean $matchSessionCookies Whether to send session cookies
-     * @param int $ret_as Whether to return cookies as objects of \Zend\Http\Cookie or as strings
+     * @param int $ret_as Whether to return cookies as objects of \Zend\Http\Header\Cookie or as strings
      * @param int $now Override the current time when checking for expiry time
      * @return array|string
      */
@@ -218,7 +193,7 @@ class Cookies implements ParametersDescription
      *
      * @param Uri\Uri|string $uri The uri (domain and path) to match
      * @param string $cookie_name The cookie's name
-     * @param int $ret_as Whether to return cookies as objects of \Zend\Http\Cookie or as strings
+     * @param int $ret_as Whether to return cookies as objects of \Zend\Http\Header\Cookie or as strings
      * @return Cookie|string
      */
     public function getCookie($uri, $cookie_name, $ret_as = self::COOKIE_OBJECT)
@@ -267,7 +242,7 @@ class Cookies implements ParametersDescription
      * Helper function to recursivly flatten an array. Shoud be used when exporting the
      * cookies array (or parts of it)
      *
-     * @param \Zend\Http\Cookie|array $ptr
+     * @param \Zend\Http\Header\Cookie|array $ptr
      * @param int $ret_as What value to return
      * @return array|string
      */
@@ -348,7 +323,7 @@ class Cookies implements ParametersDescription
     }
 
     /**
-     * Create a new CookieJar object and automatically load into it all the
+     * Create a new Cookies object and automatically load into it all the
      * cookies set in an Http_Response object. If $uri is set, it will be
      * considered as the requested URI for setting default domain and path
      * of the cookie.
@@ -366,27 +341,7 @@ class Cookies implements ParametersDescription
     }
 
     /**
-     * Required by Countable interface
-     *
-     * @return int
-     */
-    public function count()
-    {
-        return count($this->_rawCookies);
-    }
-
-    /**
-     * Required by IteratorAggregate interface
-     *
-     * @return ArrayIterator
-     */
-    public function getIterator()
-    {
-        return new \ArrayIterator($this->_rawCookies);
-    }
-
-    /**
-     * Tells if the jar is empty of any cookie
+     * Tells if the array of cookies is empty 
      *
      * @return bool
      */
@@ -398,7 +353,7 @@ class Cookies implements ParametersDescription
     /**
      * Empties the cookieJar of any cookie
      *
-     * @return \Cookies\Http\CookieJar
+     * @return Cookies
      */
     public function reset()
     {
@@ -406,120 +361,4 @@ class Cookies implements ParametersDescription
         return $this;
     }
 
-    /**
-     * (PHP 5 &gt;= 5.1.0)<br/>
-     * Whether a offset exists
-     * @link http://php.net/manual/en/arrayaccess.offsetexists.php
-     * @param mixed $offset <p>
-     * An offset to check for.
-     * </p>
-     * @return boolean Returns true on success or false on failure.
-     * </p>
-     * <p>
-     * The return value will be casted to boolean if non-boolean was returned.
-     */
-    public function offsetExists($offset)
-    {
-        // TODO: Implement offsetExists() method.
-    }
-
-    /**
-     * (PHP 5 &gt;= 5.1.0)<br/>
-     * Offset to retrieve
-     * @link http://php.net/manual/en/arrayaccess.offsetget.php
-     * @param mixed $offset <p>
-     * The offset to retrieve.
-     * </p>
-     * @return mixed Can return all value types.
-     */
-    public function offsetGet($offset)
-    {
-        // TODO: Implement offsetGet() method.
-    }
-
-    /**
-     * (PHP 5 &gt;= 5.1.0)<br/>
-     * Offset to set
-     * @link http://php.net/manual/en/arrayaccess.offsetset.php
-     * @param mixed $offset <p>
-     * The offset to assign the value to.
-     * </p>
-     * @param mixed $value <p>
-     * The value to set.
-     * </p>
-     * @return void
-     */
-    public function offsetSet($offset, $value)
-    {
-        // TODO: Implement offsetSet() method.
-    }
-
-    /**
-     * (PHP 5 &gt;= 5.1.0)<br/>
-     * Offset to unset
-     * @link http://php.net/manual/en/arrayaccess.offsetunset.php
-     * @param mixed $offset <p>
-     * The offset to unset.
-     * </p>
-     * @return void
-     */
-    public function offsetUnset($offset)
-    {
-        // TODO: Implement offsetUnset() method.
-    }
-
-    /**
-     * (PHP 5 &gt;= 5.1.0)<br/>
-     * String representation of object
-     * @link http://php.net/manual/en/serializable.serialize.php
-     * @return string the string representation of the object or &null;
-     */
-    public function serialize()
-    {
-        // TODO: Implement serialize() method.
-    }
-
-    /**
-     * (PHP 5 &gt;= 5.1.0)<br/>
-     * Constructs the object
-     * @link http://php.net/manual/en/serializable.unserialize.php
-     * @param string $serialized <p>
-     * The string representation of the object.
-     * </p>
-     * @return mixed the original value unserialized.
-     */
-    public function unserialize($serialized)
-    {
-        // TODO: Implement unserialize() method.
-    }
-
-    public function fromArray(array $values)
-    {
-        // TODO: Implement fromArray() method.
-    }
-
-    public function fromString($string)
-    {
-        // TODO: Implement fromString() method.
-    }
-
-    public function toArray()
-    {
-        // TODO: Implement toArray() method.
-    }
-
-    public function toString()
-    {
-        // TODO: Implement toString() method.
-    }
-
-    public function get($name, $default = null)
-    {
-        // TODO: Implement get() method.
-    }
-
-    public function set($name, $value)
-    {
-        // TODO: Implement set() method.
-    }
 }

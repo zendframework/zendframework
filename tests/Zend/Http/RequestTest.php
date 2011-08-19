@@ -55,20 +55,20 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo', $request->getRawBody());
     }
 
-    public function testRequestUsesRequestHeadersContainerByDefault()
+    public function testRequestUsesHeadersContainerByDefault()
     {
         $request = new Request();
-        $this->assertInstanceOf('Zend\Http\RequestHeaders', $request->headers());
+        $this->assertInstanceOf('Zend\Http\Headers', $request->headers());
     }
 
-    public function testRequestCanSetRequestHeaders()
+    public function testRequestCanSetHeaders()
     {
         $request = new Request();
-        $rHeaders = new \Zend\Http\RequestHeaders();
+        $headers = new \Zend\Http\Headers();
 
-        $ret = $request->setHeaders($rHeaders);
+        $ret = $request->setHeaders($headers);
         $this->assertInstanceOf('Zend\Http\Request', $ret);
-        $this->assertSame($rHeaders, $request->headers());
+        $this->assertSame($headers, $request->headers());
     }
 
     public function testRequestCanSetAndRetrieveValidMethod()

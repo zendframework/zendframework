@@ -65,7 +65,7 @@ class Response extends Message implements ResponseDescription
     /**
      * @var string
      */
-    protected $version = self::VERISON_11;
+    protected $version = self::VERSION_11;
 
     /**
      * @var array Recommended Reason Phrases
@@ -125,9 +125,9 @@ class Response extends Message implements ResponseDescription
     protected $statusCode = 200;
 
     /**
-     * @var string
+     * @var string|null Null means it will be looked up from the $reasonPhrase list above
      */
-    protected $reasonPhrase = 'OK';
+    protected $reasonPhrase = null;
 
     /**
      * @var Headers
@@ -308,6 +308,22 @@ class Response extends Message implements ResponseDescription
         return $this;
     }
 
+    public function setRawBody($body)
+    {
+        $this->setContent($body);
+        return $this;
+    }
+
+    public function getRawBody()
+    {
+        return (string) $this->getContent();
+    }
+
+    public function setBody($body, $encoding = null)
+    {
+        
+    }
+
     /**
      * Get the body of the response
      * 
@@ -317,21 +333,22 @@ class Response extends Message implements ResponseDescription
     {
         $body = (string) $this->getContent();
 
-        $transferEncoding= $this->headers()->get('Transfer-Encoding');
+        $transferEncoding = $this->headers()->get('Transfer-Encoding');
+
         if (!empty($transferEncoding)) {
-            if (strtolower($transferEncoding->getFieldValue())=='chunked') {
-                $body = self::decodeChunkedBody($body);
+            if (strtolower($transferEncoding->getFieldValue()) == 'chunked') {
+                $body = $this->decodeChunkedBody($body);
             }
         }
 
-        $contentEncoding= $this->headers()->get('Content-Encoding');
+        $contentEncoding = $this->headers()->get('Content-Encoding');
         
         if (!empty($contentEncoding)) {
-            $contentEncoding= $contentEncoding->getFieldValue();
-            if ($contentEncoding=='gzip') {
-                $body = self::decodeGzip($body);
-            } elseif ($contentEncoding=='deflate') {
-                 $body = self::decodeDeflate($body);
+            $contentEncoding = $contentEncoding->getFieldValue();
+            if ($contentEncoding =='gzip') {
+                $body = $this->decodeGzip($body);
+            } elseif ($contentEncoding == 'deflate') {
+                 $body = $this->decodeDeflate($body);
             }
         }
 
@@ -433,7 +450,7 @@ class Response extends Message implements ResponseDescription
         $str = $this->renderResponseLine() . "\r\n";
         $str .= $this->headers()->toString();
         $str .= "\r\n";
-        $str .= $this->getContent();
+        $str .= $this->getBody();
         return $str;
     }
     
@@ -443,7 +460,7 @@ class Response extends Message implements ResponseDescription
      * @param string $body
      * @return string
      */
-    public static function decodeChunkedBody($body)
+    protected function decodeChunkedBody($body)
     {
         $decBody = '';
 
@@ -482,7 +499,7 @@ class Response extends Message implements ResponseDescription
      * @param string $body
      * @return string
      */
-    public static function decodeGzip($body)
+    protected function decodeGzip($body)
     {
         if (!function_exists('gzinflate')) {
             throw new Exception\RuntimeException(
@@ -501,7 +518,7 @@ class Response extends Message implements ResponseDescription
      * @param string $body
      * @return string
      */
-    public static function decodeDeflate($body)
+    protected function decodeDeflate($body)
     {
         if (!function_exists('gzuncompress')) {
             throw new Exception\RuntimeException(

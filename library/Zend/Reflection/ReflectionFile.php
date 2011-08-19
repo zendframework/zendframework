@@ -370,6 +370,12 @@ class ReflectionFile implements \Reflector
                     } elseif ($namespaceTrapped) {
                         $this->_namespace .= $value . '\\';
                     } elseif ($useAsTrapped) {
+                        if (!isset($this->_uses[$useIndex])) {
+                            $this->_uses[$useIndex] = array();
+                        }
+                        if (!isset($this->_uses[$useIndex]['as'])) {
+                            $this->_uses[$useIndex]['as'] = '';
+                        }
                         $this->_uses[$useIndex]['as'] .= $value . '\\';
                     } elseif ($useTrapped) {
                         $this->_uses[$useIndex]['namespace'] .= $value . '\\';
@@ -432,7 +438,13 @@ class ReflectionFile implements \Reflector
 
         // cleanup uses
         foreach ($this->_uses as $useIndex => $useInfo) {
+            if (!isset($this->_uses[$useIndex]['namespace'])) {
+                $this->_uses[$useIndex]['namespace'] = '';
+            }
             $this->_uses[$useIndex]['namespace'] = rtrim($this->_uses[$useIndex]['namespace'], '\\');
+            if (!isset($this->_uses[$useIndex]['as'])) {
+                $this->_uses[$useIndex]['as'] = '';
+            }
             $this->_uses[$useIndex]['as'] = rtrim($this->_uses[$useIndex]['as'], '\\');
 
             if ($this->_uses[$useIndex]['as'] == '') {
